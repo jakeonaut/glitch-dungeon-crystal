@@ -1,0 +1,165 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/water_normal_2.png" type="Texture" id=3]
+[ext_resource path="res://tiles.tres" type="MeshLibrary" id=4]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sceneObjects/portdoor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/npcs/eyebrowsport.png" type="Texture" id=8]
+[ext_resource path="res://assets/npcs/eyebrows.png" type="Texture" id=9]
+[ext_resource path="res://levels/Swamp/AbortSound_eyebrowsQuest_complete.gd" type="Script" id=10]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/chicken.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/pet.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/CubeCrystal.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/Plant.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sceneObjects/PlantLeafy.tscn" type="PackedScene" id=16]
+
+[node name="level" type="Node"]
+script = ExtResource( 1 )
+
+[node name="commonWorldEnvironment" parent="." instance=ExtResource( 2 )]
+
+[node name="BackgroundControl" type="Control" parent="."]
+editor/display_folded = true
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundControl"]
+margin_right = 1020.0
+margin_bottom = 763.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Level Tiles" type="GridMap" parent="."]
+mesh_library = ExtResource( 4 )
+cell_octant_size = 4
+data = {
+"cells": PoolIntArray( 0, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 1, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 4, 0, 0, 5, 0, 65535, 5, 0, 0, 6, 0, 65531, 6, 0, 65532, 6, 0, 65535, 6, 0, 65531, 7, 1610612736, 65532, 7, 0, 65535, 7, 0, 65531, 11, 0, 131067, 11, 0, 458746, 15, 1, 458747, 15, 1, 458748, 15, 1, 65529, 16, 0, 65530, 16, 0, 65531, 16, 0, 65532, 16, 0, 458745, 16, 1, 458746, 16, 1, 458747, 16, -1610612735, 458748, 16, 536870913, 65529, 17, 0, 65530, 17, 0, 65531, 17, 0, 65532, 17, 0, 131067, 17, 1, 458746, 17, 1, 458747, 17, 1, 458748, 17, 1, 65530, 18, 0, 65531, 18, 536870912, 65532, 18, 536870912, 65529, 19, 0, 65531, 19, 536870912, 65532, 19, 0, 262138, 19, 1, 0, 65527, 0, 65535, 65527, 0, 0, 65528, 0, 65535, 65528, 0, 0, 65529, 536870912, 1, 65529, 0, 65535, 65529, 0, 0, 65530, 0, 1, 65530, 0, 65535, 65530, 0, 65537, 65530, 1, 131074, 65530, 1, 0, 65531, 536870912, 1, 65531, 0, 2, 65531, 0, 3, 65531, 0, 65532, 65531, 0, 65533, 65531, 0, 65534, 65531, 0, 65535, 65531, 0, 0, 65532, 0, 1, 65532, 0, 2, 65532, 0, 3, 65532, 0, 65532, 65532, 0, 65533, 65532, 0, 65534, 65532, 0, 65535, 65532, 0, 65539, 65532, 1, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 65532, 65533, 0, 65533, 65533, 6, 65534, 65533, 0, 65535, 65533, 0, 131069, 65533, 0, 131070, 65533, 0, 131071, 65533, 0, -4, 65533, 0, -3, 65533, 0, -2, 65533, 0, 0, 65534, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 0, 65532, 65534, 0, 65533, 65534, 0, 65534, 65534, 6, 65535, 65534, 0, 131069, 65534, 0, 131070, 65534, 0, 131071, 65534, 0, 196606, 65534, 1, -4, 65534, 0, -3, 65534, 0, -2, 65534, 0, 0, 65535, 0, 65532, 65535, 0, 65533, 65535, 6, 65534, 65535, 6, 65535, 65535, 6, 131069, 65535, 0, 131070, 65535, 0, 131071, 65535, 0, -3, 65535, 0, -2, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 6, 0 )
+}
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14603, -13.7803 )
+
+[node name="CameraY" parent="Player" index="4"]
+transform = Transform( -0.998628, 0, -0.0523361, 0, 1, 0, 0.0523361, 0, -0.998628, 0, 0, 0 )
+
+[node name="portalTownDungeon" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 1.74846e-007, 0, 1, 0, -1.74846e-007, 0, 1, 0, 3.4124, -17.0479 )
+midLevelDir = "Swamp"
+connectedScene = "SwampTown.tscn"
+
+[node name="eyebrows1" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48445, 3.2514, 11.2085 )
+
+[node name="InteractionArea" parent="eyebrows1" index="1"]
+editor/display_folded = true
+
+[node name="SmallInteractionArea" parent="eyebrows1" index="2"]
+editor/display_folded = true
+
+[node name="Portrait" parent="eyebrows1/NPC TextBox/TextBox" index="0"]
+texture = ExtResource( 8 )
+
+[node name="Text" parent="eyebrows1/NPC TextBox/TextBox" index="1"]
+bbcode_text = "have u tried talking 
+2 dog while holding
+chicken?
+     ...check it out"
+text = "have u tried talking 
+2 dog while holding
+chicken?
+     ...check it out"
+
+[node name="Sprite3D" parent="eyebrows1" index="4"]
+pixel_size = 0.08
+texture = ExtResource( 9 )
+
+[node name="eyebrows2" parent="." instance=ExtResource( 7 )]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51555, 3.2514, 32.2085 )
+
+[node name="Portrait" parent="eyebrows2/NPC TextBox/TextBox" index="0"]
+texture = ExtResource( 8 )
+
+[node name="Text" parent="eyebrows2/NPC TextBox/TextBox" index="1"]
+bbcode_text = "I now release my tendency to be distraught, fatigued, and inhibited."
+text = "I now release my tendency to be distraught, fatigued, and inhibited."
+
+[node name="Sprite3D" parent="eyebrows2" index="4"]
+pixel_size = 0.08
+texture = ExtResource( 9 )
+
+[node name="eyebrows3" parent="." instance=ExtResource( 7 )]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48445, 7.2514, -10.7915 )
+
+[node name="NPC TextBox" parent="eyebrows3" index="3"]
+editor/display_folded = false
+
+[node name="Portrait" parent="eyebrows3/NPC TextBox/TextBox" index="0"]
+texture = ExtResource( 8 )
+
+[node name="Text" parent="eyebrows3/NPC TextBox/TextBox" index="1"]
+bbcode_text = "i'm so sick and tired
+of always turning over
+a new leaf"
+text = "i'm so sick and tired
+of always turning over
+a new leaf"
+
+[node name="AbortSound" parent="eyebrows3/NPC TextBox/TextBox" index="3"]
+script = ExtResource( 10 )
+
+[node name="Sprite3D" parent="eyebrows3" index="4"]
+pixel_size = 0.1
+texture = ExtResource( 9 )
+
+[node name="SavePoint" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 7, -3 )
+
+[node name="chickey" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51555, 5.2514, -2.79153 )
+
+[node name="chickey2" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51555, 5.2514, -4.79153 )
+
+[node name="pet" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.23764, 5.2514, 23.3505 )
+stationary = true
+
+[node name="CubeCrystal" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 5, 35 )
+
+[node name="Plant" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, 39 )
+
+[node name="Plant2" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 9, 39 )
+
+[node name="portdoorPsychic" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -14, 15.4124, 32.9521 )
+midLevelDir = "Swamp"
+connectedScene = "PsychicScene2"
+
+[node name="Plant3" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 14 )
+
+[editable path="Player"]
+
+[editable path="eyebrows1"]
+
+[editable path="eyebrows1/NPC TextBox"]
+
+[editable path="eyebrows2"]
+
+[editable path="eyebrows2/NPC TextBox"]
+
+[editable path="eyebrows3"]
+
+[editable path="eyebrows3/NPC TextBox"]

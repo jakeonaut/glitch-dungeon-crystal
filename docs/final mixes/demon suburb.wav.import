@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/demon suburb.wav-e04a6df6e05ad0083fe244e7d83c06be.sample"
+
+[deps]
+
+source_file="res://docs/final mixes/demon suburb.wav"
+dest_files=[ "res://.import/demon suburb.wav-e04a6df6e05ad0083fe244e7d83c06be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

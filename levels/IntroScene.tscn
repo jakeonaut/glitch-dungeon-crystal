@@ -1,0 +1,149 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://levels/Intro/IntroSceneScript.gd" type="Script" id=1]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/textures/bricks.png" type="Texture" id=3]
+[ext_resource path="res://tiles.tres" type="MeshLibrary" id=4]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/playerportrait.png" type="Texture" id=7]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/npcs/tutorial1.png" type="Texture" id=9]
+[ext_resource path="res://assets/npcs/tootorial0000.png" type="Texture" id=10]
+[ext_resource path="res://assets/npcs/tutorial2.png" type="Texture" id=11]
+[ext_resource path="res://scripts/SetAsTextbox.gd" type="Script" id=12]
+[ext_resource path="res://sceneObjects/portdoor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=15]
+
+[node name="level" type="Node"]
+script = ExtResource( 1 )
+
+[node name="commonWorldEnvironment" parent="." instance=ExtResource( 2 )]
+
+[node name="BackgroundControl" type="Control" parent="."]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundControl"]
+margin_right = 1020.0
+margin_bottom = 770.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Level Tiles" type="GridMap" parent="."]
+mesh_library = ExtResource( 4 )
+cell_octant_size = 4
+data = {
+"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 10, 0, -1610612736, 65534, 0, 0, 65535, 0, 0, 65537, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 10, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 10, 2, -1610612736, 65534, 2, 0, 65535, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 65534, 3, 0, 65535, 3, 0, 65537, 3, 0, 65540, 3, 0, 131071, 3, 0, 131076, 3, 2, 196607, 3, 0, 262143, 3, 2, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 65534, 4, 0, 65535, 4, 0, 1, 65531, 0, 2, 65531, 0, 1, 65532, 0, 2, 65532, 0, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 4, 65533, 0, 5, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 0, 65534, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 0, 4, 65534, 0, 5, 65534, 0, 65534, 65534, 0, 65535, 65534, 0, 65540, 65534, 0, 131076, 65534, 2, 0, 65535, 0, 1, 65535, 0, 2, 65535, 0, 3, 65535, 0, 4, 65535, 0, 5, 65535, 0, 10, 65535, 0, 65534, 65535, 0, 65535, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.075, 3.15231, 6.82459 )
+
+[node name="PlayerTextBox" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
+
+[node name="TextBox" parent="PlayerTextBox" index="0"]
+nextTextBoxPath = NodePath("../../yellow/TextBox4/TextBox")
+
+[node name="Portrait" parent="PlayerTextBox/TextBox" index="0"]
+texture = ExtResource( 7 )
+
+[node name="Text" parent="PlayerTextBox/TextBox" index="1"]
+bbcode_text = ". . . . . . . . . . . . .
+. . . . . .
+. . . .
+. . .            ... press F"
+text = ". . . . . . . . . . . . .
+. . . . . .
+. . . .
+. . .            ... press F"
+
+[node name="yellow" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.21747, 3.2514, 4.72877 )
+grav = 0
+
+[node name="TextBox" parent="yellow/NPC TextBox" index="0"]
+editor/display_folded = true
+nextTextBoxPath = NodePath("../../TextBox2/TextBox")
+
+[node name="Portrait" parent="yellow/NPC TextBox/TextBox" index="0"]
+texture = ExtResource( 9 )
+
+[node name="Text" parent="yellow/NPC TextBox/TextBox" index="1"]
+bbcode_text = "hey wake up, noob!
+it's the first day of 
+[magic academy!]
+!                ... press F"
+text = "hey wake up, noob!
+it's the first day of 
+[magic academy!]
+!                ... press F"
+
+[node name="Sprite3D" parent="yellow" index="4"]
+texture = ExtResource( 10 )
+
+[node name="TextBox2" parent="yellow" instance=ExtResource( 6 )]
+editor/display_folded = true
+
+[node name="TextBox" parent="yellow/TextBox2" index="0"]
+nextTextBoxPath = NodePath("../../../PlayerTextBox/TextBox")
+
+[node name="Portrait" parent="yellow/TextBox2/TextBox" index="0"]
+texture = ExtResource( 11 )
+
+[node name="Text" parent="yellow/TextBox2/TextBox" index="1"]
+bbcode_text = ". . . . . . . . . . . . .
+. . . . . .
+. . . .
+!                ... press F"
+text = ". . . . . . . . . . . . .
+. . . . . .
+. . . .
+!                ... press F"
+
+[node name="TextBox4" parent="yellow" instance=ExtResource( 6 )]
+
+[node name="Portrait" parent="yellow/TextBox4/TextBox" index="0"]
+texture = ExtResource( 9 )
+
+[node name="Text" parent="yellow/TextBox4/TextBox" index="1"]
+bbcode_text = "don't tell me you forgot
+the \"WALK\" spell!!!! just
+press \"WASD\" to cast it!
+!                ... press F"
+text = "don't tell me you forgot
+the \"WALK\" spell!!!! just
+press \"WASD\" to cast it!
+!                ... press F"
+
+[node name="Event" type="Node" parent="yellow/TextBox4/TextBox" index="4"]
+script = ExtResource( 12 )
+
+[node name="portal1" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03998, 3.4124, -8.77596 )
+midLevelDir = "Intro"
+connectedScene = "IntroScene2"
+
+[node name="FloorSpell" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.48445, 7.2514, 7.20847 )
+
+[node name="FeatherSpell" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.4296, 7 )
+
+[editable path="PlayerTextBox"]
+
+[editable path="yellow"]
+
+[editable path="yellow/NPC TextBox"]
+
+[editable path="yellow/TextBox2"]
+
+[editable path="yellow/TextBox4"]
