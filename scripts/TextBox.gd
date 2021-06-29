@@ -35,7 +35,6 @@ func interact():
         global.pauseMoveInput = true
         if player.glitch_form != player.GlitchForm.FLOOR: player.on_ground = true
         player.vv = 0
-        player.is_lunging = 0
     else:
         self.hide()
         global.pauseGame = false

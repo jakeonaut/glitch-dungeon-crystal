@@ -1,7 +1,6 @@
 extends "Sprite.gd"
 
 onready var parent = get_parent()
-var is_lunge_sprite = false
 
 func _ready():
     set_process(true)
@@ -49,7 +48,7 @@ func animate(delta):
         elif self.isFacingDown() or self.isFacingUp():
             set_frame(start_frame)
             # TODO(jaketrower): Need a better way to say if 
-            if not is_lunge_sprite or not parent.on_ground:
+            if not parent.on_ground:
                 self.flip_h = not self.flip_h
         else:
             set_frame(start_frame)
@@ -65,8 +64,7 @@ func faceLeft():
 # @override
 func isFacingLeft():
     var right_frame = base_frame + 2
-    var right_lunge_frame = base_frame + (self.hframes) + 3
-    return (start_frame == right_frame or start_frame == right_lunge_frame) and self.flip_h
+    return start_frame == right_frame and self.flip_h
 
 # @override
 func faceRight(set_facing = true):
@@ -79,18 +77,15 @@ func faceRight(set_facing = true):
 # @override
 func isFacingRight():
     var right_frame = base_frame + 2
-    var right_lunge_frame = base_frame + (self.hframes) + 3
-    return (start_frame == right_frame or start_frame == right_lunge_frame) and not self.flip_h
+    return start_frame == right_frame and not self.flip_h
 
 # @override
 func isFacingUp():
-    var up_lunge_frame = base_frame + (self.hframes) + 2
-    return .isFacingUp() or start_frame == up_lunge_frame
+    return .isFacingUp()
 
 # @override
 func isFacingDown():
-    var down_lunge_frame = base_frame + (self.hframes) + 1
-    return .isFacingDown() or start_frame == down_lunge_frame
+    return .isFacingDown()
 
 func isPlayerFacingDown():
     # Forward as "seen" by the camera (OpenGL convention)
@@ -141,33 +136,3 @@ func fixSpriteFacing():
             faceRight()
         elif isPlayerFacingLeft():
             faceLeft()
-
-func setLungeSprite(val):
-    if is_lunge_sprite == val: 
-        return
-    # TODO(jaketrower): This should be set by facing, not sprite position
-    # so as to fix double jump spin error
-    if val:
-        if isPlayerFacingDown():
-            start_frame = base_frame + (self.hframes) + 1
-        elif isPlayerFacingUp():
-            start_frame = base_frame + (self.hframes) + 2
-        elif isPlayerFacingRight():
-            start_frame = base_frame + (self.hframes) + 3
-            self.flip_h = false
-        elif isPlayerFacingLeft():
-            start_frame = base_frame + (self.hframes) + 3
-            self.flip_h = true
-        set_frame(start_frame)
-        max_frames = 1
-    else:
-        if isPlayerFacingDown():
-            faceDown()
-        elif isPlayerFacingUp():
-            faceUp()
-        elif isPlayerFacingRight():
-            faceRight()
-        elif isPlayerFacingLeft():
-            faceLeft()
-        max_frames = 2
-    is_lunge_sprite = val

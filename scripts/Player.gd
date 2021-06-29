@@ -4,8 +4,7 @@ onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/Men
 onready var hurtSound = get_node("Sounds/HurtSound")
 
 onready var sunLight = get_node("../commonWorldEnvironment/The Sun")
-
-onready var glitchFilter = get_node("GlitchFilter/TextureRect") if has_node("GlitchFilter/TextureRect") else null
+onready var levelTiles = get_node("../LevelTiles")
 
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
@@ -19,6 +18,21 @@ func _ready():
     set_process(true)
     set_physics_process(true)
     if pauseMenu: pauseMenu.hide()
+
+func floorGlitch():
+    glitch_form = GlitchForm.FLOOR
+    levelTiles.floorGlitch()
+    mySprite.setClericCostume()
+
+func featherGlitch():
+    glitch_form = GlitchForm.FEATHER
+    levelTiles.featherGlitch()
+    mySprite.setMothCostume()
+
+func ladderGlitch():
+    glitch_form = GlitchForm.LADDER
+    levelTiles.ladderGlitch()
+    mySprite.setLuckyCatCostume()
 
 func wearCostume(costume):
     if costume == "normal": 
@@ -36,18 +50,9 @@ func wearCostume(costume):
         mySprite.setNightgown()
     global.memory["player_costume"] = costume
     
-func bugTransform():
-    pass # needs to be updated to work with hframe/vframe!!! could be a glitch or a costume ? [both?]
-    
 func _process(delta):
     # ._process(delta) #NOTE: this super method is called automatically 
     # https://github.com/godotengine/godot/issues/6500
-
-    #if Input.is_action_just_pressed("ui_interact"):
-    #    cameraFlash.flash()
-
-    if Input.is_action_just_pressed("ui_glitch_left"):
-        if glitchFilter: glitchFilter.visible = not glitchFilter.visible
 
     if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
         if not global.pauseGame:
@@ -57,20 +62,8 @@ func _process(delta):
             if pauseMenu: pauseMenu.hide()
             global.pauseGame = false
 
-    # if Input.is_action_just_pressed("ui_action") and on_ground and not global.pauseMoveInput and not global.pauseGame:
-    #     is_rolling = true
-    #     rolling_timer = 0
-    #     is_rotating = true
-
 
     if broom_state != 0:
-        # if broom_state >= 1 and broom_state <= 2:
-        #     mySprite.faceRight()
-        # elif broom_state > 2 and broom_state <= 4:
-        #     mySprite.faceLeft()
-        # else:
-        #     mySprite.faceDown()
-
         broom_timer += (delta*22)
         if broom_timer >= broom_time_limit:
             broom_timer = 0
@@ -87,11 +80,9 @@ func _process(delta):
                 broom_state = 3
                 broomSound.play()
             elif broom_state == 3:
-                #broom_mesh.rotation_degrees.z = -10
                 broom_sprite.updateBaseFrame(1, 0)
                 broom_state = 4
             elif broom_state == 4:
-                #broom_mesh.translation.x = 0
                 broom_sprite.translation.x = 0.5
                 broom_state = -2
                 broom.visible = false
@@ -104,15 +95,6 @@ func _process(delta):
     tryRotateCamera(delta)
 
     if global.pauseGame: return
-
-    tryDieToEnemy()
-
-    # if not is_walking:
-    #     sprite_reset_timer += delta
-    #     if sprite_reset_timer >= sprite_reset_limit and not mySprite.isFacingDown():
-    #         mySprite.faceDown()
-    # else:
-    #     sprite_reset_timer = 0
 
 func _physics_process(delta):
     # ._process_physics(delta) #NOTE: this super method is called automatically 
@@ -128,11 +110,6 @@ func tryRotateCamera(delta):
         cameraRotationCounter += delta
         getCamera().rotate_right((delta*66)+(cameraRotationCounter*36))
     else: cameraRotationCounter = 0
-    # elif Input.is_action_pressed("ui_ctrl"):
-    #     if Input.is_action_just_pressed("ui_rotate_left"):
-    #         getCamera().rotate_left_90deg()
-    #     elif Input.is_action_just_pressed("ui_rotate_right"):
-    #         getCamera().rotate_right_90deg()
         
     if cameraRotationCounter > 1: cameraRotationCounter = 1
     
@@ -147,9 +124,10 @@ func tryRotateCamera(delta):
         getCamera().focusForward(facing)
 
 func tryDieToEnemy():
-    if smallInteractionArea.is_touching_enemy and not transitioning:
+    if not transitioning:
         hurtSound.play()
         global.pauseGame = true
+        global.pauseMoveInput = true
         self.playerRespawn("blink_fade")
 
 func tryBroom():

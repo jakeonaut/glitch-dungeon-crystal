@@ -50,7 +50,7 @@ func faceLeft():
         start_frame = left_frame
         set_frame(start_frame)
     facing = Vector2(-1, 0)
-func isFacingLeft(): # TODO(jaketrower): How can this interact with lunging and other varied animations ?
+func isFacingLeft():
     # var left_frame = base_frame + (self.hframes) + 2
     # return start_frame == left_frame
     return facing.x == -1 and facing.y == 0
@@ -61,7 +61,7 @@ func faceRight():
         start_frame = right_frame
         set_frame(start_frame)
     facing = Vector2(1, 0)
-func isFacingRight(): # TODO(jaketrower): How can this interact with lunging and other varied animations ?
+func isFacingRight():
     # var right_frame = base_frame + 2
     # return start_frame == right_frame
     return facing.x == 1 and facing.y == 0
@@ -74,7 +74,7 @@ func faceUp():
     facing = Vector2(0, -1)
 
     
-func isFacingUp(): # TODO(jaketrower): How can this interact with lunging and other varied animations ?
+func isFacingUp():
     # var up_frame = base_frame + (self.hframes)
     # return start_frame == up_frame
     return facing.x == 0 and facing.y == -1
@@ -85,7 +85,7 @@ func faceDown():
         start_frame = down_frame
         set_frame(start_frame)
     facing = Vector2(0, 1)
-func isFacingDown(): # TODO(jaketrower): How can this interact with lunging and other varied animations ?
+func isFacingDown():
     # var down_frame = base_frame
     # return start_frame == down_frame
     return facing.x == 0 and facing.y == 1

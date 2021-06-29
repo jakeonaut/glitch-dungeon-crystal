@@ -16,7 +16,7 @@ var cameraRotation = 0
 var pauseMoveInput = false # don't allow player physics or camera input??
 var pauseGame = false   
 
-var can_broom = false
+var can_broom = true
 
 func _ready():
     # somehow this gets rid of errors LOL

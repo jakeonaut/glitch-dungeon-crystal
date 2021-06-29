@@ -7,8 +7,8 @@ onready var player = get_tree().get_root().get_node("level/Player")
 func isActive():
     return visible
 
-func activate():
+func passiveActivate(delta):
     transformSound.play()
     visible = false
 
-    player.glitch_form = player.GlitchForm.FLOOR
+    player.floorGlitch()
