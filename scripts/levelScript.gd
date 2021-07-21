@@ -11,15 +11,32 @@ func _ready_impl():
     set_process_input(true)
     set_process(true)
 
-    global.activeInteractor = null
-    global.pauseMoveInput = false
-    global.pauseGame = false
-
     player.lightsOn()
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
     
+    tryToRespawn()
+
+    global.activeThrowableObject = null
+    if global.activeThrowableObjectPath != null:
+        # resource is loaded at compile time
+        var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
+        add_child(carriedThrowableObject)
+        carriedThrowableObject.activate()
+        carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
+    else:
+        pass
+    global.activeThrowableObjectPath = null
+
+    # update music
+    musicPlayer.conductFromScenePath(self.get_filename())
+
+func tryToRespawn():
+    global.activeInteractor = null
+    global.pauseMoveInput = false
+    global.pauseGame = false
+
     var found_door = null
     if global.memory.has("active_save_point") and global.isRespawning \
        and global.memory["roomPath"] == self.get_filename():
@@ -52,20 +69,6 @@ func _ready_impl():
     # elif global.cameraRotation:
         # player.getCamera().rotateTo(global.cameraRotation, true)
 
-    global.activeThrowableObject = null
-    if global.activeThrowableObjectPath != null:
-        # resource is loaded at compile time
-        var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
-        add_child(carriedThrowableObject)
-        carriedThrowableObject.activate()
-        carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
-    else:
-        pass
-    global.activeThrowableObjectPath = null
-
-    # update music
-    musicPlayer.conductFromScenePath(self.get_filename())
-
     global.isRespawning = false
 
     # final global memory management
@@ -73,7 +76,6 @@ func _ready_impl():
     if not global.memory.has("active_save_point"):
         global.memory["roomPath"] = self.filename
         global.saveGame()
-
 
 # TODO(jaketrower): Remove this level edit stuff in final cut ?!?
 func _process(delta):

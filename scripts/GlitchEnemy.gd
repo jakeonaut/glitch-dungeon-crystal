@@ -11,11 +11,12 @@ func _ready():
     set_process(true)
 
 func _process(delta):
-    flipTimer += delta*5
-    if flipTimer >= flipTimeLimit:
-        flipTimer = 0
-        meshInstance.get_mesh().set_flip_faces(not meshInstance.get_mesh().get_flip_faces())
-        meshInstance.rotate_x(PI/2)
+    pass
+    # flipTimer += delta*5
+    # if flipTimer >= flipTimeLimit:
+    #     flipTimer = 0
+    #     meshInstance.get_mesh().set_flip_faces(not meshInstance.get_mesh().get_flip_faces())
+    #     meshInstance.rotate_x(PI/2)
 
 func getHitByBroom():
     if visible:

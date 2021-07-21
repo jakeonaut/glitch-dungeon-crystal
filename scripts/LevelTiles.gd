@@ -5,6 +5,8 @@ var grey_tiles = preload("res://sceneObjects/tiles/grey_tiles.tres")
 var red_tiles = preload("res://sceneObjects/tiles/red_tiles.tres")
 var green_tiles = preload("res://sceneObjects/tiles/green_tiles.tres")
 var yellow_tiles = preload("res://sceneObjects/tiles/yellow_tiles.tres")
+var black_tiles = preload("res://sceneObjects/tiles/black_tiles.tres")
+var white_tiles = preload("res://sceneObjects/tiles/white_tiles.tres")
 
 func noGlitch():
     set_mesh_library(grey_tiles)
@@ -17,3 +19,9 @@ func featherGlitch():
 
 func ladderGlitch():
     set_mesh_library(yellow_tiles)
+
+func invisibleGlitch():
+    set_mesh_library(black_tiles)
+
+func walkThroughWallsGlitch():
+    set_mesh_library(white_tiles)

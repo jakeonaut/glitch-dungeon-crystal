@@ -40,9 +40,15 @@ func randomizeFrameDelay():
     frame_delay = rand_range(0.1, 1.0)
 
 func updateBaseFrame(hframe, vframe):
+    var is_facing_right = isFacingRight()
     start_frame = (self.hframes * vframe) + hframe
     base_frame = start_frame
     set_frame(start_frame)
+    
+    if is_facing_right:
+        faceRight()
+    else:
+        faceLeft()
 
 func faceLeft():
     var left_frame = base_frame + (self.hframes) + 2

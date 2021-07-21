@@ -1,18 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/textures/tinybrick.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/grass_side.png" type="Texture" id=2]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 uv1_scale = Vector3( 3, 2, 3 )
 
 [sub_resource type="CubeMesh" id=2]
-material = SubResource( 7 )
+material = SubResource( 1 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_unshaded = true
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
+size = Vector3( 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -24,7 +34,7 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="BrickSolid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
@@ -34,4 +44,15 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="BrickSolid"]
 
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid/StaticBody"]
-shape = SubResource( 10 )
+shape = SubResource( 3 )
+
+[node name="CloudSemisolid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolid"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 3 )

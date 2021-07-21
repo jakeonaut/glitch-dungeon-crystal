@@ -4,7 +4,6 @@ onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/Men
 onready var hurtSound = get_node("Sounds/HurtSound")
 
 onready var sunLight = get_node("../commonWorldEnvironment/The Sun")
-onready var levelTiles = get_node("../LevelTiles")
 
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
@@ -22,7 +21,7 @@ func _ready():
 func floorGlitch():
     glitch_form = GlitchForm.FLOOR
     levelTiles.floorGlitch()
-    mySprite.setClericCostume()
+    mySprite.setBugCatcherCostume()
 
 func featherGlitch():
     glitch_form = GlitchForm.FEATHER
@@ -33,6 +32,16 @@ func ladderGlitch():
     glitch_form = GlitchForm.LADDER
     levelTiles.ladderGlitch()
     mySprite.setLuckyCatCostume()
+
+func invisibleGlitch():
+    glitch_form = GlitchForm.INVISIBLE
+    levelTiles.invisibleGlitch()
+    mySprite.setClericCostume()
+
+func walkThroughWallsGlitch():
+    glitch_form = GlitchForm.WALK_THROUGH_WALLS
+    levelTiles.walkThroughWallsGlitch()
+    mySprite.setNightgown()
 
 func wearCostume(costume):
     if costume == "normal": 
@@ -124,11 +133,12 @@ func tryRotateCamera(delta):
         getCamera().focusForward(facing)
 
 func tryDieToEnemy():
-    if not transitioning:
+    if glitch_form != GlitchForm.INVISIBLE and not transitioning:
         hurtSound.play()
         global.pauseGame = true
         global.pauseMoveInput = true
-        self.playerRespawn("blink_fade")
+        global.isRespawning = true
+        get_node("..").tryToRespawn()
 
 func tryBroom():
     if can_broom:        
