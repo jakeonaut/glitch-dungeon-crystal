@@ -8,6 +8,9 @@ var start_frame = 0
 var base_frame = start_frame
 export var max_frames = 2
 
+var has_finished_animation = false
+var repeat_animation = true
+
 var facing = Vector2(0, 1)
 var is_rotating = false
 
@@ -46,33 +49,50 @@ func updateBaseFrame(hframe, vframe):
     set_frame(start_frame)
     
     if is_facing_right:
-        faceRight()
+        walkRight()
     else:
-        faceLeft()
+        walkLeft()
 
-func faceLeft():
-    var left_frame = base_frame + (self.hframes) + 2
-    if start_frame != left_frame:
-        start_frame = left_frame
-        set_frame(start_frame)
+func walkLeft():
+    walkRight()
+    self.flip_h = true
+    facing = Vector2(-1, 0)
+func jumpLeft(set_facing = true):
+    jumpRight()
+    self.flip_h = true
+    facing = Vector2(-1, 0)
+func fallLeft(set_facing = true):
+    fallRight()
+    self.flip_h = true
     facing = Vector2(-1, 0)
 func isFacingLeft():
-    # var left_frame = base_frame + (self.hframes) + 2
-    # return start_frame == left_frame
     return facing.x == -1 and facing.y == 0
 
-func faceRight():
+func walkRight(set_facing = true):
     var right_frame = base_frame + 2
     if start_frame != right_frame:
         start_frame = right_frame
         set_frame(start_frame)
+    self.flip_h = false
+    facing = Vector2(1, 0)
+func jumpRight(set_facing = true):
+    var right_frame = base_frame + 4
+    if start_frame != right_frame:
+        start_frame = right_frame
+        set_frame(start_frame)
+    self.flip_h = false
+    facing = Vector2(1, 0)
+func fallRight(set_facing = true):
+    var right_frame = base_frame + 6
+    if start_frame != right_frame:
+        start_frame = right_frame
+        set_frame(start_frame)
+    self.flip_h = false
     facing = Vector2(1, 0)
 func isFacingRight():
-    # var right_frame = base_frame + 2
-    # return start_frame == right_frame
     return facing.x == 1 and facing.y == 0
 
-func faceUp():
+func walkUp():
     var up_frame = base_frame + (self.hframes)
     if start_frame != up_frame:
         start_frame = up_frame
@@ -85,7 +105,7 @@ func isFacingUp():
     # return start_frame == up_frame
     return facing.x == 0 and facing.y == -1
 
-func faceDown():
+func walkDown():
     var down_frame = base_frame
     if start_frame != down_frame:
         start_frame = down_frame
@@ -99,7 +119,7 @@ func isFacingDown():
 func fixSpriteFacing():
     if not is_rotating:
         # by default, just face down. Player will have more sophisticated based on facing var and camera
-        faceDown()
+        walkDown()
 
 func setRotating(val):
     is_rotating = val

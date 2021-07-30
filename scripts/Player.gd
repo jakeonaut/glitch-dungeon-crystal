@@ -21,42 +21,42 @@ func _ready():
 func floorGlitch():
     glitch_form = GlitchForm.FLOOR
     levelTiles.floorGlitch()
-    mySprite.setBugCatcherCostume()
+    # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
     glitch_form = GlitchForm.FEATHER
     levelTiles.featherGlitch()
-    mySprite.setMothCostume()
+    # mySprite.setMothCostume()
 
 func ladderGlitch():
     glitch_form = GlitchForm.LADDER
     levelTiles.ladderGlitch()
-    mySprite.setLuckyCatCostume()
+    # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
     glitch_form = GlitchForm.INVISIBLE
     levelTiles.invisibleGlitch()
-    mySprite.setClericCostume()
+    # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
     glitch_form = GlitchForm.WALK_THROUGH_WALLS
     levelTiles.walkThroughWallsGlitch()
-    mySprite.setNightgown()
+    # mySprite.setNightgown()
 
 func wearCostume(costume):
-    if costume == "normal": 
-        mySprite.setNormalClothes()
-    elif costume == "moth": 
-        mySprite.setMothCostume()
-    elif costume == "bugcatcher": 
-        mySprite.setBugCatcherCostume()
-    elif costume == "cleric": 
-        mySprite.setClericCostume()
-        jumpSound = get_node("Sounds/JumpOverallsSound")
-    elif costume == "luckycat": 
-        mySprite.setLuckyCatCostume()
-    elif costume == "nightgown": 
-        mySprite.setNightgown()
+    # if costume == "normal": 
+    #     mySprite.setNormalClothes()
+    # elif costume == "moth": 
+    #     mySprite.setMothCostume()
+    # elif costume == "bugcatcher": 
+    #     mySprite.setBugCatcherCostume()
+    # elif costume == "cleric": 
+    #     mySprite.setClericCostume()
+    #     jumpSound = get_node("Sounds/JumpOverallsSound")
+    # elif costume == "luckycat": 
+    #     mySprite.setLuckyCatCostume()
+    # elif costume == "nightgown": 
+    #     mySprite.setNightgown()
     global.memory["player_costume"] = costume
     
 func _process(delta):
@@ -132,6 +132,7 @@ func tryRotateCamera(delta):
     if Input.is_action_just_pressed("ui_focus_forward"):
         getCamera().focusForward(facing)
 
+# @override
 func tryDieToEnemy():
     if glitch_form != GlitchForm.INVISIBLE and not transitioning:
         hurtSound.play()
@@ -143,18 +144,18 @@ func tryDieToEnemy():
 func tryBroom():
     if can_broom:        
         var broom_sprite = broom.get_node("Sprite3D")
-        if mySprite.isPlayerFacingDown():
-            broom.rotation_degrees.y = 0
-            broom_sprite.flip_h = false
-        elif mySprite.isPlayerFacingRight():
-            broom.rotation_degrees.y = 90
-            broom_sprite.flip_h = false
-        elif mySprite.isPlayerFacingUp():
-            broom.rotation_degrees.y = 180
-            broom_sprite.flip_h = true
-        elif mySprite.isPlayerFacingLeft():
-            broom.rotation_degrees.y = 270
-            broom_sprite.flip_h = true
+        # if mySprite.isPlayerFacingDown():
+        #     broom.rotation_degrees.y = 0
+        #     broom_sprite.flip_h = false
+        # elif mySprite.isPlayerFacingRight():
+        #     broom.rotation_degrees.y = 90
+        #     broom_sprite.flip_h = false
+        # elif mySprite.isPlayerFacingUp():
+        #     broom.rotation_degrees.y = 180
+        #     broom_sprite.flip_h = true
+        # elif mySprite.isPlayerFacingLeft():
+        #     broom.rotation_degrees.y = 270
+        #     broom_sprite.flip_h = true
 
         broom.visible = true
         broom_state = 1
@@ -166,7 +167,7 @@ func tryBroom():
         pass # on_ground = false
 
 func faceDown():
-    mySprite.faceDown()
+    pass # mySprite.faceDown()
 
 func lightsOff():
     sunLight.visible = false

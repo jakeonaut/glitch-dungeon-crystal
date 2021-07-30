@@ -9,16 +9,38 @@ func preProcess():
     .preProcess() # super
 
     # an object in motion...
-    if parent.linear_velocity.x > 0.001 or parent.linear_velocity.x < -0.001 \
+    if not parent.on_ground \
+       or parent.linear_velocity.x > 0.001 or parent.linear_velocity.x < -0.001 \
        or parent.linear_velocity.z > 0.001 or parent.linear_velocity.z < -0.001 \
        or parent.broom_state > 0:
         frame_delay = 0.1
     # TODO (need to pull this from PlayerGameMover, if glitch_form == GlitchForm.FEATHER and not on_ground)
-    elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") \
-         or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
+    elif parent.pressingMoveRight() or parent.pressingMoveLeft() \
+       or parent.pressingMoveDown() or parent.pressingMoveForward():
         frame_delay = 0.2
     else:
         frame_delay = 0.4
+    
+    var shouldFaceLeft = not parent.pressingMoveRight() and (parent.pressingMoveLeft() or isFacingLeft())
+    var shouldFaceRight = not parent.pressingMoveLeft() and (parent.pressingMoveRight() or isFacingRight())
+    if parent.on_ground:
+        if shouldFaceRight:
+            walkRight()
+        elif shouldFaceLeft:
+            walkLeft()
+    else:
+        # jumping up
+        if parent.linear_velocity.y > 0:
+            if shouldFaceRight:
+                jumpRight()
+            elif shouldFaceLeft:
+                jumpLeft()
+        if parent.linear_velocity.y < 0:
+            if shouldFaceRight:
+                fallRight()
+            elif shouldFaceLeft:
+                fallLeft()
+                
 
 func setNormalClothes():
     updateBaseFrame(0, 0)
@@ -27,7 +49,7 @@ func setMothCostume():
 func setBugCatcherCostume():
     updateBaseFrame(0, 2)
 func setClericCostume():
-    updateBaseFrame(4, 0)
+    updateBaseFrame(0, 8)
 func setLuckyCatCostume():
     updateBaseFrame(0, 4)
 func setNightgown():
@@ -55,29 +77,6 @@ func animate(delta):
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()
-
-# @override
-func faceLeft():
-    faceRight()
-    self.flip_h = true
-    facing = Vector2(-1, 0)
-# @override
-func isFacingLeft():
-    var right_frame = base_frame + 2
-    return start_frame == right_frame and self.flip_h
-
-# @override
-func faceRight(set_facing = true):
-    var right_frame = base_frame + 2
-    if start_frame != right_frame:
-        start_frame = right_frame
-        set_frame(start_frame)
-    self.flip_h = false
-    facing = Vector2(1, 0)
-# @override
-func isFacingRight():
-    var right_frame = base_frame + 2
-    return start_frame == right_frame and not self.flip_h
 
 # @override
 func isFacingUp():
@@ -129,10 +128,10 @@ func isPlayerFacingLeft():
 func fixSpriteFacing():
     if not is_rotating:
         if isPlayerFacingDown():
-            faceDown()
+            walkDown()
         elif isPlayerFacingUp():
-            faceUp()
+            walkUp()
         elif isPlayerFacingRight():
-            faceRight()
+            walkRight()
         elif isPlayerFacingLeft():
-            faceLeft()
+            walkLeft()
