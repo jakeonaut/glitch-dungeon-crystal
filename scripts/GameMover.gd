@@ -27,6 +27,7 @@ var on_ground = true
 var was_on_ground = true
 var truly_on_ground = false
 var half_on_ground = false
+var should_turn_around = false
 var jumped_from_true_ground = false
 var was_just_on_ground_timer = 0
 var was_just_on_ground_time_limit = 5
@@ -49,6 +50,7 @@ var vv = up.dot(lv) # vertical velocity
 var hv = lv - up * vv # horizontal velocity
 
 var walk_speed = 8
+var DNUMHORZ = 65
 
 # GlitchForm variables
 enum GlitchForm {
@@ -185,7 +187,7 @@ func applyGravity(delta):
     elif smallInteractionArea.is_touching_water:
         g = Vector3(0, -grav/3, 0)
     elif isFeatherLike():
-        g = Vector3(0, -grav/2, 0)
+        g = Vector3(0, -grav/1.5, 0)
     else:
         g = Vector3(0, -grav, 0)
 
@@ -219,7 +221,7 @@ func processInputs(delta):
 
     if isWalkingIntoWall() and glitch_form == GlitchForm.LADDER:
         # CLIMB BABY!!!!
-        vv = jump_force / 3
+        vv = jump_force / 2.5
     was_pressing_horizontal_input = is_pressing_horizontal_input
 
 func justPressedDown():
@@ -268,7 +270,7 @@ func processJumpInputs(delta):
             jumped_from_true_ground = truly_on_ground
             vv = jump_force
             if self.isFeatherLike():
-                vv = (jump_force) / 6
+                vv = (jump_force*6)
             elif glitch_form == GlitchForm.INVISIBLE:
                 vv = invisible_jump_force
 
@@ -309,7 +311,7 @@ func processJumpInputs(delta):
             if jumpSound != null: jumpSound.play()
             has_just_jumped_timer = -has_just_jumped_time_limit
 
-    if self.isFeatherLike() and pressingJump() and not justPressedJump():
+    if self.isFeatherLike() and (pressingJump() or vv > jump_force) and not justPressedJump():
         vv = (4*jump_force) / 5
         
 
@@ -354,20 +356,20 @@ func processHorizontalInputs(delta):
 
         if not global.pauseMoveInput:
             if pressingMoveForward():
-                dir += forward
+                dir += forward*(delta*DNUMHORZ)
             elif pressingMoveDown():
-                dir -= forward
+                dir -= forward*(delta*DNUMHORZ)
                     
             if pressingMoveLeft():
                 if aniPlayer != null:
                     # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
                     if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-                        dir += right / 2 # TODO(jaketrower): *delta
+                        dir += (right/2)*(delta*DNUMHORZ)
                         if aniPlayer.assigned_animation != "turnAround":
                             aniPlayer.clear_queue()
                             aniPlayer.play("turnAround")
                     elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-                        dir += right # TODO(jaketrower): *delta
+                        dir += right*(delta*DNUMHORZ)
                         mySprite.flip_h = true
                         if on_ground and aniPlayer.current_animation != "walk":
                             if aniPlayer.current_animation != "land":
@@ -376,18 +378,18 @@ func processHorizontalInputs(delta):
                             aniPlayer.queue("walk")
                 # if there's no animation player, there's no animation. just flip
                 else:
-                    dir += right # TODO(jaketrower): *delta
+                    dir += right*(delta*DNUMHORZ)
                     mySprite.flip_h = true
             elif pressingMoveRight():
                 if aniPlayer != null:
                     # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
                     if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-                        dir -= right / 2 # TODO(jaketrower): *delta
+                        dir -= (right/2)*(delta*DNUMHORZ)
                         if aniPlayer.assigned_animation != "turnAround":
                             aniPlayer.clear_queue()
                             aniPlayer.play("turnAround")
                     elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-                        dir -= right # TODO(jaketrower): *delta
+                        dir -= right*(delta*DNUMHORZ)
                         mySprite.flip_h = false
                         if on_ground and aniPlayer.current_animation != "walk":
                             if aniPlayer.current_animation != "land":
@@ -396,27 +398,34 @@ func processHorizontalInputs(delta):
                             aniPlayer.queue("walk")
                 # if there's no animation player, there's no animation. just flip
                 else:
-                    dir -= right # TODO(jaketrower): *delta
+                    dir -= right*(delta*DNUMHORZ)
                     mySprite.flip_h = false
             
-            if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and (aniPlayer.current_animation == "walk" or (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing())):
-                if aniPlayer.assigned_animation == "turnAround":
+            if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
+               (aniPlayer.current_animation == "walk" or (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
+                if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_turn_around):
                     mySprite.flip_h = not mySprite.flip_h
+                    should_turn_around = false
                 aniPlayer.clear_queue()
-                if half_on_ground and not glitch_form == GlitchForm.FLOOR:
-                    aniPlayer.play("teeter")
-                else:
-                    aniPlayer.play("stand")
+                if aniPlayer.assigned_animation != "teeter" and aniPlayer.assigned_animation != "stand":
+                    if half_on_ground and not glitch_form == GlitchForm.FLOOR:
+                        aniPlayer.stop()
+                        if should_turn_around:
+                            aniPlayer.queue("turnAround")
+                        aniPlayer.queue("teeter")
+                    else:
+                        aniPlayer.play("stand")
 
+    var DNUMSKID = 60
     if self.isFeatherLike():
         if self.isFeatherLike() and dir.length() > 1:
             dir = dir.normalized()
         if on_ground and not self.is_pressing_horizontal_input:
-            dir = dir * 0.9 # TODO(jaketrower): *delta
+            dir = dir * 0.9*(delta*DNUMSKID)
             if dir.length() < 0.1:
                 dir = Vector3(0, 0, 0)
     elif glitch_form == GlitchForm.FLOOR and not on_ground:
-        dir = dir * 0.98 # TODO(jaketrower): *delta
+        dir = dir * 0.98*(delta*DNUMSKID)
         if dir.length() < 0.1:
             dir = Vector3(0, 0, 0)
 
@@ -544,6 +553,9 @@ func isRectColliding(o_lb, o_tb, o_rb, o_bb, lb, tb, rb, bb):
     return false
     
 func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
+    var collided_left_side = false
+    var collided_middle = false
+    var collided_right_side = false
     for i in range(bottom_tile_y, top_tile_y):
         for j in range(left_tile_x, right_tile_x):
             var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
@@ -584,22 +596,29 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
                 truly_on_ground = true
                 y = tile_y + TILE_HEIGHT - bb
                 global_transform.origin.y = y
+                var tq = 0.5
                 if isRectColliding(
                     tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                    x + lb + q, y + bb, x + lb, y + bb + lv.y - 0.1
-                ) and not isRectColliding(
-                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                    x + rb, y + bb, x + rb - q, y + bb + lv.y - 0.1
-                ) :
-                    half_on_ground = true
-                elif not isRectColliding(
-                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                     x + lb, y + bb, x + lb, y + bb + lv.y - 0.1
-                ) and isRectColliding(
+                ):
+                    collided_left_side = true
+                if isRectColliding(
                     tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                     x + rb, y + bb, x + rb, y + bb + lv.y - 0.1
-                ) :
-                    half_on_ground = true
+                ):
+                    collided_right_side = true
+                if isRectColliding(
+                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                    x, y + bb, x, y + bb + lv.y - 0.1
+                ):
+                    collided_middle = true
+    if truly_on_ground:
+        if collided_left_side and not collided_right_side:
+            if not collided_middle and not aniPlayer.assigned_animation == "teeter": should_turn_around = true
+            half_on_ground = true
+        elif collided_right_side and not collided_left_side:
+            if not collided_middle and not aniPlayer.assigned_animation == "teeter": should_turn_around = true
+            half_on_ground = true
     return lv
 
 func postProcessInputs(delta):
