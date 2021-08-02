@@ -27,7 +27,7 @@ var on_ground = true
 var was_on_ground = true
 var truly_on_ground = false
 var half_on_ground = false
-var should_turn_around = false
+var should_teeter_turn_around = false
 var jumped_from_true_ground = false
 var was_just_on_ground_timer = 0
 var was_just_on_ground_time_limit = 5
@@ -165,6 +165,8 @@ func processPhysics(delta):
     if not was_on_ground and on_ground: # I just landed!!
         landed()
         just_landed = true
+    if aniPlayer != null and aniPlayer.assigned_animation == "land" and not aniPlayer.is_playing():
+        aniPlayer.play("stand")
 
 
     if not is_touching_water and was_touching_water:
@@ -326,7 +328,7 @@ func processHorizontalInputs(delta):
     var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
     var right = view_right
 
-    if glitch_form == GlitchForm.FEATHER:
+    if glitch_form == GlitchForm.FEATHER and not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
         if on_ground:
             forward = forward / 8
             right = right / 8
@@ -352,6 +354,7 @@ func processHorizontalInputs(delta):
         
         horizontal_input = true
         if glitch_form != GlitchForm.FEATHER and not (glitch_form == GlitchForm.FLOOR and not on_ground):
+            #if not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"): #jumpSquat Boots
             dir = Vector3(0.0, 0.0, 0.0)
 
         if not global.pauseMoveInput:
@@ -400,21 +403,24 @@ func processHorizontalInputs(delta):
                 else:
                     dir -= right*(delta*DNUMHORZ)
                     mySprite.flip_h = false
-            
-            if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
-               (aniPlayer.current_animation == "walk" or (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
-                if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_turn_around):
-                    mySprite.flip_h = not mySprite.flip_h
-                    should_turn_around = false
-                aniPlayer.clear_queue()
-                if aniPlayer.assigned_animation != "teeter" and aniPlayer.assigned_animation != "stand":
-                    if half_on_ground and not glitch_form == GlitchForm.FLOOR:
-                        aniPlayer.stop()
-                        if should_turn_around:
-                            aniPlayer.queue("turnAround")
-                        aniPlayer.queue("teeter")
-                    else:
-                        aniPlayer.play("stand")
+    
+    # print("teeter check: " + str(on_ground) + ", " + str(aniPlayer.assigned_animation))
+    # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
+    if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
+        (aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
+        (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
+        if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
+            mySprite.flip_h = not mySprite.flip_h
+            should_teeter_turn_around = false
+        aniPlayer.clear_queue()
+        if aniPlayer.assigned_animation != "teeter":
+            if half_on_ground and not glitch_form == GlitchForm.FLOOR:
+                aniPlayer.stop()
+                if should_teeter_turn_around:
+                    aniPlayer.queue("turnAround")
+                aniPlayer.queue("teeter")
+            else:
+                aniPlayer.play("stand")
 
     var DNUMSKID = 60
     if self.isFeatherLike():
@@ -466,10 +472,10 @@ func handleCollisionsAndMove(lv, delta):
     var tb = get_node("CollisionShape").shape.height/2
     var rb = -lb
     var bb = -tb
-    var left_tile_x = int(floor(global_transform.origin.x + lb + lv.x - 0.1))
-    var right_tile_x = int(ceil(global_transform.origin.x + rb + lv.x + 0.1))
-    var top_tile_y = int(ceil(global_transform.origin.y + tb + lv.y + 0.1))
-    var bottom_tile_y = int(floor(global_transform.origin.y + bb + lv.y - 0.1))
+    var left_tile_x = int(floor(global_transform.origin.x + lb + lv.x - .5))
+    var right_tile_x = int(ceil(global_transform.origin.x + rb + lv.x + .5))
+    var top_tile_y = int(ceil(global_transform.origin.y + tb + lv.y + .5))
+    var bottom_tile_y = int(floor(global_transform.origin.y + bb + lv.y - .5))
     
     was_on_ground = on_ground
     if glitch_form != GlitchForm.FLOOR:
@@ -479,7 +485,7 @@ func handleCollisionsAndMove(lv, delta):
 
     lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
-    lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
+    lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
     global_transform.origin.y += lv.y
     
     if on_ground:
@@ -547,15 +553,19 @@ func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, botto
                 global_transform.origin.x = x
     return lv
     
-func isRectColliding(o_lb, o_tb, o_rb, o_bb, lb, tb, rb, bb):
+func isRectColliding(o_lb, o_tb, o_rb, o_bb, lb, tb, rb, bb, debug_ = false):
+    if debug_:
+        print("\tisRectColliding: " + str(lb <= o_rb) + ", " + str(rb >= o_lb) + ", " + str(tb >= o_bb) + ", " + str(bb <= o_tb))
     if lb <= o_rb and rb >= o_lb and tb >= o_bb and bb <= o_tb:
         return true
     return false
     
 func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
     var collided_left_side = false
+    var collided_true_left_side = false
     var collided_middle = false
     var collided_right_side = false
+    var collided_true_right_side = false
     for i in range(bottom_tile_y, top_tile_y):
         for j in range(left_tile_x, right_tile_x):
             var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
@@ -574,6 +584,11 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
             var tile_pos = levelTiles.map_to_world(coords.x, coords.y, coords.z)
             var tile_x = tile_pos.x - TILE_WIDTH/2
             var tile_y = tile_pos.y - TILE_HEIGHT/2
+            var debug_ = false
+
+            # if i == 1:
+            #     print("tx: " + str(tile_x) + ", x: " + str(x) + ", y: " + str(y))
+            #     debug_ = true
                 
             # Check for top collisions
             if lv.y > 0 and not isTileTypeFallthroughSolid(tile_type) and isRectColliding(
@@ -596,29 +611,53 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
                 truly_on_ground = true
                 y = tile_y + TILE_HEIGHT - bb
                 global_transform.origin.y = y
-                var tq = 0.5
-                if isRectColliding(
-                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                    x + lb, y + bb, x + lb, y + bb + lv.y - 0.1
-                ):
-                    collided_left_side = true
-                if isRectColliding(
-                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                    x + rb, y + bb, x + rb, y + bb + lv.y - 0.1
-                ):
-                    collided_right_side = true
-                if isRectColliding(
-                    tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                    x, y + bb, x, y + bb + lv.y - 0.1
-                ):
-                    collided_middle = true
+
+            # check for left, right, middle collisions for teetering
+            # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
+            var qteeter = 0.3
+            if isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + lb + qteeter, y + bb, x + lb + qteeter, y + bb + lv.y - 0.1, debug_
+            ):
+                collided_left_side = true
+            if isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + lb, y + bb, x + lb, y + bb + lv.y - 0.1, debug_
+            ):
+                collided_true_left_side = true
+            if isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + rb - qteeter, y + bb, x + rb - qteeter, y + bb + lv.y - 0.1
+            ):
+                collided_right_side = true
+            if isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + rb, y + bb, x + rb, y + bb + lv.y - 0.1
+            ):
+                collided_true_right_side = true
+            if not mySprite.flip_h and isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x - .05, y + bb, x - .05, y + bb + lv.y - 0.1
+            ) or mySprite.flip_h and isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + .05, y + bb, x + .05, y + bb + lv.y - 0.1
+            ):
+                collided_middle = true
+    # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
     if truly_on_ground:
         if collided_left_side and not collided_right_side:
-            if not collided_middle and not aniPlayer.assigned_animation == "teeter": should_turn_around = true
+            if not collided_middle and not mySprite.flip_h and not aniPlayer.assigned_animation == "teeter":
+                should_teeter_turn_around = true
             half_on_ground = true
         elif collided_right_side and not collided_left_side:
-            if not collided_middle and not aniPlayer.assigned_animation == "teeter": should_turn_around = true
+            if not collided_middle and mySprite.flip_h and not aniPlayer.assigned_animation == "teeter":
+                should_teeter_turn_around = true
             half_on_ground = true
+        elif not collided_left_side and not collided_right_side:
+            half_on_ground = true
+            if (collided_true_left_side and not mySprite.flip_h) or (collided_true_right_side and mySprite.flip_h):
+                should_teeter_turn_around = true 
+    # print("trulyOnGround: " + str(truly_on_ground) + ", collided_left: " + str(collided_left_side) + ", halfOnGround: " + str(half_on_ground))
     return lv
 
 func postProcessInputs(delta):
