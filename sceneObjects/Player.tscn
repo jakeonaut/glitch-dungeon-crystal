@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -153,7 +153,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=13]
-length = 0.15
+length = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -161,13 +161,29 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.08, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 10, 11, 12 ]
+"values": [ 11 ]
 }
 
 [sub_resource type="Animation" id=14]
+resource_name = "jumpStart"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0336991 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=15]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -182,8 +198,7 @@ tracks/0/keys = {
 "values": [ 14, 15, 10, 3 ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "sad"
+[sub_resource type="Animation" id=16]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -199,7 +214,7 @@ tracks/0/keys = {
 "values": [ 21, 20 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -214,8 +229,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=17]
-resource_name = "teeter"
+[sub_resource type="Animation" id=18]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -231,7 +245,7 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -246,7 +260,7 @@ tracks/0/keys = {
 "values": [ 3, 9 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -421,11 +435,12 @@ anims/fallStart = SubResource( 10 )
 anims/happy = SubResource( 11 )
 anims/jump = SubResource( 12 )
 anims/jumpSquat = SubResource( 13 )
-anims/land = SubResource( 14 )
-anims/sad = SubResource( 15 )
-anims/stand = SubResource( 16 )
-anims/teeter = SubResource( 17 )
-anims/turnAround = SubResource( 18 )
-anims/walk = SubResource( 19 )
+anims/jumpStart = SubResource( 14 )
+anims/land = SubResource( 15 )
+anims/sad = SubResource( 16 )
+anims/stand = SubResource( 17 )
+anims/teeter = SubResource( 18 )
+anims/turnAround = SubResource( 19 )
+anims/walk = SubResource( 20 )
 
 [editable path="PauseMenu"]
