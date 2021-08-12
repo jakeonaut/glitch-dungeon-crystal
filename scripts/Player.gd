@@ -18,6 +18,24 @@ func _ready():
     set_physics_process(true)
     if pauseMenu: pauseMenu.hide()
 
+func applyNextGlitch():
+    applyGlitch(getNextGlitch())
+
+func applyPrevGlitch():
+    applyGlitch(getPrevGlitch())
+
+func applyGlitch(glitch):
+    if glitch == GlitchForm.FLOOR: floorGlitch()
+    if glitch == GlitchForm.FEATHER: featherGlitch()
+    if glitch == GlitchForm.LADDER: ladderGlitch()
+    if glitch == GlitchForm.INVISIBLE: invisibleGlitch()
+    if glitch == GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
+
+func normalGlitch():
+    glitch_form = GlitchForm.NORMAL
+    levelTiles.normalGlitch()
+    # mySprite.setNormalClothes()
+
 func floorGlitch():
     glitch_form = GlitchForm.FLOOR
     levelTiles.floorGlitch()
@@ -71,6 +89,10 @@ func _process(delta):
             if pauseMenu: pauseMenu.hide()
             global.pauseGame = false
 
+    if Input.is_action_just_pressed("ui_glitch_next"):
+        applyNextGlitch()
+    if Input.is_action_just_pressed("ui_glitch_prev"):
+        applyPrevGlitch()
 
     if broom_state != 0:
         broom_timer += (delta*22)
@@ -101,7 +123,7 @@ func _process(delta):
                     can_broom = true
 
 
-    tryRotateCamera(delta)
+    #tryRotateCamera(delta)
 
     if global.pauseGame: return
 
@@ -111,26 +133,26 @@ func _physics_process(delta):
     pass
 
 func tryRotateCamera(delta):
-    # if not Input.is_action_pressed("ui_ctrl"):
-    if Input.is_action_pressed("ui_rotate_left"):
-        cameraRotationCounter += delta
-        getCamera().rotate_left((delta*66)+(cameraRotationCounter*36))
-    elif Input.is_action_pressed("ui_rotate_right"):
-        cameraRotationCounter += delta
-        getCamera().rotate_right((delta*66)+(cameraRotationCounter*36))
-    else: cameraRotationCounter = 0
+    pass
+    # if Input.is_action_pressed("ui_rotate_left"):
+    #     cameraRotationCounter += delta
+    #     getCamera().rotate_left((delta*66)+(cameraRotationCounter*36))
+    # elif Input.is_action_pressed("ui_rotate_right"):
+    #     cameraRotationCounter += delta
+    #     getCamera().rotate_right((delta*66)+(cameraRotationCounter*36))
+    # else: cameraRotationCounter = 0
         
-    if cameraRotationCounter > 1: cameraRotationCounter = 1
+    # if cameraRotationCounter > 1: cameraRotationCounter = 1
     
-    if Input.is_action_pressed("ui_rotate_up"):
-        getCamera().rotate_up(3*(delta*66))
-    if Input.is_action_pressed("ui_rotate_down"):
-        getCamera().rotate_down(3*(delta*66))
+    # if Input.is_action_pressed("ui_rotate_up"):
+    #     getCamera().rotate_up(3*(delta*66))
+    # if Input.is_action_pressed("ui_rotate_down"):
+    #     getCamera().rotate_down(3*(delta*66))
 
-    if Input.is_action_just_pressed("ui_focus_next"):
-        getCamera().toggleNext()
-    if Input.is_action_just_pressed("ui_focus_forward"):
-        getCamera().focusForward(facing)
+    # if Input.is_action_just_pressed("ui_focus_next"):
+    #     getCamera().toggleNext()
+    # if Input.is_action_just_pressed("ui_focus_forward"):
+    #     getCamera().focusForward(facing)
 
 # @override
 func tryDieToEnemy():

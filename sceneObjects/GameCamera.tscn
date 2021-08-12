@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/GameCamera.gd" type="Script" id=1]
+
+[node name="GameCamera" type="InterpolatedCamera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.923, 19.226 )
+projection = 1
+current = true
+size = 15.0
+target = NodePath("../Player")
+speed = 5.0
+enabled = true
+script = ExtResource( 1 )

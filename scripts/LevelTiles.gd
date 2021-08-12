@@ -8,7 +8,7 @@ var yellow_tiles = preload("res://sceneObjects/tiles/yellow_tiles.tres")
 var black_tiles = preload("res://sceneObjects/tiles/black_tiles.tres")
 var white_tiles = preload("res://sceneObjects/tiles/white_tiles.tres")
 
-func noGlitch():
+func normalGlitch():
     set_mesh_library(grey_tiles)
 
 func floorGlitch():

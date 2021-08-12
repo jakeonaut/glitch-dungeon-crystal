@@ -17,7 +17,6 @@ radius = 1.5
 [sub_resource type="BoxShape" id=3]
 
 [node name="NPC" type="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.48445, 3.2514, 6.20847 )
 collision_layer = 2
 script = ExtResource( 1 )
 
