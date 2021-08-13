@@ -25,5 +25,5 @@ func _process(delta):
     elif distance > 19.33:
         set_interpolation_enabled(true)
         set_speed(1)
-    elif distance < 19.25:
+    elif distance < 19.26:
         set_interpolation_enabled(false)

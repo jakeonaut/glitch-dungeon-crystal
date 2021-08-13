@@ -363,7 +363,7 @@ func processJumpInputs(delta):
             jump_squat_jump_input_timer = 0
             
 
-    if isFeatherLike() and feather_jump_timer < 6 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
+    if isFeatherLike() and feather_jump_timer < 10 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
         feather_jump_timer += (delta*22)
         actuallyApplyJump(false)
     elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
@@ -376,10 +376,10 @@ func processJumpInputs(delta):
 func actuallyApplyJump(play_sound = true):
     vv = jump_force
     if isFeatherLike():
-        if feather_jump_timer < 5:
-            vv = (3*jump_force) / 4
-        else:
-            vv = (2*jump_force) / 3
+        # if feather_jump_timer < 5:
+        #     vv = (3*jump_force) / 4
+        # else:
+        vv = jump_force / 2
     elif not play_sound:
         vv = (1.58*jump_force)/3
     elif glitch_form == GlitchForm.INVISIBLE:
@@ -445,6 +445,7 @@ func processHorizontalInputs(delta):
                 dir -= forward*(delta*DNUMHORZ)
                     
             if pressingMoveLeft():
+                should_teeter_turn_around = false
                 if aniPlayer != null:
                     # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
                     if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
@@ -461,6 +462,7 @@ func processHorizontalInputs(delta):
                     dir += right*(delta*DNUMHORZ)
                     mySprite.flip_h = true
             elif pressingMoveRight():
+                should_teeter_turn_around = false
                 if aniPlayer != null:
                     # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
                     if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
@@ -581,14 +583,16 @@ func handleCollisionsAndMove(lv, delta):
     lv.y /= delta*DNUM
     return lv
 
-func isTileTypeSolid(tile_type):
-    return glitch_form != GlitchForm.WALK_THROUGH_WALLS and tile_type == 1
+func isTileSolid(tile_type):
+    var tileCollisionShape = levelTiles.mesh_library.get_item_shapes(tile_type)[0]
+    return glitch_form != GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape
     
-func isTileTypeFallthroughSolid(tile_type):
-    return tile_type == 2 or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tile_type == 1)
+func isTileFallthroughSolid(tile_type):
+    var tileCollisionShape = levelTiles.mesh_library.get_item_shapes(tile_type)[0]
+    return tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
 
-func isTileTypeNotSolid(tile_type):
-    return tile_type == -1
+func isTileNotSolid(tile_type):
+    return tile_type == -1 or len(levelTiles.mesh_library.get_item_shapes(tile_type)) == 0
     
 func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
     self.horizontal_collision = false
@@ -596,7 +600,7 @@ func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, botto
         for j in range(left_tile_x, right_tile_x):
             var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
             var tile_type = levelTiles.get_cell_item(coords.x, coords.y, coords.z)
-            if tile_type == GridMap.INVALID_CELL_ITEM or not isTileTypeSolid(tile_type):
+            if tile_type == GridMap.INVALID_CELL_ITEM or not isTileSolid(tile_type):
                 continue
 
             var x = global_transform.origin.x
@@ -654,7 +658,7 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
         for j in range(left_tile_x, right_tile_x):
             var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
             var tile_type = levelTiles.get_cell_item(coords.x, coords.y, coords.z)
-            if tile_type == GridMap.INVALID_CELL_ITEM or isTileTypeNotSolid(tile_type):
+            if tile_type == GridMap.INVALID_CELL_ITEM or isTileNotSolid(tile_type):
                 continue
 
             var x = global_transform.origin.x
@@ -675,7 +679,7 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
             #     debug_ = true
                 
             # Check for top collisions
-            if lv.y > 0 and not isTileTypeFallthroughSolid(tile_type) and isRectColliding(
+            if lv.y > 0 and not isTileFallthroughSolid(tile_type) and isRectColliding(
                 tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                 x + lb + q, y + tb + lv.y + 0.1, x + rb - q, y + tb
             ):
@@ -688,7 +692,7 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
                 tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                 x + lb + q, y + bb, x + rb - q, y + bb + lv.y - 0.1
             ):
-                if isTileTypeFallthroughSolid(tile_type) and (tile_y + TILE_HEIGHT > y + bb or pressingDown()):
+                if isTileFallthroughSolid(tile_type) and (tile_y + TILE_HEIGHT > y + bb or pressingDown()):
                     continue
                 lv.y = 0
                 on_ground = true
@@ -741,7 +745,6 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
             half_on_ground = true
             if (collided_true_left_side and not mySprite.flip_h) or (collided_true_right_side and mySprite.flip_h):
                 should_teeter_turn_around = true 
-    # print("trulyOnGround: " + str(truly_on_ground) + ", collided_left: " + str(collided_left_side) + ", halfOnGround: " + str(half_on_ground))
     return lv
 
 func postProcessInputs(delta):

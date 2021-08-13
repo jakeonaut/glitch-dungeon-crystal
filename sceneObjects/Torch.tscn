@@ -23,7 +23,8 @@ script = ExtResource( 1 )
 material_override = ExtResource( 2 )
 pixel_size = 0.12
 texture = ExtResource( 3 )
-hframes = 2
+vframes = 2
+hframes = 4
 script = ExtResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

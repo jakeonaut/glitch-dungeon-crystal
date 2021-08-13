@@ -1,7 +1,48 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://assets/textures/greysolid1.png" type="Texture" id=1]
-[ext_resource path="res://assets/textures/greysemisolid1.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/greysolid2.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/greysolid3.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/greysolid4.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/greysolid5.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/greysolid6.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/greysolid7.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/greysolid8.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/greysolidtop1.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/greysolidtop_left2.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/greysolidtop_right1.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/greysolidtop_right2.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/greysolidtop2.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/greysolidtop3.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/greysolidtop4.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/greysolidtop5.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/greysolidtop6.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/greysolidtop7.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/greysolidtop8.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/greyfloorbot1.png" type="Texture" id=20]
+[ext_resource path="res://assets/textures/greyfloorbot2.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/greyfloorbot3.png" type="Texture" id=22]
+[ext_resource path="res://assets/textures/greyfloorbot4.png" type="Texture" id=23]
+[ext_resource path="res://assets/textures/greyfloorbot5.png" type="Texture" id=24]
+[ext_resource path="res://assets/textures/greyfloorbot6.png" type="Texture" id=25]
+[ext_resource path="res://assets/textures/greyfloorbot7.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/greyfloorbot8.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/greyfloorbot9.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/greyroof1.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/greyroof2.png" type="Texture" id=30]
+[ext_resource path="res://assets/textures/greyroof3.png" type="Texture" id=31]
+[ext_resource path="res://assets/textures/greyroof4.png" type="Texture" id=32]
+[ext_resource path="res://assets/textures/greyroof5.png" type="Texture" id=33]
+[ext_resource path="res://assets/textures/greyroof6.png" type="Texture" id=34]
+[ext_resource path="res://assets/textures/greyroof7.png" type="Texture" id=35]
+[ext_resource path="res://assets/textures/greysolidceil1.png" type="Texture" id=36]
+[ext_resource path="res://assets/textures/greysolidceil2.png" type="Texture" id=37]
+[ext_resource path="res://assets/textures/greysolidceil3.png" type="Texture" id=38]
+[ext_resource path="res://assets/textures/greysolidceil4.png" type="Texture" id=39]
+[ext_resource path="res://assets/textures/greysolidceil5.png" type="Texture" id=40]
+[ext_resource path="res://assets/textures/greysolidceil6.png" type="Texture" id=41]
+[ext_resource path="res://assets/textures/greysemisolid1.png" type="Texture" id=42]
+[ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=43]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -15,18 +56,392 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=90]
 flags_unshaded = true
 albedo_texture = ExtResource( 2 )
 uv1_scale = Vector3( 3, 2, 3 )
 
-[sub_resource type="CubeMesh" id=5]
-material = SubResource( 4 )
+[sub_resource type="CubeMesh" id=91]
+material = SubResource( 90 )
 size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=92]
+flags_unshaded = true
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=93]
+material = SubResource( 92 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=94]
+flags_unshaded = true
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=95]
+material = SubResource( 94 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=96]
+flags_unshaded = true
+albedo_texture = ExtResource( 5 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=97]
+material = SubResource( 96 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=98]
+flags_unshaded = true
+albedo_texture = ExtResource( 6 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=99]
+material = SubResource( 98 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=100]
+flags_unshaded = true
+albedo_texture = ExtResource( 7 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=101]
+material = SubResource( 100 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=102]
+flags_unshaded = true
+albedo_texture = ExtResource( 8 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=103]
+material = SubResource( 102 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=104]
+flags_unshaded = true
+albedo_texture = ExtResource( 9 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=105]
+material = SubResource( 104 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=106]
+flags_unshaded = true
+albedo_texture = ExtResource( 10 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=107]
+material = SubResource( 106 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=108]
+flags_unshaded = true
+albedo_texture = ExtResource( 11 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=109]
+material = SubResource( 108 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=110]
+flags_unshaded = true
+albedo_texture = ExtResource( 12 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=111]
+material = SubResource( 110 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=112]
+flags_unshaded = true
+albedo_texture = ExtResource( 13 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=113]
+material = SubResource( 112 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=114]
+flags_unshaded = true
+albedo_texture = ExtResource( 14 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=115]
+material = SubResource( 114 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=116]
+flags_unshaded = true
+albedo_texture = ExtResource( 15 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=117]
+material = SubResource( 116 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=118]
+flags_unshaded = true
+albedo_texture = ExtResource( 16 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=119]
+material = SubResource( 118 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=34]
+flags_unshaded = true
+albedo_texture = ExtResource( 17 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=35]
+material = SubResource( 34 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=36]
+flags_unshaded = true
+albedo_texture = ExtResource( 18 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=37]
+material = SubResource( 36 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=38]
+flags_unshaded = true
+albedo_texture = ExtResource( 19 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=39]
+material = SubResource( 38 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=40]
+flags_unshaded = true
+albedo_texture = ExtResource( 20 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=41]
+material = SubResource( 40 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=42]
+flags_unshaded = true
+albedo_texture = ExtResource( 21 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=43]
+material = SubResource( 42 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=44]
+flags_unshaded = true
+albedo_texture = ExtResource( 22 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=45]
+material = SubResource( 44 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=46]
+flags_unshaded = true
+albedo_texture = ExtResource( 23 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=47]
+material = SubResource( 46 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=48]
+flags_unshaded = true
+albedo_texture = ExtResource( 24 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=49]
+material = SubResource( 48 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=50]
+flags_unshaded = true
+albedo_texture = ExtResource( 25 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=51]
+material = SubResource( 50 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=52]
+flags_unshaded = true
+albedo_texture = ExtResource( 26 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=53]
+material = SubResource( 52 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=54]
+flags_unshaded = true
+albedo_texture = ExtResource( 27 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=120]
+material = SubResource( 54 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=121]
+flags_unshaded = true
+albedo_texture = ExtResource( 28 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=122]
+material = SubResource( 121 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=58]
+flags_unshaded = true
+albedo_texture = ExtResource( 29 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=59]
+material = SubResource( 58 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=60]
+flags_unshaded = true
+albedo_texture = ExtResource( 30 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=61]
+material = SubResource( 60 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=62]
+flags_unshaded = true
+albedo_texture = ExtResource( 31 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=63]
+material = SubResource( 62 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=64]
+flags_unshaded = true
+albedo_texture = ExtResource( 32 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=65]
+material = SubResource( 64 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=66]
+flags_unshaded = true
+albedo_texture = ExtResource( 33 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=67]
+material = SubResource( 66 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=68]
+flags_unshaded = true
+albedo_texture = ExtResource( 34 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=69]
+material = SubResource( 68 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=70]
+flags_unshaded = true
+albedo_texture = ExtResource( 35 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=71]
+material = SubResource( 70 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=72]
+flags_unshaded = true
+albedo_texture = ExtResource( 36 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=73]
+material = SubResource( 72 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=74]
+flags_unshaded = true
+albedo_texture = ExtResource( 37 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=75]
+material = SubResource( 74 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=76]
+flags_unshaded = true
+albedo_texture = ExtResource( 38 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=77]
+material = SubResource( 76 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=78]
+flags_unshaded = true
+albedo_texture = ExtResource( 39 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=79]
+material = SubResource( 78 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=80]
+flags_unshaded = true
+albedo_texture = ExtResource( 40 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=81]
+material = SubResource( 80 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=82]
+flags_unshaded = true
+albedo_texture = ExtResource( 41 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=83]
+material = SubResource( 82 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=84]
+flags_unshaded = true
+albedo_texture = ExtResource( 42 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=85]
+material = SubResource( 84 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="PlaneShape" id=86]
+
+[sub_resource type="SpatialMaterial" id=87]
+flags_unshaded = true
+albedo_texture = ExtResource( 43 )
+uv1_scale = Vector3( 3, 2, 3 )
+
+[sub_resource type="CubeMesh" id=88]
+material = SubResource( 87 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="RayShape" id=89]
 
 [node name="Spatial" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
@@ -37,6 +452,7 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
@@ -46,13 +462,476 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid/StaticBody"]
 shape = SubResource( 3 )
 
+[node name="BrickSolid2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1 )
+mesh = SubResource( 91 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -2 )
+mesh = SubResource( 93 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -3 )
+mesh = SubResource( 95 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid5" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -4 )
+mesh = SubResource( 97 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid6" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -5 )
+mesh = SubResource( 99 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid7" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -6 )
+mesh = SubResource( 101 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid8" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -7 )
+mesh = SubResource( 103 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, 0 )
+mesh = SubResource( 105 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopLeft" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0 )
+mesh = SubResource( 105 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopLeft2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -1 )
+mesh = SubResource( 107 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopRight" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, 0 )
+mesh = SubResource( 109 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopRight2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, -1 )
+mesh = SubResource( 111 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -1 )
+mesh = SubResource( 113 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -2 )
+mesh = SubResource( 115 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -3 )
+mesh = SubResource( 117 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop5" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -4 )
+mesh = SubResource( 119 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop6" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -5 )
+mesh = SubResource( 35 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop7" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -6 )
+mesh = SubResource( 37 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop8" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -7 )
+mesh = SubResource( 39 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, 0 )
+mesh = SubResource( 41 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -1 )
+mesh = SubResource( 43 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -2 )
+mesh = SubResource( 45 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -3 )
+mesh = SubResource( 47 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot5" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -4 )
+mesh = SubResource( 49 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot6" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -5 )
+mesh = SubResource( 51 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot7" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -6 )
+mesh = SubResource( 53 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot8" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -7 )
+mesh = SubResource( 120 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot9" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -8 )
+mesh = SubResource( 122 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, 0 )
+mesh = SubResource( 59 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -1 )
+mesh = SubResource( 61 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -2 )
+mesh = SubResource( 63 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -3 )
+mesh = SubResource( 65 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof5" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -4 )
+mesh = SubResource( 67 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof6" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -5 )
+mesh = SubResource( 69 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof7" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -6 )
+mesh = SubResource( 71 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, 0 )
+mesh = SubResource( 73 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -1 )
+mesh = SubResource( 75 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -2 )
+mesh = SubResource( 77 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -3 )
+mesh = SubResource( 79 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil5" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -4 )
+mesh = SubResource( 81 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil6" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -5 )
+mesh = SubResource( 83 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6/StaticBody"]
+shape = SubResource( 3 )
+
 [node name="CloudSemisolid" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
-mesh = SubResource( 5 )
+mesh = SubResource( 85 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="CloudSemisolid"]
 
 [node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 3 )
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 86 )
+
+[node name="Spikes" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+mesh = SubResource( 88 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Spikes"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 89 )
