@@ -2,11 +2,22 @@ extends GridMap
 
 # resources is loaded at compile time with preload
 var grey_tiles = preload("res://sceneObjects/tiles/grey_tiles.tres") 
+var grey_palette = preload("res://assets/palettes/grey_palette.png")
+
 var red_tiles = preload("res://sceneObjects/tiles/red_tiles.tres")
+var red_palette = preload("res://assets/palettes/red_palette.png")
+
 var green_tiles = preload("res://sceneObjects/tiles/green_tiles.tres")
-var yellow_tiles = preload("res://sceneObjects/tiles/yellow_tiles.tres")
+var green_palette = preload("res://assets/palettes/green_palette.png")
+
 var black_tiles = preload("res://sceneObjects/tiles/black_tiles.tres")
+var black_palette = preload("res://assets/palettes/black_palette.png")
+
+var yellow_tiles = preload("res://sceneObjects/tiles/yellow_tiles.tres")
+var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
+
 var white_tiles = preload("res://sceneObjects/tiles/white_tiles.tres")
+var white_palette = preload("res://assets/palettes/white_palette.png")
 
 var tile_index_array = []
 var tile_name_array = []
@@ -86,6 +97,17 @@ func _ready():
     #       pass
     pass
     
+func changeColorPalette(palette):
+    var item_list = mesh_library.get_item_list()
+    for i in range(len(item_list)):
+        var item_id = item_list[i]
+        var mesh = mesh_library.get_item_mesh(item_id)
+        var material = mesh.get_material()
+        if material is ShaderMaterial:
+            material.set_shader_param("base_palette", palette)
+        mesh.set_material(material)
+        mesh_library.set_item_mesh(item_id, mesh)
+
 func properlySetTiles():
     for i in range(len(tile_index_array)):
         var cell_index = tile_index_array[i]
@@ -94,24 +116,30 @@ func properlySetTiles():
 
 func normalGlitch():
     set_mesh_library(grey_tiles)
+    changeColorPalette(grey_palette)
     properlySetTiles()
 
 func floorGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(red_tiles)
+    changeColorPalette(red_palette)
     properlySetTiles()
 
 func featherGlitch():
-    set_mesh_library(green_tiles)
-    properlySetTiles()
-
-func ladderGlitch():
-    set_mesh_library(grey_tiles) # set_mesh_library(yellow_tiles)
+    set_mesh_library(grey_tiles) # set_mesh_library(green_tiles)
+    changeColorPalette(green_palette)
     properlySetTiles()
 
 func invisibleGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(black_tiles)
+    changeColorPalette(black_palette)
+    properlySetTiles()
+    
+func ladderGlitch():
+    set_mesh_library(grey_tiles) # set_mesh_library(yellow_tiles)
+    changeColorPalette(yellow_palette)
     properlySetTiles()
 
 func walkThroughWallsGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(white_tiles)
+    changeColorPalette(white_palette)
     properlySetTiles()

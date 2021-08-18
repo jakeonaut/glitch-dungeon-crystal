@@ -213,7 +213,10 @@ func applyGravity(delta):
     elif smallInteractionArea.is_touching_water:
         g = Vector3(0, -grav/3, 0)
     elif isFeatherLike():
-            g = Vector3(0, -grav/1.5, 0)
+        if pressingDown() or (feather_fall_time_limit >= feather_fall_time_limit and not pressingJump()):
+            g = Vector3(0, -grav/2, 0)
+        else:
+            g = Vector3(0, -grav/3, 0)
     else:
         g = Vector3(0, -grav, 0)
 
@@ -254,8 +257,8 @@ func processInputs(delta):
         on_ground = false
 
     # fail safe...
-    if vv > jump_force:
-        vv = jump_force
+    if vv > jump_force*2:
+        vv = jump_force*2
         if was_walking_into_wall and not isWalkingIntoWall():
             vv = 1
     was_walking_into_wall = isWalkingIntoWall()
@@ -374,16 +377,25 @@ func processJumpInputs(delta):
         feather_jump_timer = 200
 
 func actuallyApplyJump(play_sound = true):
-    vv = jump_force
     if isFeatherLike():
-        # if feather_jump_timer < 5:
-        #     vv = (3*jump_force) / 4
-        # else:
-        vv = jump_force / 2
+        if feather_jump_timer < 5:
+            if vv < (2*jump_force) / 3:
+                vv = (2*jump_force) / 3
+        elif feather_jump_timer < 8:
+            if vv < jump_force / 2:
+                vv = jump_force / 2
+        else:
+            if vv < jump_force / 3:
+                vv = jump_force / 3
     elif not play_sound:
-        vv = (1.58*jump_force)/3
+        if vv < (1.58*jump_force)/3:
+            vv = (1.58*jump_force)/3
     elif glitch_form == GlitchForm.INVISIBLE:
         vv = invisible_jump_force
+    else:
+        # rocket boost boots
+        # vv = jump_force*3
+        vv = jump_force*1.1
     jumpSound.play() if jumpSound and play_sound else null
     on_ground = false
     has_just_jumped_timer = 0 
@@ -398,6 +410,7 @@ func isKindOfOnGround():
 const PROJECTION_ORTHOGONAL = 1
 func processHorizontalInputs(delta):
     is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight() or pressingMoveForward() or pressingMoveDown()
+    var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
 
     # Forward as "seen" by the camera (OpenGL convention)
     var view_forward = -getCamera().get_transform().basis.z
@@ -434,9 +447,18 @@ func processHorizontalInputs(delta):
         is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == GlitchForm.LADDER:
         
         horizontal_input = true
-        if glitch_form != GlitchForm.FEATHER: # and not glitch_floor_jump_walking:
+        if glitch_form == GlitchForm.NORMAL:
             #if not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"): #jumpSquat Boots
             dir = Vector3(0.0, 0.0, 0.0)
+        elif glitch_form == GlitchForm.FEATHER:
+            if is_pressing_opposite_horizontal_input and (aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
+                dir = Vector3(0.0, 0.0, 0.0)
+        elif glitch_form == GlitchForm.FLOOR:
+            if is_pressing_horizontal_input or on_ground: # and not glitch_floor_jump_walking:
+                dir = Vector3(0.0, 0.0, 0.0)
+        else:
+            dir = Vector3(0.0, 0.0, 0.0)
+            
 
         if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
             if pressingMoveForward():

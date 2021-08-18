@@ -2,33 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Image-1.png-02f07d6d192aa77a3138a2123a121563.stex"
+path="res://.import/green_palette.png-13f4d338783e049bf7e1caf29be441ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://insp/Image-1.png"
-dest_files=[ "res://.import/Image-1.png-02f07d6d192aa77a3138a2123a121563.stex" ]
+source_file="res://assets/palettes/green_palette.png"
+dest_files=[ "res://.import/green_palette.png-13f4d338783e049bf7e1caf29be441ae.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
-flags/filter=true
-flags/mipmaps=false
+flags/repeat=true
+flags/filter=false
+flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
