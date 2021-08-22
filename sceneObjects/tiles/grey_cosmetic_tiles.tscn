@@ -1,0 +1,269 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/grey_column_top_left1.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/grey_column_top_right1.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/grey_column_mid_top_left_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/grey_column_mid_top_right1.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/grey_column_mid_left1.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/grey_column_mid_right1.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/grey_column_bot_left1.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/grey_column_bot_right1.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/grey_chandelier_top1.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/grey_chandelier_mid1.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/black.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/grey_chandelier_bot1.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/grey_chandelier_bot_left1.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/grey_chandelier_bot_right1.png" type="Texture" id=16]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=61]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=62]
+material = SubResource( 61 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=65]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=66]
+material = SubResource( 65 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=69]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=70]
+material = SubResource( 69 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=10]
+material = SubResource( 9 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=12]
+material = SubResource( 11 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=14]
+material = SubResource( 13 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=16]
+material = SubResource( 15 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=18]
+material = SubResource( 17 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=20]
+material = SubResource( 19 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=22]
+material = SubResource( 21 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=24]
+material = SubResource( 23 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 15 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=26]
+material = SubResource( 25 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=28]
+material = SubResource( 27 )
+size = Vector3( 1, 1, 1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Column" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="ColumnTopRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0 )
+mesh = SubResource( 62 )
+material/0 = null
+
+[node name="ColumnMidTopLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0 )
+mesh = SubResource( 66 )
+material/0 = null
+
+[node name="ColumnMidTopRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.5, 0 )
+mesh = SubResource( 70 )
+material/0 = null
+
+[node name="ColumnMidLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="ColumnMidRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1, 0 )
+mesh = SubResource( 12 )
+material/0 = null
+
+[node name="ColumnMidBotLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.5, 0 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="ColumnMidBotRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1.5, 0 )
+mesh = SubResource( 12 )
+material/0 = null
+
+[node name="ColumnBotLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="ColumnBotRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -2, 0 )
+mesh = SubResource( 16 )
+material/0 = null
+
+[node name="Chandelier" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+mesh = SubResource( 18 )
+material/0 = null
+
+[node name="ChandelierMid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -0.5, 0 )
+mesh = SubResource( 20 )
+material/0 = null
+
+[node name="ChandelierMidRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -0.5, 0 )
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="ChandelierBot" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
+mesh = SubResource( 24 )
+material/0 = null
+
+[node name="ChandelierBotLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -1, 0 )
+mesh = SubResource( 26 )
+material/0 = null
+
+[node name="ChandelierBotRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -1, 0 )
+mesh = SubResource( 28 )
+material/0 = null

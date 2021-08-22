@@ -8,6 +8,14 @@ onready var sunLight = get_node("../commonWorldEnvironment/The Sun")
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
 
+var grey_player_palette = preload("res://assets/palettes/player_grey_palette.png")
+var grey_palette = preload("res://assets/palettes/grey_palette.png")
+var red_palette = preload("res://assets/palettes/red_palette.png")
+var green_palette = preload("res://assets/palettes/green_palette.png")
+var black_palette = preload("res://assets/palettes/black_palette.png")
+var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
+var white_palette = preload("res://assets/palettes/white_palette.png")
+
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
@@ -25,40 +33,53 @@ func applyPrevGlitch():
     applyGlitch(getPrevGlitch())
 
 func applyGlitch(glitch):
+    if glitch == GlitchForm.NORMAL: normalGlitch()
     if glitch == GlitchForm.FLOOR: floorGlitch()
     if glitch == GlitchForm.FEATHER: featherGlitch()
     if glitch == GlitchForm.LADDER: ladderGlitch()
     if glitch == GlitchForm.INVISIBLE: invisibleGlitch()
     if glitch == GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
 
+func changeSpriteColorPalette(palette):
+    var material = mySprite.material_override
+    if material is ShaderMaterial:
+        material.set_shader_param("base_palette", palette)
+        mySprite.material_override = material
+
 func normalGlitch():
     glitch_form = GlitchForm.NORMAL
     levelTiles.normalGlitch()
+    changeSpriteColorPalette(grey_player_palette)
     # mySprite.setNormalClothes()
 
 func floorGlitch():
     glitch_form = GlitchForm.FLOOR
     levelTiles.floorGlitch()
+    changeSpriteColorPalette(red_palette)
     # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
     glitch_form = GlitchForm.FEATHER
     levelTiles.featherGlitch()
+    changeSpriteColorPalette(green_palette)
     # mySprite.setMothCostume()
 
 func ladderGlitch():
     glitch_form = GlitchForm.LADDER
     levelTiles.ladderGlitch()
+    changeSpriteColorPalette(yellow_palette)
     # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
     glitch_form = GlitchForm.INVISIBLE
     levelTiles.invisibleGlitch()
+    changeSpriteColorPalette(black_palette)
     # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
     glitch_form = GlitchForm.WALK_THROUGH_WALLS
     levelTiles.walkThroughWallsGlitch()
+    changeSpriteColorPalette(grey_palette)
     # mySprite.setNightgown()
 
 func wearCostume(costume):
