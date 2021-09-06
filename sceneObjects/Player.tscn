@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -36,7 +36,7 @@ height = 2.5
 [sub_resource type="CylinderShape" id=3]
 radius = 0.8
 
-[sub_resource type="ShaderMaterial" id=22]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/specular = 0.5
@@ -52,14 +52,13 @@ shader_param/uv2_offset = Vector3( 0, 0, 0 )
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 5 )
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="SphereShape" id=5]
 radius = 4.0
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 4, 3, 4 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "angry"
+[sub_resource type="Animation" id=7]
 length = 0.9
 loop = true
 tracks/0/type = "value"
@@ -75,7 +74,7 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:flip_h")
@@ -90,7 +89,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:flip_h")
@@ -105,7 +104,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -121,8 +120,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "fallStart"
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -137,8 +135,7 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "happy"
+[sub_resource type="Animation" id=12]
 length = 0.9
 loop = true
 tracks/0/type = "value"
@@ -154,7 +151,7 @@ tracks/0/keys = {
 "values": [ 16, 17 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -170,7 +167,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -185,8 +182,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "jumpStart"
+[sub_resource type="Animation" id=15]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -201,7 +197,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -216,7 +212,7 @@ tracks/0/keys = {
 "values": [ 14, 15, 10, 3 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -232,7 +228,7 @@ tracks/0/keys = {
 "values": [ 21, 20 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -247,7 +243,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -263,7 +259,7 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -278,8 +274,8 @@ tracks/0/keys = {
 "values": [ 3, 9 ]
 }
 
-[sub_resource type="Animation" id=20]
-length = 0.3
+[sub_resource type="Animation" id=21]
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -288,10 +284,42 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 2, 25 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "walkStart"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 2, 3 ]
+"values": [ 24, 25 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "walkStop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 27 ]
 }
 
 [node name="Player" type="KinematicBody"]
@@ -320,13 +348,14 @@ shape = SubResource( 3 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224, 0.8 )
-material_override = SubResource( 22 )
+material_override = SubResource( 4 )
 pixel_size = 0.12
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 6 )
-vframes = 3
+vframes = 4
 hframes = 8
+frame = 28
 
 [node name="CameraY" type="Spatial" parent="."]
 editor/display_folded = true
@@ -367,12 +396,12 @@ script = ExtResource( 11 )
 
 [node name="CollisionShape" type="CollisionShape" parent="CameraY/broom/Sprite3D/PassiveInteractionArea"]
 transform = Transform( 1, 0, 1.86265e-008, 0, 1, 0, -1.86265e-008, 0, 1, 2.206, -1.574, 1.547 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CameraY/broom/Sprite3D/PassiveInteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.914, -1.074, 1.237 )
 visible = false
-mesh = SubResource( 5 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="Sounds" type="Node" parent="."]
@@ -445,20 +474,22 @@ margin_bottom = 47.3208
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
-anims/angry = SubResource( 6 )
-anims/faceLeft = SubResource( 7 )
-anims/faceRight = SubResource( 8 )
-anims/fall = SubResource( 9 )
-anims/fallStart = SubResource( 10 )
-anims/happy = SubResource( 11 )
-anims/jump = SubResource( 12 )
-anims/jumpSquat = SubResource( 13 )
-anims/jumpStart = SubResource( 14 )
-anims/land = SubResource( 15 )
-anims/sad = SubResource( 16 )
-anims/stand = SubResource( 17 )
-anims/teeter = SubResource( 18 )
-anims/turnAround = SubResource( 19 )
-anims/walk = SubResource( 20 )
+anims/angry = SubResource( 7 )
+anims/faceLeft = SubResource( 8 )
+anims/faceRight = SubResource( 9 )
+anims/fall = SubResource( 10 )
+anims/fallStart = SubResource( 11 )
+anims/happy = SubResource( 12 )
+anims/jump = SubResource( 13 )
+anims/jumpSquat = SubResource( 14 )
+anims/jumpStart = SubResource( 15 )
+anims/land = SubResource( 16 )
+anims/sad = SubResource( 17 )
+anims/stand = SubResource( 18 )
+anims/teeter = SubResource( 19 )
+anims/turnAround = SubResource( 20 )
+anims/walk = SubResource( 21 )
+anims/walkStart = SubResource( 22 )
+anims/walkStop = SubResource( 23 )
 
 [editable path="PauseMenu"]

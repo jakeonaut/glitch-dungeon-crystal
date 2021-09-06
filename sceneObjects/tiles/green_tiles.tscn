@@ -1,65 +1,63 @@
-[gd_scene load_steps=175 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/greensolid1.png" type="Texture" id=3]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
-[ext_resource path="res://assets/textures/greensolid2.png" type="Texture" id=5]
-[ext_resource path="res://assets/textures/greensolid3.png" type="Texture" id=6]
-[ext_resource path="res://assets/textures/greensolid4.png" type="Texture" id=7]
-[ext_resource path="res://assets/textures/greensolid5.png" type="Texture" id=8]
-[ext_resource path="res://assets/textures/greensolid6.png" type="Texture" id=9]
-[ext_resource path="res://assets/textures/greensolid7.png" type="Texture" id=10]
-[ext_resource path="res://assets/textures/greensolid8.png" type="Texture" id=11]
-[ext_resource path="res://assets/textures/greensolidtop1.png" type="Texture" id=12]
-[ext_resource path="res://assets/textures/greensolidtop_left1.png" type="Texture" id=13]
-[ext_resource path="res://assets/textures/greensolidtop_left2.png" type="Texture" id=14]
-[ext_resource path="res://assets/textures/greensolidtop_right1.png" type="Texture" id=15]
-[ext_resource path="res://assets/textures/greensolidtop_right2.png" type="Texture" id=16]
-[ext_resource path="res://assets/textures/greensolidtop2.png" type="Texture" id=17]
-[ext_resource path="res://assets/textures/greensolidtop3.png" type="Texture" id=18]
-[ext_resource path="res://assets/textures/greensolidtop4.png" type="Texture" id=19]
-[ext_resource path="res://assets/textures/greensolidtop5.png" type="Texture" id=20]
-[ext_resource path="res://assets/textures/greensolidtop6.png" type="Texture" id=21]
-[ext_resource path="res://assets/textures/greensolidtop7.png" type="Texture" id=22]
-[ext_resource path="res://assets/textures/greensolidtop8.png" type="Texture" id=23]
-[ext_resource path="res://assets/textures/greenfloorbot1.png" type="Texture" id=24]
-[ext_resource path="res://assets/textures/greenfloorbot2.png" type="Texture" id=25]
-[ext_resource path="res://assets/textures/greenfloorbot3.png" type="Texture" id=26]
-[ext_resource path="res://assets/textures/greenfloorbot4.png" type="Texture" id=27]
-[ext_resource path="res://assets/textures/greenfloorbot5.png" type="Texture" id=28]
-[ext_resource path="res://assets/textures/greenfloorbot6.png" type="Texture" id=29]
-[ext_resource path="res://assets/textures/greenfloorbot7.png" type="Texture" id=30]
-[ext_resource path="res://assets/textures/greenfloorbot8.png" type="Texture" id=31]
-[ext_resource path="res://assets/textures/greenfloorbot9.png" type="Texture" id=32]
-[ext_resource path="res://assets/textures/greenroof1.png" type="Texture" id=33]
-[ext_resource path="res://assets/textures/greenroof2.png" type="Texture" id=34]
-[ext_resource path="res://assets/textures/greenroof3.png" type="Texture" id=35]
-[ext_resource path="res://assets/textures/greenroof4.png" type="Texture" id=36]
-[ext_resource path="res://assets/textures/greenroof5.png" type="Texture" id=37]
-[ext_resource path="res://assets/textures/greenroof6.png" type="Texture" id=38]
-[ext_resource path="res://assets/textures/greenroof7.png" type="Texture" id=39]
-[ext_resource path="res://assets/textures/greensolidceil1.png" type="Texture" id=40]
-[ext_resource path="res://assets/textures/greensolidceil2.png" type="Texture" id=41]
-[ext_resource path="res://assets/textures/greensolidceil3.png" type="Texture" id=42]
-[ext_resource path="res://assets/textures/greensolidceil4.png" type="Texture" id=43]
-[ext_resource path="res://assets/textures/greensolidceil5.png" type="Texture" id=44]
-[ext_resource path="res://assets/textures/greensolidceil6.png" type="Texture" id=45]
-[ext_resource path="res://assets/palettes/grey_palette_alt.png" type="Texture" id=46]
-[ext_resource path="res://assets/textures/greysolidtop5.png" type="Texture" id=47]
-[ext_resource path="res://assets/textures/greysolidtop2.png" type="Texture" id=48]
-[ext_resource path="res://assets/textures/greysolidtop3.png" type="Texture" id=49]
-[ext_resource path="res://assets/textures/greysolidtop6.png" type="Texture" id=50]
-[ext_resource path="res://assets/textures/greysolid1.png" type="Texture" id=51]
-[ext_resource path="res://assets/textures/greysolid2.png" type="Texture" id=52]
-[ext_resource path="res://assets/textures/greysolid3.png" type="Texture" id=53]
-[ext_resource path="res://assets/textures/greysolid7.png" type="Texture" id=54]
-[ext_resource path="res://assets/textures/greenspikes1.png" type="Texture" id=55]
-[ext_resource path="res://assets/textures/greenspikes2.png" type="Texture" id=56]
-[ext_resource path="res://assets/textures/greenspikes3.png" type="Texture" id=57]
-[ext_resource path="res://assets/textures/greenspikes4.png" type="Texture" id=58]
-[ext_resource path="res://assets/textures/greenspikes5.png" type="Texture" id=59]
-
+[ext_resource path="res://assets/textures/greensolid2.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/greensolid3.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/greensolid4.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/greensolid5.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/greensolid6.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/greensolid7.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/greensolid8.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/greensolidtop1.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/greensolidtop_left1.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/greensolidtop_left2.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/greensolidtop_right1.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/greensolidtop_right2.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/greensolidtop2.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/greensolidtop3.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/greensolidtop4.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/greensolidtop5.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/greensolidtop6.png" type="Texture" id=20]
+[ext_resource path="res://assets/textures/greensolidtop7.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/greensolidtop8.png" type="Texture" id=22]
+[ext_resource path="res://assets/textures/greenfloorbot1.png" type="Texture" id=23]
+[ext_resource path="res://assets/textures/greenfloorbot2.png" type="Texture" id=24]
+[ext_resource path="res://assets/textures/greenfloorbot3.png" type="Texture" id=25]
+[ext_resource path="res://assets/textures/greenfloorbot4.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/greenfloorbot5.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/greenfloorbot6.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/greenfloorbot7.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/greenfloorbot8.png" type="Texture" id=30]
+[ext_resource path="res://assets/textures/greenfloorbot9.png" type="Texture" id=31]
+[ext_resource path="res://assets/textures/greenroof1.png" type="Texture" id=32]
+[ext_resource path="res://assets/textures/greenroof2.png" type="Texture" id=33]
+[ext_resource path="res://assets/textures/greenroof3.png" type="Texture" id=34]
+[ext_resource path="res://assets/textures/greenroof4.png" type="Texture" id=35]
+[ext_resource path="res://assets/textures/greenroof5.png" type="Texture" id=36]
+[ext_resource path="res://assets/textures/greenroof6.png" type="Texture" id=37]
+[ext_resource path="res://assets/textures/greenroof7.png" type="Texture" id=38]
+[ext_resource path="res://assets/textures/greensolidceil1.png" type="Texture" id=39]
+[ext_resource path="res://assets/textures/greensolidceil2.png" type="Texture" id=40]
+[ext_resource path="res://assets/textures/greensolidceil3.png" type="Texture" id=41]
+[ext_resource path="res://assets/textures/greensolidceil4.png" type="Texture" id=42]
+[ext_resource path="res://assets/textures/greensolidceil5.png" type="Texture" id=43]
+[ext_resource path="res://assets/textures/greensolidceil6.png" type="Texture" id=44]
+[ext_resource path="res://assets/palettes/grey_palette_alt.png" type="Texture" id=45]
+[ext_resource path="res://assets/textures/greysolidtop5.png" type="Texture" id=46]
+[ext_resource path="res://assets/textures/greysolidtop2.png" type="Texture" id=47]
+[ext_resource path="res://assets/textures/greysolidtop3.png" type="Texture" id=48]
+[ext_resource path="res://assets/textures/greysolidtop6.png" type="Texture" id=49]
+[ext_resource path="res://assets/textures/greysolid1.png" type="Texture" id=50]
+[ext_resource path="res://assets/textures/greysolid2.png" type="Texture" id=51]
+[ext_resource path="res://assets/textures/greysolid3.png" type="Texture" id=52]
+[ext_resource path="res://assets/textures/greysolid7.png" type="Texture" id=53]
+[ext_resource path="res://assets/textures/greenspikes1.png" type="Texture" id=54]
+[ext_resource path="res://assets/textures/greenspikes2.png" type="Texture" id=55]
+[ext_resource path="res://assets/textures/greenspikes3.png" type="Texture" id=56]
+[ext_resource path="res://assets/textures/greenspikes4.png" type="Texture" id=57]
+[ext_resource path="res://assets/textures/greenspikes5.png" type="Texture" id=58]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -91,8 +89,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 5 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=7]
 material = SubResource( 6 )
@@ -103,8 +101,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 6 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=9]
 material = SubResource( 8 )
@@ -115,8 +113,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 7 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=11]
 material = SubResource( 10 )
@@ -127,8 +125,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 8 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=13]
 material = SubResource( 12 )
@@ -139,8 +137,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 9 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=15]
 material = SubResource( 14 )
@@ -151,8 +149,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 10 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=17]
 material = SubResource( 16 )
@@ -163,8 +161,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 11 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=19]
 material = SubResource( 18 )
@@ -175,8 +173,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 12 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=21]
 material = SubResource( 20 )
@@ -187,8 +185,8 @@ shader = ExtResource( 1 )
 shader_param/specular = 0.5
 shader_param/metallic = 0.0
 shader_param/roughness = 1.0
-shader_param/texture_albedo = ExtResource( 13 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=23]
 material = SubResource( 22 )
@@ -199,8 +197,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 14 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=25]
 material = SubResource( 24 )
@@ -211,8 +209,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 15 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=27]
 material = SubResource( 26 )
@@ -223,8 +221,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 16 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 15 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=29]
 material = SubResource( 28 )
@@ -235,8 +233,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=31]
 material = SubResource( 30 )
@@ -247,8 +245,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 18 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 17 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=33]
 material = SubResource( 32 )
@@ -259,8 +257,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 19 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=35]
 material = SubResource( 34 )
@@ -271,8 +269,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 20 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 19 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=37]
 material = SubResource( 36 )
@@ -283,8 +281,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 21 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 20 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=39]
 material = SubResource( 38 )
@@ -295,8 +293,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 22 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 21 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=41]
 material = SubResource( 40 )
@@ -307,8 +305,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 23 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 22 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=43]
 material = SubResource( 42 )
@@ -319,8 +317,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 24 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 23 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=45]
 material = SubResource( 44 )
@@ -331,8 +329,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 25 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 24 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=47]
 material = SubResource( 46 )
@@ -343,8 +341,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 26 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 25 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=49]
 material = SubResource( 48 )
@@ -355,8 +353,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 26 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=51]
 material = SubResource( 50 )
@@ -367,8 +365,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 28 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 27 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=53]
 material = SubResource( 52 )
@@ -379,8 +377,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 29 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 28 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=55]
 material = SubResource( 54 )
@@ -391,8 +389,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 30 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=57]
 material = SubResource( 56 )
@@ -403,8 +401,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 31 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=59]
 material = SubResource( 58 )
@@ -415,8 +413,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 32 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 31 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=61]
 material = SubResource( 60 )
@@ -427,8 +425,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 33 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 32 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=63]
 material = SubResource( 62 )
@@ -439,8 +437,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 34 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 33 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=65]
 material = SubResource( 64 )
@@ -451,8 +449,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 35 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=67]
 material = SubResource( 66 )
@@ -463,8 +461,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 36 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 35 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=69]
 material = SubResource( 68 )
@@ -475,8 +473,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 37 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 36 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=71]
 material = SubResource( 70 )
@@ -487,8 +485,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 38 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 37 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=73]
 material = SubResource( 72 )
@@ -499,8 +497,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 39 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 38 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=75]
 material = SubResource( 74 )
@@ -511,8 +509,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 40 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 39 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=77]
 material = SubResource( 76 )
@@ -523,8 +521,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 41 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 40 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=79]
 material = SubResource( 78 )
@@ -535,8 +533,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 42 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 41 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=81]
 material = SubResource( 80 )
@@ -547,8 +545,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 43 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 42 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=83]
 material = SubResource( 82 )
@@ -559,8 +557,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 44 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 43 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=85]
 material = SubResource( 84 )
@@ -571,8 +569,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 45 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 44 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=87]
 material = SubResource( 86 )
@@ -583,8 +581,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 47 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=89]
 material = SubResource( 88 )
@@ -597,8 +595,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 48 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 47 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=92]
 material = SubResource( 91 )
@@ -609,8 +607,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 49 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 48 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=94]
 material = SubResource( 93 )
@@ -621,8 +619,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 50 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 49 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=96]
 material = SubResource( 95 )
@@ -633,8 +631,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 51 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 50 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=98]
 material = SubResource( 97 )
@@ -645,8 +643,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 52 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 51 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=100]
 material = SubResource( 99 )
@@ -657,8 +655,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 53 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 52 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=102]
 material = SubResource( 101 )
@@ -669,8 +667,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 54 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/texture_albedo = ExtResource( 53 )
+shader_param/base_palette = ExtResource( 45 )
 
 [sub_resource type="CubeMesh" id=104]
 material = SubResource( 103 )
@@ -681,8 +679,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 55 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 54 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=106]
 material = SubResource( 105 )
@@ -695,8 +693,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 56 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 55 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=109]
 material = SubResource( 108 )
@@ -707,8 +705,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 57 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 56 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=111]
 material = SubResource( 110 )
@@ -719,8 +717,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 58 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 57 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=113]
 material = SubResource( 112 )
@@ -731,8 +729,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 59 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 58 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=115]
 material = SubResource( 114 )

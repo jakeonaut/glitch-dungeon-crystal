@@ -92,21 +92,20 @@ func _ready():
         tile_name_array.push_back(mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z)))
     
 func changeColorPalette(palette, palette_alt):
-    var item_list = mesh_library.get_item_list()
-    for i in range(len(item_list)):
-        var item_id = item_list[i]
-        var mesh = mesh_library.get_item_mesh(item_id)
-        var tile_name = mesh_library.get_item_name(item_id)
-        var material = mesh.get_material()
-        if material is ShaderMaterial:
-            if "CloudSemisolid" in tile_name:
-                material.set_shader_param("base_palette", palette_alt)
-            else:
-                material.set_shader_param("base_palette", palette)
-        mesh.set_material(material)
-        mesh_library.set_item_mesh(item_id, mesh)
-        
-    cosmeticLevelTiles.changeColorPalette(palette)
+    pass
+    # var item_list = mesh_library.get_item_list()
+    # for i in range(len(item_list)):
+    #     var item_id = item_list[i]
+    #     var mesh = mesh_library.get_item_mesh(item_id)
+    #     var tile_name = mesh_library.get_item_name(item_id)
+    #     var material = mesh.get_material()
+    #     if material is ShaderMaterial:
+    #         if "CloudSemisolid" in tile_name:
+    #             material.set_shader_param("base_palette", palette_alt)
+    #         else:
+    #             material.set_shader_param("base_palette", palette)
+    #     mesh.set_material(material)
+    #     mesh_library.set_item_mesh(item_id, mesh)
 
 func properlySetTiles():
     for i in range(len(tile_index_array)):
@@ -116,36 +115,36 @@ func properlySetTiles():
 
 func normalGlitch():
     set_mesh_library(grey_tiles)
-    changeColorPalette(grey_purple_palette, grey_palette_alt)
+    # changeColorPalette(grey_purple_palette, grey_palette_alt)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(grey_palette)
 
 func floorGlitch():
     set_mesh_library(red_tiles)
-    changeColorPalette(grey_palette, red_palette)
+    # changeColorPalette(grey_palette, red_palette)
     properlySetTiles()
     cosmeticLevelTiles.floorGlitch(red_palette)
 
 func featherGlitch():
     set_mesh_library(green_tiles)
+    # changeColorPalette(green_palette, green_palette_alt)
     properlySetTiles()
-    changeColorPalette(green_palette, green_palette_alt)
     cosmeticLevelTiles.featherGlitch(green_palette)
 
 func invisibleGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(black_tiles)
-    changeColorPalette(black_palette, white_palette)
+    # changeColorPalette(black_palette, white_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(black_palette)
     
 func ladderGlitch():
     set_mesh_library(yellow_tiles)
-    changeColorPalette(yellow_palette, black_palette)
+    # changeColorPalette(yellow_palette, black_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(yellow_palette)
 
 func walkThroughWallsGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(white_tiles)
-    changeColorPalette(white_palette, red_palette)
+    # changeColorPalette(white_palette, red_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(white_palette)

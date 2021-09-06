@@ -13,7 +13,7 @@ func _ready_impl():
 
     player.lightsOn()
 
-    if global and global.memory.has("player_costume"):
+    if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
     
     tryToRespawn()
@@ -33,6 +33,8 @@ func _ready_impl():
     musicPlayer.conductFromScenePath(self.get_filename())
 
 func tryToRespawn():
+    if global.activeInteractor != null:
+        global.activeInteractor.stopInteract()
     global.activeInteractor = null
     global.pauseMoveInput = false
     global.pauseGame = false

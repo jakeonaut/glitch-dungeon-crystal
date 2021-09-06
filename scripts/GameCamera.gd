@@ -2,6 +2,8 @@ extends InterpolatedCamera
 
 var initial_z
 onready var actual_target = get_node(target) 
+onready var initial_target = get_node(target)
+
 func _ready():
     initial_z = global_transform.origin.z
 
@@ -25,5 +27,17 @@ func _process(delta):
     elif distance > 19.33:
         set_interpolation_enabled(true)
         set_speed(1)
-    elif distance < 19.26:
+    elif distance < 19.26 and global.activeInteractor == null:
         set_interpolation_enabled(false)
+
+    if global.activeInteractor != null:
+        actual_target = global.activeInteractor.get_node("../..")
+        set_target(actual_target)
+        # interpolation = A + (B - A) * t
+        self.size = self.size + (12 - self.size) * (delta*5)
+        set_speed(4)
+        set_interpolation_enabled(true)
+    else:
+        actual_target = initial_target
+        set_target(actual_target)
+        self.size = self.size + (15 - self.size) * (delta*5)

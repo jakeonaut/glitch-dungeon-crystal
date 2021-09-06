@@ -17,15 +17,14 @@ height = 1.6
 [node name="GlitchEnemy" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 1 )
-grav = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0.6 )
 material_override = ExtResource( 2 )
 pixel_size = 0.12
 texture = ExtResource( 3 )
 vframes = 4
-hframes = 7
+hframes = 6
 script = ExtResource( 4 )
 
 [node name="InteractionArea" type="Area" parent="."]

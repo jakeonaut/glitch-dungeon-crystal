@@ -40,10 +40,13 @@ func activate():
         textBox.interact()
 
 func passiveActivate(delta):
-    pass
+    if global.activeInteractor == null:
+        textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
-    pass
+    if global.activeInteractor != null:
+        global.activeInteractor.stopInteract()
+        global.activeInteractor = null
 
 func _physics_process(delta):
     #._physics_process(delta) # NOTE: This super method is called automatically

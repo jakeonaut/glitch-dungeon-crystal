@@ -1,7 +1,7 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/green_column_top_left1.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/green_column_top_right1.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/green_column_mid_top_left_1.png" type="Texture" id=5]
@@ -16,8 +16,9 @@
 [ext_resource path="res://assets/textures/green_chandelier_mid1.png" type="Texture" id=14]
 [ext_resource path="res://assets/textures/green_chandelier_mid_right1.png" type="Texture" id=15]
 [ext_resource path="res://assets/textures/green_chandelier_bot1.png" type="Texture" id=16]
-[ext_resource path="res://assets/textures/black.png" type="Texture" id=17]
-[ext_resource path="res://assets/textures/green_chandelier_bot_right1.png" type="Texture" id=18]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/black.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/green_chandelier_bot_right1.png" type="Texture" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -192,8 +193,8 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 17 )
 
 [sub_resource type="CubeMesh" id=30]
 material = SubResource( 29 )
@@ -204,7 +205,7 @@ shader = ExtResource( 1 )
 shader_param/specular = null
 shader_param/metallic = null
 shader_param/roughness = null
-shader_param/texture_albedo = ExtResource( 18 )
+shader_param/texture_albedo = ExtResource( 19 )
 shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=32]

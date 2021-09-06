@@ -155,6 +155,8 @@ func respawn():
     last_grounded_y = global_transform.origin.y 
 
 func processPhysics(delta):
+    if grav == null: grav = 0 # ???
+
     lv = linear_velocity
     g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
     
@@ -501,8 +503,6 @@ func processHorizontalInputs(delta):
                     dir -= right*(delta*DNUMHORZ)
                     mySprite.flip_h = false
     
-    # print("teeter check: " + str(on_ground) + ", " + str(aniPlayer.assigned_animation))
-    # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
     if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
         (aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
         (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
@@ -516,8 +516,11 @@ func processHorizontalInputs(delta):
                 if should_teeter_turn_around:
                     aniPlayer.queue("turnAround")
                 aniPlayer.queue("teeter")
-            else:
-                aniPlayer.play("stand")
+            elif aniPlayer.assigned_animation != "walkStop" and aniPlayer.assigned_animation != "stand":
+                aniPlayer.stop()
+                if aniPlayer.assigned_animation == "walk":
+                    aniPlayer.queue("walkStop")
+                aniPlayer.queue("stand")
 
     var DNUMSKID = 60
     if self.isFeatherLike():
@@ -560,10 +563,12 @@ func processHorizontalInputs(delta):
         updateFacing(dir)
 
 func doWalkAnimation():
-    if on_ground and aniPlayer.current_animation != "walk":
+    if on_ground and aniPlayer.current_animation != "walk" and aniPlayer.current_animation != "walkStart":
         if aniPlayer.current_animation != "land":
             aniPlayer.clear_queue()
             aniPlayer.stop()
+        if aniPlayer.assigned_animation == "stand" or aniPlayer.assigned_animation == "turnAround":
+            aniPlayer.queue("walkStart")
         aniPlayer.queue("walk")
         
 func handleCollisionsAndMove(lv, delta):
@@ -756,11 +761,11 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
     # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
     if truly_on_ground:
         if collided_left_side and not collided_right_side:
-            if not collided_middle and not mySprite.flip_h and not aniPlayer.assigned_animation == "teeter":
+            if not collided_middle and not mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
                 should_teeter_turn_around = true
             half_on_ground = true
         elif collided_right_side and not collided_left_side:
-            if not collided_middle and mySprite.flip_h and not aniPlayer.assigned_animation == "teeter":
+            if not collided_middle and mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
                 should_teeter_turn_around = true
             half_on_ground = true
         elif not collided_left_side and not collided_right_side:

@@ -11,7 +11,7 @@ onready var broomSound = get_node("Sounds/BroomSound")
 var grey_player_palette = preload("res://assets/palettes/player_grey_palette.png")
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
-var green_palette = preload("res://assets/palettes/green_palette.png")
+var green_player_palette = preload("res://assets/palettes/player_green_palette.png")
 var black_palette = preload("res://assets/palettes/black_palette.png")
 var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
@@ -61,7 +61,7 @@ func floorGlitch():
 func featherGlitch():
     glitch_form = GlitchForm.FEATHER
     levelTiles.featherGlitch()
-    changeSpriteColorPalette(green_palette)
+    changeSpriteColorPalette(green_player_palette)
     # mySprite.setMothCostume()
 
 func ladderGlitch():

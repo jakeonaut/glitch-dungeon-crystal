@@ -1,60 +1,74 @@
 extends TextureRect
 
-onready var text = get_node("Text")
+onready var textNode = get_node("Text")
 onready var dialogSound = get_node("DialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
 onready var player = get_tree().get_root().get_node("level").get_node("Player")
 
+var text_timer = 0
+var text_next_index = 0
+var text_time_limit = 0
+var text_final = ''
+
+var has_been_shown = false
+
 var type = "textBox"
 
 func _ready():
     self.hide()
-    set_process_input(true)
+    set_process(true)
+    
+    text_final = textNode.get_text()
+    
+func _process(delta):
+    if visible:
+        text_timer += (delta*22)
 
-func _input_event(camera, event, click_position, click_normal, shape_idx):
-    if event is InputEventMouseButton \
-    and event.button_index == BUTTON_LEFT \
-    and event.pressed:
-        self.interact()
+        if text_timer >= text_time_limit and len(textNode.get_text()) < len(text_final):
+            # letterSound.play()
+            textNode.add_text(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
+            text_timer = 0
+            text_next_index += 1
+            
+            if len(textNode.get_text()) == len(text_final):
+                global.pauseGame = false
+                has_been_shown = true
 
         
 func InteractActivate():
     interact()
         
 func interact():
-    # dialogSound.isActive can be overridden
     if !visible and dialogSound.isActive():
-        text.get_v_scroll().value = 0
-        self.show()
-        dialogSound.play()
-        dialogSound.activateScript()
-        if has_node("Event"):
-            get_node("Event").activate()
-        global.pauseGame = true
-        global.pauseMoveInput = true
-        if player.glitch_form != player.GlitchForm.FLOOR: player.on_ground = true
-        player.vv = 0
+        showTextbox()
     else:
-        self.hide()
-        global.pauseGame = false
-        global.pauseMoveInput = false
-        if !nextTextBoxPath.is_empty():
-            var nextTextBox = get_node(nextTextBoxPath)
-            if nextTextBox.type == "textBox":
-                nextTextBox.interact()
-            elif nextTextBox.type == "textBoxContainer":
-                nextTextBox = nextTextBox.get_node("TextBox")
-                nextTextBox.interact()
-            global.activeInteractor = nextTextBox
-        else:
-            abortSound.play()
-            abortSound.activateScript()
-            global.activeInteractor = null
-            
-func abort():
-    hide()
-    abortSound.play()
-    global.activeInteractor = null
+        hideTextbox()
+
+func passiveInteract(delta):
+    if not has_been_shown and !visible and dialogSound.isActive() and global.activeInteractor == null:
+            global.activeInteractor = self
+            showTextbox()
+                
+func stopInteract():
+    hideTextbox()
+    
+func showTextbox():
+    global.pauseGame = true
+    text_timer = 0
+    text_next_index = 0
+    textNode.set_text('')
+
+    textNode.get_v_scroll().value = 0
+    self.show()
+    dialogSound.play()
+    dialogSound.activateScript()
+    if has_node("Event"):
+        get_node("Event").activate()
+        
+func hideTextbox():
+    self.hide()
     global.pauseGame = false
-    global.pauseMoveInput = false
+    abortSound.play()
+    abortSound.activateScript()
+    global.activeInteractor = null
