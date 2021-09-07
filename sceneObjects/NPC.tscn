@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://materials/Sprite3D.tres" type="Material" id=5]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=6]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
+[ext_resource path="res://assets/npcs/tutorial2.png" type="Texture" id=5]
+[ext_resource path="res://shaders/Sprite3D.tres" type="Shader" id=6]
+[ext_resource path="res://assets/palettes/player_grey_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=8]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=9]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
@@ -15,6 +17,22 @@ radius = 0.9
 radius = 1.5
 
 [sub_resource type="BoxShape" id=3]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = null
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/metallic_texture_channel = Plane( 1, 0, 0, 0 )
+shader_param/roughness_texture_channel = Plane( 1, 0, 0, 0 )
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = null
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = null
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 7 )
 
 [node name="NPC" type="KinematicBody"]
 collision_layer = 2
@@ -36,17 +54,20 @@ script = ExtResource( 3 )
 shape = SubResource( 3 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
+
+[node name="Portrait" parent="NPC TextBox/TextBox" index="0"]
+texture = ExtResource( 5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-material_override = ExtResource( 5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209535, 0 )
+material_override = SubResource( 4 )
 pixel_size = 0.12
 shaded = true
 alpha_cut = 2
-texture = ExtResource( 6 )
-vframes = 2
-hframes = 2
-script = ExtResource( 7 )
+texture = ExtResource( 8 )
+vframes = 4
+hframes = 8
+script = ExtResource( 9 )
 should_randomize_frame_delay = true
 
 [editable path="NPC TextBox"]

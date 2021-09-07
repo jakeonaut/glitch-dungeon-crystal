@@ -475,8 +475,10 @@ func processHorizontalInputs(delta):
                     if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
                         dir += (right/2)*(delta*DNUMHORZ)
                         if aniPlayer.assigned_animation != "turnAround":
+                            aniPlayer.stop()
                             aniPlayer.clear_queue()
-                            aniPlayer.play("turnAround")
+                            aniPlayer.queue("turnAround")
+                            aniPlayer.queue("walkStart")
                     elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
                         dir += right*(delta*DNUMHORZ)
                         mySprite.flip_h = true
@@ -567,7 +569,7 @@ func doWalkAnimation():
         if aniPlayer.current_animation != "land":
             aniPlayer.clear_queue()
             aniPlayer.stop()
-        if aniPlayer.assigned_animation == "stand" or aniPlayer.assigned_animation == "turnAround":
+        if aniPlayer.assigned_animation == "stand" or aniPlayer.assigned_animation == "turnAround" or aniPlayer.assigned_animation == "walkStop":
             aniPlayer.queue("walkStart")
         aniPlayer.queue("walk")
         
@@ -719,7 +721,7 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
                 tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                 x + lb + q, y + bb, x + rb - q, y + bb + lv.y - 0.1
             ):
-                if isTileFallthroughSolid(tile_type) and (tile_y + TILE_HEIGHT > y + bb or pressingDown()):
+                if isTileFallthroughSolid(tile_type) and (tile_y + TILE_HEIGHT > y + bb + 0.1 or pressingDown()):
                     continue
                 lv.y = 0
                 on_ground = true

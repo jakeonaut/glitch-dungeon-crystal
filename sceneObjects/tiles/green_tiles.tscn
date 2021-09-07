@@ -1201,7 +1201,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -5 )
 mesh = SubResource( 87 )
 material/0 = null
@@ -1248,7 +1247,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolidTop4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -3 )
 mesh = SubResource( 96 )
 material/0 = null
@@ -1260,7 +1258,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolid" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
 mesh = SubResource( 98 )
 material/0 = null
