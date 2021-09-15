@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/npcs/tutorial2.png" type="Texture" id=5]
 [ext_resource path="res://shaders/Sprite3D.tres" type="Shader" id=6]
 [ext_resource path="res://assets/palettes/player_grey_palette.png" type="Texture" id=7]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/npc_med_sheet.png" type="Texture" id=8]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=9]
 
 [sub_resource type="CylinderShape" id=1]
@@ -59,14 +59,13 @@ shape = SubResource( 3 )
 texture = ExtResource( 5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209535, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.446059, 0 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 8 )
-vframes = 4
-hframes = 8
+hframes = 2
 script = ExtResource( 9 )
 should_randomize_frame_delay = true
 

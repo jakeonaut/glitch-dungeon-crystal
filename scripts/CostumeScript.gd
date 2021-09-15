@@ -1,7 +1,12 @@
 extends KinematicBody
 
 onready var textBox = get_node("Object TextBox").get_node("TextBox")
-onready var player = get_tree().get_root().get_node("level/Player")
+
+var player = null
+func getPlayer():
+    if player == null:
+        player = get_tree().get_root().get_node("level").player
+    return player
 
 func _ready():
     set_process_input(true)
@@ -23,12 +28,12 @@ func activate():
         textBox.interact()
         
         match get_node("Sprite3D").frame:
-            0: player.wearCostume("normal")
-            1: player.wearCostume("moth")
+            0: getPlayer().wearCostume("normal")
+            1: getPlayer().wearCostume("moth")
             # 2:
-            3: player.wearCostume("bugcatcher")
-            4: player.wearCostume("cleric")
+            3: getPlayer().wearCostume("bugcatcher")
+            4: getPlayer().wearCostume("cleric")
             # 5: 
-            6: player.wearCostume("luckycat")
-            7: player.wearCostume("nightgown")
+            6: getPlayer().wearCostume("luckycat")
+            7: getPlayer().wearCostume("nightgown")
         # visible = false

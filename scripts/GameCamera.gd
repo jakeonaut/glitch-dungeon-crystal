@@ -4,8 +4,42 @@ var initial_z
 onready var actual_target = get_node(target) 
 onready var initial_target = get_node(target)
 
+var leftmost_x = 999
+var rightmost_x = -999
+var topmost_y = -999
+var botmost_y = 999
+
+var levelTiles = null
+func getLevelTiles():
+    if levelTiles == null:
+        levelTiles = get_tree().get_root().get_node("level").levelTiles
+    return levelTiles
+
 func _ready():
     initial_z = global_transform.origin.z
+    
+    # Wait two frames so that levelTiles on levelScript is available
+    yield(get_tree(), "idle_frame")
+    yield(get_tree(), "idle_frame")
+    
+    var tile_coords = getLevelTiles().get_used_cells()
+    
+    for i in range(len(tile_coords)):
+        var coords = tile_coords[i]
+        var TILE_WIDTH = getLevelTiles().cell_size.x
+        var TILE_HEIGHT = getLevelTiles().cell_size.y
+        var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+        var tile_x = tile_pos.x - TILE_WIDTH/2
+        var tile_y = tile_pos.y - TILE_HEIGHT/2
+
+        if tile_x < leftmost_x:
+            leftmost_x = tile_x
+        if tile_x + TILE_WIDTH > rightmost_x:
+            rightmost_x = tile_x + TILE_WIDTH
+        if tile_y < botmost_y:
+            botmost_y = tile_y
+        if tile_y + TILE_HEIGHT > topmost_y:
+            topmost_y = tile_y + TILE_HEIGHT
 
 func _process(delta):
     global_transform.origin.z = initial_z
@@ -41,3 +75,16 @@ func _process(delta):
         actual_target = initial_target
         set_target(actual_target)
         self.size = self.size + (15 - self.size) * (delta*5)
+        
+    respectLevelTilesEdges()
+    
+func respectLevelTilesEdges():
+    if global_transform.origin.x < leftmost_x + 10:
+        global_transform.origin.x = leftmost_x + 10
+    if global_transform.origin.x > rightmost_x - 10:
+        global_transform.origin.x = rightmost_x - 10
+        
+    if global_transform.origin.y < botmost_y + 7.5:
+        global_transform.origin.y = botmost_y + 7.5
+    if global_transform.origin.y > topmost_y - 7.5:
+        global_transform.origin.y = topmost_y - 7.5

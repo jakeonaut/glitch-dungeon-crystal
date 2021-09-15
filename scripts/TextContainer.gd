@@ -18,6 +18,7 @@ func _ready():
 func setVars():
     if bbText != "":
         textBoxtext.bbcode_text = bbText
+        textBox.text_final = bbText
     if portrait:
         textBoxportrait.texture = portrait
     if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():

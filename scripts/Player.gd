@@ -3,8 +3,6 @@ extends "PlayerGameMover.gd"
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var hurtSound = get_node("Sounds/HurtSound")
 
-onready var sunLight = get_node("../commonWorldEnvironment/The Sun")
-
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
 
@@ -182,7 +180,7 @@ func tryDieToEnemy():
         global.pauseGame = true
         global.pauseMoveInput = true
         global.isRespawning = true
-        get_node("..").tryToRespawn()
+        get_tree().get_root().get_node("level").tryToRespawn()
 
 func tryBroom():
     if can_broom:        
@@ -211,9 +209,3 @@ func tryBroom():
 
 func faceDown():
     pass # mySprite.faceDown()
-
-func lightsOff():
-    sunLight.visible = false
-
-func lightsOn():
-    sunLight.visible = true

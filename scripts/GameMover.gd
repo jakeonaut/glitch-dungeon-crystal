@@ -6,7 +6,11 @@ onready var jumpSound = get_node("Sounds/JumpSound") if has_node("Sounds/JumpSou
 onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("Sounds/DoubleJumpSound") else null
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
 
-onready var levelTiles = get_tree().get_root().get_node("level/LevelTiles")
+var levelTiles = null
+func getLevelTiles():
+    if levelTiles == null:
+        levelTiles = get_tree().get_root().get_node("level").levelTiles
+    return levelTiles
 
 onready var smallInteractionArea = get_node("SmallInteractionArea")
 onready var collisionShape = get_node("CollisionShape")
@@ -144,7 +148,7 @@ func getHitByBroom():
     pass
     
 func getCamera():
-    return get_tree().get_root().get_node("level/GameCamera")
+    return get_tree().get_root().get_node("level").gameCamera
 
 func respawn():
     hv = Vector3(0, 0, 0)
@@ -190,7 +194,7 @@ func processPhysics(delta):
         landed()
         just_landed = true
     if aniPlayer != null:
-        if aniPlayer.assigned_animation == "land" and not aniPlayer.is_playing():
+        if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
             aniPlayer.play("stand")
         elif aniPlayer.assigned_animation == "jump" and on_ground:
             aniPlayer.play("land")
@@ -425,6 +429,7 @@ func processHorizontalInputs(delta):
         (aniPlayer.assigned_animation == "jumpSquat" or aniPlayer.assigned_animation == "jumpStart")))
     if glitch_form == GlitchForm.FEATHER and not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
         if on_ground:
+            # TODO(jaketrower): Initial dash state..???
             forward = forward / 8
             right = right / 8
         else:
@@ -496,6 +501,7 @@ func processHorizontalInputs(delta):
                         if aniPlayer.assigned_animation != "turnAround":
                             aniPlayer.clear_queue()
                             aniPlayer.play("turnAround")
+                            aniPlayer.queue("walkStart")
                     elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
                         dir -= right*(delta*DNUMHORZ)
                         mySprite.flip_h = false
@@ -613,22 +619,22 @@ func handleCollisionsAndMove(lv, delta):
     return lv
 
 func isTileSolid(tile_type):
-    var tileCollisionShape = levelTiles.mesh_library.get_item_shapes(tile_type)[0]
+    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return glitch_form != GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape
     
 func isTileFallthroughSolid(tile_type):
-    var tileCollisionShape = levelTiles.mesh_library.get_item_shapes(tile_type)[0]
+    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
 
 func isTileNotSolid(tile_type):
-    return tile_type == -1 or len(levelTiles.mesh_library.get_item_shapes(tile_type)) == 0
+    return tile_type == -1 or len(getLevelTiles().mesh_library.get_item_shapes(tile_type)) == 0
     
 func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
     self.horizontal_collision = false
     for i in range(bottom_tile_y, top_tile_y):
         for j in range(left_tile_x, right_tile_x):
-            var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
-            var tile_type = levelTiles.get_cell_item(coords.x, coords.y, coords.z)
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if tile_type == GridMap.INVALID_CELL_ITEM or not isTileSolid(tile_type):
                 continue
 
@@ -638,9 +644,9 @@ func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, botto
             var tb = get_node("CollisionShape").shape.height/2
             var rb = -lb
             var bb = -tb
-            var TILE_WIDTH = levelTiles.cell_size.x
-            var TILE_HEIGHT = levelTiles.cell_size.y
-            var tile_pos = levelTiles.map_to_world(coords.x, coords.y, coords.z)
+            var TILE_WIDTH = getLevelTiles().cell_size.x
+            var TILE_HEIGHT = getLevelTiles().cell_size.y
+            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
             var tile_x = tile_pos.x - TILE_WIDTH/2
             var tile_y = tile_pos.y - TILE_HEIGHT/2
 
@@ -685,8 +691,8 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
     var collided_true_right_side = false
     for i in range(bottom_tile_y, top_tile_y):
         for j in range(left_tile_x, right_tile_x):
-            var coords = levelTiles.world_to_map(Vector3(j, i, global_transform.origin.z))
-            var tile_type = levelTiles.get_cell_item(coords.x, coords.y, coords.z)
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if tile_type == GridMap.INVALID_CELL_ITEM or isTileNotSolid(tile_type):
                 continue
 
@@ -696,9 +702,9 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
             var tb = get_node("CollisionShape").shape.height/2
             var rb = -lb
             var bb = -tb
-            var TILE_WIDTH = levelTiles.cell_size.x
-            var TILE_HEIGHT = levelTiles.cell_size.y
-            var tile_pos = levelTiles.map_to_world(coords.x, coords.y, coords.z)
+            var TILE_WIDTH = getLevelTiles().cell_size.x
+            var TILE_HEIGHT = getLevelTiles().cell_size.y
+            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
             var tile_x = tile_pos.x - TILE_WIDTH/2
             var tile_y = tile_pos.y - TILE_HEIGHT/2
             var debug_ = false

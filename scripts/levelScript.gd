@@ -1,7 +1,8 @@
 extends Node
 
 onready var player = get_node("Player")
-onready var gridMap = get_node("Level Tiles")
+onready var levelTiles = get_node("LevelTiles")
+onready var gameCamera = get_node("GameCamera")
 
 func _ready():
     # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
@@ -10,8 +11,6 @@ func _ready():
 func _ready_impl():
     set_process_input(true)
     set_process(true)
-
-    player.lightsOn()
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
@@ -31,6 +30,18 @@ func _ready_impl():
 
     # update music
     musicPlayer.conductFromScenePath(self.get_filename())
+
+# TODO(jaketrower): Remove this level edit stuff in final cut ?!?
+func _process(delta):
+    if Input.is_action_just_pressed("ui_place_tile"):
+        var player_position = player.global_transform.origin + (player.facing * 2)
+        var grid_cell = levelTiles.world_to_map(player_position)
+        levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
+
+    if Input.is_action_just_pressed("ui_save"):
+        var packed_scene = PackedScene.new()
+        packed_scene.pack(get_tree().get_current_scene())
+        ResourceSaver.save("res://saved_scene.tscn", packed_scene)
 
 func tryToRespawn():
     if global.activeInteractor != null:
@@ -78,15 +89,3 @@ func tryToRespawn():
     if not global.memory.has("active_save_point"):
         global.memory["roomPath"] = self.filename
         global.saveGame()
-
-# TODO(jaketrower): Remove this level edit stuff in final cut ?!?
-func _process(delta):
-    if Input.is_action_just_pressed("ui_place_tile"):
-        var player_position = player.global_transform.origin + (player.facing * 2)
-        var grid_cell = gridMap.world_to_map(player_position)
-        gridMap.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
-
-    if Input.is_action_just_pressed("ui_save"):
-        var packed_scene = PackedScene.new()
-        packed_scene.pack(get_tree().get_current_scene())
-        ResourceSaver.save("res://saved_scene.tscn", packed_scene)

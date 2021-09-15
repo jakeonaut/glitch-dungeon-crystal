@@ -8,9 +8,14 @@ export var isLocked = false
 
 onready var area = get_node("Area")
 onready var enterSound = get_node("EnterSound")
-onready var player = get_tree().get_root().get_node("level/Player")
 onready var landingPad = get_node("landing-pad")
 onready var textBox = get_node("portdoorTextBox").get_node("TextBox")
+
+var player = null
+func getPlayer():
+    if player == null:
+        player = get_tree().get_root().get_node("level").player
+    return player
 
 var canInteractWithPlayer = true
 
@@ -83,13 +88,11 @@ func enterDoor():
         # global transition scene, see res://scripts/transition.gd
         transition.fade_to("res://" + connectedScene)
         transitioning = true
-        # take into account enterDoor rotation + player's camera rotation
-        global.cameraRotation = player.getCamera().real_rotation_target - self.rotation_degrees.y
 
         # NOTE: when entering a new level, res://scripts/levelScript.gd runs
 
 func land():
-    player.global_transform.origin = landingPad.global_transform.origin
-    player.last_grounded_y = player.global_transform.origin.y 
+    getPlayer().global_transform.origin = landingPad.global_transform.origin
+    getPlayer().last_grounded_y = getPlayer().global_transform.origin.y 
     if not global.isRespawning:
         enterSound.play()

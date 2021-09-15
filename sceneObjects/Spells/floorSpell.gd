@@ -1,8 +1,11 @@
 extends KinematicBody
 
 onready var transformSound = get_node("TransformSound")
-onready var player = get_tree().get_root().get_node("level/Player")
-# onready var levelTiles = get_tree().get_root().get_node("level/Level Tiles")
+var player = null
+func getPlayer():
+    if player == null:
+        player = get_tree().get_root().get_node("level").player
+    return player
 
 func isActive():
     return visible
@@ -11,4 +14,4 @@ func passiveActivate(delta):
     transformSound.play()
     visible = false
 
-    player.floorGlitch()
+    getPlayer().floorGlitch()

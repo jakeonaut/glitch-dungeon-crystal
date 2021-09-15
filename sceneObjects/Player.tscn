@@ -355,6 +355,7 @@ alpha_cut = 2
 texture = ExtResource( 6 )
 vframes = 4
 hframes = 8
+frame = 25
 
 [node name="CameraY" type="Spatial" parent="."]
 editor/display_folded = true

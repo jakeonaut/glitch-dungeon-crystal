@@ -4,7 +4,6 @@ onready var textNode = get_node("Text")
 onready var dialogSound = get_node("DialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
-onready var player = get_tree().get_root().get_node("level").get_node("Player")
 
 var text_timer = 0
 var text_next_index = 0
