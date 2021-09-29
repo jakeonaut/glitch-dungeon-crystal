@@ -275,7 +275,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-length = 0.6
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -284,10 +284,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 2, 3, 2, 25 ]
+"values": [ 2, 3 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -347,7 +347,7 @@ script = ExtResource( 3 )
 shape = SubResource( 3 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224, 0.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224033, 0.8 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
 shaded = true
@@ -355,7 +355,6 @@ alpha_cut = 2
 texture = ExtResource( 6 )
 vframes = 4
 hframes = 8
-frame = 25
 
 [node name="CameraY" type="Spatial" parent="."]
 editor/display_folded = true

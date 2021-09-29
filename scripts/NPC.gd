@@ -5,6 +5,7 @@ extends "GameMover.gd"
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
+export var is_important = false
 
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
@@ -35,13 +36,14 @@ func isActive():
     return visible
 
 func activate():
-    if global.activeInteractor == null:
-        global.activeInteractor = textBox
-        textBox.interact()
+    # if global.activeInteractor == null:
+    #     global.activeInteractor = textBox
+    #     textBox.interact()
+    pass
 
 func passiveActivate(delta):
     if global.activeInteractor == null:
-        textBox.passiveInteract(delta)
+        textBox.passiveInteract(delta, is_important)
 
 func stopPassiveActivate():
     if global.activeInteractor != null:

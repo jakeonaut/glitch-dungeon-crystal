@@ -46,37 +46,37 @@ func changeSpriteColorPalette(palette):
 
 func normalGlitch():
     glitch_form = GlitchForm.NORMAL
-    levelTiles.normalGlitch()
+    level.normalGlitch()
     changeSpriteColorPalette(grey_player_palette)
     # mySprite.setNormalClothes()
 
 func floorGlitch():
     glitch_form = GlitchForm.FLOOR
-    levelTiles.floorGlitch()
+    level.floorGlitch()
     changeSpriteColorPalette(red_palette)
     # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
     glitch_form = GlitchForm.FEATHER
-    levelTiles.featherGlitch()
+    level.featherGlitch()
     changeSpriteColorPalette(green_player_palette)
     # mySprite.setMothCostume()
 
 func ladderGlitch():
     glitch_form = GlitchForm.LADDER
-    levelTiles.ladderGlitch()
+    level.ladderGlitch()
     changeSpriteColorPalette(yellow_palette)
     # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
     glitch_form = GlitchForm.INVISIBLE
-    levelTiles.invisibleGlitch()
+    level.invisibleGlitch()
     changeSpriteColorPalette(black_palette)
     # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
     glitch_form = GlitchForm.WALK_THROUGH_WALLS
-    levelTiles.walkThroughWallsGlitch()
+    level.walkThroughWallsGlitch()
     changeSpriteColorPalette(grey_palette)
     # mySprite.setNightgown()
 

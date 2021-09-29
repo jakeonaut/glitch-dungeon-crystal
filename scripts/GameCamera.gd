@@ -79,12 +79,24 @@ func _process(delta):
     respectLevelTilesEdges()
     
 func respectLevelTilesEdges():
-    if global_transform.origin.x < leftmost_x + 10:
-        global_transform.origin.x = leftmost_x + 10
-    if global_transform.origin.x > rightmost_x - 10:
-        global_transform.origin.x = rightmost_x - 10
+    # respect left and right, dependent on gameCamera size
+    var x_margin = 10 - ((15-self.size)/1.5)
+    if global_transform.origin.x < leftmost_x + x_margin:
+        global_transform.origin.x = leftmost_x + x_margin
+    if global_transform.origin.x > rightmost_x - x_margin:
+        global_transform.origin.x = rightmost_x - x_margin
         
-    if global_transform.origin.y < botmost_y + 7.5:
-        global_transform.origin.y = botmost_y + 7.5
-    if global_transform.origin.y > topmost_y - 7.5:
-        global_transform.origin.y = topmost_y - 7.5
+    # respect top and bottom, dependent on gameCamera size
+    var y_margin = 7.5 - ((15-self.size)/2)
+    if global_transform.origin.y < botmost_y + y_margin:
+        global_transform.origin.y = botmost_y + y_margin
+    if global_transform.origin.y > topmost_y - y_margin:
+        global_transform.origin.y = topmost_y - y_margin
+        
+func isNearBottom():
+    # print("is near bottom?: " + str(global_transform.origin.y) + " < " + str(botmost_y + 8) + " : " + str(global_transform.origin.y < botmost_y + 8))
+    return global_transform.origin.y < botmost_y + 8
+    
+func isInitialTargetNearBottom():
+    # print("is near bottom?: " + str(initial_target.global_transform.origin.y) + " < " + str(botmost_y + 5) + " : " + str(initial_target.global_transform.origin.y < botmost_y + 4))
+    return initial_target.global_transform.origin.y < botmost_y + 4

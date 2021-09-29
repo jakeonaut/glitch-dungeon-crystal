@@ -7,18 +7,12 @@ func _ready():
 func _process(delta):
     var shortest_dist = 999 # zero escape saga
     var nearest_area = null
-    var shortest_passive_dist = 999
-    var nearest_passive_area = null
 
     # find the nearest active area and passive area
     var areas = get_overlapping_areas()
     for area in areas:
         if area.has_method("isActive") and area.isActive():
-            var dist = area.global_transform.origin.distance_to(global_transform.origin)
-            # always interact with passive interaction areas
-            if area.has_method("PassiveInteractActivate"):
-                area.PassiveInteractActivate(delta)
-            
+            var dist = area.global_transform.origin.distance_to(global_transform.origin)            
             if area.has_method("InteractActivate"):
                 if dist < shortest_dist:
                     shortest_dist = dist

@@ -114,9 +114,9 @@ func properlySetTiles():
 
 func normalGlitch():
     set_mesh_library(grey_tiles)
-    changeColorPalette(grey_purple_palette, grey_palette_alt)
+    # changeColorPalette(grey_purple_palette, grey_palette_alt)
     properlySetTiles()
-    cosmeticLevelTiles.normalGlitch(grey_purple_palette)
+    cosmeticLevelTiles.normalGlitch(grey_palette)
 
 func floorGlitch():
     set_mesh_library(red_tiles)

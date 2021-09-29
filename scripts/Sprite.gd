@@ -17,6 +17,12 @@ var is_rotating = false
 func _ready():
     set_process(true)
     start_frame = get_frame()
+    
+func changeSpriteColorPalette(palette):
+    var material = material_override
+    if material is ShaderMaterial:
+        material.set_shader_param("base_palette", palette)
+        material_override = material
 
 func preProcess():
     pass

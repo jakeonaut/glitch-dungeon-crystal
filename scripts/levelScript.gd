@@ -4,6 +4,13 @@ onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var gameCamera = get_node("GameCamera")
 
+var grey_palette = preload("res://assets/palettes/grey_palette.png")
+var red_palette = preload("res://assets/palettes/red_palette.png")
+var green_palette = preload("res://assets/palettes/green_palette.png")
+var black_palette = preload("res://assets/palettes/black_palette.png")
+var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
+var white_palette = preload("res://assets/palettes/white_palette.png")
+
 func _ready():
     # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
     _ready_impl()
@@ -89,3 +96,28 @@ func tryToRespawn():
     if not global.memory.has("active_save_point"):
         global.memory["roomPath"] = self.filename
         global.saveGame()
+
+# TODO(jaketrower): Really bad performance?
+func normalGlitch():
+    levelTiles.normalGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", grey_palette)
+
+func floorGlitch():
+    levelTiles.floorGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", red_palette)
+
+func featherGlitch():
+    levelTiles.featherGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", green_palette)
+
+func ladderGlitch():
+    levelTiles.ladderGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", yellow_palette)
+
+func invisibleGlitch():
+    levelTiles.invisibleGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", black_palette)
+
+func walkThroughWallsGlitch():
+    levelTiles.walkThroughWallsGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", white_palette)

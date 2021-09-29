@@ -6,10 +6,12 @@ onready var jumpSound = get_node("Sounds/JumpSound") if has_node("Sounds/JumpSou
 onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("Sounds/DoubleJumpSound") else null
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
 
+onready var level = get_tree().get_root().get_node("level")
+
 var levelTiles = null
 func getLevelTiles():
     if levelTiles == null:
-        levelTiles = get_tree().get_root().get_node("level").levelTiles
+        levelTiles = level.levelTiles
     return levelTiles
 
 onready var smallInteractionArea = get_node("SmallInteractionArea")
@@ -134,9 +136,9 @@ func _physics_process(delta):
 
     processPhysics(delta) #super
 
-    if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
-        respawn()
-        is_falling = true
+    # if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
+    #     respawn()
+    #     is_falling = true
        
 func isActive():
     return visible
@@ -608,6 +610,8 @@ func handleCollisionsAndMove(lv, delta):
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
     global_transform.origin.y += lv.y
+
+    handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
     
     if on_ground:
         feather_fall_timer = 0
@@ -627,7 +631,11 @@ func isTileFallthroughSolid(tile_type):
     return tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
 
 func isTileNotSolid(tile_type):
-    return tile_type == -1 or len(getLevelTiles().mesh_library.get_item_shapes(tile_type)) == 0
+    return tile_type == -1 or len(getLevelTiles().mesh_library.get_item_shapes(tile_type)) == 0 or isTileSpikes(tile_type)
+    
+func isTileSpikes(tile_type):
+    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+    return tileCollisionShape is RayShape
     
 func handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
     self.horizontal_collision = false
@@ -781,6 +789,33 @@ func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_
             if (collided_true_left_side and not mySprite.flip_h) or (collided_true_right_side and mySprite.flip_h):
                 should_teeter_turn_around = true 
     return lv
+    
+func handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
+    for i in range(bottom_tile_y, top_tile_y):
+        for j in range(left_tile_x, right_tile_x):
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if tile_type == GridMap.INVALID_CELL_ITEM or not isTileSpikes(tile_type): 
+                continue
+                
+            var x = global_transform.origin.x
+            var y = global_transform.origin.y
+            var lb = -get_node("CollisionShape").shape.radius
+            var tb = get_node("CollisionShape").shape.height/2
+            var rb = -lb
+            var bb = -tb
+            var TILE_WIDTH = getLevelTiles().cell_size.x
+            var TILE_HEIGHT = getLevelTiles().cell_size.y
+            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+            var tile_x = tile_pos.x - TILE_WIDTH/2
+            var tile_y = tile_pos.y - TILE_HEIGHT/2
+            
+            if isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + lb + q, y + tb - q, x + rb - q, y + bb + q
+            ):
+                tryDieToEnemy()
+                return
 
 func postProcessInputs(delta):
     pass
