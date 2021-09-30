@@ -54,6 +54,22 @@ func _ready():
             tile_name_dict[Vector3(cell_index.x-1, cell_index.y-2, cell_index.z)] = "ChandelierBotLeft"
             setTileNameNum("ChandelierBotRight", 0, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
             tile_name_dict[Vector3(cell_index.x+1, cell_index.y-2, cell_index.z)] = "ChandelierBotRight"
+            
+        if tile_name == "FloorDecor":
+            setTileNameNum("FloorDecor", 0, cell_index)
+            tile_name_dict[cell_index] = "FloorDecor"
+            setTileNameNum("FloorDecorRight", 0, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
+            tile_name_dict[Vector3(cell_index.x+1, cell_index.y, cell_index.z)] = "FloorDecorRight"
+
+        if tile_name == "FloorDecor2":
+            setTileNameNum("FloorDecor2", 0, cell_index)
+            tile_name_dict[cell_index] = "FloorDecor2"
+            setTileNameNum("FloorDecor2Right", 0, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
+            tile_name_dict[Vector3(cell_index.x+1, cell_index.y, cell_index.z)] = "FloorDecor2Right"
+            setTileNameNum("FloorDecor2Top", 0, Vector3(cell_index.x, cell_index.y+1, cell_index.z))
+            tile_name_dict[Vector3(cell_index.x, cell_index.y+1, cell_index.z)] = "FloorDecor2Top"
+            setTileNameNum("FloorDecor2TopRight", 0, Vector3(cell_index.x+1, cell_index.y+1, cell_index.z))
+            tile_name_dict[Vector3(cell_index.x+1, cell_index.y+1, cell_index.z)] = "FloorDecor2TopRight"
 
 func properlySetTiles():
     var tile_cell_indices = tile_name_dict.keys()
