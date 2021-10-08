@@ -1,6 +1,7 @@
 extends GridMap
 
 # resources is loaded at compile time with preload
+# TODO(jaketrower): Probably best to load this once in the levelScript and reference from there
 var grey_tiles = preload("res://sceneObjects/tiles/grey_tiles.tres") 
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var grey_purple_palette = preload("res://assets/palettes/grey_purple_palette.png")
@@ -37,6 +38,7 @@ func setTileNameNum(newName, num, cell_index):
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type)
 
 func _ready():
+    set_process(true)
     var cell_indices = get_used_cells()
     for i in range(len(cell_indices)):
         var cell_index = cell_indices[i]
@@ -90,6 +92,36 @@ func _ready():
         
         tile_index_array.push_back(cell_index)
         tile_name_array.push_back(mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z)))
+
+var randomize_timer = 0
+var randomize_time_limit = 1
+func _process(delta):
+    randomize_timer += delta
+    if randomize_timer >= randomize_time_limit:
+        randomize_timer = 0
+        randomizeTile(tile_index_array[randi() % tile_index_array.size()])
+
+func randomizeTile(cell_index):
+    var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+    var tile_name = mesh_library.get_item_name(tile_type)
+    if "BrickSolidRoof" in tile_name:
+        setRandomTileNameOfType("BrickSolidRoof", 7, Vector3(cell_index.x, cell_index.y+1, cell_index.z))
+    elif "BrickSolidCeil" in tile_name:
+        setRandomTileNameOfType("BrickSolidCeil", 6, cell_index)
+    elif "BrickSolidTopLeft" in tile_name:
+        setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index)
+    elif "BrickSolidTopRight" in tile_name:
+        setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index)
+    elif "BrickSolidTop" in tile_name:
+        setRandomTileNameOfType("BrickSolidTop", 8, cell_index)
+    elif "BrickSolidBot" in tile_name:
+        setRandomTileNameOfType("BrickSolidBot", 9, cell_index)
+    elif "BrickSolid" in tile_name:
+        setRandomTileNameOfType("BrickSolid", 8, cell_index)
+    elif "CloudSemisolidTop" in tile_name:
+        setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index)
+    elif "CloudSemisolid" in tile_name:
+        setRandomTileNameOfType("CloudSemisolid", 4, cell_index)
     
 func changeColorPalette(palette, palette_alt):
     var item_list = mesh_library.get_item_list()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.tres" type="Shader" id=2]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -69,6 +70,9 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.6, 0.6, 0.6 )
+
 [node name="Door" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -76,6 +80,7 @@ script = ExtResource( 1 )
 "sprite",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0 )
+visible = false
 material_override = SubResource( 1 )
 pixel_size = 0.12
 texture = ExtResource( 4 )
@@ -90,3 +95,10 @@ autoplay = "doorClose"
 anims/doorClose = SubResource( 2 )
 anims/doorOpen = SubResource( 3 )
 anims/locked = SubResource( 4 )
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02902, 0 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+shape = SubResource( 5 )

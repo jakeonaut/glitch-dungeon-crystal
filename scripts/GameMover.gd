@@ -289,6 +289,9 @@ func pressingDown():
 
 func justPressedJump():
     return false
+    
+func recentlyJustPressedJump():
+    return false
 
 func pressingJump():
     return false
@@ -307,7 +310,7 @@ func pressingMoveRight():
 
 func processJumpInputs(delta):
     # jump
-    if justPressedJump() and not global.pauseMoveInput: 
+    if (justPressedJump() or recentlyJustPressedJump()) and not global.pauseMoveInput: 
         # Jump from the water
         if smallInteractionArea.is_touching_water:
             if is_floating:
@@ -332,6 +335,8 @@ func processJumpInputs(delta):
                 actuallyApplyJump()
 
             if aniPlayer:
+                print(aniPlayer.assigned_animation)
+            if aniPlayer and not "jump" in aniPlayer.assigned_animation:
                 aniPlayer.clear_queue()
                 aniPlayer.play("jumpSquat", -1, .6 if isFeatherLike() else 1.0)
                 aniPlayer.queue("jumpStart")
@@ -381,6 +386,8 @@ func processJumpInputs(delta):
         feather_jump_timer += (delta*22)
         if feather_jump_timer > 3: 
             actuallyApplyJump(false)
+    elif pressingJump() and feather_jump_timer < 7: 
+        feather_jump_timer += (delta*22)
     if not pressingJump():
         feather_jump_timer = 200
 
@@ -412,7 +419,7 @@ func actuallyApplyJump(play_sound = true):
 
 func isKindOfOnGround():
     # I'm on the ground or just fell off a platform...
-    return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
+    return (on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)) and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
         
 
 const PROJECTION_ORTHOGONAL = 1
@@ -628,7 +635,7 @@ func isTileSolid(tile_type):
     
 func isTileFallthroughSolid(tile_type):
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    return tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
+    return tileCollisionShape is PlaneShape # or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
 
 func isTileNotSolid(tile_type):
     return tile_type == -1 or len(getLevelTiles().mesh_library.get_item_shapes(tile_type)) == 0 or isTileSpikes(tile_type)

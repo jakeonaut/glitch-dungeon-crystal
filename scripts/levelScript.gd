@@ -4,6 +4,8 @@ onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var gameCamera = get_node("GameCamera")
 
+export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
+
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
 var green_palette = preload("res://assets/palettes/green_palette.png")
@@ -18,6 +20,8 @@ func _ready():
 func _ready_impl():
     set_process_input(true)
     set_process(true)
+
+    player.applyGlitch(starting_glitch_type)
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])

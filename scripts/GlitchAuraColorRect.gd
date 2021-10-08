@@ -17,6 +17,8 @@ func _ready():
 
 func _process(delta):
     if glow_dir == GlowDir.SHRINKING:
+        self.rect_position += Vector2(step*delta/2, step*delta/2)
+
         self.rect_size.x -= step * delta
         self.rect_size.y = self.rect_size.x
         if should_fizzle_out:
@@ -25,6 +27,8 @@ func _process(delta):
         elif self.rect_size.x <= minSize:
             glow_dir = GlowDir.GROWING
     elif glow_dir == GlowDir.GROWING:
+        self.rect_position -= Vector2(step*delta/2, step*delta/2)
+
         self.rect_size.x += step * delta
         self.rect_size.y = self.rect_size.x
         if self.rect_size.x >= maxSize:

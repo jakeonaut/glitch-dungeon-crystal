@@ -9,3 +9,12 @@ func _ready():
         animationPlayer.queue("locked")
     else: 
         animationPlayer.play("doorOpen")
+
+func isActive():
+    return true
+
+func activate():
+    transition.fade_to("res://levels/IntroDungeon/IntroScene2Forest.tscn")
+
+func passiveActivate(delta):
+    pass

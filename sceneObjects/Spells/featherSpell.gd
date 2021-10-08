@@ -1,11 +1,36 @@
 extends KinematicBody
 
 onready var transformSound = get_node("TransformSound")
+var original_position = null
+var previous_point = null
+var interpolation_point = null
+var t = 0
+
 var player = null
 func getPlayer():
     if player == null:
         player = get_tree().get_root().get_node("level").player
     return player
+
+func _ready():
+    set_process(true)
+    original_position = global_transform.origin
+    previous_point = original_position
+    interpolation_point = Vector3(
+        original_position.x + (randf() * 1) - .5, 
+        original_position.y + (randf() * 1) - .5, 
+        original_position.z)
+
+func _process(delta):
+    global_transform.origin = previous_point.linear_interpolate(interpolation_point, t)
+    t += (delta*2)
+    if t >= 1:
+        previous_point = interpolation_point
+        interpolation_point = Vector3(
+            original_position.x + (randf() * 1) - .5, 
+            original_position.y + (randf() * 1) - .5, 
+            original_position.z)
+        t = 0
 
 func isActive():
     return visible

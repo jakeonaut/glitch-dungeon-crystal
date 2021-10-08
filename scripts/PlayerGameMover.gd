@@ -7,6 +7,8 @@ var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0
 var can_broom = global.can_broom
+var jump_press_timer = 999
+var jump_press_time_limit = 5
 
 func getCamera(): return camera
 func getCameraX(): return camera.get_node("CameraX")
@@ -14,6 +16,14 @@ func getTrueCamera(): return camera.get_node("CameraX/Camera")
 
 func _ready():
     set_physics_process(true)
+    set_process(true)
+    
+func _process(delta):
+    if jump_press_timer <= jump_press_time_limit:
+        jump_press_timer += 1
+
+    if justPressedJump():
+        jump_press_timer = 0
 
 # @override
 func respawn():
@@ -46,6 +56,10 @@ func pressingDown():
 # @override
 func justPressedJump():
     return Input.is_action_just_pressed("ui_jump") or should_magic_jump
+    
+# @override
+func recentlyJustPressedJump():
+    return jump_press_timer < jump_press_time_limit
 
 # @override
 func pressingJump():

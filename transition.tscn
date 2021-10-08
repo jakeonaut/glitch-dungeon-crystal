@@ -103,4 +103,3 @@ color = Color( 0, 0, 0, 0 )
 anims/blink_fade = SubResource( 1 )
 anims/fade = SubResource( 2 )
 anims/long_fade = SubResource( 3 )
-
