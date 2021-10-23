@@ -61,9 +61,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 1 )
@@ -87,9 +85,7 @@ extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -112,9 +108,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -137,9 +131,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -162,9 +154,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -187,9 +177,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 7 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -212,9 +200,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 8 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -237,9 +223,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 9 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -262,9 +246,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=34]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -287,9 +269,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -312,9 +292,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=42]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -337,9 +315,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -362,9 +338,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=50]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -389,9 +363,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=55]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -414,9 +386,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=59]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -439,9 +409,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=63]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 18 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -464,9 +432,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=67]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 19 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -489,9 +455,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=71]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 20 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -514,9 +478,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=75]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 21 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -539,9 +501,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=79]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 22 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -564,9 +524,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=83]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 23 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -589,9 +547,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=87]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 24 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -614,9 +570,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=91]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 25 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -639,9 +593,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=95]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 26 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -664,9 +616,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=99]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 27 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -689,9 +639,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=103]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 28 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -714,9 +662,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=107]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 29 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -739,9 +685,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=111]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 30 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -764,9 +708,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=115]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -789,9 +731,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=119]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 32 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -814,9 +754,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=123]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 33 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -839,9 +777,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=127]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 34 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -864,9 +800,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=131]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 35 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -889,9 +823,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=135]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 36 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -914,9 +846,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=139]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 37 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -939,9 +869,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=143]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 38 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -964,9 +892,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=147]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 39 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -989,9 +915,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=151]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 40 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1014,9 +938,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=155]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 41 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1039,9 +961,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=159]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 42 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1066,9 +986,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=164]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 43 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1091,9 +1009,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=168]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 44 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1116,9 +1032,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=172]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 45 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1141,9 +1055,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=176]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 46 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1166,9 +1078,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=180]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 47 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1191,9 +1101,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=184]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 48 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1216,9 +1124,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=188]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 49 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1241,9 +1147,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=192]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 50 )
 shader_param/base_palette = ExtResource( 14 )
 
@@ -1266,9 +1170,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=196]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 51 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1291,9 +1193,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=200]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 52 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1316,9 +1216,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=204]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 53 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1341,9 +1239,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=208]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 54 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1366,9 +1262,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=212]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 55 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1391,9 +1285,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=216]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 56 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1416,9 +1308,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=220]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 57 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1441,9 +1331,7 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=224]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 58 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -1467,225 +1355,337 @@ size = Vector2( 64, 64 )
 [resource]
 item/0/name = "MeshInstance"
 item/0/mesh = SubResource( 2 )
+item/0/mesh_transform = null
 item/0/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/0/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/0/preview = SubResource( 4 )
 item/1/name = "BrickSolid"
 item/1/mesh = SubResource( 7 )
+item/1/mesh_transform = null
 item/1/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/1/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/1/preview = SubResource( 9 )
 item/2/name = "CloudSemisolid"
 item/2/mesh = SubResource( 51 )
+item/2/mesh_transform = null
 item/2/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/preview = SubResource( 53 )
 item/3/name = "BrickSolid2"
 item/3/mesh = SubResource( 96 )
+item/3/mesh_transform = null
 item/3/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/3/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/3/preview = SubResource( 98 )
 item/4/name = "BrickSolid3"
 item/4/mesh = SubResource( 140 )
+item/4/mesh_transform = null
 item/4/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/4/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/4/preview = SubResource( 142 )
 item/5/name = "BrickSolid4"
 item/5/mesh = SubResource( 185 )
+item/5/mesh_transform = null
 item/5/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/5/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/5/preview = SubResource( 187 )
 item/6/name = "BrickSolid5"
 item/6/mesh = SubResource( 213 )
+item/6/mesh_transform = null
 item/6/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/6/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/6/preview = SubResource( 215 )
 item/7/name = "BrickSolid6"
 item/7/mesh = SubResource( 217 )
+item/7/mesh_transform = null
 item/7/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/7/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/7/preview = SubResource( 219 )
 item/8/name = "BrickSolid7"
 item/8/mesh = SubResource( 221 )
+item/8/mesh_transform = null
 item/8/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/8/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/8/preview = SubResource( 223 )
 item/9/name = "BrickSolid8"
 item/9/mesh = SubResource( 225 )
+item/9/mesh_transform = null
 item/9/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/9/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/9/preview = SubResource( 227 )
 item/10/name = "BrickSolidTop"
 item/10/mesh = SubResource( 11 )
+item/10/mesh_transform = null
 item/10/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/10/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/10/preview = SubResource( 13 )
 item/11/name = "BrickSolidTopLeft"
 item/11/mesh = SubResource( 15 )
+item/11/mesh_transform = null
 item/11/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/11/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/11/preview = SubResource( 17 )
 item/12/name = "BrickSolidTopLeft2"
 item/12/mesh = SubResource( 19 )
+item/12/mesh_transform = null
 item/12/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/12/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/12/preview = SubResource( 21 )
 item/13/name = "BrickSolidTopRight"
 item/13/mesh = SubResource( 23 )
+item/13/mesh_transform = null
 item/13/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/13/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/13/preview = SubResource( 25 )
 item/14/name = "BrickSolidTopRight2"
 item/14/mesh = SubResource( 27 )
+item/14/mesh_transform = null
 item/14/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/14/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/14/preview = SubResource( 29 )
 item/15/name = "BrickSolidTop2"
 item/15/mesh = SubResource( 31 )
+item/15/mesh_transform = null
 item/15/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/15/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/15/preview = SubResource( 33 )
 item/16/name = "BrickSolidTop3"
 item/16/mesh = SubResource( 35 )
+item/16/mesh_transform = null
 item/16/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/16/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/16/preview = SubResource( 37 )
 item/17/name = "BrickSolidTop4"
 item/17/mesh = SubResource( 39 )
+item/17/mesh_transform = null
 item/17/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/17/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/17/preview = SubResource( 41 )
 item/18/name = "BrickSolidTop5"
 item/18/mesh = SubResource( 43 )
+item/18/mesh_transform = null
 item/18/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/18/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/18/preview = SubResource( 45 )
 item/19/name = "BrickSolidTop6"
 item/19/mesh = SubResource( 47 )
+item/19/mesh_transform = null
 item/19/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/19/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/19/preview = SubResource( 49 )
 item/20/name = "BrickSolidTop7"
 item/20/mesh = SubResource( 56 )
+item/20/mesh_transform = null
 item/20/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/20/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/20/preview = SubResource( 58 )
 item/21/name = "BrickSolidTop8"
 item/21/mesh = SubResource( 60 )
+item/21/mesh_transform = null
 item/21/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/21/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/21/preview = SubResource( 62 )
 item/22/name = "BrickSolidBot"
 item/22/mesh = SubResource( 64 )
+item/22/mesh_transform = null
 item/22/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/22/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/22/preview = SubResource( 66 )
 item/23/name = "BrickSolidBot2"
 item/23/mesh = SubResource( 68 )
+item/23/mesh_transform = null
 item/23/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/23/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/23/preview = SubResource( 70 )
 item/24/name = "BrickSolidBot3"
 item/24/mesh = SubResource( 72 )
+item/24/mesh_transform = null
 item/24/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/24/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/24/preview = SubResource( 74 )
 item/25/name = "BrickSolidBot4"
 item/25/mesh = SubResource( 76 )
+item/25/mesh_transform = null
 item/25/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/25/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/25/preview = SubResource( 78 )
 item/26/name = "BrickSolidBot5"
 item/26/mesh = SubResource( 80 )
+item/26/mesh_transform = null
 item/26/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/26/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/26/preview = SubResource( 82 )
 item/27/name = "BrickSolidBot6"
 item/27/mesh = SubResource( 84 )
+item/27/mesh_transform = null
 item/27/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/27/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/27/preview = SubResource( 86 )
 item/28/name = "BrickSolidBot7"
 item/28/mesh = SubResource( 88 )
+item/28/mesh_transform = null
 item/28/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/28/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/28/preview = SubResource( 90 )
 item/29/name = "BrickSolidBot8"
 item/29/mesh = SubResource( 92 )
+item/29/mesh_transform = null
 item/29/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/29/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/29/preview = SubResource( 94 )
 item/30/name = "BrickSolidBot9"
 item/30/mesh = SubResource( 100 )
+item/30/mesh_transform = null
 item/30/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/30/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/30/preview = SubResource( 102 )
 item/31/name = "BrickSolidRoof"
 item/31/mesh = SubResource( 104 )
+item/31/mesh_transform = null
 item/31/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/31/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/31/preview = SubResource( 106 )
 item/32/name = "BrickSolidRoof2"
 item/32/mesh = SubResource( 108 )
+item/32/mesh_transform = null
 item/32/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/32/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/32/preview = SubResource( 110 )
 item/33/name = "BrickSolidRoof3"
 item/33/mesh = SubResource( 112 )
+item/33/mesh_transform = null
 item/33/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/33/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/33/preview = SubResource( 114 )
 item/34/name = "BrickSolidRoof4"
 item/34/mesh = SubResource( 116 )
+item/34/mesh_transform = null
 item/34/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/34/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/34/preview = SubResource( 118 )
 item/35/name = "BrickSolidRoof5"
 item/35/mesh = SubResource( 120 )
+item/35/mesh_transform = null
 item/35/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/35/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/35/preview = SubResource( 122 )
 item/36/name = "BrickSolidRoof6"
 item/36/mesh = SubResource( 124 )
+item/36/mesh_transform = null
 item/36/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/36/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/36/preview = SubResource( 126 )
 item/37/name = "BrickSolidRoof7"
 item/37/mesh = SubResource( 128 )
+item/37/mesh_transform = null
 item/37/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/37/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/37/preview = SubResource( 130 )
 item/38/name = "BrickSolidCeil"
 item/38/mesh = SubResource( 132 )
+item/38/mesh_transform = null
 item/38/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/38/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/38/preview = SubResource( 134 )
 item/39/name = "BrickSolidCeil2"
 item/39/mesh = SubResource( 136 )
+item/39/mesh_transform = null
 item/39/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/39/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/39/preview = SubResource( 138 )
 item/40/name = "BrickSolidCeil3"
 item/40/mesh = SubResource( 144 )
+item/40/mesh_transform = null
 item/40/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/40/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/40/preview = SubResource( 146 )
 item/41/name = "BrickSolidCeil4"
 item/41/mesh = SubResource( 148 )
+item/41/mesh_transform = null
 item/41/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/41/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/41/preview = SubResource( 150 )
 item/42/name = "BrickSolidCeil5"
 item/42/mesh = SubResource( 152 )
+item/42/mesh_transform = null
 item/42/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/42/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/42/preview = SubResource( 154 )
 item/43/name = "BrickSolidCeil6"
 item/43/mesh = SubResource( 156 )
+item/43/mesh_transform = null
 item/43/shapes = [ SubResource( 5 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ) ]
+item/43/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/43/preview = SubResource( 158 )
 item/44/name = "Spikes"
 item/44/mesh = SubResource( 160 )
+item/44/mesh_transform = null
 item/44/shapes = [ SubResource( 163 ), Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 ) ]
+item/44/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/44/preview = SubResource( 162 )
 item/45/name = "CloudSemisolidTop"
 item/45/mesh = SubResource( 165 )
+item/45/mesh_transform = null
 item/45/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/45/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/45/preview = SubResource( 167 )
 item/46/name = "CloudSemisolidTop2"
 item/46/mesh = SubResource( 169 )
+item/46/mesh_transform = null
 item/46/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/46/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/46/preview = SubResource( 171 )
 item/47/name = "CloudSemisolidTop3"
 item/47/mesh = SubResource( 173 )
+item/47/mesh_transform = null
 item/47/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/47/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/47/preview = SubResource( 175 )
 item/48/name = "CloudSemisolidTop4"
 item/48/mesh = SubResource( 177 )
+item/48/mesh_transform = null
 item/48/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/48/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/48/preview = SubResource( 179 )
 item/49/name = "CloudSemisolid2"
 item/49/mesh = SubResource( 181 )
+item/49/mesh_transform = null
 item/49/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/49/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/49/preview = SubResource( 183 )
 item/50/name = "CloudSemisolid3"
 item/50/mesh = SubResource( 189 )
+item/50/mesh_transform = null
 item/50/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/50/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/50/preview = SubResource( 191 )
 item/51/name = "CloudSemisolid4"
 item/51/mesh = SubResource( 193 )
+item/51/mesh_transform = null
 item/51/shapes = [ SubResource( 54 ), Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 ) ]
+item/51/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/51/preview = SubResource( 195 )
 item/52/name = "Spikes2"
 item/52/mesh = SubResource( 197 )
+item/52/mesh_transform = null
 item/52/shapes = [ SubResource( 163 ), Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 ) ]
+item/52/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/52/preview = SubResource( 199 )
 item/53/name = "Spikes3"
 item/53/mesh = SubResource( 201 )
+item/53/mesh_transform = null
 item/53/shapes = [ SubResource( 163 ), Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 ) ]
+item/53/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/53/preview = SubResource( 203 )
 item/54/name = "Spikes4"
 item/54/mesh = SubResource( 205 )
+item/54/mesh_transform = null
 item/54/shapes = [ SubResource( 163 ), Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 ) ]
+item/54/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/54/preview = SubResource( 207 )
 item/55/name = "Spikes5"
 item/55/mesh = SubResource( 209 )
+item/55/mesh_transform = null
 item/55/shapes = [ SubResource( 163 ), Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 ) ]
+item/55/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/55/preview = SubResource( 211 )

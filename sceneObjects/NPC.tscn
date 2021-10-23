@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://shaders/Sprite3D.tres" type="Shader" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=6]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=7]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=8]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=9]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
@@ -31,8 +32,10 @@ shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = null
 shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 7 )
-shader_param/base_palette = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 9 )
+shader_param/target_palette = ExtResource( 6 )
 
 [node name="NPC" type="KinematicBody" groups=[
 "npc",
@@ -57,9 +60,6 @@ shape = SubResource( 3 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
-[node name="Portrait" parent="NPC TextBox/TextBox" index="1"]
-frame = 0
-
 [node name="Sprite3D" type="Sprite3D" parent="." groups=[
 "sprite",
 ]]
@@ -69,8 +69,8 @@ pixel_size = 0.12
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 7 )
-vframes = 4
 hframes = 8
+vframes = 4
 frame = 16
 script = ExtResource( 8 )
 should_randomize_frame_delay = true

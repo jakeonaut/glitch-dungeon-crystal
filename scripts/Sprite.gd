@@ -2,6 +2,7 @@ extends Sprite3D
 
 var animation_counter = 0
 export var frame_delay = 0.4
+var original_frame_delay = 0
 # If true, this will override frame_delay after first frame change.
 export var should_randomize_frame_delay = false
 var start_frame = 0
@@ -17,11 +18,12 @@ var is_rotating = false
 func _ready():
     set_process(true)
     start_frame = get_frame()
+    original_frame_delay = frame_delay
     
 func changeSpriteColorPalette(palette):
     var material = material_override
     if material is ShaderMaterial:
-        material.set_shader_param("base_palette", palette)
+        material.set_shader_param("target_palette", palette)
         material_override = material
 
 func preProcess():
@@ -46,7 +48,7 @@ func animate(delta):
             randomizeFrameDelay()
 
 func randomizeFrameDelay():
-    frame_delay = rand_range(0.1, 1.0)
+    frame_delay = rand_range(original_frame_delay/4, original_frame_delay*2.2)
 
 func updateBaseFrame(hframe, vframe):
     start_frame = (self.hframes * vframe) + hframe

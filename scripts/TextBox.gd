@@ -49,8 +49,8 @@ func _process(delta):
                 has_been_shown = true
                 
     if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-        self.margin_top = 50
-        self.margin_bottom = 191
+        self.margin_top = 60
+        self.margin_bottom = 201
     else:
         self.margin_top = top_margin_start
         self.margin_bottom = bot_margin_start

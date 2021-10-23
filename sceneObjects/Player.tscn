@@ -3,11 +3,11 @@
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
 [ext_resource path="res://scripts/PlayerSmallInteractionArea.gd" type="Script" id=3]
-[ext_resource path="res://shaders/Sprite3D.tres" type="Shader" id=4]
-[ext_resource path="res://assets/palettes/player_grey_palette.png" type="Texture" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=4]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=6]
 [ext_resource path="res://scripts/MouseCamera.gd" type="Script" id=7]
-[ext_resource path="res://materials/Sprite3D.tres" type="Material" id=8]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=8]
 [ext_resource path="res://assets/item_sheet0000.png" type="Texture" id=9]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=10]
 [ext_resource path="res://scripts/PlayerBroomPassiveInteractionArea.gd" type="Script" id=11]
@@ -23,7 +23,6 @@
 [ext_resource path="res://assets/sounds/hurt.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=23]
-[ext_resource path="res://sceneObjects/PauseMenu.tscn" type="PackedScene" id=24]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -39,26 +38,25 @@ radius = 0.8
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 1.0
-shader_param/metallic_texture_channel = Plane( 1, 0, 0, 0 )
-shader_param/roughness_texture_channel = Plane( 1, 0, 0, 0 )
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 8 )
 
-[sub_resource type="SphereShape" id=5]
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 9 )
+
+[sub_resource type="SphereShape" id=6]
 radius = 4.0
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=7]
 size = Vector3( 4, 3, 4 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.9
 loop = true
 tracks/0/type = "value"
@@ -74,7 +72,7 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:flip_h")
@@ -89,7 +87,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:flip_h")
@@ -104,7 +102,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -120,7 +118,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -135,7 +133,7 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.9
 loop = true
 tracks/0/type = "value"
@@ -151,7 +149,7 @@ tracks/0/keys = {
 "values": [ 16, 17 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -167,7 +165,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -182,7 +180,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -197,7 +195,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -212,7 +210,7 @@ tracks/0/keys = {
 "values": [ 14, 15, 10, 3 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -228,7 +226,7 @@ tracks/0/keys = {
 "values": [ 21, 20 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -243,7 +241,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -259,7 +257,7 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -274,7 +272,7 @@ tracks/0/keys = {
 "values": [ 3, 9 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -290,8 +288,7 @@ tracks/0/keys = {
 "values": [ 2, 3 ]
 }
 
-[sub_resource type="Animation" id=22]
-resource_name = "walkStart"
+[sub_resource type="Animation" id=23]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -306,8 +303,7 @@ tracks/0/keys = {
 "values": [ 24, 25 ]
 }
 
-[sub_resource type="Animation" id=23]
-resource_name = "walkStop"
+[sub_resource type="Animation" id=24]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -350,14 +346,14 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224033, 0.8 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
-shaded = true
+transparent = false
+double_sided = false
 alpha_cut = 2
 texture = ExtResource( 6 )
-vframes = 4
 hframes = 8
+vframes = 4
 
 [node name="CameraY" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )
 script = ExtResource( 7 )
 
@@ -382,29 +378,28 @@ transform = Transform( 0.499999, 0, 0, 0, 0.6, 0, 0, 0, 0.499999, 0, 0, 0 )
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="CameraY/broom"]
-transform = Transform( 1, 0, 7.10543e-015, 0, 1, 0, -7.10543e-015, 0, 1, 0.5, 0.5, 2 )
-material_override = ExtResource( 8 )
+transform = Transform( 1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0.5, 0.5, 2 )
+material_override = SubResource( 5 )
 pixel_size = 0.16
 texture = ExtResource( 9 )
-vframes = 8
 hframes = 8
+vframes = 8
 script = ExtResource( 10 )
 
 [node name="PassiveInteractionArea" type="Area" parent="CameraY/broom/Sprite3D"]
 script = ExtResource( 11 )
 
 [node name="CollisionShape" type="CollisionShape" parent="CameraY/broom/Sprite3D/PassiveInteractionArea"]
-transform = Transform( 1, 0, 1.86265e-008, 0, 1, 0, -1.86265e-008, 0, 1, 2.206, -1.574, 1.547 )
-shape = SubResource( 5 )
+transform = Transform( 1, 0, 1.86265e-08, 0, 1, 0, -1.86265e-08, 0, 1, 2.206, -1.574, 1.547 )
+shape = SubResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CameraY/broom/Sprite3D/PassiveInteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.914, -1.074, 1.237 )
 visible = false
-mesh = SubResource( 6 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
@@ -454,41 +449,22 @@ volume_db = -20.0
 stream = ExtResource( 23 )
 volume_db = -30.0
 
-[node name="PauseMenu" parent="." instance=ExtResource( 24 )]
-editor/display_folded = true
-
-[node name="MenuBox" parent="PauseMenu" index="0"]
-visible = false
-margin_right = 613.0
-margin_bottom = 616.0
-
-[node name="TitleBar" parent="PauseMenu/MenuBox" index="0"]
-margin_right = 596.0
-
-[node name="TextureButton" parent="PauseMenu/MenuBox/TitleBar" index="0"]
-margin_left = 549.266
-margin_top = 6.32082
-margin_right = 589.266
-margin_bottom = 47.3208
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
-anims/angry = SubResource( 7 )
-anims/faceLeft = SubResource( 8 )
-anims/faceRight = SubResource( 9 )
-anims/fall = SubResource( 10 )
-anims/fallStart = SubResource( 11 )
-anims/happy = SubResource( 12 )
-anims/jump = SubResource( 13 )
-anims/jumpSquat = SubResource( 14 )
-anims/jumpStart = SubResource( 15 )
-anims/land = SubResource( 16 )
-anims/sad = SubResource( 17 )
-anims/stand = SubResource( 18 )
-anims/teeter = SubResource( 19 )
-anims/turnAround = SubResource( 20 )
-anims/walk = SubResource( 21 )
-anims/walkStart = SubResource( 22 )
-anims/walkStop = SubResource( 23 )
-
-[editable path="PauseMenu"]
+anims/angry = SubResource( 8 )
+anims/faceLeft = SubResource( 9 )
+anims/faceRight = SubResource( 10 )
+anims/fall = SubResource( 11 )
+anims/fallStart = SubResource( 12 )
+anims/happy = SubResource( 13 )
+anims/jump = SubResource( 14 )
+anims/jumpSquat = SubResource( 15 )
+anims/jumpStart = SubResource( 16 )
+anims/land = SubResource( 17 )
+anims/sad = SubResource( 18 )
+anims/stand = SubResource( 19 )
+anims/teeter = SubResource( 20 )
+anims/turnAround = SubResource( 21 )
+anims/walk = SubResource( 22 )
+anims/walkStart = SubResource( 23 )
+anims/walkStop = SubResource( 24 )

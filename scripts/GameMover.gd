@@ -36,7 +36,7 @@ var half_on_ground = false
 var should_teeter_turn_around = false
 var jumped_from_true_ground = false
 var was_just_on_ground_timer = 0
-var was_just_on_ground_time_limit = 5
+var was_just_on_ground_time_limit = 2
 var just_landed = false
 var spawn_origin
 var last_grounded_y = 0
@@ -88,6 +88,7 @@ var feather_fall_timer = 0
 var feather_fall_initial_time_limit = 20
 var feather_fall_time_limit = 60
 var feather_jump_timer = 0
+var feather_jump_time_limit = 10
 
 func isFeatherLike():
     return glitch_form == GlitchForm.FEATHER
@@ -127,9 +128,6 @@ func _process(delta):
     pass
 
 func _physics_process(delta):
-    # ._process_physics(delta) #NOTE: this super method is called automatically 
-    # https://github.com/godotengine/godot/issues/6500
-
     if global.pauseGame: return
 
     is_touching_water = smallInteractionArea.is_touching_water
@@ -334,8 +332,6 @@ func processJumpInputs(delta):
                 jump_squat_jump_input_timer = 1
                 actuallyApplyJump()
 
-            if aniPlayer:
-                print(aniPlayer.assigned_animation)
             if aniPlayer and not "jump" in aniPlayer.assigned_animation:
                 aniPlayer.clear_queue()
                 aniPlayer.play("jumpSquat", -1, .6 if isFeatherLike() else 1.0)
@@ -379,7 +375,7 @@ func processJumpInputs(delta):
             jump_squat_jump_input_timer = 0
             
 
-    if isFeatherLike() and feather_jump_timer < 10 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
+    if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
         feather_jump_timer += (delta*22)
         actuallyApplyJump(false)
     elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
@@ -588,13 +584,13 @@ func doWalkAnimation():
             aniPlayer.queue("walkStart")
         aniPlayer.queue("walk")
         
+# http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
+# https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(lv, delta):
     if delta == 0:
         return lv
         
     var DNUM = 1.15
-    # move_and_slide automatically includes "delta"
-    # return move_and_slide(lv, -g.normalized(), true, 4, 0.785398, false)
     lv.x *= delta*DNUM
     lv.y *= delta*DNUM
     
@@ -613,12 +609,12 @@ func handleCollisionsAndMove(lv, delta):
     truly_on_ground = false
     half_on_ground = false
 
-    lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
+    # lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
-    lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
+    lv = handleVerticalCollisions(lv)
     global_transform.origin.y += lv.y
 
-    handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
+    # handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
     
     if on_ground:
         feather_fall_timer = 0
@@ -630,12 +626,14 @@ func handleCollisionsAndMove(lv, delta):
     return lv
 
 func isTileSolid(tile_type):
+    if tile_type == GridMap.INVALID_CELL_ITEM:
+        return false
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return glitch_form != GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape
     
 func isTileFallthroughSolid(tile_type):
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    return tileCollisionShape is PlaneShape # or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
+    return tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape)
 
 func isTileNotSolid(tile_type):
     return tile_type == -1 or len(getLevelTiles().mesh_library.get_item_shapes(tile_type)) == 0 or isTileSpikes(tile_type)
@@ -698,104 +696,211 @@ func isRectColliding(o_lb, o_tb, o_rb, o_bb, lb, tb, rb, bb, debug_ = false):
         return true
     return false
     
-func handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
-    var collided_left_side = false
-    var collided_true_left_side = false
-    var collided_middle = false
-    var collided_right_side = false
-    var collided_true_right_side = false
-    for i in range(bottom_tile_y, top_tile_y):
-        for j in range(left_tile_x, right_tile_x):
-            var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
-            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-            if tile_type == GridMap.INVALID_CELL_ITEM or isTileNotSolid(tile_type):
-                continue
+func probeSensorDown(sensor):
+    var z = global_transform.origin.z
+    var TILE_HEIGHT = getLevelTiles().cell_size.y
+    
+    var coords_a = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y, z))
+    var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+    
+    var tile_height = -999
+    if isTileSolid(tile_type_a):
+        # We found a collision, regress to see if there is a previous one
+        var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y + TILE_HEIGHT, z))
+        var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+        if isTileSolid(tile_type_b):
+            # Found an earlier tile collision, use it instead of tile A
+            tile_height = coords_b.y + TILE_HEIGHT
+        else:
+            # Did not find an earlier tile collision, so use tile A
+            tile_height = coords_a.y + TILE_HEIGHT
+    else:
+        # We have found no collision, extend to see if there is an upcoming one
+        var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - TILE_HEIGHT, z))
+        var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+        if isTileSolid(tile_type_b):
+            # Found a later tile collision, use it
+            tile_height = coords_b.y + TILE_HEIGHT
+        else:
+            # We found no tile collision on this side! Just use default :)
+            pass
+    return tile_height
 
-            var x = global_transform.origin.x
-            var y = global_transform.origin.y
-            var lb = -get_node("CollisionShape").shape.radius
-            var tb = get_node("CollisionShape").shape.height/2
-            var rb = -lb
-            var bb = -tb
-            var TILE_WIDTH = getLevelTiles().cell_size.x
-            var TILE_HEIGHT = getLevelTiles().cell_size.y
-            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
-            var tile_x = tile_pos.x - TILE_WIDTH/2
-            var tile_y = tile_pos.y - TILE_HEIGHT/2
-            var debug_ = false
+func collideWithFloor(local_lv):
+    local_lv.y = 0
+    on_ground = true
+    truly_on_ground = true
+    return local_lv
+    
+func handleVerticalCollisions(local_lv):
+    var x = global_transform.origin.x
+    var y = global_transform.origin.y
+    var lb = -get_node("CollisionShape").shape.radius
+    var tb = get_node("CollisionShape").shape.height/2
+    var rb = -lb
+    var bb = -tb
 
-            # if i == 1:
-            #     print("tx: " + str(tile_x) + ", x: " + str(x) + ", y: " + str(y))
-            #     debug_ = true
+    # check for bottom collisions
+    if truly_on_ground or local_lv.y <= 0:
+        # Check for left ground sensor
+        var left_floor_sensor = Vector2(x+lb, y+bb)
+        if not truly_on_ground:
+            # add y speed to floor checking if we're in the air
+            left_floor_sensor.y += local_lv.y
+        var left_floor_tile_height = probeSensorDown(left_floor_sensor)
+        var left_floor_tile_distance = (y+bb) - left_floor_tile_height
+
+        # Check for right ground sensor
+        var right_floor_sensor = Vector2(x+rb, y+bb)
+        if not truly_on_ground:
+            # add y speed to floor checking if we're in the air
+            right_floor_sensor.y += local_lv.y
+        var right_floor_tile_height = probeSensorDown(right_floor_sensor)
+        var right_floor_tile_distance = (y+bb) - right_floor_tile_height
+
+        # Check for middle ground sensor
+        var middle_floor_sensor = Vector2(x, y+bb)
+        if not truly_on_ground:
+            # add y speed to floor checking if we're in the air
+            middle_floor_sensor.y += local_lv.y
+        var middle_floor_tile_height = probeSensorDown(middle_floor_sensor)
+        var middle_floor_tile_distance = (y+bb) - middle_floor_tile_height
+
+        # Compare left and right floor tile distances
+        if left_floor_tile_distance <= right_floor_tile_distance and left_floor_tile_distance <= middle_floor_tile_distance:
+            if left_floor_tile_distance <= 0:
+                # push player out of the tile!
+                global_transform.origin.y -= left_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            elif (y + local_lv.y + bb) < left_floor_tile_height:
+                # position + velocity will exceed tile position, so let's snap!
+                global_transform.origin.y -= left_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            # else no collision
+        elif right_floor_tile_distance < left_floor_tile_distance and right_floor_tile_distance <= middle_floor_tile_distance:
+            if right_floor_tile_distance <= 0:
+                global_transform.origin.y -= right_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            elif (y + local_lv.y + bb) < right_floor_tile_height:
+                # position + velocity will exceed tile position, so let's snap!
+                global_transform.origin.y -= right_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            # else no collision
+        else:
+            # special case for checking middle collision, because GameMovers are often larger than a single tile...
+            if middle_floor_tile_distance <= 0:
+                global_transform.origin.y -= middle_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            elif (y + local_lv.y + bb) < middle_floor_tile_height:
+                # position + velocity will exceed tile position, so let's snap!
+                global_transform.origin.y -= middle_floor_tile_distance
+                local_lv = collideWithFloor(local_lv)
+            # else no collision
+
+    # check for top collisions
+    if not truly_on_ground and local_lv.y > 0:
+        pass
+    
+    return local_lv
+    # var collided_left_side = false
+    # var collided_true_left_side = false
+    # var collided_middle = false
+    # var collided_right_side = false
+    # var collided_true_right_side = false
+    # for i in range(bottom_tile_y, top_tile_y):
+    #     for j in range(left_tile_x, right_tile_x):
+    #         var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
+    #         var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+    #         if tile_type == GridMap.INVALID_CELL_ITEM or isTileNotSolid(tile_type):
+    #             continue
+
+    #         var x = global_transform.origin.x
+    #         var y = global_transform.origin.y
+    #         var lb = -get_node("CollisionShape").shape.radius
+    #         var tb = get_node("CollisionShape").shape.height/2
+    #         var rb = -lb
+    #         var bb = -tb
+    #         var TILE_WIDTH = getLevelTiles().cell_size.x
+    #         var TILE_HEIGHT = getLevelTiles().cell_size.y
+    #         var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+    #         var tile_x = tile_pos.x - TILE_WIDTH/2
+    #         var tile_y = tile_pos.y - TILE_HEIGHT/2
+    #         var debug_ = false
+
+    #         # if i == 1:
+    #         #     print("tx: " + str(tile_x) + ", x: " + str(x) + ", y: " + str(y))
+    #         #     debug_ = true
                 
-            # Check for top collisions
-            if lv.y > 0 and not isTileFallthroughSolid(tile_type) and isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + lb + q, y + tb + lv.y + 0.1, x + rb - q, y + tb
-            ):
-                lv.y /= 2
-                y = tile_y - tb
-                global_transform.origin.y = y
+    #         # Check for top collisions
+    #         if lv.y > 0 and not isTileFallthroughSolid(tile_type) and isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + lb + q, y + tb + lv.y + 0.1, x + rb - q, y + tb
+    #         ):
+    #             lv.y /= 2
+    #             y = tile_y - tb
+    #             global_transform.origin.y = y
 
-            # Check for bottom collisions
-            if lv.y <= 0 and isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + lb + q, y + bb, x + rb - q, y + bb + lv.y - 0.1
-            ):
-                if isTileFallthroughSolid(tile_type) and (tile_y + TILE_HEIGHT > y + bb + 0.1 or pressingDown()):
-                    continue
-                lv.y = 0
-                on_ground = true
-                truly_on_ground = true
-                y = tile_y + TILE_HEIGHT - bb
-                global_transform.origin.y = y
+    #         # Check for bottom collisions
+    #         if lv.y <= 0 and isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + lb + q, y + bb, x + rb - q, y + bb + lv.y - 0.1
+    #         ):
+    #             if isTileFallthroughSolid(tile_type) and \
+    #                 (tile_y + TILE_HEIGHT > y + bb + 0.1 or \
+    #                     (pressingDown() and not glitch_form == GlitchForm.WALK_THROUGH_WALLS and not isTileSolid(tile_type))):
+    #                 continue
+    #             lv.y = 0
+    #             on_ground = true
+    #             truly_on_ground = true
+    #             y = tile_y + TILE_HEIGHT - bb
+    #             global_transform.origin.y = y
 
-            # check for left, right, middle collisions for teetering
-            # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
-            var qteeter = 0.3
-            if isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + lb + qteeter, y + bb, x + lb + qteeter, y + bb + lv.y - 0.1, debug_
-            ):
-                collided_left_side = true
-            if isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + lb, y + bb, x + lb, y + bb + lv.y - 0.1, debug_
-            ):
-                collided_true_left_side = true
-            if isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + rb - qteeter, y + bb, x + rb - qteeter, y + bb + lv.y - 0.1
-            ):
-                collided_right_side = true
-            if isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + rb, y + bb, x + rb, y + bb + lv.y - 0.1
-            ):
-                collided_true_right_side = true
-            if not mySprite.flip_h and isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x - .05, y + bb, x - .05, y + bb + lv.y - 0.1
-            ) or mySprite.flip_h and isRectColliding(
-                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-                x + .05, y + bb, x + .05, y + bb + lv.y - 0.1
-            ):
-                collided_middle = true
-    # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
-    if truly_on_ground:
-        if collided_left_side and not collided_right_side:
-            if not collided_middle and not mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
-                should_teeter_turn_around = true
-            half_on_ground = true
-        elif collided_right_side and not collided_left_side:
-            if not collided_middle and mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
-                should_teeter_turn_around = true
-            half_on_ground = true
-        elif not collided_left_side and not collided_right_side:
-            half_on_ground = true
-            if (collided_true_left_side and not mySprite.flip_h) or (collided_true_right_side and mySprite.flip_h):
-                should_teeter_turn_around = true 
-    return lv
+    #         # check for left, right, middle collisions for teetering
+    #         # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
+    #         var qteeter = 0.3
+    #         if isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + lb + qteeter, y + bb, x + lb + qteeter, y + bb + lv.y - 0.1, debug_
+    #         ):
+    #             collided_left_side = true
+    #         if isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + lb, y + bb, x + lb, y + bb + lv.y - 0.1, debug_
+    #         ):
+    #             collided_true_left_side = true
+    #         if isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + rb - qteeter, y + bb, x + rb - qteeter, y + bb + lv.y - 0.1
+    #         ):
+    #             collided_right_side = true
+    #         if isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + rb, y + bb, x + rb, y + bb + lv.y - 0.1
+    #         ):
+    #             collided_true_right_side = true
+    #         if not mySprite.flip_h and isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x - .05, y + bb, x - .05, y + bb + lv.y - 0.1
+    #         ) or mySprite.flip_h and isRectColliding(
+    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+    #             x + .05, y + bb, x + .05, y + bb + lv.y - 0.1
+    #         ):
+    #             collided_middle = true
+    # # TODO(jaketrower): This code will be impossible to read later on. I did this very haphazardly.
+    # if truly_on_ground:
+    #     if collided_left_side and not collided_right_side:
+    #         if not collided_middle and not mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
+    #             should_teeter_turn_around = true
+    #         half_on_ground = true
+    #     elif collided_right_side and not collided_left_side:
+    #         if not collided_middle and mySprite.flip_h and (not aniPlayer or not aniPlayer.assigned_animation == "teeter"):
+    #             should_teeter_turn_around = true
+    #         half_on_ground = true
+    #     elif not collided_left_side and not collided_right_side:
+    #         half_on_ground = true
+    #         if (collided_true_left_side and not mySprite.flip_h) or (collided_true_right_side and mySprite.flip_h):
+    #             should_teeter_turn_around = true 
+    # return lv
     
 func handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
     for i in range(bottom_tile_y, top_tile_y):

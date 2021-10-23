@@ -12,6 +12,9 @@ onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
 onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
 
+var pressing_jump = false
+var just_pressed_jump = false
+
 
 func _ready():
     set_process(true)
@@ -57,3 +60,9 @@ func _physics_process(delta):
     if global.pauseGame: return
 
     .processPhysics(delta)
+
+func justPressedJump():
+    return just_pressed_jump
+
+func pressingJump():
+    return pressing_jump

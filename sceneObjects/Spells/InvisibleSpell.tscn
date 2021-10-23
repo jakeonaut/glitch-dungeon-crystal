@@ -1,16 +1,28 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sceneObjects/Spells/invisibleSpell.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
-[ext_resource path="res://materials/Sprite3D.tres" type="Material" id=3]
-[ext_resource path="res://assets/collection_sheet.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/minimi.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
 [ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=6]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
 
-[sub_resource type="CylinderShape" id=1]
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="CylinderShape" id=2]
 radius = 0.7
 
-[sub_resource type="SphereShape" id=2]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 4 )
 
 [node name="InvisibleSpell" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -26,16 +38,16 @@ script = ExtResource( 2 )
 shape = SubResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-material_override = ExtResource( 3 )
-pixel_size = 0.16
+material_override = SubResource( 3 )
+pixel_size = 0.12
 shaded = true
 alpha_cut = 2
-texture = ExtResource( 4 )
-vframes = 6
-hframes = 12
-frame = 60
+texture = ExtResource( 3 )
+hframes = 8
 script = ExtResource( 5 )
-max_frames = 1
+frame_delay = 0.15
+should_randomize_frame_delay = true
+max_frames = 8
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

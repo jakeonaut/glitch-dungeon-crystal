@@ -5,7 +5,7 @@ uniform sampler2D base_palette : hint_albedo;
 void fragment() {
     vec3 screen_tex = texture(screen_texture, vec2(1.0)).rgb;
     // https://gamedev.stackexchange.com/questions/43294/creating-a-retro-style-palette-swapping-effect-in-opengl
-    vec2 index = vec2(mod(screen_tex.r*256.0, 8.0)/8.0, 0);
+    vec2 index = vec2(mod(screen_tex.r*256.0, 16.0)/16.0, 0);
     vec4 indexed_color = texture(base_palette, index, -100);
     COLOR.rgb = indexed_color.rgb; // vec3(index.x); // indexed_color.rgb;
     // Brain Blast: even though sampling the r value from the output on paint for "black" background results in rgb = 4,0,0

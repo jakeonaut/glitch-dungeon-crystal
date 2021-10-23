@@ -97,7 +97,7 @@ var randomize_timer = 0
 var randomize_time_limit = 1
 func _process(delta):
     randomize_timer += delta
-    if randomize_timer >= randomize_time_limit:
+    if randomize_timer >= randomize_time_limit and tile_index_array.size() > 0:
         randomize_timer = 0
         randomizeTile(tile_index_array[randi() % tile_index_array.size()])
 

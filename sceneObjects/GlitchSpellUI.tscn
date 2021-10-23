@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/GlitchSpellUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/glitchspellmenu.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=3]
+
+[node name="GlitchSpellUI" type="Control"]
+margin_right = 243.0
+margin_bottom = 55.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 229.0
+margin_bottom = 49.0
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedSpell" type="Sprite" parent="TextureRect"]
+position = Vector2( 25, 25 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 5
+script = ExtResource( 3 )
+max_frames = 1
+
+[node name="GreenSpell" type="Sprite" parent="TextureRect"]
+position = Vector2( 70, 25 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 5
+frame = 4
+script = ExtResource( 3 )
+
+[node name="BlackSpell" type="Sprite" parent="TextureRect"]
+position = Vector2( 115, 25 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 5
+frame = 6
+script = ExtResource( 3 )
+max_frames = 1
+
+[node name="YellowSpell" type="Sprite" parent="TextureRect"]
+position = Vector2( 160, 25 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 5
+frame = 9
+script = ExtResource( 3 )
+max_frames = 1
+
+[node name="WhiteSpell" type="Sprite" parent="TextureRect"]
+position = Vector2( 205, 25 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 5
+frame = 12
+script = ExtResource( 3 )
+max_frames = 1

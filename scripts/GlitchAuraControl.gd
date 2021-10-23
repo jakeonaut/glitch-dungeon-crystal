@@ -8,7 +8,7 @@ var green_palette_alt = preload("res://assets/palettes2D/green_palette_alt.png")
 
 var has_set_position = false
 var spawn_timer = 0
-var spawn_time_limit = 5
+var spawn_time_limit = 3
 var featherSpell_origin = Vector3(0, 0, 0)
 
 onready var level = get_tree().get_root().get_node("level")
@@ -46,24 +46,23 @@ func _process(delta):
             newRect.maxSize = randi() % 25 + 15
             newRect.should_fizzle_out = true
             newRect.rect_position = Vector2(
-                randi() % 200 - 100,
-                randi() % 200 - 100
+                randi() % 150 - 100,
+                randi() % 150 - 100
             )
             newRect.glow_dir = newRect.GlowDir.GROWING
-            newRect.step = randi() % 30 + 30
-            newRect.material.set_shader_param("base_palette", green_palette_alt)
+            newRect.step = randi() % 30 + 50
+            var material = newRect.material.duplicate(true)
+            material.set_shader_param("base_palette", green_palette_alt)
+            newRect.material = material
 
             add_child(newRect)
             spawn_timer = 0
 
 
 func setPosition(should_set_featherSpell_origin):
-    var center_x = 960/2
-    var center_y = 720/2
-
     # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
     if should_set_featherSpell_origin:
         featherSpell_origin = featherSpell.global_transform.origin
     var featherSpell_pos = getGameCamera().unproject_position(featherSpell_origin)
-    self.rect_position.x = featherSpell_pos.x
-    self.rect_position.y = featherSpell_pos.y
+    self.rect_position.x = featherSpell_pos.x + 10
+    self.rect_position.y = featherSpell_pos.y + 10

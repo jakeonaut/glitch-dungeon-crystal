@@ -39,11 +39,11 @@ func _physics_process(delta):
 
 # @override
 func pressingMoveLeft():
-    return walk_direction == -1 and (behavior_walking or behavior_was_thrown and not on_ground)
+    return walk_direction == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    return walk_direction == 1 and (behavior_walking or behavior_was_thrown and not on_ground)
+    return walk_direction == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():

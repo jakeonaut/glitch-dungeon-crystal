@@ -19,10 +19,11 @@ func _ready():
     start_frame = get_frame()
     
 func changeSpriteColorPalette(palette):
-    var material = material_override
-    if material is ShaderMaterial:
-        material.set_shader_param("base_palette", palette)
-        material_override = material
+    if self.material_override:
+        var material = self.material_override
+        if material is ShaderMaterial:
+            material.set_shader_param("base_palette", palette)
+            self.material_override = material
 
 func preProcess():
     pass
@@ -50,5 +51,6 @@ func randomizeFrameDelay():
 
 func updateBaseFrame(hframe, vframe):
     start_frame = (self.hframes * vframe) + hframe
-    base_frame = start_frame
-    set_frame(start_frame)
+    if base_frame != start_frame:
+        base_frame = start_frame
+        set_frame(start_frame)
