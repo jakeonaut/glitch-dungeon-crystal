@@ -58,9 +58,6 @@ far = 8192.0
 enabled = false
 script = null
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10.9716, 0 )
-
 [node name="LevelTiles" type="GridMap" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 2 )
@@ -110,3 +107,6 @@ frame = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29111, -2, 0 )
