@@ -94,7 +94,7 @@ func _ready():
         tile_name_array.push_back(mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z)))
 
 var randomize_timer = 0
-var randomize_time_limit = 1
+var randomize_time_limit = 0.5
 func _process(delta):
     randomize_timer += delta
     if randomize_timer >= randomize_time_limit and tile_index_array.size() > 0:
