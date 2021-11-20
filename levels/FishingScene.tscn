@@ -50,7 +50,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 2, 0, 1, 4, 0, 536870913, 5, 0, 536870913, 6, 0, 536870913, 8, 0, 536870913, 9, 0, 536870914, 10, 0, 2, 11, 0, 536870914, 12, 0, 536870914, 13, 0, 536870914, 65538, 0, 1, 65539, 0, 1, 65540, 0, 536870913, 65541, 0, 1073741825, 65542, 0, 536870913, 65543, 0, 536870913, 65544, 0, 536870913, 65545, 0, 2, 65546, 0, 536870914, 65547, 0, 536870914, 65548, 0, 536870914, 65549, 0, 2, -65534, 0, 1, -65533, 0, 536870913, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
+"cells": PoolIntArray( 2, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 8, 0, 1, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
 }
 script = ExtResource( 5 )
 __meta__ = {
@@ -65,7 +65,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( -65529, 0, 1610612738 )
+"cells": PoolIntArray( -65529, 0, 2 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -79,14 +79,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.075, 3.00767, 0 )
 
 [node name="Camera" parent="Player/CameraY/CameraX" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, 0 )
 mesh = SubResource( 2 )
 material/0 = null
@@ -99,56 +97,46 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="GlitchEnemy" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy" index="0"]
 texture = ExtResource( 12 )
-vframes = 2
 hframes = 2
+vframes = 2
 
 [node name="GlitchEnemy2" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, 0 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy2" index="0"]
 texture = ExtResource( 13 )
-vframes = 2
 hframes = 2
+vframes = 2
 
 [node name="GlitchEnemy3" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -4, 0 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy3" index="0"]
 texture = ExtResource( 14 )
-vframes = 2
 hframes = 2
+vframes = 2
 
 [node name="GlitchEnemy4" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6602, -5.66015, 0 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy4" index="0"]
 texture = ExtResource( 15 )
-vframes = 2
 hframes = 2
+vframes = 2
 
 [node name="SavePoint" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0 )
 
 [editable path="Player"]
-
-[editable path="Player/PauseMenu"]
-
 [editable path="GlitchEnemy"]
-
 [editable path="GlitchEnemy2"]
-
 [editable path="GlitchEnemy3"]
-
 [editable path="GlitchEnemy4"]

@@ -10,6 +10,7 @@ var grey_palette_alt = preload("res://assets/palettes/grey_palette_alt.png")
 var red_tiles = preload("res://sceneObjects/tiles/red_tiles.tres")
 var red_palette = preload("res://assets/palettes/red_palette.png")
 
+var tide_pool_palette = preload("res://assets/palettes/tidepool_palette.png")
 var green_tiles = preload("res://sceneObjects/tiles/green_tiles.tres")
 var green_palette = preload("res://assets/palettes/green_palette.png")
 var green_palette_alt = preload("res://assets/palettes/green_palette_alt.png")
@@ -158,7 +159,7 @@ func floorGlitch():
 
 func featherGlitch():
     set_mesh_library(green_tiles)
-    # changeColorPalette(green_palette, green_palette_alt)
+    # changeColorPalette(tide_pool_palette, green_palette)
     properlySetTiles()
     cosmeticLevelTiles.featherGlitch(green_palette)
 

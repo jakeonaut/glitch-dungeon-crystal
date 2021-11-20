@@ -8,6 +8,7 @@ var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999
 var botmost_y = 999
+var initial_size = 15
 
 var levelTiles = null
 func getLevelTiles():
@@ -16,6 +17,7 @@ func getLevelTiles():
     return levelTiles
 
 func _ready():
+    initial_size = self.size
     initial_z = global_transform.origin.z
     
     # Wait two frames so that levelTiles on levelScript is available
@@ -64,7 +66,7 @@ func _process(delta):
     elif distance < 19.26 and global.activeInteractor == null:
         set_interpolation_enabled(false)
 
-    if global.activeInteractor != null:
+    if global.activeInteractor != null and initial_size > 12:
         actual_target = global.activeInteractor.get_node("../..")
         set_target(actual_target)
         # interpolation = A + (B - A) * t
@@ -74,7 +76,7 @@ func _process(delta):
     else:
         actual_target = initial_target
         set_target(actual_target)
-        self.size = self.size + (15 - self.size) * (delta*5)
+        self.size = self.size + (initial_size - self.size) * (delta*5)
         
     respectLevelTilesEdges()
     
