@@ -10,8 +10,8 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=11]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/IntroDungeon/IntroDungeon2ForestNPCUpAbortSound.gd" type="Script" id=13]
 [ext_resource path="res://levels/IntroDungeon/IntroDungeon2ForestNPCUpDialogSound.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=15]
@@ -107,10 +107,10 @@ grav = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 14, 0 )
 grav = 0
 
-[node name="SavePoint" parent="." instance=ExtResource( 11 )]
+[node name="SavePoint" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 
-[node name="NPC" parent="." instance=ExtResource( 12 )]
+[node name="NPC" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 4, 0 )
 bbText = "just keep holding
 jump!! "
