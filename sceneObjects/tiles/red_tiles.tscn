@@ -1,9 +1,8 @@
-[gd_scene load_steps=175 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/redsolid1.png" type="Texture" id=3]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/redsolid2.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/redsolid3.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/redsolid4.png" type="Texture" id=7]
@@ -45,7 +44,6 @@
 [ext_resource path="res://assets/textures/redsolidceil4.png" type="Texture" id=43]
 [ext_resource path="res://assets/textures/redsolidceil5.png" type="Texture" id=44]
 [ext_resource path="res://assets/textures/redsolidceil6.png" type="Texture" id=45]
-[ext_resource path="res://assets/palettes/grey_palette_alt.png" type="Texture" id=46]
 [ext_resource path="res://assets/textures/greysolidtop5.png" type="Texture" id=47]
 [ext_resource path="res://assets/textures/greysolidtop2.png" type="Texture" id=48]
 [ext_resource path="res://assets/textures/greysolidtop3.png" type="Texture" id=49]
@@ -59,12 +57,11 @@
 [ext_resource path="res://assets/textures/redspikes3.png" type="Texture" id=57]
 [ext_resource path="res://assets/textures/redspikes4.png" type="Texture" id=58]
 [ext_resource path="res://assets/textures/redspikes5.png" type="Texture" id=59]
+[ext_resource path="res://assets/palettes/fall_palette.png" type="Texture" id=60]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 1 )
@@ -75,9 +72,7 @@ extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -87,11 +82,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 5 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=7]
 material = SubResource( 6 )
@@ -99,11 +92,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 6 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=9]
 material = SubResource( 8 )
@@ -111,11 +102,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 7 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=11]
 material = SubResource( 10 )
@@ -123,11 +112,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 8 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=13]
 material = SubResource( 12 )
@@ -135,11 +122,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 9 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=15]
 material = SubResource( 14 )
@@ -147,11 +132,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=16]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 10 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=17]
 material = SubResource( 16 )
@@ -159,11 +142,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 11 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=19]
 material = SubResource( 18 )
@@ -171,9 +152,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=20]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -183,9 +162,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -195,11 +172,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 14 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=25]
 material = SubResource( 24 )
@@ -207,9 +182,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -219,11 +192,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 16 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=29]
 material = SubResource( 28 )
@@ -231,11 +202,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=31]
 material = SubResource( 30 )
@@ -243,11 +212,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=32]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 18 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=33]
 material = SubResource( 32 )
@@ -255,11 +222,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=34]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 19 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=35]
 material = SubResource( 34 )
@@ -267,11 +232,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 20 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=37]
 material = SubResource( 36 )
@@ -279,11 +242,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 21 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=39]
 material = SubResource( 38 )
@@ -291,11 +252,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=40]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 22 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=41]
 material = SubResource( 40 )
@@ -303,11 +262,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=42]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 23 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=43]
 material = SubResource( 42 )
@@ -315,9 +272,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=44]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 24 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -327,11 +282,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 25 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=47]
 material = SubResource( 46 )
@@ -339,11 +292,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=48]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 26 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=49]
 material = SubResource( 48 )
@@ -351,11 +302,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=50]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=51]
 material = SubResource( 50 )
@@ -363,11 +312,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=52]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 28 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=53]
 material = SubResource( 52 )
@@ -375,11 +322,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=54]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 29 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=55]
 material = SubResource( 54 )
@@ -387,11 +332,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=56]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 30 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=57]
 material = SubResource( 56 )
@@ -399,11 +342,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=58]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 31 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=59]
 material = SubResource( 58 )
@@ -411,11 +352,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=60]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 32 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=61]
 material = SubResource( 60 )
@@ -423,9 +362,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=62]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 33 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -435,11 +372,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=64]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 34 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=65]
 material = SubResource( 64 )
@@ -447,11 +382,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=66]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 35 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=67]
 material = SubResource( 66 )
@@ -459,11 +392,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=68]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 36 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=69]
 material = SubResource( 68 )
@@ -471,11 +402,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=70]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 37 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=71]
 material = SubResource( 70 )
@@ -483,11 +412,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=72]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 38 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=73]
 material = SubResource( 72 )
@@ -495,11 +422,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=74]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 39 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=75]
 material = SubResource( 74 )
@@ -507,9 +432,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=76]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 40 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -519,11 +442,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=78]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 41 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=79]
 material = SubResource( 78 )
@@ -531,11 +452,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=80]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 42 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=81]
 material = SubResource( 80 )
@@ -543,11 +462,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=82]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 43 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=83]
 material = SubResource( 82 )
@@ -555,11 +472,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=84]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 44 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=85]
 material = SubResource( 84 )
@@ -567,11 +482,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=86]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 45 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=87]
 material = SubResource( 86 )
@@ -579,11 +492,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=88]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 47 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=89]
 material = SubResource( 88 )
@@ -593,11 +504,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=91]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 48 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=92]
 material = SubResource( 91 )
@@ -605,11 +514,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=93]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 49 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=94]
 material = SubResource( 93 )
@@ -617,11 +524,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=95]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 50 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=96]
 material = SubResource( 95 )
@@ -629,11 +534,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=97]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 51 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=98]
 material = SubResource( 97 )
@@ -641,11 +544,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=99]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 52 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=100]
 material = SubResource( 99 )
@@ -653,11 +554,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=101]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 53 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=102]
 material = SubResource( 101 )
@@ -665,11 +564,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=103]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 54 )
-shader_param/base_palette = ExtResource( 46 )
+shader_param/base_palette = ExtResource( 60 )
 
 [sub_resource type="CubeMesh" id=104]
 material = SubResource( 103 )
@@ -677,9 +574,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=105]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 55 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -691,11 +586,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=108]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 56 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=109]
 material = SubResource( 108 )
@@ -703,11 +596,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=110]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 57 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=111]
 material = SubResource( 110 )
@@ -715,11 +606,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=112]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 58 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=113]
 material = SubResource( 112 )
@@ -727,11 +616,9 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=114]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 59 )
-shader_param/base_palette = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=115]
 material = SubResource( 114 )
@@ -740,7 +627,6 @@ size = Vector3( 1, 1, 1 )
 [node name="Spatial" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
@@ -751,7 +637,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
 mesh = SubResource( 5 )
 material/0 = null
@@ -762,7 +647,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1 )
 mesh = SubResource( 7 )
 material/0 = null
@@ -773,7 +657,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -2 )
 mesh = SubResource( 9 )
 material/0 = null
@@ -784,7 +667,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -3 )
 mesh = SubResource( 11 )
 material/0 = null
@@ -795,7 +677,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -4 )
 mesh = SubResource( 13 )
 material/0 = null
@@ -806,7 +687,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -5 )
 mesh = SubResource( 15 )
 material/0 = null
@@ -817,7 +697,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid7" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -6 )
 mesh = SubResource( 17 )
 material/0 = null
@@ -828,7 +707,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolid8" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -7 )
 mesh = SubResource( 19 )
 material/0 = null
@@ -839,7 +717,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, 0 )
 mesh = SubResource( 21 )
 material/0 = null
@@ -850,7 +727,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTopLeft" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0 )
 mesh = SubResource( 23 )
 material/0 = null
@@ -861,7 +737,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTopLeft2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -1 )
 mesh = SubResource( 25 )
 material/0 = null
@@ -872,7 +747,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTopRight" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, 0 )
 mesh = SubResource( 27 )
 material/0 = null
@@ -883,7 +757,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTopRight2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, -1 )
 mesh = SubResource( 29 )
 material/0 = null
@@ -894,7 +767,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -1 )
 mesh = SubResource( 31 )
 material/0 = null
@@ -905,7 +777,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -2 )
 mesh = SubResource( 33 )
 material/0 = null
@@ -916,7 +787,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -3 )
 mesh = SubResource( 35 )
 material/0 = null
@@ -927,7 +797,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -4 )
 mesh = SubResource( 37 )
 material/0 = null
@@ -938,7 +807,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -5 )
 mesh = SubResource( 39 )
 material/0 = null
@@ -949,7 +817,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop7" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, 1, -6 )
 mesh = SubResource( 41 )
 material/0 = null
@@ -960,7 +827,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidTop8" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -7 )
 mesh = SubResource( 43 )
 material/0 = null
@@ -971,7 +837,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, 0 )
 mesh = SubResource( 45 )
 material/0 = null
@@ -982,7 +847,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -1 )
 mesh = SubResource( 47 )
 material/0 = null
@@ -993,7 +857,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -2 )
 mesh = SubResource( 49 )
 material/0 = null
@@ -1004,7 +867,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -3 )
 mesh = SubResource( 51 )
 material/0 = null
@@ -1015,7 +877,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -4 )
 mesh = SubResource( 53 )
 material/0 = null
@@ -1026,7 +887,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -5 )
 mesh = SubResource( 55 )
 material/0 = null
@@ -1037,7 +897,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot7" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -6 )
 mesh = SubResource( 57 )
 material/0 = null
@@ -1048,7 +907,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot8" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -7 )
 mesh = SubResource( 59 )
 material/0 = null
@@ -1059,7 +917,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidBot9" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -8 )
 mesh = SubResource( 61 )
 material/0 = null
@@ -1070,7 +927,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, 0 )
 mesh = SubResource( 63 )
 material/0 = null
@@ -1081,7 +937,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -1 )
 mesh = SubResource( 65 )
 material/0 = null
@@ -1092,7 +947,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -2 )
 mesh = SubResource( 67 )
 material/0 = null
@@ -1103,7 +957,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -3 )
 mesh = SubResource( 69 )
 material/0 = null
@@ -1114,7 +967,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -4 )
 mesh = SubResource( 71 )
 material/0 = null
@@ -1125,7 +977,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -5 )
 mesh = SubResource( 73 )
 material/0 = null
@@ -1136,7 +987,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidRoof7" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -6 )
 mesh = SubResource( 75 )
 material/0 = null
@@ -1147,7 +997,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, 0 )
 mesh = SubResource( 77 )
 material/0 = null
@@ -1158,7 +1007,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -1 )
 mesh = SubResource( 79 )
 material/0 = null
@@ -1169,7 +1017,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -2 )
 mesh = SubResource( 81 )
 material/0 = null
@@ -1180,7 +1027,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -3 )
 mesh = SubResource( 83 )
 material/0 = null
@@ -1191,7 +1037,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -4 )
 mesh = SubResource( 85 )
 material/0 = null
@@ -1202,7 +1047,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="BrickSolidCeil6" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -5 )
 mesh = SubResource( 87 )
 material/0 = null
@@ -1213,7 +1057,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="CloudSemisolidTop" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, 0 )
 mesh = SubResource( 89 )
 material/0 = null
@@ -1225,7 +1068,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolidTop2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -1 )
 mesh = SubResource( 92 )
 material/0 = null
@@ -1237,7 +1079,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolidTop3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -2 )
 mesh = SubResource( 94 )
 material/0 = null
@@ -1249,7 +1090,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolidTop4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -3 )
 mesh = SubResource( 96 )
 material/0 = null
@@ -1261,7 +1101,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolid" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
 mesh = SubResource( 98 )
 material/0 = null
@@ -1273,7 +1112,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolid2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -1 )
 mesh = SubResource( 100 )
 material/0 = null
@@ -1285,7 +1123,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolid3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -2 )
 mesh = SubResource( 102 )
 material/0 = null
@@ -1297,7 +1134,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="CloudSemisolid4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -3 )
 mesh = SubResource( 104 )
 material/0 = null
@@ -1309,7 +1145,6 @@ transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
 shape = SubResource( 90 )
 
 [node name="Spikes" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
 mesh = SubResource( 106 )
 material/0 = null
@@ -1321,7 +1156,6 @@ transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
 shape = SubResource( 107 )
 
 [node name="Spikes2" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -1 )
 mesh = SubResource( 109 )
 material/0 = null
@@ -1333,7 +1167,6 @@ transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
 shape = SubResource( 107 )
 
 [node name="Spikes3" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -2 )
 mesh = SubResource( 111 )
 material/0 = null
@@ -1345,7 +1178,6 @@ transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
 shape = SubResource( 107 )
 
 [node name="Spikes4" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -3 )
 mesh = SubResource( 113 )
 material/0 = null
@@ -1357,7 +1189,6 @@ transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
 shape = SubResource( 107 )
 
 [node name="Spikes5" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -4 )
 mesh = SubResource( 115 )
 material/0 = null

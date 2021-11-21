@@ -14,7 +14,7 @@ func isActive():
     return true
 
 func activate():
-    transition.fade_to("res://levels/IntroDungeon/IntroScene2Forest.tscn")
+    transition.fade_to("res://levels/IntroDungeon/IntroScene1.tscn")
 
 func passiveActivate(delta):
     pass
