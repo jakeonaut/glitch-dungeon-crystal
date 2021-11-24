@@ -22,6 +22,7 @@
 
 [node name="level" type="Node"]
 script = ExtResource( 1 )
+starting_glitch_type = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

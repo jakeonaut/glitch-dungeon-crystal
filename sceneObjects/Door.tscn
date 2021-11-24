@@ -85,7 +85,7 @@ script = ExtResource( 5 )
 max_frames = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "doorClose"
+autoplay = "doorOpen"
 anims/doorClose = SubResource( 2 )
 anims/doorOpen = SubResource( 3 )
 anims/locked = SubResource( 4 )
