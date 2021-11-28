@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/npc_med_sheet.png-7ec18af809c36e8696da0b2dfac8b147.stex"
+path="res://.import/elder_sprite.png-e5ced5837936de1b3ba95174ec3a3c15.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/npc_med_sheet.png"
-dest_files=[ "res://.import/npc_med_sheet.png-7ec18af809c36e8696da0b2dfac8b147.stex" ]
+source_file="res://assets/sprites/elder_sprite.png"
+dest_files=[ "res://.import/elder_sprite.png-e5ced5837936de1b3ba95174ec3a3c15.stex" ]
 
 [params]
 

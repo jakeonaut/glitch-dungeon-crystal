@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glitchspellmenu_old.png-b1ad601045383bb287ee2dddd1f6d7c7.stex"
+path="res://.import/violet_palette.png-162fa6e355ecd05f100ae1a7833d49aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/glitchspellmenu_old.png"
-dest_files=[ "res://.import/glitchspellmenu_old.png-b1ad601045383bb287ee2dddd1f6d7c7.stex" ]
+source_file="res://assets/palettes/violet_palette.png"
+dest_files=[ "res://.import/violet_palette.png-162fa6e355ecd05f100ae1a7833d49aa.stex" ]
 
 [params]
 

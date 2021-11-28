@@ -24,9 +24,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -36,9 +34,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -48,9 +44,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -60,9 +54,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -72,9 +64,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 7 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -84,9 +74,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 8 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -96,9 +84,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 9 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -108,9 +94,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -120,9 +104,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -132,9 +114,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -144,9 +124,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -156,9 +134,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -168,9 +144,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=25]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -180,9 +154,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -192,9 +164,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -204,9 +174,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 18 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -216,9 +184,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 19 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -228,9 +194,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=35]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 20 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -240,9 +204,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=37]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 21 )
 shader_param/base_palette = ExtResource( 2 )
 
@@ -252,9 +214,7 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=39]
 shader = ExtResource( 1 )
-shader_param/specular = null
-shader_param/metallic = null
-shader_param/roughness = null
+shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 18 )
 shader_param/base_palette = ExtResource( 2 )
 
