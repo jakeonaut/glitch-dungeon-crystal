@@ -32,7 +32,6 @@ func preProcess():
 func _process(delta):
     preProcess()
     animate(delta)
-    self.rotate_y(delta*2)
     
 func animate(delta):
     animation_counter += delta

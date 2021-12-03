@@ -39,14 +39,15 @@ shape = SubResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 3 )
-pixel_size = 0.12
+pixel_size = 0.1
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 3 )
 hframes = 8
+vframes = 5
+frame = 16
 script = ExtResource( 5 )
-frame_delay = 0.15
-should_randomize_frame_delay = true
+frame_delay = 0.2
 max_frames = 8
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]

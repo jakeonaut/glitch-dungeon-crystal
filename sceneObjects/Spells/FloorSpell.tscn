@@ -58,12 +58,14 @@ script = ExtResource( 9 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 3 )
-pixel_size = 0.12
+pixel_size = 0.1
 alpha_cut = 2
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 5
 script = ExtResource( 4 )
+frame_delay = 0.2
+max_frames = 5
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
