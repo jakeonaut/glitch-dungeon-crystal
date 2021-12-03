@@ -129,7 +129,7 @@ script = ExtResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9685, 3.94351, -0.769371 )
 
 [node name="FeatherSpell" parent="." instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8026, 4.43228, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8291, 4.43228, 0 )
 
 [node name="WallTorch" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, 0 )

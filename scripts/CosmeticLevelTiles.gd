@@ -4,6 +4,7 @@ extends GridMap
 var grey_cosmetic_tiles = preload("res://sceneObjects/tiles/grey_cosmetic_tiles.tres")
 var green_cosmetic_tiles = preload("res://sceneObjects/tiles/green_cosmetic_tiles.tres")
 var red_cosmetic_tiles = preload("res://sceneObjects/tiles/red_cosmetic_tiles.tres")
+var yellow_cosmetic_tiles = preload("res://sceneObjects/tiles/yellow_cosmetic_tiles.tres")
 
 var tile_name_dict = {}
 
@@ -90,6 +91,11 @@ func featherGlitch(palette):
     
 func floorGlitch(palette):
     set_mesh_library(red_cosmetic_tiles)
+    properlySetTiles()
+    changeColorPalette(palette)
+
+func ladderGlitch(palette):
+    set_mesh_library(yellow_cosmetic_tiles)
     properlySetTiles()
     changeColorPalette(palette)
 

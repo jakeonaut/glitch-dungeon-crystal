@@ -30,7 +30,12 @@ var tile_index_array = []
 var tile_name_array = []
 
 func setRandomTileNameOfType(newName, num_rand, cell_index, offset = 0):
-    setTileNameNum(newName, (randi() % num_rand) + offset, cell_index)
+    var rand_int = randi() % num_rand
+    # make forest spirals and yellow holes spawn a little less often
+    if newName == "BrickSolid" and rand_int == 2:
+        if randi() % 3 <= 1:
+            rand_int = randi() % num_rand
+    setTileNameNum(newName, rand_int + offset, cell_index)
 
 func setTileNameNum(newName, num, cell_index):
     if num != 0:
@@ -173,7 +178,7 @@ func ladderGlitch():
     set_mesh_library(yellow_tiles)
     # changeColorPalette(yellow_palette, black_palette)
     properlySetTiles()
-    cosmeticLevelTiles.normalGlitch(yellow_palette)
+    cosmeticLevelTiles.ladderGlitch(yellow_palette)
 
 func walkThroughWallsGlitch():
     set_mesh_library(grey_tiles) # set_mesh_library(white_tiles)
