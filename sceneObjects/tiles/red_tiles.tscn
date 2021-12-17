@@ -494,7 +494,7 @@ size = Vector3( 1, 1, 1 )
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 47 )
-shader_param/base_palette = ExtResource( 60 )
+shader_param/base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=89]
 material = SubResource( 88 )
