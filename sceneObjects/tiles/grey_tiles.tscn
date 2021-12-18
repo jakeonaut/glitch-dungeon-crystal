@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=2]
+[gd_scene load_steps=171 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -50,6 +50,11 @@
 [ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=48]
 [ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=49]
 [ext_resource path="res://assets/textures/greyspikes5.png" type="Texture" id=50]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=51]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=52]
+[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=53]
+[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=54]
+[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=55]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -565,7 +570,7 @@ material = SubResource( 103 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=105]
-shader = ExtResource( 1 )
+shader = ExtResource( 55 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 46 )
 shader_param/base_palette = ExtResource( 2 )
@@ -577,40 +582,40 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="RayShape" id=107]
 
 [sub_resource type="ShaderMaterial" id=108]
-shader = ExtResource( 1 )
+shader = ExtResource( 55 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 47 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 54 )
 
 [sub_resource type="CubeMesh" id=109]
 material = SubResource( 108 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=110]
-shader = ExtResource( 1 )
+shader = ExtResource( 55 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 48 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 52 )
 
 [sub_resource type="CubeMesh" id=111]
 material = SubResource( 110 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=112]
-shader = ExtResource( 1 )
+shader = ExtResource( 55 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 49 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 53 )
 
 [sub_resource type="CubeMesh" id=113]
 material = SubResource( 112 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=114]
-shader = ExtResource( 1 )
+shader = ExtResource( 55 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 50 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 51 )
 
 [sub_resource type="CubeMesh" id=115]
 material = SubResource( 114 )

@@ -21,11 +21,13 @@ func _ready():
     set_physics_process(true)
     walk_speed = 5
     
-    if behavior_walking:
-        mySprite.frame_delay = 0.2
-        mySprite.updateBaseFrame(0, 1)
+    #if behavior_walking:
+    #    mySprite.frame_delay = 0.2
+    #    mySprite.updateBaseFrame(0, 1)
     if behavior_jumping:
         grav = 60
+
+    mySprite.updateBaseFrame(randi() % 6, randi() % 3)
 
 func _process(delta):
     if behavior_walking and horizontal_collision:

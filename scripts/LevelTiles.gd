@@ -141,8 +141,8 @@ func changeColorPalette(palette, palette_alt):
                 material.set_shader_param("base_palette", palette_alt)
             else:
                 material.set_shader_param("base_palette", palette)
-        mesh.set_material(material)
-        mesh_library.set_item_mesh(item_id, mesh)
+        # mesh.set_material(material)
+        # mesh_library.set_item_mesh(item_id, mesh)
 
 func properlySetTiles():
     for i in range(len(tile_index_array)):
@@ -157,31 +157,31 @@ func normalGlitch():
     cosmeticLevelTiles.normalGlitch(grey_palette)
 
 func floorGlitch():
-    set_mesh_library(red_tiles)
-    # changeColorPalette(tidepool_palette, red_palette)
+    # set_mesh_library(red_tiles)
+    changeColorPalette(red_palette, red_palette)
     properlySetTiles()
     cosmeticLevelTiles.floorGlitch(red_palette)
 
 func featherGlitch():
-    set_mesh_library(green_tiles)
-    # changeColorPalette(tide_pool_palette, green_palette)
+    # set_mesh_library(green_tiles)
+    changeColorPalette(green_palette, green_palette)
     properlySetTiles()
     cosmeticLevelTiles.featherGlitch(green_palette)
 
 func invisibleGlitch():
-    set_mesh_library(grey_tiles) # set_mesh_library(black_tiles)
-    # changeColorPalette(black_palette, white_palette)
+    # set_mesh_library(grey_tiles) # set_mesh_library(black_tiles)
+    changeColorPalette(black_palette, black_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(black_palette)
     
 func ladderGlitch():
-    set_mesh_library(yellow_tiles)
-    # changeColorPalette(yellow_palette, black_palette)
+    # set_mesh_library(yellow_tiles)
+    changeColorPalette(yellow_palette, yellow_palette)
     properlySetTiles()
     cosmeticLevelTiles.ladderGlitch(yellow_palette)
 
 func walkThroughWallsGlitch():
-    set_mesh_library(grey_tiles) # set_mesh_library(white_tiles)
-    changeColorPalette(white_palette, white_tiles)
+    # set_mesh_library(white_tiles)
+    changeColorPalette(white_palette, white_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(white_palette)

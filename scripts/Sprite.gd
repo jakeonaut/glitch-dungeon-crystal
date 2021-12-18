@@ -46,6 +46,7 @@ func animate(delta):
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()
+            
 
 func randomizeFrameDelay():
     frame_delay = rand_range(original_frame_delay/4, original_frame_delay*2.2)

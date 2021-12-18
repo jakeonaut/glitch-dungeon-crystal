@@ -101,27 +101,32 @@ func tryToRespawn():
     self.overrideLevelRespawnEvent()
 
 
-# TODO(jaketrower): Really bad performance?
 func normalGlitch():
     levelTiles.normalGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", grey_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", grey_palette)
 
 func floorGlitch():
     levelTiles.floorGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", red_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", red_palette)
 
 func featherGlitch():
     levelTiles.featherGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", green_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", green_palette)
 
 func ladderGlitch():
     levelTiles.ladderGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", yellow_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", yellow_palette)
 
 func invisibleGlitch():
     levelTiles.invisibleGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", black_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", black_palette)
 
 func walkThroughWallsGlitch():
     levelTiles.walkThroughWallsGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", white_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", white_palette)

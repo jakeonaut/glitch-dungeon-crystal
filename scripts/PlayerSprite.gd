@@ -21,25 +21,25 @@ func preProcess():
     else:
         frame_delay = 0.4
     
-    var shouldFaceLeft = not parent.pressingMoveRight() and (parent.pressingMoveLeft() or isFacingLeft())
-    var shouldFaceRight = not parent.pressingMoveLeft() and (parent.pressingMoveRight() or isFacingRight())
-    if parent.on_ground:
-        if shouldFaceRight:
-            walkRight()
-        elif shouldFaceLeft:
-            walkLeft()
-    else:
-        # jumping up
-        if parent.linear_velocity.y > 0:
-            if shouldFaceRight:
-                jumpRight()
-            elif shouldFaceLeft:
-                jumpLeft()
-        if parent.linear_velocity.y < 0:
-            if shouldFaceRight:
-                fallRight()
-            elif shouldFaceLeft:
-                fallLeft()
+    # var shouldFaceLeft = not parent.pressingMoveRight() and (parent.pressingMoveLeft() or self.isFacingLeft())
+    # var shouldFaceRight = not parent.pressingMoveLeft() and (parent.pressingMoveRight() or self.isFacingRight())
+    # if parent.on_ground:
+    #     if shouldFaceRight:
+    #         walkRight()
+    #     elif shouldFaceLeft:
+    #         walkLeft()
+    # else:
+    #     # jumping up
+    #     if parent.linear_velocity.y > 0:
+    #         if shouldFaceRight:
+    #             jumpRight()
+    #         elif shouldFaceLeft:
+    #             jumpLeft()
+    #     if parent.linear_velocity.y < 0:
+    #         if shouldFaceRight:
+    #             fallRight()
+    #         elif shouldFaceLeft:
+    #             fallLeft()
                 
 
 func setNormalClothes():

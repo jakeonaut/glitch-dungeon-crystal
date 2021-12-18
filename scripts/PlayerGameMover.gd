@@ -1,6 +1,5 @@
 extends "GameMover.gd"
 
-onready var camera = get_node("CameraY") # the "camera"
 onready var fallSound = get_node("Sounds/FallSound")
 
 var broom_timer = 0
@@ -9,10 +8,6 @@ var broom_state = 0
 var can_broom = global.can_broom
 var jump_press_timer = 999
 var jump_press_time_limit = 5
-
-func getCamera(): return camera
-func getCameraX(): return camera.get_node("CameraX")
-func getTrueCamera(): return camera.get_node("CameraX/Camera")
 
 func _ready():
     set_physics_process(true)
@@ -31,9 +26,10 @@ func respawn():
 
 # param transition name only used as a crappy enum
 func playerRespawn(transition_name):
+    if transitioning: return
+        
     fallSound.play()
     global.isRespawning = true
-    global.cameraRotation = getCamera().rotation_degrees.y
     # global transition scene, see res://scripts/transition.gd
     var currLevelPath = get_tree().get_root().get_node("level").filename
     transitioning = true

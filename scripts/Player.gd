@@ -111,6 +111,15 @@ func _process(delta):
         applyNextGlitch()
     if Input.is_action_just_pressed("ui_glitch_prev"):
         applyPrevGlitch()
+        
+    var DEATH_MARGIN = 5
+    if self.getCamera().rightmost_x > -999:
+        if global_transform.origin.x > self.getCamera().rightmost_x + DEATH_MARGIN or \
+        global_transform.origin.x < self.getCamera().leftmost_x - DEATH_MARGIN or \
+        global_transform.origin.y > self.getCamera().topmost_y + DEATH_MARGIN or \
+        global_transform.origin.y < self.getCamera().botmost_y - DEATH_MARGIN:
+            print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
+            self.respawn()
 
     if broom_state != 0:
         broom_timer += (delta*22)
@@ -175,6 +184,14 @@ func tryRotateCamera(delta):
 # @override
 func tryDieToEnemy():
     if glitch_form != GlitchForm.INVISIBLE and not transitioning:
+        hurtSound.play()
+        global.pauseGame = true
+        global.pauseMoveInput = true
+        global.isRespawning = true
+        get_tree().get_root().get_node("level").tryToRespawn()
+        
+func tryDieFromOffscreen():
+    if not transitioning:
         hurtSound.play()
         global.pauseGame = true
         global.pauseMoveInput = true

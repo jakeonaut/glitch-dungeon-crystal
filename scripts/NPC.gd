@@ -49,6 +49,7 @@ func passiveActivate(delta):
         textBox.passiveInteract(delta, is_important)
 
 func stopPassiveActivate():
+    # TODO(jaketrower): TODO on a timer...
     if global.activeInteractor != null:
         global.activeInteractor.stopInteract()
         global.activeInteractor = null

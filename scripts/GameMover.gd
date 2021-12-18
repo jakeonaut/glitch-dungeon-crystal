@@ -10,9 +10,9 @@ onready var level = get_tree().get_root().get_node("level")
 
 var levelTiles = null
 func getLevelTiles():
-    if levelTiles == null:
-        levelTiles = level.levelTiles
-    return levelTiles
+	if levelTiles == null:
+		levelTiles = level.levelTiles
+	return levelTiles
 
 onready var smallInteractionArea = get_node("SmallInteractionArea")
 onready var collisionShape = get_node("CollisionShape")
@@ -41,6 +41,15 @@ var just_landed = false
 var spawn_origin
 var last_grounded_y = 0
 var falling_y_offset = 16
+var fall_timer = 0
+
+enum PhysicsState {
+	NORMAL,
+	COLLAPSED,
+	CAN_WAKE_UP,
+	WAKING_UP,
+}
+var physics_state = PhysicsState.NORMAL
 
 var linear_velocity = Vector3()
 var lv = linear_velocity
@@ -61,28 +70,28 @@ var DNUMHORZ = 65
 
 # GlitchForm variables
 enum GlitchForm {
-    NORMAL,
-    FLOOR,
-    FEATHER,
-    INVISIBLE,
-    LADDER,
-    WALK_THROUGH_WALLS,
+	NORMAL,
+	FLOOR,
+	FEATHER,
+	INVISIBLE,
+	LADDER,
+	WALK_THROUGH_WALLS,
 }
 func getNextGlitch():
-    if glitch_form == GlitchForm.NORMAL: return GlitchForm.FLOOR
-    if glitch_form == GlitchForm.FLOOR: return GlitchForm.FEATHER
-    if glitch_form == GlitchForm.FEATHER: return GlitchForm.INVISIBLE
-    if glitch_form == GlitchForm.INVISIBLE: return GlitchForm.LADDER
-    if glitch_form == GlitchForm.LADDER: return GlitchForm.WALK_THROUGH_WALLS
-    if glitch_form == GlitchForm.WALK_THROUGH_WALLS: return GlitchForm.NORMAL
+	if glitch_form == GlitchForm.NORMAL: return GlitchForm.FLOOR
+	if glitch_form == GlitchForm.FLOOR: return GlitchForm.FEATHER
+	if glitch_form == GlitchForm.FEATHER: return GlitchForm.INVISIBLE
+	if glitch_form == GlitchForm.INVISIBLE: return GlitchForm.LADDER
+	if glitch_form == GlitchForm.LADDER: return GlitchForm.WALK_THROUGH_WALLS
+	if glitch_form == GlitchForm.WALK_THROUGH_WALLS: return GlitchForm.NORMAL
 func getPrevGlitch():
-    if glitch_form == GlitchForm.NORMAL: return GlitchForm.WALK_THROUGH_WALLS
-    if glitch_form == GlitchForm.FLOOR: return GlitchForm.NORMAL
-    if glitch_form == GlitchForm.FEATHER: return GlitchForm.FLOOR
-    if glitch_form == GlitchForm.INVISIBLE: return GlitchForm.FEATHER
-    if glitch_form == GlitchForm.LADDER: return GlitchForm.INVISIBLE
-    if glitch_form == GlitchForm.WALK_THROUGH_WALLS: return GlitchForm.LADDER
-    
+	if glitch_form == GlitchForm.NORMAL: return GlitchForm.WALK_THROUGH_WALLS
+	if glitch_form == GlitchForm.FLOOR: return GlitchForm.NORMAL
+	if glitch_form == GlitchForm.FEATHER: return GlitchForm.FLOOR
+	if glitch_form == GlitchForm.INVISIBLE: return GlitchForm.FEATHER
+	if glitch_form == GlitchForm.LADDER: return GlitchForm.INVISIBLE
+	if glitch_form == GlitchForm.WALK_THROUGH_WALLS: return GlitchForm.LADDER
+	
 var glitch_form = GlitchForm.NORMAL
 var feather_fall_timer = 0
 var feather_fall_initial_time_limit = 20
@@ -92,7 +101,7 @@ var feather_jump_time_limit = 10
 var feather_jump_partial_time_limit = 7
 
 func isFeatherLike():
-    return glitch_form == GlitchForm.FEATHER
+	return glitch_form == GlitchForm.FEATHER
 
 # Physics variables
 var floor_glitch_walk_speed = 3
@@ -118,761 +127,791 @@ var horizontal_collision = false
 
 
 func _ready():
-    set_process_input(true)
-    set_process(true)
-    set_physics_process(true)
-    float_timer = float_time_limit
-    spawn_origin = global_transform.origin
-    last_grounded_y = spawn_origin.y
+	set_process_input(true)
+	set_process(true)
+	set_physics_process(true)
+	float_timer = float_time_limit
+	spawn_origin = global_transform.origin
+	last_grounded_y = spawn_origin.y
 
 func _process(delta):
-    pass
+	pass
 
 func _physics_process(delta):
-    if global.pauseGame: return
+	if global.pauseGame: return
 
-    is_touching_water = smallInteractionArea.is_touching_water
+	is_touching_water = smallInteractionArea.is_touching_water
 
-    processPhysics(delta) #super
+	processPhysics(delta) #super
 
-    # if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
-    #     respawn()
-    #     is_falling = true
-       
+	# if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
+	#     respawn()
+	#     is_falling = true
+	   
 func isActive():
-    return visible
+	return visible
 
 func tryDieToEnemy():
-    pass    
-    
+	pass    
+	
 func getHitByBroom():
-    pass
-    
+	pass
+	
 func getCamera():
-    return get_tree().get_root().get_node("level").gameCamera
+	return get_tree().get_root().get_node("level").gameCamera
 
 func respawn():
-    hv = Vector3(0, 0, 0)
-    linear_velocity = Vector3(0, 0, 0)
+	hv = Vector3(0, 0, 0)
+	linear_velocity = Vector3(0, 0, 0)
 
-    global_transform.origin = spawn_origin
-    global_transform.origin.y += 2
-    last_grounded_y = global_transform.origin.y 
+	global_transform.origin = spawn_origin
+	global_transform.origin.y += 2
+	last_grounded_y = global_transform.origin.y 
 
 func processPhysics(delta):
-    if grav == null: grav = 0 # ???
+	if grav == null: grav = 0 # ???
 
-    lv = linear_velocity
-    g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
-    
-    if not is_touching_water:
-        is_floating = false
-    applyGravity(delta)
-    
-    up = -g.normalized() # (up is against gravity)
-    vv = up.dot(lv) # vertical velocity
-    hv = lv - up * vv # horizontal velocity
-    
-    applyTerminalVelocity(delta)
-    
-    processInputs(delta)
-    if is_touching_water:
-        hv -= (hv.normalized()*delta*22)
-        if abs(hv.length()) < delta*22:
-            hv = Vector3()
-            dir = Vector3(0.0, 0.0, 0.0)
-        
-    lv = hv + (up * vv)
-    
-    linear_velocity = handleCollisionsAndMove(lv, delta)
-    last_vv = vv
+	lv = linear_velocity
+	g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
+	
+	if not is_touching_water:
+		is_floating = false
+	applyGravity(delta)
+	
+	up = -g.normalized() # (up is against gravity)
+	vv = up.dot(lv) # vertical velocity
+	hv = lv - up * vv # horizontal velocity
+	
+	applyTerminalVelocity(delta)
+	
+	# TODO(jaketrower): This code really sucks.
+	if physics_state == PhysicsState.NORMAL:
+		processInputs(delta)
+	elif physics_state == PhysicsState.COLLAPSED:
+		hv = Vector3()
+		dir = Vector3(0.0, 0.0, 0.0)
+		if not aniPlayer or not aniPlayer.is_playing():
+			physics_state = PhysicsState.CAN_WAKE_UP
+	elif physics_state == PhysicsState.CAN_WAKE_UP:
+		var pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight() or pressingMoveForward() or pressingMoveDown()
+		var pressing_jump = justPressedJump() or recentlyJustPressedJump()
+		if pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground:
+			if aniPlayer:
+				aniPlayer.play("wakeup")
+			physics_state = PhysicsState.WAKING_UP
+	elif physics_state == PhysicsState.WAKING_UP:
+		if not aniPlayer or not aniPlayer.is_playing():
+			physics_state = PhysicsState.NORMAL
 
-    postProcessInputs(delta)
-    prev_dir = dir
-    
-    just_landed = false
-    if not was_on_ground and on_ground: # I just landed!!
-        landed()
-        just_landed = true
-    if aniPlayer != null:
-        if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
-            aniPlayer.play("stand")
-        elif aniPlayer.assigned_animation == "jump" and on_ground:
-            aniPlayer.play("land")
 
-    if not is_touching_water and was_touching_water:
-        float_timer = 0
-    if was_on_ground and not on_ground: # I just fell off platform!
-        was_just_on_ground_timer = 0
-    was_touching_water = is_touching_water
+	if is_touching_water:
+		hv -= (hv.normalized()*delta*22)
+		if abs(hv.length()) < delta*22:
+			hv = Vector3()
+			dir = Vector3(0.0, 0.0, 0.0)
+		
+	lv = hv + (up * vv)
+	
+	linear_velocity = handleCollisionsAndMove(lv, delta)
+	last_vv = vv
 
-    if was_just_on_ground_timer <= was_just_on_ground_time_limit:
-        was_just_on_ground_timer += (delta*22)
-        
+	postProcessInputs(delta)
+	prev_dir = dir
+	
+	just_landed = false
+	if not was_on_ground and on_ground: # I just landed!!
+		landed()
+		just_landed = true
+	if aniPlayer != null:
+		if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
+			aniPlayer.play("stand")
+		elif aniPlayer.assigned_animation == "jump" and on_ground:
+			aniPlayer.play("land")
+
+	if not is_touching_water and was_touching_water:
+		float_timer = 0
+	if was_on_ground and not on_ground: # I just fell off platform!
+		was_just_on_ground_timer = 0
+	was_touching_water = is_touching_water
+
+	if was_just_on_ground_timer <= was_just_on_ground_time_limit:
+		was_just_on_ground_timer += (delta*22)
+		
 func applyGravity(delta):
-    if global.pauseMoveInput:
-        g = Vector3(0, 0, 0)
-        vv = 0
-    elif is_floating:
-        # somehow, a positive (upwards) gravity causes a jump (normally pushing up) to invert (push down) 
-        g = Vector3(0, grav/2, 0)
-        # on_ground = false
-    elif smallInteractionArea.is_touching_water:
-        g = Vector3(0, -grav/3, 0)
-    elif isFeatherLike():
-        if pressingDown() or (feather_fall_time_limit >= feather_fall_time_limit and not pressingJump()):
-            g = Vector3(0, -grav/2, 0)
-        else:
-            g = Vector3(0, -grav/3, 0)
-    else:
-        g = Vector3(0, -grav, 0)
+	if global.pauseMoveInput:
+		g = Vector3(0, 0, 0)
+		vv = 0
+	elif is_floating:
+		# somehow, a positive (upwards) gravity causes a jump (normally pushing up) to invert (push down) 
+		g = Vector3(0, grav/2, 0)
+		# on_ground = false
+	elif smallInteractionArea.is_touching_water:
+		g = Vector3(0, -grav/3, 0)
+	elif isFeatherLike():
+		if pressingDown() or (feather_fall_time_limit >= feather_fall_time_limit and not pressingJump()):
+			g = Vector3(0, -grav/2, 0)
+		else:
+			g = Vector3(0, -grav/3, 0)
+	else:
+		g = Vector3(0, -grav, 0)
 
-    if not on_ground or glitch_form != GlitchForm.FLOOR:
-        lv += g * delta
-        if lv.y < 0 and not on_ground and aniPlayer and (aniPlayer.current_animation != "jumpSquat" and aniPlayer.current_animation != "jumpStart" and \
-           aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart"):
-            aniPlayer.clear_queue()
-            aniPlayer.stop()
-            aniPlayer.queue("fallStart")
-            aniPlayer.queue("fall")
+	if not on_ground or glitch_form != GlitchForm.FLOOR:
+		lv += g * delta
+		fall_timer += (delta*22)
+		if lv.y < 0 and not on_ground and aniPlayer and (aniPlayer.current_animation != "jumpSquat" and aniPlayer.current_animation != "jumpStart" and \
+		   aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart"):
+			aniPlayer.clear_queue()
+			aniPlayer.stop()
+			aniPlayer.queue("fallStart")
+			aniPlayer.queue("fall")
 
 func applyTerminalVelocity(delta):
-    feather_fall_timer += (delta*22)
-    if smallInteractionArea.is_touching_water or glitch_form == GlitchForm.FEATHER:
-        if pressingJump() and feather_fall_timer < feather_fall_initial_time_limit:
-            terminal_vel = water_terminal_vel/2
-        elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
-            terminal_vel = true_terminal_vel
-            feather_fall_timer = feather_fall_time_limit
-        else:
-            terminal_vel = water_terminal_vel
-    else:
-        terminal_vel = true_terminal_vel
-        if pressingJump():
-            feather_fall_timer = 0
+	feather_fall_timer += (delta*22)
+	if smallInteractionArea.is_touching_water or glitch_form == GlitchForm.FEATHER:
+		if pressingJump() and feather_fall_timer < feather_fall_initial_time_limit:
+			terminal_vel = water_terminal_vel/2
+		elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
+			terminal_vel = true_terminal_vel
+			feather_fall_timer = feather_fall_time_limit
+		else:
+			terminal_vel = water_terminal_vel
+	else:
+		terminal_vel = true_terminal_vel
+		if pressingJump():
+			feather_fall_timer = 0
 
-    if vv < -terminal_vel:
-        vv = -terminal_vel
+	if vv < -terminal_vel:
+		vv = -terminal_vel
 
-    if glitch_form == GlitchForm.FLOOR and on_ground:
-        vv = 0
+	if glitch_form == GlitchForm.FLOOR and on_ground:
+		vv = 0
 
 func processInputs(delta):
-    processJumpInputs(delta)
-    processHorizontalInputs(delta)
-    if justPressedDown():
-        on_ground = false
+	processJumpInputs(delta)
+	processHorizontalInputs(delta)
+	if justPressedDown():
+		on_ground = false
 
-    # fail safe...
-    if vv > jump_force*2:
-        vv = jump_force*2
-        if was_walking_into_wall and not isWalkingIntoWall():
-            vv = 1
-    was_walking_into_wall = isWalkingIntoWall()
-    if was_walking_into_wall and glitch_form == GlitchForm.LADDER:
-        vv = 6
-        # ladder_timer += (delta*22)
-        # # CLIMB BABY!!!!
-        # if ladder_timer < 8:
-        #     vv = -1
-        # if ladder_timer >= 8:
-        #     ladder_timer = 0
-        #     vv = jump_force * 8
-    was_pressing_horizontal_input = is_pressing_horizontal_input
+	# fail safe...
+	if vv > jump_force*2:
+		vv = jump_force*2
+		if was_walking_into_wall and not isWalkingIntoWall():
+			vv = 1
+	was_walking_into_wall = isWalkingIntoWall()
+	if was_walking_into_wall and glitch_form == GlitchForm.LADDER:
+		vv = 6
+		# ladder_timer += (delta*22)
+		# # CLIMB BABY!!!!
+		# if ladder_timer < 8:
+		#     vv = -1
+		# if ladder_timer >= 8:
+		#     ladder_timer = 0
+		#     vv = jump_force * 8
+
+	was_pressing_horizontal_input = is_pressing_horizontal_input
 
 func justPressedDown():
-    return false
-    
+	return false
+	
 func pressingDown():
-    return false
+	return false
 
 func justPressedJump():
-    return false
-    
+	return false
+	
 func recentlyJustPressedJump():
-    return false
+	return false
 
 func pressingJump():
-    return false
+	return false
 
 func pressingMoveForward():
-    return false
+	return false
 
 func pressingMoveDown():
-    return false
+	return false
 
 func pressingMoveLeft():
-    return false
+	return false
 
 func pressingMoveRight():
-    return false
+	return false
 
 func processJumpInputs(delta):
-    # jump
-    if (justPressedJump() or recentlyJustPressedJump()) and not global.pauseMoveInput: 
-        # Jump from the water
-        if smallInteractionArea.is_touching_water:
-            if is_floating:
-                vv = -jump_force / 2
-            else:
-                vv = jump_force / 2
+	# jump
+	if (justPressedJump() or recentlyJustPressedJump()) and not global.pauseMoveInput: 
+		# Jump from the water
+		if smallInteractionArea.is_touching_water:
+			if is_floating:
+				vv = -jump_force / 2
+			else:
+				vv = jump_force / 2
 
-            if smallInteractionArea.is_touching_water and wetJumpSound != null:
-                wetJumpSound.play()
-            elif jumpSound != null: 
-                jumpSound.play()
-            on_ground = false
-            has_just_jumped_timer = -has_just_jumped_time_limit
-            feather_fall_timer = 0
-        # Jump from the ground
-        elif isKindOfOnGround():
-            jumped_from_true_ground = truly_on_ground
-            jump_squat_jump_input_timer = 0
-            feather_jump_timer = 0
-            if not aniPlayer:
-                jump_squat_jump_input_timer = 1
-                actuallyApplyJump()
+			if smallInteractionArea.is_touching_water and wetJumpSound != null:
+				wetJumpSound.play()
+			elif jumpSound != null: 
+				jumpSound.play()
+			on_ground = false
+			has_just_jumped_timer = -has_just_jumped_time_limit
+			feather_fall_timer = 0
+		# Jump from the ground
+		elif isKindOfOnGround():
+			jumped_from_true_ground = truly_on_ground
+			jump_squat_jump_input_timer = 0
+			feather_jump_timer = 0
+			if not aniPlayer:
+				jump_squat_jump_input_timer = 1
+				actuallyApplyJump()
 
-            if aniPlayer and not "jump" in aniPlayer.assigned_animation:
-                aniPlayer.clear_queue()
-                aniPlayer.play("jumpSquat", -1, .6 if isFeatherLike() else 1.0)
-                aniPlayer.queue("jumpStart")
-                aniPlayer.queue("jump")
+			if aniPlayer and not "jump" in aniPlayer.assigned_animation:
+				aniPlayer.clear_queue()
+				aniPlayer.play("jumpSquat", -1, .6 if isFeatherLike() else 1.0)
+				aniPlayer.queue("jumpStart")
+				aniPlayer.queue("jump")
 
-    if is_touching_water:
-        if justPressedJump() and not global.pauseMoveInput:
-            float_timer = 0
-            is_floating = false
-        elif pressingJump() and not global.pauseMoveInput:
-            float_timer += (delta*22)
-            if float_timer >= big_float_time_limit:
-                is_floating = true
-                float_timer = 0
-        elif not pressingJump():
-            float_timer += (delta*22)
-            if on_ground:
-                is_floating = true
-                float_timer = 0
-            elif float_timer >= big_float_time_limit:
-                is_floating = false
-                float_timer = 0
-    else: 
-        is_floating = false
-        float_timer = 0
-        if pressingJump() and was_touching_water and not global.pauseMoveInput:
-            vv = (jump_force) / 6
+	if is_touching_water:
+		fall_timer = 0
+		if justPressedJump() and not global.pauseMoveInput:
+			float_timer = 0
+			is_floating = false
+		elif pressingJump() and not global.pauseMoveInput:
+			float_timer += (delta*22)
+			if float_timer >= big_float_time_limit:
+				is_floating = true
+				float_timer = 0
+		elif not pressingJump():
+			float_timer += (delta*22)
+			if on_ground:
+				is_floating = true
+				float_timer = 0
+			elif float_timer >= big_float_time_limit:
+				is_floating = false
+				float_timer = 0
+	else: 
+		is_floating = false
+		float_timer = 0
+		if pressingJump() and was_touching_water and not global.pauseMoveInput:
+			vv = (jump_force) / 6
 
-            on_ground = false
-            if jumpSound != null: jumpSound.play()
-            has_just_jumped_timer = -has_just_jumped_time_limit
+			on_ground = false
+			if jumpSound != null: jumpSound.play()
+			has_just_jumped_timer = -has_just_jumped_time_limit
 
-    if aniPlayer:
-        if aniPlayer.assigned_animation == "jumpSquat":
-            vv = 0
-            if pressingJump():
-                jump_squat_jump_input_timer += (delta*22)
-        if aniPlayer.assigned_animation != "jumpSquat" and jump_squat_jump_input_timer > 0:
-            actuallyApplyJump()
-            jump_squat_jump_input_timer = 0
-            
+	if aniPlayer:
+		if aniPlayer.assigned_animation == "jumpSquat":
+			vv = 0
+			if pressingJump():
+				jump_squat_jump_input_timer += (delta*22)
+		if aniPlayer.assigned_animation != "jumpSquat" and jump_squat_jump_input_timer > 0:
+			actuallyApplyJump()
+			jump_squat_jump_input_timer = 0
+			
 
-    if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
-        feather_jump_timer += (delta*22)
-        actuallyApplyJump(false)
-    elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
-        feather_jump_timer += (delta*22)
-        if feather_jump_timer > 3: 
-            actuallyApplyJump(false)
-    elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
-        feather_jump_timer += (delta*22)
-    if not pressingJump():
-        feather_jump_timer = 200
+	if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
+		feather_jump_timer += (delta*22)
+		actuallyApplyJump(false)
+	elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
+		feather_jump_timer += (delta*22)
+		if feather_jump_timer > 3: 
+			actuallyApplyJump(false)
+	elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
+		feather_jump_timer += (delta*22)
+	if not pressingJump():
+		feather_jump_timer = 200
 
 func actuallyApplyJump(play_sound = true):
-    if isFeatherLike():
-        if feather_jump_timer < 5:
-            if vv < (2*jump_force) / 3:
-                vv = (2*jump_force) / 3
-        elif feather_jump_timer < 8:
-            if vv < jump_force / 2:
-                vv = jump_force / 2
-        else:
-            if vv < jump_force / 3:
-                vv = jump_force / 3
-    elif not play_sound:
-        if vv < (1.58*jump_force)/3:
-            vv = (1.58*jump_force)/3
-    elif glitch_form == GlitchForm.INVISIBLE:
-        vv = invisible_jump_force
-    else:
-        # rocket boost boots
-        # vv = jump_force*3
-        vv = jump_force*1.1
-    jumpSound.play() if jumpSound and play_sound else null
-    on_ground = false
-    has_just_jumped_timer = 0 
-    feather_fall_timer = 0
-    should_magic_jump = false
+	if isFeatherLike():
+		if feather_jump_timer < 5:
+			if vv < (2*jump_force) / 3:
+				vv = (2*jump_force) / 3
+		elif feather_jump_timer < 8:
+			if vv < jump_force / 2:
+				vv = jump_force / 2
+		else:
+			if vv < jump_force / 3:
+				vv = jump_force / 3
+	elif not play_sound:
+		if vv < (1.58*jump_force)/3:
+			vv = (1.58*jump_force)/3
+	elif glitch_form == GlitchForm.INVISIBLE:
+		vv = invisible_jump_force
+	else:
+		# rocket boost boots
+		# vv = jump_force*3
+		vv = jump_force*1.1
+	jumpSound.play() if jumpSound and play_sound else null
+	on_ground = false
+	has_just_jumped_timer = 0 
+	feather_fall_timer = 0
+	should_magic_jump = false
 
 func isKindOfOnGround():
-    # I'm on the ground or just fell off a platform...
-    return (on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)) and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
-        
+	# I'm on the ground or just fell off a platform...
+	return (on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)) and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
+		
 
 const PROJECTION_ORTHOGONAL = 1
 func processHorizontalInputs(delta):
-    is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight() or pressingMoveForward() or pressingMoveDown()
-    var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
+	is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight() or pressingMoveForward() or pressingMoveDown()
+	var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
 
-    # Forward as "seen" by the camera (OpenGL convention)
-    var view_forward = -getCamera().get_transform().basis.z
-    var view_right = -getCamera().get_transform().basis.x
-    # Forward as "seen" by the player
-    var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
-    var right = view_right
+	# Forward as "seen" by the camera (OpenGL convention)
+	var view_forward = -getCamera().get_transform().basis.z
+	var view_right = -getCamera().get_transform().basis.x
+	# Forward as "seen" by the player
+	var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
+	var right = view_right
 
-    var glitch_floor_jump_walking = (glitch_form == GlitchForm.FLOOR and not on_ground and not (aniPlayer != null and \
-        (aniPlayer.assigned_animation == "jumpSquat" or aniPlayer.assigned_animation == "jumpStart")))
-    if glitch_form == GlitchForm.FEATHER and not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
-        if on_ground:
-            # TODO(jaketrower): Initial dash state..???
-            forward = forward / 8
-            right = right / 8
-        else:
-            if dir.length() < 0.2:
-                forward = forward / 8
-                right = right / 8
-            else:
-                forward = forward / 32
-                right = right / 32
-    # elif glitch_floor_jump_walking:
-    #     if dir.length() < 0.2:
-    #         forward = forward / 8
-    #         right = right / 8
-    #     else:
-    #         forward = Vector3(0, 0, 0)
-    #         right = Vector3(0, 0, 0)
-    
-    var horizontal_input = false
-    has_just_jumped_timer += (delta*22)
-        
-    if isKindOfOnGround() or has_just_jumped_timer < has_just_jumped_time_limit or \
-        is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == GlitchForm.LADDER:
-        
-        horizontal_input = true
-        if glitch_form == GlitchForm.NORMAL:
-            #if not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"): #jumpSquat Boots
-            dir = Vector3(0.0, 0.0, 0.0)
-        elif glitch_form == GlitchForm.FEATHER:
-            if is_pressing_opposite_horizontal_input and (aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
-                dir = Vector3(0.0, 0.0, 0.0)
-        elif glitch_form == GlitchForm.FLOOR:
-            if is_pressing_horizontal_input or on_ground: # and not glitch_floor_jump_walking:
-                dir = Vector3(0.0, 0.0, 0.0)
-        else:
-            dir = Vector3(0.0, 0.0, 0.0)
-            
+	var glitch_floor_jump_walking = (glitch_form == GlitchForm.FLOOR and not on_ground and not (aniPlayer != null and \
+		(aniPlayer.assigned_animation == "jumpSquat" or aniPlayer.assigned_animation == "jumpStart")))
+	if glitch_form == GlitchForm.FEATHER and not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
+		if on_ground:
+			# TODO(jaketrower): Initial dash state..???
+			forward = forward / 8
+			right = right / 8
+		else:
+			if dir.length() < 0.2:
+				forward = forward / 8
+				right = right / 8
+			else:
+				forward = forward / 32
+				right = right / 32
+	# elif glitch_floor_jump_walking:
+	#     if dir.length() < 0.2:
+	#         forward = forward / 8
+	#         right = right / 8
+	#     else:
+	#         forward = Vector3(0, 0, 0)
+	#         right = Vector3(0, 0, 0)
+	
+	var horizontal_input = false
+	has_just_jumped_timer += (delta*22)
+		
+	if isKindOfOnGround() or has_just_jumped_timer < has_just_jumped_time_limit or \
+		is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == GlitchForm.LADDER:
+		
+		horizontal_input = true
+		if glitch_form == GlitchForm.NORMAL:
+			#if not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"): #jumpSquat Boots
+			dir = Vector3(0.0, 0.0, 0.0)
+		elif glitch_form == GlitchForm.FEATHER:
+			if is_pressing_opposite_horizontal_input and (aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
+				dir = Vector3(0.0, 0.0, 0.0)
+		elif glitch_form == GlitchForm.FLOOR:
+			if is_pressing_horizontal_input or on_ground: # and not glitch_floor_jump_walking:
+				dir = Vector3(0.0, 0.0, 0.0)
+		else:
+			dir = Vector3(0.0, 0.0, 0.0)
+			
 
-        if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
-            if pressingMoveForward():
-                dir += forward*(delta*DNUMHORZ)
-            elif pressingMoveDown():
-                dir -= forward*(delta*DNUMHORZ)
-                    
-            if pressingMoveLeft():
-                should_teeter_turn_around = false
-                if aniPlayer != null:
-                    # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
-                    if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-                        dir += (right/2)*(delta*DNUMHORZ)
-                        if aniPlayer.assigned_animation != "turnAround":
-                            aniPlayer.stop()
-                            aniPlayer.clear_queue()
-                            aniPlayer.queue("turnAround")
-                            aniPlayer.queue("walkStart")
-                    elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-                        dir += right*(delta*DNUMHORZ)
-                        mySprite.flip_h = true
-                        doWalkAnimation()
-                # if there's no animation player, there's no animation. just flip
-                else:
-                    dir += right*(delta*DNUMHORZ)
-                    mySprite.flip_h = true
-            elif pressingMoveRight():
-                should_teeter_turn_around = false
-                if aniPlayer != null:
-                    # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
-                    if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-                        dir -= (right/2)*(delta*DNUMHORZ)
-                        if aniPlayer.assigned_animation != "turnAround":
-                            aniPlayer.clear_queue()
-                            aniPlayer.play("turnAround")
-                            aniPlayer.queue("walkStart")
-                    elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-                        dir -= right*(delta*DNUMHORZ)
-                        mySprite.flip_h = false
-                        doWalkAnimation()
-                # if there's no animation player, there's no animation. just flip
-                else:
-                    dir -= right*(delta*DNUMHORZ)
-                    mySprite.flip_h = false
-    
-    if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
-        (aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
-        (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
-        if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
-            mySprite.flip_h = not mySprite.flip_h
-            should_teeter_turn_around = false
-        aniPlayer.clear_queue()
-        if aniPlayer.assigned_animation != "teeter":
-            if half_on_ground and not glitch_form == GlitchForm.FLOOR:
-                aniPlayer.stop()
-                if should_teeter_turn_around:
-                    aniPlayer.queue("turnAround")
-                aniPlayer.queue("teeter")
-            elif aniPlayer.assigned_animation != "walkStop" and aniPlayer.assigned_animation != "stand":
-                aniPlayer.stop()
-                if aniPlayer.assigned_animation == "walk":
-                    aniPlayer.queue("walkStop")
-                aniPlayer.queue("stand")
+		if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
+			if pressingMoveForward():
+				dir += forward*(delta*DNUMHORZ)
+			elif pressingMoveDown():
+				dir -= forward*(delta*DNUMHORZ)
+					
+			if pressingMoveLeft():
+				should_teeter_turn_around = false
+				if aniPlayer != null:
+					# this logic looks really complicated but it's basically handling turn around animation and acceleration delay
+					if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
+						dir += (right/2)*(delta*DNUMHORZ)
+						if aniPlayer.assigned_animation != "turnAround":
+							aniPlayer.stop()
+							aniPlayer.clear_queue()
+							aniPlayer.queue("turnAround")
+							aniPlayer.queue("walkStart")
+					elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
+						dir += right*(delta*DNUMHORZ)
+						mySprite.flip_h = true
+						doWalkAnimation()
+				# if there's no animation player, there's no animation. just flip
+				else:
+					dir += right*(delta*DNUMHORZ)
+					mySprite.flip_h = true
+			elif pressingMoveRight():
+				should_teeter_turn_around = false
+				if aniPlayer != null:
+					# this logic looks really complicated but it's basically handling turn around animation and acceleration delay
+					if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
+						dir -= (right/2)*(delta*DNUMHORZ)
+						if aniPlayer.assigned_animation != "turnAround":
+							aniPlayer.clear_queue()
+							aniPlayer.play("turnAround")
+							aniPlayer.queue("walkStart")
+					elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
+						dir -= right*(delta*DNUMHORZ)
+						mySprite.flip_h = false
+						doWalkAnimation()
+				# if there's no animation player, there's no animation. just flip
+				else:
+					dir -= right*(delta*DNUMHORZ)
+					mySprite.flip_h = false
+	
+	if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
+		(aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
+		(aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
+		if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
+			mySprite.flip_h = not mySprite.flip_h
+			should_teeter_turn_around = false
+		aniPlayer.clear_queue()
+		if aniPlayer.assigned_animation != "teeter":
+			if half_on_ground and not glitch_form == GlitchForm.FLOOR:
+				aniPlayer.stop()
+				if should_teeter_turn_around:
+					aniPlayer.queue("turnAround")
+				aniPlayer.queue("teeter")
+			elif aniPlayer.assigned_animation != "walkStop" and aniPlayer.assigned_animation != "stand":
+				aniPlayer.stop()
+				if aniPlayer.assigned_animation == "walk":
+					aniPlayer.queue("walkStop")
+				aniPlayer.queue("stand")
 
-    var DNUMSKID = 60
-    if self.isFeatherLike():
-        if dir.length() > 1:
-            dir = dir.normalized()
-        if on_ground and not self.is_pressing_horizontal_input:
-            dir = dir * 0.9*(delta*DNUMSKID)
-            if dir.length() < 0.1:
-                dir = Vector3(0, 0, 0)
-        elif not on_ground:
-            dir = dir * 0.99*(delta*DNUMSKID)
-            if dir.length() < 0.01:
-                dir = Vector3(0, 0, 0)
-    # elif glitch_form == GlitchForm.FLOOR and not on_ground:
-    #     dir = dir * 0.97*(delta*DNUMSKID)
-    #     if dir.length() < 0.1:
-    #         dir = Vector3(0, 0, 0)
+	var DNUMSKID = 60
+	if self.isFeatherLike():
+		if dir.length() > 1:
+			dir = dir.normalized()
+		if on_ground and not self.is_pressing_horizontal_input:
+			dir = dir * 0.9*(delta*DNUMSKID)
+			if dir.length() < 0.1:
+				dir = Vector3(0, 0, 0)
+		elif not on_ground:
+			dir = dir * 0.99*(delta*DNUMSKID)
+			if dir.length() < 0.01:
+				dir = Vector3(0, 0, 0)
+	# elif glitch_form == GlitchForm.FLOOR and not on_ground:
+	#     dir = dir * 0.97*(delta*DNUMSKID)
+	#     if dir.length() < 0.1:
+	#         dir = Vector3(0, 0, 0)
 
-    var curr_walk_speed = walk_speed
-    # if glitch_form == GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
-    #     curr_walk_speed = floor_glitch_walk_speed
-    if glitch_form == GlitchForm.INVISIBLE:
-        curr_walk_speed = invisible_glitch_walk_speed
-    elif smallInteractionArea.is_touching_water:
-        curr_walk_speed = swimming_walk_speed
+	var curr_walk_speed = walk_speed
+	# if glitch_form == GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
+	#     curr_walk_speed = floor_glitch_walk_speed
+	if glitch_form == GlitchForm.INVISIBLE:
+		curr_walk_speed = invisible_glitch_walk_speed
+	elif smallInteractionArea.is_touching_water:
+		curr_walk_speed = swimming_walk_speed
 
-    # update x and z
-    if not smallInteractionArea.is_touching_water or horizontal_input:
-        hv = dir * curr_walk_speed
-    elif on_ground:
-        hv -= (hv.normalized()*delta*30)
-        if abs(hv.length()) < delta*22:
-            hv = Vector3()
-            dir = Vector3(0.0, 0.0, 0.0)
+	# update x and z
+	if not smallInteractionArea.is_touching_water or horizontal_input:
+		hv = dir * curr_walk_speed
+	elif on_ground:
+		hv -= (hv.normalized()*delta*30)
+		if abs(hv.length()) < delta*22:
+			hv = Vector3()
+			dir = Vector3(0.0, 0.0, 0.0)
 
-    if global.pauseMoveInput:
-        hv = Vector3(0, 0, 0)
-        is_walking = false
-    else:
-        updateFacing(dir)
+	if global.pauseMoveInput:
+		hv = Vector3(0, 0, 0)
+		is_walking = false
+	else:
+		updateFacing(dir)
 
 func doWalkAnimation():
-    if on_ground and aniPlayer.current_animation != "walk" and aniPlayer.current_animation != "walkStart":
-        if aniPlayer.current_animation != "land":
-            aniPlayer.clear_queue()
-            aniPlayer.stop()
-        if aniPlayer.assigned_animation == "stand" or aniPlayer.assigned_animation == "turnAround" or aniPlayer.assigned_animation == "walkStop":
-            aniPlayer.queue("walkStart")
-        aniPlayer.queue("walk")
-        
+	if on_ground and aniPlayer.current_animation != "walk" and aniPlayer.current_animation != "walkStart":
+		if aniPlayer.current_animation != "land":
+			aniPlayer.clear_queue()
+			aniPlayer.stop()
+		if aniPlayer.assigned_animation == "stand" or aniPlayer.assigned_animation == "turnAround" or aniPlayer.assigned_animation == "walkStop":
+			aniPlayer.queue("walkStart")
+		aniPlayer.queue("walk")
+		
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(local_lv, delta):
-    if delta == 0:
-        return local_lv
-        
-    var DNUM = 1.15
-    local_lv.x *= delta*DNUM
-    local_lv.y *= delta*DNUM
-    
-    was_on_ground = on_ground
-    if glitch_form != GlitchForm.FLOOR:
-        on_ground = false
-    truly_on_ground = false
-    half_on_ground = false
+	if delta == 0:
+		return local_lv
+		
+	var DNUM = 1.15
+	local_lv.x *= delta*DNUM
+	local_lv.y *= delta*DNUM
+	
+	was_on_ground = on_ground
+	if glitch_form != GlitchForm.FLOOR:
+		on_ground = false
+	truly_on_ground = false
+	half_on_ground = false
 
-    local_lv = handleHorizontalCollisions(local_lv)
-    global_transform.origin.x += local_lv.x
-    local_lv = handleVerticalCollisions(local_lv)
-    global_transform.origin.y += local_lv.y
+	local_lv = handleHorizontalCollisions(local_lv)
+	global_transform.origin.x += local_lv.x
+	local_lv = handleVerticalCollisions(local_lv)
+	global_transform.origin.y += local_lv.y
 
-    # handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    
-    if on_ground:
-        feather_fall_timer = 0
-        if is_touching_water:
-            is_floating = true
-    
-    local_lv.x /= delta*DNUM
-    local_lv.y /= delta*DNUM
-    return local_lv
+	# handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
+	
+	if on_ground:
+		if was_on_ground:
+			fall_timer = 0
+		feather_fall_timer = 0
+		if is_touching_water:
+			is_floating = true
+	
+	local_lv.x /= delta*DNUM
+	local_lv.y /= delta*DNUM
+	return local_lv
 
 func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
-    var checking_for_floor_collisions = is_vertical and sensor_direction == -1
-    if tile_type == GridMap.INVALID_CELL_ITEM:
-        return false
-    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    if glitch_form == GlitchForm.WALK_THROUGH_WALLS:
-        return checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
-    else:
-        return tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
-    
+	var checking_for_floor_collisions = is_vertical and sensor_direction == -1
+	if tile_type == GridMap.INVALID_CELL_ITEM:
+		return false
+	var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+	if glitch_form == GlitchForm.WALK_THROUGH_WALLS:
+		return checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+	else:
+		return tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+	
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
-    var y = global_transform.origin.y
-    var tb = get_node("CollisionShape").shape.height/2
-    var bb = -tb
-    var is_above_top_of_tile = y + bb > tile_pos_coords.y
-    
-    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
-    
+	var y = global_transform.origin.y
+	var tb = get_node("CollisionShape").shape.height/2
+	var bb = -tb
+	var is_above_top_of_tile = y + bb > tile_pos_coords.y
+	
+	var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+	return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
+	
 func isTileSpikes(tile_type):
-    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    return tileCollisionShape is RayShape
-    
+	var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+	return tileCollisionShape is RayShape
+	
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = false):
-    var z = global_transform.origin.z
-    var TILE_WIDTH = getLevelTiles().cell_size.x
-    var TILE_HEIGHT = getLevelTiles().cell_size.y
-    
-    var coords_a = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y, z))
-    var tile_pos_a = getLevelTiles().map_to_world(coords_a.x, coords_a.y, coords_a.z)
-    var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
-    
-    var tile_pos = 99999 * sensor_direction
-    if isTileSolid(tile_type_a, is_vertical, sensor_direction, tile_pos_a):
-        # We found a collision, regress to see if there is a previous one
-        var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x - (TILE_WIDTH*sensor_direction), sensor.y, z))
-        if is_vertical:
-            coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - (TILE_HEIGHT*sensor_direction), z))
-        var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
-        var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
-            if debug:
-                print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
-            # Found an earlier tile collision, use it instead of tile A
-            tile_pos = coords_b.x + tile_anchor
-            if is_vertical:
-                tile_pos = coords_b.y + tile_anchor
-        else:
-            if debug:
-                print("coords_a: " + str(coords_a) + ", tile_type_a: " + str(tile_type_a))
-            # Did not find an earlier tile collision, so use tile A
-            tile_pos = coords_a.x + tile_anchor
-            if is_vertical:
-                tile_pos = coords_a.y + tile_anchor
-    else:
-        # We have found no collision, extend to see if there is an upcoming one
-        var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x + (TILE_WIDTH*sensor_direction), sensor.y, z))
-        if is_vertical:
-            coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y + (TILE_HEIGHT*sensor_direction), z))
-        var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
-        var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
-            if debug:
-                print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
-            # Found a later tile collision, use it
-            tile_pos = coords_b.x + tile_anchor
-            if is_vertical:
-                tile_pos = coords_b.y + tile_anchor
-        else:
-            # We found no tile collision on this side! Just use default :)
-            pass
-    return tile_pos
+	var z = global_transform.origin.z
+	var TILE_WIDTH = getLevelTiles().cell_size.x
+	var TILE_HEIGHT = getLevelTiles().cell_size.y
+	
+	var coords_a = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y, z))
+	var tile_pos_a = getLevelTiles().map_to_world(coords_a.x, coords_a.y, coords_a.z)
+	var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+	
+	var tile_pos = 99999 * sensor_direction
+	if isTileSolid(tile_type_a, is_vertical, sensor_direction, tile_pos_a):
+		# We found a collision, regress to see if there is a previous one
+		var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x - (TILE_WIDTH*sensor_direction), sensor.y, z))
+		if is_vertical:
+			coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - (TILE_HEIGHT*sensor_direction), z))
+		var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
+		var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+		if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
+			if debug:
+				print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
+			# Found an earlier tile collision, use it instead of tile A
+			tile_pos = coords_b.x + tile_anchor
+			if is_vertical:
+				tile_pos = coords_b.y + tile_anchor
+		else:
+			if debug:
+				print("coords_a: " + str(coords_a) + ", tile_type_a: " + str(tile_type_a))
+			# Did not find an earlier tile collision, so use tile A
+			tile_pos = coords_a.x + tile_anchor
+			if is_vertical:
+				tile_pos = coords_a.y + tile_anchor
+	else:
+		# We have found no collision, extend to see if there is an upcoming one
+		var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x + (TILE_WIDTH*sensor_direction), sensor.y, z))
+		if is_vertical:
+			coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y + (TILE_HEIGHT*sensor_direction), z))
+		var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
+		var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+		if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
+			if debug:
+				print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
+			# Found a later tile collision, use it
+			tile_pos = coords_b.x + tile_anchor
+			if is_vertical:
+				tile_pos = coords_b.y + tile_anchor
+		else:
+			# We found no tile collision on this side! Just use default :)
+			pass
+	return tile_pos
 
 func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
-    var x = global_transform.origin.x
-    var y = global_transform.origin.y
-    
-    if is_vertical:
-        if not truly_on_ground:
-            # add y speed to collision checking if we're in the air
-            sensor.y += local_lv.y
-    else:
-        sensor.x += local_lv.x
-    var tile_pos = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
-    var tile_distance = (tile_pos*sensor_direction) - ((x+sensor_anchor) * sensor_direction)
-    if is_vertical:
-        tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
-    return Vector2(tile_pos, tile_distance)
+	var x = global_transform.origin.x
+	var y = global_transform.origin.y
+	
+	if is_vertical:
+		if not truly_on_ground:
+			# add y speed to collision checking if we're in the air
+			sensor.y += local_lv.y
+	else:
+		sensor.x += local_lv.x
+	var tile_pos = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
+	var tile_distance = (tile_pos*sensor_direction) - ((x+sensor_anchor) * sensor_direction)
+	if is_vertical:
+		tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
+	return Vector2(tile_pos, tile_distance)
 
 func collideWithFloor(local_lv):
-    local_lv.y = 0
-    on_ground = true
-    truly_on_ground = true
-    return local_lv
+	local_lv.y = 0
+	on_ground = true
+	truly_on_ground = true
+	return local_lv
 
 func reactToPotentialCollisions(tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
-    if tile_distance <= 0:
-        if debug:
-            # print("collide sensor A...")
-            if not is_vertical: get_tree().paused = true
-        # push player out of the tile!
-        if is_vertical:
-            global_transform.origin.y += tile_distance * sensor_direction
-            if should_collide_with_floor:
-                local_lv = collideWithFloor(local_lv)
-            else:
-                local_lv.y = 0
-                if feather_jump_timer < feather_jump_partial_time_limit:
-                    feather_jump_timer = feather_jump_partial_time_limit
-        else:
-            global_transform.origin.x += tile_distance * sensor_direction
-            local_lv.x = 0
-    elif is_vertical and tile_distance < local_lv.y * sensor_direction:
-        global_transform.origin.y += tile_distance * sensor_direction
-        if should_collide_with_floor:
-            local_lv = collideWithFloor(local_lv)
-        else:
-            local_lv.y = 0
-            if feather_jump_timer < feather_jump_partial_time_limit:
-                feather_jump_timer = feather_jump_partial_time_limit
-    elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
-        global_transform.origin.x += tile_distance * sensor_direction
-        local_lv.x = 0
-    return local_lv
+	if tile_distance <= 0:
+		if debug:
+			# print("collide sensor A...")
+			if not is_vertical: get_tree().paused = true
+		# push player out of the tile!
+		if is_vertical:
+			global_transform.origin.y += tile_distance * sensor_direction
+			if should_collide_with_floor:
+				local_lv = collideWithFloor(local_lv)
+			else:
+				local_lv.y = 0
+				if feather_jump_timer < feather_jump_partial_time_limit:
+					feather_jump_timer = feather_jump_partial_time_limit
+		else:
+			global_transform.origin.x += tile_distance * sensor_direction
+			local_lv.x = 0
+	elif is_vertical and tile_distance < local_lv.y * sensor_direction:
+		global_transform.origin.y += tile_distance * sensor_direction
+		if should_collide_with_floor:
+			local_lv = collideWithFloor(local_lv)
+		else:
+			local_lv.y = 0
+			if feather_jump_timer < feather_jump_partial_time_limit:
+				feather_jump_timer = feather_jump_partial_time_limit
+	elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
+		global_transform.origin.x += tile_distance * sensor_direction
+		local_lv.x = 0
+	return local_lv
 
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
-    var x = global_transform.origin.x
-    var y = global_transform.origin.y
-    var lb = -get_node("CollisionShape").shape.radius
-    var rb = -lb
-    var tb = get_node("CollisionShape").shape.height/2
-    var bb = -tb
+	var x = global_transform.origin.x
+	var y = global_transform.origin.y
+	var lb = -get_node("CollisionShape").shape.radius
+	var rb = -lb
+	var tb = get_node("CollisionShape").shape.height/2
+	var bb = -tb
 
-    # Check for sensor A
-    var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
-    if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
-    var tile_pos_and_distance_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_A = tile_pos_and_distance_A.x
-    var tile_distance_A = tile_pos_and_distance_A.y
+	# Check for sensor A
+	var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
+	if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
+	var tile_pos_and_distance_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+	var tile_pos_A = tile_pos_and_distance_A.x
+	var tile_distance_A = tile_pos_and_distance_A.y
 
-    # Check for sensor B
-    var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
-    if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
-    var tile_pos_and_distance_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_B = tile_pos_and_distance_B.x
-    var tile_distance_B = tile_pos_and_distance_B.y
+	# Check for sensor B
+	var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
+	if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
+	var tile_pos_and_distance_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+	var tile_pos_B = tile_pos_and_distance_B.x
+	var tile_distance_B = tile_pos_and_distance_B.y
 
-    # Check for middle sensor
-    var middle_sensor = Vector2(x+sensor_anchor, y)
-    if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
-    var tile_pos_and_distance_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var middle_tile_pos = tile_pos_and_distance_middle.x
-    var middle_tile_distance = tile_pos_and_distance_middle.y
+	# Check for middle sensor
+	var middle_sensor = Vector2(x+sensor_anchor, y)
+	if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
+	var tile_pos_and_distance_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+	var middle_tile_pos = tile_pos_and_distance_middle.x
+	var middle_tile_distance = tile_pos_and_distance_middle.y
 
-    if debug:
-        print(
-            str(is_vertical) + 
-            " (x, y): " + str(x) + ", " + str(y) +
-            ";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
-            ";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
-            ";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
-        )
+	if debug:
+		print(
+			str(is_vertical) + 
+			" (x, y): " + str(x) + ", " + str(y) +
+			";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
+			";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
+			";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
+		)
 
-    # Compare left and right collision tile distances
-    if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    else:
-        local_lv = reactToPotentialCollisions(middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    return local_lv
+	# Compare left and right collision tile distances
+	if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
+		local_lv = reactToPotentialCollisions(tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+	elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
+		local_lv = reactToPotentialCollisions(tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+	else:
+		local_lv = reactToPotentialCollisions(middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+	return local_lv
 
 func handleHorizontalCollisions(local_lv):
-    self.horizontal_collision = false
-    var rb = get_node("CollisionShape").shape.radius
-    var lb = -rb
-    var TILE_WIDTH = getLevelTiles().cell_size.x
+	self.horizontal_collision = false
+	var rb = get_node("CollisionShape").shape.radius
+	var lb = -rb
+	var TILE_WIDTH = getLevelTiles().cell_size.x
 
-    # check for left collisions
-    if local_lv.x < 0 or pressingMoveLeft():
-        # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-        local_lv = performCollisionCheck(false, local_lv, lb-0.2, -1, TILE_WIDTH, false)
+	# check for left collisions
+	if local_lv.x < 0 or pressingMoveLeft():
+		# params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+		local_lv = performCollisionCheck(false, local_lv, lb-0.2, -1, TILE_WIDTH, false)
 
-    # check for right collisions
-    if local_lv.x > 0 or pressingMoveRight():
-        # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-        local_lv = performCollisionCheck(false, local_lv, rb+0.2, 1, 0, false)
-    
-    return local_lv
-    
-    
+	# check for right collisions
+	if local_lv.x > 0 or pressingMoveRight():
+		# params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+		local_lv = performCollisionCheck(false, local_lv, rb+0.2, 1, 0, false)
+	
+	return local_lv
+	
+	
 func handleVerticalCollisions(local_lv):
-    var tb = get_node("CollisionShape").shape.height/2
-    var bb = -tb
-    var TILE_HEIGHT = getLevelTiles().cell_size.y
+	var tb = get_node("CollisionShape").shape.height/2
+	var bb = -tb
+	var TILE_HEIGHT = getLevelTiles().cell_size.y
 
-    # check for bottom collisions
-    if truly_on_ground or local_lv.y <= 0:
-        # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-        local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
+	# check for bottom collisions
+	if truly_on_ground or local_lv.y <= 0:
+		# params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+		local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
 
-    # check for top collisions
-    if not truly_on_ground and local_lv.y > 0:
-        # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-        local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
-    
-    return local_lv
-    
+	# check for top collisions
+	if not truly_on_ground and local_lv.y > 0:
+		# params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+		local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
+	
+	return local_lv
+	
 func handleSpikeCollisions(left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, q):
-    pass
-    # for i in range(bottom_tile_y, top_tile_y):
-    #     for j in range(left_tile_x, right_tile_x):
-    #         var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
-    #         var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-    #         if tile_type == GridMap.INVALID_CELL_ITEM or not isTileSpikes(tile_type): 
-    #             continue
-                
-    #         var x = global_transform.origin.x
-    #         var y = global_transform.origin.y
-    #         var lb = -get_node("CollisionShape").shape.radius
-    #         var tb = get_node("CollisionShape").shape.height/2
-    #         var rb = -lb
-    #         var bb = -tb
-    #         var TILE_WIDTH = getLevelTiles().cell_size.x
-    #         var TILE_HEIGHT = getLevelTiles().cell_size.y
-    #         var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
-    #         var tile_x = tile_pos.x - TILE_WIDTH/2
-    #         var tile_y = tile_pos.y - TILE_HEIGHT/2
-            
-    #         if isRectColliding(
-    #             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-    #             x + lb + q, y + tb - q, x + rb - q, y + bb + q
-    #         ):
-    #             tryDieToEnemy()
-    #             return
+	pass
+	# for i in range(bottom_tile_y, top_tile_y):
+	#     for j in range(left_tile_x, right_tile_x):
+	#         var coords = getLevelTiles().world_to_map(Vector3(j, i, global_transform.origin.z))
+	#         var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+	#         if tile_type == GridMap.INVALID_CELL_ITEM or not isTileSpikes(tile_type): 
+	#             continue
+				
+	#         var x = global_transform.origin.x
+	#         var y = global_transform.origin.y
+	#         var lb = -get_node("CollisionShape").shape.radius
+	#         var tb = get_node("CollisionShape").shape.height/2
+	#         var rb = -lb
+	#         var bb = -tb
+	#         var TILE_WIDTH = getLevelTiles().cell_size.x
+	#         var TILE_HEIGHT = getLevelTiles().cell_size.y
+	#         var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+	#         var tile_x = tile_pos.x - TILE_WIDTH/2
+	#         var tile_y = tile_pos.y - TILE_HEIGHT/2
+			
+	#         if isRectColliding(
+	#             tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+	#             x + lb + q, y + tb - q, x + rb - q, y + bb + q
+	#         ):
+	#             tryDieToEnemy()
+	#             return
 
 func postProcessInputs(delta):
-    pass
-    
+	pass
+	
 func landed():
-    last_grounded_y = global_transform.origin.y 
-    if landSound: landSound.play()
-    if aniPlayer != null and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
-        aniPlayer.clear_queue()
-        aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 2.0)
+	last_grounded_y = global_transform.origin.y 
+	if landSound: landSound.play()
+	if aniPlayer != null and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
+		aniPlayer.clear_queue()
+		print(fall_timer)
+		if fall_timer > 30 and not glitch_form == GlitchForm.FEATHER:
+			aniPlayer.play("collapse", -1, 1.0)
+			physics_state = PhysicsState.COLLAPSED
+		else:
+			aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 2.0)
+	fall_timer = 0
 
 func isWalkingIntoWall():
-    return linear_velocity.x < 2 and linear_velocity.x > -2 \
-            and linear_velocity.z < 2 and linear_velocity.z > -2 \
-            and is_pressing_horizontal_input and was_pressing_horizontal_input \
-            and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat") 
+	return linear_velocity.x < 2 and linear_velocity.x > -2 \
+			and linear_velocity.z < 2 and linear_velocity.z > -2 \
+			and is_pressing_horizontal_input and was_pressing_horizontal_input \
+			and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat") 
 
 func updateFacing(dir):
-    if dir.x != 0 or dir.y != 0 or dir.z != 0:
-        facing = dir
-        is_walking = true
-    else:
-        is_walking = false
+	if dir.x != 0 or dir.y != 0 or dir.z != 0:
+		facing = dir
+		is_walking = true
+	else:
+		is_walking = false
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=174 format=2]
+[gd_scene load_steps=175 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/redsolid1.png" type="Texture" id=3]
+[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=4]
 [ext_resource path="res://assets/textures/redsolid2.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/redsolid3.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/redsolid4.png" type="Texture" id=7]
@@ -573,7 +574,7 @@ material = SubResource( 103 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=105]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 55 )
 shader_param/base_palette = ExtResource( 2 )
@@ -585,7 +586,7 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="RayShape" id=107]
 
 [sub_resource type="ShaderMaterial" id=108]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 56 )
 shader_param/base_palette = ExtResource( 2 )
@@ -595,7 +596,7 @@ material = SubResource( 108 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=110]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 57 )
 shader_param/base_palette = ExtResource( 2 )
@@ -605,7 +606,7 @@ material = SubResource( 110 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=112]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 58 )
 shader_param/base_palette = ExtResource( 2 )
@@ -615,7 +616,7 @@ material = SubResource( 112 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=114]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 59 )
 shader_param/base_palette = ExtResource( 2 )

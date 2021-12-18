@@ -4,13 +4,11 @@ uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
 
 uniform int palettesize = 16;
 
 void vertex() {
-    UV=UV*uv1_scale.xy+uv1_offset.xy;
+    UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
     MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
 }
 
