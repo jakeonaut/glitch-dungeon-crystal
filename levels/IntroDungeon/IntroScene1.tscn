@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=20]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=21]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=22]
-[ext_resource path="res://assets/npcs/clericgirlportrait.png" type="Texture" id=23]
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=24]
 [ext_resource path="res://levels/IntroDungeon/IntroDungeon1GlitchNPCUpAbortSound.gd" type="Script" id=25]
 
@@ -102,6 +101,7 @@ is_locked = true
 
 [node name="Door2" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0 )
+path = "res://levels/IntroDungeon/IntroScene2Forest.tscn"
 
 [node name="Torch" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
@@ -121,7 +121,8 @@ script = ExtResource( 19 )
 grav = 0
 bbText = "YOU MUST ESCAPE
 THE DUNGEON."
-portrait = ExtResource( 23 )
+is_important = true
+can_activate = false
 
 [node name="CollisionShape" type="CollisionShape" parent="NPC"]
 shape = SubResource( 1 )

@@ -50,7 +50,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 2, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 8, 0, 1, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
+"cells": PoolIntArray( 2, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 8, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, 983046, 0, 28, 1048575, 0, 28, -1179616, 0, 28, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
 }
 script = ExtResource( 5 )
 __meta__ = {
@@ -97,7 +97,7 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="GlitchEnemy" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy" index="0"]
@@ -106,7 +106,7 @@ hframes = 2
 vframes = 2
 
 [node name="GlitchEnemy2" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, 2 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy2" index="0"]
@@ -115,7 +115,7 @@ hframes = 2
 vframes = 2
 
 [node name="GlitchEnemy3" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -4, 2 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy3" index="0"]
@@ -124,7 +124,7 @@ hframes = 2
 vframes = 2
 
 [node name="GlitchEnemy4" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6602, -5.66015, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6602, -5.66015, 2 )
 grav = 0
 
 [node name="Sprite3D" parent="GlitchEnemy4" index="0"]

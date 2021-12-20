@@ -10,4 +10,4 @@ func overrideLevelRespawnEvent():
     npc.pressing_jump = false
     npc.just_pressed_jump = false
     npc.global_transform.origin.y = 4
-    npc.get_node("NPC TextBox/TextBox").text_final = "just keep holding\njump!!\nGO LEFT TO DOOR"
+    npc.get_node("NPC TextBox/TextBox").text_final = "i love when it's green\ni can just keep holding\njump to float"

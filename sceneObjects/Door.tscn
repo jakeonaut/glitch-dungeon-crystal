@@ -1,18 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=4]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=6]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 7 )
@@ -81,8 +78,6 @@ texture = ExtResource( 4 )
 hframes = 4
 vframes = 6
 frame = 2
-script = ExtResource( 5 )
-max_frames = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "doorOpen"

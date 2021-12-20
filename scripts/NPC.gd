@@ -6,6 +6,7 @@ export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
 export var is_important = false
+export var can_activate = true
 
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
@@ -13,57 +14,65 @@ onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
 onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
 
 var pressing_jump = false
-var just_pressed_jump = false
+var just_pressed_jump = false 
 
 
 func _ready():
-    set_process(true)
-    set_physics_process(true)
+	set_process(true)
+	set_physics_process(true)
 
-    set_collision_mask_bit(1, true)
+	set_collision_mask_bit(1, true)
 
-    if bbText != "" and textBoxContainer.bbText == "":
-        textBoxContainer.bbText = bbText
-    if portrait and not textBoxContainer.portrait:
-        textBoxContainer.portrait = portrait
-    if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
-        var nextTextBoxPathStr = "../"
-        for i in range(nextTextBoxPath.get_name_count()):
-            if i != 0:
-                nextTextBoxPathStr += "/"
-            nextTextBoxPathStr += nextTextBoxPath.get_name(i)
-        textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
-    textBoxContainer.setVars()
+	if bbText != "" and textBoxContainer.bbText == "":
+		textBoxContainer.bbText = bbText
+	if portrait and not textBoxContainer.portrait:
+		textBoxContainer.portrait = portrait
+	if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
+		var nextTextBoxPathStr = "../"
+		for i in range(nextTextBoxPath.get_name_count()):
+			if i != 0:
+				nextTextBoxPathStr += "/"
+			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
+		textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+	textBoxContainer.setVars()
 
 func isActive():
-    return visible
+	return visible or can_activate
 
 func activate():
-    # if global.activeInteractor == null:
-    #     global.activeInteractor = textBox
-    #     textBox.interact()
-    pass
+	# if global.activeInteractor == null:
+	#     global.activeInteractor = textBox
+	#     textBox.interact()
+	pass
 
 func passiveActivate(delta):
-    if global.activeInteractor == null:
-        textBox.passiveInteract(delta, is_important)
+	mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
+
+	if not visible and can_activate:
+		if aniPlayer:
+			aniPlayer.play("flickerOn")
+		else:
+			visible = true
+		can_activate = false
+	elif visible and (not aniPlayer or not aniPlayer.is_playing()):
+		if global.activeInteractor == null or global.activeInteractor == textBox:
+			textBox.passiveInteract(delta, is_important)
 
 func stopPassiveActivate():
-    # TODO(jaketrower): TODO on a timer...
-    if global.activeInteractor != null:
-        global.activeInteractor.stopInteract()
-        global.activeInteractor = null
+	# TODO(jaketrower): TODO on a timer...
+	if global.activeInteractor != null and global.activeInteractor == textBox:
+		global.activeInteractor.stopInteract()
 
 func _physics_process(delta):
-    #._physics_process(delta) # NOTE: This super method is called automatically
-    # https://github.com/godotengine/godot/issues/6500
+	#._physics_process(delta) # NOTE: This super method is called automatically
+	# https://github.com/godotengine/godot/issues/6500
 
-    if global.pauseGame: return
+	if global.pauseGame: return
 
-    .processPhysics(delta)
+	.processPhysics(delta)
 
 func justPressedJump():
-    return just_pressed_jump
+	return just_pressed_jump
 
 func pressingJump():
-    return pressing_jump
+	return pressing_jump
