@@ -32,7 +32,7 @@ radius = 0.9
 radius = 1.5
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 4, 3, 1.3 )
+extents = Vector3( 3, 3, 1.3 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 21 )
@@ -137,7 +137,7 @@ shape = SubResource( 2 )
 script = ExtResource( 20 )
 
 [node name="CollisionShape" type="CollisionShape" parent="NPC/SmallInteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31781, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31781, 0, 0 )
 shape = SubResource( 3 )
 
 [node name="NPC TextBox" parent="NPC" instance=ExtResource( 16 )]
@@ -168,3 +168,4 @@ grav = 0
 [node name="GlitchAura" parent="." instance=ExtResource( 14 )]
 
 [editable path="NPC/NPC TextBox"]
+[editable path="GlitchAura"]

@@ -1,6 +1,6 @@
 extends Control
 
-onready var target = get_node("../NPC")
+onready var target = get_node("../../NPC")
 onready var mainColorRect = get_node("ColorRect")
 
 # TODO(jaketrower): Probably best to load this once in the levelScript and reference from there

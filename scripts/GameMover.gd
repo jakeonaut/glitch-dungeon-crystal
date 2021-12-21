@@ -48,6 +48,7 @@ enum PhysicsState {
     COLLAPSED,
     CAN_WAKE_UP,
     WAKING_UP,
+    GLITCH_DYING
 }
 var physics_state = PhysicsState.NORMAL
 
@@ -151,7 +152,7 @@ func _physics_process(delta):
 func isActive():
     return visible
 
-func tryDieToEnemy():
+func tryDieToEnemy(delta):
     pass    
     
 func getHitByBroom():
@@ -184,7 +185,6 @@ func processPhysics(delta):
     
     applyTerminalVelocity(delta)
     
-    # TODO(jaketrower): This code really sucks.
     if physics_state == PhysicsState.NORMAL:
         processInputs(delta)
     elif physics_state == PhysicsState.COLLAPSED:
