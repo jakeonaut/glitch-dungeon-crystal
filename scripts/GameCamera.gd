@@ -70,13 +70,13 @@ func _process(delta):
         actual_target = global.activeInteractor.get_node("../..")
         set_target(actual_target)
         # interpolation = A + (B - A) * t
-        self.size = self.size + (12 - self.size) * (delta*5)
+        # self.size = self.size + (12 - self.size) * (delta*5)
         set_speed(2)
         set_interpolation_enabled(true)
     else:
         actual_target = initial_target
         set_target(actual_target)
-        self.size = self.size + (initial_size - self.size) * (delta*5)
+        # self.size = self.size + (initial_size - self.size) * (delta*5)
         
     respectLevelTilesEdges()
     

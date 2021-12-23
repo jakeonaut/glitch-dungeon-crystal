@@ -226,7 +226,7 @@ func tryDieFromOffscreen():
 		global.pauseGame = true
 		global.pauseMoveInput = true
 		global.isRespawning = true
-		get_tree().get_root().get_node("level").tryToRespawn()
+		get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
 
 func tryBroom():
 	if can_broom:        

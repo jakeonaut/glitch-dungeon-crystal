@@ -18,7 +18,7 @@
 [ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/GlitchScreenEffect.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=19]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.3, 5, 1.3 )

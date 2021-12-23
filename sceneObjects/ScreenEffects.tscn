@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=1]
+[ext_resource path="res://shaders/CRTEffect.gdshader" type="Shader" id=2]
+[ext_resource path="res://shaders/CRTEffect2.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 3 )
+shader_param/crt_curve = 0.0
+shader_param/crt_scan_line_color = 0.0
+shader_param/aperture_grille_rate = 0.273
+shader_param/rf_switch_esque_blur = 1.0
+shader_param/white_noise_rate = 0.0
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/shake_power = 0.05
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.05
+
+[node name="ScreenEffects" type="CanvasLayer"]
+
+[node name="CrtEffectRect" type="ColorRect" parent="."]
+material = SubResource( 5 )
+margin_right = 640.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrtEffectRect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 7 )
+margin_right = 640.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GlitchEffectRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 3 )
+margin_right = 640.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

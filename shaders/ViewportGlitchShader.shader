@@ -4,10 +4,6 @@ shader_type canvas_item;
 
 // æŒ¯å‹•ã®å¼·ã•
 uniform float shake_power = 0.03;
-// æŒ¯å‹•çŽ‡
-uniform float shake_rate : hint_range( 0.0, 1.0 ) = 0.2;
-// æŒ¯å‹•é€Ÿåº¦
-uniform float shake_speed = 5.0;
 // æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
 uniform float shake_block_size = 30.5;
 // è‰²ã®åˆ†é›¢çŽ‡
@@ -18,10 +14,11 @@ float random(float seed) {
 }
 
 void fragment() {
-	float enable_shift = 1.0; // float(random(trunc(TIME * shake_speed)) < shake_rate);
+	float enable_shift = 1.0;
 
 	vec2 fixed_uv = SCREEN_UV;
 	fixed_uv.x += (random((trunc(SCREEN_UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+	fixed_uv.y += (random((trunc(SCREEN_UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
 
 	vec4 pixel_color = textureLod(SCREEN_TEXTURE, fixed_uv, 0.0);
 	pixel_color.r = mix(pixel_color.r, texture(SCREEN_TEXTURE, fixed_uv + vec2(shake_color_rate, 0.0)).r, enable_shift);

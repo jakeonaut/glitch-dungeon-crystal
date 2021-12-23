@@ -32,7 +32,7 @@
 [ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=30]
 [ext_resource path="res://assets/playerportrait.png" type="Texture" id=31]
 [ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=32]
-[ext_resource path="res://sceneObjects/GlitchScreenEffect.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=33]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )

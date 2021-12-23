@@ -14,7 +14,7 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=12]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=13]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/GlitchScreenEffect.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=15]
 
 [node name="level" type="Node"]
 script = ExtResource( 10 )
@@ -179,9 +179,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 [node name="Torch3" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 3, 0 )
 
-[node name="GlitchScreenEffect" parent="." instance=ExtResource( 15 )]
+[node name="ScreenEffects" parent="." instance=ExtResource( 15 )]
 
 [editable path="NPC3"]
 [editable path="NPC3/NPC TextBox"]
 [editable path="Torch2"]
-[editable path="GlitchScreenEffect"]
+[editable path="ScreenEffects"]
