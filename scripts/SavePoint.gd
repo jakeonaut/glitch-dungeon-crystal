@@ -36,7 +36,7 @@ func _process(delta):
 	rotate_y(step*delta)
 
 func generateId():
-	return get_tree().get_root().get_node("level").get_filename() + ":" + get_name()
+	return get_tree().get_root().get_node("Game/Viewport/level").get_filename() + ":" + get_name()
 
 func passiveActivate(delta):
 	if not global.memory.has("active_save_point") or global.memory["active_save_point"] != self.id:
@@ -45,7 +45,7 @@ func passiveActivate(delta):
 		global.memory["active_save_point_x"] = self.translation.x
 		global.memory["active_save_point_y"] = self.translation.y
 		global.memory["active_save_point_z"] = self.translation.z
-		global.memory["roomPath"] = get_tree().get_root().get_node("level").get_filename()
+		global.memory["roomPath"] = get_tree().get_root().get_node("Game/Viewport/level").get_filename()
 		global.saveGame()
 
 func isActive():

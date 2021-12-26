@@ -3,7 +3,7 @@ extends Node
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var gameCamera = get_node("GameCamera")
-onready var glitchScreenEffect = get_node("ScreenEffects/GlitchEffectRect")
+onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 

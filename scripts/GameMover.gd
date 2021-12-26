@@ -6,7 +6,7 @@ onready var jumpSound = get_node("Sounds/JumpSound") if has_node("Sounds/JumpSou
 onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("Sounds/DoubleJumpSound") else null
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
 
-onready var level = get_tree().get_root().get_node("level")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var levelTiles = null
 func getLevelTiles():
@@ -159,7 +159,7 @@ func getHitByBroom():
     pass
     
 func getCamera():
-    return get_tree().get_root().get_node("level").gameCamera
+    return get_tree().get_root().get_node("Game/Viewport/level").gameCamera
 
 func respawn():
     hv = Vector3(0, 0, 0)

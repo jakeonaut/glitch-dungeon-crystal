@@ -10,7 +10,7 @@ var is_active = true
 var player = null
 func getPlayer():
     if player == null:
-        player = get_tree().get_root().get_node("level").player
+        player = get_tree().get_root().get_node("Game/Viewport/level").player
     return player
 
 func _ready():
@@ -40,7 +40,7 @@ func _process(delta):
 func isActive():
     return is_active
 
-func passiveActivate(delta):
+func passiveActivate(_delta):
     transformSound.play()
     is_active = false
 

@@ -13,7 +13,7 @@ var initial_size = 15
 var levelTiles = null
 func getLevelTiles():
     if levelTiles == null:
-        levelTiles = get_tree().get_root().get_node("level").levelTiles
+        levelTiles = get_tree().get_root().get_node("Game/Viewport/level").levelTiles
     return levelTiles
 
 func _ready():

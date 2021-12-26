@@ -1,6 +1,5 @@
 extends "GameMover.gd"
 
-onready var meshInstance = get_node("MeshInstance")
 var flipTimer = 0
 var flipTimeLimit = 4
 

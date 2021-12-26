@@ -79,7 +79,6 @@ func _ready():
                 setRandomTileNameOfType("BrickSolid", 8, cell_index)
         elif tile_name == "CloudSemisolid":
             var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-            var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
             if top_neighbor_tile_type == -1: # no top neighbor
                 setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index)
             else:

@@ -17,7 +17,6 @@ var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
 var glitch_death_timer = 0
-var stupid_variable = false
 
 func _ready():
 	set_process_input(true)
@@ -100,6 +99,13 @@ func wearCostume(costume):
 func _process(delta):
 	# ._process(delta) #NOTE: this super method is called automatically 
 	# https://github.com/godotengine/godot/issues/6500
+
+	if physics_state == PhysicsState.GLITCH_DYING:
+		glitch_death_timer += (delta*22)
+		if glitch_death_timer >= 10:
+			level.glitchScreenEffect.visible = false
+			get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
+			self.physics_state = PhysicsState.NORMAL
 
 	if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
 		if not global.pauseGame:
@@ -195,30 +201,14 @@ func isOnSavePoint():
 # @override
 func tryDieToEnemy(delta):
 	if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
-	   physics_state != PhysicsState.GLITCH_DYING:
-		if stupid_variable or isOnSavePoint():
-			stupid_variable = false
-			print("stupid")
-			print(self.global_transform.origin)
-			print(Vector3(
-				global.memory["active_save_point_x"], 
-				global.memory["active_save_point_y"], 
-				global.memory["active_save_point_z"]))
-		else:
-			hurtSound.play()
-			global.pauseGame = true
-			global.pauseMoveInput = true
-			global.isRespawning = true
-			level.glitchScreenEffect.visible = true
-			physics_state = PhysicsState.GLITCH_DYING
-			glitch_death_timer = 0
-			stupid_variable = true
-	elif physics_state == PhysicsState.GLITCH_DYING:
-		glitch_death_timer += (delta*22)
-		if glitch_death_timer >= 10:
-			level.glitchScreenEffect.visible = false
-			get_tree().get_root().get_node("level").tryToRespawn()
-			self.physics_state = PhysicsState.NORMAL
+	   physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
+		hurtSound.play()
+		global.pauseGame = true
+		global.pauseMoveInput = true
+		global.isRespawning = true
+		level.glitchScreenEffect.visible = true
+		physics_state = PhysicsState.GLITCH_DYING
+		glitch_death_timer = 0
 		
 func tryDieFromOffscreen():
 	if not transitioning:

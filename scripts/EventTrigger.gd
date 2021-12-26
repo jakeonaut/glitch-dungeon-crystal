@@ -3,7 +3,7 @@ extends Area
 var playerArea = null
 func getPlayerArea():
     if playerArea == null:
-        playerArea = get_tree().get_root().get_node("level").player.get_node("InteractionArea")
+        playerArea = get_tree().get_root().get_node("Game/Viewport/level").player.get_node("InteractionArea")
     return playerArea
 
 var hasActivated = false

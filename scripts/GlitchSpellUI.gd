@@ -9,7 +9,7 @@ onready var whiteSpell = get_node("TextureRect/WhiteSpell")
 var player = null
 func getPlayer():
 	if player == null:
-		player = get_tree().get_root().get_node("level").player
+		player = get_tree().get_root().get_node("Game/Viewport/level").player
 	return player
 
 

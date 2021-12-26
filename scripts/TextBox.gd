@@ -22,7 +22,7 @@ var bot_margin_start = 0
 
 var focus_me = false
 
-onready var level = get_tree().get_root().get_node("level")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var gameCamera = null
 func getGameCamera():

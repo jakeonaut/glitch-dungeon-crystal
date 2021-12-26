@@ -11,7 +11,7 @@ var spawn_timer = 0
 var spawn_time_limit = 3
 var target_origin = Vector3(0, 0, 0)
 
-onready var level = get_tree().get_root().get_node("level")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var levelTiles = null
 func getLevelTiles():

@@ -23,9 +23,9 @@ main_scene="res://MainMenu.tscn"
 
 [autoload]
 
-global="*res://scripts/global.gd"
-transition="*res://transition.tscn"
-musicPlayer="*res://sceneObjects/musicPlayer.tscn"
+global="*res://scripts/autoload/global.gd"
+transition="*res://sceneObjects/_autoload/transition.tscn"
+musicPlayer="*res://sceneObjects/_autoload/musicPlayer.tscn"
 
 [display]
 
