@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
@@ -11,21 +11,27 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=26]
 
-[node name="level" type="Node"]
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Node"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 640, 512 )
+
+[node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 23 )]
 
-[node name="commonWorldEnvironment" parent="." instance=ExtResource( 23 )]
-
-[node name="BackgroundControl" type="Control" parent="."]
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="ColorRect" parent="BackgroundControl"]
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
 margin_right = 1728.0
 margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -33,7 +39,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BackgroundControl"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Viewport/level/BackgroundControl"]
 margin_left = 372.54
 margin_top = 311.231
 margin_right = 756.54
@@ -51,14 +57,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameCamera" parent="." instance=ExtResource( 18 )]
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 18 )]
 size = 20.0
 speed = 10.0
 
-[node name="Player" parent="." instance=ExtResource( 22 )]
+[node name="Player" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.29238, 0 )
 
-[node name="LevelTiles" type="GridMap" parent="."]
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 1 )
 cell_size = Vector3( 1, 1, 1 )
@@ -73,7 +79,7 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 7, 0 )
 }
 
-[node name="CosmeticLevelTiles" type="GridMap" parent="LevelTiles"]
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 mesh_library = ExtResource( 6 )
 cell_size = Vector3( 1, 1, 1 )
@@ -87,6 +93,15 @@ data = {
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_clip_": 0
+}
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 1 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 26 )]

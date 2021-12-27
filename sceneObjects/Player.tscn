@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -20,9 +20,10 @@
 [ext_resource path="res://assets/DELETEME/LA_Link_Fall.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/worm.wav" type="AudioStream" id=19]
 [ext_resource path="res://assets/sounds/wormClimb.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/sounds/hurt.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/glitchhurt.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -38,7 +39,11 @@ height = 2.3
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 8 )
@@ -286,7 +291,7 @@ tracks/0/keys = {
 "values": [ 3, 9 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=27]
 resource_name = "wakeup"
 length = 0.9
 tracks/0/type = "value"
@@ -302,7 +307,7 @@ tracks/0/keys = {
 "values": [ 31, 30, 29, 24, 25, 26, 27, 0 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=28]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -318,7 +323,7 @@ tracks/0/keys = {
 "values": [ 2, 3 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=29]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -333,7 +338,7 @@ tracks/0/keys = {
 "values": [ 24, 25 ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=26]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -431,7 +436,8 @@ material/0 = null
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
-volume_db = -25.0
+volume_db = -30.0
+pitch_scale = 1.1
 
 [node name="DoubleJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 13 )
@@ -447,15 +453,16 @@ volume_db = -30.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
-volume_db = -30.0
+volume_db = -31.0
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )
-volume_db = -30.0
+volume_db = -25.0
 
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
 volume_db = -25.0
+pitch_scale = 0.8
 
 [node name="WormSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
@@ -467,7 +474,11 @@ volume_db = -30.0
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 21 )
-volume_db = -20.0
+volume_db = -15.0
+
+[node name="HurtSound2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 24 )
+volume_db = -10.0
 
 [node name="SkateSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )
@@ -494,7 +505,7 @@ anims/sad = SubResource( 19 )
 anims/stand = SubResource( 20 )
 anims/teeter = SubResource( 21 )
 anims/turnAround = SubResource( 22 )
-anims/wakeup = SubResource( 26 )
-anims/walk = SubResource( 23 )
-anims/walkStart = SubResource( 24 )
-anims/walkStop = SubResource( 25 )
+anims/wakeup = SubResource( 27 )
+anims/walk = SubResource( 28 )
+anims/walkStart = SubResource( 29 )
+anims/walkStop = SubResource( 26 )

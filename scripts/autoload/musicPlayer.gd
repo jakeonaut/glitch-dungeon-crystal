@@ -8,7 +8,10 @@ onready var suburbThemePlayer = get_node("SuburbThemePlayer")
 onready var swampThemePlayer = get_node("SwampThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 
+var currentlyPlayingTheme = null
+
 func stopAll():
+    changeSongPitch(1.0)
     titleThemePlayer.stop()
     dungeonThemePlayer.stop()
     debugThemePlayer.stop()
@@ -16,8 +19,12 @@ func stopAll():
     suburbThemePlayer.stop()
     swampThemePlayer.stop()
     goddessThemePlayer.stop()
+    currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
+    print(path)
+    print("hello")
+    changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0:
         self.playGoddess()
     elif path.find("Intro") > 0:
@@ -31,34 +38,47 @@ func conductFromScenePath(path):
     elif path.find("Swamp") > 0:
         self.playSwamp()
     elif path.find("MainMenu") > 0:
-        titleThemePlayer.play()
+        titleThemePlayer.play() # TODO(jaketrower!!!)
+    changeSongPitch(1.0)
+    print(currentlyPlayingTheme)
+
+func changeSongPitch(new_pitch):
+    # TODO(jaketrower): reset pitches when you play them
+    if currentlyPlayingTheme:
+        currentlyPlayingTheme.pitch_scale = new_pitch
 
 func playDungeon():
     if dungeonThemePlayer.is_playing(): return
     self.stopAll()
     dungeonThemePlayer.play()
+    currentlyPlayingTheme = dungeonThemePlayer
 
 func playDebug():
     if debugThemePlayer.is_playing(): return
     self.stopAll()
     debugThemePlayer.play()
+    currentlyPlayingTheme = debugThemePlayer
     
 func playCasino():
     if casinoThemePlayer.is_playing(): return
     self.stopAll()
     casinoThemePlayer.play()
+    currentlyPlayingTheme = casinoThemePlayer
 
 func playSuburb():
     if suburbThemePlayer.is_playing(): return
     self.stopAll()
     suburbThemePlayer.play()
+    currentlyPlayingTheme = suburbThemePlayer
 
 func playSwamp():
     if swampThemePlayer.is_playing(): return
     self.stopAll()
     swampThemePlayer.play()
+    currentlyPlayingTheme = swampThemePlayer
 
 func playGoddess():
     if goddessThemePlayer.is_playing(): return
     self.stopAll()
     goddessThemePlayer.play()
+    currentlyPlayingTheme = goddessThemePlayer

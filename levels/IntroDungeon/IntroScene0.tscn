@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=2]
@@ -16,26 +16,42 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=15]
 
-[node name="level" type="Node"]
+[sub_resource type="BoxShape" id=2]
+resource_local_to_scene = true
+extents = Vector3( 3, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=3]
+resource_local_to_scene = true
+extents = Vector3( 4, 1.3, 1.3 )
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Node"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 640, 512 )
+
+[node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 10 )
 
-[node name="commonWorldEnvironment" parent="." instance=ExtResource( 6 )]
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 6 )]
 
-[node name="BackgroundControl" type="Control" parent="."]
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="ColorRect" parent="BackgroundControl"]
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
 margin_right = 1728.0
 margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="GameCamera" parent="." instance=ExtResource( 2 )]
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 2 )]
 
-[node name="LevelTiles" type="GridMap" parent="."]
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 12 )
 cell_size = Vector3( 1, 1, 1 )
@@ -50,7 +66,7 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 7, 0 )
 }
 
-[node name="CosmeticLevelTiles" type="GridMap" parent="LevelTiles"]
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 mesh_library = ExtResource( 13 )
 cell_size = Vector3( 1, 1, 1 )
@@ -66,10 +82,10 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 45, 0 )
 
-[node name="NPC3" parent="." instance=ExtResource( 8 )]
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60055, 2.10336, 0 )
 visible = false
 grav = 0
@@ -77,7 +93,10 @@ bbText = "hey..! wake up..!
 .....................
 PRESS ARROW KEYS"
 
-[node name="NPC" parent="." instance=ExtResource( 8 )]
+[node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5869, -4.89664, 0 )
 visible = false
 grav = 0
@@ -85,103 +104,108 @@ bbText = "welcome to our home
 ....
 PRESS UP TO JUMP"
 
-[node name="NPC8" parent="." instance=ExtResource( 8 )]
+[node name="NPC8" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0467, 0.10336, 0 )
 grav = 0
 bbText = "here.. try some
 nutritional glitch stew
 it keeps you strong"
 
-[node name="NPC5" parent="." instance=ExtResource( 8 )]
+[node name="NPC5" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.0467, 0.10336, 0 )
 grav = 0
 bbText = "we live in harmony
 with these strange
 glowing squares"
 
-[node name="NPC6" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.0467, 9.10336, 0 )
+[node name="NPC7" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.0467, 0.10336, 0 )
 visible = false
 grav = 0
 bbText = "one day they just
 started showing
-up."
-
-[node name="NPC7" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.0467, 0.10336, 0 )
-visible = false
-grav = 0
-bbText = "well, we just
+up.
+well, we just
 showed up some
 day too."
 
-[node name="NPC2" parent="." instance=ExtResource( 8 )]
+[node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
+shape = SubResource( 3 )
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
 visible = false
 grav = 0
-bbText = "you say you're
-looking for a cat?
-i think i saw one running
-this way...
-PRESS DOWN TO
+bbText = "PRESS DOWN TO
 GO THROUGH DOORS"
 
-[node name="Door" parent="." instance=ExtResource( 7 )]
+[node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78, -1, 0 )
 path = "res://levels/IntroDungeon/IntroScene1.tscn"
 
-[node name="Torch2" parent="." instance=ExtResource( 1 )]
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0 )
 
-[node name="Sprite3D" parent="Torch2" index="0"]
+[node name="Sprite3D" parent="Viewport/level/Torch2" index="0"]
 frame = 3
 
-[node name="GlitchEnemy4" parent="." instance=ExtResource( 3 )]
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0214, 0.00959241, 0 )
 grav = 0
 
-[node name="GlitchEnemy5" parent="." instance=ExtResource( 3 )]
+[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0214, 0.00959241, 0 )
 grav = 0
 
-[node name="GlitchEnemy2" parent="." instance=ExtResource( 3 )]
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 11, 0 )
 grav = 0
 
-[node name="GlitchEnemy3" parent="." instance=ExtResource( 3 )]
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -1, 0 )
 grav = 0
 
-[node name="WallTorch" parent="." instance=ExtResource( 4 )]
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
 
-[node name="WallTorch2" parent="." instance=ExtResource( 4 )]
+[node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 0 )
 
-[node name="WallTorch4" parent="." instance=ExtResource( 4 )]
+[node name="WallTorch4" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 4, 0 )
 
-[node name="WallTorch5" parent="." instance=ExtResource( 4 )]
+[node name="WallTorch5" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 2, 0 )
 
-[node name="WallTorch6" parent="." instance=ExtResource( 4 )]
+[node name="WallTorch6" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 2, 0 )
 
-[node name="SavePoint" parent="." instance=ExtResource( 14 )]
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -1, 0 )
 
-[node name="SavePoint2" parent="." instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 0, 0 )
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 4, 0 )
 
-[node name="Torch" parent="." instance=ExtResource( 1 )]
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 
-[node name="Torch3" parent="." instance=ExtResource( 1 )]
+[node name="Torch3" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 3, 0 )
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 1 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 15 )]
 
-[editable path="NPC3"]
-[editable path="NPC3/NPC TextBox"]
-[editable path="Torch2"]
+[editable path="Viewport/level/NPC3"]
+[editable path="Viewport/level/NPC3/NPC TextBox"]
+[editable path="Viewport/level/NPC7"]
+[editable path="Viewport/level/NPC7/NPC TextBox"]
+[editable path="Viewport/level/Torch2"]
 [editable path="ScreenEffects"]

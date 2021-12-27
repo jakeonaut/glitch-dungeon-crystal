@@ -31,7 +31,7 @@ func playerRespawn(transition_name):
     fallSound.play()
     global.isRespawning = true
     # global transition scene, see res://scripts/transition.gd
-    var currLevelPath = get_tree().get_root().get_node("Game/Viewport/level").filename
+    var currLevelPath = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
     transitioning = true
 
     if transition_name == "long_fade":

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fairy.wav-9e3a60cd2d7f8fcef29ade0a6e29bed7.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Fairy.wav"
+dest_files=[ "res://.import/Fairy.wav-9e3a60cd2d7f8fcef29ade0a6e29bed7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

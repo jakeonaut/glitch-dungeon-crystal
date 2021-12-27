@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Yokai.wav-2c48ea44fba5eb4420724e2a2fcea4ad.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Yokai.wav"
+dest_files=[ "res://.import/Yokai.wav-2c48ea44fba5eb4420724e2a2fcea4ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

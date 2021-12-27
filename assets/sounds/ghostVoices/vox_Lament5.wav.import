@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/vox_Lament5.wav-d8d4ca54d9b48507fa0c576280d5fe90.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ghostVoices/vox_Lament5.wav"
+dest_files=[ "res://.import/vox_Lament5.wav-d8d4ca54d9b48507fa0c576280d5fe90.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

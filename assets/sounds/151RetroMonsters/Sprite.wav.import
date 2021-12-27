@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sprite.wav-5d6bd240aef90aedf43bf9a991e4b440.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Sprite.wav"
+dest_files=[ "res://.import/Sprite.wav-5d6bd240aef90aedf43bf9a991e4b440.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

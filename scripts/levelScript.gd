@@ -41,7 +41,8 @@ func _ready_impl():
     global.activeThrowableObjectPath = null
 
     # update music
-    musicPlayer.conductFromScenePath(self.get_filename())
+    print("filename: " + str(getLevelName()))
+    musicPlayer.conductFromScenePath(getLevelName())
 
 # TODO(jaketrower): Remove this level edit stuff in final cut ?!?
 func _process(delta):
@@ -58,6 +59,9 @@ func _process(delta):
 func overrideLevelRespawnEvent():
     pass
 
+func getLevelName():
+    return get_tree().get_root().get_node("Game").get_filename()
+
 func tryToRespawn():
     if global.activeInteractor != null:
         global.activeInteractor.stopInteract()
@@ -66,8 +70,9 @@ func tryToRespawn():
     global.pauseGame = false
 
     var found_door = null
-    if global.memory.has("active_save_point") and global.isRespawning \
-       and global.memory["roomPath"] == self.get_filename():
+    if global.memory.has("active_save_point_x") and global.isRespawning \
+       and global.memory["roomPath"] == getLevelName():
+        print(global.memory["active_save_point_x"])
         player.global_transform.origin = Vector3(
             global.memory["active_save_point_x"], 
             global.memory["active_save_point_y"], 
@@ -86,8 +91,8 @@ func tryToRespawn():
             found_door = doors[0]
 
     ########### (not anymore!) # camera update ... if player has never visited this room.. give it the "default" perspective
-    if not global.memory.has(self.get_filename()):
-        global.memory[self.get_filename()] = true
+    if not global.memory.has(getLevelName()):
+        global.memory[getLevelName()] = true
         if found_door:
             found_door.land()
             # player.getCamera().rotateTo(found_door.rotation_degrees.y + 180, true)

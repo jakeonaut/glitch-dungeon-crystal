@@ -26,9 +26,9 @@ material/0 = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0.245172, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.245172, 0 )
 shape = SubResource( 3 )
 
 [node name="SaveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -22.0
+volume_db = -27.0

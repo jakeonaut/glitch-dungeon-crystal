@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Dog Bark.wav-788680c4020fe417dee71b1bd72bcb2a.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Dog Bark.wav"
+dest_files=[ "res://.import/Dog Bark.wav-788680c4020fe417dee71b1bd72bcb2a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

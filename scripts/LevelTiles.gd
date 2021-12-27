@@ -106,6 +106,8 @@ func _process(delta):
         randomize_timer = 0
         randomizeTile(tile_index_array[randi() % tile_index_array.size()])
 
+    # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
+
 func randomizeTile(cell_index):
     var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
     var tile_name = mesh_library.get_item_name(tile_type)

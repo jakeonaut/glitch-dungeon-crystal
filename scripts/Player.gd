@@ -2,6 +2,7 @@ extends "PlayerGameMover.gd"
 
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var hurtSound = get_node("Sounds/HurtSound")
+onready var hurt2Sound = get_node("Sounds/HurtSound2")
 
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
@@ -81,19 +82,6 @@ func walkThroughWallsGlitch():
 	# mySprite.setNightgown()
 
 func wearCostume(costume):
-	# if costume == "normal": 
-	#     mySprite.setNormalClothes()
-	# elif costume == "moth": 
-	#     mySprite.setMothCostume()
-	# elif costume == "bugcatcher": 
-	#     mySprite.setBugCatcherCostume()
-	# elif costume == "cleric": 
-	#     mySprite.setClericCostume()
-	#     jumpSound = get_node("Sounds/JumpOverallsSound")
-	# elif costume == "luckycat": 
-	#     mySprite.setLuckyCatCostume()
-	# elif costume == "nightgown": 
-	#     mySprite.setNightgown()
 	global.memory["player_costume"] = costume
 	
 func _process(delta):
@@ -101,19 +89,32 @@ func _process(delta):
 	# https://github.com/godotengine/godot/issues/6500
 
 	if physics_state == PhysicsState.GLITCH_DYING:
+		global.pauseGame = true
 		glitch_death_timer += (delta*22)
+
 		if glitch_death_timer >= 10:
-			level.glitchScreenEffect.visible = false
 			get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
 			self.physics_state = PhysicsState.NORMAL
-
-	if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
-		if not global.pauseGame:
-			if pauseMenu: pauseMenu.show()
-			global.pauseGame = true
-		else:
-			if pauseMenu: pauseMenu.hide()
 			global.pauseGame = false
+	else:
+		if glitch_death_timer != 0:
+			glitch_death_timer += (delta*22)
+			applyGlitchDeathEffects(abs(glitch_death_timer))
+			if glitch_death_timer >= 40:
+				musicPlayer.changeSongPitch(1.0)
+				level.glitchScreenEffect.visible = false
+				glitch_death_timer = 0
+				var my_material = mySprite.get_material_override()
+				if my_material is ShaderMaterial:
+					my_material.set_shader_param("enable_glitch", false)
+			
+		if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
+			if not global.pauseGame:
+				if pauseMenu: pauseMenu.show()
+				global.pauseGame = true
+			else:
+				if pauseMenu: pauseMenu.hide()
+				global.pauseGame = false
 
 	if Input.is_action_just_pressed("ui_glitch_next"):
 		applyNextGlitch()
@@ -126,9 +127,73 @@ func _process(delta):
 		global_transform.origin.x < self.getCamera().leftmost_x - DEATH_MARGIN or \
 		global_transform.origin.y > self.getCamera().topmost_y + DEATH_MARGIN or \
 		global_transform.origin.y < self.getCamera().botmost_y - DEATH_MARGIN:
-			print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
+			#print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
 			self.respawn()
 
+	doBroomLogic(delta)
+	#tryRotateCamera(delta)
+
+func applyGlitchDeathEffects(x):
+	if x < 0 or x > 20:
+		musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
+	var material = level.glitchScreenEffect.get_material()
+	if material is ShaderMaterial:
+		material.set_shader_param("shake_power", -.0001*pow(x-25, 2) + .02)
+		material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .01)
+
+	var my_material = mySprite.get_material_override()
+	if my_material is ShaderMaterial:
+		my_material.set_shader_param("enable_glitch", false)
+
+func _physics_process(delta):
+	# ._process_physics(delta) #NOTE: this super method is called automatically 
+	# https://github.com/godotengine/godot/issues/6500
+	pass
+
+func tryRotateCamera(delta):
+	pass
+
+func isOnSavePoint():
+	if not global.memory.has("active_save_point_x"):
+		return false
+		
+	var origin = self.global_transform.origin
+	var x = origin.x
+	var y = origin.y
+	var z = origin.z
+	return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
+		   int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
+		   int(round(z)) == int(round(global.memory["active_save_point_z"]))
+
+# @override
+func tryDieToEnemy(delta):
+	if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
+	   physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
+		if randi() % 3 == 0:
+			hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
+			hurt2Sound.play()
+		else:
+			hurtSound.pitch_scale = rand_range(0.8, 1.5)
+			hurtSound.play()
+		bumpSound.play()
+		global.pauseGame = true
+		global.pauseMoveInput = true
+		global.isRespawning = true
+		level.glitchScreenEffect.visible = true
+		var material = level.glitchScreenEffect.get_material()
+		if material is ShaderMaterial:
+			material.set_shader_param("shake_power", 0.01)
+			material.set_shader_param("shake_color_rate", 0.01)
+		var my_material = mySprite.get_material_override()
+		if my_material is ShaderMaterial:
+			my_material.set_shader_param("enable_glitch", true)
+
+		physics_state = PhysicsState.GLITCH_DYING
+		glitch_death_timer = 0
+
+		musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+
+func doBroomLogic(delta):
 	if broom_state != 0:
 		broom_timer += (delta*22)
 		if broom_timer >= broom_time_limit:
@@ -156,67 +221,6 @@ func _process(delta):
 				broom_state += 1
 				if broom_state == 0:
 					can_broom = true
-
-
-	#tryRotateCamera(delta)
-
-	if global.pauseGame: return
-
-func _physics_process(delta):
-	# ._process_physics(delta) #NOTE: this super method is called automatically 
-	# https://github.com/godotengine/godot/issues/6500
-	pass
-
-func tryRotateCamera(delta):
-	pass
-	# if Input.is_action_pressed("ui_rotate_left"):
-	#     cameraRotationCounter += delta
-	#     getCamera().rotate_left((delta*66)+(cameraRotationCounter*36))
-	# elif Input.is_action_pressed("ui_rotate_right"):
-	#     cameraRotationCounter += delta
-	#     getCamera().rotate_right((delta*66)+(cameraRotationCounter*36))
-	# else: cameraRotationCounter = 0
-		
-	# if cameraRotationCounter > 1: cameraRotationCounter = 1
-	
-	# if Input.is_action_pressed("ui_rotate_up"):
-	#     getCamera().rotate_up(3*(delta*66))
-	# if Input.is_action_pressed("ui_rotate_down"):
-	#     getCamera().rotate_down(3*(delta*66))
-
-	# if Input.is_action_just_pressed("ui_focus_next"):
-	#     getCamera().toggleNext()
-	# if Input.is_action_just_pressed("ui_focus_forward"):
-	#     getCamera().focusForward(facing)
-
-func isOnSavePoint():
-	var origin = self.global_transform.origin
-	var x = origin.x
-	var y = origin.y
-	var z = origin.z
-	return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
-		   int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
-		   int(round(z)) == int(round(global.memory["active_save_point_z"]))
-
-# @override
-func tryDieToEnemy(delta):
-	if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
-	   physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
-		hurtSound.play()
-		global.pauseGame = true
-		global.pauseMoveInput = true
-		global.isRespawning = true
-		level.glitchScreenEffect.visible = true
-		physics_state = PhysicsState.GLITCH_DYING
-		glitch_death_timer = 0
-		
-func tryDieFromOffscreen():
-	if not transitioning:
-		hurtSound.play()
-		global.pauseGame = true
-		global.pauseMoveInput = true
-		global.isRespawning = true
-		get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
 
 func tryBroom():
 	if can_broom:        

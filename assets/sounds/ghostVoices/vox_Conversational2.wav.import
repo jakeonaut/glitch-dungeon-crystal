@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/vox_Conversational2.wav-869a7e1e6bb2f99b8e2762ff58e1f708.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ghostVoices/vox_Conversational2.wav"
+dest_files=[ "res://.import/vox_Conversational2.wav-869a7e1e6bb2f99b8e2762ff58e1f708.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

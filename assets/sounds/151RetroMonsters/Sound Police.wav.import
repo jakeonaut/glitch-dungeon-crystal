@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sound Police.wav-756f47c03fd08e16fde12fbd1cb1f9dc.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Sound Police.wav"
+dest_files=[ "res://.import/Sound Police.wav-756f47c03fd08e16fde12fbd1cb1f9dc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

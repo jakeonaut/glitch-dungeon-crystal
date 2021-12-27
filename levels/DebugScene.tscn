@@ -202,6 +202,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 20, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0 )
+grav = 0
 behavior_walking = true
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 18 )]

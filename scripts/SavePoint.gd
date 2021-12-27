@@ -19,7 +19,7 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	if global.memory.has("active_save_point") and global.memory["active_save_point"] == self.id:
+	if isOnSavePoint():
 		step = MAX_STEP
 		if not is_active:
 			var material = meshInstance.get_surface_material(0).duplicate(true)
@@ -35,17 +35,28 @@ func _process(delta):
 		is_active = false
 	rotate_y(step*delta)
 
+func isOnSavePoint():
+	if not global.memory.has("active_save_point_x"):
+		return false
+
+	var origin = self.global_transform.origin
+	var x = origin.x
+	var y = origin.y
+	var z = origin.z
+	return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
+			int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
+			int(round(z)) == int(round(global.memory["active_save_point_z"]))
+
 func generateId():
-	return get_tree().get_root().get_node("Game/Viewport/level").get_filename() + ":" + get_name()
+	return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 func passiveActivate(delta):
-	if not global.memory.has("active_save_point") or global.memory["active_save_point"] != self.id:
+	if not isOnSavePoint():
 		saveSound.play()
-		global.memory["active_save_point"] = self.id
 		global.memory["active_save_point_x"] = self.translation.x
 		global.memory["active_save_point_y"] = self.translation.y
 		global.memory["active_save_point_z"] = self.translation.z
-		global.memory["roomPath"] = get_tree().get_root().get_node("Game/Viewport/level").get_filename()
+		global.memory["roomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
 		global.saveGame()
 
 func isActive():

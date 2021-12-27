@@ -36,8 +36,8 @@ float random (vec2 uv) {
 void fragment() {
     vec4 incolor = texture(texture_albedo, UV);
     int index = getpaletteidx(incolor.rgb);
-    float fdelta = float(index) - TIME * 3.0;
-    float mod2 = mod(fdelta,float(palettesize));
+    float fdelta = float(index) - TIME * 5.0;
+    float mod2 = 8.0 + mod(fdelta, float(5));
     int delta = int(mod2);
     vec3 color = getpalettecolor(delta);
     if (index > -1) {
@@ -46,5 +46,5 @@ void fragment() {
     else {
         ALBEDO.rgb = vec3(0,1,0);
     }
-    ALPHA = 1.0;
+    ALPHA = incolor.a;
 }

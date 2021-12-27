@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hellhound.wav-727efcd9c73f008fce9b82782c0750cb.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Hellhound.wav"
+dest_files=[ "res://.import/Hellhound.wav-727efcd9c73f008fce9b82782c0750cb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
