@@ -26,6 +26,10 @@ func _ready_impl():
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
+
+    # update music
+    print("filename: " + str(getLevelName()))
+    musicPlayer.conductFromScenePath(getLevelName())
     
     tryToRespawn()
 
@@ -39,10 +43,6 @@ func _ready_impl():
     else:
         pass
     global.activeThrowableObjectPath = null
-
-    # update music
-    print("filename: " + str(getLevelName()))
-    musicPlayer.conductFromScenePath(getLevelName())
 
 # TODO(jaketrower): Remove this level edit stuff in final cut ?!?
 func _process(delta):

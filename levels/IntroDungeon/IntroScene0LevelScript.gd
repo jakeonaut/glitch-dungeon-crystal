@@ -19,8 +19,6 @@ func _process(delta):
         if cutscene_timer > 115:
             global.pauseMoveInput = false
     elif cutscene_timer > 115 and global.activeInteractor == get_node("NPC3/NPC TextBox/TextBox"):
-        global.activeInteractor.hideTextbox()
-        get_node("NPC3/NPC TextBox/TextBox").text_final = "are you from\nthe outside world?"
         cutscene_timer = 0
 
 func overrideLevelRespawnEvent():

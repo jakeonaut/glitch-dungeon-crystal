@@ -9,15 +9,13 @@
 shader = ExtResource( 2 )
 shader_param/base_palette = ExtResource( 3 )
 
-[node name="CanvasLayer" type="CanvasLayer"]
-
-[node name="GlitchAura" type="Control" parent="."]
+[node name="GlitchAura" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="GlitchAura"]
+[node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 1 )
 margin_left = -50.0
 margin_top = -50.0

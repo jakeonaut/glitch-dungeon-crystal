@@ -2,6 +2,7 @@ extends KinematicBody
 
 onready var landSound = get_node("Sounds/LandSound") if has_node("Sounds/LandSound") else null
 onready var bumpSound = get_node("Sounds/BumpSound") if has_node("Sounds/BumpSound") else null
+onready var fallSound = get_node("Sounds/FallSound") if has_node("Sounds/FallSound") else null
 onready var jumpSound = get_node("Sounds/JumpSound") if has_node("Sounds/JumpSound") else null
 onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("Sounds/DoubleJumpSound") else null
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
@@ -259,11 +260,18 @@ func applyGravity(delta):
 		else:
 			fall_timer = 0
 		if lv.y < 0 and not on_ground and aniPlayer and (aniPlayer.current_animation != "jumpSquat" and aniPlayer.current_animation != "jumpStart" and \
-		   aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart"):
+		   aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart" and \
+		   aniPlayer.current_animation != "fallFar"):
 			aniPlayer.clear_queue()
 			aniPlayer.stop()
 			aniPlayer.queue("fallStart")
 			aniPlayer.queue("fall")
+		if lv.y and fall_timer > 20 and aniPlayer and aniPlayer.current_animation != "fallFar":
+			aniPlayer.clear_queue()
+			aniPlayer.stop()
+			aniPlayer.play("fallFar")
+			if fallSound: fallSound.play()
+			
 
 func applyTerminalVelocity(delta):
 	feather_fall_timer += (delta*22)
@@ -895,8 +903,9 @@ func landed():
 	if aniPlayer != null and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
 		aniPlayer.clear_queue()
 		if fall_timer > 30 and not glitch_form == GlitchForm.FEATHER:
-			aniPlayer.play("collapse", -1, 1.0)
+			aniPlayer.play("fallFlat", -1, 1.0)
 			physics_state = PhysicsState.COLLAPSED
+			if bumpSound: bumpSound.play()
 		else:
 			aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 2.0)
 	fall_timer = 0

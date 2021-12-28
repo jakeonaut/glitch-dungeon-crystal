@@ -1,7 +1,5 @@
 extends "GameMover.gd"
 
-onready var fallSound = get_node("Sounds/FallSound")
-
 var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0

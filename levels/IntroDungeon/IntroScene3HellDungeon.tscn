@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -17,7 +17,7 @@
 [ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=16]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=17]
-[ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=18]
 [ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=21]
@@ -29,7 +29,6 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=27]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=28]
 [ext_resource path="res://levels/IntroDungeon/IntroScene3HellDungeonNPCAbortSound.gd" type="Script" id=29]
-[ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=30]
 [ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=32]
 [ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=33]
 
@@ -105,7 +104,7 @@ radius = 0.9
 radius = 1.5
 
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 3, 2, 1.3 )
+extents = Vector3( 2, 2, 1.3 )
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 17 )
@@ -211,11 +210,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0 )
-is_locked = true
+path = "res://levels/IntroDungeon/IntroScene2Forest.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 10, 0 )
-path = "res://levels/Scene4Nullification.tscn"
+path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5193, 6.43651, 0 )
@@ -237,10 +236,6 @@ grav = 0
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -2, 0 )
-grav = 0
-
-[node name="GlitchEnemy12" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4, 3.7, 0 )
 grav = 0
 
 [node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 10 )]
@@ -267,17 +262,15 @@ grav = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -3, 0 )
 grav = 0
 
+[node name="GlitchEnemy13" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, 6.1, 0 )
+grav = 0
+
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06627, 0, 0 )
 
 [node name="SavePoint4" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9663, 4, 0 )
-
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.84038, 5.45035, 0 )
-
-[node name="Obelisk2" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.97909, 4.96427, -0.769371 )
 
 [node name="NPC4" type="KinematicBody" parent="Viewport/level" groups=[
 "npc",
@@ -349,7 +342,7 @@ i'm not very helpful
 
 the glitches in this
 room make my head
-hu̵rt a little=̵̜͉̌̈̑̐͋͆̽̌͝/̷̡̛̛̛̭͈̬̯̥͇̰̳͖͓́̈́̈̐̈́̑̌͊̏͗́̈͐̃͗̂͛̂̂́͒̔́̿̍̓̏̐̈́̒̏́̏̈́̇́͘̕͘͝͝͠͝͠ͅͅ-̷̡̧̨̢̛̛̛̺̻̟͍̥̟͇̩̳̼̝͈̭̟̞͚̙̭͕͈͚͉̞͔͖̼̤̤̳̩͙̗̟̝̗͍̣͈̞̤̙͖̓̄̒̅͐́̈́͊͊̈̆̀̅̄̾̃̈́̒͂̆̎̄̈͂̑̉̏͛̅̊̄̒̌̅͛̅͑͆͘̚͜͜͝͠[̷͛̽
+hu̵rt a little=̵̜͉̌̈̑̐͋͆̽̌͝/
 i would leave but
 recently i haven't
 been able to move"
@@ -369,7 +362,7 @@ shape = SubResource( 9 )
 script = ExtResource( 25 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.2, 0 )
 shape = SubResource( 10 )
 
 [node name="NPC TextBox" parent="Viewport/level/NPC" instance=ExtResource( 23 )]
@@ -385,9 +378,9 @@ pitch_scale = 0.76
 script = ExtResource( 12 )
 
 [node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="4"]
-stream = ExtResource( 30 )
+stream = ExtResource( 18 )
 volume_db = -28.0
-pitch_scale = 0.75
+pitch_scale = 0.5
 script = ExtResource( 29 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/NPC" groups=[

@@ -1,12 +1,13 @@
 extends AudioStreamPlayer
 
 func _ready():
-	pass
+    pass
 
 func activateScript():
-	var npc = get_node("../../..")
-	npc.visible = false
+    var npc = get_node("../../..")
+    npc.visible = false
+    npc.can_activate = false
 
 func isActive():
-	# OVERRIDE ME... if you dare
-	return true
+    # OVERRIDE ME... if you dare
+    return true

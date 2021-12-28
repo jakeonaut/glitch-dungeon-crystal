@@ -1,18 +1,22 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/walltorchsheet.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true

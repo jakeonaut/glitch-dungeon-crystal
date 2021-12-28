@@ -20,6 +20,7 @@ var cameraRotationCounter = 0
 var glitch_death_timer = 0
 
 func _ready():
+	grav = 60
 	set_process_input(true)
 	set_process(true)
 	set_physics_process(true)
@@ -92,6 +93,9 @@ func _process(delta):
 		global.pauseGame = true
 		glitch_death_timer += (delta*22)
 
+		var material = level.glitchScreenEffect.get_material()
+		if material is ShaderMaterial:
+			material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
 		if glitch_death_timer >= 10:
 			get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
 			self.physics_state = PhysicsState.NORMAL
@@ -136,14 +140,15 @@ func _process(delta):
 func applyGlitchDeathEffects(x):
 	if x < 0 or x > 20:
 		musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
+	if x > 10:
+		var my_material = mySprite.get_material_override()
+		if my_material is ShaderMaterial:
+			my_material.set_shader_param("enable_glitch", false)
+
 	var material = level.glitchScreenEffect.get_material()
 	if material is ShaderMaterial:
-		material.set_shader_param("shake_power", -.0001*pow(x-25, 2) + .02)
-		material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .01)
-
-	var my_material = mySprite.get_material_override()
-	if my_material is ShaderMaterial:
-		my_material.set_shader_param("enable_glitch", false)
+		material.set_shader_param("shake_power", -.00005*pow(x-25, 2) + .005)
+		material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .005)
 
 func _physics_process(delta):
 	# ._process_physics(delta) #NOTE: this super method is called automatically 

@@ -31,7 +31,11 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 21 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 23 )
 shader_param/base_palette = ExtResource( 22 )
 shader_param/target_palette = ExtResource( 20 )
@@ -43,7 +47,11 @@ load_path = "res://.import/obelisk.png-2970dc1283e69deeee7541cab1733be6.stex"
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 21 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 23 )
 shader_param/base_palette = ExtResource( 22 )
 shader_param/target_palette = ExtResource( 24 )
@@ -55,7 +63,11 @@ load_path = "res://.import/obelisk.png-2970dc1283e69deeee7541cab1733be6.stex"
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 21 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 23 )
 shader_param/base_palette = ExtResource( 22 )
 shader_param/target_palette = ExtResource( 25 )
@@ -63,7 +75,11 @@ shader_param/target_palette = ExtResource( 25 )
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 21 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 23 )
 shader_param/base_palette = ExtResource( 22 )
 shader_param/target_palette = ExtResource( 26 )

@@ -1,6 +1,8 @@
 extends Control
 
-onready var target = get_node("../../NPC")
+export(NodePath) var target_path = null
+var target = null
+
 onready var mainColorRect = get_node("ColorRect")
 
 # TODO(jaketrower): Probably best to load this once in the levelScript and reference from there
@@ -27,6 +29,7 @@ func getGameCamera():
 
 func _ready():
 	set_process(true)
+	target = get_node(target_path)
 
 func _process(delta):
 	setPosition(not has_set_position)
