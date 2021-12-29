@@ -18,6 +18,8 @@ var pressing_jump = false
 var just_pressed_jump = false 
 export var is_active = true
 
+export var tiny_textbox = false
+
 
 func _ready():
 	set_process(true)
@@ -37,6 +39,9 @@ func _ready():
 			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
 		textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
 	textBoxContainer.setVars()
+
+	if tiny_textbox:
+		textBox.tinify()
 
 func isActive():
 	return visible or can_activate

@@ -7,6 +7,7 @@ onready var casinoThemePlayer = get_node("CasinoThemePlayer")
 onready var suburbThemePlayer = get_node("SuburbThemePlayer")
 onready var swampThemePlayer = get_node("SwampThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
+onready var townThemePlayer = get_node("TownThemePlayer")
 
 var currentlyPlayingTheme = null
 
@@ -19,11 +20,10 @@ func stopAll():
     suburbThemePlayer.stop()
     swampThemePlayer.stop()
     goddessThemePlayer.stop()
+    townThemePlayer.stop()
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    print(path)
-    print("hello")
     changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0:
         self.playGoddess()
@@ -39,6 +39,8 @@ func conductFromScenePath(path):
         self.playSwamp()
     elif path.find("MainMenu") > 0:
         titleThemePlayer.play() # TODO(jaketrower!!!)
+    elif path.find("Town") > 0:
+        self.playTown()
     changeSongPitch(1.0)
     print(currentlyPlayingTheme)
 
@@ -76,6 +78,12 @@ func playSwamp():
     self.stopAll()
     swampThemePlayer.play()
     currentlyPlayingTheme = swampThemePlayer
+
+func playTown():
+    if townThemePlayer.is_playing(): return
+    self.stopAll()
+    townThemePlayer.play()
+    currentlyPlayingTheme = townThemePlayer
 
 func playGoddess():
     if goddessThemePlayer.is_playing(): return

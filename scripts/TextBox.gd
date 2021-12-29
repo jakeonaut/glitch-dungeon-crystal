@@ -22,6 +22,11 @@ var bot_margin_start = 0
 
 var focus_me = false
 
+var tiny = false
+var has_set_position = false
+var target_origin = Vector3(0, 0, 0)
+onready var tinyColorRect = get_node("TinyColorRect")
+
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var gameCamera = null
@@ -39,6 +44,10 @@ func _ready():
 	bot_margin_start = self.margin_bottom
 	
 func _process(delta):
+	if tiny:
+		setPosition(not has_set_position)
+		has_set_position = true
+
 	if visible:
 		text_timer += (delta*22)
 		
@@ -50,6 +59,11 @@ func _process(delta):
 			# letterSound.play()
 			# TODO(jaketrower): We can just do RichTextLabel.set_visible_character(text_next_index)
 			textNode.add_text(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
+			if tiny:
+				tinyColorRect.margin_right += 13
+				if text_next_index == 0 or text_final[text_next_index] == "\n":
+					tinyColorRect.margin_bottom += 31
+
 			if textNode.get_text().count("\n") >= 3:
 				textNode.set_text("")
 			dialogSound.play()
@@ -67,12 +81,33 @@ func _process(delta):
 				hideTextbox()
 				stop_timer = 0
 				
-	if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-		self.margin_top = 60
-		self.margin_bottom = 201
-	else:
-		self.margin_top = top_margin_start
-		self.margin_bottom = bot_margin_start
+	if not tiny:
+		if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+			self.margin_top = 60
+			self.margin_bottom = 201
+		else:
+			self.margin_top = top_margin_start
+			self.margin_bottom = bot_margin_start
+
+func tinify():
+	self.texture = null
+	get_node("Portrait").visible = false
+	get_node("ColorRect").visible = false
+	tiny = true
+	stop_time_limit = 5
+	# get_node("Text").theme.default_font.set_size(32)
+	var large_font = textNode.theme.default_font.duplicate()
+	large_font.resource_local_to_scene = true
+	large_font.set_size(32)
+	textNode.add_font_override("normal_font", large_font)
+
+func setPosition(should_set_target_origin):
+	# https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
+	if should_set_target_origin:
+		target_origin = get_node("../..").global_transform.origin
+	var target_pos = getGameCamera().unproject_position(target_origin)
+	self.rect_position.x = target_pos.x - 100
+	self.rect_position.y = target_pos.y - 50
 
 		
 func InteractActivate():
@@ -104,6 +139,8 @@ func showTextbox(is_important):
 	text_timer = 0
 	text_next_index = 0
 	textNode.set_text('')
+	tinyColorRect.margin_right = 135
+	tinyColorRect.margin_bottom = 20
 
 	textNode.get_v_scroll().value = 0
 	self.show()

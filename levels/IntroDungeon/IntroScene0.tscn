@@ -21,7 +21,7 @@
 resource_local_to_scene = true
 extents = Vector3( 3, 1.3, 1.3 )
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
@@ -100,11 +100,8 @@ script = ExtResource( 16 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5869, -4.89664, 0 )
 visible = false
 grav = 0
-bbText = "welcome to our home
-....you must be seeking
-MAGIC CRYSTALS born.. 
-from power of our 
-GODDESS. ..just like us.......
+bbText = "....you must be seeking
+MAGIC CRYSTALS.....
 PRESS UP TO JUMP"
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 8 )]
@@ -122,12 +119,8 @@ is_active = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
-visible = false
 grav = 0
-bbText = "glitches comes from
-our GODDESS as well.
-........
-....
+bbText = "..............
 PRESS DOWN TO
 GO THROUGH DOORS"
 
@@ -185,7 +178,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 3, 0 )
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false

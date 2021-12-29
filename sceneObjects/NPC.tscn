@@ -62,9 +62,7 @@ tracks/0/keys = {
 "values": [ false, true, false, true, false, true ]
 }
 
-[node name="NPC" type="KinematicBody" groups=[
-"npc",
-]]
+[node name="NPC" type="KinematicBody" groups=["npc"]]
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -85,12 +83,10 @@ shape = SubResource( 3 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="3"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="4"]
 volume_db = -23.0
 
-[node name="Sprite3D" type="Sprite3D" parent="." groups=[
-"sprite",
-]]
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.192001, 0 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
@@ -99,7 +95,7 @@ alpha_cut = 2
 texture = ExtResource( 7 )
 hframes = 8
 vframes = 4
-frame = 16
+frame = 10
 script = ExtResource( 8 )
 should_randomize_frame_delay = true
 

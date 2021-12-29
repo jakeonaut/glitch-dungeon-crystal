@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/markeryjane - Totorie Tower OST - 24 Town Called Sigh (Night Version).mp3-74157c176f1cb9d484b407e36ba8d501.mp3str"
+
+[deps]
+
+source_file="res://assets/music/markeryjane - Totorie Tower OST - 24 Town Called Sigh (Night Version).mp3"
+dest_files=[ "res://.import/markeryjane - Totorie Tower OST - 24 Town Called Sigh (Night Version).mp3-74157c176f1cb9d484b407e36ba8d501.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

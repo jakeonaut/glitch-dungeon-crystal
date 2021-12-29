@@ -1,20 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
 [ext_resource path="res://assets/npcs/tadpoleportrait.png" type="Texture" id=3]
-[ext_resource path="res://assets/Quirk.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://dialogFontTheme.tres" type="Theme" id=4]
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=5]
 [ext_resource path="res://scripts/AbortSound.gd" type="Script" id=6]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=7]
+[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=8]
 
 [sub_resource type="GradientTexture" id=1]
 
-[sub_resource type="DynamicFont" id=2]
-size = 21
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 4 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 8 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 7 )
 
 [node name="TextContainer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -27,27 +28,45 @@ margin_bottom = 511.0
 texture = SubResource( 1 )
 expand = true
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="TextBox"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 482.0
 margin_bottom = 132.0
+color = Color( 0, 1, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="TextBox/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 471.0
-margin_bottom = 121.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 469.0
+margin_bottom = 119.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Portrait" type="Sprite" parent="TextBox" groups=[
-"sprite",
-]]
+[node name="Portrait" type="Sprite" parent="TextBox" groups=["sprite"]]
+material = SubResource( 3 )
 position = Vector2( 72.9973, 69.3905 )
 scale = Vector2( 3.1958, 3.08572 )
 texture = ExtResource( 3 )
-flip_h = true
+
+[node name="TinyColorRect" type="ColorRect" parent="TextBox"]
+margin_left = 135.0
+margin_top = 20.0
+margin_right = 137.0
+margin_bottom = 20.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Text" type="RichTextLabel" parent="TextBox"]
 margin_left = 136.0
@@ -56,7 +75,8 @@ margin_right = 502.0
 margin_bottom = 136.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/normal_font = SubResource( 2 )
+theme = ExtResource( 4 )
+custom_colors/default_color = Color( 0, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "yo what up
 hey mu dude
@@ -66,6 +86,9 @@ text = "yo what up
 hey mu dude
 ???????? so why???"
 scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DialogSound" type="AudioStreamPlayer" parent="TextBox"]
 stream = ExtResource( 5 )
