@@ -5,7 +5,16 @@ uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
 
+// æŒ¯å‹•ã®å¼·ã•
+uniform float shake_power = 0.03;
+// æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
+uniform float shake_block_size = 30.5;
+// è‰²ã®åˆ†é›¢çŽ‡
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+
 uniform int palettesize = 16;
+uniform bool enable_glitch = false;
+uniform bool enable_palette_cycle = false;
 
 void vertex() {
     UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
@@ -28,13 +37,19 @@ vec3 getpalettecolor(int x) {
     return texelFetch(target_palette, coord, 0).rgb;
 }
 
+float random(float seed) {
+	return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
+}
+
 void fragment() {
-     
     vec4 incolor = texture(texture_albedo, UV);
      
     int index = getpaletteidx(incolor.rgb);
      
-    float fdelta = float(index) - TIME * 4.0;
+    float fdelta = float(index);
+	if (enable_palette_cycle) {
+		fdelta = fdelta - TIME * 4.0;
+	}
     float mod2 = mod(fdelta,float(palettesize));
     int delta = int(mod2);
      
@@ -47,4 +62,17 @@ void fragment() {
         ALBEDO.rgb = vec3(0,1,0);
     }
     ALPHA = incolor.a;
+
+	if (enable_glitch) {
+		vec2 fixed_uv = SCREEN_UV;
+		fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+		fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+		
+		vec4 alp = texture(texture_albedo, fixed_uv);
+
+		color.r = mix(color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 1.0);
+		color.b = mix(color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 1.0);
+		ALBEDO.rgb = color.rgb;
+		ALPHA = alp.a;
+	}
 }

@@ -8,6 +8,9 @@ export(String, FILE) var path
 onready var doorSound = get_node("DoorSound")
 onready var lockedSound = get_node("LockedSound")
 
+onready var myOtherSprite = get_node("Sprite3D2")
+var is_passive_activate = false
+
 func _ready():
     animationPlayer.clear_queue()
     animationPlayer.stop()
@@ -16,6 +19,12 @@ func _ready():
         animationPlayer.queue("locked")
     else: 
         animationPlayer.play("doorOpen")
+
+func _process(delta):
+    if not is_passive_activate:
+        myOtherSprite.visible = false
+    else:
+        is_passive_activate = false
 
 func isActive():
     return true
@@ -30,4 +39,5 @@ func activate():
             lockedSound.play()
 
 func passiveActivate(delta):
-    pass
+    # myOtherSprite.visible = true
+    is_passive_activate = true

@@ -36,7 +36,7 @@ float random (vec2 uv) {
 void fragment() {
     vec4 incolor = texture(texture_albedo, UV);
     int index = getpaletteidx(incolor.rgb);
-    float fdelta = float(index) - TIME * 5.0;
+    float fdelta = float(index) - TIME * 4.0;
     float mod2 = 8.0 + mod(fdelta, float(5));
     int delta = int(mod2);
     vec3 color = getpalettecolor(delta);

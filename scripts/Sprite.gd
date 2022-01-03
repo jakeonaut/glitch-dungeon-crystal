@@ -14,6 +14,7 @@ var repeat_animation = true
 
 var facing = Vector2(0, 1)
 var is_rotating = false
+var should_fizzle_out = false
 
 func _ready():
     set_process(true)
@@ -42,7 +43,10 @@ func animate(delta):
         if frame >= start_frame and frame < start_frame + max_frames - 1:
             set_frame(frame+1)
         else:
-            set_frame(start_frame)
+            if should_fizzle_out:
+                queue_free()
+            else:
+                set_frame(start_frame)
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()

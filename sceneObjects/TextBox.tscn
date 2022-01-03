@@ -37,7 +37,6 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 482.0
 margin_bottom = 132.0
-color = Color( 0, 1, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,7 +75,6 @@ margin_bottom = 136.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 4 )
-custom_colors/default_color = Color( 0, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "yo what up
 hey mu dude

@@ -15,42 +15,42 @@ var facing = Vector2(0, 1)
 var is_rotating = false
 
 func _ready():
-    set_process(true)
-    start_frame = get_frame()
-    
+	set_process(true)
+	start_frame = get_frame()
+	
 func changeSpriteColorPalette(palette):
-    if self.material_override:
-        var material = self.material_override
-        if material is ShaderMaterial:
-            material.set_shader_param("base_palette", palette)
-            self.material_override = material
+	if self.material_override:
+		var material = self.material_override
+		if material is ShaderMaterial:
+			material.set_shader_param("base_palette", palette)
+			self.material_override = material
 
 func preProcess():
-    pass
+	pass
 
 func _process(delta):
-    preProcess()
-    animate(delta)
-    
+	preProcess()
+	animate(delta)
+	
 func animate(delta):
-    animation_counter += delta
-    if animation_counter >= frame_delay:
-        animation_counter = 0
-        var frame = get_frame()
+	animation_counter += delta
+	if animation_counter >= frame_delay:
+		animation_counter = 0
+		var frame = get_frame()
 
-        if frame >= start_frame and frame < start_frame + max_frames - 1:
-            set_frame(frame+1)
-        else:
-            set_frame(start_frame)
-        
-        if should_randomize_frame_delay:
-            randomizeFrameDelay()
+		if frame >= start_frame and frame < start_frame + max_frames - 1:
+			set_frame(frame+1)
+		else:
+			set_frame(start_frame)
+		
+		if should_randomize_frame_delay:
+			randomizeFrameDelay()
 
 func randomizeFrameDelay():
-    frame_delay = rand_range(0.1, 1.0)
+	frame_delay = rand_range(0.1, 1.0)
 
 func updateBaseFrame(hframe, vframe):
-    start_frame = (self.hframes * vframe) + hframe
-    if base_frame != start_frame:
-        base_frame = start_frame
-        set_frame(start_frame)
+	start_frame = (self.hframes * vframe) + hframe
+	if base_frame != start_frame:
+		base_frame = start_frame
+		set_frame(start_frame)
