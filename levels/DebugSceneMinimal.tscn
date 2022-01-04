@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=2]
+[ext_resource path="res://assets/Quirk.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
-[ext_resource path="res://font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=10]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=11]
@@ -10,6 +11,13 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=26]
+
+[sub_resource type="DynamicFont" id=2]
+size = 13
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 3 )
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -44,7 +52,7 @@ margin_left = 372.54
 margin_top = 311.231
 margin_right = 756.54
 margin_bottom = 534.231
-custom_fonts/normal_font = ExtResource( 8 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
@@ -53,9 +61,11 @@ text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
     global_transform.origin.y += lv.y	"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+target_origin = Vector3( 0, -100, 0 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 18 )]
 size = 20.0

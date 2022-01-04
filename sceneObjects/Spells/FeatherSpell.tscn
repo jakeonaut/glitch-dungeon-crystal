@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://sceneObjects/Spells/featherSpell.gd" type="Script" id=1]
+[ext_resource path="res://scripts/obeliskSpell.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=4]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
+[ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.2, 0.2, 0.2 )
@@ -18,9 +19,11 @@ radius = 0.7
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = false
 shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 4 )
@@ -55,3 +58,6 @@ max_frames = 8
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -20.0
+
+[node name="Obelisk" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452547, -0.415195, -0.769371 )

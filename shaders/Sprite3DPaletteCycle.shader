@@ -18,7 +18,7 @@ uniform bool enable_palette_cycle = false;
 
 void vertex() {
     UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
-    MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
+    // MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
 }
 
 int getpaletteidx(vec3 color) {
@@ -59,7 +59,7 @@ void fragment() {
         ALBEDO.rgb = color.rgb;  
     }
     else {
-        ALBEDO.rgb = vec3(0,1,0);
+        ALBEDO.rgb = vec3(0,0,0);
     }
     ALPHA = incolor.a;
 

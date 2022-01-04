@@ -183,7 +183,6 @@ func processPhysics(delta):
     up = -g.normalized() # (up is against gravity)
     vv = up.dot(lv) # vertical velocity
     hv = lv - up * vv # horizontal velocity
-    print(hv)
     
     applyTerminalVelocity(delta)
     
@@ -437,8 +436,8 @@ func actuallyApplyJump(play_sound = true):
             if vv < jump_force / 2:
                 vv = jump_force / 2
         else:
-            if vv < jump_force / 3:
-                vv = jump_force / 3
+            if vv < jump_force / 2.5:
+                vv = jump_force / 2.5
     elif not play_sound:
         if vv < (1.58*jump_force)/3:
             vv = (1.58*jump_force)/3
