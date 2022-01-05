@@ -1,6 +1,7 @@
 extends TextureRect
 
 onready var textNode = get_node("Text")
+onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
@@ -156,7 +157,7 @@ func showTextbox(is_important):
 
     textNode.get_v_scroll().value = 0
     self.show()
-    # dialogSound.play()
+    dialogStartSound.play()
     dialogSound.activateScript()
     # TODO(jaketrower): This seems redundant... everything about dialogSound and abortSound does...
     if has_node("Event"):

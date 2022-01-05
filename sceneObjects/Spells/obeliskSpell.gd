@@ -1,6 +1,6 @@
 extends KinematicBody
 
-onready var transformSound = get_node("TransformSound")
+onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 
 enum GlitchForm {
@@ -32,7 +32,7 @@ func _ready():
     interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
 func _process(delta):
-    if is_active and getPlayer().glitch_form == my_glitch_form:
+    if is_active and not shouldIBeActive():
         is_active = false
         mySprite.visible = false
         t = 0
@@ -44,16 +44,23 @@ func _process(delta):
             mySprite.visible = false
             t = 0
 
-    if not mySprite.visible and getPlayer().glitch_form != my_glitch_form:
+    if not mySprite.visible and shouldIBeActive():
         mySprite.visible = true
         mySprite.global_transform.origin = original_position
         is_active = true
+        
+func shouldIBeActive():
+    return getPlayer().glitch_form != my_glitch_form and (
+        not global.memory.has("spellbookPage") or \
+        global.memory["spellbookPage"].size() == 0 or \
+        global.memory["spellbookPage"][0] != my_glitch_form) 
 
 func isActive():
     return is_active
 
 func passiveActivate(_delta):
-    transformSound.play()
+    if global.memory.has("spellbookPage"):
+        collectSound.play()
     is_active = false
 
-    getPlayer().applyGlitch(my_glitch_form)
+    getPlayer().applyObeliskGlitch(my_glitch_form)

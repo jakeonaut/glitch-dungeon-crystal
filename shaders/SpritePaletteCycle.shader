@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode blend_mix,depth_draw_alpha_prepass,cull_disabled,diffuse_burley,specular_schlick_ggx,unshaded;
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
+uniform sampler2D alpha_albedo : hint_albedo;
 uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
 
@@ -46,5 +47,10 @@ void fragment() {
     else {
         ALBEDO.rgb = vec3(0,1,0);
     }
-    ALPHA = incolor.a;
+	
+	if (albedo.r == 0.0) {
+		ALPHA = texture(alpha_albedo, UV).a * incolor.a;
+	} else {
+		ALPHA = incolor.a;
+	}
 }

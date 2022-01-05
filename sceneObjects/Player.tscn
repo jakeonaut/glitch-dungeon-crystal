@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -171,7 +173,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "fallFlat"
-length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -341,7 +342,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=24]
 resource_name = "wakeup"
-length = 0.9
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -484,8 +485,23 @@ material/0 = null
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
-volume_db = -30.0
-pitch_scale = 1.1
+volume_db = -32.0
+pitch_scale = 1.05
+
+[node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = -35.0
+pitch_scale = 1.2
+
+[node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 25 )
+volume_db = -32.0
+pitch_scale = 1.05
+
+[node name="NoSpellSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 26 )
+volume_db = -25.0
+pitch_scale = 1.05
 
 [node name="DoubleJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 13 )
@@ -498,10 +514,6 @@ volume_db = -20.0
 [node name="JumpOverallsSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
 volume_db = -30.0
-
-[node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
-volume_db = -31.0
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )

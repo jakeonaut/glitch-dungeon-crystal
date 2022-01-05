@@ -60,14 +60,14 @@ void fragment() {
     ALPHA = incolor.a;
 
 	if (enable_glitch) {
-		vec2 fixed_uv = SCREEN_UV;
+		vec2 fixed_uv = UV;
 		fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
 		fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
 		
 		vec4 alp = texture(texture_albedo, fixed_uv);
 
-		color.r = mix(color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 1.0);
-		color.b = mix(color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 1.0);
+		color.r = mix(color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
+		color.b = mix(color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
 		ALBEDO.rgb = color.rgb;
 		ALPHA = alp.a;
 	}

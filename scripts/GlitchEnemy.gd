@@ -4,6 +4,7 @@ var flipTimer = 0
 var flipTimeLimit = 4
 
 onready var dieSound = get_node("Sounds/DieSound")
+onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
 export var behavior_walking = false
 export var behavior_jumping = false
@@ -21,12 +22,12 @@ func _ready():
     set_process_input(true)
     set_process(true)
     set_physics_process(true)
-    walk_speed = 5
+    walk_speed = 3
     
     #if behavior_walking:
     #    mySprite.frame_delay = 0.2
     #    mySprite.updateBaseFrame(0, 1)
-    if behavior_jumping:
+    if behavior_jumping and grav == 0:
         grav = 60
 
     glitch_switch_time_limit = rand_range(30.0, 50.0)
@@ -42,10 +43,15 @@ func _process(delta):
     if behavior_walking and horizontal_collision:
         horizontal_collision = false
         walk_direction = -walk_direction
+        if myOtherSprite:
+            myOtherSprite.flip_h = not myOtherSprite.flip_h
 
     var modAmt = 0.5
     mySprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
     mySprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
+    # if myOtherSprite:
+    #     myOtherSprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
+    #     myOtherSprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
     smallInteractionArea.global_transform.origin.x = int(round(self.global_transform.origin.x))
     smallInteractionArea.global_transform.origin.y = int(round(self.global_transform.origin.y))
 
@@ -74,6 +80,8 @@ func landed():
     .landed()
     if behavior_flip_on_land:
         walk_direction = -walk_direction
+        if myOtherSprite:
+            myOtherSprite.flip_h = not myOtherSprite.flip_h
     if behavior_stop_on_land:
         behavior_was_thrown = false
         behavior_jumping = false

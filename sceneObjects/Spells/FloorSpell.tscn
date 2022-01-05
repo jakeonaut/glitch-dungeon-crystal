@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://scripts/obeliskSpell.gd" type="Script" id=1]
+[ext_resource path="res://sceneObjects/Spells/obeliskSpell.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/minimi.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
-[ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=7]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
 [ext_resource path="res://scripts/SpinningMeshInstance.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/obelisk.png" type="Texture" id=11]
+[ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=12]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.2, 0.2, 0.2 )
@@ -84,9 +84,10 @@ script = ExtResource( 4 )
 frame_delay = 0.2
 max_frames = 5
 
-[node name="TransformSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -20.0
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -25.0
+pitch_scale = 0.9
 
 [node name="Obelisk" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0514584, -0.429115, -0.769371 )

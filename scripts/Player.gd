@@ -3,6 +3,8 @@ extends "PlayerGameMover.gd"
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
+onready var transformSound = get_node("Sounds/TransformSound")
+onready var noSpellSound = get_node("Sounds/NoSpellSound")
 
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
@@ -28,11 +30,28 @@ func _ready():
 
 func applyNextGlitch():
     applyGlitch(getNextGlitch())
+    
+func applyObeliskGlitch(glitch):
+    if global.memory.has("spellbookPage"):
+        global.memory["spellbookPage"] = [glitch]
+    else:
+        applyGlitch(glitch)
+        
+func applySpellbookGlitch():
+    if not global.memory.has("spellbookPage"):
+        return
+    
+    if global.memory["spellbookPage"].size() > 0:
+        var glitch_type = global.memory["spellbookPage"].pop_front()
+        applyGlitch(glitch_type)
+    else:
+        noSpellSound.play()
 
-func applyPrevGlitch():
-    applyGlitch(getPrevGlitch())
 
 func applyGlitch(glitch):
+    transformSound.play()
+    global.memory["current_glitch"] = glitch
+
     if glitch == GlitchForm.NORMAL: normalGlitch()
     if glitch == GlitchForm.FLOOR: floorGlitch()
     if glitch == GlitchForm.FEATHER: featherGlitch()
@@ -99,11 +118,11 @@ func _process(delta):
         if material is ShaderMaterial:
             material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
         if glitch_death_timer >= 10:
+            global.pauseGame = false
             get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
             self.physics_state = PhysicsState.NORMAL
     else:
         if glitch_death_timer != 0:
-            global.pauseGame = false
             glitch_death_timer += (delta*22)
             applyGlitchDeathEffects(abs(glitch_death_timer))
             if glitch_death_timer >= 40:
@@ -122,10 +141,10 @@ func _process(delta):
                 if pauseMenu: pauseMenu.hide()
                 global.pauseGame = false
 
-    if Input.is_action_just_pressed("ui_glitch_next"):
-        applyNextGlitch()
+    if Input.is_action_just_pressed("action_button"):
+        applySpellbookGlitch()
     if Input.is_action_just_pressed("ui_glitch_prev"):
-        applyPrevGlitch()
+        applyNextGlitch()
         
     var DEATH_MARGIN = 5
     if self.getCamera().rightmost_x > -999:
@@ -173,7 +192,7 @@ func isOnSavePoint():
            int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 # @override
-func tryDieToEnemy(delta):
+func tryDieToEnemy():
     if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
        physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
         if randi() % 3 == 0:

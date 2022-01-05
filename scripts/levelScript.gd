@@ -15,121 +15,121 @@ var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
 
 func _ready():
-	# stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
-	_ready_impl()
+    # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
+    _ready_impl()
 
 func _ready_impl():
-	set_process_input(true)
-	set_process(true)
+    set_process_input(true)
+    set_process(true)
 
-	player.applyGlitch(starting_glitch_type)
+    if not global.memory.has("spellbookPage"):
+        player.applyGlitch(starting_glitch_type)
+    else:
+        player.applyGlitch(global.memory["current_glitch"])
 
-	if global.memory.has("player_costume"):
-		player.wearCostume(global.memory["player_costume"])
+    if global.memory.has("player_costume"):
+        player.wearCostume(global.memory["player_costume"])
 
-	# update music
-	print("filename: " + str(getLevelName()))
-	musicPlayer.conductFromScenePath(getLevelName())
-	
-	tryToRespawn()
+    # update music
+    musicPlayer.conductFromScenePath(getLevelName())
+    
+    tryToRespawn()
 
-	global.activeThrowableObject = null
-	if global.activeThrowableObjectPath != null:
-		# resource is loaded at compile time
-		var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
-		add_child(carriedThrowableObject)
-		carriedThrowableObject.activate()
-		carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
-	else:
-		pass
-	global.activeThrowableObjectPath = null
+    global.activeThrowableObject = null
+    if global.activeThrowableObjectPath != null:
+        # resource is loaded at compile time
+        var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
+        add_child(carriedThrowableObject)
+        carriedThrowableObject.activate()
+        carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
+    else:
+        pass
+    global.activeThrowableObjectPath = null
 
 # TODO(jaketrower): Remove this level edit stuff in final cut ?!?
 func _process(delta):
-	if Input.is_action_just_pressed("ui_place_tile"):
-		var player_position = player.global_transform.origin + (player.facing * 2)
-		var grid_cell = levelTiles.world_to_map(player_position)
-		levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
+    if Input.is_action_just_pressed("ui_place_tile"):
+        var player_position = player.global_transform.origin + (player.facing * 2)
+        var grid_cell = levelTiles.world_to_map(player_position)
+        levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
 
-	if Input.is_action_just_pressed("ui_save"):
-		var packed_scene = PackedScene.new()
-		packed_scene.pack(get_tree().get_current_scene())
-		ResourceSaver.save("res://saved_scene.tscn", packed_scene)
+    if Input.is_action_just_pressed("ui_save"):
+        var packed_scene = PackedScene.new()
+        packed_scene.pack(get_tree().get_current_scene())
+        ResourceSaver.save("res://saved_scene.tscn", packed_scene)
 
 func overrideLevelRespawnEvent():
-	pass
+    pass
 
 func getLevelName():
-	return get_tree().get_root().get_node("Game").get_filename()
+    return get_tree().get_root().get_node("Game").get_filename()
 
 func tryToRespawn():
-	if global.activeInteractor != null:
-		global.activeInteractor.stopInteract()
-	global.activeInteractor = null
-	global.pauseMoveInput = false
-	global.pauseGame = false
+    if global.activeInteractor != null:
+        global.activeInteractor.stopInteract()
+    global.activeInteractor = null
+    global.pauseMoveInput = false
+    global.pauseGame = false
 
-	var found_door = null
-	print(global.memory)
-	if global.memory.has("active_save_point_x") and global.isRespawning \
-	   and global.memory["roomPath"] == getLevelName():
-		player.global_transform.origin = Vector3(
-			global.memory["active_save_point_x"], 
-			global.memory["active_save_point_y"], 
-			global.memory["active_save_point_z"])
-		player.getCamera().rotation_degrees.y = global.cameraRotation
-		player.last_grounded_y = player.global_transform.origin.y 
-	elif global.memory.has("lastDoor") and global.memory["roomPath"] != getLevelName():
-		print("lastDoor...")
-		var door_path = global.memory["roomPath"]
-		var doors = get_tree().get_nodes_in_group("doors")
-		for door in doors:
-			print(str(door.path) + ", " + str(door_path) + " ==? " + str(door.path == door_path))
-			if door.path == door_path:
-				found_door = door
-				break
-		# if no door found, pick the first door in the level!
-		if not found_door and doors.size() > 0:
-			found_door = doors[0]
-	else:
-		player.global_transform.origin = player.spawn_origin
+    var found_door = null
+    if global.memory.has("active_save_point_x") and global.isRespawning \
+       and global.memory["roomPath"] == getLevelName():
+        player.global_transform.origin = Vector3(
+            global.memory["active_save_point_x"], 
+            global.memory["active_save_point_y"], 
+            global.memory["active_save_point_z"])
+        player.getCamera().rotation_degrees.y = global.cameraRotation
+        player.last_grounded_y = player.global_transform.origin.y 
+    elif global.memory.has("lastDoor") and global.memory["roomPath"] != getLevelName():
+        var door_path = global.memory["roomPath"]
+        var doors = get_tree().get_nodes_in_group("doors")
+        for door in doors:
+            print(str(door.path) + ", " + str(door_path) + " ==? " + str(door.path == door_path))
+            if door.path == door_path:
+                found_door = door
+                break
+        # if no door found, pick the first door in the level!
+        if not found_door and doors.size() > 0:
+            found_door = doors[0]
+    else:
+        player.global_transform.origin = player.spawn_origin
 
-	if found_door:
-		found_door.land()
-	elif not global.memory.has("roomPath") or global.memory["roomPath"] != getLevelName():
-		player.global_transform.origin = player.spawn_origin
+    if found_door:
+        found_door.land()
+    elif not global.memory.has("roomPath") or global.memory["roomPath"] != getLevelName():
+        player.global_transform.origin = player.spawn_origin
 
-	global.isRespawning = false
+    global.isRespawning = false
 
-	self.overrideLevelRespawnEvent()
+    self.overrideLevelRespawnEvent()
 
 
 func normalGlitch():
-	levelTiles.normalGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", grey_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", grey_palette)
+    levelTiles.normalGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", grey_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", grey_palette)
 
 func floorGlitch():
-	levelTiles.floorGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", red_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", red_palette)
+    levelTiles.floorGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", red_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", red_palette)
 
 func featherGlitch():
-	levelTiles.featherGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", green_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", green_palette)
+    levelTiles.featherGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", green_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", green_palette)
 
 func ladderGlitch():
-	levelTiles.ladderGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", yellow_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", yellow_palette)
+    levelTiles.ladderGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", yellow_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", yellow_palette)
 
 func invisibleGlitch():
-	levelTiles.invisibleGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", black_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", black_palette)
+    levelTiles.invisibleGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", black_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", black_palette)
 
 func walkThroughWallsGlitch():
-	levelTiles.walkThroughWallsGlitch()
-	get_tree().call_group("sprite","changeSpriteColorPalette", white_palette)
-	get_tree().call_group("glitchSprite","changeSpriteColorPalette", white_palette)
+    levelTiles.walkThroughWallsGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", white_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", white_palette)

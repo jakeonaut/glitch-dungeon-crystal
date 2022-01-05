@@ -114,6 +114,7 @@ var jump_force = 16
 var invisible_jump_force = 14
 var has_just_jumped_timer = 0
 var has_just_jumped_time_limit = 200# 3
+# TODO(jaketrower): This is dumb and should be like a boolean or state, oh well
 var jump_squat_jump_input_timer = 0
 var ladder_timer = 0
 # TODO(jaketrower): dedupe with is_pressing_horizontal_input
@@ -153,7 +154,7 @@ func _physics_process(delta):
 func isActive():
     return visible
 
-func tryDieToEnemy(delta):
+func tryDieToEnemy():
     pass    
     
 func getHitByBroom():
@@ -223,7 +224,7 @@ func processPhysics(delta):
     if not was_on_ground and on_ground: # I just landed!!
         landed()
         just_landed = true
-    if aniPlayer != null:
+    if aniPlayer != null and not global.pauseGame:
         if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
             aniPlayer.play("stand")
         elif aniPlayer.assigned_animation == "jump" and on_ground:
@@ -373,7 +374,7 @@ func processJumpInputs(delta):
 
             if aniPlayer and not "jump" in aniPlayer.assigned_animation:
                 aniPlayer.clear_queue()
-                aniPlayer.play("jumpSquat", -1, .6 if isFeatherLike() else 1.0)
+                aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
                 aniPlayer.queue("jumpStart")
                 aniPlayer.queue("jump")
 
@@ -436,8 +437,8 @@ func actuallyApplyJump(play_sound = true):
             if vv < jump_force / 2:
                 vv = jump_force / 2
         else:
-            if vv < jump_force / 2.5:
-                vv = jump_force / 2.5
+            if vv < jump_force / 2.3:
+                vv = jump_force / 2.3
     elif not play_sound:
         if vv < (1.58*jump_force)/3:
             vv = (1.58*jump_force)/3
@@ -446,7 +447,10 @@ func actuallyApplyJump(play_sound = true):
     else:
         # rocket boost boots
         # vv = jump_force*3
-        vv = jump_force*1.1
+        if pressingJump():
+            vv = jump_force*1.1
+        else:
+            vv = jump_force*0.7
     jumpSound.play() if jumpSound and play_sound else null
     on_ground = false
     has_just_jumped_timer = 0 
@@ -678,6 +682,8 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
     return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
     
 func isTileSpikes(tile_type):
+    if tile_type == GridMap.INVALID_CELL_ITEM:
+        return false
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return tileCollisionShape is RayShape
     
@@ -691,18 +697,20 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = f
     var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
     
     var tile_pos = 99999 * sensor_direction
-    if isTileSolid(tile_type_a, is_vertical, sensor_direction, tile_pos_a):
+    var tile_type = GridMap.INVALID_CELL_ITEM
+    if isTileSpikes(tile_type_a) or isTileSolid(tile_type_a, is_vertical, sensor_direction, tile_pos_a):
         # We found a collision, regress to see if there is a previous one
         var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x - (TILE_WIDTH*sensor_direction), sensor.y, z))
         if is_vertical:
             coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - (TILE_HEIGHT*sensor_direction), z))
         var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
         var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
+        if isTileSpikes(tile_type_b) or isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
             if debug:
                 print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
             # Found an earlier tile collision, use it instead of tile A
             tile_pos = coords_b.x + tile_anchor
+            tile_type = tile_type_b
             if is_vertical:
                 tile_pos = coords_b.y + tile_anchor
         else:
@@ -710,6 +718,7 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = f
                 print("coords_a: " + str(coords_a) + ", tile_type_a: " + str(tile_type_a))
             # Did not find an earlier tile collision, so use tile A
             tile_pos = coords_a.x + tile_anchor
+            tile_type = tile_type_a
             if is_vertical:
                 tile_pos = coords_a.y + tile_anchor
     else:
@@ -719,17 +728,19 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = f
             coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y + (TILE_HEIGHT*sensor_direction), z))
         var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
         var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
+        # note, don't check for isTileSpikes case here, because we don't want to let the poor player die early
+        if isTileSpikes(tile_type_b) or isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
             if debug:
                 print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
             # Found a later tile collision, use it
             tile_pos = coords_b.x + tile_anchor
+            tile_type = tile_type_b
             if is_vertical:
                 tile_pos = coords_b.y + tile_anchor
         else:
             # We found no tile collision on this side! Just use default :)
             pass
-    return tile_pos
+    return Vector2(tile_pos, tile_type)
 
 func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
     var x = global_transform.origin.x
@@ -741,11 +752,13 @@ func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, se
             sensor.y += local_lv.y
     else:
         sensor.x += local_lv.x
-    var tile_pos = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
+    var tile_pos_and_type = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
+    var tile_pos = tile_pos_and_type.x
+    var tile_type = tile_pos_and_type.y
     var tile_distance = (tile_pos*sensor_direction) - ((x+sensor_anchor) * sensor_direction)
     if is_vertical:
         tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
-    return Vector2(tile_pos, tile_distance)
+    return Vector3(tile_pos, tile_distance, tile_type)
 
 func collideWithFloor(local_lv):
     local_lv.y = 0
@@ -753,8 +766,13 @@ func collideWithFloor(local_lv):
     truly_on_ground = true
     return local_lv
 
-func reactToPotentialCollisions(tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
+func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
     if tile_distance <= 0:
+        if isTileSpikes(tile_type):
+            # no need to push player, just call death!!
+            self.tryDieToEnemy()
+            return local_lv
+
         if debug:
             # print("collide sensor A...")
             if not is_vertical: get_tree().paused = true
@@ -773,6 +791,11 @@ func reactToPotentialCollisions(tile_distance, is_vertical, local_lv, _sensor_an
             self.horizontal_collision = true
             dir = Vector3(0, 0, 0)
     elif is_vertical and tile_distance < local_lv.y * sensor_direction:
+        if isTileSpikes(tile_type):
+            # no need to push player, just call death!!
+            self.tryDieToEnemy()
+            return local_lv
+            
         global_transform.origin.y += tile_distance * sensor_direction
         if should_collide_with_floor:
             local_lv = collideWithFloor(local_lv)
@@ -781,6 +804,11 @@ func reactToPotentialCollisions(tile_distance, is_vertical, local_lv, _sensor_an
             if feather_jump_timer < feather_jump_partial_time_limit:
                 feather_jump_timer = feather_jump_partial_time_limit
     elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
+        if isTileSpikes(tile_type):
+            # no need to push player, just call death!!
+            self.tryDieToEnemy()
+            return local_lv
+            
         global_transform.origin.x += tile_distance * sensor_direction
         local_lv.x = 0
         self.horizontal_collision = true
@@ -798,23 +826,26 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
     # Check for sensor A
     var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
     if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
-    var tile_pos_and_distance_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_A = tile_pos_and_distance_A.x
-    var tile_distance_A = tile_pos_and_distance_A.y
+    var tile_pos_and_distance_and_type_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var tile_pos_A = tile_pos_and_distance_and_type_A.x
+    var tile_distance_A = tile_pos_and_distance_and_type_A.y
+    var tile_type_A = tile_pos_and_distance_and_type_A.z
 
     # Check for sensor B
     var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
     if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
-    var tile_pos_and_distance_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_B = tile_pos_and_distance_B.x
-    var tile_distance_B = tile_pos_and_distance_B.y
+    var tile_pos_and_distance_and_type_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var tile_pos_B = tile_pos_and_distance_and_type_B.x
+    var tile_distance_B = tile_pos_and_distance_and_type_B.y
+    var tile_type_B = tile_pos_and_distance_and_type_B.z
 
     # Check for middle sensor
     var middle_sensor = Vector2(x+sensor_anchor, y)
     if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
-    var tile_pos_and_distance_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var middle_tile_pos = tile_pos_and_distance_middle.x
-    var middle_tile_distance = tile_pos_and_distance_middle.y
+    var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var middle_tile_pos = tile_pos_and_distance_and_type_middle.x
+    var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
+    var middle_tile_type = tile_pos_and_distance_and_type_middle.z
 
     if debug:
         print(
@@ -827,11 +858,11 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
 
     # Compare left and right collision tile distances
     if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
     elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
     else:
-        local_lv = reactToPotentialCollisions(middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
     return local_lv
 
 func handleHorizontalCollisions(local_lv):
@@ -903,7 +934,7 @@ func postProcessInputs(delta):
 func landed():
     last_grounded_y = global_transform.origin.y 
     if landSound: landSound.play()
-    if aniPlayer != null and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
+    if aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
         aniPlayer.clear_queue()
         if fall_timer > 30 and not glitch_form == GlitchForm.FEATHER:
             aniPlayer.play("fallFlat", -1, 1.0)

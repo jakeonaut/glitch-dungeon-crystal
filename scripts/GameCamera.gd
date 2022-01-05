@@ -3,6 +3,7 @@ extends InterpolatedCamera
 var initial_z
 onready var actual_target = get_node(target) 
 onready var initial_target = get_node(target)
+onready var realCamera = get_node("RealCamera")
 
 var leftmost_x = 999
 var rightmost_x = -999
@@ -84,6 +85,11 @@ func _process(delta):
         
     respectLevelTilesEdges()
     
+    # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size
+    realCamera.size = self.size
+    realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, 0.06)
+    realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, 0.06)    
+
 func respectLevelTilesEdges():
     # respect left and right, dependent on gameCamera size
     var x_margin = 10 - ((15-self.size)/1.5)

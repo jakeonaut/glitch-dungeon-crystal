@@ -3,8 +3,6 @@ extends Node
 var hasLoadedGame = false
 var memory = {}
 
-var numHearts = 3
-
 var activeInteractor = null
 var activeThrowableObject = null
 var activeThrowableObjectPath = null
@@ -22,7 +20,6 @@ func _ready():
     # somehow this gets rid of errors LOL
     if hasLoadedGame: pass
     if memory: pass
-    if numHearts: pass
     if activeInteractor: pass
     if activeThrowableObject: pass
     if activeThrowableObjectPath: pass
