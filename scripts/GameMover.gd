@@ -224,7 +224,8 @@ func processPhysics(delta):
     if not was_on_ground and on_ground: # I just landed!!
         landed()
         just_landed = true
-    if aniPlayer != null and not global.pauseGame:
+    # TODO(jaketrower): all this animation code IS going to break everything one day :)
+    if aniPlayer != null and not global.pauseGame and not aniPlayer.assigned_animation == "getItem":
         if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
             aniPlayer.play("stand")
         elif aniPlayer.assigned_animation == "jump" and on_ground:
@@ -940,7 +941,8 @@ func landed():
             aniPlayer.play("fallFlat", -1, 1.0)
             physics_state = PhysicsState.COLLAPSED
             if bumpSound: bumpSound.play()
-        else:
+        # TODO(jaketrower): all of this non FSM animation code WILL break everything some day
+        elif aniPlayer.assigned_animation != "getItem":
             aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 2.0)
     fall_timer = 0
 

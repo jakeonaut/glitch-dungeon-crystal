@@ -24,25 +24,26 @@ func stopAll():
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0:
-        self.playGoddess()
-    elif path.find("Intro") > 0:
-        self.playDungeon()
-    elif path.find("Debug") > 0:
-        self.playDebug()
-    elif path.find("Casino") > 0:
-        self.playCasino()
-    elif path.find("Suburb") > 0:
-        self.playSuburb()
-    elif path.find("Swamp") > 0:
-        self.playSwamp()
-    elif path.find("MainMenu") > 0:
-        titleThemePlayer.play() # TODO(jaketrower!!!)
-    elif path.find("Town") > 0:
-        self.playTown()
-    changeSongPitch(1.0)
-    print(currentlyPlayingTheme)
+    pass # i don't want to listen to music for a bit
+    # changeSongPitch(1.0)
+    # if path.find("Goddess") > 0 or path.find("Psychic") > 0:
+    #     self.playGoddess()
+    # elif path.find("Intro") > 0:
+    #     self.playDungeon()
+    # elif path.find("Debug") > 0:
+    #     self.playDebug()
+    # elif path.find("Casino") > 0:
+    #     self.playCasino()
+    # elif path.find("Suburb") > 0:
+    #     self.playSuburb()
+    # elif path.find("Swamp") > 0:
+    #     self.playSwamp()
+    # elif path.find("MainMenu") > 0:
+    #     titleThemePlayer.play() # TODO(jaketrower!!!)
+    # elif path.find("Town") > 0:
+    #     self.playTown()
+    # changeSongPitch(1.0)
+    # print(currentlyPlayingTheme)
 
 func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them

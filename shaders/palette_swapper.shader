@@ -14,6 +14,7 @@ vec3 getpalettecolor(int x) {
     return texelFetch(base_palette, coord, 0).rgb;
 }
 
+// https://unlimited3d.wordpress.com/2020/01/08/srgb-color-space-in-opengl/
 float Convert_sRGB_FromLinear (float theLinearValue) {
   return theLinearValue <= 0.0031308
        ? theLinearValue * 12.92

@@ -93,7 +93,7 @@ func _process(delta):
         text_timer += (delta*22)
         
         var time_limit = text_time_limit
-        if Input.is_action_pressed("jump_button"):
+        if Input.is_action_pressed("interact_button"):
             time_limit = 0
             
         tryToHide(delta)

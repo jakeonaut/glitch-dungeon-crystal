@@ -1,8 +1,13 @@
 extends "../../scripts/levelScript.gd"
 
+var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
+var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
+
 # @override
 func overrideLevelRespawnEvent():
     levelTiles.set_mesh_library(levelTiles.red_tiles)
+    levelTiles.grey_palette = grey_palette_town
+    levelTiles.green_palette = green_palette_town
     levelTiles.changeColorPalette(levelTiles.grey_palette, levelTiles.grey_purple_palette)
     levelTiles.properlySetTiles()
     

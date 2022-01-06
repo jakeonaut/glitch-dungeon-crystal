@@ -34,9 +34,10 @@ func _ready():
 func applyNextGlitch():
     applyGlitch(getNextGlitch())
     
-func applyObeliskGlitch(glitch):
+func applyObeliskGlitch(glitch, only_visual = false):
     if global.memory.has("spellbookPage"):
-        global.memory["spellbookPage"] = [glitch]
+        if not only_visual:
+            global.memory["spellbookPage"] = [glitch]
         # TODO(jaketrower): you have to know how stupid this is right?
         var equipSlotSprite = level.get_node("UILayer/ColorRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
         if glitch == GlitchForm.FLOOR: equipSlotSprite.frame = 0
