@@ -37,6 +37,13 @@ func applyNextGlitch():
 func applyObeliskGlitch(glitch):
     if global.memory.has("spellbookPage"):
         global.memory["spellbookPage"] = [glitch]
+        # TODO(jaketrower): you have to know how stupid this is right?
+        var equipSlotSprite = level.get_node("UILayer/ColorRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
+        if glitch == GlitchForm.FLOOR: equipSlotSprite.frame = 0
+        if glitch == GlitchForm.FEATHER: equipSlotSprite.frame = 14
+        if glitch == GlitchForm.LADDER: equipSlotSprite.frame = 25
+        if glitch == GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
+        if glitch == GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
     else:
         applyGlitch(glitch)
         
@@ -47,6 +54,9 @@ func applySpellbookGlitch():
     if global.memory["spellbookPage"].size() > 0:
         var glitch_type = global.memory["spellbookPage"].pop_front()
         applyGlitch(glitch_type)
+        # TODO(jaketrower): you have to know how stupid this is right?
+        var equipSlotSprite = level.get_node("UILayer/ColorRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
+        equipSlotSprite.frame = 6
     else:
         noSpellSound.play()
 

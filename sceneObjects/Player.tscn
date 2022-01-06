@@ -455,7 +455,7 @@ shape = SubResource( 3 )
 
 [node name="InteractPrompt" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
-visible = false
+opacity = 0.0
 pixel_size = 0.12
 texture = ExtResource( 27 )
 hframes = 2
@@ -464,7 +464,7 @@ frame_delay = 0.8
 
 [node name="ImportantInteractPrompt" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
-visible = false
+opacity = 0.0
 pixel_size = 0.12
 texture = ExtResource( 28 )
 hframes = 4

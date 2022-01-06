@@ -91,7 +91,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 49, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6005, 2.10336, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6005, 2.10336, 0 )
 visible = false
 grav = 0
 bbText = "hey..! wake up..!
@@ -126,7 +126,7 @@ shape = SubResource( 3 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
 grav = 0
-bbText = "PRESS [X] TO
+bbText = "PRESS [DOWN] TO
 GO THROUGH DOORS"
 tiny_textbox = true
 
@@ -173,8 +173,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 3, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 640.0
+margin_bottom = 512.0
 texture = SubResource( 2 )
 flip_v = true
 __meta__ = {
