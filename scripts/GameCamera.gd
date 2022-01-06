@@ -80,7 +80,7 @@ func _process(delta):
         set_interpolation_enabled(true)
     else:
         actual_target = initial_target
-        set_target(actual_target)
+        set_target(actual_target)      
         self.size = self.size + (initial_size - self.size) * (delta*5)
         
     respectLevelTilesEdges()

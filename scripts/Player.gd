@@ -6,6 +6,9 @@ onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
 
+onready var interactPrompt = get_node("InteractPrompt")
+onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
+
 onready var broom = get_node("CameraY/broom")
 onready var broomSound = get_node("Sounds/BroomSound")
 
@@ -48,8 +51,9 @@ func applySpellbookGlitch():
         noSpellSound.play()
 
 
-func applyGlitch(glitch):
-    transformSound.play()
+func applyGlitch(glitch, playSound = true):
+    if playSound:
+        transformSound.play()
     global.memory["current_glitch"] = glitch
 
     if glitch == GlitchForm.NORMAL: normalGlitch()
@@ -143,7 +147,7 @@ func _process(delta):
 
     if Input.is_action_just_pressed("action_button"):
         applySpellbookGlitch()
-    if Input.is_action_just_pressed("ui_glitch_prev"):
+    if Input.is_action_just_pressed("debug_glitch_button"):
         applyNextGlitch()
         
     var DEATH_MARGIN = 5
@@ -218,6 +222,17 @@ func tryDieToEnemy():
         glitch_death_timer = 0
 
         musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+        
+func showInteractPrompt(is_important = false):
+    if global.activeInteractor == null:
+        if is_important:
+            importantInteractPrompt.visible = true
+        else:
+            interactPrompt.visible = true
+
+func hideInteractPrompt():
+    interactPrompt.visible = false
+    importantInteractPrompt.visible = false
 
 func doBroomLogic(delta):
     if broom_state != 0:

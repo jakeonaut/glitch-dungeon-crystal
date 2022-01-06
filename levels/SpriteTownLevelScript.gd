@@ -11,4 +11,4 @@ func overrideLevelRespawnEvent():
         spellbookPage.is_active = false
         spellbookPage.visible = false
         
-        player.applyGlitch(global.memory["current_glitch"])
+        player.applyGlitch(global.memory["current_glitch"], false)

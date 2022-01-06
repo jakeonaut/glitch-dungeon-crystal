@@ -60,6 +60,11 @@ func activate():
 func passiveActivate(delta):
     if is_passive:
         goThroughDoor()
+    else:
+        getPlayer().showInteractPrompt()
+        
+func justStopPassiveActivate():
+    getPlayer().hideInteractPrompt()
 
 func goThroughDoor():
     if not doorSound.is_playing() and not global.isRespawning:
@@ -70,9 +75,13 @@ func goThroughDoor():
     global.pauseGame = true
 
     global.isRespawning = true
-    transition.long_fade_to(self.path)
+    if is_passive:
+        transition.fade_to(self.path)
+    else:
+        transition.long_fade_to(self.path)
 
 func land():
+    global.pauseGame = false
     global.memory.erase("active_save_point_x")
     global.memory.erase("active_save_point_y")
     global.memory.erase("active_save_point_z")

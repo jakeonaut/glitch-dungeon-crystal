@@ -41,15 +41,15 @@ func playerRespawn(transition_name):
 
 # @override
 func justPressedDown():
-    return Input.is_action_just_pressed("ui_fall_down")
+    return Input.is_action_just_pressed("ui_down")
 
 # @override
 func pressingDown():
-    return Input.is_action_pressed("ui_fall_down")
+    return Input.is_action_pressed("ui_down")
 
 # @override
 func justPressedJump():
-    return Input.is_action_just_pressed("ui_jump") or should_magic_jump
+    return Input.is_action_just_pressed("jump_button") or should_magic_jump
     
 # @override
 func recentlyJustPressedJump():
@@ -57,7 +57,7 @@ func recentlyJustPressedJump():
 
 # @override
 func pressingJump():
-    return Input.is_action_pressed("ui_jump")
+    return Input.is_action_pressed("jump_button")
 
 # @override
 func pressingMoveForward():

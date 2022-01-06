@@ -25,13 +25,12 @@ func _ready_impl():
     if not global.memory.has("spellbookPage"):
         player.applyGlitch(starting_glitch_type)
     else:
-        player.applyGlitch(global.memory["current_glitch"])
+        player.applyGlitch(global.memory["current_glitch"], false)
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
 
-    # update music
-    musicPlayer.conductFromScenePath(getLevelName())
+    restartMusic()
     
     tryToRespawn()
 
@@ -46,17 +45,15 @@ func _ready_impl():
         pass
     global.activeThrowableObjectPath = null
 
-# TODO(jaketrower): Remove this level edit stuff in final cut ?!?
 func _process(delta):
-    if Input.is_action_just_pressed("ui_place_tile"):
+    if Input.is_action_just_pressed("place_tile_button"):
         var player_position = player.global_transform.origin + (player.facing * 2)
         var grid_cell = levelTiles.world_to_map(player_position)
         levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
-
-    if Input.is_action_just_pressed("ui_save"):
-        var packed_scene = PackedScene.new()
-        packed_scene.pack(get_tree().get_current_scene())
-        ResourceSaver.save("res://saved_scene.tscn", packed_scene)
+        
+func restartMusic():
+    # update music
+    musicPlayer.conductFromScenePath(getLevelName())
 
 func overrideLevelRespawnEvent():
     pass

@@ -36,5 +36,8 @@ func change_scene():
 
     if self.path != "":
         get_tree().change_scene(self.path)
+    else:
+        global.pauseGame = true
+        
     if global.activeThrowableObject:
         global.activeThrowableObjectPath = global.activeThrowableObject.filename

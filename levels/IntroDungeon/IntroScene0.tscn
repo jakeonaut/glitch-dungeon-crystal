@@ -102,7 +102,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="6"]
+[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 16 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 8 )]
@@ -110,7 +110,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5869, -4.89664, 0 )
 visible = false
 grav = 0
 bbText = "welcome to home
-PRESS UP TO JUMP"
+PRESS [SPACE] TO JUMP"
 tiny_textbox = true
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 8 )]
@@ -126,7 +126,7 @@ shape = SubResource( 3 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
 grav = 0
-bbText = "PRESS DOWN TO
+bbText = "PRESS [X] TO
 GO THROUGH DOORS"
 tiny_textbox = true
 

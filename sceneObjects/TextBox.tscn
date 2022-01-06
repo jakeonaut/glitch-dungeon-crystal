@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scripts/AbortSound.gd" type="Script" id=6]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=7]
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=8]
+[ext_resource path="res://assets/sprites/nextTextboxPrompt.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/endTextboxPrompt.png" type="Texture" id=10]
 
 [sub_resource type="GradientTexture" id=1]
 
@@ -88,6 +90,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="NextPrompt" type="Sprite" parent="TextBox"]
+material = SubResource( 3 )
+position = Vector2( 455, 110 )
+scale = Vector2( 3.1958, 3.08572 )
+texture = ExtResource( 9 )
+
+[node name="EndPrompt" type="Sprite" parent="TextBox"]
+material = SubResource( 3 )
+position = Vector2( 455, 110 )
+scale = Vector2( 3.1958, 3.08572 )
+texture = ExtResource( 10 )
+
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="TextBox"]
 volume_db = -15.0
 script = ExtResource( 6 )
@@ -96,6 +110,11 @@ script = ExtResource( 6 )
 stream = ExtResource( 5 )
 volume_db = -20.0
 pitch_scale = 0.7
+script = ExtResource( 6 )
+
+[node name="NextDialogSound" type="AudioStreamPlayer" parent="TextBox"]
+stream = ExtResource( 5 )
+volume_db = -20.0
 script = ExtResource( 6 )
 
 [node name="AbortSound" type="AudioStreamPlayer" parent="TextBox"]

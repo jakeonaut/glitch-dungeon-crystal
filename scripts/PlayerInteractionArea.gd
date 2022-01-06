@@ -19,12 +19,12 @@ func _process(delta):
                     nearest_area = area
 
     if Input.is_action_just_pressed("ui_interact"):
-        # can short circuit and just immediately interact with "activeInteractor" AKA TextBox if 
-        # I am already looking at one (e.g. if global.activeInteractor exists   )
         if global.activeInteractor != null:
             global.activeInteractor.InteractActivate()
+            
+    if Input.is_action_just_pressed("interact_button"):
         # give priority to active area if user pressing interact action
-        elif nearest_area:
+        if nearest_area:
             nearest_area.InteractActivate()
         # Give secondary priority to held objects action.
         elif global.activeThrowableObject:

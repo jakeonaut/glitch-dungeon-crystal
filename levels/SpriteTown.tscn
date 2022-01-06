@@ -120,7 +120,7 @@ tiny_textbox = true
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 12, 0 )
 grav = 0
-bbText = "use X to cast
+bbText = "use [Z] to cast
 collected spells!"
 tiny_textbox = true
 

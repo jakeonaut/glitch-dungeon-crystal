@@ -7,8 +7,7 @@ func _ready():
 
 func activateScript():
     var npc = get_node("../../..")
-    npc.is_active = false
-    npc.can_activate = false
+    npc.get_node("NPC TextBox/TextBox").text_final = "are you corporeal?"
 
 func isActive():
     # OVERRIDE ME... if you dare

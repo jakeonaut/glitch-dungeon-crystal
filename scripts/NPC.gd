@@ -22,65 +22,68 @@ export var tiny_textbox = false
 
 
 func _ready():
-	set_process(true)
-	set_physics_process(true)
+    set_process(true)
+    set_physics_process(true)
 
-	set_collision_mask_bit(1, true)
+    set_collision_mask_bit(1, true)
 
-	if bbText != "" and textBoxContainer.bbText == "":
-		textBoxContainer.bbText = bbText
-	if portrait and not textBoxContainer.portrait:
-		textBoxContainer.portrait = portrait
-	if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
-		var nextTextBoxPathStr = "../"
-		for i in range(nextTextBoxPath.get_name_count()):
-			if i != 0:
-				nextTextBoxPathStr += "/"
-			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
-		textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
-	textBoxContainer.setVars()
+    if bbText != "" and textBoxContainer.bbText == "":
+        textBoxContainer.bbText = bbText
+    if portrait and not textBoxContainer.portrait:
+        textBoxContainer.portrait = portrait
+    if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
+        var nextTextBoxPathStr = "../"
+        for i in range(nextTextBoxPath.get_name_count()):
+            if i != 0:
+                nextTextBoxPathStr += "/"
+            nextTextBoxPathStr += nextTextBoxPath.get_name(i)
+        textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+    textBoxContainer.setVars()
 
-	if tiny_textbox:
-		textBox.tinify()
+    textBox.is_important = is_important
+    if tiny_textbox:
+        textBox.tinify()
 
 func isActive():
-	return visible or can_activate
+    return visible or can_activate or is_active
 
 func activate():
-	# if global.activeInteractor == null:
-	#     global.activeInteractor = textBox
-	#     textBox.interact()
-	pass
+    if global.activeInteractor == null:
+        textBox.interact()
 
 func passiveActivate(delta):
-	if can_move:
-		mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
+    if can_move:
+        mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
 
-	if not visible and can_activate:
-		if aniPlayer:
-			aniPlayer.play("flickerOn")
-		else:
-			visible = true
-		can_activate = false
-	elif visible and is_active and (not aniPlayer or not aniPlayer.is_playing()):
-		if global.activeInteractor == null or global.activeInteractor == textBox:
-			textBox.passiveInteract(delta, is_important)
+    if not visible and can_activate:
+        if aniPlayer:
+            aniPlayer.play("flickerOn")
+        else:
+            visible = true
+        can_activate = false
+    elif visible and is_active and (not aniPlayer or not aniPlayer.is_playing()):
+        if global.activeInteractor == null or global.activeInteractor == textBox:
+            textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
-	# TODO(jaketrower): TODO on a timer...
-	if global.activeInteractor != null and global.activeInteractor == textBox:
-		global.activeInteractor.stopInteract()
+    # TODO(jaketrower): TODO on a timer...
+    if global.activeInteractor != null and global.activeInteractor == textBox:
+        global.activeInteractor.stopInteract()
+        
+func justStopPassiveActivate():
+    if global.activeInteractor == null:
+        level.player.hideInteractPrompt()
 
 func _physics_process(delta):
-	#._physics_process(delta) # NOTE: This super method is called automatically
-	# https://github.com/godotengine/godot/issues/6500
+    #._physics_process(delta) # NOTE: This super method is called automatically
+    # https://github.com/godotengine/godot/issues/6500
 
-	if global.pauseGame: return
+    if global.pauseGame: return
 
-	.processPhysics(delta)
+    .processPhysics(delta)
 
 func justPressedJump():
-	return just_pressed_jump
+    return just_pressed_jump
 
 func pressingJump():
-	return pressing_jump
+    return pressing_jump

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -26,6 +26,9 @@
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/sprites/interactPrompt.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/importantInteractPrompt.png" type="Texture" id=28]
+[ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=29]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -73,7 +76,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 6 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -199,6 +202,33 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 14 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 14, 15, 11, 16, 13, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sounds/GetItemSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -423,6 +453,25 @@ script = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 shape = SubResource( 3 )
 
+[node name="InteractPrompt" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
+visible = false
+pixel_size = 0.12
+texture = ExtResource( 27 )
+hframes = 2
+script = ExtResource( 10 )
+frame_delay = 0.8
+
+[node name="ImportantInteractPrompt" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
+visible = false
+pixel_size = 0.12
+texture = ExtResource( 28 )
+hframes = 4
+script = ExtResource( 10 )
+frame_delay = 0.6
+max_frames = 4
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.8 )
 material_override = SubResource( 4 )
@@ -433,7 +482,6 @@ alpha_cut = 2
 texture = ExtResource( 6 )
 hframes = 8
 vframes = 4
-frame = 6
 
 [node name="CameraY" type="Spatial" parent="."]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )
@@ -548,6 +596,10 @@ volume_db = -20.0
 stream = ExtResource( 23 )
 volume_db = -30.0
 
+[node name="GetItemSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 29 )
+volume_db = -15.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
 anims/RESET = SubResource( 29 )
@@ -559,6 +611,7 @@ anims/fall = SubResource( 12 )
 anims/fallFar = SubResource( 28 )
 anims/fallFlat = SubResource( 13 )
 anims/fallStart = SubResource( 14 )
+anims/getItem = SubResource( 30 )
 anims/happy = SubResource( 15 )
 anims/jump = SubResource( 16 )
 anims/jumpSquat = SubResource( 17 )
