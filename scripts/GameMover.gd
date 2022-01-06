@@ -154,7 +154,7 @@ func _physics_process(delta):
 func isActive():
     return visible
 
-func tryDieToEnemy():
+func tryDieToEnemy(should_glitch):
     pass    
     
 func getHitByBroom():
@@ -770,7 +770,7 @@ func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv,
     if tile_distance <= 0:
         if isTileSpikes(tile_type):
             # no need to push player, just call death!!
-            self.tryDieToEnemy()
+            self.tryDieToEnemy(false)
             return local_lv
 
         if debug:
@@ -793,7 +793,7 @@ func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv,
     elif is_vertical and tile_distance < local_lv.y * sensor_direction:
         if isTileSpikes(tile_type):
             # no need to push player, just call death!!
-            self.tryDieToEnemy()
+            self.tryDieToEnemy(false)
             return local_lv
             
         global_transform.origin.y += tile_distance * sensor_direction
@@ -806,7 +806,7 @@ func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv,
     elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
         if isTileSpikes(tile_type):
             # no need to push player, just call death!!
-            self.tryDieToEnemy()
+            self.tryDieToEnemy(false)
             return local_lv
             
         global_transform.origin.x += tile_distance * sensor_direction

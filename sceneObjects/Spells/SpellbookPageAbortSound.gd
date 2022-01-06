@@ -22,6 +22,9 @@ func activateScript():
 		# TODO(jaketrower): you have to know how stupid this is right?
 		level.get_node("UILayer/ColorRect").visible = true
 		level.get_node("UILayer/ColorRect2").visible = true
+
+	# IFNDEF SpriteTownLevelScript.gd
+	level.get_node("NPC").textBox.text_final = "well, that might not\nactually explain anything huh......\n..\nthese SPRITES here\nsay that CRYSTAL ELDERS\nknow much more\nif you explore more of\nthe dungeon you can\nfind them i think\nbut i'm too scared.."
 		
 	level.restartMusic()
 

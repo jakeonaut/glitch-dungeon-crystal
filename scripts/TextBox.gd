@@ -93,7 +93,7 @@ func _process(delta):
         text_timer += (delta*22)
         
         var time_limit = text_time_limit
-        if Input.is_action_pressed("action_button"):
+        if Input.is_action_pressed("jump_button"):
             time_limit = 0
             
         tryToHide(delta)
@@ -101,8 +101,9 @@ func _process(delta):
         if isWaitingForEndPrompt():
             endPrompt.visible = not tiny
             has_been_shown = true
-            if self.is_important:
+            if is_important:
                 global.pauseGame = false
+            is_important = false
             
         if isWaitingForNextPrompt():
             if not ui_should_continue:
@@ -170,6 +171,7 @@ func showTextbox():
     focus_me = true
     if is_important:
         global.pauseGame = true
+        # maybe treat this like the Item Catch?
     text_timer = 0
     text_next_index = 0
     textNode.set_text('')

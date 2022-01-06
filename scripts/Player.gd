@@ -206,7 +206,7 @@ func isOnSavePoint():
            int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 # @override
-func tryDieToEnemy():
+func tryDieToEnemy(should_glitch):
     if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
        physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
         if randi() % 3 == 0:
@@ -219,7 +219,8 @@ func tryDieToEnemy():
         global.pauseGame = true
         global.pauseMoveInput = true
         global.isRespawning = true
-        level.glitchScreenEffect.visible = true
+        if should_glitch:
+            level.glitchScreenEffect.visible = true
         var material = level.glitchScreenEffect.get_material()
         if material is ShaderMaterial:
             material.set_shader_param("shake_power", 0.01)
