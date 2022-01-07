@@ -105,7 +105,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 16 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 8 )]

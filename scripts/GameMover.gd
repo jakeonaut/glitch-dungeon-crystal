@@ -14,6 +14,12 @@ func getLevelTiles():
     if levelTiles == null:
         levelTiles = level.levelTiles
     return levelTiles
+    
+var gameCamera = null
+func getGameCamera():
+    if gameCamera == null:
+        gameCamera = level.gameCamera
+    return gameCamera
 
 onready var smallInteractionArea = get_node("SmallInteractionArea")
 onready var collisionShape = get_node("CollisionShape")
@@ -101,6 +107,7 @@ var feather_fall_time_limit = 60
 var feather_jump_timer = 0
 var feather_jump_time_limit = 10
 var feather_jump_partial_time_limit = 7
+var weak_feather_dbl_jump = false
 
 func isFeatherLike():
     return glitch_form == GlitchForm.FEATHER
@@ -159,9 +166,6 @@ func tryDieToEnemy(should_glitch):
     
 func getHitByBroom():
     pass
-    
-func getCamera():
-    return get_tree().get_root().get_node("Game/Viewport/level").gameCamera
 
 func respawn():
     hv = Vector3(0, 0, 0)
@@ -369,6 +373,7 @@ func processJumpInputs(delta):
             jumped_from_true_ground = truly_on_ground
             jump_squat_jump_input_timer = 0
             feather_jump_timer = 0
+            weak_feather_dbl_jump = false
             if not aniPlayer:
                 jump_squat_jump_input_timer = 1
                 actuallyApplyJump()
@@ -419,6 +424,8 @@ func processJumpInputs(delta):
 
     if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
         feather_jump_timer += (delta*22)
+        if weak_feather_dbl_jump:
+            feather_jump_timer += (delta*22)
         actuallyApplyJump(false)
     elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
         feather_jump_timer += (delta*22)
@@ -427,19 +434,24 @@ func processJumpInputs(delta):
     elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
         feather_jump_timer += (delta*22)
     if not pressingJump():
-        feather_jump_timer = 200
+        weak_feather_dbl_jump = true
+        if glitch_form != GlitchForm.FEATHER:
+            feather_jump_timer = 200
 
 func actuallyApplyJump(play_sound = true):
     if isFeatherLike():
-        if feather_jump_timer < 5:
+        if not weak_feather_dbl_jump and feather_jump_timer < 5:
             if vv < (2*jump_force) / 3:
                 vv = (2*jump_force) / 3
-        elif feather_jump_timer < 8:
+        elif not weak_feather_dbl_jump and feather_jump_timer < 8:
             if vv < jump_force / 2:
                 vv = jump_force / 2
-        else:
+        elif not weak_feather_dbl_jump:
             if vv < jump_force / 2.3:
                 vv = jump_force / 2.3
+        else:
+            if vv < jump_force / 2.5:
+                vv = jump_force / 2.5
     elif not play_sound:
         if vv < (1.58*jump_force)/3:
             vv = (1.58*jump_force)/3
@@ -469,8 +481,8 @@ func processHorizontalInputs(delta):
     var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
 
     # Forward as "seen" by the camera (OpenGL convention)
-    var view_forward = -getCamera().get_transform().basis.z
-    var view_right = -getCamera().get_transform().basis.x
+    var view_forward = -getGameCamera().get_transform().basis.z
+    var view_right = -getGameCamera().get_transform().basis.x
     # Forward as "seen" by the player
     var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
     var right = view_right

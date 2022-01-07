@@ -1,5 +1,23 @@
 extends Node
 
+var grey_palette = preload("res://assets/palettes/grey_palette.png")
+var red_palette = preload("res://assets/palettes/red_palette.png")
+var green_palette = preload("res://assets/palettes/green_palette.png")
+var black_palette = preload("res://assets/palettes/black_palette.png")
+var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
+var white_palette = preload("res://assets/palettes/white_palette.png")
+
+var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
+var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
+enum TilesetType {
+    DUNGEON,
+    HOUSE,
+    FOREST,
+    ALIEN,
+    DESERT,
+    GLITCH_WORLD
+}
+
 var hasLoadedGame = false
 var memory = {}
 
@@ -15,6 +33,7 @@ var pauseMoveInput = false # don't allow player physics or camera input??
 var pauseGame = false   
 
 var can_broom = true
+
 
 func _ready():
     # somehow this gets rid of errors LOL

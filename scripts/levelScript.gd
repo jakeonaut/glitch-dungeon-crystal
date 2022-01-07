@@ -2,18 +2,16 @@ extends Node
 
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
+onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 export var has_spellbook_page = false
+# IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
+export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD") var tileset_type 
 
-var grey_palette = preload("res://assets/palettes/grey_palette.png")
-var red_palette = preload("res://assets/palettes/red_palette.png")
-var green_palette = preload("res://assets/palettes/green_palette.png")
-var black_palette = preload("res://assets/palettes/black_palette.png")
-var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
-var white_palette = preload("res://assets/palettes/white_palette.png")
+export var display_title = "???"
 
 func _ready():
     # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
@@ -23,13 +21,29 @@ func _ready_impl():
     set_process_input(true)
     set_process(true)
     
+    # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
+    get_node("UILayer/LevelTitle/ColorRect/ColorRect/RichTextLabel").bbcode_text = display_title
+    if tileset_type == global.TilesetType.HOUSE:
+        levelTiles.set_mesh_library(levelTiles.red_tiles)
+        levelTiles.grey_palette = global.grey_palette_town
+        levelTiles.green_palette = global.green_palette_town
+        levelTiles.properlySetTiles()
+    elif tileset_type == global.TilesetType.FOREST:
+        levelTiles.set_mesh_library(levelTiles.green_tiles)
+        levelTiles.properlySetTiles()
+    
     if has_spellbook_page and not global.memory.has("spellbookPage"):
+        print("gimme a spellbook!!")
         global.memory["spellbookPage"] = []
 
     if not global.memory.has("spellbookPage"):
-        player.applyGlitch(starting_glitch_type)
+        player.applyGlitch(starting_glitch_type, true)
     else:
-        player.applyGlitch(global.memory["current_glitch"], false)
+        if global.memory.has("current_glitch"):
+            player.applyGlitch(global.memory["current_glitch"], true)
+        else:
+            player.applyGlitch(starting_glitch_type, true)
+            
         if global.memory["spellbookPage"].size() > 0:
             player.applyObeliskGlitch(global.memory["spellbookPage"][0], true)
 
@@ -91,13 +105,12 @@ func tryToRespawn():
             global.memory["active_save_point_x"], 
             global.memory["active_save_point_y"], 
             global.memory["active_save_point_z"])
-        player.getCamera().rotation_degrees.y = global.cameraRotation
+        gameCamera.rotation_degrees.y = global.cameraRotation
         player.last_grounded_y = player.global_transform.origin.y 
     elif global.memory.has("lastDoor") and global.memory["roomPath"] != getLevelName():
         var door_path = global.memory["roomPath"]
         var doors = get_tree().get_nodes_in_group("doors")
         for door in doors:
-            print(str(door.path) + ", " + str(door_path) + " ==? " + str(door.path == door_path))
             if door.path == door_path:
                 found_door = door
                 break
@@ -119,30 +132,42 @@ func tryToRespawn():
 
 func normalGlitch():
     levelTiles.normalGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", grey_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", grey_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.normalGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.grey_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.grey_palette)
 
 func floorGlitch():
     levelTiles.floorGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", red_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", red_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.floorGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.red_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.red_palette)
 
 func featherGlitch():
     levelTiles.featherGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", green_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", green_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.featherGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.green_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.green_palette)
 
 func ladderGlitch():
     levelTiles.ladderGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", yellow_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", yellow_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.ladderGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.yellow_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.yellow_palette)
 
 func invisibleGlitch():
     levelTiles.invisibleGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", black_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", black_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.invisibleGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.black_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.black_palette)
 
 func walkThroughWallsGlitch():
     levelTiles.walkThroughWallsGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", white_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", white_palette)
+    if fakeLevelTiles:
+        fakeLevelTiles.walkThroughWallsGlitch()
+    get_tree().call_group("sprite","changeSpriteColorPalette", global.white_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.white_palette)

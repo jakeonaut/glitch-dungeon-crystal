@@ -84,7 +84,7 @@ shape = SubResource( 3 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
 volume_db = -23.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
@@ -95,7 +95,7 @@ shaded = true
 alpha_cut = 2
 texture = ExtResource( 7 )
 hframes = 8
-vframes = 4
+vframes = 8
 frame = 10
 script = ExtResource( 8 )
 should_randomize_frame_delay = true

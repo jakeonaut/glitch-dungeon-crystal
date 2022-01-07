@@ -79,6 +79,9 @@ func setPosition(should_set_target_origin):
     self.rect_position.y = target_pos.y - 75 - adjusted_tiny_y_pos
     
 func _process(delta):
+    get_node("../..").mySprite.frame_delay = 1.6
+    get_node("../..").mySprite.should_randomize_frame_delay = false
+
     if endPrompt.visible:
         wigglePrompt(delta, endPrompt)
     elif nextPrompt.visible:
@@ -112,6 +115,7 @@ func _process(delta):
             ui_should_continue = false
 
         if text_timer >= time_limit and text_next_index < len(text_final):
+            get_node("../..").mySprite.frame_delay = 0.2
             textNode.add_text(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
             # TODO(jaketrower): We can just do RichTextLabel.set_visible_characters(text_next_index)
             # TODO(jaketrower): but it needs to be refigured to be compatible with "self.text_final"

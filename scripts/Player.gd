@@ -46,7 +46,7 @@ func applyObeliskGlitch(glitch, only_visual = false):
         if glitch == GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
         if glitch == GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
     else:
-        applyGlitch(glitch)
+        applyGlitch(glitch, only_visual)
         
 func applySpellbookGlitch():
     if not global.memory.has("spellbookPage"):
@@ -62,8 +62,8 @@ func applySpellbookGlitch():
         noSpellSound.play()
 
 
-func applyGlitch(glitch, playSound = true):
-    if playSound:
+func applyGlitch(glitch, notPlaySound = false):
+    if not notPlaySound:
         transformSound.play()
     global.memory["current_glitch"] = glitch
 
@@ -162,11 +162,11 @@ func _process(delta):
         applyNextGlitch()
         
     var DEATH_MARGIN = 5
-    if self.getCamera().rightmost_x > -999:
-        if global_transform.origin.x > self.getCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < self.getCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > self.getCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < self.getCamera().botmost_y - DEATH_MARGIN:
+    if getGameCamera().rightmost_x > -999:
+        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
             self.respawn()
 

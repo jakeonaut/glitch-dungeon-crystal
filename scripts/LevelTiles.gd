@@ -3,26 +3,18 @@ extends GridMap
 # resources is loaded at compile time with preload
 # TODO(jaketrower): Probably best to load this once in the levelScript and reference from there
 var grey_tiles = preload("res://sceneObjects/tiles/grey_tiles.tres") 
-var grey_palette = preload("res://assets/palettes/grey_palette.png")
-var grey_purple_palette = preload("res://assets/palettes/grey_purple_palette.png")
-var grey_palette_alt = preload("res://assets/palettes/grey_palette_alt.png")
-
 var red_tiles = preload("res://sceneObjects/tiles/red_tiles.tres")
-var red_palette = preload("res://assets/palettes/red_palette.png")
-
-var tidepool_palette = preload("res://assets/palettes/tidepool_palette.png")
 var green_tiles = preload("res://sceneObjects/tiles/green_tiles.tres")
-var green_palette = preload("res://assets/palettes/green_palette.png")
-var green_palette_alt = preload("res://assets/palettes/green_palette_alt.png")
-
 var black_tiles = preload("res://sceneObjects/tiles/black_tiles.tres")
-var black_palette = preload("res://assets/palettes/black_palette.png")
-
 var yellow_tiles = preload("res://sceneObjects/tiles/yellow_tiles.tres")
-var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
-
 var white_tiles = preload("res://sceneObjects/tiles/white_tiles.tres")
-var white_palette = preload("res://assets/palettes/white_palette.png")
+
+var grey_palette = global.grey_palette
+var red_palette = global.red_palette
+var green_palette = global.green_palette
+var black_palette = global.black_palette
+var yellow_palette = global.yellow_palette
+var white_palette = global.white_palette
 
 onready var cosmeticLevelTiles = get_node("CosmeticLevelTiles")
 
@@ -45,6 +37,9 @@ func setTileNameNum(newName, num, cell_index):
 
 func _ready():
     set_process(true)
+    ready_impl()
+
+func ready_impl():
     buildRandomTiles()
 
 func buildRandomTiles():
@@ -155,8 +150,8 @@ func properlySetTiles():
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name))
 
 func normalGlitch():
-    set_mesh_library(grey_tiles)
-    changeColorPalette(grey_palette, grey_purple_palette)
+    # set_mesh_library(grey_tiles)
+    changeColorPalette(grey_palette, grey_palette)
     properlySetTiles()
     cosmeticLevelTiles.normalGlitch(grey_palette)
 
