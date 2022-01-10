@@ -71,6 +71,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=5]
+resource_local_to_scene = true
 
 [node name="Door" type="Spatial" groups=["doors"]]
 script = ExtResource( 1 )

@@ -76,15 +76,21 @@ func goThroughDoor():
 
     global.isRespawning = true
     if is_passive:
+        global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
+        print(global.memory["player_y_offset"])
         transition.fade_to(self.path)
     else:
         transition.long_fade_to(self.path)
 
 func land():
     global.pauseGame = false
+    # TODO(jaketrower): Oh...
     global.memory.erase("active_save_point_x")
     global.memory.erase("active_save_point_y")
     global.memory.erase("active_save_point_z")
     
     getPlayer().global_transform.origin.x = landing.global_transform.origin.x
     getPlayer().global_transform.origin.y = landing.global_transform.origin.y
+
+    if is_passive and global.memory.has("player_y_offset"):
+        getPlayer().global_transform.origin.y += global.memory["player_y_offset"]

@@ -116,7 +116,8 @@ func _process(delta):
 
         if text_timer >= time_limit and text_next_index < len(text_final):
             get_node("../..").mySprite.frame_delay = 0.2
-            textNode.add_text(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
+            #textNode.set_bbcode(text_final)
+            textNode.append_bbcode(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
             # TODO(jaketrower): We can just do RichTextLabel.set_visible_characters(text_next_index)
             # TODO(jaketrower): but it needs to be refigured to be compatible with "self.text_final"
             # textNode.set_visible_characters(text_next_index)
@@ -132,8 +133,8 @@ func _process(delta):
             if isWaitingForNextPrompt() or isWaitingForEndPrompt():
                 resetPrompts()
 
-            if textNode.get_text().count("\n") >= 3:
-                textNode.set_text("")
+            if textNode.get_bbcode().count("\n") >= 3:
+                textNode.set_bbcode("")
                 resetTinyColorRect()
                 adjusted_tiny_y_pos += 35
                 
@@ -150,7 +151,7 @@ func _process(delta):
             self.margin_bottom = bot_margin_start
             
 func isWaitingForNextPrompt():
-    return text_next_index < len(text_final) and text_final[text_next_index] == "\n" and textNode.get_text().count("\n") == 2
+    return text_next_index < len(text_final) and text_final[text_next_index] == "\n" and textNode.get_bbcode().count("\n") == 2
     
 func isWaitingForEndPrompt():
     return text_next_index == len(text_final)
@@ -178,7 +179,7 @@ func showTextbox():
         # maybe treat this like the Item Catch?
     text_timer = 0
     text_next_index = 0
-    textNode.set_text('')
+    textNode.set_bbcode('')
     resetTinyColorRect()
 
     textNode.get_v_scroll().value = 0

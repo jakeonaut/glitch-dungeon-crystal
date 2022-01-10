@@ -21,8 +21,6 @@ func _ready_impl():
     set_process_input(true)
     set_process(true)
     
-    # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
-    get_node("UILayer/LevelTitle/ColorRect/ColorRect/RichTextLabel").bbcode_text = display_title
     if tileset_type == global.TilesetType.HOUSE:
         levelTiles.set_mesh_library(levelTiles.red_tiles)
         levelTiles.grey_palette = global.grey_palette_town
@@ -76,6 +74,9 @@ func restartMusic():
     musicPlayer.conductFromScenePath(getLevelName())
     
 func tryShowUIElements():
+    # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
+    get_node("UILayer").setDisplayTitle(display_title)
+
     if global.memory.has("spellbookPage"):
         # TODO(jaketrower): you have to know how stupid this is right?
         get_node("UILayer/ColorRect").visible = true

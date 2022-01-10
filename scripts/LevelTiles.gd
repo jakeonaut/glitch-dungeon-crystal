@@ -110,7 +110,7 @@ func randomizeTile(cell_index):
     var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
     var tile_name = mesh_library.get_item_name(tile_type)
     if "BrickSolidRoof" in tile_name:
-        setRandomTileNameOfType("BrickSolidRoof", 7, Vector3(cell_index.x, cell_index.y+1, cell_index.z))
+        setRandomTileNameOfType("BrickSolidRoof", 7, cell_index)
     elif "BrickSolidCeil" in tile_name:
         setRandomTileNameOfType("BrickSolidCeil", 6, cell_index)
     elif "BrickSolidTopLeft" in tile_name:

@@ -79,6 +79,23 @@ func magicJump():
     should_magic_jump = true
 
 # @override
+func handleSpikeCollisions():
+    var x = global_transform.origin.x
+    var y = global_transform.origin.y
+    var rb = get_node("CollisionShape").shape.radius
+    var lb = -rb
+    var tb = get_node("CollisionShape").shape.height/2
+    var bb = -tb
+
+    for i in range(int(round(y+bb-0.24)), int(round(y+tb))+1):
+        for j in range(int(round(x+lb))-1, int(round(x+rb))+1):
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if isTileSpikes(tile_type):
+                tryDieToEnemy(false)
+                return
+
+# @override
 func landed():
     if is_falling:
         transition.interrupt()

@@ -21,6 +21,8 @@ func _process(delta):
         if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             is_touching_enemy = true
             parent.tryDieToEnemy(true)
+        if area.is_in_group("spikes"):
+            parent.tryDieToEnemy(false)
         if area.is_in_group("water"):
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true

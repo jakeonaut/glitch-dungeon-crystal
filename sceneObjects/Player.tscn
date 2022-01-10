@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -433,6 +433,9 @@ tracks/0/keys = {
 "values": [ 26, 27 ]
 }
 
+[sub_resource type="Animation" id=31]
+resource_name = "wallBump"
+
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.146, 0 )
 collision_layer = 2
@@ -557,7 +560,8 @@ volume_db = -20.0
 
 [node name="WetJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -20.0
+volume_db = -25.0
+pitch_scale = 0.9
 
 [node name="JumpOverallsSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
@@ -625,3 +629,4 @@ anims/wakeup = SubResource( 24 )
 anims/walk = SubResource( 25 )
 anims/walkStart = SubResource( 26 )
 anims/walkStop = SubResource( 27 )
+anims/wallBump = SubResource( 31 )
