@@ -3,15 +3,7 @@ extends KinematicBody
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 
-enum GlitchForm {
-    NORMAL,
-    FLOOR,
-    FEATHER,
-    INVISIBLE,
-    LADDER,
-    WALK_THROUGH_WALLS,
-}
-export var my_glitch_form = GlitchForm.FEATHER
+export var my_glitch_form = global.GlitchForm.FEATHER
 
 var original_position = null
 var previous_point = null

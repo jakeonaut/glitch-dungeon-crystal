@@ -14,7 +14,7 @@ func preProcess():
        or parent.linear_velocity.z > 0.001 or parent.linear_velocity.z < -0.001 \
        or parent.broom_state > 0:
         frame_delay = 0.1
-    # TODO (need to pull this from PlayerGameMover, if glitch_form == GlitchForm.FEATHER and not on_ground)
+    # TODO (need to pull this from PlayerGameMover, if glitch_form == global.GlitchForm.FEATHER and not on_ground)
     elif parent.pressingMoveRight() or parent.pressingMoveLeft() \
        or parent.pressingMoveDown() or parent.pressingMoveForward():
         frame_delay = 0.2

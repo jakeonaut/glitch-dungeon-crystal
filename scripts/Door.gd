@@ -70,14 +70,14 @@ func goThroughDoor():
     if not doorSound.is_playing() and not global.isRespawning:
         doorSound.play()
         
+    global.memory["cameraSize"] = level.gameCamera.initial_size
     global.memory["lastDoor"] = id
-    global.memory["roomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
+    global.memory["roomPath"] = level.getLevelName()
     global.pauseGame = true
 
     global.isRespawning = true
     if is_passive:
         global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
-        print(global.memory["player_y_offset"])
         transition.fade_to(self.path)
     else:
         transition.long_fade_to(self.path)

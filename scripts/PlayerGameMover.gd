@@ -1,11 +1,15 @@
 extends "GameMover.gd"
 
+onready var interactionArea = get_node("InteractionArea")
+
 var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0
 var can_broom = global.can_broom
 var jump_press_timer = 999
 var jump_press_time_limit = 5
+
+var has_played_fall_sound = false
 
 func _ready():
     set_physics_process(true)
@@ -17,6 +21,13 @@ func _process(delta):
 
     if justPressedJump():
         jump_press_timer = 0
+        
+    # this is a little weird but fixes the fallthrough area situation:
+    if linear_velocity.y < 0:
+        interactionArea.transform.origin.y = -2
+    else:
+        interactionArea.transform.origin.y = 0
+    
 
 # @override
 func respawn():
@@ -26,7 +37,9 @@ func respawn():
 func playerRespawn(transition_name):
     if transitioning: return
         
-    fallSound.play()
+    if not has_played_fall_sound:
+        fallSound.play()
+        has_played_fall_sound = true
     global.isRespawning = true
     # global transition scene, see res://scripts/transition.gd
     var currLevelPath = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
@@ -86,12 +99,23 @@ func handleSpikeCollisions():
     var lb = -rb
     var tb = get_node("CollisionShape").shape.height/2
     var bb = -tb
+    
+    var TILE_WIDTH = levelTiles.cell_size.x
+    var TILE_HEIGHT = levelTiles.cell_size.y
+    
+    var margin = 0.12
 
-    for i in range(int(round(y+bb-0.24)), int(round(y+tb))+1):
+    for i in range(int(round(y+bb-0.24))-1, int(round(y+tb))+1):
         for j in range(int(round(x+lb))-1, int(round(x+rb))+1):
             var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
             var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-            if isTileSpikes(tile_type):
+            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+            var tile_x = tile_pos.x - TILE_WIDTH/2
+            var tile_y = tile_pos.y - TILE_HEIGHT/2
+            if isTileSpikes(tile_type) and isRectColliding(
+                tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+                x + lb + margin, y + tb - margin, x + rb - margin, y + bb + margin
+            ):
                 tryDieToEnemy(false)
                 return
 

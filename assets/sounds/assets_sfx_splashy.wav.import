@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/assets_sfx_splashy.wav-eb669f8a71a24c4f578f29ec67735b28.sample"
+
+[deps]
+
+source_file="res://assets/sounds/assets_sfx_splashy.wav"
+dest_files=[ "res://.import/assets_sfx_splashy.wav-eb669f8a71a24c4f578f29ec67735b28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

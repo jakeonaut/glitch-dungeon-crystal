@@ -40,11 +40,11 @@ func applyObeliskGlitch(glitch, only_visual = false):
             global.memory["spellbookPage"] = [glitch]
         # TODO(jaketrower): you have to know how stupid this is right?
         var equipSlotSprite = level.get_node("UILayer/ColorRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-        if glitch == GlitchForm.FLOOR: equipSlotSprite.frame = 0
-        if glitch == GlitchForm.FEATHER: equipSlotSprite.frame = 14
-        if glitch == GlitchForm.LADDER: equipSlotSprite.frame = 25
-        if glitch == GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
-        if glitch == GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
+        if glitch == global.GlitchForm.FLOOR: equipSlotSprite.frame = 0
+        if glitch == global.GlitchForm.FEATHER: equipSlotSprite.frame = 14
+        if glitch == global.GlitchForm.LADDER: equipSlotSprite.frame = 25
+        if glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
+        if glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
     else:
         applyGlitch(glitch, only_visual)
         
@@ -67,12 +67,12 @@ func applyGlitch(glitch, notPlaySound = false):
         transformSound.play()
     global.memory["current_glitch"] = glitch
 
-    if glitch == GlitchForm.NORMAL: normalGlitch()
-    if glitch == GlitchForm.FLOOR: floorGlitch()
-    if glitch == GlitchForm.FEATHER: featherGlitch()
-    if glitch == GlitchForm.LADDER: ladderGlitch()
-    if glitch == GlitchForm.INVISIBLE: invisibleGlitch()
-    if glitch == GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
+    if glitch == global.GlitchForm.NORMAL: normalGlitch()
+    if glitch == global.GlitchForm.FLOOR: floorGlitch()
+    if glitch == global.GlitchForm.FEATHER: featherGlitch()
+    if glitch == global.GlitchForm.LADDER: ladderGlitch()
+    if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
+    if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
 
 func changeSpriteColorPalette(palette):
     var material = mySprite.material_override
@@ -81,37 +81,37 @@ func changeSpriteColorPalette(palette):
         mySprite.material_override = material
 
 func normalGlitch():
-    glitch_form = GlitchForm.NORMAL
+    glitch_form = global.GlitchForm.NORMAL
     level.normalGlitch()
     changeSpriteColorPalette(grey_palette)
     # mySprite.setNormalClothes()
 
 func floorGlitch():
-    glitch_form = GlitchForm.FLOOR
+    glitch_form = global.GlitchForm.FLOOR
     level.floorGlitch()
     changeSpriteColorPalette(red_palette)
     # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
-    glitch_form = GlitchForm.FEATHER
+    glitch_form = global.GlitchForm.FEATHER
     level.featherGlitch()
     changeSpriteColorPalette(green_palette)
     # mySprite.setMothCostume()
 
 func ladderGlitch():
-    glitch_form = GlitchForm.LADDER
+    glitch_form = global.GlitchForm.LADDER
     level.ladderGlitch()
     changeSpriteColorPalette(yellow_palette)
     # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
-    glitch_form = GlitchForm.INVISIBLE
+    glitch_form = global.GlitchForm.INVISIBLE
     level.invisibleGlitch()
     changeSpriteColorPalette(black_palette)
     # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
-    glitch_form = GlitchForm.WALK_THROUGH_WALLS
+    glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
     level.walkThroughWallsGlitch()
     changeSpriteColorPalette(white_palette)
     # mySprite.setNightgown()
@@ -208,7 +208,7 @@ func isOnSavePoint():
 
 # @override
 func tryDieToEnemy(should_glitch):
-    if glitch_form != GlitchForm.INVISIBLE and not transitioning and \
+    if glitch_form != global.GlitchForm.INVISIBLE and not transitioning and \
        physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint():
         if randi() % 3 == 0:
             hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 

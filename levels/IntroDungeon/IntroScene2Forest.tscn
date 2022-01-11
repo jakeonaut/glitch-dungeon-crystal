@@ -86,7 +86,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0 )
-path = "res://levels/IntroDungeon/IntroScene1.tscn"
+path = "res://levels/IntroDungeon/IntroScene0.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7.01967, 0 )
@@ -118,10 +118,10 @@ bbText = "see IntroScene2ForestLevelScript"
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="8"]
 script = ExtResource( 14 )
 
-[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 13 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 11 )]

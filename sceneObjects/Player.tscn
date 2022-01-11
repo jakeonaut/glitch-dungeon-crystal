@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PlayerInteractionArea.gd" type="Script" id=2]
@@ -302,10 +302,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 14, 15, 10, 3 ]
+"values": [ 14, 15, 10, 3, 0 ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "landBump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 33, 34, 35, 25, 0 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -403,6 +419,21 @@ tracks/0/keys = {
 "values": [ 2, 3, 2, 25 ]
 }
 
+[sub_resource type="Animation" id=31]
+resource_name = "walkBump"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 24, 25, 26, 0 ]
+}
+
 [sub_resource type="Animation" id=26]
 length = 0.2
 tracks/0/type = "value"
@@ -432,9 +463,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 26, 27 ]
 }
-
-[sub_resource type="Animation" id=31]
-resource_name = "wallBump"
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.146, 0 )
@@ -484,7 +512,7 @@ double_sided = false
 alpha_cut = 2
 texture = ExtResource( 6 )
 hframes = 8
-vframes = 4
+vframes = 8
 
 [node name="CameraY" type="Spatial" parent="."]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )
@@ -621,12 +649,13 @@ anims/jump = SubResource( 16 )
 anims/jumpSquat = SubResource( 17 )
 anims/jumpStart = SubResource( 18 )
 anims/land = SubResource( 19 )
+anims/landBump = SubResource( 32 )
 anims/sad = SubResource( 20 )
 anims/stand = SubResource( 21 )
 anims/teeter = SubResource( 22 )
 anims/turnAround = SubResource( 23 )
 anims/wakeup = SubResource( 24 )
 anims/walk = SubResource( 25 )
+anims/walkBump = SubResource( 31 )
 anims/walkStart = SubResource( 26 )
 anims/walkStop = SubResource( 27 )
-anims/wallBump = SubResource( 31 )

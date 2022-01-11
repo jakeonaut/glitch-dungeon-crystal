@@ -11,6 +11,33 @@ func _process(delta):
     # find the nearest active area and passive area
     var areas = get_overlapping_areas()
     for area in areas:
+        if area.is_in_group("fallthrough"):
+            var player = get_node("..")
+            var areaShape = area.get_node("CollisionShape")
+            var ax = areaShape.global_transform.origin.x
+            var ay = areaShape.global_transform.origin.y
+            var arb = areaShape.shape.extents.x
+            var alb = -arb
+            var atb = areaShape.shape.extents.y
+            var abb = -atb
+
+            var x = player.global_transform.origin.x
+            var y = player.global_transform.origin.y
+            var rb = player.get_node("CollisionShape").shape.radius
+            var lb = -rb
+            var tb = player.get_node("CollisionShape").shape.height/2
+            var bb = -tb
+            if get_node("..").isRectColliding(
+                ax + alb, ay + atb, ax + arb, ay + abb,
+                x + lb, y + bb, x + rb, y + bb - 0.12
+            ):
+                var was_on_ground = player.was_on_ground
+                player.linear_velocity = player.collideWithFloor(player.linear_velocity)
+                if not player.was_on_ground:
+                    player.landed()
+                player.was_on_ground = was_on_ground
+                player.global_transform.origin.y = ay + atb - bb
+
         if area.has_method("isActive") and area.isActive():
             var dist = area.global_transform.origin.distance_to(global_transform.origin)            
             if area.has_method("InteractActivate"):
@@ -29,5 +56,5 @@ func _process(delta):
         elif global.activeThrowableObject:
             global.activeThrowableObject.activate()
         # if no nearby active area, and no held object, use primary player action
-        else:
-            get_node("..").tryBroom()
+        # else:
+        #     get_node("..").tryBroom()

@@ -34,16 +34,13 @@ func _ready_impl():
         print("gimme a spellbook!!")
         global.memory["spellbookPage"] = []
 
-    if not global.memory.has("spellbookPage"):
-        player.applyGlitch(starting_glitch_type, true)
+    if global.memory.has("current_glitch"):
+        player.applyGlitch(global.memory["current_glitch"], true)
     else:
-        if global.memory.has("current_glitch"):
-            player.applyGlitch(global.memory["current_glitch"], true)
-        else:
-            player.applyGlitch(starting_glitch_type, true)
-            
-        if global.memory["spellbookPage"].size() > 0:
-            player.applyObeliskGlitch(global.memory["spellbookPage"][0], true)
+        player.applyGlitch(starting_glitch_type, true)
+        
+    if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 0:
+        player.applyObeliskGlitch(global.memory["spellbookPage"][0], true)
 
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])

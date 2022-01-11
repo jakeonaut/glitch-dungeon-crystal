@@ -26,6 +26,6 @@ func isActive():
     return is_active
 
 func passiveActivate(_delta):
-    if getPlayer().glitch_form != getPlayer().GlitchForm.NORMAL:
+    if getPlayer().glitch_form != global.GlitchForm.NORMAL:
         transformSound.play()
-        getPlayer().normalGlitch()
+        getPlayer().applyGlitch(global.GlitchForm.NORMAL, true)

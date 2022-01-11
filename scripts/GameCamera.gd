@@ -19,6 +19,8 @@ func getLevelTiles():
 
 func _ready():
     initial_size = self.size
+    if global.memory.has("cameraSize"):
+        self.size = global.memory["cameraSize"]
     initial_z = global_transform.origin.z
     
     # Wait two frames so that levelTiles on levelScript is available

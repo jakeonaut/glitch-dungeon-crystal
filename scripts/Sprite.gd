@@ -14,7 +14,7 @@ var repeat_animation = true
 
 var facing = Vector2(0, 1)
 var is_rotating = false
-var should_fizzle_out = false
+export var should_fizzle_out = false
 
 func _ready():
     set_process(true)
@@ -32,7 +32,8 @@ func preProcess():
 
 func _process(delta):
     preProcess()
-    animate(delta)
+    if visible:
+        animate(delta)
     
 func animate(delta):
     animation_counter += delta

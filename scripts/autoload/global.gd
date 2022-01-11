@@ -9,6 +9,16 @@ var white_palette = preload("res://assets/palettes/white_palette.png")
 
 var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
 var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
+
+# GlitchForm variables
+enum GlitchForm {
+    NORMAL,
+    FLOOR,
+    FEATHER,
+    INVISIBLE,
+    LADDER,
+    WALK_THROUGH_WALLS,
+}
 enum TilesetType {
     DUNGEON,
     HOUSE,
