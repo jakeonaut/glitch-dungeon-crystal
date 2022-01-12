@@ -15,6 +15,7 @@ var repeat_animation = true
 var facing = Vector2(0, 1)
 var is_rotating = false
 export var should_fizzle_out = false
+var should_soft_fizzle_out = false
 
 func _ready():
     set_process(true)
@@ -46,6 +47,8 @@ func animate(delta):
         else:
             if should_fizzle_out:
                 queue_free()
+            elif should_soft_fizzle_out:
+                visible = false
             else:
                 set_frame(start_frame)
         

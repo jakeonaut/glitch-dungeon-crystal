@@ -55,7 +55,9 @@ enum PhysicsState {
 	COLLAPSED,
 	CAN_WAKE_UP,
 	WAKING_UP,
-	GLITCH_DYING
+	GLITCH_DYING,
+	GLITCH_HURT,
+	GLITCH_RECOVERY,
 }
 var physics_state = PhysicsState.NORMAL
 
@@ -182,7 +184,7 @@ func processPhysics(delta):
 	
 	applyTerminalVelocity(delta)
 	
-	if physics_state == PhysicsState.NORMAL:
+	if physics_state == PhysicsState.NORMAL or physics_state == PhysicsState.GLITCH_RECOVERY:
 		processInputs(delta)
 	elif physics_state == PhysicsState.COLLAPSED:
 		hv = Vector3()
@@ -259,13 +261,18 @@ func applyGravity(delta):
 			fall_timer += (delta*22)
 		else:
 			fall_timer = 0
-		if lv.y < 0 and not on_ground and aniPlayer and (aniPlayer.current_animation != "jumpSquat" and aniPlayer.current_animation != "jumpStart" and \
-		   aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart" and \
-		   aniPlayer.current_animation != "fallFar"):
-			aniPlayer.clear_queue()
-			aniPlayer.stop()
-			aniPlayer.queue("fallStart")
-			aniPlayer.queue("fall")
+		if lv.y < 0 and not on_ground and aniPlayer:
+			if (aniPlayer.current_animation != "jumpSquat" and aniPlayer.current_animation != "jumpStart" and \
+				 aniPlayer.current_animation != "fall" and aniPlayer.current_animation != "fallStart" and \
+				 aniPlayer.current_animation != "fallFar" and aniPlayer.current_animation != "swimJumpStart" and \
+				 aniPlayer.current_animation != "swimFall"):
+				aniPlayer.clear_queue()
+				aniPlayer.stop()
+				if is_touching_water:
+					aniPlayer.queue("swimFall")
+				else:
+					aniPlayer.queue("fallStart")
+					aniPlayer.queue("fall")
 		if lv.y and fall_timer > 20 and aniPlayer and aniPlayer.current_animation != "fallFar":
 			aniPlayer.clear_queue()
 			aniPlayer.stop()
@@ -360,6 +367,11 @@ func processJumpInputs(delta):
 			on_ground = false
 			has_just_jumped_timer = -has_just_jumped_time_limit
 			feather_fall_timer = 0
+
+			if aniPlayer and not "jump" in aniPlayer.assigned_animation and not "Jump" in aniPlayer.assigned_animation:
+				aniPlayer.clear_queue()
+				aniPlayer.play("swimJumpStart")
+				aniPlayer.queue("swimJump")
 		# Jump from the ground
 		elif isKindOfOnGround():
 			jumped_from_true_ground = truly_on_ground
@@ -778,11 +790,6 @@ func collideWithFloor(local_lv):
 
 func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
 	if tile_distance <= 0:
-		if isTileSpikes(tile_type):
-			# no need to push player, just call death!!
-			self.tryDieToEnemy(false)
-			return local_lv
-
 		if debug:
 			# print("collide sensor A...")
 			if not is_vertical: get_tree().paused = true
@@ -816,8 +823,8 @@ func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv,
 func collideWithWall(local_lv):
 	self.horizontal_collision = true
 	if aniPlayer and was_on_ground and not aniPlayer.assigned_animation == "land":
-		print(aniPlayer.assigned_animation)
-		if aniPlayer.assigned_animation != "walkBump" and aniPlayer.assigned_animation != "landBump" and "jump" not in aniPlayer.assigned_animation:
+		if aniPlayer.assigned_animation != "walkBump" and aniPlayer.assigned_animation != "landBump" and \
+		   (not "jump" in aniPlayer.assigned_animation):
 			aniPlayer.stop()
 			aniPlayer.clear_queue()
 			aniPlayer.queue("walkBump")

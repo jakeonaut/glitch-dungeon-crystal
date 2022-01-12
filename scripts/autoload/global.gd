@@ -59,6 +59,10 @@ func _ready():
     if pauseGame: pass
     if can_broom: pass
 
+    memory["total_hearts"] = 1
+    memory["hearts"] = 1
+    memory["hearts_recovering"] = false
+
 
 var save_game_file = "user://savegame.save"
 func saveGame():

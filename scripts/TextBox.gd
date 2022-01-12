@@ -79,8 +79,9 @@ func setPosition(should_set_target_origin):
     self.rect_position.y = target_pos.y - 75 - adjusted_tiny_y_pos
     
 func _process(delta):
-    get_node("../..").mySprite.frame_delay = 1.6
-    get_node("../..").mySprite.should_randomize_frame_delay = false
+    if get_node("../..").is_active:
+        get_node("../..").mySprite.frame_delay = 1.6
+        get_node("../..").mySprite.should_randomize_frame_delay = false
 
     if endPrompt.visible:
         wigglePrompt(delta, endPrompt)

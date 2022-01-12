@@ -76,12 +76,12 @@ func tryShowUIElements():
 
     if global.memory.has("spellbookPage"):
         # TODO(jaketrower): you have to know how stupid this is right?
-        get_node("UILayer/ColorRect").visible = true
-        get_node("UILayer/ColorRect2").visible = true
+        get_node("UILayer/EquipmentRect").visible = true
+        get_node("UILayer/EquipmentStatusRect").visible = true
     else:
         # TODO(jaketrower): you have to know how stupid this is right?
-        get_node("UILayer/ColorRect").visible = false
-        get_node("UILayer/ColorRect2").visible = false
+        get_node("UILayer/EquipmentRect").visible = false
+        get_node("UILayer/EquipmentStatusRect").visible = false
 
 func overrideLevelRespawnEvent():
     pass

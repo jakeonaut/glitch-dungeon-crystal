@@ -4,6 +4,8 @@ var flipTimer = 0
 var flipTimeLimit = 4
 
 onready var dieSound = get_node("Sounds/DieSound")
+onready var evolveSound = get_node("Sounds/EvolveSound")
+onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
 export var behavior_walking = false
@@ -12,10 +14,15 @@ export var behavior_flip_on_land = false
 export var behavior_stop_on_land = false
 export var behavior_was_thrown = false
 export var behavior_thrower = false
+export var behavior_evolve = false
+export var behavior_fizzle_out_after_evolve = false
 export var walk_direction = 1
 
 var glitch_switch_timer = 0
-var glitch_switch_time_limit = 10
+var glitch_switch_time_limit = 99
+
+var evolution_timer = 0
+var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +37,19 @@ func _ready():
     if behavior_jumping and grav == 0:
         grav = 60
 
-    glitch_switch_time_limit = rand_range(30.0, 50.0)
-    mySprite.frame_delay = rand_range(0.3, 0.5)
+    if behavior_evolve:
+        mySprite.hframes = mySprite.hframes * 2
+        mySprite.vframes = mySprite.vframes * 2
+    else:
+        glitch_switch_time_limit = rand_range(30.0, 50.0)
+        mySprite.frame_delay = rand_range(0.3, 0.5)
 
 func _process(delta):
+    if behavior_fizzle_out_after_evolve:
+        if not mySprite.visible:
+            queue_free()
+            return
+
     glitch_switch_timer += (delta*22)
     if glitch_switch_timer > glitch_switch_time_limit:
         mySprite.updateBaseFrame(randi() % 6, randi() % 3)
@@ -46,14 +62,30 @@ func _process(delta):
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
 
-    var modAmt = 0.5
-    mySprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    mySprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
-    # if myOtherSprite:
-    #     myOtherSprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    #     myOtherSprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
-    smallInteractionArea.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    smallInteractionArea.global_transform.origin.y = int(round(self.global_transform.origin.y))
+    if behavior_evolve:
+        evolution_timer += (delta*22)
+        if evolution_timer > evolution_time_limit/3 and not startEvolveSound.is_playing():
+            startEvolveSound.play()
+        if evolution_timer > evolution_time_limit:
+            evolution_timer = 0
+            mySprite.hframes = mySprite.hframes / 2
+            mySprite.vframes = mySprite.vframes / 2
+            behavior_evolve = false
+            evolveSound.play()
+
+            if behavior_fizzle_out_after_evolve:
+                glitch_switch_timer = 0
+                glitch_switch_time_limit = 99999
+                mySprite.should_soft_fizzle_out = true
+
+    # var modAmt = 0.5
+    # mySprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
+    # mySprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
+    # # if myOtherSprite:
+    # #     myOtherSprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
+    # #     myOtherSprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
+    # smallInteractionArea.global_transform.origin.x = int(round(self.global_transform.origin.x))
+    # smallInteractionArea.global_transform.origin.y = int(round(self.global_transform.origin.y))
 
 func _physics_process(delta):
     # ._process_physics(delta) #NOTE: this super method is called automatically 
@@ -94,7 +126,7 @@ func getHitByBroom():
         dieSound.play()
 
 func isActive():
-    return visible
+    return visible and not behavior_evolve
 
 func activate():
     pass

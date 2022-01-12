@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/fakewater.png" type="Texture" id=2]
@@ -11,6 +11,17 @@
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.8, 1.8, 1.8 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec3 screen_tex = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+    COLOR.rgb = vec3(0, screen_tex.g, screen_tex.b + screen_tex.r);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 3 )
 
 [node name="WaterCube" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, -4 )
@@ -56,3 +67,14 @@ pitch_scale = 1.5
 [node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -6.0
+
+[node name="WaterFilter" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="WaterFilter"]
+material = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
