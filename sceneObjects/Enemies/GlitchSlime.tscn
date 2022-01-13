@@ -13,7 +13,7 @@
 [ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=11]
 [ext_resource path="res://scripts/GlitchSlime.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Lament6.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 11 )
@@ -51,7 +51,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11 )
 pixel_size = 0.12
 texture = ExtResource( 10 )
 hframes = 8
-vframes = 4
+vframes = 16
 frame = 4
 script = ExtResource( 8 )
 frame_delay = 0.3
@@ -91,12 +91,17 @@ stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="ScoochSound1" type="AudioStreamPlayer" parent="Sounds"]
+[node name="ScoochSound1" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 13 )
-volume_db = -10.0
-pitch_scale = 0.9
+unit_db = 20.0
+max_db = 6.0
+pitch_scale = 0.8
+max_distance = 15.0
 
-[node name="ScoochSound2" type="AudioStreamPlayer" parent="Sounds"]
+[node name="ScoochSound2" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -10.0
+unit_size = 0.1
+max_db = 1.0
 pitch_scale = 0.9
+max_distance = 20.0
+out_of_range_mode = 1

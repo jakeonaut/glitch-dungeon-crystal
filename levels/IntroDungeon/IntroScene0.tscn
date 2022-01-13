@@ -14,9 +14,9 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=12]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=13]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=15]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/IntroDungeon/IntroScene0NPCAbortSound.gd" type="Script" id=16]
-[ext_resource path="res://sceneObjects/UILayer.tscn" type="PackedScene" id=17]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=17]
 
 [sub_resource type="BoxShape" id=1]
 resource_local_to_scene = true

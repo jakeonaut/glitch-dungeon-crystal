@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=2]
@@ -7,19 +7,30 @@
 [ext_resource path="res://sceneObjects/WaterCube.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sceneObjects/UILayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=10]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/Enemies/GlitchDustBunny.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Spells/LadderSpell.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=20]
+[ext_resource path="res://levels/common/ViewportTexture.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/HeartContainer.tscn" type="PackedScene" id=25]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=27]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+ambient_light_color = Color( 0.4, 0.4, 0.4, 1 )
+ambient_light_energy = 0.7
 
 [sub_resource type="DynamicFont" id=2]
 size = 13
@@ -28,13 +39,12 @@ extra_spacing_char = 2
 extra_spacing_space = 2
 font_data = ExtResource( 3 )
 
-[sub_resource type="ViewportTexture" id=1]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
@@ -43,10 +53,8 @@ tileset_type = 4
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 8 )]
 
-[node name="LevelTitle" parent="Viewport/level/UILayer" index="1"]
-visible = false
-
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 23 )]
+environment = SubResource( 1 )
 
 [node name="BackgroundControl" type="Control" parent="Viewport/level"]
 margin_right = 40.0
@@ -88,7 +96,7 @@ size = 20.0
 speed = 10.0
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.29238, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 5.29238, 0 )
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -146,17 +154,27 @@ grav = 0
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 0 )
 
-[node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = SubResource( 1 )
-flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GlitchDustBunny" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 0 )
+
+[node name="EvilSprite" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 20, 0 )
+
+[node name="HeartContainer" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9, 0 )
+
+[node name="HeartContainer2" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 21, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0 )
+
+[node name="ViewportTexture" parent="." instance=ExtResource( 21 )]
+texture = SubResource( 3 )
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 26 )]
 
-[editable path="Viewport/level/UILayer"]
-[editable path="Viewport/level/GameCamera"]
 [editable path="ScreenEffects"]

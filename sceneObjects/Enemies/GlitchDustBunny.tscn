@@ -1,0 +1,133 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=2]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=7]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=8]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=9]
+[ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=10]
+[ext_resource path="res://scripts/GlitchDustBunny.gd" type="Script" id=11]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=12]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=13]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=14]
+[ext_resource path="res://shaders/Sprite3DPaletteCycle.shader" type="Shader" id=15]
+[ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=16]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 10 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 1 )
+shader_param/target_palette = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.9
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 1 )
+shader_param/target_palette = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 15 )
+shader_param/albedo = null
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = true
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 1 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="CylinderShape" id=2]
+radius = 0.8
+height = 1.6
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.8
+
+[node name="GlitchDustBunny" type="KinematicBody"]
+collision_layer = 4
+script = ExtResource( 11 )
+behavior_walking = true
+behavior_jumping = true
+behavior_flip_on_land = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+visible = false
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 2 )
+hframes = 6
+vframes = 4
+script = ExtResource( 8 )
+frame_delay = 1.0
+max_frames = 6
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.401194, 11 )
+material_override = SubResource( 6 )
+pixel_size = 0.12
+texture = ExtResource( 7 )
+hframes = 8
+vframes = 16
+frame = 16
+script = ExtResource( 8 )
+frame_delay = 0.2
+max_frames = 5
+
+[node name="SparkleSprite" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )
+visible = false
+material_override = SubResource( 5 )
+pixel_size = 0.12
+texture = ExtResource( 16 )
+hframes = 8
+script = ExtResource( 8 )
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 3 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 4 )
+volume_db = -30.0
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+pitch_scale = 0.5

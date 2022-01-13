@@ -16,8 +16,8 @@
 [ext_resource path="res://assets/sprites/big_critters.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/tiny_critters.png" type="Texture" id=15]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=16]
-[ext_resource path="res://sceneObjects/ScreenEffects.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/UILayer.tscn" type="PackedScene" id=18]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=17]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=18]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
