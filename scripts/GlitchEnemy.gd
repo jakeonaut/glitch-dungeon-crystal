@@ -78,14 +78,17 @@ func _process(delta):
                 glitch_switch_time_limit = 99999
                 mySprite.should_soft_fizzle_out = true
 
-    # var modAmt = 0.5
-    # mySprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    # mySprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
-    # # if myOtherSprite:
-    # #     myOtherSprite.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    # #     myOtherSprite.global_transform.origin.y = int(round(self.global_transform.origin.y))
-    # smallInteractionArea.global_transform.origin.x = int(round(self.global_transform.origin.x))
-    # smallInteractionArea.global_transform.origin.y = int(round(self.global_transform.origin.y))
+    glitchSetSpritesAndCollision()
+
+func glitchSetSpritesAndCollision():
+    var modAmt = 0.5
+    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
+    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
+    if myOtherSprite:
+        myOtherSprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
+        myOtherSprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
+    smallInteractionArea.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
+    smallInteractionArea.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
 
 func _physics_process(delta):
     # ._process_physics(delta) #NOTE: this super method is called automatically 
