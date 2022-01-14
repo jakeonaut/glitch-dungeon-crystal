@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -17,10 +17,11 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/Yawn.wav" type="AudioStream" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=17]
+[ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=21]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=22]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=24]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=25]
@@ -28,65 +29,12 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=27]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=28]
 [ext_resource path="res://levels/IntroDungeon/IntroScene3HellDungeonNPCAbortSound.gd" type="Script" id=29]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=32]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=33]
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
-
-[sub_resource type="CylinderShape" id=2]
-radius = 0.9
-
-[sub_resource type="SphereShape" id=3]
-radius = 1.5
-
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 17 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/palettesize = 16
-shader_param/enable_glitch = false
-shader_param/enable_palette_cycle = false
-shader_param/texture_albedo = ExtResource( 28 )
-shader_param/base_palette = ExtResource( 13 )
-shader_param/target_palette = ExtResource( 22 )
-
-[sub_resource type="Animation" id=6]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "flickerOn"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
 
 [sub_resource type="CylinderShape" id=8]
 radius = 0.9
@@ -141,13 +89,16 @@ tracks/0/keys = {
 "values": [ false, true, false, true, false, true ]
 }
 
+[sub_resource type="BoxShape" id=17]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 30 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
@@ -175,7 +126,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 19, 0, 1, 20, 0, 1, 21, 0, 1, 22, 0, 1, 25, 0, 2, 26, 0, 2, 27, 0, 1, 28, 0, 1, 29, 0, 1, 30, 0, 1, 65518, 0, 1, 65519, 0, 1, 65520, 0, 1, 65521, 0, 1, 65522, 0, 1, 65523, 0, 1, 65524, 0, 1, 65561, 0, 2, 65562, 0, 2, 65563, 0, 1, 65564, 0, 1, 65565, 0, 1, 65566, 0, 1, 131054, 0, 1, 131055, 0, 1, 131056, 0, 1, 131057, 0, 1, 131058, 0, 1, 131059, 0, 1, 131060, 0, 1, 131073, 0, 3, 131074, 0, 3, 131075, 0, 3, 131076, 0, 3, 131077, 0, 3, 131078, 0, 3, 131079, 0, 3, 131080, 0, 3, 131081, 0, 1, 131082, 0, 1, 131083, 0, 3, 131097, 0, 2, 131098, 0, 2, 131099, 0, 1, 131100, 0, 1, 131101, 0, 1, 131102, 0, 1, 196590, 0, 1, 196591, 0, 1, 196592, 0, 1, 196593, 0, 1, 196594, 0, 1, 196608, 0, 3, 196609, 0, 3, 196610, 0, 3, 196611, 0, 3, 196612, 0, 3, 196613, 0, 3, 196614, 0, 3, 196615, 0, 1, 196616, 0, 1, 196619, 0, 3, 196620, 0, 1, 196635, 0, 1, 196636, 0, 1, 196637, 0, 1, 196638, 0, 1, 262126, 0, 1, 262127, 0, 1, 262128, 0, 1, 262129, 0, 1, 262130, 0, 1, 262131, 0, 1, 262140, 0, 3, 262141, 0, 3, 262142, 0, 3, 262143, 0, 3, 262144, 0, 3, 262145, 0, 3, 262146, 0, 3, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262155, 0, 1, 262156, 0, 1, 262171, 0, 1, 262172, 0, 1, 262173, 0, 1, 262174, 0, 1, 327662, 0, 1, 327663, 0, 1, 327664, 0, 1, 327676, 0, 3, 327677, 0, 3, 327678, 0, 3, 327679, 0, 3, 327680, 0, 3, 327681, 0, 3, 327682, 0, 3, 327683, 0, 2, 327684, 0, 2, 327707, 0, 1, 327708, 0, 1, 327709, 0, 1, 327710, 0, 1, 393198, 0, 1, 393199, 0, 1, 393200, 0, 1, 393212, 0, 3, 393213, 0, 3, 393214, 0, 3, 393215, 0, 3, 393216, 0, 3, 393217, 0, 3, 393218, 0, 3, 393219, 0, 2, 393220, 0, 2, 393243, 0, 1, 393244, 0, 1, 393245, 0, 1, 393246, 0, 1, 458734, 0, 1, 458735, 0, 1, 458736, 0, 1, 458746, 0, 3, 458747, 0, 3, 458748, 0, 3, 458749, 0, 3, 458750, 0, 3, 458751, 0, 3, 458752, 0, 1, 458753, 0, 1, 458754, 0, 1, 458779, 0, 1, 458780, 0, 1, 458781, 0, 1, 458782, 0, 1, 524270, 0, 1, 524271, 0, 1, 524272, 0, 1, 524282, 0, 3, 524283, 0, 3, 524284, 0, 3, 524285, 0, 3, 524286, 0, 3, 524288, 0, 1, 524289, 0, 1, 524290, 0, 1, 524315, 0, 1, 524316, 0, 1, 524317, 0, 1, 524318, 0, 1, 589806, 0, 3, 589807, 0, 3, 589808, 0, 3, 589809, 0, 3, 589810, 0, 3, 589811, 0, 3, 589812, 0, 3, 589813, 0, 3, 589814, 0, 3, 589815, 0, 3, 589816, 0, 3, 589817, 0, 3, 589818, 0, 3, 589819, 0, 3, 589820, 0, 3, 589821, 0, 3, 589822, 0, 3, 589823, 0, 1, 589824, 0, 1, 589825, 0, 1, 589826, 0, 1, 589851, 0, 1, 589852, 0, 1, 589853, 0, 1, 589854, 0, 1, 655342, 0, 3, 655343, 0, 3, 655344, 0, 3, 655345, 0, 3, 655346, 0, 3, 655347, 0, 3, 655348, 0, 3, 655349, 0, 3, 655350, 0, 3, 655351, 0, 3, 655352, 0, 3, 655353, 0, 3, 655354, 0, 3, 655355, 0, 3, 655356, 0, 3, 655357, 0, 3, 655358, 0, 3, 655359, 0, 1, 655387, 0, 1, 655388, 0, 1, 655389, 0, 1, 655390, 0, 1, 720878, 0, 3, 720879, 0, 3, 720880, 0, 3, 720881, 0, 3, 720882, 0, 3, 720883, 0, 3, 720884, 0, 3, 720885, 0, 3, 720886, 0, 3, 720887, 0, 3, 720888, 0, 3, 720889, 0, 3, 720890, 0, 3, 720891, 0, 3, 720892, 0, 3, 720893, 0, 3, 720894, 0, 3, 720923, 0, 1, 720925, 0, 1, 720926, 0, 1, 786414, 0, 3, 786415, 0, 3, 786416, 0, 3, 786417, 0, 3, 786418, 0, 3, 786419, 0, 3, 786420, 0, 3, 786421, 0, 3, 786422, 0, 3, 786423, 0, 3, 786424, 0, 3, 786425, 0, 3, 786426, 0, 3, 786427, 0, 3, 786428, 0, 3, 786429, 0, 1, 786430, 0, 1, 786459, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 851965, 0, 1, 851966, 0, 1, 851968, 0, 3, 851998, 0, 1, 917501, 0, 3, 917502, 0, 3, 917503, 0, 3, 917504, 0, 3, 917534, 0, 1, 983037, 0, 3, 983039, 0, 3, 983040, 0, 3, 983070, 0, 1, 1048573, 0, 3, 1048574, 0, 3, 1048575, 0, 3, 1048606, 0, 1, 1114142, 0, 1, 1179678, 0, 1, 1245213, 0, 1, 1245214, 0, 1, 1310748, 0, 1, 1310749, 0, 1, 1310750, 0, 1, 1376284, 0, 1, 1376286, 0, 1, 1441820, 0, 1, 1441821, 0, 1, 1441822, 0, 1, -458760, 0, 1, -458759, 0, 1, -458758, 0, 1, -393224, 0, 1, -393222, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327674, 0, 28, -327668, 0, 28, -327667, 0, 28, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262137, 0, 28, -262129, 0, 28, -262128, 0, 28, -196626, 0, 1, -196625, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 1, -196620, 0, 1, -196619, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196589, 0, 1, -196588, 0, 1, -196587, 0, 1, -131090, 0, 1, -131089, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131085, 0, 1, -131084, 0, 1, -131083, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131063, 0, 28, -131062, 0, 28, -131061, 0, 28, -131058, 0, 28, -131055, 0, 28, -131054, 0, 28, -131053, 0, 1, -131051, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131044, 0, 1, -131043, 0, 1, -131042, 0, 1, -65554, 0, 1, -65553, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65549, 0, 1, -65548, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65517, 0, 1, -65516, 0, 1, -65515, 0, 1, -65514, 0, 1, -65513, 0, 1, -65512, 0, 1, -65511, 0, 1, -65510, 0, 1, -65509, 0, 1, -65507, 0, 1, -65506, 0, 1, -18, 0, 1, -17, 0, 1, -16, 0, 1, -15, 0, 1, -14, 0, 1, -13, 0, 1, -12, 0, 1 )
+"cells": PoolIntArray( 19, 0, 1, 20, 0, 1, 21, 0, 1, 22, 0, 1, 27, 0, 1, 28, 0, 1, 29, 0, 1, 30, 0, 1, 65518, 0, 1, 65519, 0, 1, 65520, 0, 1, 65521, 0, 1, 65522, 0, 1, 65523, 0, 1, 65524, 0, 1, 65563, 0, 1, 65564, 0, 1, 65565, 0, 1, 65566, 0, 1, 131054, 0, 1, 131055, 0, 1, 131056, 0, 1, 131057, 0, 1, 131058, 0, 1, 131059, 0, 1, 131060, 0, 1, 131073, 0, 3, 131074, 0, 3, 131075, 0, 3, 131076, 0, 3, 131077, 0, 3, 131078, 0, 3, 131079, 0, 3, 131080, 0, 3, 131081, 0, 1, 131082, 0, 1, 131083, 0, 3, 131097, 0, 2, 131098, 0, 2, 131099, 0, 1, 131100, 0, 1, 131101, 0, 1, 131102, 0, 1, 196590, 0, 1, 196591, 0, 1, 196592, 0, 1, 196593, 0, 1, 196594, 0, 1, 196608, 0, 3, 196609, 0, 3, 196610, 0, 3, 196611, 0, 3, 196612, 0, 3, 196613, 0, 3, 196614, 0, 3, 196615, 0, 1, 196616, 0, 1, 196619, 0, 3, 196620, 0, 1, 196635, 0, 1, 196636, 0, 1, 196637, 0, 1, 196638, 0, 1, 262126, 0, 1, 262127, 0, 1, 262128, 0, 1, 262129, 0, 1, 262130, 0, 1, 262131, 0, 1, 262140, 0, 3, 262141, 0, 3, 262142, 0, 3, 262143, 0, 3, 262144, 0, 3, 262145, 0, 3, 262146, 0, 3, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262155, 0, 1, 262156, 0, 1, 262171, 0, 1, 262172, 0, 1, 262173, 0, 1, 262174, 0, 1, 327662, 0, 1, 327663, 0, 1, 327664, 0, 1, 327676, 0, 3, 327677, 0, 3, 327678, 0, 3, 327679, 0, 3, 327680, 0, 3, 327681, 0, 3, 327682, 0, 3, 327683, 0, 2, 327684, 0, 2, 327707, 0, 1, 327708, 0, 1, 327709, 0, 1, 327710, 0, 1, 393198, 0, 1, 393199, 0, 1, 393200, 0, 1, 393212, 0, 3, 393213, 0, 3, 393214, 0, 3, 393215, 0, 3, 393216, 0, 3, 393217, 0, 3, 393218, 0, 3, 393219, 0, 2, 393220, 0, 2, 393243, 0, 1, 393244, 0, 1, 393245, 0, 1, 393246, 0, 1, 458734, 0, 1, 458735, 0, 1, 458736, 0, 1, 458746, 0, 3, 458747, 0, 3, 458748, 0, 3, 458749, 0, 3, 458750, 0, 3, 458751, 0, 3, 458752, 0, 1, 458753, 0, 1, 458754, 0, 1, 458779, 0, 1, 458780, 0, 1, 458781, 0, 1, 458782, 0, 1, 524270, 0, 1, 524271, 0, 1, 524272, 0, 1, 524282, 0, 3, 524283, 0, 3, 524284, 0, 3, 524285, 0, 3, 524286, 0, 3, 524288, 0, 1, 524289, 0, 1, 524290, 0, 1, 524315, 0, 1, 524316, 0, 1, 524317, 0, 1, 524318, 0, 1, 589806, 0, 3, 589807, 0, 3, 589808, 0, 3, 589809, 0, 3, 589810, 0, 3, 589811, 0, 3, 589812, 0, 3, 589813, 0, 3, 589814, 0, 3, 589815, 0, 3, 589816, 0, 3, 589817, 0, 3, 589818, 0, 3, 589819, 0, 3, 589820, 0, 3, 589821, 0, 3, 589822, 0, 3, 589823, 0, 1, 589824, 0, 1, 589825, 0, 1, 589826, 0, 1, 589851, 0, 1, 589852, 0, 1, 589853, 0, 1, 589854, 0, 1, 655342, 0, 3, 655343, 0, 3, 655344, 0, 3, 655345, 0, 3, 655346, 0, 3, 655347, 0, 3, 655348, 0, 3, 655349, 0, 3, 655350, 0, 3, 655351, 0, 3, 655352, 0, 3, 655353, 0, 3, 655354, 0, 3, 655355, 0, 3, 655356, 0, 3, 655357, 0, 3, 655358, 0, 3, 655359, 0, 1, 655387, 0, 1, 655388, 0, 1, 655389, 0, 1, 655390, 0, 1, 720878, 0, 3, 720879, 0, 3, 720880, 0, 3, 720881, 0, 3, 720882, 0, 3, 720883, 0, 3, 720884, 0, 3, 720885, 0, 3, 720886, 0, 3, 720887, 0, 3, 720888, 0, 3, 720889, 0, 3, 720890, 0, 3, 720891, 0, 3, 720892, 0, 3, 720893, 0, 3, 720894, 0, 3, 720923, 0, 1, 720925, 0, 1, 720926, 0, 1, 786414, 0, 3, 786415, 0, 3, 786416, 0, 3, 786417, 0, 3, 786418, 0, 3, 786419, 0, 3, 786420, 0, 3, 786421, 0, 3, 786422, 0, 3, 786423, 0, 3, 786424, 0, 3, 786425, 0, 3, 786426, 0, 3, 786427, 0, 3, 786428, 0, 3, 786429, 0, 1, 786430, 0, 1, 786459, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 851965, 0, 1, 851966, 0, 1, 851968, 0, 3, 851998, 0, 1, 917501, 0, 3, 917502, 0, 3, 917503, 0, 3, 917504, 0, 3, 917534, 0, 1, 983037, 0, 3, 983039, 0, 3, 983040, 0, 3, 983070, 0, 1, 1048573, 0, 3, 1048574, 0, 3, 1048575, 0, 3, 1048606, 0, 1, 1114142, 0, 1, 1179678, 0, 1, 1245213, 0, 1, 1245214, 0, 1, 1310748, 0, 1, 1310749, 0, 1, 1310750, 0, 1, 1376284, 0, 1, 1376286, 0, 1, 1441820, 0, 1, 1441821, 0, 1, 1441822, 0, 1, -458760, 0, 1, -458759, 0, 1, -458758, 0, 1, -393224, 0, 1, -393222, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327674, 0, 28, -327668, 0, 28, -327667, 0, 28, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262137, 0, 28, -262129, 0, 28, -262128, 0, 28, -196626, 0, 1, -196625, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 1, -196620, 0, 1, -196619, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196589, 0, 1, -196588, 0, 1, -196587, 0, 1, -131090, 0, 1, -131089, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131085, 0, 1, -131084, 0, 1, -131083, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131063, 0, 28, -131062, 0, 28, -131061, 0, 28, -131058, 0, 28, -131055, 0, 28, -131054, 0, 28, -131053, 0, 1, -131051, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131044, 0, 1, -131043, 0, 1, -131042, 0, 1, -65554, 0, 1, -65553, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65549, 0, 1, -65548, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65517, 0, 1, -65516, 0, 1, -65515, 0, 1, -65514, 0, 1, -65513, 0, 1, -65512, 0, 1, -65511, 0, 1, -65510, 0, 1, -65509, 0, 1, -65507, 0, 1, -65506, 0, 1, -18, 0, 1, -17, 0, 1, -16, 0, 1, -15, 0, 1, -14, 0, 1, -13, 0, 1, -12, 0, 1 )
 }
 script = ExtResource( 5 )
 __meta__ = {
@@ -260,56 +211,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96627, 0, 0 )
 [node name="SavePoint4" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9663, 4, 0 )
 
-[node name="NPC4" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.0724, 15.5389, 0 )
-visible = false
-collision_layer = 2
-script = ExtResource( 26 )
-grav = 0
-bbText = "the glowing triangles
- are the bodies of our
-fallen sisters................
-they let outsiders
-like you survive
-glitch exposure
-there are more
-outsiders deeper
-in the dungeon."
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/NPC4"]
-shape = SubResource( 2 )
-
-[node name="InteractionArea" type="Area" parent="Viewport/level/NPC4"]
-script = ExtResource( 24 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/NPC4/InteractionArea"]
-shape = SubResource( 3 )
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/NPC4"]
-script = ExtResource( 25 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea"]
-shape = SubResource( 4 )
-
-[node name="NPC TextBox" parent="Viewport/level/NPC4" instance=ExtResource( 23 )]
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/NPC4" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.192001, 0 )
-material_override = SubResource( 5 )
-pixel_size = 0.12
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 28 )
-hframes = 8
-vframes = 4
-frame = 10
-script = ExtResource( 27 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/NPC4"]
-anims/default = SubResource( 6 )
-anims/flickerOn = SubResource( 7 )
-
 [node name="NPC" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 7.4, 0 )
 collision_layer = 2
@@ -382,6 +283,27 @@ should_randomize_frame_delay = true
 anims/default = SubResource( 12 )
 anims/flickerOn = SubResource( 13 )
 
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 15, 0 )
+visible = false
+grav = 0
+bbText = "the glowing triangles
+ are the bodies of our
+fallen sisters................
+they let outsiders
+like you survive
+glitch exposure
+there are more
+outsiders deeper
+in the dungeon."
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 17 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+frame = 12
+
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 6, 0 )
 
@@ -390,6 +312,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 0 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 14, 0 )
+
+[node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -403,5 +328,6 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 33 )]
 
 [editable path="Viewport/level/Door"]
-[editable path="Viewport/level/NPC4/NPC TextBox"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://sceneObjects/Spells/obeliskSpell.gd" type="Script" id=1]
+[ext_resource path="res://scripts/SpellsTreasures/obeliskSpell.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/minimi.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]

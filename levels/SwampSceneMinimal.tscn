@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=20]
-[ext_resource path="res://levels/common/ViewportTexture.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=24]
@@ -172,8 +171,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0 )
 
-[node name="ViewportTexture" parent="." instance=ExtResource( 21 )]
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 texture = SubResource( 3 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 26 )]
 

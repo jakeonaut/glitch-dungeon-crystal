@@ -11,7 +11,7 @@
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=9]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=11]
-[ext_resource path="res://scripts/GlitchSlime.gd" type="Script" id=12]
+[ext_resource path="res://scripts/Enemies/GlitchSlime.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Lament6.wav" type="AudioStream" id=14]
 
@@ -33,6 +33,7 @@ radius = 0.8
 [node name="GlitchSlime" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 12 )
+walk_speed = 2
 behavior_walking = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -76,7 +77,7 @@ shape = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
 
-[node name="Sounds" type="Node" parent="."]
+[node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 4 )

@@ -1,4 +1,4 @@
-extends "GameMover.gd"
+extends "../GameMover.gd"
 
 var flipTimer = 0
 var flipTimeLimit = 4
@@ -9,6 +9,7 @@ onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
 export var behavior_walking = false
+export var behavior_vertical_walking = false
 export var behavior_jumping = false
 export var behavior_flip_on_land = false
 export var behavior_stop_on_land = false
@@ -34,6 +35,12 @@ func _ready():
     #if behavior_walking:
     #    mySprite.frame_delay = 0.2
     #    mySprite.updateBaseFrame(0, 1)
+    if behavior_vertical_walking:
+        jump_force = 3
+        grav = 0
+        terminal_vel = 3
+        water_terminal_vel = 3
+        true_terminal_vel = 3
     if behavior_jumping and grav == 0:
         grav = 60
 
@@ -61,6 +68,15 @@ func _process(delta):
         walk_direction = -walk_direction
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
+            
+    if behavior_walking and behavior_vertical_walking:
+        if on_ground:
+            on_ground = false
+            walk_direction = 1
+            grav = 0
+        elif not on_ground and linear_velocity.y == 0:
+            walk_direction = -1
+            grav = 60
 
     if behavior_evolve:
         evolution_timer += (delta*22)
@@ -81,6 +97,9 @@ func _process(delta):
     glitchSetSpritesAndCollision()
 
 func glitchSetSpritesAndCollision():
+    if behavior_jumping:
+        return
+        
     var modAmt = 0.5
     mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
     mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
@@ -97,18 +116,25 @@ func _physics_process(delta):
 
 # @override
 func pressingMoveLeft():
-    return walk_direction == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
+    return walk_direction == -1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    return walk_direction == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
+    return walk_direction == 1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
-    return behavior_jumping
+    return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
 # @override
 func pressingJump():
-    return behavior_jumping
+    return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
+    
+# @override
+func isKindOfOnGround():
+    if behavior_vertical_walking:
+        return walk_direction == 1
+    else:
+        return .isKindOfOnGround()
     
 # @override
 func landed():

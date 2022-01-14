@@ -6,6 +6,7 @@ var green_palette = preload("res://assets/palettes/green_palette.png")
 var black_palette = preload("res://assets/palettes/black_palette.png")
 var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
+var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
 var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
 var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
@@ -86,3 +87,11 @@ func loadGame():
         var current_line = parse_json(save_game.get_line())
         
     save_game.close()
+    
+func getNextGlitch(glitch_form):
+    if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FLOOR
+    if glitch_form == global.GlitchForm.FLOOR: return global.GlitchForm.FEATHER
+    if glitch_form == global.GlitchForm.FEATHER: return global.GlitchForm.INVISIBLE
+    if glitch_form == global.GlitchForm.INVISIBLE: return global.GlitchForm.LADDER
+    if glitch_form == global.GlitchForm.LADDER: return global.GlitchForm.WALK_THROUGH_WALLS
+    if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS: return global.GlitchForm.NORMAL

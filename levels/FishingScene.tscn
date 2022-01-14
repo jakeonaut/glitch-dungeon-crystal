@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=18]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -35,8 +36,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 19 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )

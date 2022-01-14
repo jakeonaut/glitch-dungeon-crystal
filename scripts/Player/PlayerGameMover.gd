@@ -1,4 +1,4 @@
-extends "GameMover.gd"
+extends "../GameMover.gd"
 
 onready var interactionArea = get_node("InteractionArea")
 

@@ -1,4 +1,4 @@
-extends "NPC.gd"
+extends "../NPC.gd"
 
 enum AttackState {
     IDLE,
@@ -125,6 +125,11 @@ func _process(delta):
                 newGlitchEnemy.behavior_fizzle_out_after_evolve = true
                 self.add_child(newGlitchEnemy)
                 newGlitchEnemy.global_transform.origin = getPlayer().global_transform.origin
+                var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
+                newGlitchEnemy.mySprite.remove_from_group("sprite")
+                if newGlitchMaterial is ShaderMaterial:
+                    newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
+                newGlitchEnemy.mySprite.set_material_override(newGlitchMaterial)
     elif attackState == AttackState.CAST_GLITCH:
         attackStateTimer += (delta*22)
         if attackStateTimer >= attackStateCastGlitchTimeLimit:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=24]
 [ext_resource path="res://levels/IntroDungeon/IntroDungeon1GlitchNPCUpAbortSound.gd" type="Script" id=25]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=26]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
@@ -59,8 +60,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 26 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )

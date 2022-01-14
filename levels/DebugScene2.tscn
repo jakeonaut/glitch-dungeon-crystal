@@ -11,12 +11,12 @@
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Spells/LadderSpell.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/Spells/InvisibleSpell.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Spells/WalkThroughWallsSpell.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=29]
@@ -33,8 +33,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 12 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
@@ -143,12 +142,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 0 )
 
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 20, 0 )
-
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
-bbText = "[wave amp=50 freq=2]woah[/wave]
-[shake rate=10 level=10]scary[/shake] [rainbow freq=0.2 sat=10 val=20]crystals[/rainbow]
-[fade start=4 length=14]goodbye[/fade]"
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

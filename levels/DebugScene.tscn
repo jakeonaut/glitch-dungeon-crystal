@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=29]
 
@@ -39,8 +40,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Node"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+[node name="Viewport" parent="." instance=ExtResource( 21 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
