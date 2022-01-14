@@ -101,12 +101,12 @@ grav = 0
 bbText = "\"SPELL BOOK PAGE\"
 get!!!
 wow, good job
-now you can record
-one \"spell\" for a 
-limited time use
-collect \"spell\" from 
+store a \"spell\" from 
 an obelisk and
-press [Z] to use it"
+press [Z] to use it
+use spells at smart 
+times to solve 
+dungeon puzzles!"
 portrait = ExtResource( 11 )
 is_important = true
 can_activate = false

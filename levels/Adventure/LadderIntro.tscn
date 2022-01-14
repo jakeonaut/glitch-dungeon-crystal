@@ -164,7 +164,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -12, 0 )
 grav = 0
 bbText = "god me and my
 pet REALLY love
-spike baths"
+glitch baths"
 tiny_textbox = true
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 9 )]

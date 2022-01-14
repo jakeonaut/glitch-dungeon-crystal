@@ -21,14 +21,7 @@ func _ready_impl():
     set_process_input(true)
     set_process(true)
     
-    if tileset_type == global.TilesetType.HOUSE:
-        levelTiles.set_mesh_library(levelTiles.red_tiles)
-        levelTiles.grey_palette = global.grey_palette_town
-        levelTiles.green_palette = global.green_palette_town
-        levelTiles.properlySetTiles()
-    elif tileset_type == global.TilesetType.FOREST:
-        levelTiles.set_mesh_library(levelTiles.green_tiles)
-        levelTiles.properlySetTiles()
+    levelTiles.setTileset(tileset_type)
     
     if has_spellbook_page and not global.memory.has("spellbookPage"):
         print("gimme a spellbook!!")

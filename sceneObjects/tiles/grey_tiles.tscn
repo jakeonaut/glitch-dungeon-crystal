@@ -1,4 +1,4 @@
-[gd_scene load_steps=172 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -55,6 +55,7 @@
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=53]
 [ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=54]
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=55]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=56]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -569,14 +570,28 @@ shader_param/base_palette = ExtResource( 45 )
 material = SubResource( 103 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=105]
+[sub_resource type="AnimatedTexture" id=118]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 48 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 49 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 50 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=117]
 shader = ExtResource( 55 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 46 )
+shader_param/texture_albedo = SubResource( 118 )
 shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 56 )
 
 [sub_resource type="CubeMesh" id=106]
-material = SubResource( 105 )
+material = SubResource( 117 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="RayShape" id=107]

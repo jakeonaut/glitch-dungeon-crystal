@@ -122,7 +122,7 @@ tiny_textbox = true
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9524, -1.64598, 0 )
 grav = 0
-bbText = "i love spike baths"
+bbText = "i love glitch baths"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC8/SmallInteractionArea" index="0"]

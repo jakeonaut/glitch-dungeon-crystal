@@ -2,32 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bricks.png-44009e1865e0c53f94b186a5f3722087.stex"
+path="res://.import/savepointaltar.png-4ce32402956e4bd522056f5eabed90e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/bricks.png"
-dest_files=[ "res://.import/bricks.png-44009e1865e0c53f94b186a5f3722087.stex" ]
+source_file="res://assets/sprites/savepointaltar.png"
+dest_files=[ "res://.import/savepointaltar.png-4ce32402956e4bd522056f5eabed90e2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
-compress/hdr_mode=1
+compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=2
-flags/repeat=0
+compress/normal_map=0
+flags/repeat=true
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

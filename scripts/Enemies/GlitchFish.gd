@@ -3,6 +3,8 @@ extends "GlitchEnemy.gd"
 var can_flip_flop = false
 var can_flip_flop_timer = 0
 var can_flip_flop_time_limit = 10
+var weak_fish_jump_force = 6
+export var fish_jump_force = 18
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +13,7 @@ func _ready():
     
     if behavior_jumping:
         grav = 60
-        jump_force = 6
+        jump_force = weak_fish_jump_force
 
 func _process(delta):
     # ._process(delta) implicit
@@ -24,7 +26,7 @@ func _process(delta):
 
     if (was_on_ground or on_ground) and can_flip_flop:
         can_flip_flop = false
-        if jump_force == 6:
-            jump_force = 18
+        if jump_force == weak_fish_jump_force:
+            jump_force = fish_jump_force
         else:
-            jump_force = 6
+            jump_force = weak_fish_jump_force

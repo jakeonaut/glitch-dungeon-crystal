@@ -152,6 +152,19 @@ func properlySetTiles():
         var tile_name = tile_name_array[i]
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name))
 
+func setTileset(tileset_type):
+    if tileset_type == global.TilesetType.HOUSE:
+        set_mesh_library(red_tiles)
+        grey_palette = global.grey_palette_town
+        green_palette = global.green_palette_town
+        properlySetTiles()
+    elif tileset_type == global.TilesetType.FOREST:
+        set_mesh_library(green_tiles)
+        properlySetTiles()
+    elif tileset_type == global.TilesetType.DESERT:
+        set_mesh_library(yellow_tiles)
+        properlySetTiles()
+
 func normalGlitch():
     # set_mesh_library(grey_tiles)
     changeColorPalette(grey_palette, grey_palette)

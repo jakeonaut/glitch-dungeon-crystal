@@ -19,6 +19,7 @@ onready var noticeSound = get_node("NoticeSound")
 onready var windUpSound = get_node("WindUpSound")
 onready var smallerInteractionArea = get_node("SmallerInteractionArea")
 
+onready var glitchSprite = get_node("GlitchSprite")
 onready var sparkleSprite = get_node("SparkleSprite")
 var spawn_timer = 0
 var spawn_time_limit = 5
@@ -92,6 +93,7 @@ func resetStateToIdle():
         smallerInteractionArea.remove_from_group("enemies")
         mySprite.frame_delay = 1.4
         mySprite.should_randomize_frame_delay = true
+        glitchSprite.visible = false
         var my_material = mySprite.get_material_override().duplicate()
         if my_material is ShaderMaterial:
             my_material.set_shader_param("enable_glitch", false)
@@ -108,6 +110,7 @@ func _process(delta):
             attackStateTimer = 0
             attackState = AttackState.CAST_GLITCH
             smallerInteractionArea.add_to_group("enemies")
+            glitchSprite.visible = true
             var my_material = mySprite.get_material_override().duplicate()
             if my_material is ShaderMaterial:
                 my_material.set_shader_param("enable_glitch", true)
@@ -136,6 +139,7 @@ func _process(delta):
             attackStateTimer = 0
             attackState = AttackState.COOLDOWN
             smallerInteractionArea.remove_from_group("enemies")
+            glitchSprite.visible = false
             var my_material = mySprite.get_material_override().duplicate()
             if my_material is ShaderMaterial:
                 my_material.set_shader_param("enable_glitch", false)

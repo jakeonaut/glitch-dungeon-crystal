@@ -3,7 +3,7 @@ extends KinematicBody
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 
-export var my_glitch_form = global.GlitchForm.FEATHER
+export var my_glitch_form = 2
 
 var original_position = null
 var previous_point = null

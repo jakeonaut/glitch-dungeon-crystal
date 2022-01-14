@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=2]
+[gd_scene load_steps=183 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
@@ -53,12 +53,14 @@
 [ext_resource path="res://assets/textures/greysolid2.png" type="Texture" id=51]
 [ext_resource path="res://assets/textures/greysolid3.png" type="Texture" id=52]
 [ext_resource path="res://assets/textures/greysolid7.png" type="Texture" id=53]
-[ext_resource path="res://assets/textures/greenspikes1.png" type="Texture" id=54]
-[ext_resource path="res://assets/textures/greenspikes2.png" type="Texture" id=55]
-[ext_resource path="res://assets/textures/greenspikes3.png" type="Texture" id=56]
-[ext_resource path="res://assets/textures/greenspikes4.png" type="Texture" id=57]
-[ext_resource path="res://assets/textures/greenspikes5.png" type="Texture" id=58]
+[ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=54]
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=59]
+[ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=60]
+[ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=61]
+[ext_resource path="res://assets/textures/greyspikes5.png" type="Texture" id=62]
+[ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=63]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=64]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=65]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -573,14 +575,28 @@ shader_param/base_palette = ExtResource( 45 )
 material = SubResource( 103 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=105]
+[sub_resource type="AnimatedTexture" id=118]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 54 )
+frame_1/texture = ExtResource( 60 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 61 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 63 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 62 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=117]
 shader = ExtResource( 59 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 54 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = SubResource( 118 )
+shader_param/base_palette = ExtResource( 65 )
+shader_param/real_base_palette = ExtResource( 64 )
 
 [sub_resource type="CubeMesh" id=106]
-material = SubResource( 105 )
+material = SubResource( 117 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="RayShape" id=107]
@@ -588,44 +604,90 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="BoxShape" id=116]
 extents = Vector3( 0.4, 0.4, 0.4 )
 
-[sub_resource type="ShaderMaterial" id=108]
+[sub_resource type="AnimatedTexture" id=119]
+flags = 19
+frames = 4
+frame_0/texture = ExtResource( 54 )
+frame_1/texture = ExtResource( 60 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 61 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 63 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=120]
 shader = ExtResource( 59 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 55 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = SubResource( 119 )
+shader_param/base_palette = ExtResource( 65 )
+shader_param/real_base_palette = ExtResource( 64 )
 
 [sub_resource type="CubeMesh" id=109]
-material = SubResource( 108 )
+material = SubResource( 120 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=110]
+[sub_resource type="AnimatedTexture" id=121]
+flags = 19
+frames = 4
+fps = 3.0
+frame_0/texture = ExtResource( 54 )
+frame_1/texture = ExtResource( 60 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 61 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 63 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=122]
 shader = ExtResource( 59 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 56 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = SubResource( 121 )
+shader_param/base_palette = ExtResource( 65 )
+shader_param/real_base_palette = ExtResource( 64 )
 
 [sub_resource type="CubeMesh" id=111]
-material = SubResource( 110 )
+material = SubResource( 122 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=112]
+[sub_resource type="AnimatedTexture" id=123]
+flags = 19
+frames = 2
+frame_0/texture = ExtResource( 54 )
+frame_1/texture = ExtResource( 60 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=124]
 shader = ExtResource( 59 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 57 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = SubResource( 123 )
+shader_param/base_palette = ExtResource( 65 )
+shader_param/real_base_palette = ExtResource( 64 )
 
 [sub_resource type="CubeMesh" id=113]
-material = SubResource( 112 )
+material = SubResource( 124 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=114]
+[sub_resource type="AnimatedTexture" id=125]
+flags = 19
+frames = 4
+fps = 5.0
+frame_0/texture = ExtResource( 54 )
+frame_1/texture = ExtResource( 60 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 61 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 63 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=126]
 shader = ExtResource( 59 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 58 )
-shader_param/base_palette = ExtResource( 2 )
+shader_param/texture_albedo = SubResource( 125 )
+shader_param/base_palette = ExtResource( 65 )
+shader_param/real_base_palette = ExtResource( 64 )
 
 [sub_resource type="CubeMesh" id=115]
-material = SubResource( 114 )
+material = SubResource( 126 )
 size = Vector3( 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]

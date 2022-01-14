@@ -2,32 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass.png-44de1b601ed5e0482c9aa195977ab90c.stex"
+path="res://.import/savepoint.png-61cd375e0c177ae8852024156eb51c37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/grass.png"
-dest_files=[ "res://.import/grass.png-44de1b601ed5e0482c9aa195977ab90c.stex" ]
+source_file="res://assets/sprites/savepoint.png"
+dest_files=[ "res://.import/savepoint.png-61cd375e0c177ae8852024156eb51c37.stex" ]
 
 [params]
 
 compress/mode=3
 compress/lossy_quality=0.7
-compress/hdr_mode=1
+compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
