@@ -19,16 +19,16 @@ func activateScript():
     
     if not global.memory.has("spellbookPage"):
         global.memory["spellbookPage"] = []
-        # TODO(jaketrower): you have to know how stupid this is right?
-        level.get_node("UILayer/EquipmentRect").visible = true
-        level.get_node("UILayer/EquipmentStatusRect").visible = true
+        # TODO(jaketrower): give UILayer.gd a function
+        level.uiLayer.get_node("EquipmentRect").visible = true
+        level.uiLayer.get_node("EquipmentStatusRect").visible = true
 
-    # IFNDEF SpriteTownLevelScript.gd
-    # level.get_node("NPC").textBox.text_final = "well, that might not\nactually explain anything huh......\n..\nthese SPRITES here\nsay that CRYSTAL ELDERS\nknow much more\nif you explore more of\nthe dungeon you can\nfind them i think\nbut i'm too scared.."
+    # IFNDEF SpellbookIntroLevelScript.gd
     level.get_node("NPC5").textBox.text_final = "use [Z] to cast\ncollected spells!"
     level.get_node("NPC5").textBox.has_been_shown = false
         
     level.restartMusic()
+    level.saveTheGame()
 
 func isActive():
     return true

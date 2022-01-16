@@ -39,8 +39,6 @@ func _ready():
     set_process(true)
     set_physics_process(true)
 
-    is_active = false
-
 func passiveActivate(delta):
     .passiveActivate(delta) # let NPC.gd handle facing player... but is_active = false so no textbox
 
@@ -90,7 +88,8 @@ func resetStateToIdle():
     if attackState != AttackState.IDLE:
         attackState = AttackState.IDLE
         attackStateTimer = 0
-        smallerInteractionArea.remove_from_group("enemies")
+        if smallerInteractionArea.is_in_group("enemies"):
+            smallerInteractionArea.remove_from_group("enemies")
         mySprite.frame_delay = 1.4
         mySprite.should_randomize_frame_delay = true
         glitchSprite.visible = false
@@ -109,7 +108,8 @@ func _process(delta):
         if attackStateTimer >= attackStateWindUpTimeLimit:
             attackStateTimer = 0
             attackState = AttackState.CAST_GLITCH
-            smallerInteractionArea.add_to_group("enemies")
+            if not smallerInteractionArea.is_in_group("enemies"):
+                smallerInteractionArea.add_to_group("enemies")
             glitchSprite.visible = true
             var my_material = mySprite.get_material_override().duplicate()
             if my_material is ShaderMaterial:
@@ -129,7 +129,8 @@ func _process(delta):
                 self.add_child(newGlitchEnemy)
                 newGlitchEnemy.global_transform.origin = getPlayer().global_transform.origin
                 var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
-                newGlitchEnemy.mySprite.remove_from_group("sprite")
+                if newGlitchEnemy.is_in_group("sprite"):
+                    newGlitchEnemy.mySprite.remove_from_group("sprite")
                 if newGlitchMaterial is ShaderMaterial:
                     newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
                 newGlitchEnemy.mySprite.set_material_override(newGlitchMaterial)
@@ -138,7 +139,8 @@ func _process(delta):
         if attackStateTimer >= attackStateCastGlitchTimeLimit:
             attackStateTimer = 0
             attackState = AttackState.COOLDOWN
-            smallerInteractionArea.remove_from_group("enemies")
+            if smallerInteractionArea.is_in_group("enemies"):
+                smallerInteractionArea.remove_from_group("enemies")
             glitchSprite.visible = false
             var my_material = mySprite.get_material_override().duplicate()
             if my_material is ShaderMaterial:

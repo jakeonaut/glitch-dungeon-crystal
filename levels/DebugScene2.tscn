@@ -10,12 +10,12 @@
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=13]
-[ext_resource path="res://sceneObjects/Spells/LadderSpell.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/Spells/InvisibleSpell.tscn" type="PackedScene" id=15]
-[ext_resource path="res://sceneObjects/Spells/WalkThroughWallsSpell.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/WalkThroughWallsSpell.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/WaterCube.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
@@ -96,7 +96,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 65537, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65544, 0, 3, 65545, 0, 3, 65546, 0, 3, 65547, 0, 3, 65548, 0, 3, 65549, 0, 3, 65550, 0, 3, 65561, 0, 1, 131080, 0, 3, 131081, 0, 3, 131082, 0, 3, 131083, 0, 3, 131084, 0, 3, 131085, 0, 3, 131086, 0, 3, 196616, 0, 3, 196622, 0, 3, 393225, 0, 3, 393226, 0, 3, 393227, 0, 3, 393228, 0, 3, 393229, 0, 3, 393230, 0, 3, 393231, 0, 3, 458761, 0, 3, 458762, 0, 3, 458763, 0, 3, 458764, 0, 3, 458765, 0, 3, 458766, 0, 3, 458767, 0, 3, 524297, 0, 3, 524303, 0, 3, 851973, 0, 1, 851993, 0, 1, 1638431, 0, 3, 1638432, 0, 3, 1703967, 0, 3, 1703968, 0, 3, 1769503, 0, 3, 1769504, 0, 3 )
+"cells": PoolIntArray( 65537, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65544, 0, 3, 65545, 0, 3, 65546, 0, 3, 65547, 0, 3, 65548, 0, 3, 65549, 0, 3, 65550, 0, 3, 65561, 0, 1, 131080, 0, 3, 131081, 0, 3, 131082, 0, 3, 131083, 0, 3, 131084, 0, 3, 131085, 0, 3, 131086, 0, 3, 196616, 0, 3, 196622, 0, 3, 327688, 0, 1, 393224, 0, 1, 393225, 0, 3, 393226, 0, 3, 393227, 0, 3, 393228, 0, 3, 393229, 0, 3, 393230, 0, 3, 393231, 0, 3, 458760, 0, 1, 458761, 0, 3, 458762, 0, 3, 458763, 0, 3, 458764, 0, 3, 458765, 0, 3, 458766, 0, 3, 458767, 0, 3, 524296, 0, 1, 524297, 0, 3, 524303, 0, 3, 589832, 0, 1, 655368, 0, 1, 720904, 0, 1, 786440, 0, 1, 851973, 0, 1, 851976, 0, 1, 851993, 0, 1, 1638431, 0, 3, 1638432, 0, 3, 1703967, 0, 3, 1703968, 0, 3, 1769503, 0, 3, 1769504, 0, 3 )
 }
 script = ExtResource( 7 )
 __meta__ = {

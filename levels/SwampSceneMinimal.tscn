@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=2]
@@ -15,14 +15,15 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Enemies/GlitchDustBunny.tscn" type="PackedScene" id=14]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
-[ext_resource path="res://sceneObjects/Spells/LadderSpell.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/Spells/FeatherSpell.tscn" type="PackedScene" id=19]
-[ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/HeartContainer.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn" type="PackedScene" id=25]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=27]
 
@@ -148,14 +149,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 10, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, -4 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 11, 0 )
 grav = 0
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 0 )
 
 [node name="GlitchDustBunny" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 17, 0 )
 
 [node name="EvilSprite" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 20, 0 )
@@ -171,6 +172,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0 )
+
+[node name="FishingRod" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 7.66995, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

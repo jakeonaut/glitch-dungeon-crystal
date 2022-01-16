@@ -28,7 +28,7 @@ func conductFromScenePath(path):
     # changeSongPitch(1.0)
     # if path.find("Goddess") > 0 or path.find("Psychic") > 0:
     #     self.playGoddess()
-    # elif path.find("Intro") > 0:
+    # elif path.find("IntroDungeon") > 0:
     #     self.playDungeon()
     # elif path.find("Debug") > 0:
     #     self.playDebug()
@@ -41,9 +41,14 @@ func conductFromScenePath(path):
     # elif path.find("MainMenu") > 0:
     #     titleThemePlayer.play() # TODO(jaketrower!!!)
     # elif path.find("Town") > 0:
-    #     self.playTown()
+    #     self.playSwamp() # self.playTown()
+    # elif path.find("SpellbookIntro") > 0:
+    #     self.playDebug()
+    # elif path.find("Adventure") > 0:
+    #     self.playSuburb()
+    # else:
+    #     self.stopAll()
     # changeSongPitch(1.0)
-    # print(currentlyPlayingTheme)
 
 func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them

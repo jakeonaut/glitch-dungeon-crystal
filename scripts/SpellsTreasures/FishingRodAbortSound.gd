@@ -1,0 +1,30 @@
+extends AudioStreamPlayer
+
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+
+func _ready():
+    pass
+
+func activateScript():
+    var fishingRod = get_node("../../..")
+    fishingRod.visible = false
+    fishingRod.is_active = false
+    fishingRod.being_collected = false
+    
+    global.pauseGame = false
+    global.pauseMoveInput = false
+    level.player.aniPlayer.clear_queue()
+    level.player.aniPlayer.queue("walkStop")
+    level.player.aniPlayer.queue("stand")
+    
+    if not global.memory.has("fishingRod"):
+        global.memory["fishingRod"] = true
+
+    # IFNDEF SpriteTownLevelScript.gd
+    level.get_node("NPC").textBox.text_final = "oh cool! now we can\nfish together... well i\ndon't have a fishing rod\nanyway, to fish, just stand\nin front of some water and\npress [DOWN]\nyou can find different fish\nin different areas.... \nso i've heard"
+        
+    level.restartMusic()
+    level.saveTheGame()
+
+func isActive():
+    return true

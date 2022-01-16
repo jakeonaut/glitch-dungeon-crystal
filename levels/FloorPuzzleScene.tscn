@@ -26,7 +26,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=24]
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=25]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=26]
-[ext_resource path="res://sceneObjects/Spells/FloorSpell.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=27]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=6]

@@ -1,5 +1,6 @@
 extends Node
 
+onready var uiLayer = get_node("UILayer")
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
@@ -58,6 +59,9 @@ func _process(delta):
         var player_position = player.global_transform.origin + (player.facing * 2)
         var grid_cell = levelTiles.world_to_map(player_position)
         levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
+
+func saveTheGame():
+    uiLayer.displaySavingText()
         
 func restartMusic():
     # update music
@@ -65,16 +69,16 @@ func restartMusic():
     
 func tryShowUIElements():
     # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
-    get_node("UILayer").setDisplayTitle(display_title)
+    uiLayer.setDisplayTitle(display_title)
 
     if global.memory.has("spellbookPage"):
         # TODO(jaketrower): you have to know how stupid this is right?
-        get_node("UILayer/EquipmentRect").visible = true
-        get_node("UILayer/EquipmentStatusRect").visible = true
+        uiLayer.get_node("EquipmentRect").visible = true
+        uiLayer.get_node("EquipmentStatusRect").visible = true
     else:
         # TODO(jaketrower): you have to know how stupid this is right?
-        get_node("UILayer/EquipmentRect").visible = false
-        get_node("UILayer/EquipmentStatusRect").visible = false
+        uiLayer.get_node("EquipmentRect").visible = false
+        uiLayer.get_node("EquipmentStatusRect").visible = false
 
 func overrideLevelRespawnEvent():
     pass

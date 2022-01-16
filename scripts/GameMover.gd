@@ -78,6 +78,7 @@ export var walk_speed = 8
 var DNUMHORZ = 65
 	
 var glitch_form = global.GlitchForm.NORMAL
+var prev_glitch_form = global.GlitchForm.NORMAL
 var feather_fall_timer = 0
 var feather_fall_initial_time_limit = 20
 var feather_fall_time_limit = 60
@@ -209,7 +210,8 @@ func processPhysics(delta):
 				aniPlayer.play("stand")
 			elif aniPlayer.assigned_animation == "jump" or aniPlayer.assigned_animation == "jumpBump":
 				aniPlayer.play("land")
-		elif linear_velocity.y > 0 and not "jump" in aniPlayer.assigned_animation and not "Jump" in aniPlayer.assigned_animation:
+		elif linear_velocity.y > 0 and not "jump" in aniPlayer.assigned_animation and not "Jump" in aniPlayer.assigned_animation \
+			 and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
 			aniPlayer.stop()
 			aniPlayer.clear_queue()
 			if is_touching_water:
@@ -223,6 +225,8 @@ func processPhysics(delta):
 
 	if was_just_on_ground_timer <= was_just_on_ground_time_limit:
 		was_just_on_ground_timer += (delta*22)
+	was_pressing_horizontal_input = is_pressing_horizontal_input
+	prev_glitch_form = glitch_form
 		
 func applyGravity(delta):
 	if is_touching_water:
@@ -315,8 +319,6 @@ func processInputs(delta):
 		#     ladder_timer = 0
 		#     vv = jump_force * 8
 
-	was_pressing_horizontal_input = is_pressing_horizontal_input
-
 func justPressedDown():
 	return false
 	
@@ -357,7 +359,7 @@ func processJumpInputs(delta):
 			has_just_jumped_timer = -has_just_jumped_time_limit
 			feather_fall_timer = 0
 
-			if aniPlayer and not "Jump" in aniPlayer.assigned_animation:
+			if aniPlayer:
 				aniPlayer.clear_queue()
 				aniPlayer.play("swimJumpStart")
 				aniPlayer.queue("swimJump")
@@ -376,6 +378,13 @@ func processJumpInputs(delta):
 				aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
 				aniPlayer.queue("jumpStart")
 				aniPlayer.queue("jump")
+		elif aniPlayer and "swimJump" in aniPlayer.assigned_animation and \
+			 not is_touching_water and glitch_form != global.GlitchForm.FEATHER:
+			feather_jump_timer = 0
+			aniPlayer.clear_queue()
+			aniPlayer.queue("jumpStart")
+			aniPlayer.queue("jump")
+			actuallyApplyJump(false)
 
 	if aniPlayer:
 		if aniPlayer.assigned_animation == "jumpSquat":
@@ -429,8 +438,8 @@ func actuallyApplyJump(play_sound = true):
 			vv = jump_force*1.1
 		else:
 			vv = jump_force*0.7
-	if not is_touching_water:
-		jumpSound.play() if jumpSound and play_sound else null
+	if not is_touching_water and play_sound and jumpSound != null:
+		jumpSound.play()
 	on_ground = false
 	has_just_jumped_timer = 0 
 	feather_fall_timer = 0
@@ -557,6 +566,8 @@ func processHorizontalInputs(delta):
 	var DNUMSKID = 54
 	if self.isFeatherLike():
 		DNUMSKID = 58
+		if not on_ground and is_pressing_horizontal_input:
+			DNUMSKID = 59
 	if glitch_form == global.GlitchForm.FLOOR and not on_ground:
 		DNUMSKID = 60
 		# TODO(jaketrower): RocketJumpBoots # DNUMSKID = 120
@@ -625,7 +636,9 @@ func handleCollisionsAndMove(local_lv, delta):
 	local_lv.y *= delta*DNUM
 	
 	was_on_ground = on_ground
-	if glitch_form != global.GlitchForm.FLOOR:
+	if glitch_form == global.GlitchForm.LADDER and was_on_ground:
+		on_ground = isWalkingIntoWall()
+	elif glitch_form != global.GlitchForm.FLOOR:
 		on_ground = false
 	truly_on_ground = false
 	half_on_ground = false
@@ -672,7 +685,7 @@ func isTileSpikes(tile_type):
 	return tileCollisionShape is RayShape
 	
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = false):
-	var z = global_transform.origin.z
+	var z = 0 # global_transform.origin.z
 	var TILE_WIDTH = getLevelTiles().cell_size.x
 	var TILE_HEIGHT = getLevelTiles().cell_size.y
 	
@@ -784,7 +797,9 @@ func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv,
 func collideWithWall(local_lv):
 	self.horizontal_collision = true
 	var just_pressed_horizontal_input = is_pressing_horizontal_input and not was_pressing_horizontal_input
-	if aniPlayer and (abs(local_lv.x) > 0.09 or just_pressed_horizontal_input):
+	var switched_to_red_from_yellow = glitch_form == global.GlitchForm.FLOOR and prev_glitch_form == global.GlitchForm.LADDER
+	var switched_to_yellow = glitch_form == global.GlitchForm.LADDER and prev_glitch_form != global.GlitchForm.LADDER
+	if aniPlayer and (abs(local_lv.x) > 0.09 or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
 		if not was_on_ground and not is_touching_water:
 			if local_lv.y > 0 and aniPlayer.assigned_animation != "jumpBump" and aniPlayer.assigned_animation != "jumpSquat":
 				aniPlayer.stop()
@@ -800,6 +815,10 @@ func collideWithWall(local_lv):
 			aniPlayer.stop()
 			aniPlayer.clear_queue()
 			aniPlayer.queue("walkBump")
+			if glitch_form == global.GlitchForm.LADDER:
+				aniPlayer.queue("walk")
+			else:
+				aniPlayer.queue("stand")
 	dir = Vector3(0, 0, 0)
 
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
@@ -903,7 +922,7 @@ func landed():
 			physics_state = PhysicsState.COLLAPSED
 			if bumpSound: bumpSound.play()
 		# TODO(jaketrower): all of this non FSM animation code WILL break everything some day
-		elif aniPlayer.assigned_animation != "getItem":
+		elif aniPlayer.assigned_animation != "getItem" and not "fishing" in aniPlayer.assigned_animation:
 			# if horizontal_collision:
 			#     aniPlayer.play("landBump", -1, 1.0 if isFeatherLike() else 1.5)
 			# else:

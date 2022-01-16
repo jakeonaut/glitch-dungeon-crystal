@@ -8,6 +8,7 @@ export var should_lock = false
 export(String, FILE) var path
 
 export var is_passive = false
+export var is_vertical = false
 
 onready var doorSound = get_node("DoorSound")
 onready var doorCloseSound = get_node("DoorCloseSound")
@@ -66,9 +67,14 @@ func passiveActivate(delta):
 func justStopPassiveActivate():
     getPlayer().hideInteractPrompt()
 
-func goThroughDoor():
+func goThroughDoor(start_of_game = false):
     if not doorSound.is_playing() and not global.isRespawning:
         doorSound.play()
+
+    global.activeInteractor = null
+    if start_of_game:
+        transition.long_fade_to(self.path)
+        return
         
     global.memory["cameraSize"] = level.gameCamera.initial_size
     global.memory["lastDoor"] = id
@@ -77,7 +83,11 @@ func goThroughDoor():
 
     global.isRespawning = true
     if is_passive:
-        global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
+        if is_vertical:
+            global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
+        else:
+            global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
+        global.memory["linear_velocity"] = getPlayer().linear_velocity
         transition.fade_to(self.path)
     else:
         transition.long_fade_to(self.path)
@@ -92,5 +102,13 @@ func land():
     getPlayer().global_transform.origin.x = landing.global_transform.origin.x
     getPlayer().global_transform.origin.y = landing.global_transform.origin.y
 
-    if is_passive and global.memory.has("player_y_offset"):
-        getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
+    if is_passive:
+        if global.memory.has("player_y_offset"):
+            getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
+            global.memory.erase("player_y_offset")
+        if global.memory.has("feather_jump_timer"):
+            getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]
+            global.memory.erase("feather_jump_timer")
+        if global.memory.has("linear_velocity"):
+            getPlayer().linear_velocity = global.memory["linear_velocity"]
+            global.memory.erase("linear_velocity")

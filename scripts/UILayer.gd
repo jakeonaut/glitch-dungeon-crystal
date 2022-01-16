@@ -11,6 +11,11 @@ var title_display_time_limit = 30
 # LIKE AN ENUM-LESS fsm
 var title_display_state = 0
 
+onready var savingTextLabel = get_node("SavingTextLabel")
+var should_display_saving_text = false
+var saving_text_timer = 0
+var saving_text_time_limit = 60
+
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null
 func getPlayer():
@@ -84,6 +89,17 @@ func _process(delta):
 					levelTitleRect.rect_scale.x = 0
 					title_display_timer = 0
 					title_display_state = 3
+
+	if should_display_saving_text:
+		saving_text_timer += (delta*22)
+		if saving_text_timer >= saving_text_time_limit:
+			should_display_saving_text = false
+			savingTextLabel.visible = false
+
+func displaySavingText():
+	savingTextLabel.visible = true
+	should_display_saving_text = true
+	saving_text_timer = 0
 
 func setDisplayTitle(title):
 	display_title = title

@@ -1,6 +1,6 @@
 extends "../../scripts/levelScript.gd"
 
-var cutscene_timer = 0
+var cutscene_timer = 20
 var should_do_cutscene = false
 
 var has_player_died = false
@@ -12,6 +12,7 @@ func _ready_impl():
     if not global.memory.has("roomPath"):
         global.pauseMoveInput = true
         should_do_cutscene = true
+        player.applyGlitch(global.GlitchForm.NORMAL)
 
 func _process(delta):
     if should_do_cutscene:

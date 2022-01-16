@@ -205,3 +205,18 @@ margin_bottom = 136.0
 theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "Lv. 1"
+
+[node name="SavingTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 11.0
+margin_top = 463.0
+margin_right = 212.0
+margin_bottom = 499.0
+theme = ExtResource( 5 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave] saving...[/wave]"
+text = " saving..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
