@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tile_base_colidungeon.png-eb852e03c05cdfc763490ea415bb76c0.stex"
+path="res://.import/geodeShine.png-9bcc5a937db2cd92cf867497a163b992.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Tile_base_colidungeon.png"
-dest_files=[ "res://.import/Tile_base_colidungeon.png-eb852e03c05cdfc763490ea415bb76c0.stex" ]
+source_file="res://assets/sprites/geodeShine.png"
+dest_files=[ "res://.import/geodeShine.png-9bcc5a937db2cd92cf867497a163b992.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -7,6 +7,8 @@ onready var nextDialogSound = get_node("NextDialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
 
+var tinyTextTheme = preload("res://dialogFontTheme.tres")
+
 var text_timer = 0
 var text_next_index = 0
 var text_time_limit = 0.5
@@ -54,7 +56,7 @@ func _ready():
     self.hide()
     set_process(true)
     
-    text_final = textNode.get_text()
+    # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
     top_margin_start = self.margin_top
     bot_margin_start = self.margin_bottom
     
@@ -65,9 +67,10 @@ func tinify():
     tiny = true
     hide_textbox_time_limit = 5
     # get_node("Text").theme.default_font.set_size(32)
+    textNode.set_theme(tinyTextTheme)
     var large_font = textNode.theme.default_font.duplicate()
     large_font.resource_local_to_scene = true
-    large_font.set_size(28)
+    large_font.set_size(26)
     textNode.add_font_override("normal_font", large_font)
 
 func setPosition(should_set_target_origin):
@@ -79,7 +82,7 @@ func setPosition(should_set_target_origin):
     self.rect_position.y = target_pos.y - 75 - adjusted_tiny_y_pos
     
 func _process(delta):
-    if get_node("../..").is_active:
+    if get_node("../..").is_active and not get_node("../..").textbox_dont_touch_my_sprite:
         get_node("../..").mySprite.frame_delay = 1.6
         get_node("../..").mySprite.should_randomize_frame_delay = false
 
@@ -116,32 +119,7 @@ func _process(delta):
             ui_should_continue = false
 
         if text_timer >= time_limit and text_next_index < len(text_final):
-            get_node("../..").mySprite.frame_delay = 0.2
-            #textNode.set_bbcode(text_final)
-            textNode.add_text(text_final[text_next_index]) # textNode.append_bbcode(text_final[text_next_index]) # this would fail with bbcode tags https://docs.godotengine.org/en/stable/classes/class_richtextlabel.html#class-richtextlabel-method-append-bbcode
-            # TODO(jaketrower): We can just do RichTextLabel.set_visible_characters(text_next_index)
-            # TODO(jaketrower): but it needs to be refigured to be compatible with "self.text_final"
-            # textNode.set_visible_characters(text_next_index)
-            
-            if tiny:
-                tinyColorRect.margin_right += 12
-                if adjusted_tiny_x_pos < 50:
-                    adjusted_tiny_x_pos += 12
-                if text_next_index == 0 or text_final[text_next_index] == "\n":
-                    tinyColorRect.margin_bottom += 35
-                    adjusted_tiny_y_pos += 35
-
-            if isWaitingForNextPrompt() or isWaitingForEndPrompt():
-                resetPrompts()
-
-            if textNode.get_text().count("\n") >= 3:
-                textNode.set_text("") # textNode.set_bbcode("")
-                resetTinyColorRect()
-                adjusted_tiny_y_pos += 35
-                
-            dialogSound.play()
-            text_timer = 0
-            text_next_index += 1
+            appendNextTextCharacter()
                 
     if not tiny:
         if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
@@ -151,8 +129,30 @@ func _process(delta):
             self.margin_top = top_margin_start
             self.margin_bottom = bot_margin_start
             
+func appendNextTextCharacter():
+    if not get_node("../..").textbox_dont_touch_my_sprite:
+        get_node("../..").mySprite.frame_delay = 0.2
+
+    # TODO(jaketrower): this still has an odd effect when processing bbcode tags
+    textNode.bbcode_text += text_final[text_next_index]
+    
+    if tiny:
+        adjustTinyColorRect()
+
+    if isWaitingForNextPrompt() or isWaitingForEndPrompt():
+        resetPrompts()
+
+    if textNode.bbcode_text.count("\n") >= 3:
+        textNode.bbcode_text = ""
+        resetTinyColorRect()
+        adjusted_tiny_y_pos += 35
+        
+    dialogSound.play()
+    text_timer = 0
+    text_next_index += 1
+            
 func isWaitingForNextPrompt():
-    return text_next_index < len(text_final) and text_final[text_next_index] == "\n" and textNode.get_text().count("\n") == 2
+    return text_next_index < len(text_final) and text_final[text_next_index] == "\n" and textNode.bbcode_text.count("\n") == 2
     
 func isWaitingForEndPrompt():
     return text_next_index == len(text_final)
@@ -178,10 +178,10 @@ func showTextbox():
     if is_important:
         global.pauseGame = true
         # maybe treat this like the Item Catch?
+    # if tiny: tinyColorRect.visible = true
     text_timer = 0
     text_next_index = 0
-    textNode.set_text('')
-    # textNode.set_bbcode('')
+    textNode.bbcode_text = ""
     resetTinyColorRect()
 
     textNode.get_v_scroll().value = 0
@@ -237,6 +237,22 @@ func passiveInteract(_delta):
 func stopInteract():
     focus_me = false
     
+func adjustTinyColorRect():
+    var lines = textNode.bbcode_text.split("\n", true)
+    var max_width = 0
+    var total_height = 0
+    var font = textNode.get_font("normal_font")
+    for line in lines:
+        var width = font.get_string_size(line).x
+        var height = font.get_height()
+        total_height += height
+        if width > max_width:
+            max_width = width
+    tinyColorRect.margin_right = max_width
+    adjusted_tiny_x_pos = max_width / 2
+    tinyColorRect.margin_bottom = total_height
+    adjusted_tiny_y_pos = total_height
+    tinyColorRect.margin_right += 12
 
 func resetTinyColorRect():
     tinyColorRect.margin_right = 135

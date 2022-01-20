@@ -726,3 +726,5 @@ anims/walkStop = SubResource( 27 )
 
 [node name="Listener" type="Listener" parent="."]
 current = true
+
+[node name="CameraTarget" type="Spatial" parent="."]

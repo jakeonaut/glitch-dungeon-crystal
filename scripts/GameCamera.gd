@@ -18,6 +18,9 @@ func getLevelTiles():
     return levelTiles
 
 func _ready():
+    if initial_target.has_node("CameraTarget"):
+        initial_target = initial_target.get_node("CameraTarget")
+
     initial_size = self.size
     if global.memory.has("cameraSize"):
         self.size = global.memory["cameraSize"]
@@ -78,12 +81,16 @@ func _process(delta):
         # interpolation = A + (B - A) * t
         if not global.activeInteractor.tiny:
             self.size = self.size + (12 - self.size) * (delta*5)
+            if stepify(self.size, 0.1) == 12:
+                self.size = 12
         set_speed(2)
         set_interpolation_enabled(true)
     else:
         actual_target = initial_target
         set_target(actual_target)      
         self.size = self.size + (initial_size - self.size) * (delta*5)
+        if stepify(self.size, 0.1) == initial_size:
+            self.size = initial_size
         
     respectLevelTilesEdges()
     

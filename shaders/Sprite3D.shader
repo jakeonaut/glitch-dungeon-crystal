@@ -4,6 +4,7 @@ uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
+uniform float opacity = 1.0;
 
 // æŒ¯å‹•ã®å¼·ã•
 uniform float shake_power = 0.03;
@@ -61,7 +62,7 @@ void fragment() {
     else {
         ALBEDO.rgb = vec3(0,1,0);
     }
-    ALPHA = incolor.a;
+    ALPHA = incolor.a * opacity;
 
 	if (enable_glitch) {
 		vec2 fixed_uv = UV;

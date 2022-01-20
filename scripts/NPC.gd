@@ -14,6 +14,8 @@ onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
 onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
 
+var textbox_dont_touch_my_sprite = false
+
 var pressing_jump = false
 var just_pressed_jump = false 
 export var is_active = true

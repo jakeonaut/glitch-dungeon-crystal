@@ -56,9 +56,12 @@ func _ready_impl():
 
 func _process(delta):
     if Input.is_action_just_pressed("place_tile_button"):
-        var player_position = player.global_transform.origin + (player.facing * 2)
-        var grid_cell = levelTiles.world_to_map(player_position)
-        levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
+        global.canChangeSongPitch = not global.canChangeSongPitch
+        global.canGlitchScreen = not global.canGlitchScreen
+    # if Input.is_action_just_pressed("place_tile_button"):
+    #     var player_position = player.global_transform.origin + (player.facing * 2)
+    #     var grid_cell = levelTiles.world_to_map(player_position)
+    #     levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
 
 func saveTheGame():
     uiLayer.displaySavingText()

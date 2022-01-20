@@ -38,6 +38,11 @@ func _ready():
     # .ready() implicit
     set_process(true)
     set_physics_process(true)
+    textbox_dont_touch_my_sprite = true
+    
+# @override
+func activate():
+    pass
 
 func passiveActivate(delta):
     .passiveActivate(delta) # let NPC.gd handle facing player... but is_active = false so no textbox
@@ -74,7 +79,6 @@ func passiveActivate(delta):
             windUpSound.play()
             attackStateTimer = 0
             attackState = AttackState.WIND_UP
-            mySprite.frame_delay = 0.8
             var my_material = mySprite.get_material_override()
             if my_material is ShaderMaterial:
                 my_material.set_shader_param("enable_palette_cycle", true)
@@ -100,6 +104,7 @@ func resetStateToIdle():
         mySprite.set_material_override(my_material)
 
 func _process(delta):
+    # ._process(delta) implicit
     # this state should be handled in the process event instead of passiveActivate
     # because if the player leaves the detection radius while we're casting a glitch
     # we still want to cast it and start "recovery"
@@ -108,9 +113,9 @@ func _process(delta):
         if attackStateTimer >= attackStateWindUpTimeLimit:
             attackStateTimer = 0
             attackState = AttackState.CAST_GLITCH
-            if not smallerInteractionArea.is_in_group("enemies"):
+            if not behavior_summon_glitch and not smallerInteractionArea.is_in_group("enemies"):
                 smallerInteractionArea.add_to_group("enemies")
-            glitchSprite.visible = true
+                glitchSprite.visible = true
             var my_material = mySprite.get_material_override().duplicate()
             if my_material is ShaderMaterial:
                 my_material.set_shader_param("enable_glitch", true)
@@ -137,6 +142,7 @@ func _process(delta):
     elif attackState == AttackState.CAST_GLITCH:
         attackStateTimer += (delta*22)
         if attackStateTimer >= attackStateCastGlitchTimeLimit:
+            mySprite.frame_delay = 0.8
             attackStateTimer = 0
             attackState = AttackState.COOLDOWN
             if smallerInteractionArea.is_in_group("enemies"):
@@ -150,3 +156,4 @@ func _process(delta):
         attackStateTimer += (delta*22)
         if attackStateTimer >= attackStateRecoveryTimeLimit:
             resetStateToIdle()
+

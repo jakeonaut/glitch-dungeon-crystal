@@ -9,8 +9,7 @@ onready var noSpellSound = get_node("Sounds/NoSpellSound")
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
-onready var broom = get_node("CameraY/broom")
-onready var broomSound = get_node("Sounds/BroomSound")
+# onready var broomSound = get_node("Sounds/BroomSound")
 
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
@@ -164,13 +163,13 @@ func _process(delta):
                     my_material.set_shader_param("enable_glitch", false)
                 self.physics_state = PhysicsState.NORMAL
             
-        if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
-            if not global.pauseGame:
-                if pauseMenu: pauseMenu.show()
-                global.pauseGame = true
-            else:
-                if pauseMenu: pauseMenu.hide()
-                global.pauseGame = false
+        # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
+        #     if not global.pauseGame:
+        #         if pauseMenu: pauseMenu.show()
+        #         global.pauseGame = true
+        #     else:
+        #         if pauseMenu: pauseMenu.hide()
+        #         global.pauseGame = false
 
     if Input.is_action_just_pressed("action_button"):
         applySpellbookGlitch()
@@ -186,11 +185,11 @@ func _process(delta):
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
             self.respawn()
 
-    doBroomLogic(delta)
+    # doBroomLogic(delta)
     #tryRotateCamera(delta)
 
 func applyGlitchDeathEffects(x):
-    if x < 0 or x > 20:
+    if global.canChangeSongPitch and (x < 0 or x > 20):
         musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
     if x > 10:
         var my_material = mySprite.get_material_override()
@@ -237,7 +236,7 @@ func tryDieToEnemy(should_glitch):
         global.pauseGame = true
         global.pauseMoveInput = true
 
-        if should_glitch:
+        if global.canGlitchScreen and should_glitch:
             level.glitchScreenEffect.visible = true
         var material = level.glitchScreenEffect.get_material()
         if material is ShaderMaterial:
@@ -247,7 +246,8 @@ func tryDieToEnemy(should_glitch):
         if my_material is ShaderMaterial:
             my_material.set_shader_param("enable_glitch", true)
         
-        musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+        if global.canChangeSongPitch:
+            musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
         global.memory["hearts"] -= 1
         if global.memory["hearts"] <= 0:
@@ -271,59 +271,59 @@ func hideInteractPrompt():
     interactPrompt.visible = false
     importantInteractPrompt.visible = false
 
-func doBroomLogic(delta):
-    if broom_state != 0:
-        broom_timer += (delta*22)
-        if broom_timer >= broom_time_limit:
-            broom_timer = 0
-            #var broom_mesh = broom.get_node("broom")
-            var broom_sprite = broom.get_node("Sprite3D")
-            if broom_state == 1:
-                #broom_mesh.rotation_degrees.z = 10
-                broom_sprite.updateBaseFrame(1, 0)
-                broom_state = 2
-            elif broom_state == 2:
-                #broom_mesh.translation.x = 5
-                broom_sprite.translation.x = -3
-                broom_sprite.updateBaseFrame(0, 0)
-                broom_state = 3
-                broomSound.play()
-            elif broom_state == 3:
-                broom_sprite.updateBaseFrame(1, 0)
-                broom_state = 4
-            elif broom_state == 4:
-                broom_sprite.translation.x = 0.5
-                broom_state = -2
-                broom.visible = false
-            elif broom_state < 0:
-                broom_state += 1
-                if broom_state == 0:
-                    can_broom = true
+# func doBroomLogic(delta):
+#     if broom_state != 0:
+#         broom_timer += (delta*22)
+#         if broom_timer >= broom_time_limit:
+#             broom_timer = 0
+#             #var broom_mesh = broom.get_node("broom")
+#             var broom_sprite = broom.get_node("Sprite3D")
+#             if broom_state == 1:
+#                 #broom_mesh.rotation_degrees.z = 10
+#                 broom_sprite.updateBaseFrame(1, 0)
+#                 broom_state = 2
+#             elif broom_state == 2:
+#                 #broom_mesh.translation.x = 5
+#                 broom_sprite.translation.x = -3
+#                 broom_sprite.updateBaseFrame(0, 0)
+#                 broom_state = 3
+#                 broomSound.play()
+#             elif broom_state == 3:
+#                 broom_sprite.updateBaseFrame(1, 0)
+#                 broom_state = 4
+#             elif broom_state == 4:
+#                 broom_sprite.translation.x = 0.5
+#                 broom_state = -2
+#                 broom.visible = false
+#             elif broom_state < 0:
+#                 broom_state += 1
+#                 if broom_state == 0:
+#                     can_broom = true
 
-func tryBroom():
-    if can_broom:        
-        var broom_sprite = broom.get_node("Sprite3D")
-        # if mySprite.isPlayerFacingDown():
-        #     broom.rotation_degrees.y = 0
-        #     broom_sprite.flip_h = false
-        # elif mySprite.isPlayerFacingRight():
-        #     broom.rotation_degrees.y = 90
-        #     broom_sprite.flip_h = false
-        # elif mySprite.isPlayerFacingUp():
-        #     broom.rotation_degrees.y = 180
-        #     broom_sprite.flip_h = true
-        # elif mySprite.isPlayerFacingLeft():
-        #     broom.rotation_degrees.y = 270
-        #     broom_sprite.flip_h = true
+# func tryBroom():
+#     if can_broom:        
+#         var broom_sprite = broom.get_node("Sprite3D")
+#         # if mySprite.isPlayerFacingDown():
+#         #     broom.rotation_degrees.y = 0
+#         #     broom_sprite.flip_h = false
+#         # elif mySprite.isPlayerFacingRight():
+#         #     broom.rotation_degrees.y = 90
+#         #     broom_sprite.flip_h = false
+#         # elif mySprite.isPlayerFacingUp():
+#         #     broom.rotation_degrees.y = 180
+#         #     broom_sprite.flip_h = true
+#         # elif mySprite.isPlayerFacingLeft():
+#         #     broom.rotation_degrees.y = 270
+#         #     broom_sprite.flip_h = true
 
-        broom.visible = true
-        broom_state = 1
-        broom_timer = 0
-        can_broom = false
-        broom_sprite.updateBaseFrame(1, 1)
-        broom_sprite.max_frames = 1
-        broomSound.play()
-        pass # on_ground = false
+#         broom.visible = true
+#         broom_state = 1
+#         broom_timer = 0
+#         can_broom = false
+#         broom_sprite.updateBaseFrame(1, 1)
+#         broom_sprite.max_frames = 1
+#         broomSound.play()
+#         pass # on_ground = false
 
 func faceDown():
     pass # mySprite.faceDown()

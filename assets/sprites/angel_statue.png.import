@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tile_base_collisseum.png-8c8cb870617cb6a1e0b391af859002eb.stex"
+path="res://.import/angel_statue.png-7e0c1cfbd89ab2baee24379f35bc887d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Tile_base_collisseum.png"
-dest_files=[ "res://.import/Tile_base_collisseum.png-8c8cb870617cb6a1e0b391af859002eb.stex" ]
+source_file="res://assets/sprites/angel_statue.png"
+dest_files=[ "res://.import/angel_statue.png-7e0c1cfbd89ab2baee24379f35bc887d.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -45,6 +45,9 @@ var pauseGame = false
 
 var can_broom = true
 
+var canGlitchScreen = true
+var canChangeSongPitch = true
+
 
 func _ready():
     # somehow this gets rid of errors LOL
@@ -59,6 +62,8 @@ func _ready():
     if pauseMoveInput: pass
     if pauseGame: pass
     if can_broom: pass
+    if canGlitchScreen: pass
+    if canChangeSongPitch: pass
 
     memory["total_hearts"] = 1
     memory["hearts"] = 1
