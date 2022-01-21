@@ -12,6 +12,7 @@ var jump_press_time_limit = 5
 var has_played_fall_sound = false
 
 onready var cameraTarget = get_node("CameraTarget")
+var camera_target_origin_x_target = 0
 
 func _ready():
     set_physics_process(true)
@@ -31,9 +32,13 @@ func _process(delta):
         interactionArea.transform.origin.y = 0
         
     if linear_velocity.x > 0.5:
-        cameraTarget.transform.origin.x = 2
+        camera_target_origin_x_target = 2
     elif linear_velocity.x < -0.5:
-        cameraTarget.transform.origin.x = -2
+        camera_target_origin_x_target = -2
+
+    cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
+    if stepify(cameraTarget.transform.origin.x, 0.1) == camera_target_origin_x_target:
+        cameraTarget.transform.origin.x = camera_target_origin_x_target
 
     if global.memory.has("fishingRod") and on_ground and justPressedDown():
         aniPlayer.stop()

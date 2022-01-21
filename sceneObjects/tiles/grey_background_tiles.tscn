@@ -1,0 +1,219 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
+[ext_resource path="res://assets/textures/greyfloorbot9.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/greyfloorbot5.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/greyfloorbot8.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/greyfloorbot3.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/greyfloorbot4.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/greyfloorbot6.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/greyfloorbot7.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/greyfloorbot1.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/greyfloorbot2.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/greysolid1.png" type="Texture" id=11]
+[ext_resource path="res://assets/palettes/dark_grey_palette.png" type="Texture" id=12]
+
+[sub_resource type="ShaderMaterial" id=62]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 62 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=63]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=45]
+material = SubResource( 63 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=64]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=47]
+material = SubResource( 64 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=65]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=49]
+material = SubResource( 65 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=66]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=51]
+material = SubResource( 66 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=67]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=53]
+material = SubResource( 67 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=68]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=55]
+material = SubResource( 68 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=69]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=57]
+material = SubResource( 69 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=70]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=59]
+material = SubResource( 70 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=71]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 12 )
+
+[sub_resource type="CubeMesh" id=61]
+material = SubResource( 71 )
+size = Vector3( 1, 1, 1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="BrickSolid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, 0 )
+mesh = SubResource( 45 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -1 )
+mesh = SubResource( 47 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -2 )
+mesh = SubResource( 49 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -3 )
+mesh = SubResource( 51 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -4 )
+mesh = SubResource( 53 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -5 )
+mesh = SubResource( 55 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -6 )
+mesh = SubResource( 57 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot8" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -7 )
+mesh = SubResource( 59 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot9" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -8 )
+mesh = SubResource( 61 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9/StaticBody"]
+shape = SubResource( 3 )

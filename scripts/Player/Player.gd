@@ -6,10 +6,13 @@ onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
 
+var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
+var broom_cooldown_timer = 0
+var broom_cooldown_time_limit = 20
+var is_in_broom_cooldown = false
+
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
-
-# onready var broomSound = get_node("Sounds/BroomSound")
 
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
@@ -163,6 +166,32 @@ func _process(delta):
                     my_material.set_shader_param("enable_glitch", false)
                 self.physics_state = PhysicsState.NORMAL
             
+        if not pauseSelf and is_in_broom_cooldown:
+            broom_cooldown_timer += (delta*22)
+            if broom_cooldown_timer >= broom_cooldown_time_limit:
+                broom_cooldown_timer = 0
+                is_in_broom_cooldown = false
+
+        if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
+            is_in_broom_cooldown = true
+            broom_cooldown_timer = 0
+            if on_ground:
+                broom_cooldown_timer = broom_cooldown_time_limit / 2
+            elif glitch_form == global.GlitchForm.FEATHER:
+                broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
+            pauseSelf = true
+            var broom = summonedBroomRes.instance()
+            level.add_child(broom)
+            if mySprite.flip_h:
+                broom.get_node("Sprite3D").flip_h = true
+                broom.global_transform.origin.x = self.global_transform.origin.x - 1.558
+            else:
+                broom.get_node("Sprite3D").flip_h = false
+                broom.global_transform.origin.x = self.global_transform.origin.x + 1.557
+            broom.global_transform.origin.y = self.global_transform.origin.y
+            broom.my_broom_owner = self
+            
+            
         # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
         #     if not global.pauseGame:
         #         if pauseMenu: pauseMenu.show()
@@ -187,6 +216,10 @@ func _process(delta):
 
     # doBroomLogic(delta)
     #tryRotateCamera(delta)
+    
+func broomStop():
+    pauseSelf = false
+    was_just_on_ground_timer = -8
 
 func applyGlitchDeathEffects(x):
     if global.canChangeSongPitch and (x < 0 or x > 20):

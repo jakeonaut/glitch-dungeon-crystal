@@ -36,6 +36,7 @@ extents = Vector3( 0.8, 0.8, 1.3 )
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -133,14 +134,14 @@ shape = SubResource( 8 )
 volume_db = -23.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.192001, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.967422, 0 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 9 )
 hframes = 8
-vframes = 8
+vframes = 15
 frame = 12
 script = ExtResource( 6 )
 should_randomize_frame_delay = true

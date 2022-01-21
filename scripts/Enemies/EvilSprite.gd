@@ -12,7 +12,7 @@ var attackStateTimer = 0
 var attackStateNoticePlayerTimeLimit = 10
 var attackStateWindUpTimeLimit = 10
 var attackStateCastGlitchTimeLimit = 20
-var attackStateRecoveryTimeLimit = 30
+var attackStateRecoveryTimeLimit = 50
 
 onready var castGlitchSound = get_node("CastGlitchSound")
 onready var noticeSound = get_node("NoticeSound")
@@ -128,7 +128,7 @@ func _process(delta):
                 var newGlitchEnemy = GlitchEnemyResource.instance()
                 newGlitchEnemy.visible = true
                 newGlitchEnemy.grav = 0
-                newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.1
+                newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
                 newGlitchEnemy.behavior_evolve = true
                 newGlitchEnemy.behavior_fizzle_out_after_evolve = true
                 self.add_child(newGlitchEnemy)

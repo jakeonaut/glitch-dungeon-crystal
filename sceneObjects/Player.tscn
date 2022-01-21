@@ -41,6 +41,7 @@ height = 2.3
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -621,12 +622,12 @@ vframes = 8
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
-volume_db = -32.0
+volume_db = -35.0
 pitch_scale = 1.05
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
-volume_db = -35.0
+volume_db = -39.0
 pitch_scale = 1.2
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -645,7 +646,7 @@ volume_db = -20.0
 
 [node name="WetJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -5.0
+volume_db = -8.0
 pitch_scale = 1.3
 
 [node name="JumpOverallsSound" type="AudioStreamPlayer" parent="Sounds"]

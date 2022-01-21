@@ -8,6 +8,13 @@ var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
+var dark_grey_palette = preload("res://assets/palettes/dark_grey_palette.png")
+var dark_red_palette = preload("res://assets/palettes/dark_red_palette.png")
+var dark_green_palette = preload("res://assets/palettes/dark_green_palette.png")
+var dark_black_palette = preload("res://assets/palettes/dark_black_palette.png")
+var dark_yellow_palette = preload("res://assets/palettes/dark_yellow_palette.png")
+var dark_white_palette = preload("res://assets/palettes/dark_white_palette.png")
+
 var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
 var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
 

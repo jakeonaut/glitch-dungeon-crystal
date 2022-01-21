@@ -110,6 +110,7 @@ var facing = Vector3(0, 0, 1) #default to facing "down" toward the player behind
 var transitioning = false
 var is_falling = false
 var was_walking_into_wall = false
+var pauseSelf = false
 
 var horizontal_collision = false
 
@@ -125,7 +126,7 @@ func _process(_delta):
     pass
 
 func _physics_process(delta):
-    if global.pauseGame: return
+    if global.pauseGame or pauseSelf: return
 
     is_touching_water = smallInteractionArea.is_touching_water
 
@@ -353,7 +354,8 @@ func processJumpInputs(delta):
         if is_touching_water:
             vv = jump_force / 2
 
-            if is_touching_water and wetJumpSound != null:
+            if is_touching_water and wetJumpSound != null and justPressedJump():
+                wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
                 wetJumpSound.play()
             on_ground = false
             has_just_jumped_timer = -has_just_jumped_time_limit

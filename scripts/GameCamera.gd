@@ -10,6 +10,7 @@ var rightmost_x = -999
 var topmost_y = -999
 var botmost_y = 999
 var initial_size = 15
+var start_applying_parallax = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -32,6 +33,8 @@ func _ready():
 
     global_transform.origin.x = initial_target.global_transform.origin.x
     global_transform.origin.y = initial_target.global_transform.origin.y
+    start_applying_parallax = true
+
     
     var tile_coords = getLevelTiles().get_used_cells()
     
@@ -97,7 +100,10 @@ func _process(delta):
     # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size
     realCamera.size = self.size
     realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, 0.06)
-    realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, 0.06)    
+    realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, 0.06)   
+    
+    if start_applying_parallax and getLevelTiles().backgroundLevelTiles:
+        getLevelTiles().backgroundLevelTiles.applyParallax(realCamera.global_transform.origin.x)
 
 func respectLevelTilesEdges():
     # respect left and right, dependent on gameCamera size
