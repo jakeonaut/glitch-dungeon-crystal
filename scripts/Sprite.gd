@@ -35,6 +35,10 @@ func _process(delta):
     preProcess()
     if visible:
         animate(delta)
+        
+func restart():
+    animation_counter = 0
+    set_frame(start_frame)
     
 func animate(delta):
     animation_counter += delta

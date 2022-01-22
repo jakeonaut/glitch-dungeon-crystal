@@ -17,6 +17,10 @@ onready var heartSound = get_node("Sounds/HeartSound")
 var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
 
+onready var dieAniPlayer = get_node("DieAnimationPlayer")
+
+var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
@@ -25,6 +29,11 @@ func _ready():
 
 func _process(delta):
     # ._process(delta) implicit
+
+    if am_i_dying:
+        if not myOtherSprite.visible:
+            queue_free()
+        return
 
     slime_state_timer += (delta*22)
     if slime_state == SlimeState.WALK:
@@ -58,17 +67,44 @@ func glitchSetSpritesAndCollision():
 
 # @override
 func pressingMoveLeft():
+    if am_i_dying: return false
     return walk_direction == -1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
+    if am_i_dying: return false
     return walk_direction == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
-func passiveActivate(delta):
+func passiveActivate(_delta):
+    if am_i_dying: return
+        
     var aniPlayer = get_node("HeartSprite/AnimationPlayer")
     if level.player.glitch_form == global.GlitchForm.INVISIBLE and not aniPlayer.is_playing():
         heartSound.play()
         aniPlayer.stop()
         aniPlayer.queue("heartWiggle")
         aniPlayer.queue("noHeart")
+        
+# @override
+func ouchies():
+    if am_i_dying: return
+    am_i_dying = true
+    
+    if smallInteractionArea.is_in_group("enemies"):
+        smallInteractionArea.remove_from_group("enemies")
+
+    mySprite.hframes = 10
+    mySprite.vframes = 6
+    mySprite.restart()
+    mySprite.frame_delay = 0.1
+    mySprite.max_frames = 3
+    mySprite.should_fizzle_out = true
+    var new_material = mySprite.get_material().duplicate()
+    new_material.set_shader_param("texture_albedo", altGlitchEnemySheet)
+    mySprite.set_material(new_material)
+    myOtherSprite.set_script(null)
+    dieAniPlayer.stop()
+    dieAniPlayer.clear_queue()
+    dieAniPlayer.queue("metamorphosis")
+    dieAniPlayer.queue("flutterAway")

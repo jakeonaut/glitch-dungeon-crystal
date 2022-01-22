@@ -8,9 +8,12 @@ onready var gameCamera = get_node("GameCamera")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
-export var has_spellbook_page = false
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
 export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD") var tileset_type 
+
+# TODO(jaketrower): Make a debug global section???
+export var has_spellbook_page = false
+export var has_broom = false
 
 export var display_title = "???"
 
@@ -25,8 +28,12 @@ func _ready_impl():
     levelTiles.setTileset(tileset_type)
     
     if has_spellbook_page and not global.memory.has("spellbookPage"):
-        print("gimme a spellbook!!")
+        print("gimme a spellbook page!!")
         global.memory["spellbookPage"] = []
+        
+    if has_broom and not global.memory.has("broom"):
+        print("gimme the broom!")
+        global.memory["broom"] = true
 
     if global.memory.has("current_glitch"):
         player.applyGlitch(global.memory["current_glitch"], true)
@@ -42,6 +49,7 @@ func _ready_impl():
     restartMusic()
     tryShowUIElements()
     tryToRespawn()
+    setUpRoomInitializationOverride()
 
     global.activeThrowableObject = null
     if global.activeThrowableObjectPath != null:
@@ -84,6 +92,9 @@ func tryShowUIElements():
         uiLayer.get_node("EquipmentStatusRect").visible = false
 
 func overrideLevelRespawnEvent():
+    pass
+    
+func setUpRoomInitializationOverride():
     pass
 
 func getLevelName():

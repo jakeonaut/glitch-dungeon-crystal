@@ -24,31 +24,31 @@ func stopAll():
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    pass # i don't want to listen to music for a bit
-    # changeSongPitch(1.0)
-    # if path.find("Goddess") > 0 or path.find("Psychic") > 0:
-    #     self.playGoddess()
-    # elif path.find("IntroDungeon") > 0:
-    #     self.playDungeon()
-    # elif path.find("Debug") > 0:
-    #     self.playDebug()
-    # elif path.find("Casino") > 0:
-    #     self.playCasino()
-    # elif path.find("Suburb") > 0:
-    #     self.playSuburb()
-    # elif path.find("Swamp") > 0:
-    #     self.playSwamp()
-    # elif path.find("MainMenu") > 0:
-    #     titleThemePlayer.play() # TODO(jaketrower!!!)
-    # elif path.find("Town") > 0:
-    #     self.playSwamp() # self.playTown()
-    # elif path.find("SpellbookIntro") > 0:
-    #     self.playDebug()
-    # elif path.find("Adventure") > 0:
-    #     self.playSuburb()
-    # else:
-    #     self.stopAll()
-    # changeSongPitch(1.0)
+    #pass # i don't want to listen to music for a bit
+    changeSongPitch(1.0)
+    if path.find("Goddess") > 0 or path.find("Psychic") > 0:
+        self.playGoddess()
+    elif path.find("IntroDungeon") > 0:
+        self.playDungeon()
+    elif path.find("Debug") > 0:
+        self.playDebug()
+    elif path.find("Casino") > 0:
+        self.playCasino()
+    elif path.find("Suburb") > 0:
+        self.playSuburb()
+    elif path.find("Swamp") > 0:
+        self.playSwamp()
+    elif path.find("MainMenu") > 0:
+        titleThemePlayer.play() # TODO(jaketrower!!!)
+    elif path.find("Town") > 0:
+        self.playSwamp() # self.playTown()
+    elif path.find("SpellbookIntro") > 0:
+        self.playDebug()
+    elif path.find("Adventure") > 0:
+        self.playSuburb()
+    else:
+        self.stopAll()
+    changeSongPitch(1.0)
 
 func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them

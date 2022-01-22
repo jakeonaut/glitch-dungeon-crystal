@@ -21,7 +21,7 @@ func activateScript():
         global.memory["broom"] = true
 
     # IFNDEF SpriteTownLevelScript.gd
-    level.get_node("NPC").textBox.text_final = "oh cool! now we can clean together\n... well i don't have a broom..\n\nanyway, to sweep, just stand in front\nof a glitch and press [C]"
+    level.get_node("NPC").textBox.text_final = "you found the broom! now you\ncan help me clean my house...\ni have a great reward buried somewhere under the dust!\nplease, come in."
         
     level.restartMusic()
     level.saveTheGame()

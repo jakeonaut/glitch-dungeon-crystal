@@ -1,8 +1,7 @@
 extends "../../scripts/levelScript.gd"
 
 # @override
-func overrideLevelRespawnEvent():
-    pass
+func setUpRoomInitializationOverride():
     # IFNDEF SpellbookPageAbortSound.gd
     if global.memory.has("spellbookPage"):
         var spellbookPage = get_node("SpellbookPage")

@@ -23,6 +23,7 @@ var has_been_shown = false
 var focus_me = false
 
 var is_important = false
+var is_really_important = false
 var tiny = false
 
 onready var tinyColorRect = get_node("TinyColorRect")
@@ -224,7 +225,7 @@ func interact():
 
 func passiveInteract(_delta):
     if !visible and dialogSound.isActive() and (global.activeInteractor == null or global.activeInteractor == self):
-        if (tiny or is_important) and not has_been_shown:
+        if (tiny or is_really_important) and not has_been_shown:
             global.activeInteractor = self
             showTextbox()
         else:

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/glitchMoth.wav-c991b1fbefce9513aa5f37601834bcfd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/glitchMoth.wav"
+dest_files=[ "res://.import/glitchMoth.wav-c991b1fbefce9513aa5f37601834bcfd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

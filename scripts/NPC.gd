@@ -5,7 +5,8 @@ extends "GameMover.gd"
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
-export var is_important = false
+export var is_important = false # when dialogue is started, can't walk away until finished.
+export var is_really_important = false # touching it will start the dialogue
 export var can_activate = true
 export var can_move = true
 
@@ -42,7 +43,8 @@ func _ready():
         textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
     textBoxContainer.setVars()
 
-    textBox.is_important = is_important
+    textBox.is_important = is_important or is_really_important
+    textBox.is_really_important = is_really_important
     if tiny_textbox:
         textBox.tinify()
 

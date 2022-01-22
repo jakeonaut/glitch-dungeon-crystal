@@ -10,12 +10,12 @@ export(String, FILE) var path
 export var is_passive = false
 export var is_vertical = false
 
-onready var doorSound = get_node("DoorSound")
 onready var doorCloseSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
 
 onready var landing = get_node("landing")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var hasPlayedDoorSound = false
 
 var player = null
 func getPlayer():
@@ -68,8 +68,9 @@ func justStopPassiveActivate():
     getPlayer().hideInteractPrompt()
 
 func goThroughDoor(start_of_game = false):
-    if not doorSound.is_playing() and not global.isRespawning:
-        doorSound.play()
+    if not global.isRespawning and not hasPlayedDoorSound:
+        global.doorSound.play()
+        hasPlayedDoorSound = true
 
     global.activeInteractor = null
     if start_of_game:

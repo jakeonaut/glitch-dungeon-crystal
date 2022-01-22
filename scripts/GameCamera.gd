@@ -11,6 +11,7 @@ var topmost_y = -999
 var botmost_y = 999
 var initial_size = 15
 var start_applying_parallax = false
+var how_fast_to_switch_targets = 1
 
 var levelTiles = null
 func getLevelTiles():
@@ -60,23 +61,29 @@ func _process(delta):
     # d=√((x_2-x_1)²+(y_2-y_1)²)
     var distance = global_transform.origin.distance_to(actual_target.global_transform.origin)
 
+    var speed_multiplier = 1
+    if how_fast_to_switch_targets > 0:
+        speed_multiplier = how_fast_to_switch_targets
+        
     if distance > 19.8:
         set_interpolation_enabled(true)
-        set_speed(7)
+        set_speed(7 * speed_multiplier)
     elif distance > 19.7:
         set_interpolation_enabled(true)
-        set_speed(5)
+        set_speed(5 * speed_multiplier)
     elif distance > 19.6:
         set_interpolation_enabled(true)
-        set_speed(4)
+        set_speed(4 * speed_multiplier)
     elif distance > 19.5:
         set_interpolation_enabled(true)
-        set_speed(3)
+        set_speed(3 * speed_multiplier)
     elif distance > 19.4:
         set_interpolation_enabled(true)
-        set_speed(2)
+        set_speed(2 * speed_multiplier)
     elif distance < 19.33 and global.activeInteractor == null:
         set_interpolation_enabled(false)
+        if actual_target == initial_target:
+            how_fast_to_switch_targets = 0
 
     if global.activeInteractor != null and global.activeInteractor.focus_me and initial_size > 12:
         actual_target = global.activeInteractor.get_node("../..")

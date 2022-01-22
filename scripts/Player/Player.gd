@@ -126,79 +126,19 @@ func _process(delta):
     # ._process(delta) #NOTE: this super method is called automatically 
     # https://github.com/godotengine/godot/issues/6500
 
-    if physics_state == PhysicsState.GLITCH_HURT:
-        global.pauseGame = true
-        lv = Vector3(0, 0, 0)
-        dir = Vector3(0, 0, 0)
-        glitch_death_timer += (delta*22)
+    if not processGlitchHurtRecovery(delta):
+        return
 
-        var material = level.glitchScreenEffect.get_material()
-        if material is ShaderMaterial:
-            material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
-        if glitch_death_timer >= 10:
-            global.pauseGame = false
-            global.pauseMoveInput = false
-            self.physics_state = PhysicsState.GLITCH_RECOVERY
-    elif physics_state == PhysicsState.GLITCH_DYING:
-        global.pauseGame = true
-        lv = Vector3(0, 0, 0)
-        dir = Vector3(0, 0, 0)
-        glitch_death_timer += (delta*22)
-
-        var material = level.glitchScreenEffect.get_material()
-        if material is ShaderMaterial:
-            material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
-        if glitch_death_timer >= 10:
-            global.pauseGame = false
-            get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
-            global.memory["hearts_recovering"] = true
-            self.physics_state = PhysicsState.NORMAL
-    else:
-        if glitch_death_timer != 0:
-            glitch_death_timer += (delta*22)
-            applyGlitchDeathEffects(abs(glitch_death_timer))
-            if glitch_death_timer >= 40:
-                musicPlayer.changeSongPitch(1.0)
-                level.glitchScreenEffect.visible = false
-                glitch_death_timer = 0
-                var my_material = mySprite.get_material_override()
-                if my_material is ShaderMaterial:
-                    my_material.set_shader_param("enable_glitch", false)
-                self.physics_state = PhysicsState.NORMAL
-            
-        if not pauseSelf and is_in_broom_cooldown:
-            broom_cooldown_timer += (delta*22)
-            if broom_cooldown_timer >= broom_cooldown_time_limit:
-                broom_cooldown_timer = 0
-                is_in_broom_cooldown = false
-
-        if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
-            is_in_broom_cooldown = true
-            broom_cooldown_timer = 0
-            if on_ground:
-                broom_cooldown_timer = broom_cooldown_time_limit / 2
-            elif glitch_form == global.GlitchForm.FEATHER:
-                broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
-            pauseSelf = true
-            var broom = summonedBroomRes.instance()
-            level.add_child(broom)
-            if mySprite.flip_h:
-                broom.get_node("Sprite3D").flip_h = true
-                broom.global_transform.origin.x = self.global_transform.origin.x - 1.558
-            else:
-                broom.get_node("Sprite3D").flip_h = false
-                broom.global_transform.origin.x = self.global_transform.origin.x + 1.557
-            broom.global_transform.origin.y = self.global_transform.origin.y
-            broom.my_broom_owner = self
-            
-            
-        # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
-        #     if not global.pauseGame:
-        #         if pauseMenu: pauseMenu.show()
-        #         global.pauseGame = true
-        #     else:
-        #         if pauseMenu: pauseMenu.hide()
-        #         global.pauseGame = false
+    if global.memory.has("broom"):
+        processBroomLogic(delta)
+        
+    # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
+    #     if not global.pauseGame:
+    #         if pauseMenu: pauseMenu.show()
+    #         global.pauseGame = true
+    #     else:
+    #         if pauseMenu: pauseMenu.hide()
+    #         global.pauseGame = false
 
     if Input.is_action_just_pressed("action_button"):
         applySpellbookGlitch()
@@ -214,12 +154,54 @@ func _process(delta):
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
             self.respawn()
 
-    # doBroomLogic(delta)
     #tryRotateCamera(delta)
     
-func broomStop():
-    pauseSelf = false
-    was_just_on_ground_timer = -8
+func processGlitchHurtRecovery(delta):
+    if physics_state == PhysicsState.GLITCH_HURT:
+        global.pauseGame = true
+        lv = Vector3(0, 0, 0)
+        dir = Vector3(0, 0, 0)
+        glitch_death_timer += (delta*22)
+
+        var material = level.glitchScreenEffect.get_material()
+        if material is ShaderMaterial:
+            material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
+        if glitch_death_timer >= 10:
+            global.pauseGame = false
+            global.pauseMoveInput = false
+            self.physics_state = PhysicsState.GLITCH_RECOVERY
+
+        return false
+    elif physics_state == PhysicsState.GLITCH_DYING:
+        global.pauseGame = true
+        lv = Vector3(0, 0, 0)
+        dir = Vector3(0, 0, 0)
+        glitch_death_timer += (delta*22)
+
+        var material = level.glitchScreenEffect.get_material()
+        if material is ShaderMaterial:
+            material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
+        if glitch_death_timer >= 10:
+            global.pauseGame = false
+            get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
+            global.memory["hearts_recovering"] = true
+            self.physics_state = PhysicsState.NORMAL
+
+        return false
+    else:
+        if glitch_death_timer != 0:
+            glitch_death_timer += (delta*22)
+            applyGlitchDeathEffects(abs(glitch_death_timer))
+            if glitch_death_timer >= 40:
+                musicPlayer.changeSongPitch(1.0)
+                level.glitchScreenEffect.visible = false
+                glitch_death_timer = 0
+                var my_material = mySprite.get_material_override()
+                if my_material is ShaderMaterial:
+                    my_material.set_shader_param("enable_glitch", false)
+                self.physics_state = PhysicsState.NORMAL
+
+        return true
 
 func applyGlitchDeathEffects(x):
     if global.canChangeSongPitch and (x < 0 or x > 20):
@@ -304,59 +286,41 @@ func hideInteractPrompt():
     interactPrompt.visible = false
     importantInteractPrompt.visible = false
 
-# func doBroomLogic(delta):
-#     if broom_state != 0:
-#         broom_timer += (delta*22)
-#         if broom_timer >= broom_time_limit:
-#             broom_timer = 0
-#             #var broom_mesh = broom.get_node("broom")
-#             var broom_sprite = broom.get_node("Sprite3D")
-#             if broom_state == 1:
-#                 #broom_mesh.rotation_degrees.z = 10
-#                 broom_sprite.updateBaseFrame(1, 0)
-#                 broom_state = 2
-#             elif broom_state == 2:
-#                 #broom_mesh.translation.x = 5
-#                 broom_sprite.translation.x = -3
-#                 broom_sprite.updateBaseFrame(0, 0)
-#                 broom_state = 3
-#                 broomSound.play()
-#             elif broom_state == 3:
-#                 broom_sprite.updateBaseFrame(1, 0)
-#                 broom_state = 4
-#             elif broom_state == 4:
-#                 broom_sprite.translation.x = 0.5
-#                 broom_state = -2
-#                 broom.visible = false
-#             elif broom_state < 0:
-#                 broom_state += 1
-#                 if broom_state == 0:
-#                     can_broom = true
+func processBroomLogic(delta):
+    if not pauseSelf and is_in_broom_cooldown:
+        broom_cooldown_timer += (delta*22)
+        if broom_cooldown_timer >= broom_cooldown_time_limit:
+            broom_cooldown_timer = 0
+            is_in_broom_cooldown = false
 
-# func tryBroom():
-#     if can_broom:        
-#         var broom_sprite = broom.get_node("Sprite3D")
-#         # if mySprite.isPlayerFacingDown():
-#         #     broom.rotation_degrees.y = 0
-#         #     broom_sprite.flip_h = false
-#         # elif mySprite.isPlayerFacingRight():
-#         #     broom.rotation_degrees.y = 90
-#         #     broom_sprite.flip_h = false
-#         # elif mySprite.isPlayerFacingUp():
-#         #     broom.rotation_degrees.y = 180
-#         #     broom_sprite.flip_h = true
-#         # elif mySprite.isPlayerFacingLeft():
-#         #     broom.rotation_degrees.y = 270
-#         #     broom_sprite.flip_h = true
-
-#         broom.visible = true
-#         broom_state = 1
-#         broom_timer = 0
-#         can_broom = false
-#         broom_sprite.updateBaseFrame(1, 1)
-#         broom_sprite.max_frames = 1
-#         broomSound.play()
-#         pass # on_ground = false
+    if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
+        is_in_broom_cooldown = true
+        broom_cooldown_timer = 0
+        if on_ground:
+            broom_cooldown_timer = broom_cooldown_time_limit / 2
+        elif glitch_form == global.GlitchForm.FEATHER:
+            broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
+        pauseSelf = true
+        var broom = summonedBroomRes.instance()
+        level.add_child(broom)
+        if mySprite.flip_h:
+            broom.get_node("Sprite3D").flip_h = true
+            broom.global_transform.origin.x = self.global_transform.origin.x - 1.558
+        else:
+            broom.get_node("Sprite3D").flip_h = false
+            broom.global_transform.origin.x = self.global_transform.origin.x + 1.557
+        broom.global_transform.origin.y = self.global_transform.origin.y
+        broom.my_broom_owner = self
+        
+# @override
+func landed():
+    .landed()
+    broom_cooldown_timer = 0
+    is_in_broom_cooldown = false
+        
+func broomStop():
+    pauseSelf = false
+    was_just_on_ground_timer = -8
 
 func faceDown():
     pass # mySprite.faceDown()

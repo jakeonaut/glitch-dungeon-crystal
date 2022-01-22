@@ -8,6 +8,8 @@ onready var evolveSound = get_node("Sounds/EvolveSound")
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
+var am_i_dying
+
 export var behavior_walking = false
 export var behavior_vertical_walking = false
 export var behavior_jumping = false
@@ -52,6 +54,8 @@ func _ready():
         mySprite.frame_delay = rand_range(0.3, 0.5)
 
 func _process(delta):
+    if am_i_dying: return
+
     if behavior_fizzle_out_after_evolve:
         if not mySprite.visible:
             queue_free()
@@ -116,17 +120,21 @@ func _physics_process(delta):
 
 # @override
 func pressingMoveLeft():
+    if am_i_dying: return false
     return walk_direction == -1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
+    if am_i_dying: return false
     return walk_direction == 1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
+    if am_i_dying: return false
     return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
 # @override
 func pressingJump():
+    if am_i_dying: return false
     return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
     
 # @override
@@ -164,4 +172,8 @@ func passiveActivate(delta):
     pass
 
 func stopPassiveActivate():
+    pass
+
+func ouchies():
+    queue_free()
     pass

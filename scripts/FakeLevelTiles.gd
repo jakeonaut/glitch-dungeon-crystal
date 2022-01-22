@@ -13,9 +13,11 @@ func ready_impl():
     # IFNDEF levelScript.gd
     if tileset_type == global.TilesetType.HOUSE:
         self.set_mesh_library(self.red_tiles)
+        cosmeticLevelTiles.set_mesh_library(self.red_tiles)
         self.grey_palette = global.grey_palette_town
         self.green_palette = global.green_palette_town
         self.properlySetTiles()
     elif tileset_type == global.TilesetType.FOREST:
         self.set_mesh_library(self.green_tiles)
+        cosmeticLevelTiles.set_mesh_library(self.green_tiles)
         self.properlySetTiles()

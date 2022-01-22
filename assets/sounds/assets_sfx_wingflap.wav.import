@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/assets_sfx_wingflap.wav-dc44f6377cd5c9d2a980de98899f7def.sample"
+
+[deps]
+
+source_file="res://assets/sounds/assets_sfx_wingflap.wav"
+dest_files=[ "res://.import/assets_sfx_wingflap.wav-dc44f6377cd5c9d2a980de98899f7def.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

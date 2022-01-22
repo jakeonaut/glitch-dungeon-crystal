@@ -367,6 +367,7 @@ func processJumpInputs(delta):
                 aniPlayer.queue("swimJump")
         # Jump from the ground
         elif isKindOfOnGround():
+            was_just_on_ground_timer = was_just_on_ground_time_limit
             jumped_from_true_ground = truly_on_ground
             jump_squat_jump_input_timer = 0
             feather_jump_timer = 0
@@ -915,11 +916,13 @@ func postProcessInputs(delta):
     pass
     
 func landed():
+    var quiet_the_fall_sound = true
     last_grounded_y = global_transform.origin.y 
     if landSound: landSound.play()
     if aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
         aniPlayer.clear_queue()
         if fall_timer > 30 and not glitch_form == global.GlitchForm.FEATHER:
+            quiet_the_fall_sound = false
             aniPlayer.play("fallFlat", -1, 1.0)
             physics_state = PhysicsState.COLLAPSED
             if bumpSound: bumpSound.play()
@@ -930,7 +933,8 @@ func landed():
             # else:
             aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
     fall_timer = 0
-    if fallSound: fallSound.stop()
+    if fallSound and quiet_the_fall_sound:
+        fallSound.stop()
 
 func isWalkingIntoWall():
     return abs(linear_velocity.x) < 0.5 \
