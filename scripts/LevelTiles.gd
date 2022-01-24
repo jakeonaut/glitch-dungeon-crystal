@@ -158,6 +158,7 @@ func setTileset(tileset_type):
         set_mesh_library(red_tiles)
         grey_palette = global.grey_palette_town
         green_palette = global.green_palette_town
+        black_palette = global.black_palette_town
         properlySetTiles()
     elif tileset_type == global.TilesetType.FOREST:
         set_mesh_library(green_tiles)

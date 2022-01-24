@@ -49,8 +49,6 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
 starting_glitch_type = 2
-has_spellbook_page = true
-tileset_type = 4
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 8 )]
 

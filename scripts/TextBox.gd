@@ -107,15 +107,16 @@ func _process(delta):
         tryToHide(delta)
             
         if isWaitingForEndPrompt():
-            endPrompt.visible = not tiny
+            endPrompt.visible = true
             has_been_shown = true
-            if is_important:
+            if is_important or is_really_important:
                 global.pauseGame = false
             is_important = false
+            is_really_important = false
             
         if isWaitingForNextPrompt():
             if not ui_should_continue:
-                nextPrompt.visible = not tiny
+                nextPrompt.visible = true
                 return
             ui_should_continue = false
 
@@ -140,7 +141,7 @@ func appendNextTextCharacter():
     if tiny:
         adjustTinyColorRect()
 
-    if isWaitingForNextPrompt() or isWaitingForEndPrompt():
+    if not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
         resetPrompts()
 
     if textNode.bbcode_text.count("\n") >= 3:
@@ -168,15 +169,13 @@ func wigglePrompt(delta, promptSprite):
         nextPrompt_wiggle_timer = 0
         
 func resetPrompts():
-    nextPrompt.transform.origin.y = 110
     nextPrompt.visible = false
-    endPrompt.transform.origin.y = 110
     endPrompt.visible = false
     nextPrompt_wiggle_timer = 0
             
 func showTextbox():
     focus_me = true
-    if is_important:
+    if is_important or is_really_important:
         global.pauseGame = true
         # maybe treat this like the Item Catch?
     # if tiny: tinyColorRect.visible = true
@@ -254,6 +253,10 @@ func adjustTinyColorRect():
     tinyColorRect.margin_bottom = total_height
     adjusted_tiny_y_pos = total_height
     tinyColorRect.margin_right += 12
+
+    print("MAX HEIGHT AND WIDTH: " + str(max_width) + ", " + str(total_height))
+    nextPrompt.position = Vector2(max_width + 200, total_height)
+    endPrompt.position = nextPrompt.position
 
 func resetTinyColorRect():
     tinyColorRect.margin_right = 135

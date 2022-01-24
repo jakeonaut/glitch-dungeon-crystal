@@ -5,9 +5,9 @@
 [ext_resource path="res://assets/music/dungeon.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/music/debug town.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/music/lucky cat casino.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/music/town.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/music/demon suburb.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/music/prairie swamp.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/music/chordloop002_coolarpsinE.wav" type="AudioStream" id=10]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -37,8 +37,8 @@ stream = ExtResource( 8 )
 volume_db = -20.0
 
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -10.0
+stream = ExtResource( 6 )
+volume_db = -15.0
 
 [node name="TownThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

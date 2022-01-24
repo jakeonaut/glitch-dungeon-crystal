@@ -113,3 +113,6 @@ func land():
         if global.memory.has("linear_velocity"):
             getPlayer().linear_velocity = global.memory["linear_velocity"]
             global.memory.erase("linear_velocity")
+
+        if is_vertical:
+            getPlayer().on_ground = false

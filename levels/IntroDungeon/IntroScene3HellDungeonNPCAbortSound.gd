@@ -3,21 +3,24 @@ extends AudioStreamPlayer
 var fishy = preload("res://sceneObjects/Fish.tscn")
 
 func _ready():
-    pass
+	pass
 
 func activateScript():
-    var npc = get_node("../../..")
-    npc.visible = false
-    npc.can_activate = false
-    npc.is_active = false
-    var new_self = fishy.instance()
-    new_self.global_transform.origin = npc.global_transform.origin
-    npc.get_parent().add_child(new_self)
-    npc.get_node("../Player").glitch_death_timer = 0
-    musicPlayer.changeSongPitch(0.5)
+	var npc = get_node("../../..")
+	if npc.has_node("../GlitchEnemy13"):
+		npc.visible = false
+		npc.can_activate = false
+		npc.is_active = false
+		var new_self = fishy.instance()
+		new_self.global_transform.origin = npc.global_transform.origin
+		npc.get_parent().add_child(new_self)
+		npc.get_node("../Player").glitch_death_timer = 0
+		musicPlayer.changeSongPitch(0.5)
 
-    npc.get_node("../GlitchEnemy13").visible = false
+		npc.get_node("../GlitchEnemy13").visible = false
+	else:
+		npc.textBox.text_final = "hey... thanks for helping me\ni still need to recover my strength..\n\nstrength st r enth"
 
 func isActive():
-    # OVERRIDE ME... if you dare
-    return true
+	# OVERRIDE ME... if you dare
+	return true

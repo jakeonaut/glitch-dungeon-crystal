@@ -22,7 +22,8 @@ func setUpRoomInitializationOverride():
         # i love when nodes have to know about other nodes intimates... gossip girls much
         global.activeInteractor = null
         self.gameCamera.actual_target = self.gameCamera.initial_target
-        newDoor.land()
+        if "BroomChallenge" in global.memory["roomPath"]:
+            newDoor.land()
         get_node("NPC").queue_free()
 
     # IFNDEF FishingRodAbortSound.gd

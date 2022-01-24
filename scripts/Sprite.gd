@@ -67,3 +67,4 @@ func updateBaseFrame(hframe, vframe):
     start_frame = (self.hframes * vframe) + hframe
     base_frame = start_frame
     set_frame(start_frame)
+    restart()

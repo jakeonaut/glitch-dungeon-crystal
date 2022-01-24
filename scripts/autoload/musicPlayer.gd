@@ -26,13 +26,13 @@ func stopAll():
 func conductFromScenePath(path):
     #pass # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0:
+    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0:
         self.playGoddess()
     elif path.find("IntroDungeon") > 0:
         self.playDungeon()
     elif path.find("Debug") > 0:
         self.playDebug()
-    elif path.find("Casino") > 0:
+    elif path.find("Casino") > 0 or path.find("BroomChallenge") > 0:
         self.playCasino()
     elif path.find("Suburb") > 0:
         self.playSuburb()

@@ -104,6 +104,7 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
 starting_glitch_type = 2
+has_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 16 )]
 

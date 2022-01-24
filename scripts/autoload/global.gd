@@ -17,6 +17,7 @@ var dark_white_palette = preload("res://assets/palettes/dark_white_palette.png")
 
 var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
 var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
+var black_palette_town = preload("res://assets/palettes/black_palette_town.png")
 
 onready var doorSound = get_node("DoorSound")
 

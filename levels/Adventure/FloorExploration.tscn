@@ -298,7 +298,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 7, 0 )
 grav = 0
 bbText = "evil sprites will
 summon glitches to
-attack outsiders .. v
+attack outsiders ..
 but they need to
 catch their breath
 afterward..."

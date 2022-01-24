@@ -14,13 +14,6 @@ var is_in_broom_cooldown = false
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
-var grey_palette = preload("res://assets/palettes/grey_palette.png")
-var red_palette = preload("res://assets/palettes/red_palette.png")
-var green_palette = preload("res://assets/palettes/green_palette.png")
-var black_palette = preload("res://assets/palettes/black_palette.png")
-var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
-var white_palette = preload("res://assets/palettes/white_palette.png")
-
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
@@ -86,37 +79,37 @@ func changeSpriteColorPalette(palette):
 func normalGlitch():
     glitch_form = global.GlitchForm.NORMAL
     level.normalGlitch()
-    changeSpriteColorPalette(grey_palette)
+    changeSpriteColorPalette(getLevelTiles().grey_palette)
     # mySprite.setNormalClothes()
 
 func floorGlitch():
     glitch_form = global.GlitchForm.FLOOR
     level.floorGlitch()
-    changeSpriteColorPalette(red_palette)
+    changeSpriteColorPalette(getLevelTiles().red_palette)
     # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
     glitch_form = global.GlitchForm.FEATHER
     level.featherGlitch()
-    changeSpriteColorPalette(green_palette)
+    changeSpriteColorPalette(getLevelTiles().green_palette)
     # mySprite.setMothCostume()
 
 func ladderGlitch():
     glitch_form = global.GlitchForm.LADDER
     level.ladderGlitch()
-    changeSpriteColorPalette(yellow_palette)
+    changeSpriteColorPalette(getLevelTiles().yellow_palette)
     # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
     glitch_form = global.GlitchForm.INVISIBLE
     level.invisibleGlitch()
-    changeSpriteColorPalette(black_palette)
+    changeSpriteColorPalette(getLevelTiles().black_palette)
     # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
     glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
     level.walkThroughWallsGlitch()
-    changeSpriteColorPalette(white_palette)
+    changeSpriteColorPalette(getLevelTiles().white_palette)
     # mySprite.setNightgown()
 
 func wearCostume(costume):
@@ -287,6 +280,9 @@ func hideInteractPrompt():
     importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
+    if global.pauseGame or global.pauseMoveInput:
+        return
+
     if not pauseSelf and is_in_broom_cooldown:
         broom_cooldown_timer += (delta*22)
         if broom_cooldown_timer >= broom_cooldown_time_limit:
@@ -294,6 +290,10 @@ func processBroomLogic(delta):
             is_in_broom_cooldown = false
 
     if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
+        if on_ground:
+            aniPlayer.stop()
+            aniPlayer.clear_queue()
+            aniPlayer.play("land")
         is_in_broom_cooldown = true
         broom_cooldown_timer = 0
         if on_ground:
@@ -321,6 +321,8 @@ func landed():
 func broomStop():
     pauseSelf = false
     was_just_on_ground_timer = -8
+    if linear_velocity.y < 0:
+        linear_velocity.y = 0
 
 func faceDown():
     pass # mySprite.faceDown()

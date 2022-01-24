@@ -5,7 +5,8 @@ enum AttackState {
     NOTICED_PLAYER,
     WIND_UP,
     CAST_GLITCH,
-    COOLDOWN
+    COOLDOWN,
+    IM_ACTUALLY_GOOD_NOW
 }
 var attackState = AttackState.IDLE
 var attackStateTimer = 0
@@ -157,3 +158,11 @@ func _process(delta):
         if attackStateTimer >= attackStateRecoveryTimeLimit:
             resetStateToIdle()
 
+func ouchies():
+    resetStateToIdle()
+    attackState = AttackState.IM_ACTUALLY_GOOD_NOW
+    self.textBox.text_final = "actually, i'm good now!"
+    self.textBox.hideTextbox()
+    self.textBox.has_been_shown = false
+    mySprite.updateBaseFrame(6, 1)
+    print(mySprite.start_frame)

@@ -46,7 +46,7 @@ height = 1.7
 script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.039, 0.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.039, 1.8 )
 material_override = SubResource( 41 )
 flip_h = true
 pixel_size = 0.12
@@ -78,7 +78,7 @@ max_frames = 4
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -38.0
+volume_db = -34.0
 
 [node name="Area" type="Area" parent="."]
 

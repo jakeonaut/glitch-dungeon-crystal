@@ -23,7 +23,7 @@ main_scene="res://MainMenu.tscn"
 
 [autoload]
 
-global="*res://scripts/autoload/global.gd"
+global="*res://sceneObjects/_autoload/global.tscn"
 transition="*res://sceneObjects/_autoload/transition.tscn"
 musicPlayer="*res://sceneObjects/_autoload/musicPlayer.tscn"
 

@@ -923,6 +923,8 @@ func landed():
         aniPlayer.clear_queue()
         if fall_timer > 30 and not glitch_form == global.GlitchForm.FEATHER:
             quiet_the_fall_sound = false
+            aniPlayer.stop()
+            aniPlayer.clear_queue()
             aniPlayer.play("fallFlat", -1, 1.0)
             physics_state = PhysicsState.COLLAPSED
             if bumpSound: bumpSound.play()
@@ -931,6 +933,8 @@ func landed():
             # if horizontal_collision:
             #     aniPlayer.play("landBump", -1, 1.0 if isFeatherLike() else 1.5)
             # else:
+            aniPlayer.stop()
+            aniPlayer.clear_queue()
             aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
     fall_timer = 0
     if fallSound and quiet_the_fall_sound:

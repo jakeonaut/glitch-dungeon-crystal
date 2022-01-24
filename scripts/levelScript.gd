@@ -22,6 +22,7 @@ func _ready():
     _ready_impl()
 
 func _ready_impl():
+    global.activeInteractor = null # somewhat of a failsafe
     set_process_input(true)
     set_process(true)
     
@@ -143,40 +144,40 @@ func normalGlitch():
     levelTiles.normalGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.normalGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.grey_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.grey_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.grey_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.grey_palette)
 
 func floorGlitch():
     levelTiles.floorGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.floorGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.red_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.red_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.red_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.red_palette)
 
 func featherGlitch():
     levelTiles.featherGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.featherGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.green_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.green_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.green_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.green_palette)
 
 func ladderGlitch():
     levelTiles.ladderGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.ladderGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.yellow_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.yellow_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.yellow_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.yellow_palette)
 
 func invisibleGlitch():
     levelTiles.invisibleGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.invisibleGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.black_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.black_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.black_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.black_palette)
 
 func walkThroughWallsGlitch():
     levelTiles.walkThroughWallsGlitch()
     if fakeLevelTiles:
         fakeLevelTiles.walkThroughWallsGlitch()
-    get_tree().call_group("sprite","changeSpriteColorPalette", global.white_palette)
-    get_tree().call_group("glitchSprite","changeSpriteColorPalette", global.white_palette)
+    get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.white_palette)
+    get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette)

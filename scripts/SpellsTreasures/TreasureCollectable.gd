@@ -24,6 +24,9 @@ func _process(delta):
                     aniPlayer.play("getItem")
                     aniPlayer = null # very weird but it's to stop the GameMover from trying to play other animations...?
                     textBox.focus_me = true
+                    # if there is an existing textBox already... hide it... fail safe:
+                    if global.activeInteractor != null:
+                        global.activeInteractor.hideTextbox()
                     global.activeInteractor = textBox # also weird but this is to get the camera to look at me
             if level.player.aniPlayer.assigned_animation == "getItem":
                 if level.player.aniPlayer.is_playing():
