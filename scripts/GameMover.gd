@@ -132,9 +132,9 @@ func _physics_process(delta):
 
     processPhysics(delta) #super
 
-    # if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
-    #     respawn()
-    #     is_falling = true
+    if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
+        respawn()
+        is_falling = true
        
 func isActive():
     return visible

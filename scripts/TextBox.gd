@@ -194,8 +194,9 @@ func showTextbox():
         
 func hideTextbox():
     self.hide()
-    abortSound.play()
-    abortSound.activateScript()
+    if isWaitingForEndPrompt():
+        abortSound.play()
+        abortSound.activateScript()
     if global.activeInteractor == self:
         global.activeInteractor = null
             
@@ -240,6 +241,7 @@ func stopInteract():
 func adjustTinyColorRect():
     var lines = textNode.bbcode_text.split("\n", true)
     var max_width = 0
+    var last_line_width = 0
     var total_height = 0
     var font = textNode.get_font("normal_font")
     for line in lines:
@@ -248,14 +250,14 @@ func adjustTinyColorRect():
         total_height += height
         if width > max_width:
             max_width = width
+        last_line_width = width
     tinyColorRect.margin_right = max_width
     adjusted_tiny_x_pos = max_width / 2
     tinyColorRect.margin_bottom = total_height
     adjusted_tiny_y_pos = total_height
     tinyColorRect.margin_right += 12
 
-    print("MAX HEIGHT AND WIDTH: " + str(max_width) + ", " + str(total_height))
-    nextPrompt.position = Vector2(max_width + 200, total_height)
+    nextPrompt.position = Vector2(last_line_width + 200, total_height)
     endPrompt.position = nextPrompt.position
 
 func resetTinyColorRect():

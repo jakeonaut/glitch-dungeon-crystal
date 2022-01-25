@@ -158,7 +158,7 @@ func _process(delta):
         if attackStateTimer >= attackStateRecoveryTimeLimit:
             resetStateToIdle()
 
-func ouchies():
+func ouchies(_broom_origin):
     resetStateToIdle()
     attackState = AttackState.IM_ACTUALLY_GOOD_NOW
     self.textBox.text_final = "actually, i'm good now!"

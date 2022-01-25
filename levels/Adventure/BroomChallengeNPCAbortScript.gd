@@ -11,7 +11,8 @@ func _ready():
 
 func activateScript():
     # IFNDEF BroomChallengeLevelScript.gd
-    if can_complete_challenge:
+    if can_complete_challenge: # this means the player made it to me again after talking to me from the doorway
+        global.memory["broomChallenge"] = true
         npc.textBox.text_final = "here's SCARF to keep you warm.\n but if you get hit by a glitch\nit will fall off until you respawn..\nstay cozy!"
     else:
         npc.get_node("SmallInteractionArea/CollisionShape").transform.origin = Vector3(0, 0, 0)

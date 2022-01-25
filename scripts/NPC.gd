@@ -78,13 +78,14 @@ func justStopPassiveActivate():
     if global.activeInteractor == null:
         level.player.hideInteractPrompt()
 
-func _physics_process(delta):
-    #._physics_process(delta) # NOTE: This super method is called automatically
-    # https://github.com/godotengine/godot/issues/6500
-
-    if global.pauseGame: return
-
-    .processPhysics(delta)
+# @override
+func processPhysics(delta):
+    if grav == 0 and not just_pressed_jump and not pressing_jump:
+        return
+    else:
+        # call GameMover.gd super method
+        .processPhysics(delta)
+    
 
 func justPressedJump():
     return just_pressed_jump

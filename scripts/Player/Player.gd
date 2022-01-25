@@ -145,7 +145,8 @@ func _process(delta):
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-            self.respawn()
+            global.memory["hearts"] = 0
+            tryDieToEnemy(true)
 
     #tryRotateCamera(delta)
     
@@ -280,7 +281,7 @@ func hideInteractPrompt():
     importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
-    if global.pauseGame or global.pauseMoveInput:
+    if global.pauseGame or global.pauseMoveInput or physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
         return
 
     if not pauseSelf and is_in_broom_cooldown:
@@ -323,6 +324,8 @@ func broomStop():
     was_just_on_ground_timer = -8
     if linear_velocity.y < 0:
         linear_velocity.y = 0
+    if jump_press_timer < jump_press_broom_time_limit:
+        jump_press_timer = 0
 
 func faceDown():
     pass # mySprite.faceDown()

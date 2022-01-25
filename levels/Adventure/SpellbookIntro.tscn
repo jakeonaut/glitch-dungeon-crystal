@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=26]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=27]
 [ext_resource path="res://assets/minilandmarks.png" type="Texture" id=28]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
@@ -238,7 +239,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9, 36, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 8, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -1, 0 )
@@ -328,7 +329,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5363, 13.3327, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5363, 1.3327, 0 )
 
 [node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88134, 3.3507, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88134, 3.44248, 0 )
 
 [node name="InvisibleSpell2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88134, 8.3507, 0 )
@@ -340,13 +341,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5363, 30.3327, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7, 0 )
 
 [node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5.43552, 0 )
 
 [node name="NullificationArea9" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 3, 0 )
 
 [node name="NullificationArea10" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 2.56652, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2.56652, 0 )
 
 [node name="NullificationArea3" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 21, 0 )
@@ -393,6 +394,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 22, -1 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 31, 0 )
 
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6308, 3, 0 )
+
 [node name="Gravestone" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28018, -0.516903, 0 )
 material_override = SubResource( 23 )
@@ -434,7 +438,7 @@ script = ExtResource( 27 )
 max_frames = 1
 
 [node name="Gravestone6" type="Sprite3D" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7198, 2.4831, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5086, 2.4831, 0 )
 material_override = SubResource( 23 )
 pixel_size = 0.12
 texture = ExtResource( 28 )
@@ -462,6 +466,12 @@ hframes = 4
 vframes = 4
 script = ExtResource( 27 )
 max_frames = 1
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 10, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 19, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

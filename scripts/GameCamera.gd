@@ -64,6 +64,10 @@ func _process(delta):
     var speed_multiplier = 1
     if how_fast_to_switch_targets > 0:
         speed_multiplier = how_fast_to_switch_targets
+        how_fast_to_switch_targets = how_fast_to_switch_targets + (1 - how_fast_to_switch_targets) * (delta * 0.1)
+        if stepify(how_fast_to_switch_targets, 0.1) == 1.0:
+            how_fast_to_switch_targets = 0
+        
         
     if distance > 19.8:
         set_interpolation_enabled(true)
@@ -80,10 +84,10 @@ func _process(delta):
     elif distance > 19.4:
         set_interpolation_enabled(true)
         set_speed(2 * speed_multiplier)
+        if actual_target == initial_target: how_fast_to_switch_targets = 0
     elif distance < 19.33 and global.activeInteractor == null:
         set_interpolation_enabled(false)
-        if actual_target == initial_target:
-            how_fast_to_switch_targets = 0
+        if actual_target == initial_target: how_fast_to_switch_targets = 0
 
     if global.activeInteractor != null and global.activeInteractor.focus_me and initial_size > 12:
         actual_target = global.activeInteractor.get_node("../..")

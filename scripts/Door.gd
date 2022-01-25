@@ -16,6 +16,7 @@ onready var lockedSound = get_node("LockedSound")
 onready var landing = get_node("landing")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hasPlayedDoorSound = false
+var is_on_main_menu = false
 
 var player = null
 func getPlayer():
@@ -52,7 +53,7 @@ func generateId():
 
 func activate():
     if not is_passive:
-        if not is_locked:
+        if not is_locked and not should_lock and global.activeInteractor == null:
             goThroughDoor()
         else:
             if not lockedSound.is_playing():

@@ -32,6 +32,7 @@ func preProcess():
     pass
 
 func _process(delta):
+    pass
     preProcess()
     if visible:
         animate(delta)
