@@ -112,13 +112,3 @@ func handleSpikeCollisions():
             ):
                 tryDieToEnemy(true)
                 return
-
-# @override
-func landed():
-    if is_falling:
-        transition.interrupt()
-        is_falling = false
-        fallSound.stop()
-        transitioning = false
-        global.isRespawning = false
-    .landed() #super

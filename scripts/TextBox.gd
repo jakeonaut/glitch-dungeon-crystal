@@ -107,6 +107,8 @@ func _process(delta):
         tryToHide(delta)
             
         if isWaitingForEndPrompt():
+            if not endPrompt.visible and abortSound.has_method("preActivateScript"):
+                abortSound.preActivateScript()
             endPrompt.visible = true
             has_been_shown = true
             if is_important or is_really_important:

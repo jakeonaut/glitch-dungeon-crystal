@@ -133,7 +133,6 @@ func _physics_process(delta):
     processPhysics(delta) #super
 
     if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
-        respawn()
         is_falling = true
        
 func isActive():
@@ -144,14 +143,6 @@ func tryDieToEnemy(_should_glitch):
     
 func getHitByBroom():
     pass
-
-func respawn():
-    hv = Vector3(0, 0, 0)
-    linear_velocity = Vector3(0, 0, 0)
-
-    global_transform.origin = spawn_origin
-    global_transform.origin.y += 2
-    last_grounded_y = global_transform.origin.y 
 
 func processPhysics(delta):
     if grav == null: grav = 0 # ???
@@ -936,9 +927,9 @@ func landed():
             aniPlayer.stop()
             aniPlayer.clear_queue()
             aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
-    fall_timer = 0
     if fallSound and quiet_the_fall_sound:
         fallSound.stop()
+    fall_timer = 0
 
 func isWalkingIntoWall():
     return abs(linear_velocity.x) < 0.5 \
