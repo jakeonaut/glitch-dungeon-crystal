@@ -13,10 +13,12 @@ func _ready_impl():
         global.pauseMoveInput = true
         should_do_cutscene = true
         player.applyGlitch(global.GlitchForm.NORMAL)
+        player.true_terminal_vel = 5
 
 func _process(delta):
     if should_do_cutscene:
         if player.physics_state != player.PhysicsState.NORMAL:
+            player.true_terminal_vel = 32
             cutscene_timer += (delta*22)
             if cutscene_timer > 40 and cutscene_timer < 45 and not get_node("NPC3/AnimationPlayer").is_playing():
                 get_node("NPC3/AnimationPlayer").play("flickerOn")

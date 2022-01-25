@@ -1,6 +1,7 @@
 extends Node
 
 onready var titleThemePlayer = get_node("TitleThemePlayer")
+onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
 onready var debugThemePlayer = get_node("DebugThemePlayer")
 onready var casinoThemePlayer = get_node("CasinoThemePlayer")
@@ -10,6 +11,13 @@ onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 
 var currentlyPlayingTheme = null
+
+func _ready():
+    set_process(true)
+
+func _process(delta):
+    if currentlyPlayingTheme == wakeupPlayer and not wakeupPlayer.is_playing():
+        self.playDungeon()
 
 func stopAll():
     changeSongPitch(1.0)
@@ -28,6 +36,8 @@ func conductFromScenePath(path):
     changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0:
         self.playGoddess()
+    elif path.find("IntroScene0") > 0:
+        self.playWakeup()
     elif path.find("IntroDungeon") > 0:
         self.playDungeon()
     elif path.find("Debug") > 0:
@@ -54,6 +64,12 @@ func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch
+        
+func playWakeup():
+    if wakeupPlayer.is_playing(): return
+    self.stopAll()
+    wakeupPlayer.play()
+    currentlyPlayingTheme = wakeupPlayer
 
 func playDungeon():
     if dungeonThemePlayer.is_playing(): return

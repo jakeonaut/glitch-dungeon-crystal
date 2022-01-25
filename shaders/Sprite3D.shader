@@ -74,6 +74,6 @@ void fragment() {
 		color.r = mix(color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
 		color.b = mix(color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
 		ALBEDO.rgb = color.rgb;
-		ALPHA = alp.a;
+		ALPHA = alp.a * opacity;
 	}
 }

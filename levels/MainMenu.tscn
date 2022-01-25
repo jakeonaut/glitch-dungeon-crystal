@@ -589,6 +589,7 @@ target_origin = Vector3( 0, -100, 0 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 17 )]
 size = 25.0
+target = NodePath("../NPC")
 speed = 10.0
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 19 )]
@@ -629,7 +630,7 @@ __meta__ = {
 }
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
 grav = 0
 bbText = "hey....
 press ENTER!!!"
