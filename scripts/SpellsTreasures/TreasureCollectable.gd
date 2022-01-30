@@ -9,6 +9,8 @@ func _ready():
     set_process(true)
     set_physics_process(true)
     is_active = true
+    is_important = true
+    is_really_important = true
     # ._ready() implicit
     
 func _process(delta):
@@ -39,6 +41,8 @@ func _process(delta):
                     self.global_transform.origin.z = level.player.global_transform.origin.z + 1
                 else:
                     gotcha = true
+                    textBox.is_really_important = true
+                    textBox.is_important = true
                     .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
 
 # @override

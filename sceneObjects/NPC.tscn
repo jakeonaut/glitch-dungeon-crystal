@@ -75,7 +75,7 @@ shape = SubResource( 1 )
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea" groups=["player_activation_area"]]
 shape = SubResource( 2 )
 
 [node name="SmallInteractionArea" type="Area" parent="."]

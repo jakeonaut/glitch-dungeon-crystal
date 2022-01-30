@@ -12,4 +12,5 @@ func _ready():
         flip_v = true
 
 func _process(delta):
+    if global.pauseGame: return
     global_transform.origin.y = global_transform.origin.y + (target_y - global_transform.origin.y) * (delta*2)

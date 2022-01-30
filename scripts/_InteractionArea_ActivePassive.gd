@@ -20,6 +20,11 @@ func PassiveInteractActivate(delta):
         parent.passiveActivate(delta)
     touchingPlayer = true
 
+func playerActivationAreaPassiveActivate():
+    if parent.has_method("playerActivationAreaPassiveActivate"):
+        parent.playerActivationAreaPassiveActivate()
+    touchingPlayer = true
+
 func _process(delta):
     if not touchingPlayer and wasTouchingPlayer:
         if parent.has_method("justStopPassiveActivate"):

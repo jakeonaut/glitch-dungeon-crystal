@@ -163,6 +163,7 @@ bbText = "there are many
 secrets in this 
 world.."
 is_important = true
+is_really_important = true
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8291, 4.43228, 0 )

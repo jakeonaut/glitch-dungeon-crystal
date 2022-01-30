@@ -43,7 +43,7 @@ radius = 0.8
 height = 1.8
 
 [sub_resource type="BoxShape" id=7]
-extents = Vector3( 10, 10, 1 )
+extents = Vector3( 30, 20, 30 )
 
 [node name="FlyingGlitchEnemy" type="KinematicBody"]
 collision_layer = 4

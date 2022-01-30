@@ -46,6 +46,11 @@ func _process(delta):
         aniPlayer.clear_queue()
         aniPlayer.queue("fishingSitDown")
 
+func _physics_process(delta):
+    if not global.pauseGame and pauseSelf:
+        # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
+        pass
+
 # @override
 func justPressedDown():
     return Input.is_action_just_pressed("ui_down")

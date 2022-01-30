@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/sprites/geodeBase.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/geodeFace.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/CrystalGeode.gd" type="Script" id=4]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/npcs/geodeportrait.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -150,16 +151,26 @@ anims/idle = SubResource( 2 )
 [node name="NPC" parent="." instance=ExtResource( 5 )]
 grav = 0
 bbText = "you feel an ominous
-presence in your core.
+presence deep in your core.
 .........
-before you stands a
-crystal geode.. an elder
-NPC is frozen inside..."
+before you stands a crystal
+geode.. an elder witch is
+frozen inside...
+do you wish to free her?
+[] YES
+[] NO"
 portrait = ExtResource( 6 )
 is_important = true
 
 [node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 3 )
+
+[node name="NextDialogSound" parent="NPC/NPC TextBox/TextBox" index="9"]
+pitch_scale = 0.5
+
+[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="10"]
+stream = ExtResource( 7 )
+pitch_scale = 0.75
 
 [node name="Sprite3D" parent="NPC" index="4"]
 texture = null

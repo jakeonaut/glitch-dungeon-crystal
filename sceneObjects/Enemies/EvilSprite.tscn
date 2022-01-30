@@ -105,6 +105,7 @@ collision_layer = 2
 script = ExtResource( 3 )
 grav = 0
 bbText = "die!!!!!!!!!!!"
+is_active = false
 tiny_textbox = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

@@ -18,9 +18,14 @@ var white_palette = global.white_palette
 
 onready var cosmeticLevelTiles = get_node("CosmeticLevelTiles") if has_node("CosmeticLevelTiles") else null
 onready var backgroundLevelTiles = get_node("BackgroundLevelTiles") if has_node("BackgroundLevelTiles") else null
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var tile_index_array = []
 var tile_name_array = []
+var infected_spikes = []
+var spike_infection_timer = 0
+var spike_infection_time_limit = 5
+var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 func setRandomTileNameOfType(newName, num_rand, cell_index, offset = 0):
     var rand_int = randi() % num_rand
@@ -97,6 +102,8 @@ func buildRandomTiles():
             else:
                 setRandomTileNameOfType("Spikes", 2, cell_index, 1)
         
+        # maybe make it into a dictionary so that infected spikes removed can be remembered easier
+        # and other "tile pushing/creating" if that happens
         tile_index_array.push_back(cell_index)
         tile_name_array.push_back(mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z)))
 
@@ -107,8 +114,66 @@ func _process(delta):
     if randomize_timer >= randomize_time_limit and tile_index_array.size() > 0:
         randomize_timer = 0
         randomizeTile(tile_index_array[randi() % tile_index_array.size()])
-
     # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
+
+    if global.pauseGame: return
+
+    if len(infected_spikes) > 0:
+        spike_infection_timer += (delta*22)
+        if spike_infection_timer >= spike_infection_time_limit: 
+            spike_infection_timer = 0
+            for i in range(len(infected_spikes)):
+                var coords = infected_spikes.pop_front()
+                var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
+                var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)
+                var left_neighbor_coords = Vector3(coords.x - 1, coords.y, coords.z)
+                var right_neighbor_coords = Vector3(coords.x + 1, coords.y, coords.z)
+                infectSpikes(top_neighbor_coords)
+                infectSpikes(bottom_neighbor_coords)
+                infectSpikes(left_neighbor_coords)
+                infectSpikes(right_neighbor_coords)
+                var top_left_neighbor_coords = Vector3(coords.x - 1, coords.y + 1, coords.z)
+                var bottom_right_neighbor_coords = Vector3(coords.x + 1, coords.y - 1, coords.z)
+                var bottom_left_neighbor_coords = Vector3(coords.x - 1, coords.y - 1, coords.z)
+                var top_right_neighbor_coords = Vector3(coords.x + 1, coords.y + 1, coords.z)
+                infectSpikes(top_left_neighbor_coords)
+                infectSpikes(bottom_right_neighbor_coords)
+                infectSpikes(bottom_left_neighbor_coords)
+                infectSpikes(top_right_neighbor_coords)
+
+func isTileSpikes(tile_type):
+    if tile_type == GridMap.INVALID_CELL_ITEM:
+        return false
+    var tileCollisionShape = self.mesh_library.get_item_shapes(tile_type)[0]
+    return tileCollisionShape is RayShape
+
+func infectSpikes(coords):
+    var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+    if isTileSpikes(tile_type):
+        infected_spikes.append(coords)
+        self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+        summonSmokeClouds(coords, 2)
+    spike_infection_timer = 0
+
+func summonSmokeClouds(coords, num_clouds):
+    var play_sound = true
+    for _i in range(num_clouds):
+        var newSmokeCloud = smokeCloudRes.instance()
+        level.add_child(newSmokeCloud)
+        var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+        newSmokeCloud.global_transform.origin.x = tile_pos.x + rand_range(-1, 1)
+        newSmokeCloud.global_transform.origin.y = tile_pos.y + rand_range(-1, 1)
+        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        
+        if play_sound:
+            newSmokeCloud.get_node("CleanGlitchSound").play()
+            newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+            play_sound = false
+        
+        var new_material = newSmokeCloud.get_material_override().duplicate()
+        new_material.set_shader_param("enable_glitch", "true")
+        new_material.set_shader_param("target_palette", global.weird_base_palette)
+        newSmokeCloud.set_material_override(new_material.duplicate())
 
 func randomizeTile(cell_index):
     var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)

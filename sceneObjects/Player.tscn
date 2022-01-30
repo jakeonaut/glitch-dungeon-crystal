@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -81,6 +81,23 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 18, 19 ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "broomSweep"
+length = 0.5
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 48, 49 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -172,10 +189,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 6, 14 ]
+"values": [ 6, 14, 7, 6, 7 ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -608,9 +625,9 @@ frame_delay = 0.6
 max_frames = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )
 material_override = SubResource( 4 )
-pixel_size = 0.12
+pixel_size = 0.125
 transparent = false
 double_sided = false
 alpha_cut = 2
@@ -694,6 +711,7 @@ volume_db = -15.0
 autoplay = "stand"
 anims/RESET = SubResource( 29 )
 anims/angry = SubResource( 8 )
+anims/broomSweep = SubResource( 41 )
 anims/collapse = SubResource( 9 )
 anims/faceLeft = SubResource( 10 )
 anims/faceRight = SubResource( 11 )

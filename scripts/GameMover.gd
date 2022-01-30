@@ -47,6 +47,7 @@ var spawn_origin
 var last_grounded_y = 0
 var falling_y_offset = 16
 var fall_timer = 0
+var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
 
 enum PhysicsState {
     NORMAL,
@@ -134,6 +135,13 @@ func _physics_process(delta):
 
     if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
         is_falling = true
+
+    alignMySprite()
+
+func alignMySprite():
+    var pixelSize = 0.125
+    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.25
        
 func isActive():
     return visible
@@ -363,6 +371,8 @@ func processJumpInputs(delta):
             jump_squat_jump_input_timer = 0
             feather_jump_timer = 0
             weak_feather_dbl_jump = false
+            if on_ground:
+                addJumpSmokeCloud()
             if not aniPlayer:
                 jump_squat_jump_input_timer = 1
                 actuallyApplyJump()
@@ -405,6 +415,18 @@ func processJumpInputs(delta):
         weak_feather_dbl_jump = true
         if glitch_form != global.GlitchForm.FEATHER:
             feather_jump_timer = 200
+
+func addJumpSmokeCloud(flip_flip_h = false):
+    var newSmokeCloud = jumpSmokeCloudRes.instance()
+    level.add_child(newSmokeCloud)
+    newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
+    newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y - 0.24
+    newSmokeCloud.global_transform.origin.z = mySprite.global_transform.origin.z + 0.24
+    if flip_flip_h:
+        newSmokeCloud.flip_h = not mySprite.flip_h
+    else:
+        newSmokeCloud.flip_h = mySprite.flip_h
+    newSmokeCloud.get_material_override().set_shader_param("target_palette", level.current_sprite_palette)
 
 func actuallyApplyJump(play_sound = true):
     if isFeatherLike():
@@ -510,6 +532,7 @@ func processHorizontalInputs(delta):
                             aniPlayer.clear_queue()
                             aniPlayer.queue("turnAround")
                             aniPlayer.queue("walkStart")
+                            addJumpSmokeCloud(true)
                     elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
                         dir += right*(delta*DNUMHORZ)
                         mySprite.flip_h = true
@@ -528,6 +551,7 @@ func processHorizontalInputs(delta):
                             aniPlayer.clear_queue()
                             aniPlayer.play("turnAround")
                             aniPlayer.queue("walkStart")
+                            addJumpSmokeCloud(true)
                     elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
                         dir -= right*(delta*DNUMHORZ)
                         mySprite.flip_h = false
@@ -617,6 +641,7 @@ func doWalkAnimation():
         if aa == "stand" or aa == "turnAround" or aa == "walkStop" or aa == "walkBump":
             if not horizontal_collision:
                 aniPlayer.queue("walkStart")
+                addJumpSmokeCloud()
         aniPlayer.queue("walk")
         
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
@@ -910,6 +935,7 @@ func landed():
     var quiet_the_fall_sound = true
     last_grounded_y = global_transform.origin.y 
     if landSound: landSound.play()
+    addJumpSmokeCloud()
     if aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
         aniPlayer.clear_queue()
         if fall_timer > 30 and not glitch_form == global.GlitchForm.FEATHER:

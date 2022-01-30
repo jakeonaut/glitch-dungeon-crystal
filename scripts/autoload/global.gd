@@ -57,6 +57,7 @@ var can_broom = true
 
 var canGlitchScreen = true
 var canChangeSongPitch = true
+var crtScreenEffects = true
 
 
 func _ready():
@@ -74,6 +75,7 @@ func _ready():
     if can_broom: pass
     if canGlitchScreen: pass
     if canChangeSongPitch: pass
+    if crtScreenEffects: pass
 
     memory["total_hearts"] = 1
     memory["hearts"] = 1

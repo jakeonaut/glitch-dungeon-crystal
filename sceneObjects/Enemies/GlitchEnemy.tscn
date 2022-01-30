@@ -19,7 +19,7 @@ radius = 0.8
 height = 1.8
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 10, 10, 1 )
+extents = Vector3( 30, 20, 30 )
 
 [node name="GlitchEnemy" type="KinematicBody"]
 collision_layer = 4
@@ -71,7 +71,7 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="PlayerActivationArea" type="Area" parent="." groups=["player_activation_area"]]
+[node name="PlayerActivationArea" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
 shape = SubResource( 4 )

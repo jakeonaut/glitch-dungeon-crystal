@@ -85,6 +85,7 @@ func goThroughDoor(start_of_game = false):
 
     global.isRespawning = true
     if is_passive:
+        global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
         if is_vertical:
             global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
         else:
@@ -105,6 +106,9 @@ func land():
     getPlayer().global_transform.origin.y = landing.global_transform.origin.y
 
     if is_passive:
+        if global.memory.has("player_flip_h"):
+            getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
+            global.memory.erase("player_flip_h")
         if global.memory.has("player_y_offset"):
             getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
             global.memory.erase("player_y_offset")

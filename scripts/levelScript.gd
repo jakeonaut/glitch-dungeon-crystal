@@ -5,7 +5,9 @@ onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
+onready var crtScreenEffect = get_node("../../ScreenEffects/CrtEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
+var current_sprite_palette = global.grey_palette
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
@@ -64,9 +66,11 @@ func _ready_impl():
     global.activeThrowableObjectPath = null
 
 func _process(delta):
-    if Input.is_action_just_pressed("place_tile_button"):
+    if Input.is_action_just_pressed("ui_accept"):
         global.canChangeSongPitch = not global.canChangeSongPitch
         global.canGlitchScreen = not global.canGlitchScreen
+        global.crtScreenEffects = not global.crtScreenEffects
+        crtScreenEffect.visible = global.crtScreenEffects
     # if Input.is_action_just_pressed("place_tile_button"):
     #     var player_position = player.global_transform.origin + (player.facing * 2)
     #     var grid_cell = levelTiles.world_to_map(player_position)
@@ -146,6 +150,7 @@ func normalGlitch():
         fakeLevelTiles.normalGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.grey_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.grey_palette)
+    current_sprite_palette = levelTiles.grey_palette
 
 func floorGlitch():
     levelTiles.floorGlitch()
@@ -153,6 +158,7 @@ func floorGlitch():
         fakeLevelTiles.floorGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.red_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.red_palette)
+    current_sprite_palette = levelTiles.red_palette
 
 func featherGlitch():
     levelTiles.featherGlitch()
@@ -160,6 +166,7 @@ func featherGlitch():
         fakeLevelTiles.featherGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.green_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.green_palette)
+    current_sprite_palette = levelTiles.green_palette
 
 func ladderGlitch():
     levelTiles.ladderGlitch()
@@ -167,6 +174,7 @@ func ladderGlitch():
         fakeLevelTiles.ladderGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.yellow_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.yellow_palette)
+    current_sprite_palette = levelTiles.yellow_palette
 
 func invisibleGlitch():
     levelTiles.invisibleGlitch()
@@ -174,6 +182,7 @@ func invisibleGlitch():
         fakeLevelTiles.invisibleGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.black_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.black_palette)
+    current_sprite_palette = levelTiles.black_palette
 
 func walkThroughWallsGlitch():
     levelTiles.walkThroughWallsGlitch()
@@ -181,3 +190,4 @@ func walkThroughWallsGlitch():
         fakeLevelTiles.walkThroughWallsGlitch()
     get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.white_palette)
     get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette)
+    current_sprite_palette = levelTiles.white_palette

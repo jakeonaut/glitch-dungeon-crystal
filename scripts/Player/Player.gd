@@ -291,10 +291,14 @@ func processBroomLogic(delta):
             is_in_broom_cooldown = false
 
     if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
+        aniPlayer.stop()
+        aniPlayer.clear_queue()
+        aniPlayer.play("broomSweep")
         if on_ground:
-            aniPlayer.stop()
-            aniPlayer.clear_queue()
-            aniPlayer.play("land")
+            aniPlayer.queue("stand")
+        else:
+            aniPlayer.queue("fall")
+
         is_in_broom_cooldown = true
         broom_cooldown_timer = 0
         if on_ground:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -11,22 +11,46 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sceneObjects/Dragonfly.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
+[ext_resource path="res://levels/Adventure/LadderIntroDialogStartScript.gd" type="Script" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=18]
+[ext_resource path="res://sceneObjects/WaterCube.tscn" type="PackedScene" id=18]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=23]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=24]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/bigmoth0000.png" type="Texture" id=26]
 
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
 extents = Vector3( 2, 8, 1 )
 
+[sub_resource type="BoxShape" id=17]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 19 )
+shader_param/albedo = null
+shader_param/opacity = 0.5
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/texture_albedo = ExtResource( 26 )
+shader_param/base_palette = ExtResource( 25 )
+shader_param/target_palette = ExtResource( 23 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -171,7 +195,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 11, 0 )
 grav = 0
 bbText = "this is wherei 
 come  to be a l 
-o ne with my thoughts"
+o ne with my thoughts
+that moth is so beautiful.."
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -12, 0 )
@@ -180,6 +205,12 @@ bbText = "god me and my
 pet REALLY love
 glitch baths"
 tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 17 )
+
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
+script = ExtResource( 12 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -15, 0 )
@@ -212,11 +243,22 @@ shape = SubResource( 16 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, 0 )
 
-[node name="EvilSprite" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
-
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, -13, -1 )
+
+[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 8, -1 )
+
+[node name="BigMoth" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, 0 )
+material_override = SubResource( 18 )
+pixel_size = 0.12
+texture = ExtResource( 26 )
+hframes = 2
+script = ExtResource( 24 )
+
+[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -4 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -230,4 +272,6 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
 [editable path="Viewport/level/Door"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Door2"]

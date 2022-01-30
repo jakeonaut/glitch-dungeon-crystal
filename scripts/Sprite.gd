@@ -32,7 +32,7 @@ func preProcess():
     pass
 
 func _process(delta):
-    pass
+    if global.pauseGame: return
     preProcess()
     if visible:
         animate(delta)

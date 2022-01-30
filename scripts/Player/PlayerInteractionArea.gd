@@ -1,6 +1,5 @@
 extends Area
 
-
 func _ready():
     set_process(true)
 
@@ -14,9 +13,10 @@ func _process(delta):
         if area.is_in_group("fallthrough"):
             doFallthroughObjectCollision(area)
             
-        if area.is_in_group("player_activation_area"):
-            if area.get_parent().has_method("playerActivationAreaPassiveActivate"):
-                area.get_parent().playerActivationAreaPassiveActivate()
+        if area.has_method("playerActivationAreaPassiveActivate"):
+            area.playerActivationAreaPassiveActivate()
+        elif area.get_parent().has_method("playerActivationAreaPassiveActivate"):
+            area.get_parent().playerActivationAreaPassiveActivate()
 
         if area.has_method("isActive") and area.isActive():
             var dist = area.global_transform.origin.distance_to(global_transform.origin)            

@@ -29,6 +29,8 @@ func _ready():
 
 
 func _process(delta):
+    if global.pauseGame: return
+
     cleanUpGlitches()
     broom_active_timer += (delta*22)
     if broom_active_timer >= broom_active_time_limit:
@@ -57,6 +59,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
         if play_sound:
             newSmokeCloud.get_node("CleanGlitchSound").play()
             newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+            play_sound = false
         if is_glitchy:
             var new_material = newSmokeCloud.get_material_override().duplicate()
             new_material.set_shader_param("enable_glitch", "true")
@@ -74,7 +77,7 @@ func cleanUpGlitches():
     for area in areas:
         if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             area.get_node("..").ouchies(global_transform.origin)
-            summonSmokeClouds(5, false, true)
+            summonSmokeClouds(5, true, true)
             # TODO kill glitches or "free" them like glitch slug...
             pass
 
@@ -90,12 +93,9 @@ func cleanUpGlitches():
     for i in range(int(floor(bb)), int(ceil(tb))):
         for j in range(int(floor(lb)), int(ceil(rb))):
             var coords = getLevelTiles().world_to_map(Vector3(j, i, collisionShape.global_transform.origin.z))
-            var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
             var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if isTileSpikes(tile_type):
-                getLevelTiles().set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
-                summonSmokeClouds(2, not has_played_sound, true)
-                has_played_sound = true
+                getLevelTiles().infectSpikes(coords)
                 # TODO(jaketrower): also reset the levelTiles array position?
     
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://sceneObjects/WaterCube.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -104,6 +104,37 @@ shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 12 )
 shader_param/target_palette = ExtResource( 15 )
+
+[sub_resource type="Animation" id=25]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -275,7 +306,7 @@ material_override = SubResource( 16 )
 
 [node name="EvilSprite" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, 0 )
-visible = false
+is_active = false
 behavior_summon_glitch = false
 
 [node name="CollisionShape" parent="Viewport/level/EvilSprite/SmallInteractionArea" index="0"]
@@ -288,8 +319,24 @@ shape = SubResource( 23 )
 [node name="GlitchSprite" parent="Viewport/level/EvilSprite" index="10"]
 material_override = SubResource( 24 )
 
-[node name="EvilSprite2" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 4, 0 )
+[node name="EvilSprite3" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 12, 0 )
+is_active = false
+behavior_summon_glitch = false
+
+[node name="CollisionShape" parent="Viewport/level/EvilSprite3/SmallInteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26237, -2.19201, 0 )
+shape = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/EvilSprite3/SmallerInteractionArea" index="0"]
+shape = SubResource( 23 )
+
+[node name="AnimationPlayer" parent="Viewport/level/EvilSprite3" index="6"]
+anims/default = SubResource( 25 )
+anims/flickerOn = SubResource( 26 )
+
+[node name="GlitchSprite" parent="Viewport/level/EvilSprite3" index="10"]
+material_override = SubResource( 24 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 13, 0 )
@@ -299,8 +346,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 7, 0 )
 grav = 0
 bbText = "evil sprites will
 summon glitches to
-attack outsiders ..
-but they need to
+attack outsiders .."
+tiny_textbox = true
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, 0 )
+grav = 0
+bbText = "but they need to
 catch their breath
 afterward..."
 tiny_textbox = true
@@ -324,3 +376,5 @@ __meta__ = {
 [editable path="Viewport/level/GlitchFish2"]
 [editable path="Viewport/level/EvilSprite"]
 [editable path="Viewport/level/EvilSprite/NPC TextBox"]
+[editable path="Viewport/level/EvilSprite3"]
+[editable path="Viewport/level/EvilSprite3/NPC TextBox"]
