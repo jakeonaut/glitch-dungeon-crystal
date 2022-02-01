@@ -110,6 +110,8 @@ func buildRandomTiles():
 var randomize_timer = 0
 var randomize_time_limit = 0.5
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     randomize_timer += delta
     if randomize_timer >= randomize_time_limit and tile_index_array.size() > 0:
         randomize_timer = 0

@@ -29,6 +29,8 @@ func _ready():
 
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if global.pauseGame: return
 
     cleanUpGlitches()

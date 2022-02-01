@@ -27,6 +27,9 @@ func _ready():
 
 func _process(delta):
     # ._process(delta) implicit
+    
+    delta = delta * global.time_dilation_multiplier
+    dieAniPlayer.playback_speed = global.time_dilation_multiplier
 
     if am_i_dying:
         return
@@ -100,7 +103,7 @@ func ouchies(broom_origin):
     mySprite.restart()
     mySprite.frame_delay = 0.1
     mySprite.max_frames = 4
-    mySprite.should_fizzle_out = true
+    mySprite.should_soft_fizzle_out = true
     var new_material = mySprite.get_material_override().duplicate()
     new_material.set_shader_param("texture_albedo", altGlitchEnemySheet)
     mySprite.set_material_override(new_material)

@@ -10,6 +10,8 @@ func _ready():
     set_process(true)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     is_touching_enemy = false
     is_touching_water = false
     var areas = get_overlapping_areas()

@@ -17,6 +17,8 @@ func _ready():
 
 func _process(delta):
     # ._process(delta) implicit
+    
+    delta = delta * global.time_dilation_multiplier
 
     if not can_flip_flop:
         can_flip_flop_timer += (delta*22)

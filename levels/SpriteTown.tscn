@@ -417,7 +417,7 @@ __meta__ = {
 }
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70402, 3.75549, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70402, 3.0256, 0 )
 grav = 0
 bbText = "oh! hello there!
 you're human too..
@@ -447,7 +447,6 @@ shape = SubResource( 4 )
 script = ExtResource( 15 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0692081, 0.192001, 0 )
 frame = 4
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
@@ -455,7 +454,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2, 0 )
 path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door" index="1"]
+[node name="landing" parent="Viewport/level/Door" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -466,10 +465,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -12, 0 )
 path = "res://levels/Adventure/FloorExploration.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door3" index="1"]
+[node name="landing" parent="Viewport/level/Door3" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
 anims/doorClose = SubResource( 13 )
 anims/doorOpen = SubResource( 14 )
 anims/locked = SubResource( 15 )
@@ -482,10 +481,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, -12, 0 )
 path = "res://levels/SwampSceneMinimal.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door4" index="1"]
+[node name="landing" parent="Viewport/level/Door4" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="3"]
 anims/doorClose = SubResource( 16 )
 anims/doorOpen = SubResource( 17 )
 anims/locked = SubResource( 18 )
@@ -501,10 +500,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door6" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.45, 0 )
 
-[node name="landing" parent="Viewport/level/Door6" index="1"]
+[node name="landing" parent="Viewport/level/Door6" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door6" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door6" index="3"]
 anims/doorClose = SubResource( 23 )
 anims/doorOpen = SubResource( 24 )
 anims/locked = SubResource( 25 )
@@ -518,10 +517,10 @@ path = "res://levels/Adventure/FeatherExploration.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door2" index="1"]
+[node name="landing" parent="Viewport/level/Door2" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="3"]
 anims/doorClose = SubResource( 10 )
 anims/doorOpen = SubResource( 11 )
 anims/locked = SubResource( 12 )
@@ -535,10 +534,10 @@ path = "res://levels/Adventure/InvisIntro.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door5" index="1"]
+[node name="landing" parent="Viewport/level/Door5" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="3"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -806,7 +805,7 @@ path = "res://levels/Adventure/LadderIntro.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door7" index="1"]
+[node name="landing" parent="Viewport/level/Door7" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/InteractionArea" index="0"]
@@ -863,9 +862,6 @@ __meta__ = {
 }
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 4 )]
-
-[node name="CrtEffectRect" parent="ScreenEffects" index="0"]
-visible = false
 
 [editable path="Viewport/level/UILayer"]
 [editable path="Viewport/level/NPC"]

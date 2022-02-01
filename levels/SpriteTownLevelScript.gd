@@ -20,8 +20,6 @@ func setUpRoomInitializationOverride():
         newDoor.global_transform.origin.y -= 1.75
         
         # i love when nodes have to know about other nodes intimates... gossip girls much
-        global.activeInteractor = null
-        self.gameCamera.actual_target = self.gameCamera.initial_target
         if "BroomChallenge" in global.memory["roomPath"]:
             newDoor.land()
         get_node("NPC").queue_free()

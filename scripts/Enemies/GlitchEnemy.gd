@@ -57,6 +57,8 @@ func _ready():
         mySprite.frame_delay = rand_range(0.3, 0.5)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if am_i_dying:
         processDeath()
         return
@@ -191,7 +193,7 @@ func ouchies(_broom_origin):
         mySprite.restart()
         mySprite.frame_delay = 0.1
         mySprite.max_frames = 4
-        mySprite.should_fizzle_out = true
+        mySprite.should_soft_fizzle_out = true
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
         dieSound.play()

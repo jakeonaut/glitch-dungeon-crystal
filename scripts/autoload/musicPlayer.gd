@@ -32,7 +32,7 @@ func stopAll():
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    #pass # i don't want to listen to music for a bit
+    return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0:
         self.playGoddess()

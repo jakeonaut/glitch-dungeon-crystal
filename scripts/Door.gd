@@ -13,9 +13,15 @@ export var is_vertical = false
 onready var doorCloseSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
 
-onready var landing = get_node("landing")
-onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hasPlayedDoorSound = false
+
+var spawn_timer = 0
+var spawn_time_limit = 5
+
+onready var mySprite = get_node("Sprite3D")
+onready var landing = get_node("landing")
+onready var sparkleSprite = get_node("SparkleSprite")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var is_on_main_menu = false
 
 var player = null
@@ -25,10 +31,11 @@ func getPlayer():
     return player
 
 func _ready():
+    set_process(true)
     landing.visible = false
 
     if is_passive:
-        visible = false
+        mySprite.visible = false
 
     id = self.generateId()
 
@@ -44,6 +51,82 @@ func _ready():
         animationPlayer.queue("locked")
     else: 
         animationPlayer.play("doorOpen")
+        
+func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    animationPlayer.playback_speed = global.time_dilation_multiplier
+    
+    if global.pauseGame: return
+
+    if is_passive:
+        spawnParticles(delta)
+
+func spawnParticles(delta):
+    spawn_timer += (delta*22)
+    if spawn_timer >= spawn_time_limit:
+        var x_y_min_max = calculateXYMinMax()
+        var x_min = x_y_min_max[0]
+        var x_max = x_y_min_max[1]
+        var y_min = x_y_min_max[2]
+        var y_max = x_y_min_max[3]
+        var target_x_add = x_y_min_max[4]
+        var target_y_add = x_y_min_max[5]
+
+        var children = self.get_children()
+        var num_children = 0
+        for i in children:
+            num_children += 1
+
+        if num_children < 20:
+            var newSprite = sparkleSprite.duplicate()
+            newSprite.should_fizzle_out = true
+            newSprite.visible = true
+            newSprite.transform.origin = Vector3(
+                stepify(rand_range(x_min, x_max), 0.12),
+                stepify(rand_range(y_min, y_max), 0.12),
+                0
+            )
+            newSprite.updateBaseFrame(0, 0)
+            newSprite.max_frames = 2
+            add_child(newSprite)
+            newSprite.target_x = newSprite.global_transform.origin.x + target_x_add
+            newSprite.target_y = newSprite.global_transform.origin.y + target_y_add
+            newSprite.fade_out_opacity = true
+            newSprite.curr_opacity = 0.4
+            newSprite.start_frame = randi() % 100
+            newSprite.restart()
+            newSprite.opacity_fade_rate = 6
+            spawn_timer = 0
+            
+func calculateXYMinMax():
+    var x_min = -1.0
+    var x_max = 1.0
+    var y_min = 0.5
+    var y_max = 2.5
+    var target_x_add = 0
+    var target_y_add = 0
+    if not is_vertical:
+        if landing.global_transform.origin.x < self.global_transform.origin.x:
+            x_min = -4
+            x_max = -3
+            target_x_add = rand_range(-3, -1.5)
+        else:
+            x_min = 3
+            x_max = 4
+            target_x_add = rand_range(1.5, 3)
+    else:
+        x_min = -1.0
+        x_max = 1.0
+        if landing.global_transform.origin.y < self.global_transform.origin.y:
+            y_min = -2
+            y_max = -0.5
+            target_y_add = rand_range(-3, -1.5)
+        else:
+            y_min = 2.5
+            y_max = 4.0
+            target_y_add = rand_range(1.5, 3)
+    # okay.... I wish godot allowed multiple return values like javascript
+    return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive():
     return true

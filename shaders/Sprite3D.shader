@@ -16,6 +16,7 @@ uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
 uniform int palettesize = 16;
 uniform bool enable_glitch = false;
 uniform bool enable_palette_cycle = false;
+uniform float palette_cycle_speed = 10.0;
 
 void vertex() {
     UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
@@ -49,7 +50,7 @@ void fragment() {
      
     float fdelta = float(index);
 	if (enable_palette_cycle) {
-		fdelta = fdelta - (TIME * 10.0);
+		fdelta = fdelta - (TIME * palette_cycle_speed);
 	}
     float mod2 = mod(fdelta,float(palettesize));
     int delta = int(mod2);

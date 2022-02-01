@@ -10,7 +10,10 @@ var is_angel_activated = false
 func _ready():
     set_process(true)
     
-func _process(_delta):
+func _process(delta):
+    aniPlayer.playback_speed = global.time_dilation_multiplier
+    delta = delta * global.time_dilation_multiplier
+
     if tweetSound.is_playing() and not hasRandomizedTweet:
         tweetSound.pitch_scale = rand_range(0.8, 1.5)
         hasRandomizedTweet = true

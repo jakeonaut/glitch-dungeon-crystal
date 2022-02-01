@@ -66,11 +66,17 @@ func _ready_impl():
     global.activeThrowableObjectPath = null
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+
     if Input.is_action_just_pressed("ui_accept"):
         global.canChangeSongPitch = not global.canChangeSongPitch
         global.canGlitchScreen = not global.canGlitchScreen
         global.crtScreenEffects = not global.crtScreenEffects
         crtScreenEffect.visible = global.crtScreenEffects
+    
+    var amt = 6.0
+    crtScreenEffect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
+    crtScreenEffect.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
     # if Input.is_action_just_pressed("place_tile_button"):
     #     var player_position = player.global_transform.origin + (player.facing * 2)
     #     var grid_cell = levelTiles.world_to_map(player_position)

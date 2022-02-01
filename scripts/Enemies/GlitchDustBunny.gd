@@ -19,6 +19,9 @@ func _ready():
 
 func _process(delta):
     # ._process(delta) implicit
+    
+    delta = delta * global.time_dilation_multiplier
+
     spawn_timer += (delta*22)
     if spawn_timer >= spawn_time_limit:
         var children = self.get_children()

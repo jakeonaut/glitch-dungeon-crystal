@@ -5,7 +5,7 @@
 [node name="GameCamera" type="InterpolatedCamera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.923, 19.226 )
 projection = 1
-size = 15.0
+size = 20.0
 target = NodePath("../Player")
 speed = 5.0
 enabled = true
@@ -14,4 +14,4 @@ script = ExtResource( 1 )
 [node name="RealCamera" type="Camera" parent="."]
 projection = 1
 current = true
-size = 15.0
+size = 20.0

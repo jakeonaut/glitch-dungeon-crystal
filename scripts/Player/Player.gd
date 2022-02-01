@@ -118,10 +118,16 @@ func wearCostume(costume):
 func _process(delta):
     # ._process(delta) #NOTE: this super method is called automatically 
     # https://github.com/godotengine/godot/issues/6500
-
+    
+    var real_delta = delta
+    delta = delta * global.time_dilation_multiplier
     if not processGlitchHurtRecovery(delta):
         return
 
+    if global.pauseGame or global.pauseMoveInput or physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
+        return
+        
+    # doTimeDilation(real_delta)
     if global.memory.has("broom"):
         processBroomLogic(delta)
         
@@ -149,6 +155,29 @@ func _process(delta):
             tryDieToEnemy(true)
 
     #tryRotateCamera(delta)
+    
+func doTimeDilation(delta):
+    var real_delta_multiplier = 8
+
+    var gtdm = global.time_dilation_multiplier
+    var low = 0.6
+    var high = 1.0
+    if Input.is_action_pressed("ui_select"):
+        mySprite.material_override.set_shader_param("palette_cycle_speed", 4.0)
+        gtdm = gtdm + (low - gtdm) * (delta*real_delta_multiplier)
+        if stepify(gtdm, 0.01) == low:
+            gtdm = low
+            mySprite.material_override.set_shader_param("palette_cycle_speed", 2.5)
+            
+        mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+    else:
+        gtdm = gtdm + (high - gtdm) * (delta*real_delta_multiplier)
+        mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+            
+        if stepify(gtdm, 0.01) == high:
+            gtdm = high
+    global.time_dilation_multiplier = gtdm
+    
     
 func processGlitchHurtRecovery(delta):
     if physics_state == PhysicsState.GLITCH_HURT:
@@ -281,9 +310,6 @@ func hideInteractPrompt():
     importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
-    if global.pauseGame or global.pauseMoveInput or physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
-        return
-
     if not pauseSelf and is_in_broom_cooldown:
         broom_cooldown_timer += (delta*22)
         if broom_cooldown_timer >= broom_cooldown_time_limit:

@@ -14,6 +14,7 @@ var is_active = false
 var spawn_timer = 0
 var spawn_time_limit = 5
 var has_grown_spores = false
+var animation_speed_multiplier = 1.0
 
 func _ready():
     if not is_in_group("savepoints"):
@@ -23,6 +24,9 @@ func _ready():
     set_process(true)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+    
     if isOnSavePoint():
         triangleContainer.rotation_degrees.y -= delta*22*5
         if not is_active:

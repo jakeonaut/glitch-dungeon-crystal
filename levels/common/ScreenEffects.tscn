@@ -9,6 +9,9 @@ shader = ExtResource( 2 )
 shader_param/color_depth = 5
 shader_param/dithering = true
 shader_param/resolution_scale = 4
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )

@@ -189,7 +189,6 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 22 )]
-size = 20.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -266,7 +265,7 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="1"]
+[node name="landing" parent="Viewport/level/Door" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 9, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -278,7 +277,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 18, 0 )
 path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door2" index="1"]
+[node name="landing" parent="Viewport/level/Door2" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
@@ -289,10 +288,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 24, 0 )
 path = "res://levels/Adventure/InvisIntro.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door3" index="1"]
+[node name="landing" parent="Viewport/level/Door3" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="2"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
 anims/doorClose = SubResource( 21 )
 anims/doorOpen = SubResource( 22 )
 anims/locked = SubResource( 23 )

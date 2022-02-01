@@ -17,7 +17,7 @@ func preActivateScript():
     npc.get_parent().add_child(new_self)
     new_self.get_node("TriangleContainer").visible = false
     new_self.get_node("Sprite3D2").visible = false
-    new_self.aniPlayer.playback_speed = 0.3
+    new_self.animation_speed_multiplier = 0.3
     new_self.passiveActivate(0)
 
 func activateScript():

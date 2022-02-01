@@ -77,6 +77,12 @@ func stopPassiveActivate():
 func justStopPassiveActivate():
     if global.activeInteractor == null:
         level.player.hideInteractPrompt()
+    
+# @override
+func alignMySprite():
+    var pixelSize = 0.125
+    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.927
 
 # @override
 func processPhysics(delta):

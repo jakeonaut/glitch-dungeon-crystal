@@ -14,6 +14,8 @@ func _ready():
     # ._ready() implicit
     
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if gotcha:
         .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
     elif being_collected:
@@ -44,6 +46,10 @@ func _process(delta):
                     textBox.is_really_important = true
                     textBox.is_important = true
                     .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+                    
+# @override
+func alignMySprite():
+    pass
 
 # @override
 func activate():

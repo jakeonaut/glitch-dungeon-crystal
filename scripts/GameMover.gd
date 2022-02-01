@@ -24,6 +24,7 @@ func getGameCamera():
 onready var smallInteractionArea = get_node("SmallInteractionArea")
 onready var collisionShape = get_node("CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
+var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("Sprite3D")
 
 var true_terminal_vel = 32
@@ -75,8 +76,6 @@ var last_vv = vv
 var hv = lv - up * vv # horizontal velocity
 
 export var walk_speed = 8
-# TODO(jaketrower): I don't super think we ever want to change or use this cuz we have other logic for making feather acceleration slower...
-var DNUMHORZ = 65
     
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
@@ -115,6 +114,9 @@ var pauseSelf = false
 
 var horizontal_collision = false
 
+var DNUMHORZ = 65.0
+var DNUMSKID_BASE = 54.0
+
 
 func _ready():
     set_process_input(true)
@@ -124,14 +126,17 @@ func _ready():
     last_grounded_y = spawn_origin.y
 
 func _process(_delta):
-    pass
+    if aniPlayer:
+        aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
 
 func _physics_process(delta):
     if global.pauseGame or pauseSelf: return
 
     is_touching_water = smallInteractionArea.is_touching_water
 
-    processPhysics(delta) #super
+    DNUMHORZ = 65.0 * global.time_dilation_multiplier
+    DNUMSKID_BASE = 54.0 / global.time_dilation_multiplier
+    processPhysics(delta * global.time_dilation_multiplier)
 
     if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
         is_falling = true
@@ -140,8 +145,9 @@ func _physics_process(delta):
 
 func alignMySprite():
     var pixelSize = 0.125
-    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.25
+    if mySprite:
+        mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+        mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.25
        
 func isActive():
     return visible
@@ -183,13 +189,6 @@ func processPhysics(delta):
     elif physics_state == PhysicsState.WAKING_UP:
         if not aniPlayer or not aniPlayer.is_playing():
             physics_state = PhysicsState.NORMAL
-
-
-    if is_touching_water:
-        hv -= (hv.normalized()*delta*22)
-        if abs(hv.length()) < delta*22:
-            hv = Vector3()
-            dir = Vector3(0.0, 0.0, 0.0)
         
     lv = hv + (up * vv)
     
@@ -491,8 +490,12 @@ func processHorizontalInputs(delta):
                 forward = forward / 32
                 right = right / 32
     else:
-        forward = forward / 2
-        right = right / 2
+        if is_touching_water:
+            forward = forward / 3
+            right = right / 3
+        else:
+            forward = forward / 2
+            right = right / 2
     # var glitch_floor_jump_walking = (glitch_form == global.GlitchForm.FLOOR and not on_ground and not (aniPlayer != null and \
     #     (aniPlayer.assigned_animation == "jumpSquat" or aniPlayer.assigned_animation == "jumpStart")))
     # elif glitch_floor_jump_walking:
@@ -581,16 +584,17 @@ func processHorizontalInputs(delta):
                     aniPlayer.queue("walkStop")
                 aniPlayer.queue("stand")
 
-    var DNUMSKID = 54
+    var DNUMSKID = DNUMSKID_BASE
     if self.isFeatherLike():
-        DNUMSKID = 58
+        DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/13.5)
         if not on_ground and is_pressing_horizontal_input:
-            DNUMSKID = 59
+            DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/10.8)
     if glitch_form == global.GlitchForm.FLOOR and not on_ground:
-        DNUMSKID = 60
-        # TODO(jaketrower): RocketJumpBoots # DNUMSKID = 120
+        DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
+        # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
 
     
+    # TODO(Engine.time_scale suspect)
     if dir.length() > 1:
         dir = dir.normalized()
     if on_ground and not self.is_pressing_horizontal_input:
@@ -618,6 +622,7 @@ func processHorizontalInputs(delta):
     if not is_touching_water or horizontal_input:
         hv = dir * curr_walk_speed
     elif on_ground:
+        # TODO(Engine.time_scale suspect)
         hv -= (hv.normalized()*delta*30)
         if abs(hv.length()) < delta*22:
             hv = Vector3()

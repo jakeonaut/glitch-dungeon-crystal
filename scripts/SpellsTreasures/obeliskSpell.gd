@@ -24,6 +24,8 @@ func _ready():
     interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if is_active and not shouldIBeActive():
         is_active = false
         mySprite.visible = false

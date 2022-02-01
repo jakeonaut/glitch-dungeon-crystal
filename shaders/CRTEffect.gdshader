@@ -4,6 +4,9 @@ shader_type canvas_item;
 uniform int color_depth : hint_range(1, 8) = 5;
 uniform bool dithering = true;
 uniform int resolution_scale = 4;
+uniform float r_mult = 0.0;
+uniform float g_mult = 1.0;
+uniform float b_mult = -1.0;
 
 int dithering_pattern(ivec2 fragcoord) {
     const int pattern[] = {
@@ -40,9 +43,9 @@ void fragment()
     float PI = 3.14159;
     
     // // You can modify the *3.0, *-3.0 for a bigger or smaller 
-    float r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*0.0), 0.0).r;
-    float g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*1.0), 0.0).g;
-    float b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*-1.0), 0.0).b;
+    float r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult), 0.0).r;
+    float g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult), 0.0).g;
+    float b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult), 0.0).b;
     
     COLOR = vec4(r, g, b, 1.0);
 

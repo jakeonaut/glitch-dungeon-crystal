@@ -20,6 +20,8 @@ func _ready():
     set_process(true)
     
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if jump_press_timer <= jump_press_broom_time_limit:
         jump_press_timer += 1
 
@@ -47,6 +49,8 @@ func _process(delta):
         aniPlayer.queue("fishingSitDown")
 
 func _physics_process(delta):
+    delta = delta * global.time_dilation_multiplier
+    
     if not global.pauseGame and pauseSelf:
         # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
         pass

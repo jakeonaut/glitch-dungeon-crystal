@@ -14,7 +14,7 @@ func _ready_impl():
         should_do_cutscene = true
         player.applyGlitch(global.GlitchForm.NORMAL)
         player.true_terminal_vel = 5
-        player.aniPlayer.playback_speed = 0.3
+        player.animation_speed_multiplier = 0.3
         player.aniPlayer.remove_animation("fallFar")
         player.aniPlayer.add_animation("fallFar", player.aniPlayer.get_animation("fall"))
 
@@ -22,7 +22,7 @@ func _process(delta):
     if should_do_cutscene:
         if player.physics_state != player.PhysicsState.NORMAL:
             player.true_terminal_vel = 32
-            player.aniPlayer.playback_speed = 1
+            player.animation_speed_multiplier = 1.0
             cutscene_timer += (delta*22)
             if cutscene_timer > 40 and cutscene_timer < 45 and not get_node("NPC3/AnimationPlayer").is_playing():
                 get_node("NPC3/AnimationPlayer").play("flickerOn")

@@ -47,6 +47,7 @@ func activate():
 
 func passiveActivate(delta):
     .passiveActivate(delta) # let NPC.gd handle facing player... but is_active = false so no textbox
+    delta = delta * global.time_dilation_multiplier
 
     spawn_timer += (delta*22)
     if spawn_timer >= spawn_time_limit:
@@ -106,6 +107,8 @@ func resetStateToIdle():
 
 func _process(delta):
     # ._process(delta) implicit
+    delta = delta * global.time_dilation_multiplier
+
     # this state should be handled in the process event instead of passiveActivate
     # because if the player leaves the detection radius while we're casting a glitch
     # we still want to cast it and start "recovery"
