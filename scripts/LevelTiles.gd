@@ -234,6 +234,8 @@ func setTileset(tileset_type):
         set_mesh_library(yellow_tiles)
         properlySetTiles()
         
+    if cosmeticLevelTiles:
+        cosmeticLevelTiles.setTileset(tileset_type)
     if backgroundLevelTiles:
         backgroundLevelTiles.setTileset(tileset_type)
 

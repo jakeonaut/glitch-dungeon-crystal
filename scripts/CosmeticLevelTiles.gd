@@ -14,6 +14,17 @@ func setTileNameNum(newName, num, cell_index):
     var new_tile_type = mesh_library.find_item_by_name(newName)
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type)
 
+func setTileset(tileset_type):
+    if tileset_type == global.TilesetType.HOUSE:
+        set_mesh_library(red_cosmetic_tiles)
+        properlySetTiles()
+    elif tileset_type == global.TilesetType.FOREST:
+        set_mesh_library(green_cosmetic_tiles)
+        properlySetTiles()
+    elif tileset_type == global.TilesetType.DESERT:
+        set_mesh_library(yellow_cosmetic_tiles)
+        properlySetTiles()
+
 func _ready():
     var cell_indices = get_used_cells()
     for i in range(len(cell_indices)):
@@ -80,22 +91,22 @@ func properlySetTiles():
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name))
         
 func normalGlitch(palette):
-    set_mesh_library(grey_cosmetic_tiles)
+    # set_mesh_library(grey_cosmetic_tiles)
     properlySetTiles()
     changeColorPalette(palette)
         
 func featherGlitch(palette):
-    set_mesh_library(green_cosmetic_tiles)
+    # set_mesh_library(green_cosmetic_tiles)
     properlySetTiles()
     changeColorPalette(palette)
     
 func floorGlitch(palette):
-    set_mesh_library(red_cosmetic_tiles)
+    # set_mesh_library(red_cosmetic_tiles)
     properlySetTiles()
     changeColorPalette(palette)
 
 func ladderGlitch(palette):
-    set_mesh_library(yellow_cosmetic_tiles)
+    # set_mesh_library(yellow_cosmetic_tiles)
     properlySetTiles()
     changeColorPalette(palette)
 

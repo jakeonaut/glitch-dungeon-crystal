@@ -58,7 +58,7 @@ func doFallthroughObjectCollision(area):
     if get_node("..").isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
         x + lb, y + bb, x + rb, y + bb - 0.12
-    ):
+    ) and player.linear_velocity.y <= 0:
         var was_on_ground = player.was_on_ground
         player.linear_velocity = player.collideWithFloor(player.linear_velocity)
         if not player.was_on_ground:

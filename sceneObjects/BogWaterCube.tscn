@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/fakewater.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/water_splash0000.png" type="Texture" id=3]
+[ext_resource path="res://scripts/WaterCube.gd" type="Script" id=4]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
+[ext_resource path="res://assets/sounds/assets_sfx_splashy.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/splish2.wav" type="AudioStream" id=8]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=10]
+[ext_resource path="res://assets/palettes/bog_water_palette.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 9 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 8
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 10 )
+shader_param/target_palette = ExtResource( 11 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.8, 1.8, 1.8 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec3 screen_tex = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+    COLOR.rgb = vec3(screen_tex.r/1.5, screen_tex.g/1.5, screen_tex.b/1.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 5 )
+
+[node name="WaterCube" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, -4 )
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 0 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 2 )
+hframes = 4
+vframes = 4
+script = ExtResource( 1 )
+max_frames = 4
+
+[node name="Area" type="Area" parent="." groups=["water"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
+shape = SubResource( 1 )
+
+[node name="SplashSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.498, 2.4251, 5 )
+visible = false
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 7
+script = ExtResource( 1 )
+frame_delay = 0.05
+max_frames = 5
+should_fizzle_out = true
+
+[node name="SplashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -25.0
+pitch_scale = 2.0
+
+[node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -6.0
+pitch_scale = 1.5
+
+[node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -6.0
+
+[node name="WaterFilter" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="WaterFilter"]
+material = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
