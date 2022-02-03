@@ -24,7 +24,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/WaterCube.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=27]
 

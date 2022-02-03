@@ -39,7 +39,8 @@ func _process(delta):
 			disappearTimer += (delta*22)
 			cubeContainer.rotate_y(disappearTimer*delta)
 			cubeContainer.rotate_x((disappearTimer/2)*delta)
-			if aniPlayer.assigned_animation == "floatAway" and not aniPlayer.is_playing():
+			if aniPlayer.assigned_animation == "floatAway" and not aniPlayer.is_playing() and \
+			   not cubeSound.is_playing() and not cubeSound2.is_playing():
 				queue_free()
 		else:
 			step = rand_range(MIN_STEP-1, MIN_STEP+1)
@@ -51,11 +52,13 @@ func isActive():
 
 func passiveActivate(delta):
 	# musicPlayer.stopAll()
-	cubeSound.play()
-	cubeSound2.play()
-	aniPlayer.play("floatAway")
+	if not disappearing2:
+		cubeSound.play()
+		cubeSound2.pitch_scale = rand_range(0.8, 1.5)
+		cubeSound2.play()
+		aniPlayer.play("floatAway")
 
-	disappearing2 = true
+		disappearing2 = true
 
 	# global.pauseGame = true
 	# global.pauseMoveInput = true

@@ -230,6 +230,8 @@ func processPhysics(delta):
 func applyGravity(delta):
     if is_touching_water:
         g = Vector3(0, -grav/3, 0)
+        if fallSound:
+            fallSound.stop()
     elif isFeatherLike():
         if pressingDown() or (feather_fall_time_limit >= feather_fall_time_limit and not pressingJump()):
             g = Vector3(0, -grav/2, 0)
@@ -416,6 +418,8 @@ func processJumpInputs(delta):
             feather_jump_timer = 200
 
 func addJumpSmokeCloud(flip_flip_h = false):
+    if is_touching_water: return
+
     var newSmokeCloud = jumpSmokeCloudRes.instance()
     level.add_child(newSmokeCloud)
     newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
