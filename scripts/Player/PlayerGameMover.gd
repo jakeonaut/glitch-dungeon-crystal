@@ -12,6 +12,8 @@ var jump_press_broom_time_limit = 15
 
 var has_played_fall_sound = false
 
+var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
+
 onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 
@@ -93,6 +95,35 @@ func pressingMoveRight():
 
 func magicJump():
     should_magic_jump = true
+
+func processJumpInputs(delta):
+    .processJumpInputs(delta)
+
+    if not is_touching_ladder and not is_touching_water and not isKindOfOnGround() and not on_ground:
+        if global.num_cherries_eaten > 0:
+            if justPressedJump() and not global.pauseMoveInput: 
+                was_just_on_ground_timer = was_just_on_ground_time_limit
+                jumped_from_true_ground = truly_on_ground
+                jump_squat_jump_input_timer = 0
+                feather_jump_timer = 0
+                weak_feather_dbl_jump = false
+                if on_ground:
+                    addJumpSmokeCloud()
+    
+                if not "jump" in aniPlayer.assigned_animation:
+                    aniPlayer.clear_queue()
+                    aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
+                    aniPlayer.queue("jumpStart")
+                    aniPlayer.queue("jump")
+
+                var new_carcass = cherryCarcassRes.instance()
+                level.add_child(new_carcass)
+                new_carcass.global_transform.origin = self.global_transform.origin
+                new_carcass.mySprite.flip_h = mySprite.flip_h
+                if randi() % 4 == 1:
+                    new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
+                global.num_cherries_eaten -= 1
+        
 
 # @override
 func handleSpikeCollisions():

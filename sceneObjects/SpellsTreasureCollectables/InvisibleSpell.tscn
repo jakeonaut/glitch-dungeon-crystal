@@ -19,11 +19,14 @@ radius = 0.7
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
 shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 4 )
@@ -31,11 +34,14 @@ shader_param/target_palette = ExtResource( 4 )
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
 shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 4 )
@@ -56,7 +62,7 @@ shape = SubResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 3 )
-pixel_size = 0.1
+pixel_size = 0.125
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 3 )
@@ -75,3 +81,4 @@ pitch_scale = 0.9
 [node name="Obelisk" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0593766, -0.439817, -0.769371 )
 material_override = SubResource( 4 )
+pixel_size = 0.125

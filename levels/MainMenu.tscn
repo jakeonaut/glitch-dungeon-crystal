@@ -597,6 +597,11 @@ speed = 10.0
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 1, 9.05692, -1 )
+grav = null
+walk_speed = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+swimming_walk_speed = null
 
 [node name="TransformSound" parent="Viewport/level/Player/Sounds" index="2"]
 volume_db = -80.0

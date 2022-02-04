@@ -92,12 +92,12 @@ func makeNewSplashSprite(x_offset, is_mini = false):
 func setFilterPosition():
 	# https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
 	var target_pos = getGameCamera().unproject_position(target_origin)
-	waterFilter.rect_position.x = target_pos.x
-	waterFilter.rect_position.y = target_pos.y
+	waterFilter.rect_position.x = target_pos.x - 1
+	waterFilter.rect_position.y = target_pos.y - 1
 
 	var bot_right_corner_3D = target_origin + Vector3(4.0, 4.0, 0.0)
 
 	var bot_right_corner_2D = getGameCamera().unproject_position(bot_right_corner_3D)
-	waterFilter.get_node("ColorRect").rect_size = bot_right_corner_2D - target_pos
+	waterFilter.get_node("ColorRect").rect_size = bot_right_corner_2D - target_pos + Vector2(1.0, 1.0)
 	# i really don't know why we need to do this, but we do.
 	waterFilter.get_node("ColorRect").rect_size.y = waterFilter.get_node("ColorRect").rect_size.x

@@ -54,6 +54,7 @@ var pauseMoveInput = false # don't allow player physics or camera input??
 var pauseGame = false   
 
 var can_broom = true
+var num_cherries_eaten = 0
 
 var canGlitchScreen = true
 var canChangeSongPitch = true
@@ -75,6 +76,7 @@ func _ready():
     if pauseMoveInput: pass
     if pauseGame: pass
     if can_broom: pass
+    if num_cherries_eaten > 0: pass
     if canGlitchScreen: pass
     if canChangeSongPitch: pass
     if crtScreenEffects: pass

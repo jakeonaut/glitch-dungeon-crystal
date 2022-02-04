@@ -95,14 +95,15 @@ func _process(delta):
         set_interpolation_enabled(false)
         if actual_target == initial_target: how_fast_to_switch_targets = 0
 
+    var zoomed_size = (initial_size-8)
     if global.activeInteractor != null and global.activeInteractor.focus_me and initial_size > 12:
         actual_target = global.activeInteractor.get_node("../..")
         set_target(actual_target)
         # interpolation = A + (B - A) * t
         if not global.activeInteractor.tiny:
-            self.size = self.size + (12 - self.size) * (delta*5)
-            if stepify(self.size, 0.1) == 12:
-                self.size = 12
+            self.size = self.size + (zoomed_size - self.size) * (delta*5)
+            if stepify(self.size, 0.1) == zoomed_size:
+                self.size = zoomed_size
         set_speed(2)
         set_interpolation_enabled(true)
     else:
