@@ -32,15 +32,15 @@ func buildRandomTiles():
         tile_name_array.push_back(mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z)))
     
 # @override
-func setTileset(tileset_type):
+func setTileset(tileset_type, properly_set_tiles = true):
     if tileset_type == global.TilesetType.HOUSE:
         set_mesh_library(red_background_tiles)
-        properlySetTiles()
     elif tileset_type == global.TilesetType.FOREST:
         set_mesh_library(green_background_tiles)
-        properlySetTiles()
     elif tileset_type == global.TilesetType.DESERT:
         set_mesh_library(yellow_background_tiles)
+
+    if properly_set_tiles:
         properlySetTiles()
 
 # @override

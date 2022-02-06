@@ -28,6 +28,8 @@ func _ready_impl():
     set_process_input(true)
     set_process(true)
     
+    levelTiles.my_tileset_type = tileset_type
+    levelTiles.buildRandomTiles()
     levelTiles.setTileset(tileset_type)
     
     if has_spellbook_page and not global.memory.has("spellbookPage"):

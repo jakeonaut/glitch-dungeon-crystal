@@ -40,6 +40,9 @@ func _process(delta):
         #     get_node("..").tryBroom()
 
 func doFallthroughObjectCollision(area):
+    if area.get_node("..").has_method("fallthroughCollisionActivate"):
+        area.get_node("..").fallthroughCollisionActivate()
+
     var player = get_node("..")
     var areaShape = area.get_node("CollisionShape")
     var ax = areaShape.global_transform.origin.x

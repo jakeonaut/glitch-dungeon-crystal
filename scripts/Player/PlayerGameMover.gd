@@ -122,6 +122,7 @@ func processJumpInputs(delta):
                 new_carcass.mySprite.flip_h = mySprite.flip_h
                 if randi() % 4 == 1:
                     new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
+                tryDieToEnemy(true, false)
                 global.num_cherries_eaten -= 1
         
 
@@ -150,5 +151,5 @@ func handleSpikeCollisions():
                 tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
                 x + lb + margin, y + tb - margin, x + rb - margin, y + bb + margin
             ):
-                tryDieToEnemy(true)
+                tryDieToEnemy(true, false)
                 return

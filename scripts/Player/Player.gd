@@ -152,7 +152,7 @@ func _process(delta):
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
             global.memory["hearts"] = 0
-            tryDieToEnemy(true)
+            tryDieToEnemy(true, true)
 
     #tryRotateCamera(delta)
     
@@ -260,10 +260,10 @@ func isOnSavePoint():
            int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 # @override
-func tryDieToEnemy(should_glitch):
-    if glitch_form != global.GlitchForm.INVISIBLE and not transitioning and \
+func tryDieToEnemy(should_glitch, should_kill_invis):
+    if not transitioning and (should_kill_invis or (glitch_form != global.GlitchForm.INVISIBLE and \
        physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint() and \
-       physics_state != PhysicsState.GLITCH_HURT and physics_state != PhysicsState.GLITCH_RECOVERY:
+       physics_state != PhysicsState.GLITCH_HURT and physics_state != PhysicsState.GLITCH_RECOVERY)):
         if randi() % 3 == 0:
             hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
             hurt2Sound.play()

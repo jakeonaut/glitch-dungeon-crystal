@@ -12,7 +12,7 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
     if not visible and not crunchSound.is_playing():
-        queue_free()
+        queue_free() # can we respawn it after used by the player..., need to keep a store?
 
 func passiveActivate(delta):
     visible = false

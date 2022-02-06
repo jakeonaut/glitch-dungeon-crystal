@@ -14,15 +14,15 @@ func setTileNameNum(newName, num, cell_index):
     var new_tile_type = mesh_library.find_item_by_name(newName)
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type)
 
-func setTileset(tileset_type):
+func setTileset(tileset_type, properly_set_tiles = true):
     if tileset_type == global.TilesetType.HOUSE:
         set_mesh_library(red_cosmetic_tiles)
-        properlySetTiles()
     elif tileset_type == global.TilesetType.FOREST:
         set_mesh_library(green_cosmetic_tiles)
-        properlySetTiles()
     elif tileset_type == global.TilesetType.DESERT:
         set_mesh_library(yellow_cosmetic_tiles)
+    
+    if properly_set_tiles:
         properlySetTiles()
 
 func _ready():
