@@ -196,7 +196,9 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
 grav = 0
 bbText = "PRESS [DOWN] TO
-GO THROUGH DOORS"
+GO THROUGH DOORS
+
+and to talk more to us!!"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
@@ -702,7 +704,7 @@ alpha_cut = 2
 texture = ExtResource( 23 )
 hframes = 8
 vframes = 15
-frame = 60
+frame = 66
 script = ExtResource( 22 )
 should_randomize_frame_delay = true
 

@@ -49,6 +49,14 @@ var spawn_origin
 var last_grounded_y = 0
 var falling_y_offset = 16
 var fall_timer = 0
+var should_collide_horizontally = true
+var should_collide_floor = true 
+var should_collide_ceil = true
+var should_do_middle_sensor = false
+var should_only_do_middle_sensor = false
+var should_do_simple_sensor_probe = true
+
+
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
 
 enum PhysicsState {
@@ -688,9 +696,11 @@ func handleCollisionsAndMove(local_lv, delta):
     truly_on_ground = false
     half_on_ground = false
 
-    local_lv = handleHorizontalCollisions(local_lv)
+    if should_collide_horizontally:
+        local_lv = handleHorizontalCollisions(local_lv)
     global_transform.origin.x += local_lv.x
-    local_lv = handleVerticalCollisions(local_lv)
+    if should_collide_floor or should_collide_ceil:
+        local_lv = handleVerticalCollisions(local_lv)
     global_transform.origin.y += local_lv.y
 
     handleSpikeCollisions()
@@ -729,7 +739,7 @@ func isTileSpikes(tile_type):
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return tileCollisionShape is RayShape
     
-func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = false):
+func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
     var z = 0 # global_transform.origin.z
     var TILE_WIDTH = getLevelTiles().cell_size.x
     var TILE_HEIGHT = getLevelTiles().cell_size.y
@@ -741,29 +751,26 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = f
     var tile_pos = 99999 * sensor_direction
     var tile_type = GridMap.INVALID_CELL_ITEM
     if isTileSolid(tile_type_a, is_vertical, sensor_direction, tile_pos_a):
-        # We found a collision, regress to see if there is a previous one
-        var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x - (TILE_WIDTH*sensor_direction), sensor.y, z))
+        tile_pos = coords_a.x + tile_anchor
+        tile_type = tile_type_a
         if is_vertical:
-            coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - (TILE_HEIGHT*sensor_direction), z))
-        var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
-        var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
-            if debug:
-                print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
-            # Found an earlier tile collision, use it instead of tile A
-            tile_pos = coords_b.x + tile_anchor
-            tile_type = tile_type_b
+            tile_pos = coords_a.y + tile_anchor
+            
+        # We found a collision, regress to see if there is a previous one
+        if should_do_simple_sensor_probe:
+            var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x - (TILE_WIDTH*sensor_direction), sensor.y, z))
             if is_vertical:
-                tile_pos = coords_b.y + tile_anchor
-        else:
-            if debug:
-                print("coords_a: " + str(coords_a) + ", tile_type_a: " + str(tile_type_a))
-            # Did not find an earlier tile collision, so use tile A
-            tile_pos = coords_a.x + tile_anchor
-            tile_type = tile_type_a
-            if is_vertical:
-                tile_pos = coords_a.y + tile_anchor
-    else:
+                coords_b = getLevelTiles().world_to_map(Vector3(sensor.x, sensor.y - (TILE_HEIGHT*sensor_direction), z))
+            var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
+            var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+            if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
+                # Found an earlier tile collision, use it instead of tile A
+                tile_pos = coords_b.x + tile_anchor
+                tile_type = tile_type_b
+                if is_vertical:
+                    tile_pos = coords_b.y + tile_anchor
+        # else: # Did not find an earlier tile collision, so use tile A
+    elif should_do_simple_sensor_probe:
         # We have found no collision, extend to see if there is an upcoming one
         var coords_b = getLevelTiles().world_to_map(Vector3(sensor.x + (TILE_WIDTH*sensor_direction), sensor.y, z))
         if is_vertical:
@@ -771,16 +778,12 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, debug = f
         var tile_pos_b = getLevelTiles().map_to_world(coords_b.x, coords_b.y, coords_b.z)
         var tile_type_b = getLevelTiles().get_cell_item(coords_b.x, coords_b.y, coords_b.z)
         if isTileSolid(tile_type_b, is_vertical, sensor_direction, tile_pos_b):
-            if debug:
-                print("coords_b: " + str(coords_b) + ", tile_type_b: " + str(tile_type_b))
             # Found a later tile collision, use it
             tile_pos = coords_b.x + tile_anchor
             tile_type = tile_type_b
             if is_vertical:
                 tile_pos = coords_b.y + tile_anchor
-        else:
-            # We found no tile collision on this side! Just use default :)
-            pass
+        # else: # We found no tile collision on this side! Just use default :)
     return Vector2(tile_pos, tile_type)
 
 func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
@@ -874,47 +877,66 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
     var tb = get_node("CollisionShape").shape.height/2
     var bb = -tb
 
-    # Check for sensor A
-    var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
-    if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_A = tile_pos_and_distance_and_type_A.x
-    var tile_distance_A = tile_pos_and_distance_and_type_A.y
-    var tile_type_A = tile_pos_and_distance_and_type_A.z
+    if not should_only_do_middle_sensor:
+        # Check for sensor A
+        var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
+        if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
+        var tile_pos_and_distance_and_type_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+        var tile_pos_A = tile_pos_and_distance_and_type_A.x
+        var tile_distance_A = tile_pos_and_distance_and_type_A.y
+        var tile_type_A = tile_pos_and_distance_and_type_A.z
 
-    # Check for sensor B
-    var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
-    if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_B = tile_pos_and_distance_and_type_B.x
-    var tile_distance_B = tile_pos_and_distance_and_type_B.y
-    var tile_type_B = tile_pos_and_distance_and_type_B.z
+        # Check for sensor B
+        var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
+        if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
+        var tile_pos_and_distance_and_type_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+        var tile_pos_B = tile_pos_and_distance_and_type_B.x
+        var tile_distance_B = tile_pos_and_distance_and_type_B.y
+        var tile_type_B = tile_pos_and_distance_and_type_B.z
 
-    # Check for middle sensor
-    var middle_sensor = Vector2(x+sensor_anchor, y)
-    if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var middle_tile_pos = tile_pos_and_distance_and_type_middle.x
-    var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
-    var middle_tile_type = tile_pos_and_distance_and_type_middle.z
+        if should_do_middle_sensor:
+            # Check for middle sensor
+            
+            var middle_sensor = Vector2(x+sensor_anchor, y)
+            if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
+            var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+            var middle_tile_pos = tile_pos_and_distance_and_type_middle.x
+            var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
+            var middle_tile_type = tile_pos_and_distance_and_type_middle.z
 
-    if debug:
-        print(
-            str(is_vertical) + 
-            " (x, y): " + str(x) + ", " + str(y) +
-            ";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
-            ";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
-            ";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
-        )
+            if debug:
+                print(
+                    str(is_vertical) + 
+                    " (x, y): " + str(x) + ", " + str(y) +
+                    ";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
+                    ";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
+                    ";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
+                )
 
-    # Compare left and right collision tile distances
-    if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            # Compare left and right collision tile distances
+            if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
+                local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
+                local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            else:
+                local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            return local_lv
+        else:
+            # Compare left and right collision tile distances
+            if tile_distance_A <= tile_distance_B:
+                local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            elif tile_distance_B < tile_distance_A:
+                local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+            return local_lv
     else:
+        var middle_sensor = Vector2(x+sensor_anchor, y)
+        if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
+        var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+        var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
+        var middle_tile_type = tile_pos_and_distance_and_type_middle.z
+
         local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    return local_lv
+        return local_lv
 
 func handleHorizontalCollisions(local_lv):
     self.horizontal_collision = false
@@ -940,12 +962,12 @@ func handleVerticalCollisions(local_lv):
     var TILE_HEIGHT = getLevelTiles().cell_size.y
 
     # check for bottom collisions
-    if truly_on_ground or local_lv.y <= 0:
+    if should_collide_floor and (truly_on_ground or local_lv.y <= 0):
         # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
         local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
 
     # check for top collisions
-    if not truly_on_ground and local_lv.y > 0:
+    if should_collide_ceil and not truly_on_ground and local_lv.y > 0:
         # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
         local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
     

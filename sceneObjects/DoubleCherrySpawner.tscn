@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/DoubleCherrySpawner.gd" type="Script" id=1]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 10.0
+
+[node name="DoubleCherrySpawner" type="Spatial"]
+script = ExtResource( 1 )
+spawned_object_path = "res://sceneObjects/DoubleCherry.tscn"
+spawn_time_limit = 15
+max_num_children = 1
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=2]
@@ -7,6 +7,13 @@
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
 [ext_resource path="res://scripts/DoubleCherry.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/cherrycrunch.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=8]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=9]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=10]
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.5
+height = 1.5
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -23,27 +30,207 @@ shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 2 )
 
-[sub_resource type="SphereShape" id=2]
-radius = 0.7
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 20 ]
+}
 
-[node name="DoubleCherry" type="Spatial"]
+[sub_resource type="Animation" id=8]
+resource_name = "eaten"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.15, 0.05 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "fall"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "growBack"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:pixel_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.05, 0.125, 0.09, 0.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 21, 20, 21 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "land"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 22, 21, 20 ]
+}
+
+[sub_resource type="BoxShape" id=13]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="SphereShape" id=12]
+radius = 10.0
+
+[node name="DoubleCherry" type="KinematicBody"]
 script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 3 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 1 )
-pixel_size = 0.125
+pixel_size = 0.05
 texture = ExtResource( 4 )
 hframes = 8
 vframes = 8
 frame = 20
-
-[node name="Area" type="Area" parent="."]
-script = ExtResource( 5 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 2 )
+script = ExtResource( 9 )
+should_randomize_frame_delay = true
 
 [node name="CrunchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -5.0
 pitch_scale = 1.18
+
+[node name="FullSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/eaten = SubResource( 8 )
+anims/fall = SubResource( 9 )
+anims/growBack = SubResource( 4 )
+anims/land = SubResource( 6 )
+
+[node name="SmallInteractionArea" type="Area" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+shape = SubResource( 13 )
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 12 )

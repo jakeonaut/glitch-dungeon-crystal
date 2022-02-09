@@ -8,6 +8,11 @@ var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
+var red_dungeon_palette = preload("res://assets/palettes/red_dungeon_palette.png")
+var green_dungeon_palette = preload("res://assets/palettes/green_dungeon_palette.png")
+var black_dungeon_palette = preload("res://assets/palettes/black_dungeon_palette.png")
+var yellow_dungeon_palette = preload("res://assets/palettes/yellow_dungeon_palette.png")
+
 var dark_grey_palette = preload("res://assets/palettes/dark_grey_palette.png")
 var dark_red_palette = preload("res://assets/palettes/dark_red_palette.png")
 var dark_green_palette = preload("res://assets/palettes/dark_green_palette.png")
@@ -55,6 +60,7 @@ var pauseGame = false
 
 var can_broom = true
 var num_cherries_eaten = 0
+var max_cherries = 5
 
 var canGlitchScreen = true
 var canChangeSongPitch = true

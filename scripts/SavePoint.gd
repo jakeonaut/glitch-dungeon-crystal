@@ -60,8 +60,8 @@ func _process(delta):
                 newSprite.should_fizzle_out = true
                 newSprite.visible = true
                 newSprite.transform.origin = Vector3(
-                    stepify(rand_range(-1.0, 1.0), 0.12),
-                    stepify(rand_range(0.5, 1.5), 0.12),
+                    stepify(rand_range(-1.0, 1.0), 0.125),
+                    stepify(rand_range(0.5, 1.5), 0.125),
                     0
                 )
                 newSprite.updateBaseFrame(0, 0)

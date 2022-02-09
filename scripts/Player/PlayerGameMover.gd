@@ -21,6 +21,9 @@ func _ready():
     set_physics_process(true)
     set_process(true)
     
+    should_do_middle_sensor = true
+    should_do_simple_sensor_probe = false
+    
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
