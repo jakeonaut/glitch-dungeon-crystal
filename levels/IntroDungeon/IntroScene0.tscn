@@ -194,6 +194,7 @@ shape = SubResource( 3 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
+visible = false
 grav = 0
 bbText = "PRESS [DOWN] TO
 GO THROUGH DOORS

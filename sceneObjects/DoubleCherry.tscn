@@ -209,12 +209,12 @@ should_randomize_frame_delay = true
 
 [node name="CrunchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -5.0
-pitch_scale = 1.18
+volume_db = -10.0
+pitch_scale = 1.26
 
 [node name="FullSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )

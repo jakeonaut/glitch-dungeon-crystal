@@ -208,7 +208,7 @@ func processGlitchHurtRecovery(delta):
             global.pauseGame = false
             get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
             global.memory["hearts_recovering"] = true
-            self.physics_state = PhysicsState.NORMAL
+            self.physics_state = PhysicsState.GLITCH_RECOVERY
 
         return false
     else:
@@ -264,6 +264,7 @@ func tryDieToEnemy(should_glitch, should_kill_invis):
     if not transitioning and (should_kill_invis or (glitch_form != global.GlitchForm.INVISIBLE and \
        physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint() and \
        physics_state != PhysicsState.GLITCH_HURT and physics_state != PhysicsState.GLITCH_RECOVERY)):
+        print("die to enemy..")
         if randi() % 3 == 0:
             hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
             hurt2Sound.play()

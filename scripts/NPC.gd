@@ -15,6 +15,8 @@ onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
 onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
 
+var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
+
 var textbox_dont_touch_my_sprite = false
 
 var pressing_jump = false
@@ -62,6 +64,8 @@ func passiveActivate(delta):
     if not visible and can_activate:
         if aniPlayer:
             aniPlayer.play("flickerOn")
+            var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+            add_child(newSpawnGlitchEffect)
         else:
             visible = true
         can_activate = false

@@ -15,9 +15,9 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
     if opacity > 0:
-        opacity -= delta/10
+        opacity -= delta/5
         shake_color_rate += delta/2000
-        shake_power += delta/1000
+        shake_power += delta/100
         mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
         mySprite.material_override.set_shader_param("shake_power", shake_power)
         mySprite.material_override.set_shader_param("opacity", opacity)

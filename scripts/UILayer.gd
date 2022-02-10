@@ -7,6 +7,9 @@ var heart_recovery_time_limit = 5
 onready var powerupRect = get_node("PowerupRect")
 onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/RichTextLabel")
 
+onready var miniCrystalCube = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/miniCubeCrystal")
+onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
+
 var display_title = "???"
 onready var levelTitleRect = get_node("LevelTitle")
 var title_display_timer = 10
@@ -25,6 +28,12 @@ func getPlayer():
     if player == null:
         player = level.player
     return player
+
+var gameCamera = null
+func getGameCamera():
+    if gameCamera == null:
+        gameCamera = level.gameCamera
+    return gameCamera
 
 func _ready():
     levelTitleRect.rect_pivot_offset = levelTitleRect.rect_size / 2
@@ -46,6 +55,8 @@ func recreateHeartSprites():
         heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+
     if not global.memory.has("total_hearts") or global.memory["total_hearts"] <= 1:
         heartsRect.visible = false
     else:
@@ -104,6 +115,8 @@ func _process(delta):
         powerupRectTextLabel.text = str(global.num_cherries_eaten)
     else:
         powerupRect.visible = false
+
+    miniCrystalCube.global_transform.origin = getGameCamera().project_position(Vector2(520, 464), 90)
 
 func displaySavingText():
     savingTextLabel.visible = true

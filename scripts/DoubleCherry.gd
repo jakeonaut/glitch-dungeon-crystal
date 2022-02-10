@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
-    if secretAniPlayer.assigned_animation == "eaten" and not secretAniPlayer.is_playing():
+    if secretAniPlayer.assigned_animation == "eaten" and not secretAniPlayer.is_playing() and not crunchSound.is_playing():
         queue_free()
     
     if am_i_really_in_range_of_player:

@@ -1,13 +1,15 @@
 extends AudioStreamPlayer
 
 func _ready():
-	pass
+    pass
 
 func activateScript():
-	var textBox = get_node("..")
-	textBox.text_final = "it's really nice up here"
-	get_node("../../..").jump_force = 2
+    var textBox = get_node("..")
+    textBox.text_final = "it's really nice up here"
+    textBox.tinify()
+    textBox.has_been_shown = false
+    get_node("../../..").jump_force = 2
 
 func isActive():
-	# OVERRIDE ME... if you dare
-	return true
+    # OVERRIDE ME... if you dare
+    return true

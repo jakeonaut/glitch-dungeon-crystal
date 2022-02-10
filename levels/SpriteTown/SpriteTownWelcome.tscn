@@ -352,11 +352,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
-grav = null
-walk_speed = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-swimming_walk_speed = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
@@ -827,9 +822,12 @@ shape = SubResource( 16 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6727, 19.6558, 0 )
 grav = 0
-bbText = "ya hah! do you wish
+bbText = "ya ho ho! do you wish
 to have great power?
-take the \"GRIMOIRE\"!"
+take the \"GRIMOIRE\"!
+i've been watching you,
+have great potential!!
+ya hah!"
 is_important = true
 is_really_important = true
 

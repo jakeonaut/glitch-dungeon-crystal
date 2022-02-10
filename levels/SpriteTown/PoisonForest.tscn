@@ -527,9 +527,12 @@ spawn_time_limit = 10
 x_range = Vector2( -2, 2 )
 
 [node name="DoubleCherrySpawner5" parent="Viewport/level/DoubleCherries" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 34.3, 0 )
-max_num_children = 2
-x_range = Vector2( -4, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 34.3, 0 )
+x_range = Vector2( 0, 0 )
+
+[node name="DoubleCherrySpawner9" parent="Viewport/level/DoubleCherries" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7, 34.3, 0 )
+x_range = Vector2( 0, 0 )
 
 [node name="DoubleCherrySpawner6" parent="Viewport/level/DoubleCherries" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.4, 29.2, 0 )

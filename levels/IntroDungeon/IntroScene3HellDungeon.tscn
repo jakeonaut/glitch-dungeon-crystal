@@ -450,10 +450,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 14, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
+grav = 0
 bbText = "obeslisks hold MAGIC
 CRYSTAL shards.. that's
 why they change colors"
+tiny_textbox = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -469,3 +471,5 @@ __meta__ = {
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/NPC3"]
+[editable path="Viewport/level/NPC3/NPC TextBox"]

@@ -55,6 +55,8 @@ var should_collide_ceil = true
 var should_do_middle_sensor = false
 var should_only_do_middle_sensor = false
 var should_do_simple_sensor_probe = true
+var should_do_fallthrough_area_collision = false
+var fallthrough_area_collision_y = 0
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -315,6 +317,7 @@ func processInputs(delta):
     processHorizontalInputs(delta)
     if justPressedDown():
         on_ground = false
+        should_do_fallthrough_area_collision = false
 
     # fail safe...
     if vv > jump_force*2:
@@ -324,6 +327,7 @@ func processInputs(delta):
     was_walking_into_wall = isWalkingIntoWall()
     if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
         vv = 6
+        should_do_fallthrough_area_collision = false
         # ladder_timer += (delta*22)
         # # CLIMB BABY!!!!
         # if ladder_timer < 8:
@@ -371,6 +375,7 @@ func processJumpInputs(delta):
                 wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
                 wetJumpSound.play()
             on_ground = false
+            should_do_fallthrough_area_collision = false
             has_just_jumped_timer = -has_just_jumped_time_limit
             feather_fall_timer = 0
 
@@ -476,6 +481,7 @@ func actuallyApplyJump(play_sound = true):
     if not is_touching_water and play_sound and jumpSound != null:
         jumpSound.play()
     on_ground = false
+    should_do_fallthrough_area_collision = false
     has_just_jumped_timer = 0 
     feather_fall_timer = 0
     should_magic_jump = false
@@ -699,8 +705,11 @@ func handleCollisionsAndMove(local_lv, delta):
     if should_collide_horizontally:
         local_lv = handleHorizontalCollisions(local_lv)
     global_transform.origin.x += local_lv.x
-    if should_collide_floor or should_collide_ceil:
+    if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
         local_lv = handleVerticalCollisions(local_lv)
+    elif should_do_fallthrough_area_collision:
+        local_lv = collideWithFloor(local_lv)
+        global_transform.origin.y = fallthrough_area_collision_y
     global_transform.origin.y += local_lv.y
 
     handleSpikeCollisions()

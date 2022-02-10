@@ -4,6 +4,8 @@ extends AudioStreamPlayer
 var savePoint = preload("res://sceneObjects/SavePoint.tscn")
 var new_self = null
 
+var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
+
 func _ready():
     pass
     
@@ -23,12 +25,15 @@ func preActivateScript():
 func activateScript():
     var npc = get_node("../../..")
     if npc.has_node("../GlitchEnemy13"):
-        npc.visible = false
+        npc.mySprite.visible = false
         npc.can_activate = false
         npc.is_active = false
         npc.get_node("../Player").glitch_death_timer = 0
         musicPlayer.changeSongPitch(0.5)
         npc.get_node("../GlitchEnemy13").visible = false
+
+        var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+        npc.add_child(newSpawnGlitchEffect)
         
     else:
         npc.textBox.text_final = "hey... thanks for helping me\ni still need to recover my strength..\n\nstrength st r enth"

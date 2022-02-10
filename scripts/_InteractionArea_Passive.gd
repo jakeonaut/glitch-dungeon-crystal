@@ -41,43 +41,15 @@ func _process(delta):
 	var areas = get_overlapping_areas()
 	is_touching_water = false
 	is_touching_ladder = false
+	var has_done_fallthrough_object_collision = false
+	var possible_game_mover = get_node("..")
 	for area in areas:
 		if area.is_in_group("water"):
 			is_touching_water = true
 		if area.is_in_group("ladder"):
 			is_touching_ladder = true
 		if area.is_in_group("fallthrough"):
-			doFallthroughObjectCollision(area)
+			has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
 
-func doFallthroughObjectCollision(area):
-	if area.get_node("..").has_method("fallthroughCollisionActivate"):
-		area.get_node("..").fallthroughCollisionActivate()
-		
-	var gameMover = get_node("..")
-	var areaShape = area.get_node("CollisionShape")
-	var ax = areaShape.global_transform.origin.x
-	var ay = areaShape.global_transform.origin.y
-	var arb = areaShape.shape.extents.x
-	var alb = -arb
-	var atb = areaShape.shape.extents.y
-	var abb = -atb
-
-	var x = gameMover.global_transform.origin.x
-	var y = gameMover.global_transform.origin.y
-	if not gameMover.has_node("CollisionShape") or not gameMover.get_node("CollisionShape").shape is CylinderShape:
-		return
-
-	var rb = gameMover.get_node("CollisionShape").shape.radius
-	var lb = -rb
-	var tb = gameMover.get_node("CollisionShape").shape.height/2
-	var bb = -tb
-	if get_node("..").isRectColliding(
-		ax + alb, ay + atb, ax + arb, ay + abb,
-		x + lb, y + bb, x + rb, y + bb - 0.12
-	) and gameMover.linear_velocity.y < 0:
-		var was_on_ground = gameMover.was_on_ground
-		gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
-		if not gameMover.was_on_ground:
-			gameMover.landed()
-		gameMover.was_on_ground = was_on_ground
-		gameMover.global_transform.origin.y = ay + atb - bb
+	if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:
+		possible_game_mover.should_do_fallthrough_area_collision = false
