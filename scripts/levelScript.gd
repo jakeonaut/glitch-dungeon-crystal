@@ -11,7 +11,7 @@ var current_sprite_palette = global.grey_palette
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
-export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD") var tileset_type 
+export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH") var tileset_type 
 
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false

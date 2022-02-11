@@ -106,7 +106,7 @@ func magicJump():
 func processJumpInputs(delta):
     if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
         if global.num_cherries_eaten > 0:
-            if justPressedJump() and not global.pauseMoveInput: 
+            if justPressedJump() and not should_magic_jump and not global.pauseMoveInput: 
                 was_just_on_ground_timer = was_just_on_ground_time_limit
                 jumped_from_true_ground = truly_on_ground
                 jump_squat_jump_input_timer = 1
