@@ -24,6 +24,8 @@ func _ready():
     # ._ready() implicit
     heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+    
+    should_collide_ceil = false
 
 func _process(delta):
     # ._process(delta) implicit

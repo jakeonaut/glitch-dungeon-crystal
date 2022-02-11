@@ -105,7 +105,8 @@ func passiveActivate(delta):
         global.memory["active_save_point_y"] = self.translation.y
         global.memory["active_save_point_z"] = self.translation.z
         global.memory["roomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
-        global.saveGame()
+        
+        global.memory.erase("player_y_offset")
 
 func isActive():
     return true

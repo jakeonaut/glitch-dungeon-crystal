@@ -8,7 +8,8 @@ var broom_state = 0
 var can_broom = global.can_broom
 var jump_press_timer = 999
 var jump_press_time_limit = 5
-var jump_press_broom_time_limit = 15
+var jump_press_broom_time_limit = 30
+var has_reset_broom_double_jump = false
 
 var has_played_fall_sound = false
 
@@ -32,6 +33,9 @@ func _process(delta):
 
     if justPressedJump():
         jump_press_timer = 0
+        if aniPlayer.assigned_animation == "broomSweep":
+            should_magic_jump = true
+            has_reset_broom_double_jump = true
         
     # this is a little weird but fixes the fallthrough area situation:
     if linear_velocity.y < 0:
@@ -78,7 +82,7 @@ func recentlyJustPressedJump():
 
 # @override
 func pressingJump():
-    return Input.is_action_pressed("jump_button")
+    return Input.is_action_pressed("jump_button") or should_magic_jump
 
 # @override
 func pressingMoveForward():
@@ -100,16 +104,15 @@ func magicJump():
     should_magic_jump = true
 
 func processJumpInputs(delta):
-    .processJumpInputs(delta)
-
-    if not is_touching_ladder and not is_touching_water and not isKindOfOnGround() and not on_ground:
+    if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
         if global.num_cherries_eaten > 0:
             if justPressedJump() and not global.pauseMoveInput: 
                 was_just_on_ground_timer = was_just_on_ground_time_limit
                 jumped_from_true_ground = truly_on_ground
-                jump_squat_jump_input_timer = 0
+                jump_squat_jump_input_timer = 1
                 feather_jump_timer = 0
                 weak_feather_dbl_jump = false
+                should_magic_jump = true
                 if on_ground:
                     addJumpSmokeCloud()
     
@@ -127,6 +130,8 @@ func processJumpInputs(delta):
                     new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
                 tryDieToEnemy(true, false)
                 global.num_cherries_eaten -= 1
+                
+    .processJumpInputs(delta)
         
 
 # @override

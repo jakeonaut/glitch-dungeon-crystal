@@ -194,7 +194,6 @@ func land():
             global.memory.erase("player_flip_h")
         if global.memory.has("player_y_offset"):
             getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
-            global.memory.erase("player_y_offset")
         if global.memory.has("feather_jump_timer"):
             getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]
             global.memory.erase("feather_jump_timer")

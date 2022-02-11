@@ -86,6 +86,7 @@ func _process(delta):
 
 func saveTheGame():
     uiLayer.displaySavingText()
+    global.saveGame()
         
 func restartMusic():
     # update music

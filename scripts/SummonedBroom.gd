@@ -13,6 +13,7 @@ var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var myArea = get_node("Area")
 onready var collisionShape = get_node("Area/CollisionShape")
+var scale_factor = 1.0
 
 var levelTiles = null
 func getLevelTiles():
@@ -50,6 +51,9 @@ func _process(delta):
                 broomSoundCounter += 1
     if not visible and not broomSound.is_playing():
         queue_free()
+    
+    scale_factor = scale_factor + (0.5 - scale_factor) * (delta*5)
+    collisionShape.scale = Vector3(scale_factor, scale_factor, scale_factor)
         
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):

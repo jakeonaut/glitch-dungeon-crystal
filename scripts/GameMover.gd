@@ -35,6 +35,7 @@ var hit_water_terminal_vel = 1
 var terminal_vel = true_terminal_vel
 var is_touching_water = false
 var was_touching_water = false
+var was_touching_water_at_start_of_jump = false
 var is_touching_ladder = false
 var on_ground = true
 var was_on_ground = true
@@ -365,10 +366,10 @@ func pressingMoveRight():
 
 func processJumpInputs(delta):
     # jump
-    if (justPressedJump() or recentlyJustPressedJump() or (
-        is_touching_ladder and pressingJump())) and not global.pauseMoveInput: 
+    if (justPressedJump() or recentlyJustPressedJump() or (is_touching_ladder and pressingJump())) and not global.pauseMoveInput: 
         # Jump from the water
         if is_touching_water and not is_touching_ladder:
+            was_touching_water_at_start_of_jump = true
             vv = jump_force / 2
 
             if is_touching_water and wetJumpSound != null and justPressedJump():
@@ -385,6 +386,7 @@ func processJumpInputs(delta):
                 aniPlayer.queue("swimJump")
         # Jump from the ground
         elif isKindOfOnGround() or is_touching_ladder:
+            was_touching_water_at_start_of_jump = false
             was_just_on_ground_timer = was_just_on_ground_time_limit
             jumped_from_true_ground = truly_on_ground
             jump_squat_jump_input_timer = 0
@@ -401,13 +403,6 @@ func processJumpInputs(delta):
                 aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
                 aniPlayer.queue("jumpStart")
                 aniPlayer.queue("jump")
-        elif aniPlayer and "swimJump" in aniPlayer.assigned_animation and \
-             not is_touching_water and glitch_form != global.GlitchForm.FEATHER:
-            feather_jump_timer = 0
-            aniPlayer.clear_queue()
-            aniPlayer.queue("jumpStart")
-            aniPlayer.queue("jump")
-            actuallyApplyJump(false)
 
     if aniPlayer:
         if aniPlayer.assigned_animation == "jumpSquat":
@@ -433,10 +428,21 @@ func processJumpInputs(delta):
             actuallyApplyJump(false)
     elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
         feather_jump_timer += (delta*22)
+        
+    if not is_touching_water and was_touching_water_at_start_of_jump and pressingJump():
+        feather_jump_timer = 0
+        should_magic_jump = true
+        was_touching_water_at_start_of_jump = false
+        actuallyApplyJump(false)
+        
     if not pressingJump():
         weak_feather_dbl_jump = true
         if glitch_form != global.GlitchForm.FEATHER:
             feather_jump_timer = 200
+            
+    if vv > 0 or on_ground:
+        should_magic_jump = false
+        was_touching_water_at_start_of_jump = false
 
 func addJumpSmokeCloud(flip_flip_h = false):
     if is_touching_water: return
@@ -484,11 +490,16 @@ func actuallyApplyJump(play_sound = true):
     should_do_fallthrough_area_collision = false
     has_just_jumped_timer = 0 
     feather_fall_timer = 0
-    should_magic_jump = false
+    if glitch_form == global.GlitchForm.FEATHER:
+        should_magic_jump = false
 
 func isKindOfOnGround():
     # I'm on the ground or just fell off a platform...
-    return (on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)) and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
+    return isKindaSortaOfOnGround() and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
+    
+func isKindaSortaOfOnGround():
+    # I'm on the ground or just fell off a platform...
+    return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
         
 
 const PROJECTION_ORTHOGONAL = 1
