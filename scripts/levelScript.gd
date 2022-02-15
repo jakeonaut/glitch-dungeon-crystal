@@ -16,6 +16,7 @@ export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BE
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
 export var has_broom = false
+var has_ever_set_camera_position = false
 
 export var display_title = "???"
 
@@ -51,6 +52,8 @@ func _ready_impl():
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
 
+    yield(get_tree(), "idle_frame")
+    yield(get_tree(), "idle_frame")
     restartMusic()
     tryShowUIElements()
     tryToRespawn()
@@ -147,6 +150,9 @@ func tryToRespawn():
         found_door.land()
     elif not global.memory.has("roomPath") or global.memory["roomPath"] != getLevelName():
         player.global_transform.origin = player.spawn_origin
+    if not has_ever_set_camera_position:
+        gameCamera.setCameraPositionNow()
+        has_ever_set_camera_position = true
 
     global.isRespawning = false
 

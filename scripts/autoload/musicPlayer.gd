@@ -1,14 +1,24 @@
 extends Node
 
+onready var tween_out = get_node("Tween")
+export var transition_duration = 3.00
+export var transition_type = 1 # TRANS_SINE
+
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
 onready var debugThemePlayer = get_node("DebugThemePlayer")
 onready var casinoThemePlayer = get_node("CasinoThemePlayer")
+onready var realizationThemePlayer = get_node("RealizationThemePlayer")
 onready var suburbThemePlayer = get_node("SuburbThemePlayer")
 onready var swampThemePlayer = get_node("SwampThemePlayer")
+onready var poisonThemePlayer = get_node("PoisonThemePlayer")
+onready var oceanThemePlayer = get_node("OceanThemePlayer")
+onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
+
+var initial_volume_dbs = {}
 
 var currentlyPlayingTheme = null
 
@@ -16,46 +26,92 @@ func _ready():
     set_process(true)
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+
     if currentlyPlayingTheme == wakeupPlayer and not wakeupPlayer.is_playing():
-        self.playDungeon()
+        tryToPlay(dungeonThemePlayer)
+        
+func tryToPlay(stream_player):
+    if not initial_volume_dbs.has(stream_player.name):
+        initial_volume_dbs[stream_player.name] = stream_player.volume_db
+        
+    print("try to play: " + stream_player.name)
+        
+    if stream_player.name == null:
+        return
+
+    if stream_player.is_playing(): return
+    self.stopAll()
+    fade_in(stream_player)
+        
+func fade_out(stream_player):
+    if not stream_player.is_playing():
+        return
+
+    # tween music volume down to -80
+    tween_out.interpolate_property(stream_player, "volume_db", initial_volume_dbs[stream_player.name], -80, transition_duration, transition_type, Tween.EASE_IN, 0)
+    tween_out.start()
+    # when the tween ends, the music will be stopped
+    
+func fade_in(stream_player):
+    stream_player.play()
+    
+    if currentlyPlayingTheme != null:
+        # tween music volume up to proper volume
+        stream_player.volume_db = -80
+        tween_out.interpolate_property(stream_player, "volume_db", -80, initial_volume_dbs[stream_player.name], transition_duration, transition_type, Tween.EASE_IN, 0)
+        tween_out.start()
+        # when the tween ends, the music will be stopped
+    currentlyPlayingTheme = stream_player
+
+func _on_TweenOut_tween_completed(object, _key):
+    print("tween out completed: " + str(object.name))
+    # stop the music -- otherwise it continues to run at silent volume
+    object.stop()
+    object.pitch_scale = 1.0
 
 func stopAll():
-    changeSongPitch(1.0)
-    titleThemePlayer.stop()
-    dungeonThemePlayer.stop()
-    debugThemePlayer.stop()
-    casinoThemePlayer.stop()
-    suburbThemePlayer.stop()
-    swampThemePlayer.stop()
-    goddessThemePlayer.stop()
-    townThemePlayer.stop()
+    fade_out(titleThemePlayer)
+    fade_out(dungeonThemePlayer)
+    fade_out(debugThemePlayer)
+    fade_out(casinoThemePlayer)
+    fade_out(realizationThemePlayer)
+    fade_out(poisonThemePlayer)
+    fade_out(suburbThemePlayer)
+    fade_out(swampThemePlayer)
+    fade_out(oceanThemePlayer)
+    fade_out(exploreThemePlayer)
+    fade_out(goddessThemePlayer)
+    fade_out(townThemePlayer)
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    return # i don't want to listen to music for a bit
+    # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0:
-        self.playGoddess()
+        tryToPlay(goddessThemePlayer)
     elif path.find("IntroScene0") > 0:
-        self.playWakeup()
+        tryToPlay(wakeupPlayer)
     elif path.find("IntroDungeon") > 0:
-        self.playDungeon()
+        tryToPlay(dungeonThemePlayer)
     elif path.find("Debug") > 0:
-        self.playDebug()
-    elif path.find("Casino") > 0 or path.find("BroomChallenge") > 0:
-        self.playCasino()
+        tryToPlay(debugThemePlayer)
+    elif path.find("Casino") > 0:
+        tryToPlay(casinoThemePlayer)
+    elif path.find("BroomChallenge") > 0:
+        tryToPlay(realizationThemePlayer)
     elif path.find("Suburb") > 0:
-        self.playSuburb()
-    elif path.find("Swamp") > 0:
-        self.playSwamp()
+        tryToPlay(suburbThemePlayer)
+    elif path.find("Ocean") > 0:
+        tryToPlay(oceanThemePlayer)
+    elif path.find("Desert") > 0:
+        tryToPlay(exploreThemePlayer)
+    elif path.find("Poison") > 0:
+        tryToPlay(poisonThemePlayer)
+    elif path.find("Swamp") > 0 or path.find("Town") > 0:
+        tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0:
-        titleThemePlayer.play() # TODO(jaketrower!!!)
-    elif path.find("Town") > 0:
-        self.playSwamp() # self.playTown()
-    elif path.find("SpellbookIntro") > 0:
-        self.playDebug()
-    elif path.find("Adventure") > 0:
-        self.playSuburb()
+        tryToPlay(titleThemePlayer)
     else:
         self.stopAll()
     changeSongPitch(1.0)
@@ -64,51 +120,3 @@ func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch
-        
-func playWakeup():
-    if wakeupPlayer.is_playing(): return
-    self.stopAll()
-    wakeupPlayer.play()
-    currentlyPlayingTheme = wakeupPlayer
-
-func playDungeon():
-    if dungeonThemePlayer.is_playing(): return
-    self.stopAll()
-    dungeonThemePlayer.play()
-    currentlyPlayingTheme = dungeonThemePlayer
-
-func playDebug():
-    if debugThemePlayer.is_playing(): return
-    self.stopAll()
-    debugThemePlayer.play()
-    currentlyPlayingTheme = debugThemePlayer
-    
-func playCasino():
-    if casinoThemePlayer.is_playing(): return
-    self.stopAll()
-    casinoThemePlayer.play()
-    currentlyPlayingTheme = casinoThemePlayer
-
-func playSuburb():
-    if suburbThemePlayer.is_playing(): return
-    self.stopAll()
-    suburbThemePlayer.play()
-    currentlyPlayingTheme = suburbThemePlayer
-
-func playSwamp():
-    if swampThemePlayer.is_playing(): return
-    self.stopAll()
-    swampThemePlayer.play()
-    currentlyPlayingTheme = swampThemePlayer
-
-func playTown():
-    if townThemePlayer.is_playing(): return
-    self.stopAll()
-    townThemePlayer.play()
-    currentlyPlayingTheme = townThemePlayer
-
-func playGoddess():
-    if goddessThemePlayer.is_playing(): return
-    self.stopAll()
-    goddessThemePlayer.play()
-    currentlyPlayingTheme = goddessThemePlayer

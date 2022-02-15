@@ -22,13 +22,15 @@ export var behavior_was_thrown = false
 export var behavior_thrower = false
 export var behavior_evolve = false
 export var behavior_fizzle_out_after_evolve = false
+export var behavior_mini_explore = false
 export var walk_direction = 1
+export var is_particle = false
 
 var glitch_switch_timer = 0
 var glitch_switch_time_limit = 99
 
 var evolution_timer = 0
-var evolution_time_limit = 15
+export var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,6 +54,8 @@ func _ready():
     if behavior_evolve:
         mySprite.hframes = mySprite.hframes * 2
         mySprite.vframes = mySprite.vframes * 2
+    elif behavior_fizzle_out_after_evolve:
+        mySprite.should_soft_fizzle_out = true
     else:
         glitch_switch_time_limit = rand_range(30.0, 50.0)
         mySprite.frame_delay = rand_range(0.3, 0.5)
@@ -59,12 +63,21 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
+    if is_particle:
+        if smallInteractionArea.is_in_group("enemies"):
+            smallInteractionArea.remove_from_group("enemies")
+        if behavior_jumping:
+            on_ground = false
+        should_collide_floor = false
+        should_collide_ceil = false
+        should_collide_horizontally = false
+        should_do_fallthrough_area_collision = false
+    
     if am_i_dying:
         processDeath()
         return
         
-    if am_i_really_in_range_of_player:
-        am_i_in_range_of_player = true
+    am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
 
     if behavior_fizzle_out_after_evolve:
@@ -89,20 +102,26 @@ func _process(delta):
             on_ground = false
             walk_direction = 1
             grav = 0
+            if myOtherSprite:
+                myOtherSprite.flip_v = not myOtherSprite.flip_v
         elif not on_ground and linear_velocity.y == 0:
             walk_direction = -1
             grav = 60
+            if myOtherSprite:
+                myOtherSprite.flip_v = not myOtherSprite.flip_v
 
     if behavior_evolve:
         evolution_timer += (delta*22)
         if evolution_timer > evolution_time_limit/3 and not startEvolveSound.is_playing():
-            startEvolveSound.play()
+            if not is_particle:
+                startEvolveSound.play()
         if evolution_timer > evolution_time_limit:
             evolution_timer = 0
             mySprite.hframes = mySprite.hframes / 2
             mySprite.vframes = mySprite.vframes / 2
             behavior_evolve = false
-            evolveSound.play()
+            if not is_particle:
+                evolveSound.play()
 
             if behavior_fizzle_out_after_evolve:
                 glitch_switch_timer = 0
@@ -188,6 +207,9 @@ func stopPassiveActivate():
     pass
 
 func ouchies(_broom_origin):
+    if is_particle:
+        return
+
     if not am_i_dying:
         am_i_dying = true
         mySprite.restart()
@@ -197,6 +219,9 @@ func ouchies(_broom_origin):
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
         dieSound.play()
+        pauseSelf = true
+        if smallInteractionArea.is_in_group("enemies"):
+            smallInteractionArea.remove_from_group("enemies")
 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true

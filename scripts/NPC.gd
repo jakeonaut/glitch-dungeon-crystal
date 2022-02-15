@@ -9,6 +9,7 @@ export var is_important = false # when dialogue is started, can't walk away unti
 export var is_really_important = false # touching it will start the dialogue
 export var can_activate = true
 export var can_move = true
+export var is_fast_text = false
 
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
@@ -45,10 +46,11 @@ func _ready():
         textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
     textBoxContainer.setVars()
 
-    textBox.is_important = is_important or is_really_important
+    textBox.is_important = is_important
     textBox.is_really_important = is_really_important
     if tiny_textbox:
         textBox.tinify()
+    textBox.is_fast_text = is_fast_text
 
 func isActive():
     return visible or can_activate or is_active

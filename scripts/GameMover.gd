@@ -58,6 +58,7 @@ var should_only_do_middle_sensor = false
 var should_do_simple_sensor_probe = true
 var should_do_fallthrough_area_collision = false
 var fallthrough_area_collision_y = 0
+var should_always_do_jump_smoke_cloud = false
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -107,13 +108,12 @@ export var floor_glitch_walk_speed = 3
 export var invisible_glitch_walk_speed = 6
 export var swimming_walk_speed = 6
 var should_magic_jump = false
-var jump_force = 16
-var invisible_jump_force = 14
+export var jump_force = 16
+export var invisible_jump_force = 14
 var has_just_jumped_timer = 0
 var has_just_jumped_time_limit = 200# 3
 # TODO(jaketrower): This is dumb and should be like a boolean or state, oh well
 var jump_squat_jump_input_timer = 0
-var ladder_timer = 0
 # TODO(jaketrower): dedupe with is_pressing_horizontal_input
 var is_walking = false
 var is_pressing_horizontal_input = false
@@ -329,13 +329,6 @@ func processInputs(delta):
     if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
         vv = 6
         should_do_fallthrough_area_collision = false
-        # ladder_timer += (delta*22)
-        # # CLIMB BABY!!!!
-        # if ladder_timer < 8:
-        #     vv = -1
-        # if ladder_timer >= 8:
-        #     ladder_timer = 0
-        #     vv = jump_force * 8
 
 func justPressedDown():
     return false
@@ -544,7 +537,8 @@ func processHorizontalInputs(delta):
     #         right = Vector3(0, 0, 0)
     
     var horizontal_input = false
-    has_just_jumped_timer += (delta*22)
+    if has_just_jumped_timer < has_just_jumped_time_limit:
+        has_just_jumped_timer += (delta*22)
         
     if isKindOfOnGround() or has_just_jumped_timer < has_just_jumped_time_limit or \
         is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == global.GlitchForm.LADDER:
@@ -577,6 +571,8 @@ func processHorizontalInputs(delta):
                         dir += right*(delta*DNUMHORZ)
                         mySprite.flip_h = true
                         doWalkAnimation()
+                        if on_ground and should_always_do_jump_smoke_cloud:
+                            addJumpSmokeCloud(true)
                 # if there's no animation player, there's no animation. just flip
                 else:
                     dir += right*(delta*DNUMHORZ)
@@ -596,6 +592,8 @@ func processHorizontalInputs(delta):
                         dir -= right*(delta*DNUMHORZ)
                         mySprite.flip_h = false
                         doWalkAnimation()
+                        if on_ground and should_always_do_jump_smoke_cloud:
+                            addJumpSmokeCloud(true)
                 # if there's no animation player, there's no animation. just flip
                 else:
                     dir -= right*(delta*DNUMHORZ)
@@ -700,7 +698,8 @@ func doWalkAnimation():
 func handleCollisionsAndMove(local_lv, delta):
     if delta == 0:
         return local_lv
-        
+       
+    # TODO(jaketrower): global.time_dilation_multiplier?
     var DNUM = 1.15
     local_lv.x *= delta*DNUM
     local_lv.y *= delta*DNUM

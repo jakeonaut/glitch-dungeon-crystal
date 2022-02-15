@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -6,10 +6,10 @@
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://levels/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=6]
-[ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Fish.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=10]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=13]
@@ -26,46 +26,13 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=26]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=27]
+[ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=28]
-[ext_resource path="res://assets/sprites/elder_sprite.png" type="Texture" id=29]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=30]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=31]
 [ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=32]
-[ext_resource path="res://dialogFontTheme.tres" type="Theme" id=33]
-[ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=34]
-[ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=35]
-[ext_resource path="res://assets/sprites2D/hearts.png" type="Texture" id=36]
-[ext_resource path="res://scripts/UILayer.gd" type="Script" id=37]
-[ext_resource path="res://assets/fonts/PixulBrush.ttf" type="DynamicFontData" id=38]
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=39]
 [ext_resource path="res://shaders/CRTEffect.gdshader" type="Shader" id=40]
-
-[sub_resource type="DynamicFont" id=29]
-resource_local_to_scene = true
-size = 32
-outline_size = 4
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 38 )
-
-[sub_resource type="Theme" id=30]
-default_font = SubResource( 29 )
-
-[sub_resource type="DynamicFont" id=27]
-resource_local_to_scene = true
-size = 20
-outline_size = 3
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=28]
-default_font = SubResource( 27 )
 
 [sub_resource type="Environment" id=23]
 background_mode = 4
@@ -101,6 +68,37 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=11]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=35]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -315,12 +313,6 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=19]
-flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 1
-albedo_texture = ExtResource( 29 )
-
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport")
 
@@ -332,225 +324,7 @@ viewport_path = NodePath("Viewport")
 script = ExtResource( 5 )
 display_title = "[/wave] press enter to begin...        "
 
-[node name="UILayer" type="CanvasLayer" parent="Viewport/level"]
-script = ExtResource( 37 )
-
-[node name="Filters" type="Control" parent="Viewport/level/UILayer"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Viewport/level/UILayer"]
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 612.0
-margin_bottom = 368.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 30 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[rainbow freq=0.2 sat=2 val=10][wave amp=10 freq=2]GLITCH DUNGEON 
-        CRYSTAL[/wave][/rainbow]"
-text = "GLITCH DUNGEON 
-        CRYSTAL"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelTitle" type="ColorRect" parent="Viewport/level/UILayer"]
-margin_left = 177.0
-margin_top = 428.0
-margin_right = 473.0
-margin_bottom = 500.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/LevelTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 293.0
-margin_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/LevelTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 285.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer/LevelTitle/ColorRect/ColorRect"]
-margin_top = 8.0
-margin_right = 512.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 28 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "the dungeon"
-text = "the dungeon"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HeartsRect" type="ColorRect" parent="Viewport/level/UILayer"]
-margin_left = 76.0
-margin_right = 136.0
-margin_bottom = 57.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/HeartsRect"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 57.0
-margin_bottom = 54.0
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/HeartsRect/ColorRect"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 51.0
-margin_bottom = 48.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HeartSprite" type="Sprite" parent="Viewport/level/UILayer/HeartsRect/ColorRect/ColorRect"]
-position = Vector2( 24, 24 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 36 )
-hframes = 3
-vframes = 2
-script = ExtResource( 10 )
-frame_delay = 0.1
-should_randomize_frame_delay = true
-max_frames = 1
-
-[node name="EquipmentRect" type="ColorRect" parent="Viewport/level/UILayer"]
-margin_right = 77.0
-margin_bottom = 77.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/EquipmentRect"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 74.0
-margin_bottom = 74.0
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Viewport/level/UILayer/EquipmentRect/ColorRect"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 68.0
-margin_bottom = 68.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EquipmentSprite" type="Sprite" parent="Viewport/level/UILayer/EquipmentRect/ColorRect/ColorRect"]
-position = Vector2( 20, 40 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 35 )
-hframes = 6
-vframes = 5
-frame = 2
-
-[node name="ColorRect2" type="ColorRect" parent="Viewport/level/UILayer/EquipmentRect/ColorRect/ColorRect"]
-margin_left = 26.0
-margin_top = 5.0
-margin_right = 60.0
-margin_bottom = 39.0
-color = Color( 0, 0.392157, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Viewport/level/UILayer/EquipmentRect/ColorRect/ColorRect/ColorRect2"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 32.0
-margin_bottom = 32.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EquipmentSlotSprite" type="Sprite" parent="Viewport/level/UILayer/EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3"]
-position = Vector2( 15, 15 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 34 )
-hframes = 8
-vframes = 5
-frame = 6
-
-[node name="EquipmentStatusRect" type="ColorRect" parent="Viewport/level/UILayer"]
-margin_left = 7.0
-margin_top = 76.0
-margin_right = 70.0
-margin_bottom = 96.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer/EquipmentStatusRect"]
-margin_left = 4.0
-margin_top = -7.0
-margin_right = 73.0
-margin_bottom = 136.0
-theme = ExtResource( 33 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-text = "Lv. 1"
-
-[node name="SavingTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer"]
-visible = false
-margin_left = 11.0
-margin_top = 463.0
-margin_right = 276.0
-margin_bottom = 499.0
-theme = ExtResource( 33 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[wave] saving... (not really)[/wave]"
-text = " saving... (not really)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 environment = SubResource( 23 )
@@ -649,11 +423,29 @@ shape = SubResource( 9 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 flip_h = true
-frame = 4
+frame = 64
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
 anims/default = SubResource( 10 )
 anims/flickerOn = SubResource( 11 )
+
+[node name="NPC6" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -7.6, 1.2 )
+grav = 0
+bbText = "hey....
+press ENTER?"
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
+shape = SubResource( 9 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+flip_h = true
+frame = 66
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+anims/default = SubResource( 34 )
+anims/flickerOn = SubResource( 35 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 14, 4 )
@@ -810,14 +602,23 @@ anims/default = SubResource( 6 )
 anims/flickerOn = SubResource( 7 )
 anims/getItem = SubResource( 8 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -6, 0 )
-material_override = SubResource( 19 )
-pixel_size = 0.12
-texture = ExtResource( 29 )
-hframes = 4
-vframes = 2
-script = ExtResource( 27 )
+[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3, 12 )
+
+[node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -7, 12 )
+
+[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -3.44048, 12 )
+
+[node name="Dragonfly3" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -6, 12 )
+
+[node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5, 12 )
+
+[node name="Snail" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.271328, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -833,6 +634,8 @@ __meta__ = {
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/NPC6"]
+[editable path="Viewport/level/NPC6/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/NPC5"]

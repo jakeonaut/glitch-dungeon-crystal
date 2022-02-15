@@ -33,8 +33,7 @@ func _ready():
     if initial_target != null:
         if initial_target.has_node("CameraTarget"):
             initial_target = initial_target.get_node("CameraTarget")
-        global_transform.origin.x = initial_target.global_transform.origin.x
-        global_transform.origin.y = initial_target.global_transform.origin.y
+        setCameraPositionNow()
     start_applying_parallax = true
 
     
@@ -56,6 +55,10 @@ func _ready():
             botmost_y = tile_y
         if tile_y + TILE_HEIGHT > topmost_y:
             topmost_y = tile_y + TILE_HEIGHT
+            
+func setCameraPositionNow():
+    global_transform.origin.x = initial_target.global_transform.origin.x
+    global_transform.origin.y = initial_target.global_transform.origin.y
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

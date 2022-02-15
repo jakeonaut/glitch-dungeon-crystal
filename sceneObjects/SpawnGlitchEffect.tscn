@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=5]
 [ext_resource path="res://assets/MRMOTEXTEX3.png" type="Texture" id=6]
 [ext_resource path="res://scripts/SpawnGlitchEffect.gd" type="Script" id=7]
+[ext_resource path="res://assets/sounds/glitchspawneffect.wav" type="AudioStream" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -73,3 +74,9 @@ frame = 864
 script = ExtResource( 2 )
 frame_delay = 0.01
 max_frames = 4
+
+[node name="AppearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+pitch_scale = 1.7
+autoplay = true

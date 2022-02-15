@@ -1,4 +1,4 @@
-[gd_scene load_steps=172 format=2]
+[gd_scene load_steps=179 format=2]
 
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/textures/yellowfloorbot1.png" type="Texture" id=14]
 [ext_resource path="res://assets/textures/yellowfloorbot4.png" type="Texture" id=15]
 [ext_resource path="res://assets/textures/yellowsolid4.png" type="Texture" id=16]
-[ext_resource path="res://assets/textures/greenspikes4.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/greyspikes5.png" type="Texture" id=17]
 [ext_resource path="res://assets/textures/yellowsolid3.png" type="Texture" id=18]
 [ext_resource path="res://assets/textures/yellowsolidtop1.png" type="Texture" id=19]
 [ext_resource path="res://assets/textures/yellowsolid7.png" type="Texture" id=20]
@@ -42,18 +42,20 @@
 [ext_resource path="res://assets/textures/yellowfloorbot2.png" type="Texture" id=40]
 [ext_resource path="res://assets/textures/yellowroof2.png" type="Texture" id=41]
 [ext_resource path="res://assets/textures/yellowsolidtop2.png" type="Texture" id=42]
-[ext_resource path="res://assets/textures/greenspikes2.png" type="Texture" id=43]
-[ext_resource path="res://assets/textures/greenspikes3.png" type="Texture" id=44]
-[ext_resource path="res://assets/textures/greenspikes5.png" type="Texture" id=45]
+[ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=43]
+[ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=44]
+[ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=45]
 [ext_resource path="res://assets/textures/yellowsolid5.png" type="Texture" id=46]
 [ext_resource path="res://assets/textures/yellowfloorbot3.png" type="Texture" id=47]
 [ext_resource path="res://assets/textures/yellowsolid6.png" type="Texture" id=48]
 [ext_resource path="res://assets/textures/yellowroof5.png" type="Texture" id=49]
 [ext_resource path="res://assets/textures/yellowroof1.png" type="Texture" id=50]
 [ext_resource path="res://assets/textures/yellowroof7.png" type="Texture" id=51]
+[ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=52]
 [ext_resource path="res://assets/textures/yellowsolid8.png" type="Texture" id=53]
-[ext_resource path="res://assets/textures/greenspikes1.png" type="Texture" id=54]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=54]
 [ext_resource path="res://assets/textures/yellowsolid1.png" type="Texture" id=55]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=56]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=59]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -569,59 +571,119 @@ shader_param/base_palette = ExtResource( 9 )
 material = SubResource( 187 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=191]
+[sub_resource type="AnimatedTexture" id=276]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 44 )
+frame_1/texture = ExtResource( 52 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 45 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 43 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 17 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=117]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 54 )
-shader_param/base_palette = ExtResource( 59 )
-
-[sub_resource type="CubeMesh" id=276]
-material = SubResource( 191 )
-size = Vector3( 1, 1, 1 )
-
-[sub_resource type="RayShape" id=195]
-
-[sub_resource type="BoxShape" id=281]
-extents = Vector3( 0.4, 0.4, 0.4 )
-
-[sub_resource type="ShaderMaterial" id=196]
-shader = ExtResource( 1 )
-shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 43 )
-shader_param/base_palette = ExtResource( 59 )
+shader_param/texture_albedo = SubResource( 276 )
+shader_param/base_palette = ExtResource( 56 )
+shader_param/real_base_palette = ExtResource( 54 )
 
 [sub_resource type="CubeMesh" id=277]
-material = SubResource( 196 )
+material = SubResource( 117 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=200]
+[sub_resource type="RayShape" id=278]
+
+[sub_resource type="BoxShape" id=279]
+extents = Vector3( 0.4, 0.4, 0.4 )
+
+[sub_resource type="AnimatedTexture" id=280]
+flags = 19
+frames = 4
+frame_0/texture = ExtResource( 44 )
+frame_1/texture = ExtResource( 52 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 45 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 43 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=120]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 44 )
-shader_param/base_palette = ExtResource( 59 )
+shader_param/texture_albedo = SubResource( 280 )
+shader_param/base_palette = ExtResource( 56 )
+shader_param/real_base_palette = ExtResource( 54 )
 
-[sub_resource type="CubeMesh" id=278]
-material = SubResource( 200 )
+[sub_resource type="CubeMesh" id=281]
+material = SubResource( 120 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=204]
+[sub_resource type="AnimatedTexture" id=282]
+flags = 19
+frames = 4
+fps = 3.0
+frame_0/texture = ExtResource( 44 )
+frame_1/texture = ExtResource( 52 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 45 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 43 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=283]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 59 )
+shader_param/texture_albedo = SubResource( 282 )
+shader_param/base_palette = ExtResource( 56 )
+shader_param/real_base_palette = ExtResource( 54 )
 
-[sub_resource type="CubeMesh" id=279]
-material = SubResource( 204 )
+[sub_resource type="CubeMesh" id=284]
+material = SubResource( 283 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=208]
+[sub_resource type="AnimatedTexture" id=285]
+flags = 19
+frames = 2
+frame_0/texture = ExtResource( 44 )
+frame_1/texture = ExtResource( 52 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=124]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
-shader_param/texture_albedo = ExtResource( 45 )
-shader_param/base_palette = ExtResource( 59 )
+shader_param/texture_albedo = SubResource( 285 )
+shader_param/base_palette = ExtResource( 56 )
+shader_param/real_base_palette = ExtResource( 54 )
 
-[sub_resource type="CubeMesh" id=280]
-material = SubResource( 208 )
+[sub_resource type="CubeMesh" id=286]
+material = SubResource( 124 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=287]
+flags = 19
+frames = 4
+fps = 5.0
+frame_0/texture = ExtResource( 44 )
+frame_1/texture = ExtResource( 52 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 45 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 43 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=288]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = SubResource( 287 )
+shader_param/base_palette = ExtResource( 56 )
+shader_param/real_base_palette = ExtResource( 54 )
+
+[sub_resource type="CubeMesh" id=289]
+material = SubResource( 288 )
 size = Vector3( 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]
@@ -1146,80 +1208,80 @@ shape = SubResource( 158 )
 
 [node name="Spikes" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
-mesh = SubResource( 276 )
+mesh = SubResource( 277 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Spikes"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes/StaticBody"]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 278 )
 
 [node name="Area" type="Area" parent="Spikes" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes/Area"]
-shape = SubResource( 281 )
+shape = SubResource( 279 )
 
 [node name="Spikes2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -1 )
-mesh = SubResource( 277 )
+mesh = SubResource( 281 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Spikes2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes2/StaticBody"]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 278 )
 
 [node name="Area" type="Area" parent="Spikes2" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes2/Area"]
-shape = SubResource( 281 )
+shape = SubResource( 279 )
 
 [node name="Spikes3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -2 )
-mesh = SubResource( 278 )
+mesh = SubResource( 284 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Spikes3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes3/StaticBody"]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 278 )
 
 [node name="Area" type="Area" parent="Spikes3" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes3/Area"]
-shape = SubResource( 281 )
+shape = SubResource( 279 )
 
 [node name="Spikes4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -3 )
-mesh = SubResource( 279 )
+mesh = SubResource( 286 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Spikes4"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes4/StaticBody"]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 278 )
 
 [node name="Area" type="Area" parent="Spikes4" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes4/Area"]
-shape = SubResource( 281 )
+shape = SubResource( 279 )
 
 [node name="Spikes5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -4 )
-mesh = SubResource( 280 )
+mesh = SubResource( 289 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Spikes5"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes5/StaticBody"]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 278 )
 
 [node name="Area" type="Area" parent="Spikes5" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes5/Area"]
-shape = SubResource( 281 )
+shape = SubResource( 279 )

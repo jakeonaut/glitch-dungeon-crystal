@@ -18,6 +18,8 @@ export var should_fizzle_out = false
 var should_soft_fizzle_out = false
 export var should_animate = true # set this to false if you handle animation through an AnimationPlayer
 
+export var should_ignore_pause = false
+
 func _ready():
     set_process(true)
     start_frame = get_frame()
@@ -35,7 +37,7 @@ func preProcess():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
-    if global.pauseGame: return
+    if global.pauseGame and should_ignore_pause: return
     preProcess()
     if visible and should_animate:
         animate(delta)

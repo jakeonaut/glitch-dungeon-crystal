@@ -1,14 +1,15 @@
 extends Spatial
 
-
 onready var mrmotex1 = get_node("MrMoTex")
 onready var mrmotex2 = get_node("MrMoTex2")
 onready var mrmotex3 = get_node("MrMoTex3")
 onready var mrmotex4 = get_node("MrMoTex4")
+onready var appearSound = get_node("AppearSound")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process(true)
+    appearSound.pitch_scale = rand_range(1.0, 1.8)
     setSpriteValues(mrmotex1)
     setSpriteValues(mrmotex2)
     setSpriteValues(mrmotex3)

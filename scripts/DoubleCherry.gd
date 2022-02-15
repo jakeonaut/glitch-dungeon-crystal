@@ -16,6 +16,7 @@ func _ready():
     set_process(true)
     should_collide_ceil = false
     should_collide_horizontally = false
+    should_only_do_middle_sensor = true
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("growBack")
@@ -28,12 +29,14 @@ func _process(delta):
     if secretAniPlayer.assigned_animation == "eaten" and not secretAniPlayer.is_playing() and not crunchSound.is_playing():
         queue_free()
     
-    if am_i_really_in_range_of_player:
-        am_i_in_range_of_player = true
+    am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
     
-    if not am_i_in_range_of_player:
-        return
+    if (not am_i_in_range_of_player or global.num_cherries_eaten >= global.max_cherries) and \
+       secretAniPlayer.assigned_animation != "shrivel":
+        secretAniPlayer.stop()
+        secretAniPlayer.clear_queue()
+        secretAniPlayer.play("shrivel")
     
     if secretAniPlayer.assigned_animation == "growBack" and not secretAniPlayer.is_playing() and can_fall and not on_ground:
         true_terminal_vel = 32
@@ -46,6 +49,14 @@ func _process(delta):
         
     if secretAniPlayer.assigned_animation == "land" and not secretAniPlayer.is_playing():
         mySprite.should_animate = true
+        
+    if secretAniPlayer.assigned_animation == "shrivel":
+        if am_i_in_range_of_player and global.num_cherries_eaten < global.max_cherries:
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("growBack")
+        if not secretAniPlayer.is_playing():
+            queue_free()
         
                 
 func playerActivationAreaPassiveActivate():

@@ -32,6 +32,7 @@ var bot_margin_start = 0
 var adjusted_tiny_y_pos = 0
 var adjusted_tiny_x_pos = 0
 var target_origin = Vector3(0, 0, 0)
+var is_fast_text = false
 
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
@@ -100,7 +101,7 @@ func _process(delta):
         text_timer += (delta*22)
         
         var time_limit = text_time_limit
-        if Input.is_action_pressed("interact_button"):
+        if Input.is_action_pressed("interact_button") or is_fast_text:
             time_limit = 0
             
         tryToHide(delta)
@@ -110,7 +111,7 @@ func _process(delta):
                 abortSound.preActivateScript()
             endPrompt.visible = not tiny
             has_been_shown = true
-            if is_important or is_really_important:
+            if is_important:
                 global.pauseGame = false
             is_important = false
             is_really_important = false
@@ -176,7 +177,7 @@ func resetPrompts():
             
 func showTextbox():
     focus_me = true
-    if is_important or is_really_important:
+    if is_important:
         global.pauseGame = true
         # maybe treat this like the Item Catch?
     # if tiny: tinyColorRect.visible = true

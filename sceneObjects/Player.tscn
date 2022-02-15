@@ -673,7 +673,7 @@ volume_db = -30.0
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )
-volume_db = -25.0
+volume_db = -35.0
 
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
@@ -690,11 +690,11 @@ volume_db = -30.0
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 21 )
-volume_db = -15.0
+volume_db = -18.0
 
 [node name="HurtSound2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 24 )
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="SkateSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )

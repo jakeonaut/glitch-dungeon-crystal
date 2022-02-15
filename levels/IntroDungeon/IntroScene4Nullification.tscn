@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=2]
@@ -70,6 +70,10 @@ tracks/0/keys = {
 
 [sub_resource type="BoxShape" id=6]
 resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=12]
+resource_local_to_scene = true
+extents = Vector3( 5, 4, 1.3 )
 
 [sub_resource type="BoxShape" id=7]
 resource_local_to_scene = true
@@ -176,11 +180,12 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( -3604451, 1, 36 )
 }
 script = ExtResource( 12 )
 __meta__ = {
-"_editor_clip_": 0
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 1 )
 }
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
@@ -292,9 +297,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7684, -56.0345, 0 )
 [node name="Torch3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2052, -56.0345, 0 )
 
-[node name="Torch4" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45801, -55.0345, 0 )
-
 [node name="Torch5" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.542, -54.0345, 0 )
 
@@ -312,11 +314,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8916, -54.0345, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.52738, -54.0977, 0 )
+visible = false
 grav = 0
-bbText = "this door leads
-to GODDESS lair
-... its locked"
-tiny_textbox = true
+bbText = "This door leads to GODDESS
+TEMPLE....but it's locked by magic. 
+Do you wish to know more?
+Welcome to these cursed lands.
+Entities of old magic, pixies,
+sprites, witches have lived here
+for ages in harmony. 
+However, a powerful priestess,
+by corrupting the teachings of
+our GODDESS, has brought blight
+upon our land. In order to
+unlock the door, you must collect
+100 crystal cubes, it seems you have
+some already.. Venture forth, and
+talk to every being you see, for
+they may be able to help your quest.
+PLEASE!!! Help us traveler! Do not
+turn your back on us! "
+is_really_important = true
+is_fast_text = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 12 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+frame = 6
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5274, -49.0977, 0 )
@@ -382,6 +407,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.90751, -10.6012, 0 )
 [node name="miniCubeCrystal6" parent="Viewport/level/miniCubeCrystals" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.90751, -9.27746, 0 )
 
+[node name="NPC4" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -52, 0 )
+grav = 0
+bbText = "i miss friends..
+but glitches
+enchant me..."
+tiny_textbox = true
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -398,6 +431,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -62, 0 )
 grav = 0
 
 [editable path="Viewport/level/Door5"]
+[editable path="Viewport/level/NPC"]
+[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/NPC3"]

@@ -19,8 +19,8 @@ height = 1.6
 radius = 0.8
 height = 1.8
 
-[sub_resource type="SphereShape" id=4]
-radius = 10.0
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 18, 13, 1 )
 
 [node name="GlitchEnemy" type="KinematicBody"]
 collision_layer = 4

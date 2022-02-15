@@ -69,6 +69,8 @@ var can_broom = true
 var num_cherries_eaten = 0
 var max_cherries = 5
 
+var num_mini_crystal_cubes = 0
+
 var canGlitchScreen = true
 var canChangeSongPitch = true
 var crtScreenEffects = true

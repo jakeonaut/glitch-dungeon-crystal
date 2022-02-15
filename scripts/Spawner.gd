@@ -21,8 +21,7 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
-    if am_i_really_in_range_of_player:
-        am_i_in_range_of_player = true
+    am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
     
     if not am_i_in_range_of_player:

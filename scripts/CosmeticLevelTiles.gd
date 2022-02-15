@@ -8,6 +8,12 @@ var yellow_cosmetic_tiles = preload("res://sceneObjects/tiles/yellow_cosmetic_ti
 
 var tile_name_dict = {}
 
+#########################################################
+#########################################################
+# NOTE: DOESN'T ACTUALLY INHERIT FROM LevelTiles.gd
+#########################################################
+#########################################################
+
 func setTileNameNum(newName, num, cell_index):
     if num != 0:
         newName = newName + str(num+1) # 0 index, so add one
@@ -90,6 +96,7 @@ func properlySetTiles():
     for i in range(len(tile_cell_indices)):
         var cell_index = tile_cell_indices[i]
         var tile_name = tile_name_dict[cell_index]
+        var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name))
         
 func normalGlitch(palette):

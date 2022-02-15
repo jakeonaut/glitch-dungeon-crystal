@@ -22,7 +22,7 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
-[ext_resource path="res://sceneObjects/Dragonfly.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=23]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=2]
@@ -184,6 +184,46 @@ tracks/0/keys = {
 "values": [ 22, 21, 20 ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "shrivel"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:pixel_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.65, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.09, 0.09, 0.001 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 21, 20, 21 ]
+}
+
 [sub_resource type="BoxShape" id=13]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -222,6 +262,7 @@ anims/eaten = SubResource( 8 )
 anims/fall = SubResource( 9 )
 anims/growBack = SubResource( 4 )
 anims/land = SubResource( 6 )
+anims/shrivel = SubResource( 14 )
 
 [node name="SmallInteractionArea" type="Area" parent="."]
 script = ExtResource( 5 )
@@ -233,4 +274,5 @@ shape = SubResource( 13 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
 shape = SubResource( 12 )

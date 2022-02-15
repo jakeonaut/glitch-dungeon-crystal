@@ -19,47 +19,48 @@ var disappearing2 = false
 var disappearTimer = 0
 
 func _ready():
-	set_process(true)
+    set_process(true)
 
-	var rand_init_step = rand_range(-90, -2)
-	cubeContainer.rotate_y(rand_init_step)
-	cubeContainer.rotate_x((rand_init_step/2))
+    var rand_init_step = rand_range(-90, -2)
+    cubeContainer.rotate_y(rand_init_step)
+    cubeContainer.rotate_x((rand_init_step/2))
 
-	mySprite.material_override = mySprite.material_override.duplicate()
-	meshInstance2.material_override = meshInstance2.material_override.duplicate()
+    mySprite.material_override = mySprite.material_override.duplicate()
+    meshInstance2.material_override = meshInstance2.material_override.duplicate()
 
 func _process(delta):
-	delta = delta * global.time_dilation_multiplier
-	aniPlayer.playback_speed = global.time_dilation_multiplier
+    delta = delta * global.time_dilation_multiplier
+    aniPlayer.playback_speed = global.time_dilation_multiplier
 
-	if is_visible():
-		if disappearing2:
-			step = MID_STEP
-			translate(Vector3(0, 0.5*delta, 0))
-			disappearTimer += (delta*22)
-			cubeContainer.rotate_y(disappearTimer*delta)
-			cubeContainer.rotate_x((disappearTimer/2)*delta)
-			if aniPlayer.assigned_animation == "floatAway" and not aniPlayer.is_playing() and \
-			   not cubeSound.is_playing() and not cubeSound2.is_playing():
-				queue_free()
-		else:
-			step = rand_range(MIN_STEP-1, MIN_STEP+1)
-		cubeContainer.rotate_y(step*delta)
-		cubeContainer.rotate_x((step/2)*delta)
+    if is_visible():
+        if disappearing2:
+            step = MID_STEP
+            translate(Vector3(0, 0.5*delta, 0))
+            disappearTimer += (delta*22)
+            cubeContainer.rotate_y(disappearTimer*delta)
+            cubeContainer.rotate_x((disappearTimer/2)*delta)
+            if aniPlayer.assigned_animation == "floatAway" and not aniPlayer.is_playing() and \
+               not cubeSound.is_playing() and not cubeSound2.is_playing():
+                queue_free()
+        else:
+            step = rand_range(MIN_STEP-1, MIN_STEP+1)
+        cubeContainer.rotate_y(step*delta)
+        cubeContainer.rotate_x((step/2)*delta)
 
 func isActive():
-	return is_visible() and not disappearing2
+    return is_visible() and not disappearing2
 
 func passiveActivate(delta):
-	# musicPlayer.stopAll()
-	if not disappearing2:
-		cubeSound.play()
-		cubeSound2.pitch_scale = rand_range(0.8, 1.5)
-		cubeSound2.play()
-		aniPlayer.play("floatAway")
+    # musicPlayer.stopAll()
+    if not disappearing2:
+        cubeSound.play()
+        cubeSound2.pitch_scale = rand_range(0.8, 1.5)
+        cubeSound2.play()
+        aniPlayer.play("floatAway")
+        global.num_mini_crystal_cubes += 1
 
-		disappearing2 = true
+        disappearing2 = true
 
-	# global.pauseGame = true
-	# global.pauseMoveInput = true
-	# player.global_transform.origin = self.global_transform.origin
+    # global.pauseGame = true
+    # global.pauseMoveInput = true
+    # player.global_transform.origin = self.global_transform.origin

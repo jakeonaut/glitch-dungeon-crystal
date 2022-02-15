@@ -5,6 +5,7 @@ var can_flip_flop_timer = 0
 var can_flip_flop_time_limit = 10
 var weak_fish_jump_force = 6
 export var fish_jump_force = 18
+var no_longer_glitched = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +15,8 @@ func _ready():
     if behavior_jumping:
         grav = 60
         jump_force = weak_fish_jump_force
+        
+    myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
 
 func _process(delta):
     # ._process(delta) implicit
@@ -32,3 +35,24 @@ func _process(delta):
             jump_force = fish_jump_force
         else:
             jump_force = weak_fish_jump_force
+            
+    if no_longer_glitched:
+        if smallInteractionArea.is_touching_water:
+            behavior_walking = false
+            behavior_jumping = true
+            grav = 60
+            jump_force = weak_fish_jump_force
+        else:
+            behavior_walking = false
+            behavior_jumping = false
+            grav = 0
+            behavior_mini_explore = true
+
+func processDeath():
+    if not dieSound.is_playing():
+        no_longer_glitched = true
+        pauseSelf = false
+        
+func ouchies(_broom_origin):
+    .ouchies(_broom_origin)
+    myOtherSprite.material_override.set_shader_param("enable_palette_cycle", false)
