@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -33,6 +33,8 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=32]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=33]
+[ext_resource path="res://levels/SpriteTown/BugCollectorDialogAbortSound.gd" type="Script" id=34]
+[ext_resource path="res://levels/SpriteTown/BugCollectorDialogStartSound.gd" type="Script" id=35]
 
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
@@ -430,7 +432,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
@@ -779,11 +781,7 @@ frame = 68
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 0, 0 )
 grav = 0
-bbText = "every bug has life
-but I am very hungry.
-hey you... can you help me out?
-if you bring me dragonflies
-i can trade for crystal cubes"
+bbText = "See SpriteTown\\BugCollectorDialogStartSound.gd"
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -792,6 +790,7 @@ shape = SubResource( 24 )
 stream = ExtResource( 30 )
 volume_db = -8.0
 pitch_scale = 0.2
+script = ExtResource( 35 )
 
 [node name="DialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.5
@@ -799,6 +798,7 @@ pitch_scale = 0.5
 [node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
 volume_db = -9.0
 pitch_scale = 0.15
+script = ExtResource( 34 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 frame = 68
@@ -1406,6 +1406,37 @@ frame = 319
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 11.5, 10.5, -2.26577 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/MrMoTexBG/Lilpad7/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.258684, 0 )
+shape = SubResource( 34 )
+
+[node name="Lilpad10" type="Spatial" parent="Viewport/level/MrMoTexBG"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 15.2766, 8.5, -1 )
+
+[node name="MrMoTex16" parent="Viewport/level/MrMoTexBG/Lilpad10" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 11, -1 )
+material_override = SubResource( 29 )
+texture = SubResource( 30 )
+frame = 318
+
+[node name="MrMoTex17" parent="Viewport/level/MrMoTexBG/Lilpad10" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 11, -1 )
+material_override = SubResource( 31 )
+frame = 637
+
+[node name="MrMoTex18" parent="Viewport/level/MrMoTexBG/Lilpad10" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 11, -1 )
+material_override = SubResource( 32 )
+frame = 637
+
+[node name="MrMoTex19" parent="Viewport/level/MrMoTexBG/Lilpad10" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 11, -1 )
+material_override = SubResource( 33 )
+frame = 319
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/MrMoTexBG/Lilpad10" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 11.5, 10.5, -2.26577 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/MrMoTexBG/Lilpad10/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.258684, 0 )
 shape = SubResource( 34 )
 

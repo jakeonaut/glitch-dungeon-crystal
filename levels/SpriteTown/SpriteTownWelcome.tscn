@@ -890,9 +890,9 @@ shape = SubResource( 16 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6727, 19.6558, 0 )
 grav = 0
-bbText = "ya ho ho! do you wish for
-great power? i've been
-watching you.. take this here \"GRIMOIRE\"!  ya hah ho!"
+bbText = "•ya ho ho! do you wish for
+ great power? i've been
+ watching you.. take this here •\"GRIMOIRE\"!  ya hah ho!"
 is_important = true
 is_really_important = true
 

@@ -5,6 +5,7 @@ var heart_recovery_timer = 0
 var heart_recovery_time_limit = 5
 
 onready var powerupRect = get_node("PowerupRect")
+onready var powerupSprite = get_node("PowerupRect/ColorRect/ColorRect/PowerupSprite")
 onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/RichTextLabel")
 
 onready var miniCrystalCube = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/miniCubeCrystal")
@@ -55,7 +56,7 @@ func recreateHeartSprites():
         heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
     if not global.memory.has("total_hearts") or global.memory["total_hearts"] <= 1:
         heartsRect.visible = false
@@ -110,8 +111,22 @@ func _process(delta):
             should_display_saving_text = false
             savingTextLabel.visible = false
 
-    if global.num_cherries_eaten > 0:
+    if global.collectable_key_recently_got != null:
         powerupRect.visible = true
+        powerupRect.rect_scale.x = 1.0
+        if global.collectable_key_recently_got == "dragonflies":
+            powerupSprite.updateBaseFrame(0, 1)
+        if global.collectable_key_recently_got == "snails":
+            powerupSprite.updateBaseFrame(4, 3)
+        powerupRectTextLabel.text = str(global.memory[global.collectable_key_recently_got]) 
+        
+        global.collectable_key_recently_got_timer += (delta*22)
+        powerupRect.rect_scale.x = min(1.0, 1 - pow(global.collectable_key_recently_got_timer / global.collectable_key_recently_got_time_limit - 0.3, 2.0))
+        if stepify(global.collectable_key_recently_got_timer, 0.1) >= global.collectable_key_recently_got_time_limit:
+            global.collectable_key_recently_got = null
+    elif global.num_cherries_eaten > 0:
+        powerupRect.visible = true
+        powerupSprite.updateBaseFrame(4, 2)
         powerupRectTextLabel.text = str(global.num_cherries_eaten)
     else:
         powerupRect.visible = false

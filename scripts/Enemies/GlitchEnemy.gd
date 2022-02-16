@@ -97,18 +97,7 @@ func _process(delta):
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
             
-    if behavior_walking and behavior_vertical_walking:
-        if on_ground:
-            on_ground = false
-            walk_direction = 1
-            grav = 0
-            if myOtherSprite:
-                myOtherSprite.flip_v = not myOtherSprite.flip_v
-        elif not on_ground and linear_velocity.y == 0:
-            walk_direction = -1
-            grav = 60
-            if myOtherSprite:
-                myOtherSprite.flip_v = not myOtherSprite.flip_v
+    doVerticalWalkingBehavior()
 
     if behavior_evolve:
         evolution_timer += (delta*22)
@@ -129,6 +118,20 @@ func _process(delta):
                 mySprite.should_soft_fizzle_out = true
 
     glitchSetSpritesAndCollision()
+    
+func doVerticalWalkingBehavior():
+    if behavior_walking and behavior_vertical_walking:
+        if on_ground:
+            on_ground = false
+            walk_direction = 1
+            grav = 0
+            if myOtherSprite:
+                myOtherSprite.flip_v = not myOtherSprite.flip_v
+        elif not on_ground and linear_velocity.y == 0:
+            walk_direction = -1
+            grav = 60
+            if myOtherSprite:
+                myOtherSprite.flip_v = not myOtherSprite.flip_v
     
 # @override
 func processPhysics(delta):

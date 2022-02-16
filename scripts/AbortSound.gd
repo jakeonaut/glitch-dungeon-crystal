@@ -7,7 +7,7 @@ func activateScript():
     # OVERRIDE ME
     pass
     
-func preActivateScript():
+func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
     pass
 

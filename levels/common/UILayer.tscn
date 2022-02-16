@@ -141,6 +141,8 @@ max_frames = 1
 margin_left = 521.0
 margin_right = 640.0
 margin_bottom = 57.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 59, 0 )
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

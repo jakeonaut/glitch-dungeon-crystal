@@ -254,14 +254,14 @@ transform = Transform( 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0, 1, 7.69632, 
 collision_layer = 2
 script = ExtResource( 26 )
 grav = 0
-bbText = "WHEN YOU ARE []red 
-YOU CAN WALK OFF
-& NOT FALL...........
-did you know that already?... 
-sorry... GLITCH in this
-room make my head [rainbow freq=0.2 sat=10 val=20]hu̵rt a little[/rainbow] . . . . . 
-recently i haven't
-haven't been able 
+bbText = "•WHEN YOU ARE []red 
+ YOU CAN WALK OFF
+ & NOT FALL...........
+•did you know that already?... 
+ sorry... GLITCH in this
+ room make my head [rainbow freq=0.2 sat=10 val=20]hu̵rt a little[/rainbow] . . . . . 
+•recently i haven't
+ haven't been able 
                                           i can'tmove"
 is_important = true
 is_really_important = true

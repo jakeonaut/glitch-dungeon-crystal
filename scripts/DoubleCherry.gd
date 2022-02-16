@@ -32,11 +32,14 @@ func _process(delta):
     am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
     
-    if (not am_i_in_range_of_player or global.num_cherries_eaten >= global.max_cherries) and \
-       secretAniPlayer.assigned_animation != "shrivel":
+    if global.num_cherries_eaten >= global.max_cherries and \
+       secretAniPlayer.assigned_animation != "shrivel" and secretAniPlayer.assigned_animation != "eaten":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("shrivel")
+        
+    if not am_i_in_range_of_player:
+        queue_free()
     
     if secretAniPlayer.assigned_animation == "growBack" and not secretAniPlayer.is_playing() and can_fall and not on_ground:
         true_terminal_vel = 32
@@ -51,10 +54,6 @@ func _process(delta):
         mySprite.should_animate = true
         
     if secretAniPlayer.assigned_animation == "shrivel":
-        if am_i_in_range_of_player and global.num_cherries_eaten < global.max_cherries:
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("growBack")
         if not secretAniPlayer.is_playing():
             queue_free()
         
@@ -74,7 +73,7 @@ func processPhysics(delta):
 func landed():
     .landed()
 
-    if not secretAniPlayer.assigned_animation == "eaten":
+    if secretAniPlayer.assigned_animation != "eaten" and secretAniPlayer.assigned_animation != "shrivel":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("land")

@@ -68,6 +68,9 @@ var pauseGame = false
 var can_broom = true
 var num_cherries_eaten = 0
 var max_cherries = 5
+var collectable_key_recently_got = null
+var collectable_key_recently_got_timer = 0
+var collectable_key_recently_got_time_limit = 40
 
 var num_mini_crystal_cubes = 0
 

@@ -177,9 +177,9 @@ func processPhysics(delta):
     if grav == null: grav = 0 # ???
 
     lv = linear_velocity
-    g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
 
     applyGravity(delta)
+    g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
     
     up = -g.normalized() # (up is against gravity)
     vv = up.dot(lv) # vertical velocity

@@ -80,9 +80,11 @@ viewport_path = NodePath("Viewport")
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 640, 512 )
+audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 16 )
+starting_glitch_type = 3
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 8 )]
 
@@ -163,7 +165,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
@@ -360,7 +362,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, -0.2, 0 )
 
 [node name="Snail2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2701, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2701, 2, 0 )
 
 [node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.7423, -0.979147, 0 )

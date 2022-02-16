@@ -316,24 +316,26 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8916, -54.0345, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.52738, -54.0977, 0 )
 visible = false
 grav = 0
-bbText = "This door leads to GODDESS
-TEMPLE....but it's locked by magic. 
-Do you wish to know more?
-Welcome to these cursed lands.
-Entities of old magic, pixies,
-sprites, witches have lived here
-for ages in harmony. 
-However, a powerful priestess,
-by corrupting the teachings of
-our GODDESS, has brought blight
-upon our land. In order to
-unlock the door, you must collect
-100 crystal cubes, it seems you have
-some already.. Venture forth, and
-talk to every being you see, for
-they may be able to help your quest.
-PLEASE!!! Help us traveler! Do not
-turn your back on us! "
+bbText = "•This door leads to GODDESS
+ TEMPLE....but it's locked by magic. 
+•Do you wish to know more?
+•Welcome to these cursed lands.
+•Entities of old magic, pixies,
+ sprites, witches have lived here
+ for ages in harmony. 
+•However, a powerful priestess,
+ by corrupting the teachings of
+ our GODDESS, has brought blight
+ upon our land.
+•In order to unlock the door,
+ you must collect 100
+ crystal cubes,
+•it seems you have some already..
+•Venture forth, and talk to
+ every being you see, for
+ they may be able to help your quest.
+•PLEASE!!! Help us traveler!
+Do not turn your back on us! "
 is_really_important = true
 is_fast_text = true
 

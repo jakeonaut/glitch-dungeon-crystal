@@ -207,6 +207,7 @@ func processGlitchHurtRecovery(delta):
         if glitch_death_timer >= 10:
             global.pauseGame = false
             get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
+            target_last_grounded_y = global_transform.origin.y
             global.memory["hearts_recovering"] = true
             self.physics_state = PhysicsState.GLITCH_RECOVERY
 
@@ -349,6 +350,7 @@ func processBroomLogic(delta):
 # @override
 func landed():
     .landed()
+    target_last_grounded_y = global_transform.origin.y
     broom_cooldown_timer = 0
     is_in_broom_cooldown = false
         

@@ -9,7 +9,7 @@ var can_broom = global.can_broom
 var jump_press_timer = 999
 var jump_press_time_limit = 5
 var jump_press_broom_time_limit = 30
-var has_reset_broom_double_jump = false
+var target_last_grounded_y = 0
 
 var has_played_fall_sound = false
 
@@ -27,6 +27,9 @@ func _ready():
     
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if is_touching_water or is_touching_ladder or target_last_grounded_y > global_transform.origin.y:
+        target_last_grounded_y = global_transform.origin.y
     
     if jump_press_timer <= jump_press_broom_time_limit:
         jump_press_timer += 1
@@ -34,8 +37,8 @@ func _process(delta):
     if justPressedJump():
         jump_press_timer = 0
         if aniPlayer.assigned_animation == "broomSweep":
+            target_last_grounded_y = global_transform.origin.y
             should_magic_jump = true
-            has_reset_broom_double_jump = true
         
     # this is a little weird but fixes the fallthrough area situation:
     if linear_velocity.y < 0:
@@ -51,6 +54,8 @@ func _process(delta):
     cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
     if stepify(cameraTarget.transform.origin.x, 0.1) == camera_target_origin_x_target:
         cameraTarget.transform.origin.x = camera_target_origin_x_target
+    cameraTarget.global_transform.origin.y = target_last_grounded_y
+
 
     if global.memory.has("fishingRod") and on_ground and justPressedDown():
         aniPlayer.stop()

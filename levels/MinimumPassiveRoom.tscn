@@ -29,6 +29,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 640, 512 )
+audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )

@@ -164,10 +164,10 @@ func isWaitingForEndPrompt():
 func wigglePrompt(delta, promptSprite):
     nextPrompt_wiggle_timer += (delta*22)
     if nextPrompt_wiggle_timer >= nextPrompt_wiggle_time_limit:
-        if promptSprite.transform.origin.y == 110:
-            promptSprite.transform.origin.y = 105
+        if promptSprite.transform.origin.y == 120:
+            promptSprite.transform.origin.y = 115
         else:
-            promptSprite.transform.origin.y = 110
+            promptSprite.transform.origin.y = 120
         nextPrompt_wiggle_timer = 0
         
 func resetPrompts():

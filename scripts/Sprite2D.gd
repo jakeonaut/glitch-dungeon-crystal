@@ -29,6 +29,8 @@ func preProcess():
     pass
 
 func _process(delta):
+    delta = delta * global.time_dilation_multiplier
+
     preProcess()
     animate(delta)
     
@@ -45,6 +47,10 @@ func animate(delta):
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()
+            
+func restart():
+    animation_counter = 0
+    set_frame(start_frame)
 
 func randomizeFrameDelay():
     frame_delay = rand_range(0.1, 1.0)
@@ -54,3 +60,4 @@ func updateBaseFrame(hframe, vframe):
     if base_frame != start_frame:
         base_frame = start_frame
         set_frame(start_frame)
+        restart()
