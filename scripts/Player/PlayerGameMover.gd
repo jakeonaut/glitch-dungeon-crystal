@@ -24,11 +24,14 @@ func _ready():
     
     should_do_middle_sensor = true
     should_do_simple_sensor_probe = false
+
+func ladderUpdateTargetLastGroundedY():
+    target_last_grounded_y = global_transform.origin.y
     
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-    if is_touching_water or is_touching_ladder or target_last_grounded_y > global_transform.origin.y:
+    if is_touching_water or is_touching_ladder or global_transform.origin.y < target_last_grounded_y:
         target_last_grounded_y = global_transform.origin.y
     
     if jump_press_timer <= jump_press_broom_time_limit:
@@ -127,6 +130,7 @@ func processJumpInputs(delta):
                     aniPlayer.queue("jumpStart")
                     aniPlayer.queue("jump")
 
+                target_last_grounded_y = global_transform.origin.y
                 var new_carcass = cherryCarcassRes.instance()
                 level.add_child(new_carcass)
                 new_carcass.global_transform.origin = self.global_transform.origin

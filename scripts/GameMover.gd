@@ -329,6 +329,10 @@ func processInputs(delta):
     if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
         vv = 6
         should_do_fallthrough_area_collision = false
+        ladderUpdateTargetLastGroundedY()
+
+func ladderUpdateTargetLastGroundedY():
+    pass
 
 func justPressedDown():
     return false
