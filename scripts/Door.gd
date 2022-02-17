@@ -203,3 +203,5 @@ func land():
 
         if is_vertical:
             getPlayer().on_ground = false
+            
+    getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y

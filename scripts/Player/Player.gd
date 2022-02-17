@@ -119,7 +119,6 @@ func _process(delta):
     # ._process(delta) #NOTE: this super method is called automatically 
     # https://github.com/godotengine/godot/issues/6500
     
-    var real_delta = delta
     delta = delta * global.time_dilation_multiplier
     if not processGlitchHurtRecovery(delta):
         return

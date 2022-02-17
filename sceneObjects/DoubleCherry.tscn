@@ -228,8 +228,8 @@ tracks/2/keys = {
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="SphereShape" id=12]
-radius = 10.0
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 12, 9, 1 )
 
 [node name="DoubleCherry" type="KinematicBody"]
 script = ExtResource( 6 )
@@ -274,5 +274,5 @@ shape = SubResource( 13 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
-shape = SubResource( 12 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 15 )

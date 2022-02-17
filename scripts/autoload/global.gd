@@ -81,7 +81,6 @@ var crtScreenEffects = true
 var time_dilation_multiplier = 1.0
 
 func _ready():
-
     # somehow this gets rid of errors LOL
     if hasLoadedGame: pass
     if memory: pass

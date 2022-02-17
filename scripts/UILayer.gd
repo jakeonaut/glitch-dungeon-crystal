@@ -86,7 +86,7 @@ func _process(delta):
                     heartSprite.max_frames = 1
         
 
-    if title_display_state < 3:
+    if title_display_state < 3 and display_title != "???":
         title_display_timer += (delta*22)
         if title_display_timer >= title_display_time_limit:
             if title_display_state == 0:

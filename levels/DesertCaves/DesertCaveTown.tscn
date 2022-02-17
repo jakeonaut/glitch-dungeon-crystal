@@ -798,9 +798,8 @@ frame = 78
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 11, 0 )
 grav = 0
-bbText = "hi so much
-[wave]explore & seek powerful
-MAGIC CRYSTALS[/wave]"
+bbText = "probably need an middle 
+room with gate off"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]

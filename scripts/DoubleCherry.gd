@@ -5,8 +5,10 @@ onready var fullSound = get_node("FullSound")
 var can_play_full_sound = true
 var which_cherry_was_i = 0
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-var am_i_in_range_of_player = false
-var am_i_really_in_range_of_player = false
+var am_i_in_range_of_player = true
+var am_i_really_in_range_of_player = true
+var away_from_player_timer = 0
+var away_from_player_time_limit = 15
 
 var can_fall = true
 var is_active = true
@@ -39,7 +41,11 @@ func _process(delta):
         secretAniPlayer.play("shrivel")
         
     if not am_i_in_range_of_player:
-        queue_free()
+        away_from_player_timer += (delta * 22)
+        if away_from_player_timer >= away_from_player_time_limit:
+            queue_free()
+    else:
+        away_from_player_timer = 0
     
     if secretAniPlayer.assigned_animation == "growBack" and not secretAniPlayer.is_playing() and can_fall and not on_ground:
         true_terminal_vel = 32
