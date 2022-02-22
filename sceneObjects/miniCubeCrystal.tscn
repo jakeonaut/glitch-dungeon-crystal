@@ -112,34 +112,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 4, 5 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 5 ), Vector3( 0, 5, 5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/opacity")
-tracks/1/interp = 1
+tracks/1/path = NodePath("CubeContainer:translation")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CubeContainer/MeshInstance2:material_override:distance_fade_max_distance")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1000.0 ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 5 ), Vector3( 0, 5, 5 ) ]
 }
 
 [node name="miniCubeCrystal" type="Spatial"]

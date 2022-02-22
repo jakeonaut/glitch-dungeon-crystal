@@ -12,6 +12,7 @@ var away_from_player_time_limit = 15
 
 var can_fall = true
 var is_active = true
+var my_parent = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,20 +30,24 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
     if secretAniPlayer.assigned_animation == "eaten" and not secretAniPlayer.is_playing() and not crunchSound.is_playing():
+        if my_parent and my_parent.has_method("spawnedChildWasEaten"):
+            my_parent.spawnedChildWasEaten(which_cherry_was_i)
         queue_free()
     
     am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
     
-    if global.num_cherries_eaten >= global.max_cherries and \
-       secretAniPlayer.assigned_animation != "shrivel" and secretAniPlayer.assigned_animation != "eaten":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("shrivel")
+    # if global.num_cherries_eaten >= global.max_cherries and \
+    #    secretAniPlayer.assigned_animation != "shrivel" and secretAniPlayer.assigned_animation != "eaten":
+    #     secretAniPlayer.stop()
+    #     secretAniPlayer.clear_queue()
+    #     secretAniPlayer.play("shrivel")
         
     if not am_i_in_range_of_player:
         away_from_player_timer += (delta * 22)
         if away_from_player_timer >= away_from_player_time_limit:
+            if my_parent and my_parent.has_method("decrementSpawnedChildren"):
+                my_parent.decrementSpawnedChildren()
             queue_free()
     else:
         away_from_player_timer = 0
@@ -61,8 +66,12 @@ func _process(delta):
         
     if secretAniPlayer.assigned_animation == "shrivel":
         if not secretAniPlayer.is_playing():
+            if my_parent and my_parent.has_method("decrementSpawnedChildren"):
+                my_parent.decrementSpawnedChildren()
             queue_free()
-        
+            
+func setAsParent(parent):
+    my_parent = parent
                 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
@@ -84,11 +93,11 @@ func landed():
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("land")
 
-func passiveActivate(delta):
+func passiveActivate(_delta):
     if global.num_cherries_eaten < global.max_cherries:
         true_terminal_vel = 0
         is_active = false
-        which_cherry_was_i = global.num_cherries_eaten
+        which_cherry_was_i = global.num_cherries_eaten + 1
         mySprite.should_animate = false
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()

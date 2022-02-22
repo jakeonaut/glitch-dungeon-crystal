@@ -5,6 +5,7 @@ onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
+onready var miniCubeCrystal = get_node("miniCubeCrystal")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var broom_cooldown_timer = 0
@@ -152,6 +153,15 @@ func _process(delta):
             #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
             global.memory["hearts"] = 0
             tryDieToEnemy(true, true)
+            
+    if gimme_mini_crystal_cubes > 0:
+        gimme_mini_crystal_cubes_timer += (delta*22)
+        if gimme_mini_crystal_cubes_timer >= gimme_mini_crystal_cubes_time_limit:
+            gimme_mini_crystal_cubes_timer = 0
+            gimme_mini_crystal_cubes -= 1
+            var newCrystalCube = miniCubeCrystal.duplicate()
+            newCrystalCube.visible = true
+            add_child(newCrystalCube)
 
     #tryRotateCamera(delta)
     
@@ -364,3 +374,10 @@ func broomStop():
 
 func faceDown():
     pass # mySprite.faceDown()
+
+var gimme_mini_crystal_cubes = 0
+var gimme_mini_crystal_cubes_timer = 0
+var gimme_mini_crystal_cubes_time_limit = 5
+func giveMeMiniCrystalCubes(how_many):
+    gimme_mini_crystal_cubes = how_many
+    gimme_mini_crystal_cubes_timer = 0

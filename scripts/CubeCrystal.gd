@@ -10,6 +10,9 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 onready var mySprite = get_node("Sprite3D")
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+export var is_static_in_level = true
+
 var MIN_STEP = -2
 var MID_STEP = 5
 var MAX_STEP = -12
@@ -19,14 +22,14 @@ var disappearing2 = false
 var disappearTimer = 0
 
 func _ready():
+    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+        queue_free()
+        
     set_process(true)
 
     var rand_init_step = rand_range(-90, -2)
     cubeContainer.rotate_y(rand_init_step)
     cubeContainer.rotate_x((rand_init_step/2))
-
-    mySprite.material_override = mySprite.material_override.duplicate()
-    meshInstance2.material_override = meshInstance2.material_override.duplicate()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -60,6 +63,11 @@ func passiveActivate(delta):
         global.num_mini_crystal_cubes += 1
 
         disappearing2 = true
+        
+        if is_static_in_level:
+            if not global.memory.has(level.getShortLevelName()):
+                global.memory[level.getShortLevelName()] = {}
+            global.memory[level.getShortLevelName()][self.name] = true
 
     # global.pauseGame = true
     # global.pauseMoveInput = true

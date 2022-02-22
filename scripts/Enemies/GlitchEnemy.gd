@@ -91,12 +91,7 @@ func _process(delta):
         glitch_switch_time_limit = rand_range(30.0, 50.0)
         glitch_switch_timer = 0
 
-    if behavior_walking and horizontal_collision:
-        horizontal_collision = false
-        walk_direction = -walk_direction
-        if myOtherSprite:
-            myOtherSprite.flip_h = not myOtherSprite.flip_h
-            
+    doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
 
     if behavior_evolve:
@@ -118,6 +113,13 @@ func _process(delta):
                 mySprite.should_soft_fizzle_out = true
 
     glitchSetSpritesAndCollision()
+    
+func doHorizontalWalkingBehavior():
+    if behavior_walking and horizontal_collision:
+        horizontal_collision = false
+        walk_direction = -walk_direction
+        if myOtherSprite:
+            myOtherSprite.flip_h = not myOtherSprite.flip_h
     
 func doVerticalWalkingBehavior():
     if behavior_walking and behavior_vertical_walking:

@@ -118,6 +118,8 @@ func _process(delta):
             powerupSprite.updateBaseFrame(0, 1)
         if global.collectable_key_recently_got == "snails":
             powerupSprite.updateBaseFrame(4, 3)
+        if global.collectable_key_recently_got == "cicadas":
+            powerupSprite.updateBaseFrame(0, 4)
         powerupRectTextLabel.text = str(global.memory[global.collectable_key_recently_got]) 
         
         global.collectable_key_recently_got_timer += (delta*22)
@@ -126,6 +128,7 @@ func _process(delta):
             global.collectable_key_recently_got = null
     elif global.num_cherries_eaten > 0:
         powerupRect.visible = true
+        powerupRect.rect_scale.x = 1
         powerupSprite.updateBaseFrame(4, 2)
         powerupRectTextLabel.text = str(global.num_cherries_eaten)
     else:

@@ -45,6 +45,8 @@ func spawn():
         0
     )
     add_child(newObject)
+    if newObject.has_method("setAsParent"):
+        newObject.setAsParent(self)
 
             
 func playerActivationAreaPassiveActivate():

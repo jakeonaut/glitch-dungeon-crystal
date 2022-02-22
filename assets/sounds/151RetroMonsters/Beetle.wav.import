@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Beetle.wav-dc16ce67c38eec156daf3c82fa49dc92.sample"
+
+[deps]
+
+source_file="res://assets/sounds/151RetroMonsters/Beetle.wav"
+dest_files=[ "res://.import/Beetle.wav-dc16ce67c38eec156daf3c82fa49dc92.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

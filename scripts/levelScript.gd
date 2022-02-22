@@ -116,6 +116,10 @@ func setUpRoomInitializationOverride():
 
 func getLevelName():
     return get_tree().get_root().get_node("Game").get_filename()
+    
+func getShortLevelName():
+    var longLevelName = getLevelName()
+    return longLevelName.substr(13, longLevelName.length() - 18)
 
 func tryToRespawn():
     if global.activeInteractor != null:

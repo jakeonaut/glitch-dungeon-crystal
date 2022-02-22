@@ -7,8 +7,14 @@ onready var catchSound = get_node("CatchSound")
 var didja_get_me = false
 var opacity = 1.0
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+export var is_static_in_level = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+        queue_free()
+        
     set_process(true)
     
     original_pos = global_transform.origin
@@ -59,3 +65,8 @@ func passiveActivate(_delta):
             global_transform.origin.y + rand_range(2, 3),
             original_pos.z
         )
+        
+        if is_static_in_level:
+            if not global.memory.has(level.getShortLevelName()):
+                global.memory[level.getShortLevelName()] = {}
+            global.memory[level.getShortLevelName()][self.name] = true

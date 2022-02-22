@@ -4,8 +4,12 @@ onready var collectSound = get_node("CollectSound")
 
 var being_collected = false
 var gotcha = false
+export var is_static_in_level = true
 
 func _ready():
+    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+        queue_free()
+        
     set_process(true)
     set_physics_process(true)
     is_active = true
@@ -67,3 +71,8 @@ func passiveActivate(delta):
         visible = false
         global.pauseMoveInput = true
         being_collected = true
+        
+        if is_static_in_level:
+            if not global.memory.has(level.getShortLevelName()):
+                global.memory[level.getShortLevelName()] = {}
+            global.memory[level.getShortLevelName()][self.name] = true

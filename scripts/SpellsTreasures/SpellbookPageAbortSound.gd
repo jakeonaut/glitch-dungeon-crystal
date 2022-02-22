@@ -24,9 +24,11 @@ func activateScript():
         level.uiLayer.get_node("EquipmentStatusRect").visible = true
 
     # IFNDEF SpellbookIntroLevelScript.gd
-    level.get_node("NPC5").textBox.text_final = "use [Z] to cast\ncollected spells!"
+    if level.has_node("NPC5"):
+        level.get_node("NPC5").textBox.text_final = "use [Z] to cast\ncollected spells!"
     
-    level.get_node("NPC").textBox.text_final = "wow you got it......i bet all\nkinds of new paths will open up\nfor you now in swamp home......\ni could never cast spells\nlike you can... i'm just\na lowly frog wizard."
+    if level.has_node("NPC"):
+        level.get_node("NPC").textBox.text_final = "wow you got it......i bet all\nkinds of new paths will open up\nfor you now in swamp home......\ni could never cast spells\nlike you can... i'm just\na lowly frog wizard."
         
     level.restartMusic()
     level.saveTheGame()

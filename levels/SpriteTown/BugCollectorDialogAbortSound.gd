@@ -11,17 +11,22 @@ func _ready():
 func preActivateScript():
     var num_bugs = 0
     if global.memory.has("dragonflies"):
-        num_bugs += global.memory["dragonflies"]
+        num_bugs += global.memory["dragonflies"]*2
         global.memory["dragonflies"] = 0
     if global.memory.has("snails"):
-        num_bugs += global.memory["snails"]
+        num_bugs += global.memory["snails"]*3
         global.memory["snails"] = 0
+    if global.memory.has("cicadas"):
+        num_bugs += global.memory["cicadas"]*3
+        global.memory["cicadas"] = 0
         
-    for _i in range(num_bugs):
-        var newCube = miniCrystalCubeRes.instance()
-        level.add_child(newCube)
-        newCube.global_transform.origin.x = npc.global_transform.origin.x + rand_range(-2, 2)
-        newCube.global_transform.origin.y = npc.global_transform.origin.y + rand_range(-2, 2)
+    level.player.giveMeMiniCrystalCubes(num_bugs)
+    # for _i in range(num_bugs):
+    #     var newCube = miniCrystalCubeRes.instance()
+    #     newCube.is_static_in_level = false
+    #     level.add_child(newCube)
+    #     newCube.global_transform.origin.x = npc.global_transform.origin.x + rand_range(-2, 2)
+    #     newCube.global_transform.origin.y = npc.global_transform.origin.y + rand_range(-2, 2)
             
 func activateScript():
     pass
