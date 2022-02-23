@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=2]
@@ -56,10 +56,10 @@ radius = 0.8
 height = 1.8
 
 [sub_resource type="BoxShape" id=15]
-extents = Vector3( 8, 6, 1 )
+extents = Vector3( 8, 8, 1 )
 
 [sub_resource type="BoxShape" id=16]
-extents = Vector3( 3, 3, 1 )
+extents = Vector3( 3, 5, 1 )
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -112,7 +112,7 @@ tracks/3/keys = {
 "values": [ -20.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/4/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -121,10 +121,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1.0 ]
+"values": [ false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/5/path = NodePath("Sprite3D2:pixel_size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -133,7 +133,55 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ 0.125 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D2:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.125124, 0.258068, 11 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.25 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/MeowSound:max_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -20.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -193,40 +241,52 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sounds/MeowSound:volume_db")
+tracks/3/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1.6 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -20.0 ]
+"times": PoolRealArray( 1.6, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/4/path = NodePath("Sprite3D2:pixel_size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.6 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 1.0 ]
+"values": [ 0.25, 0.25, 0.125 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/5/path = NodePath("Sprite3D2:translation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 1.6, 2.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.600126, 0.564904, 11 ), Vector3( -0.600126, 0.564904, 11 ), Vector3( 0.125, 0.258, 11 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -316,6 +376,70 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=17]
 resource_name = "meow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 39, 40, 39, 38 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sounds/MeowSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.12 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/MeowSound:max_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -24.0 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "meow (copy)"
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D2:frame")
@@ -342,16 +466,16 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sounds/MeowSound:volume_db")
+tracks/2/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -25.0 ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sounds/MeowSound:pitch_scale")
@@ -364,18 +488,6 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.12 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -417,7 +529,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sounds/MeowSound:volume_db")
+tracks/3/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -425,20 +537,148 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -25.0 ]
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "teleportIn"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 37, 39, 37, 40, 39, 40, 39, 38 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sounds/MeowSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.8, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/4/path = NodePath("Sprite3D2:pixel_size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.25, 0.25, 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D2:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.600126, 0.564904, 11 ), Vector3( -0.600126, 0.564904, 11 ), Vector3( 0.125, 0.258, 11 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/MeowSound:pitch_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.7 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.25 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "teleportOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ 38, 37 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.25, 0.0 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -475,26 +715,11 @@ collision_layer = 4
 script = ExtResource( 9 )
 true_terminal_vel = 8
 grav = 30
-walk_speed = 2
-floor_glitch_walk_speed = 2
-invisible_glitch_walk_speed = 2
+walk_speed = 3
+invisible_glitch_walk_speed = 3
 swimming_walk_speed = 4
 jump_force = 10
 invisible_jump_force = 10
-behavior_walking = null
-behavior_vertical_walking = null
-behavior_jumping = null
-behavior_flip_on_land = null
-behavior_stop_on_land = null
-behavior_was_thrown = null
-behavior_thrower = null
-behavior_evolve = null
-behavior_fizzle_out_after_evolve = null
-behavior_mini_explore = null
-walk_direction = null
-is_particle = null
-evolution_time_limit = null
-can_freeze = null
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -571,6 +796,7 @@ shape = SubResource( 15 )
 script = ExtResource( 16 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697355, 0 )
 shape = SubResource( 16 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -581,5 +807,8 @@ anims/jump = SubResource( 11 )
 anims/jumpStart = SubResource( 12 )
 anims/land = SubResource( 13 )
 anims/meow = SubResource( 17 )
+"anims/meow (copy)" = SubResource( 20 )
 anims/stonify = SubResource( 14 )
+anims/teleportIn = SubResource( 18 )
+anims/teleportOut = SubResource( 19 )
 anims/walk = SubResource( 8 )

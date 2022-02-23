@@ -64,6 +64,14 @@ func randomizeTargetPos():
 func isActive():
     return true
 
+# @override
+func playerActivationAreaPassiveActivate():
+    if not is_awake:
+        is_awake = true
+        mySprite.max_frames = 2
+        mySprite.updateBaseFrame(1, 4)
+
+
 func passiveActivate(_delta):
     if not didja_get_me:
         catchSound.play()

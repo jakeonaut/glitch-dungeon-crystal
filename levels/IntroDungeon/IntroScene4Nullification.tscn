@@ -271,6 +271,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.357, 1.4006, 0 )
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56486, -57, 0 )
 is_locked = true
+path = "res://levels/Adventure/SpellbookIntro.tscn"
 
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.0708, -55.0266, 0 )

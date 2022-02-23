@@ -169,7 +169,7 @@ radius = 10.0
 
 [node name="CherryCarcass" type="KinematicBody"]
 script = ExtResource( 2 )
-true_terminal_vel = 15
+true_terminal_vel = 10
 grav = 10
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
