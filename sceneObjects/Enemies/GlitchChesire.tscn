@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=12]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=13]
-[ext_resource path="res://assets/palettes/red_dungeon_palette.png" type="Texture" id=14]
+[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=14]
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=15]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive2.gd" type="Script" id=16]
 
@@ -32,7 +32,7 @@ shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 11 )
 shader_param/target_palette = ExtResource( 7 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 13 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -254,7 +254,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite3D2:pixel_size")
-tracks/4/interp = 1
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
@@ -266,7 +266,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite3D2:translation")
-tracks/5/interp = 1
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
@@ -594,7 +594,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite3D2:pixel_size")
-tracks/4/interp = 1
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
@@ -606,7 +606,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite3D2:translation")
-tracks/5/interp = 1
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
@@ -732,9 +732,9 @@ script = ExtResource( 10 )
 frame_delay = 1.0
 max_frames = 6
 
-[node name="Sprite3D2" type="Sprite3D" parent="." groups=["glitchSprite"]]
+[node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125124, 0.258068, 11 )
-material_override = SubResource( 5 )
+material_override = SubResource( 21 )
 pixel_size = 0.125
 texture = ExtResource( 12 )
 hframes = 8

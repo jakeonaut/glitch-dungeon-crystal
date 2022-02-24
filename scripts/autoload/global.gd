@@ -80,7 +80,15 @@ var crtScreenEffects = true
 
 var time_dilation_multiplier = 1.0
 
+var mini_cube_crystal_pitch_min = 0.5
+var mini_cube_crystal_pitch_max = 2.0
+var mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
+var mini_cube_crystal_pitch_timer = 0
+var mini_cube_crystal_pitch_time_limit = 60
+
 func _ready():
+    set_process(true)
+
     # somehow this gets rid of errors LOL
     if hasLoadedGame: pass
     if memory: pass
@@ -101,6 +109,19 @@ func _ready():
     memory["total_hearts"] = 1
     memory["hearts"] = 1
     memory["hearts_recovering"] = false
+
+func _process(delta):
+    delta = delta * time_dilation_multiplier
+
+    if mini_cube_crystal_pitch >= mini_cube_crystal_pitch_max:
+        mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
+
+    if mini_cube_crystal_pitch != mini_cube_crystal_pitch_min:
+        mini_cube_crystal_pitch_timer += (delta*22)
+        if mini_cube_crystal_pitch_timer >= mini_cube_crystal_pitch_time_limit:
+            mini_cube_crystal_pitch_timer = 0
+            mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
+            
 
 
 var save_game_file = "user://savegame.save"

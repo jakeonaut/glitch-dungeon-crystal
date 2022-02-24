@@ -401,7 +401,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78.9, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
@@ -776,6 +776,8 @@ pixel_size = 0.12
 texture = ExtResource( 4 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D" groups=["fallthrough"]]
 
@@ -790,6 +792,8 @@ pixel_size = 0.12
 texture = ExtResource( 4 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D2" groups=["fallthrough"]]
 
@@ -804,6 +808,8 @@ pixel_size = 0.12
 texture = ExtResource( 4 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D5" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
@@ -819,6 +825,8 @@ pixel_size = 0.12
 texture = ExtResource( 26 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D8" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94049, 3 )
@@ -834,6 +842,8 @@ pixel_size = 0.12
 texture = ExtResource( 26 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D9" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94049, 3 )
@@ -850,6 +860,8 @@ pixel_size = 0.12
 texture = ExtResource( 4 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D6" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
@@ -865,6 +877,8 @@ pixel_size = 0.12
 texture = ExtResource( 4 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D3" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.73423 )
@@ -881,6 +895,8 @@ pixel_size = 0.12
 texture = ExtResource( 25 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D4" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.73423 )
@@ -897,6 +913,8 @@ pixel_size = 0.12
 texture = ExtResource( 25 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D10" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.73423 )
@@ -913,6 +931,8 @@ pixel_size = 0.12
 texture = ExtResource( 25 )
 script = ExtResource( 24 )
 max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D7" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.26577 )

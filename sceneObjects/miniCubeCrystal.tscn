@@ -161,7 +161,7 @@ pitch_scale = 1.5
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -20.0
+volume_db = -10.0
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

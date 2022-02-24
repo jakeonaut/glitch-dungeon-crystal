@@ -18,59 +18,79 @@ export var should_fizzle_out = false
 var should_soft_fizzle_out = false
 export var should_animate = true # set this to false if you handle animation through an AnimationPlayer
 
+export(String, FILE) var overwritten_green_palette_path = null
+var overwritten_green_palette = null
+export(String, FILE) var overwritten_yellow_palette_path = null
+var overwritten_yellow_palette = null
+
 export var should_ignore_pause = false
 
 func _ready():
-    set_process(true)
-    start_frame = get_frame()
-    original_frame_delay = frame_delay
-    
-func changeSpriteColorPalette(palette):
-    var material = material_override
-    if material is ShaderMaterial:
-        material.set_shader_param("target_palette", palette)
-        material_override = material
+	set_process(true)
+	start_frame = get_frame()
+	original_frame_delay = frame_delay
+
+	var should_duplicate_material = false
+	if overwritten_green_palette_path != null:
+		overwritten_green_palette = load(overwritten_green_palette_path)
+		should_duplicate_material = true
+	if overwritten_yellow_palette_path != null:
+		overwritten_yellow_palette = load(overwritten_yellow_palette_path)
+		should_duplicate_material = true
+
+	if should_duplicate_material:
+		material_override = material_override.duplicate()
+	
+func changeSpriteColorPalette(palette, palette_name = ""):
+	var material = material_override
+	if material is ShaderMaterial:
+		if palette_name == "green_palette" and overwritten_green_palette != null: # whateva
+			palette = overwritten_green_palette
+		if palette_name == "yellow_palette" and overwritten_yellow_palette != null: # whateva
+			palette = overwritten_yellow_palette
+		material.set_shader_param("target_palette", palette)
+		material_override = material
 
 func preProcess():
-    pass
+	pass
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
-    
-    if global.pauseGame and should_ignore_pause: return
-    preProcess()
-    if visible and should_animate:
-        animate(delta)
-        
+	delta = delta * global.time_dilation_multiplier
+	
+	if global.pauseGame and should_ignore_pause: return
+	preProcess()
+	if visible and should_animate:
+		animate(delta)
+		
 func restart():
-    animation_counter = 0
-    set_frame(start_frame)
-    
+	animation_counter = 0
+	set_frame(start_frame)
+	
 func animate(delta):
-    animation_counter += delta
-    if animation_counter >= frame_delay:
-        animation_counter = 0
-        var frame = get_frame()
+	animation_counter += delta
+	if animation_counter >= frame_delay:
+		animation_counter = 0
+		var frame = get_frame()
 
-        if frame >= start_frame and frame < start_frame + max_frames - 1:
-            set_frame(frame+1)
-        else:
-            if should_fizzle_out:
-                queue_free()
-            elif should_soft_fizzle_out:
-                visible = false
-            else:
-                set_frame(start_frame)
-        
-        if should_randomize_frame_delay:
-            randomizeFrameDelay()
-            
+		if frame >= start_frame and frame < start_frame + max_frames - 1:
+			set_frame(frame+1)
+		else:
+			if should_fizzle_out:
+				queue_free()
+			elif should_soft_fizzle_out:
+				visible = false
+			else:
+				set_frame(start_frame)
+		
+		if should_randomize_frame_delay:
+			randomizeFrameDelay()
+			
 
 func randomizeFrameDelay():
-    frame_delay = rand_range(original_frame_delay/4, original_frame_delay*2.2)
+	frame_delay = rand_range(original_frame_delay/4, original_frame_delay*2.2)
 
 func updateBaseFrame(hframe, vframe):
-    start_frame = (self.hframes * vframe) + hframe
-    base_frame = start_frame
-    set_frame(start_frame)
-    restart()
+	start_frame = (self.hframes * vframe) + hframe
+	base_frame = start_frame
+	set_frame(start_frame)
+	restart()

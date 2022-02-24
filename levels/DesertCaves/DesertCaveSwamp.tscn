@@ -181,7 +181,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.40788, 7.51818, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
-path = "res://levels/DesertCaves/DesertCaveTown.tscn"
+path = "res://levels/DesertCaves/DesertPassageway.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
