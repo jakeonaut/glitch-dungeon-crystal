@@ -13,7 +13,9 @@ enum CatState {
     UNFREEZE,
     JUMP,
     TELEPORT_IN,
-    TELEPORT_OUT
+    TELEPORT_OUT,
+    TELEPORT_BACK,
+    ASLEEP,
 }
 var cat_state = CatState.HIDDEN
 var cat_state_timer = 0
@@ -73,10 +75,15 @@ func _process(delta):
             cat_state = CatState.IDLE
     elif cat_state == CatState.TELEPORT_OUT:
         if not secretAniPlayer.is_playing():
+            teleport()
+    elif cat_state == CatState.TELEPORT_BACK:
+        if not secretAniPlayer.is_playing():
             respawn()
     elif cat_state == CatState.WALK:
         walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
         myOtherSprite.flip_h = walk_direction == -1
+        if abs(getPlayer().global_transform.origin.x - global_transform.origin.x) < 1:
+            playerActivationAreaPassiveActivate2()
     elif cat_state == CatState.PREPARE_LUNGE:
         walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
         myOtherSprite.flip_h = walk_direction == -1
@@ -110,7 +117,8 @@ func _process(delta):
             invisible_jump_force = proper_jump_force
             
     if cat_state != CatState.FLICKER_ON and cat_state != CatState.HIDDEN and \
-       cat_state != CatState.TELEPORT_IN and cat_state != CatState.TELEPORT_OUT:
+       cat_state != CatState.TELEPORT_IN and cat_state != CatState.TELEPORT_OUT and \
+       cat_state != CatState.TELEPORT_BACK and cat_state != CatState.ASLEEP:
         if can_freeze and cat_state != CatState.FREEZE and getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
             cat_state = CatState.FREEZE
             secretAniPlayer.stop()
@@ -121,8 +129,8 @@ func _process(delta):
             grav = 0
             lv = Vector3(0, 0, 0)
             linear_velocity = Vector3(0, 0, 0)
-        if not am_i_in_range_of_player:
-            cat_state = CatState.TELEPORT_OUT
+        if not am_i_in_range_of_player and on_ground:
+            cat_state = CatState.TELEPORT_BACK
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("teleportOut")
@@ -145,6 +153,27 @@ func doHorizontalWalkingBehavior():
         secretAniPlayer.queue("jump")
         
 func respawn():
+    global_transform.origin = spawn_origin
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.queue("fallAsleep")
+    secretAniPlayer.queue("sleepIdle")
+    behavior_walking = false
+    behavior_jumping = false
+    
+    grav = 30
+    on_ground = true
+    walk_speed = proper_walk_speed
+    floor_glitch_walk_speed = proper_walk_speed
+    invisible_glitch_walk_speed = proper_walk_speed
+    jump_force = proper_jump_force
+    invisible_jump_force = proper_jump_force
+
+    walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+    myOtherSprite.flip_h = walk_direction == -1
+    cat_state = CatState.ASLEEP
+        
+func teleport():
     global_transform.origin = getPlayer().global_transform.origin
     var teleport_distance = 4
     # appear in front of player
@@ -198,10 +227,10 @@ func playerActivationAreaPassiveActivate():
 
 # @override, not really until GlitchEnemy gets one
 func playerActivationAreaPassiveActivate2():
-    if cat_state == CatState.WALK or cat_state == CatState.LAND:
+    if cat_state == CatState.WALK or cat_state == CatState.LAND or cat_state == CatState.ASLEEP:
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        if cat_state == CatState.WALK:
+        if cat_state == CatState.WALK or cat_state == CatState.ASLEEP:
             secretAniPlayer.queue("meow")
         cat_state = CatState.PREPARE_LUNGE
         behavior_walking = false
