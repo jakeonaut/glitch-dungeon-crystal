@@ -24,6 +24,8 @@ var grey_palette_town = preload("res://assets/palettes/grey_town_palette.png")
 var green_palette_town = preload("res://assets/palettes/green_palette_town.png")
 var black_palette_town = preload("res://assets/palettes/black_palette_town.png")
 
+var black_palette_alien = preload("res://assets/palettes/black_palette_alien.png")
+
 var tidepool_palette = preload("res://assets/palettes/tidepool_palette.png")
 var green_tidepool_palette = preload("res://assets/palettes/green_tidepool_palette.png")
 var red_tidepool_palette = preload("res://assets/palettes/red_tidepool_palette.png")

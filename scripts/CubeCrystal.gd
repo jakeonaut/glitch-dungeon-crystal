@@ -1,6 +1,5 @@
 extends Spatial
 
-onready var player = get_tree().get_root().get_node("level/Player")
 onready var cubeContainer = get_node("CubeContainer")
 onready var cubeSound = get_node("cubeSound")
 onready var cubeSound2 = get_node("cubeSound2")

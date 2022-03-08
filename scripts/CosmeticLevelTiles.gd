@@ -29,6 +29,8 @@ func setTileset(tileset_type, properly_set_tiles = true):
         set_mesh_library(yellow_cosmetic_tiles)
     elif tileset_type == global.TilesetType.BEACH:
         set_mesh_library(yellow_cosmetic_tiles)
+    elif tileset_type == global.TilesetType.ALIEN:
+        set_mesh_library(yellow_cosmetic_tiles)
     
     if properly_set_tiles:
         properlySetTiles()

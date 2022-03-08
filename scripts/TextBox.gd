@@ -240,7 +240,8 @@ func passiveInteract(_delta):
         hide_textbox_timer = 0
                 
 func stopInteract():
-    focus_me = false
+    if not is_important:
+        focus_me = false
     
 func adjustTinyColorRect():
     var lines = textNode.bbcode_text.split("\n", true)

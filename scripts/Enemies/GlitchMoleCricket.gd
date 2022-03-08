@@ -17,8 +17,6 @@ var mole_state_reset_dig_time_limit = 3
 var far_from_home_dist = 5
 var has_dug = false
 
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
-
 var fakeLevelTiles = null
 func getFakeLevelTiles():
     if fakeLevelTiles == null:
@@ -133,13 +131,13 @@ func digTilesBelow(levelTiles, should_summon_clouds):
     var tiles_dug = 0
 
     if isTileSolid(tile_type_a, true, 1, tile_pos_a):
-        levelTiles.set_cell_item(coords_a.x, coords_a.y, coords_a.z, -1)
+        levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z))
         tiles_dug += 1
     if isTileSolid(tile_type_b, true, 1, tile_pos_b):
-        levelTiles.set_cell_item(coords_b.x, coords_b.y, coords_b.z, -1)
+        levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z))
         tiles_dug += 1
     if isTileSolid(tile_type_mid, true, 1, tile_pos_mid):
-        levelTiles.set_cell_item(coords_mid.x, coords_mid.y, coords_mid.z, -1)
+        levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z))
         tiles_dug += 1
 
     if should_summon_clouds and tiles_dug > 0:
@@ -182,20 +180,3 @@ func playerActivationAreaPassiveActivate3():
 # @override
 func glitchSetSpritesAndCollision():
     pass
-
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
-    for _i in range(num_clouds):
-        var newSmokeCloud = smokeCloudRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
-        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-        if play_sound:
-            newSmokeCloud.get_node("CleanGlitchSound").play()
-            newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
-            play_sound = false
-        if is_glitchy:
-            var new_material = newSmokeCloud.get_material_override().duplicate()
-            new_material.set_shader_param("enable_glitch", "true")
-            new_material.set_shader_param("target_palette", global.weird_base_palette)
-            newSmokeCloud.set_material_override(new_material.duplicate())

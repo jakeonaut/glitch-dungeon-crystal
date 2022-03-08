@@ -144,15 +144,7 @@ func _process(delta):
     if Input.is_action_just_pressed("debug_glitch_button"):
         applyNextGlitch()
         
-    var DEATH_MARGIN = 5
-    if getGameCamera().rightmost_x > -999:
-        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-            global.memory["hearts"] = 0
-            tryDieToEnemy(true, true)
+    tryDieToOffscreenCamera()
             
     if gimme_mini_crystal_cubes > 0:
         gimme_mini_crystal_cubes_timer += (delta*22)
@@ -164,6 +156,17 @@ func _process(delta):
             add_child(newCrystalCube)
 
     #tryRotateCamera(delta)
+    
+func tryDieToOffscreenCamera():
+    var DEATH_MARGIN = 5
+    if getGameCamera().rightmost_x > -999:
+        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
+            global.memory["hearts"] = 0
+            tryDieToEnemy(true, true)
     
 func doTimeDilation(delta):
     var real_delta_multiplier = 8
