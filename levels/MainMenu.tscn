@@ -410,11 +410,11 @@ press ENTER?"
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
 flip_h = true
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
 anims/default = SubResource( 10 )
 anims/flickerOn = SubResource( 11 )
 
@@ -428,11 +428,11 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="5"]
 flip_h = true
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="6"]
 anims/default = SubResource( 34 )
 anims/flickerOn = SubResource( 35 )
 
@@ -443,12 +443,12 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
 material_override = SubResource( 18 )
 flip_h = true
 frame = 26
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="6"]
 anims/default = SubResource( 12 )
 anims/flickerOn = SubResource( 13 )
 
@@ -459,11 +459,11 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="5"]
 flip_h = true
 frame = 14
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="6"]
 anims/default = SubResource( 16 )
 anims/flickerOn = SubResource( 17 )
 
@@ -474,11 +474,11 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
 flip_h = true
 frame = 6
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
 anims/default = SubResource( 14 )
 anims/flickerOn = SubResource( 15 )
 

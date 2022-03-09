@@ -328,7 +328,7 @@ frame = 78
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5798, 21.0525, 0 )
-path = "res://levels/SpriteTown/DeathrootBog.tscn"
+path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 is_passive = true
 is_vertical = true
 

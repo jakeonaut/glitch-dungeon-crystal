@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=18]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
@@ -125,7 +126,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
-path = "res://levels/Adventure/FeatherExploration.tscn"
+path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
@@ -233,6 +234,9 @@ bbText = "PUT BUG OR ELIXER"
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 14, 0 )
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.40177, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

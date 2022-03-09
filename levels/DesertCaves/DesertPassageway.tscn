@@ -467,7 +467,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
 frame = 78
 
 [node name="ViewportTexture" type="TextureRect" parent="."]

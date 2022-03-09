@@ -385,7 +385,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
-path = "res://levels/IntroDungeon/AngelStatueFluteNest.tscn"
+path = "res://levels/SpriteTown/SpriteTown_1_0.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
@@ -400,7 +400,7 @@ shape = SubResource( 15 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101, -1, 0 )
-path = "res://levels/SpriteTown/SpriteTown_1_0.tscn"
+path = "res://levels/SpriteTown/DeathrootBog.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]

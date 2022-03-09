@@ -1,0 +1,208 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
+[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 25, 25, 1.8 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=18]
+resource_local_to_scene = true
+extents = Vector3( 8, 2, 1 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Node"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 640, 512 )
+audio_listener_enable_3d = true
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 3 )
+starting_glitch_type = 3
+tileset_type = 2
+
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 16 )]
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 22 )]
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 6 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 1 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 8 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 6 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( -2359268, 0, 1, -2359267, 0, 1, -2359266, 0, 1, -2359265, 0, 1, -2359264, 0, 1, -2359263, 0, 1, -2359262, 0, 1, -2359261, 0, 1, -2359260, 0, 1, -2359259, 0, 1, -2359258, 0, 1, -2359257, 0, 1, -2359256, 0, 1, -2359255, 0, 1, -2359254, 0, 1, -2359253, 0, 1, -2359252, 0, 1, -2359251, 0, 1, -2359250, 0, 1, -2359249, 0, 1, -2359248, 0, 1, -2359247, 0, 1, -2359246, 0, 1, -2359245, 0, 1, -2359244, 0, 1, -2359243, 0, 1, -2359242, 0, 1, -2359241, 0, 1, -2359240, 0, 1, -2359239, 0, 1, -2359238, 0, 1, -2359237, 0, 1, -2359236, 0, 1, -2359235, 0, 1, -2359234, 0, 1, -2359233, 0, 1, -2359232, 0, 1, -2359231, 0, 1, -2359230, 0, 1, -2359229, 0, 1, -2359228, 0, 1, -2359227, 0, 1, -2359225, 0, 1, -2359224, 0, 1, -2359223, 0, 1, -2359222, 0, 1, -2359221, 0, 1, -2359220, 0, 1, -2359219, 0, 1, -2293729, 0, 1, -2293728, 0, 1, -2293727, 0, 1, -2293726, 0, 1, -2293725, 0, 1, -2293724, 0, 1, -2293723, 0, 1, -2293720, 0, 1, -2293719, 0, 1, -2293718, 0, 1, -2293717, 0, 1, -2293716, 0, 1, -2293715, 0, 1, -2293714, 0, 1, -2293713, 0, 1, -2293712, 0, 1, -2293711, 0, 1, -2293710, 0, 1, -2293709, 0, 1, -2293708, 0, 1, -2293707, 0, 1, -2293706, 0, 1, -2293705, 0, 1, -2293704, 0, 1, -2293702, 0, 1, -2293701, 0, 1, -2293700, 0, 1, -2293699, 0, 1, -2293698, 0, 1, -2293697, 0, 1, -2293696, 0, 1, -2293694, 0, 1, -2293693, 0, 1, -2293692, 0, 1, -2293691, 0, 1, -2293690, 0, 1, -2293689, 0, 1, -2293688, 0, 1, -2293687, 0, 1, -2293686, 0, 1, -2293685, 0, 1, -2293684, 0, 1, -2293683, 0, 1, -2228196, 0, 1, -2228195, 0, 1, -2228194, 0, 1, -2228193, 0, 1, -2228192, 0, 1, -2228191, 0, 1, -2228189, 0, 1, -2228188, 0, 1, -2228187, 0, 1, -2228186, 0, 1, -2228185, 0, 1, -2228184, 0, 1, -2228183, 0, 1, -2228182, 0, 1, -2228181, 0, 1, -2228180, 0, 1, -2228179, 0, 1, -2228178, 0, 1, -2228177, 0, 1, -2228176, 0, 1, -2228161, 0, 1, -2228160, 0, 1, -2228159, 0, 1, -2228158, 0, 1, -2228157, 0, 1, -2228156, 0, 1, -2228155, 0, 1, -2228154, 0, 1, -2228148, 0, 1, -2228147, 0, 1, -2162656, 0, 1, -2162655, 0, 1, -2162652, 0, 1, -2162651, 0, 1, -2162624, 0, 1, -2162623, 0, 1, -2162622, 0, 1, -2162621, 0, 1, -2162620, 0, 1, -2162619, 0, 1, -2162618, 0, 1, -2162617, 0, 1, -2162616, 0, 1, -2162615, 0, 1, -2162613, 0, 1, -2162611, 0, 1, -2097121, 0, 1, -2097120, 0, 1, -2097119, 0, 1, -2097117, 0, 1, -2097116, 0, 1, -2097086, 0, 1, -2097085, 0, 1, -2097084, 0, 1, -2097083, 0, 1, -2097082, 0, 1, -2097081, 0, 1, -2097077, 0, 1, -2097076, 0, 1, -2031586, 0, 1, -2031585, 0, 1, -2031584, 0, 1, -2031583, 0, 1, -2031582, 0, 1, -2031581, 0, 1, -2031550, 0, 1, -2031549, 0, 1, -2031548, 0, 1, -2031547, 0, 1, -2031546, 0, 1, -2031545, 0, 1, -2031544, 0, 1, -2031543, 0, 1, -2031542, 0, 1, -2031541, 0, 1, -2031540, 0, 1, -1966050, 0, 1, -1966048, 0, 1, -1966047, 0, 1, -1966046, 0, 1, -1966013, 0, 1, -1966012, 0, 1, -1966011, 0, 1, -1966010, 0, 1, -1966008, 0, 1, -1966007, 0, 1, -1966006, 0, 1, -1966005, 0, 1, -1966004, 0, 1, -1900514, 0, 1, -1900513, 0, 1, -1900511, 0, 1, -1900476, 0, 1, -1900475, 0, 1, -1900474, 0, 1, -1900471, 0, 1, -1900469, 0, 1, -1900467, 0, 1, -1834978, 0, 1, -1834977, 0, 1, -1834976, 0, 1, -1834940, 0, 1, -1834939, 0, 1, -1834938, 0, 1, -1834935, 0, 1, -1834933, 0, 1, -1834932, 0, 1, -1834931, 0, 1, -1769442, 0, 1, -1769441, 0, 1, -1769404, 0, 1, -1769403, 0, 1, -1769402, 0, 1, -1769401, 0, 1, -1769399, 0, 1, -1769398, 0, 1, -1769396, 0, 1, -1769395, 0, 1, -1703906, 0, 1, -1703905, 0, 1, -1703868, 0, 1, -1703867, 0, 1, -1703866, 0, 1, -1703865, 0, 1, -1703864, 0, 1, -1703863, 0, 1, -1703862, 0, 1, -1703860, 0, 1, -1703859, 0, 1, -1638370, 0, 1, -1638369, 0, 1, -1638331, 0, 1, -1638330, 0, 1, -1638329, 0, 1, -1638328, 0, 1, -1638327, 0, 1, -1638326, 0, 1, -1638324, 0, 1, -1638323, 0, 1, -1572834, 0, 1, -1572833, 0, 1, -1572794, 0, 1, -1572793, 0, 1, -1572792, 0, 1, -1572791, 0, 1, -1572790, 0, 1, -1572789, 0, 1, -1572787, 0, 1, -1507298, 0, 1, -1507258, 0, 1, -1507257, 0, 1, -1507256, 0, 1, -1507255, 0, 1, -1507254, 0, 1, -1507253, 0, 1, -1507251, 0, 1, -1441762, 0, 1, -1441761, 0, 1, -1441721, 0, 1, -1441719, 0, 1, -1441718, 0, 1, -1441717, 0, 1, -1441715, 0, 1, -1376228, 0, 1, -1376227, 0, 1, -1376226, 0, 1, -1376225, 0, 1, -1376186, 0, 1, -1376185, 0, 1, -1376183, 0, 1, -1376182, 0, 1, -1376181, 0, 1, -1376179, 0, 1, -1310692, 0, 1, -1310691, 0, 1, -1310690, 0, 1, -1310689, 0, 1, -1310650, 0, 1, -1310649, 0, 1, -1310648, 0, 1, -1310647, 0, 1, -1310645, 0, 1, -1310643, 0, 1, -1245156, 0, 1, -1245155, 0, 1, -1245153, 0, 1, -1245113, 0, 1, -1245112, 0, 1, -1245111, 0, 1, -1245110, 0, 1, -1245109, 0, 1, -1245108, 0, 1, -1245107, 0, 1, -1179620, 0, 1, -1179619, 0, 1, -1179618, 0, 1, -1179577, 0, 1, -1179576, 0, 1, -1179575, 0, 1, -1179574, 0, 1, -1179573, 0, 1, -1179572, 0, 1, -1114084, 0, 1, -1114083, 0, 1, -1114082, 0, 1, -1114052, 0, 1, -1114051, 0, 1, -1114050, 0, 1, -1114041, 0, 1, -1114039, 0, 1, -1114038, 0, 1, -1114037, 0, 1, -1114036, 0, 1, -1048548, 0, 1, -1048547, 0, 1, -1048516, 0, 1, -1048514, 0, 1, -1048509, 0, 1, -1048508, 0, 1, -1048507, 0, 1, -1048505, 0, 1, -1048503, 0, 1, -1048502, 0, 1, -1048501, 0, 1, -1048500, 0, 1, -983012, 0, 1, -983011, 0, 1, -982997, 0, 1, -982996, 0, 1, -982987, 0, 1, -982986, 0, 1, -982985, 0, 1, -982980, 0, 1, -982979, 0, 1, -982978, 0, 1, -982973, 0, 1, -982971, 0, 1, -982969, 0, 1, -982968, 0, 1, -982967, 0, 1, -982965, 0, 1, -982964, 0, 1, -982963, 0, 1, -917476, 0, 1, -917475, 0, 1, -917461, 0, 1, -917459, 0, 1, -917451, 0, 1, -917449, 0, 1, -917437, 0, 1, -917436, 0, 1, -917435, 0, 1, -917433, 0, 1, -917432, 0, 1, -917431, 0, 1, -917430, 0, 1, -917429, 0, 1, -917427, 0, 1, -851940, 0, 1, -851939, 0, 1, -851938, 0, 1, -851925, 0, 1, -851924, 0, 1, -851923, 0, 1, -851915, 0, 1, -851914, 0, 1, -851913, 0, 1, -851897, 0, 1, -851895, 0, 1, -851894, 0, 1, -851893, 0, 1, -851891, 0, 1, -786404, 0, 1, -786403, 0, 1, -786402, 0, 1, -786382, 0, 1, -786381, 0, 1, -786380, 0, 1, -786362, 0, 1, -786360, 0, 1, -786359, 0, 1, -786357, 0, 1, -786356, 0, 1, -786355, 0, 1, -720868, 0, 1, -720866, 0, 1, -720846, 0, 1, -720844, 0, 1, -720827, 0, 1, -720826, 0, 1, -720825, 0, 1, -720824, 0, 1, -720823, 0, 1, -720821, 0, 1, -720820, 0, 1, -720819, 0, 1, -655332, 0, 1, -655330, 0, 1, -655329, 0, 1, -655318, 0, 1, -655317, 0, 1, -655310, 0, 1, -655309, 0, 1, -655308, 0, 1, -655304, 0, 1, -655292, 0, 1, -655291, 0, 1, -655290, 0, 1, -655289, 0, 1, -655288, 0, 1, -655287, 0, 1, -655285, 0, 1, -655284, 0, 1, -655283, 0, 1, -589796, 0, 1, -589794, 0, 1, -589793, 0, 1, -589792, 0, 1, -589788, 0, 1, -589782, 0, 1, -589781, 0, 1, -589769, 0, 1, -589768, 0, 1, -589757, 0, 1, -589756, 0, 1, -589755, 0, 1, -589754, 0, 1, -589753, 0, 1, -589752, 0, 1, -589750, 0, 1, -589749, 0, 1, -524260, 0, 1, -524259, 0, 1, -524258, 0, 1, -524257, 0, 1, -524256, 0, 1, -524252, 0, 1, -524233, 0, 1, -524232, 0, 1, -524222, 0, 1, -524221, 0, 1, -524220, 0, 1, -524219, 0, 1, -524217, 0, 1, -524216, 0, 1, -524214, 0, 1, -524212, 0, 1, -458723, 0, 1, -458721, 0, 1, -458720, 0, 1, -458719, 0, 1, -458716, 0, 1, -458715, 0, 1, -458697, 0, 1, -458696, 0, 1, -458687, 0, 1, -458686, 0, 1, -458684, 0, 1, -458683, 0, 1, -458682, 0, 1, -458681, 0, 1, -458679, 0, 1, -458678, 0, 1, -458677, 0, 1, -393188, 0, 1, -393187, 0, 1, -393186, 0, 1, -393185, 0, 1, -393184, 0, 1, -393183, 0, 1, -393182, 0, 1, -393181, 0, 1, -393180, 0, 1, -393179, 0, 1, -393164, 0, 1, -393163, 0, 1, -393162, 0, 1, -393161, 0, 1, -393160, 0, 1, -393159, 0, 1, -393157, 0, 1, -393156, 0, 1, -393155, 0, 1, -393154, 0, 1, -393153, 0, 1, -393152, 0, 1, -393151, 0, 1, -393148, 0, 1, -393147, 0, 1, -393146, 0, 1, -393145, 0, 1, -393144, 0, 1, -393142, 0, 1, -393141, 0, 1, -327652, 0, 1, -327651, 0, 1, -327650, 0, 1, -327649, 0, 1, -327648, 0, 1, -327647, 0, 1, -327646, 0, 1, -327645, 0, 1, -327644, 0, 1, -327643, 0, 1, -327640, 0, 1, -327639, 0, 1, -327638, 0, 1, -327637, 0, 1, -327636, 0, 1, -327635, 0, 1, -327628, 0, 1, -327626, 0, 1, -327625, 0, 1, -327624, 0, 1, -327623, 0, 1, -327622, 0, 1, -327621, 0, 1, -327620, 0, 1, -327618, 0, 1, -327617, 0, 1, -327616, 0, 1, -327615, 0, 1, -327614, 0, 1, -327613, 0, 1, -327612, 0, 1, -327610, 0, 1, -327609, 0, 1, -327608, 0, 1, -327607, 0, 1, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -262108, 0, 1, -262107, 0, 1, -262106, 0, 1, -262105, 0, 1, -262104, 0, 1, -262101, 0, 1, -262100, 0, 1, -262099, 0, 1, -262092, 0, 1, -262091, 0, 1, -262090, 0, 1, -262089, 0, 1, -262088, 0, 1, -262086, 0, 1, -262085, 0, 1, -262084, 0, 1, -262075, 0, 1, -262074, 0, 1 )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 8 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9, -6, 0 )
+
+[node name="WaterCube37" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -5, -4 )
+water_cube_width = 9999.0
+water_cube_height = 9999.0
+
+[node name="CollisionShape" parent="Viewport/level/WaterCube37/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -11, 2 )
+shape = SubResource( 19 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9191, -2.78415, 0 )
+path = "res://levels/PlasticBeach/PlasticReef.tscn"
+is_passive = true
+is_vertical = true
+
+[node name="Sprite3D" parent="Viewport/level/Door3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
+
+[node name="landing" parent="Viewport/level/Door3" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261108, -4, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
+anims/doorClose = SubResource( 15 )
+anims/doorOpen = SubResource( 16 )
+anims/locked = SubResource( 17 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.284184, 0 )
+shape = SubResource( 18 )
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 14 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
+
+[editable path="Viewport/level/WaterCube37"]
+[editable path="Viewport/level/Door3"]

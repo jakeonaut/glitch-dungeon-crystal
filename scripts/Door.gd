@@ -193,6 +193,7 @@ func land():
             getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
             global.memory.erase("player_flip_h")
         if global.memory.has("player_y_offset"):
+            print(str(getPlayer().global_transform.origin.y) + ", " + str(global.memory["player_y_offset"]))
             getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
         if global.memory.has("feather_jump_timer"):
             getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]
