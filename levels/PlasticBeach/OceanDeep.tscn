@@ -1,11 +1,12 @@
 [gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://sceneObjects/WaterCubes/OceanWaterCube.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
+[ext_resource path="res://sceneObjects/Buggies/Fishy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
-[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
@@ -13,9 +14,6 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
-
-[sub_resource type="BoxShape" id=19]
-extents = Vector3( 25, 25, 1.8 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "doorClose"
@@ -163,15 +161,6 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9, -6, 0 )
 
-[node name="WaterCube37" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -5, -4 )
-water_cube_width = 9999.0
-water_cube_height = 9999.0
-
-[node name="CollisionShape" parent="Viewport/level/WaterCube37/Area" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -11, 2 )
-shape = SubResource( 19 )
-
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9191, -2.78415, 0 )
 path = "res://levels/PlasticBeach/PlasticReef.tscn"
@@ -193,6 +182,94 @@ anims/locked = SubResource( 17 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.284184, 0 )
 shape = SubResource( 18 )
 
+[node name="WaterCubes" type="Spatial" parent="Viewport/level"]
+
+[node name="WaterCube2" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -2, -4 )
+
+[node name="WaterCube3" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -2, -4 )
+
+[node name="WaterCube4" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, -2, -4 )
+
+[node name="WaterCube5" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -2, -4 )
+
+[node name="WaterCube6" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -2, -4 )
+
+[node name="WaterCube7" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -2, -4 )
+
+[node name="WaterCube8" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52, -2, -4 )
+
+[node name="WaterCube9" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56, -2, -4 )
+
+[node name="WaterCube10" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -2, -4 )
+
+[node name="WaterCube11" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64, -2, -4 )
+
+[node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, -2, -4 )
+
+[node name="WaterCube13" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72, -2, -4 )
+
+[node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76, -2, -4 )
+
+[node name="Fishies" type="Spatial" parent="Viewport/level"]
+
+[node name="Fishy" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -14, 0 )
+
+[node name="Fishy2" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52, -17, 0 )
+
+[node name="Fishy3" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62, -10, 0 )
+
+[node name="Fishy4" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -11, 0 )
+
+[node name="Fishy5" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -28, 0 )
+
+[node name="Fishy6" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -30, 0 )
+
+[node name="Fishy7" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -30, 0 )
+
+[node name="Fishy8" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -27, 0 )
+
+[node name="Fishy9" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, -27, 0 )
+
+[node name="Fishy10" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -24, 0 )
+
+[node name="Fishy11" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, -24, 0 )
+
+[node name="Fishy12" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -26, 0 )
+
+[node name="Fishy13" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -21, 0 )
+
+[node name="Fishy14" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -23, 0 )
+
+[node name="Fishy15" parent="Viewport/level/Fishies" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, -21, 0 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -204,5 +281,5 @@ __meta__ = {
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
-[editable path="Viewport/level/WaterCube37"]
 [editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/WaterCubes/WaterCube5"]

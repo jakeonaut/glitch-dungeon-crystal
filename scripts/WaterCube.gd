@@ -79,7 +79,7 @@ func makeNewSplashSprite(x_offset, is_mini = false):
 
 	# x not less than -0.498, not greater than 2.502
 	var new_x = getPlayer().global_transform.origin.x - self.global_transform.origin.x + x_offset
-	newSplashSprite.transform.origin.x = clamp(new_x, -0.498, 2.502)
+	newSplashSprite.transform.origin.x = clamp(new_x, -0.498, water_cube_width/1.598)
 	
 	if is_mini:
 		newSplashSprite.updateBaseFrame(4, 0)
@@ -102,6 +102,7 @@ func setFilterPosition():
 	var bot_right_corner_3D = target_origin + Vector3(water_cube_width, water_cube_height, 0.0)
 
 	var bot_right_corner_2D = getGameCamera().unproject_position(bot_right_corner_3D)
-	waterFilter.get_node("ColorRect").rect_size = bot_right_corner_2D - target_pos + Vector2(1.0, 1.0)
-	# i really don't know why we need to do this, but we do.
-	waterFilter.get_node("ColorRect").rect_size.y = waterFilter.get_node("ColorRect").rect_size.x
+	var rect_size = bot_right_corner_2D - target_pos + Vector2(1.0, 1.0)
+	waterFilter.get_node("ColorRect").rect_size.x = rect_size.x
+	# switching from 3D to 2D flips the y axis...
+	waterFilter.get_node("ColorRect").rect_size.y = -rect_size.y

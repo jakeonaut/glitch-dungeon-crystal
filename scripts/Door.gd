@@ -188,6 +188,8 @@ func land():
     getPlayer().global_transform.origin.x = landing.global_transform.origin.x
     getPlayer().global_transform.origin.y = landing.global_transform.origin.y
 
+    getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
+
     if is_passive:
         if global.memory.has("player_flip_h"):
             getPlayer().mySprite.flip_h = global.memory["player_flip_h"]

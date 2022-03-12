@@ -50,8 +50,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 0 )
 material_override = SubResource( 4 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
-hframes = 4
-vframes = 4
+hframes = 8
+vframes = 8
 script = ExtResource( 1 )
 max_frames = 4
 

@@ -1,14 +1,14 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sceneObjects/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
+[ext_resource path="res://sceneObjects/WaterCubes/OceanWaterCube.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
@@ -17,9 +17,6 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/WallTorch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
-
-[sub_resource type="BoxShape" id=26]
-extents = Vector3( 50, 25, 1.8 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "doorClose"
@@ -277,15 +274,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0 )
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8153, 5, 0 )
 
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5, -4 )
-water_cube_width = 9999.0
-water_cube_height = 9999.0
-
-[node name="CollisionShape" parent="Viewport/level/WaterCube/Area" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -21, 2 )
-shape = SubResource( 26 )
-
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 
@@ -353,6 +341,74 @@ anims/locked = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.284184, 0 )
 shape = SubResource( 25 )
 
+[node name="WaterCubes" type="Spatial" parent="Viewport/level"]
+
+[node name="WaterCube2" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5, -2 )
+
+[node name="WaterCube3" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -5, -2 )
+
+[node name="WaterCube4" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -5, -2 )
+
+[node name="WaterCube5" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -5, -2 )
+
+[node name="WaterCube6" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -5, -2 )
+
+[node name="WaterCube7" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5, -2 )
+
+[node name="WaterCube8" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5, -2 )
+
+[node name="WaterCube9" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -5, -2 )
+
+[node name="WaterCube10" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -5, -2 )
+
+[node name="WaterCube11" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -5, -2 )
+
+[node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, -5, -2 )
+
+[node name="WaterCube13" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -5, -2 )
+
+[node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -5, -2 )
+
+[node name="WaterCube15" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -5, -2 )
+
+[node name="WaterCube16" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -5, -2 )
+
+[node name="WaterCube17" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -5, -2 )
+
+[node name="WaterCube18" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -5, -2 )
+
+[node name="WaterCube19" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59, -5, -2 )
+
+[node name="WaterCube20" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -5, -2 )
+
+[node name="WaterCube21" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -5, -2 )
+
+[node name="WaterCube22" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, -5, -2 )
+
+[node name="WaterCube23" parent="Viewport/level/WaterCubes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 75, -5, -2 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -364,7 +420,6 @@ __meta__ = {
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
-[editable path="Viewport/level/WaterCube"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door3"]

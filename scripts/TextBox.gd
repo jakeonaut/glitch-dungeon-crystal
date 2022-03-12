@@ -7,7 +7,7 @@ onready var nextDialogSound = get_node("NextDialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
 
-var tinyTextTheme = preload("res://dialogFontTheme.tres")
+var tinyTextTheme = preload("res://appleKidDialogFontTheme2.tres")
 
 var text_timer = 0
 var text_next_index = 0
@@ -71,7 +71,7 @@ func tinify():
     textNode.set_theme(tinyTextTheme)
     var large_font = textNode.theme.default_font.duplicate()
     large_font.resource_local_to_scene = true
-    large_font.set_size(26)
+    large_font.set_size(20)
     textNode.add_font_override("normal_font", large_font)
 
 func setPosition():

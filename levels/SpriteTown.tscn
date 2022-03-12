@@ -446,7 +446,7 @@ shape = SubResource( 4 )
 [node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 15 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
 frame = 4
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
@@ -698,7 +698,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 8 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.808, 0 )
 frame = 18
 
@@ -716,7 +716,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
 frame = 0
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 24 )]
@@ -844,7 +844,7 @@ can_activate = false
 [node name="CollisionShape" parent="Viewport/level/FrogWizardNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
 
-[node name="Sprite3D" parent="Viewport/level/FrogWizardNPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/FrogWizardNPC" index="5"]
 frame = 60
 max_frames = 1
 
