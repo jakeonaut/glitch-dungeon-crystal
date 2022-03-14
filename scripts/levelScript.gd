@@ -28,6 +28,9 @@ func _ready_impl():
     global.activeInteractor = null # somewhat of a failsafe
     set_process_input(true)
     set_process(true)
+
+    yield(get_tree(), "idle_frame")
+    yield(get_tree(), "idle_frame")
     
     levelTiles.my_tileset_type = tileset_type
     levelTiles.buildRandomTiles()
@@ -52,8 +55,6 @@ func _ready_impl():
     if global.memory.has("player_costume"):
         player.wearCostume(global.memory["player_costume"])
 
-    yield(get_tree(), "idle_frame")
-    yield(get_tree(), "idle_frame")
     restartMusic()
     tryShowUIElements()
     tryToRespawn()

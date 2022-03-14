@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -23,6 +23,17 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/WaterCubes/OceanWaterCube.tscn" type="PackedScene" id=23]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=24]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=25]
+[ext_resource path="res://sceneObjects/MrMoTex.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/palettes/black_palette_alien.png" type="Texture" id=27]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=28]
+[ext_resource path="res://assets/MRMOTEXTEX3.png" type="Texture" id=29]
+[ext_resource path="res://assets/MRMOTEXTEX2.png" type="Texture" id=30]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=31]
+[ext_resource path="res://sceneObjects/Kelp.tscn" type="PackedScene" id=32]
+[ext_resource path="res://assets/sprites/kelp.png" type="Texture" id=33]
+[ext_resource path="res://sceneObjects/Kelp3.tscn" type="PackedScene" id=34]
 
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
@@ -73,6 +84,171 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 3 ]
+}
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.002
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=29]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 1.0
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 25 )
+
+[sub_resource type="StreamTexture" id=23]
+flags = 19
+load_path = "res://.import/MRMOTEXTEX3.png-185b206545207102e27e371ae62e7539.stex"
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 50.0
+shader_param/shake_color_rate = 0.001
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 25 )
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.001
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 33 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 31 )
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "wiggle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 0.7, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 3, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
 }
 
 [sub_resource type="ViewportTexture" id=14]
@@ -294,6 +470,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86, -5, -4 )
 [node name="WaterCube71" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 5, -4 )
 
+[node name="WaterCube97" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, 3, -4 )
+
+[node name="WaterCube98" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 9, -4 )
+
 [node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, -4 )
 
@@ -330,6 +512,164 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5177, -15.9757, 0 )
 [node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.51482, 0 )
 
+[node name="MrMoTexBG" type="Spatial" parent="Viewport/level"]
+
+[node name="MrMoTex" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 58.5, -9.5, -1 )
+material_override = SubResource( 28 )
+flip_h = true
+texture = ExtResource( 29 )
+frame = 239
+
+[node name="MrMoTex5" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 61.5, -16.5, -1 )
+material_override = SubResource( 29 )
+texture = ExtResource( 29 )
+frame = 778
+
+[node name="MrMoTex4" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 66.5, -10.5, -1 )
+material_override = SubResource( 30 )
+flip_h = true
+texture = ExtResource( 29 )
+frame = 462
+
+[node name="MrMoTex13" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 75.5, -11.5, -1 )
+material_override = SubResource( 30 )
+flip_h = true
+texture = ExtResource( 29 )
+frame = 462
+
+[node name="MrMoTex14" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 43.5, -6.5, -1 )
+material_override = SubResource( 30 )
+flip_h = true
+texture = ExtResource( 29 )
+frame = 462
+
+[node name="MrMoTex10" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 26.5, 4.5, -1 )
+material_override = SubResource( 31 )
+flip_h = true
+texture = ExtResource( 29 )
+frame = 462
+script = null
+
+[node name="MrMoTex12" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 15.5, -0.5, -1 )
+material_override = SubResource( 31 )
+texture = ExtResource( 29 )
+frame = 462
+script = null
+
+[node name="MrMoTex2" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 64.5, -9.5, -1 )
+material_override = SubResource( 22 )
+texture = SubResource( 23 )
+frame = 239
+
+[node name="MrMoTex7" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 42.5, -9.5, -1 )
+material_override = SubResource( 22 )
+texture = SubResource( 23 )
+frame = 239
+
+[node name="MrMoTex8" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 34.5, -2.5, -1 )
+material_override = SubResource( 24 )
+flip_h = true
+texture = SubResource( 23 )
+frame = 239
+
+[node name="MrMoTex9" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 29.5, -1.5, -1 )
+material_override = SubResource( 24 )
+flip_h = true
+texture = SubResource( 23 )
+frame = 803
+
+[node name="MrMoTex11" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 19.5, -1.5, -1 )
+material_override = SubResource( 24 )
+flip_h = true
+texture = SubResource( 23 )
+frame = 323
+
+[node name="MrMoTex3" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 68.5, -14.5, -1 )
+material_override = SubResource( 22 )
+texture = SubResource( 23 )
+frame = 462
+
+[node name="MrMoTex6" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 50.5, -16.5, -1 )
+material_override = SubResource( 22 )
+texture = SubResource( 23 )
+frame = 462
+
+[node name="Kelp" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, -15, -2 )
+
+[node name="Kelp13" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 87, -8, -2 )
+
+[node name="Kelp14" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.136, -7, -2 )
+
+[node name="Kelp6" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -16, -2 )
+
+[node name="Kelp7" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, -2 )
+
+[node name="Kelp8" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.7236, -15, -2 )
+
+[node name="Kelp11" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.7236, -16.4188, -2 )
+
+[node name="Kelp12" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.7337, -15.8768, -2 )
+
+[node name="Kelp15" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5029, -8.87681, -2 )
+
+[node name="Kelp16" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5029, -9.38626, -2 )
+
+[node name="Kelp9" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6051, -14, -2 )
+
+[node name="Kelp10" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.4866, -14.4542, -2 )
+
+[node name="Kelp2" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -16.0938, -2 )
+
+[node name="Kelp4" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -16.0938, -2 )
+
+[node name="Kelp5" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, -17.0938, -2 )
+
+[node name="Kelp3" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.5469, -15.5469, -2 )
+
+[node name="Kelp" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -17, 0 )
+
+[node name="Kelp2" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 82, -8, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/Kelp2" index="0"]
+material_override = SubResource( 25 )
+flip_h = true
+
+[node name="AnimationPlayer" parent="Viewport/level/Kelp2" index="1"]
+anims/RESET = SubResource( 26 )
+anims/wiggle = SubResource( 27 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -344,3 +684,4 @@ __meta__ = {
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Snail4"]
+[editable path="Viewport/level/Kelp2"]

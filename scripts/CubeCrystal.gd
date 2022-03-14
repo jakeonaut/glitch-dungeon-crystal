@@ -21,6 +21,8 @@ var disappearing2 = false
 var disappearTimer = 0
 
 func _ready():
+    yield(get_tree(), "idle_frame")
+    yield(get_tree(), "idle_frame")
     if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
         queue_free()
         
