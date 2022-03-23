@@ -35,7 +35,7 @@ code = "shader_type canvas_item;
 
 void fragment() {
     vec3 screen_tex = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
-    COLOR.rgb = vec3(0, screen_tex.g, screen_tex.b + screen_tex.r);
+    COLOR.rgb = vec3(screen_tex.r/2.0, screen_tex.g, screen_tex.b + screen_tex.r);
 }"
 
 [sub_resource type="ShaderMaterial" id=6]
@@ -52,6 +52,17 @@ pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 8
+script = ExtResource( 1 )
+max_frames = 4
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 9 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 8
+frame = 12
 script = ExtResource( 1 )
 max_frames = 4
 

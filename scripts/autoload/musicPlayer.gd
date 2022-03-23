@@ -100,7 +100,7 @@ func conductFromScenePath(path):
         tryToPlay(casinoThemePlayer)
     elif path.find("BroomChallenge") > 0:
         tryToPlay(realizationThemePlayer)
-    elif path.find("Suburb") > 0:
+    elif path.find("Crypts") > 0 or path.find("Suburb") > 0:
         tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0:
         tryToPlay(oceanThemePlayer)

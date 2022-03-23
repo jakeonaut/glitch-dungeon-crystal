@@ -63,7 +63,7 @@ func passiveActivate(delta):
         global.mini_cube_crystal_pitch += 0.1
         cubeSound2.play()
         aniPlayer.play("floatAway")
-        global.num_mini_crystal_cubes += 1
+        level.player.giveMeMiniCrystalCubes(15)
 
         disappearing2 = true
         

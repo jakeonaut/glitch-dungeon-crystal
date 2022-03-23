@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/kelp.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Ocean/Kelp3.gd" type="Script" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -22,6 +23,7 @@ shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 2 )
 
 [node name="Kelp" type="Spatial"]
+script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 1 )

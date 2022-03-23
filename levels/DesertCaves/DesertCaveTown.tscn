@@ -455,7 +455,7 @@ shape = SubResource( 4 )
 [node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 28 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
 frame = 70
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -696,7 +696,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 8 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.808, 0 )
 frame = 18
 
@@ -714,7 +714,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
 frame = 0
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -792,7 +792,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 31 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="5"]
 frame = 78
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 6 )]
@@ -805,7 +805,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC7" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC7" index="5"]
 frame = 78
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -853,7 +853,7 @@ can_activate = false
 [node name="CollisionShape" parent="Viewport/level/FrogWizardNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
 
-[node name="Sprite3D" parent="Viewport/level/FrogWizardNPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/FrogWizardNPC" index="5"]
 frame = 60
 max_frames = 1
 

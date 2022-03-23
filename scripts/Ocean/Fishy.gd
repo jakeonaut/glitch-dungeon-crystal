@@ -28,10 +28,10 @@ func _process(delta):
     var step = 1
     if is_swimmin_away:
         step = 5
-    global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (step*1)
+    global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
     
     var diff = target_pos - global_transform.origin
-    var diff_step = 0.01
+    var diff_step = 0.05
     if stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), diff_step) == 0:
         is_swimmin_away = false
         randomizeTargetPos()
@@ -69,3 +69,4 @@ func passiveActivate(_delta):
         global_transform.origin.y + rand_range(y_min, y_max),
         original_pos.z
     )
+    mySprite.flip_h = (target_pos.x < global_transform.origin.x)
