@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -94,6 +94,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D2:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.125, 0.258, 11 ) ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "dig"
@@ -121,7 +133,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -179,6 +191,24 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "fly"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 53, 54, 56, 57 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -327,6 +357,21 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=36]
+resource_name = "suddenly_fly"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 52, 56, 57, 56, 57, 53, 54, 53, 54, 53 ]
+}
+
 [node name="GlitchMoleCricket" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 14 )
@@ -425,9 +470,11 @@ anims/RESET = SubResource( 19 )
 anims/dig = SubResource( 20 )
 anims/fall = SubResource( 22 )
 anims/fallStart = SubResource( 30 )
+anims/fly = SubResource( 37 )
 anims/idle = SubResource( 21 )
 anims/jump = SubResource( 23 )
 anims/jumpSquat = SubResource( 24 )
 anims/jumpStart = SubResource( 25 )
 anims/land = SubResource( 26 )
 anims/stand = SubResource( 29 )
+anims/suddenly_fly = SubResource( 36 )
