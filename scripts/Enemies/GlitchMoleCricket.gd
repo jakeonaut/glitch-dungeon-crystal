@@ -57,6 +57,7 @@ func _process(delta):
 	delta = delta * global.time_dilation_multiplier
 	aniPlayer.playback_speed = global.time_dilation_multiplier
 
+	checkForDigPathOverrides()
 	checkForFlyPathOverrides()
 	
 	if mole_state == MoleState.IDLE:
@@ -132,20 +133,21 @@ func _process(delta):
 			aniPlayer.queue("suddenly_fly")
 			aniPlayer.queue("fly")
 		if grav == 0:
-			global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*5)
-			if stepify(global_transform.origin.x, 0.1) == flight_anchor.global_transform.origin.x and \
-			   stepify(global_transform.origin.y, 0.1) == flight_anchor.global_transform.origin.y:
+			global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*3)
+			var step = .5
+			if stepify(global_transform.origin.x, step) == stepify(flight_anchor.global_transform.origin.x, step) and \
+			   stepify(global_transform.origin.y, step) == stepify(flight_anchor.global_transform.origin.y, step):
 				mole_state = MoleState.OVERRIDE_FLYING
 	elif mole_state == MoleState.OVERRIDE_FLYING:
 		if not aniPlayer.is_playing():
 			aniPlayer.play("fly")
 		walk_speed = 5
 
-		behavior_walking = false
-		behavior_vertical_walking = false
 		if flight_anchor.frame == 0: # DOWN
 			behavior_vertical_walking = true
 			walk_direction = -1
+			grav = 50
+			true_terminal_vel = 5
 		elif flight_anchor.frame == 1: # RIGHT
 			myOtherSprite.flip_h = false
 			walk_direction = 1
@@ -157,6 +159,8 @@ func _process(delta):
 		elif flight_anchor.frame == 3: # UP?
 			behavior_vertical_walking = true
 			walk_direction = 1
+			grav = -50
+			true_terminal_vel = 5
 
 
 
@@ -167,9 +171,30 @@ func checkForFlyPathOverrides():
 	var areas = smallInteractionArea.get_overlapping_areas()
 	for area in areas:
 		if area.is_in_group("flypath") and flight_anchor != area.get_node(".."):
-			grav = 60
+			if not aniPlayer.has_animation("jumpSquatInitial"):
+				aniPlayer.rename_animation("jumpSquat", "jumpSquatInitial")
+				aniPlayer.add_animation("jumpSquat", aniPlayer.get_animation("jumpStart"))
+			behavior_walking = false
+			behavior_vertical_walking = false
+			if mole_state != MoleState.OVERRIDE_FLYING:
+				grav = 60
+			else:
+				grav = 0
+				linear_velocity.y = 0
+				vv = 0
+				aniPlayer.stop()
+				aniPlayer.clear_queue()
+				aniPlayer.play("fly")
 			flight_anchor = area.get_node("..")
 			mole_state = MoleState.OVERRIDE_FLY_START
+
+func checkForDigPathOverrides():
+	var areas = smallInteractionArea.get_overlapping_areas()
+	for area in areas:
+		if area.is_in_group("digpath") and flight_anchor != area.get_node(".."):
+			if aniPlayer.has_animation("jumpSquatInitial"):
+				aniPlayer.remove_animation("jumpSquat")
+				aniPlayer.rename_animation("jumpSquatInitial", "jumpSquat")
 		
 func isFarFromHome():
 	return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
