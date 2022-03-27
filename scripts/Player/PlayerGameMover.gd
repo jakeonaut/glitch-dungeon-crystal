@@ -95,7 +95,7 @@ func pressingJump():
     return Input.is_action_pressed("jump_button") or should_magic_jump
 
 # @override
-func pressingMoveForward():
+func pressingMoveUp():
     return Input.is_action_pressed("ui_up")
     
 # @override
