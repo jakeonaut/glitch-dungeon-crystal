@@ -741,6 +741,9 @@ shape = SubResource( 33 )
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -7, 0 )
 
+[node name="Sprite3D" parent="Viewport/level/Dragonfly" index="0"]
+frame = 37
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -759,3 +762,4 @@ __meta__ = {
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door4"]
+[editable path="Viewport/level/Dragonfly"]

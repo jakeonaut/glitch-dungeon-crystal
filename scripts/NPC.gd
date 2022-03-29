@@ -25,82 +25,96 @@ var just_pressed_jump = false
 export var is_active = true
 
 export var tiny_textbox = false
+var is_static_in_level = true
 
 
 func _ready():
-    set_process(true)
-    set_physics_process(true)
+	set_process(true)
+	set_physics_process(true)
 
-    set_collision_mask_bit(1, true)
+	set_collision_mask_bit(1, true)
 
-    if bbText != "" and textBoxContainer.bbText == "":
-        textBoxContainer.bbText = bbText
-    if portrait and not textBoxContainer.portrait:
-        textBoxContainer.portrait = portrait
-    if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
-        var nextTextBoxPathStr = "../"
-        for i in range(nextTextBoxPath.get_name_count()):
-            if i != 0:
-                nextTextBoxPathStr += "/"
-            nextTextBoxPathStr += nextTextBoxPath.get_name(i)
-        textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
-    textBoxContainer.setVars()
+	if bbText != "" and textBoxContainer.bbText == "":
+		textBoxContainer.bbText = bbText
+	if portrait and not textBoxContainer.portrait:
+		textBoxContainer.portrait = portrait
+	if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
+		var nextTextBoxPathStr = "../"
+		for i in range(nextTextBoxPath.get_name_count()):
+			if i != 0:
+				nextTextBoxPathStr += "/"
+			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
+		textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+	textBoxContainer.setVars()
 
-    textBox.is_important = is_important
-    textBox.is_really_important = is_really_important
-    if tiny_textbox:
-        textBox.tinify()
-    textBox.is_fast_text = is_fast_text
+	textBox.is_important = is_important
+	textBox.is_really_important = is_really_important
+	if tiny_textbox:
+		textBox.tinify()
+	textBox.is_fast_text = is_fast_text
+
+	if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+		if not visible and can_activate:
+			visible = true
+			can_activate = false
+		textBox.has_been_shown = true
+		if textBox.has_been_shown: 
+			textBox.is_important = false
+
+func setGlobalMemoryOfHasSpoken():
+	if not global.memory.has(level.getShortLevelName()):
+		global.memory[level.getShortLevelName()] = {}
+	global.memory[level.getShortLevelName()][self.name] = true
 
 func isActive():
-    return visible or can_activate or is_active
+	return visible or can_activate or is_active
 
 func activate():
-    if global.activeInteractor == null:
-        textBox.interact()
+	if global.activeInteractor == null:
+		textBox.interact()
 
 func passiveActivate(delta):
-    if can_move:
-        mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
+	if can_move:
+		mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
 
-    if not visible and can_activate:
-        if aniPlayer:
-            aniPlayer.play("flickerOn")
-            var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
-            add_child(newSpawnGlitchEffect)
-        else:
-            visible = true
-        can_activate = false
-    elif visible and is_active and (not aniPlayer or not aniPlayer.is_playing()):
-        if global.activeInteractor == null or global.activeInteractor == textBox:
-            textBox.passiveInteract(delta)
+	if not visible and can_activate:
+		if aniPlayer:
+			aniPlayer.play("flickerOn")
+			var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+			add_child(newSpawnGlitchEffect)
+		else:
+			visible = true
+		can_activate = false
+	elif visible and is_active and (not aniPlayer or not aniPlayer.is_playing()):
+		if global.activeInteractor == null or global.activeInteractor == textBox:
+			textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
-    # TODO(jaketrower): TODO on a timer...
-    if global.activeInteractor != null and global.activeInteractor == textBox:
-        global.activeInteractor.stopInteract()
-        
+	# TODO(jaketrower): TODO on a timer...
+	if global.activeInteractor != null and global.activeInteractor == textBox:
+		global.activeInteractor.stopInteract()
+		
 func justStopPassiveActivate():
-    if global.activeInteractor == null:
-        level.player.hideInteractPrompt()
-    
+	if global.activeInteractor == null:
+		level.player.hideInteractPrompt()
+	
 # @override
 func alignMySprite():
-    var pixelSize = 0.125
-    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.927
+	var pixelSize = 0.125
+	mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+	mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.927
 
 # @override
 func processPhysics(delta):
-    if grav == 0 and not just_pressed_jump and not pressing_jump:
-        return
-    else:
-        # call GameMover.gd super method
-        .processPhysics(delta)
-    
+	if grav == 0 and not just_pressed_jump and not pressing_jump:
+		return
+	else:
+		# call GameMover.gd super method
+		.processPhysics(delta)
+	
 
 func justPressedJump():
-    return just_pressed_jump
+	return just_pressed_jump
 
 func pressingJump():
-    return pressing_jump
+	return pressing_jump
