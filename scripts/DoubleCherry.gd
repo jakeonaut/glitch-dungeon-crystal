@@ -43,14 +43,14 @@ func _process(delta):
     #     secretAniPlayer.clear_queue()
     #     secretAniPlayer.play("shrivel")
         
-    if not am_i_in_range_of_player:
-        away_from_player_timer += (delta * 22)
-        if away_from_player_timer >= away_from_player_time_limit:
-            if my_parent and my_parent.has_method("decrementSpawnedChildren"):
-                my_parent.decrementSpawnedChildren()
-            queue_free()
-    else:
-        away_from_player_timer = 0
+    # if not am_i_in_range_of_player:
+    #     away_from_player_timer += (delta * 22)
+    #     if away_from_player_timer >= away_from_player_time_limit:
+    #         if my_parent and my_parent.has_method("decrementSpawnedChildren"):
+    #             my_parent.decrementSpawnedChildren()
+    #         queue_free()
+    # else:
+    #     away_from_player_timer = 0
     
     if secretAniPlayer.assigned_animation == "growBack" and not secretAniPlayer.is_playing() and can_fall and not on_ground:
         true_terminal_vel = 32
@@ -103,6 +103,7 @@ func passiveActivate(_delta):
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("eaten")
         global.num_cherries_eaten += 1
+        global.num_cherries_gained += 1
         crunchSound.play()
     else:
         if can_play_full_sound:

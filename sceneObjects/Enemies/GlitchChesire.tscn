@@ -508,7 +508,7 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id=20]
-resource_name = "meow (copy)"
+resource_name = "meowDrop"
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D2:frame")
@@ -517,10 +517,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 39, 40, 39, 38, 40, 39, 38, 32 ]
+"values": [ 39, 40, 39, 38, 40, 39, 38 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sounds/MeowSound:playing")
@@ -557,6 +557,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.12 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -846,7 +858,7 @@ anims/jump = SubResource( 11 )
 anims/jumpStart = SubResource( 12 )
 anims/land = SubResource( 13 )
 anims/meow = SubResource( 17 )
-"anims/meow (copy)" = SubResource( 20 )
+anims/meowDrop = SubResource( 20 )
 anims/sleepIdle = SubResource( 24 )
 anims/stonify = SubResource( 14 )
 anims/teleportIn = SubResource( 18 )

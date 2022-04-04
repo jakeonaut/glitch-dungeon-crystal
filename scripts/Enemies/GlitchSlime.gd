@@ -1,15 +1,5 @@
 extends "GlitchEnemy.gd"
 
-enum SlimeState {
-    IDLE,
-    WALK
-}
-var slime_state = SlimeState.WALK
-
-var slime_state_timer = 0
-export var slime_walk_time_limit = 10
-var slime_idle_time_limit = 10
-
 onready var scoochSound1 = get_node("Sounds/ScoochSound1")
 onready var scoochSound2 = get_node("Sounds/ScoochSound2")
 onready var heartSprite = get_node("HeartSprite")
@@ -18,12 +8,16 @@ var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
 
 onready var dieAniPlayer = get_node("DieAnimationPlayer")
+export var metamorphosis_on_range = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
     heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+
+    behavior_intermittent_walking = true
+    slow_walk_speed = 1
     
     should_collide_ceil = false
 
@@ -36,7 +30,9 @@ func _process(delta):
     if am_i_dying:
         return
 
-    slime_state_timer += (delta*22)
+    if am_i_in_range_of_player and metamorphosis_on_range:
+        ouchies(level.player.global_transform.origin)
+
     if slime_state == SlimeState.WALK:
         mySprite.hframes = 5
         mySprite.vframes = 5
@@ -46,20 +42,16 @@ func _process(delta):
         else:
             myOtherSprite.transform.origin.x = 0.15
         myOtherSprite.transform.origin.y = -0.30
-        if slime_state_timer >= slime_walk_time_limit:
-            slime_state_timer = 0
-            slime_state = SlimeState.IDLE 
-            scoochSound1.play()
+        if slime_state_timer == 0:
+            scoochSound2.play()
     elif slime_state == SlimeState.IDLE:
         mySprite.hframes = 6
         mySprite.vframes = 4
         mySprite.transform.origin.y = 0
         myOtherSprite.transform.origin.x = 0
         myOtherSprite.transform.origin.y = 0
-        if slime_state_timer >= slime_idle_time_limit:
-            slime_state_timer = 0
-            slime_state = SlimeState.WALK
-            scoochSound2.play()
+        if slime_state_timer == 0:
+            scoochSound1.play()
         
 
 # @override
@@ -113,7 +105,10 @@ func ouchies(broom_origin):
     
     dieAniPlayer.stop()
     dieAniPlayer.clear_queue()
-    dieAniPlayer.queue("metamorphosis")
-    dieAniPlayer.queue("flutterAway")
+    if metamorphosis_on_range:
+        dieAniPlayer.play("flutterAway", -1, rand_range(0.5, 1.0))
+    else:
+        dieAniPlayer.queue("metamorphosis")
+        dieAniPlayer.queue("flutterAway")
     if broom_origin.x < self.global_transform.origin.x:
         pass

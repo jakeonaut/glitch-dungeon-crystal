@@ -75,6 +75,11 @@ func _physics_process(delta):
         pass
 
 # @override
+func landed():
+    .landed()
+    global.num_cherries_eaten = global.num_cherries_gained
+
+# @override
 func justPressedDown():
     return Input.is_action_just_pressed("ui_down")
 
@@ -115,7 +120,7 @@ func magicJump():
 
 func processJumpInputs(delta):
     if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
-        if global.num_cherries_eaten > 0:
+        if global.num_cherries_eaten > 0 and glitch_form == global.GlitchForm.INVISIBLE:
             if justPressedJump() and not should_magic_jump and not global.pauseMoveInput: 
                 was_just_on_ground_timer = was_just_on_ground_time_limit
                 jumped_from_true_ground = truly_on_ground

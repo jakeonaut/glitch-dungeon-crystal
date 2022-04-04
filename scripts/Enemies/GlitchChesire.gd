@@ -26,6 +26,7 @@ var proper_jump_force = 10
 export var lunge_jump_force = 7
 var proper_walk_speed  = 2
 export var lunge_walk_speed = 5
+export var is_drop_bear = false
 
 var player = null
 func getPlayer():
@@ -218,10 +219,15 @@ func landed():
 # @override
 func playerActivationAreaPassiveActivate():
     if cat_state == CatState.HIDDEN:
-        cat_state = CatState.FLICKER_ON
-        secretAniPlayer.play("flickerOn")
-        walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        if is_drop_bear:
+            on_ground = false
+            secretAniPlayer.play("meowDrop")
+            cat_state = CatState.JUMP
+        else:
+            cat_state = CatState.FLICKER_ON
+            secretAniPlayer.play("flickerOn")
+            walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+            myOtherSprite.flip_h = walk_direction == -1
     else:
         .playerActivationAreaPassiveActivate()
 

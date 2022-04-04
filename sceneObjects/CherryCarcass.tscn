@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CherryCarcass.gd" type="Script" id=2]
@@ -120,10 +120,6 @@ shader_param/texture_albedo = ExtResource( 1 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 3 )
 
-[sub_resource type="BoxShape" id=3]
-resource_local_to_scene = true
-extents = Vector3( 0.9, 0.24, 1 )
-
 [sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
@@ -192,12 +188,6 @@ frame = 56
 script = ExtResource( 4 )
 max_frames = 1
 should_animate = false
-
-[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01161, 0 )
-shape = SubResource( 3 )
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

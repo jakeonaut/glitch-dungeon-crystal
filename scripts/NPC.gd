@@ -25,7 +25,7 @@ var just_pressed_jump = false
 export var is_active = true
 
 export var tiny_textbox = false
-var is_static_in_level = true
+export var is_static_in_level = true
 
 
 func _ready():
