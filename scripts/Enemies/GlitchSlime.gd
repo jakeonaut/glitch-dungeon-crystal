@@ -17,7 +17,6 @@ func _ready():
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
 
     behavior_intermittent_walking = true
-    slow_walk_speed = 1
     
     should_collide_ceil = false
 

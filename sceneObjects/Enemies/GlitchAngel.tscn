@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=2]
@@ -438,6 +438,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [ 60, 61, 62, 59, 61, 60 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D2:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=27]
 resource_name = "shootBullet"
@@ -638,6 +662,72 @@ tracks/7/keys = {
 "values": [ 0.01 ]
 }
 
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "flyInfinite"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 1, 0 ), Vector3( 1, -1, 0 ), Vector3( 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "flySquare"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "flyTriangle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -2, 0, 0 ), Vector3( 0, 2, 0 ), Vector3( 2, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
 [node name="GlitchAngel" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 14 )
@@ -748,3 +838,9 @@ anims/flickerIn = SubResource( 19 )
 anims/idle = SubResource( 22 )
 anims/shootBullet = SubResource( 27 )
 anims/shootBulletWindup = SubResource( 26 )
+
+[node name="FlightPathAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 28 )
+anims/flyInfinite = SubResource( 29 )
+anims/flySquare = SubResource( 30 )
+anims/flyTriangle = SubResource( 31 )

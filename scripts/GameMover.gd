@@ -290,7 +290,9 @@ func applyGravity(delta):
             
 
 func applyTerminalVelocity(delta):
-    feather_fall_timer += (delta*22)
+    if feather_fall_timer < feather_fall_initial_time_limit:
+        feather_fall_timer += (delta*22)
+
     if is_touching_water:
         if not was_touching_water:
             terminal_vel = hit_water_terminal_vel
@@ -384,6 +386,7 @@ func processLadderInputs(delta):
     else:
         if is_climbing_ladder:
             is_climbing_ladder = false
+            feather_fall_timer = 0
             if not is_touching_water:
                 on_ground = true
                 vv = 0

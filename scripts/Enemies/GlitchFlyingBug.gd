@@ -5,13 +5,10 @@ onready var body1 = get_node("GlitchFlyingBugBody1")
 onready var body2 = get_node("GlitchFlyingBugBody2")
 onready var scoochSound1 = get_node("Sounds/ScoochSound1")
 onready var scoochSound2 = get_node("Sounds/ScoochSound2")
-onready var heartSprite = get_node("HeartSprite")
-onready var heartSound = get_node("Sounds/HeartSound")
-var heartSpriteOriginX = 0
-var heartSpriteOriginY = 0
+onready var playerActivationArea = get_node("PlayerActivationArea")
 
 var am_i_dying = false
-onready var dieAniPlayer = get_node("DieAnimationPlayer")
+onready var aniPlayer = get_node("AnimationPlayer")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
@@ -19,9 +16,8 @@ export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_W
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
-    heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
 
-    get_node("AnimationPlayer").play("wiggle")
+    aniPlayer.play("wiggle")
 
     yield(get_tree(), "idle_frame")
     yield(get_tree(), "idle_frame")
@@ -33,12 +29,18 @@ func _ready():
 
     bugHead.should_collide_floor = false
     bugHead.should_collide_ceil = false
+    bugHead.should_only_do_middle_sensor = true
+    bugHead.should_do_simple_sensor_probe = true
     bugHead.glitch_form = global.GlitchForm.FEATHER
     body1.should_collide_floor = false
     body1.should_collide_ceil = false
+    body1.should_only_do_middle_sensor = true
+    body1.should_do_simple_sensor_probe = true
     body1.glitch_form = global.GlitchForm.FEATHER
     body2.should_collide_floor = false
     body2.should_collide_ceil = false
+    body2.should_only_do_middle_sensor = true
+    body2.should_do_simple_sensor_probe = true
     body2.glitch_form = global.GlitchForm.FEATHER
 
     var levelTiles = body1.getLevelTiles()
@@ -66,13 +68,35 @@ func _ready():
         body1.myOtherSprite.changeSpriteColorPalette(levelTiles.white_palette, "white_palette")
         body1.get_node("WingSprite1").changeSpriteColorPalette(levelTiles.white_palette, "white_palette")
         body1.get_node("WingSprite2").changeSpriteColorPalette(levelTiles.white_palette, "white_palette")
-    
 
 func _process(delta):
     # ._process(delta) implicit
     
     delta = delta * global.time_dilation_multiplier
-    dieAniPlayer.playback_speed = global.time_dilation_multiplier
+    aniPlayer.playback_speed = global.time_dilation_multiplier
+
+    playerActivationArea.global_transform.origin.x = bugHead.global_transform.origin.x
+
+    #############################
+    # Only allow collision for whichever body part is about to hit the wall...
+    #############################
+    if bugHead.walk_direction == body1.walk_direction and body1.walk_direction == body2.walk_direction:
+        bugHead.should_collide_horizontally = true
+        body1.should_collide_horizontally = false
+        body2.should_collide_horizontally = false
+    elif bugHead.walk_direction != body1.walk_direction and body1.walk_direction == body2.walk_direction:
+        bugHead.should_collide_horizontally = false
+        body1.should_collide_horizontally = true
+        body2.should_collide_horizontally = false
+    elif bugHead.walk_direction == body1.walk_direction and body1.walk_direction != body2.walk_direction:
+        bugHead.should_collide_horizontally = false
+        body1.should_collide_horizontally = false
+        body2.should_collide_horizontally = true
+    else:
+        # should theoretically never get here...
+        bugHead.should_collide_horizontally = true
+        body1.should_collide_horizontally = true
+        body2.should_collide_horizontally = true
 
     #############################
     # NEED TO MAKE SURE HEAD IS BEFORE BODY1 AND BODY1 IS BEFORE BODY2
