@@ -94,9 +94,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 0 )
 [node name="Player" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.075, 3.00767, 0 )
 
-[node name="Camera" parent="Viewport/level/Player/CameraY/CameraX" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15 )
-
 [node name="MeshInstance" type="MeshInstance" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, 0 )
 mesh = SubResource( 2 )

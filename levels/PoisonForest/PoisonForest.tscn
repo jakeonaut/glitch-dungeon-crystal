@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://sceneObjects/Ladder.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/Enemies/GlitchAngel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=20]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=21]
@@ -44,52 +43,9 @@
 resource_local_to_scene = true
 extents = Vector3( 8, 2, 1 )
 
-[sub_resource type="Animation" id=39]
-resource_name = "doorClose"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 1, 0 ]
-}
-
-[sub_resource type="Animation" id=40]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-
-[sub_resource type="Animation" id=41]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 3 ]
-}
+[sub_resource type="BoxShape" id=58]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=27]
 resource_local_to_scene = true
@@ -425,7 +381,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1262, 1.097, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -10, 0 )
-path = "res://levels/SpriteTown/DeathrootBog.tscn"
+path = "res://levels/SpriteTown/SpriteTown_1_0.tscn"
 is_passive = true
 is_vertical = true
 
@@ -439,23 +395,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.5, 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76837e-07, 0 )
 shape = SubResource( 38 )
 
-[node name="Door2" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 48, 0 )
-is_locked = true
-path = "res://levels/PoisonForest/ForestFeatherExploration.tscn"
-is_vertical = true
-
-[node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
-
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="3"]
-anims/doorClose = SubResource( 39 )
-anims/doorOpen = SubResource( 40 )
-anims/locked = SubResource( 41 )
-
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 38 )
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 58 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.6, 21.1, 0 )
@@ -1412,9 +1353,6 @@ anims/default = SubResource( 52 )
 anims/flickerOn = SubResource( 53 )
 anims/jump = SubResource( 54 )
 
-[node name="GlitchAngel" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2, 26.6, 0 )
-
 [node name="MoltFruit" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1, 23.5, 0 )
 
@@ -1430,7 +1368,8 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
 
 [editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door/NPC"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]

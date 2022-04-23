@@ -11,10 +11,12 @@ var interpolation_point = null
 var t = 0
 var is_active = true
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+
 var player = null
 func getPlayer():
     if player == null:
-        player = get_tree().get_root().get_node("Game/Viewport/level").player
+        player = level.player
     return player
 
 func _ready():
@@ -45,6 +47,7 @@ func _process(delta):
         
 func shouldIBeActive():
     return getPlayer().glitch_form != my_glitch_form and (
+        level.spellbook_forbidden or \
         not global.memory.has("spellbookPage") or \
         global.memory["spellbookPage"].size() == 0 or \
         global.memory["spellbookPage"][0] != my_glitch_form) 

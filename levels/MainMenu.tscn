@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -7,26 +7,128 @@
 [ext_resource path="res://levels/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://scripts/backgroundCode.gd" type="Script" id=6]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sceneObjects/Fish.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sceneObjects/Enemies/EvilSprite.tscn" type="PackedScene" id=13]
-[ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=15]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=8]
+[ext_resource path="res://appleKidDialogFontTheme.tres" type="Theme" id=9]
+[ext_resource path="res://dialogFontTheme.tres" type="Theme" id=10]
+[ext_resource path="res://levels/MainMenuGlitchTitleTextLabel.gd" type="Script" id=11]
+[ext_resource path="res://assets/fonts/apple_kid.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/fonts/Sakred.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
+[ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=15]
+[ext_resource path="res://assets/backgrounds/greybackground.png" type="Texture" id=16]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=25]
-[ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=27]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=28]
-[ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=32]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=26]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=29]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=37]
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=39]
 [ext_resource path="res://shaders/CRTEffect.gdshader" type="Shader" id=40]
+
+[sub_resource type="Shader" id=45]
+code = "/* Glitch Effect Shader by Yui Kinomoto @arlez80 */
+
+shader_type canvas_item;
+
+// æŒ¯å‹•ã®å¼·ã•
+uniform float shake_power = 0.03;
+// æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
+uniform float shake_block_size = 30.5;
+// è‰²ã®åˆ†é›¢çŽ‡
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+
+float random(float seed) {
+	return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
+}
+
+void fragment() {
+	float enable_shift = 1.0;
+
+	vec2 fixed_uv = UV;
+	fixed_uv.x += (random((trunc(UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+	fixed_uv.y += (random((trunc(UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+
+	vec4 pixel_color = textureLod(TEXTURE, fixed_uv, 0.0);
+	pixel_color.r = mix(pixel_color.r, texture(TEXTURE, fixed_uv + vec2(shake_color_rate, 0.0)).r, enable_shift);
+	pixel_color.b = mix(pixel_color.b, texture(TEXTURE, fixed_uv + vec2(-shake_color_rate, 0.0)).b, enable_shift);
+	pixel_color.a = 0.5;
+	COLOR = pixel_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=46]
+shader = SubResource( 45 )
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.04
+
+[sub_resource type="DynamicFont" id=36]
+size = 32
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=40]
+size = 64
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="Theme" id=41]
+default_font = SubResource( 40 )
+
+[sub_resource type="DynamicFont" id=39]
+size = 72
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="Shader" id=42]
+code = "/* Glitch Effect Shader by Yui Kinomoto @arlez80 */
+
+shader_type canvas_item;
+
+// æŒ¯å‹•ã®å¼·ã•
+uniform float shake_power = 0.03;
+// æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
+uniform float shake_block_size = 30.5;
+// è‰²ã®åˆ†é›¢çŽ‡
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+
+float random(float seed) {
+	return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
+}
+
+void fragment() {
+	float enable_shift = 1.0;
+
+	vec2 fixed_uv = UV;
+	fixed_uv.x += (random((trunc(UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+	fixed_uv.y += (random((trunc(UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+
+	vec4 pixel_color = textureLod(SCREEN_TEXTURE, fixed_uv, 0.0);
+	pixel_color.r = mix(pixel_color.r, texture(TEXTURE, fixed_uv + vec2(shake_color_rate, 0.0)).r, enable_shift);
+	pixel_color.b = mix(pixel_color.b, texture(TEXTURE, fixed_uv + vec2(-shake_color_rate, 0.0)).b, enable_shift);
+	COLOR = pixel_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=43]
+shader = SubResource( 42 )
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 
 [sub_resource type="Environment" id=23]
 background_mode = 4
@@ -41,183 +143,35 @@ font_data = ExtResource( 39 )
 [sub_resource type="Theme" id=32]
 default_font = SubResource( 31 )
 
-[sub_resource type="BoxShape" id=9]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="Animation" id=10]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-
-[sub_resource type="Animation" id=34]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=35]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-
-[sub_resource type="SpatialMaterial" id=18]
-flags_transparent = true
-flags_unshaded = true
-albedo_texture = ExtResource( 28 )
-
-[sub_resource type="Animation" id=12]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=13]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-
-[sub_resource type="Animation" id=16]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=17]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-
-[sub_resource type="Animation" id=14]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=15]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-
-[sub_resource type="BoxShape" id=20]
-resource_local_to_scene = true
-extents = Vector3( 6, 4, 1.3 )
-
-[sub_resource type="BoxShape" id=21]
-resource_local_to_scene = true
-extents = Vector3( 0.8, 0.8, 1.3 )
-
-[sub_resource type="ShaderMaterial" id=22]
-resource_local_to_scene = true
-shader = ExtResource( 32 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 26 )
 shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.0
+shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 29 )
+shader_param/target_palette = ExtResource( 37 )
+
+[sub_resource type="ShaderMaterial" id=44]
+shader = ExtResource( 26 )
+shader_param/albedo = null
+shader_param/opacity = 0.1
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.0
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 15 )
+shader_param/base_palette = ExtResource( 29 )
+shader_param/target_palette = ExtResource( 37 )
 
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 40 )
@@ -237,9 +191,125 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
-display_title = "[/wave] press enter to begin...        "
+tileset_type = 2
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
+
+[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="4"]
+visible = false
+
+[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="7"]
+visible = true
+margin_left = 260.0
+margin_top = 364.0
+margin_right = 527.0
+bbcode_text = "[wave] press enter to begin[/wave]"
+text = " press enter to begin"
+
+[node name="Title" type="Control" parent="Viewport/level/UILayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="GlitchTitleTextLabel0" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]
+material = SubResource( 46 )
+anchor_left = 0.165
+anchor_top = 0.104
+anchor_right = 0.165
+anchor_bottom = 0.21
+margin_left = 99.0
+margin_top = 49.088
+margin_right = 457.0
+margin_bottom = 134.088
+theme = ExtResource( 10 )
+custom_colors/default_color = Color( 0.501961, 0, 0.941176, 1 )
+custom_fonts/normal_font = SubResource( 36 )
+bbcode_enabled = true
+bbcode_text = "Glitch Dungeon"
+text = "Glitch Dungeon"
+
+[node name="GlitchTitleTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]
+anchor_left = 0.122
+anchor_top = 0.21
+anchor_right = 0.15
+anchor_bottom = 0.21
+margin_left = 73.2
+margin_top = 99.12
+margin_right = 399.2
+margin_bottom = 184.12
+theme = SubResource( 41 )
+bbcode_enabled = true
+bbcode_text = "Glitch"
+text = "Glitch"
+script = ExtResource( 11 )
+
+[node name="GlitchTitleTextLabel2" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]
+anchor_left = 0.122
+anchor_top = 0.22
+anchor_right = 0.221
+anchor_bottom = 0.22
+margin_left = 73.2
+margin_top = 103.84
+margin_right = 675.2
+margin_bottom = 267.84
+theme = ExtResource( 10 )
+custom_fonts/normal_font = SubResource( 39 )
+bbcode_enabled = true
+bbcode_text = "       Dungeon"
+text = "       Dungeon"
+
+[node name="GlitchTitleTextLabel3" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]
+anchor_left = 0.164
+anchor_top = 0.341
+anchor_right = 0.214
+anchor_bottom = 0.341
+margin_left = 98.4
+margin_top = 160.952
+margin_right = 700.4
+margin_bottom = 324.952
+theme = ExtResource( 10 )
+custom_fonts/normal_font = SubResource( 39 )
+bbcode_enabled = true
+bbcode_text = "Crystal"
+text = "Crystal"
+
+[node name="Options" type="Control" parent="Viewport/level/UILayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="NewGame" type="Control" parent="Viewport/level/UILayer/Options"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="OptionTextLabeGlitched" type="RichTextLabel" parent="Viewport/level/UILayer/Options/NewGame"]
+material = SubResource( 43 )
+anchor_left = 0.52
+anchor_top = 0.525
+anchor_right = 0.726
+anchor_bottom = 0.525
+margin_left = 312.0
+margin_top = 287.0
+margin_right = 670.0
+margin_bottom = 332.8
+theme = ExtResource( 10 )
+custom_colors/default_color = Color( 0.501961, 0, 0.941176, 1 )
+custom_fonts/normal_font = SubResource( 36 )
+bbcode_enabled = true
+bbcode_text = "new game"
+text = "new game"
+
+[node name="OptionTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer/Options/NewGame"]
+anchor_left = 0.464
+anchor_top = 0.525
+anchor_right = 0.726
+anchor_bottom = 0.525
+margin_left = 278.4
+margin_top = 287.0
+margin_right = 636.4
+margin_bottom = 332.8
+theme = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "new game"
+text = "new game"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 environment = SubResource( 23 )
@@ -281,14 +351,48 @@ __meta__ = {
 target_origin = Vector3( 0, -100, 0 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 17 )]
-target = NodePath("../NPC")
+size = 30.0
 speed = 10.0
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 1, 9.05692, -1 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -13.2296, 4.90515, -1 )
+true_terminal_vel = 2
+grav = 3
 
 [node name="TransformSound" parent="Viewport/level/Player/Sounds" index="2"]
 volume_db = -80.0
+
+[node name="FallSound" parent="Viewport/level/Player/Sounds" index="8"]
+volume_db = -80.0
+
+[node name="MenuOptionPointer" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13784, -5.65962, -1 )
+material_override = SubResource( 6 )
+pixel_size = 0.25
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+script = ExtResource( 8 )
+frame_delay = 0.3
+
+[node name="MenuOptionPointer3" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1378, 8.34038, -1 )
+material_override = SubResource( 44 )
+pixel_size = 0.0625
+texture = ExtResource( 15 )
+script = ExtResource( 8 )
+frame_delay = 0.3
+
+[node name="MenuOptionPointer2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90071, -5.65962, -1 )
+material_override = SubResource( 6 )
+flip_h = true
+pixel_size = 0.25
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+script = ExtResource( 8 )
+frame_delay = 0.3
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -297,12 +401,12 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 196620, 0, 1, 196621, 0, 1, 196622, 0, 1, 262156, 0, 1, 262158, 0, 1, 327680, 0, 1, 327681, 0, 1, 327692, 0, 1, 327693, 0, 1, 327694, 0, 1, 393215, 0, 1, 393217, 0, 1, 458744, 0, 1, 458745, 0, 1, 458746, 0, 1, 458751, 0, 1, 458752, 0, 1, 458753, 0, 1, 524280, 0, 1, 524282, 0, 1, 524287, 0, 1, 589816, 0, 1, 589817, 0, 1, 589818, 0, 1, 655362, 0, 1, 655363, 0, 1, 655364, 0, 1, 720898, 0, 1, 720900, 0, 1, 786434, 0, 1, 786435, 0, 1, 786436, 0, 1, 786442, 0, 1, 786443, 0, 1, 786444, 0, 1, 851978, 0, 1, 851980, 0, 1, 917514, 0, 1, 917515, 0, 1, 917516, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1114127, 0, 1, 1114129, 0, 1, 1179663, 0, 1, 1179664, 0, 1, 1179665, 0, 1, 1441811, 0, 1, 1441812, 0, 1, 1441813, 0, 1, 1507316, 0, 1, 1507317, 0, 1, 1507318, 0, 1, 1507347, 0, 1, 1507349, 0, 1, 1572852, 0, 1, 1572854, 0, 1, 1572883, 0, 1, 1572884, 0, 1, 1572885, 0, 1, 1638388, 0, 1, 1638389, 0, 1, 1638390, 0, 1, 1703959, 0, 1, 1703960, 0, 1, 1703961, 0, 1, 1769495, 0, 1, 1769497, 0, 1, 1835031, 0, 1, 1835032, 0, 1, 1835033, 0, 1, -786447, 0, 1, -786446, 0, 1, -786445, 0, 1, -720909, 0, 1, -655375, 0, 1, -655374, 0, 1, -655373, 0, 1, -589821, 0, 1, -589820, 0, 1, -589819, 0, 1, -589806, 0, 1, -589805, 0, 1, -589804, 0, 1, -589803, 0, 1, -524300, 0, 1, -524299, 0, 1, -524298, 0, 1, -524285, 0, 1, -524283, 0, 1, -524269, 0, 1, -524267, 0, 1, -458764, 0, 1, -458762, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458733, 0, 1, -458732, 0, 1, -458731, 0, 1, -393228, 0, 1, -393227, 0, 1, -393226, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -131073, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131059, 0, 1, -65537, 0, 1, -65536, 0, 1, -65535, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65525, 0, 1, -65524, 0, 1, -65523, 0, 1, -1, 0, 1, 196620, 1, 1, 196622, 1, 1, 262156, 1, 1, 262158, 1, 1, 327692, 1, 1, 458744, 1, 1, 458745, 1, 1, 458746, 1, 1, 524280, 1, 1, 524282, 1, 1, 589816, 1, 1, 589817, 1, 1, 589818, 1, 1, -196608, 1, 1, -196607, 1, 1, -196603, 1, 1, -196602, 1, 1, -196601, 1, 1, -131073, 1, 1, -131071, 1, 1, -131070, 1, 1, -131069, 1, 1, -131068, 1, 1, -131067, 1, 1, -131065, 1, 1, -65537, 1, 1, -65536, 1, 1, -65535, 1, 1, -65531, 1, 1, -65530, 1, 1, -65529, 1, 1, -1, 1, 1, 786436, 3, 1, 655362, 4, 1, 655364, 4, 1, 720898, 4, 1, 720900, 4, 1, 786434, 4, 1, 786436, 4, 1, 655362, 5, 1, 655363, 5, 1, 655364, 5, 1, 720898, 5, 1, 720900, 5, 1, 786434, 5, 1, 786435, 5, 1, 786436, 5, 1, 655362, 6, 1, 655364, 6, 1, 720898, 6, 1, 720900, 6, 1, 786434, 6, 1, 786436, 6, 1, 786442, 65530, 1, 786443, 65530, 1, 786444, 65530, 1, 851978, 65530, 1, 851980, 65530, 1, 917514, 65530, 1, 917515, 65530, 1, 917516, 65530, 1, 196622, 65534, 1, 262158, 65534, 1, 327694, 65534, 1, 196620, 65535, 1, 196622, 65535, 1, 262156, 65535, 1, 327692, 65535, 1, 327694, 65535, 1, 1048591, 65535, 1, 1048592, 65535, 1, 1048593, 65535, 1, 1114127, 65535, 1, 1114129, 65535, 1, 1179663, 65535, 1, 1179664, 65535, 1, 1179665, 65535, 1, -196608, 65535, 1, -196607, 65535, 1, -196603, 65535, 1, -196602, 65535, 1, -196601, 65535, 1, -131073, 65535, 1, -131071, 65535, 1, -131070, 65535, 1, -131069, 65535, 1, -131068, 65535, 1, -131067, 65535, 1, -131065, 65535, 1, -65537, 65535, 1, -65536, 65535, 1, -65535, 65535, 1, -65531, 65535, 1, -65530, 65535, 1, -65529, 65535, 1, -1, 65535, 1 )
+"cells": PoolIntArray( 1114124, 0, 1, 1114125, 0, 1, 1114126, 0, 1, 1179660, 0, 1, 1179662, 0, 1, 1245196, 0, 1, 1245197, 0, 1, 1245198, 0, 1, 1507316, 0, 1, 1507317, 0, 1, 1507318, 0, 1, 1572852, 0, 1, 1572854, 0, 1, 1638388, 0, 1, 1638389, 0, 1, 1638390, 0, 1, -786447, 0, 1, -786446, 0, 1, -786445, 0, 1, -720909, 0, 1, -655375, 0, 1, -655374, 0, 1, -655373, 0, 1, 1, 5, 1, 65533, 5, 1, 65537, 5, 1, 131069, 5, 1, 131073, 5, 1, 196605, 5, 1, 196608, 5, 1, 196609, 5, 1, 262141, 5, 1, 262142, 5, 1, 262143, 5, 1, -65536, 5, 1, -65535, 5, 1, -3, 5, 1, -2, 5, 1, -1, 5, 1 )
 }
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_clip_": 0,
-"_editor_floor_": Vector3( 14, 0, 0 )
+"_editor_floor_": Vector3( 14, 0, 2 )
 }
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
@@ -314,132 +418,12 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 1048592, 0, 2, -589820, 0, 2, -196608, 0, 2, -196602, 0, 2 )
+"cells": PoolIntArray(  )
 }
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_clip_": 0
 }
-
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
-grav = 0
-bbText = "hey....
-press ENTER!!!"
-
-[node name="NPC2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7, 0 )
-grav = 0
-bbText = "hey....
-press ENTER?"
-
-[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 9 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
-flip_h = true
-frame = 64
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
-anims/default = SubResource( 10 )
-anims/flickerOn = SubResource( 11 )
-
-[node name="NPC6" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -7.6, 1.2 )
-grav = 0
-bbText = "hey....
-press ENTER?"
-tiny_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
-shape = SubResource( 9 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="5"]
-flip_h = true
-frame = 66
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="6"]
-anims/default = SubResource( 34 )
-anims/flickerOn = SubResource( 35 )
-
-[node name="NPC3" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 14, 4 )
-grav = 0
-
-[node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
-shape = SubResource( 9 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
-material_override = SubResource( 18 )
-flip_h = true
-frame = 26
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="6"]
-anims/default = SubResource( 12 )
-anims/flickerOn = SubResource( 13 )
-
-[node name="NPC5" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, 0 )
-grav = 0
-
-[node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
-shape = SubResource( 9 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="5"]
-flip_h = true
-frame = 14
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="6"]
-anims/default = SubResource( 16 )
-anims/flickerOn = SubResource( 17 )
-
-[node name="NPC4" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 4 )
-grav = 0
-
-[node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
-shape = SubResource( 9 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
-flip_h = true
-frame = 6
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
-anims/default = SubResource( 14 )
-anims/flickerOn = SubResource( 15 )
-
-[node name="EvilSprite" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6, 0 )
-can_activate = false
-tiny_textbox = false
-behavior_summon_glitch = false
-
-[node name="CollisionShape" parent="Viewport/level/EvilSprite/SmallInteractionArea" index="0"]
-shape = SubResource( 20 )
-
-[node name="CollisionShape" parent="Viewport/level/EvilSprite/SmallerInteractionArea" index="0"]
-shape = SubResource( 21 )
-
-[node name="CastGlitchSound" parent="Viewport/level/EvilSprite" index="7"]
-volume_db = -80.0
-
-[node name="WindUpSound" parent="Viewport/level/EvilSprite" index="8"]
-volume_db = -80.0
-
-[node name="NoticeSound" parent="Viewport/level/EvilSprite" index="9"]
-volume_db = -80.0
-
-[node name="GlitchSprite" parent="Viewport/level/EvilSprite" index="10"]
-material_override = SubResource( 22 )
-
-[node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -10 )
-
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.37373, 0 )
-
-[node name="Fish" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -5, -12 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0 )
@@ -448,73 +432,15 @@ should_lock = true
 path = "res://levels/IntroDungeon/IntroScene0.tscn"
 
 [node name="GlitchAura" parent="Viewport/level" instance=ExtResource( 22 )]
-target_path = NodePath("../EvilSprite")
+target_path = NodePath("../Player")
 
 [node name="ColorRect" parent="Viewport/level/GlitchAura" index="0"]
 material = SubResource( 33 )
 
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -4 )
-
-[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, -3, -1 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube2" index="4"]
-volume_db = -80.0
-
-[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, -3, 0 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube3" index="4"]
-volume_db = -80.0
-
-[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, -3, -3 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube4" index="4"]
-volume_db = -80.0
-
-[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -10, -4 )
-
-[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, -10, -1 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube6" index="4"]
-volume_db = -80.0
-
-[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14, -10, 0 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube7" index="4"]
-volume_db = -80.0
-
-[node name="WaterCube8" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 15, -10, -3 )
-
-[node name="SplashSound" parent="Viewport/level/WaterCube8" index="4"]
-volume_db = -80.0
-
-[node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 7, -7 )
-
-[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3, 12 )
-
-[node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -7, 12 )
-
-[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -3.44048, 12 )
-
-[node name="Dragonfly3" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -6, 12 )
-
-[node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5, 12 )
-
-[node name="Snail" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.271328, 0 )
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -4, -9 )
+pixel_size = 0.25
+texture = ExtResource( 16 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -527,24 +453,7 @@ __meta__ = {
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 18 )]
 
+[editable path="Viewport/level/UILayer"]
 [editable path="Viewport/level/Player"]
-[editable path="Viewport/level/NPC2"]
-[editable path="Viewport/level/NPC2/NPC TextBox"]
-[editable path="Viewport/level/NPC6"]
-[editable path="Viewport/level/NPC6/NPC TextBox"]
-[editable path="Viewport/level/NPC3"]
-[editable path="Viewport/level/NPC3/NPC TextBox"]
-[editable path="Viewport/level/NPC5"]
-[editable path="Viewport/level/NPC5/NPC TextBox"]
-[editable path="Viewport/level/NPC4"]
-[editable path="Viewport/level/NPC4/NPC TextBox"]
-[editable path="Viewport/level/EvilSprite"]
-[editable path="Viewport/level/EvilSprite/NPC TextBox"]
 [editable path="Viewport/level/GlitchAura"]
-[editable path="Viewport/level/WaterCube2"]
-[editable path="Viewport/level/WaterCube3"]
-[editable path="Viewport/level/WaterCube4"]
-[editable path="Viewport/level/WaterCube6"]
-[editable path="Viewport/level/WaterCube7"]
-[editable path="Viewport/level/WaterCube8"]
 [editable path="ScreenEffects"]

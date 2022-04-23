@@ -15,6 +15,12 @@ func _ready():
     if behavior_jumping:
         grav = 60
         jump_force = weak_fish_jump_force
+        should_collide_horizontally = false
+    else:
+        should_collide_floor = false
+        should_collide_ceil = false
+    should_only_do_middle_sensor = true
+    should_do_simple_sensor_probe = true
         
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
 

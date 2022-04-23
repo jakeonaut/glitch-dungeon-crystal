@@ -32,8 +32,8 @@ func _process(delta):
         tryToPlay(dungeonThemePlayer)
         
 func tryToPlay(stream_player):
-    if not initial_volume_dbs.has(stream_player.name):
-        initial_volume_dbs[stream_player.name] = stream_player.volume_db
+    # if not initial_volume_dbs.has(stream_player.name):
+    #     initial_volume_dbs[stream_player.name] = stream_player.volume_db
         
     print("try to play: " + stream_player.name)
         
@@ -41,27 +41,28 @@ func tryToPlay(stream_player):
         return
 
     if stream_player.is_playing(): return
-    self.stopAll()
+    stopAll()
     fade_in(stream_player)
         
 func fade_out(stream_player):
-    if not stream_player.is_playing():
-        return
+    stream_player.stop()
+    # if not stream_player.is_playing():
+    #     return
 
-    # tween music volume down to -80
-    tween_out.interpolate_property(stream_player, "volume_db", initial_volume_dbs[stream_player.name], -80, transition_duration, transition_type, Tween.EASE_IN, 0)
-    tween_out.start()
-    # when the tween ends, the music will be stopped
+    # # tween music volume down to -80
+    # tween_out.interpolate_property(stream_player, "volume_db", initial_volume_dbs[stream_player.name], -80, transition_duration, transition_type, Tween.EASE_IN, 0)
+    # tween_out.start()
+    # # when the tween ends, the music will be stopped
     
 func fade_in(stream_player):
     stream_player.play()
     
-    if currentlyPlayingTheme != null:
-        # tween music volume up to proper volume
-        stream_player.volume_db = -80
-        tween_out.interpolate_property(stream_player, "volume_db", -80, initial_volume_dbs[stream_player.name], transition_duration, transition_type, Tween.EASE_IN, 0)
-        tween_out.start()
-        # when the tween ends, the music will be stopped
+    # if currentlyPlayingTheme != null:
+    #     # tween music volume up to proper volume
+    #     stream_player.volume_db = -80
+    #     tween_out.interpolate_property(stream_player, "volume_db", -80, initial_volume_dbs[stream_player.name], transition_duration, transition_type, Tween.EASE_IN, 0)
+    #     tween_out.start()
+    #     # when the tween ends, the music will be stopped
     currentlyPlayingTheme = stream_player
 
 func _on_TweenOut_tween_completed(object, _key):
@@ -88,7 +89,7 @@ func stopAll():
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0:
+    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("IntroScene0") > 0:
         tryToPlay(wakeupPlayer)
@@ -102,7 +103,7 @@ func conductFromScenePath(path):
         tryToPlay(realizationThemePlayer)
     elif path.find("Crypts") > 0 or path.find("Suburb") > 0:
         tryToPlay(suburbThemePlayer)
-    elif path.find("Ocean") > 0:
+    elif path.find("Ocean") > 0 or path.find("Plastic") > 0 or path.find("Tide") > 0:
         tryToPlay(oceanThemePlayer)
     elif path.find("Desert") > 0:
         tryToPlay(exploreThemePlayer)

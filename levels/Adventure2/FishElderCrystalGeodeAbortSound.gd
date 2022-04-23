@@ -12,7 +12,7 @@ func activateScript():
     global.memory["broomChallenge"] = false
     global.doorSound.play()
     var newDoor = doorRes.instance()
-    newDoor.path = "res://levels/Adventure2/FishElderDungeonScene.tscn"
+    newDoor.path = "res://levels/Adventure/SpellbookIntro.tscn"
     newDoor.visible = false
     level.add_child(newDoor)
     newDoor.global_transform.origin = npc.global_transform.origin

@@ -38,18 +38,19 @@ func _ready():
 		overwritten_yellow_palette = load(overwritten_yellow_palette_path)
 		should_duplicate_material = true
 
-	if should_duplicate_material:
+	if should_duplicate_material and material_override:
 		material_override = material_override.duplicate()
 	
 func changeSpriteColorPalette(palette, palette_name = ""):
-	var material = material_override
-	if material is ShaderMaterial:
-		if palette_name == "green_palette" and overwritten_green_palette != null: # whateva
-			palette = overwritten_green_palette
-		if palette_name == "yellow_palette" and overwritten_yellow_palette != null: # whateva
-			palette = overwritten_yellow_palette
-		material.set_shader_param("target_palette", palette)
-		material_override = material
+	if material_override:
+		var material = material_override
+		if material is ShaderMaterial:
+			if palette_name == "green_palette" and overwritten_green_palette != null: # whateva
+				palette = overwritten_green_palette
+			if palette_name == "yellow_palette" and overwritten_yellow_palette != null: # whateva
+				palette = overwritten_yellow_palette
+			material.set_shader_param("target_palette", palette)
+			material_override = material
 
 func preProcess():
 	pass

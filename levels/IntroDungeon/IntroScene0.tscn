@@ -71,7 +71,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 10 )
-display_title = "?"
+display_title = "??????"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 17 )]
 

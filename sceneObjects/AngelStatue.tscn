@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( -1.8, 2.653, 0 ) ]
+"values": [ Vector3( -1.28119, 2.34887, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BirdSprite:frame")
@@ -144,6 +144,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("BirdSprite:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "BirdFlyIn"
@@ -158,7 +170,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( -4.20136, 6.43754, 0 ), Vector3( -0.914846, 4.29386, 0 ), Vector3( -1.79978, 2.65261, 0 ) ]
+"values": [ Vector3( -4.20136, 6.43754, 0 ), Vector3( -0.914846, 4.29386, 0 ), Vector3( -1.26308, 2.3127, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BirdSprite:frame")
@@ -271,10 +283,22 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( -1.79978, 2.65261, 0 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("BirdSprite:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="BoxShape" id=9]
 resource_local_to_scene = true
-extents = Vector3( 1.5, 2, 1 )
+extents = Vector3( 1.5, 1.5, 1 )
 
 [node name="AngelStatue" type="Spatial"]
 script = ExtResource( 10 )
@@ -282,7 +306,7 @@ script = ExtResource( 10 )
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.860353, 0 )
 material_override = SubResource( 1 )
-pixel_size = 0.18
+pixel_size = 0.125
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
 max_frames = 1
@@ -290,12 +314,11 @@ max_frames = 1
 [node name="BirdSprite" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79978, 2.65261, 0 )
 material_override = SubResource( 6 )
-flip_h = true
-pixel_size = 0.12
+pixel_size = 0.125
 texture = ExtResource( 6 )
 hframes = 8
 vframes = 8
-frame = 3
+frame = 2
 script = ExtResource( 5 )
 max_frames = 1
 
@@ -332,4 +355,5 @@ max_distance = 25.0
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697349, 0 )
 shape = SubResource( 9 )

@@ -197,13 +197,14 @@ behavior_was_thrown = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 17.0178, 0 )
-bbText = "make sure to be
-prepared for battle!"
+bbText = "GLITCH
+        DUNGEON
+    CRYSTAL"
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 8 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
 frame = 4
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]

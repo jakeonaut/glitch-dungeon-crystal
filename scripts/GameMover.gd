@@ -111,6 +111,7 @@ func isFeatherLike():
     return glitch_form == global.GlitchForm.FEATHER
 
 # Physics variables
+export var feather_glitch_walk_speed = 10
 export var floor_glitch_walk_speed = 3
 export var invisible_glitch_walk_speed = 6
 export var swimming_walk_speed = 6
@@ -375,6 +376,8 @@ func pressingMoveRight():
     return false
 
 func processLadderInputs(delta):
+    if global.pauseMoveInput: return
+
     if is_touching_ladder:
         if not is_climbing_ladder and (pressingMoveUp() or pressingMoveDown()):
             is_climbing_ladder = true
@@ -423,10 +426,10 @@ func processLadderInputs(delta):
         
 
 func processJumpInputs(delta):
-    if is_climbing_ladder: return
+    if is_climbing_ladder or global.pauseMoveInput: return
 
     # jump
-    if justPressedJump() or recentlyJustPressedJump() and not global.pauseMoveInput: 
+    if justPressedJump() or recentlyJustPressedJump(): 
         # Jump from the water
         if is_touching_water:
             was_touching_water_at_start_of_jump = true
@@ -707,6 +710,8 @@ func processHorizontalInputs(delta):
 
     if walk_speed == null:
         walk_speed = 8
+    if feather_glitch_walk_speed == null:
+        feather_glitch_walk_speed = 10
     if floor_glitch_walk_speed == null:
         floor_glitch_walk_speed = 3
     if invisible_glitch_walk_speed == null:
@@ -717,7 +722,9 @@ func processHorizontalInputs(delta):
     var curr_walk_speed = walk_speed
     # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
     #     curr_walk_speed = floor_glitch_walk_speed
-    if glitch_form == global.GlitchForm.INVISIBLE:
+    if glitch_form == global.GlitchForm.FEATHER:
+        curr_walk_speed = feather_glitch_walk_speed
+    elif glitch_form == global.GlitchForm.INVISIBLE:
         curr_walk_speed = invisible_glitch_walk_speed
     elif is_touching_water:
         curr_walk_speed = swimming_walk_speed

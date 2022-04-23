@@ -648,6 +648,9 @@ tracks/0/keys = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.146, 0 )
 collision_layer = 2
 script = ExtResource( 1 )
+walk_speed = 9
+invisible_glitch_walk_speed = 7
+swimming_walk_speed = 7
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -42,6 +42,10 @@
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
 extents = Vector3( 2, 8, 1 )
+
+[sub_resource type="BoxShape" id=48]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="Animation" id=16]
 resource_name = "doorClose"
@@ -93,6 +97,10 @@ tracks/0/keys = {
 [sub_resource type="BoxShape" id=19]
 resource_local_to_scene = true
 extents = Vector3( 2, 16, 1 )
+
+[sub_resource type="BoxShape" id=49]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=41]
 resource_local_to_scene = true
@@ -246,12 +254,13 @@ shader_param/target_palette = ExtResource( 28 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=42]
-resource_local_to_scene = true
-
 [sub_resource type="BoxShape" id=43]
 resource_local_to_scene = true
 extents = Vector3( 10, 1, 1 )
+
+[sub_resource type="BoxShape" id=50]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=44]
 resource_local_to_scene = true
@@ -390,7 +399,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.9, 19, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
-path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
+path = "res://levels/SpriteTown/SpriteTownWelcome.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
@@ -403,9 +412,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 shape = SubResource( 15 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 48 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, -1, 0 )
-path = "res://levels/SpriteTown/SpriteTownWelcome.tscn"
+path = "res://levels/SpriteTown/DeathrootBog.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
@@ -422,6 +434,9 @@ anims/locked = SubResource( 18 )
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
 shape = SubResource( 19 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 49 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 9, 0 )
@@ -2480,16 +2495,6 @@ grav = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 1, 0 )
 grav = 0
 
-[node name="Door4" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 13, 0 )
-path = "res://levels/SpriteTown/Marsh_Challenge.tscn"
-
-[node name="Sprite3D" parent="Viewport/level/Door4" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -5 )
-
-[node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
-shape = SubResource( 42 )
-
 [node name="GlitchFlyingBug" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 23, 0 )
 starting_glitch_type = 2
@@ -2504,6 +2509,7 @@ starting_glitch_type = 3
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 65, 0 )
+path = "res://levels/PoisonForest/PoisonForest.tscn"
 is_passive = true
 is_vertical = true
 
@@ -2512,6 +2518,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 43 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 50 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2, 27.2, 0 )
@@ -2682,12 +2691,17 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
 [editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
-[editable path="Viewport/level/Door4"]
 [editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]

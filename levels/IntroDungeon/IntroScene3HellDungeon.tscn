@@ -203,7 +203,7 @@ shape = SubResource( 16 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 10, 0 )
-path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
+path = "res://levels/HubWorld/HubWorld0.tscn"
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5193, 6.43651, 0 )
