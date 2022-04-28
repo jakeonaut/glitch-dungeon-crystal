@@ -21,8 +21,11 @@ func _process(delta):
     switch_glitch_timer += (delta*22)
     if switch_glitch_timer >= switch_glitch_time_limit:
         switch_glitch_timer = 0
-        self.player.applyNextGlitch()
+        player.applyNextGlitch()
 
     if Input.is_action_just_pressed("ui_accept"):
+        switch_glitch_timer = -999999
+        global.memory["current_glitch"] = global.GlitchForm.NORMAL
+        player.normalGlitch()
         get_node("Door").is_on_main_menu = true
         get_node("Door").goThroughDoor(true)

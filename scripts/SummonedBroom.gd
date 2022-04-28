@@ -83,6 +83,7 @@ func cleanUpGlitches():
     for area in areas:
         if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             area.get_node("..").ouchies(global_transform.origin)
+            my_broom_owner.has_sweeped_glitch = true
             summonSmokeClouds(5, true, true)
             # TODO kill glitches or "free" them like glitch slug...
             pass
@@ -101,6 +102,7 @@ func cleanUpGlitches():
             var coords = getLevelTiles().world_to_map(Vector3(j, i, collisionShape.global_transform.origin.z))
             var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if isTileSpikes(tile_type):
+                my_broom_owner.has_sweeped_glitch = true
                 getLevelTiles().infectSpikes(coords)
                 # TODO(jaketrower): also reset the levelTiles array position?
     

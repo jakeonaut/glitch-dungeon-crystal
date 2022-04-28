@@ -13,6 +13,8 @@ var target_last_grounded_y = 0
 
 var has_played_fall_sound = false
 
+var has_sweeped_glitch = false
+
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
 onready var cameraTarget = get_node("CameraTarget")
@@ -41,7 +43,9 @@ func _process(delta):
 
     if justPressedJump():
         jump_press_timer = 0
-        if aniPlayer.assigned_animation == "broomSweep":
+        print(str(has_sweeped_glitch) + ", " + str(aniPlayer.assigned_animation == "broomSweep"))
+        if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
+            has_sweeped_glitch = false
             target_last_grounded_y = global_transform.origin.y
             should_magic_jump = true
         
@@ -77,6 +81,7 @@ func _physics_process(delta):
 # @override
 func landed():
     .landed()
+    has_sweeped_glitch = false
     global.num_cherries_eaten = global.num_cherries_gained
 
 # @override

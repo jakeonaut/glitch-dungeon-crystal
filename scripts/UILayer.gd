@@ -8,6 +8,7 @@ onready var powerupRect = get_node("PowerupRect")
 onready var powerupSprite = get_node("PowerupRect/ColorRect/ColorRect/PowerupSprite")
 onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/RichTextLabel")
 
+onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCube = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/miniCubeCrystal")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
@@ -134,8 +135,12 @@ func _process(delta):
     else:
         powerupRect.visible = false
 
-    miniCrystalCube.global_transform.origin = getGameCamera().project_position(Vector2(520, 464), 90)
-    miniCrystalCubeTextLabel.text = str(global.num_mini_crystal_cubes)
+    if global.num_mini_crystal_cubes > 0:
+        miniCrystalCubeRect.visible = true
+        miniCrystalCube.global_transform.origin = getGameCamera().project_position(Vector2(520, 464), 90)
+        miniCrystalCubeTextLabel.text = str(global.num_mini_crystal_cubes)
+    else:
+        miniCrystalCubeRect.visible = false
 
 func displaySavingText():
     savingTextLabel.visible = true

@@ -146,9 +146,6 @@ func tryToRespawn():
             if door.path == door_path:
                 found_door = door
                 break
-        # if no door found, pick the first door in the level!
-        if not found_door and doors.size() > 0:
-            found_door = doors[0]
     else:
         player.global_transform.origin = player.spawn_origin
 

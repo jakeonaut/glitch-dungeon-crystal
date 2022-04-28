@@ -510,7 +510,7 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="2"]
+[node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -528,10 +528,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door2" index="2"]
+[node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 25 )
 anims/doorOpen = SubResource( 26 )
 anims/locked = SubResource( 27 )
@@ -1253,7 +1253,7 @@ path = "res://levels/DesertCaves/DesertCaveSwamp.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -3 )
 frame = 4
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 40 )
 anims/doorOpen = SubResource( 41 )
 anims/locked = SubResource( 42 )
@@ -1273,7 +1273,7 @@ path = "res://levels/Crypts/MushroomCave.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -3 )
 frame = 4
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 43 )
 anims/doorOpen = SubResource( 44 )
 anims/locked = SubResource( 45 )

@@ -368,12 +368,14 @@ func landed():
         
 func broomStop():
     pauseSelf = false
-    was_just_on_ground_timer = -8
+    if has_sweeped_glitch:
+        was_just_on_ground_timer = -8
     if linear_velocity.y < 0:
         linear_velocity.y = 0
     if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:
         jump_press_timer = 0
-        linear_velocity.y = -0.01
+        if has_sweeped_glitch or should_magic_jump:
+            linear_velocity.y = -0.01
 
 func faceDown():
     pass # mySprite.faceDown()

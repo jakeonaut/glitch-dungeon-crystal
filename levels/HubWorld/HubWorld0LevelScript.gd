@@ -12,7 +12,7 @@ func setUpRoomInitializationOverride():
     # i love when nodes have to know about other nodes intimates... gossip girls much
     if global.memory.has("talkedToHubWorld0Wizard"):
         var newDoor = doorRes.instance()
-        newDoor.path = "res://levels/SpriteTown/SpriteTownWelcome.tscn"
+        newDoor.path = "res://levels/FantasyDungeon/FantasyHubWorld.tscn"
         newDoor.visible = false
         self.add_child(newDoor)
         newDoor.global_transform.origin = get_node("NPC").global_transform.origin

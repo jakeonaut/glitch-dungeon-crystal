@@ -14,7 +14,7 @@ func preActivateScript():
     global.memory["talkedToHubWorld0Wizard"] = false
     global.doorSound.play()
     var newDoor = doorRes.instance()
-    newDoor.path = "res://levels/SpriteTown/SpriteTownWelcome.tscn"
+    newDoor.path = "res://levels/FantasyDungeon/FantasyHubWorld.tscn"
     newDoor.visible = false
     level.add_child(newDoor)
     newDoor.global_transform.origin = npc.global_transform.origin

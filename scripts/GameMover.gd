@@ -67,6 +67,10 @@ var should_do_fallthrough_area_collision = false
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
 
+var tile_coords_below_me_a = null
+var tile_coords_below_me_b = null
+var tile_coords_below_me_mid = null
+
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
 
@@ -111,7 +115,7 @@ func isFeatherLike():
     return glitch_form == global.GlitchForm.FEATHER
 
 # Physics variables
-export var feather_glitch_walk_speed = 10
+export var feather_glitch_walk_speed = 9
 export var floor_glitch_walk_speed = 3
 export var invisible_glitch_walk_speed = 6
 export var swimming_walk_speed = 6
@@ -228,7 +232,15 @@ func processPhysics(delta):
     if aniPlayer != null and not global.pauseGame and not aniPlayer.assigned_animation == "getItem":
         if not is_climbing_ladder:
             if on_ground:
-                if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
+                if glitch_form == global.GlitchForm.FLOOR and \
+                   aniPlayer.assigned_animation == "stand" and \
+                   not is_touching_water and \
+                   not areTilesBelow(getLevelTiles()):
+                    aniPlayer.clear_queue()
+                    aniPlayer.stop()
+                    aniPlayer.queue("fallStart")
+                    aniPlayer.queue("swimFall")
+                elif (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
                     aniPlayer.play("stand")
                 elif aniPlayer.assigned_animation == "jump" or aniPlayer.assigned_animation == "jumpBump":
                     aniPlayer.play("land")
@@ -323,7 +335,44 @@ func applyTerminalVelocity(delta):
         vv = terminal_vel
 
     if glitch_form == global.GlitchForm.FLOOR and on_ground:
-        vv = 0
+        if "fall" in aniPlayer.assigned_animation.to_lower():
+            vv = -0.2
+        else:
+            vv = 0
+        
+
+func areTilesBelow(currLevelTiles):
+    tile_coords_below_me_a = null
+    tile_coords_below_me_b = null
+    tile_coords_below_me_mid = null
+
+    var x = global_transform.origin.x
+    var y = global_transform.origin.y
+    var z = global_transform.origin.z
+    var lb = -get_node("CollisionShape").shape.radius
+    var rb = -lb
+    var bb = -get_node("CollisionShape").shape.height/2
+    
+    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - 0.1, z))
+    var tile_pos_a = currLevelTiles.map_to_world(coords_a.x, coords_a.y, coords_a.z)
+    var tile_type_a = currLevelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+
+    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + bb - 0.1, z))
+    var tile_pos_b = currLevelTiles.map_to_world(coords_b.x, coords_b.y, coords_b.z)
+    var tile_type_b = currLevelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+
+    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + bb - 0.1, z))
+    var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
+    var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
+
+    if isTileSolid(tile_type_a, true, 1, tile_pos_a):
+        tile_coords_below_me_a = coords_a
+    if isTileSolid(tile_type_b, true, 1, tile_pos_b):
+        tile_coords_below_me_b = coords_b
+    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid):
+        tile_coords_below_me_mid = coords_mid
+
+    return tile_coords_below_me_a != null or tile_coords_below_me_b != null or tile_coords_below_me_mid != null
 
 func processInputs(delta):
     processLadderInputs(delta)

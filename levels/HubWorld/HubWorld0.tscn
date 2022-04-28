@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=2]
@@ -24,7 +24,14 @@
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/HubWorld/HubWorld0LevelScript.gd" type="Script" id=23]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="BoxShape" id=12]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="Animation" id=23]
 resource_name = "doorClose"
 length = 0.4
 tracks/0/type = "value"
@@ -40,7 +47,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=24]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -55,7 +62,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=25]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -71,14 +78,71 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=18]
-resource_local_to_scene = true
+[sub_resource type="Animation" id=26]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="BoxShape" id=12]
-resource_local_to_scene = true
+[sub_resource type="Animation" id=27]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "jump"
+length = 0.001
 
 [sub_resource type="BoxShape" id=7]
 resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=21]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="Animation" id=9]
 resource_name = "doorClose"
@@ -126,6 +190,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=22]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=8]
 resource_local_to_scene = true
@@ -266,26 +334,6 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0 )
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, 0 )
-should_lock = true
-
-[node name="Door5" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -56, -15 )
-should_lock = true
-path = "res://levels/SpriteTown/SpriteTownWelcome.tscn"
-
-[node name="landing" parent="Viewport/level/Door5" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16 )
-
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="3"]
-anims/doorClose = SubResource( 15 )
-anims/doorOpen = SubResource( 16 )
-anims/locked = SubResource( 17 )
-
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
-shape = SubResource( 18 )
-
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3775, 1.44754, 0 )
 
@@ -325,11 +373,43 @@ is_locked = true
 path = "res://levels/Adventure/SpellbookIntro.tscn"
 
 [node name="Sprite3D" parent="Viewport/level/Door4" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20414, 0 )
-pixel_size = 0.18
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44831, 0 )
+pixel_size = 0.125
 
 [node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
 shape = SubResource( 12 )
+
+[node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 20 )
+
+[node name="Door5" parent="Viewport/level" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.43514, -56, -6 )
+visible = false
+is_locked = true
+path = "res://levels/FantasyDungeon/FantasyHubWorld.tscn"
+
+[node name="Sprite3D" parent="Viewport/level/Door5" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44831, 0 )
+pixel_size = 0.125
+
+[node name="landing" parent="Viewport/level/Door5" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
+anims/doorClose = SubResource( 23 )
+anims/doorOpen = SubResource( 24 )
+anims/locked = SubResource( 25 )
+
+[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+shape = SubResource( 12 )
+
+[node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 20 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door5/NPC" index="6"]
+anims/default = SubResource( 26 )
+anims/flickerOn = SubResource( 27 )
+anims/jump = SubResource( 28 )
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4075, -53, 0 )
@@ -351,27 +431,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, -20, 0 )
 path = "res://levels/PoisonForest/ForestFeatherExploration.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door2" index="2"]
+[node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 7 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 21 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 12, 0 )
 path = "res://levels/Adventure/Crossroads.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door3" index="2"]
+[node name="landing" parent="Viewport/level/Door3" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 9 )
 anims/doorOpen = SubResource( 10 )
 anims/locked = SubResource( 11 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 7 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 22 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -18, 0 )
@@ -463,10 +549,18 @@ __meta__ = {
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 8 )]
 
-[editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door4"]
+[editable path="Viewport/level/Door4/NPC"]
+[editable path="Viewport/level/Door4/NPC/NPC TextBox"]
+[editable path="Viewport/level/Door5"]
+[editable path="Viewport/level/Door5/NPC"]
+[editable path="Viewport/level/Door5/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/NPC"]

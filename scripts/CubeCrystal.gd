@@ -12,9 +12,9 @@ onready var mySprite = get_node("Sprite3D")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export var is_static_in_level = true
 
-var MIN_STEP = -2
+export var MIN_STEP = -2
 var MID_STEP = 5
-var MAX_STEP = -12
+export var MAX_STEP = -12
 var step = MIN_STEP
 
 var disappearing2 = false
