@@ -481,7 +481,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2, 0 )
 path = "res://levels/IntroDungeon/IntroScene4Nullification.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door" index="2"]
+[node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -495,10 +495,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -12, 0 )
 path = "res://levels/Adventure/FloorExploration.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door3" index="2"]
+[node name="landing" parent="Viewport/level/Door3" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 13 )
 anims/doorOpen = SubResource( 14 )
 anims/locked = SubResource( 15 )
@@ -514,10 +514,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, -12, 0 )
 path = "res://levels/SwampSceneMinimal.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door4" index="2"]
+[node name="landing" parent="Viewport/level/Door4" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 16 )
 anims/doorOpen = SubResource( 17 )
 anims/locked = SubResource( 18 )
@@ -536,10 +536,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door6" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.45, 0 )
 
-[node name="landing" parent="Viewport/level/Door6" index="2"]
+[node name="landing" parent="Viewport/level/Door6" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door6" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door6" index="4"]
 anims/doorClose = SubResource( 23 )
 anims/doorOpen = SubResource( 24 )
 anims/locked = SubResource( 25 )
@@ -556,10 +556,10 @@ path = "res://levels/Adventure/FeatherExploration.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door2" index="2"]
+[node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 10 )
 anims/doorOpen = SubResource( 11 )
 anims/locked = SubResource( 12 )
@@ -576,10 +576,10 @@ path = "res://levels/Adventure/InvisIntro.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door5" index="2"]
+[node name="landing" parent="Viewport/level/Door5" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -915,7 +915,7 @@ path = "res://levels/Adventure/LadderIntro.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door7" index="2"]
+[node name="landing" parent="Viewport/level/Door7" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/InteractionArea" index="0"]

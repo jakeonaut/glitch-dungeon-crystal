@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/grandma.mp3-04d96624310b98da26a90b751072ff86.mp3str"
+
+[deps]
+
+source_file="res://assets/music/grandma.mp3"
+dest_files=[ "res://.import/grandma.mp3-04d96624310b98da26a90b751072ff86.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

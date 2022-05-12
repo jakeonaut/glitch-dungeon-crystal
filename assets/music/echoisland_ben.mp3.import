@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/echoisland_ben.mp3-1c4d7f7b3bdab00b55f413ae090aa27b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/echoisland_ben.mp3"
+dest_files=[ "res://.import/echoisland_ben.mp3-1c4d7f7b3bdab00b55f413ae090aa27b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

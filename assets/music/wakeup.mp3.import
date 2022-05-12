@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wakeup.mp3-cb401aa2027f21b3ee1eaaa5ece7946b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/wakeup.mp3"
+dest_files=[ "res://.import/wakeup.mp3-cb401aa2027f21b3ee1eaaa5ece7946b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

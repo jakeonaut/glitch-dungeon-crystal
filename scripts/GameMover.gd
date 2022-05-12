@@ -232,15 +232,7 @@ func processPhysics(delta):
     if aniPlayer != null and not global.pauseGame and not aniPlayer.assigned_animation == "getItem":
         if not is_climbing_ladder:
             if on_ground:
-                if glitch_form == global.GlitchForm.FLOOR and \
-                   aniPlayer.assigned_animation == "stand" and \
-                   not is_touching_water and \
-                   not areTilesBelow(getLevelTiles()):
-                    aniPlayer.clear_queue()
-                    aniPlayer.stop()
-                    aniPlayer.queue("fallStart")
-                    aniPlayer.queue("swimFall")
-                elif (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
+                if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
                     aniPlayer.play("stand")
                 elif aniPlayer.assigned_animation == "jump" or aniPlayer.assigned_animation == "jumpBump":
                     aniPlayer.play("land")
@@ -335,10 +327,7 @@ func applyTerminalVelocity(delta):
         vv = terminal_vel
 
     if glitch_form == global.GlitchForm.FLOOR and on_ground:
-        if "fall" in aniPlayer.assigned_animation.to_lower():
-            vv = -0.2
-        else:
-            vv = 0
+        vv = 0
         
 
 func areTilesBelow(currLevelTiles):
@@ -804,9 +793,8 @@ func doWalkAnimation():
             aniPlayer.stop()
         var aa = aniPlayer.assigned_animation
         if aa == "stand" or aa == "turnAround" or aa == "walkStop" or aa == "walkBump":
-            if not horizontal_collision:
-                aniPlayer.queue("walkStart")
-                addJumpSmokeCloud()
+            aniPlayer.queue("walkStart")
+            addJumpSmokeCloud()
         aniPlayer.queue("walk")
         
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
@@ -982,19 +970,20 @@ func collideWithWall(local_lv):
     var just_pressed_horizontal_input = is_pressing_horizontal_input and not was_pressing_horizontal_input
     var switched_to_red_from_yellow = glitch_form == global.GlitchForm.FLOOR and prev_glitch_form == global.GlitchForm.LADDER
     var switched_to_yellow = glitch_form == global.GlitchForm.LADDER and prev_glitch_form != global.GlitchForm.LADDER
-    if aniPlayer and (abs(local_lv.x) > 0.09 or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
+    if aniPlayer and (abs(local_lv.x) > 0.12 or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
+        var aa = aniPlayer.assigned_animation
         if not was_on_ground and not is_touching_water:
-            if local_lv.y > 0 and aniPlayer.assigned_animation != "jumpBump" and aniPlayer.assigned_animation != "jumpSquat":
+            if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat":
                 aniPlayer.stop()
                 aniPlayer.clear_queue()
                 aniPlayer.queue("jumpBump")
                 aniPlayer.queue("jump")
-            elif local_lv.y < 0 and aniPlayer.assigned_animation != "fallBump" and aniPlayer.assigned_animation != "fallFar":
+            elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar":
                 aniPlayer.stop()
                 aniPlayer.clear_queue()
                 aniPlayer.queue("fallBump")
                 aniPlayer.queue("fall")
-        elif was_on_ground and aniPlayer.assigned_animation != "walkBump" and (not "jump" in aniPlayer.assigned_animation):
+        elif was_on_ground and aa != "walkBump" and "walk" in aa:
             aniPlayer.stop()
             aniPlayer.clear_queue()
             aniPlayer.queue("walkBump")

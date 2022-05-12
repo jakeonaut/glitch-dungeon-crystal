@@ -27,7 +27,6 @@ func _ready():
     should_do_middle_sensor = true
     should_do_simple_sensor_probe = false
     target_last_grounded_y = global_transform.origin.y
-    print(target_last_grounded_y)
 
 func ladderUpdateTargetLastGroundedY():
     target_last_grounded_y = global_transform.origin.y
@@ -43,7 +42,6 @@ func _process(delta):
 
     if justPressedJump():
         jump_press_timer = 0
-        print(str(has_sweeped_glitch) + ", " + str(aniPlayer.assigned_animation == "broomSweep"))
         if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
             has_sweeped_glitch = false
             target_last_grounded_y = global_transform.origin.y

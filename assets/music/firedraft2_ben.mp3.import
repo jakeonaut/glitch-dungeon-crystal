@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/firedraft2_ben.mp3-8cb86a3b6a0526135c79348765d31c72.mp3str"
+
+[deps]
+
+source_file="res://assets/music/firedraft2_ben.mp3"
+dest_files=[ "res://.import/firedraft2_ben.mp3-8cb86a3b6a0526135c79348765d31c72.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

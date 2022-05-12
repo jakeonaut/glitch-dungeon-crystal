@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/prairie swamp.mp3-4d53885a4f312108c189e081924e0df9.mp3str"
+
+[deps]
+
+source_file="res://assets/music/prairie swamp.mp3"
+dest_files=[ "res://.import/prairie swamp.mp3-4d53885a4f312108c189e081924e0df9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

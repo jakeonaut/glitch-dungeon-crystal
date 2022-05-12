@@ -239,7 +239,7 @@ margin_bottom = 184.12
 theme = SubResource( 41 )
 bbcode_enabled = true
 bbcode_text = "Glitch"
-text = "Glitch"
+text = "Dungeon"
 script = ExtResource( 11 )
 
 [node name="GlitchTitleTextLabel2" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]

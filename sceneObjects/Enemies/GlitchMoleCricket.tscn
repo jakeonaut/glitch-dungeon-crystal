@@ -378,6 +378,7 @@ script = ExtResource( 14 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+visible = false
 material_override = SubResource( 38 )
 pixel_size = 0.125
 texture = ExtResource( 7 )

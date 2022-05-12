@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/demon suburb.mp3-31f29cee6cdffa6e6d44352c54956f9f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/demon suburb.mp3"
+dest_files=[ "res://.import/demon suburb.mp3-31f29cee6cdffa6e6d44352c54956f9f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

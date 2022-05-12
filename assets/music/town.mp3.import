@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/town.mp3-ec556cf8d8caa47398b84fdba8767b65.mp3str"
+
+[deps]
+
+source_file="res://assets/music/town.mp3"
+dest_files=[ "res://.import/town.mp3-ec556cf8d8caa47398b84fdba8767b65.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/debug town.mp3-038dfc3955d74ab1fefa85a2a4f4c66f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/debug town.mp3"
+dest_files=[ "res://.import/debug town.mp3-038dfc3955d74ab1fefa85a2a4f4c66f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
