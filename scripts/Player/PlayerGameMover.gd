@@ -76,6 +76,10 @@ func _physics_process(delta):
         # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
         pass
 
+func playJumpSound():
+    jumpSound.pitch_scale = rand_range(0.9, 1.1)
+    .playJumpSound()
+
 # @override
 func landed():
     .landed()

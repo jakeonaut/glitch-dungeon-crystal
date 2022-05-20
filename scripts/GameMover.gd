@@ -582,13 +582,16 @@ func actuallyApplyJump(play_sound = true):
         else:
             vv = jump_force*0.7
     if not is_touching_water and play_sound and jumpSound != null:
-        jumpSound.play()
+        playJumpSound()
     on_ground = false
     should_do_fallthrough_area_collision = false
     has_just_jumped_timer = 0 
     feather_fall_timer = 0
     if glitch_form == global.GlitchForm.FEATHER:
         should_magic_jump = false
+
+func playJumpSound():
+    jumpSound.play()
 
 func isKindOfOnGround():
     # I'm on the ground or just fell off a platform...
