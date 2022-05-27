@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=2]
@@ -40,6 +40,10 @@ extents = Vector3( 2, 8, 1 )
 [sub_resource type="BoxShape" id=53]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=66]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=19]
 resource_name = "doorClose"
@@ -92,6 +96,10 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=67]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=16]
 resource_name = "doorClose"
 length = 0.4
@@ -142,6 +150,10 @@ tracks/0/keys = {
 [sub_resource type="BoxShape" id=55]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=68]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=26]
 resource_name = "doorClose"
@@ -197,6 +209,10 @@ extents = Vector3( 8, 2, 1 )
 [sub_resource type="BoxShape" id=56]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=69]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=60]
 resource_name = "doorClose"
@@ -304,6 +320,10 @@ tracks/1/keys = {
 resource_name = "jump"
 length = 0.001
 
+[sub_resource type="BoxShape" id=70]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=43]
 resource_name = "doorClose"
 length = 0.4
@@ -354,6 +374,10 @@ tracks/0/keys = {
 [sub_resource type="BoxShape" id=57]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=71]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=46]
 resource_name = "doorClose"
@@ -406,6 +430,10 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=72]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=50]
 resource_name = "doorClose"
 length = 0.4
@@ -457,13 +485,25 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=73]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="BoxShape" id=22]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=74]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=75]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 22 )
@@ -534,6 +574,10 @@ tracks/0/keys = {
 resource_name = "jump"
 length = 0.001
 
+[sub_resource type="BoxShape" id=76]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=37]
 resource_name = "default"
 length = 0.1
@@ -568,6 +612,10 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=39]
 resource_name = "jump"
 length = 0.001
+
+[sub_resource type="BoxShape" id=77]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=40]
 resource_name = "default"
@@ -604,13 +652,17 @@ tracks/0/keys = {
 resource_name = "jump"
 length = 0.001
 
+[sub_resource type="BoxShape" id=78]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="SphereShape" id=49]
 radius = 10.0
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 640, 512 )
@@ -709,7 +761,7 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="2"]
+[node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -719,6 +771,9 @@ shape = SubResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 53 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 66 )
+
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -13, 0 )
 path = "res://levels/Crypts/DeathrootBogFloorExplore.tscn"
@@ -727,10 +782,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door3" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door3" index="2"]
+[node name="landing" parent="Viewport/level/Door3" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 19 )
 anims/doorOpen = SubResource( 20 )
 anims/locked = SubResource( 21 )
@@ -741,6 +796,9 @@ shape = SubResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 54 )
 
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 67 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.1, -1, 0 )
 path = "res://levels/PlasticBeach/PlasticBeach.tscn"
@@ -749,10 +807,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door2" index="2"]
+[node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 16 )
 anims/doorOpen = SubResource( 17 )
 anims/locked = SubResource( 18 )
@@ -764,6 +822,9 @@ shape = SubResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 55 )
 
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 68 )
+
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.6, 28.2, 0 )
 path = "res://levels/PoisonForest/PoisonForestCrossroads.tscn"
@@ -773,10 +834,10 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door4" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door4" index="2"]
+[node name="landing" parent="Viewport/level/Door4" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 26 )
 anims/doorOpen = SubResource( 27 )
 anims/locked = SubResource( 28 )
@@ -788,6 +849,9 @@ shape = SubResource( 29 )
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 56 )
 
+[node name="CollisionShape" parent="Viewport/level/Door4/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 69 )
+
 [node name="Door8" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.4, -11.9, 0 )
 path = "res://levels/Crypts/MushroomCave.tscn"
@@ -797,10 +861,10 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door8" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door8" index="2"]
+[node name="landing" parent="Viewport/level/Door8" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door8" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door8" index="4"]
 anims/doorClose = SubResource( 60 )
 anims/doorOpen = SubResource( 61 )
 anims/locked = SubResource( 62 )
@@ -817,6 +881,9 @@ anims/default = SubResource( 63 )
 anims/flickerOn = SubResource( 64 )
 anims/jump = SubResource( 65 )
 
+[node name="CollisionShape" parent="Viewport/level/Door8/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 70 )
+
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.6, 32.6, 0 )
 path = "res://levels/PoisonForest/Crossroads/Crossroads2.tscn"
@@ -826,10 +893,10 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door5" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door5" index="2"]
+[node name="landing" parent="Viewport/level/Door5" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.5, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 43 )
 anims/doorOpen = SubResource( 44 )
 anims/locked = SubResource( 45 )
@@ -841,6 +908,9 @@ shape = SubResource( 29 )
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 57 )
 
+[node name="CollisionShape" parent="Viewport/level/Door5/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 71 )
+
 [node name="Door6" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.6, 36.9, 0 )
 path = "res://levels/PoisonForest/PoisonForest.tscn"
@@ -850,10 +920,10 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door6" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door6" index="2"]
+[node name="landing" parent="Viewport/level/Door6" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door6" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door6" index="4"]
 anims/doorClose = SubResource( 46 )
 anims/doorOpen = SubResource( 47 )
 anims/locked = SubResource( 48 )
@@ -865,6 +935,9 @@ shape = SubResource( 29 )
 [node name="CollisionShape" parent="Viewport/level/Door6/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 58 )
 
+[node name="CollisionShape" parent="Viewport/level/Door6/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 72 )
+
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.6, 41.9, 0 )
 path = "res://levels/PoisonForest/Crossroads/Crossroads3.tscn"
@@ -874,10 +947,10 @@ is_vertical = true
 [node name="Sprite3D" parent="Viewport/level/Door7" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door7" index="2"]
+[node name="landing" parent="Viewport/level/Door7" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door7" index="3"]
+[node name="AnimationPlayer" parent="Viewport/level/Door7" index="4"]
 anims/doorClose = SubResource( 50 )
 anims/doorOpen = SubResource( 51 )
 anims/locked = SubResource( 52 )
@@ -888,6 +961,9 @@ shape = SubResource( 29 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )
+
+[node name="CollisionShape" parent="Viewport/level/Door7/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 73 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0 )
@@ -945,6 +1021,9 @@ shape = SubResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657463, 0 )
 frame = 16
 
+[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 74 )
+
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.47272, 0 )
 grav = 0
@@ -956,6 +1035,9 @@ shape = SubResource( 23 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
 frame = 36
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 75 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2, 0 )
@@ -1266,6 +1348,9 @@ anims/default = SubResource( 31 )
 anims/flickerOn = SubResource( 32 )
 anims/jump = SubResource( 33 )
 
+[node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
+shape = SubResource( 76 )
+
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.9, 23, 0 )
 grav = 0
@@ -1296,6 +1381,9 @@ frame = 64
 anims/default = SubResource( 37 )
 anims/flickerOn = SubResource( 38 )
 anims/jump = SubResource( 39 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC5/FallthroughSolid" index="0"]
+shape = SubResource( 77 )
 
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6, 21.2, 0 )
@@ -1328,6 +1416,9 @@ frame = 64
 anims/default = SubResource( 40 )
 anims/flickerOn = SubResource( 41 )
 anims/jump = SubResource( 42 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC6/FallthroughSolid" index="0"]
+shape = SubResource( 78 )
 
 [node name="Cicada" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.2, 20.9, 0 )

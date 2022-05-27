@@ -106,7 +106,7 @@ shader_param/target_palette = ExtResource( 23 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 12 )]
 

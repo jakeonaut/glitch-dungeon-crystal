@@ -93,7 +93,7 @@ shader_param/target_palette = ExtResource( 24 )
 [sub_resource type="ViewportTexture" id=10]
 viewport_path = NodePath("Viewport")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 18 )]
 

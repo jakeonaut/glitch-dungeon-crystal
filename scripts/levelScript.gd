@@ -75,11 +75,12 @@ func _ready_impl():
 func _process(delta):
 	delta = delta * global.time_dilation_multiplier
 
+	crtScreenEffect.visible = false
 	if Input.is_action_just_pressed("ui_accept") and getLevelName().find("MainMenu") < 0:
 		global.canChangeSongPitch = not global.canChangeSongPitch
 		global.canGlitchScreen = not global.canGlitchScreen
 		global.crtScreenEffects = not global.crtScreenEffects
-		crtScreenEffect.visible = global.crtScreenEffects
+		# crtScreenEffect.visible = global.crtScreenEffects
 	
 	var amt = 6.0
 	crtScreenEffect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))

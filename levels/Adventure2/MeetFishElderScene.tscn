@@ -541,7 +541,7 @@ tracks/7/keys = {
 [sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("Viewport")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 12 )]
 

@@ -65,7 +65,7 @@ shader_param/shake_power = 0.002
 shader_param/shake_block_size = 50.0
 shader_param/shake_color_rate = 0.001
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 28 )]
 

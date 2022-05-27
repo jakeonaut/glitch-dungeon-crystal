@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -622,6 +622,10 @@ extents = Vector3( 2, 8, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=59]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=53]
 resource_name = "doorClose"
 length = 0.4
@@ -728,10 +732,14 @@ tracks/1/keys = {
 resource_name = "jump"
 length = 0.001
 
+[sub_resource type="BoxShape" id=60]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 640, 512 )
@@ -897,6 +905,9 @@ shape = SubResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 59 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -10, 0 )
 path = "res://levels/FantasyDungeon/1_1.tscn"
@@ -917,6 +928,9 @@ shape = SubResource( 16 )
 anims/default = SubResource( 56 )
 anims/flickerOn = SubResource( 57 )
 anims/jump = SubResource( 58 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 60 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.41899, 0 )

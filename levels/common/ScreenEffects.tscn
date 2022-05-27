@@ -46,12 +46,10 @@ shader_param/shake_color_rate = 0.001
 [node name="ScreenEffects" type="CanvasLayer"]
 
 [node name="CrtEffectRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 3 )
 margin_right = 640.0
 margin_bottom = 512.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CrtEffectRect2" type="ColorRect" parent="."]
 visible = false

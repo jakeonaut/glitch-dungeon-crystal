@@ -185,7 +185,7 @@ shader_param/b_mult = -1.0
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 23 )]
 
