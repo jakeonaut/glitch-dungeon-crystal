@@ -13,24 +13,24 @@ onready var textBoxportrait = get_node("TextBox/Portrait")
 var type = "textBoxContainer"
 
 func _ready():
-    self.setVars()
+	self.setVars()
 
 func setVars():
-    if bbText != "":
-        textBoxtext.bbcode_text = bbText
-        textBox.text_final = bbText
-    if portrait:
-        textBoxportrait.texture = portrait
-    if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():
-        var nextTextBoxPathStr = "../"
-        for i in range(nextTextBoxPath.get_name_count()):
-            if i != 0:
-                nextTextBoxPathStr += "/"
-            nextTextBoxPathStr += nextTextBoxPath.get_name(i)
-        textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+	if bbText != "":
+		textBoxtext.bbcode_text = bbText
+		textBox.text_final = bbText
+	if portrait:
+		textBoxportrait.texture = portrait
+	if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():
+		var nextTextBoxPathStr = "../"
+		for i in range(nextTextBoxPath.get_name_count()):
+			if i != 0:
+				nextTextBoxPathStr += "/"
+			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
+		textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
 
 func InteractActivate():
-    interact()
-        
+	interact()
+		
 func interact():
-    textBox.interact()
+	textBox.interact()

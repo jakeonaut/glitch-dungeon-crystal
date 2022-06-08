@@ -571,7 +571,14 @@ is_really_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 14 )
 
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+pitch_scale = 0.2
+
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="8"]
+pitch_scale = 0.5
+
 [node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
+pitch_scale = 0.15
 script = ExtResource( 13 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="5"]

@@ -6,6 +6,10 @@ uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
 uniform float opacity = 1.0;
 
+// For outline
+uniform vec4 line_color : hint_color = vec4(0.01, 0.01, 0.01, 1.0);//color line
+uniform float line_scale : hint_range(0, 20) = 0.04;  
+
 // æŒ¯å‹•ã®å¼·ã•
 uniform float shake_power = 0.03;
 // æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
@@ -14,6 +18,7 @@ uniform float shake_block_size = 30.5;
 uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
 
 uniform int palettesize = 16;
+uniform bool enable_outline = true;
 uniform bool enable_glitch = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
@@ -47,6 +52,17 @@ void fragment() {
     vec4 incolor = texture(texture_albedo, UV);
      
     int index = getpaletteidx(incolor.rgb);
+	
+	vec2 size = vec2(0.125, 0.125) * line_scale;
+	float outline = texture(texture_albedo, UV + vec2(-size.x, 0)).a;
+	outline += texture(texture_albedo, UV + vec2(0, size.y)).a;
+	outline += texture(texture_albedo, UV + vec2(size.x, 0)).a;
+	outline += texture(texture_albedo, UV + vec2(0, -size.y)).a;
+	outline += texture(texture_albedo, UV + vec2(-size.x, size.y)).a;
+	outline += texture(texture_albedo, UV + vec2(size.x, size.y)).a;
+	outline += texture(texture_albedo, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(texture_albedo, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
      
     float fdelta = float(index);
 	if (enable_palette_cycle) {
@@ -56,14 +72,22 @@ void fragment() {
     int delta = int(mod2);
      
     vec3 color = getpalettecolor(delta);
-     
+    
+	float alpha = incolor.a * opacity; 
+	ALPHA = alpha;
     if (index > -1) {
-        ALBEDO.rgb = color.rgb;  
+		if (enable_outline) {
+	        vec4 color_and_outline = mix(vec4(color.rgb, alpha), line_color , outline - incolor.a);
+			ALBEDO.rgb = color_and_outline.rgb;
+			ALPHA = color_and_outline.a;
+		} else {
+			ALBEDO.rgb = color.rgb;
+		}
     }
     else {
         ALBEDO.rgb = vec3(0,1,0);
     }
-    ALPHA = incolor.a * opacity;
+	
 
 	if (enable_glitch) {
 		vec2 fixed_uv = UV;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=12]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=13]
-[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=15]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=17]
@@ -116,14 +115,6 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=41]
-resource_local_to_scene = true
-extents = Vector3( 5, 3, 1.3 )
-
-[sub_resource type="BoxShape" id=61]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
 extents = Vector3( 3, 3, 1.3 )
@@ -167,10 +158,13 @@ extents = Vector3( 0.5, 0.24, 1 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -182,10 +176,13 @@ shader_param/target_palette = ExtResource( 31 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -197,10 +194,13 @@ shader_param/target_palette = ExtResource( 30 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -212,10 +212,13 @@ shader_param/target_palette = ExtResource( 30 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -231,10 +234,13 @@ load_path = "res://.import/MRMOTEXTEX.png-74a14690814d122bb6461eeb85a4f200.stex"
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -246,10 +252,13 @@ shader_param/target_palette = ExtResource( 37 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -261,10 +270,13 @@ shader_param/target_palette = ExtResource( 37 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -335,10 +347,13 @@ extents = Vector3( 0.5, 0.24, 1 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -354,10 +369,13 @@ extents = Vector3( 3.24, 0.24, 1 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -369,10 +387,13 @@ shader_param/target_palette = ExtResource( 31 )
 shader = ExtResource( 34 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 16
+shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -566,7 +587,7 @@ shape = SubResource( 59 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, -1, 0 )
-path = "res://levels/SpriteTown/DeathrootBog.tscn"
+path = "res://levels/FantasyDungeon/debug_long_level_puzzle_intro.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
@@ -796,24 +817,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0 )
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7, 0 )
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 0 )
-grav = 0
-bbText = "sometimes i like to
-nibble on glitch slimes
-as a little treat"
-tiny_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-shape = SubResource( 41 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
-frame = 68
-
-[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 61 )
-
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 0, 0 )
 grav = 0
@@ -823,7 +826,6 @@ bbText = "See SpriteTown\\BugCollectorDialogStartSound.gd"
 shape = SubResource( 24 )
 
 [node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 14 )
 volume_db = -8.0
 pitch_scale = 0.2
 script = ExtResource( 36 )
@@ -2953,8 +2955,6 @@ __meta__ = {
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/NPC"]
-[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
