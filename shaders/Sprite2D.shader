@@ -10,9 +10,9 @@ void fragment(){
     vec4 new_color = vec4(.0);
     
     for (int i = 0; i < palette_size; i++) {
-        vec4 palette_color = texture(base_palette, vec2(1.0 / float(palette_size) * float(i), .0));
+        vec4 palette_color = texture(base_palette, vec2(1.0 / float(palette_size) * float(i) + 0.5, .0));
         if (distance(palette_color, color) < distance(new_color, color)) {
-            new_color = texture(target_palette, vec2(1.0 / float(palette_size) * float(i), .0));
+            new_color = texture(target_palette, vec2(1.0 / float(palette_size) * float(i) + 0.5, .0));
         }
     }
     

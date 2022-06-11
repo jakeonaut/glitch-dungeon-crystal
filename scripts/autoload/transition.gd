@@ -43,7 +43,7 @@ func change_scene():
         return
 
     if self.path != "":
-        get_tree().change_scene(self.path)
+        var _was_change_ok = get_tree().change_scene(self.path)
     else:
         global.pauseGame = true
         

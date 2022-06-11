@@ -285,8 +285,8 @@ func applyGravity(delta):
 					if is_touching_water:
 						aniPlayer.queue("swimFall")
 					else:
-						aniPlayer.queue("fallStart")
-						aniPlayer.queue("fall")
+						if aniPlayer.has_animation("fallStart"): aniPlayer.queue("fallStart")
+						if aniPlayer.has_animation("fall"): aniPlayer.queue("fall")
 			if fall_timer > 20 and aniPlayer and aniPlayer.current_animation != "fallFar":
 				aniPlayer.clear_queue()
 				aniPlayer.stop()
@@ -413,7 +413,7 @@ func pressingMoveLeft():
 func pressingMoveRight():
 	return false
 
-func processLadderInputs(delta):
+func processLadderInputs(_delta):
 	if global.pauseMoveInput: return
 
 	if is_touching_ladder:
@@ -936,7 +936,7 @@ func collideWithFloor(local_lv):
 	truly_on_ground = true
 	return local_lv
 
-func reactToPotentialCollisions(tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
+func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
 	if tile_distance <= 0:
 		if debug:
 			# print("collide sensor A...")
@@ -973,7 +973,10 @@ func collideWithWall(local_lv):
 	var just_pressed_horizontal_input = is_pressing_horizontal_input and not was_pressing_horizontal_input
 	var switched_to_red_from_yellow = glitch_form == global.GlitchForm.FLOOR and prev_glitch_form == global.GlitchForm.LADDER
 	var switched_to_yellow = glitch_form == global.GlitchForm.LADDER and prev_glitch_form != global.GlitchForm.LADDER
-	var should_play_bump = abs(local_lv.x) > 0.06 or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow
+	var bumpSpeed = 0.06
+	if not on_ground and glitch_form != global.GlitchForm.FEATHER:
+		bumpSpeed = 0.10
+	var should_play_bump = abs(local_lv.x) > bumpSpeed or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow
 	var bump_ani_speed = 1.0
 	if abs(local_lv.x) < 0.16 and not (just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
 		bump_ani_speed = 0.75
@@ -1109,7 +1112,7 @@ func handleVerticalCollisions(local_lv):
 func handleSpikeCollisions():
 	pass
 
-func postProcessInputs(delta):
+func postProcessInputs(_delta):
 	pass
 	
 func landed():
@@ -1143,9 +1146,9 @@ func isWalkingIntoWall():
 		   and is_pressing_horizontal_input and was_pressing_horizontal_input \
 		   and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat") 
 
-func updateFacing(dir):
-	if dir.x != 0 or dir.y != 0 or dir.z != 0:
-		facing = dir
+func updateFacing(local_dir):
+	if local_dir.x != 0 or local_dir.y != 0 or local_dir.z != 0:
+		facing = local_dir
 		is_walking = true
 	else:
 		is_walking = false

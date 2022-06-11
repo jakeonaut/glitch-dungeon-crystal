@@ -93,7 +93,7 @@ func conductFromScenePath(path):
         tryToPlay(goddessThemePlayer)
     elif path.find("IntroScene0") > 0:
         tryToPlay(wakeupPlayer)
-    elif path.find("IntroDungeon") > 0:
+    elif path.find("IntroDungeon") > 0 or path.find("000") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("Debug") > 0:
         tryToPlay(debugThemePlayer)

@@ -97,7 +97,7 @@ func setPaletteCycle(sprite, value):
 func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
-func passiveActivate(delta):
+func passiveActivate(_delta):
     global.memory["hearts_recovering"] = true
     if not isOnSavePoint():
         saveSound.play()

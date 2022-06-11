@@ -141,7 +141,7 @@ func _process(delta):
 		spike_infection_timer += (delta*22)
 		if spike_infection_timer >= spike_infection_time_limit: 
 			spike_infection_timer = 0
-			for i in range(len(infected_spikes)):
+			for _i in range(len(infected_spikes)):
 				var coords = infected_spikes.pop_front()
 				var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
 				var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)

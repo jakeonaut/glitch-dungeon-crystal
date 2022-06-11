@@ -76,13 +76,13 @@ void fragment() {
 	float alpha = incolor.a * opacity; 
 	ALPHA = alpha;
     if (index > -1) {
-		if (enable_outline) {
-	        vec4 color_and_outline = mix(vec4(color.rgb, alpha), line_color , outline - incolor.a);
-			ALBEDO.rgb = color_and_outline.rgb;
-			ALPHA = color_and_outline.a;
-		} else {
+		// if (enable_outline) {
+	    //    vec4 color_and_outline = mix(vec4(color.rgb, alpha), line_color , outline - incolor.a);
+		//	ALBEDO.rgb = color_and_outline.rgb;
+		//	ALPHA = color_and_outline.a;
+		//} else {
 			ALBEDO.rgb = color.rgb;
-		}
+		//}
     }
     else {
         ALBEDO.rgb = vec3(0,1,0);

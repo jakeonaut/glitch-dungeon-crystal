@@ -96,7 +96,7 @@ func cleanUpGlitches():
     var lb = x - collisionShape.shape.radius
     var rb = x + collisionShape.shape.radius
     
-    var has_played_sound = false
+    var _has_played_sound = false
     for i in range(int(floor(bb)), int(ceil(tb))):
         for j in range(int(floor(lb)), int(ceil(rb))):
             var coords = getLevelTiles().world_to_map(Vector3(j, i, collisionShape.global_transform.origin.z))

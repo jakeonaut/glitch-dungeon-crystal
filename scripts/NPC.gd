@@ -5,6 +5,7 @@ extends "GameMover.gd"
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
+export(String) var nameTextStr = ""
 export var is_important = false # when dialogue is started, can't walk away until finished.
 export var is_really_important = false # touching it will start the dialogue
 export var can_activate = true
@@ -27,6 +28,17 @@ export var is_active = true
 export var tiny_textbox = false
 export var is_static_in_level = true
 
+var pressing_move_left = false
+var pressing_move_right = false
+
+# @override
+func pressingMoveLeft():
+	return pressing_move_left
+
+# @override
+func pressingMoveRight():
+	return pressing_move_right
+
 
 func _ready():
 	set_process(true)
@@ -38,6 +50,8 @@ func _ready():
 		textBoxContainer.bbText = bbText
 	if portrait and not textBoxContainer.portrait:
 		textBoxContainer.portrait = portrait
+	if nameTextStr and textBoxContainer.nameTextStr == "":
+		textBoxContainer.nameTextStr = nameTextStr
 	if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
 		var nextTextBoxPathStr = "../"
 		for i in range(nextTextBoxPath.get_name_count()):
@@ -106,7 +120,7 @@ func alignMySprite():
 
 # @override
 func processPhysics(delta):
-	if grav == 0 and not just_pressed_jump and not pressing_jump:
+	if grav == 0 and not just_pressed_jump and not pressing_jump and not pressing_move_left and not pressing_move_right:
 		return
 	else:
 		# call GameMover.gd super method

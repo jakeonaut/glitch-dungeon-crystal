@@ -132,14 +132,14 @@ shape = SubResource( 9 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 10 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="9"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="11"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

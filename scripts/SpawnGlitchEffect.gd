@@ -20,7 +20,7 @@ func setSpriteValues(whichSprite):
     whichSprite.max_frames = randi() % 20 + 8
     whichSprite.should_soft_fizzle_out = true
 
-func _process(delta):
+func _process(_delta):
     processSpriteValues(mrmotex1)
     processSpriteValues(mrmotex2)
     processSpriteValues(mrmotex3)

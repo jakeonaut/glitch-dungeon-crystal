@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/fakewater.png" type="Texture" id=2]
@@ -16,10 +16,31 @@
 shader = ExtResource( 9 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/palettesize = 8
+shader_param/enable_outline = true
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 10 )
+shader_param/target_palette = ExtResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 9 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 8
+shader_param/enable_outline = false
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -52,6 +73,17 @@ pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 8
+script = ExtResource( 1 )
+max_frames = 4
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 8 )
+material_override = SubResource( 6 )
+pixel_size = 0.125
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 8
+frame = 12
 script = ExtResource( 1 )
 max_frames = 4
 

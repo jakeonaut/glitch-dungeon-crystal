@@ -252,12 +252,7 @@ func applyGlitchDeathEffects(x):
 		material.set_shader_param("shake_power", -.00005*pow(x-25, 2) + .005)
 		material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .005)
 
-func _physics_process(delta):
-	# ._process_physics(delta) #NOTE: this super method is called automatically 
-	# https://github.com/godotengine/godot/issues/6500
-	pass
-
-func tryRotateCamera(delta):
+func tryRotateCamera(_delta):
 	pass
 
 func isOnSavePoint():

@@ -40,7 +40,7 @@ func landed():
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("land")
         
-func addJumpSmokeCloud(flip_flip_h = false):
+func addJumpSmokeCloud(_flip_flip_h = false):
     pass
 
 func fallthroughCollisionActivate():

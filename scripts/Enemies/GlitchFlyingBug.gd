@@ -3,8 +3,8 @@ extends Spatial
 onready var bugHead = get_node("GlitchFlyingBugHead")
 onready var body1 = get_node("GlitchFlyingBugBody1")
 onready var body2 = get_node("GlitchFlyingBugBody2")
-onready var scoochSound1 = get_node("Sounds/ScoochSound1")
-onready var scoochSound2 = get_node("Sounds/ScoochSound2")
+# onready var scoochSound1 = get_node("Sounds/ScoochSound1")
+# onready var scoochSound2 = get_node("Sounds/ScoochSound2")
 onready var playerActivationArea = get_node("PlayerActivationArea")
 
 var am_i_dying = false

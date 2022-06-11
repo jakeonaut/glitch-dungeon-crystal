@@ -121,7 +121,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/Adventure/FeatherExploration.tscn"
+path = "res://levels/MainMenu.tscn"
 is_passive = true
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]

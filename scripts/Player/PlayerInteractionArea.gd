@@ -3,7 +3,7 @@ extends Area
 func _ready():
     set_process(true)
 
-func _process(delta):
+func _process(_delta):
     var has_done_fallthrough_object_collision = false
     var shortest_dist = 999 # zero escape saga
     var nearest_area = null

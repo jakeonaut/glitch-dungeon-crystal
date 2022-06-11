@@ -14,7 +14,8 @@ func isActive():
            parent.isActive()
 
 func InteractActivate():
-    parent.has_method("activate") and parent.activate()
+    if parent.has_method("activate"):
+        parent.activate()
 
 func PassiveInteractActivate(delta):
     if parent.has_method("passiveActivate"):
@@ -26,7 +27,7 @@ func playerActivationAreaPassiveActivate():
         parent.playerActivationAreaPassiveActivate()
     touchingPlayer = true
 
-func _process(delta):
+func _process(_delta):
     if not touchingPlayer and wasTouchingPlayer:
         if parent.has_method("justStopPassiveActivate"):
             parent.justStopPassiveActivate()

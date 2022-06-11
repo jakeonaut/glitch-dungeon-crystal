@@ -12,7 +12,7 @@ func InteractActivate():
     if get_parent().has_method("activate"):
         get_parent().activate()
 
-func _process(delta):
+func _process(_delta):
     var areas = get_overlapping_areas()
     is_touching_water = false
     for area in areas:

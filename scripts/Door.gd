@@ -165,7 +165,7 @@ func activate():
 				lockedSound.play()
 				npc.activate()
 
-func passiveActivate(delta):
+func passiveActivate(_delta):
 	if is_passive:
 		goThroughDoor()
 	else:

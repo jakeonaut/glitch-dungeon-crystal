@@ -135,7 +135,7 @@ func _process(delta):
 	else:
 		powerupRect.visible = false
 
-	if global.num_mini_crystal_cubes > 0:
+	if global.num_mini_crystal_cubes > 0 and global.activeInteractor == null:
 		miniCrystalCubeRect.visible = true
 		miniCrystalCube.global_transform.origin = getGameCamera().project_position(Vector2(520, 464), 90)
 		miniCrystalCubeTextLabel.text = str(global.num_mini_crystal_cubes)

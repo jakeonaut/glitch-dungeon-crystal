@@ -28,7 +28,7 @@ func split_vertices():
         for v in vertices:
             tmp.append( v )
         vertices = []
-        for i in range( 0, len( tmp ) / 2 ):
+        for i in range( 0, len( tmp ) / 2.0 ):
             var a = tmp[i*2]
             var b = tmp[i*2 + 1]
             var mid = b - a
@@ -88,5 +88,5 @@ func cube_create():
 func _ready():
     cube_create()
 
-func _process(delta):
+func _process(_delta):
     processed_once = true

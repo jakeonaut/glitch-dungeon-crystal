@@ -1,9 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
 [ext_resource path="res://assets/npcs/tadpoleportrait.png" type="Texture" id=3]
-[ext_resource path="res://appleKidDialogFontTheme.tres" type="Theme" id=4]
+[ext_resource path="res://assets/fonts/VGATypewriter.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=5]
 [ext_resource path="res://scripts/AbortSound.gd" type="Script" id=6]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=7]
@@ -15,6 +15,7 @@
 [ext_resource path="res://shaders/Sprite2D.shader" type="Shader" id=13]
 [ext_resource path="res://assets/palettes2D/grey_palette.png" type="Texture" id=14]
 [ext_resource path="res://assets/npcs/r0llerportrait.png" type="Texture" id=15]
+[ext_resource path="res://assets/fonts/BittyBullet.ttf" type="DynamicFontData" id=16]
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.010929, 1 )
@@ -23,11 +24,31 @@ colors = PoolColorArray( 0.0156863, 0.0156863, 0.0156863, 1, 0.0156863, 0.015686
 [sub_resource type="GradientTexture" id=6]
 gradient = SubResource( 5 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = -6
+extra_spacing_space = 2
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
+
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 13 )
 shader_param/palette_size = 16
 shader_param/base_palette = ExtResource( 11 )
 shader_param/target_palette = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 3
+extra_spacing_space = 2
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
@@ -48,29 +69,60 @@ expand = true
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="TextBox"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 563.0
-margin_bottom = 132.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 565.0
+margin_bottom = 134.0
 color = Color( 0.792157, 0.854902, 0.988235, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="TextBox/ColorRect"]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 551.0
-margin_bottom = 119.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 555.0
+margin_bottom = 125.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="NameBox" type="TextureRect" parent="TextBox/ColorRect"]
+margin_left = 3.0
+margin_top = -36.0
+margin_right = 155.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ColorRect" type="ColorRect" parent="TextBox/ColorRect/NameBox"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 146.0
+margin_bottom = 38.0
+color = Color( 0.792157, 0.854902, 0.988235, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="TextBox/ColorRect/NameBox/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 136.0
+margin_bottom = 31.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="NameText" type="RichTextLabel" parent="TextBox"]
+margin_left = 20.0
+margin_top = -26.0
+margin_right = 148.0
+margin_bottom = 6.0
+rect_clip_content = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource( 8 )
+custom_colors/default_color = Color( 0.792157, 0.854902, 0.988235, 1 )
+bbcode_enabled = true
+bbcode_text = "Erdrick"
+tab_size = 2
+text = "Erdrick"
+scroll_active = false
 
 [node name="Portrait" type="Sprite" parent="TextBox" groups=["sprite"]]
 material = SubResource( 4 )
-position = Vector2( 72.9973, 69.3905 )
-scale = Vector2( 3.1958, 3.08572 )
+position = Vector2( 71, 69.391 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 script = ExtResource( 12 )
 max_frames = 1
@@ -97,10 +149,11 @@ margin_left = 136.0
 margin_top = 14.0
 margin_right = 558.0
 margin_bottom = 136.0
+rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 4 )
+theme = SubResource( 10 )
 custom_colors/default_color = Color( 0.792157, 0.854902, 0.988235, 1 )
 bbcode_enabled = true
 bbcode_text = "•yo what up
@@ -111,9 +164,6 @@ text = "•yo what up
 hey mu dude
 ???????? so why???"
 scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NextPrompt" type="Sprite" parent="TextBox"]
 material = SubResource( 3 )

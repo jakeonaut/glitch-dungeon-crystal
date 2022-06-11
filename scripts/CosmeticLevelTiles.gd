@@ -98,7 +98,7 @@ func properlySetTiles():
     for i in range(len(tile_cell_indices)):
         var cell_index = tile_cell_indices[i]
         var tile_name = tile_name_dict[cell_index]
-        var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
+        var _tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name))
         
 func normalGlitch(palette):
@@ -127,7 +127,7 @@ func changeColorPalette(palette):
     for i in range(len(item_list)):
         var item_id = item_list[i]
         var mesh = mesh_library.get_item_mesh(item_id)
-        var tile_name = mesh_library.get_item_name(item_id)
+        var _tile_name = mesh_library.get_item_name(item_id)
         var material = mesh.get_material()
         if material is ShaderMaterial:
             material.set_shader_param("base_palette", palette)
