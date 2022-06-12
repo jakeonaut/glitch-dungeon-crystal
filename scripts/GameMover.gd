@@ -796,6 +796,7 @@ func doWalkAnimation():
 			aniPlayer.stop()
 		var aa = aniPlayer.assigned_animation
 		if aa == "stand" or aa == "turnAround" or aa == "walkStop" or aa == "walkBump":
+			print("walkStart")
 			aniPlayer.queue("walkStart")
 			addJumpSmokeCloud()
 		aniPlayer.queue("walk")
@@ -810,6 +811,10 @@ func handleCollisionsAndMove(local_lv, delta):
 	var DNUM = 1.15
 	local_lv.x *= delta*DNUM
 	local_lv.y *= delta*DNUM
+
+	if should_collide_horizontally:
+		local_lv = handleHorizontalCollisions(local_lv)
+	global_transform.origin.x += local_lv.x
 	
 	was_on_ground = on_ground
 	if glitch_form == global.GlitchForm.LADDER and was_on_ground:
@@ -818,10 +823,6 @@ func handleCollisionsAndMove(local_lv, delta):
 		on_ground = false
 	truly_on_ground = false
 	half_on_ground = false
-
-	if should_collide_horizontally:
-		local_lv = handleHorizontalCollisions(local_lv)
-	global_transform.origin.x += local_lv.x
 	if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
 		local_lv = handleVerticalCollisions(local_lv)
 	elif should_do_fallthrough_area_collision:
@@ -981,6 +982,7 @@ func collideWithWall(local_lv):
 	if abs(local_lv.x) < 0.16 and not (just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
 		bump_ani_speed = 0.75
 
+	var ladder_glitch = glitch_form == global.GlitchForm.LADDER
 	if aniPlayer and should_play_bump:
 		var aa = aniPlayer.assigned_animation
 		if not was_on_ground and not is_touching_water:
@@ -995,7 +997,8 @@ func collideWithWall(local_lv):
 				aniPlayer.play("fallBump", -1, bump_ani_speed)
 				aniPlayer.queue("fall")
 		# TODO(jaketrower): Should probably have like an animationState FSM (along with physics state?)
-		elif was_on_ground and aa != "walkBump" and ("walk" in aa or "land" in aa):
+		elif ((was_on_ground and not ladder_glitch) or (truly_on_ground and ladder_glitch)) \
+			 and aa != "walkBump" and ("walk" in aa or "land" in aa):
 			aniPlayer.stop()
 			aniPlayer.clear_queue()
 			aniPlayer.play("walkBump", -1, bump_ani_speed)

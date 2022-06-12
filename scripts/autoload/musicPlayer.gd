@@ -7,6 +7,7 @@ export var transition_type = 1 # TRANS_SINE
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
+onready var dungeonThemePlayer2 = get_node("DungeonThemePlayer2")
 onready var debugThemePlayer = get_node("DebugThemePlayer")
 onready var casinoThemePlayer = get_node("CasinoThemePlayer")
 onready var realizationThemePlayer = get_node("RealizationThemePlayer")
@@ -74,6 +75,7 @@ func _on_TweenOut_tween_completed(object, _key):
 func stopAll():
 	fade_out(titleThemePlayer)
 	fade_out(dungeonThemePlayer)
+	fade_out(dungeonThemePlayer2)
 	fade_out(debugThemePlayer)
 	fade_out(casinoThemePlayer)
 	fade_out(realizationThemePlayer)
@@ -93,8 +95,10 @@ func conductFromScenePath(path):
 		tryToPlay(goddessThemePlayer)
 	elif path.find("IntroScene0") > 0:
 		tryToPlay(wakeupPlayer)
-	elif path.find("IntroDungeon") > 0 or path.find("000") > 0 or path.find("001") > 0:
+	elif path.find("IntroDungeon") > 0 or path.find("000") > 0:
 		tryToPlay(dungeonThemePlayer)
+	elif path.find("001") > 0:
+		tryToPlay(dungeonThemePlayer2)
 	elif path.find("Debug") > 0:
 		tryToPlay(debugThemePlayer)
 	elif path.find("Casino") > 0:
