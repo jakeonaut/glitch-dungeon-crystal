@@ -242,9 +242,6 @@ __meta__ = {
 margin_right = 77.0
 margin_bottom = 77.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect"]
 margin_left = 3.0
@@ -252,9 +249,6 @@ margin_top = 3.0
 margin_right = 74.0
 margin_bottom = 74.0
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect/ColorRect"]
 margin_left = 3.0
@@ -272,7 +266,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 hframes = 6
 vframes = 5
-frame = 2
+frame = 3
 
 [node name="ColorRect2" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 26.0
@@ -280,9 +274,6 @@ margin_top = 5.0
 margin_right = 60.0
 margin_bottom = 39.0
 color = Color( 0, 0.392157, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/ColorRect2"]
 margin_left = 2.0
@@ -308,21 +299,15 @@ margin_top = 76.0
 margin_right = 70.0
 margin_bottom = 96.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="EquipmentStatusRect"]
 margin_left = 4.0
 margin_top = -7.0
-margin_right = 73.0
+margin_right = 180.0
 margin_bottom = 136.0
 theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "Lv. 1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SavingTextLabel" type="RichTextLabel" parent="."]
 visible = false

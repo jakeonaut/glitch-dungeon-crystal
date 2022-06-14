@@ -17,6 +17,8 @@ func activateScript():
         NPC.pressing_move_left = false
         NPC.textBoxContainer.bbText = "•GODDESS is source of all life\n•but sHe has been broken up\n•into 100 pieces.\n•you just collected 3!!\npress DOWN to enter door"
         NPC.textBoxContainer.setVars()
+        NPC.textBox.is_important = true
+        NPC.textBox.is_really_important = true
         has_done_my_magick = true
     elif has_done_my_magick:
         NPC.visible = false

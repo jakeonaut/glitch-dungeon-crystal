@@ -1,10 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=3]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=8]
@@ -23,23 +20,10 @@ radius = 1.5
 [sub_resource type="BoxShape" id=8]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 5 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/palettesize = 16
-shader_param/enable_outline = true
-shader_param/enable_glitch = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/texture_albedo = ExtResource( 1 )
-shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 3 )
+[sub_resource type="SpatialMaterial" id=11]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "default"
@@ -106,8 +90,9 @@ grav = 0
 bbText = "\"SPELL BOOK PAGE\"
 get!!!
 wow, good job
-store \"GODDESS MEMORY\" from an obelisk
-and press [Z] to use it"
+press [SPACE] to switch
+between color
+memories"
 portrait = ExtResource( 11 )
 is_important = true
 can_activate = false
@@ -145,7 +130,7 @@ stream = null
 script = ExtResource( 13 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-material_override = SubResource( 7 )
+material_override = SubResource( 11 )
 pixel_size = 0.125
 shaded = true
 alpha_cut = 2

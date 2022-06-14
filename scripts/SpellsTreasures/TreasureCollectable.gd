@@ -63,7 +63,7 @@ func isActive():
 	return is_active
 
 # @override
-func passiveActivate(delta):
+func passiveActivate(_delta):
 	if not being_collected:
 		musicPlayer.stopAll()
 		collectSound.play()
