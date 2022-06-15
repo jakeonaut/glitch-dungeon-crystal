@@ -19,6 +19,8 @@ var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
 var glitch_death_timer = 0
+var can_cast_spell_timer = 0
+var can_cast_spell_time_limit = 10
 
 func _ready():
   grav = 60
@@ -128,6 +130,9 @@ func _process(delta):
   # doTimeDilation(real_delta)
   if global.memory.has("broom"):
     processBroomLogic(delta)
+
+  if can_cast_spell_timer < can_cast_spell_time_limit:
+    can_cast_spell_timer += (delta*22)
     
   # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
   #     if not global.pauseGame:
@@ -137,7 +142,7 @@ func _process(delta):
   #         if pauseMenu: pauseMenu.hide()
   #         global.pauseGame = false
 
-  if Input.is_action_just_pressed("action_button"):
+  if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
     applySpellbookGlitch()
   if Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()

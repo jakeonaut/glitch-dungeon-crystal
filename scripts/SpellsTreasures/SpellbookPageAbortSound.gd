@@ -21,10 +21,7 @@ func activateScript():
   if level.has_node("NPC5"):
     level.get_node("NPC5").textBox.text_final = "use [SPACE] to switch between\nyour last two colors!"
     level.get_node("NPC5").textBox.has_been_shown = false
-
-  if level.has_node("TutorialNPC"):
-    global.activeInteractor = null
-    level.get_node("TutorialNPC").activate()
+    level.get_node("NPC5").textBox.tinify()
   
   #if level.has_node("NPC"):
   #    level.get_node("NPC").textBox.text_final = "wow you got it......i bet all\nkinds of new paths will open up\nfor you now in swamp home......\ni could never cast spells\nlike you can... i'm just\na lowly frog wizard."

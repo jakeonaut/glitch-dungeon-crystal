@@ -29,3 +29,6 @@ func passiveActivate(_delta):
     if getPlayer().glitch_form != global.GlitchForm.NORMAL:
         transformSound.play()
         getPlayer().applyGlitch(global.GlitchForm.NORMAL, true)
+        getPlayer().can_cast_spell_timer = 0
+        if global.memory.has("spellbookPage"):
+            global.memory["spellbookPage"].pop_back()

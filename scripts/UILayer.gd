@@ -149,12 +149,11 @@ func _process(delta):
     tryLerpFromCenter(equipStatusRect, delta, Vector2(7, 76))
     if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
       get_node("EquipmentStatusRect/RichTextLabel").text = "press SPACE"
-    else:
-      get_node("EquipmentStatusRect/RichTextLabel").text = "lv. 1"
 
   if global.memory.has("spellbookPage"):
     var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-    if global.memory["spellbookPage"].size() <= 1:
+    if global.memory["spellbookPage"].size() <= 1 and (
+       global.memory["spellbookPage"].size() != 1 or getPlayer().glitch_form != global.GlitchForm.NORMAL):
       equipSlotSprite.frame = 6
     else:
       var glitch = global.memory["spellbookPage"][0]

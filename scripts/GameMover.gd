@@ -247,6 +247,8 @@ func processPhysics(delta):
 
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
+    if prev_glitch_form == global.GlitchForm.FLOOR and glitch_form != global.GlitchForm.FLOOR:
+      was_just_on_ground_timer = -4
   was_touching_water = is_touching_water
 
   if was_just_on_ground_timer <= was_just_on_ground_time_limit:
