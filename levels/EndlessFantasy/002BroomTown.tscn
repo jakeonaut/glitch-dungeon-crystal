@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -12,6 +12,17 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=13]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=14]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=15]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/house_flipped.png" type="Texture" id=17]
+[ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/tall_house0000.png" type="Texture" id=20]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=23]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -23,6 +34,64 @@ extents = Vector3( 2, 1.3, 1.3 )
 [sub_resource type="BoxShape" id=18]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 15 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_outline = true
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 19 )
+shader_param/base_palette = ExtResource( 16 )
+shader_param/target_palette = ExtResource( 13 )
+
+[sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 3.24, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 15 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_outline = true
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 20 )
+shader_param/base_palette = ExtResource( 16 )
+shader_param/target_palette = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 15 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/palettesize = 16
+shader_param/enable_outline = true
+shader_param/enable_glitch = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 17 )
+shader_param/base_palette = ExtResource( 16 )
+shader_param/target_palette = ExtResource( 13 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -37,6 +106,7 @@ audio_listener_enable_3d = true
 script = ExtResource( 4 )
 starting_glitch_type = 2
 tileset_type = 2
+has_spellbook_page = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
@@ -60,7 +130,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 6, 1, 196611, 7, 1, 196611, 65540, 1, 196611, 65541, 1, 196611, 65542, 1, 196611, 65543, 1, 196611, 65544, 1, 196611, 131075, 1, 196611, 131076, 1, 196611, 131077, 1, 196611, 131078, 1, 196611, 131079, 1, 196611, 131080, 1, 196611, 131081, 1, 196611, -131062, 1, 196611, -131061, 1, 196611, -131060, 1, 196611, -131059, 1, 196611, -131058, 1, 196611, -131057, 1, 196611, -131056, 1, 196611, -131055, 1, 196611, -131054, 1, 196611, -131051, 1, 196611, -131050, 1, 196611, -131049, 1, 196611, -131048, 1, 196611, -131047, 1, 196611, -131046, 1, 196611, -131045, 1, 196611, -65532, 1, 196611, -65531, 1, 196611, -65530, 1, 196611, -65529, 1, 196611, -65528, 1, 196611, -65527, 1, 196611 )
 }
 script = ExtResource( 6 )
 __meta__ = {
@@ -92,7 +162,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65536, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131071, 0, 1, 131072, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196607, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655373, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786436, 0, 1, 786437, 0, 1, 786438, 0, 1, 786439, 0, 1, 786440, 0, 1, 786441, 0, 1, 786442, 0, 1, 786443, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 1, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 1, 851974, 0, 1, 851975, 0, 1, 851976, 0, 1, 851977, 0, 1, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 851981, 0, 1, 851982, 0, 1, 851983, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917503, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 1, 917509, 0, 1, 917510, 0, 1, 917511, 0, 1, 917512, 0, 1, 917513, 0, 1, 917514, 0, 1, 917515, 0, 1, 917516, 0, 1, 917517, 0, 1, 917518, 0, 1, 917519, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983035, 0, 1, 983036, 0, 1, 983037, 0, 1, 983038, 0, 1, 983039, 0, 1, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 1, 983049, 0, 1, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048575, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1 )
+"cells": PoolIntArray( 6, 0, 2, 7, 0, 2, 31, 0, 1, 32, 0, 1, 33, 0, 1, 65526, 0, 1, 65527, 0, 1, 65540, 0, 2, 65541, 0, 2, 65542, 0, 2, 65543, 0, 2, 65544, 0, 2, 65567, 0, 1, 65568, 0, 1, 65569, 0, 1, 131062, 0, 1, 131063, 0, 1, 131075, 0, 2, 131076, 0, 2, 131077, 0, 2, 131078, 0, 2, 131079, 0, 2, 131080, 0, 2, 131081, 0, 2, 131103, 0, 1, 131104, 0, 1, 131105, 0, 1, 196598, 0, 1, 196599, 0, 1, 196639, 0, 1, 196640, 0, 1, 196641, 0, 1, 262134, 0, 1, 262135, 0, 1, 262175, 0, 1, 262176, 0, 1, 262177, 0, 1, 327670, 0, 1, 327671, 0, 1, 327711, 0, 1, 327712, 0, 1, 327713, 0, 1, 393206, 0, 1, 393207, 0, 1, 393247, 0, 1, 393248, 0, 1, 393249, 0, 1, 458742, 0, 1, 458743, 0, 1, 458783, 0, 1, 458784, 0, 1, 458785, 0, 1, 524278, 0, 1, 524279, 0, 1, 524319, 0, 1, 524320, 0, 1, 524321, 0, 1, 589814, 0, 1, 589815, 0, 1, 589855, 0, 1, 589856, 0, 1, 589857, 0, 1, 655350, 0, 1, 655351, 0, 1, 655391, 0, 1, 655393, 0, 1, 720886, 0, 1, 720887, 0, 1, 720927, 0, 1, 720928, 0, 1, 720929, 0, 1, 786422, 0, 1, 786423, 0, 1, 851958, 0, 1, 851959, 0, 1, 917494, 0, 1, 917495, 0, 1, 983030, 0, 1, 983031, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1245208, 0, 1, 1245209, 0, 1, 1245210, 0, 1, 1310744, 0, 1, 1310746, 0, 1, 1376280, 0, 1, 1376281, 0, 1, 1376282, 0, 1, 1900575, 0, 1, 1900576, 0, 1, 1900577, 0, 1, 1966111, 0, 1, 1966113, 0, 1, 2031647, 0, 1, 2031648, 0, 1, 2031649, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196577, 0, 1, -196576, 0, 1, -196575, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131062, 0, 2, -131061, 0, 2, -131060, 0, 2, -131059, 0, 2, -131058, 0, 2, -131057, 0, 2, -131056, 0, 2, -131055, 0, 2, -131054, 0, 2, -131051, 0, 2, -131050, 0, 2, -131049, 0, 2, -131048, 0, 2, -131047, 0, 2, -131046, 0, 2, -131045, 0, 2, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65532, 0, 2, -65531, 0, 2, -65530, 0, 2, -65529, 0, 2, -65528, 0, 2, -65527, 0, 2, -65505, 0, 1, -65504, 0, 1, -65503, 0, 1, -10, 0, 1, -9, 0, 1 )
 }
 script = ExtResource( 2 )
 __meta__ = {
@@ -121,8 +191,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/MainMenu.tscn"
-is_passive = true
+path = "res://levels/EndlessFantasy/001YourFirstPuzzle.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -136,6 +205,190 @@ shape = SubResource( 16 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 18 )
+
+[node name="Houses" type="Spatial" parent="Viewport/level"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6.36, -2 )
+material_override = SubResource( 19 )
+pixel_size = 0.12
+texture = ExtResource( 19 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D2" groups=["fallthrough"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D2/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 8.36, -3 )
+material_override = SubResource( 19 )
+pixel_size = 0.12
+texture = ExtResource( 19 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D5" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D5/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D9" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13.36, -6 )
+material_override = SubResource( 21 )
+pixel_size = 0.12
+texture = ExtResource( 20 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D9" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94049, 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D9/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406319, 3.08217, 2 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D6" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 2.36, -2.43208 )
+material_override = SubResource( 19 )
+flip_h = true
+pixel_size = 0.12
+texture = ExtResource( 19 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D6" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D6/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.36, -1.56476 )
+material_override = SubResource( 19 )
+pixel_size = 0.12
+texture = ExtResource( 19 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D3" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.73423 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D3/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.36, -1.56476 )
+material_override = SubResource( 22 )
+flip_h = true
+pixel_size = 0.12
+texture = ExtResource( 17 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D4" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.73423 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D4/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D10" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 29.36, -4.56476 )
+material_override = SubResource( 22 )
+flip_h = true
+pixel_size = 0.12
+texture = ExtResource( 17 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D10" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.26577 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D10/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="Sprite3D7" type="Sprite3D" parent="Viewport/level/Houses" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10.1655, -3.56476 )
+material_override = SubResource( 22 )
+flip_h = true
+pixel_size = 0.12
+texture = ExtResource( 17 )
+script = ExtResource( 14 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Houses/Sprite3D7" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.26577 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Houses/Sprite3D7/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
+shape = SubResource( 20 )
+
+[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -4 )
+
+[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3, -4 )
+
+[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3, -4 )
+
+[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, -4 )
+
+[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -3, -4 )
+
+[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -3, -4 )
+
+[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -3, -4 )
+
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 15.9649, 0 )
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40134, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 20, 0 )
+grav = 0
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 23, 0 )
+grav = 0
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 7, 0 )
+grav = 0
+
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0 )
+grav = 0
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

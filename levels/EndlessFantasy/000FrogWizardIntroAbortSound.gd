@@ -15,6 +15,8 @@ func activateScript():
         floorSpell.passiveActivate(1.0)
         yield(get_tree().create_timer(3.0), "timeout")
         NPC.pressing_move_left = false
+        NPC.aniPlayer.stop()
+        NPC.aniPlayer.clear_queue()
         NPC.textBoxContainer.bbText = "•GODDESS is source of all life\n•but sHe has been broken up\n•into 100 pieces.\n•you just collected 3!!\npress DOWN to enter door"
         NPC.textBoxContainer.setVars()
         NPC.textBox.is_important = true

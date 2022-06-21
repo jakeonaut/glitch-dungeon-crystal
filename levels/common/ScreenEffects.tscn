@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=1]
-[ext_resource path="res://shaders/CRTEffect.gdshader" type="Shader" id=2]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
 [ext_resource path="res://shaders/CRTEffect2.shader" type="Shader" id=3]
+[ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
+shader_param/palettesize = 16
 shader_param/color_depth = 5
-shader_param/dithering = true
-shader_param/resolution_scale = 4
-shader_param/r_mult = 0.0
-shader_param/g_mult = 1.0
-shader_param/b_mult = -1.0
+shader_param/resolution_scale = 1
+shader_param/ratio_multiplier = 1.0
+shader_param/target_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
@@ -59,6 +59,12 @@ margin_bottom = 512.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ShaderEffectRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 3 )
+margin_right = 640.0
+margin_bottom = 512.0
 
 [node name="GlitchEffectRect" type="ColorRect" parent="."]
 visible = false

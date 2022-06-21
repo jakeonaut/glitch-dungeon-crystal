@@ -1,5 +1,4 @@
 shader_type canvas_item;
-uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
 uniform int palettesize = 16;
 
@@ -20,24 +19,18 @@ const int bayer[] = {
 const float bayerSize = 8.0;
 const float bayerDivider = bayerSize * bayerSize;
 
-const int matrix[] = {
-    1, 9, 3, 11,
-    13, 5, 15, 7,
-    4, 12, 2, 10,
-    16, 8, 14, 6
-};
 const float matrixSize = 4.0;
 
 int getclosestpaletteidx(ivec3 color) {
-    float closest_distance = 999.0;
-    int closest_x = 0;
+    float closest_distance = 9990.0;
+    int closest_x = -1;
     for (int x=0; x<palettesize; x++) {
         ivec2 coord = ivec2(x,0);
         vec3 pixelcolor = texelFetch(target_palette, coord, 0).rgb;
         ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
-        float the_distance = distance(vec3(color), vec3(ipixelcolor));
-        if (the_distance < closest_distance) {
-            closest_distance = the_distance;
+        float dist = distance(vec3(color), vec3(ipixelcolor));
+        if (dist < closest_distance) {
+            closest_distance = dist;
             closest_x = x;
         }
     }
@@ -62,24 +55,41 @@ float Convert_sRGB_ToLinear (float thesRGBValue) {
        : pow ((thesRGBValue + 0.055) / 1.055, 2.4);
 }
 
+const float canvas_width = 640.0;
+const float canvas_height = 512.0;
+const float tile_size = 32.0;
 void fragment() {
-    vec3 incolor = texture(TEXTURE, UV).rgb;
-    vec2 uv = UV * vec2(640.0, 512.0) / vec2(float(resolution_scale));
-        
-    // int x = int(floor(mod(uv.x, bayerSize)));
-    // int y = int(floor(mod(uv.y, bayerSize)));
-    //float ratio = ratio_multiplier * float(bayer[y * int(bayerSize) + x]);
-    int x = int(floor(mod(uv.x, matrixSize)));
-    int y = int(floor(mod(uv.y, matrixSize)));
-    float ratio = ratio_multiplier * float(matrix[y * int(matrixSize) + x]);
-    
+    int m[] = {
+        1, 9, 3, 11,
+        13, 5, 15, 7,
+        4, 12, 2, 10,
+        16, 8, 14, 6
+    };
+
+    float x = UV.x;
+    float y = UV.y;
+
     // Convert from [0.0, 1.0] range to [0, 255] range
-    ivec3 c = ivec3(round(incolor * 255.0));
-    ivec3 c_ratio = c + ivec3(int(ratio));
-    int closest_palette_idx = getclosestpaletteidx(c_ratio);
+    ivec3 pixel_color = ivec3(round(texture(SCREEN_TEXTURE, SCREEN_UV).rgb * 255.0));
+    int tile_x = int(floor(x / tile_size));
+    int tile_y = int(floor(y / tile_size));
+
+    vec3 incolor = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+    vec2 uv = SCREEN_UV * vec2(640.0, 512.0) / vec2(float(resolution_scale));
+
+    ////////////////////////////////////////////////
+    // TODO(jaketrower): Select sub-palette is more work...
+    ////////////////////////////////////////////////
+
+    int m_x = int(mod(x, matrixSize));
+    int m_y = int(mod(y, matrixSize));
+    int ratio = 3 * m[m_x + (m_y*int(matrixSize))];
+    int r = pixel_color.r + ratio;
+    int g = pixel_color.g + ratio;
+    int b = pixel_color.b + ratio;
     // Note: don't have to convert back to [0.0, 1.0] range because
     // getpalettecolor does by using the [0.0, 1.0] indexed value of the palette
-    vec3 closest_color = getpalettecolor(closest_palette_idx);
+    vec3 closest_color = getpalettecolor(getclosestpaletteidx(ivec3(r, g, b)));
     
     // ivec3 i_closest_color = ivec3(round(closest_color * 255.0));
     // // Truncate from 8 bits to color_depth bits
@@ -88,12 +98,8 @@ void fragment() {
     // vec3 final_color = vec3(i_closest_color) / float(1 << color_depth);
     
     COLOR.rgb = vec3(
-        Convert_sRGB_FromLinear(closest_color.r),
-        Convert_sRGB_FromLinear(closest_color.g),
-        Convert_sRGB_FromLinear(closest_color.b));
-    // Truncate from 8 bits to color_depth bits
-    // c_ratio >>= (8 - color_depth);
-    // Convert back to [0.0, 1.0] range
-    // vec3 final_color = vec3(c_ratio) / float(1 << color_depth);
-    // COLOR.rgb = final_color;
+        Convert_sRGB_FromLinear(float(closest_color.r)),
+        Convert_sRGB_FromLinear(float(closest_color.g)),
+        Convert_sRGB_FromLinear(float(closest_color.b)));
+    COLOR.rgb = vec3(float(closest_color.r), float(closest_color.g), float(closest_color.b));
 }
