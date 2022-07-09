@@ -24,7 +24,7 @@ var focus_me = false
 
 var is_important = false
 var is_really_important = false
-var tiny = false
+var is_tiny = false
 
 onready var tinyColorRect = get_node("TinyColorRect")
 var top_margin_start = 0
@@ -63,17 +63,17 @@ func _ready():
   bot_margin_start = self.margin_bottom
   
 func tinify():
-  self.texture = null
-  get_node("Portrait").visible = false
-  get_node("ColorRect").visible = false
-  tiny = true
-  hide_textbox_time_limit = 5
-  # get_node("Text").theme.default_font.set_size(32)
-  textNode.set_theme(tinyTextTheme)
-  var large_font = textNode.theme.default_font.duplicate()
-  large_font.resource_local_to_scene = true
-  large_font.set_size(20)
-  textNode.add_font_override("normal_font", large_font)
+  # self.texture = null
+  # get_node("Portrait").visible = false
+  # get_node("ColorRect").visible = false
+  is_tiny = true
+  # hide_textbox_time_limit = 5
+  # # get_node("Text").theme.default_font.set_size(32)
+  # textNode.set_theme(tinyTextTheme)
+  # var large_font = textNode.theme.default_font.duplicate()
+  # large_font.resource_local_to_scene = true
+  # large_font.set_size(20)
+  # textNode.add_font_override("normal_font", large_font)
 
 func setPosition():
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
@@ -94,8 +94,8 @@ func _process(delta):
   elif nextPrompt.visible:
     wigglePrompt(delta, nextPrompt)
 
-  if tiny:
-    setPosition()
+  # if is_tiny:
+  #   setPosition()
 
   # TODO(jaketrower): This logic could probably be simplified with a FSM, or at least broken into functions
   if visible:
@@ -111,7 +111,7 @@ func _process(delta):
       get_node("../..").setGlobalMemoryOfHasSpoken()
       if not endPrompt.visible and abortSound.has_method("preActivateScript"):
         abortSound.preActivateScript()
-      endPrompt.visible = not tiny
+      # endPrompt.visible = not is_tiny
       has_been_shown = true
       if is_important:
         global.pauseGame = false
@@ -127,13 +127,13 @@ func _process(delta):
     if text_timer >= time_limit and text_next_index < len(text_final):
       appendNextTextCharacter()
         
-  if not tiny:
-    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-      self.margin_top = 60
-      self.margin_bottom = 201
-    else:
-      self.margin_top = top_margin_start
-      self.margin_bottom = bot_margin_start
+  #if not is_tiny:
+  if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+    self.margin_top = 60
+    self.margin_bottom = 201
+  else:
+    self.margin_top = top_margin_start
+    self.margin_bottom = bot_margin_start
       
 func appendNextTextCharacter():
   if not get_node("../..").textbox_dont_touch_my_sprite:
@@ -142,8 +142,8 @@ func appendNextTextCharacter():
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
   textNode.bbcode_text += text_final[text_next_index]
   
-  if tiny:
-    adjustTinyColorRect()
+  # if is_tiny:
+  #   adjustTinyColorRect()
 
   if not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
     resetPrompts()
@@ -234,7 +234,7 @@ func interact():
 
 func passiveInteract(_delta):
   if !visible and dialogSound.isActive() and (global.activeInteractor == null or global.activeInteractor == self):
-    if (tiny or is_really_important) and not has_been_shown:
+    if (is_tiny or is_really_important) and not has_been_shown:
       global.activeInteractor = self
       showTextbox()
     else:

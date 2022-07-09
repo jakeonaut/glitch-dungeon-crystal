@@ -5,13 +5,10 @@ extends CanvasLayer
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
-export(String) var nameTextStr =""
 
 onready var textBox = get_node("TextBox")
 onready var textBoxtext = get_node("TextBox/Text")
 onready var textBoxportrait = get_node("TextBox/Portrait")
-onready var nameTextBox = get_node("TextBox/ColorRect/NameBox")
-onready var nameTexttext = get_node("TextBox/NameText")
 
 var type = "textBoxContainer"
 
@@ -24,11 +21,6 @@ func setVars():
 		textBox.text_final = bbText
 	if portrait:
 		textBoxportrait.texture = portrait
-	if nameTextStr != "":
-		nameTexttext.bbcode_text = nameTextStr
-	else:
-		nameTextBox.visible = false
-		nameTexttext.visible = false
 
 	if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():
 		var nextTextBoxPathStr = "../"
