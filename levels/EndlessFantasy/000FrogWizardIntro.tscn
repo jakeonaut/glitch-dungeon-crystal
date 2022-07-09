@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -19,11 +19,20 @@
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=19]
+[ext_resource path="res://levels/EndlessFantasy/000NPC3AbortSound.gd" type="Script" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/EndlessFantasy/000FrogWizardIntroAbortSound.gd" type="Script" id=23]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=25]
+
+[sub_resource type="BoxShape" id=23]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=24]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=19]
 resource_local_to_scene = true
@@ -150,14 +159,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
 visible = false
 grav = 0
-bbText = "hi so much!"
+bbText = "•hi so much!
+... um... •press UP or
+X to jump I think"
 tiny_textbox = true
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 15, 0 )
 grav = 0
-bbText = "press down to talk↓thank u!!!"
+bbText = "•press down to talk↓•thank u!!!"
 tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
+shape = SubResource( 23 )
+
+[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 20 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
+shape = SubResource( 24 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 23, 0 )
@@ -275,6 +295,8 @@ flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 7 )]
 
+[editable path="Viewport/level/NPC3"]
+[editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="ScreenEffects"]

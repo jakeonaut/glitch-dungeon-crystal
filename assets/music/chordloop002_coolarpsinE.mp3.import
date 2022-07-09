@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chordloop002_coolarpsinE.mp3-7839957e91c875afe0f015396a429f3b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/chordloop002_coolarpsinE.mp3"
+dest_files=[ "res://.import/chordloop002_coolarpsinE.mp3-7839957e91c875afe0f015396a429f3b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
