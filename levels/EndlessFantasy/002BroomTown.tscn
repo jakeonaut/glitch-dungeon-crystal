@@ -386,6 +386,14 @@ grav = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 7, 0 )
 grav = 0
 
+[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 18, 0 )
+grav = 0
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 15, 0 )
+grav = 0
+
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0 )
 grav = 0
