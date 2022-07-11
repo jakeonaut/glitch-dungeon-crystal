@@ -11,5 +11,5 @@ dest_files=[ "res://.import/wakeup.mp3-cb401aa2027f21b3ee1eaaa5ece7946b.mp3str" 
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
