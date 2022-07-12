@@ -36,6 +36,8 @@ func performSpawn():
   has_been_hit = true
   for child in self.get_foreign_children():
     child.visible = true
+    if child.has_method("passiveActivate"):
+        child.passiveActivate(33)
   
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   for _i in range(num_clouds):

@@ -29,7 +29,8 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-    if currentlyPlayingTheme == wakeupPlayer and not wakeupPlayer.is_playing():
+    if currentlyPlayingTheme == wakeupPlayer and (not wakeupPlayer.is_playing() or global.memory.has("roomPath")):
+        fade_out(wakeupPlayer)
         tryToPlay(exploreThemePlayer)
         
 func tryToPlay(stream_player):
@@ -73,6 +74,7 @@ func _on_TweenOut_tween_completed(object, _key):
     object.pitch_scale = 1.0
 
 func stopAll():
+    fade_out(wakeupPlayer)
     fade_out(titleThemePlayer)
     fade_out(dungeonThemePlayer)
     fade_out(dungeonThemePlayer2)
@@ -91,7 +93,7 @@ func stopAll():
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0:
+    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0 or path.find("002") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("IntroScene0") > 0 or path.find("000") > 0:
         tryToPlay(wakeupPlayer)
