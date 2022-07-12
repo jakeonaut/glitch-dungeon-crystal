@@ -1,44 +1,32 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
-[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
-[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=3]
-[ext_resource path="res://scripts/levelScript.gd" type="Script" id=4]
-[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=5]
-[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=6]
-[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=7]
-[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=9]
-[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=13]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=14]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=15]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/house_flipped.png" type="Texture" id=17]
-[ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=18]
-[ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/tall_house0000.png" type="Texture" id=20]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=4]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=10]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=12]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=13]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=14]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/sprites/tall_house0000.png" type="Texture" id=16]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=17]
+[ext_resource path="res://assets/sprites/house_flipped.png" type="Texture" id=18]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=21]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=22]
-[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=25]
-
-[sub_resource type="BoxShape" id=17]
-resource_local_to_scene = true
-
-[sub_resource type="BoxShape" id=16]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=18]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=19]
-shader = ExtResource( 15 )
+shader = ExtResource( 5 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
 shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
@@ -51,16 +39,16 @@ shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/texture_albedo = ExtResource( 19 )
-shader_param/base_palette = ExtResource( 16 )
-shader_param/target_palette = ExtResource( 13 )
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="BoxShape" id=20]
 resource_local_to_scene = true
 extents = Vector3( 3.24, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 15 )
+shader = ExtResource( 5 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
 shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
@@ -73,12 +61,12 @@ shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/texture_albedo = ExtResource( 20 )
-shader_param/base_palette = ExtResource( 16 )
-shader_param/target_palette = ExtResource( 13 )
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=22]
-shader = ExtResource( 15 )
+shader = ExtResource( 5 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
 shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
@@ -91,9 +79,9 @@ shader_param/enable_outline = true
 shader_param/enable_glitch = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 16 )
-shader_param/target_palette = ExtResource( 13 )
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
@@ -113,14 +101,14 @@ size = Vector2( 640, 512 )
 audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]
-script = ExtResource( 4 )
+script = ExtResource( 13 )
 starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
 
-[node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 6 )]
 
-[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 10 )]
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 3 )]
 
 [node name="BackgroundControl" type="Control" parent="Viewport/level"]
 margin_right = 40.0
@@ -131,18 +119,18 @@ margin_right = 1728.0
 margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 12 )]
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 11 )]
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 3 )
+mesh_library = ExtResource( 9 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
 "cells": PoolIntArray( 6, 1, 196611, 7, 1, 196611, 65540, 1, 196611, 65541, 1, 196611, 65542, 1, 196611, 65543, 1, 196611, 65544, 1, 196611, 131075, 1, 196611, 131076, 1, 196611, 131077, 1, 196611, 131078, 1, 196611, 131079, 1, 196611, 131080, 1, 196611, 131081, 1, 196611, -131062, 1, 196611, -131061, 1, 196611, -131060, 1, 196611, -131059, 1, 196611, -131058, 1, 196611, -131057, 1, 196611, -131056, 1, 196611, -131055, 1, 196611, -131054, 1, 196611, -131051, 1, 196611, -131050, 1, 196611, -131049, 1, 196611, -131048, 1, 196611, -131047, 1, 196611, -131046, 1, 196611, -131045, 1, 196611, -65532, 1, 196611, -65531, 1, 196611, -65530, 1, 196611, -65529, 1, 196611, -65528, 1, 196611, -65527, 1, 196611 )
 }
-script = ExtResource( 6 )
+script = ExtResource( 17 )
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 7, 1 )
@@ -151,7 +139,7 @@ tileset_type = 1
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
-mesh_library = ExtResource( 1 )
+mesh_library = ExtResource( 10 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
@@ -160,21 +148,21 @@ collision_mask = 0
 data = {
 "cells": PoolIntArray(  )
 }
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 __meta__ = {
 "_editor_clip_": 0
 }
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 3 )
+mesh_library = ExtResource( 9 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
 "cells": PoolIntArray( 6, 0, 2, 7, 0, 2, 31, 0, 1, 32, 0, 1, 33, 0, 1, 65526, 0, 1, 65527, 0, 1, 65540, 0, 2, 65541, 0, 2, 65542, 0, 2, 65543, 0, 2, 65544, 0, 2, 65567, 0, 1, 65568, 0, 1, 65569, 0, 1, 131062, 0, 1, 131063, 0, 1, 131075, 0, 2, 131076, 0, 2, 131077, 0, 2, 131078, 0, 2, 131079, 0, 2, 131080, 0, 2, 131081, 0, 2, 131103, 0, 1, 131104, 0, 1, 131105, 0, 1, 196598, 0, 1, 196599, 0, 1, 196639, 0, 1, 196640, 0, 1, 196641, 0, 1, 262134, 0, 1, 262135, 0, 1, 262175, 0, 1, 262176, 0, 1, 262177, 0, 1, 327670, 0, 1, 327671, 0, 1, 327711, 0, 1, 327712, 0, 1, 327713, 0, 1, 393206, 0, 1, 393207, 0, 1, 393247, 0, 1, 393248, 0, 1, 393249, 0, 1, 458742, 0, 1, 458743, 0, 1, 458783, 0, 1, 458784, 0, 1, 458785, 0, 1, 524278, 0, 1, 524279, 0, 1, 524319, 0, 1, 524320, 0, 1, 524321, 0, 1, 589814, 0, 1, 589815, 0, 1, 589855, 0, 1, 589856, 0, 1, 589857, 0, 1, 655350, 0, 1, 655351, 0, 1, 655391, 0, 1, 655393, 0, 1, 720886, 0, 1, 720887, 0, 1, 720927, 0, 1, 720928, 0, 1, 720929, 0, 1, 786422, 0, 1, 786423, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 851958, 0, 1, 851959, 0, 1, 851996, 0, 1, 851998, 0, 1, 917494, 0, 1, 917495, 0, 1, 917532, 0, 1, 917533, 0, 1, 917534, 0, 1, 983030, 0, 1, 983031, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1114139, 0, 1, 1114141, 0, 1, 1179675, 0, 1, 1179676, 0, 1, 1179677, 0, 1, 1179679, 0, 1, 1179680, 0, 1, 1179681, 0, 1, 1179682, 0, 1, 1179683, 0, 1, 1179684, 0, 1, 1179685, 0, 1, 1179686, 0, 1, 1179687, 0, 1, 1179688, 0, 1, 1179689, 0, 1, 1179690, 0, 1, 1179691, 0, 1, 1179692, 0, 1, 1179693, 0, 1, 1179694, 0, 1, 1179695, 0, 1, 1179696, 0, 1, 1179697, 0, 1, 1245208, 0, 1, 1245209, 0, 1, 1245210, 0, 1, 1245211, 0, 28, 1245212, 0, 28, 1245213, 0, 28, 1245215, 0, 1, 1245217, 0, 1, 1245218, 0, 1, 1245219, 0, 1, 1245220, 0, 1, 1245221, 0, 1, 1245222, 0, 1, 1245223, 0, 1, 1245224, 0, 1, 1245225, 0, 1, 1245226, 0, 1, 1245227, 0, 1, 1245228, 0, 1, 1245229, 0, 1, 1245230, 0, 1, 1245231, 0, 1, 1245232, 0, 1, 1245233, 0, 1, 1310744, 0, 1, 1310746, 0, 1, 1310747, 0, 28, 1310748, 0, 28, 1310749, 0, 28, 1310751, 0, 1, 1310753, 0, 1, 1310754, 0, 1, 1310755, 0, 1, 1310756, 0, 1, 1310757, 0, 1, 1310758, 0, 1, 1310759, 0, 1, 1310760, 0, 1, 1310761, 0, 1, 1310762, 0, 1, 1310763, 0, 1, 1310764, 0, 1, 1310765, 0, 1, 1310766, 0, 1, 1310767, 0, 1, 1310768, 0, 1, 1310769, 0, 1, 1376280, 0, 1, 1376281, 0, 1, 1376282, 0, 1, 1376283, 0, 28, 1376284, 0, 28, 1376285, 0, 28, 1376287, 0, 1, 1376288, 0, 1, 1376289, 0, 1, 1376290, 0, 1, 1376291, 0, 1, 1376292, 0, 1, 1376293, 0, 1, 1376294, 0, 1, 1376295, 0, 1, 1376296, 0, 1, 1376297, 0, 1, 1376298, 0, 1, 1376299, 0, 1, 1376300, 0, 1, 1376301, 0, 1, 1376302, 0, 1, 1376303, 0, 1, 1376304, 0, 1, 1376305, 0, 1, 1507356, 0, 28, 1507357, 0, 28, 1507358, 0, 28, 1507359, 0, 28, 1572892, 0, 28, 1572893, 0, 28, 1572894, 0, 28, 1572895, 0, 28, 1638428, 0, 28, 1638429, 0, 28, 1638430, 0, 28, 1638431, 0, 28, 1900575, 0, 1, 1900576, 0, 1, 1900577, 0, 1, 1966111, 0, 1, 1966113, 0, 1, 2031647, 0, 1, 2031648, 0, 1, 2031649, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196577, 0, 1, -196576, 0, 1, -196575, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131062, 0, 2, -131061, 0, 2, -131060, 0, 2, -131059, 0, 2, -131058, 0, 2, -131057, 0, 2, -131056, 0, 2, -131055, 0, 2, -131054, 0, 2, -131051, 0, 2, -131050, 0, 2, -131049, 0, 2, -131048, 0, 2, -131047, 0, 2, -131046, 0, 2, -131045, 0, 2, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65532, 0, 2, -65531, 0, 2, -65530, 0, 2, -65529, 0, 2, -65528, 0, 2, -65527, 0, 2, -65505, 0, 1, -65504, 0, 1, -65503, 0, 1, -10, 0, 1, -9, 0, 1 )
 }
-script = ExtResource( 2 )
+script = ExtResource( 12 )
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, -1, 0 )
@@ -182,7 +170,7 @@ __meta__ = {
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
-mesh_library = ExtResource( 1 )
+mesh_library = ExtResource( 10 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
@@ -191,30 +179,13 @@ collision_mask = 0
 data = {
 "cells": PoolIntArray(  )
 }
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="Player" parent="Viewport/level" instance=ExtResource( 11 )]
+[node name="Player" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
-
-[node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/EndlessFantasy/001YourFirstPuzzle.tscn"
-
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
-shape = SubResource( 17 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 16 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 18 )
 
 [node name="Houses" type="Spatial" parent="Viewport/level"]
 
@@ -222,8 +193,8 @@ shape = SubResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6.36, -2 )
 material_override = SubResource( 19 )
 pixel_size = 0.12
-texture = ExtResource( 19 )
-script = ExtResource( 14 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -238,8 +209,8 @@ shape = SubResource( 20 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 8.36, -3 )
 material_override = SubResource( 19 )
 pixel_size = 0.12
-texture = ExtResource( 19 )
-script = ExtResource( 14 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -255,8 +226,8 @@ shape = SubResource( 20 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13.36, -6 )
 material_override = SubResource( 21 )
 pixel_size = 0.12
-texture = ExtResource( 20 )
-script = ExtResource( 14 )
+texture = ExtResource( 16 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -273,8 +244,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 2.36, -2.43208 )
 material_override = SubResource( 19 )
 flip_h = true
 pixel_size = 0.12
-texture = ExtResource( 19 )
-script = ExtResource( 14 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -290,8 +261,8 @@ shape = SubResource( 20 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.36, -1.56476 )
 material_override = SubResource( 19 )
 pixel_size = 0.12
-texture = ExtResource( 19 )
-script = ExtResource( 14 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -308,8 +279,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.36, -1.56476 )
 material_override = SubResource( 22 )
 flip_h = true
 pixel_size = 0.12
-texture = ExtResource( 17 )
-script = ExtResource( 14 )
+texture = ExtResource( 18 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -326,8 +297,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 29.36, -4.56476 )
 material_override = SubResource( 22 )
 flip_h = true
 pixel_size = 0.12
-texture = ExtResource( 17 )
-script = ExtResource( 14 )
+texture = ExtResource( 18 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -344,8 +315,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10.1655, -3.56476 )
 material_override = SubResource( 22 )
 flip_h = true
 pixel_size = 0.12
-texture = ExtResource( 17 )
-script = ExtResource( 14 )
+texture = ExtResource( 18 )
+script = ExtResource( 1 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
@@ -357,46 +328,46 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.26577 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
 shape = SubResource( 20 )
 
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -4 )
 
-[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3, -4 )
 
-[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3, -4 )
 
-[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, -4 )
 
-[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -3, -4 )
 
-[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -3, -4 )
 
-[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 18 )]
+[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -3, -4 )
 
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 21.0971, 0 )
 
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 22 )]
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40134, 0 )
 
-[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 23 )]
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 7, 0 )
 grav = 0
 
-[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 23 )]
+[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 18, 0 )
 grav = 0
 
-[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 23 )]
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 15, 0 )
 grav = 0
 
-[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 23 )]
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0 )
 grav = 0
 
@@ -412,7 +383,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 6.62171, 0 )
 [node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 16.6217, 0 )
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 25 )]
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14.5628, 0 )
 grav = 0
 bbText = "oh me? no i'm not 
@@ -438,10 +409,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScreenEffects" parent="." instance=ExtResource( 8 )]
+[node name="ScreenEffects" parent="." instance=ExtResource( 23 )]
 
-[editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC"]
-[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]

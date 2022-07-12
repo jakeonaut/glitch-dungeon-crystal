@@ -1,4 +1,4 @@
-extends "Sprite.gd"
+extends "../Sprite.gd"
 
 onready var parent = get_parent()
 

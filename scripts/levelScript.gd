@@ -16,6 +16,7 @@ export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BE
 export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
+export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 export var has_broom = false
 var has_ever_set_camera_position = false
 
@@ -40,6 +41,8 @@ func _ready_impl():
   if has_spellbook_page and not global.memory.has("spellbookPage"):
     print("gimme a spellbook page!!")
     global.memory["spellbookPage"] = []
+    for spellbook_spell in spellbook_spells:
+      global.memory["spellbookPage"].push_back(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
     
   if has_broom and not global.memory.has("broom"):
@@ -50,9 +53,6 @@ func _ready_impl():
     player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
-    
-  if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 0:
-    player.applyObeliskGlitch(global.memory["spellbookPage"][0], true)
 
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])

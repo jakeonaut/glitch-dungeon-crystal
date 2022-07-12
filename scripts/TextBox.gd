@@ -203,6 +203,7 @@ func showTextbox():
     
 func hideTextbox():
   self.hide()
+  get_node("../..").setGlobalMemoryOfHasSpoken()
   if isWaitingForEndPrompt():
     abortSound.play()
     abortSound.activateScript()
