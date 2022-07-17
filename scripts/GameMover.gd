@@ -381,6 +381,10 @@ func processInputs(delta):
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
     vv = 6
+    if aniPlayer.assigned_animation == "stand":
+      aniPlayer.stop()
+      aniPlayer.queue("walkBump")
+      aniPlayer.queue("walk")
     should_do_fallthrough_area_collision = false
     ladderUpdateTargetLastGroundedY()
 
