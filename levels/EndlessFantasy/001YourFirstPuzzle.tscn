@@ -1207,7 +1207,7 @@ anims/flutterAway = SubResource( 45 )
 anims/metamorphosis = SubResource( 46 )
 
 [node name="GlitchSlime3" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99, 0, 0 )
 walk_direction = -1
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchSlime3" index="1"]
@@ -1263,10 +1263,9 @@ shape = SubResource( 19 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102, 12, 0 )
 grav = 0
-bbText = "each color holds
-a special ability..
-a fragment of HER
-great power"
+bbText = "each color holds a special
+ability.. fragments of 
+HER great power"
 portrait = ExtResource( 24 )
 tiny_textbox = true
 

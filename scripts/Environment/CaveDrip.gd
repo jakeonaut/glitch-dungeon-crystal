@@ -19,5 +19,5 @@ func alignMySprite():
     if mySprite:
         mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
         
-func addJumpSmokeCloud(flip_flip_h = false):
+func addJumpSmokeCloud(_flip_flip_h = false):
     pass
