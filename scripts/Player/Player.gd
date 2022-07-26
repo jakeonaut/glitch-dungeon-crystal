@@ -77,23 +77,34 @@ func changeSpriteColorPalette(palette):
     material.set_shader_param("target_palette", palette)
     mySprite.material_override = material
 
+func changeDitherRect(palette, paletteSize):
+  var ditherRect = get_tree().get_root().get_node("Game/DitherRect")
+  if ditherRect != null:
+    var material = ditherRect.material
+    material.set_shader_param("target_palette", palette)
+    material.set_shader_param("palettesize", paletteSize)
+    ditherRect.material = material
+
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
   changeSpriteColorPalette(getLevelTiles().grey_palette)
   # mySprite.setNormalClothes()
+  changeDitherRect(global.tidepool_palette, 16)
 
 func floorGlitch():
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(getLevelTiles().red_palette)
   # mySprite.setBugCatcherCostume()
+  changeDitherRect(global.dream_palette, 8)
 
 func featherGlitch():
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
-  changeSpriteColorPalette(getLevelTiles().green_palette)
+  changeSpriteColorPalette(global.green_dungeon_palette)
   # mySprite.setMothCostume()
+  changeDitherRect(global.foggy_forest_palette, 8)
 
 func ladderGlitch():
   glitch_form = global.GlitchForm.LADDER
@@ -238,6 +249,7 @@ func processGlitchHurtRecovery(delta):
         var my_material = mySprite.get_material_override()
         if my_material is ShaderMaterial:
           my_material.set_shader_param("enable_glitch", false)
+          my_material.set_shader_param("enable_remove_skin_tone", false)
         self.physics_state = PhysicsState.NORMAL
 
     return true
@@ -249,6 +261,7 @@ func applyGlitchDeathEffects(x):
     var my_material = mySprite.get_material_override()
     if my_material is ShaderMaterial:
       my_material.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
+      my_material.set_shader_param("enable_remove_skin_tone", self.physics_state == PhysicsState.GLITCH_RECOVERY)
 
   var material = level.glitchScreenEffect.get_material()
   if material is ShaderMaterial:
@@ -295,6 +308,7 @@ func tryDieToEnemy(should_glitch, should_kill_invis):
     var my_material = mySprite.get_material_override()
     if my_material is ShaderMaterial:
       my_material.set_shader_param("enable_glitch", true)
+      my_material.set_shader_param("enable_remove_skin_tone", true)
     
     if global.canChangeSongPitch:
       musicPlayer.changeSongPitch(rand_range(0.8, 1.5))

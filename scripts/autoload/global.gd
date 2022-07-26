@@ -32,6 +32,9 @@ var red_tidepool_palette = preload("res://assets/palettes/red_tidepool_palette.p
 var yellow_tidepool_palette = preload("res://assets/palettes/yellow_tidepool_palette.png")
 var black_tidepool_palette = preload("res://assets/palettes/black_tidepool_palette.png")
 
+var foggy_forest_palette = preload("res://assets/palettes/foggyforest.png")
+var dream_palette = preload("res://assets/palettes/dream-haze-8-1x.png")
+
 onready var doorSound = get_node("DoorSound")
 
 # GlitchForm variables
