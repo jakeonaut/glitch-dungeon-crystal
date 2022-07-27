@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/bubble.png" type="Texture" id=7]
 [ext_resource path="res://scripts/BubbleSpell.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/tone2.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=10]
 
 [sub_resource type="CylinderShape" id=16]
@@ -119,11 +120,11 @@ anims/bubble = SubResource( 13 )
 anims/bubbleGrow = SubResource( 14 )
 
 [node name="AppearSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 9 )
 unit_db = -12.804
 unit_size = 30.0
 max_db = -24.0
-pitch_scale = 1.58
+pitch_scale = 3.93
 max_distance = 15.0
 
 [node name="PopSound" type="AudioStreamPlayer3D" parent="."]
@@ -138,6 +139,6 @@ max_distance = 30.0
 stream = ExtResource( 10 )
 unit_db = 2.46
 unit_size = 6.8
-max_db = -19.444
-pitch_scale = 1.05
+max_db = -22.333
+pitch_scale = 0.52
 max_distance = 30.0

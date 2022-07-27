@@ -11,6 +11,7 @@ var opacity = 0.5
 var target_opacity = 1.0
 var didja_get_me = false
 var y_speed = 2
+export var pop_from_distance = true
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -71,8 +72,10 @@ func _process(delta):
         target_opacity = 1.0
 
     tryDieToOffscreenCamera()
-    bulletTryDieToSolids()
-    if global_transform.origin.y > getPlayer().global_transform.origin.y and \
+    if pop_from_distance:
+      bulletTryDieToSolids()
+    if pop_from_distance and \
+       global_transform.origin.y > getPlayer().global_transform.origin.y and \
        global_transform.origin.distance_to(getPlayer().global_transform.origin) > 10:
       popSound1.max_db = -100
       popSound2.max_db = -100

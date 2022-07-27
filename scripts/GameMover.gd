@@ -303,7 +303,7 @@ func applyTerminalVelocity(delta):
   if is_touching_water:
     if not was_touching_water:
       terminal_vel = hit_water_terminal_vel
-    elif pressingJump() and feather_fall_timer < feather_fall_initial_time_limit:
+    elif pressingJump(): # and feather_fall_timer < feather_fall_initial_time_limit:
       terminal_vel = water_terminal_vel/2
     elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
       terminal_vel = water_fall_terminal
@@ -311,7 +311,7 @@ func applyTerminalVelocity(delta):
     else:
       terminal_vel = water_terminal_vel
   elif glitch_form == global.GlitchForm.FEATHER:
-    if pressingJump() and feather_fall_timer < feather_fall_initial_time_limit:
+    if pressingJump(): # and feather_fall_timer < feather_fall_initial_time_limit:
       terminal_vel = water_terminal_vel/2
     elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
       terminal_vel = true_terminal_feather_vel

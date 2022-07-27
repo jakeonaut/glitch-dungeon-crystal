@@ -8,6 +8,7 @@ export var spawn_time_limit = 5
 export var max_num_children = 10
 export var x_range = Vector2(-5, 5)
 export var y_range = Vector2(0, 0)
+export var is_active = true
 
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
@@ -24,7 +25,7 @@ func _process(delta):
 	am_i_in_range_of_player = am_i_really_in_range_of_player
 	am_i_really_in_range_of_player = false
 	
-	if not am_i_in_range_of_player:
+	if not am_i_in_range_of_player or not is_active:
 		return
 
 	var num_children = self.get_children().size() - 1 # to account for the PlayerInteractionArea

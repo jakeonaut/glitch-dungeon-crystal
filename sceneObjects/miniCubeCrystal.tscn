@@ -156,16 +156,16 @@ shape = SubResource( 5 )
 
 [node name="cubeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -45.0
+volume_db = -36.149
 pitch_scale = 1.5
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -15.0
+volume_db = -12.788
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -50.0
+volume_db = -40.411
 pitch_scale = 1.43
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

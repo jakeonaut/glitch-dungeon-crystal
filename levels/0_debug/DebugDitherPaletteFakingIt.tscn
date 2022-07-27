@@ -140,6 +140,9 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 13 )]
 
+[node name="RealCamera" parent="Viewport/level/GameCamera" index="0"]
+projection = 0
+
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 3 )
@@ -284,6 +287,7 @@ material = SubResource( 24 )
 margin_right = 640.0
 margin_bottom = 512.0
 
+[editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC"]

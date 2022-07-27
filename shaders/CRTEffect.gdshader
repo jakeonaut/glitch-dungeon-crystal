@@ -41,7 +41,7 @@ vec2 uv_curve(vec2 uv)
 void fragment()
 {   
     float PI = 3.14159;
-    
+        
     // // You can modify the *3.0, *-3.0 for a bigger or smaller 
     float r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult), 0.0).r;
     float g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult), 0.0).g;
