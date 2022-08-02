@@ -71,6 +71,20 @@ func _ready():
     textBox.has_been_shown = true
     if textBox.has_been_shown: 
       textBox.is_important = false
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  aniPlayer.queue("flickerOn")
+  
 
 func setGlobalMemoryOfHasSpoken():
   if not global.memory.has(level.getShortLevelName()):
