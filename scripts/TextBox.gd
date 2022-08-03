@@ -20,7 +20,9 @@ var hide_textbox_timer = 0
 var hide_textbox_time_limit = 10
 
 var has_been_shown = false
+var has_preactivated = false
 var focus_me = false
+var can_camera_zoom = true
 
 var is_important = false
 var is_really_important = false
@@ -109,8 +111,9 @@ func _process(delta):
       
     if isWaitingForEndPrompt():
       get_node("../..").setGlobalMemoryOfHasSpoken()
-      if not endPrompt.visible and abortSound.has_method("preActivateScript"):
+      if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
         abortSound.preActivateScript()
+        has_preactivated = true
       # endPrompt.visible = not is_tiny
       has_been_shown = true
       if is_important:
@@ -181,6 +184,7 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
       
 func showTextbox():
+  has_preactivated = false
   focus_me = true
   if is_important:
     global.pauseGame = true
@@ -202,6 +206,7 @@ func showTextbox():
   resetPrompts()
     
 func hideTextbox():
+  has_preactivated = false
   self.hide()
   get_node("../..").setGlobalMemoryOfHasSpoken()
   if isWaitingForEndPrompt():

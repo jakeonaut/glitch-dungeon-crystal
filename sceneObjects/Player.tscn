@@ -744,7 +744,7 @@ volume_db = -35.0
 
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
-volume_db = -29.0
+volume_db = -80.0
 pitch_scale = 0.8
 
 [node name="WormSound" type="AudioStreamPlayer" parent="Sounds"]

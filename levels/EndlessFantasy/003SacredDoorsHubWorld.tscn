@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -29,6 +29,16 @@
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=27]
 [ext_resource path="res://sceneObjects/MrMoTex.tscn" type="PackedScene" id=28]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=29]
+[ext_resource path="res://levels/EndlessFantasy/BugCollectorDialogAbortSound.gd" type="Script" id=30]
+[ext_resource path="res://levels/EndlessFantasy/BugCollectorDialogStartSound.gd" type="Script" id=31]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=32]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=34]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=35]
+[ext_resource path="res://levels/EndlessFantasy/AngelStatueDialogAbortSound.gd" type="Script" id=36]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=37]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=42]
+[ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=43]
 
 [sub_resource type="BoxShape" id=20]
 resource_local_to_scene = true
@@ -41,6 +51,14 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=46]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=47]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -49,10 +67,47 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=48]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=49]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=50]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/line_scale = 0.04
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = ExtResource( 27 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 20 )
+
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
+shader_param/opacity = 0.5
 shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
 shader_param/line_scale = 0.04
 shader_param/shake_power = 0.03
@@ -95,8 +150,8 @@ shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
-shader_param/enable_glitch = false
-shader_param/enable_palette_cycle = true
+shader_param/enable_glitch = true
+shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 2.0
 shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 4 )
@@ -207,14 +262,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=36]
 resource_name = "jump"
 length = 0.001
-
-[sub_resource type="BoxShape" id=37]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=38]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=39]
 shader = ExtResource( 3 )
@@ -365,13 +412,14 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( -1376202, 1, 196611, -1376201, 1, 196611, -1376200, 1, 196611, -1376199, 1, 196611, -1376198, 1, 196611, -1376197, 1, 196611, -1376196, 1, 196611, -1376195, 1, 196611, -1376193, 1, 196611, -1310665, 1, 196611, -1310664, 1, 196611, -1310663, 1, 196611, -1310662, 1, 196611, -1310661, 1, 196611, -1310660, 1, 196611, -1310658, 1, 196611, -1245131, 1, 196611, -1245130, 1, 196611, -1245129, 1, 196611, -1245128, 1, 196611, -1245127, 1, 196611, -1245126, 1, 196611, -1245125, 1, 196611, -1245124, 1, 196611, -1245123, 1, 196611, -1245122, 1, 196611, -1245121, 1, 196611, -1245119, 1, 196611, -1245118, 1, 196611, -1245117, 1, 196611, -1179583, 1, 196611, -1179581, 1, 196611, -1114047, 1, 196611, -1114046, 1, 196611, -1114045, 1, 196611 )
 }
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 7, 1 )
 }
+tileset_type = 1
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
@@ -396,7 +444,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 8, 0, 1, 9, 0, 1, 10, 0, 1, 65544, 0, 1, 65546, 0, 1, 131080, 0, 1, 131081, 0, 1, 131082, 0, 1, 262166, 0, 1, -2031607, 0, 1, -2031606, 0, 1, -2031605, 0, 1, -1966071, 0, 1, -1966069, 0, 1, -1966068, 0, 1, -1900535, 0, 1, -1900534, 0, 1, -1900533, 0, 1, -1900532, 0, 1, -1376256, 0, 1, -1376255, 0, 1, -1376254, 0, 1, -1376253, 0, 1, -1376252, 0, 1, -1376251, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1376245, 0, 1, -1376244, 0, 1, -1376243, 0, 1, -1376242, 0, 1, -1376241, 0, 1, -1376240, 0, 1, -1376239, 0, 1, -1376238, 0, 1, -1376237, 0, 1, -1376236, 0, 1, -1376235, 0, 1, -1376234, 0, 1, -1376233, 0, 1, -1310722, 0, 1, -1310721, 0, 1, -1310720, 0, 1, -1310719, 0, 1, -1310718, 0, 1, -1310717, 0, 1, -1310716, 0, 1, -1310715, 0, 1, -1310714, 0, 1, -1310713, 0, 1, -1310712, 0, 1, -1310711, 0, 1, -1310710, 0, 1, -1310709, 0, 1, -1310708, 0, 1, -1310707, 0, 1, -1310706, 0, 1, -1310705, 0, 1, -1310704, 0, 1, -1310703, 0, 1, -1310702, 0, 1, -1310701, 0, 1, -1310700, 0, 1, -1310699, 0, 1, -1310698, 0, 1, -1310697, 0, 1, -1310695, 0, 1, -1245191, 0, 1, -1245190, 0, 1, -1245186, 0, 1, -1245185, 0, 1, -1245178, 0, 1, -1245176, 0, 1, -1245171, 0, 1, -1245169, 0, 1, -1245162, 0, 1, -1245161, 0, 1, -1245112, 0, 1, -1245111, 0, 1, -1245110, 0, 1, -1179655, 0, 1, -1179654, 0, 1, -1179650, 0, 1, -1179649, 0, 1, -1179642, 0, 16, -1179641, 0, 21, -1179640, 0, 19, -1179635, 0, 16, -1179634, 0, 21, -1179633, 0, 20, -1179626, 0, 1, -1179625, 0, 1, -1179620, 0, 1, -1179576, 0, 1, -1179574, 0, 1, -1114114, 0, 1, -1114113, 0, 1, -1114112, 0, 1, -1114111, 0, 1, -1114092, 0, 1, -1114091, 0, 1, -1114090, 0, 1, -1114089, 0, 1, -1114040, 0, 1, -1114039, 0, 1, -1114038, 0, 1, -1048578, 0, 1, -1048577, 0, 1, -1048575, 0, 1, -1048568, 0, 2, -1048567, 0, 2, -1048566, 0, 2, -1048565, 0, 2, -1048564, 0, 2, -1048563, 0, 2, -1048557, 0, 1, -1048556, 0, 1, -1048554, 0, 1, -1048546, 0, 3, -1048545, 0, 3, -1048544, 0, 3, -1048543, 0, 3, -1048542, 0, 3, -983041, 0, 1, -983040, 0, 1, -983039, 0, 1, -983032, 0, 2, -983027, 0, 2, -983021, 0, 1, -983020, 0, 1, -983019, 0, 1, -983018, 0, 1, -983010, 0, 3, -983009, 0, 3, -983008, 0, 3, -983007, 0, 3, -983006, 0, 3, -917505, 0, 1, -917496, 0, 2, -917491, 0, 2, -917474, 0, 3, -917473, 0, 3, -917472, 0, 3, -917471, 0, 3, -851960, 0, 2, -851955, 0, 2, -786458, 0, 1, -786424, 0, 2, -786419, 0, 2, -720924, 0, 1, -720923, 0, 1, -720922, 0, 1, -720920, 0, 1, -720910, 0, 28, -720888, 0, 2, -720887, 0, 2, -720886, 0, 2, -720885, 0, 2, -720884, 0, 2, -720883, 0, 2, -655388, 0, 1, -655387, 0, 1, -655386, 0, 1, -655385, 0, 1, -655384, 0, 1, -655373, 0, 28, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -589852, 0, 1, -589851, 0, 1, -589850, 0, 1, -589849, 0, 1, -589848, 0, 1, -589840, 0, 1, -589839, 0, 1, -589838, 0, 1, -589820, 0, 1, -589818, 0, 1, -524304, 0, 1, -524302, 0, 1, -524284, 0, 1, -524283, 0, 1, -524282, 0, 1, -458768, 0, 1, -458767, 0, 1, -458766, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -327665, 0, 1, -327663, 0, 1, -327662, 0, 1, -262129, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1 )
+"cells": PoolIntArray( 8, 0, 1, 9, 0, 1, 10, 0, 1, 65544, 0, 1, 65546, 0, 1, 131080, 0, 1, 131081, 0, 1, 131082, 0, 1, 262166, 0, 1, 327727, 0, 1, 393259, 0, 1, 393260, 0, 1, 393261, 0, 1, 458795, 0, 1, 458797, 0, 1, 524331, 0, 1, 524332, 0, 1, 524333, 0, 1, 786401, 0, 1, -2031607, 0, 1, -2031606, 0, 1, -2031605, 0, 1, -1966071, 0, 1, -1966069, 0, 1, -1966068, 0, 1, -1900535, 0, 1, -1900534, 0, 1, -1900533, 0, 1, -1900532, 0, 1, -1572870, 0, 1, -1572833, 0, 1, -1507337, 0, 1, -1507336, 0, 1, -1507335, 0, 1, -1507334, 0, 1, -1507298, 0, 1, -1507296, 0, 1, -1441801, 0, 1, -1441800, 0, 1, -1441798, 0, 1, -1441762, 0, 1, -1441761, 0, 1, -1441760, 0, 1, -1376264, 0, 1, -1376263, 0, 1, -1376262, 0, 1, -1376256, 0, 1, -1376255, 0, 1, -1376254, 0, 1, -1376253, 0, 1, -1376252, 0, 1, -1376251, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1376245, 0, 1, -1376244, 0, 1, -1376243, 0, 1, -1376242, 0, 1, -1376241, 0, 1, -1376240, 0, 1, -1376239, 0, 1, -1376238, 0, 1, -1376237, 0, 1, -1376236, 0, 1, -1376235, 0, 1, -1376234, 0, 1, -1376233, 0, 1, -1376202, 0, 2, -1376201, 0, 2, -1376200, 0, 2, -1376199, 0, 2, -1376198, 0, 2, -1376197, 0, 2, -1376196, 0, 2, -1376195, 0, 2, -1376193, 0, 2, -1310722, 0, 1, -1310721, 0, 1, -1310720, 0, 1, -1310719, 0, 1, -1310718, 0, 1, -1310717, 0, 1, -1310716, 0, 1, -1310715, 0, 1, -1310714, 0, 1, -1310713, 0, 1, -1310712, 0, 1, -1310711, 0, 1, -1310710, 0, 1, -1310709, 0, 1, -1310708, 0, 1, -1310707, 0, 1, -1310706, 0, 1, -1310705, 0, 1, -1310704, 0, 1, -1310703, 0, 1, -1310702, 0, 1, -1310701, 0, 1, -1310700, 0, 1, -1310699, 0, 1, -1310698, 0, 1, -1310697, 0, 1, -1310695, 0, 1, -1310665, 0, 2, -1310664, 0, 2, -1310663, 0, 2, -1310662, 0, 2, -1310661, 0, 2, -1310660, 0, 2, -1310658, 0, 2, -1245191, 0, 1, -1245190, 0, 1, -1245186, 0, 1, -1245185, 0, 1, -1245178, 0, 1, -1245176, 0, 1, -1245171, 0, 1, -1245169, 0, 1, -1245162, 0, 1, -1245161, 0, 1, -1245131, 0, 2, -1245130, 0, 2, -1245129, 0, 2, -1245128, 0, 2, -1245127, 0, 2, -1245126, 0, 2, -1245125, 0, 2, -1245124, 0, 2, -1245123, 0, 2, -1245122, 0, 2, -1245121, 0, 2, -1245119, 0, 2, -1245118, 0, 2, -1245117, 0, 2, -1179655, 0, 1, -1179654, 0, 1, -1179650, 0, 1, -1179649, 0, 1, -1179642, 0, 16, -1179641, 0, 21, -1179640, 0, 19, -1179635, 0, 16, -1179634, 0, 21, -1179633, 0, 20, -1179626, 0, 1, -1179625, 0, 1, -1179620, 0, 1, -1179583, 0, 2, -1179581, 0, 2, -1114114, 0, 1, -1114113, 0, 1, -1114112, 0, 1, -1114111, 0, 1, -1114092, 0, 1, -1114091, 0, 1, -1114090, 0, 1, -1114089, 0, 1, -1114047, 0, 2, -1114046, 0, 2, -1114045, 0, 2, -1048578, 0, 1, -1048577, 0, 1, -1048575, 0, 1, -1048568, 0, 2, -1048567, 0, 2, -1048566, 0, 2, -1048565, 0, 2, -1048564, 0, 2, -1048563, 0, 2, -1048557, 0, 1, -1048556, 0, 1, -1048554, 0, 1, -1048546, 0, 3, -1048545, 0, 3, -1048544, 0, 3, -1048543, 0, 3, -1048542, 0, 3, -983041, 0, 1, -983040, 0, 1, -983039, 0, 1, -983032, 0, 2, -983027, 0, 2, -983021, 0, 1, -983020, 0, 1, -983019, 0, 1, -983018, 0, 1, -983010, 0, 3, -983009, 0, 3, -983008, 0, 3, -983007, 0, 3, -983006, 0, 3, -917505, 0, 1, -917496, 0, 2, -917491, 0, 2, -917474, 0, 3, -917473, 0, 3, -917472, 0, 3, -917471, 0, 3, -851960, 0, 2, -851955, 0, 2, -786458, 0, 1, -786424, 0, 2, -786419, 0, 2, -720924, 0, 1, -720923, 0, 1, -720922, 0, 1, -720920, 0, 1, -720910, 0, 28, -720888, 0, 2, -720887, 0, 2, -720886, 0, 2, -720885, 0, 2, -720884, 0, 2, -720883, 0, 2, -655388, 0, 1, -655387, 0, 1, -655386, 0, 1, -655385, 0, 1, -655384, 0, 1, -655373, 0, 28, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -589852, 0, 1, -589851, 0, 1, -589850, 0, 1, -589849, 0, 1, -589848, 0, 1, -589840, 0, 1, -589839, 0, 1, -589838, 0, 1, -589820, 0, 1, -589818, 0, 1, -524304, 0, 1, -524302, 0, 1, -524284, 0, 1, -524283, 0, 1, -524282, 0, 1, -458768, 0, 1, -458767, 0, 1, -458766, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -327665, 0, 1, -327663, 0, 1, -327662, 0, 1, -262129, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -414,37 +462,6 @@ collision_layer = 0
 collision_mask = 0
 data = {
 "cells": PoolIntArray( -1245173, 0, 36, -1048567, 0, 2, -1048545, 0, 0, -917504, 0, 36, -393200, 0, 2 )
-}
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_clip_": 0
-}
-
-[node name="LevelTiles2" type="GridMap" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 5 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
-script = ExtResource( 7 )
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, -1, 0 )
-}
-
-[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
-mesh_library = ExtResource( 8 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-collision_layer = 0
-collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
 }
 script = ExtResource( 9 )
 __meta__ = {
@@ -480,11 +497,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0486, -13.871, 0 )
 
 [node name="NPC" parent="Viewport/level/AngelStatue" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-bbText = "* Statue ANGEL of the          GODDESS. 
-* Please offer your             prayers.
-* Deposit cubes?"
-is_important = true
-is_really_important = true
+bbText = "* Statue ANGEL of the GODDESS. 
+* Please offer your prayers.
+         > Deposit cubes?"
+
+[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 46 )
+
+[node name="AbortSound" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 36 )
+
+[node name="FallthroughSolid" parent="Viewport/level/AngelStatue/NPC" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 47 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -7, 0 )
@@ -492,8 +519,6 @@ grav = 0
 bbText = "are you up for challenge?
 if so, enter my mind and
 claim elusive \"ANGEL FLUTE\"!!"
-is_important = true
-is_really_important = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -505,8 +530,46 @@ frame = 6
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 25 )
 
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 37 )
+
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
+script = ExtResource( 31 )
+
+[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 30 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+frame = 68
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 38 )
+
 [node name="AngelFlute" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10, 0 )
+
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.36839, -6, 0 )
+bbText = "you fool!!!
+yor'n't the first to
+seek this cursed power!!"
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
+shape = SubResource( 48 )
+
+[node name="DialogStartSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 37 )
+volume_db = -12.634
+
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
+frame = 72
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
+shape = SubResource( 49 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -18, 0 )
@@ -518,10 +581,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -18, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -5, 0 )
 
 [node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -1, 0 )
+
+[node name="MrMoTex18" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, -1.50018, -15.5036, -1.19209e-06 )
+material_override = SubResource( 50 )
+frame = 1
 
 [node name="Snail" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -18.2876, 0 )
@@ -540,6 +608,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -9, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -14, 0 )
+is_locked = true
+should_lock = true
+num_cubes_unlock = 50
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 material_override = SubResource( 26 )
@@ -555,6 +626,9 @@ shape = SubResource( 29 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )
+is_locked = true
+should_lock = true
+num_cubes_unlock = 99
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 material_override = SubResource( 30 )
@@ -569,6 +643,9 @@ shape = SubResource( 27 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallerInteractionArea" index="0"]
+visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3/NPC" index="6"]
 anims/default = SubResource( 34 )
@@ -617,18 +694,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -22, -4 )
 [node name="WaterCube13" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -22, -4 )
 
-[node name="NPC2" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, 0 )
-grav = 0
+[node name="WaterCube14" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -22, -4 )
 
-[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 37 )
+[node name="WaterCube15" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -22, -4 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
-frame = 68
+[node name="WaterCube16" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -22, -4 )
 
-[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
-shape = SubResource( 38 )
+[node name="WaterCube17" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59, -22, -4 )
+
+[node name="WaterCube18" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -22, -4 )
+
+[node name="WaterCube19" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -22, -4 )
 
 [node name="Lilpad11" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 30.5, -7.5, -1 )
@@ -752,7 +834,7 @@ material_override = SubResource( 45 )
 frame = 768
 
 [node name="Lilpad13" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 38.5, -1.5, -1 )
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 32.5, -1.5, -1 )
 
 [node name="MrMoTex16" parent="Viewport/level/Lilpad13" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 13, -1 )
@@ -872,8 +954,250 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
 material_override = SubResource( 45 )
 frame = 768
 
+[node name="Lilpad16" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 40.5, -3.5, -1 )
+
+[node name="MrMoTex16" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 13, -1 )
+material_override = SubResource( 39 )
+texture = SubResource( 40 )
+frame = 318
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13, -1 )
+material_override = SubResource( 41 )
+frame = 637
+
+[node name="MrMoTex18" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 13, -1 )
+material_override = SubResource( 42 )
+frame = 637
+
+[node name="MrMoTex19" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 13, -1 )
+material_override = SubResource( 43 )
+frame = 319
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Lilpad16" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 6.5, 12.5, -2.26577 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Lilpad16/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.258684, 0 )
+shape = SubResource( 44 )
+
+[node name="MrMoTex54" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.0863, 14.7593, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex54" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex55" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 15.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex55" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex56" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 16.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex56" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex57" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 17.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex57" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex58" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 18.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex58" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex59" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 19.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex59" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex60" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 5.87529, 13.8832, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex60" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex61" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 7.13296, 13.7013, -1 )
+material_override = SubResource( 45 )
+frame = 705
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex61" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 705
+
+[node name="MrMoTex62" parent="Viewport/level/Lilpad16" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.5, 13.8686, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad16/MrMoTex62" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="Lilpad15" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 34.5, 1.5, -1 )
+
+[node name="MrMoTex16" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 13, -1 )
+material_override = SubResource( 39 )
+texture = SubResource( 40 )
+frame = 318
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13, -1 )
+material_override = SubResource( 41 )
+frame = 637
+
+[node name="MrMoTex18" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 13, -1 )
+material_override = SubResource( 42 )
+frame = 637
+
+[node name="MrMoTex19" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 13, -1 )
+material_override = SubResource( 43 )
+frame = 319
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Lilpad15" groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 6.5, 12.5, -2.26577 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Lilpad15/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.258684, 0 )
+shape = SubResource( 44 )
+
+[node name="MrMoTex54" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.0863, 14.7593, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex54" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex55" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 15.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex55" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex56" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 16.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex56" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex57" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 17.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex57" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex58" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 18.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex58" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex59" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.23344, 19.7055, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex59" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex60" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 5.87529, 13.8832, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex60" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex61" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 7.13296, 13.7013, -1 )
+material_override = SubResource( 45 )
+frame = 705
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex61" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 705
+
+[node name="MrMoTex62" parent="Viewport/level/Lilpad15" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 6.5, 13.8686, -1 )
+material_override = SubResource( 45 )
+frame = 768
+
+[node name="MrMoTex17" parent="Viewport/level/Lilpad15/MrMoTex62" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
+material_override = SubResource( 45 )
+frame = 768
+
 [node name="Lilpad14" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 32.5, 5.5, -1 )
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 38.5, 5.5, -1 )
 
 [node name="MrMoTex16" parent="Viewport/level/Lilpad14" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 13, -1 )
@@ -1095,6 +1419,7 @@ frame = 768
 
 [node name="Lilpad12" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 25.5, -9.5, -1 )
+visible = false
 
 [node name="MrMoTex16" parent="Viewport/level/Lilpad12" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 11, -1 )
@@ -1214,6 +1539,30 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124535, 0, 0 )
 material_override = SubResource( 45 )
 frame = 768
 
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -6.58533, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -6, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -16, 0 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -23, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -22, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -22, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -15, 0 )
+
+[node name="GlitchFish" parent="Viewport/level" instance=ExtResource( 43 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.3074, 0 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -1228,14 +1577,18 @@ __meta__ = {
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/AngelStatue/NPC"]
+[editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/NPC3"]
+[editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
-[editable path="Viewport/level/NPC2"]
-[editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="ScreenEffects"]

@@ -9,6 +9,7 @@ export var is_important = false # when dialogue is started, can't walk away unti
 export var is_really_important = false # touching it will start the dialogue
 export var can_activate = true
 export var can_move = true
+export var can_camera_zoom = true
 export var is_fast_text = false
 
 onready var textBoxContainer = get_node("NPC TextBox")
@@ -60,6 +61,7 @@ func _ready():
 
   textBox.is_important = is_important
   textBox.is_really_important = is_really_important
+  textBox.can_camera_zoom = can_camera_zoom
   if tiny_textbox:
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
@@ -71,20 +73,6 @@ func _ready():
     textBox.has_been_shown = true
     if textBox.has_been_shown: 
       textBox.is_important = false
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  aniPlayer.queue("flickerOn")
-  
 
 func setGlobalMemoryOfHasSpoken():
   if not global.memory.has(level.getShortLevelName()):

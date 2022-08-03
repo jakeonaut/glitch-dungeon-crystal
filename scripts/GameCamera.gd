@@ -99,7 +99,8 @@ func _process(delta):
     if actual_target == initial_target: how_fast_to_switch_targets = 0
 
   var zoomed_size = (initial_size-8)
-  if global.activeInteractor != null and initial_size > 12:
+  var npcTextBox = global.activeInteractor
+  if npcTextBox != null and npcTextBox.can_camera_zoom and initial_size > 12:
     actual_target = global.activeInteractor.get_node("../..")
     set_target(actual_target)
     # interpolation = A + (B - A) * t

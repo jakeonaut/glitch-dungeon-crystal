@@ -59,8 +59,9 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    npc.textBoxContainer.bbText = str(num_cubes_unlock) + " cube to unlock"
+    npc.textBoxContainer.bbText = str(num_cubes_unlock) + " crystal to unlock"
     npc.textBoxContainer.setVars()
+    npc.textBox.can_camera_zoom = false
   else:
     npc.visible = false 
     npc.can_activate = false

@@ -27,6 +27,11 @@ global="*res://sceneObjects/_autoload/global.tscn"
 transition="*res://sceneObjects/_autoload/transition.tscn"
 musicPlayer="*res://sceneObjects/_autoload/musicPlayer.tscn"
 
+[debug]
+
+settings/crash_handler/message="Whoops! Please include error message when reporting the bug to jakeonaut@gmail.com"
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=640

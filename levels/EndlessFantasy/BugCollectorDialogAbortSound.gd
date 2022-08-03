@@ -2,7 +2,6 @@ extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var npc = get_node("../../..")
-var miniCrystalCubeRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
     
 func _ready():
     pass
@@ -20,13 +19,8 @@ func preActivateScript():
         num_bugs += global.memory["cicadas"]*3
         global.memory["cicadas"] = 0
         
+    print("Give me bugs: " + str(num_bugs))
     level.player.giveMeMiniCrystalCubes(num_bugs)
-    # for _i in range(num_bugs):
-    #     var newCube = miniCrystalCubeRes.instance()
-    #     newCube.is_static_in_level = false
-    #     level.add_child(newCube)
-    #     newCube.global_transform.origin.x = npc.global_transform.origin.x + rand_range(-2, 2)
-    #     newCube.global_transform.origin.y = npc.global_transform.origin.y + rand_range(-2, 2)
             
 func activateScript():
     pass
