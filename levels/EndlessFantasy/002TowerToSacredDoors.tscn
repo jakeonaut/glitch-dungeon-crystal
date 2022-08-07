@@ -508,11 +508,9 @@ shape = SubResource( 20 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5139, 44, 0 )
 grav = 0
-bbText = "hold JUMP button when
-light as a feather.
-can make you float!
-....... who me? no, i'm
-just a non-magical frog."
+bbText = "when green, you're light 
+as a feather! hold the JUMP
+button to float"
 is_important = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
@@ -531,7 +529,7 @@ pitch_scale = 0.5
 pitch_scale = 0.45
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
-frame = 68
+frame = 14
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
 anims/default = SubResource( 21 )

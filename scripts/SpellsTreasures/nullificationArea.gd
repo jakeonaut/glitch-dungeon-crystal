@@ -31,4 +31,4 @@ func passiveActivate(_delta):
         getPlayer().applyGlitch(global.GlitchForm.NORMAL, true)
         getPlayer().can_cast_spell_timer = 0
         if global.memory.has("spellbookPage"):
-            global.memory["spellbookPage"].pop_back()
+            global.memory["spellbookPage"] = []

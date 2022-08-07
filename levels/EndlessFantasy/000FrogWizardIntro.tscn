@@ -263,7 +263,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -41.1, 30, 0 )
 stream = null
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 1, 0 )
 visible = false
 grav = 0
 bbText = "•hi so much!
