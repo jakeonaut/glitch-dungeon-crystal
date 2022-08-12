@@ -268,6 +268,7 @@ visible = false
 grav = 0
 bbText = "•hi so much!
 ... um... •press arrow keys to walk"
+can_camera_zoom = false
 tiny_textbox = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -276,12 +277,14 @@ visible = false
 grav = 0
 bbText = "•press UP or
 X to jump I think"
+can_camera_zoom = false
 tiny_textbox = true
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 15, 0 )
 grav = 0
 bbText = "•press down to talk↓•thank u!!!"
+can_camera_zoom = false
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]

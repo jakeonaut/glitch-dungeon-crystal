@@ -1276,7 +1276,6 @@ shape = SubResource( 29 )
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
 visible = false
-is_locked = true
 num_cubes_unlock = 50
 
 [node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]

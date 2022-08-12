@@ -144,7 +144,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive():
-  return true
+  return visible
 
 func generateId():
   return get_name()

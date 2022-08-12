@@ -212,6 +212,9 @@ func hideTextbox():
   if isWaitingForEndPrompt():
     abortSound.play()
     abortSound.activateScript()
+  else:
+    abortSound.play()
+    abortSound.cutOffEarlyActivateScript()
   if global.activeInteractor == self:
     global.activeInteractor = null
       
