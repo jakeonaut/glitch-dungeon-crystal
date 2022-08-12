@@ -23,6 +23,7 @@ uniform bool enable_no_transparency = false;
 uniform int palettesize = 16;
 uniform int resolution_scale = 1;
 uniform bool enable_glitch = false;
+uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
 
@@ -111,7 +112,7 @@ void fragment() {
     int r = pixel_color.r;
     int g = pixel_color.g;
     int b = pixel_color.b;
-    if (enable_dither || enable_glitch) {
+    if (enable_dither || (enable_glitch && !disable_glitch_dither)) {
       r = r + ratio;
       g = g + ratio;
       b = b + ratio;

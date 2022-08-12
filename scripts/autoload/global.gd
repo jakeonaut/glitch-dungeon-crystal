@@ -54,6 +54,7 @@ enum TilesetType {
     DESERT,
     GLITCH_WORLD,
     BEACH,
+    POISON_FOREST,
 }
 
 var hasLoadedGame = false

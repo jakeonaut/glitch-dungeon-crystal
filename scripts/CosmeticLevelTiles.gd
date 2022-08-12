@@ -23,7 +23,7 @@ func setTileNameNum(newName, num, cell_index):
 func setTileset(tileset_type, properly_set_tiles = true):
     if tileset_type == global.TilesetType.HOUSE:
         set_mesh_library(red_cosmetic_tiles)
-    elif tileset_type == global.TilesetType.FOREST:
+    elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.POISON_FOREST:
         set_mesh_library(green_cosmetic_tiles)
     elif tileset_type == global.TilesetType.DESERT:
         set_mesh_library(yellow_cosmetic_tiles)
