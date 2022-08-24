@@ -864,8 +864,6 @@ grav = 0
 bbText = "•warrior... please listen
 to my dying request...
 "
-is_important = true
-is_really_important = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )

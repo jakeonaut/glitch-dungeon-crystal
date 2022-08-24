@@ -102,6 +102,7 @@ func floorGlitch():
 func featherGlitch():
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
+  # TODO(jaketrower):
   changeSpriteColorPalette(global.green_dungeon_palette)
   # mySprite.setMothCostume()
   changeDitherRect(global.foggy_forest_palette, 8)
@@ -109,6 +110,7 @@ func featherGlitch():
 func ladderGlitch():
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
+  # TODO(jaketrower):
   changeSpriteColorPalette(getLevelTiles().yellow_palette)
   # mySprite.setLuckyCatCostume()
 

@@ -214,7 +214,8 @@ func hideTextbox():
     abortSound.activateScript()
   else:
     abortSound.play()
-    abortSound.cutOffEarlyActivateScript()
+    if abortSound.has_method("cutOffEarlyActivateScript"):
+      abortSound.cutOffEarlyActivateScript()
   if global.activeInteractor == self:
     global.activeInteractor = null
       

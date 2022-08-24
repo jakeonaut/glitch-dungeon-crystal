@@ -341,7 +341,7 @@ shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 4 )
 shader_param/target_palette = ExtResource( 13 )
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=64]
 resource_name = "doorClose"
 length = 0.4
 tracks/0/type = "value"
@@ -357,7 +357,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=65]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -372,7 +372,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=66]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -395,7 +395,7 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=67]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -423,7 +423,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=68]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -450,7 +450,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=69]
 resource_name = "jump"
 length = 0.001
 
@@ -564,7 +564,7 @@ tracks/1/keys = {
 resource_name = "jump"
 length = 0.001
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=31]
 resource_name = "doorClose"
 length = 0.4
 tracks/0/type = "value"
@@ -580,7 +580,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id=32]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -595,7 +595,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=66]
+[sub_resource type="Animation" id=33]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -611,7 +611,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=67]
+[sub_resource type="Animation" id=34]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -639,7 +639,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=68]
+[sub_resource type="Animation" id=35]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -666,7 +666,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id=36]
 resource_name = "jump"
 length = 0.001
 
@@ -908,7 +908,7 @@ shape = SubResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7486, -14.871, -0.3 )
 
 [node name="NPC" parent="Viewport/level/AngelStatue" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.5, -1 )
 visible = false
 bbText = "* Statue ANGEL of the GODDESS. 
 * Please offer your prayers.
@@ -1222,17 +1222,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -11, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -9, 0 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
 visible = false
-num_cubes_unlock = 99
+path = "res://levels/EndlessFantasy/004BroomTown.tscn"
+num_cubes_unlock = 50
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 material_override = SubResource( 30 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
-anims/doorClose = SubResource( 31 )
-anims/doorOpen = SubResource( 32 )
-anims/locked = SubResource( 33 )
+anims/doorClose = SubResource( 64 )
+anims/doorOpen = SubResource( 65 )
+anims/locked = SubResource( 66 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -1244,9 +1245,9 @@ shape = SubResource( 28 )
 visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3/NPC" index="6"]
-anims/default = SubResource( 34 )
-anims/flickerOn = SubResource( 35 )
-anims/jump = SubResource( 36 )
+anims/default = SubResource( 67 )
+anims/flickerOn = SubResource( 68 )
+anims/jump = SubResource( 69 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 29 )
@@ -1282,18 +1283,18 @@ anims/jump = SubResource( 63 )
 shape = SubResource( 29 )
 
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/DeathrootBogMushroomCrypt.tscn"
-num_cubes_unlock = 50
+num_cubes_unlock = 99
 
 [node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
 material_override = SubResource( 30 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
-anims/doorClose = SubResource( 64 )
-anims/doorOpen = SubResource( 65 )
-anims/locked = SubResource( 66 )
+anims/doorClose = SubResource( 31 )
+anims/doorOpen = SubResource( 32 )
+anims/locked = SubResource( 33 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -1305,9 +1306,9 @@ shape = SubResource( 28 )
 visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door5/NPC" index="6"]
-anims/default = SubResource( 67 )
-anims/flickerOn = SubResource( 68 )
-anims/jump = SubResource( 69 )
+anims/default = SubResource( 34 )
+anims/flickerOn = SubResource( 35 )
+anims/jump = SubResource( 36 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 29 )

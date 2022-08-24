@@ -71,12 +71,12 @@ func pressingMoveRight():
 func passiveActivate(_delta):
     if am_i_dying: return
         
-    var aniPlayer = get_node("HeartSprite/AnimationPlayer")
-    if level.player.glitch_form == global.GlitchForm.INVISIBLE and not aniPlayer.is_playing():
-        heartSound.play()
-        aniPlayer.stop()
-        aniPlayer.queue("heartWiggle")
-        aniPlayer.queue("noHeart")
+    # var aniPlayer = get_node("HeartSprite/AnimationPlayer")
+    # if level.player.glitch_form == global.GlitchForm.INVISIBLE and not aniPlayer.is_playing():
+    #     heartSound.play()
+    #     aniPlayer.stop()
+    #     aniPlayer.queue("heartWiggle")
+    #     aniPlayer.queue("noHeart")
 
 func processDeath():
     if not myOtherSprite.visible:

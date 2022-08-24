@@ -8,6 +8,7 @@ func _ready():
 
 func activateScript():
     NPCSmallInteractionArea.global_transform.origin = NPC.global_transform.origin
+    NPCSmallInteractionArea.get_node("CollisionShape").shape.set_extents(Vector3(2, 1.3, 1.3))
     
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
