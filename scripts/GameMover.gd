@@ -289,7 +289,8 @@ func applyGravity(delta):
           else:
             if aniPlayer.has_animation("fallStart"): aniPlayer.queue("fallStart")
             if aniPlayer.has_animation("fall"): aniPlayer.queue("fall")
-      if fall_timer > 20 and aniPlayer and aniPlayer.current_animation != "fallFar":
+      if fall_timer > 20 and aniPlayer and \
+         aniPlayer.current_animation != "fallFar" and aniPlayer.has_animation("fallFar"):
         aniPlayer.clear_queue()
         aniPlayer.stop()
         aniPlayer.play("fallFar")

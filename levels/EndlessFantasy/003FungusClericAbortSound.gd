@@ -6,8 +6,10 @@ onready var fungusNPC1 = get_node("../../../../FungusNPC1")
 onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
 onready var door3 = get_node("../../../../Door3")
-onready var door4 = get_node("../../../../Door4")
-onready var door5 = get_node("../../../../Door5")
+onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
+onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
+onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
+onready var broom = get_node("../../../../Broom")
 export var which_one_am_i = 1
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
@@ -29,10 +31,15 @@ func activateScript():
       summon(fungusNPC3)
     elif which_one_am_i == 3:
       summonDoor(door3)
-      yield(get_tree().create_timer(0.2), "timeout")
-      summonDoor(door4)
-      yield(get_tree().create_timer(0.2), "timeout")
-      summonDoor(door5)
+      yield(get_tree().create_timer(0.4), "timeout")
+      summonDoor(glitchEnemy2)
+      yield(get_tree().create_timer(0.1), "timeout")
+      summonDoor(glitchEnemy3)
+      yield(get_tree().create_timer(0.1), "timeout")
+      summonDoor(glitchEnemy4)
+      yield(get_tree().create_timer(0.3), "timeout")
+      summonDoor(broom)
+      broom.is_active = true
 
 func summon(npc):
   summonSmokeClouds(npc, 5, true, true)

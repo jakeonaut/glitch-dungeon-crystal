@@ -420,7 +420,7 @@ shape = SubResource( 18 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5337, 125, 0 )
-path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
+path = "res://levels/EndlessFantasy/002PathToSacredDoors/001PatienceVirtue.tscn"
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.55, 0 )
