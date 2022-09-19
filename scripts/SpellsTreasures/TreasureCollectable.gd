@@ -18,9 +18,6 @@ func _ready():
   
 func _process(delta):
   delta = delta * global.time_dilation_multiplier 
-
-  if not isActive():
-    return
   
   if gotcha:
     .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
@@ -28,16 +25,6 @@ func _process(delta):
     level.player.dir = Vector3(0, 0, 0)
     if level.player.on_ground:
       # TODO(jaketrower): kinda hacky...
-      if level.player.aniPlayer.assigned_animation != "getItem":
-        level.player.aniPlayer.play("getItem")
-        if aniPlayer:
-          aniPlayer.play("getItem")
-          aniPlayer = null # very weird but it's to stop the GameMover from trying to play other animations...?
-          textBox.focus_me = true
-          # if there is an existing textBox already... hide it... fail safe:
-          if global.activeInteractor != null:
-            global.activeInteractor.hideTextbox()
-          global.activeInteractor = textBox # also weird but this is to get the camera to look at me
       if level.player.aniPlayer.assigned_animation == "getItem":
         if level.player.aniPlayer.is_playing():
           self.global_transform.origin.x = level.player.global_transform.origin.x
@@ -52,6 +39,16 @@ func _process(delta):
           textBox.is_really_important = true
           textBox.is_important = true
           .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+      else:
+        level.player.aniPlayer.play("getItem")
+        if aniPlayer:
+          aniPlayer.play("getItem")
+          aniPlayer = null # very weird but it's to stop the GameMover from trying to play other animations...?
+          textBox.focus_me = true
+          # if there is an existing textBox already... hide it... fail safe:
+          if global.activeInteractor != null:
+            global.activeInteractor.hideTextbox()
+          global.activeInteractor = textBox # also weird but this is to get the camera to look at me
           
 # @override
 func alignMySprite():
