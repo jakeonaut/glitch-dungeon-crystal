@@ -77,27 +77,17 @@ func changeSpriteColorPalette(palette):
     material.set_shader_param("target_palette", palette)
     mySprite.material_override = material
 
-func changeDitherRect(palette, paletteSize):
-  var ditherRect = get_tree().get_root().get_node("Game/DitherRect")
-  if ditherRect != null:
-    var material = ditherRect.material
-    material.set_shader_param("target_palette", palette)
-    material.set_shader_param("palettesize", paletteSize)
-    ditherRect.material = material
-
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
   changeSpriteColorPalette(getLevelTiles().grey_palette)
   # mySprite.setNormalClothes()
-  changeDitherRect(global.tidepool_palette, 16)
 
 func floorGlitch():
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(getLevelTiles().red_palette)
   # mySprite.setBugCatcherCostume()
-  changeDitherRect(global.dream_palette, 8)
 
 func featherGlitch():
   glitch_form = global.GlitchForm.FEATHER
@@ -105,7 +95,6 @@ func featherGlitch():
   # TODO(jaketrower):
   changeSpriteColorPalette(global.green_dungeon_palette)
   # mySprite.setMothCostume()
-  changeDitherRect(global.foggy_forest_palette, 8)
 
 func ladderGlitch():
   glitch_form = global.GlitchForm.LADDER

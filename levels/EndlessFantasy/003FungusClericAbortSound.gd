@@ -2,9 +2,9 @@ extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var NPC = get_node("../../..")
-onready var fungusNPC1 = get_node("../../../../FungusNPC1")
 onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
+onready var fungusNPC4 = get_node("../../../../FungusNPC4")
 onready var door3 = get_node("../../../../Door3")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
@@ -19,6 +19,9 @@ func _ready():
     pass
 
 func activateScript():
+    if which_one_am_i == 4:
+      return
+
     summonSmokeClouds(NPC, 5, true, true)
     NPC.visible = false
     NPC.can_activate = false
@@ -38,10 +41,12 @@ func activateScript():
       yield(get_tree().create_timer(0.1), "timeout")
       summonDoor(glitchEnemy4)
       yield(get_tree().create_timer(0.3), "timeout")
+      summon(fungusNPC4)
       summonDoor(broom)
       broom.is_active = true
 
 func summon(npc):
+  yield(get_tree().create_timer(0.4), "timeout")
   summonSmokeClouds(npc, 5, true, true)
   npc.visible = true
   npc.can_activate = true
@@ -50,7 +55,7 @@ func summon(npc):
 func summonDoor(door):
   summonSmokeClouds(door, 5, true, true)
   door.visible = true
-    
+
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
     pass

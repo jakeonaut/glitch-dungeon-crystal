@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -24,6 +24,10 @@
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=21]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=17]
 resource_name = "default"
@@ -56,6 +60,10 @@ tracks/0/keys = {
 "values": [ false, true, false, true, false, true ]
 }
 
+[sub_resource type="BoxShape" id=22]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=19]
 resource_name = "default"
 length = 0.1
@@ -86,6 +94,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false, true, false, true, false, true ]
 }
+
+[sub_resource type="BoxShape" id=23]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -197,6 +209,9 @@ clout online.! u can pet them
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
+[node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
+shape = SubResource( 21 )
+
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 7.56469, 0 )
 grav = 0
@@ -218,6 +233,9 @@ flip_h = true
 anims/default = SubResource( 17 )
 anims/flickerOn = SubResource( 18 )
 
+[node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
+shape = SubResource( 22 )
+
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 18, 0 )
 bbText = "evil sprites can only be
@@ -230,6 +248,9 @@ shape = SubResource( 15 )
 [node name="AnimationPlayer" parent="Viewport/level/NPC5" index="6"]
 anims/default = SubResource( 19 )
 anims/flickerOn = SubResource( 20 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC5/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
 
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2.38366, 0 )

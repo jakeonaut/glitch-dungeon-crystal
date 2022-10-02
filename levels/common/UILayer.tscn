@@ -79,6 +79,7 @@ shader_param/enable_no_transparency = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = ExtResource( 13 )
@@ -145,9 +146,6 @@ bbcode_enabled = true
 bbcode_text = "the dungeon"
 text = "the dungeon"
 scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HeartsRect" type="ColorRect" parent="."]
 margin_left = 76.0
@@ -290,6 +288,7 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="MiniCrystalCubeRect/ColorRect/ColorRect"]
 size = Vector2( 32, 32 )
+own_world = true
 transparent_bg = true
 
 [node name="miniCubeCrystal" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport" instance=ExtResource( 9 )]

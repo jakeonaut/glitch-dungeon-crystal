@@ -16,7 +16,7 @@ onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
 onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
-onready var fallthroughSolid = get_node("FallthroughSolid")
+onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 
@@ -75,7 +75,7 @@ func _ready():
     if textBox.has_been_shown: 
       textBox.is_important = false
 
-func _process(delta):
+func _process(_delta):
   # super._process(delta) implicit
   if fallthroughSolid:
     if not visible and fallthroughSolid.is_in_group("fallthrough"):

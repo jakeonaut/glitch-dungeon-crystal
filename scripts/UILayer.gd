@@ -9,7 +9,6 @@ onready var powerupSprite = get_node("PowerupRect/ColorRect/ColorRect/PowerupSpr
 onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/RichTextLabel")
 
 onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
-onready var miniCrystalCube = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
 var display_title = "???"
