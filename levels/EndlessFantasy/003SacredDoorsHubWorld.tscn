@@ -2393,8 +2393,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.3074, 0 )
 visible = false
 
 [node name="Broom" parent="Viewport/level" instance=ExtResource( 38 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3, 0.799999, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1, -5.7, 0 )
 bbText = "\\\"BROOM\\\" get!!!
 press [C] to cure blight"
 portrait = ExtResource( 47 )
