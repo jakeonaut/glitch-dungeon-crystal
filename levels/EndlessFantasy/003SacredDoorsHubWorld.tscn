@@ -1174,6 +1174,9 @@ grav = 0
 bbText = "still.. perhaps you could
 cure the blight.   seek out 
 the 3 eldest witches.
+each hold one of the
+crystal eggs of
+  the goddess
 but be warned, they are not
 too fond of outsiders. "
 can_activate = false
