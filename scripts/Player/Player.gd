@@ -3,11 +3,13 @@ extends "PlayerGameMover.gd"
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
+onready var broomSound = get_node("Sounds/BroomSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
+var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
 var is_in_broom_cooldown = false
@@ -276,6 +278,9 @@ func isOnSavePoint():
 
 # @override
 func tryDieToEnemy(should_glitch, should_kill_invis):
+  if summonedBroom:
+    broomStop()
+
   if not transitioning and (should_kill_invis or (glitch_form != global.GlitchForm.INVISIBLE and \
      physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint() and \
      physics_state != PhysicsState.GLITCH_HURT and physics_state != PhysicsState.GLITCH_RECOVERY and \
@@ -327,16 +332,16 @@ func hideInteractPrompt():
   importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
-  if not pauseSelf and is_in_broom_cooldown:
+  if not summonedBroom and is_in_broom_cooldown:
     broom_cooldown_timer += (delta*22)
     if broom_cooldown_timer >= broom_cooldown_time_limit:
       broom_cooldown_timer = 0
       is_in_broom_cooldown = false
 
-  if Input.is_action_just_pressed("sub_action_button") and not pauseSelf and not is_in_broom_cooldown:
+  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom:
     aniPlayer.stop()
     aniPlayer.clear_queue()
-    aniPlayer.play("broomSweep")
+    aniPlayer.play("broomSmack")
     if on_ground:
       aniPlayer.queue("stand")
     else:
@@ -346,21 +351,28 @@ func processBroomLogic(delta):
     broom_cooldown_timer = 0
     if on_ground:
       broom_cooldown_timer = broom_cooldown_time_limit / 2
-    elif glitch_form == global.GlitchForm.FEATHER:
-      broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
-    pauseSelf = true
+    # elif glitch_form == global.GlitchForm.FEATHER:
+    #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
+    # velocity_dampener = 2.0
+    pauseInput = true
+    pauseAnimation = true # TODO(jaketrower): implement this instead
+    aniPlayer = null
     if linear_velocity.y < 0:
       linear_velocity.y = 0
-    var broom = summonedBroomRes.instance()
-    level.add_child(broom)
+    summonedBroom = summonedBroomRes.instance()
+    level.add_child(summonedBroom)
+    summonedBroom.my_broom_owner = self
+    
+  if summonedBroom:
     if mySprite.flip_h:
-      broom.get_node("Sprite3D").flip_h = true
-      broom.global_transform.origin.x = self.global_transform.origin.x - 1.558
+      summonedBroom.get_node("Sprite3D").flip_h = true
+      summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
+      summonedBroom.rotation_degrees = Vector3(0, 180, 0)
     else:
-      broom.get_node("Sprite3D").flip_h = false
-      broom.global_transform.origin.x = self.global_transform.origin.x + 1.557
-    broom.global_transform.origin.y = self.global_transform.origin.y
-    broom.my_broom_owner = self
+      summonedBroom.get_node("Sprite3D").flip_h = false
+      summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
+      summonedBroom.rotation_degrees = Vector3(0, 0, 0)
+    summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
     
 # @override
 func landed():
@@ -368,9 +380,23 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
+
+func broomSmackFast():
+  var aniPlayer = get_node("AnimationPlayer")
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("broomSmackFast")
+  if on_ground:
+    aniPlayer.queue("stand")
+  else:
+    aniPlayer.queue("fall")
     
 func broomStop():
-  pauseSelf = false
+  summonedBroom = null
+  pauseInput = false
+  pauseAnimation = false
+  aniPlayer = get_node("AnimationPlayer")
+  velocity_dampener = 1.0
   if has_sweeped_glitch:
     was_just_on_ground_timer = -8
   if linear_velocity.y < 0:

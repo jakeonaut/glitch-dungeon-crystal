@@ -87,6 +87,8 @@ var physics_state = PhysicsState.NORMAL
 
 var linear_velocity = Vector3()
 var lv = linear_velocity
+var velocity_dampener = 1.0
+var pauseAnimation = false
 
 export var grav = 60
 var g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
@@ -820,7 +822,7 @@ func handleCollisionsAndMove(local_lv, delta):
 
   if should_collide_horizontally:
     local_lv = handleHorizontalCollisions(local_lv)
-  global_transform.origin.x += local_lv.x
+  global_transform.origin.x += local_lv.x / velocity_dampener
   
   was_on_ground = on_ground
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
@@ -834,7 +836,7 @@ func handleCollisionsAndMove(local_lv, delta):
   elif should_do_fallthrough_area_collision:
     local_lv = collideWithFloor(local_lv)
     global_transform.origin.y = fallthrough_area_collision_y
-  global_transform.origin.y += local_lv.y
+  global_transform.origin.y += local_lv.y / velocity_dampener
 
   handleSpikeCollisions()
   

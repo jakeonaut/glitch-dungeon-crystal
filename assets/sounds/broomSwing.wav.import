@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/broomSwing.wav-b1b673efe9d27e22937c2748c8069b0b.sample"
+
+[deps]
+
+source_file="res://assets/sounds/broomSwing.wav"
+dest_files=[ "res://.import/broomSwing.wav-b1b673efe9d27e22937c2748c8069b0b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/assets_sfx_jumpcartoon.wav-b0e6780fe71d2d14b1c5eaafcb39926c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/assets_sfx_jumpcartoon.wav"
+dest_files=[ "res://.import/assets_sfx_jumpcartoon.wav-b0e6780fe71d2d14b1c5eaafcb39926c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

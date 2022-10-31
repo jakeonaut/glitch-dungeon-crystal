@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=6]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=8]
+[ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=10]
 [ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=13]
@@ -20,7 +21,6 @@
 [ext_resource path="res://assets/sounds/wormClimb.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/glitchhurt.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=22]
-[ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
@@ -106,7 +106,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=46]
 resource_name = "broomSmack"
-length = 0.6
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -115,10 +115,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 50, 51, 15, 2 ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "broomSmackFast"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 51, 15, 2 ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -786,8 +802,8 @@ stream = ExtResource( 22 )
 volume_db = -20.0
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 23 )
-volume_db = -30.0
+stream = ExtResource( 9 )
+volume_db = -25.0
 
 [node name="GetItemSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 29 )
@@ -798,6 +814,7 @@ autoplay = "stand"
 anims/RESET = SubResource( 29 )
 anims/angry = SubResource( 8 )
 anims/broomSmack = SubResource( 46 )
+anims/broomSmackFast = SubResource( 47 )
 anims/broomSweep = SubResource( 41 )
 anims/climb = SubResource( 43 )
 anims/climbStop = SubResource( 44 )
