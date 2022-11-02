@@ -231,15 +231,17 @@ func processPhysics(delta):
     landed()
     just_landed = true
   # TODO(jaketrower): all this animation code IS going to break everything one day :)
-  if aniPlayer != null and not global.pauseGame and not aniPlayer.assigned_animation == "getItem":
+  var aa = ""
+  if aniPlayer != null:
+    aa = aniPlayer.assigned_animation
+  if aniPlayer != null and not global.pauseGame and not aa == "getItem":
     if not is_climbing_ladder:
       if on_ground:
-        if (aniPlayer.assigned_animation == "land" or aniPlayer.assigned_animation == "walkStart") and not aniPlayer.is_playing():
+        if (aa == "land" or aa == "walkStart") and not aniPlayer.is_playing():
           aniPlayer.play("stand")
-        elif aniPlayer.assigned_animation == "jump" or aniPlayer.assigned_animation == "jumpBump":
+        elif aa == "jump" or aa == "jumpBump" or aa == "fall" or aa == "fallBump":
           aniPlayer.play("land")
-      elif linear_velocity.y > 0 and not "jump" in aniPlayer.assigned_animation and not "Jump" in aniPlayer.assigned_animation \
-        and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
+      elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
         aniPlayer.stop()
         aniPlayer.clear_queue()
         if is_touching_water:

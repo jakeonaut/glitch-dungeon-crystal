@@ -9,7 +9,7 @@ onready var door3 = get_node("../../../../Door3")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
 onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
-onready var broom = get_node("../../../../Broom")
+# onready var broom = get_node("../../../../Broom")
 export var which_one_am_i = 1
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
@@ -42,8 +42,8 @@ func activateScript():
       summonDoor(glitchEnemy4)
       yield(get_tree().create_timer(0.3), "timeout")
       summon(fungusNPC4)
-      summonDoor(broom)
-      broom.is_active = true
+      # summonDoor(broom)
+      # broom.is_active = true
 
 func summon(npc):
   yield(get_tree().create_timer(0.4), "timeout")

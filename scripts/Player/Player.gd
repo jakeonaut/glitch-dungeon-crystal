@@ -373,6 +373,7 @@ func processBroomLogic(delta):
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
       summonedBroom.rotation_degrees = Vector3(0, 0, 0)
     summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
+    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 0.125
     
 # @override
 func landed():
