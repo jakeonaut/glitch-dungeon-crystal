@@ -285,6 +285,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, 0 )
 visible = false
 grav = 0
 bbText = "get off!!"
+can_camera_zoom = false
 tiny_textbox = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]

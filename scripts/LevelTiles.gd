@@ -248,7 +248,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
   my_tileset_type = tileset_type
   if tileset_type == global.TilesetType.DUNGEON:
     green_palette = global.green_dungeon_palette
-    red_palette = global.red_dungeon_palette
+    red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_dungeon_palette
     black_palette = global.black_dungeon_palette
   elif tileset_type == global.TilesetType.HOUSE:
