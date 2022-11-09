@@ -29,7 +29,7 @@ func _process(delta):
   
   if global.pauseGame: return
 
-  cleanUpGlitches()
+  hitStuff()
   if broom_active_timer == 0:
     summonSmokeClouds(1)
     
@@ -74,7 +74,7 @@ func isTileSpikes(tile_type):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return tileCollisionShape is RayShape
     
-func cleanUpGlitches():
+func hitStuff():
   if not visible: return
   
   var areas = myArea.get_overlapping_areas()
@@ -86,6 +86,10 @@ func cleanUpGlitches():
       summonSmokeClouds(5, true, true)
       # TODO kill glitches or "free" them like glitch slug...
       pass
+    elif area.is_in_group("corporeal_body"):
+      var npc = area.get_node("..")
+      if npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+        npc.getSmacked()
 
   # erase glitch tiles...
   var x = collisionShape.global_transform.origin.x

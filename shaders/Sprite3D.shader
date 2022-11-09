@@ -68,6 +68,15 @@ float random(float seed) {
   return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
 }
 
+uniform float normal_offset : hint_range(0, 1, 0.01) = 0.02;
+uniform float time_influence : hint_range(0, 50) = 3;
+uniform float y_div : hint_range(0, 10, .1) = 2.87;
+void vertex() {
+    VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+    VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
+    VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+}
+
 const float canvas_width = 2560.0;
 const float canvas_height = 2048.0;
 const float matrixSize = 4.0;

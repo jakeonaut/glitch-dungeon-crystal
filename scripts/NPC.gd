@@ -12,6 +12,10 @@ export var can_move = true
 export var can_camera_zoom = true
 export var is_fast_text = false
 
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 10
+
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
@@ -75,13 +79,35 @@ func _ready():
     if textBox.has_been_shown: 
       textBox.is_important = false
 
-func _process(_delta):
+func _process(delta):
   # super._process(delta) implicit
   if fallthroughSolid:
     if not visible and fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.remove_from_group("fallthrough")
     elif visible and not fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.add_to_group("fallthrough")
+
+  if is_smacked:
+    smack_timer += (delta * 22)
+    if smack_timer >= smack_time_limit:
+      is_smacked = false
+      var material = mySprite.material_override
+      if material is ShaderMaterial:
+        material.set_shader_param("time_influence", 3)
+        # material.set_shader_param("y_div", 2.3)
+        material.set_shader_param("normal_offset", .02)
+        mySprite.material_override = material
+
+
+func getSmacked():
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 35)
+    material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .15)
+    mySprite.material_override = material
+  smack_timer = 0
+  is_smacked = true
 
 func setGlobalMemoryOfHasSpoken():
   if not global.memory.has(level.getShortLevelName()):

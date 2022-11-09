@@ -7,13 +7,17 @@ func _process(_delta):
     var has_done_fallthrough_object_collision = false
     var shortest_dist = 999 # zero escape saga
     var nearest_area = null
+    var fallthrough_collision_area = null
     var player = get_node("..")
 
     # find the nearest active area and passive area
     var areas = get_overlapping_areas()
     for area in areas:
         if area.is_in_group("fallthrough"):
-            has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(player, area, true) or has_done_fallthrough_object_collision
+            if global.doFallthroughObjectCollision(player, area, true):
+                has_done_fallthrough_object_collision = true
+                # this makes the last fallthrough object we meet
+                fallthrough_collision_area = area
             
         if area.is_in_group("playerActivation") and area.has_method("playerActivationAreaPassiveActivate"):
             area.playerActivationAreaPassiveActivate()
@@ -39,5 +43,8 @@ func _process(_delta):
         # else:
         #     player.tryBroom()
 
-    if not has_done_fallthrough_object_collision:
+    if has_done_fallthrough_object_collision:
+        if fallthrough_collision_area and fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionActivate"):
+            fallthrough_collision_area.get_node("..").fallthroughCollisionActivate()
+    else:
         player.should_do_fallthrough_area_collision = false

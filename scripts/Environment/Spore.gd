@@ -6,7 +6,7 @@ var original_pos = null
 var target_pos = null
 onready var mySprite = get_node("Sprite3D")
 var opacity = 1.0
-var target_opacity = 0.2
+var target_opacity = 0.5
 var didja_get_me = false
 var bubble_speed = 0.625
 
@@ -116,9 +116,4 @@ func passiveActivate(_delta):
         bubbleStartPop()
 
 func bubbleStartPop():
-    mySprite.frame_delay = 0.1
-    mySprite.should_randomize_frame_delay = false
-    mySprite.updateBaseFrame(2, 2)
-    mySprite.should_soft_fizzle_out = true
-    didja_get_me = true
-    global_transform.origin.y += .625
+    mySprite.visible = false

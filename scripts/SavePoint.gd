@@ -32,7 +32,8 @@ func _process(delta):
         if not is_active:
             enablePaletteCycle()
             spawn_timer = spawn_time_limit
-            level.saveTheGame()
+            if triangleContainer.visible:
+                level.saveTheGame()
             if not has_grown_spores:
                 aniPlayer.play("sporeGrow")
                 has_grown_spores = true
@@ -47,7 +48,7 @@ func _process(delta):
             disablePaletteCycle()
         is_active = false
 
-    if is_active:
+    if is_active and triangleContainer.visible:
         spawn_timer += (delta*22)
         if spawn_timer >= spawn_time_limit:
             var children = self.get_children()

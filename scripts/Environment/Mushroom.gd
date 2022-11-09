@@ -1,45 +1,80 @@
 extends Spatial
 
-var bubble_timer = 0
-var bubble_time_limit = 5
+export var should_grow = false
+
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 
+onready var mySprite = get_node("Sprite3D")
+onready var fallthroughSolid = get_node("FallthroughSolid")
 var had_already_been_collided = false
 var is_being_collided = false
+var should_wiggle = false
+var wiggle_timer = 0
+var wiggle_time_limit = 2
+var spore_origin = Vector3(0, 0, 0)
+
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var player = null
+func getPlayer():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if player == null:
+    player = level.player
+  return player
 
 func _ready():
-    bubble_time_limit = randi() % 50 + 5
-
-func randomizeBubbleTimeLimit():
-    bubble_time_limit = randi() % 100 + 50
+    if should_grow:
+        wiggle_time_limit = 8
+    spore_origin = self.global_transform.origin
 
 func fallthroughCollisionActivate():
-    is_being_collided = true
-    if not had_already_been_collided:
-        had_already_been_collided = true
-        var how_many = randi() % 4 + 3
+    if not getPlayer().on_ground and not should_wiggle:
+        should_wiggle = true
+        wiggle_timer = 0
+        var how_many = randi() % 3 + 3
         for _i in range(how_many):
             spawnASpore()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-    if is_being_collided:
-        bubble_timer += (delta*22)
-        if bubble_timer >= bubble_time_limit:
-            bubble_timer = 0
-            randomizeBubbleTimeLimit()
+    if should_wiggle:
+        if wiggle_timer == 0:
+            mySprite.global_transform.origin.y -= 0.125
+            fallthroughSolid.global_transform.origin.y -= 0.125
+            if getPlayer().on_ground:
+                getPlayer().global_transform.origin.y -= 0.125
+        elif should_grow and wiggle_timer >= 2:
+            mySprite.global_transform.origin.y += 0.125
+            fallthroughSolid.global_transform.origin.y += 0.125
+            spore_origin.y += 0.125
+            getPlayer().global_transform.origin.y += 0.375
 
-            if randi() % 2 == 0:
-                spawnASpore()
-            is_being_collided = false
+
+        wiggle_timer += (delta*22)
+        var how_many = randi() % 1 + 1
+        for _i in range(how_many):
+            spawnASpore()
+
+        if wiggle_timer >= wiggle_time_limit:
+            should_grow = false
+            wiggle_time_limit = 2
+            should_wiggle = false
+            wiggle_timer = 0
+            mySprite.global_transform.origin.y += 0.125
+            fallthroughSolid.global_transform.origin.y += 0.125
+            if getPlayer().on_ground:
+                getPlayer().global_transform.origin.y += 0.125
+            if should_grow:
+                getPlayer().magicJump()
 
 func spawnASpore():
     var spore = sporeRes.instance()
     spore.bubble_speed = rand_range(4.0, 8.0)
     add_child(spore)
-    spore.global_transform.origin = self.global_transform.origin
-    spore.global_transform.origin.x += rand_range(0, 2.5)
-    spore.global_transform.origin.z = 0
+    spore.global_transform.origin = spore_origin
+    spore.global_transform.origin.x += rand_range(-2.5, 2.5)
+    spore.global_transform.origin.z += 2
+    spore.global_transform.origin.y += 1
     spore.global_transform.origin.y -= rand_range(0, .625)
     

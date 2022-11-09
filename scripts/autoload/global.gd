@@ -169,9 +169,6 @@ func getNextGlitch(glitch_form):
 # are the child of a GameMover....
 # anyways this way works even though global is bad :)
 func doFallthroughObjectCollision(gameMover, area, debug = false):
-    if area.get_node("..").has_method("fallthroughCollisionActivate"):
-        area.get_node("..").fallthroughCollisionActivate()
-
     var areaShape = area.get_node("CollisionShape")
     var ax = areaShape.global_transform.origin.x
     var ay = areaShape.global_transform.origin.y
