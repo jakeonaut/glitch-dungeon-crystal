@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -47,6 +47,8 @@
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=45]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=46]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=47]
+[ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=48]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=49]
 
 [sub_resource type="BoxShape" id=20]
 resource_local_to_scene = true
@@ -83,8 +85,8 @@ extents = Vector3( 2, 1.3, 1.3 )
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
@@ -125,8 +127,8 @@ extents = Vector3( 0.6, 0.8, 1 )
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -390,8 +392,8 @@ length = 0.001
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -415,8 +417,8 @@ shader_param/target_palette = ExtResource( 20 )
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -769,8 +771,8 @@ length = 0.001
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -798,8 +800,8 @@ load_path = "res://.import/MRMOTEXTEX.png-74a14690814d122bb6461eeb85a4f200.stex"
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -823,8 +825,8 @@ shader_param/target_palette = ExtResource( 29 )
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -848,8 +850,8 @@ shader_param/target_palette = ExtResource( 29 )
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -877,8 +879,8 @@ extents = Vector3( 1.5, 0.24, 1 )
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
@@ -903,9 +905,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Spatial"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
-audio_listener_enable_3d = true
+[node name="Viewport" parent="." instance=ExtResource( 49 )]
 
 [node name="level" type="Spatial" parent="Viewport"]
 script = ExtResource( 6 )
@@ -2615,6 +2615,11 @@ frame = 672
 [node name="MiniAdventures26" parent="Viewport/level/MiniAdventures" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, -19.5, -1 )
 frame = 672
+
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9, -8.7, -10 )
+pixel_size = 0.125
+texture = ExtResource( 48 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

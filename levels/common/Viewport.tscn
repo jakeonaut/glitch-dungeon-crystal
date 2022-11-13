@@ -1,5 +1,5 @@
 [gd_scene format=2]
 
 [node name="Viewport" type="Viewport"]
-size = Vector2( 640, 512 )
+size = Vector2( 1280, 1024 )
 audio_listener_enable_3d = true

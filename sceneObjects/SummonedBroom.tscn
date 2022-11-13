@@ -14,8 +14,8 @@
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -28,6 +28,9 @@ shader_param/enable_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 5 )
@@ -36,8 +39,8 @@ shader_param/target_palette = ExtResource( 5 )
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.25
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -50,13 +53,16 @@ shader_param/enable_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 8 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 9 )
 
 [sub_resource type="CylinderShape" id=43]
-radius = 0.7
-height = 1.06691
+radius = 0.650362
+height = 0.611956
 
 [sub_resource type="Animation" id=44]
 length = 0.001
@@ -120,6 +126,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.650362 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:shape:height")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.611956 ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "broomSmack"
@@ -146,7 +176,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.568, 999, 999 ), Vector3( 1.32029, -0.32428, 0 ), Vector3( 1.05441, -0.395181, 0 ) ]
+"values": [ Vector3( -0.568, 999, 999 ), Vector3( 1.31236, 0.157934, 0 ), Vector3( 1.05441, -0.395181, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -172,6 +202,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -53.62 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.725129, 0.650362 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:shape:height")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.611956, 0.611956 ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "broomSmackFast"
@@ -195,10 +261,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.568, 999, 999 ), Vector3( 1.05441, 0.101129, 0 ) ]
+"values": [ Vector3( -0.568, 999, 999 ), Vector3( 1.05441, 0.101129, 0 ), Vector3( 1.05441, -0.606238, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -224,13 +290,49 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.725129, 0.596729 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:shape:height")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.611956, 0.611956 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -53.62 ), Vector3( 0, 0, 0 ) ]
+}
 
 [node name="SummonedBroom" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.146, 0 )
 script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.125 )
 material_override = SubResource( 41 )
 pixel_size = 0.125
 transparent = false

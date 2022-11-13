@@ -123,6 +123,9 @@ func wearCostume(costume):
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
+
+  if Input.is_action_just_pressed("toggle_fullscreen"):
+    OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
   if not processGlitchHurtRecovery(delta):
@@ -365,15 +368,13 @@ func processBroomLogic(delta):
     
   if summonedBroom:
     if mySprite.flip_h:
-      summonedBroom.get_node("Sprite3D").flip_h = true
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
       summonedBroom.rotation_degrees = Vector3(0, 180, 0)
     else:
-      summonedBroom.get_node("Sprite3D").flip_h = false
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
       summonedBroom.rotation_degrees = Vector3(0, 0, 0)
     summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
-    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 0.125
+    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 0.925
     
 # @override
 func landed():

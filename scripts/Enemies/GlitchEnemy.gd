@@ -24,6 +24,7 @@ var am_i_dying = false
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 
+export(float) var sprite_offset_y = 0
 export var behavior_walking = false
 export var behavior_intermittent_walking = false
 export var behavior_vertical_walking = false
@@ -107,11 +108,7 @@ func _process(delta):
             queue_free()
             return
 
-    glitch_switch_timer += (delta*22)
-    if glitch_switch_timer > glitch_switch_time_limit:
-        mySprite.updateBaseFrame(randi() % 6, randi() % 3)
-        glitch_switch_time_limit = rand_range(30.0, 50.0)
-        glitch_switch_timer = 0
+    glitchSwitchSprite(delta)
 
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
@@ -222,13 +219,20 @@ func processDeath():
     if not dieSound.is_playing():
         queue_free()
 
+func glitchSwitchSprite(delta):
+    glitch_switch_timer += (delta*22)
+    if glitch_switch_timer > glitch_switch_time_limit:
+        mySprite.updateBaseFrame(randi() % 6, randi() % 3)
+        glitch_switch_time_limit = rand_range(30.0, 50.0)
+        glitch_switch_timer = 0
+
 func glitchSetSpritesAndCollision():
     if behavior_jumping or behavior_directional_bullet:
         return
         
     if modAmt > 0:
         mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
-        mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
+        mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y + sprite_offset_y, modAmt)
         if myOtherSprite:
             myOtherSprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
             myOtherSprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)

@@ -97,7 +97,7 @@ func pressingDown():
 
 # @override
 func justPressedJump():
-  return Input.is_action_just_pressed("jump_button") and not pauseInput or should_magic_jump
+  return (Input.is_action_just_pressed("jump_button") and not pauseInput) or should_magic_jump
   
 # @override
 func recentlyJustPressedJump():
@@ -105,7 +105,7 @@ func recentlyJustPressedJump():
 
 # @override
 func pressingJump():
-  return Input.is_action_pressed("jump_button") and not pauseInput or should_magic_jump
+  return (Input.is_action_pressed("jump_button") and not pauseInput) or should_magic_jump
 
 # @override
 func pressingMoveUp():

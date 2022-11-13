@@ -7,8 +7,8 @@ uniform sampler2D target_palette : hint_albedo;
 uniform float opacity = 1.0;
 
 // For outline
-uniform vec4 line_color : hint_color = vec4(0.01, 0.01, 0.01, 1.0);//color line
-uniform float line_scale : hint_range(0, 20) = 0.04;  
+uniform vec4 outline_color : hint_color;
+uniform float outline_width = 1.0; 
 
 // æŒ¯å‹•ã®å¼·ã•
 uniform float shake_power = 0.03;

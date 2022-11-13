@@ -41,9 +41,6 @@ func _process(delta):
     if should_wiggle:
         if wiggle_timer == 0:
             mySprite.global_transform.origin.y -= 0.125
-            fallthroughSolid.global_transform.origin.y -= 0.125
-            if getPlayer().on_ground:
-                getPlayer().global_transform.origin.y -= 0.125
         elif should_grow and wiggle_timer >= 2:
             mySprite.global_transform.origin.y += 0.125
             fallthroughSolid.global_transform.origin.y += 0.125
@@ -62,10 +59,8 @@ func _process(delta):
             should_wiggle = false
             wiggle_timer = 0
             mySprite.global_transform.origin.y += 0.125
-            fallthroughSolid.global_transform.origin.y += 0.125
-            if getPlayer().on_ground:
-                getPlayer().global_transform.origin.y += 0.125
             if should_grow:
+                getPlayer().global_transform.origin.y = mySprite.global_transform.origin.y + 1
                 getPlayer().magicJump()
 
 func spawnASpore():
