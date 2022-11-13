@@ -90,7 +90,7 @@ void fragment() {
     vec4 incolor = texture(texture_albedo, UV);
     float alpha = incolor.a * opacity; 
     if (alpha == 0.0) {
-      incolor = vec4(4.0/255.0, 4.0/255.0, 4.0/255.0, 1.0);
+      incolor = vec4(4.0/256.0, 4.0/256.0, 4.0/256.0, 1.0);
     }
     vec2 uv = UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
     float x = uv.x;
@@ -134,7 +134,7 @@ void fragment() {
       ALBEDO.rgb = closest_color.rgb;
     }
     else if (enable_no_transparency) {
-        ALBEDO.rgb = incolor.rgb;
+        ALBEDO.rgb = closest_color.rgb;
     }
     if (enable_no_transparency && alpha == 0.0) {
       alpha = 1.0;

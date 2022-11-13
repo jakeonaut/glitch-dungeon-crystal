@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=4]
 [ext_resource path="res://scripts/ParallaxBackground.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
 
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 2 )
@@ -39,9 +40,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4, 8.3, -10 )
 material_override = SubResource( 23 )
 pixel_size = 0.125
 texture = ExtResource( 4 )
+script = ExtResource( 6 )
+max_frames = 1
+should_animate = false
 
 [node name="Sprite3D2" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70.6, 8.3, -10 )
 material_override = SubResource( 23 )
 pixel_size = 0.125
 texture = ExtResource( 4 )
+script = ExtResource( 6 )
+max_frames = 1
+should_animate = false
