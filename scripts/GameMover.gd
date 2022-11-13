@@ -40,6 +40,7 @@ var water_fall_terminal = 8
 var hit_water_terminal_vel = 1
 var terminal_vel = true_terminal_vel
 var is_touching_water = false
+var touched_water_area = null
 var was_touching_water = false
 var was_touching_water_at_start_of_jump = false
 var is_touching_ladder = false
@@ -160,6 +161,7 @@ func _physics_process(delta):
   if global.pauseGame or pauseSelf: return
 
   is_touching_water = smallInteractionArea.is_touching_water
+  touched_water_area = smallInteractionArea.touched_water_area
   is_touching_ladder = smallInteractionArea.is_touching_ladder
 
   DNUMHORZ = 65.0 * global.time_dilation_multiplier

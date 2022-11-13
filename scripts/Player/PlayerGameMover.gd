@@ -41,6 +41,9 @@ func _process(delta):
   if jump_press_timer <= jump_press_broom_time_limit:
     jump_press_timer += 1
 
+  if is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison:
+    tryDieToEnemy(true, false)
+
   if justPressedJump():
     jump_press_timer = 0
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":

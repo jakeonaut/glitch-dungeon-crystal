@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -14,15 +14,13 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=15]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=20]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=21]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=22]
-[ext_resource path="res://assets/fakewater.png" type="Texture" id=23]
+[ext_resource path="res://scripts/WaterCube.gd" type="Script" id=20]
+[ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=21]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -34,35 +32,6 @@ extents = Vector3( 2, 1.3, 1.3 )
 [sub_resource type="BoxShape" id=18]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="ShaderMaterial" id=22]
-shader = ExtResource( 21 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.006
-shader_param/shake_block_size = 60.0
-shader_param/shake_color_rate = 0.023
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
-shader_param/enable_no_transparency = false
-shader_param/palettesize = 8
-shader_param/resolution_scale = 1
-shader_param/enable_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 2.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 26.841
-shader_param/y_div = 0.5
-shader_param/texture_albedo = ExtResource( 23 )
-shader_param/base_palette = ExtResource( 22 )
-shader_param/target_palette = ExtResource( 20 )
-
-[sub_resource type="BoxShape" id=21]
-resource_local_to_scene = true
-extents = Vector3( 2, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=19]
 resource_local_to_scene = true
@@ -81,8 +50,10 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 2 )
-starting_glitch_type = 1
+starting_glitch_type = 2
 tileset_type = 2
+has_spellbook_page = true
+spellbook_spells = [ 1, 2 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -98,6 +69,8 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 8 )]
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -138,7 +111,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 524278, 0, 1, 524279, 0, 1, 589814, 0, 1, 589815, 0, 1, 655350, 0, 1, 655351, 0, 1, 720886, 0, 1, 720887, 0, 1, 786422, 0, 1, 851960, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, -262144, 0, 1, -262143, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
+"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65551, 0, 1, 65590, 0, 1, 65591, 0, 1, 65592, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131126, 0, 1, 131128, 0, 1, 196598, 0, 1, 196599, 0, 1, 196662, 0, 1, 196663, 0, 1, 196664, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 524278, 0, 1, 524279, 0, 1, 589814, 0, 1, 589815, 0, 1, 655350, 0, 1, 655351, 0, 1, 720886, 0, 1, 720887, 0, 1, 786422, 0, 1, 851960, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, -262144, 0, 1, -262143, 0, 1, -262124, 0, 1, -262123, 0, 1, -262122, 0, 1, -262121, 0, 1, -262120, 0, 1, -262119, 0, 1, -262118, 0, 1, -262117, 0, 1, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -262109, 0, 1, -262108, 0, 1, -262093, 0, 1, -262092, 0, 1, -262091, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196589, 0, 1, -196587, 0, 1, -196586, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -196582, 0, 1, -196581, 0, 1, -196580, 0, 1, -196579, 0, 1, -196578, 0, 1, -196577, 0, 1, -196576, 0, 1, -196575, 0, 1, -196574, 0, 1, -196573, 0, 1, -196572, 0, 1, -196571, 0, 1, -196557, 0, 1, -196555, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131053, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131049, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131043, 0, 1, -131042, 0, 1, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -131035, 0, 1, -131021, 0, 1, -131020, 0, 1, -131019, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
 }
 script = ExtResource( 3 )
 __meta__ = {
@@ -179,50 +152,88 @@ shape = SubResource( 16 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 18 )
 
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCubes" type="Spatial" parent="Viewport/level"]
+
+[node name="WaterCube" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6, -4.1, -4 )
 
-[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube2" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6, -4.1, -4 )
 
-[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube3" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, -4.1, -4 )
 
-[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube4" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -4.1, -4 )
 
-[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube5" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4, -4.1, -4 )
 
-[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube6" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, -4.1, -4 )
 
-[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube7" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, -4.1, -4 )
+script = ExtResource( 20 )
 
-[node name="Sprite3D" parent="Viewport/level/WaterCube7" index="0"]
-material_override = SubResource( 22 )
-
-[node name="WaterFilter" parent="Viewport/level/WaterCube7" index="7"]
-visible = false
-
-[node name="WaterCube8" parent="Viewport/level" instance=ExtResource( 14 )]
+[node name="WaterCube8" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, -4.1, -4 )
 
+[node name="WaterCube9" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, -4.1, -4 )
+
+[node name="WaterCube10" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -4.1, -4 )
+
+[node name="WaterCube11" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -4.1, -4 )
+
+[node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -4.1, -4 )
+
+[node name="WaterCube13" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -4.1, -4 )
+
+[node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4, -4.1, -4 )
+script = ExtResource( 20 )
+
+[node name="WaterCube15" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4, -4.1, -4 )
+turn_poisonous = true
+
+[node name="WaterCube19" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5, 4.2, -4 )
+
+[node name="WaterCube16" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4, -4.1, -4 )
+turn_poisonous = true
+
+[node name="WaterCube17" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4, -4.1, -4 )
+turn_poisonous = true
+
+[node name="WaterCube18" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.4, -4.1, -4 )
+turn_poisonous = true
+
 [node name="Mushroom" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.3, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.3, 0 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 6.6, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 6.6, 0 )
 
-[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -1 )
+[node name="Mushroom4" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 3.7, 0 )
 
-[node name="Sprite3D" parent="Viewport/level/Mushroom2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.5 )
+[node name="Mushroom5" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4, -2.38419e-07, 0 )
 
-[node name="CollisionShape" parent="Viewport/level/Mushroom2/FallthroughSolid" index="0"]
-shape = SubResource( 21 )
+[node name="Mushroom6" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.8, 3.6, 0 )
+
+[node name="Mushroom7" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.9, 0.5, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1829, 3.8396, 0 )
@@ -232,11 +243,6 @@ visible = false
 
 [node name="SaveSpores" parent="Viewport/level/SavePoint" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0452971, 0.165527 )
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4, 8.3, -10 )
-pixel_size = 0.125
-texture = ExtResource( 15 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 9.9, 0 )
@@ -256,6 +262,24 @@ frame = 66
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 20 )
 
+[node name="MiniAdventures" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.3, -0.5, -1 )
+frame = 512
+max_frames = 1
+should_animate = false
+
+[node name="MiniAdventures2" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7, -0.5, -1 )
+frame = 480
+max_frames = 1
+should_animate = false
+
+[node name="MiniAdventures3" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, -0.5, -1 )
+frame = 480
+max_frames = 1
+should_animate = false
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -268,15 +292,14 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
 
 [node name="BasicFrogEnemy" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 6.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.6, 0, 0 )
 walk_speed = 6
 walk_direction = -1
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/WaterCube7"]
-[editable path="Viewport/level/Mushroom2"]
+[editable path="Viewport/level/WaterCubes/WaterCube"]
 [editable path="Viewport/level/SavePoint"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]

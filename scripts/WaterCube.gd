@@ -12,6 +12,7 @@ onready var mySprite = get_node("Sprite3D")
 
 export var water_cube_width = 4.0
 export var water_cube_height = 4.0
+export var turn_poisonous = false
 var is_poison = false
 
 var target_origin = Vector3(0, 0, 0)
@@ -33,6 +34,8 @@ func _ready():
 
   target_origin = self.global_transform.origin + Vector3(-1, 2, 0)
   mySprite.material_override = mySprite.material_override.duplicate()
+  if turn_poisonous:
+    becomePoisonous()
 
 func _process(_delta):
   if level and waterFilter.get_parent() == self:
@@ -45,9 +48,15 @@ func isActive():
   return true
 
 func becomePoisonous():
+  if is_poison:
+    return
   is_poison = true
-  mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  mySprite.material_override.set_shader_param("shake_power", 0.006)
+  mySprite.material_override.set_shader_param("shake_block_size", 60)
   mySprite.material_override.set_shader_param("enable_glitch", true)
+  mySprite.material_override.set_shader_param("time_influence", 26.841)
+  mySprite.material_override.set_shader_param("y_div", 0.5)
+  mySprite.material_override.set_shader_param("target_palette", global.rgb_palette)
   waterFilter.visible = false
   
 func passiveActivate(_delta):

@@ -113,9 +113,8 @@ func randomizeTargetPos():
 func bulletTryDieToSolids():
   for x in range(global_transform.origin.x - 2, global_transform.origin.x + 2):
     var y = global_transform.origin.y + 1
-    var z = global_transform.origin.z
     
-    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, z))
+    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, 0))
     var tile_pos_a = getLevelTiles().map_to_world(coords_a.x, coords_a.y, coords_a.z)
     var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 

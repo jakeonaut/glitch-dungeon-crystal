@@ -21,6 +21,8 @@ var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
 var glitch_death_timer = 0
+var glitch_tickle_timer = 0
+var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
 
@@ -165,6 +167,13 @@ func _process(delta):
       newCrystalCube.visible = true
       add_child(newCrystalCube)
 
+  if glitch_tickle_timer > 0:
+    glitch_tickle_timer += (delta * 22)
+    if glitch_tickle_timer >= glitch_tickle_time_limit:
+      glitch_tickle_timer = 0
+      mySprite.get_material_override().set_shader_param("enable_glitch", false)
+      mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+
   #tryRotateCamera(delta)
   
 func tryDieToOffscreenCamera():
@@ -278,6 +287,14 @@ func isOnSavePoint():
   return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
        int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
+
+func glitchTickle():
+  glitch_tickle_timer = 1
+  var my_material = mySprite.get_material_override()
+  if my_material is ShaderMaterial:
+    my_material.set_shader_param("enable_glitch", true)
+    my_material.set_shader_param("enable_remove_skin_tone", true)
+    noSpellSound.play()
 
 # @override
 func tryDieToEnemy(should_glitch, should_kill_invis):

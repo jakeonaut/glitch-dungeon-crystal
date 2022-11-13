@@ -11,6 +11,8 @@ var is_being_collided = false
 var should_wiggle = false
 var wiggle_timer = 0
 var wiggle_time_limit = 2
+var followup_timer = 200
+var followup_time_limit = 8
 var spore_origin = Vector3(0, 0, 0)
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -49,9 +51,6 @@ func _process(delta):
 
 
         wiggle_timer += (delta*22)
-        var how_many = randi() % 1 + 1
-        for _i in range(how_many):
-            spawnASpore()
 
         if wiggle_timer >= wiggle_time_limit:
             should_grow = false
@@ -62,14 +61,24 @@ func _process(delta):
             if should_grow:
                 getPlayer().global_transform.origin.y = mySprite.global_transform.origin.y + 1
                 getPlayer().magicJump()
+            var how_many = randi() % 2 + 2
+            for _i in range(how_many):
+                spawnASpore()
+            followup_timer = 0
+
+    if followup_timer < followup_time_limit:
+        followup_timer += (delta*22)
+        if followup_timer >= followup_time_limit:
+            var how_many = randi() % 2 + 2
+            for _i in range(how_many):
+                spawnASpore()
+
 
 func spawnASpore():
     var spore = sporeRes.instance()
-    spore.bubble_speed = rand_range(4.0, 8.0)
     add_child(spore)
     spore.global_transform.origin = spore_origin
     spore.global_transform.origin.x += rand_range(-2.5, 2.5)
-    spore.global_transform.origin.z += 2
     spore.global_transform.origin.y += 1
     spore.global_transform.origin.y -= rand_range(0, .625)
     

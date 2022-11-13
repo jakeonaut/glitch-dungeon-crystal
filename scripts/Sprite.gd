@@ -68,6 +68,9 @@ func restart():
     set_frame(start_frame)
     
 func animate(delta):
+    if max_frames == 1:
+        return
+
     animation_counter += delta
     if animation_counter >= frame_delay:
         animation_counter = 0

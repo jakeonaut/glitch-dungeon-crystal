@@ -4,6 +4,7 @@ onready var parent = get_parent()
 
 var is_touching_enemy = false
 var is_touching_water = false
+var touched_water_area = null
 var is_touching_ladder = false
 var water_y = 0 # what does it do? nothing.y
 
@@ -15,6 +16,7 @@ func _process(delta):
     
     is_touching_enemy = false
     is_touching_water = false
+    touched_water_area = null
     is_touching_ladder = false
     var areas = get_overlapping_areas()
     for area in areas:
@@ -29,5 +31,6 @@ func _process(delta):
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true
             water_y = collision_shape.global_transform.origin.y + (collision_shape.get_shape().get_extents().y) + 1
+            touched_water_area = area
         if area.is_in_group("ladder"):
             is_touching_ladder = true

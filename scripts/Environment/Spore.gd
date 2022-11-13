@@ -4,11 +4,13 @@ extends Spatial
 
 var original_pos = null
 var target_pos = null
-onready var mySprite = get_node("Sprite3D")
 var opacity = 1.0
 var target_opacity = 0.5
 var didja_get_me = false
-var bubble_speed = 0.625
+var bubble_speed = 0
+
+onready var mySprite = get_node("Sprite3D")
+onready var interactionArea = get_node("SmallInteractionArea")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -27,6 +29,14 @@ func getGameCamera():
     if gameCamera == null:
         gameCamera = level.gameCamera
     return gameCamera
+
+var player = null
+func getPlayer():
+    if level == null:
+        level = get_tree().get_root().get_node("Game/Viewport/level")
+    if player == null:
+        player = level.player
+    return player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,6 +71,10 @@ func _process(delta):
 
         tryDieToOffscreenCamera()
         bulletTryDieToSolids()
+        if interactionArea.is_touching_water and interactionArea.touched_water_area != null:
+            bubbleStartPop()
+            interactionArea.touched_water_area.get_node("..").becomePoisonous()
+
 
 func tryDieToOffscreenCamera():
     var DEATH_MARGIN = 5
@@ -72,11 +86,12 @@ func tryDieToOffscreenCamera():
             queue_free()
 
 func bulletTryDieToSolids():
+    if didja_get_me:
+        return
     var x = global_transform.origin.x
-    var y = global_transform.origin.y
-    var z = global_transform.origin.z
+    var y = global_transform.origin.y - .25
     
-    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, z))
+    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, 0))
     var tile_pos_a = getLevelTiles().map_to_world(coords_a.x, coords_a.y, coords_a.z)
     var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 
@@ -99,9 +114,8 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
     return is_above_top_of_tile and (tileCollisionShape is PlaneShape)
         
-        
 func randomizeTargetPos():
-    bubble_speed = rand_range(.625, 1.925)
+    bubble_speed = rand_range(1.925, 3.8)
     target_pos = Vector3(
         original_pos.x + rand_range(-3, 3),
         original_pos.y,
@@ -114,6 +128,9 @@ func isActive():
 func passiveActivate(_delta):
     if not didja_get_me:
         bubbleStartPop()
+        getPlayer().glitchTickle()
 
 func bubbleStartPop():
-    mySprite.visible = false
+    didja_get_me = true
+    mySprite.max_frames = 6
+    mySprite.should_soft_fizzle_out = true
