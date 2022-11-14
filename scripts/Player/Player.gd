@@ -6,6 +6,8 @@ onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var broomSound = get_node("Sounds/BroomSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
+onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
+onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
@@ -25,6 +27,8 @@ var glitch_tickle_timer = 0
 var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
+var poison_timer = 0
+var poison_time_limit = 16
 
 func _ready():
   grav = 60
@@ -174,6 +178,40 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_glitch", false)
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
 
+  if is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison:
+    if poison_timer == 0:
+      poisonWaterSound.play()
+    elif reversePoisonWaterSound.is_playing():
+      # TODO(jaketrower): Could be put in a function
+      var playback_position = reversePoisonWaterSound.get_playback_position()
+      var sound_length = reversePoisonWaterSound.stream.get_length()
+      poisonWaterSound.play(sound_length - playback_position)
+      reversePoisonWaterSound.stop()
+    poison_timer += (delta*22)
+    glitchTickle(0)
+    if poison_timer >= poison_time_limit:
+      tryDieToEnemy(true, false)
+      poison_timer = 0
+      poisonWaterSound.stop()
+  elif poison_timer > 0:
+    if poisonWaterSound.is_playing():
+      # TODO(jaketrower): Could be put in a function
+      var playback_position = poisonWaterSound.get_playback_position()
+      var sound_length = poisonWaterSound.stream.get_length()
+      reversePoisonWaterSound.play(sound_length - playback_position)
+      poisonWaterSound.stop()
+    poison_timer -= (delta*22)
+    if poison_timer <= 0:
+      poison_timer = 0
+      level.glitchScreenEffect.visible = false
+      musicPlayer.changeSongPitch(1.0)
+      reversePoisonWaterSound.stop()
+
+  if poison_timer > 0:
+    level.glitchScreenEffect.visible = true
+    level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
+    musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
+
   #tryRotateCamera(delta)
   
 func tryDieToOffscreenCamera():
@@ -288,13 +326,14 @@ func isOnSavePoint():
        int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
-func glitchTickle():
+func glitchTickle(play_sound = true):
   glitch_tickle_timer = 1
   var my_material = mySprite.get_material_override()
   if my_material is ShaderMaterial:
     my_material.set_shader_param("enable_glitch", true)
     my_material.set_shader_param("enable_remove_skin_tone", true)
-    noSpellSound.play()
+    if play_sound:
+      noSpellSound.play()
 
 # @override
 func tryDieToEnemy(should_glitch, should_kill_invis):

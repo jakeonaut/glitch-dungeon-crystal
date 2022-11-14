@@ -150,7 +150,7 @@ func justStopPassiveActivate():
 func alignMySprite():
   var pixelSize = 0.125
   mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-  mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.927
+  mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.3
 
 # @override
 func processPhysics(delta):

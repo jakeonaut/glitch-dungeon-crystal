@@ -237,6 +237,8 @@ func glitchSetSpritesAndCollision():
             myOtherSprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
         smallInteractionArea.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
         smallInteractionArea.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
+    else:
+        mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
 
 # @override
 func pressingMoveLeft():

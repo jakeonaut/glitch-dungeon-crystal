@@ -73,6 +73,7 @@ func _process(delta):
         bulletTryDieToSolids()
         if interactionArea.is_touching_water and interactionArea.touched_water_area != null:
             bubbleStartPop()
+            # TODO(jaketrower):
             interactionArea.touched_water_area.get_node("..").becomePoisonous()
 
 

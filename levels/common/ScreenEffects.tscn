@@ -8,9 +8,12 @@
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
 shader_param/palettesize = 16
-shader_param/color_depth = 5
 shader_param/resolution_scale = 1
-shader_param/ratio_multiplier = 1.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=6]
@@ -48,14 +51,14 @@ shader_param/shake_color_rate = 0.001
 [node name="CrtEffectRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 3 )
-margin_right = 640.0
-margin_bottom = 512.0
+margin_right = 1280.0
+margin_bottom = 1024.0
 
 [node name="CrtEffectRect2" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 6 )
-margin_right = 640.0
-margin_bottom = 512.0
+margin_right = 1280.0
+margin_bottom = 1024.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,8 +72,8 @@ margin_bottom = 512.0
 [node name="GlitchEffectRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 5 )
-margin_right = 640.0
-margin_bottom = 512.0
+margin_right = 1280.0
+margin_bottom = 1024.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

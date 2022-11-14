@@ -68,8 +68,8 @@ distance_fade_max_distance = 0.0
 shader = ExtResource( 11 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -82,11 +82,16 @@ shader_param/enable_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 12 )
 shader_param/target_palette = ExtResource( 10 )
 
 [node name="UILayer" type="CanvasLayer"]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 script = ExtResource( 3 )
 
 [node name="Filters" type="Control" parent="."]

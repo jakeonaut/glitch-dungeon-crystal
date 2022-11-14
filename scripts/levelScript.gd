@@ -150,7 +150,6 @@ func tryToRespawn():
         break
   else:
     player.global_transform.origin = player.spawn_origin
-  print(found_door)
 
   if found_door:
     print("found door land?")

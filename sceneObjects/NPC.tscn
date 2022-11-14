@@ -138,6 +138,8 @@ script = ExtResource( 3 )
 shape = SubResource( 9 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 10 )
@@ -150,15 +152,16 @@ volume_db = -23.0
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.927, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
 material_override = SubResource( 4 )
-pixel_size = 0.12
-shaded = true
-alpha_cut = 2
+pixel_size = 0.125
+transparent = false
+double_sided = false
 texture = ExtResource( 7 )
 hframes = 8
-vframes = 15
+vframes = 10
 frame = 10
+region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 8 )
 should_randomize_frame_delay = true
 

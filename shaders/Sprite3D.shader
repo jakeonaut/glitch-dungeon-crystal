@@ -27,11 +27,6 @@ uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
 
-void vertex() {
-    UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
-    MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
-}
-
 vec3 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
     vec3 closest_color = vec3(0, 1.0, 0);
@@ -71,6 +66,7 @@ float random(float seed) {
 uniform float normal_offset : hint_range(0, 1, 0.01) = 0.02;
 uniform float time_influence : hint_range(0, 50) = 3;
 uniform float y_div : hint_range(0, 10, .1) = 2.87;
+
 void vertex() {
     VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
     VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
@@ -131,27 +127,26 @@ void fragment() {
     vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
     if (index > -1) {
-      ALBEDO.rgb = closest_color.rgb;
+        ALBEDO.rgb = closest_color.rgb;
     }
     else if (enable_no_transparency) {
         ALBEDO.rgb = closest_color.rgb;
     }
     if (enable_no_transparency && alpha == 0.0) {
-      alpha = 1.0;
+        alpha = 1.0;
     }
     ALPHA = alpha;
-  
 
-  if (enable_glitch) {
-    vec2 fixed_uv = UV;
-    fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
-    fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+    if (enable_glitch) {
+        vec2 fixed_uv = UV;
+        fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+        fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
     
-    vec4 alp = texture(texture_albedo, fixed_uv);
+        vec4 alp = texture(texture_albedo, fixed_uv);
 
-    closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
-    closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
-    ALBEDO.rgb = closest_color.rgb;
-    ALPHA = alp.a * opacity;
-  }
+        closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
+        closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
+        ALBEDO.rgb = closest_color.rgb;
+        ALPHA = alp.a * opacity;
+    }
 }

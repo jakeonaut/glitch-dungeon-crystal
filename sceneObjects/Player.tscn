@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=8]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=10]
+[ext_resource path="res://assets/sounds/chord004_innerpeace.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=14]
@@ -21,6 +22,7 @@
 [ext_resource path="res://assets/sounds/wormClimb.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/glitchhurt.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/gurgle_firered.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/chord004_innerpeace_reverse.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/switchglitch.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
@@ -811,6 +813,14 @@ volume_db = -25.0
 [node name="GetItemSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 29 )
 volume_db = -15.0
+
+[node name="PoisonWaterSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+
+[node name="PoisonWaterReverseSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
+volume_db = -5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
