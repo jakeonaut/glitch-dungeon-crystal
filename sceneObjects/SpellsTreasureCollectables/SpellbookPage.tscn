@@ -114,18 +114,20 @@ script = ExtResource( 2 )
 shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 10 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="10"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="11"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
 stream = null
 script = ExtResource( 13 )
 

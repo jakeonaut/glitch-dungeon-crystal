@@ -11,14 +11,14 @@ var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 func _ready_impl():
     ._ready_impl()
     
-    if not global.memory.has("roomPath"):
-        global.pauseMoveInput = true
-        should_do_cutscene = true
-        player.applyGlitch(global.GlitchForm.NORMAL, true)
-        player.true_terminal_vel = 5
-        player.animation_speed_multiplier = 0.3
-        player.aniPlayer.remove_animation("fallFar")
-        player.aniPlayer.add_animation("fallFar", player.aniPlayer.get_animation("fall"))
+    # if not global.memory.has("roomPath"):
+    #     global.pauseMoveInput = true
+    #     should_do_cutscene = true
+    #     player.applyGlitch(global.GlitchForm.NORMAL, true)
+    #     player.true_terminal_vel = 5
+    #     player.animation_speed_multiplier = 0.3
+    #     player.aniPlayer.remove_animation("fallFar")
+    #     player.aniPlayer.add_animation("fallFar", player.aniPlayer.get_animation("fall"))
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

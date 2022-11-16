@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -19,9 +19,14 @@
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scripts/WaterCube.gd" type="Script" id=20]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=20]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Enemies/InfectedFrogEnemy.tscn" type="PackedScene" id=22]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=23]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/Toad_Dude.png" type="Texture" id=25]
+[ext_resource path="res://sceneObjects/Enemies/GlitchFlyingBug.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=27]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -39,6 +44,39 @@ resource_local_to_scene = true
 extents = Vector3( 2.5, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=21]
+resource_local_to_scene = true
+extents = Vector3( 3, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 23 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/enable_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 25 )
+shader_param/base_palette = ExtResource( 24 )
+shader_param/target_palette = ExtResource( 20 )
+
+[sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -72,6 +110,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.46, 10.2016, 0 )
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -112,7 +151,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65590, 0, 1, 65591, 0, 1, 65592, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131126, 0, 1, 131128, 0, 1, 196598, 0, 1, 196599, 0, 1, 196662, 0, 1, 196663, 0, 1, 196664, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 524278, 0, 1, 524279, 0, 1, 589814, 0, 1, 589815, 0, 1, 655350, 0, 1, 655351, 0, 1, 720886, 0, 1, 720887, 0, 1, 786422, 0, 1, 851960, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, -262144, 0, 1, -262143, 0, 1, -262124, 0, 1, -262123, 0, 1, -262122, 0, 1, -262121, 0, 1, -262120, 0, 1, -262119, 0, 1, -262118, 0, 1, -262117, 0, 1, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -262109, 0, 1, -262108, 0, 1, -262093, 0, 1, -262092, 0, 1, -262091, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196589, 0, 1, -196587, 0, 1, -196586, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -196582, 0, 1, -196581, 0, 1, -196580, 0, 1, -196579, 0, 1, -196578, 0, 1, -196577, 0, 1, -196576, 0, 1, -196575, 0, 1, -196574, 0, 1, -196573, 0, 1, -196572, 0, 1, -196571, 0, 1, -196557, 0, 1, -196555, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131053, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131049, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131043, 0, 1, -131042, 0, 1, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -131035, 0, 1, -131021, 0, 1, -131020, 0, 1, -131019, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
+"cells": PoolIntArray( 14, 0, 1, 38, 0, 1, 39, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65574, 0, 1, 65576, 0, 1, 65590, 0, 1, 65591, 0, 1, 65592, 0, 1, 65593, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131110, 0, 1, 131111, 0, 1, 131112, 0, 1, 131125, 0, 1, 131126, 0, 1, 131128, 0, 1, 131130, 0, 1, 196598, 0, 1, 196599, 0, 1, 196660, 0, 1, 196661, 0, 1, 196662, 0, 1, 196663, 0, 1, 196664, 0, 1, 196665, 0, 1, 196666, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 524278, 0, 1, 524279, 0, 1, 589814, 0, 1, 589815, 0, 1, 589883, 0, 1, 589884, 0, 1, 589885, 0, 1, 655350, 0, 1, 655351, 0, 1, 655419, 0, 1, 655421, 0, 1, 720886, 0, 1, 720887, 0, 1, 720955, 0, 1, 720956, 0, 1, 786422, 0, 1, 851960, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, -262144, 0, 1, -262143, 0, 1, -262124, 0, 1, -262123, 0, 1, -262122, 0, 1, -262121, 0, 1, -262120, 0, 1, -262119, 0, 1, -262118, 0, 1, -262117, 0, 1, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -262113, 0, 1, -262112, 0, 1, -262111, 0, 1, -262109, 0, 1, -262108, 0, 1, -262093, 0, 1, -262092, 0, 1, -262091, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196589, 0, 1, -196587, 0, 1, -196586, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -196582, 0, 1, -196581, 0, 1, -196580, 0, 1, -196579, 0, 1, -196578, 0, 1, -196577, 0, 1, -196576, 0, 1, -196575, 0, 1, -196574, 0, 1, -196573, 0, 1, -196572, 0, 1, -196571, 0, 1, -196557, 0, 1, -196555, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131053, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131049, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131043, 0, 1, -131042, 0, 1, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -131035, 0, 1, -131021, 0, 1, -131020, 0, 1, -131019, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
 }
 script = ExtResource( 3 )
 __meta__ = {
@@ -129,7 +168,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 917498, 0, 2, -1, 0, 36 )
+"cells": PoolIntArray( 65592, 0, 2, 589883, 0, 2, 917498, 0, 2, -1, 0, 36 )
 }
 script = ExtResource( 4 )
 __meta__ = {
@@ -175,7 +214,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, -4.1, -4 )
 
 [node name="WaterCube7" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, -4.1, -4 )
-script = ExtResource( 20 )
 
 [node name="WaterCube8" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, -4.1, -4 )
@@ -197,7 +235,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -4.1, -4 )
 
 [node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4, -4.1, -4 )
-script = ExtResource( 20 )
 
 [node name="WaterCube15" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4, -4.1, -4 )
@@ -236,6 +273,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.8, 3.6, 0 )
 [node name="Mushroom7" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.9, 0.5, 0 )
 
+[node name="Mushroom8" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.6, 5.5, 0 )
+
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1829, 3.8396, 0 )
 
@@ -248,8 +288,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0452971, 0.165527 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 9.9, 0 )
 grav = 0
-bbText = "welcome to
-forbidden lands"
+bbText = "•welcome to
+forbidden lands,
+
+•the DRUID SEER saved me
+from these cursed waters
+•i owe everything to her."
 can_camera_zoom = false
 tiny_textbox = true
 
@@ -282,7 +326,53 @@ max_frames = 1
 should_animate = false
 
 [node name="InfectedFrogEnemy" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.57026, 6.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5703, -0.0999999, 0 )
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.4, 4.6, 0 )
+grav = 0
+bbText = "•end of DEMO
+•thank for playing!"
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 21 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+material_override = SubResource( 22 )
+texture = ExtResource( 25 )
+hframes = 7
+vframes = 1
+frame = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3, 0, 0 )
+
+[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 4.5, 0 )
+
+[node name="Dragonfly3" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 11.2, 0 )
+
+[node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 13.4, 0 )
+
+[node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 2.4, 0 )
+
+[node name="Dragonfly6" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8, 9.53674e-07, 0 )
+
+[node name="Dragonfly7" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.1, 7.9, 0 )
+
+[node name="Dragonfly8" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8, 6.6, 0 )
+
+[node name="GlitchFlyingBug" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4, 9, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -296,7 +386,7 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
 
 [node name="BasicFrogEnemy" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.6, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 6.9, 0 )
 walk_speed = 6
 walk_direction = -1
 
@@ -307,3 +397,5 @@ walk_direction = -1
 [editable path="Viewport/level/SavePoint"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]

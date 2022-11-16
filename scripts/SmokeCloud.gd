@@ -21,7 +21,7 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
-    if global.pauseGame: return
+    # if global.pauseGame: return
     if target_x != -9999:
         global_transform.origin.x = global_transform.origin.x + (target_x - global_transform.origin.x) * (delta*2)
     if target_y != -9999:

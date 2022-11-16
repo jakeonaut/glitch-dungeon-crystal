@@ -11,6 +11,7 @@ onready var myArea = get_node("Area")
 onready var collisionShape = get_node("Area/CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer")
 var has_pressed_again = false
+var has_hit_npc = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -27,7 +28,7 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
-  if global.pauseGame: return
+  # if global.pauseGame: return
 
   hitStuff()
   if broom_active_timer == 0:
@@ -80,18 +81,24 @@ func hitStuff():
   var areas = myArea.get_overlapping_areas()
   for area in areas:
     if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-      area.get_node("..").ouchies(global_transform.origin)
-      my_broom_owner.has_sweeped_glitch = true
+      if global.memory.has("broom"):
+        area.get_node("..").ouchies(global_transform.origin)
+        my_broom_owner.has_sweeped_glitch = true
+      else:
+        area.get_node("..").getSmacked()
       my_broom_owner.broomSound.play()
       summonSmokeClouds(5, true, true)
       # TODO kill glitches or "free" them like glitch slug...
       pass
     elif area.is_in_group("corporeal_body"):
       var npc = area.get_node("..")
-      if npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+      if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+        has_hit_npc = true
         npc.getSmacked()
 
   # erase glitch tiles...
+  if not global.memory.has("broom"):
+    return
   var x = collisionShape.global_transform.origin.x
   var y = collisionShape.global_transform.origin.y
   var tb = y + collisionShape.shape.height/2

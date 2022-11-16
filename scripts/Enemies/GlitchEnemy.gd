@@ -41,6 +41,10 @@ export var walk_direction = 1
 export var is_particle = false
 export var modAmt = 0.5
 
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 10
+
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
 var glitch_switch_time_limit = 99
@@ -150,6 +154,17 @@ func _process(delta):
                 slime_state = SlimeState.WALK
 
     glitchSetSpritesAndCollision()
+
+    if is_smacked:
+        smack_timer += (delta * 22)
+        if smack_timer >= smack_time_limit:
+            is_smacked = false
+            var material = mySprite.material_override
+            if material is ShaderMaterial:
+                material.set_shader_param("time_influence", 3)
+                # material.set_shader_param("y_div", 2.3)
+                material.set_shader_param("normal_offset", .02)
+                mySprite.material_override = material
     
 func doHorizontalWalkingBehavior():
     if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
@@ -332,3 +347,13 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             new_material.set_shader_param("enable_glitch", "true")
             new_material.set_shader_param("target_palette", global.weird_base_palette)
             newSmokeCloud.set_material_override(new_material.duplicate())
+
+func getSmacked():
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 35)
+    material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .15)
+    mySprite.material_override = material
+  smack_timer = 0
+  is_smacked = true

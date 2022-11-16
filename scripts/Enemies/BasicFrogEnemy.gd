@@ -6,11 +6,15 @@ var jump_time_limit = 30
 var air_timer = 0
 var air_time_limit = 15
 
+onready var interactionArea = get_node("SmallInteractionArea")
+
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
 func _process(delta):
+  print(should_do_fallthrough_area_collision)
+
   if on_ground:
     jump_timer +=  (delta * 22)
     if jump_timer >= jump_time_limit:

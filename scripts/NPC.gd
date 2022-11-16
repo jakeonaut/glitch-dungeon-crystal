@@ -16,6 +16,7 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 
+onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
@@ -50,6 +51,7 @@ func _ready():
   set_physics_process(true)
 
   set_collision_mask_bit(1, true)
+  mySprite.material_override = mySprite.material_override.duplicate()
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
@@ -81,6 +83,16 @@ func _ready():
 
 func _process(delta):
   # super._process(delta) implicit
+
+  # don't you love math
+  if interactPrompt != null:
+    interactPrompt.visible = get_node("SmallInteractionArea").wasTouchingPlayer and (
+      (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
+      global.activeInteractor == null or (
+        global.activeInteractor == textBox and textBox.nextPrompt.visible
+      )
+    )
+
   if fallthroughSolid:
     if not visible and fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.remove_from_group("fallthrough")
@@ -109,6 +121,11 @@ func getSmacked():
   smack_timer = 0
   is_smacked = true
 
+  if global.activeInteractor == null:
+    textBox.interact()
+  elif global.activeInteractor == textBox:
+    global.activeInteractor.InteractActivate()
+
 func setGlobalMemoryOfHasSpoken():
   if not global.memory.has(level.getShortLevelName()):
     global.memory[level.getShortLevelName()] = {}
@@ -120,6 +137,7 @@ func isActive():
 func activate():
   if global.activeInteractor == null:
     textBox.interact()
+  pass
 
 func passiveActivate(delta):
   if can_move:

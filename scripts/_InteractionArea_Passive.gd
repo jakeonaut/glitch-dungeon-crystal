@@ -6,6 +6,7 @@ var is_touching_water = false
 var touched_water_area = null
 var is_touching_ladder = false
 onready var parent = get_parent()
+export var handlePlayerInteraction = true
 
 func _ready():
     set_process(true)
@@ -24,13 +25,14 @@ func playerActivationAreaPassiveActivate():
     touchingPlayer = true
 
 func _process(_delta):
-    if not touchingPlayer and wasTouchingPlayer:
-        if parent.has_method("justStopPassiveActivate"):
-            parent.justStopPassiveActivate()
-            
-    if not touchingPlayer and not wasTouchingPlayer:
-        if parent.has_method("stopPassiveActivate"):
-            parent.stopPassiveActivate()
+    if handlePlayerInteraction:
+        if not touchingPlayer and wasTouchingPlayer:
+            if parent.has_method("justStopPassiveActivate"):
+                parent.justStopPassiveActivate()
+                
+        if not touchingPlayer and not wasTouchingPlayer:
+            if parent.has_method("stopPassiveActivate"):
+                parent.stopPassiveActivate()
         
     # need to have this buffer variable because the PlayerInteractionArea
     # handles the PassiveInteractActivate method, and this can occur

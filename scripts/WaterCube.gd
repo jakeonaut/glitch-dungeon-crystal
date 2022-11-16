@@ -10,8 +10,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var waterFilter = get_node("WaterFilter")
 onready var mySprite = get_node("Sprite3D")
 
-export var water_cube_width = 4.0
-export var water_cube_height = 4.0
+export var water_cube_width = 2.0
+export var water_cube_height = 2.0
 export var turn_poisonous = false
 var is_poison = false
 
@@ -32,7 +32,7 @@ func getGameCamera():
 func _ready():
   set_process(true)
 
-  target_origin = self.global_transform.origin + Vector3(-1, 2, 0)
+  target_origin = self.global_transform.origin + Vector3(-2, 2, 0)
   mySprite.material_override = mySprite.material_override.duplicate()
   if turn_poisonous:
     becomePoisonous()
@@ -114,8 +114,8 @@ func makeNewSplashSprite(x_offset, is_mini = false):
 func setFilterPosition():
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   var target_pos = getGameCamera().unproject_position(target_origin)
-  waterFilter.rect_position.x = target_pos.x - 1
-  waterFilter.rect_position.y = target_pos.y - 1
+  waterFilter.rect_position.x = target_pos.x - 200
+  waterFilter.rect_position.y = target_pos.y - 232
 
   var bot_right_corner_3D = target_origin + Vector3(water_cube_width, water_cube_height, 0.0)
 

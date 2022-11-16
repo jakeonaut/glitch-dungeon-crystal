@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -14,7 +14,10 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=18]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -138,9 +141,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Spatial"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
-audio_listener_enable_3d = true
+[node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
@@ -247,7 +248,7 @@ shape = SubResource( 18 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56462, 5, 0 )
-path = "res://levels/EndlessFantasy/002PathToSacredDoors/Marsh_Challenge.tscn"
+path = "res://levels/EndlessFantasy/002PathToSacredDoors/0_1.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
@@ -282,14 +283,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9524, 0.428972, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
 grav = 0
 
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55564, 10, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 9, 0 )
+
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9, 0 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1280.0
+margin_bottom = 1024.0
 texture = SubResource( 14 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 12 )]
 

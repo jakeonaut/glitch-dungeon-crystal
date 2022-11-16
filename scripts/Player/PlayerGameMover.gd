@@ -5,7 +5,6 @@ onready var interactionArea = get_node("InteractionArea")
 var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0
-var can_broom = global.can_broom
 var jump_press_timer = 999
 var jump_press_time_limit = 5
 var jump_press_broom_time_limit = 30

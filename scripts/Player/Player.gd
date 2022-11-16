@@ -137,12 +137,13 @@ func _process(delta):
   if not processGlitchHurtRecovery(delta):
     return
 
-  if global.pauseGame or global.pauseMoveInput or physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
+  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
+    return
+  processBroomLogic(delta)
+  if global.pauseGame or global.pauseMoveInput:
     return
     
   # doTimeDilation(real_delta)
-  if global.memory.has("broom"):
-    processBroomLogic(delta)
 
   if can_cast_spell_timer < can_cast_spell_time_limit:
     can_cast_spell_timer += (delta*22)
@@ -430,7 +431,7 @@ func processBroomLogic(delta):
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
       summonedBroom.rotation_degrees = Vector3(0, 0, 0)
     summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
-    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 0.925
+    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
     
 # @override
 func landed():
