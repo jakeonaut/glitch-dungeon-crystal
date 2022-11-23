@@ -76,6 +76,13 @@ func _physics_process(delta):
     # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
     pass
 
+func bodyPushMe(delta, origin):
+  var multiplier = 5
+  if self.global_transform.origin.x > origin.x:
+    self.global_transform.origin.x += (delta * multiplier)
+  else:
+    self.global_transform.origin.x -= (delta * multiplier)
+
 func playJumpSound():
   jumpSound.pitch_scale = rand_range(0.9, 1.1)
   .playJumpSound()

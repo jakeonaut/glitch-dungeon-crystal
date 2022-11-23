@@ -6,6 +6,10 @@ var jump_time_limit = 30
 var air_timer = 0
 var air_time_limit = 15
 
+var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
+
+export var is_infected = false
+
 onready var interactionArea = get_node("SmallInteractionArea")
 
 func _ready():
@@ -13,8 +17,6 @@ func _ready():
   mySprite.updateBaseFrame(0, 0)
 
 func _process(delta):
-  print(should_do_fallthrough_area_collision)
-
   if on_ground:
     jump_timer +=  (delta * 22)
     if jump_timer >= jump_time_limit:
@@ -43,4 +45,21 @@ func landed():
   behavior_walking = false
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
+
+  if is_infected:
+    var how_many = randi() % 3 + 4
+    for _i in range(how_many):
+      spawnASpore()
   
+func spawnASpore():
+    var spore = sporeRes.instance()
+    spore.initially_fly_up = true
+    spore.global_transform.origin = self.global_transform.origin
+    spore.original_pos = self.global_transform.origin
+    level.add_child(spore)
+    spore.bubble_speed = -rand_range(1.925, 2.8)
+    spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
+    spore.delta_multiplier = 4.0
+    spore.global_transform.origin.x += rand_range(-3, 3)
+    spore.global_transform.origin.y += 1.5
+    spore.global_transform.origin.y -= rand_range(0, .225)

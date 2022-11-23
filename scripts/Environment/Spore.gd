@@ -8,6 +8,8 @@ var opacity = 1.0
 var target_opacity = 0.5
 var didja_get_me = false
 var bubble_speed = 0
+var initially_fly_up = false
+var delta_multiplier = 1.0
 
 onready var mySprite = get_node("Sprite3D")
 onready var interactionArea = get_node("SmallInteractionArea")
@@ -44,6 +46,8 @@ func _ready():
     
     original_pos = global_transform.origin
     randomizeTargetPos()
+    if initially_fly_up:
+        bubble_speed = -rand_range(1.925, 3.8)
     mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
@@ -55,7 +59,7 @@ func _process(delta):
     else:
         global_transform.origin.y -= bubble_speed * delta
 
-        global_transform.origin.x = global_transform.origin.x + (target_pos.x - global_transform.origin.x) * (delta)
+        global_transform.origin.x = global_transform.origin.x + (target_pos.x - global_transform.origin.x) * (delta * delta_multiplier)
         opacity = opacity + (target_opacity - opacity) * (delta * 2)
         mySprite.material_override.set_shader_param("opacity", opacity)
         
@@ -122,6 +126,7 @@ func randomizeTargetPos():
         original_pos.y,
         original_pos.z
     )
+    delta_multiplier = 1.0
     
 func isActive():
     return true

@@ -85,6 +85,7 @@ walk_speed = 10
 jump_force = 13
 sprite_offset_y = 0.125
 modAmt = 0.0
+is_infected = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )

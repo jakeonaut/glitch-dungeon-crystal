@@ -76,8 +76,10 @@ func _process(delta):
 
 func spawnASpore():
     var spore = sporeRes.instance()
-    add_child(spore)
     spore.global_transform.origin = spore_origin
+    spore.original_pos = spore_origin
+    level.add_child(spore)
+    spore.randomizeTargetPos()
     spore.global_transform.origin.x += rand_range(-2.5, 2.5)
     spore.global_transform.origin.y += 1
     spore.global_transform.origin.y -= rand_range(0, .625)

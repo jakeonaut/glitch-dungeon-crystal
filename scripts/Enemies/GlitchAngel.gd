@@ -26,15 +26,16 @@ func getPlayer():
 
 func _ready():
     set_process(true)
+
+    print(global_transform.origin)
+    original_pos = global_transform.origin
+    randomizeTargetPos()
     
     # flightPathAniPlayer.play("flySquare")
     if angel_state == AngelState.HIDDEN:
         myOtherSprite.visible = false
         get_node("HaloSprite").visible = false
         get_node("WingsSprite").visible = false
-
-    original_pos = global_transform.origin
-    randomizeTargetPos()
     
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique

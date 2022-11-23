@@ -28,7 +28,7 @@ var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
 var poison_timer = 0
-var poison_time_limit = 16
+var poison_time_limit = 28
 
 func _ready():
   grav = 60
@@ -189,7 +189,8 @@ func _process(delta):
       poisonWaterSound.play(sound_length - playback_position)
       reversePoisonWaterSound.stop()
     poison_timer += (delta*22)
-    glitchTickle(0)
+    if poison_timer > 7:
+      glitchTickle(0)
     if poison_timer >= poison_time_limit:
       tryDieToEnemy(true, false)
       poison_timer = 0

@@ -8,6 +8,17 @@ var is_touching_ladder = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+
+# is this cheating?
+var player = null
+func getPlayer():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if player == null:
+    player = level.player
+  return player
+
 func _ready():
     set_process(true)
 
@@ -18,6 +29,8 @@ func PassiveInteractActivate(delta):
     if parent.has_method("passiveActivate"):
         parent.passiveActivate(delta)
     touchingPlayer = true
+    if is_in_group("corporeal_body"):
+        getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
 func playerActivationAreaPassiveActivate():
     if parent.has_method("playerActivationAreaPassiveActivate"):
