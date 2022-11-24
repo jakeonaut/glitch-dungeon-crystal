@@ -4,6 +4,7 @@ onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 
 export var my_glitch_form = 2
+export var first_ever_glitch = false
 
 var original_position = null
 var previous_point = null
@@ -12,6 +13,14 @@ var t = 0
 var is_active = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+
+var levelTiles = null
+func getLevelTiles():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if levelTiles == null:
+    levelTiles = level.levelTiles
+  return levelTiles
 
 var player = null
 func getPlayer():
@@ -40,7 +49,7 @@ func _process(delta):
       mySprite.visible = false
       t = 0
 
-  if not mySprite.visible and shouldIBeActive():
+  if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
     mySprite.visible = true
     mySprite.global_transform.origin = original_position
     is_active = true
@@ -63,4 +72,10 @@ func passiveActivate(_delta):
     collectSound.play()
   is_active = false
 
-  getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
+  if first_ever_glitch:
+    global.pauseGame = true
+    getPlayer().glitch_form = global.GlitchForm.FEATHER
+    getPlayer().changeSpriteColorPalette(global.green_dungeon_palette)
+    getLevelTiles().unrandomizeAllTiles()
+  else:
+    getPlayer().applyObeliskGlitch(my_glitch_form, false, true)

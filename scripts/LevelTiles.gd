@@ -21,6 +21,12 @@ onready var cosmeticLevelTiles = get_node("CosmeticLevelTiles") if has_node("Cos
 onready var backgroundLevelTiles = get_node("BackgroundLevelTiles") if has_node("BackgroundLevelTiles") else null
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+var player = null
+func getPlayer():
+  if player == null:
+    player = level.player
+  return player
+
 var tile_dict = {}
 var infected_spikes = []
 var spike_infection_timer = 0
@@ -53,81 +59,122 @@ func buildRandomTiles():
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
     var cell_index = cell_indices[i]
-    var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
-    var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
-    var tile_name = mesh_library.get_item_name(tile_type)
-    if tile_name == "BrickSolidCeil":
-      var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-      var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
-      if bottom_neighbor_tile_type != -1: # we have a bottom neighbor!!!
-        if top_neighbor_tile_type == -1 and grow_tile_upward: # we have no top neighbor...
-          var new_index = Vector3(cell_index.x, cell_index.y+1, cell_index.z)
-          setRandomTileNameOfType("BrickSolidRoof", 7, new_index, tile_orientation)
-          var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
-          tile_dict[new_index] = [name, tile_orientation]
-        setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
-      else:
-        setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation)
-    elif tile_name == "BrickSolid":
-      var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
-      var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-      var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
-      var skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
-      # DESERT MODIFICATION
-      if my_tileset_type == global.TilesetType.DESERT:
-        skip_level_top_neighbor_tile_type = top_neighbor_tile_type
-        skip_level_bottom_neighbor_tile_type = bottom_neighbor_tile_type
+    buildSingleRandomTile(cell_index)
 
-      if top_neighbor_tile_type == -1 and skip_level_top_neighbor_tile_type == -1: # no top neighbor
-        var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
-        var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
-        if left_neighbor_tile_type == -1: # no left neighbor
-          setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation)
-        elif right_neighbor_tile_type == -1: # no right neighbor
-          setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation)
-        else:
-          setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation)
-      # we have a top neighbor, but no bottom neighbor
-      elif bottom_neighbor_tile_type == -1 and skip_level_bottom_neighbor_tile_type == -1: 
-        setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation)
-        # DESERT MODIFICATION 
-        if my_tileset_type == global.TilesetType.DESERT:
-          skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
-          if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
-            var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
-            setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation)
-            var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
-            tile_dict[new_index] = [name, tile_orientation]
-      else:
-        setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
-    elif tile_name == "CloudSemisolid":
-      var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-      if top_neighbor_tile_type == -1: # no top neighbor
-        setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
-      else:
-        setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
-    elif tile_name == "Spikes":
+func buildSingleRandomTile(cell_index):
+  var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
+  var tile_name = mesh_library.get_item_name(tile_type)
+  if tile_name == "BrickSolidCeil":
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
+    if bottom_neighbor_tile_type != -1: # we have a bottom neighbor!!!
+      if top_neighbor_tile_type == -1 and grow_tile_upward: # we have no top neighbor...
+        var new_index = Vector3(cell_index.x, cell_index.y+1, cell_index.z)
+        setRandomTileNameOfType("BrickSolidRoof", 7, new_index, tile_orientation)
+        var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
+        tile_dict[new_index] = [name, tile_orientation]
+      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
+    else:
+      setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation)
+  elif tile_name == "BrickSolid":
+    var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
+    var skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
+    # DESERT MODIFICATION
+    if my_tileset_type == global.TilesetType.DESERT:
+      skip_level_top_neighbor_tile_type = top_neighbor_tile_type
+      skip_level_bottom_neighbor_tile_type = bottom_neighbor_tile_type
+
+    if top_neighbor_tile_type == -1 and skip_level_top_neighbor_tile_type == -1: # no top neighbor
       var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
       var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
-      if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
-        setTileNameNum("Spikes", 4, cell_index, tile_orientation) # 5, but 0 indexed...
-      elif left_neighbor_tile_type == -1: # no left neighbor
-        pass 
+      if left_neighbor_tile_type == -1: # no left neighbor
+        setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation)
       elif right_neighbor_tile_type == -1: # no right neighbor
-        setTileNameNum("Spikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
+        setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation)
       else:
-        setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
-    
-    # maybe make it into a dictionary so that infected spikes removed can be remembered easier
-    # and other "tile pushing/creating" if that happens
-    var name = mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z))
-    tile_dict[cell_index] = [name, tile_orientation]
+        setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation)
+    # we have a top neighbor, but no bottom neighbor
+    elif bottom_neighbor_tile_type == -1 and skip_level_bottom_neighbor_tile_type == -1: 
+      setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation)
+      # DESERT MODIFICATION 
+      if my_tileset_type == global.TilesetType.DESERT:
+        skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
+        if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
+          var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
+          setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation)
+          var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
+          tile_dict[new_index] = [name, tile_orientation]
+    else:
+      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
+  elif tile_name == "CloudSemisolid":
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    if top_neighbor_tile_type == -1: # no top neighbor
+      setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
+    else:
+      setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
+  elif tile_name == "Spikes":
+    var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
+    var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
+    if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
+      setTileNameNum("Spikes", 4, cell_index, tile_orientation) # 5, but 0 indexed...
+    elif left_neighbor_tile_type == -1: # no left neighbor
+      pass 
+    elif right_neighbor_tile_type == -1: # no right neighbor
+      setTileNameNum("Spikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
+    else:
+      setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
+  
+  # maybe make it into a dictionary so that infected spikes removed can be remembered easier
+  # and other "tile pushing/creating" if that happens
+  var name = mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z))
+  tile_dict[cell_index] = [name, tile_orientation]
 
 var randomize_timer = 0
 var randomize_time_limit = 0.5
+var unrandomize_timer = 0
+var unrandomize_time_limit = 0.5
+var unrandomize_cell_index = 0
+var unrandomize_cell_indices = []
+var is_unrandomizing = false
+var is_rerandomizing = false
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
+  if is_unrandomizing:
+    unrandomize_timer += (delta*22)
+    if unrandomize_timer >= unrandomize_time_limit:
+      unrandomize_timer = 0
+      for _i in range(15):
+        var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
+        unrandomizeTile(cell_index)
+        unrandomize_cell_index += 1
+        if unrandomize_cell_index >= unrandomize_cell_indices.size():
+          unrandomize_cell_index = 0
+          is_unrandomizing = false
+          getPlayer().applyGlitch(global.GlitchForm.FEATHER)
+          for i in range(len(unrandomize_cell_indices)):
+            unrandomizeTile(unrandomize_cell_indices[i])
+          is_rerandomizing = true
+          break
+    return
+  elif is_rerandomizing:
+    unrandomize_timer += (delta*22)
+    if unrandomize_timer >= unrandomize_time_limit:
+      unrandomize_timer = 0
+      for _i in range(15):
+        var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
+        buildSingleRandomTile(cell_index)
+        unrandomize_cell_index += 1
+        if unrandomize_cell_index >= unrandomize_cell_indices.size():
+          unrandomize_cell_index = 0
+          is_rerandomizing = false
+          global.pauseGame = false
+          break
+    return
+
   randomize_timer += delta
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
@@ -216,6 +263,23 @@ func randomizeTile(cell_index):
     setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
+
+func unrandomizeAllTiles():
+  unrandomize_cell_indices = get_used_cells()
+  unrandomize_cell_indices.shuffle()
+  unrandomize_cell_index = 0
+  is_unrandomizing = true
+
+func unrandomizeTile(cell_index):
+  var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  var tile_name = mesh_library.get_item_name(tile_type)
+  var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
+  if "BrickSolidRoof" in tile_name or "BrickSolidCeil" in tile_name:
+    setTileNameNum("BrickSolidCeil", 0, cell_index, tile_orientation)
+  elif "BrickSolid" in tile_name:
+    setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)
+  elif "CloudSemisolid" in tile_name:
+    setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
   
 func changeColorPalette(palette, _palette_alt = null):
   var item_list = mesh_library.get_item_list()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -49,8 +49,6 @@
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=47]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=48]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=49]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=50]
-[ext_resource path="res://assets/palettes/microsoft-windows-1x.png" type="Texture" id=51]
 
 [sub_resource type="BoxShape" id=20]
 resource_local_to_scene = true
@@ -136,7 +134,7 @@ shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
-shader_param/enable_no_transparency = true
+shader_param/enable_no_transparency = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
@@ -148,7 +146,7 @@ shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 40 )
 shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 50 )
+shader_param/target_palette = ExtResource( 32 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "default"
@@ -320,7 +318,7 @@ shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 40 )
 shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 51 )
+shader_param/target_palette = ExtResource( 32 )
 
 [sub_resource type="Animation" id=55]
 resource_name = "default"

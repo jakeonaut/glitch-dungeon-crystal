@@ -14,6 +14,9 @@ export var water_cube_width = 2.0
 export var water_cube_height = 2.0
 export var turn_poisonous = false
 var is_poison = false
+var poisonous_timer = 0
+var poisonous_time_limit = 10
+var poisonous_counter = 0
 
 var target_origin = Vector3(0, 0, 0)
 
@@ -37,27 +40,37 @@ func _ready():
   if turn_poisonous:
     becomePoisonous()
 
-func _process(_delta):
+func _process(delta):
   if level and waterFilter.get_parent() == self:
     self.remove_child(waterFilter)
     level.get_node("UILayer/Filters").add_child(waterFilter)
 
   setFilterPosition()
-  
-func isActive():
-  return true
+
+  if poisonous_counter > 0 and poisonous_counter < 3:
+    poisonous_timer += (delta * 22)
+    if poisonous_timer >= poisonous_time_limit:
+      poisonous_timer = 0
+      poisonous_counter += 1
+      if poisonous_counter == 2:
+        mySprite.material_override.set_shader_param("shake_power", 0.006)
+        mySprite.material_override.set_shader_param("shake_block_size", 60)
+        mySprite.material_override.set_shader_param("enable_glitch", true)
+      elif poisonous_counter == 3:
+        mySprite.material_override.set_shader_param("time_influence", 26.841)
+        mySprite.material_override.set_shader_param("y_div", 0.5)
+        mySprite.material_override.set_shader_param("target_palette", global.rgb_palette)
 
 func becomePoisonous():
-  if is_poison:
+  if is_poison or poisonous_counter > 0:
     return
   is_poison = true
-  mySprite.material_override.set_shader_param("shake_power", 0.006)
-  mySprite.material_override.set_shader_param("shake_block_size", 60)
-  mySprite.material_override.set_shader_param("enable_glitch", true)
-  mySprite.material_override.set_shader_param("time_influence", 26.841)
-  mySprite.material_override.set_shader_param("y_div", 0.5)
-  mySprite.material_override.set_shader_param("target_palette", global.rgb_palette)
+  poisonous_counter = 1
+  mySprite.material_override.set_shader_param("target_palette", global.dream_palette)
   waterFilter.visible = false
+
+func isActive():
+  return true
   
 func passiveActivate(_delta):
   if not getPlayer().was_touching_water:

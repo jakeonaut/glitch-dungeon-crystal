@@ -11,6 +11,7 @@ export var can_activate = true
 export var can_move = true
 export var can_camera_zoom = true
 export var is_fast_text = false
+export var dont_recolor_me = false
 
 var is_smacked = false
 var smack_timer = 0
@@ -83,6 +84,9 @@ func _ready():
 
 func _process(delta):
   # super._process(delta) implicit
+
+  if dont_recolor_me:
+    mySprite.remove_from_group("sprite")
 
   # don't you love math
   if interactPrompt != null:
