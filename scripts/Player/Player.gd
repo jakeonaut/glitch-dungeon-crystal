@@ -222,7 +222,7 @@ func _process(delta):
     level.glitchScreenEffect.visible = true
     level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
     musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
-  if poison_timer <= 0:
+  if poison_timer < 0:
     poison_timer = 0
     level.glitchScreenEffect.visible = false
     musicPlayer.changeSongPitch(1.0)

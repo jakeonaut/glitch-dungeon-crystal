@@ -2,7 +2,7 @@ extends Spatial
 
 onready var bugHead = get_node("GlitchFlyingBugHead")
 onready var body1 = get_node("GlitchFlyingBugBody1")
-onready var body2 = get_node("GlitchFlyingBugBody2")
+# onready var body2 = get_node("GlitchFlyingBugBody2")
 # onready var scoochSound1 = get_node("Sounds/ScoochSound1")
 # onready var scoochSound2 = get_node("Sounds/ScoochSound2")
 onready var playerActivationArea = get_node("PlayerActivationArea")
@@ -25,7 +25,7 @@ func _ready():
     body1.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override().duplicate())
     body1.get_node("WingSprite1").set_material_override(body1.get_node("WingSprite1").get_material_override().duplicate())
     body1.get_node("WingSprite2").set_material_override(body1.get_node("WingSprite2").get_material_override().duplicate())
-    body2.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override())
+    # body2.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override())
 
     bugHead.should_collide_floor = false
     bugHead.should_collide_ceil = false
@@ -37,11 +37,11 @@ func _ready():
     body1.should_only_do_middle_sensor = true
     body1.should_do_simple_sensor_probe = true
     body1.glitch_form = global.GlitchForm.FEATHER
-    body2.should_collide_floor = false
-    body2.should_collide_ceil = false
-    body2.should_only_do_middle_sensor = true
-    body2.should_do_simple_sensor_probe = true
-    body2.glitch_form = global.GlitchForm.FEATHER
+    # body2.should_collide_floor = false
+    # body2.should_collide_ceil = false
+    # body2.should_only_do_middle_sensor = true
+    # body2.should_do_simple_sensor_probe = true
+    # body2.glitch_form = global.GlitchForm.FEATHER
 
     var levelTiles = body1.getLevelTiles()
     if starting_glitch_type == global.GlitchForm.NORMAL:
@@ -80,23 +80,23 @@ func _process(delta):
     #############################
     # Only allow collision for whichever body part is about to hit the wall...
     #############################
-    if bugHead.walk_direction == body1.walk_direction and body1.walk_direction == body2.walk_direction:
+    if bugHead.walk_direction == body1.walk_direction:
         bugHead.should_collide_horizontally = true
         body1.should_collide_horizontally = false
-        body2.should_collide_horizontally = false
-    elif bugHead.walk_direction != body1.walk_direction and body1.walk_direction == body2.walk_direction:
+    #     body2.should_collide_horizontally = false
+    elif bugHead.walk_direction != body1.walk_direction:
         bugHead.should_collide_horizontally = false
         body1.should_collide_horizontally = true
-        body2.should_collide_horizontally = false
-    elif bugHead.walk_direction == body1.walk_direction and body1.walk_direction != body2.walk_direction:
-        bugHead.should_collide_horizontally = false
-        body1.should_collide_horizontally = false
-        body2.should_collide_horizontally = true
-    else:
-        # should theoretically never get here...
-        bugHead.should_collide_horizontally = true
-        body1.should_collide_horizontally = true
-        body2.should_collide_horizontally = true
+        # body2.should_collide_horizontally = false
+    # elif bugHead.walk_direction == body1.walk_direction and body1.walk_direction != body2.walk_direction:
+    #     bugHead.should_collide_horizontally = false
+    #     body1.should_collide_horizontally = false
+    #     body2.should_collide_horizontally = true
+    # else:
+    #     # should theoretically never get here...
+    #     bugHead.should_collide_horizontally = true
+    #     body1.should_collide_horizontally = true
+    #     body2.should_collide_horizontally = true
 
     #############################
     # NEED TO MAKE SURE HEAD IS BEFORE BODY1 AND BODY1 IS BEFORE BODY2
@@ -117,20 +117,20 @@ func _process(delta):
             body1.slime_state_timer = 0
             body1.slime_state = body1.SlimeState.WALK
 
-    if bugHead.walk_direction == 1 and body2.walk_direction == 1:
-        if bugHead.global_transform.origin.x < body2.global_transform.origin.x + 2.5:
-            body2.slime_state_timer = 0
-            body2.slime_state = body2.SlimeState.IDLE
-        if bugHead.global_transform.origin.x > body2.global_transform.origin.x + 3.5:
-            body2.slime_state_timer = 0
-            body2.slime_state = body2.SlimeState.WALK
-    if bugHead.walk_direction == -1 and body2.walk_direction == -1:
-        if bugHead.global_transform.origin.x > body2.global_transform.origin.x - 2.5:
-            body2.slime_state_timer = 0
-            body2.slime_state = body2.SlimeState.IDLE
-        if bugHead.global_transform.origin.x < body2.global_transform.origin.x - 3.5:
-            body2.slime_state_timer = 0
-            body2.slime_state = body2.SlimeState.WALK
+    # if bugHead.walk_direction == 1 and body2.walk_direction == 1:
+    #     if bugHead.global_transform.origin.x < body2.global_transform.origin.x + 2.5:
+    #         body2.slime_state_timer = 0
+    #         body2.slime_state = body2.SlimeState.IDLE
+    #     if bugHead.global_transform.origin.x > body2.global_transform.origin.x + 3.5:
+    #         body2.slime_state_timer = 0
+    #         body2.slime_state = body2.SlimeState.WALK
+    # if bugHead.walk_direction == -1 and body2.walk_direction == -1:
+    #     if bugHead.global_transform.origin.x > body2.global_transform.origin.x - 2.5:
+    #         body2.slime_state_timer = 0
+    #         body2.slime_state = body2.SlimeState.IDLE
+    #     if bugHead.global_transform.origin.x < body2.global_transform.origin.x - 3.5:
+    #         body2.slime_state_timer = 0
+    #         body2.slime_state = body2.SlimeState.WALK
 
 
 
@@ -147,9 +147,9 @@ func _process(delta):
     body1.tryAddEnemiesGroup()
     body1.myOtherSprite.visible = false
     body1.mySprite.visible = true
-    body2.tryAddEnemiesGroup()
-    body2.myOtherSprite.visible = false
-    body2.mySprite.visible = true
+    # body2.tryAddEnemiesGroup()
+    # body2.myOtherSprite.visible = false
+    # body2.mySprite.visible = true
 
     bugHead.get_node("AntennaSprite").flip_h = bugHead.myOtherSprite.flip_h
     body1.get_node("WingSprite1").flip_h = body1.myOtherSprite.flip_h
@@ -179,4 +179,4 @@ func ouchies(_broom_origin):
 func playerActivationAreaPassiveActivate():
     bugHead.am_i_really_in_range_of_player = true
     body1.am_i_really_in_range_of_player = true
-    body2.am_i_really_in_range_of_player = true
+    # body2.am_i_really_in_range_of_player = true

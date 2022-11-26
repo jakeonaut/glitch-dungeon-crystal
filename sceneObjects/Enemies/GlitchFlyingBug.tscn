@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/Enemies/GlitchFlyingBug.gd" type="Script" id=8]
 [ext_resource path="res://sceneObjects/Enemies/GlitchFlyingBugBody.tscn" type="PackedScene" id=17]
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
 extents = Vector3( 0.75, 0.24, 1 )
 
@@ -33,18 +33,6 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("GlitchFlyingBugBody2:translation:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -80,18 +68,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ -0.5, 0.0, 0.5, 0.0, -0.5 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("GlitchFlyingBugBody2:translation:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -0.5, -0.75, -0.5, 0.0, 0.5, 0.75, 0.5, 0.0, -0.5 ]
-}
 
 [node name="GlitchFlyingBug" type="Spatial"]
 script = ExtResource( 8 )
@@ -102,25 +78,18 @@ walk_speed = 6
 modAmt = 0.0
 
 [node name="GlitchFlyingBugBody1" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0 )
 walk_speed = 6
 modAmt = 0.0
 
-[node name="GlitchFlyingBugBody2" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1 )
-walk_speed = 6
-modAmt = 0.0
+[node name="WingSprite1" parent="GlitchFlyingBugBody1" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.928211, 1.80913, -4 )
 
-[node name="Sprite3D2" parent="GlitchFlyingBugBody2" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0954378, 0.3054, 6 )
+[node name="WingSprite2" parent="GlitchFlyingBugBody1" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.928211, -1.82821, -4 )
 
-[node name="WingSprite1" parent="GlitchFlyingBugBody2" index="2"]
-visible = false
-
-[node name="WingSprite2" parent="GlitchFlyingBugBody2" index="3"]
-visible = false
-
-[node name="CollisionShape" parent="GlitchFlyingBugBody2/FallthroughSolid" index="0"]
-shape = SubResource( 19 )
+[node name="CollisionShape" parent="GlitchFlyingBugBody1/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 4 )
@@ -132,4 +101,4 @@ shape = SubResource( 20 )
 anims/RESET = SubResource( 21 )
 anims/wiggle = SubResource( 22 )
 
-[editable path="GlitchFlyingBugBody2"]
+[editable path="GlitchFlyingBugBody1"]

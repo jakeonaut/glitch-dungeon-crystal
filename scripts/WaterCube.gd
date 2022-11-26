@@ -59,6 +59,7 @@ func _process(delta):
       elif poisonous_counter == 3:
         mySprite.material_override.set_shader_param("time_influence", 26.841)
         mySprite.material_override.set_shader_param("y_div", 0.5)
+        mySprite.material_override.set_shader_param("shake_power", 0.012)
         mySprite.material_override.set_shader_param("target_palette", global.rgb_palette)
 
 func becomePoisonous():

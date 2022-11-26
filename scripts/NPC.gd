@@ -85,7 +85,7 @@ func _ready():
 func _process(delta):
   # super._process(delta) implicit
 
-  if dont_recolor_me:
+  if dont_recolor_me and mySprite.is_in_group("sprite"):
     mySprite.remove_from_group("sprite")
 
   # don't you love math

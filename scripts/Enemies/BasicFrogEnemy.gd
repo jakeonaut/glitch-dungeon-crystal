@@ -16,6 +16,12 @@ func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
+func setAsParent(_owner):
+  behavior_jumping = true
+  behavior_walking = true
+  jump_timer = 0
+  walk_direction = -1
+
 func _process(delta):
   if on_ground:
     jump_timer +=  (delta * 22)

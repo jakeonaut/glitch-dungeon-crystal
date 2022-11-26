@@ -751,13 +751,13 @@ pitch_scale = 1.05
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
-volume_db = -28.0
+volume_db = -33.0
 pitch_scale = 1.2
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 25 )
-volume_db = -32.0
-pitch_scale = 1.05
+volume_db = -37.0
+pitch_scale = 0.75
 
 [node name="NoSpellSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 26 )
@@ -766,7 +766,7 @@ pitch_scale = 1.05
 
 [node name="DoubleJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 13 )
-volume_db = -20.0
+volume_db = -30.0
 
 [node name="WetJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )

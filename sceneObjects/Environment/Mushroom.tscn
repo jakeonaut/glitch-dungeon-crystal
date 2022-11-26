@@ -137,6 +137,16 @@ hframes = 5
 vframes = 5
 frame = 12
 
+[node name="Sprite3D8" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.1, -1 )
+material_override = SubResource( 2 )
+extra_cull_margin = 0.06
+pixel_size = 0.125
+texture = ExtResource( 1 )
+hframes = 5
+vframes = 5
+frame = 12
+
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 1.8, 0 )
 

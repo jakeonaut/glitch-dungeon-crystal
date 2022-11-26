@@ -12,6 +12,9 @@ var target_opacity = 1.0
 var didja_get_me = false
 var y_speed = 2
 export var pop_from_distance = true
+var pop_distance = 20
+var pop_timer = 0
+var pop_time_limit = 30
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -57,6 +60,9 @@ func _process(delta):
     if not mySprite.visible:
       queue_free()
   else:
+    pop_timer += (delta*22)
+    if pop_timer >= pop_time_limit:
+      bubbleStartPop()
     global_transform.origin.y += delta*y_speed
 
     global_transform.origin.x = global_transform.origin.x + (target_pos_x - global_transform.origin.x) * (delta*5)
@@ -76,7 +82,7 @@ func _process(delta):
       bulletTryDieToSolids()
     if pop_from_distance and \
        global_transform.origin.y > getPlayer().global_transform.origin.y and \
-       global_transform.origin.distance_to(getPlayer().global_transform.origin) > 10:
+       global_transform.origin.distance_to(getPlayer().global_transform.origin) > pop_distance:
       popSound1.max_db = -100
       popSound2.max_db = -100
       bubbleStartPop()
