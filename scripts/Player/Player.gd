@@ -29,6 +29,8 @@ var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
 var poison_timer = 0
 var poison_time_limit = 28
+var unpoison_timer = 0
+var unpoison_time_limit = 10
 
 func _ready():
   grav = 60
@@ -180,7 +182,7 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
 
   if is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison:
-    if poison_timer == 0:
+    if poison_timer == 0 or unpoison_timer > 0:
       poisonWaterSound.play()
     elif reversePoisonWaterSound.is_playing():
       # TODO(jaketrower): Could be put in a function
@@ -188,6 +190,10 @@ func _process(delta):
       var sound_length = reversePoisonWaterSound.stream.get_length()
       poisonWaterSound.play(sound_length - playback_position)
       reversePoisonWaterSound.stop()
+    # If trying to jump out of water a lot... poison harder!
+    if unpoison_timer > 0:
+      poison_timer += (delta * 220)
+      unpoison_timer = 0
     poison_timer += (delta*22)
     if poison_timer > 7:
       glitchTickle(0)
@@ -202,18 +208,25 @@ func _process(delta):
       var sound_length = poisonWaterSound.stream.get_length()
       reversePoisonWaterSound.play(sound_length - playback_position)
       poisonWaterSound.stop()
-    # decrease half as fast as it increases... toxic
-    poison_timer -= (delta*11)
-    if poison_timer <= 0:
-      poison_timer = 0
-      level.glitchScreenEffect.visible = false
-      musicPlayer.changeSongPitch(1.0)
-      reversePoisonWaterSound.stop()
+    # decrease more slowly than it increases... toxic
+    unpoison_timer += (delta * 22)
+    if unpoison_timer >= unpoison_time_limit:
+      poison_timer -= (delta * 22)
+      if poison_timer <= 0:
+        poison_timer = 0
+        level.glitchScreenEffect.visible = false
+        musicPlayer.changeSongPitch(1.0)
+        reversePoisonWaterSound.stop()
 
   if poison_timer > 0:
     level.glitchScreenEffect.visible = true
     level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
     musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
+  if poison_timer <= 0:
+    poison_timer = 0
+    level.glitchScreenEffect.visible = false
+    musicPlayer.changeSongPitch(1.0)
+    reversePoisonWaterSound.stop()
 
   #tryRotateCamera(delta)
   
