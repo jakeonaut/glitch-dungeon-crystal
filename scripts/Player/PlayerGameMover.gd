@@ -20,6 +20,10 @@ var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 
+var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
+var sparkle_timer = 0
+var sparkle_time_limit = 2
+
 func _ready():
   set_physics_process(true)
   set_process(true)
@@ -46,6 +50,13 @@ func _process(delta):
       has_sweeped_glitch = false
       target_last_grounded_y = global_transform.origin.y
       should_magic_jump = true
+
+  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input:
+    spawnSparkles(delta)
+  elif glitch_form == global.GlitchForm.FEATHER and pressingJump():
+    spawnSparkles(delta)
+  else:
+    sparkle_timer = 0
     
   # this is a little weird but fixes the fallthrough area situation:
   if linear_velocity.y < 0:
@@ -63,11 +74,29 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
 
-
   if global.memory.has("fishingRod") and on_ground and justPressedDown():
     aniPlayer.stop()
     aniPlayer.clear_queue()
     aniPlayer.queue("fishingSitDown")
+
+func spawnOneSparkle(xdiff):
+  var newSparkle = sparkleRes.instance()
+  level.add_child(newSparkle)
+  newSparkle.global_transform.origin = self.global_transform.origin
+  newSparkle.global_transform.origin.x -= xdiff - (hv.x / 20)
+  newSparkle.global_transform.origin.y -= 1.3
+  newSparkle.global_transform.origin.z -= 5.0
+  newSparkle.get_material_override().set_shader_param(
+    "target_palette", 
+    mySprite.material_override.get_shader_param("target_palette")
+  )
+
+func spawnSparkles(delta):
+  sparkle_timer += (delta*22)
+  if sparkle_timer >= sparkle_time_limit:
+    spawnOneSparkle(.5)
+    spawnOneSparkle(-.5)
+    sparkle_timer = 0
 
 func _physics_process(delta):
   delta = delta * global.time_dilation_multiplier

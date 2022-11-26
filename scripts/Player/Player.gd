@@ -202,7 +202,8 @@ func _process(delta):
       var sound_length = poisonWaterSound.stream.get_length()
       reversePoisonWaterSound.play(sound_length - playback_position)
       poisonWaterSound.stop()
-    poison_timer -= (delta*22)
+    # decrease half as fast as it increases... toxic
+    poison_timer -= (delta*11)
     if poison_timer <= 0:
       poison_timer = 0
       level.glitchScreenEffect.visible = false

@@ -74,8 +74,8 @@ func passiveActivate(_delta):
 
   if first_ever_glitch:
     global.pauseGame = true
-    getPlayer().glitch_form = global.GlitchForm.FEATHER
-    getPlayer().changeSpriteColorPalette(global.green_dungeon_palette)
+    getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", true)
     getLevelTiles().unrandomizeAllTiles()
+    musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)

@@ -275,10 +275,19 @@ tiny_textbox = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
+grav = 0
+bbText = "•um, hi!
+•press UP or
+X to jump I think"
+can_camera_zoom = false
+tiny_textbox = true
+
+[node name="NPC6" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 10.8, 0 )
 visible = false
 grav = 0
-bbText = "•press UP or
-X to jump I think"
+bbText = "hold UP or
+X to jump higher!"
 can_camera_zoom = false
 tiny_textbox = true
 

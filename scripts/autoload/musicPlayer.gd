@@ -31,7 +31,7 @@ func _process(delta):
 
     if currentlyPlayingTheme == wakeupPlayer and (not wakeupPlayer.is_playing() or global.memory.has("roomPath")):
         fade_out(wakeupPlayer)
-        tryToPlay(exploreThemePlayer)
+        tryToPlay(dungeonThemePlayer)
         
 func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):
@@ -95,12 +95,12 @@ func conductFromScenePath(path):
     changeSongPitch(1.0)
     if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0 or path.find("002") > 0  or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
-    elif path.find("IntroScene0") > 0 or path.find("000") > 0:
-        tryToPlay(wakeupPlayer)
+    # elif path.find("IntroScene0") > 0 or path.find("000") > 0:
+    #     tryToPlay(wakeupPlayer)
     elif path.find("IntroDungeon") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0:
-        tryToPlay(dungeonThemePlayer2)
+        tryToPlay(dungeonThemePlayer)
     elif path.find("Debug") > 0:
         tryToPlay(debugThemePlayer)
     elif path.find("Casino") > 0:

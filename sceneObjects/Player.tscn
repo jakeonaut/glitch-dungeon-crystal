@@ -746,12 +746,12 @@ vframes = 8
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
-volume_db = -35.0
+volume_db = -30.0
 pitch_scale = 1.05
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
-volume_db = -39.0
+volume_db = -28.0
 pitch_scale = 1.2
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]

@@ -66,6 +66,10 @@ func _process(delta):
 func restart():
     animation_counter = 0
     set_frame(start_frame)
+
+func randomizeFrame():
+    animation_counter = 0
+    set_frame(randi() % max_frames)
     
 func animate(delta):
     if max_frames == 1:

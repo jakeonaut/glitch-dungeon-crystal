@@ -136,6 +136,8 @@ var randomize_timer = 0
 var randomize_time_limit = 0.5
 var unrandomize_timer = 0
 var unrandomize_time_limit = 0.5
+var unrandomized_num = 0
+var unrandomized_num_counter = 0.1
 var unrandomize_cell_index = 0
 var unrandomize_cell_indices = []
 var is_unrandomizing = false
@@ -147,7 +149,8 @@ func _process(delta):
     unrandomize_timer += (delta*22)
     if unrandomize_timer >= unrandomize_time_limit:
       unrandomize_timer = 0
-      for _i in range(15):
+      unrandomized_num += unrandomized_num_counter
+      for _i in range(floor(unrandomized_num)):
         var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
         unrandomizeTile(cell_index)
         unrandomize_cell_index += 1
@@ -164,7 +167,8 @@ func _process(delta):
     unrandomize_timer += (delta*22)
     if unrandomize_timer >= unrandomize_time_limit:
       unrandomize_timer = 0
-      for _i in range(15):
+      unrandomized_num -= unrandomized_num_counter/2
+      for _i in range(ceil(unrandomized_num)):
         var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
         buildSingleRandomTile(cell_index)
         unrandomize_cell_index += 1
@@ -172,6 +176,7 @@ func _process(delta):
           unrandomize_cell_index = 0
           is_rerandomizing = false
           global.pauseGame = false
+          getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", false)
           break
     return
 
