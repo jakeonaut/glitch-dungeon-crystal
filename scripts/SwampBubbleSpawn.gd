@@ -23,6 +23,7 @@ func isActive():
 func spawn():
     bubbleSpawner.is_active = false
     has_spawned = true
+    get_node("Sprite3D").visible = false
     var newObject = spawned_object_res.instance()
     add_child(newObject)
     if newObject.has_method("setAsParent"):

@@ -53,7 +53,7 @@ func landed():
   mySprite.updateBaseFrame(0, 0)
 
   if is_infected:
-    var how_many = randi() % 3 + 4
+    var how_many = randi() % 3 + 1
     for _i in range(how_many):
       spawnASpore()
   
@@ -66,6 +66,6 @@ func spawnASpore():
     spore.bubble_speed = -rand_range(1.925, 2.8)
     spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
     spore.delta_multiplier = 4.0
-    spore.global_transform.origin.x += rand_range(-3, 3)
+    spore.global_transform.origin.x += rand_range(-1, 1)
     spore.global_transform.origin.y += 1.5
     spore.global_transform.origin.y -= rand_range(0, .225)
