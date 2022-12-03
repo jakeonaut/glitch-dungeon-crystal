@@ -17,6 +17,8 @@ var yellow_palette = global.yellow_palette
 var white_palette = global.white_palette
 var grow_tile_upward = true
 
+var curr_palette = global.grey_palette
+
 onready var cosmeticLevelTiles = get_node("CosmeticLevelTiles") if has_node("CosmeticLevelTiles") else null
 onready var backgroundLevelTiles = get_node("BackgroundLevelTiles") if has_node("BackgroundLevelTiles") else null
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -287,6 +289,7 @@ func unrandomizeTile(cell_index):
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
   
 func changeColorPalette(palette, _palette_alt = null):
+  curr_palette = palette
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):
     var item_id = item_list[i]

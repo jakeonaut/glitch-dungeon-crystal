@@ -31,11 +31,14 @@ func _ready():
 
 func fallthroughCollisionActivate():
     if not getPlayer().on_ground and not should_wiggle:
-        should_wiggle = true
-        wiggle_timer = 0
-        var how_many = randi() % 3 + 3
-        for _i in range(how_many):
-            spawnASpore()
+        wiggle()
+
+func wiggle():
+    should_wiggle = true
+    wiggle_timer = 0
+    var how_many = randi() % 3 + 3
+    for _i in range(how_many):
+        spawnASpore()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

@@ -5,8 +5,11 @@ var jump_time_limit = 30
 
 var air_timer = 0
 var air_time_limit = 15
+var spawn_timer = 0
+var spawn_time_limit = 10
 
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
+var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
 export var is_infected = false
 
@@ -29,7 +32,20 @@ func _process(delta):
       behavior_jumping = true
       behavior_walking = true
       jump_timer = 0
+
+    if not is_infected:
+      spawn_timer += (delta*22)
+      if spawn_timer >= spawn_time_limit:
+          spawn_timer = 0
+          var bubble = bubbleRes.instance()
+          bubble.global_transform.origin = self.global_transform.origin
+          bubble.original_pos_x = self.global_transform.origin.x
+          level.add_child(bubble)
+          bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
+          bubble.global_transform.origin.y += 1
+          bubble.setAsParent(self)
   else:
+    spawn_timer = 0
     behavior_jumping = false
     mySprite.max_frames = 1
     if vv > 0:

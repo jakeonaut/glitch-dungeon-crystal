@@ -91,14 +91,15 @@ func isActive():
   return true
 
 func passiveActivate(_delta):
-  if not didja_get_me and getPlayer().linear_velocity.y < 0:
+  if not didja_get_me:
     bubbleStartPop()
-    getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-    getPlayer().should_magic_jump = true
-    getPlayer().was_just_on_ground_timer = -8
     if getPlayer().linear_velocity.y < 0:
-      getPlayer().linear_velocity.y = -0.01
-    getPlayer().jump_press_timer = 0
+      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+      getPlayer().should_magic_jump = true
+      getPlayer().was_just_on_ground_timer = -8
+      if getPlayer().linear_velocity.y < 0:
+        getPlayer().linear_velocity.y = -0.01
+      getPlayer().jump_press_timer = 0
 
 func bubbleStartPop():
   popSound1.play()
@@ -156,3 +157,6 @@ func tryDieToOffscreenCamera():
     global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
       queue_free()
+
+func setAsParent(_parent):
+  mySprite.changeSpriteColorPaletteToLevelPalette()

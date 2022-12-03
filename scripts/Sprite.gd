@@ -25,6 +25,8 @@ var overwritten_yellow_palette = null
 
 export var should_ignore_pause = false
 
+onready var levelTiles = get_tree().get_root().get_node("Game/Viewport/level/LevelTiles")
+
 func _ready():
     set_process(true)
     start_frame = get_frame()
@@ -41,6 +43,9 @@ func _ready():
     if should_duplicate_material and material_override:
         material_override = material_override.duplicate()
     
+func changeSpriteColorPaletteToLevelPalette():
+    changeSpriteColorPalette(levelTiles.curr_palette)
+
 func changeSpriteColorPalette(palette, palette_name = ""):
     if material_override:
         var material = material_override

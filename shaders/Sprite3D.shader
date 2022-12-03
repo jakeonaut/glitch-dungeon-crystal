@@ -20,6 +20,7 @@ uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
 uniform bool enable_remove_skin_tone = false;
 uniform bool enable_dither = false;
 uniform bool enable_no_transparency = false;
+uniform bool enable_black_unknown = false;
 uniform int palettesize = 16;
 uniform int resolution_scale = 1;
 uniform bool enable_glitch = false;
@@ -132,6 +133,9 @@ void fragment() {
     else if (enable_no_transparency) {
         ALBEDO.rgb = closest_color.rgb;
     }
+	else if (enable_black_unknown) {
+		ALBEDO.rgb = vec3(0.016, 0.016, 0.016);
+	}
     if (enable_no_transparency && alpha == 0.0) {
         alpha = 1.0;
     }

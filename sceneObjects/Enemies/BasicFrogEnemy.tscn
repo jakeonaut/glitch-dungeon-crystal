@@ -25,6 +25,7 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
