@@ -325,7 +325,7 @@ func tryDieToEnemy(should_glitch, should_kill_invis):
     global.pauseGame = true
     global.pauseMoveInput = true
 
-    if global.canGlitchScreen and should_glitch:
+    if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
       level.glitchScreenEffect.visible = true
     var material = level.glitchScreenEffect.get_material()
     if material is ShaderMaterial:
@@ -404,7 +404,9 @@ func processBroomLogic(delta):
     summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func processPoisonWaterLogic(delta):
-  if is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison:
+  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
+
+  if is_touching_poison_water:
     if glitch_form == global.GlitchForm.INVISIBLE:
       glitchTickle(0)
     else:
@@ -427,7 +429,8 @@ func processPoisonWaterLogic(delta):
         tryDieToEnemy(true, false)
         poison_timer = 0
         poisonWaterSound.stop()
-  elif poison_timer > 0:
+
+  if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
     if poisonWaterSound.is_playing():
       # TODO(jaketrower): Could be put in a function
       var playback_position = poisonWaterSound.get_playback_position()

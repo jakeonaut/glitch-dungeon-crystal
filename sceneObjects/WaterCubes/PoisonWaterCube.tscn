@@ -11,7 +11,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=10]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=11]
-[ext_resource path="res://shaders/PoisonWaterCube.gdshader" type="Shader" id=12]
+[ext_resource path="res://shaders/BogWaterShader.gdshader" type="Shader" id=12]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 9 )
@@ -25,6 +25,7 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
@@ -50,6 +51,7 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false

@@ -2,6 +2,14 @@ extends Spatial
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+var player = null
+func getPlayer():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if player == null:
+    player = level.player
+  return player
+
 var has_done_cutscene = false
 var infectedFrogRes = preload("res://sceneObjects/Enemies/InfectedFrogEnemy.tscn")
 
@@ -16,6 +24,10 @@ func isActive():
 
 func passiveActivate(_delta):
     if not has_done_cutscene:
+        global.pauseMoveInput = true
+        if not getPlayer().on_ground:
+            return
+            
         has_done_cutscene = true
         global.pauseGame = true
         yield(get_tree().create_timer(0.5), "timeout")
@@ -35,3 +47,4 @@ func passiveActivate(_delta):
         infectedFrog.walk_direction = -1
         yield(get_tree().create_timer(1.0), "timeout")
         global.pauseGame = false
+        global.pauseMoveInput = false
