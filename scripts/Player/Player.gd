@@ -16,6 +16,9 @@ var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
 var is_in_broom_cooldown = false
 
+onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
+onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
+
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
@@ -74,6 +77,7 @@ func applyGlitch(glitch, notPlaySound = false):
     transformSound.play()
   global.memory["current_glitch"] = glitch
 
+  mySprite.get_material_override().set_shader_param("opacity", 1.0)
   if glitch == global.GlitchForm.NORMAL: normalGlitch()
   if glitch == global.GlitchForm.FLOOR: floorGlitch()
   if glitch == global.GlitchForm.FEATHER: featherGlitch()
@@ -117,6 +121,7 @@ func invisibleGlitch():
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(getLevelTiles().black_palette)
+  mySprite.get_material_override().set_shader_param("opacity", 0.75)
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
@@ -362,6 +367,13 @@ func hideInteractPrompt():
   importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
+  broomSpriteVisible.frame = broomSpriteAnimated.frame
+  broomSpriteVisible.translation = broomSpriteAnimated.translation
+  broomSpriteVisible.flip_h = false
+  if mySprite.flip_h:
+    broomSpriteVisible.flip_h = true
+    broomSpriteVisible.translation.x *= -1
+
   if not summonedBroom and is_in_broom_cooldown:
     broom_cooldown_timer += (delta*22)
     if broom_cooldown_timer >= broom_cooldown_time_limit:

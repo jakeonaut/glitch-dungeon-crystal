@@ -112,7 +112,7 @@ func _process(delta):
             queue_free()
             return
 
-    glitchSwitchSprite(delta)
+    # glitchSwitchSprite(delta)
 
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
@@ -233,12 +233,12 @@ func processDeath():
     if not dieSound.is_playing():
         queue_free()
 
-func glitchSwitchSprite(delta):
-    glitch_switch_timer += (delta*22)
-    if glitch_switch_timer > glitch_switch_time_limit:
-        mySprite.updateBaseFrame(randi() % 6, randi() % 3)
-        glitch_switch_time_limit = rand_range(30.0, 50.0)
-        glitch_switch_timer = 0
+# func glitchSwitchSprite(delta):
+#     glitch_switch_timer += (delta*22)
+#     if glitch_switch_timer > glitch_switch_time_limit:
+#         mySprite.updateBaseFrame(randi() % 6, randi() % 3)
+#         glitch_switch_time_limit = rand_range(30.0, 50.0)
+#         glitch_switch_timer = 0
 
 func glitchSetSpritesAndCollision():
     if behavior_jumping or behavior_directional_bullet:

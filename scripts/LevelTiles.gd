@@ -118,16 +118,16 @@ func buildSingleRandomTile(cell_index):
     else:
       setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
   elif tile_name == "Spikes":
-    var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
-    var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
-    if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
-      setTileNameNum("Spikes", 4, cell_index, tile_orientation) # 5, but 0 indexed...
-    elif left_neighbor_tile_type == -1: # no left neighbor
-      pass 
-    elif right_neighbor_tile_type == -1: # no right neighbor
-      setTileNameNum("Spikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
-    else:
-      setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
+    # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
+    # var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
+    # if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
+    setRandomTileNameOfType("Spikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
+    # elif left_neighbor_tile_type == -1: # no left neighbor
+    #   pass 
+    # elif right_neighbor_tile_type == -1: # no right neighbor
+    #   setTileNameNum("Spikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
+    # else:
+    #   setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
   
   # maybe make it into a dictionary so that infected spikes removed can be remembered easier
   # and other "tile pushing/creating" if that happens

@@ -77,5 +77,9 @@ func passiveActivate(_delta):
     getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", true)
     getLevelTiles().unrandomizeAllTiles()
     musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
+    var NPC = level.get_node("NPC4")
+    NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold down UP\nor X to jump higher"
+    NPC.textBoxContainer.setVars()
+
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)

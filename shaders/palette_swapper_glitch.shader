@@ -25,9 +25,19 @@ float random(float seed) {
 	return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
 }
 
+float random2( vec2 p )
+{
+  // We need irrationals for pseudo randomness.
+  // Most (all?) known transcendental numbers will (generally) work.
+  const vec2 r = vec2(
+    23.1406926327792690,  // e^pi (Gelfond's constant)
+     2.6651441426902251); // 2^sqrt(2) (Gelfond–Schneider constant)
+  return fract( cos( mod( 123456789., 1e-7 + 256. * dot(p,r) ) ) );  
+}
+
 void fragment() {
     vec4 incolor = texture(texture_albedo, UV);
-    float fdelta = mod(256.0 * Convert_sRGB_FromLinear(incolor.r), 16.0) - TIME * 1.0;
+    float fdelta = mod(256.0 * Convert_sRGB_FromLinear(incolor.r), 16.0) - TIME * random(1.0);
     float mod2 = mod(fdelta, float(palettesize));
     int delta = int(mod2);
     vec3 color = getpalettecolor(delta);

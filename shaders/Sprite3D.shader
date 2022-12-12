@@ -151,6 +151,8 @@ void fragment() {
         closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
         closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
         ALBEDO.rgb = closest_color.rgb;
-        ALPHA = alp.a * opacity;
+		if (!enable_no_transparency) {
+			ALPHA = alp.a * opacity;
+		}
     }
 }
