@@ -283,15 +283,6 @@ X to jump I think"
 can_camera_zoom = false
 tiny_textbox = true
 
-[node name="NPC6" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 10.8, 0 )
-visible = false
-grav = 0
-bbText = "hold UP or
-X to jump higher!"
-can_camera_zoom = false
-tiny_textbox = true
-
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 15, 0 )
 grav = 0

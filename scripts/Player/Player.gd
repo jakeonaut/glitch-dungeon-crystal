@@ -10,7 +10,9 @@ onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 
+var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
+var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
@@ -367,6 +369,10 @@ func hideInteractPrompt():
   importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
+  if not (global.memory.has("broom") and global.memory["broom"]):
+    broomSpriteVisible.visible = false
+    return
+
   broomSpriteVisible.frame = broomSpriteAnimated.frame
   broomSpriteVisible.translation = broomSpriteAnimated.translation
   broomSpriteVisible.flip_h = false
@@ -414,6 +420,8 @@ func processBroomLogic(delta):
       summonedBroom.rotation_degrees = Vector3(0, 0, 0)
     summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
     summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
+  else:
+    broomSpriteVisible.visible = true
 
 func processPoisonWaterLogic(delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
@@ -475,6 +483,11 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
+  
+  var localAniPlayer = get_node("AnimationPlayer")
+  if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
+    localAniPlayer.clear_queue()
+    localAniPlayer.queue("stand")
 
 func broomSmackFast():
   var aniPlayer = get_node("AnimationPlayer")
@@ -488,6 +501,7 @@ func broomSmackFast():
     
 func broomStop():
   summonedBroom = null
+  broomSpriteVisible.visible = true
   pauseInput = false
   pauseAnimation = false
   aniPlayer = get_node("AnimationPlayer")
@@ -510,3 +524,33 @@ var gimme_mini_crystal_cubes_time_limit = 5
 func giveMeMiniCrystalCubes(how_many):
   gimme_mini_crystal_cubes = how_many
   gimme_mini_crystal_cubes_timer = 0
+
+func iFellFlat():
+  broomSpriteVisible.visible = false
+
+  summonSmokeClouds(5, false, false)
+
+  if global.memory.has("broom") and global.memory["broom"]:
+    var fallenBroom = fallenBroomRes.instance()
+    level.add_child(fallenBroom)
+    fallenBroom.global_transform.origin = self.global_transform.origin
+    fallenBroom.global_transform.origin.x += 1
+    fallenBroom.global_transform.origin.y += 2
+    global.memory["broom"] = false
+
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
+    for _i in range(num_clouds):
+        var newSmokeCloud = smokeCloudRes.instance()
+        level.add_child(newSmokeCloud)
+        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
+        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(1, 2)
+        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        if play_sound:
+            newSmokeCloud.get_node("CleanGlitchSound").play()
+            newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+            play_sound = false
+        if is_glitchy:
+            var new_material = newSmokeCloud.get_material_override().duplicate()
+            new_material.set_shader_param("enable_glitch", "true")
+            new_material.set_shader_param("target_palette", global.weird_base_palette)
+            newSmokeCloud.set_material_override(new_material.duplicate())

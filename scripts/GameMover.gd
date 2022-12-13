@@ -1144,6 +1144,7 @@ func landed():
       aniPlayer.play("fallFlat", -1, 1.0)
       physics_state = PhysicsState.COLLAPSED
       if bumpSound: bumpSound.play()
+      iFellFlat()
     # TODO(jaketrower): all of this non FSM animation code WILL break everything some day
     elif aniPlayer.assigned_animation != "getItem" and not "fishing" in aniPlayer.assigned_animation:
       # if horizontal_collision:
@@ -1155,6 +1156,9 @@ func landed():
   if fallSound and quiet_the_fall_sound:
     fallSound.stop()
   fall_timer = 0
+
+func iFellFlat():
+  pass
 
 func isWalkingIntoWall():
   return abs(linear_velocity.x) < 0.5 \
