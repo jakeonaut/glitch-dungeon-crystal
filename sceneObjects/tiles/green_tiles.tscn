@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=2]
+[gd_scene load_steps=182 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
@@ -57,7 +57,6 @@
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=59]
 [ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=60]
 [ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=61]
-[ext_resource path="res://assets/textures/greyspikes5.png" type="Texture" id=62]
 [ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=63]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=64]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=65]
@@ -578,14 +577,14 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="AnimatedTexture" id=118]
 flags = 19
 frames = 5
-frame_0/texture = ExtResource( 54 )
-frame_1/texture = ExtResource( 60 )
+frame_0/texture = ExtResource( 23 )
+frame_1/texture = ExtResource( 24 )
 frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 61 )
+frame_2/texture = ExtResource( 3 )
 frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 63 )
+frame_3/texture = ExtResource( 35 )
 frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 62 )
+frame_4/texture = ExtResource( 28 )
 frame_4/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=117]
@@ -593,7 +592,7 @@ shader = ExtResource( 59 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = SubResource( 118 )
 shader_param/base_palette = ExtResource( 65 )
-shader_param/real_base_palette = ExtResource( 64 )
+shader_param/real_base_palette = ExtResource( 2 )
 
 [sub_resource type="CubeMesh" id=106]
 material = SubResource( 117 )

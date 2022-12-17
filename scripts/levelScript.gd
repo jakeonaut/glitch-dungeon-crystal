@@ -27,6 +27,8 @@ func _ready():
   _ready_impl()
 
 func _ready_impl():
+  get_node("..").audio_listener_enable_3d = true
+
   global.activeInteractor = null # somewhat of a failsafe
   set_process_input(true)
   set_process(true)

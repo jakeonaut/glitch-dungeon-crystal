@@ -915,7 +915,7 @@ frame = 66
 shape = SubResource( 20 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7, -0.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7, -0.65879, 0 )
 grav = 0
 bbText = "don't stand in poison
 water for too long"

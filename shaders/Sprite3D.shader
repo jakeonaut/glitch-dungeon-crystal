@@ -133,9 +133,9 @@ void fragment() {
     else if (enable_no_transparency) {
         ALBEDO.rgb = closest_color.rgb;
     }
-	else if (enable_black_unknown) {
-		ALBEDO.rgb = vec3(0.016, 0.016, 0.016);
-	}
+    else if (enable_black_unknown) {
+        ALBEDO.rgb = vec3(0.016, 0.016, 0.016);
+    }
     if (enable_no_transparency && alpha == 0.0) {
         alpha = 1.0;
     }
@@ -151,8 +151,8 @@ void fragment() {
         closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
         closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
         ALBEDO.rgb = closest_color.rgb;
-		if (!enable_no_transparency) {
-			ALPHA = alp.a * opacity;
-		}
+        if (!enable_no_transparency) {
+            ALPHA = alp.a * opacity;
+        }
     }
 }

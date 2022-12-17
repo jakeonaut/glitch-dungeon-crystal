@@ -13,6 +13,8 @@ onready var miniCubeCrystal = get_node("miniCubeCrystal")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
+var spriteSheet = preload("res://assets/player_sheet_old.png")
+var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
@@ -371,6 +373,7 @@ func hideInteractPrompt():
 func processBroomLogic(delta):
   if not (global.memory.has("broom") and global.memory["broom"]):
     broomSpriteVisible.visible = false
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
     return
 
   broomSpriteVisible.frame = broomSpriteAnimated.frame
@@ -422,6 +425,7 @@ func processBroomLogic(delta):
     summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
   else:
     broomSpriteVisible.visible = true
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
 
 func processPoisonWaterLogic(delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
@@ -537,6 +541,8 @@ func iFellFlat():
     fallenBroom.global_transform.origin.x += 1
     fallenBroom.global_transform.origin.y += 2
     global.memory["broom"] = false
+    walk_speed /= 2
+    jump_force /= 2
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):
