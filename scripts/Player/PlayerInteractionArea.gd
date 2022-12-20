@@ -28,8 +28,11 @@ func _process(_delta):
                 if dist < shortest_dist:
                     shortest_dist = dist
                     nearest_area = area
-            
-    if Input.is_action_just_pressed("interact_button"):
+
+    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
+        if global.activeInteractor != null:
+            global.activeInteractor.InteractActivate()      
+    elif Input.is_action_just_pressed("interact_button"):
         # short circuit to textbox if one exists
         if global.activeInteractor != null:
             global.activeInteractor.InteractActivate()

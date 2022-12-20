@@ -78,3 +78,7 @@ func passiveActivate(_delta):
       if not global.memory.has(level.getShortLevelName()):
         global.memory[level.getShortLevelName()] = {}
       global.memory[level.getShortLevelName()][self.name] = true
+    collectMe()
+
+func collectMe():
+  pass

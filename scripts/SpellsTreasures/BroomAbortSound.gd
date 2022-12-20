@@ -16,12 +16,7 @@ func activateScript():
     level.player.aniPlayer.clear_queue()
     level.player.aniPlayer.queue("walkStop")
     level.player.aniPlayer.queue("stand")
-    
-    if not global.memory.has("broom"):
-        global.memory["broom"] = true
-
-    # IFNDEF SpriteTownLevelScript.gd
-    level.get_node("NPC").textBox.text_final = "you found the broom! now you\ncan help me clean my house...\ni have a great reward buried somewhere under the dust!\nplease, come in."
+    level.player.getABroom()
         
     level.restartMusic()
     level.saveTheGame()

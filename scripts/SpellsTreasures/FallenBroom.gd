@@ -1,4 +1,4 @@
-extends "../GameMover.gd"
+extends "TreasureCollectable.gd"
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
@@ -25,16 +25,7 @@ func pressingMoveRight():
     return walk_direction == 1 and behavior_walking and not on_ground
 
 func isActive():
-    return visible
-
-func activate():
-    pass
-
-func passiveActivate(_delta):
-    pass
-
-func stopPassiveActivate():
-    pass
+    return visible and on_ground
 
 # @override
 func justPressedJump():
@@ -67,3 +58,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             new_material.set_shader_param("enable_glitch", "true")
             new_material.set_shader_param("target_palette", global.weird_base_palette)
             newSmokeCloud.set_material_override(new_material.duplicate())
+
+func collectMe():
+    get_node("SecretAnimationPlayer").play("GET")
+    grav = 0

@@ -22,7 +22,7 @@
 [ext_resource path="res://assets/sounds/assets_sfx_wingflap.wav" type="AudioStream" id=20]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=21]
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 11 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/palettesize = 16
@@ -490,7 +490,7 @@ behavior_walking = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
-material_override = SubResource( 13 )
+material_override = SubResource( 19 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 6

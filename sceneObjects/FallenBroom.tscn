@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/SpellsTreasures/FallenBroom.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sprites/broom_ani.png" type="Texture" id=9]
+[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/SpellsTreasures/BroomAbortSound.gd" type="Script" id=11]
+[ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=13]
 
 [sub_resource type="ShaderMaterial" id=41]
 shader = ExtResource( 3 )
@@ -116,6 +120,45 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 270 ) ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "GET"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.5, 0.125 ) ]
 }
 
 [sub_resource type="Animation" id=44]
@@ -244,6 +287,9 @@ height = 1.8
 script = ExtResource( 1 )
 true_terminal_vel = 8
 walk_speed = 6
+bbText = "\"BROOM\" get!!!
+press [C] to sweep"
+is_static_in_level = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.6145, 0.125 )
@@ -267,6 +313,7 @@ volume_db = 5.0
 autoplay = "AirSpinReverse"
 anims/AirSpin = SubResource( 45 )
 anims/AirSpinReverse = SubResource( 46 )
+anims/GET = SubResource( 51 )
 anims/RESET = SubResource( 44 )
 anims/land = SubResource( 50 )
 
@@ -289,3 +336,42 @@ shape = SubResource( 48 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
 shape = SubResource( 49 )
+
+[node name="NPC TextBox" parent="." instance=ExtResource( 10 )]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 69.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 13 )
+
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
+stream = null
+volume_db = -23.0
+
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
+volume_db = -10.0
+
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
+stream = null
+script = ExtResource( 11 )
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -25.0
+pitch_scale = 0.8
+
+[editable path="NPC TextBox"]

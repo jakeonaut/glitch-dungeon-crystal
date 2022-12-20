@@ -531,7 +531,6 @@ func giveMeMiniCrystalCubes(how_many):
 
 func iFellFlat():
   broomSpriteVisible.visible = false
-
   summonSmokeClouds(5, false, false)
 
   if global.memory.has("broom") and global.memory["broom"]:
@@ -543,6 +542,13 @@ func iFellFlat():
     global.memory["broom"] = false
     walk_speed /= 2
     jump_force /= 2
+
+func getABroom():
+  global.memory["broom"] = true
+  walk_speed *= 2
+  jump_force *= 2
+  broomSpriteVisible.visible = true
+  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):
