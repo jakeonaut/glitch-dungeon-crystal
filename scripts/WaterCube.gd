@@ -20,7 +20,7 @@ export var turn_poisonous = false
 var is_poison = false
 var poisonous_timer = 0
 var poisonous_time_limit = 10
-var poisonous_counter = 0
+var poisonous_counter = 2
 
 # will be set as top left position
 var target_origin = Vector3(0, 0, 0)
