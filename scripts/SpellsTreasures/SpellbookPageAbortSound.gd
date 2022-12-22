@@ -13,6 +13,7 @@ func activateScript():
   
   global.pauseGame = false
   global.pauseMoveInput = false
+  level.player.aniPlayer = level.player.get_node("AnimationPlayer")
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")

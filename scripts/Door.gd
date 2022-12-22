@@ -151,7 +151,7 @@ func generateId():
 
 func activate():
   if not is_passive:
-    if not is_locked and not should_lock and global.activeInteractor == null:
+    if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().on_ground:
       goThroughDoor()
     elif is_locked:
       if global.num_mini_crystal_cubes >= num_cubes_unlock:
@@ -182,6 +182,9 @@ func goThroughDoor(start_of_game = false):
   if not global.isRespawning and not hasPlayedDoorSound:
     global.doorSound.play()
     hasPlayedDoorSound = true
+
+  getPlayer().aniPlayer.clear_queue()
+  getPlayer().aniPlayer.play("enterDoor")
 
   global.activeInteractor = null
   if start_of_game:

@@ -46,6 +46,8 @@ func _ready():
   set_physics_process(true)
   if pauseMenu: pauseMenu.hide()
 
+  broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
+
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
@@ -150,9 +152,10 @@ func _process(delta):
 
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
     return
-  processBroomLogic(delta)
+  processBroomRenderLogic(delta)
   if global.pauseGame or global.pauseMoveInput:
     return
+  processBroomLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -382,18 +385,6 @@ func hideInteractPrompt():
   importantInteractPrompt.visible = false
 
 func processBroomLogic(delta):
-  if not (global.memory.has("broom") and global.memory["broom"]):
-    broomSpriteVisible.visible = false
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-    return
-
-  broomSpriteVisible.frame = broomSpriteAnimated.frame
-  broomSpriteVisible.translation = broomSpriteAnimated.translation
-  broomSpriteVisible.flip_h = false
-  if mySprite.flip_h:
-    broomSpriteVisible.flip_h = true
-    broomSpriteVisible.translation.x *= -1
-
   if not summonedBroom and is_in_broom_cooldown:
     broom_cooldown_timer += (delta*22)
     if broom_cooldown_timer >= broom_cooldown_time_limit:
@@ -424,6 +415,19 @@ func processBroomLogic(delta):
     summonedBroom = summonedBroomRes.instance()
     level.add_child(summonedBroom)
     summonedBroom.my_broom_owner = self
+
+  if not (global.memory.has("broom") and global.memory["broom"]):
+    broomSpriteVisible.visible = false
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+    return
+
+func processBroomRenderLogic(_delta):
+  broomSpriteVisible.frame = broomSpriteAnimated.frame
+  broomSpriteVisible.translation = broomSpriteAnimated.translation
+  broomSpriteVisible.flip_h = false
+  if mySprite.flip_h:
+    broomSpriteVisible.flip_h = true
+    broomSpriteVisible.translation.x *= -1
     
   if summonedBroom:
     if mySprite.flip_h:
@@ -561,6 +565,11 @@ func getABroom():
   jump_force *= 2
   broomSpriteVisible.visible = true
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+
+func iJustPressedDown():
+  if not smallInteractionArea.is_touching_door:
+    on_ground = false
+  should_do_fallthrough_area_collision = false
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):

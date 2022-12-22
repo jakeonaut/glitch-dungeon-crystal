@@ -13,6 +13,7 @@ var t = 0
 var is_active = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var has_frozen_input = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -34,6 +35,9 @@ func _ready():
   previous_point = original_position
   interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
+  if first_ever_glitch and global.memory.has("roomPath"):
+    first_ever_glitch = false
+
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
@@ -53,6 +57,13 @@ func _process(delta):
     mySprite.visible = true
     mySprite.global_transform.origin = original_position
     is_active = true
+
+  if first_ever_glitch:
+    if not has_frozen_input:
+      global.pauseMoveInput = true
+    if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
+      global.pauseMoveInput = false
+      has_frozen_input = true
     
 func shouldIBeActive():
   if getPlayer().glitch_form == my_glitch_form:
@@ -80,6 +91,7 @@ func passiveActivate(_delta):
     var NPC = level.get_node("NPC4")
     NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold down UP\nor X to jump higher"
     NPC.textBoxContainer.setVars()
+    NPC.textBoxContainer.textBox.has_been_shown = false
 
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)

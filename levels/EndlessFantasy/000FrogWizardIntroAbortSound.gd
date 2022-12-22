@@ -12,6 +12,8 @@ func _ready():
 
 func activateScript():
     if not has_done_my_magick:
+        NPC.textBoxContainer.bbText = ""
+        NPC.textBoxContainer.setVars()
         NPC.pressing_move_left = true
         yield(get_tree().create_timer(0.5), "timeout")
         floorSpell.passiveActivate(1.0)

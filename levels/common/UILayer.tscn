@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -14,17 +14,19 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=12]
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/water_normal_3.png" type="Texture" id=14]
+[ext_resource path="res://TextBoxTheme.tres" type="Theme" id=15]
+[ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=16]
 
-[sub_resource type="DynamicFont" id=1]
-resource_local_to_scene = true
-size = 32
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 2 )
+[sub_resource type="DynamicFont" id=10]
+size = 20
+outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 16 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Theme" id=11]
+default_font = SubResource( 10 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -41,7 +43,7 @@ default_font = SubResource( 3 )
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=9]
+[sub_resource type="ArrayMesh" id=14]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -90,6 +92,16 @@ shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 12 )
 shader_param/target_palette = ExtResource( 10 )
 
+[sub_resource type="DynamicFont" id=12]
+outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=13]
+default_font = SubResource( 12 )
+
 [node name="UILayer" type="CanvasLayer"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
@@ -102,6 +114,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="StatsTitle" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="StatsTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 637.0
+margin_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="StatsTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 629.0
+margin_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsTitle/ColorRect/ColorRect"]
+margin_left = 77.0
+margin_top = 7.0
+margin_right = 471.0
+margin_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "MAGIC: 10"
+text = "MAGIC: 10"
+scroll_active = false
+
 [node name="LevelTitle" type="ColorRect" parent="."]
 margin_left = 177.0
 margin_top = 428.0
@@ -111,9 +163,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="LevelTitle"]
 margin_left = 4.0
@@ -146,7 +195,7 @@ margin_right = 276.0
 margin_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 2 )
+theme = SubResource( 11 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "the dungeon"
@@ -154,13 +203,11 @@ text = "the dungeon"
 scroll_active = false
 
 [node name="HeartsRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 76.0
 margin_right = 136.0
 margin_bottom = 57.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="HeartsRect"]
 margin_left = 3.0
@@ -194,6 +241,7 @@ should_randomize_frame_delay = true
 max_frames = 1
 
 [node name="PowerupRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 521.0
 margin_right = 640.0
 margin_bottom = 57.0
@@ -304,7 +352,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 9 )
+mesh = SubResource( 14 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -380,12 +428,12 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="EquipmentStatusRect"]
 margin_left = 4.0
-margin_top = -7.0
+margin_top = -1.0
 margin_right = 180.0
-margin_bottom = 136.0
-theme = ExtResource( 5 )
+margin_bottom = 137.0
+theme = SubResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-text = "Lv. 1"
+text = "L.1"
 
 [node name="SavingTextLabel" type="RichTextLabel" parent="."]
 visible = false

@@ -17,6 +17,7 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 
+onready var smackSound = get_node("SmackSound")
 onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
@@ -116,6 +117,7 @@ func _process(delta):
 
 
 func getSmacked():
+  smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
     material.set_shader_param("time_influence", 35)

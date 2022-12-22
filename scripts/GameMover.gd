@@ -372,13 +372,16 @@ func areTilesBelow(currLevelTiles):
 
   return tile_coords_below_me_a != null or tile_coords_below_me_b != null or tile_coords_below_me_mid != null
 
+func iJustPressedDown():
+  on_ground = false
+  should_do_fallthrough_area_collision = false
+
 func processInputs(delta):
   processLadderInputs(delta)
   processJumpInputs(delta)
   processHorizontalInputs(delta)
   if justPressedDown():
-    on_ground = false
-    should_do_fallthrough_area_collision = false
+    iJustPressedDown()
 
   # fail safe...
   if vv > jump_force*2:

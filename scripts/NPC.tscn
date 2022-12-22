@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=14]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
@@ -187,5 +188,10 @@ visible = false
 material_override = SubResource( 11 )
 frame = 745
 frame_delay = 0.3
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -15.0
+pitch_scale = 0.65
 
 [editable path="NPC TextBox"]

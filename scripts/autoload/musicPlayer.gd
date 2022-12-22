@@ -28,10 +28,6 @@ func _ready():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
-
-    if currentlyPlayingTheme == wakeupPlayer and (not wakeupPlayer.is_playing() or global.memory.has("roomPath")):
-        fade_out(wakeupPlayer)
-        tryToPlay(dungeonThemePlayer)
         
 func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):

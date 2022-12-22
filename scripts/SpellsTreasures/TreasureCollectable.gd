@@ -25,6 +25,7 @@ func _process(delta):
     level.player.dir = Vector3(0, 0, 0)
     if level.player.on_ground:
       # TODO(jaketrower): kinda hacky...
+      level.player.broomSpriteVisible.visible = false
       if level.player.aniPlayer.assigned_animation == "getItem":
         if level.player.aniPlayer.is_playing():
           self.global_transform.origin.x = level.player.global_transform.origin.x

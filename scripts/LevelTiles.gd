@@ -192,6 +192,8 @@ func _process(delta):
           unrandomize_cell_index = 0
           is_unrandomizing = false
           getPlayer().applyGlitch(global.GlitchForm.FEATHER)
+          level.get_node("FeatherSpell").first_ever_glitch = false
+          musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):
             unrandomizeTile(unrandomize_cell_indices[i])
           is_rerandomizing = true
