@@ -315,6 +315,14 @@ func glitchTickle(play_sound = true):
     if play_sound:
       noSpellSound.play()
 
+func nullify():
+  if self.glitch_form != global.GlitchForm.NORMAL:
+      transformSound.play()
+      self.applyGlitch(global.GlitchForm.NORMAL, true)
+      self.can_cast_spell_timer = 0
+      if global.memory.has("spellbookPage"):
+          global.memory["spellbookPage"] = []
+
 # @override
 func tryDieToEnemy(should_glitch, should_kill_invis):
   if summonedBroom:
@@ -348,15 +356,18 @@ func tryDieToEnemy(should_glitch, should_kill_invis):
     if global.canChangeSongPitch:
       musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
-    global.memory["hearts"] -= 1
-    if global.memory["hearts"] <= 0:
-      global.memory["hearts"] = 0
+    # global.memory["hearts"] -= 1
+    print(self.glitch_form)
+    print(global.GlitchForm.NORMAL)
+    if self.glitch_form == global.GlitchForm.NORMAL: # global.memory["hearts"] <= 0:
+      # global.memory["hearts"] = 0
       global.isRespawning = true
       physics_state = PhysicsState.GLITCH_DYING
       glitch_death_timer = 0
     else:
       physics_state = PhysicsState.GLITCH_HURT
       glitch_death_timer = 0
+      self.nullify()
 
     
 func showInteractPrompt(is_important = false):
@@ -427,7 +438,7 @@ func processBroomLogic(delta):
     broomSpriteVisible.visible = true
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
 
-func processPoisonWaterLogic(delta):
+func processPoisonWaterLogic(_delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 
   if is_touching_poison_water:

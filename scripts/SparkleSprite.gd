@@ -17,7 +17,6 @@ func _process(delta):
     # super._process(delta) implicit
     delta = delta * global.time_dilation_multiplier
     
-    print(visible)
     if not visible:
         pass
 

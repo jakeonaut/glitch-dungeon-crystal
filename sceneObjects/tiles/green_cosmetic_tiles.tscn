@@ -29,114 +29,114 @@
 [ext_resource path="res://assets/textures/green_decor_top_left2.png" type="Texture" id=27]
 [ext_resource path="res://assets/textures/green_decor_top_right2.png" type="Texture" id=28]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=170]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=2]
-material = SubResource( 1 )
+[sub_resource type="CubeMesh" id=171]
+material = SubResource( 170 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=172]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=4]
-material = SubResource( 3 )
+[sub_resource type="CubeMesh" id=173]
+material = SubResource( 172 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=174]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=6]
-material = SubResource( 5 )
+[sub_resource type="CubeMesh" id=175]
+material = SubResource( 174 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=176]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=8]
-material = SubResource( 7 )
+[sub_resource type="CubeMesh" id=177]
+material = SubResource( 176 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=178]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 7 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="CubeMesh" id=179]
+material = SubResource( 178 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=11]
+[sub_resource type="ShaderMaterial" id=180]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 8 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=12]
-material = SubResource( 11 )
+[sub_resource type="CubeMesh" id=181]
+material = SubResource( 180 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=182]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 9 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=14]
-material = SubResource( 13 )
+[sub_resource type="CubeMesh" id=183]
+material = SubResource( 182 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=15]
+[sub_resource type="ShaderMaterial" id=184]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=16]
-material = SubResource( 15 )
+[sub_resource type="CubeMesh" id=185]
+material = SubResource( 184 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=17]
+[sub_resource type="ShaderMaterial" id=186]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=18]
-material = SubResource( 17 )
+[sub_resource type="CubeMesh" id=187]
+material = SubResource( 186 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=19]
+[sub_resource type="ShaderMaterial" id=188]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=20]
-material = SubResource( 19 )
+[sub_resource type="CubeMesh" id=189]
+material = SubResource( 188 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=21]
+[sub_resource type="ShaderMaterial" id=190]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=22]
-material = SubResource( 21 )
+[sub_resource type="CubeMesh" id=191]
+material = SubResource( 190 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=45]
@@ -145,48 +145,48 @@ shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=24]
+[sub_resource type="CubeMesh" id=192]
 material = SubResource( 45 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=25]
+[sub_resource type="ShaderMaterial" id=193]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=26]
-material = SubResource( 25 )
+[sub_resource type="CubeMesh" id=194]
+material = SubResource( 193 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=27]
+[sub_resource type="ShaderMaterial" id=195]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=28]
-material = SubResource( 27 )
+[sub_resource type="CubeMesh" id=196]
+material = SubResource( 195 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=29]
+[sub_resource type="ShaderMaterial" id=197]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 18 )
 shader_param/base_palette = ExtResource( 17 )
 
-[sub_resource type="CubeMesh" id=30]
-material = SubResource( 29 )
+[sub_resource type="CubeMesh" id=198]
+material = SubResource( 197 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=31]
+[sub_resource type="ShaderMaterial" id=199]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 19 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=32]
-material = SubResource( 31 )
+[sub_resource type="CubeMesh" id=200]
+material = SubResource( 199 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=46]
@@ -259,24 +259,24 @@ shader_param/base_palette = ExtResource( 2 )
 material = SubResource( 43 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=33]
+[sub_resource type="ShaderMaterial" id=201]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 25 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=34]
-material = SubResource( 33 )
+[sub_resource type="CubeMesh" id=202]
+material = SubResource( 201 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=35]
+[sub_resource type="ShaderMaterial" id=203]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 26 )
 shader_param/base_palette = ExtResource( 17 )
 
-[sub_resource type="CubeMesh" id=36]
-material = SubResource( 35 )
+[sub_resource type="CubeMesh" id=204]
+material = SubResource( 203 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=169]
@@ -285,150 +285,150 @@ shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 27 )
 shader_param/base_palette = ExtResource( 2 )
 
-[sub_resource type="CubeMesh" id=38]
+[sub_resource type="CubeMesh" id=205]
 material = SubResource( 169 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=39]
+[sub_resource type="ShaderMaterial" id=206]
 shader = ExtResource( 1 )
 shader_param/palettesize = 16
 shader_param/texture_albedo = ExtResource( 28 )
 shader_param/base_palette = ExtResource( 17 )
 
-[sub_resource type="CubeMesh" id=40]
-material = SubResource( 39 )
+[sub_resource type="CubeMesh" id=207]
+material = SubResource( 206 )
 size = Vector3( 1, 1, 1 )
 
-[node name="Spatial" type="Spatial"]
+[node name="GreenTiles" type="Spatial"]
 
 [node name="Column" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 171 )
 material/0 = null
 
 [node name="ColumnTopRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0 )
-mesh = SubResource( 4 )
+mesh = SubResource( 173 )
 material/0 = null
 
 [node name="ColumnMidTopLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0 )
-mesh = SubResource( 6 )
+mesh = SubResource( 175 )
 material/0 = null
 
 [node name="ColumnMidTopRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.5, 0 )
-mesh = SubResource( 8 )
+mesh = SubResource( 177 )
 material/0 = null
 
 [node name="ColumnMidLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
-mesh = SubResource( 10 )
+mesh = SubResource( 179 )
 material/0 = null
 
 [node name="ColumnMidRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1, 0 )
-mesh = SubResource( 12 )
+mesh = SubResource( 181 )
 material/0 = null
 
 [node name="ColumnMidBotLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.5, 0 )
-mesh = SubResource( 14 )
+mesh = SubResource( 183 )
 material/0 = null
 
 [node name="ColumnMidBotRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1.5, 0 )
-mesh = SubResource( 16 )
+mesh = SubResource( 185 )
 material/0 = null
 
 [node name="ColumnBotLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
-mesh = SubResource( 18 )
+mesh = SubResource( 187 )
 material/0 = null
 
 [node name="ColumnBotRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -2, 0 )
-mesh = SubResource( 20 )
+mesh = SubResource( 189 )
 material/0 = null
 
 [node name="Column2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, 0, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 171 )
 material/0 = null
 
 [node name="ColumnTopRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, 0, 0 )
-mesh = SubResource( 4 )
+mesh = SubResource( 173 )
 material/0 = null
 
 [node name="ColumnMidTopLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -0.5, 0 )
-mesh = SubResource( 6 )
+mesh = SubResource( 175 )
 material/0 = null
 
 [node name="ColumnMidTopRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -0.5, 0 )
-mesh = SubResource( 8 )
+mesh = SubResource( 177 )
 material/0 = null
 
 [node name="ColumnMidLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1, 0 )
-mesh = SubResource( 10 )
+mesh = SubResource( 179 )
 material/0 = null
 
 [node name="ColumnMidRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1, 0 )
-mesh = SubResource( 12 )
+mesh = SubResource( 181 )
 material/0 = null
 
 [node name="ColumnMidBotLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1.5, 0 )
-mesh = SubResource( 14 )
+mesh = SubResource( 183 )
 material/0 = null
 
 [node name="ColumnMidBotRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1.5, 0 )
-mesh = SubResource( 16 )
+mesh = SubResource( 185 )
 material/0 = null
 
 [node name="ColumnBotRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -2, 0 )
-mesh = SubResource( 20 )
+mesh = SubResource( 189 )
 material/0 = null
 
 [node name="ColumnBotLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -2, 0 )
-mesh = SubResource( 18 )
+mesh = SubResource( 187 )
 material/0 = null
 
 [node name="Chandelier" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
-mesh = SubResource( 22 )
+mesh = SubResource( 191 )
 material/0 = null
 
 [node name="ChandelierMid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -0.5, 0 )
-mesh = SubResource( 24 )
+mesh = SubResource( 192 )
 material/0 = null
 
 [node name="ChandelierMidRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -0.5, 0 )
-mesh = SubResource( 26 )
+mesh = SubResource( 194 )
 material/0 = null
 
 [node name="ChandelierBot" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
-mesh = SubResource( 28 )
+mesh = SubResource( 196 )
 material/0 = null
 
 [node name="ChandelierBotLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -1, 0 )
-mesh = SubResource( 30 )
+mesh = SubResource( 198 )
 material/0 = null
 
 [node name="ChandelierBotRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -1, 0 )
-mesh = SubResource( 32 )
+mesh = SubResource( 200 )
 material/0 = null
 
 [node name="Chandelier2" type="MeshInstance" parent="."]
@@ -458,7 +458,7 @@ material/0 = null
 
 [node name="ChandelierBotLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.08687, -1, 0 )
-mesh = SubResource( 30 )
+mesh = SubResource( 198 )
 material/0 = null
 
 [node name="FloorDecor" type="MeshInstance" parent="."]
@@ -473,20 +473,20 @@ material/0 = null
 
 [node name="FloorDecor2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -3, 0 )
-mesh = SubResource( 34 )
+mesh = SubResource( 202 )
 material/0 = null
 
 [node name="FloorDecor2Right" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -3, 0 )
-mesh = SubResource( 36 )
+mesh = SubResource( 204 )
 material/0 = null
 
 [node name="FloorDecor2Top" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -2.5, 0 )
-mesh = SubResource( 38 )
+mesh = SubResource( 205 )
 material/0 = null
 
 [node name="FloorDecor2TopRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -2.5, 0 )
-mesh = SubResource( 40 )
+mesh = SubResource( 207 )
 material/0 = null

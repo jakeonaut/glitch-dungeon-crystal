@@ -36,17 +36,29 @@ var spike_infection_time_limit = 5
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var my_tileset_type = global.TilesetType.DUNGEON
 
-func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, offset = 0):
+func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, offset = 0, glitch_type = global.GlitchForm.NORMAL):
   var rand_int = randi() % num_rand
   # make forest spirals and yellow holes spawn a little less often
   if newName == "BrickSolid" and rand_int == 2:
     if randi() % 3 <= 1:
       rand_int = randi() % num_rand
-  setTileNameNum(newName, rand_int + offset, cell_index, tile_orientation)
+  setTileNameNum(newName, rand_int + offset, cell_index, tile_orientation, glitch_type)
 
-func setTileNameNum(newName, num, cell_index, tile_orientation):
+func setTileNameNum(newName, num, cell_index, tile_orientation, glitch_type = global.GlitchForm.NORMAL):
   if num != 0:
     newName = newName + str(num+1) # 0 index, so add one
+
+  if glitch_type == global.GlitchForm.FEATHER:
+    newName = newName + "_green"
+  elif glitch_type == global.GlitchForm.FLOOR:
+    newName = newName + "_red"
+  elif glitch_type == global.GlitchForm.LADDER:
+    newName = newName + "_yellow"
+  elif glitch_type == global.GlitchForm.INVISIBLE:
+    newName = newName + "_black"
+  elif glitch_type == global.GlitchForm.WALK_THROUGH_WALLS: 
+    newName = newName + "_white"
+
   var new_tile_type = mesh_library.find_item_by_name(newName)
   set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type, tile_orientation)
 
@@ -144,8 +156,28 @@ var unrandomize_cell_index = 0
 var unrandomize_cell_indices = []
 var is_unrandomizing = false
 var is_rerandomizing = false
+
+var rerandomize_timer = 0
+var rerandomize_time_limit = 5
+
+func getRandomGlitchType():
+  var rand_int = randi() % 4
+  if rand_int == 0:
+    return global.GlitchForm.NORMAL
+  if rand_int == 1:
+    return global.GlitchForm.FEATHER
+  if rand_int == 2:
+    return global.GlitchForm.FLOOR
+  if rand_int == 3:
+    return global.GlitchForm.LADDER
+
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+
+  rerandomize_timer += (delta * 22)
+  if rerandomize_timer >= rerandomize_time_limit:
+    rerandomizeTile(Vector3(0, 0, 0), getRandomGlitchType())
+    rerandomize_timer = 0
   
   if is_unrandomizing:
     unrandomize_timer += (delta*22)
@@ -248,24 +280,24 @@ func summonSmokeClouds(coords, num_clouds):
     new_material.set_shader_param("target_palette", global.weird_base_palette)
     newSmokeCloud.set_material_override(new_material.duplicate())
 
-func randomizeTile(cell_index):
+func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
   var tile_name = mesh_library.get_item_name(tile_type)
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "BrickSolidRoof" in tile_name:
-    setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidCeil" in tile_name:
-    setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidTopLeft" in tile_name:
-    setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidTopRight" in tile_name:
-    setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidTop" in tile_name:
-    setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidBot" in tile_name:
-    setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolid" in tile_name:
-    setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
+    setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
   elif "CloudSemisolidTop" in tile_name:
     setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
@@ -287,6 +319,10 @@ func unrandomizeTile(cell_index):
     setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
+
+func rerandomizeTile(cell_index, glitch_type):
+  unrandomizeTile(cell_index)
+  randomizeTile(cell_index, glitch_type)  
   
 func changeColorPalette(palette, _palette_alt = null):
   curr_palette = palette
@@ -296,10 +332,9 @@ func changeColorPalette(palette, _palette_alt = null):
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
     var material = mesh.get_material()
+    var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)
     if material is ShaderMaterial:
-      if "CloudSemisolid" in tile_name:
-        material.set_shader_param("base_palette", palette)
-      else:
+      if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
         material.set_shader_param("base_palette", palette)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)

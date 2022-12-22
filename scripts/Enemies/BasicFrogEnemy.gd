@@ -38,9 +38,9 @@ func _process(delta):
       if spawn_timer >= spawn_time_limit:
           spawn_timer = 0
           var bubble = bubbleRes.instance()
+          level.add_child(bubble)
           bubble.global_transform.origin = self.global_transform.origin
           bubble.original_pos_x = self.global_transform.origin.x
-          level.add_child(bubble)
           bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
           bubble.global_transform.origin.y += 1
           bubble.setAsParent(self)

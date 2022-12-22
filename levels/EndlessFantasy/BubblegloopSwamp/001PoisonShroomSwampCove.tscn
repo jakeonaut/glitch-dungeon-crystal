@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -57,32 +57,6 @@ extents = Vector3( 2, 0.24, 1 )
 [sub_resource type="BoxShape" id=33]
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
-
-[sub_resource type="ArrayMesh" id=43]
-surfaces/0 = {
-"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
-"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
-"blend_shape_data": [  ],
-"format": 2194689,
-"index_count": 24,
-"primitive": 1,
-"skeleton_aabb": [  ],
-"vertex_count": 8
-}
-
-[sub_resource type="ArrayMesh" id=44]
-surfaces/0 = {
-"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
-"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
-"blend_shape_data": [  ],
-"format": 2194689,
-"index_count": 24,
-"primitive": 1,
-"skeleton_aabb": [  ],
-"vertex_count": 8
-}
 
 [sub_resource type="Animation" id=29]
 length = 0.001
@@ -163,19 +137,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
-}
-
-[sub_resource type="ArrayMesh" id=45]
-surfaces/0 = {
-"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
-"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
-"blend_shape_data": [  ],
-"format": 2194689,
-"index_count": 24,
-"primitive": 1,
-"skeleton_aabb": [  ],
-"vertex_count": 8
 }
 
 [sub_resource type="Animation" id=36]
@@ -567,76 +528,76 @@ shape = SubResource( 18 )
 [node name="WaterCubes" type="Spatial" parent="Viewport/level"]
 
 [node name="WaterCube" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6, -3.5, -4 )
 
 [node name="WaterCube2" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6, -3.5, -4 )
 
 [node name="WaterCube3" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, -3.5, -4 )
 
 [node name="WaterCube4" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -3.5, -4 )
 
 [node name="WaterCube5" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4, -3.5, -4 )
 
 [node name="WaterCube6" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, -3.5, -4 )
 
 [node name="WaterCube7" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, -3.5, -4 )
 
 [node name="WaterCube8" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, -3.5, -4 )
 
 [node name="WaterCube9" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, -3.5, -4 )
 
 [node name="WaterCube10" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -3.5, -4 )
 
 [node name="WaterCube11" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -3.5, -4 )
 
 [node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, -3.5, -4 )
 
 [node name="WaterCube13" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -3.5, -4 )
 
 [node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4, -3.5, -4 )
 
 [node name="WaterCube15" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4, -3.5, -4 )
 
 [node name="WaterCube19" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5, 4.2, -4 )
 
 [node name="WaterCube16" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4, -3.5, -4 )
 
 [node name="WaterCube17" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4, -3.5, -4 )
 
 [node name="WaterCube18" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.4, -3.5, -4 )
 
 [node name="WaterCube20" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.4, -3.5, -4 )
 
 [node name="WaterCube21" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.4, -3.64409, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.4, -3.5, -4 )
 
 [node name="WaterCube22" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, -1, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, -1.2, -4 )
 
 [node name="WaterCube23" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 6.45591, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 6.3, -4 )
 
 [node name="WaterCube36" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91, 6.45591, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91, 6.3, -4 )
 
 [node name="WaterCube24" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 98.9, 8, -4 )
@@ -645,10 +606,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 98.9, 8, -4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102.8, 8, -4 )
 
 [node name="WaterCube25" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109.564, 10.4559, -4 )
-
-[node name="WaterCube37" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.575, 10.4559, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107, 10, -4 )
 
 [node name="WaterCube26" parent="Viewport/level/WaterCubes" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 11.9, -4 )
@@ -883,17 +841,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8, 6.6, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2829, -0.0604, 0 )
 
-[node name="MeshInstance" parent="Viewport/level/SavePoint/TriangleContainer/CubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 43 )
-
 [node name="SaveSpores" parent="Viewport/level/SavePoint" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0452971, 0.165527 )
 
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.8829, 6.8396, 0 )
-
-[node name="MeshInstance" parent="Viewport/level/SavePoint2/TriangleContainer/CubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 44 )
 
 [node name="SaveSpores" parent="Viewport/level/SavePoint2" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0452971, 0.165527 )
@@ -905,9 +857,6 @@ anims/sporeGrow = SubResource( 31 )
 
 [node name="SavePoint3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 116.683, 14.9396, 0 )
-
-[node name="MeshInstance" parent="Viewport/level/SavePoint3/TriangleContainer/CubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 45 )
 
 [node name="SaveSpores" parent="Viewport/level/SavePoint3" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0452971, 0.165527 )

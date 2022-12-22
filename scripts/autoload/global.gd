@@ -58,6 +58,20 @@ enum TilesetType {
     POISON_FOREST,
 }
 
+func getColorSuffixFromTilesetType(type):
+    if type == TilesetType.DUNGEON:
+        return ""
+    if type == TilesetType.HOUSE:
+        return "_red"
+    if type == TilesetType.FOREST or type == TilesetType.BEACH or type == TilesetType.POISON_FOREST:
+        return "_green"
+    if type == TilesetType.ALIEN:
+        return "_black"
+    if type == TilesetType.DESERT:
+        return "_yellow"
+    if type == TilesetType.GLITCH_WORLD:
+        return "_white"
+
 var hasLoadedGame = false
 var memory = {}
 

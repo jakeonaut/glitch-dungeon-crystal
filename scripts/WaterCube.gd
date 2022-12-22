@@ -44,6 +44,7 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
   waterFilterColorRect.material = waterFilterColorRect.material.duplicate()
   if turn_poisonous:
+    is_poison = true
     becomePoisonous()
 
 func _process(delta):

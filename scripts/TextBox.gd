@@ -184,7 +184,6 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
       
 func showTextbox():
-  print("4")
   has_preactivated = false
   focus_me = true
   if is_important:

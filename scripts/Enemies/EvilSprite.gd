@@ -172,4 +172,3 @@ func ouchies(_broom_origin):
     self.textBox.hideTextbox()
     self.textBox.has_been_shown = false
     mySprite.updateBaseFrame(6, 1)
-    print(mySprite.start_frame)
