@@ -95,3 +95,4 @@ func passiveActivate(_delta):
 
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
+    global.memory["mp"] = global.memory["max_mp"]

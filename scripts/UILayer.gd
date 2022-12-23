@@ -18,6 +18,8 @@ var title_display_time_limit = 30
 # LIKE AN ENUM-LESS fsm
 var title_display_state = 0
 
+onready var statsTitleRect = get_node("StatsTitle")
+
 onready var savingTextLabel = get_node("SavingTextLabel")
 var should_display_saving_text = false
 var saving_text_timer = 0
@@ -56,6 +58,7 @@ func recreateHeartSprites():
     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 func _process(delta):
+  statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MP: "+ str(global.memory["mp"])
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   if not global.memory.has("total_hearts") or global.memory["total_hearts"] <= 1:

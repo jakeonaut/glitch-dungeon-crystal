@@ -22,7 +22,7 @@ var camera_target_origin_x_target = 0
 
 var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
 var sparkle_timer = 0
-var sparkle_time_limit = 2
+var sparkle_time_limit = 5
 
 func _ready():
   set_physics_process(true)
@@ -51,6 +51,7 @@ func _process(delta):
       target_last_grounded_y = global_transform.origin.y
       should_magic_jump = true
 
+  # TODO(jaketrower):
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input:
     spawnSparkles(delta)
   elif glitch_form == global.GlitchForm.FEATHER and pressingJump():
@@ -92,11 +93,27 @@ func spawnOneSparkle(xdiff):
   )
 
 func spawnSparkles(delta):
-  sparkle_timer += (delta*22)
-  if sparkle_timer >= sparkle_time_limit:
-    spawnOneSparkle(.5)
-    spawnOneSparkle(-.5)
-    sparkle_timer = 0
+  if global.memory["mp"] > 0:
+    sparkle_timer += (delta*22)
+    if sparkle_timer >= sparkle_time_limit:
+      global.memory["mp"] -= 1
+      spawnOneSparkle(.5)
+      spawnOneSparkle(-.5)
+      sparkle_timer = 0
+      if global.memory["mp"] == 0:
+        self.normalGlitch()
+
+func normalGlitch():
+  glitch_form = global.GlitchForm.NORMAL
+  level.normalGlitch()
+  changeSpriteColorPalette(getLevelTiles().grey_palette)
+  # mySprite.setNormalClothes()
+
+func changeSpriteColorPalette(palette):
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("target_palette", palette)
+    mySprite.material_override = material
 
 func _physics_process(delta):
   delta = delta * global.time_dilation_multiplier

@@ -84,24 +84,12 @@ func applyGlitch(glitch, notPlaySound = false):
   global.memory["current_glitch"] = glitch
 
   mySprite.get_material_override().set_shader_param("opacity", 1.0)
-  if glitch == global.GlitchForm.NORMAL: normalGlitch()
+  if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: floorGlitch()
   if glitch == global.GlitchForm.FEATHER: featherGlitch()
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
-
-func changeSpriteColorPalette(palette):
-  var material = mySprite.material_override
-  if material is ShaderMaterial:
-    material.set_shader_param("target_palette", palette)
-    mySprite.material_override = material
-
-func normalGlitch():
-  glitch_form = global.GlitchForm.NORMAL
-  level.normalGlitch()
-  changeSpriteColorPalette(getLevelTiles().grey_palette)
-  # mySprite.setNormalClothes()
 
 func floorGlitch():
   glitch_form = global.GlitchForm.FLOOR

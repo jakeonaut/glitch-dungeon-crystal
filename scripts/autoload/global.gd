@@ -129,7 +129,8 @@ func _ready():
     memory["total_hearts"] = 1
     memory["hearts"] = 1
     memory["hearts_recovering"] = false
-    memory["mp"] = 10
+    memory["max_mp"] = 10
+    memory["mp"] = memory["max_mp"]
 
 func _process(delta):
     delta = delta * time_dilation_multiplier
