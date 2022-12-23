@@ -178,7 +178,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.568, 999, 999 ), Vector3( 1.31236, 0.157934, 0 ), Vector3( 1.05441, -0.395181, 0 ) ]
+"values": [ Vector3( -0.568, 999, 999 ), Vector3( 0.59565, 0.733, 0 ), Vector3( 1.05441, -0.395181, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -214,7 +214,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, -53.62 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, -39.751 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Area/CollisionShape:shape:radius")
@@ -226,7 +226,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.725129, 0.650362 ]
+"values": [ 1.19124, 0.650362 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Area/CollisionShape:shape:height")
@@ -238,7 +238,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.611956, 0.611956 ]
+"values": [ 0.837435, 0.611956 ]
 }
 
 [sub_resource type="Animation" id=46]

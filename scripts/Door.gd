@@ -183,6 +183,9 @@ func goThroughDoor(start_of_game = false):
     global.doorSound.play()
     hasPlayedDoorSound = true
 
+  if not is_passive:
+    getPlayer().global_transform.origin = self.global_transform.origin
+    getPlayer().global_transform.origin.y += 1
   getPlayer().aniPlayer.clear_queue()
   getPlayer().aniPlayer.play("enterDoor")
 

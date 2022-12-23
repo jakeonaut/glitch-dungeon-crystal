@@ -30,6 +30,7 @@ func PassiveInteractActivate(delta):
         parent.passiveActivate(delta)
     touchingPlayer = true
     if is_in_group("corporeal_body"):
+        # TODO(jaketrower): Don't do this if the broom is the activator
         getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
 func playerActivationAreaPassiveActivate():

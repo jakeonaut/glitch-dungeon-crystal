@@ -30,7 +30,7 @@ func _process(delta):
   
   # if global.pauseGame: return
 
-  hitStuff()
+  hitStuff(delta)
   if broom_active_timer == 0:
     summonSmokeClouds(1)
     
@@ -75,17 +75,14 @@ func isTileSpikes(tile_type):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return tileCollisionShape is RayShape
     
-func hitStuff():
+func hitStuff(delta):
   if not visible: return
   
   var areas = myArea.get_overlapping_areas()
   for area in areas:
     if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-      if global.memory.has("broom"):
-        area.get_node("..").ouchies(global_transform.origin)
-        my_broom_owner.has_sweeped_glitch = true
-      else:
-        area.get_node("..").getSmacked()
+      area.get_node("..").ouchies(global_transform.origin)
+      my_broom_owner.has_sweeped_glitch = true
       my_broom_owner.broomSound.play()
       summonSmokeClouds(5, true, true)
       # TODO kill glitches or "free" them like glitch slug...
@@ -95,6 +92,8 @@ func hitStuff():
       if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
         has_hit_npc = true
         npc.getSmacked()
+    elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
+      area.PassiveInteractActivate(delta)
 
   # erase glitch tiles...
   if not global.memory.has("broom"):

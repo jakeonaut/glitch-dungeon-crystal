@@ -372,12 +372,15 @@ func hideInteractPrompt():
   interactPrompt.visible = false
   importantInteractPrompt.visible = false
 
-func processBroomLogic(delta):
-  if not summonedBroom and is_in_broom_cooldown:
-    broom_cooldown_timer += (delta*22)
-    if broom_cooldown_timer >= broom_cooldown_time_limit:
-      broom_cooldown_timer = 0
-      is_in_broom_cooldown = false
+func processBroomLogic(_delta):
+  if not (global.memory.has("broom") and global.memory["broom"]):
+    return
+
+  # if not summonedBroom and is_in_broom_cooldown:
+  #   broom_cooldown_timer += (delta*22)
+  #   if broom_cooldown_timer >= broom_cooldown_time_limit:
+  #     broom_cooldown_timer = 0
+  is_in_broom_cooldown = false
 
   if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom:
     aniPlayer.stop()
@@ -404,10 +407,8 @@ func processBroomLogic(delta):
     level.add_child(summonedBroom)
     summonedBroom.my_broom_owner = self
 
-  if not (global.memory.has("broom") and global.memory["broom"]):
-    broomSpriteVisible.visible = false
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-    return
+func shouldAirHaveFriction():
+  return summonedBroom == null
 
 func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
@@ -418,6 +419,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.translation.x *= -1
     
   if summonedBroom:
+    broomSpriteVisible.visible = false
     if mySprite.flip_h:
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
       summonedBroom.rotation_degrees = Vector3(0, 180, 0)
@@ -426,9 +428,13 @@ func processBroomRenderLogic(_delta):
       summonedBroom.rotation_degrees = Vector3(0, 0, 0)
     summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
     summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
-  else:
+  elif global.memory.has("broom") and global.memory["broom"]:
     broomSpriteVisible.visible = true
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  else:
+    broomSpriteVisible.visible = false
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+
 
 func processPoisonWaterLogic(_delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
@@ -438,52 +444,6 @@ func processPoisonWaterLogic(_delta):
       glitchTickle(0)
     else:
       tryDieToEnemy(true, false)
-  #     if poison_timer == 0 or unpoison_timer > 0:
-  #       poisonWaterSound.play()
-  #     elif reversePoisonWaterSound.is_playing():
-  #       # TODO(jaketrower): Could be put in a function
-  #       var playback_position = reversePoisonWaterSound.get_playback_position()
-  #       var sound_length = reversePoisonWaterSound.stream.get_length()
-  #       poisonWaterSound.play(sound_length - playback_position)
-  #       reversePoisonWaterSound.stop()
-  #     # If trying to jump out of water a lot... poison harder!
-  #     if unpoison_timer > 0:
-  #       poison_timer += (delta * 220)
-  #       unpoison_timer = 0
-  #     poison_timer += (delta*22)
-  #     if poison_timer > 7:
-  #       glitchTickle(0)
-  #     if poison_timer >= poison_time_limit:
-  #       tryDieToEnemy(true, false)
-  #       poison_timer = 0
-  #       poisonWaterSound.stop()
-
-  # if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
-  #   if poisonWaterSound.is_playing():
-  #     # TODO(jaketrower): Could be put in a function
-  #     var playback_position = poisonWaterSound.get_playback_position()
-  #     var sound_length = poisonWaterSound.stream.get_length()
-  #     reversePoisonWaterSound.play(sound_length - playback_position)
-  #     poisonWaterSound.stop()
-  #   # decrease more slowly than it increases... toxic
-  #   unpoison_timer += (delta * 22)
-  #   if unpoison_timer >= unpoison_time_limit:
-  #     poison_timer -= (delta * 22)
-  #     if poison_timer <= 0:
-  #       poison_timer = 0
-  #       level.glitchScreenEffect.visible = false
-  #       musicPlayer.changeSongPitch(1.0)
-  #       reversePoisonWaterSound.stop()
-
-  # if poison_timer > 0:
-  #   level.glitchScreenEffect.visible = true
-  #   level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
-  #   musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
-  # if poison_timer < 0:
-  #   poison_timer = 0
-  #   level.glitchScreenEffect.visible = false
-  #   musicPlayer.changeSongPitch(1.0)
-  #   reversePoisonWaterSound.stop()
     
 # @override
 func landed():

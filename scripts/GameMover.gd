@@ -756,7 +756,7 @@ func processHorizontalInputs(delta):
     dir = dir * 0.9*(delta*DNUMSKID)
     if dir.length() < 0.1:
       dir = Vector3(0, 0, 0)
-  elif not on_ground:
+  elif not on_ground and shouldAirHaveFriction():
     dir = dir * 0.99*(delta*DNUMSKID)
     if dir.length() < 0.01:
       dir = Vector3(0, 0, 0)
@@ -801,6 +801,12 @@ func processHorizontalInputs(delta):
     is_walking = false
   else:
     updateFacing(dir)
+
+func shouldAirHaveFriction():
+  return true
+
+func shouldGroundHaveFriction():
+  return true
 
 func doWalkAnimation():
   if horizontal_collision:
