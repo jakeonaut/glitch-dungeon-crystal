@@ -1,0 +1,25 @@
+extends AudioStreamPlayer
+
+onready var NPC = get_node("../../..")
+onready var CHUNKY = get_node("../../../..")
+
+func _ready():
+    pass
+
+func activateScript():
+    global.activeInteractor = null
+    global.memory["max_mp"] += 10
+    global.memory["mp"] = global.memory["max_mp"]
+    CHUNKY.queue_free()
+    
+    
+func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
+    # OVERRIDE ME
+    pass
+
+func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
+    activateScript()
+
+func isActive():
+    # OVERRIDE ME... if you dare
+    return true

@@ -1,7 +1,7 @@
 extends InterpolatedCamera
 
 var initial_z
-onready var actual_target = get_node(target) 
+onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
 
@@ -63,12 +63,13 @@ func setCameraPositionNow():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
-  if actual_target == null:
-    return
+  if not actual_target.get_ref():
+    actual_target = weakref(initial_target)
+    set_target(actual_target.get_ref())   
 
   global_transform.origin.z = initial_z
   # d=√((x_2-x_1)²+(y_2-y_1)²)
-  var distance = global_transform.origin.distance_to(actual_target.global_transform.origin)
+  var distance = global_transform.origin.distance_to(actual_target.get_ref().global_transform.origin)
 
   var speed_multiplier = 1
   if how_fast_to_switch_targets > 0:
@@ -93,16 +94,16 @@ func _process(delta):
   elif distance > 19.4:
     set_interpolation_enabled(true)
     set_speed(2 * speed_multiplier)
-    if actual_target == initial_target: how_fast_to_switch_targets = 0
+    if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
   elif distance < 19.33 and global.activeInteractor == null:
     set_interpolation_enabled(false)
-    if actual_target == initial_target: how_fast_to_switch_targets = 0
+    if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
   var zoomed_size = (initial_size-8)
   var npcTextBox = global.activeInteractor
   if npcTextBox != null and npcTextBox.can_camera_zoom and initial_size > 12:
-    actual_target = global.activeInteractor.get_node("../..")
-    set_target(actual_target)
+    actual_target = weakref(global.activeInteractor.get_node("../.."))
+    set_target(actual_target.get_ref())
     # interpolation = A + (B - A) * t
     self.size = self.size + (zoomed_size - self.size) * (delta*5)
     if stepify(self.size, 0.1) == zoomed_size:
@@ -110,8 +111,8 @@ func _process(delta):
     set_speed(2)
     set_interpolation_enabled(true)
   else:
-    actual_target = initial_target
-    set_target(actual_target)      
+    actual_target = weakref(initial_target)
+    set_target(actual_target.get_ref())      
     self.size = self.size + (initial_size - self.size) * (delta*5)
     if stepify(self.size, 0.1) == initial_size:
       self.size = initial_size
@@ -119,7 +120,7 @@ func _process(delta):
   if is_doing_fake_static:
     set_speed(0)
     set_interpolation_enabled(false)
-    var target_screen_pos = unproject_position(actual_target.global_transform.origin)
+    var target_screen_pos = unproject_position(actual_target.get_ref().global_transform.origin)
     var SCREEN_WIDTH = 640
     if target_screen_pos.x >= SCREEN_WIDTH:
       self.global_transform.origin.x += project_position(Vector2(SCREEN_WIDTH*1, 0), 0).x*2
