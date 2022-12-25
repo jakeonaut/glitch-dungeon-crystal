@@ -26,6 +26,9 @@ onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
+onready var textBoxContainer = get_node("TextContainer")
+onready var textBox = get_node("TextContainer/TextBox")
+
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
@@ -149,21 +152,13 @@ func _process(delta):
 
   if can_cast_spell_timer < can_cast_spell_time_limit:
     can_cast_spell_timer += (delta*22)
-    
-  # if Input.is_action_just_pressed("ui_accept") and not global.pauseMoveInput:
-  #     if not global.pauseGame:
-  #         if pauseMenu: pauseMenu.show()
-  #         global.pauseGame = true
-  #     else:
-  #         if pauseMenu: pauseMenu.hide()
-  #         global.pauseGame = false
 
   if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
     applySpellbookGlitch()
   if Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()
     
-  tryDieToOffscreenCamera()
+  tryDieToOffscreenCamera(delta)
       
   if gimme_mini_crystal_cubes > 0:
     gimme_mini_crystal_cubes_timer += (delta*22)
@@ -183,7 +178,7 @@ func _process(delta):
   
   processPoisonWaterLogic(delta)
   
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(delta):
   var DEATH_MARGIN = 5
   if getGameCamera().rightmost_x > -999:
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
@@ -192,7 +187,7 @@ func tryDieToOffscreenCamera():
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
       #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
       global.memory["hearts"] = 0
-      tryDieToEnemy(true, true)
+      tryDieToEnemy(delta, true, true, true)
   
 func doTimeDilation(delta):
   var real_delta_multiplier = 8
@@ -315,50 +310,54 @@ func nullify():
           global.memory["spellbookPage"] = []
 
 # @override
-func tryDieToEnemy(should_glitch, should_kill_invis):
-  if summonedBroom:
-    broomStop()
+func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
+  if transitioning:
+    return
+  if isOnSavePoint():
+    return
+  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT:
+    return
 
-  if not transitioning and (should_kill_invis or (glitch_form != global.GlitchForm.INVISIBLE and \
-     physics_state != PhysicsState.GLITCH_DYING and not isOnSavePoint() and \
-     physics_state != PhysicsState.GLITCH_HURT and physics_state != PhysicsState.GLITCH_RECOVERY and \
-     aniPlayer.assigned_animation != "broomSweep")):
-    if randi() % 3 == 0:
-      hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
-      hurt2Sound.play()
-    else:
-      hurtSound.pitch_scale = rand_range(0.8, 1.5)
-      hurtSound.play()
-    bumpSound.play()
-    global.pauseGame = true
-    global.pauseMoveInput = true
+  if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
+    spawnSparkles(delta, true)
+    return
 
-    if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
-      level.glitchScreenEffect.visible = true
-    var material = level.glitchScreenEffect.get_material()
-    if material is ShaderMaterial:
-      material.set_shader_param("shake_power", 0.01)
-      material.set_shader_param("shake_color_rate", 0.01)
-    var my_material = mySprite.get_material_override()
-    if my_material is ShaderMaterial:
-      my_material.set_shader_param("enable_glitch", true)
-      my_material.set_shader_param("enable_remove_skin_tone", true)
-    
-    if global.canChangeSongPitch:
-      musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+  if randi() % 3 == 0:
+    hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
+    hurt2Sound.play()
+  else:
+    hurtSound.pitch_scale = rand_range(0.8, 1.5)
+    hurtSound.play()
+  bumpSound.play()
+  global.pauseGame = true
+  global.pauseMoveInput = true
 
-    # global.memory["hearts"] -= 1
-    print(self.glitch_form)
-    print(global.GlitchForm.NORMAL)
-    if self.glitch_form == global.GlitchForm.NORMAL: # global.memory["hearts"] <= 0:
-      # global.memory["hearts"] = 0
-      global.isRespawning = true
-      physics_state = PhysicsState.GLITCH_DYING
-      glitch_death_timer = 0
-    else:
-      physics_state = PhysicsState.GLITCH_HURT
-      glitch_death_timer = 0
-      self.nullify()
+  if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
+    level.glitchScreenEffect.visible = true
+  var material = level.glitchScreenEffect.get_material()
+  if material is ShaderMaterial:
+    material.set_shader_param("shake_power", 0.01)
+    material.set_shader_param("shake_color_rate", 0.01)
+  var my_material = mySprite.get_material_override()
+  if my_material is ShaderMaterial:
+    my_material.set_shader_param("enable_glitch", true)
+    my_material.set_shader_param("enable_remove_skin_tone", true)
+  
+  if global.canChangeSongPitch:
+    musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+
+  # global.memory["hearts"] -= 1
+  if self.glitch_form == global.GlitchForm.NORMAL or should_immediately_die: # global.memory["hearts"] <= 0:
+    # global.memory["hearts"] = 0
+    global.isRespawning = true
+    physics_state = PhysicsState.GLITCH_DYING
+    glitch_death_timer = 0
+    if summonedBroom:
+      broomStop()
+  else:
+    physics_state = PhysicsState.GLITCH_HURT
+    glitch_death_timer = 0
+    self.nullify()
 
     
 func showInteractPrompt(is_important = false):
@@ -436,14 +435,14 @@ func processBroomRenderLogic(_delta):
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
 
 
-func processPoisonWaterLogic(_delta):
+func processPoisonWaterLogic(delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 
   if is_touching_poison_water:
     if glitch_form == global.GlitchForm.INVISIBLE:
       glitchTickle(0)
     else:
-      tryDieToEnemy(true, false)
+      tryDieToEnemy(delta, true, false)
     
 # @override
 func landed():
@@ -535,3 +534,14 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             new_material.set_shader_param("enable_glitch", "true")
             new_material.set_shader_param("target_palette", global.weird_base_palette)
             newSmokeCloud.set_material_override(new_material.duplicate())
+
+var is_active = true
+func setGlobalMemoryOfHasSpoken():
+  # no-op for now
+  pass
+func idleTalk():
+  # no-op for now
+  pass
+func appendNextTextCharacter():
+  # no-op for now
+  pass

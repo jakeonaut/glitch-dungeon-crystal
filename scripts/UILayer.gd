@@ -11,6 +11,8 @@ onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/Ric
 onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
+onready var inventoryControl = get_node("Inventory")
+
 var display_title = "???"
 onready var levelTitleRect = get_node("LevelTitle")
 var title_display_timer = 10
@@ -60,6 +62,8 @@ func recreateHeartSprites():
 func _process(delta):
   statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MP: "+ str(global.memory["mp"])
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
+
+  inventoryControl.visible = global.isInventoryOpen
 
   if not global.memory.has("total_hearts") or global.memory["total_hearts"] <= 1:
     heartsRect.visible = false

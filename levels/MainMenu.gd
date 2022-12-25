@@ -23,7 +23,7 @@ func _process(delta):
         switch_glitch_timer = 0
         player.applyNextGlitch()
 
-    if Input.is_action_just_pressed("ui_accept"):
+    if Input.is_action_just_pressed("ui_start"):
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()

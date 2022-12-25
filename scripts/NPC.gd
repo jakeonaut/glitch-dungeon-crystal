@@ -21,13 +21,9 @@ onready var smackSound = get_node("SmackSound")
 onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
-onready var textBoxtext = get_node("NPC TextBox/TextBox/Text")
-onready var textBoxportrait = get_node("NPC TextBox/TextBox/Portrait")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
-
-var textbox_dont_touch_my_sprite = false
 
 var pressing_jump = false
 var just_pressed_jump = false 
@@ -190,3 +186,10 @@ func justPressedJump():
 
 func pressingJump():
   return pressing_jump
+
+func idleTalk():
+  mySprite.frame_delay = 1.6
+  mySprite.should_randomize_frame_delay = false
+
+func appendNextTextCharacter():
+  mySprite.frame_delay = 0.2

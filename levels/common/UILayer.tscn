@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/water_normal_3.png" type="Texture" id=14]
 [ext_resource path="res://TextBoxTheme.tres" type="Theme" id=15]
 [ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://assets/CHUNKY.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=10]
 size = 20
@@ -27,6 +28,16 @@ font_data = ExtResource( 16 )
 
 [sub_resource type="Theme" id=11]
 default_font = SubResource( 10 )
+
+[sub_resource type="DynamicFont" id=14]
+outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=15]
+default_font = SubResource( 14 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -43,7 +54,7 @@ default_font = SubResource( 3 )
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=14]
+[sub_resource type="ArrayMesh" id=16]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -202,6 +213,144 @@ bbcode_text = "the dungeon"
 text = "the dungeon"
 scroll_active = false
 
+[node name="Inventory" type="Control" parent="."]
+margin_right = 640.0
+margin_bottom = 510.0
+
+[node name="InventoryContent" type="ColorRect" parent="Inventory"]
+margin_left = 111.0
+margin_top = 104.0
+margin_right = 533.0
+margin_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 416.0
+margin_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 409.0
+margin_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="SelectorTopLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 9, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 188
+
+[node name="SelectorTopRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 56, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 190
+
+[node name="SelectorBotLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 9, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 220
+
+[node name="SelectorBotRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 56, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 222
+
+[node name="SelectorBotRight2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+visible = false
+position = Vector2( 66, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 220
+
+[node name="Pet1" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 32.5, 31.5 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 321
+
+[node name="Pet2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+visible = false
+position = Vector2( 89.5001, 31.5 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 304
+
+[node name="InventoryTitle" type="ColorRect" parent="Inventory"]
+margin_left = 218.5
+margin_top = 70.5
+margin_right = 424.5
+margin_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inventory/InventoryTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "inventory"
+text = "inventory"
+scroll_active = false
+
 [node name="HeartsRect" type="ColorRect" parent="."]
 visible = false
 margin_left = 76.0
@@ -352,7 +501,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 14 )
+mesh = SubResource( 16 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -360,6 +509,7 @@ material_override = SubResource( 7 )
 [node name="Sprite3D" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal" index="5"]
 material_override = SubResource( 8 )
 frame = 0
+should_ignore_pause = null
 
 [node name="Camera" type="Camera" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -999, -999, 1.283 )

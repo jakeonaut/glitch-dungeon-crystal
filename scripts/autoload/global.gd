@@ -58,6 +58,10 @@ enum TilesetType {
     POISON_FOREST,
 }
 
+enum Inventory {
+    PET_0,
+}
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""
@@ -84,7 +88,8 @@ var isRespawning = false
 var cameraRotation = 0
 
 var pauseMoveInput = false # don't allow player physics or camera input??
-var pauseGame = false   
+var pauseGame = false
+var isInventoryOpen = false
 
 var num_cherries_eaten = 0
 var num_cherries_gained = 0
@@ -214,7 +219,7 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
         x + lb, y + bb, x + rb, y + bb - 0.12
-    ) and gameMover.linear_velocity.y < 0:
+    ) and (gameMover.linear_velocity.y < 0 or (gameMover.linear_velocity.y == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.should_do_fallthrough_area_collision = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
         return true

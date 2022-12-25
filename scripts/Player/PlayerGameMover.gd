@@ -21,7 +21,7 @@ onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 
 var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
-var sparkle_timer = 0
+var sparkle_timer = 4
 var sparkle_time_limit = 5
 
 func _ready():
@@ -51,13 +51,16 @@ func _process(delta):
       target_last_grounded_y = global_transform.origin.y
       should_magic_jump = true
 
-  # TODO(jaketrower):
-  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input:
+  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input and not was_walking_into_wall:
     spawnSparkles(delta)
-  elif glitch_form == global.GlitchForm.FEATHER and pressingJump():
+  elif glitch_form == global.GlitchForm.FEATHER and pressingJump() and not on_ground:
     spawnSparkles(delta)
+  elif glitch_form == global.GlitchForm.LADDER and was_walking_into_wall:
+    spawnSparkles(delta)
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    pass
   else:
-    sparkle_timer = 0
+    sparkle_timer = sparkle_time_limit - 1
     
   # this is a little weird but fixes the fallthrough area situation:
   if linear_velocity.y < 0:
@@ -80,25 +83,30 @@ func _process(delta):
     aniPlayer.clear_queue()
     aniPlayer.queue("fishingSitDown")
 
-func spawnOneSparkle(xdiff):
+func spawnOneSparkle(xdiff, above_the_head = false):
   var newSparkle = sparkleRes.instance()
   level.add_child(newSparkle)
   newSparkle.global_transform.origin = self.global_transform.origin
   newSparkle.global_transform.origin.x -= xdiff - (hv.x / 20)
-  newSparkle.global_transform.origin.y -= 1.3
+  if above_the_head:
+    newSparkle.global_transform.origin.y += 2.3
+  else:
+    newSparkle.global_transform.origin.y -= 1.3
   newSparkle.global_transform.origin.z -= 5.0
   newSparkle.get_material_override().set_shader_param(
     "target_palette", 
     mySprite.material_override.get_shader_param("target_palette")
   )
 
-func spawnSparkles(delta):
+func spawnSparkles(delta, above_the_head = false):
+  if global.pauseGame: return
+
   if global.memory["mp"] > 0:
     sparkle_timer += (delta*22)
     if sparkle_timer >= sparkle_time_limit:
       global.memory["mp"] -= 1
-      spawnOneSparkle(.5)
-      spawnOneSparkle(-.5)
+      spawnOneSparkle(.5, above_the_head)
+      spawnOneSparkle(-.5, above_the_head)
       sparkle_timer = 0
       if global.memory["mp"] == 0:
         self.normalGlitch()
@@ -204,14 +212,14 @@ func processJumpInputs(delta):
         new_carcass.mySprite.flip_h = mySprite.flip_h
         if randi() % 4 == 1:
           new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
-        tryDieToEnemy(true, false)
+        tryDieToEnemy(delta, true, false)
         global.num_cherries_eaten -= 1
         
   .processJumpInputs(delta)
     
 
 # @override
-func handleSpikeCollisions():
+func handleSpikeCollisions(delta):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var rb = get_node("CollisionShape").shape.radius
@@ -235,5 +243,5 @@ func handleSpikeCollisions():
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
         x + lb + margin, y + tb - margin, x + rb - margin, y + bb + margin
       ):
-        tryDieToEnemy(true, false)
+        tryDieToEnemy(delta, true, false)
         return

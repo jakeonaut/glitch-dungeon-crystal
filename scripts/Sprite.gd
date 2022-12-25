@@ -23,8 +23,6 @@ var overwritten_green_palette = null
 export(String, FILE) var overwritten_yellow_palette_path = null
 var overwritten_yellow_palette = null
 
-export var should_ignore_pause = false
-
 onready var levelTiles = get_tree().get_root().get_node("Game/Viewport/level/LevelTiles")
 
 func _ready():
@@ -63,7 +61,6 @@ func preProcess():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
-    if global.pauseGame and should_ignore_pause: return
     preProcess()
     if visible and should_animate:
         animate(delta)

@@ -233,7 +233,7 @@ hframes = 4
 vframes = 2
 frame = 1
 
-[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+[node name="SparkleSprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
 visible = false
 material_override = SubResource( 14 )

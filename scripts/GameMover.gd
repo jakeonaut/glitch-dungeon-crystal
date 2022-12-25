@@ -182,7 +182,7 @@ func alignMySprite():
 func isActive():
   return visible
 
-func tryDieToEnemy(_should_glitch, _should_kill_invis):
+func tryDieToEnemy(_delta, _should_glitch, _should_kill_invis, _should_immediately_die = false):
   pass    
   
 func getHitByBroom():
@@ -851,7 +851,7 @@ func handleCollisionsAndMove(local_lv, delta):
     global_transform.origin.y = fallthrough_area_collision_y
   global_transform.origin.y += local_lv.y / velocity_dampener
 
-  handleSpikeCollisions()
+  handleSpikeCollisions(delta)
   
   if on_ground:
     if was_on_ground:
@@ -939,9 +939,10 @@ func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, se
   var y = global_transform.origin.y
   
   if is_vertical:
-    if not truly_on_ground:
-      # add y speed to collision checking if we're in the air
-      sensor.y += local_lv.y
+    # add y speed to collision checking if we're in the air
+    sensor.y += local_lv.y
+    if local_lv.y == 0 and glitch_form == global.GlitchForm.FLOOR:
+      sensor.y -= 0.125
   else:
     sensor.x += local_lv.x
   var tile_pos_and_type = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
@@ -1133,7 +1134,7 @@ func handleVerticalCollisions(local_lv):
   
   return local_lv
   
-func handleSpikeCollisions():
+func handleSpikeCollisions(_delta):
   pass
 
 func postProcessInputs(_delta):

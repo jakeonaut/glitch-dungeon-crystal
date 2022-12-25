@@ -39,7 +39,6 @@ func _ready():
     # .ready() implicit
     set_process(true)
     set_physics_process(true)
-    textbox_dont_touch_my_sprite = true
     
 # @override
 func activate():

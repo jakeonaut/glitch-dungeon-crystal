@@ -10,6 +10,11 @@ func activateScript():
     global.activeInteractor = null
     global.memory["max_mp"] += 10
     global.memory["mp"] = global.memory["max_mp"]
+    if not global.memory.has("inventory"):
+        global.memory["inventory"] = []
+    global.memory["inventory"].append(global.Inventory.PET_0)
+    global.pauseGame = false
+    global.pauseMoveInput = false
     CHUNKY.queue_free()
     
     

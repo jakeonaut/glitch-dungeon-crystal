@@ -79,11 +79,25 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   crtScreenEffect.visible = false
-  if Input.is_action_just_pressed("ui_accept") and getLevelName().find("MainMenu") < 0:
-    global.canChangeSongPitch = not global.canChangeSongPitch
-    global.canGlitchScreen = not global.canGlitchScreen
-    global.crtScreenEffects = not global.crtScreenEffects
-    # crtScreenEffect.visible = global.crtScreenEffects
+  if Input.is_action_pressed("toggle_fullscreen"):
+    return
+
+  if global.memory.has("inventory") and not global.pauseGame and not global.pauseMoveInput:
+    if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
+    #   global.canChangeSongPitch = not global.canChangeSongPitch
+    #   global.canGlitchScreen = not global.canGlitchScreen
+    #   global.crtScreenEffects = not global.crtScreenEffects
+      global.isInventoryOpen = true
+      global.pauseGame = true
+  elif global.isInventoryOpen:
+    if Input.is_action_just_pressed("ui_start"):
+      global.isInventoryOpen = false
+      global.pauseGame = false
+    if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
+      print("yo it's jake")
+      player.textBox.interact()
+    
+
   
   var amt = 6.0
   crtScreenEffect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
@@ -164,6 +178,7 @@ func tryToRespawn():
     has_ever_set_camera_position = true
 
   global.isRespawning = false
+  global.memory["mp"] = global.memory["max_mp"]
 
   self.overrideLevelRespawnEvent()
 

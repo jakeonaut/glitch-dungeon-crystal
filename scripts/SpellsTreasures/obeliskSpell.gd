@@ -2,6 +2,11 @@ extends KinematicBody
 
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
+onready var sparkleSprite = get_node("SparkleSprite3D")
+var spawn_timer = 0
+var spawn_time_limit = 5
+var num_sparkles_spawned = 0
+var num_sparkles_spawned_limit = 5
 
 export var my_glitch_form = 2
 export var first_ever_glitch = false
@@ -64,6 +69,23 @@ func _process(delta):
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
       has_frozen_input = true
+
+  if num_sparkles_spawned < num_sparkles_spawned_limit:
+    spawn_timer += (delta*22)
+    if spawn_timer >= spawn_time_limit:
+      var newSprite = sparkleSprite.duplicate()
+      newSprite.should_fizzle_out = true
+      newSprite.visible = true
+      newSprite.transform.origin = Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125),
+          0
+      )
+      newSprite.updateBaseFrame(0, 0)
+      newSprite.max_frames = 2
+      add_child(newSprite)
+      spawn_timer = 0
+      num_sparkles_spawned += 1
     
 func shouldIBeActive():
   if getPlayer().glitch_form == my_glitch_form:
@@ -76,10 +98,19 @@ func shouldIBeActive():
     return true
 
 func isActive():
-  return is_active
+  return true
 
 func passiveActivate(_delta):
+  if not is_active:
+    if global.memory["mp"] < global.memory["max_mp"]:
+      collectSound.pitch_scale = 0.5
+      collectSound.play()
+      num_sparkles_spawned = 0
+      global.memory["mp"] = global.memory["max_mp"]
+    return
+
   if global.memory.has("spellbookPage"):
+    collectSound.pitch_scale = 0.9
     collectSound.play()
   is_active = false
 
@@ -92,7 +123,8 @@ func passiveActivate(_delta):
     NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold down UP\nor X to jump higher"
     NPC.textBoxContainer.setVars()
     NPC.textBoxContainer.textBox.has_been_shown = false
-
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
     global.memory["mp"] = global.memory["max_mp"]
+
+  num_sparkles_spawned = 0

@@ -87,9 +87,8 @@ func setPosition():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if get_node("../..").is_active and not get_node("../..").textbox_dont_touch_my_sprite:
-    get_node("../..").mySprite.frame_delay = 1.6
-    get_node("../..").mySprite.should_randomize_frame_delay = false
+  if get_node("../..").is_active:
+    get_node("../..").idleTalk()
 
   if endPrompt.visible:
     wigglePrompt(delta, endPrompt)
@@ -139,8 +138,7 @@ func _process(delta):
     self.margin_bottom = bot_margin_start
       
 func appendNextTextCharacter():
-  if not get_node("../..").textbox_dont_touch_my_sprite:
-    get_node("../..").mySprite.frame_delay = 0.2
+  get_node("../..").appendNextTextCharacter()
 
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
   textNode.bbcode_text += text_final[text_next_index]

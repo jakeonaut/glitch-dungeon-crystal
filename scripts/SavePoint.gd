@@ -1,8 +1,8 @@
 extends Spatial
 
-onready var mySprite = get_node("Sprite3D")
+onready var sparkleSprite = get_node("SparkleSprite3D")
 onready var triangleContainer = get_node("TriangleContainer")
-onready var myOtherSprite = get_node("TriangleContainer/Sprite3D")
+onready var saveDiskSprite = get_node("TriangleContainer/Sprite3D")
 onready var saveSound = get_node("SaveSound")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -57,7 +57,7 @@ func _process(delta):
                 num_children += 1
 
             if num_children < 20:
-                var newSprite = mySprite.duplicate()
+                var newSprite = sparkleSprite.duplicate()
                 newSprite.should_fizzle_out = true
                 newSprite.visible = true
                 newSprite.transform.origin = Vector3(
@@ -83,10 +83,10 @@ func isOnSavePoint():
             int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func enablePaletteCycle():
-    setPaletteCycle(myOtherSprite, true)
+    setPaletteCycle(saveDiskSprite, true)
 
 func disablePaletteCycle():
-    setPaletteCycle(myOtherSprite, false)
+    setPaletteCycle(saveDiskSprite, false)
 
 func setPaletteCycle(sprite, value):
     var my_material = sprite.get_material_override()
