@@ -22,7 +22,7 @@ var hide_textbox_time_limit = 10
 var has_been_shown = false
 var has_preactivated = false
 var focus_me = false
-var can_camera_zoom = true
+export var can_camera_zoom = true
 
 var is_important = false
 var is_really_important = false
@@ -103,7 +103,7 @@ func _process(delta):
     text_timer += (delta*22)
     
     var time_limit = text_time_limit
-    if Input.is_action_pressed("interact_button") or is_fast_text:
+    if Input.is_action_pressed("interact_button") or Input.is_action_pressed("sub_action_button") or Input.is_action_pressed("jump_button") or is_fast_text:
       time_limit = 0
       
     tryToHide(delta)
@@ -228,11 +228,14 @@ func InteractActivate():
   interact()
     
 func interact():
+  print("visible: " + str(visible) + ", isActive: " + str(dialogSound.isActive()))
   if !visible and dialogSound.isActive():
     showTextbox()
     global.activeInteractor = self
 
+  print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
+    print("isWaiting?: " + str(isWaitingForNextPrompt()) + ", " + str(isWaitingForEndPrompt()))
     if isWaitingForNextPrompt():
       nextDialogSound.play()
       ui_should_continue = true

@@ -18,6 +18,7 @@ var white_palette = global.white_palette
 var grow_tile_upward = true
 
 var curr_palette = global.grey_palette
+export(Resource) var override_palette = null
 
 onready var cosmeticLevelTiles = get_node("CosmeticLevelTiles") if has_node("CosmeticLevelTiles") else null
 onready var backgroundLevelTiles = get_node("BackgroundLevelTiles") if has_node("BackgroundLevelTiles") else null
@@ -327,7 +328,11 @@ func rerandomizeTile(cell_index, glitch_type):
   randomizeTile(cell_index, glitch_type)  
   
 func changeColorPalette(palette, _palette_alt = null):
-  curr_palette = palette
+  if override_palette == null:
+    curr_palette = palette
+  else:
+    curr_palette = override_palette
+    
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):
     var item_id = item_list[i]
@@ -337,7 +342,7 @@ func changeColorPalette(palette, _palette_alt = null):
     var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)
     if material is ShaderMaterial:
       if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
-        material.set_shader_param("base_palette", palette)
+        material.set_shader_param("base_palette", curr_palette)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
 

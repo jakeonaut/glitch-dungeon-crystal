@@ -1,11 +1,39 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/swamp_water_palette2.png" type="Texture" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=5]
-[ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/water_splash0000.png" type="Texture" id=8]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/enable_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -20,7 +48,7 @@ shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
+shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
 shader_param/disable_glitch_dither = false
@@ -35,148 +63,353 @@ shader_param/target_palette = ExtResource( 1 )
 
 [node name="Waterfall" type="Spatial"]
 
-[node name="MiniAdventures" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -0.611692, -1 )
-material_override = SubResource( 1 )
-
-[node name="MiniAdventures27" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 0.388308, -1 )
-material_override = SubResource( 1 )
+[node name="MiniAdventures27" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -0.612666, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
 frame = 576
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures28" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, 0.388308, -1 )
-material_override = SubResource( 1 )
+[node name="MiniAdventures28" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 0.369445, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
 frame = 576
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures29" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51258, 0.488307, -1 )
-material_override = SubResource( 1 )
+[node name="MiniAdventures29" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53089, 0.367176, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
 frame = 576
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -0.611692, -1 )
-material_override = SubResource( 1 )
+[node name="MiniAdventures30" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5355, 0.385814, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 576
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -1.61169, -1 )
+[node name="MiniAdventures2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -0.611692, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures4" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -1.61169, -1 )
+[node name="MiniAdventures3" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -1.60778, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures5" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -2.61169, -1 )
+[node name="MiniAdventures4" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -1.60778, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures6" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -2.61169, -1 )
+[node name="MiniAdventures5" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -2.59797, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures7" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -3.61169, -1 )
+[node name="MiniAdventures6" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -2.59797, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures8" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -3.61169, -1 )
+[node name="MiniAdventures7" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -3.59405, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures9" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -4.61169, -1 )
+[node name="MiniAdventures8" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -3.59405, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures10" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -4.61169, -1 )
+[node name="MiniAdventures9" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -4.59974, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures11" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -5.61169, -1 )
+[node name="MiniAdventures10" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -4.59974, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures12" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -5.61169, -1 )
+[node name="MiniAdventures11" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -5.59583, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures13" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -6.61169, -1 )
+[node name="MiniAdventures12" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -5.59583, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures14" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -6.61169, -1 )
+[node name="MiniAdventures13" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -6.58602, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures15" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -7.51169, -1 )
+[node name="MiniAdventures14" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -6.58602, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures16" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -7.51169, -1 )
+[node name="MiniAdventures15" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -7.5821, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures17" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -8.51169, -1 )
+[node name="MiniAdventures16" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -7.5821, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures18" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -8.51169, -1 )
+[node name="MiniAdventures17" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -8.58087, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures19" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -9.51169, -1 )
+[node name="MiniAdventures18" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -8.58087, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures20" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -9.51169, -1 )
+[node name="MiniAdventures19" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -9.57695, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures21" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -10.5117, -1 )
+[node name="MiniAdventures20" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -9.57695, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures22" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -10.5117, -1 )
+[node name="MiniAdventures21" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -10.5671, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures23" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -11.5117, -1 )
+[node name="MiniAdventures22" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -10.5671, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures24" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -11.5117, -1 )
+[node name="MiniAdventures23" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -11.5632, -1 )
 material_override = SubResource( 1 )
-frame = 640
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures25" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -12.5117, -1 )
+[node name="MiniAdventures24" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -11.5632, -1 )
 material_override = SubResource( 1 )
-frame = 672
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
-[node name="MiniAdventures26" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51258, -12.5117, -1 )
+[node name="MiniAdventures25" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -12.5462, -1 )
 material_override = SubResource( 1 )
-frame = 672
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures26" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -12.5462, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 7 )
+frame_delay = 0.1
+max_frames = 4
 
 [node name="WaterCube" parent="." instance=ExtResource( 3 )]
 water_cube_width = 1.0
@@ -190,6 +423,7 @@ visible = false
 [node name="WaterCube2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5.59583, -4 )
 water_cube_width = 1.0
+can_splash = false
 
 [node name="Sprite3D" parent="WaterCube2" index="0"]
 visible = false
@@ -200,6 +434,7 @@ visible = false
 [node name="WaterCube3" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9.18292, -4 )
 water_cube_width = 1.0
+can_splash = false
 
 [node name="Sprite3D" parent="WaterCube3" index="0"]
 visible = false
@@ -211,9 +446,9 @@ visible = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9857, 2 )
 
 [node name="WaterCube4" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -12.7893, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -11.1903, -4 )
 water_cube_width = 1.0
-water_cube_height = 1.0
+can_splash = false
 
 [node name="Sprite3D" parent="WaterCube4" index="0"]
 visible = false
@@ -223,6 +458,50 @@ visible = false
 
 [node name="CollisionShape" parent="WaterCube4/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9857, 2 )
+
+[node name="SplashSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58499, -12.5154, 5 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+hframes = 7
+frame = 1
+script = ExtResource( 7 )
+frame_delay = 0.1
+should_randomize_frame_delay = true
+max_frames = 4
+
+[node name="SplashSprite2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59395, -12.5154, 5 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+hframes = 7
+frame = 1
+script = ExtResource( 7 )
+frame_delay = 0.1
+should_randomize_frame_delay = true
+max_frames = 5
+
+[node name="SplashSprite3" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.450448, -12.5154, 5 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+hframes = 7
+frame = 1
+script = ExtResource( 7 )
+frame_delay = 0.1
+should_randomize_frame_delay = true
+max_frames = 5
+
+[node name="SplashSprite4" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.558517, -12.5154, 5 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+hframes = 7
+frame = 1
+script = ExtResource( 7 )
+frame_delay = 0.1
+should_randomize_frame_delay = true
+max_frames = 4
 
 [editable path="WaterCube"]
 [editable path="WaterCube2"]

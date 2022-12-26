@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "godot",
+            "request": "launch",
+            "project": "/home/glitch-dungeon-crystal/project.godot",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "launch_game_instance": true,
+            "launch_scene": false,
+            "scene_file": "levels/EndlessFantasy/002PathToSacredDoors/0_1.tscn",
+        }
+    ]
+}

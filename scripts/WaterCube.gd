@@ -17,6 +17,7 @@ var poisonWaterShader = preload("res://shaders/PoisonWaterCube.gdshader")
 export var water_cube_width = 2.0
 export var water_cube_height = 2.0
 export var turn_poisonous = false
+export var can_splash = true
 var is_poison = false
 var poisonous_timer = 0
 var poisonous_time_limit = 10
@@ -67,7 +68,7 @@ func _process(delta):
         mySprite.material_override.set_shader_param("time_influence", 26.841)
         # mySprite.material_override.set_shader_param("y_div", 0.5)
         mySprite.material_override.set_shader_param("enable_glitch", false)
-        mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+        #mySprite.material_override.set_shader_param("enable_palette_cycle", true)
         waterFilterColorRect.material.set_shader(poisonWaterShader)
 
 func becomePoisonous():
@@ -81,7 +82,7 @@ func isActive():
   return true
   
 func passiveActivate(_delta):
-  if not getPlayer().was_touching_water:
+  if not getPlayer().was_touching_water and can_splash:
     if bigSplash():
       splashSound.play()
     else:
@@ -94,7 +95,7 @@ func passiveActivate(_delta):
       makeNewSplashSprite(0.582)
       
 func justStopPassiveActivate():
-  if not getPlayer().is_touching_water:
+  if not getPlayer().is_touching_water and can_splash:
     if bigSplash():
       splashSound.play()
     else:

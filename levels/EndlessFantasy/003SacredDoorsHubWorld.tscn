@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -36,16 +36,11 @@
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=34]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=35]
 [ext_resource path="res://levels/EndlessFantasy/AngelStatueDialogAbortSound.gd" type="Script" id=36]
-[ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=37]
+[ext_resource path="res://assets/tower.png" type="Texture" id=37]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=38]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=39]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=40]
-[ext_resource path="res://scripts/NPC.gd" type="Script" id=41]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=42]
 [ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=43]
-[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=44]
-[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=45]
-[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=46]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=47]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=48]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=49]
@@ -113,25 +108,16 @@ shader_param/target_palette = ExtResource( 47 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="CylinderShape" id=1]
-radius = 0.9
-
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 1.3, 1.3, 1 )
-
-[sub_resource type="BoxShape" id=48]
+[sub_resource type="BoxShape" id=76]
 resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
+extents = Vector3( 3, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 0.6, 0.8, 1 )
-
-[sub_resource type="ShaderMaterial" id=74]
+[sub_resource type="ShaderMaterial" id=77]
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
@@ -152,96 +138,11 @@ shader_param/texture_albedo = ExtResource( 40 )
 shader_param/base_palette = ExtResource( 4 )
 shader_param/target_palette = ExtResource( 32 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="BoxShape" id=49]
+[sub_resource type="BoxShape" id=78]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="ShaderMaterial" id=51]
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/enable_glitch = false
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 40 )
-shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 32 )
-
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=79]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -269,7 +170,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=80]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -296,37 +197,11 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=81]
 resource_name = "jump"
 length = 0.001
 
-[sub_resource type="ShaderMaterial" id=75]
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/enable_glitch = false
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 40 )
-shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 32 )
-
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=82]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -354,7 +229,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=83]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -381,66 +256,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=57]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=70]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=71]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=72]
+[sub_resource type="Animation" id=84]
 resource_name = "jump"
 length = 0.001
 
@@ -460,6 +276,32 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 27 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 20 )
+
+[sub_resource type="ShaderMaterial" id=85]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = true
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/enable_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -974,6 +816,7 @@ viewport_path = NodePath("Viewport")
 script = ExtResource( 6 )
 starting_glitch_type = 2
 tileset_type = 6
+has_broom = true
 display_title = "debug swamp"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 19 )]
@@ -1009,9 +852,8 @@ data = {
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 7, 1 )
+"_editor_floor_": Vector3( 0, 7, -2 )
 }
-tileset_type = 1
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
@@ -1144,82 +986,37 @@ frame = 68
 shape = SubResource( 38 )
 
 [node name="AngelFlute" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00433, 10, 0 )
 
-[node name="FungusNPC" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9684, -13.4, 0 )
-collision_layer = 2
-script = ExtResource( 41 )
+[node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9045, -13.5517, 0 )
 grav = 0
 bbText = "•you fool!!!
 did that frog send u?"
-tiny_textbox = true
+can_activate = false
+can_move = false
+dont_recolor_me = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC"]
-shape = SubResource( 1 )
-
-[node name="InteractionArea" type="Area" parent="Viewport/level/FungusNPC"]
-script = ExtResource( 44 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC/InteractionArea"]
-shape = SubResource( 8 )
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/FungusNPC"]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC/SmallInteractionArea"]
-shape = SubResource( 48 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/FungusNPC" groups=["corporeal_body"]]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC/SmallerInteractionArea"]
-shape = SubResource( 9 )
-
-[node name="NPC TextBox" parent="Viewport/level/FungusNPC" instance=ExtResource( 46 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 37 )
-volume_db = -12.634
-
-[node name="DialogSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="8"]
-volume_db = -23.0
+[node name="CollisionShape" parent="Viewport/level/FungusNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 76 )
 
 [node name="AbortSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="10"]
-pitch_scale = 0.65
 script = ExtResource( 14 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/FungusNPC"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
-material_override = SubResource( 74 )
+[node name="Sprite3D" parent="Viewport/level/FungusNPC" index="5"]
+material_override = SubResource( 77 )
 pixel_size = 0.16
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 40 )
-hframes = 8
-vframes = 10
 frame = 72
-script = ExtResource( 39 )
-should_randomize_frame_delay = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/FungusNPC"]
-anims/default = SubResource( 5 )
-anims/flickerOn = SubResource( 6 )
-anims/jump = SubResource( 7 )
+[node name="CollisionShape" parent="Viewport/level/FungusNPC/FallthroughSolid" index="0"]
+shape = SubResource( 78 )
 
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/FungusNPC" groups=["fallthrough"]]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 49 )
-
-[node name="FungusNPC2" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4684, -5.4, 0 )
+[node name="FungusNPC2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47699, -5.55142, 0 )
 visible = false
-collision_layer = 2
-script = ExtResource( 41 )
 grav = 0
 bbText = "the power of the gods 
 is corruption. this place is
@@ -1227,74 +1024,35 @@ is corruption. this place is
 •still.. perhaps you could
 cure the blight..."
 can_activate = false
-is_active = false
+can_move = false
+dont_recolor_me = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC2"]
-shape = SubResource( 1 )
-
-[node name="InteractionArea" type="Area" parent="Viewport/level/FungusNPC2"]
-script = ExtResource( 44 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC2/InteractionArea"]
-shape = SubResource( 8 )
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/FungusNPC2"]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC2/SmallInteractionArea"]
-shape = SubResource( 48 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/FungusNPC2" groups=["corporeal_body"]]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC2/SmallerInteractionArea"]
-shape = SubResource( 9 )
-
-[node name="NPC TextBox" parent="Viewport/level/FungusNPC2" instance=ExtResource( 46 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 37 )
-volume_db = -12.634
-
-[node name="DialogSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="8"]
-volume_db = -23.0
+[node name="CollisionShape" parent="Viewport/level/FungusNPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 76 )
 
 [node name="AbortSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="10"]
-pitch_scale = 0.65
 script = ExtResource( 14 )
 which_one_am_i = 2
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/FungusNPC2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.027, 0 )
-material_override = SubResource( 51 )
+[node name="Sprite3D" parent="Viewport/level/FungusNPC2" index="5"]
+material_override = SubResource( 77 )
 pixel_size = 0.16
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 40 )
-hframes = 8
-vframes = 10
 frame = 72
-script = ExtResource( 39 )
-should_randomize_frame_delay = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/FungusNPC2"]
-anims/default = SubResource( 52 )
-anims/flickerOn = SubResource( 53 )
-anims/jump = SubResource( 54 )
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC2" index="6"]
+anims/default = SubResource( 79 )
+anims/flickerOn = SubResource( 80 )
+anims/jump = SubResource( 81 )
 
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/FungusNPC2" groups=["fallthrough"]]
+[node name="CollisionShape" parent="Viewport/level/FungusNPC2/FallthroughSolid" index="0"]
+shape = SubResource( 78 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC2/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 49 )
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC2" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 
-[node name="FungusNPC3" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8684, -8.5, 0 )
+[node name="FungusNPC3" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8539, -8.52389, 0 )
 visible = false
-collision_layer = 2
-script = ExtResource( 41 )
 grav = 0
 bbText = "•seek out the 3 OLD WITCHES.
 •they hold the keys to 
@@ -1302,141 +1060,31 @@ restoring the life of this place
 •but be warned, they are not
 too fond of outsiders. "
 can_activate = false
-is_active = false
+can_move = false
+dont_recolor_me = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC3"]
-shape = SubResource( 1 )
-
-[node name="InteractionArea" type="Area" parent="Viewport/level/FungusNPC3"]
-script = ExtResource( 44 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC3/InteractionArea"]
-shape = SubResource( 8 )
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/FungusNPC3"]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC3/SmallInteractionArea"]
-shape = SubResource( 48 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/FungusNPC3" groups=["corporeal_body"]]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC3/SmallerInteractionArea"]
-shape = SubResource( 9 )
-
-[node name="NPC TextBox" parent="Viewport/level/FungusNPC3" instance=ExtResource( 46 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 37 )
-volume_db = -12.634
-
-[node name="DialogSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="8"]
-volume_db = -23.0
+[node name="CollisionShape" parent="Viewport/level/FungusNPC3/SmallInteractionArea" index="0"]
+shape = SubResource( 76 )
 
 [node name="AbortSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="10"]
-pitch_scale = 0.65
 script = ExtResource( 14 )
 which_one_am_i = 3
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/FungusNPC3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073, 0 )
-material_override = SubResource( 75 )
+[node name="Sprite3D" parent="Viewport/level/FungusNPC3" index="5"]
+material_override = SubResource( 77 )
 pixel_size = 0.16
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 40 )
-hframes = 8
-vframes = 10
 frame = 72
-script = ExtResource( 39 )
-should_randomize_frame_delay = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/FungusNPC3"]
-anims/default = SubResource( 55 )
-anims/flickerOn = SubResource( 56 )
-anims/jump = SubResource( 57 )
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC3" index="6"]
+anims/default = SubResource( 82 )
+anims/flickerOn = SubResource( 83 )
+anims/jump = SubResource( 84 )
 
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/FungusNPC3" groups=["fallthrough"]]
+[node name="CollisionShape" parent="Viewport/level/FungusNPC3/FallthroughSolid" index="0"]
+shape = SubResource( 78 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC3/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 49 )
-
-[node name="FungusNPC4" type="KinematicBody" parent="Viewport/level" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1684, -12.4, 0 )
-visible = false
-collision_layer = 2
-script = ExtResource( 41 )
-grav = 0
-bbText = "to cure blight, use MAGIC
-BROOM to sweep it away.
-press [C]"
-can_activate = false
-is_active = false
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC4"]
-shape = SubResource( 1 )
-
-[node name="InteractionArea" type="Area" parent="Viewport/level/FungusNPC4"]
-script = ExtResource( 44 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC4/InteractionArea"]
-shape = SubResource( 8 )
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/FungusNPC4"]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC4/SmallInteractionArea"]
-shape = SubResource( 48 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/FungusNPC4" groups=["corporeal_body"]]
-script = ExtResource( 45 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC4/SmallerInteractionArea"]
-shape = SubResource( 9 )
-
-[node name="NPC TextBox" parent="Viewport/level/FungusNPC4" instance=ExtResource( 46 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC4/NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 37 )
-volume_db = -12.634
-
-[node name="DialogSound" parent="Viewport/level/FungusNPC4/NPC TextBox/TextBox" index="8"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/FungusNPC4/NPC TextBox/TextBox" index="10"]
-pitch_scale = 0.65
-script = ExtResource( 14 )
-which_one_am_i = 4
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/FungusNPC4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )
-material_override = SubResource( 51 )
-pixel_size = 0.16
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 40 )
-hframes = 8
-vframes = 10
-frame = 72
-script = ExtResource( 39 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/FungusNPC4"]
-anims/default = SubResource( 70 )
-anims/flickerOn = SubResource( 71 )
-anims/jump = SubResource( 72 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/FungusNPC4" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FungusNPC4/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 49 )
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC3" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -18, 0 )
@@ -1445,13 +1093,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -18, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -18, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9, -10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8936, -7.94293, 0 )
 
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -5, 0 )
 
 [node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4203, -1, 0 )
 
 [node name="MrMoTex18" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, -1.50018, -15.5036, -1.19209e-06 )
@@ -1465,14 +1113,14 @@ frame = 298
 
 [node name="MrMoTex20" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 12.6998, -9.5036, -1.19209e-06 )
-material_override = SubResource( 50 )
+material_override = SubResource( 85 )
 frame = 298
 
 [node name="Snail" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -18.2876, 0 )
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3188, -4.41782, 0 )
 
 [node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, -15, 0 )
@@ -2393,6 +2041,16 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 36.8955
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 51 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2853, -6.62196, 0 )
 
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -7.1739, -5 )
+pixel_size = 0.125
+texture = ExtResource( 37 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, -4.5 )
+pixel_size = 0.125
+texture = ExtResource( 37 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -2413,10 +2071,12 @@ __meta__ = {
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/FungusNPC"]
 [editable path="Viewport/level/FungusNPC/NPC TextBox"]
+[editable path="Viewport/level/FungusNPC2"]
 [editable path="Viewport/level/FungusNPC2/NPC TextBox"]
+[editable path="Viewport/level/FungusNPC3"]
 [editable path="Viewport/level/FungusNPC3/NPC TextBox"]
-[editable path="Viewport/level/FungusNPC4/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
@@ -2426,4 +2086,10 @@ __meta__ = {
 [editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door5/NPC"]
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
+[editable path="Viewport/level/WaterCube19"]
+[editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall/WaterCube"]
+[editable path="Viewport/level/Waterfall/WaterCube2"]
+[editable path="Viewport/level/Waterfall/WaterCube3"]
+[editable path="Viewport/level/Waterfall/WaterCube4"]
 [editable path="ScreenEffects"]

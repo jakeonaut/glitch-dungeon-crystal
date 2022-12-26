@@ -134,7 +134,7 @@ func _ready():
     memory["total_hearts"] = 1
     memory["hearts"] = 1
     memory["hearts_recovering"] = false
-    memory["max_mp"] = 10
+    memory["max_mp"] = 5
     memory["mp"] = memory["max_mp"]
 
 func _process(delta):

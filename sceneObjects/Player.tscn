@@ -410,7 +410,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.875, 0.25, -0.2 ) ]
+"values": [ Vector3( 0.875, 0.25, 0.2 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -1307,5 +1307,9 @@ visible = false
 is_static_in_level = false
 
 [node name="TextContainer" parent="." instance=ExtResource( 32 )]
+bbText = "hi!!!! hi hi hi !!!!"
+
+[node name="TextBox" parent="TextContainer" index="0"]
+can_camera_zoom = false
 
 [editable path="TextContainer"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
+[ext_resource path="res://assets/treasureChest.png" type="Texture" id=3]
+[ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=4]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=8]
@@ -25,16 +27,92 @@ flags_transparent = true
 flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "default"
-length = 0.1
+[sub_resource type="SpatialMaterial" id=12]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="Animation" id=13]
+length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("Sprite3D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TreasureSprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TreasureSprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("OpenSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmallInteractionArea:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -59,28 +137,121 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=10]
 resource_name = "getItem"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath("Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("Sprite3D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "idle"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1.44281, 1 ), Vector3( 0, 1.55, 1 ), Vector3( 0, 1.44281, 1 ), Vector3( 0, 1.3, 1 ), Vector3( 0, 1.44281, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SmallInteractionArea:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.39492, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "openUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreasureSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OpenSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.5, 1 ), Vector3( 0, 1.44281, 1 ) ]
 }
 
 [node name="SpellbookPage" type="KinematicBody" groups=["npc"]]
@@ -114,8 +285,6 @@ script = ExtResource( 2 )
 shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 10 )
@@ -132,6 +301,8 @@ stream = null
 script = ExtResource( 13 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+visible = false
 material_override = SubResource( 11 )
 pixel_size = 0.125
 shaded = true
@@ -143,15 +314,32 @@ frame = 2
 script = ExtResource( 6 )
 should_randomize_frame_delay = true
 
+[node name="TreasureSprite3D" type="Sprite3D" parent="."]
+material_override = SubResource( 12 )
+pixel_size = 0.125
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 3 )
+hframes = 2
+script = ExtResource( 6 )
+should_randomize_frame_delay = true
+should_animate = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "default"
-anims/default = SubResource( 5 )
+autoplay = "RESET"
+anims/RESET = SubResource( 13 )
 anims/flickerOn = SubResource( 6 )
 anims/getItem = SubResource( 10 )
+anims/idle = SubResource( 15 )
+anims/openUp = SubResource( 14 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -25.0
 pitch_scale = 0.8
+
+[node name="OpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
 
 [editable path="NPC TextBox"]

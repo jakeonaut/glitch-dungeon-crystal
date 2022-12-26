@@ -8,7 +8,7 @@ func _ready():
 
 func activateScript():
     global.activeInteractor = null
-    global.memory["max_mp"] += 10
+    global.memory["max_mp"] += 5
     global.memory["mp"] = global.memory["max_mp"]
     if not global.memory.has("inventory"):
         global.memory["inventory"] = []
