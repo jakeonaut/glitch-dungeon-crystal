@@ -2060,6 +2060,7 @@ grav = 0
 
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 169.497, 9, 0 )
+visible = false
 bbText = "\"SPELL BOOK PAGE\" get!!
 ...............
 ????"

@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 onready var NPC = get_node("../../..")
-onready var CHUNKY = get_node("../../../..")
+onready var CHUNKY = get_node("../../../../CHUNKY")
 
 func _ready():
     pass
@@ -16,6 +16,7 @@ func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
     CHUNKY.queue_free()
+    NPC.queue_free()
     
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

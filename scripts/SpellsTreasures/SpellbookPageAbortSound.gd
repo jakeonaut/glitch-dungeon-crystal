@@ -7,9 +7,8 @@ func _ready():
 
 func activateScript():
   var spellbookPage = get_node("../../..")
-  spellbookPage.visible = false
   spellbookPage.is_active = false
-  spellbookPage.being_collected = false
+  spellbookPage.mySprite.visible = false
   
   global.pauseGame = false
   global.pauseMoveInput = false
