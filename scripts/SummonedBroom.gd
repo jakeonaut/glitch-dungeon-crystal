@@ -45,7 +45,8 @@ func _process(delta):
   if not aniPlayer.is_playing() and has_pressed_again:
     has_pressed_again = false
     broom_active_timer = 2
-    if my_broom_owner: my_broom_owner.broomSmackFast()
+    if my_broom_owner: 
+      my_broom_owner.broomSmackFast()
     aniPlayer.play("broomSmackFast")
     summonSmokeClouds(2)
     

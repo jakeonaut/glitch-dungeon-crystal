@@ -156,8 +156,8 @@ func _process(delta):
   if can_cast_spell_timer < can_cast_spell_time_limit:
     can_cast_spell_timer += (delta*22)
 
-  if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
-    applySpellbookGlitch()
+  # if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
+  #   applySpellbookGlitch()
   if Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()
     
@@ -386,6 +386,7 @@ func processBroomLogic(_delta):
   is_in_broom_cooldown = false
 
   if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom:
+    applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
     aniPlayer.play("broomSmack")
@@ -421,7 +422,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1
     
-  if summonedBroom:
+  if summonedBroom != null:
     broomSpriteVisible.visible = false
     if mySprite.flip_h:
       summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
@@ -461,15 +462,20 @@ func landed():
     localAniPlayer.queue("stand")
 
   var lt = getLevelTiles()
-  var tiles = getTilesBelow(lt)
-  if tiles[0] != null:
-    lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
-  if tiles[1] != null:
-    lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
-  if tiles[2] != null:
-    lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+  var original_y = global_transform.origin.y
+  for _i in range(4):
+    var tiles = getTilesBelow(lt)
+    if tiles[0] != null:
+      lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+    if tiles[1] != null:
+      lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+    if tiles[2] != null:
+      lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+    global_transform.origin.y -= 1
+  global_transform.origin.y = original_y
 
 func broomSmackFast():
+  applySpellbookGlitch()
   var aniPlayer = get_node("AnimationPlayer")
   aniPlayer.stop()
   aniPlayer.clear_queue()

@@ -66,6 +66,7 @@ func _process(delta):
   if first_ever_glitch:
     if not has_frozen_input:
       global.pauseMoveInput = true
+      level.uiLayer.statsTitleRect.visible = false
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
       has_frozen_input = true

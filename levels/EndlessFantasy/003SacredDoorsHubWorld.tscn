@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -38,7 +38,9 @@
 [ext_resource path="res://levels/EndlessFantasy/AngelStatueDialogAbortSound.gd" type="Script" id=36]
 [ext_resource path="res://assets/tower.png" type="Texture" id=37]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=38]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=40]
+[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=41]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=42]
 [ext_resource path="res://sceneObjects/Enemies/GlitchFish.tscn" type="PackedScene" id=43]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=47]
@@ -1000,6 +1002,14 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/FungusNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
 
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 39 )
+pitch_scale = 0.9
+
+[node name="DialogSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="8"]
+volume_db = -15.0
+pitch_scale = 0.3
+
 [node name="AbortSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
 
@@ -1018,17 +1028,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47699, -5.55142, 0 )
 visible = false
 grav = 0
-bbText = "the power of the gods 
-is corruption. this place is
-  rotting...
-•still.. perhaps you could
-cure the blight..."
+bbText = "•MAGICK    
+    is corruption. •this place is
+rotting...
+•it is best left shunned and uninhabited"
 can_activate = false
 can_move = false
 dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/FungusNPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
+
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 39 )
+pitch_scale = 0.7
+
+[node name="DialogSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="8"]
+stream = ExtResource( 39 )
+pitch_scale = 0.3
 
 [node name="AbortSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
@@ -1054,17 +1071,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8539, -8.52389, 0 )
 visible = false
 grav = 0
-bbText = "•seek out the 3 OLD WITCHES.
-•they hold the keys to 
-restoring the life of this place
-•but be warned, they are not
-too fond of outsiders. "
+bbText = "•what's that? you wish to 
+  cure this blight? 
+.... hrm....
+•i will allow you entry to this tower.
+•perhaps you can cleanse these grounds
+•before they take their toll on you"
 can_activate = false
 can_move = false
 dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/FungusNPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
+
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 39 )
+
+[node name="DialogSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="8"]
+pitch_scale = 0.3
 
 [node name="AbortSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
@@ -2026,6 +2050,9 @@ visible = false
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0707, -6.98203, 0 )
 
+[node name="SplashSprite4" parent="Viewport/level/Waterfall" index="36"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.558517, -12.5154, 5 )
+
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -12.1, 0 )
 
@@ -2050,6 +2077,9 @@ texture = ExtResource( 37 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, -4.5 )
 pixel_size = 0.125
 texture = ExtResource( 37 )
+
+[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.3354, -5.8914, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

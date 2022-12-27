@@ -190,6 +190,7 @@ func _process(delta):
     rerandomizeTile(Vector3(0, 0, 0), getRandomGlitchType())
     rerandomize_timer = 0
   
+  # TODO(jake): This Cutscene stuff is only for collecting your first obelisk spell... 
   if is_unrandomizing:
     unrandomize_timer += (delta*22)
     if unrandomize_timer >= unrandomize_time_limit:
@@ -204,6 +205,7 @@ func _process(delta):
           is_unrandomizing = false
           getPlayer().applyGlitch(global.GlitchForm.FEATHER)
           level.get_node("FeatherSpell").first_ever_glitch = false
+          level.uiLayer.statsTitleRect.visible = true
           musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):
             unrandomizeTile(unrandomize_cell_indices[i])

@@ -6,6 +6,11 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 var being_collected = false # actually is_opened
 var really_being_collected = false
 var gotcha = false
+var okay_im_done = false
+
+onready var sparkleSprite = get_node("SparkleSprite3D")
+var spawn_timer = 0
+var spawn_time_limit = 5
 
 func _ready():
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
@@ -15,6 +20,7 @@ func _ready():
     is_really_important = false
     set_process(false)
     set_physics_process(false)
+    okay_im_done = true
     return
     
   set_process(true)
@@ -27,11 +33,35 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier 
 
+  if okay_im_done:
+    spawn_timer += (delta*22)
+    if spawn_timer >= spawn_time_limit:
+      var newSprite = sparkleSprite.duplicate()
+      newSprite.should_fizzle_out = true
+      newSprite.visible = true
+      newSprite.transform.origin = Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125),
+          0
+      )
+      newSprite.updateBaseFrame(0, 0)
+      newSprite.max_frames = 2
+      add_child(newSprite)
+      spawn_timer = 0
+    return
+
   if gotcha or being_collected or really_being_collected:
     level.player.broomSpriteVisible.visible = false
   
   if gotcha:
     .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+  elif being_collected and not really_being_collected: 
+    if secretAniPlayer.current_animation != "openUp" and secretAniPlayer.current_animation != "idle" and level.player.aniPlayer.current_animation != "preGetItem":
+      really_being_collected = true
+    elif secretAniPlayer.current_animation != "openUp":
+      level.player.global_transform.origin = self.global_transform.origin
+      level.player.aniPlayer.play("preGetItem")
+      global.activeInteractor = textBox # also weird but this is to get the camera to look at me
   elif really_being_collected:
     level.player.dir = Vector3(0, 0, 0)
     if not level.player.on_ground:
@@ -50,6 +80,9 @@ func _process(delta):
         gotcha = true
         textBox.is_really_important = true
         textBox.is_important = true
+        # collectSound.play()
+        global.memory["max_mp"] += 5
+        global.memory["mp"] = global.memory["max_mp"]
         .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
     else:
       level.player.aniPlayer.play("getItem")
@@ -74,12 +107,12 @@ func isActive():
 
 # @override
 func passiveActivate(_delta):
-  if not isActive():
+  if okay_im_done:
+    global.memory["mp"] = global.memory["max_mp"]
     return
     
   if not being_collected:
     musicPlayer.stopAll()
-    #collectSound.play()
     #visible = false
     secretAniPlayer.clear_queue()
     secretAniPlayer.queue("openUp")
@@ -92,12 +125,6 @@ func passiveActivate(_delta):
         global.memory[level.getShortLevelName()] = {}
       global.memory[level.getShortLevelName()][self.name] = true
     collectMe()
-  elif being_collected and not really_being_collected: 
-    if secretAniPlayer.current_animation != "openUp" and secretAniPlayer.current_animation != "idle" and level.player.aniPlayer.current_animation != "preGetItem":
-      really_being_collected = true
-    elif secretAniPlayer.current_animation != "openUp":
-      level.player.aniPlayer.play("preGetItem")
-      global.activeInteractor = textBox # also weird but this is to get the camera to look at me
 
 func collectMe():
   pass

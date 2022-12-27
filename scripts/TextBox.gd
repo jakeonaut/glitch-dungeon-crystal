@@ -228,12 +228,12 @@ func InteractActivate():
   interact()
     
 func interact():
-  print("visible: " + str(visible) + ", isActive: " + str(dialogSound.isActive()))
+  # print("visible: " + str(visible) + ", isActive: " + str(dialogSound.isActive()))
   if !visible and dialogSound.isActive():
     showTextbox()
     global.activeInteractor = self
 
-  print("global activeInteractor: ", global.activeInteractor)
+  # print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
     print("isWaiting?: " + str(isWaitingForNextPrompt()) + ", " + str(isWaitingForEndPrompt()))
     if isWaitingForNextPrompt():

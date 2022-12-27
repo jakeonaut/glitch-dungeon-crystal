@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/SpellsTreasures/FallenBroom.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/SpellsTreasures/BroomAbortSound.gd" type="Script" id=11]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=41]
 shader = ExtResource( 3 )
@@ -236,6 +237,49 @@ tracks/5/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="Animation" id=52]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.125, 0, -1 ) ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "idle"
+length = 0.1
+
 [sub_resource type="Animation" id=50]
 resource_name = "land"
 tracks/0/type = "value"
@@ -274,6 +318,10 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, -0.75, 0.125 ) ]
 }
+
+[sub_resource type="Animation" id=54]
+resource_name = "openUp"
+length = 0.1
 
 [sub_resource type="CylinderShape" id=48]
 radius = 0.8
@@ -315,7 +363,10 @@ anims/AirSpin = SubResource( 45 )
 anims/AirSpinReverse = SubResource( 46 )
 anims/GET = SubResource( 51 )
 anims/RESET = SubResource( 44 )
+anims/getItem = SubResource( 52 )
+anims/idle = SubResource( 53 )
 anims/land = SubResource( 50 )
+anims/openUp = SubResource( 54 )
 
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -338,8 +389,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
 shape = SubResource( 49 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 10 )]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="VScrollBar2" type="VScrollBar" parent="NPC TextBox/TextBox/Text" index="0"]
 visible = false
@@ -373,5 +422,10 @@ script = ExtResource( 11 )
 stream = ExtResource( 12 )
 volume_db = -25.0
 pitch_scale = 0.8
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.0
+pitch_scale = 0.65
 
 [editable path="NPC TextBox"]

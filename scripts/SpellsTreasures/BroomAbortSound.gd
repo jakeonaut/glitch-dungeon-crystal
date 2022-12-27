@@ -7,9 +7,6 @@ func _ready():
 
 func activateScript():
     var broom = get_node("../../..")
-    broom.visible = false
-    broom.is_active = false
-    broom.being_collected = false
     
     global.pauseGame = false
     global.pauseMoveInput = false
@@ -20,6 +17,8 @@ func activateScript():
         
     level.restartMusic()
     level.saveTheGame()
+
+    broom.queue_free()
 
 func isActive():
     return true
