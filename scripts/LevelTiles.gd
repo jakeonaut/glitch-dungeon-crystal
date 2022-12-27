@@ -78,6 +78,9 @@ func buildRandomTiles():
 
 func buildSingleRandomTile(cell_index):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  if tile_type == INVALID_CELL_ITEM:
+    return
+
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   var tile_name = mesh_library.get_item_name(tile_type)
   if tile_name == "BrickSolidCeil":
@@ -87,8 +90,10 @@ func buildSingleRandomTile(cell_index):
       if top_neighbor_tile_type == -1 and grow_tile_upward: # we have no top neighbor...
         var new_index = Vector3(cell_index.x, cell_index.y+1, cell_index.z)
         setRandomTileNameOfType("BrickSolidRoof", 7, new_index, tile_orientation)
-        var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
-        tile_dict[new_index] = [name, tile_orientation]
+        var type = get_cell_item(new_index.x, new_index.y, new_index.z)
+        if type != INVALID_CELL_ITEM:
+          var name = mesh_library.get_item_name(type)
+          tile_dict[new_index] = [name, tile_orientation]
       setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
     else:
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation)
@@ -120,8 +125,10 @@ func buildSingleRandomTile(cell_index):
         if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
           var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
           setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation)
-          var name = mesh_library.get_item_name(get_cell_item(new_index.x, new_index.y, new_index.z))
-          tile_dict[new_index] = [name, tile_orientation]
+          var type = get_cell_item(new_index.x, new_index.y, new_index.z)
+          if type != INVALID_CELL_ITEM:
+            var name = mesh_library.get_item_name(type)
+            tile_dict[new_index] = [name, tile_orientation]
     else:
       setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation)
   elif tile_name == "CloudSemisolid":
@@ -144,7 +151,10 @@ func buildSingleRandomTile(cell_index):
   
   # maybe make it into a dictionary so that infected spikes removed can be remembered easier
   # and other "tile pushing/creating" if that happens
-  var name = mesh_library.get_item_name(get_cell_item(cell_index.x, cell_index.y, cell_index.z))
+  var type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  if type == INVALID_CELL_ITEM:
+    return
+  var name = mesh_library.get_item_name(type)
   tile_dict[cell_index] = [name, tile_orientation]
 
 var randomize_timer = 0
@@ -285,6 +295,9 @@ func summonSmokeClouds(coords, num_clouds):
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  if tile_type == INVALID_CELL_ITEM:
+    return
+
   var tile_name = mesh_library.get_item_name(tile_type)
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "BrickSolidRoof" in tile_name:
@@ -314,6 +327,9 @@ func unrandomizeAllTiles():
 
 func unrandomizeTile(cell_index):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+  if tile_type == INVALID_CELL_ITEM:
+    return false
+
   var tile_name = mesh_library.get_item_name(tile_type)
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "BrickSolidRoof" in tile_name or "BrickSolidCeil" in tile_name:
@@ -322,10 +338,11 @@ func unrandomizeTile(cell_index):
     setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
+  return true
 
 func rerandomizeTile(cell_index, glitch_type):
-  unrandomizeTile(cell_index)
-  randomizeTile(cell_index, glitch_type)  
+  if unrandomizeTile(cell_index):
+    randomizeTile(cell_index, glitch_type)  
   
 func changeColorPalette(palette, _palette_alt = null):
   if override_palette == null:
@@ -336,6 +353,8 @@ func changeColorPalette(palette, _palette_alt = null):
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):
     var item_id = item_list[i]
+    if item_id == INVALID_CELL_ITEM:
+      continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
     var material = mesh.get_material()

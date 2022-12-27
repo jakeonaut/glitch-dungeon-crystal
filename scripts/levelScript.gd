@@ -52,7 +52,8 @@ func _ready_impl():
     global.memory["broom"] = true
 
   if global.memory.has("current_glitch"):
-    player.applyGlitch(global.memory["current_glitch"], true)
+    if global.memory["mp"] > 0:
+      player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
 

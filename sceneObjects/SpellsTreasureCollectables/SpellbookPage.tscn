@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=11]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=12]
 [ext_resource path="res://scripts/SpellsTreasures/SpellbookPageAbortSound.gd" type="Script" id=13]
+[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=14]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
@@ -480,5 +481,10 @@ pitch_scale = 0.9
 [node name="OpenSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.0
+pitch_scale = 0.65
 
 [editable path="NPC TextBox"]

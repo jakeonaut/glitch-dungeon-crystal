@@ -10,6 +10,7 @@ onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("So
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var collidedTiles = []
 
 var levelTiles = null
 func getLevelTiles():
@@ -67,10 +68,6 @@ var should_do_simple_sensor_probe = true
 var should_do_fallthrough_area_collision = false
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
-
-var tile_coords_below_me_a = null
-var tile_coords_below_me_b = null
-var tile_coords_below_me_mid = null
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -338,12 +335,7 @@ func applyTerminalVelocity(delta):
   if glitch_form == global.GlitchForm.FLOOR and on_ground:
     vv = 0
     
-
-func areTilesBelow(currLevelTiles):
-  tile_coords_below_me_a = null
-  tile_coords_below_me_b = null
-  tile_coords_below_me_mid = null
-
+func getTilesBelow(currLevelTiles):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -363,14 +355,15 @@ func areTilesBelow(currLevelTiles):
   var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
   var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
+  var solidTilesBelow = [null, null, null]
   if isTileSolid(tile_type_a, true, 1, tile_pos_a):
-    tile_coords_below_me_a = coords_a
-  if isTileSolid(tile_type_b, true, 1, tile_pos_b):
-    tile_coords_below_me_b = coords_b
+    solidTilesBelow[0] = coords_a
   if isTileSolid(tile_type_mid, true, 1, tile_pos_mid):
-    tile_coords_below_me_mid = coords_mid
+    solidTilesBelow[1] = coords_mid
+  if isTileSolid(tile_type_b, true, 1, tile_pos_b):
+    solidTilesBelow[2] = coords_b
 
-  return tile_coords_below_me_a != null or tile_coords_below_me_b != null or tile_coords_below_me_mid != null
+  return solidTilesBelow
 
 func iJustPressedDown():
   on_ground = false

@@ -70,6 +70,9 @@ func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
 func applySpellbookGlitch():
   if not global.memory.has("spellbookPage"):
     return
+
+  if global.memory["mp"] <= 0:
+    return
   
   if global.memory["spellbookPage"].size() > 0:
     var glitch_type = global.memory["spellbookPage"].pop_front()
@@ -310,7 +313,7 @@ func nullify():
           global.memory["spellbookPage"] = []
 
 # @override
-func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
+func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_die = false):
   if transitioning:
     return
   if isOnSavePoint():
@@ -347,17 +350,18 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   # global.memory["hearts"] -= 1
-  if self.glitch_form == global.GlitchForm.NORMAL or should_immediately_die: # global.memory["hearts"] <= 0:
-    # global.memory["hearts"] = 0
-    global.isRespawning = true
-    physics_state = PhysicsState.GLITCH_DYING
-    glitch_death_timer = 0
-    if summonedBroom:
-      broomStop()
-  else:
-    physics_state = PhysicsState.GLITCH_HURT
-    glitch_death_timer = 0
-    self.nullify()
+  #if self.glitch_form == global.GlitchForm.NORMAL or should_immediately_die: # global.memory["hearts"] <= 0:
+  # global.memory["hearts"] = 0
+  global.isRespawning = true
+  physics_state = PhysicsState.GLITCH_DYING
+  glitch_death_timer = 0
+  if summonedBroom:
+    broomStop()
+  # else:
+  #   physics_state = PhysicsState.GLITCH_HURT
+  #   glitch_death_timer = 0
+  #   # global.memory["hearts"] -= 1
+  #   # self.nullify()
 
     
 func showInteractPrompt(is_important = false):
@@ -455,6 +459,15 @@ func landed():
   if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
     localAniPlayer.clear_queue()
     localAniPlayer.queue("stand")
+
+  var lt = getLevelTiles()
+  var tiles = getTilesBelow(lt)
+  if tiles[0] != null:
+    lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+  if tiles[1] != null:
+    lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+  if tiles[2] != null:
+    lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
 
 func broomSmackFast():
   var aniPlayer = get_node("AnimationPlayer")
