@@ -7,6 +7,7 @@ var being_collected = false # actually is_opened
 var really_being_collected = false
 var gotcha = false
 var okay_im_done = false
+export var gimme_mp = 0
 
 onready var sparkleSprite = get_node("SparkleSprite3D")
 var spawn_timer = 0
@@ -81,8 +82,9 @@ func _process(delta):
         textBox.is_really_important = true
         textBox.is_important = true
         # collectSound.play()
-        global.memory["max_mp"] += 5
-        global.memory["mp"] = global.memory["max_mp"]
+        if gimme_mp > 0:
+          global.memory["max_mp"] += gimme_mp
+          global.memory["mp"] = global.memory["max_mp"]
         .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
     else:
       level.player.aniPlayer.play("getItem")

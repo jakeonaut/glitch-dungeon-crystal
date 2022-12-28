@@ -431,6 +431,7 @@ portrait = ExtResource( 11 )
 is_important = true
 can_activate = false
 can_move = false
+gimme_mp = 5
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

@@ -36,9 +36,8 @@ func _ready_impl():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   
-  levelTiles.my_tileset_type = tileset_type
+  levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
-  levelTiles.setTileset(tileset_type)
   
   if has_spellbook_page and not global.memory.has("spellbookPage"):
     print("gimme a spellbook page!!")

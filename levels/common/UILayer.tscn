@@ -449,9 +449,6 @@ margin_top = 449.0
 margin_right = 632.0
 margin_bottom = 506.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="MiniCrystalCubeRect"]
 margin_left = 3.0
@@ -502,6 +499,7 @@ texture = ExtResource( 17 )
 hframes = 16
 vframes = 23
 frame = 321
+max_frames = 1
 
 [node name="Camera" type="Camera" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -999, -999, 1.283 )

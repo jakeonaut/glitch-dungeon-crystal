@@ -263,7 +263,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2, 46, 0 )
 
-[node name="FallSound" parent="Viewport/level/Player/Sounds" index="8"]
+[node name="FallSound" parent="Viewport/level/Player/Sounds" index="10"]
 stream = null
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -306,7 +306,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 23, 0 )
 grav = 0
 bbText = "•what's that? you wish to
 cure the blight of this dungeon?
-•....hrm...... followe me!"
+•....hrm...... followe me!................................  "
 portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true

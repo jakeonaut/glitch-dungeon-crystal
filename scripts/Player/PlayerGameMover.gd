@@ -17,6 +17,7 @@ var has_sweeped_glitch = false
 
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
+onready var nullifySound = get_node("Sounds/NullifySound")
 onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 
@@ -110,6 +111,7 @@ func spawnSparkles(delta, above_the_head = false):
       sparkle_timer = 0
       if global.memory["mp"] == 0:
         self.normalGlitch()
+        nullifySound.play()
 
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL

@@ -7,6 +7,7 @@ export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
 export var is_important = false # when dialogue is started, can't walk away until finished.
 export var is_really_important = false # touching it will start the dialogue
+export var can_be_activated_invisibly = false
 export var can_activate = true
 export var can_move = true
 export var can_camera_zoom = true
@@ -14,6 +15,7 @@ export var is_fast_text = false
 export var dont_recolor_me = false
 
 var is_smacked = false
+var did_i_get_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 
@@ -34,6 +36,7 @@ export var is_static_in_level = true
 
 var pressing_move_left = false
 var pressing_move_right = false
+var just_said_bye = false
 
 # @override
 func pressingMoveLeft():
@@ -122,19 +125,21 @@ func getSmacked():
     mySprite.material_override = material
   smack_timer = 0
   is_smacked = true
+  did_i_get_smacked = true
 
-  if global.activeInteractor == null:
+  if global.activeInteractor == null and not just_said_bye:
     textBox.interact()
-  elif global.activeInteractor == textBox:
-    global.activeInteractor.InteractActivate()
 
-func setGlobalMemoryOfHasSpoken():
+func setGlobalMemoryOfHasSpoken(set_vars = false):
+  if set_vars:
+    just_said_bye = true
+    did_i_get_smacked = false
   if not global.memory.has(level.getShortLevelName()):
     global.memory[level.getShortLevelName()] = {}
   global.memory[level.getShortLevelName()][self.name] = true
 
 func isActive():
-  return visible or can_activate or is_active
+  return visible or can_be_activated_invisibly
 
 func activate():
   if global.activeInteractor == null:
@@ -158,9 +163,14 @@ func passiveActivate(delta):
       textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
+  if did_i_get_smacked and not level.player.is_pressing_horizontal_input:
+    return
+
   # TODO(jaketrower): TODO on a timer...
   if global.activeInteractor != null and global.activeInteractor == textBox:
     global.activeInteractor.stopInteract()
+  just_said_bye = false
+  did_i_get_smacked = false
     
 func justStopPassiveActivate():
   if global.activeInteractor == null:

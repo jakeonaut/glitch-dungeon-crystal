@@ -1622,7 +1622,7 @@ shape = SubResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 181, 20, 0 )
 grav = 0
 bbText = "•if you wish to master MAGICK,
-seek out the
+seek out
 WET ROT, the guardian of the tower of magick"
 portrait = ExtResource( 24 )
 is_important = true

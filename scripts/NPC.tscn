@@ -18,12 +18,12 @@
 [sub_resource type="CylinderShape" id=1]
 radius = 0.9
 
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 1.3, 1.3, 1 )
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 2, 1.3, 1 )
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=12]
 resource_local_to_scene = true
-extents = Vector3( 3, 1.3, 1.3 )
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=9]
 extents = Vector3( 0.6, 0.8, 1 )
@@ -128,13 +128,13 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 8 )
+shape = SubResource( 13 )
 
-[node name="SmallInteractionArea" type="Area" parent="."]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
-shape = SubResource( 3 )
+shape = SubResource( 12 )
 
 [node name="SmallerInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 script = ExtResource( 3 )

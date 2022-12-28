@@ -4,6 +4,7 @@ onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/Men
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var broomSound = get_node("Sounds/BroomSound")
+onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
@@ -41,6 +42,10 @@ var poison_timer = 0
 var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
+
+var is_blinked = false
+var blink_timer = 0
+var unblink_time_limit = 5
 
 func _ready():
   grav = 60
@@ -180,6 +185,45 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   
   processPoisonWaterLogic(delta)
+  processMPBlinkLogic(delta)
+
+func processMPBlinkLogic(delta):
+  if glitch_form == global.GlitchForm.NORMAL:
+    return
+
+  var overwrite_blink = (global.memory["mp"] == 5 and global.memory["max_mp"] == 5) or global.memory["mp"] > 5
+
+  if global.memory["mp"] <= 5:
+    var blink_time_limit = 20
+    if global.memory["mp"] == 4:
+      blink_time_limit = 15
+    if global.memory["mp"] == 3:
+      blink_time_limit = 10
+    if global.memory["mp"] == 2:
+      blink_time_limit = 5
+    if global.memory["mp"] == 1:
+      blink_time_limit = 2
+    blink_timer += (delta*22)
+    if overwrite_blink or (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
+      blink_timer = 0
+      is_blinked = not is_blinked
+
+      if overwrite_blink:
+        is_blinked = false
+
+      if is_blinked:
+        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().grey_palette)
+        blinkSound.play()
+      elif glitch_form == global.GlitchForm.FLOOR:
+        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
+      elif glitch_form == global.GlitchForm.FEATHER:
+        mySprite.material_override.set_shader_param("target_palette", global.green_dungeon_palette)
+      elif glitch_form == global.GlitchForm.LADDER:
+        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().yellow_palette)
+      elif glitch_form == global.GlitchForm.INVISIBLE:
+        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().black_palette)
+      elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().white_palette)
   
 func tryDieToOffscreenCamera(delta):
   var DEATH_MARGIN = 5
@@ -501,6 +545,9 @@ func broomStop():
     if has_sweeped_glitch or should_magic_jump:
       linear_velocity.y = -0.01
 
+  for npc in get_tree().get_nodes_in_group("npc"):
+    npc.just_said_bye = false
+
 func faceDown():
   pass # mySprite.faceDown()
 
@@ -555,7 +602,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             newSmokeCloud.set_material_override(new_material.duplicate())
 
 var is_active = true
-func setGlobalMemoryOfHasSpoken():
+func setGlobalMemoryOfHasSpoken(_set_vars = false):
   # no-op for now
   pass
 func idleTalk():

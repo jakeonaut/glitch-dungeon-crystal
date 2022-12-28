@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/sprites/obelisk.png" type="Texture" id=7]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sprites/savespores.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=12]
 
@@ -152,8 +152,7 @@ max_frames = 8
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -25.0
-pitch_scale = 0.9
+volume_db = -15.0
 
 [node name="Obelisk" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452547, -0.415195, -0.769371 )

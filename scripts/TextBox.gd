@@ -206,7 +206,7 @@ func showTextbox():
 func hideTextbox():
   has_preactivated = false
   self.hide()
-  get_node("../..").setGlobalMemoryOfHasSpoken()
+  get_node("../..").setGlobalMemoryOfHasSpoken(true)
   if isWaitingForEndPrompt():
     abortSound.play()
     abortSound.activateScript()
@@ -235,7 +235,6 @@ func interact():
 
   # print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
-    print("isWaiting?: " + str(isWaitingForNextPrompt()) + ", " + str(isWaitingForEndPrompt()))
     if isWaitingForNextPrompt():
       nextDialogSound.play()
       ui_should_continue = true
