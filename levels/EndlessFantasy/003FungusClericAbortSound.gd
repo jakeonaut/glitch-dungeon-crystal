@@ -4,6 +4,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var NPC = get_node("../../..")
 onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
+onready var fungusNPC4 = get_node("../../../../FungusNPC4")
 onready var door3 = get_node("../../../../Door3")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
@@ -18,8 +19,6 @@ func _ready():
     pass
 
 func activateScript():
-    if which_one_am_i == 4:
-      return
 
     summonSmokeClouds(NPC, 5, true, true)
     NPC.visible = false
@@ -32,6 +31,8 @@ func activateScript():
     elif which_one_am_i == 2:
       summon(fungusNPC3)
     elif which_one_am_i == 3:
+      summon(fungusNPC4)
+    elif which_one_am_i == 4:
       summonDoor(door3)
       # yield(get_tree().create_timer(0.4), "timeout")
       # summonDoor(glitchEnemy2)

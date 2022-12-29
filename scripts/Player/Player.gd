@@ -214,7 +214,8 @@ func processMPBlinkLogic(delta):
 
       if is_blinked:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().grey_palette)
-        blinkSound.play()
+        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null):
+          blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
       elif glitch_form == global.GlitchForm.FEATHER:
@@ -360,12 +361,16 @@ func nullify():
 # @override
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_die = false):
   if transitioning:
+    print("transitioning")
     return
   if isOnSavePoint():
+    print("transitioning 2")
     return
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT:
+    print("transitioning 3 ")
     return
 
+  print("glitchform: " + str(glitch_form) + ", " + str(should_kill_invis))
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
     print("SPAWN SPARKLES!")
     spawnSparkles(delta, true)
@@ -493,6 +498,7 @@ func processPoisonWaterLogic(delta):
     if glitch_form == global.GlitchForm.INVISIBLE:
       glitchTickle(0)
     else:
+      print("DIE!")
       tryDieToEnemy(delta, true, false)
     
 # @override

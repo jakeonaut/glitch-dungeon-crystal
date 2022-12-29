@@ -18,6 +18,7 @@ onready var oceanThemePlayer = get_node("OceanThemePlayer")
 onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
+onready var bossThemePlayer = get_node("BossThemePlayer")
 
 var initial_volume_dbs = {}
 
@@ -84,13 +85,16 @@ func stopAll():
     fade_out(exploreThemePlayer)
     fade_out(goddessThemePlayer)
     fade_out(townThemePlayer)
+    fade_out(bossThemePlayer)
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0 or path.find("002") > 0  or path.find("003SacredDoorsHubWorld") > 0:
+    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
+    elif path.find("Boss") > 0:
+        tryToPlay(bossThemePlayer)
     # elif path.find("IntroScene0") > 0 or path.find("000") > 0:
     #     tryToPlay(wakeupPlayer)
     elif path.find("IntroDungeon") > 0:
