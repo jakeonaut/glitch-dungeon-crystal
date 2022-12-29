@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=2]
@@ -29,9 +29,24 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=28]
 [ext_resource path="res://sceneObjects/tiles/grey_background_tiles.tres" type="MeshLibrary" id=29]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Broom.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=32]
+
+[sub_resource type="ArrayMesh" id=48]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="ViewportTexture" id=49]
+viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
 
 [sub_resource type="BoxShape" id=4]
 resource_local_to_scene = true
@@ -386,6 +401,12 @@ display_title = "swamp home"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 16 )]
 
+[node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
+mesh = SubResource( 48 )
+
+[node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
+texture = SubResource( 49 )
+
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 2 )]
 
 [node name="BackgroundControl" type="Control" parent="Viewport/level"]
@@ -515,7 +536,7 @@ is_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 4 )
 
-[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="11"]
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 15 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
@@ -974,9 +995,6 @@ max_frames = 1
 [node name="CollisionShape" parent="Viewport/level/FrogWizardNPC/FallthroughSolid" index="0"]
 shape = SubResource( 47 )
 
-[node name="Broom" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 5, 0 )
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 material = SubResource( 3 )
 margin_right = 40.0
@@ -990,6 +1008,7 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 4 )]
 
 [editable path="Viewport/level/UILayer"]
+[editable path="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]

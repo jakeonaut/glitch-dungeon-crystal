@@ -31,6 +31,7 @@ func activateScript():
 
 func preActivateScript():
   if not global.memory.has("spellbookPage"):
+    global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = [global.GlitchForm.FLOOR]
     global.memory["tutorial_spellbookPage"] = true
     # TODO(jaketrower): give UILayer.gd a function

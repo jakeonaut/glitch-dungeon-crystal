@@ -11,6 +11,7 @@ var spawn_time_limit = 10
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
+export var is_static = false
 export var is_infected = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
@@ -19,6 +20,9 @@ func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
+  if is_static:
+    interactionArea.remove_from_group("corporeal_body")
+
 func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
@@ -26,12 +30,13 @@ func setAsParent(_owner):
   walk_direction = -1
 
 func _process(delta):
-  if on_ground:
-    jump_timer +=  (delta * 22)
-    if jump_timer >= jump_time_limit:
-      behavior_jumping = true
-      behavior_walking = true
-      jump_timer = 0
+  if on_ground or is_static:
+    if not is_static:
+      jump_timer +=  (delta * 22)
+      if jump_timer >= jump_time_limit:
+        behavior_jumping = true
+        behavior_walking = true
+        jump_timer = 0
 
     if not is_infected:
       spawn_timer += (delta*22)

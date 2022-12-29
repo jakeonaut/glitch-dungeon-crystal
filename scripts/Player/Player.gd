@@ -27,7 +27,7 @@ onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
-onready var textBoxContainer = get_node("TextContainer")
+onready var textContainer = get_node("TextContainer")
 onready var textBox = get_node("TextContainer/TextBox")
 
 var sprite_reset_timer = 0
@@ -193,7 +193,7 @@ func processMPBlinkLogic(delta):
 
   var overwrite_blink = (global.memory["mp"] == 5 and global.memory["max_mp"] == 5) or global.memory["mp"] > 5
 
-  if global.memory["mp"] <= 5:
+  if global.memory["mp"] <= 5 or overwrite_blink:
     var blink_time_limit = 20
     if global.memory["mp"] == 4:
       blink_time_limit = 15
@@ -209,6 +209,7 @@ func processMPBlinkLogic(delta):
       is_blinked = not is_blinked
 
       if overwrite_blink:
+        blink_timer = 0
         is_blinked = false
 
       if is_blinked:
@@ -366,6 +367,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_
     return
 
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
+    print("SPAWN SPARKLES!")
     spawnSparkles(delta, true)
     return
 

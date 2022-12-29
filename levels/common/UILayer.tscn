@@ -6,9 +6,9 @@
 [ext_resource path="res://assets/sprites2D/hearts.png" type="Texture" id=4]
 [ext_resource path="res://dialogFontTheme.tres" type="Theme" id=5]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=6]
-[ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=10]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=11]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=12]
 [ext_resource path="res://assets/water_normal_3.png" type="Texture" id=14]
@@ -276,7 +276,6 @@ vframes = 23
 frame = 222
 
 [node name="SelectorBotRight2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-visible = false
 position = Vector2( 66, 55.5 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 17 )
@@ -286,14 +285,13 @@ frame = 220
 
 [node name="Pet1" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
 position = Vector2( 32.5, 31.5 )
-scale = Vector2( 5, 5 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 321
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+hframes = 6
+vframes = 5
+frame = 3
 
 [node name="Pet2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-visible = false
 position = Vector2( 89.5001, 31.5 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 17 )
@@ -537,16 +535,15 @@ __meta__ = {
 [node name="EquipmentSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect"]
 position = Vector2( 20, 40 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+texture = ExtResource( 10 )
 hframes = 6
 vframes = 5
-frame = 3
 
 [node name="ColorRect2" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
-margin_left = 26.0
-margin_top = 5.0
-margin_right = 60.0
-margin_bottom = 39.0
+margin_left = 28.0
+margin_top = 3.0
+margin_right = 62.0
+margin_bottom = 37.0
 color = Color( 0, 0.392157, 0, 1 )
 
 [node name="ColorRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/ColorRect2"]
@@ -555,9 +552,6 @@ margin_top = 2.0
 margin_right = 32.0
 margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3"]
 position = Vector2( 15, 15 )

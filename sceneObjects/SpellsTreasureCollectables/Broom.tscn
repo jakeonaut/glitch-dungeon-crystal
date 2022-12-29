@@ -107,7 +107,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 
-[node name="Broom" type="KinematicBody" groups=["npc"]]
+[node name="Broom" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 10 )
 grav = 0

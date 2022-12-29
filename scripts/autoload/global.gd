@@ -59,6 +59,7 @@ enum TilesetType {
 }
 
 enum Inventory {
+    GRIMOIRE,
     PET_0,
 }
 
@@ -131,11 +132,13 @@ func _ready():
     if canChangeSongPitch: pass
     if crtScreenEffects: pass
 
+    memory["broom"] = true
     memory["total_hearts"] = 1
     memory["hearts"] = 1
     memory["hearts_recovering"] = false
     memory["max_mp"] = 5
     memory["mp"] = memory["max_mp"]
+    memory["which_floor"] = 0
 
 func _process(delta):
     delta = delta * time_dilation_multiplier

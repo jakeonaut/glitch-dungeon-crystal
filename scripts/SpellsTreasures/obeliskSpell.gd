@@ -89,7 +89,9 @@ func _process(delta):
       num_sparkles_spawned += 1
     
 func shouldIBeActive():
-  if getPlayer().glitch_form == my_glitch_form:
+  if global.memory["mp"] == 0:
+    return true
+  elif getPlayer().glitch_form == my_glitch_form:
     return false
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
     return true

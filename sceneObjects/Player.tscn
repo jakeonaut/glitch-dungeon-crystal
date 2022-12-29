@@ -252,7 +252,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 51, 15, 2 ]
+"values": [ 51, 15, 24 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomVisible:visible")
@@ -280,7 +280,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 51, 15, 2 ]
+"values": [ 51, 15, 24 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomVisible:visible")
@@ -1190,7 +1190,7 @@ pitch_scale = 1.05
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
-volume_db = -30.0
+volume_db = -40.0
 pitch_scale = 2.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]

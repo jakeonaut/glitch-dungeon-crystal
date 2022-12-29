@@ -354,9 +354,8 @@ func unrandomizeTile(cell_index):
   return true
 
 func rerandomizeTile(cell_index, glitch_type):
-  print("cell_index, glitch_type: " + str(cell_index) + ", " + str(glitch_type))
   if unrandomizeTile(cell_index):
-    randomizeTile(cell_index, glitch_type, true)  
+    randomizeTile(cell_index, glitch_type)  
   
 func changeColorPalette(palette, _palette_alt = null):
   if override_palette == null:

@@ -17,7 +17,7 @@ export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
-export var has_broom = false
+export var how_much_mp = 5
 var has_ever_set_camera_position = false
 
 export var display_title = "???"
@@ -41,15 +41,16 @@ func _ready_impl():
   
   if has_spellbook_page and not global.memory.has("spellbookPage"):
     print("gimme a spellbook page!!")
+    global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = []
     for spellbook_spell in spellbook_spells:
       global.memory["spellbookPage"].push_back(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
-    
-  if has_broom and not global.memory.has("broom"):
-    print("gimme the broom!")
-    global.memory["broom"] = true
 
+  if global.memory["max_mp"] == 5 and global.memory["max_mp"] < how_much_mp:
+    global.memory["max_mp"] = how_much_mp
+    global.memory["mp"] = global.memory["max_mp"]
+    
   if global.memory.has("current_glitch"):
     if global.memory["mp"] > 0:
       player.applyGlitch(global.memory["current_glitch"], true)
@@ -94,7 +95,8 @@ func _process(delta):
       global.isInventoryOpen = false
       global.pauseGame = false
     if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
-      print("yo it's jake")
+      player.textContainer.bbText = uiLayer.getInventoryBBText()
+      player.textContainer.setVars()
       player.textBox.interact()
     
 
@@ -178,7 +180,6 @@ func tryToRespawn():
     has_ever_set_camera_position = true
 
   global.isRespawning = false
-  global.memory["mp"] = global.memory["max_mp"]
 
   self.overrideLevelRespawnEvent()
 

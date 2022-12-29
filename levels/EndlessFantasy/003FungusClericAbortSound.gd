@@ -54,6 +54,7 @@ func summon(npc):
 func summonDoor(door):
   summonSmokeClouds(door, 5, true, true)
   door.visible = true
+  global.memory["which_floor"] = 1
 
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

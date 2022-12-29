@@ -180,7 +180,6 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 6 )
-has_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 10 )]
 

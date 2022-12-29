@@ -12,9 +12,9 @@ var target_opacity = 1.0
 var didja_get_me = false
 var y_speed = 2
 export var pop_from_distance = true
-var pop_distance = 20
+var pop_distance = 30
 var pop_timer = 0
-var pop_time_limit = 30
+var pop_time_limit = 35
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")

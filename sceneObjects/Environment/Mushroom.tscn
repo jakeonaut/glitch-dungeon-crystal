@@ -18,6 +18,7 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/enable_glitch = false
@@ -40,7 +41,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 script = ExtResource( 7 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0.5 )
+material_override = SubResource( 2 )
+extra_cull_margin = 0.06
+pixel_size = 0.125
+texture = ExtResource( 1 )
+vframes = 4
+
+[node name="Sprite3D12" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -1 )
 material_override = SubResource( 2 )
 extra_cull_margin = 0.06
 pixel_size = 0.125

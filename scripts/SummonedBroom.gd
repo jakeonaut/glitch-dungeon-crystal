@@ -82,11 +82,11 @@ func hitStuff(delta):
   var areas = myArea.get_overlapping_areas()
   for area in areas:
     if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-      area.get_node("..").ouchies(global_transform.origin)
-      my_broom_owner.has_sweeped_glitch = true
-      my_broom_owner.broomSound.play()
-      summonSmokeClouds(5, true, true)
-      # TODO kill glitches or "free" them like glitch slug...
+      # area.get_node("..").ouchies(global_transform.origin)
+      # my_broom_owner.has_sweeped_glitch = true
+      # my_broom_owner.broomSound.play()
+      # summonSmokeClouds(5, true, true)
+      # # TODO kill glitches or "free" them like glitch slug...
       pass
     elif area.is_in_group("corporeal_body"):
       var npc = area.get_node("..")

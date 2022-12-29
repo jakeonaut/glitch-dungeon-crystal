@@ -9,10 +9,6 @@ var gotcha = false
 var okay_im_done = false
 export var gimme_mp = 0
 
-onready var sparkleSprite = get_node("SparkleSprite3D")
-var spawn_timer = 0
-var spawn_time_limit = 5
-
 func _ready():
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
     secretAniPlayer.play("isOpen")
@@ -35,20 +31,6 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier 
 
   if okay_im_done:
-    spawn_timer += (delta*22)
-    if spawn_timer >= spawn_time_limit:
-      var newSprite = sparkleSprite.duplicate()
-      newSprite.should_fizzle_out = true
-      newSprite.visible = true
-      newSprite.transform.origin = Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125),
-          0
-      )
-      newSprite.updateBaseFrame(0, 0)
-      newSprite.max_frames = 2
-      add_child(newSprite)
-      spawn_timer = 0
     return
 
   if gotcha or being_collected or really_being_collected:
@@ -110,7 +92,6 @@ func isActive():
 # @override
 func passiveActivate(_delta):
   if okay_im_done:
-    global.memory["mp"] = global.memory["max_mp"]
     return
     
   if not being_collected:

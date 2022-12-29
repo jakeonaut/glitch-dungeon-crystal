@@ -208,7 +208,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.05, 0.125 ]
+"values": [ 0.05, 0.1 ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -417,16 +417,13 @@ shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 16 )
 shader_param/target_palette = ExtResource( 16 )
 
-[node name="SpellbookPage" type="KinematicBody" groups=["npc"]]
+[node name="SpellbookPage" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 7 )
 grav = 0
-bbText = "\"SPELL BOOK PAGE\"
-get!!!
-wow, good job
-press [SPACE] to switch
-between color
-memories"
+bbText = "\"GRIMOIRE\" get!!
+...............
+????"
 portrait = ExtResource( 11 )
 is_important = true
 can_activate = false
@@ -474,9 +471,9 @@ alpha_cut = 2
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 2
 script = ExtResource( 6 )
 should_randomize_frame_delay = true
+max_frames = 1
 
 [node name="TreasureSprite3D" type="Sprite3D" parent="."]
 material_override = SubResource( 12 )

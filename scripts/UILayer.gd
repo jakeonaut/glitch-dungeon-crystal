@@ -12,6 +12,12 @@ onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
 onready var inventoryControl = get_node("Inventory")
+var inventory_index = 0
+func getInventoryBBText():
+  if inventory_index == 0:
+    return "GRIMOIRE spells:\n  •floor\n  •feather"
+  if inventory_index == 1:
+    return "...hi!!! hi!!! hi hi hi!..."
 
 var display_title = "???"
 onready var levelTitleRect = get_node("LevelTitle")

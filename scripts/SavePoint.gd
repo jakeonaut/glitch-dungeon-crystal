@@ -99,8 +99,8 @@ func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 func passiveActivate(_delta):
-    global.memory["hearts_recovering"] = true
-    global.memory["mp"] = global.memory["max_mp"]
+    # global.memory["hearts_recovering"] = true
+    # global.memory["mp"] = global.memory["max_mp"]
     if not isOnSavePoint():
         saveSound.play()
         global.memory["active_save_point_x"] = self.translation.x
