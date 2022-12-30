@@ -1618,7 +1618,7 @@ anims/jump = SubResource( 22 )
 shape = SubResource( 19 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 181, 20, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 186, 20, 0 )
 grav = 0
 bbText = "•seek out
 WET ROT, the guardian of the tower of magick"
@@ -2041,9 +2041,6 @@ path = "res://levels/EndlessFantasy/002PathToSacredDoors/001PatienceVirtue.tscn"
 
 [node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 22.2736, 0 )
-
-[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 172, 18.2736, 0 )
 
 [node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 166, 16.2736, 0 )

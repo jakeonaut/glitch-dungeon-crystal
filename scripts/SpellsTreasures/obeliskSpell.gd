@@ -40,8 +40,13 @@ func _ready():
   previous_point = original_position
   interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
-  if first_ever_glitch and global.memory.has("roomPath"):
-    first_ever_glitch = false
+  yield(get_tree(), "idle_frame")
+  yield(get_tree(), "idle_frame")
+  if first_ever_glitch:
+    if global.memory.has("roomPath"):
+      first_ever_glitch = false
+    else:
+      level.uiLayer.statsTitleRect.visible = false
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -66,7 +71,6 @@ func _process(delta):
   if first_ever_glitch:
     if not has_frozen_input:
       global.pauseMoveInput = true
-      level.uiLayer.statsTitleRect.visible = false
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
       has_frozen_input = true

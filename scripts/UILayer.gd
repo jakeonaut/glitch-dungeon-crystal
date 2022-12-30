@@ -66,7 +66,7 @@ func recreateHeartSprites():
     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 func _process(delta):
-  statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MP: "+ str(global.memory["mp"])
+  statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"])
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
@@ -147,11 +147,11 @@ func _process(delta):
   else:
     powerupRect.visible = false
 
-  if global.num_mini_crystal_cubes > 0 and global.activeInteractor == null:
-    miniCrystalCubeRect.visible = true
-    miniCrystalCubeTextLabel.text = str(global.num_mini_crystal_cubes)
-  else:
-    miniCrystalCubeRect.visible = false
+  # if global.num_mini_crystal_cubes > 0 and global.activeInteractor == null:
+  #   miniCrystalCubeRect.visible = true
+  #   miniCrystalCubeTextLabel.text = str(global.num_mini_crystal_cubes)
+  # else:
+  miniCrystalCubeRect.visible = false
 
   if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
     var equipRect = level.uiLayer.get_node("EquipmentRect")

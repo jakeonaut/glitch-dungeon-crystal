@@ -7,7 +7,6 @@ var being_collected = false # actually is_opened
 var really_being_collected = false
 var gotcha = false
 var okay_im_done = false
-export var gimme_mp = 0
 
 func _ready():
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
@@ -64,9 +63,6 @@ func _process(delta):
         textBox.is_really_important = true
         textBox.is_important = true
         # collectSound.play()
-        if gimme_mp > 0:
-          global.memory["max_mp"] += gimme_mp
-          global.memory["mp"] = global.memory["max_mp"]
         .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
     else:
       level.player.aniPlayer.play("getItem")

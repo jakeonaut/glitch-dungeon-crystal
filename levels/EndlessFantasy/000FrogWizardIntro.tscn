@@ -180,6 +180,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 6 )
+how_much_mp = 0
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 10 )]
 
@@ -303,9 +304,9 @@ shape = SubResource( 24 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 23, 0 )
 grav = 0
-bbText = "•what's that? you wish to
-cure the blight of this dungeon?
-•....hrm...... followe me!................................  "
+bbText = "•oh, helloe! do you come
+seeking MAGICK power?
+•if so, followe me!................................  "
 portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true
@@ -440,15 +441,6 @@ first_ever_glitch = true
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 24.4317, 0 )
 
-[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 24, 0 )
-
-[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 24, 0 )
-
-[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 24, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, -1 )
 path = "res://levels/EndlessFantasy/001YourFirstPuzzle.tscn"
@@ -456,6 +448,21 @@ num_cubes_unlock = 3
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, 6.5, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.4, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, 10.6, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 12.9, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 5, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

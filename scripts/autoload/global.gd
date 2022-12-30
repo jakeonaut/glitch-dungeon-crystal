@@ -136,7 +136,7 @@ func _ready():
     memory["total_hearts"] = 1
     memory["hearts"] = 1
     memory["hearts_recovering"] = false
-    memory["max_mp"] = 5
+    memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
     memory["which_floor"] = 0
 

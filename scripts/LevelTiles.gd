@@ -206,7 +206,6 @@ func _process(delta):
           is_unrandomizing = false
           getPlayer().applyGlitch(global.GlitchForm.FEATHER)
           level.get_node("FeatherSpell").first_ever_glitch = false
-          level.uiLayer.statsTitleRect.visible = true
           musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):
             unrandomizeTile(unrandomize_cell_indices[i])

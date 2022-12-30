@@ -83,7 +83,7 @@ func _process(delta):
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
-  if global.memory.has("inventory") and not global.pauseGame and not global.pauseMoveInput:
+  if global.memory.has("inventory") and not global.pauseGame and not global.pauseMoveInput and global.activeInteractor == null:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
     #   global.canChangeSongPitch = not global.canChangeSongPitch
     #   global.canGlitchScreen = not global.canGlitchScreen
@@ -94,6 +94,9 @@ func _process(delta):
     if Input.is_action_just_pressed("ui_start"):
       global.isInventoryOpen = false
       global.pauseGame = false
+      if global.activeInteractor:
+        global.activeInteractor.hideTextbox()
+      global.activeInteractor = null
     if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
       player.textContainer.bbText = uiLayer.getInventoryBBText()
       player.textContainer.setVars()
@@ -170,10 +173,8 @@ func tryToRespawn():
     player.global_transform.origin = player.spawn_origin
 
   if found_door:
-    print("found door land?")
     found_door.land()
   elif not global.memory.has("roomPath") or global.memory["roomPath"] != getLevelName():
-    print("no global mem")
     player.global_transform.origin = player.spawn_origin
   if not has_ever_set_camera_position:
     gameCamera.setCameraPositionNow()

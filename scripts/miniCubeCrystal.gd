@@ -67,6 +67,9 @@ func passiveActivate(_delta):
     global.mini_cube_crystal_pitch += 0.1
     cubeSound2.play()
     aniPlayer.play("floatAway")
+    global.memory["mp"] += 1
+    global.memory["max_mp"] += 1
+    level.uiLayer.statsTitleRect.visible = true
     global.num_mini_crystal_cubes += 1
 
     disappearing2 = true

@@ -160,7 +160,7 @@ theme = ExtResource( 15 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "MAGIC: 10"
-text = "MAGIC: 10"
+text = "MAGICK: 10 / 10"
 scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]
@@ -243,38 +243,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="SelectorTopLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 9, 8 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 188
-
-[node name="SelectorTopRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 56, 8 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 190
-
-[node name="SelectorBotLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 9, 55.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 220
-
-[node name="SelectorBotRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 56, 55.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 222
-
 [node name="SelectorBotRight2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
 position = Vector2( 66, 55.5 )
 scale = Vector2( 2, 2 )
@@ -298,6 +266,42 @@ texture = ExtResource( 17 )
 hframes = 16
 vframes = 23
 frame = 304
+
+[node name="Control" type="Control" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SelectorTopLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 9, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 188
+
+[node name="SelectorTopRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 56, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 190
+
+[node name="SelectorBotLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 9, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 220
+
+[node name="SelectorBotRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 56, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 222
 
 [node name="InventoryTitle" type="ColorRect" parent="Inventory"]
 margin_left = 218.5

@@ -21,7 +21,7 @@ func activateScript():
         NPC.pressing_move_left = false
         NPC.aniPlayer.stop()
         NPC.aniPlayer.clear_queue()
-        NPC.textBoxContainer.bbText = "•MAGICK is source of all life\n•but sHe has been broken up\n•into 100 crystals.\n•you just collected 3!!\npress DOWN to enter door"
+        NPC.textBoxContainer.bbText = "•MAGICK is source of all life\n•but sHe has been broken up\n•into 200 crystals.\n•i see you have some already!\npress DOWN to enter door"
         NPC.textBoxContainer.setVars()
         NPC.textBox.is_important = true
         NPC.textBox.is_really_important = true

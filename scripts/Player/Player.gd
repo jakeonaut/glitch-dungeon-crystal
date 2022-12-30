@@ -361,18 +361,13 @@ func nullify():
 # @override
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_die = false):
   if transitioning:
-    print("transitioning")
     return
   if isOnSavePoint():
-    print("transitioning 2")
     return
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT:
-    print("transitioning 3 ")
     return
 
-  print("glitchform: " + str(glitch_form) + ", " + str(should_kill_invis))
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
-    print("SPAWN SPARKLES!")
     spawnSparkles(delta, true)
     return
 
@@ -497,8 +492,8 @@ func processPoisonWaterLogic(delta):
   if is_touching_poison_water:
     if glitch_form == global.GlitchForm.INVISIBLE:
       glitchTickle(0)
+      tryDieToEnemy(delta, true, false)
     else:
-      print("DIE!")
       tryDieToEnemy(delta, true, false)
     
 # @override
