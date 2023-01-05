@@ -61,8 +61,9 @@ func applyNextGlitch():
   
 func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
   if global.memory.has("spellbookPage") and not level.spellbook_forbidden:
-    if not only_visual and not global.memory["spellbookPage"].has(glitch):
+    if not only_visual:
       if global.memory["spellbookPage"].size() >= 2:
+        print(global.memory["spellbookPage"])
         global.memory["spellbookPage"].pop_front()
       elif global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"] and can_show_tutorial:
         level.uiLayer.get_node("EquipmentStatusRect").visible = true
@@ -88,6 +89,9 @@ func applySpellbookGlitch():
   else:
     noSpellSound.play()
 
+func restoreGlitchAndMP():
+  global.memory["mp"] = global.memory["max_mp"]
+  applyGlitch(global.memory["current_glitch"], true)
 
 func applyGlitch(glitch, notPlaySound = false):
   if not notPlaySound:
@@ -191,13 +195,13 @@ func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
     return
 
-  var overwrite_blink = (global.memory["mp"] == 5 and global.memory["max_mp"] == 5) or global.memory["mp"] > 5
+  var overwrite_blink = (global.memory["mp"] == global.memory["max_mp"]) or global.memory["mp"] > 5
 
   if global.memory["mp"] <= 5 or overwrite_blink:
     var blink_time_limit = 20
     if global.memory["mp"] == 4:
       blink_time_limit = 15
-    if global.memory["mp"] == 3:
+    if global.memory["mp"] == 3 and global.memory["mp"] <= 5:
       blink_time_limit = 10
     if global.memory["mp"] == 2:
       blink_time_limit = 5
@@ -431,7 +435,7 @@ func processBroomLogic(_delta):
   #     broom_cooldown_timer = 0
   is_in_broom_cooldown = false
 
-  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom:
+  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom and global.activeInteractor == null:
     applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
@@ -547,9 +551,6 @@ func broomStop():
     jump_press_timer = 0
     if has_sweeped_glitch or should_magic_jump:
       linear_velocity.y = -0.01
-
-  for npc in get_tree().get_nodes_in_group("npc"):
-    npc.just_said_bye = false
 
 func faceDown():
   pass # mySprite.faceDown()

@@ -36,7 +36,6 @@ export var is_static_in_level = true
 
 var pressing_move_left = false
 var pressing_move_right = false
-var just_said_bye = false
 
 # @override
 func pressingMoveLeft():
@@ -127,12 +126,11 @@ func getSmacked():
   is_smacked = true
   did_i_get_smacked = true
 
-  if global.activeInteractor == null and not just_said_bye:
+  if global.activeInteractor == null:
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
   if set_vars:
-    just_said_bye = true
     did_i_get_smacked = false
   if not global.memory.has(level.getShortLevelName()):
     global.memory[level.getShortLevelName()] = {}
@@ -169,7 +167,6 @@ func stopPassiveActivate():
   # TODO(jaketrower): TODO on a timer...
   if global.activeInteractor != null and global.activeInteractor == textBox:
     global.activeInteractor.stopInteract()
-  just_said_bye = false
   did_i_get_smacked = false
     
 func justStopPassiveActivate():

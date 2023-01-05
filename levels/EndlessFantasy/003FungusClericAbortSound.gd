@@ -5,7 +5,7 @@ onready var NPC = get_node("../../..")
 onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
 onready var fungusNPC4 = get_node("../../../../FungusNPC4")
-onready var door3 = get_node("../../../../Door3")
+onready var angelStatue = get_node("../../../../AngelStatue")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
 onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
@@ -33,7 +33,7 @@ func activateScript():
     elif which_one_am_i == 3:
       summon(fungusNPC4)
     elif which_one_am_i == 4:
-      summonDoor(door3)
+      summonAngelStatue()
       # yield(get_tree().create_timer(0.4), "timeout")
       # summonDoor(glitchEnemy2)
       # yield(get_tree().create_timer(0.1), "timeout")
@@ -52,9 +52,9 @@ func summon(npc):
   npc.can_activate = true
   npc.is_active = true
 
-func summonDoor(door):
-  summonSmokeClouds(door, 5, true, true)
-  door.visible = true
+func summonAngelStatue():
+  summonSmokeClouds(angelStatue, 5, true, true)
+  angelStatue.visible = true
   global.memory["which_floor"] = 1
 
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

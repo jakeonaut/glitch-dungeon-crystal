@@ -149,26 +149,26 @@ shader_param/target_palette = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, -1 )
 
 [node name="MrMoTex16" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36243, 0.409223, -11.4276 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36243, 0.409223, -2 )
 material_override = SubResource( 39 )
 flip_v = true
 texture = SubResource( 40 )
 frame = 318
 
 [node name="MrMoTex17" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.362429, 0.409223, -11.4276 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.362429, 0.409223, -2 )
 material_override = SubResource( 41 )
 flip_v = true
 frame = 637
 
 [node name="MrMoTex18" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.637571, 0.409223, -11.4276 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.637571, 0.409223, -2 )
 material_override = SubResource( 42 )
 flip_v = true
 frame = 637
 
 [node name="MrMoTex19" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63757, 0.409223, -11.4276 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63757, 0.409223, -2 )
 material_override = SubResource( 43 )
 flip_v = true
 frame = 319

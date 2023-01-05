@@ -4,6 +4,8 @@ onready var tween_out = get_node("Tween")
 export var transition_duration = 3.00
 export var transition_type = 1 # TRANS_SINE
 
+onready var windPlayer = get_node("WindPlayer")
+onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
@@ -71,6 +73,8 @@ func _on_TweenOut_tween_completed(object, _key):
     object.pitch_scale = 1.0
 
 func stopAll():
+    fade_out(windPlayer)
+    fade_out(restZonePlayer)
     fade_out(wakeupPlayer)
     fade_out(titleThemePlayer)
     fade_out(dungeonThemePlayer)
@@ -91,7 +95,11 @@ func stopAll():
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("MeetFishElderScene") > 0 or path.find("SpellbookIntroLevel") > 0 or path.find("003SacredDoorsHubWorld") > 0:
+    # if path.find("000FrogWizardIntro"):
+    #     tryToPlay(windPlayer)
+    if path.find("RestZone") > 0:
+        tryToPlay(restZonePlayer)
+    elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("Boss") > 0:
         tryToPlay(bossThemePlayer)

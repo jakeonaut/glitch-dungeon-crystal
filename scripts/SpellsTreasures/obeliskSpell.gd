@@ -93,10 +93,10 @@ func _process(delta):
       num_sparkles_spawned += 1
     
 func shouldIBeActive():
-  if global.memory["mp"] == 0:
-    return true
-  elif getPlayer().glitch_form == my_glitch_form:
+  if getPlayer().glitch_form == my_glitch_form:
     return false
+  elif global.memory["mp"] == 0:
+    return true
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
     return true
   elif global.memory["spellbookPage"].has(my_glitch_form):
@@ -110,8 +110,11 @@ func isActive():
 func passiveActivate(_delta):
   if not is_active:
     if global.memory["mp"] < global.memory["max_mp"]:
-      collectSound.pitch_scale = 0.5
-      collectSound.play()
+      if global.memory["mp"] < global.memory["max_mp"]-1:
+        collectSound.pitch_scale = 0.5
+        collectSound.play()
+      if global.memory["mp"] == 0:
+        level.player.restoreGlitchAndMP()
       num_sparkles_spawned = 0
       global.memory["mp"] = global.memory["max_mp"]
     return
@@ -131,6 +134,7 @@ func passiveActivate(_delta):
     NPC.textBoxContainer.setVars()
     NPC.textBoxContainer.textBox.has_been_shown = false
   else:
+    print("yo")
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
     global.memory["mp"] = global.memory["max_mp"]
 

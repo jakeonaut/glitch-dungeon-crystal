@@ -113,6 +113,9 @@ func bubbleStartPop():
   didja_get_me = true
   global_transform.origin.y += .625
 
+func touchCorporealBody():
+    bubbleStartPop()
+
 
 func randomizeTargetPos():
   target_pos_x = original_pos_x + rand_range(-2, 2)

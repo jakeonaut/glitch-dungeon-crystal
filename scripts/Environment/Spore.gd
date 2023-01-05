@@ -140,3 +140,6 @@ func bubbleStartPop():
     didja_get_me = true
     mySprite.max_frames = 6
     mySprite.should_soft_fizzle_out = true
+
+func touchCorporealBody():
+    bubbleStartPop()

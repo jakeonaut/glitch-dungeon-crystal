@@ -9,6 +9,8 @@ onready var crtScreenEffect = get_node("../../ScreenEffects/CrtEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 var current_sprite_palette = global.grey_palette
 
+export var show_crt_effect = false
+
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
 export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST") var tileset_type 
@@ -47,7 +49,7 @@ func _ready_impl():
       global.memory["spellbookPage"].push_back(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
 
-  if global.memory["max_mp"] == 5 and global.memory["max_mp"] < how_much_mp:
+  if global.memory["max_mp"] == 0 and global.memory["max_mp"] < how_much_mp:
     global.memory["max_mp"] = how_much_mp
     global.memory["mp"] = global.memory["max_mp"]
     
@@ -79,7 +81,8 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  crtScreenEffect.visible = false
+  if not show_crt_effect:
+    crtScreenEffect.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 

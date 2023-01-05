@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/jump_overalls.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sounds/land.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/DELETEME/LA_Link_Fall.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/worm.wav" type="AudioStream" id=19]
@@ -1196,7 +1196,7 @@ pitch_scale = 2.0
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
 volume_db = -33.0
-pitch_scale = 1.2
+pitch_scale = 0.7
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 25 )

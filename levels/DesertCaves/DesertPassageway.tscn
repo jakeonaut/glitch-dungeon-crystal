@@ -308,7 +308,7 @@ viewport_path = NodePath("Viewport")
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+size = Vector2( 1280, 1024 )
 audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]

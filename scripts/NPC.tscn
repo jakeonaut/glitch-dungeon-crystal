@@ -189,7 +189,7 @@ frame_delay = 0.3
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -15.0
+volume_db = -20.0
 pitch_scale = 0.65
 
 [editable path="NPC TextBox"]

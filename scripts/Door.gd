@@ -178,7 +178,7 @@ func passiveActivate(_delta):
 func justStopPassiveActivate():
   getPlayer().hideInteractPrompt()
 
-func goThroughDoor(start_of_game = false):
+func goThroughDoor(start_of_game = false, really_long_fade = false):
   if not global.isRespawning and not hasPlayedDoorSound:
     global.doorSound.play()
     hasPlayedDoorSound = true
@@ -208,6 +208,8 @@ func goThroughDoor(start_of_game = false):
       global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
     global.memory["linear_velocity"] = getPlayer().linear_velocity
     transition.fade_to(self.path)
+  elif really_long_fade:
+    transition.really_long_fade_to(self.path)
   else:
     transition.long_fade_to(self.path)
 

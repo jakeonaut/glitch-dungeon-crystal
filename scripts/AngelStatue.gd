@@ -6,6 +6,8 @@ onready var mySprite = get_node("Sprite3D")
 onready var tweetSound = get_node("TweetSound")
 var hasRandomizedTweet = false
 var is_angel_activated = false
+export var teleport_to_angel_zone_first = false
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
     set_process(true)
@@ -28,16 +30,20 @@ func _process(delta):
 
 
 func isActive():
-    return true
+    return self.visible
 
 func passiveActivate(_delta):
     if not is_angel_activated:
         is_angel_activated = true
         activateSound.play()
-        aniPlayer.stop()
-        aniPlayer.clear_queue()
-        aniPlayer.queue("BirdFlyIn")
-        aniPlayer.queue("ActivatedIdle")
+        if teleport_to_angel_zone_first:
+            global.pauseGame = true
+            level.get_node("AngelDoor").goThroughDoor(false, true)
+        else:
+            aniPlayer.stop()
+            aniPlayer.clear_queue()
+            aniPlayer.queue("BirdFlyIn")
+            aniPlayer.queue("ActivatedIdle")
         var my_material = mySprite.get_material_override()
         if my_material is ShaderMaterial:
             my_material.set_shader_param("enable_palette_cycle", true)

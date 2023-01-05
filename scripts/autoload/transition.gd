@@ -25,6 +25,11 @@ func long_fade_to(scn_path):
     self.path = scn_path # store the scene path
     aniPlayer.play("long_fade") # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
+func really_long_fade_to(scn_path):
+    was_i_interrupted = false
+    self.path = scn_path # store the scene path
+    aniPlayer.play("really_long_fade") # play the long transition animation
+# PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func blink_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path

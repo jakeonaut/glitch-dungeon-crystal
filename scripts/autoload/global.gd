@@ -1,5 +1,6 @@
 extends Node
 
+var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
 var green_palette = preload("res://assets/palettes/green_palette.png")

@@ -653,7 +653,7 @@ viewport_path = NodePath("Viewport")
 script = ExtResource( 6 )
 starting_glitch_type = 2
 spellbook_spells = [ 1, 2 ]
-how_much_mp = 10
+how_much_mp = 14
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 19 )]
 
@@ -763,7 +763,9 @@ shape = SubResource( 21 )
 shape = SubResource( 22 )
 
 [node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7546, -12.8741, -0.3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2243, -13.8535, -0.3 )
+visible = false
+teleport_to_angel_zone_first = true
 
 [node name="NPC" parent="Viewport/level/AngelStatue" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.5, -1 )
@@ -880,7 +882,7 @@ shape = SubResource( 78 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 
 [node name="FungusNPC3" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9918, -12.9266, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9469, -8.59069, 0 )
 visible = false
 grav = 0
 bbText = "•i will allow's't thou entry to this corrupt tower. •tho be warned...
@@ -924,7 +926,7 @@ shape = SubResource( 78 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="FungusNPC4" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3837, -10.8634, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3521, -12.5861, 0 )
 visible = false
 grav = 0
 bbText = "•should thou find's't thineself
@@ -965,7 +967,7 @@ shape = SubResource( 78 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -18, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4235, -18, 0 )
 grav = 0
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
@@ -993,7 +995,7 @@ material_override = SubResource( 85 )
 frame = 298
 
 [node name="Snail" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -18.2876, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.74689, -18.2876, 0 )
 grav = 0
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 2 )]
@@ -1023,35 +1025,35 @@ grav = 0
 [node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -9, 0 )
 
-[node name="Door3" parent="Viewport/level" instance=ExtResource( 21 )]
+[node name="AngelDoor" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
 visible = false
-path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
+path = "res://levels/EndlessFantasy/004AngelStatueRestZone.tscn"
 num_cubes_unlock = 50
 
-[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
+[node name="Sprite3D2" parent="Viewport/level/AngelDoor" index="1"]
 material_override = SubResource( 30 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/AngelDoor" index="4"]
 anims/doorClose = SubResource( 64 )
 anims/doorOpen = SubResource( 65 )
 anims/locked = SubResource( 66 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/AngelDoor/InteractionArea" index="0"]
 shape = SubResource( 27 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/AngelDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallerInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/AngelDoor/NPC/SmallerInteractionArea" index="0"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3/NPC" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/AngelDoor/NPC" index="6"]
 anims/default = SubResource( 67 )
 anims/flickerOn = SubResource( 68 )
 anims/jump = SubResource( 69 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/AngelDoor/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 29 )
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 18 )]
@@ -1911,9 +1913,9 @@ __meta__ = {
 [editable path="Viewport/level/FungusNPC3/NPC TextBox"]
 [editable path="Viewport/level/FungusNPC4"]
 [editable path="Viewport/level/FungusNPC4/NPC TextBox"]
-[editable path="Viewport/level/Door3"]
-[editable path="Viewport/level/Door3/NPC"]
-[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
+[editable path="Viewport/level/AngelDoor"]
+[editable path="Viewport/level/AngelDoor/NPC"]
+[editable path="Viewport/level/AngelDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/WaterCube19"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/WaterCube"]
