@@ -8,6 +8,7 @@ var hasRandomizedTweet = false
 var is_angel_activated = false
 export var teleport_to_angel_zone_first = false
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var npc = get_node("NPC") if has_node("NPC") else null
 
 func _ready():
     set_process(true)

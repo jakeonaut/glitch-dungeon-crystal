@@ -90,8 +90,10 @@ func applySpellbookGlitch():
     noSpellSound.play()
 
 func restoreGlitchAndMP():
+  if global.memory["mp"] <= 0:
+    applyGlitch(global.memory["current_glitch"], true)
   global.memory["mp"] = global.memory["max_mp"]
-  applyGlitch(global.memory["current_glitch"], true)
+  
 
 func applyGlitch(glitch, notPlaySound = false):
   if not notPlaySound:
@@ -218,7 +220,7 @@ func processMPBlinkLogic(delta):
 
       if is_blinked:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().grey_palette)
-        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null):
+        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump()):
           blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)

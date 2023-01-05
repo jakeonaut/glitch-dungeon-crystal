@@ -105,7 +105,7 @@ func shouldIBeActive():
     return true
 
 func isActive():
-  return true
+  return self.visible
 
 func passiveActivate(_delta):
   if not is_active:

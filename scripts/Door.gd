@@ -6,6 +6,7 @@ export var is_locked = false
 export var should_lock = false
 # String is a path to a file.
 export(String, FILE) var path
+export var dont_recolor_me = false
 
 export var is_passive = false
 export var is_vertical = false
@@ -23,6 +24,7 @@ var spawn_timer = 0
 var spawn_time_limit = 5
 
 onready var mySprite = get_node("Sprite3D")
+onready var mySprite2 = get_node("Sprite3D2")
 onready var landing = get_node("landing")
 onready var sparkleSprite = get_node("SparkleSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -70,6 +72,12 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   animationPlayer.playback_speed = global.time_dilation_multiplier
+
+  if dont_recolor_me:
+    if mySprite.is_in_group("sprite"):
+      mySprite.remove_from_group("sprite")
+    if mySprite2.is_in_group("sprite"):
+      mySprite2.remove_from_group("sprite")
   
   if global.pauseGame: return
 

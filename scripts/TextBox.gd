@@ -43,6 +43,7 @@ var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var is_immediate = false
 
 var gameCamera = null
 func getGameCamera():
@@ -191,6 +192,9 @@ func showTextbox():
   text_timer = 0
   text_next_index = 0
   textNode.bbcode_text = ""
+  if is_immediate:
+    textNode.bbcode_text = text_final
+    text_next_index = len(text_final)
   resetTinyColorRect()
 
   textNode.get_v_scroll().value = 0

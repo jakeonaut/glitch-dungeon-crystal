@@ -133,6 +133,9 @@ func _physics_process(delta):
     pass
 
 func bodyPushMe(delta, origin):
+  if not on_ground or is_pressing_horizontal_input:
+    return
+
   var multiplier = 5
   if self.global_transform.origin.x > origin.x:
     self.global_transform.origin.x += (delta * multiplier)

@@ -13,6 +13,7 @@ export var can_move = true
 export var can_camera_zoom = true
 export var is_fast_text = false
 export var dont_recolor_me = false
+export var is_immediate = false
 
 var is_smacked = false
 var did_i_get_smacked = false
@@ -57,6 +58,7 @@ func _ready():
     textBoxContainer.bbText = bbText
   if portrait and not textBoxContainer.portrait:
     textBoxContainer.portrait = portrait
+  textBoxContainer.is_immediate = is_immediate
   if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
     var nextTextBoxPathStr = "../"
     for i in range(nextTextBoxPath.get_name_count()):

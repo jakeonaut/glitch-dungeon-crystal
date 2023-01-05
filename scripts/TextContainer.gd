@@ -5,6 +5,7 @@ extends CanvasLayer
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
+var is_immediate = false
 
 onready var textBox = get_node("TextBox")
 onready var textBoxtext = get_node("TextBox/Text")
@@ -13,25 +14,28 @@ onready var textBoxportrait = get_node("TextBox/Portrait")
 var type = "textBoxContainer"
 
 func _ready():
-	self.setVars()
+    self.setVars()
 
 func setVars():
-	if bbText != "":
-		textBoxtext.bbcode_text = bbText
-		textBox.text_final = bbText
-	if portrait:
-		textBoxportrait.texture = portrait
+    if bbText != "":
+        textBoxtext.bbcode_text = bbText
+        textBox.text_final = bbText
+    if portrait:
+        textBoxportrait.texture = portrait
 
-	if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():
-		var nextTextBoxPathStr = "../"
-		for i in range(nextTextBoxPath.get_name_count()):
-			if i != 0:
-				nextTextBoxPathStr += "/"
-			nextTextBoxPathStr += nextTextBoxPath.get_name(i)
-		textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+    if not nextTextBoxPath.is_empty() and textBox.nextTextBoxPath.is_empty():
+        var nextTextBoxPathStr = "../"
+        for i in range(nextTextBoxPath.get_name_count()):
+            if i != 0:
+                nextTextBoxPathStr += "/"
+            nextTextBoxPathStr += nextTextBoxPath.get_name(i)
+        textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+
+    if is_immediate:
+        textBox.is_immediate = is_immediate
 
 func InteractActivate():
-	interact()
-		
+    interact()
+        
 func interact():
-	textBox.interact()
+    textBox.interact()
