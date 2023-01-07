@@ -839,7 +839,6 @@ shader_param/target_palette = ExtResource( 25 )
 script = ExtResource( 6 )
 show_crt_effect = true
 starting_glitch_type = 4
-tileset_type = 5
 how_much_mp = 20
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]

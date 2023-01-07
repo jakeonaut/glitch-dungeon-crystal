@@ -22,8 +22,8 @@ onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 
 var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
-var sparkle_timer = 4
-var sparkle_time_limit = 5
+var sparkle_timer = 7
+var sparkle_time_limit = 8
 
 func _ready():
   set_physics_process(true)
@@ -61,7 +61,7 @@ func _process(delta):
   elif glitch_form == global.GlitchForm.INVISIBLE:
     pass
   else:
-    sparkle_timer = sparkle_time_limit - 1
+    sparkle_timer = sparkle_time_limit - 2
     
   # this is a little weird but fixes the fallthrough area situation:
   if linear_velocity.y < 0:

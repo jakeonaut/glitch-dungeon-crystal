@@ -195,6 +195,16 @@ func setDoorsSpriteFrame(frame):
       continue
     door.get_node("Sprite3D2").frame = frame
 
+func setTorchSpriteFrame(v_frame):
+  pass
+  # var torches = get_tree().get_nodes_in_group("torch")
+  # for torch in torches:
+  #   torch.get_node("Sprite3D").updateBaseFrame(0, v_frame)
+
+  # var walltorches = get_tree().get_nodes_in_group("walltorch")
+  # for walltorch in walltorches:
+  #   walltorch.get_node("Sprite3D").updateBaseFrame(0, v_frame)
+
 func normalGlitch():
   levelTiles.normalGlitch()
   if fakeLevelTiles:

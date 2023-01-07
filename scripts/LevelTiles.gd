@@ -390,6 +390,7 @@ func properlySetTiles():
 
 func setTileset(tileset_type, properly_set_tiles = true):
   my_tileset_type = tileset_type
+  level.setTorchSpriteFrame(0)
   if tileset_type == global.TilesetType.DUNGEON:
     green_palette = global.green_dungeon_palette
     red_palette = global.red_tidepool_palette
@@ -423,6 +424,9 @@ func setTileset(tileset_type, properly_set_tiles = true):
   elif tileset_type == global.TilesetType.ALIEN:
     my_tileset_glitch_type = global.GlitchForm.INVISIBLE
     black_palette = global.black_palette_alien
+  elif tileset_type == global.TilesetType.GLITCH_WORLD:
+    my_tileset_glitch_type = global.GlitchForm.WALK_THROUGH_WALLS
+    level.setTorchSpriteFrame(3)
 
   if properly_set_tiles:
     properlySetTiles()

@@ -48,7 +48,6 @@ var blink_timer = 0
 var unblink_time_limit = 5
 
 func _ready():
-  grav = 60
   set_process_input(true)
   set_process(true)
   set_physics_process(true)
