@@ -62,3 +62,5 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")
     grav = 0
+    getGameCamera().initial_target = level.player.get_node("CameraTarget")
+    getGameCamera().actual_target = weakref(getGameCamera().initial_target)

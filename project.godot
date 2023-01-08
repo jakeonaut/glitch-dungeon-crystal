@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="crystal dungeon"
-run/main_scene="res://levels/EndlessFantasy/000FrogWizardIntro.tscn"
+run/main_scene="res://levels/000Intro.tscn"
 boot_splash/image="res://goddessmockup.png"
 config/icon="res://icon.png"
 name="glitch dungeon 2: lovely sweet dreams crystal"

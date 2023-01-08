@@ -643,6 +643,7 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Spatial" parent="Viewport"]
 script = ExtResource( 6 )
 starting_glitch_type = 2
+has_spellbook_page = true
 spellbook_spells = [ 1, 2 ]
 how_much_mp = 14
 
@@ -783,7 +784,8 @@ shape = SubResource( 38 )
 [node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8352, -4.75006, 0 )
 grav = 0
-bbText = "•MAGICK    is corruption.       •this        place   ROTs.."
+bbText = "•MAGICK    is corruption.       •this        place   ROTs..
+•those who seek its power will die"
 is_important = true
 is_really_important = true
 can_activate = false
@@ -820,9 +822,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47699, -5.55142, 0 )
 visible = false
 grav = 0
-bbText = "•what's that? thou wish's't' 
-  cleanse this blight? & save your
-people? .... hrm...."
+bbText = "•TODO STORY TEXT LOL"
 can_activate = false
 can_move = false
 dont_recolor_me = true
@@ -863,11 +863,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9469, -8.59069, 0 )
 visible = false
 grav = 0
-bbText = "•i will allow's't thou entry to this corrupt tower. •tho be warned...
-
+bbText = "•if you wish to climb the tower
 •bedlam lies within.
-•ascension is
-not straightforward. thou may easily lose thineself."
+•thou may easily lose thineself."
 is_important = true
 is_really_important = true
 can_activate = false
@@ -1049,7 +1047,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -22, -4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -22, -4 )
 
 [node name="WaterCube18" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -22, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1, -11.3, -4.9 )
 
 [node name="WaterCube19" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -22, -4 )

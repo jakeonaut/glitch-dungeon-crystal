@@ -366,7 +366,7 @@ max_frames = 4
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 5.0
+volume_db = -5.0
 
 [node name="Area" type="Area" parent="."]
 

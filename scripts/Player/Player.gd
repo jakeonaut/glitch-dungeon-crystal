@@ -61,7 +61,9 @@ func applyNextGlitch():
 func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
   if global.memory.has("spellbookPage") and not level.spellbook_forbidden:
     if not only_visual:
-      if global.memory["spellbookPage"].size() >= 2:
+      var spellbook_size = global.memory["spellbookPage"].size()
+      var is_it_already_my_first_spellbook_page = spellbook_size > 0 and global.memory["spellbookPage"][spellbook_size-1] == glitch
+      if global.memory["spellbookPage"].size() >= 2 and not is_it_already_my_first_spellbook_page:
         print(global.memory["spellbookPage"])
         global.memory["spellbookPage"].pop_front()
       elif global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"] and can_show_tutorial:
@@ -69,7 +71,8 @@ func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
         level.uiLayer.get_node("EquipmentStatusRect").rect_scale = Vector2(1.5, 1.5)
         level.uiLayer.get_node("EquipmentStatusRect").rect_position = Vector2(300, 250)
 
-      global.memory["spellbookPage"].push_back(glitch)
+      if not is_it_already_my_first_spellbook_page:
+        global.memory["spellbookPage"].push_back(glitch)
   applyGlitch(glitch, only_visual)
     
 func applySpellbookGlitch():
@@ -507,6 +510,8 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
+
+  summonSmokeClouds(1, false, false, true)
   
   var localAniPlayer = get_node("AnimationPlayer")
   if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
@@ -589,13 +594,24 @@ func iJustPressedDown():
     on_ground = false
   should_do_fallthrough_area_collision = false
 
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = false):
     for _i in range(num_clouds):
         var newSmokeCloud = smokeCloudRes.instance()
         level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(1, 2)
-        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        if horizontal:
+          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
+          if mySprite.flip_h:
+            newSmokeCloud.global_transform.origin.x -= 1
+            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x - rand_range(1, 3)
+          else:
+            newSmokeCloud.global_transform.origin.x += 1
+            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(1, 3)
+          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y
+          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        else:
+          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
+          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(1, 2)
+          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
         if play_sound:
             newSmokeCloud.get_node("CleanGlitchSound").play()
             newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)

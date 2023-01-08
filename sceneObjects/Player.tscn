@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/jump_overalls.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/landgranny.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/DELETEME/LA_Link_Fall.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/worm.wav" type="AudioStream" id=19]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=31]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Beetle.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=34]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -69,7 +70,7 @@ shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 30 )
 shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 34 )
 
 [sub_resource type="ShaderMaterial" id=48]
 shader = ExtResource( 4 )
@@ -171,7 +172,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.125, 0.25, -0.2 ) ]
+"values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite3DBroomVisible:visible")
@@ -481,7 +482,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, -0.2 ) ]
+"values": [ Vector3( 1, 1, 0.7 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite3DBroomVisible:visible")
@@ -688,7 +689,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.125, 0.5, -0.2 ) ]
+"values": [ Vector3( 0.125, 0.5, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=39]
@@ -743,7 +744,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.125, 0.25, -0.2 ) ]
+"values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -809,7 +810,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 1, 0.5, -0.2 ), Vector3( 1, 0.25, -0.2 ), Vector3( 1.25, 0.25, -0.2 ) ]
+"values": [ Vector3( 1, 0.5, 0.7 ), Vector3( 1, 0.25, 0.7 ), Vector3( 1.25, 0.25, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=51]
@@ -880,7 +881,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.125, 0.25, -0.2 ) ]
+"values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/opacity")
@@ -1062,7 +1063,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 24, 25 ]
+"values": [ 24, 3 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -1089,7 +1090,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 26, 27 ]
+"values": [ 25, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -1162,7 +1163,7 @@ hframes = 8
 vframes = 8
 
 [node name="Sprite3DBroomAnimated" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.25, -0.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.25, 0.7 )
 visible = false
 material_override = SubResource( 48 )
 pixel_size = 0.125
@@ -1174,7 +1175,7 @@ hframes = 8
 vframes = 8
 
 [node name="Sprite3DBroomVisible" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.25, -0.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.25, 0.6 )
 material_override = SubResource( 50 )
 pixel_size = 0.125
 transparent = false
@@ -1199,8 +1200,7 @@ pitch_scale = 2.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
-volume_db = -33.0
-pitch_scale = 0.7
+volume_db = -10.0
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 25 )

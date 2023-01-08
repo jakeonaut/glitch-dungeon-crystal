@@ -479,8 +479,8 @@ tracks/7/keys = {
 "values": [ 1.0 ]
 }
 
-[sub_resource type="BoxShape" id=18]
-extents = Vector3( 18, 13, 1 )
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 25, 13, 1 )
 
 [node name="GlitchSlime" type="KinematicBody"]
 collision_layer = 4
@@ -602,4 +602,4 @@ anims/metamorphosis = SubResource( 15 )
 script = ExtResource( 21 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
-shape = SubResource( 18 )
+shape = SubResource( 20 )

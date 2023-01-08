@@ -43,7 +43,7 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   if first_ever_glitch:
-    if global.memory.has("roomPath"):
+    if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/000Intro.tscn":
       first_ever_glitch = false
     else:
       level.uiLayer.statsTitleRect.visible = false
@@ -130,11 +130,10 @@ func passiveActivate(_delta):
     getLevelTiles().unrandomizeAllTiles()
     musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
     var NPC = level.get_node("NPC4")
-    NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold down UP\nor X to jump higher"
+    NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold UP or X \n longer to jump higher"
     NPC.textBoxContainer.setVars()
     NPC.textBoxContainer.textBox.has_been_shown = false
   else:
-    print("yo")
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
     global.memory["mp"] = global.memory["max_mp"]
 
