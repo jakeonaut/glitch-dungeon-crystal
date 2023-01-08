@@ -783,9 +783,7 @@ shape = SubResource( 38 )
 [node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8352, -4.75006, 0 )
 grav = 0
-bbText = "•fool!!! wer'st thou sent byn that power-hungry frog?
-
-•MAGICK    is corruption.       •this        place   ROTs.."
+bbText = "•MAGICK    is corruption.       •this        place   ROTs.."
 is_important = true
 is_really_important = true
 can_activate = false
@@ -797,6 +795,7 @@ shape = SubResource( 76 )
 
 [node name="DialogStartSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
+volume_db = -10.0
 pitch_scale = 0.9
 
 [node name="DialogSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="8"]
@@ -833,6 +832,7 @@ shape = SubResource( 76 )
 
 [node name="DialogStartSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
+volume_db = -10.0
 pitch_scale = 0.7
 
 [node name="DialogSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="8"]
@@ -879,6 +879,7 @@ shape = SubResource( 76 )
 
 [node name="DialogStartSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
+volume_db = -10.0
 
 [node name="DialogSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.3
@@ -920,6 +921,7 @@ shape = SubResource( 76 )
 
 [node name="DialogStartSound" parent="Viewport/level/FungusNPC4/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
+volume_db = -10.0
 
 [node name="DialogSound" parent="Viewport/level/FungusNPC4/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.3

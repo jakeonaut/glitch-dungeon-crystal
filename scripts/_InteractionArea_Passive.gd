@@ -69,7 +69,7 @@ func _process(_delta):
         if area.is_in_group("fallthrough"):
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if isActive() and area.is_in_group("corporeal_body") and parent.has_method("touchCorporealBody"):
-            parent.touchCorporealBody()
+            parent.touchCorporealBody(area.get_node(".."))
 
     if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:
         possible_game_mover.should_do_fallthrough_area_collision = false

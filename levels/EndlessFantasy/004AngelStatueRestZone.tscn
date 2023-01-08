@@ -1121,6 +1121,9 @@ flip_v = true
 visible = true
 material = SubResource( 24 )
 
+[node name="CrtEffectRect2" parent="ScreenEffects" index="1"]
+visible = false
+
 [editable path="Viewport/level/AngelStatue"]
 [editable path="Viewport/level/AngelStatue/NPC"]
 [editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]

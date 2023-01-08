@@ -15,6 +15,7 @@ export var pop_from_distance = true
 var pop_distance = 30
 var pop_timer = 0
 var pop_time_limit = 35
+var my_parent = null
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -91,17 +92,22 @@ func isActive():
   return true
 
 func passiveActivate(_delta):
-  if not didja_get_me:
-    bubbleStartPop()
+  if didja_get_me:
+    return
+
+  bubbleStartPop()
+  if getPlayer().linear_velocity.y < 0:
+    getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+    getPlayer().should_magic_jump = true
+    getPlayer().was_just_on_ground_timer = -8
     if getPlayer().linear_velocity.y < 0:
-      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-      getPlayer().should_magic_jump = true
-      getPlayer().was_just_on_ground_timer = -8
-      if getPlayer().linear_velocity.y < 0:
-        getPlayer().linear_velocity.y = -0.01
-      getPlayer().jump_press_timer = 0
+      getPlayer().linear_velocity.y = -0.01
+    getPlayer().jump_press_timer = 0
 
 func bubbleStartPop():
+  if didja_get_me:
+    return
+
   popSound1.play()
   popSound2.play()
   aniPlayer.clear_queue()
@@ -113,7 +119,8 @@ func bubbleStartPop():
   didja_get_me = true
   global_transform.origin.y += .625
 
-func touchCorporealBody():
+func touchCorporealBody(body):
+  if body != my_parent:
     bubbleStartPop()
 
 
@@ -161,5 +168,6 @@ func tryDieToOffscreenCamera():
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
       queue_free()
 
-func setAsParent(_parent):
+func setAsParent(parent):
   mySprite.changeSpriteColorPaletteToLevelPalette()
+  my_parent = parent

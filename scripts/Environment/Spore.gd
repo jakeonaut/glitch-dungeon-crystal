@@ -10,6 +10,7 @@ var didja_get_me = false
 var bubble_speed = 0
 var initially_fly_up = false
 var delta_multiplier = 1.0
+var my_parent = null
 
 onready var mySprite = get_node("Sprite3D")
 onready var interactionArea = get_node("SmallInteractionArea")
@@ -141,5 +142,9 @@ func bubbleStartPop():
     mySprite.max_frames = 6
     mySprite.should_soft_fizzle_out = true
 
-func touchCorporealBody():
+func touchCorporealBody(body):
+  if body != my_parent:
     bubbleStartPop()
+
+func setAsParent(parent):
+  my_parent = parent

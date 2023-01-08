@@ -19,22 +19,22 @@ shader_param/target_palette = ExtResource( 4 )
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
 shader_param/overlay = true
-shader_param/scanlines_opacity = 0.0
-shader_param/scanlines_width = 0.0
+shader_param/scanlines_opacity = 0.4
+shader_param/scanlines_width = 0.25
 shader_param/grille_opacity = 0.0
 shader_param/resolution = Vector2( 640, 512 )
 shader_param/pixelate = true
 shader_param/roll = false
 shader_param/roll_speed = 8.0
 shader_param/roll_size = 0.0
-shader_param/roll_variation = 0.1
+shader_param/roll_variation = 1.8
 shader_param/distort_intensity = 0.0
 shader_param/noise_opacity = 0.4
 shader_param/noise_speed = 5.0
 shader_param/static_noise_intensity = 0.06
 shader_param/aberration = 0.0
 shader_param/brightness = 1.4
-shader_param/discolor = false
+shader_param/discolor = true
 shader_param/warp_amount = 0.0
 shader_param/clip_warp = false
 shader_param/vignette_intensity = 0.4
@@ -59,9 +59,6 @@ visible = false
 material = SubResource( 6 )
 margin_right = 1280.0
 margin_bottom = 1024.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ShaderEffectRect" type="ColorRect" parent="."]
 visible = false

@@ -35,7 +35,7 @@ var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("Sprite3D")
 
 export var true_terminal_vel = 32
-var true_terminal_feather_vel = 12
+var true_terminal_feather_vel = 2 
 var water_terminal_vel = 4
 var water_fall_terminal = 8
 var hit_water_terminal_vel = 1
@@ -53,7 +53,7 @@ var half_on_ground = false
 var should_teeter_turn_around = false
 var jumped_from_true_ground = false
 var was_just_on_ground_timer = 0
-var was_just_on_ground_time_limit = 2
+var was_just_on_ground_time_limit = 6
 var just_landed = false
 var spawn_origin
 var last_grounded_y = 0
@@ -103,9 +103,6 @@ export var walk_speed = 8
   
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
-var feather_fall_timer = 0
-var feather_fall_initial_time_limit = 20
-var feather_fall_time_limit = 60
 var feather_jump_timer = 0
 var feather_jump_time_limit = 10
 var feather_jump_partial_time_limit = 7
@@ -265,7 +262,7 @@ func applyGravity(delta):
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
-    if pressingDown() or (feather_fall_time_limit >= feather_fall_time_limit and not pressingJump()):
+    if not pressingJump():
       g = Vector3(0, -grav/2, 0)
     else:
       g = Vector3(0, -grav/3, 0)
@@ -292,7 +289,7 @@ func applyGravity(delta):
           else:
             if aniPlayer.has_animation("fallStart"): aniPlayer.queue("fallStart")
             if aniPlayer.has_animation("fall"): aniPlayer.queue("fall")
-      if fall_timer > 20 and aniPlayer and \
+      if fall_timer > 40 and aniPlayer and \
          aniPlayer.current_animation != "fallFar" and aniPlayer.has_animation("fallFar"):
         aniPlayer.clear_queue()
         aniPlayer.stop()
@@ -300,32 +297,23 @@ func applyGravity(delta):
         if not transitioning and fallSound: fallSound.play()
       
 
-func applyTerminalVelocity(delta):
-  if feather_fall_timer < feather_fall_initial_time_limit:
-    feather_fall_timer += (delta*22)
-
+func applyTerminalVelocity(_delta):
   if is_touching_water:
     if not was_touching_water:
       terminal_vel = hit_water_terminal_vel
-    elif pressingJump(): # and feather_fall_timer < feather_fall_initial_time_limit:
+    elif pressingJump():
       terminal_vel = water_terminal_vel/2
-    elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
+    elif pressingDown():
       terminal_vel = water_fall_terminal
-      feather_fall_timer = feather_fall_time_limit
     else:
       terminal_vel = water_terminal_vel
   elif glitch_form == global.GlitchForm.FEATHER:
-    if pressingJump(): # and feather_fall_timer < feather_fall_initial_time_limit:
-      terminal_vel = water_terminal_vel/2
-    elif pressingDown() or feather_fall_timer >= feather_fall_time_limit:
+    if pressingJump():
       terminal_vel = true_terminal_feather_vel
-      feather_fall_timer = feather_fall_time_limit
     else:
-      terminal_vel = water_terminal_vel
+      terminal_vel = true_terminal_vel
   else:
     terminal_vel = true_terminal_vel
-    if pressingJump():
-      feather_fall_timer = 0
 
   if vv < -terminal_vel:
     vv = -terminal_vel
@@ -436,7 +424,6 @@ func processLadderInputs(_delta):
   else:
     if is_climbing_ladder:
       is_climbing_ladder = false
-      feather_fall_timer = 0
       if not is_touching_water:
         on_ground = true
         vv = 0
@@ -488,7 +475,6 @@ func processJumpInputs(delta):
       on_ground = false
       should_do_fallthrough_area_collision = false
       has_just_jumped_timer = -has_just_jumped_time_limit
-      feather_fall_timer = 0
 
       if aniPlayer:
         aniPlayer.clear_queue()
@@ -595,7 +581,6 @@ func actuallyApplyJump(play_sound = true):
   on_ground = false
   should_do_fallthrough_area_collision = false
   has_just_jumped_timer = 0 
-  feather_fall_timer = 0
   if glitch_form == global.GlitchForm.FEATHER:
     should_magic_jump = false
 
@@ -849,7 +834,6 @@ func handleCollisionsAndMove(local_lv, delta):
   if on_ground:
     if was_on_ground:
       fall_timer = 0
-    feather_fall_timer = 0
   
   local_lv.x /= delta*DNUM
   local_lv.y /= delta*DNUM
@@ -1140,7 +1124,7 @@ func landed():
   addJumpSmokeCloud()
   if aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
-    if fall_timer > 30 and not glitch_form == global.GlitchForm.FEATHER:
+    if fall_timer > 50 and not glitch_form == global.GlitchForm.FEATHER:
       quiet_the_fall_sound = false
       aniPlayer.stop()
       aniPlayer.clear_queue()
