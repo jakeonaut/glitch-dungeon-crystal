@@ -7,6 +7,7 @@ onready var broomSound = get_node("Sounds/BroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
+onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
@@ -359,12 +360,13 @@ func glitchTickle(play_sound = true):
       noSpellSound.play()
 
 func nullify():
-  if self.glitch_form != global.GlitchForm.NORMAL:
-      transformSound.play()
-      self.applyGlitch(global.GlitchForm.NORMAL, true)
-      self.can_cast_spell_timer = 0
-      if global.memory.has("spellbookPage"):
-          global.memory["spellbookPage"] = []
+  if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
+    nullifySound.play()
+    global.memory["mp"] = 0
+    self.applyGlitch(global.GlitchForm.NORMAL, true)
+    self.can_cast_spell_timer = 0
+    if global.memory.has("spellbookPage"):
+        global.memory["spellbookPage"] = []
 
 # @override
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_die = false):
@@ -464,6 +466,18 @@ func processBroomLogic(_delta):
     summonedBroom = summonedBroomRes.instance()
     level.add_child(summonedBroom)
     summonedBroom.my_broom_owner = self
+    adjustSummonedBroomSpritePosition()
+
+func adjustSummonedBroomSpritePosition():
+  broomSpriteVisible.visible = false
+  if mySprite.flip_h:
+    summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
+    summonedBroom.rotation_degrees = Vector3(0, 180, 0)
+  else:
+    summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
+    summonedBroom.rotation_degrees = Vector3(0, 0, 0)
+  summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
+  summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func shouldAirHaveFriction():
   return summonedBroom == null
@@ -477,15 +491,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.translation.x *= -1
     
   if summonedBroom != null:
-    broomSpriteVisible.visible = false
-    if mySprite.flip_h:
-      summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
-      summonedBroom.rotation_degrees = Vector3(0, 180, 0)
-    else:
-      summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
-      summonedBroom.rotation_degrees = Vector3(0, 0, 0)
-    summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
-    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
+    adjustSummonedBroomSpritePosition()
   elif global.memory.has("broom") and global.memory["broom"]:
     broomSpriteVisible.visible = true
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
@@ -557,6 +563,12 @@ func broomStop():
     jump_press_timer = 0
     if has_sweeped_glitch or should_magic_jump:
       linear_velocity.y = -0.01
+
+# @override
+func playJumpSound():
+  .playJumpSound()
+  grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
+  grannyLandSound.play()
 
 func faceDown():
   pass # mySprite.faceDown()

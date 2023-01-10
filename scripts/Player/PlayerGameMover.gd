@@ -143,7 +143,7 @@ func bodyPushMe(delta, origin):
     self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
-  jumpSound.pitch_scale = rand_range(0.9, 1.1)
+  jumpSound.pitch_scale = rand_range(0.8, 1.2)
   .playJumpSound()
 
 # @override

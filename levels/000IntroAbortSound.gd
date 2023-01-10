@@ -8,4 +8,5 @@ func _ready():
     pass
 
 func activateScript():
-    door.goThroughDoor(false, true)
+    door.hasPlayedDoorSound = true
+    door.goThroughDoor(false, false, true)

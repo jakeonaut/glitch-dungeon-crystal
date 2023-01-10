@@ -535,7 +535,7 @@ script = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies", "weak_enemies"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 3 )
 

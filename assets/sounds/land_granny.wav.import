@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/land_granny.wav-804af84bb2579f3df4e136822636de60.sample"
+
+[deps]
+
+source_file="res://assets/sounds/land_granny.wav"
+dest_files=[ "res://.import/land_granny.wav-804af84bb2579f3df4e136822636de60.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

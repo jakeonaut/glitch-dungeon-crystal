@@ -9,6 +9,8 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 onready var mySprite = get_node("Sprite3D")
 
+onready var plusSpriteContainer = get_node("PlusSpriteContainer")
+
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export var is_static_in_level = true
 
@@ -78,6 +80,11 @@ func passiveActivate(_delta):
       if not global.memory.has(level.getShortLevelName()):
         global.memory[level.getShortLevelName()] = {}
       global.memory[level.getShortLevelName()][self.name] = true
+
+    remove_child(plusSpriteContainer)
+    level.add_child(plusSpriteContainer)
+    plusSpriteContainer.visible = true
+    plusSpriteContainer.global_transform.origin = self.global_transform.origin
 
   # global.pauseGame = true
   # global.pauseMoveInput = true
