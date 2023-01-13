@@ -128,11 +128,10 @@ func tryShowUIElements():
   uiLayer.setDisplayTitle(display_title)
 
   if global.memory.has("spellbookPage"):
-    # TODO(jaketrower): you have to know how stupid this is right?
+    # TODO(jaketrower): less ideal
     uiLayer.get_node("EquipmentRect").visible = true
     uiLayer.get_node("EquipmentStatusRect").visible = true
   else:
-    # TODO(jaketrower): you have to know how stupid this is right?
     uiLayer.get_node("EquipmentRect").visible = false
     uiLayer.get_node("EquipmentStatusRect").visible = false
 

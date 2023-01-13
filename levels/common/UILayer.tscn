@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -6,15 +6,20 @@
 [ext_resource path="res://assets/sprites2D/hearts.png" type="Texture" id=4]
 [ext_resource path="res://dialogFontTheme.tres" type="Theme" id=5]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=6]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=10]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=11]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=12]
+[ext_resource path="res://shaders/Sprite2DPaletteShader.shader" type="Shader" id=13]
 [ext_resource path="res://assets/water_normal_3.png" type="Texture" id=14]
 [ext_resource path="res://TextBoxTheme.tres" type="Theme" id=15]
 [ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/CHUNKY.png" type="Texture" id=17]
+[ext_resource path="res://assets/glitches/dither3.png" type="Texture" id=18]
+[ext_resource path="res://assets/palettes2D/base_palette.png" type="Texture" id=19]
+[ext_resource path="res://assets/palettes2D/green_palette.png" type="Texture" id=20]
 
 [sub_resource type="DynamicFont" id=10]
 size = 20
@@ -49,7 +54,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="ArrayMesh" id=16]
+[sub_resource type="ArrayMesh" id=20]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -87,7 +92,9 @@ shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -100,6 +107,24 @@ shader_param/target_palette = ExtResource( 12 )
 
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 13 )
+shader_param/screen_mode = false
+shader_param/num_colors = 16
+shader_param/offset = 0
+shader_param/precision = 0.3
+shader_param/palette_in = ExtResource( 19 )
+shader_param/palette_out = ExtResource( 20 )
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 13 )
+shader_param/screen_mode = false
+shader_param/num_colors = 16
+shader_param/offset = -1
+shader_param/precision = 0.3
+shader_param/palette_in = ExtResource( 12 )
+shader_param/palette_out = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=12]
 outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
@@ -124,6 +149,7 @@ __meta__ = {
 }
 
 [node name="StatsTitle" type="ColorRect" parent="."]
+visible = false
 margin_right = 640.0
 margin_bottom = 49.0
 grow_horizontal = 2
@@ -150,9 +176,9 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="StatsTitle/ColorRect/ColorRect"]
-margin_left = 77.0
+margin_left = 68.0
 margin_top = 7.0
-margin_right = 471.0
+margin_right = 473.0
 margin_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -160,7 +186,7 @@ theme = ExtResource( 15 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "MAGIC: 10"
-text = "MAGICK: 10 / 10"
+text = "MAGIC: 10"
 scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]
@@ -490,7 +516,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 16 )
+mesh = SubResource( 20 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -514,9 +540,65 @@ centered = false
 offset = Vector2( 6, 6 )
 flip_v = true
 
+[node name="EquipmentRect1" type="ColorRect" parent="."]
+margin_left = 0.5
+margin_top = 1.0
+margin_right = 64.5
+margin_bottom = 66.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="EquipmentRect1"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 62.0
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="EquipmentRect1/ColorRect"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 55.0
+margin_bottom = 54.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect1/ColorRect/ColorRect"]
+material = SubResource( 18 )
+position = Vector2( 26, 25 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 40
+vframes = 25
+frame = 1
+
+[node name="EquipmentSlotSprite2" type="Sprite" parent="EquipmentRect1/ColorRect/ColorRect"]
+material = SubResource( 19 )
+position = Vector2( 26, 25 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 40
+vframes = 25
+
+[node name="EquipmentStatusRect1" type="ColorRect" parent="."]
+margin_left = 3.0
+margin_top = 66.0
+margin_right = 66.0
+margin_bottom = 84.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EquipmentStatusRect1"]
+margin_left = 4.0
+margin_top = -1.0
+margin_right = 180.0
+margin_bottom = 137.0
+theme = ExtResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+text = "L.1"
+
 [node name="EquipmentRect" type="ColorRect" parent="."]
-margin_right = 77.0
-margin_bottom = 77.0
+margin_left = 65.5
+margin_top = 3.0
+margin_right = 142.5
+margin_bottom = 80.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect"]
@@ -566,10 +648,10 @@ vframes = 5
 frame = 6
 
 [node name="EquipmentStatusRect" type="ColorRect" parent="."]
-margin_left = 7.0
-margin_top = 76.0
-margin_right = 70.0
-margin_bottom = 96.0
+margin_left = 68.0
+margin_top = 79.0
+margin_right = 131.0
+margin_bottom = 99.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="EquipmentStatusRect"]

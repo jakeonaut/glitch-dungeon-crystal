@@ -34,6 +34,7 @@ onready var textBox = get_node("TextContainer/TextBox")
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
+var should_turn_on_glitch_screen_effects = false
 var glitch_death_timer = 0
 var glitch_tickle_timer = 0
 var glitch_tickle_time_limit = 10
@@ -223,7 +224,7 @@ func processMPBlinkLogic(delta):
 
       if is_blinked:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().grey_palette)
-        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump()):
+        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
           blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
@@ -307,6 +308,9 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer != 0:
       glitch_death_timer += (delta*22)
       applyGlitchDeathEffects(abs(glitch_death_timer))
+      if glitch_death_timer >= 20 and should_turn_on_glitch_screen_effects:
+        level.glitchScreenEffect.visible = true
+        should_turn_on_glitch_screen_effects = false
       if glitch_death_timer >= 40:
         musicPlayer.changeSongPitch(1.0)
         level.glitchScreenEffect.visible = false
@@ -363,6 +367,7 @@ func nullify():
   if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
     nullifySound.play()
     global.memory["mp"] = 0
+    mySprite.get_material_override().set_shader_param("opacity", 1.0)
     self.applyGlitch(global.GlitchForm.NORMAL, true)
     self.can_cast_spell_timer = 0
     if global.memory.has("spellbookPage"):
@@ -379,6 +384,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_
 
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
     spawnSparkles(delta, true)
+    glitchTickle(true)
     return
 
   if randi() % 3 == 0:
@@ -505,7 +511,6 @@ func processPoisonWaterLogic(delta):
 
   if is_touching_poison_water:
     if glitch_form == global.GlitchForm.INVISIBLE:
-      glitchTickle(0)
       tryDieToEnemy(delta, true, false)
     else:
       tryDieToEnemy(delta, true, false)
@@ -516,9 +521,10 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-
   summonSmokeClouds(1, false, false, true)
   
+  grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
+  grannyLandSound.play()
   var localAniPlayer = get_node("AnimationPlayer")
   if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
     localAniPlayer.clear_queue()

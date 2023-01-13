@@ -6,6 +6,8 @@ onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
 onready var fungusNPC4 = get_node("../../../../FungusNPC4")
 onready var angelStatue = get_node("../../../../AngelStatue")
+onready var glitchSlime2 = get_node("../../../../GlitchSlime2")
+onready var glitchSlime3 = get_node("../../../../GlitchSlime3")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
 onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
@@ -29,7 +31,9 @@ func activateScript():
     if which_one_am_i == 1:
       summon(fungusNPC2)
     elif which_one_am_i == 2:
-      summon(fungusNPC3)
+      # summon(fungusNPC3)
+      summon(glitchSlime2, false)
+      summon(glitchSlime3, false)
     # elif which_one_am_i == 3:
     #   summon(fungusNPC4)
     elif which_one_am_i == 3:
@@ -45,12 +49,13 @@ func activateScript():
       # summonDoor(broom)
       # broom.is_active = true
 
-func summon(npc):
+func summon(npc, set_vars = true):
   yield(get_tree().create_timer(0.4), "timeout")
   summonSmokeClouds(npc, 5, true, true)
   npc.visible = true
-  npc.can_activate = true
-  npc.is_active = true
+  if set_vars:
+    npc.can_activate = true
+    npc.is_active = true
 
 func summonAngelStatue():
   summonSmokeClouds(angelStatue, 5, true, true)

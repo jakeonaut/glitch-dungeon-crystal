@@ -22,6 +22,7 @@ func _ready():
 
 func _process(delta):
     # ._process(delta) implicit
+    if not visible: return
     
     delta = delta * global.time_dilation_multiplier
     dieAniPlayer.playback_speed = global.time_dilation_multiplier
@@ -59,17 +60,17 @@ func glitchSetSpritesAndCollision():
 
 # @override
 func pressingMoveLeft():
-    if am_i_dying: return false
+    if am_i_dying or not visible: return false
     return walk_direction == -1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    if am_i_dying: return false
+    if am_i_dying or not visible: return false
     return walk_direction == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
 func passiveActivate(_delta):
-    if am_i_dying: return
+    if am_i_dying or not visible: return
         
     # var aniPlayer = get_node("HeartSprite/AnimationPlayer")
     # if level.player.glitch_form == global.GlitchForm.INVISIBLE and not aniPlayer.is_playing():
@@ -79,12 +80,13 @@ func passiveActivate(_delta):
     #     aniPlayer.queue("noHeart")
 
 func processDeath():
+    if not visible: return
     if not myOtherSprite.visible:
         queue_free()
         
 # @override
 func ouchies(broom_origin):
-    if am_i_dying: return
+    if am_i_dying or not visible: return
         
     am_i_dying = true
     

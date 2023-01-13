@@ -23,7 +23,9 @@ uniform bool enable_no_transparency = false;
 uniform bool enable_black_unknown = false;
 uniform int palettesize = 16;
 uniform int resolution_scale = 1;
+uniform int offset = 0;
 uniform bool enable_glitch = false;
+uniform bool enable_color_glitch = true;
 uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
@@ -69,14 +71,14 @@ uniform float time_influence : hint_range(0, 50) = 1;
 uniform float y_div : hint_range(0, 10, .1) = 2.87;
 
 void vertex() {
-	if (enable_glitch) {
-		VERTEX.x = VERTEX.x;
-		VERTEX.y = VERTEX.y;
-	} else {
-	    VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
-	    VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
-	    VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
-	}
+    if (enable_glitch) {
+        VERTEX.x = VERTEX.x;
+        VERTEX.y = VERTEX.y;
+    } else {
+        VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+        VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
+        VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+    }
 }
 
 const float canvas_width = 2560.0;
@@ -106,7 +108,7 @@ void fragment() {
       index = 10;
     }
      
-    float fdelta = float(index);
+    float fdelta = float(index+offset);
     if (enable_palette_cycle) {
       fdelta = fdelta - (TIME * palette_cycle_speed);
     }
@@ -153,8 +155,10 @@ void fragment() {
     
         vec4 alp = texture(texture_albedo, fixed_uv);
 
-        closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
-        closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
+        if (enable_color_glitch) {
+            closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
+            closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
+        }
         ALBEDO.rgb = closest_color.rgb;
         if (!enable_no_transparency) {
             ALPHA = alp.a * opacity;

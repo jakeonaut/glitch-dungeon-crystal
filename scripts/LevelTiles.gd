@@ -206,6 +206,9 @@ func _process(delta):
           is_unrandomizing = false
           getPlayer().applyGlitch(global.GlitchForm.FEATHER)
           level.get_node("FeatherSpell").first_ever_glitch = false
+          level.uiLayer.get_node("EquipmentRect1").visible = true
+          level.uiLayer.get_node("EquipmentStatusRect1").visible = true
+          # level.uiLayer.statsTitleRect.visible = true
           musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):
             unrandomizeTile(unrandomize_cell_indices[i])
@@ -227,6 +230,8 @@ func _process(delta):
           is_rerandomizing = false
           global.pauseGame = false
           getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", false)
+          getPlayer().mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+          getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
           break
     return
 

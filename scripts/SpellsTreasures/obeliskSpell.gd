@@ -47,6 +47,8 @@ func _ready():
       first_ever_glitch = false
     else:
       level.uiLayer.statsTitleRect.visible = false
+      level.uiLayer.get_node("EquipmentRect1").visible = false
+      level.uiLayer.get_node("EquipmentStatusRect1").visible = false
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -117,6 +119,7 @@ func passiveActivate(_delta):
         level.player.restoreGlitchAndMP()
       num_sparkles_spawned = 0
       global.memory["mp"] = global.memory["max_mp"]
+      level.player.glitchTickle()
     return
 
   if global.memory.has("spellbookPage"):
@@ -127,6 +130,8 @@ func passiveActivate(_delta):
   if first_ever_glitch:
     global.pauseGame = true
     getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", true)
+    getPlayer().mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
+    getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", true)
     getLevelTiles().unrandomizeAllTiles()
     musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
     var NPC = level.get_node("NPC4")
@@ -135,6 +140,9 @@ func passiveActivate(_delta):
     NPC.textBoxContainer.textBox.has_been_shown = false
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
+    level.player.glitchTickle()
+    level.player.glitch_death_timer = 1
+    level.player.should_turn_on_glitch_screen_effects = true
     global.memory["mp"] = global.memory["max_mp"]
 
   num_sparkles_spawned = 0

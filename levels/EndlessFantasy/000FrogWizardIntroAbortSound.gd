@@ -15,9 +15,9 @@ func activateScript():
         NPC.textBoxContainer.bbText = ""
         NPC.textBoxContainer.setVars()
         NPC.pressing_move_left = true
-        yield(get_tree().create_timer(0.5), "timeout")
+        yield(get_tree().create_timer(0.30), "timeout")
         floorSpell.passiveActivate(1.0)
-        yield(get_tree().create_timer(3.0), "timeout")
+        yield(get_tree().create_timer(4.0), "timeout")
         NPC.pressing_move_left = false
         NPC.aniPlayer.stop()
         NPC.aniPlayer.clear_queue()

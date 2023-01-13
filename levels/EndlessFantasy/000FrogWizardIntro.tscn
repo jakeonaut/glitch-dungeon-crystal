@@ -81,7 +81,9 @@ shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 2.0
@@ -296,15 +298,16 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 23 )
 
-[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 20 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
 shape = SubResource( 24 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 23, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 23, 0 )
 grav = 0
+walk_speed = 6
 bbText = "•oh, helloe! do you come
 seeking MAGICK power?
 
@@ -317,16 +320,16 @@ is_really_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 19 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="6"]
 pitch_scale = 0.5
 
-[node name="DialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
 pitch_scale = 0.5
 
-[node name="NextDialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.5
 
-[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="9"]
 pitch_scale = 0.4
 script = ExtResource( 23 )
 
@@ -356,16 +359,16 @@ is_really_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 19 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="6"]
 pitch_scale = 0.5
 
-[node name="DialogSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="7"]
 pitch_scale = 0.5
 
-[node name="NextDialogSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.5
 
-[node name="AbortSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC5/NPC TextBox/TextBox" index="9"]
 pitch_scale = 0.4
 script = ExtResource( 23 )
 

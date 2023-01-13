@@ -108,7 +108,7 @@ func conductFromScenePath(path):
     elif path.find("IntroDungeon") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0:
-        tryToPlay(dungeonThemePlayer)
+        tryToPlay(dungeonThemePlayer2)
     elif path.find("Debug") > 0:
         tryToPlay(debugThemePlayer)
     elif path.find("Casino") > 0:
