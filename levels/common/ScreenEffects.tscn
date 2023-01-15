@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
 [ext_resource path="res://shaders/CRTEffect2.shader" type="Shader" id=3]
-[ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=5]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
 shader_param/palettesize = 16
-shader_param/resolution_scale = 1
+shader_param/resolution_scale = 0.25
 shader_param/canvas_width = 1280.0
 shader_param/canvas_height = 1024.0
 shader_param/r_mult = 0.0
@@ -19,26 +20,81 @@ shader_param/target_palette = ExtResource( 4 )
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
 shader_param/overlay = true
-shader_param/scanlines_opacity = 0.4
-shader_param/scanlines_width = 0.25
-shader_param/grille_opacity = 0.0
+shader_param/scanlines_opacity = 0.5
+shader_param/scanlines_width = 0.073
+shader_param/grille_opacity = 0.612
 shader_param/resolution = Vector2( 640, 512 )
-shader_param/pixelate = true
+shader_param/pixelate = false
 shader_param/roll = false
 shader_param/roll_speed = 8.0
 shader_param/roll_size = 0.0
 shader_param/roll_variation = 1.8
-shader_param/distort_intensity = 0.0
-shader_param/noise_opacity = 0.4
-shader_param/noise_speed = 5.0
-shader_param/static_noise_intensity = 0.06
+shader_param/distort_intensity = 0.05
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 0.0
+shader_param/static_noise_intensity = 0.0
 shader_param/aberration = 0.0
-shader_param/brightness = 1.4
-shader_param/discolor = true
+shader_param/brightness = 1.0
+shader_param/discolor = false
 shader_param/warp_amount = 0.0
 shader_param/clip_warp = false
 shader_param/vignette_intensity = 0.4
 shader_param/vignette_opacity = 0.0
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform int levels = 3;
+uniform float spread = 0.01;
+
+vec3 chromatic_slice(float t){
+	vec3 res = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+	return max(res, 0.0);
+}
+
+void fragment(){
+	vec3 sum;
+	COLOR.rgb = vec3(0);
+	vec2 offset = (UV - vec2(0.5))*vec2(1,-1);
+	for(int i = 0; i < levels; i++){
+		float t = 2.0*float(i)/float(levels-1); // range 0.0->2.0
+		vec3 slice = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+		slice = max(slice, 0.0);
+		sum += slice;
+		vec2 slice_offset = (t-1.0)*spread*offset;
+		COLOR.rgb += slice * texture(SCREEN_TEXTURE, SCREEN_UV + slice_offset).rgb;
+	}
+	COLOR.rgb /= sum;
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/levels = 3
+shader_param/spread = 0.01
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform bool flip ;
+uniform sampler2D gradient : hint_black; // It can be whatever palette you want
+
+
+void fragment(){ 
+	vec4 col = texture(SCREEN_TEXTURE,SCREEN_UV);
+	
+	float lum = dot(col.rgb,vec3(0.2126,0.7152,0.0722)); // luminance
+	
+	
+	col = texture(gradient,vec2(abs(float(flip) - lum),0));
+	
+	
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/flip = null
+shader_param/gradient = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
@@ -48,7 +104,7 @@ shader_param/shake_color_rate = 0.001
 
 [node name="ScreenEffects" type="CanvasLayer"]
 
-[node name="CrtEffectRect" type="ColorRect" parent="."]
+[node name="DitherPaletteEffectRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 3 )
 margin_right = 1280.0
@@ -60,11 +116,17 @@ material = SubResource( 6 )
 margin_right = 1280.0
 margin_bottom = 1024.0
 
-[node name="ShaderEffectRect" type="ColorRect" parent="."]
+[node name="ChromaticAberrationEffectRect" type="ColorRect" parent="."]
 visible = false
-material = SubResource( 3 )
-margin_right = 640.0
-margin_bottom = 512.0
+material = SubResource( 8 )
+margin_right = 1280.0
+margin_bottom = 1024.0
+
+[node name="PaletteSwapEffectRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 10 )
+margin_right = 1280.0
+margin_bottom = 1024.0
 
 [node name="GlitchEffectRect" type="ColorRect" parent="."]
 visible = false

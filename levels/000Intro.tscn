@@ -101,9 +101,6 @@ how_much_mp = 0
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
-[node name="StatsTitle" parent="Viewport/level/UILayer" index="1"]
-visible = false
-
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 25 )
 

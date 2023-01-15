@@ -28,6 +28,9 @@ func getLevelTiles():
     levelTiles = level.levelTiles
   return levelTiles
 
+var is_touching_player = false
+var is_touching_player_timer = 0
+var is_touching_player_time_limit = 5
 var player = null
 func getPlayer():
   if player == null:
@@ -37,14 +40,16 @@ func getPlayer():
 func _ready():
   set_process(true)
   original_position = mySprite.global_transform.origin
-  previous_point = original_position
-  interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
+  # previous_point = original_position
+  # interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   if first_ever_glitch:
     if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/000Intro.tscn":
       first_ever_glitch = false
+      level.gameCamera.initial_target = level.player.get_node("CameraTarget")
+      level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)
     else:
       level.uiLayer.statsTitleRect.visible = false
       level.uiLayer.get_node("EquipmentRect1").visible = false
@@ -55,18 +60,24 @@ func _process(delta):
   
   if is_active and not shouldIBeActive():
     is_active = false
-    mySprite.visible = false
+    # mySprite.visible = false
     t = 0
 
-  if mySprite.visible and not is_active:
-    mySprite.global_transform.origin = previous_point.linear_interpolate(interpolation_point, t)
-    t += (delta*2)
-    if t >= 1:
-      mySprite.visible = false
-      t = 0
+  # if mySprite.visible and not is_active:
+  #   mySprite.global_transform.origin = previous_point.linear_interpolate(interpolation_point, t)
+  #   t += (delta*2)
+  #   if t >= 1:
+  #     mySprite.visible = false
+  #     t = 0
 
-  if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
-    mySprite.visible = true
+  # if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
+  #   mySprite.visible = true
+  if is_touching_player:
+    is_touching_player_timer += (delta*22)
+    if is_touching_player_timer >= is_touching_player_time_limit:
+      is_touching_player_timer = 0
+      is_touching_player = false
+  else:
     mySprite.global_transform.origin = original_position
     is_active = true
 
@@ -110,6 +121,11 @@ func isActive():
   return self.visible
 
 func passiveActivate(_delta):
+  is_touching_player = true
+  is_touching_player_timer = 0
+  mySprite.global_transform.origin.x = level.player.global_transform.origin.x
+  mySprite.global_transform.origin.y = level.player.global_transform.origin.y + 1
+  level.player.glitchTickle(global.memory["mp"] < global.memory["max_mp"])
   if not is_active:
     if global.memory["mp"] < global.memory["max_mp"]:
       if global.memory["mp"] < global.memory["max_mp"]-1:
@@ -119,7 +135,6 @@ func passiveActivate(_delta):
         level.player.restoreGlitchAndMP()
       num_sparkles_spawned = 0
       global.memory["mp"] = global.memory["max_mp"]
-      level.player.glitchTickle()
     return
 
   if global.memory.has("spellbookPage"):
@@ -141,8 +156,9 @@ func passiveActivate(_delta):
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
     level.player.glitchTickle()
-    level.player.glitch_death_timer = 1
-    level.player.should_turn_on_glitch_screen_effects = true
+    # if level.player.glitch_death_timer == 0:
+    #   level.player.glitch_death_timer = 5
+    # level.player.should_turn_on_glitch_screen_effects = true
     global.memory["mp"] = global.memory["max_mp"]
 
   num_sparkles_spawned = 0

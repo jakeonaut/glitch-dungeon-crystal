@@ -238,6 +238,7 @@ text = "the dungeon"
 scroll_active = false
 
 [node name="Inventory" type="Control" parent="."]
+visible = false
 margin_right = 640.0
 margin_bottom = 510.0
 
@@ -472,6 +473,7 @@ __meta__ = {
 }
 
 [node name="MiniCrystalCubeRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 503.0
 margin_top = 449.0
 margin_right = 632.0

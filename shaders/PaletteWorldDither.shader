@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D target_palette : hint_albedo;
 uniform int palettesize = 16;
-uniform int resolution_scale = 4;
+uniform float resolution_scale = 4;
 uniform float canvas_width = 1280.0;
 uniform float canvas_height = 1024.0;
 uniform float r_mult = 0.0;

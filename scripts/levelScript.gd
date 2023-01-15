@@ -5,7 +5,7 @@ onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
-onready var crtScreenEffect = get_node("../../ScreenEffects/CrtEffectRect")
+onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 var current_sprite_palette = global.grey_palette
 
@@ -82,7 +82,7 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   if not show_crt_effect:
-    crtScreenEffect.visible = false
+    ditherPaletteEffectRect.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
@@ -108,8 +108,8 @@ func _process(delta):
 
   
   var amt = 6.0
-  crtScreenEffect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
-  crtScreenEffect.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
+  ditherPaletteEffectRect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
+  ditherPaletteEffectRect.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
   # if Input.is_action_just_pressed("place_tile_button"):
   #     var player_position = player.global_transform.origin + (player.facing * 2)
   #     var grid_cell = levelTiles.world_to_map(player_position)
