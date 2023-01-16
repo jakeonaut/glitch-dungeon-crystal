@@ -102,6 +102,11 @@ void fragment() {
     // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
     vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
-    COLOR.rgb = closest_color;
+    COLOR.rgb = vec3(
+        Convert_sRGB_FromLinear(closest_color.r),
+        Convert_sRGB_FromLinear(closest_color.g),
+        Convert_sRGB_FromLinear(closest_color.b)
+    );
+    COLOR.rgb = incolor;
     // COLOR.rgb = vec3(float(r) / 255.0, float(g) / 255.0, float(b) / 255.0);
 }

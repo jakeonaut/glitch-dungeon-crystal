@@ -1,6 +1,6 @@
 extends Node
 
-onready var uiLayer = get_node("UILayer")
+onready var uiLayer = get_node("../../UILayer") if has_node("../../UILayer") else get_node("UILayer")
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null

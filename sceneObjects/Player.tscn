@@ -1372,14 +1372,14 @@ bbText = "hi!!!! hi hi hi !!!!"
 [node name="TextBox" parent="TextContainer" index="0"]
 can_camera_zoom = false
 
-[node name="MrMoTex" type="Sprite3D" parent="."]
+[node name="MPNumSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9 )
 material_override = SubResource( 52 )
 pixel_size = 0.125
 texture = ExtResource( 25 )
 hframes = 32
 vframes = 32
-frame = 883
+frame = 880
 script = ExtResource( 10 )
 max_frames = 1
 

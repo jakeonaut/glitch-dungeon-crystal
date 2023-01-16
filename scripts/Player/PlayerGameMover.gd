@@ -24,6 +24,10 @@ var camera_target_origin_x_target = 0
 var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
 var sparkle_timer = 7
 var sparkle_time_limit = 8
+var blink_timer = 0
+var blink_time_limit = 20
+var is_blinked = false
+var unblink_time_limit = 5
 
 func _ready():
   set_physics_process(true)
@@ -112,6 +116,9 @@ func spawnSparkles(delta, above_the_head = false):
       if global.memory["mp"] == 0:
         self.normalGlitch()
         nullifySound.play()
+        blink_timer = 0
+        blink_time_limit = 20
+        is_blinked = false
 
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL

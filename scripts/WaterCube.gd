@@ -51,7 +51,7 @@ func _ready():
 func _process(delta):
   if level and waterFilter.get_parent() == self:
     self.remove_child(waterFilter)
-    level.get_node("UILayer/Filters").add_child(waterFilter)
+    level.uiLayer.get_node("Filters").add_child(waterFilter)
 
   setFilterPosition()
 

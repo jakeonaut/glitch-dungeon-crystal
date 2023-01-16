@@ -11,6 +11,7 @@ onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
+onready var mpNumSprite = get_node("MPNumSprite")
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
@@ -44,10 +45,6 @@ var poison_timer = 0
 var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
-
-var is_blinked = false
-var blink_timer = 0
-var unblink_time_limit = 5
 
 func _ready():
   set_process_input(true)
@@ -88,7 +85,7 @@ func applySpellbookGlitch():
     var glitch_type = global.memory["spellbookPage"].pop_front()
     applyGlitch(glitch_type)
     applyObeliskGlitch(glitch_type)
-    var equipSlotSprite = level.get_node("UILayer/EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
+    var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
     equipSlotSprite.frame = 6
   else:
     noSpellSound.play()
@@ -199,20 +196,42 @@ func _process(delta):
 
 func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
+    if global.memory["mp"] == 0:
+      mpNumSprite.frame = 880
+      blink_timer += (delta*22)
+      if (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
+        blink_timer = 0
+        if not is_blinked and blink_time_limit == 3:
+          nullifySound.stop()
+        is_blinked = not is_blinked
+        mpNumSprite.visible = not is_blinked
+        blink_time_limit = 3
+    if global.memory["mp"] > 1 or not nullifySound.is_playing():
+      mpNumSprite.visible = false
     return
 
   var overwrite_blink = (global.memory["mp"] == global.memory["max_mp"]) or global.memory["mp"] > 5
 
+  if (global.memory["mp"] <= 5 and global.memory["max_mp"] > 6) or (global.memory["mp"] <= 3 and global.memory["max_mp"] >= 5) or (global.memory["mp"] <= 2):
+    mpNumSprite.visible = true
+  else:
+    mpNumSprite.visible = false
+
   if global.memory["mp"] <= 5 or overwrite_blink:
-    var blink_time_limit = 20
+    mpNumSprite.frame = 885
+    blink_time_limit = 20
     if global.memory["mp"] == 4:
       blink_time_limit = 15
-    if global.memory["mp"] == 3 and global.memory["mp"] <= 5:
+      mpNumSprite.frame = 884
+    if global.memory["mp"] == 3:
       blink_time_limit = 10
+      mpNumSprite.frame = 883
     if global.memory["mp"] == 2:
       blink_time_limit = 5
+      mpNumSprite.frame = 882
     if global.memory["mp"] == 1:
       blink_time_limit = 2
+      mpNumSprite.frame = 881
     blink_timer += (delta*22)
     if overwrite_blink or (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
       blink_timer = 0
