@@ -11,5 +11,5 @@ dest_files=[ "res://.import/grandma.mp3-04d96624310b98da26a90b751072ff86.mp3str"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

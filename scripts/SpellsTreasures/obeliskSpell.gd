@@ -46,14 +46,14 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   if first_ever_glitch:
-    if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/000Intro.tscn":
+    if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/EndlessFantasy/000Intro/001CozyHome.tscn":
       first_ever_glitch = false
       level.gameCamera.initial_target = level.player.get_node("CameraTarget")
       level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)
     else:
       level.uiLayer.statsTitleRect.visible = false
-      level.uiLayer.get_node("EquipmentRect1").visible = false
-      level.uiLayer.get_node("EquipmentStatusRect1").visible = false
+      level.uiLayer.get_node("GlitchRect").visible = false
+      level.uiLayer.get_node("GlitchStatusRect").visible = false
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -154,7 +154,7 @@ func passiveActivate(_delta):
     NPC.textBoxContainer.setVars()
     NPC.textBoxContainer.textBox.has_been_shown = false
   else:
-    getPlayer().applyObeliskGlitch(my_glitch_form, false, true)
+    getPlayer().applyObeliskGlitch(my_glitch_form, false)
     level.player.glitchTickle()
     # if level.player.glitch_death_timer == 0:
     #   level.player.glitch_death_timer = 5

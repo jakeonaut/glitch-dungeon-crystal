@@ -206,8 +206,12 @@ func _process(delta):
           is_unrandomizing = false
           getPlayer().applyGlitch(global.GlitchForm.FEATHER)
           level.get_node("FeatherSpell").first_ever_glitch = false
-          level.uiLayer.get_node("EquipmentRect1").visible = true
-          level.uiLayer.get_node("EquipmentStatusRect1").visible = true
+          level.uiLayer.get_node("GlitchRect").visible = true
+          level.uiLayer.get_node("GlitchRect").rect_scale = Vector2(1.5, 1.5)
+          level.uiLayer.get_node("GlitchRect").rect_position = Vector2(300, 250)
+          level.uiLayer.get_node("GlitchStatusRect").visible = true
+          level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
+          level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(300, 250)
           # level.uiLayer.statsTitleRect.visible = true
           musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):

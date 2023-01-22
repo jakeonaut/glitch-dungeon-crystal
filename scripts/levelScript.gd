@@ -56,7 +56,7 @@ func _ready_impl():
   if global.memory.has("current_glitch"):
     if global.memory["mp"] > 0:
       player.applyGlitch(global.memory["current_glitch"], true)
-  else:
+  elif starting_glitch_type != 0:
     player.applyGlitch(starting_glitch_type, true)
 
   if global.memory.has("player_costume"):
@@ -205,6 +205,7 @@ func setTorchSpriteFrame(v_frame):
   #   walltorch.get_node("Sprite3D").updateBaseFrame(0, v_frame)
 
 func normalGlitch():
+  uiLayer.normalGlitch()
   levelTiles.normalGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.normalGlitch()
@@ -215,6 +216,7 @@ func normalGlitch():
   
 
 func floorGlitch():
+  uiLayer.floorGlitch()
   levelTiles.floorGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.floorGlitch()
@@ -224,6 +226,7 @@ func floorGlitch():
   setDoorsSpriteFrame(9)
 
 func featherGlitch():
+  uiLayer.featherGlitch()
   levelTiles.featherGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.featherGlitch()
@@ -233,6 +236,7 @@ func featherGlitch():
   setDoorsSpriteFrame(14)
 
 func ladderGlitch():
+  uiLayer.ladderGlitch()
   levelTiles.ladderGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.ladderGlitch()
@@ -242,6 +246,7 @@ func ladderGlitch():
   setDoorsSpriteFrame(19)
 
 func invisibleGlitch():
+  uiLayer.invisibleGlitch()
   levelTiles.invisibleGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.invisibleGlitch()
@@ -251,6 +256,7 @@ func invisibleGlitch():
   setDoorsSpriteFrame(24)
 
 func walkThroughWallsGlitch():
+  uiLayer.walkThroughWallsGlitch()
   levelTiles.walkThroughWallsGlitch()
   if fakeLevelTiles:
     fakeLevelTiles.walkThroughWallsGlitch()

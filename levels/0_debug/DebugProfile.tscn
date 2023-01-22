@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
-[ext_resource path="res://sceneObjects/WaterCubes/OceanWaterCube.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sceneObjects/Enemies/Boss/COBOL.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=6]
@@ -111,7 +111,6 @@ audio_listener_enable_3d = true
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 21 )
 tileset_type = 1
-has_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 15 )]
 
@@ -192,7 +191,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 1, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9245, 7.96564, 0 )
@@ -393,8 +392,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 26, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 21, 0 )
 behavior_summon_glitch = false
 
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 3, -4 )
+[node name="COBOL" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

@@ -187,7 +187,7 @@ func justStopPassiveActivate():
   getPlayer().hideInteractPrompt()
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
-  if not global.isRespawning and not hasPlayedDoorSound:
+  if not global.isRespawning and not hasPlayedDoorSound and not is_passive:
     global.doorSound.play()
     hasPlayedDoorSound = true
 

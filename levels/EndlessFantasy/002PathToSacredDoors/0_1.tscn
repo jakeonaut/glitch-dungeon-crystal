@@ -1123,7 +1123,7 @@ shape = SubResource( 59 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -14, 0 )
-path = "res://levels/EndlessFantasy/004AngelStatueRestZone.tscn"
+path = "res://levels/EndlessFantasy/Boss/000CobolBossFightPuzzles.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
@@ -1227,6 +1227,9 @@ texture = SubResource( 14 )
 flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
+
+[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
+visible = true
 
 [editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player2/NPC"]

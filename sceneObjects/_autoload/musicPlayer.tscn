@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/music/fishing.mp3" type="AudioStream" id=15]
 [ext_resource path="res://assets/DELETEME/OOT_Sandstorm.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/music/trunk.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/music/grandma.mp3" type="AudioStream" id=18]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -38,6 +39,11 @@ volume_db = -15.0
 stream = ExtResource( 4 )
 volume_db = -20.0
 pitch_scale = 1.1
+
+[node name="GrannyPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -15.0
+pitch_scale = 0.9
 
 [node name="DungeonThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

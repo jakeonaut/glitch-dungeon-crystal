@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -16,6 +16,27 @@ shader_param/r_mult = 0.0
 shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+uniform float r_mult = 0.0;
+uniform float g_mult = 1.0;
+uniform float b_mult = -1.0;
+
+void fragment() {
+    float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
+    float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
+    float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
+    vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
+    COLOR.rgb = incolor;
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
@@ -107,6 +128,12 @@ shader_param/shake_color_rate = 0.001
 [node name="DitherPaletteEffectRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 3 )
+margin_right = 1280.0
+margin_bottom = 1024.0
+
+[node name="BasicCrtEffectRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 12 )
 margin_right = 1280.0
 margin_bottom = 1024.0
 

@@ -8,6 +8,7 @@ onready var windPlayer = get_node("WindPlayer")
 onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
+onready var grannyPlayer = get_node("GrannyPlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
 onready var dungeonThemePlayer2 = get_node("DungeonThemePlayer2")
 onready var debugThemePlayer = get_node("DebugThemePlayer")
@@ -75,6 +76,7 @@ func _on_TweenOut_tween_completed(object, _key):
 func stopAll():
     fade_out(windPlayer)
     fade_out(restZonePlayer)
+    fade_out(grannyPlayer)
     fade_out(wakeupPlayer)
     fade_out(titleThemePlayer)
     fade_out(dungeonThemePlayer)
@@ -95,9 +97,9 @@ func stopAll():
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    # if path.find("000FrogWizardIntro"):
-    #     tryToPlay(windPlayer)
-    if path.find("RestZone") > 0:
+    if path.find("CozyHome") > 0 or path.find("000FrogWizardIntro") > 0:
+        tryToPlay(grannyPlayer)
+    elif path.find("RestZone") > 0:
         tryToPlay(restZonePlayer)
     elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)

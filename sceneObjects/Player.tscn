@@ -1374,6 +1374,7 @@ can_camera_zoom = false
 
 [node name="MPNumSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9 )
+visible = false
 material_override = SubResource( 52 )
 pixel_size = 0.125
 texture = ExtResource( 25 )

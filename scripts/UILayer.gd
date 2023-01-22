@@ -67,7 +67,7 @@ func recreateHeartSprites():
 
 func _process(delta):
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
-  get_node("EquipmentStatusRect1/RichTextLabel").text = str(global.memory["mp"]) + "/ " + str(global.memory["max_mp"])
+  get_node("GlitchStatusRect/RichTextLabel").text = str(global.memory["mp"]) + "/ " + str(global.memory["max_mp"])
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
@@ -154,11 +154,11 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
+  tryLerpFromCenter(get_node("GlitchRect"), delta, Vector2(0, 1))
+  tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
   if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-    var equipRect = level.uiLayer.get_node("EquipmentRect")
-    var equipStatusRect = level.uiLayer.get_node("EquipmentStatusRect")
-    tryLerpFromCenter(equipRect, delta, Vector2(0, 0))
-    tryLerpFromCenter(equipStatusRect, delta, Vector2(7, 76))
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
+    tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
     if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
       get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
 
@@ -195,3 +195,28 @@ func displaySavingText():
 func setDisplayTitle(title):
   display_title = title
   levelTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
+
+onready var glitchSprite = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite")
+onready var glitchSprite2 = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite2")
+func normalGlitch():
+  glitchSprite.visible = false
+  glitchSprite2.visible = false
+
+func glitch(palette):
+  glitchSprite.visible = true
+  glitchSprite2.visible = true
+
+func floorGlitch():
+  glitch(global.red_palette)
+
+func featherGlitch():
+  glitch(global.green_palette)
+
+func ladderGlitch():
+  glitch(global.yellow_palette)
+
+func invisibleGlitch():
+  glitch(global.black_palette)
+
+func walkThroughWallsGlitch():
+  glitch(global.white_palette)

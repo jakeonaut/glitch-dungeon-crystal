@@ -114,6 +114,7 @@ func spawnSparkles(delta, above_the_head = false):
       spawnOneSparkle(-.5, above_the_head)
       sparkle_timer = 0
       if global.memory["mp"] == 0:
+        mySprite.get_material_override().set_shader_param("opacity", 1.0)
         self.normalGlitch()
         nullifySound.play()
         blink_timer = 0

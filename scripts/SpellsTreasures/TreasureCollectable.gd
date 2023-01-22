@@ -7,6 +7,7 @@ var being_collected = false # actually is_opened
 var really_being_collected = false
 var gotcha = false
 var okay_im_done = false
+export var stop_all_music = true
 
 func _ready():
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
@@ -91,7 +92,8 @@ func passiveActivate(_delta):
     return
     
   if not being_collected:
-    musicPlayer.stopAll()
+    if stop_all_music:
+      musicPlayer.stopAll()
     #visible = false
     secretAniPlayer.clear_queue()
     secretAniPlayer.queue("openUp")

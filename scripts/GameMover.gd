@@ -1100,12 +1100,12 @@ func handleVerticalCollisions(local_lv):
   var TILE_HEIGHT = getLevelTiles().cell_size.y
 
   # check for bottom collisions
-  if should_collide_floor and (truly_on_ground or local_lv.y <= 0):
+  if should_collide_floor and (on_ground or local_lv.y <= 0):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
 
   # check for top collisions
-  if should_collide_ceil and not truly_on_ground and local_lv.y > 0:
+  if should_collide_ceil and not on_ground and local_lv.y > 0:
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
   

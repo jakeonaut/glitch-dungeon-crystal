@@ -7,9 +7,6 @@ var multiplier = 1
 func _ready():
     var material = get_material_override().duplicate()
     set_material_override(material)
-    if randi() % 2 == 0:
-        updateBaseFrame(27, 8)
-        max_frames = 3
     multiplier = rand_range(0, 5)
     sparkle_fade_time_limit = rand_range(1, 2)
 

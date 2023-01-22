@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PNG-FROGBLOCK-by-Polyducks.png-c3297a21cd75720b59e16b35ceb57193.stex"
+path="res://.import/glitches.png-2fd70d4f1554f84f726aa9b6728caf19.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PNG-FROGBLOCK-by-Polyducks.png"
-dest_files=[ "res://.import/PNG-FROGBLOCK-by-Polyducks.png-c3297a21cd75720b59e16b35ceb57193.stex" ]
+source_file="res://assets/sprites2D/glitches.png"
+dest_files=[ "res://.import/glitches.png-2fd70d4f1554f84f726aa9b6728caf19.stex" ]
 
 [params]
 

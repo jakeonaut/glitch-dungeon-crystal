@@ -57,7 +57,7 @@ func _ready():
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
-func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
+func applyObeliskGlitch(glitch, only_visual = false):
   if global.memory.has("spellbookPage") and not level.spellbook_forbidden:
     if not only_visual:
       var spellbook_size = global.memory["spellbookPage"].size()
@@ -65,7 +65,7 @@ func applyObeliskGlitch(glitch, only_visual = false, can_show_tutorial = false):
       if global.memory["spellbookPage"].size() >= 2 and not is_it_already_my_first_spellbook_page:
         print(global.memory["spellbookPage"])
         global.memory["spellbookPage"].pop_front()
-      elif global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"] and can_show_tutorial:
+      elif global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
         level.uiLayer.get_node("EquipmentStatusRect").visible = true
         level.uiLayer.get_node("EquipmentStatusRect").rect_scale = Vector2(1.5, 1.5)
         level.uiLayer.get_node("EquipmentStatusRect").rect_position = Vector2(300, 250)
