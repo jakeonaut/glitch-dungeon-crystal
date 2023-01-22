@@ -20,6 +20,7 @@ export var spellbook_forbidden = false
 export var has_spellbook_page = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 export var how_much_mp = 5
+export var how_much_hp = 1
 var has_ever_set_camera_position = false
 
 export var display_title = "???"
@@ -52,6 +53,10 @@ func _ready_impl():
   if global.memory["max_mp"] == 0 and global.memory["max_mp"] < how_much_mp:
     global.memory["max_mp"] = how_much_mp
     global.memory["mp"] = global.memory["max_mp"]
+
+  if global.memory["max_hp"] == 1 and global.memory["max_hp"] < how_much_hp:
+    global.memory["max_hp"] = how_much_hp
+    global.memory["hp"] = global.memory["max_hp"]
     
   if global.memory.has("current_glitch"):
     if global.memory["mp"] > 0:
@@ -149,6 +154,8 @@ func getShortLevelName():
   return longLevelName.substr(13, longLevelName.length() - 18)
 
 func tryToRespawn():
+  global.memory["hp"] = global.memory["max_hp"]
+  self.gameCamera.initial_target = player.get_node("CameraTarget")
   if global.activeInteractor != null:
     global.activeInteractor.stopInteract()
   global.activeInteractor = null

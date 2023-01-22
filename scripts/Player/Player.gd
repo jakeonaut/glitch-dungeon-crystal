@@ -26,6 +26,9 @@ var is_in_broom_cooldown = false
 onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
 
+onready var enchantedBagSpriteAnimated = get_node("Sprite3DBagAnimated")
+onready var enchantedBagSpriteVisible = get_node("Sprite3DBagVisible")
+
 onready var interactPrompt = get_node("InteractPrompt")
 onready var importantInteractPrompt = get_node("ImportantInteractPrompt")
 
@@ -159,9 +162,11 @@ func _process(delta):
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
     return
   processBroomRenderLogic(delta)
+  processBagRenderLogic(delta)
   if global.pauseGame or global.pauseMoveInput:
     return
   processBroomLogic(delta)
+  processBagLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -264,7 +269,7 @@ func tryDieToOffscreenCamera(delta):
     global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
       #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-      global.memory["hearts"] = 0
+      global.memory["hp"] = 0
       tryDieToEnemy(delta, true, true, true)
   
 func doTimeDilation(delta):
@@ -393,12 +398,13 @@ func nullify():
         global.memory["spellbookPage"] = []
 
 # @override
-func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_die = false):
+# aka func ouchies():
+func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
   if transitioning:
     return
   if isOnSavePoint():
     return
-  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT:
+  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY:
     return
 
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
@@ -416,8 +422,6 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_
   global.pauseGame = true
   global.pauseMoveInput = true
 
-  if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
-    level.glitchScreenEffect.visible = true
   var material = level.glitchScreenEffect.get_material()
   if material is ShaderMaterial:
     material.set_shader_param("shake_power", 0.01)
@@ -430,19 +434,25 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, _should_immediately_
   if global.canChangeSongPitch:
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
-  # global.memory["hearts"] -= 1
-  #if self.glitch_form == global.GlitchForm.NORMAL or should_immediately_die: # global.memory["hearts"] <= 0:
-  # global.memory["hearts"] = 0
-  global.isRespawning = true
-  physics_state = PhysicsState.GLITCH_DYING
-  glitch_death_timer = 0
-  if summonedBroom:
-    broomStop()
-  # else:
-  #   physics_state = PhysicsState.GLITCH_HURT
-  #   glitch_death_timer = 0
-  #   # global.memory["hearts"] -= 1
-  #   # self.nullify()
+  global.memory["hp"] -= 1
+  if global.memory["hp"] <= 0 or should_immediately_die:
+    global.memory["hp"] = 0
+    global.isRespawning = true
+    physics_state = PhysicsState.GLITCH_DYING
+    glitch_death_timer = 0
+    if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
+      level.glitchScreenEffect.visible = true
+    if summonedBroom:
+      broomStop()
+  else:
+    physics_state = PhysicsState.GLITCH_HURT
+    glitchTickle(true)
+    glitch_death_timer = 0
+
+    if global.memory["hp"] <= 1:
+      summonSmokeClouds(5, true, true, -1)
+      enchantedBagSpriteVisible.visible = false
+    # self.nullify()
 
     
 func showInteractPrompt(is_important = false):
@@ -455,6 +465,9 @@ func showInteractPrompt(is_important = false):
 func hideInteractPrompt():
   interactPrompt.visible = false
   importantInteractPrompt.visible = false
+
+func processBagLogic(_delta):
+  pass
 
 func processBroomLogic(_delta):
   if not (global.memory.has("broom") and global.memory["broom"]):
@@ -524,6 +537,21 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
 
+func processBagRenderLogic(_delta):
+  enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame
+  enchantedBagSpriteVisible.translation = enchantedBagSpriteAnimated.translation
+  enchantedBagSpriteVisible.flip_h = false
+  if mySprite.flip_h:
+    enchantedBagSpriteVisible.flip_h = true
+    enchantedBagSpriteVisible.translation.x *= -1
+    
+  # if summonedBroom != null:
+  #   adjustSummonedBroomSpritePosition()
+  if global.memory["hp"] > 1:
+    enchantedBagSpriteVisible.visible = true
+  else:
+    enchantedBagSpriteVisible.visible = false
+
 
 func processPoisonWaterLogic(delta):
   var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
@@ -540,7 +568,7 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-  summonSmokeClouds(1, false, false, true)
+  summonSmokeClouds(1, false, false, 1)
   
   grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
   grannyLandSound.play()
@@ -631,13 +659,16 @@ func iJustPressedDown():
     on_ground = false
   should_do_fallthrough_area_collision = false
 
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = false):
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
     for _i in range(num_clouds):
         var newSmokeCloud = smokeCloudRes.instance()
         level.add_child(newSmokeCloud)
-        if horizontal:
+        if horizontal != 0:
           newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
-          if mySprite.flip_h:
+          var which_horizontal_dir = mySprite.flip_h
+          if horizontal < 0:
+            which_horizontal_dir = not which_horizontal_dir
+          if which_horizontal_dir:
             newSmokeCloud.global_transform.origin.x -= 1
             newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x - rand_range(1, 3)
           else:

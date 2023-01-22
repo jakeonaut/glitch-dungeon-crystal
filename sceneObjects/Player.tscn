@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://assets/sounds/land.wav" type="AudioStream" id=35]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=36]
 [ext_resource path="res://assets/MRMOTEXTEX3.png" type="Texture" id=37]
+[ext_resource path="res://assets/player_sheet_bag.png" type="Texture" id=38]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.72
@@ -132,6 +133,34 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=53]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.05
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 1.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 38 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 36 )
 
 [sub_resource type="Animation" id=29]
 length = 0.001
@@ -1223,6 +1252,29 @@ hframes = 8
 vframes = 8
 frame = 3
 
+[node name="Sprite3DBagAnimated" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, 0.214967, 0.6 )
+visible = false
+material_override = SubResource( 53 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 38 )
+hframes = 8
+vframes = 8
+
+[node name="Sprite3DBagVisible" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, 0.214967, 0.6 )
+material_override = SubResource( 53 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 38 )
+hframes = 8
+vframes = 8
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -1373,8 +1425,7 @@ bbText = "hi!!!! hi hi hi !!!!"
 can_camera_zoom = false
 
 [node name="MPNumSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 19 )
 material_override = SubResource( 52 )
 pixel_size = 0.125
 texture = ExtResource( 25 )

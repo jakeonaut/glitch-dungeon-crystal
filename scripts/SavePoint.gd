@@ -101,6 +101,7 @@ func generateId():
 func passiveActivate(_delta):
     # global.memory["hearts_recovering"] = true
     # level.player.restoreGlitchAndMP()
+    global.memory["hp"] = global.memory["max_hp"]
     if not isOnSavePoint():
         saveSound.play()
         global.memory["active_save_point_x"] = self.translation.x

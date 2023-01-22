@@ -134,8 +134,8 @@ func _ready():
     if crtScreenEffects: pass
 
     memory["broom"] = true
-    memory["total_hearts"] = 1
-    memory["hearts"] = 1
+    memory["max_hp"] = 1
+    memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]

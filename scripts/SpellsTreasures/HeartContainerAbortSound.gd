@@ -17,10 +17,10 @@ func activateScript():
     level.player.aniPlayer.queue("walkStop")
     level.player.aniPlayer.queue("stand")
     
-    if not global.memory.has("total_hearts"):
-        global.memory["total_hearts"] = 1
+    if not global.memory.has("max_hp"):
+        global.memory["max_hp"] = 1
         
-    global.memory["total_hearts"] += 1
+    global.memory["max_hp"] += 1
     global.memory["hearts_recovering"] = true
     level.get_node("UILayer").recreateHeartSprites()
         

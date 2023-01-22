@@ -176,6 +176,7 @@ func alignMySprite():
 func isActive():
   return visible
 
+# aka func ouchies() for player
 func tryDieToEnemy(_delta, _should_glitch, _should_kill_invis, _should_immediately_die = false):
   pass    
   

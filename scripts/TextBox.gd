@@ -96,8 +96,8 @@ func _process(delta):
   elif nextPrompt.visible:
     wigglePrompt(delta, nextPrompt)
 
-  # if is_tiny:
-  #   setPosition()
+  if is_tiny:
+    setPosition()
 
   # TODO(jaketrower): This logic could probably be simplified with a FSM, or at least broken into functions
   if visible:
@@ -114,7 +114,7 @@ func _process(delta):
       if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
         abortSound.preActivateScript()
         has_preactivated = true
-      # endPrompt.visible = not is_tiny
+      endPrompt.visible = not is_tiny
       has_been_shown = true
       if is_important:
         global.pauseGame = false
@@ -130,13 +130,13 @@ func _process(delta):
     if text_timer >= time_limit and text_next_index < len(text_final):
       appendNextTextCharacter()
         
-  #if not is_tiny:
-  if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-    self.margin_top = 60
-    self.margin_bottom = 201
-  else:
-    self.margin_top = top_margin_start
-    self.margin_bottom = bot_margin_start
+  if not is_tiny:
+    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+      self.margin_top = 60
+      self.margin_bottom = 201
+    else:
+      self.margin_top = top_margin_start
+      self.margin_bottom = bot_margin_start
       
 func appendNextTextCharacter():
   get_node("../..").appendNextTextCharacter()
@@ -144,8 +144,8 @@ func appendNextTextCharacter():
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
   textNode.bbcode_text += text_final[text_next_index]
   
-  # if is_tiny:
-  #   adjustTinyColorRect()
+  if is_tiny:
+    adjustTinyColorRect()
 
   if not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
     resetPrompts()

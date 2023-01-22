@@ -14,6 +14,7 @@ export var can_camera_zoom = true
 export var is_fast_text = false
 export var dont_recolor_me = false
 export var is_immediate = false
+export var is_a_body = true
 
 var is_smacked = false
 var did_i_get_smacked = false
@@ -25,6 +26,7 @@ onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPro
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
+onready var smallerInteractionArea = get_node("SmallerInteractionArea")
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 
@@ -53,6 +55,9 @@ func _ready():
 
   set_collision_mask_bit(1, true)
   mySprite.material_override = mySprite.material_override.duplicate()
+
+  if not is_a_body:
+    smallerInteractionArea.remove_from_group("corporeal_body")
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
