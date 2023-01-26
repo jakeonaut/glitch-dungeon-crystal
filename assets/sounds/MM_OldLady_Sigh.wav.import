@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MM_OldLady_Sigh.wav-40907c94bddd07922cc7519b28f20e59.sample"
+
+[deps]
+
+source_file="res://assets/sounds/MM_OldLady_Sigh.wav"
+dest_files=[ "res://.import/MM_OldLady_Sigh.wav-40907c94bddd07922cc7519b28f20e59.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

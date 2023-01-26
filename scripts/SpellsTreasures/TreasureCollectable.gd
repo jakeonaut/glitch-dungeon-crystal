@@ -8,6 +8,7 @@ var really_being_collected = false
 var gotcha = false
 var okay_im_done = false
 export var stop_all_music = true
+export var display_textbox = true
 
 func _ready():
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
@@ -37,14 +38,19 @@ func _process(delta):
     level.player.broomSpriteVisible.visible = false
   
   if gotcha:
-    .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+    if display_textbox:
+      .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+    else:
+      okay_im_done = true
+      textBox.abortSound.activateScript()
   elif being_collected and not really_being_collected: 
     if secretAniPlayer.current_animation != "openUp" and secretAniPlayer.current_animation != "idle" and level.player.aniPlayer.current_animation != "preGetItem":
       really_being_collected = true
     elif secretAniPlayer.current_animation != "openUp":
       level.player.global_transform.origin = self.global_transform.origin
       level.player.aniPlayer.play("preGetItem")
-      global.activeInteractor = textBox # also weird but this is to get the camera to look at me
+      if display_textbox:
+        global.activeInteractor = textBox # also weird but this is to get the camera to look at me
   elif really_being_collected:
     level.player.dir = Vector3(0, 0, 0)
     if not level.player.on_ground:
@@ -61,18 +67,20 @@ func _process(delta):
         mySprite.global_transform.origin.z = level.player.global_transform.origin.z + 1
       else:
         gotcha = true
-        textBox.is_really_important = true
-        textBox.is_important = true
-        # collectSound.play()
-        .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+        if display_textbox:
+          textBox.is_really_important = true
+          textBox.is_important = true
+          # collectSound.play()
+          .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
     else:
       level.player.aniPlayer.play("getItem")
       secretAniPlayer.play("getItem")
-      textBox.focus_me = true
-      # if there is an existing textBox already... hide it... fail safe:
-      if global.activeInteractor != null:
-        global.activeInteractor.hideTextbox()
-      global.activeInteractor = textBox # also weird but this is to get the camera to look at me
+      if display_textbox:
+        textBox.focus_me = true
+        # if there is an existing textBox already... hide it... fail safe:
+        if global.activeInteractor != null:
+          global.activeInteractor.hideTextbox()
+        global.activeInteractor = textBox # also weird but this is to get the camera to look at me
           
 # @override
 func alignMySprite():

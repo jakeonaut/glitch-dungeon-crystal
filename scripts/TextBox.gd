@@ -66,12 +66,12 @@ func _ready():
   bot_margin_start = self.margin_bottom
   
 func tinify():
-  # self.texture = null
+  self.texture = null
   # get_node("Portrait").visible = false
-  # get_node("ColorRect").visible = false
+  get_node("ColorRect").visible = false
   is_tiny = true
-  # hide_textbox_time_limit = 5
-  # # get_node("Text").theme.default_font.set_size(32)
+  hide_textbox_time_limit = 5
+  # get_node("Text").theme.default_font.set_size(32)
   # textNode.set_theme(tinyTextTheme)
   # var large_font = textNode.theme.default_font.duplicate()
   # large_font.resource_local_to_scene = true
@@ -79,11 +79,13 @@ func tinify():
   # textNode.add_font_override("normal_font", large_font)
 
 func setPosition():
+  var factor = 0.5
+
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   target_origin = get_node("../..").global_transform.origin
   var target_pos = getGameCamera().unproject_position(target_origin)
-  self.rect_position.x = target_pos.x - 150 - adjusted_tiny_x_pos
-  self.rect_position.y = target_pos.y - 75 - adjusted_tiny_y_pos
+  self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
+  self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
   
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

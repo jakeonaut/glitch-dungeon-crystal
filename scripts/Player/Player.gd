@@ -437,6 +437,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   global.memory["hp"] -= 1
   if global.memory["hp"] <= 0 or should_immediately_die:
     global.memory["hp"] = 0
+    self.textBox.hideTextbox()
     global.isRespawning = true
     physics_state = PhysicsState.GLITCH_DYING
     glitch_death_timer = 0
@@ -479,7 +480,7 @@ func processBroomLogic(_delta):
   #     broom_cooldown_timer = 0
   is_in_broom_cooldown = false
 
-  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom and global.activeInteractor == null:
+  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()

@@ -19,6 +19,7 @@ var is_active = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var has_frozen_input = false
+var has_player_spoken = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -87,6 +88,11 @@ func _process(delta):
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
       has_frozen_input = true
+    elif not has_player_spoken and not global.pauseMoveInput and getPlayer().physics_state == getPlayer().PhysicsState.NORMAL:
+      player.textBox.tinify()
+      player.textBox.interact()
+      has_player_spoken = true
+    
 
   if num_sparkles_spawned < num_sparkles_spawned_limit:
     spawn_timer += (delta*22)

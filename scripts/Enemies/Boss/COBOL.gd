@@ -30,7 +30,7 @@ enum BossState {
     CALM_DOWN
     DIE,
 }
-var boss_state = BossState.DOCILE
+var boss_state = BossState.HURT # BossState.DOCILE
 
 func _ready():
     walk_direction = -1
@@ -83,12 +83,12 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.play("land")
             behavior_walking = false
-            calm_down_counter += 1
-            if calm_down_counter >= calm_down_count_limit:
-                boss_state = BossState.CALM_DOWN
-                secretAniPlayer.stop()
-                secretAniPlayer.queue("calmDown")
-                secretAniPlayer.queue("idle")
+            # calm_down_counter += 1
+            # if calm_down_counter >= calm_down_count_limit:
+            #     boss_state = BossState.CALM_DOWN
+            #     secretAniPlayer.stop()
+            #     secretAniPlayer.queue("calmDown")
+            #     secretAniPlayer.queue("idle")
     elif boss_state == BossState.LAND:
         if not secretAniPlayer.is_playing():
             boss_state = BossState.IDLE

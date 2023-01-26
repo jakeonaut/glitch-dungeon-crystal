@@ -918,7 +918,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 196608, 0, 0, 327678, 0, 2, -983056, 0, 36, -983043, 0, 36, -327692, 0, 0, -196614, 0, 2, -65530, 0, 36, -8, 0, 36 )
+"cells": PoolIntArray( 196608, 0, 0, 327678, 0, 2, -983056, 0, 36, -983050, 0, 36, -327692, 0, 0, -196614, 0, 2, -65530, 0, 36, -8, 0, 36 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -941,7 +941,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 9, 0 )
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 3, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 9, -1 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Player2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )
@@ -1094,7 +1094,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 grav = 0
 
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
 grav = 0
 bbText = "if you want some protection
 take this enchanted bag.
@@ -1107,13 +1107,15 @@ shape = SubResource( 75 )
 [node name="AbortSound" parent="Viewport/level/QuestionBlock/NPC/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 28 )
 
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC" index="5"]
+frame = 66
+
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 76 )
 
 [node name="Sprite3DBag" type="Sprite3D" parent="Viewport/level/QuestionBlock/NPC"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.594457, 0.214968, -0.4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40554, 1.21497, -0.4 )
 material_override = SubResource( 77 )
-flip_h = true
 pixel_size = 0.125
 transparent = false
 double_sided = false
