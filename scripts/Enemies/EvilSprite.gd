@@ -18,7 +18,6 @@ var attackStateRecoveryTimeLimit = 50
 onready var castGlitchSound = get_node("CastGlitchSound")
 onready var noticeSound = get_node("NoticeSound")
 onready var windUpSound = get_node("WindUpSound")
-onready var smallerInteractionArea = get_node("SmallerInteractionArea")
 
 onready var glitchSprite = get_node("GlitchSprite")
 onready var sparkleSprite = get_node("SparkleSprite")

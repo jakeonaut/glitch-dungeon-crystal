@@ -4,6 +4,7 @@ var flipTimer = 0
 var flipTimeLimit = 4
 
 onready var dieSound = get_node("Sounds/DieSound")
+onready var notDieSound = get_node("Sounds/NotDieSound")
 onready var evolveSound = get_node("Sounds/EvolveSound")
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
@@ -85,6 +86,8 @@ func _ready():
     if behavior_directional_bullet:
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
+
+    mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -327,6 +330,12 @@ func ouchies(_broom_origin):
         dieSound.play()
         pauseSelf = true
         tryRemoveEnemiesGroup()
+
+func notOuchies(_broom_origin):
+    if not is_smacked:
+        notDieSound.play()
+        summonSmokeClouds(1, true, true)
+        getSmacked()
 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true

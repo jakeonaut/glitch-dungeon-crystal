@@ -61,7 +61,7 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    npc.textBoxContainer.bbText = str(num_cubes_unlock) + " crystal to unlock"
+    npc.textBoxContainer.bbText = "locked" #str(num_cubes_unlock) + " crystal to unlock"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:
@@ -162,18 +162,18 @@ func activate():
     if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().on_ground:
       goThroughDoor()
     elif is_locked:
-      if global.num_mini_crystal_cubes >= num_cubes_unlock:
-        npc.visible = false 
-        npc.can_activate = false
-        npc.is_active = false
-        npc.stopPassiveActivate()
-        animationPlayer.clear_queue()
-        animationPlayer.stop()
-        doorOpenSound.play()
-        animationPlayer.queue("doorOpen")
-        is_locked = false
-        setGlobalMemoryOfHasUnlocked()
-      elif not lockedSound.is_playing():
+      # if global.num_mini_crystal_cubes >= num_cubes_unlock:
+      #   npc.visible = false 
+      #   npc.can_activate = false
+      #   npc.is_active = false
+      #   npc.stopPassiveActivate()
+      #   animationPlayer.clear_queue()
+      #   animationPlayer.stop()
+      #   doorOpenSound.play()
+      #   animationPlayer.queue("doorOpen")
+      #   is_locked = false
+      #   setGlobalMemoryOfHasUnlocked()
+      if not lockedSound.is_playing():
         lockedSound.play()
         npc.activate()
 

@@ -57,7 +57,7 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
 
   if not is_a_body:
-    smallerInteractionArea.remove_from_group("corporeal_body")
+    smallerInteractionArea.add_to_group("no_pushems")
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText

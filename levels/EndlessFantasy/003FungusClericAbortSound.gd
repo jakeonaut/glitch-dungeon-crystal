@@ -32,8 +32,9 @@ func activateScript():
       summon(fungusNPC2)
     elif which_one_am_i == 2:
       # summon(fungusNPC3)
-      summon(glitchSlime2, false)
-      summon(glitchSlime3, false)
+      # summon(glitchSlime2, false)
+      # summon(glitchSlime3, false)
+      pass
     # elif which_one_am_i == 3:
     #   summon(fungusNPC4)
     elif which_one_am_i == 3:

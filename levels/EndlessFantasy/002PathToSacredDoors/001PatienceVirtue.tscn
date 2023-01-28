@@ -144,7 +144,6 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 how_much_mp = 15
 

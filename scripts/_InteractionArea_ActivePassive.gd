@@ -28,11 +28,11 @@ func InteractActivate():
     if parent.has_method("activate"):
         parent.activate()
 
-func PassiveInteractActivate(delta):
+func PassiveInteractActivate(delta, is_player = true):
     if parent.has_method("passiveActivate"):
         parent.passiveActivate(delta)
     touchingPlayer = true
-    if is_in_group("corporeal_body"):
+    if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:
         getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
 func playerActivationAreaPassiveActivate():

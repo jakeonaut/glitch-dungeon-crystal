@@ -994,6 +994,7 @@ anims/walkStop = SubResource( 52 )
 
 [node name="NPC" parent="Viewport/level/Player2" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+grav = 0
 bbText = "•one day, a glitch appeared.  
 •we could not make it go away, 
 
@@ -1043,7 +1044,7 @@ shape = SubResource( 59 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, 0 )
-path = "res://levels/EndlessFantasy/Boss/000CobolBossFightPuzzles_002PathToSacredDoors.tscn"
+path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 53 )
@@ -1096,9 +1097,9 @@ grav = 0
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
 grav = 0
-bbText = "if you want some protection
-take this enchanted bag.
-now you can take two hits."
+bbText = "*meow* take this
+enchanted bag... now
+you can take an extra hit."
 can_move = false
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/SmallInteractionArea" index="0"]
@@ -1108,14 +1109,15 @@ shape = SubResource( 75 )
 script = ExtResource( 28 )
 
 [node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC" index="5"]
-frame = 66
+frame = 24
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 76 )
 
 [node name="Sprite3DBag" type="Sprite3D" parent="Viewport/level/QuestionBlock/NPC"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40554, 1.21497, -0.4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59446, 0.21497, -0.4 )
 material_override = SubResource( 77 )
+flip_h = true
 pixel_size = 0.125
 transparent = false
 double_sided = false
