@@ -1060,6 +1060,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 2, 3 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0.25, 0.7 ) ]
+}
 
 [sub_resource type="Animation" id=31]
 resource_name = "walkBump"

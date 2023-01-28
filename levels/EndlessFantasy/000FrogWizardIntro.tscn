@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=4]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=5]
-[ext_resource path="res://scripts/levelScript.gd" type="Script" id=6]
+[ext_resource path="res://levels/EndlessFantasy/000FrogWizardIntroLevelScript.gd" type="Script" id=6]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=9]
@@ -328,7 +328,9 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 15, 0 )
 grav = 0
 bbText = "•welcome to DUNGEON
-•press DOWN or C to talk↓•thank u!!!"
+•press SPACE to talk↓•thank u!!!
+•if someone says \". . .\"
+you can talk to them!"
 is_really_important = true
 can_camera_zoom = false
 

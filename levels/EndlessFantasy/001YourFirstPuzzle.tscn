@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://sceneObjects/tiles/green_cosmetic_tiles.tres" type="MeshLibrary" id=30]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=32]
+[ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=33]
 [ext_resource path="res://levels/EndlessFantasy/001QuestionBlockNPCAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=41]
 
@@ -1687,7 +1688,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3.41868, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 10.4187, 0 )
 
 [node name="FeatherSpell2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 12.4187, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 12.4187, 0 )
 
 [node name="FeatherSpell3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 1.41868, 0 )
@@ -1700,6 +1701,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69, 0, 0 )
 
 [node name="WallTorch7" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 97, 10, 0 )
+
+[node name="WallTorch9" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 10, 0 )
+
+[node name="WallTorch10" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 15, 0 )
+
+[node name="WallTorch11" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 20, 0 )
+
+[node name="WallTorch12" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 23, 0 )
 
 [node name="WallTorch8" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 111, 21, 0 )
@@ -1864,6 +1877,9 @@ shape = SubResource( 84 )
 [node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 22.2736, 0 )
 
+[node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134, 19.2736, 0 )
+
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177, 24, 0 )
 
@@ -1893,12 +1909,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 132, 34, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134.18, 18.0573, 0 )
+bbText = "*purrrr*
+"
+can_camera_zoom = false
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 72 )
 
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="6"]
+stream = ExtResource( 33 )
+
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
 frame = 24
+
+[node name="FallthroughSolid" parent="Viewport/level/NPC2" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
 shape = SubResource( 73 )

@@ -182,7 +182,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.568, 999, 999 ), Vector3( 0.59565, 0.733, 0 ), Vector3( 1.05441, -0.395181, 0 ) ]
+"values": [ Vector3( -1.71626, 1.733, 0 ), Vector3( 0.78081, 0.54784, 0 ), Vector3( 1.23957, -0.395181, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -191,10 +191,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0, 0, 1 ), Vector3( 2, 2, 1 ), Vector3( 2, 2, 1 ) ]
+"values": [ Vector3( 0.4, 1, 1 ), Vector3( 2, 2, 1 ), Vector3( 2, 2, 1 ), Vector3( 1.5, 2, 1 ), Vector3( 1, 2, 1 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BroomSound:playing")
@@ -215,10 +215,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, -39.751 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, -39.751 ), Vector3( 0, 0, -39.751 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Area/CollisionShape:shape:radius")
@@ -227,10 +227,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 1.19124, 0.650362 ]
+"values": [ 1.19124, 1.19124, 0.650362 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Area/CollisionShape:shape:height")
@@ -239,10 +239,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.837435, 0.611956 ]
+"values": [ 0.837435, 0.837435, 0.611956 ]
 }
 
 [sub_resource type="Animation" id=46]

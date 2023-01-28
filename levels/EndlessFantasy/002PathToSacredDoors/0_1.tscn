@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://levels/EndlessFantasy/002PathToSacredDoors/NPCEnchantedBagAbortSound.gd" type="Script" id=28]
 [ext_resource path="res://assets/player_sheet_bag.png" type="Texture" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=30]
+[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=31]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 2 )
@@ -940,6 +941,10 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 9, 0 )
 
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
+stream = ExtResource( 31 )
+pitch_scale = 1.1
+
 [node name="Player2" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 9, -1 )
 
@@ -1097,10 +1102,9 @@ grav = 0
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
 grav = 0
-bbText = "*meow* take this
-enchanted bag... now
-you can take an extra hit."
+bbText = "*purrr*..."
 can_move = false
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 75 )
@@ -1150,6 +1154,8 @@ flip_v = true
 visible = true
 
 [editable path="Viewport/level/GameCamera"]
+[editable path="Viewport/level/Player"]
+[editable path="Viewport/level/Player/TextContainer"]
 [editable path="Viewport/level/Player2/NPC"]
 [editable path="Viewport/level/Player2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]

@@ -155,10 +155,6 @@ func passiveActivate(_delta):
     getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", true)
     getLevelTiles().unrandomizeAllTiles()
     musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
-    var NPC = level.get_node("NPC4")
-    NPC.textBoxContainer.bbText = "•oh you're green.\n•um... hold UP or X \n longer to jump higher"
-    NPC.textBoxContainer.setVars()
-    NPC.textBoxContainer.textBox.has_been_shown = false
   else:
     getPlayer().applyObeliskGlitch(my_glitch_form, false)
     level.player.glitchTickle()
