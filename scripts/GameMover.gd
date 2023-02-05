@@ -202,13 +202,13 @@ func processPhysics(delta):
   elif physics_state == PhysicsState.COLLAPSED:
     hv = Vector3()
     dir = Vector3(0.0, 0.0, 0.0)
-    if not aniPlayer or not aniPlayer.is_playing():
+    if pauseAnimation or not aniPlayer or not aniPlayer.is_playing():
       physics_state = PhysicsState.CAN_WAKE_UP
   elif physics_state == PhysicsState.CAN_WAKE_UP:
     var pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
     var pressing_jump = justPressedJump() or recentlyJustPressedJump()
     if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground):
-      if aniPlayer:
+      if not pauseAnimation and aniPlayer:
         aniPlayer.play("wakeup")
       physics_state = PhysicsState.WAKING_UP
   elif physics_state == PhysicsState.WAKING_UP:
@@ -229,9 +229,9 @@ func processPhysics(delta):
     just_landed = true
   # TODO(jaketrower): all this animation code IS going to break everything one day :)
   var aa = ""
-  if aniPlayer != null:
+  if not pauseAnimation and aniPlayer != null:
     aa = aniPlayer.assigned_animation
-  if aniPlayer != null and not global.pauseGame and not aa == "getItem":
+  if not pauseAnimation and aniPlayer != null and not global.pauseGame and not aa == "getItem":
     if not is_climbing_ladder:
       if on_ground:
         if (aa == "land" or aa == "walkStart") and not aniPlayer.is_playing():
@@ -277,7 +277,7 @@ func applyGravity(delta):
     else:
       fall_timer = 0
     if lv.y < 0:
-      if not on_ground and aniPlayer:
+      if not on_ground and not pauseAnimation and aniPlayer:
         var a = aniPlayer.current_animation
         if (a != "jumpSquat" and a != "jumpStart" and \
           a != "fall" and a != "fallStart" and \
@@ -290,7 +290,7 @@ func applyGravity(delta):
           else:
             if aniPlayer.has_animation("fallStart"): aniPlayer.queue("fallStart")
             if aniPlayer.has_animation("fall"): aniPlayer.queue("fall")
-      if fall_timer > 40 and aniPlayer and \
+      if fall_timer > 40 and not pauseAnimation and aniPlayer and \
          aniPlayer.current_animation != "fallFar" and aniPlayer.has_animation("fallFar"):
         aniPlayer.clear_queue()
         aniPlayer.stop()
@@ -372,8 +372,8 @@ func processInputs(delta):
       vv = 1
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    vv = 6
-    if aniPlayer.assigned_animation == "stand":
+    vv = 6 if not pauseAnimation else 0
+    if not pauseAnimation and aniPlayer and aniPlayer.assigned_animation == "stand":
       aniPlayer.stop()
       aniPlayer.queue("walkBump")
       aniPlayer.queue("walk")
@@ -417,11 +417,12 @@ func processLadderInputs(_delta):
   if is_touching_ladder:
     if not is_climbing_ladder and (pressingMoveUp() or pressingMoveDown()):
       is_climbing_ladder = true
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("climb")
       dir = Vector3(0, 0, 0)
       on_ground = true
+      if not pauseAnimation and aniPlayer:
+        aniPlayer.stop()
+        aniPlayer.clear_queue()
+        aniPlayer.play("climb")
   else:
     if is_climbing_ladder:
       is_climbing_ladder = false
@@ -448,16 +449,17 @@ func processLadderInputs(_delta):
 
     is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
 
-    if pressingMoveUp() or pressingMoveDown() or pressingMoveRight() or pressingMoveLeft():
-      if not aniPlayer.current_animation == "climb":
-        aniPlayer.stop()
-        aniPlayer.clear_queue()
-        aniPlayer.play("climb")
-    else:
-      if not aniPlayer.assigned_animation == "climbStop":
-        aniPlayer.stop()
-        aniPlayer.clear_queue()
-        aniPlayer.play("climbStop")
+    if not pauseAnimation and aniPlayer:
+      if pressingMoveUp() or pressingMoveDown() or pressingMoveRight() or pressingMoveLeft():
+        if not aniPlayer.current_animation == "climb":
+          aniPlayer.stop()
+          aniPlayer.clear_queue()
+          aniPlayer.play("climb")
+      else:
+        if not aniPlayer.assigned_animation == "climbStop":
+          aniPlayer.stop()
+          aniPlayer.clear_queue()
+          aniPlayer.play("climbStop")
     
 
 func processJumpInputs(delta):
@@ -477,7 +479,7 @@ func processJumpInputs(delta):
       should_do_fallthrough_area_collision = false
       has_just_jumped_timer = -has_just_jumped_time_limit
 
-      if aniPlayer:
+      if not pauseAnimation and aniPlayer:
         aniPlayer.clear_queue()
         aniPlayer.play("swimJumpStart")
         aniPlayer.queue("swimJump")
@@ -495,13 +497,13 @@ func processJumpInputs(delta):
         jump_squat_jump_input_timer = 1
         actuallyApplyJump()
 
-      if aniPlayer and not "jump" in aniPlayer.assigned_animation:
+      if not pauseAnimation and aniPlayer and not "jump" in aniPlayer.assigned_animation:
         aniPlayer.clear_queue()
         aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
         aniPlayer.queue("jump")
 
-  if aniPlayer:
+  if not pauseAnimation and aniPlayer:
     if aniPlayer.assigned_animation == "jumpSquat":
       vv = 0
       if pressingJump():
@@ -590,7 +592,7 @@ func playJumpSound():
 
 func isKindOfOnGround():
   # I'm on the ground or just fell off a platform...
-  return isKindaSortaOfOnGround() and (not aniPlayer or not "jump" in aniPlayer.assigned_animation)
+  return isKindaSortaOfOnGround() and (pauseAnimation or not aniPlayer or not "jump" in aniPlayer.assigned_animation)
   
 func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
@@ -648,7 +650,7 @@ func processHorizontalInputs(delta):
     is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == global.GlitchForm.LADDER:
     
     horizontal_input = true
-    if is_pressing_opposite_horizontal_input and (aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
+    if is_pressing_opposite_horizontal_input and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
       if not glitch_form == global.GlitchForm.FLOOR or on_ground:
         dir = Vector3(0.0, 0.0, 0.0)
       
@@ -656,7 +658,7 @@ func processHorizontalInputs(delta):
     if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
       if pressingMoveLeft():
         should_teeter_turn_around = false
-        if aniPlayer != null:
+        if not pauseAnimation and aniPlayer != null:
           # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
           if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
             dir += (right/2)*(delta*DNUMHORZ)
@@ -678,7 +680,7 @@ func processHorizontalInputs(delta):
           mySprite.flip_h = true
       elif pressingMoveRight():
         should_teeter_turn_around = false
-        if aniPlayer != null:
+        if not pauseAnimation and aniPlayer != null:
           # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
           if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
             dir -= (right/2)*(delta*DNUMHORZ)
@@ -699,7 +701,7 @@ func processHorizontalInputs(delta):
           mySprite.flip_h = false
   
   # TODO(jaketrower): Maybe this? seems complicated
-  if not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
+  if not pauseAnimation and not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \
      (aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
      (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
     if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
@@ -727,7 +729,6 @@ func processHorizontalInputs(delta):
     DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
     # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
 
-  
   # TODO(Engine.time_scale suspect)
   if dir.length() > 1:
     dir = dir.normalized()
@@ -788,7 +789,7 @@ func shouldGroundHaveFriction():
   return true
 
 func doWalkAnimation():
-  if horizontal_collision:
+  if horizontal_collision or pauseAnimation or not aniPlayer:
     return
 
   if on_ground and aniPlayer.current_animation != "walkStart" and aniPlayer.current_animation != "walk":
@@ -983,7 +984,7 @@ func collideWithWall(local_lv):
     bump_ani_speed = 0.75
 
   var ladder_glitch = glitch_form == global.GlitchForm.LADDER
-  if aniPlayer and should_play_bump:
+  if not pauseAnimation and aniPlayer and should_play_bump:
     var aa = aniPlayer.assigned_animation
     if not was_on_ground and not is_touching_water:
       if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat":
@@ -1123,7 +1124,7 @@ func landed():
   last_grounded_y = global_transform.origin.y 
   if landSound: landSound.play()
   addJumpSmokeCloud()
-  if aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
+  if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
     if fall_timer > 50 and not glitch_form == global.GlitchForm.FEATHER:
       quiet_the_fall_sound = false
@@ -1151,7 +1152,7 @@ func iFellFlat():
 func isWalkingIntoWall():
   return abs(linear_velocity.x) < 0.5 \
        and is_pressing_horizontal_input and was_pressing_horizontal_input \
-       and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat") 
+       and (pauseAnimation or not aniPlayer or aniPlayer.assigned_animation != "jumpSquat") 
 
 func updateFacing(local_dir):
   if local_dir.x != 0 or local_dir.y != 0 or local_dir.z != 0:

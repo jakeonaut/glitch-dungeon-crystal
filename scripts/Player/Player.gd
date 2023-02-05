@@ -49,12 +49,14 @@ var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
 
+var remembered_walk_speed = 7
 func _ready():
   set_process_input(true)
   set_process(true)
   set_physics_process(true)
   if pauseMenu: pauseMenu.hide()
 
+  remembered_walk_speed = walk_speed
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
 
 func applyNextGlitch():
@@ -497,9 +499,9 @@ func processBroomLogic(_delta):
     # elif glitch_form == global.GlitchForm.FEATHER:
     #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
     # velocity_dampener = 2.0
-    pauseInput = true
-    pauseAnimation = true # TODO(jaketrower): implement this instead
-    aniPlayer = null
+    pauseAnimation = true
+    if on_ground:
+      walk_speed = 0
     if linear_velocity.y < 0:
       linear_velocity.y = 0
     summonedBroom = summonedBroomRes.instance()
@@ -593,7 +595,6 @@ func landed():
 
 func broomSmackFast():
   applySpellbookGlitch()
-  var aniPlayer = get_node("AnimationPlayer")
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("broomSmackFast")
@@ -605,9 +606,8 @@ func broomSmackFast():
 func broomStop():
   summonedBroom = null
   broomSpriteVisible.visible = true
-  pauseInput = false
   pauseAnimation = false
-  aniPlayer = get_node("AnimationPlayer")
+  walk_speed = remembered_walk_speed
   velocity_dampener = 1.0
   if has_sweeped_glitch:
     was_just_on_ground_timer = -8

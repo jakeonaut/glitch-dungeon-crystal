@@ -127,6 +127,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=51]
 resource_name = "GET"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -241,6 +242,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=52]
 resource_name = "getItem"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1

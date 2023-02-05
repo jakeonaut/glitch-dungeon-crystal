@@ -10,6 +10,6 @@ func buildRandomTiles():
 
 # @override
 func ready_impl():
+    setTileset(tileset_type)
     buildRandomTiles()
 
-    setTileset(tileset_type)

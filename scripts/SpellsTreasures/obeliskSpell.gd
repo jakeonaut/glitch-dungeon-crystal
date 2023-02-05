@@ -2,7 +2,7 @@ extends KinematicBody
 
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
-onready var sparkleSprite = get_node("SparkleSprite3D")
+onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
 var spawn_timer = 0
 var spawn_time_limit = 5
 var num_sparkles_spawned = 0
@@ -94,7 +94,7 @@ func _process(delta):
       has_player_spoken = true
     
 
-  if num_sparkles_spawned < num_sparkles_spawned_limit:
+  if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
     spawn_timer += (delta*22)
     if spawn_timer >= spawn_time_limit:
       var newSprite = sparkleSprite.duplicate()

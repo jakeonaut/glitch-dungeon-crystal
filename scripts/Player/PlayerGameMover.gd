@@ -104,7 +104,7 @@ func spawnOneSparkle(xdiff, above_the_head = false):
   )
 
 func spawnSparkles(delta, above_the_head = false):
-  if global.pauseGame: return
+  if pauseSelf or pauseAnimation or global.pauseGame or global.pauseMoveInput: return
 
   if global.memory["mp"] > 0:
     sparkle_timer += (delta*22)

@@ -11,6 +11,7 @@ onready var glitchSlime3 = get_node("../../../../GlitchSlime3")
 onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
 onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
 onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
+onready var smallKey = get_node("../../../../SmallKey")
 # onready var broom = get_node("../../../../Broom")
 export var which_one_am_i = 1
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
@@ -21,7 +22,6 @@ func _ready():
     pass
 
 func activateScript():
-
     summonSmokeClouds(NPC, 5, true, true)
     NPC.visible = false
     NPC.can_activate = false
@@ -31,6 +31,7 @@ func activateScript():
     if which_one_am_i == 1:
       summon(fungusNPC2)
     elif which_one_am_i == 2:
+      summon(smallKey, false)
       # summon(fungusNPC3)
       # summon(glitchSlime2, false)
       # summon(glitchSlime3, false)

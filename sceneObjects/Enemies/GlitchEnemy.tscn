@@ -36,8 +36,8 @@ shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.847
-shader_param/y_div = 2.87
+shader_param/time_influence = 1.0
+shader_param/y_div = 0.9
 shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 9 )
 shader_param/target_palette = ExtResource( 2 )
@@ -84,6 +84,9 @@ extents = Vector3( 18, 13, 1 )
 [node name="GlitchEnemy" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 1 )
+time_influence = 20
+y_div = 0.9
+normal_offset = 0.5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
