@@ -333,7 +333,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/EndlessFantasy/001YourFirstPuzzle.tscn"
+path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false

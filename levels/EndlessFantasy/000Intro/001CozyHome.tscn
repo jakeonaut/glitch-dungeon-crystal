@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=15]
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=17]
 
 [sub_resource type="BoxShape" id=22]
 resource_local_to_scene = true
@@ -204,9 +205,15 @@ shape = SubResource( 28 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 0, 0 )
+bbText = "mew!"
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
+
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="6"]
+stream = ExtResource( 17 )
+pitch_scale = 2.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
 frame = 24

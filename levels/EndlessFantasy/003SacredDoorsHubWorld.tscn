@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=123 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -1245,6 +1245,123 @@ shader_param/target_palette = ExtResource( 29 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
+[sub_resource type="Animation" id=125]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=126]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=127]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=128]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=129]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="Animation" id=130]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=131]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=132]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="BoxShape" id=133]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -1278,6 +1395,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57619, -11.7926, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -41.6, 0 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 24 )]
+size = 30.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -1613,7 +1731,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0619, -17.5255, 0.0809188 )
 visible = false
 grav = 0
 bbText = "•you're pretty handy with
-that broom.. "
+that broom.. 
+•hmm...
+•maybe you could cleanse
+the world of CORRUPTION
+and ROT."
 can_activate = false
 can_move = false
 dont_recolor_me = true
@@ -2728,7 +2850,48 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2951, 2.09692, 0 )
 grav = 0
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8922, -1.96009, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.8922, -13.9601, 0 )
+visible = false
+
+[node name="Door7" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -5, 0 )
+path = "res://levels/EndlessFantasy/000Intro/BeginnerZone.tscn"
+
+[node name="Sprite3D2" parent="Viewport/level/Door7" index="1"]
+visible = false
+
+[node name="AnimationPlayer" parent="Viewport/level/Door7" index="4"]
+anims/doorClose = SubResource( 125 )
+anims/doorOpen = SubResource( 126 )
+anims/locked = SubResource( 127 )
+
+[node name="CollisionShape" parent="Viewport/level/Door7/InteractionArea" index="0"]
+shape = SubResource( 128 )
+
+[node name="CollisionShape" parent="Viewport/level/Door7/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 129 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door7/NPC/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 69.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door7/NPC/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="AnimationPlayer" parent="Viewport/level/Door7/NPC" index="6"]
+anims/default = SubResource( 130 )
+anims/flickerOn = SubResource( 131 )
+anims/jump = SubResource( 132 )
+
+[node name="CollisionShape" parent="Viewport/level/Door7/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 133 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -2776,4 +2939,7 @@ __meta__ = {
 [editable path="Viewport/level/Waterfall/WaterCube2"]
 [editable path="Viewport/level/Waterfall/WaterCube3"]
 [editable path="Viewport/level/Waterfall/WaterCube4"]
+[editable path="Viewport/level/Door7"]
+[editable path="Viewport/level/Door7/NPC"]
+[editable path="Viewport/level/Door7/NPC/NPC TextBox"]
 [editable path="ScreenEffects"]
