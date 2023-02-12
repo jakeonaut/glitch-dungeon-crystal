@@ -414,6 +414,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
+  if global.activeInteractor:
+    global.activeInteractor.hideTextbox()
+  global.activeInteractor = null
   if randi() % 3 == 0:
     hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
     hurt2Sound.play()

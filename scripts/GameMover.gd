@@ -28,7 +28,7 @@ func getGameCamera():
     gameCamera = level.gameCamera
   return gameCamera
 
-onready var smallInteractionArea = get_node("SmallInteractionArea")
+onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
 onready var collisionShape = get_node("CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 var animation_speed_multiplier = 1.0
@@ -154,9 +154,10 @@ func _process(_delta):
 func _physics_process(delta):
   if global.pauseGame or pauseSelf: return
 
-  is_touching_water = smallInteractionArea.is_touching_water
-  touched_water_area = smallInteractionArea.touched_water_area
-  is_touching_ladder = smallInteractionArea.is_touching_ladder
+  if smallInteractionArea:
+    is_touching_water = smallInteractionArea.is_touching_water
+    touched_water_area = smallInteractionArea.touched_water_area
+    is_touching_ladder = smallInteractionArea.is_touching_ladder
 
   DNUMHORZ = 65.0 * global.time_dilation_multiplier
   DNUMSKID_BASE = 54.0 / global.time_dilation_multiplier

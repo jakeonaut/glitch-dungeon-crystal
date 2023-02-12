@@ -31,15 +31,15 @@ func activateScript():
     if which_one_am_i == 1:
       summon(fungusNPC2)
     elif which_one_am_i == 2:
-      summon(smallKey, false)
-      # summon(fungusNPC3)
+      summon(fungusNPC3)
       # summon(glitchSlime2, false)
       # summon(glitchSlime3, false)
       pass
     # elif which_one_am_i == 3:
     #   summon(fungusNPC4)
     elif which_one_am_i == 3:
-      summonAngelStatue()
+      summon(smallKey, false)
+      # summonAngelStatue()
       # yield(get_tree().create_timer(0.4), "timeout")
       # summonDoor(glitchEnemy2)
       # yield(get_tree().create_timer(0.1), "timeout")

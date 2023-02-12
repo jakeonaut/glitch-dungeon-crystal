@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
-[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/SpellsTreasures/SmallKey.gd" type="Script" id=10]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=11]
-[ext_resource path="res://scripts/SpellsTreasures/BroomAbortSound.gd" type="Script" id=12]
+[ext_resource path="res://scripts/SpellsTreasures/SmallKeyAbortSound.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=14]
 
@@ -183,6 +183,7 @@ height = 1.8
 
 [node name="SmallKey" type="KinematicBody"]
 script = ExtResource( 10 )
+display_textbox = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.125 )
@@ -197,7 +198,6 @@ vframes = 5
 frame = 18
 script = ExtResource( 4 )
 frame_delay = 0.15
-should_animate = false
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )

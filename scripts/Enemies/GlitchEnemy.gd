@@ -4,7 +4,7 @@ var flipTimer = 0
 var flipTimeLimit = 4
 
 onready var dieSound = get_node("Sounds/DieSound")
-onready var notDieSound = get_node("Sounds/NotDieSound")
+onready var notDieSound = get_node("Sounds/NotDieSound") if has_node("Sounds/NotDieSound") else null
 onready var evolveSound = get_node("Sounds/EvolveSound")
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
@@ -333,7 +333,7 @@ func ouchies(_broom_origin):
 
 func notOuchies(_broom_origin):
     if not is_smacked:
-        notDieSound.play()
+        if notDieSound: notDieSound.play()
         summonSmokeClouds(1, true, true)
         getSmacked()
 

@@ -21,12 +21,12 @@ var did_i_get_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 
-onready var smackSound = get_node("SmackSound")
+onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
 onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
-onready var smallerInteractionArea = get_node("SmallerInteractionArea")
+onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 
@@ -56,7 +56,7 @@ func _ready():
   set_collision_mask_bit(1, true)
   mySprite.material_override = mySprite.material_override.duplicate()
 
-  if not is_a_body:
+  if not is_a_body and smallerInteractionArea:
     smallerInteractionArea.add_to_group("no_pushems")
 
   if bbText != "" and textBoxContainer.bbText == "":
@@ -95,8 +95,8 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  if interactPrompt != null:
-    interactPrompt.visible = get_node("SmallInteractionArea").wasTouchingPlayer and (
+  if interactPrompt != null and smallInteractionArea != null:
+    interactPrompt.visible = smallInteractionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
       global.activeInteractor == null or (
         global.activeInteractor == textBox and textBox.nextPrompt.visible
@@ -122,7 +122,7 @@ func _process(delta):
 
 
 func getSmacked():
-  smackSound.play()
+  if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
     material.set_shader_param("time_influence", 35)

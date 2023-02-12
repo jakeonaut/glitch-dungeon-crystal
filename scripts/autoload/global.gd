@@ -140,6 +140,7 @@ func _ready():
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
     memory["which_floor"] = 0
+    memory["key"] = 0
 
 func _process(delta):
     delta = delta * time_dilation_multiplier

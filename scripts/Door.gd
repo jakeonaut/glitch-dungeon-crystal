@@ -162,17 +162,18 @@ func activate():
     if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().on_ground:
       goThroughDoor()
     elif is_locked:
-      # if global.num_mini_crystal_cubes >= num_cubes_unlock:
-      #   npc.visible = false 
-      #   npc.can_activate = false
-      #   npc.is_active = false
-      #   npc.stopPassiveActivate()
-      #   animationPlayer.clear_queue()
-      #   animationPlayer.stop()
-      #   doorOpenSound.play()
-      #   animationPlayer.queue("doorOpen")
-      #   is_locked = false
-      #   setGlobalMemoryOfHasUnlocked()
+      if global.memory["key"] > 0:
+        global.memory["key"] -= 1
+        npc.visible = false 
+        npc.can_activate = false
+        npc.is_active = false
+        npc.stopPassiveActivate()
+        animationPlayer.clear_queue()
+        animationPlayer.stop()
+        doorOpenSound.play()
+        animationPlayer.queue("doorOpen")
+        is_locked = false
+        setGlobalMemoryOfHasUnlocked()
       if not lockedSound.is_playing():
         lockedSound.play()
         npc.activate()

@@ -17,7 +17,8 @@ _global_script_class_icons={
 config/name="crystal dungeon"
 run/main_scene="res://levels/000Intro.tscn"
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
-config/icon="res://icon.png"
+config/icon="res://favico.png"
+config/windows_native_icon="res://favico.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"
 main_scene="res://MainMenu.tscn"
 
