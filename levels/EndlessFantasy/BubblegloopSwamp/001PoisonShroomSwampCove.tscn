@@ -732,7 +732,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 113.6, 16.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 155.1, 15.2, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
@@ -1222,17 +1222,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.1, 14.4, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 157.3, 14.8, 0 )
-grav = 0
 is_static = true
 
 [node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 172.5, 12.3, 0 )
-grav = 0
 is_static = true
 
 [node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 164.9, 14.8, 0 )
-grav = 0
 is_static = true
 
 [node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy4" index="0"]
@@ -1243,7 +1240,6 @@ shape = SubResource( 46 )
 
 [node name="BasicFrogEnemy5" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 168.5, 28, 0 )
-grav = 0
 is_static = true
 
 [node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy5" index="0"]

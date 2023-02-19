@@ -67,7 +67,8 @@ func recreateHeartSprites():
 
 func _process(delta):
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
-  get_node("GlitchStatusRect/RichTextLabel").text = str(global.memory["mp"]) + "/ " + str(global.memory["max_mp"])
+  get_node("GlitchStatusRect/RichTextLabel").text = str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
+  get_node("GlitchStatusRect/RichTextLabel2").text = get_node("GlitchStatusRect/RichTextLabel").text
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
@@ -204,7 +205,6 @@ func normalGlitch():
 
 func glitch(palette):
   glitchSprite.visible = true
-  glitchSprite2.visible = true
 
 func floorGlitch():
   glitch(global.red_palette)

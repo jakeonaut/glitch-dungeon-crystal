@@ -20,8 +20,8 @@ func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
-  if is_static:
-    interactionArea.remove_from_group("corporeal_body")
+  smack_time_limit = 5
+  interactionArea.add_to_group("no_pushems")
 
 func setAsParent(_owner):
   behavior_jumping = true
@@ -30,6 +30,10 @@ func setAsParent(_owner):
   walk_direction = -1
 
 func _process(delta):
+  if pauseSelf and not is_smacked:
+    pauseSelf = false
+    on_ground = true
+
   if on_ground or is_static:
     if not is_static:
       jump_timer +=  (delta * 22)
@@ -90,3 +94,17 @@ func spawnASpore():
     spore.global_transform.origin.x += rand_range(-1, 1)
     spore.global_transform.origin.y += 1.5
     spore.global_transform.origin.y -= rand_range(0, .225)
+
+# @override
+func getSmacked():
+  .getSmacked()
+  behavior_jumping = true
+  behavior_walking = true
+  jump_timer = 0
+  walk_direction = 1
+  if level.player.mySprite.flip_h:
+    walk_direction = -1
+  is_static = false
+  pauseSelf = true
+  on_ground = true
+  notDieSound.play()

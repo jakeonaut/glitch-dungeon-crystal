@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/favico.png-7af27b9b94ca5792ec24f3766db47b3c.stex"
+path="res://.import/catbabushka.png-9eb6d2558efafb20b70eedb4595065da.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://favico.png"
-dest_files=[ "res://.import/favico.png-7af27b9b94ca5792ec24f3766db47b3c.stex" ]
+source_file="res://catbabushka.png"
+dest_files=[ "res://.import/catbabushka.png-9eb6d2558efafb20b70eedb4595065da.stex" ]
 
 [params]
 
