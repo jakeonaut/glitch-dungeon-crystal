@@ -2117,7 +2117,7 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 160.5, 
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 163.8, 28.9, -0.999996 )
 
 [node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 45 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 179.1, 36.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 168.7, 17.8, 0 )
 walk_direction = -1
 
 [node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 30 )]

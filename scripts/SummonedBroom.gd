@@ -10,7 +10,6 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var myArea = get_node("Area")
 onready var collisionShape = get_node("Area/CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer")
-var has_pressed_again = false
 var has_hit_npc = false
 
 var levelTiles = null
@@ -39,16 +38,6 @@ func _process(delta):
     # broom_active_timer = 0
     if my_broom_owner: my_broom_owner.broomStop()
     visible = false
-  elif Input.is_action_just_pressed("sub_action_button"):
-    has_pressed_again = true
-
-  if not aniPlayer.is_playing() and has_pressed_again:
-    has_pressed_again = false
-    broom_active_timer = 2
-    if my_broom_owner: 
-      my_broom_owner.broomSmackFast()
-    aniPlayer.play("broomSmackFast")
-    summonSmokeClouds(2)
     
   if not visible and not broomSound.is_playing():
     queue_free()

@@ -50,6 +50,8 @@ var unpoison_timer = 0
 var unpoison_time_limit = 10
 
 var remembered_walk_speed = 7
+var remembered_feather_glitch_walk_speed = 6
+var remembered_invisible_glitch_walk_speed = 5
 func _ready():
   set_process_input(true)
   set_process(true)
@@ -57,6 +59,8 @@ func _ready():
   if pauseMenu: pauseMenu.hide()
 
   remembered_walk_speed = walk_speed
+  remembered_feather_glitch_walk_speed = feather_glitch_walk_speed
+  remembered_invisible_glitch_walk_speed = invisible_glitch_walk_speed
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
 
 func applyNextGlitch():
@@ -505,6 +509,8 @@ func processBroomLogic(_delta):
     pauseAnimation = true
     if on_ground:
       walk_speed = 0
+      feather_glitch_walk_speed = 0
+      invisible_glitch_walk_speed = 0
     if linear_velocity.y < 0:
       linear_velocity.y = 0
     summonedBroom = summonedBroomRes.instance()
@@ -595,22 +601,14 @@ func landed():
       lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
     global_transform.origin.y -= 1
   global_transform.origin.y = original_y
-
-func broomSmackFast():
-  applySpellbookGlitch()
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("broomSmackFast")
-  if on_ground:
-    aniPlayer.queue("stand")
-  else:
-    aniPlayer.queue("fall")
     
 func broomStop():
   summonedBroom = null
   broomSpriteVisible.visible = true
   pauseAnimation = false
   walk_speed = remembered_walk_speed
+  feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
+  invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
   velocity_dampener = 1.0
   if has_sweeped_glitch:
     was_just_on_ground_timer = -8

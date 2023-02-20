@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites2D/hearts.png" type="Texture" id=4]
 [ext_resource path="res://dialogFontTheme.tres" type="Theme" id=5]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=6]
-[ext_resource path="res://assets/fonts/VGATypewriter.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/fonts/MrMoTex.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=10]
@@ -52,7 +52,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="ArrayMesh" id=22]
+[sub_resource type="ArrayMesh" id=25]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -107,26 +107,22 @@ shader_param/target_palette = ExtResource( 12 )
 viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
 
 [sub_resource type="DynamicFont" id=23]
-size = 32
+size = 48
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
 font_data = ExtResource( 7 )
 
 [sub_resource type="Theme" id=24]
 default_font = SubResource( 23 )
 
-[sub_resource type="DynamicFont" id=25]
-size = 32
+[sub_resource type="DynamicFont" id=26]
+size = 48
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
 font_data = ExtResource( 7 )
 
-[sub_resource type="Theme" id=26]
-default_font = SubResource( 25 )
+[sub_resource type="Theme" id=27]
+default_font = SubResource( 26 )
 
 [sub_resource type="DynamicFont" id=12]
 outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
@@ -519,7 +515,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 22 )
+mesh = SubResource( 25 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -573,16 +569,15 @@ vframes = 3
 frame = 1
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
-margin_left = 3.0
-margin_top = 66.0
-margin_right = 66.0
-margin_bottom = 84.0
+margin_top = 65.0
+margin_right = 63.0
+margin_bottom = 130.0
 color = Color( 1, 1, 1, 0 )
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="GlitchStatusRect"]
-margin_left = 71.0
+margin_left = 67.0
 margin_top = -63.0
-margin_right = 247.0
+margin_right = 243.0
 margin_bottom = 75.0
 theme = SubResource( 24 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
@@ -590,11 +585,11 @@ text = "10/
 10"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GlitchStatusRect"]
-margin_left = 68.0
-margin_top = -65.0
-margin_right = 244.0
-margin_bottom = 73.0
-theme = SubResource( 26 )
+margin_left = 63.0
+margin_top = -67.0
+margin_right = 239.0
+margin_bottom = 71.0
+theme = SubResource( 27 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "10/
 10"
