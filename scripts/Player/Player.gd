@@ -204,6 +204,8 @@ func _process(delta):
   
   processPoisonWaterLogic(delta)
   processMPBlinkLogic(delta)
+  if pressingJump():
+    tryClearFallthroughCollisionSolid()
 
 func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
@@ -660,6 +662,12 @@ func iJustPressedDown():
   if not smallInteractionArea.is_touching_door:
     on_ground = false
   should_do_fallthrough_area_collision = false
+  tryClearFallthroughCollisionSolid()
+
+func tryClearFallthroughCollisionSolid():
+  if interactionArea.prev_fallthrough_collision_area != null and \
+     interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
+    interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
     for _i in range(num_clouds):

@@ -29,8 +29,8 @@ func _ready():
         wiggle_time_limit = 8
     spore_origin = self.global_transform.origin
 
-func fallthroughCollisionActivate():
-    if not getPlayer().on_ground and not should_wiggle:
+func fallthroughCollisionActivate(possible_game_mover):
+    if not possible_game_mover.on_ground and not should_wiggle:
         wiggle()
 
 func wiggle():

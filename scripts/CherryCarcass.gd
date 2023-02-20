@@ -43,7 +43,7 @@ func landed():
 func addJumpSmokeCloud(_flip_flip_h = false):
     pass
 
-func fallthroughCollisionActivate():
+func fallthroughCollisionActivate(_possible_game_mover):
     pass
     # mySprite.material_override.set_shader_param("enable_glitch", true)
     # print("set shake power...")

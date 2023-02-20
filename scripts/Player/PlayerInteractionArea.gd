@@ -3,8 +3,8 @@ extends Area
 func _ready():
     set_process(true)
 
+var prev_fallthrough_collision_area = null
 func _process(_delta):
-    var has_done_fallthrough_object_collision = false
     var shortest_dist = 999 # zero escape saga
     var nearest_area = null
     var fallthrough_collision_area = null
@@ -14,9 +14,10 @@ func _process(_delta):
     var areas = get_overlapping_areas()
     for area in areas:
         if area.is_in_group("fallthrough"):
-            if global.doFallthroughObjectCollision(player, area, true):
-                has_done_fallthrough_object_collision = true
-                # this makes the last fallthrough object we meet
+            if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and prev_fallthrough_collision_area == null:
+                continue
+            if global.doFallthroughObjectCollision(player, area):
+                # last fallthrough object overrides this value
                 fallthrough_collision_area = area
             
         if area.is_in_group("playerActivation") and area.has_method("playerActivationAreaPassiveActivate"):
@@ -46,8 +47,20 @@ func _process(_delta):
         # else:
         #     player.tryBroom()
 
-    if has_done_fallthrough_object_collision:
-        if fallthrough_collision_area and fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionActivate"):
-            fallthrough_collision_area.get_node("..").fallthroughCollisionActivate()
+    postProcessFallthroughCollisionArea(fallthrough_collision_area)
+
+func postProcessFallthroughCollisionArea(fallthrough_collision_area):
+    var player = get_node("..")
+    if fallthrough_collision_area != null:
+        if fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionActivate"):
+            fallthrough_collision_area.get_node("..").fallthroughCollisionActivate(player)
     else:
         player.should_do_fallthrough_area_collision = false
+
+
+    if prev_fallthrough_collision_area != null and \
+       prev_fallthrough_collision_area != fallthrough_collision_area and \
+       prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
+        # prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(player)
+        pass
+    prev_fallthrough_collision_area = fallthrough_collision_area

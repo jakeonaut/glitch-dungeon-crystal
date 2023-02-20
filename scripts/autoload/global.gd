@@ -193,7 +193,7 @@ func getNextGlitch(glitch_form):
 # and we don't want it in gameMover because it makes InteractionAreas do more checks to see if they
 # are the child of a GameMover....
 # anyways this way works even though global is bad :)
-func doFallthroughObjectCollision(gameMover, area, debug = false):
+func doFallthroughObjectCollision(gameMover, area):
     var areaShape = area.get_node("CollisionShape")
     var ax = areaShape.global_transform.origin.x
     var ay = areaShape.global_transform.origin.y
@@ -207,16 +207,9 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
     if not gameMover.has_node("CollisionShape") \
         or not gameMover.get_node("CollisionShape").shape is CylinderShape \
         or not "should_do_fallthrough_area_collision" in gameMover:
-        if debug:
-            print(
-                str(not gameMover.has_node("CollisionShape")) + ", " +
-                str(not gameMover.get_node("CollisionShape").shape is CylinderShape)
-                + ", " + str(not "should_do_fallthrough_area_collision" in gameMover)
-            )
-            print(gameMover.get_node("CollisionShape"))
-            print(gameMover.get_node("CollisionShape").shape is CylinderShape)
         return false
         
+    # check for fallThroughSolid collision while falling
     var rb = gameMover.get_node("CollisionShape").shape.radius
     var lb = -rb
     var tb = gameMover.get_node("CollisionShape").shape.height/2
