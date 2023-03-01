@@ -2,11 +2,12 @@ extends "GlitchEnemy.gd"
 
 var jump_timer = 0
 var jump_time_limit = 30
+var water_jump_time_limit = 10
 
 var air_timer = 0
 var air_time_limit = 15
 var spawn_timer = 0
-var spawn_time_limit = 3
+var spawn_time_limit = 15
 
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
@@ -37,33 +38,28 @@ func _process(delta):
     pauseSelf = false
     on_ground = true
 
-  if on_ground or is_static:
+  if on_ground or is_static or is_touching_water:
     if not is_static:
       jump_timer +=  (delta * 22)
-      if jump_timer >= jump_time_limit:
+      if jump_timer >= jump_time_limit or (is_touching_water and jump_timer >= water_jump_time_limit):
         behavior_jumping = true
         behavior_walking = true
         jump_timer = 0
 
     if not is_infected:
       spawn_timer += (delta*22)
-      if spawn_timer >= spawn_time_limit:
+      if spawn_timer >= spawn_time_limit or (is_touching_water and spawn_timer >= water_jump_time_limit):
           spawn_timer = 0
-          # var bubble = bubbleRes.instance()
-          # level.add_child(bubble)
-          # bubble.global_transform.origin = self.global_transform.origin
-          # bubble.original_pos_x = self.global_transform.origin.x
-          # bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
-          # bubble.global_transform.origin.y += 1
-          # bubble.setAsParent(self)
+          var bubble = bubbleRes.instance()
+          level.add_child(bubble)
+          bubble.global_transform.origin = self.global_transform.origin
+          bubble.original_pos_x = self.global_transform.origin.x
+          bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
+          bubble.global_transform.origin.y += 1
+          bubble.setAsParent(self)
   else:
     spawn_timer = 0
     behavior_jumping = false
-    mySprite.max_frames = 1
-    if vv > 0:
-      mySprite.updateBaseFrame(2, 0)
-    else:
-      mySprite.updateBaseFrame(3, 0)
 
     if behavior_walking:
       air_timer += (delta * 22)
@@ -73,6 +69,13 @@ func _process(delta):
 
   moveMyFriends(delta)
   lastPosition = self.global_transform.origin
+
+  if not on_ground:
+    mySprite.max_frames = 1
+    if vv > 0:
+      mySprite.updateBaseFrame(2, 0)
+    else:
+      mySprite.updateBaseFrame(3, 0)
 
 func glitchSwitchSprite(_delta):
   pass

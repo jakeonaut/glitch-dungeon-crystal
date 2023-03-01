@@ -12,6 +12,7 @@ onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
+onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
@@ -211,6 +212,7 @@ func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
     if global.memory["mp"] == 0:
       mpNumSprite.frame = 880
+      mpNumSprite2.frame = 880
       blink_timer += (delta*22)
       if (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
         blink_timer = 0
@@ -245,6 +247,7 @@ func processMPBlinkLogic(delta):
     if global.memory["mp"] == 1:
       blink_time_limit = 2
       mpNumSprite.frame = 881
+    mpNumSprite2.frame = mpNumSprite.frame
     blink_timer += (delta*22)
     if overwrite_blink or (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
       blink_timer = 0
@@ -268,6 +271,13 @@ func processMPBlinkLogic(delta):
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().black_palette)
       elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().white_palette)
+
+  if showMpTimer < showMpTimeLimit:
+    showMpTimer += (delta*22)
+    var opacity = 2*(1 - (showMpTimer/showMpTimeLimit))
+    mpNumSprite2.material_override.set_shader_param("opacity", opacity)
+  if showMpTimer >= showMpTimeLimit:
+    mpNumSprite.visible = false
   
 func tryDieToOffscreenCamera(delta):
   var DEATH_MARGIN = 5
@@ -456,6 +466,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
       level.glitchScreenEffect.visible = true
     if summonedBroom:
       broomStop()
+    tryClearFallthroughCollisionSolid()
   else:
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)

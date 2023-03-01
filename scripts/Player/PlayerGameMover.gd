@@ -29,6 +29,9 @@ var blink_time_limit = 20
 var is_blinked = false
 var unblink_time_limit = 5
 
+var showMpTimer = 0
+var showMpTimeLimit = 60
+
 func _ready():
   set_physics_process(true)
   set_process(true)
@@ -110,6 +113,8 @@ func spawnSparkles(delta, above_the_head = false):
     sparkle_timer += (delta*22)
     if sparkle_timer >= sparkle_time_limit:
       global.memory["mp"] -= 1
+      showMpTimer = 0
+      
       spawnOneSparkle(.5, above_the_head)
       spawnOneSparkle(-.5, above_the_head)
       sparkle_timer = 0

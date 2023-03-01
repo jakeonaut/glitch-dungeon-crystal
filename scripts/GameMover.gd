@@ -242,10 +242,10 @@ func processPhysics(delta):
       elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
         aniPlayer.stop()
         aniPlayer.clear_queue()
-        # if is_touching_water:
-        #   aniPlayer.queue("swimJump")
-        # else:
-        aniPlayer.queue("jump")
+        if is_touching_water:
+          aniPlayer.queue("swimJump")
+        else:
+          aniPlayer.queue("jump")
 
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
@@ -469,21 +469,21 @@ func processJumpInputs(delta):
   # jump
   if justPressedJump() or recentlyJustPressedJump(): 
     # # Jump from the water
-    # if is_touching_water:
-    #   was_touching_water_at_start_of_jump = true
-    #   vv = jump_force / 2
+    if is_touching_water:
+      was_touching_water_at_start_of_jump = true
+      vv = jump_force / 2
 
-    #   if is_touching_water and wetJumpSound != null and justPressedJump():
-    #     wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
-    #     wetJumpSound.play()
-    #   on_ground = false
-    #   should_do_fallthrough_area_collision = false
-    #   has_just_jumped_timer = -has_just_jumped_time_limit
+      if is_touching_water and wetJumpSound != null and justPressedJump():
+        wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
+        wetJumpSound.play()
+      on_ground = false
+      should_do_fallthrough_area_collision = false
+      has_just_jumped_timer = -has_just_jumped_time_limit
 
-    #   if not pauseAnimation and aniPlayer:
-    #     aniPlayer.clear_queue()
-    #     aniPlayer.play("swimJumpStart")
-    #     aniPlayer.queue("swimJump")
+      if not pauseAnimation and aniPlayer:
+        aniPlayer.clear_queue()
+        aniPlayer.play("swimJumpStart")
+        aniPlayer.queue("swimJump")
     # Jump from the ground
     if isKindOfOnGround():
       was_touching_water_at_start_of_jump = false
@@ -526,11 +526,11 @@ func processJumpInputs(delta):
   elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
     feather_jump_timer += (delta*22)
     
-  # if was_touching_water_at_start_of_jump and pressingJump(): #not is_touching_water and
-  #   feather_jump_timer = 0
-  #   should_magic_jump = true
-  #   actuallyApplyJump(false)
-  #   was_touching_water_at_start_of_jump = false
+  if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
+    feather_jump_timer = 0
+    should_magic_jump = true
+    actuallyApplyJump(false)
+    was_touching_water_at_start_of_jump = false
     
   if not pressingJump():
     weak_feather_dbl_jump = true

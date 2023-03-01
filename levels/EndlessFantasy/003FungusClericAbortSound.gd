@@ -62,7 +62,6 @@ func summon(npc, set_vars = true):
 func summonAngelStatue():
   summonSmokeClouds(angelStatue, 5, true, true)
   angelStatue.visible = true
-  global.memory["which_floor"] = 1
 
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
