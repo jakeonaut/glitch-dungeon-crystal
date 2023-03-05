@@ -30,6 +30,8 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
 
+  # is_doing_fake_static = true
+
   if initial_target != null:
     if initial_target.has_node("CameraTarget"):
       initial_target = initial_target.get_node("CameraTarget")
@@ -121,18 +123,17 @@ func _process(delta):
     set_speed(0)
     set_interpolation_enabled(false)
     var target_screen_pos = unproject_position(actual_target.get_ref().global_transform.origin)
-    var SCREEN_WIDTH = 640
-    if target_screen_pos.x >= SCREEN_WIDTH:
-      self.global_transform.origin.x += project_position(Vector2(SCREEN_WIDTH*1, 0), 0).x*2
-      print(self.global_transform.origin.x)
-    elif target_screen_pos.x <= 0:
-      self.global_transform.origin.x -= project_position(Vector2(SCREEN_WIDTH*1, 0), 0).x*2
-      
-    var SCREEN_HEIGHT = 512
-    if target_screen_pos.y >= SCREEN_HEIGHT:
-      self.global_transform.origin.y += project_position(Vector2(0, SCREEN_HEIGHT*1), 0).y*2
-    elif target_screen_pos.y <= 0:
-      self.global_transform.origin.y -= project_position(Vector2(0, SCREEN_HEIGHT*1), 0).y*2
+
+    # self.global_transform.origin.x = x_step * floor(x / x_step) + x_step
+
+    var SCREEN_WIDTH = 1280.0
+    var SCREEN_HEIGHT = 1024.0
+    # self.global_transform.origin.x = fmod(target_screen_pos.x, SCREEN_WIDTH) # doesn't work...
+    # self.global_transform.origin.y = fmod(target_screen_pos.y, SCREEN_HEIGHT)
+    print(target_screen_pos)
+    var w = 10
+    realCamera.global_transform.origin.x = project_position(Vector2(SCREEN_WIDTH * floor(target_screen_pos.x / SCREEN_WIDTH) + SCREEN_WIDTH/2 + w, 0), 0).x
+    realCamera.global_transform.origin.y = project_position(Vector2(0, SCREEN_HEIGHT * floor(target_screen_pos.y / SCREEN_HEIGHT) + SCREEN_HEIGHT/2 + w), 0).y
     
   respectLevelTilesEdges()
   

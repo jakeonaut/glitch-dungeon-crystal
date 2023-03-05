@@ -1250,7 +1250,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 192.9, 20, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100006, 2, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1 )
@@ -1434,6 +1434,7 @@ bbText = "i was born from the
 blood of the magi "
 can_activate = false
 can_camera_zoom = false
+is_a_body = false
 tiny_textbox = true
 
 [node name="SmallInteractionArea" parent="Viewport/level/NPC3" index="2"]
@@ -1457,27 +1458,15 @@ shape = SubResource( 61 )
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 0 )
 
-[node name="NPC2" parent="Viewport/level/QuestionBlock" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-grav = 0
-bbText = "why did you
-wake me up?"
-can_activate = false
-can_camera_zoom = false
-tiny_textbox = true
-
-[node name="SmallInteractionArea" parent="Viewport/level/QuestionBlock/NPC2" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC2/SmallInteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
-shape = SubResource( 65 )
-
-[node name="AbortSound" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox" index="9"]
-script = ExtResource( 40 )
-
-[node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC2/FallthroughSolid" index="0"]
-shape = SubResource( 61 )
+[node name="GridMap" type="GridMap" parent="Viewport/level/QuestionBlock"]
+mesh_library = ExtResource( 30 )
+cell_size = Vector3( 1, 1, 1 )
+data = {
+"cells": PoolIntArray( 65536, 0, 35, 131071, 0, 34, 131072, 0, 37, 196607, 0, 36 )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
 
 [node name="QuestionBlock2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 5, 0 )
@@ -1488,15 +1477,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38544, 0 )
 [node name="QuestionBlock3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 0 )
 
-[node name="GridMap" type="GridMap" parent="Viewport/level/QuestionBlock3"]
-mesh_library = ExtResource( 30 )
-cell_size = Vector3( 1, 1, 1 )
-data = {
-"cells": PoolIntArray( 65536, 0, 35, 131071, 0, 34, 131072, 0, 37, 196607, 0, 36 )
-}
-__meta__ = {
-"_editor_clip_": 0
-}
+[node name="NPC2" parent="Viewport/level/QuestionBlock3" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+grav = 0
+bbText = "why did you
+wake me up?"
+can_activate = false
+can_camera_zoom = false
+tiny_textbox = true
+
+[node name="SmallInteractionArea" parent="Viewport/level/QuestionBlock3/NPC2" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock3/NPC2/SmallInteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 65 )
+
+[node name="AbortSound" parent="Viewport/level/QuestionBlock3/NPC2/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 40 )
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock3/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 61 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 13.4187, 0 )
@@ -1754,8 +1755,8 @@ flip_v = true
 [editable path="Viewport/level/NPC8/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
-[editable path="Viewport/level/QuestionBlock/NPC2"]
-[editable path="Viewport/level/QuestionBlock/NPC2/NPC TextBox"]
+[editable path="Viewport/level/QuestionBlock3/NPC2"]
+[editable path="Viewport/level/QuestionBlock3/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door4"]
