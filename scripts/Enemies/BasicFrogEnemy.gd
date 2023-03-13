@@ -13,19 +13,25 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
 export var is_static = false
-export var is_infected = false
+export var is_infected = true
 
 onready var interactionArea = get_node("SmallInteractionArea")
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
+var original_material = null
+
+onready var mushroomSprite = get_node("MushroomSprite") if has_node("MushroomSprite") else null
+onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
+  original_material = mySprite.get_material_override().duplicate()
 
   smack_time_limit = 5
   interactionArea.add_to_group("no_pushems")
+    
 
 func setAsParent(_owner):
   behavior_jumping = true
@@ -34,6 +40,17 @@ func setAsParent(_owner):
   walk_direction = -1
 
 func _process(delta):
+  if is_infected:
+    if mySprite2:
+      mySprite.set_material_override(mySprite2.get_material_override())
+    if mushroomSprite:
+      mushroomSprite.visible = true
+  else:
+    if original_material:
+      mySprite.set_material_override(original_material)
+    if mushroomSprite:
+      mushroomSprite.visible = false
+
   if pauseSelf and not is_smacked:
     pauseSelf = false
     on_ground = true

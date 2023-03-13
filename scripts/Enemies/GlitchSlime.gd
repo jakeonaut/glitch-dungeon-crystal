@@ -6,6 +6,7 @@ onready var heartSprite = get_node("HeartSprite")
 onready var heartSound = get_node("Sounds/HeartSound")
 var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
+var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 onready var dieAniPlayer = get_node("DieAnimationPlayer")
 export var metamorphosis_on_range = false
@@ -111,5 +112,10 @@ func ouchies(broom_origin):
     else:
         dieAniPlayer.queue("metamorphosis")
         dieAniPlayer.queue("flutterAway")
+
+    var miniCubeCrystal = miniCubeCrystalRes.instance()
+    level.add_child(miniCubeCrystal)
+    miniCubeCrystal.global_transform.origin = self.global_transform.origin
+    
     if broom_origin.x < self.global_transform.origin.x:
         pass

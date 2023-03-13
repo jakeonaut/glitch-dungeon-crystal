@@ -585,7 +585,52 @@ func processPoisonWaterLogic(delta):
     if glitch_form == global.GlitchForm.INVISIBLE:
       tryDieToEnemy(delta, true, false)
     else:
-      tryDieToEnemy(delta, true, false)
+      if poison_timer == 0 or unpoison_timer > 0:
+        poisonWaterSound.play()
+      elif reversePoisonWaterSound.is_playing():
+        # TODO(jaketrower): Could be put in a function
+        var playback_position = reversePoisonWaterSound.get_playback_position()
+        var sound_length = reversePoisonWaterSound.stream.get_length()
+        poisonWaterSound.play(sound_length - playback_position)
+        reversePoisonWaterSound.stop()
+      # If trying to jump out of water a lot... poison harder!
+      if unpoison_timer > 0:
+        poison_timer += (delta * 220)
+        unpoison_timer = 0
+      poison_timer += (delta*22)
+      if poison_timer > 7:
+        glitchTickle(0)
+      if poison_timer >= poison_time_limit:
+        tryDieToEnemy(delta, true, false)
+        poison_timer = 0
+        poisonWaterSound.stop()
+
+  if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
+    if poisonWaterSound.is_playing():
+      # TODO(jaketrower): Could be put in a function
+      var playback_position = poisonWaterSound.get_playback_position()
+      var sound_length = poisonWaterSound.stream.get_length()
+      reversePoisonWaterSound.play(sound_length - playback_position)
+      poisonWaterSound.stop()
+    # decrease more slowly than it increases... toxic
+    unpoison_timer += (delta * 22)
+    if unpoison_timer >= unpoison_time_limit:
+      poison_timer -= (delta * 22)
+      if poison_timer <= 0:
+        poison_timer = 0
+        level.glitchScreenEffect.visible = false
+        musicPlayer.changeSongPitch(1.0)
+        reversePoisonWaterSound.stop()
+
+  if poison_timer > 0:
+    level.glitchScreenEffect.visible = true
+    level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
+    musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
+  if poison_timer < 0:
+    poison_timer = 0
+    level.glitchScreenEffect.visible = false
+    musicPlayer.changeSongPitch(1.0)
+    reversePoisonWaterSound.stop()
     
 # @override
 func landed():
@@ -602,18 +647,19 @@ func landed():
     localAniPlayer.clear_queue()
     localAniPlayer.queue("stand")
 
-  var lt = getLevelTiles()
-  var original_y = global_transform.origin.y
-  for _i in range(4):
-    var tiles = getTilesBelow(lt)
-    if tiles[0] != null:
-      lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
-    if tiles[1] != null:
-      lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
-    if tiles[2] != null:
-      lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
-    global_transform.origin.y -= 1
-  global_transform.origin.y = original_y
+  # TODO(jaketrower): Uncomment out for final dungeon level
+  # var lt = getLevelTiles()
+  # var original_y = global_transform.origin.y
+  # for _i in range(4):
+  #   var tiles = getTilesBelow(lt)
+  #   if tiles[0] != null:
+  #     lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+  #   if tiles[1] != null:
+  #     lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+  #   if tiles[2] != null:
+  #     lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+  #   global_transform.origin.y -= 1
+  # global_transform.origin.y = original_y
     
 func broomStop():
   summonedBroom = null

@@ -30,7 +30,7 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
 
-  # is_doing_fake_static = true
+  is_doing_fake_static = false
 
   if initial_target != null:
     if initial_target.has_node("CameraTarget"):
@@ -130,10 +130,13 @@ func _process(delta):
     var SCREEN_HEIGHT = 1024.0
     # self.global_transform.origin.x = fmod(target_screen_pos.x, SCREEN_WIDTH) # doesn't work...
     # self.global_transform.origin.y = fmod(target_screen_pos.y, SCREEN_HEIGHT)
-    print(target_screen_pos)
-    var w = 10
-    realCamera.global_transform.origin.x = project_position(Vector2(SCREEN_WIDTH * floor(target_screen_pos.x / SCREEN_WIDTH) + SCREEN_WIDTH/2 + w, 0), 0).x
-    realCamera.global_transform.origin.y = project_position(Vector2(0, SCREEN_HEIGHT * floor(target_screen_pos.y / SCREEN_HEIGHT) + SCREEN_HEIGHT/2 + w), 0).y
+    
+    var w = 0
+    var position_x_2D = Vector2(SCREEN_WIDTH * floor(target_screen_pos.x / SCREEN_WIDTH) + SCREEN_WIDTH/2 + w, 0)
+    self.global_transform.origin.x = project_position(position_x_2D, 0).x
+    var position_y_2D = Vector2(0, SCREEN_HEIGHT * floor(target_screen_pos.y / SCREEN_HEIGHT) + SCREEN_HEIGHT/2 + w)
+    self.global_transform.origin.y = project_position(position_y_2D, 0).y
+    print(position_x_2D, self.global_transform.origin.x)
     
   respectLevelTilesEdges()
   

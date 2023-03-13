@@ -10,7 +10,7 @@ export var dont_recolor_me = false
 
 export var is_passive = false
 export var is_vertical = false
-export var num_cubes_unlock = 999
+export var num_keys_unlock = 999
 
 onready var npc = get_node("NPC")
 
@@ -61,7 +61,7 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    npc.textBoxContainer.bbText = "locked" #str(num_cubes_unlock) + " crystal to unlock"
+    npc.textBoxContainer.bbText = "locked,\nneeds" + str(num_keys_unlock) + "keys"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:

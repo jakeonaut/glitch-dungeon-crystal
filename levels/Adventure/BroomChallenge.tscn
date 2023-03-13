@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -80,10 +80,6 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=26]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -97,7 +93,6 @@ audio_listener_enable_3d = true
 script = ExtResource( 10 )
 starting_glitch_type = 1
 tileset_type = 1
-has_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 11 )]
 
@@ -219,7 +214,7 @@ is_really_important = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -53, -23, 0 )
 shape = SubResource( 16 )
 
-[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
@@ -283,9 +278,6 @@ shape = SubResource( 21 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 26 )
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 16, 0 )
 grav = 0
@@ -331,5 +323,4 @@ __meta__ = {
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]
 [editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

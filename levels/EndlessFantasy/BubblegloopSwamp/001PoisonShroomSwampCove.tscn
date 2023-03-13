@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=25]
-[ext_resource path="res://scripts/LevelEvents/001PoisonShroomSwampCove_InfectionScene.gd" type="Script" id=26]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=29]
@@ -255,13 +254,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
-
-[sub_resource type="BoxShape" id=34]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=35]
-extents = Vector3( 2, 4, 2 )
 
 [sub_resource type="BoxShape" id=46]
 resource_local_to_scene = true
@@ -655,6 +647,7 @@ script = ExtResource( 2 )
 starting_glitch_type = 2
 tileset_type = 2
 how_much_mp = 11
+display_title = "LV1: Save All Frogs"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -673,6 +666,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.46, 2.0016, 0 )
+visible = false
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -742,7 +736,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 155.1, 15.2, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/EndlessFantasy/001YourFirstPuzzle.tscn"
+path = "res://levels/EndlessFantasy/004AngelStatueRestZone.tscn"
 dont_recolor_me = true
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
@@ -1163,30 +1157,6 @@ spawned_object_path = "res://sceneObjects/Environment/Spore.tscn"
 
 [node name="SwampBubbleSpawn3" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -1, 0 )
-
-[node name="FrogToBeInfected" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.2, 6.9, 0 )
-script = null
-
-[node name="Sprite3D" parent="Viewport/level/FrogToBeInfected" index="0"]
-max_frames = 0
-should_animate = false
-
-[node name="FallthroughSolid" parent="Viewport/level/FrogToBeInfected" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/FrogToBeInfected/FallthroughSolid" index="0"]
-shape = SubResource( 34 )
-
-[node name="FrogInfectionEvent" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.3, 9.6371, 0 )
-script = ExtResource( 26 )
-
-[node name="Area" type="Area" parent="Viewport/level/FrogInfectionEvent"]
-script = ExtResource( 22 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/FrogInfectionEvent/Area"]
-shape = SubResource( 35 )
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 128.7, 13.9, -0.999998 )
@@ -2283,7 +2253,6 @@ __meta__ = {
 [editable path="Viewport/level/SwampBubbleSpawn6/BubbleSpawner"]
 [editable path="Viewport/level/SwampBubbleSpawn3"]
 [editable path="Viewport/level/SwampBubbleSpawn3/BubbleSpawner"]
-[editable path="Viewport/level/FrogToBeInfected"]
 [editable path="Viewport/level/BasicFrogEnemy4"]
 [editable path="Viewport/level/BasicFrogEnemy6"]
 [editable path="Viewport/level/BasicFrogEnemy7"]
