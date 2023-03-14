@@ -120,8 +120,8 @@ func _process(delta):
   #     var grid_cell = levelTiles.world_to_map(player_position)
   #     levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
 
-func saveTheGame():
-  uiLayer.displaySavingText()
+func saveTheGame(message = "saving (not really)"):
+  uiLayer.displaySavingText(message)
   global.saveGame()
     
 func restartMusic():

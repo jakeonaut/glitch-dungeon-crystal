@@ -312,8 +312,10 @@ func applyTerminalVelocity(_delta):
   elif glitch_form == global.GlitchForm.FEATHER:
     if pressingJump():
       terminal_vel = true_terminal_feather_vel
-    else:
+    elif pressingDown():
       terminal_vel = true_terminal_vel
+    else:
+      terminal_vel = true_terminal_vel / 2
   else:
     terminal_vel = true_terminal_vel
 

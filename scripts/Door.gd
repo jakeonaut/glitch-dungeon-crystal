@@ -61,7 +61,7 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    npc.textBoxContainer.bbText = "locked,\nneeds" + str(num_keys_unlock) + "keys"
+    npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:
@@ -162,19 +162,21 @@ func activate():
     if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().on_ground:
       goThroughDoor()
     elif is_locked:
-      if global.memory["key"] > 0:
-        global.memory["key"] -= 1
+      if global.memory["key"] >= num_keys_unlock:
+        global.memory["key"] -= num_keys_unlock
         npc.visible = false 
         npc.can_activate = false
         npc.is_active = false
-        npc.stopPassiveActivate()
         animationPlayer.clear_queue()
         animationPlayer.stop()
         doorOpenSound.play()
         animationPlayer.queue("doorOpen")
         is_locked = false
         setGlobalMemoryOfHasUnlocked()
-      if not lockedSound.is_playing():
+        if global.activeInteractor != null:
+          global.activeInteractor.stopInteract()
+        global.activeInteractor = null
+      elif not lockedSound.is_playing():
         lockedSound.play()
         npc.activate()
 
@@ -227,9 +229,9 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
 func land():
   global.pauseGame = false
   # TODO(jaketrower): Oh...
-  global.memory.erase("active_save_point_x")
-  global.memory.erase("active_save_point_y")
-  global.memory.erase("active_save_point_z")
+  # global.memory.erase("active_save_point_x")
+  # global.memory.erase("active_save_point_y")
+  # global.memory.erase("active_save_point_z")
   
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y
@@ -254,6 +256,7 @@ func land():
       getPlayer().on_ground = false
       
   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+  global.memory["roomPath"] = level.getLevelName()
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):

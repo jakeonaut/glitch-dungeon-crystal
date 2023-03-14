@@ -27,6 +27,7 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    addPlusSprite()
     queue_free()
     
   set_process(true)
@@ -80,10 +81,13 @@ func passiveActivate(_delta):
         global.memory[level.getShortLevelName()] = {}
       global.memory[level.getShortLevelName()][self.name] = true
 
-    remove_child(plusSpriteContainer)
-    level.add_child(plusSpriteContainer)
-    plusSpriteContainer.visible = true
-    plusSpriteContainer.global_transform.origin = self.global_transform.origin
+    addPlusSprite()
+
+func addPlusSprite():
+  remove_child(plusSpriteContainer)
+  level.add_child(plusSpriteContainer)
+  plusSpriteContainer.visible = true
+  plusSpriteContainer.global_transform.origin = self.global_transform.origin
 
   # global.pauseGame = true
   # global.pauseMoveInput = true

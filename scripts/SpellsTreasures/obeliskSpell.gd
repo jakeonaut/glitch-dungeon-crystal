@@ -134,9 +134,12 @@ func passiveActivate(_delta):
   level.player.glitchTickle(global.memory["mp"] < global.memory["max_mp"])
   if not is_active:
     if global.memory["mp"] < global.memory["max_mp"]:
-      if global.memory["mp"] < global.memory["max_mp"]-1:
+      print("yo", level.player.glitch_form, my_glitch_form)
+      if level.player.glitch_form != my_glitch_form:
         collectSound.pitch_scale = 0.5
         collectSound.play()
+      elif global.memory["mp"] < global.memory["max_mp"]-2:
+        level.player.rechargeSound.play()
       if global.memory["mp"] == 0:
         level.player.restoreGlitchAndMP()
       num_sparkles_spawned = 0

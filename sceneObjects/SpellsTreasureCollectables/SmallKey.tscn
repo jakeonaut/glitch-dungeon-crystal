@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
@@ -10,10 +10,11 @@
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=8]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/SpellsTreasures/SmallKey.gd" type="Script" id=10]
-[ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/pickup.wav" type="AudioStream" id=11]
 [ext_resource path="res://scripts/SpellsTreasures/SmallKeyAbortSound.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/tone2.wav" type="AudioStream" id=15]
 
 [sub_resource type="ShaderMaterial" id=55]
 shader = ExtResource( 6 )
@@ -264,11 +265,18 @@ script = ExtResource( 12 )
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 volume_db = -25.0
-pitch_scale = 0.8
+pitch_scale = 1.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -20.0
 pitch_scale = 0.65
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+pitch_scale = 3.0
 
 [editable path="NPC TextBox"]

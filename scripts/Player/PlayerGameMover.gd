@@ -18,6 +18,7 @@ var has_sweeped_glitch = false
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
 onready var nullifySound = get_node("Sounds/NullifySound")
+onready var rechargeSound = get_node("Sounds/RechargeSound")
 onready var cameraTarget = get_node("CameraTarget")
 var camera_target_origin_x_target = 0
 

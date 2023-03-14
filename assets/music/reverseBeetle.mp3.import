@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/reverseBeetle.mp3-476defd9e0e5fc113a1bdc8eb9edd492.mp3str"
+
+[deps]
+
+source_file="res://assets/music/reverseBeetle.mp3"
+dest_files=[ "res://.import/reverseBeetle.mp3-476defd9e0e5fc113a1bdc8eb9edd492.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

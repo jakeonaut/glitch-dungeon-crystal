@@ -13,7 +13,7 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
 export var is_static = false
-export var is_infected = true
+export var is_infected = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
 var who_is_standing_on_me = {}

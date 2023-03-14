@@ -188,8 +188,9 @@ func tryLerpFromCenter(rect, delta, final_pos):
     if stepify(rect.rect_position.x, 0.1) == final_pos.x:
       rect.rect_position = final_pos
 
-func displaySavingText():
+func displaySavingText(message = "saving (not really)"):
   savingTextLabel.visible = true
+  savingTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
   should_display_saving_text = true
   saving_text_timer = 0
 

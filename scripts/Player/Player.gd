@@ -107,8 +107,12 @@ func restoreGlitchAndMP():
   
 
 func applyGlitch(glitch, notPlaySound = false):
+  nullifySound.stop()
   if not notPlaySound:
-    transformSound.play()
+    if glitch == self.glitch_form:
+      rechargeSound.play()
+    else:
+      transformSound.play()
   global.memory["current_glitch"] = glitch
 
   mySprite.get_material_override().set_shader_param("opacity", 1.0)

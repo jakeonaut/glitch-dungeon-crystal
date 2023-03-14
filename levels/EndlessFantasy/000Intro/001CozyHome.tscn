@@ -167,7 +167,7 @@ grav = 0
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, -9.1, 0 )
-path = "res://levels/EndlessFantasy/000FrogWizardIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1/0_0.tscn"
 is_passive = true
 is_vertical = true
 

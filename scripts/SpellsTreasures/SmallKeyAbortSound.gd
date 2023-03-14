@@ -10,8 +10,10 @@ func activateScript():
     var key = get_node("../../..")
     global.pauseGame = false
     global.pauseMoveInput = false
-    level.saveTheGame()
+    level.saveTheGame("got a key!")
+    yield(get_tree().create_timer(0.30), "timeout")
     key.queue_free()
+    level.player.aniPlayer.play("stand")
 
 func isActive():
     return true

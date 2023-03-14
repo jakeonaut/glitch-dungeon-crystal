@@ -15,6 +15,9 @@ func _ready():
     set_process(true)
     set_physics_process(true)
 
+    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+        visible = false
+
 func _process(_delta):
     pauseSelf = not visible
 
@@ -31,6 +34,7 @@ func alignMySprite():
 
 func landed():
     get_node("SecretAnimationPlayer").play("land")
+    landSound.play()
     jump_force /= 2
     land_count += 1
     if land_count >= land_count_limit:
@@ -58,3 +62,4 @@ func collectMe():
     grav = 0
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
+    collectSound.play()
