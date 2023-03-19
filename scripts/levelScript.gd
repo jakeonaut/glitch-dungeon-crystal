@@ -170,14 +170,18 @@ func tryToRespawn():
       global.memory["active_save_point_y"], 
       global.memory["active_save_point_z"])
     gameCamera.rotation_degrees.y = global.cameraRotation
-    player.last_grounded_y = player.global_transform.origin.y 
-  elif global.memory.has("lastDoor") and global.memory["roomPath"] != getLevelName():
-    var door_path = global.memory["roomPath"]
-    var doors = get_tree().get_nodes_in_group("doors")
-    for door in doors:
-      if door.path == door_path:
-        found_door = door
-        break
+    player.last_grounded_y = player.global_transform.origin.y
+  elif global.isRespawning and global.memory.has("roomPath") and global.memory["roomPath"] != getLevelName():
+    if global.memory.has("active_save_point_x"):
+      transition.path = global.memory["roomPath"]
+      transition.change_scene()
+    elif global.memory.has("lastDoor"):
+      var door_path = global.memory["roomPath"]
+      var doors = get_tree().get_nodes_in_group("doors")
+      for door in doors:
+        if door.path == door_path:
+          found_door = door
+          break
   else:
     player.global_transform.origin = player.spawn_origin
 
