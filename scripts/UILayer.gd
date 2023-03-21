@@ -202,7 +202,6 @@ onready var glitchSprite = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite
 onready var glitchSprite2 = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite2")
 func normalGlitch():
   glitchSprite.visible = false
-  glitchSprite2.visible = false
 
 func glitch(palette):
   glitchSprite.visible = true

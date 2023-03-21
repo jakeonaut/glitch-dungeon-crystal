@@ -61,7 +61,7 @@ func _ready_impl():
   if global.memory.has("current_glitch"):
     if global.memory["mp"] > 0:
       player.applyGlitch(global.memory["current_glitch"], true)
-  elif starting_glitch_type != 0:
+  else:
     player.applyGlitch(starting_glitch_type, true)
 
   if global.memory.has("player_costume"):
@@ -82,6 +82,8 @@ func _ready_impl():
   else:
     pass
   global.activeThrowableObjectPath = null
+  player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
+  player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

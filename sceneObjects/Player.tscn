@@ -1348,7 +1348,7 @@ pitch_scale = 1.05
 
 [node name="NullifySound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 33 )
-volume_db = -15.0
+volume_db = -18.0
 pitch_scale = 0.7
 
 [node name="RechargeSound" type="AudioStreamPlayer" parent="Sounds"]

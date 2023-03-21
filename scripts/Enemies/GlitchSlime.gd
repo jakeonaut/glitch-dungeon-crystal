@@ -6,10 +6,11 @@ onready var heartSprite = get_node("HeartSprite")
 onready var heartSound = get_node("Sounds/HeartSound")
 var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
-var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 onready var dieAniPlayer = get_node("DieAnimationPlayer")
 export var metamorphosis_on_range = false
+
+export var flip_initial_direction = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,11 @@ func _ready():
     behavior_intermittent_walking = true
     
     should_collide_ceil = false
+
+    if flip_initial_direction:
+        walk_direction = -walk_direction
+        if myOtherSprite:
+            myOtherSprite.flip_h = not myOtherSprite.flip_h
 
 func _process(delta):
     # ._process(delta) implicit
@@ -87,6 +93,7 @@ func processDeath():
         
 # @override
 func ouchies(broom_origin):
+    .ouchies_base()
     if am_i_dying or not visible: return
         
     am_i_dying = true
@@ -112,10 +119,6 @@ func ouchies(broom_origin):
     else:
         dieAniPlayer.queue("metamorphosis")
         dieAniPlayer.queue("flutterAway")
-
-    var miniCubeCrystal = miniCubeCrystalRes.instance()
-    level.add_child(miniCubeCrystal)
-    miniCubeCrystal.global_transform.origin = self.global_transform.origin
     
     if broom_origin.x < self.global_transform.origin.x:
         pass

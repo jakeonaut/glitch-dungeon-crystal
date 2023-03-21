@@ -10,6 +10,7 @@ onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
+var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 enum SlimeState {
     IDLE,
@@ -41,6 +42,8 @@ export var behavior_directional_bullet = false
 export var walk_direction = 1
 export var is_particle = false
 export var modAmt = 0.5
+
+export var is_static_in_level = true
 
 var is_smacked = false
 var smack_timer = 0
@@ -315,9 +318,20 @@ func tryAddEnemiesGroup():
     if not smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.add_to_group("enemies")
 
+func ouchies_base():
+    if am_i_dying:
+        return
+    if is_static_in_level and not (global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name)):
+        setGlobalMemoryOfHasBeenDefeated()
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = self.global_transform.origin
+
 func ouchies(_broom_origin):
     if is_particle:
         return
+
+    ouchies_base()
 
     if not am_i_dying:
         am_i_dying = true
@@ -356,6 +370,11 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             new_material.set_shader_param("enable_glitch", "true")
             new_material.set_shader_param("target_palette", global.weird_base_palette)
             newSmokeCloud.set_material_override(new_material.duplicate())
+
+func setGlobalMemoryOfHasBeenDefeated():
+  if not global.memory.has(level.getShortLevelName()):
+    global.memory[level.getShortLevelName()] = {}
+  global.memory[level.getShortLevelName()][self.name] = true
 
 export var time_influence = 35
 export var y_div = 2.3

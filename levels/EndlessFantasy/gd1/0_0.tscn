@@ -219,7 +219,7 @@ bbText = "\"don't remember
 having a basement..\""
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 4.3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3, 4.3, 0 )
 grav = 0
 bbText = "hi so much!
 press DOWN to
@@ -246,6 +246,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 2.5, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, -2, 0 )
 is_locked = true
+path = "res://levels/EndlessFantasy/gd1/002GrubAmbush.tscn"
 num_keys_unlock = 2
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
@@ -288,10 +289,10 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.7, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 4.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 4.5, 0 )
 
 [node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 3.8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3.8, 0 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.6, 0 )
