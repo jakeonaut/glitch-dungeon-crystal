@@ -190,7 +190,7 @@ func justStopPassiveActivate():
   getPlayer().hideInteractPrompt()
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
-  if not global.isRespawning and not hasPlayedDoorSound and not is_passive:
+  if not global.isEnteringRoom and not hasPlayedDoorSound and not is_passive:
     global.doorSound.play()
     hasPlayedDoorSound = true
 
@@ -210,7 +210,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   global.memory["roomPath"] = level.getLevelName()
   global.pauseGame = true
 
-  global.isRespawning = true
+  global.isEnteringRoom = true
   if is_passive:
     global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
     if is_vertical:

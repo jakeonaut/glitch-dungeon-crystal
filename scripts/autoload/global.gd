@@ -87,6 +87,7 @@ var activeThrowableObjectPath = null
 var activeSavePoint = null
 
 var isRespawning = false
+var isEnteringRoom = false
 var cameraRotation = 0
 
 var pauseMoveInput = false # don't allow player physics or camera input??

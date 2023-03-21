@@ -147,6 +147,7 @@ func setUpRoomInitializationOverride():
   pass
 
 func getLevelName():
+  print(get_tree().get_root().get_node("Game").get_filename())
   return get_tree().get_root().get_node("Game").get_filename()
   
 func getShortLevelName():
@@ -163,18 +164,30 @@ func tryToRespawn():
   global.pauseGame = false
 
   var found_door = null
-  if global.memory.has("active_save_point_x") and global.isRespawning \
-     and global.memory["roomPath"] == getLevelName():
-    player.global_transform.origin = Vector3(
-      global.memory["active_save_point_x"], 
-      global.memory["active_save_point_y"], 
-      global.memory["active_save_point_z"])
-    gameCamera.rotation_degrees.y = global.cameraRotation
-    player.last_grounded_y = player.global_transform.origin.y
-  elif global.isRespawning and global.memory.has("roomPath") and global.memory["roomPath"] != getLevelName():
-    if global.memory.has("active_save_point_x"):
-      transition.path = global.memory["roomPath"]
-      transition.change_scene()
+  if global.isEnteringRoom:
+    global.isEnteringRoom = false
+    if global.memory.has("lastDoor"):
+      var door_path = global.memory["roomPath"]
+      var doors = get_tree().get_nodes_in_group("doors")
+      for door in doors:
+        if door.path == door_path:
+          found_door = door
+          break
+  elif global.isRespawning:
+    print("okay respawn")
+    print(global.memory)
+    if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+      print("onto checkpoint")
+      player.global_transform.origin = Vector3(
+        global.memory["active_save_point_x"], 
+        global.memory["active_save_point_y"], 
+        global.memory["active_save_point_z"])
+      gameCamera.rotation_degrees.y = global.cameraRotation
+      player.last_grounded_y = player.global_transform.origin.y
+    elif global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] != getLevelName():
+      if global.memory.has("active_save_point_x"):
+        transition.path = global.memory["savedRoomPath"]
+        transition.change_scene()
     elif global.memory.has("lastDoor"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -182,8 +195,8 @@ func tryToRespawn():
         if door.path == door_path:
           found_door = door
           break
-  else:
-    player.global_transform.origin = player.spawn_origin
+    else:
+      player.global_transform.origin = player.spawn_origin
 
   if found_door:
     found_door.land()
