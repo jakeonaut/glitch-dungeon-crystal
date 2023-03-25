@@ -130,7 +130,7 @@ func getSmacked():
   walk_direction = 1
   if level.player.mySprite.flip_h:
     walk_direction = -1
-  is_static = false
+  # is_static = false
   pauseSelf = true
   on_ground = true
   notDieSound.play()
