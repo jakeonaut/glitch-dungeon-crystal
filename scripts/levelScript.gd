@@ -149,7 +149,7 @@ func setUpRoomInitializationOverride():
   pass
 
 func getLevelName():
-  print(get_tree().get_root().get_node("Game").get_filename())
+  # print("LEVEL NAMAE: " + get_tree().get_root().get_node("Game").get_filename())
   return get_tree().get_root().get_node("Game").get_filename()
   
 func getShortLevelName():
@@ -177,7 +177,6 @@ func tryToRespawn():
           break
   elif global.isRespawning:
     print("okay respawn")
-    print(global.memory)
     if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       print("onto checkpoint")
       player.global_transform.origin = Vector3(

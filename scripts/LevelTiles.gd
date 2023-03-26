@@ -389,6 +389,10 @@ func removeTile(key):
   set_cell_item(key.x, key.y, key.z, -1)
   tile_dict.erase(key)
 
+func cloneTile(source, target):
+  set_cell_item(target.x, target.y, target.z, get_cell_item(source.x, source.y, source.z))
+  tile_dict[target] = tile_dict[source]
+
 func properlySetTiles():
   var keys = tile_dict.keys()
   for i in range(len(keys)):

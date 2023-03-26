@@ -708,7 +708,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1243, -10, 0 )
 [node name="DigPaths" type="Spatial" parent="Viewport/level"]
 
 [node name="FlyPaths" type="Spatial" parent="Viewport/level"]
-visible = false
 
 [node name="flypath" type="Sprite3D" parent="Viewport/level/FlyPaths"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -25, 1 )
