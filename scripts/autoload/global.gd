@@ -88,6 +88,10 @@ var activeSavePoint = null
 
 var isRespawning = false
 var isEnteringRoom = false
+var hasJustRespawned = false
+var hasJustEnteredRoom = false
+var respawnVarTimerHack = 0
+var respawnVarTimerHackLimit = 2
 var cameraRotation = 0
 
 var pauseMoveInput = false # don't allow player physics or camera input??
@@ -126,6 +130,7 @@ func _ready():
     if activeThrowableObjectPath: pass
     if activeSavePoint: pass
     if isRespawning: pass
+    if isEnteringRoom: pass
     if cameraRotation: pass
     if pauseMoveInput: pass
     if pauseGame: pass
@@ -153,6 +158,13 @@ func _process(delta):
         if mini_cube_crystal_pitch_timer >= mini_cube_crystal_pitch_time_limit:
             mini_cube_crystal_pitch_timer = 0
             mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
+
+    if hasJustEnteredRoom:
+        respawnVarTimerHack += (delta*22)
+        if respawnVarTimerHack >= respawnVarTimerHackLimit:
+            respawnVarTimerHack = 0
+            hasJustEnteredRoom = false
+            isEnteringRoom = false
             
 
 

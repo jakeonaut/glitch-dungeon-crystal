@@ -81,6 +81,8 @@ func _ready():
   textBox.is_fast_text = is_fast_text
 
   if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    can_camera_zoom = false
+    textBox.can_camera_zoom = false
     if not visible and can_activate:
       visible = true
       can_activate = false

@@ -66,6 +66,8 @@ func recreateHeartSprites():
     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 func _process(delta):
+  if global.memory["max_mp"] <= 0:
+    get_node("GlitchStatusRect").visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
   get_node("GlitchStatusRect/RichTextLabel").text = str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
   get_node("GlitchStatusRect/RichTextLabel2").text = get_node("GlitchStatusRect/RichTextLabel").text

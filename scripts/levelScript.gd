@@ -43,7 +43,6 @@ func _ready_impl():
   levelTiles.buildRandomTiles()
   
   if has_spellbook_page and not global.memory.has("spellbookPage"):
-    print("gimme a spellbook page!!")
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = []
     for spellbook_spell in spellbook_spells:
@@ -59,7 +58,7 @@ func _ready_impl():
     global.memory["hp"] = global.memory["max_hp"]
     
   if global.memory.has("current_glitch"):
-    if global.memory["mp"] > 0:
+    if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
       player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
@@ -167,7 +166,6 @@ func tryToRespawn():
 
   var found_door = null
   if global.isEnteringRoom:
-    global.isEnteringRoom = false
     if global.memory.has("lastDoor"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -176,9 +174,7 @@ func tryToRespawn():
           found_door = door
           break
   elif global.isRespawning:
-    print("okay respawn")
     if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
-      print("onto checkpoint")
       player.global_transform.origin = Vector3(
         global.memory["active_save_point_x"], 
         global.memory["active_save_point_y"], 
@@ -207,6 +203,9 @@ func tryToRespawn():
     gameCamera.setCameraPositionNow()
     has_ever_set_camera_position = true
 
+  global.respawnVarTimerHack = 0
+  global.hasJustEnteredRoom = global.isEnteringRoom
+  global.isEnteringRoom = false
   global.isRespawning = false
 
   self.overrideLevelRespawnEvent()

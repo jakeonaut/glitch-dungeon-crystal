@@ -205,6 +205,7 @@ script = ExtResource( 17 )
 grav = 0
 is_a_body = false
 tiny_textbox = true
+is_static_in_level = false
 
 [node name="CollisionShape" type="CollisionShape" parent="NPC"]
 shape = SubResource( 12 )

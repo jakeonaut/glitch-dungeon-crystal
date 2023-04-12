@@ -6,6 +6,8 @@ func _ready():
     pass
 
 func activateScript():
+    NPC.can_camera_zoom = false
+    NPC.textBox.can_camera_zoom = false
     NPC.textBoxContainer.bbText = "a little tip:\nyou can sweep up color\nspells as well..."
     NPC.textBoxContainer.setVars()
 

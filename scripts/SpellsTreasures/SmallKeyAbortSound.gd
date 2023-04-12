@@ -11,7 +11,7 @@ func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
     level.saveTheGame("got a key!")
-    yield(get_tree().create_timer(0.30), "timeout")
+    yield(get_tree().create_timer(0.20), "timeout")
     key.queue_free()
     level.player.aniPlayer.play("stand")
 

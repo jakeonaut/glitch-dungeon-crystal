@@ -9,8 +9,6 @@ onready var catchSound = get_node("CatchSound")
 var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
 
-export var is_static_in_level = true
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
     if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):

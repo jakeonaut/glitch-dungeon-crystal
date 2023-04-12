@@ -163,6 +163,10 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  # TODO(jaketrower): !!! Remove (change to HOLD) before release
+  if Input.is_action_just_pressed("ui_cancel"):
+    level.get_tree().quit()
+
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
   
@@ -231,7 +235,9 @@ func processMPBlinkLogic(delta):
 
   var overwrite_blink = (global.memory["mp"] == global.memory["max_mp"]) or global.memory["mp"] > 5
 
-  if (global.memory["mp"] <= 5 and global.memory["max_mp"] > 6) or (global.memory["mp"] <= 3 and global.memory["max_mp"] >= 5) or (global.memory["mp"] <= 2):
+  if global.memory["max_mp"] == 0:
+    mpNumSprite.visible = false
+  elif (global.memory["mp"] <= 5 and global.memory["max_mp"] > 6) or (global.memory["mp"] <= 3 and global.memory["max_mp"] >= 5) or (global.memory["mp"] <= 2):
     mpNumSprite.visible = true
   else:
     mpNumSprite.visible = false
@@ -506,7 +512,7 @@ func processBroomLogic(_delta):
   #     broom_cooldown_timer = 0
   is_in_broom_cooldown = false
 
-  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
@@ -720,8 +726,7 @@ func getABroom():
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
 
 func iJustPressedDown():
-  if not smallInteractionArea.is_touching_door:
-    on_ground = false
+  on_ground = false
   should_do_fallthrough_area_collision = false
   tryClearFallthroughCollisionSolid()
 

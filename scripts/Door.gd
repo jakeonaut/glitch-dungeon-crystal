@@ -6,6 +6,8 @@ export var is_locked = false
 export var should_lock = false
 # String is a path to a file.
 export(String, FILE) var path
+# partner_door_id assumes path is unset.
+export var parter_door_id = ""
 export var dont_recolor_me = false
 
 export var is_passive = false
@@ -61,7 +63,12 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+    if not global.memory.has("key") or global.memory["key"] == 0:
+      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+    elif global.memory["key"] < num_keys_unlock:
+      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
+    else:
+      npc.textBoxContainer.bbText = "press [DOWN] to unlock"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:
@@ -159,10 +166,12 @@ func generateId():
 
 func activate():
   if not is_passive:
-    if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().on_ground:
+    if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().truly_on_ground:
       goThroughDoor()
     elif is_locked:
       if global.memory["key"] >= num_keys_unlock:
+        level.saveTheGame("unlocked!")
+        global.pauseMoveInput = true
         global.memory["key"] -= num_keys_unlock
         npc.visible = false 
         npc.can_activate = false
@@ -176,6 +185,7 @@ func activate():
         if global.activeInteractor != null:
           global.activeInteractor.stopInteract()
         global.activeInteractor = null
+        goThroughDoor()
       elif not lockedSound.is_playing():
         lockedSound.play()
         npc.activate()
@@ -197,10 +207,25 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   if not is_passive:
     getPlayer().global_transform.origin = self.global_transform.origin
     getPlayer().global_transform.origin.y += 1
+  getPlayer().aniPlayer.stop()
   getPlayer().aniPlayer.clear_queue()
   getPlayer().aniPlayer.play("enterDoor")
 
   global.activeInteractor = null
+
+  if not self.path:
+    if not parter_door_id:
+      return
+    var partnerDoor = level.get_node(parter_door_id) if level.has_node(parter_door_id) else null
+    if partnerDoor and partnerDoor.has_method("land"):
+      global.pauseGame = true
+      yield(get_tree().create_timer(0.50), "timeout")
+      partnerDoor.land()
+      getPlayer().aniPlayer.stop()
+      getPlayer().aniPlayer.clear_queue()
+      getPlayer().aniPlayer.play("stand")
+    return
+
   if start_of_game:
     transition.long_fade_to(self.path)
     return
@@ -211,6 +236,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   global.pauseGame = true
 
   global.isEnteringRoom = true
+  global.hasJustEnteredRoom = false
+  global.respawnVarTimerHack = 0
   if is_passive:
     global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
     if is_vertical:

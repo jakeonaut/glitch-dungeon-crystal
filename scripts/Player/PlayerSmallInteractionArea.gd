@@ -14,6 +14,9 @@ func _ready():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if global.hasJustEnteredRoom or global.isEnteringRoom:
+        return
     
     is_touching_enemy = false
     is_touching_water = false

@@ -13,3 +13,6 @@ func ready_impl():
     setTileset(tileset_type)
     buildRandomTiles()
 
+# @override
+func randomizeTile(_cell_index, _glitch_type = global.GlitchForm.NORMAL, _debug = false):
+    pass

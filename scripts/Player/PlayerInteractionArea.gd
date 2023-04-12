@@ -10,6 +10,9 @@ func _process(_delta):
     var fallthrough_collision_area = null
     var player = get_node("..")
 
+    if global.hasJustEnteredRoom or global.isEnteringRoom:
+        return
+
     # find the nearest active area and passive area
     var areas = get_overlapping_areas()
     for area in areas:

@@ -70,6 +70,11 @@ func passiveActivate(_delta):
     global.mini_cube_crystal_pitch += 0.1
     cubeSound2.play()
     aniPlayer.play("floatAway")
+    if global.memory["max_mp"] == 0:
+      level.uiLayer.get_node("GlitchStatusRect").visible = true
+      level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
+      level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(300, 250)
+
     global.memory["mp"] += 1
     global.memory["max_mp"] += 1
     global.num_mini_crystal_cubes += 1
