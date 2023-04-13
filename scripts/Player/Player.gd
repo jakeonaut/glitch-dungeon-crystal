@@ -268,7 +268,7 @@ func processMPBlinkLogic(delta):
         is_blinked = false
 
       if is_blinked:
-        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().grey_palette)
+        mySprite.material_override.set_shader_param("target_palette", global.grey_player_palette)
         if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
           blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
@@ -718,8 +718,9 @@ func iFellFlat():
     walk_speed /= 2
     jump_force /= 2
 
-func getABroom():
+func getABroom(broomLevel = 0):
   global.memory["broom"] = true
+  global.memory["broom_level"] = broomLevel
   walk_speed *= 2
   jump_force *= 2
   broomSpriteVisible.visible = true

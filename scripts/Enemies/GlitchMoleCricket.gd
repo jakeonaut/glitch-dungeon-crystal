@@ -226,7 +226,7 @@ func digTilesBelow(solidTilesBelow, should_summon_clouds):
         tiles_dug += 1
 
     if should_summon_clouds and tiles_dug > 0:
-        summonSmokeClouds(tiles_dug*2)
+        summonSmokeClouds(2)
 
     if tiles_dug > 0:
         if is_builder:

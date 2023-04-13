@@ -1,6 +1,6 @@
 extends "Sprite.gd"
 
-var step = 2
+export var step = 1
 var flip_timer = 0
 var flip_time_limit = 40
 var flipped = false

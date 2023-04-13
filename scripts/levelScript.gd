@@ -197,7 +197,7 @@ func tryToRespawn():
 
   if found_door:
     found_door.land()
-  elif not global.memory.has("roomPath") or global.memory["roomPath"] != getLevelName():
+  elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin
   if not has_ever_set_camera_position:
     gameCamera.setCameraPositionNow()
@@ -218,7 +218,7 @@ func setDoorsSpriteFrame(frame):
       continue
     door.get_node("Sprite3D2").frame = frame
 
-func setTorchSpriteFrame(v_frame):
+func setTorchSpriteFrame(_v_frame):
   pass
   # var torches = get_tree().get_nodes_in_group("torch")
   # for torch in torches:

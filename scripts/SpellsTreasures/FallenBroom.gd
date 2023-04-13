@@ -1,20 +1,30 @@
 extends "TreasureCollectable.gd"
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
+onready var broomAbortSound = get_node("NPC TextBox/TextBox/AbortSound")
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
 export var walk_direction = 1
+export var broomLevel = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process_input(true)
     set_process(true)
     set_physics_process(true)
+    if is_static_in_level:
+        get_node("SecretAnimationPlayer").play("isStaticInLevel")
+        grav = 0
 
 func _process(_delta):
     if vv > 0:
         behavior_was_thrown = false
+
+    broomAbortSound.broomLevel = broomLevel
+    if broomLevel > 0:
+        mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+        mySprite.material_override.set_shader_param("enable_dither", true)
 
 # @override
 func pressingMoveLeft():

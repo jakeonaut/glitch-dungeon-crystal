@@ -201,11 +201,10 @@ func setDisplayTitle(title):
   levelTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
 
 onready var glitchSprite = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite")
-onready var glitchSprite2 = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite2")
 func normalGlitch():
   glitchSprite.visible = false
 
-func glitch(palette):
+func glitch(_palette):
   glitchSprite.visible = true
 
 func floorGlitch():

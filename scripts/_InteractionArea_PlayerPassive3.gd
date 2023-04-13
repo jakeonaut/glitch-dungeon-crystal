@@ -18,5 +18,5 @@ func playerActivationAreaPassiveActivate():
 		parent.playerActivationAreaPassiveActivate3()
 	touchingPlayer = true
 
-func _process(delta):
+func _process(_delta):
 	pass

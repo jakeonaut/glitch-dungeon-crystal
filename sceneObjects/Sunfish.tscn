@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/portdoorPolyTriangle.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=5]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/pickup.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=8]
+[ext_resource path="res://scripts/CubeCrystal.gd" type="Script" id=9]
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 0.5
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 8.0
+shader_param/normal_offset = 0.03
+shader_param/time_influence = 3.0
+shader_param/y_div = 4.2
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.94, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "floatAway"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.94, 0 ), Vector3( 0, 5, 5 ) ]
+}
+
+[node name="Sunfish" type="Spatial"]
+script = ExtResource( 9 )
+MIN_STEP = -12
+
+[node name="InteractionArea" type="Area" parent="."]
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+shape = SubResource( 5 )
+
+[node name="cubeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -50.0
+pitch_scale = 1.5
+
+[node name="cubeSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -40.0
+pitch_scale = 0.5
+
+[node name="cubeSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -50.0
+pitch_scale = 1.43
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94, 0 )
+material_override = SubResource( 11 )
+pixel_size = 0.125
+texture = ExtResource( 5 )
+hframes = 8
+vframes = 8
+script = ExtResource( 1 )
+max_frames = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 8 )
+anims/floatAway = SubResource( 9 )
