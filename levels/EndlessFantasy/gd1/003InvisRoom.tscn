@@ -324,7 +324,7 @@ grav = 0
 frame = 27
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -0.1, 0 )
 
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1, 1.4, 0 )

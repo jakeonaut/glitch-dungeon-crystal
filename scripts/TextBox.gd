@@ -11,7 +11,7 @@ var tinyTextTheme = preload("res://appleKidDialogFontTheme2.tres")
 
 var text_timer = 0
 var text_next_index = 0
-var text_time_limit = 0.5
+var text_time_limit = 0
 var text_final = ''
 
 var ui_should_continue = false
@@ -106,8 +106,6 @@ func _process(delta):
     text_timer += (delta*22)
     
     var time_limit = text_time_limit
-    if Input.is_action_pressed("interact_button") or Input.is_action_pressed("sub_action_button") or Input.is_action_pressed("jump_button") or is_fast_text:
-      time_limit = 0
       
     tryToHide(delta)
       

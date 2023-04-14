@@ -21,7 +21,6 @@ export var has_spellbook_page = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 export var how_much_mp = 5
 export var how_much_hp = 1
-var has_ever_set_camera_position = false
 
 export var display_title = "???"
 
@@ -185,6 +184,7 @@ func tryToRespawn():
       if global.memory.has("active_save_point_x"):
         transition.path = global.memory["savedRoomPath"]
         transition.change_scene()
+        return
     elif global.memory.has("lastDoor"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -199,9 +199,11 @@ func tryToRespawn():
     found_door.land()
   elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin
-  if not has_ever_set_camera_position:
+  if global.set_camera_position_on_respawn:
+    player.target_last_grounded_y = player.global_transform.origin.y
+    player.cameraTarget.global_transform.origin.y = player.target_last_grounded_y
     gameCamera.setCameraPositionNow()
-    has_ever_set_camera_position = true
+    global.set_camera_position_on_respawn = false
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom

@@ -117,7 +117,10 @@ func applyGlitch(glitch, notPlaySound = false):
 
   mySprite.get_material_override().set_shader_param("opacity", 1.0)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
-  if glitch == global.GlitchForm.FLOOR: floorGlitch()
+  if glitch == global.GlitchForm.FLOOR: 
+    if self.glitch_form == global.GlitchForm.LADDER and (was_walking_into_wall or isWalkingIntoWall()):
+      on_ground = true
+    floorGlitch()
   if glitch == global.GlitchForm.FEATHER: featherGlitch()
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
@@ -350,7 +353,7 @@ func processGlitchHurtRecovery(delta):
       material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
     if glitch_death_timer >= 10:
       global.pauseGame = false
-      get_tree().get_root().get_node("Game/Viewport/level").tryToRespawn()
+      level.tryToRespawn()
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY

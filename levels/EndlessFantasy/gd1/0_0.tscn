@@ -250,7 +250,7 @@ num_keys_unlock = 2
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1/000FeatherFrogIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1/000GreenGlitchIntro.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
@@ -268,7 +268,7 @@ shape = SubResource( 24 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1/000DustyCricketIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1/000RedGlitchIntro.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false

@@ -52,10 +52,12 @@ func change_scene():
         was_i_interrupted = false
         return
 
+    global.set_camera_position_on_respawn = true
+
     if self.path != "":
         var _was_change_ok = get_tree().change_scene(self.path)
     else:
-        global.pauseGame = true
+        global.pauseGame = false
         
     if global.activeThrowableObject:
         global.activeThrowableObjectPath = global.activeThrowableObject.filename

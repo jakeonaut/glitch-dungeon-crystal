@@ -270,7 +270,7 @@ shape = SubResource( 17 )
 shape = SubResource( 16 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 9, 0 )
 path = "res://levels/EndlessFantasy/gd1/003InvisRoom.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
@@ -286,7 +286,7 @@ shape = SubResource( 17 )
 shape = SubResource( 16 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 0 )
 parter_door_id = "Door4"
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
@@ -332,7 +332,7 @@ flip_initial_direction = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.43656, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
 
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 12, 0 )

@@ -119,6 +119,8 @@ var mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
 var mini_cube_crystal_pitch_timer = 0
 var mini_cube_crystal_pitch_time_limit = 60
 
+var set_camera_position_on_respawn = false
+
 func _ready():
     set_process(true)
 
@@ -138,6 +140,7 @@ func _ready():
     if canGlitchScreen: pass
     if canChangeSongPitch: pass
     if crtScreenEffects: pass
+    if set_camera_position_on_respawn: pass
 
     memory["broom"] = true
     memory["broom_level"] = 0
