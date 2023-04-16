@@ -87,7 +87,7 @@ func hitStuff(delta):
       var npc = area.get_node("..")
       if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
         has_hit_npc = true
-        npc.getSmacked()
+        npc.getSmacked(global_transform.origin)
     elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
       area.PassiveInteractActivate(delta, false)
 

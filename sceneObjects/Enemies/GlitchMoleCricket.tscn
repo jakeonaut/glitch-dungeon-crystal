@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -398,6 +398,21 @@ tracks/0/keys = {
 "values": [ 52, 56, 57, 56, 57, 53, 54, 53, 54, 53 ]
 }
 
+[sub_resource type="Animation" id=40]
+resource_name = "walk"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 52, 56, 57, 56, 57, 53, 54, 53, 54, 53 ]
+}
+
 [node name="GlitchMoleCricket" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 14 )
@@ -441,6 +456,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+visible = false
 shape = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -505,3 +521,4 @@ anims/jumpStart = SubResource( 25 )
 anims/land = SubResource( 26 )
 anims/stand = SubResource( 29 )
 anims/suddenly_fly = SubResource( 36 )
+anims/walk = SubResource( 40 )

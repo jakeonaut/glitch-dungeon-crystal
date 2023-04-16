@@ -122,8 +122,8 @@ func spawnASpore():
     spore.global_transform.origin.y -= rand_range(0, .225)
 
 # @override
-func getSmacked():
-  .getSmacked()
+func getSmacked(broom_origin):
+  .getSmacked(broom_origin)
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0

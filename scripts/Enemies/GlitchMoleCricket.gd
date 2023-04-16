@@ -19,6 +19,7 @@ var mole_state_dig_time_limit = 6
 var mole_state_reset_dig_time_limit = 8
 var far_from_home_dist = 5
 var has_dug = false
+var has_been_smacked = false
 
 export var is_builder = false
 export var can_hop = false
@@ -49,11 +50,21 @@ func _ready():
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
 
+func getSmacked(broom_origin):
+    .getSmacked(broom_origin)
+    walk_speed = 0
+    grav = 0
+    walk_direction = 1
+    if level.player.mySprite.flip_h:
+        walk_direction = -1
+    linear_velocity.y = 0
+    lv.y = 0
+
 func _process(delta):
     # ._process(delta) implicit
 
     if is_builder:
-        myOtherSprite.material_override.set_shader_param("enable_glitch", true)
+        # myOtherSprite.material_override.set_shader_param("enable_glitch", true)
         mole_state_dig_time_limit = 4
     
     delta = delta * global.time_dilation_multiplier
@@ -70,23 +81,27 @@ func _process(delta):
         mole_state_timer += (delta*22)
         if mole_state_timer >= mole_state_idle_time_limit:
             mole_state_timer = 0
-            var i = randi() % 5
+            var i = randi() % 4
             if i == 0:
                 pass # stay idle
             elif can_hop and (i == 1 or i == 2):
-                walk_direction = 1 if i == 1 else 2
-                if isFarFromHome():
-                    if global_transform.origin.x > spawn_origin.x:
-                        walk_direction = -1
-                    else:
-                        walk_direction = 1
+                walk_direction = 1 if i == 1 else -1
+                # if isFarFromHome():
+                #     if global_transform.origin.x > spawn_origin.x:
+                #         walk_direction = -1
+                #     else:
+                #         walk_direction = 1
                 myOtherSprite.flip_h = walk_direction == -1
                 behavior_jumping = true
                 mole_state = MoleState.JUMP
-            elif i == 4:
+            elif i == 3:
                 aniPlayer.stop()
                 aniPlayer.clear_queue()
                 mole_state = MoleState.DIG_IDLE
+
+        if on_ground and has_been_smacked:
+            has_been_smacked = false
+            startDigging()
     elif mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE:
         # falling
         if not on_ground and has_dug:
@@ -120,6 +135,7 @@ func _process(delta):
         behavior_jumping = true
         mole_state = MoleState.JUMP
     elif mole_state == MoleState.JUMP:
+        walk_speed = 5
         behavior_walking = not on_ground
     elif mole_state == MoleState.LAND:
         if not aniPlayer.is_playing():
@@ -128,13 +144,15 @@ func _process(delta):
             aniPlayer.clear_queue()
             aniPlayer.play("idle")
     elif mole_state == MoleState.OVERRIDE_FLY_START:
-        if on_ground and grav != 0:
+        if has_been_smacked or (on_ground and grav != 0):
             grav = 0
             aniPlayer.stop()
             aniPlayer.clear_queue()
             aniPlayer.queue("suddenly_fly")
             aniPlayer.queue("fly")
-        if grav == 0:
+            if has_been_smacked:
+                mole_state = MoleState.OVERRIDE_FLYING
+        elif grav == 0:
             global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*3)
             var step = .5
             if stepify(global_transform.origin.x, step) == stepify(flight_anchor.global_transform.origin.x, step) and \
@@ -143,9 +161,17 @@ func _process(delta):
     elif mole_state == MoleState.OVERRIDE_FLYING:
         if not aniPlayer.is_playing():
             aniPlayer.play("fly")
-        walk_speed = 5
+            walk_speed = 5
 
-        if flight_anchor.frame == 0: # DOWN
+        if has_been_smacked:
+            grav = 0
+            behavior_walking = true
+            myOtherSprite.flip_h = walk_direction == -1
+            walk_speed = 8
+            behavior_vertical_walking = false
+            linear_velocity.y = 0
+            lv.y = 0
+        elif flight_anchor.frame == 0: # DOWN
             behavior_vertical_walking = true
             walk_direction = -1
             grav = 50
@@ -170,6 +196,9 @@ func _process(delta):
         return
 
 func checkForFlyPathOverrides():
+    if has_been_smacked:
+        return
+
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:
         if area.is_in_group("flypath") and flight_anchor != area.get_node(".."):
@@ -200,6 +229,34 @@ func checkForDigPathOverrides():
         
 func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
+
+# @override
+func passiveActivate(delta):
+    .passiveActivate(delta)
+    myOtherSprite.flip_h = (level.player.global_transform.origin.x <= global_transform.origin.x)
+
+# @override, not really until GlitchEnemy gets one
+func playerActivationAreaPassiveActivate2():
+    pass
+
+# @override, not really until GlitchEnemy gets one
+func playerActivationAreaPassiveActivate3():
+    pass
+    # if mole_state == MoleState.IDLE or mole_state == MoleState.DIG or mole_state == MoleState.LAND:
+    #     mole_state = MoleState.PREPARE_JUMP
+    #     behavior_walking = false
+
+# @override
+func glitchSetSpritesAndCollision():
+    pass
+
+# @override
+func unsmack():
+    .unsmack()
+    has_been_smacked = true
+    if not (mole_state == MoleState.OVERRIDE_FLY_START or mole_state == MoleState.OVERRIDE_FLYING):
+        grav = 60
+    
 
 func digTilesBelow(solidTilesBelow, should_summon_clouds):
     var tiles_dug = 0
@@ -243,11 +300,10 @@ func landed():
     behavior_walking = false
         
     if mole_state != MoleState.DIG and mole_state != MoleState.IDLE and \
-       mole_state != MoleState.OVERRIDE_FLY_START and mole_state != MoleState.OVERRIDE_FLYING:
+        mole_state != MoleState.OVERRIDE_FLY_START and mole_state != MoleState.OVERRIDE_FLYING:
         mole_state = MoleState.LAND
 
-# @override, not really until GlitchEnemy gets one
-func playerActivationAreaPassiveActivate2():
+func startDigging():
     if mole_state == MoleState.IDLE or mole_state == MoleState.LAND:
         if aniPlayer.assigned_animation == "idle":
             aniPlayer.stop()
@@ -261,14 +317,3 @@ func playerActivationAreaPassiveActivate2():
         # run away from player
         walk_direction = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
         myOtherSprite.flip_h = walk_direction == -1
-
-# @override, not really until GlitchEnemy gets one
-func playerActivationAreaPassiveActivate3():
-    pass
-    # if mole_state == MoleState.IDLE or mole_state == MoleState.DIG or mole_state == MoleState.LAND:
-    #     mole_state = MoleState.PREPARE_JUMP
-    #     behavior_walking = false
-
-# @override
-func glitchSetSpritesAndCollision():
-    pass

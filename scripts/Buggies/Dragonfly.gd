@@ -12,6 +12,8 @@ export var is_static_in_level = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    is_static_in_level = false # TODO(jaketroweR): :-)
+
     if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
         queue_free()
         
@@ -47,18 +49,18 @@ func randomizeTargetPos():
     mySprite.flip_h = (target_pos.x < global_transform.origin.x)
     
 func isActive():
-    return false # true
+    return true
 
 func passiveActivate(_delta):
     if not didja_get_me:
         catchSound.play()
-        if global.memory.has("dragonflies"):
-            global.memory["dragonflies"] += 1
-        else:
-            global.memory["dragonflies"] = 1
+        # if global.memory.has("dragonflies"):
+        #     global.memory["dragonflies"] += 1
+        # else:
+        #     global.memory["dragonflies"] = 1
         didja_get_me = true
-        global.collectable_key_recently_got = "dragonflies"
-        global.collectable_key_recently_got_timer = 0
+        # global.collectable_key_recently_got = "dragonflies"
+        # global.collectable_key_recently_got_timer = 0
         
         target_pos = Vector3(
             global_transform.origin.x,

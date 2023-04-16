@@ -164,13 +164,18 @@ func _process(delta):
     if is_smacked:
         smack_timer += (delta * 22)
         if smack_timer >= smack_time_limit:
-            is_smacked = false
-            var material = mySprite.material_override
-            if material is ShaderMaterial:
-                material.set_shader_param("time_influence", 3)
-                # material.set_shader_param("y_div", 2.3)
-                material.set_shader_param("normal_offset", .02)
-                mySprite.material_override = material
+            unsmack()
+
+func unsmack():
+    is_smacked = false
+    mySprite.material_override.set_shader_param("time_influence", 3)
+    mySprite.material_override.set_shader_param("y_div", 2.3)
+    mySprite.material_override.set_shader_param("normal_offset", .02)
+
+    if myOtherSprite:
+        myOtherSprite.material_override.set_shader_param("time_influence", 3)
+        myOtherSprite.material_override.set_shader_param("y_div", 2.3)
+        myOtherSprite.material_override.set_shader_param("normal_offset", .02)
     
 func doHorizontalWalkingBehavior():
     if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
@@ -345,11 +350,11 @@ func ouchies(_broom_origin):
         pauseSelf = true
         tryRemoveEnemiesGroup()
 
-func notOuchies(_broom_origin):
+func notOuchies(broom_origin):
     if not is_smacked:
         if notDieSound: notDieSound.play()
         summonSmokeClouds(1, true, true)
-        getSmacked()
+        getSmacked(broom_origin)
 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
@@ -379,12 +384,15 @@ func setGlobalMemoryOfHasBeenDefeated():
 export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
-func getSmacked():
-  var material = mySprite.material_override
-  if material is ShaderMaterial:
-    material.set_shader_param("time_influence", time_influence)
-    material.set_shader_param("y_div", y_div)
-    material.set_shader_param("normal_offset", normal_offset)
-    mySprite.material_override = material
-  smack_timer = 0
-  is_smacked = true
+func getSmacked(_broom_origin):
+    mySprite.material_override.set_shader_param("time_influence", time_influence)
+    mySprite.material_override.set_shader_param("y_div", y_div)
+    mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+
+    if myOtherSprite:
+        myOtherSprite.material_override.set_shader_param("time_influence", time_influence)
+        myOtherSprite.material_override.set_shader_param("y_div", y_div)
+        myOtherSprite.material_override.set_shader_param("normal_offset", normal_offset)
+    
+    smack_timer = 0
+    is_smacked = true

@@ -123,7 +123,7 @@ func _process(delta):
         mySprite.material_override = material
 
 
-func getSmacked():
+func getSmacked(_broom_origin):
   if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
