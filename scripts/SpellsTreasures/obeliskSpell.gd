@@ -53,7 +53,7 @@ func _ready():
       level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)
     else:
       level.uiLayer.statsTitleRect.visible = false
-      level.uiLayer.get_node("GlitchRect").visible = false
+      level.uiLayer.get_node("GlitchSprite").visible = false
       level.uiLayer.get_node("GlitchStatusRect").visible = false
 
 func _process(delta):

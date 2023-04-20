@@ -207,9 +207,9 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   if not is_passive:
     getPlayer().global_transform.origin = self.global_transform.origin
     getPlayer().global_transform.origin.y += 1
-  getPlayer().aniPlayer.stop()
-  getPlayer().aniPlayer.clear_queue()
-  getPlayer().aniPlayer.play("enterDoor")
+    getPlayer().aniPlayer.stop()
+    getPlayer().aniPlayer.clear_queue()
+    getPlayer().aniPlayer.play("enterDoor")
 
   global.activeInteractor = null
 

@@ -157,13 +157,13 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
-  tryLerpFromCenter(get_node("GlitchRect"), delta, Vector2(0, 1))
-  tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
-  if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
-    tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
-    if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
-      get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
+  # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
+  # tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
+  # if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
+  #   tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
+  #   tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
+  #   if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
+  #     get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
 
   if global.memory.has("spellbookPage"):
     var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
@@ -190,6 +190,18 @@ func tryLerpFromCenter(rect, delta, final_pos):
     if stepify(rect.rect_position.x, 0.1) == final_pos.x:
       rect.rect_position = final_pos
 
+func tryLerpSpriteFromCenter(sprite, delta, final_pos):
+  if sprite.scale.x > 1:
+    sprite.scale.x = sprite.scale.x + (1 - sprite.scale.x) * (delta*2)
+    sprite.scale.y = sprite.scale.y + (1 - sprite.scale.y) * (delta*2)
+    if stepify(sprite.scale.x, 0.1) == 1:
+      sprite.scale = Vector2(1, 1)
+  if sprite.position.x > final_pos.x:
+    sprite.position.x = sprite.position.x + (final_pos.x - sprite.position.x) * (delta*2)
+    sprite.position.y = sprite.position.y + (final_pos.y - sprite.position.y) * (delta*2)
+    if stepify(sprite.position.x, 0.1) == final_pos.x:
+      sprite.position = final_pos
+
 func displaySavingText(message = "saving (not really)"):
   savingTextLabel.visible = true
   savingTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
@@ -200,24 +212,29 @@ func setDisplayTitle(title):
   display_title = title
   levelTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
 
-onready var glitchSprite = get_node("GlitchRect/ColorRect/ColorRect/GlitchSprite")
+onready var glitchSprite = get_node("GlitchSprite")
 func normalGlitch():
-  glitchSprite.visible = false
+  # glitchSprite.visible = false
+  glitchSprite.frame = 0
 
 func glitch(_palette):
   glitchSprite.visible = true
 
 func floorGlitch():
   glitch(global.red_palette)
+  glitchSprite.frame = 2
 
 func featherGlitch():
   glitch(global.green_palette)
+  glitchSprite.frame = 1
 
 func ladderGlitch():
   glitch(global.yellow_palette)
+  glitchSprite.frame = 4
 
 func invisibleGlitch():
   glitch(global.black_palette)
+  glitchSprite.frame = 3
 
 func walkThroughWallsGlitch():
   glitch(global.white_palette)

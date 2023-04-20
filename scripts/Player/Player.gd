@@ -19,6 +19,7 @@ var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var spriteSheet = preload("res://assets/player_sheet_old.png")
 var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
+var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
@@ -115,7 +116,8 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
-  mySprite.get_material_override().set_shader_param("opacity", 1.0)
+  mySprite.material_override.set_shader_param("opacity", 1.0)
+  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
     if self.glitch_form == global.GlitchForm.LADDER and (was_walking_into_wall or isWalkingIntoWall()):
@@ -138,6 +140,7 @@ func featherGlitch():
   # TODO(jaketrower):
   changeSpriteColorPalette(global.green_dungeon_palette)
   # mySprite.setMothCostume()
+  mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
   glitch_form = global.GlitchForm.LADDER
@@ -570,7 +573,6 @@ func processBroomRenderLogic(_delta):
     adjustSummonedBroomSpritePosition()
   elif global.memory.has("broom") and global.memory["broom"]:
     broomSpriteVisible.visible = true
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   else:
     broomSpriteVisible.visible = false
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
