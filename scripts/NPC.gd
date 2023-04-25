@@ -170,7 +170,7 @@ func passiveActivate(delta):
       textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
-  if did_i_get_smacked and not level.player.is_pressing_horizontal_input:
+  if not level.player.is_pressing_horizontal_input:
     return
 
   # TODO(jaketrower): TODO on a timer...

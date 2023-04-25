@@ -26,11 +26,12 @@ func isActive():
     return parent.has_method("isActive") and parent.isActive()
 
 func PassiveInteractActivate(delta, is_player = true):
-    if parent.has_method("passiveActivate"):
+    if parent.has_method("pickyPassiveActivate"):
+        parent.pickyPassiveActivate(delta, is_player)
+    elif parent.has_method("passiveActivate"):
         parent.passiveActivate(delta)
     touchingPlayer = true
     if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:
-        # TODO(jaketrower): Don't do this if the broom is the activator
         getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
 func playerActivationAreaPassiveActivate():

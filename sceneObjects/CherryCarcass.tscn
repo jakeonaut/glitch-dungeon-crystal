@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CherryCarcass.gd" type="Script" id=2]
-[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=3]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=6]
@@ -15,6 +15,8 @@
 [ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=14]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=15]
+[ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=16]
+[ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=17]
 
 [sub_resource type="CylinderShape" id=7]
 radius = 0.9
@@ -23,102 +25,61 @@ radius = 0.9
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="Shader" id=4]
-code = "shader_type spatial;
-render_mode blend_mix,depth_draw_alpha_prepass,cull_disabled,diffuse_burley,specular_schlick_ggx,unshaded;
-uniform vec4 albedo : hint_color;
-uniform sampler2D texture_albedo : hint_albedo;
-uniform sampler2D base_palette : hint_albedo;
-uniform sampler2D target_palette : hint_albedo;
-uniform float opacity = 1.0;
-
-// æŒ¯å‹•ã®å¼·ã•
-uniform float shake_power = 0.03;
-// æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
-uniform float shake_block_size = 30.5;
-// è‰²ã®åˆ†é›¢çŽ‡
-uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
-
-uniform int palettesize = 16;
-uniform bool enable_glitch = false;
-uniform bool enable_palette_cycle = false;
-uniform float palette_cycle_speed = 10.0;
-
-void vertex() {
-    UV=UV*vec3(1, 1, 1).xy+vec3(0, 0, 0).xy;
-    MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
-}
-
-int getpaletteidx(vec3 color) {
-    for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(base_palette, coord, 0).rgb;    
-        if (distance(color, pixelcolor) == 0.0) {
-            return x;
-        }
-    }
-    return -1;
-}
-
-vec3 getpalettecolor(int x) {
-    ivec2 coord = ivec2(x,0);
-    return texelFetch(target_palette, coord, 0).rgb;
-}
-
-float random(float seed) {
-	return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
-}
-
-void fragment() {
-    vec4 incolor = texture(texture_albedo, UV);
-     
-    int index = getpaletteidx(incolor.rgb);
-     
-    float fdelta = float(index);
-	if (enable_palette_cycle) {
-		fdelta = fdelta - (TIME * palette_cycle_speed);
-	}
-    float mod2 = mod(fdelta,float(palettesize));
-    int delta = int(mod2);
-     
-    vec3 color = getpalettecolor(delta);
-     
-    if (index > -1) {
-        ALBEDO.rgb = color.rgb;  
-    }
-    else {
-        ALBEDO.rgb = vec3(0,1,0);
-    }
-    ALPHA = incolor.a * opacity;
-
-	if (enable_glitch) {
-		vec2 fixed_uv = UV;
-		fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
-		fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
-		
-		vec4 alp = texture(texture_albedo, fixed_uv);
-
-		color.r = mix(color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
-		color.b = mix(color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
-		ALBEDO.rgb = color.rgb;
-		ALPHA = alp.a * opacity;
-	}
-}"
-
 [sub_resource type="ShaderMaterial" id=1]
-shader = SubResource( 4 )
+shader = ExtResource( 3 )
 shader_param/albedo = null
-shader_param/opacity = 0.5
+shader_param/opacity = 0.9
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.001
+shader_param/enable_remove_skin_tone = true
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
+shader_param/resolution_scale = 4
+shader_param/offset = 0
 shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 2.0
-shader_param/texture_albedo = ExtResource( 1 )
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 0.9
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.001
+shader_param/enable_remove_skin_tone = true
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 4
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 2.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 17 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 1 )
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -132,7 +93,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 56 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -146,10 +107,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 56, 57, 56 ]
+"values": [ 11, 0 ]
 }
 
 [sub_resource type="CylinderShape" id=2]
@@ -162,6 +123,10 @@ height = 1.8
 
 [sub_resource type="SphereShape" id=6]
 radius = 10.0
+
+[sub_resource type="BoxShape" id=12]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="CherryCarcass" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -177,14 +142,24 @@ script = ExtResource( 15 )
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 shape = SubResource( 8 )
 
-[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250193, 0 )
 material_override = SubResource( 1 )
 pixel_size = 0.125
-texture = ExtResource( 1 )
+texture = ExtResource( 16 )
 hframes = 8
 vframes = 8
-frame = 56
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1058, 0.250193, 0 )
+material_override = SubResource( 11 )
+pixel_size = 0.125
+texture = ExtResource( 17 )
+hframes = 8
+vframes = 8
 script = ExtResource( 4 )
 max_frames = 1
 should_animate = false
@@ -335,3 +310,10 @@ script = ExtResource( 14 )
 
 [node name="CollisionShape" type="CollisionShape" parent="GlitchEnemy2/PlayerActivationArea"]
 shape = SubResource( 6 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
+shape = SubResource( 12 )

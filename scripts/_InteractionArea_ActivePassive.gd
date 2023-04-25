@@ -29,7 +29,9 @@ func InteractActivate():
         parent.activate()
 
 func PassiveInteractActivate(delta, is_player = true):
-    if parent.has_method("passiveActivate"):
+    if parent.has_method("pickyPassiveActivate"):
+        parent.pickyPassiveActivate(delta, is_player)
+    elif parent.has_method("passiveActivate"):
         parent.passiveActivate(delta)
     touchingPlayer = true
     if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:

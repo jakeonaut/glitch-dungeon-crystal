@@ -1218,10 +1218,10 @@ collision_layer = 2
 script = ExtResource( 1 )
 true_terminal_vel = 12
 grav = 45
-walk_speed = 7
+walk_speed = 6
 feather_glitch_walk_speed = 7
 swimming_walk_speed = 7
-jump_force = 15
+jump_force = 10
 invisible_jump_force = 13
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

@@ -14,15 +14,15 @@ func _ready():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-    if opacity > 0:
-        opacity -= delta/5
-        shake_color_rate += delta/2000
-        shake_power += delta/100
-        mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
-        mySprite.material_override.set_shader_param("shake_power", shake_power)
-        mySprite.material_override.set_shader_param("opacity", opacity)
-        if opacity <= 0:
-            queue_free()
+    # if opacity > 0:
+    #     opacity -= delta/5
+    #     shake_color_rate += delta/2000
+    #     shake_power += delta/100
+    #     mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
+    #     mySprite.material_override.set_shader_param("shake_power", shake_power)
+    #     mySprite.material_override.set_shader_param("opacity", opacity)
+    #     if opacity <= 0:
+    #         queue_free()
             
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
@@ -30,7 +30,8 @@ func _process(delta):
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            queue_free()
+            # queue_free()
+            grav = 0
             
 # @override
 func landed():

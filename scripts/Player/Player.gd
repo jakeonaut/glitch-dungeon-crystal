@@ -17,9 +17,7 @@ onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
-var spriteSheet = preload("res://assets/player_sheet_old.png")
-var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
-var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
+# var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 20
@@ -140,13 +138,13 @@ func featherGlitch():
   # TODO(jaketrower):
   changeSpriteColorPalette(global.green_dungeon_palette)
   # mySprite.setMothCostume()
-  mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
+  # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
   # TODO(jaketrower):
-  changeSpriteColorPalette(getLevelTiles().yellow_palette)
+  changeSpriteColorPalette(global.yellow_player_palette)
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
@@ -222,6 +220,18 @@ func _process(delta):
   if pressingJump():
     tryClearFallthroughCollisionSolid()
 
+  if is_smacked:
+    smack_timer += (delta * 22)
+    if smack_timer >= smack_time_limit:
+        unsmack()
+
+func unsmack():
+  is_smacked = false
+  pauseSelf = false
+  mySprite.material_override.set_shader_param("time_influence", 3)
+  mySprite.material_override.set_shader_param("y_div", 2.3)
+  mySprite.material_override.set_shader_param("normal_offset", .02)
+
 func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
     if global.memory["mp"] == 0:
@@ -282,7 +292,7 @@ func processMPBlinkLogic(delta):
       elif glitch_form == global.GlitchForm.FEATHER:
         mySprite.material_override.set_shader_param("target_palette", global.green_dungeon_palette)
       elif glitch_form == global.GlitchForm.LADDER:
-        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().yellow_palette)
+        mySprite.material_override.set_shader_param("target_palette", global.yellow_player_palette)
       elif glitch_form == global.GlitchForm.INVISIBLE:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().black_palette)
       elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
@@ -505,6 +515,21 @@ func hideInteractPrompt():
   interactPrompt.visible = false
   importantInteractPrompt.visible = false
 
+export var time_influence = 35
+export var y_div = 2.3
+export var normal_offset = .15
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 10
+func getSmacked():
+  mySprite.material_override.set_shader_param("time_influence", time_influence)
+  mySprite.material_override.set_shader_param("y_div", y_div)
+  mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+  smack_timer = 0
+  is_smacked = true
+  pauseSelf = true
+
+
 func processBagLogic(_delta):
   pass
 
@@ -575,7 +600,8 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = true
   else:
     broomSpriteVisible.visible = false
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+    if not is_tiny:
+      mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
 
 func processBagRenderLogic(_delta):
   enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame

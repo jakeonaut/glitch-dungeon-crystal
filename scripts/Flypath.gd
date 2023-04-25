@@ -1,7 +1,7 @@
 extends Sprite3D
 
 
-export var should_fade_away
+export var should_fade_away = false
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

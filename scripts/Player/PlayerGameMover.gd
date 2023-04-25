@@ -15,7 +15,12 @@ var has_played_fall_sound = false
 
 var has_sweeped_glitch = false
 
+var new_carcass = null
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
+var spriteSheet = preload("res://assets/player_sheet_old.png")
+var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
+var spriteSheetTiny = preload("res://assets/player_sheet_tiny.png")
+var is_tiny = false
 
 onready var nullifySound = get_node("Sounds/NullifySound")
 onready var rechargeSound = get_node("Sounds/RechargeSound")
@@ -86,6 +91,9 @@ func _process(delta):
   if stepify(cameraTarget.transform.origin.x, 0.1) == camera_target_origin_x_target:
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
+
+  if is_tiny and Input.is_action_just_pressed("sub_action_button"):
+    regainNestingDoll()
 
   if global.memory.has("fishingRod") and on_ground and justPressedDown():
     aniPlayer.stop()
@@ -205,9 +213,20 @@ func pressingMoveRight():
 func magicJump():
   should_magic_jump = true
 
+func regainNestingDoll():
+  global.memory["nesting_doll"] = true
+  if is_tiny:
+    is_tiny = false
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+    global.memory["broom"] = true
+    if new_carcass != null:
+      new_carcass.queue_free()
+      new_carcass = null
+
+
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
-    if global.num_cherries_eaten > 0 and glitch_form == global.GlitchForm.INVISIBLE:
+    if global.memory["nesting_doll"] and global.memory["broom"]:
       if justPressedJump() and not should_magic_jump and not global.pauseMoveInput: 
         was_just_on_ground_timer = was_just_on_ground_time_limit
         jumped_from_true_ground = truly_on_ground
@@ -215,8 +234,6 @@ func processJumpInputs(delta):
         feather_jump_timer = 0
         weak_feather_dbl_jump = false
         should_magic_jump = true
-        if on_ground:
-          addJumpSmokeCloud()
   
         if not "jump" in aniPlayer.assigned_animation:
           aniPlayer.clear_queue()
@@ -225,14 +242,16 @@ func processJumpInputs(delta):
           aniPlayer.queue("jump")
 
         target_last_grounded_y = global_transform.origin.y
-        var new_carcass = cherryCarcassRes.instance()
+        new_carcass = cherryCarcassRes.instance()
         level.add_child(new_carcass)
         new_carcass.global_transform.origin = self.global_transform.origin
         new_carcass.mySprite.flip_h = mySprite.flip_h
-        if randi() % 4 == 1:
-          new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
-        tryDieToEnemy(delta, true, false)
-        global.num_cherries_eaten -= 1
+        # if randi() % 4 == 1:
+        #   new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
+        global.memory["nesting_doll"] = false
+        global.memory["broom"] = false
+        mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+        is_tiny = true
         
   .processJumpInputs(delta)
     

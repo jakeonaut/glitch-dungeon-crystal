@@ -243,15 +243,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 6, 0 )
 [node name="WallTorch4" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 2.5, 0 )
 
-[node name="WallTorch5" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 8.5, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/WallTorch5" index="0"]
-material_override = null
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level" groups=["sprite", "walltorch"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 8.5, -0.5 )
 opacity = 0.5
+pixel_size = 0.12
 texture = ExtResource( 17 )
-hframes = 1
-vframes = 1
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, -2, 0 )
@@ -327,7 +323,6 @@ flip_v = true
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
-[editable path="Viewport/level/WallTorch5"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]

@@ -190,6 +190,12 @@ func activate():
         lockedSound.play()
         npc.activate()
 
+func pickyPassiveActivate(_delta, is_player):
+  if is_passive and is_player:
+    goThroughDoor()
+  else:
+    getPlayer().showInteractPrompt()
+
 func passiveActivate(_delta):
   if is_passive:
     goThroughDoor()

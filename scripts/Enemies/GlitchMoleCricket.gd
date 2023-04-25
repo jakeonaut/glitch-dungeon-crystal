@@ -27,6 +27,8 @@ var initial_grav = 60
 var initial_true_terminal_vel = 32
 var flight_anchor = null
 
+var opacity = 1.0
+
 var fakeLevelTiles = null
 func getFakeLevelTiles():
     if fakeLevelTiles == null:
@@ -59,6 +61,7 @@ func getSmacked(broom_origin):
         walk_direction = -1
     linear_velocity.y = 0
     lv.y = 0
+    smallInteractionArea.add_to_group("no_pushems")
 
 func _process(delta):
     # ._process(delta) implicit
@@ -149,16 +152,18 @@ func _process(delta):
             aniPlayer.stop()
             aniPlayer.clear_queue()
             aniPlayer.queue("suddenly_fly")
-            aniPlayer.queue("fly")
             if has_been_smacked:
                 mole_state = MoleState.OVERRIDE_FLYING
         elif grav == 0:
-            global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*3)
+            global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*5)
             var step = .5
             if stepify(global_transform.origin.x, step) == stepify(flight_anchor.global_transform.origin.x, step) and \
                stepify(global_transform.origin.y, step) == stepify(flight_anchor.global_transform.origin.y, step):
                 mole_state = MoleState.OVERRIDE_FLYING
+                myOtherSprite.material_override.set_shader_param("enable_glitch", true)
     elif mole_state == MoleState.OVERRIDE_FLYING:
+        tryFadeAway(delta)
+
         if not aniPlayer.is_playing():
             aniPlayer.play("fly")
             walk_speed = 5
@@ -190,13 +195,19 @@ func _process(delta):
             grav = -50
             true_terminal_vel = 5
 
-
-
     if am_i_dying:
         return
 
+func tryFadeAway(delta):
+    if flight_anchor.should_fade_away:
+        opacity = opacity + (0.0 - opacity) * (delta * 3)
+        myOtherSprite.material_override.set_shader_param("opacity", opacity)
+        
+        if stepify(opacity, 0.1) == 0:
+            queue_free()
+
 func checkForFlyPathOverrides():
-    if has_been_smacked:
+    if has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away):
         return
 
     var areas = smallInteractionArea.get_overlapping_areas()
@@ -220,6 +231,9 @@ func checkForFlyPathOverrides():
             mole_state = MoleState.OVERRIDE_FLY_START
 
 func checkForDigPathOverrides():
+    if has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away):
+        return
+
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:
         if area.is_in_group("digpath") and flight_anchor != area.get_node(".."):
