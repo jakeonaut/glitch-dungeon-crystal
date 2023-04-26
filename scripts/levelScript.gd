@@ -48,9 +48,9 @@ func _ready_impl():
       global.memory["spellbookPage"].push_back(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
 
-  if global.memory["max_mp"] == 0 and global.memory["max_mp"] < how_much_mp:
-    global.memory["max_mp"] = how_much_mp
-    global.memory["mp"] = global.memory["max_mp"]
+  # if global.memory["max_mp"] == 0 and global.memory["max_mp"] < how_much_mp:
+  #   global.memory["max_mp"] = how_much_mp
+  #   global.memory["mp"] = global.memory["max_mp"]
 
   if global.memory["max_hp"] == 1 and global.memory["max_hp"] < how_much_hp:
     global.memory["max_hp"] = how_much_hp

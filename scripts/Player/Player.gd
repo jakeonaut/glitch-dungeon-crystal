@@ -285,7 +285,7 @@ func processMPBlinkLogic(delta):
 
       if is_blinked:
         mySprite.material_override.set_shader_param("target_palette", global.grey_player_palette)
-        if not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
+        if mpNumSprite.visible and not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
           blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
@@ -520,7 +520,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
-var smack_time_limit = 10
+var smack_time_limit = 7
 func getSmacked():
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
@@ -681,8 +681,8 @@ func landed():
   is_in_broom_cooldown = false
   summonSmokeClouds(1, false, false, 1)
   
-  grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
-  grannyLandSound.play()
+  # grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
+  # grannyLandSound.play()
   var localAniPlayer = get_node("AnimationPlayer")
   if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
     localAniPlayer.clear_queue()
@@ -722,8 +722,8 @@ func broomStop():
 # @override
 func playJumpSound():
   .playJumpSound()
-  grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
-  grannyLandSound.play()
+  # grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
+  # grannyLandSound.play()
 
 func faceDown():
   pass # mySprite.faceDown()

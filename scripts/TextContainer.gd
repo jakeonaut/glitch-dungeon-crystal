@@ -6,6 +6,7 @@ export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
 var is_immediate = false
+var floating_text = false
 
 onready var textBox = get_node("TextBox")
 onready var textBoxtext = get_node("TextBox/Text")
@@ -33,6 +34,8 @@ func setVars():
 
     if is_immediate:
         textBox.is_immediate = is_immediate
+    if floating_text:
+        textBox.floating_text = floating_text
 
 func InteractActivate():
     interact()

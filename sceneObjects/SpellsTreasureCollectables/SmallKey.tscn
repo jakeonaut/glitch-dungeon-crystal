@@ -184,6 +184,7 @@ height = 1.8
 
 [node name="SmallKey" type="KinematicBody"]
 script = ExtResource( 10 )
+stop_all_music = false
 display_textbox = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

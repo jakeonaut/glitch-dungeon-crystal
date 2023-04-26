@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=15]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive2.gd" type="Script" id=16]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive3.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=19]
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 2 )
@@ -119,18 +121,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D2:translation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0.125, 0.258, 11 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -417,6 +407,7 @@ tracks/0/keys = {
 [node name="GlitchMoleCricket" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 14 )
+smack_time_limit = 3
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -431,9 +422,9 @@ frame_delay = 1.0
 max_frames = 6
 
 [node name="Sprite3D2" type="Sprite3D" parent="." groups=["glitchSprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.6, 11 )
 material_override = SubResource( 39 )
-pixel_size = 0.125
+pixel_size = 0.16
 texture = ExtResource( 13 )
 hframes = 8
 vframes = 16
@@ -469,6 +460,16 @@ shape = SubResource( 3 )
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 9 )
 volume_db = -30.0
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 18 )
+volume_db = -18.0
+pitch_scale = 0.9
+
+[node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 19 )
+volume_db = -18.0
+pitch_scale = 1.4
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 8 )

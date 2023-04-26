@@ -146,7 +146,7 @@ func _ready():
 
     memory["broom"] = true
     memory["broom_level"] = 0
-    memory["nesting_doll"] = true
+    memory["nesting_doll"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false

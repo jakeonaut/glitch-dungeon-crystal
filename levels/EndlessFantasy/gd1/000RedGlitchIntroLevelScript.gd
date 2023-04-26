@@ -10,7 +10,7 @@ func setUpRoomInitializationOverride():
 
 # @override
 func _process(_delta):
-	if global.memory.has("roomPath") and "001DustyCricket" in global.memory["roomPath"]:
-		NPC.textBoxContainer.bbText = "to get back up\nyou must die."
-		NPC.textBoxContainer.setVars()
-		NPC.textBoxContainer.textBox.has_been_shown = false
+    if global.memory.has("roomPath") and "001RedGlitch" in global.memory["roomPath"]:
+        NPC.textBoxContainer.bbText = "to get back up\nyou must die."
+        NPC.textBoxContainer.setVars()
+        NPC.textBoxContainer.textBox.has_been_shown = false

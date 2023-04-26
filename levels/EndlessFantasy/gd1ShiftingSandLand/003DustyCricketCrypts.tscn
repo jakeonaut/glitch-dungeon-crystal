@@ -232,6 +232,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 20, 0 )
 [node name="GlitchMoleCricket2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 20, 0 )
 
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0655, 0, 0 )
+bbText = "need to have easy-to-solve paths
+or at least option to skip puzzles.
+LEVEL SELECT? maybe"
+
 [node name="Viewport2" parent="." instance=ExtResource( 16 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

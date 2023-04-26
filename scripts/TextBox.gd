@@ -22,6 +22,7 @@ var hide_textbox_time_limit = 10
 var has_been_shown = false
 var has_preactivated = false
 var focus_me = false
+var floating_text = false
 export var can_camera_zoom = true
 
 var is_important = false
@@ -77,6 +78,8 @@ func tinify():
   # large_font.resource_local_to_scene = true
   # large_font.set_size(20)
   # textNode.add_font_override("normal_font", large_font)
+  if floating_text:
+    showTextbox()
 
 func setPosition():
   var factor = 0.5
@@ -93,10 +96,11 @@ func _process(delta):
   if get_node("../..").is_active:
     get_node("../..").idleTalk()
 
-  if endPrompt.visible:
-    wigglePrompt(delta, endPrompt)
-  elif nextPrompt.visible:
-    wigglePrompt(delta, nextPrompt)
+  if not floating_text:
+    if endPrompt.visible:
+      wigglePrompt(delta, endPrompt)
+    elif nextPrompt.visible:
+      wigglePrompt(delta, nextPrompt)
 
   if is_tiny:
     setPosition()
@@ -123,7 +127,7 @@ func _process(delta):
       
     if isWaitingForNextPrompt():
       if not ui_should_continue:
-        nextPrompt.visible = true
+        nextPrompt.visible = not floating_text
         return
       ui_should_continue = false
 
@@ -192,7 +196,7 @@ func showTextbox():
   text_timer = 0
   text_next_index = 0
   textNode.bbcode_text = ""
-  if is_immediate:
+  if is_immediate or floating_text:
     textNode.bbcode_text = text_final
     text_next_index = len(text_final)
   resetTinyColorRect()
@@ -204,8 +208,9 @@ func showTextbox():
   dialogStartSound.activateScript()
   dialogSound.activateScript()
   
-  getPlayer().hideInteractPrompt()
-  resetPrompts()
+  if not floating_text:
+    getPlayer().hideInteractPrompt()
+    resetPrompts()
     
 func hideTextbox():
   has_preactivated = false
@@ -284,8 +289,9 @@ func adjustTinyColorRect():
   adjusted_tiny_y_pos = total_height
   tinyColorRect.margin_right += 12
 
-  nextPrompt.position = Vector2(last_line_width + 160, total_height + 20)
-  endPrompt.position = nextPrompt.position
+  if not floating_text:
+    nextPrompt.position = Vector2(last_line_width + 160, total_height + 20)
+    endPrompt.position = nextPrompt.position
 
 func resetTinyColorRect():
   tinyColorRect.margin_right = 135

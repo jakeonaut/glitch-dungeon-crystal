@@ -46,8 +46,9 @@ export var modAmt = 0.5
 export var is_static_in_level = true
 
 var is_smacked = false
+var has_ever_been_smacked = false
 var smack_timer = 0
-var smack_time_limit = 10
+export var smack_time_limit = 5
 
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
@@ -352,7 +353,6 @@ func ouchies(_broom_origin):
 
 func notOuchies(broom_origin):
     if not is_smacked:
-        if notDieSound: notDieSound.play()
         summonSmokeClouds(1, true, true)
         getSmacked(broom_origin)
 
@@ -385,6 +385,7 @@ export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 func getSmacked(_broom_origin):
+    if notDieSound: notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
     mySprite.material_override.set_shader_param("normal_offset", normal_offset)
@@ -396,3 +397,4 @@ func getSmacked(_broom_origin):
     
     smack_timer = 0
     is_smacked = true
+    has_ever_been_smacked = true

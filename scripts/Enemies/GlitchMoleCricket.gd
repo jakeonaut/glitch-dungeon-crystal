@@ -2,6 +2,7 @@ extends "GlitchEnemy.gd"
 
 onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
 
+onready var digSound = get_node("Sounds/DigSound")
 enum MoleState {
     IDLE,
     PREPARE_JUMP,
@@ -51,14 +52,17 @@ func _ready():
 
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
+    myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.6
 
 func getSmacked(broom_origin):
+    if has_ever_been_smacked:
+        return
     .getSmacked(broom_origin)
     walk_speed = 0
     grav = 0
-    walk_direction = 1
+    walk_direction = -1
     if level.player.mySprite.flip_h:
-        walk_direction = -1
+        walk_direction = 1
     linear_velocity.y = 0
     lv.y = 0
     smallInteractionArea.add_to_group("no_pushems")
@@ -81,26 +85,27 @@ func _process(delta):
         if not aniPlayer.is_playing():
             aniPlayer.play("idle")
             
-        mole_state_timer += (delta*22)
-        if mole_state_timer >= mole_state_idle_time_limit:
-            mole_state_timer = 0
-            var i = randi() % 4
-            if i == 0:
-                pass # stay idle
-            elif can_hop and (i == 1 or i == 2):
-                walk_direction = 1 if i == 1 else -1
-                # if isFarFromHome():
-                #     if global_transform.origin.x > spawn_origin.x:
-                #         walk_direction = -1
-                #     else:
-                #         walk_direction = 1
-                myOtherSprite.flip_h = walk_direction == -1
-                behavior_jumping = true
-                mole_state = MoleState.JUMP
-            elif i == 3:
-                aniPlayer.stop()
-                aniPlayer.clear_queue()
-                mole_state = MoleState.DIG_IDLE
+        if can_hop:
+            mole_state_timer += (delta*22)
+            if mole_state_timer >= mole_state_idle_time_limit:
+                mole_state_timer = 0
+                var i = randi() % 4
+                if i == 0:
+                    pass # stay idle
+                elif can_hop and (i == 1 or i == 2):
+                    walk_direction = 1 if i == 1 else -1
+                    # if isFarFromHome():
+                    #     if global_transform.origin.x > spawn_origin.x:
+                    #         walk_direction = -1
+                    #     else:
+                    #         walk_direction = 1
+                    myOtherSprite.flip_h = walk_direction == -1
+                    behavior_jumping = true
+                    mole_state = MoleState.JUMP
+                elif i == 3:
+                    aniPlayer.stop()
+                    aniPlayer.clear_queue()
+                    mole_state = MoleState.DIG_IDLE
 
         if on_ground and has_been_smacked:
             has_been_smacked = false
@@ -130,6 +135,7 @@ func _process(delta):
                     digTilesBelow(getTilesBelow(getLevelTiles()), true)
                     digTilesBelow(getTilesBelow(getFakeLevelTiles()), false)
                     has_dug = true
+                    digSound.play()
                 mole_state_timer = 0
     elif mole_state == MoleState.PREPARE_JUMP:
         # run away from player

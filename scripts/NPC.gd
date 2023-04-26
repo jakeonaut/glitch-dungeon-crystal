@@ -15,6 +15,7 @@ export var is_fast_text = false
 export var dont_recolor_me = false
 export var is_immediate = false
 export var is_a_body = true
+export var floating_text = false
 
 var is_smacked = false
 var did_i_get_smacked = false
@@ -56,7 +57,7 @@ func _ready():
   set_collision_mask_bit(1, true)
   mySprite.material_override = mySprite.material_override.duplicate()
 
-  if not is_a_body and smallerInteractionArea:
+  if floating_text or not is_a_body and smallerInteractionArea:
     smallerInteractionArea.add_to_group("no_pushems")
 
   if bbText != "" and textBoxContainer.bbText == "":
@@ -64,6 +65,9 @@ func _ready():
   if portrait and not textBoxContainer.portrait:
     textBoxContainer.portrait = portrait
   textBoxContainer.is_immediate = is_immediate
+  textBoxContainer.floating_text = floating_text
+  if floating_text:
+    grav = 0
   if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
     var nextTextBoxPathStr = "../"
     for i in range(nextTextBoxPath.get_name_count()):
@@ -76,7 +80,7 @@ func _ready():
   textBox.is_important = is_important
   textBox.is_really_important = is_really_important
   textBox.can_camera_zoom = can_camera_zoom
-  if tiny_textbox:
+  if tiny_textbox or floating_text:
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
 
@@ -93,7 +97,10 @@ func _ready():
 func _process(delta):
   # super._process(delta) implicit
 
-  if dont_recolor_me and mySprite.is_in_group("sprite"):
+  if floating_text:
+    mySprite.visible = false
+
+  if (floating_text or dont_recolor_me) and mySprite.is_in_group("sprite"):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
@@ -106,9 +113,9 @@ func _process(delta):
     )
 
   if fallthroughSolid:
-    if not visible and fallthroughSolid.is_in_group("fallthrough"):
+    if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.remove_from_group("fallthrough")
-    elif visible and not fallthroughSolid.is_in_group("fallthrough"):
+    elif visible and not floating_text and not fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.add_to_group("fallthrough")
 
   if is_smacked:
@@ -124,6 +131,7 @@ func _process(delta):
 
 
 func getSmacked(_broom_origin):
+  if floating_text: return
   if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -146,7 +154,7 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
   global.memory[level.getShortLevelName()][self.name] = true
 
 func isActive():
-  return visible or can_be_activated_invisibly
+  return not floating_text and (visible or can_be_activated_invisibly)
 
 func activate():
   if global.activeInteractor == null:
