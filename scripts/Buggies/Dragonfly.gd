@@ -10,6 +10,10 @@ var opacity = 1.0
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export var is_static_in_level = true
 
+var is_smacked = false
+var smack_timer = 0
+export var smack_time_limit = 5
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     is_static_in_level = false # TODO(jaketroweR): :-)
@@ -38,6 +42,18 @@ func _process(delta):
         var step = 0.1
         if stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
             randomizeTargetPos()
+
+    if is_smacked:
+        smack_timer += (delta * 22)
+        if smack_timer >= smack_time_limit:
+            unsmack()
+        didja_get_me = true
+
+func unsmack():
+    is_smacked = false
+    mySprite.material_override.set_shader_param("time_influence", 3)
+    mySprite.material_override.set_shader_param("y_div", 2.3)
+    mySprite.material_override.set_shader_param("normal_offset", .02)
         
 func randomizeTargetPos():
     target_pos = Vector3(
@@ -72,3 +88,15 @@ func passiveActivate(_delta):
             if not global.memory.has(level.getShortLevelName()):
                 global.memory[level.getShortLevelName()] = {}
             global.memory[level.getShortLevelName()][self.name] = true
+
+export var time_influence = 35
+export var y_div = 2.3
+export var normal_offset = .15
+func getSmacked(_broom_origin):
+    if catchSound: catchSound.play()
+    mySprite.material_override.set_shader_param("time_influence", time_influence)
+    mySprite.material_override.set_shader_param("y_div", y_div)
+    mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+    
+    smack_timer = 0
+    is_smacked = true

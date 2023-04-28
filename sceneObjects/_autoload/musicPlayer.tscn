@@ -82,8 +82,8 @@ stream = ExtResource( 7 )
 volume_db = -15.0
 
 [node name="SwampThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
-volume_db = -20.0
+stream = ExtResource( 6 )
+volume_db = -15.0
 
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

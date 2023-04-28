@@ -65,7 +65,7 @@ func isTileSpikes(tile_type):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return tileCollisionShape is RayShape
     
-func hitStuff(delta):
+func hitStuff(_delta):
   if not visible: return
   
   var areas = myArea.get_overlapping_areas()

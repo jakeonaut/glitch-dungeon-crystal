@@ -101,7 +101,7 @@ func conductFromScenePath(path):
         tryToPlay(grannyPlayer)
     elif path.find("RestZone") > 0:
         tryToPlay(restZonePlayer)
-    elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
+    elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0 or path.find("DebugTown") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("Boss") > 0:
         tryToPlay(bossThemePlayer)
@@ -121,11 +121,11 @@ func conductFromScenePath(path):
         tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0 or path.find("Plastic") > 0 or path.find("Tide") > 0:
         tryToPlay(oceanThemePlayer)
-    elif path.find("Desert") > 0 or path.find("DustyCricket"):
+    elif path.find("Desert") > 0 or path.find("DustyCricket") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("Poison") > 0:
         tryToPlay(poisonThemePlayer)
-    elif path.find("Swamp") > 0 or path.find("Town") > 0:
+    elif path.find("Swamp") > 0 or path.find("Town") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0:
         tryToPlay(titleThemePlayer)

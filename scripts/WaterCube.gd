@@ -21,7 +21,7 @@ export var can_splash = true
 var is_poison = false
 var poisonous_timer = 0
 var poisonous_time_limit = 10
-var poisonous_counter = 2
+var poisonous_counter = 0
 
 # will be set as top left position
 var target_origin = Vector3(0, 0, 0)

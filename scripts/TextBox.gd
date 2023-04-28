@@ -65,6 +65,8 @@ func _ready():
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
   top_margin_start = self.margin_top
   bot_margin_start = self.margin_bottom
+  nextPrompt.visible = false
+  endPrompt.visible = false
   
 func tinify():
   self.texture = null
@@ -96,7 +98,10 @@ func _process(delta):
   if get_node("../..").is_active:
     get_node("../..").idleTalk()
 
-  if not floating_text:
+  if floating_text:
+    nextPrompt.visible = false
+    endPrompt.visible = false
+  else:
     if endPrompt.visible:
       wigglePrompt(delta, endPrompt)
     elif nextPrompt.visible:
@@ -118,7 +123,7 @@ func _process(delta):
       if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
         abortSound.preActivateScript()
         has_preactivated = true
-      endPrompt.visible = not is_tiny
+      endPrompt.visible = not is_tiny and not floating_text
       has_been_shown = true
       if is_important:
         global.pauseGame = false
@@ -127,7 +132,7 @@ func _process(delta):
       
     if isWaitingForNextPrompt():
       if not ui_should_continue:
-        nextPrompt.visible = not floating_text
+        nextPrompt.visible = not is_tiny and not floating_text
         return
       ui_should_continue = false
 

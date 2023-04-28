@@ -952,7 +952,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=57]
 resource_name = "swimJump"
 length = 0.4
 loop = true
@@ -963,15 +963,39 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 44, 45 ]
+"values": [ 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.125, 0.5, 0.7 ) ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=58]
 resource_name = "swimJumpStart"
-length = 0.3
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -979,10 +1003,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.0336991 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 36, 44, 45 ]
+"values": [ 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.03 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -1446,8 +1482,8 @@ anims/preGetItem = SubResource( 51 )
 anims/sad = SubResource( 20 )
 anims/stand = SubResource( 21 )
 anims/swimFall = SubResource( 35 )
-anims/swimJump = SubResource( 34 )
-anims/swimJumpStart = SubResource( 33 )
+anims/swimJump = SubResource( 57 )
+anims/swimJumpStart = SubResource( 58 )
 anims/teeter = SubResource( 22 )
 anims/turnAround = SubResource( 23 )
 anims/wakeup = SubResource( 24 )
