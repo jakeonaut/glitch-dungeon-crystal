@@ -1,16 +1,17 @@
 extends Spatial
 
+var has_been_smacked = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+    set_process(true)
+
+func _process(delta):
+    if has_been_smacked:
+        self.rotation_degrees.y += (delta * 11)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func isActive():
+    return visible and not has_been_smacked
+
+func activate():
+    has_been_smacked = true
