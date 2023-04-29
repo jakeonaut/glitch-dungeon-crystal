@@ -23,11 +23,11 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=26]
 [ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=27]
 [ext_resource path="res://assets/sprites/tall_house0000.png" type="Texture" id=28]
-[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/Fish.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=32]
@@ -285,7 +285,6 @@ script = ExtResource( 8 )
 starting_glitch_type = 2
 tileset_type = 2
 how_much_mp = 15
-display_title = "bayou town"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 20 )]
 
@@ -309,7 +308,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 52, 1, 196611, 53, 1, 196611, 57, 1, 196611, 65588, 1, 196611, 65589, 1, 196611, 65593, 1, 196611, 131120, 1, 196611, 131121, 1, 196611, 131122, 1, 196611, 131123, 1, 196611, 131124, 1, 196611, 131125, 1, 196611, 131126, 1, 196611, 131127, 1, 196611, 131128, 1, 196611, 393283, 1, 196611, 393284, 1, 196611, 458819, 1, 196611, 458820, 1, 196611, 458821, 1, 196611, 917516, 1, 196611, 983050, 1, 196611, 983051, 1, 196611, 983052, 1, 196611, -131078, 1, 1, -131075, 1, 1, -131053, 1, 196611, -131052, 1, 196611, -131051, 1, 196611, -131031, 1, 196611, -131030, 1, 196611, -131029, 1, 196611, -131028, 1, 196611, -65541, 1, 1, -65517, 1, 196611, -65516, 1, 196611, -65515, 1, 196611, -65485, 1, 196611, -65484, 1, 196611, -65483, 1, 196611, -65482, 1, 196611, -65480, 1, 196611, -65479, 1, 196611 )
+"cells": PoolIntArray( 52, 1, 196611, 53, 1, 196611, 57, 1, 196611, 65588, 1, 196611, 65589, 1, 196611, 65593, 1, 196611, 131120, 1, 196611, 131121, 1, 196611, 131122, 1, 196611, 131123, 1, 196611, 131124, 1, 196611, 131125, 1, 196611, 131126, 1, 196611, 131127, 1, 196611, 131128, 1, 196611, 393283, 1, 196611, 393284, 1, 196611, 458819, 1, 196611, 458820, 1, 196611, 458821, 1, 196611, 917516, 1, 196611, 983050, 1, 196611, 983051, 1, 196611, 983052, 1, 196611, -131053, 1, 196611, -131052, 1, 196611, -131051, 1, 196611, -131031, 1, 196611, -131030, 1, 196611, -131029, 1, 196611, -131028, 1, 196611, -65517, 1, 196611, -65516, 1, 196611, -65515, 1, 196611, -65485, 1, 196611, -65484, 1, 196611, -65483, 1, 196611, -65482, 1, 196611, -65480, 1, 196611, -65479, 1, 196611 )
 }
 script = ExtResource( 9 )
 __meta__ = {
@@ -341,7 +340,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 52, 0, 2, 53, 0, 2, 57, 0, 2, 65588, 0, 2, 65589, 0, 2, 65593, 0, 2, 131120, 0, 2, 131121, 0, 2, 131122, 0, 2, 131123, 0, 2, 131124, 0, 2, 131125, 0, 2, 131126, 0, 2, 131127, 0, 2, 131128, 0, 2, 196684, 0, 3, 196685, 0, 3, 196686, 0, 3, 196687, 0, 3, 262219, 0, 3, 262220, 0, 3, 262221, 0, 3, 262222, 0, 3, 262223, 0, 3, 262224, 0, 3, 327755, 0, 3, 327756, 0, 3, 327757, 0, 3, 327758, 0, 3, 327759, 0, 3, 327760, 0, 3, 393283, 0, 2, 393284, 0, 2, 393291, 0, 3, 393292, 0, 3, 393293, 0, 3, 393294, 0, 3, 393295, 0, 3, 393296, 0, 3, 458819, 0, 2, 458820, 0, 2, 458821, 0, 2, 852014, 0, 1, 852015, 0, 1, 852016, 0, 1, 917550, 0, 1, 917552, 0, 1, 983086, 0, 1, 983087, 0, 1, 983088, 0, 1, 1310755, 0, 3, 1310756, 0, 3, 1310757, 0, 3, 1376291, 0, 3, 1376292, 0, 3, 1376293, 0, 3, 1441827, 0, 3, 1441828, 0, 3, 1441829, 0, 3, -524245, 0, 1, -524244, 0, 1, -524228, 0, 1, -458714, 0, 1, -458713, 0, 1, -458712, 0, 1, -458711, 0, 1, -458709, 0, 1, -458708, 0, 1, -458692, 0, 1, -458691, 0, 1, -458690, 0, 1, -393181, 0, 1, -393180, 0, 1, -393179, 0, 1, -393178, 0, 1, -393177, 0, 1, -393175, 0, 1, -393156, 0, 1, -393154, 0, 1, -393152, 0, 1, -327645, 0, 1, -327643, 0, 1, -327642, 0, 1, -327641, 0, 1, -327640, 0, 1, -327639, 0, 1, -327620, 0, 1, -327619, 0, 1, -327618, 0, 1, -327615, 0, 1, -262112, 0, 1, -262111, 0, 1, -262110, 0, 1, -262109, 0, 1, -262108, 0, 1, -262107, 0, 1, -262106, 0, 1, -262105, 0, 1, -262104, 0, 1, -262083, 0, 1, -262082, 0, 1, -262081, 0, 1, -262080, 0, 1, -262079, 0, 1, -262078, 0, 1, -262077, 0, 1, -262076, 0, 1, -262075, 0, 1, -262074, 0, 1, -262073, 0, 1, -262072, 0, 1, -262071, 0, 1, -262070, 0, 1, -262069, 0, 1, -262068, 0, 1, -262067, 0, 1, -262066, 0, 1, -196579, 0, 1, -196578, 0, 1, -196577, 0, 1, -196576, 0, 1, -196574, 0, 1, -196573, 0, 1, -196571, 0, 1, -196570, 0, 1, -196568, 0, 1, -196547, 0, 1, -196546, 0, 1, -196545, 0, 1, -196544, 0, 1, -196543, 0, 1, -196542, 0, 1, -196541, 0, 1, -196540, 0, 1, -196539, 0, 1, -196538, 0, 1, -196537, 0, 1, -196536, 0, 1, -196535, 0, 1, -196534, 0, 1, -196533, 0, 1, -196532, 0, 1, -196531, 0, 1, -196530, 0, 1, -131043, 0, 1, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -131035, 0, 1, -131034, 0, 1, -131033, 0, 1, -131032, 0, 1, -131031, 0, 2, -131030, 0, 2, -131029, 0, 2, -131028, 0, 2, -131011, 0, 1, -131010, 0, 1, -131009, 0, 1, -131008, 0, 1, -131007, 0, 1, -131006, 0, 1, -131005, 0, 1, -131004, 0, 1, -131003, 0, 1, -131002, 0, 1, -131001, 0, 1, -131000, 0, 1, -130999, 0, 1, -130998, 0, 1, -130997, 0, 1, -130996, 0, 1, -130995, 0, 1, -130994, 0, 1, -65507, 0, 1, -65506, 0, 1, -65505, 0, 1, -65485, 0, 2, -65484, 0, 2, -65483, 0, 2, -65482, 0, 2, -65480, 0, 2, -65479, 0, 2 )
+"cells": PoolIntArray( 52, 0, 2, 53, 0, 2, 57, 0, 2, 65588, 0, 2, 65589, 0, 2, 65593, 0, 2, 131120, 0, 2, 131121, 0, 2, 131122, 0, 2, 131123, 0, 2, 131124, 0, 2, 131125, 0, 2, 131126, 0, 2, 131127, 0, 2, 131128, 0, 2, 196684, 0, 3, 196685, 0, 3, 196686, 0, 3, 196687, 0, 3, 262219, 0, 3, 262220, 0, 3, 262221, 0, 3, 262222, 0, 3, 262223, 0, 3, 262224, 0, 3, 327755, 0, 3, 327756, 0, 3, 327757, 0, 3, 327758, 0, 3, 327759, 0, 3, 327760, 0, 3, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393283, 0, 2, 393284, 0, 2, 393291, 0, 3, 393292, 0, 3, 393293, 0, 3, 393294, 0, 3, 393295, 0, 3, 393296, 0, 3, 458747, 0, 1, 458748, 0, 1, 458749, 0, 1, 458754, 0, 1, 458756, 0, 1, 458819, 0, 2, 458820, 0, 2, 458821, 0, 2, 524283, 0, 1, 524285, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 589819, 0, 1, 589820, 0, 1, 589821, 0, 1, 852014, 0, 1, 852015, 0, 1, 852016, 0, 1, 917550, 0, 1, 917552, 0, 1, 983086, 0, 1, 983087, 0, 1, 983088, 0, 1, 1310755, 0, 3, 1310756, 0, 3, 1310757, 0, 3, 1376291, 0, 3, 1376292, 0, 3, 1376293, 0, 3, 1441827, 0, 3, 1441828, 0, 3, 1441829, 0, 3, -1114106, 0, 1, -1114105, 0, 1, -1114104, 0, 1, -1048571, 0, 1, -1048570, 0, 1, -1048568, 0, 1, -1048567, 0, 1, -983034, 0, 1, -983033, 0, 1, -983032, 0, 1, -983031, 0, 1, -917494, 0, 1, -917493, 0, 1, -851958, 0, 1, -851957, 0, 1, -786435, 0, 1, -786434, 0, 1, -786433, 0, 1, -786422, 0, 1, -786421, 0, 1, -720899, 0, 1, -720897, 0, 1, -720886, 0, 1, -720885, 0, 1, -655363, 0, 1, -655362, 0, 1, -655361, 0, 1, -655350, 0, 1, -655349, 0, 1, -655348, 0, 1, -589814, 0, 1, -589812, 0, 1, -524280, 0, 1, -524279, 0, 1, -524278, 0, 1, -524277, 0, 1, -524276, 0, 1, -524245, 0, 1, -524244, 0, 1, -524228, 0, 1, -458744, 0, 1, -458742, 0, 1, -458714, 0, 1, -458713, 0, 1, -458712, 0, 1, -458711, 0, 1, -458709, 0, 1, -458708, 0, 1, -458692, 0, 1, -458691, 0, 1, -458690, 0, 1, -393207, 0, 1, -393206, 0, 1, -393181, 0, 1, -393180, 0, 1, -393179, 0, 1, -393178, 0, 1, -393177, 0, 1, -393175, 0, 1, -393156, 0, 1, -393154, 0, 1, -393152, 0, 1, -327645, 0, 1, -327643, 0, 1, -327642, 0, 1, -327641, 0, 1, -327640, 0, 1, -327639, 0, 1, -327620, 0, 1, -327619, 0, 1, -327618, 0, 1, -327615, 0, 1, -262112, 0, 1, -262111, 0, 1, -262110, 0, 1, -262109, 0, 1, -262108, 0, 1, -262107, 0, 1, -262106, 0, 1, -262105, 0, 1, -262104, 0, 1, -262083, 0, 1, -262082, 0, 1, -262081, 0, 1, -262080, 0, 1, -262079, 0, 1, -262078, 0, 1, -262077, 0, 1, -262076, 0, 1, -262075, 0, 1, -262074, 0, 1, -262073, 0, 1, -262072, 0, 1, -262071, 0, 1, -262070, 0, 1, -262069, 0, 1, -262068, 0, 1, -262067, 0, 1, -262066, 0, 1, -196579, 0, 1, -196578, 0, 1, -196577, 0, 1, -196576, 0, 1, -196574, 0, 1, -196573, 0, 1, -196571, 0, 1, -196570, 0, 1, -196568, 0, 1, -196547, 0, 1, -196546, 0, 1, -196545, 0, 1, -196544, 0, 1, -196543, 0, 1, -196542, 0, 1, -196541, 0, 1, -196540, 0, 1, -196539, 0, 1, -196538, 0, 1, -196537, 0, 1, -196536, 0, 1, -196535, 0, 1, -196534, 0, 1, -196533, 0, 1, -196532, 0, 1, -196531, 0, 1, -196530, 0, 1, -131053, 0, 2, -131052, 0, 2, -131051, 0, 2, -131043, 0, 1, -131041, 0, 1, -131040, 0, 1, -131039, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -131035, 0, 1, -131034, 0, 1, -131033, 0, 1, -131032, 0, 1, -131031, 0, 2, -131030, 0, 2, -131029, 0, 2, -131028, 0, 2, -131011, 0, 1, -131010, 0, 1, -131009, 0, 1, -131008, 0, 1, -131007, 0, 1, -131006, 0, 1, -131005, 0, 1, -131004, 0, 1, -131003, 0, 1, -131002, 0, 1, -131001, 0, 1, -131000, 0, 1, -130999, 0, 1, -130998, 0, 1, -130997, 0, 1, -130996, 0, 1, -130995, 0, 1, -130994, 0, 1, -65517, 0, 2, -65516, 0, 2, -65515, 0, 2, -65507, 0, 1, -65506, 0, 1, -65505, 0, 1, -65485, 0, 2, -65484, 0, 2, -65483, 0, 2, -65482, 0, 2, -65480, 0, 2, -65479, 0, 2 )
 }
 script = ExtResource( 6 )
 __meta__ = {
@@ -358,7 +357,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 196614, 0, 2, 196621, 0, 2, 196685, 0, 0, 262138, 0, 0, 786440, 0, 36, 1048590, 0, 36, 1048600, 0, 2, 1310734, 0, 0, 1310753, 0, 2, 1572878, 0, 36, 2228218, 0, 36, -65530, 0, 36, -65527, 0, 36, -7, 0, 36 )
+"cells": PoolIntArray( 196614, 0, 2, 196621, 0, 2, 196685, 0, 0, 262138, 0, 0, 786440, 0, 36, 1048590, 0, 36, 1048600, 0, 2, 1310734, 0, 0, 1310753, 0, 2, 1572878, 0, 36, 2228218, 0, 36, -1114104, 0, 2, -786434, 0, 2, -524280, 0, 2, -65530, 0, 36, -65527, 0, 36, -7, 0, 36 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -382,7 +381,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, -13, 0 )
 
 [node name="WaterCubes" type="Spatial" parent="Viewport/level"]
 
@@ -391,6 +390,39 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 10, -4 )
 
 [node name="WaterCube11" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -3, -4 )
+
+[node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -2.33484, -4 )
+
+[node name="WaterCube13" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -2.33484, -4 )
+
+[node name="WaterCube24" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -6.33484, -4 )
+
+[node name="WaterCube25" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -6.33484, -4 )
+
+[node name="WaterCube26" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -6.33484, -4 )
+
+[node name="WaterCube29" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -10.3348, -4 )
+
+[node name="WaterCube30" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -10.3348, -4 )
+
+[node name="WaterCube31" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -10.3348, -4 )
+
+[node name="WaterCube32" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -10.3348, -4 )
+
+[node name="WaterCube28" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -6.33484, -4 )
+
+[node name="WaterCube27" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -2.33484, -4 )
 
 [node name="WaterCube14" parent="Viewport/level/WaterCubes" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -3, -4 )
@@ -630,18 +662,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
 shape = SubResource( 16 )
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5058, 4.01543, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0206, 1.01543, 0 )
 grav = 0
 bbText = "i'm fishing"
 can_move = false
 can_camera_zoom = false
+is_a_body = false
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC9/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC9" index="5"]
-frame = 68
+frame = 64
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC9" index="6"]
 anims/default = SubResource( 34 )
@@ -720,12 +753,12 @@ flip_v = true
 frame = 430
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -14, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/001GrubAmbush.tscn"
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.6096, 11.7161, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/005HouseInterior.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door4" index="1"]
 visible = false
@@ -743,15 +776,13 @@ shape = SubResource( 62 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 31 )]
 
-[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 0 )
-walk_direction = -1
-
 [node name="Fish" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -5.32974, 0 )
+behavior_walking = true
 
 [node name="Fish2" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.9549, -3.32974, 0 )
+behavior_walking = true
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 0 )
@@ -764,12 +795,8 @@ grav = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 2, 0 )
 grav = 0
 
-[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 15, 0 )
-grav = 0
-
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 14, 0 )
 grav = 0
 
 [node name="Sunfish" parent="Viewport/level" instance=ExtResource( 34 )]
@@ -777,6 +804,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -7, 0 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 1.41907, 0 )
+
+[node name="Fishy" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -3, 0 )
+
+[node name="Fishy3" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -3, 0 )
+
+[node name="Fishy4" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -5, 0 )
+
+[node name="Fishy5" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -8, 0 )
+
+[node name="Fishy2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, -6, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

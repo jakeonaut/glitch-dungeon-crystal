@@ -45,6 +45,8 @@ func _process(delta):
       mySprite.set_material_override(mySprite2.get_material_override())
     if mushroomSprite:
       mushroomSprite.visible = true
+    if not interactionArea.is_in_group("enemies"):
+      interactionArea.add_to_group("enemies")
   else:
     if original_material:
       mySprite.set_material_override(original_material)

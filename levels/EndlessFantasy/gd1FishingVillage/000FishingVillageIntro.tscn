@@ -320,7 +320,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9, 8.5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.2, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 0 )
 
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.6774, 0, 0 )
