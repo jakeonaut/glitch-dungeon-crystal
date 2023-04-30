@@ -104,7 +104,7 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  if interactPrompt != null and smallInteractionArea != null:
+  if is_active and interactPrompt != null and smallInteractionArea != null:
     interactPrompt.visible = smallInteractionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
       global.activeInteractor == null or (
@@ -131,7 +131,7 @@ func _process(delta):
 
 
 func getSmacked(_broom_origin):
-  if floating_text: return
+  if floating_text or not is_active: return
   if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -154,7 +154,7 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
   global.memory[level.getShortLevelName()][self.name] = true
 
 func isActive():
-  return not floating_text and (visible or can_be_activated_invisibly)
+  return is_active and not floating_text and (visible or can_be_activated_invisibly)
 
 func activate():
   if global.activeInteractor == null:
@@ -173,7 +173,7 @@ func passiveActivate(delta):
     else:
       visible = true
     can_activate = false
-  elif visible and is_active and (not aniPlayer or not aniPlayer.is_playing()):
+  elif visible and (not aniPlayer or not aniPlayer.is_playing()):
     if (global.activeInteractor == null and level.player.on_ground) or global.activeInteractor == textBox:
       textBox.passiveInteract(delta)
 

@@ -166,7 +166,7 @@ func wearCostume(costume):
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-
+  
   # TODO(jaketrower): !!! Remove (change to HOLD) before release
   if Input.is_action_just_pressed("ui_cancel"):
     level.get_tree().quit()
@@ -548,10 +548,6 @@ func processBroomLogic(_delta):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     aniPlayer.play("broomSmack")
-    if on_ground:
-      aniPlayer.queue("stand")
-    else:
-      aniPlayer.queue("fall")
 
     is_in_broom_cooldown = true
     broom_cooldown_timer = 0
@@ -571,6 +567,7 @@ func processBroomLogic(_delta):
     level.add_child(summonedBroom)
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
+    jump_press_timer = jump_press_broom_time_limit
 
 func adjustSummonedBroomSpritePosition():
   broomSpriteVisible.visible = false
@@ -680,13 +677,6 @@ func landed():
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
   summonSmokeClouds(1, false, false, 1)
-  
-  # grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
-  # grannyLandSound.play()
-  var localAniPlayer = get_node("AnimationPlayer")
-  if "broomSmack" in localAniPlayer.current_animation and localAniPlayer.get_queue()[0] == "fall":
-    localAniPlayer.clear_queue()
-    localAniPlayer.queue("stand")
 
   # TODO(jaketrower): Uncomment out for final dungeon level
   # var lt = getLevelTiles()
@@ -718,6 +708,11 @@ func broomStop():
     jump_press_timer = 0
     if has_sweeped_glitch or should_magic_jump:
       linear_velocity.y = -0.01
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.queue("fall")
+  if on_ground:
+    aniPlayer.queue("stand")
 
 # @override
 func playJumpSound():

@@ -796,7 +796,7 @@ func doWalkAnimation():
     return
 
   if on_ground and aniPlayer.current_animation != "walkStart" and aniPlayer.current_animation != "walk":
-    if aniPlayer.current_animation != "land":
+    if aniPlayer.current_animation != "land" or aniPlayer.current_animation != "walkLand":
       aniPlayer.clear_queue()
       aniPlayer.stop()
     var aa = aniPlayer.assigned_animation

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -748,7 +748,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=17]
-length = 0.03
+length = 0.06
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -756,10 +757,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 11 ]
+"values": [ 11, 15 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -1138,6 +1139,47 @@ tracks/1/keys = {
 "values": [ 12, 3, 0, 0 ]
 }
 
+[sub_resource type="Animation" id=59]
+resource_name = "walkLand"
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 2, 2, 25 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0.25, 0.7 ) ]
+}
+
 [sub_resource type="Animation" id=26]
 length = 0.2
 tracks/0/type = "value"
@@ -1150,7 +1192,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 24, 3 ]
+"values": [ 24, 2 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -1489,6 +1531,7 @@ anims/turnAround = SubResource( 23 )
 anims/wakeup = SubResource( 24 )
 anims/walk = SubResource( 25 )
 anims/walkBump = SubResource( 31 )
+anims/walkLand = SubResource( 59 )
 anims/walkStart = SubResource( 26 )
 anims/walkStop = SubResource( 27 )
 

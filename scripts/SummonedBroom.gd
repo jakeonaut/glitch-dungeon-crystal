@@ -91,9 +91,8 @@ func hitStuff(_delta):
         has_hit_npc = true
         npc.getSmacked(global_transform.origin)
         my_broom_owner.getSmacked()
-    # TODO(jaketrower): Don't do this, just give miniCubeCrystal a body
-    # elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
-    #   area.PassiveInteractActivate(delta, false)
+    elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+      area.InteractActivate()
 
   # erase glitch tiles...
   if not global.memory.has("broom"):

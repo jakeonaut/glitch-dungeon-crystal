@@ -754,7 +754,7 @@ frame = 430
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -14, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/001GrubAmbush.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.6096, 11.7161, 0 )

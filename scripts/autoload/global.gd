@@ -123,6 +123,8 @@ var mini_cube_crystal_pitch_time_limit = 60
 
 var set_camera_position_on_respawn = false
 
+var hasGottenLevelGeode = false
+
 func _ready():
     set_process(true)
 
@@ -143,6 +145,7 @@ func _ready():
     if canChangeSongPitch: pass
     if crtScreenEffects: pass
     if set_camera_position_on_respawn: pass
+    if hasGottenLevelGeode: pass
 
     memory["broom"] = true
     memory["broom_level"] = 0
