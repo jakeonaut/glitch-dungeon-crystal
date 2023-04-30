@@ -105,6 +105,10 @@ func _process(delta):
         should_collide_ceil = false
         should_collide_horizontally = false
         should_do_fallthrough_area_collision = false
+    else:
+        should_collide_floor = not on_ground or behavior_walking or behavior_vertical_walking
+        should_collide_ceil = not on_ground or behavior_vertical_walking
+        should_collide_horizontally = behavior_walking and not behavior_vertical_walking
         
     
     if am_i_dying:

@@ -823,7 +823,7 @@ func handleCollisionsAndMove(local_lv, delta):
   was_on_ground = on_ground
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
     on_ground = isWalkingIntoWall()
-  elif glitch_form != global.GlitchForm.FLOOR:
+  elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
     on_ground = false
   truly_on_ground = false
   half_on_ground = false
