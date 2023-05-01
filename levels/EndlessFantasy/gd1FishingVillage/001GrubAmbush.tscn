@@ -262,7 +262,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/002GrubAmbush.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="3"]

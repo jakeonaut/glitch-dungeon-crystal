@@ -591,6 +591,9 @@ func processBroomRenderLogic(_delta):
   if mySprite.flip_h:
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1
+  if global.hasGottenLevelGeode:
+    broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
+    broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()

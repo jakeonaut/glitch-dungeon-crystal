@@ -790,15 +790,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 4, 0 )
-grav = 0
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 2, 0 )
-grav = 0
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 14, 0 )
-grav = 0
 
 [node name="Sunfish" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -7, 0 )

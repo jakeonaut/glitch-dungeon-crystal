@@ -8,11 +8,17 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var npc = get_node("NPC")
 onready var getHitSound = get_node("GetHitSound")
 onready var getHitSound2 = get_node("GetHitSound2")
+var can_do_my_power = true
+
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
     set_process(true)
 
 func _process(delta):
+    if not can_do_my_power:
+        return
+
     if not global.hasGottenLevelGeode:
         if has_been_smacked:
             self.rotation_degrees.y -= (delta * rot_amount)
@@ -33,6 +39,7 @@ func _process(delta):
             npc.mySprite.material_override.set_shader_param("opacity", 1.0)
             npc.mySprite.max_frames = 2
             npc.is_active = true
+            can_do_my_power = false
 
 
 
@@ -45,3 +52,7 @@ func activate():
     musicPlayer.stopAll()
     getHitSound.play()
     getHitSound2.play()
+
+    level.get_node("SavePoint").passiveActivate(0)
+    # TODO(jaketrower): Make more generic, this is specific to fishingVillage
+    level.get_node("NPC").queue_free()

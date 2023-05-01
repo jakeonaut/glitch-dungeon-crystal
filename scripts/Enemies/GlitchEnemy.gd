@@ -349,7 +349,7 @@ func ouchies(_broom_origin):
         mySprite.frame_delay = 0.1
         mySprite.max_frames = 4
         mySprite.should_soft_fizzle_out = true
-        mySprite.texture = altGlitchEnemySheet
+        # mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
         dieSound.play()
         pauseSelf = true
