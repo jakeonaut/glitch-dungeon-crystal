@@ -483,6 +483,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 
   global.memory["hp"] -= 1
   if global.memory["hp"] <= 0 or should_immediately_die:
+    global.incrementLevelZoneDeaths()
     global.memory["hp"] = 0
     self.textBox.hideTextbox()
     global.isRespawning = true

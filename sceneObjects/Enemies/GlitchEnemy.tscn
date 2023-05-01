@@ -84,6 +84,7 @@ extents = Vector3( 18, 13, 1 )
 [node name="GlitchEnemy" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 1 )
+grav = 0
 time_influence = 20
 y_div = 0.9
 normal_offset = 0.5

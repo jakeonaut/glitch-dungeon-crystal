@@ -254,3 +254,29 @@ func doFallthroughObjectCollision(gameMover, area):
         ):
         return true
     return false
+
+var currLevelZone = null
+const HUB_LEVEL_ZONE = "gd1" 
+func tryInitializeLevelZone(levelZone):
+    if not self.memory.has(levelZone):
+        self.memory[levelZone] = {}
+    
+    if currLevelZone == HUB_LEVEL_ZONE and levelZone != HUB_LEVEL_ZONE:
+        # entering the level from the hub world, restart!
+        hasGottenLevelGeode = false
+        self.memory[levelZone] = {}
+        pass
+    elif currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
+        # just got back to the hub!, record the levelZone's results
+        self.memory[levelZone + "_highscore"] = self.memory[levelZone]
+    currLevelZone = levelZone
+
+func incrementLevelZoneDeaths():
+    if currLevelZone == null:
+        return
+
+    if not self.memory.has(currLevelZone):
+        self.memory[currLevelZone] = {}
+    if not self.memory[currLevelZone].has("num_deaths"):
+        self.memory[currLevelZone]["num_deaths"] = 0
+    self.memory[currLevelZone]["num_deaths"] += 1

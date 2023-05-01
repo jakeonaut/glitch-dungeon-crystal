@@ -27,7 +27,7 @@ func _process(delta):
     if not am_i_in_range_of_player or not is_active:
         return
 
-    var num_children = self.get_children().size() - 1 # to account for the PlayerInteractionArea
+    var num_children = getNumChildren()
 
     if num_children < max_num_children:
         spawn_timer += (delta*22)
@@ -36,6 +36,9 @@ func _process(delta):
             spawn_timer = 0
     else:
         spawn_timer = 0
+
+func getNumChildren():
+    return self.get_children().size() - 1 # to account for the PlayerInteractionArea
         
 func spawn():
     var newObject = spawned_object_res.instance()

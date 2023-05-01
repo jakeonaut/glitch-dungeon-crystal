@@ -69,6 +69,7 @@ func _ready_impl():
   tryShowUIElements()
   tryToRespawn()
   setUpRoomInitializationOverride()
+  global.tryInitializeLevelZone(self.getLevelZoneName())
 
   global.activeThrowableObject = null
   if global.activeThrowableObjectPath != null:
@@ -126,6 +127,7 @@ func saveTheGame(message = "saving (not really)"):
     
 func restartMusic():
   # update music
+  print(getLevelZoneName())
   musicPlayer.conductFromScenePath(getLevelName())
   
 func tryShowUIElements():
@@ -153,6 +155,13 @@ func getLevelName():
 func getShortLevelName():
   var longLevelName = getLevelName()
   return longLevelName.substr(13, longLevelName.length() - 18)
+
+func getLevelZoneName():
+  var shortLevelName = getShortLevelName()
+  var segments = shortLevelName.split("/")
+  if segments.size() == 1:
+    return null
+  return segments[segments.size() - 2]
 
 func tryToRespawn():
   global.memory["hp"] = global.memory["max_hp"]
