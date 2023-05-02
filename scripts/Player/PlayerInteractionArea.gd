@@ -41,8 +41,8 @@ func _process(_delta):
         if global.activeInteractor != null:
             global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
-        # elif nearest_area and not global.pauseMoveInput:
-        #     nearest_area.InteractActivate()
+        elif nearest_area and not global.pauseMoveInput:
+            nearest_area.InteractActivate()
         # Give secondary priority to held objects action.
         elif global.activeThrowableObject:
             global.activeThrowableObject.activate()

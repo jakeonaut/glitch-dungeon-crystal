@@ -12,7 +12,7 @@ export var is_static_in_level = true
 
 var is_smacked = false
 var smack_timer = 0
-export var smack_time_limit = 5
+export var smack_time_limit = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,17 +37,17 @@ func _process(delta):
         
         if stepify(opacity, 0.1) == 0:
             queue_free()
-    else:
-        var diff = target_pos - global_transform.origin
-        var step = 0.1
-        if stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
-            randomizeTargetPos()
+
+    var diff = target_pos - global_transform.origin
+    var step = 0.1
+    if not didja_get_me and stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
+        randomizeTargetPos()
 
     if is_smacked:
         smack_timer += (delta * 22)
         if smack_timer >= smack_time_limit:
             unsmack()
-        didja_get_me = true
+            didja_get_me = true
 
 func unsmack():
     is_smacked = false
@@ -100,3 +100,7 @@ func getSmacked(_broom_origin):
     
     smack_timer = 0
     is_smacked = true
+    if level.player.mySprite.flip_h:
+        target_pos = self.global_transform.origin + Vector3(-3, 6, 0)
+    else:
+        target_pos = self.global_transform.origin + Vector3(3, 6, 0)

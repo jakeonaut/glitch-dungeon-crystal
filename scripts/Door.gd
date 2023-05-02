@@ -260,11 +260,11 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     transition.long_fade_to(self.path)
 
 func land():
-  global.pauseGame = false
   # TODO(jaketrower): Oh...
   # global.memory.erase("active_save_point_x")
   # global.memory.erase("active_save_point_y")
   # global.memory.erase("active_save_point_z")
+  global.pauseGame = false
   
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y

@@ -324,7 +324,7 @@ func applyTerminalVelocity(_delta):
   if grav < 0 and vv > terminal_vel:
     vv = terminal_vel
 
-  if glitch_form == global.GlitchForm.FLOOR and on_ground:
+  if (glitch_form == global.GlitchForm.FLOOR or not should_collide_floor) and on_ground:
     vv = 0
     
 func getTilesBelow(currLevelTiles):

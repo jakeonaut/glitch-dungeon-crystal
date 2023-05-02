@@ -126,6 +126,9 @@ func shouldIBeActive():
 func isActive():
   return self.visible
 
+func activate():
+  passiveActivate(0)
+
 func passiveActivate(_delta):
   is_touching_player = true
   is_touching_player_timer = 0
