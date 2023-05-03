@@ -104,3 +104,4 @@ func getSmacked(_broom_origin):
         target_pos = self.global_transform.origin + Vector3(-3, 6, 0)
     else:
         target_pos = self.global_transform.origin + Vector3(3, 6, 0)
+    mySprite.flip_h = (target_pos.x < global_transform.origin.x)

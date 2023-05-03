@@ -219,6 +219,7 @@ func tryToRespawn():
   global.isEnteringRoom = false
   global.isRespawning = false
 
+  player.unsmack()
   self.overrideLevelRespawnEvent()
 
 

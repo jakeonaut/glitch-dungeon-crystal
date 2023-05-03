@@ -85,7 +85,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 4 )
-starting_glitch_type = 1
+starting_glitch_type = 2
 tileset_type = 2
 how_much_mp = 15
 
@@ -278,12 +278,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -5.96046e-08, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0, 0 )
-
-[node name="NullificationArea3" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 2.3, 0 )
-
-[node name="NullificationArea4" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, 0.7, 0 )
 
 [node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.7, 0 )

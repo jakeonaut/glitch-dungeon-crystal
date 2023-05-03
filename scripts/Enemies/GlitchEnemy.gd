@@ -59,6 +59,17 @@ export var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+        yield(get_tree(), "idle_frame")
+        yield(get_tree(), "idle_frame")
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = global.memory[level.getShortLevelName()][self.name]
+        miniCubeCrystal.addPlusSprite()
+        miniCubeCrystal.queue_free()
+        queue_free()
+        return
+
     set_process_input(true)
     set_process(true)
     set_physics_process(true)
@@ -233,6 +244,7 @@ func tryDieToOffscreenCamera():
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            setGlobalMemoryOfHasBeenDefeated()
             queue_free()
     
 # @override
@@ -334,8 +346,10 @@ func ouchies_base():
     if is_static_in_level and not (global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name)):
         setGlobalMemoryOfHasBeenDefeated()
         var miniCubeCrystal = miniCubeCrystalRes.instance()
+        miniCubeCrystal.is_static_in_level = false
         level.add_child(miniCubeCrystal)
         miniCubeCrystal.global_transform.origin = self.global_transform.origin
+        miniCubeCrystal.passiveActivate(0)
 
 func ouchies(_broom_origin):
     if is_particle:
@@ -383,7 +397,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
 func setGlobalMemoryOfHasBeenDefeated():
   if not global.memory.has(level.getShortLevelName()):
     global.memory[level.getShortLevelName()] = {}
-  global.memory[level.getShortLevelName()][self.name] = true
+  global.memory[level.getShortLevelName()][self.name] = self.global_transform.origin
 
 export var time_influence = 35
 export var y_div = 2.3

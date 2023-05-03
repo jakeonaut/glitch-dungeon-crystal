@@ -721,6 +721,7 @@ func broomStop():
 # @override
 func playJumpSound():
   .playJumpSound()
+  global.incrementLevelZoneJumps()
   # grannyLandSound.pitch_scale = rand_range(0.6, 1.0)
   # grannyLandSound.play()
 

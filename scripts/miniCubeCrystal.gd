@@ -40,7 +40,7 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
   aniPlayer.playback_speed = global.time_dilation_multiplier
 
-  if is_visible():
+  if visible:
     if disappearing2:
       step = MID_STEP
       translate(Vector3(0, 0.5*delta, 0))
@@ -59,7 +59,7 @@ func _process(delta):
     cubeContainer.rotate_x((step/2)*delta)
 
 func isActive():
-  return is_visible() and not disappearing2
+  return visible and not disappearing2
 
 func passiveActivate(_delta):
   # musicPlayer.stopAll()

@@ -248,11 +248,13 @@ func _process(delta):
 
   if global.pauseGame: return
 
-  if len(infected_spikes) > 0:
+  var num_infected_spikes = len(infected_spikes)
+  if num_infected_spikes > 0:
     spike_infection_timer += (delta*22)
     if spike_infection_timer >= spike_infection_time_limit: 
       spike_infection_timer = 0
-      for _i in range(len(infected_spikes)):
+      global.incrementLevelZoneGlitchTiles(num_infected_spikes)
+      for _i in range(num_infected_spikes):
         var coords = infected_spikes.pop_front()
         var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
         var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)
@@ -391,6 +393,7 @@ func changeColorPalette(palette, _palette_alt = null):
     # mesh_library.set_item_mesh(item_id, mesh)
 
 func removeTile(key):
+  # TODO(jaketrower): 
   set_cell_item(key.x, key.y, key.z, -1)
   tile_dict.erase(key)
 

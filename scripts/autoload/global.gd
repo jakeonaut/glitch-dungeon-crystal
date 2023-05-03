@@ -271,12 +271,28 @@ func tryInitializeLevelZone(levelZone):
         self.memory[levelZone + "_highscore"] = self.memory[levelZone]
     currLevelZone = levelZone
 
-func incrementLevelZoneDeaths():
+func incrementLevelZoneThing(thing, amt):
+    # also increment the total counter
+    if not self.memory.has(thing):
+        self.memory[thing] = 0
+    self.memory[thing] += amt
     if currLevelZone == null:
         return
 
     if not self.memory.has(currLevelZone):
         self.memory[currLevelZone] = {}
-    if not self.memory[currLevelZone].has("num_deaths"):
-        self.memory[currLevelZone]["num_deaths"] = 0
-    self.memory[currLevelZone]["num_deaths"] += 1
+    if not self.memory[currLevelZone].has(thing):
+        self.memory[currLevelZone][thing] = 0
+    self.memory[currLevelZone][thing] += amt
+
+func incrementLevelZoneDeaths():
+    incrementLevelZoneThing("num_deaths", 1)
+
+func incrementLevelZoneJumps():
+    incrementLevelZoneThing("num_jumps", 1)
+
+func incrementLevelZoneGlitchTiles(amt):
+    incrementLevelZoneThing("num_glitch_tiles", amt)
+
+func incrementLevelZoneSecretEggs():
+    incrementLevelZoneThing("num_secret_eggs", 1)
