@@ -14,6 +14,9 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
     set_process(true)
+    if global.hasGottenLevelGeode:
+        aniPlayer.play("quick_explode")
+        stop()
 
 func _process(delta):
     if not can_do_my_power:
@@ -32,14 +35,17 @@ func _process(delta):
             self.rotation_degrees.y -= (delta * rot_amount)
             self.global_transform.origin.y += (delta * 1)
         else:
-            self.rotation_degrees.y = 0 
             global.pauseGame = false
-            npc.grav = 30
-            npc.mySprite.material_override.set_shader_param("enable_palette_cycle", false)
-            npc.mySprite.material_override.set_shader_param("opacity", 1.0)
-            npc.mySprite.max_frames = 2
-            npc.is_active = true
-            can_do_my_power = false
+            stop()
+
+func stop():
+    self.rotation_degrees.y = 0 
+    npc.grav = 30
+    npc.mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+    npc.mySprite.material_override.set_shader_param("opacity", 1.0)
+    npc.mySprite.max_frames = 2
+    npc.is_active = true
+    can_do_my_power = false
 
 
 
@@ -48,7 +54,7 @@ func isActive():
 
 func activate():
     has_been_smacked = true
-    global.pauseGame = true
+    # global.pauseGame = true
     musicPlayer.stopAll()
     getHitSound.play()
     getHitSound2.play()

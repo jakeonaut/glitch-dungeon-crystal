@@ -340,7 +340,7 @@ func doTimeDilation(delta):
   
   
 func processGlitchHurtRecovery(delta):
-  if physics_state == PhysicsState.GLITCH_HURT:
+  if physics_state == PhysicsState.GLITCH_HURT or has_sweeped_glitch:
     global.pauseGame = true
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
@@ -353,6 +353,7 @@ func processGlitchHurtRecovery(delta):
       global.pauseGame = false
       global.pauseMoveInput = false
       self.physics_state = PhysicsState.GLITCH_RECOVERY
+      has_sweeped_glitch = false
 
     return false
   elif physics_state == PhysicsState.GLITCH_DYING:

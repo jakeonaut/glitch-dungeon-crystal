@@ -40,7 +40,7 @@ func _process(delta):
 func getNumChildren():
     return self.get_children().size() - 1 # to account for the PlayerInteractionArea
         
-func spawn():
+func spawn(_with_flare = true):
     var newObject = spawned_object_res.instance()
     newObject.transform.origin = Vector3(
         stepify(rand_range(x_range.x, x_range.y), 0.125),
@@ -50,6 +50,8 @@ func spawn():
     add_child(newObject)
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)
+    if "is_static_in_level" in newObject:
+        newObject.is_static_in_level = false
 
             
 func playerActivationAreaPassiveActivate():
