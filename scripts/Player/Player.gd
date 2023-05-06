@@ -340,7 +340,8 @@ func doTimeDilation(delta):
   
   
 func processGlitchHurtRecovery(delta):
-  if physics_state == PhysicsState.GLITCH_HURT or has_sweeped_glitch:
+  if physics_state == PhysicsState.GLITCH_HURT or \
+     (physics_state == PhysicsState.GLITCH_DYING and has_sweeped_glitch and global.hasGottenLevelGeode):
     global.pauseGame = true
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
@@ -595,6 +596,11 @@ func processBroomRenderLogic(_delta):
   if global.hasGottenLevelGeode:
     broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
     broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
+    mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  else:
+    broomSpriteVisible.material_override.set_shader_param("enable_glitch", false)
+    broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
+    mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()

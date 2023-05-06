@@ -21,9 +21,9 @@ func _ready():
         # 2 = spawned_and_dead
         if global.memory[level.getShortLevelName()][self.name] == 1:
             spawn(false)
-        has_spawned = true
-        queue_free()
-        return
+            has_spawned = true
+        if global.memory[level.getShortLevelName()][self.name] == 2:
+            queue_free()
 
 func _process(_delta):
     is_active = global.hasGottenLevelGeode and not has_spawned
@@ -59,3 +59,7 @@ func spawn(with_flare = true):
             if not global.memory.has(level.getShortLevelName()):
                 global.memory[level.getShortLevelName()] = {}
             global.memory[level.getShortLevelName()][self.name] = 1
+
+# @override
+func myChildDied():
+    global.memory[level.getShortLevelName()][self.name] = 2

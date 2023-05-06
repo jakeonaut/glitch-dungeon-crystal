@@ -38,6 +38,7 @@ func _ready_impl():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   
+  levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
   
@@ -149,7 +150,7 @@ func setUpRoomInitializationOverride():
   pass
 
 func getLevelName():
-  # print("LEVEL NAMAE: " + get_tree().get_root().get_node("Game").get_filename())
+  # print("LEVEL NAME: " + get_tree().get_root().get_node("Game").get_filename())
   return get_tree().get_root().get_node("Game").get_filename()
   
 func getShortLevelName():

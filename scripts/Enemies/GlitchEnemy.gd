@@ -350,6 +350,8 @@ func ouchies_base():
         level.add_child(miniCubeCrystal)
         miniCubeCrystal.global_transform.origin = self.global_transform.origin
         miniCubeCrystal.passiveActivate(0)
+    if parentSpawner != null and parentSpawner.has_method("myChildDied"):
+        parentSpawner.myChildDied()
 
 func ouchies(_broom_origin):
     if is_particle:
@@ -416,3 +418,7 @@ func getSmacked(_broom_origin):
     smack_timer = 0
     is_smacked = true
     has_ever_been_smacked = true
+
+var parentSpawner = null
+func setAsParent(spawner):
+    parentSpawner = spawner

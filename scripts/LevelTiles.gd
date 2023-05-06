@@ -69,6 +69,18 @@ func _ready():
 func ready_impl():
   pass
 
+func removeRemovedTiles():
+  var lz = global.currLevelZone
+  var ln = level.getShortLevelName()
+  var rt = global.removedLevelZoneTilesKey
+  if not (global.memory.has(lz) and global.memory[lz].has(ln) and global.memory[lz][ln].has(rt)):
+    return
+  var removedLevelTiles = global.memory[lz][ln][rt]
+  var num_removed_tiles = len(removedLevelTiles)
+  for i in range(num_removed_tiles):
+    var coords = removedLevelTiles[i]
+    removeTile(coords, false)
+
 func buildRandomTiles():
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
@@ -392,14 +404,16 @@ func changeColorPalette(palette, _palette_alt = null):
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
 
-func removeTile(key):
-  # TODO(jaketrower): 
+func removeTile(key, removeFromLevelZone = true):
   set_cell_item(key.x, key.y, key.z, -1)
   tile_dict.erase(key)
+  if removeFromLevelZone:
+    global.removeLevelZoneTile(level.getShortLevelName(), key)
 
 func cloneTile(source, target):
   set_cell_item(target.x, target.y, target.z, get_cell_item(source.x, source.y, source.z))
   tile_dict[target] = tile_dict[source]
+  # TODO(jaketrower): add to levelZone...
 
 func properlySetTiles():
   var keys = tile_dict.keys()

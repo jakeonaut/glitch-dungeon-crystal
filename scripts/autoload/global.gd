@@ -263,13 +263,15 @@ func tryInitializeLevelZone(levelZone):
     
     if currLevelZone == HUB_LEVEL_ZONE and levelZone != HUB_LEVEL_ZONE:
         # entering the level from the hub world, restart!
-        hasGottenLevelGeode = false
-        self.memory[levelZone] = {}
-        pass
+        resetLevelZone(levelZone)
     elif currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
         # just got back to the hub!, record the levelZone's results
         self.memory[levelZone + "_highscore"] = self.memory[levelZone]
     currLevelZone = levelZone
+
+func resetLevelZone(levelZone):
+    hasGottenLevelGeode = false
+    self.memory[levelZone] = {}
 
 func incrementLevelZoneThing(thing, amt):
     # also increment the total counter
@@ -293,6 +295,19 @@ func incrementLevelZoneJumps():
 
 func incrementLevelZoneGlitchTiles(amt):
     incrementLevelZoneThing("num_glitch_tiles", amt)
+
+var removedLevelZoneTilesKey = "removed_tiles"
+func removeLevelZoneTile(levelName, coords):
+    if currLevelZone == null:
+        return
+
+    if not self.memory.has(currLevelZone):
+        self.memory[currLevelZone] = {}
+    if not self.memory[currLevelZone].has(levelName):
+        self.memory[currLevelZone][levelName] = {}
+    if not self.memory[currLevelZone][levelName].has(removedLevelZoneTilesKey):
+        self.memory[currLevelZone][levelName][removedLevelZoneTilesKey] = []
+    self.memory[currLevelZone][levelName][removedLevelZoneTilesKey].append(coords)
 
 func incrementLevelZoneSecretEggs():
     incrementLevelZoneThing("num_secret_eggs", 1)

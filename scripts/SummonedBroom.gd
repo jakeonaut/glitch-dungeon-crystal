@@ -84,7 +84,7 @@ func hitStuff(_delta):
         my_broom_owner.broomSound.play()
       else:
         area.get_node("..").notOuchies(global_transform.origin)
-        my_broom_owner.getSmacked()
+      my_broom_owner.getSmacked()
       # # TODO kill glitches or "free" them like glitch slug...
       
     elif area.is_in_group("corporeal_body"):
@@ -95,6 +95,8 @@ func hitStuff(_delta):
         my_broom_owner.getSmacked()
     elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
       area.InteractActivate()
+    elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
+      area.PassiveInteractActivate(0, false)
 
   # erase glitch tiles...
   if not global.memory.has("broom"):

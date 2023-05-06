@@ -56,3 +56,6 @@ func spawn(_with_flare = true):
             
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
+
+func myChildDied():
+    pass

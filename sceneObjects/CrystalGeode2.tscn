@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=15]
 
-[sub_resource type="ArrayMesh" id=30]
+[sub_resource type="ArrayMesh" id=32]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -349,7 +349,7 @@ transform = Transform( 2.82843, 2.82843, 0, -2, 2, 2.82843, 2, -2, 2.82843, 0, 0
 [node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
 extra_cull_margin = 16384.0
-mesh = SubResource( 30 )
+mesh = SubResource( 32 )
 material/0 = SubResource( 17 )
 script = ExtResource( 12 )
 

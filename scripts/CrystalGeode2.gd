@@ -54,7 +54,7 @@ func isActive():
 
 func activate():
     has_been_smacked = true
-    # global.pauseGame = true
+    global.pauseGame = true
     musicPlayer.stopAll()
     getHitSound.play()
     getHitSound2.play()
