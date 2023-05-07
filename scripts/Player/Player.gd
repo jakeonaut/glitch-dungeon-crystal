@@ -162,10 +162,15 @@ func walkThroughWallsGlitch():
 
 func wearCostume(costume):
   global.memory["player_costume"] = costume
+
+# @override
+func pressingRun():
+  return Input.is_action_pressed("sub_action_button") and summonedBroom == null
   
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
+  pauseInput = summonedBroom
   
   # TODO(jaketrower): !!! Remove (change to HOLD) before release
   if Input.is_action_just_pressed("ui_cancel"):

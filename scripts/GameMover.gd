@@ -100,6 +100,7 @@ var last_vv = vv
 var hv = lv - up * vv # horizontal velocity
 
 export var walk_speed = 8
+export var run_speed = 10
   
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
@@ -390,6 +391,9 @@ func justPressedDown():
   return false
   
 func pressingDown():
+  return false
+
+func pressingRun():
   return false
 
 func justPressedJump():
@@ -762,7 +766,9 @@ func processHorizontalInputs(delta):
   var curr_walk_speed = walk_speed
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
-  if glitch_form == global.GlitchForm.FEATHER:
+  if pressingRun() and on_ground:
+    curr_walk_speed = run_speed
+  elif glitch_form == global.GlitchForm.FEATHER:
     curr_walk_speed = feather_glitch_walk_speed
   elif glitch_form == global.GlitchForm.INVISIBLE:
     curr_walk_speed = invisible_glitch_walk_speed
