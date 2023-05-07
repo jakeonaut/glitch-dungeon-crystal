@@ -1,26 +1,16 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
-[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=3]
-[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/FishingRod.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=7]
-[ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=8]
-[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=10]
-[ext_resource path="res://scripts/SpellsTreasures/FishingRodAbortSound.gd" type="Script" id=11]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=13]
 
-[sub_resource type="CylinderShape" id=1]
-radius = 0.9
-
-[sub_resource type="SphereShape" id=2]
-radius = 1.5
-
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=11]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 1 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 6 )
@@ -37,7 +27,9 @@ shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -52,7 +44,7 @@ shader_param/target_palette = ExtResource( 1 )
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("RodSprite:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -94,7 +86,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("RodSprite:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -106,63 +98,43 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 
-[node name="FishingRod" type="KinematicBody"]
-collision_layer = 2
-script = ExtResource( 8 )
-grav = 0
-bbText = "\"FISHING ROD\" get!!!
-wow, good job
+[node name="FishingRod" type="Spatial"]
+script = ExtResource( 3 )
 
-go talk to glasses in
-swamp home to learn
-how to fish?"
-portrait = ExtResource( 7 )
-is_important = true
-can_activate = false
-can_move = false
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
-
-[node name="InteractionArea" type="Area" parent="."]
-script = ExtResource( 10 )
-
-[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 2 )
-
-[node name="SmallInteractionArea" type="Area" parent="."]
+[node name="HookInteractionArea" type="Area" parent="."]
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
-shape = SubResource( 8 )
+[node name="CollisionShape" type="CollisionShape" parent="HookInteractionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57786, -0.57786, 0 )
+shape = SubResource( 11 )
 
-[node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
-
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
-stream = ExtResource( 3 )
-
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
-stream = null
-volume_db = -23.0
-
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
-volume_db = -10.0
-
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
-stream = null
-script = ExtResource( 11 )
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="HookSprite" type="Sprite3D" parent="HookInteractionArea"]
 material_override = SubResource( 7 )
 pixel_size = 0.125
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 13 )
-hframes = 6
-vframes = 5
-frame = 16
+hframes = 12
+vframes = 10
+frame = 30
 script = ExtResource( 5 )
 should_randomize_frame_delay = true
+max_frames = 1
+should_animate = false
+
+[node name="RodSprite" type="Sprite3D" parent="."]
+material_override = SubResource( 7 )
+pixel_size = 0.125
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 13 )
+hframes = 12
+vframes = 10
+frame = 28
+script = ExtResource( 5 )
+should_randomize_frame_delay = true
+max_frames = 1
+should_animate = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
@@ -174,5 +146,3 @@ anims/getItem = SubResource( 10 )
 stream = ExtResource( 12 )
 volume_db = -25.0
 pitch_scale = 0.8
-
-[editable path="NPC TextBox"]

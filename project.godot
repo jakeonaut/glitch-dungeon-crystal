@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="crystal dungeon"
+config/name="secret of nana"
 run/main_scene="res://levels/EndlessFantasy/gd1/0_0.tscn"
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
 config/icon="res://catbabushka.png"
