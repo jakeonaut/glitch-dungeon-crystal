@@ -1000,22 +1000,18 @@ shape = SubResource( 16 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.47169, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.47169, 0 )
-grav = 0
 
 [node name="Sprite3D" parent="Viewport/level/GlitchEnemy6" index="0"]
 frame = 53
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.47169, 0 )
-grav = 0
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 16.4717, 0 )
-grav = 0
 
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -12, 0 )
@@ -1025,7 +1021,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level/QuestionBlock" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
-grav = 0
 
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )

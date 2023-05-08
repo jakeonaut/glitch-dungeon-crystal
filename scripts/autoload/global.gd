@@ -148,7 +148,6 @@ func _ready():
     if hasGottenLevelGeode: pass
 
     memory["broom"] = true
-    memory["broom_level"] = 0
     memory["nesting_doll"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]

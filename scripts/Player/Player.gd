@@ -165,7 +165,7 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
-  return Input.is_action_pressed("sub_action_button") and summonedBroom == null
+  return global.memory["broom"] and Input.is_action_pressed("sub_action_button") and summonedBroom == null
   
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
@@ -576,6 +576,9 @@ func processBroomLogic(_delta):
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
+  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom:
+    summonedBroom.broom_active_timer = 100
+    summonFallenBroom(true)
 
 func adjustSummonedBroomSpritePosition():
   broomSpriteVisible.visible = false
@@ -748,6 +751,9 @@ func giveMeMiniCrystalCubes(how_many):
   gimme_mini_crystal_cubes_timer = 0
 
 func iFellFlat():
+  summonFallenBroom(false)
+
+func summonFallenBroom(was_thrown):
   broomSpriteVisible.visible = false
   summonSmokeClouds(5, false, false)
 
@@ -755,18 +761,31 @@ func iFellFlat():
     var fallenBroom = fallenBroomRes.instance()
     level.add_child(fallenBroom)
     fallenBroom.global_transform.origin = self.global_transform.origin
-    fallenBroom.global_transform.origin.x += 1
+    if mySprite.flip_h:
+      fallenBroom.global_transform.origin.x -= 1
+      fallenBroom.walk_direction = -1
+      if was_thrown:
+        fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin", -1, 2.0)
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+    else:
+      fallenBroom.global_transform.origin.x += 1
+      fallenBroom.walk_direction = 1
+      if was_thrown:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin")
     fallenBroom.global_transform.origin.y += 2
+    if was_thrown:
+      fallenBroom.grav = 1
+      fallenBroom.projectile = true
+      fallenBroom.global_transform.origin.y -= 1
+      fallenBroom.true_terminal_vel = 0
+      fallenBroom.walk_speed *= 3
     global.memory["broom"] = false
-    walk_speed /= 2
-    jump_force /= 2
 
-func getABroom(broomLevel = 0):
+func getABroom():
   global.memory["broom"] = true
-  global.memory["broom_level"] = broomLevel
-  walk_speed *= 2
-  jump_force *= 2
-  broomSpriteVisible.visible = true
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
 
 func iJustPressedDown():

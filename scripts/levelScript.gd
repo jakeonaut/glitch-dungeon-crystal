@@ -12,6 +12,10 @@ var current_sprite_palette = global.grey_palette
 export var show_crt_effect = false
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
+# will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
+export var should_glitch_activate = false 
+# TODO(jaketrower): need to make this work with grimoire
+
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
 export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST") var tileset_type 
 
@@ -57,7 +61,8 @@ func _ready_impl():
     global.memory["max_hp"] = how_much_hp
     global.memory["hp"] = global.memory["max_hp"]
     
-  if global.memory.has("current_glitch"):
+  global.memory["broom"] = true
+  if global.memory.has("current_glitch") and not should_glitch_activate:
     if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
       player.applyGlitch(global.memory["current_glitch"], true)
   else:

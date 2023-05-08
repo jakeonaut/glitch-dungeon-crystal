@@ -605,6 +605,19 @@ func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
   return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
     
+func getWalkSpeed():
+  # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
+  #     curr_walk_speed = floor_glitch_walk_speed
+  if pressingRun() and on_ground:
+    return run_speed
+  elif glitch_form == global.GlitchForm.FEATHER:
+    return feather_glitch_walk_speed
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    return invisible_glitch_walk_speed
+  elif is_touching_water:
+    return swimming_walk_speed
+  else:
+    return walk_speed
 
 const PROJECTION_ORTHOGONAL = 1
 func processHorizontalInputs(delta):
@@ -763,17 +776,7 @@ func processHorizontalInputs(delta):
   if swimming_walk_speed == null:
     swimming_walk_speed = 6
 
-  var curr_walk_speed = walk_speed
-  # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
-  #     curr_walk_speed = floor_glitch_walk_speed
-  if pressingRun() and on_ground:
-    curr_walk_speed = run_speed
-  elif glitch_form == global.GlitchForm.FEATHER:
-    curr_walk_speed = feather_glitch_walk_speed
-  elif glitch_form == global.GlitchForm.INVISIBLE:
-    curr_walk_speed = invisible_glitch_walk_speed
-  elif is_touching_water:
-    curr_walk_speed = swimming_walk_speed
+  var curr_walk_speed = getWalkSpeed()
 
   # update x and z
   if not is_touching_water or horizontal_input:
@@ -810,6 +813,8 @@ func doWalkAnimation():
       aniPlayer.queue("walkStart")
       addJumpSmokeCloud()
     aniPlayer.queue("walk")
+  if aniPlayer.current_animation == "walk":
+    aniPlayer.play("walk", -1, 1.5 if pressingRun() else 1.0)
     
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles

@@ -218,15 +218,21 @@ func regainNestingDoll():
   if is_tiny:
     is_tiny = false
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-    global.memory["broom"] = true
+    global.memory["broom"] = global.memory["had_broom"]
     if new_carcass != null:
       new_carcass.queue_free()
       new_carcass = null
 
+# @override
+func getWalkSpeed():
+  if not global.memory["broom"]:
+    return 4
+  else:
+    return .getWalkSpeed() # super()
 
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
-    if global.memory["nesting_doll"] and global.memory["broom"]:
+    if global.memory["nesting_doll"]: # and global.memory["broom"]:
       if justPressedJump() and not should_magic_jump and not global.pauseMoveInput: 
         was_just_on_ground_timer = was_just_on_ground_time_limit
         jumped_from_true_ground = truly_on_ground
@@ -249,6 +255,7 @@ func processJumpInputs(delta):
         # if randi() % 4 == 1:
         #   new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
         global.memory["nesting_doll"] = false
+        global.memory["had_broom"] = global.memory["broom"]
         global.memory["broom"] = false
         mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
         is_tiny = true

@@ -6,7 +6,12 @@ onready var broomAbortSound = get_node("NPC TextBox/TextBox/AbortSound")
 export var behavior_walking = true
 export var behavior_was_thrown = true
 export var walk_direction = 1
-export var broomLevel = 0
+# should be a FSM
+var projectile = false
+var was_projectile = false
+var return_timer = 0
+var return_time_limit = 5
+var returning = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,30 +21,76 @@ func _ready():
     if is_static_in_level:
         get_node("SecretAnimationPlayer").play("isStaticInLevel")
         grav = 0
-
-func _process(_delta):
-    if vv > 0:
+ 
+func _process(delta):
+    if returning:
         behavior_was_thrown = false
+        behavior_walking = false
+        if walk_direction == 1:
+            get_node("SecretAnimationPlayer").play("returnAirSpinReverse")
+        else:
+            get_node("SecretAnimationPlayer").play("returnAirSpin")
 
-    broomAbortSound.broomLevel = broomLevel
-    if broomLevel > 0:
-        mySprite.material_override.set_shader_param("enable_palette_cycle", true)
-        mySprite.material_override.set_shader_param("enable_dither", true)
+        var x1 = global_transform.origin.x
+        var x2 = level.player.global_transform.origin.x
+        global_transform.origin.x = x1 + (x2 - x1) * (delta * 5) 
+        if stepify(x1, 0.1) == x2:
+            global_transform.origin.x = x2
+
+        var y1 = global_transform.origin.y
+        var y2 = level.player.global_transform.origin.y
+        global_transform.origin.y = y1 + (y2 - y1) * (delta * 5) 
+        if stepify(y1, 0.1) == y2:
+            global_transform.origin.y = y2
+        
+
+        return
+
+    if vv > 0 and not projectile:
+        behavior_was_thrown = false
+        behavior_walking = false
+    if projectile:
+        var has_hit_something = hitStuff(delta)
+        if horizontal_collision or has_hit_something:
+            grav = 60
+            behavior_was_thrown = false
+            behavior_walking = false
+            true_terminal_vel = 16
+            get_node("SecretAnimationPlayer").play("isStaticInLevel")
+            projectile = false
+            was_projectile = true
+    tryDieToOffscreenCamera()
+    if on_ground and not is_static_in_level and was_projectile:
+        return_timer += (delta * 22)
+        if return_timer >= return_time_limit:
+            returning = true
+            on_ground = false
+
+    
+
+func tryDieToOffscreenCamera():
+    var DEATH_MARGIN = 5
+    if getGameCamera().rightmost_x > -999:
+        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            returning = true
 
 # @override
 func pressingMoveLeft():
-    return walk_direction == -1 and behavior_walking and not on_ground
+    return walk_direction == -1 and behavior_walking and behavior_was_thrown
 
 # @override
 func pressingMoveRight():
-    return walk_direction == 1 and behavior_walking and not on_ground
+    return walk_direction == 1 and behavior_walking and behavior_was_thrown
 
 func isActive():
-    return visible and on_ground
+    return visible and on_ground and not behavior_was_thrown
 
 # @override
 func justPressedJump():
-    return behavior_was_thrown
+    return behavior_was_thrown and grav > 10
 
 # @override
 func isKindOfOnGround():
@@ -74,3 +125,59 @@ func collectMe():
     grav = 0
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
+
+func hitStuff(_delta):
+    if not visible or not projectile: return
+        
+    var my_broom_owner = level.player
+    var has_hit_something = false
+    var areas = get_node("Area").get_overlapping_areas()
+    for area in areas:
+        if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
+            if not area.get_node("..").am_i_dying:
+                area.get_node("..").ouchies(global_transform.origin)
+                # my_broom_owner.has_sweeped_glitch = true
+                my_broom_owner.broomSound.play()
+                summonSmokeClouds(5, true, true)
+                # my_broom_owner.getSmacked()
+                has_hit_something = true
+        elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+            if global.hasGottenLevelGeode:
+                area.get_node("..").ouchies(global_transform.origin)
+                my_broom_owner.has_sweeped_glitch = true
+                my_broom_owner.broomSound.play()
+            else:
+                area.get_node("..").notOuchies(global_transform.origin)
+            # my_broom_owner.getSmacked()
+            has_hit_something = true
+            # # TODO kill glitches or "free" them like glitch slug...
+            
+        elif area.is_in_group("corporeal_body"):
+            var npc = area.get_node("..")
+            if npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+                npc.getSmacked(global_transform.origin)
+                # my_broom_owner.getSmacked()
+            has_hit_something = true
+        elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+            area.InteractActivate()
+        elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
+            area.PassiveInteractActivate(0, false)
+      
+        # erase glitch tiles...
+        var x = collisionShape.global_transform.origin.x
+        var y = collisionShape.global_transform.origin.y
+        var tb = y + collisionShape.shape.height/2
+        var bb = y - collisionShape.shape.height/2
+        var lb = x - collisionShape.shape.radius
+        var rb = x + collisionShape.shape.radius
+        
+        var _has_played_sound = false
+        for i in range(int(floor(bb)), int(ceil(tb))):
+          for j in range(int(floor(lb)), int(ceil(rb))):
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if isTileSpikes(tile_type):
+              my_broom_owner.has_sweeped_glitch = true
+              getLevelTiles().infectSpikes(coords)
+              # TODO(jaketrower): also reset the levelTiles array position?
+    return has_hit_something

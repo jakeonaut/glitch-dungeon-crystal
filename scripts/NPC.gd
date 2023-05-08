@@ -190,8 +190,11 @@ func justStopPassiveActivate():
   if global.activeInteractor == null:
     level.player.hideInteractPrompt()
   
+export var dont_align_sprite = false
 # @override
 func alignMySprite():
+  if dont_align_sprite:
+    return
   var pixelSize = 0.125
   mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
   mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.3

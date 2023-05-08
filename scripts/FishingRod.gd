@@ -2,6 +2,7 @@ extends Spatial
 
 
 onready var hookInteractionArea = get_node("HookInteractionArea")
+onready var lineSprite = get_node("LineSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hooked = false
 var is_reeled_in = false
@@ -17,12 +18,15 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  var diff = self.global_transform.origin.y - hookInteractionArea.global_transform.origin.y + 1
+  lineSprite.global_transform.origin.y = self.global_transform.origin.y - (diff) / 2
+  lineSprite.scale.y = (diff - .75) / 2
+
   if hooked:
     movePlayerToHook(delta)
     if not is_reeled_in:
       reelItIn(delta)
     else:
-      global.pauseGame = false
       if Input.is_action_just_pressed("jump_button"):
         hooked = false
         level.player.should_magic_jump = true
@@ -31,17 +35,17 @@ func _process(delta):
 
 func movePlayerToHook(delta):
   if is_reeled_in:
-    level.player.global_transform.origin.x = self.global_transform.origin.x
-    level.player.global_transform.origin.y = self.global_transform.origin.y
+    level.player.global_transform.origin.x = hookInteractionArea.global_transform.origin.x
+    level.player.global_transform.origin.y = hookInteractionArea.global_transform.origin.y
   else:
     var x = level.player.global_transform.origin.x
     var y = level.player.global_transform.origin.y
-    x = x + (self.global_transform.origin.x - x) * (delta * 5)
-    y = y + (self.global_transform.origin.y - y) * (delta * 5)
-    if stepify(x, 0.1) == self.global_transform.origin.x:
-      x = self.global_transform.origin.x
-    if stepify(y, 0.1) == self.global_transform.origin.y:
-      y = self.global_transform.origin.y
+    x = x + (hookInteractionArea.global_transform.origin.x - x) * (delta * 10)
+    y = y + (hookInteractionArea.global_transform.origin.y - y) * (delta * 10)
+    if stepify(x, 0.1) == hookInteractionArea.global_transform.origin.x:
+      x = hookInteractionArea.global_transform.origin.x
+    if stepify(y, 0.1) == hookInteractionArea.global_transform.origin.y:
+      y = hookInteractionArea.global_transform.origin.y
     level.player.global_transform.origin.x = x
     level.player.global_transform.origin.y = y
 
