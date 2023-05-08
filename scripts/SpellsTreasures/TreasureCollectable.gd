@@ -2,6 +2,7 @@ extends "../../scripts/NPC.gd"
 
 onready var collectSound = get_node("CollectSound")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var abortSound = get_node("NPC TextBox/TextBox/AbortSound")
 
 var being_collected = false # actually is_opened
 var really_being_collected = false

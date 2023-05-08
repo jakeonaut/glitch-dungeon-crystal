@@ -231,9 +231,9 @@ func doFallthroughObjectCollision(gameMover, area):
         return false
         
     # check for fallThroughSolid collision while falling
-    var rb = gameMover.get_node("CollisionShape").shape.radius
+    var rb = gameMover.rb
     var lb = -rb
-    var tb = gameMover.get_node("CollisionShape").shape.height/2
+    var tb = gameMover.tb
     var bb = -tb
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,

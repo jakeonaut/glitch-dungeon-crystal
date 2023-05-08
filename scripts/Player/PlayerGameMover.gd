@@ -267,10 +267,6 @@ func processJumpInputs(delta):
 func handleSpikeCollisions(delta):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
-  var rb = get_node("CollisionShape").shape.radius
-  var lb = -rb
-  var tb = get_node("CollisionShape").shape.height/2
-  var bb = -tb
   
   var TILE_WIDTH = levelTiles.cell_size.x
   var TILE_HEIGHT = levelTiles.cell_size.y

@@ -215,7 +215,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 32.2, 0 )
 
-[node name="TextContainer" parent="Viewport/level/Player" index="15"]
+[node name="TextContainer" parent="Viewport/level/Player" index="14"]
 bbText = "\"don't remember
 having a basement..\""
 

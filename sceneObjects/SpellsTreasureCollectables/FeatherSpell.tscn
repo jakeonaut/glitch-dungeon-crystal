@@ -160,7 +160,7 @@ shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 8 )
 
-[node name="FeatherSpell" type="KinematicBody"]
+[node name="FeatherSpell" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

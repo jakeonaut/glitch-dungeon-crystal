@@ -949,16 +949,16 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/Player2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 61 )
 
-[node name="SmallerInteractionArea" parent="Viewport/level/Player2/NPC" index="3"]
+[node name="SmallerInteractionArea" parent="Viewport/level/Player2/NPC" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
-[node name="Sprite3D" parent="Viewport/level/Player2/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/Player2/NPC" index="4"]
 pixel_size = 0.0001
 
 [node name="CollisionShape" parent="Viewport/level/Player2/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 62 )
 
-[node name="InteractPrompt" parent="Viewport/level/Player2/NPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/Player2/NPC" index="7"]
 pixel_size = 0.0001
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/Player2"]
@@ -1035,7 +1035,7 @@ shape = SubResource( 75 )
 [node name="AbortSound" parent="Viewport/level/QuestionBlock/NPC/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 28 )
 
-[node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC" index="4"]
 frame = 24
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/FallthroughSolid" index="0"]

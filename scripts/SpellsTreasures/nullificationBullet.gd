@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 onready var transformSound = get_node("TransformSound")
 var original_position = null

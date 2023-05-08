@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 # TODO(jaketrower): This "class" is monolithic when it should be Modular... but how in gdscript?
 
@@ -29,7 +29,6 @@ func getGameCamera():
   return gameCamera
 
 onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
-onready var collisionShape = get_node("CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("Sprite3D")
@@ -68,6 +67,10 @@ var should_do_simple_sensor_probe = true
 var should_do_fallthrough_area_collision = false
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
+var lb = -0.72
+var rb = .72
+var tb = 1
+var bb = -1
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -332,9 +335,6 @@ func getTilesBelow(currLevelTiles):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
-  var lb = -get_node("CollisionShape").shape.radius
-  var rb = -lb
-  var bb = -get_node("CollisionShape").shape.height/2
   
   var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - 0.1, z))
   var tile_pos_a = currLevelTiles.map_to_world(coords_a.x, coords_a.y, coords_a.z)
@@ -867,8 +867,6 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y
-  var tb = get_node("CollisionShape").shape.height/2
-  var bb = -tb
   var is_above_top_of_tile = y + bb > tile_pos_coords.y
   
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
@@ -1026,10 +1024,6 @@ func collideWithWall(local_lv):
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
-  var lb = -get_node("CollisionShape").shape.radius
-  var rb = -lb
-  var tb = get_node("CollisionShape").shape.height/2
-  var bb = -tb
 
   if not should_only_do_middle_sensor:
     # Check for sensor A
@@ -1094,8 +1088,6 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
 
 func handleHorizontalCollisions(local_lv):
   self.horizontal_collision = false
-  var rb = get_node("CollisionShape").shape.radius
-  var lb = -rb
   var TILE_WIDTH = getLevelTiles().cell_size.x
 
   # check for left collisions
@@ -1111,8 +1103,6 @@ func handleHorizontalCollisions(local_lv):
   
   
 func handleVerticalCollisions(local_lv):
-  var tb = get_node("CollisionShape").shape.height/2
-  var bb = -tb
   var TILE_HEIGHT = getLevelTiles().cell_size.y
 
   # check for bottom collisions

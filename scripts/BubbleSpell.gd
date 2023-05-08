@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 onready var mySprite = get_node("Sprite3D")
 onready var aniPlayer = get_node("AnimationPlayer")

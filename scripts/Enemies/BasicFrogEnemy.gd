@@ -161,8 +161,6 @@ func moveMyFriends(delta):
     var relativePosition = friendArray[2]
     friend.should_do_fallthrough_area_collision = true
     friend.global_transform.origin += self.global_transform.origin - lastPosition
-    var lb = -get_node("CollisionShape").shape.radius
-    var rb = -lb
     if friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
        friend.global_transform.origin.x > self.global_transform.origin.x + rb:
       who_is_standing_on_me.erase(friend_key)

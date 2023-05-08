@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
@@ -130,6 +130,7 @@ func activate():
   passiveActivate(0)
 
 func passiveActivate(_delta):
+  level.player.getSmacked()
   is_touching_player = true
   is_touching_player_timer = 0
   mySprite.global_transform.origin.x = level.player.global_transform.origin.x

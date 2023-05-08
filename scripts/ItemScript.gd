@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 onready var textBox = get_node("Object TextBox").get_node("TextBox")
 

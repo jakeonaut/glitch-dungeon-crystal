@@ -761,20 +761,8 @@ func summonFallenBroom(was_thrown):
     var fallenBroom = fallenBroomRes.instance()
     level.add_child(fallenBroom)
     fallenBroom.global_transform.origin = self.global_transform.origin
-    if mySprite.flip_h:
-      fallenBroom.global_transform.origin.x -= 1
-      fallenBroom.walk_direction = -1
-      if was_thrown:
-        fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin", -1, 2.0)
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
-    else:
-      fallenBroom.global_transform.origin.x += 1
-      fallenBroom.walk_direction = 1
-      if was_thrown:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin")
+    fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
+    fallenBroom.walk_direction = -1 if mySprite.flip_h else 1
     fallenBroom.global_transform.origin.y += 2
     if was_thrown:
       fallenBroom.grav = 1
@@ -783,6 +771,15 @@ func summonFallenBroom(was_thrown):
       fallenBroom.true_terminal_vel = 0
       fallenBroom.walk_speed *= 3
     global.memory["broom"] = false
+
+    if mySprite.flip_h and was_thrown:
+      fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin", -1, 2.0)
+    elif mySprite.flip_h and not was_thrown:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+    elif not mySprite.flip_h and was_thrown:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin")
 
 func getABroom():
   global.memory["broom"] = true

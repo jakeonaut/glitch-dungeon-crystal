@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var player = get_node("../Player")

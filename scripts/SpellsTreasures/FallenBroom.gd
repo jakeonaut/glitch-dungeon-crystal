@@ -12,6 +12,7 @@ var was_projectile = false
 var return_timer = 0
 var return_time_limit = 5
 var returning = false
+onready var collisionShape = get_node("Area/CollisionShape")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +25,9 @@ func _ready():
  
 func _process(delta):
     if returning:
+        is_active = false
+        okay_im_done = true
+        grav = 0
         behavior_was_thrown = false
         behavior_walking = false
         if walk_direction == 1:
@@ -34,21 +38,25 @@ func _process(delta):
         var x1 = global_transform.origin.x
         var x2 = level.player.global_transform.origin.x
         global_transform.origin.x = x1 + (x2 - x1) * (delta * 5) 
-        if stepify(x1, 0.1) == x2:
+        var is_x_the_same = false
+        if stepify(x1, 1) == stepify(x2, 1):
             global_transform.origin.x = x2
+            is_x_the_same = true
 
         var y1 = global_transform.origin.y
         var y2 = level.player.global_transform.origin.y
         global_transform.origin.y = y1 + (y2 - y1) * (delta * 5) 
-        if stepify(y1, 0.1) == y2:
+        var is_y_the_same = false
+        if stepify(y1, 1) == stepify(y2, 1):
             global_transform.origin.y = y2
-        
+            is_y_the_same = true
 
+        if is_x_the_same and is_y_the_same:
+            abortSound.activateScript()
         return
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
-        behavior_walking = false
     if projectile:
         var has_hit_something = hitStuff(delta)
         if horizontal_collision or has_hit_something:
@@ -79,11 +87,11 @@ func tryDieToOffscreenCamera():
 
 # @override
 func pressingMoveLeft():
-    return walk_direction == -1 and behavior_walking and behavior_was_thrown
+    return walk_direction == -1 and behavior_walking and (projectile or not on_ground)
 
 # @override
 func pressingMoveRight():
-    return walk_direction == 1 and behavior_walking and behavior_was_thrown
+    return walk_direction == 1 and behavior_walking and (projectile or not on_ground)
 
 func isActive():
     return visible and on_ground and not behavior_was_thrown
@@ -157,7 +165,7 @@ func hitStuff(_delta):
             if npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
                 npc.getSmacked(global_transform.origin)
                 # my_broom_owner.getSmacked()
-            has_hit_something = true
+                has_hit_something = true
         elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             area.InteractActivate()
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
