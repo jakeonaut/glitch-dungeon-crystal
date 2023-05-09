@@ -718,7 +718,7 @@ dont_align_sprite = true
 [node name="CollisionShape" parent="Viewport/level/NPC9/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC9" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC9" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69523, 0 )
 material_override = SubResource( 75 )
 hframes = 4
@@ -726,7 +726,7 @@ vframes = 5
 frame = 14
 max_frames = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="5"]
 anims/default = SubResource( 34 )
 anims/flickerOn = SubResource( 35 )
 
@@ -894,7 +894,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 77 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 frame = 20
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]

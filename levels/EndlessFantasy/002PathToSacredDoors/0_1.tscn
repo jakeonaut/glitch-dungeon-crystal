@@ -1010,9 +1010,6 @@ frame = 53
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.47169, 0 )
 
-[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 16.4717, 0 )
-
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -12, 0 )
 
