@@ -47,14 +47,12 @@ func _process(delta):
         opacity = opacity + (target_opacity - opacity) * (delta * 2)
         mySprite.material_override.set_shader_param("opacity", opacity)
         
-        if target_opacity > .5 and stepify(opacity, target_opacity) == 0:
+        if target_opacity > .5 and stepify(opacity, 0.1) == stepify(target_opacity, 0.1):
             target_opacity = 0.2
-        if target_opacity < .5 and stepify(opacity, target_opacity) == 0:
+        if target_opacity < .5 and stepify(opacity, 0.1) == stepify(target_opacity, 0.1):
             target_opacity = 1.0
 
-        var diff_x = target_pos.x - global_transform.origin.x
-        var step = 0.1
-        if stepify(abs(diff_x), step) == 0:
+        if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1):
             randomizeTargetPos()
 
         tryDieToOffscreenCamera()

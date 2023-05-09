@@ -1165,9 +1165,9 @@ func updateFacing(local_dir):
   else:
     is_walking = false
 
-func isRectColliding(o_lb, o_tb, o_rb, o_bb, lb, tb, rb, bb, debug_ = false):
+func isRectColliding(lb1, tb1, rb1, bb1, lb2, tb2, rb2, bb2, debug_ = false):
   if debug_:
-    print("\tisRectColliding: " + str(lb <= o_rb) + ", " + str(rb >= o_lb) + ", " + str(tb >= o_bb) + ", " + str(bb <= o_tb))
-  if lb <= o_rb and rb >= o_lb and tb >= o_bb and bb <= o_tb:
+    print("\tisRectColliding: " + str(lb2 <= rb1) + ", " + str(rb2 >= lb1) + ", " + str(tb2 >= bb1) + ", " + str(bb2 <= tb1))
+  if lb2 <= rb1 and rb2 >= lb1 and tb2 >= bb1 and bb2 <= tb1:
     return true
   return false

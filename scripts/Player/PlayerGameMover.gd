@@ -88,7 +88,7 @@ func _process(delta):
     camera_target_origin_x_target = -2
 
   cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
-  if stepify(cameraTarget.transform.origin.x, 0.1) == camera_target_origin_x_target:
+  if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
 

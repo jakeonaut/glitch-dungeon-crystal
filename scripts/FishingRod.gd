@@ -42,9 +42,9 @@ func movePlayerToHook(delta):
     var y = level.player.global_transform.origin.y
     x = x + (hookInteractionArea.global_transform.origin.x - x) * (delta * 10)
     y = y + (hookInteractionArea.global_transform.origin.y - y) * (delta * 10)
-    if stepify(x, 0.1) == hookInteractionArea.global_transform.origin.x:
+    if stepify(x, 0.1) == stepify(hookInteractionArea.global_transform.origin.x, 0.1):
       x = hookInteractionArea.global_transform.origin.x
-    if stepify(y, 0.1) == hookInteractionArea.global_transform.origin.y:
+    if stepify(y, 0.1) == stepify(hookInteractionArea.global_transform.origin.y, 0.1):
       y = hookInteractionArea.global_transform.origin.y
     level.player.global_transform.origin.x = x
     level.player.global_transform.origin.y = y

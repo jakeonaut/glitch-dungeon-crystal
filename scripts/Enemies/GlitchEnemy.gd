@@ -59,12 +59,12 @@ export var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         yield(get_tree(), "idle_frame")
         yield(get_tree(), "idle_frame")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = global.memory[level.getShortLevelName()][self.name]
+        miniCubeCrystal.global_transform.origin = global.getStaticLevelZoneLevelVar(level, self.name)
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         queue_free()
@@ -343,7 +343,7 @@ func tryAddEnemiesGroup():
 func ouchies_base():
     if am_i_dying:
         return
-    if is_static_in_level and not (global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name)):
+    if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self.name):
         setGlobalMemoryOfHasBeenDefeated()
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         miniCubeCrystal.is_static_in_level = false
@@ -397,9 +397,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             newSmokeCloud.set_material_override(new_material.duplicate())
 
 func setGlobalMemoryOfHasBeenDefeated():
-  if not global.memory.has(level.getShortLevelName()):
-    global.memory[level.getShortLevelName()] = {}
-  global.memory[level.getShortLevelName()][self.name] = self.global_transform.origin
+    global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)
 
 export var time_influence = 35
 export var y_div = 2.3

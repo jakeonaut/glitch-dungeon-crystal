@@ -26,7 +26,7 @@ var disappearTimer = 0
 func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
-  if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
     addPlusSprite()
     queue_free()
     
@@ -82,9 +82,7 @@ func passiveActivate(_delta):
     disappearing2 = true
     
     if is_static_in_level:
-      if not global.memory.has(level.getShortLevelName()):
-        global.memory[level.getShortLevelName()] = {}
-      global.memory[level.getShortLevelName()][self.name] = true
+      global.setStaticLevelZoneLevelVar(level, self.name, true)
 
     addPlusSprite()
 

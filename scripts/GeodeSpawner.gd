@@ -12,17 +12,17 @@ export var is_static_in_level = true
 
 func _ready():
     mySprite.visible = false
-    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         # TODO(jaketrower): This is actually quite new, what if GeodeSpawner has spawned an enemy that hasn't been
         # killed yet, but was removed from the level (e.g. by leaving a room and re-entering it)
         # ideally we should have memory[geodeSpawnerShortName] be either:
-        # 0 = not_spawned
+        # 0, null = not_spawned
         # 1 = spawned_and_alive
         # 2 = spawned_and_dead
-        if global.memory[level.getShortLevelName()][self.name] == 1:
+        if global.getStaticLevelZoneLevelVar(level, self.name) == 1:
             spawn(false)
             has_spawned = true
-        if global.memory[level.getShortLevelName()][self.name] == 2:
+        if global.getStaticLevelZoneLevelVar(level, self.name) == 2:
             queue_free()
 
 func _process(_delta):
@@ -55,11 +55,9 @@ func spawn(with_flare = true):
         newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
         newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + 1
 
-        if is_static_in_level and not (global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name)):
-            if not global.memory.has(level.getShortLevelName()):
-                global.memory[level.getShortLevelName()] = {}
-            global.memory[level.getShortLevelName()][self.name] = 1
+        if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self.name):
+            global.setStaticLevelZoneLevelVar(level, self.name, 1)
 
 # @override
 func myChildDied():
-    global.memory[level.getShortLevelName()][self.name] = 2
+    global.setStaticLevelZoneLevelVar(level, self.name, 2)

@@ -7,6 +7,7 @@ var prev_fallthrough_collision_area = null
 func _process(_delta):
     var shortest_dist = 999 # zero escape saga
     var nearest_area = null
+    var was_nearest_area_door = false
     var fallthrough_collision_area = null
     var player = get_node("..")
 
@@ -29,9 +30,11 @@ func _process(_delta):
         if area.has_method("isActive") and area.isActive():
             var dist = area.global_transform.origin.distance_to(global_transform.origin)            
             if area.has_method("InteractActivate"):
-                if dist < shortest_dist:
+                if dist < shortest_dist and not was_nearest_area_door:
                     shortest_dist = dist
                     nearest_area = area
+                    if area.is_in_group("door"):
+                        was_nearest_area_door = true
 
     if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
         if global.activeInteractor != null:

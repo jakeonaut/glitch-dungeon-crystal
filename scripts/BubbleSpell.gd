@@ -67,12 +67,12 @@ func _process(delta):
     global_transform.origin.y += delta*y_speed
 
     global_transform.origin.x = global_transform.origin.x + (target_pos_x - global_transform.origin.x) * (delta*5)
-    if stepify(global_transform.origin.x, 0.1) == target_pos_x:
+    if stepify(global_transform.origin.x, 0.1) == stepify(target_pos_x, 0.1):
       randomizeTargetPos()
 
     opacity = opacity + (target_opacity - opacity) * (delta * 5)
     mySprite.material_override.set_shader_param("opacity", opacity)
-    if stepify(opacity, 0.1) == target_opacity:
+    if stepify(opacity, 0.1) == stepify(target_opacity, 0.1):
       if target_opacity == 1.0:
         target_opacity = 0.5
       else:

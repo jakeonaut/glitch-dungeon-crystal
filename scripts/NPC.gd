@@ -83,7 +83,7 @@ func _ready():
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
 
-  if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
     can_camera_zoom = false
     textBox.can_camera_zoom = false
     if not visible and can_activate:
@@ -148,9 +148,7 @@ func getSmacked(_broom_origin):
 func setGlobalMemoryOfHasSpoken(set_vars = false):
   if set_vars:
     did_i_get_smacked = false
-  if not global.memory.has(level.getShortLevelName()):
-    global.memory[level.getShortLevelName()] = {}
-  global.memory[level.getShortLevelName()][self.name] = true
+  global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 func isActive():
   return is_active and not floating_text and (visible or can_be_activated_invisibly)

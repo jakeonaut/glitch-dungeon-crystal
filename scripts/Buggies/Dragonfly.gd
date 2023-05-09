@@ -18,7 +18,7 @@ export var smack_time_limit = 2
 func _ready():
     is_static_in_level = false # TODO(jaketroweR): :-)
 
-    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         queue_free()
         
     set_process(true)
@@ -85,9 +85,7 @@ func passiveActivate(_delta):
         )
         
         if is_static_in_level:
-            if not global.memory.has(level.getShortLevelName()):
-                global.memory[level.getShortLevelName()] = {}
-            global.memory[level.getShortLevelName()][self.name] = true
+            global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 export var time_influence = 35
 export var y_div = 2.3

@@ -108,7 +108,7 @@ func _process(delta):
     set_target(actual_target.get_ref())
     # interpolation = A + (B - A) * t
     self.size = self.size + (zoomed_size - self.size) * (delta*5)
-    if stepify(self.size, 0.1) == zoomed_size:
+    if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
       self.size = zoomed_size
     set_speed(2)
     set_interpolation_enabled(true)
@@ -116,7 +116,7 @@ func _process(delta):
     actual_target = weakref(initial_target)
     set_target(actual_target.get_ref())      
     self.size = self.size + (initial_size - self.size) * (delta*5)
-    if stepify(self.size, 0.1) == initial_size:
+    if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
       self.size = initial_size
       
   if is_doing_fake_static:

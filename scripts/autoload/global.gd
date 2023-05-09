@@ -148,7 +148,7 @@ func _ready():
     if hasGottenLevelGeode: pass
 
     memory["broom"] = true
-    memory["nesting_doll"] = true
+    memory["nesting_doll"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
@@ -225,9 +225,7 @@ func doFallthroughObjectCollision(gameMover, area):
 
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
-    if not gameMover.has_node("CollisionShape") \
-        or not gameMover.get_node("CollisionShape").shape is CylinderShape \
-        or not "should_do_fallthrough_area_collision" in gameMover:
+    if not "should_do_fallthrough_area_collision" in gameMover:
         return false
         
     # check for fallThroughSolid collision while falling
@@ -265,12 +263,33 @@ func tryInitializeLevelZone(levelZone):
         resetLevelZone(levelZone)
     elif currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
         # just got back to the hub!, record the levelZone's results
+        hasGottenLevelGeode = false
         self.memory[levelZone + "_highscore"] = self.memory[levelZone]
     currLevelZone = levelZone
 
 func resetLevelZone(levelZone):
     hasGottenLevelGeode = false
     self.memory[levelZone] = {}
+
+func setStaticLevelZoneLevelVar(level, name, val):
+    # this should likely never occur from this callsite
+    if not currLevelZone:
+        tryInitializeLevelZone(HUB_LEVEL_ZONE)
+
+    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+        global.memory[currLevelZone][level.getShortLevelName()] = {}
+    global.memory[currLevelZone][level.getShortLevelName()][name] = val
+
+func getStaticLevelZoneLevelVar(level, name):
+    # this should likely never occur from this callsite
+    if not currLevelZone or not global.memory.has(currLevelZone): 
+        return null
+
+    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+        return null
+    if not global.memory[currLevelZone][level.getShortLevelName()].has(name):
+        return null
+    return global.memory[currLevelZone][level.getShortLevelName()][name]
 
 func incrementLevelZoneThing(thing, amt):
     # also increment the total counter

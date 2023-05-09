@@ -30,9 +30,8 @@ func _process(delta):
         step = 5
     global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
     
-    var diff = target_pos - global_transform.origin
-    var diff_step = 0.05
-    if stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), diff_step) == 0:
+    if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
+       stepify(target_pos.y, 0.1) == stepify(global_transform.origin.y, 0.1):
         is_swimmin_away = false
         randomizeTargetPos()
         

@@ -287,6 +287,12 @@ func land():
 
     if is_vertical:
       getPlayer().on_ground = false
+  else:
+    # SNEAKY SNEAKY
+    global.memory["active_save_point_x"] = self.translation.x
+    global.memory["active_save_point_y"] = self.translation.y
+    global.memory["active_save_point_z"] = self.translation.z
+    global.memory["savedRoomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
       
   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
   global.memory["roomPath"] = level.getLevelName()

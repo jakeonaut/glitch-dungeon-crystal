@@ -330,7 +330,7 @@ func doTimeDilation(delta):
   if Input.is_action_pressed("ui_select"):
     mySprite.material_override.set_shader_param("palette_cycle_speed", 4.0)
     gtdm = gtdm + (low - gtdm) * (delta*real_delta_multiplier)
-    if stepify(gtdm, 0.01) == low:
+    if stepify(gtdm, 0.01) == stepify(low, 0.01):
       gtdm = low
       mySprite.material_override.set_shader_param("palette_cycle_speed", 2.5)
       
@@ -339,7 +339,7 @@ func doTimeDilation(delta):
     gtdm = gtdm + (high - gtdm) * (delta*real_delta_multiplier)
     mySprite.material_override.set_shader_param("enable_palette_cycle", false)
       
-    if stepify(gtdm, 0.01) == high:
+    if stepify(gtdm, 0.01) == stepify(high, 0.01):
       gtdm = high
   global.time_dilation_multiplier = gtdm
   
@@ -773,13 +773,13 @@ func summonFallenBroom(was_thrown):
     global.memory["broom"] = false
 
     if mySprite.flip_h and was_thrown:
-      fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin", -1, 2.0)
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
     elif mySprite.flip_h and not was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
     elif not mySprite.flip_h and was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
     else:
-      fallenBroom.get_node("SecretAnimationPlayer").play("ReverseAirSpin")
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
 
 func getABroom():
   global.memory["broom"] = true

@@ -187,7 +187,7 @@ func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_position.x > final_pos.x:
     rect.rect_position.x = rect.rect_position.x + (final_pos.x - rect.rect_position.x) * (delta*2)
     rect.rect_position.y = rect.rect_position.y + (final_pos.y - rect.rect_position.y) * (delta*2)
-    if stepify(rect.rect_position.x, 0.1) == final_pos.x:
+    if stepify(rect.rect_position.x, 0.1) == stepify(final_pos.x, 0.1):
       rect.rect_position = final_pos
 
 func tryLerpSpriteFromCenter(sprite, delta, final_pos):
@@ -199,7 +199,7 @@ func tryLerpSpriteFromCenter(sprite, delta, final_pos):
   if sprite.position.x > final_pos.x:
     sprite.position.x = sprite.position.x + (final_pos.x - sprite.position.x) * (delta*2)
     sprite.position.y = sprite.position.y + (final_pos.y - sprite.position.y) * (delta*2)
-    if stepify(sprite.position.x, 0.1) == final_pos.x:
+    if stepify(sprite.position.x, 0.1) == stepify(final_pos.x, 0.1):
       sprite.position = final_pos
 
 func displaySavingText(message = "saving (not really)"):

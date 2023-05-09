@@ -11,7 +11,7 @@ var heartSpriteOriginY = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         queue_free()
 
     # ._ready() implicit
@@ -129,7 +129,5 @@ func passiveActivate(_delta):
         global.collectable_key_recently_got_timer = 0
         
         if is_static_in_level:
-            if not global.memory.has(level.getShortLevelName()):
-                global.memory[level.getShortLevelName()] = {}
-            global.memory[level.getShortLevelName()][self.name] = true
+            global.setStaticLevelZoneLevelVar(level, self.name, true)
     

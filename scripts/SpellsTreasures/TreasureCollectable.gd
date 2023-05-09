@@ -12,8 +12,9 @@ export var stop_all_music = true
 export var display_textbox = true
 
 func _ready():
-  if is_static_in_level and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.name):
-    secretAniPlayer.play("isOpen")
+  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if secretAniPlayer.has_animation("isOpen"):
+      secretAniPlayer.play("isOpen")
     is_active = false
     is_important = false
     is_really_important = false
@@ -111,9 +112,7 @@ func passiveActivate(_delta):
     being_collected = true
     
     if is_static_in_level:
-      if not global.memory.has(level.getShortLevelName()):
-        global.memory[level.getShortLevelName()] = {}
-      global.memory[level.getShortLevelName()][self.name] = true
+      global.setStaticLevelZoneLevelVar(level, self.name, true)
     collectMe()
 
 func collectMe():
