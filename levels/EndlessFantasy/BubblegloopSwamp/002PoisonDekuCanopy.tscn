@@ -848,11 +848,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
 anims/default = SubResource( 24 )
 anims/flickerOn = SubResource( 25 )
 anims/jump = SubResource( 26 )
@@ -884,11 +884,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
 anims/default = SubResource( 27 )
 anims/flickerOn = SubResource( 28 )
 anims/jump = SubResource( 29 )
@@ -921,11 +921,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0 )
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
 anims/default = SubResource( 32 )
 anims/flickerOn = SubResource( 33 )
 anims/jump = SubResource( 34 )
@@ -959,11 +959,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0 )
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
 anims/default = SubResource( 44 )
 anims/flickerOn = SubResource( 45 )
 anims/jump = SubResource( 46 )
@@ -996,11 +996,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="5"]
 anims/default = SubResource( 35 )
 anims/flickerOn = SubResource( 36 )
 anims/jump = SubResource( 37 )

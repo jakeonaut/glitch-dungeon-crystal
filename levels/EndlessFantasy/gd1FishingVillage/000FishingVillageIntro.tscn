@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=25]
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=27]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -224,7 +225,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 26, 0, 36, 48, 0, 36, 196625, 0, 0, 196627, 0, 2, 851956, 0, 2, -327636, 0, 2, -131041, 0, 36, -65533, 0, 36 )
+"cells": PoolIntArray( 48, 0, 36, 196625, 0, 0, 196627, 0, 2, 851956, 0, 2, -327636, 0, 2, -131041, 0, 36, -65533, 0, 36, -65522, 0, 36 )
 }
 script = ExtResource( 4 )
 __meta__ = {
@@ -293,7 +294,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -4.3, -4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -5.3, -4 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3, 0.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4, 1, 0 )
 is_static = true
 
 [node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -381,6 +382,8 @@ shape = SubResource( 29 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 27 )]
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

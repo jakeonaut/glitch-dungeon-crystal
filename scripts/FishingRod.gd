@@ -48,6 +48,7 @@ func movePlayerToHook(delta):
       y = hookInteractionArea.global_transform.origin.y
     level.player.global_transform.origin.x = x
     level.player.global_transform.origin.y = y
+    level.player.ladderUpdateTargetLastGroundedY()
 
 func reelItIn(delta):
   vv += acc * delta

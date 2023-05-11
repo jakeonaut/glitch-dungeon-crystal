@@ -1151,16 +1151,16 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/Player2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 61 )
 
-[node name="SmallerInteractionArea" parent="Viewport/level/Player2/NPC" index="3"]
+[node name="SmallerInteractionArea" parent="Viewport/level/Player2/NPC" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
-[node name="Sprite3D" parent="Viewport/level/Player2/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/Player2/NPC" index="4"]
 pixel_size = 0.0001
 
 [node name="CollisionShape" parent="Viewport/level/Player2/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 62 )
 
-[node name="InteractPrompt" parent="Viewport/level/Player2/NPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/Player2/NPC" index="7"]
 pixel_size = 0.0001
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/Player2"]
@@ -1227,7 +1227,7 @@ shape = SubResource( 16 )
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1/004LadderRoom.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 num_keys_unlock = 1
 
 [node name="Sprite3D2" parent="Viewport/level/Door7" index="1"]
@@ -1246,11 +1246,9 @@ shape = SubResource( 16 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9.52831, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.47169, 0 )
-grav = 0
 
 [node name="Sprite3D" parent="Viewport/level/GlitchEnemy6" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, -0.444425, 1 )
@@ -1258,7 +1256,6 @@ frame = 53
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.4717, 0 )
-grav = 0
 
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 0 )
@@ -1351,7 +1348,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 89 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 material_override = SubResource( 91 )
 frame = 0
 

@@ -65,7 +65,7 @@ func _process(delta):
         behavior_walking = true
         jump_timer = 0
 
-    if not is_infected:
+    if not is_infected and is_static:
       spawn_timer += (delta*22)
       if spawn_timer >= spawn_time_limit or (is_touching_water and spawn_timer >= water_jump_time_limit):
           spawn_timer = 0

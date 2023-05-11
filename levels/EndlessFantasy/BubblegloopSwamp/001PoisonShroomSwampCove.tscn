@@ -1291,7 +1291,6 @@ volume_db = -30.0
 pitch_scale = 3.0
 
 [node name="GlitchEnemy" parent="Viewport/level/Dragonfly6" instance=ExtResource( 29 )]
-grav = 0
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly6/GlitchEnemy" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6 )
@@ -1322,7 +1321,6 @@ volume_db = -30.0
 pitch_scale = 3.0
 
 [node name="GlitchEnemy" parent="Viewport/level/Dragonfly7" instance=ExtResource( 29 )]
-grav = 0
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly7/GlitchEnemy" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6 )
@@ -1381,12 +1379,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 flip_h = true
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
 anims/default = SubResource( 48 )
 anims/flickerOn = SubResource( 49 )
 anims/jump = SubResource( 50 )
@@ -1438,11 +1436,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 material_override = SubResource( 53 )
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
 anims/default = SubResource( 54 )
 anims/flickerOn = SubResource( 55 )
 anims/jump = SubResource( 56 )

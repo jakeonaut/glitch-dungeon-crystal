@@ -16,6 +16,10 @@ var pop_distance = 30
 var pop_timer = 0
 var pop_time_limit = 35
 var my_parent = null
+var y_speed_start = null
+var y_speed_max = null
+var y_acc = 5
+var has_set_origin_x = false
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -52,10 +56,17 @@ func _ready():
   
   original_pos_x = global_transform.origin.x
   randomizeTargetPos()
-  y_speed = rand_range(2, 3.5)
+  if y_speed_start:
+    y_speed = y_speed_start
+    y_speed_max = rand_range(2, 3.5)
+  else:
+    y_speed = rand_range(2, 3.5)
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+
+  if y_speed_max != null and y_speed < y_speed_max:
+    y_speed += y_acc * delta
   
   if didja_get_me:
     if not mySprite.visible:
@@ -68,6 +79,9 @@ func _process(delta):
 
     global_transform.origin.x = global_transform.origin.x + (target_pos_x - global_transform.origin.x) * (delta*5)
     if stepify(global_transform.origin.x, 0.1) == stepify(target_pos_x, 0.1):
+      if y_speed_max != null and not has_set_origin_x:
+        original_pos_x = global_transform.origin.x
+        has_set_origin_x = true
       randomizeTargetPos()
 
     opacity = opacity + (target_opacity - opacity) * (delta * 5)
@@ -79,14 +93,13 @@ func _process(delta):
         target_opacity = 1.0
 
     tryDieToOffscreenCamera()
-    if pop_from_distance:
-      bulletTryDieToSolids()
-    if pop_from_distance and \
-       global_transform.origin.y > getPlayer().global_transform.origin.y and \
-       global_transform.origin.distance_to(getPlayer().global_transform.origin) > pop_distance:
-      popSound1.max_db = -100
-      popSound2.max_db = -100
-      bubbleStartPop()
+    bulletTryDieToSolids()
+    # if pop_from_distance and \
+    #    global_transform.origin.y > getPlayer().global_transform.origin.y and \
+    #    global_transform.origin.distance_to(getPlayer().global_transform.origin) > pop_distance:
+    #   popSound1.max_db = -100
+    #   popSound2.max_db = -100
+    #   bubbleStartPop()
 
 func isActive():
   return true
