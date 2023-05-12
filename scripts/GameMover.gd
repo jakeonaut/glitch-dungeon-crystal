@@ -263,6 +263,8 @@ func processPhysics(delta):
   prev_glitch_form = glitch_form
     
 func applyGravity(delta):
+  if not can_collide_with_floor:
+    return
   if is_touching_water:
     g = Vector3(0, -grav/3, 0)
     if fallSound:
@@ -944,10 +946,12 @@ func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, se
     tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
   return Vector3(tile_pos, tile_distance, tile_type)
 
+var can_collide_with_floor = true
 func collideWithFloor(local_lv):
   local_lv.y = 0
-  on_ground = true
-  truly_on_ground = true
+  if can_collide_with_floor:
+    on_ground = true
+    truly_on_ground = true
   return local_lv
 
 func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):

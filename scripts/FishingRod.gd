@@ -6,16 +6,31 @@ onready var lineSprite = get_node("LineSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hooked = false
 var is_reeled_in = false
+export(NodePath) var hookTargetPath = null
+var hookTarget = null
 
 var depth = 0
 var vv = 0
-var acc = 60
-var max_speed = 8
+var acc = 30
+var max_speed = 12
 var low_speed = 4
 
 func _ready():
   depth = self.global_transform.origin.y - hookInteractionArea.global_transform.origin.y
+  if hookTargetPath != null and has_node(hookTargetPath):
+    hookTarget = weakref(get_node(hookTargetPath))
+    hooked = true
   set_process(true)
+
+enum PhysicsState {
+  NORMAL,
+  COLLAPSED,
+  CAN_WAKE_UP,
+  WAKING_UP,
+  GLITCH_DYING,
+  GLITCH_HURT,
+  GLITCH_RECOVERY,
+}
 
 func _process(delta):
   var diff = self.global_transform.origin.y - hookInteractionArea.global_transform.origin.y + 1
@@ -23,32 +38,49 @@ func _process(delta):
   lineSprite.scale.y = (diff - .75) / 2
 
   if hooked:
-    movePlayerToHook(delta)
+    if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_RECOVERY:
+      hooked = false
+      if hookTarget.get_ref() == level.player:
+        level.player.can_collide_with_floor = true
+      hookTarget = null
+      is_reeled_in = true
+      return
+
+    hookTarget.get_ref().can_collide_with_floor = false
+    moveTargetToHook(delta)
     if not is_reeled_in:
       reelItIn(delta)
-    else:
-      if Input.is_action_just_pressed("jump_button"):
+    elif hookTarget.get_ref() == level.player:
+      if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
         hooked = false
-        level.player.should_magic_jump = true
+        hookTarget = null
+        level.player.on_ground = true
+        level.player.can_collide_with_floor = true
+        if Input.is_action_just_pressed("jump_button"):
+          level.player.actuallyApplyJump(true)
+    else:
+      hooked = false
+      hookTarget = null
+
   elif is_reeled_in:
     reelItOut(delta)
 
-func movePlayerToHook(delta):
-  if is_reeled_in:
-    level.player.global_transform.origin.x = hookInteractionArea.global_transform.origin.x
-    level.player.global_transform.origin.y = hookInteractionArea.global_transform.origin.y
-  else:
-    var x = level.player.global_transform.origin.x
-    var y = level.player.global_transform.origin.y
-    x = x + (hookInteractionArea.global_transform.origin.x - x) * (delta * 10)
-    y = y + (hookInteractionArea.global_transform.origin.y - y) * (delta * 10)
-    if stepify(x, 0.1) == stepify(hookInteractionArea.global_transform.origin.x, 0.1):
-      x = hookInteractionArea.global_transform.origin.x
-    if stepify(y, 0.1) == stepify(hookInteractionArea.global_transform.origin.y, 0.1):
-      y = hookInteractionArea.global_transform.origin.y
-    level.player.global_transform.origin.x = x
-    level.player.global_transform.origin.y = y
-    level.player.ladderUpdateTargetLastGroundedY()
+func moveTargetToHook(delta):
+  if not hookTarget.get_ref():
+    return
+
+  var x = hookTarget.get_ref().global_transform.origin.x
+  var y = hookTarget.get_ref().global_transform.origin.y
+  x = x + (hookInteractionArea.global_transform.origin.x - x) * (delta * 15)
+  y = y + (hookInteractionArea.global_transform.origin.y - y) * (delta * 15)
+  if stepify(x, 0.1) == stepify(hookInteractionArea.global_transform.origin.x, 0.1):
+    x = hookInteractionArea.global_transform.origin.x
+  if stepify(y, 0.1) == stepify(hookInteractionArea.global_transform.origin.y, 0.1):
+    y = hookInteractionArea.global_transform.origin.y
+  hookTarget.get_ref().global_transform.origin.x = x
+  hookTarget.get_ref().global_transform.origin.y = y
+  if hookTarget.get_ref().has_method("ladderUpdateTargetLastGroundedY"):
+    hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
 
 func reelItIn(delta):
   vv += acc * delta
@@ -71,4 +103,5 @@ func isActive():
 func passiveActivate(_delta):
   if not hooked and not is_reeled_in:
     hooked = true
+    hookTarget = weakref(level.player)
   

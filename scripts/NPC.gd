@@ -110,6 +110,8 @@ func _process(delta):
         global.activeInteractor == textBox and textBox.nextPrompt.visible
       )
     )
+    if not interactPrompt.visible:
+      interactPrompt.restart()
 
   if fallthroughSolid:
     if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):
