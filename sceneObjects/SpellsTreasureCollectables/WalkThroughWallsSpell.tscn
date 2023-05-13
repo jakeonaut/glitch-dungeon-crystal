@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/SpellsTreasures/obeliskSpell.gd" type="Script" id=1]
-[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=2]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
@@ -82,7 +82,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111377, -0.0680631, 0 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="InteractionArea" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="." groups=["noplayer"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]

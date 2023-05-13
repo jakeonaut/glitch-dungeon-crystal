@@ -27,7 +27,7 @@ func _process(_delta):
         if area.is_in_group("playerActivation") and area.has_method("playerActivationAreaPassiveActivate"):
             area.playerActivationAreaPassiveActivate()
 
-        if area.has_method("isActive") and area.isActive():
+        if area.has_method("isActive") and area.isActive() and not area.is_in_group("noplayer"):
             var dist = area.global_transform.origin.distance_to(global_transform.origin)            
             if area.has_method("InteractActivate"):
                 if dist < shortest_dist and not was_nearest_area_door:

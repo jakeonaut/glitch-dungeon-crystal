@@ -357,10 +357,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.89037, 8.2, -4 )
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 18 )]
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0 )
 
 [node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 11.7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 

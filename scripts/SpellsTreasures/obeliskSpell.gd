@@ -16,6 +16,7 @@ var previous_point = null
 var interpolation_point = null
 var t = 0
 var is_active = true
+export var is_locked = false
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var has_frozen_input = false
@@ -127,10 +128,13 @@ func isActive():
   return self.visible
 
 func activate():
+  level.player.getSmacked()
   passiveActivate(0)
 
 func passiveActivate(_delta):
-  level.player.getSmacked()
+  if is_locked:
+    return
+
   is_touching_player = true
   is_touching_player_timer = 0
   mySprite.global_transform.origin.x = level.player.global_transform.origin.x
