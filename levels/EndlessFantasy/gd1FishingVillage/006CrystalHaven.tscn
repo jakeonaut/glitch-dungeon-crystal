@@ -207,7 +207,7 @@ can_camera_zoom = true
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 21 )
 
-[node name="Sprite3D" parent="Viewport/level/CubeCrystal/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/CubeCrystal/NPC" index="4"]
 material_override = SubResource( 22 )
 frame = 66
 

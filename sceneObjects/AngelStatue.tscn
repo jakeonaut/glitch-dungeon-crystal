@@ -416,6 +416,9 @@ shape = SubResource( 11 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, -0.195348 )
 pixel_size = 0.0001
 
+[node name="FallthroughSolid" parent="NPC" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.82613, 0 )
+
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
 shape = SubResource( 12 )
 

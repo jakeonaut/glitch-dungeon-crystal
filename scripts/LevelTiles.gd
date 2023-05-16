@@ -159,6 +159,17 @@ func buildSingleRandomTile(cell_index, glitch_type):
     #   setTileNameNum("Spikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
     # else:
     #   setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
+  elif tile_name == "GlitchSpikes":
+    # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
+    # var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
+    # if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
+    setRandomTileNameOfType("GlitchSpikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
+    # elif left_neighbor_tile_type == -1: # no left neighbor
+    #   pass 
+    # elif right_neighbor_tile_type == -1: # no right neighbor
+    #   setTileNameNum("GlitchSpikes", 3, cell_index, tile_orientation) # 4, but 0 indexed...
+    # else:
+    #   setRandomTileNameOfType("GlitchSpikes", 2, cell_index, tile_orientation, 1)
   
   # maybe make it into a dictionary so that infected spikes removed can be remembered easier
   # and other "tile pushing/creating" if that happens
@@ -290,6 +301,13 @@ func isTileSpikes(tile_type):
     return false
   var tileCollisionShape = self.mesh_library.get_item_shapes(tile_type)[0]
   return tileCollisionShape is RayShape
+
+func isTileGlitchSpikes(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "GlitchSpikes" in tile_name
+  
 
 func infectSpikes(coords):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)

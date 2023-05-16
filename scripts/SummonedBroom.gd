@@ -113,10 +113,13 @@ func hitStuff(_delta):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if isTileSpikes(tile_type):
+      if isTileSpikes(tile_type) and not getLevelTiles().isTileGlitchSpikes(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
         # TODO(jaketrower): also reset the levelTiles array position?
+      if getLevelTiles().isTileGlitchSpikes(tile_type):
+        my_broom_owner.getSmacked()
+
   
 
 func isActive():

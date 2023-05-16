@@ -9,6 +9,8 @@ onready var npc = get_node("NPC")
 onready var getHitSound = get_node("GetHitSound")
 onready var getHitSound2 = get_node("GetHitSound2")
 var can_do_my_power = true
+# String is a path to a file.
+export(String, FILE) var path
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -35,16 +37,17 @@ func _process(delta):
             self.rotation_degrees.y -= (delta * rot_amount)
             self.global_transform.origin.y += (delta * 1)
         else:
-            global.pauseGame = false
+            # global.pauseGame = false
             stop()
+            transition.long_fade_to(self.path)
 
 func stop():
     self.rotation_degrees.y = 0 
-    npc.grav = 30
+    npc.grav = 0
     npc.mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     npc.mySprite.material_override.set_shader_param("opacity", 1.0)
     npc.mySprite.max_frames = 2
-    npc.is_active = true
+    # npc.is_active = true
     can_do_my_power = false
 
 

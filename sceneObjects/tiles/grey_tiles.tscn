@@ -1,4 +1,4 @@
-[gd_scene load_steps=555 format=2]
+[gd_scene load_steps=577 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -178,6 +178,13 @@
 [ext_resource path="res://assets/textures/yellowsolidceil3.png" type="Texture" id=176]
 [ext_resource path="res://assets/textures/yellowroof7.png" type="Texture" id=177]
 [ext_resource path="res://assets/textures/yellowroof3.png" type="Texture" id=178]
+[ext_resource path="res://assets/palettes/black_tidepool_palette.png" type="Texture" id=179]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=180]
+[ext_resource path="res://assets/textures/greyglitchspikes5.png" type="Texture" id=181]
+[ext_resource path="res://assets/textures/greyglitchspikes2.png" type="Texture" id=182]
+[ext_resource path="res://assets/textures/greyglitchspikes1.png" type="Texture" id=183]
+[ext_resource path="res://assets/textures/greyglitchspikes3.png" type="Texture" id=184]
+[ext_resource path="res://assets/textures/greyglitchspikes4.png" type="Texture" id=185]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -707,7 +714,25 @@ frame_4/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=117]
 shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = SubResource( 118 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/real_base_palette = ExtResource( 56 )
@@ -734,7 +759,25 @@ frame_3/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=120]
 shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = SubResource( 119 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/real_base_palette = ExtResource( 56 )
@@ -757,7 +800,25 @@ frame_3/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=122]
 shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = SubResource( 121 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/real_base_palette = ExtResource( 51 )
@@ -775,7 +836,25 @@ frame_1/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=124]
 shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = SubResource( 123 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/real_base_palette = ExtResource( 56 )
@@ -798,13 +877,241 @@ frame_3/delay_sec = 0.0
 
 [sub_resource type="ShaderMaterial" id=126]
 shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/texture_albedo = SubResource( 125 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/real_base_palette = ExtResource( 56 )
 
 [sub_resource type="CubeMesh" id=115]
 material = SubResource( 126 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=391]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 183 )
+frame_1/texture = ExtResource( 182 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 184 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 185 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 181 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=392]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 391 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=393]
+material = SubResource( 392 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=394]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 182 )
+frame_1/texture = ExtResource( 184 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 185 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 181 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 183 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=395]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 394 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=396]
+material = SubResource( 395 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=397]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 184 )
+frame_1/texture = ExtResource( 185 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 181 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 183 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 182 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=398]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 397 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 179 )
+
+[sub_resource type="CubeMesh" id=399]
+material = SubResource( 398 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=400]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 185 )
+frame_1/texture = ExtResource( 181 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 183 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 182 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 184 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=401]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 400 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=402]
+material = SubResource( 401 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=403]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 181 )
+frame_1/texture = ExtResource( 183 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 182 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 184 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 185 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=404]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 403 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=405]
+material = SubResource( 404 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=127]
@@ -2674,6 +2981,87 @@ shape = SubResource( 107 )
 [node name="Area" type="Area" parent="Spikes5" groups=["spikes"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Spikes5/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, 0 )
+generate_lightmap = false
+mesh = SubResource( 393 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 107 )
+
+[node name="Area" type="Area" parent="GlitchSpikes" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -1 )
+mesh = SubResource( 396 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 107 )
+
+[node name="Area" type="Area" parent="GlitchSpikes2" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -2 )
+mesh = SubResource( 399 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 107 )
+
+[node name="Area" type="Area" parent="GlitchSpikes3" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -3 )
+mesh = SubResource( 402 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 107 )
+
+[node name="Area" type="Area" parent="GlitchSpikes4" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -4 )
+mesh = SubResource( 405 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0.45, 0 )
+shape = SubResource( 107 )
+
+[node name="Area" type="Area" parent="GlitchSpikes5" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/Area"]
 shape = SubResource( 116 )
 
 [node name="BrickSolid_green" type="MeshInstance" parent="."]

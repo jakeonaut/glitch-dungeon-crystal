@@ -47,6 +47,7 @@ func _process(delta):
       return
 
     hookTarget.get_ref().can_collide_with_floor = false
+    hookTarget.get_ref().fall_timer = 0
     moveTargetToHook(delta)
     if not is_reeled_in:
       reelItIn(delta)

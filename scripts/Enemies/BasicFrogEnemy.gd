@@ -40,6 +40,9 @@ func setAsParent(_owner):
   walk_direction = -1
 
 func _process(delta):
+  if not visible:
+    return
+
   if is_infected:
     if mySprite2:
       mySprite.set_material_override(mySprite2.get_material_override())
