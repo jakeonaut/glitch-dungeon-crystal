@@ -123,7 +123,7 @@ func conductFromScenePath(path):
         tryToPlay(oceanThemePlayer)
     elif path.find("Desert") > 0 or path.find("DustyCricket") > 0:
         tryToPlay(exploreThemePlayer)
-    elif path.find("Poison") > 0:
+    elif path.find("Poison") > 0 or path.find("Toxic") > 0:
         tryToPlay(poisonThemePlayer)
     elif path.find("Swamp") > 0 or path.find("Town") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)

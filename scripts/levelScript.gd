@@ -133,7 +133,6 @@ func saveTheGame(message = "saving (not really)"):
     
 func restartMusic():
   # update music
-  print(getLevelZoneName())
   musicPlayer.conductFromScenePath(getLevelName())
   
 func tryShowUIElements():

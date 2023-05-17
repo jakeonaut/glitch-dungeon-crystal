@@ -772,6 +772,7 @@ func summonFallenBroom(was_thrown):
       fallenBroom.global_transform.origin.y -= 1
       fallenBroom.true_terminal_vel = 0
       fallenBroom.walk_speed *= 3
+      fallenBroom.get_node("BroomSound").play()
     global.memory["broom"] = false
 
     if mySprite.flip_h and was_thrown:

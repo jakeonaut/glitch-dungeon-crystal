@@ -995,7 +995,7 @@ volume_db = -5.0
 [node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 69 )
 
-[node name="InteractPrompt" parent="Viewport/level/AngelStatue/NPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/AngelStatue/NPC" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.11877, -1 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 22 )]
@@ -1017,7 +1017,7 @@ bbText = "•welcome to REST ZONE
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 78 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 material_override = SubResource( 79 )
 pixel_size = 0.16
 frame = 72
@@ -1025,7 +1025,7 @@ frame = 72
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 80 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/NPC" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303364, 2.51877, -1 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 18 )]
@@ -1035,11 +1035,11 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 flip_h = true
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
 anims/default = SubResource( 16 )
 anims/flickerOn = SubResource( 17 )
 anims/jump = SubResource( 18 )

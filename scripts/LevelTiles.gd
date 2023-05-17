@@ -454,19 +454,21 @@ func setTileset(tileset_type, properly_set_tiles = true):
     # and we named them "_green", etc. but it's more like "_forest" etc. 
     my_tileset_glitch_type = global.GlitchForm.FLOOR
     grey_palette = global.grey_palette_town
-    green_palette = global.green_palette_town
-    black_palette = global.black_palette_town
+    green_palette = global.green_tidepool_palette
+    # black_palette = global.black_palette_town
+    black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
   elif tileset_type == global.TilesetType.DESERT:
     my_tileset_glitch_type = global.GlitchForm.LADDER
+    green_palette = global.green_tidepool_palette
   elif tileset_type == global.TilesetType.BEACH:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
     grey_palette = global.tidepool_palette
     green_palette = global.green_tidepool_palette
     red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_tidepool_palette
-    black_palette = global.black_tidepool_palette
+    # black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.POISON_FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
     grey_palette = global.black_palette

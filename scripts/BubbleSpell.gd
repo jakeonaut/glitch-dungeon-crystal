@@ -136,9 +136,9 @@ func touchCorporealBody(body):
   if body != my_parent:
     bubbleStartPop()
 
-
+var x_diff_max = 2
 func randomizeTargetPos():
-  target_pos_x = original_pos_x + rand_range(-2, 2)
+  target_pos_x = original_pos_x + rand_range(-x_diff_max, x_diff_max)
 
 func bulletTryDieToSolids():
   for x in range(global_transform.origin.x - 2, global_transform.origin.x + 2):

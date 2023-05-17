@@ -60,6 +60,7 @@ func _process(delta):
     if projectile:
         var has_hit_something = hitStuff(delta)
         if horizontal_collision or has_hit_something:
+            landSound.play()
             grav = 60
             behavior_was_thrown = false
             behavior_walking = false
@@ -67,14 +68,19 @@ func _process(delta):
             get_node("SecretAnimationPlayer").play("isStaticInLevel")
             projectile = false
             was_projectile = true
+    tryDieIfTooFarFromPlayer()
     tryDieToOffscreenCamera()
-    if on_ground and not is_static_in_level and was_projectile:
+    if not is_static_in_level and was_projectile:
         return_timer += (delta * 22)
         if return_timer >= return_time_limit:
             returning = true
             on_ground = false
 
     
+func tryDieIfTooFarFromPlayer():
+    var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
+    if distance >= 20:
+        returning = true
 
 func tryDieToOffscreenCamera():
     var DEATH_MARGIN = 5
