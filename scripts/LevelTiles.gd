@@ -468,7 +468,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
     green_palette = global.green_tidepool_palette
     red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_tidepool_palette
-    # black_palette = global.black_tidepool_palette
+    black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.POISON_FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
     grey_palette = global.black_palette

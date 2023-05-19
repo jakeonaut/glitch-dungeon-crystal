@@ -49,6 +49,7 @@ enum GlitchForm {
     INVISIBLE,
     LADDER,
     WALK_THROUGH_WALLS,
+    ASCEND,
 }
 enum TilesetType {
     DUNGEON,

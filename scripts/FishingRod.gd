@@ -45,12 +45,6 @@ func _process(delta):
       hookTarget = null
       is_reeled_in = true
       return
-
-    hookTarget.get_ref().can_collide_with_floor = false
-    hookTarget.get_ref().fall_timer = 0
-    moveTargetToHook(delta)
-    if not is_reeled_in:
-      reelItIn(delta)
     elif hookTarget.get_ref() == level.player:
       if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
         hooked = false
@@ -59,7 +53,15 @@ func _process(delta):
         level.player.can_collide_with_floor = true
         if Input.is_action_just_pressed("jump_button"):
           level.player.actuallyApplyJump(true)
-    else:
+        is_reeled_in = true
+        return
+
+    hookTarget.get_ref().can_collide_with_floor = false
+    hookTarget.get_ref().fall_timer = 0
+    moveTargetToHook(delta)
+    if not is_reeled_in:
+      reelItIn(delta)
+    elif hookTarget.get_ref() != level.player:
       hooked = false
       hookTarget = null
 
