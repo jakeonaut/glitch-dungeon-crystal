@@ -61,12 +61,12 @@ func _process(delta):
         secretAniPlayer.stop()
         cat_state = CatState.WALK
         behavior_walking = true
-        walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1
         secretAniPlayer.play("walk")
     elif cat_state == CatState.IDLE:
-        walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1
         if am_i_in_range_of_player:
             cat_state = CatState.WALK
             behavior_walking = true
@@ -81,13 +81,13 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             respawn()
     elif cat_state == CatState.WALK:
-        walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1
         if abs(getPlayer().global_transform.origin.x - global_transform.origin.x) < 1:
             playerActivationAreaPassiveActivate2()
     elif cat_state == CatState.PREPARE_LUNGE:
-        walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1
         cat_state_timer += (delta*22)
         if cat_state_timer >= cat_state_prepare_lunge_time_limit:
             cat_state_timer = 0
@@ -170,8 +170,8 @@ func respawn():
     jump_force = proper_jump_force
     invisible_jump_force = proper_jump_force
 
-    walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-    myOtherSprite.flip_h = walk_direction == -1
+    walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+    myOtherSprite.flip_h = walk_direction.x == -1
     cat_state = CatState.ASLEEP
         
 func teleport():
@@ -196,8 +196,8 @@ func teleport():
     jump_force = proper_jump_force
     invisible_jump_force = proper_jump_force
 
-    walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-    myOtherSprite.flip_h = walk_direction == -1
+    walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+    myOtherSprite.flip_h = walk_direction.x == -1
     cat_state = CatState.TELEPORT_IN
         
 # @override
@@ -226,8 +226,8 @@ func playerActivationAreaPassiveActivate():
         else:
             cat_state = CatState.FLICKER_ON
             secretAniPlayer.play("flickerOn")
-            walk_direction = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
-            myOtherSprite.flip_h = walk_direction == -1
+            walk_direction.x = 1 if getPlayer().global_transform.origin.x > global_transform.origin.x else -1
+            myOtherSprite.flip_h = walk_direction.x == -1
     else:
         .playerActivationAreaPassiveActivate()
 

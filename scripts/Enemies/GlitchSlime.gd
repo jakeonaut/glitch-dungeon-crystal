@@ -23,7 +23,7 @@ func _ready():
     should_collide_ceil = false
 
     if flip_initial_direction:
-        walk_direction = -walk_direction
+        walk_direction.x = -walk_direction.x
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
 
@@ -68,12 +68,12 @@ func glitchSetSpritesAndCollision():
 # @override
 func pressingMoveLeft():
     if am_i_dying or not visible: return false
-    return walk_direction == -1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
+    return walk_direction.x == -1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
     if am_i_dying or not visible: return false
-    return walk_direction == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
+    return walk_direction.x == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
 func passiveActivate(_delta):

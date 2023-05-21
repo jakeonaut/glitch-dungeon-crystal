@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -687,6 +687,35 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "hookCaught"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 14, 34 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 7, 8 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -1551,6 +1580,7 @@ anims/fishingIdle = SubResource( 37 )
 anims/fishingSitDown = SubResource( 36 )
 anims/getItem = SubResource( 30 )
 anims/happy = SubResource( 15 )
+anims/hookCaught = SubResource( 61 )
 anims/jump = SubResource( 16 )
 anims/jumpBump = SubResource( 39 )
 anims/jumpSquat = SubResource( 17 )

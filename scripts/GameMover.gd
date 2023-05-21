@@ -138,6 +138,7 @@ var was_walking_into_wall = false
 var pauseSelf = false
 
 var horizontal_collision = false
+var vertical_collision = false
 
 var DNUMHORZ = 65.0
 var DNUMSKID_BASE = 54.0
@@ -152,6 +153,8 @@ func _ready():
   if true_terminal_vel == null: true_terminal_vel = 32
 
 func _process(_delta):
+  # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
+  # rather than have to do this conditional check every time
   if aniPlayer:
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
 
@@ -842,6 +845,8 @@ func handleCollisionsAndMove(local_lv, delta):
   half_on_ground = false
   if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
     local_lv = handleVerticalCollisions(local_lv)
+    if last_vv != 0 and local_lv.y == 0:
+      self.vertical_collision = true
   elif should_do_fallthrough_area_collision:
     local_lv = collideWithFloor(local_lv)
     global_transform.origin.y = fallthrough_area_collision_y
@@ -1107,6 +1112,7 @@ func handleHorizontalCollisions(local_lv):
   
   
 func handleVerticalCollisions(local_lv):
+  self.vertical_collision = false
   var TILE_HEIGHT = getLevelTiles().cell_size.y
 
   # check for bottom collisions

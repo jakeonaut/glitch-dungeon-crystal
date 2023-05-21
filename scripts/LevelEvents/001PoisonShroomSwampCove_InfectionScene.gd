@@ -44,7 +44,7 @@ func passiveActivate(_delta):
         var infectedFrog = infectedFrogRes.instance()
         level.add_child(infectedFrog)
         infectedFrog.global_transform.origin = frogToBeInfected.global_transform.origin
-        infectedFrog.walk_direction = -1
+        infectedFrog.walk_direction.x = -1
         yield(get_tree().create_timer(1.0), "timeout")
         global.pauseGame = false
         global.pauseMoveInput = false

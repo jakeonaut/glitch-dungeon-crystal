@@ -5,13 +5,15 @@ onready var broomAbortSound = get_node("NPC TextBox/TextBox/AbortSound")
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
-export var walk_direction = 1
+export var walk_direction = Vector2(1, 0)
 # should be a FSM
 var projectile = false
 var was_projectile = false
 var return_timer = 0
 var return_time_limit = 5
 var returning = false
+var returning_timer = 0
+var returning_time_limit = 30
 onready var collisionShape = get_node("Area/CollisionShape")
 
 # Called when the node enters the scene tree for the first time.
@@ -25,12 +27,19 @@ func _ready():
  
 func _process(delta):
     if returning:
+        returning_timer += (delta*22)
+        if returning_timer >= returning_time_limit:
+            self.global_transform.origin.x = level.player.global_transform.origin.x
+            self.global_transform.origin.y = level.player.global_transform.origin.y
+            abortSound.activateScript()
+            return
+
         is_active = false
         okay_im_done = true
         grav = 0
         behavior_was_thrown = false
         behavior_walking = false
-        if walk_direction == 1:
+        if walk_direction.x == 1:
             get_node("SecretAnimationPlayer").play("returnAirSpinReverse")
         else:
             get_node("SecretAnimationPlayer").play("returnAirSpin")
@@ -59,9 +68,13 @@ func _process(delta):
         behavior_was_thrown = false
     if projectile:
         var has_hit_something = hitStuff(delta)
-        if horizontal_collision or has_hit_something:
+        if horizontal_collision or has_hit_something or vertical_collision or on_ground:
             landSound.play()
             grav = 60
+            walk_direction = Vector2(0, 0)
+            just_pressed_jump = false
+            pressing_jump = false
+            returning = true
             behavior_was_thrown = false
             behavior_walking = false
             true_terminal_vel = 16
@@ -93,22 +106,26 @@ func tryDieToOffscreenCamera():
 
 # @override
 func pressingMoveLeft():
-    return walk_direction == -1 and behavior_walking and (projectile or not on_ground)
+    return walk_direction.x == -1 and behavior_walking and (projectile or not on_ground)
 
 # @override
 func pressingMoveRight():
-    return walk_direction == 1 and behavior_walking and (projectile or not on_ground)
+    return walk_direction.x == 1 and behavior_walking and (projectile or not on_ground)
 
 func isActive():
     return visible and on_ground and not behavior_was_thrown
 
 # @override
 func justPressedJump():
-    return behavior_was_thrown and grav > 10
+    return (behavior_was_thrown and grav > 10 and not walk_direction.y == -1) or (behavior_walking and walk_direction.y == 1)
+
+# @override
+func pressingJump():
+    return behavior_walking and walk_direction.y == 1
 
 # @override
 func isKindOfOnGround():
-    return behavior_was_thrown
+    return behavior_was_thrown or (behavior_walking and walk_direction.y == 1)
 
 # @override
 func alignMySprite():

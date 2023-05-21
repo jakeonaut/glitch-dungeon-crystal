@@ -56,6 +56,8 @@ func isActive():
     return visible and not has_been_smacked
 
 func activate():
+    level.levelTiles.randomize_num += 10
+    level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true
     global.pauseGame = true
     musicPlayer.stopAll()

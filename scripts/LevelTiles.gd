@@ -181,6 +181,8 @@ func buildSingleRandomTile(cell_index, glitch_type):
 
 var randomize_timer = 0
 var randomize_time_limit = 0.5
+var randomize_num = 1
+var randomize_num_counter = 0
 var unrandomize_timer = 0
 var unrandomize_time_limit = 0.5
 var unrandomized_num = 0
@@ -212,7 +214,7 @@ func _process(delta):
   #   rerandomizeTile(Vector3(0, 0, 0), getRandomGlitchType())
   #   rerandomize_timer = 0
   
-  # TODO(jake): This Cutscene stuff is only for collecting your first obelisk spell... 
+  # TODO(jake): This Cutscene stuff is only for hitting the end of level geode
   if is_unrandomizing:
     unrandomize_timer += (delta*22)
     if unrandomize_timer >= unrandomize_time_limit:
@@ -227,14 +229,14 @@ func _process(delta):
         if unrandomize_cell_index >= unrandomize_cell_indices.size():
           unrandomize_cell_index = 0
           is_unrandomizing = false
-          getPlayer().applyGlitch(global.GlitchForm.FEATHER)
-          level.get_node("FeatherSpell").first_ever_glitch = false
-          level.uiLayer.get_node("GlitchSprite").visible = true
-          level.uiLayer.get_node("GlitchSprite").rect_scale = Vector2(1.5, 1.5)
-          level.uiLayer.get_node("GlitchSprite").rect_position = Vector2(300, 250)
-          level.uiLayer.get_node("GlitchStatusRect").visible = true
-          level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
-          level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(300, 250)
+          # getPlayer().applyGlitch(global.GlitchForm.FEATHER)
+          # level.get_node("FeatherSpell").first_ever_glitch = false
+          # level.uiLayer.get_node("GlitchSprite").visible = true
+          # level.uiLayer.get_node("GlitchSprite").rect_scale = Vector2(1.5, 1.5)
+          # level.uiLayer.get_node("GlitchSprite").rect_position = Vector2(300, 250)
+          # level.uiLayer.get_node("GlitchStatusRect").visible = true
+          # level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
+          # level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(300, 250)
           # level.uiLayer.statsTitleRect.visible = true
           # musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer)
           for i in range(len(unrandomize_cell_indices)):
@@ -255,18 +257,20 @@ func _process(delta):
         if unrandomize_cell_index >= unrandomize_cell_indices.size():
           unrandomize_cell_index = 0
           is_rerandomizing = false
-          global.pauseGame = false
-          getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", false)
-          getPlayer().mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
-          getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
-          break
+          # global.pauseGame = false
+          # getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", false)
+          # getPlayer().mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+          # getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
+          # break
     return
 
   randomize_timer += delta
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
-    var rand_key = tile_dict.keys()[randi() % tile_dict.size()]
-    randomizeTile(rand_key, getRandomGlitchType())
+    for _i in range(randomize_num):
+      var rand_key = tile_dict.keys()[randi() % tile_dict.size()]
+      randomizeTile(rand_key, getRandomGlitchType())
+    randomize_num += randomize_num_counter
   # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
 
   if global.pauseGame: return

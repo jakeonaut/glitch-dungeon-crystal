@@ -41,7 +41,7 @@ func _process(delta):
     if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_RECOVERY:
       hooked = false
       if hookTarget.get_ref() == level.player:
-        level.player.can_collide_with_floor = true
+        restorePlayer()
       hookTarget = null
       is_reeled_in = true
       return
@@ -49,8 +49,7 @@ func _process(delta):
       if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
         hooked = false
         hookTarget = null
-        level.player.on_ground = true
-        level.player.can_collide_with_floor = true
+        restorePlayer()
         if Input.is_action_just_pressed("jump_button"):
           level.player.actuallyApplyJump(true)
         is_reeled_in = true
@@ -58,6 +57,10 @@ func _process(delta):
 
     hookTarget.get_ref().can_collide_with_floor = false
     hookTarget.get_ref().fall_timer = 0
+    hookTarget.get_ref().on_ground = true
+    hookTarget.get_ref().vv = 0
+    hookTarget.get_ref().lv.y = 0
+    hookTarget.get_ref().linear_velocity.y = 0
     moveTargetToHook(delta)
     if not is_reeled_in:
       reelItIn(delta)
@@ -67,6 +70,10 @@ func _process(delta):
 
   elif is_reeled_in:
     reelItOut(delta)
+
+func restorePlayer():
+  level.player.can_collide_with_floor = true
+  level.player.aniPlayer = level.player.get_node("AnimationPlayer")
 
 func moveTargetToHook(delta):
   if not hookTarget.get_ref():
@@ -107,4 +114,6 @@ func passiveActivate(_delta):
   if not hooked and not is_reeled_in:
     hooked = true
     hookTarget = weakref(level.player)
+    level.player.aniPlayer.play("hookCaught")
+    level.player.aniPlayer = null
   

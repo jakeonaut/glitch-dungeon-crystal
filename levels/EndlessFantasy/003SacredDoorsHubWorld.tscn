@@ -1297,13 +1297,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0147, -15.8261, 0 )
 visible = false
 grav = 0
-walk_direction = -1
+walk_direction = Vector2(-1, 0)
 
 [node name="GlitchSlime3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8235, -17.9181, 0 )
 visible = false
 grav = 0
-walk_direction = -1
+walk_direction = Vector2(-1, 0)
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8936, -7.94293, -0.331177 )

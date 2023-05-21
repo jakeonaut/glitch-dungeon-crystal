@@ -4,7 +4,6 @@ var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
-export var walk_direction = 1
 
 var land_count = 0
 var land_count_limit = 3

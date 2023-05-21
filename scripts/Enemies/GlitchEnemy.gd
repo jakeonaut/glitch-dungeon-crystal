@@ -29,7 +29,6 @@ var am_i_really_in_range_of_player = false
 export(float) var sprite_offset_y = 0
 export var behavior_walking = false
 export var behavior_intermittent_walking = false
-export var behavior_vertical_walking = false
 export var behavior_jumping = false
 export var behavior_flip_on_land = false
 export var behavior_stop_on_land = false
@@ -39,7 +38,7 @@ export var behavior_evolve = false
 export var behavior_fizzle_out_after_evolve = false
 export var behavior_mini_explore = false
 export var behavior_directional_bullet = false
-export var walk_direction = 1
+export var walk_direction = Vector2(1, 0)
 export var is_particle = false
 export var modAmt = 0.5
 
@@ -80,7 +79,7 @@ func _ready():
     #if behavior_walking:
     #    mySprite.frame_delay = 0.2
     #    mySprite.updateBaseFrame(0, 1)
-    if behavior_vertical_walking:
+    if walk_direction.y != 0:
         jump_force = 3
         grav = 0
         terminal_vel = 3
@@ -117,9 +116,9 @@ func _process(delta):
         should_collide_horizontally = false
         should_do_fallthrough_area_collision = false
     else:
-        should_collide_floor = not on_ground or behavior_walking or behavior_vertical_walking
-        should_collide_ceil = not on_ground or behavior_vertical_walking
-        should_collide_horizontally = behavior_walking and not behavior_vertical_walking
+        should_collide_floor = not on_ground or behavior_walking
+        should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1)
+        should_collide_horizontally = behavior_walking and walk_direction.x != 0
         
     
     if am_i_dying:
@@ -196,7 +195,7 @@ func unsmack():
 func doHorizontalWalkingBehavior():
     if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
         horizontal_collision = false
-        walk_direction = -walk_direction
+        walk_direction.x = -walk_direction.x
         if behavior_intermittent_walking:
             behavior_walking = true
             slime_state_timer = 0
@@ -205,15 +204,15 @@ func doHorizontalWalkingBehavior():
             myOtherSprite.flip_h = not myOtherSprite.flip_h
     
 func doVerticalWalkingBehavior():
-    if behavior_walking and behavior_vertical_walking:
+    if behavior_walking and walk_direction.y != 0:
         if on_ground:
             on_ground = false
-            walk_direction = 1
+            walk_direction.y = 1
             grav = 0
             if myOtherSprite:
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
         elif not on_ground and linear_velocity.y == 0:
-            walk_direction = -1
+            walk_direction.y = -1
             grav = 60
             if myOtherSprite:
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
@@ -251,7 +250,7 @@ func tryDieToOffscreenCamera():
 func processPhysics(delta):
     if not am_i_in_range_of_player:
         return
-    elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_vertical_walking and not behavior_jumping and not behavior_was_thrown:
+    elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
         return
     else:
         # call GameMover.gd super method
@@ -286,26 +285,26 @@ func glitchSetSpritesAndCollision():
 # @override
 func pressingMoveLeft():
     if am_i_dying: return false
-    return walk_direction == -1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
+    return walk_direction.x == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
     if am_i_dying: return false
-    return walk_direction == 1 and not behavior_vertical_walking and (behavior_walking or (behavior_was_thrown and not on_ground))
+    return walk_direction.x == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
     if am_i_dying: return false
-    return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
+    return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 # @override
 func pressingJump():
     if am_i_dying: return false
-    return behavior_jumping or (behavior_vertical_walking and walk_direction == 1)
+    return behavior_jumping or (behavior_walking and walk_direction.y == 1)
     
 # @override
 func isKindOfOnGround():
-    if behavior_vertical_walking:
-        return walk_direction == 1
+    if behavior_walking:
+        return walk_direction.y == 1
     else:
         return .isKindOfOnGround()
     
@@ -313,7 +312,7 @@ func isKindOfOnGround():
 func landed():
     .landed()
     if behavior_flip_on_land:
-        walk_direction = -walk_direction
+        walk_direction.x = -walk_direction.x
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
     if behavior_stop_on_land:

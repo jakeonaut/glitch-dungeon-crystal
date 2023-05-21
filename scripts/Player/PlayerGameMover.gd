@@ -60,6 +60,7 @@ func _process(delta):
 
   if justPressedJump():
     jump_press_timer = 0
+    var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
       target_last_grounded_y = global_transform.origin.y
@@ -95,10 +96,10 @@ func _process(delta):
   if is_tiny and Input.is_action_just_pressed("sub_action_button"):
     regainNestingDoll()
 
-  if global.memory.has("fishingRod") and on_ground and justPressedDown():
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    aniPlayer.queue("fishingSitDown")
+  # if global.memory.has("fishingRod") and on_ground and justPressedDown():
+  #   aniPlayer.stop()
+  #   aniPlayer.clear_queue()
+  #   aniPlayer.queue("fishingSitDown")
 
 func spawnOneSparkle(xdiff, above_the_head = false):
   var newSparkle = sparkleRes.instance()
@@ -241,6 +242,7 @@ func processJumpInputs(delta):
         weak_feather_dbl_jump = false
         should_magic_jump = true
   
+        var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
         if not "jump" in aniPlayer.assigned_animation:
           aniPlayer.clear_queue()
           aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)

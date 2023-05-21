@@ -37,7 +37,7 @@ func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0
-  walk_direction = -1
+  walk_direction.x = -1
 
 func _process(delta):
   if not visible:
@@ -132,9 +132,9 @@ func getSmacked(broom_origin):
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0
-  walk_direction = 1
+  walk_direction.x = 1
   if level.player.mySprite.flip_h:
-    walk_direction = -1
+    walk_direction.x = -1
   # is_static = false
   pauseSelf = true
   on_ground = true

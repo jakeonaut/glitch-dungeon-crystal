@@ -60,9 +60,9 @@ func getSmacked(broom_origin):
     .getSmacked(broom_origin)
     walk_speed = 0
     grav = 0
-    walk_direction = -1
+    walk_direction.x = -1
     if level.player.mySprite.flip_h:
-        walk_direction = 1
+        walk_direction.x = 1
     linear_velocity.y = 0
     lv.y = 0
     smallInteractionArea.add_to_group("no_pushems")
@@ -93,13 +93,13 @@ func _process(delta):
                 if i == 0:
                     pass # stay idle
                 elif can_hop and (i == 1 or i == 2):
-                    walk_direction = 1 if i == 1 else -1
+                    walk_direction.x = 1 if i == 1 else -1
                     # if isFarFromHome():
                     #     if global_transform.origin.x > spawn_origin.x:
-                    #         walk_direction = -1
+                    #         walk_direction.x = -1
                     #     else:
-                    #         walk_direction = 1
-                    myOtherSprite.flip_h = walk_direction == -1
+                    #         walk_direction.x = 1
+                    myOtherSprite.flip_h = walk_direction.x == -1
                     behavior_jumping = true
                     mole_state = MoleState.JUMP
                 elif i == 3:
@@ -139,8 +139,8 @@ func _process(delta):
                 mole_state_timer = 0
     elif mole_state == MoleState.PREPARE_JUMP:
         # run away from player
-        walk_direction = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1
         behavior_jumping = true
         mole_state = MoleState.JUMP
     elif mole_state == MoleState.JUMP:
@@ -177,27 +177,26 @@ func _process(delta):
         if has_been_smacked:
             grav = 0
             behavior_walking = true
-            myOtherSprite.flip_h = walk_direction == -1
+            myOtherSprite.flip_h = walk_direction.x == -1
             walk_speed = 8
-            behavior_vertical_walking = false
             linear_velocity.y = 0
             lv.y = 0
         elif flight_anchor.frame == 0: # DOWN
-            behavior_vertical_walking = true
-            walk_direction = -1
+            behavior_walking = true
+            walk_direction.x = -1
             grav = 50
             true_terminal_vel = 5
         elif flight_anchor.frame == 1: # RIGHT
             myOtherSprite.flip_h = false
-            walk_direction = 1
+            walk_direction.x = 1
             behavior_walking = true
         elif flight_anchor.frame == 2: # LEFT
             myOtherSprite.flip_h = true
-            walk_direction = -1
+            walk_direction.x = -1
             behavior_walking = true
         elif flight_anchor.frame == 3: # UP?
-            behavior_vertical_walking = true
-            walk_direction = 1
+            behavior_walking = true
+            walk_direction.x = 1
             grav = -50
             true_terminal_vel = 5
 
@@ -223,7 +222,6 @@ func checkForFlyPathOverrides():
                 aniPlayer.rename_animation("jumpSquat", "jumpSquatInitial")
                 aniPlayer.add_animation("jumpSquat", aniPlayer.get_animation("jumpStart"))
             behavior_walking = false
-            behavior_vertical_walking = false
             if mole_state != MoleState.OVERRIDE_FLYING:
                 grav = 60
             else:
@@ -335,5 +333,5 @@ func startDigging():
         behavior_jumping = false
 
         # run away from player
-        walk_direction = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
-        myOtherSprite.flip_h = walk_direction == -1
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
+        myOtherSprite.flip_h = walk_direction.x == -1

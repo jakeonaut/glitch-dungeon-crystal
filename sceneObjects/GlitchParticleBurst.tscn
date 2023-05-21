@@ -104,7 +104,7 @@ behavior_flip_on_land = true
 behavior_stop_on_land = true
 behavior_was_thrown = true
 behavior_fizzle_out_after_evolve = true
-walk_direction = -1
+walk_direction = Vector2( -1, 0 )
 is_particle = true
 evolution_time_limit = 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=21]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -755,6 +756,45 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4, 7.5, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 11 )]
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 2.5, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1.8, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3.4, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 2.6, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3, 2.6, 0 )
+
+[node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 5, 0 )
+
+[node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 6.6, 0 )
+
+[node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7, 5.8, 0 )
+
+[node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3, 5.8, 0 )
+
+[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.5, 0 )
+
+[node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4.1, 0 )
+
+[node name="miniCubeCrystal12" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 3.3, 0 )
+
+[node name="miniCubeCrystal13" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 3.3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

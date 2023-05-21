@@ -102,14 +102,14 @@ func _process(delta):
     # NEED TO MAKE SURE HEAD IS BEFORE BODY1 AND BODY1 IS BEFORE BODY2
     # but not too far ahead....
     #############################
-    if bugHead.walk_direction == 1 and body1.walk_direction == 1:
+    if bugHead.walk_direction.x == 1 and body1.walk_direction.x == 1:
         if bugHead.global_transform.origin.x < body1.global_transform.origin.x + 1:
             body1.slime_state_timer = 0
             body1.slime_state = body1.SlimeState.IDLE
         if bugHead.global_transform.origin.x > body1.global_transform.origin.x + 2:
             body1.slime_state_timer = 0
             body1.slime_state = body1.SlimeState.WALK
-    if bugHead.walk_direction == -1 and body1.walk_direction == -1:
+    if bugHead.walk_direction.x == -1 and body1.walk_direction.x == -1:
         if bugHead.global_transform.origin.x > body1.global_transform.origin.x - 1:
             body1.slime_state_timer = 0
             body1.slime_state = body1.SlimeState.IDLE

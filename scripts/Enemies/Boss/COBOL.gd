@@ -33,7 +33,7 @@ enum BossState {
 var boss_state = BossState.HURT # BossState.DOCILE
 
 func _ready():
-    walk_direction = -1
+    walk_direction.x = -1
     behavior_flip_on_land = true
 
 func _process(delta):

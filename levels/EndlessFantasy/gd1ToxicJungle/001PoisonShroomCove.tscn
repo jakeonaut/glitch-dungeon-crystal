@@ -75,6 +75,8 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 2 )
+starting_glitch_type = 2
+should_glitch_activate = true
 tileset_type = 6
 how_much_mp = 11
 display_title = "toxic jungle"

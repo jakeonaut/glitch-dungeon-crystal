@@ -553,6 +553,8 @@ func processBroomLogic(_delta):
   #     broom_cooldown_timer = 0
   is_in_broom_cooldown = false
 
+  # CHEAT CODE
+  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
   if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
@@ -579,7 +581,14 @@ func processBroomLogic(_delta):
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
   elif Input.is_action_just_pressed("sub_action_button") and summonedBroom:
-    summonedBroom.broom_active_timer = 100
+    summonedBroom.queue_free()
+    summonedBroom = null
+    self.broomStop()
+    if not on_ground:
+      var amt = 2
+      self.vv = amt
+      self.linear_velocity.y = amt
+      self.lv.y = amt
     summonFallenBroom(true)
 
 func adjustSummonedBroomSpritePosition():
@@ -714,6 +723,9 @@ func landed():
   # global_transform.origin.y = original_y
     
 func broomStop():
+  # CHEAT CODE
+  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
+  
   summonedBroom = null
   broomSpriteVisible.visible = true
   pauseAnimation = false
@@ -764,7 +776,7 @@ func summonFallenBroom(was_thrown):
     level.add_child(fallenBroom)
     fallenBroom.global_transform.origin = self.global_transform.origin
     fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
-    fallenBroom.walk_direction = -1 if mySprite.flip_h else 1
+    fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
     fallenBroom.global_transform.origin.y += 2
     if was_thrown:
       fallenBroom.grav = 1
@@ -773,7 +785,25 @@ func summonFallenBroom(was_thrown):
       fallenBroom.true_terminal_vel = 0
       fallenBroom.walk_speed *= 3
       fallenBroom.get_node("BroomSound").play()
+      var x_direction = 0
+      if Input.is_action_pressed("ui_left"):
+        x_direction = -1
+      elif Input.is_action_pressed("ui_right"):
+        x_direction = 1
+      if Input.is_action_pressed("ui_up"):
+        fallenBroom.walk_speed *= .7
+        fallenBroom.walk_direction = Vector2(x_direction, 1)
+        fallenBroom.just_pressed_jump = true
+        fallenBroom.pressing_jump = true
+        fallenBroom.grav = 0
+        fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
+      elif Input.is_action_pressed("ui_down"):
+        fallenBroom.walk_speed *= .7
+        fallenBroom.walk_direction = Vector2(x_direction, -1)
+        fallenBroom.grav = 600
+        fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
     global.memory["broom"] = false
+    print(fallenBroom.walk_direction)
 
     if mySprite.flip_h and was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)

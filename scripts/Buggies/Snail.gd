@@ -19,7 +19,6 @@ func _ready():
     
     should_only_do_middle_sensor = true
     if is_wall_snail:
-        behavior_vertical_walking = true
         should_collide_horizontally = false
         jump_force = 1
         grav = 0
@@ -35,10 +34,10 @@ func addJumpSmokeCloud(_flip_flip_h = false):
     
 # @override
 func doVerticalWalkingBehavior():
-    if behavior_walking and behavior_vertical_walking:
+    if behavior_walking and is_wall_snail:
         if on_ground:
             on_ground = false
-            walk_direction = 1
+            walk_direction.y = 1
             grav = 5
             slime_state_timer = 0
             slime_state = SlimeState.WALK
@@ -48,7 +47,7 @@ func doVerticalWalkingBehavior():
         elif not on_ground and linear_velocity.y == 0:
             has_reached_top_of_wall = slime_state == SlimeState.WALK and slime_state_timer > slime_walk_time_limit/2
             if has_reached_top_of_wall:
-                walk_direction = -1
+                walk_direction.y = -1
                 grav = 60
                 if myOtherSprite:
                     myOtherSprite.flip_v = true

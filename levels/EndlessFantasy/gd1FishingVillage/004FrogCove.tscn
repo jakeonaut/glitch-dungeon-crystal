@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/BubbleSpellObelisk.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=22]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -287,6 +288,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.3, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 22 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7, 31, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8, 28.1, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 12 )]
 

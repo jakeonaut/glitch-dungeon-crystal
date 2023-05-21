@@ -16,7 +16,7 @@ func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0
-  walk_direction = -1
+  walk_direction.x = -1
 
 func _process(delta):
   if pauseSelf and not is_smacked:
@@ -47,14 +47,14 @@ func landed():
   mySprite.updateBaseFrame(0, 0)
 
 # @override
-func getSmacked():
-  .getSmacked()
+func getSmacked(broom_origin):
+  .getSmacked(broom_origin)
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0
-  walk_direction = 1
+  walk_direction.x = 1
   if level.player.mySprite.flip_h:
-    walk_direction = -1
+    walk_direction.x = -1
   pauseSelf = true
   on_ground = true
   notDieSound.play()
