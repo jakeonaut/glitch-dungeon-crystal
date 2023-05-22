@@ -37,6 +37,10 @@ var unblink_time_limit = 5
 
 var showMpTimer = 0
 var showMpTimeLimit = 60
+var is_mushroom_infected = false
+var mushroom_infection_direction = 1
+var mushroom_turn_timer = 0
+var mushroom_turn_time_limit = 10
 
 func _ready():
   set_physics_process(true)
@@ -205,10 +209,14 @@ func pressingMoveDown():
   
 # @override
 func pressingMoveLeft():
+  if is_mushroom_infected:
+    return mushroom_infection_direction == -1
   return Input.is_action_pressed("ui_left") and not pauseInput
 
 # @override
 func pressingMoveRight():
+  if is_mushroom_infected:
+    return mushroom_infection_direction == 1
   return Input.is_action_pressed("ui_right") and not pauseInput
 
 func magicJump():
@@ -226,7 +234,11 @@ func regainNestingDoll():
 
 # @override
 func getWalkSpeed():
-  if not global.memory["broom"]:
+  if mushroom_turn_timer > 0:
+    return 3
+  elif not global.memory["broom"]:
+    if pressingRun() and on_ground:
+      return 5
     return 4
   else:
     return .getWalkSpeed() # super()

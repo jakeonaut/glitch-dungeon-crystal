@@ -217,5 +217,8 @@ func idleTalk():
   mySprite.frame_delay = 1.6
   mySprite.should_randomize_frame_delay = false
 
+func imAnNpc():
+  return true
+
 func appendNextTextCharacter():
   mySprite.frame_delay = 0.2

@@ -13,11 +13,13 @@ onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
+onready var mushroomSprite = get_node("MushroomSprite")
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
+var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 # var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
@@ -49,6 +51,7 @@ var poison_timer = 0
 var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
+var can_smack_npc = true
 
 var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
@@ -152,7 +155,7 @@ func invisibleGlitch():
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(getLevelTiles().black_palette)
-  mySprite.get_material_override().set_shader_param("opacity", 0.75)
+  # mySprite.get_material_override().set_shader_param("opacity", 0.9)
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
@@ -166,7 +169,8 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
-  return global.memory["broom"] and Input.is_action_pressed("sub_action_button") and summonedBroom == null
+  return Input.is_action_pressed("sub_action_button") and summonedBroom == null or \
+         (is_mushroom_infected and mushroom_turn_timer > 0)
   
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
@@ -192,6 +196,7 @@ func _process(delta):
     return
   processBroomLogic(delta)
   processBagLogic(delta)
+  processMushroomLogic(delta)
   # processBubbleLogic(delta)
     
   # doTimeDilation(real_delta)
@@ -450,6 +455,18 @@ func nullify():
     if global.memory.has("spellbookPage"):
         global.memory["spellbookPage"] = []
 
+func getMushroomInfected():
+  if is_mushroom_infected:
+    return false
+
+  mushroom_turn_timer = 0
+  glitchTickle(0)
+  is_mushroom_infected = true
+  if mySprite.flip_h:
+    mushroom_infection_direction = -1
+  else:
+    mushroom_infection_direction = 1
+
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
@@ -464,6 +481,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     spawnSparkles(delta, true)
     glitchTickle(true)
     return
+
+  is_mushroom_infected = false
 
   if global.activeInteractor:
     global.activeInteractor.hideTextbox()
@@ -577,6 +596,8 @@ func processBroomLogic(_delta):
       linear_velocity.y = 0
     summonedBroom = summonedBroomRes.instance()
     level.add_child(summonedBroom)
+    if not can_smack_npc or global.activeInteractor != null:
+      summonedBroom.has_hit_npc = true
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
@@ -590,6 +611,39 @@ func processBroomLogic(_delta):
       self.linear_velocity.y = amt
       self.lv.y = amt
     summonFallenBroom(true)
+
+func processMushroomLogic(delta):
+  mushroomSprite.visible = is_mushroom_infected
+  if is_mushroom_infected:
+    if global.memory["broom"]:
+      mySprite.flip_h = not mySprite.flip_h
+      summonFallenBroom(false, true)
+      mySprite.flip_h = not mySprite.flip_h
+    adjustMushroomSpritePosition()
+    if horizontal_collision:
+      mushroom_infection_direction = -mushroom_infection_direction
+      mushroom_turn_timer = 0
+
+    var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+    var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+    if on_ground and (turning_left or turning_right):
+      mushroom_turn_timer += (delta*22)
+      if mushroom_turn_timer >= mushroom_turn_time_limit:
+        mushroom_turn_timer = 0
+        mushroom_infection_direction *= -1
+    else:
+      mushroom_turn_timer -= (delta*22)
+      if mushroom_turn_timer <= 0:
+        mushroom_turn_timer = 0
+
+
+func adjustMushroomSpritePosition():
+  mushroomSprite.global_transform.origin.x = self.global_transform.origin.x
+  var amt = 0.25
+  if mySprite.flip_h:
+    mushroomSprite.global_transform.origin.x -= amt
+  else:
+    mushroomSprite.global_transform.origin.x += amt
 
 func adjustSummonedBroomSpritePosition():
   broomSpriteVisible.visible = false
@@ -746,6 +800,7 @@ func broomStop():
   aniPlayer.queue("fall")
   if on_ground:
     aniPlayer.queue("stand")
+  can_smack_npc = true
 
 # @override
 func playJumpSound():
@@ -767,13 +822,16 @@ func giveMeMiniCrystalCubes(how_many):
 func iFellFlat():
   summonFallenBroom(false)
 
-func summonFallenBroom(was_thrown):
+func summonFallenBroom(was_thrown, should_die_on_land = false):
   broomSpriteVisible.visible = false
   summonSmokeClouds(5, false, false)
 
   if global.memory.has("broom") and global.memory["broom"]:
     var fallenBroom = fallenBroomRes.instance()
     level.add_child(fallenBroom)
+    if not can_smack_npc:
+      fallenBroom.has_hit_npc = true
+    fallenBroom.should_die_on_land = should_die_on_land
     fallenBroom.global_transform.origin = self.global_transform.origin
     fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
     fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
@@ -817,6 +875,7 @@ func summonFallenBroom(was_thrown):
 func getABroom():
   global.memory["broom"] = true
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  can_smack_npc = true
 
 func iJustPressedDown():
   on_ground = false

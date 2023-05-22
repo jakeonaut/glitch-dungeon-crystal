@@ -101,6 +101,11 @@ func generateId():
 func passiveActivate(_delta):
     # global.memory["hearts_recovering"] = true
     # level.player.restoreGlitchAndMP()
+    if level.player.is_mushroom_infected:
+        level.player.is_mushroom_infected = false
+        level.player.summonSmokeClouds(2, true, true)
+    if not global.memory["broom"]:
+        level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
     if not isOnSavePoint():
         saveSound.play()

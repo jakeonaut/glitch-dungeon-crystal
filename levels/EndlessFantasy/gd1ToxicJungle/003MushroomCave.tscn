@@ -1,0 +1,383 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=7]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=16]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=19]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
+
+[sub_resource type="Animation" id=21]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+extents = Vector3( 4, 2, 1 )
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 2, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 2, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 2, 0.24, 1 )
+
+[sub_resource type="ViewportTexture" id=35]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1280, 1024 )
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 7 )
+should_glitch_activate = true
+tileset_type = 6
+
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 17 )]
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 16 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 13 )]
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 9 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( -131078, 1, 1, -131075, 1, 1, -65541, 1, 1 )
+}
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, -5 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 1 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 9 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 786449, 0, 1, 786450, 0, 1, 786451, 0, 1, 786452, 0, 1, 786453, 0, 1, 786454, 0, 1, 786455, 0, 1, 786456, 0, 1, 786457, 0, 1, 786458, 0, 1, 786459, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 786463, 0, 1, 786464, 0, 1, 786465, 0, 1, 786466, 0, 1, 786467, 0, 1, 786468, 0, 1, 786469, 0, 1, 786470, 0, 1, 851985, 0, 1, 851986, 0, 1, 851987, 0, 1, 851988, 0, 1, 851989, 0, 1, 851990, 0, 1, 851991, 0, 1, 851992, 0, 1, 851993, 0, 1, 851994, 0, 1, 851995, 0, 1, 851996, 0, 1, 851997, 0, 1, 851998, 0, 1, 851999, 0, 1, 852000, 0, 1, 852001, 0, 1, 852002, 0, 1, 852003, 0, 1, 852004, 0, 1, 852005, 0, 1, 852006, 0, 1, 917521, 0, 1, 917523, 0, 1, 917537, 0, 1, 917539, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 983073, 0, 1, 983074, 0, 1, 983075, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1048597, 0, 1, 1048598, 0, 1, 1048611, 0, 1, 1048613, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, 1114134, 0, 1, 1114147, 0, 1, 1114148, 0, 1, 1114149, 0, 1, 1179665, 0, 1, 1245202, 0, 1, 1245203, 0, 1, 1245204, 0, 1, 1245217, 0, 1, 1245218, 0, 1, 1245222, 0, 1, 1245223, 0, 1, 1245224, 0, 1, 1310738, 0, 1, 1310740, 0, 1, 1310753, 0, 1, 1310754, 0, 1, 1310758, 0, 1, 1310760, 0, 1, 1376274, 0, 1, 1376275, 0, 1, 1376276, 0, 1, 1376294, 0, 1, 1376295, 0, 1, 1376296, 0, 1, 1441813, 0, 1, 1441814, 0, 1, 1441815, 0, 1, 1507349, 0, 1, 1507351, 0, 1, 1572885, 0, 1, 1572886, 0, 1, 1572887, 0, 1, 1638424, 0, 1, 1638425, 0, 1, 1703960, 0, 1, 1703961, 0, 1, 1703973, 0, 1, 1703974, 0, 1, 1703975, 0, 1, 1769501, 0, 1, 1769502, 0, 1, 1769509, 0, 1, 1769511, 0, 1, 1835036, 0, 1, 1835037, 0, 1, 1835038, 0, 1, 1835045, 0, 1, 1835046, 0, 1, 1835047, 0, 1, 1900570, 0, 1, 1900571, 0, 1, 1900572, 0, 1, 1900574, 0, 1, 1900578, 0, 3, 1900579, 0, 3, 1900580, 0, 3, 1900581, 0, 3, 1900582, 0, 3, 1900583, 0, 3, 1900584, 0, 3, 1900585, 0, 3, 1900586, 0, 3, 1966098, 0, 3, 1966099, 0, 3, 1966100, 0, 3, 1966101, 0, 3, 1966102, 0, 3, 1966103, 0, 3, 1966104, 0, 3, 1966105, 0, 3, 1966106, 0, 3, 1966107, 0, 3, 1966108, 0, 3, 1966109, 0, 3, 1966110, 0, 1, 1966114, 0, 3, 1966116, 0, 3, 1966117, 0, 3, 1966118, 0, 3, 1966119, 0, 3, 1966120, 0, 3, 1966121, 0, 3, 1966122, 0, 3, 2031634, 0, 3, 2031635, 0, 3, 2031636, 0, 3, 2031637, 0, 3, 2031638, 0, 3, 2031639, 0, 3, 2031640, 0, 3, 2031641, 0, 3, 2031642, 0, 3, 2031643, 0, 3, 2031644, 0, 3, 2031645, 0, 3, 2031646, 0, 1, 2031650, 0, 3, 2031651, 0, 3, 2031652, 0, 3, 2031653, 0, 3, 2031654, 0, 3, 2031655, 0, 3, 2031656, 0, 3, 2031657, 0, 3, 2031658, 0, 3 )
+}
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 1 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 1769501, 0, 2 )
+}
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1, 29.2, 0 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 32, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
+is_passive = true
+is_vertical = true
+
+[node name="landing" parent="Viewport/level/Door3" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+anims/doorClose = SubResource( 21 )
+anims/doorOpen = SubResource( 22 )
+anims/locked = SubResource( 23 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 32 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[node name="WallTorch4" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4222, 18.5768, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 2, 0 )
+
+[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 38, -1 )
+
+[node name="MrMoTexBG" type="Spatial" parent="Viewport/level"]
+
+[node name="Mushroom2" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 33.9, 26.5, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/MrMoTexBG/Mushroom2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -5.1 )
+
+[node name="Sprite3D12" parent="Viewport/level/MrMoTexBG/Mushroom2" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 2 )
+
+[node name="Sprite3D2" parent="Viewport/level/MrMoTexBG/Mushroom2" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, -1 )
+
+[node name="Sprite3D3" parent="Viewport/level/MrMoTexBG/Mushroom2" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, 2 )
+
+[node name="Sprite3D4" parent="Viewport/level/MrMoTexBG/Mushroom2" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 2 )
+
+[node name="Sprite3D5" parent="Viewport/level/MrMoTexBG/Mushroom2" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.4, 2 )
+
+[node name="Sprite3D9" parent="Viewport/level/MrMoTexBG/Mushroom2" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41561e-07, 2 )
+
+[node name="Sprite3D10" parent="Viewport/level/MrMoTexBG/Mushroom2" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 2 )
+
+[node name="Sprite3D11" parent="Viewport/level/MrMoTexBG/Mushroom2" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 2 )
+
+[node name="Sprite3D6" parent="Viewport/level/MrMoTexBG/Mushroom2" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.3, 2 )
+
+[node name="Sprite3D7" parent="Viewport/level/MrMoTexBG/Mushroom2" index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2, 2 )
+
+[node name="Sprite3D8" parent="Viewport/level/MrMoTexBG/Mushroom2" index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.1, 2 )
+
+[node name="CollisionShape" parent="Viewport/level/MrMoTexBG/Mushroom2/FallthroughSolid" index="0"]
+shape = SubResource( 36 )
+
+[node name="Mushroom3" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 27.6, 23.3, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/MrMoTexBG/Mushroom3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -4.7 )
+
+[node name="Sprite3D12" parent="Viewport/level/MrMoTexBG/Mushroom3" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.5 )
+
+[node name="Sprite3D2" parent="Viewport/level/MrMoTexBG/Mushroom3" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, 0.5 )
+
+[node name="Sprite3D3" parent="Viewport/level/MrMoTexBG/Mushroom3" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, 0.5 )
+
+[node name="Sprite3D4" parent="Viewport/level/MrMoTexBG/Mushroom3" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0.5 )
+
+[node name="Sprite3D5" parent="Viewport/level/MrMoTexBG/Mushroom3" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.4, 0.5 )
+
+[node name="Sprite3D9" parent="Viewport/level/MrMoTexBG/Mushroom3" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+
+[node name="Sprite3D10" parent="Viewport/level/MrMoTexBG/Mushroom3" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0.5 )
+
+[node name="Sprite3D11" parent="Viewport/level/MrMoTexBG/Mushroom3" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0.5 )
+
+[node name="Sprite3D6" parent="Viewport/level/MrMoTexBG/Mushroom3" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.3, 0.5 )
+
+[node name="Sprite3D7" parent="Viewport/level/MrMoTexBG/Mushroom3" index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2, 0.5 )
+
+[node name="Sprite3D8" parent="Viewport/level/MrMoTexBG/Mushroom3" index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.1, 0.5 )
+
+[node name="CollisionShape" parent="Viewport/level/MrMoTexBG/Mushroom3/FallthroughSolid" index="0"]
+shape = SubResource( 37 )
+
+[node name="Mushroom4" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 30.5, 20, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/MrMoTexBG/Mushroom4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -2.8 )
+
+[node name="Sprite3D12" parent="Viewport/level/MrMoTexBG/Mushroom4" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 2 )
+
+[node name="Sprite3D2" parent="Viewport/level/MrMoTexBG/Mushroom4" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, 2 )
+
+[node name="Sprite3D3" parent="Viewport/level/MrMoTexBG/Mushroom4" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, 2 )
+
+[node name="Sprite3D4" parent="Viewport/level/MrMoTexBG/Mushroom4" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 2 )
+
+[node name="Sprite3D5" parent="Viewport/level/MrMoTexBG/Mushroom4" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.4, 2 )
+
+[node name="Sprite3D9" parent="Viewport/level/MrMoTexBG/Mushroom4" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+
+[node name="Sprite3D10" parent="Viewport/level/MrMoTexBG/Mushroom4" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 2 )
+
+[node name="Sprite3D11" parent="Viewport/level/MrMoTexBG/Mushroom4" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 2 )
+
+[node name="Sprite3D6" parent="Viewport/level/MrMoTexBG/Mushroom4" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.3, 2 )
+
+[node name="Sprite3D7" parent="Viewport/level/MrMoTexBG/Mushroom4" index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2, 2 )
+
+[node name="Sprite3D8" parent="Viewport/level/MrMoTexBG/Mushroom4" index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.1, 2 )
+
+[node name="CollisionShape" parent="Viewport/level/MrMoTexBG/Mushroom4/FallthroughSolid" index="0"]
+shape = SubResource( 38 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1, 14.9662, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8, 14, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/004MushroomInfectionPt1.tscn"
+
+[node name="Viewport2" parent="." instance=ExtResource( 15 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 35 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 20 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 14 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 20 )]
+
+[editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
+[editable path="Viewport/level/MrMoTexBG/Mushroom2"]
+[editable path="Viewport/level/MrMoTexBG/Mushroom3"]
+[editable path="Viewport/level/MrMoTexBG/Mushroom4"]
+[editable path="Viewport2/ScreenEffects"]

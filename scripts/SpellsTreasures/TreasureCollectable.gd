@@ -105,9 +105,10 @@ func passiveActivate(_delta):
     if stop_all_music:
       musicPlayer.stopAll()
     #visible = false
-    secretAniPlayer.clear_queue()
-    secretAniPlayer.queue("openUp")
-    secretAniPlayer.queue("idle")
+    if secretAniPlayer:
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.queue("openUp")
+      secretAniPlayer.queue("idle")
     global.pauseMoveInput = true
     being_collected = true
     

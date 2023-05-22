@@ -205,11 +205,11 @@ portrait = ExtResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 frame = 60
 max_frames = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
 anims/default = SubResource( 17 )
 anims/flickerOn = SubResource( 18 )
 

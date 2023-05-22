@@ -65,6 +65,10 @@ func isTileSpikes(tile_type):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return tileCollisionShape is RayShape
     
+func canActivate(area):
+  var areaParent = area.get_node("..")
+  return not has_hit_npc or not areaParent.has_method("imAnNpc")
+
 func hitStuff(_delta):
   if not visible: return
   
@@ -88,14 +92,14 @@ func hitStuff(_delta):
       # # TODO kill glitches or "free" them like glitch slug...
       
     elif area.is_in_group("corporeal_body"):
-      var npc = area.get_node("..")
-      if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+      var areaParent = area.get_node("..")
+      if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         has_hit_npc = true
-        npc.getSmacked(global_transform.origin)
+        areaParent.getSmacked(global_transform.origin)
         my_broom_owner.getSmacked()
-    elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+    elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
       area.InteractActivate()
-    elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
+    elif canActivate(area) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       area.PassiveInteractActivate(0, false)
 
   # erase glitch tiles...

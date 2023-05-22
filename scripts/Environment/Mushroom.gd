@@ -1,6 +1,7 @@
 extends Spatial
 
 export var should_grow = false
+export var spore_on_respawn = false
 
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 
@@ -42,6 +43,9 @@ func wiggle():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if spore_on_respawn and (global.isRespawning or global.isEnteringRoom) and not should_wiggle:
+        wiggle()
 
     if should_wiggle:
         if wiggle_timer == 0:

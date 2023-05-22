@@ -132,10 +132,11 @@ func randomizeTargetPos():
 func isActive():
     return true
 
-func passiveActivate(_delta):
+func pickyPassiveActivate(_delta, is_player):
     if not didja_get_me:
         bubbleStartPop()
-        getPlayer().glitchTickle()
+        if is_player: 
+            getPlayer().getMushroomInfected()
 
 func bubbleStartPop():
     didja_get_me = true

@@ -1,6 +1,6 @@
 extends Spatial
 
-# extends "res://scripts/_InteractionAreaEvent_template.gd"
+#extends "res://scripts/_InteractionAreaEvent_template.gd"
 
 func isActive():
     # @override me #.isActive()

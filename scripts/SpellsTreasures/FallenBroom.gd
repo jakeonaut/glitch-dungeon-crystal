@@ -13,8 +13,10 @@ var return_timer = 0
 var return_time_limit = 5
 var returning = false
 var returning_timer = 0
-var returning_time_limit = 30
+var returning_time_limit = 25
 onready var collisionShape = get_node("Area/CollisionShape")
+var has_hit_npc = false
+var should_die_on_land = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,9 @@ func _ready():
         grav = 0
  
 func _process(delta):
+    if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
+        queue_free()
+
     if returning:
         returning_timer += (delta*22)
         if returning_timer >= returning_time_limit:
@@ -66,6 +71,14 @@ func _process(delta):
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
+        if should_die_on_land:
+            get_node("SecretAnimationPlayer").play("die")
+            behavior_walking = false
+            behavior_was_thrown = false
+            grav = 0
+            vv = 0
+            linear_velocity.y = 0
+            lv.y = 0
     if projectile:
         var has_hit_something = hitStuff(delta)
         if horizontal_collision or has_hit_something or vertical_collision or on_ground:
@@ -113,7 +126,7 @@ func pressingMoveRight():
     return walk_direction.x == 1 and behavior_walking and (projectile or not on_ground)
 
 func isActive():
-    return visible and on_ground and not behavior_was_thrown
+    return visible and on_ground and not behavior_was_thrown and not level.player.is_mushroom_infected
 
 # @override
 func justPressedJump():
@@ -185,8 +198,9 @@ func hitStuff(_delta):
             
         elif area.is_in_group("corporeal_body"):
             var npc = area.get_node("..")
-            if npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
+            if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
                 npc.getSmacked(global_transform.origin)
+                has_hit_npc = true
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):

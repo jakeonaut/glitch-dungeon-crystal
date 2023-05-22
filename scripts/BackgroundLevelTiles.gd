@@ -1,4 +1,4 @@
- extends "LevelTiles.gd"
+extends "LevelTiles.gd"
 
 var grey_background_tiles = preload("res://sceneObjects/tiles/grey_background_tiles.tres") 
 var red_background_tiles = preload("res://sceneObjects/tiles/red_background_tiles.tres")
