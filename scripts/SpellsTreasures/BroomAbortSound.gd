@@ -10,9 +10,10 @@ func activateScript():
     
     global.pauseGame = false
     global.pauseMoveInput = false
-    level.player.aniPlayer.clear_queue()
-    level.player.aniPlayer.queue("walkStop")
-    level.player.aniPlayer.queue("stand")
+    var aniPlayer = level.player.get_node("AnimationPlayer")
+    aniPlayer.clear_queue()
+    aniPlayer.queue("walkStop")
+    aniPlayer.queue("stand")
     level.player.getABroom()
         
     level.restartMusic()

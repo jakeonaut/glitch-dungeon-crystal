@@ -38,6 +38,7 @@ var black_tidepool_palette = preload("res://assets/palettes/black_tidepool_palet
 var foggy_forest_palette = preload("res://assets/palettes/foggyforest.png")
 var dream_palette = preload("res://assets/palettes/dream-haze-8-1x.png")
 var rgb_palette = preload("res://assets/palettes/3bitrgb_palette.png")
+var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
 onready var doorSound = get_node("DoorSound")
 

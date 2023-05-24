@@ -23,6 +23,8 @@ var has_dug = false
 var has_been_smacked = false
 
 export var is_builder = false
+export var is_mushroom_infected = false
+onready var mushroomSprite = get_node("MushroomSprite")
 export var can_hop = false
 var initial_grav = 60
 var initial_true_terminal_vel = 32
@@ -70,8 +72,11 @@ func getSmacked(broom_origin):
 func _process(delta):
     # ._process(delta) implicit
 
+    if is_mushroom_infected:
+        myOtherSprite.material_override.set_shader_param("enable_glitch", true)
+        mushroomSprite.visible = true
+
     if is_builder:
-        # myOtherSprite.material_override.set_shader_param("enable_glitch", true)
         mole_state_dig_time_limit = 4
     
     delta = delta * global.time_dilation_multiplier
@@ -314,6 +319,9 @@ func digTilesBelow(solidTilesBelow, should_summon_clouds):
 # @override
 func landed():
     .landed()
+    if is_mushroom_infected:
+        for _i in range(3):
+            spawnASpore()
     behavior_jumping = false
     behavior_walking = false
         
@@ -335,3 +343,17 @@ func startDigging():
         # run away from player
         walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
         myOtherSprite.flip_h = walk_direction.x == -1
+
+var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
+func spawnASpore():
+    var spore = sporeRes.instance()
+    spore.initially_fly_up = true
+    spore.global_transform.origin = self.global_transform.origin
+    spore.original_pos = self.global_transform.origin
+    level.add_child(spore)
+    spore.bubble_speed = -rand_range(1.925, 2.8)
+    spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
+    spore.delta_multiplier = 4.0
+    spore.global_transform.origin.x += rand_range(-1, 1)
+    spore.global_transform.origin.y += 1.5
+    spore.global_transform.origin.y -= rand_range(0, .225)

@@ -178,6 +178,7 @@ func landed():
   .landed()
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
+  has_mushroom_double_jumped = false
 
 # @override
 func justPressedDown():
@@ -234,47 +235,125 @@ func regainNestingDoll():
 
 # @override
 func getWalkSpeed():
-  if mushroom_turn_timer > 0:
-    return 3
+  if is_mushroom_infected:
+    return 3 if mushroom_turn_timer > 0 else 5
   elif not global.memory["broom"]:
-    if pressingRun() and on_ground:
-      return 5
-    return 4
+    return 5 if pressingRun() and on_ground else 4
   else:
     return .getWalkSpeed() # super()
 
+func doubleJump():
+  was_just_on_ground_timer = was_just_on_ground_time_limit
+  jumped_from_true_ground = truly_on_ground
+  jump_squat_jump_input_timer = 1
+  feather_jump_timer = 0
+  weak_feather_dbl_jump = false
+  should_magic_jump = true
+
+  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
+  aniPlayer.clear_queue()
+  aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
+  aniPlayer.queue("jumpStart")
+  aniPlayer.queue("jump")
+
+  target_last_grounded_y = global_transform.origin.y
+
+
+onready var infectSound = get_node("Sounds/InfectSound")
+onready var wormSound = get_node("Sounds/WormSound")
+var has_mushroom_double_jumped = false
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
-    if global.memory["nesting_doll"]: # and global.memory["broom"]:
-      if justPressedJump() and not should_magic_jump and not global.pauseMoveInput: 
-        was_just_on_ground_timer = was_just_on_ground_time_limit
-        jumped_from_true_ground = truly_on_ground
-        jump_squat_jump_input_timer = 1
-        feather_jump_timer = 0
-        weak_feather_dbl_jump = false
-        should_magic_jump = true
-  
-        var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
-        if not "jump" in aniPlayer.assigned_animation:
-          aniPlayer.clear_queue()
-          aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
-          aniPlayer.queue("jumpStart")
-          aniPlayer.queue("jump")
-
-        target_last_grounded_y = global_transform.origin.y
-        new_carcass = cherryCarcassRes.instance()
-        level.add_child(new_carcass)
-        new_carcass.global_transform.origin = self.global_transform.origin
-        new_carcass.mySprite.flip_h = mySprite.flip_h
-        # if randi() % 4 == 1:
-        #   new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
-        global.memory["nesting_doll"] = false
-        global.memory["had_broom"] = global.memory["broom"]
-        global.memory["broom"] = false
-        mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
-        is_tiny = true
+    var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
+    if is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
+      has_mushroom_double_jumped = true
+      doubleJump()
+      wormSound.play()
+      var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+      var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+      if turning_left or turning_right:
+        mushroom_infection_direction = -mushroom_infection_direction
+      for _i in range(2):
+        spawnASpore(0, -1)
+      var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
+      aniPlayer.clear_queue()
+      aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
+      aniPlayer.queue("jumpStart")
+      aniPlayer.queue("jump")
+    elif global.memory["nesting_doll"] and triedToDoubleJump: 
+      doubleJump()
+      new_carcass = cherryCarcassRes.instance()
+      level.add_child(new_carcass)
+      new_carcass.global_transform.origin = self.global_transform.origin
+      new_carcass.mySprite.flip_h = mySprite.flip_h
+      # if randi() % 4 == 1:
+      #   new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
+      global.memory["nesting_doll"] = false
+      global.memory["had_broom"] = global.memory["broom"]
+      global.memory["broom"] = false
+      mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+      is_tiny = true
         
   .processJumpInputs(delta)
+
+var sporeRes = preload("res://sceneObjects/Environment/PlayerSpore.tscn")
+func spawnASpore(x_dir = 0, y_dir = 1):
+  summonSmokeClouds(1, 0, 0, 0)
+  var spore = sporeRes.instance()
+  if y_dir == 1:
+    spore.initially_fly_up = true
+  spore.global_transform.origin = self.global_transform.origin
+  spore.original_pos = self.global_transform.origin
+  level.add_child(spore)
+  if y_dir == 1:
+    spore.bubble_speed = -rand_range(1.925, 2.8)
+  elif y_dir == -1:
+    spore.bubble_speed = rand_range(1.925, 2.8)
+  spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
+  if x_dir == 1:
+    if mySprite.flip_h:
+      spore.global_transform.origin.x -= 1
+      spore.target_pos.x = self.global_transform.origin.x + rand_range(-2, -1)
+    else:
+      spore.global_transform.origin.x += 1
+      spore.target_pos.x = self.global_transform.origin.x + rand_range(1, 2)
+  spore.delta_multiplier = 4.0
+  spore.global_transform.origin.x += rand_range(-.5, .5)
+  spore.global_transform.origin.y += 1.5
+  spore.global_transform.origin.y += rand_range(0, .225)
+  spore.is_active = false
+
+var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
+    for _i in range(num_clouds):
+        var newSmokeCloud = smokeCloudRes.instance()
+        level.add_child(newSmokeCloud)
+        if horizontal != 0:
+          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
+          var which_horizontal_dir = mySprite.flip_h
+          if horizontal < 0:
+            which_horizontal_dir = not which_horizontal_dir
+          if which_horizontal_dir:
+            newSmokeCloud.global_transform.origin.x -= 1
+            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x - rand_range(1, 3)
+          else:
+            newSmokeCloud.global_transform.origin.x += 1
+            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(1, 3)
+          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y
+          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        else:
+          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
+          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(1, 2)
+          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+        if play_sound:
+            newSmokeCloud.get_node("CleanGlitchSound").play()
+            newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+            play_sound = false
+        if is_glitchy:
+            var new_material = newSmokeCloud.get_material_override().duplicate()
+            new_material.set_shader_param("enable_glitch", "true")
+            new_material.set_shader_param("target_palette", global.weird_base_palette)
+            newSmokeCloud.set_material_override(new_material.duplicate())
     
 
 # @override

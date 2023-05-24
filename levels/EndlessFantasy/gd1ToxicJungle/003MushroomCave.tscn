@@ -224,9 +224,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -5.1 )
 [node name="Sprite3D12" parent="Viewport/level/MrMoTexBG/Mushroom2" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 2 )
 
-[node name="Sprite3D2" parent="Viewport/level/MrMoTexBG/Mushroom2" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, -1 )
-
 [node name="Sprite3D3" parent="Viewport/level/MrMoTexBG/Mushroom2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, 2 )
 

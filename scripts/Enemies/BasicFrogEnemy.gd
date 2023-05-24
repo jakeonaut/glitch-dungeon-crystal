@@ -9,7 +9,6 @@ var air_time_limit = 15
 var spawn_timer = 0
 var spawn_time_limit = 15
 
-var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
 export var is_static = false
@@ -113,6 +112,7 @@ func landed():
     for _i in range(how_many):
       spawnASpore()
   
+var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():
     var spore = sporeRes.instance()
     spore.initially_fly_up = true

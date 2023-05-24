@@ -4,6 +4,7 @@ onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/Men
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var broomSound = get_node("Sounds/BroomSound")
+onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
@@ -15,11 +16,9 @@ onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 onready var mushroomSprite = get_node("MushroomSprite")
 
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
-var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 # var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
@@ -459,6 +458,8 @@ func getMushroomInfected():
   if is_mushroom_infected:
     return false
 
+  musicPlayer.changeSongPitch(0.5)
+  infectSound.play()
   mushroom_turn_timer = 0
   glitchTickle(0)
   is_mushroom_infected = true
@@ -564,6 +565,8 @@ func processBagLogic(_delta):
 
 func processBroomLogic(_delta):
   if not (global.memory.has("broom") and global.memory["broom"]):
+    if Input.is_action_just_pressed("sub_action_button"):
+      noBroomSound.play()
     return
 
   # if not summonedBroom and is_in_broom_cooldown:
@@ -612,6 +615,9 @@ func processBroomLogic(_delta):
       self.lv.y = amt
     summonFallenBroom(true)
 
+var spore_spawn_timer = 0
+var spore_spawn_time_limit = 15
+onready var sporeSound = get_node("Sounds/SporeSound")
 func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
@@ -626,8 +632,8 @@ func processMushroomLogic(delta):
 
     var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
     var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-    if on_ground and (turning_left or turning_right):
-      mushroom_turn_timer += (delta*22)
+    if turning_left or turning_right:
+      mushroom_turn_timer += (delta*22) if on_ground else (delta*16)
       if mushroom_turn_timer >= mushroom_turn_time_limit:
         mushroom_turn_timer = 0
         mushroom_infection_direction *= -1
@@ -635,6 +641,12 @@ func processMushroomLogic(delta):
       mushroom_turn_timer -= (delta*22)
       if mushroom_turn_timer <= 0:
         mushroom_turn_timer = 0
+    
+    spore_spawn_timer += (delta*22)
+    if spore_spawn_timer >= spore_spawn_time_limit:
+      spore_spawn_timer = 0
+      spawnASpore()
+      sporeSound.play()
 
 
 func adjustMushroomSpritePosition():
@@ -956,3 +968,4 @@ func idleTalk():
 func appendNextTextCharacter():
   # no-op for now
   pass
+    

@@ -58,6 +58,9 @@ func _process(delta):
         if not mySprite.visible:
             queue_free()
     else:
+        if level.uiLayer.savingTextLabel.visible and level.uiLayer.saving_text_timer < 3: 
+            bubbleStartPop()
+            return
         global_transform.origin.y -= bubble_speed * delta
 
         global_transform.origin.x = global_transform.origin.x + (target_pos.x - global_transform.origin.x) * (delta * delta_multiplier)
@@ -129,8 +132,9 @@ func randomizeTargetPos():
     )
     delta_multiplier = 1.0
     
+var is_active = true
 func isActive():
-    return true
+    return is_active
 
 func pickyPassiveActivate(_delta, is_player):
     if not didja_get_me:
