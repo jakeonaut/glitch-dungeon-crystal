@@ -94,7 +94,8 @@ func hitStuff(_delta):
     elif area.is_in_group("corporeal_body"):
       var areaParent = area.get_node("..")
       if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
-        has_hit_npc = true
+        if areaParent.has_method("imAnNpc"):
+          has_hit_npc = true
         areaParent.getSmacked(global_transform.origin)
         my_broom_owner.getSmacked()
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):

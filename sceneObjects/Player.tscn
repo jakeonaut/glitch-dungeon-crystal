@@ -1691,6 +1691,7 @@ max_frames = 1
 
 [node name="MushroomSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 2.125, 1 )
+visible = false
 material_override = SubResource( 62 )
 pixel_size = 0.125
 texture = ExtResource( 41 )

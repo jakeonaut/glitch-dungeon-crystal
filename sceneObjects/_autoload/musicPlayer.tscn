@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/title.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/music/wakeup.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/music/dungeon.mp3" type="AudioStream" id=5]
-[ext_resource path="res://assets/DELETEME/eryngi - mossy EP - 01 i've got moss.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/music/demon suburb.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/music/selfrealization.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/music/echoisland_ben.mp3" type="AudioStream" id=9]
@@ -83,7 +82,7 @@ stream = ExtResource( 7 )
 volume_db = -15.0
 
 [node name="SwampThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 12 )
 volume_db = -15.0
 
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]

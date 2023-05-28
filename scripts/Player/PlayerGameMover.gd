@@ -38,6 +38,7 @@ var unblink_time_limit = 5
 var showMpTimer = 0
 var showMpTimeLimit = 60
 var is_mushroom_infected = false
+var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
 var mushroom_turn_time_limit = 10
@@ -237,7 +238,7 @@ func regainNestingDoll():
 func getWalkSpeed():
   if is_mushroom_infected:
     return 3 if mushroom_turn_timer > 0 else 5
-  elif not global.memory["broom"]:
+  elif not global.memory["broom"] or is_dust_infected:
     return 5 if pressingRun() and on_ground else 4
   else:
     return .getWalkSpeed() # super()

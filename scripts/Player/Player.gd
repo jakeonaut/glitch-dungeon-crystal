@@ -468,6 +468,22 @@ func getMushroomInfected():
   else:
     mushroom_infection_direction = 1
 
+func getDustInfected():
+  if is_dust_infected:
+    return false
+  glitchTickle(0)
+  is_dust_infected = true
+  mySprite.get_material_override().set_shader_param("target_palette", global.dream_palette)
+  broomSpriteVisible.get_material_override().set_shader_param("target_palette", global.dream_palette)
+
+func cleanUpDustInfection():
+  if not is_dust_infected:
+    return false
+  is_dust_infected = false
+  mySprite.get_material_override().set_shader_param("target_palette", global.dream_palette)
+  broomSpriteVisible.get_material_override().set_shader_param("target_palette", global.red_palette)
+
+
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
@@ -483,6 +499,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
+  if is_mushroom_infected:
+    level.player.getABroom()
   is_mushroom_infected = false
 
   if global.activeInteractor:
@@ -565,7 +583,7 @@ func processBagLogic(_delta):
 
 func processBroomLogic(_delta):
   if not (global.memory.has("broom") and global.memory["broom"]):
-    if Input.is_action_just_pressed("sub_action_button"):
+    if Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       noBroomSound.play()
     return
 

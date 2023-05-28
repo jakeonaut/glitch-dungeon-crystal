@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape" id=33]
 
 [node name="Flypath" type="Sprite3D"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.6, 9.8, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
 pixel_size = 0.12
 texture = ExtResource( 1 )
 hframes = 2

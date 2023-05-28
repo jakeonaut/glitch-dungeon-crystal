@@ -11,6 +11,8 @@ var bubble_speed = 0
 var initially_fly_up = false
 var delta_multiplier = 1.0
 var my_parent = null
+var lifespan_timer = 0
+var lifespan_time_limit = 0
 
 onready var mySprite = get_node("Sprite3D")
 onready var interactionArea = get_node("SmallInteractionArea")
@@ -58,6 +60,11 @@ func _process(delta):
         if not mySprite.visible:
             queue_free()
     else:
+        if lifespan_time_limit > 0:
+            lifespan_timer += (delta*22)
+            if lifespan_timer >= lifespan_time_limit:
+                bubbleStartPop()
+                return
         if level.uiLayer.savingTextLabel.visible and level.uiLayer.saving_text_timer < 3: 
             bubbleStartPop()
             return

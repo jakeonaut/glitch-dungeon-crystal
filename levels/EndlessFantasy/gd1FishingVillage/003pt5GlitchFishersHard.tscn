@@ -954,6 +954,9 @@ can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true
 
+[node name="SmallInteractionArea" parent="Viewport/level/NPC3" index="1"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4.1, 0 )
+
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )
 

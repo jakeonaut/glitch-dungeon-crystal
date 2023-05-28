@@ -170,8 +170,12 @@ func collectMe():
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
 
+func canActivate(area):
+  var areaParent = area.get_node("..")
+  return not has_hit_npc or not areaParent.has_method("imAnNpc")
+
 func hitStuff(_delta):
-    if not visible or not projectile: return
+    if not visible or not projectile or should_die_on_land: return
         
     var my_broom_owner = level.player
     var has_hit_something = false
@@ -197,10 +201,11 @@ func hitStuff(_delta):
             # # TODO kill glitches or "free" them like glitch slug...
             
         elif area.is_in_group("corporeal_body"):
-            var npc = area.get_node("..")
-            if not has_hit_npc and npc != my_broom_owner and npc.has_method("isActive") and npc.isActive():
-                npc.getSmacked(global_transform.origin)
-                has_hit_npc = true
+            var areaParent = area.get_node("..")
+            if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+                areaParent.getSmacked(global_transform.origin)
+                if areaParent.has_method("imAnNpc"):
+                    has_hit_npc = true
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):

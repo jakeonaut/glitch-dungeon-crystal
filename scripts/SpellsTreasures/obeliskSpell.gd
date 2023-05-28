@@ -128,7 +128,8 @@ func isActive():
   return self.visible
 
 func activate():
-  level.player.getSmacked()
+  if level.player.glitch_form != my_glitch_form:
+    level.player.getSmacked()
   passiveActivate(0)
 
 func passiveActivate(_delta):

@@ -17,7 +17,7 @@ func activateScript():
     level.player.getABroom()
         
     level.restartMusic()
-    level.saveTheGame()
+    # level.saveTheGame()
 
     broom.queue_free()
 
