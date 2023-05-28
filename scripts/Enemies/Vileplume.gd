@@ -22,6 +22,9 @@ var original_material = null
 
 var flip_timer = 0
 var flip_time_limit = 20
+var cooldown_timer = 0
+var cooldown_time_limit = 40
+var is_in_cooldown = false
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
@@ -36,6 +39,12 @@ func _process(delta):
     flip_time_limit = rand_range(5, 30)
     mySprite.flip_h = not mySprite.flip_h
 
+  if is_in_cooldown:
+    cooldown_timer += (delta*22)
+    if cooldown_timer >= cooldown_time_limit:
+      cooldown_timer = 0
+      is_in_cooldown = false
+
 # @override
 func glitchSetSpritesAndCollision():
   pass
@@ -46,11 +55,16 @@ func glitchSwitchSprite(_delta):
 
 # @override
 func getSmacked(broom_origin):
-  if is_smacked:
+  if is_smacked or is_in_cooldown:
     return
+  is_in_cooldown = true
+  cooldown_timer = 0
   .getSmacked(broom_origin)
   summonSmokeClouds(5)
   spawnFiveSpores()
+
+func passiveActivate(delta):
+  getSmacked(null)
 
 func spawnFiveSpores():
   for _i in range(10):
