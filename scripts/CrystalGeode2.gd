@@ -66,4 +66,5 @@ func activate():
 
     level.get_node("SavePoint").passiveActivate(0)
     # TODO(jaketrower): Make more generic, this is specific to fishingVillage
-    level.get_node("NPC").queue_free()
+    if level.has_node("NPC"):
+        level.get_node("NPC").queue_free()

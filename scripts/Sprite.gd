@@ -41,10 +41,15 @@ func _ready():
     if should_duplicate_material and material_override:
         material_override = material_override.duplicate()
     
+export var automatically_change_color = true
 func changeSpriteColorPaletteToLevelPalette():
+    if not automatically_change_color:
+        return
     changeSpriteColorPalette(levelTiles.curr_palette)
 
 func changeSpriteColorPalette(palette, palette_name = ""):
+    if not automatically_change_color:
+        return
     if material_override:
         var material = material_override
         if material is ShaderMaterial:

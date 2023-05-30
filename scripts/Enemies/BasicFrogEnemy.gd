@@ -1,11 +1,11 @@
 extends "GlitchEnemy.gd"
 
 var jump_timer = 0
-var jump_time_limit = 30
+export var jump_time_limit = 30
 var water_jump_time_limit = 10
 
 var air_timer = 0
-var air_time_limit = 15
+export var air_time_limit = 15
 var spawn_timer = 0
 var spawn_time_limit = 15
 
@@ -41,6 +41,9 @@ func setAsParent(_owner):
 func _process(delta):
   if not visible:
     return
+
+  if am_i_in_range_of_player:
+    override_am_i_in_range_of_player = true
 
   if is_infected:
     if mySprite2:
@@ -82,7 +85,7 @@ func _process(delta):
     spawn_timer = 0
     behavior_jumping = false
 
-    if behavior_walking:
+    if behavior_walking and air_time_limit > 0:
       air_timer += (delta * 22)
       if air_timer >= air_time_limit:
         behavior_walking = false
@@ -138,7 +141,8 @@ func getSmacked(broom_origin):
   # is_static = false
   pauseSelf = true
   on_ground = true
-  notDieSound.play()
+  if notDieSound and not notDieSound.is_playing():
+    notDieSound.play()
 
 func fallthroughCollisionActivate(friend):
   if not friend.on_ground:

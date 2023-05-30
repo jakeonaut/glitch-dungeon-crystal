@@ -891,7 +891,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
         fallenBroom.grav = 600
         fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
     global.memory["broom"] = false
-    print(fallenBroom.walk_direction)
+    # print(fallenBroom.walk_direction)
 
     if mySprite.flip_h and was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)

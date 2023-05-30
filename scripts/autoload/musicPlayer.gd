@@ -37,7 +37,7 @@ func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):
     #     initial_volume_dbs[stream_player.name] = stream_player.volume_db
         
-    print("try to play: " + stream_player.name)
+    # print("try to play: " + stream_player.name)
         
     if stream_player.name == null:
         return

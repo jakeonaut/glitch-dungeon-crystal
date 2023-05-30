@@ -116,8 +116,8 @@ func _process(delta):
         should_collide_horizontally = false
         should_do_fallthrough_area_collision = false
     else:
-        should_collide_floor = not on_ground or behavior_walking
-        should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1)
+        should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
+        should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
         should_collide_horizontally = behavior_walking and walk_direction.x != 0
         
     
@@ -246,9 +246,10 @@ func tryDieToOffscreenCamera():
             setGlobalMemoryOfHasBeenDefeated()
             queue_free()
     
+var override_am_i_in_range_of_player = false
 # @override
 func processPhysics(delta):
-    if not am_i_in_range_of_player:
+    if not am_i_in_range_of_player and not override_am_i_in_range_of_player:
         return
     elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
         return
@@ -296,14 +297,15 @@ func pressingMoveRight():
 func justPressedJump():
     if am_i_dying: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
+
 # @override
 func pressingJump():
     if am_i_dying: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
-    
+
 # @override
 func isKindOfOnGround():
-    if behavior_walking:
+    if behavior_walking and walk_direction.y != 0:
         return walk_direction.y == 1
     else:
         return .isKindOfOnGround()
@@ -405,7 +407,7 @@ func getSmacked(_broom_origin):
     if is_smacked:
         return
 
-    if notDieSound: notDieSound.play()
+    if notDieSound and not notDieSound.is_playing(): notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
     mySprite.material_override.set_shader_param("normal_offset", normal_offset)

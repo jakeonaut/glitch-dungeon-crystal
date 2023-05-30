@@ -15,7 +15,7 @@ var vulnerableSprite = preload("res://assets/glitches/dither3.png")
 export var metamorphosis_on_range = false
 
 var idle_timer = 0
-var idle_time_limit = 30
+var idle_time_limit = 10
 var hurt_timer = 0
 var hurt_time_limit = 30
 var calm_down_counter = 0
@@ -71,7 +71,7 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             boss_state = BossState.JUMP
             behavior_jumping = true
-            behavior_walking = true
+            #behavior_walking = true
             secretAniPlayer.stop()
             secretAniPlayer.queue("jumpStart")
             secretAniPlayer.queue("jumpFall")

@@ -148,7 +148,6 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
 show_crt_effect = true
-tileset_type = 2
 how_much_mp = 0
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
@@ -297,6 +296,7 @@ tiny_textbox = true
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 5, 0 )
+sprite_offset_y = 0.0
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0.4, 0 )

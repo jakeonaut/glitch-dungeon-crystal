@@ -37,7 +37,6 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 4 )
 starting_glitch_type = 1
-tileset_type = 1
 how_much_mp = 0
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 10 )]

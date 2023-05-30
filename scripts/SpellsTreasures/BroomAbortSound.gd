@@ -16,7 +16,7 @@ func activateScript():
     aniPlayer.queue("stand")
     level.player.getABroom()
         
-    level.restartMusic()
+    # level.restartMusic()
     # level.saveTheGame()
 
     broom.queue_free()
