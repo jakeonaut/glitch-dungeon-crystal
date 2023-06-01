@@ -27,8 +27,7 @@ func getPlayer():
 func _ready():
     set_process(true)
 
-    print(global_transform.origin)
-    original_pos = global_transform.origin
+    original_pos = spawn_origin
     randomizeTargetPos()
     
     # flightPathAniPlayer.play("flySquare")

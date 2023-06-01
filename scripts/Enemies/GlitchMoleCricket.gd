@@ -69,6 +69,10 @@ func getSmacked(broom_origin):
     lv.y = 0
     smallInteractionArea.add_to_group("no_pushems")
 
+func shouldIDoCollisions():
+    .shouldIDoCollisions()
+    should_collide_floor = should_collide_floor or mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE
+
 func _process(delta):
     # ._process(delta) implicit
 

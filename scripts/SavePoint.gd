@@ -105,8 +105,8 @@ func passiveActivate(_delta):
         level.player.is_mushroom_infected = false
         level.player.summonSmokeClouds(2, true, true)
         musicPlayer.changeSongPitch(1.0)
-    if not global.memory["broom"]:
-        level.player.getABroom()
+        if not global.memory["broom"]:
+            level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
     if not isOnSavePoint():
         saveSound.play()

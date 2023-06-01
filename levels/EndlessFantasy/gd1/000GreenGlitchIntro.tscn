@@ -219,7 +219,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 262146, 0, 36, 327688, 0, 2, 655367, 0, 36, 983037, 0, 2, -131072, 0, 36 )
+"cells": PoolIntArray( 262146, 0, 36, 655367, 0, 36, 983037, 0, 2, -131072, 0, 36 )
 }
 script = ExtResource( 1 )
 __meta__ = {
@@ -286,12 +286,13 @@ shape = SubResource( 17 )
 shape = SubResource( 16 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, 2.7, 0 )
 grav = 0
 bbText = "GREEN can jump
 high by holding [Z]"
 can_camera_zoom = false
 is_a_body = false
+floating_text = true
 tiny_textbox = true
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
@@ -300,9 +301,6 @@ sprite_offset_y = 0.0
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0.4, 0 )
-
-[node name="FeatherSpell2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 10.4, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )

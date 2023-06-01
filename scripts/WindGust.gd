@@ -3,7 +3,7 @@ extends Sprite3D
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
-  #self.visible = false
+  self.visible = false
   set_process(true)
 
 var cloud_timer = 0
@@ -23,8 +23,8 @@ func summonSmokeClouds(num_clouds):
         newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
         newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(-2, 2)
         newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(2, 8)
-        newSmokeCloud.get_material_override().set_shader_param("opacity", 0.2)
-        newSmokeCloud.get_material_override().set_shader_param("target_palette", global.dream_palette)
+        # newSmokeCloud.get_material_override().set_shader_param("opacity", 0.2)
+        # newSmokeCloud.get_material_override().set_shader_param("target_palette", global.dream_palette)
     
 
 func getDirection():
@@ -41,4 +41,5 @@ func isActive():
   return true
 
 func passiveActivate(_delta):
-  level.player.getDustInfected()
+  # level.player.getDustInfected()
+  pass

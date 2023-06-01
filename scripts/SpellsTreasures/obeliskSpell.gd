@@ -32,7 +32,7 @@ func getLevelTiles():
 
 var is_touching_player = false
 var is_touching_player_timer = 0
-var is_touching_player_time_limit = 5
+var is_touching_player_time_limit = 15
 var player = null
 func getPlayer():
   if player == null:
@@ -60,9 +60,9 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
-  if is_active and not shouldIBeActive():
+  if is_active and not shouldIBeActive() and not is_touching_player:
     is_active = false
-    # mySprite.visible = false
+    mySprite.visible = false
     t = 0
 
   # if mySprite.visible and not is_active:
@@ -72,8 +72,8 @@ func _process(delta):
   #     mySprite.visible = false
   #     t = 0
 
-  # if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
-  #   mySprite.visible = true
+  if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
+    mySprite.visible = true
   if is_touching_player:
     is_touching_player_timer += (delta*22)
     if is_touching_player_timer >= is_touching_player_time_limit:
@@ -125,7 +125,7 @@ func shouldIBeActive():
     return true
 
 func isActive():
-  return self.visible
+  return self.visible and is_active and shouldIBeActive()
 
 func activate():
   if level.player.glitch_form != my_glitch_form:

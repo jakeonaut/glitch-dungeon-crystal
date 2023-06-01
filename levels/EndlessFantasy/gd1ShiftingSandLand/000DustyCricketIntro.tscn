@@ -180,7 +180,7 @@ shape = SubResource( 16 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 9, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false

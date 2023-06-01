@@ -103,6 +103,11 @@ func _ready():
 
     mySprite.material_override = mySprite.material_override.duplicate()
 
+func shouldIDoCollisions():
+    should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
+    should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
+    should_collide_horizontally = behavior_walking and walk_direction.x != 0
+
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
@@ -116,9 +121,7 @@ func _process(delta):
         should_collide_horizontally = false
         should_do_fallthrough_area_collision = false
     else:
-        should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
-        should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
-        should_collide_horizontally = behavior_walking and walk_direction.x != 0
+        shouldIDoCollisions()
         
     
     if am_i_dying:
