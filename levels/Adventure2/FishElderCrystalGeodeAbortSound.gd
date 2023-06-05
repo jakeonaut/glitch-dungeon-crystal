@@ -20,7 +20,7 @@ func activateScript():
     
     # i love when nodes have to know about other nodes intimates... gossip girls much
     global.activeInteractor = null
-    newDoor.hasPlayedDoorSound = true
+    newDoor.canPlayDoorSound = false
     newDoor.goThroughDoor()
 
 func isActive():

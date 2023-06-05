@@ -169,7 +169,7 @@ func wearCostume(costume):
 # @override
 func pressingRun():
   return Input.is_action_pressed("sub_action_button") and summonedBroom == null or \
-         (is_mushroom_infected and mushroom_turn_timer > 0)
+         (is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
   
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
@@ -380,6 +380,7 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
+      global_transform.origin.y += 2
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY

@@ -273,12 +273,17 @@ func applyGravity(delta):
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
-    if not pressingJump():
-      g = Vector3(0, -grav/2, 0)
-    else:
+    if pressingJump():
       g = Vector3(0, -grav/3, 0)
+    elif pressingDown():
+      g = Vector3(0, -grav*2, 0)
+    else:
+      g = Vector3(0, -grav/2, 0)
   else:
-    g = Vector3(0, -grav, 0)
+    if pressingDown():
+      g = Vector3(0, -grav*2, 0)
+    else:
+      g = Vector3(0, -grav, 0)
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
     lv += g * delta
@@ -322,7 +327,7 @@ func applyTerminalVelocity(_delta):
     if pressingJump():
       terminal_vel = true_terminal_feather_vel
     elif pressingDown():
-      terminal_vel = true_terminal_vel
+      terminal_vel = true_terminal_vel * .75
     else:
       terminal_vel = true_terminal_vel / 2
   else:
@@ -941,6 +946,8 @@ func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, se
     sensor.y += local_lv.y
     if local_lv.y == 0 and glitch_form == global.GlitchForm.FLOOR:
       sensor.y -= 0.125
+    # if local_lv.y == 0 and glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall():
+    #   sensor.y += 0.125
   else:
     sensor.x += local_lv.x
   var tile_pos_and_type = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
@@ -1121,7 +1128,7 @@ func handleVerticalCollisions(local_lv):
     local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
 
   # check for top collisions
-  if should_collide_ceil and not on_ground and local_lv.y > 0:
+  if should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y > 0:
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
   

@@ -55,8 +55,8 @@ func _process(delta):
         global.activeInteractor = textBox # also weird but this is to get the camera to look at me
   elif really_being_collected:
     level.player.dir = Vector3(0, 0, 0)
-    if not level.player.on_ground:
-      return
+    # if not level.player.on_ground:
+    #   return
     # TODO(jaketrower): kinda hacky...
     if level.player.aniPlayer.assigned_animation == "getItem":
       if level.player.aniPlayer.is_playing():
@@ -110,6 +110,7 @@ func passiveActivate(_delta):
       secretAniPlayer.queue("openUp")
       secretAniPlayer.queue("idle")
     global.pauseMoveInput = true
+    global.pauseGame = true
     being_collected = true
     
     if is_static_in_level:

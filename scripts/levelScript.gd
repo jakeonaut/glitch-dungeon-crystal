@@ -76,6 +76,9 @@ func _ready_impl():
   tryToRespawn()
   setUpRoomInitializationOverride()
   global.tryInitializeLevelZone(self.getLevelZoneName())
+  if global.hasGottenLevelGeode:
+    levelTiles.randomize_num += 10
+    levelTiles.randomize_num_counter = 15
 
   global.activeThrowableObject = null
   if global.activeThrowableObjectPath != null:

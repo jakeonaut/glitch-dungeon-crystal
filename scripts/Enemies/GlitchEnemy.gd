@@ -58,7 +58,13 @@ export var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    set_process_input(true)
+    set_process(true)
+    set_physics_process(true)
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+        set_process_input(false)
+        set_process(false)
+        set_physics_process(false)
         yield(get_tree(), "idle_frame")
         yield(get_tree(), "idle_frame")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
@@ -69,9 +75,7 @@ func _ready():
         queue_free()
         return
 
-    set_process_input(true)
-    set_process(true)
-    set_physics_process(true)
+    
 
     if walk_speed == 8:
         walk_speed = 3 # ????????????????????? TODO(jaketrower): Why?

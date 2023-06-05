@@ -20,7 +20,7 @@ onready var doorCloseSound = get_node("DoorCloseSound")
 onready var doorOpenSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
 
-var hasPlayedDoorSound = false
+var canPlayDoorSound = true
 
 var spawn_timer = 0
 var spawn_time_limit = 5
@@ -206,9 +206,11 @@ func justStopPassiveActivate():
   getPlayer().hideInteractPrompt()
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
-  if not global.isEnteringRoom and not hasPlayedDoorSound:
+  if global.isEnteringRoom:
+    return
+
+  if canPlayDoorSound:
     global.doorSound.play()
-    hasPlayedDoorSound = true
 
   if not is_passive:
     getPlayer().global_transform.origin = self.global_transform.origin
@@ -268,6 +270,7 @@ func land():
   
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y
+  getPlayer().target_last_grounded_y = landing.global_transform.origin.y
 
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
 
@@ -294,7 +297,6 @@ func land():
     global.memory["active_save_point_z"] = self.translation.z
     global.memory["savedRoomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
       
-  getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
   global.memory["roomPath"] = level.getLevelName()
 
 func setGlobalMemoryOfHasUnlocked():

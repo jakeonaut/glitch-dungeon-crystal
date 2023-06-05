@@ -1393,7 +1393,7 @@ shader_param/target_palette = ExtResource( 36 )
 [node name="Player" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.146, 0 )
 script = ExtResource( 1 )
-true_terminal_vel = 12
+true_terminal_vel = 14
 grav = 28
 walk_speed = 6
 run_speed = 8

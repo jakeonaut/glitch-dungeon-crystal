@@ -211,7 +211,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48445, 0, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 11.5, 0 )
 grav = 0
-bbText = "SWEEP IT! [X]"
+bbText = "[wave]SWEEP IT! [X][/wave]"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true

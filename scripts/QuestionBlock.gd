@@ -22,7 +22,7 @@ func isActive():
   
 func passiveActivate(_delta):
   if not has_been_hit:
-    if player.linear_velocity.y < 0 or player.justPressedJump():
+    if (player.linear_velocity.y <= 0 and not player.on_ground) or player.justPressedJump():
       aniPlayer.play("hit")
       performSpawn()
     # elif player.linear_velocity.y > 0:

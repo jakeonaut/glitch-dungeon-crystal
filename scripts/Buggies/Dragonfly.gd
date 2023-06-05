@@ -13,15 +13,25 @@ export var is_static_in_level = true
 var is_smacked = false
 var smack_timer = 0
 export var smack_time_limit = 2
+var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    is_static_in_level = false # TODO(jaketroweR): :-)
+    # is_static_in_level = false # TODO(jaketroweR): :-)
 
+    set_process(true)
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+        set_process(false)
+        yield(get_tree(), "idle_frame")
+        yield(get_tree(), "idle_frame")
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = global.getStaticLevelZoneLevelVar(level, self.name)
+        miniCubeCrystal.addPlusSprite()
+        miniCubeCrystal.queue_free()
         queue_free()
         
-    set_process(true)
+    
     
     original_pos = global_transform.origin
     randomizeTargetPos()
@@ -85,12 +95,15 @@ func passiveActivate(_delta):
         )
         
         if is_static_in_level:
-            global.setStaticLevelZoneLevelVar(level, self.name, true)
+            global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)
 
 export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 func getSmacked(_broom_origin):
+    if is_smacked:
+        return
+
     if catchSound: catchSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
@@ -103,3 +116,12 @@ func getSmacked(_broom_origin):
     else:
         target_pos = self.global_transform.origin + Vector3(3, 6, 0)
     mySprite.flip_h = (target_pos.x < global_transform.origin.x)
+
+    var miniCubeCrystal = miniCubeCrystalRes.instance()
+    miniCubeCrystal.is_static_in_level = false
+    level.add_child(miniCubeCrystal)
+    miniCubeCrystal.global_transform.origin = self.global_transform.origin
+    miniCubeCrystal.passiveActivate(0)
+
+    if is_static_in_level:
+        global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)

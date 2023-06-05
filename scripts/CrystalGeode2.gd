@@ -37,9 +37,9 @@ func _process(delta):
             self.rotation_degrees.y -= (delta * rot_amount)
             self.global_transform.origin.y += (delta * 1)
         else:
-            # global.pauseGame = false
+            global.pauseGame = false
             stop()
-            transition.long_fade_to(self.path)
+            # transition.long_fade_to(self.path)
 
 func stop():
     self.rotation_degrees.y = 0 
