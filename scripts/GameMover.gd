@@ -104,6 +104,7 @@ var hv = lv - up * vv # horizontal velocity
 
 export var walk_speed = 8
 export var run_speed = 10
+# export var fast_run_speed = 12
   
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
@@ -615,12 +616,26 @@ func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
   return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
     
-func getWalkSpeed():
+var run_timer = 0
+var run_time_limit = 10
+func getWalkSpeed(delta):
+  if not pressingRun():
+    run_timer = 0
+
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
-  if pressingRun() and on_ground:
-    return run_speed
-  elif glitch_form == global.GlitchForm.FEATHER:
+  if pressingRun():
+    if on_ground:
+      run_timer += (delta*22)
+
+    # if run_timer >= 10:
+    #  return fast_run_speed
+    if run_timer >= 0:
+      return run_speed
+    else:
+      pass
+
+  if glitch_form == global.GlitchForm.FEATHER:
     return feather_glitch_walk_speed
   elif glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed
@@ -786,7 +801,7 @@ func processHorizontalInputs(delta):
   if swimming_walk_speed == null:
     swimming_walk_speed = 6
 
-  var curr_walk_speed = getWalkSpeed()
+  var curr_walk_speed = getWalkSpeed(delta)
 
   # update x and z
   if not is_touching_water or horizontal_input:

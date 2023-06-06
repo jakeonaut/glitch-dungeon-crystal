@@ -445,6 +445,9 @@ func properlySetTiles():
     var tile_orientation = tile_dict[cell_index][1]
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
 
+    if global.hasGottenLevelGeode:
+      randomizeTile(cell_index, getRandomGlitchType())
+
 func setTileset(tileset_type, properly_set_tiles = true):
   my_tileset_type = tileset_type
   level.setTorchSpriteFrame(0)

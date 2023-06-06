@@ -18,7 +18,10 @@ func _ready():
     set_process(true)
     if global.hasGottenLevelGeode:
         aniPlayer.play("quick_explode")
+        yield(get_tree(), "idle_frame")
+        yield(get_tree(), "idle_frame")
         stop()
+        otherActivateStuff()
 
 func _process(delta):
     if not can_do_my_power:
@@ -38,6 +41,7 @@ func _process(delta):
             self.global_transform.origin.y += (delta * 1)
         else:
             global.pauseGame = false
+            level.restartMusic()
             stop()
             # transition.long_fade_to(self.path)
 
@@ -49,11 +53,13 @@ func stop():
     npc.mySprite.max_frames = 2
     # npc.is_active = true
     can_do_my_power = false
+    # level.levelTiles.randomize_num = 1
+    # level.levelTiles.randomize_num_counter = 0
 
 
 
 func isActive():
-    return visible and not has_been_smacked
+    return visible and not has_been_smacked and not global.hasGottenLevelGeode
 
 func activate():
     level.levelTiles.randomize_num += 10
@@ -65,6 +71,9 @@ func activate():
     getHitSound2.play()
 
     level.get_node("SavePoint").passiveActivate(0)
+    otherActivateStuff()
+
+func otherActivateStuff():
     # TODO(jaketrower): Make more generic, this is specific to fishingVillage
     if level.has_node("NPC"):
         level.get_node("NPC").queue_free()

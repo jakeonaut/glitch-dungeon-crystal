@@ -794,18 +794,19 @@ func landed():
   summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
-  # var lt = getLevelTiles()
-  # var original_y = global_transform.origin.y
-  # for _i in range(4):
-  #   var tiles = getTilesBelow(lt)
-  #   if tiles[0] != null:
-  #     lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
-  #   if tiles[1] != null:
-  #     lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
-  #   if tiles[2] != null:
-  #     lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
-  #   global_transform.origin.y -= 1
-  # global_transform.origin.y = original_y
+  if global.hasGottenLevelGeode:
+    var lt = getLevelTiles()
+    var original_y = global_transform.origin.y
+    for _i in range(4):
+      var tiles = getTilesBelow(lt)
+      if tiles[0] != null:
+        lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+      if tiles[1] != null:
+        lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+      if tiles[2] != null:
+        lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+      global_transform.origin.y -= 1
+    global_transform.origin.y = original_y
     
 func broomStop():
   # CHEAT CODE

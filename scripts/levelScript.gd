@@ -71,11 +71,11 @@ func _ready_impl():
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
 
-  restartMusic()
   tryShowUIElements()
   tryToRespawn()
   setUpRoomInitializationOverride()
   global.tryInitializeLevelZone(self.getLevelZoneName())
+  restartMusic()
   if global.hasGottenLevelGeode:
     levelTiles.randomize_num += 10
     levelTiles.randomize_num_counter = 15

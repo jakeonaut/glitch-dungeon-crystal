@@ -223,6 +223,7 @@ having a basement..\""
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 7.3, 0 )
 grav = 0
+fast_run_speed = null
 bbText = "press DOWN to
 go through door"
 can_camera_zoom = false
