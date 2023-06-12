@@ -132,7 +132,7 @@ func _process(delta):
       
     if isWaitingForNextPrompt():
       if not ui_should_continue:
-        nextPrompt.visible = not is_tiny and not floating_text
+        nextPrompt.visible = not floating_text
         return
       ui_should_continue = false
 

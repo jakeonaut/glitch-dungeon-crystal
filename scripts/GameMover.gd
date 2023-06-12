@@ -290,7 +290,7 @@ func applyGravity(delta):
     lv += g * delta
     if glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water:
       fall_timer += (delta*22)
-    else:
+    elif glitch_form == global.GlitchForm.FEATHER or vv > 0:
       fall_timer = 0
     if lv.y < 0:
       if not on_ground and not pauseAnimation and aniPlayer:
@@ -873,10 +873,6 @@ func handleCollisionsAndMove(local_lv, delta):
   global_transform.origin.y += local_lv.y / velocity_dampener
 
   handleSpikeCollisions(delta)
-  
-  if on_ground:
-    if was_on_ground:
-      fall_timer = 0
   
   local_lv.x /= delta*DNUM
   local_lv.y /= delta*DNUM

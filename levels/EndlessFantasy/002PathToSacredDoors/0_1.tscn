@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -774,6 +774,14 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=80]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=81]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -783,7 +791,6 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 4 )
-starting_glitch_type = 1
 tileset_type = 2
 how_much_mp = 10
 
@@ -1070,6 +1077,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -13, 0 )
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -13, 0 )
 
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -15, 0 )
+bbText = "hmm... where are we?"
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 80 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+frame = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 81 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
@@ -1095,4 +1116,6 @@ visible = true
 [editable path="Viewport/level/QuestionBlock/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="ScreenEffects"]

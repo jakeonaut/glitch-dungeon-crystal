@@ -584,7 +584,7 @@ func processBagLogic(_delta):
 
 func processBroomLogic(_delta):
   if not global.memory["broom"]:
-    if global.memory["has_gotten_broom"] and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       noBroomSound.play()
     return
 
@@ -906,7 +906,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
 
 func getABroom():
   global.memory["broom"] = true
-  global.memory["has_gotten_broom"] = true
+  global.memory["has_gotten_broom"] = 2
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   can_smack_npc = true
 
