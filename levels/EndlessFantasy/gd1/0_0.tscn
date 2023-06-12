@@ -378,6 +378,7 @@ shape = SubResource( 24 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.6, 0 )
+first_ever_glitch = true
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 0 )

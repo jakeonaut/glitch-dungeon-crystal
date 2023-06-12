@@ -63,11 +63,11 @@ func _ready_impl():
     global.memory["max_hp"] = how_much_hp
     global.memory["hp"] = global.memory["max_hp"]
     
-  if global.memory["has_gotten_broom"]:
+  if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true
-  if doesnt_have_broom:
+  if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false
-    global.memory["has_gotten_broom"] = false
+    global.memory["has_gotten_broom"] = 0
 
   if global.memory.has("current_glitch") and not should_glitch_activate:
     if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:

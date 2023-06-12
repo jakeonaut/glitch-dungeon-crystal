@@ -242,7 +242,7 @@ func getWalkSpeed(delta):
   if is_mushroom_infected:
     run_timer = 0
     return 3 if mushroom_turn_timer > 0 else 5
-  elif not global.memory["broom"] and global.memory["has_gotten_broom"]:
+  elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     run_timer = 0
     return 5 if pressingRun() and on_ground else 4
   else:
