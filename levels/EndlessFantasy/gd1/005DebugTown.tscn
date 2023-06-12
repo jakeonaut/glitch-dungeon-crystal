@@ -1297,9 +1297,6 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
 num_keys_unlock = 1
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 53 )
 anims/doorOpen = SubResource( 54 )
@@ -1316,9 +1313,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 num_keys_unlock = 1
 
-[node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
-visible = false
-
 [node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 98 )
 anims/doorOpen = SubResource( 99 )
@@ -1332,11 +1326,9 @@ shape = SubResource( 16 )
 
 [node name="Door8" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3, 7, 0 )
+is_locked = true
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 num_keys_unlock = 1
-
-[node name="Sprite3D2" parent="Viewport/level/Door8" index="1"]
-visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door8" index="4"]
 anims/doorClose = SubResource( 104 )

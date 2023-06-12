@@ -583,8 +583,8 @@ func processBagLogic(_delta):
   pass
 
 func processBroomLogic(_delta):
-  if not (global.memory.has("broom") and global.memory["broom"]):
-    if Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
+  if not global.memory["broom"]:
+    if global.memory["has_gotten_broom"] and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       noBroomSound.play()
     return
 
@@ -708,7 +708,7 @@ func processBroomRenderLogic(_delta):
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()
-  elif global.memory.has("broom") and global.memory["broom"]:
+  elif global.memory["broom"]:
     broomSpriteVisible.visible = true
   else:
     broomSpriteVisible.visible = false
@@ -858,7 +858,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
   broomSpriteVisible.visible = false
   summonSmokeClouds(5, false, false)
 
-  if global.memory.has("broom") and global.memory["broom"]:
+  if global.memory["broom"]:
     var fallenBroom = fallenBroomRes.instance()
     level.add_child(fallenBroom)
     if not can_smack_npc:
@@ -906,6 +906,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
 
 func getABroom():
   global.memory["broom"] = true
+  global.memory["has_gotten_broom"] = true
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   can_smack_npc = true
 

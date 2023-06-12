@@ -214,7 +214,7 @@ func setDisplayTitle(title):
 
 onready var glitchSprite = get_node("GlitchSprite")
 func normalGlitch():
-  # glitchSprite.visible = false
+  glitchSprite.visible = false
   glitchSprite.frame = 0
 
 func glitch(_palette):

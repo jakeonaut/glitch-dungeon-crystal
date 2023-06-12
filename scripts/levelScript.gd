@@ -27,11 +27,13 @@ export var how_much_mp = 5
 export var how_much_hp = 1
 
 export var display_title = "???"
+export var doesnt_have_broom = false
 
 func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   _ready_impl()
 
+export var is_randomizing = false
 func _ready_impl():
   get_node("..").audio_listener_enable_3d = true
 
@@ -61,7 +63,12 @@ func _ready_impl():
     global.memory["max_hp"] = how_much_hp
     global.memory["hp"] = global.memory["max_hp"]
     
-  global.memory["broom"] = true
+  if global.memory["has_gotten_broom"]:
+    global.memory["broom"] = true
+  if doesnt_have_broom:
+    global.memory["broom"] = false
+    global.memory["has_gotten_broom"] = false
+
   if global.memory.has("current_glitch") and not should_glitch_activate:
     if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
       player.applyGlitch(global.memory["current_glitch"], true)
@@ -76,7 +83,7 @@ func _ready_impl():
   setUpRoomInitializationOverride()
   global.tryInitializeLevelZone(self.getLevelZoneName())
   restartMusic()
-  if global.hasGottenLevelGeode:
+  if global.hasGottenLevelGeode or is_randomizing:
     levelTiles.randomize_num += 10
     levelTiles.randomize_num_counter = 15
 

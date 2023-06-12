@@ -217,7 +217,7 @@ shape = SubResource( 16 )
 [node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 frame = 4
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
@@ -249,10 +249,10 @@ can_activate = false
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
 flip_h = true
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
 anims/default = SubResource( 17 )
 anims/flickerOn = SubResource( 18 )
 
@@ -280,27 +280,21 @@ shape = SubResource( 25 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 16, 0 )
-grav = 0
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 22, 0 )
-grav = 0
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 19, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 2, 0 )
-grav = 0
 
 [node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 8, 0 )
-grav = 0
 
 [node name="GlitchEnemy9" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, 0 )
-grav = 0
 
 [node name="HeartContainer" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 26, 0 )

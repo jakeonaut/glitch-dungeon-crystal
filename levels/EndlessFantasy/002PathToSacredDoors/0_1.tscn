@@ -8,7 +8,7 @@
 [ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
-[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=9]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=12]
@@ -802,38 +802,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 16 )]
 
-[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 5 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 7, 1 )
-}
-tileset_type = 1
-
-[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
-mesh_library = ExtResource( 8 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-collision_layer = 0
-collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
-script = ExtResource( 7 )
-__meta__ = {
-"_editor_clip_": 0
-}
-
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 5 )
@@ -976,6 +944,9 @@ vframes = 8
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
 path = "res://levels/EndlessFantasy/gd1/0_0.tscn"
 
+[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
+visible = false
+
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 shape = SubResource( 15 )
@@ -1051,10 +1022,7 @@ hframes = 8
 vframes = 8
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9, 0 )
-
-[node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -11, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.5666, 0 )
 
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
@@ -1095,6 +1063,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -5, 0 )
 
 [node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -13, 0 )
+
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -13, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

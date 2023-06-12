@@ -150,6 +150,7 @@ func _ready():
     if hasGottenLevelGeode: pass
 
     memory["broom"] = true
+    memory["has_gotten_broom"] = true
     memory["nesting_doll"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]

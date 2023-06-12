@@ -992,7 +992,6 @@ visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
 dont_recolor_me = true
-num_cubes_unlock = 20
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
@@ -1019,7 +1018,6 @@ visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
 dont_recolor_me = true
-num_cubes_unlock = 20
 
 [node name="Sprite3D" parent="Viewport/level/Door3" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
@@ -1046,7 +1044,6 @@ visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
 dont_recolor_me = true
-num_cubes_unlock = 20
 
 [node name="Sprite3D" parent="Viewport/level/Door4" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
@@ -1073,7 +1070,6 @@ visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
 dont_recolor_me = true
-num_cubes_unlock = 20
 
 [node name="Sprite3D" parent="Viewport/level/Door5" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
@@ -1100,7 +1096,6 @@ visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/BubblegloopSwamp/001PoisonShroomSwampCove.tscn"
 dont_recolor_me = true
-num_cubes_unlock = 20
 
 [node name="Sprite3D" parent="Viewport/level/Door6" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
@@ -1150,7 +1145,7 @@ pitch_scale = 0.3
 [node name="AbortSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 14 )
 
-[node name="Sprite3D" parent="Viewport/level/FungusNPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/FungusNPC" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450687, 0 )
 material_override = SubResource( 77 )
 pixel_size = 0.3
@@ -1160,7 +1155,7 @@ should_animate = false
 [node name="CollisionShape" parent="Viewport/level/FungusNPC/FallthroughSolid" index="0"]
 shape = SubResource( 78 )
 
-[node name="InteractPrompt" parent="Viewport/level/FungusNPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 
 [node name="FungusNPC2" parent="Viewport/level" instance=ExtResource( 10 )]
@@ -1193,12 +1188,12 @@ pitch_scale = 0.3
 script = ExtResource( 14 )
 which_one_am_i = 2
 
-[node name="Sprite3D" parent="Viewport/level/FungusNPC2" index="5"]
+[node name="Sprite3D" parent="Viewport/level/FungusNPC2" index="4"]
 material_override = SubResource( 77 )
 pixel_size = 0.16
 frame = 72
 
-[node name="AnimationPlayer" parent="Viewport/level/FungusNPC2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC2" index="5"]
 anims/default = SubResource( 79 )
 anims/flickerOn = SubResource( 80 )
 anims/jump = SubResource( 81 )
@@ -1206,7 +1201,7 @@ anims/jump = SubResource( 81 )
 [node name="CollisionShape" parent="Viewport/level/FungusNPC2/FallthroughSolid" index="0"]
 shape = SubResource( 78 )
 
-[node name="InteractPrompt" parent="Viewport/level/FungusNPC2" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC2" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 
 [node name="FungusNPC3" parent="Viewport/level" instance=ExtResource( 10 )]
@@ -1235,12 +1230,12 @@ pitch_scale = 0.3
 script = ExtResource( 14 )
 which_one_am_i = 3
 
-[node name="Sprite3D" parent="Viewport/level/FungusNPC3" index="5"]
+[node name="Sprite3D" parent="Viewport/level/FungusNPC3" index="4"]
 material_override = SubResource( 77 )
 pixel_size = 0.16
 frame = 72
 
-[node name="AnimationPlayer" parent="Viewport/level/FungusNPC3" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC3" index="5"]
 anims/default = SubResource( 82 )
 anims/flickerOn = SubResource( 83 )
 anims/jump = SubResource( 84 )
@@ -1248,7 +1243,7 @@ anims/jump = SubResource( 84 )
 [node name="CollisionShape" parent="Viewport/level/FungusNPC3/FallthroughSolid" index="0"]
 shape = SubResource( 78 )
 
-[node name="InteractPrompt" parent="Viewport/level/FungusNPC3" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC3" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="FungusNPC4" parent="Viewport/level" instance=ExtResource( 10 )]
@@ -1277,12 +1272,12 @@ pitch_scale = 0.3
 script = ExtResource( 14 )
 which_one_am_i = 4
 
-[node name="Sprite3D" parent="Viewport/level/FungusNPC4" index="5"]
+[node name="Sprite3D" parent="Viewport/level/FungusNPC4" index="4"]
 material_override = SubResource( 77 )
 pixel_size = 0.16
 frame = 72
 
-[node name="AnimationPlayer" parent="Viewport/level/FungusNPC4" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC4" index="5"]
 anims/default = SubResource( 86 )
 anims/flickerOn = SubResource( 87 )
 anims/jump = SubResource( 88 )
@@ -1290,20 +1285,20 @@ anims/jump = SubResource( 88 )
 [node name="CollisionShape" parent="Viewport/level/FungusNPC4/FallthroughSolid" index="0"]
 shape = SubResource( 78 )
 
-[node name="InteractPrompt" parent="Viewport/level/FungusNPC4" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC4" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0147, -15.8261, 0 )
 visible = false
 grav = 0
-walk_direction = Vector2(-1, 0)
+walk_direction = Vector2( -1, 0 )
 
 [node name="GlitchSlime3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8235, -17.9181, 0 )
 visible = false
 grav = 0
-walk_direction = Vector2(-1, 0)
+walk_direction = Vector2( -1, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8936, -7.94293, -0.331177 )
@@ -1349,7 +1344,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/004AngelStatueRestZone.tscn"
-num_cubes_unlock = 50
 
 [node name="Sprite3D2" parent="Viewport/level/AngelDoor" index="1"]
 material_override = SubResource( 30 )
@@ -2150,7 +2144,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -22, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -15, 0 )
-grav = 0
 
 [node name="GlitchFish" parent="Viewport/level" instance=ExtResource( 43 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.3074, 0 )
@@ -2203,11 +2196,9 @@ texture = ExtResource( 37 )
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3347, -0.801764, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2951, 2.09692, 0 )
-grav = 0
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.8922, -13.9601, 0 )
@@ -2281,15 +2272,7 @@ __meta__ = {
 [editable path="Viewport/level/AngelDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/WaterCube19"]
 [editable path="Viewport/level/Waterfall"]
-[editable path="Viewport/level/Waterfall/WaterCube"]
-[editable path="Viewport/level/Waterfall/WaterCube2"]
-[editable path="Viewport/level/Waterfall/WaterCube3"]
-[editable path="Viewport/level/Waterfall/WaterCube4"]
 [editable path="Viewport/level/Waterfall5"]
-[editable path="Viewport/level/Waterfall5/WaterCube"]
-[editable path="Viewport/level/Waterfall5/WaterCube2"]
-[editable path="Viewport/level/Waterfall5/WaterCube3"]
-[editable path="Viewport/level/Waterfall5/WaterCube4"]
 [editable path="Viewport/level/Door7"]
 [editable path="Viewport/level/Door7/NPC/NPC TextBox"]
 [editable path="ScreenEffects"]

@@ -148,6 +148,9 @@ func normalGlitch():
   # mySprite.setNormalClothes()
 
 func changeSpriteColorPalette(palette):
+  if level.spellbook_forbidden:
+    return
+
   var material = mySprite.material_override
   if material is ShaderMaterial:
     material.set_shader_param("target_palette", palette)
@@ -239,7 +242,7 @@ func getWalkSpeed(delta):
   if is_mushroom_infected:
     run_timer = 0
     return 3 if mushroom_turn_timer > 0 else 5
-  elif not global.memory["broom"] or is_dust_infected:
+  elif not global.memory["broom"] and global.memory["has_gotten_broom"]:
     run_timer = 0
     return 5 if pressingRun() and on_ground else 4
   else:

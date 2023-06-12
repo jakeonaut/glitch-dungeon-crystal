@@ -53,7 +53,7 @@ func _process(delta):
         var x2 = level.player.global_transform.origin.x
         global_transform.origin.x = x1 + (x2 - x1) * (delta * 5) 
         var is_x_the_same = false
-        if stepify(x1, 1) == stepify(x2, 1):
+        if stepify(x1, 2) == stepify(x2, 2):
             global_transform.origin.x = x2
             is_x_the_same = true
 
@@ -61,7 +61,7 @@ func _process(delta):
         var y2 = level.player.global_transform.origin.y
         global_transform.origin.y = y1 + (y2 - y1) * (delta * 5) 
         var is_y_the_same = false
-        if stepify(y1, 1) == stepify(y2, 1):
+        if stepify(y1, 2) == stepify(y2, 2):
             global_transform.origin.y = y2
             is_y_the_same = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://assets/npcs/frogportrait.png" type="Texture" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=21]
@@ -230,26 +229,14 @@ you?
 bye!"
 tiny_textbox = true
 
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5.33269, 0 )
-
 [node name="FeatherSpell2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4637, 10.3327, 0 )
-
-[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.35069, 0 )
 
 [node name="FloorSpell2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5363, 13.3327, 0 )
 
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5363, 1.3327, 0 )
-
-[node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88134, 3.44248, 0 )
-
-[node name="InvisibleSpell2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88134, 8.3507, 0 )
 
 [node name="FloorSpell3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5363, 30.3327, 0 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -20,7 +20,60 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=20]
-[ext_resource path="res://sceneObjects/Enemies/BigFrogEnemy.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Animation" id=29]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=31]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=33]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="Animation" id=20]
 resource_name = "doorClose"
@@ -223,9 +276,18 @@ having a basement..\""
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 7.3, 0 )
 grav = 0
-fast_run_speed = null
 bbText = "press DOWN to
 go through door"
+can_camera_zoom = false
+is_a_body = false
+floating_text = true
+tiny_textbox = true
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 3.4, 0 )
+grav = 0
+bbText = "press Z
+to jump!"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
@@ -257,6 +319,26 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, -2, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/002PathToSacredDoors/0_1.tscn"
 num_keys_unlock = 2
+
+[node name="Door4" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 33.9, 0 )
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
+is_passive = true
+is_vertical = true
+
+[node name="landing" parent="Viewport/level/Door4" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+anims/doorClose = SubResource( 29 )
+anims/doorOpen = SubResource( 30 )
+anims/locked = SubResource( 31 )
+
+[node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
+shape = SubResource( 32 )
+
+[node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 33 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2, 0 )
@@ -296,7 +378,6 @@ shape = SubResource( 24 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.6, 0 )
-first_ever_glitch = true
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 0 )
@@ -306,10 +387,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2.9, 0 )
 
 [node name="SmallKey2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.1, 2.9, 0 )
-
-[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3, 3.6, 0 )
-sprite_offset_y = 0.625
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]
 
@@ -336,6 +413,8 @@ flip_v = true
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
+[editable path="Viewport/level/Door4"]
+[editable path="Viewport/level/Door4/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]

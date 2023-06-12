@@ -102,8 +102,10 @@ func conductFromScenePath(path):
 
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("CozyHome") > 0 or path.find("000FrogWizardIntro") > 0:
+    if path.find("CozyHome") > 0 or path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
+        changeSongPitch(0.9)
         tryToPlay(grannyPlayer)
+        return
     elif path.find("RestZone") > 0:
         tryToPlay(restZonePlayer)
     elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0 or path.find("DebugTown") > 0:
@@ -112,10 +114,6 @@ func conductFromScenePath(path):
         tryToPlay(bossThemePlayer)
     # elif path.find("IntroScene0") > 0 or path.find("000") > 0:
     #     tryToPlay(wakeupPlayer)
-    elif path.find("IntroDungeon") > 0:
-        tryToPlay(dungeonThemePlayer)
-    elif path.find("001Your") > 0:
-        tryToPlay(dungeonThemePlayer2)
     elif path.find("Debug") > 0:
         tryToPlay(debugThemePlayer)
     elif path.find("Casino") > 0:
@@ -134,6 +132,10 @@ func conductFromScenePath(path):
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0:
         tryToPlay(titleThemePlayer)
+    elif path.find("IntroDungeon") > 0:
+        tryToPlay(dungeonThemePlayer)
+    elif path.find("001Your") > 0  or path.find("gd1"):
+        tryToPlay(dungeonThemePlayer2)
     else:
         self.stopAll()
     changeSongPitch(1.0)
