@@ -30,6 +30,7 @@ var black_palette_town = preload("res://assets/palettes/black_palette_town.png")
 var black_palette_alien = preload("res://assets/palettes/black_palette_alien.png")
 
 var tidepool_palette = preload("res://assets/palettes/tidepool_palette.png")
+var bog_water_palette = preload("res://assets/palettes/bog_water_palette2.png")
 var green_tidepool_palette = preload("res://assets/palettes/green_tidepool_palette.png")
 var red_tidepool_palette = preload("res://assets/palettes/red_tidepool_palette.png")
 var yellow_tidepool_palette = preload("res://assets/palettes/yellow_tidepool_palette.png")

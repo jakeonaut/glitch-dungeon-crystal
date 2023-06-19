@@ -40,6 +40,7 @@ export var is_static_in_level = true
 
 var pressing_move_left = false
 var pressing_move_right = false
+export var is_wiggling_fast = false
 
 # @override
 func pressingMoveLeft():
@@ -55,6 +56,9 @@ func _ready():
   set_physics_process(true)
 
   mySprite.material_override = mySprite.material_override.duplicate()
+  mySprite.should_randomize_frame_delay = false
+  if is_wiggling_fast:
+    mySprite.frame_delay = 0.2
 
   if floating_text or not is_a_body and smallerInteractionArea:
     smallerInteractionArea.add_to_group("no_pushems")
@@ -214,11 +218,12 @@ func pressingJump():
   return pressing_jump
 
 func idleTalk():
-  mySprite.frame_delay = 1.6
-  mySprite.should_randomize_frame_delay = false
+  if not is_wiggling_fast:
+    mySprite.frame_delay = 1.6
 
 func imAnNpc():
   return true
 
 func appendNextTextCharacter():
-  mySprite.frame_delay = 0.2
+  if not is_wiggling_fast:
+    mySprite.frame_delay = 0.2

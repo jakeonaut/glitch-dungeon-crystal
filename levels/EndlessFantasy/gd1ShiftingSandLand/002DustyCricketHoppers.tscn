@@ -2132,6 +2132,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 75.4396, -11, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket5" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket5" index="9"]
@@ -2153,6 +2154,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 81.4396, -7, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket6" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket6" index="9"]
@@ -2174,6 +2176,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78.4396, -5, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket7" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket7" index="9"]
@@ -2195,6 +2198,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0666, -10, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket3" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket3" index="9"]
@@ -2216,6 +2220,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8235, 10.6028, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket4" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket4" index="9"]
@@ -2237,6 +2242,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.8235, 9.60283, 0 )
 can_hop = true
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket8" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 flip_h = true
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket8" index="9"]
@@ -2283,27 +2289,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84, -16, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, -9, 0 )
-grav = 0
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64, -13, 0 )
-grav = 0
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -12, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -12, 0 )
-grav = 0
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -8, 0 )
-grav = 0
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -10, 0 )
-grav = 0
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -19, 0 )
@@ -2338,7 +2338,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -4, 0 )
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 113 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 frame = 78
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
