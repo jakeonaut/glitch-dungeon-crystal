@@ -701,49 +701,41 @@ func processHorizontalInputs(delta):
       
 
     if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
+      var multiplier = 0
+      var flip_h = false
       if pressingMoveLeft():
+        multiplier = 1
+        flip_h = true
+      elif pressingMoveRight():
+        multiplier = -1
+        flip_h = false
+
+      if multiplier != 0:
         should_teeter_turn_around = false
         if not pauseAnimation and aniPlayer != null:
           # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
-          if not mySprite.flip_h and on_ground and lv.x > 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-            dir += (right/2)*(delta*DNUMHORZ)
+          if mySprite.flip_h != flip_h and on_ground and aniPlayer.assigned_animation != "walkStart" and (aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing())):
+            dir += (right/2)*(delta*DNUMHORZ)*multiplier
             if aniPlayer.assigned_animation != "turnAround":
               aniPlayer.stop()
               aniPlayer.clear_queue()
               aniPlayer.queue("turnAround")
               aniPlayer.queue("walkStart")
               addJumpSmokeCloud(true)
-          elif mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-            dir += right*(delta*DNUMHORZ)
-            mySprite.flip_h = true
-            doWalkAnimation()
-            if on_ground and should_always_do_jump_smoke_cloud:
-              addJumpSmokeCloud(true)
-        # if there's no animation player, there's no animation. just flip
-        else:
-          dir += right*(delta*DNUMHORZ)
-          mySprite.flip_h = true
-      elif pressingMoveRight():
-        should_teeter_turn_around = false
-        if not pauseAnimation and aniPlayer != null:
-          # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
-          if mySprite.flip_h and on_ground and lv.x < 0 and aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing()):
-            dir -= (right/2)*(delta*DNUMHORZ)
-            if aniPlayer.assigned_animation != "turnAround":
+          elif mySprite.flip_h == flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing() or lv.x == 0:
+            dir += right*(delta*DNUMHORZ)*multiplier
+            if mySprite.flip_h != flip_h:
+              aniPlayer.stop()
               aniPlayer.clear_queue()
-              aniPlayer.play("turnAround")
               aniPlayer.queue("walkStart")
-              addJumpSmokeCloud(true)
-          elif not mySprite.flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing():
-            dir -= right*(delta*DNUMHORZ)
-            mySprite.flip_h = false
+            mySprite.flip_h = flip_h
             doWalkAnimation()
             if on_ground and should_always_do_jump_smoke_cloud:
               addJumpSmokeCloud(true)
         # if there's no animation player, there's no animation. just flip
         else:
-          dir -= right*(delta*DNUMHORZ)
-          mySprite.flip_h = false
+          dir += right*(delta*DNUMHORZ)*multiplier
+          mySprite.flip_h = flip_h
   
   # TODO(jaketrower): Maybe this? seems complicated
   if not pauseAnimation and not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer and \

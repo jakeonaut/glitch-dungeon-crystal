@@ -582,7 +582,8 @@ func getSmacked():
 func processBagLogic(_delta):
   pass
 
-func processBroomLogic(_delta):
+func processBroomLogic(delta):
+  var which_broom_attack = 1
   if not global.memory["broom"]:
     if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       noBroomSound.play()
@@ -593,19 +594,23 @@ func processBroomLogic(_delta):
   #   if broom_cooldown_timer >= broom_cooldown_time_limit:
   #     broom_cooldown_timer = 0
   is_in_broom_cooldown = false
+  #     which_broom_attack = 1
 
   # CHEAT CODE
   var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
-  if Input.is_action_just_pressed("sub_action_button") and not is_in_broom_cooldown and not summonedBroom: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
-    aniPlayer.play("broomSmack")
+    # TODO(jaketrower): has just turned around
+    if is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)):
+      aniPlayer.play("broomSmack2")
+      which_broom_attack = 2
+    else:
+      aniPlayer.play("broomSmack")
 
     is_in_broom_cooldown = true
     broom_cooldown_timer = 0
-    if on_ground:
-      broom_cooldown_timer = broom_cooldown_time_limit / 2
     # elif glitch_form == global.GlitchForm.FEATHER:
     #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
     # velocity_dampener = 2.0
@@ -618,6 +623,11 @@ func processBroomLogic(_delta):
       linear_velocity.y = 0
     summonedBroom = summonedBroomRes.instance()
     level.add_child(summonedBroom)
+    if which_broom_attack == 2:
+      summonedBroom.aniPlayer.stop()
+      summonedBroom.aniPlayer.clear_queue()
+      summonedBroom.aniPlayer.play("broomSmack2")
+      is_in_broom_cooldown = false
     if not can_smack_npc or global.activeInteractor != null:
       summonedBroom.has_hit_npc = true
     summonedBroom.my_broom_owner = self
@@ -684,7 +694,10 @@ func adjustSummonedBroomSpritePosition():
   else:
     summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
-  summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
+  if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
+    summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
+  elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
+    summonedBroom.global_transform.origin.y = self.global_transform.origin.y - 1
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func shouldAirHaveFriction():
@@ -909,6 +922,7 @@ func getABroom():
   global.memory["has_gotten_broom"] = 2
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   can_smack_npc = true
+  is_in_broom_cooldown = false
 
 func iJustPressedDown():
   on_ground = false
