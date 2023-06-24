@@ -30,8 +30,6 @@ func _process(delta):
   # if global.pauseGame: return
 
   hitStuff(delta)
-  if broom_active_timer == 0:
-    summonSmokeClouds(1)
     
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:

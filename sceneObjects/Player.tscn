@@ -310,7 +310,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=64]
 resource_name = "broomSmack2"
-length = 0.4
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -319,10 +319,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 16, 15, 24 ]
+"values": [ 16, 17, 15, 24 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomVisible:visible")

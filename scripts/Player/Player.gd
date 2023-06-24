@@ -22,7 +22,7 @@ var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 # var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var summonedBroom = null
 var broom_cooldown_timer = 0
-var broom_cooldown_time_limit = 20
+var broom_cooldown_time_limit = 10
 var is_in_broom_cooldown = false
 
 onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
@@ -589,12 +589,12 @@ func processBroomLogic(delta):
       noBroomSound.play()
     return
 
-  # if not summonedBroom and is_in_broom_cooldown:
-  #   broom_cooldown_timer += (delta*22)
-  #   if broom_cooldown_timer >= broom_cooldown_time_limit:
-  #     broom_cooldown_timer = 0
-  is_in_broom_cooldown = false
-  #     which_broom_attack = 1
+  if not summonedBroom and is_in_broom_cooldown:
+    broom_cooldown_timer += (delta*22)
+    if broom_cooldown_timer >= broom_cooldown_time_limit:
+      broom_cooldown_timer = 0
+      is_in_broom_cooldown = false
+      which_broom_attack = 1
 
   # CHEAT CODE
   var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
@@ -603,7 +603,7 @@ func processBroomLogic(delta):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
-    if is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)):
+    if is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2
     else:
@@ -627,6 +627,7 @@ func processBroomLogic(delta):
       summonedBroom.aniPlayer.stop()
       summonedBroom.aniPlayer.clear_queue()
       summonedBroom.aniPlayer.play("broomSmack2")
+      summonedBroom.broom_active_time_limit = 15
       is_in_broom_cooldown = false
     if not can_smack_npc or global.activeInteractor != null:
       summonedBroom.has_hit_npc = true
@@ -687,17 +688,23 @@ func adjustMushroomSpritePosition():
     mushroomSprite.global_transform.origin.x += amt
 
 func adjustSummonedBroomSpritePosition():
+  var xAddition = 0
+  var yAddition = 0
+  if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
+    xAddition = .875
+    yAddition = .625
+  elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
+    xAddition = .4
+    yAddition = 0
+
   broomSpriteVisible.visible = false
   if mySprite.flip_h:
-    summonedBroom.global_transform.origin.x = self.global_transform.origin.x - .875
+    summonedBroom.global_transform.origin.x = self.global_transform.origin.x - xAddition
     summonedBroom.rotation_degrees = Vector3(0, 180, 0)
   else:
-    summonedBroom.global_transform.origin.x = self.global_transform.origin.x + .875
+    summonedBroom.global_transform.origin.x = self.global_transform.origin.x + xAddition
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
-  if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
-    summonedBroom.global_transform.origin.y = self.global_transform.origin.y + .625
-  elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
-    summonedBroom.global_transform.origin.y = self.global_transform.origin.y - 1
+  summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func shouldAirHaveFriction():
