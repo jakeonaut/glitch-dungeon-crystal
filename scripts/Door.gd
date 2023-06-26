@@ -64,7 +64,10 @@ func _ready():
 
   if is_locked or should_lock:
     if not global.memory.has("key") or global.memory["key"] == 0:
-      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+      if num_keys_unlock == 1:
+        npc.textBoxContainer.bbText = "locked,\nneeds a key"
+      else:
+        npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
     elif global.memory["key"] < num_keys_unlock:
       npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
     else:

@@ -163,15 +163,16 @@ func _physics_process(delta):
     # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
     pass
 
-func bodyPushMe(delta, origin):
-  if not on_ground or is_pressing_horizontal_input:
-    return
+func bodyPushMe(_delta, _origin):
+  pass # no more
+  # if not on_ground or is_pressing_horizontal_input:
+  #   return
 
-  var multiplier = 5
-  if self.global_transform.origin.x > origin.x:
-    self.global_transform.origin.x += (delta * multiplier)
-  else:
-    self.global_transform.origin.x -= (delta * multiplier)
+  # var multiplier = 5
+  # if self.global_transform.origin.x > origin.x:
+  #   self.global_transform.origin.x += (delta * multiplier)
+  # else:
+  #   self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
   jumpSound.pitch_scale = rand_range(0.8, 1.2)

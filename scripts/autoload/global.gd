@@ -110,8 +110,6 @@ var collectable_key_recently_got = null
 var collectable_key_recently_got_timer = 0
 var collectable_key_recently_got_time_limit = 40
 
-var num_mini_crystal_cubes = 0
-
 var canGlitchScreen = true
 var canChangeSongPitch = true
 var crtScreenEffects = true
@@ -294,6 +292,15 @@ func getStaticLevelZoneLevelVar(level, name):
     if not global.memory[currLevelZone][level.getShortLevelName()].has(name):
         return null
     return global.memory[currLevelZone][level.getShortLevelName()][name]
+
+func getLevelZoneThing(thing):
+    if currLevelZone == null:
+        return
+    if not self.memory.has(currLevelZone):
+        return
+    if not self.memory[currLevelZone].has(thing):
+        return
+    return self.memory[currLevelZone][thing]
 
 func incrementLevelZoneThing(thing, amt):
     # also increment the total counter

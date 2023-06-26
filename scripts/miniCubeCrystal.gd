@@ -77,14 +77,13 @@ func passiveActivate(_delta):
 
     # global.memory["mp"] += 1
     # global.memory["max_mp"] += 1
-    global.num_mini_crystal_cubes += 1
-
-    disappearing2 = true
-    
+    # global.memory["num_mini_crystal_cubes"] += 1
+    global.incrementLevelZoneThing("num_mini_crystal_cubes", 1)
     if is_static_in_level:
       global.setStaticLevelZoneLevelVar(level, self.name, true)
 
     addPlusSprite()
+    disappearing2 = true
 
 func addPlusSprite():
   remove_child(plusSpriteContainer)

@@ -65,12 +65,15 @@ func recreateHeartSprites():
     newHeartSprite.global_position.x = 72 + i * 48
     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
+onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
+onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 func _process(delta):
-  if global.memory["max_mp"] <= 0:
-    get_node("GlitchStatusRect").visible = false
+  # if global.memory["max_mp"] <= 0:
+  #  get_node("GlitchStatusRect").visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
-  get_node("GlitchStatusRect/RichTextLabel").text = str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
-  get_node("GlitchStatusRect/RichTextLabel2").text = get_node("GlitchStatusRect/RichTextLabel").text
+  var glitchStatusText = str(global.getLevelZoneThing("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
+  glitchStatusText1.text = glitchStatusText 
+  glitchStatusText2.text = glitchStatusText
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
