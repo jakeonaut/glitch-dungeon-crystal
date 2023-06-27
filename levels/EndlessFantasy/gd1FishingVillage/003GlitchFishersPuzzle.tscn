@@ -1264,6 +1264,9 @@ shape = SubResource( 65 )
 [node name="AbortSound" parent="Viewport/level/QuestionBlock3/NPC2/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock3/NPC2" index="4"]
+frame = 0
+
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock3/NPC2/FallthroughSolid" index="0"]
 shape = SubResource( 61 )
 

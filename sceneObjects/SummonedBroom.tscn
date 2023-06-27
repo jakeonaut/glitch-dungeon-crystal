@@ -156,6 +156,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ 0.611956 ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("BroomSound:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "broomSmack"
@@ -258,6 +270,18 @@ tracks/7/keys = {
 "method": "summonSmokeClouds"
 } ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("BroomSound:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "broomSmack2"
@@ -306,7 +330,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0.25, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -360,6 +384,18 @@ tracks/7/keys = {
 "args": [ 3, false, true ],
 "method": "summonSmokeClouds"
 } ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("BroomSound:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.85 ]
 }
 
 [node name="SummonedBroom" type="Spatial"]

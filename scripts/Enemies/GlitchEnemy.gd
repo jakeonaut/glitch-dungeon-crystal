@@ -3,6 +3,7 @@ extends "../GameMover.gd"
 var flipTimer = 0
 var flipTimeLimit = 4
 
+onready var horizontalTurnSound = get_node("Sounds/HorizontalTurnSound") if has_node("Sounds/HorizontalTurnSound") else null
 onready var dieSound = get_node("Sounds/DieSound")
 onready var notDieSound = get_node("Sounds/NotDieSound") if has_node("Sounds/NotDieSound") else null
 onready var evolveSound = get_node("Sounds/EvolveSound")
@@ -203,6 +204,7 @@ func doHorizontalWalkingBehavior():
     if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
         horizontal_collision = false
         walk_direction.x = -walk_direction.x
+        if horizontalTurnSound: horizontalTurnSound.play()
         if behavior_intermittent_walking:
             behavior_walking = true
             slime_state_timer = 0

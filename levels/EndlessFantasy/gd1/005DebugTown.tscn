@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=34]
 [ext_resource path="res://sceneObjects/PlayerLevelSelect.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=36]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=37]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 5 )
@@ -1429,6 +1430,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 1.5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 5.6, -2.3 )
 pixel_size = 0.125
 texture = ExtResource( 11 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, 0 )
+bbText = "thank you for being
+a great mom"
+tiny_textbox = true
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2, 7.4, 0 )
+
+[node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 8.9, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

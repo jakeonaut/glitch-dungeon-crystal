@@ -1188,7 +1188,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, 0 )
 [node name="BasicFrogEnemy" parent="Viewport/level/QuestionBlock" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 walk_speed = 6
-walk_direction = Vector2(-1, 0)
+walk_direction = Vector2( -1, 0 )
 
 [node name="FeatherSpell" parent="Viewport/level/QuestionBlock" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0 )
@@ -2162,7 +2162,7 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 163.8, 
 
 [node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 168.7, 17.8, 0 )
-walk_direction = Vector2(-1, 0)
+walk_direction = Vector2( -1, 0 )
 
 [node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 197.8, 27.8, 0 )
