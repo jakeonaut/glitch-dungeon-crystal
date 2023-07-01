@@ -10,7 +10,8 @@ func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
     level.saveTheGame("got an angel!")
-    egg.spawnTadpole()
+    level.spawnAngelTadpole(egg.global_transform.origin)
+    global.incrementLevelZoneThing("angelTadpole", 1)
     global.activeInteractor = null
     egg.queue_free()
     level.player.aniPlayer.play("stand")

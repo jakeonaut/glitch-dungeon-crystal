@@ -3,8 +3,6 @@ extends "TreasureCollectable.gd"
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 onready var sparkleSprite = get_node("SparkleSprite3D")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
-var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
-
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
@@ -22,12 +20,6 @@ func _ready():
 
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         visible = false
-
-func spawnTadpole():
-  var tadpole = tadpoleRes.instance()
-  level.add_child(tadpole)
-  tadpole.global_transform.origin = self.global_transform.origin
-  tadpole.get_node("Sounds/HatchSound").play()
 
 func _process(delta):
     pauseSelf = not visible

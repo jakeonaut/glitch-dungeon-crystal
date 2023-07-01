@@ -145,11 +145,11 @@ func _process(delta):
 
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
+    tryDieToOffscreenCamera()
     if behavior_directional_bullet:
         global_transform.origin += bullet_direction_vector * delta
         tryDieToBody()
         bulletTryDieToSolids()
-        tryDieToOffscreenCamera()
 
     if behavior_evolve:
         evolution_timer += (delta*22)

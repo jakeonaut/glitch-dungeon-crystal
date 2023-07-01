@@ -34,14 +34,19 @@ func _process(delta):
             if rot_amount >= rot_amount_max:
                 global.hasGottenLevelGeode = true
                 aniPlayer.play("explode")
-    elif global.pauseGame:
+    elif level.player.pauseSelf:
         if rot_amount > 50:
             rot_amount -= (delta * 55)
             self.rotation_degrees.y -= (delta * rot_amount)
             self.global_transform.origin.y += (delta * 1)
         else:
-            global.pauseGame = false
-            level.restartMusic()
+            # TODO(jaketrower): move player to center of geode, fade out background, 
+            # the tadpoles stop bouncing and rotate in 3d around the player,
+            # and pop one by one into NPCs, start chanting and you all speed upward and teleport back
+            # to hub world...
+
+            # level.player.pauseSelf = false
+            # level.restartMusic()
             stop()
             # transition.long_fade_to(self.path)
 
@@ -65,7 +70,7 @@ func activate():
     level.levelTiles.randomize_num += 10
     level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true
-    global.pauseGame = true
+    level.player.pauseSelf = true
     musicPlayer.stopAll()
     getHitSound.play()
     getHitSound2.play()

@@ -1,8 +1,8 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
-[ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
 [ext_resource path="res://sceneObjects/CherryCarcass.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=14]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=17]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=19]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
@@ -74,7 +75,35 @@ extents = Vector3( 2, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="ShaderMaterial" id=60]
+shader = ExtResource( 10 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 1.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 17 )
+shader_param/base_palette = ExtResource( 11 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="Animation" id=61]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -102,7 +131,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=62]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -129,11 +158,11 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=62]
+[sub_resource type="Animation" id=63]
 resource_name = "jump"
 length = 0.001
 
-[sub_resource type="BoxShape" id=63]
+[sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -306,8 +335,8 @@ should_animate = false
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.017, 8.03393, 0 )
 
-[node name="Vileplume" parent="Viewport/level/QuestionBlock" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0 )
+[node name="FeatherSpell" parent="Viewport/level/QuestionBlock" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170002, 3.46607, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 9.7, 0 )
@@ -325,22 +354,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 20.1, 0 )
 [node name="CherryCarcass" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 3.6, 0 )
 
-[node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999994, 0 )
-grav = 0
-bbText = "you can DOUBLE jump 
-and change directions
-when infected"
-is_really_important = true
-can_move = false
-can_camera_zoom = false
-is_a_body = false
-tiny_textbox = true
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 16, 0 )
 
-[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 2.8, 0 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 9.2, 0 )
+grav = 0
+bbText = "welcome to
+forbidden lands.
+you will die soon "
+is_really_important = true
+can_camera_zoom = false
+dont_recolor_me = true
+is_a_body = false
+
+[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -348,32 +382,38 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
-flip_h = true
-frame = 64
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
-anims/default = SubResource( 60 )
-anims/flickerOn = SubResource( 61 )
-anims/jump = SubResource( 62 )
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
 
-[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
-shape = SubResource( 63 )
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+material_override = SubResource( 60 )
+frame = 50
+automatically_change_color = false
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 16, 0 )
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+anims/default = SubResource( 61 )
+anims/flickerOn = SubResource( 62 )
+anims/jump = SubResource( 63 )
 
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9, 5.5, 0 )
-
-[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 2.8, 0 )
+[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 64 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -393,5 +433,5 @@ __meta__ = {
 [editable path="Viewport/level/Dragonflies/Dragonfly2"]
 [editable path="Viewport/level/Dragonflies/Dragonfly3"]
 [editable path="Viewport/level/Dragonflies/Dragonfly4"]
-[editable path="Viewport/level/NPC2"]
-[editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/NPC"]
+[editable path="Viewport/level/NPC/NPC TextBox"]

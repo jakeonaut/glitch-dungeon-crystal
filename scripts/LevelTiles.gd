@@ -300,6 +300,15 @@ func _process(delta):
         infectSpikes(bottom_left_neighbor_coords)
         infectSpikes(top_right_neighbor_coords)
 
+func isNeighborOfInfectedSpikes(neighborCoords):
+  var num_infected_spikes = len(infected_spikes)
+  for i in range(num_infected_spikes):
+    var infectedCoords = infected_spikes[i]
+    if neighborCoords.x <= infectedCoords.x + 1 and neighborCoords.x >= infectedCoords.x - 1 and \
+       neighborCoords.y <= infectedCoords.y + 1 and neighborCoords.y >= infectedCoords.y - 1:
+      return true
+  return false
+
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false

@@ -250,10 +250,10 @@ func processPhysics(delta):
       elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
         aniPlayer.stop()
         aniPlayer.clear_queue()
-        if is_touching_water:
-          aniPlayer.queue("swimJump")
-        else:
-          aniPlayer.queue("jump")
+        # if is_touching_water:
+        #   aniPlayer.queue("swimJump")
+        # else:
+        aniPlayer.queue("jump")
 
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
@@ -486,9 +486,11 @@ func processJumpInputs(delta):
   # jump
   if justPressedJump() or recentlyJustPressedJump(): 
     # # Jump from the water
-    if is_touching_water:
+    if is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
+    (not aniPlayer or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
       was_touching_water_at_start_of_jump = true
-      vv = jump_force / 2
+      vv = jump_force * .75
+      has_water_double_jumped = true
 
       if is_touching_water and wetJumpSound != null and justPressedJump():
         wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
@@ -503,7 +505,8 @@ func processJumpInputs(delta):
         aniPlayer.queue("swimJump")
     # Jump from the ground
     if isKindOfOnGround():
-      was_touching_water_at_start_of_jump = false
+      has_water_double_jumped = false
+      was_touching_water_at_start_of_jump = is_touching_water
       was_just_on_ground_timer = was_just_on_ground_time_limit
       jumped_from_true_ground = truly_on_ground
       jump_squat_jump_input_timer = 0
@@ -543,11 +546,11 @@ func processJumpInputs(delta):
   elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
     feather_jump_timer += (delta*22)
     
-  if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
-    feather_jump_timer = 0
-    should_magic_jump = true
-    actuallyApplyJump(false)
-    was_touching_water_at_start_of_jump = false
+  # if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
+  #   feather_jump_timer = 0
+  #   should_magic_jump = true
+  #   actuallyApplyJump(false)
+  #   was_touching_water_at_start_of_jump = false
     
   if not pressingJump():
     weak_feather_dbl_jump = true
@@ -593,11 +596,11 @@ func actuallyApplyJump(play_sound = true):
   else:
     # rocket boost boots
     # vv = jump_force*3
-    if pressingJump():
+    if pressingJump() and not is_touching_water:
       vv = jump_force*1.1
     else:
       vv = jump_force*0.7
-  if not is_touching_water and play_sound and jumpSound != null:
+  if play_sound and jumpSound != null:
     playJumpSound()
   on_ground = false
   should_do_fallthrough_area_collision = false
@@ -1143,7 +1146,9 @@ func handleSpikeCollisions(_delta):
 func postProcessInputs(_delta):
   pass
   
+var has_water_double_jumped = false
 func landed():
+  has_water_double_jumped = false
   var quiet_the_fall_sound = true
   last_grounded_y = global_transform.origin.y 
   if landSound: landSound.play()

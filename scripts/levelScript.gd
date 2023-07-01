@@ -83,8 +83,13 @@ func _ready_impl():
 
   tryShowUIElements()
   tryToRespawn()
-  setUpRoomInitializationOverride()
   global.tryInitializeLevelZone(self.getLevelZoneName())
+  var numAngelTadpoles = global.getLevelZoneThing("angelTadpole")
+  if numAngelTadpoles != null:
+    for i in range(numAngelTadpoles):
+      spawnAngelTadpole(player.global_transform.origin + Vector3(stepify(rand_range(-1.0, 1.0), 0.125),
+                stepify(rand_range(0.5, 1.5), 0.125), 0))
+  setUpRoomInitializationOverride()
   restartMusic()
   if global.hasGottenLevelGeode or is_randomizing:
     levelTiles.randomize_num += 10
@@ -318,3 +323,10 @@ func walkThroughWallsGlitch():
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
   current_sprite_palette = levelTiles.white_palette
   setDoorsSpriteFrame(29)
+
+var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
+func spawnAngelTadpole(starting_position):
+  var tadpole = tadpoleRes.instance()
+  self.add_child(tadpole)
+  tadpole.global_transform.origin = starting_position
+  tadpole.get_node("Sounds/HatchSound").play()

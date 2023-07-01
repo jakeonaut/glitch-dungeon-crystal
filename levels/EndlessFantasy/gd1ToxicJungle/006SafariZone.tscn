@@ -1,17 +1,13 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
-[ext_resource path="res://sceneObjects/Enemies/TadpoleEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=6]
-[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=7]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=10]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/sprites/Tadpole_smaller.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/QuietSavePoint.tscn" type="PackedScene" id=15]
@@ -33,46 +29,6 @@ resource_local_to_scene = true
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="ShaderMaterial" id=20]
-shader = ExtResource( 8 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 12 )
-shader_param/base_palette = ExtResource( 10 )
-shader_param/target_palette = ExtResource( 7 )
-
-[sub_resource type="BoxShape" id=21]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=22]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=23]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -367,80 +323,6 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="Tadpoles" type="Spatial" parent="Viewport/level"]
-
-[node name="BasicTadpoleEnemy" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy" index="0"]
-material_override = SubResource( 20 )
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy/FallthroughSolid" index="0"]
-shape = SubResource( 21 )
-
-[node name="BasicTadpoleEnemy2" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 4, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy2" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy2/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy4" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8, 4, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy4" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy4/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy5" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.3, 0.2, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy5" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy5/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy6" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7, 0.2, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy6" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy6/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy7" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.6, 7.3, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy7" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy7/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy8" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2, 5.8, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy8" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy8/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
-
-[node name="BasicTadpoleEnemy3" parent="Viewport/level/Tadpoles" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 7.2, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy3" index="0"]
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/Tadpoles/BasicTadpoleEnemy3/FallthroughSolid" index="0"]
-shape = SubResource( 23 )
-
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
@@ -665,6 +547,15 @@ anims/jump = SubResource( 34 )
 [node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
 shape = SubResource( 28 )
 
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0, 0 )
+
+[node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3, 7.9, 0 )
+
+[node name="AngelEgg3" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.7, 7.3, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -690,14 +581,6 @@ flip_v = true
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy2"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy4"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy5"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy6"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy7"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy8"]
-[editable path="Viewport/level/Tadpoles/BasicTadpoleEnemy3"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]

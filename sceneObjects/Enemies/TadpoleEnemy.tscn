@@ -67,6 +67,7 @@ walk_direction = Vector2( -1, 0 )
 modAmt = 0.0
 jump_time_limit = 0
 air_time_limit = 0
+goBackToPlayer = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
@@ -125,12 +126,12 @@ pitch_scale = 1.5
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
-volume_db = -30.0
+volume_db = -40.0
 pitch_scale = 0.5
 
 [node name="HorizontalTurnSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
-volume_db = -30.0
+volume_db = -40.0
 pitch_scale = 0.5
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
