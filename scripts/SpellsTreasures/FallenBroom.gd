@@ -33,11 +33,6 @@ func _process(delta):
 
     if returning:
         returning_timer += (delta*22)
-        if returning_timer >= returning_time_limit:
-            self.global_transform.origin.x = level.player.global_transform.origin.x
-            self.global_transform.origin.y = level.player.global_transform.origin.y
-            abortSound.activateScript()
-            return
 
         is_active = false
         okay_im_done = true
@@ -49,23 +44,10 @@ func _process(delta):
         else:
             get_node("SecretAnimationPlayer").play("returnAirSpin")
 
-        var x1 = global_transform.origin.x
-        var x2 = level.player.global_transform.origin.x
-        global_transform.origin.x = x1 + (x2 - x1) * (delta * 5) 
-        var is_x_the_same = false
-        if stepify(x1, 2) == stepify(x2, 2):
-            global_transform.origin.x = x2
-            is_x_the_same = true
-
-        var y1 = global_transform.origin.y
-        var y2 = level.player.global_transform.origin.y
-        global_transform.origin.y = y1 + (y2 - y1) * (delta * 5) 
-        var is_y_the_same = false
-        if stepify(y1, 2) == stepify(y2, 2):
-            global_transform.origin.y = y2
-            is_y_the_same = true
-
-        if is_x_the_same and is_y_the_same:
+        var pos = global_transform.origin
+        var playerPos = level.player.global_transform.origin
+        global_transform.origin = moveToward2D(pos, playerPos, delta * 22)
+        if compare2D(global_transform.origin, playerPos):
             abortSound.activateScript()
         return
 
@@ -81,7 +63,7 @@ func _process(delta):
             lv.y = 0
     if projectile:
         var has_hit_something = hitStuff(delta)
-        if horizontal_collision or has_hit_something or vertical_collision or on_ground:
+        if horizontal_collision or has_hit_something or vertical_collision:
             landSound.play()
             grav = 60
             walk_direction = Vector2(0, 0)
@@ -145,7 +127,8 @@ func alignMySprite():
     pass
 
 func landed():
-    get_node("SecretAnimationPlayer").play("land")
+    if not projectile:
+        get_node("SecretAnimationPlayer").play("land")
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):
@@ -208,8 +191,8 @@ func hitStuff(_delta):
                     has_hit_npc = true
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
-        elif not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
-            area.InteractActivate()
+        elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+            area.InteractActivate(false)
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             area.PassiveInteractActivate(0, false)
       

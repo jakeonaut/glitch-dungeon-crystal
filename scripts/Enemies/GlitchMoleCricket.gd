@@ -258,8 +258,8 @@ func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
 
 # @override
-func passiveActivate(delta):
-    .passiveActivate(delta)
+func passiveActivate(delta, is_player):
+    .passiveActivate(delta, is_player)
     myOtherSprite.flip_h = (level.player.global_transform.origin.x <= global_transform.origin.x)
 
 # @override, not really until GlitchEnemy gets one

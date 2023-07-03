@@ -159,7 +159,7 @@ func _process(delta):
         return
 
 # @override
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if am_i_dying: return
 
 func processDeath():

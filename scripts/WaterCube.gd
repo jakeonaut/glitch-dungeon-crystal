@@ -81,7 +81,7 @@ func becomePoisonous():
 func isActive():
   return true
   
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   if not getPlayer().was_touching_water and can_splash:
     if bigSplash():
       splashSound.play()

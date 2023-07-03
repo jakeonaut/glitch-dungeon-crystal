@@ -37,7 +37,7 @@ func setVars():
     if floating_text:
         textBox.floating_text = floating_text
 
-func InteractActivate():
+func InteractActivate(_is_player=true):
     interact()
         
 func interact():

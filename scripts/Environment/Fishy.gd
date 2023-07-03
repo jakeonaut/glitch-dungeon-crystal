@@ -46,7 +46,7 @@ func randomizeTargetPos():
 func isActive():
     return true
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not is_swimmin_away:
         catchSound.play()
         is_swimmin_away = true

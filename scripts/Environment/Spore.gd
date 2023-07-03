@@ -143,7 +143,7 @@ var is_active = true
 func isActive():
     return is_active
 
-func pickyPassiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player):
     if not didja_get_me:
         bubbleStartPop()
         if is_player: 

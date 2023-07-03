@@ -115,7 +115,7 @@ func ouchies(_broom_origin):
 func isActive():
     return false # true
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not am_i_dying:
         myOtherSprite.visible = false
         catchSound.play()

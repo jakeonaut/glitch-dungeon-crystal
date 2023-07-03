@@ -124,6 +124,7 @@ var mini_cube_crystal_pitch_time_limit = 60
 
 var set_camera_position_on_respawn = false
 
+var hasLevelGeodeBeenSmacked = false
 var hasGottenLevelGeode = false
 
 func _ready():
@@ -340,3 +341,20 @@ func removeLevelZoneTile(levelName, coords):
 
 func incrementLevelZoneSecretEggs():
     incrementLevelZoneThing("num_secret_eggs", 1)
+
+func vec3ToVec2(vec3):
+    return Vector2(vec3.x, vec3.y)
+
+func moveToward2D(sourceVec3, targetVec3, delta):
+    var z = sourceVec3.z
+    var sourceVec2 = vec3ToVec2(sourceVec3)
+    var targetVec2 = vec3ToVec2(targetVec3)
+
+    sourceVec2 = sourceVec2.move_toward(targetVec2, delta)
+    return Vector3(sourceVec2.x, sourceVec2.y, z)
+
+func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
+    var sourceVec2 = vec3ToVec2(sourceVec3)
+    var targetVec2 = vec3ToVec2(targetVec3)
+    return (sourceVec2 - targetVec2).length() < closeness_amt    
+

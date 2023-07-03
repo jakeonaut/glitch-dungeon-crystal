@@ -148,10 +148,12 @@ func _ready():
   set_process_input(true)
   set_process(true)
   set_physics_process(true)
+  if true_terminal_vel == null: true_terminal_vel = 32
+
+  yield(get_tree(), "idle_frame")
+  yield(get_tree(), "idle_frame")
   spawn_origin = global_transform.origin
   last_grounded_y = spawn_origin.y
-
-  if true_terminal_vel == null: true_terminal_vel = 32
 
 func _process(_delta):
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
@@ -858,7 +860,9 @@ func handleCollisionsAndMove(local_lv, delta):
     on_ground = false
   truly_on_ground = false
   half_on_ground = false
+
   if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
+    last_vv = local_lv.y
     local_lv = handleVerticalCollisions(local_lv)
     if last_vv != 0 and local_lv.y == 0:
       self.vertical_collision = true
@@ -1196,3 +1200,12 @@ func isRectColliding(lb1, tb1, rb1, bb1, lb2, tb2, rb2, bb2, debug_ = false):
   if lb2 <= rb1 and rb2 >= lb1 and tb2 >= bb1 and bb2 <= tb1:
     return true
   return false
+
+func vec3ToVec2(vec3):
+    return global.vec3ToVec2(vec3)
+
+func moveToward2D(sourceVec3, targetVec3, delta):
+    return global.moveToward2D(sourceVec3, targetVec3, delta)
+
+func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
+    return global.compare2D(sourceVec3, targetVec3, closeness_amt)

@@ -13,7 +13,7 @@ func _ready():
 func _process(_delta):
     pass
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not has_spawned:
         spawn()
 

@@ -63,7 +63,7 @@ func getSmacked(broom_origin):
   summonSmokeClouds(5)
   spawnFiveSpores()
 
-func passiveActivate(delta):
+func passiveActivate(delta, _is_player):
   getSmacked(null)
 
 func spawnFiveSpores():

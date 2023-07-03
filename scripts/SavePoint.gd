@@ -98,7 +98,7 @@ func setPaletteCycle(sprite, value):
 func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     # global.memory["hearts_recovering"] = true
     # level.player.restoreGlitchAndMP()
     if level.player.is_mushroom_infected:

@@ -8,9 +8,9 @@ func _ready():
 func isActive():
     return get_parent().has_method("isActive") and get_parent().isActive()
 
-func InteractActivate():
+func InteractActivate(is_player=true):
     if get_parent().has_method("activate"):
-        get_parent().activate()
+        get_parent().activate(is_player)
 
 func _process(_delta):
     var areas = get_overlapping_areas()

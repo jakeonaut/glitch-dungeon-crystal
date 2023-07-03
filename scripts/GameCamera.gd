@@ -10,9 +10,11 @@ var rightmost_x = -999
 var topmost_y = -999
 var botmost_y = 999
 var initial_size = 15
+var zoomed_size = 7
 var start_applying_parallax = false
 var how_fast_to_switch_targets = 1
 export var is_doing_fake_static = false
+var am_i_zooming = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -22,6 +24,7 @@ func getLevelTiles():
 
 func _ready():
   initial_size = self.size
+  zoomed_size = (initial_size-8)
   if global.memory.has("cameraSize"):
     self.size = global.memory["cameraSize"]
   initial_z = global_transform.origin.z
@@ -101,7 +104,6 @@ func _process(delta):
     set_interpolation_enabled(false)
     if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
-  var zoomed_size = (initial_size-8)
   var npcTextBox = global.activeInteractor
   if npcTextBox != null and npcTextBox.can_camera_zoom and initial_size > 12:
     actual_target = weakref(global.activeInteractor.get_node("../.."))
@@ -112,6 +114,12 @@ func _process(delta):
       self.size = zoomed_size
     set_speed(2)
     set_interpolation_enabled(true)
+  elif am_i_zooming:
+    actual_target = weakref(initial_target)
+    set_target(actual_target.get_ref())      
+    self.size = self.size + (zoomed_size - self.size) * (delta*5)
+    if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
+      self.size = zoomed_size
   else:
     actual_target = weakref(initial_target)
     set_target(actual_target.get_ref())      

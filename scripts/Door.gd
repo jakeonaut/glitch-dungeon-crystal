@@ -167,7 +167,10 @@ func isActive():
 func generateId():
   return get_name()
 
-func activate():
+func activate(is_player):
+  if not is_player:
+    return false
+    
   if not is_passive:
     if not is_locked and not should_lock and global.activeInteractor == null and getPlayer().truly_on_ground:
       goThroughDoor()
@@ -191,16 +194,10 @@ func activate():
         goThroughDoor()
       elif not lockedSound.is_playing():
         lockedSound.play()
-        npc.activate()
+        npc.activate(is_player)
 
-func pickyPassiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player):
   if is_passive and is_player:
-    goThroughDoor()
-  else:
-    getPlayer().showInteractPrompt()
-
-func passiveActivate(_delta):
-  if is_passive:
     goThroughDoor()
   else:
     getPlayer().showInteractPrompt()

@@ -159,12 +159,14 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
 func isActive():
   return is_active and not floating_text and (visible or can_be_activated_invisibly)
 
-func activate():
+func activate(_is_player):
+  # if not is_player:
+  #   return
   if global.activeInteractor == null:
     textBox.interact()
   pass
 
-func passiveActivate(delta):
+func passiveActivate(delta, _is_player):
   if can_move:
     mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
 

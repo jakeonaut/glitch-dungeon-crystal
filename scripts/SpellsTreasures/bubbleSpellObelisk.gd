@@ -76,10 +76,10 @@ func summonBubble():
 func isActive():
   return is_active
 
-func activate():
-  passiveActivate(0)
+func activate(is_player):
+  passiveActivate(0, is_player)
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   level.player.getSmacked()
   is_active = false
   is_spawning = true

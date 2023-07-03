@@ -46,9 +46,9 @@ func _process(delta):
             player.animation_speed_multiplier = 1.0
             cutscene_timer += (delta*22)
             if cutscene_timer > 40 and cutscene_timer < 45 and not NPC.get_node("AnimationPlayer").is_playing():
-                NPC.passiveActivate(delta)
+                NPC.passiveActivate(delta, true)
             if cutscene_timer > 100:
-                NPC.passiveActivate(delta)
+                NPC.passiveActivate(delta, true)
             if cutscene_timer > 115:
                 global.pauseMoveInput = false
         elif cutscene_timer > 115 and global.activeInteractor == NPC.get_node("NPC TextBox/TextBox"):

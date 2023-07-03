@@ -52,6 +52,7 @@ func _process(delta):
         restorePlayer()
         if Input.is_action_just_pressed("jump_button"):
           level.player.actuallyApplyJump(true)
+        level.player.on_ground = false
         is_reeled_in = true
         return
 
@@ -79,16 +80,11 @@ func moveTargetToHook(delta):
   if not hookTarget.get_ref():
     return
 
-  var x = hookTarget.get_ref().global_transform.origin.x
-  var y = hookTarget.get_ref().global_transform.origin.y
-  x = x + (hookInteractionArea.global_transform.origin.x - x) * (delta * 15)
-  y = y + (hookInteractionArea.global_transform.origin.y - y) * (delta * 15)
-  if stepify(x, 0.1) == stepify(hookInteractionArea.global_transform.origin.x, 0.1):
-    x = hookInteractionArea.global_transform.origin.x
-  if stepify(y, 0.1) == stepify(hookInteractionArea.global_transform.origin.y, 0.1):
-    y = hookInteractionArea.global_transform.origin.y
-  hookTarget.get_ref().global_transform.origin.x = x
-  hookTarget.get_ref().global_transform.origin.y = y
+  var fishPos = hookTarget.get_ref().global_transform.origin
+  var hookPos = hookInteractionArea.global_transform.origin
+  hookTarget.get_ref().global_transform.origin = global.moveToward2D(fishPos, hookPos, delta * 15)
+  hookInteractionArea.global_transform.origin.z = fishPos.z - 1
+
   if hookTarget.get_ref().has_method("ladderUpdateTargetLastGroundedY"):
     hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
 
@@ -110,8 +106,8 @@ func reelItOut(delta):
 func isActive():
   return true
 
-func passiveActivate(_delta):
-  if not hooked and not is_reeled_in:
+func passiveActivate(_delta, is_player):
+  if not hooked and not is_reeled_in and is_player:
     hooked = true
     hookTarget = weakref(level.player)
     level.player.aniPlayer.play("hookCaught")

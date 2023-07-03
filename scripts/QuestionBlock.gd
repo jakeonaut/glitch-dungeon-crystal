@@ -20,7 +20,7 @@ func get_foreign_children():
 func isActive():
   return not has_been_hit
   
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   if not has_been_hit:
     if (player.linear_velocity.y <= 0 and not player.on_ground) or player.justPressedJump():
       aniPlayer.play("hit")
@@ -37,7 +37,7 @@ func performSpawn():
   for child in self.get_foreign_children():
     child.visible = true
     if child.has_method("passiveActivate"):
-        child.passiveActivate(33)
+        child.passiveActivate(33, true)
   
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   for _i in range(num_clouds):

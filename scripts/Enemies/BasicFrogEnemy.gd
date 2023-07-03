@@ -22,7 +22,6 @@ var original_material = null
 
 onready var mushroomSprite = get_node("MushroomSprite") if has_node("MushroomSprite") else null
 onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
-export var goBackToPlayer = false
 
 func _ready():
   mySprite.max_frames = 2
@@ -113,24 +112,8 @@ func tryDieToOffscreenCamera():
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            if goBackToPlayer:
-              actuallyGoBackToPlayer()
-            else:
-              setGlobalMemoryOfHasBeenDefeated()
-              queue_free()
-
-    if goBackToPlayer:
-      var dist = self.global_transform.origin.distance_to(level.player.global_transform.origin)
-      if dist > 20:
-        actuallyGoBackToPlayer()
-
-func actuallyGoBackToPlayer():
-  self.global_transform.origin = level.player.global_transform.origin
-  self.lv.y = jump_force
-  self.vv = jump_force
-  self.linear_velocity.y = jump_force
-  walk_direction.x = randi() % 2
-  if walk_direction.x == 0: walk_direction.x = -1
+            setGlobalMemoryOfHasBeenDefeated()
+            queue_free()
 
 func landed():
   .landed()

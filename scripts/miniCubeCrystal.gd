@@ -61,7 +61,7 @@ func _process(delta):
 func isActive():
   return visible and not disappearing2
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   # musicPlayer.stopAll()
   if not disappearing2:
     cubeSound.play()

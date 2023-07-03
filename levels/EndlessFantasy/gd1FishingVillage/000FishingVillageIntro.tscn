@@ -408,7 +408,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
-bbText = "aye"
+bbText = "fish or be fished."
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -433,8 +433,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.3, 0 )
 [node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 32 )
 
-[node name="SmallKey" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3, 3.7, 0 )
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.4, 3.7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

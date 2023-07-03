@@ -22,7 +22,7 @@ func getFrogToBeInfected():
 func isActive():
     return not has_done_cutscene
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not has_done_cutscene:
         global.pauseMoveInput = true
         if not getPlayer().on_ground:

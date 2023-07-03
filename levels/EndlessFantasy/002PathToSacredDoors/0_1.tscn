@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -29,7 +29,11 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=27]
 [ext_resource path="res://levels/EndlessFantasy/002PathToSacredDoors/NPCEnchantedBagAbortSound.gd" type="Script" id=28]
 [ext_resource path="res://assets/player_sheet_bag.png" type="Texture" id=29]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=31]
+[ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=32]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=33]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=34]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 2 )
@@ -767,6 +771,86 @@ shader_param/texture_albedo = ExtResource( 29 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 27 )
 
+[sub_resource type="Animation" id=82]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=84]
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
 [sub_resource type="BoxShape" id=78]
 resource_local_to_scene = true
 
@@ -777,6 +861,34 @@ extents = Vector3( 2, 1.3, 1.3 )
 [sub_resource type="BoxShape" id=80]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=85]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.5
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 33 )
 
 [sub_resource type="BoxShape" id=81]
 resource_local_to_scene = true
@@ -1037,8 +1149,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
 
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -13, 0 )
+
+[node name="TriangleContainer" parent="Viewport/level/SavePoint2" index="0"]
+visible = false
+
+[node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
+anims/RESET = SubResource( 82 )
+anims/default = SubResource( 83 )
+anims/sporeGrow = SubResource( 84 )
+
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -14, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -27, 0 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 dont_recolor_me = true
 
@@ -1051,7 +1174,7 @@ shape = SubResource( 78 )
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 79 )
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 22 )]
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42, -1, 0 )
 bbText = "[wave]down here![/wave]"
 floating_text = true
@@ -1078,18 +1201,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -13, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -13, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -15, 0 )
-bbText = "hmm... where are we?"
+bbText = "find angel eggs
+to cleanse the world"
+can_camera_zoom = false
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 80 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+material_override = SubResource( 85 )
 frame = 0
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
 shape = SubResource( 81 )
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
+
+[node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -10, 0 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -7.8, 0 )
+bbText = "[wave]smack it! [X][/wave]"
+is_a_body = false
+floating_text = true
+tiny_textbox = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
@@ -1114,6 +1252,7 @@ visible = true
 [editable path="Viewport/level/GlitchEnemy6"]
 [editable path="Viewport/level/QuestionBlock/NPC"]
 [editable path="Viewport/level/QuestionBlock/NPC/NPC TextBox"]
+[editable path="Viewport/level/SavePoint2"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]

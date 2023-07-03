@@ -106,7 +106,7 @@ func randomizeTargetPos():
 func isActive():
     return true
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not didja_get_me:
         bubbleStartPop()
 

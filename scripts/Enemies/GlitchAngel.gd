@@ -26,9 +26,6 @@ func getPlayer():
 
 func _ready():
     set_process(true)
-
-    original_pos = spawn_origin
-    randomizeTargetPos()
     
     # flightPathAniPlayer.play("flySquare")
     if angel_state == AngelState.HIDDEN:
@@ -38,6 +35,11 @@ func _ready():
     
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
+
+    yield(get_tree(), "idle_frame")
+    yield(get_tree(), "idle_frame")
+    original_pos = spawn_origin
+    randomizeTargetPos()
 
 func _process(delta):
     # ._process(delta) implicit
@@ -79,10 +81,8 @@ func _process(delta):
         return
         
 func flutterAndRandomizeLocation(delta):
-    global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*5)
-    var diff = target_pos - global_transform.origin
-    var step = 0.1
-    if stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
+    global_transform.origin = moveToward2D(global_transform.origin, target_pos, delta * 11)
+    if compare2D(global_transform.origin, target_pos, 0.1):
         randomizeTargetPos()
         
 func spawnNullificationBullet():

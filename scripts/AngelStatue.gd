@@ -34,7 +34,7 @@ func _process(delta):
 func isActive():
     return self.visible and is_active
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not is_angel_activated:
         is_angel_activated = true
         activateSound.play()

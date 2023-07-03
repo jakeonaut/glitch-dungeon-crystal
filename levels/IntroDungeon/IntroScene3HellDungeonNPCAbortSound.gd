@@ -20,7 +20,7 @@ func preActivateScript():
     new_self.get_node("TriangleContainer").visible = false
     new_self.get_node("Sprite3D2").visible = false
     new_self.animation_speed_multiplier = 0.3
-    new_self.passiveActivate(0)
+    new_self.passiveActivate(0, true)
 
 func activateScript():
     var npc = get_node("../../..")

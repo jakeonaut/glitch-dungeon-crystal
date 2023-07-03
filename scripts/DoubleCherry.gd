@@ -93,7 +93,7 @@ func landed():
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("land")
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if global.num_cherries_eaten < global.max_cherries:
         true_terminal_vel = 0
         is_active = false

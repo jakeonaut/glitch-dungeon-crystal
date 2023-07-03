@@ -41,7 +41,7 @@ func getDirection():
 func isActive():
   return true
 
-func passiveActivate(delta):
+func passiveActivate(delta, _is_player):
   # level.player.getDustInfected()
   var mult = 5
   if level.player.vv > 4:

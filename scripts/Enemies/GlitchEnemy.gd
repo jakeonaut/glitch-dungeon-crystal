@@ -278,7 +278,7 @@ func processDeath():
 #         glitch_switch_timer = 0
 
 func glitchSetSpritesAndCollision():
-    if behavior_jumping or behavior_directional_bullet:
+    if behavior_jumping or behavior_directional_bullet or pauseSelf:
         return
         
     if modAmt > 0:
@@ -333,10 +333,10 @@ func landed():
 func isActive():
     return visible and not behavior_evolve
 
-func activate():
+func activate(_is_player):
     pass
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     pass
 
 func stopPassiveActivate():
@@ -359,7 +359,7 @@ func ouchies_base():
         miniCubeCrystal.is_static_in_level = false
         level.add_child(miniCubeCrystal)
         miniCubeCrystal.global_transform.origin = self.global_transform.origin
-        miniCubeCrystal.passiveActivate(0)
+        miniCubeCrystal.passiveActivate(0, false)
     if parentSpawner != null and parentSpawner.has_method("myChildDied"):
         parentSpawner.myChildDied()
 

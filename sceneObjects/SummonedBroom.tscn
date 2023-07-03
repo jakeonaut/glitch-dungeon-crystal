@@ -309,7 +309,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -1.716, 1, 0 ), Vector3( 0, 0.548, 0 ), Vector3( 1.24, 0.75, 0 ) ]
+"values": [ Vector3( -1.56864, -0.257879, 0 ), Vector3( 1.08171, 0.697201, 0 ), Vector3( 1.7046, 1.48562, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -344,8 +344,8 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, -39.751 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 50.82 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Area/CollisionShape:shape:radius")
@@ -354,10 +354,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.25 ),
+"times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 1.19124, 1.19124, 0.650362 ]
+"update": 1,
+"values": [ 2.0, 1.03549, 0.492779 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Area/CollisionShape:shape:height")
@@ -366,10 +366,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.1, 0.25 ),
+"times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.837435, 0.837435, 0.611956 ]
+"update": 1,
+"values": [ 0.837435, 0.827369, 1.17211 ]
 }
 tracks/7/type = "method"
 tracks/7/path = NodePath(".")

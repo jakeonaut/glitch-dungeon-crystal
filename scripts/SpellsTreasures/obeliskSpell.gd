@@ -123,12 +123,12 @@ func shouldIBeActive():
 func isActive():
   return self.visible and is_active and shouldIBeActive()
 
-func activate():
+func activate(is_player):
   if level.player.glitch_form != my_glitch_form:
     level.player.getSmacked()
-  passiveActivate(0)
+  passiveActivate(0, is_player)
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   if is_locked:
     return
 

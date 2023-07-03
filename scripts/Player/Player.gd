@@ -238,7 +238,8 @@ func _process(delta):
 
 func unsmack():
   is_smacked = false
-  pauseSelf = false
+  if not global.hasLevelGeodeBeenSmacked:
+    pauseSelf = false
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
   mySprite.material_override.set_shader_param("normal_offset", .02)
@@ -598,7 +599,7 @@ func processBroomLogic(delta):
 
   # CHEAT CODE
   var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
-  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
@@ -634,7 +635,7 @@ func processBroomLogic(delta):
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
-  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom:
+  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf:
     summonedBroom.queue_free()
     summonedBroom = null
     self.broomStop()

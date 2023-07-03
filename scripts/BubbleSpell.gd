@@ -104,7 +104,7 @@ func _process(delta):
 func isActive():
   return true
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   if didja_get_me:
     return
 

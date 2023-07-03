@@ -48,7 +48,7 @@ func _process(_delta):
             nearest_area.InteractActivate()
         # Give secondary priority to held objects action.
         elif global.activeThrowableObject:
-            global.activeThrowableObject.activate()
+            global.activeThrowableObject.activate(true)
         # if no nearby active area, and no held object, use primary player action
         # else:
         #     player.tryBroom()

@@ -77,7 +77,7 @@ func randomizeTargetPos():
 func isActive():
     return true
 
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if not didja_get_me:
         catchSound.play()
         # if global.memory.has("dragonflies"):
@@ -121,7 +121,7 @@ func getSmacked(_broom_origin):
     miniCubeCrystal.is_static_in_level = false
     level.add_child(miniCubeCrystal)
     miniCubeCrystal.global_transform.origin = self.global_transform.origin
-    miniCubeCrystal.passiveActivate(0)
+    miniCubeCrystal.passiveActivate(0, false)
 
     if is_static_in_level:
         global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)

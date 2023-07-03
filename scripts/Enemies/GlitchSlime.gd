@@ -76,7 +76,7 @@ func pressingMoveRight():
     return walk_direction.x == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 # @override
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
     if am_i_dying or not visible: return
         
     # var aniPlayer = get_node("HeartSprite/AnimationPlayer")

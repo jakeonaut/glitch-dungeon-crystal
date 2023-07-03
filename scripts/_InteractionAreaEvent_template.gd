@@ -6,12 +6,12 @@ func isActive():
     # @override me #.isActive()
     return true
 
-func activate():
-    # @override me #.activate()
+func activate(_is_player=true):
+    # @override me #.activate(is_player)
     pass
 
-func passiveActivate(delta):
-    # @override me #.passiveActivate(delta)
+func passiveActivate(_delta, _is_player=true):
+    # @override me #.passiveActivate(delta, is_player)
     pass
 
 func stopPassiveActivate():

@@ -41,7 +41,7 @@ func _process(delta):
   
   if gotcha:
     if display_textbox:
-      .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+      .passiveActivate(delta, true) # let the NPC passiveActive super script handle the textbox
     else:
       okay_im_done = true
       textBox.abortSound.activateScript()
@@ -73,7 +73,7 @@ func _process(delta):
           textBox.is_really_important = true
           textBox.is_important = true
           # collectSound.play()
-          .passiveActivate(delta) # let the NPC passiveActive super script handle the textbox
+          .passiveActivate(delta, true) # let the NPC passiveActive super script handle the textbox
     else:
       level.player.aniPlayer.play("getItem")
       secretAniPlayer.play("getItem")
@@ -89,7 +89,7 @@ func alignMySprite():
   pass
 
 # @override
-func activate():
+func activate(_is_player):
   pass
   
 # @override
@@ -97,7 +97,7 @@ func isActive():
   return is_active and visible
 
 # @override
-func passiveActivate(_delta):
+func passiveActivate(_delta, _is_player):
   if okay_im_done:
     return
     
