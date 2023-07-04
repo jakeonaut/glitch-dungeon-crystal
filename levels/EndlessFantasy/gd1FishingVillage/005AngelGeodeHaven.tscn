@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=25]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/QuietSavePoint.tscn" type="PackedScene" id=27]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
@@ -905,7 +904,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 3.3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 3.3, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 17.1, 0 )
+grav = 0
 bbText = "•'ello dearie. oi'm the fishin' guru.
 •and i'm 200 years old
 •oi'll teach ya to fish for 30 crystals"
@@ -949,15 +949,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0 )
 
 [node name="TriangleContainer" parent="Viewport/level/QuietSavePoint" index="0"]
 visible = false
-
-[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.2, 0 )
-
-[node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9, 8.9, 0 )
-
-[node name="AngelEgg3" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 11.7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

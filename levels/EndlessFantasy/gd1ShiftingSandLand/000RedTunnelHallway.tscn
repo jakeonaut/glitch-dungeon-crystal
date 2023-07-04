@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=18]
@@ -384,7 +385,7 @@ shape = SubResource( 16 )
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8, 8, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/001DustyCricketRed.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006DustFreefall.tscn"
 num_keys_unlock = 3
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
@@ -563,6 +564,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 9, 0 )
 material_override = SubResource( 28 )
 frame = 4
 
+[node name="Torch3" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3, 9, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/Torch3" index="0"]
+material_override = SubResource( 28 )
+frame = 4
+
+[node name="Torch4" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.3, 9, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/Torch4" index="0"]
+material_override = SubResource( 28 )
+frame = 4
+
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 0 )
 
@@ -589,6 +604,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 8, 0 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
+
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8, 11.9, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
@@ -629,6 +647,8 @@ flip_v = true
 [editable path="Viewport/level/DustFarmer2/NPC2"]
 [editable path="Viewport/level/DustFarmer2/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Torch"]
+[editable path="Viewport/level/Torch3"]
+[editable path="Viewport/level/Torch4"]
 [editable path="Viewport/level/Torch2"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

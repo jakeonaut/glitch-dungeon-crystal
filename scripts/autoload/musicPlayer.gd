@@ -108,7 +108,7 @@ func conductFromScenePath(path):
         return
     elif path.find("RestZone") > 0 or path.find("DebugTown") > 0:
         tryToPlay(restZonePlayer)
-    elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
+    elif path.find("Haven") > 0 or path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("Boss") > 0:
         tryToPlay(bossThemePlayer)

@@ -172,7 +172,7 @@ can_move = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 21 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 pixel_size = 0.16
 frame = 70
 
@@ -180,7 +180,7 @@ frame = 70
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341999, 0.231315, 0 )
 shape = SubResource( 22 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC" index="8"]
+[node name="InteractPrompt" parent="Viewport/level/NPC" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303383, 2.09001, -1 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 11 )]

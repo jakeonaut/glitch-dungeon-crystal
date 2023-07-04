@@ -67,7 +67,7 @@ func _process(delta):
             secretAniPlayer.get_animation("idle").loop = false
             secretAniPlayer.queue("jumpSquat")
     elif boss_state == BossState.JUMP_SQUAT:
-        musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+        # musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
         if not secretAniPlayer.is_playing():
             boss_state = BossState.JUMP
             behavior_jumping = true
@@ -127,8 +127,8 @@ func ouchies(_broom_origin):
             boss_state = BossState.DIE
             return    
         
-        if not musicPlayer.bossThemePlayer.is_playing():
-            musicPlayer.stopAll()
+        # if not musicPlayer.bossThemePlayer.is_playing():
+        #     musicPlayer.stopAll()
         calm_down_counter = 0
         calm_down_count_limit += 1
         if calm_down_count_limit == 3:

@@ -107,7 +107,7 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  if is_active and interactPrompt != null and smallInteractionArea != null:
+  if is_active and interactPrompt != null and smallInteractionArea != null and not floating_text:
     interactPrompt.visible = smallInteractionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
       global.activeInteractor == null or (

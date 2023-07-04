@@ -15,6 +15,7 @@ export var is_static = false
 export var is_infected = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
+onready var fallthroughSolidArea = get_node("FallthroughSolid")
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
@@ -52,6 +53,9 @@ func _process(delta):
       mushroomSprite.visible = true
     if not interactionArea.is_in_group("enemies"):
       interactionArea.add_to_group("enemies")
+    if fallthroughSolidArea:
+      fallthroughSolidArea.remove_from_group("fallthrough")
+    
   else:
     if original_material:
       mySprite.set_material_override(original_material)

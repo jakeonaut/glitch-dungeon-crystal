@@ -56,3 +56,4 @@ func passiveActivate(delta, _is_player):
   level.player.was_just_on_ground_timer = -4
   level.player.lv.y = level.player.vv
   level.player.linear_velocity.y = level.player.vv
+  level.player.target_last_grounded_y = level.player.global_transform.origin.y
