@@ -28,8 +28,6 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
 tileset_type = 2
-how_much_mp = 15
-how_much_hp = 2
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 16 )]
 

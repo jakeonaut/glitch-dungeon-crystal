@@ -15,6 +15,7 @@ func activateScript():
     aniPlayer.queue("walkStop")
     aniPlayer.queue("stand")
     level.player.getABroom()
+    level.player.textBox.hideTextbox()
         
     # level.restartMusic()
     # level.saveTheGame()

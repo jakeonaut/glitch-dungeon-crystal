@@ -48,13 +48,13 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   if first_ever_glitch:
-    global.pauseMoveInput = true
-    level.player.fall_timer = 50
     if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/EndlessFantasy/000Intro/001CozyHome.tscn":
       first_ever_glitch = false
       level.gameCamera.initial_target = level.player.get_node("CameraTarget")
       level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)
     else:
+      global.pauseMoveInput = true
+      level.player.fall_timer = 50
       level.uiLayer.statsTitleRect.visible = false
       level.uiLayer.get_node("GlitchSprite").visible = false
       level.uiLayer.get_node("GlitchStatusRect").visible = false
@@ -86,9 +86,12 @@ func _process(delta):
     is_active = true
 
   if first_ever_glitch:
+    global.pauseMoveInput = true
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
       first_ever_glitch = false
+      getPlayer().textBox.tinify()
+      getPlayer().textBox.interact()
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:

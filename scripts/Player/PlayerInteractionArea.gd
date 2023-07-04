@@ -30,7 +30,7 @@ func _process(_delta):
         if area.has_method("isActive") and area.isActive() and not area.is_in_group("noplayer"):
             var dist = area.global_transform.origin.distance_to(global_transform.origin)            
             if area.has_method("InteractActivate"):
-                if dist < shortest_dist and not was_nearest_area_door:
+                if (dist < shortest_dist or area.is_in_group("door")) and not was_nearest_area_door:
                     shortest_dist = dist
                     nearest_area = area
                     if area.is_in_group("door"):
@@ -42,7 +42,10 @@ func _process(_delta):
     elif Input.is_action_just_pressed("interact_button"):
         # short circuit to textbox if one exists
         if global.activeInteractor != null:
-            global.activeInteractor.InteractActivate()
+            if global.activeInteractor.is_in_group("door_textbox") and nearest_area.is_in_group("door"):
+                nearest_area.InteractActivate()
+            if global.activeInteractor != null: # need to recheck cuz the above line might have cleared
+                global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
         elif nearest_area and not global.pauseMoveInput:
             nearest_area.InteractActivate()

@@ -293,8 +293,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 3.4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 2, 0 )
 grav = 0
 bbText = "you can DOUBLE jump 
-and change directions
-when infected"
+when infected with spores"
 is_really_important = true
 can_move = false
 can_camera_zoom = false
@@ -333,7 +332,6 @@ anchor_bottom = 1.0
 step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
 flip_h = true
 frame = 64
 

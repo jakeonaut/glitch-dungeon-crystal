@@ -186,7 +186,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1, 29.2, 0 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 32, 0 )
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/000DieToSavePoint.tscn"
 is_passive = true
 is_vertical = true
 

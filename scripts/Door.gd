@@ -292,6 +292,7 @@ func land():
       getPlayer().on_ground = false
   else:
     # SNEAKY SNEAKY
+    print("set save point to door")
     global.memory["active_save_point_x"] = self.translation.x
     global.memory["active_save_point_y"] = self.translation.y
     global.memory["active_save_point_z"] = self.translation.z

@@ -170,6 +170,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
 tileset_type = 2
+display_title = "fishing village"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 
@@ -408,7 +409,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
-bbText = "fish or be fished."
+bbText = "howdy"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

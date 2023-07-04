@@ -11,6 +11,6 @@ func setUpRoomInitializationOverride():
 # @override
 func overrideLevelRespawnEvent():
   if did_i_die:
-    player.textContainer.bbText = "huh? what?\n....let's sweep away\n that dust with SPACE"
+    player.textContainer.bbText = "huh? what?\n....let's sweep away\n that dust with [X]"
     player.textContainer.setVars()
     player.textBox.interact()

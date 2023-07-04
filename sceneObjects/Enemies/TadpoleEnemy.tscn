@@ -95,7 +95,7 @@ region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 2 )
 should_randomize_frame_delay = true
 
-[node name="InteractionArea" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="." groups=["tadpole"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 6 )
 
@@ -103,7 +103,7 @@ script = ExtResource( 6 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "tadpole"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
 script = ExtResource( 5 )
 

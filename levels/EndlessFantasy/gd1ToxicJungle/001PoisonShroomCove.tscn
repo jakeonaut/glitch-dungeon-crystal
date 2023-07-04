@@ -175,10 +175,8 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 2 )
-should_glitch_activate = true
 tileset_type = 6
 how_much_mp = 11
-display_title = "toxic jungle"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 20 )]
 
@@ -340,6 +338,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170002, 3.46607, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 9.7, 0 )
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6, 11.3, 0 )
+
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 5.9, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1, -2.6, 0 )

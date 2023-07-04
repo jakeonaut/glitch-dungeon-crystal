@@ -73,6 +73,7 @@ func shouldIDoCollisions():
     .shouldIDoCollisions()
     should_collide_floor = should_collide_floor or mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE
 
+export var is_digging_left = false
 func _process(delta):
     # ._process(delta) implicit
 
@@ -141,8 +142,12 @@ func _process(delta):
                 if mole_state == MoleState.DIG_IDLE:
                     mole_state = MoleState.IDLE
                 else:
-                    digTilesBelow(getTilesBelow(getLevelTiles()), true)
-                    digTilesBelow(getTilesBelow(getFakeLevelTiles()), false)
+                    if is_digging_left:
+                        digTiles(getTilesLeftOf(getLevelTiles()), true)
+                        digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
+                    else:
+                        digTiles(getTilesBelow(getLevelTiles()), true)
+                        digTiles(getTilesBelow(getFakeLevelTiles()), false)
                     has_dug = true
                     digSound.play()
                 mole_state_timer = 0
@@ -285,24 +290,24 @@ func unsmack():
         grav = 60
     
 
-func digTilesBelow(solidTilesBelow, should_summon_clouds):
+func digTiles(solidTiles, should_summon_clouds):
     var tiles_dug = 0
-    if solidTilesBelow[0] != null:
-        var coords_a = solidTilesBelow[0]
+    if solidTiles[0] != null:
+        var coords_a = solidTiles[0]
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_a.x, coords_a.y, coords_a.z), Vector3(coords_a.x, coords_a.y+1, coords_a.z))
         else:
             levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z))
         tiles_dug += 1
-    if solidTilesBelow[1] != null:
-        var coords_mid = solidTilesBelow[1]
+    if solidTiles[1] != null:
+        var coords_mid = solidTiles[1]
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z))
         else:
             levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z))
         tiles_dug += 1
-    if solidTilesBelow[2] != null:
-        var coords_b = solidTilesBelow[2]
+    if solidTiles[2] != null:
+        var coords_b = solidTiles[2]
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_b.x, coords_b.y, coords_b.z), Vector3(coords_b.x, coords_b.y+1, coords_b.z))
         else:
@@ -316,7 +321,8 @@ func digTilesBelow(solidTilesBelow, should_summon_clouds):
         if is_builder:
             global_transform.origin.y += 8*.125
         else:
-            global_transform.origin.y -= 8*.125
+            if is_digging_left: global_transform.origin.x -= 8*.125
+            else: global_transform.origin.y -= 8*.125
                 
     return tiles_dug > 0
 

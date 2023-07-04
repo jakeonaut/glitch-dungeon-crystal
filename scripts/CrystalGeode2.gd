@@ -134,6 +134,7 @@ func otherActivateStuff():
         level.get_node("ParallaxBackground").hideMe()
 
 func alwaysActivateStuff():
+    musicPlayer.tryToPlay(musicPlayer.goddessThemePlayer)
     # TODO(jaketrower): Make more generic, this is specific to fishingVillage
     if level.has_node("NPC"):
         level.get_node("NPC").queue_free()

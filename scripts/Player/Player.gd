@@ -933,6 +933,16 @@ func getABroom():
   is_in_broom_cooldown = false
 
 func iJustPressedDown():
+  var trying_to_interact_with_door = false
+  if Input.is_action_just_pressed("interact_button"):
+    var areas = interactionArea.get_overlapping_areas()
+    for area in areas:
+      if area.is_in_group("door"):
+        trying_to_interact_with_door = true
+        break
+  if trying_to_interact_with_door:
+    return
+
   on_ground = false
   should_do_fallthrough_area_collision = false
   tryClearFallthroughCollisionSolid()

@@ -37,6 +37,7 @@ export var is_randomizing = false
 func _ready_impl():
   get_node("..").audio_listener_enable_3d = true
 
+  global.canChangeSongPitch = true
   global.activeInteractor = null # somewhat of a failsafe
   set_process_input(true)
   set_process(true)
