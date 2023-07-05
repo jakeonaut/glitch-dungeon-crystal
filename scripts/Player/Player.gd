@@ -623,6 +623,7 @@ func processBroomLogic(delta):
     if linear_velocity.y < 0:
       linear_velocity.y = 0
     summonedBroom = summonedBroomRes.instance()
+    global.incrementLevelZoneSweeps()
     level.add_child(summonedBroom)
     if which_broom_attack == 2:
       summonedBroom.aniPlayer.stop()
@@ -890,6 +891,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
     fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
     fallenBroom.global_transform.origin.y += 2
     if was_thrown:
+      global.incrementLevelZoneSweeps()
       fallenBroom.grav = 1
       fallenBroom.projectile = true
       fallenBroom.global_transform.origin.y -= 1

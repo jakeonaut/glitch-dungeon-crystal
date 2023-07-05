@@ -63,7 +63,7 @@ func getSmacked(broom_origin):
   summonSmokeClouds(5)
   spawnFiveSpores()
 
-func passiveActivate(delta, _is_player):
+func passiveActivate(_delta, _is_player):
   getSmacked(null)
 
 func spawnFiveSpores():
@@ -74,9 +74,9 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():
     var spore = sporeRes.instance()
     spore.initially_fly_up = true
+    level.add_child(spore)
     spore.global_transform.origin = self.global_transform.origin
     spore.original_pos = self.global_transform.origin
-    level.add_child(spore)
     spore.setAsParent(self)
     spore.bubble_speed = -rand_range(2.925, 3.8)
     spore.target_pos.x = self.global_transform.origin.x + rand_range(-3, 3)

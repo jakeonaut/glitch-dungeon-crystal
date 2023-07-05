@@ -200,7 +200,7 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
 visible = false
 frame = 0
 

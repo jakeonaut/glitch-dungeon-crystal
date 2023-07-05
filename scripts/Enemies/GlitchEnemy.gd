@@ -4,10 +4,10 @@ var flipTimer = 0
 var flipTimeLimit = 4
 
 onready var horizontalTurnSound = get_node("Sounds/HorizontalTurnSound") if has_node("Sounds/HorizontalTurnSound") else null
-onready var dieSound = get_node("Sounds/DieSound")
+onready var dieSound = get_node("Sounds/DieSound") if has_node("Sounds/DieSound") else null
 onready var notDieSound = get_node("Sounds/NotDieSound") if has_node("Sounds/NotDieSound") else null
-onready var evolveSound = get_node("Sounds/EvolveSound")
-onready var startEvolveSound = get_node("Sounds/StartEvolveSound")
+onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/EvolveSound") else null
+onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
@@ -153,7 +153,7 @@ func _process(delta):
 
     if behavior_evolve:
         evolution_timer += (delta*22)
-        if evolution_timer > evolution_time_limit/3 and not startEvolveSound.is_playing():
+        if startEvolveSound != null and evolution_timer > evolution_time_limit/3 and not startEvolveSound.is_playing():
             if not is_particle:
                 startEvolveSound.play()
         if evolution_timer > evolution_time_limit:
@@ -161,7 +161,7 @@ func _process(delta):
             mySprite.hframes = mySprite.hframes / 2
             mySprite.vframes = mySprite.vframes / 2
             behavior_evolve = false
-            if not is_particle:
+            if not is_particle and evolveSound != null:
                 evolveSound.play()
 
             if behavior_fizzle_out_after_evolve:
@@ -267,7 +267,7 @@ func processPhysics(delta):
         .processPhysics(delta)
 
 func processDeath():
-    if not dieSound.is_playing():
+    if dieSound == null or not dieSound.is_playing():
         queue_free()
 
 # func glitchSwitchSprite(delta):
@@ -377,7 +377,7 @@ func ouchies(_broom_origin):
         mySprite.should_soft_fizzle_out = true
         # mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
-        dieSound.play()
+        if dieSound != null: dieSound.play()
         pauseSelf = true
         tryRemoveEnemiesGroup()
 

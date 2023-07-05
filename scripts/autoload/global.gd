@@ -277,6 +277,7 @@ func tryInitializeLevelZone(levelZone):
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths")
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps")
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles")
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps")
     currLevelZone = levelZone
 
 func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing):
@@ -346,6 +347,9 @@ func incrementLevelZoneDeaths():
 
 func incrementLevelZoneJumps():
     incrementLevelZoneThing("num_jumps", 1)
+
+func incrementLevelZoneSweeps():
+    incrementLevelZoneThing("num_broom_sweeps", 1)
 
 func incrementLevelZoneGlitchTiles(amt):
     incrementLevelZoneThing("num_glitch_tiles", amt)

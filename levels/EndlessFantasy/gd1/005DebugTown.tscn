@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -48,7 +48,6 @@
 [ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=46]
 [ext_resource path="res://levels/EndlessFantasy/000FrogWizardIntroAbortSound.gd" type="Script" id=47]
 [ext_resource path="res://assets/npcs/frogwizportrait.png" type="Texture" id=48]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=49]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 5 )
@@ -782,6 +781,53 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=100]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=132]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=133]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=134]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -1531,6 +1577,16 @@ is_a_body = false
 floating_text = true
 tiny_textbox = true
 
+[node name="EndOfDemoNPC" parent="Viewport/level/StatusNPCs" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, 0.8, 0 )
+grav = 0
+bbText = "beat all levels
+to unlock"
+can_camera_zoom = false
+is_a_body = false
+floating_text = true
+tiny_textbox = true
+
 [node name="Player2" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 9, -1 )
 
@@ -1661,6 +1717,25 @@ anims/locked = SubResource( 100 )
 shape = SubResource( 64 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="EndOfDemoDoor" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -3, 0 )
+is_locked = true
+path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
+
+[node name="AnimationPlayer" parent="Viewport/level/EndOfDemoDoor" index="4"]
+anims/doorClose = SubResource( 132 )
+anims/doorOpen = SubResource( 133 )
+anims/locked = SubResource( 134 )
+
+[node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/InteractionArea" index="0"]
+shape = SubResource( 64 )
+
+[node name="NPC" parent="Viewport/level/EndOfDemoDoor" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8, -3.7, -1 )
+
+[node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
 [node name="Door8" parent="Viewport/level" instance=ExtResource( 16 )]
@@ -2063,9 +2138,6 @@ anims/walk = SubResource( 130 )
 [node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
 shape = SubResource( 131 )
 
-[node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 49 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -2, 0 )
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
@@ -2088,6 +2160,8 @@ visible = true
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
+[editable path="Viewport/level/EndOfDemoDoor"]
+[editable path="Viewport/level/EndOfDemoDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door8"]
 [editable path="Viewport/level/Door8/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door7"]

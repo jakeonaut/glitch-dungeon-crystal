@@ -76,7 +76,7 @@ func spinTheFroggies(delta):
             var tadpole = tadpoles[tadpole_index]
             tadpole.startSpinning(tadpole_index, num_tadpoles)
             tadpole_index += 1
-    else:
+    elif global.hasGottenLevelGeode:
         var should_stop_animation = true
         for tadpole in tadpoles:
             if not tadpole.is_evolved:
@@ -85,7 +85,6 @@ func spinTheFroggies(delta):
             stop_animation_timer += (delta*11)
             if stop_animation_timer >= stop_animation_time_limit:
                 stopAnimation()
-                transition.long_fade_to(self.path)
 
 func stopAnimation():
     npc.is_active = false

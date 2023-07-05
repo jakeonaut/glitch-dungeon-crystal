@@ -237,7 +237,7 @@ tileset_type = 2
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="6"]
+[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="12"]
 visible = false
 
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
@@ -246,7 +246,7 @@ mesh = SubResource( 48 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="11"]
+[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="17"]
 visible = true
 margin_left = 260.0
 margin_top = 364.0

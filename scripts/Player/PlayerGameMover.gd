@@ -41,7 +41,7 @@ var is_mushroom_infected = false
 var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
-var mushroom_turn_time_limit = 10
+var mushroom_turn_time_limit = 6
 
 func _ready():
   set_physics_process(true)
@@ -242,7 +242,7 @@ func regainNestingDoll():
 func getWalkSpeed(delta):
   if is_mushroom_infected:
     run_timer = 0
-    return 3 if mushroom_turn_timer > 0 else 5
+    return 2 if mushroom_turn_timer > 0 else 7
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     run_timer = 0
     return 5 if pressingRun() and on_ground else 4
@@ -309,9 +309,9 @@ func spawnASpore(x_dir = 0, y_dir = 1):
   var spore = sporeRes.instance()
   if y_dir == 1:
     spore.initially_fly_up = true
+  level.add_child(spore)
   spore.global_transform.origin = self.global_transform.origin
   spore.original_pos = self.global_transform.origin
-  level.add_child(spore)
   if y_dir == 1:
     spore.bubble_speed = -rand_range(1.925, 2.8)
   elif y_dir == -1:

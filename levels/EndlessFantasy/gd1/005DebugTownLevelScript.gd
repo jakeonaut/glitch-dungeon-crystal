@@ -9,6 +9,8 @@ onready var toxicJungleNPC = get_node("StatusNPCs/ToxicJungleNPC")
 var cricketCaveStr = "gd1ShiftingSandLand"
 onready var cricketCaveNPC = get_node("StatusNPCs/CricketCaveNPC")
 
+onready var endOfDemoDoor = get_node("EndOfDemoDoor")
+
 # @override
 func setUpRoomInitializationOverride():
   var fishHiscore = global.getHighScoreLevelZoneThing(fishingVillageStr, "num_mini_crystal_cubes")
@@ -32,7 +34,9 @@ func setUpRoomInitializationOverride():
     cricketCaveNPC.textBoxContainer.bbText = " "
   cricketCaveNPC.textBoxContainer.setVars()
 
-
+  if fishHiscore != null and toxicHiscore != null and cricketHiscore != null:
+    endOfDemoDoor.is_locked = false
+    endOfDemoDoor.animationPlayer.play("doorOpen")
 
 func _process(delta):
   # ._process(delta) implicit

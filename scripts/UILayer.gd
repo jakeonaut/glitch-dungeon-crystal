@@ -68,6 +68,7 @@ func recreateHeartSprites():
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
 onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 func _process(delta):
+  processHiscoreRenderLogic(delta)
   # if global.memory["max_mp"] <= 0:
   #  get_node("GlitchStatusRect").visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
@@ -180,6 +181,77 @@ func _process(delta):
       elif glitch == global.GlitchForm.LADDER: equipSlotSprite.frame = 25
       elif glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
       elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
+
+onready var congratsHiscoreLabel = get_node("CongratsHiscoreLabel")
+onready var crystalCubeHiscoreLabel = get_node("CrystalCubeHiscoreLabel")
+onready var glitchTilesHiscoreLabel = get_node("GlitchTilesHiscoreLabel")
+onready var deathsHiscoreLabel = get_node("DeathsHiscoreLabel")
+onready var jumpsHiscoreLabel = get_node("JumpsHiscoreLabel")
+onready var pressEnterLabel = get_node("PressEnterLabel")
+var hiscoreDisplayIndex = 0
+var hiscoreCounter = 0
+var hiscoreTimer = 0
+var hiscoreTimeLimit = 1
+func processHiscoreRenderLogic(delta):
+  if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    congratsHiscoreLabel.visible = false
+    return
+  congratsHiscoreLabel.visible = true
+  congratsHiscoreLabel.text = "   CONGRATS:\nU won a dungeon!!"
+
+  hiscoreTimer += (delta*11)
+  if hiscoreTimer >= hiscoreTimeLimit:
+    glitchStatusText1.visible = false
+    glitchStatusText2.visible = false
+    hiscoreTimer = 0
+    # TODO(jaketrower): can consolidate this but i'm lazy rn
+    if hiscoreDisplayIndex == 0:
+      hiscoreTimeLimit = 2
+      crystalCubeHiscoreLabel.visible = true
+      crystalCubeHiscoreLabel.text = "mini crystals: " + str(hiscoreCounter)
+      var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
+      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+        hiscoreCounter += 1
+      else:
+        hiscoreDisplayIndex += 1
+        hiscoreCounter = 0
+    elif hiscoreDisplayIndex == 1:
+      hiscoreTimeLimit = 2
+      glitchTilesHiscoreLabel.visible = true
+      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(hiscoreCounter)
+      var hiscoreSource = global.getLevelZoneThing("num_broom_sweeps")
+      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+        hiscoreCounter += 1
+      else:
+        hiscoreDisplayIndex += 1
+        hiscoreCounter = 0
+    elif hiscoreDisplayIndex == 2:
+      hiscoreTimeLimit = 4
+      deathsHiscoreLabel.visible = true
+      deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
+      var hiscoreSource = global.getLevelZoneThing("num_deaths")
+      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+        hiscoreCounter += 1
+      else:
+        hiscoreDisplayIndex += 1
+        hiscoreCounter = 0
+    elif hiscoreDisplayIndex == 3:
+      hiscoreTimeLimit = 2
+      jumpsHiscoreLabel.visible = true
+      jumpsHiscoreLabel.text = "jumps: " + str(hiscoreCounter)
+      var hiscoreSource = global.getLevelZoneThing("num_jumps")
+      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+        hiscoreCounter += 1
+      else:
+        hiscoreDisplayIndex += 1
+        hiscoreCounter = 0
+        hiscoreTimeLimit = 5
+    elif hiscoreDisplayIndex == 4:
+      pressEnterLabel.visible = not pressEnterLabel.visible
+      pressEnterLabel.text = "press enter\nto go back"
+  
+  if Input.is_action_just_pressed("ui_start"):  
+    transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x > 1:

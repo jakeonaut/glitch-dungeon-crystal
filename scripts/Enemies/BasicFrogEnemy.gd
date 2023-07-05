@@ -53,7 +53,7 @@ func _process(delta):
       mushroomSprite.visible = true
     if not interactionArea.is_in_group("enemies"):
       interactionArea.add_to_group("enemies")
-    if fallthroughSolidArea:
+    if fallthroughSolidArea and fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.remove_from_group("fallthrough")
     
   else:
@@ -134,9 +134,9 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():
     var spore = sporeRes.instance()
     spore.initially_fly_up = true
+    level.add_child(spore)
     spore.global_transform.origin = self.global_transform.origin
     spore.original_pos = self.global_transform.origin
-    level.add_child(spore)
     spore.bubble_speed = -rand_range(1.925, 2.8)
     spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
     spore.delta_multiplier = 4.0
