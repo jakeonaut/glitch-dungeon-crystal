@@ -388,8 +388,11 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
-      if glitch_form != global.GlitchForm.FLOOR:
-        global_transform.origin.y += 2
+      self.linear_velocity.y = 0
+      self.vv = 0
+      self.lv.y = 0
+      self.on_ground = false
+      self.global_transform.origin.y += 1
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY
