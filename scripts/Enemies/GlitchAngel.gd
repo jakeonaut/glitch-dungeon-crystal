@@ -2,7 +2,6 @@ extends "GlitchEnemy.gd"
 
 onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-onready var flightPathAniPlayer = get_node("FlightPathAnimationPlayer")
 
 const NullificationBulletResource = preload("res://sceneObjects/SpellsTreasureCollectables/NullificationBullet.tscn")
 
@@ -46,7 +45,6 @@ func _process(delta):
     
     delta = delta * global.time_dilation_multiplier
     secretAniPlayer.playback_speed = global.time_dilation_multiplier
-    flightPathAniPlayer.playback_speed = global.time_dilation_multiplier
 
     if am_i_in_range_of_player:
         if angel_state == AngelState.HIDDEN:

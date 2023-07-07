@@ -51,6 +51,15 @@ func _ready():
   levelTitleRect.rect_scale = Vector2(0, 1)
   set_process(true)
   recreateHeartSprites()
+  hiscoreRect.visible = false
+  congratsHiscoreLabel.visible = false
+  crystalCubeHiscoreLabel.visible = false
+  glitchTilesHiscoreLabel.visible = false
+  angelHiscoreLabel.visible = false
+  deathsHiscoreLabel.visible = false
+  jumpsHiscoreLabel.visible = false
+  totalHiscoreLabel.visible = false
+  pressEnterLabel.visible = false
 
 func recreateHeartSprites():
   var heartSprite = heartsRect.get_node("ColorRect/ColorRect/HeartSprite")
@@ -182,20 +191,33 @@ func _process(delta):
       elif glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
       elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
 
+onready var hiscoreRect = get_node("HiscoreRect")
 onready var congratsHiscoreLabel = get_node("CongratsHiscoreLabel")
 onready var crystalCubeHiscoreLabel = get_node("CrystalCubeHiscoreLabel")
 onready var glitchTilesHiscoreLabel = get_node("GlitchTilesHiscoreLabel")
 onready var deathsHiscoreLabel = get_node("DeathsHiscoreLabel")
+onready var angelHiscoreLabel = get_node("AngelHiscoreLabel")
 onready var jumpsHiscoreLabel = get_node("JumpsHiscoreLabel")
+onready var totalHiscoreLabel = get_node("TotalHiscoreLabel")
 onready var pressEnterLabel = get_node("PressEnterLabel")
 var hiscoreDisplayIndex = 0
 var hiscoreCounter = 0
+var totalHiscoreCounter = 0
 var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
 func processHiscoreRenderLogic(delta):
   if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    hiscoreRect.visible = false
     congratsHiscoreLabel.visible = false
+    crystalCubeHiscoreLabel.visible = false
+    glitchTilesHiscoreLabel.visible = false
+    angelHiscoreLabel.visible = false
+    deathsHiscoreLabel.visible = false
+    jumpsHiscoreLabel.visible = false
+    totalHiscoreLabel.visible = false
+    pressEnterLabel.visible = false
     return
+  hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
   congratsHiscoreLabel.text = "   CONGRATS:\nU won a dungeon!!"
 
@@ -206,39 +228,38 @@ func processHiscoreRenderLogic(delta):
     hiscoreTimer = 0
     # TODO(jaketrower): can consolidate this but i'm lazy rn
     if hiscoreDisplayIndex == 0:
-      hiscoreTimeLimit = 2
+      totalHiscoreLabel.visible = true
       crystalCubeHiscoreLabel.visible = true
-      crystalCubeHiscoreLabel.text = "mini crystals: " + str(hiscoreCounter)
+      crystalCubeHiscoreLabel.text = "mini crystals: " + str(hiscoreCounter) + "   (* 3) = " + str(hiscoreCounter * 3)
       var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
+        totalHiscoreCounter += 3
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 1:
-      hiscoreTimeLimit = 2
+    elif hiscoreDisplayIndex == 2:
       glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(hiscoreCounter)
+      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(hiscoreCounter) + "   (* 0)"
       var hiscoreSource = global.getLevelZoneThing("num_broom_sweeps")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 2:
-      hiscoreTimeLimit = 4
+    elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
+      deathsHiscoreLabel.text = "+ deaths: " + str(hiscoreCounter) + "   (* -5) = " + str(hiscoreCounter * -5)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
+        totalHiscoreCounter -= 5
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 3:
-      hiscoreTimeLimit = 2
       jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = "jumps: " + str(hiscoreCounter)
+      jumpsHiscoreLabel.text = "jumps: " + str(hiscoreCounter) + "   (* 0)"
       var hiscoreSource = global.getLevelZoneThing("num_jumps")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
@@ -247,8 +268,22 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
         hiscoreTimeLimit = 5
     elif hiscoreDisplayIndex == 4:
+      angelHiscoreLabel.visible = true
+      angelHiscoreLabel.text = "+ angels: " + str(hiscoreCounter) + "   (* 20) = " + str(hiscoreCounter * 20)
+      var hiscoreSource = global.getLevelZoneThing("angelTadpole")
+      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+        hiscoreCounter += 1
+        totalHiscoreCounter += 20
+      else:
+        hiscoreDisplayIndex += 1
+        hiscoreCounter = 0
+        hiscoreTimeLimit = 5
+    elif hiscoreDisplayIndex == 5:
       pressEnterLabel.visible = not pressEnterLabel.visible
-      pressEnterLabel.text = "press enter\nto go back"
+      pressEnterLabel.text = "press enter\nto continue"
+    totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
+    if level.has_node("CubeCrystal"):
+      global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
   if Input.is_action_just_pressed("ui_start"):  
     transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")

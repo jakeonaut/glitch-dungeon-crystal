@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=2]
@@ -714,72 +714,6 @@ tracks/7/keys = {
 "values": [ 0.01 ]
 }
 
-[sub_resource type="Animation" id=28]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=29]
-resource_name = "flyInfinite"
-length = 4.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 2, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 1, 0 ), Vector3( 1, -1, 0 ), Vector3( 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=30]
-resource_name = "flySquare"
-length = 4.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=31]
-resource_name = "flyTriangle"
-length = 4.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( -2, 0, 0 ), Vector3( 0, 2, 0 ), Vector3( 2, 0, 0 ), Vector3( 0, 0, 0 ) ]
-}
-
 [node name="GlitchAngel" type="KinematicBody"]
 collision_layer = 4
 script = ExtResource( 14 )
@@ -890,9 +824,3 @@ anims/flickerIn = SubResource( 19 )
 anims/idle = SubResource( 22 )
 anims/shootBullet = SubResource( 27 )
 anims/shootBulletWindup = SubResource( 26 )
-
-[node name="FlightPathAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 28 )
-anims/flyInfinite = SubResource( 29 )
-anims/flySquare = SubResource( 30 )
-anims/flyTriangle = SubResource( 31 )

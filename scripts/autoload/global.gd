@@ -149,7 +149,7 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
-    memory["broom"] = true
+    memory["broom"] = false
     memory["has_gotten_broom"] = 1
     memory["nesting_doll"] = false
     memory["max_hp"] = 1
@@ -258,7 +258,6 @@ func doFallthroughObjectCollision(gameMover, area):
 var currLevelZone = null
 const HUB_LEVEL_ZONE = "gd1" 
 func tryInitializeLevelZone(levelZone):
-    print(str(currLevelZone) + ", " + str(levelZone))
     if not self.memory.has(levelZone):
         self.memory[levelZone] = {}
     
@@ -278,6 +277,8 @@ func tryInitializeLevelZone(levelZone):
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps")
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles")
         setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps")
+        setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore")
+
     currLevelZone = levelZone
 
 func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing):
@@ -327,6 +328,22 @@ func getLevelZoneThing(thing):
     if not self.memory[currLevelZone].has(thing):
         return
     return self.memory[currLevelZone][thing]
+
+func setLevelZoneThing(thing, val):
+    # also set the total counter
+    if not self.memory.has(thing):
+        self.memory[thing] = 0
+    self.memory[thing] = val
+    if currLevelZone == null:
+        return
+    if currLevelZone == null:
+        return
+
+    if not self.memory.has(currLevelZone):
+        self.memory[currLevelZone] = {}
+    if not self.memory[currLevelZone].has(thing):
+        self.memory[currLevelZone][thing] = 0
+    self.memory[currLevelZone][thing] = val
 
 func incrementLevelZoneThing(thing, amt):
     # also increment the total counter
@@ -386,3 +403,8 @@ func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
     var targetVec2 = vec3ToVec2(targetVec3)
     return (sourceVec2 - targetVec2).length() < closeness_amt    
 
+func saveMySpot(position, level):
+    global.memory["active_save_point_x"] = position.x
+    global.memory["active_save_point_y"] = position.y
+    global.memory["active_save_point_z"] = position.z
+    global.memory["savedRoomPath"] = level.getLevelName()

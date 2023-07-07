@@ -86,6 +86,9 @@ func _process(delta):
 
     
 func tryDieIfTooFarFromPlayer():
+    if is_static_in_level:
+        return
+        
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
     if distance >= 20:
         returning = true

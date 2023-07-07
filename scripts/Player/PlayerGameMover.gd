@@ -41,7 +41,7 @@ var is_mushroom_infected = false
 var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
-var mushroom_turn_time_limit = 6
+var mushroom_turn_time_limit = 3
 
 func _ready():
   set_physics_process(true)
@@ -64,6 +64,7 @@ func _process(delta):
     jump_press_timer += 1
 
   if justPressedJump():
+    mushroom_turn_timer = mushroom_turn_time_limit
     jump_press_timer = 0
     var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
@@ -240,9 +241,10 @@ func regainNestingDoll():
 
 # @override
 func getWalkSpeed(delta):
+  var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if is_mushroom_infected:
     run_timer = 0
-    return 2 if mushroom_turn_timer > 0 else 7
+    return 1 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 3
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     run_timer = 0
     return 5 if pressingRun() and on_ground else 4

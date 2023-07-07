@@ -42,7 +42,7 @@ func _process(_delta):
     elif Input.is_action_just_pressed("interact_button"):
         # short circuit to textbox if one exists
         if global.activeInteractor != null:
-            if global.activeInteractor.is_in_group("door_textbox") and nearest_area.is_in_group("door"):
+            if global.activeInteractor.is_in_group("door_textbox") and nearest_area != null and nearest_area.is_in_group("door"):
                 nearest_area.InteractActivate()
             if global.activeInteractor != null: # need to recheck cuz the above line might have cleared
                 global.activeInteractor.InteractActivate()

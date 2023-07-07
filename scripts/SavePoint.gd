@@ -23,13 +23,14 @@ func _ready():
 
     set_process(true)
 
+var was_on_save_point = false
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
     
     if isOnSavePoint():
         triangleContainer.rotation_degrees.y -= delta*22*5
-        if not is_active:
+        if not is_active or not was_on_save_point:
             enablePaletteCycle()
             spawn_timer = spawn_time_limit
             if triangleContainer.visible:
@@ -38,7 +39,9 @@ func _process(delta):
                 aniPlayer.play("sporeGrow")
                 has_grown_spores = true
         is_active = true
+        was_on_save_point = true
     else:
+        was_on_save_point = false
         triangleContainer.rotation_degrees.y += delta*22*inactive_triangle_rotation_direction
         if triangleContainer.rotation_degrees.y >= 45 and inactive_triangle_rotation_direction == 1:
             inactive_triangle_rotation_direction = -1
@@ -110,10 +113,7 @@ func passiveActivate(_delta, _is_player):
     global.memory["hp"] = global.memory["max_hp"]
     if not isOnSavePoint():
         saveSound.play()
-        global.memory["active_save_point_x"] = self.translation.x
-        global.memory["active_save_point_y"] = self.translation.y
-        global.memory["active_save_point_z"] = self.translation.z
-        global.memory["savedRoomPath"] = get_tree().get_root().get_node("Game/Viewport/level").getLevelName()
+        global.saveMySpot(self.translation, level)
         
         global.memory.erase("player_y_offset")
 

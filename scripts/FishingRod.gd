@@ -46,7 +46,7 @@ func _process(delta):
       is_reeled_in = true
       return
     elif hookTarget.get_ref() == level.player:
-      if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
+      if is_reeled_in or Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
         hooked = false
         hookTarget = null
         restorePlayer()

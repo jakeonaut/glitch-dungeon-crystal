@@ -5,9 +5,9 @@ onready var NPC = get_node("NPC")
 var has_updated = false
 
 # @override
-func setUpRoomInitializationOverride():
+func _process(_delta):
   if global.memory["broom"] and not has_updated:
-    NPC.textBoxContainer.bbText = "thank ye dearie.\nsweep up with [X]"
+    NPC.textBoxContainer.bbText = "what is this strange\ndust... could ya\nsweep up with [X]?"
     NPC.textBoxContainer.setVars()
     NPC.textBox.has_been_shown = false
     has_updated = true

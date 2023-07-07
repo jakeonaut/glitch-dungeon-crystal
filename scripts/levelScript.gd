@@ -232,6 +232,7 @@ func tryToRespawn():
     found_door.land()
   elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin
+    global.saveMySpot(player.spawn_origin, self)
   if global.set_camera_position_on_respawn:
     player.target_last_grounded_y = player.global_transform.origin.y
     player.cameraTarget.global_transform.origin.y = player.target_last_grounded_y

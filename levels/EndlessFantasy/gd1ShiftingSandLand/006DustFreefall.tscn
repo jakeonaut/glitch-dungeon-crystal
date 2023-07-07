@@ -182,6 +182,9 @@ path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"
 is_passive = true
 is_vertical = true
 
+[node name="landing" parent="Viewport/level/Door2" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.6, 1 )
+
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 15 )
 anims/doorOpen = SubResource( 16 )
@@ -225,15 +228,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -18, 0 )
 
 [node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, -37, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, -28.8, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999985, 0 )
 frame = 37
 
 [node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, -34.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, -30.5, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly5" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999985, 0 )
 frame = 37
 
 [node name="Dragonfly6" parent="Viewport/level" instance=ExtResource( 18 )]

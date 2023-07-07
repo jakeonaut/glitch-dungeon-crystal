@@ -516,7 +516,7 @@ frame_delay = 0.3
 max_frames = 4
 
 [node name="HeartSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 12 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12 )
 material_override = SubResource( 5 )
 pixel_size = 0.12
 texture = ExtResource( 15 )

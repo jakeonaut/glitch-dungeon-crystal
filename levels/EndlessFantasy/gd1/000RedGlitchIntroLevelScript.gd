@@ -8,9 +8,11 @@ func overrideLevelRespawnEvent():
 func setUpRoomInitializationOverride():
   pass
 
+
+var has_done_my_power = false
 # @override
 func _process(_delta):
-    if global.memory.has("roomPath") and "001RedGlitch" in global.memory["roomPath"]:
-        NPC.textBoxContainer.bbText = "to get back up\nyou must die."
-        NPC.textBoxContainer.setVars()
-        NPC.textBoxContainer.textBox.has_been_shown = false
+    if not has_done_my_power and global.memory.has("roomPath") and "001RedGlitch" in global.memory["roomPath"]:
+      NPC.textBoxContainer.bbText = "to get back up\nyou must die."
+      NPC.textBoxContainer.setVars()
+      has_done_my_power = true

@@ -814,6 +814,7 @@ so much for playing!
 tell me what u thought!"
 is_really_important = true
 can_move = false
+can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
@@ -867,6 +868,7 @@ by zaebucca, markeryjane,
 carefree media"
 is_really_important = true
 can_move = false
+can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
@@ -920,6 +922,7 @@ itch.io artists &
 twitter people!!!"
 is_really_important = true
 can_move = false
+can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
@@ -972,6 +975,7 @@ bbText = "i'll make better
 credits later"
 is_really_important = true
 can_move = false
+can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
@@ -1025,6 +1029,7 @@ bbText = "plenty more to come:
 more \"spells\", the GRIMOIRE"
 is_really_important = true
 can_move = false
+can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
@@ -1254,6 +1259,10 @@ shape = SubResource( 44 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 45 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, -1, 0 )
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 28 )]
 

@@ -171,10 +171,17 @@ func pressingRun():
   return Input.is_action_pressed("sub_action_button") and summonedBroom == null or \
          (is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
   
+func isWalkingIntoWall():
+  if summonedBroom != null:
+    return was_walking_into_wall
+  else:
+    return .isWalkingIntoWall() # super
+
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom
+  pauseInput = summonedBroom != null
+
   
   # TODO(jaketrower): !!! Remove (change to HOLD) before release
   if Input.is_action_just_pressed("ui_cancel"):
@@ -381,7 +388,8 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
-      global_transform.origin.y += 2
+      if glitch_form != global.GlitchForm.FLOOR:
+        global_transform.origin.y += 2
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY
@@ -501,8 +509,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
-  if is_mushroom_infected:
-    level.player.getABroom()
+  # if is_mushroom_infected:
+  #   level.player.getABroom()
   is_mushroom_infected = false
 
   if global.activeInteractor:
@@ -653,10 +661,10 @@ onready var sporeSound = get_node("Sounds/SporeSound")
 func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
-    if global.memory["broom"]:
-      mySprite.flip_h = not mySprite.flip_h
-      summonFallenBroom(false, true)
-      mySprite.flip_h = not mySprite.flip_h
+    # if global.memory["broom"]:
+    #   mySprite.flip_h = not mySprite.flip_h
+    #   summonFallenBroom(false, true)
+    #   mySprite.flip_h = not mySprite.flip_h
     adjustMushroomSpritePosition()
     if horizontal_collision:
       mushroom_infection_direction = -mushroom_infection_direction
@@ -935,6 +943,10 @@ func getABroom():
   is_in_broom_cooldown = false
 
 func iJustPressedDown():
+  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:
+    .iJustPressedDown() # super
+    return
+
   var trying_to_interact_with_door = false
   if Input.is_action_just_pressed("interact_button"):
     var areas = interactionArea.get_overlapping_areas()

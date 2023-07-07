@@ -14,6 +14,7 @@ var is_smacked = false
 var smack_timer = 0
 export var smack_time_limit = 2
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
+var is_swimmin_away = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +37,7 @@ func _ready():
     original_pos = global_transform.origin
     randomizeTargetPos()
     mySprite.material_override = mySprite.material_override.duplicate()
+    mySprite.global_transform.origin = self.global_transform.origin
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -50,7 +52,13 @@ func _process(delta):
 
     var diff = target_pos - global_transform.origin
     var step = 0.1
-    if not didja_get_me and stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
+    if is_swimmin_away:
+        step = 5
+        if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
+        stepify(target_pos.y, 0.1) == stepify(global_transform.origin.y, 0.1):
+            is_swimmin_away = false
+            randomizeTargetPos()
+    elif not didja_get_me and stepify(abs(diff.x), step) == 0 and stepify(abs(diff.y), step) == 0:
         randomizeTargetPos()
 
     if is_smacked:
@@ -78,24 +86,27 @@ func isActive():
     return true
 
 func passiveActivate(_delta, _is_player):
-    if not didja_get_me:
-        catchSound.play()
-        # if global.memory.has("dragonflies"):
-        #     global.memory["dragonflies"] += 1
-        # else:
-        #     global.memory["dragonflies"] = 1
-        didja_get_me = true
-        # global.collectable_key_recently_got = "dragonflies"
-        # global.collectable_key_recently_got_timer = 0
+    if not is_swimmin_away:
+        is_swimmin_away = true
         
-        target_pos = Vector3(
-            global_transform.origin.x,
-            global_transform.origin.y + rand_range(2, 3),
-            original_pos.z
-        )
-        
-        if is_static_in_level:
-            global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)
+    var x_min = 2
+    var x_max = 3
+    var y_min = 2
+    var y_max = 3
+    if level.player.global_transform.origin.x > self.global_transform.origin.x:
+        x_min = -3
+        x_max = -2
+    if level.player.global_transform.origin.y > self.global_transform.origin.y:
+        y_min = -3
+        y_max = -2
+
+
+    target_pos = Vector3(
+        global_transform.origin.x + rand_range(x_min, x_max),
+        global_transform.origin.y + rand_range(y_min, y_max),
+        original_pos.z
+    )
+    mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
 export var time_influence = 35
 export var y_div = 2.3

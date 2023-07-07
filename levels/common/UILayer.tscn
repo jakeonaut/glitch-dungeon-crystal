@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=10]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=11]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=12]
+[ext_resource path="res://assets/fonts/VGATypewriter.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://assets/water_normal_3.png" type="Texture" id=14]
 [ext_resource path="res://TextBoxTheme.tres" type="Theme" id=15]
 [ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=16]
@@ -20,13 +21,13 @@
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=10]
-size = 20
+size = 32
 outline_size = 4
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
 extra_spacing_top = 2
 extra_spacing_bottom = 2
-font_data = ExtResource( 16 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="Theme" id=11]
 default_font = SubResource( 10 )
@@ -65,7 +66,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="ArrayMesh" id=28]
+[sub_resource type="ArrayMesh" id=31]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -248,12 +249,22 @@ bbcode_text = "the dungeon"
 text = "the dungeon"
 scroll_active = false
 
+[node name="HiscoreRect" type="ColorRect" parent="."]
+visible = false
+margin_left = 40.0
+margin_top = 25.0
+margin_right = 599.0
+margin_bottom = 489.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.556863 )
+
 [node name="CongratsHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
 margin_left = 109.0
-margin_top = 55.0
+margin_top = 40.0
 margin_right = 569.0
-margin_bottom = 118.0
+margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 30 )
@@ -265,10 +276,10 @@ scroll_active = false
 
 [node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 142.5
-margin_top = 140.0
-margin_right = 525.5
-margin_bottom = 193.0
+margin_left = 96.0
+margin_top = 131.0
+margin_right = 588.5
+margin_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -280,10 +291,25 @@ scroll_active = false
 
 [node name="GlitchTilesHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 17.0
-margin_top = 193.0
-margin_right = 494.0
-margin_bottom = 246.0
+margin_left = 99.0
+margin_top = 216.0
+margin_right = 534.0
+margin_bottom = 269.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 11 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "the dungeon"
+text = "the dungeon"
+scroll_active = false
+
+[node name="AngelHiscoreLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 103.0
+margin_top = 295.5
+margin_right = 538.0
+margin_bottom = 348.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -295,10 +321,10 @@ scroll_active = false
 
 [node name="DeathsHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 266.0
-margin_top = 255.5
-margin_right = 649.0
-margin_bottom = 308.5
+margin_left = 99.5
+margin_top = 172.0
+margin_right = 482.5
+margin_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -310,10 +336,25 @@ scroll_active = false
 
 [node name="JumpsHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 307.0
-margin_top = 313.5
-margin_right = 690.0
-margin_bottom = 366.5
+margin_left = 100.0
+margin_top = 253.5
+margin_right = 483.0
+margin_bottom = 306.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 11 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "the dungeon"
+text = "the dungeon"
+scroll_active = false
+
+[node name="TotalHiscoreLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 136.5
+margin_top = 354.0
+margin_right = 519.5
+margin_bottom = 407.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -328,7 +369,7 @@ visible = false
 margin_left = 180.0
 margin_top = 403.5
 margin_right = 563.0
-margin_bottom = 456.5
+margin_bottom = 489.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -618,7 +659,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 28 )
+mesh = SubResource( 31 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )

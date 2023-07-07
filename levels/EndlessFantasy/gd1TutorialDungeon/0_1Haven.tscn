@@ -1,0 +1,1260 @@
+[gd_scene load_steps=92 format=2]
+
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=7]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=9]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=14]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=16]
+[ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/player_sheet_bag.png" type="Texture" id=19]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=20]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/tiles/grey_background_tiles.tres" type="MeshLibrary" id=25]
+[ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=26]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=28]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=29]
+[ext_resource path="res://levels/EndlessFantasy/002PathToSacredDoors/NPCEnchantedBagAbortSound.gd" type="Script" id=30]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=31]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=32]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=33]
+[ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=34]
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.3
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.05
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 3.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=19]
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 18, 19 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "broomSweep"
+length = 0.5
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 48, 49, 48, 49 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "climb"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 46, 47, 46, 47 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "climbStop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 46, 47 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "collapse"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 1, 1.1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 12, 11, 12, 0, 26, 0, 22, 23, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "fallBump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 35, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "fallFar"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 6, 14, 7, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "fallFlat"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 14 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "fishingHooked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 39, 38 ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "fishingIdle"
+length = 15.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.1, 1.2, 1.3, 1.5, 1.7, 2.2, 3, 3.2, 3.4, 3.6, 3.8, 3.9, 4, 4.2, 4.4, 4.6, 6, 9.1, 9.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 39, 40, 39, 40, 39, 40, 39, 40, 41, 40, 41, 40, 41, 40, 41, 40, 41, 40, 39, 40, 39 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "fishingSitDown"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 36, 37, 38, 39 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 14, 15, 11, 16, 13, 1 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=36]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "jumpBump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 33, 5 ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 11 ]
+}
+
+[sub_resource type="Animation" id=39]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0336991 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=40]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 14, 15, 10, 0 ]
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 21, 20 ]
+}
+
+[sub_resource type="Animation" id=42]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "swimFall"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "swimJump"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 44, 45 ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "swimJumpStart"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 36, 44, 45 ]
+}
+
+[sub_resource type="Animation" id=46]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 22, 23 ]
+}
+
+[sub_resource type="Animation" id=47]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3, 9 ]
+}
+
+[sub_resource type="Animation" id=48]
+resource_name = "wakeup"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 31, 30, 29, 24, 25, 26, 27, 0 ]
+}
+
+[sub_resource type="Animation" id=49]
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 2, 3, 2, 25 ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "walkBump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 32, 24, 25, 26, 0 ]
+}
+
+[sub_resource type="Animation" id=51]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 24, 25 ]
+}
+
+[sub_resource type="Animation" id=52]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 26, 27 ]
+}
+
+[sub_resource type="BoxShape" id=61]
+resource_local_to_scene = true
+extents = Vector3( 3, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=62]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=63]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.1
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.02
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.402
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/normal_offset = 0.39
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="BoxShape" id=15]
+resource_local_to_scene = true
+extents = Vector3( 2, 8, 1 )
+
+[sub_resource type="BoxShape" id=16]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="Animation" id=53]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=54]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=55]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=64]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=75]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=76]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=77]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.05
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 1.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 19 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="Animation" id=82]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=84]
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="BoxShape" id=78]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape" id=79]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=80]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=85]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.5
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="BoxShape" id=81]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" parent="." instance=ExtResource( 21 )]
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 33 )
+tileset_type = 2
+how_much_mp = 10
+
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 11 )]
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 15 )]
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 32 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 196589, 0, 3, 196590, 0, 3, 196591, 0, 3, 196592, 0, 3, 196593, 0, 3, 196594, 0, 3, 196595, 0, 3, 196596, 0, 3, 196609, 0, 3, 196610, 0, 3, 262125, 0, 3, 262126, 0, 3, 262127, 0, 3, 262128, 0, 3, 262129, 0, 3, 262130, 0, 3, 262131, 0, 3, 262132, 0, 3, 262133, 0, 3, 262144, 0, 1, 262145, 0, 3, 262146, 0, 3, 327661, 0, 3, 327662, 0, 3, 327663, 0, 3, 327664, 0, 3, 327665, 0, 3, 327666, 0, 3, 327667, 0, 3, 327668, 0, 3, 327669, 0, 3, 327670, 0, 3, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 3, 327682, 0, 3, 393197, 0, 3, 393198, 0, 3, 393199, 0, 3, 393200, 0, 3, 393201, 0, 3, 393202, 0, 3, 393203, 0, 3, 393204, 0, 3, 393205, 0, 3, 393206, 0, 3, 393207, 0, 3, 393213, 0, 1, 393216, 0, 1, 458733, 0, 3, 458734, 0, 3, 458735, 0, 3, 458736, 0, 3, 458737, 0, 3, 458738, 0, 3, 458739, 0, 3, 458740, 0, 3, 458741, 0, 3, 458742, 0, 3, 458743, 0, 3, 458744, 0, 3, 458749, 0, 1, 458752, 0, 1, 524269, 0, 3, 524270, 0, 3, 524271, 0, 3, 524272, 0, 3, 524273, 0, 3, 524274, 0, 3, 524275, 0, 3, 524276, 0, 3, 524277, 0, 3, 524278, 0, 3, 524279, 0, 3, 524280, 0, 3, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 589805, 0, 3, 589806, 0, 3, 589807, 0, 3, 589808, 0, 3, 589809, 0, 3, 589810, 0, 3, 589811, 0, 3, 589812, 0, 3, 589813, 0, 3, 589814, 0, 3, 589815, 0, 3, 589816, 0, 3, 655341, 0, 3, 655342, 0, 3, 655343, 0, 3, 655344, 0, 3, 655345, 0, 3, 655346, 0, 3, 655347, 0, 3, 655348, 0, 3, 655349, 0, 3, 655350, 0, 3, 655351, 0, 3, 655352, 0, 3, 655353, 0, 1, 720877, 0, 3, 720878, 0, 3, 720879, 0, 3, 720880, 0, 3, 720881, 0, 3, 720882, 0, 3, 720883, 0, 3, 720884, 0, 3, 720885, 0, 3, 720886, 0, 3, 720887, 0, 3, 720888, 0, 3, 720889, 0, 1, 786413, 0, 3, 786414, 0, 3, 786415, 0, 3, 786416, 0, 3, 786417, 0, 3, 786418, 0, 3, 786419, 0, 3, 786420, 0, 3, 786421, 0, 3, 786422, 0, 3, 786423, 0, 3, 786424, 0, 3, 851949, 0, 3, 851950, 0, 3, 851951, 0, 3, 851952, 0, 3, 851953, 0, 3, 851954, 0, 3, 851955, 0, 3, 851956, 0, 3, 851957, 0, 3, 851958, 0, 3, 851959, 0, 3, 851960, 0, 3, 917485, 0, 3, 917486, 0, 3, 917487, 0, 3, 917488, 0, 3, 917489, 0, 3, 917490, 0, 3, 917491, 0, 3, 917492, 0, 3, 917493, 0, 3, 917494, 0, 3, 917495, 0, 3, 917496, 0, 3, 983021, 0, 3, 983022, 0, 3, 983023, 0, 3, 983024, 0, 3, 983025, 0, 3, 983026, 0, 3, 983027, 0, 3, 983028, 0, 3, 983029, 0, 3, 983030, 0, 3, 983031, 0, 3, 983032, 0, 3, -1310718, 0, 1, -1310717, 0, 1, -1310716, 0, 1, -1310715, 0, 1, -1245182, 0, 1, -1245179, 0, 1, -1179666, 0, 1, -1179665, 0, 1, -1179664, 0, 1, -1179663, 0, 1, -1179662, 0, 1, -1179661, 0, 1, -1179660, 0, 1, -1179659, 0, 1, -1179658, 0, 1, -1179657, 0, 1, -1179656, 0, 1, -1179655, 0, 1, -1179653, 0, 1, -1179652, 0, 1, -1179651, 0, 1, -1179648, 0, 1, -1179646, 0, 1, -1179643, 0, 1, -1114131, 0, 1, -1114130, 0, 1, -1114129, 0, 1, -1114128, 0, 1, -1114127, 0, 1, -1114126, 0, 1, -1114125, 0, 1, -1114124, 0, 1, -1114123, 0, 1, -1114122, 0, 1, -1114121, 0, 1, -1114120, 0, 1, -1114119, 0, 1, -1114118, 0, 1, -1114117, 0, 1, -1114115, 0, 1, -1114114, 0, 1, -1114113, 0, 1, -1114112, 0, 1, -1114111, 0, 1, -1114110, 0, 1, -1114109, 0, 1, -1114108, 0, 1, -1114107, 0, 1, -1048595, 0, 1, -1048594, 0, 1, -1048593, 0, 1, -1048592, 0, 1, -1048591, 0, 1, -1048590, 0, 1, -1048589, 0, 1, -1048588, 0, 1, -1048587, 0, 1, -1048586, 0, 1, -1048585, 0, 1, -1048584, 0, 1, -1048583, 0, 1, -1048582, 0, 1, -1048581, 0, 1, -1048580, 0, 1, -1048579, 0, 1, -1048576, 0, 1, -983043, 0, 1, -983040, 0, 1, -917507, 0, 1, -917506, 0, 1, -917505, 0, 1, -327693, 0, 3, -327692, 0, 3, -327691, 0, 3, -327690, 0, 3, -262157, 0, 3, -262156, 0, 3, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -196621, 0, 3, -196620, 0, 3, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1 )
+}
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 5 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 196608, 0, 0, 327678, 0, 2, -983056, 0, 36, -983050, 0, 36, -327692, 0, 0, -196614, 0, 2, -65530, 0, 36, -8, 0, 36 )
+}
+script = ExtResource( 31 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="BackgroundLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+mesh_library = ExtResource( 25 )
+cell_size = Vector3( 1, 1, 1 )
+data = {
+"cells": PoolIntArray( 65518, 65531, 0, 65520, 65531, 0, 131054, 65531, 0, 131055, 65531, 0, 131056, 65531, 0, 131082, 65531, 0, 131083, 65531, 0, 196618, 65531, 0, 196619, 65531, 0, 262132, 65531, 0, 262140, 65531, 0, 327674, 65531, 0, 458758, 65531, 0, 458759, 65531, 0, 458760, 65531, 0, 524294, 65531, 0, 524295, 65531, 0, 524296, 65531, 0, 589830, 65531, 0, 589831, 65531, 0, 589832, 65531, 0, 720897, 65531, 0, 851968, 65531, 0, 917502, 65531, 0, 917503, 65531, 0, 917504, 65531, 0, 983038, 65531, 0, 983040, 65531, 0, 1048574, 65531, 0, 1048575, 65531, 0, -524280, 65531, 0, -524279, 65531, 0, -524278, 65531, 0, -458757, 65531, 0, -458756, 65531, 0, -458748, 65531, 0, -458744, 65531, 0, -458742, 65531, 0, -393221, 65531, 0, -393220, 65531, 0, -393216, 65531, 0, -393215, 65531, 0, -393214, 65531, 0, -393208, 65531, 0, -393207, 65531, 0, -393206, 65531, 0, -327680, 65531, 0, -327679, 65531, 0, -262145, 65531, 0, -131089, 65531, 0, -18, 65531, 0, -17, 65531, 0, -16, 65531, 0 )
+}
+script = ExtResource( 26 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, -5 )
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 9, 0 )
+
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
+stream = ExtResource( 14 )
+pitch_scale = 1.1
+
+[node name="Player2" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 9, -1 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Player2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )
+material_override = SubResource( 17 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 16 )
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Player2"]
+autoplay = "swimFall"
+anims/RESET = SubResource( 18 )
+anims/angry = SubResource( 19 )
+anims/broomSweep = SubResource( 20 )
+anims/climb = SubResource( 21 )
+anims/climbStop = SubResource( 22 )
+anims/collapse = SubResource( 23 )
+anims/faceLeft = SubResource( 24 )
+anims/faceRight = SubResource( 25 )
+anims/fall = SubResource( 26 )
+anims/fallBump = SubResource( 27 )
+anims/fallFar = SubResource( 28 )
+anims/fallFlat = SubResource( 29 )
+anims/fallStart = SubResource( 30 )
+anims/fishingHooked = SubResource( 31 )
+anims/fishingIdle = SubResource( 32 )
+anims/fishingSitDown = SubResource( 33 )
+anims/getItem = SubResource( 34 )
+anims/happy = SubResource( 35 )
+anims/jump = SubResource( 36 )
+anims/jumpBump = SubResource( 37 )
+anims/jumpSquat = SubResource( 38 )
+anims/jumpStart = SubResource( 39 )
+anims/land = SubResource( 40 )
+anims/sad = SubResource( 41 )
+anims/stand = SubResource( 42 )
+anims/swimFall = SubResource( 43 )
+anims/swimJump = SubResource( 44 )
+anims/swimJumpStart = SubResource( 45 )
+anims/teeter = SubResource( 46 )
+anims/turnAround = SubResource( 47 )
+anims/wakeup = SubResource( 48 )
+anims/walk = SubResource( 49 )
+anims/walkBump = SubResource( 50 )
+anims/walkStart = SubResource( 51 )
+anims/walkStop = SubResource( 52 )
+
+[node name="NPC" parent="Viewport/level/Player2" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+grav = 0
+bbText = "•one day, a glitch appeared.  
+•we could not make it go away, 
+
+•so we constructed walls 
+•to separate our people from its corrupting power."
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/Player2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 61 )
+
+[node name="SmallerInteractionArea" parent="Viewport/level/Player2/NPC" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/Player2/NPC" index="4"]
+pixel_size = 0.0001
+
+[node name="CollisionShape" parent="Viewport/level/Player2/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 62 )
+
+[node name="InteractPrompt" parent="Viewport/level/Player2/NPC" index="7"]
+pixel_size = 0.0001
+
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/Player2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -13, 0.8 )
+material_override = SubResource( 63 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 16 )
+hframes = 8
+vframes = 8
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue.tscn"
+
+[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
+visible = false
+
+[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+shape = SubResource( 15 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, 0 )
+path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
+
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+anims/doorClose = SubResource( 53 )
+anims/doorOpen = SubResource( 54 )
+anims/locked = SubResource( 55 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 64 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.47169, 0 )
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.47169, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/GlitchEnemy6" index="0"]
+frame = 53
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.47169, 0 )
+
+[node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -12, 0 )
+
+[node name="miniCubeCrystal" parent="Viewport/level/QuestionBlock" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="GlitchEnemy4" parent="Viewport/level/QuestionBlock" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
+
+[node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
+grav = 0
+bbText = "*purrr*..."
+can_move = false
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 75 )
+
+[node name="AbortSound" parent="Viewport/level/QuestionBlock/NPC/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 30 )
+
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC" index="4"]
+frame = 24
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 76 )
+
+[node name="Sprite3DBag" type="Sprite3D" parent="Viewport/level/QuestionBlock/NPC"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59446, 0.21497, -0.4 )
+material_override = SubResource( 77 )
+flip_h = true
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 19 )
+hframes = 8
+vframes = 8
+
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.5666, 0 )
+
+[node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
+
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -13, 0 )
+
+[node name="TriangleContainer" parent="Viewport/level/SavePoint2" index="0"]
+visible = false
+
+[node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
+anims/RESET = SubResource( 82 )
+anims/default = SubResource( 83 )
+anims/sporeGrow = SubResource( 84 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -27, 0 )
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+dont_recolor_me = true
+
+[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
+frame = 29
+
+[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 78 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 79 )
+
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42, -1, 0 )
+bbText = "[wave]down here![/wave]"
+floating_text = true
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -5, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -13, 0 )
+
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -13, 0 )
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]
+bbText = "find angel eggs
+to cleanse the world"
+can_camera_zoom = false
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 80 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+material_override = SubResource( 85 )
+frame = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+shape = SubResource( 81 )
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
+
+[node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -10, 0 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -12.8, 0 )
+bbText = "[wave]smack it! [X][/wave]"
+is_a_body = false
+floating_text = true
+tiny_textbox = true
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 14 )
+flip_v = true
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 20 )]
+
+[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
+visible = true
+
+[editable path="Viewport/level/GameCamera"]
+[editable path="Viewport/level/Player"]
+[editable path="Viewport/level/Player/TextContainer"]
+[editable path="Viewport/level/Player2/NPC"]
+[editable path="Viewport/level/Player2/NPC/NPC TextBox"]
+[editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/GlitchEnemy6"]
+[editable path="Viewport/level/QuestionBlock/NPC"]
+[editable path="Viewport/level/QuestionBlock/NPC/NPC TextBox"]
+[editable path="Viewport/level/SavePoint2"]
+[editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="ScreenEffects"]
