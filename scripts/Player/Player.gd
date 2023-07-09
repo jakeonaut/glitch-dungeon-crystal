@@ -608,8 +608,6 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
       which_broom_attack = 1
 
-  # CHEAT CODE
-  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
   if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     applySpellbookGlitch()
     aniPlayer.stop()
@@ -620,13 +618,13 @@ func processBroomLogic(delta):
       which_broom_attack = 2
     else:
       aniPlayer.play("broomSmack")
+    pauseAnimation = true
 
     is_in_broom_cooldown = true
     broom_cooldown_timer = 0
     # elif glitch_form == global.GlitchForm.FEATHER:
     #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
     # velocity_dampener = 2.0
-    pauseAnimation = true
     if on_ground:
       walk_speed = 0
       feather_glitch_walk_speed = 0
@@ -649,8 +647,7 @@ func processBroomLogic(delta):
     jump_press_timer = jump_press_broom_time_limit
   elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf:
     summonedBroom.queue_free()
-    summonedBroom = null
-    self.broomStop()
+    broomStop()
     if not on_ground:
       var amt = 2
       self.vv = amt
@@ -676,14 +673,12 @@ func processMushroomLogic(delta):
     var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
     var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
     if turning_left or turning_right:
-      mushroom_turn_timer += (delta*22) if on_ground else (delta*16)
+      mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
       if mushroom_turn_timer >= mushroom_turn_time_limit:
         mushroom_turn_timer = 0
         mushroom_infection_direction *= -1
     else:
-      mushroom_turn_timer -= (delta*22)
-      if mushroom_turn_timer <= 0:
-        mushroom_turn_timer = 0
+      mushroom_turn_timer = 0
     
     spore_spawn_timer += (delta*22)
     if spore_spawn_timer >= spore_spawn_time_limit:
@@ -841,13 +836,10 @@ func landed():
       global_transform.origin.y -= 1
     global_transform.origin.y = original_y
     
-func broomStop():
-  # CHEAT CODE
-  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
-  
+func broomStop():  
   summonedBroom = null
-  broomSpriteVisible.visible = true
   pauseAnimation = false
+  broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed

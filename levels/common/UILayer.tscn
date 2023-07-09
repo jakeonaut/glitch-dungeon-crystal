@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -20,18 +20,6 @@
 [ext_resource path="res://assets/sprites2D/glitches.png" type="Texture" id=19]
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=21]
 
-[sub_resource type="DynamicFont" id=10]
-size = 32
-outline_size = 4
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 13 )
-
-[sub_resource type="Theme" id=11]
-default_font = SubResource( 10 )
-
 [sub_resource type="DynamicFont" id=29]
 size = 24
 outline_size = 4
@@ -43,6 +31,18 @@ font_data = ExtResource( 16 )
 
 [sub_resource type="Theme" id=30]
 default_font = SubResource( 29 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+outline_size = 4
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="Theme" id=11]
+default_font = SubResource( 10 )
 
 [sub_resource type="DynamicFont" id=14]
 outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
@@ -148,6 +148,117 @@ font_data = ExtResource( 16 )
 [sub_resource type="Theme" id=13]
 default_font = SubResource( 12 )
 
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 512 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "endCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 448.0, 512.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "startCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 512.0, 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 64.0 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "startCutsceneImmediate"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 64.0 ]
+}
+
 [node name="UILayer" type="CanvasLayer"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
@@ -199,54 +310,6 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "MAGIC: 10"
 text = "MAGIC: 10"
-scroll_active = false
-
-[node name="LevelTitle" type="ColorRect" parent="."]
-margin_left = 111.0
-margin_top = 428.0
-margin_right = 521.0
-margin_bottom = 500.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="LevelTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 405.0
-margin_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="LevelTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 398.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle/ColorRect/ColorRect"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 391.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 11 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "the dungeon"
-text = "the dungeon"
 scroll_active = false
 
 [node name="HiscoreRect" type="ColorRect" parent="."]
@@ -782,6 +845,74 @@ margin_bottom = 137.0
 theme = SubResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "L.1"
+
+[node name="CinematicTopRect" type="ColorRect" parent="."]
+margin_right = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="CinematicBottomRect" type="ColorRect" parent="."]
+margin_top = 512.0
+margin_right = 640.0
+margin_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 32 )
+anims/endCutscene = SubResource( 33 )
+anims/startCutscene = SubResource( 34 )
+anims/startCutsceneImmediate = SubResource( 35 )
+
+[node name="LevelTitle" type="ColorRect" parent="."]
+margin_left = 111.0
+margin_top = 428.0
+margin_right = 521.0
+margin_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="LevelTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 405.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="LevelTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 398.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle/ColorRect/ColorRect"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 391.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 11 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "the dungeon"
+text = "the dungeon"
+scroll_active = false
 
 [node name="SavingTextLabel" type="RichTextLabel" parent="."]
 visible = false

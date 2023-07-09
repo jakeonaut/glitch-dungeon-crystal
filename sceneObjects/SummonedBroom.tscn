@@ -309,7 +309,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -1.56864, -0.257879, 0 ), Vector3( 1.08171, 0.697201, 0 ), Vector3( 1.7046, 1.48562, 0 ) ]
+"values": [ Vector3( -2, -0.258, 0 ), Vector3( 1.4, 1, 0 ), Vector3( 1.7046, 1.48562, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area/CollisionShape:scale")
@@ -321,7 +321,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.25, 0.35, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0.5, 2, 1 ), Vector3( 2, 2.5, 1 ), Vector3( 2, 2, 1 ), Vector3( 1.5, 2, 1 ) ]
+"values": [ Vector3( 0.1, 0.1, 1 ), Vector3( 1.5, 2.5, 1 ), Vector3( 2, 2, 1 ), Vector3( 1.5, 2, 1 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BroomSound:playing")

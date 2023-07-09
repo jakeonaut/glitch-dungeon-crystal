@@ -128,11 +128,11 @@ func getSmacked(_broom_origin):
         target_pos = self.global_transform.origin + Vector3(3, 6, 0)
     mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
-    var miniCubeCrystal = miniCubeCrystalRes.instance()
-    miniCubeCrystal.is_static_in_level = false
-    level.add_child(miniCubeCrystal)
-    miniCubeCrystal.global_transform.origin = self.global_transform.origin
-    miniCubeCrystal.passiveActivate(0, false)
-
     if is_static_in_level:
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        miniCubeCrystal.is_static_in_level = false
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = self.global_transform.origin
+        miniCubeCrystal.passiveActivate(0, false)
+
         global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)

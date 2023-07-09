@@ -59,6 +59,8 @@ func _ready():
       level.uiLayer.get_node("GlitchSprite").visible = false
       level.uiLayer.get_node("GlitchStatusRect").visible = false
 
+var snarkyCommentTimer = 0
+var snarkyCommentTimeLimit = 10
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
@@ -89,9 +91,12 @@ func _process(delta):
     global.pauseMoveInput = true
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
-      first_ever_glitch = false
-      getPlayer().textBox.tinify()
-      getPlayer().textBox.interact()
+    if not global.pauseMoveInput:
+      snarkyCommentTimer += (delta*11)
+      if snarkyCommentTimer >= snarkyCommentTimeLimit:
+        first_ever_glitch = false
+        getPlayer().textBox.tinify()
+        getPlayer().textBox.interact()
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:

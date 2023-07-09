@@ -157,6 +157,7 @@ func restartMusic():
 func tryShowUIElements():
   # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
   uiLayer.setDisplayTitle(display_title)
+  uiLayer.initiateCutsceneRenderLogic()
 
   if global.memory.has("spellbookPage"):
     # TODO(jaketrower): less ideal

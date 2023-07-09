@@ -625,6 +625,7 @@ material_override = SubResource( 38 )
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 2.5, 0 )
+is_static_in_level = false
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 3.4, 0 )
@@ -632,6 +633,7 @@ automatically_change_color = false
 
 [node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.400001, 4, 0 )
+is_static_in_level = false
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly2" index="0"]
 automatically_change_color = false
@@ -677,7 +679,7 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 47 )
 anims/doorOpen = SubResource( 48 )
 anims/locked = SubResource( 49 )

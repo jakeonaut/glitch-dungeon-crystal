@@ -197,7 +197,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 14.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 14, 0 )
 true_terminal_vel = 5
 grav = 4
 
@@ -223,7 +223,7 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )

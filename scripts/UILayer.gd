@@ -77,6 +77,7 @@ func recreateHeartSprites():
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
 onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 func _process(delta):
+  processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
   # if global.memory["max_mp"] <= 0:
   #  get_node("GlitchStatusRect").visible = false
@@ -190,6 +191,21 @@ func _process(delta):
       elif glitch == global.GlitchForm.LADDER: equipSlotSprite.frame = 25
       elif glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
       elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
+
+onready var cinematicTopRect = get_node("CinematicTopRect")
+onready var cinematicBottomRect = get_node("CinematicBottomRect")
+onready var cinematicAniPlayer = get_node("CinematicAnimationPlayer")
+func initiateCutsceneRenderLogic():
+  if global.pauseMoveInput:
+    cinematicAniPlayer.play("startCutsceneImmediate")
+
+func processCutsceneRenderLogic(_delta):
+  var aa = cinematicAniPlayer.assigned_animation
+  if global.pauseMoveInput and not "startCutscene" in aa and not global.isRespawning:
+    cinematicAniPlayer.play("startCutscene")
+  elif not global.pauseMoveInput and aa != null and not "endCutscene" in aa and not aa == "":
+    cinematicAniPlayer.play("endCutscene")
+
 
 onready var hiscoreRect = get_node("HiscoreRect")
 onready var congratsHiscoreLabel = get_node("CongratsHiscoreLabel")

@@ -74,7 +74,7 @@ func _process(delta):
 
 func restorePlayer():
   level.player.can_collide_with_floor = true
-  level.player.aniPlayer = level.player.get_node("AnimationPlayer")
+  level.player.pauseAnimation = false
 
 func moveTargetToHook(delta):
   if not hookTarget.get_ref():
@@ -111,5 +111,5 @@ func passiveActivate(_delta, is_player):
     hooked = true
     hookTarget = weakref(level.player)
     level.player.aniPlayer.play("hookCaught")
-    level.player.aniPlayer = null
+    level.player.pauseAnimation = true
   

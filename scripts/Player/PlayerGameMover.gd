@@ -41,7 +41,7 @@ var is_mushroom_infected = false
 var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
-var mushroom_turn_time_limit = 3
+var mushroom_turn_time_limit = 2
 
 func _ready():
   set_physics_process(true)
@@ -53,9 +53,23 @@ func _ready():
 
 func ladderUpdateTargetLastGroundedY():
   target_last_grounded_y = global_transform.origin.y
+
+func processPauseAnimation():
+  if aniPlayer.assigned_animation == "hookCaught":
+    return
+  
+  if is_mushroom_infected:
+    pauseAnimation = not on_ground and not has_mushroom_double_jumped
+    if pauseAnimation and aniPlayer.assigned_animation != "walk":
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("walk")
+  else:
+    pauseAnimation = false 
   
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+  processPauseAnimation()
 
   if is_touching_water or is_touching_ladder or global_transform.origin.y < target_last_grounded_y:
     target_last_grounded_y = global_transform.origin.y
@@ -66,7 +80,6 @@ func _process(delta):
   if justPressedJump():
     mushroom_turn_timer = mushroom_turn_time_limit
     jump_press_timer = 0
-    var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
       target_last_grounded_y = global_transform.origin.y
@@ -244,7 +257,7 @@ func getWalkSpeed(delta):
   var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if is_mushroom_infected:
     run_timer = 0
-    return 1 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 3
+    return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     run_timer = 0
     return 5 if pressingRun() and on_ground else 4
@@ -259,7 +272,6 @@ func doubleJump():
   weak_feather_dbl_jump = false
   should_magic_jump = true
 
-  var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
   aniPlayer.clear_queue()
   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
   aniPlayer.queue("jumpStart")
@@ -284,7 +296,6 @@ func processJumpInputs(delta):
         mushroom_infection_direction = -mushroom_infection_direction
       for _i in range(2):
         spawnASpore(0, -1)
-      var aniPlayer = self.aniPlayer if self.aniPlayer else get_node("AnimationPlayer")
       aniPlayer.clear_queue()
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
