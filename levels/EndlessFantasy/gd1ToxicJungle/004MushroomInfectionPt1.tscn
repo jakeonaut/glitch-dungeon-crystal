@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=7]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=12]
@@ -17,7 +18,6 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=24]
 
 [sub_resource type="BoxShape" id=17]
@@ -73,73 +73,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
-
-[sub_resource type="BoxShape" id=21]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="Animation" id=22]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=23]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=24]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="BoxShape" id=25]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=26]
 resource_local_to_scene = true
@@ -239,7 +172,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 3.7, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomCave2.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -286,67 +219,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 13, 0 )
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 3.4, 0 )
 
-[node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 2, 0 )
-grav = 0
-bbText = "you can DOUBLE jump 
-when infected with spores"
-is_really_important = true
-can_move = false
-can_camera_zoom = false
-is_a_body = false
-tiny_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 21 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
-flip_h = true
-frame = 64
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
-anims/default = SubResource( 22 )
-anims/flickerOn = SubResource( 23 )
-anims/jump = SubResource( 24 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.338, 0 )
-shape = SubResource( 25 )
-
 [node name="Vileplume" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8.1, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/Vileplume/FallthroughSolid" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.838, 0 )
 shape = SubResource( 26 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.2, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 14, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 14, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 9.4, 0 )
+
+[node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 5.2, 0 )
+
+[node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 3.9, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -363,6 +262,4 @@ __meta__ = {
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/NPC2"]
-[editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Vileplume"]

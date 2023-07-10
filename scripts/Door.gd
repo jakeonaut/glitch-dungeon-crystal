@@ -180,7 +180,7 @@ func activate(is_player):
       goThroughDoor()
     elif is_locked:
       if global.memory["key"] >= num_keys_unlock:
-        level.saveTheGame("unlocked!")
+        level.displayMessageText("unlocked!")
         global.pauseMoveInput = true
         global.memory["key"] -= num_keys_unlock
         npc.visible = false 

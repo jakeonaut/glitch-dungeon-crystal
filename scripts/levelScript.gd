@@ -78,6 +78,7 @@ func _ready_impl():
       player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
+  displayMessageText("")
 
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
@@ -145,6 +146,9 @@ func _process(delta):
   #     var player_position = player.global_transform.origin + (player.facing * 2)
   #     var grid_cell = levelTiles.world_to_map(player_position)
   #     levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
+
+func displayMessageText(message):
+  uiLayer.displayMessageText(message)
 
 func saveTheGame(message = "saving (not really)"):
   uiLayer.displaySavingText(message)

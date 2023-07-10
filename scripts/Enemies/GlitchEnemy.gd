@@ -194,6 +194,10 @@ func unsmack():
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
+    mySprite.material_override.set_shader_param("shake_power", 0.03)
+    mySprite.material_override.set_shader_param("shake_block_size", 30.5)
+    mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
+    mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
     if myOtherSprite:
         myOtherSprite.material_override.set_shader_param("time_influence", 3)
@@ -420,6 +424,10 @@ func getSmacked(_broom_origin):
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
     mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+    mySprite.material_override.set_shader_param("shake_power", 0.143)
+    mySprite.material_override.set_shader_param("shake_block_size", 60)
+    mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
+    mySprite.material_override.set_shader_param("target_palette", global.white_palette)
 
     if myOtherSprite:
         myOtherSprite.material_override.set_shader_param("time_influence", time_influence)

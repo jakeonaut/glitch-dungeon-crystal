@@ -1077,7 +1077,7 @@ shape = SubResource( 16 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, 0 )
 path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 53 )
 anims/doorOpen = SubResource( 54 )
 anims/locked = SubResource( 55 )

@@ -12,7 +12,14 @@ func setUpRoomInitializationOverride():
 var has_done_my_power = false
 # @override
 func _process(_delta):
-    if not has_done_my_power and global.memory.has("roomPath") and "001RedGlitch" in global.memory["roomPath"]:
-      NPC.textBoxContainer.bbText = "to get back up\nyou must die."
-      NPC.textBoxContainer.setVars()
-      has_done_my_power = true
+  if not global.memory.has("roomPath") or not "RedGlitch" in global.memory["roomPath"]:
+    NPC.textBox.hideTextbox()
+    # if global.memory.has("roomPath") and "001RedGlitch" in global.memory["roomPath"]:
+    #   if not has_done_my_power:
+    #     NPC.textBoxContainer.bbText = "to get back up\nyou must die."
+    #     NPC.textBoxContainer.setVars()
+    #     NPC.textBox.has_been_shown = false
+    #     NPC.textBox.showTextbox()
+    #     has_done_my_power = true
+    # else:
+    #   NPC.textBox.hideTextbox()

@@ -213,7 +213,7 @@ func processPhysics(delta):
   elif physics_state == PhysicsState.COLLAPSED:
     hv = Vector3()
     dir = Vector3(0.0, 0.0, 0.0)
-    if pauseAnimation or not aniPlayer or not aniPlayer.is_playing():
+    if pauseAnimation or aniPlayer == null or not aniPlayer.is_playing():
       physics_state = PhysicsState.CAN_WAKE_UP
   elif physics_state == PhysicsState.CAN_WAKE_UP:
     var pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
@@ -223,7 +223,7 @@ func processPhysics(delta):
         aniPlayer.play("wakeup")
       physics_state = PhysicsState.WAKING_UP
   elif physics_state == PhysicsState.WAKING_UP:
-    if not aniPlayer or not aniPlayer.is_playing():
+    if aniPlayer == null or not aniPlayer.is_playing():
       physics_state = PhysicsState.NORMAL
     
   lv = hv + (up * vv)
@@ -517,7 +517,7 @@ func processJumpInputs(delta):
   if justPressedJump() or recentlyJustPressedJump(): 
     # # Jump from the water
     if is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
-    (not aniPlayer or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
+    (aniPlayer == null or pauseAnimation or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
       was_touching_water_at_start_of_jump = true
       vv = jump_force * .75
       has_water_double_jumped = true
@@ -544,7 +544,7 @@ func processJumpInputs(delta):
       weak_feather_dbl_jump = false
       if on_ground:
         addJumpSmokeCloud()
-      if not aniPlayer:
+      if aniPlayer == null or pauseAnimation:
         jump_squat_jump_input_timer = 1
         actuallyApplyJump()
 
@@ -564,12 +564,12 @@ func processJumpInputs(delta):
       jump_squat_jump_input_timer = 0
       
 
-  if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"): 
+  if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
     feather_jump_timer += (delta*22)
     if weak_feather_dbl_jump:
       feather_jump_timer += (delta*22)
     actuallyApplyJump(false)
-  elif feather_jump_timer < 4 and pressingJump() and (not aniPlayer or aniPlayer.assigned_animation != "jumpSquat"):
+  elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
     feather_jump_timer += (delta*22)
     if feather_jump_timer > 3: 
       actuallyApplyJump(false)
@@ -691,7 +691,7 @@ func processHorizontalInputs(delta):
   var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
   var right = view_right
 
-  if glitch_form == global.GlitchForm.FEATHER and not (aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
+  if glitch_form == global.GlitchForm.FEATHER and not (pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
     if on_ground:
       # TODO(jaketrower): Initial dash state..???
       forward = forward / 8
@@ -733,7 +733,7 @@ func processHorizontalInputs(delta):
         dir = Vector3(0.0, 0.0, 0.0)
       
 
-    if not global.pauseMoveInput and not (aniPlayer and aniPlayer.assigned_animation == "jumpSquat"):
+    if not global.pauseMoveInput and not (not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
       var multiplier = 0
       var flip_h = false
       if pressingMoveLeft():
@@ -1213,7 +1213,7 @@ func iFellFlat():
 func isWalkingIntoWall():
   return abs(linear_velocity.x) < 0.5 \
        and is_pressing_horizontal_input and was_pressing_horizontal_input \
-       and (pauseAnimation or not aniPlayer != null or aniPlayer.assigned_animation != "jumpSquat") 
+       and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation != "jumpSquat") 
 
 func updateFacing(local_dir):
   if local_dir.x != 0 or local_dir.y != 0 or local_dir.z != 0:

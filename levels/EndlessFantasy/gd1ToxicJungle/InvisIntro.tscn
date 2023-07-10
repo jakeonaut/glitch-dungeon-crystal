@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=26]
 
 [sub_resource type="BoxShape" id=15]
 resource_local_to_scene = true
@@ -281,8 +282,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 15, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 15, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 21, 0 )
-bbText = "ladder secret"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 29.4, 0 )
+bbText = "please take care
+of my sister"
 tiny_textbox = true
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -404,7 +406,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758781, 0 )
 shape = SubResource( 24 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9, 12.7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 29.3, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6, 19.2, 0 )
@@ -416,6 +418,12 @@ can_camera_zoom = false
 is_a_body = false
 floating_text = true
 tiny_textbox = true
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4, 11.1, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.8, 12.2, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 23 )]
 

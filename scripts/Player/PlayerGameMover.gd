@@ -59,13 +59,11 @@ func processPauseAnimation():
     return
   
   if is_mushroom_infected:
-    pauseAnimation = not on_ground and not has_mushroom_double_jumped
-    if pauseAnimation and aniPlayer.assigned_animation != "walk":
+    pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
+    if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
       aniPlayer.stop()
       aniPlayer.clear_queue()
       aniPlayer.play("walk")
-  else:
-    pauseAnimation = false 
   
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

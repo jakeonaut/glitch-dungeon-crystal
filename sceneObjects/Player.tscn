@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://assets/mini_mushroom2.png" type="Texture" id=41]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=42]
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=43]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
 
 [sub_resource type="CylinderShape" id=2]
 radius = 1.5
@@ -1563,7 +1564,12 @@ volume_db = -20.0
 [node name="NoSpellSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 26 )
 volume_db = -25.0
-pitch_scale = 1.05
+pitch_scale = 1.2
+
+[node name="TickleSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 44 )
+volume_db = -2.0
+pitch_scale = 0.5
 
 [node name="NullifySound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 33 )

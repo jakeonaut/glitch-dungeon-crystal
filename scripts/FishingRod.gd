@@ -40,22 +40,24 @@ func _process(delta):
   if hooked:
     if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_RECOVERY:
       hooked = false
-      if hookTarget.get_ref() == level.player:
-        restorePlayer()
+      restorePlayer()
       hookTarget = null
       is_reeled_in = true
       return
     elif hookTarget.get_ref() == level.player:
       if is_reeled_in or Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("ui_down"):
         hooked = false
-        hookTarget = null
         restorePlayer()
+        hookTarget = null
         if Input.is_action_just_pressed("jump_button"):
+          level.player.should_magic_jump = true
           level.player.actuallyApplyJump(true)
         level.player.on_ground = false
         is_reeled_in = true
         return
 
+    hookTarget.get_ref().should_do_fallthrough_area_collision = false
+    hookTarget.get_ref().should_collide_floor = false
     hookTarget.get_ref().can_collide_with_floor = false
     hookTarget.get_ref().fall_timer = 0
     hookTarget.get_ref().on_ground = true
@@ -67,14 +69,16 @@ func _process(delta):
       reelItIn(delta)
     elif hookTarget.get_ref() != level.player:
       hooked = false
+      restorePlayer()
       hookTarget = null
 
   elif is_reeled_in:
     reelItOut(delta)
 
 func restorePlayer():
-  level.player.can_collide_with_floor = true
-  level.player.pauseAnimation = false
+  hookTarget.get_ref().should_collide_floor = true
+  hookTarget.get_ref().can_collide_with_floor = true
+  hookTarget.get_ref().pauseAnimation = false
 
 func moveTargetToHook(delta):
   if not hookTarget.get_ref():
@@ -112,4 +116,6 @@ func passiveActivate(_delta, is_player):
     hookTarget = weakref(level.player)
     level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
+    level.player.should_do_fallthrough_area_collision = false
+    level.player.tryClearFallthroughCollisionSolid()
   

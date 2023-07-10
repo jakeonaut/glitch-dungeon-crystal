@@ -33,6 +33,11 @@ var should_display_saving_text = false
 var saving_text_timer = 0
 var saving_text_time_limit = 60
 
+onready var messageTextLabel = get_node("MessageTextLabel")
+var should_display_message_text = false
+var message_text_timer = 0
+var message_text_time_limit = 60
+
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null
 func getPlayer():
@@ -141,6 +146,12 @@ func _process(delta):
     if saving_text_timer >= saving_text_time_limit:
       should_display_saving_text = false
       savingTextLabel.visible = false
+
+  if should_display_message_text:
+    message_text_timer += (delta*22)
+    if message_text_timer >= message_text_time_limit:
+      should_display_message_text = false
+      messageTextLabel.visible = false
 
   if global.collectable_key_recently_got != null:
     powerupRect.visible = true
@@ -254,36 +265,17 @@ func processHiscoreRenderLogic(delta):
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 2:
-      glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(hiscoreCounter) + "   (* 0)"
-      var hiscoreSource = global.getLevelZoneThing("num_broom_sweeps")
-      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
-      else:
-        hiscoreDisplayIndex += 1
-        hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "+ deaths: " + str(hiscoreCounter) + "   (* -5) = " + str(hiscoreCounter * -5)
+      deathsHiscoreLabel.text = "- deaths: " + str(hiscoreCounter) + "          = " + str(hiscoreCounter * -1)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
-        totalHiscoreCounter -= 5
+        totalHiscoreCounter -= 1
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 3:
-      jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = "jumps: " + str(hiscoreCounter) + "   (* 0)"
-      var hiscoreSource = global.getLevelZoneThing("num_jumps")
-      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
-      else:
-        hiscoreDisplayIndex += 1
-        hiscoreCounter = 0
-        hiscoreTimeLimit = 5
-    elif hiscoreDisplayIndex == 4:
+    elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
       angelHiscoreLabel.text = "+ angels: " + str(hiscoreCounter) + "   (* 20) = " + str(hiscoreCounter * 20)
       var hiscoreSource = global.getLevelZoneThing("angelTadpole")
@@ -294,6 +286,14 @@ func processHiscoreRenderLogic(delta):
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
         hiscoreTimeLimit = 5
+    elif hiscoreDisplayIndex == 3:
+      glitchTilesHiscoreLabel.visible = true
+      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(global.getLevelZoneThing("num_broom_sweeps"))
+      hiscoreDisplayIndex += 1
+    elif hiscoreDisplayIndex == 4:
+      jumpsHiscoreLabel.visible = true
+      jumpsHiscoreLabel.text = "jumps: " + str(global.getLevelZoneThing("num_jumps"))
+      hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 5:
       pressEnterLabel.visible = not pressEnterLabel.visible
       pressEnterLabel.text = "press enter\nto continue"
@@ -333,6 +333,12 @@ func displaySavingText(message = "saving (not really)"):
   savingTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
   should_display_saving_text = true
   saving_text_timer = 0
+
+func displayMessageText(message):
+  messageTextLabel.visible = true
+  messageTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
+  should_display_message_text = true
+  message_text_timer = 0
 
 func setDisplayTitle(title):
   display_title = title

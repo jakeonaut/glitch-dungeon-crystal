@@ -201,7 +201,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -214,9 +214,10 @@ shape = SubResource( 17 )
 shape = SubResource( 16 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.1, 0 )
 grav = 0
-bbText = "       "
+bbText = "to get back up
+you must die."
 can_camera_zoom = false
 is_immediate = true
 is_a_body = false

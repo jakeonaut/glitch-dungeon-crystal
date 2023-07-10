@@ -1692,7 +1692,7 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 53 )
 anims/doorOpen = SubResource( 54 )
 anims/locked = SubResource( 55 )
@@ -1708,7 +1708,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="5"]
 anims/doorClose = SubResource( 98 )
 anims/doorOpen = SubResource( 99 )
 anims/locked = SubResource( 100 )
@@ -1724,7 +1724,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -3, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/EndOfDemoDoor" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/EndOfDemoDoor" index="5"]
 anims/doorClose = SubResource( 132 )
 anims/doorOpen = SubResource( 133 )
 anims/locked = SubResource( 134 )
@@ -1732,7 +1732,7 @@ anims/locked = SubResource( 134 )
 [node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/InteractionArea" index="0"]
 shape = SubResource( 64 )
 
-[node name="NPC" parent="Viewport/level/EndOfDemoDoor" index="9"]
+[node name="NPC" parent="Viewport/level/EndOfDemoDoor" index="10"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8, -3.7, -1 )
 
 [node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/NPC/SmallInteractionArea" index="0"]
@@ -1744,7 +1744,7 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/000DieToSavePoint.tscn"
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door8" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door8" index="5"]
 anims/doorClose = SubResource( 104 )
 anims/doorOpen = SubResource( 105 )
 anims/locked = SubResource( 106 )
@@ -1756,7 +1756,7 @@ shape = SubResource( 64 )
 shape = SubResource( 16 )
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -31.1, 0 )
 visible = false
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
@@ -1765,7 +1765,7 @@ num_keys_unlock = 1
 [node name="Sprite3D2" parent="Viewport/level/Door7" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door7" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door7" index="5"]
 anims/doorClose = SubResource( 101 )
 anims/doorOpen = SubResource( 102 )
 anims/locked = SubResource( 103 )
@@ -1867,7 +1867,7 @@ dont_recolor_me = true
 visible = false
 frame = 29
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="5"]
 anims/doorClose = SubResource( 80 )
 anims/doorOpen = SubResource( 81 )
 anims/locked = SubResource( 82 )
@@ -1886,7 +1886,7 @@ dont_recolor_me = true
 [node name="Sprite3D2" parent="Viewport/level/Door6" index="1"]
 frame = 29
 
-[node name="AnimationPlayer" parent="Viewport/level/Door6" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door6" index="5"]
 anims/doorClose = SubResource( 86 )
 anims/doorOpen = SubResource( 87 )
 anims/locked = SubResource( 88 )

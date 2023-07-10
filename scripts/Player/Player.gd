@@ -8,6 +8,7 @@ onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
+onready var tickleSound = get_node("Sounds/TickleSound")
 onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
@@ -100,6 +101,7 @@ func applySpellbookGlitch():
     var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
     equipSlotSprite.frame = 6
   else:
+    noSpellSound.pitch_scale = 1.2
     noSpellSound.play()
 
 func restoreGlitchAndMP():
@@ -130,12 +132,14 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
 
 func floorGlitch():
+  level.displayMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(getLevelTiles().red_palette)
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
+  level.displayMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
   # TODO(jaketrower):
@@ -144,6 +148,7 @@ func featherGlitch():
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
+  level.displayMessageText("ladder")
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
   # TODO(jaketrower):
@@ -151,6 +156,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
+  level.displayMessageText("invis")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(getLevelTiles().black_palette)
@@ -158,6 +164,7 @@ func invisibleGlitch():
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
+  level.displayMessageText("undefined")
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
   changeSpriteColorPalette(getLevelTiles().white_palette)
@@ -455,6 +462,7 @@ func glitchTickle(play_sound = true):
     my_material.set_shader_param("shake_power", 0.01)
     my_material.set_shader_param("shake_color_rate", 0.01)
     if play_sound:
+      noSpellSound.pitch_scale = .5
       noSpellSound.play()
 
 func nullify():
@@ -512,8 +520,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
-  # if is_mushroom_infected:
-  #   level.player.getABroom()
+  if is_mushroom_infected:
+    getABroom()
   is_mushroom_infected = false
 
   if global.activeInteractor:
@@ -661,10 +669,10 @@ onready var sporeSound = get_node("Sounds/SporeSound")
 func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
-    # if global.memory["broom"]:
-    #   mySprite.flip_h = not mySprite.flip_h
-    #   summonFallenBroom(false, true)
-    #   mySprite.flip_h = not mySprite.flip_h
+    if global.memory["broom"]:
+      mySprite.flip_h = not mySprite.flip_h
+      summonFallenBroom(false, true)
+      mySprite.flip_h = not mySprite.flip_h
     adjustMushroomSpritePosition()
     if horizontal_collision:
       mushroom_infection_direction = -mushroom_infection_direction
@@ -931,6 +939,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
 
 func getABroom():
+  pauseAnimation = false 
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)

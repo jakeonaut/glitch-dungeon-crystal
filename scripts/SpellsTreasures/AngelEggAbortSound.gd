@@ -9,7 +9,6 @@ func activateScript():
     var egg = get_node("../../..")
     global.pauseGame = false
     global.pauseMoveInput = false
-    level.saveTheGame("got an angel!")
     level.spawnAngelTadpole(egg.global_transform.origin)
     global.incrementLevelZoneThing("angelTadpole", 1)
     global.activeInteractor = null

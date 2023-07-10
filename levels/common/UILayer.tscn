@@ -66,7 +66,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="ArrayMesh" id=31]
+[sub_resource type="ArrayMesh" id=36]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -354,10 +354,10 @@ scroll_active = false
 
 [node name="GlitchTilesHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 99.0
-margin_top = 216.0
-margin_right = 534.0
-margin_bottom = 269.0
+margin_left = 67.0
+margin_top = 347.0
+margin_right = 502.0
+margin_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -369,10 +369,10 @@ scroll_active = false
 
 [node name="AngelHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 103.0
-margin_top = 295.5
-margin_right = 538.0
-margin_bottom = 348.5
+margin_left = 164.0
+margin_top = 213.0
+margin_right = 599.0
+margin_bottom = 266.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -384,9 +384,9 @@ scroll_active = false
 
 [node name="DeathsHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 99.5
+margin_left = 159.0
 margin_top = 172.0
-margin_right = 482.5
+margin_right = 542.0
 margin_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -399,10 +399,10 @@ scroll_active = false
 
 [node name="JumpsHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 100.0
-margin_top = 253.5
-margin_right = 483.0
-margin_bottom = 306.5
+margin_left = 365.5
+margin_top = 343.5
+margin_right = 748.5
+margin_bottom = 396.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -414,10 +414,10 @@ scroll_active = false
 
 [node name="TotalHiscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 136.5
-margin_top = 354.0
-margin_right = 519.5
-margin_bottom = 407.0
+margin_left = 193.5
+margin_top = 255.0
+margin_right = 576.5
+margin_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -722,7 +722,7 @@ MIN_STEP = 1
 should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 31 )
+mesh = SubResource( 36 )
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -901,10 +901,10 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle/ColorRect/ColorRect"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 391.0
-margin_bottom = 61.0
+margin_left = 11.0
+margin_top = 3.0
+margin_right = 394.0
+margin_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 11 )
@@ -920,6 +920,21 @@ margin_left = 11.0
 margin_top = 463.0
 margin_right = 276.0
 margin_bottom = 499.0
+theme = ExtResource( 5 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave] saving... (not really)[/wave]"
+text = " saving... (not really)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 11.0
+margin_top = 68.0
+margin_right = 276.0
+margin_bottom = 104.0
 theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
