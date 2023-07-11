@@ -8,7 +8,7 @@ onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
-onready var tickleSound = get_node("Sounds/TickleSound")
+onready var returnSound = get_node("Sounds/ReturnSound")
 onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
@@ -184,11 +184,12 @@ func isWalkingIntoWall():
   else:
     return .isWalkingIntoWall() # super
 
+var returning_recover_time = 0
+var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
   pauseInput = summonedBroom != null
-
   
   # TODO(jaketrower): !!! Remove (change to HOLD) before release
   if Input.is_action_just_pressed("ui_cancel"):
@@ -198,10 +199,32 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
+
+  if returning_to_save_point == 1:
+    linear_velocity = Vector3(0, 0, 0)
+    lv = linear_velocity
+    vv = 0
+    hv = 0
+    fall_timer = 0
+    global_transform.origin = moveToward2D(global_transform.origin, last_grounded_pos, delta * 22)
+    if compare2D(global_transform.origin, last_grounded_pos):
+      global_transform.origin = last_grounded_pos
+      returning_to_save_point = 2
+  if returning_to_save_point == 2:
+    if aniPlayer.assigned_animation == "returning":
+      aniPlayer.play("land")
+    returning_recover_time += (delta*11)
+    if returning_recover_time >= returning_recover_time_limit:
+      returning_recover_time = 0
+      ignorePhysics = false
+      pauseAnimation = false
+      pauseSelf = false
+      physics_state = PhysicsState.NORMAL
+      returning_to_save_point = 0
   if not processGlitchHurtRecovery(delta):
     return
 
-  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT:
+  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     return
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
@@ -331,16 +354,27 @@ func processMPBlinkLogic(delta):
   if showMpTimer >= showMpTimeLimit:
     mpNumSprite.visible = false
   
+var returning_to_save_point = 0
 func tryDieToOffscreenCamera(delta):
-  var DEATH_MARGIN = 5
+  var DEATH_MARGIN = 2
   if getGameCamera().rightmost_x > -999:
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
     global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
       #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-      global.memory["hp"] = 0
-      tryDieToEnemy(delta, true, true, true)
+      # global.memory["hp"] = 0
+      # tryDieToEnemy(delta, true, true, true)
+      returning_to_save_point = 1
+      returning_recover_time = 0
+      returnSound.play()
+      pauseSelf = true
+      ignorePhysics = true
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("returning")
+      pauseAnimation = true
+      physics_state = PhysicsState.GLITCH_RECOVERY
   
 func doTimeDilation(delta):
   var real_delta_multiplier = 8

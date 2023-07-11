@@ -267,7 +267,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "- deaths: " + str(hiscoreCounter) + "          = " + str(hiscoreCounter * -1)
+      deathsHiscoreLabel.text = "- deaths: " + str(hiscoreCounter) + "   (* 1 ) = " + str(hiscoreCounter * -1)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1

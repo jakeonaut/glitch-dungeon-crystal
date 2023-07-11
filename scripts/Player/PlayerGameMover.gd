@@ -168,13 +168,6 @@ func changeSpriteColorPalette(palette):
     material.set_shader_param("target_palette", palette)
     mySprite.material_override = material
 
-func _physics_process(delta):
-  delta = delta * global.time_dilation_multiplier
-  
-  if not global.pauseGame and pauseSelf:
-    # linear_velocity = handleCollisionsAndMove(linear_velocity, delta)
-    pass
-
 func bodyPushMe(_delta, _origin):
   pass # no more
   # if not on_ground or is_pressing_horizontal_input:

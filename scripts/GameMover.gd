@@ -55,7 +55,7 @@ var was_just_on_ground_timer = 0
 var was_just_on_ground_time_limit = 6
 var just_landed = false
 var spawn_origin
-var last_grounded_y = 0
+var last_grounded_pos = Vector3(0, 0, 0)
 var falling_y_offset = 16
 var fall_timer = 0
 var should_collide_horizontally = true
@@ -83,8 +83,10 @@ enum PhysicsState {
   GLITCH_DYING,
   GLITCH_HURT,
   GLITCH_RECOVERY,
+  IGNORE_PHYSICS,
 }
 var physics_state = PhysicsState.NORMAL
+var ignorePhysics = false
 
 var linear_velocity = Vector3()
 var lv = linear_velocity
@@ -153,7 +155,7 @@ func _ready():
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
   spawn_origin = global_transform.origin
-  last_grounded_y = spawn_origin.y
+  last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
 func _process(_delta):
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
@@ -173,7 +175,7 @@ func _physics_process(delta):
   DNUMSKID_BASE = 54.0 / global.time_dilation_multiplier
   processPhysics(delta * global.time_dilation_multiplier)
 
-  if not on_ground and translation.y < (last_grounded_y - falling_y_offset) and not transitioning:
+  if not on_ground and translation.y < (last_grounded_pos.y - falling_y_offset) and not transitioning:
     is_falling = true
 
   alignMySprite()
@@ -196,6 +198,9 @@ func getHitByBroom():
 
 func processPhysics(delta):
   if grav == null: grav = 0 # ???
+
+  if physics_state == PhysicsState.IGNORE_PHYSICS or ignorePhysics:
+    return
 
   lv = linear_velocity
 
@@ -237,6 +242,12 @@ func processPhysics(delta):
   just_landed = false
   if not was_on_ground and on_ground: # I just landed!!
     landed()
+    if getGameCamera().rightmost_x == -999 or not (
+      # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+      global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
+      global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
+      global_transform.origin.y < getGameCamera().botmost_y + 2):
+        last_grounded_pos = Vector3(global_transform.origin)
     just_landed = true
   # TODO(jaketrower): all this animation code IS going to break everything one day :)
   var aa = ""
@@ -1182,7 +1193,6 @@ var has_water_double_jumped = false
 func landed():
   has_water_double_jumped = false
   var quiet_the_fall_sound = true
-  last_grounded_y = global_transform.origin.y 
   if landSound: landSound.play()
   addJumpSmokeCloud()
   if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
