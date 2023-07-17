@@ -14,7 +14,7 @@ var y_speed = 2
 export var pop_from_distance = true
 var pop_distance = 30
 var pop_timer = 0
-var pop_time_limit = 35
+var pop_time_limit = 45
 var my_parent = null
 var y_speed_start = null
 var y_speed_max = null
@@ -104,18 +104,17 @@ func _process(delta):
 func isActive():
   return true
 
-func passiveActivate(_delta, _is_player):
-  if didja_get_me:
+func passiveActivate(_delta, is_player):
+  if didja_get_me or not is_player:
     return
 
   bubbleStartPop()
-  if getPlayer().linear_velocity.y < 0:
+  if getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground:
     getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-    getPlayer().should_magic_jump = true
     getPlayer().was_just_on_ground_timer = -8
+    getPlayer().magicJump()
     if getPlayer().linear_velocity.y < 0:
       getPlayer().linear_velocity.y = -0.01
-    getPlayer().jump_press_timer = 0
 
 func bubbleStartPop():
   if didja_get_me:

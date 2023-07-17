@@ -234,7 +234,7 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 10, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 11, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 11, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 0 )

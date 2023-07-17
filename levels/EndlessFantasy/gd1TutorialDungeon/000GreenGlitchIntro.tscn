@@ -303,7 +303,7 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0.4, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 9.5, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 

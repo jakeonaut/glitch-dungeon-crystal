@@ -70,7 +70,7 @@ func _ready():
         yield(get_tree(), "idle_frame")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = global.getStaticLevelZoneLevelVar(level, self.name)
+        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(global.getStaticLevelZoneLevelVar(level, self.name))
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         queue_free()

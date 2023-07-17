@@ -45,13 +45,13 @@
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=43]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
 
-[sub_resource type="CylinderShape" id=2]
-radius = 1.5
+[sub_resource type="CylinderShape" id=66]
+radius = 1.1537
 height = 2.5
 
-[sub_resource type="CylinderShape" id=3]
-radius = 0.8
-height = 2.3
+[sub_resource type="CylinderShape" id=67]
+radius = 0.542615
+height = 2.03183
 
 [sub_resource type="ShaderMaterial" id=45]
 shader = ExtResource( 4 )
@@ -1564,13 +1564,13 @@ invisible_jump_force = 11
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 2 )
+shape = SubResource( 66 )
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "player"]]
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
-shape = SubResource( 3 )
+shape = SubResource( 67 )
 
 [node name="InteractPrompt" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )

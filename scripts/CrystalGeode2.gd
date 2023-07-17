@@ -29,17 +29,22 @@ var tadpole_spin_start_time_limit = 10
 var tadpoles = []
 var num_tadpoles = 0
 var tadpole_index = 0
+var cube_rotation = 66
 func _process(delta):
     if not can_do_my_power:
         return
 
     if global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode:
+        cubeContainer.rotation_degrees.z += (delta * cube_rotation)
+        cube_rotation += (delta * 100)
         npc.rotation_degrees.y -= (delta * rot_amount)
         rot_amount += (delta * 33)
         if rot_amount >= rot_amount_max:
             global.hasGottenLevelGeode = true
             aniPlayer.play("explode")
     elif global.hasGottenLevelGeode and level.player.pauseSelf:
+        cubeContainer.rotation_degrees.z += (delta * cube_rotation)
+        cube_rotation += (delta * 100)
         opacity = opacity + (0.0 - opacity) * (delta * 1)
         npc.mySprite.material_override.set_shader_param("opacity", opacity)
 
@@ -76,7 +81,7 @@ func spinTheFroggies(delta):
             var tadpole = tadpoles[tadpole_index]
             tadpole.startSpinning(tadpole_index, num_tadpoles)
             tadpole_index += 1
-    elif global.hasGottenLevelGeode:
+    elif global.hasGottenLevelGeode and level.gameCamera.am_i_zooming:
         var should_stop_animation = true
         for tadpole in tadpoles:
             if not tadpole.is_evolved:
@@ -109,6 +114,11 @@ func activate(is_player):
         if not notGetHitSound.is_playing(): notGetHitSound.play()
         return
 
+    level.player.glitchTickle()
+    level.player.physics_state = level.player.PhysicsState.GLITCH_HURT
+    level.player.glitch_death_timer = 1
+    if global.canGlitchScreen: # TODO(jaketrower): RESPECT MORE
+      level.glitchScreenEffect.visible = true
     level.levelTiles.randomize_num += 10
     level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -15,14 +15,13 @@
 [ext_resource path="res://assets/fonts/Sakred.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=15]
-[ext_resource path="res://assets/textures/download_(5).png" type="Texture" id=16]
+[ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=16]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=25]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=26]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=29]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=37]
@@ -43,7 +42,7 @@ surfaces/0 = {
 }
 
 [sub_resource type="ViewportTexture" id=47]
-viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
+viewport_path = NodePath("Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
 
 [sub_resource type="Shader" id=45]
 code = "/* Glitch Effect Shader by Yui Kinomoto @arlez80 */
@@ -233,11 +232,14 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+show_crt_effect = true
 tileset_type = 2
+spellbook_forbidden = true
+doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="12"]
+[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="14"]
 visible = false
 
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
@@ -246,10 +248,12 @@ mesh = SubResource( 48 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="17"]
-visible = true
+[node name="LevelTitle" parent="Viewport/level/UILayer" index="23"]
+visible = false
+
+[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="25"]
 margin_left = 260.0
-margin_top = 364.0
+margin_top = 453.0
 margin_right = 527.0
 bbcode_text = "[wave] press enter to begin[/wave]"
 text = " press enter to begin"
@@ -324,11 +328,48 @@ text = "Crystal"
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="Continue" type="Control" parent="Viewport/level/UILayer/Options"]
+margin_right = 40.0
+margin_bottom = 75.0
+
+[node name="OptionTextLabeGlitched" type="RichTextLabel" parent="Viewport/level/UILayer/Options/Continue"]
+material = SubResource( 43 )
+anchor_left = 0.52
+anchor_top = 0.525
+anchor_right = 0.726
+anchor_bottom = 0.525
+margin_left = 312.0
+margin_top = 287.0
+margin_right = 670.0
+margin_bottom = 332.8
+theme = ExtResource( 10 )
+custom_colors/default_color = Color( 0.501961, 0, 0.941176, 1 )
+custom_fonts/normal_font = SubResource( 36 )
+bbcode_enabled = true
+bbcode_text = "new game"
+text = "new game"
+
+[node name="OptionTextLabel" type="RichTextLabel" parent="Viewport/level/UILayer/Options/Continue"]
+anchor_left = 0.464
+anchor_top = 0.525
+anchor_right = 0.726
+anchor_bottom = 0.525
+margin_left = 278.4
+margin_top = 287.0
+margin_right = 636.4
+margin_bottom = 332.8
+theme = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "CONTINUE!"
+text = "CONTINUE!"
+
 [node name="NewGame" type="Control" parent="Viewport/level/UILayer/Options"]
+margin_top = 100.0
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="OptionTextLabeGlitched" type="RichTextLabel" parent="Viewport/level/UILayer/Options/NewGame"]
+visible = false
 material = SubResource( 43 )
 anchor_left = 0.52
 anchor_top = 0.525
@@ -356,8 +397,8 @@ margin_right = 636.4
 margin_bottom = 332.8
 theme = ExtResource( 9 )
 bbcode_enabled = true
-bbcode_text = "new game"
-text = "new game"
+bbcode_text = "new game..."
+text = "new game..."
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 environment = SubResource( 23 )
@@ -410,6 +451,9 @@ grav = 3
 [node name="TransformSound" parent="Viewport/level/Player/Sounds" index="4"]
 volume_db = -80.0
 
+[node name="TextBox" parent="Viewport/level/Player/TextContainer" index="0"]
+visible = false
+
 [node name="MenuOptionPointer" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13784, -5.65962, -1 )
 material_override = SubResource( 6 )
@@ -427,6 +471,8 @@ pixel_size = 0.0625
 texture = ExtResource( 15 )
 script = ExtResource( 8 )
 frame_delay = 0.3
+max_frames = 1
+should_animate = false
 
 [node name="MenuOptionPointer2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90071, -5.65962, -1 )
@@ -470,12 +516,6 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0 )
-is_locked = true
-should_lock = true
-path = "res://levels/EndlessFantasy/000FrogWizardIntro.tscn"
-
 [node name="GlitchAura" parent="Viewport/level" instance=ExtResource( 22 )]
 target_path = NodePath("../Player")
 
@@ -492,9 +532,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = SubResource( 3 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 18 )]
 

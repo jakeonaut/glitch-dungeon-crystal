@@ -33,7 +33,7 @@ func _process(delta):
         if not is_active or not was_on_save_point:
             enablePaletteCycle()
             spawn_timer = spawn_time_limit
-            if triangleContainer.visible:
+            if triangleContainer.visible and not global.isEnteringRoom:
                 level.saveTheGame()
             if not has_grown_spores:
                 aniPlayer.play("sporeGrow")

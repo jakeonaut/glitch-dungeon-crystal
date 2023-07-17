@@ -1146,9 +1146,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.5666, 0 )
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -13, 0 )
 

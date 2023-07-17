@@ -76,7 +76,7 @@ func restart():
 
 func randomizeFrame():
     animation_counter = 0
-    set_frame(randi() % max_frames)
+    set_frame(randi() % int(min(max_frames, hframes * vframes)))
     
 func animate(delta):
     if max_frames == 1:
@@ -87,7 +87,7 @@ func animate(delta):
         animation_counter = 0
         var frame = get_frame()
 
-        if frame >= start_frame and frame < start_frame + max_frames - 1:
+        if frame >= start_frame and frame < start_frame + max_frames - 1 and frame < vframes * hframes:
             set_frame(frame+1)
         else:
             if should_fizzle_out:

@@ -83,7 +83,6 @@ func getColorSuffixFromTilesetType(type):
     if type == TilesetType.GLITCH_WORLD:
         return "_white"
 
-var hasLoadedGame = false
 var memory = {}
 
 var activeInteractor = null
@@ -131,7 +130,6 @@ func _ready():
     set_process(true)
 
     # somehow this gets rid of errors LOL
-    if hasLoadedGame: pass
     if memory: pass
     if activeInteractor: pass
     if activeThrowableObject: pass
@@ -157,7 +155,6 @@ func _ready():
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
-    memory["key"] = 0
 
 func _process(delta):
     delta = delta * time_dilation_multiplier
@@ -179,6 +176,30 @@ func _process(delta):
             isEnteringRoom = false
             
 
+func getShortLevelName(longLevelName):
+  return longLevelName.substr(13, longLevelName.length() - 18)
+
+func getLevelZoneName(longLevelName):
+  var shortLevelName = getShortLevelName(longLevelName)
+  var segments = shortLevelName.split("/")
+  if segments.size() == 1:
+    return null
+  return segments[segments.size() - 2]
+
+
+func normalizeMemoryPosition(positionVariable):
+    if typeof(positionVariable) == TYPE_VECTOR3:
+        return positionVariable
+    if typeof(positionVariable) == TYPE_VECTOR2:
+        return Vector3(positionVariable.x, positionVariable.y, 0)
+    if typeof(positionVariable) == TYPE_STRING:
+        var positionVariableArray = positionVariable.replace("(", "").replace(")", "").split(",")
+        if positionVariableArray.size() == 2:
+            return Vector3(positionVariableArray[0], positionVariableArray[1], 0)
+        elif positionVariableArray.size() == 3:
+            return Vector3(positionVariableArray[0], positionVariableArray[1], positionVariableArray[2])
+    return Vector3(0, 0, 0)
+
 
 var save_game_file = "user://savegame.save"
 func saveGame():
@@ -187,21 +208,30 @@ func saveGame():
     save_game.store_line(to_json(global.memory))
     save_game.close()
 
+func doesSaveGameExist():
+    var save_game = File.new()
+    return save_game.file_exists(save_game_file)
+
 func loadGame():
     var save_game = File.new()
-    if not save_game.file_exists("user://savegame.save"):
-        return # Error! We don't have a save to load.
+    if not save_game.file_exists(save_game_file):
+        return false # Error! We don't have a save to load.
     
     # Load the file line by line and process that dictionary to restore
     # the object it represents.
     save_game.open(save_game_file, File.READ)
     
-    global.memory = parse_json(save_game.get_line())
+    var save_game_contents = save_game.get_line()
+    global.memory = parse_json(save_game_contents)
     while not save_game.eof_reached():
         # ... ??? Is this because global.memory is stored on a single line? enigmatic..
         var _current_line = parse_json(save_game.get_line())
         
     save_game.close()
+
+    if global.memory.has("roomPath"):
+        currLevelZone = getLevelZoneName(global.memory["roomPath"])
+    return true
     
 func getNextGlitch(glitch_form):
     if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FLOOR

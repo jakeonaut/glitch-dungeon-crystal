@@ -50,7 +50,7 @@ func _process(delta):
         restorePlayer()
         hookTarget = null
         if Input.is_action_just_pressed("jump_button"):
-          level.player.should_magic_jump = true
+          level.player.magicJump()
           level.player.actuallyApplyJump(true)
         level.player.on_ground = false
         is_reeled_in = true

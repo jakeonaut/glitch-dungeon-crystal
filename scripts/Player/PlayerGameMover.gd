@@ -81,7 +81,7 @@ func _process(delta):
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
       target_last_grounded_y = global_transform.origin.y
-      should_magic_jump = true
+      magicJump()
 
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input and not was_walking_into_wall:
     spawnSparkles(delta)
@@ -232,6 +232,7 @@ func pressingMoveRight():
 
 func magicJump():
   should_magic_jump = true
+  actuallyApplyJump(false)
 
 func regainNestingDoll():
   global.memory["nesting_doll"] = true
@@ -261,7 +262,7 @@ func doubleJump():
   jump_squat_jump_input_timer = 1
   feather_jump_timer = 0
   weak_feather_dbl_jump = false
-  should_magic_jump = true
+  magicJump()
 
   aniPlayer.clear_queue()
   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)

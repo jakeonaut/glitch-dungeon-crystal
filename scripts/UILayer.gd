@@ -33,6 +33,11 @@ var should_display_saving_text = false
 var saving_text_timer = 0
 var saving_text_time_limit = 60
 
+onready var spellMessageTextLabel = get_node("SpellMessageTextLabel")
+var should_display_spell_message_text = false
+var spell_message_text_timer = 0
+var spell_message_text_time_limit = 60
+
 onready var messageTextLabel = get_node("MessageTextLabel")
 var should_display_message_text = false
 var message_text_timer = 0
@@ -81,9 +86,21 @@ func recreateHeartSprites():
 
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
 onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
+onready var keyStatusRect = get_node("KeyStatusRect")
+onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
+onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
 func _process(delta):
+  processQuitGameRenderLogic(delta)
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
+  # TODO(jaketrower):
+  if global.memory.has("key"):
+    keyStatusRect.visible = true
+    keyStatusText1.text = str(global.memory["key"])
+    keyStatusText2.text = str(global.memory["key"])
+  else:
+    keyStatusRect.visible = false
+    
   # if global.memory["max_mp"] <= 0:
   #  get_node("GlitchStatusRect").visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
@@ -122,7 +139,7 @@ func _process(delta):
   #         heartSprite.max_frames = 1
     
 
-  if title_display_state < 3 and display_title != "???":
+  if title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "DebugTown" in global.memory["roomPath"]):
     title_display_timer += (delta*22)
     if title_display_timer >= title_display_time_limit:
       if title_display_state == 0:
@@ -146,6 +163,12 @@ func _process(delta):
     if saving_text_timer >= saving_text_time_limit:
       should_display_saving_text = false
       savingTextLabel.visible = false
+
+  if should_display_spell_message_text:
+    spell_message_text_timer += (delta*22)
+    if spell_message_text_timer >= spell_message_text_time_limit:
+      should_display_spell_message_text = false
+      spellMessageTextLabel.visible = false
 
   if should_display_message_text:
     message_text_timer += (delta*22)
@@ -202,6 +225,31 @@ func _process(delta):
       elif glitch == global.GlitchForm.LADDER: equipSlotSprite.frame = 25
       elif glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
       elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
+
+onready var quitGameRect = get_node("QuitGameRect")
+onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")
+var quitGameTimer = 0
+var quitGameTimeLimit = 30
+func processQuitGameRenderLogic(delta):
+  if global.pauseMoveInput or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    quitGameTimer = 0
+    quitGameRect.visible = false
+    return
+
+  if Input.is_action_pressed("ui_cancel"):
+    quitGameRect.visible = true
+    quitGameTimer += (delta*11)
+    if quitGameTimer < 10:
+      quitGameText.text = "hold ESC to quit: ... 3"
+    elif quitGameTimer < 20:
+      quitGameText.text = "hold ESC to quit: ... 3 ... 2"
+    elif quitGameTimer < 30:
+      quitGameText.text = "hold ESC to quit: ... 3 ... 2 ... 1!"
+    if quitGameTimer >= quitGameTimeLimit:
+      level.get_tree().quit()
+  else:
+    quitGameRect.visible = false
+    quitGameTimer = 0
 
 onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")
@@ -267,11 +315,11 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "- deaths: " + str(hiscoreCounter) + "   (* 1 ) = " + str(hiscoreCounter * -1)
+      deathsHiscoreLabel.text = "+ deaths: " + str(hiscoreCounter) + "   (* 1 ) = " + str(hiscoreCounter * 1)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
-        totalHiscoreCounter -= 1
+        totalHiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
@@ -301,7 +349,7 @@ func processHiscoreRenderLogic(delta):
     if level.has_node("CubeCrystal"):
       global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
-  if Input.is_action_just_pressed("ui_start"):  
+  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button")):  
     transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
@@ -333,6 +381,12 @@ func displaySavingText(message = "saving (not really)"):
   savingTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
   should_display_saving_text = true
   saving_text_timer = 0
+
+func displaySpellMessageText(message):
+  spellMessageTextLabel.visible = true
+  spellMessageTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
+  should_display_spell_message_text = true
+  spell_message_text_timer = 0
 
 func displayMessageText(message):
   messageTextLabel.visible = true

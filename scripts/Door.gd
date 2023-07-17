@@ -28,6 +28,7 @@ var spawn_time_limit = 3
 onready var mySprite = get_node("Sprite3D")
 onready var mySprite2 = get_node("Sprite3D2")
 onready var interactPromptSprite = get_node("InteractPrompt")
+onready var interactionAniPlayer = get_node("InteractionAnimationPlayer")
 onready var landing = get_node("landing")
 onready var sparkleSprite = get_node("SparkleSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -39,6 +40,7 @@ func getPlayer():
     player = level.player
   return player
 
+var prev_keys = 0
 func _ready():
   set_process(true)
   landing.visible = false
@@ -69,9 +71,11 @@ func _ready():
         npc.textBoxContainer.bbText = "locked,\nneeds a key"
       else:
         npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
-    elif global.memory["key"] < num_keys_unlock:
+    elif global.memory.has("key") and global.memory["key"] < num_keys_unlock:
+      prev_keys = global.memory["key"]
       npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
     else:
+      prev_keys = global.memory["key"]
       npc.textBoxContainer.bbText = "press [DOWN] to unlock"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
@@ -97,6 +101,19 @@ func _process(delta):
 
   if is_passive:
     spawnParticles(delta)
+
+  if global.memory.has("key") and prev_keys != global.memory["key"] and is_locked:
+    prev_keys = global.memory["key"]
+    if not global.memory.has("key") or global.memory["key"] == 0:
+      if num_keys_unlock == 1:
+        npc.textBoxContainer.bbText = "locked,\nneeds a key"
+      else:
+        npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+    elif global.memory.has("key") and global.memory["key"] < num_keys_unlock:
+      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
+    else:
+      npc.textBoxContainer.bbText = "press [DOWN] to unlock"
+    npc.textBoxContainer.setVars()
 
 func spawnParticles(delta):
   spawn_timer += (delta*22)
@@ -201,22 +218,22 @@ func activate(is_player):
         npc.activate(is_player)
 
 
-var interactPromptTimer = 0
-var interactPromptTimeLimit = 10
-func passiveActivate(delta, is_player):
+# var interactPromptTimer = 0
+# var interactPromptTimeLimit = 10
+func passiveActivate(_delta, is_player):
   if is_passive and is_player:
     goThroughDoor()
   elif is_player and not interactPromptSprite.visible:
-    interactPromptTimer += (delta*11)
-    if interactPromptTimer >= interactPromptTimeLimit:
-      interactPromptSprite.visible = true
-      interactPromptSprite.restart()
+    interactPromptSprite.visible = true
+    # interactPromptTimer += (delta*11)
+    # if interactPromptTimer >= interactPromptTimeLimit:
+    #   interactPromptSprite.visible = true
     # getPlayer().showInteractPrompt()
     
 func justStopPassiveActivate():
   # getPlayer().hideInteractPrompt()
   interactPromptSprite.visible = false
-  interactPromptTimer = 0
+  # interactPromptTimer = 0
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
   if global.isEnteringRoom:
@@ -304,9 +321,7 @@ func land():
       getPlayer().on_ground = false
   else:
     # SNEAKY SNEAKY
-    global.saveMySpot(self.translation, level)
-      
-  global.memory["roomPath"] = level.getLevelName()
+    global.saveMySpot(self.translation, level)  
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):

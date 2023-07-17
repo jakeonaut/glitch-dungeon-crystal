@@ -10,6 +10,7 @@ var spawn_timer = 0
 var spawn_time_limit = 15
 
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
+onready var npc = get_node("NPC")
 
 export var is_static = false
 export var is_infected = false
@@ -62,6 +63,7 @@ func getSmacked(broom_origin):
   .getSmacked(broom_origin)
   summonSmokeClouds(5)
   spawnFiveSpores()
+  npc.getSmacked(broom_origin)
 
 func passiveActivate(_delta, _is_player):
   getSmacked(null)

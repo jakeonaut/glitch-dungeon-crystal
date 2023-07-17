@@ -221,7 +221,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 458761, 0, 2, 589817, 0, 36, 917497, 0, 2, -65524, 0, 36 )
+"cells": PoolIntArray( 196620, 0, 2, 589817, 0, 36, 917497, 0, 2, -65524, 0, 36 )
 }
 script = ExtResource( 1 )
 __meta__ = {
@@ -252,7 +252,7 @@ path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/004_KeyRoom.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 25 )
 anims/doorOpen = SubResource( 26 )
 anims/locked = SubResource( 27 )

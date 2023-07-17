@@ -183,7 +183,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 393227, 1, 196611, 393228, 1, 196611, 393229, 1, 196611, 458761, 1, 196611, 458762, 1, 196611, 458763, 1, 196611, 458764, 1, 196611, 458765, 1, 196611, 458766, 1, 196611 )
 }
 script = ExtResource( 10 )
 __meta__ = {
@@ -257,7 +257,7 @@ shape = SubResource( 16 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 8.02838, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )

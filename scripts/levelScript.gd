@@ -150,8 +150,12 @@ func _process(delta):
 func displayMessageText(message):
   uiLayer.displayMessageText(message)
 
-func saveTheGame(message = "saving (not really)"):
+func displaySpellMessageText(message):
+  uiLayer.displaySpellMessageText(message)
+
+func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
+  global.memory["roomPath"] = self.getLevelName()
   global.saveGame()
     
 func restartMusic():
@@ -178,19 +182,13 @@ func setUpRoomInitializationOverride():
   pass
 
 func getLevelName():
-  # print("LEVEL NAME: " + get_tree().get_root().get_node("Game").get_filename())
   return get_tree().get_root().get_node("Game").get_filename()
   
 func getShortLevelName():
-  var longLevelName = getLevelName()
-  return longLevelName.substr(13, longLevelName.length() - 18)
+  return global.getShortLevelName(getLevelName())
 
 func getLevelZoneName():
-  var shortLevelName = getShortLevelName()
-  var segments = shortLevelName.split("/")
-  if segments.size() == 1:
-    return null
-  return segments[segments.size() - 2]
+  return global.getLevelZoneName(getLevelName())
 
 func tryToRespawn():
   global.memory["hp"] = global.memory["max_hp"]
@@ -203,7 +201,7 @@ func tryToRespawn():
 
   var found_door = null
   if global.isEnteringRoom:
-    if global.memory.has("lastDoor"):
+    if global.memory.has("lastDoor") and global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
       for door in doors:

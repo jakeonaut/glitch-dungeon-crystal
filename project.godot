@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="secret of nana"
-run/main_scene="res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+run/main_scene="res://levels/MainMenu.tscn"
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://favicon.ico"

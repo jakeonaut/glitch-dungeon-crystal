@@ -125,6 +125,9 @@ func landed():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
+  if behavior_jumping and is_static:
+    behavior_jumping = false
+
   if is_infected:
     var how_many = randi() % 3 + 1
     for _i in range(how_many):
@@ -148,7 +151,7 @@ func spawnASpore():
 func getSmacked(broom_origin):
   .getSmacked(broom_origin)
   behavior_jumping = true
-  behavior_walking = true
+  behavior_walking = not is_static
   jump_timer = 0
   walk_direction.x = 1
   if level.player.mySprite.flip_h:
@@ -181,6 +184,8 @@ func moveMyFriends(delta):
     var friendArray = who_is_standing_on_me[friend_key]
     var friend = friendArray[0]
     var relativePosition = friendArray[2]
+    if friend.linear_velocity.y > 0 or friend.should_magic_jump:
+      continue
     friend.should_do_fallthrough_area_collision = true
     friend.global_transform.origin += self.global_transform.origin - lastPosition
     if friend.global_transform.origin.x < self.global_transform.origin.x + lb or \

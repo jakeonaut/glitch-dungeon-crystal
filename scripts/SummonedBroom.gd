@@ -97,7 +97,7 @@ func hitStuff(_delta):
         areaParent.getSmacked(global_transform.origin)
         my_broom_owner.getSmacked()
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
-      area.InteractActivate()
+      area.InteractActivate(false)
     elif canActivate(area) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       area.PassiveInteractActivate(0, false)
 

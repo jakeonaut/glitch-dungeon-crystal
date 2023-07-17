@@ -78,7 +78,7 @@ func removeRemovedTiles():
   var removedLevelTiles = global.memory[lz][ln][rt]
   var num_removed_tiles = len(removedLevelTiles)
   for i in range(num_removed_tiles):
-    var coords = removedLevelTiles[i]
+    var coords = global.normalizeMemoryPosition(removedLevelTiles[i])
     removeTile(coords, false)
 
 func buildRandomTiles():

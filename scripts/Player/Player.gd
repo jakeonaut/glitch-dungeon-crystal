@@ -132,14 +132,14 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
 
 func floorGlitch():
-  level.displayMessageText("air walk")
+  level.displaySpellMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(getLevelTiles().red_palette)
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
-  level.displayMessageText("feather fall")
+  level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
   # TODO(jaketrower):
@@ -148,7 +148,7 @@ func featherGlitch():
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
-  level.displayMessageText("ladder")
+  level.displaySpellMessageText("ladder")
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
   # TODO(jaketrower):
@@ -156,7 +156,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
-  level.displayMessageText("invis")
+  level.displaySpellMessageText("invis")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(getLevelTiles().black_palette)
@@ -164,7 +164,7 @@ func invisibleGlitch():
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
-  level.displayMessageText("undefined")
+  level.displaySpellMessageText("undefined")
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
   changeSpriteColorPalette(getLevelTiles().white_palette)
@@ -190,10 +190,6 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
   pauseInput = summonedBroom != null
-  
-  # TODO(jaketrower): !!! Remove (change to HOLD) before release
-  if Input.is_action_just_pressed("ui_cancel"):
-    level.get_tree().quit()
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -355,7 +351,7 @@ func processMPBlinkLogic(delta):
     mpNumSprite.visible = false
   
 var returning_to_save_point = 0
-func tryDieToOffscreenCamera(delta):
+func tryDieToOffscreenCamera(_delta):
   var DEATH_MARGIN = 2
   if getGameCamera().rightmost_x > -999:
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
@@ -500,6 +496,7 @@ func glitchTickle(play_sound = true):
       noSpellSound.play()
 
 func nullify():
+  level.displaySpellMessageText("no magic")
   if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
     nullifySound.play()
     global.memory["mp"] = 0

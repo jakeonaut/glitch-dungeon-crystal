@@ -11,9 +11,34 @@ func _ready():
     should_collide_ceil = false
     should_collide_horizontally = false
 
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 10
+onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
+func getSmacked(_broom_origin):
+  if smackSound: smackSound.play()
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 35)
+    material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .15)
+    mySprite.material_override = material
+  smack_timer = 0
+  is_smacked = true
+
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
+    if is_smacked:
+        smack_timer += (delta * 22)
+        if smack_timer >= smack_time_limit:
+            is_smacked = false
+            var material = mySprite.material_override
+            if material is ShaderMaterial:
+                material.set_shader_param("time_influence", 3)
+                # material.set_shader_param("y_div", 2.3)
+                material.set_shader_param("normal_offset", .02)
+                mySprite.material_override = material
     # if opacity > 0:
     #     opacity -= delta/5
     #     shake_color_rate += delta/2000

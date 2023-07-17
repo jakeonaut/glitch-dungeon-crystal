@@ -78,6 +78,8 @@ func _ready():
         nextTextBoxPathStr += "/"
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+  if not is_static_in_level or not global.getStaticLevelZoneLevelVar(level, self.name): 
+    is_really_important = true
   textBoxContainer.setVars()
 
   textBox.is_important = is_important
@@ -148,7 +150,7 @@ func getSmacked(_broom_origin):
   is_smacked = true
   did_i_get_smacked = true
 
-  if global.activeInteractor == null:
+  if global.activeInteractor == null and level.player.mySprite.flip_h == which_side_is_player_on:
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
@@ -159,16 +161,21 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
 func isActive():
   return is_active and not floating_text and (visible or can_be_activated_invisibly)
 
-func activate(_is_player):
-  # if not is_player:
-  #   return
+func activate(is_player):
+  if not is_player:
+    return
   if global.activeInteractor == null:
     textBox.interact()
   pass
 
-func passiveActivate(delta, _is_player):
+var which_side_is_player_on = false
+func passiveActivate(delta, is_player):
+  if not is_player:
+    return
+  which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   if can_move:
-    mySprite.flip_h = (level.player.global_transform.origin.x > global_transform.origin.x)
+    mySprite.flip_h = which_side_is_player_on
+  
 
   if not visible and can_activate:
     if aniPlayer:

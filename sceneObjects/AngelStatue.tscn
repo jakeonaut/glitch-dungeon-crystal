@@ -407,6 +407,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697349, 0 )
 shape = SubResource( 9 )
 
 [node name="NPC" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.32072 )
 is_a_body = false
 
 [node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]

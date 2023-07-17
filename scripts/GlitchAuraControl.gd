@@ -36,7 +36,7 @@ func _ready():
   # remove_child(mainColorRect)
   # topGame.call_deferred("add_child", mainColorRect)
 
-func _process(delta):
+func _process(_delta):
   setPosition(not has_set_position)
   has_set_position = true
 
