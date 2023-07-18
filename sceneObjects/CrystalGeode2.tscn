@@ -360,7 +360,7 @@ transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 20 )
 
-[node name="InteractionArea" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]

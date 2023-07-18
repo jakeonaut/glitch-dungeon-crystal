@@ -123,7 +123,5 @@ func hitStuff(_delta):
       if getLevelTiles().isTileGlitchSpikes(tile_type):
         my_broom_owner.getSmacked()
 
-  
-
 func isActive():
   return visible

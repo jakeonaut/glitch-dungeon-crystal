@@ -101,6 +101,7 @@ func setPaletteCycle(sprite, value):
 func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
+var is_currently_on_save_point = false
 func passiveActivate(_delta, _is_player):
     # global.memory["hearts_recovering"] = true
     # level.player.restoreGlitchAndMP()
@@ -111,11 +112,16 @@ func passiveActivate(_delta, _is_player):
         if not global.memory["broom"]:
             level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
-    if not isOnSavePoint():
+    if not is_currently_on_save_point or not isOnSavePoint():
+        was_on_save_point = false
         saveSound.play()
         global.saveMySpot(self.translation, level)
         
         global.memory.erase("player_y_offset")
+    is_currently_on_save_point = true
+
+func justStopPassiveActivate():
+    is_currently_on_save_point = false
 
 func isActive():
     return true

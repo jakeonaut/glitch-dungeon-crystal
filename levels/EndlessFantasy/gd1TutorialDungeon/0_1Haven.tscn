@@ -1146,13 +1146,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.5666, 0 )
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 
-[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 23 )]
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -13, 0 )
 
-[node name="TriangleContainer" parent="Viewport/level/SavePoint2" index="0"]
+[node name="TriangleContainer" parent="Viewport/level/SavePoint" index="0"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/SavePoint" index="6"]
 anims/RESET = SubResource( 82 )
 anims/default = SubResource( 83 )
 anims/sporeGrow = SubResource( 84 )
@@ -1249,7 +1249,7 @@ visible = true
 [editable path="Viewport/level/GlitchEnemy6"]
 [editable path="Viewport/level/QuestionBlock/NPC"]
 [editable path="Viewport/level/QuestionBlock/NPC/NPC TextBox"]
-[editable path="Viewport/level/SavePoint2"]
+[editable path="Viewport/level/SavePoint"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]

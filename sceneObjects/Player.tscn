@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -52,6 +52,10 @@ height = 2.5
 [sub_resource type="CylinderShape" id=67]
 radius = 0.542615
 height = 2.03183
+
+[sub_resource type="CylinderShape" id=68]
+radius = 0.48954
+height = 1.23275
 
 [sub_resource type="ShaderMaterial" id=45]
 shader = ExtResource( 4 )
@@ -115,7 +119,7 @@ shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
-shader_param/shake_power = 0.005
+shader_param/shake_power = 0.01
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
 shader_param/enable_remove_skin_tone = false
@@ -274,6 +278,18 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.32587, 0.882688, 0 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -578,6 +594,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.62906, 1.53429, 0 ) ]
+}
 
 [sub_resource type="Animation" id=40]
 resource_name = "fallBump"
@@ -763,6 +791,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 7, 8 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.642459, 1.53429, 0 ), Vector3( 1.25886, 1.53429, 0 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 length = 0.2
@@ -802,6 +842,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0.125, 0.5, 0.7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.52335, 1.11888, 0 ) ]
 }
 
 [sub_resource type="Animation" id=39]
@@ -858,6 +910,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.29906, 0.85088, 0 ) ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -948,6 +1012,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.803261, 0.958081, 0 ), Vector3( 0.897062, 0.73028, 0 ), Vector3( 1.39286, 0.82408, 0 ) ]
 }
 
 [sub_resource type="Animation" id=60]
@@ -1150,6 +1226,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.51347, 0.882688, 0 ) ]
+}
 
 [sub_resource type="Animation" id=35]
 resource_name = "swimFall"
@@ -1208,6 +1296,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0.125, 0.5, 0.7 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.483149, 1.08369, 0 ) ]
+}
 
 [sub_resource type="Animation" id=58]
 resource_name = "swimJumpStart"
@@ -1235,6 +1335,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 12 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.146656, 1.08369, 0 ) ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -1325,6 +1437,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.830061, 0.788888, 0 ), Vector3( 1.27226, 0.855888, 0 ) ]
+}
 
 [sub_resource type="Animation" id=31]
 resource_name = "walkBump"
@@ -1352,6 +1476,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 12, 3, 0, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.27226, 0.855888, 0 ), Vector3( 1.47326, 0.855888, 0 ) ]
 }
 
 [sub_resource type="Animation" id=59]
@@ -1394,6 +1530,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.776459, 0.775487, 0 ), Vector3( 1.29906, 0.802288, 0 ) ]
+}
 
 [sub_resource type="Animation" id=63]
 resource_name = "walkStart"
@@ -1435,6 +1583,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.803258, 0.802288, 0 ), Vector3( 1.25886, 0.829087, 0 ) ]
+}
 
 [sub_resource type="Animation" id=27]
 length = 0.2
@@ -1461,6 +1621,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 11, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SecretSweepArea/CollisionShape:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.25886, 0.829087, 0 ), Vector3( 1.48666, 0.829087, 0 ) ]
 }
 
 [sub_resource type="ShaderMaterial" id=56]
@@ -1571,6 +1743,21 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 shape = SubResource( 67 )
+
+[node name="SecretSweepArea" type="Area" parent="."]
+visible = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SecretSweepArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
+shape = SubResource( 68 )
+
+[node name="SecretSweepAreaActual" type="Area" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SecretSweepAreaActual"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
+shape = SubResource( 68 )
 
 [node name="InteractPrompt" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )

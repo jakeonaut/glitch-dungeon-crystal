@@ -520,21 +520,6 @@ func getMushroomInfected():
   else:
     mushroom_infection_direction = 1
 
-func getDustInfected():
-  if is_dust_infected:
-    return false
-  glitchTickle(0)
-  is_dust_infected = true
-  mySprite.get_material_override().set_shader_param("target_palette", global.dream_palette)
-  broomSpriteVisible.get_material_override().set_shader_param("target_palette", global.dream_palette)
-
-func cleanUpDustInfection():
-  if not is_dust_infected:
-    return false
-  is_dust_infected = false
-  mySprite.get_material_override().set_shader_param("target_palette", global.dream_palette)
-  broomSpriteVisible.get_material_override().set_shader_param("target_palette", global.red_palette)
-
 
 # @override
 # aka func ouchies():
@@ -693,6 +678,8 @@ func processBroomLogic(delta):
       self.linear_velocity.y = amt
       self.lv.y = amt
     summonFallenBroom(true)
+  elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf:
+    hitStuff(delta)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
@@ -760,10 +747,12 @@ func shouldAirHaveFriction():
 func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
   broomSpriteVisible.translation = broomSpriteAnimated.translation
+  secretSweepActualCollisionShape.translation = secretSweepCollisionShape.translation
   broomSpriteVisible.flip_h = false
   if mySprite.flip_h:
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1
+    secretSweepActualCollisionShape.translation.x *= -1
   if global.hasGottenLevelGeode:
     broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
     broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
@@ -777,6 +766,10 @@ func processBroomRenderLogic(_delta):
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"]:
     broomSpriteVisible.visible = true
+    if Input.is_action_pressed("sub_action_button") or global.hasGottenLevelGeode:
+      broomSpriteVisible.get_material_override().set_shader_param("enable_glitch", true)
+    else:
+      broomSpriteVisible.get_material_override().set_shader_param("enable_glitch", false)
   else:
     broomSpriteVisible.visible = false
     if not is_tiny:
@@ -983,7 +976,7 @@ func iJustPressedDown():
     return
 
   var trying_to_interact_with_door = false
-  if Input.is_action_just_pressed("interact_button"):
+  if Input.is_action_just_pressed("ui_down"):
     var areas = interactionArea.get_overlapping_areas()
     for area in areas:
       if area.is_in_group("door"):
@@ -1070,4 +1063,52 @@ func idleTalk():
 func appendNextTextCharacter():
   # no-op for now
   pass
-    
+
+onready var secretSweepArea = get_node("SecretSweepArea")
+onready var secretSweepCollisionShape = get_node("SecretSweepArea/CollisionShape")
+onready var secretSweepActualArea = get_node("SecretSweepAreaActual")
+onready var secretSweepActualCollisionShape = get_node("SecretSweepAreaActual/CollisionShape")
+func hitStuff(_delta):
+  if not visible: return
+  
+  var my_broom_owner = self
+  var areas = secretSweepActualArea.get_overlapping_areas()
+  for area in areas:
+    if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
+      if not area.get_node("..").am_i_dying:
+        area.get_node("..").ouchies(global_transform.origin)
+        my_broom_owner.has_sweeped_glitch = true
+        my_broom_owner.broomSound.play()
+        summonSmokeClouds(5, true, true)
+        my_broom_owner.getSmacked()
+    elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+      if global.hasGottenLevelGeode:
+        area.get_node("..").ouchies(global_transform.origin)
+        my_broom_owner.has_sweeped_glitch = true
+        my_broom_owner.broomSound.play()
+      else:
+        area.get_node("..").notOuchies(global_transform.origin)
+      my_broom_owner.getSmacked()
+      # # TODO kill glitches or "free" them like glitch slug...
+
+  # erase glitch tiles...
+  if not global.memory.has("broom"):
+    return
+  var x = secretSweepActualCollisionShape.global_transform.origin.x
+  var y = secretSweepActualCollisionShape.global_transform.origin.y
+  var tb = y + secretSweepActualCollisionShape.shape.height/2
+  var bb = y - secretSweepActualCollisionShape.shape.height/2
+  var lb = x - secretSweepActualCollisionShape.shape.radius
+  var rb = x + secretSweepActualCollisionShape.shape.radius
+  
+  var _has_played_sound = false
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if isTileSpikes(tile_type) and not getLevelTiles().isTileGlitchSpikes(tile_type):
+        my_broom_owner.has_sweeped_glitch = true
+        getLevelTiles().infectSpikes(coords)
+        # TODO(jaketrower): also reset the levelTiles array position?
+      if getLevelTiles().isTileGlitchSpikes(tile_type):
+        my_broom_owner.getSmacked()

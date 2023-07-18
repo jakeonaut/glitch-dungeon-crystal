@@ -104,7 +104,8 @@ func stopAnimation():
     # level.restartMusic()
     # level.gameCamera.am_i_zooming = false
 
-
+func getSmacked(_broom_origin):
+    activate(true)
 
 func isActive():
     return visible and not has_been_smacked and not global.hasGottenLevelGeode
@@ -130,7 +131,8 @@ func activate(is_player):
     getHitSound.play()
     getHitSound2.play()
 
-    level.get_node("SavePoint").passiveActivate(0, is_player)
+    if level.has_node("SavePoint"):
+        level.get_node("SavePoint").passiveActivate(0, is_player)
     otherActivateStuff()
     alwaysActivateStuff()
 
