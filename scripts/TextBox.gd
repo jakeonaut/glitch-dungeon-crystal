@@ -257,7 +257,7 @@ func interact():
       hideTextbox()
 
 func passiveInteract(_delta):
-  if !visible and dialogSound.isActive() and (global.activeInteractor == null or global.activeInteractor == self):
+  if !visible and dialogSound.isActive() and (global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and global.activeInteractor == self)):
     if (is_tiny or is_really_important) and not has_been_shown:
       global.activeInteractor = self
       showTextbox()

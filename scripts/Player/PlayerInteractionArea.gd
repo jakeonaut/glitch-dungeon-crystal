@@ -36,15 +36,15 @@ func _process(_delta):
                     if area.is_in_group("door"):
                         was_nearest_area_door = true
 
-    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and Input.is_action_just_pressed("sub_action_button"):
         global.activeInteractor.InteractActivate()
         player.can_smack_npc = false
     elif Input.is_action_just_pressed("ui_down"):
         # short circuit to textbox if one exists
-        if global.activeInteractor != null:
+        if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             if global.activeInteractor.is_in_group("door_textbox") and nearest_area != null and nearest_area.is_in_group("door"):
                 nearest_area.InteractActivate()
-            if global.activeInteractor != null: # need to recheck cuz the above line might have cleared
+            if global.activeInteractor != null and is_instance_valid(global.activeInteractor): # need to recheck cuz the above line might have cleared
                 global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
         elif nearest_area and not global.pauseMoveInput:

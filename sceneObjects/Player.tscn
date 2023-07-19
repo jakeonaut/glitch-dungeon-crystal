@@ -46,7 +46,7 @@
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
 
 [sub_resource type="CylinderShape" id=66]
-radius = 1.1537
+radius = 0.837805
 height = 2.5
 
 [sub_resource type="CylinderShape" id=67]

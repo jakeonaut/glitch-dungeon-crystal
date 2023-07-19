@@ -193,7 +193,7 @@ func getLevelZoneName():
 func tryToRespawn():
   global.memory["hp"] = global.memory["max_hp"]
   self.gameCamera.initial_target = player.get_node("CameraTarget")
-  if global.activeInteractor != null:
+  if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
     global.activeInteractor.stopInteract()
   global.activeInteractor = null
   global.pauseMoveInput = false

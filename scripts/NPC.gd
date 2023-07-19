@@ -112,7 +112,7 @@ func _process(delta):
   if is_active and interactPrompt != null and smallInteractionArea != null and not floating_text:
     interactPrompt.visible = smallInteractionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
-      global.activeInteractor == null or (
+      global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
         global.activeInteractor == textBox and textBox.nextPrompt.visible
       )
     )
@@ -194,7 +194,7 @@ func stopPassiveActivate():
     return
 
   # TODO(jaketrower): TODO on a timer...
-  if global.activeInteractor != null and global.activeInteractor == textBox:
+  if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor == textBox:
     global.activeInteractor.stopInteract()
   did_i_get_smacked = false
     

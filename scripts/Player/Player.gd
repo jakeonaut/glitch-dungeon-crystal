@@ -330,7 +330,7 @@ func processMPBlinkLogic(delta):
 
       if is_blinked:
         mySprite.material_override.set_shader_param("target_palette", global.grey_player_palette)
-        if mpNumSprite.visible and not (global.pauseMoveInput or global.pauseGame or global.activeInteractor != null) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
+        if mpNumSprite.visible and not (global.pauseMoveInput or global.pauseGame or (global.activeInteractor != null and is_instance_valid(global.activeInteractor))) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
           blinkSound.play()
       elif glitch_form == global.GlitchForm.FLOOR:
         mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
@@ -664,7 +664,7 @@ func processBroomLogic(delta):
       summonedBroom.aniPlayer.play("broomSmack2")
       summonedBroom.broom_active_time_limit = 15
       is_in_broom_cooldown = false
-    if not can_smack_npc or global.activeInteractor != null:
+    if not can_smack_npc or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
       summonedBroom.has_hit_npc = true
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()

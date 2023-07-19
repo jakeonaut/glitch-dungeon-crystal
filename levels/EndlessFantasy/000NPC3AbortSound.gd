@@ -5,11 +5,30 @@ onready var NPC3 = get_node("../../..")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 func _ready():
-    pass
+    var memory = global.getStaticLevelZoneLevelVar(level, self.name)
+    if memory == null:
+        return
+    elif not memory:
+        doActivateScriptStuff()
+    elif memory:
+        NPC3.queue_free()
+        
 
+var has_talked = false
 func activateScript():
-    NPC3.textBoxContainer.bbText = " truthfully, i have nothing\nmore to say"
-    NPC3.textBoxContainer.setVars()
+    if not has_talked:
+        doActivateScriptStuff()
+    else:
+        summonSmokeClouds(NPC3, 3, true, true)
+        global.activeInteractor = null
+        NPC3.queue_free()
+        global.setStaticLevelZoneLevelVar(level, self.name, true)
+
+func doActivateScriptStuff():
+    NPC3.get_node("NPC TextBox").bbText = " truthfully, i have nothing\nmore to say"
+    NPC3.get_node("NPC TextBox").setVars()
+    global.setStaticLevelZoneLevelVar(level, self.name, false)
+    has_talked = true
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

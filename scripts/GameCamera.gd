@@ -104,8 +104,7 @@ func _process(delta):
     set_interpolation_enabled(false)
     if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
-  var npcTextBox = global.activeInteractor
-  if npcTextBox != null and npcTextBox.can_camera_zoom and initial_size > 12:
+  if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
     actual_target = weakref(global.activeInteractor.get_node("../.."))
     set_target(actual_target.get_ref())
     # interpolation = A + (B - A) * t

@@ -196,7 +196,7 @@ func activate(is_player):
     if not is_locked and not should_lock and global.activeInteractor == null and not (getPlayer().glitch_form == global.GlitchForm.FLOOR and getPlayer().on_ground and not getPlayer().truly_on_ground):
       goThroughDoor()
     elif is_locked:
-      if global.memory["key"] >= num_keys_unlock:
+      if global.memory.has("key") and global.memory["key"] >= num_keys_unlock:
         level.displayMessageText("unlocked!")
         global.pauseMoveInput = true
         global.memory["key"] -= num_keys_unlock
@@ -209,7 +209,7 @@ func activate(is_player):
         animationPlayer.queue("doorOpen")
         is_locked = false
         setGlobalMemoryOfHasUnlocked()
-        if global.activeInteractor != null:
+        if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
           global.activeInteractor.stopInteract()
         global.activeInteractor = null
         goThroughDoor()

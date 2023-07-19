@@ -80,7 +80,7 @@ func _process(delta):
       if display_textbox:
         textBox.focus_me = true
         # if there is an existing textBox already... hide it... fail safe:
-        if global.activeInteractor != null:
+        if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
           global.activeInteractor.hideTextbox()
         global.activeInteractor = textBox # also weird but this is to get the camera to look at me
           
