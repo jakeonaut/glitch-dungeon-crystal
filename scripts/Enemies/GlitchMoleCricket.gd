@@ -117,7 +117,7 @@ func _process(delta):
                     aniPlayer.clear_queue()
                     mole_state = MoleState.DIG_IDLE
 
-        if on_ground and has_been_smacked:
+        if has_been_smacked:
             has_been_smacked = false
             startDigging()
     elif mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE:
@@ -174,7 +174,7 @@ func _process(delta):
             aniPlayer.queue("suddenly_fly")
             if has_been_smacked:
                 mole_state = MoleState.OVERRIDE_FLYING
-        elif grav == 0:
+        elif grav == 0 and flight_anchor != null:
             global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*5)
             var step = .5
             if stepify(global_transform.origin.x, step) == stepify(flight_anchor.global_transform.origin.x, step) and \
@@ -195,20 +195,20 @@ func _process(delta):
             walk_speed = 8
             linear_velocity.y = 0
             lv.y = 0
-        elif flight_anchor.frame == 0: # DOWN
+        elif flight_anchor != null and flight_anchor.frame == 0: # DOWN
             behavior_walking = true
             walk_direction.x = -1
             grav = 50
             true_terminal_vel = 5
-        elif flight_anchor.frame == 1: # RIGHT
+        elif flight_anchor != null and flight_anchor.frame == 1: # RIGHT
             myOtherSprite.flip_h = false
             walk_direction.x = 1
             behavior_walking = true
-        elif flight_anchor.frame == 2: # LEFT
+        elif flight_anchor != null and flight_anchor.frame == 2: # LEFT
             myOtherSprite.flip_h = true
             walk_direction.x = -1
             behavior_walking = true
-        elif flight_anchor.frame == 3: # UP?
+        elif flight_anchor != null and flight_anchor.frame == 3: # UP?
             behavior_walking = true
             walk_direction.x = 1
             grav = -50
@@ -218,7 +218,7 @@ func _process(delta):
         return
 
 func tryFadeAway(delta):
-    if flight_anchor.should_fade_away:
+    if flight_anchor != null and flight_anchor.should_fade_away:
         opacity = opacity + (0.0 - opacity) * (delta * 3)
         myOtherSprite.material_override.set_shader_param("opacity", opacity)
         

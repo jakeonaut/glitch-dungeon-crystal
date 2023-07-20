@@ -272,6 +272,12 @@ func doFallthroughObjectCollision(gameMover, area):
     ) and (gameMover.linear_velocity.y < 0 or (gameMover.linear_velocity.y == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.should_do_fallthrough_area_collision = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
+        gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
+        gameMover.lv = gameMover.linear_velocity
+        gameMover.global_transform.origin.y = gameMover.fallthrough_area_collision_y
+
+        if not gameMover.was_on_ground:
+            gameMover.processLand()
         return true
 
     # the above check counts for falling down onto the fallthroughCollision,

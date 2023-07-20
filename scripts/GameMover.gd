@@ -243,14 +243,7 @@ func processPhysics(delta):
   
   just_landed = false
   if not was_on_ground and on_ground: # I just landed!!
-    landed()
-    if getGameCamera().rightmost_x == -999 or not (
-      # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-      global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
-      global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
-      global_transform.origin.y < getGameCamera().botmost_y + 2):
-        last_grounded_pos = Vector3(global_transform.origin)
-    just_landed = true
+    processLand()
   # TODO(jaketrower): all this animation code IS going to break everything one day :)
   var aa = ""
   if not pauseAnimation and aniPlayer != null:
@@ -280,6 +273,16 @@ func processPhysics(delta):
     was_just_on_ground_timer += (delta*22)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   prev_glitch_form = glitch_form
+
+func processLand():
+  landed()
+  if getGameCamera().rightmost_x == -999 or not (
+    # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+    global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
+    global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
+    global_transform.origin.y < getGameCamera().botmost_y + 2):
+      last_grounded_pos = Vector3(global_transform.origin)
+  just_landed = true
     
 func applyGravity(delta):
   if not can_collide_with_floor:
@@ -303,7 +306,9 @@ func applyGravity(delta):
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
     lv += g * delta
-    if glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water:
+    if on_ground:
+      fall_timer = 0
+    elif glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water:
       fall_timer += (delta*22)
     elif glitch_form == global.GlitchForm.FEATHER or vv > 0:
       fall_timer = 0
@@ -346,10 +351,12 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel * .75
     else:
       terminal_vel = true_terminal_vel / 2
+  elif glitch_form == global.GlitchForm.LADDER:
+    terminal_vel = true_terminal_vel
   else:
     terminal_vel = true_terminal_vel
 
-  if vv < -terminal_vel:
+  if vv < -terminal_vel or (glitch_form == global.GlitchForm.LADDER and vv <= 0):
     vv = -terminal_vel
   if grav < 0 and vv > terminal_vel:
     vv = terminal_vel
@@ -577,17 +584,18 @@ func processJumpInputs(delta):
       jump_squat_jump_input_timer = 0
       
 
-  if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
-    feather_jump_timer += (delta*22)
-    if weak_feather_dbl_jump:
+  if not glitch_form == global.GlitchForm.LADDER:
+    if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
       feather_jump_timer += (delta*22)
-    actuallyApplyJump(false)
-  elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
-    feather_jump_timer += (delta*22)
-    if feather_jump_timer > 3: 
+      if weak_feather_dbl_jump:
+        feather_jump_timer += (delta*22)
       actuallyApplyJump(false)
-  elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
-    feather_jump_timer += (delta*22)
+    elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
+      feather_jump_timer += (delta*22)
+      if feather_jump_timer > 3: 
+        actuallyApplyJump(false)
+    elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
+      feather_jump_timer += (delta*22)
     
   # if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
   #   feather_jump_timer = 0

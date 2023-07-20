@@ -570,12 +570,9 @@ shape = SubResource( 21 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, 0.0347237, 0 )
 grav = 0
-bbText = "hello my love
-could you go grab
-our broom?
-i left it
-on the roof..
-press [Z] to jump."
+bbText = "hello dearie, could you
+grab our broom? i 
+left it on the roof.."
 is_really_important = true
 can_move = false
 dont_recolor_me = true
@@ -626,7 +623,9 @@ material_override = SubResource( 46 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7, 0.0347237, 0 )
 grav = 0
-bbText = "moo"
+bbText = "moo..
+(press Z or up 
+to jump)"
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true

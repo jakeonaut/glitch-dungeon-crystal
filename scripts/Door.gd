@@ -32,6 +32,7 @@ onready var interactionAniPlayer = get_node("InteractionAnimationPlayer")
 onready var landing = get_node("landing")
 onready var sparkleSprite = get_node("SparkleSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var fallthroughSolid = get_node("FallthroughSolid")
 var is_on_main_menu = false
 
 var player = null
@@ -90,6 +91,12 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   animationPlayer.playback_speed = global.time_dilation_multiplier
+
+  if not is_passive:
+    if not mySprite2.visible and fallthroughSolid.is_in_group("fallthrough"):
+      fallthroughSolid.remove_from_group("fallthrough")
+    elif mySprite2.visible and not fallthroughSolid.is_in_group("fallthrough"):
+      fallthroughSolid.add_to_group("fallthrough")
 
   if dont_recolor_me:
     if mySprite.is_in_group("sprite"):

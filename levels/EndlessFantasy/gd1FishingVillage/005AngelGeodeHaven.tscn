@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/QuietSavePoint.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=28]
+[ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
@@ -952,6 +953,9 @@ visible = false
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, 1.4, 0 )
+
+[node name="GeodeSpawner7" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2, 5.5, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

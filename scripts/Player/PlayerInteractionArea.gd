@@ -44,14 +44,14 @@ func _process(_delta):
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             if global.activeInteractor.is_in_group("door_textbox") and nearest_area != null and nearest_area.is_in_group("door"):
                 nearest_area.InteractActivate()
-            if global.activeInteractor != null and is_instance_valid(global.activeInteractor): # need to recheck cuz the above line might have cleared
-                global.activeInteractor.InteractActivate()
+            # if global.activeInteractor != null and is_instance_valid(global.activeInteractor): # need to recheck cuz the above line might have cleared
+            #     global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
-        elif nearest_area and not global.pauseMoveInput:
+        elif nearest_area and not global.pauseMoveInput and nearest_area.is_in_group("door"):
             nearest_area.InteractActivate()
         # Give secondary priority to held objects action.
-        elif global.activeThrowableObject:
-            global.activeThrowableObject.activate(true)
+        # elif global.activeThrowableObject:
+        #     global.activeThrowableObject.activate(true)
         # if no nearby active area, and no held object, use primary player action
         # else:
         #     player.tryBroom()
