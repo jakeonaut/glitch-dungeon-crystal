@@ -38,6 +38,9 @@ func setUpRoomInitializationOverride():
     endOfDemoDoor.is_locked = false
     endOfDemoDoor.animationPlayer.play("doorOpen")
 
-func _process(delta):
+func _process(_delta):
   # ._process(delta) implicit
-  pass
+  if player.glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+    if endOfDemoDoor.is_locked:
+      endOfDemoDoor.animationPlayer.play("doorOpen")
+    endOfDemoDoor.is_locked = false

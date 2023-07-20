@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -569,6 +569,149 @@ tracks/1/keys = {
 resource_name = "jump"
 length = 0.001
 
+[sub_resource type="Animation" id=59]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=61]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=63]
+resource_name = "land"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "stand"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=39]
 resource_name = "default"
 length = 0.1
@@ -684,19 +827,16 @@ shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 10 )
 shader_param/target_palette = ExtResource( 13 )
 
-[sub_resource type="BoxShape" id=42]
-resource_local_to_scene = true
-
-[sub_resource type="BoxShape" id=43]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
 [sub_resource type="BoxShape" id=44]
 resource_local_to_scene = true
 
 [sub_resource type="BoxShape" id=45]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=65]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -1163,6 +1303,52 @@ shape = SubResource( 27 )
 [node name="InteractPrompt" parent="Viewport/level/NPC3" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
+[node name="NPC9" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1.56528, 0 )
+grav = 0
+bbText = "moo"
+is_really_important = true
+can_camera_zoom = false
+dont_recolor_me = true
+is_a_body = false
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC9/SmallInteractionArea" index="0"]
+shape = SubResource( 22 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Sprite3D" parent="Viewport/level/NPC9" index="4"]
+material_override = SubResource( 29 )
+frame = 28
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="5"]
+anims/default = SubResource( 59 )
+anims/fall = SubResource( 60 )
+anims/flickerOn = SubResource( 61 )
+anims/jump = SubResource( 62 )
+anims/land = SubResource( 63 )
+anims/stand = SubResource( 64 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC9/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162, 0 )
+shape = SubResource( 27 )
+
+[node name="InteractPrompt" parent="Viewport/level/NPC9" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
+
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6.8347, 0 )
 grav = 0
@@ -1234,20 +1420,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6, 3.5, 0 )
 [node name="Sprite3D" parent="Viewport/level/Dragonfly3" index="0"]
 automatically_change_color = false
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.9, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
-is_passive = true
-
-[node name="landing" parent="Viewport/level/Door" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 1 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 42 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 43 )
-
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, -14.2, 0 )
 is_locked = true
@@ -1262,6 +1434,9 @@ shape = SubResource( 44 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 45 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 65 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, -1, 0 )
@@ -1280,6 +1455,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 2.2, 0 )
 
 [node name="BasicTadpoleEnemy4" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, 0 )
+path = "res://levels/EndlessFantasy/gd1BiogardenBoss1/000000FrogWizardIntro.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 28 )]
 
@@ -1320,14 +1499,14 @@ flip_v = true
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
+[editable path="Viewport/level/NPC9"]
+[editable path="Viewport/level/NPC9/NPC TextBox"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/Dragonfly"]
 [editable path="Viewport/level/Dragonfly2"]
 [editable path="Viewport/level/Dragonfly3"]
-[editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]

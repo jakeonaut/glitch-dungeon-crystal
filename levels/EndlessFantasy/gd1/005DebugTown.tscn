@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -697,6 +697,10 @@ extents = Vector3( 2, 8, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=137]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=53]
 resource_name = "doorClose"
 length = 0.4
@@ -747,6 +751,10 @@ tracks/0/keys = {
 [sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
 
+[sub_resource type="BoxShape" id=138]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=98]
 resource_name = "doorClose"
 length = 0.4
@@ -793,6 +801,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=139]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=132]
 resource_name = "doorClose"
@@ -841,6 +853,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=140]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=104]
 resource_name = "doorClose"
 length = 0.4
@@ -888,6 +904,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=141]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=101]
 resource_name = "doorClose"
 length = 0.4
@@ -934,6 +954,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=142]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=113]
 resource_local_to_scene = true
@@ -1037,6 +1061,10 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="BoxShape" id=143]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=80]
 resource_name = "doorClose"
 length = 0.4
@@ -1084,6 +1112,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=144]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=86]
 resource_name = "doorClose"
 length = 0.4
@@ -1130,6 +1162,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=145]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=92]
 shader = ExtResource( 5 )
@@ -1692,6 +1728,9 @@ shape = SubResource( 15 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 137 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, -6, 0 )
 is_locked = true
@@ -1709,6 +1748,9 @@ shape = SubResource( 64 )
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 138 )
+
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
@@ -1724,6 +1766,9 @@ shape = SubResource( 64 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door5/FallthroughSolid" index="0"]
+shape = SubResource( 139 )
 
 [node name="EndOfDemoDoor" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -3, 0 )
@@ -1744,6 +1789,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8, -3.7, -1 )
 [node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/FallthroughSolid" index="0"]
+shape = SubResource( 140 )
+
 [node name="Door8" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3, 7, 0 )
 is_locked = true
@@ -1760,6 +1808,9 @@ shape = SubResource( 64 )
 
 [node name="CollisionShape" parent="Viewport/level/Door8/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door8/FallthroughSolid" index="0"]
+shape = SubResource( 141 )
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -31.1, 0 )
@@ -1781,6 +1832,9 @@ shape = SubResource( 64 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door7/FallthroughSolid" index="0"]
+shape = SubResource( 142 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9.52831, 0 )
@@ -1870,6 +1924,9 @@ shape = SubResource( 78 )
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 79 )
 
+[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
+shape = SubResource( 143 )
+
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -16, 0 )
 is_locked = true
@@ -1890,6 +1947,9 @@ shape = SubResource( 78 )
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 79 )
 
+[node name="CollisionShape" parent="Viewport/level/Door4/FallthroughSolid" index="0"]
+shape = SubResource( 144 )
+
 [node name="Door6" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -16, 0 )
 is_locked = true
@@ -1908,6 +1968,9 @@ shape = SubResource( 78 )
 
 [node name="CollisionShape" parent="Viewport/level/Door6/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 79 )
+
+[node name="CollisionShape" parent="Viewport/level/Door6/FallthroughSolid" index="0"]
+shape = SubResource( 145 )
 
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 12, 0 )

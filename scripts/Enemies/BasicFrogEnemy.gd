@@ -125,7 +125,7 @@ func landed():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
 
-  if behavior_jumping and is_static:
+  if behavior_jumping and is_static and not is_infected:
     behavior_jumping = false
 
   if is_infected:

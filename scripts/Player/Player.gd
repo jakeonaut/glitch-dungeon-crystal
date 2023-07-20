@@ -156,7 +156,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
-  level.displaySpellMessageText("invis")
+  level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(getLevelTiles().black_palette)
