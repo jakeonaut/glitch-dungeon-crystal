@@ -152,8 +152,8 @@ func _ready():
   set_physics_process(true)
   if true_terminal_vel == null: true_terminal_vel = 32
 
-  yield(get_tree(), "idle_frame")
-  yield(get_tree(), "idle_frame")
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   spawn_origin = global_transform.origin
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 

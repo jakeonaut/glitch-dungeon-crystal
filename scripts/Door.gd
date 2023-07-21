@@ -89,14 +89,14 @@ func _ready():
     interactPromptSprite.global_transform.origin.y -= 1
     
 func _process(delta):
+  if is_passive: visible = false
   delta = delta * global.time_dilation_multiplier
   animationPlayer.playback_speed = global.time_dilation_multiplier
 
-  if not is_passive:
-    if not mySprite2.visible and fallthroughSolid.is_in_group("fallthrough"):
-      fallthroughSolid.remove_from_group("fallthrough")
-    elif mySprite2.visible and not fallthroughSolid.is_in_group("fallthrough"):
-      fallthroughSolid.add_to_group("fallthrough")
+  if (is_passive or not mySprite2.visible) and fallthroughSolid.is_in_group("fallthrough"):
+    fallthroughSolid.remove_from_group("fallthrough")
+  elif not is_passive and mySprite2.visible and not fallthroughSolid.is_in_group("fallthrough"):
+    fallthroughSolid.add_to_group("fallthrough")
 
   if dont_recolor_me:
     if mySprite.is_in_group("sprite"):
@@ -190,7 +190,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive():
-  return visible
+  return visible or is_passive
 
 func generateId():
   return get_name()

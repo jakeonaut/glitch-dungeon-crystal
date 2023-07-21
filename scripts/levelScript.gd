@@ -42,8 +42,8 @@ func _ready_impl():
   set_process_input(true)
   set_process(true)
 
-  yield(get_tree(), "idle_frame")
-  yield(get_tree(), "idle_frame")
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   
   levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)

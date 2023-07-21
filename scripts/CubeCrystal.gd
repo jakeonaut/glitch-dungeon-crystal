@@ -19,8 +19,8 @@ var disappearing2 = false
 var disappearTimer = 0
 
 func _ready():
-    yield(get_tree(), "idle_frame")
-    yield(get_tree(), "idle_frame")
+    yield(TempTimer.idle_frame(self), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
         queue_free()
         

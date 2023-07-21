@@ -35,8 +35,8 @@ func _ready():
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
 
-    yield(get_tree(), "idle_frame")
-    yield(get_tree(), "idle_frame")
+    yield(TempTimer.idle_frame(self), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
     original_pos = spawn_origin
     randomizeTargetPos()
 

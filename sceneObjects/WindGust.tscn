@@ -23,7 +23,7 @@ vframes = 2
 frame = 3
 script = ExtResource( 2 )
 
-[node name="Area" type="Area" parent="." groups=["flypath"]]
+[node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 script = ExtResource( 3 )
 

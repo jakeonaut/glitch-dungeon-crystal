@@ -30,8 +30,8 @@ func _ready():
   initial_z = global_transform.origin.z
   
   # Wait two frames so that levelTiles on levelScript is available
-  yield(get_tree(), "idle_frame")
-  yield(get_tree(), "idle_frame")
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
 
   is_doing_fake_static = false
 

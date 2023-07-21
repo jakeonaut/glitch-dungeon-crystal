@@ -9,7 +9,6 @@ func _ready():
     pass
 
 func activateScript():
-    global.memory["broomChallenge"] = false
     global.doorSound.play()
     var newDoor = doorRes.instance()
     newDoor.path = "res://levels/Adventure/SpellbookIntro.tscn"

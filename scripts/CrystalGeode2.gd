@@ -19,8 +19,8 @@ func _ready():
     set_process(true)
     if global.hasGottenLevelGeode:
         aniPlayer.play("quick_explode")
-        yield(get_tree(), "idle_frame")
-        yield(get_tree(), "idle_frame")
+        yield(TempTimer.idle_frame(self), "timeout")
+        yield(TempTimer.idle_frame(self), "timeout")
         stopAnimation()
         alwaysActivateStuff()
 
@@ -30,11 +30,15 @@ var tadpoles = []
 var num_tadpoles = 0
 var tadpole_index = 0
 var cube_rotation = 66
+var sams_weird_timeout_timer = 0
+var sams_weird_timeout_time_limit = 60
+var spawn_pos = null
 func _process(delta):
     if not can_do_my_power:
         return
 
     if global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode:
+        spawn_pos = self.global_transform.origin
         cubeContainer.rotation_degrees.z += (delta * cube_rotation)
         cube_rotation += (delta * 100)
         npc.rotation_degrees.y -= (delta * rot_amount)
@@ -48,10 +52,11 @@ func _process(delta):
         opacity = opacity + (0.0 - opacity) * (delta * 1)
         npc.mySprite.material_override.set_shader_param("opacity", opacity)
 
-        var pos = npc.global_transform.origin
         var playerPos = level.player.global_transform.origin
-        level.player.global_transform.origin = global.moveToward2D(playerPos, pos, delta * 1)
-        if global.compare2D(level.player.global_transform.origin, pos, 0.1):
+        level.player.global_transform.origin = global.moveToward2D(playerPos, spawn_pos, delta * 2)
+        sams_weird_timeout_timer += (delta * 11)
+        if global.compare2D(level.player.global_transform.origin, spawn_pos, 0.1) or sams_weird_timeout_timer >= sams_weird_timeout_time_limit:
+            level.player.global_transform.origin = spawn_pos
             level.gameCamera.zoomed_size = level.gameCamera.initial_size - 4
             level.gameCamera.am_i_zooming = true
         level.player.ladderUpdateTargetLastGroundedY()
@@ -70,10 +75,7 @@ var opacity = 0.8
 var stop_animation_timer = 0
 var stop_animation_time_limit = 20
 func spinTheFroggies(delta):
-    # TODO(jaketrower): move player to center of geode, fade out background, 
-    # the tadpoles stop bouncing and rotate in 3d around the player,
-    # and pop one by one into NPCs, start chanting and you all speed upward and teleport back
-    # to hub world...
+    # TODO(jaketrower): start chanting and you all speed upward and teleport back to hub world...
     if tadpole_index < num_tadpoles:
         tadpole_spin_start_timer += (delta*11)
         if tadpole_spin_start_timer >= tadpole_spin_start_time_limit:

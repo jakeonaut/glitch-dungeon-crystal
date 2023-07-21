@@ -11,19 +11,6 @@ func setUpRoomInitializationOverride():
         broom.visible = false
         get_node("NPC").textBox.text_final = "you found the broom! now you\ncan help me clean my house...\ni have a great reward buried somewhere under the dust!\nplease, come in."
 
-    if global.memory.has("broomChallenge"):
-        var newDoor = doorRes.instance()
-        newDoor.path = "res://levels/Adventure/BroomChallenge.tscn"
-        newDoor.visible = false
-        self.add_child(newDoor)
-        newDoor.global_transform.origin = get_node("NPC").global_transform.origin
-        newDoor.global_transform.origin.y -= 1.75
-        
-        # i love when nodes have to know about other nodes intimates... gossip girls much
-        if "BroomChallenge" in global.memory["roomPath"]:
-            newDoor.land()
-        get_node("NPC").queue_free()
-
     # IFNDEF FishingRodAbortSound.gd
     # if global.memory.has("fishingRod"):
     #     var fishingRod = get_node("FishingRod")

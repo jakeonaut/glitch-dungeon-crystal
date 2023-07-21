@@ -122,8 +122,6 @@ func conductFromScenePath(path):
         tryToPlay(debugThemePlayer)
     elif path.find("Casino") > 0:
         tryToPlay(casinoThemePlayer)
-    elif path.find("BroomChallenge") > 0:
-        tryToPlay(realizationThemePlayer)
     elif path.find("Suburb") > 0:
         tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0:

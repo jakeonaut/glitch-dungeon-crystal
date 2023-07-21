@@ -54,8 +54,8 @@ func overrideLevelRespawnEvent():
     if has_player_died:
         var npc = get_node("NPC8")
         npc.textBox.has_been_shown = (npc.textBox.text_final == "what, you don't\nlike it?")
-        yield(get_tree(), "idle_frame")
-        yield(get_tree(), "idle_frame")
+        yield(TempTimer.idle_frame(self), "timeout")
+        yield(TempTimer.idle_frame(self), "timeout")
         npc.textBox.hideTextbox()
         npc.textBox.text_final = "what, you don't\nlike it?\npress [ENTER] to change"
         npc.textBox.has_been_shown = false

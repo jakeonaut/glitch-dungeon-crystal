@@ -57,17 +57,6 @@ func _process(delta):
             NPC.textBox.has_been_shown = false
             should_do_cutscene = false
 
-# func overrideLevelRespawnEvent():
-#     if has_player_died:
-#         var npc = get_node("NPC8")
-#         npc.textBox.has_been_shown = (npc.textBox.text_final == "what, you don't\nlike it?")
-#         yield(get_tree(), "idle_frame")
-#         yield(get_tree(), "idle_frame")
-#         npc.textBox.hideTextbox()
-#         npc.textBox.text_final = "what, you don't\nlike it?\npress [ENTER] to change"
-#         npc.textBox.has_been_shown = false
-#     has_player_died = true
-
 func summonSmokeClouds(npc, num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):
       var newSmokeCloud = smokeCloudRes.instance()

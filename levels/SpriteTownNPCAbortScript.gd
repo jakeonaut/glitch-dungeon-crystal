@@ -11,10 +11,8 @@ func _ready():
 func activateScript():
     # IFNDEF SpriteTownLevelScript.gd
     if global.memory.has("broom"):
-        global.memory["broomChallenge"] = false
         global.doorSound.play()
         var newDoor = doorRes.instance()
-        newDoor.path = "res://levels/Adventure/BroomChallenge.tscn"
         newDoor.visible = false
         level.add_child(newDoor)
         newDoor.global_transform.origin = npc.global_transform.origin

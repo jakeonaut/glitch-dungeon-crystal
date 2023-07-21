@@ -530,6 +530,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     return
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY:
     return
+  if global.hasLevelGeodeBeenSmacked and (not global.hasGottenLevelGeode or level.player.pauseSelf):
+    return
 
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
     spawnSparkles(delta, true)

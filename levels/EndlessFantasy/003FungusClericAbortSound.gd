@@ -32,24 +32,9 @@ func activateScript():
       summon(fungusNPC2)
     elif which_one_am_i == 2:
       summon(fungusNPC3)
-      # summon(glitchSlime2, false)
-      # summon(glitchSlime3, false)
       pass
-    # elif which_one_am_i == 3:
-    #   summon(fungusNPC4)
     elif which_one_am_i == 3:
       summon(smallKey, false)
-      # summonAngelStatue()
-      # yield(get_tree().create_timer(0.4), "timeout")
-      # summonDoor(glitchEnemy2)
-      # yield(get_tree().create_timer(0.1), "timeout")
-      # summonDoor(glitchEnemy3)
-      # yield(get_tree().create_timer(0.1), "timeout")
-      # summonDoor(glitchEnemy4)
-      # yield(get_tree().create_timer(0.3), "timeout")
-      # summon(fungusNPC4)
-      # summonDoor(broom)
-      # broom.is_active = true
 
 func summon(npc, set_vars = true):
   yield(get_tree().create_timer(0.4), "timeout")

@@ -19,8 +19,8 @@ func _ready():
 
     aniPlayer.play("wiggle")
 
-    yield(get_tree(), "idle_frame")
-    yield(get_tree(), "idle_frame")
+    yield(TempTimer.idle_frame(self), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
     bugHead.myOtherSprite.set_material_override(bugHead.myOtherSprite.get_material_override().duplicate())
     body1.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override().duplicate())
     body1.get_node("WingSprite1").set_material_override(body1.get_node("WingSprite1").get_material_override().duplicate())

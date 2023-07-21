@@ -15,7 +15,7 @@ export var is_static = false
 export var is_infected = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
-onready var fallthroughSolidArea = get_node("FallthroughSolid")
+onready var fallthroughSolidArea = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)

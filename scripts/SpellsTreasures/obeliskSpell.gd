@@ -45,8 +45,8 @@ func _ready():
   # previous_point = original_position
   # interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
 
-  yield(get_tree(), "idle_frame")
-  yield(get_tree(), "idle_frame")
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   if first_ever_glitch:
     if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/EndlessFantasy/000Intro/001CozyHome.tscn":
       first_ever_glitch = false

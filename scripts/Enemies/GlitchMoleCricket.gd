@@ -265,7 +265,7 @@ func isFarFromHome():
 # @override
 func passiveActivate(delta, is_player):
     .passiveActivate(delta, is_player)
-    myOtherSprite.flip_h = (level.player.global_transform.origin.x <= global_transform.origin.x)
+    # myOtherSprite.flip_h = (level.player.global_transform.origin.x <= global_transform.origin.x)
 
 # @override, not really until GlitchEnemy gets one
 func playerActivationAreaPassiveActivate2():
