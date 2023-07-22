@@ -89,6 +89,7 @@ func _process(delta):
 
   if first_ever_glitch:
     global.pauseMoveInput = true
+    getPlayer().fall_timer = 999
     if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
       global.pauseMoveInput = false
     if not global.pauseMoveInput:

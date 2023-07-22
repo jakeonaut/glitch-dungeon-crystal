@@ -1,5 +1,7 @@
 extends Area
 
+var touchingPlayer = false
+var wasTouchingPlayer = false
 var is_touching_water = false
 
 func _ready():
@@ -12,7 +14,13 @@ func InteractActivate(is_player=true):
     if get_parent().has_method("activate"):
         get_parent().activate(is_player)
 
+func playerActivationAreaPassiveActivate():
+    touchingPlayer = true
+
 func _process(_delta):
+    wasTouchingPlayer = touchingPlayer
+    touchingPlayer = false
+
     var areas = get_overlapping_areas()
     is_touching_water = false
     for area in areas:

@@ -225,22 +225,14 @@ func activate(is_player):
         npc.activate(is_player)
 
 
-# var interactPromptTimer = 0
-# var interactPromptTimeLimit = 10
 func passiveActivate(_delta, is_player):
   if is_passive and is_player:
     goThroughDoor()
   elif is_player and not interactPromptSprite.visible:
     interactPromptSprite.visible = true
-    # interactPromptTimer += (delta*11)
-    # if interactPromptTimer >= interactPromptTimeLimit:
-    #   interactPromptSprite.visible = true
-    # getPlayer().showInteractPrompt()
     
 func justStopPassiveActivate():
-  # getPlayer().hideInteractPrompt()
   interactPromptSprite.visible = false
-  # interactPromptTimer = 0
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
   if global.isEnteringRoom:

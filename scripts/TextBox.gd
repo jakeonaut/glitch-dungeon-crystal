@@ -17,7 +17,7 @@ var text_final = ''
 var ui_should_continue = false
 
 var hide_textbox_timer = 0
-var hide_textbox_time_limit = 10
+var hide_textbox_time_limit = 20
 
 var has_been_shown = false
 var has_preactivated = false
@@ -214,7 +214,6 @@ func showTextbox():
   dialogSound.activateScript()
   
   if not floating_text:
-    getPlayer().hideInteractPrompt()
     resetPrompts()
     
 func hideTextbox():
@@ -261,15 +260,13 @@ func passiveInteract(_delta):
     if (is_tiny or is_really_important) and not has_been_shown:
       global.activeInteractor = self
       showTextbox()
-    else:
-      getPlayer().showInteractPrompt(not has_been_shown)
 
   if global.activeInteractor == self and not focus_me:
     focus_me = true
     hide_textbox_timer = 0
         
 func stopInteract():
-  if not is_important:
+  if not is_important and isWaitingForNextPrompt() or isWaitingForEndPrompt():
     focus_me = false
   
 func adjustTinyColorRect():

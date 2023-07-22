@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -26,8 +26,6 @@
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
-[ext_resource path="res://assets/sprites/interactPrompt.png" type="Texture" id=27]
-[ext_resource path="res://assets/sprites/importantInteractPrompt.png" type="Texture" id=28]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=29]
 [ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=30]
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=31]
@@ -1744,37 +1742,16 @@ shape = SubResource( 67 )
 
 [node name="SecretSweepArea" type="Area" parent="."]
 visible = false
-script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SecretSweepArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
 shape = SubResource( 68 )
 
 [node name="SecretSweepAreaActual" type="Area" parent="."]
-script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SecretSweepAreaActual"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
 shape = SubResource( 68 )
-
-[node name="InteractPrompt" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
-opacity = 0.0
-pixel_size = 0.12
-texture = ExtResource( 27 )
-hframes = 2
-script = ExtResource( 10 )
-frame_delay = 0.8
-
-[node name="ImportantInteractPrompt" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
-opacity = 0.0
-pixel_size = 0.12
-texture = ExtResource( 28 )
-hframes = 4
-script = ExtResource( 10 )
-frame_delay = 0.6
-max_frames = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )

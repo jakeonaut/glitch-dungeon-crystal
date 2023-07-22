@@ -9,6 +9,7 @@ var green_palette = preload("res://assets/palettes/green_palette.png")
 var black_palette = preload("res://assets/palettes/black_palette.png")
 var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
+var base_palette = preload("res://assets/palettes/base_palette.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
 var red_dungeon_palette = preload("res://assets/palettes/red_dungeon_palette.png")
@@ -39,6 +40,7 @@ var black_tidepool_palette = preload("res://assets/palettes/black_tidepool_palet
 var foggy_forest_palette = preload("res://assets/palettes/foggyforest.png")
 var dream_palette = preload("res://assets/palettes/dream-haze-8-1x.png")
 var rgb_palette = preload("res://assets/palettes/3bitrgb_palette.png")
+var NES_palette = preload("res://assets/palettes/NES_base_palette.png")
 var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
 onready var doorSound = get_node("DoorSound")
@@ -155,9 +157,48 @@ func _ready():
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
+    memory["anna_mode"] = false
+    memory["blue_mode"] = false
+
+var anna_mode_counter = 0
+var anna_key_helper = false
+func processEasterEggs():
+    if Input.is_physical_key_pressed(KEY_A):
+        if anna_mode_counter == 0:
+            anna_key_helper = true
+            anna_mode_counter += 1
+        elif anna_mode_counter == 3:
+            if not memory.has("anna_mode"):
+                memory["anna_mode"] = true
+            else:
+                memory["anna_mode"] = not memory["anna_mode"]
+            print("ANNA_MODE = " + str(memory["anna_mode"]))
+            anna_key_helper = true
+            anna_mode_counter = 0
+        elif not anna_key_helper:
+            anna_mode_counter = 0
+    elif Input.is_physical_key_pressed(KEY_N):
+        if (anna_mode_counter == 1 or anna_mode_counter == 2) and not anna_key_helper:
+            anna_key_helper = true
+            anna_mode_counter += 1
+        elif not anna_key_helper:
+            anna_mode_counter = 0
+    elif Input.is_physical_key_pressed(KEY_B):
+        if not anna_key_helper:
+            anna_mode_counter = 0
+            anna_key_helper = true
+            if not memory.has("blue_mode"):
+                memory["blue_mode"] = true
+            else:
+                memory["blue_mode"] = not memory["blue_mode"]
+    else:
+        anna_key_helper = false
+
 
 func _process(delta):
     delta = delta * time_dilation_multiplier
+
+    processEasterEggs()
 
     if mini_cube_crystal_pitch >= mini_cube_crystal_pitch_max:
         mini_cube_crystal_pitch = mini_cube_crystal_pitch_min
@@ -222,7 +263,7 @@ func loadGame():
     save_game.open(save_game_file, File.READ)
     
     var save_game_contents = save_game.get_line()
-    global.memory = parse_json(save_game_contents)
+    global.memory.merge(parse_json(save_game_contents), true)
     while not save_game.eof_reached():
         # ... ??? Is this because global.memory is stored on a single line? enigmatic..
         var _current_line = parse_json(save_game.get_line())
@@ -258,7 +299,7 @@ func doFallthroughObjectCollision(gameMover, area):
 
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
-    if not "should_do_fallthrough_area_collision" in gameMover:
+    if gameMover.pressingDown() or not "should_do_fallthrough_area_collision" in gameMover:
         return false
         
     # check for fallThroughSolid collision while falling
@@ -288,6 +329,7 @@ func doFallthroughObjectCollision(gameMover, area):
             ax + alb, ay + atb, ax + arb, ay + abb,
             x + lb, y + bb, x + rb, y + bb - 0.12
         ):
+        gameMover.on_ground = true
         return true
     return false
 

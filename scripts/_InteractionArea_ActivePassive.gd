@@ -65,7 +65,7 @@ func _process(_delta):
             is_touching_water = true
         if area.is_in_group("ladder"):
             is_touching_ladder = true
-        if area.is_in_group("fallthrough"):
+        if area.is_in_group("fallthrough") and "should_do_fallthrough_area_collision" in possible_game_mover:
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
 
     if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:

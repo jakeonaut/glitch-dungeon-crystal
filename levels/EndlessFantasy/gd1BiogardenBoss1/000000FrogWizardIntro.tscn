@@ -837,7 +837,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1, 4.2, -4 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -1.1, 0 )
-should_lock = true
 path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 21 )]

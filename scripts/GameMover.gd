@@ -930,9 +930,9 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
     return false
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
-    return checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+    return not pressingDown() and checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   else:
-    return tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+    return tileCollisionShape is BoxShape or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y

@@ -25,5 +25,6 @@ func _process(_delta):
 func isActive():
     return is_active
 
-func passiveActivate(_delta, _is_player):
-    getPlayer().nullify()
+func passiveActivate(_delta, is_player):
+    if is_player:
+        getPlayer().nullify()

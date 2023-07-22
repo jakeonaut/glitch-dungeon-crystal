@@ -31,7 +31,7 @@ func _ready():
     spore_origin = self.global_transform.origin
 
 func fallthroughCollisionActivate(possible_game_mover):
-    if not possible_game_mover.on_ground and not should_wiggle:
+    if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle()
 
 func wiggle():

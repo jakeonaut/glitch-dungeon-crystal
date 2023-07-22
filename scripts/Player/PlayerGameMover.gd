@@ -20,6 +20,7 @@ var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 var spriteSheet = preload("res://assets/player_sheet_old.png")
 var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
 var spriteSheetTiny = preload("res://assets/player_sheet_tiny.png")
+var broomSpriteSheetTiny = preload("res://assets/player_sheet_broom_tiny.png")
 var is_tiny = false
 
 onready var nullifySound = get_node("Sounds/NullifySound")

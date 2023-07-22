@@ -37,8 +37,8 @@ func _process(_delta):
                         was_nearest_area_door = true
 
     if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and Input.is_action_just_pressed("sub_action_button"):
+        player.can_smack_npc = global.activeInteractor.get_node("../..")
         global.activeInteractor.InteractActivate()
-        player.can_smack_npc = false
     elif Input.is_action_just_pressed("ui_down"):
         # short circuit to textbox if one exists
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
@@ -66,10 +66,4 @@ func postProcessFallthroughCollisionArea(fallthrough_collision_area):
     else:
         player.should_do_fallthrough_area_collision = false
 
-
-    if prev_fallthrough_collision_area != null and \
-       prev_fallthrough_collision_area != fallthrough_collision_area and \
-       prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
-        # prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(player)
-        pass
     prev_fallthrough_collision_area = fallthrough_collision_area

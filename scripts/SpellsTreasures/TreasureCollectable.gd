@@ -97,8 +97,8 @@ func isActive():
   return is_active and visible
 
 # @override
-func passiveActivate(_delta, is_player):
-  if okay_im_done or not is_player:
+func passiveActivate(_delta, _is_player):
+  if okay_im_done:
     return
     
   if not being_collected:

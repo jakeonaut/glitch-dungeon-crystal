@@ -24,6 +24,7 @@ var smack_time_limit = 10
 
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
 onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
+onready var interactionArea = get_node("InteractionArea")
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
@@ -102,6 +103,7 @@ func _ready():
 func _process(delta):
   # super._process(delta) implicit
 
+  which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   if floating_text:
     mySprite.visible = false
 
@@ -109,8 +111,8 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  if is_active and interactPrompt != null and smallInteractionArea != null and not floating_text:
-    interactPrompt.visible = smallInteractionArea.wasTouchingPlayer and (
+  if is_active and interactPrompt != null and not floating_text:
+    interactPrompt.visible = interactionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
       global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
         global.activeInteractor == textBox and textBox.nextPrompt.visible
@@ -172,7 +174,6 @@ var which_side_is_player_on = false
 func passiveActivate(delta, is_player):
   if not is_player:
     return
-  which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   if can_move:
     mySprite.flip_h = which_side_is_player_on
   
@@ -199,8 +200,7 @@ func stopPassiveActivate():
   did_i_get_smacked = false
     
 func justStopPassiveActivate():
-  if global.activeInteractor == null:
-    level.player.hideInteractPrompt()
+  pass
   
 export var dont_align_sprite = false
 # @override

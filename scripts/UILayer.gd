@@ -207,11 +207,11 @@ func _process(delta):
 
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   # tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
-  # if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-  #   tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
-  #   tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
-  #   if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
-  #     get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
+  if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
+    tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
+    if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
+      get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
 
   if global.memory.has("spellbookPage"):
     var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")

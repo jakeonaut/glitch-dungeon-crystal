@@ -10,7 +10,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var myArea = get_node("Area")
 onready var collisionShape = get_node("Area/CollisionShape")
 onready var aniPlayer = get_node("AnimationPlayer")
-var has_hit_npc = false
+var has_hit_npc = null
+var has_hit_any_npc = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -65,7 +66,7 @@ func isTileSpikes(tile_type):
     
 func canActivate(area):
   var areaParent = area.get_node("..")
-  return not has_hit_npc or not areaParent.has_method("imAnNpc")
+  return not has_hit_any_npc and (areaParent != has_hit_npc or not areaParent.has_method("imAnNpc"))
 
 func hitStuff(_delta):
   if not visible: return
@@ -93,9 +94,11 @@ func hitStuff(_delta):
       var areaParent = area.get_node("..")
       if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         if areaParent.has_method("imAnNpc"):
-          has_hit_npc = true
+          has_hit_npc = areaParent
+          has_hit_any_npc = true
         areaParent.getSmacked(global_transform.origin)
-        my_broom_owner.getSmacked()
+        if not area.is_in_group("tadpole"):
+          my_broom_owner.getSmacked()
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
       area.InteractActivate(false)
     elif canActivate(area) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 

@@ -25,7 +25,7 @@ func isActive():
 
 # @override
 func justPressedJump():
-    return behavior_was_thrown
+    return behavior_was_thrown and on_ground
 
 # @override
 func alignMySprite():
