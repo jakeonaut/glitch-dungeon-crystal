@@ -4,6 +4,7 @@ var original_pos = null
 var target_pos = null
 onready var mySprite = get_node("Sprite3D")
 onready var catchSound = get_node("CatchSound")
+onready var smackSound = get_node("SmackSound")
 var didja_get_me = false
 var opacity = 1.0
 
@@ -116,6 +117,7 @@ func getSmacked(_broom_origin):
         return
 
     if catchSound: catchSound.play()
+    if smackSound: smackSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
     mySprite.material_override.set_shader_param("normal_offset", normal_offset)

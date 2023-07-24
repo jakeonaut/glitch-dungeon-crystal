@@ -870,9 +870,6 @@ mesh_library = ExtResource( 14 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -888,9 +885,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_clip_": 0
@@ -1458,7 +1452,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1BiogardenBoss1/000000FrogWizardIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1GrimoireGrove/0000Grimoire.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 28 )]
 

@@ -12,6 +12,9 @@ func activateScript():
   
   global.pauseGame = false
   global.pauseMoveInput = false
+  level.player.vv = 0
+  level.player.linear_velocity.y = 0
+  level.player.lv.y = 0
   level.player.aniPlayer = level.player.get_node("AnimationPlayer")
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
@@ -30,7 +33,7 @@ func activateScript():
 func preActivateScript():
   if not global.memory.has("spellbookPage"):
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
-    global.memory["spellbookPage"] = [global.GlitchForm.FLOOR]
+    global.memory["spellbookPage"] = []
     global.memory["tutorial_spellbookPage"] = true
     # TODO(jaketrower): give UILayer.gd a function
     level.uiLayer.get_node("EquipmentRect").visible = true

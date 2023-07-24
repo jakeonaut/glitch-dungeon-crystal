@@ -293,6 +293,11 @@ func processJumpInputs(delta):
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
       aniPlayer.queue("jump")
+      new_carcass = cherryCarcassRes.instance()
+      level.add_child(new_carcass)
+      new_carcass.is_crumbling = true
+      new_carcass.global_transform.origin = self.global_transform.origin
+      new_carcass.mySprite.flip_h = mySprite.flip_h
     elif global.memory["nesting_doll"] and triedToDoubleJump: 
       doubleJump()
       new_carcass = cherryCarcassRes.instance()

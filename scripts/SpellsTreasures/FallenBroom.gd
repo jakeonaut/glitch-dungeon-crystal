@@ -173,19 +173,17 @@ func hitStuff(_delta):
             if not area.get_node("..").am_i_dying:
                 area.get_node("..").ouchies(global_transform.origin)
                 # my_broom_owner.has_sweeped_glitch = true
-                my_broom_owner.broomSound.play()
                 summonSmokeClouds(5, true, true)
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             if global.hasGottenLevelGeode:
-                area.get_node("..").ouchies(global_transform.origin)
-                my_broom_owner.has_sweeped_glitch = true
-                my_broom_owner.broomSound.play()
-            else:
-                area.get_node("..").notOuchies(global_transform.origin)
-            # my_broom_owner.getSmacked()
-            has_hit_something = true
+                if area.get_node("..").ouchies(global_transform.origin):
+                    my_broom_owner.getSmacked()
+                    my_broom_owner.has_sweeped_glitch = true
+            elif area.get_node("..").notOuchies(global_transform.origin):
+                my_broom_owner.getSmacked()
+                has_hit_something = true
             # # TODO kill glitches or "free" them like glitch slug...
             
         elif area.is_in_group("corporeal_body"):

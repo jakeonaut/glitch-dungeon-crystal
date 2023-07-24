@@ -68,33 +68,17 @@ func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
 func applyObeliskGlitch(glitch, only_visual = false):
-  if global.memory.has("spellbookPage") and not level.spellbook_forbidden:
-    if not only_visual:
-      var spellbook_size = global.memory["spellbookPage"].size()
-      var is_it_already_my_first_spellbook_page = spellbook_size > 0 and global.memory["spellbookPage"][spellbook_size-1] == glitch
-      if global.memory["spellbookPage"].size() >= 2 and not is_it_already_my_first_spellbook_page:
-        print(global.memory["spellbookPage"])
-        global.memory["spellbookPage"].pop_front()
-      elif global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-        level.uiLayer.get_node("EquipmentStatusRect").visible = true
-        level.uiLayer.get_node("EquipmentStatusRect").rect_scale = Vector2(1.5, 1.5)
-        level.uiLayer.get_node("EquipmentStatusRect").rect_position = Vector2(300, 250)
-
-      if not is_it_already_my_first_spellbook_page:
-        global.memory["spellbookPage"].push_back(glitch)
   applyGlitch(glitch, only_visual)
     
 func applySpellbookGlitch():
   if not global.memory.has("spellbookPage"):
-    return
-
-  if global.memory["mp"] <= 0:
     return
   
   if global.memory["spellbookPage"].size() > 0:
     var glitch_type = global.memory["spellbookPage"].pop_front()
     applyGlitch(glitch_type)
     applyObeliskGlitch(glitch_type)
+    global.memory["spellbookPage"].push_back(glitch_type)
     var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
     equipSlotSprite.frame = 6
   else:
@@ -113,6 +97,7 @@ func applyGlitch(glitch, notPlaySound = false):
     if glitch == self.glitch_form:
       rechargeSound.play()
     else:
+      transformSound.pitch_scale = rand_range(0.8, 1.2)
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
@@ -509,8 +494,8 @@ func nullify():
     mySprite.get_material_override().set_shader_param("opacity", 1.0)
     self.applyGlitch(global.GlitchForm.NORMAL, true)
     self.can_cast_spell_timer = 0
-    if global.memory.has("spellbookPage"):
-        global.memory["spellbookPage"] = []
+    # if global.memory.has("spellbookPage"):
+    #     global.memory["spellbookPage"] = []
 
 func getMushroomInfected():
   if is_mushroom_infected:
@@ -1076,18 +1061,23 @@ func hitStuff(_delta):
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
         my_broom_owner.has_sweeped_glitch = true
-        my_broom_owner.broomSound.play()
         summonSmokeClouds(5, true, true)
         my_broom_owner.getSmacked()
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
       if global.hasGottenLevelGeode:
-        area.get_node("..").ouchies(global_transform.origin)
-        my_broom_owner.has_sweeped_glitch = true
-        my_broom_owner.broomSound.play()
+        if area.get_node("..").ouchies(global_transform.origin):
+          my_broom_owner.has_sweeped_glitch = true
+          my_broom_owner.getSmacked()
       else:
-        area.get_node("..").notOuchies(global_transform.origin)
-      my_broom_owner.getSmacked()
+        # TODO(should "remember" i hit it until i'm no longer touching it...?)
+        if area.get_node("..").notOuchies(global_transform.origin):
+          area.get_node("..").smack_recovery_time_limit = 30
+          my_broom_owner.getSmacked()
       # # TODO kill glitches or "free" them like glitch slug...
+    elif area.is_in_group("bug") and area.get_node("..").has_method("getSmacked"):
+      area.get_node("..").getSmacked(global_transform.origin)
+      my_broom_owner.getSmacked()
+
 
   # erase glitch tiles...
   if not global.memory.has("broom"):

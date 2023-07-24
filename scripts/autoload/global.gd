@@ -372,6 +372,9 @@ func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing):
 func resetLevelZone(levelZone):
     hasGottenLevelGeode = false
     self.memory[levelZone] = {}
+    self.memory.erase("key")
+    # if self.memory.has("spellbookPage"):
+    #     self.memory["spellbookPage"] = []
 
 func setStaticLevelZoneLevelVar(level, name, val):
     # this should likely never occur from this callsite

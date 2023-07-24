@@ -92,6 +92,8 @@ func setPosition():
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
   
+var important_unpause_timer = 0
+var important_unpause_time_limit = 15
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
@@ -125,9 +127,11 @@ func _process(delta):
         has_preactivated = true
       endPrompt.visible = not is_tiny and not floating_text
       has_been_shown = true
-      if is_important:
-        global.pauseGame = false
-      is_important = false
+      if is_important and global.pauseGame:
+        important_unpause_timer += (delta * 11)
+        if important_unpause_timer >= important_unpause_time_limit:
+          is_important = false
+          global.pauseGame = false
       is_really_important = false
       
     if isWaitingForNextPrompt():
@@ -229,6 +233,9 @@ func hideTextbox():
       abortSound.cutOffEarlyActivateScript()
   if global.activeInteractor == self:
     global.activeInteractor = null
+  if is_important:
+    is_important = false
+    global.pauseGame = false
       
 func tryToHide(delta):
   if not focus_me:

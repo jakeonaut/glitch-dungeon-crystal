@@ -455,7 +455,6 @@ text = "the dungeon"
 scroll_active = false
 
 [node name="Inventory" type="Control" parent="."]
-visible = false
 margin_right = 640.0
 margin_bottom = 510.0
 
@@ -735,6 +734,7 @@ should_randomize_step = false
 
 [node name="MeshInstance" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 37 )
+split = 0
 
 [node name="MeshInstance2" parent="MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 material_override = SubResource( 7 )
@@ -822,7 +822,6 @@ text = "2
 "
 
 [node name="EquipmentRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 65.5
 margin_top = 3.0
 margin_right = 142.5
@@ -876,7 +875,6 @@ vframes = 5
 frame = 6
 
 [node name="EquipmentStatusRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 68.0
 margin_top = 79.0
 margin_right = 131.0

@@ -7,7 +7,7 @@ onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTi
 onready var gameCamera = get_node("GameCamera")
 onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
-onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
+# onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
 var current_sprite_palette = global.grey_palette
 
 export var show_crt_effect = false

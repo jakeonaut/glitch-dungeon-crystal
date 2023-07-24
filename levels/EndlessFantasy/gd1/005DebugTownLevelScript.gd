@@ -15,23 +15,23 @@ onready var endOfDemoDoor = get_node("EndOfDemoDoor")
 func setUpRoomInitializationOverride():
   var fishHiscore = global.getHighScoreLevelZoneThing(fishingVillageStr, "hiscore")
   if fishHiscore != null:
-    fishingVillageNPC.textBoxContainer.bbText = "fishVillage\nhiscore: " + str(fishHiscore)
+    fishingVillageNPC.textBoxContainer.bbText = "Fish Village\nhiscore: " + str(fishHiscore)
   else:
-    fishingVillageNPC.textBoxContainer.bbText = "fishVillage"
+    fishingVillageNPC.textBoxContainer.bbText = "Fish Village"
   fishingVillageNPC.textBoxContainer.setVars()
 
   var toxicHiscore = global.getHighScoreLevelZoneThing(toxicJungleStr, "hiscore")
   if toxicHiscore != null:
-    toxicJungleNPC.textBoxContainer.bbText = "ghostForest\nhiscore: " + str(toxicHiscore)
+    toxicJungleNPC.textBoxContainer.bbText = "Spore Forest\nhiscore: " + str(toxicHiscore)
   else:
-    toxicJungleNPC.textBoxContainer.bbText = "ghostForest"
+    toxicJungleNPC.textBoxContainer.bbText = "Spore Forest"
   toxicJungleNPC.textBoxContainer.setVars()
 
   var cricketHiscore = global.getHighScoreLevelZoneThing(cricketCaveStr, "hiscore")
   if cricketHiscore != null:
-    cricketCaveNPC.textBoxContainer.bbText = "cricketCave\nhiscore: " + str(cricketHiscore)
+    cricketCaveNPC.textBoxContainer.bbText = "Cricket Cave\nhiscore: " + str(cricketHiscore)
   else:
-    cricketCaveNPC.textBoxContainer.bbText = "cricketCave"
+    cricketCaveNPC.textBoxContainer.bbText = "Cricket Cave"
   cricketCaveNPC.textBoxContainer.setVars()
 
   if fishHiscore != null and toxicHiscore != null and cricketHiscore != null:
