@@ -208,7 +208,7 @@ func _process(delta):
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   # tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
   if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(3, 65))
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(65, 3))
     tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
     if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() > 1:
       get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
@@ -239,11 +239,11 @@ func processQuitGameRenderLogic(delta):
   if Input.is_action_pressed("ui_cancel"):
     quitGameRect.visible = true
     quitGameTimer += (delta*11)
-    if quitGameTimer < 10:
+    if quitGameTimer < 5:
       quitGameText.text = "hold ESC to quit: ... 3"
-    elif quitGameTimer < 20:
+    elif quitGameTimer < 10:
       quitGameText.text = "hold ESC to quit: ... 3 ... 2"
-    elif quitGameTimer < 30:
+    elif quitGameTimer < 15:
       quitGameText.text = "hold ESC to quit: ... 3 ... 2 ... 1!"
     if quitGameTimer >= quitGameTimeLimit:
       level.get_tree().quit()

@@ -13,7 +13,6 @@ var is_active = false
 
 var spawn_timer = 0
 var spawn_time_limit = 5
-var has_grown_spores = false
 var animation_speed_multiplier = 1.0
 
 func _ready():
@@ -22,6 +21,7 @@ func _ready():
     id = self.generateId()
 
     set_process(true)
+    saveDiskSprite.set_material_override(saveDiskSprite.get_material_override().duplicate())
 
 var was_on_save_point = false
 func _process(delta):
@@ -33,23 +33,25 @@ func _process(delta):
         if not is_active or not was_on_save_point:
             enablePaletteCycle()
             spawn_timer = spawn_time_limit
+            triangleContainer.scale.x = 1.5
+            triangleContainer.scale.y = 1.5
             if triangleContainer.visible and not global.isEnteringRoom:
                 level.saveTheGame()
-            if not has_grown_spores:
-                aniPlayer.play("sporeGrow")
-                has_grown_spores = true
+            aniPlayer.play("sporeGrow")
         is_active = true
         was_on_save_point = true
     else:
+        triangleContainer.scale.x = 1
+        triangleContainer.scale.y = 1
         was_on_save_point = false
         triangleContainer.rotation_degrees.y += delta*22*inactive_triangle_rotation_direction
         if triangleContainer.rotation_degrees.y >= 45 and inactive_triangle_rotation_direction == 1:
             inactive_triangle_rotation_direction = -1
         elif triangleContainer.rotation_degrees.y <= -45 and inactive_triangle_rotation_direction == -1:
             inactive_triangle_rotation_direction = 1
-        if is_active:
-            disablePaletteCycle()
+        disablePaletteCycle()
         is_active = false
+        aniPlayer.play("default")
 
     if is_active and triangleContainer.visible:
         spawn_timer += (delta*22)
@@ -86,17 +88,12 @@ func isOnSavePoint():
             int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func enablePaletteCycle():
-    setPaletteCycle(saveDiskSprite, true)
+    saveDiskSprite.material_override.set_shader_param("enable_palette_cycle", true)
+    saveDiskSprite.material_override.set_shader_param("target_palette", global.base_palette)
 
 func disablePaletteCycle():
-    setPaletteCycle(saveDiskSprite, false)
-
-func setPaletteCycle(sprite, value):
-    var my_material = sprite.get_material_override()
-    if my_material is ShaderMaterial:
-        var new_material = my_material.duplicate()
-        new_material.set_shader_param("enable_palette_cycle", value)
-        sprite.set_material_override(new_material)
+    saveDiskSprite.material_override.set_shader_param("enable_palette_cycle", false)
+    saveDiskSprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
 func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
@@ -112,9 +109,15 @@ func passiveActivate(_delta, _is_player):
         if not global.memory["broom"]:
             level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
-    if not is_currently_on_save_point or not isOnSavePoint():
+    if not global.isRespawning and (not is_currently_on_save_point or not isOnSavePoint()):
+        
         was_on_save_point = false
-        saveSound.play()
+        if not saveSound.is_playing():
+            if isOnSavePoint():
+                saveSound.volume_db = -38
+            else:
+                saveSound.volume_db = -32
+            saveSound.play()
         global.saveMySpot(self.translation, level)
         
         global.memory.erase("player_y_offset")

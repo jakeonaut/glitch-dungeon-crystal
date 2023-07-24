@@ -89,7 +89,9 @@ func _ready():
     interactPromptSprite.global_transform.origin.y -= 1
     
 func _process(delta):
-  if is_passive: visible = false
+  if is_passive:
+    mySprite.visible = false
+    mySprite2.visible = false
   delta = delta * global.time_dilation_multiplier
   animationPlayer.playback_speed = global.time_dilation_multiplier
 

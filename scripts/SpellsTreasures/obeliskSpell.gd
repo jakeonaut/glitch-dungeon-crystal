@@ -124,6 +124,7 @@ func shouldIBeActive():
     return true
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
     return true
+  # TODO(jaketrower):... why
   elif global.memory["spellbookPage"].has(my_glitch_form):
     return false
   else:

@@ -4,6 +4,8 @@ var shake_power = 0.001
 var opacity = 0.5
 var shake_color_rate = 0.001
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var mySprite2 = get_node("Sprite3D2")
+var is_crumbling = false
 
 
 func _ready():
@@ -29,6 +31,8 @@ func getSmacked(_broom_origin):
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
+        
+
     if is_smacked:
         smack_timer += (delta * 22)
         if smack_timer >= smack_time_limit:
@@ -39,15 +43,17 @@ func _process(delta):
                 # material.set_shader_param("y_div", 2.3)
                 material.set_shader_param("normal_offset", .02)
                 mySprite.material_override = material
-    # if opacity > 0:
-    #     opacity -= delta/5
-    #     shake_color_rate += delta/2000
-    #     shake_power += delta/100
-    #     mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
-    #     mySprite.material_override.set_shader_param("shake_power", shake_power)
-    #     mySprite.material_override.set_shader_param("opacity", opacity)
-    #     if opacity <= 0:
-    #         queue_free()
+
+    if is_crumbling:
+        mySprite2.visible = false
+        opacity -= delta/5
+        shake_color_rate += delta/2000
+        shake_power += delta/100
+        mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
+        mySprite.material_override.set_shader_param("shake_power", shake_power)
+        mySprite.material_override.set_shader_param("opacity", opacity)
+        if opacity <= 0:
+            queue_free()
             
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:

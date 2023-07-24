@@ -79,15 +79,15 @@ shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 3 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.8
 height = 1.8
+radius = 0.8
 
-[sub_resource type="BoxShape" id=31]
-extents = Vector3( 22, 16, 1 )
+[sub_resource type="BoxShape" id=42]
+extents = Vector3( 22, 24, 1 )
 
 [sub_resource type="BoxShape" id=28]
 extents = Vector3( 6, 4, 1 )
@@ -521,7 +521,7 @@ pitch_scale = 0.7
 script = ExtResource( 12 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
-shape = SubResource( 31 )
+shape = SubResource( 42 )
 
 [node name="PlayerActivationArea2" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 16 )

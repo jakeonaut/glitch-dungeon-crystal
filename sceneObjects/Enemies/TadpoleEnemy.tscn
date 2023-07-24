@@ -47,12 +47,12 @@ shader_param/base_palette = ExtResource( 4 )
 shader_param/target_palette = ExtResource( 1 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.8
 height = 1.8
+radius = 0.8
 
 [sub_resource type="BoxShape" id=9]
 extents = Vector3( 10, 10, 1 )
@@ -67,6 +67,7 @@ jump_force = 13
 sprite_offset_y = -0.125
 walk_direction = Vector2( -1, 0 )
 modAmt = 0.0
+smack_recovery_time_limit = 30
 jump_time_limit = 0
 air_time_limit = 0
 

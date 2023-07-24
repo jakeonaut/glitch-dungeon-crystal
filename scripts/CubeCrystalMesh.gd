@@ -3,7 +3,7 @@ tool
 extends MeshInstance
 
 export(bool) var sides = true setget _sides
-export(float) var split = 0 setget _split
+export(int) var split = 0 setget _split
 
 var processed_once = false
 var vertices = null

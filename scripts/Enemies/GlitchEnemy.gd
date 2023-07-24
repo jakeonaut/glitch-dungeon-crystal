@@ -27,7 +27,7 @@ var am_i_dying = false
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 
-export(float) var sprite_offset_y = 0
+export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
 export var behavior_intermittent_walking = false
 export var behavior_jumping = false
@@ -49,6 +49,7 @@ var is_smacked = false
 var has_ever_been_smacked = false
 var smack_timer = 0
 export var smack_time_limit = 10
+export var smack_recovery_time_limit = 11
 
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
@@ -188,9 +189,10 @@ func _process(delta):
         smack_timer += (delta * 22)
         if smack_timer >= smack_time_limit:
             unsmack()
+        if smack_timer >= smack_recovery_time_limit:
+            is_smacked = false
 
 func unsmack():
-    is_smacked = false
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
@@ -369,7 +371,7 @@ func ouchies_base():
 
 func ouchies(_broom_origin):
     if is_particle:
-        return
+        return false
 
     ouchies_base()
 
@@ -384,11 +386,14 @@ func ouchies(_broom_origin):
         if dieSound != null: dieSound.play()
         pauseSelf = true
         tryRemoveEnemiesGroup()
+        return true
+    return false
 
 func notOuchies(broom_origin):
     if not is_smacked:
         summonSmokeClouds(1, true, true)
-        getSmacked(broom_origin)
+        return getSmacked(broom_origin)
+    return false
 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
@@ -418,7 +423,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 func getSmacked(_broom_origin):
     if is_smacked:
-        return
+        return false
 
     if notDieSound and not notDieSound.is_playing(): notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)
@@ -437,6 +442,7 @@ func getSmacked(_broom_origin):
     smack_timer = 0
     is_smacked = true
     has_ever_been_smacked = true
+    return true
 
 var parentSpawner = null
 func setAsParent(spawner):

@@ -4,6 +4,7 @@ var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
+export var message = "got a key!"
 
 var land_count = 0
 var land_count_limit = 3
@@ -62,4 +63,4 @@ func collectMe():
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
     collectSound.play()
-    level.displayMessageText("got a key!")
+    level.displayMessageText(message)

@@ -47,12 +47,12 @@
 extents = Vector3( 0.7, 1.2, 3 )
 
 [sub_resource type="CylinderShape" id=67]
-radius = 0.542615
 height = 2.03183
+radius = 0.542615
 
 [sub_resource type="CylinderShape" id=68]
-radius = 0.48954
 height = 1.23275
+radius = 0.48954
 
 [sub_resource type="ShaderMaterial" id=45]
 shader = ExtResource( 4 )
@@ -1704,7 +1704,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
-shader_param/enable_glitch = true
+shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
@@ -1726,7 +1726,7 @@ feather_glitch_walk_speed = 7
 invisible_glitch_walk_speed = 5
 swimming_walk_speed = 7
 jump_force = 11
-invisible_jump_force = 11
+invisible_jump_force = 10
 
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 2 )
@@ -1834,7 +1834,8 @@ volume_db = -20.0
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 13 )
-volume_db = -20.0
+volume_db = -25.0
+pitch_scale = 1.1
 
 [node name="NoSpellSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 26 )
