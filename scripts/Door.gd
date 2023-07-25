@@ -155,8 +155,8 @@ func spawnParticles(delta):
       newSprite.target_x = newSprite.global_transform.origin.x + target_x_add
       newSprite.target_y = newSprite.global_transform.origin.y + target_y_add
       newSprite.fade_out_opacity = true
-      newSprite.curr_opacity = 0.4
-      newSprite.start_frame = randi() % 100
+      newSprite.curr_opacity = 0.6
+      newSprite.start_frame = randi() % (newSprite.hframes * newSprite.vframes)
       newSprite.restart()
       newSprite.opacity_fade_rate = 5
       spawn_timer = 0

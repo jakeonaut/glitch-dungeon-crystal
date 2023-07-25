@@ -5,6 +5,7 @@ func setUpRoomInitializationOverride():
   global.pauseMoveInput = true
 
 var glitch_death_timer_fake = 0
+onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
 func _process(delta):
   # ._process(delta) implicit
   self.player.fall_timer = 0

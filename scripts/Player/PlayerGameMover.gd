@@ -249,10 +249,8 @@ func regainNestingDoll():
 func getWalkSpeed(delta):
   var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if is_mushroom_infected:
-    run_timer = 0
     return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
-    run_timer = 0
     return 5 if pressingRun() and on_ground else 4
   else:
     return .getWalkSpeed(delta) # super()

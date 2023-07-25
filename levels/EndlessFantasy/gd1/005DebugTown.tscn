@@ -1628,7 +1628,7 @@ floating_text = true
 tiny_textbox = true
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9, 9, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3, -3.9, -1 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Player2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )

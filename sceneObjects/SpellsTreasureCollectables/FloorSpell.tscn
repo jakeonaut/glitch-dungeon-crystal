@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/SpellsTreasures/obeliskSpell.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=2]
@@ -15,11 +15,7 @@
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/minimi.png" type="Texture" id=14]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.2, 0.2, 0.2 )
-
-[sub_resource type="CylinderShape" id=2]
-radius = 0.7
+[sub_resource type="BoxShape" id=11]
 
 [sub_resource type="SpatialMaterial" id=5]
 params_cull_mode = 1
@@ -170,26 +166,20 @@ shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 5 )
 
-[node name="FloorSpell" type="KinematicBody"]
+[node name="FloorSpell" type="Spatial"]
 script = ExtResource( 1 )
 my_glitch_form = 1
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115505, -0.0834219, 0 )
-shape = SubResource( 1 )
-disabled = true
 
 [node name="InteractionArea" type="Area" parent="." groups=["noplayer"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 2 )
+shape = SubResource( 11 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.707107, -0.707107, 0, 0.5, 0.5, -0.707107, 0.5, 0.5, 0.707107, 0, 0, 0 )
 visible = false
 mesh = SubResource( 4 )
-material/0 = null
 script = ExtResource( 9 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

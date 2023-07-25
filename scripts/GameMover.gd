@@ -667,25 +667,12 @@ func isKindOfOnGround():
 func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
   return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
-    
-var run_timer = 0
-var run_time_limit = 10
-func getWalkSpeed(delta):
-  if not pressingRun():
-    run_timer = 0
 
+func getWalkSpeed(_delta):
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
-  if pressingRun():
-    if on_ground:
-      run_timer += (delta*22)
-
-    # if run_timer >= 10:
-    #  return fast_run_speed
-    if run_timer >= 0:
+  if pressingRun() and on_ground:
       return run_speed
-    else:
-      pass
 
   if glitch_form == global.GlitchForm.FEATHER:
     return feather_glitch_walk_speed
@@ -766,7 +753,9 @@ func processHorizontalInputs(delta):
         should_teeter_turn_around = false
         if not pauseAnimation and aniPlayer != null:
           # this logic looks really complicated but it's basically handling turn around animation and acceleration delay
-          if mySprite.flip_h != flip_h and on_ground and aniPlayer.assigned_animation != "walkStart" and (aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing())):
+          if mySprite.flip_h != flip_h and on_ground and aniPlayer.assigned_animation != "walkStart" and \
+             (aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing())) and \
+             (lv.x != 0 or aniPlayer.assigned_animation == "land"):
             dir += (right/2)*(delta*DNUMHORZ)*multiplier
             if aniPlayer.assigned_animation != "turnAround":
               aniPlayer.stop()
@@ -932,7 +921,8 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
     return not pressingDown() and checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   else:
-    return tileCollisionShape is BoxShape or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+    var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+    return (tileCollisionShape is BoxShape or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and not "Spikes" in tile_name
   
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y
@@ -941,11 +931,12 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
   
+# TODO(should just use the levelTiles func here)
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-  return tileCollisionShape is RayShape
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return "Spikes" in tile_name and not "GlitchSpikes" in tile_name
   
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
   var z = 0 # global_transform.origin.z

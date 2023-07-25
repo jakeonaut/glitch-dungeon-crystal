@@ -192,7 +192,7 @@ func _process(delta):
             grav = 0
             behavior_walking = true
             myOtherSprite.flip_h = walk_direction.x == -1
-            walk_speed = 8
+            walk_speed = 2
             linear_velocity.y = 0
             lv.y = 0
         elif flight_anchor != null and flight_anchor.frame == 0: # DOWN
@@ -226,7 +226,7 @@ func tryFadeAway(delta):
             queue_free()
 
 func checkForFlyPathOverrides():
-    if has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away):
+    if not (has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away)):
         return
 
     var areas = smallInteractionArea.get_overlapping_areas()
@@ -249,7 +249,7 @@ func checkForFlyPathOverrides():
             mole_state = MoleState.OVERRIDE_FLY_START
 
 func checkForDigPathOverrides():
-    if has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away):
+    if not (has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away)):
         return
 
     var areas = smallInteractionArea.get_overlapping_areas()

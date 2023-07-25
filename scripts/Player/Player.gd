@@ -157,6 +157,10 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
+  # if (broom_flip_h and Input.is_action_pressed("ui_right")) or \
+  #    (not broom_flip_h and Input.is_action_pressed("ui_left")):
+  #   return false
+
   return Input.is_action_pressed("sub_action_button") and summonedBroom == null or \
          (is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
   
@@ -177,6 +181,11 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
+
+  # if Input.is_action_pressed("sub_action_button") and on_ground:
+  #   mySprite.flip_h = broom_flip_h
+  # else:
+  #   broom_flip_h = mySprite.flip_h
 
   if returning_to_save_point == 1:
     linear_velocity = Vector3(0, 0, 0)
@@ -727,6 +736,7 @@ func adjustSummonedBroomSpritePosition():
 func shouldAirHaveFriction():
   return summonedBroom == null
 
+# var broom_flip_h = false
 func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
   broomSpriteVisible.translation = broomSpriteAnimated.translation
@@ -757,6 +767,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
     if not is_tiny:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+
 
 func processBagRenderLogic(_delta):
   enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame
@@ -892,7 +903,9 @@ func giveMeMiniCrystalCubes(how_many):
   gimme_mini_crystal_cubes_timer = 0
 
 func iFellFlat():
-  summonFallenBroom(false)
+  var fallenBroom = summonFallenBroom(false)
+  if fallenBroom != null:
+    fallenBroom.canPause = true
 
 func summonFallenBroom(was_thrown, should_die_on_land = false):
   broomSpriteVisible.visible = false
@@ -933,17 +946,21 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
         fallenBroom.walk_direction = Vector2(x_direction, -1)
         fallenBroom.grav = 600
         fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
+      elif x_direction != 0:
+        fallenBroom.walk_direction.x = x_direction
     global.memory["broom"] = false
     # print(fallenBroom.walk_direction)
 
-    if mySprite.flip_h and was_thrown:
+    if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
-    elif mySprite.flip_h and not was_thrown:
+    elif (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and not was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
-    elif not mySprite.flip_h and was_thrown:
+    elif (fallenBroom.walk_direction.x > 0  or not mySprite.flip_h) and was_thrown:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
     else:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+    return fallenBroom
+  return null
 
 func getABroom():
   pauseAnimation = false 

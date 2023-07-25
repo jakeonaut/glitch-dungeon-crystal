@@ -957,7 +957,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1, 2, 0 )
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2121, -4.98327, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2121, -8.35778, 1 )
 should_fade_away = true
 
 [node name="Flypath3" parent="Viewport/level" instance=ExtResource( 29 )]
@@ -1084,22 +1084,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758781, 0 )
 shape = SubResource( 35 )
 
 [node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59097, 21.304, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59097, 22.616, 0 )
 
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72784, 22.5047, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72784, 23.8167, 0 )
 
 [node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60017, 23.7001, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60017, 25.0121, 0 )
 
 [node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07343, 23.7001, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07343, 25.0121, 0 )
 
 [node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14181, 23.7001, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14181, 25.0121, 0 )
 
 [node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44809, 22.5047, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44809, 23.8167, 0 )
 
 [node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63.0098, 33.4468, 0 )

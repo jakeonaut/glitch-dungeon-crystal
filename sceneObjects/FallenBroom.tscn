@@ -603,8 +603,8 @@ tracks/3/keys = {
 [sub_resource type="CylinderShape" id=56]
 
 [sub_resource type="CylinderShape" id=48]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [node name="FallenBroom" type="Spatial"]
 script = ExtResource( 1 )
@@ -618,6 +618,7 @@ press [C] to sweep"
 is_static_in_level = false
 stop_all_music = false
 display_textbox = false
+canPause = false
 
 [node name="Sprite3DReal" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.6145, 0.125 )

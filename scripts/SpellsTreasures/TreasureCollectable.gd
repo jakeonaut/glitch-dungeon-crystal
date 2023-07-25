@@ -10,6 +10,7 @@ var gotcha = false
 var okay_im_done = false
 export var stop_all_music = true
 export var display_textbox = true
+export var canPause = true
 
 func _ready():
   if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
@@ -40,13 +41,15 @@ func _process(delta):
     level.player.broomSpriteVisible.visible = false
   
   if gotcha:
-    if display_textbox:
+    if display_textbox and canPause:
       .passiveActivate(delta, true) # let the NPC passiveActive super script handle the textbox
     else:
       okay_im_done = true
       textBox.abortSound.activateScript()
   elif being_collected and not really_being_collected: 
-    if secretAniPlayer.current_animation != "openUp" and secretAniPlayer.current_animation != "idle" and level.player.aniPlayer.current_animation != "preGetItem":
+    if not canPause:
+      gotcha = true
+    elif secretAniPlayer.current_animation != "openUp" and secretAniPlayer.current_animation != "idle" and level.player.aniPlayer.current_animation != "preGetItem":
       really_being_collected = true
     elif secretAniPlayer.current_animation != "openUp":
       level.player.global_transform.origin = self.global_transform.origin
@@ -109,8 +112,9 @@ func passiveActivate(_delta, _is_player):
       secretAniPlayer.clear_queue()
       secretAniPlayer.queue("openUp")
       secretAniPlayer.queue("idle")
-    global.pauseMoveInput = true
-    global.pauseGame = true
+    if canPause:
+      global.pauseMoveInput = true
+      global.pauseGame = true
     being_collected = true
     
     if is_static_in_level:

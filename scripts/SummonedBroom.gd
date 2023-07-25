@@ -8,10 +8,11 @@ onready var broomSound = get_node("BroomSound")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var myArea = get_node("Area")
-onready var collisionShape = get_node("Area/CollisionShape")
+onready var collisionShape1 = get_node("Area/CollisionShape")
+onready var collisionShape2 = get_node("Area/CollisionShape2")
+onready var collisionShape3 = get_node("Area/CollisionShape3")
 onready var aniPlayer = get_node("AnimationPlayer")
 var has_hit_npc = null
-var has_hit_any_npc = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -58,15 +59,16 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
       new_material.set_shader_param("target_palette", global.weird_base_palette)
       newSmokeCloud.set_material_override(new_material.duplicate())
     
+  # TODO(should just use the levelTiles func here)
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-  return tileCollisionShape is RayShape
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return "Spikes" in tile_name and not "GlitchSpikes" in tile_name
     
 func canActivate(area):
   var areaParent = area.get_node("..")
-  return not has_hit_any_npc and (areaParent != has_hit_npc or not areaParent.has_method("imAnNpc"))
+  return not areaParent.has_method("imAnNpc") or areaParent != has_hit_npc
 
 func hitStuff(_delta):
   if not visible: return
@@ -95,7 +97,6 @@ func hitStuff(_delta):
       if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         if areaParent.has_method("imAnNpc"):
           has_hit_npc = areaParent
-          has_hit_any_npc = true
         areaParent.getSmacked(global_transform.origin)
         if not area.is_in_group("tadpole"):
           my_broom_owner.getSmacked()
@@ -107,12 +108,20 @@ func hitStuff(_delta):
   # erase glitch tiles...
   if not global.memory.has("broom"):
     return
+  trySweepUpGlitchTiles(collisionShape1)
+  trySweepUpGlitchTiles(collisionShape2)
+  trySweepUpGlitchTiles(collisionShape3)
+  
+func trySweepUpGlitchTiles(collisionShape):
+  if not collisionShape.visible:
+    return
+
   var x = collisionShape.global_transform.origin.x
   var y = collisionShape.global_transform.origin.y
-  var tb = y + collisionShape.shape.height/2
-  var bb = y - collisionShape.shape.height/2
-  var lb = x - collisionShape.shape.radius
-  var rb = x + collisionShape.shape.radius
+  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y
+  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y
+  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x
+  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x
   
   var _has_played_sound = false
   for i in range(int(floor(bb)), int(ceil(tb))):

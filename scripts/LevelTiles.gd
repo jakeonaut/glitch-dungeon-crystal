@@ -312,8 +312,8 @@ func isNeighborOfInfectedSpikes(neighborCoords):
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileCollisionShape = self.mesh_library.get_item_shapes(tile_type)[0]
-  return tileCollisionShape is RayShape
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "Spikes" in tile_name and not "GlitchSpikes" in tile_name
 
 func isTileGlitchSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:

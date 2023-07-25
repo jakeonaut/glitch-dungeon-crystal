@@ -53,12 +53,12 @@ shader_param/base_palette = ExtResource( 1 )
 shader_param/target_palette = ExtResource( 9 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.8
 height = 1.8
+radius = 0.8
 
 [node name="Fish" type="KinematicBody"]
 collision_layer = 4

@@ -90,7 +90,7 @@ func tryDieIfTooFarFromPlayer():
         return
         
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
-    if distance >= 20:
+    if distance >= 15:
         returning = true
 
 func tryDieToOffscreenCamera():
@@ -202,6 +202,7 @@ func hitStuff(_delta):
         # erase glitch tiles...
         var x = collisionShape.global_transform.origin.x
         var y = collisionShape.global_transform.origin.y
+        # TODO(jaketrower): This needs to be based on a rotated cylinder
         var tb = y + collisionShape.shape.height/2
         var bb = y - collisionShape.shape.height/2
         var lb = x - collisionShape.shape.radius

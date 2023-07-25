@@ -69,14 +69,20 @@ func _process(delta):
     preProcess()
     if visible and should_animate:
         animate(delta)
+
+func trySetFrame(frame):
+    if frame < hframes * vframes:
+        set_frame(frame)
+        return true
+    return set_frame((hframes * vframes) - 1)
         
 func restart():
     animation_counter = 0
-    set_frame(start_frame)
+    trySetFrame(start_frame)
 
 func randomizeFrame():
     animation_counter = 0
-    set_frame(randi() % int(min(max_frames, hframes * vframes)))
+    trySetFrame(randi() % int(min(max_frames, hframes * vframes)))
     
 func animate(delta):
     if max_frames == 1:
@@ -88,14 +94,14 @@ func animate(delta):
         var frame = get_frame()
 
         if frame >= start_frame and frame < start_frame + max_frames - 1 and frame < vframes * hframes:
-            set_frame(frame+1)
+            trySetFrame(frame+1)
         else:
             if should_fizzle_out:
                 queue_free()
             elif should_soft_fizzle_out:
                 visible = false
             else:
-                set_frame(start_frame)
+                trySetFrame(start_frame)
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()
@@ -107,5 +113,5 @@ func randomizeFrameDelay():
 func updateBaseFrame(hframe, vframe):
     start_frame = (self.hframes * vframe) + hframe
     base_frame = start_frame
-    set_frame(start_frame)
+    trySetFrame(start_frame)
     restart()

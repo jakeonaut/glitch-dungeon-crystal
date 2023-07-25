@@ -83,7 +83,8 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
     if tile_type == GridMap.INVALID_CELL_ITEM:
         return false
     var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
-    return tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))
+    var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+    return (tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and not "Spikes" in tile_name
     
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
     var y = global_transform.origin.y
