@@ -34,6 +34,7 @@ func _process(delta):
     if returning:
         returning_timer += (delta*22)
 
+        pauseSelf = true
         is_active = false
         okay_im_done = true
         grav = 0
@@ -115,15 +116,15 @@ func isActive():
 
 # @override
 func justPressedJump():
-    return (behavior_was_thrown and grav > 10 and not walk_direction.y == -1) or (behavior_walking and walk_direction.y == 1)
+    return not returning and ((behavior_was_thrown and grav > 10 and not walk_direction.y == -1) or (behavior_walking and walk_direction.y == 1))
 
 # @override
 func pressingJump():
-    return behavior_walking and walk_direction.y == 1
+    return not returning and behavior_walking and walk_direction.y == 1
 
 # @override
 func isKindOfOnGround():
-    return behavior_was_thrown or (behavior_walking and walk_direction.y == 1)
+    return not returning and (behavior_was_thrown or (behavior_walking and walk_direction.y == 1))
 
 # @override
 func alignMySprite():
