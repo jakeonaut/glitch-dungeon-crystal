@@ -69,18 +69,26 @@ func applyNextGlitch():
   
 func applyObeliskGlitch(glitch, only_visual = false):
   applyGlitch(glitch, only_visual)
+
+# used in AnimationPlayer.broomSmackGlitch
+func actuallyApplySpellbookGlitch():
+  var glitch_type = global.memory["spellbookPage"].pop_front()
+  applyGlitch(glitch_type)
+  applyObeliskGlitch(glitch_type)
+  global.memory["spellbookPage"].push_back(glitch_type)
+  var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
+  equipSlotSprite.frame = 6
     
 func applySpellbookGlitch():
   if not global.memory.has("spellbookPage"):
     return
   
   if global.memory["spellbookPage"].size() > 0:
-    var glitch_type = global.memory["spellbookPage"].pop_front()
-    applyGlitch(glitch_type)
-    applyObeliskGlitch(glitch_type)
-    global.memory["spellbookPage"].push_back(glitch_type)
-    var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-    equipSlotSprite.frame = 6
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    aniPlayer.play("broomSmackGlitch")
+    pauseInput = true
+    pauseAnimation = true
   else:
     noSpellSound.pitch_scale = 1.2
     noSpellSound.play()
@@ -175,7 +183,7 @@ var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null
+  pauseInput = summonedBroom != null or (aniPlayer.assigned_animation == "broomSmackGlitch" and aniPlayer.is_playing())
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -217,6 +225,9 @@ func _process(delta):
   processBagRenderLogic(delta)
   if global.pauseGame or global.pauseMoveInput:
     return
+  if Input.is_action_just_pressed("alt_action_button"):
+    applySpellbookGlitch()
+  
   processBroomLogic(delta)
   processBagLogic(delta)
   processMushroomLogic(delta)
@@ -609,6 +620,9 @@ func processBagLogic(_delta):
   pass
 
 func processBroomLogic(delta):
+  if aniPlayer.assigned_animation == "broomSmackGlitch" and not aniPlayer.is_playing():
+    broomStop()
+
   var which_broom_attack = 1
   if not global.memory["broom"]:
     if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
@@ -623,7 +637,6 @@ func processBroomLogic(delta):
       which_broom_attack = 1
 
   if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
-    applySpellbookGlitch()
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around

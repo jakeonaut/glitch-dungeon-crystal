@@ -144,7 +144,7 @@ func _process(delta):
     if title_display_timer >= title_display_time_limit:
       if title_display_state == 0:
         levelTitleRect.rect_scale.x = levelTitleRect.rect_scale.x + (1 - levelTitleRect.rect_scale.x) * (delta*5)
-        if stepify(levelTitleRect.rect_scale.x, 0.01) == 1:
+        if stepify(levelTitleRect.rect_scale.x, 0.1) == 1:
           levelTitleRect.rect_scale.x = 1
           title_display_timer = 0
           title_display_state = 1
