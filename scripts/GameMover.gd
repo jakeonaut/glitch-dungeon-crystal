@@ -30,6 +30,7 @@ func getGameCamera():
 
 onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
+onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
 var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("Sprite3D")
 
@@ -230,6 +231,7 @@ func processPhysics(delta):
     if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground):
       if not pauseAnimation and aniPlayer:
         aniPlayer.play("wakeup")
+        playBounce("wakeup")
       physics_state = PhysicsState.WAKING_UP
   elif physics_state == PhysicsState.WAKING_UP:
     if aniPlayer == null or not aniPlayer.is_playing():
@@ -256,7 +258,7 @@ func processPhysics(delta):
         if (aa == "land" or aa == "walkStart") and not aniPlayer.is_playing():
           aniPlayer.play("stand")
         elif aa == "jump" or aa == "jumpBump" or aa == "fall" or aa == "fallBump":
-          aniPlayer.play("land")
+          playLandAnimation()
       elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
         aniPlayer.stop()
         aniPlayer.clear_queue()
@@ -275,6 +277,15 @@ func processPhysics(delta):
     was_just_on_ground_timer += (delta*22)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   prev_glitch_form = glitch_form
+
+func playLandAnimation():
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
+  if last_vv < -10:
+    playBounce("land")
+  elif last_vv < -6:
+    playBounce("landSoft")
 
 func processLand():
   landed()
@@ -575,6 +586,7 @@ func processJumpInputs(delta):
         aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
         aniPlayer.queue("jump")
+        playBounce("jumpSquat", ["jumpStart"])
 
   if not pauseAnimation and aniPlayer != null:
     if aniPlayer.assigned_animation == "jumpSquat":
@@ -1192,6 +1204,14 @@ func handleSpikeCollisions(_delta):
 func postProcessInputs(_delta):
   pass
   
+func playBounce(aniName, aniNameQueue = []):
+  if bounceAniPlayer != null:
+    bounceAniPlayer.stop()
+    bounceAniPlayer.clear_queue()
+    bounceAniPlayer.play(aniName)
+    for queuedAniName in aniNameQueue:
+      bounceAniPlayer.queue(queuedAniName)
+
 var has_water_double_jumped = false
 func landed():
   has_water_double_jumped = false
@@ -1205,17 +1225,10 @@ func landed():
       aniPlayer.stop()
       aniPlayer.clear_queue()
       aniPlayer.play("fallFlat", -1, 1.0)
+      playBounce("fallFlat")
       physics_state = PhysicsState.COLLAPSED
       if bumpSound: bumpSound.play()
       iFellFlat()
-    # TODO(jaketrower): all of this non FSM animation code WILL break everything some day
-    elif aniPlayer.assigned_animation != "getItem" and not "fishing" in aniPlayer.assigned_animation:
-      # if horizontal_collision:
-      #     aniPlayer.play("landBump", -1, 1.0 if isFeatherLike() else 1.5)
-      # else:
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
   if fallSound and quiet_the_fall_sound:
     fallSound.stop()
   fall_timer = 0

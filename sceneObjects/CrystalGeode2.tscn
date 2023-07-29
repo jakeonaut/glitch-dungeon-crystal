@@ -420,7 +420,7 @@ material_override = SubResource( 26 )
 max_frames = 1
 
 [node name="FallthroughSolid" parent="NPC" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -23.7 )
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
 shape = SubResource( 27 )

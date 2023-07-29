@@ -52,6 +52,7 @@ func _ready():
   id = self.generateId()
   if (is_locked or should_lock) and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id):
     is_locked = false
+    should_lock = false
 
   animationPlayer.clear_queue()
   animationPlayer.stop()
