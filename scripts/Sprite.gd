@@ -71,10 +71,18 @@ func _process(delta):
         animate(delta)
 
 func trySetFrame(frame):
+    if frame < hframes * vframes and frame < start_frame + max_frames:
+        set_frame(frame)
+        return true
+    set_frame((hframes * vframes) - 1)
+    return false
+
+func glitchyTrySetFrame(frame):
     if frame < hframes * vframes:
         set_frame(frame)
         return true
-    return set_frame((hframes * vframes) - 1)
+    set_frame((hframes * vframes) - 1)
+    return false
         
 func restart():
     animation_counter = 0
@@ -84,6 +92,7 @@ func randomizeFrame():
     animation_counter = 0
     trySetFrame(randi() % int(min(max_frames, hframes * vframes)))
     
+export var is_really_glitchy = false
 func animate(delta):
     if max_frames == 1:
         return
@@ -93,15 +102,23 @@ func animate(delta):
         animation_counter = 0
         var frame = get_frame()
 
-        if frame >= start_frame and frame < start_frame + max_frames - 1 and frame < vframes * hframes:
-            trySetFrame(frame+1)
+        if is_really_glitchy:
+            if not glitchyTrySetFrame(frame+1):
+                if should_fizzle_out:
+                    queue_free()
+                elif should_soft_fizzle_out:
+                    visible = false
+                else:
+                    trySetFrame(start_frame)
         else:
-            if should_fizzle_out:
-                queue_free()
-            elif should_soft_fizzle_out:
-                visible = false
-            else:
-                trySetFrame(start_frame)
+            if not trySetFrame(frame+1):
+                if should_fizzle_out:
+                    queue_free()
+                elif should_soft_fizzle_out:
+                    visible = false
+                else:
+                    trySetFrame(start_frame)
+
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()

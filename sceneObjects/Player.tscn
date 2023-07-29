@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -26,6 +26,8 @@
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=28]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=29]
 [ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=30]
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=31]
@@ -78,7 +80,7 @@ shader_param/palette_cycle_speed = 4.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 30 )
+shader_param/texture_albedo = ExtResource( 28 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 34 )
 
@@ -288,6 +290,54 @@ tracks/9/keys = {
 "update": 0,
 "values": [ Vector3( 1.32587, 0.882688, 0 ) ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite3D:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.9
@@ -333,6 +383,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=64]
 resource_name = "broomSmack2"
@@ -361,6 +435,30 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=47]
@@ -405,7 +503,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 51, 15, 24 ]
+"values": [ 1, 15, 24 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -417,7 +515,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 1, 1 ]
+"values": [ 2, 1, 0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
@@ -426,10 +524,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.0130111, 0.371602, 0.7 ), Vector3( 1.27758, 0.203367, 0.7 ), Vector3( 1.12464, 0.203367, 0.7 ) ]
+"values": [ Vector3( 0.62202, 1.56628, 0.7 ), Vector3( 0.813398, 1.18352, 0.7 ), Vector3( 1.34501, 0.290422, 0.7 ), Vector3( 1.23868, 0.247894, 0.7 ) ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath(".")
@@ -438,15 +536,66 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.1, 0.101, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "actuallyApplySpellbookGlitch"
 }, {
+"args": [ null ],
+"method": "addJumpSmokeCloud"
+}, {
 "args": [ 2, true, true ],
 "method": "summonSmokeClouds"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.491202, 0.8 ), Vector3( 0, -0.00728226, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -621,6 +770,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0.875, 0.25, 0.2 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=10]
 length = 0.1
@@ -715,6 +888,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector3( 0.62906, 1.53429, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=40]
 resource_name = "fallBump"
@@ -751,6 +948,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "fallFlat"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -762,6 +960,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.235115, 0.8 ), Vector3( 0, -0.0264359, 0.8 ), Vector3( 0, -0.239079, 0.8 ), Vector3( 0, 0.228736, 0.8 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -855,6 +1077,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 13, 1 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 length = 0.9
@@ -912,6 +1158,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [ Vector3( 0.642459, 1.53429, 0 ), Vector3( 1.25886, 1.53429, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 length = 0.2
@@ -963,6 +1233,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( -0.52335, 1.11888, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=39]
@@ -1032,6 +1326,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector3( 1.29906, 0.85088, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.122984, 0.8 ) ]
+}
 
 [sub_resource type="Animation" id=18]
 length = 0.1
@@ -1058,6 +1376,30 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 12 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.420115, 0.8 ), Vector3( 0, 0.271264, 0.8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -1134,6 +1476,30 @@ tracks/5/keys = {
 "update": 1,
 "values": [ Vector3( 0.803261, 0.958081, 0 ), Vector3( 0.897062, 0.73028, 0 ), Vector3( 1.39286, 0.82408, 0 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:translation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.00460231, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
+}
 
 [sub_resource type="Animation" id=60]
 resource_name = "leaveDoor"
@@ -1190,6 +1556,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 8, 9, 8, 9, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
 }
 
 [sub_resource type="Animation" id=65]
@@ -1346,6 +1736,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 1.51347, 0.882688, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=35]
@@ -1505,6 +1919,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 31, 30, 29, 24, 25, 26, 27, 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.335057, 0.8 ), Vector3( 0, 0.409482, 0.8 ), Vector3( 0, 0.356321, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=25]
 length = 0.3
@@ -1558,6 +1996,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector3( 0.830061, 0.788888, 0 ), Vector3( 1.27226, 0.855888, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=31]
 resource_name = "walkBump"
@@ -1597,6 +2059,30 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector3( 1.27226, 0.855888, 0 ), Vector3( 1.47326, 0.855888, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281402, 0.491202, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=59]
@@ -1703,6 +2189,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector3( 0.803258, 0.802288, 0 ), Vector3( 1.25886, 0.829087, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -2107,11 +2617,15 @@ bbText = "hi!!!! hi hi hi !!!!"
 [node name="TextBox" parent="TextContainer" index="0"]
 can_camera_zoom = false
 
+[node name="DialogStartSound" parent="TextContainer/TextBox" index="6"]
+stream = ExtResource( 27 )
+pitch_scale = 0.9
+
 [node name="MPNumSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 19 )
 visible = false
 material_override = SubResource( 56 )
-pixel_size = 0.125
+pixel_size = 0.0001
 texture = ExtResource( 25 )
 hframes = 32
 vframes = 32
@@ -2122,7 +2636,7 @@ max_frames = 1
 [node name="MPNumSprite2" type="Sprite3D" parent="MPNumSprite"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.132, 0.121, 0.1 )
 material_override = SubResource( 55 )
-pixel_size = 0.125
+pixel_size = 0.0001
 texture = ExtResource( 25 )
 hframes = 32
 vframes = 32

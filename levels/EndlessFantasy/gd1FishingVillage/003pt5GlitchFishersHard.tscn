@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=34]
+[ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=35]
 
 [sub_resource type="BoxShape" id=36]
 resource_local_to_scene = true
@@ -1371,9 +1372,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_clip_": 0
@@ -2377,6 +2375,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7, -2.5, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4, 25.1, 0 )
+
+[node name="GramdmaMemory" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5936, 50.1, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

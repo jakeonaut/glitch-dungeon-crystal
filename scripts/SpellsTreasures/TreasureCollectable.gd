@@ -38,6 +38,8 @@ func _process(delta):
     return
 
   if gotcha or being_collected or really_being_collected:
+    if level.player.summonedBroom != null:
+      level.player.broomStop()
     level.player.broomSpriteVisible.visible = false
   
   if gotcha:

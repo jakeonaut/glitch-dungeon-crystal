@@ -225,7 +225,7 @@ func _process(delta):
   processBagRenderLogic(delta)
   if global.pauseGame or global.pauseMoveInput:
     return
-  if Input.is_action_just_pressed("alt_action_button"):
+  if not pauseAnimation and global.memory["broom"] and Input.is_action_just_pressed("alt_action_button"):
     applySpellbookGlitch()
   
   processBroomLogic(delta)
@@ -753,20 +753,26 @@ func shouldAirHaveFriction():
 func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
   broomSpriteVisible.translation = broomSpriteAnimated.translation
+  broomSpriteVisible.scale = broomSpriteAnimated.scale
   secretSweepActualCollisionShape.translation = secretSweepCollisionShape.translation
   broomSpriteVisible.flip_h = false
   if mySprite.flip_h:
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1
     secretSweepActualCollisionShape.translation.x *= -1
-  if global.hasGottenLevelGeode:
-    broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
-    broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
-    mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  if aniPlayer.assigned_animation != "broomSmackGlitch":
+    if global.hasGottenLevelGeode:
+      broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
+      broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
+      mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+    else:
+      broomSpriteVisible.material_override.set_shader_param("enable_glitch", false)
+      broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
+      mySprite.material_override.set_shader_param("enable_palette_cycle", false)
   else:
-    broomSpriteVisible.material_override.set_shader_param("enable_glitch", false)
-    broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
-    mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+    broomSpriteVisible.material_override.set_shader_param(
+      "enable_glitch", 
+      broomSpriteAnimated.material_override.get_shader_param("enable_glitch"))
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()

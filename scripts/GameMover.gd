@@ -158,6 +158,8 @@ func _ready():
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
 func _process(_delta):
+  if mySprite.has_method("glitchyTrySetFrame"):
+    mySprite.is_really_glitchy = is_really_glitchy 
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
   # rather than have to do this conditional check every time
   if aniPlayer:
@@ -611,6 +613,7 @@ func processJumpInputs(delta):
   if vv > 0 or on_ground:
     should_magic_jump = false
 
+var is_really_glitchy = false
 func addJumpSmokeCloud(flip_flip_h = false):
   if is_touching_water: return
 
@@ -624,6 +627,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
   else:
     newSmokeCloud.flip_h = mySprite.flip_h
   newSmokeCloud.get_material_override().set_shader_param("target_palette", level.current_sprite_palette)
+  newSmokeCloud.is_really_glitchy = is_really_glitchy
 
 func actuallyApplyJump(play_sound = true):
   if isFeatherLike():
