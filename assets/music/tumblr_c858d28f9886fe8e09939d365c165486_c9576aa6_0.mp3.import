@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3-87ec84720f9b3e4cd050b09460813546.mp3str"
+
+[deps]
+
+source_file="res://assets/music/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3"
+dest_files=[ "res://.import/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3-87ec84720f9b3e4cd050b09460813546.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

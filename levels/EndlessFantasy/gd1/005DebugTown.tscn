@@ -1,6 +1,5 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=146 format=2]
 
-[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=4]
@@ -1487,8 +1486,6 @@ __meta__ = {
 "_editor_description_": "Lv1: Debug"
 }
 
-[node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
-
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 21 )]
 
 [node name="BackgroundControl" type="Control" parent="Viewport/level"]
@@ -1582,7 +1579,6 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 15.9, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
-stream = ExtResource( 1 )
 pitch_scale = 1.1
 
 [node name="StatusNPCs" type="Spatial" parent="Viewport/level"]
@@ -2211,6 +2207,8 @@ anims/walk = SubResource( 130 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
 shape = SubResource( 131 )
+
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

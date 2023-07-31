@@ -1225,10 +1225,13 @@ func landed():
       aniPlayer.stop()
       aniPlayer.clear_queue()
       aniPlayer.play("fallFlat", -1, 1.0)
-      playBounce("fallFlat")
+      # playBounce("fallFlat")
+      playBounce("land")
       physics_state = PhysicsState.COLLAPSED
       if bumpSound: bumpSound.play()
       iFellFlat()
+    else:
+      playLandAnimation()
   if fallSound and quiet_the_fall_sound:
     fallSound.stop()
   fall_timer = 0

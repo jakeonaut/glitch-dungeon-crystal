@@ -239,7 +239,10 @@ doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="14"]
+[node name="JumpSprite" parent="Viewport/level/UILayer/PauseMenu" index="6"]
+scale = Vector2( 2, 2 )
+
+[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="15"]
 visible = false
 
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
@@ -248,10 +251,15 @@ mesh = SubResource( 48 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="LevelTitle" parent="Viewport/level/UILayer" index="23"]
+[node name="LevelTitle" parent="Viewport/level/UILayer" index="24"]
 visible = false
 
-[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="25"]
+[node name="ColorRect" parent="Viewport/level/UILayer/LevelTitle" index="0"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SavingTextLabel" parent="Viewport/level/UILayer" index="26"]
 margin_left = 260.0
 margin_top = 453.0
 margin_right = 527.0

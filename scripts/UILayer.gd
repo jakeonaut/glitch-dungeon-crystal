@@ -89,7 +89,9 @@ onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 onready var keyStatusRect = get_node("KeyStatusRect")
 onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
 onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
+onready var pauseMenu = get_node("PauseMenu")
 func _process(delta):
+  processControlsLogic(delta)
   processQuitGameRenderLogic(delta)
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
@@ -110,6 +112,7 @@ func _process(delta):
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
+  pauseMenu.visible = global.isPauseMenuOpen
 
   # if not global.memory.has("max_hp") or global.memory["max_hp"] <= 1:
   #   heartsRect.visible = false
@@ -157,6 +160,10 @@ func _process(delta):
           levelTitleRect.rect_scale.x = 0
           title_display_timer = 0
           title_display_state = 3
+  if global.activeInteractor:
+    levelTitleRect.rect_scale.x = 0
+    title_display_timer = 0
+    title_display_state = 3
 
   if should_display_saving_text:
     saving_text_timer += (delta*22)
@@ -229,12 +236,13 @@ func _process(delta):
 onready var quitGameRect = get_node("QuitGameRect")
 onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")
 var quitGameTimer = 0
-var quitGameTimeLimit = 30
+var quitGameTimeLimit = 20
 func processQuitGameRenderLogic(delta):
-  if global.pauseMoveInput or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
-    quitGameTimer = 0
-    quitGameRect.visible = false
-    return
+  if not global.isPauseMenuOpen:
+    if global.pauseMoveInput or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+      quitGameTimer = 0
+      quitGameRect.visible = false
+      return
 
   if Input.is_action_pressed("ui_cancel"):
     quitGameRect.visible = true
@@ -424,3 +432,125 @@ func invisibleGlitch():
 
 func walkThroughWallsGlitch():
   glitch(global.white_palette)
+
+onready var rightSprite = get_node("PauseMenu/RightSprite")
+onready var rightSpriteAniPlayer = get_node("PauseMenu/RightSprite/AnimationPlayer")
+onready var rightTextLabel = get_node("PauseMenu/RightTextLabel")
+onready var leftSprite = get_node("PauseMenu/LeftSprite")
+onready var leftSpriteAniPlayer = get_node("PauseMenu/LeftSprite/AnimationPlayer")
+onready var leftTextLabel = get_node("PauseMenu/LeftTextLabel")
+onready var downSprite = get_node("PauseMenu/DownSprite")
+onready var downSpriteAniPlayer = get_node("PauseMenu/DownSprite/AnimationPlayer")
+onready var downTextLabel = get_node("PauseMenu/DownTextLabel")
+onready var upSprite = get_node("PauseMenu/UpSprite")
+onready var upSpriteAniPlayer = get_node("PauseMenu/UpSprite/AnimationPlayer")
+onready var upTextLabel = get_node("PauseMenu/UpTextLabel")
+onready var jumpSprite = get_node("PauseMenu/JumpSprite")
+onready var jumpSpriteAniPlayer = get_node("PauseMenu/JumpSprite/AnimationPlayer")
+onready var jumpTextLabel = get_node("PauseMenu/JumpTextLabel")
+onready var sweepSprite = get_node("PauseMenu/SweepSprite")
+onready var sweepSpriteAniPlayer = get_node("PauseMenu/SweepSprite/AnimationPlayer")
+onready var sweepTextLabel = get_node("PauseMenu/SweepTextLabel")
+onready var castSprite = get_node("PauseMenu/CastSprite")
+onready var castSpriteAniPlayer = get_node("PauseMenu/CastSprite/AnimationPlayer")
+onready var castTextLabel = get_node("PauseMenu/CastTextLabel")
+onready var menuMoveSound = get_node("PauseMenu/MenuMoveSound")
+
+var areControlsAnimating = false
+var control_index = 0
+var last_control_index = -1
+func processControlsLogic(_delta):
+  if global.isPauseMenuOpen:
+    if Input.is_action_just_pressed("ui_down"):
+      control_index += 1
+      menuMoveSound.play()
+    elif Input.is_action_just_pressed("ui_up"):
+      control_index -= 1
+      menuMoveSound.play()
+    if control_index < 0:
+      control_index = 6
+    if control_index > 6:
+      control_index = 0
+
+    var normal_size = Vector2(2, 2)
+    var big_size = Vector2(3, 3)
+    rightSprite.scale = normal_size
+    
+    leftSprite.scale = normal_size
+    downSprite.scale = normal_size
+    upSprite.scale = normal_size
+    jumpSprite.scale = normal_size
+    sweepSprite.scale = normal_size
+    castSprite.scale = normal_size
+    if control_index != 0: rightTextLabel.bbcode_text = "[color=gray]right[/color]"
+    if control_index != 1: leftTextLabel.bbcode_text = "[color=gray]left[/color]"
+    if control_index != 2: downTextLabel.bbcode_text = "[color=gray]down[/color]"
+    if control_index != 3: upTextLabel.bbcode_text = "[color=gray]up[/color]"
+    if control_index != 4: jumpTextLabel.bbcode_text = "[color=gray]z[/color]"
+    if control_index != 5: sweepTextLabel.bbcode_text = "[color=gray]x[/color]"
+    if control_index != 6: castTextLabel.bbcode_text = "[color=gray]c[/color]"
+    if control_index == 0:
+      rightSprite.scale = big_size
+      if control_index != last_control_index:
+        rightTextLabel.bbcode_text = "[wave]right[/wave]"
+    elif control_index == 1:
+      leftSprite.scale = big_size
+      if control_index != last_control_index: 
+        leftTextLabel.bbcode_text = "[wave]left[/wave]"
+    elif control_index == 2:
+      downSprite.scale = big_size
+      if control_index != last_control_index: 
+        downTextLabel.bbcode_text = "[wave]down[/wave]"
+    elif control_index == 3:
+      upSprite.scale = big_size
+      if control_index != last_control_index: 
+        upTextLabel.bbcode_text = "[wave]up[/wave]"
+    elif control_index == 4:
+      jumpSprite.scale = big_size
+      if control_index != last_control_index: 
+        jumpTextLabel.bbcode_text = "[wave]z[/wave]"
+    elif control_index == 5:
+      sweepSprite.scale = big_size
+      if control_index != last_control_index: 
+        sweepTextLabel.bbcode_text = "[wave]x[/wave]"
+    elif control_index == 6:
+      castSprite.scale = big_size
+      if control_index != last_control_index: 
+        castTextLabel.bbcode_text = "[wave]c[/wave]"
+
+
+
+    if not areControlsAnimating:
+      leftSpriteAniPlayer.play("idle")
+      rightSpriteAniPlayer.play("idle")
+      downSpriteAniPlayer.play("idle")
+      upSpriteAniPlayer.play("idle")
+      jumpSpriteAniPlayer.play("idle")
+      sweepSpriteAniPlayer.play("idle")
+      castSpriteAniPlayer.play("idle")
+      areControlsAnimating = true
+    last_control_index = control_index
+  else:
+    control_index = 0
+    last_control_index = -1
+    if areControlsAnimating:
+      leftSpriteAniPlayer.stop()
+      rightSpriteAniPlayer.stop()
+      downSpriteAniPlayer.stop()
+      upSpriteAniPlayer.stop()
+      jumpSpriteAniPlayer.stop()
+      sweepSpriteAniPlayer.stop()
+      castSpriteAniPlayer.stop()
+      areControlsAnimating = false
+
+var castSpritePalette = 0
+func changeCastSpritePalette():
+  if castSpritePalette == 0:
+    castSprite.material.set_shader_param("palette_out", global.green_palette)
+    castSpritePalette = 1
+  elif castSpritePalette == 1:
+    castSprite.material.set_shader_param("palette_out", global.red_palette)
+    castSpritePalette = 2
+  elif castSpritePalette == 2:
+    castSprite.material.set_shader_param("palette_out", global.grey_player_palette)
+    castSpritePalette = 0

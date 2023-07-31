@@ -103,6 +103,7 @@ var cameraRotation = 0
 var pauseMoveInput = false # don't allow player physics or camera input??
 var pauseGame = false
 var isInventoryOpen = false
+var isPauseMenuOpen = false
 
 var num_cherries_eaten = 0
 var num_cherries_gained = 0

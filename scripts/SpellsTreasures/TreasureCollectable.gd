@@ -79,6 +79,8 @@ func _process(delta):
           textBox.is_important = true
           # collectSound.play()
           .passiveActivate(delta, true) # let the NPC passiveActive super script handle the textbox
+          level.player.pauseInput = false
+          level.player.pauseAnimation = false
     else:
       level.player.aniPlayer.play("getItem")
       secretAniPlayer.play("getItem")

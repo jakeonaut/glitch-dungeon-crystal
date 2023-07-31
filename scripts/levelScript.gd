@@ -119,24 +119,34 @@ func _process(delta):
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
-  if global.memory.has("inventory") and not global.pauseGame and not global.pauseMoveInput and global.activeInteractor == null:
+  if not global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode and \
+     not global.pauseGame and not global.pauseMoveInput: # global.memory.has("inventory") and 
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
     #   global.canChangeSongPitch = not global.canChangeSongPitch
     #   global.canGlitchScreen = not global.canGlitchScreen
     #   global.crtScreenEffects = not global.crtScreenEffects
-      global.isInventoryOpen = true
+      # global.isInventoryOpen = true
+      global.isPauseMenuOpen = true
       global.pauseGame = true
-  elif global.isInventoryOpen:
-    if Input.is_action_just_pressed("ui_start"):
-      global.isInventoryOpen = false
-      global.pauseGame = false
-      if global.activeInteractor:
-        global.activeInteractor.hideTextbox()
-      global.activeInteractor = null
-    if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
-      player.textContainer.bbText = uiLayer.getInventoryBBText()
-      player.textContainer.setVars()
-      player.textBox.interact()
+      player.pauseSound.play()
+      musicPlayer.tryToPlay(musicPlayer.casinoThemePlayer)
+  elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
+    global.isPauseMenuOpen = false
+    global.pauseGame = false
+    player.unpauseSound.play()
+    restartMusic()
+  
+  # elif global.isInventoryOpen:
+  #   if Input.is_action_just_pressed("ui_start"):
+  #     global.isInventoryOpen = false
+  #     global.pauseGame = false
+  #     if global.activeInteractor:
+  #       global.activeInteractor.hideTextbox()
+  #     global.activeInteractor = null
+  #   if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
+  #     player.textContainer.bbText = uiLayer.getInventoryBBText()
+  #     player.textContainer.setVars()
+  #     player.textBox.interact()
     
 
   

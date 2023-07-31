@@ -100,6 +100,8 @@ func restoreGlitchAndMP():
   
 
 func applyGlitch(glitch, notPlaySound = false):
+  if returning_to_save_point > 0:
+    return
   nullifySound.stop()
   if not notPlaySound:
     if glitch == self.glitch_form:
@@ -384,26 +386,27 @@ func tryDieToOffscreenCamera(_delta):
       physics_state = PhysicsState.GLITCH_RECOVERY
   
 func doTimeDilation(delta):
-  var real_delta_multiplier = 8
+  pass
+  # var real_delta_multiplier = 8
 
-  var gtdm = global.time_dilation_multiplier
-  var low = 0.6
-  var high = 1.0
-  if Input.is_action_pressed("ui_select"):
-    mySprite.material_override.set_shader_param("palette_cycle_speed", 4.0)
-    gtdm = gtdm + (low - gtdm) * (delta*real_delta_multiplier)
-    if stepify(gtdm, 0.01) == stepify(low, 0.01):
-      gtdm = low
-      mySprite.material_override.set_shader_param("palette_cycle_speed", 2.5)
+  # var gtdm = global.time_dilation_multiplier
+  # var low = 0.6
+  # var high = 1.0
+  # if Input.is_action_pressed("ui_select"):
+  #   mySprite.material_override.set_shader_param("palette_cycle_speed", 4.0)
+  #   gtdm = gtdm + (low - gtdm) * (delta*real_delta_multiplier)
+  #   if stepify(gtdm, 0.01) == stepify(low, 0.01):
+  #     gtdm = low
+  #     mySprite.material_override.set_shader_param("palette_cycle_speed", 2.5)
       
-    mySprite.material_override.set_shader_param("enable_palette_cycle", true)
-  else:
-    gtdm = gtdm + (high - gtdm) * (delta*real_delta_multiplier)
-    mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+  #   mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  # else:
+  #   gtdm = gtdm + (high - gtdm) * (delta*real_delta_multiplier)
+  #   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
       
-    if stepify(gtdm, 0.01) == stepify(high, 0.01):
-      gtdm = high
-  global.time_dilation_multiplier = gtdm
+  #   if stepify(gtdm, 0.01) == stepify(high, 0.01):
+  #     gtdm = high
+  # global.time_dilation_multiplier = gtdm
   
   
 func processGlitchHurtRecovery(delta):
@@ -689,6 +692,8 @@ func processBroomLogic(delta):
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
 onready var sporeSound = get_node("Sounds/SporeSound")
+onready var pauseSound = get_node("Sounds/PauseSound")
+onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
@@ -884,6 +889,7 @@ func landed():
 func broomStop():  
   summonedBroom = null
   pauseAnimation = false
+  pauseInput = false
   broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed

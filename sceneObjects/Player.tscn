@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=42]
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=43]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
+[ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=45]
 
 [sub_resource type="BoxShape" id=69]
 extents = Vector3( 0.7, 1.2, 3 )
@@ -1925,7 +1926,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.335057, 0.8 ), Vector3( 0, 0.409482, 0.8 ), Vector3( 0, 0.483907, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
@@ -1937,10 +1938,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="ShaderMaterial" id=56]
@@ -2129,6 +2130,16 @@ vframes = 8
 stream = ExtResource( 12 )
 volume_db = -5.0
 pitch_scale = 1.05
+
+[node name="PauseSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 45 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="UnpauseSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 27 )
+volume_db = -15.0
+pitch_scale = 0.9
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
