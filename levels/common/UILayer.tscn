@@ -971,6 +971,7 @@ text = "the dungeon"
 scroll_active = false
 
 [node name="PauseMenu" type="Control" parent="."]
+visible = false
 margin_right = 640.0
 margin_bottom = 510.0
 
@@ -1332,6 +1333,54 @@ vframes = 5
 stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.9
+
+[node name="InputRect" type="ColorRect" parent="PauseMenu"]
+margin_left = 113.0
+margin_top = 428.0
+margin_right = 523.0
+margin_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 405.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 398.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/InputRect/ColorRect/ColorRect"]
+margin_left = 11.0
+margin_top = 3.0
+margin_right = 394.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 11 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "press X to change key"
+text = "press X to change key"
+scroll_active = false
 
 [node name="Inventory" type="Control" parent="."]
 visible = false
@@ -1790,6 +1839,7 @@ anims/startCutscene = SubResource( 34 )
 anims/startCutsceneImmediate = SubResource( 35 )
 
 [node name="LevelTitle" type="ColorRect" parent="."]
+visible = false
 margin_left = 111.0
 margin_top = 428.0
 margin_right = 521.0

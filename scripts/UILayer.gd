@@ -160,7 +160,7 @@ func _process(delta):
           levelTitleRect.rect_scale.x = 0
           title_display_timer = 0
           title_display_state = 3
-  if global.activeInteractor:
+  if global.activeInteractor or global.isPauseMenuOpen:
     levelTitleRect.rect_scale.x = 0
     title_display_timer = 0
     title_display_state = 3
@@ -455,18 +455,40 @@ onready var castSprite = get_node("PauseMenu/CastSprite")
 onready var castSpriteAniPlayer = get_node("PauseMenu/CastSprite/AnimationPlayer")
 onready var castTextLabel = get_node("PauseMenu/CastTextLabel")
 onready var menuMoveSound = get_node("PauseMenu/MenuMoveSound")
+onready var inputText = get_node("PauseMenu/InputRect/ColorRect/ColorRect/RichTextLabel")
 
 var areControlsAnimating = false
 var control_index = 0
 var last_control_index = -1
+var is_reading_input = false
+
+func _input(ev):
+  # TODO(jaketrower): don't allow players to set a key that's already being used
+  var keyText = OS.get_scancode_string(ev.scancode)
+
+  if keyText != "Escape" and keyText != "Enter":
+      erase_action_events(input_action_to_read)
+
 func processControlsLogic(_delta):
   if global.isPauseMenuOpen:
-    if Input.is_action_just_pressed("ui_down"):
-      control_index += 1
-      menuMoveSound.play()
-    elif Input.is_action_just_pressed("ui_up"):
-      control_index -= 1
-      menuMoveSound.play()
+    if is_reading_input:
+      inputText.bbcode_text = "press key"
+    else:
+      inputText.bbcode_text = "press X to change key"
+
+    if is_reading_input:
+      pass
+    else:
+      if Input.is_action_just_pressed("sub_action_button"):
+        is_reading_input = true
+        last_control_index = -1
+      elif Input.is_action_just_pressed("ui_down"):
+        control_index += 1
+        menuMoveSound.play()
+      elif Input.is_action_just_pressed("ui_up"):
+        control_index -= 1
+        menuMoveSound.play()
+
     if control_index < 0:
       control_index = 6
     if control_index > 6:
@@ -492,33 +514,31 @@ func processControlsLogic(_delta):
     if control_index == 0:
       rightSprite.scale = big_size
       if control_index != last_control_index:
-        rightTextLabel.bbcode_text = "[wave]right[/wave]"
+        rightTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]right[/wave]"
     elif control_index == 1:
       leftSprite.scale = big_size
       if control_index != last_control_index: 
-        leftTextLabel.bbcode_text = "[wave]left[/wave]"
+        leftTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]left[/wave]"
     elif control_index == 2:
       downSprite.scale = big_size
       if control_index != last_control_index: 
-        downTextLabel.bbcode_text = "[wave]down[/wave]"
+        downTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]down[/wave]"
     elif control_index == 3:
       upSprite.scale = big_size
       if control_index != last_control_index: 
-        upTextLabel.bbcode_text = "[wave]up[/wave]"
+        upTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]up[/wave]"
     elif control_index == 4:
       jumpSprite.scale = big_size
       if control_index != last_control_index: 
-        jumpTextLabel.bbcode_text = "[wave]z[/wave]"
+        jumpTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]z[/wave]"
     elif control_index == 5:
       sweepSprite.scale = big_size
       if control_index != last_control_index: 
-        sweepTextLabel.bbcode_text = "[wave]x[/wave]"
+        sweepTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]x[/wave]"
     elif control_index == 6:
       castSprite.scale = big_size
       if control_index != last_control_index: 
-        castTextLabel.bbcode_text = "[wave]c[/wave]"
-
-
+        castTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]c[/wave]"
 
     if not areControlsAnimating:
       leftSpriteAniPlayer.play("idle")

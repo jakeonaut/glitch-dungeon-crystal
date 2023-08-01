@@ -239,9 +239,6 @@ doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="JumpSprite" parent="Viewport/level/UILayer/PauseMenu" index="6"]
-scale = Vector2( 2, 2 )
-
 [node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="15"]
 visible = false
 
@@ -456,7 +453,7 @@ transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -
 true_terminal_vel = 2
 grav = 3
 
-[node name="TransformSound" parent="Viewport/level/Player/Sounds" index="4"]
+[node name="TransformSound" parent="Viewport/level/Player/Sounds" index="6"]
 volume_db = -80.0
 
 [node name="TextBox" parent="Viewport/level/Player/TextContainer" index="0"]

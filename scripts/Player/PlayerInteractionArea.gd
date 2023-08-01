@@ -11,7 +11,7 @@ func _process(_delta):
     var fallthrough_collision_area = null
     var player = get_node("..")
 
-    if global.hasJustEnteredRoom or global.isEnteringRoom:
+    if global.hasJustEnteredRoom or global.isEnteringRoom or global.pauseGame or global.pauseMoveInput or global.isPauseMenuOpen:
         return
 
     # find the nearest active area and passive area

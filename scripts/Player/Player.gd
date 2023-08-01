@@ -385,7 +385,7 @@ func tryDieToOffscreenCamera(_delta):
       pauseAnimation = true
       physics_state = PhysicsState.GLITCH_RECOVERY
   
-func doTimeDilation(delta):
+func doTimeDilation(_delta):
   pass
   # var real_delta_multiplier = 8
 
