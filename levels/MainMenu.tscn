@@ -248,9 +248,6 @@ mesh = SubResource( 48 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="LevelTitle" parent="Viewport/level/UILayer" index="24"]
-visible = false
-
 [node name="ColorRect" parent="Viewport/level/UILayer/LevelTitle" index="0"]
 __meta__ = {
 "_edit_use_anchors_": false

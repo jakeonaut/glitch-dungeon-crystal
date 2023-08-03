@@ -464,12 +464,77 @@ var is_reading_input = false
 
 func _input(ev):
   # TODO(jaketrower): don't allow players to set a key that's already being used
-  var keyText = OS.get_scancode_string(ev.scancode)
+  if is_reading_input:
+    var keyText = OS.get_scancode_string(ev.scancode)
+    print(keyText)
+    is_reading_input = false
 
-  if keyText != "Escape" and keyText != "Enter":
-      erase_action_events(input_action_to_read)
+  # if keyText != "Escape" and keyText != "Enter":
+  #     erase_action_events(input_action_to_read)
+
+var hasInitializedControlsConfig = false
+var controlsConfig = []
+
+func initializeControlsConfig():
+  var newControlsConfig = [
+    {
+      "input_key": "ui_right",
+      "text_label": rightTextLabel,
+      "sprite": rightSprite,
+      "sprite_aniPlayer": rightSpriteAniPlayer,
+    },
+    {
+      "input_key": "ui_left",
+      "text_label": leftTextLabel,
+      "sprite": leftSprite,
+      "sprite_aniPlayer": leftSpriteAniPlayer,
+    },
+    {
+      "input_key": "ui_down",
+      "text_label": downTextLabel,
+      "sprite": downSprite,
+      "sprite_aniPlayer": downSpriteAniPlayer,
+    },
+    {
+      "input_key": "ui_up",
+      "text_label": upTextLabel,
+      "sprite": upSprite,
+      "sprite_aniPlayer": upSpriteAniPlayer,
+    },
+    {
+      "input_key": "jump_button",
+      "text_label": jumpTextLabel,
+      "sprite": jumpSprite,
+      "sprite_aniPlayer": jumpSpriteAniPlayer,
+    },
+    {
+      "input_key": "sub_action_button",
+      "text_label": sweepTextLabel,
+      "sprite": sweepSprite,
+      "sprite_aniPlayer": sweepSpriteAniPlayer,
+    },
+    {
+      "input_key": "alt_action_button",
+      "text_label": castTextLabel,
+      "sprite": castSprite,
+      "sprite_aniPlayer": castSpriteAniPlayer,
+    },
+  ]
+  for controlConfig in newControlsConfig:
+      var actions = InputMap.get_action_list(controlConfig.input_key)
+      # TODO(jaketrower): Support both key & gamepad here
+      if actions.size() >= 1:
+        controlConfig["key_code"] = actions[0].as_text()
+  controlsConfig = newControlsConfig
 
 func processControlsLogic(_delta):
+  if not hasInitializedControlsConfig:
+    if castTextLabel != null:
+      initializeControlsConfig()
+      hasInitializedControlsConfig = true
+  if not hasInitializedControlsConfig:
+    return
+
   if global.isPauseMenuOpen:
     if is_reading_input:
       inputText.bbcode_text = "press key"
@@ -490,55 +555,23 @@ func processControlsLogic(_delta):
         menuMoveSound.play()
 
     if control_index < 0:
-      control_index = 6
-    if control_index > 6:
+      control_index = controlsConfig.size()
+    if control_index > controlsConfig.size():
       control_index = 0
 
     var normal_size = Vector2(2, 2)
     var big_size = Vector2(3, 3)
-    rightSprite.scale = normal_size
-    
-    leftSprite.scale = normal_size
-    downSprite.scale = normal_size
-    upSprite.scale = normal_size
-    jumpSprite.scale = normal_size
-    sweepSprite.scale = normal_size
-    castSprite.scale = normal_size
-    if control_index != 0: rightTextLabel.bbcode_text = "[color=gray]right[/color]"
-    if control_index != 1: leftTextLabel.bbcode_text = "[color=gray]left[/color]"
-    if control_index != 2: downTextLabel.bbcode_text = "[color=gray]down[/color]"
-    if control_index != 3: upTextLabel.bbcode_text = "[color=gray]up[/color]"
-    if control_index != 4: jumpTextLabel.bbcode_text = "[color=gray]z[/color]"
-    if control_index != 5: sweepTextLabel.bbcode_text = "[color=gray]x[/color]"
-    if control_index != 6: castTextLabel.bbcode_text = "[color=gray]c[/color]"
-    if control_index == 0:
-      rightSprite.scale = big_size
-      if control_index != last_control_index:
-        rightTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]right[/wave]"
-    elif control_index == 1:
-      leftSprite.scale = big_size
-      if control_index != last_control_index: 
-        leftTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]left[/wave]"
-    elif control_index == 2:
-      downSprite.scale = big_size
-      if control_index != last_control_index: 
-        downTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]down[/wave]"
-    elif control_index == 3:
-      upSprite.scale = big_size
-      if control_index != last_control_index: 
-        upTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]up[/wave]"
-    elif control_index == 4:
-      jumpSprite.scale = big_size
-      if control_index != last_control_index: 
-        jumpTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]z[/wave]"
-    elif control_index == 5:
-      sweepSprite.scale = big_size
-      if control_index != last_control_index: 
-        sweepTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]x[/wave]"
-    elif control_index == 6:
-      castSprite.scale = big_size
-      if control_index != last_control_index: 
-        castTextLabel.bbcode_text = "[wave]press key[/wave]" if is_reading_input else "[wave]c[/wave]"
+
+    for i in range(controlsConfig.size()):
+      var controlConfig = controlsConfig[i]
+      if control_index == i:
+        controlConfig.sprite.scale = big_size
+        if control_index != last_control_index:
+          var waveTextVal = "press_key" if is_reading_input else controlConfig.key_code
+          controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
+      else:
+        controlConfig.sprite.scale = normal_size
+        controlConfig.text_label.bbcode_text = "[color=gray]" + controlConfig.key_code + "[/color]"
 
     if not areControlsAnimating:
       leftSpriteAniPlayer.play("idle")
