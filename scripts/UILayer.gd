@@ -457,24 +457,10 @@ onready var castTextLabel = get_node("PauseMenu/CastTextLabel")
 onready var menuMoveSound = get_node("PauseMenu/MenuMoveSound")
 onready var inputText = get_node("PauseMenu/InputRect/ColorRect/ColorRect/RichTextLabel")
 
-var areControlsAnimating = false
 var control_index = 0
 var last_control_index = -1
-var is_reading_input = false
-
-func _input(ev):
-  # TODO(jaketrower): don't allow players to set a key that's already being used
-  if is_reading_input:
-    var keyText = OS.get_scancode_string(ev.scancode)
-    print(keyText)
-    is_reading_input = false
-
-  # if keyText != "Escape" and keyText != "Enter":
-  #     erase_action_events(input_action_to_read)
-
 var hasInitializedControlsConfig = false
 var controlsConfig = []
-
 func initializeControlsConfig():
   var newControlsConfig = [
     {
@@ -523,8 +509,10 @@ func initializeControlsConfig():
   for controlConfig in newControlsConfig:
       var actions = InputMap.get_action_list(controlConfig.input_key)
       # TODO(jaketrower): Support both key & gamepad here
-      if actions.size() >= 1:
-        controlConfig["key_code"] = actions[0].as_text()
+      for action in actions:
+        if action is InputEventKey:
+          controlConfig["key_code"] = action.as_text()
+          break
   controlsConfig = newControlsConfig
 
 func processControlsLogic(_delta):
@@ -536,16 +524,21 @@ func processControlsLogic(_delta):
     return
 
   if global.isPauseMenuOpen:
-    if is_reading_input:
-      inputText.bbcode_text = "press key"
+    if global.is_reading_input:
+      inputText.bbcode_text = "press key to set [JUMP]"
     else:
-      inputText.bbcode_text = "press X to change key"
+      inputText.bbcode_text = "press " + controlsConfig[5].key_code + " to change key"
 
-    if is_reading_input:
-      pass
+    if global.is_reading_input:
+      if global.last_read_input != null:
+        controlsConfig[control_index].key_code = global.last_read_input
+        global.is_reading_input = false
+        last_control_index = -1
+      return
     else:
       if Input.is_action_just_pressed("sub_action_button"):
-        is_reading_input = true
+        global.is_reading_input = true
+        global.last_read_input = null
         last_control_index = -1
       elif Input.is_action_just_pressed("ui_down"):
         control_index += 1
@@ -555,8 +548,8 @@ func processControlsLogic(_delta):
         menuMoveSound.play()
 
     if control_index < 0:
-      control_index = controlsConfig.size()
-    if control_index > controlsConfig.size():
+      control_index = controlsConfig.size() - 1
+    if control_index >= controlsConfig.size():
       control_index = 0
 
     var normal_size = Vector2(2, 2)
@@ -567,34 +560,21 @@ func processControlsLogic(_delta):
       if control_index == i:
         controlConfig.sprite.scale = big_size
         if control_index != last_control_index:
-          var waveTextVal = "press_key" if is_reading_input else controlConfig.key_code
+          var waveTextVal = "press key" if global.is_reading_input else controlConfig.key_code
           controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
+          controlConfig.sprite.z_index = 1
+          controlConfig.sprite_aniPlayer.play("idle")
       else:
         controlConfig.sprite.scale = normal_size
         controlConfig.text_label.bbcode_text = "[color=gray]" + controlConfig.key_code + "[/color]"
+        controlConfig.sprite.z_index = 0
+        controlConfig.sprite_aniPlayer.stop()
+        controlConfig.sprite_aniPlayer.play("RESET")
 
-    if not areControlsAnimating:
-      leftSpriteAniPlayer.play("idle")
-      rightSpriteAniPlayer.play("idle")
-      downSpriteAniPlayer.play("idle")
-      upSpriteAniPlayer.play("idle")
-      jumpSpriteAniPlayer.play("idle")
-      sweepSpriteAniPlayer.play("idle")
-      castSpriteAniPlayer.play("idle")
-      areControlsAnimating = true
     last_control_index = control_index
   else:
     control_index = 0
     last_control_index = -1
-    if areControlsAnimating:
-      leftSpriteAniPlayer.stop()
-      rightSpriteAniPlayer.stop()
-      downSpriteAniPlayer.stop()
-      upSpriteAniPlayer.stop()
-      jumpSpriteAniPlayer.stop()
-      sweepSpriteAniPlayer.stop()
-      castSpriteAniPlayer.stop()
-      areControlsAnimating = false
 
 var castSpritePalette = 0
 func changeCastSpritePalette():

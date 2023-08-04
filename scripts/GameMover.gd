@@ -148,7 +148,6 @@ var DNUMHORZ = 65.0
 var DNUMSKID_BASE = 54.0
 
 func _ready():
-  set_process_input(true)
   set_process(true)
   set_physics_process(true)
   if true_terminal_vel == null: true_terminal_vel = 32

@@ -216,7 +216,12 @@ func _process(delta):
             respawnVarTimerHack = 0
             hasJustEnteredRoom = false
             isEnteringRoom = false
-            
+
+var is_reading_input = false
+var last_read_input = null
+func _input(ev):
+  if is_reading_input and ev is InputEventKey and ev.pressed:
+    last_read_input = OS.get_scancode_string(ev.scancode)
 
 func getShortLevelName(longLevelName):
   return longLevelName.substr(13, longLevelName.length() - 18)

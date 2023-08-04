@@ -54,7 +54,6 @@ var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
 var remembered_invisible_glitch_walk_speed = 5
 func _ready():
-  set_process_input(true)
   set_process(true)
   set_physics_process(true)
   if pauseMenu: pauseMenu.hide()

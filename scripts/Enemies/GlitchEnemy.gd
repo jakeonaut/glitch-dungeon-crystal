@@ -60,11 +60,9 @@ export var evolution_time_limit = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    set_process_input(true)
     set_process(true)
     set_physics_process(true)
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
-        set_process_input(false)
         set_process(false)
         set_physics_process(false)
         yield(TempTimer.idle_frame(self), "timeout")

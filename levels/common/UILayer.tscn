@@ -254,7 +254,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2 ]
+"values": [ 14 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -278,7 +278,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -5 ) ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -331,7 +331,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2 ]
+"values": [ 15 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -355,7 +355,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../BroomSprite:offset")
@@ -367,7 +367,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 20, -4 ) ]
+"values": [ Vector2( 10, 16 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("../BroomSprite:frame")
@@ -456,7 +456,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2 ]
+"values": [ 1 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -509,7 +509,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=53]
 resource_name = "idle"
-length = 1.2
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -972,8 +972,9 @@ scroll_active = false
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
+margin_top = 12.0
 margin_right = 640.0
-margin_bottom = 510.0
+margin_bottom = 522.0
 
 [node name="PauseMenuRect" type="ColorRect" parent="PauseMenu"]
 margin_left = 36.0
@@ -1013,6 +1014,7 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0.517647 )
 
 [node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
+visible = false
 margin_left = 222.5
 margin_top = 12.0
 margin_right = 428.5
@@ -1061,7 +1063,7 @@ text = "paused..."
 scroll_active = false
 
 [node name="RightSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 245.5, 104 )
+position = Vector2( 236, 104 )
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
 hframes = 8
@@ -1091,7 +1093,7 @@ text = "right"
 scroll_active = false
 
 [node name="LeftSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 250, 155.5 )
+position = Vector2( 240.5, 155.5 )
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
 flip_h = true
@@ -1124,7 +1126,7 @@ text = "left
 scroll_active = false
 
 [node name="DownSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 250.5, 204.5 )
+position = Vector2( 241, 204.5 )
 rotation = 1.5708
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
@@ -1159,7 +1161,7 @@ text = "down
 scroll_active = false
 
 [node name="UpSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 248.5, 257 )
+position = Vector2( 239, 257 )
 rotation = -1.5708
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
@@ -1194,12 +1196,13 @@ text = "up
 scroll_active = false
 
 [node name="JumpSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 251.5, 305.5 )
+position = Vector2( 242, 321 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 24 )
+offset = Vector2( 0, -5 )
 hframes = 8
 vframes = 8
-frame = 2
+frame = 14
 __meta__ = {
 "_editor_description_": "3	"
 }
@@ -1211,9 +1214,9 @@ anims/idle = SubResource( 46 )
 
 [node name="JumpTextLabel" type="RichTextLabel" parent="PauseMenu"]
 margin_left = 284.0
-margin_top = 295.5
+margin_top = 311.0
 margin_right = 433.0
-margin_bottom = 321.5
+margin_bottom = 337.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 15 )
@@ -1228,12 +1231,11 @@ text = "z key
 scroll_active = false
 
 [node name="BroomSprite" type="Sprite" parent="PauseMenu"]
-visible = false
 material = SubResource( 47 )
-position = Vector2( 223, 298.5 )
+position = Vector2( 218.5, 333.5 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 23 )
-offset = Vector2( 20, -4 )
+offset = Vector2( 10, 16 )
 flip_h = true
 hframes = 4
 vframes = 4
@@ -1243,13 +1245,13 @@ __meta__ = {
 }
 
 [node name="SweepSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 253.5, 349.5 )
+position = Vector2( 245.5, 375.5 )
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
 flip_h = true
 hframes = 8
 vframes = 8
-frame = 2
+frame = 15
 __meta__ = {
 "_editor_description_": "3	"
 }
@@ -1261,9 +1263,9 @@ anims/idle = SubResource( 49 )
 
 [node name="SweepTextLabel" type="RichTextLabel" parent="PauseMenu"]
 margin_left = 284.0
-margin_top = 344.5
+margin_top = 364.5
 margin_right = 433.0
-margin_bottom = 370.5
+margin_bottom = 390.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 15 )
@@ -1293,12 +1295,12 @@ __meta__ = {
 
 [node name="CastSprite" type="Sprite" parent="PauseMenu"]
 material = SubResource( 51 )
-position = Vector2( 248, 398.5 )
+position = Vector2( 244.5, 428 )
 scale = Vector2( 2.1, 1.9 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
-frame = 2
+frame = 1
 __meta__ = {
 "_editor_description_": "3	"
 }
@@ -1310,9 +1312,9 @@ anims/idle = SubResource( 53 )
 
 [node name="CastTextLabel" type="RichTextLabel" parent="PauseMenu"]
 margin_left = 285.0
-margin_top = 390.5
+margin_top = 420.0
 margin_right = 434.0
-margin_bottom = 416.5
+margin_bottom = 446.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 15 )
@@ -1323,7 +1325,7 @@ text = "c key"
 scroll_active = false
 
 [node name="EquipmentSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 210, 403.5 )
+position = Vector2( 206.5, 433 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 6
@@ -1335,10 +1337,10 @@ volume_db = -15.0
 pitch_scale = 0.9
 
 [node name="InputRect" type="ColorRect" parent="PauseMenu"]
-margin_left = 113.0
-margin_top = 428.0
-margin_right = 523.0
-margin_bottom = 500.0
+margin_left = 141.5
+margin_top = 9.5
+margin_right = 551.5
+margin_bottom = 81.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true

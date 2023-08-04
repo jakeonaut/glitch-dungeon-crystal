@@ -40,7 +40,6 @@ func _ready_impl():
 
   global.canChangeSongPitch = true
   global.activeInteractor = null # somewhat of a failsafe
-  set_process_input(true)
   set_process(true)
 
   yield(TempTimer.idle_frame(self), "timeout")
@@ -147,9 +146,6 @@ func _process(delta):
   #     player.textContainer.bbText = uiLayer.getInventoryBBText()
   #     player.textContainer.setVars()
   #     player.textBox.interact()
-    
-
-  
   var amt = 6.0
   ditherPaletteEffectRect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
   ditherPaletteEffectRect.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
