@@ -47,6 +47,7 @@ export var is_static_in_level = true
 
 var is_smacked = false
 var has_ever_been_smacked = false
+
 var smack_timer = 0
 export var smack_time_limit = 10
 export var smack_recovery_time_limit = 11

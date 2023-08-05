@@ -112,8 +112,8 @@ export var run_speed = 10
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
 var feather_jump_timer = 0
-var feather_jump_time_limit = 10
-var feather_jump_partial_time_limit = 7
+var feather_jump_time_limit = 14
+var feather_jump_partial_time_limit = 17
 var weak_feather_dbl_jump = false
 
 func isFeatherLike():
@@ -258,13 +258,13 @@ func processPhysics(delta):
           aniPlayer.play("stand")
         elif aa == "jump" or aa == "jumpBump" or aa == "fall" or aa == "fallBump":
           playLandAnimation()
-      elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
+      elif linear_velocity.y > 0 and not "jump" in aa and not "Jump" in aa and not "fall" in aa and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
         aniPlayer.stop()
         aniPlayer.clear_queue()
         # if is_touching_water:
         #   aniPlayer.queue("swimJump")
         # else:
-        aniPlayer.queue("jump")
+        aniPlayer.queue("fall" if isFeatherLike() else "jump")
 
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
@@ -280,7 +280,7 @@ func processPhysics(delta):
 func playLandAnimation():
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("land", -1, 1.0 if isFeatherLike() else 1.5)
+  aniPlayer.play("land", -1, 0.5 if isFeatherLike() else 1.5)
   if last_vv < -10:
     playBounce("land")
   elif last_vv < -6:
@@ -580,11 +580,11 @@ func processJumpInputs(delta):
         jump_squat_jump_input_timer = 1
         actuallyApplyJump()
 
-      if not pauseAnimation and aniPlayer != null and not "jump" in aniPlayer.assigned_animation:
+      if not pauseAnimation and aniPlayer != null and (not "jump" in aniPlayer.assigned_animation or not "fall" in aniPlayer.assigned_animation):
         aniPlayer.clear_queue()
-        aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
+        aniPlayer.play("jumpSquat", -1, 0.5 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
-        aniPlayer.queue("jump")
+        aniPlayer.queue("fall" if isFeatherLike() else "jump")
         playBounce("jumpSquat", ["jumpStart"])
 
   if not pauseAnimation and aniPlayer != null:
@@ -642,18 +642,19 @@ func addJumpSmokeCloud(flip_flip_h = false):
 
 func actuallyApplyJump(play_sound = true):
   if isFeatherLike():
-    if not weak_feather_dbl_jump and feather_jump_timer < 5:
-      if vv < (2*jump_force) / 3:
-        vv = (2*jump_force) / 3
-    elif not weak_feather_dbl_jump and feather_jump_timer < 8:
-      if vv < jump_force / 2:
-        vv = jump_force / 2
-    elif not weak_feather_dbl_jump:
-      if vv < jump_force / 2.3:
-        vv = jump_force / 2.3
-    else:
-      if vv > -1:
-        vv = jump_force / 3
+    vv = jump_force / 2
+    # if not weak_feather_dbl_jump and feather_jump_timer < 5:
+    #   if vv < (2*jump_force) / 3:
+    #     vv = (2*jump_force) / 3
+    # elif not weak_feather_dbl_jump and feather_jump_timer < 8:
+    #   if vv < jump_force / 2:
+    #     vv = jump_force / 2
+    # elif not weak_feather_dbl_jump:
+    #   if vv < jump_force / 2.3:
+    #     vv = jump_force / 2.3
+    # else:
+    #   if vv > -1:
+    #     vv = jump_force / 3
   elif not play_sound:
     if vv < (1.58*jump_force)/3:
       vv = (1.58*jump_force)/3
@@ -1082,7 +1083,7 @@ func collideWithWall(local_lv):
         aniPlayer.stop()
         aniPlayer.clear_queue()
         aniPlayer.play("jumpBump", -1, bump_ani_speed)
-        aniPlayer.queue("jump")
+        aniPlayer.queue("fall" if isFeatherLike() else "jump")
       elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar":
         aniPlayer.stop()
         aniPlayer.clear_queue()

@@ -67,7 +67,8 @@ jump_force = 13
 sprite_offset_y = -0.125
 walk_direction = Vector2( -1, 0 )
 modAmt = 0.0
-smack_recovery_time_limit = 30
+smack_time_limit = 30
+smack_recovery_time_limit = 31
 jump_time_limit = 0
 air_time_limit = 0
 

@@ -1,0 +1,207 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/sprites/sphinx.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=6]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=7]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=10]
+[ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=11]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/assets_sfx_menu_confirm.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=14]
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 0.9
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.847
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 1 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="CylinderShape" id=8]
+radius = 1.1
+
+[sub_resource type="CylinderShape" id=9]
+height = 1.6
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 18, 13, 1 )
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.9, 1, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0, 3, 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 1, null, null ],
+"method": "summonSmokeClouds"
+} ]
+}
+
+[node name="Sphinx" type="Spatial"]
+script = ExtResource( 11 )
+grav = 0
+time_influence = 20
+y_div = 0.9
+normal_offset = 0.5
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+visible = false
+material_override = SubResource( 7 )
+pixel_size = 0.125
+texture = ExtResource( 14 )
+hframes = 13
+vframes = 7
+frame = 52
+script = ExtResource( 4 )
+frame_delay = 0.6
+should_randomize_frame_delay = true
+
+[node name="Sprite3D2" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )
+material_override = SubResource( 10 )
+pixel_size = 0.125
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 4
+script = ExtResource( 4 )
+should_randomize_frame_delay = true
+should_animate = false
+overwritten_yellow_palette_path = "Null"
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+volume_db = -13.0
+pitch_scale = 0.5
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+volume_db = -20.0
+pitch_scale = 0.8
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 4 )
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 11 )
+anims/idle = SubResource( 12 )

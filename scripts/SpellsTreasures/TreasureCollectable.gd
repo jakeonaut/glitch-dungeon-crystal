@@ -117,7 +117,6 @@ func passiveActivate(_delta, _is_player):
       secretAniPlayer.queue("openUp")
       secretAniPlayer.queue("idle")
     if canPause:
-      global.pauseMoveInput = true
       global.pauseGame = true
     being_collected = true
     
