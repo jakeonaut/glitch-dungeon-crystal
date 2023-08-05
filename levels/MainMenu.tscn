@@ -239,20 +239,6 @@ doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="JumpSprite" parent="Viewport/level/UILayer/PauseMenu" index="10"]
-offset = Vector2( 0, -5 )
-frame = 14
-
-[node name="BroomSprite" parent="Viewport/level/UILayer/PauseMenu" index="12"]
-visible = true
-offset = Vector2( 10, 16 )
-
-[node name="SweepSprite" parent="Viewport/level/UILayer/PauseMenu" index="13"]
-frame = 15
-
-[node name="CastSprite" parent="Viewport/level/UILayer/PauseMenu" index="16"]
-frame = 1
-
 [node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="15"]
 visible = false
 

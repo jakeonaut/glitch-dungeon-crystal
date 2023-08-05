@@ -130,10 +130,13 @@ func _process(delta):
       player.pauseSound.play()
       musicPlayer.tryToPlay(musicPlayer.casinoThemePlayer)
   elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
-    global.isPauseMenuOpen = false
-    global.pauseGame = false
-    player.unpauseSound.play()
-    restartMusic()
+    if global.is_reading_input:
+      player.noBroomSound.play()
+    else:
+      global.isPauseMenuOpen = false
+      global.pauseGame = false
+      player.unpauseSound.play()
+      restartMusic()
   
   # elif global.isInventoryOpen:
   #   if Input.is_action_just_pressed("ui_start"):

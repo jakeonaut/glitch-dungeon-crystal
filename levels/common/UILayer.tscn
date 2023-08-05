@@ -1079,7 +1079,7 @@ anims/RESET = SubResource( 39 )
 anims/idle = SubResource( 40 )
 
 [node name="RightTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 276.0
+margin_left = 280.0
 margin_top = 97.0
 margin_right = 425.0
 margin_bottom = 123.0
@@ -1110,7 +1110,7 @@ anims/RESET = SubResource( 37 )
 anims/idle = SubResource( 38 )
 
 [node name="LeftTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 277.0
+margin_left = 280.0
 margin_top = 151.0
 margin_right = 426.0
 margin_bottom = 177.0
@@ -1143,7 +1143,7 @@ anims/RESET = SubResource( 41 )
 anims/idle = SubResource( 42 )
 
 [node name="DownTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 281.0
+margin_left = 280.0
 margin_top = 201.0
 margin_right = 430.0
 margin_bottom = 227.0
@@ -1178,7 +1178,7 @@ anims/RESET = SubResource( 43 )
 anims/idle = SubResource( 44 )
 
 [node name="UpTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 282.5
+margin_left = 280.0
 margin_top = 245.5
 margin_right = 431.5
 margin_bottom = 271.5
@@ -1213,7 +1213,7 @@ anims/RESET = SubResource( 45 )
 anims/idle = SubResource( 46 )
 
 [node name="JumpTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 284.0
+margin_left = 280.0
 margin_top = 311.0
 margin_right = 433.0
 margin_bottom = 337.0
@@ -1262,7 +1262,7 @@ anims/RESET = SubResource( 48 )
 anims/idle = SubResource( 49 )
 
 [node name="SweepTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 284.0
+margin_left = 280.0
 margin_top = 364.5
 margin_right = 433.0
 margin_bottom = 390.5
@@ -1311,7 +1311,7 @@ anims/RESET = SubResource( 52 )
 anims/idle = SubResource( 53 )
 
 [node name="CastTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 285.0
+margin_left = 280.0
 margin_top = 420.0
 margin_right = 434.0
 margin_bottom = 446.0

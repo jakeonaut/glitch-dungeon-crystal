@@ -20,7 +20,6 @@ var should_die_on_land = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    set_process_input(true)
     set_process(true)
     set_physics_process(true)
     if is_static_in_level:

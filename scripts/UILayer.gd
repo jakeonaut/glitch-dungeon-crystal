@@ -464,56 +464,81 @@ var controlsConfig = []
 func initializeControlsConfig():
   var newControlsConfig = [
     {
-      "input_key": "ui_right",
+      "input_action": "ui_right",
       "text_label": rightTextLabel,
       "sprite": rightSprite,
       "sprite_aniPlayer": rightSpriteAniPlayer,
     },
     {
-      "input_key": "ui_left",
+      "input_action": "ui_left",
       "text_label": leftTextLabel,
       "sprite": leftSprite,
       "sprite_aniPlayer": leftSpriteAniPlayer,
     },
     {
-      "input_key": "ui_down",
+      "input_action": "ui_down",
       "text_label": downTextLabel,
       "sprite": downSprite,
       "sprite_aniPlayer": downSpriteAniPlayer,
     },
     {
-      "input_key": "ui_up",
+      "input_action": "ui_up",
       "text_label": upTextLabel,
       "sprite": upSprite,
       "sprite_aniPlayer": upSpriteAniPlayer,
     },
     {
-      "input_key": "jump_button",
+      "input_action": "jump_button",
       "text_label": jumpTextLabel,
       "sprite": jumpSprite,
       "sprite_aniPlayer": jumpSpriteAniPlayer,
     },
     {
-      "input_key": "sub_action_button",
+      "input_action": "sub_action_button",
       "text_label": sweepTextLabel,
       "sprite": sweepSprite,
       "sprite_aniPlayer": sweepSpriteAniPlayer,
     },
     {
-      "input_key": "alt_action_button",
+      "input_action": "alt_action_button",
       "text_label": castTextLabel,
       "sprite": castSprite,
       "sprite_aniPlayer": castSpriteAniPlayer,
     },
   ]
-  for controlConfig in newControlsConfig:
-      var actions = InputMap.get_action_list(controlConfig.input_key)
-      # TODO(jaketrower): Support both key & gamepad here
-      for action in actions:
-        if action is InputEventKey:
-          controlConfig["key_code"] = action.as_text()
+  if global.memory.has("controls_config"):
+    var rememberedControlsConfig = global.memory["controls_config"]
+    for control_config in newControlsConfig:
+      for remembered_config in rememberedControlsConfig:
+        if remembered_config.input_action == control_config.input_action:
+          setKeyCode(control_config.input_action, remembered_config.key_code)
+          control_config["key_code"] = remembered_config.key_code
           break
+      # make sure its set to default if it was erased from memory
+      if not control_config.has("key_code") or control_config.key_code == null:
+        control_config["key_code"] = getKeyCode(control_config.input_action)
+  else:
+    for control_config in newControlsConfig:
+      control_config["key_code"] = getKeyCode(control_config.input_action)
+
   controlsConfig = newControlsConfig
+
+func getKeyCode(input_action):
+  var inputEvents = InputMap.get_action_list(input_action)
+  # TODO(jaketrower): Support both key & gamepad here
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventKey:
+      return inputEvent.get_scancode()
+  return null
+
+func setKeyCode(input_action, key_code):
+  var inputEvents = InputMap.get_action_list(input_action)
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventKey:
+      InputMap.action_erase_event(input_action, inputEvent)
+  var new_event = InputEventKey.new()
+  new_event.set_scancode(key_code)
+  InputMap.action_add_event(input_action, new_event)
 
 func processControlsLogic(_delta):
   if not hasInitializedControlsConfig:
@@ -527,25 +552,30 @@ func processControlsLogic(_delta):
     if global.is_reading_input:
       inputText.bbcode_text = "press key to set [JUMP]"
     else:
-      inputText.bbcode_text = "press " + controlsConfig[5].key_code + " to change key"
+      inputText.bbcode_text = "press " + OS.get_scancode_string(controlsConfig[5].key_code) + " to change key"
 
     if global.is_reading_input:
       if global.last_read_input != null:
-        controlsConfig[control_index].key_code = global.last_read_input
-        global.is_reading_input = false
-        last_control_index = -1
+        var keyCodeString = OS.get_scancode_string(global.last_read_input)
+        if keyCodeString != "Enter" and keyCodeString != "Escape":
+          controlsConfig[control_index].key_code = global.last_read_input
+          setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
+          global.memory["controls_config"] = controlsConfig
+          global.is_reading_input = false
+          last_control_index = -1
+          level.saveTheGame()
       return
     else:
-      if Input.is_action_just_pressed("sub_action_button"):
-        global.is_reading_input = true
-        global.last_read_input = null
-        last_control_index = -1
-      elif Input.is_action_just_pressed("ui_down"):
+      if Input.is_action_just_pressed("ui_down"):
         control_index += 1
         menuMoveSound.play()
       elif Input.is_action_just_pressed("ui_up"):
         control_index -= 1
         menuMoveSound.play()
+      if Input.is_action_just_pressed("sub_action_button"):
+        global.is_reading_input = true
+        global.last_read_input = null
+        last_control_index = -1
 
     if control_index < 0:
       control_index = controlsConfig.size() - 1
@@ -560,13 +590,13 @@ func processControlsLogic(_delta):
       if control_index == i:
         controlConfig.sprite.scale = big_size
         if control_index != last_control_index:
-          var waveTextVal = "press key" if global.is_reading_input else controlConfig.key_code
+          var waveTextVal = "press key" if global.is_reading_input else OS.get_scancode_string(controlConfig.key_code)
           controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
           controlConfig.sprite.z_index = 1
           controlConfig.sprite_aniPlayer.play("idle")
       else:
         controlConfig.sprite.scale = normal_size
-        controlConfig.text_label.bbcode_text = "[color=gray]" + controlConfig.key_code + "[/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray]" + OS.get_scancode_string(controlConfig.key_code) + "[/color]"
         controlConfig.sprite.z_index = 0
         controlConfig.sprite_aniPlayer.stop()
         controlConfig.sprite_aniPlayer.play("RESET")
