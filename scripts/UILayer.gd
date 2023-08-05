@@ -506,7 +506,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": castSpriteAniPlayer,
     },
   ]
-  if global.memory.has("controls_config"):
+  if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
     var rememberedControlsConfig = global.memory["controls_config"]
     for control_config in newControlsConfig:
       for remembered_config in rememberedControlsConfig:
@@ -517,6 +517,7 @@ func initializeControlsConfig():
       # make sure its set to default if it was erased from memory
       if not control_config.has("key_code") or control_config.key_code == null:
         control_config["key_code"] = getKeyCode(control_config.input_action)
+    global.hasInitializedControlsConfig = true
   else:
     for control_config in newControlsConfig:
       control_config["key_code"] = getKeyCode(control_config.input_action)

@@ -219,6 +219,7 @@ func _process(delta):
 
 var is_reading_input = false
 var last_read_input = null
+var hasInitializedControlsConfig = false
 func _input(ev):
   if is_reading_input and ev is InputEventKey and ev.pressed:
     last_read_input = ev.scancode

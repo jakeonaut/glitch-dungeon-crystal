@@ -22,7 +22,9 @@ func loadGame():
             roomPath = global.memory["roomPath"]
     startGame()
 
+onready var continueText = get_node("UILayer/Options/Continue/OptionTextLabel")
 onready var continueSelectHighlight = get_node("UILayer/Options/Continue/OptionTextLabeGlitched")
+onready var newGameText = get_node("UILayer/Options/NewGame/OptionTextLabel")
 onready var newGameSelectHighlight = get_node("UILayer/Options/NewGame/OptionTextLabeGlitched")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,10 +41,14 @@ func _process(delta):
             yy = -9
             continueSelectHighlight.visible = false
             newGameSelectHighlight.visible = true
+            continueText.bbcode_text = "[color=gray]continue...[/color]"
+            newGameText.bbcode_text = "[wave]NEW GAME![/wave]"
         else:
             yy = -6
             continueSelectHighlight.visible = true
             newGameSelectHighlight.visible = false
+            continueText.bbcode_text = "[wave]CONTINUE![/wave]"
+            newGameText.bbcode_text = "[color=gray]new game...[/color]"
         menuOptionPointer.global_transform.origin.y = yy
         menuOptionPointer2.global_transform.origin.y = yy
 

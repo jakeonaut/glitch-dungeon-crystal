@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -14,14 +14,17 @@
 [ext_resource path="res://assets/fonts/apple_kid.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://assets/fonts/Sakred.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
-[ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=15]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=16]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/mushroom.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=25]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=26]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=29]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=37]
@@ -210,7 +213,7 @@ shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 15 )
+shader_param/texture_albedo = ExtResource( 21 )
 shader_param/base_palette = ExtResource( 29 )
 shader_param/target_palette = ExtResource( 37 )
 
@@ -222,6 +225,14 @@ shader_param/resolution_scale = 4
 shader_param/r_mult = 0.0
 shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
+
+[sub_resource type="BoxShape" id=49]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=50]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport")
@@ -235,6 +246,7 @@ script = ExtResource( 5 )
 show_crt_effect = true
 tileset_type = 2
 spellbook_forbidden = true
+display_title = "enter to start"
 doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
@@ -248,6 +260,12 @@ mesh = SubResource( 48 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
+[node name="GlitchSprite" parent="Viewport/level/UILayer" index="16"]
+scale = Vector2( 0.1, 0.1 )
+
+[node name="LevelTitle" parent="Viewport/level/UILayer" index="24"]
+visible = true
+
 [node name="ColorRect" parent="Viewport/level/UILayer/LevelTitle" index="0"]
 __meta__ = {
 "_edit_use_anchors_": false
@@ -259,6 +277,11 @@ margin_top = 453.0
 margin_right = 527.0
 bbcode_text = "[wave] press enter to begin[/wave]"
 text = " press enter to begin"
+
+[node name="SpellMessageTextLabel" parent="Viewport/level/UILayer" index="28"]
+visible = true
+visible_characters = 0
+percent_visible = 0.0
 
 [node name="Title" type="Control" parent="Viewport/level/UILayer"]
 margin_right = 40.0
@@ -286,13 +309,13 @@ anchor_left = 0.122
 anchor_top = 0.21
 anchor_right = 0.15
 anchor_bottom = 0.21
-margin_left = 73.2
-margin_top = 99.12
+margin_left = 20.0
+margin_top = 8.0
 margin_right = 399.2
 margin_bottom = 184.12
 theme = SubResource( 41 )
 bbcode_enabled = true
-bbcode_text = "Glitch"
+bbcode_text = "[rainbow]Glitch[/rainbow]"
 text = "Glitch"
 script = ExtResource( 11 )
 
@@ -301,29 +324,29 @@ anchor_left = 0.122
 anchor_top = 0.22
 anchor_right = 0.221
 anchor_bottom = 0.22
-margin_left = 73.2
-margin_top = 103.84
+margin_left = 20.0
+margin_top = 8.0
 margin_right = 675.2
 margin_bottom = 267.84
 theme = ExtResource( 10 )
 custom_fonts/normal_font = SubResource( 39 )
 bbcode_enabled = true
-bbcode_text = "       Dungeon"
+bbcode_text = "       [shake]Dungeon[/shake]"
 text = "       Dungeon"
 
 [node name="GlitchTitleTextLabel3" type="RichTextLabel" parent="Viewport/level/UILayer/Title"]
 anchor_left = 0.164
 anchor_top = 0.341
 anchor_right = 0.214
-anchor_bottom = 0.341
-margin_left = 98.4
-margin_top = 160.952
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 86.0
 margin_right = 700.4
 margin_bottom = 324.952
 theme = ExtResource( 10 )
 custom_fonts/normal_font = SubResource( 39 )
 bbcode_enabled = true
-bbcode_text = "Crystal"
+bbcode_text = "[tornado]Crystal[/tornado]"
 text = "Crystal"
 
 [node name="Options" type="Control" parent="Viewport/level/UILayer"]
@@ -362,7 +385,7 @@ margin_right = 636.4
 margin_bottom = 332.8
 theme = ExtResource( 9 )
 bbcode_enabled = true
-bbcode_text = "CONTINUE!"
+bbcode_text = "[wave]CONTINUE![/wave]"
 text = "CONTINUE!"
 
 [node name="NewGame" type="Control" parent="Viewport/level/UILayer/Options"]
@@ -467,10 +490,10 @@ script = ExtResource( 8 )
 frame_delay = 0.3
 
 [node name="MenuOptionPointer3" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1378, 8.34038, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8622, 2.34038, -1 )
 material_override = SubResource( 44 )
-pixel_size = 0.0625
-texture = ExtResource( 15 )
+pixel_size = 0.25
+texture = ExtResource( 21 )
 script = ExtResource( 8 )
 frame_delay = 0.3
 max_frames = 1
@@ -526,6 +549,30 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -4, -9 )
 pixel_size = 0.048
 texture = ExtResource( 16 )
 
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5538, 11.9042, 0 )
+grav = 0
+
+[node name="Sprite3D" parent="Viewport/level/AngelEgg" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.446192, 0.5 )
+pixel_size = 0.28
+
+[node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31708, 5, 0 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530556, 0.81086, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 49 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+frame = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 50 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -539,4 +586,8 @@ flip_v = true
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
 [editable path="Viewport/level/GlitchAura"]
+[editable path="Viewport/level/AngelEgg"]
+[editable path="Viewport/level/AngelEgg/NPC TextBox"]
+[editable path="Viewport/level/NPC"]
+[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="ScreenEffects"]
