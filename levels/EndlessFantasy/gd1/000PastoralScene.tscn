@@ -470,6 +470,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 13 )
+show_crt_effect = true
 tileset_type = 2
 spellbook_forbidden = true
 doesnt_have_broom = true
@@ -813,9 +814,6 @@ texture = SubResource( 14 )
 flip_v = true
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 9 )]
-
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

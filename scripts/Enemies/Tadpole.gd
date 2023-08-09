@@ -33,29 +33,43 @@ var am_i_spinning = false
 var tadpole_index = 0
 var num_tadpoles = 1
 var is_evolved = false
-func startSpinning(tadpole_index_, num_tadpoles_):
+var spinTarget = null
+func startSpinning(tadpole_index_, num_tadpoles_, target, immediately_evolve = false):
+  spinTarget = target
   am_i_spinning = true
-  pauseSelf = true
+  stopMovement()
   self.tadpole_index = tadpole_index_
   self.num_tadpoles = num_tadpoles_
-  behavior_jumping = false
-  behavior_walking = false
   walk_direction = Vector2(0, 0)
   aniPlayer = null
   grav = 0
   mySprite.should_animate = true
   mySprite.updateBaseFrame(0, 0)
-  evolve_time_limit = 80 + (tadpole_index_ * 5)
+  if immediately_evolve:
+    evolve_timer = evolve_time_limit
+    is_evolved = true
+    mySprite.visible = false
+    myOtherSprite.visible = true
+  else:
+    evolve_time_limit = 80 + (tadpole_index_ * 5)
   
+func stopMovement():
+  is_smacked = true
+  smack_timer = 0
+  pauseSelf = true
+  behavior_jumping = false
+  behavior_walking = false
 
 var evolve_timer = 0
 var evolve_time_limit = 80
 func _process(delta):
   # super._process(delta) implicit?
   if am_i_spinning:
+    stopMovement()
+
     var pos = global_transform.origin
-    var playerPos = level.player.global_transform.origin
-    global_transform.origin = moveToward2D(pos, playerPos, delta * 5)
+    var targetPos = spinTarget.global_transform.origin
+    global_transform.origin = moveToward2D(pos, targetPos, delta * 5)
 
     var mySpritePos = mySprite.transform.origin
     mySprite.transform.origin.y = moveToward2D(mySpritePos, Vector3(0, 4, 0), delta * 1).y

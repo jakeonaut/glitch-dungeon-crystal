@@ -11,6 +11,7 @@ onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
+var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 enum SlimeState {
@@ -396,6 +397,16 @@ func notOuchies(broom_origin):
 
 func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
+
+# TODO(jaketrower): Honestly just move these to GameMover...
+func spawnABubble():
+    var bubble = bubbleRes.instance()
+    level.add_child(bubble)
+    bubble.global_transform.origin = self.global_transform.origin
+    bubble.original_pos_x = self.global_transform.origin.x
+    bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
+    bubble.global_transform.origin.y += 1
+    bubble.setAsParent(self)
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):

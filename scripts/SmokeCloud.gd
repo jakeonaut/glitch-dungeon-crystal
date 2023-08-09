@@ -1,4 +1,4 @@
-extends "res://scripts/Sprite.gd"
+extends "Sprite.gd"
 
 var target_x = -9999
 var target_y = -9999

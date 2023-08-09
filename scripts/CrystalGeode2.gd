@@ -81,7 +81,7 @@ func spinTheFroggies(delta):
         if tadpole_spin_start_timer >= tadpole_spin_start_time_limit:
             tadpole_spin_start_timer = 0
             var tadpole = tadpoles[tadpole_index]
-            tadpole.startSpinning(tadpole_index, num_tadpoles)
+            tadpole.startSpinning(tadpole_index, num_tadpoles, level.player)
             tadpole_index += 1
     elif global.hasGottenLevelGeode and level.gameCamera.am_i_zooming:
         var should_stop_animation = true

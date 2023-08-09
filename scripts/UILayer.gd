@@ -142,7 +142,10 @@ func _process(delta):
   #         heartSprite.max_frames = 1
     
 
-  if title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "DebugTown" in global.memory["roomPath"]):
+  if global.isPauseMenuOpen:
+    levelTitleRect.visible = false
+  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "DebugTown" in global.memory["roomPath"]):
+    levelTitleRect.visible = true
     title_display_timer += (delta*22)
     if title_display_timer >= title_display_time_limit:
       if title_display_state == 0:
@@ -157,10 +160,11 @@ func _process(delta):
       elif title_display_state == 2:
         levelTitleRect.rect_scale.x = levelTitleRect.rect_scale.x + (0 - levelTitleRect.rect_scale.x) * (delta*5)
         if stepify(levelTitleRect.rect_scale.x, 0.1) == 0:
+          print("4 die")
           levelTitleRect.rect_scale.x = 0
           title_display_timer = 0
           title_display_state = 3
-  if global.activeInteractor or global.isPauseMenuOpen:
+  if global.activeInteractor:
     levelTitleRect.rect_scale.x = 0
     title_display_timer = 0
     title_display_state = 3

@@ -9,8 +9,6 @@ export var air_time_limit = 15
 var spawn_timer = 0
 var spawn_time_limit = 15
 
-var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
-
 export var is_static = false
 export var is_infected = false
 
@@ -78,13 +76,7 @@ func _process(delta):
       spawn_timer += (delta*22)
       if spawn_timer >= spawn_time_limit or (is_touching_water and spawn_timer >= water_jump_time_limit):
           spawn_timer = 0
-          var bubble = bubbleRes.instance()
-          level.add_child(bubble)
-          bubble.global_transform.origin = self.global_transform.origin
-          bubble.original_pos_x = self.global_transform.origin.x
-          bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
-          bubble.global_transform.origin.y += 1
-          bubble.setAsParent(self)
+          spawnABubble()
   else:
     spawn_timer = 0
     behavior_jumping = false

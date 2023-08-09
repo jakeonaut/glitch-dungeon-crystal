@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/sprites/sphinx.png" type="Texture" id=1]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
@@ -25,8 +25,8 @@ shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = true
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
@@ -37,7 +37,7 @@ shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
+shader_param/time_influence = 7.0
 shader_param/y_div = 0.9
 shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 3 )
@@ -118,15 +118,16 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.2 ),
+"times": PoolRealArray( 1.201 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 1, null, null ],
-"method": "summonSmokeClouds"
+"args": [  ],
+"method": "spawnABubble"
 } ]
 }
 
 [node name="Sphinx" type="Spatial"]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 11 )
 grav = 0
 time_influence = 20
@@ -134,10 +135,10 @@ y_div = 0.9
 normal_offset = 0.5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.1, 1 )
 visible = false
 material_override = SubResource( 7 )
-pixel_size = 0.125
+pixel_size = 0.1
 texture = ExtResource( 14 )
 hframes = 13
 vframes = 7
@@ -147,9 +148,9 @@ frame_delay = 0.6
 should_randomize_frame_delay = true
 
 [node name="Sprite3D2" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514286, 0.1 )
 material_override = SubResource( 10 )
-pixel_size = 0.125
+pixel_size = 0.1
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 4
@@ -157,6 +158,7 @@ script = ExtResource( 4 )
 should_randomize_frame_delay = true
 should_animate = false
 overwritten_yellow_palette_path = "Null"
+automatically_change_color = false
 
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

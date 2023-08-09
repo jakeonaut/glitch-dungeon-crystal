@@ -1,5 +1,6 @@
-[gd_scene load_steps=146 format=2]
+[gd_scene load_steps=149 format=2]
 
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=4]
@@ -11,13 +12,11 @@
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://assets/tower.png" type="Texture" id=11]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=12]
-[ext_resource path="res://sceneObjects/tiles/grey_background_tiles.tres" type="MeshLibrary" id=13]
 [ext_resource path="res://levels/EndlessFantasy/gd1/005DebugTownLevelScript.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=18]
-[ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=19]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=20]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=22]
@@ -32,12 +31,14 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=33]
+[ext_resource path="res://assets/sprites/tall_doors.png" type="Texture" id=34]
 [ext_resource path="res://sceneObjects/PlayerLevelSelect.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/palettes/fall_moth_palette.png" type="Texture" id=36]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=37]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=38]
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=39]
 [ext_resource path="res://levels/EndlessFantasy/001QuestionBlockNPCAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=41]
-[ext_resource path="res://assets/palettes/red_tidepool_palette.png" type="Texture" id=42]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=43]
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=44]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=45]
@@ -752,6 +753,62 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=148]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=149]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 1 )
+
 [sub_resource type="Animation" id=98]
 resource_name = "doorClose"
 length = 0.4
@@ -1212,7 +1269,7 @@ shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
-shader_param/enable_glitch = true
+shader_param/enable_glitch = false
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
@@ -1222,7 +1279,7 @@ shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 41 )
 shader_param/base_palette = ExtResource( 8 )
-shader_param/target_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 36 )
 
 [sub_resource type="Animation" id=109]
 resource_name = "default"
@@ -1287,7 +1344,7 @@ length = 0.001
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="ShaderMaterial" id=120]
+[sub_resource type="ShaderMaterial" id=150]
 shader = ExtResource( 5 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.5
@@ -1313,7 +1370,7 @@ shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 41 )
 shader_param/base_palette = ExtResource( 8 )
-shader_param/target_palette = ExtResource( 42 )
+shader_param/target_palette = ExtResource( 37 )
 
 [sub_resource type="Animation" id=121]
 resource_name = "default"
@@ -1498,9 +1555,11 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 33 )]
+size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+visible = false
 mesh_library = ExtResource( 23 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
@@ -1563,18 +1622,6 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="BackgroundLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
-mesh_library = ExtResource( 13 )
-cell_size = Vector3( 1, 1, 1 )
-data = {
-"cells": PoolIntArray( 65518, 65531, 0, 65520, 65531, 0, 131054, 65531, 0, 131055, 65531, 0, 131056, 65531, 0, 131082, 65531, 0, 131083, 65531, 0, 196618, 65531, 0, 196619, 65531, 0, 262132, 65531, 0, 262140, 65531, 0, 327674, 65531, 0, 458758, 65531, 0, 458759, 65531, 0, 458760, 65531, 0, 524294, 65531, 0, 524295, 65531, 0, 524296, 65531, 0, 589830, 65531, 0, 589831, 65531, 0, 589832, 65531, 0, 720897, 65531, 0, 851968, 65531, 0, 917502, 65531, 0, 917503, 65531, 0, 917504, 65531, 0, 983038, 65531, 0, 983040, 65531, 0, 1048574, 65531, 0, 1048575, 65531, 0, -524280, 65531, 0, -524279, 65531, 0, -524278, 65531, 0, -458757, 65531, 0, -458756, 65531, 0, -458748, 65531, 0, -458744, 65531, 0, -458742, 65531, 0, -393221, 65531, 0, -393220, 65531, 0, -393216, 65531, 0, -393215, 65531, 0, -393214, 65531, 0, -393208, 65531, 0, -393207, 65531, 0, -393206, 65531, 0, -327680, 65531, 0, -327679, 65531, 0, -262145, 65531, 0, -131089, 65531, 0, -18, 65531, 0, -17, 65531, 0, -16, 65531, 0 )
-}
-script = ExtResource( 19 )
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, -5 )
-}
-
 [node name="Player" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 15.9, 0 )
 
@@ -1586,8 +1633,6 @@ pitch_scale = 1.1
 [node name="FishingVillageNPC" parent="Viewport/level/StatusNPCs" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6, -0.7, 0 )
 grav = 0
-bbText = "fish village
-hiscore: 13"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
@@ -1596,8 +1641,6 @@ tiny_textbox = true
 [node name="ToxicJungleNPC" parent="Viewport/level/StatusNPCs" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 4.7, 0 )
 grav = 0
-bbText = "toxic jungle
-hiscore: 13"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
@@ -1606,8 +1649,6 @@ tiny_textbox = true
 [node name="CricketCaveNPC" parent="Viewport/level/StatusNPCs" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, -8.4, 0 )
 grav = 0
-bbText = "cricket cave
-hiscore: 13"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
@@ -1728,43 +1769,60 @@ shape = SubResource( 16 )
 [node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
 shape = SubResource( 137 )
 
-[node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
+[node name="CricketDoor" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, -6, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/CricketDoor" index="5"]
 anims/doorClose = SubResource( 53 )
 anims/doorOpen = SubResource( 54 )
 anims/locked = SubResource( 55 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/CricketDoor/InteractionArea" index="0"]
 shape = SubResource( 64 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/CricketDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/CricketDoor/FallthroughSolid" index="0"]
 shape = SubResource( 138 )
 
-[node name="Door5" parent="Viewport/level" instance=ExtResource( 16 )]
+[node name="FishDoor" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
+dont_recolor_me = true
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="5"]
+[node name="Sprite3D" parent="Viewport/level/FishDoor" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95657, -0.9 )
+material_override = SubResource( 148 )
+texture = ExtResource( 34 )
+
+[node name="Sprite3D2" parent="Viewport/level/FishDoor" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95657, -1 )
+material_override = SubResource( 149 )
+texture = ExtResource( 34 )
+frame = 4
+
+[node name="InteractPrompt" parent="Viewport/level/FishDoor" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303364, 2.66877, 0 )
+frame = 0
+
+[node name="AnimationPlayer" parent="Viewport/level/FishDoor" index="5"]
 anims/doorClose = SubResource( 98 )
 anims/doorOpen = SubResource( 99 )
 anims/locked = SubResource( 100 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/FishDoor/InteractionArea" index="0"]
 shape = SubResource( 64 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/FishDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/FishDoor/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.45527, 0 )
 shape = SubResource( 139 )
 
 [node name="EndOfDemoDoor" parent="Viewport/level" instance=ExtResource( 16 )]
@@ -1789,24 +1847,24 @@ shape = SubResource( 16 )
 [node name="CollisionShape" parent="Viewport/level/EndOfDemoDoor/FallthroughSolid" index="0"]
 shape = SubResource( 140 )
 
-[node name="Door8" parent="Viewport/level" instance=ExtResource( 16 )]
+[node name="ToxicDoor" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3, 7, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/000DieToSavePoint.tscn"
 num_keys_unlock = 1
 
-[node name="AnimationPlayer" parent="Viewport/level/Door8" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/ToxicDoor" index="5"]
 anims/doorClose = SubResource( 104 )
 anims/doorOpen = SubResource( 105 )
 anims/locked = SubResource( 106 )
 
-[node name="CollisionShape" parent="Viewport/level/Door8/InteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/ToxicDoor/InteractionArea" index="0"]
 shape = SubResource( 64 )
 
-[node name="CollisionShape" parent="Viewport/level/Door8/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/ToxicDoor/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="CollisionShape" parent="Viewport/level/Door8/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/ToxicDoor/FallthroughSolid" index="0"]
 shape = SubResource( 141 )
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 16 )]
@@ -2110,7 +2168,7 @@ anchor_bottom = 1.0
 step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
-material_override = SubResource( 120 )
+material_override = SubResource( 150 )
 frame = 66
 automatically_change_color = false
 
@@ -2127,6 +2185,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, -8.3, 0 )
 
 [node name="Sprite3D2" parent="Viewport/level/GlitchMoleCricket" index="1"]
 pixel_size = 0.125
+automatically_change_color = false
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -11.9, 1 )
@@ -2228,14 +2287,14 @@ visible = true
 [editable path="Viewport/level/Player2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door2"]
-[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door5"]
-[editable path="Viewport/level/Door5/NPC/NPC TextBox"]
+[editable path="Viewport/level/CricketDoor"]
+[editable path="Viewport/level/CricketDoor/NPC/NPC TextBox"]
+[editable path="Viewport/level/FishDoor"]
+[editable path="Viewport/level/FishDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/EndOfDemoDoor"]
 [editable path="Viewport/level/EndOfDemoDoor/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door8"]
-[editable path="Viewport/level/Door8/NPC/NPC TextBox"]
+[editable path="Viewport/level/ToxicDoor"]
+[editable path="Viewport/level/ToxicDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door7"]
 [editable path="Viewport/level/Door7/NPC/NPC TextBox"]
 [editable path="Viewport/level/GlitchEnemy6"]

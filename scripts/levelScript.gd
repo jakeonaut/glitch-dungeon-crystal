@@ -5,9 +5,9 @@ onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
-onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
+# onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
-# onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
+onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") if has_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") else null
 var current_sprite_palette = global.grey_palette
 
 export var show_crt_effect = false
@@ -15,6 +15,7 @@ export var show_crt_effect = false
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
 export var should_glitch_activate = false 
+export var null_glitch = false
 # TODO(jaketrower): need to make this work with grimoire
 
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
@@ -113,8 +114,8 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if not show_crt_effect:
-    ditherPaletteEffectRect.visible = false
+  if ditherPaletteEffectRect2:
+    ditherPaletteEffectRect2.visible = show_crt_effect
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
@@ -149,9 +150,9 @@ func _process(delta):
   #     player.textContainer.bbText = uiLayer.getInventoryBBText()
   #     player.textContainer.setVars()
   #     player.textBox.interact()
-  var amt = 6.0
-  ditherPaletteEffectRect.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
-  ditherPaletteEffectRect.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
+  # var amt = 6.0
+  # ditherPaletteEffectRect2.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
+  # ditherPaletteEffectRect2.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
   # if Input.is_action_just_pressed("place_tile_button"):
   #     var player_position = player.global_transform.origin + (player.facing * 2)
   #     var grid_cell = levelTiles.world_to_map(player_position)
@@ -280,9 +281,8 @@ func setTorchSpriteFrame(_v_frame):
 
 func normalGlitch():
   uiLayer.normalGlitch()
-  levelTiles.normalGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.normalGlitch()
+  if not null_glitch: levelTiles.normalGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.normalGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
   current_sprite_palette = levelTiles.grey_palette
@@ -291,9 +291,8 @@ func normalGlitch():
 
 func floorGlitch():
   uiLayer.floorGlitch()
-  levelTiles.floorGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.floorGlitch()
+  if not null_glitch: levelTiles.floorGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.floorGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
   current_sprite_palette = levelTiles.red_palette
@@ -301,9 +300,8 @@ func floorGlitch():
 
 func featherGlitch():
   uiLayer.featherGlitch()
-  levelTiles.featherGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.featherGlitch()
+  if not null_glitch: levelTiles.featherGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.featherGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
   current_sprite_palette = levelTiles.green_palette
@@ -311,9 +309,8 @@ func featherGlitch():
 
 func ladderGlitch():
   uiLayer.ladderGlitch()
-  levelTiles.ladderGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.ladderGlitch()
+  if not null_glitch: levelTiles.ladderGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.ladderGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
   current_sprite_palette = levelTiles.yellow_palette
@@ -321,9 +318,8 @@ func ladderGlitch():
 
 func invisibleGlitch():
   uiLayer.invisibleGlitch()
-  levelTiles.invisibleGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.invisibleGlitch()
+  if not null_glitch: levelTiles.invisibleGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.invisibleGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
   current_sprite_palette = levelTiles.black_palette
@@ -331,9 +327,8 @@ func invisibleGlitch():
 
 func walkThroughWallsGlitch():
   uiLayer.walkThroughWallsGlitch()
-  levelTiles.walkThroughWallsGlitch()
-  if fakeLevelTiles:
-    fakeLevelTiles.walkThroughWallsGlitch()
+  if not null_glitch: levelTiles.walkThroughWallsGlitch()
+  if fakeLevelTiles and not null_glitch: fakeLevelTiles.walkThroughWallsGlitch()
   get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
   current_sprite_palette = levelTiles.white_palette

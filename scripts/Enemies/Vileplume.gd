@@ -9,7 +9,6 @@ var air_time_limit = 15
 var spawn_timer = 0
 var spawn_time_limit = 15
 
-var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 onready var npc = get_node("NPC")
 
 export var is_static = false
