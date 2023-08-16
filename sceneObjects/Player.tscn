@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -339,6 +339,42 @@ tracks/13/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "broomSmack"
@@ -428,6 +464,115 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=70]
 resource_name = "broomSmackGlitch"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 34, 15, 33, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.62202, 1.56628, 0.7 ), Vector3( 0.813398, 1.18352, 0.7 ), Vector3( 1.34501, 0.290422, 0.7 ), Vector3( 1.23868, 0.247894, 0.7 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.101, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "actuallyApplySpellbookGlitch"
+}, {
+"args": [ null ],
+"method": "addJumpSmokeCloud"
+}, {
+"args": [ 2, true, true ],
+"method": "summonSmokeClouds"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "broomSmackGlitch (copy)"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -1638,6 +1783,35 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0.25, 0.8 ) ]
 }
 
+[sub_resource type="Animation" id=84]
+resource_name = "broomSmackGlitch"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.235115, 0.8 ), Vector3( 0, -0.0264359, 0.8 ), Vector3( 0, -0.239079, 0.8 ), Vector3( 0, 0.228736, 0.8 ), Vector3( 0, 0.44, 0.8 ), Vector3( 0, 0.228736, 0.8 ), Vector3( 0, -0.0264359, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
+}
+
 [sub_resource type="Animation" id=80]
 resource_name = "bumpBotLeft"
 length = 0.4
@@ -2260,6 +2434,7 @@ anims/broomSmack = SubResource( 46 )
 anims/broomSmack2 = SubResource( 64 )
 anims/broomSmackFast = SubResource( 47 )
 anims/broomSmackGlitch = SubResource( 70 )
+"anims/broomSmackGlitch (copy)" = SubResource( 83 )
 anims/broomSweep = SubResource( 41 )
 anims/collapse = SubResource( 9 )
 anims/enterDoor = SubResource( 49 )
@@ -2294,6 +2469,7 @@ anims/walkStop = SubResource( 27 )
 
 [node name="BounceAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 71 )
+anims/broomSmackGlitch = SubResource( 84 )
 anims/bumpBotLeft = SubResource( 80 )
 anims/bumpBotRight = SubResource( 72 )
 anims/bumpCeil = SubResource( 81 )

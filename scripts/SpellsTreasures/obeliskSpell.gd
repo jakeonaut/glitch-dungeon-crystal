@@ -48,7 +48,7 @@ func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
   if first_ever_glitch:
-    if global.memory.has("roomPath") and global.memory["roomPath"] != "res://levels/EndlessFantasy/000Intro/001CozyHome.tscn":
+    if global.memory.has("roomPath") and (not ("001CozyHome" in global.memory["roomPath"])):
       first_ever_glitch = false
       level.gameCamera.initial_target = level.player.get_node("CameraTarget")
       level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)

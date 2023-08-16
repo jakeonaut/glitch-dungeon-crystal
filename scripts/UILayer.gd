@@ -160,7 +160,6 @@ func _process(delta):
       elif title_display_state == 2:
         levelTitleRect.rect_scale.x = levelTitleRect.rect_scale.x + (0 - levelTitleRect.rect_scale.x) * (delta*5)
         if stepify(levelTitleRect.rect_scale.x, 0.1) == 0:
-          print("4 die")
           levelTitleRect.rect_scale.x = 0
           title_display_timer = 0
           title_display_state = 3

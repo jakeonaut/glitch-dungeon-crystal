@@ -459,10 +459,8 @@ func processGlitchHurtRecovery(delta):
         musicPlayer.changeSongPitch(1.0)
         level.glitchScreenEffect.visible = false
         glitch_death_timer = 0
-        var my_material = mySprite.get_material_override()
-        if my_material is ShaderMaterial:
-          my_material.set_shader_param("enable_glitch", false)
-          my_material.set_shader_param("enable_remove_skin_tone", false)
+        mySprite.material_override.set_shader_param("enable_glitch", false)
+        mySprite.material_override.set_shader_param("enable_remove_skin_tone", false)
         self.physics_state = PhysicsState.NORMAL
 
     return true
@@ -471,10 +469,8 @@ func applyGlitchDeathEffects(x):
   if global.canChangeSongPitch and (x < 0 or x > 20):
     musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
   if x > 10:
-    var my_material = mySprite.get_material_override()
-    if my_material is ShaderMaterial:
-      my_material.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
-      my_material.set_shader_param("enable_remove_skin_tone", self.physics_state == PhysicsState.GLITCH_RECOVERY)
+    mySprite.material_override.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
+    mySprite.material_override.set_shader_param("enable_remove_skin_tone", self.physics_state == PhysicsState.GLITCH_RECOVERY)
 
   var material = level.glitchScreenEffect.get_material()
   if material is ShaderMaterial:
@@ -498,15 +494,13 @@ func isOnSavePoint():
 
 func glitchTickle(play_sound = true):
   glitch_tickle_timer = 1
-  var my_material = mySprite.get_material_override()
-  if my_material is ShaderMaterial:
-    my_material.set_shader_param("enable_glitch", true)
-    my_material.set_shader_param("enable_remove_skin_tone", true)
-    my_material.set_shader_param("shake_power", 0.01)
-    my_material.set_shader_param("shake_color_rate", 0.01)
-    if play_sound:
-      noSpellSound.pitch_scale = .5
-      noSpellSound.play()
+  mySprite.material_override.set_shader_param("enable_glitch", true)
+  mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
+  mySprite.material_override.set_shader_param("shake_power", 0.01)
+  mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
+  if play_sound:
+    noSpellSound.pitch_scale = .5
+    noSpellSound.play()
 
 func nullify():
   level.displaySpellMessageText("no magic")
@@ -568,14 +562,10 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   global.pauseGame = true
   global.pauseMoveInput = true
 
-  var material = level.glitchScreenEffect.get_material()
-  if material is ShaderMaterial:
-    material.set_shader_param("shake_power", 0.01)
-    material.set_shader_param("shake_color_rate", 0.01)
-  var my_material = mySprite.get_material_override()
-  if my_material is ShaderMaterial:
-    my_material.set_shader_param("enable_glitch", true)
-    my_material.set_shader_param("enable_remove_skin_tone", true)
+  level.glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
+  level.glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)
+  mySprite.material_override.set_shader_param("enable_glitch", true)
+  mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   
   if global.canChangeSongPitch:
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
@@ -773,19 +763,11 @@ func processBroomRenderLogic(_delta):
       broomSpriteVisible.material_override.set_shader_param("enable_glitch", false)
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
       mySprite.material_override.set_shader_param("enable_palette_cycle", false)
-  else:
-    broomSpriteVisible.material_override.set_shader_param(
-      "enable_glitch", 
-      broomSpriteAnimated.material_override.get_shader_param("enable_glitch"))
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"]:
     broomSpriteVisible.visible = true
-    if Input.is_action_pressed("sub_action_button") or global.hasGottenLevelGeode:
-      broomSpriteVisible.get_material_override().set_shader_param("enable_glitch", true)
-    else:
-      broomSpriteVisible.get_material_override().set_shader_param("enable_glitch", false)
   else:
     broomSpriteVisible.visible = false
     if not is_tiny:
