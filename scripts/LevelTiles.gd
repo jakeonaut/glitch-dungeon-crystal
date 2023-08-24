@@ -81,6 +81,26 @@ func removeRemovedTiles():
     var coords = global.normalizeMemoryPosition(removedLevelTiles[i])
     removeTile(coords, false)
 
+func arrayDifference(arr1, arr2):
+    var only_in_arr1 = []
+    for v in arr1:
+        if not (v in arr2):
+            only_in_arr1.append(v)
+    return only_in_arr1
+
+var sausage_fading_timer = 0
+var sausage_fading_time_limit = 5
+var sausage_fading_away_indices = []
+var fading_in_sausage_indices = []
+func queueSausageDreamFadeAwayDifference(newLevelTiles):
+  # TODO(jaketrower): Should randomize the order of each of these arrays
+  sausage_fading_away_indices = arrayDifference(
+    self.get_used_cells(), newLevelTiles.get_used_cells()
+  )
+  fading_in_sausage_indices = arrayDifference(
+    newLevelTiles.get_used_cells(), self.get_used_cells()
+  )
+
 func buildRandomTiles():
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
@@ -208,6 +228,21 @@ func getRandomGlitchType():
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+
+  if sausage_fading_away_indices.size() > 0 or fading_in_sausage_indices.size() > 0:
+    sausage_fading_timer += (delta*22)
+    if sausage_fading_timer >= sausage_fading_time_limit:
+      sausage_fading_timer = 0
+      if sausage_fading_away_indices.size() > 0:
+        var cell_index = sausage_fading_away_indices.pop_back()
+        set_cell_item(cell_index.x, cell_index.y, cell_index.z, -1)
+      elif fading_in_sausage_indices.size() > 0:
+        var cell_index = fading_in_sausage_indices.pop_back()
+        var item = newLevelTiles.get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+        set_cell_item(cell_index.x, cell_index.y, cell_index.z, item)
+      else:
+        # TODO(jaketrower): FADE OUT GAME MOVERS, GameMovers in new scene can have .should_fade_in = true
+        pass
 
   # rerandomize_timer += (delta * 22)
   # if rerandomize_timer >= rerandomize_time_limit:

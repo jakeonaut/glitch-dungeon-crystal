@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=6]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=7]
-[ext_resource path="res://scripts/NPC.gd" type="Script" id=8]
+[ext_resource path="res://scripts/GramdmaMemory.gd" type="Script" id=8]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=9]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=10]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=12]
@@ -231,8 +231,6 @@ shader_param/target_palette = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0 )
 script = ExtResource( 8 )
 grav = 0
-bbText = "gramdma memory"
-can_camera_zoom = false
 
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 7 )
