@@ -27,6 +27,7 @@ func isActive():
 
 func PassiveInteractActivate(delta, is_player = true):
     if parent.has_method("passiveActivate"):
+        # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
         parent.passiveActivate(delta, is_player)
     touchingPlayer = true
     if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:

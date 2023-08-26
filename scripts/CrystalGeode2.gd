@@ -113,7 +113,7 @@ func isActive():
     return visible and not has_been_smacked and not global.hasGottenLevelGeode
 
 func activate(is_player):
-    if not is_player:
+    if not global.memory["broom"]:
         if not notGetHitSound.is_playing(): notGetHitSound.play()
         return
 

@@ -225,6 +225,8 @@ func _process(delta):
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
   if global.pauseGame or global.pauseMoveInput:
+    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
+      global.activeInteractor.interact()
     return
   if not pauseAnimation and global.memory["broom"] and Input.is_action_just_pressed("alt_action_button"):
     applySpellbookGlitch()
@@ -282,6 +284,7 @@ func _process(delta):
   
 
 func unsmack():
+  smack_timer = 0
   is_smacked = false
   if not global.hasLevelGeodeBeenSmacked:
     pauseSelf = false

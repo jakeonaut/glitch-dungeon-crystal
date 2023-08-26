@@ -385,9 +385,6 @@ shader_param/target_palette = ExtResource( 6 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-should_glitch_activate = true
-null_glitch = true
-spellbook_forbidden = true
 display_title = "angel realm"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 14 )]

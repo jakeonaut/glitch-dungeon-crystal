@@ -35,6 +35,14 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var fallthroughSolid = get_node("FallthroughSolid")
 var is_on_main_menu = false
 
+var gameCamera = null
+func getGameCamera():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if gameCamera == null:
+    gameCamera = level.gameCamera
+  return gameCamera
+
 var player = null
 func getPlayer():
   if player == null:
@@ -293,6 +301,16 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   else:
     transition.long_fade_to(self.path)
 
+func isLandingOutsideOfCameraBounds():
+  var DEATH_MARGIN = 0
+  if getGameCamera().rightmost_x > -999:
+      if landing.global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+      landing.global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+      landing.global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+      landing.global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+        return true
+  return false
+
 func land():
   # TODO(jaketrower): Oh...
   # global.memory.erase("active_save_point_x")
@@ -300,6 +318,8 @@ func land():
   # global.memory.erase("active_save_point_z")
   global.pauseGame = false
   
+  if isLandingOutsideOfCameraBounds():
+    return
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y
   getPlayer().target_last_grounded_y = landing.global_transform.origin.y

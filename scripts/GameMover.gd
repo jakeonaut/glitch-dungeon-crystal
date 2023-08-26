@@ -288,11 +288,11 @@ func playLandAnimation():
 
 func processLand():
   landed()
-  if getGameCamera().rightmost_x == -999 or not (
+  if (getGameCamera().rightmost_x == -999 or not (
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
     global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
-    global_transform.origin.y < getGameCamera().botmost_y + 2):
+    global_transform.origin.y < getGameCamera().botmost_y + 2)) and not global.isAMoleDigging:
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true
     

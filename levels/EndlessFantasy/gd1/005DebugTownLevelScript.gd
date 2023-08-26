@@ -22,8 +22,9 @@ func setUpRoomInitializationOverride():
   if fishHiscore != null:
     fishingVillageNPC.textBoxContainer.bbText = ""
     var num_fish_angels = global.getHighScoreLevelZoneThing(fishingVillageStr, "angelTadpole")
-    for i in range(num_fish_angels):
-      spawnAngel(fishDoor, i, num_fish_angels)
+    if num_fish_angels != null:
+      for i in range(num_fish_angels):
+        spawnAngel(fishDoor, i, num_fish_angels)
   else:
     fishingVillageNPC.textBoxContainer.bbText = ""
   fishingVillageNPC.textBoxContainer.setVars()
@@ -32,8 +33,9 @@ func setUpRoomInitializationOverride():
   if toxicHiscore != null:
     toxicJungleNPC.textBoxContainer.bbText = ""
     var num_toxic_angels = global.getHighScoreLevelZoneThing(toxicJungleStr, "angelTadpole")
-    for i in range(num_toxic_angels):
-      spawnAngel(toxicDoor, i, num_toxic_angels)
+    if num_toxic_angels != null:
+      for i in range(num_toxic_angels):
+        spawnAngel(toxicDoor, i, num_toxic_angels)
   else:
     toxicJungleNPC.textBoxContainer.bbText = ""
   toxicJungleNPC.textBoxContainer.setVars()
@@ -42,8 +44,9 @@ func setUpRoomInitializationOverride():
   if cricketHiscore != null:
     cricketCaveNPC.textBoxContainer.bbText = ""
     var num_dust_angels = global.getHighScoreLevelZoneThing(cricketCaveStr, "angelTadpole")
-    for i in range(num_dust_angels):
-      spawnAngel(cricketDoor, i, num_dust_angels)
+    if num_dust_angels != null:
+      for i in range(num_dust_angels):
+        spawnAngel(cricketDoor, i, num_dust_angels)
   else:
     cricketCaveNPC.textBoxContainer.bbText = ""
   cricketCaveNPC.textBoxContainer.setVars()

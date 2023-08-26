@@ -87,7 +87,6 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier
 
-    checkForDigPathOverrides()
     checkForFlyPathOverrides()
     should_collide_horizontally = mole_state != MoleState.OVERRIDE_FLYING
     
@@ -247,17 +246,7 @@ func checkForFlyPathOverrides():
                 aniPlayer.play("fly")
             flight_anchor = area.get_node("..")
             mole_state = MoleState.OVERRIDE_FLY_START
-
-func checkForDigPathOverrides():
-    if not (has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away)):
-        return
-
-    var areas = smallInteractionArea.get_overlapping_areas()
-    for area in areas:
-        if area.is_in_group("digpath") and flight_anchor != area.get_node(".."):
-            if aniPlayer.has_animation("jumpSquatInitial"):
-                aniPlayer.remove_animation("jumpSquat")
-                aniPlayer.rename_animation("jumpSquatInitial", "jumpSquat")
+            global.isAMoleDigging = false
         
 func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
@@ -345,6 +334,7 @@ func startDigging():
             aniPlayer.stop()
             aniPlayer.clear_queue()
         mole_state = MoleState.DIG
+        global.isAMoleDigging = true
         has_dug = false
         mole_state_timer = 0
         behavior_walking = false

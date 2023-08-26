@@ -195,8 +195,10 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+            # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             area.InteractActivate(false)
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
+            # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             area.PassiveInteractActivate(0, false)
       
         # erase glitch tiles...

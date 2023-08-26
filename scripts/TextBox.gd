@@ -93,7 +93,7 @@ func setPosition():
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
   
 var important_unpause_timer = 0
-var important_unpause_time_limit = 15
+var important_unpause_time_limit = 10
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
@@ -150,8 +150,12 @@ func _process(delta):
     else:
       self.margin_top = top_margin_start
       self.margin_bottom = bot_margin_start
+
+func advanceToEndOfPhrase():
+  while not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
+    appendNextTextCharacter(false)
       
-func appendNextTextCharacter():
+func appendNextTextCharacter(play_sound = true):
   get_node("../..").appendNextTextCharacter()
 
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
@@ -168,7 +172,8 @@ func appendNextTextCharacter():
     resetTinyColorRect()
     adjusted_tiny_y_pos += 35
     
-  dialogSound.play()
+  if play_sound:
+    dialogSound.play()
   text_timer = 0
   text_next_index += 1
       
@@ -199,6 +204,7 @@ func showTextbox():
   has_preactivated = false
   focus_me = true
   if is_important:
+    getPlayer().unsmack()
     global.pauseGame = true
     # maybe treat this like the Item Catch?
   # if tiny: tinyColorRect.visible = true
@@ -252,6 +258,7 @@ func interact():
   if !visible and dialogSound.isActive():
     showTextbox()
     global.activeInteractor = self
+    return
 
   # print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
@@ -261,6 +268,9 @@ func interact():
       nextPrompt.visible = false
     elif isWaitingForEndPrompt():
       hideTextbox()
+    else:
+      nextDialogSound.play()
+      advanceToEndOfPhrase()
 
 func passiveInteract(_delta):
   if !visible and dialogSound.isActive() and (global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and global.activeInteractor == self)):

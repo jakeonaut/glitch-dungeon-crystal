@@ -129,6 +129,8 @@ var set_camera_position_on_respawn = false
 var hasLevelGeodeBeenSmacked = false
 var hasGottenLevelGeode = false
 
+var isAMoleDigging = false
+
 func _ready():
     set_process(true)
 
