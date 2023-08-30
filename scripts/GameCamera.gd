@@ -172,11 +172,16 @@ func respectLevelTilesEdges():
     global_transform.origin.y = topmost_y - y_margin
     
 func isNearBottom():
-  # print("is near bottom?: " + str(global_transform.origin.y) + " < " + str(botmost_y + 8) + " : " + str(global_transform.origin.y < botmost_y + 8))
-  return global_transform.origin.y < botmost_y + 8
+  # this should be binary initial_size || zoomed_size, depending on whether glo
+  var calcSize = zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
+  var y_margin = 7.5 - ((15-calcSize)/2)
+  # print("is near bottom?: " + str(global_transform.origin.y) + " < " + str(botmost_y + y_margin * 2) + " : " + str(global_transform.origin.y < botmost_y + y_margin * 2))
+  return global_transform.origin.y < botmost_y + y_margin * 2
   
 func isInitialTargetNearBottom():
   if initial_target == null:
     return false
-  # print("is near bottom?: " + str(initial_target.global_transform.origin.y) + " < " + str(botmost_y + 5) + " : " + str(initial_target.global_transform.origin.y < botmost_y + 4))
-  return initial_target.global_transform.origin.y < botmost_y + 4
+  var calcSize = zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
+  var y_margin = 7.5 - ((15-calcSize)/2)
+  # print("is near bottom?: " + str(initial_target.global_transform.origin.y) + " < " + str(botmost_y + y_margin) + " : " + str(initial_target.global_transform.origin.y < botmost_y + y_margin))
+  return initial_target.global_transform.origin.y < botmost_y + y_margin

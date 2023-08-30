@@ -251,7 +251,7 @@ doesnt_have_broom = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="15"]
+[node name="MiniCrystalCubeRect" parent="Viewport/level/UILayer" index="18"]
 visible = false
 
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
@@ -260,7 +260,7 @@ mesh = SubResource( 51 )
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="GlitchSprite" parent="Viewport/level/UILayer" index="16"]
+[node name="GlitchSprite" parent="Viewport/level/UILayer" index="19"]
 scale = Vector2( 0.1, 0.1 )
 
 [node name="LevelTitle" parent="Viewport/level/UILayer" index="24"]

@@ -29,6 +29,117 @@
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=27]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=28]
 
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 512 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "endCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 448.0, 512.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "startCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 512.0, 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 64.0 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "startCutsceneImmediate"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 64.0 ]
+}
+
 [sub_resource type="DynamicFont" id=29]
 size = 24
 outline_size = 4
@@ -668,117 +779,6 @@ font_data = ExtResource( 16 )
 [sub_resource type="Theme" id=13]
 default_font = SubResource( 12 )
 
-[sub_resource type="Animation" id=32]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("CinematicBottomRect:margin_top")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 512 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=33]
-resource_name = "endCutscene"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("CinematicBottomRect:margin_top")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 448.0, 512.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 64.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=34]
-resource_name = "startCutscene"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("CinematicBottomRect:margin_top")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 512.0, 448.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 64.0 ]
-}
-
-[sub_resource type="Animation" id=35]
-resource_name = "startCutsceneImmediate"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("CinematicBottomRect:margin_top")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 448.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 64.0 ]
-}
-
 [node name="UILayer" type="CanvasLayer"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
@@ -790,6 +790,26 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CinematicTopRect" type="ColorRect" parent="."]
+margin_right = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="CinematicBottomRect" type="ColorRect" parent="."]
+margin_top = 512.0
+margin_right = 640.0
+margin_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 32 )
+anims/endCutscene = SubResource( 33 )
+anims/startCutscene = SubResource( 34 )
+anims/startCutsceneImmediate = SubResource( 35 )
 
 [node name="StatsTitle" type="ColorRect" parent="."]
 visible = false
@@ -1819,26 +1839,6 @@ margin_bottom = 137.0
 theme = SubResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "L.1"
-
-[node name="CinematicTopRect" type="ColorRect" parent="."]
-margin_right = 640.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="CinematicBottomRect" type="ColorRect" parent="."]
-margin_top = 512.0
-margin_right = 640.0
-margin_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 32 )
-anims/endCutscene = SubResource( 33 )
-anims/startCutscene = SubResource( 34 )
-anims/startCutsceneImmediate = SubResource( 35 )
 
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false

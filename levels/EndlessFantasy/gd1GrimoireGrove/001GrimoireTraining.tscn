@@ -68,9 +68,6 @@ shader_param/target_palette = ExtResource( 1 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 8 )
-should_glitch_activate = true
-null_glitch = true
-spellbook_forbidden = true
 display_title = "grimoire grove"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 15 )]
@@ -86,7 +83,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 16 )]
 fov = 80.7
-size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )

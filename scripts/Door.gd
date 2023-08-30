@@ -76,16 +76,17 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    if not global.memory.has("key") or global.memory["key"] == 0:
+    var num_keys = global.getLevelZoneThing("key")
+    if num_keys == null or num_keys == 0:
       if num_keys_unlock == 1:
         npc.textBoxContainer.bbText = "locked,\nneeds a key"
       else:
         npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
-    elif global.memory.has("key") and global.memory["key"] < num_keys_unlock:
-      prev_keys = global.memory["key"]
-      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
+    elif num_keys != null and num_keys < num_keys_unlock:
+      prev_keys = num_keys
+      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
     else:
-      prev_keys = global.memory["key"]
+      prev_keys = num_keys
       npc.textBoxContainer.bbText = "press [DOWN] to unlock"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
@@ -120,15 +121,16 @@ func _process(delta):
   if is_passive:
     spawnParticles(delta)
 
-  if global.memory.has("key") and prev_keys != global.memory["key"] and is_locked:
-    prev_keys = global.memory["key"]
-    if not global.memory.has("key") or global.memory["key"] == 0:
+  var num_keys = global.getLevelZoneThing("key")
+  if prev_keys != num_keys and is_locked:
+    prev_keys = num_keys
+    if num_keys == null or num_keys == 0:
       if num_keys_unlock == 1:
         npc.textBoxContainer.bbText = "locked,\nneeds a key"
       else:
         npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
-    elif global.memory.has("key") and global.memory["key"] < num_keys_unlock:
-      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - global.memory["key"]) + " more key"
+    elif num_keys != null and num_keys < num_keys_unlock:
+      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
     else:
       npc.textBoxContainer.bbText = "press [DOWN] to unlock"
     npc.textBoxContainer.setVars()
@@ -214,10 +216,11 @@ func activate(is_player):
     if not is_locked and not should_lock and global.activeInteractor == null and not (getPlayer().glitch_form == global.GlitchForm.FLOOR and getPlayer().on_ground and not getPlayer().truly_on_ground):
       goThroughDoor()
     elif is_locked:
-      if global.memory.has("key") and global.memory["key"] >= num_keys_unlock:
+      var num_keys = global.getLevelZoneThing("key")
+      if num_keys != null and num_keys >= num_keys_unlock:
         level.displayMessageText("unlocked!")
         global.pauseMoveInput = true
-        global.memory["key"] -= num_keys_unlock
+        global.setLevelZoneThing("key", num_keys - num_keys_unlock)
         npc.visible = false 
         npc.can_activate = false
         npc.is_active = false

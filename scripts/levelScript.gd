@@ -120,12 +120,8 @@ func _process(delta):
     return
 
   if not global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode and \
-     not global.pauseGame and not global.pauseMoveInput: # global.memory.has("inventory") and 
+     not global.pauseGame and not global.pauseMoveInput:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
-    #   global.canChangeSongPitch = not global.canChangeSongPitch
-    #   global.canGlitchScreen = not global.canGlitchScreen
-    #   global.crtScreenEffects = not global.crtScreenEffects
-      # global.isInventoryOpen = true
       global.isPauseMenuOpen = true
       global.pauseGame = true
       player.pauseSound.play()
@@ -138,25 +134,6 @@ func _process(delta):
       global.pauseGame = false
       player.unpauseSound.play()
       restartMusic()
-  
-  # elif global.isInventoryOpen:
-  #   if Input.is_action_just_pressed("ui_start"):
-  #     global.isInventoryOpen = false
-  #     global.pauseGame = false
-  #     if global.activeInteractor:
-  #       global.activeInteractor.hideTextbox()
-  #     global.activeInteractor = null
-  #   if Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("sub_action_button"):
-  #     player.textContainer.bbText = uiLayer.getInventoryBBText()
-  #     player.textContainer.setVars()
-  #     player.textBox.interact()
-  # var amt = 6.0
-  # ditherPaletteEffectRect2.material.set_shader_param("g_mult", 1.0 + (amt - amt*global.time_dilation_multiplier))
-  # ditherPaletteEffectRect2.material.set_shader_param("b_mult", -1.0 - (amt - amt*global.time_dilation_multiplier))
-  # if Input.is_action_just_pressed("place_tile_button"):
-  #     var player_position = player.global_transform.origin + (player.facing * 2)
-  #     var grid_cell = levelTiles.world_to_map(player_position)
-  #     levelTiles.set_cell_item(grid_cell.x, grid_cell.y, grid_cell.z, 0)
 
 func displayMessageText(message):
   uiLayer.displayMessageText(message)

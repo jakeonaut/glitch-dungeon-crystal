@@ -351,37 +351,37 @@ func tryInitializeLevelZone(levelZone):
     if currLevelZone == HUB_LEVEL_ZONE and levelZone != HUB_LEVEL_ZONE:
         # entering the level from the hub world, restart!
         resetLevelZone(levelZone)
-    elif currLevelZone != null and currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
+    elif hasGottenLevelGeode and currLevelZone != null and currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
         # just got back to the hub!, record the levelZone's results
-        hasGottenLevelGeode = false
         var highScoreStr = currLevelZone + "_highscore"
         if not self.memory.has(highScoreStr):
             self.memory[currLevelZone + "_highscore"] = {}
 
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_mini_crystal_cubes")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "angelTadpole")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps")
-        setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore")
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_mini_crystal_cubes", 1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "angelTadpole", 1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths", -1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps", -1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles", 1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
+        setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
 
+    hasGottenLevelGeode = false
     currLevelZone = levelZone
 
-func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing):
+func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
     if not self.memory.has(highScoreStr):
         self.memory[highScoreStr] = {}
     if not self.memory.has(currLevelZone) or not self.memory[currLevelZone].has(levelZoneThing):
         return
 
+    var curr_score = self.memory[currLevelZone][levelZoneThing]
     if not self.memory[highScoreStr].has(levelZoneThing) or \
-    self.memory[highScoreStr][levelZoneThing] < self.memory[currLevelZone][levelZoneThing]:
-        self.memory[highScoreStr][levelZoneThing] = self.memory[currLevelZone][levelZoneThing]
+       curr_score * score_mult > self.memory[highScoreStr][levelZoneThing]:
+        self.memory[highScoreStr][levelZoneThing] = curr_score
 
 func resetLevelZone(levelZone):
     hasGottenLevelGeode = false
     self.memory[levelZone] = {}
-    self.memory.erase("key")
     # if self.memory.has("spellbookPage"):
     #     self.memory["spellbookPage"] = []
 

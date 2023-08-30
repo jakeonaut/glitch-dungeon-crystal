@@ -8,7 +8,7 @@ var toxicJungleStr = "gd1ToxicJungle_highscore"
 onready var toxicJungleNPC = get_node("StatusNPCs/ToxicJungleNPC")
 onready var toxicDoor = get_node("ToxicDoor")
 
-var cricketCaveStr = "gd1ShiftingSandLand"
+var cricketCaveStr = "gd1ShiftingSandLand_highscore"
 onready var cricketCaveNPC = get_node("StatusNPCs/CricketCaveNPC")
 onready var cricketDoor = get_node("CricketDoor")
 
