@@ -147,6 +147,14 @@ var vertical_collision = false
 var DNUMHORZ = 65.0
 var DNUMSKID_BASE = 54.0
 
+var staticLevelZoneVar = null
+func getMyStaticLevelZoneVar(refresh_if_null = false):
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if staticLevelZoneVar == null or refresh_if_null:
+    staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self.name)
+  return staticLevelZoneVar
+
 func _ready():
   set_process(true)
   set_physics_process(true)

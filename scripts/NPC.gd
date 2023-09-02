@@ -51,7 +51,6 @@ func pressingMoveLeft():
 func pressingMoveRight():
   return pressing_move_right
 
-
 func _ready():
   set_process(true)
   set_physics_process(true)
@@ -79,7 +78,7 @@ func _ready():
         nextTextBoxPathStr += "/"
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
-  if not is_static_in_level or not global.getStaticLevelZoneLevelVar(level, self.name): 
+  if not is_static_in_level or not self.getMyStaticLevelZoneVar(): 
     is_really_important = true
   textBoxContainer.setVars()
 
@@ -90,7 +89,7 @@ func _ready():
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
 
-  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+  if is_static_in_level and self.getMyStaticLevelZoneVar():
     can_camera_zoom = false
     textBox.can_camera_zoom = false
     if not visible and can_activate:

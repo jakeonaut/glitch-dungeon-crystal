@@ -17,7 +17,7 @@ func _ready():
     set_process(true)
     set_physics_process(true)
 
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
 func _process(delta):

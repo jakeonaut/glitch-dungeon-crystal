@@ -8,9 +8,8 @@ func _ready():
 func activateScript():
     var num_keys = global.getLevelZoneThing("key")
     if num_keys == null:
-        num_keys = 0
         global.setLevelZoneThing("key", 0)
-    global.setLevelZoneThing("key", num_keys + 1)
+    global.incrementLevelZoneThing("key", 1)
     var key = get_node("../../..")
     global.pauseGame = false
     global.pauseMoveInput = false

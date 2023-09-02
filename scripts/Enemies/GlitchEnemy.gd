@@ -64,14 +64,14 @@ export var evolution_time_limit = 15
 func _ready():
     set_process(true)
     set_physics_process(true)
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and self.getMyStaticLevelZoneVar():
         set_process(false)
         set_physics_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(global.getStaticLevelZoneLevelVar(level, self.name))
+        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(self.getMyStaticLevelZoneVar())
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         queue_free()
@@ -359,7 +359,7 @@ func tryAddEnemiesGroup():
 func ouchies_base():
     if am_i_dying:
         return
-    if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         miniCubeCrystal.is_static_in_level = false

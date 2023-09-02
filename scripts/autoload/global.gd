@@ -345,6 +345,9 @@ func doFallthroughObjectCollision(gameMover, area):
 var currLevelZone = null
 const HUB_LEVEL_ZONE = "gd1" 
 func tryInitializeLevelZone(levelZone):
+    if currLevelZone == levelZone:
+        return
+
     if not self.memory.has(levelZone):
         self.memory[levelZone] = {}
     
@@ -381,20 +384,20 @@ func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
 
 func resetLevelZone(levelZone):
     hasGottenLevelGeode = false
-    self.memory[levelZone] = {}
+    if not levelZone == HUB_LEVEL_ZONE:
+        self.memory[levelZone] = {}
     # if self.memory.has("spellbookPage"):
     #     self.memory["spellbookPage"] = []
 
 func setStaticLevelZoneLevelVar(level, name, val):
-    # this should likely never occur from this callsite
-    if not currLevelZone:
-        tryInitializeLevelZone(HUB_LEVEL_ZONE)
+    tryInitializeLevelZone(level.getLevelZoneName())
 
     if not global.memory[currLevelZone].has(level.getShortLevelName()):
         global.memory[currLevelZone][level.getShortLevelName()] = {}
     global.memory[currLevelZone][level.getShortLevelName()][name] = val
 
 func getStaticLevelZoneLevelVar(level, name):
+    tryInitializeLevelZone(level.getLevelZoneName())
     # this should likely never occur from this callsite
     if not currLevelZone or not global.memory.has(currLevelZone): 
         return null

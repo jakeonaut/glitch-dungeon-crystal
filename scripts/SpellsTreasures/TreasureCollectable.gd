@@ -13,7 +13,7 @@ export var display_textbox = true
 export var canPause = true
 
 func _ready():
-  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+  if is_static_in_level and self.getMyStaticLevelZoneVar():
     if secretAniPlayer.has_animation("isOpen"):
       secretAniPlayer.play("isOpen")
     is_active = false
