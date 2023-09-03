@@ -223,18 +223,27 @@ var is_reading_input = false
 var last_read_input = null
 var hasInitializedControlsConfig = false
 func _input(ev):
-  if is_reading_input and ev is InputEventKey and ev.pressed:
-    last_read_input = ev.scancode
+    if is_reading_input and ev is InputEventKey and ev.pressed:
+        last_read_input = ev.scancode
 
+var SACRED_LEVEL_NAME = "res://levels/EndlessFantasy"
+var MINI_SACRED_LEVEL_NAME = "EndlessFantasy"
 func getShortLevelName(longLevelName):
-  return longLevelName.substr(13, longLevelName.length() - 18)
+    assert("res://levels/" in longLevelName)
+
+    if SACRED_LEVEL_NAME in longLevelName:
+        return longLevelName.split(SACRED_LEVEL_NAME)[1]
+    return longLevelName.split("res://")[1]
 
 func getLevelZoneName(longLevelName):
-  var shortLevelName = getShortLevelName(longLevelName)
-  var segments = shortLevelName.split("/")
-  if segments.size() == 1:
-    return null
-  return segments[segments.size() - 2]
+    if not SACRED_LEVEL_NAME in longLevelName:
+        return "levels"
+
+    var shortLevelName = getShortLevelName(longLevelName)
+    var segments = shortLevelName.split("/")
+    if segments.size() <= 1:
+        return null
+    return segments[segments.size() - 2]
 
 
 func normalizeMemoryPosition(positionVariable):
@@ -391,6 +400,8 @@ func resetLevelZone(levelZone):
 
 func setStaticLevelZoneLevelVar(level, name, val):
     tryInitializeLevelZone(level.getLevelZoneName())
+    if currLevelZone == null or not global.memory.has(currLevelZone): 
+        return null
 
     if not global.memory[currLevelZone].has(level.getShortLevelName()):
         global.memory[currLevelZone][level.getShortLevelName()] = {}
@@ -398,8 +409,7 @@ func setStaticLevelZoneLevelVar(level, name, val):
 
 func getStaticLevelZoneLevelVar(level, name):
     tryInitializeLevelZone(level.getLevelZoneName())
-    # this should likely never occur from this callsite
-    if not currLevelZone or not global.memory.has(currLevelZone): 
+    if currLevelZone == null or not global.memory.has(currLevelZone): 
         return null
 
     if not global.memory[currLevelZone].has(level.getShortLevelName()):
