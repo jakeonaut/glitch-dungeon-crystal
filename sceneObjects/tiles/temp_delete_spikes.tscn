@@ -1,0 +1,4146 @@
+[gd_scene load_steps=584 format=2]
+
+[ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/greysolid1.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/greysolid2.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/greysolid3.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/greysolid4.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/greysolid5.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/greysolid6.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/greysolid7.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/greysolid8.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/greysolidtop1.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/greysolidtop_left1.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/greysolidtop_left2.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/greysolidtop_right1.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/greysolidtop_right2.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/greysolidtop2.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/greysolidtop3.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/greysolidtop4.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/greysolidtop5.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/greysolidtop6.png" type="Texture" id=20]
+[ext_resource path="res://assets/textures/greysolidtop7.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/greysolidtop8.png" type="Texture" id=22]
+[ext_resource path="res://assets/textures/greyfloorbot1.png" type="Texture" id=23]
+[ext_resource path="res://assets/textures/greyfloorbot2.png" type="Texture" id=24]
+[ext_resource path="res://assets/textures/greyfloorbot3.png" type="Texture" id=25]
+[ext_resource path="res://assets/textures/greyfloorbot4.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/greyfloorbot5.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/greyfloorbot6.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/greyfloorbot7.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/greyfloorbot8.png" type="Texture" id=30]
+[ext_resource path="res://assets/textures/greyfloorbot9.png" type="Texture" id=31]
+[ext_resource path="res://assets/textures/greyroof1.png" type="Texture" id=32]
+[ext_resource path="res://assets/textures/greyroof2.png" type="Texture" id=33]
+[ext_resource path="res://assets/textures/greyroof3.png" type="Texture" id=34]
+[ext_resource path="res://assets/textures/greyroof4.png" type="Texture" id=35]
+[ext_resource path="res://assets/textures/greyroof5.png" type="Texture" id=36]
+[ext_resource path="res://assets/textures/greyroof6.png" type="Texture" id=37]
+[ext_resource path="res://assets/textures/greyroof7.png" type="Texture" id=38]
+[ext_resource path="res://assets/textures/greysolidceil1.png" type="Texture" id=39]
+[ext_resource path="res://assets/textures/greysolidceil2.png" type="Texture" id=40]
+[ext_resource path="res://assets/textures/greysolidceil3.png" type="Texture" id=41]
+[ext_resource path="res://assets/textures/greysolidceil4.png" type="Texture" id=42]
+[ext_resource path="res://assets/textures/greysolidceil5.png" type="Texture" id=43]
+[ext_resource path="res://assets/textures/greysolidceil6.png" type="Texture" id=44]
+[ext_resource path="res://assets/textures/cloud_greysolid3.png" type="Texture" id=45]
+[ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=46]
+[ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=47]
+[ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=48]
+[ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=49]
+[ext_resource path="res://assets/textures/greyspikes5.png" type="Texture" id=50]
+[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=51]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=52]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=53]
+[ext_resource path="res://assets/textures/redsolid1.png" type="Texture" id=54]
+[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=55]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=56]
+[ext_resource path="res://assets/textures/redfloorbot5.png" type="Texture" id=57]
+[ext_resource path="res://assets/textures/redsolidtop_right2.png" type="Texture" id=58]
+[ext_resource path="res://assets/textures/redfloorbot3.png" type="Texture" id=59]
+[ext_resource path="res://assets/textures/redsolidtop8.png" type="Texture" id=60]
+[ext_resource path="res://assets/textures/redsolid3.png" type="Texture" id=61]
+[ext_resource path="res://assets/textures/redsolidtop4.png" type="Texture" id=62]
+[ext_resource path="res://assets/textures/redroof4.png" type="Texture" id=63]
+[ext_resource path="res://assets/textures/redfloorbot9.png" type="Texture" id=64]
+[ext_resource path="res://assets/textures/redsolidceil1.png" type="Texture" id=65]
+[ext_resource path="res://assets/textures/redfloorbot4.png" type="Texture" id=66]
+[ext_resource path="res://assets/textures/redsolid5.png" type="Texture" id=67]
+[ext_resource path="res://assets/textures/redfloorbot6.png" type="Texture" id=68]
+[ext_resource path="res://assets/textures/redfloorbot8.png" type="Texture" id=69]
+[ext_resource path="res://assets/textures/redfloorbot2.png" type="Texture" id=70]
+[ext_resource path="res://assets/textures/redsolid4.png" type="Texture" id=71]
+[ext_resource path="res://assets/textures/redroof3.png" type="Texture" id=72]
+[ext_resource path="res://assets/textures/redfloorbot1.png" type="Texture" id=73]
+[ext_resource path="res://assets/textures/redfloorbot7.png" type="Texture" id=74]
+[ext_resource path="res://assets/textures/redsolidtop2.png" type="Texture" id=75]
+[ext_resource path="res://assets/textures/redsolidtop7.png" type="Texture" id=76]
+[ext_resource path="res://assets/textures/redroof5.png" type="Texture" id=77]
+[ext_resource path="res://assets/textures/redsolidceil6.png" type="Texture" id=78]
+[ext_resource path="res://assets/textures/redsolid2.png" type="Texture" id=79]
+[ext_resource path="res://assets/textures/redroof6.png" type="Texture" id=80]
+[ext_resource path="res://assets/textures/redroof7.png" type="Texture" id=81]
+[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=82]
+[ext_resource path="res://assets/textures/redsolidceil5.png" type="Texture" id=83]
+[ext_resource path="res://assets/textures/redsolid8.png" type="Texture" id=84]
+[ext_resource path="res://assets/textures/redsolidtop6.png" type="Texture" id=85]
+[ext_resource path="res://assets/textures/redsolid6.png" type="Texture" id=86]
+[ext_resource path="res://assets/textures/redsolidceil2.png" type="Texture" id=87]
+[ext_resource path="res://assets/textures/redsolidceil4.png" type="Texture" id=88]
+[ext_resource path="res://assets/textures/redsolidtop1.png" type="Texture" id=89]
+[ext_resource path="res://assets/textures/redsolidceil3.png" type="Texture" id=90]
+[ext_resource path="res://assets/textures/redsolidtop_left1.png" type="Texture" id=91]
+[ext_resource path="res://assets/textures/redsolidtop_left2.png" type="Texture" id=92]
+[ext_resource path="res://assets/textures/redsolidtop5.png" type="Texture" id=93]
+[ext_resource path="res://assets/textures/redsolidtop_right1.png" type="Texture" id=94]
+[ext_resource path="res://assets/textures/redsolidtop3.png" type="Texture" id=95]
+[ext_resource path="res://assets/textures/redroof1.png" type="Texture" id=96]
+[ext_resource path="res://assets/textures/redroof2.png" type="Texture" id=97]
+[ext_resource path="res://assets/textures/redsolid7.png" type="Texture" id=98]
+[ext_resource path="res://assets/textures/greensolid4.png" type="Texture" id=99]
+[ext_resource path="res://assets/textures/greensolidtop4.png" type="Texture" id=100]
+[ext_resource path="res://assets/textures/greenfloorbot8.png" type="Texture" id=101]
+[ext_resource path="res://assets/textures/greensolidtop5.png" type="Texture" id=102]
+[ext_resource path="res://assets/textures/greenfloorbot6.png" type="Texture" id=103]
+[ext_resource path="res://assets/textures/greenroof1.png" type="Texture" id=104]
+[ext_resource path="res://assets/textures/greenroof7.png" type="Texture" id=105]
+[ext_resource path="res://assets/textures/greensolid3.png" type="Texture" id=106]
+[ext_resource path="res://assets/textures/greensolidceil1.png" type="Texture" id=107]
+[ext_resource path="res://assets/textures/greensolid8.png" type="Texture" id=108]
+[ext_resource path="res://assets/textures/greensolidtop2.png" type="Texture" id=109]
+[ext_resource path="res://assets/textures/greenfloorbot4.png" type="Texture" id=110]
+[ext_resource path="res://assets/textures/greensolidceil2.png" type="Texture" id=111]
+[ext_resource path="res://assets/textures/greensolid1.png" type="Texture" id=112]
+[ext_resource path="res://assets/textures/greensolidtop_right2.png" type="Texture" id=113]
+[ext_resource path="res://assets/textures/greenfloorbot2.png" type="Texture" id=114]
+[ext_resource path="res://assets/textures/greensolidtop6.png" type="Texture" id=115]
+[ext_resource path="res://assets/textures/greenfloorbot7.png" type="Texture" id=116]
+[ext_resource path="res://assets/textures/greensolidceil3.png" type="Texture" id=117]
+[ext_resource path="res://assets/textures/greensolidceil4.png" type="Texture" id=118]
+[ext_resource path="res://assets/textures/greensolid2.png" type="Texture" id=119]
+[ext_resource path="res://assets/textures/greensolid5.png" type="Texture" id=120]
+[ext_resource path="res://assets/textures/greensolid7.png" type="Texture" id=121]
+[ext_resource path="res://assets/textures/greensolidtop_left1.png" type="Texture" id=122]
+[ext_resource path="res://assets/textures/greensolidtop3.png" type="Texture" id=123]
+[ext_resource path="res://assets/textures/greensolidtop8.png" type="Texture" id=124]
+[ext_resource path="res://assets/textures/greenroof2.png" type="Texture" id=125]
+[ext_resource path="res://assets/textures/greenroof3.png" type="Texture" id=126]
+[ext_resource path="res://assets/textures/greenroof5.png" type="Texture" id=127]
+[ext_resource path="res://assets/textures/greenroof6.png" type="Texture" id=128]
+[ext_resource path="res://assets/textures/greensolidceil5.png" type="Texture" id=129]
+[ext_resource path="res://assets/textures/greensolidceil6.png" type="Texture" id=130]
+[ext_resource path="res://assets/textures/greensolidtop7.png" type="Texture" id=131]
+[ext_resource path="res://assets/textures/greenfloorbot3.png" type="Texture" id=132]
+[ext_resource path="res://assets/textures/greenfloorbot1.png" type="Texture" id=133]
+[ext_resource path="res://assets/textures/greenroof4.png" type="Texture" id=134]
+[ext_resource path="res://assets/textures/greensolidtop1.png" type="Texture" id=135]
+[ext_resource path="res://assets/textures/greensolidtop_right1.png" type="Texture" id=136]
+[ext_resource path="res://assets/textures/greenfloorbot5.png" type="Texture" id=137]
+[ext_resource path="res://assets/textures/greensolid6.png" type="Texture" id=138]
+[ext_resource path="res://assets/textures/greensolidtop_left2.png" type="Texture" id=139]
+[ext_resource path="res://assets/textures/greenfloorbot9.png" type="Texture" id=140]
+[ext_resource path="res://assets/textures/yellowfloorbot4.png" type="Texture" id=141]
+[ext_resource path="res://assets/textures/yellowfloorbot9.png" type="Texture" id=142]
+[ext_resource path="res://assets/textures/yellowsolid1.png" type="Texture" id=143]
+[ext_resource path="res://assets/textures/yellowfloorbot2.png" type="Texture" id=144]
+[ext_resource path="res://assets/textures/yellowfloorbot7.png" type="Texture" id=145]
+[ext_resource path="res://assets/textures/yellowfloorbot3.png" type="Texture" id=146]
+[ext_resource path="res://assets/textures/yellowfloorbot5.png" type="Texture" id=147]
+[ext_resource path="res://assets/textures/yellowfloorbot1.png" type="Texture" id=148]
+[ext_resource path="res://assets/textures/yellowfloorbot8.png" type="Texture" id=149]
+[ext_resource path="res://assets/textures/yellowfloorbot6.png" type="Texture" id=150]
+[ext_resource path="res://assets/textures/yellowsolid4.png" type="Texture" id=151]
+[ext_resource path="res://assets/textures/yellowsolid3.png" type="Texture" id=152]
+[ext_resource path="res://assets/textures/yellowsolidceil6.png" type="Texture" id=153]
+[ext_resource path="res://assets/textures/yellowsolidtop1.png" type="Texture" id=154]
+[ext_resource path="res://assets/textures/yellowroof6.png" type="Texture" id=155]
+[ext_resource path="res://assets/textures/yellowsolidceil4.png" type="Texture" id=156]
+[ext_resource path="res://assets/textures/yellowsolidceil1.png" type="Texture" id=157]
+[ext_resource path="res://assets/textures/yellowsolid5.png" type="Texture" id=158]
+[ext_resource path="res://assets/textures/yellowsolidceil2.png" type="Texture" id=159]
+[ext_resource path="res://assets/textures/yellowsolid2.png" type="Texture" id=160]
+[ext_resource path="res://assets/textures/yellowroof2.png" type="Texture" id=161]
+[ext_resource path="res://assets/textures/yellowsolid7.png" type="Texture" id=162]
+[ext_resource path="res://assets/textures/yellowroof5.png" type="Texture" id=163]
+[ext_resource path="res://assets/textures/yellowroof1.png" type="Texture" id=164]
+[ext_resource path="res://assets/textures/yellowsolid8.png" type="Texture" id=165]
+[ext_resource path="res://assets/textures/yellowsolidtop7.png" type="Texture" id=166]
+[ext_resource path="res://assets/textures/yellowsolidtop6.png" type="Texture" id=167]
+[ext_resource path="res://assets/textures/yellowsolidtop5.png" type="Texture" id=168]
+[ext_resource path="res://assets/textures/yellowroof4.png" type="Texture" id=169]
+[ext_resource path="res://assets/textures/yellowsolidtop8.png" type="Texture" id=170]
+[ext_resource path="res://assets/textures/yellowsolidceil5.png" type="Texture" id=171]
+[ext_resource path="res://assets/textures/yellowsolidtop4.png" type="Texture" id=172]
+[ext_resource path="res://assets/textures/yellowsolidtop3.png" type="Texture" id=173]
+[ext_resource path="res://assets/textures/yellowsolidtop2.png" type="Texture" id=174]
+[ext_resource path="res://assets/textures/yellowsolid6.png" type="Texture" id=175]
+[ext_resource path="res://assets/textures/yellowsolidceil3.png" type="Texture" id=176]
+[ext_resource path="res://assets/textures/yellowroof7.png" type="Texture" id=177]
+[ext_resource path="res://assets/textures/yellowroof3.png" type="Texture" id=178]
+[ext_resource path="res://assets/palettes/black_tidepool_palette.png" type="Texture" id=179]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=180]
+[ext_resource path="res://assets/textures/greyglitchspikes5.png" type="Texture" id=181]
+[ext_resource path="res://assets/textures/greyglitchspikes2.png" type="Texture" id=182]
+[ext_resource path="res://assets/textures/greyglitchspikes1.png" type="Texture" id=183]
+[ext_resource path="res://assets/textures/greyglitchspikes3.png" type="Texture" id=184]
+[ext_resource path="res://assets/textures/greyglitchspikes4.png" type="Texture" id=185]
+[ext_resource path="res://assets/textures/cloud_greysolid1.png" type="Texture" id=186]
+[ext_resource path="res://assets/textures/cloud_greysolid7.png" type="Texture" id=187]
+[ext_resource path="res://assets/textures/cloud_greysolidtop3.png" type="Texture" id=188]
+[ext_resource path="res://assets/textures/cloud_greysolidtop2.png" type="Texture" id=189]
+[ext_resource path="res://assets/textures/cloud_greysolid2.png" type="Texture" id=190]
+[ext_resource path="res://assets/textures/cloud_greysolidtop6.png" type="Texture" id=191]
+[ext_resource path="res://assets/textures/cloud_greysolidtop5.png" type="Texture" id=192]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 8 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=11]
+material = SubResource( 10 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=13]
+material = SubResource( 12 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=15]
+material = SubResource( 14 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=17]
+material = SubResource( 16 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=19]
+material = SubResource( 18 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=21]
+material = SubResource( 20 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=23]
+material = SubResource( 22 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=25]
+material = SubResource( 24 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=27]
+material = SubResource( 26 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 15 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=29]
+material = SubResource( 28 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=31]
+material = SubResource( 30 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=32]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 17 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=33]
+material = SubResource( 32 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=34]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=35]
+material = SubResource( 34 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=36]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 19 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=37]
+material = SubResource( 36 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 20 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=39]
+material = SubResource( 38 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=40]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 21 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=41]
+material = SubResource( 40 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=42]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 22 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=43]
+material = SubResource( 42 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=44]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 23 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=45]
+material = SubResource( 44 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=46]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 24 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=47]
+material = SubResource( 46 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=48]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 25 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=49]
+material = SubResource( 48 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=50]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 26 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=51]
+material = SubResource( 50 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=52]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 27 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=53]
+material = SubResource( 52 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=54]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 28 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=55]
+material = SubResource( 54 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=56]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=57]
+material = SubResource( 56 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=58]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=59]
+material = SubResource( 58 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=60]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 31 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=61]
+material = SubResource( 60 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=62]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 32 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=63]
+material = SubResource( 62 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=64]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 33 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=65]
+material = SubResource( 64 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=66]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=67]
+material = SubResource( 66 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=68]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 35 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=69]
+material = SubResource( 68 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=70]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 36 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=71]
+material = SubResource( 70 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=72]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 37 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=73]
+material = SubResource( 72 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=74]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 38 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=75]
+material = SubResource( 74 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=76]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 39 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=77]
+material = SubResource( 76 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=78]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 40 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=79]
+material = SubResource( 78 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=80]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 41 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=81]
+material = SubResource( 80 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=82]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 42 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=83]
+material = SubResource( 82 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=84]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 43 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=85]
+material = SubResource( 84 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=86]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 44 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=87]
+material = SubResource( 86 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=88]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 192 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=89]
+material = SubResource( 88 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="PlaneShape" id=90]
+
+[sub_resource type="ShaderMaterial" id=91]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 189 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=92]
+material = SubResource( 91 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=93]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 188 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=94]
+material = SubResource( 93 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=95]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 191 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=96]
+material = SubResource( 95 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=97]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 186 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=98]
+material = SubResource( 97 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=99]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 190 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=100]
+material = SubResource( 99 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=101]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 45 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=102]
+material = SubResource( 101 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=103]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 187 )
+shader_param/base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=104]
+material = SubResource( 103 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=118]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 48 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 49 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 50 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=407]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 118 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 56 )
+
+[sub_resource type="CubeMesh" id=106]
+material = SubResource( 407 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=406]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=116]
+extents = Vector3( 0.4, 0.4, 0.4 )
+
+[sub_resource type="AnimatedTexture" id=119]
+flags = 19
+frames = 4
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 48 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 49 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=408]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 119 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 56 )
+
+[sub_resource type="CubeMesh" id=109]
+material = SubResource( 408 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=121]
+flags = 19
+frames = 4
+fps = 3.0
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 48 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 49 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=409]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 121 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 51 )
+
+[sub_resource type="CubeMesh" id=111]
+material = SubResource( 409 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=123]
+flags = 19
+frames = 2
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=410]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 123 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 56 )
+
+[sub_resource type="CubeMesh" id=113]
+material = SubResource( 410 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=125]
+flags = 19
+frames = 4
+fps = 5.0
+frame_0/texture = ExtResource( 46 )
+frame_1/texture = ExtResource( 47 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 48 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 49 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=411]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 125 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/real_base_palette = ExtResource( 56 )
+
+[sub_resource type="CubeMesh" id=115]
+material = SubResource( 411 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=391]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 183 )
+frame_1/texture = ExtResource( 182 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 184 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 185 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 181 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=412]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 391 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=393]
+material = SubResource( 412 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=394]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 182 )
+frame_1/texture = ExtResource( 184 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 185 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 181 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 183 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=413]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 394 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=396]
+material = SubResource( 413 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=397]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 184 )
+frame_1/texture = ExtResource( 185 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 181 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 183 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 182 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=414]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 397 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 179 )
+
+[sub_resource type="CubeMesh" id=399]
+material = SubResource( 414 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=400]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 185 )
+frame_1/texture = ExtResource( 181 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 183 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 182 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 184 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=415]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 400 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=402]
+material = SubResource( 415 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=403]
+flags = 19
+frames = 5
+frame_0/texture = ExtResource( 181 )
+frame_1/texture = ExtResource( 183 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 182 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 184 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 185 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=416]
+shader = ExtResource( 55 )
+shader_param/albedo = null
+shader_param/opacity = 0.7
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/texture_albedo = SubResource( 403 )
+shader_param/base_palette = ExtResource( 180 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=405]
+material = SubResource( 416 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=127]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 112 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=131]
+material = SubResource( 127 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=130]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=132]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 119 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=133]
+material = SubResource( 132 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=134]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 106 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=135]
+material = SubResource( 134 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=136]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 99 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=137]
+material = SubResource( 136 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=138]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 120 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=139]
+material = SubResource( 138 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=140]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 138 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=141]
+material = SubResource( 140 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=142]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 121 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=143]
+material = SubResource( 142 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=144]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 108 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=145]
+material = SubResource( 144 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=146]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 135 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=147]
+material = SubResource( 146 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=148]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 122 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=149]
+material = SubResource( 148 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=150]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 139 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=151]
+material = SubResource( 150 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=152]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 136 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=153]
+material = SubResource( 152 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=154]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 113 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=155]
+material = SubResource( 154 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=156]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 109 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=157]
+material = SubResource( 156 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=158]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 123 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=159]
+material = SubResource( 158 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=160]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 100 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=161]
+material = SubResource( 160 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=162]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 102 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=163]
+material = SubResource( 162 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=164]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 115 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=165]
+material = SubResource( 164 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=166]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 131 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=167]
+material = SubResource( 166 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=168]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 124 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=169]
+material = SubResource( 168 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=170]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 133 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=171]
+material = SubResource( 170 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=172]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 114 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=173]
+material = SubResource( 172 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=174]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 132 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=175]
+material = SubResource( 174 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=176]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 110 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=177]
+material = SubResource( 176 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=178]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 137 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=179]
+material = SubResource( 178 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=180]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 103 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=181]
+material = SubResource( 180 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=182]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 116 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=183]
+material = SubResource( 182 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=184]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 101 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=185]
+material = SubResource( 184 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=186]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 140 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=187]
+material = SubResource( 186 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=188]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 104 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=189]
+material = SubResource( 188 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=190]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 125 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=191]
+material = SubResource( 190 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=192]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 126 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=193]
+material = SubResource( 192 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=194]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 134 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=195]
+material = SubResource( 194 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=196]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 127 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=197]
+material = SubResource( 196 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=198]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 128 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=199]
+material = SubResource( 198 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=200]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 105 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=201]
+material = SubResource( 200 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=202]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 107 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=203]
+material = SubResource( 202 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=204]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 111 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=205]
+material = SubResource( 204 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=206]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 117 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=207]
+material = SubResource( 206 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=208]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 118 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=209]
+material = SubResource( 208 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=210]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 129 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=211]
+material = SubResource( 210 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=212]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 130 )
+shader_param/base_palette = ExtResource( 52 )
+
+[sub_resource type="CubeMesh" id=213]
+material = SubResource( 212 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=251]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 54 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=252]
+material = SubResource( 251 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=250]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=253]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 79 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=254]
+material = SubResource( 253 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=255]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 61 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=256]
+material = SubResource( 255 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=257]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 71 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=258]
+material = SubResource( 257 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=259]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 67 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=260]
+material = SubResource( 259 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=261]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 86 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=262]
+material = SubResource( 261 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=263]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 98 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=264]
+material = SubResource( 263 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=265]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 84 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=266]
+material = SubResource( 265 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=267]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 89 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=268]
+material = SubResource( 267 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=269]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 91 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=270]
+material = SubResource( 269 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=271]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 92 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=272]
+material = SubResource( 271 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=273]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 94 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=274]
+material = SubResource( 273 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=275]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 58 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=276]
+material = SubResource( 275 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=277]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 75 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=278]
+material = SubResource( 277 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=279]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 95 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=280]
+material = SubResource( 279 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=281]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 62 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=282]
+material = SubResource( 281 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=283]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 93 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=284]
+material = SubResource( 283 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=285]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 85 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=286]
+material = SubResource( 285 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=287]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 76 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=288]
+material = SubResource( 287 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=289]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 60 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=290]
+material = SubResource( 289 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=291]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 73 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=292]
+material = SubResource( 291 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=293]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 70 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=294]
+material = SubResource( 293 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=295]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 59 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=296]
+material = SubResource( 295 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=297]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 66 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=298]
+material = SubResource( 297 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=299]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 57 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=300]
+material = SubResource( 299 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=301]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 68 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=302]
+material = SubResource( 301 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=303]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 74 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=304]
+material = SubResource( 303 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=305]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 69 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=306]
+material = SubResource( 305 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=307]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 64 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=308]
+material = SubResource( 307 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=309]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 96 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=310]
+material = SubResource( 309 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=311]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 97 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=312]
+material = SubResource( 311 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=313]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 72 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=314]
+material = SubResource( 313 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=315]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 63 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=316]
+material = SubResource( 315 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=317]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 77 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=318]
+material = SubResource( 317 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=319]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 80 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=320]
+material = SubResource( 319 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=321]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 81 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=322]
+material = SubResource( 321 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=323]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 65 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=324]
+material = SubResource( 323 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=325]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 87 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=326]
+material = SubResource( 325 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=327]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 90 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=328]
+material = SubResource( 327 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=329]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 88 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=330]
+material = SubResource( 329 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=331]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 83 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=332]
+material = SubResource( 331 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=333]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 78 )
+shader_param/base_palette = ExtResource( 53 )
+
+[sub_resource type="CubeMesh" id=334]
+material = SubResource( 333 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=335]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 143 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=226]
+material = SubResource( 335 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=336]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=337]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 160 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=227]
+material = SubResource( 337 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=338]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 152 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=228]
+material = SubResource( 338 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=339]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 151 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=229]
+material = SubResource( 339 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=340]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 158 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=230]
+material = SubResource( 340 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=341]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 175 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=231]
+material = SubResource( 341 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=216]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 162 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=232]
+material = SubResource( 216 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=220]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 165 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=233]
+material = SubResource( 220 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=224]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 154 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=234]
+material = SubResource( 224 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=342]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 154 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=235]
+material = SubResource( 342 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=343]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 172 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=236]
+material = SubResource( 343 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=344]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 170 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=237]
+material = SubResource( 344 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=345]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 168 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=238]
+material = SubResource( 345 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=346]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 174 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=239]
+material = SubResource( 346 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=347]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 173 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=240]
+material = SubResource( 347 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=348]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 172 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=241]
+material = SubResource( 348 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=349]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 168 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=242]
+material = SubResource( 349 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=350]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 167 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=243]
+material = SubResource( 350 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=351]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 166 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=244]
+material = SubResource( 351 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=352]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 170 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=245]
+material = SubResource( 352 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=353]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 148 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=246]
+material = SubResource( 353 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=354]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 144 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=247]
+material = SubResource( 354 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=355]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 146 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=248]
+material = SubResource( 355 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=356]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 141 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=249]
+material = SubResource( 356 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=357]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 147 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=358]
+material = SubResource( 357 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=359]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 150 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=360]
+material = SubResource( 359 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=361]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 145 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=362]
+material = SubResource( 361 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=363]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 149 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=364]
+material = SubResource( 363 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=365]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 142 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=366]
+material = SubResource( 365 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=367]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 164 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=368]
+material = SubResource( 367 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=369]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 161 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=370]
+material = SubResource( 369 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=371]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 178 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=372]
+material = SubResource( 371 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=110]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 169 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=373]
+material = SubResource( 110 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=114]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 163 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=374]
+material = SubResource( 114 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=375]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 155 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=376]
+material = SubResource( 375 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=377]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 177 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=378]
+material = SubResource( 377 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=379]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 157 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=380]
+material = SubResource( 379 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=381]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 159 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=382]
+material = SubResource( 381 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=383]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 176 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=384]
+material = SubResource( 383 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=385]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 156 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=386]
+material = SubResource( 385 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=387]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 171 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=388]
+material = SubResource( 387 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=389]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/texture_albedo = ExtResource( 153 )
+shader_param/base_palette = ExtResource( 82 )
+
+[sub_resource type="CubeMesh" id=390]
+material = SubResource( 389 )
+size = Vector3( 1, 1, 1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
+mesh = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1 )
+mesh = SubResource( 7 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -2 )
+mesh = SubResource( 9 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -3 )
+mesh = SubResource( 11 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -4 )
+mesh = SubResource( 13 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -5 )
+mesh = SubResource( 15 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -6 )
+mesh = SubResource( 17 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolid8" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -7 )
+mesh = SubResource( 19 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, 0 )
+mesh = SubResource( 21 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopLeft" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0 )
+mesh = SubResource( 23 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopLeft2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -1 )
+mesh = SubResource( 25 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopRight" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, 0 )
+mesh = SubResource( 27 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTopRight2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, -1 )
+mesh = SubResource( 29 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -1 )
+mesh = SubResource( 31 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -2 )
+mesh = SubResource( 33 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -3 )
+mesh = SubResource( 35 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -4 )
+mesh = SubResource( 37 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -5 )
+mesh = SubResource( 39 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, 1, -6 )
+mesh = SubResource( 41 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidTop8" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -7 )
+mesh = SubResource( 43 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, 0 )
+mesh = SubResource( 45 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -1 )
+mesh = SubResource( 47 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -2 )
+mesh = SubResource( 49 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -3 )
+mesh = SubResource( 51 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -4 )
+mesh = SubResource( 53 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -5 )
+mesh = SubResource( 55 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -6 )
+mesh = SubResource( 57 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot8" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -7 )
+mesh = SubResource( 59 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidBot9" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -8 )
+mesh = SubResource( 61 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, 0 )
+mesh = SubResource( 63 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -1 )
+mesh = SubResource( 65 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -2 )
+mesh = SubResource( 67 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -3 )
+mesh = SubResource( 69 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -4 )
+mesh = SubResource( 71 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -5 )
+mesh = SubResource( 73 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidRoof7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -6 )
+mesh = SubResource( 75 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, 0 )
+mesh = SubResource( 77 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -1 )
+mesh = SubResource( 79 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -2 )
+mesh = SubResource( 81 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -3 )
+mesh = SubResource( 83 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -4 )
+mesh = SubResource( 85 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BrickSolidCeil6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -5 )
+mesh = SubResource( 87 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="CloudSemisolidTop" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, 0 )
+mesh = SubResource( 89 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolidTop2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -1 )
+mesh = SubResource( 92 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop2/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolidTop3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -2 )
+mesh = SubResource( 94 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop3/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolidTop4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -3 )
+mesh = SubResource( 96 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop4/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+mesh = SubResource( 98 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolid"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolid2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -1 )
+mesh = SubResource( 100 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolid2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid2/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolid3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -2 )
+mesh = SubResource( 102 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolid3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid3/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="CloudSemisolid4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -3 )
+mesh = SubResource( 104 )
+
+[node name="StaticBody" type="StaticBody" parent="CloudSemisolid4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid4/StaticBody"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
+shape = SubResource( 90 )
+
+[node name="Spikes" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
+mesh = SubResource( 106 )
+
+[node name="StaticBody" type="StaticBody" parent="Spikes"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="Spikes" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes/Area"]
+shape = SubResource( 116 )
+
+[node name="Spikes2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -1 )
+mesh = SubResource( 109 )
+
+[node name="StaticBody" type="StaticBody" parent="Spikes2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes2/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="Spikes2" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes2/Area"]
+shape = SubResource( 116 )
+
+[node name="Spikes3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -2 )
+mesh = SubResource( 111 )
+
+[node name="StaticBody" type="StaticBody" parent="Spikes3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes3/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="Spikes3" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes3/Area"]
+shape = SubResource( 116 )
+
+[node name="Spikes4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -3 )
+mesh = SubResource( 113 )
+
+[node name="StaticBody" type="StaticBody" parent="Spikes4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes4/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="Spikes4" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes4/Area"]
+shape = SubResource( 116 )
+
+[node name="Spikes5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -4 )
+mesh = SubResource( 115 )
+
+[node name="StaticBody" type="StaticBody" parent="Spikes5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes5/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="Spikes5" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spikes5/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, 0 )
+generate_lightmap = false
+mesh = SubResource( 393 )
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="GlitchSpikes" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -1 )
+mesh = SubResource( 396 )
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="GlitchSpikes2" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -2 )
+mesh = SubResource( 399 )
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="GlitchSpikes3" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -3 )
+mesh = SubResource( 402 )
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="GlitchSpikes4" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/Area"]
+shape = SubResource( 116 )
+
+[node name="GlitchSpikes5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -4 )
+mesh = SubResource( 405 )
+
+[node name="StaticBody" type="StaticBody" parent="GlitchSpikes5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+shape = SubResource( 406 )
+
+[node name="Area" type="Area" parent="GlitchSpikes5" groups=["spikes"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/Area"]
+shape = SubResource( 116 )
+
+[node name="BrickSolid_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, 0 )
+mesh = SubResource( 131 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -1 )
+mesh = SubResource( 133 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid3_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -2 )
+mesh = SubResource( 135 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid3_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid4_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -3 )
+mesh = SubResource( 137 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid4_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid5_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -4 )
+mesh = SubResource( 139 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid5_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid6_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -5 )
+mesh = SubResource( 141 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid6_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid7_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -6 )
+mesh = SubResource( 143 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid7_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid8_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 0, -7 )
+mesh = SubResource( 145 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid8_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.99124, 1, -0.00270188 )
+mesh = SubResource( 147 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTopLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.97175, 1, 0 )
+mesh = SubResource( 149 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTopLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.97175, 1, -1 )
+mesh = SubResource( 151 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTopRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.97175, 1, 0 )
+mesh = SubResource( 153 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTopRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.97175, 1, -1 )
+mesh = SubResource( 155 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -1 )
+mesh = SubResource( 157 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop3_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -2 )
+mesh = SubResource( 159 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop4_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -3 )
+mesh = SubResource( 161 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop5_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -4 )
+mesh = SubResource( 163 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop6_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -5 )
+mesh = SubResource( 165 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop7_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 4.97175, 1, -6 )
+mesh = SubResource( 167 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidTop8_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97175, 1, -7 )
+mesh = SubResource( 169 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, 0 )
+mesh = SubResource( 171 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -1 )
+mesh = SubResource( 173 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot3_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -2 )
+mesh = SubResource( 175 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot4_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -3 )
+mesh = SubResource( 177 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot5_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -4 )
+mesh = SubResource( 179 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot6_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -5 )
+mesh = SubResource( 181 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot7_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -6 )
+mesh = SubResource( 183 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot8_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -7 )
+mesh = SubResource( 185 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidBot9_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -0.988725, -8 )
+mesh = SubResource( 187 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, 0 )
+mesh = SubResource( 189 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -1 )
+mesh = SubResource( 191 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof3_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -2 )
+mesh = SubResource( 193 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof4_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -3 )
+mesh = SubResource( 195 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof5_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -4 )
+mesh = SubResource( 197 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof6_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -5 )
+mesh = SubResource( 199 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidRoof7_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -1.98872, -6 )
+mesh = SubResource( 201 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, 0 )
+mesh = SubResource( 203 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, -1 )
+mesh = SubResource( 205 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil3_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, -2 )
+mesh = SubResource( 207 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil4_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, -3 )
+mesh = SubResource( 209 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil5_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, -4 )
+mesh = SubResource( 211 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolidCeil6_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.9943, -2.98872, -5 )
+mesh = SubResource( 213 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_green"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_green/StaticBody"]
+shape = SubResource( 130 )
+
+[node name="BrickSolid_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, 0 )
+mesh = SubResource( 252 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -1 )
+mesh = SubResource( 254 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid3_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -2 )
+mesh = SubResource( 256 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid3_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid4_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -3 )
+mesh = SubResource( 258 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid4_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid5_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -4 )
+mesh = SubResource( 260 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid5_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid6_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -5 )
+mesh = SubResource( 262 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid6_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid7_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -6 )
+mesh = SubResource( 264 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid7_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid8_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4.95764, -7 )
+mesh = SubResource( 266 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid8_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, 0 )
+mesh = SubResource( 268 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTopLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -3.95764, 0 )
+mesh = SubResource( 270 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTopLeft2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -3.95764, -1 )
+mesh = SubResource( 272 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTopRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -3.95764, 0 )
+mesh = SubResource( 274 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTopRight2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -3.95764, -1 )
+mesh = SubResource( 276 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -1 )
+mesh = SubResource( 278 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop3_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -2 )
+mesh = SubResource( 280 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop4_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -3 )
+mesh = SubResource( 282 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop5_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -4 )
+mesh = SubResource( 284 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop6_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -5 )
+mesh = SubResource( 286 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop7_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, -3.95764, -6 )
+mesh = SubResource( 288 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidTop8_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -3.95764, -7 )
+mesh = SubResource( 290 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, 0 )
+mesh = SubResource( 292 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -1 )
+mesh = SubResource( 294 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot3_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -2 )
+mesh = SubResource( 296 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot4_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -3 )
+mesh = SubResource( 298 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot5_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -4 )
+mesh = SubResource( 300 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot6_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -5 )
+mesh = SubResource( 302 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot7_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -6 )
+mesh = SubResource( 304 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot8_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -7 )
+mesh = SubResource( 306 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidBot9_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.94637, -8 )
+mesh = SubResource( 308 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, 0 )
+mesh = SubResource( 310 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -1 )
+mesh = SubResource( 312 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof3_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -2 )
+mesh = SubResource( 314 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof4_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -3 )
+mesh = SubResource( 316 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof5_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -4 )
+mesh = SubResource( 318 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof6_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -5 )
+mesh = SubResource( 320 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidRoof7_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.94636, -6 )
+mesh = SubResource( 322 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, 0 )
+mesh = SubResource( 324 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, -1 )
+mesh = SubResource( 326 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil3_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, -2 )
+mesh = SubResource( 328 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil4_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, -3 )
+mesh = SubResource( 330 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil5_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, -4 )
+mesh = SubResource( 332 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolidCeil6_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.94636, -5 )
+mesh = SubResource( 334 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_red"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_red/StaticBody"]
+shape = SubResource( 250 )
+
+[node name="BrickSolid_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, 0 )
+mesh = SubResource( 226 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -1 )
+mesh = SubResource( 227 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid3_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -2 )
+mesh = SubResource( 228 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid3_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid4_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -3 )
+mesh = SubResource( 229 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid4_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid5_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -4 )
+mesh = SubResource( 230 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid5_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid6_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -5 )
+mesh = SubResource( 231 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid6_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid7_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -6 )
+mesh = SubResource( 232 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid7_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolid8_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -4.9799, -7 )
+mesh = SubResource( 233 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolid8_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97003, -3.9799, -0.00270188 )
+mesh = SubResource( 234 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTopLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.95054, -3.9799, 0 )
+mesh = SubResource( 235 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTopLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.95054, -3.9799, -1 )
+mesh = SubResource( 236 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTopRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.95054, -3.9799, 0 )
+mesh = SubResource( 237 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTopRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.95054, -3.9799, -1 )
+mesh = SubResource( 238 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -1 )
+mesh = SubResource( 239 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop3_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -2 )
+mesh = SubResource( 240 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop4_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -3 )
+mesh = SubResource( 241 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop5_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -4 )
+mesh = SubResource( 242 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop6_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -5 )
+mesh = SubResource( 243 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop7_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 4.95054, -3.9799, -6 )
+mesh = SubResource( 244 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidTop8_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95054, -3.9799, -7 )
+mesh = SubResource( 245 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, 0 )
+mesh = SubResource( 246 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -1 )
+mesh = SubResource( 247 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot3_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -2 )
+mesh = SubResource( 248 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot4_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -3 )
+mesh = SubResource( 249 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot5_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -4 )
+mesh = SubResource( 358 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot6_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -5 )
+mesh = SubResource( 360 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot7_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -6 )
+mesh = SubResource( 362 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot8_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -7 )
+mesh = SubResource( 364 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidBot9_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -5.96862, -8 )
+mesh = SubResource( 366 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, 0 )
+mesh = SubResource( 368 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -1 )
+mesh = SubResource( 370 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof3_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -2 )
+mesh = SubResource( 372 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof4_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -3 )
+mesh = SubResource( 373 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof5_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -4 )
+mesh = SubResource( 374 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof6_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -5 )
+mesh = SubResource( 376 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidRoof7_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -6.96862, -6 )
+mesh = SubResource( 378 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, 0 )
+mesh = SubResource( 380 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, -1 )
+mesh = SubResource( 382 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil3_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, -2 )
+mesh = SubResource( 384 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil4_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, -3 )
+mesh = SubResource( 386 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil5_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, -4 )
+mesh = SubResource( 388 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_yellow/StaticBody"]
+shape = SubResource( 336 )
+
+[node name="BrickSolidCeil6_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.97309, -7.96862, -5 )
+mesh = SubResource( 390 )
+
+[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_yellow"]
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_yellow/StaticBody"]
+shape = SubResource( 336 )

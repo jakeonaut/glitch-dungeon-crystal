@@ -91,6 +91,15 @@ func setPosition():
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
+
+func setTextBoxPosition():
+  if not is_tiny:
+    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+      self.margin_top = 60
+      self.margin_bottom = 201
+    else:
+      self.margin_top = top_margin_start
+      self.margin_bottom = bot_margin_start
   
 var important_unpause_timer = 0
 var important_unpause_time_limit = 10
@@ -142,14 +151,6 @@ func _process(delta):
 
     if text_timer >= time_limit and text_next_index < len(text_final):
       appendNextTextCharacter()
-        
-  if not is_tiny:
-    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-      self.margin_top = 60
-      self.margin_bottom = 201
-    else:
-      self.margin_top = top_margin_start
-      self.margin_bottom = bot_margin_start
 
 func advanceToEndOfPhrase():
   while not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
@@ -201,6 +202,7 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
       
 func showTextbox():
+  setTextBoxPosition()
   has_preactivated = false
   focus_me = true
   if is_important:

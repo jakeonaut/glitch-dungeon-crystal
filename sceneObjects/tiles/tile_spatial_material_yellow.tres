@@ -1,0 +1,15 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/textures/tiles_tiny0000.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/palettesize = 16
+shader_param/base_palette = ExtResource( 3 )
+
+[resource]
+next_pass = SubResource( 1 )
+flags_unshaded = true
+albedo_texture = ExtResource( 2 )
