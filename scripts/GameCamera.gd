@@ -152,9 +152,6 @@ func _process(delta):
   realCamera.size = self.size
   # realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelCameraSize)
   # realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelCameraSize)   
-  
-  if start_applying_parallax and getLevelTiles().backgroundLevelTiles:
-    getLevelTiles().backgroundLevelTiles.applyParallax(realCamera.global_transform.origin.x)
 
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size

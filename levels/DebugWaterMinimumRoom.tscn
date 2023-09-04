@@ -52,9 +52,6 @@ mesh_library = ExtResource( 2 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -70,9 +67,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_clip_": 0
@@ -101,9 +95,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_clip_": 0
@@ -121,7 +112,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0.7, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
-grav = 0
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )

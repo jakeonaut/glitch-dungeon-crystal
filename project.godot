@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "SpriteMesh",
+"language": "GDScript",
+"path": "res://addons/sprite_mesh/sprite_mesh.gd"
+}, {
+"base": "MeshInstance",
+"class": "SpriteMeshInstance",
+"language": "GDScript",
+"path": "res://addons/sprite_mesh/sprite_mesh_instance.gd"
+}, {
 "base": "Reference",
 "class": "TempTimer",
 "language": "GDScript",
 "path": "res://scripts/autoload/TempTimer.gd"
 } ]
 _global_script_class_icons={
+"SpriteMesh": "res://addons/sprite_mesh/icons/sprite_mesh.png",
+"SpriteMeshInstance": "res://addons/sprite_mesh/icons/sprite_mesh_instance.png",
 "TempTimer": ""
 }
 
@@ -51,7 +63,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/sprite_mesh/plugin.cfg" )
 
 [importer_defaults]
 
