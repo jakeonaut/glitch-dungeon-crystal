@@ -64,11 +64,11 @@ func summonBubble():
 
   var bubble = bubbleRes.instance()
   level.add_child(bubble)
-  bubble.x_diff_max = 1
+  bubble.my_diff_max = 1
   bubble.global_transform.origin = self.global_transform.origin
   # bubble.global_transform.origin.x += x_diff_start
-  bubble.original_pos_x = bubble.global_transform.origin.x
-  bubble.target_pos_x = self.global_transform.origin.x + rand_range(-0.5, .5) # + x_diff_target
+  bubble.my_original_pos = bubble.global_transform.origin.x
+  bubble.my_target_pos = self.global_transform.origin.x + rand_range(-0.5, .5) # + x_diff_target
   # bubble.y_speed_start = rand_range(-2, -3)
   bubble.mySprite.remove_from_group("sprite")
   # bubble.setAsParent(self)

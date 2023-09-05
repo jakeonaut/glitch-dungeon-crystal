@@ -102,12 +102,12 @@ shader_param/base_palette = ExtResource( 11 )
 shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.8
 height = 1.8
+radius = 0.8
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 21, 13, 1 )
@@ -122,10 +122,41 @@ script = ExtResource( 1 )
 true_terminal_vel = 8
 grav = 30
 walk_speed = 10
+run_speed = null
+feather_glitch_walk_speed = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+swimming_walk_speed = null
 jump_force = 13
+invisible_jump_force = null
+slime_walk_time_limit = null
 sprite_offset_y = 0.125
+behavior_walking = null
+behavior_intermittent_walking = null
+behavior_jumping = null
+behavior_flip_on_land = null
+behavior_stop_on_land = null
+behavior_was_thrown = null
+behavior_thrower = null
+behavior_evolve = null
+behavior_fizzle_out_after_evolve = null
+behavior_mini_explore = null
+behavior_directional_bullet = null
+walk_direction = null
+is_particle = null
 modAmt = 0.0
+is_static_in_level = null
+smack_time_limit = null
+smack_recovery_time_limit = null
+evolution_time_limit = null
+time_influence = null
+y_div = null
 normal_offset = 0.3
+jump_time_limit = null
+air_time_limit = null
+is_static = null
+is_infected = null
+blow_bubble_horizontally = null
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )

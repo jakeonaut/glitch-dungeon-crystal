@@ -18,6 +18,7 @@ var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
 var original_material = null
+export var blow_bubble_horizontally = false
 
 onready var mushroomSprite = get_node("MushroomSprite") if has_node("MushroomSprite") else null
 onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
@@ -76,7 +77,7 @@ func _process(delta):
       spawn_timer += (delta*22)
       if spawn_timer >= spawn_time_limit or (is_touching_water and spawn_timer >= water_jump_time_limit):
           spawn_timer = 0
-          spawnABubble()
+          spawnABubble(blow_bubble_horizontally)
   else:
     spawn_timer = 0
     behavior_jumping = false

@@ -234,7 +234,6 @@ func _process(delta):
   processBroomLogic(delta)
   processBagLogic(delta)
   processMushroomLogic(delta)
-  # processBubbleLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -1002,34 +1001,6 @@ func tryClearFallthroughCollisionSolid():
   if interactionArea.prev_fallthrough_collision_area != null and \
      interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
-
-var bubbleSpawnTimer = 0
-var bubbleSpawnTimeLimit = 5
-
-func processBubbleLogic(delta):
-  if Input.is_action_pressed("sub_action_button"):
-    bubbleSpawnTimer += (delta * 22)
-    if bubbleSpawnTimer >= bubbleSpawnTimeLimit:
-      bubbleSpawnTimer = 0
-      summonBubble()
-  else:
-    bubbleSpawnTimer = 0
-
-func summonBubble():
-  var x_diff_start = 2
-  var x_diff_target = 5
-  if mySprite.flip_h:
-    x_diff_start *= -1
-    x_diff_target *= -1
-
-  var bubble = bubbleRes.instance()
-  level.add_child(bubble)
-  bubble.global_transform.origin = self.global_transform.origin
-  bubble.global_transform.origin.x += x_diff_start
-  bubble.original_pos_x = bubble.global_transform.origin.x
-  bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1) + x_diff_target
-  bubble.y_speed_start = rand_range(-2, -3)
-  bubble.setAsParent(self)
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
     for _i in range(num_clouds):

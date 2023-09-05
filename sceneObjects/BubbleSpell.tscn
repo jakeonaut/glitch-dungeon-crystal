@@ -15,8 +15,8 @@
 radius = 0.6
 
 [sub_resource type="CylinderShape" id=15]
-radius = 0.6
 height = 1.0
+radius = 0.6
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 5 )

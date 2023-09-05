@@ -85,6 +85,9 @@ func _ready():
     #if behavior_walking:
     #    mySprite.frame_delay = 0.2
     #    mySprite.updateBaseFrame(0, 1)
+    if walk_direction == null:
+        walk_direction = Vector2(1, 0) # ????????????????????? TODO(jaketrower): Why?
+
     if walk_direction.y != 0:
         jump_force = 3
         grav = 0
@@ -399,15 +402,28 @@ func playerActivationAreaPassiveActivate():
     am_i_really_in_range_of_player = true
 
 # TODO(jaketrower): Honestly just move these to GameMover...
-func spawnABubble():
+func spawnABubble(is_horizontal):
     var bubble = bubbleRes.instance()
     level.add_child(bubble)
+    bubble.is_horizontal = is_horizontal
     bubble.global_transform.origin = self.global_transform.origin
-    bubble.original_pos_x = self.global_transform.origin.x
-    bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1)
-    bubble.global_transform.origin.y += 1
+    if is_horizontal:
+        bubble.my_diff_max = 0.5
+        if mySprite.flip_h:
+            bubble.global_transform.origin.x -= 1
+            bubble.horizontal_direction = -1
+        else:
+            bubble.global_transform.origin.x += 1
+            bubble.horizontal_direction = 1
+        bubble.my_original_pos = self.global_transform.origin.y
+        bubble.my_target_pos = self.global_transform.origin.y + rand_range(-1, 1)
+    else:
+        bubble.my_original_pos = self.global_transform.origin.x
+        bubble.my_target_pos = self.global_transform.origin.x + rand_range(-1, 1)
+        bubble.global_transform.origin.y += 1
     bubble.setAsParent(self)
 
+# TODO(jaketrower): Honestly just move these to GameMover...
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     for _i in range(num_clouds):
         var newSmokeCloud = smokeCloudRes.instance()
