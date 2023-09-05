@@ -479,7 +479,7 @@ func _generate_model() -> void:
     return
 
   _generate_meshes()
-  _generate_material()
+  # _generate_material()
 
   generated_sprite_mesh.emit_changed()
 
