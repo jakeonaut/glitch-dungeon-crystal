@@ -16,7 +16,7 @@ func activateScript():
       return
       
     # TODO(jaketrower): check you don't already have it
-    global.memory["spellbookPage"].push_back(global.GlitchForm.FLOOR)
+    global.memory["spellbookPage"].push_front(global.GlitchForm.FLOOR)
     var page = get_node("../../..")
     page.queue_free()
     

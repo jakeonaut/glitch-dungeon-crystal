@@ -16,6 +16,7 @@ onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 onready var mushroomSprite = get_node("MushroomSprite")
+onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -71,6 +72,7 @@ func applyObeliskGlitch(glitch, only_visual = false):
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
+  # TODO(): actually respect spellCastPauseIndex
   var glitch_type = global.memory["spellbookPage"].pop_front()
   applyGlitch(glitch_type)
   applyObeliskGlitch(glitch_type)
@@ -78,19 +80,16 @@ func actuallyApplySpellbookGlitch():
   var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
   equipSlotSprite.frame = 6
     
-func applySpellbookGlitch():
-  if not global.memory.has("spellbookPage"):
+func applySpellbookGlitch(_spellCastPauseIndex):
+  if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
     return
   
-  if global.memory["spellbookPage"].size() > 0:
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    aniPlayer.play("broomSmackGlitch")
-    pauseInput = true
-    pauseAnimation = true
-  else:
-    noSpellSound.pitch_scale = 1.2
-    noSpellSound.play()
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("broomSmackGlitch")
+  # see actuallyApplySpellbookGlitch(), which is applied by this animation ^^
+  pauseInput = true
+  pauseAnimation = true
 
 func restoreGlitchAndMP():
   if global.memory["mp"] <= 0:
@@ -181,6 +180,11 @@ func isWalkingIntoWall():
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
+var pausingFromSpellCasting = false
+var tryPauseFromSpellCasting = false
+var spellCastPauseIndex = 0
+var spellCastPauseTimer = 0
+var spellCastPauseTimeLimit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
@@ -190,6 +194,9 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
+
+  if global.isPauseMenuOpen:
+    return
 
   # if Input.is_action_pressed("sub_action_button") and on_ground:
   #   mySprite.flip_h = broom_flip_h
@@ -224,12 +231,46 @@ func _process(delta):
     return
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
-  if global.pauseGame or global.pauseMoveInput:
+  spellbookGlitchSprite.visible = pausingFromSpellCasting
+  if pausingFromSpellCasting:
+    # TODO(allow pressing arrow keys to select spellbookIndex)
+    if Input.is_action_just_pressed("ui_left"):
+      spellCastPauseIndex -= 1
+      if spellCastPauseIndex < 0: spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
+    elif Input.is_action_just_pressed("ui_right"):
+      spellCastPauseIndex += 1
+      if spellCastPauseIndex >= global.memory["spellbookPage"].size(): spellCastPauseIndex = 0
+
+    if Input.is_action_just_released("alt_action_button"):
+      global.pauseGame = false
+      # TODO(allow pressing arrow keys to select spellbookIndex)
+      applySpellbookGlitch(spellCastPauseIndex)
+      pausingFromSpellCasting = false
+  elif global.pauseGame or global.pauseMoveInput:
     if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
       global.activeInteractor.interact()
     return
-  if not pauseAnimation and global.memory["broom"] and Input.is_action_just_pressed("alt_action_button"):
-    applySpellbookGlitch()
+
+  if (not pauseAnimation or aniPlayer.assigned_animation == "broomSmackGlitch") and \
+     Input.is_action_just_pressed("alt_action_button") and global.memory.has("spellbookPage"):
+    if not global.memory["broom"] or global.memory["spellbookPage"].size() == 0:
+      noSpellSound.pitch_scale = 1.2
+      noSpellSound.play()
+    else:
+      tryPauseFromSpellCasting = true
+      spellCastPauseIndex = 0
+  elif tryPauseFromSpellCasting:
+    if Input.is_action_pressed("alt_action_button") and not global.activeInteractor:
+      spellCastPauseTimer += (delta*22)
+      if spellCastPauseTimer >= spellCastPauseTimeLimit:
+        pausingFromSpellCasting = true
+        global.pauseGame = true
+        tryPauseFromSpellCasting = false
+        spellCastPauseTimer = 0
+    else:
+      applySpellbookGlitch(spellCastPauseIndex)
+      tryPauseFromSpellCasting = false
+      spellCastPauseTimer = 0
   
   processBroomLogic(delta)
   processBagLogic(delta)
