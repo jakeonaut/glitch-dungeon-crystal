@@ -120,13 +120,12 @@ func _process(delta):
 func shouldIBeActive():
   if getPlayer().glitch_form == my_glitch_form:
     return false
+  elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
+    return false
   elif global.memory["mp"] == 0:
     return true
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
     return true
-  # TODO(jaketrower):... why
-  elif global.memory["spellbookPage"].has(my_glitch_form):
-    return false
   else:
     return true
 
@@ -173,7 +172,7 @@ func passiveActivate(_delta, _is_player):
     getLevelTiles().unrandomizeAllTiles()
     musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
   else:
-    getPlayer().applyObeliskGlitch(my_glitch_form, false)
+    getPlayer().applyObeliskGlitch(my_glitch_form)
     level.player.glitchTickle()
     # if level.player.glitch_death_timer == 0:
     #   level.player.glitch_death_timer = 5

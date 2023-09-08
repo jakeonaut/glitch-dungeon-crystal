@@ -67,15 +67,18 @@ func _ready():
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
-func applyObeliskGlitch(glitch, only_visual = false):
-  applyGlitch(glitch, only_visual)
+func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
+  applyGlitch(glitch, false)
+  if add_spell_to_grimoire and global.memory.has("spellbookPage"):
+    if not global.memory["spellbookPage"].has(glitch):
+      global.memory["spellbookPage"].push_back(glitch)
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
   # TODO(): actually respect spellCastPauseIndex
   var glitch_type = global.memory["spellbookPage"].pop_front()
   applyGlitch(glitch_type)
-  applyObeliskGlitch(glitch_type)
+  applyObeliskGlitch(glitch_type, false)
   global.memory["spellbookPage"].push_back(glitch_type)
   var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
   equipSlotSprite.frame = 6
@@ -202,6 +205,12 @@ func _process(delta):
   #   mySprite.flip_h = broom_flip_h
   # else:
   #   broom_flip_h = mySprite.flip_h
+
+  if aniPlayer.assigned_animation == "broomSmackGlitch":
+    linear_velocity = Vector3(0, 0, 0)
+    lv = linear_velocity
+    vv = 0
+    hv = 0
 
   if returning_to_save_point == 1:
     linear_velocity = Vector3(0, 0, 0)
@@ -553,8 +562,8 @@ func nullify():
     mySprite.get_material_override().set_shader_param("opacity", 1.0)
     self.applyGlitch(global.GlitchForm.NORMAL, true)
     self.can_cast_spell_timer = 0
-    # if global.memory.has("spellbookPage"):
-    #     global.memory["spellbookPage"] = []
+    if global.memory.has("spellbookPage"):
+      global.memory["spellbookPage"] = []
 
 func getMushroomInfected():
   if is_mushroom_infected:
