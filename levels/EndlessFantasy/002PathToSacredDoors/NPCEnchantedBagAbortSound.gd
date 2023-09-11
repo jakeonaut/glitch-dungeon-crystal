@@ -12,7 +12,3 @@ func activateScript():
     sprite3DBag.visible = false
     global.memory["max_hp"] = 2
     global.memory["hp"] = 2
-    level.player.textContainer.bbText = "oh! thank you kizzy\nBAG should come in handy"
-    level.player.textContainer.setVars()
-    level.player.textBox.tinify()
-    level.player.textBox.interact()
