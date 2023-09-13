@@ -5,6 +5,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var page = get_node("../../..")
 func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
@@ -15,7 +16,6 @@ func activateScript():
       
     # TODO(jaketrower): check you don't already have it
     global.memory["spellbookPage"].push_front(global.GlitchForm.FEATHER)
-    var page = get_node("../../..")
     page.queue_free()
     
 

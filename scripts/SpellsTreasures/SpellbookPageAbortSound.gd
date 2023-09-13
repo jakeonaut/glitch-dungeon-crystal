@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
   pass
 
+onready var spellbookPage = get_node("../../..")
 func activateScript():
-  var spellbookPage = get_node("../../..")
   spellbookPage.mySprite.visible = false
   spellbookPage.okay_im_done = true
   

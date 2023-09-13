@@ -5,6 +5,8 @@ var target_y = -9999
 var fade_out_opacity = false
 var curr_opacity = .5
 var opacity_fade_rate = 2
+onready var cleanGlitchSound = get_node("CleanGlitchSound")
+
 func _ready():
 
     var randint = randi() % 4

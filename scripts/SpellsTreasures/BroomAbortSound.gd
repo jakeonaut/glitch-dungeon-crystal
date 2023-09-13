@@ -5,9 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var broom = get_node("../../..")
 func activateScript():
-    var broom = get_node("../../..")
-    
     global.pauseGame = false
     global.pauseMoveInput = false
     var aniPlayer = level.player.get_node("AnimationPlayer")

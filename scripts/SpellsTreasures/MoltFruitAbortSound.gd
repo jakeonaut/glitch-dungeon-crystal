@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var molt_fruit = get_node("../../..")
 func activateScript():
-    var molt_fruit = get_node("../../..")
     molt_fruit.visible = false
     molt_fruit.is_active = false
     molt_fruit.being_collected = false

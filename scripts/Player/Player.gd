@@ -746,7 +746,7 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
     if can_smack_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
       if can_smack_npc == null:
-        can_smack_npc = global.activeInteractor.get_node("../..")
+        can_smack_npc = global.activeInteractor.textboxParent
       summonedBroom.has_hit_npc = can_smack_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()

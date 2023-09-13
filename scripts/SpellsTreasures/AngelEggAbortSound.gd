@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var egg = get_node("../../..")
 func activateScript():
-    var egg = get_node("../../..")
     global.pauseGame = false
     global.pauseMoveInput = false
     level.spawnAngelTadpole(egg.global_transform.origin)
