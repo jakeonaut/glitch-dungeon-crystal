@@ -51,7 +51,7 @@ func _ready():
     randomizeTargetPos()
     if initially_fly_up:
         bubble_speed = -rand_range(1.925, 3.8)
-    mySprite.material_override = mySprite.material_override.duplicate()
+    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

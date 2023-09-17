@@ -15,8 +15,8 @@ func _ready():
     if randint == 3:
         flip_h = true
         flip_v = true
-    var material = get_material_override().duplicate()
-    set_material_override(material)
+    # TODO(jaketrower): testing performance # var material = get_material_override().duplicate()
+    # TODO(jaketrower): testing performance # set_material_override(material)
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

@@ -5,8 +5,8 @@ var sparkle_fade_time_limit = 1
 var multiplier = 1
 
 func _ready():
-    var material = get_material_override().duplicate()
-    set_material_override(material)
+    # TODO(jaketrower): testing performance # var material = get_material_override().duplicate()
+    # TODO(jaketrower): testing performance # set_material_override(material)
     multiplier = rand_range(0, 5)
     sparkle_fade_time_limit = rand_range(1, 2)
 

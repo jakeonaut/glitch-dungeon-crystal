@@ -15,8 +15,9 @@ export var flip_initial_direction = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
-    heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
-    myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+    # TODO(jaketrower): testing performance # 
+    # heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
+    # myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
 
     behavior_intermittent_walking = true
     
@@ -107,9 +108,10 @@ func ouchies(broom_origin):
     mySprite.frame_delay = 0.1
     mySprite.max_frames = 4
     mySprite.should_soft_fizzle_out = true
-    var new_material = mySprite.get_material_override().duplicate()
-    new_material.set_shader_param("texture_albedo", altGlitchEnemySheet)
-    mySprite.set_material_override(new_material)
+    # TODO(jaketrower): testing performance # 
+    # var new_material = mySprite.get_material_override().duplicate()
+    # new_material.set_shader_param("texture_albedo", altGlitchEnemySheet)
+    # mySprite.set_material_override(new_material)
     myOtherSprite.set_script(null)
     
     dieAniPlayer.stop()

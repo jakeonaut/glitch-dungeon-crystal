@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CherryCarcass.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://sceneObjects/GlitchParticleBurst.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=8]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=15]
 [ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=16]
@@ -43,7 +44,7 @@ shader_param/palette_cycle_speed = 2.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 16 )
+shader_param/texture_albedo = ExtResource( 7 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 1 )
 
@@ -159,6 +160,7 @@ should_animate = false
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1058, 0.250193, 0 )
+visible = false
 material_override = SubResource( 11 )
 pixel_size = 0.125
 texture = ExtResource( 17 )

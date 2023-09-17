@@ -15,7 +15,7 @@ func _ready():
         queue_free()
 
     # ._ready() implicit
-    myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+    # TODO(jaketrower): testing performance # myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
     
     should_only_do_middle_sensor = true
     if is_wall_snail:

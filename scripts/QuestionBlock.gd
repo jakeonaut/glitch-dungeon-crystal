@@ -51,10 +51,12 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
       newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
       play_sound = false
     if is_glitchy:
-      var new_material = newSmokeCloud.get_material_override().duplicate()
-      new_material.set_shader_param("enable_glitch", "true")
-      new_material.set_shader_param("target_palette", global.weird_base_palette)
-      newSmokeCloud.set_material_override(new_material.duplicate())
+      pass
+      # TODO(jaketrower): testing performance # 
+      # var new_material = newSmokeCloud.get_material_override().duplicate()
+      # new_material.set_shader_param("enable_glitch", "true")
+      # new_material.set_shader_param("target_palette", global.weird_base_palette)
+      # newSmokeCloud.set_material_override(new_material.duplicate())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -32,8 +32,8 @@ func _ready():
         get_node("HaloSprite").visible = false
         get_node("WingsSprite").visible = false
     
-    mySprite.material_override = mySprite.material_override.duplicate() # make unique
-    myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
+    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate() # make unique
+    # TODO(jaketrower): testing performance # myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
 
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")

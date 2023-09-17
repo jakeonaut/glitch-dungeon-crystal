@@ -39,7 +39,8 @@ func _ready():
         should_duplicate_material = true
 
     if should_duplicate_material and material_override:
-        material_override = material_override.duplicate()
+        pass
+        # TODO(jaketrower): testing performance # material_override = material_override.duplicate()
     
 export var automatically_change_color = true
 func changeSpriteColorPaletteToLevelPalette():

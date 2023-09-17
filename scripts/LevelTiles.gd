@@ -387,10 +387,11 @@ func summonSmokeClouds(coords, num_clouds):
       newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
       play_sound = false
     
-    var new_material = newSmokeCloud.get_material_override().duplicate()
-    new_material.set_shader_param("enable_glitch", "true")
-    new_material.set_shader_param("target_palette", global.weird_base_palette)
-    newSmokeCloud.set_material_override(new_material.duplicate())
+    # TODO(jaketrower): testing performance # 
+    # var new_material = newSmokeCloud.get_material_override().duplicate()
+    # new_material.set_shader_param("enable_glitch", "true")
+    # new_material.set_shader_param("target_palette", global.weird_base_palette)
+    # newSmokeCloud.set_material_override(new_material.duplicate())
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)

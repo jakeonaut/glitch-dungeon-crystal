@@ -9,7 +9,7 @@ var is_crumbling = false
 
 
 func _ready():
-    mySprite.material_override = mySprite.material_override.duplicate()
+    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
     should_collide_ceil = false
     should_collide_horizontally = false
 

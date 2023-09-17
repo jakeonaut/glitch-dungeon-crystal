@@ -50,7 +50,7 @@ func getGameCamera():
 
 func _ready():
   appearSound.play()
-  mySprite.material_override = mySprite.material_override.duplicate()
+  # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
   aniPlayer.queue("bubbleGrow")
   aniPlayer.queue("bubble")
   

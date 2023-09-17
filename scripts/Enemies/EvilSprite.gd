@@ -97,11 +97,12 @@ func resetStateToIdle():
         mySprite.frame_delay = 1.4
         mySprite.should_randomize_frame_delay = true
         glitchSprite.visible = false
-        var my_material = mySprite.get_material_override().duplicate()
-        if my_material is ShaderMaterial:
-            my_material.set_shader_param("enable_glitch", false)
-            my_material.set_shader_param("enable_palette_cycle", false)
-        mySprite.set_material_override(my_material)
+        # TODO(jaketrower): testing performance # 
+        # var my_material = mySprite.get_material_override().duplicate()
+        # if my_material is ShaderMaterial:
+        #     my_material.set_shader_param("enable_glitch", false)
+        #     my_material.set_shader_param("enable_palette_cycle", false)
+        # mySprite.set_material_override(my_material)
 
 func _process(delta):
     # ._process(delta) implicit

@@ -7,7 +7,7 @@ var where_was_i = false
 func _ready():
     set_process(true)
     
-    mySprite.material_override = mySprite.material_override.duplicate()
+    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
     mySprite.changeSpriteColorPalette(level.current_sprite_palette)
 
     if randi() % 2 == 0:

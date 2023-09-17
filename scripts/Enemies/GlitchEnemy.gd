@@ -107,7 +107,7 @@ func _ready():
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
 
-    mySprite.material_override = mySprite.material_override.duplicate()
+    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
 
 func shouldIDoCollisions():
     should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
@@ -420,10 +420,12 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
             play_sound = false
         if is_glitchy:
-            var new_material = newSmokeCloud.get_material_override().duplicate()
-            new_material.set_shader_param("enable_glitch", "true")
-            new_material.set_shader_param("target_palette", global.weird_base_palette)
-            newSmokeCloud.set_material_override(new_material.duplicate())
+            pass
+            # TODO(jaketrower): testing performance # 
+            # var new_material = newSmokeCloud.get_material_override().duplicate()
+            # new_material.set_shader_param("enable_glitch", "true")
+            # new_material.set_shader_param("target_palette", global.weird_base_palette)
+            # newSmokeCloud.set_material_override(new_material.duplicate())
 
 func setGlobalMemoryOfHasBeenDefeated():
     global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)

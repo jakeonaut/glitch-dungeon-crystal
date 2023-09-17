@@ -55,7 +55,7 @@ func _ready():
   set_process(true)
   set_physics_process(true)
 
-  mySprite.material_override = mySprite.material_override.duplicate()
+  # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
   mySprite.should_randomize_frame_delay = false
   if is_wiggling_fast:
     mySprite.frame_delay = 0.2

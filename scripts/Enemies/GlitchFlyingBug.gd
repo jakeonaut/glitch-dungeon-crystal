@@ -21,10 +21,11 @@ func _ready():
 
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
-    bugHead.myOtherSprite.set_material_override(bugHead.myOtherSprite.get_material_override().duplicate())
-    body1.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override().duplicate())
-    body1.get_node("WingSprite1").set_material_override(body1.get_node("WingSprite1").get_material_override().duplicate())
-    body1.get_node("WingSprite2").set_material_override(body1.get_node("WingSprite2").get_material_override().duplicate())
+    # TODO(jaketrower): testing performance # 
+    # bugHead.myOtherSprite.set_material_override(bugHead.myOtherSprite.get_material_override().duplicate())
+    # body1.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override().duplicate())
+    # body1.get_node("WingSprite1").set_material_override(body1.get_node("WingSprite1").get_material_override().duplicate())
+    # body1.get_node("WingSprite2").set_material_override(body1.get_node("WingSprite2").get_material_override().duplicate())
     # body2.myOtherSprite.set_material_override(body1.myOtherSprite.get_material_override())
 
     bugHead.should_collide_floor = false
