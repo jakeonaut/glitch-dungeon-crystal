@@ -189,8 +189,6 @@ script = ExtResource( 5 )
 tileset_type = 6
 display_title = "ghost forest"
 
-[node name="UILayer" parent="Viewport/level" instance=ExtResource( 9 )]
-
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 
 [node name="BackgroundControl" type="Control" parent="Viewport/level"]
@@ -432,6 +430,8 @@ __meta__ = {
 }
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 12 )]
+
+[node name="UILayer" parent="." instance=ExtResource( 9 )]
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

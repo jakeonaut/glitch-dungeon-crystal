@@ -264,6 +264,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     getPlayer().aniPlayer.stop()
     getPlayer().aniPlayer.clear_queue()
     getPlayer().aniPlayer.play("enterDoor")
+  getPlayer().pauseSelf = true
 
   global.activeInteractor = null
 
@@ -278,6 +279,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("stand")
+      getPlayer().pauseSelf = false
     return
 
   if start_of_game:

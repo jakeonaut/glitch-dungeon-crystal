@@ -7,10 +7,8 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=8]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sceneObjects/tiles/grey_background_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/CrystalGeode.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=14]
@@ -807,11 +805,11 @@ custom_fonts/normal_font = SubResource( 9 )
 bbcode_text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y	"
+    global_transform.origin.y += lv.y "
 text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y	"
+    global_transform.origin.y += lv.y "
 script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -853,20 +851,6 @@ data = {
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_clip_": 0
-}
-
-[node name="BackgroundLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
-mesh_library = ExtResource( 11 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-data = {
-"cells": PoolIntArray( 196633, 65534, 0, 262143, 65534, 0, 262153, 65534, 0, 262178, 65534, 0, 327683, 65534, 0, 327691, 65534, 0, 327703, 65534, 0, -1638399, 65534, 0, -1638395, 65534, 0, -1638390, 65534, 0, -1638382, 65534, 0, -1638365, 65534, 0, -1572863, 65534, 0, -1572858, 65534, 0, -1572853, 65534, 0, -1572846, 65534, 0, -1572833, 65534, 0, -1572829, 65534, 0, -1507326, 65534, 0, -1507323, 65534, 0, -1507318, 65534, 0, -1507309, 65534, 0, -1507297, 65534, 0, -1507292, 65534, 0, -1441790, 65534, 0, -1441773, 65534, 0, -1441760, 65534, 0, -1441756, 65534, 0, -1376255, 65534, 0, -1376238, 65534, 0, -1376233, 65534, 0, -1376232, 65534, 0, -1376231, 65534, 0, -1376230, 65534, 0, -1376224, 65534, 0, -1376221, 65534, 0, -1310719, 65534, 0, -1310702, 65534, 0, -1310698, 65534, 0, -1310697, 65534, 0, -1310696, 65534, 0, -1310695, 65534, 0, -1310694, 65534, 0, -1310693, 65534, 0, -1310689, 65534, 0, -1310685, 65534, 0, -1245162, 65534, 0, -1245161, 65534, 0, -1245160, 65534, 0, -1245159, 65534, 0, -1245158, 65534, 0, -1245157, 65534, 0, -1245153, 65534, 0, -1179625, 65534, 0, -1179624, 65534, 0, -1179623, 65534, 0, -1179622, 65534, 0, -1114088, 65534, 0, -1114087, 65534, 0, -983035, 65534, 0, -983034, 65534, 0, -917499, 65534, 0, -917498, 65534, 0, -655340, 65534, 0, -655339, 65534, 0, -589811, 65534, 0, -589810, 65534, 0, -589804, 65534, 0, -589803, 65534, 0, -524282, 65534, 0, -524281, 65534, 0, -524275, 65534, 0, -524274, 65534, 0, -458746, 65534, 0, -458745, 65534, 0, -393188, 65534, 0, -327652, 65534, 0, -262115, 65534, 0, -196579, 65534, 0, -131044, 65534, 0, -65508, 65534, 0 )
-}
-script = ExtResource( 8 )
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, -2 )
 }
 
 [node name="Door6" parent="Viewport/level" instance=ExtResource( 9 )]

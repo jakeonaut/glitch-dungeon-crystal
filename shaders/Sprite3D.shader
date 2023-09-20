@@ -86,7 +86,7 @@ void fragment() {
         4, 12, 2, 10,
         16, 8, 14, 6
     };
-    vec4 incolor = texture(texture_albedo, UV);
+    vec4 incolor = texture(texture_albedo, UV); // COLOR
     float alpha = incolor.a * opacity; 
     if (alpha == 0.0) {
       incolor = vec4(4.0/256.0, 4.0/256.0, 4.0/256.0, 1.0);

@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
   pass
 
+onready var spellbookPage = get_node("../../..")
 func activateScript():
-  var spellbookPage = get_node("../../..")
   spellbookPage.mySprite.visible = false
   spellbookPage.okay_im_done = true
   
@@ -19,6 +19,8 @@ func activateScript():
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
+  if level.player.glitch_form != global.GlitchForm.NORMAL:
+    level.player.applyObeliskGlitch(level.player.glitch_form)
 
   # IFNDEF SpellbookIntroLevelScript.gd
   # if level.has_node("NPC5"):

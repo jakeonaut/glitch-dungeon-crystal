@@ -151,7 +151,7 @@ func getSmacked(_broom_origin):
   is_smacked = true
   did_i_get_smacked = true
 
-  if global.activeInteractor == null and level.player.mySprite.flip_h == which_side_is_player_on:
+  if global.activeInteractor == null and (level.player.mySprite.flip_h == which_side_is_player_on or not global.memory["broom"]):
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):

@@ -5,21 +5,23 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var appearSound = get_node("AppearSound")
 onready var popSound1 = get_node("PopSound")
 onready var popSound2 = get_node("PopSound2")
-var original_pos_x = null
-var target_pos_x = null
+var my_original_pos = null
+var my_target_pos = null
 var opacity = 0.5
 var target_opacity = 1.0
 var didja_get_me = false
-var y_speed = 2
 export var pop_from_distance = true
+export var is_horizontal = false
+var horizontal_direction = 1
 var pop_distance = 30
 var pop_timer = 0
 var pop_time_limit = 45
 var my_parent = null
-var y_speed_start = null
-var y_speed_max = null
-var y_acc = 5
-var has_set_origin_x = false
+var my_speed = 2
+var my_speed_start = null
+var my_speed_max = null
+var my_acc = 5
+var has_set_origin = false
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -54,19 +56,22 @@ func _ready():
   aniPlayer.queue("bubbleGrow")
   aniPlayer.queue("bubble")
   
-  original_pos_x = global_transform.origin.x
-  randomizeTargetPos()
-  if y_speed_start:
-    y_speed = y_speed_start
-    y_speed_max = rand_range(2, 3.5)
+  if is_horizontal:
+    my_original_pos = global_transform.origin.y
   else:
-    y_speed = rand_range(2, 3.5)
+    my_original_pos = global_transform.origin.x
+  randomizeTargetPos()
+  if my_speed_start:
+    my_speed = my_speed_start
+    my_speed_max = rand_range(2, 3.5)
+  else:
+    my_speed = rand_range(2, 3.5)
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if y_speed_max != null and y_speed < y_speed_max:
-    y_speed += y_acc * delta
+  if my_speed_max != null and my_speed < my_speed_max:
+    my_speed += my_acc * delta
   
   if didja_get_me:
     if not mySprite.visible:
@@ -75,14 +80,25 @@ func _process(delta):
     pop_timer += (delta*22)
     if pop_timer >= pop_time_limit:
       bubbleStartPop()
-    global_transform.origin.y += delta*y_speed
 
-    global_transform.origin.x = global_transform.origin.x + (target_pos_x - global_transform.origin.x) * (delta*5)
-    if stepify(global_transform.origin.x, 0.1) == stepify(target_pos_x, 0.1):
-      if y_speed_max != null and not has_set_origin_x:
-        original_pos_x = global_transform.origin.x
-        has_set_origin_x = true
-      randomizeTargetPos()
+    if is_horizontal:
+      global_transform.origin.x += delta*my_speed*horizontal_direction
+
+      global_transform.origin.y = global_transform.origin.y + (my_target_pos - global_transform.origin.y) * (delta*5)
+      if stepify(global_transform.origin.y, 0.1) == stepify(my_target_pos, 0.1):
+        if my_speed_max != null and not has_set_origin:
+          my_original_pos = global_transform.origin.y
+          has_set_origin = true
+        randomizeTargetPos()
+    else:
+      global_transform.origin.y += delta*my_speed
+
+      global_transform.origin.x = global_transform.origin.x + (my_target_pos - global_transform.origin.x) * (delta*5)
+      if stepify(global_transform.origin.x, 0.1) == stepify(my_target_pos, 0.1):
+        if my_speed_max != null and not has_set_origin:
+          my_original_pos = global_transform.origin.x
+          has_set_origin = true
+        randomizeTargetPos()
 
     opacity = opacity + (target_opacity - opacity) * (delta * 5)
     mySprite.material_override.set_shader_param("opacity", opacity)
@@ -135,9 +151,9 @@ func touchCorporealBody(body):
   if body != my_parent:
     bubbleStartPop()
 
-var x_diff_max = 2
+var my_diff_max = 2
 func randomizeTargetPos():
-  target_pos_x = original_pos_x + rand_range(-x_diff_max, x_diff_max)
+  my_target_pos = my_original_pos + rand_range(-my_diff_max, my_diff_max)
 
 func bulletTryDieToSolids():
   for x in range(global_transform.origin.x - 2, global_transform.origin.x + 2):

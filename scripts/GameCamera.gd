@@ -105,7 +105,7 @@ func _process(delta):
     if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
-    actual_target = weakref(global.activeInteractor.get_node("../.."))
+    actual_target = weakref(global.activeInteractor.textboxParent)
     set_target(actual_target.get_ref())
     # interpolation = A + (B - A) * t
     self.size = self.size + (zoomed_size - self.size) * (delta*5)
@@ -152,9 +152,6 @@ func _process(delta):
   realCamera.size = self.size
   # realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelCameraSize)
   # realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelCameraSize)   
-  
-  if start_applying_parallax and getLevelTiles().backgroundLevelTiles:
-    getLevelTiles().backgroundLevelTiles.applyParallax(realCamera.global_transform.origin.x)
 
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size

@@ -25,8 +25,8 @@ func activateScript():
         global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 func doActivateScriptStuff():
-    NPC3.get_node("NPC TextBox").bbText = " truthfully, i have nothing\nmore to say"
-    NPC3.get_node("NPC TextBox").setVars()
+    NPC3.textBoxContainer.bbText = " truthfully, i have nothing\nmore to say"
+    NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self.name, false)
     has_talked = true
     
@@ -47,8 +47,8 @@ func summonSmokeClouds(npc, num_clouds, play_sound = false, is_glitchy = false):
         newSmokeCloud.global_transform.origin.y = npc.global_transform.origin.y + rand_range(1, 2)
         newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
         if play_sound:
-            newSmokeCloud.get_node("CleanGlitchSound").play()
-            newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+            newSmokeCloud.cleanGlitchSound.play()
+            newSmokeCloud.cleanGlitchSound.pitch_scale = rand_range(0.8, 1.2)
             play_sound = false
         if is_glitchy:
             var new_material = newSmokeCloud.get_material_override().duplicate()

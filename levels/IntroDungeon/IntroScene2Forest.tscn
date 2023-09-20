@@ -20,8 +20,6 @@
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=20]
-[ext_resource path="res://scripts/BackgroundLevelTiles.gd" type="Script" id=21]
-[ext_resource path="res://sceneObjects/tiles/grey_background_tiles.tres" type="MeshLibrary" id=22]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Buggies/WallSnail.tscn" type="PackedScene" id=24]
 
@@ -81,20 +79,6 @@ data = {
 "cells": PoolIntArray( 196618, 0, 0, 327682, 0, 2, 524288, 0, 36, 589846, 0, 0, 851973, 0, 2 )
 }
 script = ExtResource( 7 )
-__meta__ = {
-"_editor_clip_": 0
-}
-
-[node name="BackgroundLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
-mesh_library = ExtResource( 22 )
-cell_size = Vector3( 1, 1, 1 )
-cell_octant_size = 4
-cell_center_z = false
-data = {
-"cells": PoolIntArray( 65539, 0, 0, 131076, 0, 0, 131078, 0, 0, 196611, 0, 0, 196615, 0, 0, 196617, 0, 0, 196646, 0, 0, 262150, 0, 0, 262154, 0, 0, 327689, 0, 0, 327704, 0, 0, 327718, 0, 0, 393221, 0, 0, 393239, 0, 0, 393241, 0, 0, 393244, 0, 0, 393251, 0, 0, 393254, 0, 0, 458756, 0, 0, 458779, 0, 0, 458781, 0, 0, 458786, 0, 0, 458788, 0, 0, 524294, 0, 0, 524320, 0, 0, 589855, 0, 0, 589857, 0, 0, 655367, 0, 0, 720902, 0, 0, 720904, 0, 0, 720925, 0, 0, 786448, 0, 0, 786460, 0, 0, 786462, 0, 0, 851983, 0, 0, 851985, 0, 0, 917523, 0, 0, 983054, 0, 0, 983058, 0, 0, 983060, 0, 0, 1048589, 0, 0, 1048591, 0, 0, 1179645, 0, 0, 1245180, 0, 0, 1245182, 0, 0, 1245192, 0, 0, 1310728, 0, 0, 1376263, 0, 0, 1376265, 0, 0, 1441800, 0, 0 )
-}
-script = ExtResource( 21 )
 __meta__ = {
 "_editor_clip_": 0
 }

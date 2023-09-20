@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var treasure = get_node("../../..")
 func activateScript():
-    var treasure = get_node("../../..")
     treasure.visible = false
     treasure.is_active = false
     treasure.being_collected = false

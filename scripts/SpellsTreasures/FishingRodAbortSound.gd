@@ -5,8 +5,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
     pass
 
+onready var fishingRod = get_node("../../..")
 func activateScript():
-    var fishingRod = get_node("../../..")
     fishingRod.visible = false
     fishingRod.is_active = false
     fishingRod.being_collected = false

@@ -352,12 +352,38 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -4.3, -4 )
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -5.3, -4 )
 
+[node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -5.3, -4 )
+
+[node name="WaterCube17" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -5.3, -4 )
+
+[node name="WaterCube12" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5.3, -4 )
+
+[node name="WaterCube13" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -5.3, -4 )
+
+[node name="WaterCube14" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -5.3, -4 )
+
+[node name="WaterCube15" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -5.3, -4 )
+
+[node name="WaterCube16" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -5.3, -4 )
+
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.1, 1, 0 )
+smack_time_limit = 10
+smack_recovery_time_limit = 11
 is_static = true
 
 [node name="Dragonfly5" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 2.4, -1 )
+
+[node name="Dragonfly9" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1, -1 )
 
 [node name="Dragonfly6" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3, 2.5, -1 )

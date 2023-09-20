@@ -8,7 +8,7 @@ func activateScript():
     textBox.text_final = "it's really nice up here"
     textBox.tinify()
     textBox.has_been_shown = false
-    get_node("../../..").jump_force = 2
+    textBox.textboxParent.jump_force = 2
 
 func isActive():
     # OVERRIDE ME... if you dare

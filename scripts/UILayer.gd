@@ -224,17 +224,21 @@ func _process(delta):
       get_node("EquipmentStatusRect/RichTextLabel").text = "swing BROOM"
 
   if global.memory.has("spellbookPage"):
-    var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-    if global.memory["spellbookPage"].size() <= 1 and (
-       global.memory["spellbookPage"].size() != 1 or getPlayer().glitch_form != global.GlitchForm.NORMAL):
-      equipSlotSprite.frame = 6
-    else:
-      var glitch = global.memory["spellbookPage"][0]
-      if glitch == global.GlitchForm.FLOOR: equipSlotSprite.frame = 0
-      elif glitch == global.GlitchForm.FEATHER: equipSlotSprite.frame = 14
-      elif glitch == global.GlitchForm.LADDER: equipSlotSprite.frame = 25
-      elif glitch == global.GlitchForm.INVISIBLE: equipSlotSprite.frame = 21
-      elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: equipSlotSprite.frame = 32
+    var spellbook = global.memory["spellbookPage"]
+    var currSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
+    var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3/EquipmentSlotSprite")
+    var spellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
+    setGlitchSprite(equipSlotSprite, spellPage)
+    setGlitchSprite(currSlotSprite, getPlayer().glitch_form)
+
+func setGlitchSprite(sprite, glitch):
+  # TODO(jaketrower): dedupe (1) with Player.gd
+  if glitch == global.GlitchForm.NORMAL: sprite.frame = 5
+  elif glitch == global.GlitchForm.FLOOR: sprite.frame = 0
+  elif glitch == global.GlitchForm.FEATHER: sprite.frame = 14
+  elif glitch == global.GlitchForm.LADDER: sprite.frame = 25
+  elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 21
+  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 32
 
 onready var quitGameRect = get_node("QuitGameRect")
 onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")

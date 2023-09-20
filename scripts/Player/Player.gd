@@ -16,6 +16,7 @@ onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 onready var mushroomSprite = get_node("MushroomSprite")
+onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -66,31 +67,38 @@ func _ready():
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
-func applyObeliskGlitch(glitch, only_visual = false):
-  applyGlitch(glitch, only_visual)
+func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
+  applyGlitch(glitch, false)
+  if add_spell_to_grimoire and global.memory.has("spellbookPage"):
+    if not global.memory["spellbookPage"].has(glitch):
+      global.memory["spellbookPage"].push_back(glitch)
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
-  var glitch_type = global.memory["spellbookPage"].pop_front()
-  applyGlitch(glitch_type)
-  applyObeliskGlitch(glitch_type)
-  global.memory["spellbookPage"].push_back(glitch_type)
-  var equipSlotSprite = level.uiLayer.get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-  equipSlotSprite.frame = 6
-    
-func applySpellbookGlitch():
-  if not global.memory.has("spellbookPage"):
+  if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
     return
-  
-  if global.memory["spellbookPage"].size() > 0:
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    aniPlayer.play("broomSmackGlitch")
-    pauseInput = true
-    pauseAnimation = true
-  else:
-    noSpellSound.pitch_scale = 1.2
-    noSpellSound.play()
+  var new_spellbook = []
+  var old_spellbook = global.memory["spellbookPage"]
+  var glitch_type = old_spellbook[spellCastPauseIndex]
+  var i = spellCastPauseIndex + 1
+  while new_spellbook.size() < old_spellbook.size():
+    if i >= old_spellbook.size():
+      i = 0
+    new_spellbook.append(old_spellbook[i])
+    i += 1
+  applyGlitch(glitch_type)
+  applyObeliskGlitch(glitch_type, false)
+  global.memory["spellbookPage"] = new_spellbook
+    
+func applySpellbookGlitch(_spellCastPauseIndex):
+  if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
+    return
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("broomSmackGlitch")
+  # see actuallyApplySpellbookGlitch(), which is applied by this animation ^^
+  # pauseInput = true
+  pauseAnimation = true
 
 func restoreGlitchAndMP():
   if global.memory["mp"] <= 0:
@@ -179,22 +187,36 @@ func isWalkingIntoWall():
   else:
     return .isWalkingIntoWall() # super
 
+func sayThis(message):
+  textBox.text_final = message
+  textBox.tinify()
+  textBox.interact()
+
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null or (aniPlayer.assigned_animation == "broomSmackGlitch" and aniPlayer.is_playing())
+  pauseInput = summonedBroom != null
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
 
+  if global.isPauseMenuOpen:
+    return
+
   # if Input.is_action_pressed("sub_action_button") and on_ground:
   #   mySprite.flip_h = broom_flip_h
   # else:
   #   broom_flip_h = mySprite.flip_h
+
+  if aniPlayer.assigned_animation == "broomSmackGlitch":
+    linear_velocity = Vector3(0, 0, 0)
+    lv = linear_velocity
+    vv = 0
+    hv = 0
 
   if returning_to_save_point == 1:
     linear_velocity = Vector3(0, 0, 0)
@@ -224,17 +246,10 @@ func _process(delta):
     return
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
-  if global.pauseGame or global.pauseMoveInput:
-    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
-      global.activeInteractor.interact()
-    return
-  if not pauseAnimation and global.memory["broom"] and Input.is_action_just_pressed("alt_action_button"):
-    applySpellbookGlitch()
-  
+  processCastingLogic(delta)
   processBroomLogic(delta)
   processBagLogic(delta)
   processMushroomLogic(delta)
-  # processBubbleLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -291,6 +306,73 @@ func unsmack():
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
   mySprite.material_override.set_shader_param("normal_offset", .02)
+
+var pausingFromSpellCasting = false
+var tryPauseFromSpellCasting = false
+var spellCastPauseIndex = 0
+var spellCastPauseTimer = 0
+var spellCastPauseTimeLimit = 0
+var num_spell_casts_used = 0
+var spellCastCounterResetTimer = 0
+var spellCastCounterResetTimeLimit = 30
+func processCastingLogic(delta):
+  spellbookGlitchSprite.visible = pausingFromSpellCasting
+  if pausingFromSpellCasting:
+    # TODO(allow pressing arrow keys to select spellbookIndex)
+    if Input.is_action_just_pressed("ui_left"):
+      spellCastPauseIndex -= 1
+      if spellCastPauseIndex < 0: spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
+    elif Input.is_action_just_pressed("ui_right"):
+      spellCastPauseIndex += 1
+      if spellCastPauseIndex >= global.memory["spellbookPage"].size(): spellCastPauseIndex = 0
+      # self.sayThis("walk")
+
+    var glitch = global.memory["spellbookPage"][spellCastPauseIndex]
+    # TODO(jaketrower): dedupe (1) with UILayer.gd
+    if glitch == global.GlitchForm.FLOOR: spellbookGlitchSprite.frame = 0
+    elif glitch == global.GlitchForm.FEATHER: spellbookGlitchSprite.frame = 14
+    elif glitch == global.GlitchForm.LADDER: spellbookGlitchSprite.frame = 25
+    elif glitch == global.GlitchForm.INVISIBLE: spellbookGlitchSprite.frame = 21
+    elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: spellbookGlitchSprite.frame = 32
+
+    if Input.is_action_just_released("alt_action_button"):
+      global.pauseGame = false
+      pausingFromSpellCasting = false
+      applySpellbookGlitch(spellCastPauseIndex)
+      if not on_ground: num_spell_casts_used += 1
+  elif global.pauseGame or global.pauseMoveInput:
+    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
+      global.activeInteractor.interact()
+    return
+
+  if (not pauseAnimation or aniPlayer.assigned_animation == "broomSmackGlitch") and \
+     Input.is_action_just_pressed("alt_action_button") and global.memory.has("spellbookPage"):
+    if not global.memory["broom"] or global.memory["spellbookPage"].size() <= 1:
+      noSpellSound.pitch_scale = 1.2
+      noSpellSound.play()
+    elif num_spell_casts_used < 3:
+      tryPauseFromSpellCasting = true
+      spellCastPauseIndex = 0 # global.memory["spellbookPage"].size() - 1
+      spellCastCounterResetTimer = 0
+  elif tryPauseFromSpellCasting:
+    if Input.is_action_pressed("alt_action_button") and not global.activeInteractor:
+      spellCastPauseTimer += (delta*22)
+      if spellCastPauseTimer >= spellCastPauseTimeLimit:
+        pausingFromSpellCasting = true
+        global.pauseGame = true
+        tryPauseFromSpellCasting = false
+        spellCastPauseTimer = 0
+    else:
+      applySpellbookGlitch(spellCastPauseIndex)
+      tryPauseFromSpellCasting = false
+      spellCastPauseTimer = 0
+      spellCastPauseIndex = 0
+
+  if num_spell_casts_used > 0:
+    spellCastCounterResetTimer += (delta*22)
+    if spellCastCounterResetTimer >= spellCastCounterResetTimeLimit:
+      num_spell_casts_used = 0
+      spellCastCounterResetTimer = 0
 
 func processMPBlinkLogic(delta):
   if glitch_form == global.GlitchForm.NORMAL:
@@ -513,8 +595,8 @@ func nullify():
     mySprite.get_material_override().set_shader_param("opacity", 1.0)
     self.applyGlitch(global.GlitchForm.NORMAL, true)
     self.can_cast_spell_timer = 0
-    # if global.memory.has("spellbookPage"):
-    #     global.memory["spellbookPage"] = []
+    if global.memory.has("spellbookPage"):
+      global.memory["spellbookPage"] = []
 
 func getMushroomInfected():
   if is_mushroom_infected:
@@ -664,7 +746,7 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
     if can_smack_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
       if can_smack_npc == null:
-        can_smack_npc = global.activeInteractor.get_node("../..")
+        can_smack_npc = global.activeInteractor.textboxParent
       summonedBroom.has_hit_npc = can_smack_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
@@ -850,6 +932,7 @@ func processPoisonWaterLogic(delta):
 # @override
 func landed():
   .landed()
+  num_spell_casts_used = 0
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
@@ -1002,34 +1085,6 @@ func tryClearFallthroughCollisionSolid():
   if interactionArea.prev_fallthrough_collision_area != null and \
      interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
-
-var bubbleSpawnTimer = 0
-var bubbleSpawnTimeLimit = 5
-
-func processBubbleLogic(delta):
-  if Input.is_action_pressed("sub_action_button"):
-    bubbleSpawnTimer += (delta * 22)
-    if bubbleSpawnTimer >= bubbleSpawnTimeLimit:
-      bubbleSpawnTimer = 0
-      summonBubble()
-  else:
-    bubbleSpawnTimer = 0
-
-func summonBubble():
-  var x_diff_start = 2
-  var x_diff_target = 5
-  if mySprite.flip_h:
-    x_diff_start *= -1
-    x_diff_target *= -1
-
-  var bubble = bubbleRes.instance()
-  level.add_child(bubble)
-  bubble.global_transform.origin = self.global_transform.origin
-  bubble.global_transform.origin.x += x_diff_start
-  bubble.original_pos_x = bubble.global_transform.origin.x
-  bubble.target_pos_x = self.global_transform.origin.x + rand_range(-1, 1) + x_diff_target
-  bubble.y_speed_start = rand_range(-2, -3)
-  bubble.setAsParent(self)
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
     for _i in range(num_clouds):

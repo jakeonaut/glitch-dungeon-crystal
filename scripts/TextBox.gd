@@ -43,7 +43,11 @@ var nextPrompt_wiggle_timer = 0
 var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
 
+onready var textContainer = get_node("..")
+onready var textboxParent = get_node("../..")
+
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var am_i_in_ui_layer = false
 var is_immediate = false
 
 var gameCamera = null
@@ -87,18 +91,27 @@ func setPosition():
   var factor = 0.5
 
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
-  target_origin = get_node("../..").global_transform.origin
+  target_origin = textboxParent.global_transform.origin
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
+
+func setTextBoxPosition():
+  if not is_tiny:
+    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+      self.margin_top = 60
+      self.margin_bottom = 201
+    else:
+      self.margin_top = top_margin_start
+      self.margin_bottom = bot_margin_start
   
 var important_unpause_timer = 0
 var important_unpause_time_limit = 10
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if get_node("../..").is_active:
-    get_node("../..").idleTalk()
+  if textboxParent.is_active:
+    textboxParent.idleTalk()
 
   if floating_text:
     nextPrompt.visible = false
@@ -121,7 +134,7 @@ func _process(delta):
     tryToHide(delta)
       
     if isWaitingForEndPrompt():
-      get_node("../..").setGlobalMemoryOfHasSpoken()
+      textboxParent.setGlobalMemoryOfHasSpoken()
       if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
         abortSound.preActivateScript()
         has_preactivated = true
@@ -142,21 +155,13 @@ func _process(delta):
 
     if text_timer >= time_limit and text_next_index < len(text_final):
       appendNextTextCharacter()
-        
-  if not is_tiny:
-    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
-      self.margin_top = 60
-      self.margin_bottom = 201
-    else:
-      self.margin_top = top_margin_start
-      self.margin_bottom = bot_margin_start
 
 func advanceToEndOfPhrase():
   while not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
     appendNextTextCharacter(false)
       
 func appendNextTextCharacter(play_sound = true):
-  get_node("../..").appendNextTextCharacter()
+  textboxParent.appendNextTextCharacter()
 
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
   textNode.bbcode_text += text_final[text_next_index]
@@ -201,6 +206,13 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
       
 func showTextbox():
+  if not am_i_in_ui_layer:
+    textContainer.remove_child(self)
+    if level.uiLayer != null:
+      level.uiLayer.add_child(self)
+    am_i_in_ui_layer = true
+
+  setTextBoxPosition()
   has_preactivated = false
   focus_me = true
   if is_important:
@@ -229,7 +241,7 @@ func showTextbox():
 func hideTextbox():
   has_preactivated = false
   self.hide()
-  get_node("../..").setGlobalMemoryOfHasSpoken(true)
+  textboxParent.setGlobalMemoryOfHasSpoken(true)
   if isWaitingForEndPrompt():
     abortSound.play()
     abortSound.activateScript()

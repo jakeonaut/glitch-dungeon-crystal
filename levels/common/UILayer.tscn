@@ -1824,6 +1824,28 @@ hframes = 8
 vframes = 5
 frame = 6
 
+[node name="ColorRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
+margin_left = 78.0
+margin_top = 32.5
+margin_right = 112.0
+margin_bottom = 66.5
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/ColorRect3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3"]
+position = Vector2( 15, 15 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 5
+frame = 6
+
 [node name="EquipmentStatusRect" type="ColorRect" parent="."]
 margin_left = 68.0
 margin_top = 79.0
