@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -35,6 +35,10 @@ resource_local_to_scene = true
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=35]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=32]
 resource_name = "doorClose"
@@ -83,6 +87,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
 length = 0.4
@@ -130,6 +138,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="Animation" id=20]
 resource_name = "doorClose"
 length = 0.4
@@ -176,6 +188,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
@@ -306,9 +322,6 @@ mesh_library = ExtResource( 6 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -324,9 +337,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_clip_": 0
@@ -382,6 +392,9 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 35 )
+
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8, 8, 0 )
 is_locked = true
@@ -400,10 +413,13 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door4/FallthroughSolid" index="0"]
+shape = SubResource( 36 )
+
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.503, -1, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves01.tscn"
 num_keys_unlock = 2
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
@@ -420,6 +436,9 @@ shape = SubResource( 17 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
+shape = SubResource( 37 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1, -10.1, 0 )
@@ -443,6 +462,9 @@ shape = SubResource( 17 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 38 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 16 )]
 visible = false
