@@ -110,6 +110,7 @@ func _ready_impl():
   global.activeThrowableObjectPath = null
   player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
   player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  transition.reverse_fade()
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

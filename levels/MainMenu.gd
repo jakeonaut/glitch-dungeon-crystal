@@ -10,10 +10,9 @@ func setUpRoomInitializationOverride():
 
 onready var menuOptionPointer = get_node("MenuOptionPointer")
 onready var menuOptionPointer2 = get_node("MenuOptionPointer2")
-var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+var roomPath = "res://levels/EndlessFantasy/gd1/000IntroCutscene.tscn"
 func startGame():
-    transition.path = roomPath
-    transition.change_scene()
+    transition.long_fade_to(roomPath)
 
 func loadGame():
     if global.loadGame():

@@ -50,8 +50,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
     newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
     newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
     if play_sound:
-      newSmokeCloud.get_node("CleanGlitchSound").play()
-      newSmokeCloud.get_node("CleanGlitchSound").pitch_scale = rand_range(0.8, 1.2)
+      newSmokeCloud.tryPlaySound()
       play_sound = false
     if is_glitchy:
       pass

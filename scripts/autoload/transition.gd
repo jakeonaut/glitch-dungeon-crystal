@@ -14,6 +14,8 @@ func _ready():
 func _process(_delta):
     aniPlayer.playback_speed = global.time_dilation_multiplier
 
+func reverse_fade():
+    aniPlayer.play("reverse_fade")
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func fade_to(scn_path):
     was_i_interrupted = false

@@ -5,7 +5,13 @@ var target_y = -9999
 var fade_out_opacity = false
 var curr_opacity = .5
 var opacity_fade_rate = 2
-onready var cleanGlitchSound = get_node("CleanGlitchSound")
+onready var cleanGlitchSound = get_node("CleanGlitchSound") if has_node("CleanGlitchSound") else null
+
+func tryPlaySound():
+    if cleanGlitchSound == null:
+        return
+    cleanGlitchSound.play()
+    cleanGlitchSound.pitch_scale = rand_range(0.8, 1.2)
 
 func _ready():
 

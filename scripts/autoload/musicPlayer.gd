@@ -9,6 +9,7 @@ onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var grannyPlayer = get_node("GrannyPlayer")
+onready var priestessPlayer = get_node("PriestessThemePlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
 onready var dungeonThemePlayer2 = get_node("DungeonThemePlayer2")
 onready var debugThemePlayer = get_node("DebugThemePlayer")
@@ -77,6 +78,7 @@ func stopAll():
     fade_out(windPlayer)
     fade_out(restZonePlayer)
     fade_out(grannyPlayer)
+    fade_out(priestessPlayer)
     fade_out(wakeupPlayer)
     fade_out(titleThemePlayer)
     fade_out(dungeonThemePlayer)
@@ -103,8 +105,12 @@ func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
     if path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
-        changeSongPitch(0.9)
         tryToPlay(grannyPlayer)
+        changeSongPitch(0.9)
+        return
+    elif path.find("000IntroCutscene") > 0:
+        tryToPlay(priestessPlayer)
+        changeSongPitch(0.5)
         return
     elif path.find("EndOfDemo") > 0:
         tryToPlay(grannyPlayer)

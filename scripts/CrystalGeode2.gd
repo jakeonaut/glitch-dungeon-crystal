@@ -50,6 +50,7 @@ func _process(delta):
         cubeContainer.rotation_degrees.z += (delta * cube_rotation)
         cube_rotation += (delta * 100)
         opacity = opacity + (0.0 - opacity) * (delta * 1)
+        npc.rotation_degrees.y -= (delta * rot_amount)
         npc.mySprite.material_override.set_shader_param("opacity", opacity)
 
         var playerPos = level.player.global_transform.origin
@@ -61,12 +62,9 @@ func _process(delta):
             level.gameCamera.am_i_zooming = true
         level.player.ladderUpdateTargetLastGroundedY()
         level.player.on_ground = false
-        if rot_amount > 50:
-            rot_amount -= (delta * 55)
-            npc.rotation_degrees.y -= (delta * rot_amount)
-            self.global_transform.origin.y += (delta * 1)
-        else:
-            pass
+        rot_amount -= (delta * 55)
+        npc.rotation_degrees.y -= (delta * rot_amount)
+        self.global_transform.origin.y += (delta * 1)
 
     if global.hasLevelGeodeBeenSmacked or global.hasGottenLevelGeode:
         spinTheFroggies(delta)
