@@ -85,6 +85,7 @@ func _ready():
   textBox.is_important = is_important
   textBox.is_really_important = is_really_important
   textBox.can_camera_zoom = can_camera_zoom
+  textBox.floating_text = floating_text
   if tiny_textbox or floating_text:
     textBox.tinify()
   textBox.is_fast_text = is_fast_text

@@ -105,7 +105,7 @@ func _process(delta):
     if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
-    actual_target = weakref(global.activeInteractor.textboxParent)
+    actual_target = weakref(global.activeInteractor.textboxParent.get_ref())
     set_target(actual_target.get_ref())
     # interpolation = A + (B - A) * t
     self.size = self.size + (zoomed_size - self.size) * (delta*5)

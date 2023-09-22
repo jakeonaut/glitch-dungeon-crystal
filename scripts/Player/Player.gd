@@ -49,7 +49,7 @@ var poison_timer = 0
 var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
-var can_smack_npc = null
+var smacked_npc = null
 
 var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
@@ -541,7 +541,7 @@ func processGlitchHurtRecovery(delta):
         level.glitchScreenEffect.visible = true
         should_turn_on_glitch_screen_effects = false
       if glitch_death_timer >= 40:
-        musicPlayer.changeSongPitch(1.0)
+        musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
         level.glitchScreenEffect.visible = false
         glitch_death_timer = 0
         mySprite.material_override.set_shader_param("enable_glitch", false)
@@ -744,10 +744,10 @@ func processBroomLogic(delta):
       summonedBroom.aniPlayer.play("broomSmack2")
       summonedBroom.broom_active_time_limit = 15
       is_in_broom_cooldown = false
-    if can_smack_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
-      if can_smack_npc == null:
-        can_smack_npc = global.activeInteractor.textboxParent
-      summonedBroom.has_hit_npc = can_smack_npc
+    if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
+      if smacked_npc == null:
+        smacked_npc = global.activeInteractor.textboxParent
+      summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
@@ -843,11 +843,11 @@ func processBroomRenderLogic(_delta):
     if global.hasGottenLevelGeode:
       broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
-      mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+      # mySprite.material_override.set_shader_param("enable_palette_cycle", true)
     else:
       broomSpriteVisible.material_override.set_shader_param("enable_glitch", false)
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
-      mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+      # mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     
   if summonedBroom != null:
     adjustSummonedBroomSpritePosition()
@@ -916,7 +916,7 @@ func processPoisonWaterLogic(delta):
       if poison_timer <= 0:
         poison_timer = 0
         level.glitchScreenEffect.visible = false
-        musicPlayer.changeSongPitch(1.0)
+        musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
         reversePoisonWaterSound.stop()
 
   if poison_timer > 0:
@@ -926,7 +926,7 @@ func processPoisonWaterLogic(delta):
   if poison_timer < 0:
     poison_timer = 0
     level.glitchScreenEffect.visible = false
-    musicPlayer.changeSongPitch(1.0)
+    musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
     reversePoisonWaterSound.stop()
     
 # @override
@@ -975,7 +975,7 @@ func broomStop():
   aniPlayer.queue("fall")
   if on_ground:
     aniPlayer.queue("stand")
-  can_smack_npc = null
+  smacked_npc = null
 
 # @override
 func playJumpSound():
@@ -1006,8 +1006,8 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
   if global.memory["broom"]:
     var fallenBroom = fallenBroomRes.instance()
     level.add_child(fallenBroom)
-    if can_smack_npc != null:
-      fallenBroom.has_hit_npc = can_smack_npc
+    if smacked_npc != null:
+      fallenBroom.smacked_npc = smacked_npc
     fallenBroom.should_die_on_land = should_die_on_land
     fallenBroom.global_transform.origin = self.global_transform.origin
     fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
@@ -1059,7 +1059,7 @@ func getABroom():
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
   mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-  can_smack_npc = null
+  smacked_npc = null
   is_in_broom_cooldown = false
 
 func iJustPressedDown():

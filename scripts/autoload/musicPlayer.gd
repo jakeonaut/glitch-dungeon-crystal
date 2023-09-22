@@ -27,6 +27,7 @@ onready var bossThemePlayer = get_node("BossThemePlayer")
 var initial_volume_dbs = {}
 
 var currentlyPlayingTheme = null
+var default_song_pitch = 1.0
 
 func _ready():
     set_process(true)
@@ -100,6 +101,7 @@ func conductFromScenePath(path):
     if global.hasGottenLevelGeode:
         tryToPlay(casinoThemePlayer)
         changeSongPitch(1.0)
+        default_song_pitch = 1.0
         return
 
     # return # i don't want to listen to music for a bit
@@ -107,10 +109,12 @@ func conductFromScenePath(path):
     if path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
         tryToPlay(grannyPlayer)
         changeSongPitch(0.9)
+        default_song_pitch = 0.9
         return
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
         changeSongPitch(0.5)
+        default_song_pitch = 0.5
         return
     elif path.find("EndOfDemo") > 0:
         tryToPlay(grannyPlayer)
@@ -145,6 +149,7 @@ func conductFromScenePath(path):
     else:
         self.stopAll()
     changeSongPitch(1.0)
+    default_song_pitch = 1.0
 
 func changeSongPitch(new_pitch):
     # TODO(jaketrower): This is a little dumb
@@ -154,3 +159,4 @@ func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch
+    

@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/CHUNKY.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites2D/glitches.png" type="Texture" id=19]
-[ext_resource path="res://assets/glitches/text2.png" type="Texture" id=20]
+[ext_resource path="res://logo.png" type="Texture" id=20]
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=21]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/broom_ani.png" type="Texture" id=23]
@@ -1031,7 +1031,7 @@ margin_right = 558.0
 margin_bottom = 427.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.517647 )
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.74902 )
 
 [node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
 visible = false

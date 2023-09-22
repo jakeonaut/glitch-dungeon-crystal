@@ -110,7 +110,7 @@ func _ready():
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
 
-    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
+    mySprite.material_override = mySprite.material_override.duplicate()
 
 func shouldIDoCollisions():
     should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown

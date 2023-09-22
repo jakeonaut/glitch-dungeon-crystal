@@ -9,6 +9,7 @@ onready var gameCamera = get_node("GameCamera")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") if has_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") else null
 var current_sprite_palette = global.grey_palette
+export var player_message = "???"
 
 export var show_crt_effect = false
 
@@ -111,6 +112,8 @@ func _ready_impl():
   player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
   player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   transition.reverse_fade()
+  if player_message != "???":
+    player.sayThis(player_message)
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

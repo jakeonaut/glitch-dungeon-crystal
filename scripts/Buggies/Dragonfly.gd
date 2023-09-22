@@ -37,7 +37,7 @@ func _ready():
     
     original_pos = global_transform.origin
     randomizeTargetPos()
-    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
+    mySprite.material_override = mySprite.material_override.duplicate()
     mySprite.global_transform.origin = self.global_transform.origin
 
 func _process(delta):

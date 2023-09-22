@@ -3,9 +3,16 @@ extends "../../../scripts/levelScript.gd"
 
 var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 func setUpRoomInitializationOverride():
-    pass
+    global.pauseGame = true
 
+var door_timer = 0
+var door_time_limit = 360
+var has_activated_door = false
+onready var door = get_node("Door")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-    if not transition.aniPlayer.assigned_animation != "really_really_long_fade_to":
-        transition.really_really_long_fade_to(roomPath)
+func _process(delta):
+    if not has_activated_door:
+        door_timer += (delta * 22)
+        if door_timer >= door_time_limit:
+            door.activate(true)
+            has_activated_door = true

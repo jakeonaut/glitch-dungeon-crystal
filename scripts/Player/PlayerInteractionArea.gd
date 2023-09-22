@@ -37,7 +37,7 @@ func _process(_delta):
                         was_nearest_area_door = true
 
     if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and Input.is_action_just_pressed("sub_action_button"):
-        player.can_smack_npc = global.activeInteractor.textboxParent
+        player.smacked_npc = global.activeInteractor.textboxParent
         global.activeInteractor.InteractActivate()
     elif Input.is_action_just_pressed("ui_down"):
         # short circuit to textbox if one exists

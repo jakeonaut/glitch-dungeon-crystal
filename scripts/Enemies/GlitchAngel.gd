@@ -79,7 +79,7 @@ func _process(delta):
         return
         
 func flutterAndRandomizeLocation(delta):
-    global_transform.origin = moveToward2D(global_transform.origin, target_pos, delta * 11)
+    global_transform.origin = moveToward2D(global_transform.origin, target_pos, delta * 22)
     if compare2D(global_transform.origin, target_pos, 0.1):
         randomizeTargetPos()
         

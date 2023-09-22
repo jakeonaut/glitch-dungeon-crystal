@@ -30,7 +30,7 @@
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
-[ext_resource path="res://assets/sprites/tall_doors.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/doors.png" type="Texture" id=31]
 
 [sub_resource type="ShaderMaterial" id=35]
 shader = ExtResource( 2 )
@@ -284,13 +284,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 dont_recolor_me = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, -0.9 )
 material_override = SubResource( 35 )
-texture = ExtResource( 31 )
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -496,7 +494,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
-bbText = "howdy"
+bbText = "howdy↓
+how'd'ya do↓
+we don't get too
+many visitors"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

@@ -10,7 +10,7 @@ func setUpRoomInitializationOverride():
 
 onready var menuOptionPointer = get_node("MenuOptionPointer")
 onready var menuOptionPointer2 = get_node("MenuOptionPointer2")
-var roomPath = "res://levels/EndlessFantasy/gd1/000IntroCutscene.tscn"
+var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 func startGame():
     transition.long_fade_to(roomPath)
 
@@ -51,10 +51,10 @@ func _process(delta):
         menuOptionPointer.global_transform.origin.y = yy
         menuOptionPointer2.global_transform.origin.y = yy
 
-    switch_glitch_timer += (delta*22)
-    if switch_glitch_timer >= switch_glitch_time_limit:
-        switch_glitch_timer = 0
-        player.applyNextGlitch()
+    # switch_glitch_timer += (delta*22)
+    # if switch_glitch_timer >= switch_glitch_time_limit:
+    #     switch_glitch_timer = 0
+    #     player.applyNextGlitch()
 
     if Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button"):
         switch_glitch_timer = -999999

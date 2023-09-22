@@ -44,7 +44,7 @@ var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
 
 onready var textContainer = get_node("..")
-onready var textboxParent = get_node("../..")
+onready var textboxParent = weakref(get_node("../.."))
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
@@ -91,7 +91,8 @@ func setPosition():
   var factor = 0.5
 
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
-  target_origin = textboxParent.global_transform.origin
+  if textboxParent.get_ref():
+    target_origin = textboxParent.get_ref().global_transform.origin
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
@@ -106,12 +107,12 @@ func setTextBoxPosition():
       self.margin_bottom = bot_margin_start
   
 var important_unpause_timer = 0
-var important_unpause_time_limit = 10
+var important_unpause_time_limit = 20
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if textboxParent.is_active:
-    textboxParent.idleTalk()
+  if textboxParent.get_ref() and textboxParent.get_ref().is_active:
+    textboxParent.get_ref().idleTalk()
 
   if floating_text:
     nextPrompt.visible = false
@@ -130,18 +131,20 @@ func _process(delta):
     text_timer += (delta*22)
     
     var time_limit = text_time_limit
-      
-    tryToHide(delta)
+    
+    if not floating_text:
+      tryToHide(delta)
       
     if isWaitingForEndPrompt():
-      textboxParent.setGlobalMemoryOfHasSpoken()
+      if textboxParent.get_ref():
+        textboxParent.get_ref().setGlobalMemoryOfHasSpoken()
       if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
         abortSound.preActivateScript()
         has_preactivated = true
       endPrompt.visible = not is_tiny and not floating_text
       has_been_shown = true
       if is_important and global.pauseGame:
-        important_unpause_timer += (delta * 11)
+        important_unpause_timer += (delta * 22)
         if important_unpause_timer >= important_unpause_time_limit:
           is_important = false
           global.pauseGame = false
@@ -149,7 +152,7 @@ func _process(delta):
       
     if isWaitingForNextPrompt():
       if not ui_should_continue:
-        nextPrompt.visible = not floating_text
+        nextPrompt.visible = not is_tiny and not floating_text
         return
       ui_should_continue = false
 
@@ -161,7 +164,8 @@ func advanceToEndOfPhrase():
     appendNextTextCharacter(false)
       
 func appendNextTextCharacter(play_sound = true):
-  textboxParent.appendNextTextCharacter()
+  if textboxParent.get_ref():
+    textboxParent.get_ref().appendNextTextCharacter()
 
   # TODO(jaketrower): this still has an odd effect when processing bbcode tags
   textNode.bbcode_text += text_final[text_next_index]
@@ -206,16 +210,15 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
       
 func showTextbox():
-  if not am_i_in_ui_layer:
+  if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
     textContainer.remove_child(self)
-    if level.uiLayer != null:
-      level.uiLayer.add_child(self)
+    level.uiLayer.add_child(self)
     am_i_in_ui_layer = true
 
   setTextBoxPosition()
   has_preactivated = false
   focus_me = true
-  if is_important:
+  if is_important and not floating_text:
     getPlayer().unsmack()
     global.pauseGame = true
     # maybe treat this like the Item Catch?
@@ -241,7 +244,8 @@ func showTextbox():
 func hideTextbox():
   has_preactivated = false
   self.hide()
-  textboxParent.setGlobalMemoryOfHasSpoken(true)
+  if textboxParent.get_ref():
+    textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
   if isWaitingForEndPrompt():
     abortSound.play()
     abortSound.activateScript()
