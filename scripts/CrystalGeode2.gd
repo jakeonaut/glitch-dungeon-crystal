@@ -53,13 +53,6 @@ func _process(delta):
         npc.rotation_degrees.y -= (delta * rot_amount)
         npc.mySprite.material_override.set_shader_param("opacity", opacity)
 
-        var playerPos = level.player.global_transform.origin
-        level.player.global_transform.origin = global.moveToward2D(playerPos, spawn_pos, delta * 2)
-        sams_weird_timeout_timer += (delta * 22)
-        if global.compare2D(level.player.global_transform.origin, spawn_pos, 0.1) or sams_weird_timeout_timer >= sams_weird_timeout_time_limit:
-            level.player.global_transform.origin = spawn_pos
-            level.gameCamera.zoomed_size = level.gameCamera.initial_size - 4
-            level.gameCamera.am_i_zooming = true
         level.player.ladderUpdateTargetLastGroundedY()
         level.player.on_ground = false
         rot_amount -= (delta * 55)

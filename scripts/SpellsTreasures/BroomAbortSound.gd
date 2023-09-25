@@ -15,6 +15,8 @@ func activateScript():
     aniPlayer.queue("stand")
     level.player.getABroom()
     level.player.textBox.hideTextbox()
+    if level.getLevelName().find("000PastoralScene") > 0:
+        level.player.textBox.dialogStartSound.play()
         
     # level.restartMusic()
     # level.saveTheGame()

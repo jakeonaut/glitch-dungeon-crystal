@@ -17,6 +17,7 @@ var returning_time_limit = 25
 onready var collisionShape = get_node("Area/CollisionShape")
 var smacked_npc = null
 var should_die_on_land = false
+var have_i_smacked_an_npc = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -160,7 +161,7 @@ func canActivate(area):
   var areaParent = area.get_node("..")
   # sorry!
   return not areaParent.has_method("imAnNpc") or smacked_npc == null or \
-         (smacked_npc.get_ref() and \
+         (not have_i_smacked_an_npc and smacked_npc.get_ref() and \
             (areaParent != smacked_npc.get_ref() or \
               (smacked_npc.get_ref().textBox == global.activeInteractor and \
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
@@ -197,6 +198,7 @@ func hitStuff(_delta):
                 areaParent.getSmacked(global_transform.origin)
                 if areaParent.has_method("imAnNpc"):
                     smacked_npc = weakref(areaParent)
+                    have_i_smacked_an_npc = true
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):

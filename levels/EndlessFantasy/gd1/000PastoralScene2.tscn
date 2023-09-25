@@ -886,7 +886,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 20 )
-player_message = "oh!\\nmy chickens!"
+player_message = "oh!\\nour chickens!"
 show_crt_effect = true
 tileset_type = 2
 spellbook_forbidden = true
@@ -966,7 +966,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, 0, 0 )
 
 [node name="TextContainer" parent="Viewport/level/Player" index="15"]
-bbText = "oh! my chickens!"
+bbText = "oh! our chickens!"
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.0347238, 0 )

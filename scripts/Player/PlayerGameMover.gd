@@ -157,7 +157,7 @@ func spawnSparkles(delta, above_the_head = false):
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
-  changeSpriteColorPalette(global.grey_player_palette)
+  changeSpriteColorPalette(global.base_palette)
   # mySprite.setNormalClothes()
 
 func changeSpriteColorPalette(palette):

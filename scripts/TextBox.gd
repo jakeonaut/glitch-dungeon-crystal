@@ -270,6 +270,8 @@ func InteractActivate(_is_player=true):
   interact()
     
 func interact():
+  if text_final == "":
+    return
   # print("visible: " + str(visible) + ", isActive: " + str(dialogSound.isActive()))
   if !visible and dialogSound.isActive():
     showTextbox()

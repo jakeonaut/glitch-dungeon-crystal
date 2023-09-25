@@ -246,7 +246,7 @@ var quitGameTimer = 0
 var quitGameTimeLimit = 20
 func processQuitGameRenderLogic(delta):
   if not global.isPauseMenuOpen:
-    if global.pauseMoveInput or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    if shouldRenderAsCinematic() or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
       quitGameTimer = 0
       quitGameRect.visible = false
       return
@@ -269,15 +269,18 @@ func processQuitGameRenderLogic(delta):
 onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")
 onready var cinematicAniPlayer = get_node("CinematicAnimationPlayer")
+func shouldRenderAsCinematic():
+  return global.pauseMoveInput or level.getLevelName().find("000IntroCutscene") > 0
+
 func initiateCutsceneRenderLogic():
-  if global.pauseMoveInput:
+  if shouldRenderAsCinematic():
     cinematicAniPlayer.play("startCutsceneImmediate")
 
 func processCutsceneRenderLogic(_delta):
   var aa = cinematicAniPlayer.assigned_animation
-  if global.pauseMoveInput and not "startCutscene" in aa and not global.isRespawning:
+  if shouldRenderAsCinematic() and not "startCutscene" in aa and not global.isRespawning:
     cinematicAniPlayer.play("startCutscene")
-  elif not global.pauseMoveInput and aa != null and not "endCutscene" in aa and not aa == "":
+  elif not shouldRenderAsCinematic() and aa != null and not "endCutscene" in aa and not aa == "":
     cinematicAniPlayer.play("endCutscene")
 
 
@@ -296,7 +299,7 @@ var totalHiscoreCounter = 0
 var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
 func processHiscoreRenderLogic(delta):
-  if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+  if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked or level.getLevelName().find("000IntroCutscene") > 0:
     hiscoreRect.visible = false
     congratsHiscoreLabel.visible = false
     crystalCubeHiscoreLabel.visible = false

@@ -134,7 +134,7 @@ func floorGlitch():
   level.displaySpellMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
-  changeSpriteColorPalette(getLevelTiles().red_palette)
+  changeSpriteColorPalette(global.red_palette)
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
@@ -158,7 +158,7 @@ func invisibleGlitch():
   level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
-  changeSpriteColorPalette(getLevelTiles().black_palette)
+  changeSpriteColorPalette(global.black_palette)
   # mySprite.get_material_override().set_shader_param("opacity", 0.9)
   # mySprite.setClericCostume()
 
@@ -166,7 +166,7 @@ func walkThroughWallsGlitch():
   level.displaySpellMessageText("undefined")
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
-  changeSpriteColorPalette(getLevelTiles().white_palette)
+  changeSpriteColorPalette(global.weird_base_palette)
   # mySprite.setNightgown()
 
 func wearCostume(costume):

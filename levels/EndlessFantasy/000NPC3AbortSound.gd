@@ -28,6 +28,8 @@ func doActivateScriptStuff():
     NPC3.textBoxContainer.bbText = " truthfully, i have nothing\nmore to say"
     NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self.name, false)
+    NPC3.can_camera_zoom = false
+    NPC3.textBox.can_camera_zoom = false
     has_talked = true
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

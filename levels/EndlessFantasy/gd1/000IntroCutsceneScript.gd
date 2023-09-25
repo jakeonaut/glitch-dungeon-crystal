@@ -3,7 +3,7 @@ extends "../../../scripts/levelScript.gd"
 
 var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 func setUpRoomInitializationOverride():
-    global.pauseGame = true
+    player.pauseSelf = true
 
 var door_timer = 0
 var door_time_limit = 360
@@ -14,5 +14,6 @@ func _process(delta):
     if not has_activated_door:
         door_timer += (delta * 22)
         if door_timer >= door_time_limit:
+            door.canPlayDoorSound = false
             door.activate(true)
             has_activated_door = true

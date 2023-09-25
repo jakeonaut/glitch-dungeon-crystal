@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/priestesstemple.mp3-161de3a0044de8bf3113e7231d0a76cc.mp3str"
+
+[deps]
+
+source_file="res://assets/music/priestesstemple.mp3"
+dest_files=[ "res://.import/priestesstemple.mp3-161de3a0044de8bf3113e7231d0a76cc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

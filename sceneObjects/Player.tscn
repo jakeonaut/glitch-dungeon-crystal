@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -33,7 +33,6 @@
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=31]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Beetle.wav" type="AudioStream" id=33]
-[ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=34]
 [ext_resource path="res://assets/sounds/land.wav" type="AudioStream" id=35]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=36]
 [ext_resource path="res://assets/MRMOTEXTEX3.png" type="Texture" id=37]
@@ -84,7 +83,7 @@ shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 28 )
 shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 34 )
+shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=48]
 shader = ExtResource( 4 )

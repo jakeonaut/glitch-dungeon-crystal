@@ -20,7 +20,7 @@ func _process(_delta):
             decrementSpawnedChildren()
             spawned_children_cherry_nums.pop_back()
     
-func spawn():
+func spawn(_with_flare = true):
     var num_children = self.get_children().size() - 1 # to account for the PlayerInteractionArea
     if spawned_children < max_num_children and num_children < max_num_children:
         .spawn()

@@ -13,6 +13,7 @@ onready var collisionShape2 = get_node("Area/CollisionShape2")
 onready var collisionShape3 = get_node("Area/CollisionShape3")
 onready var aniPlayer = get_node("AnimationPlayer")
 var smacked_npc = null
+var have_i_smacked_an_npc = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -71,7 +72,7 @@ func canActivate(area):
   var areaParent = area.get_node("..")
   # sorry!
   return not areaParent.has_method("imAnNpc") or smacked_npc == null or \
-         (smacked_npc.get_ref() and \
+         (not have_i_smacked_an_npc and smacked_npc.get_ref() and \
             (areaParent != smacked_npc.get_ref() or \
               (smacked_npc.get_ref().textBox == global.activeInteractor and \
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
@@ -105,6 +106,7 @@ func hitStuff(_delta):
           my_broom_owner.getSmacked()
         if areaParent.has_method("imAnNpc"):
           smacked_npc = weakref(areaParent)
+          have_i_smacked_an_npc = true
         areaParent.getSmacked(global_transform.origin)
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false

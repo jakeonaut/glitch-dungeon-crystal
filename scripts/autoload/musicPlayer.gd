@@ -113,8 +113,8 @@ func conductFromScenePath(path):
         return
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
-        changeSongPitch(0.5)
-        default_song_pitch = 0.5
+        changeSongPitch(0.63)
+        default_song_pitch = 0.63
         return
     elif path.find("EndOfDemo") > 0:
         tryToPlay(grannyPlayer)
