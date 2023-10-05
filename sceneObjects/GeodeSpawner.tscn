@@ -15,6 +15,7 @@ spawned_object_path = "res://sceneObjects/Enemies/GlitchEnemy.tscn"
 max_num_children = 1
 x_range = Vector2( 0, 0 )
 is_active = false
+num_native_children = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.0625

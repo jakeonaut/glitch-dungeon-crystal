@@ -1,9 +1,9 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=4]
+[ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=5]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=7]
@@ -22,7 +22,6 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=20]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=22]
-[ext_resource path="res://levels/EndlessFantasy/000NPC3AbortSound.gd" type="Script" id=23]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=25]
 [ext_resource path="res://assets/sprites/Tadpole_smaller.png" type="Texture" id=26]
@@ -43,6 +42,8 @@
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=41]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=42]
 [ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=43]
+[ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=44]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 6 )
@@ -863,7 +864,7 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=139]
+[sub_resource type="ArrayMesh" id=196]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -879,7 +880,7 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=115]
 extents = Vector3( 3, 1.3, 1 )
 
-[sub_resource type="BoxShape" id=137]
+[sub_resource type="BoxShape" id=194]
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
@@ -1057,7 +1058,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="BoxShape" id=138]
+[sub_resource type="BoxShape" id=195]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -1089,11 +1090,11 @@ shader_param/texture_albedo = ExtResource( 38 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=140]
+[sub_resource type="BoxShape" id=197]
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
-[sub_resource type="BoxShape" id=141]
+[sub_resource type="BoxShape" id=198]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -1492,11 +1493,39 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="BoxShape" id=126]
+[sub_resource type="BoxShape" id=147]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="Animation" id=127]
+[sub_resource type="ShaderMaterial" id=148]
+shader = ExtResource( 6 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 45 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 44 )
+
+[sub_resource type="Animation" id=149]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -1524,7 +1553,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=128]
+[sub_resource type="Animation" id=150]
 resource_name = "fall"
 length = 0.1
 tracks/0/type = "value"
@@ -1552,7 +1581,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=129]
+[sub_resource type="Animation" id=151]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
@@ -1579,11 +1608,11 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=130]
+[sub_resource type="Animation" id=152]
 resource_name = "jump"
 length = 0.001
 
-[sub_resource type="Animation" id=131]
+[sub_resource type="Animation" id=153]
 resource_name = "land"
 length = 0.1
 tracks/0/type = "value"
@@ -1611,7 +1640,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=132]
+[sub_resource type="Animation" id=154]
 resource_name = "stand"
 length = 0.1
 tracks/0/type = "value"
@@ -1639,15 +1668,20 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="BoxShape" id=133]
+[sub_resource type="BoxShape" id=155]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=142]
+[sub_resource type="BoxShape" id=199]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=143]
+[sub_resource type="SpatialMaterial" id=200]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 45 )
+
+[sub_resource type="BoxShape" id=201]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -1674,7 +1708,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 33 )
-show_crt_effect = true
 tileset_type = 2
 spellbook_forbidden = true
 how_much_mp = 10
@@ -1699,7 +1732,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 196589, 0, 3, 196590, 0, 3, 196591, 0, 3, 196592, 0, 3, 196593, 0, 3, 196594, 0, 3, 196595, 0, 3, 196596, 0, 3, 196609, 0, 3, 196610, 0, 3, 262125, 0, 3, 262126, 0, 3, 262127, 0, 3, 262128, 0, 3, 262129, 0, 3, 262130, 0, 3, 262131, 0, 3, 262132, 0, 3, 262133, 0, 3, 262144, 0, 1, 262145, 0, 3, 262146, 0, 3, 327661, 0, 3, 327662, 0, 3, 327663, 0, 3, 327664, 0, 3, 327665, 0, 3, 327666, 0, 3, 327667, 0, 3, 327668, 0, 3, 327669, 0, 3, 327670, 0, 3, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 3, 327682, 0, 3, 393197, 0, 3, 393198, 0, 3, 393199, 0, 3, 393200, 0, 3, 393201, 0, 3, 393202, 0, 3, 393203, 0, 3, 393204, 0, 3, 393205, 0, 3, 393206, 0, 3, 393207, 0, 3, 393213, 0, 1, 393216, 0, 1, 458733, 0, 3, 458734, 0, 3, 458735, 0, 3, 458736, 0, 3, 458737, 0, 3, 458738, 0, 3, 458739, 0, 3, 458740, 0, 3, 458741, 0, 3, 458742, 0, 3, 458743, 0, 3, 458744, 0, 3, 458749, 0, 1, 458752, 0, 1, 524269, 0, 3, 524270, 0, 3, 524271, 0, 3, 524272, 0, 3, 524273, 0, 3, 524274, 0, 3, 524275, 0, 3, 524276, 0, 3, 524277, 0, 3, 524278, 0, 3, 524279, 0, 3, 524280, 0, 3, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 589805, 0, 3, 589806, 0, 3, 589807, 0, 3, 589808, 0, 3, 589809, 0, 3, 589810, 0, 3, 589811, 0, 3, 589812, 0, 3, 589813, 0, 3, 589814, 0, 3, 589815, 0, 3, 589816, 0, 3, 655341, 0, 3, 655342, 0, 3, 655343, 0, 3, 655344, 0, 3, 655345, 0, 3, 655346, 0, 3, 655347, 0, 3, 655348, 0, 3, 655349, 0, 3, 655350, 0, 3, 655351, 0, 3, 655352, 0, 3, 655353, 0, 3, 720877, 0, 3, 720878, 0, 3, 720879, 0, 3, 720880, 0, 3, 720881, 0, 3, 720882, 0, 3, 720883, 0, 3, 720884, 0, 3, 720885, 0, 3, 720886, 0, 3, 720887, 0, 3, 720888, 0, 3, 720889, 0, 3, 786413, 0, 3, 786414, 0, 3, 786415, 0, 3, 786416, 0, 3, 786417, 0, 3, 786418, 0, 3, 786419, 0, 3, 786420, 0, 3, 786421, 0, 3, 786422, 0, 3, 786423, 0, 3, 786424, 0, 3, 786425, 0, 3, 851949, 0, 3, 851950, 0, 3, 851951, 0, 3, 851952, 0, 3, 851953, 0, 3, 851954, 0, 3, 851955, 0, 3, 851956, 0, 3, 851957, 0, 3, 851958, 0, 3, 851959, 0, 3, 851960, 0, 3, 851961, 0, 3, 851962, 0, 3, 851963, 0, 3, 917485, 0, 3, 917486, 0, 3, 917487, 0, 3, 917488, 0, 3, 917489, 0, 3, 917490, 0, 3, 917491, 0, 3, 917492, 0, 3, 917493, 0, 3, 917494, 0, 3, 917495, 0, 3, 917496, 0, 3, 917497, 0, 3, 917499, 0, 3, 983021, 0, 3, 983022, 0, 3, 983023, 0, 3, 983024, 0, 3, 983025, 0, 3, 983026, 0, 3, 983027, 0, 3, 983028, 0, 3, 983029, 0, 3, 983030, 0, 3, 983031, 0, 3, 983032, 0, 3, 983033, 0, 3, 983034, 0, 3, 983035, 0, 3, -1769470, 0, 1, -1769469, 0, 1, -1769468, 0, 1, -1769467, 0, 1, -1703934, 0, 1, -1703931, 0, 1, -1638418, 0, 1, -1638417, 0, 1, -1638416, 0, 1, -1638415, 0, 1, -1638414, 0, 1, -1638413, 0, 1, -1638412, 0, 1, -1638411, 0, 1, -1638410, 0, 1, -1638409, 0, 1, -1638408, 0, 1, -1638407, 0, 1, -1638405, 0, 1, -1638404, 0, 1, -1638403, 0, 1, -1638400, 0, 1, -1638398, 0, 1, -1638395, 0, 1, -1572883, 0, 1, -1572882, 0, 1, -1572881, 0, 1, -1572880, 0, 1, -1572879, 0, 1, -1572878, 0, 1, -1572877, 0, 1, -1572876, 0, 1, -1572875, 0, 1, -1572874, 0, 1, -1572873, 0, 1, -1572872, 0, 1, -1572871, 0, 1, -1572870, 0, 1, -1572869, 0, 1, -1572867, 0, 1, -1572866, 0, 1, -1572865, 0, 1, -1572864, 0, 1, -1572863, 0, 1, -1572862, 0, 1, -1572861, 0, 1, -1572860, 0, 1, -1572859, 0, 1, -1507347, 0, 1, -1507346, 0, 1, -1507345, 0, 1, -1507344, 0, 1, -1507343, 0, 1, -1507342, 0, 1, -1507341, 0, 1, -1507340, 0, 1, -1507339, 0, 1, -1507338, 0, 1, -1507337, 0, 1, -1507336, 0, 1, -1507335, 0, 1, -1507334, 0, 1, -1507333, 0, 1, -1507332, 0, 1, -1507331, 0, 1, -1507328, 0, 1, -1441795, 0, 1, -1441792, 0, 1, -1376259, 0, 1, -1376258, 0, 1, -1376257, 0, 1, -327693, 0, 3, -327692, 0, 3, -327691, 0, 3, -327690, 0, 3, -262157, 0, 3, -262156, 0, 3, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -196621, 0, 3, -196620, 0, 3, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1 )
+"cells": PoolIntArray( 65542, 0, 1, 131078, 0, 1, 196589, 0, 3, 196590, 0, 3, 196591, 0, 3, 196592, 0, 3, 196593, 0, 3, 196594, 0, 3, 196595, 0, 3, 196596, 0, 3, 196609, 0, 3, 196610, 0, 3, 196614, 0, 1, 262125, 0, 3, 262126, 0, 3, 262127, 0, 3, 262128, 0, 3, 262129, 0, 3, 262130, 0, 3, 262131, 0, 3, 262132, 0, 3, 262133, 0, 3, 262144, 0, 1, 262145, 0, 3, 262146, 0, 3, 262150, 0, 1, 327661, 0, 3, 327662, 0, 3, 327663, 0, 3, 327664, 0, 3, 327665, 0, 3, 327666, 0, 3, 327667, 0, 3, 327668, 0, 3, 327669, 0, 3, 327670, 0, 3, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 3, 327682, 0, 3, 327686, 0, 1, 393197, 0, 3, 393198, 0, 3, 393199, 0, 3, 393200, 0, 3, 393201, 0, 3, 393202, 0, 3, 393203, 0, 3, 393204, 0, 3, 393205, 0, 3, 393206, 0, 3, 393207, 0, 3, 393213, 0, 1, 393216, 0, 1, 393222, 0, 1, 458733, 0, 3, 458734, 0, 3, 458735, 0, 3, 458736, 0, 3, 458737, 0, 3, 458738, 0, 3, 458739, 0, 3, 458740, 0, 3, 458741, 0, 3, 458742, 0, 3, 458743, 0, 3, 458744, 0, 3, 458749, 0, 1, 458752, 0, 1, 458758, 0, 1, 524269, 0, 3, 524270, 0, 3, 524271, 0, 3, 524272, 0, 3, 524273, 0, 3, 524274, 0, 3, 524275, 0, 3, 524276, 0, 3, 524277, 0, 3, 524278, 0, 3, 524279, 0, 3, 524280, 0, 3, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 524294, 0, 1, 589805, 0, 3, 589806, 0, 3, 589807, 0, 3, 589808, 0, 3, 589809, 0, 3, 589810, 0, 3, 589811, 0, 3, 589812, 0, 3, 589813, 0, 3, 589814, 0, 3, 589815, 0, 3, 589816, 0, 3, 589830, 0, 1, 655341, 0, 3, 655342, 0, 3, 655343, 0, 3, 655344, 0, 3, 655345, 0, 3, 655346, 0, 3, 655347, 0, 3, 655348, 0, 3, 655349, 0, 3, 655350, 0, 3, 655351, 0, 3, 655352, 0, 3, 655353, 0, 3, 655366, 0, 1, 720877, 0, 3, 720878, 0, 3, 720879, 0, 3, 720880, 0, 3, 720881, 0, 3, 720882, 0, 3, 720883, 0, 3, 720884, 0, 3, 720885, 0, 3, 720886, 0, 3, 720887, 0, 3, 720888, 0, 3, 720889, 0, 3, 720902, 0, 1, 786413, 0, 3, 786414, 0, 3, 786415, 0, 3, 786416, 0, 3, 786417, 0, 3, 786418, 0, 3, 786419, 0, 3, 786420, 0, 3, 786421, 0, 3, 786422, 0, 3, 786423, 0, 3, 786424, 0, 3, 786425, 0, 3, 786438, 0, 1, 851949, 0, 3, 851950, 0, 3, 851951, 0, 3, 851952, 0, 3, 851953, 0, 3, 851954, 0, 3, 851955, 0, 3, 851956, 0, 3, 851957, 0, 3, 851958, 0, 3, 851959, 0, 3, 851960, 0, 3, 851961, 0, 3, 851962, 0, 3, 851963, 0, 3, 851974, 0, 1, 917485, 0, 3, 917486, 0, 3, 917487, 0, 3, 917488, 0, 3, 917489, 0, 3, 917490, 0, 3, 917491, 0, 3, 917492, 0, 3, 917493, 0, 3, 917494, 0, 3, 917495, 0, 3, 917496, 0, 3, 917497, 0, 3, 917499, 0, 3, 917510, 0, 1, 983021, 0, 3, 983022, 0, 3, 983023, 0, 3, 983024, 0, 3, 983025, 0, 3, 983026, 0, 3, 983027, 0, 3, 983028, 0, 3, 983029, 0, 3, 983030, 0, 3, 983031, 0, 3, 983032, 0, 3, 983033, 0, 3, 983034, 0, 3, 983035, 0, 3, -1966088, 0, 1, -1966087, 0, 1, -1966086, 0, 1, -1900552, 0, 1, -1900550, 0, 1, -1835016, 0, 1, -1835015, 0, 1, -1835014, 0, 1, -1769470, 0, 1, -1769469, 0, 1, -1769468, 0, 1, -1769467, 0, 1, -1703934, 0, 1, -1703931, 0, 1, -1638418, 0, 1, -1638417, 0, 1, -1638416, 0, 1, -1638415, 0, 1, -1638414, 0, 1, -1638413, 0, 1, -1638412, 0, 1, -1638411, 0, 1, -1638410, 0, 1, -1638409, 0, 1, -1638408, 0, 1, -1638407, 0, 1, -1638405, 0, 1, -1638404, 0, 1, -1638403, 0, 1, -1638400, 0, 1, -1638398, 0, 1, -1638395, 0, 1, -1572883, 0, 1, -1572882, 0, 1, -1572881, 0, 1, -1572880, 0, 1, -1572879, 0, 1, -1572878, 0, 1, -1572877, 0, 1, -1572876, 0, 1, -1572875, 0, 1, -1572874, 0, 1, -1572873, 0, 1, -1572872, 0, 1, -1572871, 0, 1, -1572870, 0, 1, -1572869, 0, 1, -1572867, 0, 1, -1572866, 0, 1, -1572865, 0, 1, -1572864, 0, 1, -1572863, 0, 1, -1572862, 0, 1, -1572861, 0, 1, -1572860, 0, 1, -1572859, 0, 1, -1507347, 0, 1, -1507346, 0, 1, -1507345, 0, 1, -1507344, 0, 1, -1507343, 0, 1, -1507342, 0, 1, -1507341, 0, 1, -1507340, 0, 1, -1507339, 0, 1, -1507338, 0, 1, -1507337, 0, 1, -1507336, 0, 1, -1507335, 0, 1, -1507334, 0, 1, -1507333, 0, 1, -1507332, 0, 1, -1507331, 0, 1, -1507328, 0, 1, -1441795, 0, 1, -1441792, 0, 1, -1376259, 0, 1, -1376258, 0, 1, -1376257, 0, 1, -1245183, 0, 1, -1245182, 0, 1, -1245181, 0, 1, -1179647, 0, 1, -1179645, 0, 1, -1114111, 0, 1, -1114110, 0, 1, -1114109, 0, 1, -1114108, 0, 1, -1114107, 0, 1, -1048574, 0, 1, -1048571, 0, 1, -983038, 0, 1, -983035, 0, 1, -917502, 0, 1, -917501, 0, 1, -917500, 0, 1, -917499, 0, 1, -327693, 0, 3, -327692, 0, 3, -327691, 0, 3, -327690, 0, 3, -262157, 0, 3, -262156, 0, 3, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -196621, 0, 3, -196620, 0, 3, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -1835,8 +1868,8 @@ shape = SubResource( 16 )
 shape = SubResource( 86 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -21, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -13, 0 )
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="5"]
 anims/doorClose = SubResource( 89 )
@@ -1875,7 +1908,7 @@ shape = SubResource( 16 )
 shape = SubResource( 87 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.47169, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.0561326, 0 )
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.47169, 0 )
@@ -1929,6 +1962,9 @@ vframes = 8
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -19.5666, 0 )
 
+[node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -8.5666, 0 )
+
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 
@@ -1955,7 +1991,7 @@ bbText = "[wave]down here![/wave]"
 floating_text = true
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0 )
@@ -1979,7 +2015,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54532, -21.0452, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -32, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 139 )
+mesh = SubResource( 196 )
 
 [node name="InteractionArea" type="Area" parent="Viewport/level/CubeCrystal/NPC" index="0" groups=["playerActivation"]]
 script = ExtResource( 37 )
@@ -1991,7 +2027,7 @@ shape = SubResource( 115 )
 script = ExtResource( 35 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea"]
-shape = SubResource( 137 )
+shape = SubResource( 194 )
 
 [node name="SmallerInteractionArea" type="Area" parent="Viewport/level/CubeCrystal/NPC" index="2" groups=["corporeal_body"]]
 script = ExtResource( 35 )
@@ -2039,7 +2075,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -23.7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 138 )
+shape = SubResource( 195 )
 
 [node name="InteractPrompt" parent="Viewport/level/CubeCrystal/NPC" index="7" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.81877, -1 )
@@ -2054,10 +2090,10 @@ volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 140 )
+shape = SubResource( 197 )
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 141 )
+shape = SubResource( 198 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/CubeCrystal" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.18264, 3 )
@@ -2196,96 +2232,137 @@ anims/stand = SubResource( 114 )
 [node name="CollisionShape" parent="Viewport/level/AngelStatue2/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 101 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -13, 0 )
-pixel_size = 0.0615
-texture = ExtResource( 4 )
-hframes = 4
-frame = 2
-script = ExtResource( 14 )
-automatically_change_color = false
-
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26, 0 )
 
-[node name="NPC4" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -16.9, 0 )
+[node name="NPC6" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 5.4347, 0 )
+true_terminal_vel = 12
+is_really_important = true
+can_camera_zoom = false
+dont_recolor_me = true
+is_a_body = false
+tiny_textbox = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
+shape = SubResource( 147 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="4"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="5"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="6"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+material_override = SubResource( 148 )
+frame = 28
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+anims/default = SubResource( 149 )
+anims/fall = SubResource( 150 )
+anims/flickerOn = SubResource( 151 )
+anims/jump = SubResource( 152 )
+anims/land = SubResource( 153 )
+anims/stand = SubResource( 154 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC6/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
+shape = SubResource( 155 )
+
+[node name="InteractPrompt" parent="Viewport/level/NPC6" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
+
+[node name="Waterfall" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -6, -5 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="1"]
+visible = false
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="2"]
+visible = false
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="3"]
+visible = false
+
+[node name="MiniAdventures2" parent="Viewport/level/Waterfall" index="4"]
+visible = false
+
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="6"]
+visible = false
+
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -19.9641, 0 )
 grav = 0
-bbText = "•thought you'd perished by now
-•you must have some magick 
-•in you, crone.. impressive."
+bbText = "fellow wise one,
+may i ask a favor of thee?
+
+i seek 7 crystals
+so that i may enter the
+sacred land
+further ahead, please
+brave the dungeons of glitch
+i will pray for thee.
+"
 is_important = true
 is_really_important = true
 
-[node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
-shape = SubResource( 126 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="AbortSound" parent="Viewport/level/NPC4/NPC TextBox/TextBox" index="9"]
-script = ExtResource( 23 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
-frame = 66
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
-anims/default = SubResource( 127 )
-anims/fall = SubResource( 128 )
-anims/flickerOn = SubResource( 129 )
-anims/jump = SubResource( 130 )
-anims/land = SubResource( 131 )
-anims/stand = SubResource( 132 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
-shape = SubResource( 133 )
-
-[node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -22, 0 )
-grav = 0
-bbText = "i feel like we should
-not be here.. actually
-how did i get down here?
-[GLITCH OUT & FRAGMENT]
-[OR SHE'S A MERCHANT LATER]
-\"i'm learning magick!\""
-
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 142 )
+shape = SubResource( 199 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
-frame = 0
+material_override = SubResource( 200 )
+frame = 32
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
-shape = SubResource( 143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3295, 0 )
+shape = SubResource( 201 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
@@ -2340,8 +2417,9 @@ visible = true
 [editable path="Viewport/level/AngelStatue2"]
 [editable path="Viewport/level/AngelStatue2/NPC"]
 [editable path="Viewport/level/AngelStatue2/NPC/NPC TextBox"]
-[editable path="Viewport/level/NPC4"]
-[editable path="Viewport/level/NPC4/NPC TextBox"]
+[editable path="Viewport/level/NPC6"]
+[editable path="Viewport/level/NPC6/NPC TextBox"]
+[editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]

@@ -291,6 +291,8 @@ func interact():
       advanceToEndOfPhrase()
 
 func passiveInteract(_delta):
+  if text_final == "":
+    return
   if !visible and dialogSound.isActive() and (global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and global.activeInteractor == self)):
     if (is_tiny or is_really_important) and not has_been_shown:
       global.activeInteractor = self

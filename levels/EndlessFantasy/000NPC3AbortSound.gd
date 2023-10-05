@@ -5,6 +5,7 @@ onready var NPC3 = get_node("../../..")
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 func _ready():
+    yield(get_tree().create_timer(0.5), "timeout")
     var memory = global.getStaticLevelZoneLevelVar(level, self.name)
     if memory == null:
         return

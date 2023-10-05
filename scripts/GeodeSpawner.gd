@@ -26,7 +26,10 @@ func _ready():
             queue_free()
 
 func _process(_delta):
-    is_active = global.hasGottenLevelGeode and not has_spawned
+    is_active = isConditionActive() and not has_spawned
+
+func isConditionActive():
+    return global.hasGottenLevelGeode
 
 # @override
 func getNumChildren():

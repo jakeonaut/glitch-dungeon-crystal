@@ -2370,7 +2370,7 @@ volume_db = -30.0
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )
-volume_db = -35.0
+volume_db = -26.0
 
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )

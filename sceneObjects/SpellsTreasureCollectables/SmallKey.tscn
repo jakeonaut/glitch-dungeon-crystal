@@ -127,8 +127,8 @@ resource_name = "openUp"
 length = 0.1
 
 [sub_resource type="CylinderShape" id=48]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [node name="SmallKey" type="Spatial"]
 script = ExtResource( 10 )

@@ -9,7 +9,6 @@ var num_sparkles_spawned = 0
 var num_sparkles_spawned_limit = 5
 
 export var my_glitch_form = 2
-export var first_ever_glitch = false
 
 var original_position = null
 var previous_point = null
@@ -47,20 +46,7 @@ func _ready():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  if first_ever_glitch:
-    if global.memory.has("roomPath") and (not ("001CozyHome" in global.memory["roomPath"])):
-      first_ever_glitch = false
-      level.gameCamera.initial_target = level.player.get_node("CameraTarget")
-      level.gameCamera.actual_target = weakref(level.gameCamera.initial_target)
-    else:
-      global.pauseMoveInput = true
-      level.player.fall_timer = 50
-      level.uiLayer.statsTitleRect.visible = false
-      level.uiLayer.get_node("GlitchSprite").visible = false
-      level.uiLayer.get_node("GlitchStatusRect").visible = false
 
-var snarkyCommentTimer = 0
-var snarkyCommentTimeLimit = 10
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
@@ -76,7 +62,7 @@ func _process(delta):
   #     mySprite.visible = false
   #     t = 0
 
-  if not mySprite.visible and shouldIBeActive() and not first_ever_glitch:
+  if not mySprite.visible and shouldIBeActive():
     mySprite.visible = true
   if is_touching_player:
     is_touching_player_timer += (delta*22)
@@ -86,18 +72,6 @@ func _process(delta):
   else:
     mySprite.global_transform.origin = original_position
     is_active = true
-
-  if first_ever_glitch:
-    global.pauseMoveInput = true
-    getPlayer().fall_timer = 999
-    if getPlayer().physics_state == getPlayer().PhysicsState.COLLAPSED:
-      global.pauseMoveInput = false
-    if not global.pauseMoveInput:
-      snarkyCommentTimer += (delta*11)
-      if snarkyCommentTimer >= snarkyCommentTimeLimit:
-        first_ever_glitch = false
-        getPlayer().textBox.tinify()
-        getPlayer().textBox.interact()
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
@@ -164,19 +138,11 @@ func passiveActivate(_delta, _is_player):
     collectSound.play()
   is_active = false
 
-  if first_ever_glitch:
-    global.pauseGame = true
-    getPlayer().mySprite.get_material_override().set_shader_param("enable_palette_cycle", true)
-    getPlayer().mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
-    getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", true)
-    getLevelTiles().unrandomizeAllTiles()
-    musicPlayer.tryToPlay(musicPlayer.wakeupPlayer)
-  else:
-    getPlayer().applyObeliskGlitch(my_glitch_form)
-    level.player.glitchTickle()
-    # if level.player.glitch_death_timer == 0:
-    #   level.player.glitch_death_timer = 5
-    # level.player.should_turn_on_glitch_screen_effects = true
-    global.memory["mp"] = global.memory["max_mp"]
+  getPlayer().applyObeliskGlitch(my_glitch_form)
+  level.player.glitchTickle()
+  # if level.player.glitch_death_timer == 0:
+  #   level.player.glitch_death_timer = 5
+  # level.player.should_turn_on_glitch_screen_effects = true
+  global.memory["mp"] = global.memory["max_mp"]
 
   num_sparkles_spawned = 0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/leez&jake.mp3-67d4217e64aa63c0b2094ebbfe9e2af2.mp3str"
+
+[deps]
+
+source_file="res://assets/music/leez&jake.mp3"
+dest_files=[ "res://.import/leez&jake.mp3-67d4217e64aa63c0b2094ebbfe9e2af2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

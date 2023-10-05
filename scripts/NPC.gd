@@ -140,7 +140,17 @@ func _process(delta):
 
 
 func getSmacked(_broom_origin):
-  if floating_text or not is_active: return
+  if textBox.text_final == "":
+    return false
+  if floating_text or not is_active: 
+    return false
+  # don't get smacked if we're on the wrong side of a wind up
+  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+    return false
+  # don't start IMPORTANT dialog if you threw broom at me
+  if is_important and not global.memory["broom"]:
+    return false
+
   if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -152,7 +162,7 @@ func getSmacked(_broom_origin):
   is_smacked = true
   did_i_get_smacked = true
 
-  if global.activeInteractor == null and (level.player.mySprite.flip_h == which_side_is_player_on or not global.memory["broom"]):
+  if global.activeInteractor == null and not textBox.text_final == "":
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
@@ -187,7 +197,7 @@ func passiveActivate(delta, is_player):
       visible = true
     can_activate = false
   elif visible and (not aniPlayer or not aniPlayer.is_playing()):
-    if (global.activeInteractor == null and level.player.on_ground) or global.activeInteractor == textBox:
+    if global.activeInteractor == null or global.activeInteractor == textBox:
       textBox.passiveInteract(delta)
 
 func stopPassiveActivate():

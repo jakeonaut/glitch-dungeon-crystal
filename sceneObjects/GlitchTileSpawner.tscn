@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/glitchspawneffect.wav" type="AudioStream" id=3]
+[ext_resource path="res://scripts/GlitchTileSpawner.gd" type="Script" id=4]
+[ext_resource path="res://assets/dog.png" type="Texture" id=5]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="GlitchTileSpawner" type="Spatial"]
+script = ExtResource( 4 )
+spawned_object_path = "res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn"
+max_num_children = 1
+x_range = Vector2( 0, 0 )
+only_activate_in_range = false
+num_native_children = 4
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0625
+texture = ExtResource( 5 )
+
+[node name="Area" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 1 )
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -20.0
+pitch_scale = 0.95
+
+[node name="SpawnSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -20.0
+pitch_scale = 2.0

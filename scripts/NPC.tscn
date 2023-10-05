@@ -263,7 +263,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
 shape = SubResource( 10 )
 
 [node name="InteractPrompt" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.81877, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
 visible = false
 material_override = SubResource( 11 )
 frame = 745
