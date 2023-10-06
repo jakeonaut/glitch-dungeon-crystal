@@ -142,8 +142,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.8
 height = 1.6
+radius = 0.8
 
 [sub_resource type="CylinderShape" id=3]
 radius = 0.8

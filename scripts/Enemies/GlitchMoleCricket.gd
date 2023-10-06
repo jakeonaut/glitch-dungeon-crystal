@@ -38,12 +38,6 @@ func getFakeLevelTiles():
         fakeLevelTiles = level.fakeLevelTiles
     return fakeLevelTiles
 
-var player = null
-func getPlayer():
-    if player == null:
-        player = level.player
-    return player
-
 func _ready():
     set_process(true)
     aniPlayer.stop()

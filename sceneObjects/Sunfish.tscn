@@ -105,7 +105,8 @@ texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
 script = ExtResource( 1 )
-max_frames = 0
+max_frames = 1
+should_animate = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

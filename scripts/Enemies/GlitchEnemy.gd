@@ -27,6 +27,7 @@ var slime_idle_time_limit = 10
 var am_i_dying = false
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
+export var only_activate_in_range = true
 
 export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
@@ -195,6 +196,7 @@ func _process(delta):
         if smack_timer >= smack_recovery_time_limit:
             is_smacked = false
 
+var last_palette = global.grey_palette
 func unsmack():
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
@@ -202,7 +204,7 @@ func unsmack():
     mySprite.material_override.set_shader_param("shake_power", 0.03)
     mySprite.material_override.set_shader_param("shake_block_size", 30.5)
     mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
-    mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
+    mySprite.material_override.set_shader_param("target_palette", last_palette)
 
     if myOtherSprite:
         myOtherSprite.material_override.set_shader_param("time_influence", 3)
@@ -267,7 +269,7 @@ func tryDieToOffscreenCamera():
 var override_am_i_in_range_of_player = false
 # @override
 func processPhysics(delta):
-    if not am_i_in_range_of_player and not override_am_i_in_range_of_player:
+    if only_activate_in_range and not am_i_in_range_of_player and not override_am_i_in_range_of_player:
         return
     elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
         return
@@ -392,6 +394,15 @@ func ouchies(_broom_origin):
         return true
     return false
 
+# is this cheating?
+var player = null
+func getPlayer():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if player == null:
+    player = level.player
+  return player
+
 func notOuchies(broom_origin):
     if not is_smacked:
         summonSmokeClouds(1, true, true)
@@ -459,6 +470,7 @@ func getSmacked(_broom_origin):
     mySprite.material_override.set_shader_param("shake_power", 0.143)
     mySprite.material_override.set_shader_param("shake_block_size", 60)
     mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
+    last_palette = mySprite.material_override.get_shader_param("target_palette")
     mySprite.material_override.set_shader_param("target_palette", global.white_palette)
 
     if myOtherSprite:
