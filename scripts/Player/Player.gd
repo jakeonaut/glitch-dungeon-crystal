@@ -197,7 +197,7 @@ var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null
+  pauseInput = summonedBroom != null or global.pauseMoveInput
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -704,6 +704,9 @@ func processBroomLogic(delta):
   if not global.memory["broom"]:
     if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       noBroomSound.play()
+    return
+
+  if global.pauseMoveInput and global.activeInteractor == null:
     return
 
   if not summonedBroom and is_in_broom_cooldown:

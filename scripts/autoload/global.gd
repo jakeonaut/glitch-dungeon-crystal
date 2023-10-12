@@ -317,8 +317,12 @@ func doFallthroughObjectCollision(gameMover, area):
 
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
-    if gameMover.pressingDown() or not "should_do_fallthrough_area_collision" in gameMover:
+    if (gameMover.pressingDown() and (gameMover.on_ground or (y - gameMover.tb) < (ay + atb))) or \
+       (not "should_do_fallthrough_area_collision" in gameMover):
+        if "should_do_fallthrough_area_collision" in gameMover:
+            gameMover.should_do_fallthrough_area_collision = false
         return false
+
         
     # check for fallThroughSolid collision while falling
     var rb = gameMover.rb

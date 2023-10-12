@@ -2660,6 +2660,9 @@ visible = false
 material_override = SubResource( 159 )
 texture = ExtResource( 8 )
 
+[node name="InteractPrompt" parent="Viewport/level/Door2" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0300002, 5.09914, 0 )
+
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 160 )
 

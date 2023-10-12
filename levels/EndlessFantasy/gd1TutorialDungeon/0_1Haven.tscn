@@ -864,7 +864,7 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=196]
+[sub_resource type="ArrayMesh" id=202]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -880,7 +880,7 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=115]
 extents = Vector3( 3, 1.3, 1 )
 
-[sub_resource type="BoxShape" id=194]
+[sub_resource type="BoxShape" id=197]
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
@@ -1058,7 +1058,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="BoxShape" id=195]
+[sub_resource type="BoxShape" id=198]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -1090,11 +1090,11 @@ shader_param/texture_albedo = ExtResource( 38 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=197]
+[sub_resource type="BoxShape" id=203]
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
-[sub_resource type="BoxShape" id=198]
+[sub_resource type="BoxShape" id=204]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -2015,7 +2015,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54532, -21.0452, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -32, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 196 )
+mesh = SubResource( 202 )
 
 [node name="InteractionArea" type="Area" parent="Viewport/level/CubeCrystal/NPC" index="0" groups=["playerActivation"]]
 script = ExtResource( 37 )
@@ -2027,7 +2027,7 @@ shape = SubResource( 115 )
 script = ExtResource( 35 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea"]
-shape = SubResource( 194 )
+shape = SubResource( 197 )
 
 [node name="SmallerInteractionArea" type="Area" parent="Viewport/level/CubeCrystal/NPC" index="2" groups=["corporeal_body"]]
 script = ExtResource( 35 )
@@ -2075,7 +2075,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -23.7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 195 )
+shape = SubResource( 198 )
 
 [node name="InteractPrompt" parent="Viewport/level/CubeCrystal/NPC" index="7" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.81877, -1 )
@@ -2090,10 +2090,10 @@ volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 197 )
+shape = SubResource( 203 )
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 198 )
+shape = SubResource( 204 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/CubeCrystal" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.18264, 3 )

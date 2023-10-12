@@ -294,7 +294,7 @@ material_override = SubResource( 35 )
 visible = false
 
 [node name="InteractPrompt" parent="Viewport/level/Door" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 5.13888, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.33888, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )

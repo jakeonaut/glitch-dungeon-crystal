@@ -222,9 +222,10 @@ hframes = 2
 vframes = 2
 
 [node name="InteractPrompt" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.63888, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 4, 0 )
 visible = false
 material_override = SubResource( 8 )
+flip_v = true
 pixel_size = 0.12
 texture = ExtResource( 18 )
 hframes = 8

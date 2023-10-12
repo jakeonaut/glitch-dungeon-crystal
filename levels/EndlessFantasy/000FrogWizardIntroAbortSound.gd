@@ -21,7 +21,7 @@ func activateScript():
         NPC.pressing_move_left = false
         NPC.aniPlayer.stop()
         NPC.aniPlayer.clear_queue()
-        NPC.textBoxContainer.bbText = "•your broom... how did you do that?\n... \npress DOWN to enter door"
+        NPC.textBoxContainer.bbText = "•your broom... how did you do that?\n... \npress UP to enter door"
         NPC.textBoxContainer.setVars()
         NPC.textBox.is_important = true
         NPC.textBox.is_really_important = true

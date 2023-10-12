@@ -886,7 +886,8 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 20 )
-player_message = "oh!\\nour chickens!"
+player_message = "oh!
+our chickens!"
 show_crt_effect = true
 tileset_type = 2
 spellbook_forbidden = true
@@ -1274,7 +1275,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.8, 0 )
 
 [node name="QuietSavePoint" parent="Viewport/level" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0 )
 
 [node name="TriangleContainer" parent="Viewport/level/QuietSavePoint" index="0"]
 visible = false
