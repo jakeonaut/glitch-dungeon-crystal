@@ -1435,7 +1435,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -3.5, -4 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9818, 25.0596, 0 )
-bbText = "keep going up!"
+bbText = "•keep going up!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1497,7 +1497,7 @@ shape = SubResource( 35 )
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.9818, 29.1596, 0 )
-bbText = "oops!"
+bbText = "•oops!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1564,7 +1564,7 @@ anims/getItem = SubResource( 83 )
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.6818, 28.1596, 0 )
-bbText = "oops!"
+bbText = "•oops!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1632,7 +1632,7 @@ anims/getItem = SubResource( 89 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.3818, 10.7596, 0 )
 grav = 0
-bbText = "i don't want this"
+bbText = "•i don't want this"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1689,7 +1689,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7818, 15.8596, 0 )
 grav = 0
-bbText = "these \"glitch\" things
+bbText = "•these \"glitch\" things
 freak me out"
 can_move = false
 can_camera_zoom = false
@@ -1770,7 +1770,7 @@ anims/getItem = SubResource( 46 )
 [node name="NPC10" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.5818, 6.7596, 0 )
 grav = 0
-bbText = "you lookin' for
+bbText = "•you lookin' for
 the crystal?
 go up."
 can_move = false
@@ -1995,7 +1995,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.1818, 34.1596, 0 )
 grav = 0
-bbText = "we're trying out
+bbText = "•we're trying out
 new technique"
 is_really_important = true
 can_move = false

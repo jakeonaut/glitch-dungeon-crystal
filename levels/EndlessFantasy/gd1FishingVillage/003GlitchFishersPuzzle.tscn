@@ -1196,7 +1196,7 @@ anims/metamorphosis = SubResource( 80 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 155, 45, 0 )
 visible = false
 grav = 0
-bbText = "use [SPACE] to switch between the
+bbText = "•use [SPACE] to switch between the
 last two colors!"
 portrait = ExtResource( 22 )
 tiny_textbox = true
@@ -1230,7 +1230,7 @@ shape = SubResource( 19 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 33, 0 )
 grav = 0
-bbText = "hey can you watch over
+bbText = "•hey can you watch over
 EGG for me?... ...
 ...thanks... .."
 tiny_textbox = true
@@ -1239,7 +1239,7 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 18, 0 )
 visible = false
 grav = 0
-bbText = "wow. i'm surprised
+bbText = "•wow. i'm surprised
 you made it over here"
 is_important = true
 is_really_important = true
@@ -1270,7 +1270,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 0 )
 [node name="NPC2" parent="Viewport/level/QuestionBlock3" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 grav = 0
-bbText = "why did you
+bbText = "•why did you
 wake me up?"
 can_activate = false
 can_camera_zoom = false
@@ -1425,7 +1425,7 @@ anims/getItem = SubResource( 84 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7818, 16.0596, 0 )
-bbText = "sometimes you just
+bbText = "•sometimes you just
 gotta relax"
 can_move = false
 can_camera_zoom = false

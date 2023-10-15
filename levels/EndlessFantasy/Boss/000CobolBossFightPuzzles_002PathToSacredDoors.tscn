@@ -158,7 +158,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -13, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, -9.9, 0 )
-bbText = "Rgndaam,lpealephse.
+bbText = "•Rgndaam,lpealephse.
 dsutgilhtescvorcrooyudb"
 is_a_body = false
 

@@ -904,7 +904,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 32.2, 0 )
 
 [node name="TextContainer" parent="Viewport/level/Player" index="15"]
-bbText = "i don't remember us 
+bbText = "•i don't remember us 
 having a basement.."
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 4 )]
@@ -1212,7 +1212,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, 1.1, 0 )
 grav = 0
-bbText = "hmm.. what's going on?
+bbText = "•hmm.. what's going on?
 i'll stay and tend to
 the chickens."
 

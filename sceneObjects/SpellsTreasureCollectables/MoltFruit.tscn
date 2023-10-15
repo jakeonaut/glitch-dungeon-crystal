@@ -111,7 +111,7 @@ tracks/1/keys = {
 collision_layer = 2
 script = ExtResource( 10 )
 grav = 0
-bbText = "\"MOLT FRUIT\" get!!!
+bbText = "•\"MOLT FRUIT\" get!!!
 wow, good job
 
 now you can double jump

@@ -282,7 +282,7 @@ shape = SubResource( 30 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8818, 9.14345, 0 )
-bbText = "some glitches are
+bbText = "•some glitches are
 un-sweepable.
 i know this"
 can_move = false

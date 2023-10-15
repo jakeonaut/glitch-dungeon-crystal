@@ -423,7 +423,7 @@ shader_param/target_palette = ExtResource( 16 )
 collision_layer = 2
 script = ExtResource( 7 )
 grav = 0
-bbText = "\"GRIMOIRE\" get!!
+bbText = "•\"GRIMOIRE\" get!!
 ...............
 ????"
 portrait = ExtResource( 11 )

@@ -363,7 +363,7 @@ frame = 2
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6999, 4.23691, 0 )
 grav = 0
-bbText = "[wave]sweep it! [X][/wave]
+bbText = "•[wave]sweep it! [X][/wave]
 then die."
 can_camera_zoom = false
 is_a_body = false

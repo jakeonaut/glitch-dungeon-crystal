@@ -405,7 +405,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
 collision_layer = 2
 script = ExtResource( 14 )
-bbText = "GET witch/rooms/room_4_5.txt
+bbText = "•GET witch/rooms/room_4_5.txt
 404 (File not found)"
 is_really_important = true
 can_camera_zoom = false

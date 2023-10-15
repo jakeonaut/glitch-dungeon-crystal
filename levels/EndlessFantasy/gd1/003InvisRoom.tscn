@@ -746,7 +746,7 @@ shape = SubResource( 16 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 0.6, 0 )
 grav = 0
-bbText = "hop on,
+bbText = "•hop on,
 i'll boost ya"
 can_camera_zoom = false
 dont_recolor_me = true
@@ -756,7 +756,7 @@ tiny_textbox = true
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3.1, 0 )
 grav = 0
-bbText = "hop on,
+bbText = "•hop on,
 i'll boost ya"
 can_camera_zoom = false
 dont_recolor_me = true
@@ -780,7 +780,7 @@ shape = SubResource( 36 )
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 4.8, 0 )
 grav = 0
-bbText = "hop on,
+bbText = "•hop on,
 i'll boost ya"
 can_camera_zoom = false
 dont_recolor_me = true
@@ -804,7 +804,7 @@ shape = SubResource( 36 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0 )
 grav = 0
-bbText = "hop on,
+bbText = "•hop on,
 i'll boost ya"
 can_camera_zoom = false
 dont_recolor_me = true
@@ -829,7 +829,7 @@ shape = SubResource( 36 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 9.1, 0 )
 grav = 0
-bbText = "i don't feel so great"
+bbText = "•i don't feel so great"
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
@@ -865,7 +865,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 11.5, 0 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8.1, 0 )
 grav = 0
-bbText = "oh hello dearie. do ye
+bbText = "•oh hello dearie. do ye
 remember how to sweep up?
 just press [X]"
 is_really_important = true

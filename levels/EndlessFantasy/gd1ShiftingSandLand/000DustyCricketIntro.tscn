@@ -362,7 +362,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 1.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "LADDER SPELL walk up
+bbText = "•LADDER SPELL walk up
 walls by walking into them"
 can_move = false
 can_camera_zoom = false
@@ -410,7 +410,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6, 24, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 7.7, 0 )
 grav = 0
-bbText = "[color=#ffff00]Ladder[/color] spell: walk
+bbText = "•[color=#ffff00]Ladder[/color] spell: walk
 up walls by walking
 forward"
 can_camera_zoom = false

@@ -199,7 +199,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 31, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 39, 0 )
-bbText = "you've gotten past
+bbText = "•you've gotten past
 my horrible sisters!!
 HERE, take [CRYSTAL]"
 tiny_textbox = true

@@ -56,21 +56,21 @@ uniform float pixelSize = 1.0;
 
 void fragment()
 {
-	
-	ivec2 size = textureSize(TEXTURE, 0);
-	
-	int xRes = size.x;
-	int yRes = size.y;
-	
-	float xFactor = float(xRes) / pixelSize;
-	float yFactor = float(yRes) / pixelSize;
-	
-	float grid_uv_x = round(UV.x * xFactor) / xFactor;
-	float grid_uv_y = round(UV.y * yFactor) / yFactor;
-	
-	vec4 text = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y));
-	
-	COLOR = text;
+  
+  ivec2 size = textureSize(TEXTURE, 0);
+  
+  int xRes = size.x;
+  int yRes = size.y;
+  
+  float xFactor = float(xRes) / pixelSize;
+  float yFactor = float(yRes) / pixelSize;
+  
+  float grid_uv_x = round(UV.x * xFactor) / xFactor;
+  float grid_uv_y = round(UV.y * yFactor) / yFactor;
+  
+  vec4 text = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y));
+  
+  COLOR = text;
 }"
 
 [sub_resource type="ShaderMaterial" id=11]
@@ -119,11 +119,11 @@ custom_fonts/normal_font = SubResource( 9 )
 bbcode_text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y	"
+    global_transform.origin.y += lv.y "
 text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
     global_transform.origin.x += lv.x
     lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y	"
+    global_transform.origin.y += lv.y "
 script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -245,7 +245,7 @@ behavior_was_thrown = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 17.0178, 0 )
-bbText = "GLITCH
+bbText = "•GLITCH
         DUNGEON
     CRYSTAL"
 
@@ -260,12 +260,12 @@ shape = SubResource( 12 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3.98224, 0 )
-bbText = "you're not supposed
+bbText = "•you're not supposed
 to be down here"
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1.01776, 0 )
-bbText = "you're not supposed
+bbText = "•you're not supposed
 to be over here"
 
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 22 )]

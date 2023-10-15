@@ -1027,7 +1027,7 @@ shape = SubResource( 74 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9.47272, 0 )
 grav = 0
-bbText = "are you lost?"
+bbText = "•are you lost?"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
@@ -1318,7 +1318,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 19.7, 0 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 17, 0 )
 grav = 0
-bbText = "you found me!
+bbText = "•you found me!
 here is a deathroot
 seed"
 tiny_textbox = true
@@ -1354,7 +1354,7 @@ shape = SubResource( 76 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.9, 23, 0 )
 grav = 0
-bbText = "i can't get down..."
+bbText = "•i can't get down..."
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
@@ -1388,7 +1388,7 @@ shape = SubResource( 77 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6, 21.2, 0 )
 grav = 0
-bbText = "don't lose your way
+bbText = "•don't lose your way
 in the angel's forest"
 tiny_textbox = true
 

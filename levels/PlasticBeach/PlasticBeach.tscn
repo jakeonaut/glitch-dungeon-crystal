@@ -914,7 +914,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -11, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 39, 0 )
 grav = 0
-bbText = "my snail farm..."
+bbText = "•my snail farm..."
 tiny_textbox = true
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 7 )]
@@ -923,12 +923,12 @@ grav = 0
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91, 26, 0 )
-bbText = "welcome to stone sky island"
+bbText = "•welcome to stone sky island"
 tiny_textbox = true
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, -1, 0 )
-bbText = "gribbit"
+bbText = "•gribbit"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]

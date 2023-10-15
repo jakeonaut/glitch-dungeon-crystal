@@ -21,6 +21,8 @@ func setVars():
     if bbText != "":
         textBoxtext.bbcode_text = bbText
         textBox.text_final = bbText
+    else:
+        textBox.text_final = textBoxtext.bbcode_text
     if portrait:
         textBoxportrait.texture = portrait
 

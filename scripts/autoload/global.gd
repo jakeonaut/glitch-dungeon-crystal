@@ -300,6 +300,11 @@ func getNextGlitch(glitch_form):
     if glitch_form == global.GlitchForm.LADDER: return global.GlitchForm.WALK_THROUGH_WALLS
     if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS: return global.GlitchForm.NORMAL
 
+func strip_bbcode(source):
+  var regex = RegEx.new()
+  regex.compile("\\[.+?\\]")
+  return regex.sub(source, "", true)
+
 # why is this here and not in PlayerInteractionArea/InteractionAreaPassive or GameMover?
 # well, we don't want to copy the function three times for the InteractionAreas...
 #   (although we should probably have a better method of dealing with that since we already copy some)

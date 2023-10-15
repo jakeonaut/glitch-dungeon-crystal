@@ -144,7 +144,7 @@ __meta__ = {
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 9, 0 )
 grav = 0
-bbText = "oh! hello there!
+bbText = "•oh! hello there!
 you're human too..
 welcome to town.
 you must have lots of 
@@ -165,7 +165,7 @@ frame = 4
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 12, 0 )
 grav = 0
-bbText = "how are
+bbText = "•how are
 you?
 
 bye!"
@@ -174,19 +174,19 @@ tiny_textbox = true
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 20, 0 )
 grav = 0
-bbText = "my dream is for
+bbText = "•my dream is for
 this town to be
 filled with CRYSTALS"
 tiny_textbox = true
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, 0 )
-bbText = "hi!"
+bbText = "•hi!"
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 17, 0 )
 grav = 0
-bbText = "yeah!!!
+bbText = "•yeah!!!
 CRYSTAL ELDERS
 know all secrets!
 hey how did you
@@ -196,7 +196,7 @@ tiny_textbox = true
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 11, 0 )
 grav = 0
-bbText = "go LEFT to find
+bbText = "•go LEFT to find
 spellbook page..
 get power!!"
 tiny_textbox = true
@@ -208,13 +208,13 @@ shape = SubResource( 7 )
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 18, 0 )
 grav = 0
-bbText = "she's my friend"
+bbText = "•she's my friend"
 tiny_textbox = true
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72, 15, 0 )
 grav = 0
-bbText = "oh! you're looking for
+bbText = "•oh! you're looking for
 CRYSTAL ELDERS?
 they know the rules
 of this place... they're

@@ -586,7 +586,7 @@ shape = SubResource( 19 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09213, 2.00803, 0 )
-bbText = "meOW!"
+bbText = "•meOW!"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
@@ -601,7 +601,7 @@ shape = SubResource( 38 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09213, -18.992, 0 )
-bbText = "darned pests infest
+bbText = "•darned pests infest
 mien hoem!"
 tiny_textbox = true
 

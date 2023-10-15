@@ -270,7 +270,7 @@ shape = SubResource( 16 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 0.6, 0 )
 grav = 0
-bbText = "hop on,
+bbText = "•hop on,
 i'll boost ya"
 can_camera_zoom = false
 is_a_body = false
@@ -279,7 +279,7 @@ tiny_textbox = true
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 2.7, 0 )
 grav = 0
-bbText = "i don't feel so great"
+bbText = "•i don't feel so great"
 can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true

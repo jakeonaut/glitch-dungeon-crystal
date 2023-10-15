@@ -716,7 +716,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59.0938, 15.8343, 0 )
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5058, 10.7514, 0 )
 grav = 0
-bbText = "wah wah"
+bbText = "•wah wah"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC9/SmallInteractionArea" index="0"]
@@ -745,14 +745,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 18, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 46, 0 )
 visible = false
 grav = 0
-bbText = "YOU GOT UP!!!!"
+bbText = "•YOU GOT UP!!!!"
 tiny_textbox = true
 
 [node name="NPC10" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 35, 0 )
 visible = false
 grav = 0
-bbText = "i don't really know
+bbText = "•i don't really know
 how to talk to those
 frog things"
 tiny_textbox = true
@@ -760,7 +760,7 @@ tiny_textbox = true
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 20, 0 )
 grav = 0
-bbText = "how are
+bbText = "•how are
 you?
 
 bye!"

@@ -10,9 +10,9 @@ export(NodePath) var nextTextBoxPath = NodePath("")
 var tinyTextTheme = preload("res://appleKidDialogFontTheme2.tres")
 
 var text_timer = 0
-var text_next_index = 0
-var text_time_limit = 0
+var text_time_limit = 0.5
 var text_final = ''
+var stripped_text = ''
 
 var ui_should_continue = false
 
@@ -45,6 +45,7 @@ var nextPrompt_wiggled_up = false
 
 onready var textContainer = get_node("..")
 onready var textboxParent = weakref(get_node("../.."))
+onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget"))
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
@@ -128,10 +129,6 @@ func _process(delta):
 
   # TODO(jaketrower): This logic could probably be simplified with a FSM, or at least broken into functions
   if visible:
-    text_timer += (delta*22)
-    
-    var time_limit = text_time_limit
-    
     if not floating_text:
       tryToHide(delta)
       
@@ -150,48 +147,68 @@ func _process(delta):
           global.pauseGame = false
       is_really_important = false
       
-    if isWaitingForNextPrompt():
-      if not ui_should_continue:
-        nextPrompt.visible = not is_tiny and not floating_text
-        return
-      ui_should_continue = false
+    elif isWaitingForNextPrompt():
+      nextPrompt.visible = not is_tiny and not floating_text
 
-    if text_timer >= time_limit and text_next_index < len(text_final):
-      appendNextTextCharacter()
+    if (not isWaitingForNextPrompt() and not isWaitingForEndPrompt()) or ui_should_continue:
+      text_timer += (delta*22)
+      var time_limit = text_time_limit
+      if textNode.visible_characters >= len(stripped_text):
+        pass
+      elif stripped_text[textNode.visible_characters - 1] == ",":
+        time_limit *= 10
+      elif  stripped_text[textNode.visible_characters - 1] == ".":
+        time_limit *= 20
+
+      if text_timer >= time_limit and textNode.visible_characters < len(stripped_text):
+        appendNextTextCharacter()
+        ui_should_continue = false
 
 func advanceToEndOfPhrase():
   while not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
     appendNextTextCharacter(false)
       
+var num_newlines = 0
+var stupid_newline_difference_variable = 0
+var currently_scrolled_line = 0
+var now_were_scrolling = false
 func appendNextTextCharacter(play_sound = true):
+  if tindex >= len(stripped_text):
+    return
   if textboxParent.get_ref():
     textboxParent.get_ref().appendNextTextCharacter()
-
-  # TODO(jaketrower): this still has an odd effect when processing bbcode tags
-  textNode.bbcode_text += text_final[text_next_index]
-  
   if is_tiny:
     adjustTinyColorRect()
 
   if not isWaitingForNextPrompt() and not isWaitingForEndPrompt():
     resetPrompts()
-
-  if textNode.bbcode_text.count("\n") >= 3 or textNode.bbcode_text.count("↓") >= 1:
-    textNode.bbcode_text = ""
-    resetTinyColorRect()
-    adjusted_tiny_y_pos += 35
     
   if play_sound:
     dialogSound.play()
   text_timer = 0
-  text_next_index += 1
+  
+  tindex += 1
+  if tindex < len(stripped_text):
+      if stripped_text[tindex] == "↓":
+        num_newlines = 3
+        textNode.scroll_to_line(currently_scrolled_line + 1)
+        currently_scrolled_line += 1
+      elif stripped_text[tindex] == "\n":
+        num_newlines += 1
+        if num_newlines < 3 and now_were_scrolling:
+          textNode.scroll_to_line(currently_scrolled_line + 1)
+          currently_scrolled_line += 1
+      else:
+        textNode.visible_characters += 1
+  if isWaitingForEndPrompt():
+    textNode.scroll_to_line(currently_scrolled_line + 1)
+    currently_scrolled_line += 1
       
 func isWaitingForNextPrompt():
-  return text_next_index < len(text_final) and ((text_final[text_next_index] == "\n" and textNode.bbcode_text.count("\n") == 2) or \
-                                                text_final[text_next_index] == "↓")
+  return tindex < len(stripped_text) and num_newlines == 3
   
 func isWaitingForEndPrompt():
-  return text_next_index == len(text_final)
+  return tindex + 1 >= len(stripped_text)
 
 func wigglePrompt(delta, promptSprite):
   nextPrompt_wiggle_timer += (delta*22)
@@ -209,12 +226,24 @@ func resetPrompts():
   nextPrompt_wiggle_timer = 0
   nextPrompt_wiggled_up = false
       
+var tindex = -1
 func showTextbox():
+  if text_final.find("•") == -1 and not text_final == "":
+    text_final = "•" + text_final
+  textNode.visible_characters = 0
+  textNode.bbcode_text = text_final
+  tindex = -1
+  stripped_text = global.strip_bbcode(textNode.bbcode_text)
+
   if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
     textContainer.remove_child(self)
     level.uiLayer.add_child(self)
     am_i_in_ui_layer = true
 
+  num_newlines = 0
+  stupid_newline_difference_variable = 0
+  currently_scrolled_line = 0
+  now_were_scrolling = false
   setTextBoxPosition()
   has_preactivated = false
   focus_me = true
@@ -223,12 +252,9 @@ func showTextbox():
     global.pauseGame = true
     # maybe treat this like the Item Catch?
   # if tiny: tinyColorRect.visible = true
-  text_timer = 0
-  text_next_index = 0
-  textNode.bbcode_text = ""
+  text_timer = 99999
   if is_immediate or floating_text:
-    textNode.bbcode_text = text_final
-    text_next_index = len(text_final)
+    textNode.visible_characters = len(stripped_text)
   resetTinyColorRect()
 
   textNode.get_v_scroll().value = 0
@@ -280,13 +306,23 @@ func interact():
 
   # print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
-    if isWaitingForNextPrompt():
+    if isWaitingForEndPrompt():
+      print("END")
+      hideTextbox()
+    elif isWaitingForNextPrompt():
+      print("NEXT")
+      textNode.scroll_to_line(currently_scrolled_line + 1)
+      currently_scrolled_line += 1
+      now_were_scrolling = true
       nextDialogSound.play()
       ui_should_continue = true
       nextPrompt.visible = false
-    elif isWaitingForEndPrompt():
-      hideTextbox()
+      stupid_newline_difference_variable += 3
+      num_newlines = 0
+      resetTinyColorRect()
+      adjusted_tiny_y_pos += 35
     else:
+      print("ADVANCE")
       nextDialogSound.play()
       advanceToEndOfPhrase()
 
@@ -307,13 +343,17 @@ func stopInteract():
     focus_me = false
   
 func adjustTinyColorRect():
-  var lines = textNode.bbcode_text.split("\n", true)
-  var last_char = textNode.bbcode_text[len(textNode.bbcode_text)-1]
+  # TODO(jaketrower): nocommit
+  # this needs to be updated with the new visible characters... ? num_newlines ?
+  var lines = stripped_text.substr(0, tindex).split("\n", true)
+  var last_char = stripped_text[tindex]
   var max_width = 0
   var last_line_width = 0
   var total_height = 0
   var font = textNode.get_font("normal_font")
   for i in lines.size():
+    if i < stupid_newline_difference_variable:
+      pass
     var line = lines[i]
     var width = font.get_string_size(line).x
     var height = font.get_height()

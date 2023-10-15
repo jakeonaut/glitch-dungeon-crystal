@@ -34,8 +34,8 @@ func _process(delta):
         player.textBox.interact()
   else:
     if player.glitch_form == global.GlitchForm.FEATHER:
-      npcGranny.textBox.text_final = "i'm feeling... green?\nas light as a leaf\n i hope i dont get sick.."
+      npcGranny.textBox.text_final = "•i'm feeling... green?\nas light as a leaf\n i hope i dont get sick.."
     elif player.glitch_form == global.GlitchForm.FLOOR:
-      npcGranny.textBox.text_final = "i'm feeling RED!\nready to move!\nhoo ya!! oh dear me.."
+      npcGranny.textBox.text_final = "•i'm feeling RED!\nready to move!\nhoo ya!! oh dear me.."
     else:
       npcGranny.textBox.text_final = original_granny_text

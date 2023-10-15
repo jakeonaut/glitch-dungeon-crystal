@@ -79,15 +79,15 @@ func _ready():
     var num_keys = global.getLevelZoneThing("key")
     if num_keys == null or num_keys == 0:
       if num_keys_unlock == 1:
-        npc.textBoxContainer.bbText = "locked,\nneeds a key"
+        npc.textBoxContainer.bbText = "•locked,\nneeds a key"
       else:
-        npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
     elif num_keys != null and num_keys < num_keys_unlock:
       prev_keys = num_keys
-      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
+      npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
     else:
       prev_keys = num_keys
-      npc.textBoxContainer.bbText = "press [UP] to unlock"
+      npc.textBoxContainer.bbText = "•press [UP] to unlock"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:
@@ -126,13 +126,13 @@ func _process(delta):
     prev_keys = num_keys
     if num_keys == null or num_keys == 0:
       if num_keys_unlock == 1:
-        npc.textBoxContainer.bbText = "locked,\nneeds a key"
+        npc.textBoxContainer.bbText = "•locked,\nneeds a key"
       else:
-        npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock) + " keys"
+        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
     elif num_keys != null and num_keys < num_keys_unlock:
-      npc.textBoxContainer.bbText = "locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
+      npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
     else:
-      npc.textBoxContainer.bbText = "press [UP] to unlock"
+      npc.textBoxContainer.bbText = "•press [UP] to unlock"
     npc.textBoxContainer.setVars()
 
 func spawnParticles(delta):

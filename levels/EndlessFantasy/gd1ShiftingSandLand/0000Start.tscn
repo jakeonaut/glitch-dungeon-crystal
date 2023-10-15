@@ -355,7 +355,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 9.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "Error: NPC: 
+bbText = "•Error: NPC: 
 GET bb_text not found"
 can_move = false
 can_camera_zoom = false

@@ -713,7 +713,7 @@ shape = SubResource( 51 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9182, 0.0596399, 0 )
 grav = 0
-bbText = "hi
+bbText = "•hi
 "
 can_move = false
 can_camera_zoom = false
@@ -811,7 +811,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4, 2.6, 0 )
 mesh = SubResource( 52 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal" index="10"]
-bbText = "oh hello dearie.
+bbText = "•oh hello dearie.
 "
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC/SmallInteractionArea" index="0"]
@@ -858,7 +858,7 @@ visible = false
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 4.2, 0 )
-bbText = "[wave]smack it! [X][/wave]"
+bbText = "•[wave]smack it! [X][/wave]"
 is_a_body = false
 floating_text = true
 tiny_textbox = true

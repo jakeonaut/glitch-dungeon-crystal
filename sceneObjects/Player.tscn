@@ -2489,7 +2489,7 @@ visible = false
 is_static_in_level = false
 
 [node name="TextContainer" parent="." instance=ExtResource( 32 )]
-bbText = "hi!!!! hi hi hi !!!!"
+bbText = "•hi!!!! hi hi hi !!!!"
 
 [node name="TextBox" parent="TextContainer" index="0"]
 can_camera_zoom = false
@@ -2541,5 +2541,7 @@ frame = 4
 script = ExtResource( 10 )
 max_frames = 1
 should_animate = false
+
+[node name="TextBoxCameraTarget" type="Spatial" parent="."]
 
 [editable path="TextContainer"]

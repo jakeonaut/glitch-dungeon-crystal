@@ -107,7 +107,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7.95583, 0 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.004, 2, 0 )
 grav = 0
-bbText = "you can talk to us 
+bbText = "•you can talk to us 
 by press [DOWN]
 
 yeah, just like that!"
@@ -115,7 +115,7 @@ tiny_textbox = true
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 4, 0 )
-bbText = "see IntroScene2ForestLevelScript"
+bbText = "•see IntroScene2ForestLevelScript"
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 3 )
@@ -129,7 +129,7 @@ script = ExtResource( 13 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6545, 17, 0 )
 grav = 0
-bbText = "if you ever get
+bbText = "•if you ever get
 lost.. you can follow
 the torches
 i really love putting
@@ -141,7 +141,7 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 7, 0 )
 visible = false
 grav = 0
-bbText = "there are many
+bbText = "•there are many
 secrets in this 
 world..
 you can collect ESSENCE

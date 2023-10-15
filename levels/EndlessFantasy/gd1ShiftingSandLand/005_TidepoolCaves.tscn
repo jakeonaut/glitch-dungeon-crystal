@@ -391,7 +391,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.2898, 12.7, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -1.6, 0 )
-bbText = "are you trying
+bbText = "•are you trying
 to find our sacred
 crystal treasure?"
 can_move = false
@@ -478,7 +478,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.18982, -6.3, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer2" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -1.6, 0 )
-bbText = "hi so much!"
+bbText = "•hi so much!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

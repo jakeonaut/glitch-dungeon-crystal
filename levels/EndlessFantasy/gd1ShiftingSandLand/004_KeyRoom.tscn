@@ -376,7 +376,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.3, 34, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4, 13.1, 0 )
 grav = 0
-bbText = "don't tell anyone
+bbText = "•don't tell anyone
 i'm slacking off.."
 is_really_important = true
 can_camera_zoom = false

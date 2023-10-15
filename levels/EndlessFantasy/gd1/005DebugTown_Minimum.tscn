@@ -500,7 +500,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 1.5, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.7, 0 )
 grav = 0
-bbText = "need 1 crystal
+bbText = "•need 1 crystal
 to unlock"
 
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 25 )]

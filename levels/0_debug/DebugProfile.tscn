@@ -201,7 +201,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.0755, 15.9656, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0 )
-bbText = "GLITCH SLUGS have a lot of
+bbText = "•GLITCH SLUGS have a lot of
 clout online.! u can pet them
 .......iF ur immune to glitches"
 
@@ -214,7 +214,7 @@ shape = SubResource( 21 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 7.56469, 0 )
 grav = 0
-bbText = "that BROOM you have has
+bbText = "•that BROOM you have has
 MAGIC.. you can double jump
 after using it in air!
 JUMP right after pressing [C]
@@ -237,7 +237,7 @@ shape = SubResource( 22 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 18, 0 )
-bbText = "evil sprites can only be
+bbText = "•evil sprites can only be
 \"swept away\" when they
 are casting their glitchy spell"
 

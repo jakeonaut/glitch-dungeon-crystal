@@ -245,7 +245,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2405, 9, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.9, 0 )
 grav = 0
-bbText = "[color=#ff0000]Air Walk[/color] spell:
+bbText = "•[color=#ff0000]Air Walk[/color] spell:
 walk without falling"
 can_camera_zoom = false
 is_a_body = false

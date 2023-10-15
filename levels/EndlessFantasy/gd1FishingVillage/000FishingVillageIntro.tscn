@@ -284,7 +284,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 dont_recolor_me = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
@@ -294,7 +294,7 @@ material_override = SubResource( 35 )
 visible = false
 
 [node name="InteractPrompt" parent="Viewport/level/Door" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.33888, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.23888, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
@@ -428,7 +428,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.6774, 0, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4999, 2.63691, 0 )
 grav = 0
-bbText = "[wave]sweep it! [X][/wave]"
+bbText = "•[wave]sweep it! [X][/wave]"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
@@ -494,7 +494,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
-bbText = "howdy↓
+bbText = "•howdy↓
 how'd'ya do↓
 we don't get too
 many visitors"

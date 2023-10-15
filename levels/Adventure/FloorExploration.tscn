@@ -355,7 +355,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 13, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 7, 0 )
 grav = 0
-bbText = "evil sprites will
+bbText = "•evil sprites will
 summon glitches to
 attack outsiders .."
 tiny_textbox = true
@@ -363,7 +363,7 @@ tiny_textbox = true
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, 0 )
 grav = 0
-bbText = "but they need to
+bbText = "•but they need to
 catch their breath
 afterward..."
 tiny_textbox = true

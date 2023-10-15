@@ -115,7 +115,7 @@ shader_param/target_palette = ExtResource( 1 )
 collision_layer = 2
 script = ExtResource( 3 )
 grav = 0
-bbText = "die!!!!!!!!!!!"
+bbText = "•die!!!!!!!!!!!"
 is_active = false
 tiny_textbox = true
 

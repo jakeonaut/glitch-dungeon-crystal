@@ -174,7 +174,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.18624, 0.0879221, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 2, 0 )
 grav = 0
-bbText = "there is a great treasure
+bbText = "•there is a great treasure
 at the top of this tower!
 
 but what do i know,
@@ -204,7 +204,7 @@ tiny_textbox = true
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 32, 0 )
 grav = 0
-bbText = "how are
+bbText = "•how are
 you?
 
 bye!"

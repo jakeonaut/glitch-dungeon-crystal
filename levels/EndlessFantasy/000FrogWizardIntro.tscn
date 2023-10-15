@@ -298,7 +298,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2, 46, 0 )
 stream = null
 
 [node name="TextContainer" parent="Viewport/level/Player" index="14"]
-bbText = "don't remember
+bbText = "•don't remember
 having a basement.."
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]

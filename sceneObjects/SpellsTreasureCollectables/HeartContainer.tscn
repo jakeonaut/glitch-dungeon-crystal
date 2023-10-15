@@ -111,7 +111,7 @@ tracks/1/keys = {
 collision_layer = 2
 script = ExtResource( 12 )
 grav = 0
-bbText = "you got heart!
+bbText = "•you got heart!
 now you can take
 one more hit!!"
 portrait = ExtResource( 13 )

@@ -974,7 +974,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 9.1, 0 )
 shape = SubResource( 67 )
 
 [node name="NPC" parent="Viewport/level/AngelStatue" index="7"]
-bbText = "
+bbText = "•
 [wave amp=50 freq=2]* you offer a prayer *[/wave]"
 can_camera_zoom = false
 is_immediate = true

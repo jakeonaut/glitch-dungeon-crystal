@@ -157,7 +157,7 @@ volume_db = -80.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6005, 2.10336, 0 )
 visible = false
 grav = 0
-bbText = "hey..! wake up..!
+bbText = "•hey..! wake up..!
 .....................
 PRESS ARROW KEYS"
 tiny_textbox = true
@@ -175,7 +175,7 @@ shape = SubResource( 11 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5869, -4.89664, 0 )
 visible = false
 grav = 0
-bbText = "hi so much
+bbText = "•hi so much
 .......
 PRESS [X] TO JUMP"
 tiny_textbox = true
@@ -183,7 +183,7 @@ tiny_textbox = true
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9524, -1.64598, 0 )
 grav = 0
-bbText = "i love glitch baths"
+bbText = "•i love glitch baths"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC8/SmallInteractionArea" index="0"]
@@ -197,7 +197,7 @@ shape = SubResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9981, 2.10336, 0 )
 visible = false
 grav = 0
-bbText = "PRESS [DOWN] TO
+bbText = "•PRESS [DOWN] TO
 GO THROUGH DOORS
 
 and to talk more to us!!"

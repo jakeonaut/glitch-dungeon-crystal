@@ -472,7 +472,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82453, -32.4796, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36311, -5, 0 )
-bbText = "cricket
+bbText = "•cricket
 cricket"
 tiny_textbox = true
 

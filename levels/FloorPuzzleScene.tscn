@@ -185,7 +185,7 @@ grav = 0
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4957, 17.0499, 0.20847 )
-bbText = "the high witch priestess
+bbText = "•the high witch priestess
 rules this dungeon
 like a kingdom :(
 
@@ -201,7 +201,7 @@ frame = 14
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4957, 23.0499, 0.20847 )
 collision_layer = 2
 script = ExtResource( 22 )
-bbText = "you have done
+bbText = "•you have done
 well to find me"
 portrait = ExtResource( 14 )
 

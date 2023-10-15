@@ -860,7 +860,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 6.83472, 0 )
 grav = 0
-bbText = "this dust just showed up!
+bbText = "•this dust just showed up!
 how odd... dearie, could
 you sweep up with [X]?
 "
@@ -908,7 +908,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1, 3.93472, 0 )
 grav = 0
-bbText = "moo..
+bbText = "•moo..
 (jump with Z)"
 is_really_important = true
 can_camera_zoom = false

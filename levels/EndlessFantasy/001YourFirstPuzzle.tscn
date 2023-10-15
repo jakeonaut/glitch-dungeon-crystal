@@ -1338,7 +1338,7 @@ shape = SubResource( 19 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 186.571, 20, 0 )
 grav = 0
-bbText = "Thou hast done well in
+bbText = "•Thou hast done well in
 making it this far.
 
 Seek out Wet Rot, at the 
@@ -1378,7 +1378,7 @@ shape = SubResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 155, 45, 0 )
 visible = false
 grav = 0
-bbText = "use [SPACE] to switch between the
+bbText = "•use [SPACE] to switch between the
 last two colors!"
 portrait = ExtResource( 24 )
 tiny_textbox = true
@@ -1412,7 +1412,7 @@ shape = SubResource( 19 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 28, 0 )
 grav = 0
-bbText = "hey can you watch over
+bbText = "•hey can you watch over
 EGG for me?... ...
 ...thanks... .."
 tiny_textbox = true
@@ -1421,7 +1421,7 @@ tiny_textbox = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 18, 0 )
 visible = false
 grav = 0
-bbText = "wow. i'm surprised
+bbText = "•wow. i'm surprised
 you made it over here"
 is_important = true
 is_really_important = true
@@ -1430,7 +1430,7 @@ tiny_textbox = true
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 9, 0 )
 grav = 0
-bbText = "i was born from the
+bbText = "•i was born from the
 blood of the magi "
 can_activate = false
 can_camera_zoom = false
@@ -1480,7 +1480,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 0 )
 [node name="NPC2" parent="Viewport/level/QuestionBlock3" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 grav = 0
-bbText = "why did you
+bbText = "•why did you
 wake me up?"
 can_activate = false
 can_camera_zoom = false
@@ -1611,7 +1611,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 176, 18.4245, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 149, 5, 0 )
 grav = 0
-bbText = "i dnt feel s o g o od"
+bbText = "•i dnt feel s o g o od"
 can_camera_zoom = false
 tiny_textbox = true
 
@@ -1681,7 +1681,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 132, 34, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134.18, 18.0573, 0 )
-bbText = "*purrrr*
+bbText = "•*purrrr*
 "
 can_camera_zoom = false
 tiny_textbox = true

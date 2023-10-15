@@ -494,7 +494,7 @@ __meta__ = {
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70402, 3.0256, 0 )
 grav = 0
-bbText = "oh! hello there!
+bbText = "•oh! hello there!
 you're human too..
 welcome to town.
 you must have lots of 
@@ -805,7 +805,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -10, 0 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -22, 0 )
 grav = 0
-bbText = "i'm the lady of
+bbText = "•i'm the lady of
 the swamp lake"
 tiny_textbox = true
 
@@ -825,7 +825,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 9, 0 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 3, 0 )
 grav = 0
-bbText = "you can't yet go any
+bbText = "•you can't yet go any
 farther... try go DOWN
 or UP"
 tiny_textbox = true
@@ -905,7 +905,7 @@ swimming_walk_speed = 4
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 grav = 0
-bbText = "please remember to
+bbText = "•please remember to
 press DOWN to talk
 to us.
 THANK YOU!!!!"
@@ -914,7 +914,7 @@ tiny_textbox = true
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 11, 0 )
 grav = 0
-bbText = "hi so much
+bbText = "•hi so much
 [wave]explore & seek powerful
 MAGIC CRYSTALS[/wave]"
 tiny_textbox = true
@@ -958,7 +958,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 10.4684, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 9.68075, 0 )
 visible = false
 grav = 0
-bbText = "with that spellbook......i bet all
+bbText = "•with that spellbook......i bet all
 kinds of new paths will open up
 for you here......
 i could never cast spells

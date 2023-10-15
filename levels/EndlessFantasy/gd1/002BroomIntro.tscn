@@ -239,7 +239,7 @@ transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 25, 7.6
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -3.72529e-08, 0 )
 grav = 0
-bbText = "oh hello dearie. do ye
+bbText = "•oh hello dearie. do ye
 remember how to sweep up?
 just press [X]"
 is_really_important = true

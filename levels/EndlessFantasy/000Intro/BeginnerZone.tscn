@@ -351,7 +351,7 @@ shape = SubResource( 18 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 1.1, 0 )
 grav = 0
-bbText = "
+bbText = "•
 • let me explain,
 colors give you abilities:
 1. green: you can float

@@ -644,7 +644,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55558, 4.07075, 0 )
 grav = 0
-bbText = "hello child this is a 
+bbText = "•hello child this is a 
 long message to test
 the behavior
 this is what happens when
@@ -666,7 +666,7 @@ shape = SubResource( 26 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.44442, 0.0707502, 0 )
 grav = 0
-bbText = "camera test"
+bbText = "•camera test"
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -690,7 +690,7 @@ shape = SubResource( 26 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4444, 7.07075, 0 )
 grav = 0
-bbText = "camera test"
+bbText = "•camera test"
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -714,7 +714,7 @@ shape = SubResource( 26 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44442, 12.0708, 0 )
 grav = 0
-bbText = "camera test"
+bbText = "•camera test"
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )

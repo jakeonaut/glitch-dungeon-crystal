@@ -611,7 +611,7 @@ shape = SubResource( 22 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 19.1, 0 )
 grav = 0
-bbText = "find angel eggs
+bbText = "•find angel eggs
 to cleanse the world"
 can_camera_zoom = false
 tiny_textbox = true

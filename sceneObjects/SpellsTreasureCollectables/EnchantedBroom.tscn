@@ -113,7 +113,7 @@ tracks/1/keys = {
 collision_layer = 2
 script = ExtResource( 7 )
 grav = 0
-bbText = "[wave]Enchanted Broom[/wave]
+bbText = "•[wave]Enchanted Broom[/wave]
 GET!"
 portrait = ExtResource( 12 )
 is_important = true

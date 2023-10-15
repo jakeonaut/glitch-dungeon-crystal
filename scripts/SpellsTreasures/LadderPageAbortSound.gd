@@ -11,7 +11,7 @@ func activateScript():
     global.pauseMoveInput = false
     level.player.aniPlayer.play("stand")
     if not global.memory.has("spellbookPage"):
-      level.player.sayThis("i need a spellbook first")
+      level.player.sayThis("•i need a spellbook first")
       return
       
     # TODO(jaketrower): check you don't already have it

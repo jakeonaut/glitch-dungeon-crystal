@@ -8,7 +8,7 @@ func _ready():
 
 func activateScript():
     NPCSmallInteractionArea.global_transform.origin = NPC.global_transform.origin + Vector3(3, -1, 0)
-    NPC.textBoxContainer.bbText = "i don't know how to\nget down yet"
+    NPC.textBoxContainer.bbText = "•i don't know how to\nget down yet"
     NPC.textBoxContainer.setVars()
     
     

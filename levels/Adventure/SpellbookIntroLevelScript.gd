@@ -8,7 +8,7 @@ func setUpRoomInitializationOverride():
         spellbookPage.is_active = false
         spellbookPage.visible = false
 
-        get_node("NPC5").textBox.text_final = "you can double jump\nwith broom\nif you have dust"
+        get_node("NPC5").textBox.text_final = "•you can double jump\nwith broom\nif you have dust"
         get_node("NPC5").textBox.has_been_shown = false
         
         get_node("NPC").visible = false

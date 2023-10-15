@@ -219,7 +219,7 @@ shape = SubResource( 22 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, 0 )
 grav = 0
-bbText = "Thou hast done well in
+bbText = "•Thou hast done well in
 getting this far..
 
 "

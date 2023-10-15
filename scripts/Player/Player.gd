@@ -325,7 +325,6 @@ func processCastingLogic(delta):
     elif Input.is_action_just_pressed("ui_right"):
       spellCastPauseIndex += 1
       if spellCastPauseIndex >= global.memory["spellbookPage"].size(): spellCastPauseIndex = 0
-      # self.sayThis("walk")
 
     var glitch = global.memory["spellbookPage"][spellCastPauseIndex]
     # TODO(jaketrower): dedupe (1) with UILayer.gd
@@ -754,7 +753,7 @@ func processBroomLogic(delta):
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
-  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf:
+  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
     summonedBroom.queue_free()
     broomStop()
     if not on_ground:

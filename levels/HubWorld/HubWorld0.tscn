@@ -498,7 +498,7 @@ shape = SubResource( 32 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -18, 0 )
 grav = 0
-bbText = "here.. can you
+bbText = "•here.. can you
 watch over my egg?"
 tiny_textbox = true
 
@@ -558,7 +558,7 @@ shape = SubResource( 13 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.64093, -55, 0 )
 grav = 0
-bbText = "HEE HOO HA
+bbText = "•HEE HOO HA
 soem magick i knoe... 
 followe me if you wish to
 learn great power....

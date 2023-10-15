@@ -1426,7 +1426,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.0589, -0.174 )
 grav = 0
-bbText = "fellow wise one,
+bbText = "•fellow wise one,
 may i ask a favor of thee?
 
 i seek 7 crystals

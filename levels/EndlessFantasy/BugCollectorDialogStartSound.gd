@@ -11,7 +11,7 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
     pass
     
 func activateScript():
-    textBox.text_final = "•.... who, me?\n•no.. i'm just a non-magical frog\n\nif you bring me dragonflies,\n snails, or other bugs,\n•i give many crystals"
+    # textBox.text_final = "•.... who, me?\nno.. i'm just a non-magical frog\n\n•if you bring me dragonflies,\n snails, or other bugs,\ni give many crystals"
 
     var num_bugs = 0
     if global.memory.has("dragonflies"):
@@ -21,8 +21,8 @@ func activateScript():
     if global.memory.has("cicadas"):
         num_bugs += global.memory["cicadas"]
         
-    if num_bugs > 0:
-        textBox.text_final += "\n•oh, you have some!\n okay, let's trade!\n•yee hee hee!!"
+    # if num_bugs > 0:
+    #     textBox.text_final += "\n•oh, you have some!\n okay, let's trade!\n•yee hee hee!!"
         
 func isActive():
     # OVERRIDE ME... if you dare

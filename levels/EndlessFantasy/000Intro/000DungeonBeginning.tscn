@@ -150,7 +150,7 @@ shape = SubResource( 18 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 66.4, 0 )
 grav = 0
-bbText = "Do you remember...?
+bbText = "•Do you remember...?
 ............................
 ........................
 ......this was you when

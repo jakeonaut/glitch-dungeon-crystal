@@ -11,7 +11,7 @@ func activateScript():
        level.levelTiles.get_cell_item(22, -11, 0) == GridMap.INVALID_CELL_ITEM or \
        level.levelTiles.get_cell_item(31, -11, 0) == GridMap.INVALID_CELL_ITEM:
         print("HWAUH?")
-        get_node("../../..").textBox.text_final = "hey.. why did you do that\nwe love glitch baths.."
+        get_node("../../..").textBox.text_final = "•hey.. why did you do that\n•we love glitch baths.."
         get_node("../../..").textBox.has_been_shown = false
     
 func preActivateScript():

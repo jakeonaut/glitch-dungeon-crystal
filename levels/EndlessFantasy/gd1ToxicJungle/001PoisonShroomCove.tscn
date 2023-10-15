@@ -281,7 +281,7 @@ grav = 0
 shape = SubResource( 60 )
 
 [node name="NPC" parent="Viewport/level/Vileplume" index="7"]
-bbText = "oops, sorry. i'm shy
+bbText = "•oops, sorry. i'm shy
 around strangers.
 & infect them with spores."
 is_important = true

@@ -228,7 +228,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -10, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 9, 0 )
 grav = 0
-bbText = "this is wherei 
+bbText = "•this is wherei 
 come  to be a l 
 o ne with my thoughts
 that moth is so beautiful.."
@@ -236,7 +236,7 @@ that moth is so beautiful.."
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -12, 0 )
 grav = 0
-bbText = "god me and my
+bbText = "•god me and my
 pet REALLY love
 glitch baths"
 tiny_textbox = true

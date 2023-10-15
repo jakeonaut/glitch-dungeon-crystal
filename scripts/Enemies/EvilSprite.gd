@@ -167,7 +167,7 @@ func _process(delta):
 func ouchies(_broom_origin):
     resetStateToIdle()
     attackState = AttackState.IM_ACTUALLY_GOOD_NOW
-    self.textBox.text_final = "actually, i'm good now!"
+    self.textBox.text_final = "•actually, i'm good now!"
     self.textBox.hideTextbox()
     self.textBox.has_been_shown = false
     mySprite.updateBaseFrame(6, 1)

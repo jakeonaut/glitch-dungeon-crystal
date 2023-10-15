@@ -504,7 +504,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "mole crickets carved
+bbText = "•mole crickets carved
 our civilization
 out of dirt"
 can_move = false
@@ -530,7 +530,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.6, 0 )
 
 [node name="NPC2" parent="Viewport/level/DustFarmer2" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 3.4, 0 )
-bbText = "we love eat dirt
+bbText = "•we love eat dirt
 and making dust"
 can_move = false
 can_camera_zoom = false

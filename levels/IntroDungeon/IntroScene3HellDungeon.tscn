@@ -421,7 +421,7 @@ anims/flickerOn = SubResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 15, 0 )
 visible = false
 grav = 0
-bbText = "the glowing triangles
+bbText = "•the glowing triangles
  are the bodies of our
 fallen sisters................
 they let outsiders
@@ -454,7 +454,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 visible = false
 grav = 0
-bbText = "obeslisks hold MAGIC
+bbText = "•obeslisks hold MAGIC
 CRYSTAL shards.. that's
 why they change colors"
 tiny_textbox = true

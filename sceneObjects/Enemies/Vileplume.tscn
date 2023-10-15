@@ -280,7 +280,7 @@ shape = SubResource( 29 )
 
 [node name="NPC" parent="." instance=ExtResource( 13 )]
 grav = 0
-bbText = "oh hi!"
+bbText = "•oh hi!"
 is_really_important = true
 can_camera_zoom = false
 is_a_body = false

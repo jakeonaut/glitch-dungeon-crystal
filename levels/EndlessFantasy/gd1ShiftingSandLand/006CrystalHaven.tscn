@@ -334,7 +334,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 10.7139, 0 )
 mesh = SubResource( 34 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal" index="10"]
-bbText = "broom is enchanted
+bbText = "•broom is enchanted
 with crystal power
 now sweep glitch!"
 can_camera_zoom = true
@@ -363,7 +363,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7, 13.2, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1, 13.1, 0 )
 grav = 0
-bbText = "[wave]smack it! [X][/wave]"
+bbText = "•[wave]smack it! [X][/wave]"
 floating_text = true
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 9 )]
@@ -421,7 +421,7 @@ sacred stone"
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "please dont destroy
+bbText = "•please dont destroy
 our sacred stone"
 can_move = false
 can_camera_zoom = false
@@ -468,7 +468,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 7.2, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer3" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "please destroy
+bbText = "•please destroy
 this false idol"
 can_move = false
 can_camera_zoom = false

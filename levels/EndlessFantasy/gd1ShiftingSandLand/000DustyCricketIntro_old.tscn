@@ -1055,7 +1055,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0.400001, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, -9.59004, 0 )
 grav = 0
-bbText = "why did you
+bbText = "•why did you
 wake me up?"
 can_activate = false
 can_camera_zoom = false
@@ -1123,7 +1123,7 @@ frame = 37
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1999, 4.73691, 0 )
 grav = 0
-bbText = "[wave]smack it! [X][/wave]"
+bbText = "•[wave]smack it! [X][/wave]"
 can_camera_zoom = false
 is_a_body = false
 floating_text = true
