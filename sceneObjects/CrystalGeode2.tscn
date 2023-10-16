@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=5]
 [ext_resource path="res://assets/frogblocks.png" type="Texture" id=6]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Goblin Empath.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/water_normal_4.png" type="Texture" id=9]
 [ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=10]
@@ -406,7 +405,7 @@ volume_db = -15.0
 pitch_scale = 0.6
 
 [node name="NPC" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399637, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000362992, 0 )
 grav = 0
 is_important = true
 is_really_important = true
@@ -419,7 +418,7 @@ dont_align_sprite = true
 shape = SubResource( 29 )
 
 [node name="Sprite3D" parent="NPC" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22456, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_override = SubResource( 33 )
 texture = ExtResource( 17 )
 hframes = 7
@@ -432,32 +431,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -23.7 )
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
 shape = SubResource( 27 )
-
-[node name="Sprite3D2" type="Sprite3D" parent="NPC" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.847886, 0, -0.967934 )
-material_override = SubResource( 33 )
-pixel_size = 0.125
-texture = ExtResource( 17 )
-hframes = 7
-frame = 4
-script = ExtResource( 7 )
-frame_delay = 1.0
-max_frames = 6
-should_animate = false
-automatically_change_color = false
-
-[node name="Sprite3D3" type="Sprite3D" parent="NPC" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.694824, 0, 0.963839 )
-material_override = SubResource( 33 )
-pixel_size = 0.125
-texture = ExtResource( 17 )
-hframes = 7
-frame = 4
-script = ExtResource( 7 )
-frame_delay = 1.0
-max_frames = 6
-should_animate = false
-automatically_change_color = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

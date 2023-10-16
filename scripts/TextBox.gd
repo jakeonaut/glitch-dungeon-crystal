@@ -110,6 +110,7 @@ func setTextBoxPosition():
 var important_unpause_timer = 0
 var important_unpause_time_limit = 20
 func _process(delta):
+  if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
   if textboxParent.get_ref() and textboxParent.get_ref().is_active:
@@ -228,8 +229,8 @@ func resetPrompts():
       
 var tindex = -1
 func showTextbox():
-  if text_final.find("•") == -1 and not text_final == "":
-    text_final = "•" + text_final
+  # if text_final.find("•") == -1 and not text_final == "":
+  #   text_final = "•" + text_final
   textNode.visible_characters = 0
   textNode.bbcode_text = text_final
   tindex = -1

@@ -170,8 +170,6 @@ func fallthroughCollisionActivate(friend):
 func fallthroughCollisionClear(exFriend):
   who_is_standing_on_me.erase(exFriend.name)
 
-
-  
 func moveMyFriends(delta):
   for friend_key in who_is_standing_on_me.keys():
     var friendArray = who_is_standing_on_me[friend_key]

@@ -295,7 +295,7 @@ shape = SubResource( 16 )
 shape = SubResource( 20 )
 
 [node name="Sunfish3" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 10.9, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Sunfish3" index="4"]
 material_override = SubResource( 21 )
