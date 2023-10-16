@@ -1,13 +1,11 @@
-[gd_scene load_steps=156 format=2]
+[gd_scene load_steps=148 format=2]
 
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
-[ext_resource path="res://assets/sprites/tall_doors.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=10]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=11]
@@ -37,7 +35,6 @@
 [ext_resource path="res://assets/palettes/fall_moth_palette.png" type="Texture" id=37]
 [ext_resource path="res://assets/tower.png" type="Texture" id=38]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=39]
-[ext_resource path="res://sceneObjects/Spawner.tscn" type="PackedScene" id=40]
 [ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=41]
 
 [sub_resource type="ShaderMaterial" id=17]
@@ -1214,74 +1211,6 @@ tracks/1/keys = {
 resource_name = "jump"
 length = 0.001
 
-[sub_resource type="ShaderMaterial" id=163]
-shader = ExtResource( 11 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 8 )
-shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 1 )
-
-[sub_resource type="ShaderMaterial" id=159]
-shader = ExtResource( 11 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 8 )
-shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 1 )
-
-[sub_resource type="BoxShape" id=160]
-resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
-
-[sub_resource type="BoxShape" id=161]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=162]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
-
 [sub_resource type="BoxShape" id=173]
 resource_local_to_scene = true
 extents = Vector3( 3, 3, 1.3 )
@@ -2136,7 +2065,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1358, 1.11731, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1358, 13.1785, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
 pitch_scale = 1.1
@@ -2621,19 +2550,6 @@ should_fade_away = true
 [node name="Fishy" parent="Viewport/level" instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1, -0.1, 0 )
 
-[node name="BubbleSpawners" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6697, 9.46877, 0 )
-
-[node name="Spawner1" parent="Viewport/level/BubbleSpawners" instance=ExtResource( 40 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-spawned_object_path = "res://sceneObjects/BubbleSpell.tscn"
-x_range = Vector2( -2, 2 )
-
-[node name="Spawner2" parent="Viewport/level/BubbleSpawners" instance=ExtResource( 40 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05785, -4.58144, 0 )
-spawned_object_path = "res://sceneObjects/BubbleSpell.tscn"
-x_range = Vector2( -2, 2 )
-
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 34 )]
@@ -2641,36 +2557,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.331, 5.26765, 0 )
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61704, 18.9551, 0 )
-
-[node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.869, 0.072423, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
-
-[node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.01415, 2.03831, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
-
-[node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81137, -0.9 )
-material_override = SubResource( 163 )
-texture = ExtResource( 8 )
-
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-material_override = SubResource( 159 )
-texture = ExtResource( 8 )
-
-[node name="InteractPrompt" parent="Viewport/level/Door2" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0300002, 5.09914, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 160 )
-
-[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 161 )
-
-[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
-shape = SubResource( 162 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0731, 3.11858, 0 )
@@ -2710,8 +2596,11 @@ anims/stand = SubResource( 179 )
 [node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
 shape = SubResource( 180 )
 
+[node name="TextBoxCameraTarget" parent="Viewport/level/NPC4" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26273, 0 )
+
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3972, 4.00372, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5312, 1.09428, 0 )
 grav = 0
 is_really_important = true
 can_camera_zoom = false
@@ -3094,6 +2983,26 @@ shape = SubResource( 189 )
 [node name="InteractPrompt" parent="Viewport/level/NPC11" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
+[node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00505, 2.02554, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
+dont_recolor_me = true
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9457, -1.03351, 0 )
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+dont_recolor_me = true
+
+[node name="Door5" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.57194, -5.9942, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/000DieToSavePoint.tscn"
+dont_recolor_me = true
+
+[node name="Door8" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0002, -3.0352, 0 )
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+dont_recolor_me = true
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
@@ -3129,8 +3038,6 @@ visible = true
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/GlitchMoleCricket"]
-[editable path="Viewport/level/Door2"]
-[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]
 [editable path="Viewport/level/NPC8"]

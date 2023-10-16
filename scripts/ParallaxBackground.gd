@@ -24,6 +24,9 @@ func _process(delta):
         opacity = opacity + (0.0 - opacity) * (delta * 1)
         mySprite.material_override.set_shader_param("opacity", opacity)
         mySprite2.material_override.set_shader_param("opacity", opacity)
-
+    else:
+        opacity = opacity + (1.0 - opacity) * (delta * 1)
+        mySprite.material_override.set_shader_param("opacity", opacity)
+        mySprite2.material_override.set_shader_param("opacity", opacity)
 func hideMe():
     hiding = true

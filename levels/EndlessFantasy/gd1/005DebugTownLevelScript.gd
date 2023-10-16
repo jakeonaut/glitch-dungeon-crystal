@@ -63,7 +63,8 @@ func spawnAngel(target, index, total):
 
 func _process(_delta):
   # ._process(delta) implicit
-  if player.glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
-    if endOfDemoDoor.is_locked:
-      endOfDemoDoor.animationPlayer.play("doorOpen")
-    endOfDemoDoor.is_locked = false
+  # if player.glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+  #   if endOfDemoDoor.is_locked:
+  #     endOfDemoDoor.animationPlayer.play("doorOpen")
+  #   endOfDemoDoor.is_locked = false
+  pass

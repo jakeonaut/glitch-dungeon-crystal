@@ -312,7 +312,7 @@ func processHiscoreRenderLogic(delta):
     return
   hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
-  congratsHiscoreLabel.text = "   CONGRATS:\nU won a dungeon!!"
+  congratsHiscoreLabel.text = "   CONGRATS:\nU got a CRYSTAL!!"
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
