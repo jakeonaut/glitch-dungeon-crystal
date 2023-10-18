@@ -45,7 +45,7 @@ var nextPrompt_wiggled_up = false
 
 onready var textContainer = get_node("..")
 onready var textboxParent = weakref(get_node("../.."))
-onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget"))
+onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget")) if has_node("../../TextBoxCameraTarget") else null
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
