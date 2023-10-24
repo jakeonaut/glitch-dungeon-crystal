@@ -25,7 +25,6 @@ var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 10
-var is_in_broom_cooldown = false
 
 onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
@@ -49,7 +48,6 @@ var poison_timer = 0
 var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
-var smacked_npc = null
 
 var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
@@ -178,8 +176,8 @@ func pressingRun():
   #    (not broom_flip_h and Input.is_action_pressed("ui_left")):
   #   return false
 
-  return Input.is_action_pressed("sub_action_button") and summonedBroom == null or \
-         (is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
+  return Input.is_action_pressed("sub_action_button") and summonedBroom == null# or \
+         #(is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
   
 func isWalkingIntoWall():
   if summonedBroom != null:
@@ -603,13 +601,13 @@ func getMushroomInfected():
 
   musicPlayer.changeSongPitch(0.5)
   infectSound.play()
-  mushroom_turn_timer = 0
+  # mushroom_turn_timer = 0
   glitchTickle(0)
   is_mushroom_infected = true
-  if mySprite.flip_h:
-    mushroom_infection_direction = -1
-  else:
-    mushroom_infection_direction = 1
+  # if mySprite.flip_h:
+  #   mushroom_infection_direction = -1
+  # else:
+  #   mushroom_infection_direction = 1
 
 
 # @override
@@ -631,7 +629,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 
   if is_mushroom_infected:
     getABroom()
-  is_mushroom_infected = false
+    for _i in range(5):
+      spawnASpore(0, -1)
+    is_mushroom_infected = false
 
   if global.activeInteractor:
     global.activeInteractor.hideTextbox()
@@ -770,7 +770,7 @@ var spore_spawn_time_limit = 15
 onready var sporeSound = get_node("Sounds/SporeSound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
-func processMushroomLogic(delta):
+func processMushroomLogic(_delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
     if global.memory["broom"]:
@@ -778,25 +778,25 @@ func processMushroomLogic(delta):
       summonFallenBroom(false, true)
       mySprite.flip_h = not mySprite.flip_h
     adjustMushroomSpritePosition()
-    if horizontal_collision:
-      mushroom_infection_direction = -mushroom_infection_direction
-      mushroom_turn_timer = 0
+    # if horizontal_collision:
+    #   mushroom_infection_direction = -mushroom_infection_direction
+    #   mushroom_turn_timer = 0
 
-    var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
-    var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-    if turning_left or turning_right:
-      mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
-      if mushroom_turn_timer >= mushroom_turn_time_limit:
-        mushroom_turn_timer = 0
-        mushroom_infection_direction *= -1
-    else:
-      mushroom_turn_timer = 0
+    # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+    # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+    # if turning_left or turning_right:
+    #   mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
+    #   if mushroom_turn_timer >= mushroom_turn_time_limit:
+    #     mushroom_turn_timer = 0
+    #     mushroom_infection_direction *= -1
+    # else:
+    #   mushroom_turn_timer = 0
     
-    spore_spawn_timer += (delta*22)
-    if spore_spawn_timer >= spore_spawn_time_limit:
-      spore_spawn_timer = 0
-      spawnASpore()
-      sporeSound.play()
+    # spore_spawn_timer += (delta*22)
+    # if spore_spawn_timer >= spore_spawn_time_limit:
+    #   spore_spawn_timer = 0
+    #   spawnASpore()
+    #   sporeSound.play()
 
 
 func adjustMushroomSpritePosition():
@@ -1055,14 +1055,6 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
     return fallenBroom
   return null
-
-func getABroom():
-  pauseAnimation = false 
-  global.memory["broom"] = true
-  global.memory["has_gotten_broom"] = 2
-  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-  smacked_npc = null
-  is_in_broom_cooldown = false
 
 func iJustPressedDown():
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:

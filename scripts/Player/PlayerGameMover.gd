@@ -77,7 +77,7 @@ func _process(delta):
     jump_press_timer += 1
 
   if justPressedJump():
-    mushroom_turn_timer = mushroom_turn_time_limit
+    # mushroom_turn_timer = mushroom_turn_time_limit
     jump_press_timer = 0
     if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
@@ -221,14 +221,14 @@ func pressingMoveDown():
   
 # @override
 func pressingMoveLeft():
-  if is_mushroom_infected:
-    return mushroom_infection_direction == -1
+  # if is_mushroom_infected:
+  #   return mushroom_infection_direction == -1
   return Input.is_action_pressed("ui_left") and not pauseInput
 
 # @override
 func pressingMoveRight():
-  if is_mushroom_infected:
-    return mushroom_infection_direction == 1
+  # if is_mushroom_infected:
+  #   return mushroom_infection_direction == 1
   return Input.is_action_pressed("ui_right") and not pauseInput
 
 func magicJump():
@@ -247,11 +247,11 @@ func regainNestingDoll():
 
 # @override
 func getWalkSpeed(delta):
-  var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
-  if is_mushroom_infected:
-    return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
-  elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
-    return 5 if pressingRun() and on_ground else 4
+  # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
+  # if is_mushroom_infected:
+  #  return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
+  if not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
+    return 7 if pressingRun() and on_ground else 6
   else:
     return .getWalkSpeed(delta) # super()
 
@@ -270,6 +270,15 @@ func doubleJump():
 
   target_last_grounded_y = global_transform.origin.y
 
+var smacked_npc = null
+var is_in_broom_cooldown = false
+func getABroom():
+  pauseAnimation = false 
+  global.memory["broom"] = true
+  global.memory["has_gotten_broom"] = 2
+  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  smacked_npc = null
+  is_in_broom_cooldown = false
 
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
@@ -281,19 +290,25 @@ func processJumpInputs(delta):
       has_mushroom_double_jumped = true
       doubleJump()
       wormSound.play()
-      var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
-      var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-      if turning_left or turning_right:
-        mushroom_infection_direction = -mushroom_infection_direction
-      for _i in range(2):
+      # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+      # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+      # if turning_left or turning_right:
+      #   mushroom_infection_direction = -mushroom_infection_direction
+      for _i in range(5):
         spawnASpore(0, -1)
+      is_mushroom_infected = false
+      summonSmokeClouds(2, true, true)
+      musicPlayer.changeSongPitch(1.0)
+      if not global.memory["broom"]:
+          getABroom()
+      has_mushroom_double_jumped = false
       aniPlayer.clear_queue()
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
       aniPlayer.queue("jump")
       new_carcass = cherryCarcassRes.instance()
       level.add_child(new_carcass)
-      new_carcass.is_crumbling = true
+      # new_carcass.is_crumbling = true
       new_carcass.global_transform.origin = self.global_transform.origin
       new_carcass.mySprite.flip_h = mySprite.flip_h
     elif global.memory["nesting_doll"] and triedToDoubleJump: 

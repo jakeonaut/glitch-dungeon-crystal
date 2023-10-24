@@ -31,8 +31,6 @@ func getSmacked(_broom_origin):
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-        
-
     if is_smacked:
         smack_timer += (delta * 22)
         if smack_timer >= smack_time_limit:
@@ -74,6 +72,9 @@ func landed():
         
 func addJumpSmokeCloud(_flip_flip_h = false):
     pass
+
+func isFallthroughCollisionActive():
+    return visible
 
 func fallthroughCollisionActivate(_possible_game_mover):
     pass

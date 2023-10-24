@@ -18,6 +18,9 @@ func _process(_delta):
     var areas = get_overlapping_areas()
     for area in areas:
         if area.is_in_group("fallthrough"):
+            var fallthroughParent = area.get_node("..")
+            if fallthroughParent.has_method("isFallthroughCollisionActive") and not fallthroughParent.isFallthroughCollisionActive():
+                continue
             if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and prev_fallthrough_collision_area == null:
                 continue
             if global.doFallthroughObjectCollision(player, area):

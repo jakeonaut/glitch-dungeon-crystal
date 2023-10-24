@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
@@ -165,6 +165,46 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "reset"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:should_animate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="QuestionBlock" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 7 )
@@ -194,6 +234,7 @@ should_randomize_frame_delay = true
 anims/RESET = SubResource( 12 )
 anims/hit = SubResource( 11 )
 anims/hitDown = SubResource( 13 )
+anims/reset = SubResource( 14 )
 
 [node name="BonkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

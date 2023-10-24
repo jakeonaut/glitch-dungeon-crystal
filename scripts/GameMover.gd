@@ -72,6 +72,7 @@ var lb = -0.72
 var rb = .72
 var tb = 1
 var bb = -1
+var grav_direction = Vector3(0, -1, 0)
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -1032,6 +1033,7 @@ func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, se
 
 var can_collide_with_floor = true
 func collideWithFloor(local_lv):
+  # TODO(jaketrower): TopsyTurvy
   local_lv.y = 0
   if can_collide_with_floor:
     on_ground = true
@@ -1043,11 +1045,11 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
     if debug:
       # print("collide sensor A...")
       if not is_vertical: get_tree().paused = true
-    # push player out of the tile!
+    # push player out of the tile! # TODO(jaketrower): TopsyTurvy
     if is_vertical:
       global_transform.origin.y += tile_distance * sensor_direction
       if should_collide_with_floor:
-        local_lv = collideWithFloor(local_lv)
+        local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
       else:
         local_lv.y = 0
         if feather_jump_timer < feather_jump_partial_time_limit:
@@ -1056,20 +1058,21 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
       global_transform.origin.x += tile_distance * sensor_direction
       collideWithWall(local_lv)
       local_lv.x = 0
-  elif is_vertical and tile_distance < local_lv.y * sensor_direction:
+  elif is_vertical and tile_distance < local_lv.y * sensor_direction: # TODO(jaketrower): TopsyTurvy
     global_transform.origin.y += tile_distance * sensor_direction
     if should_collide_with_floor:
-      local_lv = collideWithFloor(local_lv)
+      local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
     else:
       local_lv.y = 0
       if feather_jump_timer < feather_jump_partial_time_limit:
         feather_jump_timer = feather_jump_partial_time_limit
-  elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
+  elif not is_vertical and tile_distance < local_lv.x * sensor_direction: # TODO(jaketrower): TopsyTurvy
     global_transform.origin.x += tile_distance * sensor_direction
-    collideWithWall(local_lv)
+    collideWithWall(local_lv) # TODO(jaketrower): TopsyTurvy
     local_lv.x = 0
   return local_lv
 
+# TODO(jaketrower): TopsyTurvy
 func collideWithWall(local_lv):
   self.horizontal_collision = true
   var just_pressed_horizontal_input = is_pressing_horizontal_input and not was_pressing_horizontal_input
@@ -1182,11 +1185,13 @@ func handleHorizontalCollisions(local_lv):
   if local_lv.x < 0 or pressingMoveLeft():
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(false, local_lv, lb - 0.2, -1, TILE_WIDTH, false)
+    # TODO(jaketrower): TopsyTurvy is_vertical
 
   # check for right collisions
   if local_lv.x > 0 or pressingMoveRight():
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(false, local_lv, rb + 0.2, 1, 0, false)
+    # TODO(jaketrower): TopsyTurvy is_vertical
   return local_lv
   
   
@@ -1198,11 +1203,13 @@ func handleVerticalCollisions(local_lv):
   if should_collide_floor and (on_ground or local_lv.y <= 0):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
+    # TODO(jaketrower): TopsyTurvy is_vertical
 
   # check for top collisions
   if should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y > 0:
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
+    # TODO(jaketrower): TopsyTurvy is_vertical
   
   return local_lv
   
@@ -1222,6 +1229,7 @@ func playBounce(aniName, aniNameQueue = []):
 
 var has_water_double_jumped = false
 func landed():
+  jump_squat_jump_input_timer = 0
   has_water_double_jumped = false
   var quiet_the_fall_sound = true
   if landSound: landSound.play()

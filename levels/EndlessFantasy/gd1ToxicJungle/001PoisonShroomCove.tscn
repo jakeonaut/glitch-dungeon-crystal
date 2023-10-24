@@ -1,19 +1,16 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
-[ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
 [ext_resource path="res://sceneObjects/CherryCarcass.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=10]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=11]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=13]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=14]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=19]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
@@ -74,13 +71,59 @@ extents = Vector3( 2, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=60]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=61]
-resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=62]
+[sub_resource type="Animation" id=61]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "fall"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "land"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 11, 0 ]
+}
+
+[sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
@@ -147,7 +190,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 458761, 0, 1, 458762, 0, 1, 524278, 0, 1, 524279, 0, 1, 524297, 0, 1, 524298, 0, 1, 589814, 0, 1, 589815, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655372, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720908, 0, 1, 720911, 0, 1, 786422, 0, 1, 786444, 0, 1, 786445, 0, 1, 786446, 0, 1, 786447, 0, 1, 851960, 0, 1, 851972, 0, 1, 851974, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 1, 917509, 0, 1, 917510, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 983038, 0, 1, 983039, 0, 1, 983040, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048576, 0, 1, 1114103, 0, 1, 1114104, 0, 1, 1114105, 0, 1, 1114106, 0, 1, 1114107, 0, 1, 1114108, 0, 1, 1114109, 0, 1, 1114110, 0, 1, 1114111, 0, 1, 1179639, 0, 1, 1179640, 0, 1, 1179641, 0, 1, 1179642, 0, 1, 1179643, 0, 1, 1179645, 0, 1, 1245175, 0, 1, 1245176, 0, 1, 1245178, 0, 1, 1245179, 0, 1, 1245180, 0, 1, 1245181, 0, 1, 1310711, 0, 1, 1310712, 0, 1, 1310713, 0, 1, 1310714, 0, 1, 1310715, 0, 1, 1310716, 0, 1, 1310717, 0, 1, 1310718, 0, 1, 1310719, 0, 1, 1376249, 0, 1, 1376250, 0, 1, 1376253, 0, 1, 1376255, 0, 1, 1441785, 0, 1, 1441786, 0, 1, 1441787, 0, 1, 1441789, 0, 1, 1441790, 0, 1, 1441791, 0, 1, 1507321, 0, 1, 1507323, 0, 1, 1507324, 0, 1, 1507325, 0, 1, -262144, 0, 1, -262143, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
+"cells": PoolIntArray( 14, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 131062, 0, 1, 131063, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 262134, 0, 1, 262135, 0, 1, 327670, 0, 1, 327671, 0, 1, 393206, 0, 1, 393207, 0, 1, 458742, 0, 1, 458743, 0, 1, 458761, 0, 1, 458762, 0, 1, 524278, 0, 1, 524279, 0, 1, 524297, 0, 1, 524298, 0, 1, 589814, 0, 1, 589815, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655372, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720908, 0, 1, 720911, 0, 1, 786422, 0, 1, 786444, 0, 1, 786445, 0, 1, 786446, 0, 1, 786447, 0, 1, 851960, 0, 1, 851972, 0, 1, 851974, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 1, 917509, 0, 1, 917510, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983036, 0, 1, 983038, 0, 1, 983039, 0, 1, 983040, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048576, 0, 1, 1114103, 0, 1, 1114104, 0, 1, 1114105, 0, 1, 1114106, 0, 1, 1114107, 0, 1, 1114108, 0, 1, 1114109, 0, 1, 1114110, 0, 1, 1114111, 0, 1, 1179639, 0, 1, 1179640, 0, 1, 1179641, 0, 1, 1179642, 0, 1, 1179643, 0, 1, 1179645, 0, 1, 1245175, 0, 1, 1245176, 0, 1, 1245178, 0, 1, 1245179, 0, 1, 1245180, 0, 1, 1245181, 0, 1, 1310711, 0, 1, 1310712, 0, 1, 1310713, 0, 1, 1310714, 0, 1, 1310715, 0, 1, 1310716, 0, 1, 1310717, 0, 1, 1310718, 0, 1, 1310719, 0, 1, 1376249, 0, 1, 1376250, 0, 1, 1376253, 0, 1, 1376255, 0, 1, 1441785, 0, 1, 1441786, 0, 1, 1441787, 0, 1, 1441789, 0, 1, 1441790, 0, 1, 1441791, 0, 1, 1507321, 0, 1, 1507323, 0, 1, 1507324, 0, 1, 1507325, 0, 1, -262144, 0, 1, -262143, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -131082, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131069, 0, 1, -65546, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
 }
 script = ExtResource( 9 )
 __meta__ = {
@@ -199,13 +242,13 @@ shape = SubResource( 59 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, -0.6, 0 )
 
 [node name="Mushroom3" parent="Viewport/level/Mushrooms" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 5.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 5.2, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/Mushrooms/Mushroom3/FallthroughSolid" index="0"]
 shape = SubResource( 28 )
 
 [node name="Mushroom4" parent="Viewport/level/Mushrooms" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 2.7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 1.7, 0 )
 
 [node name="Dragonflies" type="Spatial" parent="Viewport/level"]
 
@@ -247,9 +290,30 @@ should_animate = false
 
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.017, 8.03393, 0 )
+max_num_hits = 3
 
-[node name="FeatherSpell" parent="Viewport/level/QuestionBlock" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170002, 3.46607, 0 )
+[node name="CherryCarcass" parent="Viewport/level/QuestionBlock" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.1, 0 )
+
+[node name="CherryCarcass2" parent="Viewport/level/QuestionBlock" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200001, 4.3, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock/CherryCarcass2/SmallInteractionArea" index="0"]
+shape = SubResource( 60 )
+
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock/CherryCarcass2" index="2"]
+flip_h = true
+
+[node name="SecretAnimationPlayer" parent="Viewport/level/QuestionBlock/CherryCarcass2" index="5"]
+anims/RESET = SubResource( 61 )
+anims/fall = SubResource( 62 )
+anims/land = SubResource( 63 )
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock/CherryCarcass2/FallthroughSolid" index="0"]
+shape = SubResource( 64 )
+
+[node name="CherryCarcass3" parent="Viewport/level/QuestionBlock" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 6.5, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 9.7, 0 )
@@ -258,7 +322,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 9.7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 10.9, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 5.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 5.3, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1, -2.6, 0 )
@@ -269,32 +333,6 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 20.1, 0 )
-
-[node name="CherryCarcass" parent="Viewport/level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 3.6, 0 )
-
-[node name="Vileplume" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 13.6, 14.2, 0 )
-grav = 0
-
-[node name="CollisionShape" parent="Viewport/level/Vileplume/FallthroughSolid" index="0"]
-shape = SubResource( 60 )
-
-[node name="NPC" parent="Viewport/level/Vileplume" index="7"]
-bbText = "•oops, sorry. i'm shy
-around strangers.
-& infect them with spores."
-is_important = true
-tiny_textbox = false
-
-[node name="CollisionShape" parent="Viewport/level/Vileplume/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 61 )
-
-[node name="CollisionShape" parent="Viewport/level/Vileplume/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 62 )
-
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 9.2, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -314,6 +352,4 @@ __meta__ = {
 [editable path="Viewport/level/Dragonflies/Dragonfly2"]
 [editable path="Viewport/level/Dragonflies/Dragonfly3"]
 [editable path="Viewport/level/Dragonflies/Dragonfly4"]
-[editable path="Viewport/level/Vileplume"]
-[editable path="Viewport/level/Vileplume/NPC"]
-[editable path="Viewport/level/Vileplume/NPC/NPC TextBox"]
+[editable path="Viewport/level/QuestionBlock/CherryCarcass2"]

@@ -51,8 +51,8 @@ var is_smacked = false
 var has_ever_been_smacked = false
 
 var smack_timer = 0
-export var smack_time_limit = 10
-export var smack_recovery_time_limit = 11
+export var smack_time_limit = 5
+export var smack_recovery_time_limit = 6
 
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
