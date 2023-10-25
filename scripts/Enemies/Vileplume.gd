@@ -9,8 +9,6 @@ var air_time_limit = 15
 var spawn_timer = 0
 var spawn_time_limit = 15
 
-onready var npc = get_node("NPC")
-
 export var is_static = false
 export var is_infected = false
 
@@ -63,10 +61,11 @@ func getSmacked(broom_origin):
   .getSmacked(broom_origin)
   summonSmokeClouds(5)
   spawnFiveSpores()
-  npc.getSmacked(broom_origin)
+  getPlayer().getMushroomInfected()
 
 func passiveActivate(_delta, _is_player):
-  getSmacked(null)
+  # getSmacked(null)
+  pass
 
 func spawnFiveSpores():
   for _i in range(10):
@@ -81,8 +80,8 @@ func spawnASpore():
     spore.original_pos = self.global_transform.origin
     spore.setAsParent(self)
     spore.bubble_speed = -rand_range(2.925, 3.8)
-    spore.target_pos.x = self.global_transform.origin.x + rand_range(-3, 3)
+    spore.target_pos.x = self.global_transform.origin.x + rand_range(-4, 4)
     spore.delta_multiplier = 4.0
-    spore.global_transform.origin.x += rand_range(-2, 2)
-    spore.global_transform.origin.y -= rand_range(0, .725)
+    spore.global_transform.origin.x += rand_range(-3, 3)
+    spore.global_transform.origin.y -= rand_range(0, 1)
     spore.lifespan_time_limit = 15

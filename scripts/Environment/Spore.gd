@@ -135,6 +135,8 @@ func isActive():
     return is_active
 
 func passiveActivate(_delta, is_player):
+    if not is_player:
+        return
     if not didja_get_me:
         bubbleStartPop()
         if is_player: 

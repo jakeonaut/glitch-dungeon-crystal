@@ -60,7 +60,7 @@ func processPauseAnimation():
     return
   
   if is_mushroom_infected:
-    pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
+    pauseAnimation = true # (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
     if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -118,6 +118,7 @@ func _process(delta):
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
+    
 
 func spawnOneSparkle(xdiff, above_the_head = false):
   var newSparkle = sparkleRes.instance()
@@ -283,6 +284,8 @@ func getABroom():
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
 var has_mushroom_double_jumped = false
+var mush_carcasses = []
+var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
@@ -296,21 +299,26 @@ func processJumpInputs(delta):
       #   mushroom_infection_direction = -mushroom_infection_direction
       for _i in range(5):
         spawnASpore(0, -1)
-      is_mushroom_infected = false
+      # is_mushroom_infected = false
       summonSmokeClouds(2, true, true)
-      musicPlayer.changeSongPitch(1.0)
-      if not global.memory["broom"]:
-          getABroom()
-      has_mushroom_double_jumped = false
       aniPlayer.clear_queue()
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
       aniPlayer.queue("jump")
-      new_carcass = cherryCarcassRes.instance()
-      level.add_child(new_carcass)
-      # new_carcass.is_crumbling = true
-      new_carcass.global_transform.origin = self.global_transform.origin
-      new_carcass.mySprite.flip_h = mySprite.flip_h
+      var mush_carcass = cherryCarcassRes.instance()
+      level.add_child(mush_carcass)
+      mush_carcass.global_transform.origin = self.global_transform.origin
+      mush_carcass.mySprite.flip_h = mySprite.flip_h
+      mush_carcasses.push_back(weakref(mush_carcass))
+      var num_mush_carcasses = len(mush_carcasses)
+      # remove freed mush_carcasses
+      for _i in range(num_mush_carcasses):
+        var mush_carcass_ref = mush_carcasses.pop_front()
+        if mush_carcass_ref.get_ref() != null:
+          mush_carcasses.push_back(mush_carcass_ref)
+      # free mushrooms when there are too many
+      while len(mush_carcasses) > max_num_mush_carcasses:
+        mush_carcasses.pop_front().get_ref().queue_free()
     elif global.memory["nesting_doll"] and triedToDoubleJump: 
       doubleJump()
       new_carcass = cherryCarcassRes.instance()

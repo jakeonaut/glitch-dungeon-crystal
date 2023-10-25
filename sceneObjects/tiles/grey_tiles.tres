@@ -4820,7 +4820,6 @@ image = SubResource( 1154 )
 size = Vector2( 64, 64 )
 
 [resource]
-resource_local_to_scene = true
 item/0/name = "MeshInstance"
 item/0/mesh = SubResource( 407 )
 item/0/mesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
