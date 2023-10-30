@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=37 format=2]
+=======
+[gd_scene load_steps=38 format=2]
+>>>>>>> 7240358 (working on suburban gothic)
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -24,6 +28,10 @@
 [ext_resource path="res://assets/backgrounds/church_layer_0.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=24]
+<<<<<<< HEAD
+=======
+[ext_resource path="res://sceneObjects/Enemies/Furbo.tscn" type="PackedScene" id=25]
+>>>>>>> 7240358 (working on suburban gothic)
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 19 )
@@ -325,6 +333,12 @@ shape = SubResource( 27 )
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 1.6, 0 )
 
+<<<<<<< HEAD
+=======
+[node name="Furbo" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5.16078, 0 )
+
+>>>>>>> 7240358 (working on suburban gothic)
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

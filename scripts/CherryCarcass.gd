@@ -9,7 +9,11 @@ var is_crumbling = false
 
 
 func _ready():
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
+=======
+    mySprite.material_override = mySprite.material_override.duplicate()
+>>>>>>> 7240358 (working on suburban gothic)
     should_collide_ceil = false
     should_collide_horizontally = false
 

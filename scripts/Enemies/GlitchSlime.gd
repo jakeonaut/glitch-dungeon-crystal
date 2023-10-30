@@ -15,7 +15,11 @@ export var flip_initial_direction = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # 
+=======
+    
+>>>>>>> 7240358 (working on suburban gothic)
     # heartSprite.set_material_override(heartSprite.get_material_override().duplicate())
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
 
@@ -108,7 +112,11 @@ func ouchies(broom_origin):
     mySprite.frame_delay = 0.1
     mySprite.max_frames = 4
     mySprite.should_soft_fizzle_out = true
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # 
+=======
+    
+>>>>>>> 7240358 (working on suburban gothic)
     var new_material = mySprite.get_material_override().duplicate()
     new_material.set_shader_param("texture_albedo", altGlitchEnemySheet)
     mySprite.set_material_override(new_material)

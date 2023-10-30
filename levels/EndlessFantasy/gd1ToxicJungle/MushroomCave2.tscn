@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=33 format=2]
+=======
+[gd_scene load_steps=34 format=2]
+>>>>>>> 7240358 (working on suburban gothic)
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -21,6 +25,10 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=21]
+<<<<<<< HEAD
+=======
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=22]
+>>>>>>> 7240358 (working on suburban gothic)
 
 [sub_resource type="Animation" id=21]
 resource_name = "doorClose"
@@ -154,7 +162,11 @@ __meta__ = {
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+<<<<<<< HEAD
 mesh_library = ExtResource( 5 )
+=======
+mesh_library = ExtResource( 22 )
+>>>>>>> 7240358 (working on suburban gothic)
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false

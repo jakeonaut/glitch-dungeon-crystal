@@ -1,0 +1,56 @@
+extends "GlitchEnemy.gd"
+
+onready var interactionArea = get_node("SmallInteractionArea")
+onready var sparkleSprite = get_node("SparkleSprite3D")
+onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+
+var spawn_timer = 0
+var spawn_time_limit = 5
+
+func _ready():
+  smack_time_limit = 5
+
+func setAsParent(_owner):
+  walk_direction.x = -1
+
+func glitchSwitchSprite(_delta):
+  pass
+
+var rejump_timer = 0
+var rejump_time_limit = 10
+func _process(delta):
+  # behavior_walking = not on_ground
+
+  spawn_timer += (delta*22)
+  if spawn_timer >= spawn_time_limit:
+      var newSprite = sparkleSprite.duplicate()
+      newSprite.should_fizzle_out = true
+      newSprite.visible = true
+      newSprite.transform.origin = Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125),
+          0
+      )
+      newSprite.updateBaseFrame(0, 0)
+      newSprite.max_frames = 2
+      level.add_child(newSprite)
+      spawn_timer = 0
+    
+  if not behavior_jumping and on_ground:
+    rejump_timer += (delta*22)
+    if rejump_timer >= rejump_time_limit:
+      behavior_jumping = true
+  elif not on_ground:
+    rejump_timer = 0
+
+# @override
+func landed():
+  .landed()
+  # behavior_jumping = false
+  rejump_timer = 0
+
+# @override
+func shouldIDoCollisions():
+    should_collide_floor = true
+    should_collide_ceil = true
+    should_collide_horizontally = true

@@ -46,8 +46,13 @@ func _ready():
     initial_grav = grav
     initial_true_terminal_vel = true_terminal_vel
 
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate() # make unique
     # TODO(jaketrower): testing performance # myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
+=======
+    mySprite.material_override = mySprite.material_override.duplicate() # make unique
+    myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
+>>>>>>> 7240358 (working on suburban gothic)
     myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.6
 
 func getSmacked(broom_origin):

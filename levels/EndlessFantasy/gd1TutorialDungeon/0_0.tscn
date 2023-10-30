@@ -1233,11 +1233,20 @@ spawned_object_path = ""
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
 bbText = "•welcome to DUNGEON
+<<<<<<< HEAD
 •press [X] to talk↓•ouch!!! well done.
+=======
+•press X to talk↓
+•ouch!!! well done.
+>>>>>>> 7240358 (working on suburban gothic)
 •if someone says \". . .\"
 you can talk to them!"
 is_important = true
 is_really_important = true
+<<<<<<< HEAD
+=======
+can_camera_zoom = false
+>>>>>>> 7240358 (working on suburban gothic)
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )

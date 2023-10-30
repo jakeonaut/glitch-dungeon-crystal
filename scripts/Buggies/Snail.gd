@@ -15,7 +15,11 @@ func _ready():
         queue_free()
 
     # ._ready() implicit
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+=======
+    myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
+>>>>>>> 7240358 (working on suburban gothic)
     
     should_only_do_middle_sensor = true
     if is_wall_snail:

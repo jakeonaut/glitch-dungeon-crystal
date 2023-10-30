@@ -7,7 +7,11 @@ var where_was_i = false
 func _ready():
     set_process(true)
     
+<<<<<<< HEAD
     # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
+=======
+    mySprite.material_override = mySprite.material_override.duplicate()
+>>>>>>> 7240358 (working on suburban gothic)
     mySprite.changeSpriteColorPalette(level.current_sprite_palette)
 
     if randi() % 2 == 0:

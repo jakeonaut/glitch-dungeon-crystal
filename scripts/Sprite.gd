@@ -40,7 +40,11 @@ func _ready():
 
     if should_duplicate_material and material_override:
         pass
+<<<<<<< HEAD
         # TODO(jaketrower): testing performance # material_override = material_override.duplicate()
+=======
+        material_override = material_override.duplicate()
+>>>>>>> 7240358 (working on suburban gothic)
     
 export var automatically_change_color = true
 func changeSpriteColorPaletteToLevelPalette():

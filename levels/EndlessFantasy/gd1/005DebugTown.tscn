@@ -2358,6 +2358,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995478, 3.55841, 0 )
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.995478, 1.42817, 0 )
 
+<<<<<<< HEAD
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 0 )
 
@@ -2365,6 +2366,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 0 )
 
 [node name="NPC7" parent="Viewport/level/QuestionBlock" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351324, 4.58672, 0 )
+=======
+[node name="NPC7" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03513, 4.58672, 0 )
+>>>>>>> 7240358 (working on suburban gothic)
 true_terminal_vel = 2
 is_really_important = true
 can_camera_zoom = false
@@ -2372,10 +2377,17 @@ dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
 
+<<<<<<< HEAD
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 164 )
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="0"]
+=======
+[node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
+shape = SubResource( 164 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="0"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2383,13 +2395,21 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
+<<<<<<< HEAD
 [node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="1"]
+=======
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="1"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+<<<<<<< HEAD
 [node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="2"]
+=======
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="2"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2397,7 +2417,11 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
+<<<<<<< HEAD
 [node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="3"]
+=======
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="3"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2405,13 +2429,21 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
+<<<<<<< HEAD
 [node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="4"]
+=======
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="4"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+<<<<<<< HEAD
 [node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="5"]
+=======
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="5"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2419,13 +2451,21 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
+<<<<<<< HEAD
 [node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="6"]
+=======
+[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="6"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+<<<<<<< HEAD
 [node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="7"]
+=======
+[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="7"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2433,17 +2473,29 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
+<<<<<<< HEAD
 [node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC7/NPC TextBox/TextBox/Text" index="8"]
+=======
+[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="8"]
+>>>>>>> 7240358 (working on suburban gothic)
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+<<<<<<< HEAD
 [node name="Sprite3D" parent="Viewport/level/QuestionBlock/NPC7" index="4"]
 material_override = SubResource( 165 )
 frame = 28
 
 [node name="AnimationPlayer" parent="Viewport/level/QuestionBlock/NPC7" index="5"]
+=======
+[node name="Sprite3D" parent="Viewport/level/NPC7" index="4"]
+material_override = SubResource( 165 )
+frame = 28
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="5"]
+>>>>>>> 7240358 (working on suburban gothic)
 anims/default = SubResource( 166 )
 anims/fall = SubResource( 167 )
 anims/flickerOn = SubResource( 168 )
@@ -2451,6 +2503,7 @@ anims/jump = SubResource( 169 )
 anims/land = SubResource( 170 )
 anims/stand = SubResource( 171 )
 
+<<<<<<< HEAD
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC7/FallthroughSolid" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 172 )
@@ -2458,6 +2511,20 @@ shape = SubResource( 172 )
 [node name="InteractPrompt" parent="Viewport/level/QuestionBlock/NPC7" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
+=======
+[node name="CollisionShape" parent="Viewport/level/NPC7/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
+shape = SubResource( 172 )
+
+[node name="InteractPrompt" parent="Viewport/level/NPC7" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
+
+[node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 0 )
+
+[node name="miniCubeCrystal" parent="Viewport/level/QuestionBlock" instance=ExtResource( 9 )]
+
+>>>>>>> 7240358 (working on suburban gothic)
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
 
@@ -3176,8 +3243,13 @@ visible = true
 [editable path="Viewport/level/Door7/NPC/NPC TextBox"]
 [editable path="Viewport/level/GlitchEnemy6"]
 [editable path="Viewport/level/GlitchEnemy7"]
+<<<<<<< HEAD
 [editable path="Viewport/level/QuestionBlock/NPC7"]
 [editable path="Viewport/level/QuestionBlock/NPC7/NPC TextBox"]
+=======
+[editable path="Viewport/level/NPC7"]
+[editable path="Viewport/level/NPC7/NPC TextBox"]
+>>>>>>> 7240358 (working on suburban gothic)
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door4"]

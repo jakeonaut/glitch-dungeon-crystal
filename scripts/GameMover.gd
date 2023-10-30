@@ -239,6 +239,10 @@ func processPhysics(delta):
     if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground):
       if not pauseAnimation and aniPlayer:
         aniPlayer.play("wakeup")
+<<<<<<< HEAD
+=======
+      if bounceAniPlayer:
+>>>>>>> 7240358 (working on suburban gothic)
         playBounce("wakeup")
       physics_state = PhysicsState.WAKING_UP
   elif physics_state == PhysicsState.WAKING_UP:
@@ -290,10 +294,13 @@ func playLandAnimation():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("land", -1, 0.5 if isFeatherLike() else 1.5)
+<<<<<<< HEAD
   if last_vv < -10:
     playBounce("land")
   elif last_vv < -6:
     playBounce("landSoft")
+=======
+>>>>>>> 7240358 (working on suburban gothic)
 
 func processLand():
   landed()
@@ -594,6 +601,10 @@ func processJumpInputs(delta):
         aniPlayer.play("jumpSquat", -1, 0.5 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
         aniPlayer.queue("fall" if isFeatherLike() else "jump")
+<<<<<<< HEAD
+=======
+      if bounceAniPlayer:
+>>>>>>> 7240358 (working on suburban gothic)
         playBounce("jumpSquat", ["jumpStart"])
 
   if not pauseAnimation and aniPlayer != null:
@@ -1241,13 +1252,24 @@ func landed():
       aniPlayer.stop()
       aniPlayer.clear_queue()
       aniPlayer.play("fallFlat", -1, 1.0)
+<<<<<<< HEAD
       # playBounce("fallFlat")
       playBounce("land")
+=======
+>>>>>>> 7240358 (working on suburban gothic)
       physics_state = PhysicsState.COLLAPSED
       if bumpSound: bumpSound.play()
       iFellFlat()
     else:
       playLandAnimation()
+<<<<<<< HEAD
+=======
+  if bounceAniPlayer:
+    if last_vv < -10:
+      playBounce("land")
+    elif last_vv < -6:
+      playBounce("landSoft")
+>>>>>>> 7240358 (working on suburban gothic)
   if fallSound and quiet_the_fall_sound:
     fallSound.stop()
   fall_timer = 0

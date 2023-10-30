@@ -25,7 +25,11 @@ var cooldown_time_limit = 40
 var is_in_cooldown = false
 
 func _ready():
+<<<<<<< HEAD
   # TODO(jaketrower): testing performance # original_material = mySprite.get_material_override().duplicate()
+=======
+  original_material = mySprite.get_material_override().duplicate()
+>>>>>>> 7240358 (working on suburban gothic)
   pass
 
 func _process(delta):

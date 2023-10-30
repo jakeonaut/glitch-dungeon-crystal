@@ -862,8 +862,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 6.83472, 0 )
 grav = 0
 bbText = "•this dust just showed up!
 how odd... dearie, could
+<<<<<<< HEAD
 you sweep up with [X]?
 "
+=======
+you sweep up with X?"
+>>>>>>> 7240358 (working on suburban gothic)
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true

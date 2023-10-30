@@ -17,5 +17,11 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=true
+<<<<<<< HEAD
 edit/loop=false
+=======
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+>>>>>>> 7240358 (working on suburban gothic)
 compress/mode=0
