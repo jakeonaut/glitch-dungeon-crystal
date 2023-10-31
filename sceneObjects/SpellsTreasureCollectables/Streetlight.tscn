@@ -166,7 +166,7 @@ pixel_size = 0.12
 texture = ExtResource( 14 )
 hframes = 4
 vframes = 2
-frame = 6
+frame = 2
 
 [node name="SparkleSprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )

@@ -57,6 +57,8 @@ func activate(_is_player):
   collectSound.play()
   num_sparkles_spawned = 0
   level.player.grav *= -1
+  level.player.mySprite.flip_v = not level.player.mySprite.flip_v
+  level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
   getSmacked()
 
 

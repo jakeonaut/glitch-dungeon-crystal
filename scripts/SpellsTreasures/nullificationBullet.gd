@@ -110,13 +110,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
             newSmokeCloud.tryPlaySound()
             play_sound = false
         if is_glitchy:
-            pass
-<<<<<<< HEAD
-            # TODO(jaketrower): testing performance # 
-=======
-            
->>>>>>> 7240358 (working on suburban gothic)
-            # var new_material = newSmokeCloud.get_material_override().duplicate()
-            # new_material.set_shader_param("enable_glitch", "true")
-            # new_material.set_shader_param("target_palette", global.weird_base_palette)
-            # newSmokeCloud.set_material_override(new_material.duplicate())
+            var new_material = newSmokeCloud.get_material_override().duplicate()
+            new_material.set_shader_param("enable_glitch", "true")
+            new_material.set_shader_param("target_palette", global.weird_base_palette)
+            newSmokeCloud.set_material_override(new_material.duplicate())

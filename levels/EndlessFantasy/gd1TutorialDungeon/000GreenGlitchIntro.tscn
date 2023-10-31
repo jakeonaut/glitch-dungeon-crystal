@@ -300,11 +300,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 3.5, 0 )
 grav = 0
 bbText = "•[color=#00ff00]Feather Fall[/color] spell:
 jump high by
-<<<<<<< HEAD
-holding [Z] button"
-=======
 holding Z button"
->>>>>>> 7240358 (working on suburban gothic)
 can_camera_zoom = false
 is_a_body = false
 floating_text = true

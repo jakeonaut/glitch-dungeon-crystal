@@ -52,11 +52,7 @@ func getGameCamera():
 
 func _ready():
   appearSound.play()
-<<<<<<< HEAD
-  # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
-=======
   mySprite.material_override = mySprite.material_override.duplicate()
->>>>>>> 7240358 (working on suburban gothic)
   aniPlayer.queue("bubbleGrow")
   aniPlayer.queue("bubble")
   

@@ -26,11 +26,7 @@ onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
-<<<<<<< HEAD
-  # TODO(jaketrower): testing performance # original_material = mySprite.get_material_override().duplicate()
-=======
   original_material = mySprite.get_material_override().duplicate()
->>>>>>> 7240358 (working on suburban gothic)
 
   smack_time_limit = 5
   interactionArea.add_to_group("no_pushems")
@@ -50,13 +46,8 @@ func _process(delta):
     override_am_i_in_range_of_player = true
 
   if is_infected:
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # if mySprite2:
-    # TODO(jaketrower): testing performance #   mySprite.set_material_override(mySprite2.get_material_override())
-=======
     if mySprite2:
       mySprite.set_material_override(mySprite2.get_material_override())
->>>>>>> 7240358 (working on suburban gothic)
     if mushroomSprite:
       mushroomSprite.visible = true
     if not interactionArea.is_in_group("enemies"):
@@ -65,13 +56,8 @@ func _process(delta):
       fallthroughSolidArea.remove_from_group("fallthrough")
     
   else:
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # if original_material:
-    # TODO(jaketrower): testing performance #   mySprite.set_material_override(original_material)
-=======
     if original_material:
       mySprite.set_material_override(original_material)
->>>>>>> 7240358 (working on suburban gothic)
     if mushroomSprite:
       mushroomSprite.visible = false
 

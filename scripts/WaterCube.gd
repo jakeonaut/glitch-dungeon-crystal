@@ -42,13 +42,8 @@ func _ready():
   set_process(true)
 
   target_origin = self.global_transform.origin + Vector3(-1, 2, 0)
-<<<<<<< HEAD
-  # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
-  # TODO(jaketrower): testing performance # waterFilterColorRect.material = waterFilterColorRect.material.duplicate()
-=======
   mySprite.material_override = mySprite.material_override.duplicate()
   waterFilterColorRect.material = waterFilterColorRect.material.duplicate()
->>>>>>> 7240358 (working on suburban gothic)
   if turn_poisonous:
     is_poison = true
     becomePoisonous()

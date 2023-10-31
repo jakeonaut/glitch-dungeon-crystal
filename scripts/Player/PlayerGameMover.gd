@@ -285,21 +285,14 @@ onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
 var has_mushroom_double_jumped = false
 var mush_carcasses = []
-<<<<<<< HEAD
-var max_num_mush_carcasses = 3
-=======
 var max_num_mush_carcasses = 1
->>>>>>> 7240358 (working on suburban gothic)
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
     if is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
       has_mushroom_double_jumped = true
       doubleJump()
-<<<<<<< HEAD
-=======
       feather_jump_timer = 13
->>>>>>> 7240358 (working on suburban gothic)
       wormSound.play()
       # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
       # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
@@ -396,16 +389,10 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horiz
             newSmokeCloud.tryPlaySound()
             play_sound = false
         if is_glitchy:
-            pass
-<<<<<<< HEAD
-            # TODO(jaketrower): testing performance # 
-=======
-            
->>>>>>> 7240358 (working on suburban gothic)
-            # var new_material = newSmokeCloud.get_material_override().duplicate()
-            # new_material.set_shader_param("enable_glitch", "true")
-            # new_material.set_shader_param("target_palette", global.weird_base_palette)
-            # newSmokeCloud.set_material_override(new_material.duplicate())
+            var new_material = newSmokeCloud.get_material_override().duplicate()
+            new_material.set_shader_param("enable_glitch", "true")
+            new_material.set_shader_param("target_palette", global.weird_base_palette)
+            newSmokeCloud.set_material_override(new_material.duplicate())
     
 
 # @override

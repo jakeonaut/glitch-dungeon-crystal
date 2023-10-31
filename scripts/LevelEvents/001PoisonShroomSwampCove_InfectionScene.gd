@@ -35,11 +35,7 @@ func passiveActivate(_delta, _is_player):
         yield(get_tree().create_timer(1.0), "timeout")
         var frogToBeInfected = getFrogToBeInfected()
         var frogSprite = getFrogToBeInfected().get_node("Sprite3D")
-<<<<<<< HEAD
-        # TODO(jaketrower): testing performance # 
-=======
         
->>>>>>> 7240358 (working on suburban gothic)
         # var frogShader = frogSprite.get_material_override().duplicate()
         # frogShader.set_shader_param("enable_glitch", true)
         # frogShader.set_shader_param("enable_palette_cycle", true)

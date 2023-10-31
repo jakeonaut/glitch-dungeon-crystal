@@ -32,11 +32,7 @@ func _ready():
     
     original_pos = global_transform.origin
     randomizeTargetPos()
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate()
-=======
     mySprite.material_override = mySprite.material_override.duplicate()
->>>>>>> 7240358 (working on suburban gothic)
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

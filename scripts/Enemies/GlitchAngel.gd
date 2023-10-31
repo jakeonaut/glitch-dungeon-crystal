@@ -32,13 +32,8 @@ func _ready():
         get_node("HaloSprite").visible = false
         get_node("WingsSprite").visible = false
     
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate() # make unique
-    # TODO(jaketrower): testing performance # myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
-=======
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
->>>>>>> 7240358 (working on suburban gothic)
 
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")

@@ -21,11 +21,7 @@ func _ready():
     id = self.generateId()
 
     set_process(true)
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # saveDiskSprite.set_material_override(saveDiskSprite.get_material_override().duplicate())
-=======
     saveDiskSprite.set_material_override(saveDiskSprite.get_material_override().duplicate())
->>>>>>> 7240358 (working on suburban gothic)
 
 var was_on_save_point = false
 func _process(delta):

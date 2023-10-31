@@ -39,15 +39,9 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # ._ready() implicit
-<<<<<<< HEAD
-    # TODO(jaketrower): testing performance # mySprite.material_override = mySprite.material_override.duplicate() # make unique
-    myOtherSprite.visible = false
-    # TODO(jaketrower): testing performance # myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
-=======
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.visible = false
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
->>>>>>> 7240358 (working on suburban gothic)
     playerActivationAreaCollisionShape.shape = playerActivationAreaCollisionShape.shape.duplicate() # make unique
 
 func _process(delta):
