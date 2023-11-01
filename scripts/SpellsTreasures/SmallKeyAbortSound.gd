@@ -1,6 +1,7 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var followerRes = preload("res://sceneObjects/KeyFollower.tscn")
 
 func _ready():
     pass
@@ -15,6 +16,9 @@ func activateScript():
     global.pauseMoveInput = false
     key.queue_free()
     level.player.aniPlayer.play("stand")
+
+    var newKeyFollower = followerRes.instance()
+    level.add_child(newKeyFollower)
 
 func isActive():
     return true

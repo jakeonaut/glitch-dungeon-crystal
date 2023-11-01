@@ -264,6 +264,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     getPlayer().aniPlayer.stop()
     getPlayer().aniPlayer.clear_queue()
     getPlayer().aniPlayer.play("enterDoor")
+    getPlayer().playBounce("land")
   getPlayer().pauseSelf = true
 
   global.activeInteractor = null
@@ -279,6 +280,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("stand")
+      getPlayer().playBounce("land")
       getPlayer().pauseSelf = false
     return
 
@@ -351,7 +353,8 @@ func land():
       getPlayer().on_ground = false
   else:
     # SNEAKY SNEAKY
-    global.saveMySpot(self.translation, level)  
+    global.saveMySpot(self.translation, level) 
+    getPlayer().playBounce("land") 
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):
