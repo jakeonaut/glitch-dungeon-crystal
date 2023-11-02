@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=107 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=31]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Beetle.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sounds/OOT_Steps_Dirt1.wav" type="AudioStream" id=34]
 [ext_resource path="res://assets/sounds/land.wav" type="AudioStream" id=35]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=36]
 [ext_resource path="res://assets/MRMOTEXTEX3.png" type="Texture" id=37]
@@ -370,6 +371,18 @@ tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Sounds/FootstepSound:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -1567,6 +1580,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector3( 0.830061, 0.788888, 0 ), Vector3( 1.27226, 0.855888, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/FootstepSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=31]
 resource_name = "walkBump"
@@ -1712,6 +1737,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector3( 0.803258, 0.802288, 0 ), Vector3( 1.25886, 0.829087, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/FootstepSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -2301,6 +2338,10 @@ vframes = 8
 stream = ExtResource( 12 )
 volume_db = -5.0
 pitch_scale = 1.05
+
+[node name="FootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 34 )
+volume_db = -8.0
 
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 45 )
