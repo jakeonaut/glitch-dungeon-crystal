@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
-[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/black_palette_town.png" type="Texture" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
@@ -104,7 +104,7 @@ pixel_size = 0.125
 texture = ExtResource( 13 )
 hframes = 8
 vframes = 16
-frame = 76
+frame = 82
 script = ExtResource( 1 )
 automatically_change_color = false
 

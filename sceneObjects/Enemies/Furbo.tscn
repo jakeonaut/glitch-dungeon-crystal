@@ -555,7 +555,7 @@ behavior_jumping = true
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )
 material_override = SubResource( 11 )
-pixel_size = 0.125
+pixel_size = 0.1
 texture = ExtResource( 13 )
 hframes = 8
 vframes = 16

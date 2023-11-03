@@ -14,6 +14,7 @@ onready var collisionShape3 = get_node("Area/CollisionShape3")
 onready var aniPlayer = get_node("AnimationPlayer")
 var smacked_npc = null
 var have_i_smacked_an_npc = false
+var is_active = true
 
 var levelTiles = null
 func getLevelTiles():
@@ -76,7 +77,7 @@ func canActivate(area):
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
 
 func hitStuff(_delta):
-  if not visible: return
+  if not visible or not is_active: return
   
   var areas = myArea.get_overlapping_areas()
   for area in areas:
@@ -86,14 +87,17 @@ func hitStuff(_delta):
         my_broom_owner.has_sweeped_glitch = true
         summonSmokeClouds(5, true, true)
         my_broom_owner.getSmacked()
+        is_active = false
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
       if global.hasGottenLevelGeode:
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.getSmacked()
           my_broom_owner.has_sweeped_glitch = true
+          is_active = false
       else:
         if area.get_node("..").notOuchies(global_transform.origin):
           my_broom_owner.getSmacked()
+          is_active = false
       
       # # TODO kill glitches or "free" them like glitch slug...
       
@@ -106,9 +110,11 @@ func hitStuff(_delta):
           have_i_smacked_an_npc = true
         if not area.is_in_group("tadpole") and smackResult == null:
           my_broom_owner.getSmacked()
+        is_active = false
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)
+      is_active = false
     elif canActivate(area) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.PassiveInteractActivate(0, false)

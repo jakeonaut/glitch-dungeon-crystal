@@ -457,6 +457,7 @@ func setGlobalMemoryOfHasBeenDefeated():
 export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
+var smacked_palette = global.white_palette
 func getSmacked(_broom_origin):
     if is_smacked:
         return false
@@ -469,7 +470,7 @@ func getSmacked(_broom_origin):
     mySprite.material_override.set_shader_param("shake_block_size", 60)
     mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
     last_palette = mySprite.material_override.get_shader_param("target_palette")
-    mySprite.material_override.set_shader_param("target_palette", global.white_palette)
+    mySprite.material_override.set_shader_param("target_palette", smacked_palette)
 
     if myOtherSprite:
         myOtherSprite.material_override.set_shader_param("time_influence", time_influence)

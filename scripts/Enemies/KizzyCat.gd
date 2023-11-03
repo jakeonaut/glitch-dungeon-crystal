@@ -24,13 +24,9 @@ func _process(delta):
     if getPlayer().glitch_form == global.GlitchForm.INVISIBLE and is_stone:
       is_stone = false
       mySprite.material_override.set_shader_param("target_palette", global.black_palette)
-      mySprite.max_frames = 2
-      mySprite.set_frame(76)
     elif getPlayer().glitch_form != global.GlitchForm.INVISIBLE and not is_stone:
       is_stone = true
-      mySprite.material_override.set_shader_param("target_palette", global.tidepool_palette)
-      mySprite.max_frames = 1
-      mySprite.set_frame(78)
+      mySprite.material_override.set_shader_param("target_palette", global.black_palette_town)
 
   if is_stone:
     self.linear_velocity.y = 0

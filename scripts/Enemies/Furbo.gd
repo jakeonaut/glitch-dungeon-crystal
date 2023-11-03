@@ -20,6 +20,9 @@ var rejump_timer = 0
 var rejump_time_limit = 10
 func _process(delta):
   # behavior_walking = not on_ground
+  if pauseSelf and not is_smacked and not secretAniPlayer.is_playing():
+    pauseSelf = false
+    on_ground = true
 
   spawn_timer += (delta*22)
   if spawn_timer >= spawn_time_limit:
@@ -54,3 +57,15 @@ func shouldIDoCollisions():
     should_collide_floor = true
     should_collide_ceil = true
     should_collide_horizontally = true
+
+# @override
+func getSmacked(broom_origin):
+  smacked_palette = global.weird_base_palette
+  if is_smacked:
+    return false
+  .getSmacked(broom_origin)
+  pauseSelf = true
+  on_ground = true
+  notDieSound.play()
+  secretAniPlayer.stop()
+  secretAniPlayer.play("evilGrin")
