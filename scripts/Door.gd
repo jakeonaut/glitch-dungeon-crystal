@@ -19,6 +19,7 @@ onready var npc = get_node("NPC")
 onready var doorCloseSound = get_node("DoorCloseSound")
 onready var doorOpenSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
+onready var keySound = get_node("KeySound")
 
 var canPlayDoorSound = true
 
@@ -132,8 +133,21 @@ func _process(delta):
     elif num_keys != null and num_keys < num_keys_unlock:
       npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
     else:
-      npc.textBoxContainer.bbText = "•press [UP] to unlock"
+      npc.textBoxContainer.bbText = "•press UP to unlock"
     npc.textBoxContainer.setVars()
+
+  if is_unlocking and not keySound.playing:
+    if unlocking_key_array.size() == 0:
+      actuallyUnlockAndEnterDoor()
+    else:
+      var key = unlocking_key_array[0]
+      if not key.flying_to_target:
+        key.flyToTarget(npc)
+      elif not key.is_returning:
+        keySound.play()
+        unlocking_key_array.remove(0)
+        key.queue_free()
+
 
 func spawnParticles(delta):
   spawn_timer += (delta*22)
@@ -218,32 +232,56 @@ func activate(is_player):
     elif is_locked:
       var num_keys = global.getLevelZoneThing("key")
       if num_keys != null and num_keys >= num_keys_unlock:
-        level.displayMessageText("unlocked!")
-        global.pauseMoveInput = true
-        global.setLevelZoneThing("key", num_keys - num_keys_unlock)
-        npc.visible = false 
-        npc.can_activate = false
-        npc.is_active = false
-        animationPlayer.clear_queue()
-        animationPlayer.stop()
-        doorOpenSound.play()
-        animationPlayer.queue("doorOpen")
-        is_locked = false
-        setGlobalMemoryOfHasUnlocked()
-        if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
-          global.activeInteractor.stopInteract()
-        global.activeInteractor = null
-        goThroughDoor()
+        startDoorUnlock()
       elif not lockedSound.is_playing():
         lockedSound.play()
         npc.activate(is_player)
+
+var is_unlocking = false
+var unlocking_key_array = []
+func startDoorUnlock():
+  var num_keys = global.getLevelZoneThing("key")
+  global.pauseMoveInput = true
+
+  unlocking_key_array = []
+  for i in range(level.followers.size() - 1, -1, -1):
+    var follower = level.followers[i]
+    if follower.is_in_group("keys"):
+      follower.popFromFollowers()
+      unlocking_key_array.push_back(follower)
+      if unlocking_key_array.size() >= num_keys_unlock:
+        break
+      
+  global.setLevelZoneThing("key", num_keys - num_keys_unlock)
+  npc.visible = false 
+  npc.can_activate = false
+  npc.is_active = false
+  getPlayer().pauseSelf = true
+  is_locked = false
+  setGlobalMemoryOfHasUnlocked()
+  is_unlocking = true
+  getPlayer().aniPlayer.stop()
+  getPlayer().aniPlayer.clear_queue()
+  getPlayer().aniPlayer.play("preGetItem")
+  getPlayer().playBounce("land")
+
+func actuallyUnlockAndEnterDoor():
+  level.displayMessageText("unlocked!")
+  animationPlayer.clear_queue()
+  animationPlayer.stop()
+  doorOpenSound.play()
+  animationPlayer.queue("doorOpen")
+  if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+    global.activeInteractor.stopInteract()
+  global.activeInteractor = null
+  goThroughDoor()
 
 
 func passiveActivate(_delta, is_player):
   if is_passive and is_player:
     goThroughDoor()
   elif is_player and not interactPromptSprite.visible:
-    interactPromptSprite.visible = true
+    interactPromptSprite.visible = not is_unlocking
     
 func justStopPassiveActivate():
   interactPromptSprite.visible = false

@@ -313,10 +313,8 @@ func walkThroughWallsGlitch():
 
 
 
-var lastFollower = null
+var followers = []
 func trySpawnFollowers():
-  lastFollower = self.player
-
   var numAngelTadpoles = global.getLevelZoneThing("angelTadpole")
   if numAngelTadpoles != null:
     for _i in range(numAngelTadpoles):
@@ -341,12 +339,15 @@ func spawnAngelTadpole(starting_position):
   var tadpole = tadpoleRes.instance()
   self.add_child(tadpole)
   tadpole.global_transform.origin = starting_position
-  lastFollower = tadpole
+
+  followers.push_back(tadpole)
 
 var keyFollowerRes = preload("res://sceneObjects/KeyFollower.tscn")
 func spawnKeyFollower(starting_position):
   var keyFollower = keyFollowerRes.instance()
   self.add_child(keyFollower)
   keyFollower.global_transform.origin = starting_position
-  keyFollower.gameMoverTarget = weakref(lastFollower)
-  lastFollower = keyFollower
+
+  var target = followers[-1] if followers.size() > 0 else player
+  keyFollower.gameMoverTarget = weakref(target)
+  followers.push_back(keyFollower)

@@ -20,13 +20,14 @@ func _process(delta):
   var targetOrigin = gameMoverTarget.get_ref().global_transform.origin
   var targetSprite = gameMoverTarget.get_ref().mySprite
 
-  var dist = self.global_transform.origin.distance_to(targetOrigin)
-  if dist > 8:
+  var zNormalizedOrigin = Vector3(global_transform.origin.x, global_transform.origin.y, targetOrigin.z)
+  var dist = zNormalizedOrigin.distance_to(targetOrigin)
+  if dist > 8 and not flying_to_target:
     is_returning = true
+  
+  if is_returning or flying_to_target:
     behavior_walking = false
     behavior_jumping = false
-  
-  if is_returning:
     global_transform.origin = global.moveToward2D(
       global_transform.origin, 
       targetOrigin, 
@@ -81,3 +82,15 @@ func glitchSetSpritesAndCollision():
 # @override 
 func getSmacked(_broom_origin):
   pass
+
+func popFromFollowers():
+  var followerIndex = level.followers.find(self)
+  level.followers.remove(followerIndex)
+
+var flying_to_target = false
+func flyToTarget(target):
+  if flying_to_target and gameMoverTarget.get_ref() == target:
+    return
+  gameMoverTarget = weakref(target)
+  flying_to_target = true
+  is_returning = true

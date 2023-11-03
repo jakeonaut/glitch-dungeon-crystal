@@ -223,6 +223,7 @@ visible = false
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, 13.4, 0 )
+spawn_time_limit = 0
 
 [node name="GlitchTileSpawner2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 13.4, 0 )
