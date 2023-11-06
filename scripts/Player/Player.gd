@@ -35,6 +35,8 @@ onready var enchantedBagSpriteVisible = get_node("Sprite3DBagVisible")
 onready var textContainer = get_node("TextContainer")
 onready var textBox = get_node("TextContainer/TextBox")
 
+onready var interactPromptSprite = get_node("InteractPrompt")
+
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0

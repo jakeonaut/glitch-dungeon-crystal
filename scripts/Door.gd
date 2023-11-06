@@ -28,8 +28,6 @@ var spawn_time_limit = 3
 
 onready var mySprite = get_node("Sprite3D")
 onready var mySprite2 = get_node("Sprite3D2")
-onready var interactPromptSprite = get_node("InteractPrompt")
-onready var interactionAniPlayer = get_node("InteractionAnimationPlayer")
 onready var landing = get_node("landing")
 onready var sparkleSprite = get_node("SparkleSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -95,9 +93,6 @@ func _ready():
     npc.visible = false 
     npc.can_activate = false
     npc.is_active = false
-  
-  if not mySprite2.visible:
-    interactPromptSprite.global_transform.origin.y -= 1
     
 func _process(delta):
   if is_passive:
@@ -280,11 +275,11 @@ func actuallyUnlockAndEnterDoor():
 func passiveActivate(_delta, is_player):
   if is_passive and is_player:
     goThroughDoor()
-  elif is_player and not interactPromptSprite.visible:
-    interactPromptSprite.visible = not is_unlocking
+  elif is_player and not getPlayer().interactPromptSprite.visible:
+    getPlayer().interactPromptSprite.visible = not is_unlocking
     
 func justStopPassiveActivate():
-  interactPromptSprite.visible = false
+  getPlayer().interactPromptSprite.visible = false
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
   if global.isEnteringRoom:

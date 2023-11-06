@@ -473,7 +473,7 @@ transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -
 true_terminal_vel = 2
 grav = 3
 
-[node name="TransformSound" parent="Viewport/level/Player/Sounds" index="6"]
+[node name="TransformSound" parent="Viewport/level/Player/Sounds" index="7"]
 volume_db = -80.0
 
 [node name="TextBox" parent="Viewport/level/Player/TextContainer" index="0"]

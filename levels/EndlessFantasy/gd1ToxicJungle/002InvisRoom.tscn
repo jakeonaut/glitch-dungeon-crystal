@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -14,11 +14,11 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=20]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -26,6 +26,10 @@ resource_local_to_scene = true
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -74,6 +78,10 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=33]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -86,7 +94,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-tileset_type = 2
+tileset_type = 7
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -107,9 +115,6 @@ mesh_library = ExtResource( 6 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -125,9 +130,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_clip_": 0
@@ -140,7 +142,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65536, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131071, 0, 1, 131072, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196607, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393227, 0, 1, 393228, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458747, 0, 1, 458748, 0, 1, 458763, 0, 1, 458764, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524283, 0, 1, 524284, 0, 1, 524285, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589820, 0, 1, 589821, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655373, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786436, 0, 3, 786437, 0, 3, 786438, 0, 3, 786439, 0, 3, 786440, 0, 3, 786441, 0, 3, 786442, 0, 3, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 3, 851969, 0, 3, 851970, 0, 3, 851971, 0, 3, 851972, 0, 3, 851973, 0, 3, 851974, 0, 3, 851975, 0, 3, 851976, 0, 3, 851977, 0, 3, 851978, 0, 3, 851979, 0, 3, 851980, 0, 3, 851981, 0, 3, 851982, 0, 3, 851983, 0, 3, 917494, 0, 3, 917495, 0, 3, 917496, 0, 3, 917497, 0, 3, 917498, 0, 3, 917499, 0, 3, 917500, 0, 3, 917501, 0, 3, 917502, 0, 3, 917503, 0, 3, 917504, 0, 3, 917505, 0, 3, 917506, 0, 3, 917507, 0, 3, 917508, 0, 3, 917509, 0, 3, 917510, 0, 3, 917511, 0, 3, 917512, 0, 3, 917513, 0, 3, 917514, 0, 3, 917515, 0, 3, 917516, 0, 3, 917517, 0, 3, 917518, 0, 3, 917519, 0, 3, 983030, 0, 3, 983031, 0, 3, 983032, 0, 3, 983033, 0, 3, 983034, 0, 3, 983035, 0, 3, 983036, 0, 3, 983037, 0, 3, 983038, 0, 3, 983039, 0, 3, 983054, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1, -7, 0, 1 )
+"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65528, 0, 1, 65529, 0, 1, 65536, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131071, 0, 1, 131072, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196607, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393227, 0, 1, 393228, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458747, 0, 1, 458748, 0, 1, 458763, 0, 1, 458764, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524283, 0, 1, 524284, 0, 1, 524285, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589820, 0, 1, 589821, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655373, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851979, 0, 3, 851980, 0, 3, 851981, 0, 3, 851982, 0, 3, 851983, 0, 3, 917494, 0, 3, 917495, 0, 3, 917496, 0, 3, 917497, 0, 3, 917513, 0, 3, 917514, 0, 3, 917515, 0, 3, 917516, 0, 3, 917517, 0, 3, 917518, 0, 3, 917519, 0, 3, 983030, 0, 3, 983031, 0, 3, 983032, 0, 3, 983033, 0, 3, 983034, 0, 3, 983035, 0, 3, 983054, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -7, 0, 1 )
 }
 script = ExtResource( 4 )
 __meta__ = {
@@ -157,7 +159,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 262134, 0, 0, 262143, 0, 36, 524299, 0, 36, 786439, 0, 2 )
+"cells": PoolIntArray( 262134, 0, 0, 262143, 0, 36, 262148, 0, 2, 524299, 0, 36 )
 }
 script = ExtResource( 2 )
 __meta__ = {
@@ -181,10 +183,13 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 32 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 num_keys_unlock = 1
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
@@ -202,17 +207,20 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 33 )
+
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11.9, 0 )
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6.9, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 4.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1, 4.1, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 8.9, 0 )
@@ -222,15 +230,6 @@ frame = 27
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -0.1, 0 )
-
-[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1, 1.4, 0 )
-
-[node name="InvisibleSpell3" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, 2.4, 0 )
-
-[node name="InvisibleSpell2" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 8.5, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 11.5, 0 )
@@ -248,7 +247,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 5.7, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, -0.6, -1 )
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8.7, 0 )
+
+[node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

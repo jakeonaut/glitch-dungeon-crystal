@@ -341,6 +341,7 @@ func spawnAngelTadpole(starting_position):
   tadpole.global_transform.origin = starting_position
 
   followers.push_back(tadpole)
+  return tadpole
 
 var keyFollowerRes = preload("res://sceneObjects/KeyFollower.tscn")
 func spawnKeyFollower(starting_position):

@@ -12,8 +12,6 @@ var is_being_collided = false
 var should_wiggle = false
 var wiggle_timer = 0
 var wiggle_time_limit = 2
-var followup_timer = 200
-var followup_time_limit = 8
 var spore_origin = Vector3(0, 0, 0)
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -32,20 +30,22 @@ func _ready():
 
 func fallthroughCollisionActivate(possible_game_mover):
     if not possible_game_mover.was_on_ground and not should_wiggle:
-        wiggle()
+        wiggle(possible_game_mover)
+        if possible_game_mover != null and possible_game_mover.has_method("magicJump"):
+            possible_game_mover.magicJump()
 
-func wiggle():
+func wiggle(possible_game_mover):
     should_wiggle = true
     wiggle_timer = 0
-    var how_many = randi() % 3 + 3
-    for _i in range(how_many):
-        spawnASpore()
+    # var how_many = randi() % 1 + 1
+    # for _i in range(how_many):
+    #     spawnASpore()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
     if spore_on_respawn and (global.isRespawning or global.isEnteringRoom) and not should_wiggle:
-        wiggle()
+        wiggle(null)
 
     if should_wiggle:
         if wiggle_timer == 0:
@@ -69,16 +69,6 @@ func _process(delta):
                 getPlayer().global_transform.origin.y = mySprite.global_transform.origin.y + 1
                 getPlayer().magicJump()
             var how_many = randi() % 2 + 2
-            for _i in range(how_many):
-                spawnASpore()
-            followup_timer = 0
-
-    if followup_timer < followup_time_limit:
-        followup_timer += (delta*22)
-        if followup_timer >= followup_time_limit:
-            var how_many = randi() % 2 + 2
-            for _i in range(how_many):
-                spawnASpore()
 
 
 func spawnASpore():

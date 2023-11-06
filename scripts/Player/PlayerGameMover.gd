@@ -285,14 +285,13 @@ onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
 var has_mushroom_double_jumped = false
 var mush_carcasses = []
-var max_num_mush_carcasses = 1
+var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
     if is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
       has_mushroom_double_jumped = true
-      doubleJump()
-      feather_jump_timer = 13
+      feather_jump_timer = 0
       wormSound.play()
       # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
       # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
