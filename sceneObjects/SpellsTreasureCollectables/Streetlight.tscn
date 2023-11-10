@@ -70,7 +70,7 @@ shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 2 )
 shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 8 )
@@ -138,26 +138,26 @@ script = ExtResource( 9 )
 shape = SubResource( 2 )
 
 [node name="Sprite3D" parent="." instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045249, 0.635882, -0.769371 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0367398, 0.636, -0.769 )
 material_override = SubResource( 7 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 12
 vframes = 10
-frame = 62
+frame = 49
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -15.0
 
 [node name="Sprite3DBase" parent="." instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452547, -1.41842, -0.769371 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.37434, -0.769 )
 material_override = SubResource( 8 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 12
 vframes = 10
-frame = 61
+frame = 60
 
 [node name="SaveSpores" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45902, 0.165527 )

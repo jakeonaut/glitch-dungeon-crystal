@@ -57,8 +57,12 @@ func activate(_is_player):
   collectSound.play()
   num_sparkles_spawned = 0
   level.player.grav *= -1
-  level.player.mySprite.flip_v = not level.player.mySprite.flip_v
-  level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
+  level.player.spriteContainer.rotation_degrees.x += 180
+  level.player.spriteContainer.rotation_degrees.x = fmod(level.player.spriteContainer.rotation_degrees.x, 360)
+  if level.player.mySprite.flip_v:
+    level.player.spriteYAlignment += 0.5
+  else:
+    level.player.spriteYAlignment -= 0.5
   getSmacked()
 
 

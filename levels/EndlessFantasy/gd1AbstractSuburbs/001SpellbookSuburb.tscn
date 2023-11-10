@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=2]
@@ -112,23 +112,6 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=34]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
-
 [sub_resource type="Animation" id=39]
 resource_name = "doorClose"
 length = 0.4
@@ -176,22 +159,9 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=42]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
+[sub_resource type="BoxShape" id=44]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -313,13 +283,10 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/000DieToSavePoint.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 31 )
 anims/doorOpen = SubResource( 32 )
 anims/locked = SubResource( 33 )
-
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door3" index="6"]
-anims/fade = SubResource( 34 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -337,13 +304,10 @@ path = "res://levels/EndlessFantasy/gd1CasinoBaths/000BathhouseIntro.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 39 )
 anims/doorOpen = SubResource( 40 )
 anims/locked = SubResource( 41 )
-
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door5" index="6"]
-anims/fade = SubResource( 42 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -368,16 +332,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.58569, 6.4662, 0 )
 path = "res://levels/DebugGrimoireSecret.tscn"
 
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 10, 1.55352, 0 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 10, 1.5812, 0 )
 
 [node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 1, 11.4282, 0 )
+transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 1, 11.3884, 0 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2728, 8.21824, 0 )
+
+[node name="KizzyCat2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.2728, 11.6105, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/KizzyCat2/FallthroughSolid" index="0"]
+shape = SubResource( 44 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 2 )]
 
@@ -409,5 +380,6 @@ __meta__ = {
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
+[editable path="Viewport/level/KizzyCat2"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

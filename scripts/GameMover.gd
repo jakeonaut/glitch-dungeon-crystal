@@ -32,7 +32,7 @@ onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node(
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
 var animation_speed_multiplier = 1.0
-onready var mySprite = get_node("Sprite3D")
+onready var mySprite = get_node("Sprite3D") if has_node("Sprite3D") else get_node("SpriteContainer/Sprite3D")
 
 export var true_terminal_vel = 32
 var true_terminal_feather_vel = 2 
@@ -193,11 +193,12 @@ func _physics_process(delta):
 
   alignMySprite()
 
+var spriteYAlignment = 0.25
 func alignMySprite():
   var pixelSize = 0.125
   if mySprite:
     mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.25
+    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
      
 func isActive():
   return visible
@@ -458,7 +459,7 @@ func processInputs(delta):
     vv = 6 if not pauseAnimation else 0
     if not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "stand":
       aniPlayer.stop()
-      aniPlayer.queue("walkBump")
+      # aniPlayer.queue("walkBump")
       aniPlayer.queue("walk")
     should_do_fallthrough_area_collision = false
     ladderUpdateTargetLastGroundedY()
@@ -1103,10 +1104,15 @@ func collideWithWall(local_lv):
        and aa != "walkBump" and ("walk" in aa or "land" in aa):
       aniPlayer.stop()
       aniPlayer.clear_queue()
-      aniPlayer.play("walkBump", -1, bump_ani_speed)
       if glitch_form == global.GlitchForm.LADDER:
-        aniPlayer.queue("walk")
+        aniPlayer.play("walk")
+        bounceAniPlayer.stop()
+        if local_lv.x > 0:
+          bounceAniPlayer.play("bumpRight", -1, bump_ani_speed)
+        if local_lv.x < 0:
+          bounceAniPlayer.play("bumpLeft", -1, bump_ani_speed)
       else:
+        aniPlayer.play("walkBump", -1, bump_ani_speed)
         aniPlayer.queue("stand")
   dir = Vector3(0, 0, 0)
 
@@ -1200,13 +1206,13 @@ func handleVerticalCollisions(local_lv):
   # check for bottom collisions
   if should_collide_floor and (on_ground or local_lv.y <= 0):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, true)
+    local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, grav >= 0)
     # TODO(jaketrower): TopsyTurvy is_vertical
 
   # check for top collisions
   if should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y > 0:
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, false)
+    local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, grav < 0)
     # TODO(jaketrower): TopsyTurvy is_vertical
   
   return local_lv

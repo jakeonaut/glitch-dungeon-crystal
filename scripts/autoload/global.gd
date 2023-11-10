@@ -336,10 +336,24 @@ func doFallthroughObjectCollision(gameMover, area):
     var lb = -rb
     var tb = gameMover.tb
     var bb = -tb
+
+    var lv = gameMover.linear_velocity.y
+    var diff = -0.12
+    if gameMover.grav < 0:
+        lv *= -1
+        diff *= -1
+        var temp = atb
+        atb = abb
+        abb = temp
+
+        temp = tb
+        tb = bb
+        bb = temp
+
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
-        x + lb, y + bb, x + rb, y + bb - 0.12
-    ) and (gameMover.linear_velocity.y < 0 or (gameMover.linear_velocity.y == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
+        x + lb, y + bb, x + rb, y + bb + diff
+    ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.should_do_fallthrough_area_collision = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
         gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
@@ -356,7 +370,7 @@ func doFallthroughObjectCollision(gameMover, area):
     if gameMover.should_do_fallthrough_area_collision and \
         gameMover.isRectColliding(
             ax + alb, ay + atb, ax + arb, ay + abb,
-            x + lb, y + bb, x + rb, y + bb - 0.12
+            x + lb, y + bb, x + rb, y + bb + diff
         ):
         gameMover.on_ground = true
         return true

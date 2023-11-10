@@ -455,7 +455,7 @@ frame_delay = 1.0
 max_frames = 6
 
 [node name="Sprite3D2" type="Sprite3D" parent="." groups=["glitchSprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.6, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.6, 0.75 )
 material_override = SubResource( 39 )
 pixel_size = 0.16
 texture = ExtResource( 13 )

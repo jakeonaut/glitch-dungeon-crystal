@@ -12,6 +12,7 @@ onready var returnSound = get_node("Sounds/ReturnSound")
 onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
+onready var footstepSound = get_node("Sounds/FootstepSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
@@ -26,11 +27,12 @@ var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 10
 
-onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
-onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
+onready var spriteContainer = get_node("SpriteContainer")
+onready var broomSpriteAnimated = get_node("SpriteContainer/Sprite3DBroomAnimated")
+onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible")
 
-onready var enchantedBagSpriteAnimated = get_node("Sprite3DBagAnimated")
-onready var enchantedBagSpriteVisible = get_node("Sprite3DBagVisible")
+onready var enchantedBagSpriteAnimated = get_node("SpriteContainer/Sprite3DBagAnimated")
+onready var enchantedBagSpriteVisible = get_node("SpriteContainer/Sprite3DBagVisible")
 
 onready var textContainer = get_node("TextContainer")
 onready var textBox = get_node("TextContainer/TextBox")
@@ -63,6 +65,13 @@ func _ready():
   remembered_feather_glitch_walk_speed = feather_glitch_walk_speed
   remembered_invisible_glitch_walk_speed = invisible_glitch_walk_speed
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
+
+func tryPlayFootstepSound():
+  if not (pressingMoveLeft() or pressingMoveRight()):
+    return
+  if not truly_on_ground:
+    return
+  footstepSound.play()
 
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))

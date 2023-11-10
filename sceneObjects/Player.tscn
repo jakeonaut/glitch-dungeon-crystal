@@ -174,7 +174,7 @@ shader_param/target_palette = ExtResource( 36 )
 [sub_resource type="Animation" id=29]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -186,7 +186,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:flip_h")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -198,7 +198,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -210,7 +210,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -222,7 +222,7 @@ tracks/3/keys = {
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -234,7 +234,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/opacity")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -246,7 +246,7 @@ tracks/5/keys = {
 "values": [ 1.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/opacity")
+tracks/6/path = NodePath("SpriteContainer/Sprite3DBroomVisible:material_override:shader_param/opacity")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -258,7 +258,7 @@ tracks/6/keys = {
 "values": [ 1.0 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/opacity")
+tracks/7/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:material_override:shader_param/opacity")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -270,7 +270,7 @@ tracks/7/keys = {
 "values": [ 1.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Sprite3DBroomVisible:opacity")
+tracks/8/path = NodePath("SpriteContainer/Sprite3DBroomVisible:opacity")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -294,7 +294,7 @@ tracks/9/keys = {
 "values": [ Vector3( 1.32587, 0.882688, 0 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Sprite3D:scale")
+tracks/10/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -306,7 +306,7 @@ tracks/10/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Sprite3D:translation")
+tracks/11/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -318,7 +318,7 @@ tracks/11/keys = {
 "values": [ Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/12/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -330,7 +330,7 @@ tracks/12/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
+tracks/13/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -342,7 +342,7 @@ tracks/13/keys = {
 "values": [ false ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
+tracks/14/path = NodePath("SpriteContainer/Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -354,7 +354,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/15/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -366,24 +366,12 @@ tracks/15/keys = {
 "values": [ false ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/16/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("Sounds/FootstepSound:playing")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -395,7 +383,7 @@ resource_name = "broomSmack"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -407,7 +395,7 @@ tracks/0/keys = {
 "values": [ 51, 15, 24 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -424,7 +412,7 @@ resource_name = "broomSmack2"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -436,7 +424,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 15, 24 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -452,7 +440,7 @@ tracks/1/keys = {
 resource_name = "broomSmackFast"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -464,7 +452,7 @@ tracks/0/keys = {
 "values": [ 51, 15, 24 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -481,7 +469,7 @@ resource_name = "broomSmackGlitch"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -493,7 +481,7 @@ tracks/0/keys = {
 "values": [ 1, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -505,7 +493,7 @@ tracks/1/keys = {
 "values": [ 4, 1, 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -534,7 +522,7 @@ tracks/3/keys = {
 } ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -546,7 +534,7 @@ tracks/4/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
+tracks/5/path = NodePath("SpriteContainer/Sprite3DBroomVisible:material_override:shader_param/enable_glitch")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -558,7 +546,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -570,7 +558,7 @@ tracks/6/keys = {
 "values": [ false, false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/7/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -587,7 +575,7 @@ resource_name = "broomSmackGlitch (copy)"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -599,7 +587,7 @@ tracks/0/keys = {
 "values": [ 1, 15, 24 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -611,7 +599,7 @@ tracks/1/keys = {
 "values": [ 2, 1, 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -643,7 +631,7 @@ tracks/3/keys = {
 } ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3DBroomAnimated:scale")
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -655,7 +643,7 @@ tracks/4/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
+tracks/5/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:material_override:shader_param/enable_glitch")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -672,7 +660,7 @@ resource_name = "broomSweep"
 length = 0.5
 step = 0.15
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -688,7 +676,7 @@ tracks/0/keys = {
 resource_name = "collapse"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -705,7 +693,7 @@ resource_name = "enterDoor"
 length = 2.0
 step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -717,7 +705,7 @@ tracks/0/keys = {
 "values": [ 56, 59, 58, 59, 58, 59, 58, 59 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -729,7 +717,7 @@ tracks/1/keys = {
 "values": [ 0, 59, 58, 59, 58, 59, 58, 59 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -744,7 +732,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -759,7 +747,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -775,7 +763,7 @@ tracks/0/keys = {
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -787,7 +775,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -799,7 +787,7 @@ tracks/1/keys = {
 "values": [ 6 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -811,7 +799,7 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 1, 0.7 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -839,7 +827,7 @@ tracks/4/keys = {
 resource_name = "fallBump"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -856,7 +844,7 @@ resource_name = "fallFar"
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -872,7 +860,7 @@ tracks/0/keys = {
 resource_name = "fallFlat"
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -887,7 +875,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=14]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -899,7 +887,7 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -915,7 +903,7 @@ tracks/1/keys = {
 resource_name = "getItem"
 length = 0.9
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -932,7 +920,7 @@ resource_name = "hookCaught"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -944,7 +932,7 @@ tracks/0/keys = {
 "values": [ 14, 34 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -972,7 +960,7 @@ tracks/2/keys = {
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -984,7 +972,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -996,7 +984,7 @@ tracks/1/keys = {
 "values": [ 4, 5 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1024,7 +1012,7 @@ tracks/3/keys = {
 resource_name = "jumpBump"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1040,7 +1028,7 @@ tracks/0/keys = {
 length = 0.06
 step = 0.03
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1052,7 +1040,7 @@ tracks/0/keys = {
 "values": [ 11, 15 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1064,7 +1052,7 @@ tracks/1/keys = {
 "values": [ 11 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1091,7 +1079,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=18]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1103,7 +1091,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1118,7 +1106,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=19]
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1130,7 +1118,7 @@ tracks/0/keys = {
 "values": [ 15, 11, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1142,7 +1130,7 @@ tracks/1/keys = {
 "values": [ 14, 3 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1154,7 +1142,7 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 0.5, 0.7 ), Vector3( 1, 0.25, 0.7 ), Vector3( 1.25, 0.25, 0.7 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/3/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/opacity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1166,7 +1154,7 @@ tracks/3/keys = {
 "values": [ 1.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/opacity")
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomVisible:material_override:shader_param/opacity")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1195,7 +1183,7 @@ resource_name = "leaveDoor"
 length = 0.8
 step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1207,7 +1195,7 @@ tracks/0/keys = {
 "values": [ 48, 49, 48, 49 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1219,7 +1207,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1235,7 +1223,7 @@ tracks/2/keys = {
 resource_name = "preGetItem"
 length = 0.8
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1247,7 +1235,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 8, 9, 8 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1264,7 +1252,7 @@ resource_name = "returning"
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1276,7 +1264,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1288,7 +1276,7 @@ tracks/1/keys = {
 "values": [ 1 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1300,7 +1288,7 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 1, 0.7 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3DBroomVisible:visible")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1312,7 +1300,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/4/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/opacity")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1324,7 +1312,7 @@ tracks/4/keys = {
 "values": [ 0.5 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3DBroomVisible:material_override:shader_param/opacity")
+tracks/5/path = NodePath("SpriteContainer/Sprite3DBroomVisible:material_override:shader_param/opacity")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1339,7 +1327,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=21]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1351,7 +1339,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1363,7 +1351,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1375,7 +1363,7 @@ tracks/2/keys = {
 "values": [ Vector3( 1.125, 0.25, 0.7 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3DBroomAnimated:material_override:shader_param/opacity")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:material_override:shader_param/opacity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1404,7 +1392,7 @@ resource_name = "swimFall"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1421,7 +1409,7 @@ resource_name = "swimJump"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1433,7 +1421,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1445,7 +1433,7 @@ tracks/1/keys = {
 "values": [ 4, 5 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1473,7 +1461,7 @@ tracks/3/keys = {
 resource_name = "swimJumpStart"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1485,7 +1473,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1513,7 +1501,7 @@ tracks/2/keys = {
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1529,7 +1517,7 @@ tracks/0/keys = {
 resource_name = "wakeup"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1546,7 +1534,7 @@ length = 0.3
 loop = true
 step = 0.15
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1558,7 +1546,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 2, 25 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1570,7 +1558,7 @@ tracks/1/keys = {
 "values": [ 2, 3 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1593,8 +1581,8 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector3( 0.830061, 0.788888, 0 ), Vector3( 1.27226, 0.855888, 0 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/FootstepSound:playing")
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1602,15 +1590,17 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [  ],
+"method": "tryPlayFootstepSound"
+} ]
 }
 
 [sub_resource type="Animation" id=31]
 resource_name = "walkBump"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1622,7 +1612,7 @@ tracks/0/keys = {
 "values": [ 32, 24, 25, 26, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1651,7 +1641,7 @@ resource_name = "walkLand"
 length = 0.3
 step = 0.15
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1663,7 +1653,7 @@ tracks/0/keys = {
 "values": [ 15, 2, 2, 25 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1675,7 +1665,7 @@ tracks/1/keys = {
 "values": [ 2, 3 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1698,13 +1688,27 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector3( 0.776459, 0.775487, 0 ), Vector3( 1.29906, 0.802288, 0 ) ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.15 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "tryPlayFootstepSound"
+} ]
+}
 
 [sub_resource type="Animation" id=63]
 resource_name = "walkStart"
 length = 0.3
 step = 0.15
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1716,7 +1720,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 2, 25 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1728,7 +1732,7 @@ tracks/1/keys = {
 "values": [ 2, 3 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1751,23 +1755,25 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector3( 0.803258, 0.802288, 0 ), Vector3( 1.25886, 0.829087, 0 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/FootstepSound:playing")
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "tryPlayFootstepSound"
+} ]
 }
 
 [sub_resource type="Animation" id=27]
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1779,7 +1785,7 @@ tracks/0/keys = {
 "values": [ 25, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1806,7 +1812,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=71]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1818,7 +1824,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1835,7 +1841,7 @@ resource_name = "broomSmackGlitch"
 length = 0.4
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1847,7 +1853,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1863,7 +1869,7 @@ tracks/1/keys = {
 resource_name = "bumpBotLeft"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1875,7 +1881,7 @@ tracks/0/keys = {
 "values": [ Vector3( -0.186412, 0.129709, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1891,7 +1897,7 @@ tracks/1/keys = {
 resource_name = "bumpBotRight"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1903,7 +1909,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0.281402, 0.129709, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1919,7 +1925,7 @@ tracks/1/keys = {
 resource_name = "bumpCeil"
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1931,7 +1937,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1947,7 +1953,7 @@ tracks/1/keys = {
 resource_name = "bumpLeft"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1959,7 +1965,7 @@ tracks/0/keys = {
 "values": [ Vector3( -0.250206, 0.491202, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1975,7 +1981,7 @@ tracks/1/keys = {
 resource_name = "bumpRight"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1987,7 +1993,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0.281402, 0.491202, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2003,7 +2009,7 @@ tracks/1/keys = {
 resource_name = "fallFlat"
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2015,7 +2021,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2031,7 +2037,7 @@ tracks/1/keys = {
 length = 0.06
 step = 0.03
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2043,7 +2049,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2058,7 +2064,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=77]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2070,7 +2076,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0.420115, 0.8 ), Vector3( 0, 0.271264, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2085,7 +2091,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=78]
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2097,7 +2103,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2113,7 +2119,7 @@ tracks/1/keys = {
 resource_name = "landSoft"
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2125,7 +2131,7 @@ tracks/0/keys = {
 "values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2141,7 +2147,7 @@ tracks/1/keys = {
 resource_name = "wakeup"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2153,7 +2159,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0.25, 0.8 ), Vector3( 0, 0.335057, 0.8 ), Vector3( 0, 0.409482, 0.8 ), Vector3( 0, 0.483907, 0.8 ), Vector3( 0, 0.25, 0.8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("SpriteContainer/Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -2314,7 +2320,9 @@ shape = SubResource( 68 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
 shape = SubResource( 68 )
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="SpriteContainer" type="Spatial" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.8 )
 material_override = SubResource( 45 )
 pixel_size = 0.125
@@ -2325,7 +2333,7 @@ texture = ExtResource( 30 )
 hframes = 8
 vframes = 8
 
-[node name="Sprite3DBroomAnimated" type="Sprite3D" parent="."]
+[node name="Sprite3DBroomAnimated" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.25, 0.7 )
 visible = false
 material_override = SubResource( 48 )
@@ -2337,7 +2345,7 @@ texture = ExtResource( 31 )
 hframes = 8
 vframes = 8
 
-[node name="Sprite3DBroomVisible" type="Sprite3D" parent="." groups=["sprite"]]
+[node name="Sprite3DBroomVisible" type="Sprite3D" parent="SpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.25, 0.6 )
 material_override = SubResource( 50 )
 pixel_size = 0.125
@@ -2349,7 +2357,7 @@ hframes = 8
 vframes = 8
 frame = 3
 
-[node name="Sprite3DBagAnimated" type="Sprite3D" parent="."]
+[node name="Sprite3DBagAnimated" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, 0.214967, 0.6 )
 visible = false
 material_override = SubResource( 53 )
@@ -2361,7 +2369,7 @@ texture = ExtResource( 38 )
 hframes = 8
 vframes = 8
 
-[node name="Sprite3DBagVisible" type="Sprite3D" parent="."]
+[node name="Sprite3DBagVisible" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, 0.214967, 0.6 )
 visible = false
 material_override = SubResource( 53 )

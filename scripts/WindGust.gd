@@ -41,7 +41,10 @@ func getDirection():
 func isActive():
   return true
 
-func passiveActivate(delta, _is_player):
+func passiveActivate(delta, is_player):
+  if not is_player:
+    return
+    
   var mult = 5
   if level.player.vv > 4:
     mult = 1
