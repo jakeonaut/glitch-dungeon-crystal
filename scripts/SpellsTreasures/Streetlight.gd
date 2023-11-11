@@ -5,8 +5,6 @@ onready var mySprite = get_node("Sprite3D")
 onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
 var spawn_timer = 0
 var spawn_time_limit = 10
-var num_sparkles_spawned = 0
-var num_sparkles_spawned_limit = 5
 var is_active = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -31,7 +29,7 @@ func _process(delta):
     if smack_timer >= smack_recovery_time_limit:
         is_smacked = false
 
-  if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
+  if sparkleSprite != null:
     spawn_timer += (delta*22)
     if spawn_timer >= spawn_time_limit:
       var newSprite = sparkleSprite.duplicate()
@@ -46,7 +44,6 @@ func _process(delta):
       newSprite.max_frames = 2
       add_child(newSprite)
       spawn_timer = 0
-      num_sparkles_spawned += 1
 
 func isActive():
   return is_active
@@ -55,14 +52,17 @@ func activate(_is_player):
   level.player.getSmacked()
   is_active = false
   collectSound.play()
-  num_sparkles_spawned = 0
   level.player.grav *= -1
+  # level.player.mySprite.flip_v = not level.player.mySprite.flip_v
+  # level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
   level.player.spriteContainer.rotation_degrees.x += 180
   level.player.spriteContainer.rotation_degrees.x = fmod(level.player.spriteContainer.rotation_degrees.x, 360)
-  if level.player.mySprite.flip_v:
-    level.player.spriteYAlignment += 0.5
-  else:
+  if level.player.grav < 0:
     level.player.spriteYAlignment -= 0.5
+    level.player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
+  else:
+    level.player.spriteYAlignment += 0.5
+    level.player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1
   getSmacked()
 
 

@@ -66,6 +66,13 @@ func _ready():
   remembered_invisible_glitch_walk_speed = invisible_glitch_walk_speed
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
 
+# @override
+func alignMySprite():
+  var pixelSize = 0.125
+  if spriteContainer:
+    spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+    spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
+
 func tryPlayFootstepSound():
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
@@ -175,7 +182,7 @@ func walkThroughWallsGlitch():
   level.displaySpellMessageText("undefined")
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
-  changeSpriteColorPalette(global.weird_base_palette)
+  changeSpriteColorPalette(global.white_player_palette)
   # mySprite.setNightgown()
 
 func wearCostume(costume):
@@ -1025,7 +1032,8 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
     fallenBroom.global_transform.origin = self.global_transform.origin
     fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
     fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
-    fallenBroom.global_transform.origin.y += 2
+    if grav > 0:
+      fallenBroom.global_transform.origin.y += 2
     if was_thrown:
       global.incrementLevelZoneSweeps()
       fallenBroom.grav = 1
@@ -1132,10 +1140,10 @@ func appendNextTextCharacter():
   # no-op for now
   pass
 
-onready var secretSweepArea = get_node("SecretSweepArea")
-onready var secretSweepCollisionShape = get_node("SecretSweepArea/CollisionShape")
-onready var secretSweepActualArea = get_node("SecretSweepAreaActual")
-onready var secretSweepActualCollisionShape = get_node("SecretSweepAreaActual/CollisionShape")
+onready var secretSweepArea = get_node("SpriteContainer/SecretSweepArea")
+onready var secretSweepCollisionShape = get_node("SpriteContainer/SecretSweepArea/CollisionShape")
+onready var secretSweepActualArea = get_node("SpriteContainer/SecretSweepAreaActual")
+onready var secretSweepActualCollisionShape = get_node("SpriteContainer/SecretSweepAreaActual/CollisionShape")
 func hitStuff(_delta):
   if not visible: return
   
