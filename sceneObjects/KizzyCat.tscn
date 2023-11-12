@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=11]
 [ext_resource path="res://scripts/Enemies/KizzyCat.gd" type="Script" id=12]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=13]
-[ext_resource path="res://assets/pokeball0000.png" type="Texture" id=14]
+[ext_resource path="res://assets/pokeballgreen.png" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 3 )
@@ -171,7 +171,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
 shape = SubResource( 8 )
 
-[node name="landing" type="Sprite3D" parent="."]
+[node name="landing" type="Sprite3D" parent="." groups=["landing"]]
 pixel_size = 0.12
 texture = ExtResource( 14 )
 hframes = 2

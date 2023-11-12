@@ -1,6 +1,6 @@
 extends Spatial
 
-var original_pos = null
+onready var mySprite = get_node("Sprite3D")
 var target_pos = null
 var delta_multiplier = 1.0
 

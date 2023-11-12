@@ -7,8 +7,6 @@ export(String, FILE) var path
 export var is_vertical = false
 export var num_keys_unlock = 999
 
-onready var doorOpenSound = get_node("DoorCloseSound")
-
 var canPlayDoorSound = true
 
 var spawn_timer = 0

@@ -134,3 +134,6 @@ func trySweepUpGlitchTiles(collisionShape):
 
 func isActive():
   return visible
+
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
+  level.summonSmokeClouds(global_transform.origin, num_clouds, play_sound, is_glitchy)

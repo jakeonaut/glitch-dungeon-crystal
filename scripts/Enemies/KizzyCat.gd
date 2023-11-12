@@ -16,6 +16,11 @@ func setAsParent(_owner):
   walk_direction.x = -1
 
 var is_stone = false
+var teleporting = false
+var has_teleported = false
+var teleport_timer = 0
+var teleport_time_limit = 15
+var teleport_time_limit2 = 30
 func _process(delta):
   # if pauseSelf and not is_smacked:
   #   pauseSelf = false
@@ -28,14 +33,17 @@ func _process(delta):
   if teleporting:
     teleport_timer += (delta*22)
     if teleport_timer >= teleport_time_limit:
+      for _i in range(1):
+        spawnASpore(true)
+      if not has_teleported:
+        self.global_transform.origin = landing_position
+        landing.global_transform.origin = lastPosition
+        landing_position = lastPosition
+        has_teleported = true
+    if teleport_timer >= teleport_time_limit2:
       has_ever_been_smacked = false
       teleporting = false
       visible = true
-      self.global_transform.origin = landing_position
-      landing.global_transform.origin = lastPosition
-      landing_position = lastPosition
-      for _i in range(5):
-        spawnASpore()
 
 
   # if not is_smacked:
@@ -71,17 +79,15 @@ func getSmacked(broom_origin):
   on_ground = true
   notDieSound.play()
 
-var teleporting = false
-var teleport_timer = 0
-var teleport_time_limit = 10
 # @override
 func unsmack():
   .unsmack()
   visible = false
   teleporting = true
   for _i in range(5):
-    spawnASpore()
+    spawnASpore(false)
   teleport_timer = 0
+  has_teleported = false
   
   
 
@@ -149,16 +155,22 @@ func moveMyFriends(delta):
       who_is_standing_on_me.erase(friend_key)
 
 var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
-func spawnASpore():
+func spawnASpore(inverse):
     var spore = sporeRes.instance()
     level.add_child(spore)
     spore.global_transform.origin = self.global_transform.origin
-    spore.original_pos = self.global_transform.origin
-    spore.delta_multiplier = 4.0
-    spore.global_transform.origin.x += rand_range(-1, 1)
-    spore.global_transform.origin.y += rand_range(-1, 1)
     spore.global_transform.origin.z = self.global_transform.origin.z + 1.0
-    var r = 2
-    if visible:
-      r = 1
-    spore.target_pos = Vector2(spore.global_transform.origin.x + rand_range(-r, r), spore.global_transform.origin.y + rand_range(-r, r))
+
+    if inverse:
+      spore.global_transform.origin.x += rand_range(-3, 3)
+      spore.global_transform.origin.y += rand_range(-3, 3)
+      var r = 1
+      spore.target_pos = Vector2(global_transform.origin.x + rand_range(-r, r), global_transform.origin.y + rand_range(-r, r))
+      spore.delta_multiplier = 2.0
+      spore.mySprite.reverseIt()
+    else:
+      spore.global_transform.origin.x += rand_range(-1, 1)
+      spore.global_transform.origin.y += rand_range(-1, 1)
+      var r = 2
+      spore.target_pos = Vector2(spore.global_transform.origin.x + rand_range(-r, r), spore.global_transform.origin.y + rand_range(-r, r))
+      spore.delta_multiplier = 4.0

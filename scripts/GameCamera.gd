@@ -153,6 +153,8 @@ func _process(delta):
   # realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelCameraSize)
   # realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelCameraSize)   
 
+  # print(Vector2(global_transform.origin.x, global_transform.origin.y))
+
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size
   var x_margin = 10 - ((15-self.size)/1.5)

@@ -17,6 +17,7 @@ var is_rotating = false
 export var should_fizzle_out = false
 var should_soft_fizzle_out = false
 export var should_animate = true # set this to false if you handle animation through an AnimationPlayer
+export var reversed = false
 
 export(String, FILE) var overwritten_green_palette_path = null
 var overwritten_green_palette = null
@@ -71,20 +72,20 @@ func _process(delta):
     if visible and should_animate:
         animate(delta)
 
-func trySetFrame(frame):
-    if frame < hframes * vframes and frame < start_frame + max_frames:
-        set_frame(frame)
-        return true
-    set_frame((hframes * vframes) - 1)
-    return false
+func trySetFrame(next_frame):
+    if not reversed:
+        if next_frame < hframes * vframes and (is_really_glitchy or next_frame < start_frame + max_frames):
+            set_frame(next_frame)
+            return true
+        set_frame((hframes * vframes) - 1)
+        return false
+    elif reversed:
+        if next_frame >= 0 and (is_really_glitchy or next_frame > start_frame - max_frames):
+            set_frame(next_frame)
+            return true
+        set_frame(0)
+        return false
 
-func glitchyTrySetFrame(frame):
-    if frame < hframes * vframes:
-        set_frame(frame)
-        return true
-    set_frame((hframes * vframes) - 1)
-    return false
-        
 func restart():
     animation_counter = 0
     trySetFrame(start_frame)
@@ -102,27 +103,25 @@ func animate(delta):
     if animation_counter >= frame_delay:
         animation_counter = 0
         var frame = get_frame()
-
-        if is_really_glitchy:
-            if not glitchyTrySetFrame(frame+1):
-                if should_fizzle_out:
-                    queue_free()
-                elif should_soft_fizzle_out:
-                    visible = false
-                else:
-                    trySetFrame(start_frame)
-        else:
-            if not trySetFrame(frame+1):
-                if should_fizzle_out:
-                    queue_free()
-                elif should_soft_fizzle_out:
-                    visible = false
-                else:
-                    trySetFrame(start_frame)
-
+        var next_frame = frame + 1 if not reversed else frame - 1
+        if not trySetFrame(next_frame):
+            if should_fizzle_out:
+                queue_free()
+            elif should_soft_fizzle_out:
+                visible = false
+            else:
+                trySetFrame(start_frame)
         
         if should_randomize_frame_delay:
             randomizeFrameDelay()
+
+func reverseIt():
+    if reversed:
+        reversed = false
+        start_frame += max_frames
+    else:
+        reversed = true
+        start_frame -= max_frames
             
 
 func randomizeFrameDelay():

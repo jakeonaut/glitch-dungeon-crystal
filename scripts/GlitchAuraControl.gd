@@ -5,9 +5,6 @@ var target = null
 
 onready var mainColorRect = get_node("ColorRect")
 
-# TODO(jaketrower): Probably best to load this once in the levelScript and reference from there
-var green_palette_alt = preload("res://assets/palettes2D/green_palette_alt.png")
-
 var has_set_position = false
 var spawn_timer = 0
 var spawn_time_limit = 3
@@ -32,11 +29,18 @@ func getGameCamera():
 
 func _ready():
   set_process(true)
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   target = get_node(target_path)
-  # remove_child(mainColorRect)
-  # topGame.call_deferred("add_child", mainColorRect)
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
+  remove_child(mainColorRect)
+  topGame.call_deferred("add_child", mainColorRect)
 
 func _process(_delta):
+  if target == null:
+    return
+    
   setPosition(not has_set_position)
   has_set_position = true
 
@@ -71,6 +75,7 @@ func setPosition(should_set_target_origin):
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   if should_set_target_origin:
     target_origin = target.global_transform.origin
+  getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = target_pos.x + 10
   self.rect_position.y = target_pos.y + 10

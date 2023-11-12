@@ -12,9 +12,13 @@ var opacity = 1.0
 
 func _ready():
     camera_origin = camera.global_transform.origin
+    yield(TempTimer.idle_frame(self), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
+    mySprite2.material_override = mySprite.material_override
 
 
 func _process(delta):
+    camera.respectLevelTilesEdges()
     self.global_transform.origin.x = (camera.global_transform.origin.x - camera_origin.x) / 2
     if dont_recolor_me and mySprite.is_in_group("sprite"):
         mySprite.remove_from_group("sprite")
@@ -23,10 +27,8 @@ func _process(delta):
     if hiding:
         opacity = opacity + (0.0 - opacity) * (delta * 1)
         mySprite.material_override.set_shader_param("opacity", opacity)
-        mySprite2.material_override.set_shader_param("opacity", opacity)
     else:
         opacity = opacity + (1.0 - opacity) * (delta * 1)
         mySprite.material_override.set_shader_param("opacity", opacity)
-        mySprite2.material_override.set_shader_param("opacity", opacity)
 func hideMe():
     hiding = true

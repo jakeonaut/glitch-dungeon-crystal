@@ -94,6 +94,7 @@ func setPosition():
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   if textboxParent.get_ref():
     target_origin = textboxParent.get_ref().global_transform.origin
+  getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos

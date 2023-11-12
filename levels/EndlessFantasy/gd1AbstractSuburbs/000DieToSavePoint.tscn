@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
-[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/japanese-woodblock-rearranged.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=4]
@@ -10,6 +10,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=10]
+[ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/SuburbDitherMaterial.tres" type="Material" id=11]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=12]
 [ext_resource path="res://assets/sprites/savespores.png" type="Texture" id=13]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=14]
@@ -18,43 +19,16 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=23]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=25]
-[ext_resource path="res://assets/backgrounds/church_layer_0.png" type="Texture" id=26]
+[ext_resource path="res://assets/backgrounds/interior_layer_0.png" type="Texture" id=26]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=27]
 
-[sub_resource type="ShaderMaterial" id=29]
-shader = ExtResource( 8 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 26 )
-shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 1 )
-
-[sub_resource type="ShaderMaterial" id=30]
+[sub_resource type="ShaderMaterial" id=34]
 shader = ExtResource( 8 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -201,8 +175,15 @@ length = 0.001
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="BoxShape" id=33]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ViewportTexture" id=31]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=32]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -210,6 +191,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 27 )
+show_crt_effect = true
 tileset_type = 1
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 18 )]
@@ -222,6 +204,15 @@ margin_bottom = 40.0
 margin_right = 1728.0
 margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+material_override = SubResource( 34 )
+texture = ExtResource( 26 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+material_override = SubResource( 34 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -284,14 +275,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 12.1, 0 )
-
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
-material_override = SubResource( 29 )
-
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
-material_override = SubResource( 30 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, 0 )
@@ -407,14 +390,34 @@ shape = SubResource( 19 )
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.4, 0 )
 
+[node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.18758, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/KizzyCat/FallthroughSolid" index="0"]
+shape = SubResource( 33 )
+
+[node name="landing" parent="Viewport/level/KizzyCat" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2, 0 )
+
+[node name="Viewport2" parent="." instance=ExtResource( 24 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 31 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 22 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+visible = true
+material = ExtResource( 11 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 32 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 22 )]
 
@@ -427,3 +430,5 @@ __meta__ = {
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/KizzyCat"]
+[editable path="Viewport2/ScreenEffects"]

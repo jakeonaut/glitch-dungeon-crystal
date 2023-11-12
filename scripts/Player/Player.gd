@@ -1000,13 +1000,25 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
     # print(fallenBroom.walk_direction)
 
     if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
-      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
+      if grav > 0:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
     elif (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and not was_thrown:
-      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+      if grav > 0:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
     elif (fallenBroom.walk_direction.x > 0  or not mySprite.flip_h) and was_thrown:
-      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+      if grav > 0:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
     else:
-      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+      if grav > 0:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+      else:
+        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
     return fallenBroom
   return null
 

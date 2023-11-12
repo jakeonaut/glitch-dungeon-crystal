@@ -29,6 +29,7 @@ func _process(delta):
       var newSprite = sparkleSprite.duplicate()
       newSprite.should_fizzle_out = true
       newSprite.visible = true
+      level.add_child(newSprite)
       newSprite.global_transform.origin = Vector3(
           global_transform.origin.x + stepify(rand_range(-1.0, 1.0), 0.125),
           global_transform.origin.y + stepify(rand_range(0.5, 1.5), 0.125),
@@ -36,7 +37,6 @@ func _process(delta):
       )
       newSprite.updateBaseFrame(0, 0)
       newSprite.max_frames = 2
-      level.add_child(newSprite)
       spawn_timer = 0
     
   if not behavior_jumping and on_ground:
