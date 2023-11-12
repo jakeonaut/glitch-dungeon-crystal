@@ -77,6 +77,7 @@ func tryPlayFootstepSound():
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
   if not truly_on_ground:
+    sporeSound.play()
     return
   footstepSound.play()
 
@@ -296,7 +297,6 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   
   processPoisonWaterLogic(delta)
-  processMPBlinkLogic(delta)
   if pressingJump():
     tryClearFallthroughCollisionSolid()
 
@@ -388,79 +388,6 @@ func processCastingLogic(delta):
     if spellCastCounterResetTimer >= spellCastCounterResetTimeLimit:
       num_spell_casts_used = 0
       spellCastCounterResetTimer = 0
-
-func processMPBlinkLogic(delta):
-  if glitch_form == global.GlitchForm.NORMAL:
-    if global.memory["mp"] == 0:
-      mpNumSprite.frame = 880
-      mpNumSprite2.frame = 880
-      blink_timer += (delta*22)
-      if (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
-        blink_timer = 0
-        if not is_blinked and blink_time_limit == 3:
-          nullifySound.stop()
-        is_blinked = not is_blinked
-        mpNumSprite.visible = not is_blinked
-        blink_time_limit = 3
-    if global.memory["mp"] > 1 or not nullifySound.is_playing():
-      mpNumSprite.visible = false
-    return
-
-  var overwrite_blink = (global.memory["mp"] == global.memory["max_mp"]) or global.memory["mp"] > 5
-
-  if global.memory["max_mp"] == 0:
-    mpNumSprite.visible = false
-  elif (global.memory["mp"] <= 5 and global.memory["max_mp"] > 6) or (global.memory["mp"] <= 3 and global.memory["max_mp"] >= 5) or (global.memory["mp"] <= 2):
-    mpNumSprite.visible = true
-  else:
-    mpNumSprite.visible = false
-
-  if global.memory["mp"] <= 5 or overwrite_blink:
-    mpNumSprite.frame = 885
-    blink_time_limit = 20
-    if global.memory["mp"] == 4:
-      blink_time_limit = 15
-      mpNumSprite.frame = 884
-    if global.memory["mp"] == 3:
-      blink_time_limit = 10
-      mpNumSprite.frame = 883
-    if global.memory["mp"] == 2:
-      blink_time_limit = 5
-      mpNumSprite.frame = 882
-    if global.memory["mp"] == 1:
-      blink_time_limit = 2
-      mpNumSprite.frame = 881
-    mpNumSprite2.frame = mpNumSprite.frame
-    blink_timer += (delta*22)
-    if overwrite_blink or (not is_blinked and blink_timer >= blink_time_limit) or (is_blinked and blink_timer >= unblink_time_limit):
-      blink_timer = 0
-      is_blinked = not is_blinked
-
-      if overwrite_blink:
-        blink_timer = 0
-        is_blinked = false
-
-      if is_blinked:
-        mySprite.material_override.set_shader_param("target_palette", global.grey_player_palette)
-        if mpNumSprite.visible and not (global.pauseMoveInput or global.pauseGame or (global.activeInteractor != null and is_instance_valid(global.activeInteractor))) and (is_pressing_horizontal_input or pressingJump() or (glitch_form == global.GlitchForm.INVISIBLE and glitch_tickle_timer > 0)):
-          blinkSound.play()
-      elif glitch_form == global.GlitchForm.FLOOR:
-        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().red_palette)
-      elif glitch_form == global.GlitchForm.FEATHER:
-        mySprite.material_override.set_shader_param("target_palette", global.green_dungeon_palette)
-      elif glitch_form == global.GlitchForm.LADDER:
-        mySprite.material_override.set_shader_param("target_palette", global.yellow_player_palette)
-      elif glitch_form == global.GlitchForm.INVISIBLE:
-        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().black_palette)
-      elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
-        mySprite.material_override.set_shader_param("target_palette", getLevelTiles().white_palette)
-
-  if showMpTimer < showMpTimeLimit:
-    showMpTimer += (delta*22)
-    var opacity = 2*(1 - (showMpTimer/showMpTimeLimit))
-    mpNumSprite2.material_override.set_shader_param("opacity", opacity)
-  if showMpTimer >= showMpTimeLimit:
-    mpNumSprite.visible = false
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
@@ -830,10 +757,10 @@ func adjustSummonedBroomSpritePosition():
   var yAddition = 0
   if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
     xAddition = .875
-    yAddition = .625
+    yAddition = 1.0
   elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
     xAddition = .4
-    yAddition = 0
+    yAddition = .45
 
   broomSpriteVisible.visible = false
   if mySprite.flip_h:
@@ -842,6 +769,14 @@ func adjustSummonedBroomSpritePosition():
   else:
     summonedBroom.global_transform.origin.x = self.global_transform.origin.x + xAddition
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
+
+  if self.grav < 0:
+    summonedBroom.rotation_degrees.x = 0
+    yAddition *= -1
+    # yAddition -= 3.146
+  else:
+    summonedBroom.rotation_degrees.x = -180
+
   summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
@@ -1098,36 +1033,6 @@ func tryClearFallthroughCollisionSolid():
   if interactionArea.prev_fallthrough_collision_area != null and \
      interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
-
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
-    for _i in range(num_clouds):
-        var newSmokeCloud = smokeCloudRes.instance()
-        level.add_child(newSmokeCloud)
-        if horizontal != 0:
-          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
-          var which_horizontal_dir = mySprite.flip_h
-          if horizontal < 0:
-            which_horizontal_dir = not which_horizontal_dir
-          if which_horizontal_dir:
-            newSmokeCloud.global_transform.origin.x -= 1
-            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x - rand_range(1, 3)
-          else:
-            newSmokeCloud.global_transform.origin.x += 1
-            newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(1, 3)
-          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y
-          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-        else:
-          newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-          newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(1, 2)
-          newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-        if play_sound:
-            newSmokeCloud.tryPlaySound()
-            play_sound = false
-        if is_glitchy:
-            var new_material = newSmokeCloud.get_material_override().duplicate()
-            new_material.set_shader_param("enable_glitch", "true")
-            new_material.set_shader_param("target_palette", global.weird_base_palette)
-            newSmokeCloud.set_material_override(new_material.duplicate())
 
 var is_active = true
 func setGlobalMemoryOfHasSpoken(_set_vars = false):

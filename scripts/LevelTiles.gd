@@ -24,7 +24,6 @@ var tile_dict = {}
 var infected_spikes = []
 var spike_infection_timer = 0
 var spike_infection_time_limit = 5
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var my_tileset_type = global.TilesetType.DUNGEON
 var my_tileset_glitch_type = global.GlitchForm.NORMAL
 
@@ -368,28 +367,9 @@ func infectSpikes(coords):
     # TODO(jaketrower): Otherwise, use this
     removeTile(coords)
 
-    summonSmokeClouds(coords, 2)
-  spike_infection_timer = 0
-
-func summonSmokeClouds(coords, num_clouds):
-  var play_sound = true
-  for _i in range(num_clouds):
-    var newSmokeCloud = smokeCloudRes.instance()
-    level.add_child(newSmokeCloud)
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
-    newSmokeCloud.global_transform.origin.x = tile_pos.x + rand_range(-1, 1)
-    newSmokeCloud.global_transform.origin.y = tile_pos.y + rand_range(-1, 1)
-    newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-    
-    if play_sound:
-      newSmokeCloud.tryPlaySound()
-      play_sound = false
-    
-    
-    # var new_material = newSmokeCloud.get_material_override().duplicate()
-    # new_material.set_shader_param("enable_glitch", "true")
-    # new_material.set_shader_param("target_palette", global.weird_base_palette)
-    # newSmokeCloud.set_material_override(new_material.duplicate())
+    level.summonSmokeClouds(tile_pos, 2)
+  spike_infection_timer = 0
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)

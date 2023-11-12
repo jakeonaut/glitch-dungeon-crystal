@@ -473,12 +473,6 @@ transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -
 true_terminal_vel = 2
 grav = 3
 
-[node name="Sprite3D" parent="Viewport/level/Player/SpriteContainer" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8 )
-
-[node name="Sprite3DBroomAnimated" parent="Viewport/level/Player/SpriteContainer" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0, 0.7 )
-
 [node name="TransformSound" parent="Viewport/level/Player/Sounds" index="7"]
 volume_db = -80.0
 

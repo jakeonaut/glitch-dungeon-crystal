@@ -352,3 +352,23 @@ func spawnKeyFollower(starting_position):
   var target = followers[-1] if followers.size() > 0 else player
   keyFollower.gameMoverTarget = weakref(target)
   followers.push_back(keyFollower)
+
+
+var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
+func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false):
+  for _i in range(num_clouds):
+    var newSmokeCloud = smokeCloudRes.instance()
+    add_child(newSmokeCloud)
+    newSmokeCloud.global_transform.origin.x = pos.x + rand_range(-1, 1)
+    newSmokeCloud.global_transform.origin.y = pos.y + rand_range(-1, 1)
+    newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+    
+    if play_sound:
+      newSmokeCloud.tryPlaySound()
+      play_sound = false
+
+    if is_glitchy:
+        var new_material = newSmokeCloud.get_material_override().duplicate()
+        new_material.set_shader_param("enable_glitch", "true")
+        new_material.set_shader_param("target_palette", global.weird_base_palette)
+        newSmokeCloud.set_material_override(new_material.duplicate())

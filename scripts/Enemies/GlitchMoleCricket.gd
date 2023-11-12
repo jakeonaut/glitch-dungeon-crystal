@@ -298,7 +298,7 @@ func digTiles(solidTiles, should_summon_clouds):
         tiles_dug += 1
 
     if should_summon_clouds and tiles_dug > 0:
-        summonSmokeClouds(2)
+        level.summonSmokeClouds(global_transform.origin, 2)
 
     if tiles_dug > 0:
         if is_builder:

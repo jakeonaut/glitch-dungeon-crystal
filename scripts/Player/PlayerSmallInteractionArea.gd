@@ -41,3 +41,8 @@ func _process(delta):
             is_touching_ladder = true
         if area.is_in_group("door"):
             is_touching_door = true
+            var door = area.get_node("..")
+            if door.is_unlocking or door.is_passive or not door.visible:
+                is_touching_door = false
+
+    parent.interactPromptSprite.visible = is_touching_door

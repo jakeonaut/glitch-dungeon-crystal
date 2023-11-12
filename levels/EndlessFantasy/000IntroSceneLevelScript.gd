@@ -4,7 +4,6 @@ var cutscene_timer = 20
 var should_do_cutscene = false
 
 var has_player_died = false
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -22,7 +21,7 @@ func _process(delta):
                 var NPC5 = get_node("NPC5")
                 if NPC5.visible:
                     NPC5.visible = false
-                    summonSmokeClouds(get_node("NPC5"), 5, true, true)
+                    self.summonSmokeClouds(NPC5.global_transform.origin, 5, true, true)
         else:
             glitchScreenEffect.visible = false
             player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
@@ -42,19 +41,3 @@ func _process(delta):
             NPC.textBox.hideTextbox()
             NPC.textBox.has_been_shown = false
             should_do_cutscene = false
-
-func summonSmokeClouds(npc, num_clouds, play_sound = false, is_glitchy = false):
-    for _i in range(num_clouds):
-      var newSmokeCloud = smokeCloudRes.instance()
-      self.add_child(newSmokeCloud)
-      newSmokeCloud.global_transform.origin.x = npc.global_transform.origin.x + rand_range(-1, 1)
-      newSmokeCloud.global_transform.origin.y = npc.global_transform.origin.y + rand_range(1, 2)
-      newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-      if play_sound:
-        newSmokeCloud.tryPlaySound()
-        play_sound = false
-      if is_glitchy:
-        var new_material = newSmokeCloud.get_material_override().duplicate()
-        new_material.set_shader_param("enable_glitch", "true")
-        new_material.set_shader_param("target_palette", global.weird_base_palette)
-        newSmokeCloud.set_material_override(new_material.duplicate())

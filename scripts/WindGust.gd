@@ -12,20 +12,7 @@ func _process(delta):
   cloud_timer += (delta*22)
   if cloud_timer >= cloud_time_limit:
     cloud_timer = 0
-    summonSmokeClouds(1)
-
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
-func summonSmokeClouds(num_clouds):
-    for _i in range(num_clouds):
-        var newSmokeCloud = smokeCloudRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
-        newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(-2, 2)
-        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(2, 4)
-        # newSmokeCloud.get_material_override().set_shader_param("opacity", 0.2)
-        newSmokeCloud.get_material_override().set_shader_param("target_palette", global.bog_water_palette)
-        newSmokeCloud.automatically_change_color = false
+    level.summonSmokeClouds(global_transform.origin, 1)
     
 
 func getDirection():

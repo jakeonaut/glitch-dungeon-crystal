@@ -165,10 +165,8 @@ func changeSpriteColorPalette(palette):
   if level.spellbook_forbidden:
     return
 
-  var material = mySprite.material_override
-  if material is ShaderMaterial:
-    material.set_shader_param("target_palette", palette)
-    mySprite.material_override = material
+  mySprite.material_override.set_shader_param("target_palette", palette)
+  print(palette)
 
 func bodyPushMe(_delta, _origin):
   pass # no more

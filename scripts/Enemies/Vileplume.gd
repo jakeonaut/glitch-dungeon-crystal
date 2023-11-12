@@ -59,7 +59,7 @@ func getSmacked(broom_origin):
   is_in_cooldown = true
   cooldown_timer = 0
   .getSmacked(broom_origin)
-  summonSmokeClouds(5)
+  level.summonSmokeClouds(global_transform.origin, 5)
   spawnFiveSpores()
   getPlayer().getMushroomInfected()
 

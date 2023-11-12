@@ -30,14 +30,14 @@ uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
 
-vec3 getClosestMatchingFromPalette(ivec3 color) {
+vec4 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
-    vec3 closest_color = vec3(0, 1.0, 0);
+    vec4 closest_color = vec4(0, 1.0, 0, 1.0);
     for (int x=0; x<palettesize; x++) {
         ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(target_palette, coord, 0).rgb;
-        ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
-        float dist = distance(vec3(color), vec3(ipixelcolor));
+        vec4 pixelcolor = texelFetch(target_palette, coord, 0);
+        ivec3 ipixelcolor = ivec3(round(pixelcolor.rgb * 255.0));
+        float dist = distance(vec3(color), vec3(ipixelcolor.rgb));
         if (dist < closest_distance) {
             closest_distance = dist;
             closest_color = pixelcolor;
@@ -127,7 +127,7 @@ void fragment() {
     }
     // Note: don't have to convert back to [0.0, 1.0] range because
     // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
-    vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
+    vec4 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
     if (index > -1) {
         ALBEDO.rgb = closest_color.rgb;
@@ -140,7 +140,9 @@ void fragment() {
     }
     if (enable_no_transparency && alpha == 0.0) {
         alpha = 1.0;
-    }
+    } else if (closest_color.a == 0.0) {
+		alpha = 0.0;
+	}
     ALPHA = alpha;
 
     if (enable_glitch) {

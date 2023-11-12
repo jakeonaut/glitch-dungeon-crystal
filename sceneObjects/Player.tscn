@@ -47,7 +47,7 @@
 [ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=45]
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=46]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=47]
-[ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=48]
+[ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=48]
 
 [sub_resource type="BoxShape" id=69]
 extents = Vector3( 0.7, 1.2, 3 )
@@ -2440,8 +2440,8 @@ volume_db = -30.0
 
 [node name="SporeSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 43 )
-volume_db = -15.0
-pitch_scale = 2.0
+volume_db = -20.0
+pitch_scale = 2.5
 
 [node name="WetJumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )

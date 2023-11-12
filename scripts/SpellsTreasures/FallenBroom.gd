@@ -1,6 +1,5 @@
 extends "TreasureCollectable.gd"
 
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 onready var broomAbortSound = get_node("NPC TextBox/TextBox/AbortSound")
 
 export var behavior_walking = true
@@ -134,23 +133,6 @@ func landed():
     if not projectile:
         get_node("SecretAnimationPlayer").play("land")
 
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
-    for _i in range(num_clouds):
-        var newSmokeCloud = smokeCloudRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
-        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-        if play_sound:
-            newSmokeCloud.tryPlaySound()
-            play_sound = false
-        if is_glitchy:
-            pass
-            # var new_material = newSmokeCloud.get_material_override().duplicate()
-            # new_material.set_shader_param("enable_glitch", "true")
-            # new_material.set_shader_param("target_palette", global.weird_base_palette)
-            # newSmokeCloud.set_material_override(new_material.duplicate())
-
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")
     grav = 0
@@ -179,7 +161,7 @@ func hitStuff(_delta):
             if not area.get_node("..").am_i_dying:
                 area.get_node("..").ouchies(global_transform.origin)
                 # my_broom_owner.has_sweeped_glitch = true
-                summonSmokeClouds(5, true, true)
+                level.summonSmokeClouds(global_transform.origin, 5, true, true)
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
@@ -204,7 +186,9 @@ func hitStuff(_delta):
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-            area.InteractActivate(false)
+            if not area.is_in_group("door"):
+                area.InteractActivate(false)
+                has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             area.PassiveInteractActivate(0, false)

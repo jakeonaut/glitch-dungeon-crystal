@@ -5,7 +5,6 @@ var broom_active_timer = 0
 var broom_active_time_limit = 10 
 var my_broom_owner = null
 onready var broomSound = get_node("BroomSound")
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var myArea = get_node("Area")
 onready var collisionShape1 = get_node("Area/CollisionShape")
@@ -44,22 +43,6 @@ func _process(delta):
   if not visible and not broomSound.is_playing():
     queue_free()
     
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
-  for _i in range(num_clouds):
-    var newSmokeCloud = smokeCloudRes.instance()
-    level.add_child(newSmokeCloud)
-    newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-    newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
-    newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-    if play_sound:
-      newSmokeCloud.tryPlaySound()
-      play_sound = false
-    if is_glitchy:
-      var new_material = newSmokeCloud.get_material_override().duplicate()
-      new_material.set_shader_param("enable_glitch", "true")
-      new_material.set_shader_param("target_palette", global.weird_base_palette)
-      newSmokeCloud.set_material_override(new_material.duplicate())
-    
   # TODO(should just use the levelTiles func here)
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
@@ -85,7 +68,7 @@ func hitStuff(_delta):
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
         my_broom_owner.has_sweeped_glitch = true
-        summonSmokeClouds(5, true, true)
+        level.summonSmokeClouds(global_transform.origin, 5, true, true)
         my_broom_owner.getSmacked()
         is_active = false
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():

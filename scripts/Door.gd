@@ -275,11 +275,9 @@ func actuallyUnlockAndEnterDoor():
 func passiveActivate(_delta, is_player):
   if is_passive and is_player:
     goThroughDoor()
-  elif is_player and not getPlayer().interactPromptSprite.visible:
-    getPlayer().interactPromptSprite.visible = not is_unlocking
     
 func justStopPassiveActivate():
-  getPlayer().interactPromptSprite.visible = false
+  pass
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
   if global.isEnteringRoom:
@@ -382,7 +380,7 @@ func land():
       getPlayer().linear_velocity = global.memory["linear_velocity"]
       global.memory.erase("linear_velocity")
 
-    if is_vertical:
+    if is_vertical or not is_passive:
       getPlayer().on_ground = false
   else:
     # SNEAKY SNEAKY

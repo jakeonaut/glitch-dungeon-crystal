@@ -29,9 +29,9 @@ func _process(delta):
       var newSprite = sparkleSprite.duplicate()
       newSprite.should_fizzle_out = true
       newSprite.visible = true
-      newSprite.transform.origin = Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125),
+      newSprite.global_transform.origin = Vector3(
+          global_transform.origin.x + stepify(rand_range(-1.0, 1.0), 0.125),
+          global_transform.origin.y + stepify(rand_range(0.5, 1.5), 0.125),
           0
       )
       newSprite.updateBaseFrame(0, 0)

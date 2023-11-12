@@ -10,7 +10,6 @@ onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/Evo
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
-var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
@@ -241,7 +240,7 @@ func tryDieToBody():
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:
         if area.is_in_group("corporeal_body"):
-            summonSmokeClouds(3)
+            level.summonSmokeClouds(global_transform.origin, 3)
             queue_free()
 
 func bulletTryDieToSolids():
@@ -253,7 +252,7 @@ func bulletTryDieToSolids():
     var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 
     if isTileSolid(tile_type_a, true, 1, tile_pos_a):
-        summonSmokeClouds(3)
+        level.summonSmokeClouds(global_transform.origin, 3)
         queue_free()
 
 func tryDieToOffscreenCamera():
@@ -405,7 +404,7 @@ func getPlayer():
 
 func notOuchies(broom_origin):
     if not is_smacked:
-        summonSmokeClouds(1, true, true)
+        level.summonSmokeClouds(global_transform.origin, 1, true, true)
         return getSmacked(broom_origin)
     return false
 
@@ -433,23 +432,6 @@ func spawnABubble(is_horizontal):
         bubble.my_target_pos = self.global_transform.origin.x + rand_range(-1, 1)
         bubble.global_transform.origin.y += 1
     bubble.setAsParent(self)
-
-# TODO(jaketrower): Honestly just move these to GameMover...
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
-    for _i in range(num_clouds):
-        var newSmokeCloud = smokeCloudRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x + rand_range(-1, 1)
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + rand_range(-1, 1)
-        newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
-        if play_sound:
-            newSmokeCloud.tryPlaySound()
-            play_sound = false
-        if is_glitchy:
-            var new_material = newSmokeCloud.get_material_override().duplicate()
-            new_material.set_shader_param("enable_glitch", "true")
-            new_material.set_shader_param("target_palette", global.weird_base_palette)
-            newSmokeCloud.set_material_override(new_material.duplicate())
 
 func setGlobalMemoryOfHasBeenDefeated():
     global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)

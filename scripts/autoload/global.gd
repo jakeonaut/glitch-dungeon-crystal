@@ -1,7 +1,9 @@
 extends Node
 
+var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
 var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
 var yellow_player_palette = preload("res://assets/palettes/yellow_player_palette.png")
+var white_player_palette = preload("res://assets/palettes/white_player_palette.png")
 
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
 var red_palette = preload("res://assets/palettes/red_palette.png")
@@ -10,7 +12,6 @@ var black_palette = preload("res://assets/palettes/black_palette.png")
 var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
 var base_palette = preload("res://assets/palettes/base_palette.png")
-var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
 var red_dungeon_palette = preload("res://assets/palettes/red_dungeon_palette.png")

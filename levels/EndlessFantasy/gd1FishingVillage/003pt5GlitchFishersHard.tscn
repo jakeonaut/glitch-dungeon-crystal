@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -1261,23 +1261,6 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=114]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
-
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -2199,7 +2182,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/004FrogCove.tscn"
 parter_door_id = "Door2"
 num_keys_unlock = 2
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 66 )
 anims/doorOpen = SubResource( 67 )
 anims/locked = SubResource( 68 )
@@ -2272,13 +2255,10 @@ parter_door_id = "Door2"
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 111 )
 anims/doorOpen = SubResource( 112 )
 anims/locked = SubResource( 113 )
-
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door3" index="6"]
-anims/fade = SubResource( 114 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 108 )
