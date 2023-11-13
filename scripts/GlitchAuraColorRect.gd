@@ -7,7 +7,7 @@ enum GlowDir {
 var glow_dir = GlowDir.GROWING
 
 var should_fizzle_out = false
-var step = 40
+var step = 10
 export var minSize = 75
 export var maxSize = 120
 

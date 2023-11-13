@@ -235,7 +235,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3912, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001pt5_StreetlightManifesto.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -250,7 +250,7 @@ shape = SubResource( 25 )
 shape = SubResource( 26 )
 
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0088, 7.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0088, 9.1, 0 )
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000DieToSavePoint.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
@@ -285,9 +285,10 @@ path = "res://levels/DebugGrimoireSecret.tscn"
 
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 10, 1.5812, 0 )
+grav_direction = -1
 
 [node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, -11, 11.3884, 0 )
+transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, -3, 9.3884, 0 )
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2728, 8.21824, 0 )

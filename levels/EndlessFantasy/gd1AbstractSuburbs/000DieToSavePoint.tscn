@@ -274,7 +274,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 12.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 12.0734, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, 0 )
@@ -284,7 +284,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4, 2, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7, 11, 0 )
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001SpellbookSuburb.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false

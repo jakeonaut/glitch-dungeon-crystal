@@ -222,7 +222,7 @@ func activate(is_player):
     return false
     
   if not is_passive:
-    if not is_locked and not should_lock and global.activeInteractor == null and not (getPlayer().glitch_form == global.GlitchForm.FLOOR and getPlayer().on_ground and not getPlayer().truly_on_ground):
+    if not is_locked and not should_lock and global.activeInteractor == null:
       goThroughDoor()
     elif is_locked:
       var num_keys = global.getLevelZoneThing("key")
@@ -380,12 +380,14 @@ func land():
       getPlayer().linear_velocity = global.memory["linear_velocity"]
       global.memory.erase("linear_velocity")
 
-    if is_vertical or not is_passive:
+    if is_vertical:
       getPlayer().on_ground = false
   else:
     # SNEAKY SNEAKY
     global.saveMySpot(self.translation, level) 
-    getPlayer().playBounce("land") 
+    getPlayer().playBounce("land")
+    getPlayer().on_ground = false
+    print(getPlayer().on_ground)
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):

@@ -344,7 +344,8 @@ func isActive():
     return visible and not behavior_evolve
 
 func activate(_is_player):
-    pass
+    getSmacked(self.global_transform.origin)
+    getPlayer().getSmacked()
 
 func passiveActivate(_delta, _is_player):
     pass

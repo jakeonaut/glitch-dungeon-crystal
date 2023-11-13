@@ -77,5 +77,5 @@ func setPosition(should_set_target_origin):
     target_origin = target.global_transform.origin
   getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
-  self.rect_position.x = target_pos.x + 10
-  self.rect_position.y = target_pos.y + 10
+  mainColorRect.rect_position.x = target_pos.x - mainColorRect.rect_size.x / 2
+  mainColorRect.rect_position.y = target_pos.y - mainColorRect.rect_size.y / 2

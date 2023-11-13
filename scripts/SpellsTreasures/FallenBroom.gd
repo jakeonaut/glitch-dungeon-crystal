@@ -169,6 +169,7 @@ func hitStuff(_delta):
                 if area.get_node("..").ouchies(global_transform.origin):
                     my_broom_owner.getSmacked()
                     my_broom_owner.has_sweeped_glitch = true
+                    has_hit_something = true
             elif area.get_node("..").notOuchies(global_transform.origin):
                 my_broom_owner.getSmacked()
                 has_hit_something = true
@@ -212,3 +213,6 @@ func hitStuff(_delta):
               getLevelTiles().infectSpikes(coords)
               # TODO(jaketrower): also reset the levelTiles array position?
     return has_hit_something
+
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
+    level.summonSmokeClouds(global_transform.origin, num_clouds, play_sound, is_glitchy)

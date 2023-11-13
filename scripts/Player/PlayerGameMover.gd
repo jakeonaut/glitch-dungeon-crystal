@@ -192,11 +192,17 @@ func landed():
 
 # @override
 func justPressedDown():
-  return Input.is_action_just_pressed("ui_down") and not pauseInput
+  if grav > 0:
+    return Input.is_action_just_pressed("ui_down") and not pauseInput
+  elif grav < 0:
+    return Input.is_action_just_pressed("ui_up") and not pauseInput
 
 # @override
 func pressingDown():
-  return Input.is_action_pressed("ui_down") and not pauseInput
+  if grav > 0:
+    return Input.is_action_pressed("ui_down") and not pauseInput
+  elif grav < 0:
+    return Input.is_action_pressed("ui_up") and not pauseInput
 
 # @override
 func justPressedJump():
