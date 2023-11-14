@@ -2,6 +2,8 @@ extends "GlitchEnemy.gd"
 
 onready var interactionArea = get_node("SmallInteractionArea")
 onready var landing = get_node("landing")
+onready var poofSound = get_node("Sounds/PoofSound")
+onready var reassembleSound = get_node("Sounds/ReassembleSound")
 var landing_position = null
 
 func _ready():
@@ -36,6 +38,7 @@ func _process(delta):
       for _i in range(1):
         spawnASpore(true)
       if not has_teleported:
+        reassembleSound.play()
         self.global_transform.origin = landing_position
         landing.global_transform.origin = lastPosition
         landing_position = lastPosition
@@ -72,9 +75,10 @@ func landed():
 func getSmacked(broom_origin):
   if is_smacked or has_ever_been_smacked:
     return false
+  poofSound.play()
   .getSmacked(broom_origin)
-  if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
-    behavior_jumping = true
+  # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
+  #   behavior_jumping = true
   pauseSelf = true
   on_ground = true
   notDieSound.play()

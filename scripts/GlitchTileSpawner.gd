@@ -12,8 +12,13 @@ func isConditionActive():
     return not amITouchingGlitchTile(getLevelTiles())
 
 # @override
-func spawn(_with_flare = false):
+func spawn(with_flare = true):
   .spawn(false)
+  if (with_flare):
+    spawnSound.play()
+    spawnSound2.play()
+    level.summonSmokeClouds(global_transform.origin, 10, false, true)
+
 
 
 func amITouchingGlitchTile(currLevelTiles):

@@ -383,6 +383,42 @@ tracks/7/keys = {
 "update": 0,
 "values": [ 0.12, 0.12, 0.18 ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D2:material_override:shader_param/normal_offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite3D2:material_override:shader_param/time_influence")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D2:material_override:shader_param/y_div")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.87 ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "metamorphosis"
@@ -481,6 +517,42 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D2:material_override:shader_param/y_div")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2.87 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite3D2:material_override:shader_param/time_influence")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D2:material_override:shader_param/normal_offset")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.02 ]
 }
 
 [sub_resource type="BoxShape" id=20]

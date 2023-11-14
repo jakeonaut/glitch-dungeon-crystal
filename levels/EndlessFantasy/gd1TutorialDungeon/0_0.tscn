@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=24]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=25]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=26]
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -903,7 +904,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 32.2, 0 )
 
-[node name="TextContainer" parent="Viewport/level/Player" index="15"]
+[node name="TextContainer" parent="Viewport/level/Player" index="9"]
 bbText = "•i don't remember us 
 having a basement.."
 
@@ -943,7 +944,7 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door4" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 29 )
 anims/doorOpen = SubResource( 30 )
 anims/locked = SubResource( 31 )
@@ -964,7 +965,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -985,7 +986,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 25 )
 anims/doorOpen = SubResource( 26 )
 anims/locked = SubResource( 27 )
@@ -1233,13 +1234,13 @@ spawned_object_path = ""
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
 bbText = "•welcome to DUNGEON
-•press X to talk↓
+   fellow crone
+•press X to talk
 •ouch!!! well done.
 •if someone says \". . .\"
 you can talk to them!"
 is_important = true
 is_really_important = true
-can_camera_zoom = false
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )
@@ -1258,11 +1259,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+[node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="6"]
+stream = ExtResource( 26 )
+volume_db = -10.0
+
 [node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 20 )
 
 [node name="Sprite3D" parent="Viewport/level/GlitchTileSpawner/NPC3" index="4"]
-frame = 66
+frame = 54
 
 [node name="AnimationPlayer" parent="Viewport/level/GlitchTileSpawner/NPC3" index="5"]
 anims/default = SubResource( 35 )

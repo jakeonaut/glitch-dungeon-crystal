@@ -60,18 +60,18 @@ func canActivate(area):
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
 
 func hitStuff(_delta):
-  if not visible or not is_active: return
+  if not visible: return
   
   var areas = myArea.get_overlapping_areas()
   for area in areas:
-    if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
+    if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
         my_broom_owner.has_sweeped_glitch = true
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         my_broom_owner.getSmacked()
         is_active = false
-    elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+    elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if global.hasGottenLevelGeode:
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.getSmacked()
@@ -84,20 +84,20 @@ func hitStuff(_delta):
       
       # # TODO kill glitches or "free" them like glitch slug...
       
-    elif area.is_in_group("corporeal_body"):
+    elif area.is_in_group("corporeal_body") and is_active:
       var areaParent = area.get_node("..")
       if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
         if areaParent.has_method("imAnNpc") and smackResult == null:
           smacked_npc = weakref(areaParent)
           have_i_smacked_an_npc = true
+          is_active = false
         if not area.is_in_group("tadpole") and smackResult == null:
           my_broom_owner.getSmacked()
-        is_active = false
-    elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
+          is_active = false
+    elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)
-      is_active = false
     elif canActivate(area) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.PassiveInteractActivate(0, false)

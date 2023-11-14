@@ -168,7 +168,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
-starting_glitch_type = 2
 tileset_type = 2
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 6 )]
@@ -265,7 +264,7 @@ shape = SubResource( 29 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 8.02838, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -288,7 +287,6 @@ i know this"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 23 )

@@ -195,7 +195,7 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 num_keys_unlock = 2
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 15 )
 anims/doorOpen = SubResource( 16 )
 anims/locked = SubResource( 17 )

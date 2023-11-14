@@ -137,7 +137,7 @@ shader_param/target_palette = ExtResource( 3 )
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 16 )
 shader_param/palettesize = 6
-shader_param/resolution_scale = 0.0
+shader_param/resolution_scale = 2.0
 shader_param/canvas_width = 1280.0
 shader_param/canvas_height = 1024.0
 shader_param/r_mult = 0.0
@@ -214,6 +214,7 @@ minSize = 150
 maxSize = 200
 
 [node name="TextureRect" type="TextureRect" parent="GlitchAura"]
+visible = false
 margin_left = -50.0
 margin_top = -50.0
 margin_right = 50.0

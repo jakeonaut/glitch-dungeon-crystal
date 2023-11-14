@@ -539,7 +539,7 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54724, -5.9, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 23 )
 anims/doorOpen = SubResource( 24 )
 anims/locked = SubResource( 25 )
@@ -614,7 +614,6 @@ grav = 0
 bbText = "•find angel eggs
 to cleanse the world"
 can_camera_zoom = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )
@@ -635,7 +634,7 @@ step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
 material_override = SubResource( 31 )
-frame = 66
+frame = 54
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
 anims/default = SubResource( 32 )
@@ -655,7 +654,6 @@ bbText = "•thought you'd perished by now
 •you must have some magick 
 •in you, crone.. impressive."
 is_important = true
-is_really_important = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.71912, 0 )
@@ -721,7 +719,7 @@ step = 1.0
 script = ExtResource( 23 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
-frame = 66
+frame = 54
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
 anims/default = SubResource( 40 )

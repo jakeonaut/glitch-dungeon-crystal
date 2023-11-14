@@ -4,7 +4,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var NPC3 = get_node("../../..")
 
 func _ready():
-    yield(get_tree().create_timer(0.5), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
     var memory = global.getStaticLevelZoneLevelVar(level, self.name)
     if memory == null:
         return

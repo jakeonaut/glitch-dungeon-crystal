@@ -70,7 +70,9 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
 
-  if is_touching_water or is_touching_ladder or global_transform.origin.y < target_last_grounded_y:
+  if is_touching_water or is_touching_ladder or \
+     (grav > 0 and global_transform.origin.y < target_last_grounded_y) or \
+     (grav < 0 and global_transform.origin.y > target_last_grounded_y):
     target_last_grounded_y = global_transform.origin.y
   
   if jump_press_timer <= jump_press_broom_time_limit:
@@ -166,7 +168,6 @@ func changeSpriteColorPalette(palette):
     return
 
   mySprite.material_override.set_shader_param("target_palette", palette)
-  print(palette)
 
 func bodyPushMe(_delta, _origin):
   pass # no more

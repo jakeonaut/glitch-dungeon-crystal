@@ -240,11 +240,12 @@ func tryToRespawn():
 
 
 func setDoorsSpriteFrame(frame):
-  var doors = get_tree().get_nodes_in_group("doors")
-  for door in doors:
-    if door.dont_recolor_me:
-      continue
-    door.get_node("Sprite3D2").frame = frame
+  pass
+  # var doors = get_tree().get_nodes_in_group("doors")
+  # for door in doors:
+  #   if door.dont_recolor_me:
+  #     continue
+  #   door.mySprite2.frame = frame
 
 func setTorchSpriteFrame(_v_frame):
   pass

@@ -1291,7 +1291,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 24 )]
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 mesh_library = ExtResource( 10 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
@@ -1535,7 +1534,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1, 29.1, 0 )
 
 [node name="HookInteractionArea" parent="Viewport/level/FishingRod5" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.9, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRod5/HookInteractionArea" index="0"]
 shape = SubResource( 35 )
@@ -1759,7 +1758,6 @@ go up."
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC10/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )
@@ -2270,7 +2268,7 @@ shape = SubResource( 109 )
 shape = SubResource( 110 )
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6, 22.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.6, 22.5, 0 )
 
 [node name="GlitchTileSpawner2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.6, 19.6, 0 )

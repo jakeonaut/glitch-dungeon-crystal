@@ -293,9 +293,6 @@ material_override = SubResource( 35 )
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
 
-[node name="InteractPrompt" parent="Viewport/level/Door" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.23888, 0 )
-
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
 shape = SubResource( 17 )
@@ -502,7 +499,6 @@ many visitors"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 30 )

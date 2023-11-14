@@ -757,10 +757,10 @@ func adjustSummonedBroomSpritePosition():
   var yAddition = 0
   if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
     xAddition = .875
-    yAddition = 1.0
+    yAddition = .625
   elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
     xAddition = .4
-    yAddition = .45
+    yAddition = 0
 
   broomSpriteVisible.visible = false
   if mySprite.flip_h:
@@ -771,11 +771,11 @@ func adjustSummonedBroomSpritePosition():
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
 
   if self.grav < 0:
-    summonedBroom.rotation_degrees.x = 0
+    summonedBroom.rotation_degrees.x = 180
     yAddition *= -1
     # yAddition -= 3.146
   else:
-    summonedBroom.rotation_degrees.x = -180
+    summonedBroom.rotation_degrees.x = 0
 
   summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5

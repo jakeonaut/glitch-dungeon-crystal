@@ -55,6 +55,12 @@ func _ready():
 
   if is_passive:
     mySprite.visible = false
+    mySprite2.visible = false
+  else:
+    mySprite.material_override = mySprite.material_override.duplicate()
+    mySprite2.material_override = mySprite.material_override
+  if not self.path:
+    mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
   id = self.generateId()
   if (is_locked or should_lock) and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id):
@@ -307,7 +313,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     if partnerDoor and partnerDoor.has_method("land"):
       global.pauseGame = true
       yield(get_tree().create_timer(0.50), "timeout")
-      partnerDoor.land()
+      partnerDoor.land(false)
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("stand")
@@ -352,7 +358,7 @@ func isLandingOutsideOfCameraBounds():
         return true
   return false
 
-func land():
+func land(should_change_shader_params = true):
   # TODO(jaketrower): Oh...
   # global.memory.erase("active_save_point_x")
   # global.memory.erase("active_save_point_y")
@@ -387,7 +393,10 @@ func land():
     global.saveMySpot(self.translation, level) 
     getPlayer().playBounce("land")
     getPlayer().on_ground = false
-    print(getPlayer().on_ground)
+    if should_change_shader_params:
+      mySprite.material_override.set_shader_param("enable_dither", true)
+      mySprite.material_override.set_shader_param("opacity", 0.9)
+      mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):

@@ -64,7 +64,7 @@ func _process(delta):
     else:
       true_terminal_vel = 0
   else:
-    true_terminal_vel = 32
+    true_terminal_vel = level.player.terminal_vel
 
 # @override
 func shouldIDoCollisions():

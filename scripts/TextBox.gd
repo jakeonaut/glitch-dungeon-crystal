@@ -101,7 +101,7 @@ func setPosition():
 
 func setTextBoxPosition():
   if not is_tiny:
-    if getGameCamera().isNearBottom() and getGameCamera().isInitialTargetNearBottom():
+    if getGameCamera().isNearBottom() and (getGameCamera().isInitialTargetNearBottom() or can_camera_zoom):
       self.margin_top = 60
       self.margin_bottom = 201
     else:
@@ -309,10 +309,8 @@ func interact():
   # print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
     if isWaitingForEndPrompt():
-      print("END")
       hideTextbox()
     elif isWaitingForNextPrompt():
-      print("NEXT")
       textNode.scroll_to_line(currently_scrolled_line + 1)
       currently_scrolled_line += 1
       now_were_scrolling = true
@@ -324,7 +322,6 @@ func interact():
       resetTinyColorRect()
       adjusted_tiny_y_pos += 35
     else:
-      print("ADVANCE")
       nextDialogSound.play()
       advanceToEndOfPhrase()
 

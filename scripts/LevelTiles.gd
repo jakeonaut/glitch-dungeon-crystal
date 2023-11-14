@@ -308,7 +308,7 @@ func _process(delta):
     randomize_num += randomize_num_counter
   # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
 
-  if global.pauseGame: return
+  if global.isPauseMenuOpen: return
 
   var num_infected_spikes = len(infected_spikes)
   if num_infected_spikes > 0:
@@ -368,7 +368,7 @@ func infectSpikes(coords):
     removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
-    level.summonSmokeClouds(tile_pos, 2)
+    level.summonSmokeClouds(tile_pos, 2, true)
   spike_infection_timer = 0
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):

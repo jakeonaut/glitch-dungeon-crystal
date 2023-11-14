@@ -90,7 +90,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
-show_crt_effect = true
 tileset_type = 6
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 18 )]

@@ -53,27 +53,27 @@ func _process(delta):
         is_active = false
         aniPlayer.play("default")
 
-    if is_active and triangleContainer.visible:
-        spawn_timer += (delta*22)
-        if spawn_timer >= spawn_time_limit:
-            var children = self.get_children()
-            var num_children = 0
-            for i in children:
-                num_children += 1
+    # if is_active and triangleContainer.visible:
+    #     spawn_timer += (delta*22)
+    #     if spawn_timer >= spawn_time_limit:
+    #         var children = self.get_children()
+    #         var num_children = 0
+    #         for i in children:
+    #             num_children += 1
 
-            if num_children < 20:
-                var newSprite = sparkleSprite.duplicate()
-                newSprite.should_fizzle_out = true
-                newSprite.visible = true
-                newSprite.transform.origin = Vector3(
-                    stepify(rand_range(-1.0, 1.0), 0.125),
-                    stepify(rand_range(0.5, 1.5), 0.125),
-                    0
-                )
-                newSprite.updateBaseFrame(0, 0)
-                newSprite.max_frames = 2
-                add_child(newSprite)
-                spawn_timer = 0
+    #         if num_children < 20:
+    #             var newSprite = sparkleSprite.duplicate()
+    #             newSprite.should_fizzle_out = true
+    #             newSprite.visible = true
+    #             newSprite.transform.origin = Vector3(
+    #                 stepify(rand_range(-1.0, 1.0), 0.125),
+    #                 stepify(rand_range(0.5, 1.5), 0.125),
+    #                 0
+    #             )
+    #             newSprite.updateBaseFrame(0, 0)
+    #             newSprite.max_frames = 2
+    #             add_child(newSprite)
+    #             spawn_timer = 0
 
 func isOnSavePoint():
     if not global.memory.has("active_save_point_x"):
