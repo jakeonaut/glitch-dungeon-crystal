@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -13,11 +13,8 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=14]
-[ext_resource path="res://sceneObjects/Sunfish.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=18]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=19]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=20]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=21]
@@ -31,6 +28,7 @@
 [ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=29]
 [ext_resource path="res://assets/palettes/magicolor-16-1x.png" type="Texture" id=30]
 [ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/SuburbDitherMaterial.tres" type="Material" id=31]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=32]
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 19 )
@@ -118,34 +116,6 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 19 )
-shader_param/albedo = null
-shader_param/opacity = 0.5
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = true
-shader_param/palette_cycle_speed = 8.0
-shader_param/normal_offset = 0.03
-shader_param/time_influence = 3.0
-shader_param/y_div = 4.2
-shader_param/texture_albedo = ExtResource( 18 )
-shader_param/base_palette = ExtResource( 17 )
-shader_param/target_palette = ExtResource( 14 )
-
 [sub_resource type="BoxShape" id=30]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
@@ -209,7 +179,7 @@ shader_param/target_palette = ExtResource( 27 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
-tileset_type = 6
+tileset_type = 7
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 
@@ -334,12 +304,6 @@ shape = SubResource( 16 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 20 )
 
-[node name="Sunfish3" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 10.9, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/Sunfish3" index="4"]
-material_override = SubResource( 21 )
-
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0.3, 0 )
 
@@ -395,6 +359,12 @@ overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 1.2 )
 shape = SubResource( 32 )
 
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 11, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -427,7 +397,6 @@ material = SubResource( 28 )
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/Sunfish3"]
 [editable path="Viewport/level/KizzyCat"]
 [editable path="Viewport/level/KizzyCat3"]
 [editable path="Viewport/level/KizzyCat4"]

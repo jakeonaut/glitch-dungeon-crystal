@@ -96,18 +96,18 @@ func unsmack():
   
 
 # @override
-func pressingMoveLeft():
-  var key_to_check = "ui_right"
-  if who_is_standing_on_me.size() > 0:
-    key_to_check = "ui_left"
-  return Input.is_action_pressed(key_to_check) and getPlayer().glitch_form == global.GlitchForm.INVISIBLE and getPlayer().on_ground
+# func pressingMoveLeft():
+#   var key_to_check = "ui_right"
+#   if who_is_standing_on_me.size() > 0:
+#     key_to_check = "ui_left"
+#   return Input.is_action_pressed(key_to_check) and getPlayer().glitch_form == global.GlitchForm.INVISIBLE and getPlayer().on_ground
 
-# @override
-func pressingMoveRight():
-  var key_to_check = "ui_left"
-  if who_is_standing_on_me.size() > 0:
-    key_to_check = "ui_right"
-  return Input.is_action_pressed(key_to_check) and getPlayer().glitch_form == global.GlitchForm.INVISIBLE and getPlayer().on_ground
+# # @override
+# func pressingMoveRight():
+#   var key_to_check = "ui_left"
+#   if who_is_standing_on_me.size() > 0:
+#     key_to_check = "ui_right"
+#   return Input.is_action_pressed(key_to_check) and getPlayer().glitch_form == global.GlitchForm.INVISIBLE and getPlayer().on_ground
 
 # @override
 func shouldIDoCollisions():

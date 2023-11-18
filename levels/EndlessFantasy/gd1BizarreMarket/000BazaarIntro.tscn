@@ -556,7 +556,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
-tileset_type = 1
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 16 )]
 
@@ -655,7 +654,7 @@ is_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 material_override = SubResource( 25 )
 frame = 22
 automatically_change_color = false
@@ -664,19 +663,19 @@ automatically_change_color = false
 shape = SubResource( 26 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.44442, 0.0707502, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44442, 0.0707502, 0 )
 grav = 0
 bbText = "•camera test"
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 25 )
-frame = 22
+frame = 6
 automatically_change_color = false
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 27 )
 anims/fall = SubResource( 28 )
 anims/flickerOn = SubResource( 29 )
@@ -695,12 +694,12 @@ bbText = "•camera test"
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 25 )
-frame = 22
+frame = 4
 automatically_change_color = false
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
 anims/default = SubResource( 33 )
 anims/fall = SubResource( 34 )
 anims/flickerOn = SubResource( 35 )
@@ -719,12 +718,12 @@ bbText = "•camera test"
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 material_override = SubResource( 25 )
-frame = 22
+frame = 28
 automatically_change_color = false
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="4"]
 anims/default = SubResource( 39 )
 anims/fall = SubResource( 40 )
 anims/flickerOn = SubResource( 41 )

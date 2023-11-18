@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/black_palette_town.png" type="Texture" id=2]
@@ -14,7 +14,8 @@
 [ext_resource path="res://scripts/Enemies/KizzyCat.gd" type="Script" id=12]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=13]
 [ext_resource path="res://assets/pokeballgreen.png" type="Texture" id=14]
-[ext_resource path="res://assets/sounds/151RetroMonsters/Frog.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/657930__matrixxx__cartoon-drowning-02.wav" type="AudioStream" id=16]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 3 )
@@ -151,13 +152,14 @@ volume_db = -20.0
 pitch_scale = 0.3
 
 [node name="PoofSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 15 )
-volume_db = -13.0
-pitch_scale = 2.0
+stream = ExtResource( 16 )
+volume_db = -20.0
+pitch_scale = 1.5
 
 [node name="ReassembleSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
-volume_db = -15.0
+volume_db = -10.0
+pitch_scale = 0.5
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 8 )

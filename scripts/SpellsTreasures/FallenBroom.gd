@@ -189,7 +189,7 @@ func hitStuff(_delta):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door"):
                 area.InteractActivate(false)
-                has_hit_something = true
+                has_hit_something = area.get_parent().has_method("activate")
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             area.PassiveInteractActivate(0, false)

@@ -24,7 +24,6 @@ var smack_time_limit = 10
 
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
 onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
-onready var interactionArea = get_node("InteractionArea") if has_node("InteractionArea") else null
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
@@ -111,15 +110,15 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
-    interactPrompt.visible = interactionArea != null and interactionArea.wasTouchingPlayer and (
-      (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
-      global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
-        global.activeInteractor == textBox and textBox.nextPrompt.visible
-      )
-    )
-    if not interactPrompt.visible:
-      interactPrompt.restart()
+  # if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
+  #   interactPrompt.visible = interactionArea != null and interactionArea.wasTouchingPlayer and (
+  #     (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
+  #     global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
+  #       global.activeInteractor == textBox and textBox.nextPrompt.visible
+  #     )
+  #   )
+  #   if not interactPrompt.visible:
+  #     interactPrompt.restart()
 
   if fallthroughSolid:
     if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):

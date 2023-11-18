@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=5]
 [ext_resource path="res://assets/frogblocks.png" type="Texture" id=6]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Goblin Empath.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/water_normal_4.png" type="Texture" id=9]
 [ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=10]
@@ -15,10 +16,9 @@
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/sounds/error.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/sprites/Tadpole_smaller.png" type="Texture" id=17]
-[ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=18]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=17]
 
-[sub_resource type="ArrayMesh" id=34]
+[sub_resource type="ArrayMesh" id=38]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -38,10 +38,10 @@ albedo_color = Color( 0, 0, 0, 1 )
 [sub_resource type="CubeMesh" id=4]
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=20]
+[sub_resource type="SpatialMaterial" id=35]
 flags_transparent = true
 flags_unshaded = true
-albedo_color = Color( 1, 1, 1, 0.25098 )
+albedo_color = Color( 2, 2, 2, 0.1 )
 albedo_texture = ExtResource( 9 )
 
 [sub_resource type="BoxShape" id=22]
@@ -51,7 +51,7 @@ extents = Vector3( 2, 2, 2 )
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
-[sub_resource type="ShaderMaterial" id=33]
+[sub_resource type="ShaderMaterial" id=37]
 shader = ExtResource( 3 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -61,11 +61,11 @@ shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
+shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 4
-shader_param/resolution_scale = 1
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 4
 shader_param/offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
@@ -77,7 +77,7 @@ shader_param/time_influence = 2.527
 shader_param/y_div = 7.4
 shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 4 )
-shader_param/target_palette = ExtResource( 18 )
+shader_param/target_palette = ExtResource( 7 )
 
 [sub_resource type="BoxShape" id=27]
 resource_local_to_scene = true
@@ -107,7 +107,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.75, 0.75, 0.75 ) ]
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CubeContainer/MeshInstance2:scale")
@@ -119,7 +119,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.75, 0.75, 0.75 ) ]
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
@@ -143,7 +143,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.25098 ) ]
+"values": [ Color( 2, 2, 2, 0.1 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("ExplodeStartSound:playing")
@@ -350,16 +350,16 @@ path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 transform = Transform( 2.82843, 2.82843, 0, -2, 2, 2.82843, 2, -2, 2.82843, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+transform = Transform( 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 extra_cull_margin = 16384.0
-mesh = SubResource( 34 )
+mesh = SubResource( 38 )
 material/0 = SubResource( 17 )
 script = ExtResource( 12 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+transform = Transform( 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 4 )
-material/0 = SubResource( 20 )
+material/0 = SubResource( 35 )
 
 [node name="InteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 script = ExtResource( 5 )
@@ -417,16 +417,13 @@ dont_align_sprite = true
 [node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
 
-[node name="Sprite3D" parent="NPC" index="4"]
+[node name="Sprite3D" parent="NPC" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-material_override = SubResource( 33 )
-texture = ExtResource( 17 )
-hframes = 7
-vframes = 1
-frame = 4
+material_override = SubResource( 37 )
+frame = 0
 max_frames = 1
 
-[node name="FallthroughSolid" parent="NPC" index="6"]
+[node name="FallthroughSolid" parent="NPC" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -23.7 )
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]

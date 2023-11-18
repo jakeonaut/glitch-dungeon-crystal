@@ -312,7 +312,7 @@ func processHiscoreRenderLogic(delta):
     return
   hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
-  congratsHiscoreLabel.text = "   CONGRATS:\nU got a CRYSTAL!!"
+  congratsHiscoreLabel.text = "   CONGRATS:\nend of level CRYSTAL!!"
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
@@ -323,17 +323,17 @@ func processHiscoreRenderLogic(delta):
     if hiscoreDisplayIndex == 0:
       totalHiscoreLabel.visible = true
       crystalCubeHiscoreLabel.visible = true
-      crystalCubeHiscoreLabel.text = "mini crystals: " + str(hiscoreCounter) + "   (* 3) = " + str(hiscoreCounter * 3)
+      crystalCubeHiscoreLabel.text = "gems: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
-        totalHiscoreCounter += 3
+        totalHiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "+ deaths: " + str(hiscoreCounter) + "   (* 1 ) = " + str(hiscoreCounter * 1)
+      deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
@@ -343,11 +343,11 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
-      angelHiscoreLabel.text = "+ angels: " + str(hiscoreCounter) + "   (* 20) = " + str(hiscoreCounter * 20)
+      angelHiscoreLabel.text = "angels: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("angelTadpole")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
-        totalHiscoreCounter += 20
+        totalHiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
         hiscoreCounter = 0
@@ -363,7 +363,7 @@ func processHiscoreRenderLogic(delta):
     elif hiscoreDisplayIndex == 5:
       pressEnterLabel.visible = not pressEnterLabel.visible
       pressEnterLabel.text = "press enter\nto continue"
-    totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
+    # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
     if level.has_node("CubeCrystal"):
       global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
