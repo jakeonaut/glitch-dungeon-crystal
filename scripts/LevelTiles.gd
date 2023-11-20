@@ -28,6 +28,8 @@ var my_tileset_type = global.TilesetType.DUNGEON
 var my_tileset_glitch_type = global.GlitchForm.NORMAL
 
 func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, offset = 0, glitch_type = global.GlitchForm.NORMAL, debug = false):
+  if "Cloud" in newName or "cloud" in newName:
+    return
   if debug:
     print("hey!!!: " + str(cell_index) + ", " + str(num_rand) + ", " + str(glitch_type))
   var rand_int = randi() % num_rand
@@ -168,7 +170,16 @@ func buildSingleRandomTile(cell_index, glitch_type):
       setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation, 0)
     else:
       setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation, 0)
+  elif tile_name == "PinkCloudSemisolid":
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    if top_neighbor_tile_type == -1: # no top neighbor
+      setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation, 0)
+      setRandomTileNameOfType("PinkCloudSemisolidTop", 1, Vector3(cell_index.x, cell_index.y+1, cell_index.z), tile_orientation, 0)
+      
   elif tile_name == "Spikes":
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    if top_neighbor_tile_type == -1: # no top neighbor
+      setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation, 0)
     # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
     # var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
     # if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
@@ -400,6 +411,10 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
     setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
+  elif "PinkCloudSemisolid" in tile_name:
+    setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation)
+  elif "PinkCloudSemisolidTop" in tile_name:
+    setRandomTileNameOfType("PinkCloudSemisolidTop", 1, cell_index, tile_orientation) 
 
 func unrandomizeAllTiles():
   unrandomize_cell_indices = get_used_cells()

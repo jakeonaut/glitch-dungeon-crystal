@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -96,23 +96,6 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=33]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
-
 [sub_resource type="BoxShape" id=54]
 resource_local_to_scene = true
 
@@ -169,23 +152,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 3 ]
-}
-
-[sub_resource type="Animation" id=40]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
 }
 
 [sub_resource type="BoxShape" id=55]
@@ -505,13 +471,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 18.9, 0 )
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 30 )
 anims/doorOpen = SubResource( 31 )
 anims/locked = SubResource( 32 )
-
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door3" index="6"]
-anims/fade = SubResource( 33 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -548,13 +511,10 @@ is_passive = true
 [node name="landing" parent="Viewport/level/Door5" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 1.5, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
 anims/doorClose = SubResource( 37 )
 anims/doorOpen = SubResource( 38 )
 anims/locked = SubResource( 39 )
-
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door5" index="6"]
-anims/fade = SubResource( 40 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00228, 0, 0 )
@@ -605,10 +565,10 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 46 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 frame = 11
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 47 )
 anims/fall = SubResource( 48 )
 anims/flickerOn = SubResource( 49 )
@@ -628,7 +588,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 2.3, 0 )
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 56 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 frame = 66
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]

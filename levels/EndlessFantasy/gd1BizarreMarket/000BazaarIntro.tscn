@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -19,9 +19,15 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=18]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=20]
+[ext_resource path="res://assets/backgrounds/cloud_layer_0.png" type="Texture" id=20]
 [ext_resource path="res://assets/backgrounds/church_layer_0.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=22]
+[ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=23]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/Enemies/Sphinx.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/BubbleSpellObelisk.tscn" type="PackedScene" id=28]
 
 [sub_resource type="ShaderMaterial" id=45]
 shader = ExtResource( 9 )
@@ -33,51 +39,23 @@ shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
+shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
+shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 21 )
+shader_param/texture_albedo = ExtResource( 20 )
 shader_param/base_palette = ExtResource( 1 )
-shader_param/target_palette = ExtResource( 20 )
-
-[sub_resource type="ShaderMaterial" id=46]
-shader = ExtResource( 9 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 21 )
-shader_param/base_palette = ExtResource( 1 )
-shader_param/target_palette = ExtResource( 20 )
+shader_param/target_palette = ExtResource( 23 )
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -544,6 +522,18 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="BoxShape" id=46]
+resource_local_to_scene = true
+extents = Vector3( 0.2, 0.2, 1 )
+
+[sub_resource type="BoxShape" id=47]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=48]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -556,6 +546,8 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
+starting_glitch_type = 2
+tileset_type = 6
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 16 )]
 
@@ -603,7 +595,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65530, 0, 1, 65531, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 1, 65535, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131066, 0, 1, 131068, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196602, 0, 1, 196603, 0, 1, 196604, 0, 1, 196617, 0, 1, 196618, 0, 1, 196619, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262153, 0, 1, 262155, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327689, 0, 1, 327690, 0, 1, 327691, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393213, 0, 1, 393214, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458749, 0, 1, 458750, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524288, 0, 1, 524289, 0, 1, 524290, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589824, 0, 1, 589826, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655360, 0, 1, 655361, 0, 1, 655362, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 1, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 1, 851974, 0, 1, 851975, 0, 1, 851976, 0, 1, 851977, 0, 1, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 851981, 0, 1, 851982, 0, 1, 851983, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917503, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 1, 917509, 0, 1, 917510, 0, 1, 917511, 0, 1, 917512, 0, 1, 917513, 0, 1, 917514, 0, 1, 917515, 0, 1, 917516, 0, 1, 917517, 0, 1, 917518, 0, 1, 917519, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983035, 0, 1, 983036, 0, 1, 983037, 0, 1, 983038, 0, 1, 983039, 0, 1, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 1, 983049, 0, 1, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048575, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -3, 0, 1, -1, 0, 1 )
+"cells": PoolIntArray( 24, 0, 187, 26, 0, 187, 65541, 0, 187, 65560, 0, 187, 65561, 0, 187, 65562, 0, 187, 131069, 0, 187, 131070, 0, 187, 131071, 0, 187, 131085, 0, 187, 196605, 0, 187, 196607, 0, 187, 196617, 0, 187, 196618, 0, 187, 196619, 0, 187, 196628, 0, 187, 196629, 0, 187, 196630, 0, 187, 262141, 0, 187, 262142, 0, 187, 262143, 0, 187, 262147, 0, 187, 262148, 0, 187, 262149, 0, 187, 262150, 0, 187, 262153, 0, 187, 262155, 0, 187, 262164, 0, 187, 262166, 0, 187, 327683, 0, 187, 327686, 0, 187, 327689, 0, 187, 327690, 0, 187, 327691, 0, 187, 327695, 0, 187, 327696, 0, 187, 327700, 0, 187, 327701, 0, 187, 327702, 0, 187, 393219, 0, 187, 393222, 0, 187, 393231, 0, 187, 393232, 0, 187, 458740, 0, 187, 458741, 0, 187, 458742, 0, 187, 458755, 0, 187, 458756, 0, 187, 458757, 0, 187, 458758, 0, 187, 524276, 0, 187, 524278, 0, 187, 524288, 0, 187, 524289, 0, 187, 524290, 0, 187, 524306, 0, 187, 524307, 0, 187, 524308, 0, 187, 524309, 0, 187, 589812, 0, 187, 589813, 0, 187, 589814, 0, 187, 589824, 0, 187, 589826, 0, 187, 589842, 0, 187, 589845, 0, 187, 655355, 0, 187, 655356, 0, 187, 655360, 0, 187, 655361, 0, 187, 655362, 0, 187, 655378, 0, 187, 655381, 0, 187, 720891, 0, 187, 720892, 0, 187, 720903, 0, 187, 720904, 0, 187, 720905, 0, 187, 720914, 0, 187, 720915, 0, 187, 720916, 0, 187, 720917, 0, 187, 786439, 0, 187, 786441, 0, 187, 851970, 0, 187, 851971, 0, 187, 851975, 0, 187, 851976, 0, 187, 851977, 0, 187, 917506, 0, 187, 917507, 0, 187, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 1048566, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1114102, 0, 1, 1114103, 0, 1, 1114104, 0, 1, 1114105, 0, 1, 1114107, 0, 1, 1179639, 0, 1, 1179641, 0, 1, 1179642, 0, 1, 1179643, 0, 1, 1245175, 0, 1, 1245176, 0, 1, 1245177, 0, 1, 1310716, 0, 187, 1310717, 0, 187, 1310718, 0, 187, 1376252, 0, 187, 1376254, 0, 187, 1441788, 0, 187, 1441789, 0, 187, 1441790, 0, 187, 1441792, 0, 187, 1441793, 0, 187, 1441794, 0, 187, 1507328, 0, 187, 1507330, 0, 187, 1572864, 0, 187, 1572865, 0, 187, 1572866, 0, 187, -458755, 0, 187, -458754, 0, 187, -458753, 0, 187, -393219, 0, 187, -393217, 0, 187, -327688, 0, 187, -327687, 0, 187, -327686, 0, 187, -327683, 0, 187, -327682, 0, 187, -327681, 0, 187, -327669, 0, 187, -327668, 0, 187, -262152, 0, 187, -262150, 0, 187, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 187, -262132, 0, 187, -262131, 0, 1, -262129, 0, 1, -262128, 0, 187, -262127, 0, 187, -262126, 0, 187, -196616, 0, 187, -196615, 0, 187, -196614, 0, 187, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 187, -196590, 0, 187, -196589, 0, 187, -196588, 0, 187, -196587, 0, 187, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 187, -131055, 0, 187, -131054, 0, 187, -131053, 0, 187, -131052, 0, 187, -131051, 0, 187, -131050, 0, 187, -131049, 0, 187, -131048, 0, 187, -131047, 0, 187, -65546, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65516, 0, 187, -65515, 0, 187, -65514, 0, 187, -65513, 0, 187, -65512, 0, 187, -65511, 0, 187, -65510, 0, 187, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
 }
 script = ExtResource( 2 )
 __meta__ = {
@@ -625,23 +617,26 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 3.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0.0999999, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 5 )]
 
 [node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
 material_override = SubResource( 45 )
-texture = ExtResource( 21 )
+texture = ExtResource( 20 )
 
 [node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
-material_override = SubResource( 46 )
+material_override = SubResource( 45 )
 texture = ExtResource( 21 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 11, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55558, 4.07075, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2578, 5.0273, 0 )
 grav = 0
 bbText = "•hello child this is a 
 long message to test
@@ -649,23 +644,23 @@ the behavior
 this is what happens when
 the message is too long
 though... cuddlefish"
-is_important = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 material_override = SubResource( 25 )
-frame = 22
+frame = 8
 automatically_change_color = false
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 26 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44442, 0.0707502, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4444, 9.07075, 0 )
 grav = 0
 bbText = "•camera test"
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -690,6 +685,8 @@ shape = SubResource( 26 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4444, 7.07075, 0 )
 grav = 0
 bbText = "•camera test"
+can_camera_zoom = false
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -713,7 +710,7 @@ shape = SubResource( 26 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44442, 12.0708, 0 )
 grav = 0
-bbText = "•camera test"
+tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -735,8 +732,35 @@ anims/stand = SubResource( 44 )
 shape = SubResource( 26 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+
+[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
+visible = false
+
+[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 46 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 47 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 48 )
+
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.130006, 0 )
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.16264, 2.36594, 0 )
+
+[node name="Sphinx" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1, 25.4437, 3.90659, 0 )
+
+[node name="BubbleSpellObelisk" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, 0 )
+
+[node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 11.1837, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 4 )]
 
@@ -770,5 +794,7 @@ __meta__ = {
 [editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]
+[editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
