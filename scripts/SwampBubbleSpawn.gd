@@ -3,7 +3,7 @@ extends Spatial
 # String is a path to a file.
 export(String, FILE) var spawned_object_path
 var spawned_object_res = null
-var has_spawned = false
+export var has_spawned = false
 onready var bubbleSpawner = get_node("BubbleSpawner")
 
 func _ready():

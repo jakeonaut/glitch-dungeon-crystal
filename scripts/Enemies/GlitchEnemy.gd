@@ -117,6 +117,13 @@ func shouldIDoCollisions():
     should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
     should_collide_horizontally = behavior_walking and walk_direction.x != 0
 
+onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer")
+func glitchOut():
+    if not am_i_dying:
+        glitchSecretAniPlayer.play("glitchOut")
+        setGlobalMemoryOfHasBeenDefeated()
+        am_i_dying = true
+
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     

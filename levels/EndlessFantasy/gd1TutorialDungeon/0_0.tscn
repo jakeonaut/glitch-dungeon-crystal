@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=24]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=27]
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -671,6 +672,34 @@ extents = Vector3( 0.5, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="ShaderMaterial" id=68]
+shader = ExtResource( 23 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 25 )
+shader_param/base_palette = ExtResource( 22 )
+shader_param/target_palette = ExtResource( 27 )
+
 [sub_resource type="Animation" id=35]
 resource_name = "default"
 length = 0.1
@@ -1057,11 +1086,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 material_override = SubResource( 46 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="4"]
 anims/default = SubResource( 47 )
 anims/fall = SubResource( 48 )
 anims/flickerOn = SubResource( 49 )
@@ -1073,7 +1102,7 @@ anims/stand = SubResource( 52 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 53 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC6" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC6" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1124,11 +1153,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC7" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC7" index="3"]
 material_override = SubResource( 46 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="4"]
 anims/default = SubResource( 54 )
 anims/fall = SubResource( 55 )
 anims/flickerOn = SubResource( 56 )
@@ -1140,7 +1169,7 @@ anims/stand = SubResource( 59 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 53 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC7" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC7" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1191,11 +1220,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC8" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
 material_override = SubResource( 46 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="4"]
 anims/default = SubResource( 60 )
 anims/fall = SubResource( 61 )
 anims/flickerOn = SubResource( 62 )
@@ -1207,7 +1236,7 @@ anims/stand = SubResource( 65 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 53 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC8" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC8" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1220,7 +1249,7 @@ the chickens."
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 66 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 0
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
@@ -1241,6 +1270,7 @@ bbText = "•welcome to DUNGEON
 you can talk to them!"
 is_important = true
 is_really_important = true
+dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )
@@ -1266,10 +1296,12 @@ volume_db = -10.0
 [node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 20 )
 
-[node name="Sprite3D" parent="Viewport/level/GlitchTileSpawner/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/GlitchTileSpawner/NPC3" index="3"]
+material_override = SubResource( 68 )
 frame = 54
+automatically_change_color = false
 
-[node name="AnimationPlayer" parent="Viewport/level/GlitchTileSpawner/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/GlitchTileSpawner/NPC3" index="4"]
 anims/default = SubResource( 35 )
 anims/fall = SubResource( 36 )
 anims/flickerOn = SubResource( 37 )

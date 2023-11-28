@@ -6,13 +6,7 @@ onready var fungusNPC2 = get_node("../../../../FungusNPC2")
 onready var fungusNPC3 = get_node("../../../../FungusNPC3")
 onready var fungusNPC4 = get_node("../../../../FungusNPC4")
 onready var angelStatue = get_node("../../../../AngelStatue")
-onready var glitchSlime2 = get_node("../../../../GlitchSlime2")
-onready var glitchSlime3 = get_node("../../../../GlitchSlime3")
-onready var glitchEnemy2 = get_node("../../../../GlitchEnemy2")
-onready var glitchEnemy3 = get_node("../../../../GlitchEnemy3")
-onready var glitchEnemy4 = get_node("../../../../GlitchEnemy4")
 onready var smallKey = get_node("../../../../SmallKey")
-# onready var broom = get_node("../../../../Broom")
 export var which_one_am_i = 1
 
 var has_done_my_magick = false

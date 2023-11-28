@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -37,6 +37,10 @@ resource_local_to_scene = true
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=64]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -84,6 +88,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=65]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=32]
 resource_local_to_scene = true
@@ -650,9 +658,6 @@ mesh_library = ExtResource( 4 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -668,9 +673,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_clip_": 0
@@ -724,6 +726,9 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 64 )
+
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9, 0 )
 path = "res://levels/EndlessFantasy/gd1/004LadderHell.tscn"
@@ -731,7 +736,7 @@ path = "res://levels/EndlessFantasy/gd1/004LadderHell.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 29 )
 anims/doorOpen = SubResource( 30 )
 anims/locked = SubResource( 31 )
@@ -742,6 +747,9 @@ shape = SubResource( 17 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 65 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 0.6, 0 )
@@ -766,10 +774,10 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 material_override = SubResource( 47 )
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="4"]
 anims/default = SubResource( 48 )
 anims/flickerOn = SubResource( 49 )
 anims/jump = SubResource( 50 )
@@ -790,10 +798,10 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC7" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC7" index="3"]
 material_override = SubResource( 54 )
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="4"]
 anims/default = SubResource( 55 )
 anims/flickerOn = SubResource( 56 )
 anims/jump = SubResource( 57 )
@@ -814,11 +822,11 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="3"]
 material_override = SubResource( 52 )
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="4"]
 anims/default = SubResource( 37 )
 anims/flickerOn = SubResource( 38 )
 anims/jump = SubResource( 39 )
@@ -838,14 +846,14 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
 
-[node name="SmallerInteractionArea" parent="Viewport/level/NPC2" index="2"]
+[node name="SmallerInteractionArea" parent="Viewport/level/NPC2" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 0, 0 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 53 )
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 21 )
 anims/flickerOn = SubResource( 22 )
 anims/jump = SubResource( 23 )
@@ -892,11 +900,11 @@ step = 1.0
 [node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 20 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 42 )
 frame = 0
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
 anims/default = SubResource( 43 )
 anims/flickerOn = SubResource( 44 )
 anims/jump = SubResource( 45 )
@@ -904,7 +912,7 @@ anims/jump = SubResource( 45 )
 [node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
 shape = SubResource( 46 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC3" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC3" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 4.01877, -1 )
 
 [node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 12 )]
@@ -947,14 +955,14 @@ pitch_scale = 0.9
 volume_db = -15.0
 pitch_scale = 0.3
 
-[node name="Sprite3D" parent="Viewport/level/FungusNPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/FungusNPC" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450687, 0 )
 material_override = SubResource( 59 )
 pixel_size = 0.175
 frame = 72
 should_animate = false
 
-[node name="AnimationPlayer" parent="Viewport/level/FungusNPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/FungusNPC" index="4"]
 anims/default = SubResource( 60 )
 anims/flickerOn = SubResource( 61 )
 anims/jump = SubResource( 62 )
@@ -962,7 +970,7 @@ anims/jump = SubResource( 62 )
 [node name="CollisionShape" parent="Viewport/level/FungusNPC/FallthroughSolid" index="0"]
 shape = SubResource( 63 )
 
-[node name="InteractPrompt" parent="Viewport/level/FungusNPC" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/FungusNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 30 )]

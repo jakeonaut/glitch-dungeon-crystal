@@ -46,6 +46,7 @@ var NES_palette = preload("res://assets/palettes/NES_base_palette.png")
 var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
 onready var doorSound = get_node("DoorSound")
+var DELETE_ME = 2
 
 # GlitchForm variables
 enum GlitchForm {

@@ -30,6 +30,7 @@ onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("Fallthr
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
+var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 
 var pressing_jump = false
 var just_pressed_jump = false 
@@ -77,7 +78,9 @@ func _ready():
         nextTextBoxPathStr += "/"
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
-  if not is_static_in_level or not self.getMyStaticLevelZoneVar(): 
+
+  var my_memory = self.getMyStaticLevelZoneVar()
+  if not is_static_in_level or not my_memory: 
     is_really_important = true
   textBoxContainer.setVars()
 
@@ -89,15 +92,18 @@ func _ready():
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
 
-  if is_static_in_level and self.getMyStaticLevelZoneVar():
-    can_camera_zoom = false
-    textBox.can_camera_zoom = false
-    if not visible and can_activate:
-      visible = true
-      can_activate = false
-    textBox.has_been_shown = true
-    if textBox.has_been_shown: 
-      textBox.is_important = false
+  if is_static_in_level and my_memory:
+    if typeof(my_memory) == TYPE_INT and my_memory == global.DELETE_ME:
+      queue_free()
+    else:
+      can_camera_zoom = false
+      textBox.can_camera_zoom = false
+      if not visible and can_activate:
+        visible = true
+        can_activate = false
+      textBox.has_been_shown = true
+      if textBox.has_been_shown: 
+        textBox.is_important = false
 
 func _process(delta):
   # super._process(delta) implicit
@@ -171,6 +177,15 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
 
 func isActive():
   return is_active and not floating_text and (visible or can_be_activated_invisibly)
+
+func glitchOut():
+  is_active = false
+  var glitchEnemy = glitchEnemyRes.instance()
+  level.add_child(glitchEnemy)
+  glitchEnemy.global_transform.origin = self.global_transform.origin
+  global.setStaticLevelZoneLevelVar(level, self.name, global.DELETE_ME)
+  glitchEnemy.glitchOut()
+  queue_free()
 
 func activate(is_player):
   if not is_player:

@@ -232,12 +232,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.0999997, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1DebugTown/ToxicJungleEntrance.tscn"
 dont_recolor_me = true
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 material_override = SubResource( 58 )
-frame = 29
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )

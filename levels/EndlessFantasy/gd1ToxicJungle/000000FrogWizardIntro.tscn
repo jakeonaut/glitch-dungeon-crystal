@@ -639,10 +639,10 @@ step = 1.0
 [node name="AbortSound" parent="Viewport/level/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
 anims/default = SubResource( 16 )
 anims/fall = SubResource( 17 )
 anims/flickerOn = SubResource( 18 )
@@ -696,10 +696,10 @@ step = 1.0
 [node name="AbortSound" parent="Viewport/level/NPC4/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="4"]
 anims/default = SubResource( 41 )
 anims/fall = SubResource( 42 )
 anims/flickerOn = SubResource( 43 )
@@ -801,12 +801,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 33 )
 frame = 0
 automatically_change_color = false
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 26 )
 anims/fall = SubResource( 27 )
 anims/flickerOn = SubResource( 28 )
