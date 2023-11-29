@@ -239,7 +239,7 @@ func tryToRespawn():
   self.overrideLevelRespawnEvent()
 
 
-func setDoorsSpriteFrame(frame):
+func setDoorsSpriteFrame(_frame):
   pass
   # var doors = get_tree().get_nodes_in_group("doors")
   # for door in doors:

@@ -267,7 +267,7 @@ func startDoorUnlock():
   getPlayer().playBounce("land")
 
 func actuallyUnlockAndEnterDoor():
-  level.displayMessageText("unlocked!")
+  # level.displayMessageText("unlocked!")
   animationPlayer.clear_queue()
   animationPlayer.stop()
   doorOpenSound.play()

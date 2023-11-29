@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=1]
+[ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=2]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
@@ -213,6 +214,30 @@ handlePlayerInteraction = false
 shape = SubResource( 14 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
+
+[node name="TextBox" parent="NPC TextBox" index="0"]
+margin_bottom = 470.0
+
+[node name="ColorRect" parent="NPC TextBox/TextBox" index="0"]
+margin_bottom = 135.0
+
+[node name="ColorRect2" parent="NPC TextBox/TextBox/ColorRect" index="0"]
+margin_bottom = 126.0
+
+[node name="ColorRect3" parent="NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
+margin_bottom = 127.0
+
+[node name="Text" parent="NPC TextBox/TextBox" index="3"]
+margin_top = 11.0
+margin_bottom = 112.0
+rect_clip_content = true
+theme = ExtResource( 2 )
+
+[node name="NextPrompt" parent="NPC TextBox/TextBox" index="4"]
+position = Vector2( 439.5, 109.5 )
+
+[node name="EndPrompt" parent="NPC TextBox/TextBox" index="5"]
+position = Vector2( 439.5, 111.5 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
 stream = ExtResource( 10 )

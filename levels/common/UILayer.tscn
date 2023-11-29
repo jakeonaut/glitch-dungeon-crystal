@@ -1950,7 +1950,7 @@ margin_right = 394.0
 margin_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 11 )
+theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "the dungeon"
@@ -1962,7 +1962,7 @@ visible = false
 margin_left = 11.0
 margin_top = 463.0
 margin_right = 276.0
-margin_bottom = 499.0
+margin_bottom = 503.0
 theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
@@ -1974,15 +1974,15 @@ __meta__ = {
 
 [node name="MessageTextLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 501.0
+margin_left = 510.0
 margin_top = 75.0
-margin_right = 636.0
+margin_right = 632.0
 margin_bottom = 153.0
 theme = ExtResource( 5 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[wave] got a key![/wave]"
-text = " got a key!"
+bbcode_text = "[wave] got key![/wave]"
+text = " got key!"
 
 [node name="SpellMessageTextLabel" type="RichTextLabel" parent="."]
 visible = false

@@ -49,6 +49,8 @@ func _process(delta):
         global_transform.origin = moveToward2D(pos, playerPos, delta * 22)
         if compare2D(global_transform.origin, playerPos):
             abortSound.activateScript()
+            if returning and global.activeInteractor and global.activeInteractor.is_important:
+                global.pauseGame = true
         return
 
     if vv > 0 and not projectile:
@@ -76,6 +78,8 @@ func _process(delta):
             get_node("SecretAnimationPlayer").play("isStaticInLevel")
             projectile = false
             was_projectile = true
+    if global.activeInteractor and global.activeInteractor.is_important:
+        returning = true
     tryDieIfTooFarFromPlayer()
     tryDieToOffscreenCamera()
     if not is_static_in_level and was_projectile:

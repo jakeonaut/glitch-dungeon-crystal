@@ -7,8 +7,6 @@ onready var nextDialogSound = get_node("NextDialogSound")
 onready var abortSound = get_node("AbortSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
 
-var tinyTextTheme = preload("res://appleKidDialogFontTheme2.tres")
-
 var text_timer = 0
 var text_time_limit = 0.5
 var text_final = ''
@@ -79,12 +77,6 @@ func tinify():
   get_node("ColorRect").visible = false
   is_tiny = true
   hide_textbox_time_limit = 5
-  # get_node("Text").theme.default_font.set_size(32)
-  # textNode.set_theme(tinyTextTheme)
-  # var large_font = textNode.theme.default_font.duplicate()
-  # large_font.resource_local_to_scene = true
-  # large_font.set_size(20)
-  # textNode.add_font_override("normal_font", large_font)
   if floating_text:
     showTextbox()
 
@@ -103,7 +95,7 @@ func setTextBoxPosition():
   if not is_tiny:
     if getGameCamera().isNearBottom() and (getGameCamera().isInitialTargetNearBottom() or can_camera_zoom):
       self.margin_top = 60
-      self.margin_bottom = 201
+      self.margin_bottom = self.margin_top + (bot_margin_start - top_margin_start)
     else:
       self.margin_top = top_margin_start
       self.margin_bottom = bot_margin_start
@@ -159,7 +151,7 @@ func _process(delta):
         pass
       elif stripped_text[textNode.visible_characters - 1] == ",":
         time_limit *= 10
-      elif  stripped_text[textNode.visible_characters - 1] == ".":
+      elif stripped_text[textNode.visible_characters - 1] == ".":
         time_limit *= 20
 
       if text_timer >= time_limit and textNode.visible_characters < len(stripped_text):
@@ -197,7 +189,10 @@ func appendNextTextCharacter(play_sound = true):
         currently_scrolled_line += 1
       elif stripped_text[tindex] == "\n":
         num_newlines += 1
+        print(num_newlines)
         if num_newlines < 3 and now_were_scrolling:
+          print("scroll")
+          print(currently_scrolled_line + 1)
           textNode.scroll_to_line(currently_scrolled_line + 1)
           currently_scrolled_line += 1
       else:

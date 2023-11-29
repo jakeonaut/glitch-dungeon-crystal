@@ -34,7 +34,7 @@ func fallthroughCollisionActivate(possible_game_mover):
         if possible_game_mover != null and possible_game_mover.has_method("magicJump"):
             possible_game_mover.magicJump()
 
-func wiggle(possible_game_mover):
+func wiggle(_possible_game_mover):
     should_wiggle = true
     wiggle_timer = 0
     # var how_many = randi() % 1 + 1
@@ -68,7 +68,7 @@ func _process(delta):
             if should_grow:
                 getPlayer().global_transform.origin.y = mySprite.global_transform.origin.y + 1
                 getPlayer().magicJump()
-            var how_many = randi() % 2 + 2
+            var _how_many = randi() % 2 + 2
 
 
 func spawnASpore():

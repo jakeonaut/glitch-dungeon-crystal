@@ -296,9 +296,9 @@ shape = SubResource( 16 )
 shape = SubResource( 53 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 3.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 3.27616, 0 )
 grav = 0
-bbText = "•[color=#00ff00]Feather Fall[/color]:
+bbText = "[color=#00ff00]Feather Fall[/color]:
 jump high by
 holding Z button"
 can_camera_zoom = false

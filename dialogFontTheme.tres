@@ -1,6 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=3 format=2]
 
-[ext_resource path="res://font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 1
+font_data = ExtResource( 1 )
 
 [resource]
-default_font = ExtResource( 1 )
+default_font = SubResource( 1 )
