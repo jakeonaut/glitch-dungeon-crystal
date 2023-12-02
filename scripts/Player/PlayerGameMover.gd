@@ -14,6 +14,7 @@ var pauseInput = false
 var has_played_fall_sound = false
 
 var has_sweeped_glitch = false
+var has_sweeped_cloud = false
 
 var new_carcass = null
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")

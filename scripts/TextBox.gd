@@ -247,6 +247,17 @@ func showTextbox():
   if is_important and not floating_text:
     getPlayer().unsmack()
     global.pauseGame = true
+    var npcOrigin = textboxParent.get_ref().global_transform.origin
+    var playerOrigin = Vector3(npcOrigin.x, npcOrigin.y, 0)
+    if getPlayer().global_transform.origin.x >= npcOrigin.x:
+      playerOrigin.x += 3
+      getPlayer().mySprite.flip_h = true
+    else:
+      playerOrigin.x -= 3
+      getPlayer().mySprite.flip_h = false
+    getPlayer().global_transform.origin = playerOrigin
+    getPlayer().on_ground = true
+    getPlayer().landed()
     # maybe treat this like the Item Catch?
   # if tiny: tinyColorRect.visible = true
   text_timer = 99999

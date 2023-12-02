@@ -130,7 +130,8 @@ func trySweepUpGlitchTiles(collisionShape):
         getLevelTiles().infectSpikes(coords)
         # TODO(jaketrower): also reset the levelTiles array position?
       if getLevelTiles().isTileGlitchSpikes(tile_type):
-        my_broom_owner.getSmacked()
+        my_broom_owner.swordClank()
+        queue_free()
 
 func isActive():
   return visible

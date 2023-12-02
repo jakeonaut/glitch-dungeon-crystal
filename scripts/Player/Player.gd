@@ -107,15 +107,16 @@ func actuallyApplySpellbookGlitch():
   applyObeliskGlitch(glitch_type, false)
   global.memory["spellbookPage"] = new_spellbook
     
-func applySpellbookGlitch(_spellCastPauseIndex):
+func applySpellbookGlitch():
   if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
     return
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("broomSmackGlitch")
+  actuallyApplySpellbookGlitch()
+  # aniPlayer.stop()
+  # aniPlayer.clear_queue()
+  # aniPlayer.play("broomSmackGlitch")
   # see actuallyApplySpellbookGlitch(), which is applied by this animation ^^
   # pauseInput = true
-  pauseAnimation = true
+  # pauseAnimation = true
 
 func restoreGlitchAndMP():
   if global.memory["mp"] <= 0:
@@ -331,63 +332,14 @@ var spellCastPauseTimeLimit = 0
 var num_spell_casts_used = 0
 var spellCastCounterResetTimer = 0
 var spellCastCounterResetTimeLimit = 30
-func processCastingLogic(delta):
-  spellbookGlitchSprite.visible = pausingFromSpellCasting
-  if pausingFromSpellCasting:
-    # TODO(allow pressing arrow keys to select spellbookIndex)
-    if Input.is_action_just_pressed("ui_left"):
-      spellCastPauseIndex -= 1
-      if spellCastPauseIndex < 0: spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
-    elif Input.is_action_just_pressed("ui_right"):
-      spellCastPauseIndex += 1
-      if spellCastPauseIndex >= global.memory["spellbookPage"].size(): spellCastPauseIndex = 0
-
-    var glitch = global.memory["spellbookPage"][spellCastPauseIndex]
-    # TODO(jaketrower): dedupe (1) with UILayer.gd
-    if glitch == global.GlitchForm.FLOOR: spellbookGlitchSprite.frame = 0
-    elif glitch == global.GlitchForm.FEATHER: spellbookGlitchSprite.frame = 14
-    elif glitch == global.GlitchForm.LADDER: spellbookGlitchSprite.frame = 25
-    elif glitch == global.GlitchForm.INVISIBLE: spellbookGlitchSprite.frame = 21
-    elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: spellbookGlitchSprite.frame = 32
-
-    if Input.is_action_just_released("alt_action_button"):
-      global.pauseGame = false
-      pausingFromSpellCasting = false
-      applySpellbookGlitch(spellCastPauseIndex)
-      if not on_ground: num_spell_casts_used += 1
-  elif global.pauseGame or global.pauseMoveInput:
-    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
-      global.activeInteractor.interact()
-    return
-
-  if (not pauseAnimation or aniPlayer.assigned_animation == "broomSmackGlitch") and \
-     Input.is_action_just_pressed("alt_action_button") and global.memory.has("spellbookPage"):
-    if not global.memory["broom"] or global.memory["spellbookPage"].size() <= 1:
+func processCastingLogic(_delta):
+  if Input.is_action_just_pressed("alt_action_button") and global.memory.has("spellbookPage"):
+    if global.memory["spellbookPage"].size() <= 1:
       noSpellSound.pitch_scale = 1.2
       noSpellSound.play()
-    elif num_spell_casts_used < 3:
-      tryPauseFromSpellCasting = true
-      spellCastPauseIndex = 0 # global.memory["spellbookPage"].size() - 1
-      spellCastCounterResetTimer = 0
-  elif tryPauseFromSpellCasting:
-    if Input.is_action_pressed("alt_action_button") and not global.activeInteractor:
-      spellCastPauseTimer += (delta*22)
-      if spellCastPauseTimer >= spellCastPauseTimeLimit:
-        pausingFromSpellCasting = true
-        global.pauseGame = true
-        tryPauseFromSpellCasting = false
-        spellCastPauseTimer = 0
     else:
-      applySpellbookGlitch(spellCastPauseIndex)
-      tryPauseFromSpellCasting = false
-      spellCastPauseTimer = 0
-      spellCastPauseIndex = 0
-
-  if num_spell_casts_used > 0:
-    spellCastCounterResetTimer += (delta*22)
-    if spellCastCounterResetTimer >= spellCastCounterResetTimeLimit:
-      num_spell_casts_used = 0
-      spellCastCounterResetTimer = 0
+      applySpellbookGlitch()
+      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
@@ -1107,6 +1059,9 @@ func hitStuff(_delta):
       if isTileSpikes(tile_type) and not getLevelTiles().isTileGlitchSpikes(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
-        # TODO(jaketrower): also reset the levelTiles array position?
-      if getLevelTiles().isTileGlitchSpikes(tile_type):
-        my_broom_owner.getSmacked()
+
+func swordClank():
+  if summonedBroom:
+    broomStop()
+  getSmacked()
+  broomSound.play()

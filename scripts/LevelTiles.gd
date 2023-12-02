@@ -191,10 +191,11 @@ func buildSingleRandomTile(cell_index, glitch_type):
     # else:
     #   setRandomTileNameOfType("Spikes", 2, cell_index, tile_orientation, 1)
   elif tile_name == "GlitchSpikes":
+    pass
     # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
     # var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
     # if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
-    setRandomTileNameOfType("GlitchSpikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
+    # setRandomTileNameOfType("GlitchSpikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
     # elif left_neighbor_tile_type == -1: # no left neighbor
     #   pass 
     # elif right_neighbor_tile_type == -1: # no right neighbor
@@ -366,6 +367,12 @@ func isTileGlitchSpikes(tile_type):
     return false
   var tile_name = mesh_library.get_item_name(tile_type)
   return "GlitchSpikes" in tile_name
+
+func isTileCloud(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "PinkCloud" in tile_name
   
 
 func infectSpikes(coords):
@@ -458,6 +465,8 @@ func changeColorPalette(palette, _palette_alt = null):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
+    if tile_name == "GlitchSpikes":
+      continue
     var material = mesh.surface_get_material(0)
     var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)
     if material != null and material is SpatialMaterial:

@@ -167,7 +167,7 @@ func getSmacked(_broom_origin):
   is_smacked = true
   did_i_get_smacked = true
 
-  if global.activeInteractor == null and not textBox.text_final == "":
+  if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):

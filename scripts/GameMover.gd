@@ -960,7 +960,7 @@ func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
   var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return "Spikes" in tile_name and not "GlitchSpikes" in tile_name
+  return "Spikes" in tile_name
   
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
   var z = 0 # global_transform.origin.z

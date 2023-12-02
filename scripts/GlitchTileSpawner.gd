@@ -24,7 +24,7 @@ func spawn(with_flare = true):
 func amITouchingGlitchTile(currLevelTiles):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
-  var z = global_transform.origin.z
+  var z = 0
   
   var coords = currLevelTiles.world_to_map(Vector3(x, y, z))
   var tile_type = currLevelTiles.get_cell_item(coords.x, coords.y, coords.z)
