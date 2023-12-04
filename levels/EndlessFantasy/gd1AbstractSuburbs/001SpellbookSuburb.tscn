@@ -147,7 +147,7 @@ shader_param/target_palette = ExtResource( 27 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-tileset_type = 1
+tileset_type = 7
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
 

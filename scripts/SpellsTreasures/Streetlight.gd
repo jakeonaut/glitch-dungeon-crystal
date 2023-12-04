@@ -48,15 +48,6 @@ func passiveActivate(_delta, _is_player):
   elif grav_direction < 0 and level.player.grav < 0:
     return
 
+  global.memory["grav_direction"] = grav_direction
   collectSound.play()
-  level.player.grav *= -1
-  # level.player.mySprite.flip_v = not level.player.mySprite.flip_v
-  # level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
-  level.player.spriteContainer.rotation_degrees.x += 180
-  level.player.spriteContainer.rotation_degrees.x = fmod(level.player.spriteContainer.rotation_degrees.x, 360)
-  if level.player.grav < 0:
-    level.player.spriteYAlignment -= 0.5
-    level.player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
-  else:
-    level.player.spriteYAlignment += 0.5
-    level.player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1
+  level.flipGravity()

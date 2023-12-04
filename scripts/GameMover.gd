@@ -53,7 +53,7 @@ var half_on_ground = false
 var should_teeter_turn_around = false
 var jumped_from_true_ground = false
 var was_just_on_ground_timer = 0
-var was_just_on_ground_time_limit = 6
+var was_just_on_ground_time_limit = 12
 var just_landed = false
 var spawn_origin
 var last_grounded_pos = Vector3(0, 0, 0)

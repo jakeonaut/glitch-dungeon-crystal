@@ -139,7 +139,7 @@ func passiveActivate(_delta, is_player):
         return
     if not didja_get_me:
         bubbleStartPop()
-        if is_player: 
+        if is_player:
             getPlayer().getMushroomInfected()
 
 func bubbleStartPop():

@@ -34,6 +34,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var fallthroughSolid = get_node("FallthroughSolid")
 var is_on_main_menu = false
 
+export var is_immediate = false
+
 var gameCamera = null
 func getGameCamera():
   if level == null:
@@ -347,6 +349,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     transition.really_long_fade_to(self.path)
   else:
     transition.long_fade_to(self.path)
+  if is_immediate or is_passive:
+    transition.change_scene()
 
 func isLandingOutsideOfCameraBounds():
   var DEATH_MARGIN = 0

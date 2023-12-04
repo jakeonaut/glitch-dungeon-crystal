@@ -110,6 +110,8 @@ func _ready_impl():
   transition.reverse_fade()
   if player_message != "???":
     player.sayThis(player_message)
+  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+    flipGravity()
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -373,3 +375,16 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false):
         new_material.set_shader_param("enable_glitch", "true")
         new_material.set_shader_param("target_palette", global.weird_base_palette)
         newSmokeCloud.set_material_override(new_material.duplicate())
+
+func flipGravity():
+  player.grav *= -1
+  # level.player.mySprite.flip_v = not level.player.mySprite.flip_v
+  # level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
+  player.spriteContainer.rotation_degrees.x += 180
+  player.spriteContainer.rotation_degrees.x = fmod(player.spriteContainer.rotation_degrees.x, 360)
+  if player.grav < 0:
+    player.spriteYAlignment -= 0.5
+    player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
+  else:
+    player.spriteYAlignment += 0.5
+    player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1

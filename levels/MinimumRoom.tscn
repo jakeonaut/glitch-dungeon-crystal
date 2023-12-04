@@ -28,7 +28,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
-tileset_type = 1
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 

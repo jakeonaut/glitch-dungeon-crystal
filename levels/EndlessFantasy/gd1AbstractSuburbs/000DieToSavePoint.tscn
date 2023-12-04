@@ -1,6 +1,5 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=41 format=2]
 
-[ext_resource path="res://assets/palettes/japanese-woodblock-rearranged.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=4]
@@ -20,41 +19,12 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=20]
-[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=23]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=25]
-[ext_resource path="res://assets/backgrounds/interior_layer_0.png" type="Texture" id=26]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=27]
-
-[sub_resource type="ShaderMaterial" id=34]
-shader = ExtResource( 8 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 26 )
-shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 1 )
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Streetlight.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=26]
 resource_local_to_scene = true
@@ -191,7 +161,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 27 )
-tileset_type = 1
+tileset_type = 7
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 18 )]
 
@@ -203,15 +173,6 @@ margin_bottom = 40.0
 margin_right = 1728.0
 margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
-material_override = SubResource( 34 )
-texture = ExtResource( 26 )
-
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
-material_override = SubResource( 34 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -248,7 +209,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 1, 0, 1, 2, 0, 1, 3, 0, 1, 5, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131075, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196603, 0, 1, 196604, 0, 1, 196605, 0, 1, 196611, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262139, 0, 1, 262141, 0, 1, 262147, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327673, 0, 1, 327675, 0, 1, 327676, 0, 1, 327677, 0, 1, 327683, 0, 1, 327684, 0, 1, 327693, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1, 393209, 0, 1, 393220, 0, 1, 393229, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458755, 0, 1, 458756, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 28, 524289, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 524293, 0, 1, 524294, 0, 1, 524295, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589818, 0, 1, 589819, 0, 1, 589825, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655355, 0, 1, 655356, 0, 1, 655361, 0, 1, 655362, 0, 1, 655363, 0, 1, 655364, 0, 1, 655366, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720893, 0, 1, 720900, 0, 1, 720901, 0, 1, 720902, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786432, 0, 1, 786433, 0, 1, 786434, 0, 1, 786436, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 1, 851970, 0, 1, 851982, 0, 1, 851983, 0, 1, 917494, 0, 1, 917495, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917518, 0, 1, 917519, 0, 1, 983030, 0, 1, 983031, 0, 1, 983039, 0, 28, 983040, 0, 1, 983054, 0, 1, 983055, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048574, 0, 1, 1048575, 0, 1, 1048576, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1114102, 0, 1, 1114103, 0, 1, 1114110, 0, 1, 1114112, 0, 1, 1114125, 0, 1, 1114126, 0, 1, 1114127, 0, 1, 1179638, 0, 1, 1179639, 0, 1, 1179646, 0, 1, 1179647, 0, 1, 1179661, 0, 1, 1179662, 0, 1, 1179663, 0, 1, 1245174, 0, 1, 1245175, 0, 1, 1245197, 0, 1, 1245198, 0, 1, 1245199, 0, 1, 1310710, 0, 1, 1310711, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65535, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65524, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, 393218, 65535, 1 )
+"cells": PoolIntArray( 1, 0, 1, 2, 0, 1, 3, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131075, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196603, 0, 1, 196604, 0, 1, 196605, 0, 1, 196611, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262139, 0, 1, 262141, 0, 1, 262147, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327673, 0, 1, 327675, 0, 1, 327676, 0, 1, 327677, 0, 1, 327683, 0, 1, 327684, 0, 1, 327692, 0, 1, 327693, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1, 393209, 0, 1, 393220, 0, 1, 393228, 0, 1, 393229, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458755, 0, 1, 458756, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 28, 524289, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 524293, 0, 1, 524294, 0, 1, 524295, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589818, 0, 1, 589819, 0, 1, 589825, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655355, 0, 1, 655356, 0, 1, 655361, 0, 1, 655362, 0, 1, 655363, 0, 1, 655364, 0, 1, 655366, 0, 1, 655375, 0, 1, 720886, 0, 1, 720887, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720893, 0, 1, 720900, 0, 1, 720901, 0, 1, 720902, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786432, 0, 1, 786433, 0, 1, 786434, 0, 1, 786436, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 1, 851970, 0, 1, 851982, 0, 1, 851983, 0, 1, 917494, 0, 1, 917495, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917518, 0, 1, 917519, 0, 1, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983039, 0, 28, 983040, 0, 1, 983054, 0, 1, 983055, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048574, 0, 1, 1048575, 0, 1, 1048576, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1114102, 0, 1, 1114103, 0, 1, 1114110, 0, 1, 1114112, 0, 1, 1114125, 0, 1, 1114126, 0, 1, 1114127, 0, 1, 1179638, 0, 1, 1179639, 0, 1, 1179646, 0, 1, 1179647, 0, 1, 1179661, 0, 1, 1179662, 0, 1, 1179663, 0, 1, 1245174, 0, 1, 1245175, 0, 1, 1245197, 0, 37, 1245198, 0, 37, 1245199, 0, 37, 1310710, 0, 37, 1310711, 0, 37, 1310712, 0, 37, 1310720, 0, 37, 1310721, 0, 37, 1310722, 0, 37, 1310723, 0, 37, 1310724, 0, 37, 1310725, 0, 37, 1310726, 0, 37, 1310732, 0, 37, 1310733, 0, 37, 1310735, 0, 37, 1376246, 0, 37, 1376248, 0, 37, 1376249, 0, 37, 1376250, 0, 37, 1376251, 0, 37, 1376252, 0, 37, 1376253, 0, 37, 1376254, 0, 37, 1376255, 0, 37, 1376256, 0, 37, 1376257, 0, 37, 1376258, 0, 37, 1376259, 0, 37, 1376260, 0, 37, 1376261, 0, 37, 1376262, 0, 37, 1376268, 0, 37, 1376269, 0, 37, 1376270, 0, 37, 1376271, 0, 37, 1441782, 0, 37, 1441783, 0, 37, 1441784, 0, 37, 1441785, 0, 37, 1441786, 0, 37, 1441787, 0, 37, 1441788, 0, 37, 1441789, 0, 37, 1441790, 0, 37, 1441791, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65535, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65524, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, 393218, 65535, 1 )
 }
 script = ExtResource( 6 )
 __meta__ = {
@@ -298,13 +259,13 @@ shape = SubResource( 27 )
 shape = SubResource( 28 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, -6.9, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.47274, 22.1, 0 )
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/003GravityFall1.tscn"
 is_passive = true
 is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 7.2, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0 )
@@ -371,15 +332,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 16
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 16 )
 anims/flickerOn = SubResource( 17 )
 anims/jump = SubResource( 18 )
 
-[node name="FallthroughSolid" parent="Viewport/level/NPC" index="6"]
+[node name="FallthroughSolid" parent="Viewport/level/NPC" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
@@ -397,6 +358,13 @@ shape = SubResource( 33 )
 
 [node name="landing" parent="Viewport/level/KizzyCat" index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2, 0 )
+
+[node name="Streetlight" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 18.3148, 0 )
+
+[node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 13, 2.58233, 0 )
+grav_direction = -1
 
 [node name="Viewport2" parent="." instance=ExtResource( 24 )]
 
@@ -422,7 +390,6 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 14 )]
 
-[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
