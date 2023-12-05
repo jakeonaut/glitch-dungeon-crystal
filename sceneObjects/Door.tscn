@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/Yokai.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=14]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=15]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=16]
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=18]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=20]
@@ -237,6 +238,10 @@ pitch_scale = 2.0
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 0.7
+
+[node name="SillySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -20.0
 
 [node name="NPC" type="Spatial" parent="." groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1 )

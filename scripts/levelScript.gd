@@ -330,7 +330,7 @@ func trySpawnFollowers():
 
   var numKeys = global.getLevelZoneThing("key")
   if numKeys != null:
-    for _i in range(numKeys):
+    for i in range(numKeys):
       spawnKeyFollower(
         player.global_transform.origin + Vector3(
           stepify(rand_range(-1.0, 1.0), 0.125),
@@ -351,10 +351,26 @@ func spawnKeyFollower(starting_position):
   var keyFollower = keyFollowerRes.instance()
   self.add_child(keyFollower)
   keyFollower.global_transform.origin = starting_position
+  # this is dumb but whatever
+  if not trySpawnSpecialKey(keyFollower, global.KeyItem.FISH):
+    if not trySpawnSpecialKey(keyFollower, global.KeyItem.PYRAMID):
+      if not trySpawnSpecialKey(keyFollower, global.KeyItem.SHROOM):
+        trySpawnSpecialKey(keyFollower, global.KeyItem.CAT)
 
   var target = followers[-1] if followers.size() > 0 else player
   keyFollower.gameMoverTarget = weakref(target)
   followers.push_back(keyFollower)
+
+var key_items_spawned = {}
+func trySpawnSpecialKey(keyFollower, keyType):
+  if not global.memory.has("key_items") or not global.memory["key_items"].has(keyType):
+    return false
+  if key_items_spawned.has(keyType):
+    return false
+  if global.memory["key_items"][keyType] == global.ItemState.GOT_IT:
+    keyFollower.makeMeSpecial(keyType)
+    key_items_spawned[keyType] = true
+    return true
 
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")

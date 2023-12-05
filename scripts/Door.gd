@@ -20,6 +20,7 @@ onready var doorCloseSound = get_node("DoorCloseSound")
 onready var doorOpenSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
 onready var keySound = get_node("KeySound")
+onready var sillySound = get_node("SillySound")
 
 var canPlayDoorSound = true
 
@@ -35,6 +36,7 @@ onready var fallthroughSolid = get_node("FallthroughSolid")
 var is_on_main_menu = false
 
 export var is_immediate = false
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
 
 var gameCamera = null
 func getGameCamera():
@@ -83,18 +85,25 @@ func _ready():
     animationPlayer.play("doorOpen")
 
   if is_locked or should_lock:
-    var num_keys = global.getLevelZoneThing("key")
-    if num_keys == null or num_keys == 0:
-      if num_keys_unlock == 1:
-        npc.textBoxContainer.bbText = "•locked,\nneeds a key"
+    if key_type == global.KeyItem.NORMAL:
+      var num_keys = global.getLevelZoneThing("key")
+      if num_keys == null or num_keys == 0:
+        if num_keys_unlock == 1:
+          npc.textBoxContainer.bbText = "•locked,\nneeds a key"
+        else:
+          npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
+      elif num_keys != null and num_keys < num_keys_unlock:
+        prev_keys = num_keys
+        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
       else:
-        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
-    elif num_keys != null and num_keys < num_keys_unlock:
-      prev_keys = num_keys
-      npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
+        prev_keys = num_keys
+        npc.textBoxContainer.bbText = "•press UP to unlock"
     else:
-      prev_keys = num_keys
-      npc.textBoxContainer.bbText = "•press UP to unlock"
+      var key_name = "FISH KEY"
+      if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
+      elif key_type == global.KeyItem.SHROOM: key_name = "SHROOM KEY"
+      elif key_type == global.KeyItem.CAT: key_name = "CAT KEY"
+      npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
   else:
@@ -125,19 +134,22 @@ func _process(delta):
   if is_passive:
     spawnParticles(delta)
 
-  var num_keys = global.getLevelZoneThing("key")
-  if prev_keys != num_keys and is_locked:
-    prev_keys = num_keys
-    if num_keys == null or num_keys == 0:
-      if num_keys_unlock == 1:
-        npc.textBoxContainer.bbText = "•locked,\nneeds a key"
+  if key_type == global.KeyItem.NORMAL:
+    var num_keys = global.getLevelZoneThing("key")
+    if prev_keys != num_keys and is_locked:
+      prev_keys = num_keys
+      if num_keys == null or num_keys == 0:
+        if num_keys_unlock == 1:
+          npc.textBoxContainer.bbText = "•locked,\nneeds a key"
+        else:
+          npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
+      elif num_keys != null and num_keys < num_keys_unlock:
+        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
       else:
-        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
-    elif num_keys != null and num_keys < num_keys_unlock:
-      npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
-    else:
-      npc.textBoxContainer.bbText = "•press UP to unlock"
-    npc.textBoxContainer.setVars()
+        npc.textBoxContainer.bbText = "•press UP to unlock"
+      npc.textBoxContainer.setVars()
+  else:
+    pass
 
   if is_unlocking and not keySound.playing:
     if unlocking_key_array.size() == 0:
@@ -233,12 +245,20 @@ func activate(is_player):
     if not is_locked and not should_lock and global.activeInteractor == null:
       goThroughDoor()
     elif is_locked:
-      var num_keys = global.getLevelZoneThing("key")
-      if num_keys != null and num_keys >= num_keys_unlock:
-        startDoorUnlock()
-      elif not lockedSound.is_playing():
-        lockedSound.play()
-        npc.activate(is_player)
+      if key_type == global.KeyItem.NORMAL:
+        var num_keys = global.getLevelZoneThing("key")
+        if num_keys != null and num_keys >= num_keys_unlock:
+          startDoorUnlock()
+        elif not lockedSound.is_playing():
+          lockedSound.play()
+          npc.activate(is_player)
+      else:
+        var has_special_key = global.memory.has("key_items") and global.memory["key_items"].has(key_type) and global.memory["key_items"][key_type] == global.ItemState.GOT_IT
+        if has_special_key:
+          startDoorUnlock()
+        elif not lockedSound.is_playing():
+          lockedSound.play()
+          npc.activate(is_player)
 
 var is_unlocking = false
 var unlocking_key_array = []
@@ -247,13 +267,17 @@ func startDoorUnlock():
   global.pauseMoveInput = true
 
   unlocking_key_array = []
+  if key_type != global.KeyItem.NORMAL:
+    num_keys_unlock = 1
+
   for i in range(level.followers.size() - 1, -1, -1):
     var follower = level.followers[i]
     if follower.is_in_group("keys"):
-      follower.popFromFollowers()
-      unlocking_key_array.push_back(follower)
-      if unlocking_key_array.size() >= num_keys_unlock:
-        break
+      if key_type == global.KeyItem.NORMAL or follower.key_type == self.key_type:
+        follower.popFromFollowers()
+        unlocking_key_array.push_back(follower)
+        if unlocking_key_array.size() >= num_keys_unlock:
+          break
       
   global.setLevelZoneThing("key", num_keys - num_keys_unlock)
   npc.visible = false 
@@ -270,6 +294,8 @@ func startDoorUnlock():
 
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
+  if key_type != global.KeyItem.NORMAL:
+    global.memory["key_items"][key_type] = global.ItemState.USED_IT
   animationPlayer.clear_queue()
   animationPlayer.stop()
   doorOpenSound.play()
@@ -288,6 +314,10 @@ func justStopPassiveActivate():
   pass
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
+  if path == "" and parter_door_id == "":
+    if not sillySound.is_playing():
+      sillySound.play()
+    return
   if global.isEnteringRoom:
     return
 

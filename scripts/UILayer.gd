@@ -245,12 +245,6 @@ onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLa
 var quitGameTimer = 0
 var quitGameTimeLimit = 20
 func processQuitGameRenderLogic(delta):
-  if not global.isPauseMenuOpen:
-    if shouldRenderAsCinematic() or global.pauseGame or global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
-      quitGameTimer = 0
-      quitGameRect.visible = false
-      return
-
   if Input.is_action_pressed("ui_cancel"):
     quitGameRect.visible = true
     quitGameTimer += (delta*11)

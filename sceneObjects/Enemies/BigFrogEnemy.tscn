@@ -43,16 +43,16 @@ shader_param/base_palette = ExtResource( 4 )
 shader_param/target_palette = ExtResource( 1 )
 
 [sub_resource type="CylinderShape" id=7]
-radius = 1.4
 height = 2.4
+radius = 1.4
 
 [sub_resource type="CylinderShape" id=8]
-radius = 1.4
 height = 2.4
+radius = 1.4
 
 [sub_resource type="CylinderShape" id=10]
-radius = 0.8
 height = 2.8
+radius = 0.8
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 21, 13, 1 )
@@ -68,8 +68,6 @@ true_terminal_vel = 8
 grav = 30
 walk_speed = 5
 jump_force = 12
-sprite_offset_y = 0.25
-modAmt = 0.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )

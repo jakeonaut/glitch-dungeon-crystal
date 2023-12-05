@@ -659,7 +659,7 @@ func processBroomLogic(delta):
       self.linear_velocity.y = amt
       self.lv.y = amt
     summonFallenBroom(true)
-  elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf:
+  elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
     hitStuff(delta)
 
 var spore_spawn_timer = 0

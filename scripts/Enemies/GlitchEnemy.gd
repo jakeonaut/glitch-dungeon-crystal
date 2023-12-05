@@ -42,7 +42,6 @@ export var behavior_mini_explore = false
 export var behavior_directional_bullet = false
 export var walk_direction = Vector2(1, 0)
 export var is_particle = false
-export var modAmt = 0.5
 
 export var is_static_in_level = true
 
@@ -117,9 +116,9 @@ func shouldIDoCollisions():
     should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
     should_collide_horizontally = behavior_walking and walk_direction.x != 0
 
-onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer")
+onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
 func glitchOut():
-    if not am_i_dying:
+    if not am_i_dying and glitchSecretAniPlayer:
         glitchSecretAniPlayer.play("glitchOut")
         setGlobalMemoryOfHasBeenDefeated()
         am_i_dying = true
@@ -295,19 +294,7 @@ func processDeath():
 #         glitch_switch_timer = 0
 
 func glitchSetSpritesAndCollision():
-    if behavior_jumping or behavior_directional_bullet or pauseSelf:
-        return
-        
-    if modAmt > 0:
-        mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
-        mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y + sprite_offset_y, modAmt)
-        if myOtherSprite:
-            myOtherSprite.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
-            myOtherSprite.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
-        smallInteractionArea.global_transform.origin.x = stepify(self.global_transform.origin.x, modAmt)
-        smallInteractionArea.global_transform.origin.y = stepify(self.global_transform.origin.y, modAmt)
-    else:
-        mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+    mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
 
 # @override
 func pressingMoveLeft():

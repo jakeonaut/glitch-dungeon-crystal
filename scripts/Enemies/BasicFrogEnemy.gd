@@ -28,7 +28,6 @@ func _ready():
   mySprite.updateBaseFrame(0, 0)
   original_material = mySprite.get_material_override().duplicate()
 
-  smack_time_limit = 5
   interactionArea.add_to_group("no_pushems")
     
 

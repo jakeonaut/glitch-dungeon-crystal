@@ -69,6 +69,19 @@ enum TilesetType {
     POISON_FOREST,
 }
 
+enum ItemState {
+    EMPTY,
+    GOT_IT,
+    USED_IT,
+}
+enum KeyItem {
+    NORMAL,
+    FISH,
+    PYRAMID,
+    SHROOM,
+    CAT
+}
+
 enum Inventory {
     GRIMOIRE,
     PET_0,

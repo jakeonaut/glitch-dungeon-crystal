@@ -1,13 +1,18 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-var keyFollowerRes = preload("res://sceneObjects/KeyFollower.tscn")
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
 
 func _ready():
     pass
     
 onready var key = get_node("../../..")
 func activateScript():
+    if key_type != 0:
+        if not global.memory.has("key_items"):
+            global.memory["key_items"] = {}
+        global.memory["key_items"][key_type] = global.ItemState.GOT_IT
+        
     var num_keys = global.getLevelZoneThing("key")
     if num_keys == null:
         global.setLevelZoneThing("key", 0)

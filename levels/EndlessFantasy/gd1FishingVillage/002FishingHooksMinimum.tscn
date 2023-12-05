@@ -250,6 +250,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/001GrubAmbush.tscn"
 
+[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
+visible = false
+
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
 shape = SubResource( 17 )
@@ -263,6 +266,9 @@ shape = SubResource( 29 )
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 8.02838, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+
+[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
+visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 20 )
@@ -319,10 +325,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 24 )
 anims/flickerOn = SubResource( 25 )
 anims/jump = SubResource( 26 )
