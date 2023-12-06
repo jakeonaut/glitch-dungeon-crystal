@@ -1454,10 +1454,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 31 )
 anims/flickerOn = SubResource( 32 )
 anims/jump = SubResource( 33 )
@@ -1465,7 +1465,7 @@ anims/jump = SubResource( 33 )
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod" parent="Viewport/level" instance=ExtResource( 26 )]
@@ -1516,10 +1516,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC8" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="4"]
 anims/default = SubResource( 78 )
 anims/flickerOn = SubResource( 79 )
 anims/jump = SubResource( 80 )
@@ -1527,7 +1527,7 @@ anims/jump = SubResource( 80 )
 [node name="CollisionShape" parent="Viewport/level/NPC8/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC8" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC8" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod5" parent="Viewport/level" instance=ExtResource( 26 )]
@@ -1583,10 +1583,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC9" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC9" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="4"]
 anims/default = SubResource( 84 )
 anims/flickerOn = SubResource( 85 )
 anims/jump = SubResource( 86 )
@@ -1594,7 +1594,7 @@ anims/jump = SubResource( 86 )
 [node name="CollisionShape" parent="Viewport/level/NPC9/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC9" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC9" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod6" parent="Viewport/level" instance=ExtResource( 26 )]
@@ -1620,7 +1620,7 @@ can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true
 
-[node name="SmallInteractionArea" parent="Viewport/level/NPC3" index="1"]
+[node name="SmallInteractionArea" parent="Viewport/level/NPC3" index="0"]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4.1, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
@@ -1654,10 +1654,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
 anims/default = SubResource( 51 )
 anims/flickerOn = SubResource( 52 )
 anims/jump = SubResource( 53 )
@@ -1665,7 +1665,7 @@ anims/jump = SubResource( 53 )
 [node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC3" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC3" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1709,11 +1709,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 flip_h = true
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 41 )
 anims/flickerOn = SubResource( 42 )
 anims/jump = SubResource( 43 )
@@ -1721,7 +1721,7 @@ anims/jump = SubResource( 43 )
 [node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC2" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC2" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod2" parent="Viewport/level" instance=ExtResource( 26 )]
@@ -1790,11 +1790,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC10" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC10" index="3"]
 flip_h = true
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC10" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC10" index="4"]
 anims/default = SubResource( 97 )
 anims/fall = SubResource( 98 )
 anims/flickerOn = SubResource( 99 )
@@ -1805,7 +1805,7 @@ anims/stand = SubResource( 102 )
 [node name="CollisionShape" parent="Viewport/level/NPC10/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC10" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC10" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod7" parent="Viewport/level" instance=ExtResource( 26 )]
@@ -1841,20 +1841,14 @@ can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true
 
-[node name="InteractionArea" parent="Viewport/level/NPC4" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC4/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 0 )
-
-[node name="SmallInteractionArea" parent="Viewport/level/NPC4" index="1"]
+[node name="SmallInteractionArea" parent="Viewport/level/NPC4" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 0, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 0 )
 shape = SubResource( 30 )
 
-[node name="SmallerInteractionArea" parent="Viewport/level/NPC4" index="2"]
+[node name="SmallerInteractionArea" parent="Viewport/level/NPC4" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 0, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallerInteractionArea" index="0"]
@@ -1888,11 +1882,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 flip_h = true
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="4"]
 anims/default = SubResource( 69 )
 anims/flickerOn = SubResource( 70 )
 anims/jump = SubResource( 71 )
@@ -1900,7 +1894,7 @@ anims/jump = SubResource( 71 )
 [node name="CollisionShape" parent="Viewport/level/NPC4/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC4" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC4" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1911,20 +1905,14 @@ can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true
 
-[node name="InteractionArea" parent="Viewport/level/NPC5" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 0, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC5/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 0 )
-
-[node name="SmallInteractionArea" parent="Viewport/level/NPC5" index="1"]
+[node name="SmallInteractionArea" parent="Viewport/level/NPC5" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 0, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 0 )
 shape = SubResource( 30 )
 
-[node name="SmallerInteractionArea" parent="Viewport/level/NPC5" index="2"]
+[node name="SmallerInteractionArea" parent="Viewport/level/NPC5" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 0, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallerInteractionArea" index="0"]
@@ -1958,11 +1946,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC5" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC5" index="3"]
 flip_h = true
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="4"]
 anims/default = SubResource( 72 )
 anims/flickerOn = SubResource( 73 )
 anims/jump = SubResource( 74 )
@@ -1970,7 +1958,7 @@ anims/jump = SubResource( 74 )
 [node name="CollisionShape" parent="Viewport/level/NPC5/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC5" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC5" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -2016,10 +2004,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="4"]
 anims/default = SubResource( 75 )
 anims/flickerOn = SubResource( 76 )
 anims/jump = SubResource( 77 )
@@ -2027,7 +2015,7 @@ anims/jump = SubResource( 77 )
 [node name="CollisionShape" parent="Viewport/level/NPC6/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC6" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC6" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="FishingRod3" parent="Viewport/level" instance=ExtResource( 26 )]

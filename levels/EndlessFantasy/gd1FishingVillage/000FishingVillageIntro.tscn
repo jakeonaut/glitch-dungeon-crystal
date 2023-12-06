@@ -217,7 +217,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1DebugTown/FishingVillageEntrance.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugTownFishingVillageEntrance.tscn"
 dont_recolor_me = true
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]

@@ -240,9 +240,6 @@ is_static = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4913, 4.97632, 0 )
 is_static = true
 
-[node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5087, 0.267736, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 is_locked = true
@@ -252,7 +249,7 @@ key_type = 1
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 16, 0 )
-path = "res://levels/EndlessFantasy/gd1DebugTown/DoubleWaterfall.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugTownDoubleWaterfall.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]

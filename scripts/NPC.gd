@@ -93,7 +93,7 @@ func _ready():
   textBox.is_fast_text = is_fast_text
 
   if is_static_in_level and my_memory:
-    if typeof(my_memory) == TYPE_INT and my_memory == global.DELETE_ME:
+    if (typeof(my_memory) == TYPE_INT or typeof(my_memory) == TYPE_REAL) and my_memory == global.DELETE_ME:
       queue_free()
     else:
       can_camera_zoom = false

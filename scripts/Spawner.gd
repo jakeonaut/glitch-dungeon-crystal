@@ -13,6 +13,7 @@ export var is_active = true
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 export var only_activate_in_range = true
+var should_staticify_children = false
 
 func _ready():
     set_process(true)
@@ -67,7 +68,7 @@ func spawn(_with_flare = true):
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)
     if "is_static_in_level" in newObject:
-        newObject.is_static_in_level = false
+        newObject.is_static_in_level = should_staticify_children
 
             
 func playerActivationAreaPassiveActivate():

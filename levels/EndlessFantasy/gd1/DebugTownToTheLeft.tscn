@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=9]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=13]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=15]
@@ -489,8 +488,6 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9, 0.0999999, 0 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 12 )]
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 8, 0 )
 
@@ -586,7 +583,7 @@ shape = SubResource( 47 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1DebugTown/ToxicJungleEntrance.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugTownToxicJungleEntrance.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]

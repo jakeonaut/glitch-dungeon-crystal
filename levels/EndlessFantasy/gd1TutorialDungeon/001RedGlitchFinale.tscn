@@ -271,7 +271,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 21 )
 anims/flickerOn = SubResource( 22 )
 anims/jump = SubResource( 23 )
