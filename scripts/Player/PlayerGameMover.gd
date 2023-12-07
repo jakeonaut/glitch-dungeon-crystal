@@ -417,7 +417,10 @@ func handleSpikeCollisions(delta):
       var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
       var tile_x = tile_pos.x - TILE_WIDTH/2
       var tile_y = tile_pos.y - TILE_HEIGHT/2
-      if isTileSpikes(tile_type) and not getLevelTiles().isNeighborOfInfectedSpikes(coords) and isRectColliding(
+      if (
+        (getLevelTiles().isTileSpikes(tile_type) and not getLevelTiles().isNeighborOfInfectedSpikes(coords))
+          or getLevelTiles().isTileGlitchSpikes(tile_type) 
+        ) and isRectColliding(
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
         x + lb + margin, y + tb - margin, x + rb - margin, y + bb + margin
       ):

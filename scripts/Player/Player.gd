@@ -593,7 +593,8 @@ func processBagLogic(_delta):
   pass
 
 func processBroomLogic(delta):
-  if aniPlayer.assigned_animation == "broomSmackGlitch" and not aniPlayer.is_playing():
+  var aa = aniPlayer.assigned_animation
+  if (aa == "broomSmackGlitch" or aa == "sweepFloor") and not aniPlayer.is_playing():
     broomStop()
 
   var which_broom_attack = 1
@@ -612,11 +613,14 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
       which_broom_attack = 1
 
-  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf and not aa == "sweepFloor": # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
-    if is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
+    if on_ground and Input.is_action_pressed("ui_down"):
+      aniPlayer.play("sweepFloor")
+      which_broom_attack = 0
+    elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2
     else:
@@ -634,22 +638,23 @@ func processBroomLogic(delta):
       invisible_glitch_walk_speed = 0
     if linear_velocity.y < 0:
       linear_velocity.y = 0
-    summonedBroom = summonedBroomRes.instance()
     global.incrementLevelZoneSweeps()
-    level.add_child(summonedBroom)
-    if which_broom_attack == 2:
-      summonedBroom.aniPlayer.stop()
-      summonedBroom.aniPlayer.clear_queue()
-      summonedBroom.aniPlayer.play("broomSmack2")
-      summonedBroom.broom_active_time_limit = 15
-      is_in_broom_cooldown = false
-    if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
-      if smacked_npc == null:
-        smacked_npc = global.activeInteractor.textboxParent
-      summonedBroom.smacked_npc = smacked_npc
-    summonedBroom.my_broom_owner = self
-    adjustSummonedBroomSpritePosition()
     jump_press_timer = jump_press_broom_time_limit
+    if which_broom_attack > 0:
+      summonedBroom = summonedBroomRes.instance()
+      level.add_child(summonedBroom)
+      if which_broom_attack == 2:
+        summonedBroom.aniPlayer.stop()
+        summonedBroom.aniPlayer.clear_queue()
+        summonedBroom.aniPlayer.play("broomSmack2")
+        summonedBroom.broom_active_time_limit = 15
+        is_in_broom_cooldown = false
+      if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
+        if smacked_npc == null:
+          smacked_npc = global.activeInteractor.textboxParent
+        summonedBroom.smacked_npc = smacked_npc
+      summonedBroom.my_broom_owner = self
+      adjustSummonedBroomSpritePosition()
   elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
     summonedBroom.queue_free()
     broomStop()
@@ -661,6 +666,15 @@ func processBroomLogic(delta):
     summonFallenBroom(true)
   elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
     hitStuff(delta)
+  elif aniPlayer.assigned_animation == "sweepFloor":
+    vv = 0
+    lv.y = 0
+    linear_velocity.y = 0
+    hitStuff(delta)
+    global_transform.origin.y = last_grounded_pos.y
+    if Input.is_action_just_pressed("sub_action_button"):
+      broomStop()
+      summonFallenBroom(true)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
@@ -1009,8 +1023,10 @@ func appendNextTextCharacter():
   # no-op for now
   pass
 
+# used for positioning secretSweepActualArea
 onready var secretSweepArea = get_node("SpriteContainer/SecretSweepArea")
 onready var secretSweepCollisionShape = get_node("SpriteContainer/SecretSweepArea/CollisionShape")
+# used for actually sweeping up glitch tiles
 onready var secretSweepActualArea = get_node("SpriteContainer/SecretSweepAreaActual")
 onready var secretSweepActualCollisionShape = get_node("SpriteContainer/SecretSweepAreaActual/CollisionShape")
 func hitStuff(_delta):
@@ -1056,9 +1072,13 @@ func hitStuff(_delta):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if isTileSpikes(tile_type) and not getLevelTiles().isTileGlitchSpikes(tile_type):
+      if getLevelTiles().isTileSpikes(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
+      elif getLevelTiles().isTileSoftSand(tile_type):
+        my_broom_owner.has_sweeped_glitch = true
+        getLevelTiles().sweepUpSand(coords)
+
 
 func swordClank():
   if summonedBroom:

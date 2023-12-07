@@ -955,13 +955,6 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
   return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
   
-# TODO(should just use the levelTiles func here)
-func isTileSpikes(tile_type):
-  if tile_type == GridMap.INVALID_CELL_ITEM:
-    return false
-  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return "Spikes" in tile_name
-  
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
   var z = 0 # global_transform.origin.z
   var TILE_WIDTH = getLevelTiles().cell_size.x

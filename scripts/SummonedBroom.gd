@@ -43,13 +43,6 @@ func _process(delta):
   if not visible and not broomSound.is_playing():
     queue_free()
     
-  # TODO(should just use the levelTiles func here)
-func isTileSpikes(tile_type):
-  if tile_type == GridMap.INVALID_CELL_ITEM:
-    return false
-  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return "Spikes" in tile_name and not "GlitchSpikes" in tile_name
-    
 func canActivate(area):
   var areaParent = area.get_node("..")
   # sorry!
@@ -125,13 +118,15 @@ func trySweepUpGlitchTiles(collisionShape):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if isTileSpikes(tile_type) and not getLevelTiles().isTileGlitchSpikes(tile_type):
+      if getLevelTiles().isTileSpikes(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
         # TODO(jaketrower): also reset the levelTiles array position?
       if getLevelTiles().isTileGlitchSpikes(tile_type):
         my_broom_owner.swordClank()
         queue_free()
+      if getLevelTiles().isTileSoftSand(tile_type):
+        getLevelTiles().sweepUpSand(coords)
 
 func isActive():
   return visible

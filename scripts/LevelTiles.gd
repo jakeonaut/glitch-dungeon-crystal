@@ -368,6 +368,12 @@ func isTileGlitchSpikes(tile_type):
   var tile_name = mesh_library.get_item_name(tile_type)
   return "GlitchSpikes" in tile_name
 
+func isTileSoftSand(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "SoftSand" in tile_name
+
 func isTileCloud(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
@@ -386,7 +392,16 @@ func infectSpikes(coords):
     removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
-    level.summonSmokeClouds(tile_pos, 2, true)
+    level.summonSmokeClouds(tile_pos, 2, true, true)
+  spike_infection_timer = 0
+
+func sweepUpSand(coords):
+  var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+  if isTileSoftSand(tile_type):
+    removeTile(coords)
+
+    var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+    level.summonSmokeClouds(tile_pos, 2, true, false, global.yellow_palette)
   spike_infection_timer = 0
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):

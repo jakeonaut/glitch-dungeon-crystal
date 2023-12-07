@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=46]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=47]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=48]
+[ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=49]
 
 [sub_resource type="BoxShape" id=69]
 extents = Vector3( 0.7, 1.2, 3 )
@@ -377,6 +378,42 @@ tracks/16/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Sounds/SweepSound:playing")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("Sounds/SweepSound:pitch_scale")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.5 ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -1375,6 +1412,124 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector3( 1.51347, 0.882688, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=86]
+resource_name = "sweepFloor"
+length = 0.5
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 0, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 18, 17, 18 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.11112, -0.527265, 1.7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.923714, -0.906875, 0 ), Vector3( 0.875772, -0.946976, 0 ), Vector3( 0.923714, -0.906875, 0 ), Vector3( 0.875772, -0.946976, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.15, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 2 ],
+"method": "summonSmokeClouds"
+}, {
+"args": [ 2 ],
+"method": "summonSmokeClouds"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.2, 1, 1 ), Vector3( 2.5, 1, 1 ), Vector3( 1.2, 1, 1 ), Vector3( 2.5, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/SweepSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sounds/SweepSound:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=35]
 resource_name = "swimFall"
@@ -1583,6 +1738,18 @@ tracks/4/keys = {
 "args": [  ],
 "method": "tryPlayFootstepSound"
 } ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -1948,7 +2115,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
@@ -1960,7 +2127,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
@@ -1976,7 +2143,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
@@ -1988,7 +2155,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
@@ -2362,7 +2529,6 @@ vframes = 8
 
 [node name="SecretSweepArea" type="Area" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
-visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="SpriteContainer/SecretSweepArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
@@ -2370,9 +2536,10 @@ shape = SubResource( 68 )
 
 [node name="SecretSweepAreaActual" type="Area" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="SpriteContainer/SecretSweepAreaActual"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32587, 0.882688, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48652, -0.916496, 0 )
 shape = SubResource( 68 )
 
 [node name="Sounds" type="Node" parent="."]
@@ -2508,6 +2675,11 @@ volume_db = -5.0
 stream = ExtResource( 23 )
 volume_db = -5.0
 
+[node name="SweepSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 49 )
+volume_db = -32.0
+pitch_scale = 1.5
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
 anims/RESET = SubResource( 29 )
@@ -2537,6 +2709,7 @@ anims/leaveDoor = SubResource( 60 )
 anims/preGetItem = SubResource( 51 )
 anims/returning = SubResource( 65 )
 anims/stand = SubResource( 21 )
+anims/sweepFloor = SubResource( 86 )
 anims/swimFall = SubResource( 35 )
 anims/swimJump = SubResource( 57 )
 anims/swimJumpStart = SubResource( 58 )
