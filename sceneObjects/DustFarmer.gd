@@ -2,6 +2,7 @@ extends Spatial
 
 onready var npc = get_node("NPC")
 onready var windGust = get_node("WindGust")
+onready var chargeSound = get_node("ChargeSound")
 onready var aniPlayer = get_node("AnimationPlayer")
 
 
@@ -14,6 +15,9 @@ var idle_time_limit = 30
 var gusting_time_limit = 20
 var is_active = false
 func _process(delta):
+  if npc.mySprite.animation_counter == 0:
+    chargeSound.play()
+
   if not aniPlayer.is_playing():
     if is_active:
       idle_timer += (delta*22)

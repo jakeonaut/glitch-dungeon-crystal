@@ -458,7 +458,9 @@ func processInputs(delta):
       vv = 1
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    if pauseAnimation:
+    if aniPlayer.assigned_animation == "sinkInSand":
+      vv = 1
+    elif pauseAnimation:
       vv = 0
     elif Input.is_action_pressed("sub_action_button"):
       vv = 8

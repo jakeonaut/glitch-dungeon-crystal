@@ -94,7 +94,7 @@ func tryDieIfTooFarFromPlayer():
         return
         
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
-    if distance >= 20:
+    if distance >= 15:
         returning = true
 
 func tryDieToOffscreenCamera():

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sandstream.mp3-2d7cd01a81fc5a1d11b91b7de08afead.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/sandstream.mp3"
+dest_files=[ "res://.import/sandstream.mp3-2d7cd01a81fc5a1d11b91b7de08afead.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
