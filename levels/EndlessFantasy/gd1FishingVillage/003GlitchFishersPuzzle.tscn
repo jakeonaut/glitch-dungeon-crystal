@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=32]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=34]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=35]
 
 [sub_resource type="BoxShape" id=90]
 resource_local_to_scene = true
@@ -1216,10 +1217,10 @@ pitch_scale = 0.5
 [node name="AbortSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="9"]
 pitch_scale = 0.5
 
-[node name="Sprite3D" parent="Viewport/level/NPC8" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="4"]
 anims/default = SubResource( 36 )
 anims/flickerOn = SubResource( 37 )
 anims/jump = SubResource( 38 )
@@ -1276,7 +1277,7 @@ can_activate = false
 can_camera_zoom = false
 tiny_textbox = true
 
-[node name="SmallInteractionArea" parent="Viewport/level/QuestionBlock3/NPC2" index="1"]
+[node name="SmallInteractionArea" parent="Viewport/level/QuestionBlock3/NPC2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock3/NPC2/SmallInteractionArea" index="0"]
@@ -1286,7 +1287,7 @@ shape = SubResource( 65 )
 [node name="AbortSound" parent="Viewport/level/QuestionBlock3/NPC2/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 9 )
 
-[node name="Sprite3D" parent="Viewport/level/QuestionBlock3/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/QuestionBlock3/NPC2" index="3"]
 frame = 20
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock3/NPC2/FallthroughSolid" index="0"]
@@ -1302,7 +1303,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3.41868, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 10.4187, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 11, 0 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 38, 0 )
@@ -1477,11 +1478,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 flip_h = true
 frame = 20
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 86 )
 anims/flickerOn = SubResource( 87 )
 anims/jump = SubResource( 88 )
@@ -1489,7 +1490,7 @@ anims/jump = SubResource( 88 )
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 89 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="Fishy" parent="Viewport/level" instance=ExtResource( 20 )]
@@ -1536,7 +1537,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 19, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 5, 0 )
 
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 17, 0 )
@@ -1546,6 +1547,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 0 )
 
 [node name="GramdmaMemory" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9064, 17, 0 )
+
+[node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 8, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 8, 0 )
+
+[node name="Torch4" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 8, 0 )
 
 [node name="Viewport2" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

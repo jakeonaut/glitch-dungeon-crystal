@@ -516,7 +516,7 @@ is_wiggling_fast = true
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 23 )
 
-[node name="Sprite3D" parent="Viewport/level/DustFarmer/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/DustFarmer/NPC" index="3"]
 frame = 78
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/FallthroughSolid" index="0"]
@@ -540,10 +540,10 @@ is_wiggling_fast = true
 [node name="CollisionShape" parent="Viewport/level/DustFarmer2/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 23 )
 
-[node name="Sprite3D" parent="Viewport/level/DustFarmer2/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/DustFarmer2/NPC2" index="3"]
 frame = 78
 
-[node name="AnimationPlayer" parent="Viewport/level/DustFarmer2/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/DustFarmer2/NPC2" index="4"]
 anims/default = SubResource( 25 )
 anims/flickerOn = SubResource( 26 )
 anims/jump = SubResource( 27 )

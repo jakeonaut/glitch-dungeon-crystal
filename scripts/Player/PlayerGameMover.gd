@@ -164,11 +164,13 @@ func normalGlitch():
   changeSpriteColorPalette(global.player_base_palette)
   # mySprite.setNormalClothes()
 
+onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
 func changeSpriteColorPalette(palette):
   if level.spellbook_forbidden:
     return
 
   mySprite.material_override.set_shader_param("target_palette", palette)
+  # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
 func bodyPushMe(_delta, _origin):
   pass # no more

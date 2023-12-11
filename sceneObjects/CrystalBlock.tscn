@@ -1,0 +1,197 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/portdoorPolyTriangle.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
+[ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=4]
+[ext_resource path="res://assets/water_normal_3.png" type="Texture" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ArrayMesh" id=2]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+albedo_texture = ExtResource( 5 )
+distance_fade_mode = 2
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 0.65, 0.65, 0.65 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 0.8
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 5.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.25, 0.25, 0.25 )
+
+[node name="CrystalBlock" type="Spatial"]
+
+[node name="miniCubeCrystal" type="MeshInstance" parent="."]
+transform = Transform( 2.05, 0, 0, 0, 2.05, 0, 0, 0, 2.05, 0.5, 0.5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="miniCubeCrystal"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="MeshInstance2" type="MeshInstance" parent="miniCubeCrystal"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+material_override = SubResource( 3 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+
+[node name="Sprite3D" type="Sprite3D" parent="miniCubeCrystal"]
+material_override = SubResource( 5 )
+pixel_size = 0.07
+texture = ExtResource( 4 )
+hframes = 24
+vframes = 16
+frame = 11
+script = ExtResource( 1 )
+frame_delay = 0.2
+should_randomize_frame_delay = true
+max_frames = 100
+
+[node name="StaticBody" type="StaticBody" parent="miniCubeCrystal"]
+
+[node name="CollisionShape" type="CollisionShape" parent="miniCubeCrystal/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="miniCubeCrystal2" type="MeshInstance" parent="."]
+transform = Transform( 2.05, 0, 0, 0, 2.05, 0, 0, 0, 2.05, 0.5, -0.5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="miniCubeCrystal2"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="MeshInstance2" type="MeshInstance" parent="miniCubeCrystal2"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+material_override = SubResource( 3 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+
+[node name="Sprite3D" type="Sprite3D" parent="miniCubeCrystal2"]
+material_override = SubResource( 5 )
+pixel_size = 0.07
+texture = ExtResource( 4 )
+hframes = 24
+vframes = 16
+frame = 11
+script = ExtResource( 1 )
+frame_delay = 0.2
+should_randomize_frame_delay = true
+max_frames = 100
+
+[node name="StaticBody" type="StaticBody" parent="miniCubeCrystal2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="miniCubeCrystal2/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="miniCubeCrystal3" type="MeshInstance" parent="."]
+transform = Transform( 2.05, 0, 0, 0, 2.05, 0, 0, 0, 2.05, -0.5, 0.5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="miniCubeCrystal3"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="MeshInstance2" type="MeshInstance" parent="miniCubeCrystal3"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+material_override = SubResource( 3 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+
+[node name="Sprite3D" type="Sprite3D" parent="miniCubeCrystal3"]
+material_override = SubResource( 5 )
+pixel_size = 0.07
+texture = ExtResource( 4 )
+hframes = 24
+vframes = 16
+frame = 11
+script = ExtResource( 1 )
+frame_delay = 0.2
+should_randomize_frame_delay = true
+max_frames = 100
+
+[node name="StaticBody" type="StaticBody" parent="miniCubeCrystal3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="miniCubeCrystal3/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="miniCubeCrystal4" type="MeshInstance" parent="."]
+transform = Transform( 2.05, 0, 0, 0, 2.05, 0, 0, 0, 2.05, -0.5, -0.5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="miniCubeCrystal4"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="MeshInstance2" type="MeshInstance" parent="miniCubeCrystal4"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+material_override = SubResource( 3 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+
+[node name="Sprite3D" type="Sprite3D" parent="miniCubeCrystal4"]
+material_override = SubResource( 5 )
+pixel_size = 0.07
+texture = ExtResource( 4 )
+hframes = 24
+vframes = 16
+frame = 11
+script = ExtResource( 1 )
+frame_delay = 0.2
+should_randomize_frame_delay = true
+max_frames = 100
+
+[node name="StaticBody" type="StaticBody" parent="miniCubeCrystal4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="miniCubeCrystal4/StaticBody"]
+shape = SubResource( 6 )

@@ -31,7 +31,6 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
   # if global.pauseGame: return
-
   hitStuff(delta)
     
   broom_active_timer += (delta*22)
@@ -96,8 +95,6 @@ func hitStuff(_delta):
       area.PassiveInteractActivate(0, false)
 
   # erase glitch tiles...
-  if not global.memory.has("broom"):
-    return
   trySweepUpGlitchTiles(collisionShape1)
   trySweepUpGlitchTiles(collisionShape2)
   trySweepUpGlitchTiles(collisionShape3)
@@ -106,12 +103,14 @@ func trySweepUpGlitchTiles(collisionShape):
   if not collisionShape.visible:
     return
 
+  var has_clanked = false
+  var was_clank_sand = false
   var x = collisionShape.global_transform.origin.x
   var y = collisionShape.global_transform.origin.y
-  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y
-  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y
-  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x
-  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x
+  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
+  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
+  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
+  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
   
   var _has_played_sound = false
   for i in range(int(floor(bb)), int(ceil(tb))):
@@ -119,14 +118,21 @@ func trySweepUpGlitchTiles(collisionShape):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileSpikes(tile_type):
-        my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
+        my_broom_owner.has_sweeped_glitch = true
         # TODO(jaketrower): also reset the levelTiles array position?
       if getLevelTiles().isTileGlitchSpikes(tile_type):
-        my_broom_owner.swordClank()
-        queue_free()
+        has_clanked = true
       if getLevelTiles().isTileSoftSand(tile_type):
         getLevelTiles().sweepUpSand(coords)
+        has_clanked = true
+        was_clank_sand = true
+  
+  if has_clanked:
+    my_broom_owner.swordClank(not was_clank_sand)
+    if was_clank_sand:
+      my_broom_owner.digSound.play()
+    queue_free()
 
 func isActive():
   return visible

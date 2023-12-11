@@ -281,6 +281,8 @@ func processPhysics(delta):
     was_just_on_ground_timer = 0
     if prev_glitch_form == global.GlitchForm.FLOOR and glitch_form != global.GlitchForm.FLOOR:
       was_just_on_ground_timer = -4
+    if "jump" in aa:
+      was_just_on_ground_timer = was_just_on_ground_time_limit
   was_touching_water = is_touching_water
 
   if was_just_on_ground_timer <= was_just_on_ground_time_limit:
@@ -375,7 +377,7 @@ func applyTerminalVelocity(_delta):
   else:
     terminal_vel = true_terminal_vel
 
-  if vv < -terminal_vel or (glitch_form == global.GlitchForm.LADDER and vv <= 0):
+  if vv < -terminal_vel: #  or (glitch_form == global.GlitchForm.LADDER and vv <= 0 and (aniPlayer == null or aniPlayer.assigned_animation != "sinkInSand")):
     vv = -terminal_vel
   if grav < 0 and vv > terminal_vel:
     vv = terminal_vel
@@ -456,7 +458,12 @@ func processInputs(delta):
       vv = 1
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    vv = 6 if not pauseAnimation else 0
+    if pauseAnimation:
+      vv = 0
+    elif Input.is_action_pressed("sub_action_button"):
+      vv = 8
+    else:
+      vv = 6
     if not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "stand":
       aniPlayer.stop()
       # aniPlayer.queue("walkBump")
@@ -883,7 +890,7 @@ func shouldGroundHaveFriction():
   return true
 
 func doWalkAnimation():
-  if horizontal_collision or pauseAnimation or aniPlayer == null:
+  if horizontal_collision or pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation == "sinkInSand":
     return
 
   if on_ground and aniPlayer.current_animation != "walkStart" and aniPlayer.current_animation != "walk":
@@ -1085,18 +1092,25 @@ func collideWithWall(local_lv):
       if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat":
         aniPlayer.stop()
         aniPlayer.clear_queue()
+        if landSound: landSound.play()
         aniPlayer.play("jumpBump", -1, bump_ani_speed)
-        aniPlayer.queue("fall" if isFeatherLike() else "jump")
+        if glitch_form == global.GlitchForm.LADDER:
+          aniPlayer.queue("walk")
+        else: aniPlayer.queue("fall" if isFeatherLike() else "jump")
       elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar":
         aniPlayer.stop()
         aniPlayer.clear_queue()
+        if landSound: landSound.play()
         aniPlayer.play("fallBump", -1, bump_ani_speed)
-        aniPlayer.queue("fall")
+        if glitch_form == global.GlitchForm.LADDER:
+          aniPlayer.queue("walk")
+        else: aniPlayer.queue("fall")
     # TODO(jaketrower): Should probably have like an animationState FSM (along with physics state?)
     elif ((was_on_ground and not ladder_glitch) or (truly_on_ground and ladder_glitch)) \
        and aa != "walkBump" and ("walk" in aa or "land" in aa):
       aniPlayer.stop()
       aniPlayer.clear_queue()
+      if landSound: landSound.play()
       if glitch_form == global.GlitchForm.LADDER:
         aniPlayer.play("walk")
         bounceAniPlayer.stop()

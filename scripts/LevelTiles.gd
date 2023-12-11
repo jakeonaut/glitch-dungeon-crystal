@@ -383,6 +383,7 @@ func isTileCloud(tile_type):
 
 func infectSpikes(coords):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+  var did_infect_spikes = false
   if isTileSpikes(tile_type):
     infected_spikes.append(coords)
     
@@ -393,7 +394,9 @@ func infectSpikes(coords):
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
     level.summonSmokeClouds(tile_pos, 2, true, true)
+    did_infect_spikes = true
   spike_infection_timer = 0
+  return did_infect_spikes
 
 func sweepUpSand(coords):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
@@ -401,7 +404,7 @@ func sweepUpSand(coords):
     removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
-    level.summonSmokeClouds(tile_pos, 2, true, false, global.yellow_palette)
+    level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)
   spike_infection_timer = 0
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):

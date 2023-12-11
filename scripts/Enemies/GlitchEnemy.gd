@@ -202,6 +202,8 @@ func _process(delta):
             is_smacked = false
 
 var last_palette = global.grey_palette
+var should_freeze = false
+var is_frozen = false
 func unsmack():
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
@@ -209,7 +211,16 @@ func unsmack():
     mySprite.material_override.set_shader_param("shake_power", 0.03)
     mySprite.material_override.set_shader_param("shake_block_size", 30.5)
     mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
-    mySprite.material_override.set_shader_param("target_palette", last_palette)
+    if should_freeze:
+        mySprite.material_override.set_shader_param("shake_power", 0.00)
+        mySprite.should_animate = false
+        mySprite.restart()
+        grav = 20
+        on_ground = false
+        is_frozen = true
+    else:
+        mySprite.material_override.set_shader_param("shake_power", 0.03)
+        mySprite.material_override.set_shader_param("target_palette", last_palette)
 
     if myOtherSprite:
         myOtherSprite.material_override.set_shader_param("time_influence", 3)
@@ -335,7 +346,7 @@ func landed():
         behavior_jumping = false
 
 func isActive():
-    return visible and not behavior_evolve
+    return visible and not behavior_evolve and not is_frozen
 
 func activate(_is_player):
     getSmacked(self.global_transform.origin)

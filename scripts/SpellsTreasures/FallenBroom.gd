@@ -216,6 +216,10 @@ func hitStuff(_delta):
               my_broom_owner.has_sweeped_glitch = true
               getLevelTiles().infectSpikes(coords)
               # TODO(jaketrower): also reset the levelTiles array position?
+            if getLevelTiles().isTileSoftSand(tile_type):
+                getLevelTiles().sweepUpSand(coords)
+                my_broom_owner.digSound.play()
+                has_hit_something = true
     return has_hit_something
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):

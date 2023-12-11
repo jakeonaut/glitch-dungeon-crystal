@@ -1,0 +1,260 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
+[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/gold_palette.png" type="Texture" id=5]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=6]
+[ext_resource path="res://sceneObjects/SandStream.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.8, 2.7, 1 )
+
+[node name="SandStream" type="Spatial"]
+script = ExtResource( 7 )
+
+[node name="MiniAdventures27" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 0.387334, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 576
+script = ExtResource( 1 )
+frame_delay = 0.1
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures28" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 0.369445, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 576
+script = ExtResource( 1 )
+frame_delay = 0.1
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures3" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -0.60778, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures4" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -0.60778, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures5" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -1.59797, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures6" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -1.59797, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures7" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -2.59405, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures8" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -2.59405, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures9" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -3.59974, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures10" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -3.59974, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures11" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -4.59583, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures12" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -4.59583, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures13" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -5.58602, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="MiniAdventures14" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -5.58602, -1 )
+material_override = SubResource( 2 )
+pixel_size = 0.126
+texture = ExtResource( 4 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+automatically_change_color = false
+
+[node name="Area" type="Area" parent="."]
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3, 0 )
+shape = SubResource( 3 )

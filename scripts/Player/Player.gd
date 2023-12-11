@@ -13,6 +13,7 @@ onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var footstepSound = get_node("Sounds/FootstepSound")
+onready var digSound = get_node("Sounds/DigSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
@@ -29,7 +30,6 @@ var broom_cooldown_time_limit = 10
 
 onready var spriteContainer = get_node("SpriteContainer")
 onready var broomSpriteAnimated = get_node("SpriteContainer/Sprite3DBroomAnimated")
-onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible")
 
 onready var enchantedBagSpriteAnimated = get_node("SpriteContainer/Sprite3DBagAnimated")
 onready var enchantedBagSpriteVisible = get_node("SpriteContainer/Sprite3DBagVisible")
@@ -76,7 +76,7 @@ func alignMySprite():
 func tryPlayFootstepSound():
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
-  if not truly_on_ground:
+  if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground:
     sporeSound.play()
     return
   footstepSound.play()
@@ -215,7 +215,7 @@ var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null or global.pauseMoveInput
+  pauseInput = summonedBroom != null or global.pauseMoveInput or aniPlayer.assigned_animation == "sweepFloor"
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -340,6 +340,9 @@ func processCastingLogic(_delta):
     else:
       applySpellbookGlitch()
       level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+
+func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
+  level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
@@ -617,7 +620,7 @@ func processBroomLogic(delta):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
-    if on_ground and Input.is_action_pressed("ui_down"):
+    if Input.is_action_pressed("ui_down"):
       aniPlayer.play("sweepFloor")
       which_broom_attack = 0
     elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
@@ -666,12 +669,12 @@ func processBroomLogic(delta):
     summonFallenBroom(true)
   elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
     hitStuff(delta)
-  elif aniPlayer.assigned_animation == "sweepFloor":
+  elif aniPlayer.assigned_animation == "sweepFloor" and isKindOfOnGround():
     vv = 0
     lv.y = 0
     linear_velocity.y = 0
     hitStuff(delta)
-    global_transform.origin.y = last_grounded_pos.y
+    # global_transform.origin.y = last_grounded_pos.y
     if Input.is_action_just_pressed("sub_action_button"):
       broomStop()
       summonFallenBroom(true)
@@ -1078,10 +1081,14 @@ func hitStuff(_delta):
       elif getLevelTiles().isTileSoftSand(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().sweepUpSand(coords)
+        digSound.play()
+        getSmacked()
+        broomStop()
 
 
-func swordClank():
+func swordClank(play_sound = true):
   if summonedBroom:
     broomStop()
   getSmacked()
-  broomSound.play()
+  if play_sound:
+    broomSound.play()

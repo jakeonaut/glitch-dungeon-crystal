@@ -9,6 +9,9 @@ func _ready():
 var cloud_timer = 0
 var cloud_time_limit = 5
 func _process(delta):
+  if not is_active:
+    return
+
   cloud_timer += (delta*22)
   if cloud_timer >= cloud_time_limit:
     cloud_timer = 0
@@ -25,16 +28,17 @@ func getDirection():
   elif self.frame == 3: # UP?
     return Vector2(0, 1)
 
+export var is_active = true
 func isActive():
-  return true
+  return is_active
 
 func passiveActivate(delta, is_player):
   if not is_player:
     return
     
-  var mult = 5
+  var mult = 6
   if level.player.vv > 4:
-    mult = 1
+    mult = 2
   level.player.vv += (mult*delta*22)
   if level.player.on_ground:
     level.player.vv = 2
@@ -42,7 +46,6 @@ func passiveActivate(delta, is_player):
   level.player.on_ground = false
   level.player.truly_on_ground = false
   level.player.was_on_ground = false
-  level.player.was_just_on_ground_timer = -4
   level.player.lv.y = level.player.vv
   level.player.linear_velocity.y = level.player.vv
   level.player.target_last_grounded_y = level.player.global_transform.origin.y
