@@ -2151,7 +2151,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995478, 3.55841, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.995478, 1.42817, 0 )
 
 [node name="ChickenNPC" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.03513, 4.58672, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.03513, 0.140868, 0 )
 true_terminal_vel = 2
 is_really_important = true
 can_camera_zoom = false
@@ -2246,15 +2246,9 @@ shape = SubResource( 172 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="FrogCroneNPC" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0351, 8.58672, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0351, -7.92412, 0 )
 grav = 0
-bbText = "•u've purified a CRYSTAL.
-•but GLITCH still spreads
-throughout DUNGEON...
-•find and clean all 7 crystals
-with your broom, and 
-GODDESS may spare us"
+bbText = "•"
 is_really_important = true
 can_activate = false
 dont_recolor_me = true
@@ -2400,7 +2394,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.331, 5.26765, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61704, 18.9551, 0 )
 
 [node name="GranmmaNPC" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0731, 3.11858, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0731, 5.11858, 0 )
 grav = 0
 bbText = "•our chickadees are 
 making themselves at home,

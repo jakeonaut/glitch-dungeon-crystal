@@ -27,6 +27,7 @@ onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPro
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
+onready var interactionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
@@ -116,15 +117,15 @@ func _process(delta):
     mySprite.remove_from_group("sprite")
 
   # don't you love math
-  # if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
-  #   interactPrompt.visible = interactionArea != null and interactionArea.wasTouchingPlayer and (
-  #     (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
-  #     global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
-  #       global.activeInteractor == textBox and textBox.nextPrompt.visible
-  #     )
-  #   )
-  #   if not interactPrompt.visible:
-  #     interactPrompt.restart()
+  if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
+    interactPrompt.visible = interactionArea != null and interactionArea.wasTouchingPlayer and (
+      (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
+      global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
+        global.activeInteractor == textBox and textBox.nextPrompt.visible
+      )
+    )
+    if not interactPrompt.visible:
+      interactPrompt.restart()
 
   if fallthroughSolid:
     if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):

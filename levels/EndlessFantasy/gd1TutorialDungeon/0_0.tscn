@@ -932,7 +932,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 32.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1994, 0.0639136, 0 )
 
 [node name="TextContainer" parent="Viewport/level/Player" index="9"]
 bbText = "•i don't remember us 
@@ -1263,8 +1263,8 @@ spawned_object_path = ""
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
-bbText = "•welcome to DUNGEON
-   fellow crone
+bbText = "•you must escape
+  the labyrinth
 •press X to talk
 •ouch!!! well done.
 •if someone says \". . .\"

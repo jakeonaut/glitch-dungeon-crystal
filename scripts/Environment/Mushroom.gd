@@ -38,9 +38,9 @@ func fallthroughCollisionActivate(possible_game_mover):
 func wiggle(_possible_game_mover):
     should_wiggle = true
     wiggle_timer = 0
-    # var how_many = randi() % 1 + 1
-    # for _i in range(how_many):
-    #     spawnASpore()
+    var how_many = randi() % 2 + 2
+    for _i in range(how_many):
+        spawnASpore()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

@@ -251,8 +251,6 @@ walk without
 falling down"
 can_camera_zoom = false
 is_a_body = false
-floating_text = true
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )

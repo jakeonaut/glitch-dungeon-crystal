@@ -8,6 +8,7 @@ onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
+onready var tickleSound = get_node("Sounds/TickleSound")
 onready var returnSound = get_node("Sounds/ReturnSound")
 onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
@@ -335,7 +336,6 @@ var spellCastCounterResetTimeLimit = 30
 func processCastingLogic(_delta):
   if Input.is_action_just_pressed("alt_action_button") and global.memory.has("spellbookPage"):
     if global.memory["spellbookPage"].size() <= 1:
-      noSpellSound.pitch_scale = 1.2
       noSpellSound.play()
     else:
       applySpellbookGlitch()
@@ -481,8 +481,7 @@ func glitchTickle(play_sound = true):
   mySprite.material_override.set_shader_param("shake_power", 0.01)
   mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
   if play_sound:
-    noSpellSound.pitch_scale = .5
-    noSpellSound.play()
+    tickleSound.play()
 
 func nullify():
   level.displaySpellMessageText("no magic")
@@ -494,6 +493,7 @@ func nullify():
     self.can_cast_spell_timer = 0
     if global.memory.has("spellbookPage"):
       global.memory["spellbookPage"] = []
+  glitchTickle(true)
 
 func getMushroomInfected():
   if is_mushroom_infected:
