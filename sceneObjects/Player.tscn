@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=117 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -51,6 +51,8 @@
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=49]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=50]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=51]
+[ext_resource path="res://assets/sounds/dollopen.wav" type="AudioStream" id=52]
+[ext_resource path="res://assets/sounds/dollclose.wav" type="AudioStream" id=53]
 
 [sub_resource type="BoxShape" id=69]
 extents = Vector3( 0.7, 1.2, 3 )
@@ -2604,6 +2606,16 @@ shape = SubResource( 68 )
 stream = ExtResource( 12 )
 volume_db = -5.0
 pitch_scale = 1.05
+
+[node name="DollOpenSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 52 )
+volume_db = -18.0
+pitch_scale = 0.95
+
+[node name="DollCloseSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 53 )
+volume_db = -18.0
+pitch_scale = 1.1
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 34 )

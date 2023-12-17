@@ -87,6 +87,12 @@ enum Inventory {
     PET_0,
 }
 
+enum NestingDoll {
+    BABY,
+    MOM,
+    GRANDMA
+}
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""
@@ -170,7 +176,7 @@ func _ready():
 
     memory["broom"] = false
     memory["has_gotten_broom"] = 1
-    memory["nesting_doll"] = false
+    memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false

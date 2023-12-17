@@ -16,13 +16,15 @@ var has_played_fall_sound = false
 var has_sweeped_glitch = false
 var has_sweeped_cloud = false
 
-var new_carcass = null
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 var spriteSheet = preload("res://assets/player_sheet_old.png")
 var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
-var spriteSheetTiny = preload("res://assets/player_sheet_tiny.png")
+var spriteSheetTiny = preload("res://assets/player_sheet_old_baby.png")
 var broomSpriteSheetTiny = preload("res://assets/player_sheet_broom_tiny.png")
-var is_tiny = false
+var spriteSheetSmall = preload("res://assets/player_sheet_old_new.png")
+var nesting_doll_state = global.NestingDoll.GRANDMA
+var nesting_doll_array = []
+
 
 onready var nullifySound = get_node("Sounds/NullifySound")
 onready var rechargeSound = get_node("Sounds/RechargeSound")
@@ -114,8 +116,9 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
 
-  if is_tiny and Input.is_action_just_pressed("sub_action_button"):
+  if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
     regainNestingDoll()
+    has_mushroom_double_jumped = true
 
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():
   #   aniPlayer.stop()
@@ -244,15 +247,52 @@ func magicJump():
   should_magic_jump = true
   actuallyApplyJump(false)
 
+onready var dollOpenSound = get_node("Sounds/DollOpenSound")
+onready var dollCloseSound = get_node("Sounds/DollCloseSound")
+func updateNestingDoll(prevNestingDollState):
+  global.memory["nesting_doll"] = nesting_doll_state
+  if nesting_doll_state < prevNestingDollState:
+    var emptyDoll = cherryCarcassRes.instance()
+    level.add_child(emptyDoll)
+    emptyDoll.global_transform.origin = self.global_transform.origin
+    emptyDoll.mySprite.flip_h = mySprite.flip_h
+    if nesting_doll_state == global.NestingDoll.BABY:
+      emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
+      emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
+    elif nesting_doll_state == global.NestingDoll.MOM:
+      emptyDoll.mySprite2.visible = global.memory["broom"]
+    # if randi() % 4 == 1:
+    #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
+    nesting_doll_array.push_back(emptyDoll)
+    if nesting_doll_state == global.NestingDoll.BABY:
+      dollOpenSound.pitch_scale = 1.2
+    elif nesting_doll_state == global.NestingDoll.MOM:
+      dollOpenSound.pitch_scale = 0.95
+      global.memory["had_broom"] = global.memory["broom"]
+      global.memory["broom"] = false
+    dollOpenSound.play()
+  elif nesting_doll_state > prevNestingDollState and nesting_doll_array.size() > 0:
+    var emptyDoll = nesting_doll_array.pop_back()
+    emptyDoll.queue_free()
+    if nesting_doll_state == global.NestingDoll.MOM:
+      dollCloseSound.pitch_scale = 1.1
+    elif nesting_doll_state == global.NestingDoll.GRANDMA:
+      dollCloseSound.pitch_scale = 0.9
+      global.memory["broom"] = global.memory["had_broom"]
+    dollCloseSound.play()
+
+  if nesting_doll_state == global.NestingDoll.GRANDMA:
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  elif nesting_doll_state == global.NestingDoll.MOM:
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
+  elif nesting_doll_state == global.NestingDoll.BABY:
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+
 func regainNestingDoll():
   global.memory["nesting_doll"] = true
-  if is_tiny:
-    is_tiny = false
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-    global.memory["broom"] = global.memory["had_broom"]
-    if new_carcass != null:
-      new_carcass.queue_free()
-      new_carcass = null
+  if nesting_doll_state < 2:
+    nesting_doll_state += 1
+    updateNestingDoll(nesting_doll_state - 1)
 
 # @override
 func getWalkSpeed(delta):
@@ -327,19 +367,10 @@ func processJumpInputs(delta):
       # free mushrooms when there are too many
       while len(mush_carcasses) > max_num_mush_carcasses:
         mush_carcasses.pop_front().get_ref().queue_free()
-    elif global.memory["nesting_doll"] and triedToDoubleJump: 
+    elif global.memory["nesting_doll"] > 0 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
-      new_carcass = cherryCarcassRes.instance()
-      level.add_child(new_carcass)
-      new_carcass.global_transform.origin = self.global_transform.origin
-      new_carcass.mySprite.flip_h = mySprite.flip_h
-      # if randi() % 4 == 1:
-      #   new_carcass.mySprite.flip_h = not new_carcass.mySprite.flip_h
-      global.memory["nesting_doll"] = false
-      global.memory["had_broom"] = global.memory["broom"]
-      global.memory["broom"] = false
-      mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
-      is_tiny = true
+      nesting_doll_state -= 1
+      updateNestingDoll(nesting_doll_state + 1)
         
   .processJumpInputs(delta)
 

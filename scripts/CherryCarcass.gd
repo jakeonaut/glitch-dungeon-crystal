@@ -6,6 +6,7 @@ var shake_color_rate = 0.001
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite2 = get_node("Sprite3D2")
 var is_crumbling = false
+onready var fallthroughSolidCollisionShape = get_node("FallthroughSolid/CollisionShape")
 
 
 func _ready():

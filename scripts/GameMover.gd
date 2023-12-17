@@ -176,6 +176,7 @@ func _process(_delta):
 
 func _physics_process(delta):
   if global.pauseGame or pauseSelf: return
+  if jump_force == null: jump_force = 16
 
   if smallInteractionArea:
     is_touching_water = smallInteractionArea.is_touching_water

@@ -602,7 +602,7 @@ func processBroomLogic(delta):
 
   var which_broom_attack = 1
   if not global.memory["broom"]:
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
       noBroomSound.play()
     return
 
@@ -779,7 +779,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = true
   else:
     broomSpriteVisible.visible = false
-    if not is_tiny:
+    if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
 
 
