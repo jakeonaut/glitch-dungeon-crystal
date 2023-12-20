@@ -932,7 +932,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1994, 0.0639136, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8006, 4.06391, 0 )
 
 [node name="TextContainer" parent="Viewport/level/Player" index="9"]
 bbText = "•i don't remember us 
@@ -1244,8 +1244,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, 1.1, 0 )
 grav = 0
 bbText = "•hmm.. what's going on?
-i'll stay and tend to
-the chickens."
+i'll tend to the chickens.
+•but could you find the rest?"
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 66 )
@@ -1263,8 +1263,8 @@ spawned_object_path = ""
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
-bbText = "•you must escape
-  the labyrinth
+bbText = "•Helloe, welcome to
+DUNGEONE
 •press X to talk
 •ouch!!! well done.
 •if someone says \". . .\"

@@ -483,7 +483,7 @@ func changeColorPalette(palette, _palette_alt = null):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
-    if tile_name == "GlitchSpikes":
+    if tile_name == "GlitchSpikes" or "Pink" in tile_name:
       continue
     var material = mesh.surface_get_material(0)
     var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)

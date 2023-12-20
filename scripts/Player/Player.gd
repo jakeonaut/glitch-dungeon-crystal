@@ -8,7 +8,6 @@ onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
-onready var tickleSound = get_node("Sounds/TickleSound")
 onready var returnSound = get_node("Sounds/ReturnSound")
 onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
@@ -45,7 +44,6 @@ var sprite_reset_limit = 3
 var cameraRotationCounter = 0
 var should_turn_on_glitch_screen_effects = false
 var glitch_death_timer = 0
-var glitch_tickle_timer = 0
 var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
@@ -138,7 +136,7 @@ func applyGlitch(glitch, notPlaySound = false):
   global.memory["current_glitch"] = glitch
 
   mySprite.material_override.set_shader_param("opacity", 1.0)
-  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
     if self.glitch_form == global.GlitchForm.LADDER and (was_walking_into_wall or isWalkingIntoWall()):
@@ -216,7 +214,7 @@ var returning_recover_time_limit = 3
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null or global.pauseMoveInput or aniPlayer.assigned_animation == "sweepFloor"
+  pauseInput = summonedBroom != null or global.pauseMoveInput
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -473,15 +471,6 @@ func isOnSavePoint():
   return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
        int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
-
-func glitchTickle(play_sound = true):
-  glitch_tickle_timer = 1
-  mySprite.material_override.set_shader_param("enable_glitch", true)
-  mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
-  mySprite.material_override.set_shader_param("shake_power", 0.01)
-  mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
-  if play_sound:
-    tickleSound.play()
 
 func nullify():
   level.displaySpellMessageText("no magic")

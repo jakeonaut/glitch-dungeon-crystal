@@ -116,9 +116,9 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
 
-  if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
-    regainNestingDoll()
-    has_mushroom_double_jumped = true
+  # if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
+  #   regainNestingDoll()
+  #   has_mushroom_double_jumped = true
 
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():
   #   aniPlayer.stop()
@@ -254,8 +254,11 @@ func updateNestingDoll(prevNestingDollState):
   if nesting_doll_state < prevNestingDollState:
     var emptyDoll = cherryCarcassRes.instance()
     level.add_child(emptyDoll)
+    emptyDoll.nesting_doll_state = prevNestingDollState
     emptyDoll.global_transform.origin = self.global_transform.origin
     emptyDoll.mySprite.flip_h = mySprite.flip_h
+    emptyDoll.mySprite.material_override.set_shader_param(
+      "target_palette", mySprite.material_override.get_shader_param("target_palette"))
     if nesting_doll_state == global.NestingDoll.BABY:
       emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
       emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
@@ -278,7 +281,7 @@ func updateNestingDoll(prevNestingDollState):
       dollCloseSound.pitch_scale = 1.1
     elif nesting_doll_state == global.NestingDoll.GRANDMA:
       dollCloseSound.pitch_scale = 0.9
-      global.memory["broom"] = global.memory["had_broom"]
+      global.memory["broom"] = global.memory["had_broom"] or global.memory["broom"]
     dollCloseSound.play()
 
   if nesting_doll_state == global.NestingDoll.GRANDMA:
@@ -293,13 +296,21 @@ func regainNestingDoll():
   if nesting_doll_state < 2:
     nesting_doll_state += 1
     updateNestingDoll(nesting_doll_state - 1)
+    glitchTickle()
+  # has_mushroom_double_jumped = true
 
 # @override
 func getWalkSpeed(delta):
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   # if is_mushroom_infected:
   #  return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
-  if not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
+  if aniPlayer.assigned_animation == "sweepFloor":
+    return 2
+  elif nesting_doll_state == global.NestingDoll.BABY:
+    return 8 if on_ground else 7
+  if nesting_doll_state == global.NestingDoll.MOM:
+    return 7 if on_ground else 6
+  elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     return 7 if pressingRun() and on_ground else 6
   else:
     return .getWalkSpeed(delta) # super()
@@ -325,7 +336,8 @@ func getABroom():
   pauseAnimation = false 
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
-  mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+  if nesting_doll_state == global.NestingDoll.GRANDMA:
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   smacked_npc = null
   is_in_broom_cooldown = false
 
@@ -367,12 +379,24 @@ func processJumpInputs(delta):
       # free mushrooms when there are too many
       while len(mush_carcasses) > max_num_mush_carcasses:
         mush_carcasses.pop_front().get_ref().queue_free()
-    elif global.memory["nesting_doll"] > 0 and triedToDoubleJump and not has_mushroom_double_jumped: 
+    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 0 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
       nesting_doll_state -= 1
       updateNestingDoll(nesting_doll_state + 1)
+      glitchTickle()
         
   .processJumpInputs(delta)
+
+onready var tickleSound = get_node("Sounds/TickleSound")
+var glitch_tickle_timer = 0
+func glitchTickle(play_sound = true):
+  glitch_tickle_timer = 1
+  mySprite.material_override.set_shader_param("enable_glitch", true)
+  mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
+  mySprite.material_override.set_shader_param("shake_power", 0.01)
+  mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
+  if play_sound:
+    tickleSound.play()
 
 var sporeRes = preload("res://sceneObjects/Environment/PlayerSpore.tscn")
 func spawnASpore(x_dir = 0, y_dir = 1):

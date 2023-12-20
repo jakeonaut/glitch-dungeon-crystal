@@ -1,0 +1,17 @@
+extends Spatial
+
+onready var mySprite = get_node("Sprite3D")
+
+func _ready():
+  mySprite.visible = false
+
+func isActive():
+  return true
+
+var has_activated = false
+onready var grandmaNpc = get_node("../NPC6")
+func passiveActivate(_delta, _is_player):
+  if has_activated:
+    return
+  grandmaNpc.textBox.text_final = "•thank you dearie.."
+  has_activated = true

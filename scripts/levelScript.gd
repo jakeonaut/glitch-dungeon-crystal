@@ -239,6 +239,7 @@ func tryToRespawn():
 
   player.unsmack()
   self.overrideLevelRespawnEvent()
+  player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
 
 
 func setDoorsSpriteFrame(_frame):

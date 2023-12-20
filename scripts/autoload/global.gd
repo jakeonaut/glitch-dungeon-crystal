@@ -176,6 +176,7 @@ func _ready():
 
     memory["broom"] = false
     memory["has_gotten_broom"] = 1
+    memory["can_nest"] = false
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]

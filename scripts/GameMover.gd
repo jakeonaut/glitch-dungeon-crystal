@@ -660,7 +660,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
 
 func actuallyApplyJump(play_sound = true):
   if isFeatherLike():
-    vv = jump_force / 2
+    vv = jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
     #   if vv < (2*jump_force) / 3:
     #     vv = (2*jump_force) / 3
@@ -705,21 +705,25 @@ func isKindaSortaOfOnGround():
 func getWalkSpeed(_delta):
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
+  var run_add = 0
   if pressingRun() and on_ground:
-      return run_speed
+      run_add = 2
 
   if glitch_form == global.GlitchForm.FEATHER:
-    return feather_glitch_walk_speed
+    if not on_ground:
+      return invisible_glitch_walk_speed  
+    return feather_glitch_walk_speed # no run_add
   elif glitch_form == global.GlitchForm.INVISIBLE:
-    return invisible_glitch_walk_speed
+    return invisible_glitch_walk_speed + run_add
   elif is_touching_water:
-    return swimming_walk_speed
+    return swimming_walk_speed + run_add
   else:
-    return walk_speed
+    return walk_speed + run_add
 
 const PROJECTION_ORTHOGONAL = 1
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
+  var prevFlipH = mySprite.flip_h
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
@@ -834,8 +838,8 @@ func processHorizontalInputs(delta):
 
   var DNUMSKID = DNUMSKID_BASE
   if self.isFeatherLike():
-    DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/13.5)
-    if not on_ground and is_pressing_horizontal_input:
+    DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/7)
+    if not on_ground:
       DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/10.8)
   if glitch_form == global.GlitchForm.FLOOR and not on_ground:
     DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
@@ -844,7 +848,7 @@ func processHorizontalInputs(delta):
   # TODO(Engine.time_scale suspect)
   if dir.length() > 1:
     dir = dir.normalized()
-  if on_ground and not self.is_pressing_horizontal_input:
+  if on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction():
     dir = dir * 0.9*(delta*DNUMSKID)
     if dir.length() < 0.1:
       dir = Vector3(0, 0, 0)
@@ -885,6 +889,9 @@ func processHorizontalInputs(delta):
     is_walking = false
   else:
     updateFacing(dir)
+
+  if aniPlayer != null and aniPlayer.assigned_animation == "sweepFloor":
+    mySprite.flip_h = prevFlipH
 
 func shouldAirHaveFriction():
   return true
