@@ -131,6 +131,9 @@ func passiveActivate(_delta, is_player):
     getPlayer().magicJump()
     if getPlayer().linear_velocity.y < 0:
       getPlayer().linear_velocity.y = -0.01
+    if not getPlayer().isFeatherLike():
+      getPlayer().applyHalfGrav = true
+      getPlayer().applyHalfGravTimer = 5
 
 func bubbleStartPop():
   if didja_get_me:

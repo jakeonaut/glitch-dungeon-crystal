@@ -96,6 +96,9 @@ var velocity_dampener = 1.0
 var pauseAnimation = false
 
 export var grav = 60
+var applyHalfGrav = false
+var applyHalfGravTimer = 0
+var applyHalfGravTimeLimit = 10
 var g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
 
 # TODO(jaketrower): Maybe should remove dir, and only rely on linear_velocity ?
@@ -307,9 +310,15 @@ func processLand():
   just_landed = true
     
 func applyGravity(delta):
+  if applyHalfGrav:
+    applyHalfGravTimer += (delta*22)
+    if applyHalfGravTimer >= applyHalfGravTimeLimit:
+      applyHalfGravTimer = 0
+      applyHalfGrav = 0
+
   if not can_collide_with_floor:
     return
-  if is_touching_water:
+  if is_touching_water or applyHalfGrav:
     g = Vector3(0, -grav/3, 0)
     if fallSound:
       fallSound.stop()
@@ -711,7 +720,7 @@ func getWalkSpeed(_delta):
 
   if glitch_form == global.GlitchForm.FEATHER:
     if not on_ground:
-      return invisible_glitch_walk_speed  
+      return walk_speed
     return feather_glitch_walk_speed # no run_add
   elif glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add

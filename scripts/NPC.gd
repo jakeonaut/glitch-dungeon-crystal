@@ -100,6 +100,7 @@ func _ready():
       can_camera_zoom = false
       textBox.can_camera_zoom = false
       if not visible and can_activate:
+        print("visible")
         visible = true
         can_activate = false
       textBox.has_been_shown = true
@@ -204,6 +205,7 @@ func passiveActivate(delta, is_player):
   
 
   if not visible and can_activate:
+    print("ugh")
     if aniPlayer:
       aniPlayer.play("flickerOn")
       var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()

@@ -9,7 +9,7 @@ func getLevelTiles():
   return levelTiles
 
 func isConditionActive():
-    return not amITouchingGlitchTile(getLevelTiles())
+  return not amITouchingGlitchTile(getLevelTiles())
 
 # @override
 func spawn(with_flare = true):
@@ -27,9 +27,10 @@ func amITouchingGlitchTile(currLevelTiles):
   var z = 0
   
   var coords = currLevelTiles.world_to_map(Vector3(x, y, z))
-  var tile_type = currLevelTiles.get_cell_item(coords.x, coords.y, coords.z)
-
-  if currLevelTiles.isTileSpikes(tile_type):
-    return true
+  for i in [-1, 0, 1]:
+    for j in [-1, 0, 1]:
+      var tile_type = currLevelTiles.get_cell_item(coords.x + i, coords.y + j, coords.z)
+      if currLevelTiles.isTileSpikes(tile_type):
+        return true
 
   return false

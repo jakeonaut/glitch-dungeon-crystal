@@ -105,7 +105,8 @@ func stopAnimation():
     # level.gameCamera.am_i_zooming = false
 
 func getSmacked(_broom_origin):
-    activate(true)
+    # activate(true)
+    pass
 
 func isActive():
     return visible and not has_been_smacked and not global.hasGottenLevelGeode

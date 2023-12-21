@@ -49,7 +49,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("TreasureSprite3D:visible")
@@ -61,7 +61,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("TreasureSprite3D:frame")
@@ -248,7 +248,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AweSound:playing")
@@ -312,7 +312,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -340,7 +340,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, false ]
+"values": [ true, true ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite3D:pixel_size")
@@ -464,7 +464,6 @@ script = ExtResource( 13 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
-visible = false
 material_override = SubResource( 17 )
 pixel_size = 0.125
 shaded = true
@@ -477,6 +476,7 @@ should_randomize_frame_delay = true
 max_frames = 1
 
 [node name="TreasureSprite3D" type="Sprite3D" parent="."]
+visible = false
 material_override = SubResource( 12 )
 pixel_size = 0.125
 shaded = true

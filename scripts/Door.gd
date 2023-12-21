@@ -398,6 +398,16 @@ func land(should_change_shader_params = true):
   # global.memory.erase("active_save_point_y")
   # global.memory.erase("active_save_point_z")
   global.pauseGame = false
+  if is_locked or should_lock:
+    is_locked = false
+    should_lock = false
+    animationPlayer.clear_queue()
+    animationPlayer.stop()
+    doorOpenSound.play()
+    animationPlayer.queue("doorOpen")
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+      global.activeInteractor.stopInteract()
+    global.activeInteractor = null
   
   if isLandingOutsideOfCameraBounds():
     return
@@ -436,3 +446,15 @@ func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):
     global.memory[level.getShortLevelName()] = {}
   global.memory[level.getShortLevelName()][self.id] = true
+
+
+func lockMeUp(num_keys):
+  if is_locked:
+    return
+  doorCloseSound.play()
+  animationPlayer.stop()
+  animationPlayer.clear_queue()
+  animationPlayer.queue("doorClose")
+  animationPlayer.queue("locked")
+  is_locked = true
+  num_keys_unlock = num_keys

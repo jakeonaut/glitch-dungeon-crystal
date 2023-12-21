@@ -415,20 +415,22 @@ func tryInitializeLevelZone(levelZone):
     
     if currLevelZone == HUB_LEVEL_ZONE and levelZone != HUB_LEVEL_ZONE:
         # entering the level from the hub world, restart!
-        resetLevelZone(levelZone)
+        # resetLevelZone(levelZone)
+        pass
     elif hasGottenLevelGeode and currLevelZone != null and currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
-        # just got back to the hub!, record the levelZone's results
-        var highScoreStr = currLevelZone + "_highscore"
-        if not self.memory.has(highScoreStr):
-            self.memory[currLevelZone + "_highscore"] = {}
+        pass
+        # # just got back to the hub!, record the levelZone's results
+        # var highScoreStr = currLevelZone + "_highscore"
+        # if not self.memory.has(highScoreStr):
+        #     self.memory[currLevelZone + "_highscore"] = {}
 
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_mini_crystal_cubes", 1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "angelTadpole", 1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths", -1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps", -1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles", 1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
-        setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_mini_crystal_cubes", 1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "angelTadpole", 1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths", -1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps", -1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles", 1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
+        # setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
 
     hasGottenLevelGeode = false
     currLevelZone = levelZone

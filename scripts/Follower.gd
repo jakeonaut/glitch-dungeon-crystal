@@ -58,7 +58,9 @@ func _process(delta):
       behavior_jumping = false
   
   ignorePhysics = is_returning
-  if level.player.glitch_form == global.GlitchForm.FLOOR and not level.player.truly_on_ground and level.player.on_ground and global_transform.origin.y < targetOrigin.y:
+  if level.player.glitch_form == global.GlitchForm.FLOOR and \
+     (not level.player.truly_on_ground or not self.on_ground) and level.player.on_ground and \
+     global_transform.origin.y < targetOrigin.y:
     if dist < 1:
       true_terminal_vel = 1
     else:
