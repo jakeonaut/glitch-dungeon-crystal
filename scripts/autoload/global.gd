@@ -308,12 +308,17 @@ func loadGame():
     while not save_game.eof_reached():
         # ... ??? Is this because global.memory is stored on a single line? enigmatic..
         var _current_line = parse_json(save_game.get_line())
+    normalizeLoadedMemory()
         
     save_game.close()
 
     if global.memory.has("roomPath"):
         currLevelZone = getLevelZoneName(global.memory["roomPath"])
     return true
+
+func normalizeLoadedMemory():
+    if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
+        global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
     
 func getNextGlitch(glitch_form):
     if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FLOOR
