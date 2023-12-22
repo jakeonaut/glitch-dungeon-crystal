@@ -292,7 +292,6 @@ func updateNestingDoll(prevNestingDollState):
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
 
 func regainNestingDoll():
-  global.memory["nesting_doll"] = true
   if nesting_doll_state < 2:
     nesting_doll_state += 1
     updateNestingDoll(nesting_doll_state - 1)
@@ -365,20 +364,6 @@ func processJumpInputs(delta):
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
       aniPlayer.queue("jump")
-      var mush_carcass = cherryCarcassRes.instance()
-      level.add_child(mush_carcass)
-      mush_carcass.global_transform.origin = self.global_transform.origin
-      mush_carcass.mySprite.flip_h = mySprite.flip_h
-      mush_carcasses.push_back(weakref(mush_carcass))
-      var num_mush_carcasses = len(mush_carcasses)
-      # remove freed mush_carcasses
-      for _i in range(num_mush_carcasses):
-        var mush_carcass_ref = mush_carcasses.pop_front()
-        if mush_carcass_ref.get_ref() != null:
-          mush_carcasses.push_back(mush_carcass_ref)
-      # free mushrooms when there are too many
-      while len(mush_carcasses) > max_num_mush_carcasses:
-        mush_carcasses.pop_front().get_ref().queue_free()
     elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 0 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
       nesting_doll_state -= 1

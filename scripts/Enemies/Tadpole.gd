@@ -97,8 +97,9 @@ func alignMySprite():
 func glitchSetSpritesAndCollision():
   pass
 
+var can_be_smacked = true
 # @override 
 func getSmacked(broom_origin):
-  if global.hasLevelGeodeBeenSmacked or global.hasGottenLevelGeode:
+  if not can_be_smacked:
     return
   .getSmacked(broom_origin)

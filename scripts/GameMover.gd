@@ -291,6 +291,8 @@ func processPhysics(delta):
 
   if was_just_on_ground_timer <= was_just_on_ground_time_limit:
     was_just_on_ground_timer += (delta*22)
+    if glitch_form == global.GlitchForm.FEATHER:
+      was_just_on_ground_timer += (delta*44)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   prev_glitch_form = glitch_form
 

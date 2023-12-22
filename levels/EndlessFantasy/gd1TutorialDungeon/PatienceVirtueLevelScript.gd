@@ -9,7 +9,7 @@ var has_activated_npc = false
 func setUpRoomInitializationOverride():
   if global.memory.has("spellbookPage"):
     activateNPC()
-    changeDoor()
+    changeDoor(false)
   
 func activateNPC():
   has_activated_npc = true
@@ -20,7 +20,7 @@ func activateNPC():
 
 var snarkyCommentTimer = 0
 var snarkyCommentTimeLimit = 10
-func _process(delta):
+func _process(_delta):
   # ._process(delta) implicit
 
   if not has_changed_door and global.memory.has("spellbookPage") and global.activeInteractor == null:
@@ -30,9 +30,10 @@ func _process(delta):
     activateNPC()
 
 
-func changeDoor():
+func changeDoor(should_lock = true):
   has_changed_door = true
   self.summonSmokeClouds(npcTutorial.global_transform.origin, 2, true, true)
   door.path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
   yield(get_tree().create_timer(0.5), "timeout")
-  door.lockMeUp(2)
+  if should_lock:
+    door.lockMeUp(2)

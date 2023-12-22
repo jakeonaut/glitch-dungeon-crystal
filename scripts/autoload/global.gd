@@ -179,6 +179,7 @@ func _ready():
     memory["can_nest"] = false
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
+    memory["clean_crystals"] = 0
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0

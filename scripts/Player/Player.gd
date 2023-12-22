@@ -13,6 +13,8 @@ onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var footstepSound = get_node("Sounds/FootstepSound")
+onready var hookSound = get_node("Sounds/HookSound")
+onready var reelSound = get_node("Sounds/ReelSound")
 onready var digSound = get_node("Sounds/DigSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
@@ -78,7 +80,8 @@ func tryPlayFootstepSound():
   if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground:
     sporeSound.play()
     return
-  footstepSound.play()
+  if on_ground or glitch_form == global.GlitchForm.LADDER:
+    footstepSound.play()
 
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))

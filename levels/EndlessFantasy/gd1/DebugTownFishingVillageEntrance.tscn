@@ -266,13 +266,6 @@ is_static = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4913, 4.97632, 0 )
 is_static = true
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0 )
-is_locked = true
-should_lock = true
-path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
-key_type = 1
-
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 18, 0 )
 path = "res://levels/EndlessFantasy/gd1/DebugTownDoubleWaterfall.tscn"
@@ -323,7 +316,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tsc
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door4" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0 )

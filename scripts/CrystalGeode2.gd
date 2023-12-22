@@ -5,24 +5,38 @@ var rot_amount = 100
 var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
 onready var aniPlayer = get_node("AnimationPlayer")
+onready var lightAniPlayer = get_node("LightAnimationPlayer")
 onready var npc = get_node("NPC")
+onready var npcSprite = get_node("NPC/Sprite3D")
 onready var getHitSound = get_node("GetHitSound")
 onready var getHitSound2 = get_node("GetHitSound2")
 onready var notGetHitSound = get_node("NotGetHitSound")
+onready var directionalLight = get_node("DirectionalLight")
+onready var collisionShape1 = get_node("InteractionArea/CollisionShape")
+onready var collisionShape2 = get_node("InteractionArea/CollisionShape2")
 var can_do_my_power = true
 # String is a path to a file.
 export(String, FILE) var path
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+var levelTiles = null
+func getLevelTiles():
+  if levelTiles == null:
+    levelTiles = level.levelTiles
+  return levelTiles
+
 func _ready():
     set_process(true)
-    if global.hasGottenLevelGeode:
-        aniPlayer.play("quick_explode")
-        yield(TempTimer.idle_frame(self), "timeout")
-        yield(TempTimer.idle_frame(self), "timeout")
-        stopAnimation()
-        alwaysActivateStuff()
+    if getMyStaticLevelZoneVar():
+        has_been_smacked = true
+        lightAniPlayer.play("lightUp")
+        musicPlayer.changeSongPitch(1.0)
+    # if global.hasGottenLevelGeode:
+    #     # aniPlayer.play("quick_explode")
+    #     yield(TempTimer.idle_frame(self), "timeout")
+    #     yield(TempTimer.idle_frame(self), "timeout")
+    #     stopAnimation()
 
 var tadpole_spin_start_timer = 0
 var tadpole_spin_start_time_limit = 10
@@ -34,40 +48,16 @@ var sams_weird_timeout_timer = 0
 var sams_weird_timeout_time_limit = 120
 var spawn_pos = null
 func _process(delta):
+    if has_been_smacked:
+        musicPlayer.changeSongPitch(1.0)
+    else:
+        musicPlayer.changeSongPitch(0.5)
     if not can_do_my_power:
         return
-
-    if global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode:
-        spawn_pos = self.global_transform.origin
-        cubeContainer.rotation_degrees.z += (delta * cube_rotation)
-        cube_rotation += (delta * 100)
-        npc.rotation_degrees.y -= (delta * rot_amount)
-        rot_amount += (delta * 33)
-        if rot_amount >= rot_amount_max:
-            global.hasGottenLevelGeode = true
-            aniPlayer.play("explode")
-    elif global.hasGottenLevelGeode and level.player.pauseSelf:
-        cubeContainer.rotation_degrees.z += (delta * cube_rotation)
-        cube_rotation += (delta * 100)
-        opacity = opacity + (0.0 - opacity) * (delta * 1)
-        npc.rotation_degrees.y -= (delta * rot_amount)
-        npc.mySprite.material_override.set_shader_param("opacity", opacity)
-
-        var playerPos = level.player.global_transform.origin
-        level.player.global_transform.origin = global.moveToward2D(playerPos, spawn_pos, delta * 2)
-        sams_weird_timeout_timer += (delta * 11)
-        if global.compare2D(level.player.global_transform.origin, spawn_pos, 0.1) or sams_weird_timeout_timer >= sams_weird_timeout_time_limit:
-            level.player.global_transform.origin = spawn_pos
-            level.gameCamera.zoomed_size = level.gameCamera.initial_size - 4
-            level.gameCamera.am_i_zooming = true
-        level.player.ladderUpdateTargetLastGroundedY()
-        level.player.on_ground = false
-        rot_amount -= (delta * 55)
-        npc.rotation_degrees.y -= (delta * rot_amount)
-        self.global_transform.origin.y += (delta * 1)
-
-    if global.hasLevelGeodeBeenSmacked or global.hasGottenLevelGeode:
-        spinTheFroggies(delta)
+    rot_amount = 10
+    if has_been_smacked:
+        rot_amount *= 2
+    npc.rotation_degrees.y -= (delta * rot_amount)
 
 var opacity = 0.8
 var stop_animation_timer = 0
@@ -80,6 +70,7 @@ func spinTheFroggies(delta):
             tadpole_spin_start_timer = 0
             var tadpole = tadpoles[tadpole_index]
             tadpole.startSpinning(tadpole_index, num_tadpoles, level.player)
+            tadpole.can_be_smacked = false
             tadpole_index += 1
     elif global.hasGottenLevelGeode and level.gameCamera.am_i_zooming:
         var should_stop_animation = true
@@ -92,10 +83,6 @@ func spinTheFroggies(delta):
                 stopAnimation()
 
 func stopAnimation():
-    npc.is_active = false
-    npc.visible = false
-    npc.can_activate = false
-
     can_do_my_power = false
     global.hasLevelGeodeBeenSmacked = false
     # level.levelTiles.randomize_num = 1
@@ -105,17 +92,18 @@ func stopAnimation():
     # level.gameCamera.am_i_zooming = false
 
 func getSmacked(_broom_origin):
-    # activate(true)
-    pass
+    activate(true)
 
 func isActive():
-    return visible and not has_been_smacked and not global.hasGottenLevelGeode
+    return visible and not has_been_smacked
 
-func activate(is_player):
-    if not global.memory["broom"]:
-        if not notGetHitSound.is_playing(): notGetHitSound.play()
-        return
+func activate(_is_player):
+    # if not global.memory["broom"]:
+    #     if not notGetHitSound.is_playing(): notGetHitSound.play()
+    #     return
 
+    global.setStaticLevelZoneLevelVar(level, self.name, true)
+    lightAniPlayer.play("lightUp")
     level.player.glitchTickle()
     level.player.physics_state = level.player.PhysicsState.GLITCH_HURT
     level.player.glitch_death_timer = 1
@@ -124,29 +112,45 @@ func activate(is_player):
     level.levelTiles.randomize_num += 10
     level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true
-    level.show_crt_effect = true
-    global.hasLevelGeodeBeenSmacked = true
+    # level.show_crt_effect = true
     level.player.pauseSelf = true
     # musicPlayer.stopAll()
-    musicPlayer.changeSongPitch(0.5)
+    musicPlayer.changeSongPitch(1.0)
     getHitSound.play()
     getHitSound2.play()
 
-    if level.has_node("SavePoint"):
-        level.get_node("SavePoint").passiveActivate(0, is_player)
-    otherActivateStuff()
-    alwaysActivateStuff()
+    # if level.has_node("SavePoint"):
+    #     level.get_node("SavePoint").passiveActivate(0, is_player)
+    trySweepUpGlitchTiles(collisionShape1)
+    trySweepUpGlitchTiles(collisionShape2)
+    global.memory["clean_crystals"] += 1
 
-func otherActivateStuff():
-    tadpole_spin_start_timer = tadpole_spin_start_time_limit
-    tadpoles = level.get_tree().get_nodes_in_group("tadpoles")
-    num_tadpoles = len(tadpoles)
+
+func trySweepUpGlitchTiles(collisionShape):
+    if not collisionShape.visible:
+        return
     
-    if level.has_node("ParallaxBackground"):
-        level.get_node("ParallaxBackground").hideMe()
+    var x = collisionShape.global_transform.origin.x
+    var y = collisionShape.global_transform.origin.y
+    var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
+    var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
+    var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
+    var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
+    
+    var _has_played_sound = false
+    for i in range(int(floor(bb)), int(ceil(tb))):
+        for j in range(int(floor(lb)), int(ceil(rb))):
+            var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if getLevelTiles().isTileSpikes(tile_type):
+                getLevelTiles().infectSpikes(coords)
+                # TODO(jaketrower): also reset the levelTiles array position?
 
-func alwaysActivateStuff():
-    musicPlayer.tryToPlay(musicPlayer.goddessThemePlayer)
-    # TODO(jaketrower): Make more generic, this is specific to fishingVillage
-    if level.has_node("NPC"):
-        level.get_node("NPC").queue_free()
+
+var staticLevelZoneVar = null
+func getMyStaticLevelZoneVar(refresh_if_null = false):
+    if level == null:
+        level = get_tree().get_root().get_node("Game/Viewport/level")
+    if staticLevelZoneVar == null or refresh_if_null:
+        staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self.name)
+        return staticLevelZoneVar
