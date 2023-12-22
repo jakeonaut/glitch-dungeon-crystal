@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=23]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=24]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=25]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -1157,12 +1159,24 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
+[sub_resource type="ShaderMaterial" id=71]
+shader = ExtResource( 24 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 0.25
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 25 )
+
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 20 )
+show_crt_effect = true
 tileset_type = 6
 spellbook_forbidden = true
 display_title = "...???"
@@ -1268,7 +1282,7 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -1380,11 +1394,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="4"]
 anims/default = SubResource( 28 )
 anims/fall = SubResource( 29 )
 anims/flickerOn = SubResource( 30 )
@@ -1396,7 +1410,7 @@ anims/stand = SubResource( 33 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC6" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC6" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1448,11 +1462,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC7" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC7" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC7" index="4"]
 anims/default = SubResource( 35 )
 anims/fall = SubResource( 36 )
 anims/flickerOn = SubResource( 37 )
@@ -1464,7 +1478,7 @@ anims/stand = SubResource( 40 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC7" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC7" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1516,11 +1530,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC8" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC8" index="4"]
 anims/default = SubResource( 41 )
 anims/fall = SubResource( 42 )
 anims/flickerOn = SubResource( 43 )
@@ -1532,7 +1546,7 @@ anims/stand = SubResource( 46 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC8" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC8" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC12" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1584,11 +1598,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC12" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC12" index="3"]
 material_override = SubResource( 27 )
 frame = 0
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC12" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC12" index="4"]
 anims/default = SubResource( 65 )
 anims/fall = SubResource( 66 )
 anims/flickerOn = SubResource( 67 )
@@ -1600,7 +1614,7 @@ anims/stand = SubResource( 70 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC12" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC12" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1652,11 +1666,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC9" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC9" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC9" index="4"]
 anims/default = SubResource( 47 )
 anims/fall = SubResource( 48 )
 anims/flickerOn = SubResource( 49 )
@@ -1668,7 +1682,7 @@ anims/stand = SubResource( 52 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC9" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC9" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC10" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1720,11 +1734,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC10" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC10" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC10" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC10" index="4"]
 anims/default = SubResource( 53 )
 anims/fall = SubResource( 54 )
 anims/flickerOn = SubResource( 55 )
@@ -1736,7 +1750,7 @@ anims/stand = SubResource( 58 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC10" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC10" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC11" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -1788,11 +1802,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="Sprite3D" parent="Viewport/level/NPC11" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC11" index="3"]
 material_override = SubResource( 27 )
 frame = 28
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC11" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC11" index="4"]
 anims/default = SubResource( 59 )
 anims/fall = SubResource( 60 )
 anims/flickerOn = SubResource( 61 )
@@ -1804,7 +1818,7 @@ anims/stand = SubResource( 64 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0619999, 0 )
 shape = SubResource( 34 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC11" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC11" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
@@ -1817,9 +1831,6 @@ flip_v = true
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 8 )]
 
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
@@ -1827,6 +1838,9 @@ texture = SubResource( 19 )
 flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 8 )]
+
+[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
+material = SubResource( 71 )
 
 [node name="UILayer" parent="." instance=ExtResource( 13 )]
 

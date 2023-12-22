@@ -965,13 +965,13 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue.tscn"
 num_keys_unlock = 2
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 33.9, 0 )
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 16.9, 0 )
+path = "res://levels/EndlessFantasy/gd1/001CozyHome.tscn"
 is_passive = true
 is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door4" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7, 1 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
 anims/doorClose = SubResource( 29 )
@@ -979,6 +979,7 @@ anims/doorOpen = SubResource( 30 )
 anims/locked = SubResource( 31 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
 shape = SubResource( 32 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]

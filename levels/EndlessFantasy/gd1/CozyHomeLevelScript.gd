@@ -11,7 +11,7 @@ func _process(delta):
   global.canChangeSongPitch = false
   if player.global_transform.origin.y < -39:
     if glitch_death_timer_fake == 0:
-      ditherPaletteEffectRect2.visible = false
+      self.show_crt_effect = false
       self.spellbook_forbidden = false
       player.normalGlitch()
     glitch_death_timer_fake += (delta*11)

@@ -189,10 +189,10 @@ func appendNextTextCharacter(play_sound = true):
         currently_scrolled_line += 1
       elif stripped_text[tindex] == "\n":
         num_newlines += 1
-        print(num_newlines)
+        # print(num_newlines)
         if num_newlines < 3 and now_were_scrolling:
-          print("scroll")
-          print(currently_scrolled_line + 1)
+          # print("scroll")
+          # print(currently_scrolled_line + 1)
           textNode.scroll_to_line(currently_scrolled_line + 1)
           currently_scrolled_line += 1
       else:
