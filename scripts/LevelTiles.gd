@@ -568,30 +568,30 @@ func setTileset(tileset_type, properly_set_tiles = true):
 func normalGlitch(_palette = null):
   # set_mesh_library(grey_tiles)
   changeColorPalette(grey_palette, grey_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(grey_palette)
 
 func floorGlitch(_palette = null):
   changeColorPalette(red_palette, red_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(red_palette)
 
 func featherGlitch(_palette = null):
   changeColorPalette(green_palette, green_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(green_palette)
 
 func invisibleGlitch(_palette = null):
   changeColorPalette(black_palette, black_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(black_palette)
   
 func ladderGlitch(_palette = null):
   changeColorPalette(yellow_palette, yellow_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(yellow_palette)
 
 func walkThroughWallsGlitch(_palette = null):
   changeColorPalette(white_palette, white_palette)
-  properlySetTiles()
+  # properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(white_palette)

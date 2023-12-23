@@ -414,6 +414,7 @@ func processGlitchHurtRecovery(delta):
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
     glitch_death_timer += (delta*22)
+    glitchTilesAroundMe()
 
     var material = level.glitchScreenEffect.get_material()
     if material is ShaderMaterial:
@@ -447,6 +448,23 @@ func processGlitchHurtRecovery(delta):
         self.physics_state = PhysicsState.NORMAL
 
     return true
+
+onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
+func glitchTilesAroundMe():
+  var lt = getLevelTiles()
+
+  var shape = glitchCollisionShape
+  var x = shape.global_transform.origin.x
+  var y = shape.global_transform.origin.y
+  var tb = y + shape.shape.extents.y/2*shape.scale.y + 0.25
+  var bb = y - shape.shape.extents.y/2*shape.scale.y - 0.25
+  var lb = x - shape.shape.extents.x/2*shape.scale.x - 0.25
+  var rb = x + shape.shape.extents.x/2*shape.scale.x + 0.25
+  
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      lt.rerandomizeTile(coords, lt.getRandomGlitchType())
 
 func applyGlitchDeathEffects(x):
   if global.canChangeSongPitch and (x < 0 or x > 20):
@@ -855,19 +873,18 @@ func landed():
   summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
-  if global.hasGottenLevelGeode:
-    var lt = getLevelTiles()
-    var original_y = global_transform.origin.y
-    for _i in range(4):
-      var tiles = getTilesBelow(lt)
-      if tiles[0] != null:
-        lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
-      if tiles[1] != null:
-        lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
-      if tiles[2] != null:
-        lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
-      global_transform.origin.y -= 1
-    global_transform.origin.y = original_y
+  # var lt = getLevelTiles()
+  # var original_y = global_transform.origin.y
+  # for _i in range(4):
+  #   var tiles = getTilesBelow(lt)
+  #   if tiles[0] != null:
+  #     lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+  #   if tiles[1] != null:
+  #     lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+  #   if tiles[2] != null:
+  #     lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+  #   global_transform.origin.y -= 1
+  # global_transform.origin.y = original_y
     
 func broomStop():  
   summonedBroom = null
