@@ -102,6 +102,14 @@ func activate(_is_player):
     #     if not notGetHitSound.is_playing(): notGetHitSound.play()
     #     return
 
+    var children = self.get_children()
+    for child in children:
+        if child.is_in_group("event") and child.isActive():
+            child.passiveActivate(0, true)
+
+
+
+
     global.setStaticLevelZoneLevelVar(level, self.name, true)
     lightAniPlayer.play("lightUp")
     level.player.glitchTickle()
@@ -109,11 +117,11 @@ func activate(_is_player):
     level.player.glitch_death_timer = 1
     if global.canGlitchScreen: # TODO(jaketrower): RESPECT MORE
       level.glitchScreenEffect.visible = true
-    level.levelTiles.randomize_num += 10
-    level.levelTiles.randomize_num_counter = 15
+        # level.levelTiles.randomize_num += 10
+        # level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true
     # level.show_crt_effect = true
-    level.player.pauseSelf = true
+    # level.player.pauseSelf = true
     # musicPlayer.stopAll()
     musicPlayer.changeSongPitch(1.0)
     getHitSound.play()
@@ -123,6 +131,9 @@ func activate(_is_player):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
     trySweepUpGlitchTiles(collisionShape1)
     trySweepUpGlitchTiles(collisionShape2)
+    var crystal_shards = level.get_tree().get_nodes_in_group("crystal_shard")
+    for shard in crystal_shards:
+        shard.passiveActivate(0, false)
     global.memory["clean_crystals"] += 1
 
 
