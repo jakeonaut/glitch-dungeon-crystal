@@ -46,6 +46,10 @@ func _process(delta):
 
   if am_i_in_range_of_player:
     override_am_i_in_range_of_player = true
+    if level.player.global_transform.origin.y > self.global_transform.origin.y + 1:
+      mySprite.translation.z = 1.5
+    else:
+      mySprite.translation.z = 0.5
 
   if is_infected:
     mySprite.set_material_override(glitched_material)
@@ -73,17 +77,17 @@ func _process(delta):
     pauseSelf = false
     on_ground = true
 
-  if on_ground or is_static or is_touching_water:
+  elif on_ground or is_static: # or is_touching_water:
     if not is_static:
       jump_timer +=  (delta * 22)
-      if jump_timer >= jump_time_limit or (is_touching_water and jump_timer >= water_jump_time_limit):
+      if jump_timer >= jump_time_limit: # or (is_touching_water and jump_timer >= water_jump_time_limit):
         behavior_jumping = true
         behavior_walking = true
         jump_timer = 0
 
     if not is_infected and is_static:
       spawn_timer += (delta*22)
-      if spawn_timer >= spawn_time_limit or (is_touching_water and spawn_timer >= water_jump_time_limit):
+      if spawn_timer >= spawn_time_limit: # or (is_touching_water and spawn_timer >= water_jump_time_limit):
           spawn_timer = 0
           spawnABubble(blow_bubble_horizontally)
   else:
@@ -171,7 +175,7 @@ func getSmacked(broom_origin):
 
 func fallthroughCollisionActivate(friend):
   if not friend.on_ground:
-    pass # just landed
+    return # just landed
   # TODO(jaketrower): The downside to this if there are multiple fallthroughSolids a game_mover is "on"
   # is that multiple of them could fight for control here
   # so TODO(jaketrower): Need to make the game_mover call like "fallthroughCollisionClear"
@@ -180,6 +184,10 @@ func fallthroughCollisionActivate(friend):
   # like jump, or fall off too...
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
+  if friend == level.player:
+    behavior_jumping = true
+    behavior_walking = true
+    jump_timer = 0
 
 func fallthroughCollisionClear(exFriend):
   who_is_standing_on_me.erase(exFriend.name)
