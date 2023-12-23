@@ -18,15 +18,18 @@ var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
 var original_material = null
+var glitched_material = null
 export var blow_bubble_horizontally = false
 
 onready var mushroomSprite = get_node("MushroomSprite") if has_node("MushroomSprite") else null
+onready var tileSpikes = get_node("TileSpikes") if has_node("TileSpikes") else null
 onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
   original_material = mySprite.get_material_override().duplicate()
+  glitched_material = mySprite2.get_material_override().duplicate() if mySprite2 else original_material
 
   interactionArea.add_to_group("no_pushems")
     
@@ -45,20 +48,26 @@ func _process(delta):
     override_am_i_in_range_of_player = true
 
   if is_infected:
-    if mySprite2:
-      mySprite.set_material_override(mySprite2.get_material_override())
-    if mushroomSprite:
-      mushroomSprite.visible = true
+    mySprite.set_material_override(glitched_material)
+    if tileSpikes:
+      tileSpikes.visible = true
+    if not interactionArea.is_in_group("weak_enemies"):
+      interactionArea.add_to_group("weak_enemies")
     if not interactionArea.is_in_group("enemies"):
       interactionArea.add_to_group("enemies")
     if fallthroughSolidArea and fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.remove_from_group("fallthrough")
-    
   else:
-    if original_material:
-      mySprite.set_material_override(original_material)
-    if mushroomSprite:
-      mushroomSprite.visible = false
+    last_palette = global.grey_palette
+    mySprite.set_material_override(original_material)
+    if tileSpikes:
+      tileSpikes.visible = false
+    if interactionArea.is_in_group("weak_enemies"):
+      interactionArea.remove_from_group("weak_enemies")
+    if interactionArea.is_in_group("enemies"):
+      interactionArea.remove_from_group("enemies")
+    if fallthroughSolidArea and not fallthroughSolidArea.is_in_group("fallthrough"):
+      fallthroughSolidArea.add_to_group("fallthrough")
 
   if pauseSelf and not is_smacked:
     pauseSelf = false
@@ -121,23 +130,28 @@ func landed():
     behavior_jumping = false
 
   if is_infected:
-    var how_many = randi() % 3 + 1
-    for _i in range(how_many):
-      spawnASpore()
+    spawnAGlitchParticle()
   
-var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
-func spawnASpore():
-    var spore = sporeRes.instance()
-    spore.initially_fly_up = true
-    level.add_child(spore)
-    spore.global_transform.origin = self.global_transform.origin
-    spore.original_pos = self.global_transform.origin
-    spore.bubble_speed = -rand_range(1.925, 2.8)
-    spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
-    spore.delta_multiplier = 4.0
-    spore.global_transform.origin.x += rand_range(-1, 1)
-    spore.global_transform.origin.y += 1.5
-    spore.global_transform.origin.y -= rand_range(0, .225)
+# var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
+var glitchParticleBurstRes = preload("res://sceneObjects/GlitchParticleBurst.tscn")
+func spawnAGlitchParticle():
+  var particle = glitchParticleBurstRes.instance()
+  level.add_child(particle)
+  particle.global_transform.origin.x = self.global_transform.origin.x
+  particle.global_transform.origin.y = self.global_transform.origin.y
+
+var frogAniPlayer = get_node("FrogAnimationPlayer") if has_node("FrogAnimationPlayer") else null
+# @override
+func ouchies(broom_origin):
+  is_infected = false
+  getSmacked(broom_origin)
+  is_smacked = false
+  mySprite.set_material_override(original_material)
+  if frogAniPlayer:
+    frogAniPlayer.play("degauss")
+  if dieSound and not dieSound.is_playing():
+    dieSound.pitch_scale = rand_range(0.8, 1.2)
+    dieSound.play()
 
 # @override
 func getSmacked(broom_origin):
@@ -152,6 +166,7 @@ func getSmacked(broom_origin):
   pauseSelf = true
   on_ground = true
   if notDieSound and not notDieSound.is_playing():
+    notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
 
 func fallthroughCollisionActivate(friend):

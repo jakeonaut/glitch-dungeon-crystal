@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=7]
-[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=9]
 [ext_resource path="res://materials/GlitchEnemy.tres" type="Material" id=10]
 
@@ -18,9 +17,6 @@ radius = 0.8
 [sub_resource type="CylinderShape" id=5]
 height = 1.8
 radius = 0.8
-
-[sub_resource type="SphereShape" id=6]
-radius = 10.0
 
 [node name="GlitchParticleBurst" type="Spatial"]
 
@@ -37,6 +33,7 @@ behavior_stop_on_land = true
 behavior_was_thrown = true
 behavior_fizzle_out_after_evolve = true
 is_particle = true
+is_static_in_level = false
 evolution_time_limit = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="GlitchEnemy" groups=["glitchSprite"]]
@@ -86,12 +83,6 @@ stream = ExtResource( 9 )
 volume_db = -80.0
 pitch_scale = 0.5
 
-[node name="PlayerActivationArea" type="Area" parent="GlitchEnemy" groups=["playerActivation"]]
-script = ExtResource( 8 )
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchEnemy/PlayerActivationArea"]
-shape = SubResource( 6 )
-
 [node name="GlitchEnemy2" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 2.09254 )
 collision_layer = 4
@@ -106,6 +97,7 @@ behavior_was_thrown = true
 behavior_fizzle_out_after_evolve = true
 walk_direction = Vector2( -1, 0 )
 is_particle = true
+is_static_in_level = false
 evolution_time_limit = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="GlitchEnemy2" groups=["glitchSprite"]]
@@ -154,9 +146,3 @@ volume_db = -80.0
 stream = ExtResource( 9 )
 volume_db = -80.0
 pitch_scale = 0.5
-
-[node name="PlayerActivationArea" type="Area" parent="GlitchEnemy2" groups=["playerActivation"]]
-script = ExtResource( 8 )
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchEnemy2/PlayerActivationArea"]
-shape = SubResource( 6 )

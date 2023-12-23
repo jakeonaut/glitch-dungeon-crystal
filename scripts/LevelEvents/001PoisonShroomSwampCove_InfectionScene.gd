@@ -11,7 +11,6 @@ func getPlayer():
   return player
 
 var has_done_cutscene = false
-var infectedFrogRes = preload("res://sceneObjects/Enemies/InfectedFrogEnemy.tscn")
 
 func getInfectingMushroom():
     return level.get_node("Mushrooms/InfectingMushroom")
@@ -34,18 +33,8 @@ func passiveActivate(_delta, _is_player):
         getInfectingMushroom().wiggle()
         yield(get_tree().create_timer(1.0), "timeout")
         var frogToBeInfected = getFrogToBeInfected()
-        var frogSprite = getFrogToBeInfected().get_node("Sprite3D")
-        
-        # var frogShader = frogSprite.get_material_override().duplicate()
-        # frogShader.set_shader_param("enable_glitch", true)
-        # frogShader.set_shader_param("enable_palette_cycle", true)
-        # frogSprite.set_material_override(frogShader)
-        yield(get_tree().create_timer(1.0), "timeout")
-        frogSprite.visible = false
-        var infectedFrog = infectedFrogRes.instance()
-        level.add_child(infectedFrog)
-        infectedFrog.global_transform.origin = frogToBeInfected.global_transform.origin
-        infectedFrog.walk_direction.x = -1
+        frogToBeInfected.is_infected = true
+        frogToBeInfected.walk_direction.x = -1
         yield(get_tree().create_timer(1.0), "timeout")
         global.pauseGame = false
         global.pauseMoveInput = false

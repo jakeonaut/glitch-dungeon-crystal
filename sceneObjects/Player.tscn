@@ -2775,8 +2775,7 @@ volume_db = -32.0
 
 [node name="BroomSound2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 50 )
-volume_db = -4.0
-pitch_scale = 1.2
+volume_db = -7.0
 
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 51 )

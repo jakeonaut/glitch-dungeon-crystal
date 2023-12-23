@@ -311,6 +311,7 @@ func processLand():
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true
     
+var should_apply_gravity = true
 func applyGravity(delta):
   if applyHalfGrav:
     applyHalfGravTimer += (delta*22)
@@ -318,7 +319,7 @@ func applyGravity(delta):
       applyHalfGravTimer = 0
       applyHalfGrav = 0
 
-  if not can_collide_with_floor:
+  if not should_apply_gravity:
     return
   if is_touching_water or applyHalfGrav:
     g = Vector3(0, -grav/3, 0)
@@ -926,10 +927,16 @@ func doWalkAnimation():
   if aniPlayer.current_animation == "walk":
     aniPlayer.play("walk", -1, 1.5 if pressingRun() else 1.0)
     
+var is_a_physics_particle = false
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(local_lv, delta):
   if delta == 0:
+    return local_lv
+
+  if is_a_physics_particle:
+    global_transform.origin.x += local_lv.x / velocity_dampener
+    global_transform.origin.y += local_lv.y / velocity_dampener
     return local_lv
      
   # TODO(jaketrower): global.time_dilation_multiplier?
