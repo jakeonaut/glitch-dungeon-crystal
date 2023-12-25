@@ -1151,6 +1151,7 @@ func collideWithWall(local_lv):
         aniPlayer.queue("stand")
   dir = Vector3(0, 0, 0)
 
+var cheating_horizontal_offset = 0
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
@@ -1207,7 +1208,7 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
         local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
       return local_lv
   else:
-    var middle_sensor = Vector2(x+sensor_anchor, y)
+    var middle_sensor = Vector2(x+sensor_anchor, y+cheating_horizontal_offset)
     if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
     var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
     var middle_tile_distance = tile_pos_and_distance_and_type_middle.y

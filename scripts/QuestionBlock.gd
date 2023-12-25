@@ -53,7 +53,6 @@ func passiveActivate(_delta, _is_player):
 
 var myDynamicSpawnedChild = null 
 func performSpawn():
-  bonkSound.play()
   level.summonSmokeClouds(global_transform.origin, 5)
   num_hits += 1
   
@@ -62,6 +61,7 @@ func performSpawn():
     for child in self.get_foreign_children():
       if myDynamicSpawnedChild and child == myDynamicSpawnedChild.get_ref():
         continue
+      bonkSound.play()
       child.visible = true
       if child.has_method("passiveActivate"):
           child.passiveActivate(33, false)
@@ -69,14 +69,16 @@ func performSpawn():
     if spawned_object_res != null:
       has_been_hit = false
       if (myDynamicSpawnedChild == null or not myDynamicSpawnedChild.get_ref()):
+        bonkSound.play()
         var newObject = spawned_object_res.instance()
         add_child(newObject)
         newObject.global_transform.origin = self.global_transform.origin
-        newObject.global_transform.origin.y += 1
+        newObject.global_transform.origin.y += 2
         if newObject.has_method("setAsParent"):
             newObject.setAsParent(self)
         myDynamicSpawnedChild = weakref(newObject)
   else:
+    bonkSound.play()
     var child = self.get_foreign_children()[num_hits - 1]
     child.visible = true
     if child.has_method("passiveActivate"):

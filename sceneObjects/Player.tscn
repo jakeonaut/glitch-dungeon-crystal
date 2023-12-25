@@ -2604,7 +2604,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0.15, 0.125, 0.08, 0.125 ]
+"values": [ 0.15, 0.125, 0.08, 0.11 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
@@ -2640,7 +2640,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.307351, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.307351, 0.8 ), Vector3( 0, -0.15, 0.8 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sounds/InfectSound:playing")

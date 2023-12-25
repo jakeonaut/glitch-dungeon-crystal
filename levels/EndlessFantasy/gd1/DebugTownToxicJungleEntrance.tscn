@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -24,8 +24,6 @@
 [ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/savespores.png" type="Texture" id=24]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/PyramidKey.tscn" type="PackedScene" id=26]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/ShroomKey.tscn" type="PackedScene" id=27]
 
 [sub_resource type="BoxShape" id=27]
 resource_local_to_scene = true
@@ -324,7 +322,7 @@ path = "res://levels/EndlessFantasy/gd1GrimoireGrove/000_LeftRoom.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door4" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.3, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.986946, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
 transform = Transform( 1.5, 0, 0, 0, 4, 0, 0, 0, 1, 0.375854, -0.5, 0 )
@@ -411,13 +409,7 @@ vframes = 2
 frame = 6
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6, 0 )
-
-[node name="ShroomKey" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="PyramidKey" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.49911, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]
 

@@ -612,6 +612,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.29922, 0 )
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 10.4, 0 )
+spawned_object_path = "res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn"
 spawn_time_limit = 0
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]

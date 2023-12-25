@@ -29,6 +29,7 @@ var nesting_doll_array = []
 onready var nullifySound = get_node("Sounds/NullifySound")
 onready var rechargeSound = get_node("Sounds/RechargeSound")
 onready var cameraTarget = get_node("CameraTarget")
+onready var smallCollisionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 var camera_target_origin_x_target = 0
 
 var sparkleRes = preload("res://sceneObjects/Sparkle.tscn")
@@ -125,6 +126,19 @@ func _process(delta):
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
+
+  if nesting_doll_state == global.NestingDoll.GRANDMA:
+    should_only_do_middle_sensor = false
+    cheating_horizontal_offset = 0
+    smallCollisionShape.shape.height = 2.032
+  elif nesting_doll_state == global.NestingDoll.MOM:
+    should_only_do_middle_sensor = false
+    cheating_horizontal_offset = 0
+    smallCollisionShape.shape.height = 2.032
+  elif nesting_doll_state == global.NestingDoll.BABY:
+    should_only_do_middle_sensor = on_ground or lv.y <= 0
+    cheating_horizontal_offset = bb / 2.0
+    smallCollisionShape.shape.height = 1.0 if on_ground or lv.y <= 0 else 2.032
     
 
 func spawnOneSparkle(xdiff, above_the_head = false):
