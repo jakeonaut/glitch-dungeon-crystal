@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=15]
-[ext_resource path="res://sceneObjects/CherryCarcass.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
@@ -31,61 +30,7 @@ extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="BoxShape" id=20]
 resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="Animation" id=21]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=22]
-resource_name = "fall"
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 6, 7 ]
-}
-
-[sub_resource type="Animation" id=23]
-resource_name = "land"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 11, 0 ]
-}
-
-[sub_resource type="BoxShape" id=24]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -121,9 +66,6 @@ mesh_library = ExtResource( 7 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_clip_": 0,
@@ -139,9 +81,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_clip_": 0
@@ -192,6 +131,9 @@ shape = SubResource( 17 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 20 )
+
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1, 9.51394, 0 )
 
@@ -218,32 +160,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.2, -1.9, -1 )
 
 [node name="Mushroom6" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.3, 0.6, -1 )
-
-[node name="CherryCarcass" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 4, 0 )
-
-[node name="CherryCarcass2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9, 4, 0 )
-
-[node name="CherryCarcass3" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2, 2.4, 0 )
-
-[node name="CherryCarcass4" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41.2, 10, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/CherryCarcass4/SmallInteractionArea" index="0"]
-shape = SubResource( 20 )
-
-[node name="SecretAnimationPlayer" parent="Viewport/level/CherryCarcass4" index="5"]
-anims/RESET = SubResource( 21 )
-anims/fall = SubResource( 22 )
-anims/land = SubResource( 23 )
-
-[node name="CollisionShape" parent="Viewport/level/CherryCarcass4/FallthroughSolid" index="0"]
-shape = SubResource( 24 )
-
-[node name="CherryCarcass5" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 10, 0 )
 
 [node name="Vileplume" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
@@ -300,6 +216,5 @@ flip_v = true
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/SavePoint"]
-[editable path="Viewport/level/CherryCarcass4"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

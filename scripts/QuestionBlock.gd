@@ -8,7 +8,9 @@ var num_hits = 0
 export var max_num_hits = 1
 var hit_cooldown = 0
 var hit_cooldown_limit = 5
+export(String, FILE) var spawned_object_path
 export var is_static_in_level = true
+var spawned_object_res = null
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -21,6 +23,8 @@ func _ready():
   if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
     has_been_hit = true
     aniPlayer.play("hit")
+  if spawned_object_path.length() != 0:
+    spawned_object_res = load(spawned_object_path)
 
 func _process(delta):
   if not has_been_hit and hit_cooldown > 0:
@@ -47,6 +51,7 @@ func passiveActivate(_delta, _is_player):
     #   performSpawn()
     
 
+var myDynamicSpawnedChild = null 
 func performSpawn():
   bonkSound.play()
   level.summonSmokeClouds(global_transform.origin, 5)
@@ -55,9 +60,22 @@ func performSpawn():
   if num_hits >= max_num_hits:
     has_been_hit = true
     for child in self.get_foreign_children():
+      if myDynamicSpawnedChild and child == myDynamicSpawnedChild.get_ref():
+        continue
       child.visible = true
       if child.has_method("passiveActivate"):
           child.passiveActivate(33, false)
+
+    if spawned_object_res != null:
+      has_been_hit = false
+      if (myDynamicSpawnedChild == null or not myDynamicSpawnedChild.get_ref()):
+        var newObject = spawned_object_res.instance()
+        add_child(newObject)
+        newObject.global_transform.origin = self.global_transform.origin
+        newObject.global_transform.origin.y += 1
+        if newObject.has_method("setAsParent"):
+            newObject.setAsParent(self)
+        myDynamicSpawnedChild = weakref(newObject)
   else:
     var child = self.get_foreign_children()[num_hits - 1]
     child.visible = true

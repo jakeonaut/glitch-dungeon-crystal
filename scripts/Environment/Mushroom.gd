@@ -33,7 +33,8 @@ func _ready():
 func fallthroughCollisionActivate(possible_game_mover):
     if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle(possible_game_mover)
-        if possible_game_mover != null and possible_game_mover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
+        if possible_game_mover != null and possible_game_mover == level.player and \
+           level.player.nesting_doll_state == global.NestingDoll.BABY and not level.player.pressingDown():
             getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
             var jump_val = 14
             possible_game_mover.magicJump()

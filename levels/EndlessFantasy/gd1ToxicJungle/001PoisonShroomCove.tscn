@@ -93,6 +93,8 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 2 )
 tileset_type = 6
+has_spellbook_page = true
+spellbook_spells = [ 2, 1 ]
 how_much_mp = 11
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 20 )]

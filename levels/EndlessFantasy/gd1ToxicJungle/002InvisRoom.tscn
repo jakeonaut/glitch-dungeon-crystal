@@ -242,6 +242,11 @@ is_static_in_level = false
 [node name="BasicShroomEnemy" parent="Viewport/level/QuestionBlock" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
+[node name="BasicShroomEnemy" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
+is_static_in_level = false
+is_infected = true
+
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
