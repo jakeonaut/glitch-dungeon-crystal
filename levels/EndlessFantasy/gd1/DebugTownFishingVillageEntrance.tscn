@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/BigFrogEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/CatKey.tscn" type="PackedScene" id=22]
 
@@ -337,6 +338,12 @@ shape = SubResource( 34 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/FallthroughSolid" index="0"]
 shape = SubResource( 35 )
+
+[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 0 )
+
+[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 

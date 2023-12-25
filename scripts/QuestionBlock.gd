@@ -57,12 +57,12 @@ func performSpawn():
     for child in self.get_foreign_children():
       child.visible = true
       if child.has_method("passiveActivate"):
-          child.passiveActivate(33, true)
+          child.passiveActivate(33, false)
   else:
     var child = self.get_foreign_children()[num_hits - 1]
     child.visible = true
     if child.has_method("passiveActivate"):
-        child.passiveActivate(33, true)
+        child.passiveActivate(33, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

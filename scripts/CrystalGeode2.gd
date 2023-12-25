@@ -31,7 +31,7 @@ func _ready():
     if getMyStaticLevelZoneVar():
         has_been_smacked = true
         lightAniPlayer.play("lightUp")
-        musicPlayer.changeSongPitch(1.0)
+        # musicPlayer.changeSongPitch(1.0)
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
     #     yield(TempTimer.idle_frame(self), "timeout")
@@ -48,10 +48,11 @@ var sams_weird_timeout_timer = 0
 var sams_weird_timeout_time_limit = 120
 var spawn_pos = null
 func _process(delta):
-    if has_been_smacked:
-        musicPlayer.changeSongPitch(1.0)
-    else:
-        musicPlayer.changeSongPitch(0.5)
+    # if has_been_smacked:
+    #     # musicPlayer.changeSongPitch(1.0)
+    # else:
+    #     musicPlayer.changeSongPitch(0.5)
+    musicPlayer.changeSongPitch(0.5)
     if not can_do_my_power:
         return
     rot_amount = 10
@@ -123,7 +124,7 @@ func activate(_is_player):
     # level.show_crt_effect = true
     # level.player.pauseSelf = true
     # musicPlayer.stopAll()
-    musicPlayer.changeSongPitch(1.0)
+    # musicPlayer.changeSongPitch(1.0)
     getHitSound.play()
     getHitSound2.play()
 

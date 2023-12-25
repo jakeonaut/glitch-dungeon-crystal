@@ -286,7 +286,9 @@ func tryDieToOffscreenCamera():
 var override_am_i_in_range_of_player = false
 # @override
 func processPhysics(delta):
-    if only_activate_in_range and not am_i_in_range_of_player and not override_am_i_in_range_of_player:
+    if not visible:
+        return
+    elif only_activate_in_range and not am_i_in_range_of_player and not override_am_i_in_range_of_player:
         return
     elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
         return
@@ -441,7 +443,8 @@ func spawnABubble(is_horizontal):
     bubble.setAsParent(self)
 
 func setGlobalMemoryOfHasBeenDefeated():
-    global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)
+    # global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)
+    pass
 
 export var time_influence = 35
 export var y_div = 2.3

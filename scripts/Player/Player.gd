@@ -506,18 +506,19 @@ func nullify():
   glitchTickle(true)
 
 func getMushroomInfected():
-  if is_mushroom_infected:
-    return false
+  return 
+  # if is_mushroom_infected:
+  #   return false
 
-  musicPlayer.changeSongPitch(0.5)
-  infectSound.play()
-  # mushroom_turn_timer = 0
-  glitchTickle(0)
-  is_mushroom_infected = true
-  # if mySprite.flip_h:
-  #   mushroom_infection_direction = -1
-  # else:
-  #   mushroom_infection_direction = 1
+  # musicPlayer.changeSongPitch(0.5)
+  # infectSound.play()
+  # # mushroom_turn_timer = 0
+  # glitchTickle(0)
+  # is_mushroom_infected = true
+  # # if mySprite.flip_h:
+  # #   mushroom_infection_direction = -1
+  # # else:
+  # #   mushroom_infection_direction = 1
 
 
 # @override
@@ -927,10 +928,11 @@ func giveMeMiniCrystalCubes(how_many):
   gimme_mini_crystal_cubes = how_many
   gimme_mini_crystal_cubes_timer = 0
 
+var fallenBroomRef = null
 func iFellFlat():
-  var fallenBroom = summonFallenBroom(false)
-  if fallenBroom != null:
-    fallenBroom.canPause = true
+  summonFallenBroom(false)
+  if fallenBroomRef and fallenBroomRef.get_ref():
+    fallenBroomRef.get_ref().canPause = true
 
 func summonFallenBroom(was_thrown, should_die_on_land = false):
   broomSpriteVisible.visible = false
@@ -997,7 +999,8 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
         fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
       else:
         fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
-    return fallenBroom
+    fallenBroomRef = weakref(fallenBroom)
+    return fallenBroomRef
   return null
 
 func iJustPressedDown():

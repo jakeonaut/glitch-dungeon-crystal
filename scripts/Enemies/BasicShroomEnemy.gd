@@ -1,0 +1,81 @@
+extends "GlitchEnemy.gd"
+
+export var is_static = false
+export var is_infected = false
+
+onready var interactionArea = get_node("SmallInteractionArea")
+
+func _ready():
+  mySprite.max_frames = 2
+  mySprite.updateBaseFrame(0, 0)
+  mySprite.set_material_override(mySprite.get_material_override().duplicate())
+
+  interactionArea.add_to_group("no_pushems")
+
+func setAsParent(_owner):
+  walk_direction.x = -1
+
+func _process(_delta):
+  if not visible: return
+
+  behavior_walking = true
+  behavior_jumping = false
+  if on_ground:
+    if mySprite.max_frames != 2:
+      mySprite.updateBaseFrame(0, 0)
+      mySprite.max_frames = 2
+  else:
+    mySprite.max_frames = 1
+    mySprite.updateBaseFrame(3, 0)
+
+  if is_infected:
+    mySprite.get_material_override().set_shader_param("target_palette", global.black_palette)
+
+func glitchSwitchSprite(_delta):
+  pass
+
+# @override
+func tryDieToOffscreenCamera():
+    var DEATH_MARGIN = 5
+    if getGameCamera().rightmost_x > -999:
+        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            setGlobalMemoryOfHasBeenDefeated()
+            queue_free()
+
+
+# @override ?
+func isActive():
+  return visible
+
+# @override ?
+func passiveActivate(_delta, is_player):
+  if not is_player:
+    return
+
+  if is_infected:
+    level.player.shroomAniPlayer.play("shrink")
+    level.player.nesting_doll_state = global.NestingDoll.BABY
+    global.memory["nesting_doll"] = global.NestingDoll.BABY
+    # level.player.updateNestingDoll(global.NestingDoll.BABY)
+    for _i in range(3):
+      level.player.spawnASpore(0, -1)
+    if global.memory["broom"] or level.player.fallenBroomRef:
+      if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
+        level.player.fallenBroomRef.get_ref().queue_free()
+        level.player.fallenBroomRef = null
+      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+      level.player.summonFallenBroom(false, true)
+      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+  else:
+    level.player.shroomAniPlayer.play("grow")
+    level.player.getABroom()
+    for _i in range(3):
+      level.player.spawnASpore(0, -1)
+    level.player.nesting_doll_state = global.NestingDoll.GRANDMA
+    global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+    # level.player.updateNestingDoll(global.NestingDoll.GRANDMA)
+  level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+  queue_free()

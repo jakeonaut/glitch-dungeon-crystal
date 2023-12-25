@@ -60,10 +60,15 @@ func restorePlayer():
   hookTarget.get_ref().should_collide_floor = true
   hookTarget.get_ref().can_collide_with_floor = true
   hookTarget.get_ref().pauseAnimation = false
+  level.player.on_ground = true
   level.player.hv = Vector3(0, 0, 0)
   level.player.dir = Vector3(0.0, 0.0, 0.0)
   level.player.linear_velocity.x = 0
   level.player.lv.x = 0
+  var jump_val = 5
+  level.player.vv = jump_val
+  level.player.linear_velocity.y = jump_val
+  level.player.lv.y = jump_val
   hookTarget = null
 
 func moveTargetToHook(delta):
@@ -83,14 +88,14 @@ func reelItIn(_delta):
     return
     
   if hookTarget.get_ref() == level.player:
-    var walk_val = 10
-    level.player.on_ground = false
+    level.player.on_ground = true
     level.player.vv = 0
     level.player.linear_velocity.y = 0
     level.player.lv.y = 0
-    level.player.hv = 0
-    level.player.linear_velocity.x = walk_val
-    level.player.lv.x = walk_val
+    level.player.hv = Vector3(0, 0, 0)
+    level.player.dir = Vector3(0.0, 0.0, 0.0)
+    level.player.linear_velocity.x = 0
+    level.player.lv.x = 0
 
 func isActive():
   return tongueCollisionShape.visible

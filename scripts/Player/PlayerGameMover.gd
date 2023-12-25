@@ -58,6 +58,7 @@ func _ready():
 func ladderUpdateTargetLastGroundedY():
   target_last_grounded_y = global_transform.origin.y
 
+onready var shroomAniPlayer = get_node("ShroomAnimationPlayer")
 func processPauseAnimation():
   if aniPlayer.assigned_animation == "hookCaught":
     return

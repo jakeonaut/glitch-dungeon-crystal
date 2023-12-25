@@ -7,6 +7,7 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 
 onready var mySprite = get_node("Sprite3D")
 onready var fallthroughSolid = get_node("FallthroughSolid")
+onready var bounceSound = get_node("BounceSound")
 var had_already_been_collided = false
 var is_being_collided = false
 var should_wiggle = false
@@ -32,8 +33,16 @@ func _ready():
 func fallthroughCollisionActivate(possible_game_mover):
     if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle(possible_game_mover)
-        # if possible_game_mover != null and possible_game_mover.has_method("magicJump"):
-        #     possible_game_mover.magicJump()
+        if possible_game_mover != null and possible_game_mover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
+            getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+            var jump_val = 14
+            possible_game_mover.magicJump()
+            getPlayer().linear_velocity.y = jump_val
+            getPlayer().lv.y = jump_val
+            getPlayer().vv = jump_val
+            getPlayer().applyHalfGrav = true
+            getPlayer().applyHalfGravTimer = 5
+            bounceSound.play()
 
 func wiggle(_possible_game_mover):
     should_wiggle = true

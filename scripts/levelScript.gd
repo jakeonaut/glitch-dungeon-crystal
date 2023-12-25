@@ -239,7 +239,12 @@ func tryToRespawn():
 
   player.unsmack()
   self.overrideLevelRespawnEvent()
+  player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
+  if player.nesting_doll_state != global.NestingDoll.GRANDMA:
+    player.mySprite.flip_h = not player.mySprite.flip_h
+    player.summonFallenBroom(false, true)
+    player.mySprite.flip_h = not player.mySprite.flip_h
 
 
 func setDoorsSpriteFrame(_frame):
