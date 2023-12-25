@@ -331,7 +331,7 @@ func trySpawnFollowers():
 
   var numKeys = global.getLevelZoneThing("key")
   if numKeys != null:
-    for i in range(numKeys):
+    for _i in range(numKeys):
       spawnKeyFollower(
         player.global_transform.origin + Vector3(
           stepify(rand_range(-1.0, 1.0), 0.125),

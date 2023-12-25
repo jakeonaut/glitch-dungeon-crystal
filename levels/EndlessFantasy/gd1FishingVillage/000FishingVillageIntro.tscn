@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=31]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=32]
 
 [sub_resource type="ShaderMaterial" id=35]
 shader = ExtResource( 2 )
@@ -139,7 +140,10 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+starting_glitch_type = 2
 tileset_type = 2
+has_spellbook_page = true
+spellbook_spells = [ 1, 1 ]
 display_title = "fishing village"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -413,6 +417,12 @@ shape = SubResource( 32 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 16, 0 )
+
+[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0 )
+
+[node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 4, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

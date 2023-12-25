@@ -128,6 +128,6 @@ func isActive():
     return cooldown_timer >= cooldown_time_limit
 
 
-func passiveActivate(delta, is_player):
+func passiveActivate(_delta, is_player):
     if is_player:
         level.player.regainNestingDoll()

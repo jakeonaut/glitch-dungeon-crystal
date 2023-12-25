@@ -1,6 +1,6 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var grammaNPC = get_node("GranmmaNPC")
+# onready var grammaNPC = get_node("GranmmaNPC")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -8,6 +8,7 @@ func setUpRoomInitializationOverride():
 
 var hasUpdatedGrammaText = false
 func _process(_delta):
-  if not hasUpdatedGrammaText and not has_node("ChickenNPC"):
-    grammaNPC.textBox.text_final = "•oh.. our chickens\nare gone."
-    hasUpdatedGrammaText = true
+  pass
+  # if not hasUpdatedGrammaText and not has_node("ChickenNPC"):
+  #   grammaNPC.textBox.text_final = "•oh.. our chickens\nare gone."
+  #   hasUpdatedGrammaText = true

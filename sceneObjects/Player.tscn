@@ -2514,7 +2514,6 @@ feather_glitch_walk_speed = 8
 invisible_glitch_walk_speed = 5
 swimming_walk_speed = 7
 jump_force = 9
-invisible_jump_force = 9
 
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 2 )

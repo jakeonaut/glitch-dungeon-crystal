@@ -6,33 +6,41 @@ var water_jump_time_limit = 10
 
 var air_timer = 0
 export var air_time_limit = 15
-var spawn_timer = 0
+export var spawn_timer = 0
 var spawn_time_limit = 15
 
 export var is_static = false
+export var is_licker = false
 export var is_infected = false
+var was_infected = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
 onready var fallthroughSolidArea = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
-var original_material = null
-var glitched_material = null
 export var blow_bubble_horizontally = false
 
 onready var mushroomSprite = get_node("MushroomSprite") if has_node("MushroomSprite") else null
 onready var tileSpikes = get_node("TileSpikes") if has_node("TileSpikes") else null
 onready var mySprite2 = get_node("Sprite3D2") if has_node("Sprite3D2") else null
+onready var tongueSprite = get_node("TongueSprite") if has_node("TongueSprite") else null
+onready var tongueSprite2 = get_node("TongueSprite2") if has_node("TongueSprite2") else null
+onready var tongueSprite3 = get_node("TongueSprite3") if has_node("TongueSprite3") else null
+onready var tongueSprite4 = get_node("TongueSprite4") if has_node("TongueSprite4") else null
 
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
-  original_material = mySprite.get_material_override().duplicate()
-  glitched_material = mySprite2.get_material_override().duplicate() if mySprite2 else original_material
+  mySprite.set_material_override(mySprite.get_material_override().duplicate())
+  if tongueSprite:
+    var tongueSpriteMaterial = tongueSprite.get_material_override().duplicate()
+    tongueSprite.set_material_override(tongueSpriteMaterial)
+    tongueSprite2.set_material_override(tongueSpriteMaterial)
+    tongueSprite3.set_material_override(tongueSpriteMaterial)
+    tongueSprite4.set_material_override(tongueSpriteMaterial)
 
   interactionArea.add_to_group("no_pushems")
-    
 
 func setAsParent(_owner):
   behavior_jumping = true
@@ -52,7 +60,11 @@ func _process(delta):
       mySprite.translation.z = 0.5
 
   if is_infected:
-    mySprite.set_material_override(glitched_material)
+    if not was_infected:
+      mySprite.get_material_override().set_shader_param("enable_glitch", true)
+      mySprite.get_material_override().set_shader_param("time_influence", 21.644)
+      mySprite.get_material_override().set_shader_param("shake_color_rate", 0.625)
+      mySprite.get_material_override().set_shader_param("target_palette", global.red_dungeon_palette)
     if tileSpikes:
       tileSpikes.visible = true
     if not interactionArea.is_in_group("weak_enemies"):
@@ -62,8 +74,6 @@ func _process(delta):
     if fallthroughSolidArea and fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.remove_from_group("fallthrough")
   else:
-    last_palette = global.grey_palette
-    mySprite.set_material_override(original_material)
     if tileSpikes:
       tileSpikes.visible = false
     if interactionArea.is_in_group("weak_enemies"):
@@ -72,6 +82,7 @@ func _process(delta):
       interactionArea.remove_from_group("enemies")
     if fallthroughSolidArea and not fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.add_to_group("fallthrough")
+  was_infected = is_infected
 
   if pauseSelf and not is_smacked:
     pauseSelf = false
@@ -85,11 +96,26 @@ func _process(delta):
         behavior_walking = true
         jump_timer = 0
 
-    if not is_infected and is_static:
-      spawn_timer += (delta*22)
-      if spawn_timer >= spawn_time_limit: # or (is_touching_water and spawn_timer >= water_jump_time_limit):
-          spawn_timer = 0
-          spawnABubble(blow_bubble_horizontally)
+    if on_ground and is_static and (not is_infected or is_licker):
+      if not is_licker or not tongueAniPlayer or not tongueAniPlayer.is_playing():
+        spawn_timer += (delta*22)
+        if spawn_timer >= spawn_time_limit: # or (is_touching_water and spawn_timer >= water_jump_time_limit):
+            spawn_timer = 0
+            if is_licker and tongueAniPlayer:
+              tongueAniPlayer.stop()
+              tongueAniPlayer.clear_queue()
+              if mySprite.flip_h:
+                tongueAniPlayer.play_backwards("lickSudden")
+                tongueAniPlayer.queue("lickIdle")
+                tongueAniPlayer.queue("lick")
+              else:
+                tongueAniPlayer.play_backwards("lickSuddenRight")
+                tongueAniPlayer.queue("lickIdle")
+                tongueAniPlayer.queue("lickRight")
+            else:
+              spawnABubble(blow_bubble_horizontally)
+  elif behavior_jumping and tongueAniPlayer and tongueAniPlayer.is_playing():
+    pass
   else:
     spawn_timer = 0
     behavior_jumping = false
@@ -124,6 +150,19 @@ func tryDieToOffscreenCamera():
             setGlobalMemoryOfHasBeenDefeated()
             queue_free()
 
+# @override
+func justPressedJump():
+  if tongueAniPlayer and tongueAniPlayer.is_playing():
+    return false
+  return .justPressedJump()
+
+# @override
+func pressingJump():
+  if tongueAniPlayer and tongueAniPlayer.is_playing():
+    return false
+  return .pressingJump()
+
+# @override
 func landed():
   .landed()
   behavior_walking = false
@@ -144,18 +183,28 @@ func spawnAGlitchParticle():
   particle.global_transform.origin.x = self.global_transform.origin.x
   particle.global_transform.origin.y = self.global_transform.origin.y
 
-var frogAniPlayer = get_node("FrogAnimationPlayer") if has_node("FrogAnimationPlayer") else null
+onready var tongueAniPlayer = get_node("TongueAnimationPlayer") if has_node("TongueAnimationPlayer") else null
+onready var degaussAniPlayer = get_node("DegaussAnimationPlayer") if has_node("DegaussAnimationPlayer") else null
 # @override
 func ouchies(broom_origin):
   is_infected = false
   getSmacked(broom_origin)
-  is_smacked = false
-  mySprite.set_material_override(original_material)
-  if frogAniPlayer:
-    frogAniPlayer.play("degauss")
+  last_palette = global.tidepool_palette
+  mySprite.get_material_override().set_shader_param("enable_glitch", false)
+  mySprite.get_material_override().set_shader_param("target_palette", last_palette)
+  if degaussAniPlayer:
+    smack_timer = -10
+    degaussAniPlayer.play("degauss")
   if dieSound and not dieSound.is_playing():
     dieSound.pitch_scale = rand_range(0.8, 1.2)
     dieSound.play()
+
+# @override
+func unsmack():
+  if degaussAniPlayer and degaussAniPlayer.assigned_animation == "degauss" and degaussAniPlayer.is_playing():
+    pass
+  else:
+    .unsmack()
 
 # @override
 func getSmacked(broom_origin):
@@ -184,7 +233,7 @@ func fallthroughCollisionActivate(friend):
   # like jump, or fall off too...
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
-  if friend == level.player:
+  if friend == level.player and not is_static:
     behavior_jumping = true
     behavior_walking = true
     jump_timer = 0

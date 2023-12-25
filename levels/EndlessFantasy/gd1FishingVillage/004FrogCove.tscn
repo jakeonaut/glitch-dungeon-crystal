@@ -844,7 +844,6 @@ flip_h = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999651, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy3/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
 shape = SubResource( 28 )
 
 [node name="FishingRod" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -978,7 +977,7 @@ anims/getItem = SubResource( 44 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.985929, 9.6, 0 )
 
 [node name="HookInteractionArea" parent="Viewport/level/FishingRod5" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.2, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRod5/HookInteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42214, -0.57786, 0 )
