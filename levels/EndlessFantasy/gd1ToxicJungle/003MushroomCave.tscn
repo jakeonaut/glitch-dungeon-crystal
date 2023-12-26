@@ -276,7 +276,7 @@ visible = false
 shape = SubResource( 36 )
 
 [node name="Mushroom3" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 27.6, 23.3, 0 )
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 27.8499, 23.3, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/MrMoTexBG/Mushroom3" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -4.7 )

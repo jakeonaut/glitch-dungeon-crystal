@@ -2,6 +2,7 @@ extends "GlitchEnemy.gd"
 
 export var is_static = false
 export var is_infected = false
+export var is_big = false
 
 onready var interactionArea = get_node("SmallInteractionArea")
 
@@ -62,13 +63,23 @@ func passiveActivate(_delta, is_player):
   if not is_player:
     return
 
-  if is_infected:
+  if is_big:
+    level.player.shroomAniPlayer.play("growBig")
+    level.player.nesting_doll_state = global.NestingDoll.MATRIARCH
+    global.memory["nesting_doll"] = global.NestingDoll.MATRIARCH
+    # level.player.updateNestingDoll(global.NestingDoll.BABY)
+    if global.memory["broom"] or level.player.fallenBroomRef:
+      if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
+        level.player.fallenBroomRef.get_ref().queue_free()
+        level.player.fallenBroomRef = null
+      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+      level.player.summonFallenBroom(false, true)
+      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+  elif is_infected:
     level.player.shroomAniPlayer.play("shrink")
     level.player.nesting_doll_state = global.NestingDoll.BABY
     global.memory["nesting_doll"] = global.NestingDoll.BABY
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
-    for _i in range(3):
-      level.player.spawnASpore(0, -1)
     if global.memory["broom"] or level.player.fallenBroomRef:
       if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
         level.player.fallenBroomRef.get_ref().queue_free()

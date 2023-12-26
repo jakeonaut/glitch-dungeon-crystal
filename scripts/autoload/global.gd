@@ -3,6 +3,7 @@ extends Node
 var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
 var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
 var yellow_player_palette = preload("res://assets/palettes/yellow_player_palette.png")
+var black_player_palette = preload("res://assets/palettes/player_black_palette.png")
 var white_player_palette = preload("res://assets/palettes/white_player_palette.png")
 
 var grey_palette = preload("res://assets/palettes/grey_palette.png")
@@ -90,7 +91,8 @@ enum Inventory {
 enum NestingDoll {
     BABY,
     MOM,
-    GRANDMA
+    GRANDMA,
+    MATRIARCH,
 }
 
 func getColorSuffixFromTilesetType(type):

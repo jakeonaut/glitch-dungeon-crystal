@@ -71,6 +71,7 @@ func processPauseAnimation():
       aniPlayer.clear_queue()
       aniPlayer.play("walk")
   
+onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
@@ -127,18 +128,25 @@ func _process(delta):
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
 
-  if nesting_doll_state == global.NestingDoll.GRANDMA:
+    
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
-    smallCollisionShape.shape.height = 2.032
-  elif nesting_doll_state == global.NestingDoll.MOM:
-    should_only_do_middle_sensor = false
-    cheating_horizontal_offset = 0
-    smallCollisionShape.shape.height = 2.032
+    smallCollisionShape.shape.height = 2.532
+    spriteYAlignment = 1.5
+    innerSpriteContainer.scale = Vector3(2.0, 2.0, 1.0)
   elif nesting_doll_state == global.NestingDoll.BABY:
     should_only_do_middle_sensor = on_ground or lv.y <= 0
     cheating_horizontal_offset = bb / 2.0
-    smallCollisionShape.shape.height = 1.0 if on_ground or lv.y <= 0 else 2.032
+    smallCollisionShape.shape.height = 1.0
+    spriteYAlignment = 0.2
+    innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
+  else:
+    should_only_do_middle_sensor = false
+    cheating_horizontal_offset = 0
+    smallCollisionShape.shape.height = 2.032
+    spriteYAlignment = 0.25
+    innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
     
 
 func spawnOneSparkle(xdiff, above_the_head = false):
@@ -169,7 +177,7 @@ func spawnSparkles(delta, above_the_head = false):
       spawnOneSparkle(-.5, above_the_head)
       sparkle_timer = 0
       if global.memory["mp"] == 0:
-        mySprite.get_material_override().set_shader_param("opacity", 1.0)
+        # mySprite.get_material_override().set_shader_param("opacity", 1.0)
         self.normalGlitch()
         nullifySound.play()
         blink_timer = 0
@@ -202,7 +210,12 @@ func bodyPushMe(_delta, _origin):
   #   self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
-  jumpSound.pitch_scale = rand_range(0.8, 1.2)
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    jumpSound.pitch_scale = rand_range(0.5, 0.6)
+  elif nesting_doll_state == global.NestingDoll.BABY:
+    jumpSound.pitch_scale = rand_range(1.2, 1.4)
+  else:
+    jumpSound.pitch_scale = rand_range(0.8, 1.2)
   .playJumpSound()
 
 # @override
@@ -299,12 +312,15 @@ func updateNestingDoll(prevNestingDollState):
       global.memory["broom"] = global.memory["had_broom"] or global.memory["broom"]
     dollCloseSound.play()
 
-  if nesting_doll_state == global.NestingDoll.GRANDMA:
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+  elif nesting_doll_state == global.NestingDoll.GRANDMA:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   elif nesting_doll_state == global.NestingDoll.MOM:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
   elif nesting_doll_state == global.NestingDoll.BABY:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+    
 
 func regainNestingDoll():
   if nesting_doll_state < 2:
@@ -321,9 +337,11 @@ func getWalkSpeed(delta):
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
-    return 8 if on_ground else 7
+    return 9 if on_ground else 8
   if nesting_doll_state == global.NestingDoll.MOM:
     return 7 if on_ground else 6
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    return 6 if pressingRun() and on_ground else 5
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     return 7 if pressingRun() and on_ground else 6
   else:

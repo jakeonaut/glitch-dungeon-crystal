@@ -81,6 +81,12 @@ func tryPlayFootstepSound():
     sporeSound.play()
     return
   if on_ground or glitch_form == global.GlitchForm.LADDER:
+    if nesting_doll_state == global.NestingDoll.MATRIARCH:
+      footstepSound.pitch_scale = rand_range(0.6, 0.8)
+    elif nesting_doll_state == global.NestingDoll.BABY:
+      footstepSound.pitch_scale = rand_range(1.2, 1.3)
+    else:
+      footstepSound.pitch_scale = rand_range(0.9, 1.1)
     footstepSound.play()
 
 func applyNextGlitch():
@@ -138,7 +144,6 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
-  mySprite.material_override.set_shader_param("opacity", 1.0)
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -178,8 +183,7 @@ func invisibleGlitch():
   level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
-  changeSpriteColorPalette(global.black_palette)
-  # mySprite.get_material_override().set_shader_param("opacity", 0.9)
+  changeSpriteColorPalette(global.black_player_palette)
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
@@ -214,6 +218,7 @@ func sayThis(message):
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
+var spriteOpacity = 1.0
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
@@ -223,6 +228,17 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
+
+  var newSpriteOpacity = spriteOpacity
+  if aniPlayer.assigned_animation == "returning":
+    newSpriteOpacity = 0.5
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    newSpriteOpacity = 0.8
+  else:
+    newSpriteOpacity = 1.0
+  if newSpriteOpacity != spriteOpacity:
+    spriteOpacity = newSpriteOpacity
+    mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
 
   if global.isPauseMenuOpen:
     return
@@ -498,7 +514,6 @@ func nullify():
   if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
     nullifySound.play()
     global.memory["mp"] = 0
-    mySprite.get_material_override().set_shader_param("opacity", 1.0)
     self.applyGlitch(global.GlitchForm.NORMAL, true)
     self.can_cast_spell_timer = 0
     if global.memory.has("spellbookPage"):
@@ -547,12 +562,21 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if global.activeInteractor:
     global.activeInteractor.hideTextbox()
   global.activeInteractor = null
+  var hurtSound_pitch_scale = 1.0
+  if nesting_doll_state == global.NestingDoll.BABY:
+    hurtSound_pitch_scale = rand_range(1.5, 2.0)
+  elif nesting_doll_state == global.NestingDoll.MATRIARCH:
+    hurtSound_pitch_scale = rand_range(0.4, 0.8)
+  else:
+    hurtSound_pitch_scale = rand_range(0.8, 1.5)
+
   if randi() % 3 == 0:
-    hurt2Sound.pitch_scale = rand_range(0.8, 1.5) 
+    hurt2Sound.pitch_scale = hurtSound_pitch_scale
     hurt2Sound.play()
   else:
-    hurtSound.pitch_scale = rand_range(0.8, 1.5)
+    hurtSound.pitch_scale = hurtSound_pitch_scale
     hurtSound.play()
+  bumpSound.pitch_scale = hurtSound_pitch_scale
   bumpSound.play()
   global.pauseGame = true
   global.pauseMoveInput = true
