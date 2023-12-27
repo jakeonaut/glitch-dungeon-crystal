@@ -19,7 +19,7 @@
 [ext_resource path="res://sceneObjects/GlitchTileSpawner.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/EndlessFantasy/000NPC3AbortSound.gd" type="Script" id=20]
-[ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=22]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=24]
@@ -933,7 +933,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1994, -0.93609, 0 )
 
-[node name="TextContainer" parent="Viewport/level/Player" index="10"]
+[node name="TextContainer" parent="Viewport/level/Player" index="11"]
 bbText = "•i don't remember us 
 having a basement.."
 
@@ -1266,6 +1266,7 @@ you can talk to them!"
 is_important = true
 is_really_important = true
 dont_recolor_me = true
+can_move_player = true
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )

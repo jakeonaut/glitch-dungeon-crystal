@@ -134,6 +134,11 @@ func passiveActivate(_delta, is_player):
     if not getPlayer().isFeatherLike():
       getPlayer().applyHalfGrav = true
       getPlayer().applyHalfGravTimer = 5
+    if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
+      var jump_val = 14
+      getPlayer().linear_velocity.y = jump_val
+      getPlayer().lv.y = jump_val
+      getPlayer().vv = jump_val
 
 func bubbleStartPop():
   if didja_get_me:

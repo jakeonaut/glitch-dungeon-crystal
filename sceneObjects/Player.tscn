@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://assets/player_sheet_old_baby.png" type="Texture" id=55]
 [ext_resource path="res://assets/sounds/eba_funny2_reverse.wav" type="AudioStream" id=56]
 [ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=57]
+[ext_resource path="res://assets/sounds/land2.wav" type="AudioStream" id=58]
 
 [sub_resource type="BoxShape" id=69]
 extents = Vector3( 0.7, 1.2, 3 )
@@ -2493,6 +2494,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=90]
 resource_name = "grow"
@@ -2591,6 +2604,32 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.8 ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "adjustStuffForNestingDolls"
+} ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=92]
@@ -2704,6 +2743,32 @@ tracks/8/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/9/type = "method"
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "adjustStuffForNestingDolls"
+} ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=91]
 resource_name = "shrink"
@@ -2814,6 +2879,148 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.8 ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "adjustStuffForNestingDolls"
+} ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=93]
+resource_name = "shrinkFromBig"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/texture_albedo")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 57 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.31, 0.02 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.609, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, -1, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 2.2, 2.2, 1 ), Vector3( 1.5, 1.5, 1 ), Vector3( 0.7, 0.7, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "adjustStuffForNestingDolls"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getABroom"
+} ]
 }
 
 [sub_resource type="ShaderMaterial" id=56]
@@ -3142,6 +3349,10 @@ pitch_scale = 0.5
 stream = ExtResource( 17 )
 volume_db = -26.0
 
+[node name="BumpSound2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 58 )
+volume_db = -25.0
+
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
 volume_db = -80.0
@@ -3275,6 +3486,7 @@ anims/RESET = SubResource( 89 )
 anims/grow = SubResource( 90 )
 anims/growBig = SubResource( 92 )
 anims/shrink = SubResource( 91 )
+anims/shrinkFromBig = SubResource( 93 )
 
 [node name="Listener" type="Listener" parent="."]
 current = true

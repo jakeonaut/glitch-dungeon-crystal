@@ -232,7 +232,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive():
-  return visible or is_passive
+  return (visible or is_passive) and level.player.nesting_doll_state != global.NestingDoll.MATRIARCH
 
 func generateId():
   return get_name()
@@ -408,6 +408,9 @@ func land(should_change_shader_params = true):
     if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
       global.activeInteractor.stopInteract()
     global.activeInteractor = null
+    npc.visible = false 
+    npc.can_activate = false
+    npc.is_active = false
   
   if isLandingOutsideOfCameraBounds():
     return

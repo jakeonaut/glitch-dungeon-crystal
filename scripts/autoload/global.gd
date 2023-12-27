@@ -176,6 +176,7 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
+    memory["random_entrances"] = false
     memory["broom"] = false
     memory["has_gotten_broom"] = 1
     memory["can_nest"] = false
@@ -364,9 +365,9 @@ func doFallthroughObjectCollision(gameMover, area):
         
     # check for fallThroughSolid collision while falling
     var rb = gameMover.rb
-    var lb = -rb
+    var lb = gameMover.lb
     var tb = gameMover.tb
-    var bb = -tb
+    var bb = gameMover.bb
 
     var lv = gameMover.linear_velocity.y
     var diff = -0.12

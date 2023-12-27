@@ -39,8 +39,6 @@ onready var enchantedBagSpriteVisible = get_node("SpriteContainer/Sprite3DBagVis
 onready var textContainer = get_node("TextContainer")
 onready var textBox = get_node("TextContainer/TextBox")
 
-onready var interactPromptSprite = get_node("InteractPrompt")
-
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
@@ -198,6 +196,10 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
+  if nesting_doll_state == global.NestingDoll.BABY:
+    return true
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    return false
   # if (broom_flip_h and Input.is_action_pressed("ui_right")) or \
   #    (not broom_flip_h and Input.is_action_pressed("ui_left")):
   #   return false
@@ -518,7 +520,11 @@ func nullify():
     self.can_cast_spell_timer = 0
     if global.memory.has("spellbookPage"):
       global.memory["spellbookPage"] = []
-  glitchTickle(true)
+  glitchTickle(false)
+
+# need this to have it available in the aniPlayer
+func adjustStuffForNestingDolls():
+  .adjustStuffForNestingDolls()
 
 func getMushroomInfected():
   return 
@@ -590,7 +596,16 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
-  if global.memory["hp"] <= 0 or should_immediately_die:
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    global.memory["hp"] += 1
+    physics_state = PhysicsState.GLITCH_HURT
+    glitchTickle(true)
+    glitch_death_timer = 0
+    shroomAniPlayer.play("shrinkFromBig")
+    nesting_doll_state = global.NestingDoll.GRANDMA
+    updateNestingDoll(nesting_doll_state)
+    global.pauseMoveInput = false
+  elif global.memory["hp"] <= 0 or should_immediately_die:
     global.incrementLevelZoneDeaths()
     global.memory["hp"] = 0
     self.textBox.hideTextbox()
@@ -605,7 +620,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   else:
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
+    getSmacked()
     glitch_death_timer = 0
+    global.pauseMoveInput = false 
 
     if global.memory["hp"] <= 1:
       summonSmokeClouds(5, true, true, -1)
@@ -626,6 +643,25 @@ func getSmacked():
   is_smacked = true
   pauseSelf = true
 
+var shroomRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
+var summonedShroom = null
+func summonSporeShroom():
+  return
+  # if summonedShroom and summonedShroom.get_ref():
+  #   summonedShroom.get_ref().queue_free()
+    
+  # var newShroom = shroomRes.instance()
+  # level.add_child(newShroom)
+  # newShroom.setAsParent(self)
+  # newShroom.global_transform.origin = self.global_transform.origin
+  # if mySprite.flip_h:
+  #   newShroom.global_transform.origin.x -= 2
+  #   newShroom.walk_direction.x = -1
+  # else:
+  #   newShroom.global_transform.origin.x += 2
+  #   newShroom.walk_direction.x = 1
+  # summonedShroom = weakref(newShroom)
+
 
 func processBagLogic(_delta):
   pass
@@ -637,7 +673,9 @@ func processBroomLogic(delta):
 
   var which_broom_attack = 1
   if not global.memory["broom"]:
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
+    if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
+      summonSporeShroom()
+    elif global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
       noBroomSound.play()
     return
 
@@ -658,6 +696,7 @@ func processBroomLogic(delta):
     if Input.is_action_pressed("ui_down"):
       aniPlayer.play("sweepFloor")
       which_broom_attack = 0
+      summonSporeShroom()
     elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2

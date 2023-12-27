@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://assets/sprites/Mushroom_Dude.png" type="Texture" id=7]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=9]
-[ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/Mushroom_elder_Dude.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=12]
 [ext_resource path="res://scripts/Enemies/BasicShroomEnemy.gd" type="Script" id=13]
+[ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 8 )
@@ -24,10 +25,10 @@ shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
+shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
+shader_param/palettesize = 3
 shader_param/resolution_scale = 1
 shader_param/offset = 0
 shader_param/enable_glitch = false
@@ -38,9 +39,9 @@ shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 7 )
+shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 10 )
+shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="CylinderShape" id=2]
 height = 1.6

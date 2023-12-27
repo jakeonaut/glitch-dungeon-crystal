@@ -467,8 +467,8 @@ func processInputs(delta):
   # fail safe...
   if vv > jump_force*2:
     vv = jump_force*2
-    if was_walking_into_wall and not isWalkingIntoWall():
-      vv = 1
+  if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
+    vv = 1
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
     if aniPlayer.assigned_animation == "sinkInSand":
@@ -1120,7 +1120,7 @@ func collideWithWall(local_lv):
       if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat":
         aniPlayer.stop()
         aniPlayer.clear_queue()
-        if landSound: landSound.play()
+        playLandSound()
         aniPlayer.play("jumpBump", -1, bump_ani_speed)
         if glitch_form == global.GlitchForm.LADDER:
           aniPlayer.queue("walk")
@@ -1128,7 +1128,7 @@ func collideWithWall(local_lv):
       elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar":
         aniPlayer.stop()
         aniPlayer.clear_queue()
-        if landSound: landSound.play()
+        playLandSound()
         aniPlayer.play("fallBump", -1, bump_ani_speed)
         if glitch_form == global.GlitchForm.LADDER:
           aniPlayer.queue("walk")
@@ -1138,7 +1138,7 @@ func collideWithWall(local_lv):
        and aa != "walkBump" and ("walk" in aa or "land" in aa):
       aniPlayer.stop()
       aniPlayer.clear_queue()
-      if landSound: landSound.play()
+      playLandSound()
       if glitch_form == global.GlitchForm.LADDER:
         aniPlayer.play("walk")
         bounceAniPlayer.stop()
@@ -1267,12 +1267,15 @@ func playBounce(aniName, aniNameQueue = []):
     for queuedAniName in aniNameQueue:
       bounceAniPlayer.queue(queuedAniName)
 
+func playLandSound():
+  if landSound: landSound.play()
+
 var has_water_double_jumped = false
 func landed():
   jump_squat_jump_input_timer = 0
   has_water_double_jumped = false
   var quiet_the_fall_sound = true
-  if landSound: landSound.play()
+  playLandSound()
   addJumpSmokeCloud()
   if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
@@ -1312,6 +1315,7 @@ func updateFacing(local_dir):
 
 func isRectColliding(lb1, tb1, rb1, bb1, lb2, tb2, rb2, bb2, debug_ = false):
   if debug_:
+    print(str(tb2) + ", " + str(bb1))
     print("\tisRectColliding: " + str(lb2 <= rb1) + ", " + str(rb2 >= lb1) + ", " + str(tb2 >= bb1) + ", " + str(bb2 <= tb1))
   if lb2 <= rb1 and rb2 >= lb1 and tb2 >= bb1 and bb2 <= tb1:
     return true
@@ -1325,3 +1329,23 @@ func moveToward2D(sourceVec3, targetVec3, delta):
 
 func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
     return global.compare2D(sourceVec3, targetVec3, closeness_amt)
+
+func isTouchingSpikes(collisionShape):
+  if not collisionShape.visible:
+    return
+
+  var x = collisionShape.global_transform.origin.x
+  var y = collisionShape.global_transform.origin.y
+  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
+  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
+  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
+  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
+  
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileSpikes(tile_type):
+        return true
+        # TODO(jaketrower): also reset the levelTiles array position?
+  return false

@@ -39,7 +39,7 @@ func _process(delta):
             touched_water_area = area
         if area.is_in_group("ladder"):
             is_touching_ladder = true
-        if area.is_in_group("door"):
+        if area.is_in_group("door") and parent.nesting_doll_state != global.NestingDoll.MATRIARCH:
             is_touching_door = true
             var door = area.get_node("..")
             if door.is_unlocking or door.is_passive or not door.visible:

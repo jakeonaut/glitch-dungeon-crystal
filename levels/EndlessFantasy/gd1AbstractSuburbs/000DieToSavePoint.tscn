@@ -1,9 +1,8 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=4]
-[ext_resource path="res://scripts/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
@@ -77,73 +76,6 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 13 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 4 )
-
-[sub_resource type="BoxShape" id=15]
-resource_local_to_scene = true
-extents = Vector3( 5, 4, 1.3 )
-
-[sub_resource type="Animation" id=16]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=17]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=18]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="BoxShape" id=19]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=33]
 resource_local_to_scene = true
@@ -290,63 +222,6 @@ hframes = 4
 vframes = 2
 frame = 2
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6999, 4.23691, 0 )
-grav = 0
-bbText = "[wave]save w/ broom[/wave] 
-then die."
-can_camera_zoom = false
-is_a_body = false
-floating_text = true
-tiny_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
-shape = SubResource( 15 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
-frame = 16
-
-[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
-anims/default = SubResource( 16 )
-anims/flickerOn = SubResource( 17 )
-anims/jump = SubResource( 18 )
-
-[node name="FallthroughSolid" parent="Viewport/level/NPC" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758781, 0 )
-shape = SubResource( 19 )
-
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.4, 0 )
 
@@ -357,7 +232,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.18758, 0 )
 shape = SubResource( 33 )
 
 [node name="landing" parent="Viewport/level/KizzyCat" index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3, 0 )
 
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 18.3148, 0 )
@@ -394,7 +269,5 @@ flip_v = true
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/NPC"]
-[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/KizzyCat"]
 [editable path="Viewport2/ScreenEffects"]

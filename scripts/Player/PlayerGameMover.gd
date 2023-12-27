@@ -72,6 +72,7 @@ func processPauseAnimation():
       aniPlayer.play("walk")
   
 onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
+onready var interactPromptSprite = get_node("InteractPrompt")
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
@@ -119,32 +120,51 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   cameraTarget.global_transform.origin.y = target_last_grounded_y
 
-  # if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
-  #   regainNestingDoll()
-  #   has_mushroom_double_jumped = true
-
+  adjustStuffForNestingDolls()
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
-
     
+func adjustStuffForNestingDolls():
+  # if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
+  #   regainNestingDoll()
+  #   has_mushroom_double_jumped = true
+
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    jump_force = 14
+    tb = 3
+    lb = -1.5
+    rb = 1.5
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
-    smallCollisionShape.shape.height = 2.532
+    smallCollisionShape.shape.height = 4
+    smallCollisionShape.shape.radius = 1.5
+    smallCollisionShape.translation.y = 1
     spriteYAlignment = 1.5
     innerSpriteContainer.scale = Vector3(2.0, 2.0, 1.0)
   elif nesting_doll_state == global.NestingDoll.BABY:
-    should_only_do_middle_sensor = on_ground or lv.y <= 0
+    jump_force = 9
+    tb = 0.5
+    lb = -0.72
+    rb = .72
+    should_only_do_middle_sensor = true
     cheating_horizontal_offset = bb / 2.0
     smallCollisionShape.shape.height = 1.0
+    smallCollisionShape.shape.radius = .5
+    smallCollisionShape.translation.y = -.5
     spriteYAlignment = 0.2
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
   else:
+    jump_force = 9
+    tb = 1
+    lb = -0.72
+    rb = .72
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
     smallCollisionShape.shape.height = 2.032
+    smallCollisionShape.shape.radius = .543
+    smallCollisionShape.translation.y = 0
     spriteYAlignment = 0.25
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
     
@@ -217,6 +237,13 @@ func playJumpSound():
   else:
     jumpSound.pitch_scale = rand_range(0.8, 1.2)
   .playJumpSound()
+
+onready var bumpSound2 = get_node("Sounds/BumpSound2")
+func playLandSound():
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    bumpSound2.play()
+  else:
+    .playLandSound()
 
 # @override
 func landed():
@@ -337,7 +364,7 @@ func getWalkSpeed(delta):
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
-    return 9 if on_ground else 8
+    return 9
   if nesting_doll_state == global.NestingDoll.MOM:
     return 7 if on_ground else 6
   if nesting_doll_state == global.NestingDoll.MATRIARCH:

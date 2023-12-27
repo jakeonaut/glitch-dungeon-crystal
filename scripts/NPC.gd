@@ -16,6 +16,7 @@ export var dont_recolor_me = false
 export var is_immediate = false
 export var is_a_body = true
 export var floating_text = false
+export var can_move_player = false
 
 var is_smacked = false
 var did_i_get_smacked = false
