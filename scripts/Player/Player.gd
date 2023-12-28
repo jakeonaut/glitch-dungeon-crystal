@@ -697,7 +697,7 @@ func processBroomLogic(delta):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
-    if Input.is_action_pressed("ui_down"):
+    if Input.is_action_pressed("ui_down") and isKindOfOnGround():
       aniPlayer.play("sweepFloor")
       which_broom_attack = 0
       summonSporeShroom()
