@@ -15,11 +15,14 @@ var am_i_really_in_range_of_player = false
 export var only_activate_in_range = true
 var should_staticify_children = false
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+
 func _ready():
     set_process(true)
     if spawned_object_path.length() != 0:
         spawned_object_res = load(spawned_object_path)
     spawn_timer = spawn_time_limit if spawn_time_limit != null else 0
+    yield(get_tree().create_timer(0.1), "timeout")
     for child in self.get_foreign_children():
         child.visible = false
 
@@ -52,10 +55,14 @@ func getNumChildren():
         if child.visible:
             count += 1
     return count
+
+func spawnEffect(_child):
+    pass
         
 func spawn(_with_flare = true):
     for child in self.get_foreign_children():
         child.visible = true
+        spawnEffect(child)
     if spawned_object_res == null: return
 
     var newObject = spawned_object_res.instance()

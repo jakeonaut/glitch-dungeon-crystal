@@ -19,6 +19,7 @@ var can_do_my_power = true
 export(String, FILE) var path
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
 
 var levelTiles = null
 func getLevelTiles():
@@ -136,6 +137,9 @@ func activate(_is_player):
     for shard in crystal_shards:
         shard.passiveActivate(0, false)
     global.memory["clean_crystals"] += 1
+    global.setLevelZoneThing("crystal_geode", true)
+    if quietSavePoint:
+        quietSavePoint.passiveActivate(0, true)
 
 
 func trySweepUpGlitchTiles(collisionShape):

@@ -11,7 +11,6 @@ extents = Vector3( 8, 8, 1 )
 
 [node name="GeodeSpawner" type="Spatial"]
 script = ExtResource( 2 )
-spawned_object_path = "res://sceneObjects/Enemies/GlitchEnemy.tscn"
 max_num_children = 1
 x_range = Vector2( 0, 0 )
 is_active = false

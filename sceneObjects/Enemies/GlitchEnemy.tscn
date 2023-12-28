@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -267,6 +267,10 @@ tracks/7/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="BoxShape" id=14]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [node name="GlitchEnemy" type="Spatial"]
 script = ExtResource( 1 )
 grav = 0
@@ -344,3 +348,10 @@ shape = SubResource( 4 )
 [node name="GlitchSecretAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 10 )
 anims/glitchOut = SubResource( 11 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
+shape = SubResource( 14 )

@@ -411,7 +411,8 @@ func doTimeDilation(_delta):
   
 func processGlitchHurtRecovery(delta):
   if physics_state == PhysicsState.GLITCH_HURT or \
-     (physics_state == PhysicsState.GLITCH_DYING and has_sweeped_glitch and global.hasGottenLevelGeode):
+     (physics_state == PhysicsState.GLITCH_DYING and has_sweeped_glitch and \
+      false): # global.getLevelZoneThing("crystal_geode")):
     global.pauseGame = true
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
@@ -523,8 +524,9 @@ func nullify():
   glitchTickle(false)
 
 # need this to have it available in the aniPlayer
-func adjustStuffForNestingDolls():
+func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
+  
 
 func getMushroomInfected():
   return 
@@ -550,8 +552,6 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if isOnSavePoint():
     return
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY:
-    return
-  if global.hasLevelGeodeBeenSmacked and (not global.hasGottenLevelGeode or level.player.pauseSelf):
     return
 
   if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
@@ -601,7 +601,11 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
     glitch_death_timer = 0
-    shroomAniPlayer.play("shrinkFromBig")
+    shroomAniPlayer.stop()
+    shroomAniPlayer.clear_queue()
+    shroomAniPlayer.play("RESET")
+    shroomAniPlayer.queue("shrinkFromBig")
+    shroomAniPlayer.queue("adjust")
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
@@ -646,21 +650,21 @@ func getSmacked():
 var shroomRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
 var summonedShroom = null
 func summonSporeShroom():
-  return
-  # if summonedShroom and summonedShroom.get_ref():
-  #   summonedShroom.get_ref().queue_free()
+  # return
+  if summonedShroom and summonedShroom.get_ref():
+    summonedShroom.get_ref().queue_free()
     
-  # var newShroom = shroomRes.instance()
-  # level.add_child(newShroom)
-  # newShroom.setAsParent(self)
-  # newShroom.global_transform.origin = self.global_transform.origin
-  # if mySprite.flip_h:
-  #   newShroom.global_transform.origin.x -= 2
-  #   newShroom.walk_direction.x = -1
-  # else:
-  #   newShroom.global_transform.origin.x += 2
-  #   newShroom.walk_direction.x = 1
-  # summonedShroom = weakref(newShroom)
+  var newShroom = shroomRes.instance()
+  level.add_child(newShroom)
+  newShroom.setAsParent(self)
+  newShroom.global_transform.origin = self.global_transform.origin
+  if mySprite.flip_h:
+    newShroom.global_transform.origin.x -= 2
+    newShroom.walk_direction.x = -1
+  else:
+    newShroom.global_transform.origin.x += 2
+    newShroom.walk_direction.x = 1
+  summonedShroom = weakref(newShroom)
 
 
 func processBagLogic(_delta):
@@ -838,7 +842,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.translation.x *= -1
     secretSweepActualCollisionShape.translation.x *= -1
   if aniPlayer.assigned_animation != "broomSmackGlitch":
-    if global.hasGottenLevelGeode:
+    if false: # global.getLevelZoneThing("crystal_geode"):
       broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
       # mySprite.material_override.set_shader_param("enable_palette_cycle", true)
@@ -1120,7 +1124,7 @@ func hitStuff(_delta):
         summonSmokeClouds(5, true, true)
         my_broom_owner.getSmacked()
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-      if global.hasGottenLevelGeode:
+      if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.has_sweeped_glitch = true
           my_broom_owner.getSmacked()

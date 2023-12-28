@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenCleanEvent.gd" type="Script" id=38]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=39]
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/CroneHavenAbortSound.gd" type="Script" id=40]
+[ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=41]
 [ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=43]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
@@ -780,6 +781,10 @@ shader_param/texture_albedo = ExtResource( 26 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 25 )
 
+[sub_resource type="BoxShape" id=224]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="BoxShape" id=75]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -1435,6 +1440,97 @@ shader_param/texture_albedo = ExtResource( 45 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 36 )
 
+[sub_resource type="Animation" id=208]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=209]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=210]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=211]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=212]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=213]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="BoxShape" id=214]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=221]
+resource_local_to_scene = true
+extents = Vector3( 0.2, 0.2, 1 )
+
+[sub_resource type="BoxShape" id=222]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=223]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=225]
+shader = ExtResource( 6 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 45 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 36 )
+
 [sub_resource type="Animation" id=215]
 resource_name = "default"
 length = 0.1
@@ -1577,69 +1673,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
-
-[sub_resource type="BoxShape" id=214]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="Animation" id=208]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=209]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=210]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=211]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=212]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=213]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="BoxShape" id=221]
-resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
-
-[sub_resource type="BoxShape" id=222]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=223]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=134]
 viewport_path = NodePath("Viewport")
@@ -1854,17 +1887,14 @@ frame = 53
 volume_db = -8.0
 pitch_scale = 1.0
 
-[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.47169, 0 )
+[node name="CollisionShape" parent="Viewport/level/GlitchEnemy6/FallthroughSolid" index="0"]
+shape = SubResource( 224 )
 
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -12, 0 )
 
 [node name="miniCubeCrystal" parent="Viewport/level/QuestionBlock" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="GlitchEnemy4" parent="Viewport/level/QuestionBlock" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
@@ -2150,117 +2180,6 @@ floating_text = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4, 0, 0 )
 script = ExtResource( 35 )
 
-[node name="FrogCroneNPC2" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9649, -15.9241, 0 )
-bbText = "•your broom seems to
-have some Hag Magic.."
-is_really_important = true
-can_activate = false
-dont_recolor_me = true
-
-[node name="CollisionShape" parent="Viewport/level/FrogCroneNPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 206 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="AbortSound" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox" index="9"]
-script = ExtResource( 40 )
-
-[node name="Sprite3D" parent="Viewport/level/FrogCroneNPC2" index="3"]
-material_override = SubResource( 207 )
-frame = 54
-
-[node name="AnimationPlayer" parent="Viewport/level/FrogCroneNPC2" index="4"]
-anims/default = SubResource( 215 )
-anims/fall = SubResource( 216 )
-anims/flickerOn = SubResource( 217 )
-anims/jump = SubResource( 218 )
-anims/land = SubResource( 219 )
-anims/stand = SubResource( 220 )
-
-[node name="CollisionShape" parent="Viewport/level/FrogCroneNPC2/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.938, 0 )
-shape = SubResource( 214 )
-
-[node name="InteractPrompt" parent="Viewport/level/FrogCroneNPC2" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
-
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 spawned_object_path = ""
@@ -2375,7 +2294,7 @@ shape = SubResource( 214 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -17, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0557, -23.0184, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
@@ -2396,6 +2315,123 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13045, -20, 0 )
 
 [node name="TriangleContainer" parent="Viewport/level/QuietSavePoint" index="0"]
 visible = false
+
+[node name="GeodeSpawner" parent="Viewport/level" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -22, 0 )
+
+[node name="FrogCroneNPC2" parent="Viewport/level/GeodeSpawner" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9649, 0.075901, 0 )
+bbText = "•your broom seems to
+have some Hag Magic.."
+is_important = true
+is_really_important = true
+dont_recolor_me = true
+
+[node name="CollisionShape" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 206 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="4"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="5"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="6"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="7"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="8"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="9"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 33.0
+step = 1.0
+page = 101.0
+
+[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="10"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="AbortSound" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 40 )
+
+[node name="Sprite3D" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2" index="3"]
+material_override = SubResource( 225 )
+frame = 54
+
+[node name="AnimationPlayer" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2" index="4"]
+anims/default = SubResource( 215 )
+anims/fall = SubResource( 216 )
+anims/flickerOn = SubResource( 217 )
+anims/jump = SubResource( 218 )
+anims/land = SubResource( 219 )
+anims/stand = SubResource( 220 )
+
+[node name="FallthroughSolid" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.938, 0 )
+shape = SubResource( 214 )
+
+[node name="InteractPrompt" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
@@ -2449,13 +2485,14 @@ visible = true
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/CubeCrystal/InteractionAreaEvent2"]
 [editable path="Viewport/level/InteractionAreaEvent"]
-[editable path="Viewport/level/FrogCroneNPC2"]
-[editable path="Viewport/level/FrogCroneNPC2/NPC TextBox"]
 [editable path="Viewport/level/GlitchTileSpawner"]
 [editable path="Viewport/level/GlitchTileSpawner/FrogCroneNPC"]
 [editable path="Viewport/level/GlitchTileSpawner/FrogCroneNPC/NPC TextBox"]
 [editable path="Viewport/level/DebugDoor"]
 [editable path="Viewport/level/DebugDoor/NPC/NPC TextBox"]
 [editable path="Viewport/level/QuietSavePoint"]
+[editable path="Viewport/level/GeodeSpawner"]
+[editable path="Viewport/level/GeodeSpawner/FrogCroneNPC2"]
+[editable path="Viewport/level/GeodeSpawner/FrogCroneNPC2/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

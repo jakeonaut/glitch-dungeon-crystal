@@ -121,8 +121,7 @@ func _process(delta):
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
-  if not global.hasLevelGeodeBeenSmacked and not global.hasGottenLevelGeode and \
-     not global.pauseGame and not global.pauseMoveInput:
+  if not global.pauseGame and not global.pauseMoveInput:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
       global.isPauseMenuOpen = true
       global.pauseGame = true
@@ -241,6 +240,12 @@ func tryToRespawn():
   self.overrideLevelRespawnEvent()
   player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
+  
+  if player.nesting_doll_state == global.NestingDoll.BABY:
+    player.shroomAniPlayer.stop(true)
+    player.shroomAniPlayer.clear_queue()
+    player.shroomAniPlayer.play("shrink", -1, 999)
+
   if player.nesting_doll_state != global.NestingDoll.GRANDMA:
     player.mySprite.flip_h = not player.mySprite.flip_h
     player.summonFallenBroom(false, true)
@@ -408,9 +413,8 @@ func flipGravity():
   # level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
   player.spriteContainer.rotation_degrees.x += 180
   player.spriteContainer.rotation_degrees.x = fmod(player.spriteContainer.rotation_degrees.x, 360)
+
   if player.grav < 0:
-    player.spriteYAlignment -= 0.5
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
   else:
-    player.spriteYAlignment += 0.5
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1

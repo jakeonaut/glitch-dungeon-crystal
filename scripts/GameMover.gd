@@ -1334,15 +1334,15 @@ func isTouchingSpikes(collisionShape):
   if not collisionShape.visible:
     return
 
-  var x = collisionShape.global_transform.origin.x
-  var y = collisionShape.global_transform.origin.y
-  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
-  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
-  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
-  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
+  var sx = collisionShape.global_transform.origin.x
+  var sy = collisionShape.global_transform.origin.y
+  var stb = sy + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
+  var sbb = sy - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
+  var slb = sx - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
+  var srb = sx + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
   
-  for i in range(int(floor(bb)), int(ceil(tb))):
-    for j in range(int(floor(lb)), int(ceil(rb))):
+  for i in range(int(floor(sbb)), int(ceil(stb))):
+    for j in range(int(floor(slb)), int(ceil(srb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileSpikes(tile_type):

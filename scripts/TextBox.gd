@@ -347,6 +347,7 @@ func passiveInteract(_delta):
 func stopInteract():
   if not is_important and isWaitingForNextPrompt() or isWaitingForEndPrompt():
     focus_me = false
+  hideTextbox()
   
 func adjustTinyColorRect():
   # TODO(jaketrower): nocommit

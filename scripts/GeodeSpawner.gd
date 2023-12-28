@@ -6,7 +6,6 @@ onready var spawnSound = get_node("SpawnSound")
 onready var spawnSound2 = get_node("SpawnSound2")
 
 var has_spawned = false
-onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var glitchParticleBurstRes = preload("res://sceneObjects/GlitchParticleBurst.tscn")
 export var is_static_in_level = true
 
@@ -25,11 +24,18 @@ func _ready():
         if global.getStaticLevelZoneLevelVar(level, self.name) == 2:
             queue_free()
 
+func spawnEffect(child):
+    level.summonSmokeClouds(child.global_transform.origin, 2, true, true)
+
 func _process(_delta):
-    is_active = isConditionActive() and not has_spawned
+    var is_condition_active = isConditionActive()
+    is_active = is_condition_active and not has_spawned
+    if not is_condition_active:
+        for child in self.get_foreign_children():
+            child.visible = false
 
 func isConditionActive():
-    return global.hasGottenLevelGeode
+    return global.getLevelZoneThing("crystal_geode")
 
 # @override
 func getNumChildren():

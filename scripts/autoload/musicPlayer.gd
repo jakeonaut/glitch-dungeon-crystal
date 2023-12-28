@@ -98,12 +98,6 @@ func stopAll():
     currentlyPlayingTheme = null
 
 func conductFromScenePath(path):
-    if global.hasGottenLevelGeode:
-        tryToPlay(casinoThemePlayer)
-        changeSongPitch(1.0)
-        default_song_pitch = 1.0
-        return
-
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
     if path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
@@ -152,10 +146,6 @@ func conductFromScenePath(path):
     default_song_pitch = 1.0
 
 func changeSongPitch(new_pitch):
-    # TODO(jaketrower): This is a little dumb
-    if new_pitch == 1.0 and global.hasGottenLevelGeode:
-        new_pitch = 1.5
-
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch

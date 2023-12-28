@@ -45,4 +45,6 @@ func _process(delta):
             if door.is_unlocking or door.is_passive or not door.visible:
                 is_touching_door = false
 
-    parent.interactPromptSprite.visible = is_touching_door and global.activeInteractor == null and not global.isEnteringRoom and not global.pauseGame
+    parent.interactPromptSprite.visible = is_touching_door and \
+                                          (global.activeInteractor == null or global.activeInteractor.is_tiny) and \
+                                          not global.isEnteringRoom and not global.pauseGame

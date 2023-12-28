@@ -106,7 +106,10 @@ func _process(delta):
     
   # this is a little weird but fixes the fallthrough area situation:
   if linear_velocity.y < 0:
-    interactionArea.transform.origin.y = -2
+    if nesting_doll_state == global.NestingDoll.BABY:
+      interactionArea.transform.origin.y = -0.5
+    else:
+      interactionArea.transform.origin.y = -2
   else:
     interactionArea.transform.origin.y = 0
     
@@ -126,6 +129,8 @@ func _process(delta):
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
     
+onready var tileCollisionShape = get_node("TileArea/CollisionShape")
+onready var interactionShape = get_node("InteractionArea/CollisionShape")
 func adjustStuffForNestingDolls():
   # if nesting_doll_state < 2 and Input.is_action_just_pressed("sub_action_button"):
   #   regainNestingDoll()
@@ -133,40 +138,49 @@ func adjustStuffForNestingDolls():
 
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     jump_force = 14
-    tb = 3
-    lb = -1.5
-    rb = 1.5
+    tb = 2
+    bb = -2
+    lb = -1.3
+    rb = 1.3
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
     smallCollisionShape.shape.height = 4
     smallCollisionShape.shape.radius = 1.5
-    smallCollisionShape.translation.y = 1
-    spriteYAlignment = 1.5
+    interactionShape.shape.extents = Vector3(1.4, 2.4, 3)
+    spriteYAlignment = 0.5
     innerSpriteContainer.scale = Vector3(2.0, 2.0, 1.0)
   elif nesting_doll_state == global.NestingDoll.BABY:
     jump_force = 9
     tb = 0.5
-    lb = -0.72
-    rb = .72
+    bb = -0.5
+    lb = -0.5
+    rb = .5
     should_only_do_middle_sensor = true
     cheating_horizontal_offset = bb / 2.0
     smallCollisionShape.shape.height = 1.0
     smallCollisionShape.shape.radius = .5
-    smallCollisionShape.translation.y = -.5
-    spriteYAlignment = 0.2
+    interactionShape.shape.extents = Vector3(0.35, 0.6, 3)
+    spriteYAlignment = 0.65
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
   else:
     jump_force = 9
     tb = 1
+    bb = -1
     lb = -0.72
     rb = .72
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
     smallCollisionShape.shape.height = 2.032
     smallCollisionShape.shape.radius = .543
-    smallCollisionShape.translation.y = 0
+    interactionShape.shape.extents = Vector3(0.7, 1.2, 3)
     spriteYAlignment = 0.25
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
+
+  if grav < 0:
+    spriteYAlignment = 0 - spriteYAlignment
+  
+  tileCollisionShape.shape.extents.x = rb
+  tileCollisionShape.shape.extents.y = tb
     
 
 func spawnOneSparkle(xdiff, above_the_head = false):

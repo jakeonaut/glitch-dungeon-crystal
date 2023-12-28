@@ -156,7 +156,7 @@ tracks/0/keys = {
 
 [sub_resource type="BoxShape" id=9]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=7]
 resource_local_to_scene = true
@@ -217,7 +217,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02902, 0 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647551, 0 )
 shape = SubResource( 9 )
 
 [node name="DoorCloseSound" type="AudioStreamPlayer" parent="."]

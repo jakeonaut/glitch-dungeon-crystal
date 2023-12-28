@@ -169,7 +169,7 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-            if global.hasGottenLevelGeode:
+            if false: # global.getLevelZoneThing("crystal_geode"):
                 if area.get_node("..").ouchies(global_transform.origin):
                     my_broom_owner.getSmacked()
                     my_broom_owner.has_sweeped_glitch = true

@@ -63,8 +63,12 @@ func passiveActivate(_delta, is_player):
   if not is_player:
     return
 
+  level.player.shroomAniPlayer.stop()
+  level.player.shroomAniPlayer.clear_queue()
+  level.player.shroomAniPlayer.play("RESET")
   if is_big:
-    level.player.shroomAniPlayer.play("growBig")
+    level.player.shroomAniPlayer.queue("growBig")
+    level.player.shroomAniPlayer.queue("adjust")
     level.player.nesting_doll_state = global.NestingDoll.MATRIARCH
     global.memory["nesting_doll"] = global.NestingDoll.MATRIARCH
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
@@ -76,7 +80,8 @@ func passiveActivate(_delta, is_player):
       level.player.summonFallenBroom(false, true)
       level.player.mySprite.flip_h = not level.player.mySprite.flip_h
   elif is_infected:
-    level.player.shroomAniPlayer.play("shrink")
+    level.player.shroomAniPlayer.queue("shrink")
+    level.player.shroomAniPlayer.queue("adjust")
     level.player.nesting_doll_state = global.NestingDoll.BABY
     global.memory["nesting_doll"] = global.NestingDoll.BABY
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
@@ -88,7 +93,8 @@ func passiveActivate(_delta, is_player):
       level.player.summonFallenBroom(false, true)
       level.player.mySprite.flip_h = not level.player.mySprite.flip_h
   else:
-    level.player.shroomAniPlayer.play("grow")
+    level.player.shroomAniPlayer.queue("grow")
+    level.player.shroomAniPlayer.queue("adjust")
     level.player.getABroom()
     for _i in range(3):
       level.player.spawnASpore(0, -1)

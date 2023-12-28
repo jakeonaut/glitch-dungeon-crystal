@@ -232,7 +232,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive():
-  return (visible or is_passive) and level.player.nesting_doll_state != global.NestingDoll.MATRIARCH
+  return (visible or is_passive) and getPlayer().nesting_doll_state != global.NestingDoll.MATRIARCH
 
 func generateId():
   return get_name()
@@ -242,7 +242,7 @@ func activate(is_player):
     return false
     
   if not is_passive:
-    if not is_locked and not should_lock and global.activeInteractor == null:
+    if not is_locked and not should_lock:
       goThroughDoor()
     elif is_locked:
       if key_type == global.KeyItem.NORMAL:
@@ -326,7 +326,12 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
 
   if not is_passive:
     getPlayer().global_transform.origin = self.global_transform.origin
-    getPlayer().global_transform.origin.y += 1
+    if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
+      getPlayer().global_transform.origin.y += 0.5
+      if getPlayer().grav < 0:
+        getPlayer().global_transform.origin.y += 1
+    else:
+      getPlayer().global_transform.origin.y += 1
     if getPlayer().summonedBroom:
       getPlayer().summonedBroom.visible = false
       getPlayer().broomStop()

@@ -1,5 +1,7 @@
 extends Node
 
+var kirokaze_palette = preload("res://assets/palettes/kirokaze-gameboy-1x.png")
+
 var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
 var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
 var yellow_player_palette = preload("res://assets/palettes/yellow_player_palette.png")
@@ -435,8 +437,6 @@ func tryInitializeLevelZone(levelZone):
         # setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles", 1)
         # setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
         # setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
-
-    hasGottenLevelGeode = false
     currLevelZone = levelZone
 
 func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
@@ -451,9 +451,9 @@ func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
         self.memory[highScoreStr][levelZoneThing] = curr_score
 
 func resetLevelZone(levelZone):
-    hasGottenLevelGeode = false
-    if not levelZone == HUB_LEVEL_ZONE:
-        self.memory[levelZone] = {}
+    return 
+    # if not levelZone == HUB_LEVEL_ZONE:
+    #     self.memory[levelZone] = {}
     # if self.memory.has("spellbookPage"):
     #     self.memory["spellbookPage"] = []
 

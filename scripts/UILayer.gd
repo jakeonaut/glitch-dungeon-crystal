@@ -293,76 +293,77 @@ var totalHiscoreCounter = 0
 var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
 func processHiscoreRenderLogic(delta):
-  if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked or level.getLevelName().find("000IntroCutscene") > 0:
-    hiscoreRect.visible = false
-    congratsHiscoreLabel.visible = false
-    crystalCubeHiscoreLabel.visible = false
-    glitchTilesHiscoreLabel.visible = false
-    angelHiscoreLabel.visible = false
-    deathsHiscoreLabel.visible = false
-    jumpsHiscoreLabel.visible = false
-    totalHiscoreLabel.visible = false
-    pressEnterLabel.visible = false
-    return
-  hiscoreRect.visible = true
-  congratsHiscoreLabel.visible = true
-  congratsHiscoreLabel.text = "   CONGRATS:\nend of level CRYSTAL!!"
+  pass
+  # if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked or level.getLevelName().find("000IntroCutscene") > 0:
+  #   hiscoreRect.visible = false
+  #   congratsHiscoreLabel.visible = false
+  #   crystalCubeHiscoreLabel.visible = false
+  #   glitchTilesHiscoreLabel.visible = false
+  #   angelHiscoreLabel.visible = false
+  #   deathsHiscoreLabel.visible = false
+  #   jumpsHiscoreLabel.visible = false
+  #   totalHiscoreLabel.visible = false
+  #   pressEnterLabel.visible = false
+  #   return
+  # hiscoreRect.visible = true
+  # congratsHiscoreLabel.visible = true
+  # congratsHiscoreLabel.text = "   CONGRATS:\nend of level CRYSTAL!!"
 
-  hiscoreTimer += (delta*11)
-  if hiscoreTimer >= hiscoreTimeLimit:
-    glitchStatusText1.visible = false
-    glitchStatusText2.visible = false
-    hiscoreTimer = 0
-    # TODO(jaketrower): can consolidate this but i'm lazy rn
-    if hiscoreDisplayIndex == 0:
-      totalHiscoreLabel.visible = true
-      crystalCubeHiscoreLabel.visible = true
-      crystalCubeHiscoreLabel.text = "gems: " + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
-      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
-        totalHiscoreCounter += 1
-      else:
-        hiscoreDisplayIndex += 1
-        hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 1:
-      deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("num_deaths")
-      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
-        totalHiscoreCounter += 1
-      else:
-        hiscoreDisplayIndex += 1
-        hiscoreCounter = 0
-    elif hiscoreDisplayIndex == 2:
-      angelHiscoreLabel.visible = true
-      angelHiscoreLabel.text = "angels: " + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("angelTadpole")
-      if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
-        totalHiscoreCounter += 1
-      else:
-        hiscoreDisplayIndex += 1
-        hiscoreCounter = 0
-        hiscoreTimeLimit = 5
-    elif hiscoreDisplayIndex == 3:
-      glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(global.getLevelZoneThing("num_broom_sweeps"))
-      hiscoreDisplayIndex += 1
-    elif hiscoreDisplayIndex == 4:
-      jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = "jumps: " + str(global.getLevelZoneThing("num_jumps"))
-      hiscoreDisplayIndex += 1
-    elif hiscoreDisplayIndex == 5:
-      pressEnterLabel.visible = not pressEnterLabel.visible
-      pressEnterLabel.text = "press enter\nto continue"
-    # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
-    if level.has_node("CubeCrystal"):
-      global.setLevelZoneThing("hiscore", totalHiscoreCounter)
+  # hiscoreTimer += (delta*11)
+  # if hiscoreTimer >= hiscoreTimeLimit:
+  #   glitchStatusText1.visible = false
+  #   glitchStatusText2.visible = false
+  #   hiscoreTimer = 0
+  #   # TODO(jaketrower): can consolidate this but i'm lazy rn
+  #   if hiscoreDisplayIndex == 0:
+  #     totalHiscoreLabel.visible = true
+  #     crystalCubeHiscoreLabel.visible = true
+  #     crystalCubeHiscoreLabel.text = "gems: " + str(hiscoreCounter)
+  #     var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
+  #     if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+  #       hiscoreCounter += 1
+  #       totalHiscoreCounter += 1
+  #     else:
+  #       hiscoreDisplayIndex += 1
+  #       hiscoreCounter = 0
+  #   elif hiscoreDisplayIndex == 1:
+  #     deathsHiscoreLabel.visible = true
+  #     deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
+  #     var hiscoreSource = global.getLevelZoneThing("num_deaths")
+  #     if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+  #       hiscoreCounter += 1
+  #       totalHiscoreCounter += 1
+  #     else:
+  #       hiscoreDisplayIndex += 1
+  #       hiscoreCounter = 0
+  #   elif hiscoreDisplayIndex == 2:
+  #     angelHiscoreLabel.visible = true
+  #     angelHiscoreLabel.text = "angels: " + str(hiscoreCounter)
+  #     var hiscoreSource = global.getLevelZoneThing("angelTadpole")
+  #     if hiscoreSource != null and hiscoreCounter < hiscoreSource:
+  #       hiscoreCounter += 1
+  #       totalHiscoreCounter += 1
+  #     else:
+  #       hiscoreDisplayIndex += 1
+  #       hiscoreCounter = 0
+  #       hiscoreTimeLimit = 5
+  #   elif hiscoreDisplayIndex == 3:
+  #     glitchTilesHiscoreLabel.visible = true
+  #     glitchTilesHiscoreLabel.text = "broom sweeps: " + str(global.getLevelZoneThing("num_broom_sweeps"))
+  #     hiscoreDisplayIndex += 1
+  #   elif hiscoreDisplayIndex == 4:
+  #     jumpsHiscoreLabel.visible = true
+  #     jumpsHiscoreLabel.text = "jumps: " + str(global.getLevelZoneThing("num_jumps"))
+  #     hiscoreDisplayIndex += 1
+  #   elif hiscoreDisplayIndex == 5:
+  #     pressEnterLabel.visible = not pressEnterLabel.visible
+  #     pressEnterLabel.text = "press enter\nto continue"
+  #   # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
+  #   if level.has_node("CubeCrystal"):
+  #     global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button")):  
-    transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
+  # if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button")):  
+  #   transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x > 1:

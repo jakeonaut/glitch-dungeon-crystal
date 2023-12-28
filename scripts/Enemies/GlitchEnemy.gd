@@ -9,6 +9,7 @@ onready var notDieSound = get_node("Sounds/NotDieSound") if has_node("Sounds/Not
 onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/EvolveSound") else null
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
+onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
@@ -24,6 +25,7 @@ export var slime_walk_time_limit = 10
 var slime_idle_time_limit = 10
 
 var am_i_dying = false
+var am_i_freezing = false
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 export var only_activate_in_range = true
@@ -138,6 +140,11 @@ func _process(delta):
         is_a_physics_particle = true
     else:
         shouldIDoCollisions()
+        if fallthroughSolid:
+            if smallInteractionArea.is_in_group("enemies") and fallthroughSolid.is_in_group("fallthrough"):
+                fallthroughSolid.remove_from_group("fallthrough")
+            elif not smallInteractionArea.is_in_group("enemies") and not fallthroughSolid.is_in_group("fallthrough"):
+                fallthroughSolid.add_to_group("fallthrough")
         
     
     if am_i_dying:
@@ -214,6 +221,9 @@ func unsmack():
     mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
     if should_freeze:
         mySprite.material_override.set_shader_param("shake_power", 0.00)
+        mySprite.material_override.set_shader_param("target_palette", global.kirokaze_palette)
+        mySprite.material_override.set_shader_param("enable_glitch", false)
+        mySprite.translation.z = 0
         mySprite.should_animate = false
         mySprite.restart()
         grav = 20
@@ -312,22 +322,22 @@ func glitchSetSpritesAndCollision():
 
 # @override
 func pressingMoveLeft():
-    if am_i_dying: return false
+    if am_i_dying or am_i_freezing: return false
     return walk_direction.x == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    if am_i_dying: return false
+    if am_i_dying or am_i_freezing: return false
     return walk_direction.x == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
-    if am_i_dying: return false
+    if am_i_dying or am_i_freezing: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override
 func pressingJump():
-    if am_i_dying: return false
+    if am_i_dying or am_i_freezing: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override
@@ -370,7 +380,7 @@ func tryAddEnemiesGroup():
         smallInteractionArea.add_to_group("enemies")
 
 func ouchies_base():
-    if am_i_dying:
+    if am_i_dying or am_i_freezing:
         return
     if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
@@ -388,17 +398,17 @@ func ouchies(_broom_origin):
 
     ouchies_base()
 
-    if not am_i_dying:
-        am_i_dying = true
-        mySprite.restart()
+    if not am_i_dying and not am_i_freezing:
+        am_i_freezing = true
         mySprite.frame_delay = 0.1
-        mySprite.max_frames = 4
-        mySprite.should_soft_fizzle_out = true
+        mySprite.max_frames = 1
+        mySprite.restart()
         # mySprite.texture = altGlitchEnemySheet
-        mySprite.set_material_override(null)
         if dieSound != null: dieSound.play()
         pauseSelf = true
         tryRemoveEnemiesGroup()
+        # glitchSecretAniPlayer.play("freeze")
+        should_freeze = true
         return true
     return false
 
