@@ -5,6 +5,7 @@ onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
 
+var CAMERA_SIZE = 25
 var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999
@@ -125,26 +126,8 @@ func _process(delta):
     self.size = self.size + (initial_size - self.size) * (delta*5)
     if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
       self.size = initial_size
-      
-  if is_doing_fake_static:
-    set_speed(0)
-    set_interpolation_enabled(false)
-    var target_screen_pos = unproject_position(actual_target.get_ref().global_transform.origin)
-
-    # self.global_transform.origin.x = x_step * floor(x / x_step) + x_step
-
-    var SCREEN_WIDTH = 1280.0
-    var SCREEN_HEIGHT = 1024.0
-    # self.global_transform.origin.x = fmod(target_screen_pos.x, SCREEN_WIDTH) # doesn't work...
-    # self.global_transform.origin.y = fmod(target_screen_pos.y, SCREEN_HEIGHT)
     
-    var w = 0
-    var position_x_2D = Vector2(SCREEN_WIDTH * floor(target_screen_pos.x / SCREEN_WIDTH) + SCREEN_WIDTH/2 + w, 0)
-    self.global_transform.origin.x = project_position(position_x_2D, 0).x
-    var position_y_2D = Vector2(0, SCREEN_HEIGHT * floor(target_screen_pos.y / SCREEN_HEIGHT) + SCREEN_HEIGHT/2 + w)
-    self.global_transform.origin.y = project_position(position_y_2D, 0).y
-    print(position_x_2D, self.global_transform.origin.x)
-    
+  self.size = CAMERA_SIZE
   respectLevelTilesEdges()
   
   # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size
@@ -172,7 +155,7 @@ func respectLevelTilesEdges():
     
 func isNearBottom():
   # this should be binary initial_size || zoomed_size, depending on whether glo
-  var calcSize = zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
+  var calcSize = self.size # zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
   var y_margin = 7.5 - ((15-calcSize)/2)
   # print("is near bottom?: " + str(global_transform.origin.y) + " < " + str(botmost_y + y_margin * 2) + " : " + str(global_transform.origin.y < botmost_y + y_margin * 2))
   return global_transform.origin.y < botmost_y + y_margin * 2
@@ -180,7 +163,7 @@ func isNearBottom():
 func isInitialTargetNearBottom():
   if initial_target == null:
     return false
-  var calcSize = zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
+  var calcSize = self.size # zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
   var y_margin = 7.5 - ((15-calcSize)/2)
   # print("is near bottom?: " + str(initial_target.global_transform.origin.y) + " < " + str(botmost_y + y_margin) + " : " + str(initial_target.global_transform.origin.y < botmost_y + y_margin))
   return initial_target.global_transform.origin.y < botmost_y + y_margin

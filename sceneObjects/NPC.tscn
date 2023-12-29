@@ -119,16 +119,13 @@ shape = SubResource( 14 )
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
 [node name="TextBox" parent="NPC TextBox" index="0"]
-margin_bottom = 470.0
-
-[node name="ColorRect" parent="NPC TextBox/TextBox" index="0"]
-margin_bottom = 135.0
+margin_bottom = 491.0
 
 [node name="ColorRect2" parent="NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 126.0
+margin_bottom = 90.0
 
 [node name="ColorRect3" parent="NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 127.0
+margin_bottom = 91.0
 
 [node name="Text" parent="NPC TextBox/TextBox" index="3"]
 margin_top = 11.0
@@ -136,10 +133,10 @@ margin_bottom = 112.0
 rect_clip_content = true
 
 [node name="NextPrompt" parent="NPC TextBox/TextBox" index="4"]
-position = Vector2( 439.5, 109.5 )
+position = Vector2( 439.5, 100 )
 
 [node name="EndPrompt" parent="NPC TextBox/TextBox" index="5"]
-position = Vector2( 439.5, 111.5 )
+position = Vector2( 439.5, 100 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
 stream = ExtResource( 10 )

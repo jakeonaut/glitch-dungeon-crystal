@@ -44,6 +44,7 @@ func fallthroughCollisionActivate(possible_game_mover):
             getPlayer().applyHalfGrav = true
             getPlayer().applyHalfGravTimer = 5
             bounceSound.play()
+            getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
 
 func wiggle(_possible_game_mover):
     should_wiggle = true
