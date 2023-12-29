@@ -359,7 +359,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     return
 
   if start_of_game:
-    transition.long_fade_to(self.path)
+    transition.really_long_fade_to(self.path)
     return
     
   global.memory["cameraSize"] = level.gameCamera.initial_size
@@ -377,15 +377,15 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     else:
       global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
     global.memory["linear_velocity"] = getPlayer().linear_velocity
-    transition.fade_to(self.path)
+    transition.fast_fade_to(self.path)
   elif really_really_long_fade:
     transition.really_really_long_fade_to(self.path)
   elif really_long_fade:
     transition.really_long_fade_to(self.path)
   else:
     transition.long_fade_to(self.path)
-  if is_immediate or is_passive:
-    transition.change_scene()
+  # if is_immediate or is_passive:
+  #   transition.change_scene()
 
 func isLandingOutsideOfCameraBounds():
   var DEATH_MARGIN = 0
@@ -397,7 +397,7 @@ func isLandingOutsideOfCameraBounds():
         return true
   return false
 
-func land(should_change_shader_params = true):
+func land(should_change_shader_params = true, should_play_transition = false):
   # TODO(jaketrower): Oh...
   # global.memory.erase("active_save_point_x")
   # global.memory.erase("active_save_point_y")
@@ -426,6 +426,8 @@ func land(should_change_shader_params = true):
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
 
   if is_passive:
+    if should_play_transition:
+      transition.fast_reverse_fade()
     if global.memory.has("player_flip_h"):
       getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
       global.memory.erase("player_flip_h")
@@ -441,6 +443,8 @@ func land(should_change_shader_params = true):
     if is_vertical:
       getPlayer().on_ground = false
   else:
+    if should_play_transition:
+      transition.reverse_fade()
     # SNEAKY SNEAKY
     global.saveMySpot(self.translation, level) 
     getPlayer().playBounce("land")

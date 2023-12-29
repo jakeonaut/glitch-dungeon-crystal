@@ -25,9 +25,12 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
+shader_param/offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -50,9 +53,12 @@ shader_param/shake_color_rate = 0.01
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
+shader_param/offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
@@ -128,9 +134,6 @@ stream = ExtResource( 8 )
 volume_db = -6.0
 
 [node name="WaterFilter" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="WaterFilter"]
 material = SubResource( 6 )

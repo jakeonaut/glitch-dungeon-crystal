@@ -14,13 +14,15 @@ func _ready():
 func _process(_delta):
     aniPlayer.playback_speed = global.time_dilation_multiplier
 
+func fast_reverse_fade():
+    aniPlayer.play("reverse_fade", -1, 2.0)
 func reverse_fade():
     aniPlayer.play("reverse_fade")
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
-func fade_to(scn_path):
+func fast_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
-    aniPlayer.play("fade") # play the transition animation
+    aniPlayer.play("long_fade", -1, 2.0) # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func long_fade_to(scn_path):
     was_i_interrupted = false
@@ -35,12 +37,7 @@ func really_long_fade_to(scn_path):
 func really_really_long_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
-    aniPlayer.play("really_really_long_fade_to") # play the long transition animation
-# PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
-func blink_fade_to(scn_path):
-    was_i_interrupted = false
-    self.path = scn_path # store the scene path
-    aniPlayer.play("blink_fade") # play the blink transition animation
+    aniPlayer.play("really_really_long_fade_to") # play the long transition animation   
 
 func interrupt():
     was_i_interrupted = true

@@ -292,7 +292,7 @@ var hiscoreCounter = 0
 var totalHiscoreCounter = 0
 var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
-func processHiscoreRenderLogic(delta):
+func processHiscoreRenderLogic(_delta):
   pass
   # if not global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked or level.getLevelName().find("000IntroCutscene") > 0:
   #   hiscoreRect.visible = false

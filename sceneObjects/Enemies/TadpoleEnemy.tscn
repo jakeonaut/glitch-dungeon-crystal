@@ -66,7 +66,6 @@ walk_speed = 10
 jump_force = 13
 sprite_offset_y = -0.125
 walk_direction = Vector2( -1, 0 )
-modAmt = 0.0
 smack_time_limit = 30
 smack_recovery_time_limit = 31
 jump_time_limit = 0
@@ -105,7 +104,7 @@ script = ExtResource( 6 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "tadpole"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["tadpole"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
 script = ExtResource( 5 )
 

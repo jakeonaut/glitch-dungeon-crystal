@@ -424,7 +424,7 @@ collision_layer = 2
 script = ExtResource( 7 )
 grav = 0
 bbText = "•\"GRIMOIRE\" get!!
-...............
+                   
 ????"
 portrait = ExtResource( 11 )
 is_important = true

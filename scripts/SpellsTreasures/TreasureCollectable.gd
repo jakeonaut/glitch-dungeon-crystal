@@ -43,9 +43,12 @@ func _process(delta):
     level.player.broomSpriteVisible.visible = false
   
   if gotcha:
+    print("gotcha")
     if display_textbox and canPause:
-      .passiveActivate(delta, true) # let the NPC passiveActive super script handle the textbox
+      print("interact")
+      textBox.interact()
     else:
+      print("abort")
       okay_im_done = true
       textBox.abortSound.activateScript()
   elif being_collected and not really_being_collected: 
@@ -57,6 +60,7 @@ func _process(delta):
       level.player.global_transform.origin = self.global_transform.origin
       level.player.aniPlayer.play("preGetItem")
       if display_textbox:
+        print("WHAT")
         global.activeInteractor = textBox # also weird but this is to get the camera to look at me
   elif really_being_collected:
     level.player.dir = Vector3(0, 0, 0)
@@ -75,6 +79,7 @@ func _process(delta):
       else:
         gotcha = true
         if display_textbox:
+          print("ok...")
           textBox.is_really_important = true
           textBox.is_important = true
           # collectSound.play()
@@ -85,11 +90,13 @@ func _process(delta):
       level.player.aniPlayer.play("getItem")
       secretAniPlayer.play("getItem")
       if display_textbox:
+        print("bye bye")
         textBox.focus_me = true
         # if there is an existing textBox already... hide it... fail safe:
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
           global.activeInteractor.hideTextbox()
         global.activeInteractor = textBox # also weird but this is to get the camera to look at me
+        textBox.interact()
           
 # @override
 func alignMySprite():

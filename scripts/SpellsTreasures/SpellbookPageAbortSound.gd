@@ -1,11 +1,8 @@
 extends AudioStreamPlayer
 
+onready var spellbookPage = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
-func _ready():
-  pass
-
-onready var spellbookPage = get_node("../../..")
 func activateScript():
   spellbookPage.mySprite.visible = false
   spellbookPage.okay_im_done = true
@@ -41,6 +38,3 @@ func preActivateScript():
     level.uiLayer.get_node("EquipmentRect").visible = true
     level.uiLayer.get_node("EquipmentRect").rect_scale = Vector2(1.5, 1.5)
     level.uiLayer.get_node("EquipmentRect").rect_position = Vector2(300, 250)
-
-func isActive():
-  return true

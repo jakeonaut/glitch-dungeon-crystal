@@ -450,7 +450,7 @@ func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
        curr_score * score_mult > self.memory[highScoreStr][levelZoneThing]:
         self.memory[highScoreStr][levelZoneThing] = curr_score
 
-func resetLevelZone(levelZone):
+func resetLevelZone(_levelZone):
     return 
     # if not levelZone == HUB_LEVEL_ZONE:
     #     self.memory[levelZone] = {}

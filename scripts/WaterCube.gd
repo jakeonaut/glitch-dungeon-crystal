@@ -18,6 +18,7 @@ export var water_cube_width = 2.0
 export var water_cube_height = 2.0
 export var turn_poisonous = false
 export var can_splash = true
+export var is_waterfall = false
 var is_poison = false
 var poisonous_timer = 0
 var poisonous_time_limit = 10
@@ -106,7 +107,7 @@ func justStopPassiveActivate():
       else:
         miniSplashSound2.pitch_scale = rand_range(0.8, 1.5)
         miniSplashSound2.play()
-    if getPlayer().global_transform.origin.y > global_transform.origin.y:
+    if not is_waterfall and getPlayer().global_transform.origin.y > global_transform.origin.y:
       makeNewSplashSprite(-0.418, true)
       makeNewSplashSprite(0.582, true)
       

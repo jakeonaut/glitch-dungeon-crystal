@@ -107,7 +107,6 @@ func _ready_impl():
   global.activeThrowableObjectPath = null
   player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
   player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
-  transition.reverse_fade()
   if player_message != "???":
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
@@ -221,7 +220,7 @@ func tryToRespawn():
       player.global_transform.origin = player.spawn_origin
 
   if found_door:
-    found_door.land()
+    found_door.land(true, true)
   elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin
     global.saveMySpot(player.spawn_origin, self)

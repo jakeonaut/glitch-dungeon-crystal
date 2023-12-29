@@ -67,7 +67,7 @@ func goThroughDoor():
   global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
   global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
   global.memory["linear_velocity"] = getPlayer().linear_velocity
-  # transition.fade_to(self.path)
+  # transition.long_fade_to(self.path)
 
   # TODO(jaketrower): Should probably put this onto transition:
   # var level = get_tree().get_root().get_node("Game/Viewport/level")

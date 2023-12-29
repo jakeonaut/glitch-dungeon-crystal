@@ -12,7 +12,7 @@ onready var menuOptionPointer = get_node("MenuOptionPointer")
 onready var menuOptionPointer2 = get_node("MenuOptionPointer2")
 var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 func startGame():
-    transition.long_fade_to(roomPath)
+    transition.really_long_fade_to(roomPath)
 
 func loadGame():
     if global.loadGame():

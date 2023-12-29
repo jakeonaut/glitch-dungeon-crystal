@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -20,6 +20,38 @@
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/BigFrogEnemy.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=21]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=22]
+[ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=23]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=24]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 21 )
+shader_param/base_palette = ExtResource( 22 )
+shader_param/target_palette = ExtResource( 23 )
 
 [sub_resource type="BoxShape" id=36]
 resource_local_to_scene = true
@@ -84,21 +116,8 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=30]
+[sub_resource type="BoxShape" id=37]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
-
-[sub_resource type="BoxShape" id=31]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=32]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=33]
-resource_local_to_scene = true
-extents = Vector3( 1, 10, 1 )
 
 [sub_resource type="BoxShape" id=34]
 resource_local_to_scene = true
@@ -198,37 +217,38 @@ __meta__ = {
 [node name="Waterfall2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 17, -1 )
 
-[node name="MiniAdventures28" parent="Viewport/level/Waterfall2" index="1"]
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall2" index="2"]
 visible = false
 
-[node name="MiniAdventures29" parent="Viewport/level/Waterfall2" index="2"]
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall2" index="3"]
 visible = false
 
-[node name="MiniAdventures30" parent="Viewport/level/Waterfall2" index="3"]
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall2" index="4"]
 visible = false
 
-[node name="MiniAdventures2" parent="Viewport/level/Waterfall2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/Waterfall2" index="5"]
 visible = false
 
-[node name="MiniAdventures4" parent="Viewport/level/Waterfall2" index="6"]
-visible = false
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall2" index="7"]
+material_override = SubResource( 2 )
+frame = 576
 
 [node name="Waterfall3" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 1 )
 
-[node name="MiniAdventures28" parent="Viewport/level/Waterfall3" index="1"]
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall3" index="2"]
 visible = false
 
-[node name="MiniAdventures29" parent="Viewport/level/Waterfall3" index="2"]
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall3" index="3"]
 visible = false
 
-[node name="MiniAdventures30" parent="Viewport/level/Waterfall3" index="3"]
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall3" index="4"]
 visible = false
 
-[node name="MiniAdventures2" parent="Viewport/level/Waterfall3" index="4"]
+[node name="Sprite3D" parent="Viewport/level/Waterfall3" index="5"]
 visible = false
 
-[node name="MiniAdventures4" parent="Viewport/level/Waterfall3" index="6"]
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall3" index="7"]
 visible = false
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 9 )]
@@ -279,6 +299,7 @@ shape = SubResource( 36 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 17, 0 )
 path = "res://levels/EndlessFantasy/gd1/DebugTownDoubleWaterfall.tscn"
 is_passive = true
+is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1 )
@@ -297,22 +318,6 @@ shape = SubResource( 28 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 29 )
 
-[node name="Door3" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0 )
-path = "res://levels/EndlessFantasy/gd1/DebugTownDoubleWaterfall.tscn"
-
-[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
-visible = false
-
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 30 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 31 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
-shape = SubResource( 32 )
-
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 0 )
 is_locked = true
@@ -320,8 +325,8 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tsc
 key_type = 1
 
 [node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0 )
-shape = SubResource( 33 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+shape = SubResource( 37 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )
@@ -360,11 +365,10 @@ __meta__ = {
 
 [editable path="Viewport/level/Waterfall2"]
 [editable path="Viewport/level/Waterfall3"]
+[editable path="Viewport/level/WaterCube"]
 [editable path="Viewport/level/BasicFrogEnemy4"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door3"]
-[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door4"]
 [editable path="Viewport/level/Door4/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]

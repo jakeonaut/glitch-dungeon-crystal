@@ -185,7 +185,7 @@ func _physics_process(delta):
     is_touching_water = smallInteractionArea.is_touching_water
     touched_water_area = smallInteractionArea.touched_water_area
     is_touching_ladder = smallInteractionArea.is_touching_ladder
-  if not is_touching_water:
+  # if not is_touching_water:
     has_water_double_jumped = false
 
   DNUMHORZ = 65.0 * global.time_dilation_multiplier
