@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scripts/GramdmaMemory.gd" type="Script" id=8]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=9]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Glitch Entity.wav" type="AudioStream" id=11]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=14]
@@ -293,3 +294,8 @@ frame_delay = 0.3
 stream = ExtResource( 14 )
 volume_db = -20.0
 pitch_scale = 0.65
+
+[node name="TeleportSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -12.0
+pitch_scale = 0.9

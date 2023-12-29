@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=32]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=34]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=35]
 
 [sub_resource type="BoxShape" id=90]
 resource_local_to_scene = true
@@ -1088,12 +1089,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.923, 19.226 )
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 8 )
+mesh_library = ExtResource( 35 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 852037, 1, 196611, 852038, 1, 196611, 852039, 1, 196611, 917572, 1, 196611, 917573, 1, 196611, 917574, 1, 196611, 917575, 1, 196611, 917576, 1, 196611, 917577, 1, 196611 )
+"cells": PoolIntArray( 852037, 1, 196645, 852038, 1, 196645, 852039, 1, 196645, 917572, 1, 196645, 917573, 1, 196645, 917574, 1, 196645, 917575, 1, 196645, 917576, 1, 196645, 917577, 1, 196645 )
 }
 script = ExtResource( 7 )
 __meta__ = {

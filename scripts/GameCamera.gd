@@ -5,7 +5,7 @@ onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
 
-var CAMERA_SIZE = 25
+var CAMERA_SIZE = 20
 var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999

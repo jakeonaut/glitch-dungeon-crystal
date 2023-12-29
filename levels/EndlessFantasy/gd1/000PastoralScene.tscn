@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1/000PastoralSceneInteractionAreaEvent.gd" type="Script" id=29]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=30]
 [ext_resource path="res://levels/EndlessFantasy/gd1/000PastoralSceneInteractionAreaEvent2.gd" type="Script" id=31]
+[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=32]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 17 )
@@ -1030,6 +1031,14 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
+
+[node name="DialogStartSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="6"]
+stream = ExtResource( 32 )
+volume_db = -15.0
+
+[node name="DialogSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 32 )
+pitch_scale = 0.9
 
 [node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 material_override = SubResource( 29 )

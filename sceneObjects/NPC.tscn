@@ -133,10 +133,10 @@ margin_bottom = 112.0
 rect_clip_content = true
 
 [node name="NextPrompt" parent="NPC TextBox/TextBox" index="4"]
-position = Vector2( 439.5, 100 )
+position = Vector2( 439.5, 80 )
 
 [node name="EndPrompt" parent="NPC TextBox/TextBox" index="5"]
-position = Vector2( 439.5, 100 )
+position = Vector2( 439.5, 80 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
 stream = ExtResource( 10 )

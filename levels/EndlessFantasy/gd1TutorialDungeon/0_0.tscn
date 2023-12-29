@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=16]
 [ext_resource path="res://sceneObjects/GlitchTileSpawner.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=19]
 [ext_resource path="res://levels/EndlessFantasy/000NPC3AbortSound.gd" type="Script" id=20]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=22]
@@ -1244,6 +1245,9 @@ i'll tend to the chickens.
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 66 )
 
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 19 )
+
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 0
 
@@ -1287,7 +1291,6 @@ step = 1.0
 
 [node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="6"]
 stream = ExtResource( 26 )
-volume_db = -10.0
 
 [node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="9"]
 script = ExtResource( 20 )

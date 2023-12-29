@@ -418,6 +418,8 @@ func land(should_change_shader_params = true, should_play_transition = false):
     npc.is_active = false
   
   if isLandingOutsideOfCameraBounds():
+    if is_passive: transition.fast_reverse_fade()
+    else: transition.reverse_fade()
     return
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y

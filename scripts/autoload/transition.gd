@@ -16,8 +16,10 @@ func _process(_delta):
 
 func fast_reverse_fade():
     aniPlayer.play("reverse_fade", -1, 2.0)
+    print("fast reverse fade")
 func reverse_fade():
     aniPlayer.play("reverse_fade")
+    print("reverse fade")
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func fast_fade_to(scn_path):
     was_i_interrupted = false

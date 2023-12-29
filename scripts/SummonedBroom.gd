@@ -56,7 +56,9 @@ func hitStuff(_delta):
   
   var areas = myArea.get_overlapping_areas()
   for area in areas:
-    if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
+    if area.is_in_group("tadpole"):
+      continue
+    elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
         my_broom_owner.has_sweeped_glitch = true

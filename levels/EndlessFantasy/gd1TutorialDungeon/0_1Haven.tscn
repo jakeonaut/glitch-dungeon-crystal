@@ -1832,7 +1832,7 @@ vframes = 8
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -2103,19 +2103,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, -4.1, -5 )
 
-[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="1"]
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="2"]
 visible = false
 
-[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="2"]
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="3"]
 visible = false
 
-[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="3"]
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="4"]
 visible = false
 
-[node name="MiniAdventures2" parent="Viewport/level/Waterfall" index="4"]
-visible = false
-
-[node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="6"]
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="7"]
 visible = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]

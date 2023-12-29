@@ -179,6 +179,7 @@ func getLevelZoneName():
   return global.getLevelZoneName(getLevelName())
 
 func tryToRespawn():
+  print("try to respawn")
   global.memory["hp"] = global.memory["max_hp"]
   self.gameCamera.initial_target = player.get_node("CameraTarget")
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
@@ -229,6 +230,8 @@ func tryToRespawn():
     player.cameraTarget.global_transform.origin.y = player.target_last_grounded_y
     gameCamera.setCameraPositionNow()
     global.set_camera_position_on_respawn = false
+  if not found_door and global.isEnteringRoom:
+    transition.reverse_fade()
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom

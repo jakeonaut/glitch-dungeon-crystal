@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -185,12 +186,12 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 12 )
+mesh_library = ExtResource( 23 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 393227, 1, 196611, 393228, 1, 196611, 393229, 1, 196611, 458761, 1, 196611, 458762, 1, 196611, 458763, 1, 196611, 458764, 1, 196611, 458765, 1, 196611, 458766, 1, 196611 )
+"cells": PoolIntArray( 393227, 1, 196645, 393228, 1, 196645, 393229, 1, 196645, 458761, 1, 196645, 458762, 1, 196645, 458763, 1, 196645, 458764, 1, 196645, 458765, 1, 196645, 458766, 1, 196645 )
 }
 script = ExtResource( 10 )
 __meta__ = {

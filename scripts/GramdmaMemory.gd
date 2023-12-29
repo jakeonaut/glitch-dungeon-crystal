@@ -39,12 +39,13 @@ func passiveActivate(_delta, _is_player):
 
 # TODO(jaketrower): Should probably put this onto transition as well
 var grannyEnteringRoom = false
+onready var teleportSound = get_node("TeleportSound")
 func goThroughDoor():
   if global.isEnteringRoom or grannyEnteringRoom:
     return
 
   if canPlayDoorSound:
-    global.doorSound.play()
+    teleportSound.play()
 
   getPlayer().global_transform.origin = self.global_transform.origin
   getPlayer().global_transform.origin.y += 1

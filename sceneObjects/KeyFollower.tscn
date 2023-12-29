@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=14]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 6 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -51,14 +51,15 @@ is_static_in_level = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
-material_override = SubResource( 10 )
+material_override = SubResource( 4 )
 pixel_size = 0.125
 texture = ExtResource( 9 )
 hframes = 12
 vframes = 10
-frame = 36
+frame = 57
 script = ExtResource( 3 )
 frame_delay = 1.0
+automatically_change_color = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999654, 0 )
