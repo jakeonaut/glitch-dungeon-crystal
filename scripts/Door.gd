@@ -418,7 +418,10 @@ func land(should_change_shader_params = true, should_play_transition = false):
     npc.is_active = false
   
   if isLandingOutsideOfCameraBounds():
-    if is_passive: transition.fast_reverse_fade()
+    if global.grannyEnteringRoom:
+      transition.reverse_granny_teleport()
+      global.grannyEnteringRoom = false
+    elif is_passive: transition.fast_reverse_fade()
     else: transition.reverse_fade()
     return
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
@@ -429,7 +432,11 @@ func land(should_change_shader_params = true, should_play_transition = false):
 
   if is_passive:
     if should_play_transition:
-      transition.fast_reverse_fade()
+      if global.grannyEnteringRoom:
+        transition.reverse_granny_teleport()
+        global.grannyEnteringRoom = false
+      else:
+        transition.fast_reverse_fade()
     if global.memory.has("player_flip_h"):
       getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
       global.memory.erase("player_flip_h")
@@ -446,7 +453,11 @@ func land(should_change_shader_params = true, should_play_transition = false):
       getPlayer().on_ground = false
   else:
     if should_play_transition:
-      transition.reverse_fade()
+      if global.grannyEnteringRoom:
+        transition.reverse_granny_teleport()
+        global.grannyEnteringRoom = false
+      else:
+        transition.reverse_fade()
     # SNEAKY SNEAKY
     global.saveMySpot(self.translation, level) 
     getPlayer().playBounce("land")

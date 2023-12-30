@@ -305,23 +305,17 @@ func InteractActivate(_is_player=true):
   interact()
     
 func interact():
-  print("INTERACT")
-  print(text_final)
   if text_final == "":
     return
-  print("visible: " + str(visible) + ", isActive: " + str(dialogSound.isActive()))
   if !visible and dialogSound.isActive():
     showTextbox()
     global.activeInteractor = self
     return
 
-  print("global activeInteractor: ", global.activeInteractor)
   if global.activeInteractor == self:
     if isWaitingForEndPrompt():
-      print("hide")
       hideTextbox()
     elif isWaitingForNextPrompt():
-      print("elif")
       textNode.scroll_to_line(currently_scrolled_line + 1)
       currently_scrolled_line += 1
       now_were_scrolling = true
@@ -333,7 +327,6 @@ func interact():
       resetTinyColorRect()
       adjusted_tiny_y_pos += 35
     else:
-      print("else")
       nextDialogSound.play()
       advanceToEndOfPhrase()
 

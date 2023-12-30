@@ -89,7 +89,7 @@ func arrayDifference(arr1, arr2):
     return only_in_arr1
 
 var sausage_fading_timer = 0
-var sausage_fading_time_limit = 5
+var sausage_fading_time_limit = 100
 var sausage_fading_away_indices = []
 var fading_in_sausage_indices = []
 var sausageNewLevelTiles = null
@@ -132,15 +132,21 @@ func buildSingleRandomTile(cell_index, glitch_type):
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
+    var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
     var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    var top_name = mesh_library.get_item_name(top_neighbor_tile_type) if top_neighbor_tile_type != -1 else ""
     var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
+    var bottom_name = mesh_library.get_item_name(bottom_neighbor_tile_type) if bottom_neighbor_tile_type != -1 else ""
     var skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
+    
     # DESERT MODIFICATION
     if my_tileset_type == global.TilesetType.DESERT:
       skip_level_top_neighbor_tile_type = top_neighbor_tile_type
+      skip_top_name = top_name
       skip_level_bottom_neighbor_tile_type = bottom_neighbor_tile_type
 
-    if top_neighbor_tile_type == -1 and skip_level_top_neighbor_tile_type == -1: # no top neighbor
+    # no top neighbor
+    if (top_neighbor_tile_type == -1 or "Cloud" in top_name or "Spike" in top_name) and (skip_level_top_neighbor_tile_type == -1 or "Cloud" in skip_top_name or "Spike" in skip_top_name):
       var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
       var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
       if left_neighbor_tile_type == -1: # no left neighbor

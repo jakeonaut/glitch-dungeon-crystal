@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/autoload/transition.gd" type="Script" id=1]
 
@@ -27,6 +27,37 @@ shader = SubResource( 7 )
 shader_param/progress = 0.0
 shader_param/diamondPixelSize = 50.0
 
+[sub_resource type="Shader" id=14]
+code = "shader_type canvas_item;
+
+uniform int levels = 3;
+uniform float spread = 0.01;
+
+vec3 chromatic_slice(float t){
+	vec3 res = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+	return max(res, 0.0);
+}
+
+void fragment(){
+	vec3 sum;
+	COLOR.rgb = vec3(0);
+	vec2 offset = (UV - vec2(0.5))*vec2(1,-1);
+	for(int i = 0; i < levels; i++){
+		float t = 2.0*float(i)/float(levels-1); // range 0.0->2.0
+		vec3 slice = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+		slice = max(slice, 0.0);
+		sum += slice;
+		vec2 slice_offset = (t-1.0)*spread*offset;
+		COLOR.rgb += slice * texture(SCREEN_TEXTURE, SCREEN_UV + slice_offset).rgb;
+	}
+	COLOR.rgb /= sum;
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+shader_param/levels = 9
+shader_param/spread = 0.0
+
 [sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
@@ -40,6 +71,59 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ChromaticAberrationEffectRect:material:shader_param/spread")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "granny_teleport"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "change_scene"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:material:shader_param/progress")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ChromaticAberrationEffectRect:material:shader_param/spread")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -145,6 +229,47 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "reverse_granny_teleport"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/progress")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unpause"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ChromaticAberrationEffectRect:material:shader_param/spread")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 128
 script = ExtResource( 1 )
@@ -155,9 +280,16 @@ margin_right = 1280.0
 margin_bottom = 1024.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="ChromaticAberrationEffectRect" type="ColorRect" parent="."]
+material = SubResource( 15 )
+margin_right = 1280.0
+margin_bottom = 1024.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 9 )
+anims/granny_teleport = SubResource( 12 )
 anims/long_fade = SubResource( 3 )
 anims/really_long_fade = SubResource( 4 )
 anims/really_really_long_fade_to = SubResource( 5 )
 anims/reverse_fade = SubResource( 6 )
+anims/reverse_granny_teleport = SubResource( 13 )

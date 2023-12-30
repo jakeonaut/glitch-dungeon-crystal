@@ -116,8 +116,8 @@ export var run_speed = 10
 var glitch_form = global.GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
 var feather_jump_timer = 0
-var feather_jump_time_limit = 14
-var feather_jump_partial_time_limit = 17
+var feather_jump_time_limit = 8
+var feather_jump_partial_time_limit = 12
 var weak_feather_dbl_jump = false
 
 func isFeatherLike():
@@ -326,12 +326,10 @@ func applyGravity(delta):
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
-    if pressingJump():
-      g = Vector3(0, -grav/3, 0)
-    elif pressingDown():
+    if pressingDown():
       g = Vector3(0, -grav*2, 0)
     else:
-      g = Vector3(0, -grav/2, 0)
+      g = Vector3(0, -grav/1.5, 0)
   else:
     if pressingDown():
       g = Vector3(0, -grav*2, 0)
@@ -611,7 +609,7 @@ func processJumpInputs(delta):
 
       if not pauseAnimation and aniPlayer != null and (not "jump" in aniPlayer.assigned_animation or not "fall" in aniPlayer.assigned_animation):
         aniPlayer.clear_queue()
-        aniPlayer.play("jumpSquat", -1, 0.5 if isFeatherLike() else 1.0)
+        aniPlayer.play("jumpSquat", -1, 2.0 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
         aniPlayer.queue("fall" if isFeatherLike() else "jump")
       if bounceAniPlayer:
@@ -648,8 +646,7 @@ func processJumpInputs(delta):
     
   if not pressingJump():
     weak_feather_dbl_jump = true
-    if glitch_form != global.GlitchForm.FEATHER:
-      feather_jump_timer = 200
+    feather_jump_timer = 200
       
   if vv > 0 or on_ground:
     should_magic_jump = false
@@ -672,7 +669,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
 
 func actuallyApplyJump(play_sound = true):
   if isFeatherLike():
-    vv = jump_force / 1.9
+    vv = jump_force # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
     #   if vv < (2*jump_force) / 3:
     #     vv = (2*jump_force) / 3
@@ -722,8 +719,6 @@ func getWalkSpeed(_delta):
       run_add = 2
 
   if glitch_form == global.GlitchForm.FEATHER:
-    if not on_ground:
-      return walk_speed
     return feather_glitch_walk_speed # no run_add
   elif glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add

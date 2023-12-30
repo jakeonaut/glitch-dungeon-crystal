@@ -577,6 +577,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     is_mushroom_infected = false
 
   if global.activeInteractor:
+    print("TRY DIE TO ENEMY")
     global.activeInteractor.hideTextbox()
   global.activeInteractor = null
   var hurtSound_pitch_scale = 1.0
@@ -623,6 +624,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   elif global.memory["hp"] <= 0 or should_immediately_die:
     global.incrementLevelZoneDeaths()
     global.memory["hp"] = 0
+    print("die and hide")
     self.textBox.hideTextbox()
     global.isRespawning = true
     physics_state = PhysicsState.GLITCH_DYING
@@ -650,7 +652,7 @@ export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 7
-func getSmacked():
+func getSmacked(_broom_origin = Vector3(0, 0, 0)):
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
   mySprite.material_override.set_shader_param("normal_offset", normal_offset)

@@ -14,12 +14,20 @@ func _ready():
 func _process(_delta):
     aniPlayer.playback_speed = global.time_dilation_multiplier
 
+func unpause():
+    global.pauseGame = false
+
 func fast_reverse_fade():
     aniPlayer.play("reverse_fade", -1, 2.0)
-    print("fast reverse fade")
 func reverse_fade():
     aniPlayer.play("reverse_fade")
-    print("reverse fade")
+func reverse_granny_teleport():
+    aniPlayer.play("reverse_granny_teleport")
+# PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
+func granny_teleport_to(scn_path):
+    was_i_interrupted = false
+    self.path = scn_path # store the scene path
+    aniPlayer.play("granny_teleport", -1, 1.0)
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func fast_fade_to(scn_path):
     was_i_interrupted = false

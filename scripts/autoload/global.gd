@@ -120,6 +120,7 @@ var activeSavePoint = null
 
 var isRespawning = false
 var isEnteringRoom = false
+var grannyEnteringRoom = false
 var hasJustRespawned = false
 var hasJustEnteredRoom = false
 var respawnVarTimerHack = 0
@@ -168,6 +169,7 @@ func _ready():
     if activeSavePoint: pass
     if isRespawning: pass
     if isEnteringRoom: pass
+    if grannyEnteringRoom: pass
     if cameraRotation: pass
     if pauseMoveInput: pass
     if pauseGame: pass

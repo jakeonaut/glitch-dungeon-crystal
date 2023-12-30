@@ -29,6 +29,7 @@ onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 onready var interactionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
+onready var interactionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
@@ -101,12 +102,14 @@ func _ready():
       can_camera_zoom = false
       textBox.can_camera_zoom = false
       if not visible and can_activate:
-        print("wisible :)")
         visible = true
         can_activate = false
       textBox.has_been_shown = true
       if textBox.has_been_shown: 
         textBox.is_important = false
+
+  if interactionShape.shape is BoxShape and interactionShape.shape.extents.x == 2 and round(interactionShape.shape.extents.y) == 1:
+    interactionShape.shape.extents = Vector3(4, 2, 1.3)
 
 func _process(delta):
   # super._process(delta) implicit
@@ -211,7 +214,6 @@ func passiveActivate(delta, is_player):
       var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
       add_child(newSpawnGlitchEffect)
     else:
-      print("no no no")
       visible = true
     can_activate = false
   elif visible and (not aniPlayer or not aniPlayer.is_playing()):
@@ -219,6 +221,8 @@ func passiveActivate(delta, is_player):
       textBox.passiveInteract(delta)
 
 func stopPassiveActivate():
+  if global.pauseGame:
+    return
   if not level.player.is_pressing_horizontal_input:
     return
 

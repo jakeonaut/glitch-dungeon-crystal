@@ -38,20 +38,23 @@ func passiveActivate(_delta, _is_player):
   goThroughDoor()
 
 # TODO(jaketrower): Should probably put this onto transition as well
-var grannyEnteringRoom = false
 onready var teleportSound = get_node("TeleportSound")
 func goThroughDoor():
-  if global.isEnteringRoom or grannyEnteringRoom:
+  if global.isEnteringRoom or global.grannyEnteringRoom:
     return
 
-  if canPlayDoorSound:
+  if canPlayDoorSound and not teleportSound.is_playing():
     teleportSound.play()
 
-  getPlayer().global_transform.origin = self.global_transform.origin
-  getPlayer().global_transform.origin.y += 1
+  if not self.path:
+    return
+
+  # getPlayer().global_transform.origin = self.global_transform.origin
+  # getPlayer().global_transform.origin.y += 1
   getPlayer().aniPlayer.stop()
   getPlayer().aniPlayer.clear_queue()
-  getPlayer().aniPlayer.play("enterDoor")
+  getPlayer().aniPlayer.play("fall")
+  getPlayer().getSmacked()
 
   global.activeInteractor = null
     
@@ -60,7 +63,7 @@ func goThroughDoor():
   global.memory["roomPath"] = level.getLevelName()
   global.pauseGame = true
 
-  grannyEnteringRoom = true
+  global.grannyEnteringRoom = true
   global.isEnteringRoom = true
   global.hasJustEnteredRoom = false
   global.respawnVarTimerHack = 0
@@ -68,19 +71,22 @@ func goThroughDoor():
   global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
   global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
   global.memory["linear_velocity"] = getPlayer().linear_velocity
-  # transition.long_fade_to(self.path)
+  transition.granny_teleport_to(self.path)
 
-  # TODO(jaketrower): Should probably put this onto transition:
-  # var level = get_tree().get_root().get_node("Game/Viewport/level")
-  var newLevelRes = load(self.path)
-  var newLevel = newLevelRes.instance()
-  # get_tree().get_root().add_child(newLevel)
-  var oldLevelTiles = getLevelTiles()
-  var newLevelTiles = newLevel.get_node("Game/Viewport/level/LevelTiles")
+  # # TODO(jaketrower): Should probably put this onto transition:
+  # # var level = get_tree().get_root().get_node("Game/Viewport/level")
+  # var newLevelRes = load(self.path)
+  # var newLevel = newLevelRes.instance()
+  # # get_tree().get_root().add_child(newLevel)
+  # var oldLevelTiles = getLevelTiles()
+  # # level.add_child(newLevel)
+  # print(newLevel)
+  # var newLevelTiles = newLevel.get_node("Viewport/level/LevelTiles")
+  # print(newLevelTiles)
 
-  oldLevelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles)
-  # TODO(jaketrower): When the above ^^ has completed, completely override newLevelTiles with oldLevelTiles.
-  # This would be a no-op, but I think the in-place tile randomization matters.
+  # oldLevelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles)
+  # # TODO(jaketrower): When the above ^^ has completed, completely override newLevelTiles with oldLevelTiles.
+  # # This would be a no-op, but I think the in-place tile randomization matters.
 
 func land():
   global.pauseGame = false

@@ -15,15 +15,13 @@
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=14]
 
-[sub_resource type="BoxShape" id=13]
-extents = Vector3( 2, 1.3, 1 )
+[sub_resource type="BoxShape" id=120]
 
-[sub_resource type="BoxShape" id=107]
+[sub_resource type="BoxShape" id=121]
 resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
+extents = Vector3( 1, 1, 1.3 )
 
-[sub_resource type="BoxShape" id=14]
-extents = Vector3( 1.35, 0.8, 1 )
+[sub_resource type="BoxShape" id=122]
 
 [sub_resource type="ShaderMaterial" id=119]
 shader = ExtResource( 3 )
@@ -238,20 +236,20 @@ can_activate = false
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 13 )
+shape = SubResource( 120 )
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
-shape = SubResource( 107 )
+shape = SubResource( 121 )
 
 [node name="SmallerInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 script = ExtResource( 6 )
 handlePlayerInteraction = false
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallerInteractionArea"]
-shape = SubResource( 14 )
+shape = SubResource( 122 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 12 )]
 
