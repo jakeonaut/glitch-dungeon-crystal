@@ -17,6 +17,7 @@ func startGame():
 func loadGame():
     if global.loadGame():
         global.isRespawning = true
+        global.isEnteringRoom = true
         if global.memory.has("roomPath"):
             roomPath = global.memory["roomPath"]
     startGame()

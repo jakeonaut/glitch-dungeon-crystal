@@ -319,6 +319,7 @@ shape = SubResource( 31 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 0 )
 parter_door_id = "Door4"
+locked_to_monsters = true
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
@@ -341,6 +342,7 @@ shape = SubResource( 32 )
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 9, 0 )
 parter_door_id = "Door3"
+locked_to_monsters = true
 
 [node name="Sprite3D2" parent="Viewport/level/Door4" index="1"]
 visible = false

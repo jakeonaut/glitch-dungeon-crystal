@@ -13,6 +13,7 @@ export var dont_recolor_me = false
 export var is_passive = false
 export var is_vertical = false
 export var num_keys_unlock = 999
+export var locked_to_monsters = false
 
 onready var npc = get_node("NPC")
 
@@ -75,7 +76,7 @@ func _ready():
   animationPlayer.stop()
   if is_locked:
     animationPlayer.play("locked")
-  elif should_lock:
+  elif should_lock or locked_to_monsters:
     is_locked = true
     doorCloseSound.play()
     animationPlayer.queue("doorOpen")
@@ -84,7 +85,7 @@ func _ready():
   else: 
     animationPlayer.play("doorOpen")
 
-  if is_locked or should_lock:
+  if is_locked:
     if key_type == global.KeyItem.NORMAL:
       var num_keys = global.getLevelZoneThing("key")
       if num_keys == null or num_keys == 0:
@@ -112,6 +113,12 @@ func _ready():
     npc.is_active = false
     
 func _process(delta):
+  if locked_to_monsters and is_locked:
+    var weak_enemies = level.get_tree().get_nodes_in_group("weak_enemies")
+    if weak_enemies.size() == 0:
+      startDoorUnlock()
+      is_locked = false
+      locked_to_monsters = false
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false
@@ -134,7 +141,9 @@ func _process(delta):
   if is_passive:
     spawnParticles(delta)
 
-  if key_type == global.KeyItem.NORMAL:
+  if locked_to_monsters:
+    npc.textBoxContainer.bbText = "•it won't open"
+  elif key_type == global.KeyItem.NORMAL:
     var num_keys = global.getLevelZoneThing("key")
     if prev_keys != num_keys and is_locked:
       prev_keys = num_keys
@@ -242,7 +251,7 @@ func activate(is_player):
     return false
     
   if not is_passive:
-    if not is_locked and not should_lock:
+    if not is_locked:
       goThroughDoor()
     elif is_locked:
       if key_type == global.KeyItem.NORMAL:
@@ -264,33 +273,40 @@ var is_unlocking = false
 var unlocking_key_array = []
 func startDoorUnlock():
   var num_keys = global.getLevelZoneThing("key")
-  global.pauseMoveInput = true
 
-  unlocking_key_array = []
-  if key_type != global.KeyItem.NORMAL:
-    num_keys_unlock = 1
+  if not locked_to_monsters:
+    unlocking_key_array = []
+    if key_type != global.KeyItem.NORMAL:
+      num_keys_unlock = 1
 
-  for i in range(level.followers.size() - 1, -1, -1):
-    var follower = level.followers[i]
-    if follower.is_in_group("keys"):
-      if key_type == global.KeyItem.NORMAL or follower.key_type == self.key_type:
-        follower.popFromFollowers()
-        unlocking_key_array.push_back(follower)
-        if unlocking_key_array.size() >= num_keys_unlock:
-          break
-      
-  global.setLevelZoneThing("key", num_keys - num_keys_unlock)
+    for i in range(level.followers.size() - 1, -1, -1):
+      var follower = level.followers[i]
+      if follower.is_in_group("keys"):
+        if key_type == global.KeyItem.NORMAL or follower.key_type == self.key_type:
+          follower.popFromFollowers()
+          unlocking_key_array.push_back(follower)
+          if unlocking_key_array.size() >= num_keys_unlock:
+            break
+        
+    global.setLevelZoneThing("key", num_keys - num_keys_unlock)
   npc.visible = false 
   npc.can_activate = false
   npc.is_active = false
-  getPlayer().pauseSelf = true
   is_locked = false
-  setGlobalMemoryOfHasUnlocked()
-  is_unlocking = true
-  getPlayer().aniPlayer.stop()
-  getPlayer().aniPlayer.clear_queue()
-  getPlayer().aniPlayer.play("preGetItem")
-  getPlayer().playBounce("land")
+  if locked_to_monsters:
+    animationPlayer.clear_queue()
+    animationPlayer.stop()
+    doorOpenSound.play()
+    animationPlayer.queue("doorOpen")
+  else:
+    global.pauseMoveInput = true
+    getPlayer().pauseSelf = true
+    setGlobalMemoryOfHasUnlocked()
+    is_unlocking = true
+    getPlayer().aniPlayer.stop()
+    getPlayer().aniPlayer.clear_queue()
+    getPlayer().aniPlayer.play("preGetItem")
+    getPlayer().playBounce("land")
 
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
@@ -403,7 +419,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
   # global.memory.erase("active_save_point_y")
   # global.memory.erase("active_save_point_z")
   global.pauseGame = false
-  if is_locked or should_lock:
+  if is_locked:
     is_locked = false
     should_lock = false
     animationPlayer.clear_queue()
@@ -459,7 +475,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
       else:
         transition.reverse_fade()
     # SNEAKY SNEAKY
-    global.saveMySpot(self.translation, level) 
+    # global.saveMySpot(self.translation, level) 
     getPlayer().playBounce("land")
     getPlayer().on_ground = false
     if should_change_shader_params:

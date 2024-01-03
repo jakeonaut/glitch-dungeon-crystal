@@ -189,7 +189,7 @@ func tryToRespawn():
     global.pauseGame = false
 
   var found_door = null
-  if global.isEnteringRoom:
+  if global.isEnteringRoom and not global.isRespawning:
     if global.memory.has("lastDoor") and global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -207,6 +207,8 @@ func tryToRespawn():
       player.last_grounded_pos = Vector3(player.global_transform.origin)
     elif global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] != getLevelName():
       if global.memory.has("active_save_point_x"):
+        # transition.fast_fade_to(global.memory["savedRoomPath"])
+        global.isEnteringRoom = true
         transition.path = global.memory["savedRoomPath"]
         transition.change_scene()
         return

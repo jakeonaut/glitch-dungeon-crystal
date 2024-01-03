@@ -234,8 +234,8 @@ func _process(delta):
   var newSpriteOpacity = spriteOpacity
   if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
-  elif glitch_form == global.GlitchForm.INVISIBLE:
-    newSpriteOpacity = 0.8
+  # elif glitch_form == global.GlitchForm.INVISIBLE:
+  #   newSpriteOpacity = 0.8
   else:
     newSpriteOpacity = 1.0
   if newSpriteOpacity != spriteOpacity:
@@ -710,11 +710,11 @@ func processBroomLogic(delta):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
-    if Input.is_action_pressed("ui_down") and isKindOfOnGround():
-      aniPlayer.play("sweepFloor")
-      which_broom_attack = 0
-      summonSporeShroom()
-    elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
+    # if Input.is_action_pressed("ui_down") and isKindOfOnGround():
+    #   aniPlayer.play("sweepFloor")
+    #   which_broom_attack = 0
+    #   summonSporeShroom()
+    if is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2
     else:
