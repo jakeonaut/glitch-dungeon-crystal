@@ -79,9 +79,7 @@ func _ready():
   elif should_lock or locked_to_monsters:
     is_locked = true
     doorCloseSound.play()
-    animationPlayer.queue("doorOpen")
-    animationPlayer.queue("doorClose")
-    animationPlayer.queue("locked")
+    animationPlayer.queue("doorBarred")
   else: 
     animationPlayer.play("doorOpen")
 
@@ -143,6 +141,7 @@ func _process(delta):
 
   if locked_to_monsters:
     npc.textBoxContainer.bbText = "•it won't open"
+    npc.textBoxContainer.setVars()
   elif key_type == global.KeyItem.NORMAL:
     var num_keys = global.getLevelZoneThing("key")
     if prev_keys != num_keys and is_locked:
@@ -297,7 +296,7 @@ func startDoorUnlock():
     animationPlayer.clear_queue()
     animationPlayer.stop()
     doorOpenSound.play()
-    animationPlayer.queue("doorOpen")
+    animationPlayer.queue("doorUnbarred")
   else:
     global.pauseMoveInput = true
     getPlayer().pauseSelf = true

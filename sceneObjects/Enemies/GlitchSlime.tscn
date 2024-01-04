@@ -554,6 +554,20 @@ tracks/10/keys = {
 "update": 1,
 "values": [ 0.02 ]
 }
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unenemize"
+} ]
+}
 
 [sub_resource type="BoxShape" id=20]
 extents = Vector3( 25, 13, 1 )

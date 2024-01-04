@@ -5,7 +5,6 @@ onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
 
-var CAMERA_SIZE = 20
 var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999
@@ -127,7 +126,6 @@ func _process(delta):
     if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
       self.size = initial_size
     
-  self.size = CAMERA_SIZE
   respectLevelTilesEdges()
   
   # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size

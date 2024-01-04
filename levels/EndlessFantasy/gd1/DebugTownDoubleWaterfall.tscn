@@ -272,7 +272,7 @@ shape = SubResource( 26 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.43529, -6.43413, 0 )
-path = "res://levels/EndlessFantasy/gd1/DebugTownFishingVillageEntrance.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 is_passive = true
 is_vertical = true
 

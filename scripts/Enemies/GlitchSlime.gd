@@ -91,6 +91,12 @@ func processDeath():
     if not visible: return
     if not myOtherSprite.visible:
         queue_free()
+
+func unenemize():
+    if smallInteractionArea.is_in_group("enemies"):
+        smallInteractionArea.remove_from_group("enemies")
+    if smallInteractionArea.is_in_group("weak_enemies"):
+        smallInteractionArea.remove_from_group("weak_enemies")
         
 # @override
 func ouchies(broom_origin):
@@ -99,8 +105,6 @@ func ouchies(broom_origin):
         
     am_i_dying = true
     
-    if smallInteractionArea.is_in_group("enemies"):
-        smallInteractionArea.remove_from_group("enemies")
 
     mySprite.hframes = 10
     mySprite.vframes = 6
