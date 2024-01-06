@@ -359,7 +359,7 @@ func landed():
         behavior_jumping = false
 
 func isActive():
-    return visible and not behavior_evolve and not is_frozen
+    return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
     getSmacked(self.global_transform.origin)

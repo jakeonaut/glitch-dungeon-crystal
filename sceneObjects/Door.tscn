@@ -296,7 +296,6 @@ automatically_change_color = false
 
 [node name="landing" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
-visible = false
 pixel_size = 0.12
 texture = ExtResource( 9 )
 hframes = 2

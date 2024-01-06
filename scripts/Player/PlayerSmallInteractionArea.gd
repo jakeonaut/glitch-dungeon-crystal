@@ -47,4 +47,4 @@ func _process(delta):
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           (global.activeInteractor == null or global.activeInteractor.is_tiny) and \
-                                          not global.isEnteringRoom and not global.pauseGame
+                                          not global.isEnteringRoom and not global.pauseGame and parent.on_ground   

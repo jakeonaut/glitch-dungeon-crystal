@@ -136,7 +136,7 @@ func buildSingleRandomTile(cell_index, glitch_type):
     var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
     var top_name = mesh_library.get_item_name(top_neighbor_tile_type) if top_neighbor_tile_type != -1 else ""
     var bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-1, cell_index.z)
-    var bottom_name = mesh_library.get_item_name(bottom_neighbor_tile_type) if bottom_neighbor_tile_type != -1 else ""
+    var _bottom_name = mesh_library.get_item_name(bottom_neighbor_tile_type) if bottom_neighbor_tile_type != -1 else ""
     var skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
     
     # DESERT MODIFICATION

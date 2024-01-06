@@ -452,10 +452,11 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
-      self.linear_velocity.y = 0
-      self.vv = 0
-      self.lv.y = 0
-      self.on_ground = false
+      self.feather_jump_timer = remembered_feather_jump_timer
+      self.lv.y = remembered_y_vel
+      self.linear_velocity.y = remembered_y_vel
+      self.vv = remembered_y_vel
+      self.on_ground = remembered_on_ground
       self.global_transform.origin.y += 1
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
@@ -555,6 +556,9 @@ func getMushroomInfected():
   # #   mushroom_infection_direction = 1
 
 
+var remembered_feather_jump_timer = 0
+var remembered_y_vel = 0
+var remembered_on_ground = false
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
@@ -645,6 +649,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
       summonSmokeClouds(5, true, true, -1)
       enchantedBagSpriteVisible.visible = false
     # self.nullify()
+  remembered_feather_jump_timer = self.feather_jump_timer
+  remembered_y_vel = lv.y
+  remembered_on_ground = on_ground
 
 export var time_influence = 35
 export var y_div = 2.3
