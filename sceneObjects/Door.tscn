@@ -274,7 +274,7 @@ vframes = 6
 frame = 2
 
 [node name="Sprite3D2" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -1.12016 )
 material_override = SubResource( 1 )
 pixel_size = 0.12
 texture = ExtResource( 4 )

@@ -33,7 +33,7 @@ func _process(delta):
       aniPlayer.play("reset")
 
 func get_foreign_children():
-  return self.get_children().slice(5, self.get_child_count())
+  return self.get_children().slice(4, self.get_child_count())
   
 func isActive():
   return not has_been_hit

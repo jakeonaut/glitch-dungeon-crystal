@@ -937,7 +937,6 @@ shape = SubResource( 26 )
 
 [node name="BigShroomEnemy" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 6, 0 )
-visible = false
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 17, 0 )

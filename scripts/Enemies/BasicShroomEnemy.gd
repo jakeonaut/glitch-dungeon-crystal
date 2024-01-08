@@ -37,7 +37,9 @@ func _process(_delta):
     mySprite.updateBaseFrame(3, 0)
 
   if is_infected:
-    mySprite.get_material_override().set_shader_param("target_palette", global.black_palette)
+    # mySprite.get_material_override().set_shader_param("target_palette", global.black_palette)
+    mySprite.pixel_size = 0.094
+    sprite_offset_y = -0.25
 
 func glitchSwitchSprite(_delta):
   pass

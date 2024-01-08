@@ -194,6 +194,8 @@ func _ready():
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 
+    loadGameSettings()
+
 var anna_mode_counter = 0
 var anna_key_helper = false
 func processEasterEggs():
@@ -301,6 +303,20 @@ func saveGame():
 func doesSaveGameExist():
     var save_game = File.new()
     return save_game.file_exists(save_game_file)
+
+func loadGameSettings():
+    var save_game = File.new()
+    if not save_game.file_exists(save_game_file):
+        return false # Error! We don't have a save to load.
+    
+    # Load the file line by line and process that dictionary to restore
+    # the object it represents.
+    save_game.open(save_game_file, File.READ)
+
+    var save_game_contents = save_game.get_line()
+    var fake_memory = parse_json(save_game_contents)
+    if fake_memory.has("controls_config"):
+        global.memory["controls_config"] = fake_memory["controls_config"]
 
 func loadGame():
     var save_game = File.new()

@@ -428,6 +428,7 @@ func processGlitchHurtRecovery(delta):
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
     glitch_death_timer += (delta*22)
+    glitchTilesAroundMe()
 
     var material = level.glitchScreenEffect.get_material()
     if material is ShaderMaterial:

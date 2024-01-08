@@ -12,7 +12,7 @@
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
@@ -411,13 +411,10 @@ jump_force = 8
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6, 2.21116, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.2, 6.9, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.2, 0.9, -1 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 4.3, -1 )
-
-[node name="Mushroom4" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.7, 4.1, -1 )
 
 [node name="Mushroom5" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70.2, 1.7, -1 )
@@ -496,8 +493,8 @@ transform = Transform( 0.8, 0, 0, 0, 0.965926, -0.207055, 0, 0.258819, 0.772741,
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 11, 0 )
 
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.283, 1.43397, 0 )
+[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

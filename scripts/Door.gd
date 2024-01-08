@@ -293,6 +293,7 @@ func startDoorUnlock():
   npc.is_active = false
   is_locked = false
   if locked_to_monsters:
+    npc.textBox.hideTextbox()
     animationPlayer.clear_queue()
     animationPlayer.stop()
     doorOpenSound.play()
