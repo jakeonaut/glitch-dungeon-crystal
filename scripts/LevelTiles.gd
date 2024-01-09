@@ -539,6 +539,13 @@ func setTileset(tileset_type, properly_set_tiles = true):
     green_palette = global.green_tidepool_palette
     # black_palette = global.black_palette_town
     black_palette = global.black_tidepool_palette
+  elif tileset_type == global.TilesetType.POISON_HOUSE:
+    my_tileset_glitch_type = global.GlitchForm.FLOOR
+    grey_palette = global.grey_black_palette
+    green_palette = global.green_black_palette
+    red_palette = global.red_black_palette
+    yellow_palette = global.yellow_black_palette
+    black_palette = global.black_palette
   elif tileset_type == global.TilesetType.FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
   elif tileset_type == global.TilesetType.DESERT:
@@ -553,10 +560,10 @@ func setTileset(tileset_type, properly_set_tiles = true):
     black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.POISON_FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
-    grey_palette = global.black_palette
-    green_palette = global.black_palette
-    red_palette = global.black_palette
-    yellow_palette = global.black_palette
+    grey_palette = global.grey_black_palette
+    green_palette = global.green_black_palette
+    red_palette = global.red_black_palette
+    yellow_palette = global.yellow_black_palette
     black_palette = global.black_palette
   elif tileset_type == global.TilesetType.ALIEN:
     my_tileset_glitch_type = global.GlitchForm.INVISIBLE

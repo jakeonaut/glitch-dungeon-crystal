@@ -26,6 +26,12 @@ var overwritten_yellow_palette = null
 
 onready var levelTiles = get_tree().get_root().get_node("Game/Viewport/level/LevelTiles")
 
+var should_fly_somewhere = false
+var should_fly_fizzle_out = false
+var has_reached_fly_dest = false
+var fly_pos = Vector3(0, 0, 0)
+var fly_speed = 11
+
 func _ready():
     set_process(true)
     start_frame = get_frame()
@@ -72,6 +78,13 @@ func _process(delta):
     if visible and should_animate:
         animate(delta)
 
+    if should_fly_somewhere and not has_reached_fly_dest:
+        global_transform.origin.x = global_transform.origin.x + (fly_pos.x - global_transform.origin.x) * (delta*fly_speed)
+        global_transform.origin.y = global_transform.origin.y + (fly_pos.y - global_transform.origin.y) * (delta*fly_speed)
+        if stepify(global_transform.origin.x, 0.1) == stepify(fly_pos.x, 0.1) and stepify(global_transform.origin.y, 0.1) == stepify(fly_pos.y, 0.1):
+            has_reached_fly_dest = true
+        
+
 func trySetFrame(next_frame):
     if not reversed:
         if next_frame < hframes * vframes and (is_really_glitchy or next_frame < start_frame + max_frames):
@@ -105,7 +118,7 @@ func animate(delta):
         var frame = get_frame()
         var next_frame = frame + 1 if not reversed else frame - 1
         if not trySetFrame(next_frame):
-            if should_fizzle_out:
+            if should_fizzle_out or should_fly_fizzle_out and has_reached_fly_dest:
                 queue_free()
             elif should_soft_fizzle_out:
                 visible = false

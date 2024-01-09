@@ -343,6 +343,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
   mySprite.material_override.set_shader_param("normal_offset", .02)
+  mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 var pausingFromSpellCasting = false
 var tryPauseFromSpellCasting = false
@@ -458,7 +459,10 @@ func processGlitchHurtRecovery(delta):
       self.linear_velocity.y = remembered_y_vel
       self.vv = remembered_y_vel
       self.on_ground = remembered_on_ground
-      self.global_transform.origin.y += 1
+      if grav < 0:
+        self.global_transform.origin.y -= 1
+      else:
+        self.global_transform.origin.y += 1
       target_last_grounded_y = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=26]
 [ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=27]
 [ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/SuburbDitherMaterial.tres" type="Material" id=28]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=29]
 
 [sub_resource type="ShaderMaterial" id=48]
 shader = ExtResource( 21 )
@@ -314,6 +315,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 12, 0 )
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 10.5049, 0 )
 
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 8, 10, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 2 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -349,6 +353,8 @@ material = SubResource( 45 )
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
+[editable path="Viewport/level/Streetlight"]
+[editable path="Viewport/level/Streetlight3"]
 [editable path="Viewport/level/KizzyCat"]
 [editable path="Viewport/level/KizzyCat2"]
 [editable path="Viewport2/ScreenEffects"]

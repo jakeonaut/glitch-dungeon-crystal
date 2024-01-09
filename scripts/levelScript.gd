@@ -20,7 +20,7 @@ export var null_glitch = false
 # TODO(jaketrower): need to make this work with grimoire
 
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
-export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST") var tileset_type 
+export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST", "POISON_HOUSE") var tileset_type 
 
 export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???

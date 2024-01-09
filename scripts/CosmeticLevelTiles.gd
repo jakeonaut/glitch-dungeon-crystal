@@ -21,7 +21,7 @@ func setTileNameNum(newName, num, cell_index):
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type)
 
 func setTileset(tileset_type, properly_set_tiles = true):
-    if tileset_type == global.TilesetType.HOUSE:
+    if tileset_type == global.TilesetType.HOUSE or tileset_type == global.TilesetType.POISON_HOUSE:
         set_mesh_library(red_cosmetic_tiles)
     elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.POISON_FOREST:
         set_mesh_library(green_cosmetic_tiles)

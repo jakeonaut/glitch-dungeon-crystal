@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=21]
-[ext_resource path="res://sceneObjects/GlitchTileSpawner.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=24]
 [ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=25]
@@ -665,11 +664,6 @@ shape = SubResource( 47 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9.42324, 0 )
-
-[node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 10.4, 0 )
-spawned_object_path = "res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn"
-spawn_time_limit = 0
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 12 )]
 dont_recolor_me = true

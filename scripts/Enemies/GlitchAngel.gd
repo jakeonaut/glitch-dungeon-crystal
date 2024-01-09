@@ -17,12 +17,6 @@ var angel_state_idle_time_limit = 40
 var original_pos = null
 var target_pos = null
 
-var player = null
-func getPlayer():
-    if player == null:
-        player = level.player
-    return player
-
 func _ready():
     set_process(true)
     

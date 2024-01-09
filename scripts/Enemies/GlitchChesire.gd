@@ -28,12 +28,6 @@ var proper_walk_speed  = 2
 export var lunge_walk_speed = 5
 export var is_drop_bear = false
 
-var player = null
-func getPlayer():
-    if player == null:
-        player = level.player
-    return player
-
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
 # Called when the node enters the scene tree for the first time.
