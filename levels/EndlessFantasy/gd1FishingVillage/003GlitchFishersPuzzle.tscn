@@ -1552,6 +1552,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 7.4453, 0 )
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.2603, 8.4453, 0 )
 
+[node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.2603, 16.4453, 0 )
+
+[node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.2603, 16.4453, 0 )
+
+[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.2603, 16.4453, 0 )
+
 [node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.7831, 8.7056, 0 )
 

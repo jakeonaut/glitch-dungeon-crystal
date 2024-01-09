@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -2401,7 +2401,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, -18, 0 )
 visible = false
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugTown_NullificationPurgatory.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

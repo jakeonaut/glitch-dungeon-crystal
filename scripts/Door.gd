@@ -268,6 +268,9 @@ func activate(is_player):
           lockedSound.play()
           npc.activate(is_player)
 
+func unpause():
+  global.pauseMoveInput = false
+
 var is_unlocking = false
 var unlocking_key_array = []
 func startDoorUnlock():
@@ -296,6 +299,7 @@ func startDoorUnlock():
     npc.textBox.hideTextbox()
     animationPlayer.clear_queue()
     animationPlayer.stop()
+    global.pauseMoveInput = true
     doorOpenSound.play()
     animationPlayer.queue("doorUnbarred")
   else:
