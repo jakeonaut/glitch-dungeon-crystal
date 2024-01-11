@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/black_palette_town.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/pokeballgreen.png" type="Texture" id=14]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/sounds/657930__matrixxx__cartoon-drowning-02.wav" type="AudioStream" id=16]
+[ext_resource path="res://sceneObjects/BounceAnimationPlayer.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 3 )
@@ -97,11 +98,15 @@ jump_force = 11
 invisible_jump_force = 10
 only_activate_in_range = false
 sprite_offset_y = 0.25
-modAmt = 0.0
 normal_offset = 0.3
 
-[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+[node name="SpriteContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5 )
+
+[node name="InnerSpriteContainer" type="Spatial" parent="SpriteContainer"]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8 )
 material_override = SubResource( 9 )
 pixel_size = 0.125
 texture = ExtResource( 13 )
@@ -188,3 +193,5 @@ pixel_size = 0.12
 texture = ExtResource( 14 )
 hframes = 2
 vframes = 2
+
+[node name="BounceAnimationPlayer" parent="." instance=ExtResource( 17 )]

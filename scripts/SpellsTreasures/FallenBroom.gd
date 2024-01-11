@@ -12,11 +12,12 @@ var return_timer = 0
 var return_time_limit = 5
 var returning = false
 var returning_timer = 0
-var returning_time_limit = 25
+var returning_time_limit = 5
 onready var collisionShape = get_node("Area/CollisionShape")
 var smacked_npc = null
 var should_die_on_land = false
 var have_i_smacked_an_npc = false
+var taking_the_player_with_me = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -72,14 +73,40 @@ func _process(delta):
             just_pressed_jump = false
             pressing_jump = false
             returning = true
+            return_timer = 0
             behavior_was_thrown = false
             behavior_walking = false
             true_terminal_vel = 16
             get_node("SecretAnimationPlayer").play("isStaticInLevel")
             projectile = false
             was_projectile = true
+            if taking_the_player_with_me:
+                level.player.has_broom_flown = true
+                level.player.has_landed_since_last_flight = false
+                taking_the_player_with_me = false
+        elif taking_the_player_with_me:
+            level.player.on_ground = false
+            level.player.global_transform.origin = self.global_transform.origin
+            level.player.target_last_grounded_y = self.global_transform.origin.y
+            return_timer += (delta*11)
+            if return_timer >= returning_time_limit:
+                return_timer = 0
+                returning = false
+                var mult = 2
+                level.player.linear_velocity = Vector3(linear_velocity.x * mult, linear_velocity.y, 0)
+                level.player.lv = Vector3(lv.x * mult, lv.y, 0)
+                level.player.vv = vv
+                level.player.hv = hv * mult
+                level.player.has_broom_flown = true
+                level.player.has_landed_since_last_flight = false
+                taking_the_player_with_me = false
     if global.activeInteractor and global.activeInteractor.is_important:
         returning = true
+        if taking_the_player_with_me:
+            level.player.has_broom_flown = true
+            level.player.has_landed_since_last_flight = false
+            returning = false
+            taking_the_player_with_me = false
     tryDieIfTooFarFromPlayer()
     tryDieToOffscreenCamera()
     if not is_static_in_level and was_projectile:
@@ -105,6 +132,10 @@ func tryDieToOffscreenCamera():
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             returning = true
+            if taking_the_player_with_me:
+                level.player.has_broom_flown = true
+                level.player.has_landed_since_last_flight = false
+                taking_the_player_with_me = false
 
 # @override
 func pressingMoveLeft():

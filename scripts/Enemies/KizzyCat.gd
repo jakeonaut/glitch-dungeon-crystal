@@ -128,7 +128,11 @@ func fallthroughCollisionActivate(friend):
   # ALSO, need to make game_mover call "fallthroughCollisionClear" if we ever
   # like jump, or fall off too...
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
+  if not who_is_standing_on_me.has(friend.name):
+    playBounce("landSoft")
+    spawnASpore(false)
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
+  
 
 func fallthroughCollisionClear(exFriend):
   who_is_standing_on_me.erase(exFriend.name)

@@ -32,7 +32,7 @@ onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node(
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
 var animation_speed_multiplier = 1.0
-onready var mySprite = get_node("Sprite3D") if has_node("Sprite3D") else get_node("SpriteContainer/InnerSpriteContainer/Sprite3D")
+onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
 
 export var true_terminal_vel = 32
 var true_terminal_feather_vel = 2 

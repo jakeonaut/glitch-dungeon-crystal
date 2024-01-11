@@ -186,10 +186,12 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
+    
     memory["random_entrances"] = false
     memory["broom"] = false
+    memory["broom_flight"] = true
     memory["has_gotten_broom"] = 1
-    memory["can_nest"] = false
+    memory["can_nest"] = true
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["clean_crystals"] = 0

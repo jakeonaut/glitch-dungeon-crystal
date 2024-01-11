@@ -405,6 +405,8 @@ func doubleJump():
 
 var smacked_npc = null
 var is_in_broom_cooldown = false
+var has_broom_flown = false
+var has_landed_since_last_flight = false
 func getABroom():
   pauseAnimation = false 
   global.memory["broom"] = true
@@ -413,6 +415,7 @@ func getABroom():
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   smacked_npc = null
   is_in_broom_cooldown = false
+  has_broom_flown = not has_landed_since_last_flight
 
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
@@ -523,11 +526,9 @@ func handleSpikeCollisions(delta):
   
   var TILE_WIDTH = levelTiles.cell_size.x
   var TILE_HEIGHT = levelTiles.cell_size.y
-  
-  var margin = 0.12
 
-  for i in range(int(round(y+bb-0.24))-1, int(round(y+tb))+1):
-    for j in range(int(round(x+lb))-1, int(round(x+rb))+1):
+  for i in range(int(round(y+bb)), int(round(y+tb))):
+    for j in range(int(round(x+lb)), int(round(x+rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
@@ -538,7 +539,7 @@ func handleSpikeCollisions(delta):
           or getLevelTiles().isTileGlitchSpikes(tile_type) 
         ) and isRectColliding(
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
-        x + lb + margin, y + tb - margin, x + rb - margin, y + bb + margin
+        x + lb, y + tb, x + rb, y + bb
       ):
         tryDieToEnemy(delta, true, false)
         return

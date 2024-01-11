@@ -959,6 +959,9 @@ func processPoisonWaterLogic(delta):
 # @override
 func landed():
   .landed()
+  has_broom_flown = not global.memory["broom"]
+  if has_broom_flown:
+    has_landed_since_last_flight = true
   num_spell_casts_used = 0
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
@@ -1046,6 +1049,9 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
       fallenBroom.grav = 1
       fallenBroom.projectile = true
       fallenBroom.global_transform.origin.y -= 1
+      if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
+        fallenBroom.global_transform.origin.y = self.global_transform.origin.y
+        fallenBroom.taking_the_player_with_me = true
       fallenBroom.true_terminal_vel = 0
       fallenBroom.walk_speed *= 3
       fallenBroom.get_node("BroomSound").play()
