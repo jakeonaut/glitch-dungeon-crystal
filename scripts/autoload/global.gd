@@ -187,11 +187,10 @@ func _ready():
     if hasGottenLevelGeode: pass
 
     
+
     memory["random_entrances"] = false
     memory["broom"] = false
-    memory["broom_flight"] = true
     memory["has_gotten_broom"] = 1
-    memory["can_nest"] = true
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["clean_crystals"] = 0
@@ -199,6 +198,14 @@ func _ready():
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
+    # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
+    memory["glitched_grimoire"] = false
+
+    # HIDDEN POWERUPS
+    memory["can_nest"] = false
+    memory["broom_flight"] = false
+
+    # EASTER EGGS
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 

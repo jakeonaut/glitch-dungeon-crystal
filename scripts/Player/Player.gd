@@ -530,14 +530,17 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  level.displaySpellMessageText("no magic")
-  if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
-    nullifySound.play()
-    global.memory["mp"] = 0
-    self.applyGlitch(global.GlitchForm.NORMAL, true)
-    self.can_cast_spell_timer = 0
-    if global.memory.has("spellbookPage"):
-      global.memory["spellbookPage"] = []
+  if not global.memory["glitched_grimoire"]:
+    level.displaySpellMessageText("no magic")
+    if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
+      nullifySound.play()
+      global.memory["mp"] = 0
+      self.applyGlitch(global.GlitchForm.NORMAL, true)
+      self.can_cast_spell_timer = 0
+      if global.memory.has("spellbookPage"):
+        global.memory["spellbookPage"] = []
+  else:
+    level.displaySpellMessageText("unaffected")
   glitchTickle(false)
 
 # need this to have it available in the aniPlayer
