@@ -38,14 +38,14 @@ func isConditionActive():
     return global.getLevelZoneThing("crystal_geode")
 
 # @override
-func getNumChildren():
+func getNumForeignChildren():
     if has_spawned:
         return max_num_children
     return 0
 
 # @override
 func spawn(with_flare = true):
-    should_staticify_children = is_static_in_level
+    # should_staticify_children = is_static_in_level # this breaks dynamically created SmallKeys
     if has_spawned:
         return
     .spawn(with_flare) # super()

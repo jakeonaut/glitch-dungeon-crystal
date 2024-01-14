@@ -256,7 +256,7 @@ __meta__ = {
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.49, 11.604, 0 )
-spawned_object_path = "res://sceneObjects/SpellsTreasureCollectables/ShroomKey.tscn"
+spawned_object_path = "res://sceneObjects/SpellsTreasureCollectables/CatKey.tscn"
 spawn_time_limit = 0
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 9 )]

@@ -68,5 +68,6 @@ opacity = 0.5
 pixel_size = 0.125
 texture = ExtResource( 4 )
 hframes = 7
+vframes = 4
 
 [editable path="BubbleSpawner"]

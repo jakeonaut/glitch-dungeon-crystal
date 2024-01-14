@@ -245,6 +245,8 @@ func tryToRespawn():
   global.isRespawning = false
 
   player.unsmack()
+  player.aniPlayer.play("land")
+  player.pauseAnimation = false
   self.overrideLevelRespawnEvent()
   player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
@@ -337,7 +339,7 @@ func walkThroughWallsGlitch():
 
 var followers = []
 func trySpawnFollowers():
-  var numKeys = global.getLevelZoneThing("key")
+  var numKeys = global.getThingFromAllLevelZonez("key")
   if numKeys != null:
     for _i in range(numKeys):
       spawnKeyFollower(
@@ -346,7 +348,7 @@ func trySpawnFollowers():
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
           
-  var numAngelTadpoles = global.getLevelZoneThing("angelTadpole")
+  var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
   if numAngelTadpoles != null:
     for _i in range(numAngelTadpoles):
       spawnAngelTadpole(

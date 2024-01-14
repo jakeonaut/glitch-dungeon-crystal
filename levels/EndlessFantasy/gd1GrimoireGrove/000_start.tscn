@@ -52,7 +52,7 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 1 )
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=49]
 viewport_path = NodePath("Viewport2")
 
 [sub_resource type="ShaderMaterial" id=44]
@@ -165,6 +165,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 5, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.447894, 0 )
 
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -3.0896, 0 )
+
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1.56496, 0 )
 
@@ -205,12 +208,13 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 11 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+visible = true
 material = SubResource( 45 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 49 )
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false

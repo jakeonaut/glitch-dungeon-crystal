@@ -64,7 +64,10 @@ func change_scene():
     global.set_camera_position_on_respawn = true
 
     if self.path != "":
-        var _was_change_ok = get_tree().change_scene(self.path)
+        var was_change_ok = get_tree().change_scene(self.path)
+        if was_change_ok != OK:
+            get_tree().change_scene("res://levels/EndlessFantasy/gd1/OLD_DEBUG_TOWN.tscn")
+
     else:
         global.pauseGame = false
         

@@ -275,10 +275,7 @@ func justPressedDown():
 
 # @override
 func pressingDown():
-  if grav > 0:
-    return Input.is_action_pressed("ui_down") and not pauseInput
-  elif grav < 0:
-    return Input.is_action_pressed("ui_up") and not pauseInput
+  return Input.is_action_pressed("ui_down") and not pauseInput
 
 # @override
 func justPressedJump():
@@ -290,6 +287,8 @@ func recentlyJustPressedJump():
 
 # @override
 func pressingJump():
+  if physics_state == PhysicsState.BEING_TOSSED:
+    return false
   return (Input.is_action_pressed("jump_button") and not pauseInput) or should_magic_jump
 
 # @override
@@ -302,12 +301,16 @@ func pressingMoveDown():
   
 # @override
 func pressingMoveLeft():
+  if physics_state == PhysicsState.BEING_TOSSED:
+    return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == -1
   return Input.is_action_pressed("ui_left") and not pauseInput
 
 # @override
 func pressingMoveRight():
+  if physics_state == PhysicsState.BEING_TOSSED:
+    return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == 1
   return Input.is_action_pressed("ui_right") and not pauseInput
@@ -370,8 +373,10 @@ func regainNestingDoll():
     glitchTickle()
   # has_mushroom_double_jumped = true
 
+var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
+  var has_speed_slippers = global.memory["speed_slippers"]
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   # if is_mushroom_infected:
   #  return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
@@ -379,6 +384,12 @@ func getWalkSpeed(delta):
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
     return 9
+  elif has_speed_slippers:
+    if not on_ground:
+      return 7
+    elif Input.is_action_pressed("sub_action_button") and summonedBroom == null:
+      return 9
+    return 8
   if nesting_doll_state == global.NestingDoll.MOM:
     return 7 if on_ground else 6
   if nesting_doll_state == global.NestingDoll.MATRIARCH:

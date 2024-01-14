@@ -66,7 +66,7 @@ func _process(delta):
             lv.y = 0
     if projectile:
         var has_hit_something = hitStuff(delta)
-        if horizontal_collision or has_hit_something or vertical_collision:
+        if has_hit_something or horizontal_collision or vertical_collision: # ((horizontal_collision or vertical_collision) and level.player.glitch_form != global.GlitchForm.WALK_THROUGH_WALLS):
             landSound.play()
             grav = 60
             walk_direction = Vector2(0, 0)

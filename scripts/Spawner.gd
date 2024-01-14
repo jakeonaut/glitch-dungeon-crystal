@@ -3,6 +3,7 @@ extends Spatial
 # String is a path to a file.
 export(String, FILE) var spawned_object_path
 var spawned_object_res = null
+var spawned_object_instance = null
 var spawn_timer = 0
 export var spawn_time_limit = 5
 export var max_num_children = 10
@@ -13,7 +14,7 @@ export var is_active = true
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 export var only_activate_in_range = true
-var should_staticify_children = false
+# var should_staticify_children = false  # this breaks dynamically created SmallKeys
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -28,7 +29,10 @@ func _ready():
 
 export var num_native_children = 1
 func get_foreign_children():
-  return self.get_children().slice(num_native_children, self.get_child_count())
+  var spawned_object_child_addition = 0
+  if spawned_object_instance:
+    spawned_object_child_addition = 1
+  return fakeSlice(self.get_children(), num_native_children, self.get_child_count() - spawned_object_child_addition)
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -39,7 +43,7 @@ func _process(delta):
     if not am_i_in_range_of_player or not is_active:
         return
 
-    var num_children = getNumChildren()
+    var num_children = getNumForeignChildren()
 
     if num_children < max_num_children:
         spawn_timer += (delta*22)
@@ -49,7 +53,7 @@ func _process(delta):
     else:
         spawn_timer = 0
 
-func getNumChildren():
+func getNumForeignChildren():
     var count = 0
     for child in self.get_foreign_children():
         if child.visible:
@@ -63,7 +67,8 @@ func spawn(_with_flare = true):
     for child in self.get_foreign_children():
         child.visible = true
         spawnEffect(child)
-    if spawned_object_res == null: return
+    if spawned_object_res == null:
+        return
 
     var newObject = spawned_object_res.instance()
     newObject.transform.origin = Vector3(
@@ -71,11 +76,13 @@ func spawn(_with_flare = true):
         stepify(rand_range(y_range.x, y_range.y), 0.125),
         0
     )
+    if "is_static_in_level" in newObject:
+        # newObject.is_static_in_level = should_staticify_children # this breaks dynamically created SmallKeys
+        newObject.is_static_in_level = false
     add_child(newObject)
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)
-    if "is_static_in_level" in newObject:
-        newObject.is_static_in_level = should_staticify_children
+    spawned_object_instance = newObject
 
             
 func playerActivationAreaPassiveActivate():
@@ -83,3 +90,23 @@ func playerActivationAreaPassiveActivate():
 
 func myChildDied():
     pass
+
+
+# https://github.com/godotengine/godot/issues/53495
+func fakeSlice(array: Array, start = null, end = null, step = null):
+    var stop = array.size()
+    var sliced = []
+    if step == null:
+        step = 1
+    if start == null:
+        return array
+    if start < 0:
+        start = start + array.size()
+    if end != null:
+        if end >= 0:
+            stop = end
+        else:
+            stop = array.size() + end
+    for i in range(start, stop, step):
+        sliced.push_back(array[i])
+    return sliced

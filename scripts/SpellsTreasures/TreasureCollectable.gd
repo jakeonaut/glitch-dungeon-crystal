@@ -14,6 +14,7 @@ export var canPause = true
 
 func _ready():
   if is_static_in_level and self.getMyStaticLevelZoneVar():
+    print("treasure collectbale, I was static in level and have memory")
     if secretAniPlayer.has_animation("isOpen"):
       secretAniPlayer.play("isOpen")
     is_active = false
@@ -108,7 +109,7 @@ func activate(_is_player):
   
 # @override
 func isActive():
-  return is_active and visible
+  return is_active and visible and not okay_im_done
 
 # @override
 func passiveActivate(_delta, _is_player):

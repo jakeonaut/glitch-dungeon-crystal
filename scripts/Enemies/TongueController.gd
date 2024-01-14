@@ -1,6 +1,7 @@
 extends Spatial
 
 
+onready var frog = get_node("..")
 onready var tongueAniPlayer = get_node("../TongueAnimationPlayer")
 onready var tongueCollisionShape = get_node("TongueArea/CollisionShape")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -35,6 +36,7 @@ func _process(delta):
   if hooked:
     if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
       restorePlayer()
+      frog.unqueueGulpAnimation()
       return
     elif hookTarget.get_ref() == level.player:
       pass
@@ -49,8 +51,9 @@ func _process(delta):
     hookTarget.get_ref().linear_velocity.y = 0
     moveTargetToHook(delta)
     reelItIn(delta)
-    if not tongueCollisionShape.visible:
-      restorePlayer()
+    # let frog & gulping take care of it
+    # if not tongueCollisionShape.visible:
+      # restorePlayer()
 
 func restorePlayer():
   if not hookTarget or not hookTarget.get_ref():
@@ -60,7 +63,7 @@ func restorePlayer():
   hookTarget.get_ref().should_collide_floor = true
   hookTarget.get_ref().can_collide_with_floor = true
   hookTarget.get_ref().pauseAnimation = false
-  level.player.on_ground = true
+  level.player.on_ground = false
   level.player.hv = Vector3(0, 0, 0)
   level.player.dir = Vector3(0.0, 0.0, 0.0)
   level.player.linear_velocity.x = 0
@@ -88,7 +91,7 @@ func reelItIn(_delta):
     return
     
   if hookTarget.get_ref() == level.player:
-    level.player.on_ground = true
+    level.player.on_ground = false
     level.player.vv = 0
     level.player.linear_velocity.y = 0
     level.player.lv.y = 0
@@ -109,4 +112,6 @@ func passiveActivate(_delta, is_player):
     level.player.pauseAnimation = true
     level.player.should_do_fallthrough_area_collision = false
     level.player.tryClearFallthroughCollisionSolid()
+
+    frog.queueGulpAnimation()
   

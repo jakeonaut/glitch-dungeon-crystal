@@ -60,7 +60,7 @@ func _ready():
   levelTitleRect.rect_pivot_offset = levelTitleRect.rect_size / 2
   levelTitleRect.rect_scale = Vector2(0, 1)
   set_process(true)
-  recreateHeartSprites()
+  # recreateHeartSprites()
   hiscoreRect.visible = false
   congratsHiscoreLabel.visible = false
   crystalCubeHiscoreLabel.visible = false
@@ -71,18 +71,18 @@ func _ready():
   totalHiscoreLabel.visible = false
   pressEnterLabel.visible = false
 
-func recreateHeartSprites():
-  var heartSprite = heartsRect.get_node("ColorRect/ColorRect/HeartSprite")
-  heartSprite.visible = false
-  var heartSpritesArray = heartsRect.get_node("ColorRect/ColorRect").get_children()
-  for i in range(heartSpritesArray.size() - 1):
-    heartSpritesArray[heartSpritesArray.size() - i - 1].queue_free()
-  for i in range(global.memory["max_hp"] - 1):
-    heartSprite.visible = true
-    var newHeartSprite = heartSprite.duplicate()
-    newHeartSprite.visible = true
-    newHeartSprite.global_position.x = 72 + i * 48
-    heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
+# func recreateHeartSprites():
+#   var heartSprite = heartsRect.get_node("ColorRect/ColorRect/HeartSprite")
+#   heartSprite.visible = false
+#   var heartSpritesArray = heartsRect.get_node("ColorRect/ColorRect").get_children()
+#   for i in range(heartSpritesArray.size() - 1):
+#     heartSpritesArray[heartSpritesArray.size() - i - 1].queue_free()
+#   for i in range(global.memory["max_hp"] - 1):
+#     heartSprite.visible = true
+#     var newHeartSprite = heartSprite.duplicate()
+#     newHeartSprite.visible = true
+#     newHeartSprite.global_position.x = 72 + i * 48
+#     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
 onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")

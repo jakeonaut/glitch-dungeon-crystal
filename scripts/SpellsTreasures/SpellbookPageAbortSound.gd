@@ -1,11 +1,11 @@
 extends AudioStreamPlayer
 
-onready var spellbookPage = get_node("../../..")
+onready var treasureChest = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func activateScript():
-  spellbookPage.mySprite.visible = false
-  spellbookPage.okay_im_done = true
+  treasureChest.mySprite.visible = false
+  treasureChest.okay_im_done = true
   
   global.pauseGame = false
   global.pauseMoveInput = false

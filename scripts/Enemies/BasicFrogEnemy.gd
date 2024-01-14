@@ -52,6 +52,9 @@ func _process(delta):
   if not visible:
     return
 
+  if gulpin:
+    level.player.visible = false
+
   if am_i_in_range_of_player:
     override_am_i_in_range_of_player = true
     if level.player.global_transform.origin.y > self.global_transform.origin.y + 1:
@@ -135,6 +138,31 @@ func _process(delta):
       mySprite.updateBaseFrame(2, 0)
     else:
       mySprite.updateBaseFrame(3, 0)
+
+var gulpin = false
+func startGulp():
+  gulpin = true
+
+onready var tongueController = get_node("TongueController")
+func spitOut():
+  gulpin = false
+  level.player.visible = true
+  level.player.on_ground = true
+  tongueController.hooked = false
+  tongueController.hookTarget = null
+  level.player.tumbleFall(mySprite.flip_h)
+
+func queueGulpAnimation():
+  tongueAniPlayer.queue("gulpIdle")
+  tongueAniPlayer.queue("spitOut")
+
+func unqueueGulpAnimation():
+  var queuedAnimations = tongueAniPlayer.get_queue()
+  tongueAniPlayer.clear_queue()
+  for aniName in queuedAnimations:
+    if aniName != "gulpIdle" and aniName != "spitOut":
+      tongueAniPlayer.queue(aniName)
+
 
 func glitchSwitchSprite(_delta):
   pass
@@ -232,7 +260,7 @@ func fallthroughCollisionActivate(friend):
   # ALSO, need to make game_mover call "fallthroughCollisionClear" if we ever
   # like jump, or fall off too...
   if not who_is_standing_on_me.has(friend.name):
-    playBounce("landSoft")
+    playBounce("land")
 
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]

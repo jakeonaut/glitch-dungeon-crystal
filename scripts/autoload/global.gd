@@ -186,8 +186,6 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
-    
-
     memory["random_entrances"] = false
     memory["broom"] = false
     memory["has_gotten_broom"] = 1
@@ -198,12 +196,15 @@ func _ready():
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
+    memory["level_zonez"] = []
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
 
     # HIDDEN POWERUPS
+    memory["broomerang"] = false
     memory["can_nest"] = false
     memory["broom_flight"] = false
+    memory["speed_slippers"] = false
 
     # EASTER EGGS
     memory["anna_mode"] = false
@@ -353,6 +354,8 @@ func loadGame():
 
     if global.memory.has("roomPath"):
         currLevelZone = getLevelZoneName(global.memory["roomPath"])
+        if not global.memory["level_zonez"].has(currLevelZone):
+            global.memory["level_zonez"].push_back(currLevelZone)
     return true
 
 func normalizeLoadedMemory():
@@ -471,6 +474,8 @@ func tryInitializeLevelZone(levelZone):
         # setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
         # setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
     currLevelZone = levelZone
+    if not global.memory["level_zonez"].has(currLevelZone):
+        global.memory["level_zonez"].push_back(currLevelZone)
 
 func setLevelZoneThingHighScoreMemory(highScoreStr, levelZoneThing, score_mult):
     if not self.memory.has(highScoreStr):
@@ -523,6 +528,17 @@ func getLevelZoneThing(thing):
     if not self.memory[currLevelZone].has(thing):
         return
     return self.memory[currLevelZone][thing]
+
+# assumes that we can make a sum of thing
+func getThingFromAllLevelZonez(thing):
+    var thingSum = 0
+    for levelZone in global.memory["level_zonez"]:
+        if not self.memory.has(levelZone):
+            continue
+        if not self.memory[levelZone].has(thing):
+            continue
+        thingSum += self.memory[levelZone][thing]
+    return thingSum
 
 func setLevelZoneThing(thing, val):
     # also set the total counter

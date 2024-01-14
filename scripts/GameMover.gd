@@ -59,6 +59,7 @@ var spawn_origin
 var last_grounded_pos = Vector3(0, 0, 0)
 var falling_y_offset = 16
 var fall_timer = 0
+var fall_time_max = 50
 var should_collide_horizontally = true
 var should_collide_floor = true 
 var should_collide_ceil = true
@@ -79,6 +80,7 @@ var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
 
 enum PhysicsState {
   NORMAL,
+  BEING_TOSSED,
   COLLAPSED,
   CAN_WAKE_UP,
   WAKING_UP,
@@ -340,9 +342,9 @@ func applyGravity(delta):
     lv += g * delta
     if on_ground:
       fall_timer = 0
-    elif glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water:
+    elif physics_state == PhysicsState.BEING_TOSSED or (glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water):
       fall_timer += (delta*22)
-    elif glitch_form == global.GlitchForm.FEATHER or vv > 0:
+    elif (glitch_form == global.GlitchForm.FEATHER or vv > 0) and physics_state != PhysicsState.BEING_TOSSED:
       fall_timer = 0
     if lv.y < 0:
       if not on_ground and not pauseAnimation and aniPlayer != null:
@@ -853,7 +855,7 @@ func processHorizontalInputs(delta):
     # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
 
   # TODO(Engine.time_scale suspect)
-  if dir.length() > 1:
+  if dir.length() > 1 and physics_state != PhysicsState.BEING_TOSSED:
     dir = dir.normalized()
   if on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction():
     dir = dir * 0.9*(delta*DNUMSKID)
@@ -1097,6 +1099,8 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
 # TODO(jaketrower): TopsyTurvy
 func collideWithWall(local_lv):
   self.horizontal_collision = true
+  if physics_state == PhysicsState.BEING_TOSSED and glitch_form == global.GlitchForm.FLOOR:
+    on_ground = false
   var just_pressed_horizontal_input = is_pressing_horizontal_input and not was_pressing_horizontal_input
   var switched_to_red_from_yellow = glitch_form == global.GlitchForm.FLOOR and prev_glitch_form == global.GlitchForm.LADDER
   var switched_to_yellow = glitch_form == global.GlitchForm.LADDER and prev_glitch_form != global.GlitchForm.LADDER
@@ -1272,9 +1276,11 @@ func landed():
   var quiet_the_fall_sound = true
   playLandSound()
   addJumpSmokeCloud()
+  if physics_state == PhysicsState.BEING_TOSSED:
+    pauseAnimation = false
   if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
-    if fall_timer > 50 and not glitch_form == global.GlitchForm.FEATHER:
+    if fall_timer > fall_time_max and not glitch_form == global.GlitchForm.FEATHER:
       quiet_the_fall_sound = false
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -1284,6 +1290,8 @@ func landed():
       iFellFlat()
     else:
       playLandAnimation()
+      if physics_state == PhysicsState.BEING_TOSSED:
+        physics_state = PhysicsState.NORMAL
   if bounceAniPlayer:
     if last_vv < -10:
       playBounce("land")

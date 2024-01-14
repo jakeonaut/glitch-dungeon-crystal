@@ -105,7 +105,7 @@ script = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="HookInteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57786, -0.57786, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82717, -0.57786, 0 )
 shape = SubResource( 11 )
 
 [node name="HookSprite" type="Sprite3D" parent="HookInteractionArea"]

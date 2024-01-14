@@ -26,7 +26,6 @@ var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 # var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
-var summonedBroom = null
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 10
 
@@ -196,7 +195,7 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
-  if nesting_doll_state == global.NestingDoll.BABY:
+  if nesting_doll_state == global.NestingDoll.BABY or global.memory["speed_slippers"]:
     return true
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     return false
@@ -589,7 +588,6 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     is_mushroom_infected = false
 
   if global.activeInteractor:
-    print("TRY DIE TO ENEMY")
     global.activeInteractor.hideTextbox()
   global.activeInteractor = null
   var hurtSound_pitch_scale = 1.0
@@ -636,7 +634,6 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   elif global.memory["hp"] <= 0 or should_immediately_die:
     global.incrementLevelZoneDeaths()
     global.memory["hp"] = 0
-    print("die and hide")
     self.textBox.hideTextbox()
     global.isRespawning = true
     physics_state = PhysicsState.GLITCH_DYING
@@ -694,14 +691,49 @@ func summonSporeShroom():
     newShroom.walk_direction.x = 1
   summonedShroom = weakref(newShroom)
 
+func tumbleFall(direction):
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  var x_val = 10
+  playBounce("grow")
+  if direction:
+    aniPlayer.play("tumbleLeft")
+    x_val *= -1
+  else:
+    aniPlayer.play("tumbleRight")
+    x_val *= 1
+
+  physics_state = PhysicsState.BEING_TOSSED
+  pauseAnimation = true
+  should_collide_floor = true
+  can_collide_with_floor = true
+  hv = Vector3(x_val, 0, 0)
+  dir = Vector3(x_val, 0.0, 0.0)
+  linear_velocity.x = x_val
+  lv.x = x_val
+  var jump_val = 5
+  vv = jump_val
+  linear_velocity.y = jump_val
+  lv.y = jump_val
+
+  yield(TempTimer.idle_frame(self), "timeout")
+  fall_timer = fall_time_max - 5
+
+
 
 func processBagLogic(_delta):
   pass
 
 func processBroomLogic(delta):
+  var can_throw_broom = global.memory["broomerang"]
+
   var aa = aniPlayer.assigned_animation
   if (aa == "broomSmackGlitch" or aa == "sweepFloor") and not aniPlayer.is_playing():
     broomStop()
+
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED:
+    noBroomSound.play()
+    return
 
   var which_broom_attack = 1
   if not global.memory["broom"]:
@@ -709,9 +741,6 @@ func processBroomLogic(delta):
       summonSporeShroom()
     elif global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
       noBroomSound.play()
-    return
-
-  if global.pauseMoveInput and global.activeInteractor == null:
     return
 
   if not summonedBroom and is_in_broom_cooldown:
@@ -764,7 +793,7 @@ func processBroomLogic(delta):
         summonedBroom.smacked_npc = smacked_npc
       summonedBroom.my_broom_owner = self
       adjustSummonedBroomSpritePosition()
-  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
+  elif can_throw_broom and Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
     summonedBroom.queue_free()
     broomStop()
     if not on_ground:
@@ -781,7 +810,7 @@ func processBroomLogic(delta):
     linear_velocity.y = 0
     hitStuff(delta)
     # global_transform.origin.y = last_grounded_pos.y
-    if Input.is_action_just_pressed("sub_action_button"):
+    if can_throw_broom and Input.is_action_just_pressed("sub_action_button"):
       broomStop()
       summonFallenBroom(true)
 
@@ -856,7 +885,7 @@ func adjustSummonedBroomSpritePosition():
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func shouldAirHaveFriction():
-  return summonedBroom == null
+  return summonedBroom == null and .shouldAirHaveFriction()
 
 # var broom_flip_h = false
 func processBroomRenderLogic(_delta):
