@@ -38,7 +38,7 @@ func _process(delta):
   lineSprite.scale.y = (diff - .75) / 2
 
   if hooked:
-    if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
+    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
       hooked = false
       restorePlayer()
       hookTarget = null
@@ -63,6 +63,8 @@ func _process(delta):
     reelItOut(delta)
 
 func restorePlayer():
+  if hookTarget == null:
+    return
   hookTarget.get_ref().should_collide_floor = true
   hookTarget.get_ref().can_collide_with_floor = true
   hookTarget.get_ref().pauseAnimation = false
@@ -70,6 +72,8 @@ func restorePlayer():
   level.player.dir = Vector3(0.0, 0.0, 0.0)
   level.player.linear_velocity.x = 0
   level.player.lv.x = 0
+  level.player.physics_state = PhysicsState.NORMAL
+  level.player.pauseAnimation = false
 
 func moveTargetToHook(delta):
   if not hookTarget.get_ref():
@@ -121,6 +125,7 @@ func isActive():
 
 func passiveActivate(_delta, is_player):
   if not hooked and not is_reeled_in and is_player and level.player.physics_state != PhysicsState.GLITCH_DYING:
+    level.clearOtherGrabbers()
     hooked = true
     hookTarget = weakref(level.player)
     level.player.hookSound.play()

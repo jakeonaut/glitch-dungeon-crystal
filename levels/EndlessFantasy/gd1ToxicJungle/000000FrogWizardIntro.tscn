@@ -17,7 +17,7 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=17]
-[ext_resource path="res://sceneObjects/Enemies/InfectedFrogEnemy.tscn" type="PackedScene" id=18]
+[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=21]
@@ -713,6 +713,7 @@ shape = SubResource( 22 )
 [node name="InfectedFrogEnemy" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 5, 0 )
 is_static = true
+is_infected = true
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 4.2, -1.1, -1 )

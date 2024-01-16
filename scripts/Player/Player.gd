@@ -199,12 +199,8 @@ func pressingRun():
     return true
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     return false
-  # if (broom_flip_h and Input.is_action_pressed("ui_right")) or \
-  #    (not broom_flip_h and Input.is_action_pressed("ui_left")):
-  #   return false
 
-  return Input.is_action_pressed("sub_action_button") and summonedBroom == null# or \
-         #(is_mushroom_infected and mushroom_turn_timer > 0) or pressingDown()
+  return .pressingRun()
   
 func isWalkingIntoWall():
   if summonedBroom != null:
@@ -224,6 +220,8 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
   pauseInput = summonedBroom != null or global.pauseMoveInput
+  if aniPlayer.assigned_animation == "getItem" and not aniPlayer.is_playing():
+    getItemFailsafe()
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
@@ -663,7 +661,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
-var smack_time_limit = 7
+var smack_time_limit = 4
 func getSmacked(_broom_origin = Vector3(0, 0, 0)):
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
@@ -725,6 +723,11 @@ func processBagLogic(_delta):
   pass
 
 func processBroomLogic(delta):
+  if physics_state == PhysicsState.OCCUPIED:
+    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
+      global.activeInteractor.interact()
+    return
+
   var can_throw_broom = global.memory["broomerang"]
 
   var aa = aniPlayer.assigned_animation
@@ -732,7 +735,10 @@ func processBroomLogic(delta):
     broomStop()
 
   if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED:
-    noBroomSound.play()
+    if physics_state == PhysicsState.OCCUPIED:
+      getItemFailsafe()
+    elif Input.is_action_just_pressed("sub_action_button"):
+      noBroomSound.play()
     return
 
   var which_broom_attack = 1
@@ -908,7 +914,9 @@ func processBroomRenderLogic(_delta):
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
       # mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     
-  if summonedBroom != null:
+  if physics_state == PhysicsState.OCCUPIED:
+    broomSpriteVisible.visible = false
+  elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"]:
     broomSpriteVisible.visible = true
@@ -998,7 +1006,8 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-  summonSmokeClouds(1, false, false, 1)
+  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED:
+    summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
   # var lt = getLevelTiles()
@@ -1017,7 +1026,7 @@ func landed():
 func broomStop():  
   summonedBroom = null
   pauseAnimation = false
-  pauseInput = false
+  global.pauseMoveInput = false
   broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
@@ -1138,16 +1147,6 @@ func iJustPressedDown():
     .iJustPressedDown() # super
     return
 
-  var trying_to_interact_with_door = false
-  if Input.is_action_just_pressed("ui_down"):
-    var areas = interactionArea.get_overlapping_areas()
-    for area in areas:
-      if area.is_in_group("door"):
-        trying_to_interact_with_door = true
-        break
-  if trying_to_interact_with_door:
-    return
-
   on_ground = false
   should_do_fallthrough_area_collision = false
   tryClearFallthroughCollisionSolid()
@@ -1234,3 +1233,11 @@ func swordClank(play_sound = true):
   getSmacked()
   if play_sound:
     broomSound.play()
+
+func getItemFailsafe():
+  if global.activeInteractor == null:
+    physics_state = PhysicsState.NORMAL
+    pauseAnimation = false
+    pauseSelf = false
+    global.pauseMoveInput = false
+    global.pauseGame = false

@@ -6,6 +6,7 @@ var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var lightAniPlayer = get_node("LightAnimationPlayer")
+onready var debugDoor = get_tree().get_root().get_node("Game/Viewport/level/DebugDoor")
 onready var npc = get_node("NPC")
 onready var npcSprite = get_node("NPC/Sprite3D")
 onready var getHitSound = get_node("GetHitSound")
@@ -32,6 +33,7 @@ func _ready():
     if getMyStaticLevelZoneVar():
         has_been_smacked = true
         lightAniPlayer.play("lightUp")
+        debugDoor.visible = true
         # musicPlayer.changeSongPitch(1.0)
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
@@ -140,6 +142,9 @@ func activate(_is_player):
     global.setLevelZoneThing("crystal_geode", true)
     if quietSavePoint:
         quietSavePoint.passiveActivate(0, true)
+    if debugDoor:
+        level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
+        debugDoor.visible = true
 
 
 func trySweepUpGlitchTiles(collisionShape):
@@ -148,10 +153,10 @@ func trySweepUpGlitchTiles(collisionShape):
     
     var x = collisionShape.global_transform.origin.x
     var y = collisionShape.global_transform.origin.y
-    var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
-    var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
-    var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
-    var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
+    var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 1
+    var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 1
+    var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 1
+    var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 1
     
     var _has_played_sound = false
     for i in range(int(floor(bb)), int(ceil(tb))):

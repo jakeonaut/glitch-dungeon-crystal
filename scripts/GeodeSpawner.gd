@@ -45,7 +45,7 @@ func getNumForeignChildren():
 
 # @override
 func spawn(with_flare = true):
-    # should_staticify_children = is_static_in_level # this breaks dynamically created SmallKeys
+    should_staticify_children = is_static_in_level # this breaks dynamically created SmallKeys
     if has_spawned:
         return
     .spawn(with_flare) # super()

@@ -363,7 +363,7 @@ func isActive():
 
 func activate(_is_player):
     getSmacked(self.global_transform.origin)
-    getPlayer().getSmacked()
+    # getPlayer().getSmacked()
 
 func passiveActivate(_delta, _is_player):
     pass

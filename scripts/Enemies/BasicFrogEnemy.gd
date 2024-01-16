@@ -141,7 +141,10 @@ func _process(delta):
 
 var gulpin = false
 func startGulp():
-  gulpin = true
+  if not gulpin:
+    gulpin = true
+    level.player.tumbleFall(mySprite.flip_h)
+    notDieSound.play()
 
 onready var tongueController = get_node("TongueController")
 func spitOut():
@@ -150,6 +153,7 @@ func spitOut():
   level.player.on_ground = true
   tongueController.hooked = false
   tongueController.hookTarget = null
+  level.player.glitchTickle()
   level.player.tumbleFall(mySprite.flip_h)
 
 func queueGulpAnimation():

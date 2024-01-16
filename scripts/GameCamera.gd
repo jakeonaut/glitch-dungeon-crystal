@@ -22,9 +22,10 @@ func getLevelTiles():
     levelTiles = get_tree().get_root().get_node("Game/Viewport/level").levelTiles
   return levelTiles
 
+var CAMERA_SIZE = 30
 func _ready():
-  initial_size = self.size
-  zoomed_size = (initial_size-8)
+  initial_size = CAMERA_SIZE# self.size
+  zoomed_size = CAMERA_SIZE # (initial_size-8)
   if global.memory.has("cameraSize"):
     self.size = global.memory["cameraSize"]
   initial_z = global_transform.origin.z
@@ -136,32 +137,29 @@ func _process(delta):
 
   # print(Vector2(global_transform.origin.x, global_transform.origin.y))
 
+var x_margin = 0
+var y_margin = 0
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size
-  var x_margin = 10 - ((15-self.size)/1.5)
+  x_margin = 18.75 # 10 - ((15-self.size)/1.5)
   if global_transform.origin.x < leftmost_x + x_margin:
     global_transform.origin.x = leftmost_x + x_margin
   if global_transform.origin.x > rightmost_x - x_margin:
     global_transform.origin.x = rightmost_x - x_margin
+  # if it's too small
+  var x_median = (rightmost_x + leftmost_x) / 2
+  # x_median = -19.5
+  if rightmost_x - leftmost_x < x_margin * 2:
+    # print(str(abs(x_median - leftmost_x)) + ", " + str(abs(x_median - x_margin)))
+    global_transform.origin.x = x_median
     
   # respect top and bottom, dependent on gameCamera size
-  var y_margin = 7.5 - ((15-self.size)/2)
+  y_margin = 7.5 - ((15-self.size)/2)
   if global_transform.origin.y < botmost_y + y_margin:
     global_transform.origin.y = botmost_y + y_margin
   if global_transform.origin.y > topmost_y - y_margin:
     global_transform.origin.y = topmost_y - y_margin
-    
-func isNearBottom():
-  # this should be binary initial_size || zoomed_size, depending on whether glo
-  var calcSize = self.size # zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
-  var y_margin = 7.5 - ((15-calcSize)/2)
-  # print("is near bottom?: " + str(global_transform.origin.y) + " < " + str(botmost_y + y_margin * 2) + " : " + str(global_transform.origin.y < botmost_y + y_margin * 2))
-  return global_transform.origin.y < botmost_y + y_margin * 2
-  
-func isInitialTargetNearBottom():
-  if initial_target == null:
-    return false
-  var calcSize = self.size # zoomed_size if global.activeInteractor != null and global.activeInteractor.can_camera_zoom else initial_size
-  var y_margin = 7.5 - ((15-calcSize)/2)
-  # print("is near bottom?: " + str(initial_target.global_transform.origin.y) + " < " + str(botmost_y + y_margin) + " : " + str(initial_target.global_transform.origin.y < botmost_y + y_margin))
-  return initial_target.global_transform.origin.y < botmost_y + y_margin
+  # if it's too small
+  var y_median = (topmost_y + botmost_y) / 2
+  if topmost_y - botmost_y < y_margin * 2:
+    global_transform.origin.y = y_median

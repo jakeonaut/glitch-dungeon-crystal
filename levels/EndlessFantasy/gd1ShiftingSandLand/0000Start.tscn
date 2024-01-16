@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=20]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=21]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=22]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 21 )
@@ -214,6 +215,7 @@ viewport_path = NodePath("Viewport")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
 tileset_type = 4
+has_spellbook_page = true
 display_title = "cricket caves"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 10 )]
@@ -410,6 +412,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06536, 0.4, 1 )
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0 )
+
+[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 11, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=2]
+[gd_scene load_steps=136 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=57]
 [ext_resource path="res://assets/sounds/land2.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=59]
+[ext_resource path="res://assets/sounds/faststep.wav" type="AudioStream" id=60]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -458,6 +459,18 @@ tracks/19/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/opacity")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -1079,6 +1092,56 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 13, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomVisible:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getItemFailsafe"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBagAnimated:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 23 ]
 }
 
 [sub_resource type="Animation" id=61]
@@ -3767,7 +3830,6 @@ alpha_cut = 2
 texture = ExtResource( 31 )
 hframes = 8
 vframes = 8
-frame = 23
 
 [node name="Sprite3DBagAnimated" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, -0.0372463, 0.6 )
@@ -3992,6 +4054,10 @@ stream = ExtResource( 51 )
 volume_db = -18.0
 pitch_scale = 1.4
 
+[node name="RunSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 60 )
+volume_db = -4.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"
 anims/RESET = SubResource( 29 )
@@ -4127,6 +4193,7 @@ should_animate = false
 
 [node name="InteractPrompt" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.5, 2 )
+visible = false
 material_override = SubResource( 85 )
 flip_h = true
 flip_v = true

@@ -2491,7 +2491,7 @@ shape = SubResource( 128 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -8, 0 )
-path = "res://levels/EndlessFantasy/gd1GrimoireGrove/000_start.tscn"
+path = "res://levels/EndlessFantasy/gd1GrimoireGrove/IntroScene0.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 24 )]
 

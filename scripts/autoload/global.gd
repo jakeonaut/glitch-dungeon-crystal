@@ -390,6 +390,9 @@ func doFallthroughObjectCollision(gameMover, area):
     var atb = areaShape.shape.extents.y
     var abb = -atb
 
+    if gameMover.physics_state != gameMover.PhysicsState.NORMAL:
+        return false
+
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
     if (gameMover.pressingDown() and (gameMover.on_ground or (y - gameMover.tb) < (ay + atb))) or \

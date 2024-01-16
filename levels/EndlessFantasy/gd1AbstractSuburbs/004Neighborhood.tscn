@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -23,6 +23,11 @@
 [ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=26]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -68,6 +73,125 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=29]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 26 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "doorBarred"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "doorUnbarred"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unpause"
+} ]
+}
+
+[sub_resource type="Animation" id=37]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -175,7 +299,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393230, 0, 1, 393231, 0, 1, 458743, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 1, 524281, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786424, 0, 1, 786425, 0, 1, 786426, 0, 1, 786428, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851961, 0, 1, 851962, 0, 1, 851963, 0, 1, 851964, 0, 1, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917499, 0, 1, 983030, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983035, 0, 1, 983036, 0, 1, 983037, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048571, 0, 1, 1048573, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1 )
+"cells": PoolIntArray( 65526, 0, 1, 65527, 0, 1, 131062, 0, 1, 131063, 0, 1, 196598, 0, 1, 196599, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262139, 0, 1, 262140, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327675, 0, 1, 327676, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393230, 0, 1, 393231, 0, 1, 458743, 0, 1, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 1, 524281, 0, 1, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655374, 0, 1, 655375, 0, 1, 720886, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720910, 0, 1, 720911, 0, 1, 786422, 0, 1, 786423, 0, 1, 786424, 0, 1, 786425, 0, 1, 786426, 0, 1, 786428, 0, 1, 786446, 0, 1, 786447, 0, 1, 851958, 0, 1, 851959, 0, 1, 851961, 0, 1, 851962, 0, 1, 851963, 0, 1, 851964, 0, 1, 851979, 0, 37, 851980, 0, 37, 851981, 0, 37, 851982, 0, 37, 851983, 0, 37, 851984, 0, 37, 851985, 0, 37, 851986, 0, 37, 851987, 0, 37, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917499, 0, 1, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 37, 917515, 0, 37, 917516, 0, 37, 917517, 0, 37, 917518, 0, 37, 917519, 0, 37, 917520, 0, 37, 917521, 0, 37, 917522, 0, 37, 917523, 0, 37, 917524, 0, 37, 917525, 0, 37, 917526, 0, 37, 983030, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983035, 0, 1, 983036, 0, 1, 983037, 0, 1, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 37, 983049, 0, 37, 983050, 0, 37, 983051, 0, 37, 983052, 0, 37, 983053, 0, 37, 983054, 0, 37, 983055, 0, 37, 983056, 0, 37, 983057, 0, 37, 983058, 0, 37, 983059, 0, 37, 983060, 0, 37, 983061, 0, 37, 983062, 0, 37, 983063, 0, 37, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048571, 0, 1, 1048573, 0, 1, 1048574, 0, 37, 1048575, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1, -262124, 0, 1, -262123, 0, 1, -262122, 0, 1, -262121, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196591, 0, 1, -196590, 0, 1, -196589, 0, 1, -196588, 0, 1, -196587, 0, 1, -196586, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -196582, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -131054, 0, 1, -131053, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131049, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -10, 0, 1, -9, 0, 1 )
 }
 script = ExtResource( 3 )
 __meta__ = {
@@ -200,13 +324,13 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0.0999999, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.0999999, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/003GravityFall1.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000DieToSavePoint.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -222,8 +346,7 @@ shape = SubResource( 26 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/UpsidedownHouse.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001PoisonShroomCove.tscn"
 num_keys_unlock = 2
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
@@ -241,6 +364,28 @@ shape = SubResource( 24 )
 shape = SubResource( 25 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 26 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -1, 0 )
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/007CrystalHaven.tscn"
+num_keys_unlock = 2
+
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+anims/RESET = SubResource( 32 )
+anims/doorBarred = SubResource( 33 )
+anims/doorClose = SubResource( 34 )
+anims/doorOpen = SubResource( 35 )
+anims/doorUnbarred = SubResource( 36 )
+anims/locked = SubResource( 37 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 24 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 25 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
 shape = SubResource( 26 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level"]
@@ -262,8 +407,8 @@ shape = SubResource( 31 )
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38784, 1.33178, 0 )
 
-[node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6122, 1.33178, 0 )
+[node name="Streetlight3" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38784, 7.33178, 0 )
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0 )
@@ -273,6 +418,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 7, 0 )
 
 [node name="Mushroom" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.74573, -1.24297 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0 )
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
+
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0 )
+
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 
@@ -301,5 +467,7 @@ __meta__ = {
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

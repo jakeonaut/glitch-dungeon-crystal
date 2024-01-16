@@ -1424,6 +1424,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73.9, 16, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.8, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.723488, -0.57786, 0 )
 shape = SubResource( 81 )
 
 [node name="HookSprite" parent="Viewport/level/FishingRod/HookInteractionArea" index="1"]

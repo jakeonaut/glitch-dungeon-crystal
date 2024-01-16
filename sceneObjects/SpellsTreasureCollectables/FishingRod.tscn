@@ -98,7 +98,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 
-[node name="FishingRod" type="Spatial"]
+[node name="FishingRod" type="Spatial" groups=["grabber"]]
 script = ExtResource( 3 )
 
 [node name="HookInteractionArea" type="Area" parent="."]

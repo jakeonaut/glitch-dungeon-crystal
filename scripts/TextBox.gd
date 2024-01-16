@@ -93,12 +93,8 @@ func setPosition():
 
 func setTextBoxPosition():
   if not is_tiny:
-    if getGameCamera().isNearBottom() and (getGameCamera().isInitialTargetNearBottom() or can_camera_zoom):
-      self.margin_top = 60
-      self.margin_bottom = self.margin_top + (bot_margin_start - top_margin_start)
-    else:
-      self.margin_top = top_margin_start
-      self.margin_bottom = bot_margin_start
+    self.margin_top = top_margin_start
+    self.margin_bottom = bot_margin_start
   
 var important_unpause_timer = 0
 var important_unpause_time_limit = 20
@@ -283,9 +279,15 @@ func hideTextbox():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
   if isWaitingForEndPrompt():
     abortSound.play()
+    if abortSound.has_method("preActivateScript") and not has_preactivated:
+      abortSound.preActivateScript()
+      has_preactivated = true
     abortSound.activateScript()
   else:
     abortSound.play()
+    if abortSound.has_method("preActivateScript") and not has_preactivated:
+      abortSound.preActivateScript()
+      has_preactivated = true
     if abortSound.has_method("cutOffEarlyActivateScript"):
       abortSound.cutOffEarlyActivateScript()
   if global.activeInteractor == self:
@@ -293,6 +295,11 @@ func hideTextbox():
   if is_important:
     is_important = false
     global.pauseGame = false
+
+  if level.player.physics_state == level.player.PhysicsState.OCCUPIED:
+    level.player.physics_state = level.player.PhysicsState.NORMAL
+    level.player.pauseAnimation = false
+    level.player.pauseInput = false
       
 func tryToHide(delta):
   if not focus_me:
@@ -343,9 +350,11 @@ func passiveInteract(_delta):
     hide_textbox_timer = 0
         
 func stopInteract():
-  if not is_important and isWaitingForNextPrompt() or isWaitingForEndPrompt():
-    focus_me = false
   hideTextbox()
+
+func tryStopInteractPassive():
+  if not is_important and isWaitingForEndPrompt():
+    focus_me = false
   
 func adjustTinyColorRect():
   # TODO(jaketrower): nocommit

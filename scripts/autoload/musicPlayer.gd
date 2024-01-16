@@ -23,6 +23,7 @@ onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
+onready var treasureJingle = get_node("TreasureJingle")
 
 var initial_volume_dbs = {}
 
@@ -34,6 +35,11 @@ func _ready():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+    if did_play_treasure_jingle and not treasureJingle.is_playing():
+        did_play_treasure_jingle = false
+        tryToPlay(restartPlayingTheme)
+        currentlyPlayingTheme = restartPlayingTheme
+        restartPlayingTheme = null
         
 func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):
@@ -96,6 +102,15 @@ func stopAll():
     fade_out(townThemePlayer)
     fade_out(bossThemePlayer)
     currentlyPlayingTheme = null
+
+var did_play_treasure_jingle = false
+var restartPlayingTheme = null
+func playTreasureJingle():
+    restartPlayingTheme = currentlyPlayingTheme
+    stopAll()
+    did_play_treasure_jingle = true
+    treasureJingle.play()
+
 
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit

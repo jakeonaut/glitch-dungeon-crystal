@@ -162,6 +162,9 @@ func _process(delta):
   if is_unlocking and not keySound.playing:
     if unlocking_key_array.size() == 0:
       actuallyUnlockAndEnterDoor()
+      print("why this not work")
+      level.player.getItemFailsafe()
+      is_unlocking = false
     else:
       var key = unlocking_key_array[0]
       if not key.flying_to_target:
@@ -249,7 +252,7 @@ func activate(is_player):
   if not is_player:
     return false
     
-  if not is_passive:
+  if not is_passive and getPlayer().on_ground:
     if not is_locked:
       goThroughDoor()
     elif is_locked:
@@ -303,6 +306,7 @@ func startDoorUnlock():
     doorOpenSound.play()
     animationPlayer.queue("doorUnbarred")
   else:
+    level.player.physics_state = level.player.PhysicsState.OCCUPIED
     global.pauseMoveInput = true
     getPlayer().pauseSelf = true
     setGlobalMemoryOfHasUnlocked()

@@ -8,6 +8,7 @@ onready var fallSound = get_node("Sounds/FallSound") if has_node("Sounds/FallSou
 onready var jumpSound = get_node("Sounds/JumpSound") if has_node("Sounds/JumpSound") else null
 onready var doubleJumpSound = get_node("Sounds/DoubleJumpSound") if has_node("Sounds/DoubleJumpSound") else null
 onready var wetJumpSound = get_node("Sounds/WetJumpSound") if has_node("Sounds/WetJumpSound") else null
+onready var runSound = get_node("Sounds/RunSound") if has_node("Sounds/RunSound") else null
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var collidedTiles = []
@@ -80,6 +81,7 @@ var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
 
 enum PhysicsState {
   NORMAL,
+  OCCUPIED,
   BEING_TOSSED,
   COLLAPSED,
   CAN_WAKE_UP,
@@ -141,6 +143,9 @@ var jump_squat_jump_input_timer = 0
 var is_walking = false
 var is_pressing_horizontal_input = false
 var was_pressing_horizontal_input = false
+var num_horizontal_input_presses = 0
+var horizontal_input_reset_timer = 0
+var horizontal_input_reset_time_limit = 3
 var facing = Vector3(0, 0, 1) #default to facing "down" toward the player behind the screen
 var transitioning = false
 var is_falling = false
@@ -296,6 +301,12 @@ func processPhysics(delta):
     if glitch_form == global.GlitchForm.FEATHER:
       was_just_on_ground_timer += (delta*44)
   was_pressing_horizontal_input = is_pressing_horizontal_input
+  if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
+    horizontal_input_reset_timer += (delta*11)
+    if horizontal_input_reset_timer >= horizontal_input_reset_time_limit:
+      num_horizontal_input_presses = 0
+  else:
+    horizontal_input_reset_timer = 0
   prev_glitch_form = glitch_form
 
 func playLandAnimation():
@@ -340,7 +351,7 @@ func applyGravity(delta):
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
     lv += g * delta
-    if on_ground:
+    if on_ground or physics_state == PhysicsState.OCCUPIED:
       fall_timer = 0
     elif physics_state == PhysicsState.BEING_TOSSED or (glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water):
       fall_timer += (delta*22)
@@ -496,7 +507,7 @@ func pressingDown():
   return false
 
 func pressingRun():
-  return false
+  return num_horizontal_input_presses >= 2
 
 func justPressedJump():
   return false
@@ -555,8 +566,6 @@ func processLadderInputs(_delta):
       hv = Vector3(-climb_speed * .5, 0, 0)
     else:
       hv = Vector3(0, 0, 0)
-
-    is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
 
     if not pauseAnimation and aniPlayer != null:
       if pressingMoveUp() or pressingMoveDown() or pressingMoveRight() or pressingMoveLeft():
@@ -717,7 +726,7 @@ func getWalkSpeed(_delta):
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
   var run_add = 0
-  if pressingRun() and on_ground:
+  if pressingRun():
       run_add = 2
 
   # if glitch_form == global.GlitchForm.FEATHER:
@@ -736,6 +745,15 @@ func processHorizontalInputs(delta):
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
+  if is_pressing_opposite_horizontal_input:
+    num_horizontal_input_presses = 1
+  elif is_pressing_horizontal_input and not was_pressing_horizontal_input and on_ground:
+    num_horizontal_input_presses += 1
+    if num_horizontal_input_presses == 2:
+      var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
+      if runSound:
+        runSound.play()
+      level.summonSmokeClouds(origin, 3, false, true)
 
   # Forward as "seen" by the camera (OpenGL convention)
   var view_forward = -getGameCamera().get_transform().basis.z
@@ -928,7 +946,7 @@ var is_a_physics_particle = false
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(local_lv, delta):
-  if delta == 0:
+  if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
 
   if is_a_physics_particle:
@@ -1149,6 +1167,7 @@ func collideWithWall(local_lv):
         aniPlayer.play("walkBump", -1, bump_ani_speed)
         aniPlayer.queue("stand")
   dir = Vector3(0, 0, 0)
+  num_horizontal_input_presses = 0
 
 var cheating_horizontal_offset = 0
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):

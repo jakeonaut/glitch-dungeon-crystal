@@ -192,7 +192,7 @@ shape = SubResource( 28 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.47274, 22.1, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/003GravityFall1.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/004Neighborhood.tscn"
 is_passive = true
 is_vertical = true
 
@@ -254,7 +254,6 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 22 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
 material = ExtResource( 11 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]

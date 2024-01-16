@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -27,6 +27,10 @@ extents = Vector3( 4, 2, 1 )
 [sub_resource type="BoxShape" id=29]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=17]
 length = 0.001
@@ -351,9 +355,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_clip_": 0
@@ -411,6 +412,9 @@ shape = SubResource( 28 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 32 )
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6, 0, 0 )
@@ -479,7 +483,7 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 frame = 78
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]

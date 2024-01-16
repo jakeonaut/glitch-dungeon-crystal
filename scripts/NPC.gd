@@ -228,7 +228,7 @@ func stopPassiveActivate():
 
   # TODO(jaketrower): TODO on a timer...
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor == textBox:
-    global.activeInteractor.stopInteract()
+    global.activeInteractor.tryStopInteractPassive()
   did_i_get_smacked = false
     
 func justStopPassiveActivate():

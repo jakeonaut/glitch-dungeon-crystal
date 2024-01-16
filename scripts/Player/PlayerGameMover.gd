@@ -268,10 +268,7 @@ func landed():
 
 # @override
 func justPressedDown():
-  if grav > 0:
-    return Input.is_action_just_pressed("ui_down") and not pauseInput
-  elif grav < 0:
-    return Input.is_action_just_pressed("ui_up") and not pauseInput
+  return Input.is_action_just_pressed("ui_down") and not pauseInput
 
 # @override
 func pressingDown():
@@ -287,7 +284,7 @@ func recentlyJustPressedJump():
 
 # @override
 func pressingJump():
-  if physics_state == PhysicsState.BEING_TOSSED:
+  if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   return (Input.is_action_pressed("jump_button") and not pauseInput) or should_magic_jump
 
@@ -301,7 +298,7 @@ func pressingMoveDown():
   
 # @override
 func pressingMoveLeft():
-  if physics_state == PhysicsState.BEING_TOSSED:
+  if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == -1
@@ -309,13 +306,16 @@ func pressingMoveLeft():
 
 # @override
 func pressingMoveRight():
-  if physics_state == PhysicsState.BEING_TOSSED:
+  if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == 1
   return Input.is_action_pressed("ui_right") and not pauseInput
 
 func magicJump():
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
+    pauseAnimation = false
   should_magic_jump = true
   actuallyApplyJump(false)
 
@@ -390,12 +390,10 @@ func getWalkSpeed(delta):
     elif Input.is_action_pressed("sub_action_button") and summonedBroom == null:
       return 9
     return 8
-  if nesting_doll_state == global.NestingDoll.MOM:
-    return 7 if on_ground else 6
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
-    return 6 if pressingRun() and on_ground else 5
+    return 6 if pressingRun() else 5
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
-    return 7 if pressingRun() and on_ground else 6
+    return 7 if pressingRun() else 6
   else:
     return .getWalkSpeed(delta) # super()
 
@@ -427,6 +425,9 @@ func getABroom():
   smacked_npc = null
   is_in_broom_cooldown = false
   has_broom_flown = not has_landed_since_last_flight
+  var ps = physics_state
+  if ps == PhysicsState.COLLAPSED or ps == PhysicsState.CAN_WAKE_UP or ps == PhysicsState.WAKING_UP:
+    physics_state = PhysicsState.NORMAL
 
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")

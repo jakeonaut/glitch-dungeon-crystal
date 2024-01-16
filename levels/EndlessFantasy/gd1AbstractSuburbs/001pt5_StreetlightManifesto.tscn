@@ -256,7 +256,6 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 11 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
 material = ExtResource( 24 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]

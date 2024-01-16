@@ -428,3 +428,8 @@ func flipGravity():
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
   else:
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1
+
+func clearOtherGrabbers():
+  var grabbers = self.get_tree().get_nodes_in_group("grabber")
+  for grabber in grabbers:
+    grabber.hookTarget = null

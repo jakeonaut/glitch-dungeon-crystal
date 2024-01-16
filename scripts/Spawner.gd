@@ -14,7 +14,7 @@ export var is_active = true
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
 export var only_activate_in_range = true
-# var should_staticify_children = false  # this breaks dynamically created SmallKeys
+var should_staticify_children = false  # this breaks dynamically created SmallKeys
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -76,9 +76,10 @@ func spawn(_with_flare = true):
         stepify(rand_range(y_range.x, y_range.y), 0.125),
         0
     )
+    newObject.name = self.name + "/" + newObject.name
     if "is_static_in_level" in newObject:
-        # newObject.is_static_in_level = should_staticify_children # this breaks dynamically created SmallKeys
-        newObject.is_static_in_level = false
+        newObject.is_static_in_level = should_staticify_children # this breaks dynamically created SmallKeys
+        # newObject.is_static_in_level = false
     add_child(newObject)
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)

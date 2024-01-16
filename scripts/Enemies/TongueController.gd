@@ -34,7 +34,7 @@ enum PhysicsState {
 
 func _process(delta):
   if hooked:
-    if not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
+    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
       restorePlayer()
       frog.unqueueGulpAnimation()
       return
@@ -105,6 +105,7 @@ func isActive():
 
 func passiveActivate(_delta, is_player):
   if not hooked and is_player and level.player.physics_state != PhysicsState.GLITCH_DYING:
+    level.clearOtherGrabbers()
     hooked = true
     hookTarget = weakref(level.player)
     level.player.hookSound.play()
