@@ -114,8 +114,9 @@ func addJumpSmokeCloud(_flip_flip_h = false):
 func isFallthroughCollisionActive():
     return visible
 
-func fallthroughCollisionActivate(_possible_game_mover):
-    pass
+func fallthroughCollisionActivate(possible_game_mover):
+    if possible_game_mover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
+        passiveActivate(0, true)
     # mySprite.material_override.set_shader_param("enable_glitch", true)
     # print("set shake power...")
     # shake_power = 0.005
@@ -131,11 +132,12 @@ func isActive():
 func passiveActivate(_delta, is_player):
     if is_player:
         level.player.regainNestingDoll()
-        level.player.shroomAniPlayer.queue("grow")
-        level.player.shroomAniPlayer.queue("adjust")
-        level.player.getABroom()
-        for _i in range(3):
-            level.player.spawnASpore(0, -1)
-        level.player.nesting_doll_state = global.NestingDoll.GRANDMA
-        global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
-        queue_free()
+        if level.player.nesting_doll_state == global.NestingDoll.BABY:
+            level.player.shroomAniPlayer.queue("grow")
+            level.player.shroomAniPlayer.queue("adjust")
+            level.player.getABroom()
+            for _i in range(3):
+                level.player.spawnASpore(0, -1)
+            level.player.nesting_doll_state = global.NestingDoll.GRANDMA
+            global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+            queue_free()

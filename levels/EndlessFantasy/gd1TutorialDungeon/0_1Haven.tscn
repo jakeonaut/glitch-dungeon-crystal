@@ -2153,11 +2153,6 @@ path = "res://levels/EndlessFantasy/gd1/DebugTownSacredDoorsHubWorld.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -1.18485, 0 )
 script = ExtResource( 38 )
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, -14.1, 0 )
-bbText = "clean it!!!!!!!"
-floating_text = true
-
 [node name="InteractionAreaEvent" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4, 0, 0 )
 script = ExtResource( 35 )
@@ -2398,7 +2393,7 @@ shape = SubResource( 214 )
 [node name="InteractPrompt" parent="Viewport/level/GeodeSpawner/FrogCroneNPC2" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
-[node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 42 )]
+[node name="DebugDoorSecret" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, -18, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/gd1/DebugTown_NullificationPurgatory.tscn"

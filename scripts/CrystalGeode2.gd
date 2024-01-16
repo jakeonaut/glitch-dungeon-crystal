@@ -17,7 +17,7 @@ onready var collisionShape1 = get_node("InteractionArea/CollisionShape")
 onready var collisionShape2 = get_node("InteractionArea/CollisionShape2")
 var can_do_my_power = true
 # String is a path to a file.
-export(String, FILE) var path
+export(String, FILE) var path # unused atm
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
@@ -144,6 +144,7 @@ func activate(_is_player):
         quietSavePoint.passiveActivate(0, true)
     if debugDoor:
         level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
+        debugDoor.path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
         debugDoor.visible = true
 
 

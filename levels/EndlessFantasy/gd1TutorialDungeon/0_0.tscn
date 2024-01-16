@@ -962,7 +962,7 @@ texture = ExtResource( 14 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, -2, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue2.tscn"
 num_keys_unlock = 2
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 11 )]

@@ -174,7 +174,7 @@ anims/RESET = SubResource( 9 )
 anims/fall = SubResource( 13 )
 anims/land = SubResource( 10 )
 
-[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough", "fallthrough_tiny"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]

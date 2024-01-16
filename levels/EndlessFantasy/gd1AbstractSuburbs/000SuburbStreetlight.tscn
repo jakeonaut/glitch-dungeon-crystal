@@ -267,7 +267,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false

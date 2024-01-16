@@ -7,7 +7,10 @@ onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTi
 onready var gameCamera = get_node("GameCamera")
 # onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
-onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") if has_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") else null
+onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
+onready var basicCrtEffectRect = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
+onready var viewportTexture = get_node("../../ViewportTexture")
+onready var viewport2 = get_node("../../Viewport2")
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 
@@ -46,6 +49,8 @@ func _ready_impl():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
+
+  viewportTexture.texture = viewport2.get_texture()
   
   levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)
@@ -115,8 +120,8 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if ditherPaletteEffectRect2:
-    ditherPaletteEffectRect2.visible = show_crt_effect
+  ditherPaletteEffectRect2.visible = true # show_crt_effect # nocommit # TODO(jaketrower)
+  basicCrtEffectRect.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 

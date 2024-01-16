@@ -408,7 +408,7 @@ shape = SubResource( 31 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38784, 1.33178, 0 )
 
 [node name="Streetlight3" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38784, 7.33178, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.61216, 12.3318, 0 )
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0 )

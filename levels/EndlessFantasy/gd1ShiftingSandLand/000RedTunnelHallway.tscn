@@ -962,6 +962,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.6, 0 )
 bbText = "•mole crickets carved
 our civilization
 out of dirt"
+tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 39 )

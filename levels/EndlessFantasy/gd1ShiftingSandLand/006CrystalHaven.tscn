@@ -251,11 +251,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 1.4, 0 )
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 2.9, 0 )
 
-[node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 8.44196, 0 )
-visible = false
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
-
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 8, 0 )
 
@@ -274,8 +269,8 @@ is_builder = true
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, 0 )
 
-[node name="DebugDoor2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5, -11.558, 0 )
+[node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, -17.558, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 

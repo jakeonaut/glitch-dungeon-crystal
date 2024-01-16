@@ -2,7 +2,7 @@ extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var frogCroneNPC = get_node("../../..")
-onready var debugDoor = get_tree().get_root().get_node("Game/Viewport/level/DebugDoor")
+onready var debugDoorSecret = get_tree().get_root().get_node("Game/Viewport/level/DebugDoorSecret")
 
 func _ready():
     var memory = global.getStaticLevelZoneLevelVar(level, self.name)
@@ -10,7 +10,7 @@ func _ready():
         return
     elif memory:
       frogCroneNPC.queue_free()
-      debugDoor.visible = true
+      debugDoorSecret.visible = true
         
 
 func activateScript():
@@ -18,7 +18,7 @@ func activateScript():
     global.activeInteractor = null
     frogCroneNPC.queue_free()
     global.setStaticLevelZoneLevelVar(level, self.name, true)
-    debugDoor.visible = true
+    debugDoorSecret.visible = true
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
