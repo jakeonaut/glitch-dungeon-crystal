@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=137 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -471,6 +471,42 @@ tracks/20/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.87 ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -2076,6 +2112,118 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0.146656, 1.08369, 0 ) ]
+}
+
+[sub_resource type="Animation" id=100]
+resource_name = "teleport"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 6, 7, 6, 7, 6, 7, 6, 7, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.75, 0.7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/SecretSweepArea/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.62906, 1.53429, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBagAnimated:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.734869, -0.0372463, 0.6 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3DBagAnimated:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 15.0, 1.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.02, 0.5, 0.02 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 2.87, 2.3, 2.87 ]
 }
 
 [sub_resource type="Animation" id=97]
@@ -4092,6 +4240,7 @@ anims/sweepFloor = SubResource( 86 )
 anims/swimFall = SubResource( 35 )
 anims/swimJump = SubResource( 57 )
 anims/swimJumpStart = SubResource( 58 )
+anims/teleport = SubResource( 100 )
 anims/tumbleLeft = SubResource( 97 )
 anims/tumbleRight = SubResource( 98 )
 anims/turnAround = SubResource( 23 )

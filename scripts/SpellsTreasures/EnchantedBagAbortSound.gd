@@ -2,6 +2,7 @@ extends AudioStreamPlayer
 
 onready var enchantedBag = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var has_activated = false
 
 func activateScript():
   enchantedBag.mySprite.visible = false
@@ -30,5 +31,7 @@ func activateScript():
   level.saveTheGame()
 
 func preActivateScript():
-  global.memory["max_hp"] += 1
-  global.memory["hp"] = global.memory["max_hp"]
+  if not has_activated:
+    global.memory["max_hp"] += 1
+    global.memory["hp"] = global.memory["max_hp"]
+    has_activated = true

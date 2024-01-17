@@ -182,6 +182,7 @@ shader_param/target_palette = ExtResource( 27 )
 script = ExtResource( 5 )
 tileset_type = 7
 has_spellbook_page = true
+display_title = "demon suburb"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 

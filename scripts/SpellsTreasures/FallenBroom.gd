@@ -36,7 +36,7 @@ func _process(delta):
 
         pauseSelf = true
         is_active = false
-        okay_im_done = true
+        okay_im_really_done_bye = true
         grav = 0
         behavior_was_thrown = false
         behavior_walking = false

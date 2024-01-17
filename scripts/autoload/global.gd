@@ -186,7 +186,10 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
-    memory["random_entrances"] = false
+    # settings?
+    memory["show_crt_effect"] = true
+
+    # game stuff
     memory["broom"] = false
     memory["has_gotten_broom"] = 1
     memory["nesting_doll"] = NestingDoll.GRANDMA
@@ -209,6 +212,7 @@ func _ready():
     # EASTER EGGS
     memory["anna_mode"] = false
     memory["blue_mode"] = false
+    memory["random_entrances"] = false
 
     loadGameSettings()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=26]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=28]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/EnchantedBag.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -432,13 +433,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 5, 0 )
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0 )
+
+[node name="EnchantedBag" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 

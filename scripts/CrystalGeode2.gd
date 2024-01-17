@@ -137,6 +137,8 @@ func activate(_is_player):
     trySweepUpGlitchTiles(collisionShape2)
     var crystal_shards = level.get_tree().get_nodes_in_group("crystal_shard")
     for shard in crystal_shards:
+        shard.cubeSound.volume_db = -99
+        shard.cubeSound2.volume_db = -99
         shard.passiveActivate(0, false)
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
@@ -165,7 +167,7 @@ func trySweepUpGlitchTiles(collisionShape):
             var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
             var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if getLevelTiles().isTileSpikes(tile_type):
-                getLevelTiles().infectSpikes(coords)
+                getLevelTiles().infectSpikes(coords, false)
                 # TODO(jaketrower): also reset the levelTiles array position?
 
 

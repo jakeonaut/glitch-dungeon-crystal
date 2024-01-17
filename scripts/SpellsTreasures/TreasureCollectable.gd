@@ -8,6 +8,7 @@ var being_collected = false # actually is_opened
 var really_being_collected = false
 var gotcha = false
 var okay_im_done = false
+var okay_im_really_done_bye = false
 export var stop_all_music = true
 export var display_textbox = true
 export var canPause = true
@@ -22,6 +23,7 @@ func _ready():
     set_process(false)
     set_physics_process(false)
     okay_im_done = true
+    okay_im_really_done_bye = true
     return
     
   set_process(true)
@@ -34,7 +36,21 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier 
 
+  # i love not using FSMs -_-
+  if okay_im_really_done_bye:
+    return
+
   if okay_im_done:
+    # small key escape hatch
+    if not display_textbox and \
+       ((level.player.aniPlayer.assigned_animation == "getItem" and not level.player.aniPlayer.is_playing()) or \
+       level.player.aniPlayer.assigned_animation != "getItem"):
+      if abortSound.has_method("preActivateScript"):
+        abortSound.preActivateScript()
+      abortSound.activateScript()
+      global.activeInteractor = null
+      level.player.getItemFailsafe()
+      okay_im_really_done_bye = true
     return
 
   if gotcha or being_collected or really_being_collected:
@@ -77,23 +93,21 @@ func _process(delta):
     else:
       level.player.aniPlayer.play("getItem")
       adjustSprite()
-      # secretAniPlayer.play("getItem")
-      if display_textbox:
-        # if there is an existing textBox already... hide it... fail safe:
-        if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
-          global.activeInteractor.hideTextbox()
-          global.pauseMoveInput = true
-        finishItAll()
+      finishItAll()
 
 
 func finishItAll():
   okay_im_done = true
-  textBox.interact()  
-  if global.activeInteractor == null:
-    if abortSound.has_method("preActivateScript"):
-      abortSound.preActivateScript()
-    abortSound.activateScript()
-    level.player.getItemFailsafe()
+  if display_textbox:
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+      global.activeInteractor.hideTextbox()
+      global.pauseMoveInput = true
+    textBox.interact()  
+    if global.activeInteractor == null:
+      if abortSound.has_method("preActivateScript"):
+        abortSound.preActivateScript()
+      abortSound.activateScript()
+      level.player.getItemFailsafe()
 
 func adjustSprite():
   textBox.can_camera_zoom = false

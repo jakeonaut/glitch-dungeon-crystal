@@ -131,7 +131,6 @@ func isActive():
 
 func passiveActivate(_delta, is_player):
     if is_player:
-        level.player.regainNestingDoll()
         if level.player.nesting_doll_state == global.NestingDoll.BABY:
             level.player.shroomAniPlayer.queue("grow")
             level.player.shroomAniPlayer.queue("adjust")

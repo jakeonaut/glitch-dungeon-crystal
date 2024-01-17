@@ -44,6 +44,7 @@ func goThroughDoor():
     return
 
   if canPlayDoorSound and not teleportSound.is_playing():
+    level.player.glitchTickle()
     teleportSound.play()
 
   if not self.path:
@@ -53,7 +54,8 @@ func goThroughDoor():
   # getPlayer().global_transform.origin.y += 1
   getPlayer().aniPlayer.stop()
   getPlayer().aniPlayer.clear_queue()
-  getPlayer().aniPlayer.play("fall")
+  getPlayer().aniPlayer.play("teleport")
+  getPlayer().pauseAnimation = true
   getPlayer().getSmacked()
 
   global.activeInteractor = null

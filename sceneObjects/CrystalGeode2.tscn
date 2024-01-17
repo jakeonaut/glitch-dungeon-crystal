@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/sounds/error.wav" type="AudioStream" id=16]
 
-[sub_resource type="ArrayMesh" id=47]
+[sub_resource type="ArrayMesh" id=49]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -724,7 +724,7 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 47 )
+mesh = SubResource( 49 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 

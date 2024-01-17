@@ -20,6 +20,7 @@ func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
     level.spawnKeyFollower(key.global_transform.origin)
+    key.okay_im_done = true
     key.queue_free()
     level.player.aniPlayer.play("stand")
 

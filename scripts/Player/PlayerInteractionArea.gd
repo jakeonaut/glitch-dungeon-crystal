@@ -19,6 +19,8 @@ func _process(_delta):
     for area in areas:
         if area.is_in_group("fallthrough"):
             var fallthroughParent = area.get_node("..")
+            if Input.is_action_pressed("ui_down"):
+                continue
             if fallthroughParent.has_method("isFallthroughCollisionActive") and not fallthroughParent.isFallthroughCollisionActive():
                 continue
             if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and prev_fallthrough_collision_area == null:

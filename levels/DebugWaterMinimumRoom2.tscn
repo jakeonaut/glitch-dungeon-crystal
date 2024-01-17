@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -18,8 +18,11 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Broomerang.tscn" type="PackedScene" id=17]
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -118,13 +121,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 12, 0 )
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 
+[node name="Viewport2" parent="." instance=ExtResource( 16 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 1 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 9 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 2 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
+
+[editable path="Viewport2/ScreenEffects"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=139 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -41,7 +41,6 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/CroneHavenAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=41]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=42]
-[ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=43]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
 
@@ -1668,13 +1667,13 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ShaderMaterial" id=135]
 shader = ExtResource( 39 )
 shader_param/palettesize = 16
-shader_param/resolution_scale = 0.0
+shader_param/resolution_scale = 0.15
 shader_param/canvas_width = 1280.0
 shader_param/canvas_height = 1024.0
 shader_param/r_mult = 0.0
 shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
-shader_param/target_palette = ExtResource( 43 )
+shader_param/target_palette = ExtResource( 3 )
 
 [sub_resource type="ViewportTexture" id=119]
 viewport_path = NodePath("Viewport2")

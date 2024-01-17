@@ -387,7 +387,7 @@ func isTileCloud(tile_type):
   return "PinkCloud" in tile_name
   
 
-func infectSpikes(coords):
+func infectSpikes(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
   var did_infect_spikes = false
   if isTileSpikes(tile_type):
@@ -399,7 +399,7 @@ func infectSpikes(coords):
     removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
-    level.summonSmokeClouds(tile_pos, 2, true, true)
+    level.summonSmokeClouds(tile_pos, 2, play_sound, true)
     did_infect_spikes = true
   spike_infection_timer = 0
   return did_infect_spikes

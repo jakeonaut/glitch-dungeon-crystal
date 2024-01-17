@@ -62,14 +62,6 @@ func _ready_impl():
     for spellbook_spell in spellbook_spells:
       global.memory["spellbookPage"].push_back(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
-
-  # if global.memory["max_mp"] == 0 and global.memory["max_mp"] < how_much_mp:
-  #   global.memory["max_mp"] = how_much_mp
-  #   global.memory["mp"] = global.memory["max_mp"]
-
-  if global.memory["max_hp"] == 1 and global.memory["max_hp"] < how_much_hp:
-    global.memory["max_hp"] = how_much_hp
-    global.memory["hp"] = global.memory["max_hp"]
     
   if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true
@@ -120,7 +112,7 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  ditherPaletteEffectRect2.visible = true # show_crt_effect # nocommit # TODO(jaketrower)
+  ditherPaletteEffectRect2.visible = global.memory["show_crt_effect"]
   basicCrtEffectRect.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):
     return
@@ -228,6 +220,7 @@ func tryToRespawn():
       player.global_transform.origin = player.spawn_origin
 
   if found_door:
+    print(found_door)
     found_door.land(true, true)
   elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin

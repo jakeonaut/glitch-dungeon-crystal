@@ -374,7 +374,7 @@ func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
-  var DEATH_MARGIN = 2
+  var DEATH_MARGIN = 5
   if getGameCamera().rightmost_x > -999:
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
@@ -735,9 +735,7 @@ func processBroomLogic(delta):
     broomStop()
 
   if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED:
-    if physics_state == PhysicsState.OCCUPIED:
-      getItemFailsafe()
-    elif Input.is_action_just_pressed("sub_action_button"):
+    if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
 

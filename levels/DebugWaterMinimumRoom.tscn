@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -19,8 +19,11 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=18]
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -125,13 +128,28 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -1, 0 )
 path = "res://levels/DebugWaterMinimumRoom2.tscn"
 
+[node name="Viewport2" parent="." instance=ExtResource( 8 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 1 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 9 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 2 )
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
+
+[editable path="Viewport2/ScreenEffects"]
