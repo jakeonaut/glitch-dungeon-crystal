@@ -23,6 +23,8 @@ onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
+onready var crystalThemePlayer = get_node("CrystalThemePlayer")
+
 onready var treasureJingle = get_node("TreasureJingle")
 
 var initial_volume_dbs = {}
@@ -101,14 +103,16 @@ func stopAll():
     fade_out(goddessThemePlayer)
     fade_out(townThemePlayer)
     fade_out(bossThemePlayer)
+    fade_out(crystalThemePlayer)
     currentlyPlayingTheme = null
 
 var did_play_treasure_jingle = false
 var restartPlayingTheme = null
-func playTreasureJingle():
+func playTreasureJingle(volume_db):
     restartPlayingTheme = currentlyPlayingTheme
     stopAll()
     did_play_treasure_jingle = true
+    treasureJingle.volume_db = volume_db
     treasureJingle.play()
 
 
@@ -120,6 +124,8 @@ func conductFromScenePath(path):
         changeSongPitch(0.9)
         default_song_pitch = 0.9
         return
+    elif path.find("Haven") > 0:
+        tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
         changeSongPitch(0.63)
@@ -135,7 +141,7 @@ func conductFromScenePath(path):
         tryToPlay(bossThemePlayer)
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
-    elif path.find("IntroDungeon") > 0: # or path.find("DebugTown") > 0:
+    elif path.find("Lily") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("Debug") > 0:
         tryToPlay(debugThemePlayer)

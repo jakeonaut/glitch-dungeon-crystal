@@ -46,6 +46,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 9 )
 starting_glitch_type = 2
+tileset_type = 2
 has_spellbook_page = true
 spellbook_spells = [ 1, 2 ]
 
@@ -111,6 +112,9 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
+data = {
+"cells": PoolIntArray( 917514, 0, 196610, -65532, 0, 196644 )
+}
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_clip_": 0

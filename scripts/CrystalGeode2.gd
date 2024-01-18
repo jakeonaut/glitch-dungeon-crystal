@@ -4,7 +4,6 @@ var has_been_smacked = false
 var rot_amount = 100
 var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
-onready var aniPlayer = get_node("AnimationPlayer")
 onready var lightAniPlayer = get_node("LightAnimationPlayer")
 onready var debugDoor = get_tree().get_root().get_node("Game/Viewport/level/DebugDoor")
 onready var npc = get_node("NPC")
@@ -18,6 +17,7 @@ onready var collisionShape2 = get_node("InteractionArea/CollisionShape2")
 var can_do_my_power = true
 # String is a path to a file.
 export(String, FILE) var path # unused atm
+export var can_change_debugDoor_path = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
@@ -32,7 +32,7 @@ func _ready():
     set_process(true)
     if getMyStaticLevelZoneVar():
         has_been_smacked = true
-        lightAniPlayer.play("lightUp")
+        lightAniPlayer.play("lightUpQuiet")
         debugDoor.visible = true
         # musicPlayer.changeSongPitch(1.0)
     # if global.hasGottenLevelGeode:
@@ -55,7 +55,8 @@ func _process(delta):
     #     # musicPlayer.changeSongPitch(1.0)
     # else:
     #     musicPlayer.changeSongPitch(0.5)
-    musicPlayer.changeSongPitch(0.5)
+    if not "Haven" in level.name:
+        musicPlayer.changeSongPitch(0.5)
     if not can_do_my_power:
         return
     rot_amount = 10
@@ -116,8 +117,13 @@ func activate(_is_player):
 
     global.setStaticLevelZoneLevelVar(level, self.name, true)
     lightAniPlayer.play("lightUp")
+    lightAniPlayer.queue("omen")
     level.player.glitchTickle()
-    level.player.physics_state = level.player.PhysicsState.GLITCH_HURT
+    level.player.physics_state = level.player.PhysicsState.OCCUPIED
+    level.player.pauseAnimation = false
+    level.player.pauseSelf = false
+    global.pauseMoveInput = true
+    global.pauseGame = true
     level.player.glitch_death_timer = 1
     if global.canGlitchScreen: # TODO(jaketrower): RESPECT MORE
       level.glitchScreenEffect.visible = true
@@ -128,8 +134,8 @@ func activate(_is_player):
     # level.player.pauseSelf = true
     # musicPlayer.stopAll()
     # musicPlayer.changeSongPitch(1.0)
-    getHitSound.play()
-    getHitSound2.play()
+    # getHitSound.play()
+    # getHitSound2.play()
 
     # if level.has_node("SavePoint"):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
@@ -140,15 +146,21 @@ func activate(_is_player):
         shard.cubeSound.volume_db = -99
         shard.cubeSound2.volume_db = -99
         shard.passiveActivate(0, false)
+    musicPlayer.playTreasureJingle(-80)
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
-    if quietSavePoint:
-        quietSavePoint.passiveActivate(0, true)
+
+func freeUpPlayer():
+    level.player.getItemFailsafe()
     if debugDoor:
         level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
-        debugDoor.path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
+        if can_change_debugDoor_path:
+            debugDoor.path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
         debugDoor.visible = true
 
+    if quietSavePoint:
+        quietSavePoint.passiveActivate(0, true)
+    level.saveTheGame("wow, congrats, you purified a crystal!")
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:

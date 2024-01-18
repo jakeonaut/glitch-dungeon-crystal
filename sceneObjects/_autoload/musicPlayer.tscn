@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/music/grandma.mp3" type="AudioStream" id=18]
 [ext_resource path="res://assets/music/poison forest.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/music/CH-OS_atmosphere_105.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/music/sfx005_cavelizards.wav" type="AudioStream" id=21]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -92,6 +93,10 @@ volume_db = -15.0
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -15.0
+
+[node name="CrystalThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -5.0
 
 [node name="TownThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )

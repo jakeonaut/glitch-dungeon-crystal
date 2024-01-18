@@ -711,12 +711,11 @@ shape = SubResource( 51 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9182, 0.0596399, 0 )
 grav = 0
-bbText = "•hi
-"
+bbText = "•i dont really know
+how to use this"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
@@ -765,7 +764,6 @@ step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 flip_h = true
-frame = 20
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 21 )

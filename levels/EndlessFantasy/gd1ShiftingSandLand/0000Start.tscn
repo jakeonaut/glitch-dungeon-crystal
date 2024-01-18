@@ -365,7 +365,6 @@ GET bb_text not found"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 is_wiggling_fast = true
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/SmallInteractionArea" index="0"]

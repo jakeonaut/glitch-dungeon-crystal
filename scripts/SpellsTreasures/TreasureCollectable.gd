@@ -141,7 +141,7 @@ func passiveActivate(_delta, _is_player):
     
   if not being_collected:
     if stop_all_music:
-      musicPlayer.playTreasureJingle()
+      musicPlayer.playTreasureJingle(-80)
     #visible = false
     if secretAniPlayer:
       secretAniPlayer.clear_queue()
