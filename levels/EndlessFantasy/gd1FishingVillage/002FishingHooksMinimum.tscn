@@ -395,18 +395,15 @@ flip_v = true
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
 visible = true
 
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
-visible = true
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
 texture = SubResource( 19 )
 flip_v = true
 
-[node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
-
 [node name="UILayer" parent="." instance=ExtResource( 9 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

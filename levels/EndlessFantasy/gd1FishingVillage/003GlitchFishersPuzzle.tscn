@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Broomerang.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
@@ -656,6 +656,50 @@ extents = Vector3( 1.5, 0.24, 1 )
 [sub_resource type="ViewportTexture" id=74]
 viewport_path = NodePath("Viewport")
 
+[sub_resource type="Shader" id=96]
+code = "shader_type canvas_item;
+
+bool is_white(float average, ivec2 pixel_pos){
+	bool pixel_bools[] = {
+		(pixel_pos.x)%4==0&&(pixel_pos.y+3)%4==0,
+		(pixel_pos.x+2)%4==0&&(pixel_pos.y+1)%4==0,
+		(pixel_pos.x+2)%4==0&&(pixel_pos.y+3)%4==0,
+		(pixel_pos.x)%4==0&&(pixel_pos.y+1)%4==0,
+		(pixel_pos.x+1)%4==0&&(pixel_pos.y+2)%4==0,
+		(pixel_pos.x+3)%4==0&&(pixel_pos.y)%4==0,
+		(pixel_pos.x+3)%4==0&&(pixel_pos.y+2)%4==0,
+		(pixel_pos.x+1)%4==0&&(pixel_pos.y)%4==0,
+		(pixel_pos.x+1)%4==0&&(pixel_pos.y+3)%4==0,
+		(pixel_pos.x+3)%4==0&&(pixel_pos.y+1)%4==0,
+		(pixel_pos.x+3)%4==0&&(pixel_pos.y+3)%4==0,
+		(pixel_pos.x+1)%4==0&&(pixel_pos.y+1)%4==0,
+		(pixel_pos.x)%4==0&&(pixel_pos.y+2)%4==0,
+		(pixel_pos.x+2)%4==0&&(pixel_pos.y)%4==0,
+		(pixel_pos.x+2)%4==0&&(pixel_pos.y+2)%4==0,
+		true
+	};
+	bool result = false;
+	int max_i = int(average*17.0);
+	for (int i = 0; i < max_i; i++){
+		result = result||pixel_bools[i];
+	}
+	return result;
+}
+
+void fragment() {
+    vec4 cur_pixel = texture(TEXTURE, UV);
+	ivec2 pixel_pos = ivec2(UV / TEXTURE_PIXEL_SIZE);
+    float average = (cur_pixel.r + cur_pixel.g + cur_pixel.b) / 3.0;
+	if(is_white(average, pixel_pos)){
+		COLOR = vec4(1.0, 1.0, 1.0, cur_pixel.a);
+	} else {
+		COLOR = vec4(0.0, 0.0, 0.0, cur_pixel.a);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=97]
+shader = SubResource( 96 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport2")
 
@@ -1107,6 +1151,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 15, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+num_keys_unlock = 1
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
@@ -1192,8 +1237,11 @@ flip_v = true
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 33 )]
 
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
 visible = true
+
+[node name="CrtEffectRect2" parent="Viewport2/ScreenEffects" index="2"]
+material = SubResource( 97 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

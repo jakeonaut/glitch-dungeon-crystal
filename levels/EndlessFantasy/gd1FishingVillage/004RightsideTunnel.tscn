@@ -6289,6 +6289,7 @@ shape = SubResource( 23 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.7, -1, 0 )
+is_locked = true
 parter_door_id = "Door4"
 num_keys_unlock = 1
 

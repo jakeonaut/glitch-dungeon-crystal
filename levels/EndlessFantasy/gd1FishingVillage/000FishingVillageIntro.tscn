@@ -438,12 +438,9 @@ margin_bottom = 1024.0
 texture = SubResource( 19 )
 flip_v = true
 
-[node name="ScreenEffects" parent="." instance=ExtResource( 18 )]
-
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
-visible = true
-
 [node name="UILayer" parent="." instance=ExtResource( 16 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 18 )]
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

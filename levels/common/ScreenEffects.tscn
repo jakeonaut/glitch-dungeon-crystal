@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
 [ext_resource path="res://shaders/CRTEffect2.shader" type="Shader" id=3]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=4]
-[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=5]
+[ext_resource path="res://shaders/CrtShaderMaterial.tres" type="Material" id=6]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
@@ -16,27 +16,6 @@ shader_param/r_mult = 0.0
 shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 4 )
-
-[sub_resource type="Shader" id=11]
-code = "shader_type canvas_item;
-
-uniform float r_mult = 0.0;
-uniform float g_mult = 1.0;
-uniform float b_mult = -1.0;
-
-void fragment() {
-    float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
-    float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
-    float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
-    vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
-    COLOR.rgb = incolor;
-}"
-
-[sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 11 )
-shader_param/r_mult = 0.0
-shader_param/g_mult = 1.0
-shader_param/b_mult = -1.0
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
@@ -96,26 +75,19 @@ shader_param/spread = 0.01
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
-uniform bool flip ;
-uniform sampler2D gradient : hint_black; // It can be whatever palette you want
+uniform int mode = 0;
 
-
-void fragment(){ 
-	vec4 col = texture(SCREEN_TEXTURE,SCREEN_UV);
-	
-	float lum = dot(col.rgb,vec3(0.2126,0.7152,0.0722)); // luminance
-	
-	
-	col = texture(gradient,vec2(abs(float(flip) - lum),0));
-	
-	
-	COLOR = col;
+void fragment() {
+	vec4 px = texture(SCREEN_TEXTURE, SCREEN_UV);
+	if (mode==1) { px = px.gbra; }
+	if (mode==2) { px = px.brga; }
+	if (mode==3) { px = px.bgra; }
+	COLOR = vec4(px.rgb,1.0);
 }"
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = SubResource( 9 )
-shader_param/flip = null
-shader_param/gradient = ExtResource( 5 )
+shader_param/mode = 2
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
@@ -133,7 +105,7 @@ margin_bottom = 1024.0
 
 [node name="BasicCrtEffectRect" type="ColorRect" parent="."]
 visible = false
-material = SubResource( 12 )
+material = ExtResource( 6 )
 margin_right = 1280.0
 margin_bottom = 1024.0
 

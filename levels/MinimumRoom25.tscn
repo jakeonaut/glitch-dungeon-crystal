@@ -150,12 +150,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="UILayer" parent="." instance=ExtResource( 18 )]
+
 [node name="ScreenEffects" parent="." instance=ExtResource( 15 )]
 
 [node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
 material = SubResource( 44 )
-
-[node name="UILayer" parent="." instance=ExtResource( 18 )]
 
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

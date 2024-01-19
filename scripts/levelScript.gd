@@ -8,6 +8,7 @@ onready var gameCamera = get_node("GameCamera")
 # onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
+onready var colorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
 onready var basicCrtEffectRect = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
 onready var viewport2 = get_node("../../Viewport2")
@@ -113,7 +114,8 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   ditherPaletteEffectRect2.visible = global.memory["show_crt_effect"]
-  basicCrtEffectRect.visible = false
+  basicCrtEffectRect.visible = false # global.memory["show_crt_effect"]
+  colorBlindEffectRect2.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 

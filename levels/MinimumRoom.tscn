@@ -123,9 +123,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
-
 [node name="UILayer" parent="." instance=ExtResource( 16 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
