@@ -9,7 +9,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sprites/obelisk.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/obelisk_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/doublejump.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sprites/savespores.png" type="Texture" id=12]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=13]
@@ -168,7 +168,7 @@ script = ExtResource( 2 )
 shape = SubResource( 9 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118303, 14 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603874, 14 )
 material_override = SubResource( 7 )
 pixel_size = 0.125
 shaded = true
@@ -204,16 +204,18 @@ pitch_scale = 1.1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049382, -0.517916, -0.769371 )
 material_override = SubResource( 4 )
 pixel_size = 0.125
+frame = 2
 
 [node name="SaveSpores" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55166, 0.165527 )
+visible = false
 material_override = SubResource( 5 )
 flip_h = true
 pixel_size = 0.12
 texture = ExtResource( 12 )
 hframes = 4
 vframes = 2
-frame = 6
+frame = 3
 
 [node name="SparkleSprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )

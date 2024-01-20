@@ -160,7 +160,7 @@ func floorGlitch():
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
-  level.displaySpellMessageText("feather fall")
+  level.displaySpellMessageText("float")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
   # TODO(jaketrower):

@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
-[ext_resource path="res://assets/sprites/obelisk.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/obelisk_sheet.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -41,6 +41,8 @@ pixel_size = 0.12
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 4 )
+hframes = 4
+vframes = 2
 script = ExtResource( 1 )
 frame_delay = 0.15
 max_frames = 1

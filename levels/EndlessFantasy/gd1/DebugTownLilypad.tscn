@@ -2177,9 +2177,6 @@ flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 19 )]
 
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
-visible = false
-
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/FungusNPC"]

@@ -2,6 +2,7 @@ extends Spatial
 
 onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
+onready var obeliskSprite = get_node("Obelisk")
 onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
 var spawn_timer = 0
 var spawn_time_limit = 5
@@ -38,6 +39,7 @@ func getPlayer():
     player = level.player
   return player
 
+var original_target_palette = null
 func _ready():
   set_process(true)
   original_position = mySprite.global_transform.origin
@@ -46,6 +48,8 @@ func _ready():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
+  obeliskSprite.material_override = obeliskSprite.material_override.duplicate()
+  original_target_palette = obeliskSprite.material_override.get_shader_param("target_palette")
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -53,6 +57,7 @@ func _process(delta):
   if is_active and not shouldIBeActive() and not is_touching_player:
     is_active = false
     mySprite.visible = false
+    obeliskSprite.material_override.set_shader_param("target_palette", global.grey_palette)
     t = 0
 
   # if mySprite.visible and not is_active:
@@ -64,6 +69,8 @@ func _process(delta):
 
   if not mySprite.visible and shouldIBeActive():
     mySprite.visible = true
+    if original_target_palette:
+      obeliskSprite.material_override.set_shader_param("target_palette", original_target_palette)
   if is_touching_player:
     is_touching_player_timer += (delta*22)
     if is_touching_player_timer >= is_touching_player_time_limit:
