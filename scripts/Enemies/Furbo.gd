@@ -1,6 +1,5 @@
 extends "GlitchEnemy.gd"
 
-onready var interactionArea = get_node("SmallInteractionArea")
 onready var sparkleSprite = get_node("SparkleSprite3D")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 

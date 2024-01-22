@@ -197,9 +197,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.698, 11, 0 )
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 3, 0 )
 
-[node name="AbortSound" parent="Viewport/level/SmallKey/NPC TextBox/TextBox" index="9"]
-key_type = 0
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 1.6, 0 )
 

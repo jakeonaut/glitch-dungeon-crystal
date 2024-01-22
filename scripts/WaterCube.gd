@@ -42,7 +42,10 @@ func getGameCamera():
 func _ready():
   set_process(true)
 
-  target_origin = self.global_transform.origin + Vector3(-1, 2, 0)
+  if is_waterfall:
+    target_origin = self.global_transform.origin + Vector3(0, -1, 0)
+  else:
+    target_origin = self.global_transform.origin + Vector3(-1, 2, 0)
   mySprite.material_override = mySprite.material_override.duplicate()
   waterFilterColorRect.material = waterFilterColorRect.material.duplicate()
   if turn_poisonous:
@@ -83,7 +86,9 @@ func becomePoisonous():
 func isActive():
   return true
   
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, is_player):
+  if not is_player:
+    return
   if not getPlayer().was_touching_water and can_splash:
     if bigSplash():
       splashSound.play()

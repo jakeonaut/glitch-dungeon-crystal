@@ -30,6 +30,7 @@ func getGameCamera():
   return gameCamera
 
 onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
+onready var interactionArea = get_node("InteractionArea") if has_node("InteractionArea") else null
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
 var animation_speed_multiplier = 1.0
@@ -53,6 +54,7 @@ var truly_on_ground = false
 var half_on_ground = false
 var should_teeter_turn_around = false
 var jumped_from_true_ground = false
+# used for Donkey Kong style coyote time jumps
 var was_just_on_ground_timer = 0
 var was_just_on_ground_time_limit = 12
 var just_landed = false
@@ -314,13 +316,21 @@ func playLandAnimation():
   aniPlayer.clear_queue()
   aniPlayer.play("land", -1, 0.5 if isFeatherLike() else 1.5)
 
+func tryClearFallthroughCollisionSolid():
+  if self != level.player:
+    return
+  if interactionArea and interactionArea.prev_fallthrough_collision_area != null and \
+      interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
+    interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
+
 func processLand():
   landed()
   if (getGameCamera().rightmost_x == -999 or not (
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
     global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
-    global_transform.origin.y < getGameCamera().botmost_y + 2)) and not global.isAMoleDigging:
+    global_transform.origin.y < getGameCamera().botmost_y + 2)) and not global.isAMoleDigging \
+    and not grav < 0:
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true
     
@@ -390,7 +400,7 @@ func applyTerminalVelocity(_delta):
     else:
       terminal_vel = water_terminal_vel
   elif glitch_form == global.GlitchForm.FEATHER:
-    if pressingJump():
+    if pressingJump() or pressingMoveUp():
       terminal_vel = true_terminal_feather_vel
     elif pressingDown():
       terminal_vel = true_terminal_vel * .75
@@ -486,10 +496,8 @@ func processInputs(delta):
       vv = 1
     elif pauseAnimation:
       vv = 0
-    elif Input.is_action_pressed("sub_action_button"):
-      vv = 8
     else:
-      vv = 6
+      vv = getWalkSpeed(delta)
     if not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "stand":
       aniPlayer.stop()
       # aniPlayer.queue("walkBump")
@@ -679,6 +687,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
   newSmokeCloud.is_really_glitchy = is_really_glitchy
 
 func actuallyApplyJump(play_sound = true):
+  tryClearFallthroughCollisionSolid()
   if isFeatherLike():
     vv = jump_force / 1.3 # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
@@ -720,7 +729,7 @@ func isKindOfOnGround():
   
 func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
-  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and vv < 0)
+  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and grav > 0) or vv > 0 and grav < 0))
 
 func getWalkSpeed(_delta):
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:

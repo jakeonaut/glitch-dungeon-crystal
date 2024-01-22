@@ -432,6 +432,18 @@ tracks/18/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=145]
 resource_name = "gulpIdle"
@@ -719,6 +731,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
 
 [sub_resource type="Animation" id=138]
 resource_name = "lickIdle"
@@ -967,6 +991,18 @@ tracks/19/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
 }
 
 [sub_resource type="Animation" id=143]
@@ -1783,7 +1819,7 @@ tracks/11/keys = {
 "values": [ 0.18, 0.125 ]
 }
 
-[sub_resource type="BoxShape" id=140]
+[sub_resource type="BoxShape" id=147]
 
 [node name="BasicFrogEnemy" type="KinematicBody"]
 collision_layer = 4
@@ -1973,8 +2009,8 @@ script = ExtResource( 16 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TongueController/TongueArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, -0.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264062, -0.25, 0 )
 visible = false
-shape = SubResource( 140 )
+shape = SubResource( 147 )
 
 [node name="BounceAnimationPlayer" parent="." instance=ExtResource( 25 )]

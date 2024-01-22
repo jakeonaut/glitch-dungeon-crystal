@@ -113,7 +113,7 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  ditherPaletteEffectRect2.visible = global.memory["show_crt_effect"]
+  ditherPaletteEffectRect2.visible = false # global.memory["show_crt_effect"]
   basicCrtEffectRect.visible = false # global.memory["show_crt_effect"]
   colorBlindEffectRect2.visible = false
   if Input.is_action_pressed("toggle_fullscreen"):

@@ -673,7 +673,7 @@ script = ExtResource( 11 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="CubeContainer" type="Spatial" parent="."]
-transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+transform = Transform( 4, 0, 0, 0, 4, -1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )

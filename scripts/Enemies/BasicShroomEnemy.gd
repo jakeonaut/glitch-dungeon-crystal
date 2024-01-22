@@ -4,14 +4,12 @@ export var is_static = false
 export var is_infected = false
 export var is_big = false
 
-onready var interactionArea = get_node("SmallInteractionArea")
-
 func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
   mySprite.set_material_override(mySprite.get_material_override().duplicate())
 
-  interactionArea.add_to_group("no_pushems")
+  smallInteractionArea.add_to_group("no_pushems")
 
 func setAsParent(_owner):
   walk_direction.x = -1

@@ -205,6 +205,7 @@ func _ready():
 
     # HIDDEN POWERUPS
     memory["broomerang"] = false
+    memory["magic_lantern"] = false
     memory["can_nest"] = false
     memory["broom_flight"] = false
     memory["speed_slippers"] = false

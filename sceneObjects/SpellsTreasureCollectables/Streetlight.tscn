@@ -283,7 +283,6 @@ frame = 49
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 5.0
 pitch_scale = 0.5
 
 [node name="Sprite3DBase" parent="." instance=ExtResource( 15 )]

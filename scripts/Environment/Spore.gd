@@ -15,7 +15,7 @@ var lifespan_timer = 0
 var lifespan_time_limit = 0
 
 onready var mySprite = get_node("Sprite3D")
-onready var interactionArea = get_node("SmallInteractionArea")
+onready var smallInteractionArea = get_node("SmallInteractionArea")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -86,7 +86,7 @@ func _process(delta):
 
         tryDieToOffscreenCamera()
         bulletTryDieToSolids()
-        if interactionArea.is_touching_water and interactionArea.touched_water_area != null:
+        if smallInteractionArea.is_touching_water and smallInteractionArea.touched_water_area != null:
             bubbleStartPop()
             # TODO(jaketrower):
             # interactionArea.touched_water_area.get_node("..").becomePoisonous()

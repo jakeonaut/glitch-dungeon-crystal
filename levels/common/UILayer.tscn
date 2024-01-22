@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/CHUNKY.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites2D/glitches.png" type="Texture" id=19]
-[ext_resource path="res://logo.png" type="Texture" id=20]
+[ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=20]
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=21]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/broom_ani.png" type="Texture" id=23]
@@ -176,6 +176,100 @@ font_data = ExtResource( 16 )
 
 [sub_resource type="Theme" id=15]
 default_font = SubResource( 14 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="ArrayMesh" id=54]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+albedo_color = Color( 1, 1, 1, 0.54902 )
+albedo_texture = ExtResource( 14 )
+distance_fade_mode = 2
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 11 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 21 )
+shader_param/base_palette = ExtResource( 12 )
+shader_param/target_palette = ExtResource( 12 )
+
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
+
+[sub_resource type="DynamicFont" id=23]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=24]
+default_font = SubResource( 23 )
+
+[sub_resource type="DynamicFont" id=26]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=27]
+default_font = SubResource( 26 )
+
+[sub_resource type="DynamicFont" id=12]
+outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=13]
+default_font = SubResource( 12 )
 
 [sub_resource type="Animation" id=39]
 length = 0.001
@@ -685,100 +779,6 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
-outline_size = 5
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
-
-[sub_resource type="ArrayMesh" id=54]
-surfaces/0 = {
-"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
-"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
-"blend_shape_data": [  ],
-"format": 2194689,
-"index_count": 24,
-"primitive": 1,
-"skeleton_aabb": [  ],
-"vertex_count": 8
-}
-
-[sub_resource type="SpatialMaterial" id=7]
-flags_transparent = true
-flags_unshaded = true
-params_blend_mode = 1
-albedo_color = Color( 1, 1, 1, 0.54902 )
-albedo_texture = ExtResource( 14 )
-distance_fade_mode = 2
-distance_fade_min_distance = 0.0
-distance_fade_max_distance = 0.0
-
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 11 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 21 )
-shader_param/base_palette = ExtResource( 12 )
-shader_param/target_palette = ExtResource( 12 )
-
-[sub_resource type="ViewportTexture" id=5]
-viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
-
-[sub_resource type="DynamicFont" id=23]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=24]
-default_font = SubResource( 23 )
-
-[sub_resource type="DynamicFont" id=26]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=27]
-default_font = SubResource( 26 )
-
-[sub_resource type="DynamicFont" id=12]
-outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
-use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 16 )
-
-[sub_resource type="Theme" id=13]
-default_font = SubResource( 12 )
-
 [node name="UILayer" type="CanvasLayer"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
@@ -988,420 +988,6 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "the dungeon"
 text = "the dungeon"
-scroll_active = false
-
-[node name="PauseMenu" type="Control" parent="."]
-visible = false
-margin_top = 12.0
-margin_right = 640.0
-margin_bottom = 522.0
-
-[node name="PauseMenuRect" type="ColorRect" parent="PauseMenu"]
-margin_left = 36.0
-margin_top = 36.0
-margin_right = 610.0
-margin_bottom = 479.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseMenuRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 570.0
-margin_bottom = 439.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-
-[node name="ColorRect" type="TextureRect" parent="PauseMenu/PauseMenuRect/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 562.0
-margin_bottom = 431.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource( 20 )
-expand = true
-stretch_mode = 7
-
-[node name="ColorRect2" type="ColorRect" parent="PauseMenu/PauseMenuRect/ColorRect/ColorRect"]
-margin_right = 558.0
-margin_bottom = 427.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.74902 )
-
-[node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
-visible = false
-margin_left = 222.5
-margin_top = 12.0
-margin_right = 428.5
-margin_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 202.0
-margin_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 193.0
-margin_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/PauseTitle/ColorRect/ColorRect"]
-margin_left = 24.0
-margin_top = 8.0
-margin_right = 173.0
-margin_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "paused..."
-text = "paused..."
-scroll_active = false
-
-[node name="RightSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 236, 104 )
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-hframes = 8
-vframes = 8
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/RightSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 39 )
-anims/idle = SubResource( 40 )
-
-[node name="RightTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 97.0
-margin_right = 425.0
-margin_bottom = 123.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-bbcode_enabled = true
-bbcode_text = "[wave]right[/wave]"
-text = "right"
-scroll_active = false
-
-[node name="LeftSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 240.5, 155.5 )
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-flip_h = true
-hframes = 8
-vframes = 8
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/LeftSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 37 )
-anims/idle = SubResource( 38 )
-
-[node name="LeftTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 151.0
-margin_right = 426.0
-margin_bottom = 177.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "left
-"
-text = "left
-"
-scroll_active = false
-
-[node name="DownSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 241, 204.5 )
-rotation = 1.5708
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-hframes = 8
-vframes = 8
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/DownSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 41 )
-anims/idle = SubResource( 42 )
-
-[node name="DownTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 201.0
-margin_right = 430.0
-margin_bottom = 227.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "down
-
-"
-text = "down
-
-"
-scroll_active = false
-
-[node name="UpSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 239, 257 )
-rotation = -1.5708
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-hframes = 8
-vframes = 8
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/UpSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 43 )
-anims/idle = SubResource( 44 )
-
-[node name="UpTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 245.5
-margin_right = 431.5
-margin_bottom = 271.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "up
-
-"
-text = "up
-
-"
-scroll_active = false
-
-[node name="JumpSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 242, 321 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 24 )
-offset = Vector2( 0, -5 )
-hframes = 8
-vframes = 8
-frame = 14
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/JumpSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 45 )
-anims/idle = SubResource( 46 )
-
-[node name="JumpTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 311.0
-margin_right = 433.0
-margin_bottom = 337.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "z key
-
-"
-text = "z key
-
-"
-scroll_active = false
-
-[node name="BroomSprite" type="Sprite" parent="PauseMenu"]
-material = SubResource( 47 )
-position = Vector2( 218.5, 333.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 23 )
-offset = Vector2( 10, 16 )
-flip_h = true
-hframes = 4
-vframes = 4
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="SweepSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 245.5, 375.5 )
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-flip_h = true
-hframes = 8
-vframes = 8
-frame = 15
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/SweepSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 48 )
-anims/idle = SubResource( 49 )
-
-[node name="SweepTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 364.5
-margin_right = 433.0
-margin_bottom = 390.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "x key
-
-"
-text = "x key
-
-"
-scroll_active = false
-
-[node name="BroomSprite2" type="Sprite" parent="PauseMenu"]
-visible = false
-material = SubResource( 47 )
-position = Vector2( 185.5, 344.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 26 )
-offset = Vector2( 13, 5 )
-hframes = 8
-vframes = 8
-frame = 1
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="CastSprite" type="Sprite" parent="PauseMenu"]
-material = SubResource( 51 )
-position = Vector2( 244.5, 428 )
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-hframes = 8
-vframes = 8
-frame = 1
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/CastSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 52 )
-anims/idle = SubResource( 53 )
-
-[node name="CastTextLabel" type="RichTextLabel" parent="PauseMenu"]
-margin_left = 280.0
-margin_top = 420.0
-margin_right = 434.0
-margin_bottom = 446.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "c key"
-text = "c key"
-scroll_active = false
-
-[node name="EquipmentSprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 206.5, 433 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 10 )
-hframes = 6
-vframes = 5
-
-[node name="MenuMoveSound" type="AudioStreamPlayer" parent="PauseMenu"]
-stream = ExtResource( 28 )
-volume_db = -15.0
-pitch_scale = 0.9
-
-[node name="InputRect" type="ColorRect" parent="PauseMenu"]
-margin_left = 141.5
-margin_top = 9.5
-margin_right = 551.5
-margin_bottom = 81.5
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 405.0
-margin_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 398.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/InputRect/ColorRect/ColorRect"]
-margin_left = 11.0
-margin_top = 3.0
-margin_right = 394.0
-margin_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 11 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "press X to change key"
-text = "press X to change key"
 scroll_active = false
 
 [node name="Inventory" type="Control" parent="."]
@@ -1861,6 +1447,420 @@ margin_bottom = 137.0
 theme = SubResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "L.1"
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+margin_top = 12.0
+margin_right = 640.0
+margin_bottom = 522.0
+
+[node name="PauseMenuRect" type="ColorRect" parent="PauseMenu"]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 610.0
+margin_bottom = 479.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseMenuRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 570.0
+margin_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="PauseMenu/PauseMenuRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 562.0
+margin_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 7
+
+[node name="ColorRect2" type="ColorRect" parent="PauseMenu/PauseMenuRect/ColorRect/ColorRect"]
+margin_right = 558.0
+margin_bottom = 427.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.74902 )
+
+[node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
+visible = false
+margin_left = 222.5
+margin_top = 12.0
+margin_right = 428.5
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/PauseTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/PauseTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "paused..."
+text = "paused..."
+scroll_active = false
+
+[node name="RightSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 236, 104 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/RightSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 39 )
+anims/idle = SubResource( 40 )
+
+[node name="RightTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 97.0
+margin_right = 425.0
+margin_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]right[/wave]"
+text = "right"
+scroll_active = false
+
+[node name="LeftSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 240.5, 155.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/LeftSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 37 )
+anims/idle = SubResource( 38 )
+
+[node name="LeftTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 151.0
+margin_right = 426.0
+margin_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "left
+"
+text = "left
+"
+scroll_active = false
+
+[node name="DownSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 241, 204.5 )
+rotation = 1.5708
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/DownSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 41 )
+anims/idle = SubResource( 42 )
+
+[node name="DownTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 201.0
+margin_right = 430.0
+margin_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "down
+
+"
+text = "down
+
+"
+scroll_active = false
+
+[node name="UpSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 239, 257 )
+rotation = -1.5708
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/UpSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 43 )
+anims/idle = SubResource( 44 )
+
+[node name="UpTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 245.5
+margin_right = 431.5
+margin_bottom = 271.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "up
+
+"
+text = "up
+
+"
+scroll_active = false
+
+[node name="JumpSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 242, 321 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+offset = Vector2( 0, -5 )
+hframes = 8
+vframes = 8
+frame = 14
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/JumpSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 45 )
+anims/idle = SubResource( 46 )
+
+[node name="JumpTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 311.0
+margin_right = 433.0
+margin_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "z key
+
+"
+text = "z key
+
+"
+scroll_active = false
+
+[node name="BroomSprite" type="Sprite" parent="PauseMenu"]
+material = SubResource( 47 )
+position = Vector2( 218.5, 333.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 23 )
+offset = Vector2( 10, 16 )
+flip_h = true
+hframes = 4
+vframes = 4
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="SweepSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 245.5, 375.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 15
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/SweepSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 48 )
+anims/idle = SubResource( 49 )
+
+[node name="SweepTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 364.5
+margin_right = 433.0
+margin_bottom = 390.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "x key
+
+"
+text = "x key
+
+"
+scroll_active = false
+
+[node name="BroomSprite2" type="Sprite" parent="PauseMenu"]
+visible = false
+material = SubResource( 47 )
+position = Vector2( 185.5, 344.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 26 )
+offset = Vector2( 13, 5 )
+hframes = 8
+vframes = 8
+frame = 1
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="CastSprite" type="Sprite" parent="PauseMenu"]
+material = SubResource( 51 )
+position = Vector2( 244.5, 428 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+hframes = 8
+vframes = 8
+frame = 1
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu/CastSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 52 )
+anims/idle = SubResource( 53 )
+
+[node name="CastTextLabel" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 280.0
+margin_top = 420.0
+margin_right = 434.0
+margin_bottom = 446.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 15 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "c key"
+text = "c key"
+scroll_active = false
+
+[node name="EquipmentSprite" type="Sprite" parent="PauseMenu"]
+position = Vector2( 206.5, 433 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 6
+vframes = 5
+
+[node name="MenuMoveSound" type="AudioStreamPlayer" parent="PauseMenu"]
+stream = ExtResource( 28 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="InputRect" type="ColorRect" parent="PauseMenu"]
+margin_left = 141.5
+margin_top = 9.5
+margin_right = 551.5
+margin_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 405.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 398.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/InputRect/ColorRect/ColorRect"]
+margin_left = 11.0
+margin_top = 3.0
+margin_right = 394.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 11 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "press X to change key"
+text = "press X to change key"
+scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false

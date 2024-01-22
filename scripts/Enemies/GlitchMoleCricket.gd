@@ -280,21 +280,21 @@ func digTiles(solidTiles, should_summon_clouds):
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_a.x, coords_a.y, coords_a.z), Vector3(coords_a.x, coords_a.y+1, coords_a.z))
         else:
-            levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z))
+            levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), false)
         tiles_dug += 1
     if solidTiles[1] != null:
         var coords_mid = solidTiles[1]
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z))
         else:
-            levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z))
+            levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), false)
         tiles_dug += 1
     if solidTiles[2] != null:
         var coords_b = solidTiles[2]
         if is_builder:
             levelTiles.cloneTile(Vector3(coords_b.x, coords_b.y, coords_b.z), Vector3(coords_b.x, coords_b.y+1, coords_b.z))
         else:
-            levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z))
+            levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), false)
         tiles_dug += 1
 
     if should_summon_clouds and tiles_dug > 0:

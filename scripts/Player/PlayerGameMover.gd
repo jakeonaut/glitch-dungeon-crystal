@@ -1,7 +1,5 @@
 extends "../GameMover.gd"
 
-onready var interactionArea = get_node("InteractionArea")
-
 var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0
@@ -47,6 +45,7 @@ var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
 var mushroom_turn_time_limit = 2
+var has_used_magic_lantern = false
 
 func _ready():
   set_physics_process(true)
@@ -265,6 +264,7 @@ func landed():
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
   has_mushroom_double_jumped = false
+  has_used_magic_lantern = false
 
 # @override
 func justPressedDown():
@@ -313,11 +313,13 @@ func pressingMoveRight():
   return Input.is_action_pressed("ui_right") and not pauseInput
 
 func magicJump():
+  has_used_magic_lantern = true
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
   should_magic_jump = true
   actuallyApplyJump(false)
+  tryClearFallthroughCollisionSolid()
 
 onready var dollOpenSound = get_node("Sounds/DollOpenSound")
 onready var dollCloseSound = get_node("Sounds/DollCloseSound")
@@ -431,13 +433,21 @@ func getABroom():
 
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
+onready var gravitySound = get_node("Sounds/GravitySound")
 var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
+    if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
+      global.memory["grav_direction"] = -global.memory["grav_direction"]
+      gravitySound.play()
+      level.flipGravity()
+      has_used_magic_lantern = true
+      was_just_on_ground_timer = was_just_on_ground_time_limit
+      glitchTickle()
+    elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
       has_mushroom_double_jumped = true
       feather_jump_timer = 0
       wormSound.play()

@@ -14,7 +14,6 @@ export var is_licker = false
 export var is_infected = false
 var was_infected = false
 
-onready var interactionArea = get_node("SmallInteractionArea")
 onready var fallthroughSolidArea = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
@@ -40,7 +39,7 @@ func _ready():
     tongueSprite3.set_material_override(tongueSpriteMaterial)
     tongueSprite4.set_material_override(tongueSpriteMaterial)
 
-  interactionArea.add_to_group("no_pushems")
+  smallInteractionArea.add_to_group("no_pushems")
 
 func setAsParent(_owner):
   behavior_jumping = true
@@ -70,19 +69,19 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("target_palette", global.red_dungeon_palette)
     if tileSpikes:
       tileSpikes.visible = true
-    if not interactionArea.is_in_group("weak_enemies"):
-      interactionArea.add_to_group("weak_enemies")
-    if not interactionArea.is_in_group("enemies"):
-      interactionArea.add_to_group("enemies")
+    if not smallInteractionArea.is_in_group("weak_enemies"):
+      smallInteractionArea.add_to_group("weak_enemies")
+    if not smallInteractionArea.is_in_group("enemies"):
+      smallInteractionArea.add_to_group("enemies")
     if fallthroughSolidArea and fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.remove_from_group("fallthrough")
   else:
     if tileSpikes:
       tileSpikes.visible = false
-    if interactionArea.is_in_group("weak_enemies"):
-      interactionArea.remove_from_group("weak_enemies")
-    if interactionArea.is_in_group("enemies"):
-      interactionArea.remove_from_group("enemies")
+    if smallInteractionArea.is_in_group("weak_enemies"):
+      smallInteractionArea.remove_from_group("weak_enemies")
+    if smallInteractionArea.is_in_group("enemies"):
+      smallInteractionArea.remove_from_group("enemies")
     if fallthroughSolidArea and not fallthroughSolidArea.is_in_group("fallthrough"):
       fallthroughSolidArea.add_to_group("fallthrough")
   was_infected = is_infected

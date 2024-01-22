@@ -1,6 +1,5 @@
 extends "GlitchEnemy.gd"
 
-onready var interactionArea = get_node("SmallInteractionArea")
 onready var landing = get_node("landing")
 onready var poofSound = get_node("Sounds/PoofSound")
 onready var reassembleSound = get_node("Sounds/ReassembleSound")
@@ -8,7 +7,7 @@ var landing_position = null
 
 func _ready():
   smack_time_limit = 5
-  interactionArea.add_to_group("no_pushems")
+  smallInteractionArea.add_to_group("no_pushems")
   landing.visible = false
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")

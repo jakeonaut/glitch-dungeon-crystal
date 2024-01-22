@@ -2114,7 +2114,6 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 20 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
 material = SubResource( 135 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
@@ -2124,9 +2123,6 @@ texture = SubResource( 119 )
 flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 20 )]
-
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
-visible = true
 
 [node name="UILayer" parent="." instance=ExtResource( 11 )]
 

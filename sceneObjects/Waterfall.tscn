@@ -483,8 +483,10 @@ should_randomize_frame_delay = true
 max_frames = 4
 
 [node name="WaterFilter" type="Control" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="WaterFilter"]
+visible = false
 material = SubResource( 4 )
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]

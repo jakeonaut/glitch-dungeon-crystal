@@ -312,7 +312,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 12, 0 )
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 10.5049, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 8, 10, 0 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2, 0, 0 )
 
 [node name="Mushroom" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.39333, -1 )

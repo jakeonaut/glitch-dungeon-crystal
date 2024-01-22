@@ -160,7 +160,7 @@ func floorGlitch():
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
-  level.displaySpellMessageText("float")
+  level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
   # TODO(jaketrower):
@@ -379,7 +379,8 @@ func tryDieToOffscreenCamera(_delta):
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
     if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
     global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-    global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+    global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
+    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
       #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
       # global.memory["hp"] = 0
       # tryDieToEnemy(delta, true, true, true)
@@ -393,6 +394,10 @@ func tryDieToOffscreenCamera(_delta):
       aniPlayer.play("returning")
       pauseAnimation = true
       physics_state = PhysicsState.GLITCH_RECOVERY
+      if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+        if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+          global.memory["grav_direction"] = 1
+          level.flipGravity()
   
 func doTimeDilation(_delta):
   pass
@@ -1023,8 +1028,9 @@ func landed():
     
 func broomStop():  
   summonedBroom = null
-  pauseAnimation = false
-  global.pauseMoveInput = false
+  if aniPlayer.assigned_animation != "getItem":
+    pauseAnimation = false
+    global.pauseMoveInput = false
   broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
@@ -1148,11 +1154,6 @@ func iJustPressedDown():
   on_ground = false
   should_do_fallthrough_area_collision = false
   tryClearFallthroughCollisionSolid()
-
-func tryClearFallthroughCollisionSolid():
-  if interactionArea.prev_fallthrough_collision_area != null and \
-     interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
-    interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
 
 var is_active = true
 func setGlobalMemoryOfHasSpoken(_set_vars = false):

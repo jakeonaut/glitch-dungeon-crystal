@@ -219,7 +219,6 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 5 )
 tileset_type = 4
 has_spellbook_page = true
-display_title = "cricket caves"
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 10 )]
 

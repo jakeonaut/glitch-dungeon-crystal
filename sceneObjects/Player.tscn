@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -62,6 +62,7 @@
 [ext_resource path="res://assets/sounds/faststep.wav" type="AudioStream" id=60]
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=61]
 [ext_resource path="res://assets/sprites/spellicons.png" type="Texture" id=62]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational.wav" type="AudioStream" id=63]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -4247,6 +4248,10 @@ pitch_scale = 1.4
 [node name="RunSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 60 )
 volume_db = -4.0
+
+[node name="GravitySound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 63 )
+pitch_scale = 0.6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"

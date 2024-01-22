@@ -28,8 +28,7 @@ onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPro
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
-onready var interactionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
-onready var interactionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
+onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
@@ -108,8 +107,8 @@ func _ready():
       if textBox.has_been_shown: 
         textBox.is_important = false
 
-  if interactionShape.shape is BoxShape and interactionShape.shape.extents.x == 2 and round(interactionShape.shape.extents.y) == 1:
-    interactionShape.shape.extents = Vector3(4, 2, 1.3)
+  if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
+    smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
 
 func _process(delta):
   # super._process(delta) implicit
@@ -123,7 +122,7 @@ func _process(delta):
 
   # don't you love math
   if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
-    interactPrompt.visible = interactionArea != null and interactionArea.wasTouchingPlayer and (
+    interactPrompt.visible = smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer and (
       (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
       global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
         global.activeInteractor == textBox and textBox.nextPrompt.visible

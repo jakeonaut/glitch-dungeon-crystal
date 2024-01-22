@@ -407,7 +407,7 @@ func infectSpikes(coords, play_sound = true):
 func sweepUpSand(coords):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
   if isTileSoftSand(tile_type):
-    removeTile(coords)
+    removeTile(coords, false)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
     level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)

@@ -3,11 +3,10 @@ extends "GlitchEnemy.gd"
 var jump_timer = 0
 var jump_time_limit = 0
 
-onready var interactionArea = get_node("SmallInteractionArea")
 
 func _ready():
   smack_time_limit = 5
-  interactionArea.add_to_group("no_pushems")
+  smallInteractionArea.add_to_group("no_pushems")
 
 func setAsParent(_owner):
   behavior_jumping = true

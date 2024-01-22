@@ -40,20 +40,15 @@ func _process(delta):
       jump_force = 4
     walk_speed = dist * 2
     if dist > 3:
-      behavior_walking = true
+      if abs(global_transform.origin.x - targetOrigin.x) > 0.5:
+        behavior_walking = true
+        if self.global_transform.origin.x > targetOrigin.x:
+          walk_direction.x = -1
+        else:
+          walk_direction.x = 1
       behavior_jumping = true
-      if self.global_transform.origin.x > targetOrigin.x:
-        walk_direction.x = -1
-      else:
-        walk_direction.x = 1
-    elif dist < 0.1:
-      behavior_walking = true
-      behavior_jumping = true
-      if not targetSprite.flip_h:
-        walk_direction.x = -1
-      else:
-        walk_direction.x = 1
-    else:
+
+    elif dist < 0.5:
       behavior_walking = false
       behavior_jumping = false
   
