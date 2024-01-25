@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=3]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=9]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=10]
+[ext_resource path="res://scripts/FreeChicken.gd" type="Script" id=11]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 5 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 22, 24, 1 )
+
+[node name="FreeChicken" type="Spatial" groups=["keys"]]
+script = ExtResource( 11 )
+true_terminal_vel = 16
+walk_speed = 4
+jump_force = 8
+sprite_offset_y = 0.125
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 9 )
+hframes = 12
+vframes = 10
+frame = 57
+script = ExtResource( 4 )
+frame_delay = 1.0
+automatically_change_color = false
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 5 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 3 )
+volume_db = -30.0
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+volume_db = -50.0
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+pitch_scale = 0.5

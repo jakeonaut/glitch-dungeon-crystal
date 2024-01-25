@@ -1,9 +1,10 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
+[ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=4]
-[ext_resource path="res://scripts/levelScript.gd" type="Script" id=5]
+[ext_resource path="res://levels/EndlessFantasy/gd1/DebugTownLilypadLevelScript.gd" type="Script" id=5]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=9]
@@ -42,8 +43,6 @@
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=44]
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=45]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Streetlight.tscn" type="PackedScene" id=46]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=47]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=48]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=49]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=50]
 
@@ -747,10 +746,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Spatial" parent="Viewport"]
 script = ExtResource( 5 )
-starting_glitch_type = 2
-tileset_type = 2
 has_spellbook_page = true
-spellbook_spells = [ 1, 2 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 25 )]
 
@@ -767,6 +763,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57619, -13.7926, 0 )
+visible = false
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 23 )]
 
@@ -802,7 +799,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 16, 0, 1, 18, 0, 1, 65552, 0, 1, 65553, 0, 1, 65554, 0, 1, -1441792, 0, 1, -1441791, 0, 1, -1441790, 0, 1, -1376256, 0, 1, -1376255, 0, 1, -1376254, 0, 1, -1376253, 0, 1, -1376252, 0, 1, -1376251, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1376245, 0, 1, -1376244, 0, 1, -1376243, 0, 1, -1376242, 0, 1, -1376241, 0, 1, -1376240, 0, 1, -1376239, 0, 1, -1376238, 0, 1, -1376237, 0, 1, -1310722, 0, 1, -1310721, 0, 1, -1310720, 0, 1, -1310719, 0, 1, -1310718, 0, 1, -1310717, 0, 1, -1310716, 0, 1, -1310715, 0, 1, -1310714, 0, 1, -1310713, 0, 1, -1310712, 0, 1, -1310711, 0, 1, -1310710, 0, 1, -1310709, 0, 1, -1310708, 0, 1, -1310707, 0, 1, -1310706, 0, 1, -1310705, 0, 1, -1310704, 0, 1, -1310703, 0, 1, -1310702, 0, 1, -1310701, 0, 1, -1310700, 0, 1, -1310699, 0, 1, -1310698, 0, 1, -1245186, 0, 1, -1245185, 0, 1, -1245184, 0, 1, -1245183, 0, 1, -1245181, 0, 1, -1245167, 0, 1, -1245165, 0, 1, -1245164, 0, 1, -1245163, 0, 1, -1245162, 0, 1, -1179650, 0, 1, -1179649, 0, 1, -1179648, 0, 1, -1179647, 0, 1, -1179646, 0, 1, -1179645, 0, 1, -1179631, 0, 1, -1179630, 0, 1, -1179629, 0, 1, -1179628, 0, 1, -1179626, 0, 1, -1114114, 0, 1, -1114113, 0, 1, -1114112, 0, 1, -1114111, 0, 1, -1114092, 0, 1, -1114091, 0, 1, -1114090, 0, 1, -1048578, 0, 1, -1048577, 0, 1, -1048575, 0, 1, -1048568, 0, 187, -1048567, 0, 187, -1048566, 0, 187, -1048565, 0, 187, -1048564, 0, 187, -1048563, 0, 187, -983041, 0, 1, -983040, 0, 1, -983039, 0, 1, -983032, 0, 187, -983027, 0, 187, -983026, 0, 1, -983025, 0, 1, -917505, 0, 1, -917496, 0, 187, -917491, 0, 187, -917490, 0, 1, -917488, 0, 1, -851955, 0, 187, -851954, 0, 1, -851953, 0, 1, -851952, 0, 1, -786419, 0, 187, -720884, 0, 187, -720883, 0, 187, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -589820, 0, 1, -589818, 0, 1, -524284, 0, 1, -524283, 0, 1, -524282, 0, 1, -65520, 0, 1, -65519, 0, 1, -65518, 0, 1 )
+"cells": PoolIntArray( 16, 0, 1, 18, 0, 1, 65552, 0, 1, 65553, 0, 1, 65554, 0, 1, -1441792, 0, 1, -1441791, 0, 1, -1441790, 0, 1, -1376256, 0, 1, -1376255, 0, 1, -1376254, 0, 1, -1376253, 0, 1, -1376252, 0, 1, -1376251, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1376245, 0, 1, -1376244, 0, 1, -1376243, 0, 1, -1376242, 0, 1, -1376241, 0, 1, -1376240, 0, 1, -1376239, 0, 1, -1376238, 0, 1, -1376237, 0, 1, -1310722, 0, 1, -1310721, 0, 1, -1310720, 0, 1, -1310719, 0, 1, -1310718, 0, 1, -1310717, 0, 1, -1310716, 0, 1, -1310715, 0, 1, -1310714, 0, 1, -1310713, 0, 1, -1310712, 0, 1, -1310711, 0, 1, -1310710, 0, 1, -1310709, 0, 1, -1310708, 0, 1, -1310707, 0, 1, -1310706, 0, 1, -1310705, 0, 1, -1310704, 0, 1, -1310703, 0, 1, -1310702, 0, 1, -1310701, 0, 1, -1310700, 0, 1, -1310699, 0, 1, -1310698, 0, 1, -1245186, 0, 1, -1245185, 0, 1, -1245184, 0, 1, -1245183, 0, 1, -1245181, 0, 1, -1245167, 0, 1, -1245165, 0, 1, -1245164, 0, 1, -1245163, 0, 1, -1245162, 0, 1, -1179650, 0, 1, -1179649, 0, 1, -1179648, 0, 1, -1179647, 0, 1, -1179646, 0, 1, -1179645, 0, 1, -1179631, 0, 1, -1179630, 0, 1, -1179629, 0, 1, -1179628, 0, 1, -1179626, 0, 1, -1114114, 0, 1, -1114113, 0, 1, -1114112, 0, 1, -1114111, 0, 1, -1114092, 0, 1, -1114091, 0, 1, -1114090, 0, 1, -1048578, 0, 1, -1048577, 0, 1, -1048575, 0, 1, -1048568, 0, 187, -1048567, 0, 187, -1048566, 0, 187, -1048565, 0, 187, -1048564, 0, 187, -1048563, 0, 187, -983041, 0, 1, -983040, 0, 1, -983039, 0, 1, -983032, 0, 187, -983027, 0, 187, -983026, 0, 1, -983025, 0, 1, -917505, 0, 1, -917496, 0, 187, -917491, 0, 187, -917490, 0, 1, -917488, 0, 1, -851955, 0, 187, -851954, 0, 1, -851953, 0, 1, -851952, 0, 1, -786419, 0, 187, -720885, 0, 187, -720884, 0, 187, -720883, 0, 187, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -589820, 0, 1, -589818, 0, 1, -524284, 0, 1, -524283, 0, 1, -524282, 0, 1, -65520, 0, 1, -65519, 0, 1, -65518, 0, 1 )
 }
 script = ExtResource( 8 )
 __meta__ = {
@@ -1867,17 +1864,16 @@ frame = 37
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 46 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -4.65006, 0 )
 
-[node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 47 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 5.59053, -12.2054, 0 )
-
-[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 48 )]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 9, -8.26546, 0 )
-
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7395, -15, 0 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 50 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -5, 0 )
+
+[node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9726, -13, 0 )
+visible = false
+path = "res://levels/EndlessFantasy/gd1GrimoireGrove/DebugGrimoireSecret.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 26 )]
 

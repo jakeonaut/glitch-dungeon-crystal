@@ -39,9 +39,10 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
     if did_play_treasure_jingle and not treasureJingle.is_playing():
         did_play_treasure_jingle = false
-        tryToPlay(restartPlayingTheme)
-        currentlyPlayingTheme = restartPlayingTheme
-        restartPlayingTheme = null
+        if restartPlayingTheme != null:
+            tryToPlay(restartPlayingTheme)
+            currentlyPlayingTheme = restartPlayingTheme
+            restartPlayingTheme = null
         
 func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):

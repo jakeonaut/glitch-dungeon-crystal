@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=2]
@@ -193,23 +193,20 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CylinderShape" id=28]
-radius = 2.5
 height = 5.2
+radius = 2.5
 
 [sub_resource type="CylinderShape" id=29]
-radius = 1.5
 height = 4.5
+radius = 1.5
 
 [sub_resource type="CylinderShape" id=31]
-radius = 2.5
 height = 3.0
+radius = 2.5
 
 [sub_resource type="CylinderShape" id=32]
-radius = 2.0
 height = 3.0
-
-[sub_resource type="CylinderShape" id=3]
-radius = 0.8
+radius = 2.0
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -1483,9 +1480,8 @@ shader_param/texture_albedo = ExtResource( 22 )
 shader_param/base_palette = ExtResource( 7 )
 shader_param/target_palette = ExtResource( 21 )
 
-[node name="COBOL" type="KinematicBody"]
+[node name="COBOL" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-collision_layer = 4
 script = ExtResource( 14 )
 true_terminal_vel = 10
 grav = 25
@@ -1773,9 +1769,6 @@ shape = SubResource( 31 )
 [node name="CollisionShape3" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.6, -1.74845e-08, -0.4 )
 shape = SubResource( 32 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 3 )
 
 [node name="Sounds" type="Spatial" parent="."]
 

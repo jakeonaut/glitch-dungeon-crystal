@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/KeyFollower.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=3]
@@ -39,12 +39,7 @@ shader_param/texture_albedo = ExtResource( 9 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 4 )
 
-[sub_resource type="CylinderShape" id=3]
-height = 1.8
-radius = 0.8
-
-[node name="KeyFollower" type="KinematicBody" groups=["keys"]]
-collision_layer = 4
+[node name="KeyFollower" type="Spatial" groups=["keys"]]
 script = ExtResource( 1 )
 only_activate_in_range = false
 is_static_in_level = false
@@ -56,14 +51,10 @@ pixel_size = 0.125
 texture = ExtResource( 9 )
 hframes = 12
 vframes = 10
-frame = 45
+frame = 36
 script = ExtResource( 3 )
 frame_delay = 1.0
 automatically_change_color = false
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999654, 0 )
-shape = SubResource( 3 )
 
 [node name="Sounds" type="Spatial" parent="."]
 

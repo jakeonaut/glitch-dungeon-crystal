@@ -18,7 +18,6 @@ func _process(delta):
   if gameMoverTarget == null or gameMoverTarget.get_ref() == null:
     return
   var targetOrigin = gameMoverTarget.get_ref().global_transform.origin
-  var targetSprite = gameMoverTarget.get_ref().mySprite
 
   var zNormalizedOrigin = Vector3(global_transform.origin.x, global_transform.origin.y, targetOrigin.z)
   var dist = zNormalizedOrigin.distance_to(targetOrigin)

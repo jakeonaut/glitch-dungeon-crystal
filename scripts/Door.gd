@@ -22,6 +22,7 @@ onready var doorOpenSound = get_node("DoorCloseSound")
 onready var lockedSound = get_node("LockedSound")
 onready var keySound = get_node("KeySound")
 onready var sillySound = get_node("SillySound")
+onready var chickenRes = preload("res://sceneObjects/FreeChicken.tscn")
 
 var canPlayDoorSound = true
 
@@ -68,9 +69,11 @@ func _ready():
     mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
   id = self.generateId()
+  var generateChickens = false
   if (is_locked or should_lock) and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id):
     is_locked = false
     should_lock = false
+    generateChickens = true
 
   animationPlayer.clear_queue()
   animationPlayer.stop()
@@ -109,6 +112,20 @@ func _ready():
     npc.visible = false 
     npc.can_activate = false
     npc.is_active = false
+
+  if generateChickens and num_keys_unlock < 10:
+    yield(get_tree().create_timer(0.5), "timeout")
+    for _i in range(num_keys_unlock):
+      spawnChicken()
+
+func spawnChicken():
+  var freeChicken = chickenRes.instance()
+  level.add_child(freeChicken)
+  freeChicken.global_transform.origin = global_transform.origin
+  freeChicken.global_transform.origin.x += rand_range(-2, 2)
+  freeChicken.global_transform.origin.y += rand_range(0.5, 3)
+  freeChicken.spawn_origin = freeChicken.global_transform.origin
+  level.summonSmokeClouds(freeChicken.global_transform.origin, 1, false, true)
     
 func _process(delta):
   if locked_to_monsters and is_locked:
@@ -173,6 +190,7 @@ func _process(delta):
         keySound.play()
         unlocking_key_array.remove(0)
         key.queue_free()
+        spawnChicken()
 
 
 func spawnParticles(delta):
@@ -316,6 +334,7 @@ func startDoorUnlock():
     getPlayer().aniPlayer.play("preGetItem")
     getPlayer().playBounce("land")
 
+# doesn't actually enter lol
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
   if key_type != global.KeyItem.NORMAL:
@@ -327,7 +346,13 @@ func actuallyUnlockAndEnterDoor():
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
     global.activeInteractor.stopInteract()
   global.activeInteractor = null
-  goThroughDoor()
+  # goThroughDoor()
+  global.pauseMoveInput = false
+  getPlayer().pauseSelf = false
+  getPlayer().aniPlayer.stop()
+  getPlayer().aniPlayer.clear_queue()
+  getPlayer().aniPlayer.play("land")
+  getPlayer().playBounce("land")
 
 
 func passiveActivate(_delta, is_player):

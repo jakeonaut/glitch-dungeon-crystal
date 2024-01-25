@@ -32,7 +32,10 @@ func activateScript():
 func preActivateScript():
   if not global.memory.has("spellbookPage"):
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
-    global.memory["spellbookPage"] = []
+    if level.player.glitch_form == global.GlitchForm.FEATHER:
+      global.memory["spellbookPage"] = [global.GlitchForm.FLOOR, global.GlitchForm.FEATHER]
+    else:
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.FLOOR]
     global.memory["tutorial_spellbookPage"] = true
     # TODO(jaketrower): give UILayer.gd a function
     level.uiLayer.get_node("EquipmentRect").visible = true
