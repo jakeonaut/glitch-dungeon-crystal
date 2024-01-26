@@ -314,7 +314,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4, 20.3, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 29.3, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6, 18.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6, 39.2, 0 )
 grav = 0
 bbText = "•[color=#ff00ff]Invis[/color] spell:
 dont be hurt

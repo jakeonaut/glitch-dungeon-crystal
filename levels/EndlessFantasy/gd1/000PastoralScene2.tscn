@@ -886,7 +886,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 20 )
-show_crt_effect = true
+show_dither_effect = true
 tileset_type = 2
 spellbook_forbidden = true
 

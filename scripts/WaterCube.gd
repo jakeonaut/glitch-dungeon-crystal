@@ -86,7 +86,7 @@ func becomePoisonous():
 func isActive():
   return true
   
-func passiveActivate(_delta, is_player):
+func passiveActivate(delta, is_player):
   if not is_player:
     return
   if not getPlayer().was_touching_water and can_splash:
@@ -100,6 +100,18 @@ func passiveActivate(_delta, is_player):
     if getPlayer().global_transform.origin.y > global_transform.origin.y:
       makeNewSplashSprite(-0.418)
       makeNewSplashSprite(0.582)
+
+  if is_waterfall:
+    if not is_player or level.player.truly_on_ground:
+      return
+    var value = -1
+    if level.player.lv.y > 0:
+      value = level.player.lv.y / 1.1
+    else:
+      value = level.player.lv.y - (delta * 11)
+    level.player.lv.y = value
+    level.player.vv = value
+    level.player.linear_velocity.y = value
       
 func justStopPassiveActivate():
   if not getPlayer().is_touching_water and can_splash:

@@ -30,6 +30,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
+show_dither_effect = true
 tileset_type = 2
 how_much_mp = 15
 how_much_hp = 2

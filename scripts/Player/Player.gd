@@ -195,12 +195,15 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
-  if nesting_doll_state == global.NestingDoll.BABY or global.memory["speed_slippers"]:
+  if nesting_doll_state == global.NestingDoll.BABY:
     return true
-  if nesting_doll_state == global.NestingDoll.MATRIARCH:
-    return false
-
   return .pressingRun()
+
+# @override
+func canRun():
+  var has_speed_slippers = global.memory["speed_slippers"]
+  var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
+  return has_speed_slippers and not is_giant
   
 func isWalkingIntoWall():
   if summonedBroom != null:
@@ -466,6 +469,7 @@ func processGlitchHurtRecovery(delta):
       else:
         self.global_transform.origin.y += 1
       target_last_grounded_y = global_transform.origin.y
+      global.memory["hp"] = global.memory["max_hp"]
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY
 
@@ -532,17 +536,24 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  if not global.memory["glitched_grimoire"]:
-    level.displaySpellMessageText("no magic")
-    if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
-      nullifySound.play()
-      global.memory["mp"] = 0
-      self.applyGlitch(global.GlitchForm.NORMAL, true)
-      self.can_cast_spell_timer = 0
-      if global.memory.has("spellbookPage"):
-        global.memory["spellbookPage"] = []
-  else:
-    level.displaySpellMessageText("unaffected")
+  level.displaySpellMessageText("lose magic")
+  if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
+    nullifySound.play()
+    global.memory["mp"] = 0
+    self.applyGlitch(global.GlitchForm.NORMAL, true)
+    self.can_cast_spell_timer = 0
+    if global.memory.has("spellbookPage"):
+      # intentional if weird, we treat the index as the int enum glitch_form
+      print("BEFORE")
+      print(global.memory["spellbookPage"])
+      for glitch_type in range(global.memory["permanent_spells"].size()):
+        print(glitch_type)
+        if not global.memory["permanent_spells"]:
+          print("delete")
+          global.memory["spellbookPage"].erase(glitch_type)
+
+      print("AFTER")
+      print(global.memory["spellbookPage"])
   glitchTickle(false)
 
 # need this to have it available in the aniPlayer

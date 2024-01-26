@@ -378,7 +378,6 @@ func regainNestingDoll():
 var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
-  var has_speed_slippers = global.memory["speed_slippers"]
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   # if is_mushroom_infected:
   #  return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
@@ -386,12 +385,6 @@ func getWalkSpeed(delta):
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
     return 9
-  elif has_speed_slippers:
-    if not on_ground:
-      return 7
-    elif Input.is_action_pressed("sub_action_button") and summonedBroom == null:
-      return 9
-    return 8
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 6 if pressingRun() else 5
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:

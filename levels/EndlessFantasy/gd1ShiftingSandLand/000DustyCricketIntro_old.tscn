@@ -1012,9 +1012,6 @@ is_builder = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 material_override = SubResource( 20 )
 
-[node name="CollisionShape" parent="Viewport/level/GlitchMoleCricket2" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
 [node name="CollisionShape" parent="Viewport/level/GlitchMoleCricket2/PlayerActivationArea3" index="0"]
 transform = Transform( 1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 1, 4, 0, 0 )
 shape = SubResource( 36 )
@@ -1023,7 +1020,7 @@ shape = SubResource( 36 )
 transform = Transform( 1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 1, -4, 0, 0 )
 shape = SubResource( 36 )
 
-[node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket2" index="9"]
+[node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket2" index="8"]
 anims/RESET = SubResource( 21 )
 anims/dig = SubResource( 22 )
 anims/fall = SubResource( 23 )
@@ -1045,9 +1042,6 @@ is_builder = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.258, 11 )
 material_override = SubResource( 20 )
 
-[node name="CollisionShape" parent="Viewport/level/GlitchMoleCricket3" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
 [node name="CollisionShape" parent="Viewport/level/GlitchMoleCricket3/PlayerActivationArea3" index="0"]
 transform = Transform( 1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 1, 4, 0, 0 )
 shape = SubResource( 36 )
@@ -1056,7 +1050,7 @@ shape = SubResource( 36 )
 transform = Transform( 1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 1, -4, 0, 0 )
 shape = SubResource( 36 )
 
-[node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket3" index="9"]
+[node name="AnimationPlayer" parent="Viewport/level/GlitchMoleCricket3" index="8"]
 anims/RESET = SubResource( 37 )
 anims/dig = SubResource( 38 )
 anims/fall = SubResource( 39 )

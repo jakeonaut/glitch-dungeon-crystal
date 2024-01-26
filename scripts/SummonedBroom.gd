@@ -69,6 +69,7 @@ func hitStuff(_delta):
       if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.getSmacked()
+          my_broom_owner.smack_timer = -my_broom_owner.smack_time_limit
           my_broom_owner.has_sweeped_glitch = true
           is_active = false
       else:

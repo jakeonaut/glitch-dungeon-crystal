@@ -3,6 +3,7 @@ extends Area
 var touchingPlayer = false
 var wasTouchingPlayer = false
 var is_touching_water = false
+var is_touching_waterfall = false
 var is_touching_ladder = false
 onready var parent = get_parent()
 

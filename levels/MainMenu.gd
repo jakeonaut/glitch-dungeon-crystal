@@ -12,12 +12,12 @@ onready var menuOptionPointer = get_node("MenuOptionPointer")
 onready var menuOptionPointer2 = get_node("MenuOptionPointer2")
 var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 func startGame():
+    global.isEnteringRoom = true
     transition.really_long_fade_to(roomPath)
 
 func loadGame():
     if global.loadGame():
         global.isRespawning = true
-        global.isEnteringRoom = true
         if global.memory.has("roomPath"):
             roomPath = global.memory["roomPath"]
     startGame()
@@ -57,7 +57,7 @@ func _process(delta):
     #     switch_glitch_timer = 0
     #     player.applyNextGlitch()
 
-    if Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button"):
+    if Input.is_action_just_pressed("sub_action_button"):
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()

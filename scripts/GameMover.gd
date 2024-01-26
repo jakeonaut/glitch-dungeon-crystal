@@ -43,6 +43,7 @@ var water_fall_terminal = 8
 var hit_water_terminal_vel = 1
 var terminal_vel = true_terminal_vel
 var is_touching_water = false
+var is_touching_waterfall = false
 var touched_water_area = null
 var was_touching_water = false
 var was_touching_water_at_start_of_jump = false
@@ -192,6 +193,7 @@ func _physics_process(delta):
 
   if smallInteractionArea:
     is_touching_water = smallInteractionArea.is_touching_water
+    is_touching_waterfall = smallInteractionArea.is_touching_waterfall
     touched_water_area = smallInteractionArea.touched_water_area
     is_touching_ladder = smallInteractionArea.is_touching_ladder
   # if not is_touching_water:
@@ -346,6 +348,8 @@ func applyGravity(delta):
     return
   if is_touching_water or applyHalfGrav:
     g = Vector3(0, -grav/3, 0)
+    if is_touching_waterfall:
+      g = Vector3(0, -grav/2, 0)
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
@@ -393,6 +397,8 @@ func applyTerminalVelocity(_delta):
   if is_touching_water:
     if not was_touching_water:
       terminal_vel = hit_water_terminal_vel
+    elif is_touching_waterfall:
+      terminal_vel = true_terminal_vel * 1.2
     elif pressingJump():
       terminal_vel = water_terminal_vel/2
     elif pressingDown():
@@ -514,8 +520,23 @@ func justPressedDown():
 func pressingDown():
   return false
 
+var running_timer = 0
+var running_time_limit = 15
+func canRun():
+  return true
+
 func pressingRun():
-  return num_horizontal_input_presses >= 2
+  if not canRun():
+    return false
+  return num_horizontal_input_presses >= 2 or running_timer > running_time_limit
+
+func startRun():
+  if not canRun():
+    return
+  var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
+  if runSound:
+    runSound.play()
+  level.summonSmokeClouds(origin, 3, false, true)
 
 func justPressedJump():
   return false
@@ -753,16 +774,26 @@ func processHorizontalInputs(delta):
   var prevFlipH = mySprite.flip_h
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
+  if is_pressing_horizontal_input:
+    if running_timer < running_time_limit:
+      if on_ground:
+        running_timer += (delta*22)
+        if running_timer >= running_time_limit and num_horizontal_input_presses < 2:
+          startRun()
+      else:
+        running_timer = 0
+  elif not is_pressing_horizontal_input:
+    running_timer = 0
+
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
   if is_pressing_opposite_horizontal_input:
     num_horizontal_input_presses = 1
+    running_timer = 0
   elif is_pressing_horizontal_input and not was_pressing_horizontal_input and on_ground:
     num_horizontal_input_presses += 1
-    if num_horizontal_input_presses == 2:
-      var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
-      if runSound:
-        runSound.play()
-      level.summonSmokeClouds(origin, 3, false, true)
+    if num_horizontal_input_presses == 2 and running_timer < running_time_limit:
+      startRun()
+
 
   # Forward as "seen" by the camera (OpenGL convention)
   var view_forward = -getGameCamera().get_transform().basis.z
@@ -877,8 +908,8 @@ func processHorizontalInputs(delta):
     DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/7)
     if not on_ground:
       DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/10.8)
-  if glitch_form == global.GlitchForm.FLOOR and not on_ground:
-    DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
+  # if glitch_form == global.GlitchForm.FLOOR and not on_ground:
+  #   DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
     # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
 
   # TODO(Engine.time_scale suspect)
@@ -1177,6 +1208,7 @@ func collideWithWall(local_lv):
         aniPlayer.queue("stand")
   dir = Vector3(0, 0, 0)
   num_horizontal_input_presses = 0
+  running_timer = 0
 
 var cheating_horizontal_offset = 0
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
@@ -1294,8 +1326,12 @@ func playBounce(aniName, aniNameQueue = []):
     for queuedAniName in aniNameQueue:
       bounceAniPlayer.queue(queuedAniName)
 
+onready var miniSplashSound = get_node("Sounds/MiniSplashSound") if has_node("Sounds/MiniSplashSound") else null
 func playLandSound():
-  if landSound: landSound.play()
+  if is_touching_water and miniSplashSound:
+      miniSplashSound.play()
+  elif landSound:
+    landSound.play()
 
 var has_water_double_jumped = false
 func landed():

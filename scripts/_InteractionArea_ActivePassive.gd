@@ -3,6 +3,7 @@ extends Area
 var touchingPlayer = false
 var wasTouchingPlayer = false
 var is_touching_water = false
+var is_touching_waterfall = false
 var is_touching_ladder = false
 onready var parent = get_parent()
 
@@ -59,12 +60,15 @@ func _process(_delta):
 
     var areas = get_overlapping_areas()
     is_touching_water = false
+    is_touching_waterfall = false
     is_touching_ladder = false
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
     for area in areas:
         if area.is_in_group("water"):
             is_touching_water = true
+            if area.is_in_group("waterfall"):
+                is_touching_waterfall = true
         if area.is_in_group("ladder"):
             is_touching_ladder = true
         if area.is_in_group("fallthrough") and "should_do_fallthrough_area_collision" in possible_game_mover:

@@ -22,6 +22,7 @@ func passiveActivate(_delta, is_player):
   level.player.linear_velocity.y = value
   level.player.on_ground = true
   level.player.was_just_on_ground_timer = 0
+  level.player.pauseAnimation = true
   var aa = level.player.aniPlayer.assigned_animation
   if aa != "jumpSquat" and aa != "sinkInSand" and aa != "sweepFloor":
     level.player.aniPlayer.play("sinkInSand", -1, 1)

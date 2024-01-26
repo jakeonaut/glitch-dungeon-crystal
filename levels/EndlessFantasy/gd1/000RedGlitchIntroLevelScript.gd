@@ -12,5 +12,6 @@ func setUpRoomInitializationOverride():
 var has_done_my_power = false
 # @override
 func _process(_delta):
-  if not global.memory.has("roomPath") or not "RedGlitch" in global.memory["roomPath"]:
-    NPC.textBox.hideTextbox()
+  NPC.textBox.hideTextbox()
+  # if not global.memory.has("roomPath") or not "RedGlitch" in global.memory["roomPath"]:
+  #   NPC.textBox.hideTextbox()

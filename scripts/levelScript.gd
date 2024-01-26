@@ -16,6 +16,7 @@ var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 
 export var show_crt_effect = false
+export var show_dither_effect = false
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
@@ -113,9 +114,9 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  ditherPaletteEffectRect2.visible = false # global.memory["show_crt_effect"]
-  basicCrtEffectRect.visible = false # global.memory["show_crt_effect"]
-  colorBlindEffectRect2.visible = false
+  ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
+  basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
+  colorBlindEffectRect2.visible = global.memory["show_color_blind"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
@@ -178,7 +179,6 @@ func getLevelZoneName():
   return global.getLevelZoneName(getLevelName())
 
 func tryToRespawn():
-  global.memory["hp"] = global.memory["max_hp"]
   self.gameCamera.initial_target = player.get_node("CameraTarget")
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
     global.activeInteractor.stopInteract()

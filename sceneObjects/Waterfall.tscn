@@ -82,7 +82,7 @@ water_cube_width = 1.0
 water_cube_height = 6.0
 is_waterfall = true
 
-[node name="Area" type="Area" parent="." groups=["water"]]
+[node name="Area" type="Area" parent="." groups=["water", "waterfall"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0 )
 script = ExtResource( 3 )
 

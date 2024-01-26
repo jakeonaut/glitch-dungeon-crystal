@@ -28,7 +28,7 @@
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=26]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=28]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/EnchantedBag.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sceneObjects/CherryCarcass.tscn" type="PackedScene" id=30]
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -443,8 +443,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0 )
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0 )
 
-[node name="EnchantedBag" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 3, 0 )
+[node name="CherryCarcass" parent="Viewport/level" instance=ExtResource( 30 )]
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 

@@ -64,7 +64,6 @@ enum GlitchForm {
     INVISIBLE,
     LADDER,
     WALK_THROUGH_WALLS,
-    ASCEND,
 }
 enum TilesetType {
     DUNGEON,
@@ -188,6 +187,8 @@ func _ready():
 
     # settings?
     memory["show_crt_effect"] = true
+    memory["show_dither_effect"] = true
+    memory["show_color_blind"] = false
 
     # game stuff
     memory["broom"] = false
@@ -203,17 +204,31 @@ func _ready():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
 
-    # HIDDEN POWERUPS
+    # PERMANENT SPELLS
+    
+    memory["permanent_spells"] = [
+        false, # "NORMAL", sort of a no-op for permanentSpells
+        false, # "FLOOR", 
+        false, # "FEATHER",
+        false, # "INVISIBLE", 
+        false, # "LADDER", 
+        false, # "WALK_THROUGH_WALLS"
+    ]
+
+    # POWERUPS
     memory["broomerang"] = false
     memory["magic_lantern"] = false
     memory["can_nest"] = false
+    memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["speed_slippers"] = false
+    memory["speed_slippers"] = true # TODO(jaketrower): turn off before beta build
+
+    # GAME MODES
+    memory["random_entrances"] = false
 
     # EASTER EGGS
     memory["anna_mode"] = false
     memory["blue_mode"] = false
-    memory["random_entrances"] = false
 
     loadGameSettings()
 

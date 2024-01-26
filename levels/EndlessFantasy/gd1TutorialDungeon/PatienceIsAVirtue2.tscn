@@ -411,7 +411,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.762, 0 )
 shape = SubResource( 62 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.459, 13.4159, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.459, 13.4159, 0 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.21888, 0.415873, 0 )

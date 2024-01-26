@@ -1,6 +1,5 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=66 format=2]
 
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Broomerang.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
@@ -829,7 +828,7 @@ flip_h = true
 anims/heartWiggle = SubResource( 42 )
 anims/noHeart = SubResource( 43 )
 
-[node name="DieAnimationPlayer" parent="Viewport/level/GlitchSlime2" index="7"]
+[node name="DieAnimationPlayer" parent="Viewport/level/GlitchSlime2" index="6"]
 anims/default = SubResource( 44 )
 anims/flutterAway = SubResource( 45 )
 anims/metamorphosis = SubResource( 46 )
@@ -1222,12 +1221,12 @@ grav = 0
 [node name="QuietSavePoint" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0 )
 
-[node name="Broomerang" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.39643, 17, 0 )
-
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.8976, 35.2047, 0 )
 grav = 0
+
+[node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 18, 0 )
 
 [node name="Viewport2" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

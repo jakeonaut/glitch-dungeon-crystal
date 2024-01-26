@@ -855,10 +855,10 @@ tracks/1/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=69]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="ViewportTexture" id=19]
+[sub_resource type="ViewportTexture" id=70]
 viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
@@ -867,7 +867,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 13 )
-show_crt_effect = true
+show_dither_effect = true
 tileset_type = 2
 spellbook_forbidden = true
 doesnt_have_broom = true
@@ -1335,7 +1335,7 @@ script = ExtResource( 31 )
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
 margin_right = 1280.0
 margin_bottom = 1024.0
-texture = SubResource( 14 )
+texture = SubResource( 69 )
 flip_v = true
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 9 )]
@@ -1343,12 +1343,12 @@ flip_v = true
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 1024.0
-texture = SubResource( 19 )
+texture = SubResource( 70 )
 flip_v = true
 
-[node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
-
 [node name="UILayer" parent="." instance=ExtResource( 11 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]

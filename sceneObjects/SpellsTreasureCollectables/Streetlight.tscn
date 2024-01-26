@@ -283,7 +283,8 @@ frame = 49
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-pitch_scale = 0.5
+volume_db = -3.0
+pitch_scale = 0.6
 
 [node name="Sprite3DBase" parent="." instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.37434, -0.769 )
