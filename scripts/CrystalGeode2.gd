@@ -59,7 +59,8 @@ func _process(delta):
     #     # musicPlayer.changeSongPitch(1.0)
     # else:
     #     musicPlayer.changeSongPitch(0.5)
-    if not "Haven" in level.name:
+    var level_name = level.getLevelName()
+    if not "Haven" in level_name and not "MainMenu" in level_name:
         musicPlayer.changeSongPitch(0.5)
     if not can_do_my_power:
         return

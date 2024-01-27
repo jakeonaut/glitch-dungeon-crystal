@@ -536,25 +536,31 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  level.displaySpellMessageText("lose magic")
-  if self.glitch_form != global.GlitchForm.NORMAL or global.memory["mp"] > 0:
-    nullifySound.play()
-    global.memory["mp"] = 0
-    self.applyGlitch(global.GlitchForm.NORMAL, true)
-    self.can_cast_spell_timer = 0
-    if global.memory.has("spellbookPage"):
-      # intentional if weird, we treat the index as the int enum glitch_form
-      print("BEFORE")
-      print(global.memory["spellbookPage"])
-      for glitch_type in range(global.memory["permanent_spells"].size()):
-        print(glitch_type)
-        if not global.memory["permanent_spells"]:
-          print("delete")
-          global.memory["spellbookPage"].erase(glitch_type)
-
-      print("AFTER")
-      print(global.memory["spellbookPage"])
   glitchTickle(false)
+  level.displaySpellMessageText("lose magic")
+  var did_erase = false
+  global.memory["mp"] = 0
+  self.can_cast_spell_timer = 0
+  if global.memory.has("spellbookPage"):
+    # intentional if weird, we treat the index as the int enum glitch_form
+    for glitch_type in range(global.memory["permanent_spells"].size()):
+      if not global.memory["permanent_spells"][glitch_type]:
+        global.memory["spellbookPage"].erase(glitch_type)
+        did_erase = true
+  else:
+    nullifySound.play()
+    self.applyGlitch(global.GlitchForm.NORMAL, true)
+    return
+
+  if did_erase:
+    nullifySound.play()
+    if global.memory["permanent_spells"][self.glitch_form]:
+      return
+      
+    if global.memory["spellbookPage"].size() > 0:
+      self.applyGlitch(global.memory["spellbookPage"][0], true)
+    else:
+      self.applyGlitch(global.GlitchForm.NORMAL, true)    
 
 # need this to have it available in the aniPlayer
 func firstAdjustmentForNestingDolls():
