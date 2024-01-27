@@ -11,12 +11,6 @@ func _process(_delta):
   if global.memory["broom"] and not has_updated:
     if fallenBroom.get_ref():
       fallenBroom.get_ref().visible = false
-    if NPC != null:
-      NPC.textBoxContainer.bbText = "•what is this strange\ndust... could ya\nsweep up with [X]?"
-      NPC.textBoxContainer.setVars()
-      NPC.textBox.has_been_shown = false
     if NPC5 != null:
-      NPC5.textBoxContainer.bbText = "•\n\n   sweep dust with [X]"
-      NPC5.textBoxContainer.setVars()
-      NPC5.textBox.showTextbox()
+      NPC5.textBox.hideTextbox()
     has_updated = true

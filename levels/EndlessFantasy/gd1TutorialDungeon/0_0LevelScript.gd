@@ -38,7 +38,7 @@ func _process(delta):
       snarkyCommentTimer += (delta*11)
       if snarkyCommentTimer >= snarkyCommentTimeLimit:
         is_start_of_game = false
-        player.textBox.tinify()
+        # player.textBox.tinify()
         player.textBox.interact()
   else:
     if player.glitch_form == global.GlitchForm.FEATHER:

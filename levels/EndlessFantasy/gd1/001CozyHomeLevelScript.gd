@@ -4,7 +4,7 @@ var did_i_die = false
 
 # @override
 func setUpRoomInitializationOverride():
-  player.textBox.tinify()
+  # player.textBox.tinify()
   player.textBox.interact()
   did_i_die = true
 

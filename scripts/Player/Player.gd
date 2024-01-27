@@ -213,7 +213,7 @@ func isWalkingIntoWall():
 
 func sayThis(message):
   textBox.text_final = message
-  textBox.tinify()
+  # textBox.tinify()
   textBox.interact()
 
 var returning_recover_time = 0

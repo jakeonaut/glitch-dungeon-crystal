@@ -523,7 +523,7 @@ func pressingDown():
 var running_timer = 0
 var running_time_limit = 15
 func canRun():
-  return true
+  return false
 
 func pressingRun():
   if not canRun():
