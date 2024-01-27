@@ -1474,12 +1474,13 @@ spawned_object_path = ""
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
 bbText = "•Helloe, welcome to
-DUNGEONE
+DUNGEON
 •press X to talk
 •ouch!!! well done.
+•this place was once a temple, 
+sealed away and corrupted by time
 •if someone says \". . .\"
 you can talk to them!"
-is_important = true
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true
