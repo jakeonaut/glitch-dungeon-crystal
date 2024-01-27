@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/QuietSavePoint.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=10]
+[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=14]
@@ -874,6 +875,89 @@ extents = Vector3( 3.8, 1, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=77]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=78]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 27 )
+
+[sub_resource type="Animation" id=79]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=80]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=81]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=83]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=84]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="BoxShape" id=85]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -1321,6 +1405,49 @@ shape = SubResource( 43 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 52 )
 
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 0.1, 0 )
+grav = 0
+bbText = "•now what's going on?
+•could you go fetch
+those poor chickadees?"
+dont_recolor_me = true
+
+[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 77 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 25.0
+step = 1.0
+page = 101.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+stream = ExtResource( 11 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
+material_override = SubResource( 78 )
+frame = 0
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
+anims/default = SubResource( 79 )
+anims/fall = SubResource( 80 )
+anims/flickerOn = SubResource( 81 )
+anims/jump = SubResource( 82 )
+anims/land = SubResource( 83 )
+anims/stand = SubResource( 84 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 85 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 25 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -1363,5 +1490,7 @@ flip_v = true
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC"]
+[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

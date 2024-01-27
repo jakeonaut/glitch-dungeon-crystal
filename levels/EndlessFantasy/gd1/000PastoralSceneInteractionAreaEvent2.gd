@@ -14,7 +14,7 @@ func passiveActivate(_delta, _is_player):
   if has_activated:
     return
   grandmaNpc.textBox.hideTextbox()
-  grandmaNpc.textBox.text_final = "•thank you dearie.."
+  grandmaNpc.textBox.text_final = "•thank you dear.."
   grandmaNpc.textBox.tinify()
   grandmaNpc.textBox.showTextbox()
   has_activated = true
