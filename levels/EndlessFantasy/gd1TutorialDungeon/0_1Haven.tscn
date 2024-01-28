@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenChickenGlitchEvent.gd" type="Script" id=35]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=36]
 [ext_resource path="res://sceneObjects/QuietSavePoint.tscn" type="PackedScene" id=37]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=38]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=39]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
@@ -1522,7 +1523,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 33 )
-starting_glitch_type = 2
 tileset_type = 2
 how_much_mp = 10
 
@@ -1789,9 +1789,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, -18, 0 )
 [node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -17.2, 0 )
 
-[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, -19.3, 0 )
-
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5226, -20.0243, 0 )
 
@@ -1931,20 +1928,8 @@ shape = SubResource( 155 )
 [node name="InteractPrompt" parent="Viewport/level/ChickenNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
-[node name="Waterfall" parent="Viewport/level" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, -4.1, -5 )
-
-[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="2"]
-visible = false
-
-[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="3"]
-visible = false
-
-[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="4"]
-visible = false
-
-[node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="7"]
-visible = false
+[node name="Waterfall2" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, -4.1, -2 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -35.192, 0 )
@@ -2128,6 +2113,9 @@ shape = SubResource( 226 )
 [node name="CollisionShape" parent="Viewport/level/DebugDoor/FallthroughSolid" index="0"]
 shape = SubResource( 227 )
 
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 38 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -20.5569, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -2171,7 +2159,7 @@ flip_v = true
 [editable path="Viewport/level/AngelStatue2/NPC/NPC TextBox"]
 [editable path="Viewport/level/ChickenNPC"]
 [editable path="Viewport/level/ChickenNPC/NPC TextBox"]
-[editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall2"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/InteractionAreaEvent"]

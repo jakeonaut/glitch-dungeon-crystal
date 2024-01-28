@@ -525,6 +525,9 @@ var running_time_limit = 15
 func canRun():
   return false
 
+func canSwim():
+  return true
+
 func pressingRun():
   if not canRun():
     return false
@@ -615,7 +618,7 @@ func processJumpInputs(delta):
   # jump
   if justPressedJump() or recentlyJustPressedJump(): 
     # # Jump from the water
-    if is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
+    if canSwim() and is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
     (aniPlayer == null or pauseAnimation or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
       was_touching_water_at_start_of_jump = true
       vv = jump_force * .75

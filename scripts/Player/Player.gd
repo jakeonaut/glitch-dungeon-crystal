@@ -204,6 +204,11 @@ func canRun():
   var has_speed_slippers = global.memory["speed_slippers"]
   var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
   return has_speed_slippers and not is_giant
+
+# @override
+func canSwim():
+  var has_flippers = global.memory["zora_flippers"]
+  return has_flippers
   
 func isWalkingIntoWall():
   if summonedBroom != null:

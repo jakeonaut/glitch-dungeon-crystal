@@ -109,7 +109,7 @@ func isActive():
 
 func speakToMe():
     if global.memory["clean_crystals"] == 1:
-        level.player.sayThis("you purified a crystal.\npleasant, somehow.\nit seems grateful.")
+        level.player.sayThis("you purified a crystal.\npleasant, somehow.")
     else:
         level.player.sayThis("wow, congrats, you purified a crystal!")
 
@@ -159,7 +159,11 @@ func activate(_is_player):
     global.setLevelZoneThing("crystal_geode", true)
 
 func freeUpPlayer():
+    var interactor = global.activeInteractor
+    global.activeInteractor = null
     level.player.getItemFailsafe()
+    global.activeInteractor = interactor
+
     if debugDoor:
         level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
         if can_change_debugDoor_path:
