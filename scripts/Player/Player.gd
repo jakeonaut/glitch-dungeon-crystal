@@ -542,11 +542,18 @@ func nullify():
   global.memory["mp"] = 0
   self.can_cast_spell_timer = 0
   if global.memory.has("spellbookPage"):
+    print("1spellbook: " + str(global.memory["spellbookPage"]))
     # intentional if weird, we treat the index as the int enum glitch_form
     for glitch_type in range(global.memory["permanent_spells"].size()):
       if not global.memory["permanent_spells"][glitch_type]:
-        did_erase = global.memory["spellbookPage"].find(glitch_type) > -1
+        print(str(glitch_type) + " not in permanent_spells")
+        var found_index = global.memory["spellbookPage"].find(glitch_type)
         global.memory["spellbookPage"].erase(glitch_type)
+        if found_index >= 0:
+          did_erase = true 
+        print("did erase?: " + str(did_erase))
+      else:
+        print(str(glitch_type) + " IS in permanent_spells")
   else:
     if glitch_form != global.GlitchForm.NORMAL:
       nullifySound.play()
@@ -555,6 +562,7 @@ func nullify():
 
   if did_erase:
     nullifySound.play()
+    print("2spellbook: " + str(global.memory["spellbookPage"]))
     if global.memory["permanent_spells"][self.glitch_form]:
       return
       

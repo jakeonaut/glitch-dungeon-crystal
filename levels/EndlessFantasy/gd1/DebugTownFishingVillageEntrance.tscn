@@ -289,9 +289,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.19284, 4.97632, 0 )
 is_static = true
 is_licker = true
 
-[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy4" index="0"]
-flip_h = false
-
 [node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy4/FallthroughSolid" index="0"]
 shape = SubResource( 36 )
 

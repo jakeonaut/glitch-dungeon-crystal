@@ -163,7 +163,7 @@ func freeUpPlayer():
     if debugDoor:
         level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
         if can_change_debugDoor_path:
-            debugDoor.path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
+            debugDoor.path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugPatienceIsAVirtue2.tscn"
         debugDoor.visible = true
 
     if quietSavePoint:
