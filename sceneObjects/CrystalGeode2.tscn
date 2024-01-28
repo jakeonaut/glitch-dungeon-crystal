@@ -476,6 +476,20 @@ tracks/14/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/15/type = "method"
+tracks/15/path = NodePath(".")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "speakToMe"
+} ]
+}
 
 [sub_resource type="Animation" id=50]
 resource_name = "lightUpQuiet"

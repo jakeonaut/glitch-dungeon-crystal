@@ -437,6 +437,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 14.2685, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, 0 )
 
+[node name="Door" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -4, 0 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
+
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

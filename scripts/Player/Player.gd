@@ -545,11 +545,12 @@ func nullify():
     # intentional if weird, we treat the index as the int enum glitch_form
     for glitch_type in range(global.memory["permanent_spells"].size()):
       if not global.memory["permanent_spells"][glitch_type]:
+        did_erase = global.memory["spellbookPage"].find(glitch_type) > -1
         global.memory["spellbookPage"].erase(glitch_type)
-        did_erase = true
   else:
-    nullifySound.play()
-    self.applyGlitch(global.GlitchForm.NORMAL, true)
+    if glitch_form != global.GlitchForm.NORMAL:
+      nullifySound.play()
+      self.applyGlitch(global.GlitchForm.NORMAL, true)
     return
 
   if did_erase:

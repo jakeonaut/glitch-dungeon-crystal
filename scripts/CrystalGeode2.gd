@@ -107,6 +107,12 @@ func getSmacked(_broom_origin):
 func isActive():
     return visible and not has_been_smacked
 
+func speakToMe():
+    if global.memory["clean_crystals"] == 1:
+        level.player.sayThis("you purified a crystal.\npleasant, somehow.\nit seems grateful.")
+    else:
+        level.player.sayThis("wow, congrats, you purified a crystal!")
+
 func activate(_is_player):
     # if not global.memory["broom"]:
     #     if not notGetHitSound.is_playing(): notGetHitSound.play()
@@ -116,9 +122,6 @@ func activate(_is_player):
     for child in children:
         if child.is_in_group("event") and child.isActive():
             child.passiveActivate(0, true)
-
-
-
 
     global.setStaticLevelZoneLevelVar(level, self.name, true)
     lightAniPlayer.play("lightUp")
@@ -165,7 +168,7 @@ func freeUpPlayer():
 
     if quietSavePoint:
         quietSavePoint.passiveActivate(0, true)
-    level.saveTheGame("wow, congrats, you purified a crystal!")
+    level.saveTheGame()
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:
