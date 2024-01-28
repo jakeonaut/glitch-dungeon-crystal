@@ -2099,7 +2099,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
 [node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -17, 0 )
 visible = false
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugPatienceIsAVirtue2.tscn"
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/DebugDoor" index="1"]
 visible = false
@@ -2160,6 +2160,7 @@ flip_v = true
 [editable path="Viewport/level/ChickenNPC"]
 [editable path="Viewport/level/ChickenNPC/NPC TextBox"]
 [editable path="Viewport/level/Waterfall2"]
+[editable path="Viewport/level/Waterfall2/AreaSound"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/InteractionAreaEvent"]

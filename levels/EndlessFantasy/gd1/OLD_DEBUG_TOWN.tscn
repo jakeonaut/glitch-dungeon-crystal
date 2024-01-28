@@ -3868,7 +3868,7 @@ shape = SubResource( 217 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1/001GrubAmbush.tscn"
+path = "res://levels/EndlessFantasy/gd1/DebugGrubAmbush.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door4" index="3"]

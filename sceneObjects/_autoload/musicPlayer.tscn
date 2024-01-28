@@ -31,43 +31,44 @@ volume_db = -15.0
 
 [node name="RestZonePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-volume_db = -18.0
+volume_db = -25.0
 
 [node name="TitleThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="WakeupPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -20.0
+volume_db = -25.0
 
 [node name="GrannyPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-volume_db = -15.0
+volume_db = -20.0
+pitch_scale = 0.9
 
 [node name="DungeonThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -20.0
+volume_db = -22.0
 
 [node name="DungeonThemePlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -20.0
+volume_db = -22.0
 
 [node name="DebugThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -15.0
+volume_db = -24.0
 
 [node name="CasinoThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="PoisonThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
-volume_db = -12.0
+volume_db = -17.0
 
 [node name="ExploreThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
-volume_db = -20.0
+volume_db = -25.0
 
 [node name="OceanThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
@@ -75,31 +76,30 @@ volume_db = -5.0
 
 [node name="PriestessThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -12.0
-pitch_scale = 0.63
+volume_db = -20.0
 
 [node name="RealizationThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -20.0
+volume_db = -30.0
 
 [node name="SuburbThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="SwampThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
-volume_db = -15.0
+volume_db = -22.0
 
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="CrystalThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="TownThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
+stream = ExtResource( 20 )
 volume_db = -20.0
 
 [node name="BossThemePlayer" type="AudioStreamPlayer" parent="."]
@@ -108,6 +108,7 @@ volume_db = -25.0
 
 [node name="TreasureJingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
-volume_db = -80.0
+volume_db = -20.0
+pitch_scale = 2.0
 
 [node name="Tween" type="Tween" parent="."]

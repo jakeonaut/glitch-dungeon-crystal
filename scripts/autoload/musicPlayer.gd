@@ -142,10 +142,8 @@ func conductFromScenePath(path):
         tryToPlay(bossThemePlayer)
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
-    elif path.find("Lily") > 0 or path.find("NullificationPurgatory") > 0:
+    elif path.find("Lily") > 0 or path.find("NullificationPurgatory") > 0 or path.find("Debug") > 0:
         tryToPlay(dungeonThemePlayer)
-    elif path.find("Debug") > 0:
-        tryToPlay(debugThemePlayer)
     elif path.find("Casino") > 0 or path.find("Medievel") > 0 or path.find("Piranesi") > 0 or path.find("Grimoire") > 0:
         tryToPlay(casinoThemePlayer)
     elif path.find("Suburb") > 0:

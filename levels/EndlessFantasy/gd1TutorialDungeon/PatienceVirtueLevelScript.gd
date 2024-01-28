@@ -1,6 +1,6 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var npcTutorial = get_node("NPC")
+onready var npcTutorial = get_node("NPCTutorial")
 onready var door = get_node("Door2")
 
 var has_activated_npc = false

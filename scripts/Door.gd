@@ -157,7 +157,7 @@ func _process(delta):
     spawnParticles(delta)
 
   if locked_to_monsters:
-    npc.textBoxContainer.bbText = ""
+    npc.textBoxContainer.bbText = "•"
     npc.textBoxContainer.setVars()
   elif key_type == global.KeyItem.NORMAL:
     var num_keys = global.getLevelZoneThing("key")
