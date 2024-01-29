@@ -2060,8 +2060,7 @@ shape = SubResource( 103 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9649, 1.0759, 0 )
 bbText = "•how odd. it seems that the 
 [color=blue]DUNGEON[/color] and your world
-are becoming one...
-•the [color=blue]goddess[/color] must be stirring."
+are becoming one... •the [color=blue]goddess[/color] must be stirring."
 is_really_important = true
 dont_recolor_me = true
 

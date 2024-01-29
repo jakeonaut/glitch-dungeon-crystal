@@ -388,7 +388,9 @@ __meta__ = {
 [node name="UILayer" parent="." instance=ExtResource( 15 )]
 
 [editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall/AreaSound"]
 [editable path="Viewport/level/Waterfall2"]
+[editable path="Viewport/level/Waterfall2/AreaSound"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]

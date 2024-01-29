@@ -11,6 +11,8 @@ func isActive():
 var has_activated = false
 onready var grandmaNpc = get_node("../NPC6")
 func passiveActivate(_delta, _is_player):
+  if global.memory.has("spellbookPage"):
+    has_activated = true
   if has_activated:
     return
   grandmaNpc.textBox.hideTextbox()
