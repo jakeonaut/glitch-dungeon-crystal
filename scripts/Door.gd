@@ -179,7 +179,7 @@ func _process(delta):
   if is_unlocking and not keySound.playing:
     if unlocking_key_array.size() == 0:
       actuallyUnlockAndEnterDoor()
-      print("why this not work")
+      # print("why this not work")
       level.player.getItemFailsafe()
       is_unlocking = false
     else:

@@ -13,9 +13,9 @@ func _ready():
     set_physics_process(true)
 
     var memory = self.getMyStaticLevelZoneVar()
-    print("is static in level?: " + str(is_static_in_level) + ", name: " + self.name + ", " + (str(memory) if memory else "null"))
+    # print("is static in level?: " + str(is_static_in_level) + ", name: " + self.name + ", " + (str(memory) if memory else "null"))
     if is_static_in_level and memory:
-        print("how did this happen?")
+        # print("how did this happen?")
         visible = false
 
 func _process(_delta):

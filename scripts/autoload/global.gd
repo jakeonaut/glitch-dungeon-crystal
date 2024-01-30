@@ -342,7 +342,17 @@ func doesSaveGameExist():
     return save_game.file_exists(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
-    if typeof(obj) == TYPE_REAL:
+    if typeof(obj) == TYPE_STRING:
+        # well, this will fail for "0", but hopefully we don't use that for a key anywhere.
+        # luckily, "key_items", which this clause is a fix for, explicitly disallows 0 as a key
+        # since 0 is reserved for "NORMAL" key_type
+        if "(" in obj:
+            return normalizeMemoryPosition(obj)
+        elif int(obj) != 0 and len(obj) == len(str(int(obj))): # don't convert "gd1", but convert 
+            print(obj + " ;; " + str(int(obj)))
+            return int(obj)
+        return obj
+    elif typeof(obj) == TYPE_REAL:
         return int(obj)
     elif typeof(obj) == TYPE_ARRAY:
         var new_arr = []
@@ -350,10 +360,9 @@ func turnRealIntoIntRecursive(obj):
             new_arr.push_back(turnRealIntoIntRecursive(obj[i]))
         return new_arr
     elif typeof(obj) == TYPE_DICTIONARY:
-        # assumes we don't have anything other than str as keys (this would fail for any key containing a float)
         var new_dict = {}
         for key in obj:
-            new_dict[key] = turnRealIntoIntRecursive(obj[key])
+            new_dict[turnRealIntoIntRecursive(key)] = turnRealIntoIntRecursive(obj[key])
         return new_dict
     else:
         return obj

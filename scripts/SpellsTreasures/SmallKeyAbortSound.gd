@@ -8,7 +8,7 @@ func _ready():
     
 onready var key = get_node("../../..")
 func activateScript():
-    if key_type != 0:
+    if key_type != 0: # thank god
         if not global.memory.has("key_items"):
             global.memory["key_items"] = {}
         global.memory["key_items"][key_type] = global.ItemState.GOT_IT
