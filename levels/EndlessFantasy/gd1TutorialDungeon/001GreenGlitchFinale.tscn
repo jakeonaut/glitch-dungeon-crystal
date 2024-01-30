@@ -90,6 +90,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 17 )
+show_crt_effect = true
 starting_glitch_type = 2
 how_much_mp = 0
 

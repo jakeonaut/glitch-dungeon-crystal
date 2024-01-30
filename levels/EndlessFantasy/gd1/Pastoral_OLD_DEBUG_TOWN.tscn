@@ -3142,6 +3142,7 @@ script = ExtResource( 19 )
 __meta__ = {
 "_editor_description_": "Lv1: Debug"
 }
+show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true
@@ -3688,7 +3689,7 @@ shape = SubResource( 189 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="ChickenNPC4" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8882, 3.63161, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8882, 3.63161, 0 )
 grav = 0
 is_really_important = true
 can_camera_zoom = false
@@ -3785,7 +3786,7 @@ shape = SubResource( 189 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="ChickenNPC5" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4015, 4.92171, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4015, 0.239421, 0 )
 grav = 0
 is_really_important = true
 can_camera_zoom = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceVirtueLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=2]
@@ -12,9 +12,11 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=11]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=12]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=14]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=15]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
@@ -317,7 +319,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-show_dither_effect = true
+show_crt_effect = true
 tileset_type = 2
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 28 )]
@@ -529,11 +531,17 @@ shape = SubResource( 79 )
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 9, 0 )
 
-[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 9, 0 )
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 17, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -2, 0 )
+
+[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 9.34687, 0 )
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4625, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 

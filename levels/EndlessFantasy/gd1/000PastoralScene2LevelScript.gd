@@ -7,6 +7,9 @@ var has_updated = false
 
 # @override
 func _process(_delta):
+  show_dither_effect = global.memory["clean_crystals"] <= 0
+  show_crt_effect = not show_dither_effect
+  
   if global.memory.has("spellbookPage") and not has_updated:
     if door2 != null:
       door2.path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"

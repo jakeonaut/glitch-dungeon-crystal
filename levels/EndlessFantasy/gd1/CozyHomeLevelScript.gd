@@ -12,6 +12,7 @@ func _process(delta):
   if player.global_transform.origin.y < -39:
     if glitch_death_timer_fake == 0:
       self.show_dither_effect = false
+      self.show_crt_effect = true
       self.spellbook_forbidden = false
       player.normalGlitch()
     glitch_death_timer_fake += (delta*11)

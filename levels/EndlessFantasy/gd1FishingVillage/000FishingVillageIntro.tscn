@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -33,8 +33,6 @@
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=31]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Slippers.tscn" type="PackedScene" id=33]
-[ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=34]
-[ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=35]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=36]
 
 [sub_resource type="ShaderMaterial" id=35]
@@ -120,62 +118,6 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ShaderMaterial" id=36]
-shader = ExtResource( 2 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 35 )
-shader_param/base_palette = ExtResource( 7 )
-shader_param/target_palette = ExtResource( 34 )
-
-[sub_resource type="ShaderMaterial" id=37]
-shader = ExtResource( 2 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 35 )
-shader_param/base_palette = ExtResource( 7 )
-shader_param/target_palette = ExtResource( 34 )
-
 [sub_resource type="BoxShape" id=30]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -200,6 +142,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+show_crt_effect = true
 starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
@@ -435,15 +378,6 @@ shape = SubResource( 28 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 27 )]
-dont_recolor_me = true
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
-material_override = SubResource( 36 )
-
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
-material_override = SubResource( 37 )
-
 [node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.9, -1.3, 0 )
 
@@ -493,6 +427,8 @@ grav = 0
 bbText = "this magic dust will
 nullify magick"
 
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 27 )]
+
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -521,7 +457,6 @@ flip_v = true
 [editable path="Viewport/level/WaterCube5"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/SwampBubbleSpawn"]
 [editable path="Viewport/level/SwampBubbleSpawn/BubbleSpawner"]
 [editable path="Viewport/level/NPC2"]
