@@ -550,7 +550,6 @@ func nullify():
     # intentional if weird, we treat the index as the int enum glitch_form
     for glitch_type in range(global.memory["permanent_spells"].size()):
       if not global.memory["permanent_spells"][glitch_type]:
-        print(str(glitch_type) + " not in permanent_spells")
         var found_index = global.memory["spellbookPage"].find(glitch_type)
         global.memory["spellbookPage"].erase(glitch_type)
         if found_index >= 0:

@@ -341,6 +341,26 @@ func doesSaveGameExist():
     var save_game = File.new()
     return save_game.file_exists(save_game_file)
 
+func turnRealIntoIntRecursive(obj):
+    if typeof(obj) == TYPE_REAL:
+        return int(obj)
+    elif typeof(obj) == TYPE_ARRAY:
+        var new_arr = []
+        for i in range(obj.size()):
+            new_arr.push_back(turnRealIntoIntRecursive(obj[i]))
+        return new_arr
+    elif typeof(obj) == TYPE_DICTIONARY:
+        # assumes we don't have anything other than str as keys (this would fail for any key containing a float)
+        var new_dict = {}
+        for key in obj:
+            new_dict[key] = turnRealIntoIntRecursive(obj[key])
+        return new_dict
+    else:
+        return obj
+
+func parseJsonPreserveInt(json_str):
+    return turnRealIntoIntRecursive(parse_json(json_str))
+
 func loadGameSettings():
     var save_game = File.new()
     if not save_game.file_exists(save_game_file):
@@ -351,7 +371,7 @@ func loadGameSettings():
     save_game.open(save_game_file, File.READ)
 
     var save_game_contents = save_game.get_line()
-    var fake_memory = parse_json(save_game_contents)
+    var fake_memory = parseJsonPreserveInt(save_game_contents)
     if fake_memory.has("controls_config"):
         global.memory["controls_config"] = fake_memory["controls_config"]
 
@@ -365,10 +385,10 @@ func loadGame():
     save_game.open(save_game_file, File.READ)
     
     var save_game_contents = save_game.get_line()
-    global.memory.merge(parse_json(save_game_contents), true)
+    global.memory.merge(parseJsonPreserveInt(save_game_contents), true)
     while not save_game.eof_reached():
         # ... ??? Is this because global.memory is stored on a single line? enigmatic..
-        var _current_line = parse_json(save_game.get_line())
+        var _current_line = parseJsonPreserveInt(save_game.get_line())
     normalizeLoadedMemory()
         
     save_game.close()
