@@ -636,6 +636,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   bumpSound.play()
   global.pauseGame = true
   global.pauseMoveInput = true
+  on_ground = false
 
   level.glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
   level.glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)

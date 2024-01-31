@@ -99,7 +99,7 @@ func _ready():
         npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
       else:
         prev_keys = num_keys
-        npc.textBoxContainer.bbText = "•press UP to unlock"
+        npc.textBoxContainer.bbText = "•"
     else:
       var key_name = "FISH KEY"
       if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
@@ -171,7 +171,7 @@ func _process(delta):
       elif num_keys != null and num_keys < num_keys_unlock:
         npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
       else:
-        npc.textBoxContainer.bbText = "•press UP to unlock"
+        npc.textBoxContainer.bbText = "•"
       npc.textBoxContainer.setVars()
   else:
     pass

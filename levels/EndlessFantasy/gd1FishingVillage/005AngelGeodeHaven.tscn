@@ -31,7 +31,7 @@
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=31]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/PyramidKey.tscn" type="PackedScene" id=32]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/EnchantedBag.tscn" type="PackedScene" id=32]
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
@@ -922,15 +922,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, 1.4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7, 5.85812, 0 )
 
 [node name="DebugDoor" parent="Viewport/level" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 10.442, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 9.442, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.44196, 0 )
 
-[node name="PyramidKey" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.3829, 9, 0 )
+[node name="EnchantedBag" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 5, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

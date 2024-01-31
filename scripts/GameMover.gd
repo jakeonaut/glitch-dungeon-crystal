@@ -539,7 +539,7 @@ func startRun():
   var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
   if runSound:
     runSound.play()
-  level.summonSmokeClouds(origin, 3, false, true)
+  level.summonSmokeClouds(origin, 3, false, false)
 
 func justPressedJump():
   return false

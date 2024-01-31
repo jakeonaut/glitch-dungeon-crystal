@@ -125,6 +125,8 @@ func conductFromScenePath(path):
         changeSongPitch(0.9)
         default_song_pitch = 0.9
         return
+    elif path.find("BossArena") > 0:
+        tryToPlay(bossThemePlayer)
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:
@@ -138,8 +140,6 @@ func conductFromScenePath(path):
         tryToPlay(restZonePlayer)
     elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
-    elif path.find("Boss") > 0:
-        tryToPlay(bossThemePlayer)
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
     elif path.find("Lily") > 0 or path.find("NullificationPurgatory") > 0 or path.find("Debug") > 0:
