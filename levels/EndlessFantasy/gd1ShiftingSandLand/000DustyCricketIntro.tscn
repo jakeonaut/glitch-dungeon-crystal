@@ -140,6 +140,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
+show_crt_effect = true
 tileset_type = 4
 display_title = "cricket caves"
 

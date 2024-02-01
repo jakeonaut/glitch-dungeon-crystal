@@ -895,6 +895,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 7 )
+show_crt_effect = true
 tileset_type = 4
 how_much_mp = 7
 

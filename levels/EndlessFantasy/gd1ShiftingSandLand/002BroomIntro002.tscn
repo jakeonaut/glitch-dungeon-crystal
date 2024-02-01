@@ -49,6 +49,7 @@ size = Vector2( 1280, 1024 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 12 )
+show_crt_effect = true
 starting_glitch_type = 4
 tileset_type = 4
 has_spellbook_page = true

@@ -217,6 +217,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+show_crt_effect = true
 tileset_type = 4
 has_spellbook_page = true
 

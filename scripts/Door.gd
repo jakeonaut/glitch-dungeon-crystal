@@ -38,7 +38,7 @@ onready var fallthroughSolid = get_node("FallthroughSolid")
 var is_on_main_menu = false
 
 export var is_immediate = false
-export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL") var key_type
 
 var gameCamera = null
 func getGameCamera():
@@ -105,6 +105,7 @@ func _ready():
       if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
       elif key_type == global.KeyItem.SHROOM: key_name = "SHROOM KEY"
       elif key_type == global.KeyItem.CAT: key_name = "CAT KEY"
+      elif key_type == global.KeyItem.CRYSTAL: key_name = "3 CRYSTALS"
       npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
@@ -281,6 +282,13 @@ func activate(is_player):
         elif not lockedSound.is_playing():
           lockedSound.play()
           npc.activate(is_player)
+      elif key_type == global.KeyItem.CRYSTAL:
+        var has_special_key = global.memory["clean_crystals"] >= 3
+        if has_special_key:
+          startDoorUnlock()
+        elif not lockedSound.is_playing():
+          lockedSound.play()
+          npc.activate(is_player)
       else:
         var has_special_key = global.memory.has("key_items") and global.memory["key_items"].has(key_type) and global.memory["key_items"][key_type] == global.ItemState.GOT_IT
         if has_special_key:
@@ -311,7 +319,8 @@ func startDoorUnlock():
           if unlocking_key_array.size() >= num_keys_unlock:
             break
         
-    global.setLevelZoneThing("key", num_keys - num_keys_unlock)
+    if not key_type == global.KeyItem.CRYSTAL:
+      global.setLevelZoneThing("key", num_keys - num_keys_unlock)
   npc.visible = false 
   npc.can_activate = false
   npc.is_active = false
@@ -337,7 +346,7 @@ func startDoorUnlock():
 # doesn't actually enter lol
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
-  if key_type != global.KeyItem.NORMAL:
+  if key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL:
     global.memory["key_items"][key_type] = global.ItemState.USED_IT
   animationPlayer.clear_queue()
   animationPlayer.stop()

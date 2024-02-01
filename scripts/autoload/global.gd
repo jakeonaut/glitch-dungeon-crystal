@@ -87,7 +87,8 @@ enum KeyItem {
     FISH,
     PYRAMID,
     SHROOM,
-    CAT
+    CAT,
+    CRYSTAL
 }
 
 enum Inventory {
@@ -221,8 +222,8 @@ func _ready():
     memory["can_nest"] = false
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["speed_slippers"] = true # TODO(jaketrower): turn off before beta build
-    memory["zora_flippers"] = true # TODO(jaketrower): turn off before beta build
+    memory["speed_slippers"] = false # TODO(jaketrower): turn off before beta build
+    memory["zora_flippers"] = false # TODO(jaketrower): turn off before beta build
 
     # GAME MODES
     memory["random_entrances"] = false
