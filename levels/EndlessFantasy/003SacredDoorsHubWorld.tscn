@@ -1715,4 +1715,5 @@ __meta__ = {
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/WaterCube19"]
 [editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall/AreaSound"]
 [editable path="ScreenEffects"]

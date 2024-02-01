@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -23,6 +23,11 @@
 [ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=24]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=25]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=26]
+[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=27]
+[ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=28]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -93,6 +98,34 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 26 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 28 )
+shader_param/base_palette = ExtResource( 25 )
+shader_param/target_palette = ExtResource( 24 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -105,6 +138,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 18 )
+show_crt_effect = true
 starting_glitch_type = 3
 tileset_type = 7
 
@@ -254,8 +288,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7, 9.2, 0 )
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7, 6.1, 0 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 14 )]
-
 [node name="GeodeSpawner6" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 30.9, 9.8, 0 )
 
@@ -273,6 +305,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 
 [node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.058, 20.3923, 0 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 26 )
+texture = ExtResource( 27 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 26 )
+texture = ExtResource( 27 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 
@@ -301,5 +346,6 @@ flip_v = true
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/SavePoint"]
 [editable path="Viewport/level/CherryCarcass4"]
+[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

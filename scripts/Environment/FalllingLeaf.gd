@@ -76,4 +76,3 @@ func landed():
 func alignMySprite():
     var pixelSize = 0.125
     mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize)
-    get_node("CollisionShape").transform.origin.x = mySprite.global_transform.origin.x

@@ -513,9 +513,12 @@ func land(should_change_shader_params = true, should_play_transition = false):
     if not (global.memory.has("grav_direction") and global.memory["grav_direction"] == -1):
       getPlayer().on_ground = false
     if should_change_shader_params:
-      mySprite.material_override.set_shader_param("enable_dither", true)
-      mySprite.material_override.set_shader_param("opacity", 0.9)
-      mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
+      greyMeOut()
+
+func greyMeOut():
+  mySprite.material_override.set_shader_param("enable_dither", true)
+  mySprite.material_override.set_shader_param("opacity", 0.9)
+  mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
 func setGlobalMemoryOfHasUnlocked():
   if not global.memory.has(level.getShortLevelName()):

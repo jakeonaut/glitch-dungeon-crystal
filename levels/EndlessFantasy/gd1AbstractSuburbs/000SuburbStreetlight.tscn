@@ -182,6 +182,7 @@ shader_param/target_palette = ExtResource( 27 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+show_crt_effect = true
 tileset_type = 7
 has_spellbook_page = true
 display_title = "demon suburb"
@@ -274,7 +275,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
+path = "res://levels/EndlessFantasy/gd1/PoisonForest.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false

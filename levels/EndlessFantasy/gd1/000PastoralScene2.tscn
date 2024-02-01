@@ -1910,13 +1910,10 @@ is_static_in_level = false
 automatically_change_color = false
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8, 0.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8, -0.4, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 2.7, 0 )
-
-[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 1.7, 0 )
 
 [node name="QuietSavePoint" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0 )
