@@ -8,7 +8,7 @@ var has_updated = false
 
 # @override
 func _process(_delta):
-  show_dither_effect = global.memory["clean_crystals"] <= 0
+  show_dither_effect = global.memory["clean_crystals"] <= 0 and not global.memory.has("spellbookPage")
   show_crt_effect = not show_dither_effect
 
   if global.memory.has("spellbookPage") or global.memory["clean_crystals"] > 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://assets/palettes/magicolor-16-1x.png" type="Texture" id=30]
 [ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/SuburbDitherMaterial.tres" type="Material" id=31]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scripts/SpellsTreasures/LanternAbortSound.gd" type="Script" id=33]
 
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 19 )
@@ -158,6 +159,21 @@ shader_param/target_palette = ExtResource( 30 )
 [sub_resource type="BoxShape" id=32]
 resource_local_to_scene = true
 extents = Vector3( 3.24, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 2.5, 2.5, 1 )
+
+[sub_resource type="BoxShape" id=35]
+resource_local_to_scene = true
+extents = Vector3( 4, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -368,6 +384,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, 0 )
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 11, 0 )
 
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 18, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 18, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 18, 0 )
+
 [node name="Streetlight" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.37142, 0 )
 
@@ -380,8 +405,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.139728, 0 )
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
 
-[node name="Mimic" parent="Viewport/level" instance=ExtResource( 24 )]
+[node name="MimicLantern" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 19, 0 )
+num_gems_needed = 50
+trade_item = "MAGIC LANTERN"
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/SmallInteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/MimicNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 35 )
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/MimicNPC/FallthroughSolid" index="0"]
+shape = SubResource( 36 )
+
+[node name="TreasureSpellCollectable" parent="Viewport/level/MimicLantern" index="3"]
+bbText = "•MAGIC LANTERN
+jump twice to
+flip gravity"
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/SmallInteractionArea" index="0"]
+shape = SubResource( 37 )
+
+[node name="AbortSound" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 33 )
+
+[node name="Sprite3D" parent="Viewport/level/MimicLantern/TreasureSpellCollectable" index="3"]
+frame = 49
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 
@@ -420,5 +470,10 @@ material = SubResource( 28 )
 [editable path="Viewport/level/KizzyCat4"]
 [editable path="Viewport/level/Streetlight"]
 [editable path="Viewport/level/Streetlight2"]
+[editable path="Viewport/level/MimicLantern"]
+[editable path="Viewport/level/MimicLantern/MimicNPC"]
+[editable path="Viewport/level/MimicLantern/MimicNPC/NPC TextBox"]
+[editable path="Viewport/level/MimicLantern/TreasureSpellCollectable"]
+[editable path="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=26]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=27]
 [ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=28]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=29]
 
 [sub_resource type="ShaderMaterial" id=58]
 shader = ExtResource( 6 )
@@ -324,6 +325,15 @@ texture = ExtResource( 27 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 70 )
 texture = ExtResource( 27 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.442, 16, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.442, 16, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 12 )]
 

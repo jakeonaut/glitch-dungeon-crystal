@@ -363,6 +363,15 @@ shape = SubResource( 30 )
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 24.3, 0 )
 
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, 28.3, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509535, 29.3, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.490465, 29.3, 0 )
+
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.8, 12.2, 0 )
 

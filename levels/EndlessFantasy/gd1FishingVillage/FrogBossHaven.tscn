@@ -31,7 +31,7 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=30]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=31]
-[ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=32]
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
@@ -963,8 +963,13 @@ hframes = 4
 vframes = 2
 frame = 7
 
-[node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 33 )]
+[node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
+is_infected = true
+
+[node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0 )
+is_infected = true
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
 

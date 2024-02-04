@@ -221,6 +221,8 @@ func resetPrompts():
       
 var tindex = -1
 func showTextbox():
+  dialogStartSound.play()
+  dialogStartSound.activateScript()
   # if text_final.find("•") == -1 and not text_final == "":
   #   text_final = "•" + text_final
   textNode.visible_characters = 0
@@ -264,9 +266,6 @@ func showTextbox():
 
   textNode.get_v_scroll().value = 0
   self.show()
-  dialogStartSound.play()
-  # whateva
-  dialogStartSound.activateScript()
   dialogSound.activateScript()
   
   if not floating_text:

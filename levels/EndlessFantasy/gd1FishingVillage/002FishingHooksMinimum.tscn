@@ -566,7 +566,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 11.9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 12, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 1.5, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )

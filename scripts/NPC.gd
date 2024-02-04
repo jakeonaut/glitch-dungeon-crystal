@@ -19,7 +19,6 @@ export var floating_text = false
 export var can_move_player = false
 
 var is_smacked = false
-var did_i_get_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 
@@ -150,17 +149,12 @@ func _process(delta):
 
 
 func getSmacked(_broom_origin):
-  if textBox.text_final == "":
-    return false
-  if floating_text or not is_active: 
+  if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
   if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
     return false
-  # don't start IMPORTANT dialog if you threw broom at me
-  if is_important and not global.memory["broom"]:
-    return false
-
+    
   if smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -170,14 +164,19 @@ func getSmacked(_broom_origin):
     mySprite.material_override = material
   smack_timer = 0
   is_smacked = true
-  did_i_get_smacked = true
+
+  if textBox.text_final == "":
+    return false
+  if floating_text or not is_active: 
+    return false
+  # don't start IMPORTANT dialog if you threw broom at me
+  if is_important and not global.memory["broom"]:
+    return false
 
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.interact()
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
-  if set_vars:
-    did_i_get_smacked = false
   global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 func isActive():
@@ -228,7 +227,6 @@ func stopPassiveActivate():
   # TODO(jaketrower): TODO on a timer...
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor == textBox:
     global.activeInteractor.tryStopInteractPassive()
-  did_i_get_smacked = false
     
 func justStopPassiveActivate():
   pass

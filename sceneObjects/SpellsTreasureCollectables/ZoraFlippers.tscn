@@ -498,6 +498,7 @@ shaded = true
 alpha_cut = 2
 texture = ExtResource( 17 )
 hframes = 2
+vframes = 2
 script = ExtResource( 3 )
 should_randomize_frame_delay = true
 should_animate = false

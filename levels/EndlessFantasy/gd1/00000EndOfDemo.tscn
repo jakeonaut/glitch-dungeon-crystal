@@ -694,7 +694,6 @@ can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
@@ -748,7 +747,6 @@ can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
@@ -802,7 +800,6 @@ can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )

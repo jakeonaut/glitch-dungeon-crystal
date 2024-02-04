@@ -144,6 +144,7 @@ func isActive():
 # @override
 func passiveActivate(_delta, is_player):
   if not is_player:
+    getSmacked(self.global_transform.origin)
     return
   if okay_im_done:
     return
@@ -177,12 +178,13 @@ func getSmacked(_broom_origin):
     return false
 
   if smackSound and not smackSound.is_playing(): smackSound.play()
-  mySprite.material_override.set_shader_param("time_influence", time_influence)
-  mySprite.material_override.set_shader_param("y_div", y_div)
-  mySprite.material_override.set_shader_param("normal_offset", normal_offset)
-  mySprite.material_override.set_shader_param("shake_power", 0.143)
-  mySprite.material_override.set_shader_param("shake_block_size", 60)
-  mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
+  if chestSprite:
+    chestSprite.material_override.set_shader_param("time_influence", time_influence)
+    chestSprite.material_override.set_shader_param("y_div", y_div)
+    chestSprite.material_override.set_shader_param("normal_offset", normal_offset)
+    chestSprite.material_override.set_shader_param("shake_power", 0.143)
+    chestSprite.material_override.set_shader_param("shake_block_size", 60)
+    chestSprite.material_override.set_shader_param("shake_color_rate", 0.219)
   
   smack_timer = 0
   is_smacked = true
@@ -190,11 +192,12 @@ func getSmacked(_broom_origin):
 
 
 func unsmack():
-  chestSprite.material_override.set_shader_param("time_influence", 3)
-  chestSprite.material_override.set_shader_param("y_div", 2.3)
-  chestSprite.material_override.set_shader_param("normal_offset", .02)
-  chestSprite.material_override.set_shader_param("shake_power", 0.03)
-  chestSprite.material_override.set_shader_param("shake_block_size", 30.5)
-  chestSprite.material_override.set_shader_param("shake_color_rate", 0.01)
-  chestSprite.material_override.set_shader_param("shake_power", 0.03)
+  if chestSprite:
+    chestSprite.material_override.set_shader_param("time_influence", 3)
+    chestSprite.material_override.set_shader_param("y_div", 2.3)
+    chestSprite.material_override.set_shader_param("normal_offset", .02)
+    chestSprite.material_override.set_shader_param("shake_power", 0.03)
+    chestSprite.material_override.set_shader_param("shake_block_size", 30.5)
+    chestSprite.material_override.set_shader_param("shake_color_rate", 0.01)
+    chestSprite.material_override.set_shader_param("shake_power", 0.03)
   is_smacked = false

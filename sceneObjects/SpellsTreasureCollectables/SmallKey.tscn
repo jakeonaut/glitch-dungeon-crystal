@@ -153,7 +153,7 @@ pitch_scale = 1.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -20.0
+volume_db = -80.0
 pitch_scale = 0.65
 
 [node name="Sounds" type="Spatial" parent="."]

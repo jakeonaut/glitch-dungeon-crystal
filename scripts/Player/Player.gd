@@ -541,6 +541,11 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
+  if global.memory["glitched_grimoire"]:
+    glitchTickle(false)
+    level.displaySpellMessageText("unaffected")
+    return
+
   glitchTickle(false)
   level.displaySpellMessageText("lose magic")
   var did_erase = false

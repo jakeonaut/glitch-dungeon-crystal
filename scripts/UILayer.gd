@@ -107,7 +107,7 @@ func _process(delta):
   # if global.memory["max_mp"] <= 0:
   #  get_node("GlitchStatusRect").visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
-  var glitchStatusText = str(global.getLevelZoneThing("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
+  var glitchStatusText = str(global.getThingFromAllLevelZonez("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
   glitchStatusText1.text = glitchStatusText 
   glitchStatusText2.text = glitchStatusText
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
