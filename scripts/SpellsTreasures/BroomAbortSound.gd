@@ -18,8 +18,6 @@ func activateScript():
     if level.getLevelName().find("000PastoralScene") > 0:
         level.player.textBox.dialogStartSound.play()
         
-    # level.restartMusic()
-    # level.saveTheGame()
 
     broom.queue_free()
 

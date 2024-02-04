@@ -221,6 +221,7 @@ func tryToRespawn():
     else:
       player.global_transform.origin = player.spawn_origin
 
+  if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if found_door:
     # print(found_door)
     found_door.land(true, true)

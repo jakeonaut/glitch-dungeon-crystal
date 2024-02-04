@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
@@ -35,8 +35,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=34]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=35]
-[ext_resource path="res://scripts/Door.gd" type="Script" id=36]
-[ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=37]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=36]
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 20 )
@@ -1393,6 +1392,7 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 3 )
 show_crt_effect = true
 tileset_type = 2
+has_spellbook_page = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 14 )]
 
@@ -1892,7 +1892,6 @@ shape = SubResource( 89 )
 
 [node name="Door6" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 18, 0 )
-script = ExtResource( 36 )
 path = "Door3"
 
 [node name="Sprite3D2" parent="Viewport/level/Door6" index="1"]
@@ -1917,7 +1916,6 @@ shape = SubResource( 89 )
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 16, 0 )
-script = ExtResource( 36 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1GrimoireGrove/000_start.tscn"
 key_type = 5
@@ -1968,14 +1966,14 @@ shape = SubResource( 103 )
 [node name="CollisionShape" parent="Viewport/level/Door5/FallthroughSolid" index="0"]
 shape = SubResource( 104 )
 
-[node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 37 )]
-transform = Transform( 0.8, 0, 0, 0, 0.965926, -0.207055, 0, 0.258819, 0.772741, -16, 0, 0 )
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 20, 0 )
 
-[node name="CubeCrystal2" parent="Viewport/level" instance=ExtResource( 37 )]
-transform = Transform( 0.8, 0, 0, 0, 0.965926, -0.207055, 0, 0.258819, 0.772741, -10, 0, 0 )
+[node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 16, 0 )
 
-[node name="CubeCrystal3" parent="Viewport/level" instance=ExtResource( 37 )]
-transform = Transform( 0.8, 0, 0, 0, 0.965926, -0.207055, 0, 0.258819, 0.772741, -4, 0, 0 )
+[node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 16 )]
 

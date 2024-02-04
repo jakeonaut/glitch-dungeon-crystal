@@ -446,7 +446,7 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="UILayer" index="17"]
+[node name="MiniCrystalCubeRect" parent="UILayer" index="18"]
 visible = false
 
 [node name="MeshInstance" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
@@ -455,10 +455,10 @@ mesh = SubResource( 56 )
 [node name="Sprite" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 47 )
 
-[node name="GlitchSprite" parent="UILayer" index="18"]
+[node name="GlitchSprite" parent="UILayer" index="19"]
 scale = Vector2( 0.1, 0.1 )
 
-[node name="LevelTitle" parent="UILayer" index="24"]
+[node name="LevelTitle" parent="UILayer" index="25"]
 visible = true
 
 [node name="ColorRect" parent="UILayer/LevelTitle" index="0"]
@@ -466,14 +466,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SavingTextLabel" parent="UILayer" index="26"]
+[node name="SavingTextLabel" parent="UILayer" index="27"]
 margin_left = 260.0
 margin_top = 453.0
 margin_right = 527.0
 bbcode_text = "[wave] press enter to begin[/wave]"
 text = " press enter to begin"
 
-[node name="SpellMessageTextLabel" parent="UILayer" index="28"]
+[node name="SpellMessageTextLabel" parent="UILayer" index="29"]
 visible = true
 visible_characters = 0
 percent_visible = 0.0

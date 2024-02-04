@@ -23,7 +23,6 @@ func activateScript():
     # IFNDEF SpriteTownLevelScript.gd
     # level.get_node("NPC").textBox.text_final = "•oh cool! now we can\nfish together... well i\ndon't have a fishing rod\n•anyway, to fish, just stand\nin front of some water and\npress [DOWN]\n•you can find different fish\nin different areas.... \nso i've heard"
         
-    level.restartMusic()
     level.saveTheGame()
 
 func isActive():

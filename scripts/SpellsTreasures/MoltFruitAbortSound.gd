@@ -19,7 +19,6 @@ func activateScript():
     
     global.num_cherries_gained = 1
         
-    level.restartMusic()
     level.saveTheGame()
 
 func isActive():

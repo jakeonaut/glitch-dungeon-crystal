@@ -24,7 +24,6 @@ func activateScript():
     global.memory["hearts_recovering"] = true
     level.get_node("UILayer").recreateHeartSprites()
         
-    level.restartMusic()
     level.saveTheGame()
 
 func isActive():

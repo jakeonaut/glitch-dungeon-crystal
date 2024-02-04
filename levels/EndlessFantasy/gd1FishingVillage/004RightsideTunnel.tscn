@@ -2619,21 +2619,6 @@ turn_poisonous = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 0.1, 0 )
 is_infected = true
 
-[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy6/SpriteContainer/InnerSpriteContainer" index="0"]
-pixel_size = 0.25
-
-[node name="TongueSprite" parent="Viewport/level/BasicFrogEnemy6" index="1"]
-pixel_size = 0.25
-
-[node name="TongueSprite2" parent="Viewport/level/BasicFrogEnemy6" index="2"]
-pixel_size = 0.25
-
-[node name="TongueSprite3" parent="Viewport/level/BasicFrogEnemy6" index="3"]
-pixel_size = 0.25
-
-[node name="TongueSprite4" parent="Viewport/level/BasicFrogEnemy6" index="4"]
-pixel_size = 0.25
-
 [node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy6/FallthroughSolid" index="0"]
 shape = SubResource( 25 )
 
@@ -2685,9 +2670,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 10, 0 )
 
 [node name="Dragonfly3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 9, 0 )
-
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
 
 [node name="FishingRod" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -48.7, 37.9, 0 )

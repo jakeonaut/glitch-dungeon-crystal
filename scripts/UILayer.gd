@@ -90,6 +90,7 @@ onready var keyStatusRect = get_node("KeyStatusRect")
 onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
 onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
 onready var pauseMenu = get_node("PauseMenu")
+onready var textBoxes = get_node("TextBoxes")
 func _process(delta):
   processControlsLogic(delta)
   processQuitGameRenderLogic(delta)
@@ -468,42 +469,49 @@ func initializeControlsConfig():
   var newControlsConfig = [
     {
       "input_action": "ui_right",
+      "label_str": "RIGHT",
       "text_label": rightTextLabel,
       "sprite": rightSprite,
       "sprite_aniPlayer": rightSpriteAniPlayer,
     },
     {
       "input_action": "ui_left",
+      "label_str": "LEFT",
       "text_label": leftTextLabel,
       "sprite": leftSprite,
       "sprite_aniPlayer": leftSpriteAniPlayer,
     },
     {
       "input_action": "ui_down",
+      "label_str": "DOWN",
       "text_label": downTextLabel,
       "sprite": downSprite,
       "sprite_aniPlayer": downSpriteAniPlayer,
     },
     {
       "input_action": "ui_up",
+      "label_str": "UP",
       "text_label": upTextLabel,
       "sprite": upSprite,
       "sprite_aniPlayer": upSpriteAniPlayer,
     },
     {
       "input_action": "jump_button",
+      "label_str": "JUMP",
       "text_label": jumpTextLabel,
       "sprite": jumpSprite,
       "sprite_aniPlayer": jumpSpriteAniPlayer,
     },
     {
       "input_action": "sub_action_button",
+      "label_str": "SWEEP",
       "text_label": sweepTextLabel,
       "sprite": sweepSprite,
       "sprite_aniPlayer": sweepSpriteAniPlayer,
     },
     {
       "input_action": "alt_action_button",
+      "label_str": "MAGICK",
       "text_label": castTextLabel,
       "sprite": castSprite,
       "sprite_aniPlayer": castSpriteAniPlayer,
@@ -554,7 +562,7 @@ func processControlsLogic(_delta):
 
   if global.isPauseMenuOpen:
     if global.is_reading_input:
-      inputText.bbcode_text = "press key to set [JUMP]"
+      inputText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
     else:
       inputText.bbcode_text = "press " + OS.get_scancode_string(controlsConfig[5].key_code) + " to change key"
 

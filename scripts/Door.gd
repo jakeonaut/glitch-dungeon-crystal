@@ -428,7 +428,10 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   global.isEnteringRoom = true
   global.hasJustEnteredRoom = false
   global.respawnVarTimerHack = 0
+  
+  global.memory["on_ground"] = true
   if is_passive:
+    global.memory["on_ground"] = getPlayer().on_ground
     global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
     if is_vertical:
       global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer

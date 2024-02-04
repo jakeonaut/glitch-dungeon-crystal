@@ -743,7 +743,7 @@ texture = ExtResource( 34 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4.7, 0 )
 script = ExtResource( 31 )
 spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 10
+spawn_time_limit = 20
 max_num_children = 2
 x_range = Vector2( -1, 1 )
 
@@ -753,44 +753,11 @@ script = ExtResource( 28 )
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/LeafSpawners/LeafSpawner/PlayerActivationArea"]
 shape = SubResource( 24 )
 
-[node name="LeafSpawner8" type="Spatial" parent="Viewport/level/LeafSpawners"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 47.7, 0 )
-script = ExtResource( 31 )
-spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 10
-max_num_children = 2
-x_range = Vector2( -1, 1 )
-
-[node name="PlayerActivationArea" type="Area" parent="Viewport/level/LeafSpawners/LeafSpawner8" groups=["playerActivation"]]
-script = ExtResource( 28 )
-
-[node name="LeafSpawner6" type="Spatial" parent="Viewport/level/LeafSpawners"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 38.6, 0 )
-script = ExtResource( 31 )
-spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 10
-max_num_children = 3
-x_range = Vector2( -1, 1 )
-
-[node name="PlayerActivationArea" type="Area" parent="Viewport/level/LeafSpawners/LeafSpawner6" groups=["playerActivation"]]
-script = ExtResource( 28 )
-
-[node name="LeafSpawner5" type="Spatial" parent="Viewport/level/LeafSpawners"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2423, 33.4867, 0 )
-script = ExtResource( 31 )
-spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 13
-max_num_children = 5
-x_range = Vector2( -2, 2 )
-
-[node name="PlayerActivationArea" type="Area" parent="Viewport/level/LeafSpawners/LeafSpawner5" groups=["playerActivation"]]
-script = ExtResource( 28 )
-
 [node name="LeafSpawner2" type="Spatial" parent="Viewport/level/LeafSpawners"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 1.7, 0 )
 script = ExtResource( 31 )
 spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 15
+spawn_time_limit = 30
 max_num_children = 2
 x_range = Vector2( -1, 1 )
 
@@ -804,7 +771,7 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8, 5.5, 0 )
 script = ExtResource( 31 )
 spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 10
+spawn_time_limit = 20
 max_num_children = 2
 x_range = Vector2( -1, 1 )
 
@@ -818,8 +785,8 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.4, 12.5, 0 )
 script = ExtResource( 31 )
 spawned_object_path = "res://sceneObjects/FalllingLeaf.tscn"
-spawn_time_limit = 10
-max_num_children = 5
+spawn_time_limit = 20
+max_num_children = 2
 x_range = Vector2( -1, 1 )
 
 [node name="PlayerActivationArea" type="Area" parent="Viewport/level/LeafSpawners/LeafSpawner4" groups=["playerActivation"]]

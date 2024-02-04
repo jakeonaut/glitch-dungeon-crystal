@@ -230,7 +230,7 @@ func showTextbox():
 
   if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
     textContainer.remove_child(self)
-    level.uiLayer.add_child(self)
+    level.uiLayer.textBoxes.add_child(self)
     am_i_in_ui_layer = true
 
   num_newlines = 0
