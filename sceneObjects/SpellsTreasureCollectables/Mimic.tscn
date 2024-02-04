@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Slippers.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=6]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
 [ext_resource path="res://scripts/SpellsTreasures/MimicNPC.gd" type="Script" id=8]
+[ext_resource path="res://scripts/SpellsTreasures/MimicAbortSound.gd" type="Script" id=9]
+[ext_resource path="res://scripts/SpellsTreasures/EnchantedBagAbortSound.gd" type="Script" id=10]
 [ext_resource path="res://scripts/SpellsTreasures/MimicDialogStartSound.gd" type="Script" id=18]
 
 [sub_resource type="BoxShape" id=20]
@@ -46,10 +48,17 @@ shader_param/target_palette = ExtResource( 2 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=119]
+resource_local_to_scene = true
+
 [node name="Mimic" type="Spatial"]
 
 [node name="MimicNPC" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 8 )
+grav = 0
+bbText = "see MimicDialogStartSound.gd"
+dont_recolor_me = true
+num_gems_needed = 1
 
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
@@ -61,6 +70,9 @@ script = ExtResource( 18 )
 stream = ExtResource( 6 )
 volume_db = -15.0
 
+[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 9 )
+
 [node name="Sprite3D" parent="MimicNPC" index="3"]
 material_override = SubResource( 118 )
 frame = 37
@@ -70,7 +82,21 @@ max_frames = 1
 shape = SubResource( 21 )
 
 [node name="TreasureSpellCollectable" parent="." instance=ExtResource( 1 )]
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25 )
+
+[node name="CollisionShape" parent="TreasureSpellCollectable/SmallInteractionArea" index="0"]
+shape = SubResource( 119 )
+
+[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="9"]
+script = ExtResource( 10 )
+
+[node name="Sprite3D" parent="TreasureSpellCollectable" index="3"]
+frame = 11
+
+[node name="TreasureSprite3D" parent="TreasureSpellCollectable" index="4"]
+pixel_size = 0.001
 
 [editable path="MimicNPC"]
 [editable path="MimicNPC/NPC TextBox"]
+[editable path="TreasureSpellCollectable"]
+[editable path="TreasureSpellCollectable/NPC TextBox"]

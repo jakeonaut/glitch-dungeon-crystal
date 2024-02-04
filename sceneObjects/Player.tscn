@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -44,7 +44,7 @@
 [ext_resource path="res://assets/sounds/eba_funny2.wav" type="AudioStream" id=42]
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=43]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
-[ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=45]
+[ext_resource path="res://assets/DELETEME/assets_sfx_ui_cancel.wav" type="AudioStream" id=45]
 [ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=46]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=47]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=48]
@@ -64,6 +64,7 @@
 [ext_resource path="res://assets/sprites/spellicons.png" type="Texture" id=62]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational.wav" type="AudioStream" id=63]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=64]
+[ext_resource path="res://assets/DELETEME/assets_sfx_menu_confirm.wav" type="AudioStream" id=65]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -4164,12 +4165,10 @@ volume_db = -8.0
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 45 )
 volume_db = -15.0
-pitch_scale = 0.9
 
 [node name="PauseSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 27 )
+stream = ExtResource( 65 )
 volume_db = -15.0
-pitch_scale = 0.9
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )

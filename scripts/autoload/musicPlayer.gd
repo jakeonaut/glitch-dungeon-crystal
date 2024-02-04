@@ -125,7 +125,7 @@ func conductFromScenePath(path):
         changeSongPitch(0.9)
         default_song_pitch = 0.9
         return
-    elif path.find("BossArena") > 0:
+    elif path.find("BossArenaReal") > 0:
         tryToPlay(bossThemePlayer)
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)

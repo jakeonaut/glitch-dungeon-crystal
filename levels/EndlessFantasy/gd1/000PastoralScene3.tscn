@@ -23,7 +23,7 @@
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/palettes/green_palette_town2.png" type="Texture" id=23]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Mimic.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=26]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=28]
@@ -2573,12 +2573,12 @@ anims/wakeup = SubResource( 110 )
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 27, 0 )
 
-[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 29, 0 )
-
 [node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 15, 0 )
 walk_direction = Vector2( -1, 0 )
+
+[node name="Mimic" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 28, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 
