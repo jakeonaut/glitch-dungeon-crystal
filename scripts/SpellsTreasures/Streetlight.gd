@@ -4,6 +4,7 @@ onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 onready var mySpriteBase = get_node("Sprite3DBase")
 onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
+onready var streetlightGlitchAura  = get_node("StreetlightGlitchAura")
 var spawn_timer = 0
 var spawn_time_limit = 10
 var is_active = true
@@ -21,8 +22,14 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
   mySpriteBase.material_override = mySprite.material_override
 
+var has_changed_palette = false
+var streetlightUpsideDownMaterial = preload("res://sceneObjects/SpellsTreasureCollectables/StreetlightUpsideDownMaterial.tres")
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+
+  if grav_direction < 0 and not has_changed_palette:
+    streetlightGlitchAura.mainTextureRect.material = streetlightUpsideDownMaterial
+    has_changed_palette = true
 
   if is_smacked:
     smack_timer += (delta * 22)

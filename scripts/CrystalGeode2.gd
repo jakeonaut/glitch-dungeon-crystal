@@ -5,7 +5,6 @@ var rot_amount = 100
 var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
 onready var lightAniPlayer = get_node("LightAnimationPlayer")
-onready var debugDoor = get_tree().get_root().get_node("Game/Viewport/level/DebugDoor")
 onready var npc = get_node("NPC")
 onready var npcSprite = get_node("NPC/Sprite3D")
 onready var getHitSound = get_node("GetHitSound")
@@ -17,7 +16,6 @@ onready var collisionShape2 = get_node("InteractionArea/CollisionShape2")
 var can_do_my_power = true
 # String is a path to a file.
 export(String, FILE) var path # unused atm
-export var can_change_debugDoor_path = true
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
@@ -33,7 +31,6 @@ func _ready():
     if getMyStaticLevelZoneVar():
         has_been_smacked = true
         lightAniPlayer.play("lightUpQuiet")
-        debugDoor.visible = true
         # musicPlayer.changeSongPitch(1.0)
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
@@ -163,12 +160,6 @@ func freeUpPlayer():
     global.activeInteractor = null
     level.player.getItemFailsafe()
     global.activeInteractor = interactor
-
-    if debugDoor:
-        level.summonSmokeClouds(debugDoor.global_transform.origin, 3, true, true)
-        if can_change_debugDoor_path:
-            debugDoor.path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
-        debugDoor.visible = true
 
     if quietSavePoint:
         quietSavePoint.passiveActivate(0, true)

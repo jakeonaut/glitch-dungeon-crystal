@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=26]
 
@@ -2467,10 +2466,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6, 0, 0 )
-floor_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4, -1, 0 )
@@ -2827,12 +2822,6 @@ anims/getItem = SubResource( 151 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33, -2, 0 )
 spawned_object_path = ""
 has_spawned = true
-
-[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
-
-[node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 3, 0 )

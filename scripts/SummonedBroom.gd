@@ -123,8 +123,8 @@ func trySweepUpGlitchTiles(collisionShape):
         getLevelTiles().infectSpikes(coords)
         my_broom_owner.has_sweeped_glitch = true
         # TODO(jaketrower): also reset the levelTiles array position?
-      if getLevelTiles().isTileGlitchSpikes(tile_type):
-        has_clanked = true
+      # if getLevelTiles().isTileGlitchSpikes(tile_type):
+      #   has_clanked = true
       if getLevelTiles().isTileSoftSand(tile_type):
         getLevelTiles().sweepUpSand(coords)
         has_clanked = true

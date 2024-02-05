@@ -296,6 +296,9 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/KizzyCat2/FallthroughSolid" index="0"]
 shape = SubResource( 44 )
 
+[node name="landing" parent="Viewport/level/KizzyCat2" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.53732, -7.99999, 0 )
+
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 12, 0 )
 

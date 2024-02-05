@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -9,13 +9,14 @@
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=7]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=9]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
-[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Enemies/StrongGlitchEnemy.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Enemies/WeepingAngel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=19]
 [ext_resource path="res://sceneObjects/Enemies/TadpoleEnemy.tscn" type="PackedScene" id=20]
@@ -150,9 +151,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7, -2.9, 0 )
 [node name="WeepingAngel" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0 )
 
-[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.55756, -0.557561, 0 )
-
 [node name="BasicTadpoleEnemy" parent="Viewport/level" instance=ExtResource( 20 )]
 
 [node name="BasicTadpoleEnemy2" parent="Viewport/level" instance=ExtResource( 20 )]
@@ -189,6 +187,15 @@ shape = SubResource( 48 )
 
 [node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.44534, 0, 0 )
+
+[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -1, 0 )
+
+[node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

@@ -473,7 +473,6 @@ material = SubResource( 28 )
 [editable path="Viewport/level/MimicLantern"]
 [editable path="Viewport/level/MimicLantern/MimicNPC"]
 [editable path="Viewport/level/MimicLantern/MimicNPC/NPC TextBox"]
-[editable path="Viewport/level/MimicLantern/TreasureSpellCollectable"]
 [editable path="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

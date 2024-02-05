@@ -222,7 +222,6 @@ func _ready():
     memory["can_nest"] = false
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["speed_slippers"] = false # TODO(jaketrower): turn off before beta build
     memory["zora_flippers"] = false # TODO(jaketrower): turn off before beta build
 
     # GAME MODES

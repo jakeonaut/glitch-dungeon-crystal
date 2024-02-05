@@ -19,6 +19,7 @@ onready var npc = get_node("NPC")
 
 onready var doorCloseSound = get_node("DoorCloseSound")
 onready var doorOpenSound = get_node("DoorCloseSound")
+onready var warpSound = get_node("WarpSound")
 onready var lockedSound = get_node("LockedSound")
 onready var keySound = get_node("KeySound")
 onready var sillySound = get_node("SillySound")
@@ -129,6 +130,9 @@ func spawnChicken():
   level.summonSmokeClouds(freeChicken.global_transform.origin, 1, false, true)
     
 func _process(delta):
+  if is_passive and parter_door_id:
+    canPlayDoorSound = false
+
   if locked_to_monsters and is_locked:
     var weak_enemies = level.get_tree().get_nodes_in_group("weak_enemies")
     if weak_enemies.size() == 0:
@@ -381,6 +385,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
 
   if canPlayDoorSound:
     global.doorSound.play()
+  elif is_passive and parter_door_id:
+    warpSound.play()
 
   if not is_passive:
     getPlayer().global_transform.origin = self.global_transform.origin
@@ -407,7 +413,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     var partnerDoor = level.get_node(parter_door_id) if level.has_node(parter_door_id) else null
     if partnerDoor and partnerDoor.has_method("land"):
       global.pauseGame = true
-      yield(get_tree().create_timer(0.50), "timeout")
+      if not is_passive:
+        yield(get_tree().create_timer(0.50), "timeout")
       partnerDoor.land(false)
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()

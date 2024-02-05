@@ -3,6 +3,7 @@ extends "PlayerGameMover.gd"
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
+onready var hurt3Sound = get_node("Sounds/HurtSound3")
 onready var broomSound = get_node("Sounds/BroomSound")
 onready var noBroomSound = get_node("Sounds/NoBroomSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
@@ -201,9 +202,8 @@ func pressingRun():
 
 # @override
 func canRun():
-  var has_speed_slippers = global.memory["speed_slippers"]
   var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
-  return has_speed_slippers and not is_giant
+  return not is_giant
 
 # @override
 func canSwim():
@@ -381,7 +381,7 @@ func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
   
 var returning_to_save_point = 0
-func tryDieToOffscreenCamera(_delta):
+func tryDieToOffscreenCamera(delta):
   var DEATH_MARGIN = 5
   if getGameCamera().rightmost_x > -999:
     # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
@@ -389,9 +389,12 @@ func tryDieToOffscreenCamera(_delta):
     global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
     global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+      if not has_landed_since_recovering:
       #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-      # global.memory["hp"] = 0
-      # tryDieToEnemy(delta, true, true, true)
+        global.memory["hp"] = 0
+        tryDieToEnemy(delta, true, true, true)
+        has_landed_since_recovering = true
+        return
       returning_to_save_point = 1
       returning_recover_time = 0
       returnSound.play()
@@ -400,6 +403,7 @@ func tryDieToOffscreenCamera(_delta):
       aniPlayer.stop()
       aniPlayer.clear_queue()
       aniPlayer.play("returning")
+      has_landed_since_recovering = false
       pauseAnimation = true
       physics_state = PhysicsState.GLITCH_RECOVERY
       if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
@@ -631,7 +635,10 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   else:
     hurtSound_pitch_scale = rand_range(0.8, 1.5)
 
-  if randi() % 3 == 0:
+  if should_immediately_die:
+    hurt3Sound.pitch_scale = hurtSound_pitch_scale
+    hurt3Sound.play()
+  elif randi() % 3 == 0:
     hurt2Sound.pitch_scale = hurtSound_pitch_scale
     hurt2Sound.play()
   else:
@@ -1030,9 +1037,11 @@ func processPoisonWaterLogic(delta):
     musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
     reversePoisonWaterSound.stop()
     
+var has_landed_since_recovering = false
 # @override
 func landed():
   .landed()
+  has_landed_since_recovering = true
   has_broom_flown = not global.memory["broom"]
   if has_broom_flown:
     has_landed_since_last_flight = true

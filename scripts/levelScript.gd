@@ -31,8 +31,6 @@ export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
-export var how_much_mp = 5
-export var how_much_hp = 1
 
 export var display_title = "???"
 export var doesnt_have_broom = false

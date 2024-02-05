@@ -60,6 +60,8 @@ var glitch_switch_time_limit = 99
 
 var evolution_timer = 0
 export var evolution_time_limit = 15
+export var kill_invis = false
+export var kill_immediately = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

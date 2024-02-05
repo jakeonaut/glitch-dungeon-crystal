@@ -308,7 +308,7 @@ texture = ExtResource( 22 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 10, 0 )
-path = "res://levels/EndlessFantasy/gd1/DebugTownLilypad.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/Corrupted0_0.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7, 4, 0 )
