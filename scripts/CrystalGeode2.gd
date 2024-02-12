@@ -66,29 +66,6 @@ func _process(delta):
         rot_amount *= 2
     npc.rotation_degrees.y -= (delta * rot_amount)
 
-var opacity = 0.8
-var stop_animation_timer = 0
-var stop_animation_time_limit = 20
-func spinTheFroggies(delta):
-    # TODO(jaketrower): start chanting and you all speed upward and teleport back to hub world...
-    if tadpole_index < num_tadpoles:
-        tadpole_spin_start_timer += (delta*11)
-        if tadpole_spin_start_timer >= tadpole_spin_start_time_limit:
-            tadpole_spin_start_timer = 0
-            var tadpole = tadpoles[tadpole_index]
-            tadpole.startSpinning(tadpole_index, num_tadpoles, level.player)
-            tadpole.can_be_smacked = false
-            tadpole_index += 1
-    elif global.hasGottenLevelGeode and level.gameCamera.am_i_zooming:
-        var should_stop_animation = true
-        for tadpole in tadpoles:
-            if not tadpole.is_evolved:
-                should_stop_animation = false
-        if should_stop_animation:
-            stop_animation_timer += (delta*11)
-            if stop_animation_timer >= stop_animation_time_limit:
-                stopAnimation()
-
 func stopAnimation():
     can_do_my_power = false
     global.hasLevelGeodeBeenSmacked = false
@@ -105,10 +82,12 @@ func isActive():
     return visible and not has_been_smacked
 
 func speakToMe():
-    if global.memory["clean_crystals"] == 1:
-        level.player.sayThis("you purified a crystal.\npleasant, somehow.")
-    else:
-        level.player.sayThis("wow, congrats, you purified a crystal!")
+    global.hasGottenLevelGeode = true
+    global.hasLevelGeodeBeenSmacked = true
+    # if global.memory["clean_crystals"] == 1:
+    #     level.player.sayThis("you purified a crystal.\npleasant, somehow.")
+    # else:
+    #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
 func activate(_is_player):
     # if not global.memory["broom"]:
@@ -154,16 +133,17 @@ func activate(_is_player):
     musicPlayer.playTreasureJingle(-80)
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
+    level.saveTheGame()
 
 func freeUpPlayer():
-    var interactor = global.activeInteractor
-    global.activeInteractor = null
-    level.player.getItemFailsafe()
-    global.activeInteractor = interactor
+    # var interactor = global.activeInteractor
+    # global.activeInteractor = null
+    # level.player.getItemFailsafe()
+    # global.activeInteractor = interactor
 
-    if quietSavePoint:
-        quietSavePoint.passiveActivate(0, true)
-    level.saveTheGame()
+    # if quietSavePoint:
+    #     quietSavePoint.passiveActivate(0, true)
+    pass
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:

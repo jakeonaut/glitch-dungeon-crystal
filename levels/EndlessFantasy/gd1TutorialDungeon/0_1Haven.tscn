@@ -1513,7 +1513,6 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 33 )
 show_crt_effect = true
 tileset_type = 2
-how_much_mp = 10
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -1957,7 +1956,6 @@ shape = SubResource( 201 )
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, -15.8151, 0 )
 path = "res://levels/EndlessFantasy/gd1/DebugTownSacredDoorsHubWorld.tscn"
-can_change_debugDoor_path = false
 
 [node name="InteractionAreaEvent" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4, 0, 0 )

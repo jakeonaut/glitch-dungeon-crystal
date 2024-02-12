@@ -121,10 +121,13 @@ func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
     if path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
-        tryToPlay(grannyPlayer)
-        changeSongPitch(0.9)
-        default_song_pitch = 0.9
-        return
+        if global.memory["clean_crystals"] > 0:
+            tryToPlay(dungeonThemePlayer)
+        else:
+            tryToPlay(grannyPlayer)
+            changeSongPitch(0.9)
+            default_song_pitch = 0.9
+            return
     elif path.find("BossArenaReal") > 0:
         tryToPlay(bossThemePlayer)
     elif path.find("Haven") > 0:
@@ -134,16 +137,12 @@ func conductFromScenePath(path):
         changeSongPitch(0.63)
         default_song_pitch = 0.63
         return
-    elif path.find("EndOfDemo") > 0:
-        tryToPlay(grannyPlayer)
     elif path.find("RestZone") > 0:
         tryToPlay(restZonePlayer)
     elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
-    elif path.find("Lily") > 0 or path.find("NullificationPurgatory") > 0 or path.find("Debug") > 0:
-        tryToPlay(dungeonThemePlayer)
     elif path.find("Casino") > 0 or path.find("Medievel") > 0 or path.find("Piranesi") > 0 or path.find("Grimoire") > 0:
         tryToPlay(casinoThemePlayer)
     elif path.find("Suburb") > 0:
@@ -156,7 +155,7 @@ func conductFromScenePath(path):
         tryToPlay(poisonThemePlayer)
     elif path.find("Swamp") > 0 or path.find("Town") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
-    elif path.find("MainMenu") > 0:
+    elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
         tryToPlay(dungeonThemePlayer2)
