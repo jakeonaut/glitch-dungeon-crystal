@@ -458,7 +458,7 @@ texture = SubResource( 47 )
 [node name="GlitchSprite" parent="UILayer" index="9"]
 scale = Vector2( 0.1, 0.1 )
 
-[node name="LevelTitle" parent="UILayer" index="15"]
+[node name="LevelTitle" parent="UILayer" index="16"]
 visible = true
 
 [node name="ColorRect" parent="UILayer/LevelTitle" index="0"]
@@ -466,14 +466,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SavingTextLabel" parent="UILayer" index="18"]
+[node name="SavingTextLabel" parent="UILayer" index="19"]
 margin_left = 260.0
 margin_top = 453.0
 margin_right = 527.0
 bbcode_text = "[wave] press enter to begin[/wave]"
 text = " press enter to begin"
 
-[node name="SpellMessageTextLabel" parent="UILayer" index="20"]
+[node name="SpellMessageTextLabel" parent="UILayer" index="21"]
 visible = true
 visible_characters = 0
 percent_visible = 0.0
