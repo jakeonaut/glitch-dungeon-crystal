@@ -16,7 +16,9 @@ func activateScript():
     level.player.getABroom()
     level.player.textBox.hideTextbox()
     if level.getLevelName().find("000PastoralScene") > 0:
-        level.player.textBox.dialogStartSound.play()
+        # level.player.textBox.dialogStartSound.play()
+        var grannyNPC = level.get_node("PastoralGrannyNPC")
+        grannyNPC.activate(true)
         
 
     broom.queue_free()

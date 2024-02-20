@@ -9,7 +9,7 @@ func isActive():
   return true
 
 var has_activated = false
-onready var grandmaNpc = get_node("../NPC6")
+onready var grandmaNpc = get_node("../PastoralGrannyNPC")
 func passiveActivate(_delta, _is_player):
   if global.memory.has("spellbookPage"):
     has_activated = true

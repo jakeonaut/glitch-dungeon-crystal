@@ -1033,7 +1033,7 @@ shape = SubResource( 27 )
 [node name="InteractPrompt" parent="Viewport/level/NPC2" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
-[node name="NPC6" parent="Viewport/level" instance=ExtResource( 22 )]
+[node name="PastoralGrannyNPC" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 6.83472, 0 )
 grav = 0
 bbText = "•this dust just showed up!
@@ -1043,10 +1043,10 @@ is_really_important = true
 can_camera_zoom = false
 is_a_body = false
 
-[node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/PastoralGrannyNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox/Text" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1054,26 +1054,26 @@ max_value = 66.0
 step = 1.0
 page = 128.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox/Text" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogStartSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="6"]
 stream = ExtResource( 32 )
 volume_db = -15.0
 script = ExtResource( 33 )
 
-[node name="DialogSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 32 )
 pitch_scale = 0.9
 
-[node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
+[node name="Sprite3D" parent="Viewport/level/PastoralGrannyNPC" index="3"]
 material_override = SubResource( 71 )
 frame = 0
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC6" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/PastoralGrannyNPC" index="4"]
 anims/default = SubResource( 54 )
 anims/fall = SubResource( 55 )
 anims/flickerOn = SubResource( 56 )
@@ -1081,10 +1081,10 @@ anims/jump = SubResource( 57 )
 anims/land = SubResource( 58 )
 anims/stand = SubResource( 59 )
 
-[node name="CollisionShape" parent="Viewport/level/NPC6/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/PastoralGrannyNPC/FallthroughSolid" index="0"]
 shape = SubResource( 27 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC6" index="6"]
+[node name="InteractPrompt" parent="Viewport/level/PastoralGrannyNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 22 )]
@@ -1383,8 +1383,8 @@ flip_v = true
 [editable path="Viewport/level/Player/TextContainer"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
-[editable path="Viewport/level/NPC6"]
-[editable path="Viewport/level/NPC6/NPC TextBox"]
+[editable path="Viewport/level/PastoralGrannyNPC"]
+[editable path="Viewport/level/PastoralGrannyNPC/NPC TextBox"]
 [editable path="Viewport/level/NPC5"]
 [editable path="Viewport/level/NPC5/NPC TextBox"]
 [editable path="Viewport/level/NPC7"]
