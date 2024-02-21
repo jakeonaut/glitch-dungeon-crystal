@@ -328,10 +328,10 @@ func tryClearFallthroughCollisionSolid():
 func processLand():
   landed()
   if (getGameCamera().rightmost_x == -999 or not (
-    # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-    global_transform.origin.x > getGameCamera().rightmost_x - 2 or \
-    global_transform.origin.x < getGameCamera().leftmost_x + 2 or \
-    global_transform.origin.y < getGameCamera().botmost_y + 2)) and not global.isAMoleDigging \
+    global_transform.origin.y > getGameCamera().topmost_y - 1 or \
+    global_transform.origin.x > getGameCamera().rightmost_x - 1 or \
+    global_transform.origin.x < getGameCamera().leftmost_x + 1 or \
+    global_transform.origin.y < getGameCamera().botmost_y + 1)) and not global.isAMoleDigging \
     and not grav < 0:
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true

@@ -190,7 +190,7 @@ shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 48 )
 
 [sub_resource type="ShaderMaterial" id=53]
 shader = ExtResource( 4 )

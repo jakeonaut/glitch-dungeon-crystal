@@ -40,6 +40,7 @@ func getPlayer():
   return player
 
 var original_target_palette = null
+var has_set_palette = false
 func _ready():
   set_process(true)
   original_position = mySprite.global_transform.origin
@@ -50,11 +51,12 @@ func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   obeliskSprite.material_override = obeliskSprite.material_override.duplicate()
   original_target_palette = obeliskSprite.material_override.get_shader_param("target_palette")
+  has_set_palette = true
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
-  if is_active and not shouldIBeActive() and not is_touching_player:
+  if has_set_palette and is_active and not shouldIBeActive() and not is_touching_player:
     is_active = false
     mySprite.visible = false
     obeliskSprite.material_override.set_shader_param("target_palette", global.grey_palette)

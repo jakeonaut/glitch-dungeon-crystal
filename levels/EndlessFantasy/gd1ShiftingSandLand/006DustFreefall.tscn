@@ -580,7 +580,7 @@ is_vertical = true
 visible = false
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 1 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 15 )

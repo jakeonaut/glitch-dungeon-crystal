@@ -319,7 +319,7 @@ func processHiscoreRenderLogic(delta):
       crystalCubeHiscoreLabel.text = "gems: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
+        hiscoreCounter = hiscoreSource
         # totalHiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
@@ -329,7 +329,7 @@ func processHiscoreRenderLogic(delta):
       deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
-        hiscoreCounter += 1
+        hiscoreCounter = hiscoreSource
         # totalHiscoreCounter += 1
       else:
         hiscoreDisplayIndex += 1
