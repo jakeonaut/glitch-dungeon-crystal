@@ -39,8 +39,6 @@ script = ExtResource( 5 )
 show_crt_effect = true
 tileset_type = 2
 has_spellbook_page = true
-how_much_mp = 15
-how_much_hp = 2
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 

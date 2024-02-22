@@ -253,7 +253,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -6, 12.
 grav_direction = -1
 
 [node name="Streetlight4" parent="Viewport/level" instance=ExtResource( 2 )]
-transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 9, 1.38558, 0 )
+transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 10, 1.38558, 0 )
 
 [node name="Streetlight3" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, -1, 10.3856, 0 )

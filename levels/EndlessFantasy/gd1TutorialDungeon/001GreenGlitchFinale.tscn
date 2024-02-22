@@ -93,7 +93,6 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 17 )
 show_crt_effect = true
 starting_glitch_type = 2
-how_much_mp = 0
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 9 )]
 

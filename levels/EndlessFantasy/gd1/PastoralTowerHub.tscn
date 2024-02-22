@@ -1013,6 +1013,7 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 3 )
 show_crt_effect = true
 tileset_type = 2
+has_spellbook_page = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 14 )]
 

@@ -32,9 +32,9 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=32]
 
-[sub_resource type="BoxShape" id=50]
+[sub_resource type="BoxShape" id=53]
 resource_local_to_scene = true
-extents = Vector3( 4, 1, 1 )
+extents = Vector3( 8, 2, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -646,6 +646,9 @@ viewport_path = NodePath("Viewport")
 viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
+__meta__ = {
+"_edit_horizontal_guides_": [ -122.0 ]
+}
 
 [node name="Viewport" parent="." instance=ExtResource( 19 )]
 
@@ -744,7 +747,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58419, 9.7, 1 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
-shape = SubResource( 50 )
+shape = SubResource( 53 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )

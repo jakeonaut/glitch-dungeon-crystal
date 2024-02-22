@@ -120,6 +120,7 @@ func _process(delta):
 
   if not global.pauseGame and not global.pauseMoveInput:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
+      uiLayer.quitGameTimer = 0
       global.isPauseMenuOpen = true
       global.pauseGame = true
       player.pauseSound.play()
@@ -128,6 +129,7 @@ func _process(delta):
     if global.is_reading_input:
       player.noBroomSound.play()
     else:
+      uiLayer.quitGameTimer = 0
       global.isPauseMenuOpen = false
       global.pauseGame = false
       player.unpauseSound.play()

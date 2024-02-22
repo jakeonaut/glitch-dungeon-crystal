@@ -520,18 +520,16 @@ func justPressedDown():
 func pressingDown():
   return false
 
-var running_timer = 0
-var running_time_limit = 15
-func canRun():
-  return false
-
 func canSwim():
   return true
+
+func canRun():
+  return false
 
 func pressingRun():
   if not canRun():
     return false
-  return num_horizontal_input_presses >= 2 or running_timer > running_time_limit
+  return num_horizontal_input_presses >= 2
 
 func startRun():
   if not canRun():
@@ -772,31 +770,21 @@ func getWalkSpeed(_delta):
     return walk_speed + run_add
 
 const PROJECTION_ORTHOGONAL = 1
+var was_running = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
+  if pressingRun() and not was_running:
+    startRun()
+  was_running = pressingRun()
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
-  if is_pressing_horizontal_input:
-    if running_timer < running_time_limit:
-      if on_ground:
-        running_timer += (delta*22)
-        if running_timer >= running_time_limit and num_horizontal_input_presses < 2:
-          startRun()
-      else:
-        running_timer = 0
-  elif not is_pressing_horizontal_input:
-    running_timer = 0
 
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
   if is_pressing_opposite_horizontal_input:
     num_horizontal_input_presses = 1
-    running_timer = 0
   elif is_pressing_horizontal_input and not was_pressing_horizontal_input and on_ground:
     num_horizontal_input_presses += 1
-    if num_horizontal_input_presses == 2 and running_timer < running_time_limit:
-      startRun()
-
 
   # Forward as "seen" by the camera (OpenGL convention)
   var view_forward = -getGameCamera().get_transform().basis.z
@@ -1211,7 +1199,6 @@ func collideWithWall(local_lv):
         aniPlayer.queue("stand")
   dir = Vector3(0, 0, 0)
   num_horizontal_input_presses = 0
-  running_timer = 0
 
 var cheating_horizontal_offset = 0
 func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):

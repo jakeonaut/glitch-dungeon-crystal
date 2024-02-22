@@ -90,9 +90,9 @@ func speakToMe():
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
 func activate(_is_player):
-    # if not global.memory["broom"]:
-    #     if not notGetHitSound.is_playing(): notGetHitSound.play()
-    #     return
+    if not global.memory["broom"]:
+        if not notGetHitSound.is_playing(): notGetHitSound.play()
+        return
 
     var children = self.get_children()
     for child in children:

@@ -1558,7 +1558,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299999, 13, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299999, 9, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
 pitch_scale = 1.1

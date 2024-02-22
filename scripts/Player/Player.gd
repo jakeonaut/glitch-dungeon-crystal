@@ -196,7 +196,12 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
+  if not canRun():
+    return
+    
   if nesting_doll_state == global.NestingDoll.BABY:
+    return true
+  if Input.is_action_pressed("run_button"):
     return true
   return .pressingRun()
 

@@ -446,9 +446,6 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
 
-[node name="MiniCrystalCubeRect" parent="UILayer" index="8"]
-visible = false
-
 [node name="MeshInstance" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 56 )
 

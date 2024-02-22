@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -9,14 +9,13 @@
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=14]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=16]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Broomerang.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -32,8 +31,6 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 1 )
 show_dither_effect = true
 tileset_type = 2
-how_much_mp = 15
-how_much_hp = 2
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -115,14 +112,14 @@ is_locked = true
 path = "res://levels/DebugWaterMinimumRoom.tscn"
 num_keys_unlock = 1
 
-[node name="Broomerang" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 0 )
-
-[node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 12, 0 )
-
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 16 )]
 

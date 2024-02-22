@@ -243,21 +243,43 @@ onready var quitGameRect = get_node("QuitGameRect")
 onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")
 var quitGameTimer = 0
 var quitGameTimeLimit = 20
+var canHoldEscape = true
 func processQuitGameRenderLogic(delta):
-  if Input.is_action_pressed("ui_cancel"):
+  if global.is_reading_input and Input.is_action_just_pressed("ui_cancel"):
+    player.noBroomSound.play()
+    return
+  if Input.is_action_pressed("ui_cancel") and canHoldEscape:
     quitGameRect.visible = true
     quitGameTimer += (delta*11)
-    if quitGameTimer < 5:
-      quitGameText.text = "hold ESC to quit: ... 3"
-    elif quitGameTimer < 10:
-      quitGameText.text = "hold ESC to quit: ... 3 ... 2"
-    elif quitGameTimer < 15:
-      quitGameText.text = "hold ESC to quit: ... 3 ... 2 ... 1!"
-    if quitGameTimer >= quitGameTimeLimit:
-      level.get_tree().quit()
+    if global.isPauseMenuOpen:
+      if quitGameTimer < 5:
+        quitGameText.text = "hold ESC:reset bindings\n ... 3"
+      elif quitGameTimer < 10:
+        quitGameText.text = "hold ESC:reset bindings\n ... 3 ... 2"
+      elif quitGameTimer < 15:
+        quitGameText.text = "hold ESC:reset bindings\n ... 3 ... 2 ... 1!"
+      if quitGameTimer >= quitGameTimeLimit:
+        for i in range(controlsConfig.size()):
+          controlsConfig[i]["key_code"] = controlsConfig[i]["default_keyCode"]
+          setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
+        global.memory["controls_config"] = controlsConfig
+        level.saveTheGame()
+        canHoldEscape = false
+    else:
+      if quitGameTimer < 5:
+        quitGameText.text = "hold ESC to quit:\n ... 3"
+      elif quitGameTimer < 10:
+        quitGameText.text = "hold ESC to quit:\n ... 3 ... 2"
+      elif quitGameTimer < 15:
+        quitGameText.text = "hold ESC to quit:\n ... 3 ... 2 ... 1!"
+      if quitGameTimer >= quitGameTimeLimit:
+        canHoldEscape = false
+        level.get_tree().quit()
   else:
     quitGameRect.visible = false
     quitGameTimer = 0
+    if not Input.is_action_pressed("ui_cancel"):
+      canHoldEscape = true
 
 onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")
@@ -277,6 +299,7 @@ func processCutsceneRenderLogic(_delta):
     cinematicAniPlayer.play("endCutscene")
 
 
+onready var endOfLevel = get_node("EndOfLevel")
 onready var hiscoreRect = get_node("EndOfLevel/HiscoreRect")
 onready var congratsHiscoreLabel = get_node("EndOfLevel/CongratsHiscoreLabel")
 onready var crystalCubeHiscoreLabel = get_node("EndOfLevel/CrystalCubeHiscoreLabel")
@@ -293,6 +316,7 @@ var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
 func processHiscoreRenderLogic(delta):
   if not global.hasGottenLevelGeode:
+    endOfLevel.visible = false
     hiscoreRect.visible = false
     congratsHiscoreLabel.visible = false
     crystalCubeHiscoreLabel.visible = false
@@ -304,6 +328,7 @@ func processHiscoreRenderLogic(delta):
     pressEnterLabel.visible = false
     return
   # global.pauseMoveInput = true
+  endOfLevel.visible = true
   hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
   # congratsHiscoreLabel.text = "you purified a CRYSTAL"
@@ -445,12 +470,15 @@ func invisibleGlitch():
 func walkThroughWallsGlitch():
   glitch(global.white_palette)
 
-onready var rightSprite = get_node("PauseMenu/RightSprite")
-onready var rightSpriteAniPlayer = get_node("PauseMenu/RightSprite/AnimationPlayer")
-onready var rightTextLabel = get_node("PauseMenu/RightTextLabel")
 onready var leftSprite = get_node("PauseMenu/LeftSprite")
 onready var leftSpriteAniPlayer = get_node("PauseMenu/LeftSprite/AnimationPlayer")
 onready var leftTextLabel = get_node("PauseMenu/LeftTextLabel")
+onready var rightSprite = get_node("PauseMenu/RightSprite")
+onready var rightSpriteAniPlayer = get_node("PauseMenu/RightSprite/AnimationPlayer")
+onready var rightTextLabel = get_node("PauseMenu/RightTextLabel")
+onready var runSprite = get_node("PauseMenu/RunSprite")
+onready var runSpriteAniPlayer = get_node("PauseMenu/RunSprite/AnimationPlayer")
+onready var runTextLabel = get_node("PauseMenu/RunTextLabel")
 onready var downSprite = get_node("PauseMenu/DownSprite")
 onready var downSpriteAniPlayer = get_node("PauseMenu/DownSprite/AnimationPlayer")
 onready var downTextLabel = get_node("PauseMenu/DownTextLabel")
@@ -476,18 +504,28 @@ var controlsConfig = []
 func initializeControlsConfig():
   var newControlsConfig = [
     {
-      "input_action": "ui_right",
-      "label_str": "RIGHT",
-      "text_label": rightTextLabel,
-      "sprite": rightSprite,
-      "sprite_aniPlayer": rightSpriteAniPlayer,
-    },
-    {
       "input_action": "ui_left",
       "label_str": "LEFT",
       "text_label": leftTextLabel,
       "sprite": leftSprite,
       "sprite_aniPlayer": leftSpriteAniPlayer,
+      "default_keyCode": 16777231, 
+    },
+    {
+      "input_action": "ui_right",
+      "label_str": "RIGHT",
+      "text_label": rightTextLabel,
+      "sprite": rightSprite,
+      "sprite_aniPlayer": rightSpriteAniPlayer,
+      "default_keyCode": 16777233, 
+    },
+    {
+      "input_action": "run_button",
+      "label_str": "RUN",
+      "text_label": runTextLabel,
+      "sprite": runSprite,
+      "sprite_aniPlayer": runSpriteAniPlayer,
+      "default_keyCode": 16777237, 
     },
     {
       "input_action": "ui_down",
@@ -495,6 +533,7 @@ func initializeControlsConfig():
       "text_label": downTextLabel,
       "sprite": downSprite,
       "sprite_aniPlayer": downSpriteAniPlayer,
+      "default_keyCode": 16777234, 
     },
     {
       "input_action": "ui_up",
@@ -502,6 +541,7 @@ func initializeControlsConfig():
       "text_label": upTextLabel,
       "sprite": upSprite,
       "sprite_aniPlayer": upSpriteAniPlayer,
+      "default_keyCode": 16777232, 
     },
     {
       "input_action": "jump_button",
@@ -509,6 +549,7 @@ func initializeControlsConfig():
       "text_label": jumpTextLabel,
       "sprite": jumpSprite,
       "sprite_aniPlayer": jumpSpriteAniPlayer,
+      "default_keyCode": 90, 
     },
     {
       "input_action": "sub_action_button",
@@ -516,6 +557,7 @@ func initializeControlsConfig():
       "text_label": sweepTextLabel,
       "sprite": sweepSprite,
       "sprite_aniPlayer": sweepSpriteAniPlayer,
+      "default_keyCode": 88, 
     },
     {
       "input_action": "alt_action_button",
@@ -523,6 +565,7 @@ func initializeControlsConfig():
       "text_label": castTextLabel,
       "sprite": castSprite,
       "sprite_aniPlayer": castSpriteAniPlayer,
+      "default_keyCode": 32, 
     },
   ]
   if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
@@ -530,11 +573,11 @@ func initializeControlsConfig():
     for control_config in newControlsConfig:
       for remembered_config in rememberedControlsConfig:
         if remembered_config.input_action == control_config.input_action:
-          setKeyCode(control_config.input_action, remembered_config.key_code)
-          control_config["key_code"] = remembered_config.key_code
+          setKeyCode(control_config.input_action, remembered_config["key_code"])
+          control_config["key_code"] = remembered_config["key_code"]
           break
       # make sure its set to default if it was erased from memory
-      if not control_config.has("key_code") or control_config.key_code == null:
+      if not control_config.has("key_code") or control_config["key_code"] == null:
         control_config["key_code"] = getKeyCode(control_config.input_action)
     global.hasInitializedControlsConfig = true
   else:
@@ -572,7 +615,7 @@ func processControlsLogic(_delta):
     if global.is_reading_input:
       inputText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
     else:
-      inputText.bbcode_text = "press " + OS.get_scancode_string(controlsConfig[5].key_code) + " to change key"
+      inputText.bbcode_text = "press " + OS.get_scancode_string(controlsConfig[6].key_code) + " to change key\nhold ESC:reset bindings"
 
     if global.is_reading_input:
       if global.last_read_input != null:
@@ -592,7 +635,7 @@ func processControlsLogic(_delta):
       elif Input.is_action_just_pressed("ui_up"):
         control_index -= 1
         menuMoveSound.play()
-      if Input.is_action_just_pressed("sub_action_button"):
+      if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel"):
         global.is_reading_input = true
         global.last_read_input = null
         last_control_index = -1
