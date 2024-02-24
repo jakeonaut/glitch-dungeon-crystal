@@ -40,6 +40,9 @@ func _process(delta):
         reassembleSound.play()
         self.global_transform.origin = landing_position
         landing.global_transform.origin = lastPosition
+        var temp_rotation_degrees = mySprite.rotation_degrees.z
+        mySprite.rotation_degrees.z = landing.rotation_degrees.z
+        landing.rotation_degrees.z = temp_rotation_degrees
         landing_position = lastPosition
         has_teleported = true
     if teleport_timer >= teleport_time_limit2:

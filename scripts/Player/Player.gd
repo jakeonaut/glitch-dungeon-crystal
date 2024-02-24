@@ -222,6 +222,7 @@ func isWalkingIntoWall():
     return .isWalkingIntoWall() # super
 
 func sayThis(message):
+  print(message)
   textBox.text_final = message
   # textBox.tinify()
   textBox.interact()

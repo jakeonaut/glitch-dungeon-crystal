@@ -117,11 +117,14 @@ func _process(delta):
 
     
 func tryDieIfTooFarFromPlayer():
-    if is_static_in_level:
+    if is_static_in_level or was_projectile or projectile:
         return
         
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
     if distance >= 15:
+        returning = true
+
+    if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:
         returning = true
 
 func tryDieToOffscreenCamera():
@@ -174,6 +177,7 @@ func collectMe():
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
 
+# dedupe with SummonedBroom
 func canActivate(area):
   var areaParent = area.get_node("..")
   # sorry!
@@ -183,6 +187,7 @@ func canActivate(area):
               (smacked_npc.get_ref().textBox == global.activeInteractor and \
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
 
+# dedupe with SummonedBroom
 func hitStuff(_delta):
     if not visible or not projectile or should_die_on_land: return
         
@@ -200,12 +205,7 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-            if false: # global.getLevelZoneThing("crystal_geode"):
-                if area.get_node("..").ouchies(global_transform.origin):
-                    my_broom_owner.getSmacked()
-                    my_broom_owner.has_sweeped_glitch = true
-                    has_hit_something = true
-            elif area.get_node("..").notOuchies(global_transform.origin):
+            if area.get_node("..").notOuchies(global_transform.origin):
                 my_broom_owner.getSmacked()
                 has_hit_something = true
             # # TODO kill glitches or "free" them like glitch slug...

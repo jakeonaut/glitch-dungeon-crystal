@@ -42,6 +42,7 @@ func _process(delta):
   if not visible and not broomSound.is_playing():
     queue_free()
     
+# dedupe with FallenBroom
 func canActivate(area):
   var areaParent = area.get_node("..")
   # sorry!
@@ -51,6 +52,7 @@ func canActivate(area):
               (smacked_npc.get_ref().textBox == global.activeInteractor and \
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
 
+# dedupe with FallenBroom
 func hitStuff(_delta):
   if not visible: return
   
@@ -64,17 +66,14 @@ func hitStuff(_delta):
         my_broom_owner.has_sweeped_glitch = true
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         my_broom_owner.getSmacked()
-        is_active = false
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.getSmacked()
           my_broom_owner.has_sweeped_glitch = true
-          is_active = false
       else:
         if area.get_node("..").notOuchies(global_transform.origin):
           my_broom_owner.getSmacked()
-          is_active = false
       
       # # TODO kill glitches or "free" them like glitch slug...
       
@@ -85,10 +84,8 @@ func hitStuff(_delta):
         if areaParent.has_method("imAnNpc") and smackResult == null:
           smacked_npc = weakref(areaParent)
           have_i_smacked_an_npc = true
-          is_active = false
         if not area.is_in_group("tadpole") and smackResult == null:
           my_broom_owner.getSmacked()
-          is_active = false
     elif canActivate(area) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)

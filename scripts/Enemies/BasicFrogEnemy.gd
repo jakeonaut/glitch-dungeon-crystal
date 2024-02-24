@@ -252,6 +252,13 @@ func getSmacked(broom_origin):
   if notDieSound and not notDieSound.is_playing():
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
+  
+  # stop the lick
+  if is_licker:
+    tongueController.restorePlayer()
+    tongueAniPlayer.stop()
+    tongueAniPlayer.clear_queue()
+    tongueAniPlayer.play("RESET")
 
 func fallthroughCollisionActivate(friend):
   if not friend.on_ground:

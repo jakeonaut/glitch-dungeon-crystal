@@ -142,6 +142,9 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
+player_message = "hi there. this is the crone speaking.
+the fish and frogs here are slippery
+find the crystal!"
 show_crt_effect = true
 starting_glitch_type = 2
 tileset_type = 2
@@ -444,6 +447,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.450447, -12.0512, 5 )
 [node name="SplashSprite4" parent="Viewport/level/Waterfall" index="33"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.558517, -12.0512, 5 )
 
+[node name="Waterfall2" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11, -0.165466 )
+
+[node name="SplashSprite" parent="Viewport/level/Waterfall2" index="30"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58499, -10.4259, 5 )
+
+[node name="SplashSprite2" parent="Viewport/level/Waterfall2" index="31"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59395, -10.4259, 5 )
+
+[node name="SplashSprite3" parent="Viewport/level/Waterfall2" index="32"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.450447, -10.4259, 5 )
+
+[node name="SplashSprite4" parent="Viewport/level/Waterfall2" index="33"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.558517, -10.4259, 5 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -479,5 +497,7 @@ flip_v = true
 [editable path="Viewport/level/FishingRod"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/AreaSound"]
+[editable path="Viewport/level/Waterfall2"]
+[editable path="Viewport/level/Waterfall2/AreaSound"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
