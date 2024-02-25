@@ -9,6 +9,7 @@ onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var grannyPlayer = get_node("GrannyPlayer")
+onready var longAdventureThemePlayer = get_node("LongAdventureThemePlayer")
 onready var priestessPlayer = get_node("PriestessThemePlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
 onready var dungeonThemePlayer2 = get_node("DungeonThemePlayer2")
@@ -85,6 +86,7 @@ func _on_TweenOut_tween_completed(object, _key):
     object.pitch_scale = 1.0
 
 func stopAll():
+    fade_out(longAdventureThemePlayer)
     fade_out(windPlayer)
     fade_out(restZonePlayer)
     fade_out(grannyPlayer)
@@ -105,6 +107,8 @@ func stopAll():
     fade_out(townThemePlayer)
     fade_out(bossThemePlayer)
     fade_out(crystalThemePlayer)
+    if currentlyPlayingTheme != null and currentlyPlayingTheme.is_playing():
+        fade_out(currentlyPlayingTheme)
     currentlyPlayingTheme = null
 
 var did_play_treasure_jingle = false
@@ -120,9 +124,11 @@ func playTreasureJingle(volume_db):
 func conductFromScenePath(path):
     # return # i don't want to listen to music for a bit
     changeSongPitch(1.0)
-    if path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0:
-        if global.memory["clean_crystals"] > 0:
-            tryToPlay(dungeonThemePlayer)
+    if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
+        tryToPlay(restZonePlayer)
+    elif path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0 or path.find("Corrupted0_0") > 0:
+        if global.memory["clean_crystals"] > 0 or global.memory.has("spellbookPage"):
+            tryToPlay(longAdventureThemePlayer)
         else:
             tryToPlay(grannyPlayer)
             changeSongPitch(0.9)
@@ -137,8 +143,6 @@ func conductFromScenePath(path):
         changeSongPitch(0.63)
         default_song_pitch = 0.63
         return
-    elif path.find("RestZone") > 0:
-        tryToPlay(restZonePlayer)
     elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("001CozyHome") > 0:
@@ -153,7 +157,7 @@ func conductFromScenePath(path):
         tryToPlay(exploreThemePlayer)
     elif path.find("Poison") > 0 or path.find("Toxic") > 0:
         tryToPlay(poisonThemePlayer)
-    elif path.find("Swamp") > 0 or path.find("Town") > 0 or path.find("Village") > 0:
+    elif path.find("Swamp") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)

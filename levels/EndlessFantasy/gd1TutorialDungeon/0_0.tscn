@@ -1511,8 +1511,8 @@ bbText = "•Helloe, welcome to
 DUNGEON
 •press X to talk
 •ouch!!! well done.
-•this place was once a [color=blue]temple[/color], 
-sealed away and corrupted by time"
+•there is magic power here,
+remnants of a goddess.."
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true

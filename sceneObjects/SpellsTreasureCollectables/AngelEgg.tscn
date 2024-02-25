@@ -124,8 +124,8 @@ shader_param/target_palette = ExtResource( 5 )
 
 [node name="AngelEgg" type="Spatial"]
 script = ExtResource( 12 )
+bbText = "what the hell is this?"
 can_camera_zoom = false
-stop_all_music = false
 display_textbox = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

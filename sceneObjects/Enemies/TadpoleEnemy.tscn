@@ -13,7 +13,7 @@
 [ext_resource path="res://scripts/Enemies/Tadpole.gd" type="Script" id=11]
 [ext_resource path="res://assets/sprites/Tadpole_smaller.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/lemoncrush.wav" type="AudioStream" id=15]
 [ext_resource path="res://shaders/realGlitch.tres" type="Material" id=16]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=17]
@@ -128,8 +128,7 @@ pitch_scale = 0.5
 
 [node name="HatchSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -20.0
-pitch_scale = 1.5
+volume_db = -10.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )

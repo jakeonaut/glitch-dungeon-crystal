@@ -443,7 +443,8 @@ shader_param/target_palette = ExtResource( 4 )
 script = ExtResource( 12 )
 grav = 0
 bbText = "•SOUL OF FISH
-now you can swim"
+now you can swim
+just keep jumping"
 portrait = ExtResource( 16 )
 is_important = true
 can_activate = false

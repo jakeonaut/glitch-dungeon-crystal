@@ -15,6 +15,7 @@ func activateScript():
     global.activeInteractor = null
     egg.queue_free()
     level.player.aniPlayer.play("stand")
+    level.player.sayThis("what the hell is this?", 3.0)
 
 func isActive():
     return true

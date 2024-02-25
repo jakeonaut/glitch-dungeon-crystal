@@ -234,7 +234,6 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
 tileset_type = 2
-how_much_mp = 4
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 9 )]
 

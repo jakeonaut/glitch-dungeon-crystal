@@ -26,7 +26,7 @@ func activateScript():
         global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 func doActivateScriptStuff():
-    NPC3.textBoxContainer.bbText = "• truthfully, i have nothing\nmore to say"
+    NPC3.textBoxContainer.bbText = "•i want her power for myself.\n• truthfully, i have nothing\nmore to say"
     NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self.name, false)
     NPC3.can_camera_zoom = false

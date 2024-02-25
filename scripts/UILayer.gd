@@ -307,6 +307,8 @@ onready var glitchTilesHiscoreLabel = get_node("EndOfLevel/GlitchTilesHiscoreLab
 onready var deathsHiscoreLabel = get_node("EndOfLevel/DeathsHiscoreLabel")
 onready var angelHiscoreLabel = get_node("EndOfLevel/AngelHiscoreLabel")
 onready var jumpsHiscoreLabel = get_node("EndOfLevel/JumpsHiscoreLabel")
+onready var loveHiscoreLabel = get_node("EndOfLevel/LoveHiscoreLabel")
+
 onready var totalHiscoreLabel = get_node("EndOfLevel/TotalHiscoreLabel")
 onready var pressEnterLabel = get_node("EndOfLevel/PressEnterLabel")
 var hiscoreDisplayIndex = 0
@@ -324,6 +326,7 @@ func processHiscoreRenderLogic(delta):
     angelHiscoreLabel.visible = false
     deathsHiscoreLabel.visible = false
     jumpsHiscoreLabel.visible = false
+    loveHiscoreLabel.visible = false
     totalHiscoreLabel.visible = false
     pressEnterLabel.visible = false
     return
@@ -379,8 +382,8 @@ func processHiscoreRenderLogic(delta):
       jumpsHiscoreLabel.text = "jumps: " + str(global.getLevelZoneThing("num_jumps"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 5:
-      jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = "love: " + str(global.getLevelZoneThing("love"))
+      loveHiscoreLabel.visible = true
+      loveHiscoreLabel.text = "love: " + str(global.getLevelZoneThing("love"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 6:
       pressEnterLabel.visible = not pressEnterLabel.visible

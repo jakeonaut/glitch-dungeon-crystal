@@ -1967,8 +1967,8 @@ spawned_object_path = ""
 [node name="FrogCroneNPC" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351, 0.0758991, 0 )
 bbText = "•your broom seems to have
-some [color=blue]hag magic[/color]
-•maybe you could purify this place"
+some [color=red]hag magic[/color]... maybe,
+•you could purify this place"
 is_really_important = true
 dont_recolor_me = true
 

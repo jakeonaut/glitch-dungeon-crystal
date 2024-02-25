@@ -15,7 +15,7 @@ func activateScript():
     aniPlayer.queue("stand")
     level.player.getABroom()
     level.player.textBox.hideTextbox()
-    if level.getLevelName().find("000PastoralScene") > 0:
+    if not global.memory.has("spellbookPage") and level.getLevelName().find("000PastoralScene") > 0 and level.has_node("PastoralGrannyNPC"):
         # level.player.textBox.dialogStartSound.play()
         var grannyNPC = level.get_node("PastoralGrannyNPC")
         grannyNPC.activate(true)

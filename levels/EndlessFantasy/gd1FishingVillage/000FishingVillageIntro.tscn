@@ -142,15 +142,12 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
-player_message = "hi there. this is the crone speaking.
-the fish and frogs here are slippery
-find the crystal!"
 show_crt_effect = true
 starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
 spellbook_spells = [ 1 ]
-display_title = "tadpole spawns "
+display_title = "fishing village"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 

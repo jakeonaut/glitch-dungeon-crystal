@@ -2389,7 +2389,6 @@ starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
 spellbook_spells = [ 1, 2 ]
-how_much_mp = 15
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 15 )]
 

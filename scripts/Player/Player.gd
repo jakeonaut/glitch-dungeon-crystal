@@ -221,11 +221,12 @@ func isWalkingIntoWall():
   else:
     return .isWalkingIntoWall() # super
 
-func sayThis(message):
-  print(message)
+func sayThis(message, time_to_clear = 3.0):
   textBox.text_final = message
-  # textBox.tinify()
   textBox.interact()
+  global.activeInteractor = textBox
+  yield(get_tree().create_timer(time_to_clear), "timeout")
+  textBox.hideTextbox()
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
