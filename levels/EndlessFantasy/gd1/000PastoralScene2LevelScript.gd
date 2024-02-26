@@ -21,7 +21,7 @@ func _process(_delta):
   
   if (global.memory.has("spellbookPage") or global.memory["clean_crystals"] > 0) and not has_updated:
     if door2 != null:
-      door2.path = "res://levels/EndlessFantasy/gd1/PastoralCorruptedCozyTunnel.tscn"
+      door2.path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
     if grannyNPC != null:
       grannyNPC.visible = false
       grannyNPC.is_active = false

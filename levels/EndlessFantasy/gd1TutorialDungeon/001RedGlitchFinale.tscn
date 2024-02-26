@@ -111,7 +111,6 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 15 )
 show_crt_effect = true
-how_much_mp = 0
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -243,7 +242,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2405, 9, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5.9, 0 )
 grav = 0
 bbText = "•[color=#ff0000]Air Walk[/color] spell:
 walk without 

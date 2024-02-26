@@ -214,8 +214,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48445, 0, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8, 1.27616, 0 )
 grav = 0
-bbText = "there was a [color=#00ff00]chicken[/color] here,
-but now there's not."
+bbText = "you can also hold [color=#00ff00]jump[/color] 
+button to float gracefully"
 can_camera_zoom = false
 is_a_body = false
 

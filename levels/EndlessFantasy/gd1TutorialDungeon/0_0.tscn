@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/backgrounds/dungeon_layer_0.png" type="Texture" id=32]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=34]
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -1462,6 +1463,7 @@ anchor_bottom = 1.0
 step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC9" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
 material_override = SubResource( 46 )
 frame = 28
 
@@ -1507,12 +1509,13 @@ spawned_object_path = ""
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.4, 0 )
 grav = 0
-bbText = "•Helloe, welcome to
-DUNGEON
-•press X to talk
-•ouch!!! well done.
-•there is magic power here,
-remnants of a goddess.."
+bbText = "•Helloe, welcome to DUNGEON
+•i've lived here with my magic
+for eons..
+
+•i am a caretaker of a CRYSTAL
+but age has made me weary.
+"
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true
@@ -1555,6 +1558,9 @@ anims/stand = SubResource( 40 )
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/FallthroughSolid" index="0"]
 shape = SubResource( 41 )
+
+[node name="NullificationArea" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0 )

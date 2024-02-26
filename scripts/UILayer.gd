@@ -145,7 +145,7 @@ func _process(delta):
 
   if global.isPauseMenuOpen:
     levelTitleRect.visible = false
-  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "DebugTown" in global.memory["roomPath"]):
+  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "TowerHub" in global.memory["roomPath"]):
     levelTitleRect.visible = true
     title_display_timer += (delta*22)
     if title_display_timer >= title_display_time_limit:

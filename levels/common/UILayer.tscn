@@ -1880,7 +1880,6 @@ hold ESC:reset bindings"
 scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]
-visible = false
 margin_left = 111.0
 margin_top = 428.0
 margin_right = 521.0

@@ -383,7 +383,9 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   if global.isEnteringRoom:
     return
 
-  if canPlayDoorSound:
+  if "LevelDoor" in self.id:
+    get_node("TeleportSound").play()
+  elif canPlayDoorSound:
     global.doorSound.play()
   elif is_passive and parter_door_id:
     warpSound.play()
@@ -399,10 +401,17 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     if getPlayer().summonedBroom:
       getPlayer().summonedBroom.visible = false
       getPlayer().broomStop()
-    getPlayer().aniPlayer.stop()
-    getPlayer().aniPlayer.clear_queue()
-    getPlayer().aniPlayer.play("enterDoor")
-    getPlayer().playBounce("land")
+    if "LevelDoor" in self.id:
+      getPlayer().aniPlayer.stop()
+      getPlayer().aniPlayer.clear_queue()
+      getPlayer().aniPlayer.play("teleport")
+      getPlayer().pauseAnimation = true
+      getPlayer().getSmacked()
+    else:
+      getPlayer().aniPlayer.stop()
+      getPlayer().aniPlayer.clear_queue()
+      getPlayer().aniPlayer.play("enterDoor")
+      getPlayer().playBounce("land")
   getPlayer().pauseSelf = true
 
   global.activeInteractor = null
@@ -437,7 +446,9 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   global.respawnVarTimerHack = 0
   
   global.memory["on_ground"] = true
-  if is_passive:
+  if "LevelDoor" in self.id:
+    transition.granny_teleport_to(self.path)
+  elif is_passive:
     global.memory["on_ground"] = getPlayer().on_ground
     global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
     if is_vertical:
