@@ -37,6 +37,7 @@ var is_fast_text = false
 
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
+onready var textPrompt = get_node("TextPrompt")
 var nextPrompt_wiggle_timer = 0
 var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
@@ -89,7 +90,7 @@ func setPosition():
   getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
-  self.rect_position.y = factor * target_pos.y - 75 - adjusted_tiny_y_pos
+  self.rect_position.y = factor * target_pos.y - 50 - adjusted_tiny_y_pos
 
 func setTextBoxPosition():
   if not is_tiny:
@@ -99,6 +100,7 @@ func setTextBoxPosition():
 var important_unpause_timer = 0
 var important_unpause_time_limit = 20
 func _process(delta):
+  textPrompt.visible = (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny 
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -139,6 +141,7 @@ func _process(delta):
       
     elif isWaitingForNextPrompt():
       nextPrompt.visible = not is_tiny and not floating_text
+
 
     if (not isWaitingForNextPrompt() and not isWaitingForEndPrompt()) or ui_should_continue:
       text_timer += (delta*22)
@@ -208,8 +211,10 @@ func wigglePrompt(delta, promptSprite):
   if nextPrompt_wiggle_timer >= nextPrompt_wiggle_time_limit:
     if nextPrompt_wiggled_up:
       promptSprite.transform.origin.y -= 5
+      textPrompt.margin_top -= 5
     else:
       promptSprite.transform.origin.y += 5
+      textPrompt.margin_top += 5
     nextPrompt_wiggled_up = not nextPrompt_wiggled_up
     nextPrompt_wiggle_timer = 0
     
@@ -226,6 +231,7 @@ func showTextbox():
   # if text_final.find("•") == -1 and not text_final == "":
   #   text_final = "•" + text_final
   textNode.visible_characters = 0
+
   textNode.bbcode_text = text_final
   tindex = -1
   stripped_text = global.strip_bbcode(textNode.bbcode_text)

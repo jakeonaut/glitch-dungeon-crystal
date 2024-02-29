@@ -505,6 +505,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
     return
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y
+  landing.global_transform.origin.z = 0
   getPlayer().target_last_grounded_y = landing.global_transform.origin.y
 
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)

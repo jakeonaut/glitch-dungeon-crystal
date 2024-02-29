@@ -19,4 +19,5 @@ func passiveActivate(_delta, _is_player):
   grandmaNpc.textBox.text_final = "•thank you dear.."
   grandmaNpc.textBox.tinify()
   grandmaNpc.textBox.showTextbox()
+  global.activeInteractor = grandmaNpc.textBox
   has_activated = true

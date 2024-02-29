@@ -541,7 +541,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 14 ]
+"values": [ 5 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -890,15 +890,6 @@ scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 script = ExtResource( 3 )
 
-[node name="Filters" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextBoxes" type="Control" parent="."]
-
 [node name="CinematicTopRect" type="ColorRect" parent="."]
 margin_right = 640.0
 grow_horizontal = 2
@@ -918,6 +909,12 @@ anims/RESET = SubResource( 32 )
 anims/endCutscene = SubResource( 33 )
 anims/startCutscene = SubResource( 34 )
 anims/startCutsceneImmediate = SubResource( 35 )
+
+[node name="TextBoxes" type="Control" parent="."]
+
+[node name="Filters" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="Inventory" type="Control" parent="."]
 visible = false
@@ -1467,7 +1464,6 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0.74902 )
 
 [node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
-visible = false
 margin_left = 222.5
 margin_top = 12.0
 margin_right = 428.5
@@ -1695,7 +1691,7 @@ texture = ExtResource( 24 )
 offset = Vector2( 0, -5 )
 hframes = 8
 vframes = 8
-frame = 14
+frame = 5
 __meta__ = {
 "_editor_description_": "3	"
 }
@@ -1880,6 +1876,7 @@ hold ESC:reset bindings"
 scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]
+visible = false
 margin_left = 111.0
 margin_top = 428.0
 margin_right = 521.0

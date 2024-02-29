@@ -4,6 +4,7 @@ extends "GameMover.gd"
 # otherwise, try to set the textBox, and textBox->portrait.texture, textBox->text.bbtext to the set variables
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
+export(String, MULTILINE) var smackedBbText = ""
 export(Texture) var portrait
 export var is_important = false # when dialogue is started, can't walk away until finished.
 export var is_really_important = false # touching it will start the dialogue
@@ -23,7 +24,7 @@ var smack_timer = 0
 var smack_time_limit = 10
 
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
-onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null
+onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPrompt") else null  # 835
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
@@ -81,8 +82,8 @@ func _ready():
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
 
   var my_memory = self.getMyStaticLevelZoneVar()
-  if not is_static_in_level or not my_memory: 
-    is_really_important = true
+  # if not is_static_in_level or not my_memory: 
+  #   is_really_important = true
   textBoxContainer.setVars()
 
   textBox.is_important = is_important
@@ -119,16 +120,7 @@ func _process(delta):
   if (floating_text or dont_recolor_me) and mySprite.is_in_group("sprite"):
     mySprite.remove_from_group("sprite")
 
-  # don't you love math
-  if is_active and interactPrompt != null and not floating_text and textBox.text_final != "":
-    interactPrompt.visible = smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer and (
-      (not textBox.is_really_important and not textBox.is_tiny) or textBox.has_been_shown) and (
-      global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and 
-        global.activeInteractor == textBox and textBox.nextPrompt.visible
-      )
-    )
-    if not interactPrompt.visible:
-      interactPrompt.restart()
+  tryShowInteractPrompt()
 
   if fallthroughSolid:
     if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):
@@ -146,6 +138,25 @@ func _process(delta):
         # material.set_shader_param("y_div", 2.3)
         material.set_shader_param("normal_offset", .02)
         mySprite.material_override = material
+
+func tryShowInteractPrompt():
+  if interactPrompt == null:
+    return
+
+  # don't you love math
+  if visible and is_active and not floating_text and textBox.text_final != "" and not textBox.visible:
+    interactPrompt.visible = true
+    if smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer:
+      interactPrompt.max_frames = 1
+      interactPrompt.updateBaseFrame(9, 26)
+    elif interactPrompt.max_frames == 1:
+      interactPrompt.max_frames = 4
+      interactPrompt.updateBaseFrame(9, 23)
+  else:
+    interactPrompt.visible = false
+
+    # if not interactPrompt.visible:
+    #   interactPrompt.restart()
 
 
 func getSmacked(_broom_origin):

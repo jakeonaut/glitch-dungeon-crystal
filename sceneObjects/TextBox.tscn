@@ -147,15 +147,32 @@ scroll_active = false
 
 [node name="NextPrompt" type="Sprite" parent="TextBox"]
 material = SubResource( 3 )
-position = Vector2( 440, 80 )
-scale = Vector2( 3.1958, 3.08572 )
+position = Vector2( 439.783, 103.343 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 9 )
 
 [node name="EndPrompt" type="Sprite" parent="TextBox"]
 material = SubResource( 3 )
-position = Vector2( 440, 80 )
-scale = Vector2( 3.1958, 3.08572 )
+position = Vector2( 439.783, 103.343 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 10 )
+
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox"]
+margin_left = 433.0
+margin_top = 86.0
+margin_right = 529.0
+margin_bottom = 122.0
+rect_pivot_offset = Vector2( -511, -189 )
+rect_clip_content = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
+bbcode_enabled = true
+bbcode_text = "C"
+tab_size = 2
+text = "C"
+scroll_active = false
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="TextBox"]
 volume_db = -15.0

@@ -225,6 +225,7 @@ func tryToRespawn():
   if found_door:
     # print(found_door)
     found_door.land(true, true)
+    global.saveMySpot(found_door.landing.global_transform.origin, self)
   elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
     player.global_transform.origin = player.spawn_origin
     global.saveMySpot(player.spawn_origin, self)

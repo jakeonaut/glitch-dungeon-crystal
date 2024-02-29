@@ -446,6 +446,11 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
 
+[node name="Filters" parent="UILayer" index="0"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MeshInstance" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 56 )
 
@@ -454,9 +459,6 @@ texture = SubResource( 47 )
 
 [node name="GlitchSprite" parent="UILayer" index="9"]
 scale = Vector2( 0.1, 0.1 )
-
-[node name="LevelTitle" parent="UILayer" index="16"]
-visible = true
 
 [node name="ColorRect" parent="UILayer/LevelTitle" index="0"]
 __meta__ = {

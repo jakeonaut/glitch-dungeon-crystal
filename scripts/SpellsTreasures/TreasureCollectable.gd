@@ -34,6 +34,11 @@ func _ready():
   is_important = true
   is_really_important = true
   # ._ready() implicit
+
+func tryShowInteractPrompt():
+  if interactPrompt == null:
+    return
+  interactPrompt.visible = false
   
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

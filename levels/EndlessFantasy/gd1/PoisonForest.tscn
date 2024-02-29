@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=36]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=37]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=38]
+[ext_resource path="res://sceneObjects/Enemies/Furbo.tscn" type="PackedScene" id=39]
 
 [sub_resource type="Animation" id=28]
 resource_name = "doorClose"
@@ -830,9 +831,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -1, -1 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 1, 0 )
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+[node name="Furbo" parent="Viewport/level" instance=ExtResource( 39 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0 )
+grav = 0
 
 [node name="Viewport2" parent="." instance=ExtResource( 35 )]
 

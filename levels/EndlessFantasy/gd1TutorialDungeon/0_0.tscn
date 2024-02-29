@@ -1110,7 +1110,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1994, -0.93609, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8006, 15.0639, 0 )
 
 [node name="TextContainer" parent="Viewport/level/Player" index="12"]
 bbText = "•i don't remember us 
@@ -1463,7 +1463,6 @@ anchor_bottom = 1.0
 step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC9" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
 material_override = SubResource( 46 )
 frame = 28
 
@@ -1513,7 +1512,7 @@ bbText = "•Helloe, welcome to DUNGEON
 •i've lived here with my magic
 for eons..
 
-•i am a caretaker of a CRYSTAL
+•i am caretaker of the CRYSTAL
 but age has made me weary.
 "
 is_really_important = true

@@ -295,15 +295,15 @@ func processPhysics(delta):
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
     if prev_glitch_form == global.GlitchForm.FLOOR and glitch_form != global.GlitchForm.FLOOR:
-      was_just_on_ground_timer = -4
+      was_just_on_ground_timer = -8
     if "jump" in aa:
       was_just_on_ground_timer = was_just_on_ground_time_limit
   was_touching_water = is_touching_water
 
   if was_just_on_ground_timer <= was_just_on_ground_time_limit:
     was_just_on_ground_timer += (delta*22)
-    if glitch_form == global.GlitchForm.FEATHER:
-      was_just_on_ground_timer += (delta*44)
+    if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
+      was_just_on_ground_timer += (delta*22)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
     horizontal_input_reset_timer += (delta*11)

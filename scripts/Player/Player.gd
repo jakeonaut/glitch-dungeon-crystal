@@ -95,6 +95,9 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
   if add_spell_to_grimoire and global.memory.has("spellbookPage"):
     if not global.memory["spellbookPage"].has(glitch):
       global.memory["spellbookPage"].push_back(glitch)
+      # TODO..
+      if global.memory["spellbookPage"].size() > 2:
+        global.memory["spellbookPage"].pop_front()
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
@@ -369,20 +372,20 @@ func processCastingLogic(_delta):
   if not global.memory.has("spellbookPage"):
     return
 
-  if Input.is_action_just_pressed("alt_action_button") or Input.is_action_just_pressed("right_button"):
+  if Input.is_action_just_pressed("alt_action_button"): #  or Input.is_action_just_pressed("right_button"):
     if global.memory["spellbookPage"].size() <= 1:
       noSpellSound.play()
     else:
       spellCastPauseIndex = 0
       applySpellbookGlitch()
       level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
-  elif Input.is_action_just_pressed("left_button"):
-    if global.memory["spellbookPage"].size() <= 1:
-      noSpellSound.play()
-    else:
-      spellCastPauseIndex = -2
-      applySpellbookGlitch()
-      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+  # elif Input.is_action_just_pressed("left_button"):
+  #   if global.memory["spellbookPage"].size() <= 1:
+  #     noSpellSound.play()
+  #   else:
+  #     spellCastPauseIndex = -2
+  #     applySpellbookGlitch()
+  #     level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
 
 func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)

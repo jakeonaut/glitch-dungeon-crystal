@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -24,7 +24,6 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=28]
@@ -304,9 +303,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7, 12, 0 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3, 9.5, 0 )
-
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.9, 0, 0 )

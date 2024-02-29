@@ -72,7 +72,7 @@ length = 0.1
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="ShaderMaterial" id=11]
+[sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 5 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -176,10 +176,9 @@ shape = SubResource( 10 )
 
 [node name="InteractPrompt" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 11 )
+material_override = SubResource( 19 )
 frame = 745
-frame_delay = 0.3
+frame_delay = 0.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

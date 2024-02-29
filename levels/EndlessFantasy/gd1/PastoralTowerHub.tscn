@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=2]
+[gd_scene load_steps=134 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=31]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=33]
+[ext_resource path="res://levels/EndlessFantasy/gd1/PastoralTowerHubCroneAbortSound.gd" type="Script" id=34]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=37]
 [ext_resource path="res://sceneObjects/LevelDoor.tscn" type="PackedScene" id=38]
@@ -1802,7 +1803,6 @@ bbText = "•well.. this tower just sprouted
 out from the ground..
 •and that old crone over there
 is saying some whacky stuff."
-is_really_important = true
 can_camera_zoom = false
 is_a_body = false
 
@@ -1837,12 +1837,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogStartSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 30 )
 volume_db = -15.0
 script = ExtResource( 26 )
 
-[node name="DialogSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 30 )
 pitch_scale = 0.9
 
@@ -1860,9 +1860,6 @@ anims/stand = SubResource( 72 )
 
 [node name="CollisionShape" parent="Viewport/level/GrannyNPC/FallthroughSolid" index="0"]
 shape = SubResource( 65 )
-
-[node name="InteractPrompt" parent="Viewport/level/GrannyNPC" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, -1.06528, 0 )
@@ -2181,7 +2178,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="AbortSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/FrogCroneNPC" index="3"]
@@ -2336,6 +2333,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
+[node name="AbortSound" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 34 )
+
 [node name="Sprite3D" parent="Viewport/level/FrogCroneNPC2" index="3"]
 material_override = SubResource( 127 )
 flip_h = true
@@ -2358,10 +2358,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="LevelDoor" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -4.09541, 0 )
+visible = false
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 
 [node name="LevelDoor2" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 6.90459, 0 )
+visible = false
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 
 [node name="TotemSprite" parent="Viewport/level/LevelDoor2" index="0"]
@@ -2386,6 +2388,7 @@ shape = SubResource( 143 )
 
 [node name="LevelDoor3" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.90459, 0 )
+visible = false
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 
 [node name="TotemSprite" parent="Viewport/level/LevelDoor3" index="0"]
@@ -2410,6 +2413,7 @@ shape = SubResource( 143 )
 
 [node name="LevelDoor4" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 15.9046, 0 )
+visible = false
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 
 [node name="TotemSprite" parent="Viewport/level/LevelDoor4" index="0"]
@@ -2434,6 +2438,7 @@ shape = SubResource( 143 )
 
 [node name="LevelDoor5" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 27.9046, 0 )
+visible = false
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 
 [node name="TotemSprite" parent="Viewport/level/LevelDoor5" index="0"]

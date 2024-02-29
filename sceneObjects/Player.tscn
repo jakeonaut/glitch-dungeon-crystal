@@ -4426,7 +4426,7 @@ bbText = "•hi!!!! hi hi hi !!!!"
 [node name="TextBox" parent="TextContainer" index="0"]
 can_camera_zoom = false
 
-[node name="DialogStartSound" parent="TextContainer/TextBox" index="6"]
+[node name="DialogStartSound" parent="TextContainer/TextBox" index="7"]
 stream = ExtResource( 27 )
 pitch_scale = 0.9
 
