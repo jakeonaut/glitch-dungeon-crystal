@@ -25,5 +25,5 @@ func activateScript():
         
     level.saveTheGame()
 
-func isActive():
+func isActive(debug=false):
     return true

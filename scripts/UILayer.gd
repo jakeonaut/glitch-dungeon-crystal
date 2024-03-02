@@ -253,28 +253,29 @@ func processQuitGameRenderLogic(delta):
     quitGameTimer += (delta*11)
     if global.isPauseMenuOpen:
       if quitGameTimer < 5:
-        quitGameText.text = "hold ESC:reset bindings\n ... 3"
+        quitGameText.text = "reset bindings\n ... 3"
       elif quitGameTimer < 10:
-        quitGameText.text = "hold ESC:reset bindings\n ... 3 ... 2"
+        quitGameText.text = "reset bindings\n ... 3 ... 2"
       elif quitGameTimer < 15:
-        quitGameText.text = "hold ESC:reset bindings\n ... 3 ... 2 ... 1!"
+        quitGameText.text = "reset bindings\n ... 3 ... 2 ... 1!"
       if quitGameTimer >= quitGameTimeLimit:
         for i in range(controlsConfig.size()):
           controlsConfig[i]["key_code"] = controlsConfig[i]["default_keyCode"]
-          setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
+          global.setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
         global.memory["controls_config"] = controlsConfig
         level.saveTheGame()
         canHoldEscape = false
     else:
-      if quitGameTimer < 5:
-        quitGameText.text = "hold ESC to quit:\n ... 3"
-      elif quitGameTimer < 10:
-        quitGameText.text = "hold ESC to quit:\n ... 3 ... 2"
-      elif quitGameTimer < 15:
-        quitGameText.text = "hold ESC to quit:\n ... 3 ... 2 ... 1!"
-      if quitGameTimer >= quitGameTimeLimit:
-        canHoldEscape = false
-        level.get_tree().quit()
+      quitGameRect.visible = false
+    #   if quitGameTimer < 5:
+    #     quitGameText.text = "hold ESC to quit:\n ... 3"
+    #   elif quitGameTimer < 10:
+    #     quitGameText.text = "hold ESC to quit:\n ... 3 ... 2"
+    #   elif quitGameTimer < 15:
+    #     quitGameText.text = "hold ESC to quit:\n ... 3 ... 2 ... 1!"
+    #   if quitGameTimer >= quitGameTimeLimit:
+    #     canHoldEscape = false
+    #     level.get_tree().quit()
   else:
     quitGameRect.visible = false
     quitGameTimer = 0
@@ -576,35 +577,18 @@ func initializeControlsConfig():
     for control_config in newControlsConfig:
       for remembered_config in rememberedControlsConfig:
         if remembered_config.input_action == control_config.input_action:
-          setKeyCode(control_config.input_action, remembered_config["key_code"])
+          global.setKeyCode(control_config.input_action, remembered_config["key_code"])
           control_config["key_code"] = remembered_config["key_code"]
           break
       # make sure its set to default if it was erased from memory
       if not control_config.has("key_code") or control_config["key_code"] == null:
-        control_config["key_code"] = getKeyCode(control_config.input_action)
+        control_config["key_code"] = global.getKeyCode(control_config.input_action)
     global.hasInitializedControlsConfig = true
   else:
     for control_config in newControlsConfig:
-      control_config["key_code"] = getKeyCode(control_config.input_action)
+      control_config["key_code"] = global.getKeyCode(control_config.input_action)
 
   controlsConfig = newControlsConfig
-
-func getKeyCode(input_action):
-  var inputEvents = InputMap.get_action_list(input_action)
-  # TODO(jaketrower): Support both key & gamepad here
-  for inputEvent in inputEvents:
-    if inputEvent is InputEventKey:
-      return inputEvent.get_scancode()
-  return null
-
-func setKeyCode(input_action, key_code):
-  var inputEvents = InputMap.get_action_list(input_action)
-  for inputEvent in inputEvents:
-    if inputEvent is InputEventKey:
-      InputMap.action_erase_event(input_action, inputEvent)
-  var new_event = InputEventKey.new()
-  new_event.set_scancode(key_code)
-  InputMap.action_add_event(input_action, new_event)
 
 func processControlsLogic(_delta):
   if not hasInitializedControlsConfig:
@@ -625,7 +609,7 @@ func processControlsLogic(_delta):
         var keyCodeString = OS.get_scancode_string(global.last_read_input)
         if keyCodeString != "Enter" and keyCodeString != "Escape":
           controlsConfig[control_index].key_code = global.last_read_input
-          setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
+          global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
           global.memory["controls_config"] = controlsConfig
           global.is_reading_input = false
           last_control_index = -1
@@ -658,12 +642,12 @@ func processControlsLogic(_delta):
         if control_index != last_control_index:
           var waveTextVal = "press key" if global.is_reading_input else OS.get_scancode_string(controlConfig.key_code)
           controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
-          controlConfig.sprite.z_index = 1
+          # controlConfig.sprite.z_index = 1
           controlConfig.sprite_aniPlayer.play("idle")
       else:
         controlConfig.sprite.scale = normal_size
         controlConfig.text_label.bbcode_text = "[color=gray]" + OS.get_scancode_string(controlConfig.key_code) + "[/color]"
-        controlConfig.sprite.z_index = 0
+        # controlConfig.sprite.z_index = 0
         controlConfig.sprite_aniPlayer.stop()
         controlConfig.sprite_aniPlayer.play("RESET")
 

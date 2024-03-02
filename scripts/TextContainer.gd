@@ -40,7 +40,7 @@ func setVars():
         textBox.floating_text = floating_text
 
 func InteractActivate(_is_player=true):
-    interact()
+    return interact()
         
 func interact():
-    textBox.interact()
+    return textBox.interact()

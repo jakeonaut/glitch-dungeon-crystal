@@ -30,6 +30,8 @@ var is_tiny = false
 onready var tinyColorRect = get_node("TinyColorRect")
 var top_margin_start = 0
 var bot_margin_start = 0
+var left_margin_start = 0
+var right_margin_start = 0
 var adjusted_tiny_y_pos = 0
 var adjusted_tiny_x_pos = 0
 var target_origin = Vector3(0, 0, 0)
@@ -68,18 +70,30 @@ func _ready():
   
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
   top_margin_start = self.margin_top
+  left_margin_start = self.margin_left
   bot_margin_start = self.margin_bottom
+  right_margin_start = self.margin_right
   nextPrompt.visible = false
   endPrompt.visible = false
-  
+
+var bg_texture = null
 func tinify():
+  if self.texture != null:
+    bg_texture = self.texture
   self.texture = null
+  textNode.rect_clip_content = false
   # get_node("Portrait").visible = false
   get_node("ColorRect").visible = false
   is_tiny = true
-  hide_textbox_time_limit = 5
   if floating_text:
     showTextbox()
+
+func untinify():
+  is_tiny = false
+  self.texture = bg_texture
+  # get_node("Portrait").visible = true
+  get_node("ColorRect").visible = true
+  setTextBoxPosition()
 
 func setPosition():
   var factor = 0.5
@@ -95,12 +109,24 @@ func setPosition():
 func setTextBoxPosition():
   if not is_tiny:
     self.margin_top = top_margin_start
+    self.margin_left = left_margin_start
     self.margin_bottom = bot_margin_start
+    self.margin_right = right_margin_start
   
 var important_unpause_timer = 0
 var important_unpause_time_limit = 20
 func _process(delta):
+  if global.activeInteractor == self and not self.visible:
+    global.activeInteractor = null
+
+  if is_interact_prompt and not textboxParent.get_ref():
+    self.hide()
+    return
+
   textPrompt.visible = (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny 
+  if textPrompt.visible:
+    var sweep_button_text = OS.get_scancode_string(global.getKeyCode("sub_action_button"))
+    textPrompt.bbcode_text = "[center]" + sweep_button_text + "[/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -223,6 +249,25 @@ func resetPrompts():
   endPrompt.visible = false
   nextPrompt_wiggle_timer = 0
   nextPrompt_wiggled_up = false
+
+var is_interact_prompt = false
+func showInteractPrompt():
+  var sweep_button_text = OS.get_scancode_string(global.getKeyCode("sub_action_button"))
+  if not is_interact_prompt:
+    textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
+    tinify()
+    is_interact_prompt = true
+
+  self.show()
+  textNode.visible_characters = -1
+  resetTinyColorRect()
+  adjusted_tiny_x_pos = -25
+  adjusted_tiny_y_pos = 10
+  setPosition()
+
+func hideInteractPrompt():
+  is_interact_prompt = false
+  self.hide()
       
 var tindex = -1
 func showTextbox():
@@ -307,22 +352,22 @@ func hideTextbox():
     level.player.pauseInput = false
       
 func tryToHide(delta):
-  if not focus_me:
+  if not focus_me and not is_interact_prompt:
     hide_textbox_timer += (delta*22)
     if hide_textbox_timer >= hide_textbox_time_limit:
       hideTextbox()
       hide_textbox_timer = 0
     
 func InteractActivate(_is_player=true):
-  interact()
+  return interact()
     
 func interact():
   if text_final == "":
-    return
+    return false
   if !visible and dialogSound.isActive():
     showTextbox()
     global.activeInteractor = self
-    return
+    return true
 
   if global.activeInteractor == self:
     if isWaitingForEndPrompt():
@@ -341,6 +386,8 @@ func interact():
     else:
       nextDialogSound.play()
       advanceToEndOfPhrase()
+    return true
+  return false
 
 func passiveInteract(_delta):
   if text_final == "":

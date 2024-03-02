@@ -1461,7 +1461,7 @@ margin_right = 558.0
 margin_bottom = 427.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.74902 )
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
 
 [node name="PauseTitle" type="ColorRect" parent="PauseMenu"]
 margin_left = 222.5
@@ -1826,10 +1826,9 @@ volume_db = -15.0
 pitch_scale = 0.9
 
 [node name="InputRect" type="ColorRect" parent="PauseMenu"]
-margin_left = 141.5
-margin_top = 9.5
-margin_right = 551.5
-margin_bottom = 81.5
+margin_left = 87.0
+margin_right = 559.0
+margin_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -1838,8 +1837,8 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 405.0
-margin_bottom = 68.0
+margin_right = 468.0
+margin_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -1850,8 +1849,8 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="PauseMenu/InputRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 398.0
-margin_bottom = 61.0
+margin_right = 460.0
+margin_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -1861,18 +1860,20 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/InputRect/ColorRect/ColorRect"]
 margin_left = 11.0
-margin_top = 3.0
-margin_right = 394.0
-margin_bottom = 56.0
+margin_top = 4.0
+margin_right = 454.0
+margin_bottom = 67.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "press X to change key
-hold ESC:reset bindings"
+
+hold ENTER:reset bindings"
 text = "press X to change key
-hold ESC:reset bindings"
+
+hold ENTER:reset bindings"
 scroll_active = false
 
 [node name="LevelTitle" type="ColorRect" parent="."]

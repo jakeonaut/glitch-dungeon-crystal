@@ -302,7 +302,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8, 0.27616, 0 )
 grav = 0
 bbText = "[color=#00ff00]Feather Fall[/color]:
 jump high by
-holding Z button"
+holding jump button"
 can_camera_zoom = false
 is_a_body = false
 

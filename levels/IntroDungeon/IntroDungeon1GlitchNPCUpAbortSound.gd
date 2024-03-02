@@ -8,6 +8,6 @@ func activateScript():
     npc.visible = false
     npc.can_activate = false
 
-func isActive():
+func isActive(debug=false):
     # OVERRIDE ME... if you dare
     return true

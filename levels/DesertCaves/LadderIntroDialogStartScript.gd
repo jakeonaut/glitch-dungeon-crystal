@@ -18,6 +18,6 @@ func preActivateScript():
     # OVERRIDE ME
     pass
 
-func isActive():
+func isActive(debug=false):
     # OVERRIDE ME... if you dare
     return true

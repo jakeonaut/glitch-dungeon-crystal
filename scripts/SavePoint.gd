@@ -126,5 +126,5 @@ func passiveActivate(_delta, _is_player):
 func justStopPassiveActivate():
     is_currently_on_save_point = false
 
-func isActive():
+func isActive(debug=false):
     return true

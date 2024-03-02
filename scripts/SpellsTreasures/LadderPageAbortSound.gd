@@ -19,5 +19,5 @@ func activateScript():
     page.queue_free()
     
 
-func isActive():
+func isActive(debug=false):
     return true

@@ -56,7 +56,7 @@ func _process(delta):
             newSprite.global_transform.origin = self.global_transform.origin + origin_diff
             spawn_timer = 0
 
-func isActive():
+func isActive(debug=false):
     return visible and on_ground
 
 # @override

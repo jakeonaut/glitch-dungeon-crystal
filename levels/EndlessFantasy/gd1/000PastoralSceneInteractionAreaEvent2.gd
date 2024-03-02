@@ -5,7 +5,7 @@ onready var mySprite = get_node("Sprite3D")
 func _ready():
   mySprite.visible = false
 
-func isActive():
+func isActive(debug=false):
   return true
 
 var has_activated = false

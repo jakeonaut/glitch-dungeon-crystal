@@ -408,6 +408,24 @@ func loadGame():
             global.memory["level_zonez"].push_back(currLevelZone)
     return true
 
+func getKeyCode(input_action):
+  var inputEvents = InputMap.get_action_list(input_action)
+  # TODO(jaketrower): Support both key & gamepad here
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventKey:
+      return inputEvent.get_scancode()
+  return null
+
+# TODO(jaketrower): Support both key & gamepad here
+func setKeyCode(input_action, key_code):
+  var inputEvents = InputMap.get_action_list(input_action)
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventKey:
+      InputMap.action_erase_event(input_action, inputEvent)
+  var new_event = InputEventKey.new()
+  new_event.set_scancode(key_code)
+  InputMap.action_add_event(input_action, new_event)
+
 func normalizeLoadedMemory():
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
         global.memory["nesting_doll"] = global.NestingDoll.GRANDMA

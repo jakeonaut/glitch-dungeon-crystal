@@ -44,6 +44,7 @@ export var is_static_in_level = true
 var pressing_move_left = false
 var pressing_move_right = false
 export var is_wiggling_fast = false
+export var can_be_smacked = false
 
 # @override
 func pressingMoveLeft():
@@ -73,7 +74,7 @@ func _ready():
   textBoxContainer.floating_text = floating_text
   if floating_text:
     grav = 0
-  if not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
+  if nextTextBoxPath != null and not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
     var nextTextBoxPathStr = "../"
     for i in range(nextTextBoxPath.get_name_count()):
       if i != 0:
@@ -120,8 +121,6 @@ func _process(delta):
   if (floating_text or dont_recolor_me) and mySprite.is_in_group("sprite"):
     mySprite.remove_from_group("sprite")
 
-  tryShowInteractPrompt()
-
   if fallthroughSolid:
     if (not visible or floating_text) and fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.remove_from_group("fallthrough")
@@ -139,16 +138,22 @@ func _process(delta):
         material.set_shader_param("normal_offset", .02)
         mySprite.material_override = material
 
+func tryHideInteractPrompt():
+  textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
+
 func tryShowInteractPrompt():
   if interactPrompt == null:
     return
 
   # don't you love math
-  if visible and is_active and not floating_text and textBox.text_final != "" and not textBox.visible:
+  # this should be bundled together with PlayerInteractionArea.gd likely
+  if visible and is_active and not floating_text and textBox.text_final != "" and global.activeInteractor == null:
     interactPrompt.visible = true
-    if smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer:
+    if smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer and level.player.on_ground:
       interactPrompt.max_frames = 1
-      interactPrompt.updateBaseFrame(9, 26)
+      interactPrompt.updateBaseFrame(9, 23)
+      interactPrompt.visible = false
+      textBox.showInteractPrompt()
     elif interactPrompt.max_frames == 1:
       interactPrompt.max_frames = 4
       interactPrompt.updateBaseFrame(9, 23)
@@ -158,8 +163,14 @@ func tryShowInteractPrompt():
     # if not interactPrompt.visible:
     #   interactPrompt.restart()
 
+func fallthroughCollisionActivate(_friend):
+  # don't allow text interaction
+  pass
+
 
 func getSmacked(_broom_origin):
+  if not can_be_smacked:
+    return false
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
@@ -187,11 +198,11 @@ func getSmacked(_broom_origin):
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.interact()
 
-func setGlobalMemoryOfHasSpoken(set_vars = false):
+func setGlobalMemoryOfHasSpoken(_set_vars = false):
   global.setStaticLevelZoneLevelVar(level, self.name, true)
 
-func isActive():
-  return is_active and not floating_text and (visible or can_be_activated_invisibly)
+func isActive(_debug = false):
+  return is_active and not floating_text and (visible or can_be_activated_invisibly) and textBox.text_final != ""
 
 func glitchOut():
   is_active = false
@@ -204,10 +215,14 @@ func glitchOut():
 
 func activate(is_player):
   if not is_player:
-    return
+    return false
   if global.activeInteractor == null:
+    if not tiny_textbox and not floating_text:
+      textBox.untinify()
+    textBox.hideInteractPrompt()
     textBox.interact()
-  pass
+    return true
+  return false
 
 var which_side_is_player_on = false
 func passiveActivate(delta, is_player):
@@ -232,10 +247,9 @@ func passiveActivate(delta, is_player):
 func stopPassiveActivate():
   if global.pauseGame:
     return
+  textBox.hideInteractPrompt()
   if not level.player.is_pressing_horizontal_input:
     return
-
-  # TODO(jaketrower): TODO on a timer...
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor == textBox:
     global.activeInteractor.tryStopInteractPassive()
     

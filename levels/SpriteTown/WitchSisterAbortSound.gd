@@ -12,6 +12,6 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
     if level.has_node("CubeCrystal"):
         level.get_node("CubeCrystal").visible = true
 
-func isActive():
+func isActive(debug=false):
     # OVERRIDE ME... if you dare
     return true

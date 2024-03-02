@@ -2,7 +2,7 @@ extends Spatial
 
 #extends "res://scripts/_InteractionAreaEvent_template.gd"
 
-func isActive():
+func isActive(debug=false):
     # @override me #.isActive()
     return true
 

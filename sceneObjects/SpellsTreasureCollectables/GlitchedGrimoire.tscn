@@ -9,7 +9,7 @@
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=7]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=12]
 [ext_resource path="res://scripts/SpellsTreasures/GlitchedGrimoireAbortSound.gd" type="Script" id=13]
@@ -468,14 +468,42 @@ shader_param/target_palette = ExtResource( 4 )
 
 [node name="GlitchedGrimoire" type="Spatial"]
 script = ExtResource( 7 )
+true_terminal_vel = null
 grav = 0
+walk_speed = null
+run_speed = null
+feather_glitch_walk_speed = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+swimming_walk_speed = null
+jump_force = null
+invisible_jump_force = null
+nextTextBoxPath = null
 bbText = "•\"GRIMOIRE\" get!!
                    
 ????"
+smackedBbText = null
 portrait = ExtResource( 15 )
 is_important = true
+is_really_important = null
+can_be_activated_invisibly = null
 can_activate = false
 can_move = false
+can_camera_zoom = null
+is_fast_text = null
+dont_recolor_me = null
+is_immediate = null
+is_a_body = null
+floating_text = null
+can_move_player = null
+is_active = null
+tiny_textbox = null
+is_static_in_level = null
+is_wiggling_fast = null
+dont_align_sprite = null
+stop_all_music = null
+display_textbox = null
+canPause = null
 
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 1 )
@@ -491,17 +519,17 @@ shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 9 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 11 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
 stream = null
 script = ExtResource( 13 )
 
@@ -526,6 +554,7 @@ shaded = true
 alpha_cut = 2
 texture = SubResource( 20 )
 hframes = 2
+vframes = 2
 script = ExtResource( 3 )
 should_randomize_frame_delay = true
 should_animate = false

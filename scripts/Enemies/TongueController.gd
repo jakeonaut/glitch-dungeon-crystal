@@ -100,7 +100,7 @@ func reelItIn(_delta):
     level.player.linear_velocity.x = 0
     level.player.lv.x = 0
 
-func isActive():
+func isActive(debug=false):
   return tongueCollisionShape.visible
 
 func passiveActivate(_delta, is_player):

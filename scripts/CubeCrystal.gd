@@ -41,7 +41,7 @@ func _process(delta):
         else:
             step = rand_range(MIN_STEP-1, MIN_STEP+1) / 4
 
-func isActive():
+func isActive(debug=false):
     return is_visible() and not disappearing2
 
 func passiveActivate(_delta, _is_player):

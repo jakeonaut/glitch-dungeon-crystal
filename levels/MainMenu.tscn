@@ -446,7 +446,7 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
 
-[node name="Filters" parent="UILayer" index="0"]
+[node name="Filters" parent="UILayer" index="4"]
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -360,7 +360,7 @@ func landed():
         behavior_was_thrown = false
         behavior_jumping = false
 
-func isActive():
+func isActive(debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):

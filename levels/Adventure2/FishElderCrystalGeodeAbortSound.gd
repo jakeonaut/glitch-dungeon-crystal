@@ -22,5 +22,5 @@ func activateScript():
     newDoor.canPlayDoorSound = false
     newDoor.goThroughDoor()
 
-func isActive():
+func isActive(debug=false):
     return true

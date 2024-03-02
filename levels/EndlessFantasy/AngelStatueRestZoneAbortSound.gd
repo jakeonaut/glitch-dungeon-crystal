@@ -16,5 +16,5 @@ func activateScript():
         door.visible = true
         door2.visible = false
 
-func isActive():
+func isActive(debug=false):
     return true

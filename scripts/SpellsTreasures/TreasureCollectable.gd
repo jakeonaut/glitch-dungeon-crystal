@@ -33,6 +33,7 @@ func _ready():
   is_active = true
   is_important = true
   is_really_important = true
+  can_be_smacked = true
   # ._ready() implicit
 
 func tryShowInteractPrompt():
@@ -137,10 +138,10 @@ func alignMySprite():
 
 # @override
 func activate(is_player):
-  passiveActivate(0, is_player)
+  return passiveActivate(0, is_player)
   
 # @override
-func isActive():
+func isActive(debug=false):
   return is_active and visible and not okay_im_done and global.activeInteractor == null and \
          level.player.physics_state != PhysicsState.OCCUPIED and \
          level.player.physics_state != PhysicsState.COLLAPSED and \
@@ -150,9 +151,9 @@ func isActive():
 func passiveActivate(_delta, is_player):
   if not is_player:
     getSmacked(self.global_transform.origin)
-    return
+    return false
   if okay_im_done:
-    return
+    return false
     
   if not being_collected:
     if stop_all_music:
@@ -170,6 +171,8 @@ func passiveActivate(_delta, is_player):
     if is_static_in_level:
       global.setStaticLevelZoneLevelVar(level, self.name, true)
     collectMe()
+    return true
+  return false
 
 func collectMe():
   pass

@@ -20,7 +20,7 @@ func _process(_delta):
   if treasureSpellCollectable.okay_im_done and not mimicNPC.is_active:
     mimicNPC.mySprite.trySetFrame(1)
   
-func isActive():
+func isActive(debug=false):
   return is_active and visible and global.activeInteractor == null and \
          level.player.physics_state != level.player.PhysicsState.OCCUPIED and \
          level.player.physics_state != level.player.PhysicsState.COLLAPSED and \

@@ -11,7 +11,7 @@ func _ready():
   set_process(true)
   max_vol = self.volume_db
 
-func _process(delta):
+func _process(_delta):
   if repeat and not self.is_playing() and not self.stream_paused:
     self.play()
 

@@ -112,7 +112,7 @@ func processDeath():
 func ouchies(_broom_origin):
     pass
 
-func isActive():
+func isActive(debug=false):
     return false # true
 
 func passiveActivate(_delta, _is_player):

@@ -268,15 +268,15 @@ func landed():
 
 # @override
 func justPressedDown():
-  return Input.is_action_just_pressed("ui_down") and not pauseInput
+  return Input.is_action_just_pressed("ui_down") and not pauseInput and global.activeInteractor == null
 
 # @override
 func pressingDown():
-  return Input.is_action_pressed("ui_down") and not pauseInput
+  return Input.is_action_pressed("ui_down") and not pauseInput and global.activeInteractor == null
 
 # @override
 func justPressedJump():
-  return (Input.is_action_just_pressed("jump_button") and not pauseInput) or should_magic_jump
+  return (Input.is_action_just_pressed("jump_button") and not pauseInput and global.activeInteractor == null) or should_magic_jump
   
 # @override
 func recentlyJustPressedJump():
@@ -286,15 +286,15 @@ func recentlyJustPressedJump():
 func pressingJump():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  return (Input.is_action_pressed("jump_button") and not pauseInput) or should_magic_jump
+  return (Input.is_action_pressed("jump_button") and not pauseInput and global.activeInteractor == null) or should_magic_jump
 
 # @override
 func pressingMoveUp():
-  return Input.is_action_pressed("ui_up") and not pauseInput
+  return Input.is_action_pressed("ui_up") and not pauseInput and global.activeInteractor == null
   
 # @override
 func pressingMoveDown():
-  return Input.is_action_pressed("ui_down") and not pauseInput
+  return Input.is_action_pressed("ui_down") and not pauseInput and global.activeInteractor == null
   
 # @override
 func pressingMoveLeft():
@@ -302,7 +302,7 @@ func pressingMoveLeft():
     return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == -1
-  return Input.is_action_pressed("ui_left") and not pauseInput
+  return Input.is_action_pressed("ui_left") and not pauseInput and global.activeInteractor == null
 
 # @override
 func pressingMoveRight():
@@ -310,7 +310,7 @@ func pressingMoveRight():
     return false
   # if is_mushroom_infected:
   #   return mushroom_infection_direction == 1
-  return Input.is_action_pressed("ui_right") and not pauseInput
+  return Input.is_action_pressed("ui_right") and not pauseInput and global.activeInteractor == null
 
 func magicJump():
   has_used_magic_lantern = true

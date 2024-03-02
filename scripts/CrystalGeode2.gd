@@ -78,7 +78,7 @@ func stopAnimation():
 func getSmacked(_broom_origin):
     activate(true)
 
-func isActive():
+func isActive(debug=false):
     return visible and not has_been_smacked
 
 func speakToMe():

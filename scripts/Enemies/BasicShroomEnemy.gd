@@ -55,7 +55,7 @@ func tryDieToOffscreenCamera():
 
 
 # @override ?
-func isActive():
+func isActive(debug=false):
   return visible
 
 # @override ?

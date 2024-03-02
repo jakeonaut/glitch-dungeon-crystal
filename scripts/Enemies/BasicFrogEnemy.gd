@@ -148,6 +148,7 @@ func startGulp():
 onready var tongueController = get_node("TongueController")
 func spitOut():
   gulpin = false
+  level.player.tumbleFall(mySprite.flip_h)
   level.player.visible = true
   level.player.on_ground = true
   tongueController.hooked = false
@@ -255,10 +256,13 @@ func getSmacked(broom_origin):
   
   # stop the lick
   if is_licker:
-    tongueController.restorePlayer()
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
-    tongueAniPlayer.play("RESET")
+    if gulpin:
+      tongueAniPlayer.play("spitOut")
+    else:
+      tongueController.restorePlayer()
+      tongueAniPlayer.play("RESET")
 
 func fallthroughCollisionActivate(friend):
   if not friend.on_ground:

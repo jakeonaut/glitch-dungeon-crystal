@@ -16,7 +16,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=14]
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=16]
-[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=17]
 [ext_resource path="res://scripts/SpellsTreasures/MimicDialogStartSound.gd" type="Script" id=18]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=19]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=20]
@@ -508,14 +508,14 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
 
-[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="7"]
 script = ExtResource( 18 )
 
-[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 6 )
 volume_db = -15.0
 
-[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 9 )
 
 [node name="Sprite3D" parent="MimicNPC" index="3"]
@@ -532,13 +532,41 @@ shape = SubResource( 21 )
 [node name="TreasureSpellCollectable" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25 )
 script = ExtResource( 24 )
+true_terminal_vel = null
 grav = 0
+walk_speed = null
+run_speed = null
+feather_glitch_walk_speed = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+swimming_walk_speed = null
+jump_force = null
+invisible_jump_force = null
+nextTextBoxPath = null
 bbText = "•SLIPPERS
 now you can run"
+smackedBbText = null
 portrait = ExtResource( 22 )
 is_important = true
+is_really_important = null
+can_be_activated_invisibly = null
 can_activate = false
 can_move = false
+can_camera_zoom = null
+is_fast_text = null
+dont_recolor_me = null
+is_immediate = null
+is_a_body = null
+floating_text = null
+can_move_player = null
+is_active = null
+tiny_textbox = null
+is_static_in_level = null
+is_wiggling_fast = null
+dont_align_sprite = null
+stop_all_music = null
+display_textbox = null
+canPause = null
 
 [node name="InteractionArea" type="Area" parent="TreasureSpellCollectable"]
 script = ExtResource( 1 )
@@ -554,17 +582,17 @@ shape = SubResource( 119 )
 
 [node name="NPC TextBox" parent="TreasureSpellCollectable" instance=ExtResource( 21 )]
 
-[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 19 )
 
-[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="8"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="8"]
+[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="9"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
 stream = null
 script = ExtResource( 10 )
 

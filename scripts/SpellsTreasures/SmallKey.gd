@@ -21,7 +21,7 @@ func _ready():
 func _process(_delta):
     pauseSelf = not visible
 
-func isActive():
+func isActive(debug=false):
     return visible and on_ground
 
 # @override

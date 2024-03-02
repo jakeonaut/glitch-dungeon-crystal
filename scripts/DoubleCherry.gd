@@ -113,5 +113,5 @@ func passiveActivate(_delta, _is_player):
 func stopPassiveActivate():
     can_play_full_sound = true
 
-func isActive():
+func isActive(debug=false):
     return is_active

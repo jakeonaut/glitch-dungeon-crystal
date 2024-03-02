@@ -776,9 +776,7 @@ func processBagLogic(_delta):
   pass
 
 func processBroomLogic(delta):
-  if physics_state == PhysicsState.OCCUPIED:
-    if global.activeInteractor != null and Input.is_action_just_pressed("sub_action_button"):
-      global.activeInteractor.interact()
+  if interactionArea.has_activated_something:
     return
 
   var can_throw_broom = global.memory["broomerang"]
@@ -1077,6 +1075,8 @@ func landed():
   # global_transform.origin.y = original_y
     
 func broomStop():  
+  if summonedBroom != null:
+    summonedBroom.queue_free()
   summonedBroom = null
   if aniPlayer.assigned_animation != "getItem":
     pauseAnimation = false

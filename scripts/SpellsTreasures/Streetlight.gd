@@ -76,7 +76,7 @@ func unsmack():
   # mySpriteBase.material_override.set_shader_param("normal_offset", .02)
   # mySpriteBase.material_override.set_shader_param("enable_palette_cycle", false)
   
-func isActive():
+func isActive(debug=false):
   return is_active
 
 var is_smacked = false

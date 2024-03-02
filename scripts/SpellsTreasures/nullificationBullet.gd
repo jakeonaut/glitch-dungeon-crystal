@@ -90,7 +90,7 @@ func tryDieToOffscreenCamera():
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             queue_free()
 
-func isActive():
+func isActive(debug=false):
     return is_active
 
 func passiveActivate(_delta, _is_player):

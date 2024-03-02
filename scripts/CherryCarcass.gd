@@ -125,7 +125,7 @@ func fallthroughCollisionActivate(possible_game_mover):
 var cooldown_timer = 0
 var cooldown_time_limit = 5
 # @override
-func isActive():
+func isActive(debug=false):
     return cooldown_timer >= cooldown_time_limit
 
 

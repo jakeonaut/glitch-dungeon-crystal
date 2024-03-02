@@ -4,6 +4,7 @@ var touchingPlayer = false
 var wasTouchingPlayer = false
 var is_touching_water = false
 var is_touching_waterfall = false
+var touched_water_area = null
 var is_touching_ladder = false
 onready var parent = get_parent()
 
@@ -21,14 +22,15 @@ func getPlayer():
 func _ready():
     set_process(true)
 
-func isActive():
+func isActive(debug=false):
     return parent.has_method("isActive") and \
            parent.isActive()
 
 func InteractActivate(is_player=true):
     if parent.has_method("activate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-        parent.activate(is_player)
+        return parent.activate(is_player)
+    return false
 
 func PassiveInteractActivate(delta, is_player = true):
     if parent.has_method("passiveActivate"):

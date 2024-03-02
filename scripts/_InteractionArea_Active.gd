@@ -8,13 +8,14 @@ var is_touching_waterfall = false
 func _ready():
     set_process(true)
         
-func isActive():
+func isActive(debug=false):
     return get_parent().has_method("isActive") and get_parent().isActive()
 
 func InteractActivate(is_player=true):
     if get_parent().has_method("activate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-        get_parent().activate(is_player)
+        return get_parent().activate(is_player)
+    return false
 
 func playerActivationAreaPassiveActivate():
     touchingPlayer = true
