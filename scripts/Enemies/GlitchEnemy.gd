@@ -130,6 +130,7 @@ func glitchOut():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     
+    
     if is_particle or behavior_directional_bullet:
         if is_particle:
             tryRemoveEnemiesGroup()
@@ -142,11 +143,7 @@ func _process(delta):
         is_a_physics_particle = true
     else:
         shouldIDoCollisions()
-        if fallthroughSolid:
-            if smallInteractionArea.is_in_group("enemies") and fallthroughSolid.is_in_group("fallthrough"):
-                fallthroughSolid.remove_from_group("fallthrough")
-            elif not smallInteractionArea.is_in_group("enemies") and not fallthroughSolid.is_in_group("fallthrough"):
-                fallthroughSolid.add_to_group("fallthrough")
+    updateFallthroughSolids()
         
     
     if am_i_dying:
@@ -210,6 +207,13 @@ func _process(delta):
             unsmack()
         if smack_timer >= smack_recovery_time_limit:
             is_smacked = false
+
+func updateFallthroughSolids():
+    if fallthroughSolid:
+        if (smallInteractionArea.is_in_group("enemies") and fallthroughSolid.is_in_group("fallthrough")) or is_particle or behavior_directional_bullet:
+            fallthroughSolid.remove_from_group("fallthrough")
+        elif not smallInteractionArea.is_in_group("enemies") and not fallthroughSolid.is_in_group("fallthrough"):
+            fallthroughSolid.add_to_group("fallthrough")
 
 var last_palette = global.grey_palette
 var should_freeze = false

@@ -27,7 +27,11 @@ onready var continueSelectHighlight = get_node("../../UILayer/Options/Continue/O
 onready var newGameText = get_node("../../UILayer/Options/NewGame/OptionTextLabel")
 onready var newGameSelectHighlight = get_node("../../UILayer/Options/NewGame/OptionTextLabeGlitched")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+    if uiLayer.title_display_state == 3:
+        uiLayer.title_display_state = 0
+    uiLayer.setDisplayTitle("press [​" + global.getKeyCodeStr(global.getKeyCode("sub_action_button")) + "​]")
+
     # .process(delta) implicit
     # player.rotation_degrees.y += (delta)*direction
     # if player.rotation_degrees.y > 5:

@@ -22,7 +22,7 @@ func setUpRoomInitializationOverride():
   has_decided = true
 
 var snarkyCommentTimer = 0
-var snarkyCommentTimeLimit = 10
+var snarkyCommentTimeLimit = 20
 func _process(delta):
   # ._process(delta) implicit
 

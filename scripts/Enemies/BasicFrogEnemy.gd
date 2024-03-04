@@ -14,7 +14,6 @@ export var is_licker = false
 export var is_infected = false
 var was_infected = false
 
-onready var fallthroughSolidArea = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
 var lastPosition = Vector3(0, 0, 0)
@@ -27,6 +26,7 @@ onready var tongueSprite = get_node("TongueSprite") if has_node("TongueSprite") 
 onready var tongueSprite2 = get_node("TongueSprite2") if has_node("TongueSprite2") else null
 onready var tongueSprite3 = get_node("TongueSprite3") if has_node("TongueSprite3") else null
 onready var tongueSprite4 = get_node("TongueSprite4") if has_node("TongueSprite4") else null
+export var should_have_fallthrough = true
 
 func _ready():
   mySprite.max_frames = 2
@@ -73,8 +73,6 @@ func _process(delta):
       smallInteractionArea.add_to_group("weak_enemies")
     if not smallInteractionArea.is_in_group("enemies"):
       smallInteractionArea.add_to_group("enemies")
-    if fallthroughSolidArea and fallthroughSolidArea.is_in_group("fallthrough"):
-      fallthroughSolidArea.remove_from_group("fallthrough")
   else:
     if tileSpikes:
       tileSpikes.visible = false
@@ -82,8 +80,6 @@ func _process(delta):
       smallInteractionArea.remove_from_group("weak_enemies")
     if smallInteractionArea.is_in_group("enemies"):
       smallInteractionArea.remove_from_group("enemies")
-    if fallthroughSolidArea and not fallthroughSolidArea.is_in_group("fallthrough"):
-      fallthroughSolidArea.add_to_group("fallthrough")
   was_infected = is_infected
 
   if pauseSelf and not is_smacked:
@@ -137,6 +133,15 @@ func _process(delta):
       mySprite.updateBaseFrame(2, 0)
     else:
       mySprite.updateBaseFrame(3, 0)
+
+# @override
+func updateFallthroughSolids():
+  if is_infected or not should_have_fallthrough:
+    if fallthroughSolid and fallthroughSolid.is_in_group("fallthrough"):
+      fallthroughSolid.remove_from_group("fallthrough")
+  else:
+    if fallthroughSolid and not fallthroughSolid.is_in_group("fallthrough"):
+      fallthroughSolid.add_to_group("fallthrough")
 
 var gulpin = false
 func startGulp():

@@ -1127,6 +1127,9 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
         local_lv.y = 0
         if feather_jump_timer < feather_jump_partial_time_limit:
           feather_jump_timer = feather_jump_partial_time_limit
+        # nocommit
+        if is_pressing_horizontal_input or was_pressing_horizontal_input:
+          local_lv.x *= 10
     else:
       global_transform.origin.x += tile_distance * sensor_direction
       collideWithWall(local_lv)

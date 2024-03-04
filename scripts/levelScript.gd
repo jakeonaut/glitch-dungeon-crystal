@@ -204,6 +204,13 @@ func tryToRespawn():
         global.memory["active_save_point_z"])
       gameCamera.rotation_degrees.y = global.cameraRotation
       player.last_grounded_pos = Vector3(player.global_transform.origin)
+    elif global.memory.has("room_save_point_x"):
+      player.global_transform.origin = Vector3(
+        global.memory["room_save_point_x"], 
+        global.memory["room_save_point_y"], 
+        player.global_transform.origin.z)
+      gameCamera.rotation_degrees.y = global.cameraRotation
+      player.last_grounded_pos = Vector3(player.global_transform.origin)
     elif global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] != getLevelName():
       if global.memory.has("active_save_point_x"):
         # transition.fast_fade_to(global.memory["savedRoomPath"])
@@ -221,25 +228,31 @@ func tryToRespawn():
     else:
       player.global_transform.origin = player.spawn_origin
 
-  if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
-  if found_door:
-    # print(found_door)
-    found_door.land(true, true)
-    global.saveMySpot(found_door.landing.global_transform.origin, self)
-  elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
-    player.global_transform.origin = player.spawn_origin
-    global.saveMySpot(player.spawn_origin, self)
   if global.set_camera_position_on_respawn:
     player.target_last_grounded_y = player.global_transform.origin.y
     player.cameraTarget.global_transform.origin.y = player.target_last_grounded_y
     gameCamera.setCameraPositionNow()
     global.set_camera_position_on_respawn = false
-  if not found_door and global.isEnteringRoom:
-    if global.grannyEnteringRoom:
-      transition.reverse_granny_teleport()
-      global.grannyEnteringRoom = false
-    else:
-      transition.reverse_fade()
+
+  if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
+  if global.isEnteringRoom:
+    if found_door:
+      # print(found_door)
+      found_door.land(true, true)
+      print('found door')
+      global.saveMySpot(found_door.landing.global_transform.origin, null)
+    elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
+      print('2?')
+      player.global_transform.origin = player.spawn_origin
+      global.saveMySpot(player.spawn_origin, null)
+    if not found_door:
+      if global.grannyEnteringRoom:
+        transition.reverse_granny_teleport()
+        global.grannyEnteringRoom = false
+      else:
+        transition.reverse_fade()
+      print('3?')
+      global.saveMySpot(player.spawn_origin, null)
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom

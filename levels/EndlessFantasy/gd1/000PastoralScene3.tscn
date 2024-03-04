@@ -1,6 +1,7 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
+[ext_resource path="res://sceneObjects/LevelDoor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=5]
@@ -2205,7 +2206,7 @@ automatically_change_color = false
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.1, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene2.tscn"
+path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="3"]
@@ -2306,6 +2307,10 @@ HP is +1"
 
 [node name="CollisionShape" parent="Viewport/level/MimicEnchantedBag/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 114 )
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 14, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=2]
+[gd_scene load_steps=125 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -23,10 +23,11 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/InteractionAreaEvent.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/LevelDoor.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=29]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=31]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=32]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=33]
@@ -1525,7 +1526,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299999, 9, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
 pitch_scale = 1.1
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
@@ -1689,7 +1690,7 @@ vframes = 8
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, -14.9666, 0 )
 
 [node name="WallTorch3" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, -12.1666, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.97906, -11.9517, 0 )
 
 [node name="WallTorch2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -10, 0 )
@@ -1752,6 +1753,7 @@ shape = SubResource( 101 )
 
 [node name="AngelStatue2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -22, 0 )
+visible = false
 is_active = false
 
 [node name="Sprite3D" parent="Viewport/level/AngelStatue2" index="0"]
@@ -1920,7 +1922,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351, 0.0758991, 0 )
 bbText = "•your broom seems to have
 some [color=red]hag magic[/color]... maybe,
 •you could purify the CRYSTALs
-
 and stop the decay of this world"
 is_really_important = true
 dont_recolor_me = true
@@ -2032,8 +2033,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13045, -20, 0 )
 [node name="TriangleContainer" parent="Viewport/level/QuietSavePoint" index="0"]
 visible = false
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -17, 0 )
+path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -20.6932, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
@@ -2086,6 +2091,5 @@ flip_v = true
 [editable path="Viewport/level/GlitchTileSpawner/FrogCroneNPC"]
 [editable path="Viewport/level/GlitchTileSpawner/FrogCroneNPC/NPC TextBox"]
 [editable path="Viewport/level/QuietSavePoint"]
-[editable path="Viewport/level/SavePoint"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

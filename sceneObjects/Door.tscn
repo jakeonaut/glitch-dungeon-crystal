@@ -382,14 +382,14 @@ shape = SubResource( 17 )
 
 [node name="TextBox" parent="NPC/NPC TextBox" index="0" groups=["door_textbox"]]
 
-[node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 21 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC/NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 24 )
 
-[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 19 )
 pitch_scale = 0.8
 

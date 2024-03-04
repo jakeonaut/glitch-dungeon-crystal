@@ -129,8 +129,6 @@ margin_bottom = 91.0
 margin_top = 11.0
 margin_bottom = 112.0
 rect_clip_content = true
-bbcode_text = ""
-text = ""
 
 [node name="NextPrompt" parent="NPC TextBox/TextBox" index="4"]
 position = Vector2( 439.5, 80 )
@@ -178,6 +176,7 @@ shape = SubResource( 10 )
 
 [node name="InteractPrompt" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
+visible = false
 material_override = SubResource( 19 )
 frame = 745
 frame_delay = 0.5

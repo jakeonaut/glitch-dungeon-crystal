@@ -84,12 +84,12 @@ func _process(_delta):
         # else:
         #     player.tryBroom()
     elif global.activeInteractor == null and nearest_area != null and nearest_area.get_node("..").has_method("tryShowInteractPrompt") and can_activate:
-        nearest_area.get_node("..").tryShowInteractPrompt()
+        nearest_area.get_node("..").tryShowInteractPrompt(true)
 
     postProcessFallthroughCollisionArea(fallthrough_collision_area)
-    if prev_nearest_area != null and (nearest_area != prev_nearest_area or not can_activate) and prev_nearest_area.get_node("..").has_method("tryHideInteractPrompt"):
-        prev_nearest_area.get_node("..").tryHideInteractPrompt()
-    prev_nearest_area = nearest_area
+    if prev_nearest_area != null and prev_nearest_area.get_ref() and (nearest_area != prev_nearest_area.get_ref() or not can_activate) and prev_nearest_area.get_ref().get_node("..").has_method("tryHideActiveInteractPrompt"):
+        prev_nearest_area.get_ref().get_node("..").tryHideActiveInteractPrompt()
+    prev_nearest_area = weakref(nearest_area)
 
 func postProcessFallthroughCollisionArea(fallthrough_collision_area):
     var player = get_node("..")

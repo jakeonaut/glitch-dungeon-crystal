@@ -145,7 +145,7 @@ func _process(delta):
 
   if global.isPauseMenuOpen:
     levelTitleRect.visible = false
-  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "TowerHub" in global.memory["roomPath"]):
+  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "TowerHub" in global.memory["roomPath"] or "CozyHome" in global.memory["roomPath"]):
     levelTitleRect.visible = true
     title_display_timer += (delta*22)
     if title_display_timer >= title_display_time_limit:
@@ -245,8 +245,8 @@ var quitGameTimer = 0
 var quitGameTimeLimit = 20
 var canHoldEscape = true
 func processQuitGameRenderLogic(delta):
-  if global.is_reading_input and Input.is_action_just_pressed("ui_cancel"):
-    player.noBroomSound.play()
+  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")):
+    getPlayer().noBroomSound.play()
     return
   if Input.is_action_pressed("ui_cancel") and canHoldEscape:
     quitGameRect.visible = true
@@ -602,7 +602,7 @@ func processControlsLogic(_delta):
     if global.is_reading_input:
       inputText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
     else:
-      inputText.bbcode_text = "press " + OS.get_scancode_string(controlsConfig[6].key_code) + " to change key\nhold ESC:reset bindings"
+      inputText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to change key\nhold ESC:reset bindings"
 
     if global.is_reading_input:
       if global.last_read_input != null:
@@ -640,13 +640,13 @@ func processControlsLogic(_delta):
       if control_index == i:
         controlConfig.sprite.scale = big_size
         if control_index != last_control_index:
-          var waveTextVal = "press key" if global.is_reading_input else OS.get_scancode_string(controlConfig.key_code)
+          var waveTextVal = "press key" if global.is_reading_input else "[​" + global.getKeyCodeStr(controlConfig.key_code) + "​]"
           controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
           # controlConfig.sprite.z_index = 1
           controlConfig.sprite_aniPlayer.play("idle")
       else:
         controlConfig.sprite.scale = normal_size
-        controlConfig.text_label.bbcode_text = "[color=gray]" + OS.get_scancode_string(controlConfig.key_code) + "[/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray][​" + global.getKeyCodeStr(controlConfig.key_code) + "​][/color]"
         # controlConfig.sprite.z_index = 0
         controlConfig.sprite_aniPlayer.stop()
         controlConfig.sprite_aniPlayer.play("RESET")

@@ -858,9 +858,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0 )
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 0 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11, 0 )
 

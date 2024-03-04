@@ -1038,6 +1038,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 8 )
 show_crt_effect = true
+display_title = "lv. 1: dungeon"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 3 )]
 

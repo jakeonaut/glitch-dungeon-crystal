@@ -111,6 +111,8 @@ func _ready():
   if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
     smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
 
+  tryShowInteractPrompt()
+
 func _process(delta):
   # super._process(delta) implicit
 
@@ -138,18 +140,21 @@ func _process(delta):
         material.set_shader_param("normal_offset", .02)
         mySprite.material_override = material
 
-func tryHideInteractPrompt():
+func tryHideActiveInteractPrompt():
   textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
+  interactPrompt.visible = true
+  interactPrompt.max_frames = 4
+  interactPrompt.updateBaseFrame(9, 23)
 
-func tryShowInteractPrompt():
+func tryShowInteractPrompt(is_active_interact_prompt = false):
   if interactPrompt == null:
     return
 
   # don't you love math
   # this should be bundled together with PlayerInteractionArea.gd likely
-  if visible and is_active and not floating_text and textBox.text_final != "" and global.activeInteractor == null:
+  if visible and is_active and not floating_text and textBox.text_final != "":
     interactPrompt.visible = true
-    if smallInteractionArea != null and smallInteractionArea.wasTouchingPlayer and level.player.on_ground:
+    if is_active_interact_prompt:
       interactPrompt.max_frames = 1
       interactPrompt.updateBaseFrame(9, 23)
       interactPrompt.visible = false

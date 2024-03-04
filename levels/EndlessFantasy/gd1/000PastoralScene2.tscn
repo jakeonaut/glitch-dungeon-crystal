@@ -1720,7 +1720,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 11 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]

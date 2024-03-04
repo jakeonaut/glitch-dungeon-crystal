@@ -296,6 +296,52 @@ func _input(ev):
     if is_reading_input and ev is InputEventKey and ev.pressed:
         last_read_input = ev.scancode
 
+func getKeyCodeStr(keycode):
+    var keycode_str = OS.get_scancode_string(keycode)
+    match keycode_str:
+        "Control":
+            return "Ctrl"
+        "CapsLock", "Capslock", "Caps Lock", "Caps lock":
+            return "Caps"
+        "Function":
+            return "Fn"
+        "PageUp":
+            return "PgUp"
+        "PageDown":
+            return "PgDn"
+        "Delete":
+            return "Del"
+        "Space":
+            return "Space"
+        "QuoteLeft":
+            return "`"
+        "Shift":
+            return "Shft"
+        "Minus":
+            return "-"
+        "Equal":
+            return "="
+        "BracketLeft":
+            return "["
+        "BracketRight":
+            return "]"
+        "Semicolon":
+            return ";"
+        "Apostrophe":
+            return "'"
+        "Comma":
+            return ","
+        "Period":
+            return "."
+        "Insert":
+            return "Ins"
+        "Slash":
+            return "/"
+        "BackSlash":
+            return "\\"
+        _:
+            return keycode_str
+
 var SACRED_LEVEL_NAME = "res://levels/EndlessFantasy"
 var MINI_SACRED_LEVEL_NAME = "EndlessFantasy"
 func getShortLevelName(longLevelName):
@@ -686,7 +732,11 @@ func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
     return (sourceVec2 - targetVec2).length() < closeness_amt    
 
 func saveMySpot(position, level):
-    global.memory["active_save_point_x"] = position.x
-    global.memory["active_save_point_y"] = position.y
-    global.memory["active_save_point_z"] = position.z
-    global.memory["savedRoomPath"] = level.getLevelName()
+    if level == null:
+        global.memory["room_save_point_x"] = position.x
+        global.memory["room_save_point_y"] = position.y
+    else:
+        global.memory["active_save_point_x"] = position.x
+        global.memory["active_save_point_y"] = position.y
+        global.memory["active_save_point_z"] = position.z
+        global.memory["savedRoomPath"] = level.getLevelName()

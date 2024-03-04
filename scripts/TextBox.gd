@@ -1,5 +1,7 @@
 extends TextureRect
 
+var dialogFont = preload("res://dialogBodyFontTheme.tres")
+var promptFont = preload("res://levels/common/UITheme_real.tres")
 onready var textNode = get_node("Text")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
@@ -123,10 +125,10 @@ func _process(delta):
     self.hide()
     return
 
-  textPrompt.visible = (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny 
+  textPrompt.visible = floating_text or ((isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny)
   if textPrompt.visible:
-    var sweep_button_text = OS.get_scancode_string(global.getKeyCode("sub_action_button"))
-    textPrompt.bbcode_text = "[center]" + sweep_button_text + "[/center]"
+    var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
+    textPrompt.bbcode_text = "[center][​" + sweep_button_text + "​][/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -252,11 +254,12 @@ func resetPrompts():
 
 var is_interact_prompt = false
 func showInteractPrompt():
-  var sweep_button_text = OS.get_scancode_string(global.getKeyCode("sub_action_button"))
+  var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
   if not is_interact_prompt:
-    textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
+    textNode.bbcode_text = "[​" + sweep_button_text + "​]"
     tinify()
     is_interact_prompt = true
+    self.theme = promptFont
 
   self.show()
   textNode.visible_characters = -1
@@ -266,8 +269,10 @@ func showInteractPrompt():
   setPosition()
 
 func hideInteractPrompt():
-  is_interact_prompt = false
-  self.hide()
+  if is_interact_prompt:
+    is_interact_prompt = false
+    self.hide()
+    self.theme = dialogFont
       
 var tindex = -1
 func showTextbox():
