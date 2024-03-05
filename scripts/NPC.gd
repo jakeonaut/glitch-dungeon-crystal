@@ -141,6 +141,8 @@ func _process(delta):
         mySprite.material_override = material
 
 func tryHideActiveInteractPrompt():
+  if interactPrompt == null:
+    return
   textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
   interactPrompt.visible = true
   interactPrompt.max_frames = 4

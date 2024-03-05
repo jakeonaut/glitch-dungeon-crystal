@@ -30,7 +30,7 @@ onready var newGameSelectHighlight = get_node("../../UILayer/Options/NewGame/Opt
 func _process(_delta):
     if uiLayer.title_display_state == 3:
         uiLayer.title_display_state = 0
-    uiLayer.setDisplayTitle("press [​" + global.getKeyCodeStr(global.getKeyCode("sub_action_button")) + "​]")
+    uiLayer.setDisplayTitle("press [lb]" + global.getKeyCodeStr(global.getKeyCode("sub_action_button")) + "[rb]")
 
     # .process(delta) implicit
     # player.rotation_degrees.y += (delta)*direction

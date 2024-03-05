@@ -125,10 +125,10 @@ func _process(delta):
     self.hide()
     return
 
-  textPrompt.visible = floating_text or ((isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny)
+  textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
   if textPrompt.visible:
     var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-    textPrompt.bbcode_text = "[center][​" + sweep_button_text + "​][/center]"
+    textPrompt.bbcode_text = "[center][lb]" + sweep_button_text + "[rb][/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -256,7 +256,7 @@ var is_interact_prompt = false
 func showInteractPrompt():
   var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
   if not is_interact_prompt:
-    textNode.bbcode_text = "[​" + sweep_button_text + "​]"
+    textNode.bbcode_text = "[lb]" + sweep_button_text + "[rb]"
     tinify()
     is_interact_prompt = true
     self.theme = promptFont
@@ -371,7 +371,8 @@ func interact():
     return false
   if !visible and dialogSound.isActive():
     showTextbox()
-    global.activeInteractor = self
+    if not is_tiny:
+      global.activeInteractor = self
     return true
 
   if global.activeInteractor == self:
@@ -399,7 +400,8 @@ func passiveInteract(_delta):
     return
   if !visible and dialogSound.isActive() and (global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and global.activeInteractor == self)):
     if (is_tiny or is_really_important) and not has_been_shown:
-      global.activeInteractor = self
+      if not is_tiny:
+        global.activeInteractor = self
       showTextbox()
 
   if global.activeInteractor == self and not focus_me:

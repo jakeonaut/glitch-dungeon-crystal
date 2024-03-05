@@ -9,7 +9,7 @@ var has_decided = false
 # @override
 func setUpRoomInitializationOverride():
   # original_granny_text = npcGranny.textBox.text_final
-  if not global.memory.has("roomPath") or (global.memory.has("roomPath") and (not ("001CozyHome" in global.memory["roomPath"]))):
+  if (global.memory.has("roomPath") and (not ("001CozyHome" in global.memory["roomPath"]))): # or not global.memory.has("roomPath"):
     is_start_of_game = false
     # npcGranny.is_really_important = true
     # npcGranny.textBox.is_really_important = true
@@ -20,9 +20,7 @@ func setUpRoomInitializationOverride():
     uiLayer.get_node("GlitchSprite").visible = false
     uiLayer.get_node("GlitchStatusRect").visible = false
   has_decided = true
-
-var snarkyCommentTimer = 0
-var snarkyCommentTimeLimit = 20
+  
 func _process(delta):
   # ._process(delta) implicit
 
@@ -32,22 +30,14 @@ func _process(delta):
   if is_start_of_game:
     global.pauseMoveInput = true
     player.fall_timer = 999
-    if player.physics_state == player.PhysicsState.COLLAPSED:
+    if player.physics_state == player.PhysicsState.COLLAPSED or \
+       player.physics_state == player.PhysicsState.CAN_WAKE_UP:
       global.pauseMoveInput = false
-    if not global.pauseMoveInput:
-      snarkyCommentTimer += (delta*11)
-      if snarkyCommentTimer >= snarkyCommentTimeLimit:
-        is_start_of_game = false
-        # player.textBox.tinify()
-        player.textBox.interact()
-  else:
-    pass
-    # if player.glitch_form == global.GlitchForm.FEATHER:
-    #   npcGranny.textBox.text_final = "•i'm feeling... green?\nas light as a leaf\n i hope i dont get sick.."
-    # elif player.glitch_form == global.GlitchForm.FLOOR:
-    #   npcGranny.textBox.text_final = "•i'm feeling RED!\nready to move!\nhoo ya!! oh dear me.."
-    # else:
-    #   npcGranny.textBox.text_final = original_granny_text
+    elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
+      is_start_of_game = false
+      global.pauseMoveInput = false
+      player.textBox.interact()
+        
 
   if not global.isPauseMenuOpen:
     if not musicPlayer.restZonePlayer.is_playing():

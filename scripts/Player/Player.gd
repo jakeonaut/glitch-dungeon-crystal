@@ -164,6 +164,15 @@ func floorGlitch():
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
+  if glitch_form != global.GlitchForm.FEATHER and not on_ground:
+    var upward_gust = 5
+    if linear_velocity.y < 0:
+      linear_velocity.y = 1
+      lv.y = 1
+      vv = 1
+    linear_velocity.y += upward_gust
+    lv.y += upward_gust
+    vv += upward_gust
   level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
@@ -775,8 +784,9 @@ func tumbleFall(direction):
 func processBagLogic(_delta):
   pass
 
+var force_a_sweep = false
 func processBroomLogic(delta):
-  if interactionArea.has_activated_something:
+  if interactionArea.has_activated_something and not force_a_sweep:
     return
 
   var can_throw_broom = global.memory["broomerang"]
@@ -805,7 +815,7 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
       which_broom_attack = 1
 
-  if Input.is_action_just_pressed("sub_action_button") and not summonedBroom and not pauseSelf and not aa == "sweepFloor": # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor": # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
@@ -813,7 +823,9 @@ func processBroomLogic(delta):
     #   aniPlayer.play("sweepFloor")
     #   which_broom_attack = 0
     #   summonSporeShroom()
-    if is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
+    if force_a_sweep:
+      aniPlayer.play("broomSmack")
+    elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2
     else:
@@ -868,6 +880,7 @@ func processBroomLogic(delta):
     if can_throw_broom and Input.is_action_just_pressed("sub_action_button"):
       broomStop()
       summonFallenBroom(true)
+  force_a_sweep = false
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
@@ -1074,7 +1087,7 @@ func landed():
   #   global_transform.origin.y -= 1
   # global_transform.origin.y = original_y
     
-func broomStop():  
+func broomStop():
   if summonedBroom != null:
     summonedBroom.queue_free()
   summonedBroom = null

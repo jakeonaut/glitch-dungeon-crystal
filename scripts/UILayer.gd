@@ -640,13 +640,13 @@ func processControlsLogic(_delta):
       if control_index == i:
         controlConfig.sprite.scale = big_size
         if control_index != last_control_index:
-          var waveTextVal = "press key" if global.is_reading_input else "[​" + global.getKeyCodeStr(controlConfig.key_code) + "​]"
+          var waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
           controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
           # controlConfig.sprite.z_index = 1
           controlConfig.sprite_aniPlayer.play("idle")
       else:
         controlConfig.sprite.scale = normal_size
-        controlConfig.text_label.bbcode_text = "[color=gray][​" + global.getKeyCodeStr(controlConfig.key_code) + "​][/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray][lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb][/color]"
         # controlConfig.sprite.z_index = 0
         controlConfig.sprite_aniPlayer.stop()
         controlConfig.sprite_aniPlayer.play("RESET")
