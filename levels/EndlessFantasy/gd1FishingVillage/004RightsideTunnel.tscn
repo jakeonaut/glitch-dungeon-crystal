@@ -1,10 +1,11 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=6]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=9]
@@ -22,8 +23,12 @@
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=26]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=27]
+[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=28]
+[ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=29]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -2157,6 +2162,34 @@ tracks/1/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
+[sub_resource type="ShaderMaterial" id=155]
+shader = ExtResource( 27 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 24 )
+shader_param/target_palette = ExtResource( 6 )
+
 [sub_resource type="BoxShape" id=136]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.5, 1 )
@@ -2616,8 +2649,6 @@ is_infected = true
 [node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy6/FallthroughSolid" index="0"]
 shape = SubResource( 25 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 18 )]
-
 [node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 7.85464, 0 )
 spawn_timer = 15
@@ -2655,6 +2686,19 @@ anims/jumpStart = SubResource( 109 )
 anims/land = SubResource( 110 )
 anims/landSoft = SubResource( 111 )
 anims/wakeup = SubResource( 112 )
+
+[node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7, -0.7, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 155 )
+texture = ExtResource( 28 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground2" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 155 )
+texture = ExtResource( 28 )
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 8, 0 )
@@ -2880,6 +2924,7 @@ flip_v = true
 [editable path="Viewport/level/Door4/NPC/NPC TextBox"]
 [editable path="Viewport/level/BasicFrogEnemy6"]
 [editable path="Viewport/level/BasicFrogEnemy4"]
+[editable path="Viewport/level/ParallaxBackground2"]
 [editable path="Viewport/level/FishingRod"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]

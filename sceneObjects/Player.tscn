@@ -4190,7 +4190,7 @@ pitch_scale = 2.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 35 )
-volume_db = -30.0
+volume_db = -35.0
 
 [node name="GrannyLandSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )

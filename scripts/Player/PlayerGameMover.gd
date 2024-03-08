@@ -286,6 +286,10 @@ func recentlyJustPressedJump():
   return jump_press_timer < jump_press_time_limit
 
 # @override
+func tryingToWakeUp():
+  return Input.is_action_just_pressed("sub_action_button")
+
+# @override
 func pressingJump():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false

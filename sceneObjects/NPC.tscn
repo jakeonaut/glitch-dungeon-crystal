@@ -128,7 +128,6 @@ margin_bottom = 91.0
 [node name="Text" parent="NPC TextBox/TextBox" index="3"]
 margin_top = 11.0
 margin_bottom = 112.0
-rect_clip_content = true
 
 [node name="NextPrompt" parent="NPC TextBox/TextBox" index="4"]
 position = Vector2( 439.5, 80 )

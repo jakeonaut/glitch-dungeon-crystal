@@ -159,7 +159,7 @@ func tryShowInteractPrompt(is_active_interact_prompt = false):
   # this should be bundled together with PlayerInteractionArea.gd likely
   if visible and is_active and not floating_text and textBox.text_final != "":
     interactPrompt.visible = true
-    if is_active_interact_prompt:
+    if is_active_interact_prompt and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
       interactPrompt.max_frames = 1
       interactPrompt.updateBaseFrame(9, 23)
       interactPrompt.visible = false
@@ -208,7 +208,9 @@ func getSmacked(_broom_origin):
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.interact()
 
-func setGlobalMemoryOfHasSpoken(_set_vars = false):
+func setGlobalMemoryOfHasSpoken(set_vars = false):
+  if set_vars:
+    mySprite.transform.origin.z = 0
   global.setStaticLevelZoneLevelVar(level, self.name, true)
 
 func isActive(_debug = false):
@@ -226,7 +228,7 @@ func glitchOut():
 func activate(is_player):
   if not is_player:
     return false
-  if global.activeInteractor == null:
+  if global.activeInteractor == null and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
     if not tiny_textbox and not floating_text:
       textBox.untinify()
     textBox.hideInteractPrompt()
@@ -238,7 +240,7 @@ var which_side_is_player_on = false
 func passiveActivate(delta, is_player):
   if not is_player:
     return
-  if can_move:
+  if can_move and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
     mySprite.flip_h = which_side_is_player_on
   
 
@@ -300,3 +302,4 @@ func imAnNpc():
 func appendNextTextCharacter():
   if not is_wiggling_fast:
     mySprite.frame_delay = 0.2
+    mySprite.transform.origin.z = 1

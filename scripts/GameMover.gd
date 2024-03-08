@@ -225,6 +225,9 @@ func tryDieToEnemy(_delta, _should_glitch, _should_kill_invis, _should_immediate
 func getHitByBroom():
   pass
 
+func tryingToWakeUp():
+  return false
+
 func processPhysics(delta):
   if grav == null: grav = 0 # ???
 
@@ -252,7 +255,7 @@ func processPhysics(delta):
   elif physics_state == PhysicsState.CAN_WAKE_UP:
     var pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
     var pressing_jump = justPressedJump() or recentlyJustPressedJump()
-    if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground):
+    if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground or tryingToWakeUp()):
       if not pauseAnimation and aniPlayer:
         aniPlayer.play("wakeup")
       if bounceAniPlayer:

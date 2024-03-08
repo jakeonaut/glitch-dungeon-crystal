@@ -1304,6 +1304,5 @@ func getItemFailsafe():
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
     pauseSelf = false
-    print("3")
     global.pauseMoveInput = false
     global.pauseGame = false

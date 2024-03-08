@@ -77,7 +77,8 @@ func _process(_delta):
             activated_something = global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
         elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
-            activated_something = nearest_area.InteractActivate()
+            if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
+                activated_something = nearest_area.InteractActivate()
             
         if activated_something and player.summonedBroom != null:
             player.broomStop()
@@ -89,7 +90,8 @@ func _process(_delta):
         # else:
         #     player.tryBroom()
     elif global.activeInteractor == null and nearest_area != null and nearest_area.get_node("..").has_method("tryShowInteractPrompt") and can_activate:
-        nearest_area.get_node("..").tryShowInteractPrompt(true)
+        if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
+            nearest_area.get_node("..").tryShowInteractPrompt(true)
 
     postProcessFallthroughCollisionArea(fallthrough_collision_area)
     if prev_nearest_area != null and prev_nearest_area.get_ref() and (nearest_area != prev_nearest_area.get_ref() or not can_activate) and prev_nearest_area.get_ref().get_node("..").has_method("tryHideActiveInteractPrompt"):

@@ -1008,12 +1008,6 @@ anims/windDown = SubResource( 50 )
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
 
-[node name="NullificationArea2" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -5, 0 )
-
-[node name="NullificationArea3" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -6, 0 )
-
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
