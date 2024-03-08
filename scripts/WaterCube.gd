@@ -83,7 +83,7 @@ func becomePoisonous():
   # poisonous_counter = 1
   # mySprite.material_override.set_shader_param("target_palette", global.dream_palette)
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
   
 func passiveActivate(delta, is_player):

@@ -29,6 +29,6 @@ func activateScript():
   textBox.text_final = finalText
   textBox.textNode.bbcode_text = finalText
         
-func isActive(debug=false):
+func isActive(_debug=false):
   # OVERRIDE ME... if you dare
   return true

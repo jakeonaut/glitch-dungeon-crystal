@@ -8,7 +8,7 @@ var is_touching_waterfall = false
 func _ready():
     set_process(true)
         
-func isActive(debug=false):
+func isActive(_debug=false):
     return get_parent().has_method("isActive") and get_parent().isActive()
 
 func InteractActivate(is_player=true):

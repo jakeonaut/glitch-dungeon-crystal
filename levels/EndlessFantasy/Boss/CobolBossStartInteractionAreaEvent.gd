@@ -2,7 +2,7 @@ extends Spatial
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true
 
 func passiveActivate(_delta, _is_player):

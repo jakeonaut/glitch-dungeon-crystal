@@ -164,7 +164,9 @@ func floorGlitch():
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
-  if glitch_form != global.GlitchForm.FEATHER and not on_ground:
+  var ui = level.uiLayer
+  if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
+     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20):
     var upward_gust = 5
     if linear_velocity.y < 0:
       linear_velocity.y = 1
@@ -786,6 +788,8 @@ func processBagLogic(_delta):
 
 var force_a_sweep = false
 func processBroomLogic(delta):
+  if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":
+    return
   if interactionArea.has_activated_something and not force_a_sweep:
     return
 
@@ -1091,9 +1095,8 @@ func broomStop():
   if summonedBroom != null:
     summonedBroom.queue_free()
   summonedBroom = null
-  if aniPlayer.assigned_animation != "getItem":
-    pauseAnimation = false
-    global.pauseMoveInput = false
+  pauseAnimation = false
+  global.pauseMoveInput = false
   broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
@@ -1301,5 +1304,6 @@ func getItemFailsafe():
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
     pauseSelf = false
+    print("3")
     global.pauseMoveInput = false
     global.pauseGame = false

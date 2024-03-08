@@ -215,7 +215,7 @@ func alignMySprite():
     mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
     mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
      
-func isActive(debug=false):
+func isActive(_debug=false):
   return visible
 
 # aka func ouchies() for player

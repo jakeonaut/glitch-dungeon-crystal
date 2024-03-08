@@ -20,7 +20,7 @@ onready var frogCroneNPC = get_node("../../FrogCroneNPC")
 func _ready():
   mySprite.visible = false
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
 
 var has_played_animation = false

@@ -17,5 +17,5 @@ func activateScript():
     level.player.aniPlayer.play("stand")
     level.player.sayThis("what the hell is this?", 3.0)
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true

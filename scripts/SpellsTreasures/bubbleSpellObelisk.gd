@@ -73,7 +73,7 @@ func summonBubble():
   bubble.mySprite.remove_from_group("sprite")
   # bubble.setAsParent(self)
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return is_active
 
 func activate(is_player):

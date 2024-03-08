@@ -148,7 +148,7 @@ func pressingMoveLeft():
 func pressingMoveRight():
     return walk_direction.x == 1 and behavior_walking and (projectile or not on_ground)
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return visible and on_ground and not behavior_was_thrown and not level.player.is_mushroom_infected
 
 # @override

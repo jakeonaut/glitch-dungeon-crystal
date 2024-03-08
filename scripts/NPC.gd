@@ -133,12 +133,15 @@ func _process(delta):
     smack_timer += (delta * 22)
     if smack_timer >= smack_time_limit:
       is_smacked = false
-      var material = mySprite.material_override
-      if material is ShaderMaterial:
-        material.set_shader_param("time_influence", 3)
-        # material.set_shader_param("y_div", 2.3)
-        material.set_shader_param("normal_offset", .02)
-        mySprite.material_override = material
+      unsmack()
+
+func unsmack():
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 3)
+    # material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .02)
+    mySprite.material_override = material
 
 func tryHideActiveInteractPrompt():
   if interactPrompt == null:

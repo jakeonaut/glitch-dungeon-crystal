@@ -15,8 +15,13 @@ func _process(_delta):
     has_activated_something = false
     var can_activate = not global.pauseMoveInput and player.on_ground
 
-    if global.hasJustEnteredRoom or global.isEnteringRoom or global.pauseGame or global.pauseMoveInput or global.isPauseMenuOpen:
+    if global.hasJustEnteredRoom or global.isEnteringRoom or global.isPauseMenuOpen:
         return
+
+    # allow interaction with the textbox, but skip it if no textbox
+    if (global.pauseGame or global.pauseMoveInput) and global.activeInteractor == null:
+        return
+
 
     # find the nearest active area and passive area
     var areas = get_overlapping_areas()
@@ -74,7 +79,7 @@ func _process(_delta):
         elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
             activated_something = nearest_area.InteractActivate()
             
-        if activated_something:
+        if activated_something and player.summonedBroom != null:
             player.broomStop()
             has_activated_something = true
         # Give secondary priority to held objects action.

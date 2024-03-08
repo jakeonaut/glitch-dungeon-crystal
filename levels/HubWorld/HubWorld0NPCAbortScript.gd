@@ -25,5 +25,5 @@ func preActivateScript():
     level.gameCamera.actual_target = level.gameCamera.initial_target
     npc.queue_free()
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true

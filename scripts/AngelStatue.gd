@@ -31,7 +31,7 @@ func _process(delta):
             my_material.set_shader_param("enable_palette_cycle", false)
 
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return self.visible and is_active
 
 func passiveActivate(_delta, _is_player):

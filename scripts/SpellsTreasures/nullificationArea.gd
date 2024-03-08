@@ -22,7 +22,7 @@ func _ready():
 func _process(_delta):
     pass
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return is_active
 
 func passiveActivate(_delta, is_player):

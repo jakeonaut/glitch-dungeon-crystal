@@ -112,7 +112,7 @@ func shouldIBeActive():
   else:
     return true
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return self.visible and is_active and shouldIBeActive()
 
 func activate(is_player):

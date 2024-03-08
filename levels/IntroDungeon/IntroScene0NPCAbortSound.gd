@@ -8,6 +8,6 @@ func _ready():
 func activateScript():
     pass
 
-func isActive(debug=false):
+func isActive(_debug=false):
     # OVERRIDE ME... if you dare
     return true

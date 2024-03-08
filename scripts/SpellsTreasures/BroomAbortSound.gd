@@ -27,5 +27,5 @@ func activateScript():
     else:
         broom.queue_free()
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true

@@ -18,7 +18,7 @@ func getInfectingMushroom():
 func getFrogToBeInfected():
     return level.get_node("FrogToBeInfected")
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return not has_done_cutscene
 
 func passiveActivate(_delta, _is_player):

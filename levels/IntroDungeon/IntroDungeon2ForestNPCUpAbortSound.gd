@@ -10,6 +10,6 @@ func activateScript():
     textBox.has_been_shown = false
     textBox.textboxParent.jump_force = 2
 
-func isActive(debug=false):
+func isActive(_debug=false):
     # OVERRIDE ME... if you dare
     return true

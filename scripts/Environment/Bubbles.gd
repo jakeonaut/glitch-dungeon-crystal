@@ -104,7 +104,7 @@ func randomizeTargetPos():
         original_pos.z
     )
     
-func isActive(debug=false):
+func isActive(_debug=false):
     return true
 
 func passiveActivate(_delta, _is_player):

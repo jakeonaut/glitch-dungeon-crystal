@@ -8,7 +8,7 @@ func _ready():
 func _process(_delta):
   pass
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player):

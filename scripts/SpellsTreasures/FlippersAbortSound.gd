@@ -17,17 +17,7 @@ func activateScript():
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
-  if level.player.glitch_form != global.GlitchForm.NORMAL:
-    level.player.applyObeliskGlitch(level.player.glitch_form)
 
-  # IFNDEF SpellbookIntroLevelScript.gd
-  # if level.has_node("NPC5"):
-  #   level.get_node("NPC5").textBox.text_final = "•use [C] to switch between\nyour last two colors!"
-  #   level.get_node("NPC5").textBox.has_been_shown = false
-  #   level.get_node("NPC5").textBox.tinify()
-  
-  #if level.has_node("NPC"):
-  #    level.get_node("NPC").textBox.text_final = "•wow you got it......i bet all\nkinds of new paths will open up\nfor you now in swamp home......\n•i could never cast spells\nlike you can... i'm just\na lowly frog wizard."
   level.saveTheGame()
 
 func preActivateScript():

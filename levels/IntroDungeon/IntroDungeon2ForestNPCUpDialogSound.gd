@@ -12,6 +12,6 @@ func activateScript():
     npc.feather_jump_time_limit = 999999
     npc.true_terminal_vel = 1
 
-func isActive(debug=false):
+func isActive(_debug=false):
     # OVERRIDE ME... if you dare
     return true

@@ -265,7 +265,7 @@ func calculateXYMinMax():
   # okay.... I wish godot allowed multiple return values like javascript
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return (visible or is_passive) and getPlayer().nesting_doll_state != global.NestingDoll.MATRIARCH
 
 func generateId():

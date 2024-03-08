@@ -24,6 +24,6 @@ func activateScript():
     # if num_bugs > 0:
     #     textBox.text_final += "\n•oh, you have some!\n okay, let's trade!\n•yee hee hee!!"
         
-func isActive(debug=false):
+func isActive(_debug=false):
     # OVERRIDE ME... if you dare
     return true

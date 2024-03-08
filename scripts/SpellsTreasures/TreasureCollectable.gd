@@ -44,11 +44,6 @@ func tryShowInteractPrompt(_is_active_interact_prompt = false):
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
-  if is_smacked:
-    smack_timer += (delta * 22)
-    if smack_timer >= smack_time_limit:
-      unsmack()
-
   # i love not using FSMs -_-
   if okay_im_really_done_bye:
     return
@@ -112,7 +107,7 @@ func _process(delta):
 func finishItAll():
   okay_im_done = true
   if display_textbox:
-    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor != textBox:
       global.activeInteractor.hideTextbox()
       global.pauseMoveInput = true
     textBox.interact()  
@@ -141,7 +136,7 @@ func activate(is_player):
   return passiveActivate(0, is_player)
   
 # @override
-func isActive(debug=false):
+func isActive(_debug=false):
   return is_active and visible and not okay_im_done and global.activeInteractor == null and \
          level.player.physics_state != PhysicsState.OCCUPIED and \
          level.player.physics_state != PhysicsState.COLLAPSED and \
@@ -174,6 +169,10 @@ func passiveActivate(_delta, is_player):
     return true
   return false
 
+# @override
+func stopPassiveActivate():
+  pass
+
 func collectMe():
   pass
 
@@ -193,12 +192,11 @@ func getSmacked(_broom_origin):
     chestSprite.material_override.set_shader_param("shake_power", 0.143)
     chestSprite.material_override.set_shader_param("shake_block_size", 60)
     chestSprite.material_override.set_shader_param("shake_color_rate", 0.219)
-  
   smack_timer = 0
   is_smacked = true
   return true
 
-
+# @override
 func unsmack():
   if chestSprite:
     chestSprite.material_override.set_shader_param("time_influence", 3)

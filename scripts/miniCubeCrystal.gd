@@ -58,7 +58,7 @@ func _process(delta):
     cubeContainer.rotate_y(step*delta)
     cubeContainer.rotate_x((step/2)*delta)
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return visible and not disappearing2
 
 func passiveActivate(_delta, _is_player):

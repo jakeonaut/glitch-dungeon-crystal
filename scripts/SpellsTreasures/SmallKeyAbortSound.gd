@@ -24,5 +24,5 @@ func activateScript():
     key.queue_free()
     level.player.aniPlayer.play("stand")
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true

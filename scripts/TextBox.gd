@@ -114,9 +114,7 @@ func setTextBoxPosition():
     self.margin_left = left_margin_start
     self.margin_bottom = bot_margin_start
     self.margin_right = right_margin_start
-  
-var important_unpause_timer = 0
-var important_unpause_time_limit = 20
+
 func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
@@ -160,11 +158,6 @@ func _process(delta):
         has_preactivated = true
       endPrompt.visible = not is_tiny and not floating_text
       has_been_shown = true
-      if is_important and global.pauseGame:
-        important_unpause_timer += (delta * 22)
-        if important_unpause_timer >= important_unpause_time_limit:
-          is_important = false
-          global.pauseGame = false
       is_really_important = false
       
     elif isWaitingForNextPrompt():

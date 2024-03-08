@@ -29,7 +29,7 @@ func getDirection():
     return Vector2(0, 1)
 
 export var is_active = true
-func isActive(debug=false):
+func isActive(_debug=false):
   return is_active
 
 func passiveActivate(delta, is_player):

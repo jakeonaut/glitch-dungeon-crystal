@@ -131,7 +131,7 @@ func randomizeTargetPos():
     delta_multiplier = 1.0
     
 var is_active = true
-func isActive(debug=false):
+func isActive(_debug=false):
     return is_active
 
 func passiveActivate(_delta, is_player):

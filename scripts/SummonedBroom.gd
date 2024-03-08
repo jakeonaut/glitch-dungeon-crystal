@@ -133,7 +133,7 @@ func trySweepUpGlitchTiles(collisionShape):
       my_broom_owner.digSound.play()
     queue_free()
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return visible
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):

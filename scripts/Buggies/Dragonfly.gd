@@ -84,7 +84,7 @@ func randomizeTargetPos():
     mySprite.flip_h = (target_pos.x < global_transform.origin.x)
     
 var is_active = true
-func isActive(debug=false):
+func isActive(_debug=false):
     return visible and is_active
 
 func passiveActivate(_delta, _is_player):

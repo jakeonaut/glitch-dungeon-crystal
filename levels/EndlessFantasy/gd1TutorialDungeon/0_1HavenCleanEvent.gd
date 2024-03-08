@@ -6,7 +6,7 @@ onready var npc = weakref(get_node("../../NPC"))
 func _ready():
   mySprite.visible = false
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
 
 var has_played_animation = false

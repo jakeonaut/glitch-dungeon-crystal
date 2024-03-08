@@ -17,7 +17,7 @@ func passiveActivate(_delta, _is_player):
     if not has_spawned:
         spawn()
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true
 
 func spawn():

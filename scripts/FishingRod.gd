@@ -120,7 +120,7 @@ func reelItOut(delta):
     hookInteractionArea.global_transform.origin.y = self.global_transform.origin.y - depth
     is_reeled_in = false
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player):

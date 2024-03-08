@@ -19,6 +19,6 @@ func preActivateScript():
 func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   pass
 
-func isActive(debug=false):
+func isActive(_debug=false):
   # OVERRIDE ME... if you dare
   return true

@@ -117,7 +117,7 @@ func _process(delta):
     #   popSound2.max_db = -100
     #   bubbleStartPop()
 
-func isActive(debug=false):
+func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player):

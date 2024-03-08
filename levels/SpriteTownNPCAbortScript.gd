@@ -25,5 +25,5 @@ func activateScript():
     else:
         npc.textBox.text_final = "•maybe I could teach you\nsome time... if you find a\nBROOM or FISHING ROD"
 
-func isActive(debug=false):
+func isActive(_debug=false):
     return true

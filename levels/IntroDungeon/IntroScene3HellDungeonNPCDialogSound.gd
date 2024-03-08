@@ -10,6 +10,6 @@ func activateScript():
     npc.level.glitchScreenEffect.visible = false
     npc.level.player.glitch_death_timer = -3200
 
-func isActive(debug=false):
+func isActive(_debug=false):
     # OVERRIDE ME... if you dare
     return true

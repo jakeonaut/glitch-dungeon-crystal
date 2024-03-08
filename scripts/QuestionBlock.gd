@@ -35,7 +35,7 @@ func _process(delta):
 func get_foreign_children():
   return self.get_children().slice(4, self.get_child_count())
   
-func isActive(debug=false):
+func isActive(_debug=false):
   return not has_been_hit
   
 func passiveActivate(_delta, _is_player):
