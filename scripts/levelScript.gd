@@ -411,6 +411,7 @@ func trySpawnSpecialKey(keyFollower, keyType):
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, override_palette = global.grey_palette):
+  var smokeClouds = []
   for _i in range(num_clouds):
     var newSmokeCloud = smokeCloudRes.instance()
     add_child(newSmokeCloud)
@@ -431,6 +432,8 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
       var new_material = newSmokeCloud.get_material_override().duplicate()
       new_material.set_shader_param("target_palette", override_palette)
       newSmokeCloud.set_material_override(new_material.duplicate())
+    smokeClouds.push_back(newSmokeCloud)
+  return smokeClouds
 
 func flipGravity():
   player.grav *= -1

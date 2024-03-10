@@ -18,8 +18,9 @@ var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 var spriteSheet = preload("res://assets/player_sheet_old.png")
 var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
 var spriteSheetTiny = preload("res://assets/player_sheet_old_baby.png")
+var broomSpriteSheet = preload("res://assets/player_sheet_broom.png")
 var broomSpriteSheetTiny = preload("res://assets/player_sheet_broom_tiny.png")
-var spriteSheetSmall = preload("res://assets/player_sheet_old_new.png")
+var spriteSheetSmall = preload("res://assets/player_sheet_tiny.png")
 var nesting_doll_state = global.NestingDoll.GRANDMA
 var nesting_doll_array = []
 
@@ -75,6 +76,8 @@ onready var interactPromptSprite = get_node("InteractPrompt")
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
+  if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
+    smokeCloudThrottleTimer += (delta*11)
 
   if is_touching_water or is_touching_ladder or \
      (grav > 0 and global_transform.origin.y < target_last_grounded_y) or \
@@ -373,6 +376,11 @@ func updateNestingDoll(prevNestingDollState):
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
   elif nesting_doll_state == global.NestingDoll.BABY:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+
+  if nesting_doll_state == global.NestingDoll.MOM:
+    broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheetTiny)
+  else:
+    broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheet)
     
 
 func regainNestingDoll():
@@ -392,8 +400,10 @@ func getWalkSpeed(delta):
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
     return 9
-  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+  elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 6 if pressingRun() else 5
+  elif nesting_doll_state == global.NestingDoll.MOM:
+    return 9 if pressingRun() else 7
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
     return 7 if pressingRun() else 6
   else:
@@ -463,7 +473,7 @@ func processJumpInputs(delta):
       aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
       aniPlayer.queue("jumpStart")
       aniPlayer.queue("jump")
-    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 0 and triedToDoubleJump and not has_mushroom_double_jumped: 
+    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
       nesting_doll_state -= 1
       updateNestingDoll(nesting_doll_state + 1)
@@ -510,7 +520,14 @@ func spawnASpore(x_dir = 0, y_dir = 1):
   spore.is_active = false
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
-func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0):
+var smokeCloudThrottleTimer = 0
+var smokeCloudThrottleTimeLimit = 4
+func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horizontal = 0, only_on_ground = false, throttle = false):
+    if throttle and smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
+      return
+    smokeCloudThrottleTimer = 0
+    if only_on_ground and not truly_on_ground:
+      return
     for _i in range(num_clouds):
         var newSmokeCloud = smokeCloudRes.instance()
         level.add_child(newSmokeCloud)
@@ -565,3 +582,17 @@ func handleSpikeCollisions(delta):
       ):
         tryDieToEnemy(delta, true, false)
         return
+
+# @override
+func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
+  var is_tile_solid = .isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords)
+  var is_tile_spikes = getLevelTiles().isTileSpikes(tile_type)
+  if nesting_doll_state == global.NestingDoll.MOM:
+    return is_tile_solid or is_tile_spikes
+  return is_tile_solid
+
+# @override
+func isTouchingSpikes(collisionShape):
+  if nesting_doll_state == global.NestingDoll.MOM:
+    return false
+  return .isTouchingSpikes(collisionShape)

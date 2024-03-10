@@ -50,7 +50,7 @@
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=48]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=49]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=50]
-[ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=51]
+[ext_resource path="res://assets/sounds/eba_digging3.wav" type="AudioStream" id=51]
 [ext_resource path="res://assets/sounds/dollopen.wav" type="AudioStream" id=52]
 [ext_resource path="res://assets/sounds/dollclose.wav" type="AudioStream" id=53]
 [ext_resource path="res://assets/sounds/public_sfx_fishreel.wav" type="AudioStream" id=54]
@@ -2847,7 +2847,7 @@ tracks/4/keys = {
 "args": [  ],
 "method": "tryPlayFootstepSound"
 }, {
-"args": [ 1 ],
+"args": [ 1, false, false, 0, true, true ],
 "method": "summonSmokeClouds"
 } ]
 }
@@ -4326,7 +4326,7 @@ volume_db = -7.0
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 51 )
 volume_db = -18.0
-pitch_scale = 1.4
+pitch_scale = 0.8
 
 [node name="RunSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 60 )
@@ -4477,8 +4477,7 @@ should_animate = false
 [node name="TextBoxCameraTarget" type="Spatial" parent="."]
 
 [node name="InteractPrompt" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.5, 2 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.5, 7 )
 material_override = SubResource( 85 )
 flip_h = true
 flip_v = true

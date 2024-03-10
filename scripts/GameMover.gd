@@ -176,7 +176,7 @@ func _ready():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  spawn_origin = global_transform.origin
+  spawn_origin = Vector3(global_transform.origin.x, global_transform.origin.y, global_transform.origin.z)
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
 func _process(_delta):
@@ -501,9 +501,9 @@ func processInputs(delta):
     vv = 1
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    if aniPlayer.assigned_animation == "sinkInSand":
-      vv = 1
-    elif pauseAnimation:
+    if aniPlayer.assigned_animation == "sinkInSand" and not pressingJump():
+      vv = -2
+    elif pauseAnimation and not pressingJump():
       vv = 0
     else:
       vv = getWalkSpeed(delta)

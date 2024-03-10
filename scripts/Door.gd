@@ -14,6 +14,7 @@ export var is_passive = false
 export var is_vertical = false
 export var num_keys_unlock = 999
 export var locked_to_monsters = false
+export var is_level_door = false
 
 onready var npc = get_node("NPC")
 
@@ -158,7 +159,7 @@ func _process(delta):
   
   if global.pauseGame: return
 
-  if is_passive:
+  if is_passive or is_level_door:
     spawnParticles(delta)
 
   if locked_to_monsters:
@@ -242,7 +243,7 @@ func calculateXYMinMax():
   var y_max = 2.5
   var target_x_add = 0
   var target_y_add = 0
-  if not is_vertical:
+  if not is_vertical and not is_level_door:
     if landing.global_transform.origin.x < self.global_transform.origin.x:
       x_min = -3
       x_max = -2
@@ -254,7 +255,7 @@ func calculateXYMinMax():
   else:
     x_min = -1.0
     x_max = 1.0
-    if landing.global_transform.origin.y < self.global_transform.origin.y:
+    if landing.global_transform.origin.y < self.global_transform.origin.y and not is_level_door:
       y_min = -2
       y_max = -0.5
       target_y_add = rand_range(-3, -1.5)

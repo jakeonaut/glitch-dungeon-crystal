@@ -23,7 +23,7 @@ func _process(_delta):
     pass
 
 func isActive(_debug=false):
-    return is_active
+    return is_active and visible
 
 func passiveActivate(_delta, is_player):
     if is_player:

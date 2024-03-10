@@ -1142,7 +1142,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 13 )
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]

@@ -26,6 +26,8 @@ onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
 onready var crystalThemePlayer = get_node("CrystalThemePlayer")
 
+onready var leavesSound = get_node("Sounds/LeavesSound")
+
 onready var treasureJingle = get_node("TreasureJingle")
 
 var initial_volume_dbs = {}

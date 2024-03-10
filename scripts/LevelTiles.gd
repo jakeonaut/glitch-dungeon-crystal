@@ -22,6 +22,8 @@ func getPlayer():
 
 var tile_dict = {}
 var infected_spikes = []
+var transient_tiles = []
+var transient_time_limit = 20
 var spike_infection_timer = 0
 var spike_infection_time_limit = 5
 var my_tileset_type = global.TilesetType.DUNGEON
@@ -328,6 +330,7 @@ func _process(delta):
 
   if global.isPauseMenuOpen: return
 
+  # process infected tiles, and spread infection.
   var num_infected_spikes = len(infected_spikes)
   if num_infected_spikes > 0:
     spike_infection_timer += (delta*22)
@@ -352,6 +355,23 @@ func _process(delta):
         infectSpikes(bottom_right_neighbor_coords)
         infectSpikes(bottom_left_neighbor_coords)
         infectSpikes(top_right_neighbor_coords)
+
+  # process transient tiles. no spread.
+  for i in range(len(transient_tiles)-1, -1, -1):
+    var coords = transient_tiles[i][0]
+    var transient_tile_time = transient_tiles[i][1]
+    transient_tile_time += (delta*11)
+    transient_tiles[i][1] = transient_tile_time
+    if transient_tile_time >= transient_time_limit:
+      # TODO(jaketrower): If you want to only TEMPORARILY clear spikes, use this
+      # self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+      # TODO(jaketrower): Otherwise, use this
+      removeTile(coords)
+      var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+      level.summonSmokeClouds(tile_pos, 1, false, false)
+      musicPlayer.leavesSound.play()
+      transient_tiles.pop_at(i)
+
 
 func isNeighborOfInfectedSpikes(neighborCoords):
   var num_infected_spikes = len(infected_spikes)
@@ -386,7 +406,6 @@ func isTileCloud(tile_type):
   var tile_name = mesh_library.get_item_name(tile_type)
   return "PinkCloud" in tile_name
   
-
 func infectSpikes(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
   var did_infect_spikes = false
@@ -412,6 +431,23 @@ func sweepUpSand(coords):
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
     level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)
   spike_infection_timer = 0
+
+
+func removeTile(key, removeFromLevelZone = true):
+  set_cell_item(key.x, key.y, key.z, -1)
+  tile_dict.erase(key)
+  if removeFromLevelZone:
+    global.removeLevelZoneTile(level.getShortLevelName(), key)
+
+func cloneTile(source, target, is_transient = false, transient_time_start = 0):
+  set_cell_item(target.x, target.y, target.z, get_cell_item(source.x, source.y, source.z))
+  randomizeTile(target, my_tileset_glitch_type)
+  tile_dict[target] = tile_dict[source]
+  if is_transient:
+    transient_tiles.append([target, transient_time_start])
+  else:
+    # TODO(jaketrower): add to levelZone...
+    pass
 
 func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
@@ -500,17 +536,6 @@ func changeColorPalette(palette, _palette_alt = null):
           next_material.set_shader_param("base_palette", curr_palette)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
-
-func removeTile(key, removeFromLevelZone = true):
-  set_cell_item(key.x, key.y, key.z, -1)
-  tile_dict.erase(key)
-  if removeFromLevelZone:
-    global.removeLevelZoneTile(level.getShortLevelName(), key)
-
-func cloneTile(source, target):
-  set_cell_item(target.x, target.y, target.z, get_cell_item(source.x, source.y, source.z))
-  tile_dict[target] = tile_dict[source]
-  # TODO(jaketrower): add to levelZone...
 
 func properlySetTiles():
   var keys = tile_dict.keys()

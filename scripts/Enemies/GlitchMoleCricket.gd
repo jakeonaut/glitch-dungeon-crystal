@@ -3,6 +3,7 @@ extends "GlitchEnemy.gd"
 onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
 
 onready var digSound = get_node("Sounds/DigSound")
+onready var respawnSound = get_node("Sounds/RespawnSound")
 enum MoleState {
     IDLE,
     PREPARE_JUMP,
@@ -12,6 +13,7 @@ enum MoleState {
     DIG_IDLE,
     OVERRIDE_FLY_START,
     OVERRIDE_FLYING,
+    RESPAWN,
 }
 var mole_state = MoleState.IDLE
 var mole_state_timer = 0
@@ -51,7 +53,7 @@ func _ready():
     myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.6
 
 func getSmacked(broom_origin):
-    if has_ever_been_smacked:
+    if has_ever_been_smacked or mole_state == MoleState.RESPAWN:
         return
     .getSmacked(broom_origin)
     walk_speed = 0
@@ -68,6 +70,7 @@ func shouldIDoCollisions():
     should_collide_floor = should_collide_floor or mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE
 
 export var is_digging_left = false
+var dig_counter = 0
 func _process(delta):
     # ._process(delta) implicit
 
@@ -206,19 +209,53 @@ func _process(delta):
             walk_direction.x = 1
             grav = -50
             true_terminal_vel = 5
+    elif mole_state == MoleState.RESPAWN:
+        global_transform.origin = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
+        has_been_smacked = false
+        has_ever_been_smacked = false
+        behavior_jumping = false
+        behavior_walking = false
+        grav = 0
+        flight_anchor = null
+        if respawn_timer >= respawn_time_limit:
+            tryFadeBack(delta)
+        else:
+            respawn_timer += (delta * 11)
 
     if am_i_dying:
         return
 
+var respawn_timer = 0
+var respawn_time_limit = 20
 func tryFadeAway(delta):
     if flight_anchor != null and flight_anchor.should_fade_away:
         opacity = opacity + (0.0 - opacity) * (delta * 3)
         myOtherSprite.material_override.set_shader_param("opacity", opacity)
         
         if stepify(opacity, 0.1) == 0:
-            queue_free()
+            if is_builder:
+                myOtherSprite.material_override.set_shader_param("opacity", 0)
+                mole_state = MoleState.RESPAWN
+                aniPlayer.stop()
+                aniPlayer.clear_queue()
+                aniPlayer.play("idle")
+                respawn_timer = 0
+            else:
+                queue_free()
+
+func tryFadeBack(delta):
+    opacity = opacity + (1.0 - opacity) * (delta * 5)
+    myOtherSprite.material_override.set_shader_param("opacity", opacity)
+    
+    if stepify(opacity, 0.1) == 1.0:
+        myOtherSprite.material_override.set_shader_param("opacity", 1.0)
+        respawnSound.play()
+        mole_state = MoleState.IDLE
+        grav = initial_grav
 
 func checkForFlyPathOverrides():
+    if mole_state == MoleState.RESPAWN:
+        return
     if not (has_been_smacked or (flight_anchor != null and flight_anchor.should_fade_away)):
         return
 
@@ -278,21 +315,21 @@ func digTiles(solidTiles, should_summon_clouds):
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_a.x, coords_a.y, coords_a.z), Vector3(coords_a.x, coords_a.y+1, coords_a.z))
+            levelTiles.cloneTile(Vector3(coords_a.x, coords_a.y, coords_a.z), Vector3(coords_a.x, coords_a.y+1, coords_a.z), true, dig_counter * -5)
         else:
             levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), false)
         tiles_dug += 1
     if solidTiles[1] != null:
         var coords_mid = solidTiles[1]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z))
+            levelTiles.cloneTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), true, dig_counter * -5)
         else:
             levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), false)
         tiles_dug += 1
     if solidTiles[2] != null:
         var coords_b = solidTiles[2]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_b.x, coords_b.y, coords_b.z), Vector3(coords_b.x, coords_b.y+1, coords_b.z))
+            levelTiles.cloneTile(Vector3(coords_b.x, coords_b.y, coords_b.z), Vector3(coords_b.x, coords_b.y+1, coords_b.z), true, dig_counter * -5)
         else:
             levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), false)
         tiles_dug += 1
@@ -301,6 +338,7 @@ func digTiles(solidTiles, should_summon_clouds):
         level.summonSmokeClouds(global_transform.origin, 2)
 
     if tiles_dug > 0:
+        dig_counter += 1
         if is_builder:
             global_transform.origin.y += 8*.125
         else:
@@ -319,10 +357,12 @@ func landed():
     behavior_walking = false
         
     if mole_state != MoleState.DIG and mole_state != MoleState.IDLE and \
-        mole_state != MoleState.OVERRIDE_FLY_START and mole_state != MoleState.OVERRIDE_FLYING:
+        mole_state != MoleState.OVERRIDE_FLY_START and mole_state != MoleState.OVERRIDE_FLYING \
+        and mole_state != MoleState.RESPAWN:
         mole_state = MoleState.LAND
 
 func startDigging():
+    dig_counter = 0
     if mole_state == MoleState.IDLE or mole_state == MoleState.LAND:
         if aniPlayer.assigned_animation == "idle":
             aniPlayer.stop()

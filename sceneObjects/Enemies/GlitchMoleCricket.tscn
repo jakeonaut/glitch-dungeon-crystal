@@ -14,7 +14,7 @@
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=12]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=13]
 [ext_resource path="res://scripts/Enemies/GlitchMoleCricket.gd" type="Script" id=14]
-[ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/eba_digging2.wav" type="AudioStream" id=15]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive2.gd" type="Script" id=16]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive3.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=18]
@@ -490,6 +490,11 @@ stream = ExtResource( 18 )
 volume_db = -18.0
 pitch_scale = 0.9
 
+[node name="RespawnSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = -25.0
+pitch_scale = 1.1
+
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
 volume_db = -18.0
@@ -503,13 +508,6 @@ volume_db = -15.0
 stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 0.5
-
-[node name="MeowSound" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource( 15 )
-unit_db = 20.0
-unit_size = 6.0
-max_db = -24.0
-pitch_scale = 0.7
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 12 )

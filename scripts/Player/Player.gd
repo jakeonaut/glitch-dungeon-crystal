@@ -160,7 +160,7 @@ func floorGlitch():
   level.displaySpellMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
-  changeSpriteColorPalette(global.red_palette)
+  changeSpriteColorPalette(global.player_red_palette)
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
@@ -215,7 +215,9 @@ func pressingRun():
     
   if nesting_doll_state == global.NestingDoll.BABY:
     return true
-  if Input.is_action_pressed("run_button"):
+  elif nesting_doll_state == global.NestingDoll.MOM:
+    return true
+  elif Input.is_action_pressed("run_button"):
     return true
   return .pressingRun()
 
@@ -352,12 +354,12 @@ func _process(delta):
     if smack_timer >= smack_time_limit:
         unsmack()
 
-  if global.memory.has("anna_mode") and global.memory["anna_mode"]:
-    mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
-    broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheetTiny)
-    if global.memory.has("blue_mode") and global.memory["blue_mode"]:
-      mySprite.material_override.set_shader_param("target_palette", global.base_palette)
-  elif global.memory.has("blue_mode") and global.memory["blue_mode"]:
+  # if global.memory.has("anna_mode") and global.memory["anna_mode"]:
+  #   mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+  #   broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheetTiny)
+  #   if global.memory.has("blue_mode") and global.memory["blue_mode"]:
+  #     mySprite.material_override.set_shader_param("target_palette", global.base_palette)
+  if global.memory.has("blue_mode") and global.memory["blue_mode"]:
     mySprite.material_override.set_shader_param("target_palette", global.NES_palette)
   
 
@@ -1078,18 +1080,19 @@ func landed():
     summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
-  # var lt = getLevelTiles()
-  # var original_y = global_transform.origin.y
-  # for _i in range(4):
-  #   var tiles = getTilesBelow(lt)
-  #   if tiles[0] != null:
-  #     lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
-  #   if tiles[1] != null:
-  #     lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
-  #   if tiles[2] != null:
-  #     lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
-  #   global_transform.origin.y -= 1
-  # global_transform.origin.y = original_y
+  if nesting_doll_state == global.NestingDoll.MOM:
+    var lt = getLevelTiles()
+    var original_y = global_transform.origin.y
+    for _i in range(4):
+      var tiles = getTilesBelow(lt)
+      if tiles[0] != null:
+        lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+      if tiles[1] != null:
+        lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+      if tiles[2] != null:
+        lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+      global_transform.origin.y -= 1
+    global_transform.origin.y = original_y
     
 func broomStop():
   if summonedBroom != null:

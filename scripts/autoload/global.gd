@@ -3,6 +3,7 @@ extends Node
 var kirokaze_palette = preload("res://assets/palettes/kirokaze-gameboy-1x.png")
 
 var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
+var player_red_palette = preload("res://assets/palettes/player_red_palette.png")
 var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
 var yellow_player_palette = preload("res://assets/palettes/yellow_player_palette.png")
 var black_player_palette = preload("res://assets/palettes/player_black_palette.png")
@@ -219,7 +220,7 @@ func _ready():
     # POWERUPS
     memory["broomerang"] = false
     memory["magic_lantern"] = false
-    memory["can_nest"] = false
+    memory["can_nest"] = true
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
     memory["zora_flippers"] = false # TODO(jaketrower): turn off before beta build

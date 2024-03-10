@@ -131,12 +131,12 @@ func isActive(_debug=false):
 
 func passiveActivate(_delta, is_player):
     if is_player:
-        if level.player.nesting_doll_state == global.NestingDoll.BABY:
+        if level.player.nesting_doll_state == global.NestingDoll.BABY or level.player.nesting_doll_state == global.NestingDoll.MOM:
             level.player.shroomAniPlayer.queue("grow")
             level.player.shroomAniPlayer.queue("adjust")
             level.player.getABroom()
-            for _i in range(3):
-                level.player.spawnASpore(0, -1)
+            # for _i in range(3):
+            #     level.player.spawnASpore(0, -1)
             level.player.nesting_doll_state = global.NestingDoll.GRANDMA
             global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
             queue_free()
