@@ -65,7 +65,7 @@ func processPauseAnimation():
     return
   
   if is_mushroom_infected:
-    pauseAnimation = true # (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
+    pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
     if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -310,16 +310,16 @@ func pressingMoveDown():
 func pressingMoveLeft():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  # if is_mushroom_infected:
-  #   return mushroom_infection_direction == -1
+  if is_mushroom_infected:
+    return mushroom_infection_direction == -1
   return Input.is_action_pressed("ui_left") and not pauseInput and not isTextboxPausingMe()
 
 # @override
 func pressingMoveRight():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  # if is_mushroom_infected:
-  #   return mushroom_infection_direction == 1
+  if is_mushroom_infected:
+    return mushroom_infection_direction == 1
   return Input.is_action_pressed("ui_right") and not pauseInput and not isTextboxPausingMe()
 
 func magicJump():
@@ -394,8 +394,6 @@ var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
-  # if is_mushroom_infected:
-  #  return 0 if mushroom_turn_timer > 0 else 6 if is_really_pressing_horizontal_input else 1
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
@@ -405,7 +403,18 @@ func getWalkSpeed(delta):
   elif nesting_doll_state == global.NestingDoll.MOM:
     return 9 if pressingRun() else 7
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
-    return 7 if pressingRun() else 6
+    if is_mushroom_infected:
+      if mushroom_infection_direction < 0:
+        if Input.is_action_pressed("ui_left"):
+          return 7
+        elif Input.is_action_pressed("ui_right"):
+          return 2
+      else:
+        if Input.is_action_pressed("ui_left"):
+          return 2
+        elif Input.is_action_pressed("ui_right"):
+          return 7
+    return 7 if pressingRun() else 4
   else:
     return .getWalkSpeed(delta) # super()
 
@@ -457,22 +466,22 @@ func processJumpInputs(delta):
       has_used_magic_lantern = true
       was_just_on_ground_timer = was_just_on_ground_time_limit
       glitchTickle()
-    elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
-      has_mushroom_double_jumped = true
-      feather_jump_timer = 0
-      wormSound.play()
-      # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
-      # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-      # if turning_left or turning_right:
-      #   mushroom_infection_direction = -mushroom_infection_direction
-      for _i in range(5):
-        spawnASpore(0, -1)
-      # is_mushroom_infected = false
-      summonSmokeClouds(2, true, true)
-      aniPlayer.clear_queue()
-      aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
-      aniPlayer.queue("jumpStart")
-      aniPlayer.queue("jump")
+    # elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
+    #   has_mushroom_double_jumped = true
+    #   feather_jump_timer = 0
+    #   wormSound.play()
+    #   # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+    #   # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+    #   # if turning_left or turning_right:
+    #   #   mushroom_infection_direction = -mushroom_infection_direction
+    #   for _i in range(5):
+    #     spawnASpore(0, -1)
+    #   # is_mushroom_infected = false
+    #   summonSmokeClouds(2, true, true)
+    #   aniPlayer.clear_queue()
+    #   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
+    #   aniPlayer.queue("jumpStart")
+    #   aniPlayer.queue("jump")
     elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
       nesting_doll_state -= 1

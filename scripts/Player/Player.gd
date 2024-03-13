@@ -607,20 +607,19 @@ func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
   
 
-func getMushroomInfected():
-  return 
-  # if is_mushroom_infected:
-  #   return false
+func getMushroomInfected(): 
+  if is_mushroom_infected:
+    return false
 
-  # musicPlayer.changeSongPitch(0.5)
-  # infectSound.play()
-  # # mushroom_turn_timer = 0
-  # glitchTickle(0)
-  # is_mushroom_infected = true
-  # # if mySprite.flip_h:
-  # #   mushroom_infection_direction = -1
-  # # else:
-  # #   mushroom_infection_direction = 1
+  musicPlayer.changeSongPitch(0.5)
+  infectSound.play()
+  # mushroom_turn_timer = 0
+  glitchTickle(0)
+  is_mushroom_infected = true
+  # if mySprite.flip_h:
+  #   mushroom_infection_direction = -1
+  # else:
+  #   mushroom_infection_direction = 1
 
 
 var remembered_feather_jump_timer = 0
@@ -893,7 +892,7 @@ var spore_spawn_time_limit = 15
 onready var sporeSound = get_node("Sounds/SporeSound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
-func processMushroomLogic(_delta):
+func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
     if global.memory["broom"]:
@@ -901,9 +900,9 @@ func processMushroomLogic(_delta):
       summonFallenBroom(false, true)
       mySprite.flip_h = not mySprite.flip_h
     adjustMushroomSpritePosition()
-    # if horizontal_collision:
-    #   mushroom_infection_direction = -mushroom_infection_direction
-    #   mushroom_turn_timer = 0
+    if horizontal_collision:
+      mushroom_infection_direction = -mushroom_infection_direction
+      mushroom_turn_timer = 0
 
     # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
     # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
@@ -915,11 +914,11 @@ func processMushroomLogic(_delta):
     # else:
     #   mushroom_turn_timer = 0
     
-    # spore_spawn_timer += (delta*22)
-    # if spore_spawn_timer >= spore_spawn_time_limit:
-    #   spore_spawn_timer = 0
-    #   spawnASpore()
-    #   sporeSound.play()
+    spore_spawn_timer += (delta*22)
+    if spore_spawn_timer >= spore_spawn_time_limit:
+      spore_spawn_timer = 0
+      spawnASpore()
+      sporeSound.play()
 
 
 func adjustMushroomSpritePosition():

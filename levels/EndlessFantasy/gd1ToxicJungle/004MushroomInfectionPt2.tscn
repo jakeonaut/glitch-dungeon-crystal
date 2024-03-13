@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -82,8 +82,11 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=24]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -245,14 +248,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9, 3.3, 0 )
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 3.3, 0 )
 
+[node name="Viewport2" parent="." instance=ExtResource( 14 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 23 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 10 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 24 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
 
@@ -260,3 +273,4 @@ __meta__ = {
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport2/ScreenEffects"]
