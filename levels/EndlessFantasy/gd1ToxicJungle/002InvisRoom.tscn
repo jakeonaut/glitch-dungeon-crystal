@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=10]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
@@ -18,6 +18,11 @@
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=19]
+[ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=20]
+[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=21]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=22]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=23]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -85,6 +90,34 @@ extents = Vector3( 1.5, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=35]
+shader = ExtResource( 22 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 20 )
+shader_param/base_palette = ExtResource( 19 )
+shader_param/target_palette = ExtResource( 10 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -97,7 +130,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
-tileset_type = 7
+tileset_type = 6
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -212,7 +245,10 @@ shape = SubResource( 16 )
 shape = SubResource( 33 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.9, 0 )
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.9, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 8.9, 0 )
@@ -222,9 +258,6 @@ frame = 27
 
 [node name="CollisionShape" parent="Viewport/level/GlitchEnemy4/FallthroughSolid" index="0"]
 shape = SubResource( 34 )
-
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -0.1, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 11.5, 0 )
@@ -243,8 +276,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, -1.01829, -1 )
 
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 0 )
-spawned_object_path = "res://sceneObjects/Enemies/BasicShroomEnemy.tscn"
 is_static_in_level = false
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 35 )
+texture = ExtResource( 21 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 35 )
+texture = ExtResource( 21 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
@@ -274,5 +319,6 @@ flip_v = true
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/GlitchEnemy4"]
+[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

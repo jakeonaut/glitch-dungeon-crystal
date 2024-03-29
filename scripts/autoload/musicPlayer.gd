@@ -47,7 +47,9 @@ func _process(delta):
             currentlyPlayingTheme = restartPlayingTheme
             restartPlayingTheme = null
         
+var stopAllMusic = true
 func tryToPlay(stream_player):
+    if stopAllMusic: return
     # if not initial_volume_dbs.has(stream_player.name):
     #     initial_volume_dbs[stream_player.name] = stream_player.volume_db
         
@@ -124,7 +126,7 @@ func playTreasureJingle(volume_db):
 
 
 func conductFromScenePath(path):
-    # return # i don't want to listen to music for a bit
+    if stopAllMusic: return
     changeSongPitch(1.0)
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
@@ -150,7 +152,7 @@ func conductFromScenePath(path):
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
     elif path.find("Casino") > 0 or path.find("Medievel") > 0 or path.find("Piranesi") > 0 or path.find("Grimoire") > 0:
-        tryToPlay(casinoThemePlayer)
+        tryToPlay(poisonThemePlayer)
     elif path.find("Suburb") > 0:
         tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0:
@@ -158,7 +160,7 @@ func conductFromScenePath(path):
     elif path.find("Desert") > 0 or path.find("ShiftingSand") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("Poison") > 0 or path.find("Toxic") > 0:
-        tryToPlay(poisonThemePlayer)
+        tryToPlay(casinoThemePlayer)
     elif path.find("Swamp") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:

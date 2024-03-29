@@ -567,7 +567,7 @@ tracks/18/path = NodePath("CubeContainer:scale")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
-tracks/18/enabled = true
+tracks/18/enabled = false
 tracks/18/keys = {
 "times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -579,7 +579,7 @@ tracks/19/path = NodePath("CubeContainer:visible")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
-tracks/19/enabled = true
+tracks/19/enabled = false
 tracks/19/keys = {
 "times": PoolRealArray( 0, 2.4, 2.5, 2.7, 3, 3.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
@@ -727,7 +727,7 @@ tracks/11/path = NodePath("CubeContainer/MeshInstance:scale")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
-tracks/11/enabled = true
+tracks/11/enabled = false
 tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -751,7 +751,7 @@ tracks/13/path = NodePath("CubeContainer:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
-tracks/13/enabled = true
+tracks/13/enabled = false
 tracks/13/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),

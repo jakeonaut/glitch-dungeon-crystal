@@ -73,6 +73,8 @@ func alignMySprite():
     spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
 
 func tryPlayFootstepSound():
+  if global.isPauseMenuOpen or global.pauseGame:
+    return 
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
   if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground:
@@ -609,17 +611,37 @@ func firstAdjustmentForNestingDolls():
 
 func getMushroomInfected(): 
   if is_mushroom_infected:
+    glitchTickle(0)
+    getSmacked()
     return false
 
   musicPlayer.changeSongPitch(0.5)
   infectSound.play()
   # mushroom_turn_timer = 0
+  physics_state = PhysicsState.GLITCH_HURT
   glitchTickle(0)
+  getSmacked()
+  glitch_death_timer = 0
+  global.pauseMoveInput = false 
   is_mushroom_infected = true
   # if mySprite.flip_h:
   #   mushroom_infection_direction = -1
   # else:
   #   mushroom_infection_direction = 1
+
+func getMushroomCured():
+  if not is_mushroom_infected:
+    return
+
+  musicPlayer.changeSongPitch(1.0)
+  returnSound.play()
+  # mushroom_turn_timer = 0
+  physics_state = PhysicsState.GLITCH_HURT
+  glitchTickle(0)
+  getSmacked()
+  glitch_death_timer = 0
+  global.pauseMoveInput = false 
+  is_mushroom_infected = false
 
 
 var remembered_feather_jump_timer = 0
@@ -641,7 +663,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     return
 
   if is_mushroom_infected:
-    getABroom()
+    # getABroom()
     for _i in range(5):
       spawnASpore(0, -1)
     is_mushroom_infected = false
@@ -895,10 +917,10 @@ onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):
   mushroomSprite.visible = is_mushroom_infected
   if is_mushroom_infected:
-    if global.memory["broom"]:
-      mySprite.flip_h = not mySprite.flip_h
-      summonFallenBroom(false, true)
-      mySprite.flip_h = not mySprite.flip_h
+    # if global.memory["broom"]:
+    #   mySprite.flip_h = not mySprite.flip_h
+    #   summonFallenBroom(false, true)
+    #   mySprite.flip_h = not mySprite.flip_h
     adjustMushroomSpritePosition()
     if horizontal_collision:
       mushroom_infection_direction = -mushroom_infection_direction
@@ -918,6 +940,7 @@ func processMushroomLogic(delta):
     if spore_spawn_timer >= spore_spawn_time_limit:
       spore_spawn_timer = 0
       spawnASpore()
+      sporeSound.pitch_scale = rand_range(2.0, 2.8)
       sporeSound.play()
 
 

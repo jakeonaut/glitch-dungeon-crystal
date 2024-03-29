@@ -386,6 +386,7 @@ func processHiscoreRenderLogic(delta):
       loveHiscoreLabel.visible = true
       loveHiscoreLabel.text = "love: " + str(global.getLevelZoneThing("love"))
       hiscoreDisplayIndex += 1
+      hiscoreTimeLimit = 15
     elif hiscoreDisplayIndex == 6:
       pressEnterLabel.visible = not pressEnterLabel.visible
       var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
@@ -603,7 +604,7 @@ func processControlsLogic(_delta):
     if global.is_reading_input:
       inputText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
     else:
-      inputText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to change key\nhold ESC:reset bindings"
+      inputText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to change key\n    hold ENTER: reset bindings"
 
     if global.is_reading_input:
       if global.last_read_input != null:

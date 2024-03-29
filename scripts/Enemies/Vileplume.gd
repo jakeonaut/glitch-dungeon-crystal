@@ -31,11 +31,11 @@ func _process(delta):
   if not visible:
     return
 
-  flip_timer += (delta*22)
-  if flip_timer >= flip_time_limit:
-    flip_timer = 0
-    flip_time_limit = rand_range(5, 30)
-    mySprite.flip_h = not mySprite.flip_h
+  # flip_timer += (delta*22)
+  # if flip_timer >= flip_time_limit:
+  #   flip_timer = 0
+  #   flip_time_limit = rand_range(5, 30)
+  #   mySprite.flip_h = not mySprite.flip_h
 
   if is_in_cooldown:
     cooldown_timer += (delta*22)
@@ -63,7 +63,7 @@ func getSmacked(broom_origin):
   getPlayer().getMushroomInfected()
 
 func passiveActivate(_delta, _is_player):
-  # getSmacked(null)
+  getSmacked(null)
   pass
 
 func spawnFiveSpores():

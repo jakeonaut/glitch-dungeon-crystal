@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://sceneObjects/Buggies/Snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=13]
 [ext_resource path="res://levels/EndlessFantasy/003FungusClericAbortSound.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=15]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=16]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=17]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=19]
@@ -28,6 +29,7 @@
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=27]
 [ext_resource path="res://sceneObjects/MrMoTex.tscn" type="PackedScene" id=28]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=29]
+[ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=30]
 [ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=32]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=34]
@@ -535,8 +537,22 @@ shader_param/target_palette = ExtResource( 29 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=88]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ShaderMaterial" id=89]
+shader = ExtResource( 16 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 30 )
+
+[sub_resource type="ViewportTexture" id=90]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -544,9 +560,9 @@ viewport_path = NodePath("Viewport")
 
 [node name="level" type="Spatial" parent="Viewport"]
 script = ExtResource( 6 )
+show_crt_effect = true
 starting_glitch_type = 2
 spellbook_spells = [ 1, 2 ]
-how_much_mp = 10
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 19 )]
 
@@ -691,15 +707,15 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/FungusNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
 
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
 pitch_scale = 0.9
 
-[node name="DialogSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="8"]
 volume_db = -15.0
 pitch_scale = 0.3
 
-[node name="AbortSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/FungusNPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
 which_one_am_i = 1
 
@@ -729,15 +745,15 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/FungusNPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
 
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
 pitch_scale = 0.7
 
-[node name="DialogSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="8"]
 stream = ExtResource( 39 )
 pitch_scale = 0.3
 
-[node name="AbortSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/FungusNPC2/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
 which_one_am_i = 2
 
@@ -774,13 +790,13 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/FungusNPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
 
-[node name="DialogStartSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 39 )
 
-[node name="DialogSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="8"]
 pitch_scale = 0.3
 
-[node name="AbortSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/FungusNPC3/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 14 )
 which_one_am_i = 3
 
@@ -1690,10 +1706,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, -4.5 )
 pixel_size = 0.125
 texture = ExtResource( 37 )
 
+[node name="Viewport2" parent="." instance=ExtResource( 49 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 88 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 25 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+material = SubResource( 89 )
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 90 )
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1716,4 +1745,5 @@ __meta__ = {
 [editable path="Viewport/level/WaterCube19"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/AreaSound"]
+[editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

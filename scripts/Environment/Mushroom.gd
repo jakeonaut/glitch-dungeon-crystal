@@ -33,16 +33,17 @@ func _ready():
 func fallthroughCollisionActivate(possible_game_mover):
     if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle(possible_game_mover)
-        if possible_game_mover != null and possible_game_mover == level.player and \
-           level.player.nesting_doll_state == global.NestingDoll.BABY and not level.player.pressingDown():
+        # if level.player.nesting_doll_state == global.NestingDoll.BABY:
+        if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
             getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
             var jump_val = 14
             possible_game_mover.magicJump()
             getPlayer().linear_velocity.y = jump_val
             getPlayer().lv.y = jump_val
             getPlayer().vv = jump_val
-            getPlayer().applyHalfGrav = true
-            getPlayer().applyHalfGravTimer = 5
+            # getPlayer().applyHalfGrav = true
+            # getPlayer().applyHalfGravTimer = 3
+            bounceSound.pitch_scale = rand_range(0.8, 1.5)
             bounceSound.play()
             getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
 

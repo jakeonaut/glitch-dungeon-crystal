@@ -64,12 +64,12 @@ func processPauseAnimation():
   if aniPlayer.assigned_animation == "hookCaught":
     return
   
-  if is_mushroom_infected:
-    pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
-    if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("walk")
+  # if is_mushroom_infected:
+  #   pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
+  #   if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
+  #     aniPlayer.stop()
+  #     aniPlayer.clear_queue()
+  #     aniPlayer.play("walk")
   
 onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
 onready var interactPromptSprite = get_node("InteractPrompt")
@@ -403,19 +403,21 @@ func getWalkSpeed(delta):
   elif nesting_doll_state == global.NestingDoll.MOM:
     return 9 if pressingRun() else 7
   elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
+    return 7 if pressingRun() else 4
+  else:
     if is_mushroom_infected:
       if mushroom_infection_direction < 0:
         if Input.is_action_pressed("ui_left"):
           return 7
         elif Input.is_action_pressed("ui_right"):
           return 2
+        else: return 5
       else:
         if Input.is_action_pressed("ui_left"):
           return 2
         elif Input.is_action_pressed("ui_right"):
           return 7
-    return 7 if pressingRun() else 4
-  else:
+        else: return 5
     return .getWalkSpeed(delta) # super()
 
 func doubleJump():
@@ -482,7 +484,7 @@ func processJumpInputs(delta):
     #   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
     #   aniPlayer.queue("jumpStart")
     #   aniPlayer.queue("jump")
-    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
+    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped and not is_mushroom_infected: 
       doubleJump()
       nesting_doll_state -= 1
       updateNestingDoll(nesting_doll_state + 1)
@@ -503,7 +505,7 @@ func glitchTickle(play_sound = true):
 
 var sporeRes = preload("res://sceneObjects/Environment/PlayerSpore.tscn")
 func spawnASpore(x_dir = 0, y_dir = 1):
-  summonSmokeClouds(1, 0, 0, 0)
+  # summonSmokeClouds(1, 0, 0, 0)
   var spore = sporeRes.instance()
   if y_dir == 1:
     spore.initially_fly_up = true

@@ -15,6 +15,7 @@ var start_applying_parallax = false
 var how_fast_to_switch_targets = 1
 export var is_doing_fake_static = false
 var am_i_zooming = false
+var can_i_move = true
 
 var levelTiles = null
 func getLevelTiles():
@@ -75,60 +76,60 @@ func _process(delta):
 
   global_transform.origin.z = initial_z
   # d=√((x_2-x_1)²+(y_2-y_1)²)
-  var distance = global_transform.origin.distance_to(actual_target.get_ref().global_transform.origin)
 
-  var speed_multiplier = 1
-  if how_fast_to_switch_targets > 0:
-    speed_multiplier = how_fast_to_switch_targets
-    how_fast_to_switch_targets = how_fast_to_switch_targets + (1 - how_fast_to_switch_targets) * (delta * 0.1)
-    if stepify(how_fast_to_switch_targets, 0.1) == 1.0:
-      how_fast_to_switch_targets = 0
-    
-    
-  if distance > 19.8:
-    set_interpolation_enabled(true)
-    set_speed(7 * speed_multiplier)
-  elif distance > 19.7:
-    set_interpolation_enabled(true)
-    set_speed(5 * speed_multiplier)
-  elif distance > 19.6:
-    set_interpolation_enabled(true)
-    set_speed(4 * speed_multiplier)
-  elif distance > 19.5:
-    set_interpolation_enabled(true)
-    set_speed(3 * speed_multiplier)
-  elif distance > 19.4:
-    set_interpolation_enabled(true)
-    set_speed(2 * speed_multiplier)
-    if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
-  elif distance < 19.33 and global.activeInteractor == null:
-    set_interpolation_enabled(false)
-    if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
+  if can_i_move:
+    var distance = global_transform.origin.distance_to(actual_target.get_ref().global_transform.origin)
 
-  if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
-    actual_target = weakref(global.activeInteractor.textboxCameraTarget.get_ref())
-    set_target(actual_target.get_ref())
-    # interpolation = A + (B - A) * t
-    self.size = self.size + (zoomed_size - self.size) * (delta*5)
-    if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
-      self.size = zoomed_size
-    set_speed(2)
-    set_interpolation_enabled(true)
-  elif am_i_zooming:
-    actual_target = weakref(initial_target)
-    set_target(actual_target.get_ref())      
-    self.size = self.size + (zoomed_size - self.size) * (delta*5)
-    if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
-      self.size = zoomed_size
-  else:
-    actual_target = weakref(initial_target)
-    set_target(actual_target.get_ref())      
-    self.size = self.size + (initial_size - self.size) * (delta*5)
-    if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
-      self.size = initial_size
-    
-  respectLevelTilesEdges()
-  
+    var speed_multiplier = 1
+    if how_fast_to_switch_targets > 0:
+      speed_multiplier = how_fast_to_switch_targets
+      how_fast_to_switch_targets = how_fast_to_switch_targets + (1 - how_fast_to_switch_targets) * (delta * 0.1)
+      if stepify(how_fast_to_switch_targets, 0.1) == 1.0:
+        how_fast_to_switch_targets = 0
+      
+    if distance > 19.8:
+      set_interpolation_enabled(true)
+      set_speed(7 * speed_multiplier)
+    elif distance > 19.7:
+      set_interpolation_enabled(true)
+      set_speed(5 * speed_multiplier)
+    elif distance > 19.6:
+      set_interpolation_enabled(true)
+      set_speed(4 * speed_multiplier)
+    elif distance > 19.5:
+      set_interpolation_enabled(true)
+      set_speed(3 * speed_multiplier)
+    elif distance > 19.4:
+      set_interpolation_enabled(true)
+      set_speed(2 * speed_multiplier)
+      if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
+    elif distance < 19.33 and global.activeInteractor == null:
+      set_interpolation_enabled(false)
+      if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
+
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
+      actual_target = weakref(global.activeInteractor.textboxCameraTarget.get_ref())
+      set_target(actual_target.get_ref())
+      # interpolation = A + (B - A) * t
+      self.size = self.size + (zoomed_size - self.size) * (delta*5)
+      if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
+        self.size = zoomed_size
+      set_speed(2)
+      set_interpolation_enabled(true)
+    elif am_i_zooming:
+      actual_target = weakref(initial_target)
+      set_target(actual_target.get_ref())      
+      self.size = self.size + (zoomed_size - self.size) * (delta*5)
+      if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
+        self.size = zoomed_size
+    else:
+      actual_target = weakref(initial_target)
+      set_target(actual_target.get_ref())      
+      self.size = self.size + (initial_size - self.size) * (delta*5)
+      if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
+        self.size = initial_size
+      
+    respectLevelTilesEdges()
   # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size
   # var pixelCameraSize = 0.125
   realCamera.size = self.size

@@ -318,6 +318,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -2, -4 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 16, 0 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 is_passive = true
 is_vertical = true
 

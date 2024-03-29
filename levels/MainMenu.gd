@@ -26,11 +26,20 @@ onready var continueText = get_node("../../UILayer/Options/Continue/OptionTextLa
 onready var continueSelectHighlight = get_node("../../UILayer/Options/Continue/OptionTextLabeGlitched")
 onready var newGameText = get_node("../../UILayer/Options/NewGame/OptionTextLabel")
 onready var newGameSelectHighlight = get_node("../../UILayer/Options/NewGame/OptionTextLabeGlitched")
+
+export var camera_size = 30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-    if uiLayer.title_display_state == 3:
-        uiLayer.title_display_state = 0
-    uiLayer.setDisplayTitle("press [lb]" + global.getKeyCodeStr(global.getKeyCode("sub_action_button")) + "[rb]")
+    gameCamera.initial_size = camera_size
+    gameCamera.zoomed_size = camera_size
+    gameCamera.size = camera_size
+    # gameCamera.can_i_move = false
+    global.pauseGame = true
+    global.pauseMoveInput = true
+
+    # if uiLayer.title_display_state == 3:
+    #     uiLayer.title_display_state = 0
+    # uiLayer.setDisplayTitle("press [lb]" + global.getKeyCodeStr(global.getKeyCode("sub_action_button")) + "[rb]")
 
     # .process(delta) implicit
     # player.rotation_degrees.y += (delta)*direction
