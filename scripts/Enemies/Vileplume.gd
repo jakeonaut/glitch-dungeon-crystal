@@ -20,7 +20,7 @@ var original_material = null
 var flip_timer = 0
 var flip_time_limit = 20
 var cooldown_timer = 0
-var cooldown_time_limit = 40
+var cooldown_time_limit = 80
 var is_in_cooldown = false
 
 func _ready():
@@ -58,7 +58,8 @@ func getSmacked(broom_origin):
   is_in_cooldown = true
   cooldown_timer = 0
   .getSmacked(broom_origin)
-  level.summonSmokeClouds(global_transform.origin, 5)
+  var smokeOrigin = Vector3(global_transform.origin.x, global_transform.origin.y + 1, 0)
+  level.summonSmokeClouds(smokeOrigin, 5)
   spawnFiveSpores()
   getPlayer().getMushroomInfected()
 
@@ -67,7 +68,7 @@ func passiveActivate(_delta, _is_player):
   pass
 
 func spawnFiveSpores():
-  for _i in range(10):
+  for _i in range(5):
       spawnASpore()
   
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
@@ -82,5 +83,5 @@ func spawnASpore():
     spore.target_pos.x = self.global_transform.origin.x + rand_range(-4, 4)
     spore.delta_multiplier = 4.0
     spore.global_transform.origin.x += rand_range(-3, 3)
-    spore.global_transform.origin.y -= rand_range(0, 1)
+    spore.global_transform.origin.y += rand_range(0, 1)
     spore.lifespan_time_limit = 15
