@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/pokemon-sgb-1x.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scripts/Enemies/Worm.gd" type="Script" id=5]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=8]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=10]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=11]
 [ext_resource path="res://assets/sounds/151RetroMonsters/minicast.wav" type="AudioStream" id=12]
@@ -43,7 +43,7 @@ shader_param/target_palette = ExtResource( 2 )
 [sub_resource type="Animation" id=25]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -52,10 +52,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 19 ]
+"values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:flip_h")
+tracks/1/path = NodePath("Sprite3D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -64,10 +64,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/2/path = NodePath("Sprite3D:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -79,7 +79,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/path = NodePath("Sprite3D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -88,10 +88,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ 19 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -100,7 +100,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 2 ) ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -132,7 +132,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ true ]
 }
 tracks/1/type = "value"
@@ -148,70 +148,142 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=27]
-resource_name = "puffAttack"
-length = 1.5
+[sub_resource type="Animation" id=37]
+resource_name = "gulp"
+step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("Sprite3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 19, 20, 19, 20, 19, 20, 19, 20, 19 ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/1/path = NodePath("Sprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ 20, 19, 24, 16, 26, 25, 19, 20 ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:offset")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.25, 0.35, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "jumpToPlayerPosition"
+}, {
+"args": [  ],
+"method": "cureMushroom"
+}, {
+"args": [  ],
+"method": "finishGulp"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.15, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "puffAttack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 19, 20, 19, 20, 19, 20, 19, 20, 19 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "spawnFiveSpores"
 } ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ), ExtResource( 2 ) ]
 }
 
 [sub_resource type="CylinderShape" id=32]
@@ -224,14 +296,6 @@ radius = 0.8
 
 [sub_resource type="BoxShape" id=29]
 extents = Vector3( 18, 13, 1 )
-
-[sub_resource type="BoxShape" id=34]
-resource_local_to_scene = true
-extents = Vector3( 3, 2, 1.3 )
-
-[sub_resource type="BoxShape" id=35]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="Worm" type="Spatial"]
 script = ExtResource( 5 )
@@ -250,11 +314,12 @@ region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 7 )
 should_animate = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="WormAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "bob"
 anims/RESET = SubResource( 25 )
 anims/bob = SubResource( 26 )
 anims/default = SubResource( 20 )
+anims/gulp = SubResource( 37 )
 anims/puffAttack = SubResource( 27 )
 
 [node name="Sounds" type="Spatial" parent="."]
@@ -262,6 +327,10 @@ anims/puffAttack = SubResource( 27 )
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
 volume_db = -80.0
+
+[node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+volume_db = -10.0
 
 [node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -284,20 +353,3 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
 shape = SubResource( 29 )
-
-[node name="NPC" parent="." instance=ExtResource( 8 )]
-bbText = "yummy!"
-tiny_textbox = true
-
-[node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 34 )
-
-[node name="Sprite3D" parent="NPC" index="3"]
-pixel_size = 0.0001
-
-[node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.323506, 0 )
-shape = SubResource( 35 )
-
-[editable path="NPC"]
-[editable path="NPC/NPC TextBox"]

@@ -310,17 +310,19 @@ func pressingMoveDown():
 func pressingMoveLeft():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
+  var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
-    return mushroom_infection_direction == -1
-  return Input.is_action_pressed("ui_left") and not pauseInput and not isTextboxPausingMe()
+    return mushroom_infection_direction == -1 and not am_paused
+  return Input.is_action_pressed("ui_left") and not am_paused
 
 # @override
 func pressingMoveRight():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
+  var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
-    return mushroom_infection_direction == 1
-  return Input.is_action_pressed("ui_right") and not pauseInput and not isTextboxPausingMe()
+    return mushroom_infection_direction == 1 and not am_paused
+  return Input.is_action_pressed("ui_right") and not am_paused
 
 func magicJump():
   has_used_magic_lantern = true
@@ -336,13 +338,7 @@ onready var dollCloseSound = get_node("Sounds/DollCloseSound")
 func updateNestingDoll(prevNestingDollState):
   global.memory["nesting_doll"] = nesting_doll_state
   if nesting_doll_state < prevNestingDollState:
-    var emptyDoll = cherryCarcassRes.instance()
-    level.add_child(emptyDoll)
-    emptyDoll.nesting_doll_state = prevNestingDollState
-    emptyDoll.global_transform.origin = self.global_transform.origin
-    emptyDoll.mySprite.flip_h = mySprite.flip_h
-    emptyDoll.mySprite.material_override.set_shader_param(
-      "target_palette", mySprite.material_override.get_shader_param("target_palette"))
+    var emptyDoll = spawnACarcass()
     if nesting_doll_state == global.NestingDoll.BABY:
       emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
       emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
@@ -381,6 +377,18 @@ func updateNestingDoll(prevNestingDollState):
     broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheetTiny)
   else:
     broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheet)
+
+func spawnACarcass():
+  var carcass = cherryCarcassRes.instance()
+  level.add_child(carcass)
+  carcass.global_transform.origin = self.global_transform.origin
+  carcass.mySprite.flip_h = mySprite.flip_h
+  if carcass.mySprite.flip_h:
+    carcass.mySprite2.flip_h = true
+    carcass.mySprite2.offset.x = -18
+  carcass.mySprite.material_override.set_shader_param(
+    "target_palette", mySprite.material_override.get_shader_param("target_palette"))
+  return carcass
     
 
 func regainNestingDoll():

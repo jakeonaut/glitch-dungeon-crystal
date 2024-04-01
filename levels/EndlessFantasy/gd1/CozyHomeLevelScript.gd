@@ -3,6 +3,7 @@ extends "../../../scripts/levelScript.gd"
 # @override
 func setUpRoomInitializationOverride():
   global.pauseMoveInput = true
+  global.shouldRenderAsCinematic = true
 
 var glitch_death_timer_fake = 0
 func _process(delta):

@@ -1,6 +1,5 @@
 extends "GlitchEnemy.gd"
 
-onready var npc = get_node("NPC")
 var jump_timer = 0
 var jump_time_limit = 30
 var water_jump_time_limit = 10
@@ -23,6 +22,7 @@ var flip_time_limit = 20
 var cooldown_timer = 0
 var cooldown_time_limit = 40
 var is_in_cooldown = false
+onready var wormAniPlayer = get_node("WormAnimationPlayer")
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
@@ -31,6 +31,8 @@ func _ready():
 func _process(delta):
   if not visible:
     return
+
+  mySprite.flip_h = level.player.global_transform.origin.x > global_transform.origin.x
 
   # flip_timer += (delta*22)
   # if flip_timer >= flip_time_limit:
@@ -65,10 +67,34 @@ func passiveActivate(_delta, _is_player):
   is_in_cooldown = true
   cooldown_timer = 0
   .getSmacked(null)
+  global_transform.origin.z = 2
+  getPlayer().pauseInput = true
+  global.pauseMoveInput = true
+  getPlayer().pauseAnimation = true
+  wormAniPlayer.stop()
+  wormAniPlayer.clear_queue()
+  wormAniPlayer.play("gulp")
+
+func jumpToPlayerPosition():
+  global_transform.origin.x = getPlayer().global_transform.origin.x  
+  if mySprite.flip_h:
+    global_transform.origin.x -= 1
+  else:
+    global_transform.origin.x += 1
   
-  level.summonSmokeClouds(global_transform.origin, 5)
+  global_transform.origin.y = getPlayer().global_transform.origin.y + 1
+
+func cureMushroom():
+  var playerMushroomOrigin = getPlayer().mushroomSpriteVisible.global_transform.origin
+  level.summonSmokeClouds(playerMushroomOrigin, 1)
   getPlayer().getMushroomCured()
-  npc.activate(true)
+
+func finishGulp():
+  global_transform.origin.z = 0
+  getPlayer().pauseInput = false
+  global.pauseMoveInput = false
+  getPlayer().pauseAnimation = false
+  global_transform.origin = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
   
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")

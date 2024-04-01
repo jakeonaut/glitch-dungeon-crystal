@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=14]
 [ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=15]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sceneObjects/Enemies/Worm.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=21]
@@ -294,6 +295,9 @@ texture = ExtResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 71 )
 texture = ExtResource( 12 )
+
+[node name="Worm" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 

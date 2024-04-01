@@ -267,7 +267,10 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 9 )
 show_crt_effect = true
+starting_glitch_type = 3
 tileset_type = 6
+has_spellbook_page = true
+spellbook_spells = [ 3 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -359,7 +362,7 @@ pixel_size = 0.25
 texture = ExtResource( 25 )
 
 [node name="Vileplume" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9209, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9209, 3, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )

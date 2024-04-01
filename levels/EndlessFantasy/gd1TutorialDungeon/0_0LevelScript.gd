@@ -15,6 +15,7 @@ func setUpRoomInitializationOverride():
     # npcGranny.textBox.is_really_important = true
   else:
     global.pauseMoveInput = true
+    global.shouldRenderAsCinematic = true
     player.fall_timer = 50
     uiLayer.statsTitleRect.visible = false
     uiLayer.get_node("GlitchSprite").visible = false
@@ -29,13 +30,16 @@ func _process(delta):
   
   if is_start_of_game:
     global.pauseMoveInput = true
+    global.shouldRenderAsCinematic = true
     player.fall_timer = 999
     if player.physics_state == player.PhysicsState.COLLAPSED or \
        player.physics_state == player.PhysicsState.CAN_WAKE_UP:
       global.pauseMoveInput = false
+      global.shouldRenderAsCinematic = false
     elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
       is_start_of_game = false
       global.pauseMoveInput = false
+      global.shouldRenderAsCinematic = false
       player.textBox.interact()
         
 

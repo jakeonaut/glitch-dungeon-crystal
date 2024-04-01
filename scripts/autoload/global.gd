@@ -135,6 +135,7 @@ var respawnVarTimerHackLimit = 2
 var cameraRotation = 0
 
 var pauseMoveInput = false # don't allow player physics or camera input??
+var shouldRenderAsCinematic = false
 var pauseGame = false
 var isInventoryOpen = false
 var isPauseMenuOpen = false

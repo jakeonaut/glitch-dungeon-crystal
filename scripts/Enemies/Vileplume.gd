@@ -21,7 +21,9 @@ var flip_timer = 0
 var flip_time_limit = 20
 var cooldown_timer = 0
 var cooldown_time_limit = 80
-var is_in_cooldown = false
+var is_in_cooldown = true
+
+onready var vileAniPlayer = get_node("VileplumeAnimationPlayer")
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
@@ -36,12 +38,14 @@ func _process(delta):
   #   flip_timer = 0
   #   flip_time_limit = rand_range(5, 30)
   #   mySprite.flip_h = not mySprite.flip_h
+  mySprite.flip_h = level.player.global_transform.origin.x > global_transform.origin.x
 
   if is_in_cooldown:
     cooldown_timer += (delta*22)
     if cooldown_timer >= cooldown_time_limit:
       cooldown_timer = 0
       is_in_cooldown = false
+      getSmacked(self.global_transform.origin)
 
 # @override
 func glitchSetSpritesAndCollision():
@@ -53,7 +57,7 @@ func glitchSwitchSprite(_delta):
 
 # @override
 func getSmacked(broom_origin):
-  if is_smacked or is_in_cooldown:
+  if (getPlayer().is_mushroom_infected or getPlayer().is_mushroom_prefected) and (is_smacked or is_in_cooldown):
     return
   is_in_cooldown = true
   cooldown_timer = 0
@@ -61,11 +65,17 @@ func getSmacked(broom_origin):
   var smokeOrigin = Vector3(global_transform.origin.x, global_transform.origin.y + 1, 0)
   level.summonSmokeClouds(smokeOrigin, 5)
   spawnFiveSpores()
-  getPlayer().getMushroomInfected()
 
 func passiveActivate(_delta, _is_player):
-  getSmacked(null)
+  getSmacked(self.global_transform.origin)
+  getPlayer().getMushroomInfected()
   pass
+
+# @override
+func unsmack():
+  .unsmack()
+  vileAniPlayer.play("RESET")
+
 
 func spawnFiveSpores():
   for _i in range(5):

@@ -286,7 +286,7 @@ onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")
 onready var cinematicAniPlayer = get_node("CinematicAnimationPlayer")
 func shouldRenderAsCinematic():
-  return global.pauseMoveInput or level.getLevelName().find("000IntroCutscene") > 0
+  return global.shouldRenderAsCinematic or level.getLevelName().find("000IntroCutscene") > 0
 
 func initiateCutsceneRenderLogic():
   if shouldRenderAsCinematic():

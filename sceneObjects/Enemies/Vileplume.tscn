@@ -207,10 +207,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 
 [sub_resource type="CylinderShape" id=32]
@@ -241,7 +241,7 @@ region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 8 )
 should_animate = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="VileplumeAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "bob"
 anims/RESET = SubResource( 25 )
 anims/bob = SubResource( 26 )
@@ -252,7 +252,8 @@ anims/puffAttack = SubResource( 27 )
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 4 )
-volume_db = -80.0
+volume_db = -30.0
+pitch_scale = 2.0
 
 [node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

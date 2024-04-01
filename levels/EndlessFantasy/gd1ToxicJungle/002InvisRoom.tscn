@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=21]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=22]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Enemies/Worm.tscn" type="PackedScene" id=24]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -291,6 +292,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 35 )
 texture = ExtResource( 21 )
 
+[node name="Worm" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )
+
+[node name="Worm2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
+
+[node name="Worm3" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -320,5 +330,6 @@ flip_v = true
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/GlitchEnemy4"]
 [editable path="Viewport/level/ParallaxBackground"]
+[editable path="Viewport/level/Worm"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

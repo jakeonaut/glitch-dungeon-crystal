@@ -1313,38 +1313,8 @@ behavior_was_thrown = false
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, -9, 0, 0 )
-run_speed = null
-feather_glitch_walk_speed = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-swimming_walk_speed = null
 jump_force = 8
-only_activate_in_range = null
 sprite_offset_y = -0.3
-behavior_walking = null
-behavior_intermittent_walking = null
-behavior_flip_on_land = null
-behavior_stop_on_land = null
-behavior_was_thrown = null
-behavior_thrower = null
-behavior_evolve = null
-behavior_fizzle_out_after_evolve = null
-behavior_mini_explore = null
-behavior_directional_bullet = null
-walk_direction = null
-is_particle = null
-is_static_in_level = null
-evolution_time_limit = null
-kill_invis = null
-kill_immediately = null
-time_influence = null
-y_div = null
-normal_offset = null
-spawn_timer = null
-is_static = null
-is_licker = null
-is_infected = null
-blow_bubble_horizontally = null
 should_have_fallthrough = false
 
 [node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy/SpriteContainer/InnerSpriteContainer" index="0"]
