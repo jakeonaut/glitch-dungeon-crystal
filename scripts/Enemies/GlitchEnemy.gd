@@ -150,7 +150,7 @@ func _process(delta):
         processDeath()
         return
         
-    am_i_in_range_of_player = am_i_really_in_range_of_player
+    am_i_in_range_of_player = true # am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
 
     if behavior_fizzle_out_after_evolve:

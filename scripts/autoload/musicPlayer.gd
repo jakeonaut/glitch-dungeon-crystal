@@ -47,7 +47,7 @@ func _process(delta):
             currentlyPlayingTheme = restartPlayingTheme
             restartPlayingTheme = null
         
-var stopAllMusic = true
+var stopAllMusic = false
 func tryToPlay(stream_player):
     if stopAllMusic: return
     # if not initial_volume_dbs.has(stream_player.name):

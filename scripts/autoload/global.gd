@@ -221,7 +221,7 @@ func _ready():
     # POWERUPS
     memory["broomerang"] = false
     memory["magic_lantern"] = false
-    memory["can_nest"] = true
+    memory["can_nest"] = false
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
     memory["zora_flippers"] = false # TODO(jaketrower): turn off before beta build
