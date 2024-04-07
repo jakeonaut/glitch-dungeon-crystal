@@ -558,11 +558,13 @@ func pressingMoveUp():
 func pressingMoveDown():
   return false
 
+var override_press_move_left = false
 func pressingMoveLeft():
-  return false
+  return override_press_move_left
 
+var override_press_move_right = false
 func pressingMoveRight():
-  return false
+  return override_press_move_right
 
 func processLadderInputs(_delta):
   if global.pauseMoveInput: return
@@ -761,7 +763,7 @@ func getWalkSpeed(_delta):
   #     curr_walk_speed = floor_glitch_walk_speed
   var run_add = 0
   if pressingRun():
-      run_add = 2
+      run_add = 3
 
   # if glitch_form == global.GlitchForm.FEATHER:
   #   return feather_glitch_walk_speed # no run_add

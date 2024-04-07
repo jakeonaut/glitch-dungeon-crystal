@@ -159,6 +159,8 @@ void fragment() {
         ALBEDO.rgb = closest_color.rgb;
         if (!enable_no_transparency) {
             ALPHA = alp.a * opacity;
-        }
+        } else {
+			ALPHA = opacity;
+		}
     }
 }

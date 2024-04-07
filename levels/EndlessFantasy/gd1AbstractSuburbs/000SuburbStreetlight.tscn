@@ -415,7 +415,7 @@ frame = 49
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 

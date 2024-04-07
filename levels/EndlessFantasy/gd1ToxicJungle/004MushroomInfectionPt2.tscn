@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=30]
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 23 )
@@ -400,6 +401,9 @@ shape = SubResource( 49 )
 [node name="Mushroom" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -2.17931, -1 )
 
+[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -3.17931, -1 )
+
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 9.42121, 0 )
 
@@ -411,6 +415,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 9, 0 )
 
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.50509, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

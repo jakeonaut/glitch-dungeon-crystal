@@ -406,7 +406,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61.1738, 0.997, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 is_passive = true
 
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]

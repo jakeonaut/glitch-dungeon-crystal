@@ -254,7 +254,6 @@ var spriteOpacity = 1.0
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
-  pauseInput = summonedBroom != null or global.pauseMoveInput
   if aniPlayer.assigned_animation == "getItem" and not aniPlayer.is_playing():
     getItemFailsafe()
 
@@ -692,7 +691,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
       x_offset = -1
     global_transform.origin.x += x_offset
     global_transform.origin.y += 1
-    spawnACarcass()
+    var carcass = spawnACarcass()
+    carcass.mushroomSprite.visible = true
     global_transform.origin.x -= x_offset
     global_transform.origin.y -= 1
     is_mushroom_infected = false
@@ -902,6 +902,7 @@ func processBroomLogic(delta):
     global.incrementLevelZoneSweeps()
     jump_press_timer = jump_press_broom_time_limit
     if which_broom_attack > 0:
+      pauseInput = true
       summonedBroom = summonedBroomRes.instance()
       level.add_child(summonedBroom)
       if which_broom_attack == 2:
@@ -1149,6 +1150,7 @@ func broomStop():
   if summonedBroom != null:
     summonedBroom.queue_free()
   summonedBroom = null
+  pauseInput = false
   pauseAnimation = false
   global.pauseMoveInput = false
   broomSpriteVisible.visible = true

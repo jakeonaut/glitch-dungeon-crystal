@@ -4,7 +4,8 @@ var shake_power = 0.001
 var opacity = 0.5
 var shake_color_rate = 0.001
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-onready var mySprite2 = get_node("Sprite3D2")
+onready var broomSprite = get_node("BroomSprite")
+onready var mushroomSprite = get_node("MushroomSprite")
 var is_crumbling = false
 onready var fallthroughSolidCollisionShape = get_node("FallthroughSolid/CollisionShape")
 var nesting_doll_state = global.NestingDoll.GRANDMA
@@ -36,6 +37,17 @@ func getSmacked(_broom_origin):
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
+    broomSprite.global_transform.origin.x = global_transform.origin.x
+    broomSprite.flip_h = mySprite.flip_h
+    mushroomSprite.global_transform.origin.x = global_transform.origin.x
+    mushroomSprite.flip_h = mySprite.flip_h
+    if mySprite.flip_h:
+        broomSprite.global_transform.origin.x -= 1.1
+        mushroomSprite.global_transform.origin.x -= 0.5
+    else:
+        broomSprite.global_transform.origin.x += 1.1
+        mushroomSprite.global_transform.origin.x += 0.5
+
     if !isActive():
         cooldown_timer += (delta*22)
 
@@ -51,7 +63,7 @@ func _process(delta):
                 mySprite.material_override = material
 
     if is_crumbling:
-        mySprite2.visible = false
+        broomSprite.visible = false
         opacity -= delta/5
         shake_color_rate += delta/2000
         shake_power += delta/100

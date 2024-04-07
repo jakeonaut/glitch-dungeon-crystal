@@ -322,10 +322,14 @@ func _process(delta):
   randomize_timer += delta
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
-    for _i in range(randomize_num):
-      var rand_key = tile_dict.keys()[randi() % tile_dict.size()]
-      randomizeTile(rand_key, getRandomGlitchType())
-    randomize_num += randomize_num_counter
+    if randomize_num > tile_dict.keys().size():
+      for i in range(tile_dict.keys().size()):
+          randomizeTile(tile_dict.keys()[i], getRandomGlitchType())
+    else:
+      for _i in range(randomize_num):
+        var rand_key = tile_dict.keys()[randi() % tile_dict.size()]
+        randomizeTile(rand_key, getRandomGlitchType())
+      randomize_num += randomize_num_counter
   # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
 
   if global.isPauseMenuOpen: return

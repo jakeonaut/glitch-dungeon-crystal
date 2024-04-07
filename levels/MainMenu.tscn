@@ -828,6 +828,7 @@ script = ExtResource( 9 )
 show_dither_effect = true
 tileset_type = 2
 doesnt_have_broom = true
+camera_size = 50
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 
@@ -1343,7 +1344,6 @@ texture = SubResource( 70 )
 flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [node name="ContinuePrompt" type="RichTextLabel" parent="UILayer"]
 margin_left = 271.5
@@ -1382,7 +1382,7 @@ text = "
 !!!                        [C]"
 scroll_active = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UILayer"]
+[node name="MenuText" type="RichTextLabel" parent="UILayer"]
 margin_left = 318.5
 margin_top = 354.0
 margin_right = 553.5

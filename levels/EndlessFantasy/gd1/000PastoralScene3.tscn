@@ -2206,7 +2206,7 @@ automatically_change_color = false
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.1, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="3"]

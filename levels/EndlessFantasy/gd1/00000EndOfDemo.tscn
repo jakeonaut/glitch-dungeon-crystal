@@ -1018,7 +1018,7 @@ shape = SubResource( 65 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 1.4, 0 )

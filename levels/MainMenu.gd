@@ -22,10 +22,9 @@ func loadGame():
             roomPath = global.memory["roomPath"]
     startGame()
 
-onready var continueText = get_node("../../UILayer/Options/Continue/OptionTextLabel")
-onready var continueSelectHighlight = get_node("../../UILayer/Options/Continue/OptionTextLabeGlitched")
-onready var newGameText = get_node("../../UILayer/Options/NewGame/OptionTextLabel")
-onready var newGameSelectHighlight = get_node("../../UILayer/Options/NewGame/OptionTextLabeGlitched")
+onready var continuePrompt = get_node("../../UILayer/ContinuePrompt")
+onready var newGamePrompt = get_node("../../UILayer/NewGamePrompt")
+onready var menuText = get_node("../../UILayer/MenuText")
 
 export var camera_size = 30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,21 +48,14 @@ func _process(_delta):
     #     direction = 1
 
     if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
-        var yy = 0
-        if continueSelectHighlight.visible:
-            yy = -9
-            continueSelectHighlight.visible = false
-            newGameSelectHighlight.visible = true
-            continueText.bbcode_text = "[color=gray]continue...[/color]"
-            newGameText.bbcode_text = "[wave]NEW GAME![/wave]"
+        if continuePrompt.visible:
+            continuePrompt.visible = false
+            newGamePrompt.visible = true
+            menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]"
         else:
-            yy = -6
-            continueSelectHighlight.visible = true
-            newGameSelectHighlight.visible = false
-            continueText.bbcode_text = "[wave]CONTINUE![/wave]"
-            newGameText.bbcode_text = "[color=gray]new game...[/color]"
-        menuOptionPointer.global_transform.origin.y = yy
-        menuOptionPointer2.global_transform.origin.y = yy
+            continuePrompt.visible = true
+            newGamePrompt.visible = false
+            menuText.bbcode_text = "[wave]Continue...?[/wave]\n\nNew Game"
 
     # switch_glitch_timer += (delta*22)
     # if switch_glitch_timer >= switch_glitch_time_limit:
@@ -74,7 +66,7 @@ func _process(_delta):
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()
-        if continueSelectHighlight.visible:
+        if continuePrompt.visible:
             loadGame()
         else:
             startGame()

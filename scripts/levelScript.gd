@@ -158,10 +158,10 @@ func tryShowUIElements():
   if global.memory.has("spellbookPage"):
     # TODO(jaketrower): less ideal
     uiLayer.get_node("EquipmentRect").visible = true
-    uiLayer.get_node("EquipmentStatusRect").visible = true
+    # uiLayer.get_node("EquipmentStatusRect").visible = true
   else:
     uiLayer.get_node("EquipmentRect").visible = false
-    uiLayer.get_node("EquipmentStatusRect").visible = false
+    # uiLayer.get_node("EquipmentStatusRect").visible = false
 
 func overrideLevelRespawnEvent():
   pass

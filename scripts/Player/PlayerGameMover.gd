@@ -310,10 +310,10 @@ func pressingMoveDown():
 func pressingMoveLeft():
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  var am_paused =  pauseInput or isTextboxPausingMe()
+  var am_paused = pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
-  return Input.is_action_pressed("ui_left") and not am_paused
+  return .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
 
 # @override
 func pressingMoveRight():
@@ -322,7 +322,7 @@ func pressingMoveRight():
   var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused
-  return Input.is_action_pressed("ui_right") and not am_paused
+  return .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
 
 func magicJump():
   has_used_magic_lantern = true
@@ -343,7 +343,7 @@ func updateNestingDoll(prevNestingDollState):
       emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
       emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
     elif nesting_doll_state == global.NestingDoll.MOM:
-      emptyDoll.mySprite2.visible = global.memory["broom"]
+      emptyDoll.broomSprite.visible = global.memory["broom"]
     # if randi() % 4 == 1:
     #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
     nesting_doll_array.push_back(emptyDoll)
@@ -383,9 +383,6 @@ func spawnACarcass():
   level.add_child(carcass)
   carcass.global_transform.origin = self.global_transform.origin
   carcass.mySprite.flip_h = mySprite.flip_h
-  if carcass.mySprite.flip_h:
-    carcass.mySprite2.flip_h = true
-    carcass.mySprite2.offset.x = -18
   carcass.mySprite.material_override.set_shader_param(
     "target_palette", mySprite.material_override.get_shader_param("target_palette"))
   return carcass
@@ -410,13 +407,11 @@ func getWalkSpeed(delta):
     return 6 if pressingRun() else 5
   elif nesting_doll_state == global.NestingDoll.MOM:
     return 9 if pressingRun() else 7
-  elif not global.memory["broom"] and global.memory["has_gotten_broom"] > 0:
-    return 7 if pressingRun() else 4
   else:
     if is_mushroom_infected:
       if mushroom_infection_direction < 0:
         if Input.is_action_pressed("ui_left"):
-          return 7
+          return 9
         elif Input.is_action_pressed("ui_right"):
           return 2
         else: return 5
@@ -424,7 +419,7 @@ func getWalkSpeed(delta):
         if Input.is_action_pressed("ui_left"):
           return 2
         elif Input.is_action_pressed("ui_right"):
-          return 7
+          return 9
         else: return 5
     return .getWalkSpeed(delta) # super()
 

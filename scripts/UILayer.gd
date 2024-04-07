@@ -220,7 +220,7 @@ func _process(delta):
   # tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
   if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
     tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(65, 3))
-    tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
+    # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
 
   if global.memory.has("spellbookPage"):
     var spellbook = global.memory["spellbookPage"]
@@ -401,7 +401,7 @@ func processHiscoreRenderLogic(delta):
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false
     global.pauseMoveInput = false
-    transition.long_fade_to("res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn")
+    transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x > 1:

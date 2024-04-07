@@ -9,15 +9,22 @@ onready var chick2 = get_node("NPC7") if has_node("NPC7") else null
 onready var chick3 = get_node("NPC8") if has_node("NPC8") else null
 onready var chick4 = get_node("NPC9") if has_node("NPC9") else null
 
+onready var forebodingSound = get_node("ForebodingSound")
+
 var has_updated = false
 
 # @override
+func restartMusic():
+  musicPlayer.stopAll()
+  forebodingSound.play()
+
+# @override
 func _process(_delta):
-  show_dither_effect = global.memory["clean_crystals"] <= 0 and not global.memory.has("spellbookPage")
-  show_crt_effect = not show_dither_effect
+  # show_dither_effect = global.memory["clean_crystals"] <= 0 and not global.memory.has("spellbookPage")
+  # show_crt_effect = not show_dither_effect
 
   if global.memory.has("spellbookPage") or global.memory["clean_crystals"] > 0:
-    door.path = "res://levels/EndlessFantasy/gd1/PastoralTowerHub.tscn"
+    door.path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
   
   if (global.memory.has("spellbookPage") or global.memory["clean_crystals"] > 0) and not has_updated:
     if door2 != null:

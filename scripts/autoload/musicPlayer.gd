@@ -130,6 +130,8 @@ func conductFromScenePath(path):
     changeSongPitch(1.0)
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
+    elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
+        tryToPlay(debugThemePlayer)
     elif path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0 or path.find("Corrupted0_0") > 0:
         if global.memory["clean_crystals"] > 0 or global.memory.has("spellbookPage"):
             tryToPlay(longAdventureThemePlayer)
@@ -165,6 +167,8 @@ func conductFromScenePath(path):
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)
+    elif path.find("005DebugTown") > 0:
+        tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
         tryToPlay(dungeonThemePlayer2)
     else:

@@ -684,9 +684,8 @@ shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 3 )
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=216]
 resource_local_to_scene = true
-extents = Vector3( 2, 8, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -1603,8 +1602,8 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPu
 visible = false
 
 [node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-shape = SubResource( 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 216 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )

@@ -24,8 +24,8 @@ func setUpRoomInitializationOverride():
 
 # @override
 func _process(_delta):
-  show_dither_effect = global.memory["clean_crystals"] <= 0
-  show_crt_effect = not show_dither_effect
+  # show_dither_effect = global.memory["clean_crystals"] <= 0
+  # show_crt_effect = not show_dither_effect
 
   if global.memory.has("spellbookPage") and not has_updated:
     if fallenBroom.get_ref():

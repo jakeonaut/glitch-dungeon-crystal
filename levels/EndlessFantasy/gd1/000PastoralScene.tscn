@@ -1155,7 +1155,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 13 )
-show_dither_effect = true
+show_crt_effect = true
 tileset_type = 2
 doesnt_have_broom = true
 

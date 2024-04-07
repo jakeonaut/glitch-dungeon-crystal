@@ -4635,7 +4635,6 @@ shader_param/target_palette = ExtResource( 36 )
 script = ExtResource( 1 )
 true_terminal_vel = 14
 grav = 28
-walk_speed = 6
 run_speed = 8
 feather_glitch_walk_speed = 8
 invisible_glitch_walk_speed = 5
