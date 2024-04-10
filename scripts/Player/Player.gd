@@ -214,21 +214,21 @@ func wearCostume(costume):
 
 # @override
 func pressingRun():
-  if not canRun():
-    return
-    
   if nesting_doll_state == global.NestingDoll.BABY:
     return true
+  elif not canRun():
+    return
   elif nesting_doll_state == global.NestingDoll.MOM:
     return true
-  elif Input.is_action_pressed("run_button"):
-    return true
+  # elif Input.is_action_pressed("run_button"):
+  #   return true
   return .pressingRun()
 
 # @override
 func canRun():
-  var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
-  return not is_giant
+  return false
+  # var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
+  # return not is_giant
 
 # @override
 func canSwim():

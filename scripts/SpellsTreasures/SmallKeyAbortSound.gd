@@ -22,6 +22,7 @@ func activateScript():
     level.spawnKeyFollower(key.global_transform.origin)
     key.okay_im_done = true
     key.queue_free()
+    level.player.pauseInput = false
     level.player.aniPlayer.play("stand")
 
 func isActive(_debug=false):
