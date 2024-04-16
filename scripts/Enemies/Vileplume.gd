@@ -74,7 +74,7 @@ func passiveActivate(_delta, _is_player):
 # @override
 func unsmack():
   .unsmack()
-  vileAniPlayer.play("RESET")
+  vileAniPlayer.play("bob")
 
 
 func spawnFiveSpores():

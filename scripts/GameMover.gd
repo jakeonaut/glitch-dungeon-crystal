@@ -73,10 +73,10 @@ var should_do_simple_sensor_probe = true
 var should_do_fallthrough_area_collision = false
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
-var lb = -0.72
-var rb = .72
-var tb = 1
-var bb = -1
+export var lb = -0.72
+export var rb = .72
+export var tb = 1.0
+export var bb = -1.0
 var grav_direction = Vector3(0, -1, 0)
 
 

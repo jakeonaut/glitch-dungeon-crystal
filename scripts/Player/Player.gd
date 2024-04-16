@@ -1120,7 +1120,8 @@ var has_landed_since_recovering = false
 # @override
 func landed():
   .landed()
-  has_landed_since_recovering = true
+  if not (is_mushroom_infected or is_mushroom_prefected):
+    has_landed_since_recovering = true
   has_broom_flown = not global.memory["broom"]
   if has_broom_flown:
     has_landed_since_last_flight = true

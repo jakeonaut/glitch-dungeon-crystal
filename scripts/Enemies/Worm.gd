@@ -73,7 +73,8 @@ func passiveActivate(_delta, _is_player):
   getPlayer().pauseAnimation = true
   wormAniPlayer.stop()
   wormAniPlayer.clear_queue()
-  wormAniPlayer.play("gulp")
+  wormAniPlayer.queue("gulp")
+  wormAniPlayer.queue("bob")
 
 func jumpToPlayerPosition():
   global_transform.origin.x = getPlayer().global_transform.origin.x  

@@ -382,7 +382,7 @@ shape = SubResource( 28 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false

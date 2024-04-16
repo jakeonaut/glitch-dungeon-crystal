@@ -18,7 +18,7 @@ enum MoleState {
 var mole_state = MoleState.IDLE
 var mole_state_timer = 0
 var mole_state_idle_time_limit = 10
-var mole_state_dig_time_limit = 6
+var mole_state_dig_time_limit = 5
 var mole_state_reset_dig_time_limit = 8
 var far_from_home_dist = 5
 var has_dug = false
@@ -79,7 +79,7 @@ func _process(delta):
         mushroomSprite.visible = true
 
     if is_builder:
-        mole_state_dig_time_limit = 4
+        mole_state_dig_time_limit = 3
     
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier
