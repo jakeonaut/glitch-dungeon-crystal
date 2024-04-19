@@ -200,14 +200,19 @@ func hitStuff(_delta):
         elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
             if not area.get_node("..").am_i_dying:
                 area.get_node("..").ouchies(global_transform.origin)
+                print("33")
                 # my_broom_owner.has_sweeped_glitch = true
                 level.summonSmokeClouds(global_transform.origin, 5, true, true)
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+            print("...")
             if area.get_node("..").notOuchies(global_transform.origin):
+                print("okay...")
                 my_broom_owner.getSmacked()
                 has_hit_something = true
+            print("okay... 2")
+                
             # # TODO kill glitches or "free" them like glitch slug...
             
         elif area.is_in_group("corporeal_body"):
@@ -220,6 +225,7 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 if smackResult == null:
                     has_hit_something = true
+                print("stop")
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door"):

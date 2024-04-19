@@ -1,17 +1,18 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=1]
+[ext_resource path="res://assets/mini_mushroom5.png" type="Texture" id=1]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=2]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/151RetroMonsters/minicast.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=6]
+[ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=7]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=8]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=10]
 [ext_resource path="res://scripts/Enemies/Vileplume.gd" type="Script" id=11]
 
-[sub_resource type="ShaderMaterial" id=36]
+[sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 9 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -51,7 +52,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 17 ]
+"values": [ 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3D:flip_h")
@@ -90,24 +91,12 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 5 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -128,7 +117,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 17, 18 ]
+"values": [ 0, 1 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
@@ -175,36 +164,24 @@ tracks/1/keys = {
 resource_name = "puffAttack"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 17, 18, 17, 18, 17, 18, 17, 18, 17 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -212,17 +189,29 @@ tracks/2/keys = {
 "method": "spawnFiveSpores"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/path = NodePath("Sprite3D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ 0, 1, 0, 1, 0 ]
 }
 
 [sub_resource type="CylinderShape" id=32]
@@ -238,18 +227,15 @@ extents = Vector3( 18, 13, 1 )
 
 [node name="Vileplume" type="Spatial"]
 script = ExtResource( 11 )
+grav = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 36 )
+material_override = SubResource( 33 )
 pixel_size = 0.125
 transparent = false
 double_sided = false
-texture = ExtResource( 1 )
-hframes = 8
-vframes = 16
-frame = 17
-region_rect = Rect2( 0, 0, 62, 0 )
+texture = ExtResource( 7 )
+hframes = 2
 script = ExtResource( 8 )
 should_animate = false
 

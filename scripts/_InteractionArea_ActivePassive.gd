@@ -29,6 +29,7 @@ func isActive(_debug=false):
 func InteractActivate(is_player=true):
     if parent.has_method("activate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+        print("hate2")
         return parent.activate(is_player)
     return false
 

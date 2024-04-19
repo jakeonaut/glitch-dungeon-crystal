@@ -1295,6 +1295,8 @@ onready var secretSweepCollisionShape = get_node("SpriteContainer/SecretSweepAre
 # used for actually sweeping up glitch tiles
 onready var secretSweepActualArea = get_node("SpriteContainer/SecretSweepAreaActual")
 onready var secretSweepActualCollisionShape = get_node("SpriteContainer/SecretSweepAreaActual/CollisionShape")
+
+# dedupe with SummonedBroom and FallenBroom
 func hitStuff(_delta):
   if not visible: return
   
@@ -1306,7 +1308,7 @@ func hitStuff(_delta):
         area.get_node("..").ouchies(global_transform.origin)
         my_broom_owner.has_sweeped_glitch = true
         summonSmokeClouds(5, true, true)
-        my_broom_owner.getSmacked()
+        # my_broom_owner.getSmacked()
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
       if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):

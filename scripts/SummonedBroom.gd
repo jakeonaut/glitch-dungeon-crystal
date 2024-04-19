@@ -66,13 +66,17 @@ func hitStuff(_delta):
         my_broom_owner.has_sweeped_glitch = true
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         my_broom_owner.getSmacked()
+        print("stop")
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
+      print("..?")
       if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):
           my_broom_owner.getSmacked()
           my_broom_owner.has_sweeped_glitch = true
       else:
+        print("..!")
         if area.get_node("..").notOuchies(global_transform.origin):
+          print("what?")
           my_broom_owner.getSmacked()
       
       # # TODO kill glitches or "free" them like glitch slug...

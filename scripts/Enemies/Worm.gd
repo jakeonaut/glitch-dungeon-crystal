@@ -54,9 +54,6 @@ func glitchSetSpritesAndCollision():
 func glitchSwitchSprite(_delta):
   pass
 
-# @override
-func getSmacked(_broom_origin):
-  pass
 
 func passiveActivate(_delta, _is_player):
   if is_smacked or is_in_cooldown:

@@ -362,7 +362,7 @@ material_override = SubResource( 24 )
 texture = ExtResource( 12 )
 
 [node name="Vileplume" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9209, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9209, 2.86029, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )

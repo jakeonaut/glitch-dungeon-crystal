@@ -18,7 +18,7 @@ func setUpRoomInitializationOverride():
   NPC7.textBox.showTextbox()
   
   var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-  pastoralGrannyNPC.textBox.text_final = "•this dust just showed up!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"
+  pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"
   pastoralGrannyNPC.textBoxContainer.bbText = pastoralGrannyNPC.textBox.text_final
   
 

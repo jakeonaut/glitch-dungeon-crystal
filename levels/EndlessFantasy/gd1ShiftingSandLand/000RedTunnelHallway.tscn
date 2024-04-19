@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=20]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=22]
@@ -353,73 +352,6 @@ tracks/0/keys = {
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=23]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="Animation" id=25]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=26]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=27]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="BoxShape" id=24]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 25 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -597,6 +529,173 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=50]
+resource_name = "windDown"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NPC/Sprite3D:frame_delay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.4, 0.6, 0.8, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WindGust:is_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=59]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=60]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=62]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=63]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=64]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("GustSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "chargeUp"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NPC/Sprite3D:frame_delay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.8, 0.6, 0.4, 0.2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WindGust:is_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GustSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=66]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NPC/Sprite3D:frame_delay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WindGust:is_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GustSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=67]
 resource_name = "windDown"
 tracks/0/type = "value"
 tracks/0/path = NodePath("NPC/Sprite3D:frame_delay")
@@ -862,32 +961,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -6.4, 0 )
 [node name="LadderSpell2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -8.3, 3.6, 0 )
 
-[node name="DustFarmer2" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.6, 0 )
-
-[node name="NPC2" parent="Viewport/level/DustFarmer2" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1.4, 0 )
-bbText = "•we love eat dirt
-and making dust"
-can_move = false
-can_camera_zoom = false
-is_a_body = false
-is_wiggling_fast = true
-
-[node name="CollisionShape" parent="Viewport/level/DustFarmer2/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 23 )
-
-[node name="Sprite3D" parent="Viewport/level/DustFarmer2/NPC2" index="3"]
-frame = 78
-
-[node name="AnimationPlayer" parent="Viewport/level/DustFarmer2/NPC2" index="4"]
-anims/default = SubResource( 25 )
-anims/flickerOn = SubResource( 26 )
-anims/jump = SubResource( 27 )
-
-[node name="CollisionShape" parent="Viewport/level/DustFarmer2/NPC2/FallthroughSolid" index="0"]
-shape = SubResource( 24 )
-
 [node name="MiniAdventures" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 6.5, -1 )
 frame = 119
@@ -967,8 +1040,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer3" index="0"]
 bbText = "•mole crickets carved
-our civilization
-out of dirt"
+these ruins. we
+evolved from them"
 tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer3/NPC/SmallInteractionArea" index="0"]
@@ -1004,6 +1077,48 @@ anims/RESET = SubResource( 47 )
 anims/chargeUp = SubResource( 48 )
 anims/start = SubResource( 49 )
 anims/windDown = SubResource( 50 )
+
+[node name="DustFarmer4" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 4.6, 0 )
+
+[node name="NPC" parent="Viewport/level/DustFarmer4" index="0"]
+bbText = "•i love eating dirt.
+•it is a sacred act."
+tiny_textbox = false
+
+[node name="CollisionShape" parent="Viewport/level/DustFarmer4/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 39 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer4/NPC/NPC TextBox/TextBox/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 25.0
+step = 1.0
+page = 101.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer4/NPC/NPC TextBox/TextBox/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="AnimationPlayer" parent="Viewport/level/DustFarmer4/NPC" index="4"]
+anims/default = SubResource( 58 )
+anims/fall = SubResource( 59 )
+anims/flickerOn = SubResource( 60 )
+anims/jump = SubResource( 61 )
+anims/land = SubResource( 62 )
+anims/stand = SubResource( 63 )
+
+[node name="CollisionShape" parent="Viewport/level/DustFarmer4/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 46 )
+
+[node name="AnimationPlayer" parent="Viewport/level/DustFarmer4" index="2"]
+anims/RESET = SubResource( 64 )
+anims/chargeUp = SubResource( 65 )
+anims/start = SubResource( 66 )
+anims/windDown = SubResource( 67 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
@@ -1044,8 +1159,6 @@ flip_v = true
 [editable path="Viewport/level/Dragonfly2"]
 [editable path="Viewport/level/Dragonfly3"]
 [editable path="Viewport/level/Dragonfly4"]
-[editable path="Viewport/level/DustFarmer2/NPC2"]
-[editable path="Viewport/level/DustFarmer2/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Torch"]
 [editable path="Viewport/level/Torch3"]
 [editable path="Viewport/level/Torch4"]
@@ -1053,5 +1166,8 @@ flip_v = true
 [editable path="Viewport/level/DustFarmer3"]
 [editable path="Viewport/level/DustFarmer3/NPC"]
 [editable path="Viewport/level/DustFarmer3/NPC/NPC TextBox"]
+[editable path="Viewport/level/DustFarmer4"]
+[editable path="Viewport/level/DustFarmer4/NPC"]
+[editable path="Viewport/level/DustFarmer4/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
