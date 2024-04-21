@@ -871,7 +871,7 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
       which_broom_attack = 1
 
-  if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor": # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     aniPlayer.stop()
     aniPlayer.clear_queue()
     # TODO(jaketrower): has just turned around
@@ -879,9 +879,11 @@ func processBroomLogic(delta):
     #   aniPlayer.play("sweepFloor")
     #   which_broom_attack = 0
     #   summonSporeShroom()
+    var is_turn_around_attack = (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
     if force_a_sweep:
       aniPlayer.play("broomSmack")
-    elif is_in_broom_cooldown or (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1))):
+    elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
+      mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
       aniPlayer.play("broomSmack2")
       which_broom_attack = 2
     else:

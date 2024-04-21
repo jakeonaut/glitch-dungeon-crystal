@@ -4637,7 +4637,6 @@ true_terminal_vel = 14
 grav = 28
 run_speed = 8
 feather_glitch_walk_speed = 8
-invisible_glitch_walk_speed = 5
 swimming_walk_speed = 7
 jump_force = 9
 invisible_jump_force = 10

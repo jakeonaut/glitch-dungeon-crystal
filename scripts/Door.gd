@@ -116,10 +116,10 @@ func _ready():
     npc.can_activate = false
     npc.is_active = false
 
-  if generateChickens and num_keys_unlock < 10:
-    yield(get_tree().create_timer(0.5), "timeout")
-    for _i in range(num_keys_unlock):
-      spawnChicken()
+  # if generateChickens and num_keys_unlock < 10:
+  #   yield(get_tree().create_timer(0.5), "timeout")
+  #   for _i in range(num_keys_unlock):
+  #     spawnChicken()
 
 func spawnChicken():
   var freeChicken = chickenRes.instance()
@@ -196,7 +196,7 @@ func _process(delta):
         keySound.play()
         unlocking_key_array.remove(0)
         key.queue_free()
-        spawnChicken()
+        # spawnChicken()
 
 
 func spawnParticles(delta):
@@ -360,13 +360,8 @@ func actuallyUnlockAndEnterDoor():
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
     global.activeInteractor.stopInteract()
   global.activeInteractor = null
-  # goThroughDoor()
+  goThroughDoor()
   global.pauseMoveInput = false
-  getPlayer().pauseSelf = false
-  getPlayer().aniPlayer.stop()
-  getPlayer().aniPlayer.clear_queue()
-  getPlayer().aniPlayer.play("land")
-  getPlayer().playBounce("land")
 
 
 func passiveActivate(_delta, is_player):

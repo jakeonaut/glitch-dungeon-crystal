@@ -368,8 +368,8 @@ func isActive(_debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    print("hm")
-    getSmacked(self.global_transform.origin)
+    pass
+    # getSmacked(self.global_transform.origin)
     # getPlayer().getSmacked()
 
 func passiveActivate(_delta, _is_player):
@@ -430,7 +430,6 @@ func getPlayer():
 
 func notOuchies(broom_origin):
     if not is_smacked:
-        print("not ouchies")
         level.summonSmokeClouds(global_transform.origin, 1, true, true)
         return getSmacked(broom_origin)
     return false
@@ -471,7 +470,6 @@ var smacked_palette = global.white_palette
 func getSmacked(_broom_origin):
     if is_smacked:
         return false
-    print("GOT SMACKED")
 
     if notDieSound and not notDieSound.is_playing(): notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)

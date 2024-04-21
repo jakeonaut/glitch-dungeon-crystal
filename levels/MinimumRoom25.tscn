@@ -52,7 +52,7 @@ shader_param/target_palette = ExtResource( 2 )
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 6 )
 show_crt_effect = true
-should_glitch_activate = true
+tileset_type = 2
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 4 )]
 

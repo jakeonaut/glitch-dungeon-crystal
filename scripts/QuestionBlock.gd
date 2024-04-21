@@ -38,9 +38,11 @@ func get_foreign_children():
 func isActive(_debug=false):
   return not has_been_hit
   
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, is_player):
   if not has_been_hit and not hit_cooldown > 0:
-    if (not player.on_ground) or player.justPressedJump():
+    if (not player.on_ground) or player.justPressedJump() or not is_player:
+      if not is_player:
+        player.getSmacked()
       aniPlayer.play("hit")
       performSpawn()
       hit_cooldown = hit_cooldown_limit

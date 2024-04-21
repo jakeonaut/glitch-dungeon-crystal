@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/pokemon-sgb-1x.png" type="Texture" id=2]
@@ -8,9 +8,12 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=10]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=11]
 [ext_resource path="res://assets/sounds/151RetroMonsters/minicast.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/infected_enemy_sheet0000.png" type="Texture" id=13]
+[ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 6 )
@@ -102,6 +105,54 @@ tracks/4/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/texture_albedo")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FallthroughSolid:translation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.912189, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("FallthroughSolid/CollisionShape:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.01, 0.95, 0 ) ]
+}
 
 [sub_resource type="Animation" id=26]
 resource_name = "bob"
@@ -118,6 +169,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19, 20 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FallthroughSolid:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0.912189, 0 ), Vector3( 0, 0.699886, 0 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -285,6 +348,113 @@ tracks/4/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=38]
+resource_name = "transform"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/texture_albedo")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ), ExtResource( 13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 19, 20, 19, 18, 17 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FallthroughSolid/CollisionShape:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.0102768, 0.949886, 9.95496e-08 ), Vector3( 0.0102768, -0.188829, 7.10543e-15 ) ]
+}
+
+[sub_resource type="Animation" id=40]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.345, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "bounce"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.345, 0 ), Vector3( 0, 0.267799, 0 ), Vector3( 0, 0.345, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
 [sub_resource type="CylinderShape" id=32]
 height = 4.0
 radius = 2.0
@@ -295,6 +465,10 @@ radius = 0.8
 
 [sub_resource type="BoxShape" id=29]
 extents = Vector3( 18, 13, 1 )
+
+[sub_resource type="BoxShape" id=39]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.24, 1 )
 
 [node name="Worm" type="Spatial"]
 script = ExtResource( 5 )
@@ -320,6 +494,11 @@ anims/bob = SubResource( 26 )
 anims/default = SubResource( 20 )
 anims/gulp = SubResource( 37 )
 anims/puffAttack = SubResource( 27 )
+anims/transform = SubResource( 38 )
+
+[node name="MushroomBounceAniPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 40 )
+anims/bounce = SubResource( 41 )
 
 [node name="Sounds" type="Spatial" parent="."]
 
@@ -330,6 +509,10 @@ volume_db = -80.0
 [node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 8 )
 volume_db = -10.0
+
+[node name="BounceSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -30.0
 
 [node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -352,3 +535,10 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
 shape = SubResource( 29 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.912189, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.95, 0 )
+shape = SubResource( 39 )

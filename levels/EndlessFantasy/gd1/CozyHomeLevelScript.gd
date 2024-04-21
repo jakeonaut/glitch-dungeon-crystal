@@ -13,12 +13,12 @@ func _process(delta):
   # ._process(delta) implicit
   player.fall_timer = 0
   global.canChangeSongPitch = false
-  if not has_activated and player.global_transform.origin.y < -39:
-    has_activated = true
-    player.global_transform.origin.z = -10
-    global.saveMySpot(player.translation, self)
-    player.tryDieToEnemy(delta, true, true, true)
-    player.global_transform.origin.z = 0
+  # if not has_activated and player.global_transform.origin.y < -39:
+  #   has_activated = true
+  #   player.global_transform.origin.z = -10
+  #   global.saveMySpot(player.translation, self)
+  #   player.tryDieToEnemy(delta, true, true, true)
+  #   player.global_transform.origin.z = 0
     # player.grav = 0
     # player.vv = 0
     # player.linear_velocity.y = 0

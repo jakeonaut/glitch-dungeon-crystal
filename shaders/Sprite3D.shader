@@ -66,9 +66,9 @@ float random(float seed) {
   return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
 }
 
-uniform float normal_offset : hint_range(0, 1, 0.01) = 0.02;
-uniform float time_influence : hint_range(0, 50) = 1;
-uniform float y_div : hint_range(0, 10, .1) = 2.87;
+uniform float normal_offset : hint_range(0, 1, 0.01) = 0.00;
+uniform float time_influence : hint_range(0, 50) = 0;
+uniform float y_div : hint_range(0, 10, .1) = 0;
 
 void vertex() {
     VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
@@ -141,8 +141,8 @@ void fragment() {
     if (enable_no_transparency && alpha == 0.0) {
         alpha = 1.0;
     } else if (closest_color.a == 0.0) {
-		alpha = 0.0;
-	}
+    alpha = 0.0;
+  }
     ALPHA = alpha;
 
     if (enable_glitch) {
@@ -160,7 +160,7 @@ void fragment() {
         if (!enable_no_transparency) {
             ALPHA = alp.a * opacity;
         } else {
-			ALPHA = opacity;
-		}
+      ALPHA = opacity;
+    }
     }
 }

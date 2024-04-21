@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CherryCarcass.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=10]
 [ext_resource path="res://assets/mini_mushroom2.png" type="Texture" id=11]
 [ext_resource path="res://assets/mini_mushroom4.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=15]
 [ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=16]
 [ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=17]
@@ -126,9 +127,13 @@ tracks/0/keys = {
 "values": [ 11, 0 ]
 }
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=21]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=18]
+resource_local_to_scene = true
+extents = Vector3( 0.9, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 3 )
@@ -157,6 +162,62 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 10 )
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MushroomSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.2, 1.971, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MushroomSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "bounce"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("MushroomSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.2, 1.971, -1 ), Vector3( 0.2, 1.78747, -1 ), Vector3( 0.2, 1.971, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MushroomSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
 
 [node name="CherryCarcass" type="Spatial"]
 script = ExtResource( 2 )
@@ -209,15 +270,29 @@ anims/land = SubResource( 10 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 12 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.776669, 0 )
+shape = SubResource( 21 )
+
+[node name="MushroomFallthroughSolid" type="Area" parent="." groups=["fallthrough", "fallthrough_tiny"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="MushroomFallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87297, 0 )
+shape = SubResource( 18 )
 
 [node name="GlitchParticleBurst" parent="." instance=ExtResource( 6 )]
 
 [node name="MushroomSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.971, -1 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.971, -1 )
 material_override = SubResource( 17 )
 pixel_size = 0.125
 texture = ExtResource( 11 )
 hframes = 2
+
+[node name="BounceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -30.0
+
+[node name="MushroomBounceAniPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 19 )
+anims/bounce = SubResource( 20 )

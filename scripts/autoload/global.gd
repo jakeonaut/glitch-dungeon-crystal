@@ -749,3 +749,53 @@ func saveMySpot(position, level):
         global.memory["active_save_point_y"] = position.y
         global.memory["active_save_point_z"] = position.z
         global.memory["savedRoomPath"] = level.getLevelName()
+
+
+func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
+  var have_i_smacked_an_npc = false
+  for area in areas:
+    if area.is_in_group("tadpole"):
+      continue
+    elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
+      if not area.get_node("..").am_i_dying:
+        area.get_node("..").ouchies(global_transform.origin)
+        my_broom_owner.has_sweeped_glitch = true
+        level.summonSmokeClouds(global_transform.origin, 5, true, true)
+        my_broom_owner.getSmacked()
+    elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
+      if false: # global.getLevelZoneThing("crystal_geode"):
+        if area.get_node("..").ouchies(global_transform.origin):
+          my_broom_owner.getSmacked()
+          my_broom_owner.has_sweeped_glitch = true
+      else:
+        if area.get_node("..").notOuchies(global_transform.origin):
+          my_broom_owner.getSmacked()
+      
+      # # TODO kill glitches or "free" them like glitch slug...
+      
+    elif area.is_in_group("corporeal_body") and is_active:
+      var areaParent = area.get_node("..")
+      if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+        var smackResult = areaParent.getSmacked(global_transform.origin)
+        if areaParent.has_method("imAnNpc") and smackResult == null:
+          smacked_npc = weakref(areaParent)
+          have_i_smacked_an_npc = true
+        if not area.is_in_group("tadpole") and smackResult == null:
+          my_broom_owner.getSmacked()
+    elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
+      # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+      area.InteractActivate(false)
+    elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
+      # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+      area.PassiveInteractActivate(0, false)
+  return smacked_npc
+
+
+func canActivate(area, smacked_npc, have_i_smacked_an_npc):
+  var areaParent = area.get_node("..")
+  # sorry!
+  return not areaParent.has_method("imAnNpc") or smacked_npc == null or \
+         (not have_i_smacked_an_npc and smacked_npc.get_ref() and \
+            (areaParent != smacked_npc.get_ref() or \
+              (smacked_npc.get_ref().textBox == global.activeInteractor and \
+                !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))

@@ -109,10 +109,9 @@ func activate(_is_player):
     global.pauseMoveInput = true
     global.pauseGame = true
     level.player.glitch_death_timer = 1
-    if global.canGlitchScreen: # TODO(jaketrower): RESPECT MORE
-      level.glitchScreenEffect.visible = true
-        # level.levelTiles.randomize_num += 10
-        # level.levelTiles.randomize_num_counter = 15
+    level.glitchScreenEffect.visible = true
+    # level.levelTiles.randomize_num += 10
+    # level.levelTiles.randomize_num_counter = 15
     has_been_smacked = true
     # level.show_crt_effect = true
     # level.player.pauseSelf = true

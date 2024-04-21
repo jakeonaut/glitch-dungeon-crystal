@@ -23,6 +23,7 @@ var cooldown_timer = 0
 var cooldown_time_limit = 40
 var is_in_cooldown = false
 onready var wormAniPlayer = get_node("WormAnimationPlayer")
+onready var mushroomBounceAniPlayer = get_node("MushroomBounceAniPlayer")
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
@@ -55,6 +56,7 @@ func glitchSwitchSprite(_delta):
   pass
 
 
+var has_transformed = false
 func passiveActivate(_delta, _is_player):
   if is_smacked or is_in_cooldown:
     return
@@ -71,6 +73,9 @@ func passiveActivate(_delta, _is_player):
   wormAniPlayer.stop()
   wormAniPlayer.clear_queue()
   wormAniPlayer.queue("gulp")
+  if not has_transformed:
+    wormAniPlayer.queue("transform")
+    has_transformed = true
   wormAniPlayer.queue("bob")
 
 func jumpToPlayerPosition():
@@ -109,3 +114,26 @@ func spawnASpore():
     spore.global_transform.origin.x += rand_range(-3, 3)
     spore.global_transform.origin.y -= rand_range(0, 1)
     spore.lifespan_time_limit = 15
+
+onready var bounceSound = get_node("Sounds/BounceSound")
+func fallthroughCollisionActivate(possible_game_mover):
+  if not has_transformed:
+    return
+
+  # if level.player.nesting_doll_state == global.NestingDoll.BABY:
+  if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
+      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+      var jump_val = 14
+      possible_game_mover.magicJump()
+      getPlayer().linear_velocity.y = jump_val
+      getPlayer().lv.y = jump_val
+      getPlayer().vv = jump_val
+      # getPlayer().applyHalfGrav = true
+      # getPlayer().applyHalfGravTimer = 3
+      bounceSound.pitch_scale = rand_range(0.8, 1.5)
+      bounceSound.play()
+      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+      mushroomBounceAniPlayer.stop()
+      mushroomBounceAniPlayer.clear_queue()
+      mushroomBounceAniPlayer.play("bounce")
+      spawnASpore()
