@@ -11,15 +11,16 @@ var prev_jump_button_text = null
 
 # @override
 func setUpRoomInitializationOverride():
-  NPC7.floating_text = true
-  NPC7.textBox.floating_text = true
-  var right_button_text = global.getKeyCodeStr(global.getKeyCode("ui_right"))
-  NPC7.textBox.text_final = "•up here dearie!\npress [lb]" + right_button_text + "[rb] to walk"
-  NPC7.textBox.showTextbox()
-  
   var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
   pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"
   pastoralGrannyNPC.textBoxContainer.bbText = pastoralGrannyNPC.textBox.text_final
+
+  NPC7.floating_text = true
+  NPC7.mySprite.pixel_size = 0.0001
+  NPC7.textBox.floating_text = true
+  var right_button_text = global.getKeyCodeStr(global.getKeyCode("ui_right"))
+  NPC7.textBox.text_final = "*meow!\n•up here dearie!\npress [lb]" + right_button_text + "[rb] to walk"
+  NPC7.textBox.showTextbox()
   
 
 # @override

@@ -1883,34 +1883,13 @@ margin_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+color = Color( 1, 1, 1, 0 )
 
-[node name="ColorRect" type="ColorRect" parent="LevelTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 405.0
-margin_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="LevelTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 398.0
-margin_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle/ColorRect/ColorRect"]
-margin_left = 11.0
-margin_top = 3.0
-margin_right = 394.0
-margin_bottom = 56.0
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle"]
+margin_left = 19.0
+margin_top = 11.0
+margin_right = 402.0
+margin_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 31 )

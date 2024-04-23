@@ -1231,7 +1231,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13536, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8646, 0, 0 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5469, 2.36, -2 )
@@ -1334,7 +1334,8 @@ script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/PastoralGrannyNPC" index="3"]
 material_override = SubResource( 71 )
-frame = 0
+frame = 18
+automatically_change_color = false
 
 [node name="AnimationPlayer" parent="Viewport/level/PastoralGrannyNPC" index="4"]
 anims/default = SubResource( 54 )
@@ -1344,11 +1345,16 @@ anims/jump = SubResource( 57 )
 anims/land = SubResource( 58 )
 anims/stand = SubResource( 59 )
 
+[node name="FallthroughSolid" parent="Viewport/level/PastoralGrannyNPC" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.579835, 0 )
+
 [node name="CollisionShape" parent="Viewport/level/PastoralGrannyNPC/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.762, 0 )
 shape = SubResource( 27 )
 
 [node name="InteractPrompt" parent="Viewport/level/PastoralGrannyNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.18256, -1 )
+pixel_size = 0.0001
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1, -7.06528, 0 )
@@ -1397,14 +1403,13 @@ shape = SubResource( 27 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1, 8.93472, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, 10.9347, 0 )
 grav = 0
 bbText = "up"
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
-floating_text = true
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
@@ -1441,6 +1446,7 @@ shape = SubResource( 27 )
 
 [node name="InteractPrompt" parent="Viewport/level/NPC7" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
+pixel_size = 0.0001
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9, 1.93472, 0 )

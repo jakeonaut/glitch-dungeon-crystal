@@ -448,7 +448,7 @@ func displayMessageText(message):
 
 func setDisplayTitle(title):
   display_title = title
-  levelTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
+  levelTitleRect.get_node("RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
 
 onready var glitchSprite = get_node("GlitchSprite")
 func normalGlitch():

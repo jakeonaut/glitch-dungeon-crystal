@@ -26,7 +26,7 @@
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=24]
 [ext_resource path="res://assets/palettes/magicolor-16-1x.png" type="Texture" id=25]
 
-[sub_resource type="ArrayMesh" id=33]
+[sub_resource type="ArrayMesh" id=35]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -116,11 +116,12 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 6 )
+show_dither_effect = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
 [node name="MeshInstance" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 33 )
+mesh = SubResource( 35 )
 
 [node name="Sprite" parent="Viewport/level/UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
 texture = SubResource( 22 )
@@ -236,7 +237,7 @@ which people called GLITCH
 •soon, temples of magick
 became overflowing with GLITCH,
 •and became condemned.
-•tho, the corruption of GLITCH
+•the corruption of GLITCH
 sunk deep roots into the earth,
 and spread far and wide"
 is_important = true
