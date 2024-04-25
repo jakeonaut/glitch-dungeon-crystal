@@ -8,6 +8,8 @@ onready var bubbleSpawner = get_node("BubbleSpawner")
 
 func _ready():
     set_process(true)
+    if spawned_object_path == "":
+        return
     spawned_object_res = load(spawned_object_path)
 
 func _process(_delta):
@@ -21,6 +23,8 @@ func isActive(_debug=false):
     return true
 
 func spawn():
+    if spawned_object_res == null:
+        return
     bubbleSpawner.is_active = false
     has_spawned = true
     get_node("Sprite3D").visible = false

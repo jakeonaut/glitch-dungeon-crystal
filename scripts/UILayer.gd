@@ -330,6 +330,9 @@ func processHiscoreRenderLogic(delta):
     loveHiscoreLabel.visible = false
     totalHiscoreLabel.visible = false
     pressEnterLabel.visible = false
+
+    glitchStatusText1.visible = true
+    glitchStatusText2.visible = true
     return
   # global.pauseMoveInput = true
   endOfLevel.visible = true

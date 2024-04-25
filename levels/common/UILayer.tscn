@@ -1211,7 +1211,6 @@ hframes = 3
 vframes = 3
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 480.0
 margin_top = 65.0
 margin_right = 463.0

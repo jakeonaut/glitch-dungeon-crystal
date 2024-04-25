@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var splashSprite = get_node("SplashSprite")
+onready var splashSprite = weakref(get_node("SplashSprite"))
 onready var splashSound = get_node("SplashSound")
 onready var miniSplashSound = get_node("MiniSplashSound")
 onready var miniSplashSound2 = get_node("MiniSplashSound2")
@@ -132,10 +132,10 @@ func bigSplash():
   return abs(getPlayer().linear_velocity.y) > 10
     
 func makeNewSplashSprite(x_offset, is_mini = false):
-  if not mySprite2.visible:
+  if not mySprite2.visible or not splashSprite.get_ref():
     return
 
-  var newSplashSprite = splashSprite.duplicate()
+  var newSplashSprite = splashSprite.get_ref().duplicate()
   newSplashSprite.should_fizzle_out = true
   newSplashSprite.visible = true
 

@@ -188,13 +188,12 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1, 29.2, 0 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 32, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 17, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 is_passive = true
-is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door3" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 21 )

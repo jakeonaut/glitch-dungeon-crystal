@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -29,6 +29,9 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=27]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=29]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=30]
+[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=31]
+[ext_resource path="res://assets/palettes/swamp_water_palette2.png" type="Texture" id=32]
 
 [sub_resource type="BoxShape" id=17]
 resource_local_to_scene = true
@@ -350,6 +353,37 @@ shader_param/texture_albedo = ExtResource( 29 )
 shader_param/base_palette = ExtResource( 26 )
 shader_param/target_palette = ExtResource( 24 )
 
+[sub_resource type="BoxShape" id=45]
+extents = Vector3( 1, 12, 1.8 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 27 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 31 )
+shader_param/base_palette = ExtResource( 26 )
+shader_param/target_palette = ExtResource( 32 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -494,7 +528,7 @@ shape = SubResource( 29 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 8.02838, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
@@ -516,6 +550,7 @@ shape = SubResource( 30 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8818, 9.14345, 0 )
+grav = 0
 bbText = "•some glitches are
 un-sweepable.
 i know this"
@@ -699,19 +734,229 @@ texture = ExtResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 10.3, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 11.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 8.9, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 11.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67945, 11.9, 0 )
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 12, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02058, 11.2423, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1.5, 0 )
 
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4395, 26, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4395, 12, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/Waterfall/Area" index="0"]
+shape = SubResource( 45 )
+
+[node name="MiniAdventures27" parent="Viewport/level/Waterfall" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 6.38733, -1 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 7.36945, -1 )
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53089, 7.36718, -1 )
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5355, 7.38581, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Waterfall" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 6.38831, -1 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 0.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures31" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 0.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures32" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, -0.59797, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures33" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, -0.59797, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="Sprite3D4" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 2.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures34" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 2.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures35" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 1.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures36" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 1.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="Sprite3D5" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 4.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures37" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 4.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures38" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 3.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures39" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 3.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="Sprite3D6" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 6.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures40" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 6.39222, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures41" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512577, 5.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
+
+[node name="MiniAdventures42" type="Sprite3D" parent="Viewport/level/Waterfall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51718, 5.40203, -1 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 31 )
+hframes = 32
+vframes = 32
+frame = 608
+script = ExtResource( 30 )
+frame_delay = 0.1
+max_frames = 4
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 
@@ -756,5 +1001,7 @@ flip_v = true
 [editable path="Viewport/level/WaterCube13"]
 [editable path="Viewport/level/FishingRod"]
 [editable path="Viewport/level/ParallaxBackground2"]
+[editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall/AreaSound"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
