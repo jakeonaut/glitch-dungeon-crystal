@@ -59,7 +59,7 @@ var remembered_feather_glitch_walk_speed = 6
 var remembered_invisible_glitch_walk_speed = 5
 func _ready():
   set_process(true)
-  set_physics_process(true)
+  set_physics_process(false)
   if pauseMenu: pauseMenu.hide()
 
   remembered_walk_speed = walk_speed
@@ -95,13 +95,12 @@ func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
 func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
-  applyGlitch(glitch, false)
-  if add_spell_to_grimoire and global.memory.has("spellbookPage"):
-    if not global.memory["spellbookPage"].has(glitch):
-      global.memory["spellbookPage"].push_back(glitch)
-      # TODO..
-      if global.memory["spellbookPage"].size() > 2:
-        global.memory["spellbookPage"].pop_front()
+  if applyGlitch(glitch, false) and add_spell_to_grimoire and \
+     global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
+    global.memory["spellbookPage"].push_back(glitch)
+    # TODO..
+    if global.memory["spellbookPage"].size() > 2:
+      global.memory["spellbookPage"].pop_front()
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
@@ -139,7 +138,7 @@ func restoreGlitchAndMP():
 
 func applyGlitch(glitch, notPlaySound = false):
   if returning_to_save_point > 0:
-    return
+    return false
   nullifySound.stop()
   if not notPlaySound:
     if glitch == self.glitch_form:
@@ -159,6 +158,7 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
+  return true
 
 func floorGlitch():
   level.displaySpellMessageText("air walk")

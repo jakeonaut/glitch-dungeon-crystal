@@ -49,7 +49,7 @@ var mushroom_turn_time_limit = 2
 var has_used_magic_lantern = false
 
 func _ready():
-  set_physics_process(true)
+  set_physics_process(false)
   set_process(true)
   
   should_do_middle_sensor = true

@@ -386,6 +386,16 @@ func isNeighborOfInfectedSpikes(neighborCoords):
       return true
   return false
 
+func isTileSolid(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tileShape = mesh_library.get_item_shapes(tile_type)
+  if tileShape == null or tileShape.size() == 0:
+    return false
+  var tileCollisionShape = tileShape[0]
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return tileCollisionShape is BoxShape and not "Spikes" in tile_name
+
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
@@ -436,6 +446,16 @@ func sweepUpSand(coords):
     level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)
   spike_infection_timer = 0
 
+func addTile(tile_id, target, is_transient = false, transient_time_start = 0):
+  set_cell_item(target.x, target.y, target.z, tile_id)
+  randomizeTile(target, my_tileset_glitch_type)
+  var name = mesh_library.get_item_name(tile_id)
+  tile_dict[target] = [name, 0]
+  if is_transient:
+    transient_tiles.append([target, transient_time_start])
+  else:
+    # TODO(jaketrower): add to levelZone...
+    pass
 
 func removeTile(key, removeFromLevelZone = true):
   set_cell_item(key.x, key.y, key.z, -1)

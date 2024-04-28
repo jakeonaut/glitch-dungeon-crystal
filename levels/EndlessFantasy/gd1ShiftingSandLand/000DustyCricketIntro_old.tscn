@@ -896,6 +896,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 7 )
 show_crt_effect = true
+starting_glitch_type = 4
 tileset_type = 4
 has_spellbook_page = true
 spellbook_spells = [ 4 ]

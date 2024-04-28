@@ -117,7 +117,10 @@ func bulletTryDieToSolids():
 func isTileSolid(tile_type, _is_vertical, _sensor_direction, _tile_pos_coords):
     if tile_type == GridMap.INVALID_CELL_ITEM:
         return false
-    var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+    var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
+    if tileShape == null or tileShape.size() == 0:
+        return false
+    var tileCollisionShape = tileShape[0]
     var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
     return (tileCollisionShape is BoxShape and not "Spikes" in tile_name)
         

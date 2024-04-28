@@ -37,7 +37,7 @@ func getPlayer():
 func _ready():
     # .ready() implicit
     set_process(true)
-    set_physics_process(true)
+    set_physics_process(false)
     
 # @override
 func activate(_is_player):

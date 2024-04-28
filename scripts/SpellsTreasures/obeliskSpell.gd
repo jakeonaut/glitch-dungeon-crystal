@@ -116,8 +116,6 @@ func isActive(_debug=false):
   return self.visible and is_active and shouldIBeActive()
 
 func activate(is_player):
-  if level.player.glitch_form != my_glitch_form:
-    level.player.getSmacked()
   passiveActivate(0, is_player)
   return false
 
@@ -148,6 +146,8 @@ func passiveActivate(_delta, _is_player):
     collectSound.play()
   is_active = false
 
+  if level.player.glitch_form != my_glitch_form:
+    level.player.getSmacked()
   getPlayer().applyObeliskGlitch(my_glitch_form)
   level.player.glitchTickle()
   # if level.player.glitch_death_timer == 0:

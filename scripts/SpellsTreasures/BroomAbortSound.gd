@@ -9,6 +9,7 @@ onready var broom = get_node("../../..")
 func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
+    level.player.pauseInput = false
     var aniPlayer = level.player.get_node("AnimationPlayer")
     aniPlayer.clear_queue()
     aniPlayer.queue("walkStop")

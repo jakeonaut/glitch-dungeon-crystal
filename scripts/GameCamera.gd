@@ -24,9 +24,14 @@ func getLevelTiles():
   return levelTiles
 
 var CAMERA_SIZE = 30
+export var override_camera_size = 0
 func _ready():
-  initial_size = CAMERA_SIZE# self.size
-  zoomed_size = CAMERA_SIZE # (initial_size-8)
+  if override_camera_size == 0:
+    initial_size = CAMERA_SIZE# self.size
+    zoomed_size = CAMERA_SIZE # (initial_size-8)
+  else:
+    initial_size = override_camera_size
+    zoomed_size = override_camera_size
   if global.memory.has("cameraSize"):
     self.size = global.memory["cameraSize"]
   initial_z = global_transform.origin.z

@@ -131,17 +131,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 14 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
 stream = null
 script = ExtResource( 12 )
 key_type = 0

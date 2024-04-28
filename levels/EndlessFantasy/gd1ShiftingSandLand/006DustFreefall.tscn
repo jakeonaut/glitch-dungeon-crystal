@@ -549,8 +549,6 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -2.9, 0 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
-
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.3, 0 )
 

@@ -66,8 +66,9 @@ func change_scene():
     if self.path != "":
         var was_change_ok = get_tree().change_scene(self.path)
         if was_change_ok != OK:
-            get_tree().change_scene("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
-
+            was_change_ok = get_tree().change_scene("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
+            print("okay something is broken")
+            global.pauseGame = false
     else:
         global.pauseGame = false
         

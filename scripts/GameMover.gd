@@ -171,7 +171,7 @@ func getMyStaticLevelZoneVar(refresh_if_null = false):
 
 func _ready():
   set_process(true)
-  set_physics_process(true)
+  set_physics_process(false)
   if true_terminal_vel == null: true_terminal_vel = 32
 
   yield(TempTimer.idle_frame(self), "timeout")
@@ -179,7 +179,7 @@ func _ready():
   spawn_origin = Vector3(global_transform.origin.x, global_transform.origin.y, global_transform.origin.z)
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
-func _process(_delta):
+func _process(delta):
   if mySprite.has_method("glitchyTrySetFrame"):
     mySprite.is_really_glitchy = is_really_glitchy 
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
@@ -187,7 +187,6 @@ func _process(_delta):
   if aniPlayer:
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
 
-func _physics_process(delta):
   if global.pauseGame or pauseSelf: return
   if jump_force == null: jump_force = 16
 
@@ -200,7 +199,7 @@ func _physics_process(delta):
     has_water_double_jumped = false
 
   DNUMHORZ = 65.0 * global.time_dilation_multiplier
-  DNUMSKID_BASE = 54.0 / global.time_dilation_multiplier
+  DNUMSKID_BASE = 7.0 / global.time_dilation_multiplier
   processPhysics(delta * global.time_dilation_multiplier)
 
   if not on_ground and translation.y < (last_grounded_pos.y - falling_y_offset) and not transitioning:
@@ -901,9 +900,11 @@ func processHorizontalInputs(delta):
 
   var DNUMSKID = DNUMSKID_BASE
   if self.isFeatherLike():
-    DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/7)
+    DNUMSKID = DNUMSKID_BASE/2.8
     if not on_ground:
-      DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/10.8)
+      DNUMSKID = DNUMSKID_BASE/7
+  elif not on_ground:
+    DNUMSKID = DNUMSKID_BASE/2
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground:
   #   DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
     # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
@@ -911,14 +912,17 @@ func processHorizontalInputs(delta):
   # TODO(Engine.time_scale suspect)
   if dir.length() > 1 and physics_state != PhysicsState.BEING_TOSSED:
     dir = dir.normalized()
-  if on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction():
-    dir = dir * 0.9*(delta*DNUMSKID)
-    if dir.length() < 0.1:
-      dir = Vector3(0, 0, 0)
-  elif not on_ground and shouldAirHaveFriction():
-    dir = dir * 0.99*(delta*DNUMSKID)
-    if dir.length() < 0.01:
-      dir = Vector3(0, 0, 0)
+  if (on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction()) or \
+     (not on_ground and not self.is_pressing_horizontal_input and shouldAirHaveFriction()):
+    if dir.x > 0:
+      dir.x -= (delta*DNUMSKID)
+      if dir.x <= 0:
+        dir = Vector3(0, 0, 0)
+    elif dir.x < 0:
+      dir.x += (delta*DNUMSKID)
+      if dir.x >= 0:
+        dir.x = 0
+    
   # elif glitch_form == global.GlitchForm.FLOOR and not on_ground:
   #     dir = dir * 0.97*(delta*DNUMSKID)
   #     if dir.length() < 0.1:
@@ -1027,7 +1031,10 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   var checking_for_floor_collisions = is_vertical and sensor_direction == -1
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
+  if tileShape == null or tileShape.size() == 0:
+    return false
+  var tileCollisionShape = tileShape[0]
   if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
     return not pressingDown() and checking_for_floor_collisions and (tileCollisionShape is BoxShape or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   else:
@@ -1038,7 +1045,10 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y
   var is_above_top_of_tile = y + bb > tile_pos_coords.y
   
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
+  if tileShape == null or tileShape.size() == 0:
+    return false
+  var tileCollisionShape = tileShape[0]
   return is_above_top_of_tile and (tileCollisionShape is PlaneShape or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and tileCollisionShape is BoxShape))
   
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):

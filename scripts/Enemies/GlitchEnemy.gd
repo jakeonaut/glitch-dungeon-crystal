@@ -66,10 +66,8 @@ export var kill_immediately = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process(true)
-    set_physics_process(true)
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         set_process(false)
-        set_physics_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
         var miniCubeCrystal = miniCubeCrystalRes.instance()

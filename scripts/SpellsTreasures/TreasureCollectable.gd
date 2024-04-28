@@ -29,7 +29,6 @@ func _ready():
     return
     
   set_process(true)
-  set_physics_process(true)
   is_active = true
   is_important = true
   is_really_important = true

@@ -181,7 +181,10 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   var checking_for_floor_collisions = is_vertical and sensor_direction == -1
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
+  if tileShape == null or tileShape.size() == 0:
+    return false
+  var tileCollisionShape = tileShape[0]
   var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
   return (tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords)))  and not "Spikes" in tile_name
   
@@ -191,7 +194,10 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var bb = -tb
   var is_above_top_of_tile = y + bb > tile_pos_coords.y
   
-  var tileCollisionShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)[0]
+  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
+  if tileShape == null or tileShape.size() == 0:
+    return false
+  var tileCollisionShape = tileShape[0]
   return is_above_top_of_tile and (tileCollisionShape is PlaneShape)
 
 func tryDieToOffscreenCamera():

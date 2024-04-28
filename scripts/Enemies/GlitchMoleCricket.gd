@@ -217,13 +217,28 @@ func _process(delta):
         behavior_walking = false
         grav = 0
         flight_anchor = null
-        if respawn_timer >= respawn_time_limit:
-            tryFadeBack(delta)
-        else:
-            respawn_timer += (delta * 11)
+        if not amITouchingSolidTiles(getLevelTiles()):
+            if respawn_timer >= respawn_time_limit:
+                tryFadeBack(delta)
+            else:
+                respawn_timer += (delta * 11)
 
     if am_i_dying:
         return
+
+func amITouchingSolidTiles(currLevelTiles):
+  var x = global_transform.origin.x
+  var y = global_transform.origin.y
+  var z = 0
+  
+  var coords = currLevelTiles.world_to_map(Vector3(x, y, z))
+  for i in [-1, 0, 1]:
+    for j in [0, 1]:
+      var tile_type = currLevelTiles.get_cell_item(coords.x + i, coords.y + j, coords.z)
+      if currLevelTiles.isTileSolid(tile_type):
+        return true
+
+  return false
 
 var respawn_timer = 0
 var respawn_time_limit = 20
@@ -310,26 +325,27 @@ func unsmack():
         grav = 60
     
 
+var SOFT_SAND_TOP_TILE = 275
 func digTiles(solidTiles, should_summon_clouds):
     var tiles_dug = 0
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_a.x, coords_a.y, coords_a.z), Vector3(coords_a.x, coords_a.y+1, coords_a.z), true, dig_counter * -5)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_a.x, coords_a.y+1, coords_a.z), false)
         else:
             levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), false)
         tiles_dug += 1
     if solidTiles[1] != null:
         var coords_mid = solidTiles[1]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), true, dig_counter * -5)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), false)
         else:
             levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), false)
         tiles_dug += 1
     if solidTiles[2] != null:
         var coords_b = solidTiles[2]
         if is_builder:
-            levelTiles.cloneTile(Vector3(coords_b.x, coords_b.y, coords_b.z), Vector3(coords_b.x, coords_b.y+1, coords_b.z), true, dig_counter * -5)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_b.x, coords_b.y+1, coords_b.z), false)
         else:
             levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), false)
         tiles_dug += 1

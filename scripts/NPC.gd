@@ -56,7 +56,7 @@ func pressingMoveRight():
 
 func _ready():
   set_process(true)
-  set_physics_process(true)
+  set_physics_process(false)
 
   mySprite.material_override = mySprite.material_override.duplicate()
   mySprite.should_randomize_frame_delay = false

@@ -22,7 +22,7 @@ var taking_the_player_with_me = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process(true)
-    set_physics_process(true)
+    set_physics_process(false)
     if is_static_in_level:
         get_node("SecretAnimationPlayer").play("isStaticInLevel")
         grav = 0
