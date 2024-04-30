@@ -50,7 +50,7 @@ func _ready():
 
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
-    myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.6
+    myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.2
 
 func getSmacked(broom_origin):
     if has_ever_been_smacked or mole_state == MoleState.RESPAWN:
@@ -233,9 +233,9 @@ func amITouchingSolidTiles(currLevelTiles):
   
   var coords = currLevelTiles.world_to_map(Vector3(x, y, z))
   for i in [-1, 0, 1]:
-    for j in [0, 1]:
+    for j in [-1, 0, 1]:
       var tile_type = currLevelTiles.get_cell_item(coords.x + i, coords.y + j, coords.z)
-      if currLevelTiles.isTileSolid(tile_type):
+      if currLevelTiles.isTileSoftSand(tile_type):
         return true
 
   return false

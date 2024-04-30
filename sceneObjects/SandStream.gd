@@ -11,22 +11,19 @@ func _process(_delta):
 func isActive(_debug=false):
   return true
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(delta, is_player):
   if not is_player or level.player.truly_on_ground:
     return
-  var value = -1
-  if level.player.lv.y > 0:
-    value = level.player.lv.y / 1.1
-  level.player.lv.y = value
-  level.player.vv = value
-  level.player.linear_velocity.y = value
-  level.player.on_ground = true
-  level.player.was_just_on_ground_timer = 0
+  var value = 1
+  level.player.global_transform.origin.y -= (delta*value)
   level.player.pauseAnimation = true
   var aa = level.player.aniPlayer.assigned_animation
-  if aa != "jumpSquat" and aa != "sinkInSand" and aa != "sweepFloor":
+  if aa != "jumpSquat" and aa != "sinkInSand" and aa != "sweepFloor" and not "broom" in aa:
     level.player.aniPlayer.play("sinkInSand", -1, 1)
 
 func justStopPassiveActivate():
   level.player.pauseAnimation = false
+  level.player.aniPlayer.stop()
+  level.player.aniPlayer.clear_queue()
+  level.player.aniPlayer.play("walk")
     

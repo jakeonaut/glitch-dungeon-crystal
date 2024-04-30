@@ -1160,7 +1160,6 @@ func broomStop():
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
-  velocity_dampener = 1.0
   if has_sweeped_glitch:
     was_just_on_ground_timer = -8
   if linear_velocity.y < 0:

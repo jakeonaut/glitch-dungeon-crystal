@@ -410,14 +410,17 @@ func trySpawnSpecialKey(keyFollower, keyType):
 
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
-func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, override_palette = global.grey_palette):
+func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, override_palette = global.grey_palette, horizontal = 0):
   var smokeClouds = []
   for _i in range(num_clouds):
     var newSmokeCloud = smokeCloudRes.instance()
     add_child(newSmokeCloud)
     newSmokeCloud.global_transform.origin.x = pos.x + rand_range(-1, 1)
     newSmokeCloud.global_transform.origin.y = pos.y + rand_range(-1, 1)
-    newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+    if horizontal != 0:
+      newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(horizontal, 3*horizontal)
+    else:
+      newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
     
     if play_sound:
       newSmokeCloud.tryPlaySound()

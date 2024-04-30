@@ -306,18 +306,20 @@ func pressingMoveUp():
 func pressingMoveDown():
   return Input.is_action_pressed("ui_down") and not pauseInput and not isTextboxPausingMe()
   
+var override_stop_left_input = false
 # @override
 func pressingMoveLeft():
-  if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
+  if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
   return .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
 
+var override_stop_right_input = false
 # @override
 func pressingMoveRight():
-  if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
+  if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:

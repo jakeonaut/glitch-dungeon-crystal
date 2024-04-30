@@ -266,7 +266,7 @@ func processPhysics(delta):
     
   lv = hv + (up * vv)
   
-  linear_velocity = handleCollisionsAndMove(lv, delta)
+  linear_velocity = handleCollisionsAndMove(normalizeLv(lv), delta)
   last_vv = vv
 
   postProcessInputs(delta)
@@ -414,8 +414,6 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel * .75
     else:
       terminal_vel = true_terminal_vel / 2
-  elif glitch_form == global.GlitchForm.LADDER:
-    terminal_vel = true_terminal_vel
   else:
     terminal_vel = true_terminal_vel
 
@@ -498,20 +496,24 @@ func processInputs(delta):
     vv = jump_force*2
   if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
     vv = 1
+  if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
+    getSmacked(global_transform.origin)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    if aniPlayer.assigned_animation == "sinkInSand" and not pressingJump():
-      vv = -2
-    elif pauseAnimation and not pressingJump():
+    if pauseAnimation and not pressingJump() and aniPlayer.assigned_animation != "sinkInSand":
       vv = 0
     else:
-      vv = getWalkSpeed(delta)
-    if not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "stand":
+      vv = getWalkSpeed(delta) * 0.9
+    if not pauseAnimation and aniPlayer != null and not "walk" in aniPlayer.assigned_animation:
       aniPlayer.stop()
       # aniPlayer.queue("walkBump")
       aniPlayer.queue("walk")
     should_do_fallthrough_area_collision = false
     ladderUpdateTargetLastGroundedY()
+
+# dummy
+func getSmacked(_broom_origin):
+  pass
 
 func ladderUpdateTargetLastGroundedY():
   pass
@@ -768,6 +770,8 @@ func getWalkSpeed(_delta):
   #   return feather_glitch_walk_speed # no run_add
   if glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add
+  elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
+    return walk_speed * .5 + run_add
   elif is_touching_water:
     return swimming_walk_speed + run_add
   else:
@@ -775,6 +779,8 @@ func getWalkSpeed(_delta):
 
 const PROJECTION_ORTHOGONAL = 1
 var was_running = false
+var horizontal_multiplier = 1
+var horizontal_addition = 0
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
@@ -848,6 +854,8 @@ func processHorizontalInputs(delta):
       elif pressingMoveRight():
         multiplier = -1
         flip_h = false
+      multiplier = multiplier * horizontal_multiplier + horizontal_addition
+      
 
       if multiplier != 0:
         should_teeter_turn_around = false
@@ -982,6 +990,12 @@ func doWalkAnimation():
   if aniPlayer.current_animation == "walk":
     aniPlayer.play("walk", -1, 1.5 if pressingRun() else 1.0)
     
+
+func normalizeLv(lv):
+  # if not truly_on_ground:
+  #   lv.x = 0
+  return lv
+
 var is_a_physics_particle = false
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
@@ -1183,7 +1197,7 @@ func collideWithWall(local_lv):
   if not pauseAnimation and aniPlayer != null and should_play_bump:
     var aa = aniPlayer.assigned_animation
     if not was_on_ground and not is_touching_water:
-      if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat":
+      if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat" and not ladder_glitch and not was_walking_into_wall:
         aniPlayer.stop()
         aniPlayer.clear_queue()
         playLandSound()
@@ -1191,7 +1205,7 @@ func collideWithWall(local_lv):
         if glitch_form == global.GlitchForm.LADDER:
           aniPlayer.queue("walk")
         else: aniPlayer.queue("fall" if isFeatherLike() else "jump")
-      elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar":
+      elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar" and not ladder_glitch and not was_walking_into_wall:
         aniPlayer.stop()
         aniPlayer.clear_queue()
         playLandSound()
@@ -1201,7 +1215,7 @@ func collideWithWall(local_lv):
         else: aniPlayer.queue("fall")
     # TODO(jaketrower): Should probably have like an animationState FSM (along with physics state?)
     elif ((was_on_ground and not ladder_glitch) or (truly_on_ground and ladder_glitch)) \
-       and aa != "walkBump" and ("walk" in aa or "land" in aa):
+       and aa != "walkBump" and ("walk" in aa or "land" in aa) and not was_walking_into_wall:
       aniPlayer.stop()
       aniPlayer.clear_queue()
       playLandSound()
@@ -1377,7 +1391,7 @@ func iFellFlat():
   pass
 
 func isWalkingIntoWall():
-  return abs(linear_velocity.x) < 0.5 \
+  return horizontal_collision \
        and is_pressing_horizontal_input and was_pressing_horizontal_input \
        and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation != "jumpSquat") 
 

@@ -1595,7 +1595,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id=40]
 resource_name = "fallBump"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -1950,7 +1950,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id=39]
 resource_name = "jumpBump"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -4923,8 +4923,9 @@ shader_param/target_palette = ExtResource( 36 )
 script = ExtResource( 1 )
 true_terminal_vel = 14
 grav = 28
+walk_speed = 7
 run_speed = 8
-feather_glitch_walk_speed = 8
+feather_glitch_walk_speed = 7
 swimming_walk_speed = 7
 jump_force = 9
 invisible_jump_force = 10

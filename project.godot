@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="secret of nana"
-run/main_scene="res://levels/EndlessFantasy/gd1ShiftingSandLand/006DustFreefall.tscn"
+run/main_scene="res://levels/000Intro.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
 config/icon="res://icon.png"
