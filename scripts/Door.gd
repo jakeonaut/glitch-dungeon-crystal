@@ -516,7 +516,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
     if global.memory.has("player_flip_h"):
       getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
       global.memory.erase("player_flip_h")
-    if global.memory.has("player_y_offset"):
+    if global.memory.has("player_y_offset") and not is_vertical:
       getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
     if global.memory.has("feather_jump_timer"):
       getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]

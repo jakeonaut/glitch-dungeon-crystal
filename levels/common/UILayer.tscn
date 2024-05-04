@@ -1824,6 +1824,24 @@ stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.9
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="PauseMenu"]
+margin_left = 24.0
+margin_top = 401.0
+margin_right = 467.0
+margin_bottom = 512.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "alt+ENTER:
+toggle 
+fullscreen"
+text = "alt+ENTER:
+toggle 
+fullscreen"
+scroll_active = false
+
 [node name="InputRect" type="ColorRect" parent="PauseMenu"]
 margin_left = 87.0
 margin_right = 559.0

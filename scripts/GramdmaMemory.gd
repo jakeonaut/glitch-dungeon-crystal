@@ -111,5 +111,3 @@ func land():
     getPlayer().linear_velocity = global.memory["linear_velocity"]
     global.memory.erase("linear_velocity")
   getPlayer().on_ground = false
-
-  global.saveMySpot(mySprite.translation, level)  

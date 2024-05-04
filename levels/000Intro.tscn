@@ -225,21 +225,18 @@ shape = SubResource( 32 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 0, 0 )
 grav = 0
-bbText = "•in this world, there are those
-who can perform magick, and 
-those who cannot.
-•magick users thrived in society,
-and constructed great
-temples to their own ability.
-•the use of these powers
+bbText = "•in this world, those who worship
+the Goddess can perform great
+and powerful magick.
+•great temples were built
+to spread her name. and to
+perform miracles.
+•the use of these holy magicks
 generated magical waste,
 which people called GLITCH
-•soon, temples of magick
+•soon, temples of the Goddess
 became overflowing with GLITCH,
-•and became condemned.
-•the corruption of GLITCH
-sunk deep roots into the earth,
-and spread far and wide"
+•and became condemned."
 is_important = true
 is_really_important = true
 can_camera_zoom = false

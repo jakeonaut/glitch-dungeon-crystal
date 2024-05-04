@@ -120,7 +120,7 @@ func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
 
-  portrait.visible = not is_tiny
+  portrait.visible = false # not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
     self.hide()
     return

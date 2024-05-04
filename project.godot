@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="secret of nana"
-run/main_scene="res://levels/000Intro.tscn"
+run/main_scene="res://levels/MainMenu.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
 config/icon="res://icon.png"
@@ -57,6 +57,7 @@ settings/fps/force_fps=60
 
 window/size/width=1280
 window/size/height=1024
+window/size/fullscreen=true
 window/size/test_width=640
 window/size/test_height=512
 window/stretch/mode="viewport"

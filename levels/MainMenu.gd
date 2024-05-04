@@ -5,12 +5,11 @@ var switch_glitch_time_limit = 15
 var direction = -1
 
 func setUpRoomInitializationOverride():
-    if not global.doesSaveGameExist():
-        startGame()
+    pass
 
 onready var menuOptionPointer = get_node("MenuOptionPointer")
 onready var menuOptionPointer2 = get_node("MenuOptionPointer2")
-var roomPath = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+var roomPath = "res://levels/000Intro.tscn"
 func startGame():
     global.isEnteringRoom = true
     transition.really_long_fade_to(roomPath)
@@ -47,15 +46,23 @@ func _process(_delta):
     # elif player.rotation_degrees.y < -5:
     #     direction = 1
 
-    if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
+    if global.doesSaveGameExist():
+        if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
+            if continuePrompt.visible:
+                continuePrompt.visible = false
+                newGamePrompt.visible = true
+                menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]"
+            else:
+                continuePrompt.visible = true
+                newGamePrompt.visible = false
+                menuText.bbcode_text = "[wave]Continue...?[/wave]\n\nNew Game"
+    else:
         if continuePrompt.visible:
             continuePrompt.visible = false
             newGamePrompt.visible = true
             menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]"
-        else:
-            continuePrompt.visible = true
-            newGamePrompt.visible = false
-            menuText.bbcode_text = "[wave]Continue...?[/wave]\n\nNew Game"
+        if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
+            player.noSpellSound.play()
 
     # switch_glitch_timer += (delta*22)
     # if switch_glitch_timer >= switch_glitch_time_limit:

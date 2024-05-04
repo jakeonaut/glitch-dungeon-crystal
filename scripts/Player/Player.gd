@@ -595,7 +595,7 @@ func nullify():
       self.applyGlitch(global.GlitchForm.NORMAL, true)
     return
 
-  if did_erase:
+  if did_erase or glitch_form != global.GlitchForm.NORMAL:
     nullifySound.play()
     if global.memory["permanent_spells"][self.glitch_form]:
       return

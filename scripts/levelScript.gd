@@ -239,20 +239,17 @@ func tryToRespawn():
     if found_door:
       # print(found_door)
       found_door.land(true, true)
-      print('found door')
-      global.saveMySpot(found_door.landing.global_transform.origin, null)
+      # global.saveMySpot(found_door.landing.global_transform.origin, null)
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
-      print('2?')
       player.global_transform.origin = player.spawn_origin
-      global.saveMySpot(player.spawn_origin, null)
+      # global.saveMySpot(player.spawn_origin, null)
     if not found_door:
       if global.grannyEnteringRoom:
         transition.reverse_granny_teleport()
         global.grannyEnteringRoom = false
       else:
         transition.reverse_fade()
-      print('3?')
-      global.saveMySpot(player.spawn_origin, null)
+      # global.saveMySpot(player.spawn_origin, null)
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom

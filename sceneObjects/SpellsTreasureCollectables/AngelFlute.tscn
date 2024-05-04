@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=6]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=7]
-[ext_resource path="res://scripts/SpellsTreasures/SpellbookPageAbortSound.gd" type="Script" id=8]
+[ext_resource path="res://scripts/SpellsTreasures/AngelFluteAbortSound.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=11]
@@ -129,17 +129,17 @@ shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 13 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
 stream = ExtResource( 10 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
 stream = null
 script = ExtResource( 8 )
 

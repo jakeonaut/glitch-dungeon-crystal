@@ -126,7 +126,9 @@ func playTreasureJingle(volume_db):
 
 
 func conductFromScenePath(path):
-    if stopAllMusic: return
+    if stopAllMusic or path.find("000Intro") > 0:
+        stopAll()
+        return
     changeSongPitch(1.0)
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
@@ -142,7 +144,7 @@ func conductFromScenePath(path):
             return
     elif path.find("BossArenaReal") > 0:
         tryToPlay(bossThemePlayer)
-    elif path.find("Haven") > 0:
+    elif path.find("Haven") > 0 or path.find("_0_0_FishingVillageEntrance") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)

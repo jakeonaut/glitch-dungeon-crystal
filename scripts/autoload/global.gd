@@ -206,6 +206,7 @@ func _ready():
     memory["level_zonez"] = []
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
+    memory["angel_flute"] = false
 
     # PERMANENT SPELLS
     
