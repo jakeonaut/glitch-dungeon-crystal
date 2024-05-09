@@ -373,7 +373,7 @@ func unsmack():
     pauseSelf = false
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
-  mySprite.material_override.set_shader_param("normal_offset", .02)
+  # mySprite.material_override.set_shader_param("normal_offset", .0)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 var pausingFromSpellCasting = false

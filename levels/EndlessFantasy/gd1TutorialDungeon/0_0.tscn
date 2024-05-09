@@ -929,6 +929,7 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8006, 15.0639, 0 )
+normal_offset = 0.0
 
 [node name="TextContainer" parent="Viewport/level/Player" index="12"]
 bbText = "•i don't remember us 

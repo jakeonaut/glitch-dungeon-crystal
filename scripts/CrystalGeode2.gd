@@ -49,7 +49,7 @@ var sams_weird_timeout_time_limit = 120
 var spawn_pos = null
 func _process(delta):
     if has_been_smacked:
-        cubeContainer.rotation_degrees.y -= delta*22*5
+        cubeContainer.rotation_degrees.y += delta*22
     else: 
         cubeContainer.rotation_degrees.y -= delta*22
     # if has_been_smacked:
