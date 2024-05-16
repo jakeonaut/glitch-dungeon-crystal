@@ -159,7 +159,7 @@ func _process(delta):
   
   if global.pauseGame: return
 
-  if is_passive or is_level_door:
+  if is_passive:
     spawnParticles(delta)
 
   if locked_to_monsters:

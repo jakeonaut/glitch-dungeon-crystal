@@ -17,6 +17,7 @@ export var player_message = "???"
 
 export var show_crt_effect = false
 export var show_dither_effect = false
+var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
@@ -38,6 +39,7 @@ export var doesnt_have_broom = false
 func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   _ready_impl()
+  ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
 
 export var is_randomizing = false
 func _ready_impl():
@@ -112,6 +114,7 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
+  # TODO(jaketrower): add an option
   ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
   basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
   colorBlindEffectRect2.visible = global.memory["show_color_blind"]
@@ -249,6 +252,7 @@ func tryToRespawn():
         global.grannyEnteringRoom = false
       else:
         transition.reverse_fade()
+        print("DEBUGGER DID NOT FIND DOOR")
       # global.saveMySpot(player.spawn_origin, null)
 
   global.respawnVarTimerHack = 0
@@ -258,6 +262,7 @@ func tryToRespawn():
 
   player.unsmack()
   player.aniPlayer.play("land")
+  player.target_last_grounded_y = player.global_transform.origin.y
   player.pauseAnimation = false
   self.overrideLevelRespawnEvent()
   player.nesting_doll_state = global.memory["nesting_doll"]

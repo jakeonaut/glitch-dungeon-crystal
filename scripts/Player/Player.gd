@@ -348,6 +348,10 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_glitch", false)
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   
+  if is_touching_water and was_touching_water and not is_fishy:
+    getFishyInfected()
+  elif not is_touching_water and not was_touching_water and is_fishy:
+    getFishyCured()
   processPoisonWaterLogic(delta)
   if pressingJump():
     tryClearFallthroughCollisionSolid()
@@ -373,7 +377,7 @@ func unsmack():
     pauseSelf = false
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
-  # mySprite.material_override.set_shader_param("normal_offset", .0)
+  mySprite.material_override.set_shader_param("normal_offset", 0.0)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 var pausingFromSpellCasting = false
@@ -609,6 +613,42 @@ func nullify():
 func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
   
+func loseBroom():
+  if global.memory["broom"]:
+    mySprite.flip_h = not mySprite.flip_h
+    summonFallenBroom(false, true)
+    mySprite.flip_h = not mySprite.flip_h
+  if horizontal_collision:
+    mushroom_infection_direction = -mushroom_infection_direction
+    mushroom_turn_timer = 0
+
+var is_fishy = false
+func getFishyInfected():
+  loseBroom()
+  is_fishy = true
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("transformToFishy")
+  print("transformToFishy")
+  pauseAnimation = true
+  physics_state = PhysicsState.IGNORE_PHYSICS
+  pauseInput = true
+
+func getFishyCured():
+  is_fishy = false
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("revertFromFishy")
+  print("revertFromFishy")
+  pauseAnimation = true
+  physics_state = PhysicsState.NORMAL
+  pauseInput = true
+  getABroom()
+
+func stopTransformationAni():
+  pauseAnimation = false
+  pauseInput = false
+
 
 var is_mushroom_prefected = false
 func getMushroomInfected(): 
@@ -617,6 +657,7 @@ func getMushroomInfected():
     # getSmacked()
     return false
   is_mushroom_prefected = true
+  loseBroom()
 
   musicPlayer.changeSongPitch(0.5)
   # mushroom_turn_timer = 0
@@ -655,6 +696,7 @@ func getMushroomCured():
   getSmacked()
   glitch_death_timer = 0
   global.pauseMoveInput = false 
+  getABroom()
   is_mushroom_infected = false
   mushroomSpriteVisible.visible = false
   mushroomSpriteAniPlayer.stop()
@@ -681,7 +723,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     return
 
   if is_mushroom_infected:
-    # getABroom()
+    getABroom()
     for _i in range(5):
       spawnASpore(0, -1)
     var x_offset = 0
@@ -950,14 +992,6 @@ func processMushroomLogic(delta):
   mushroomSpriteVisible.visible = is_mushroom_infected
   if not is_mushroom_infected:
     return
-  
-  # if global.memory["broom"]:
-  #   mySprite.flip_h = not mySprite.flip_h
-  #   summonFallenBroom(false, true)
-  #   mySprite.flip_h = not mySprite.flip_h
-  if horizontal_collision:
-    mushroom_infection_direction = -mushroom_infection_direction
-    mushroom_turn_timer = 0
 
   # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
   # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
@@ -1118,7 +1152,7 @@ func processPoisonWaterLogic(delta):
     musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
     reversePoisonWaterSound.stop()
     
-var has_landed_since_recovering = false
+var has_landed_since_recovering = true
 # @override
 func landed():
   .landed()

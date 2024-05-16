@@ -9,6 +9,7 @@ onready var egg = get_node("../../..")
 func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
+    level.player.pauseInput = false
     var tadpole = level.spawnAngelTadpole(egg.global_transform.origin)
     tadpole.get_node("Sounds/HatchSound").play()
     global.incrementLevelZoneThing("angelTadpole", 1)

@@ -1,25 +1,24 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/miniCubeCrystal.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CubeCrystalMesh.gd" type="Script" id=2]
-[ext_resource path="res://assets/water_normal_3.png" type="Texture" id=3]
+[ext_resource path="res://materials/CubeCrystalShaderMaterial.tres" type="Material" id=3]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
 [ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/pickup.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=7]
-[ext_resource path="res://scripts/portdoorPolyTriangle.gd" type="Script" id=8]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=8]
 [ext_resource path="res://assets/sounds/tone2.wav" type="AudioStream" id=9]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=10]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/frogblocks.png" type="Texture" id=12]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=13]
-[ext_resource path="res://assets/palettes/grey_blue_palette.png" type="Texture" id=14]
 
 [sub_resource type="SpatialMaterial" id=17199]
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17202]
+[sub_resource type="ArrayMesh" id=17200]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -32,49 +31,11 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="SpatialMaterial" id=17201]
-flags_transparent = true
-flags_unshaded = true
-params_blend_mode = 1
-albedo_color = Color( 1, 1, 1, 0.478431 )
-albedo_texture = ExtResource( 3 )
-distance_fade_mode = 2
-distance_fade_min_distance = 0.0
-distance_fade_max_distance = 0.0
-
 [sub_resource type="CubeMesh" id=17]
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.75, 0.75, 0.75 )
-
-[sub_resource type="ShaderMaterial" id=17203]
-shader = ExtResource( 10 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = true
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.0
-shader_param/time_influence = 0.0
-shader_param/y_div = 0.0
-shader_param/texture_albedo = ExtResource( 7 )
-shader_param/base_palette = ExtResource( 11 )
-shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -90,25 +51,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
 
 [sub_resource type="Animation" id=9]
 resource_name = "floatAway"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("CubeContainer:translation")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -118,18 +67,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 5 ), Vector3( 0, 5, 5 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CubeContainer:translation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 5 ), Vector3( 0, 5, 5 ) ]
-}
+
+[sub_resource type="ShaderMaterial" id=17201]
+shader = ExtResource( 10 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.5
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.05
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 3.0
+shader_param/normal_offset = 0.01
+shader_param/time_influence = 2.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 11 )
+shader_param/target_palette = ExtResource( 7 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 10 )
@@ -167,12 +132,12 @@ script = ExtResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17202 )
+mesh = SubResource( 17200 )
 script = ExtResource( 2 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
-material_override = SubResource( 17201 )
+material_override = ExtResource( 3 )
 mesh = SubResource( 17 )
 
 [node name="InteractionArea" type="Area" parent="."]
@@ -195,21 +160,21 @@ stream = ExtResource( 6 )
 volume_db = -40.411
 pitch_scale = 1.43
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-material_override = SubResource( 17203 )
-pixel_size = 0.04
-texture = ExtResource( 7 )
-hframes = 8
-vframes = 8
-frame = 48
-script = ExtResource( 8 )
-frame_delay = 0.2
-should_randomize_frame_delay = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
 anims/RESET = SubResource( 8 )
 anims/floatAway = SubResource( 9 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource( 17201 )
+pixel_size = 0.04
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 8 )
+hframes = 13
+vframes = 7
+frame = 44
 
 [node name="PlusSpriteContainer" type="Spatial" parent="."]
 visible = false
