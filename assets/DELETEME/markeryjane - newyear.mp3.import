@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/markeryjane - newyear.mp3-143265cdf24fecde8fc7e92f8937af91.mp3str"
+
+[deps]
+
+source_file="res://assets/DELETEME/markeryjane - newyear.mp3"
+dest_files=[ "res://.import/markeryjane - newyear.mp3-143265cdf24fecde8fc7e92f8937af91.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -17,6 +17,7 @@ func activateScript():
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
+  level.player.glitchTickle()
 
   level.saveTheGame()
 

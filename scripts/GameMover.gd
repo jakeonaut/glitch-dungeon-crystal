@@ -418,6 +418,8 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel * .75
     else:
       terminal_vel = true_terminal_vel / 2
+  elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
+    terminal_vel = true_terminal_vel * 1.5
   else:
     terminal_vel = true_terminal_vel
 
@@ -501,6 +503,7 @@ func processInputs(delta):
   if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
     vv = 1
   if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
+    playStickOnWallSound()
     getSmacked(global_transform.origin)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
@@ -517,6 +520,10 @@ func processInputs(delta):
 
 # dummy
 func getSmacked(_broom_origin):
+  pass
+
+# dummy
+func playStickOnWallSound():
   pass
 
 func ladderUpdateTargetLastGroundedY():
@@ -774,8 +781,6 @@ func getWalkSpeed(_delta):
   #   return feather_glitch_walk_speed # no run_add
   if glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add
-  elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
-    return walk_speed * .5 + run_add
   elif is_touching_water:
     return swimming_walk_speed + run_add
   else:

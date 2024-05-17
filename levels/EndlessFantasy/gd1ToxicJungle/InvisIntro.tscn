@@ -234,7 +234,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 4.9, 0 )
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 25.9, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.16776, 0 )

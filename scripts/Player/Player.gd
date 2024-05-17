@@ -628,14 +628,19 @@ func processFishyLogic(_delta):
 
   if not is_fishy and is_touching_water and was_touching_water and not truly_on_ground and not was_on_ground and not recentlyJustPressedJump():
     getFishyInfected()
+    gravitySound.play()
   elif is_fishy:
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     if (not is_touching_water and not was_touching_water):
       getFishyCured()
+      gravitySound.play()
 
+  # weird recovery
   if not is_fishy and fishySprite.visible and not pauseAnimation and not aniPlayer.assigned_animation == "revertFromFishy":
     getFishyCured()
+  elif is_fishy and not fishySprite.visible and not pauseAnimation and not aniPlayer.assigned_animation == "transformToFishy":
+    getFishyInfected()
 
 # @override
 func justPressedJump():

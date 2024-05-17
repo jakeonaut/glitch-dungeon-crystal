@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/markeryjane - unread - 15 kiqball.mp3-c60dfb17f01d3900ef5e57dd7f6a80bc.mp3str"
+
+[deps]
+
+source_file="res://assets/DELETEME/markeryjane - unread - 15 kiqball.mp3"
+dest_files=[ "res://.import/markeryjane - unread - 15 kiqball.mp3-c60dfb17f01d3900ef5e57dd7f6a80bc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

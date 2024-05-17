@@ -497,6 +497,9 @@ func processJumpInputs(delta):
         
   .processJumpInputs(delta)
 
+func playStickOnWallSound():
+  runSound.play()
+
 onready var tickleSound = get_node("Sounds/TickleSound")
 var glitch_tickle_timer = 0
 func glitchTickle(play_sound = true):

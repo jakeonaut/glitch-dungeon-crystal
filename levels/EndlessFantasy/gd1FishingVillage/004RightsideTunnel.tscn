@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=14]
@@ -23,7 +24,6 @@
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=26]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=27]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=29]
@@ -94,11 +94,7 @@ extents = Vector3( 1.5, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=28]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="Animation" id=90]
+[sub_resource type="Animation" id=156]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
@@ -328,8 +324,20 @@ tracks/18/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=91]
+[sub_resource type="Animation" id=157]
 resource_name = "gulpIdle"
 length = 0.9
 tracks/0/type = "value"
@@ -339,7 +347,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 1, 1.1, 1.2, 1.3 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
@@ -371,7 +379,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=92]
+[sub_resource type="Animation" id=158]
 resource_name = "lick"
 length = 0.5
 step = 0.025
@@ -385,7 +393,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.425, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 5, 1 ]
+"values": [ 4, 5, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("TongueSprite:visible")
@@ -615,12 +623,24 @@ tracks/19/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
 
-[sub_resource type="Animation" id=93]
+[sub_resource type="Animation" id=159]
 resource_name = "lickIdle"
 length = 0.05
 
-[sub_resource type="Animation" id=94]
+[sub_resource type="Animation" id=160]
 resource_name = "lickRight"
 length = 0.5
 step = 0.025
@@ -864,8 +884,20 @@ tracks/19/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
 
-[sub_resource type="Animation" id=95]
+[sub_resource type="Animation" id=161]
 resource_name = "lickSudden"
 length = 0.5
 step = 0.025
@@ -1110,7 +1142,7 @@ tracks/19/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=96]
+[sub_resource type="Animation" id=162]
 resource_name = "lickSuddenRight"
 length = 0.5
 step = 0.025
@@ -1355,7 +1387,7 @@ tracks/19/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=97]
+[sub_resource type="Animation" id=163]
 resource_name = "spitOut"
 step = 0.01
 tracks/0/type = "value"
@@ -1397,7 +1429,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=98]
+[sub_resource type="Animation" id=164]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
@@ -1532,7 +1564,7 @@ tracks/10/keys = {
 "values": [ 0.125 ]
 }
 
-[sub_resource type="Animation" id=99]
+[sub_resource type="Animation" id=165]
 resource_name = "degauss"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
@@ -1679,7 +1711,7 @@ tracks/11/keys = {
 "values": [ 0.18, 0.125 ]
 }
 
-[sub_resource type="Animation" id=100]
+[sub_resource type="Animation" id=166]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
@@ -1706,7 +1738,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=101]
+[sub_resource type="Animation" id=167]
 resource_name = "broomSmackGlitch"
 length = 0.4
 step = 0.01
@@ -1735,7 +1767,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=102]
+[sub_resource type="Animation" id=168]
 resource_name = "bumpBotLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -1763,7 +1795,7 @@ tracks/1/keys = {
 "values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=103]
+[sub_resource type="Animation" id=169]
 resource_name = "bumpBotRight"
 length = 0.4
 tracks/0/type = "value"
@@ -1791,7 +1823,7 @@ tracks/1/keys = {
 "values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=104]
+[sub_resource type="Animation" id=170]
 resource_name = "bumpCeil"
 length = 0.6
 tracks/0/type = "value"
@@ -1819,7 +1851,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=105]
+[sub_resource type="Animation" id=171]
 resource_name = "bumpLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -1847,7 +1879,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=106]
+[sub_resource type="Animation" id=172]
 resource_name = "bumpRight"
 length = 0.4
 tracks/0/type = "value"
@@ -1875,7 +1907,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=107]
+[sub_resource type="Animation" id=173]
 resource_name = "fallFlat"
 step = 0.05
 tracks/0/type = "value"
@@ -1903,7 +1935,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=108]
+[sub_resource type="Animation" id=174]
 length = 0.06
 step = 0.03
 tracks/0/type = "value"
@@ -1931,7 +1963,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=109]
+[sub_resource type="Animation" id=175]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
@@ -1958,7 +1990,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=110]
+[sub_resource type="Animation" id=176]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
@@ -1985,7 +2017,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=111]
+[sub_resource type="Animation" id=177]
 resource_name = "landSoft"
 length = 0.6
 tracks/0/type = "value"
@@ -2013,7 +2045,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=112]
+[sub_resource type="Animation" id=178]
 resource_name = "wakeup"
 length = 1.5
 tracks/0/type = "value"
@@ -2210,6 +2242,5947 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
 }
 
+[sub_resource type="BoxShape" id=179]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="Animation" id=180]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite2:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite3:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite4:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite:flip_h")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite2:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite4:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=181]
+resource_name = "gulpIdle"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startGulp"
+} ]
+}
+
+[sub_resource type="Animation" id=182]
+resource_name = "lick"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.27621, -0.25, 0 ), Vector3( -3.68495, -0.25, 0 ), Vector3( -2.72766, -0.25, 0 ), Vector3( -1.71407, -0.25, 0 ), Vector3( -1.31989, -0.25, 0 ), Vector3( -0.64416, -0.25, 0 ), Vector3( -0.264062, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=183]
+resource_name = "lickIdle"
+length = 0.05
+
+[sub_resource type="Animation" id=184]
+resource_name = "lickRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.6, -0.25, 0 ), Vector3( 4.276, -0.25, 0 ), Vector3( 3.685, -0.25, 0 ), Vector3( 2.728, -0.25, 0 ), Vector3( 1.714, -0.25, 0 ), Vector3( 1.32, -0.25, 0 ), Vector3( 0.644, -0.25, 0 ), Vector3( 0.264, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite4:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite2:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=185]
+resource_name = "lickSudden"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.6, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=186]
+resource_name = "lickSuddenRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.25, 0 ), Vector3( 4.5, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ), Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ), Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ), Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ), Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=187]
+resource_name = "spitOut"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.16, 0.17, 0.4, 0.46, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 5, 9, 5, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.17 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spitOut"
+} ]
+}
+
+[sub_resource type="Animation" id=188]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite2:pixel_size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite3:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite4:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+
+[sub_resource type="Animation" id=189]
+resource_name = "degauss"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueAnimationPlayer:playback_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:pixel_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite2:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite3:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite4:pixel_size")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+
+[sub_resource type="Animation" id=190]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=191]
+resource_name = "broomSmackGlitch"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=192]
+resource_name = "bumpBotLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=193]
+resource_name = "bumpBotRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=194]
+resource_name = "bumpCeil"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=195]
+resource_name = "bumpLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=196]
+resource_name = "bumpRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=197]
+resource_name = "fallFlat"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=198]
+length = 0.06
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=199]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=200]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=201]
+resource_name = "landSoft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=202]
+resource_name = "wakeup"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=203]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite2:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite3:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite4:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite:flip_h")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite2:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite4:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=204]
+resource_name = "gulpIdle"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startGulp"
+} ]
+}
+
+[sub_resource type="Animation" id=205]
+resource_name = "lick"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.27621, -0.25, 0 ), Vector3( -3.68495, -0.25, 0 ), Vector3( -2.72766, -0.25, 0 ), Vector3( -1.71407, -0.25, 0 ), Vector3( -1.31989, -0.25, 0 ), Vector3( -0.64416, -0.25, 0 ), Vector3( -0.264062, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=206]
+resource_name = "lickIdle"
+length = 0.05
+
+[sub_resource type="Animation" id=207]
+resource_name = "lickRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.6, -0.25, 0 ), Vector3( 4.276, -0.25, 0 ), Vector3( 3.685, -0.25, 0 ), Vector3( 2.728, -0.25, 0 ), Vector3( 1.714, -0.25, 0 ), Vector3( 1.32, -0.25, 0 ), Vector3( 0.644, -0.25, 0 ), Vector3( 0.264, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite4:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite2:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=208]
+resource_name = "lickSudden"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.6, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=209]
+resource_name = "lickSuddenRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.25, 0 ), Vector3( 4.5, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ), Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ), Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ), Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ), Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=210]
+resource_name = "spitOut"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.16, 0.17, 0.4, 0.46, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 5, 9, 5, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.17 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spitOut"
+} ]
+}
+
+[sub_resource type="Animation" id=211]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite2:pixel_size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite3:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite4:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+
+[sub_resource type="Animation" id=212]
+resource_name = "degauss"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueAnimationPlayer:playback_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:pixel_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite2:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite3:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite4:pixel_size")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+
+[sub_resource type="Animation" id=213]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=214]
+resource_name = "broomSmackGlitch"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=215]
+resource_name = "bumpBotLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=216]
+resource_name = "bumpBotRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=217]
+resource_name = "bumpCeil"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=218]
+resource_name = "bumpLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "bumpRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=220]
+resource_name = "fallFlat"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=221]
+length = 0.06
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=222]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=223]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=224]
+resource_name = "landSoft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=225]
+resource_name = "wakeup"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=226]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite2:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite3:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite4:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite:flip_h")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite2:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite4:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=227]
+resource_name = "gulpIdle"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startGulp"
+} ]
+}
+
+[sub_resource type="Animation" id=228]
+resource_name = "lick"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.27621, -0.25, 0 ), Vector3( -3.68495, -0.25, 0 ), Vector3( -2.72766, -0.25, 0 ), Vector3( -1.71407, -0.25, 0 ), Vector3( -1.31989, -0.25, 0 ), Vector3( -0.64416, -0.25, 0 ), Vector3( -0.264062, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=229]
+resource_name = "lickIdle"
+length = 0.05
+
+[sub_resource type="Animation" id=230]
+resource_name = "lickRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.125, 0.175, 0.275, 0.3, 0.375, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.6, -0.25, 0 ), Vector3( 4.276, -0.25, 0 ), Vector3( 3.685, -0.25, 0 ), Vector3( 2.728, -0.25, 0 ), Vector3( 1.714, -0.25, 0 ), Vector3( 1.32, -0.25, 0 ), Vector3( 0.644, -0.25, 0 ), Vector3( 0.264, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite4:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite3:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite2:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("TongueController/TongueArea/CollisionShape:shape:extents")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=231]
+resource_name = "lickSudden"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.6, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=232]
+resource_name = "lickSuddenRight"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TongueSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.425, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TongueSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 13, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TongueSprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.175, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite3:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite4:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 12 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueController/TongueArea/CollisionShape:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.25, 0 ), Vector3( 4.5, -0.25, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.5, -0.35, 0.5 ), Vector3( 1.5, -0.35, 0.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TongueSprite2:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 2.5, -0.35, 0.5 ), Vector3( 2.5, -0.35, 0.5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TongueSprite3:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 3.5, -0.35, 0.5 ), Vector3( 3.5, -0.35, 0.5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TongueSprite4:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.35, 0.5 ), Vector3( 4.5, -0.35, 0.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TongueSprite:flip_h")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TongueSprite2:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TongueSprite3:flip_h")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TongueSprite4:flip_h")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TongueController/TongueArea/CollisionShape:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=233]
+resource_name = "spitOut"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.16, 0.17, 0.4, 0.46, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 5, 9, 5, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.17 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spitOut"
+} ]
+}
+
+[sub_resource type="Animation" id=234]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueSprite:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite2:pixel_size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite3:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite4:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+
+[sub_resource type="Animation" id=235]
+resource_name = "degauss"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:pixel_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TongueAnimationPlayer:playback_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TongueSprite:pixel_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TongueSprite:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TongueSprite:material_override:shader_param/normal_offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.49, 0.02 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TongueSprite:material_override:shader_param/time_influence")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.649, 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TongueSprite2:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TongueSprite3:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TongueSprite4:pixel_size")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.18, 0.125 ]
+}
+
+[sub_resource type="Animation" id=236]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=237]
+resource_name = "broomSmackGlitch"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=238]
+resource_name = "bumpBotLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=239]
+resource_name = "bumpBotRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=240]
+resource_name = "bumpCeil"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=241]
+resource_name = "bumpLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=242]
+resource_name = "bumpRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=243]
+resource_name = "fallFlat"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=244]
+length = 0.06
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=245]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=246]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=247]
+resource_name = "landSoft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=248]
+resource_name = "wakeup"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -2323,8 +8296,7 @@ shape = SubResource( 23 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.7, -1, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1FishingVillage/FlingAndFlung.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 num_keys_unlock = 1
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
@@ -2428,43 +8400,41 @@ is_infected = true
 [node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy6/FallthroughSolid" index="0"]
 shape = SubResource( 25 )
 
-[node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 7.85464, 0 )
-spawn_timer = 15
-is_static = true
-is_licker = true
+[node name="BasicFrogEnemy7" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.7, 0.1, 0 )
+is_infected = true
 
-[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy4/FallthroughSolid" index="0"]
-shape = SubResource( 28 )
+[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy7/FallthroughSolid" index="0"]
+shape = SubResource( 25 )
 
-[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="12"]
-anims/RESET = SubResource( 90 )
-anims/gulpIdle = SubResource( 91 )
-anims/lick = SubResource( 92 )
-anims/lickIdle = SubResource( 93 )
-anims/lickRight = SubResource( 94 )
-anims/lickSudden = SubResource( 95 )
-anims/lickSuddenRight = SubResource( 96 )
-anims/spitOut = SubResource( 97 )
+[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy7" index="12"]
+anims/RESET = SubResource( 156 )
+anims/gulpIdle = SubResource( 157 )
+anims/lick = SubResource( 158 )
+anims/lickIdle = SubResource( 159 )
+anims/lickRight = SubResource( 160 )
+anims/lickSudden = SubResource( 161 )
+anims/lickSuddenRight = SubResource( 162 )
+anims/spitOut = SubResource( 163 )
 
-[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="13"]
-anims/RESET = SubResource( 98 )
-anims/degauss = SubResource( 99 )
+[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy7" index="13"]
+anims/RESET = SubResource( 164 )
+anims/degauss = SubResource( 165 )
 
-[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="15"]
-anims/RESET = SubResource( 100 )
-anims/broomSmackGlitch = SubResource( 101 )
-anims/bumpBotLeft = SubResource( 102 )
-anims/bumpBotRight = SubResource( 103 )
-anims/bumpCeil = SubResource( 104 )
-anims/bumpLeft = SubResource( 105 )
-anims/bumpRight = SubResource( 106 )
-anims/fallFlat = SubResource( 107 )
-anims/jumpSquat = SubResource( 108 )
-anims/jumpStart = SubResource( 109 )
-anims/land = SubResource( 110 )
-anims/landSoft = SubResource( 111 )
-anims/wakeup = SubResource( 112 )
+[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy7" index="15"]
+anims/RESET = SubResource( 166 )
+anims/broomSmackGlitch = SubResource( 167 )
+anims/bumpBotLeft = SubResource( 168 )
+anims/bumpBotRight = SubResource( 169 )
+anims/bumpCeil = SubResource( 170 )
+anims/bumpLeft = SubResource( 171 )
+anims/bumpRight = SubResource( 172 )
+anims/fallFlat = SubResource( 173 )
+anims/jumpSquat = SubResource( 174 )
+anims/jumpStart = SubResource( 175 )
+anims/land = SubResource( 176 )
+anims/landSoft = SubResource( 177 )
+anims/wakeup = SubResource( 178 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7, -0.7, 0 )
@@ -2491,11 +8461,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 9, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9182, 11.8429, 0 )
 grav = 0
-bbText = "•yup"
+bbText = "•when in doubt, fish!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
-tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 140 )
@@ -2634,8 +8603,136 @@ has_spawned = true
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 3, 0 )
 
-[node name="SmallKey" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 8, 0 )
+[node name="WaterCube20" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -4 )
+
+[node name="WaterCube21" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, -4 )
+
+[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.833657, 0 )
+is_static = true
+is_licker = true
+
+[node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -0.305445, 0 )
+is_static = true
+is_licker = true
+
+[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy2/SpriteContainer/InnerSpriteContainer" index="0"]
+flip_h = false
+
+[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy2/FallthroughSolid" index="0"]
+shape = SubResource( 179 )
+
+[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="12"]
+anims/RESET = SubResource( 180 )
+anims/gulpIdle = SubResource( 181 )
+anims/lick = SubResource( 182 )
+anims/lickIdle = SubResource( 183 )
+anims/lickRight = SubResource( 184 )
+anims/lickSudden = SubResource( 185 )
+anims/lickSuddenRight = SubResource( 186 )
+anims/spitOut = SubResource( 187 )
+
+[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="13"]
+anims/RESET = SubResource( 188 )
+anims/degauss = SubResource( 189 )
+
+[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="15"]
+anims/RESET = SubResource( 190 )
+anims/broomSmackGlitch = SubResource( 191 )
+anims/bumpBotLeft = SubResource( 192 )
+anims/bumpBotRight = SubResource( 193 )
+anims/bumpCeil = SubResource( 194 )
+anims/bumpLeft = SubResource( 195 )
+anims/bumpRight = SubResource( 196 )
+anims/fallFlat = SubResource( 197 )
+anims/jumpSquat = SubResource( 198 )
+anims/jumpStart = SubResource( 199 )
+anims/land = SubResource( 200 )
+anims/landSoft = SubResource( 201 )
+anims/wakeup = SubResource( 202 )
+
+[node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 7.69456, 0 )
+is_static = true
+is_licker = true
+
+[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy3/SpriteContainer/InnerSpriteContainer" index="0"]
+flip_h = false
+
+[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy3/FallthroughSolid" index="0"]
+shape = SubResource( 179 )
+
+[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy3" index="12"]
+anims/RESET = SubResource( 203 )
+anims/gulpIdle = SubResource( 204 )
+anims/lick = SubResource( 205 )
+anims/lickIdle = SubResource( 206 )
+anims/lickRight = SubResource( 207 )
+anims/lickSudden = SubResource( 208 )
+anims/lickSuddenRight = SubResource( 209 )
+anims/spitOut = SubResource( 210 )
+
+[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy3" index="13"]
+anims/RESET = SubResource( 211 )
+anims/degauss = SubResource( 212 )
+
+[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy3" index="15"]
+anims/RESET = SubResource( 213 )
+anims/broomSmackGlitch = SubResource( 214 )
+anims/bumpBotLeft = SubResource( 215 )
+anims/bumpBotRight = SubResource( 216 )
+anims/bumpCeil = SubResource( 217 )
+anims/bumpLeft = SubResource( 218 )
+anims/bumpRight = SubResource( 219 )
+anims/fallFlat = SubResource( 220 )
+anims/jumpSquat = SubResource( 221 )
+anims/jumpStart = SubResource( 222 )
+anims/land = SubResource( 223 )
+anims/landSoft = SubResource( 224 )
+anims/wakeup = SubResource( 225 )
+
+[node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 7.69456, 0 )
+is_static = true
+is_licker = true
+
+[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy4/SpriteContainer/InnerSpriteContainer" index="0"]
+flip_h = false
+
+[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy4/FallthroughSolid" index="0"]
+shape = SubResource( 179 )
+
+[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="12"]
+anims/RESET = SubResource( 226 )
+anims/gulpIdle = SubResource( 227 )
+anims/lick = SubResource( 228 )
+anims/lickIdle = SubResource( 229 )
+anims/lickRight = SubResource( 230 )
+anims/lickSudden = SubResource( 231 )
+anims/lickSuddenRight = SubResource( 232 )
+anims/spitOut = SubResource( 233 )
+
+[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="13"]
+anims/RESET = SubResource( 234 )
+anims/degauss = SubResource( 235 )
+
+[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="15"]
+anims/RESET = SubResource( 236 )
+anims/broomSmackGlitch = SubResource( 237 )
+anims/bumpBotLeft = SubResource( 238 )
+anims/bumpBotRight = SubResource( 239 )
+anims/bumpCeil = SubResource( 240 )
+anims/bumpLeft = SubResource( 241 )
+anims/bumpRight = SubResource( 242 )
+anims/fallFlat = SubResource( 243 )
+anims/jumpSquat = SubResource( 244 )
+anims/jumpStart = SubResource( 245 )
+anims/land = SubResource( 246 )
+anims/landSoft = SubResource( 247 )
+anims/wakeup = SubResource( 248 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]
 
@@ -2665,10 +8762,13 @@ flip_v = true
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/BasicFrogEnemy6"]
-[editable path="Viewport/level/BasicFrogEnemy4"]
+[editable path="Viewport/level/BasicFrogEnemy7"]
 [editable path="Viewport/level/ParallaxBackground2"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/FishingRod5"]
+[editable path="Viewport/level/BasicFrogEnemy2"]
+[editable path="Viewport/level/BasicFrogEnemy3"]
+[editable path="Viewport/level/BasicFrogEnemy4"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

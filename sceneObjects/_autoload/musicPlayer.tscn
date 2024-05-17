@@ -10,13 +10,13 @@
 [ext_resource path="res://assets/music/selfrealization.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/music/echoisland_ben.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
-[ext_resource path="res://assets/music/lucky cat casino.mp3" type="AudioStream" id=11]
-[ext_resource path="res://assets/music/prairie swamp.mp3" type="AudioStream" id=12]
+[ext_resource path="res://assets/DELETEME/markeryjane - unread - 12 pull.mp3" type="AudioStream" id=11]
+[ext_resource path="res://assets/DELETEME/eryngi - mossy EP - 01 i've got moss.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/music/explore2.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/music/soeth.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/music/fishing.mp3" type="AudioStream" id=15]
 [ext_resource path="res://assets/DELETEME/OOT_Sandstorm.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/music/trunk.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/DELETEME/markeryjane - unread - 10 tea is cold-overlooking.mp3" type="AudioStream" id=17]
 [ext_resource path="res://assets/music/grandma.mp3" type="AudioStream" id=18]
 [ext_resource path="res://assets/music/poison forest.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/music/CH-OS_atmosphere_105.wav" type="AudioStream" id=20]
@@ -34,7 +34,7 @@ volume_db = -15.0
 
 [node name="RestZonePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-volume_db = -25.0
+volume_db = -22.0
 
 [node name="TitleThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -95,7 +95,7 @@ volume_db = -20.0
 
 [node name="SwampThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
-volume_db = -22.0
+volume_db = -18.0
 
 [node name="GoddessThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

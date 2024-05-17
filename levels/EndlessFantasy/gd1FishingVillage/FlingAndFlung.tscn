@@ -2272,7 +2272,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, -2.9, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -2448,10 +2448,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -5, -4 )
 
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -5, -4 )
-
-[node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 7, 0 )
-spawned_object_path = ""
 
 [node name="SwampBubbleSpawn2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4, 0 )
