@@ -22,6 +22,7 @@ func passiveActivate(delta, is_player):
     level.player.aniPlayer.play("sinkInSand", -1, 1)
 
 func justStopPassiveActivate():
+  # TODO(jaketrower): dangerous?!
   level.player.pauseAnimation = false
   level.player.aniPlayer.stop()
   level.player.aniPlayer.clear_queue()

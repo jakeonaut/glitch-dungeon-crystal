@@ -146,8 +146,8 @@ func fallthroughCollisionActivate(possible_game_mover):
             level.player.linear_velocity.y = jump_val
             level.player.lv.y = jump_val
             level.player.vv = jump_val
-            # getPlayer().applyHalfGrav = true
-            # getPlayer().applyHalfGravTimer = 3
+            # getPlayer().physics_vars.applyHalfGrav = true
+            # getPlayer().physics_vars.applyHalfGravTimer = 3
             bounceSound.pitch_scale = rand_range(0.8, 1.5)
             bounceSound.play()
             level.player.target_last_grounded_y = level.player.global_transform.origin.y

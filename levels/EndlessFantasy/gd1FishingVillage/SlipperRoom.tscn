@@ -302,7 +302,7 @@ visible = false
 visible = false
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 7.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 0.0999999, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
 visible = false

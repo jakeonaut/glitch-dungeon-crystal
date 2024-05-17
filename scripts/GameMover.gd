@@ -95,6 +95,13 @@ enum PhysicsState {
   IGNORE_PHYSICS,
 }
 var physics_state = PhysicsState.NORMAL
+var physics_vars = {
+  "should_apply_gravity": true,
+  "applyHalfGrav": false,
+  "applyHalfGravTimer": 0,
+  "applyHalfGravTimeLimit": 10,
+}
+
 var ignorePhysics = false
 
 var linear_velocity = Vector3()
@@ -103,9 +110,6 @@ var velocity_dampener = 1.0
 var pauseAnimation = false
 
 export var grav = 60
-var applyHalfGrav = false
-var applyHalfGravTimer = 0
-var applyHalfGravTimeLimit = 10
 var g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
 
 # TODO(jaketrower): Maybe should remove dir, and only rely on linear_velocity ?
@@ -338,17 +342,17 @@ func processLand():
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true
     
-var should_apply_gravity = true
 func applyGravity(delta):
-  if applyHalfGrav:
-    applyHalfGravTimer += (delta*22)
-    if applyHalfGravTimer >= applyHalfGravTimeLimit:
-      applyHalfGravTimer = 0
-      applyHalfGrav = 0
-
-  if not should_apply_gravity:
+  if not physics_vars.should_apply_gravity:
     return
-  if is_touching_water or applyHalfGrav:
+
+  if physics_vars.applyHalfGrav:
+    physics_vars.applyHalfGravTimer += (delta*22)
+    if physics_vars.applyHalfGravTimer >= physics_vars.applyHalfGravTimeLimit:
+      physics_vars.applyHalfGravTimer = 0
+      physics_vars.applyHalfGrav = 0
+
+  if is_touching_water or physics_vars.applyHalfGrav:
     g = Vector3(0, -grav/3, 0)
     if is_touching_waterfall:
       g = Vector3(0, -grav/2, 0)

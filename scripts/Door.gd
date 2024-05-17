@@ -343,6 +343,11 @@ func startDoorUnlock():
     getPlayer().pauseSelf = true
     setGlobalMemoryOfHasUnlocked()
     is_unlocking = true
+    getPlayer().hv = 0
+    getPlayer().linear_velocity.x = 0
+    getPlayer().lv.x = 0
+    getPlayer().dir = Vector3(0, 0, 0)
+    getPlayer().global_transform.origin.x = self.global_transform.origin.x
     getPlayer().aniPlayer.stop()
     getPlayer().aniPlayer.clear_queue()
     getPlayer().aniPlayer.play("preGetItem")

@@ -20,6 +20,7 @@ onready var digSound = get_node("Sounds/DigSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
+onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
@@ -232,8 +233,7 @@ func canRun():
 
 # @override
 func canSwim():
-  var has_flippers = global.memory["zora_flippers"]
-  return has_flippers
+  return is_fishy
   
 func isWalkingIntoWall():
   if summonedBroom != null:
@@ -348,10 +348,7 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_glitch", false)
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   
-  if is_touching_water and was_touching_water and not is_fishy:
-    getFishyInfected()
-  elif not is_touching_water and not was_touching_water and is_fishy:
-    getFishyCured()
+  processFishyLogic(delta)
   processPoisonWaterLogic(delta)
   if pressingJump():
     tryClearFallthroughCollisionSolid()
@@ -614,6 +611,8 @@ func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
   
 func loseBroom():
+  if summonedBroom:
+    broomStop()
   if global.memory["broom"]:
     mySprite.flip_h = not mySprite.flip_h
     summonFallenBroom(false, true)
@@ -623,27 +622,46 @@ func loseBroom():
     mushroom_turn_timer = 0
 
 var is_fishy = false
+func processFishyLogic(_delta):
+  if not global.memory["zora_flippers"]:
+    return
+
+  if not is_fishy and is_touching_water and was_touching_water and not truly_on_ground and not was_on_ground and not recentlyJustPressedJump():
+    getFishyInfected()
+  elif is_fishy:
+    fishySprite.flip_h = mySprite.flip_h
+    physics_vars.should_apply_gravity = pressingDown()
+    if (not is_touching_water and not was_touching_water):
+      getFishyCured()
+
+  if not is_fishy and fishySprite.visible and not pauseAnimation and not aniPlayer.assigned_animation == "revertFromFishy":
+    getFishyCured()
+
+# @override
+func justPressedJump():
+  return .justPressedJump() or (is_fishy and Input.is_action_just_pressed("ui_up") and not pauseInput and not isTextboxPausingMe())
+
 func getFishyInfected():
+  if summonedBroom:
+    summonFallenBroom(true, false, false)
   loseBroom()
   is_fishy = true
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("transformToFishy")
-  print("transformToFishy")
   pauseAnimation = true
-  physics_state = PhysicsState.IGNORE_PHYSICS
-  pauseInput = true
+  # pauseInput = true
 
 func getFishyCured():
   is_fishy = false
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("revertFromFishy")
-  print("revertFromFishy")
+  aniPlayer.queue("land")
   pauseAnimation = true
-  physics_state = PhysicsState.NORMAL
-  pauseInput = true
-  getABroom()
+  on_ground = true
+  # pauseInput = true
+  physics_vars.should_apply_gravity = true
 
 func stopTransformationAni():
   pauseAnimation = false
@@ -1165,7 +1183,7 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED:
+  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED and not is_fishy:
     summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
@@ -1232,7 +1250,7 @@ func iFellFlat():
   if fallenBroomRef and fallenBroomRef.get_ref():
     fallenBroomRef.get_ref().canPause = true
 
-func summonFallenBroom(was_thrown, should_die_on_land = false):
+func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
   broomSpriteVisible.visible = false
   summonSmokeClouds(5, false, false)
 
@@ -1242,6 +1260,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false):
     if smacked_npc != null:
       fallenBroom.smacked_npc = smacked_npc
     fallenBroom.should_die_on_land = should_die_on_land
+    fallenBroom.should_return = should_return
     fallenBroom.global_transform.origin = self.global_transform.origin
     fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
     fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1

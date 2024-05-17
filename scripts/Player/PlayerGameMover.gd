@@ -444,8 +444,8 @@ var smacked_npc = null
 var is_in_broom_cooldown = false
 var has_broom_flown = false
 var has_landed_since_last_flight = false
-func getABroom():
-  pauseAnimation = false 
+func getABroom(unpauseAnimation = true):
+  pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
   if nesting_doll_state == global.NestingDoll.GRANDMA:

@@ -89,7 +89,7 @@ func _process(delta):
         if my_speed_max != null and not has_set_origin:
           my_original_pos = global_transform.origin.y
           has_set_origin = true
-        randomizeTargetPos()
+        # randomizeTargetPos()
     else:
       global_transform.origin.y += delta*my_speed
 
@@ -98,7 +98,7 @@ func _process(delta):
         if my_speed_max != null and not has_set_origin:
           my_original_pos = global_transform.origin.x
           has_set_origin = true
-        randomizeTargetPos()
+        # randomizeTargetPos()
 
     opacity = opacity + (target_opacity - opacity) * (delta * 5)
     mySprite.material_override.set_shader_param("opacity", opacity)
@@ -132,8 +132,8 @@ func passiveActivate(_delta, is_player):
     if getPlayer().linear_velocity.y < 0:
       getPlayer().linear_velocity.y = -0.01
     if not getPlayer().isFeatherLike():
-      getPlayer().applyHalfGrav = true
-      getPlayer().applyHalfGravTimer = 5
+      getPlayer().physics_vars.applyHalfGrav = true
+      getPlayer().physics_vars.applyHalfGravTimer = 5
     if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
       var jump_val = 14
       getPlayer().linear_velocity.y = jump_val

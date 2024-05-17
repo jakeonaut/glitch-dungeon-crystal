@@ -16,6 +16,8 @@ var returning_time_limit = 5
 onready var collisionShape = get_node("Area/CollisionShape")
 var smacked_npc = null
 var should_die_on_land = false
+var is_dying = false
+var should_return = true
 var have_i_smacked_an_npc = false
 var taking_the_player_with_me = false
 
@@ -32,6 +34,9 @@ func _process(delta):
         queue_free()
 
     if returning:
+        if not should_return:
+            die()
+            return
         returning_timer += (delta*22)
 
         pauseSelf = true
@@ -57,13 +62,7 @@ func _process(delta):
     if vv > 0 and not projectile:
         behavior_was_thrown = false
         if should_die_on_land:
-            get_node("SecretAnimationPlayer").play("die")
-            behavior_walking = false
-            behavior_was_thrown = false
-            grav = 0
-            vv = 0
-            linear_velocity.y = 0
-            lv.y = 0
+            die()
     if projectile:
         var has_hit_something = hitStuff(delta)
         if has_hit_something or horizontal_collision or vertical_collision: # ((horizontal_collision or vertical_collision) and level.player.glitch_form != global.GlitchForm.WALK_THROUGH_WALLS):
@@ -107,16 +106,27 @@ func _process(delta):
             level.player.has_landed_since_last_flight = false
             returning = false
             taking_the_player_with_me = false
-    tryDieIfTooFarFromPlayer()
-    tryDieToOffscreenCamera()
+    tryReturnIfTooFarFromPlayer()
+    tryReturnToOffscreenCamera()
     if not is_static_in_level and was_projectile:
         return_timer += (delta * 22)
         if return_timer >= return_time_limit:
             returning = true
             on_ground = false
 
+func die():
+    if is_dying:
+        return
+    get_node("SecretAnimationPlayer").play("die")
+    behavior_walking = false
+    behavior_was_thrown = false
+    grav = 0
+    vv = 0
+    linear_velocity.y = 0
+    lv.y = 0
+    is_dying = true
     
-func tryDieIfTooFarFromPlayer():
+func tryReturnIfTooFarFromPlayer():
     if is_static_in_level or was_projectile or projectile:
         return
         
@@ -127,7 +137,7 @@ func tryDieIfTooFarFromPlayer():
     if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:
         returning = true
 
-func tryDieToOffscreenCamera():
+func tryReturnToOffscreenCamera():
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \

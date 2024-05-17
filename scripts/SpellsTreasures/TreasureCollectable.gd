@@ -64,7 +64,7 @@ func _process(delta):
     if level.player.summonedBroom != null:
       level.player.broomStop()
     level.player.pauseAnimation = true
-    level.player.pauseInput = true
+    level.player.pauseInput = true # TODO(jaketrower): remember to unpause
     level.player.broomSpriteVisible.visible = false
     level.player.physics_state = PhysicsState.OCCUPIED
     level.player.dir = Vector3(0, 0, 0)
