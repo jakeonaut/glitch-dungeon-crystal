@@ -129,7 +129,8 @@ func passiveActivate(_delta, is_player):
     hooked = true
     hookTarget = weakref(level.player)
     level.player.hookSound.play()
-    level.player.aniPlayer.play("hookCaught")
+    if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+      level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
     level.player.should_do_fallthrough_area_collision = false
     level.player.tryClearFallthroughCollisionSolid()

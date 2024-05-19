@@ -617,11 +617,7 @@ func loseBroom():
     mySprite.flip_h = not mySprite.flip_h
     summonFallenBroom(false, true)
     mySprite.flip_h = not mySprite.flip_h
-  if horizontal_collision:
-    mushroom_infection_direction = -mushroom_infection_direction
-    mushroom_turn_timer = 0
 
-var is_fishy = false
 func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
@@ -649,13 +645,31 @@ func justPressedJump():
 func getFishyInfected():
   if summonedBroom:
     summonFallenBroom(true, false, false)
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
   loseBroom()
   is_fishy = true
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("transformToFishy")
+  if global.memory["zora_flippers"] == 1:
+    musicPlayer.stopAll()
+    aniPlayer.play("transformToFishy_first")
+    global.memory["zora_flippers"] = 2
+    dir = Vector3(0, 0, 0)
+    lv.x = 0
+    lv.y = 0
+    linear_velocity.x = 0
+    linear_velocity.y = 0
+    hv = 0
+    vv = 0
+    pauseInput = true
+  else:
+    aniPlayer.play("transformToFishy")
   pauseAnimation = true
-  # pauseInput = true
+
+func restartMusic():
+  level.restartMusic()
+  
 
 func getFishyCured():
   is_fishy = false
@@ -664,7 +678,8 @@ func getFishyCured():
   aniPlayer.play("revertFromFishy")
   aniPlayer.queue("land")
   pauseAnimation = true
-  on_ground = true
+  if glitch_form == global.GlitchForm.FLOOR and not pressingDown():
+    on_ground = true
   # pauseInput = true
   physics_vars.should_apply_gravity = true
 
@@ -1013,18 +1028,17 @@ onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):
   mushroomSpriteVisible.visible = is_mushroom_infected
+  should_collide_horizontally = not is_mushroom_infected
   if not is_mushroom_infected:
     return
 
-  # var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
-  # var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-  # if turning_left or turning_right:
-  #   mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
-  #   if mushroom_turn_timer >= mushroom_turn_time_limit:
-  #     mushroom_turn_timer = 0
-  #     mushroom_infection_direction *= -1
-  # else:
-  #   mushroom_turn_timer = 0
+  var my_y = global_transform.origin.y
+  global_transform.origin.y += 1
+  var solid_tiles = getTilesBelow(getLevelTiles())
+  if solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null:
+    # my_y += delta*11
+    glitchTickle()
+  global_transform.origin.y = my_y
   
   spore_spawn_timer += (delta*22)
   if spore_spawn_timer >= spore_spawn_time_limit:
@@ -1040,6 +1054,23 @@ func processMushroomLogic(delta):
   if mySprite.flip_h:
     mushroomSpriteVisible.flip_h = true
     mushroomSpriteVisible.translation.x *= -1
+
+var should_flip = false
+# @override
+func processHorizontalInputs(delta):
+  .processHorizontalInputs(delta)
+  if is_mushroom_infected:
+    should_flip = not should_flip
+    var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+    var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+    if turning_left or turning_right:
+      mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
+      if should_flip: mySprite.flip_h = not mySprite.flip_h
+      if mushroom_turn_timer >= mushroom_turn_time_limit:
+        mushroom_turn_timer = 0
+        mushroom_infection_direction *= -1
+    else:
+      mushroom_turn_timer = 0
 
 func adjustSummonedBroomSpritePosition():
   var xAddition = 0

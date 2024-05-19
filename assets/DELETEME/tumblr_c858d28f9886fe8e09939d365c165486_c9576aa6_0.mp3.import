@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3-92b28815a33836aa1121479b55ddd932.mp3str"
+
+[deps]
+
+source_file="res://assets/DELETEME/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3"
+dest_files=[ "res://.import/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3-92b28815a33836aa1121479b55ddd932.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

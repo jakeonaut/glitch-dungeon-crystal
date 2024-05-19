@@ -777,8 +777,8 @@ func getWalkSpeed(_delta):
   if pressingRun():
       run_add = 3
 
-  # if glitch_form == global.GlitchForm.FEATHER:
-  #   return feather_glitch_walk_speed # no run_add
+  if glitch_form == global.GlitchForm.FEATHER:
+    return feather_glitch_walk_speed # no run_add
   if glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add
   elif is_touching_water:
@@ -1167,7 +1167,7 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
           feather_jump_timer = feather_jump_partial_time_limit
         # nocommit
         if is_pressing_horizontal_input or was_pressing_horizontal_input:
-          local_lv.x *= 10
+          global_transform.origin.x += local_lv.x / velocity_dampener
     else:
       global_transform.origin.x += tile_distance * sensor_direction
       collideWithWall(local_lv)

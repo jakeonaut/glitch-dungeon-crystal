@@ -120,6 +120,9 @@ func _process(delta):
             pauseSelf = false
             physics_state = PhysicsState.NORMAL
             returning_to_save_point = 0
+    if on_ground:
+        if secretAniPlayer.assigned_animation == "fall":
+            secretAniPlayer.play("land")
             
 # @override
 func landed():

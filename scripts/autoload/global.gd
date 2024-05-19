@@ -220,15 +220,15 @@ func _ready():
     ]
 
     # POWERUPS
-    memory["broomerang"] = false
-    memory["magic_lantern"] = false
-    memory["can_nest"] = false
+    memory["broomerang"] = 0
+    memory["magic_lantern"] = 0
+    memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["zora_flippers"] = false # TODO(jaketrower): turn off before beta build
+    memory["zora_flippers"] = 0
 
     # GAME MODES
-    memory["random_entrances"] = false
+    memory["random_entrances"] = 0
 
     # EASTER EGGS
     memory["anna_mode"] = false

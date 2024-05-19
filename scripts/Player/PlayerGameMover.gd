@@ -45,7 +45,7 @@ var is_mushroom_infected = false
 var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
-var mushroom_turn_time_limit = 2
+var mushroom_turn_time_limit = 6
 var has_used_magic_lantern = false
 
 func _ready():
@@ -398,6 +398,7 @@ func regainNestingDoll():
   # has_mushroom_double_jumped = true
 
 var summonedBroom = null
+var is_fishy = false
 # @override
 func getWalkSpeed(delta):
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
@@ -407,22 +408,18 @@ func getWalkSpeed(delta):
     return 9
   elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 6 if pressingRun() else 5
-  elif nesting_doll_state == global.NestingDoll.MOM:
-    return 9 if pressingRun() else 7
+  elif is_fishy or nesting_doll_state == global.NestingDoll.MOM:
+    return 7
   else:
     if is_mushroom_infected:
       if mushroom_infection_direction < 0:
         if Input.is_action_pressed("ui_left"):
-          return 9
-        elif Input.is_action_pressed("ui_right"):
-          return 2
-        else: return 5
+          return 4
+        else: return 2
       else:
-        if Input.is_action_pressed("ui_left"):
-          return 2
-        elif Input.is_action_pressed("ui_right"):
-          return 9
-        else: return 5
+        if Input.is_action_pressed("ui_right"):
+          return 4
+        else: return 2
     return .getWalkSpeed(delta) # super()
 
 func doubleJump():

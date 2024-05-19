@@ -133,7 +133,7 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 22 )
 frame_3/delay_sec = 0.0
 
-[sub_resource type="ShaderMaterial" id=128]
+[sub_resource type="ShaderMaterial" id=148]
 shader = ExtResource( 20 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -159,7 +159,7 @@ shader_param/base_palette = ExtResource( 17 )
 shader_param/real_base_palette = ExtResource( 19 )
 
 [sub_resource type="CubeMesh" id=124]
-material = SubResource( 128 )
+material = SubResource( 148 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="AnimatedTexture" id=125]
@@ -169,7 +169,7 @@ frame_0/texture = ExtResource( 23 )
 frame_1/texture = ExtResource( 24 )
 frame_1/delay_sec = 0.0
 
-[sub_resource type="ShaderMaterial" id=129]
+[sub_resource type="ShaderMaterial" id=149]
 shader = ExtResource( 20 )
 shader_param/albedo = null
 shader_param/opacity = 1.0
@@ -195,7 +195,7 @@ shader_param/base_palette = ExtResource( 17 )
 shader_param/real_base_palette = ExtResource( 18 )
 
 [sub_resource type="CubeMesh" id=127]
-material = SubResource( 129 )
+material = SubResource( 149 )
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="Animation" id=131]

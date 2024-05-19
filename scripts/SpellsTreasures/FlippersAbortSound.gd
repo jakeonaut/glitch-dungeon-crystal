@@ -23,5 +23,5 @@ func activateScript():
 
 func preActivateScript():
   if not has_activated:
-    global.memory["zora_flippers"] = true
+    global.memory["zora_flippers"] = 1
     has_activated = true

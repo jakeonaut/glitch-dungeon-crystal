@@ -144,7 +144,11 @@ func conductFromScenePath(path):
             return
     elif path.find("BossArenaReal") > 0:
         tryToPlay(bossThemePlayer)
-    elif path.find("Haven") > 0 or path.find("_0_0_FishingVillageEntrance") > 0:
+    elif path.find("Haven2") > 0:
+        tryToPlay(priestessPlayer)
+        changeSongPitch(1.0)
+        default_song_pitch = 1.0
+    elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
