@@ -77,10 +77,10 @@ func trySweepUpGlitchTiles(collisionShape):
         # TODO(jaketrower): also reset the levelTiles array position?
       # if getLevelTiles().isTileGlitchSpikes(tile_type):
       #   has_clanked = true
-      if getLevelTiles().isTileSoftSand(tile_type):
-        getLevelTiles().sweepUpSand(coords)
-        has_clanked = true
-        was_clank_sand = true
+      # if getLevelTiles().isTileSoftSand(tile_type):
+      #   getLevelTiles().sweepUpSand(coords)
+      #   has_clanked = true
+      #   was_clank_sand = true
   
   if has_clanked:
     my_broom_owner.swordClank(not was_clank_sand)

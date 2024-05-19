@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=2]
+[gd_scene load_steps=139 format=2]
 
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -746,6 +746,293 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="Animation" id=229]
+resource_name = "ActivatedIdle"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BirdSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.28119, 2.34887, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BirdSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 5, 2, 5, 2, 5, 2, 5, 2, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BirdSprite:material_override:shader_param/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MusicNoteSprite:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9, 1.1, 2.4, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MusicNoteSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.9, 1.4, 1.9, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 6, 7 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MusicNoteSprite:translation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.9, 1.2, 1.6, 2, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -1.80339, 1.91616, 0.100891 ), Vector3( -1.44101, 2.91616, 0.100891 ), Vector3( -2.44844, 3.89566, 0.100891 ), Vector3( -1.45268, 4.84013, 0.100891 ), Vector3( -2.87767, 6.73475, 0.100891 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TweetSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1, 2.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BirdSprite:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=230]
+resource_name = "BirdFlyIn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BirdSprite:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -4.20136, 6.43754, 0 ), Vector3( -0.914846, 4.29386, 0 ), Vector3( -1.26308, 2.3127, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BirdSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 4, 3, 4, 3, 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BirdSprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BirdSprite:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=231]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BirdSprite:material_override:shader_param/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MusicNoteSprite:material_override:shader_param/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MusicNoteSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MusicNoteSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.44101, 2.91616, 0.100891 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TweetSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BirdSprite:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1.79978, 2.65261, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BirdSprite:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=232]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=233]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=234]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=235]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=236]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=237]
+resource_name = "stand"
+length = 0.1
+
 [sub_resource type="Animation" id=106]
 resource_name = "ActivatedIdle"
 length = 5.0
@@ -1361,7 +1648,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=220]
+[sub_resource type="ArrayMesh" id=238]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2379,7 +2666,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 3, 0, 51, 4, 0, 51, 5, 0, 51, 65539, 0, 51, 65541, 0, 51, 131075, 0, 51, 131076, 0, 51, 131077, 0, 51, 131082, 0, 1, 131083, 0, 1, 131084, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131088, 0, 1, 131089, 0, 1, 196589, 0, 37, 196590, 0, 37, 196591, 0, 37, 196592, 0, 37, 196593, 0, 37, 196594, 0, 37, 196595, 0, 37, 196596, 0, 37, 196608, 0, 51, 196614, 0, 51, 196619, 0, 1, 196620, 0, 1, 196621, 0, 1, 196622, 0, 1, 196623, 0, 1, 196624, 0, 1, 196625, 0, 1, 262125, 0, 37, 262126, 0, 37, 262127, 0, 37, 262128, 0, 37, 262129, 0, 37, 262130, 0, 37, 262131, 0, 37, 262132, 0, 37, 262133, 0, 37, 262143, 0, 51, 262147, 0, 51, 262148, 0, 51, 262149, 0, 51, 262154, 0, 1, 262155, 0, 1, 262156, 0, 1, 262157, 0, 1, 262158, 0, 1, 262159, 0, 1, 262160, 0, 1, 262161, 0, 1, 327661, 0, 37, 327662, 0, 37, 327663, 0, 37, 327664, 0, 37, 327665, 0, 37, 327666, 0, 37, 327667, 0, 37, 327668, 0, 37, 327669, 0, 37, 327670, 0, 37, 327683, 0, 51, 327685, 0, 51, 327686, 0, 51, 327690, 0, 1, 327691, 0, 1, 327692, 0, 1, 327693, 0, 1, 327694, 0, 1, 327695, 0, 1, 327696, 0, 1, 327697, 0, 1, 393197, 0, 37, 393198, 0, 37, 393199, 0, 37, 393200, 0, 37, 393201, 0, 37, 393202, 0, 37, 393203, 0, 37, 393204, 0, 37, 393205, 0, 37, 393206, 0, 37, 393207, 0, 37, 393216, 0, 51, 393217, 0, 51, 393219, 0, 51, 393220, 0, 51, 393222, 0, 51, 393226, 0, 1, 393227, 0, 1, 393228, 0, 1, 393229, 0, 1, 393230, 0, 1, 393231, 0, 1, 393232, 0, 1, 393233, 0, 1, 458733, 0, 37, 458734, 0, 37, 458735, 0, 37, 458736, 0, 37, 458737, 0, 37, 458738, 0, 37, 458739, 0, 37, 458740, 0, 37, 458741, 0, 37, 458742, 0, 37, 458743, 0, 37, 458744, 0, 37, 458745, 0, 1, 458746, 0, 1, 458747, 0, 1, 458751, 0, 51, 458753, 0, 51, 458756, 0, 51, 458757, 0, 51, 458758, 0, 51, 458763, 0, 1, 458764, 0, 1, 458765, 0, 1, 458766, 0, 1, 458767, 0, 1, 458768, 0, 1, 458769, 0, 1, 524269, 0, 37, 524270, 0, 37, 524271, 0, 37, 524272, 0, 37, 524273, 0, 37, 524274, 0, 37, 524275, 0, 37, 524276, 0, 37, 524277, 0, 37, 524278, 0, 37, 524279, 0, 37, 524280, 0, 37, 524281, 0, 1, 524283, 0, 1, 524287, 0, 51, 524288, 0, 51, 524289, 0, 51, 524299, 0, 1, 524300, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 524304, 0, 1, 524305, 0, 1, 589805, 0, 37, 589806, 0, 37, 589807, 0, 37, 589808, 0, 37, 589809, 0, 37, 589810, 0, 37, 589811, 0, 37, 589812, 0, 37, 589813, 0, 37, 589814, 0, 37, 589815, 0, 37, 589816, 0, 37, 589817, 0, 1, 589818, 0, 1, 589819, 0, 1, 589823, 0, 51, 589835, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 589840, 0, 1, 589841, 0, 1, 655341, 0, 37, 655342, 0, 37, 655343, 0, 37, 655344, 0, 37, 655345, 0, 37, 655346, 0, 37, 655347, 0, 37, 655348, 0, 37, 655349, 0, 37, 655350, 0, 37, 655351, 0, 37, 655352, 0, 37, 655353, 0, 37, 655370, 0, 1, 655371, 0, 1, 655372, 0, 1, 655373, 0, 1, 655374, 0, 1, 655375, 0, 1, 655376, 0, 1, 655377, 0, 1, 720877, 0, 37, 720878, 0, 37, 720879, 0, 37, 720880, 0, 37, 720881, 0, 37, 720882, 0, 37, 720883, 0, 37, 720884, 0, 37, 720885, 0, 37, 720886, 0, 37, 720887, 0, 37, 720888, 0, 37, 720889, 0, 37, 720906, 0, 1, 720907, 0, 1, 720908, 0, 1, 720910, 0, 1, 720911, 0, 1, 720912, 0, 1, 720913, 0, 1, 786413, 0, 37, 786414, 0, 37, 786415, 0, 37, 786416, 0, 37, 786417, 0, 37, 786418, 0, 37, 786419, 0, 37, 786420, 0, 37, 786421, 0, 37, 786422, 0, 37, 786423, 0, 37, 786424, 0, 37, 786425, 0, 37, 786442, 0, 1, 786443, 0, 1, 786444, 0, 1, 786445, 0, 1, 786446, 0, 1, 786447, 0, 1, 786448, 0, 1, 786449, 0, 1, 851949, 0, 37, 851950, 0, 37, 851951, 0, 37, 851952, 0, 37, 851953, 0, 37, 851954, 0, 37, 851955, 0, 37, 851956, 0, 37, 851957, 0, 37, 851958, 0, 37, 851959, 0, 37, 851960, 0, 37, 851961, 0, 37, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 851981, 0, 1, 851982, 0, 1, 851983, 0, 1, 851984, 0, 1, 851985, 0, 1, 917485, 0, 37, 917486, 0, 37, 917487, 0, 37, 917488, 0, 37, 917489, 0, 37, 917490, 0, 37, 917491, 0, 37, 917492, 0, 37, 917493, 0, 37, 917494, 0, 37, 917495, 0, 37, 917496, 0, 37, 917497, 0, 37, 917514, 0, 1, 917516, 0, 1, 917517, 0, 1, 917518, 0, 1, 917520, 0, 1, 917521, 0, 1, 983021, 0, 37, 983022, 0, 37, 983023, 0, 37, 983024, 0, 37, 983025, 0, 37, 983026, 0, 37, 983027, 0, 37, 983028, 0, 37, 983029, 0, 37, 983030, 0, 37, 983031, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, -1769470, 0, 1, -1769469, 0, 1, -1769468, 0, 1, -1769467, 0, 1, -1703934, 0, 1, -1703931, 0, 1, -1638418, 0, 1, -1638417, 0, 1, -1638416, 0, 1, -1638415, 0, 1, -1638414, 0, 1, -1638413, 0, 1, -1638412, 0, 1, -1638411, 0, 1, -1638410, 0, 1, -1638409, 0, 1, -1638408, 0, 1, -1638407, 0, 1, -1638405, 0, 1, -1638404, 0, 1, -1638403, 0, 1, -1638400, 0, 1, -1638398, 0, 1, -1638395, 0, 1, -1572883, 0, 1, -1572882, 0, 1, -1572881, 0, 1, -1572880, 0, 1, -1572879, 0, 1, -1572878, 0, 1, -1572877, 0, 1, -1572876, 0, 1, -1572875, 0, 1, -1572874, 0, 1, -1572873, 0, 1, -1572872, 0, 1, -1572871, 0, 1, -1572870, 0, 1, -1572869, 0, 1, -1572867, 0, 1, -1572866, 0, 1, -1572865, 0, 1, -1572864, 0, 1, -1572863, 0, 1, -1572862, 0, 1, -1572861, 0, 1, -1572860, 0, 1, -1572859, 0, 1, -1507347, 0, 1, -1507346, 0, 1, -1507345, 0, 1, -1507344, 0, 1, -1507343, 0, 1, -1507342, 0, 1, -1507341, 0, 1, -1507340, 0, 1, -1507339, 0, 1, -1507338, 0, 1, -1507337, 0, 1, -1507336, 0, 1, -1507335, 0, 1, -1507334, 0, 1, -1507333, 0, 1, -1507332, 0, 1, -1507331, 0, 1, -1507328, 0, 1, -1507322, 0, 1, -1507321, 0, 1, -1507320, 0, 1, -1441797, 0, 1, -1441796, 0, 1, -1441795, 0, 1, -1441792, 0, 1, -1441786, 0, 1, -1441784, 0, 1, -1376259, 0, 1, -1376258, 0, 1, -1376257, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1310713, 0, 1, -1310710, 0, 1, -1245177, 0, 1, -1245174, 0, 1, -1179665, 0, 37, -1179664, 0, 37, -1179663, 0, 37, -1179662, 0, 37, -1179661, 0, 37, -1179641, 0, 1, -1179640, 0, 1, -1179639, 0, 1, -1179638, 0, 1, -1114129, 0, 37, -1114128, 0, 37, -1114127, 0, 37, -1114126, 0, 37, -1114125, 0, 1, -1114124, 0, 1, -1114123, 0, 1, -1114122, 0, 1, -1114121, 0, 1, -1114101, 0, 1, -1114100, 0, 1, -1048593, 0, 37, -1048592, 0, 37, -1048591, 0, 37, -1048590, 0, 1, -1048587, 0, 1, -1048586, 0, 1, -1048585, 0, 1, -1048565, 0, 1, -983054, 0, 1, -983051, 0, 1, -983029, 0, 1, -983028, 0, 1, -917518, 0, 1, -917517, 0, 1, -917516, 0, 1, -917515, 0, 1, -917493, 0, 1, -917492, 0, 1, -851986, 0, 1, -851985, 0, 1, -851984, 0, 1, -851957, 0, 1, -851956, 0, 1, -786450, 0, 1, -786448, 0, 1, -786420, 0, 1, -720914, 0, 1, -720913, 0, 1, -720912, 0, 1, -720885, 0, 1, -720884, 0, 1, -655349, 0, 1, -655348, 0, 1, -524302, 0, 1, -524301, 0, 1, -524283, 0, 1, -524282, 0, 1, -458766, 0, 1, -458765, 0, 1, -458747, 0, 1, -393235, 0, 1, -393234, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -327699, 0, 1, -327698, 0, 1, -327693, 0, 37, -327692, 0, 37, -327691, 0, 37, -327690, 0, 37, -327677, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -262157, 0, 37, -262156, 0, 37, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262137, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -196621, 0, 37, -196620, 0, 37, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 1, -196591, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1 )
+"cells": PoolIntArray( 3, 0, 51, 4, 0, 51, 5, 0, 51, 65539, 0, 51, 65541, 0, 51, 131075, 0, 51, 131076, 0, 51, 131077, 0, 51, 196589, 0, 37, 196590, 0, 37, 196591, 0, 37, 196592, 0, 37, 196593, 0, 37, 196594, 0, 37, 196595, 0, 37, 196596, 0, 37, 196608, 0, 51, 196614, 0, 51, 262125, 0, 37, 262126, 0, 37, 262127, 0, 37, 262128, 0, 37, 262129, 0, 37, 262130, 0, 37, 262131, 0, 37, 262132, 0, 37, 262133, 0, 37, 262143, 0, 51, 262147, 0, 51, 262148, 0, 51, 262149, 0, 51, 327661, 0, 37, 327662, 0, 37, 327663, 0, 37, 327664, 0, 37, 327665, 0, 37, 327666, 0, 37, 327667, 0, 37, 327668, 0, 37, 327669, 0, 37, 327670, 0, 37, 327683, 0, 51, 327685, 0, 51, 327686, 0, 51, 393197, 0, 37, 393198, 0, 37, 393199, 0, 37, 393200, 0, 37, 393201, 0, 37, 393202, 0, 37, 393203, 0, 37, 393204, 0, 37, 393205, 0, 37, 393206, 0, 37, 393207, 0, 37, 393216, 0, 51, 393217, 0, 51, 393219, 0, 51, 393220, 0, 51, 393222, 0, 51, 458733, 0, 37, 458734, 0, 37, 458735, 0, 37, 458736, 0, 37, 458737, 0, 37, 458738, 0, 37, 458739, 0, 37, 458740, 0, 37, 458741, 0, 37, 458742, 0, 37, 458743, 0, 37, 458744, 0, 37, 458745, 0, 1, 458746, 0, 1, 458747, 0, 1, 458751, 0, 51, 458753, 0, 51, 458756, 0, 51, 458757, 0, 51, 458758, 0, 51, 524269, 0, 37, 524270, 0, 37, 524271, 0, 37, 524272, 0, 37, 524273, 0, 37, 524274, 0, 37, 524275, 0, 37, 524276, 0, 37, 524277, 0, 37, 524278, 0, 37, 524279, 0, 37, 524280, 0, 37, 524281, 0, 1, 524283, 0, 1, 524287, 0, 51, 524288, 0, 51, 524289, 0, 51, 589805, 0, 37, 589806, 0, 37, 589807, 0, 37, 589808, 0, 37, 589809, 0, 37, 589810, 0, 37, 589811, 0, 37, 589812, 0, 37, 589813, 0, 37, 589814, 0, 37, 589815, 0, 37, 589816, 0, 37, 589817, 0, 1, 589818, 0, 1, 589819, 0, 1, 589823, 0, 51, 655341, 0, 37, 655342, 0, 37, 655343, 0, 37, 655344, 0, 37, 655345, 0, 37, 655346, 0, 37, 655347, 0, 37, 655348, 0, 37, 655349, 0, 37, 655350, 0, 37, 655351, 0, 37, 655352, 0, 37, 655353, 0, 37, 720877, 0, 37, 720878, 0, 37, 720879, 0, 37, 720880, 0, 37, 720881, 0, 37, 720882, 0, 37, 720883, 0, 37, 720884, 0, 37, 720885, 0, 37, 720886, 0, 37, 720887, 0, 37, 720888, 0, 37, 720889, 0, 37, 786413, 0, 37, 786414, 0, 37, 786415, 0, 37, 786416, 0, 37, 786417, 0, 37, 786418, 0, 37, 786419, 0, 37, 786420, 0, 37, 786421, 0, 37, 786422, 0, 37, 786423, 0, 37, 786424, 0, 37, 786425, 0, 37, 851949, 0, 37, 851950, 0, 37, 851951, 0, 37, 851952, 0, 37, 851953, 0, 37, 851954, 0, 37, 851955, 0, 37, 851956, 0, 37, 851957, 0, 37, 851958, 0, 37, 851959, 0, 37, 851960, 0, 37, 851961, 0, 37, 917485, 0, 37, 917486, 0, 37, 917487, 0, 37, 917488, 0, 37, 917489, 0, 37, 917490, 0, 37, 917491, 0, 37, 917492, 0, 37, 917493, 0, 37, 917494, 0, 37, 917495, 0, 37, 917496, 0, 37, 917497, 0, 37, 983021, 0, 37, 983022, 0, 37, 983023, 0, 37, 983024, 0, 37, 983025, 0, 37, 983026, 0, 37, 983027, 0, 37, 983028, 0, 37, 983029, 0, 37, 983030, 0, 37, 983031, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, -1769470, 0, 1, -1769469, 0, 1, -1769468, 0, 1, -1769467, 0, 1, -1703934, 0, 1, -1703931, 0, 1, -1638418, 0, 1, -1638417, 0, 1, -1638416, 0, 1, -1638415, 0, 1, -1638414, 0, 1, -1638413, 0, 1, -1638412, 0, 1, -1638411, 0, 1, -1638410, 0, 1, -1638409, 0, 1, -1638408, 0, 1, -1638407, 0, 1, -1638405, 0, 1, -1638404, 0, 1, -1638403, 0, 1, -1638400, 0, 1, -1638398, 0, 1, -1638395, 0, 1, -1572883, 0, 1, -1572882, 0, 1, -1572881, 0, 1, -1572880, 0, 1, -1572879, 0, 1, -1572878, 0, 1, -1572877, 0, 1, -1572876, 0, 1, -1572875, 0, 1, -1572874, 0, 1, -1572873, 0, 1, -1572872, 0, 1, -1572871, 0, 1, -1572870, 0, 1, -1572869, 0, 1, -1572867, 0, 1, -1572866, 0, 1, -1572865, 0, 1, -1572864, 0, 1, -1572863, 0, 1, -1572862, 0, 1, -1572861, 0, 1, -1572860, 0, 1, -1572859, 0, 1, -1507347, 0, 1, -1507346, 0, 1, -1507345, 0, 1, -1507344, 0, 1, -1507343, 0, 1, -1507342, 0, 1, -1507341, 0, 1, -1507340, 0, 1, -1507339, 0, 1, -1507338, 0, 1, -1507337, 0, 1, -1507336, 0, 1, -1507335, 0, 1, -1507334, 0, 1, -1507333, 0, 1, -1507332, 0, 1, -1507331, 0, 1, -1507328, 0, 1, -1507322, 0, 1, -1507321, 0, 1, -1507320, 0, 1, -1441797, 0, 1, -1441796, 0, 1, -1441795, 0, 1, -1441792, 0, 1, -1441786, 0, 1, -1441784, 0, 1, -1376259, 0, 1, -1376258, 0, 1, -1376257, 0, 1, -1376250, 0, 1, -1376249, 0, 1, -1376248, 0, 1, -1376247, 0, 1, -1376246, 0, 1, -1310713, 0, 1, -1310710, 0, 1, -1245177, 0, 1, -1245174, 0, 1, -1179665, 0, 37, -1179664, 0, 37, -1179663, 0, 37, -1179662, 0, 37, -1179661, 0, 37, -1179641, 0, 1, -1179640, 0, 1, -1179639, 0, 1, -1179638, 0, 1, -1114129, 0, 37, -1114128, 0, 37, -1114127, 0, 37, -1114126, 0, 37, -1114125, 0, 1, -1114124, 0, 1, -1114123, 0, 1, -1114122, 0, 1, -1114121, 0, 1, -1114101, 0, 1, -1114100, 0, 1, -1048593, 0, 37, -1048592, 0, 37, -1048591, 0, 37, -1048590, 0, 1, -1048587, 0, 1, -1048586, 0, 1, -1048585, 0, 1, -1048565, 0, 1, -983054, 0, 1, -983051, 0, 1, -983029, 0, 1, -983028, 0, 1, -917518, 0, 1, -917517, 0, 1, -917516, 0, 1, -917515, 0, 1, -917493, 0, 1, -917492, 0, 1, -851986, 0, 1, -851985, 0, 1, -851984, 0, 1, -851957, 0, 1, -851956, 0, 1, -786450, 0, 1, -786448, 0, 1, -786420, 0, 1, -720914, 0, 1, -720913, 0, 1, -720912, 0, 1, -720885, 0, 1, -720884, 0, 1, -655349, 0, 1, -655348, 0, 1, -524302, 0, 1, -524301, 0, 1, -524283, 0, 1, -524282, 0, 1, -458766, 0, 1, -458765, 0, 1, -458747, 0, 1, -393235, 0, 1, -393234, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -327699, 0, 1, -327698, 0, 1, -327693, 0, 37, -327692, 0, 37, -327691, 0, 37, -327690, 0, 37, -327677, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -262157, 0, 37, -262156, 0, 37, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262137, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -196621, 0, 37, -196620, 0, 37, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 1, -196591, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -2514,11 +2801,11 @@ shape = SubResource( 16 )
 [node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
 shape = SubResource( 86 )
 
+[node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0 )
+
 [node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -12, 0 )
-
-[node name="miniCubeCrystal" parent="Viewport/level/QuestionBlock" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
@@ -2602,6 +2889,35 @@ shape = SubResource( 99 )
 shape = SubResource( 100 )
 
 [node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 101 )
+
+[node name="AngelStatue3" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
+is_active = false
+
+[node name="Sprite3D" parent="Viewport/level/AngelStatue3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980348, 0 )
+
+[node name="AnimationPlayer" parent="Viewport/level/AngelStatue3" index="3"]
+anims/ActivatedIdle = SubResource( 229 )
+anims/BirdFlyIn = SubResource( 230 )
+anims/RESET = SubResource( 231 )
+
+[node name="CollisionShape" parent="Viewport/level/AngelStatue3/Area" index="0"]
+shape = SubResource( 99 )
+
+[node name="CollisionShape" parent="Viewport/level/AngelStatue3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 100 )
+
+[node name="AnimationPlayer" parent="Viewport/level/AngelStatue3/NPC" index="4"]
+anims/default = SubResource( 232 )
+anims/fall = SubResource( 233 )
+anims/flickerOn = SubResource( 234 )
+anims/jump = SubResource( 235 )
+anims/land = SubResource( 236 )
+anims/stand = SubResource( 237 )
+
+[node name="CollisionShape" parent="Viewport/level/AngelStatue3/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 101 )
 
 [node name="AngelStatue2" parent="Viewport/level" instance=ExtResource( 13 )]
@@ -2792,12 +3108,11 @@ texture = ExtResource( 38 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/Haven2.tscn"
-is_passive = true
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
+[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
+visible = false
 
 [node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 217 )
@@ -2819,8 +3134,8 @@ path = "res://levels/EndlessFantasy/gd1/DebugTownSacredDoorsHubWorld.tscn"
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 220 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 238 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal" index="12"]
 anims/RESET = SubResource( 221 )
@@ -2892,6 +3207,9 @@ flip_v = true
 [editable path="Viewport/level/AngelStatue"]
 [editable path="Viewport/level/AngelStatue/NPC"]
 [editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]
+[editable path="Viewport/level/AngelStatue3"]
+[editable path="Viewport/level/AngelStatue3/NPC"]
+[editable path="Viewport/level/AngelStatue3/NPC/NPC TextBox"]
 [editable path="Viewport/level/AngelStatue2"]
 [editable path="Viewport/level/AngelStatue2/NPC"]
 [editable path="Viewport/level/AngelStatue2/NPC/NPC TextBox"]

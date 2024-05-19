@@ -145,7 +145,7 @@ func _process(delta):
 
   if global.isPauseMenuOpen:
     levelTitleRect.visible = false
-  elif title_display_state < 3 and display_title != "???" and (not global.memory.has("roomPath") or "TowerHub" in global.memory["roomPath"] or "CozyHome" in global.memory["roomPath"]):
+  elif title_display_state < 3 and display_title != "???":
     levelTitleRect.visible = true
     title_display_timer += (delta*22)
     if title_display_timer >= title_display_time_limit:
@@ -451,7 +451,7 @@ func displayMessageText(message):
 
 func setDisplayTitle(title):
   display_title = title
-  levelTitleRect.get_node("RichTextLabel").bbcode_text = ("[wave amp=50 freq=2]" + title + "[/wave]")
+  levelTitleRect.get_node("RichTextLabel").bbcode_text = ("[center][wave amp=50 freq=2]" + title + "[/wave][/center]")
 
 onready var glitchSprite = get_node("GlitchSprite")
 func normalGlitch():

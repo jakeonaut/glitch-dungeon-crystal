@@ -154,7 +154,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite3D" parent="NPC" index="3"]
 frame = 78
-frame_delay = 0.8
+frame_delay = 1.0
 should_randomize_frame_delay = false
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
@@ -162,7 +162,6 @@ shape = SubResource( 2 )
 
 [node name="WindGust" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1 )
-is_active = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "start"

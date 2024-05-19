@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/03 continue.mp3-7cf1ec264e565823ec4c54224b2882d8.mp3str"
+
+[deps]
+
+source_file="res://assets/DELETEME/03 continue.mp3"
+dest_files=[ "res://.import/03 continue.mp3-7cf1ec264e565823ec4c54224b2882d8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

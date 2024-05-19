@@ -366,16 +366,17 @@ func trySpawnFollowers():
           stepify(rand_range(-1.0, 1.0), 0.125),
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
-          
-  var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
-  if numAngelTadpoles != null:
-    for _i in range(numAngelTadpoles):
-      spawnAngelTadpole(
-        player.global_transform.origin + Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125), 
-          0
-        ))
+
+  if getLevelName().find("Haven2") > 0:        
+    var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
+    if numAngelTadpoles != null:
+      for _i in range(numAngelTadpoles):
+        spawnAngelTadpole(
+          player.global_transform.origin + Vector3(
+            stepify(rand_range(-1.0, 1.0), 0.125),
+            stepify(rand_range(0.5, 1.5), 0.125), 
+            0
+          ))
 
 var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
 func spawnAngelTadpole(starting_position):
