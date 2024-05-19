@@ -349,6 +349,7 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   
   processFishyLogic(delta)
+  processMoleLogic(delta)
   processPoisonWaterLogic(delta)
   if pressingJump():
     tryClearFallthroughCollisionSolid()
@@ -622,7 +623,7 @@ func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
 
-  if not is_fishy and is_touching_water and was_touching_water and not truly_on_ground and not was_on_ground and not recentlyJustPressedJump():
+  if not is_fishy and is_touching_water and was_touching_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
     getFishyInfected()
     gravitySound.play()
   elif is_fishy:
@@ -633,9 +634,10 @@ func processFishyLogic(_delta):
       gravitySound.play()
 
   # weird recovery
-  if not is_fishy and fishySprite.visible and not pauseAnimation and not aniPlayer.assigned_animation == "revertFromFishy":
+  var canAnimate = not pauseAnimation or aniPlayer.assigned_animation == "hookCaught"
+  if not is_fishy and fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "revertFromFishy":
     getFishyCured()
-  elif is_fishy and not fishySprite.visible and not pauseAnimation and not aniPlayer.assigned_animation == "transformToFishy":
+  elif is_fishy and not fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "transformToFishy":
     getFishyInfected()
 
 # @override
@@ -651,6 +653,7 @@ func getFishyInfected():
   is_fishy = true
   aniPlayer.stop()
   aniPlayer.clear_queue()
+  on_ground = false
   if global.memory["zora_flippers"] == 1:
     musicPlayer.stopAll()
     aniPlayer.play("transformToFishy_first")
@@ -686,6 +689,26 @@ func getFishyCured():
 func stopTransformationAni():
   pauseAnimation = false
   pauseInput = false
+
+var is_underground = false
+var dig_timer = 0
+var dig_time_limit = 5
+func processMoleLogic(delta):
+  if is_underground:
+    glitchTilesAroundMe()
+  else:
+    var solid_tiles = getTilesBelow(getLevelTiles())
+    var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
+    if is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown():
+      dig_timer += (delta*11)
+      if dig_timer > dig_time_limit:
+        is_underground = true
+        summonSmokeClouds(5, true, true, 0)
+        mySprite.visible = false
+        loseBroom()
+        digSound.play()
+    else:
+      dig_timer = 0
 
 
 var is_mushroom_prefected = false
@@ -790,6 +813,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 
   if should_immediately_die:
     hurt3Sound.pitch_scale = hurtSound_pitch_scale
+    hurt3Sound.volume_db = -18
     hurt3Sound.play()
   elif randi() % 3 == 0:
     hurt2Sound.pitch_scale = hurtSound_pitch_scale

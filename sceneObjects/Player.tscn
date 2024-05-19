@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=2]
+[gd_scene load_steps=159 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -67,9 +67,10 @@
 [ext_resource path="res://assets/DELETEME/assets_sfx_menu_confirm.wav" type="AudioStream" id=65]
 [ext_resource path="res://assets/sounds/hurtGlitch3.wav" type="AudioStream" id=66]
 [ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=67]
-[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=68]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=68]
 [ext_resource path="res://assets/palettes/player_red_palette.png" type="Texture" id=69]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous4.wav" type="AudioStream" id=70]
+[ext_resource path="res://assets/palettes/yellow_palette_town.png" type="Texture" id=71]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -129,7 +130,7 @@ shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
 shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
+shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 1.0
@@ -139,6 +140,34 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 68 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 69 )
+
+[sub_resource type="ShaderMaterial" id=111]
+shader = ExtResource( 4 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = true
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 1.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 68 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 71 )
 
 [sub_resource type="ShaderMaterial" id=101]
 shader = ExtResource( 4 )
@@ -1161,6 +1190,42 @@ tracks/33/loop_wrap = true
 tracks/33/imported = false
 tracks/33/enabled = true
 tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("Sounds/HurtSound3:playing")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("Sounds/GravitySound2:playing")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("SpriteContainer/InnerSpriteContainer/StatueSprite:visible")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -3620,7 +3685,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0.05, 0.01 ]
+"values": [ 0.05, 0.005 ]
 }
 tracks/8/type = "method"
 tracks/8/path = NodePath(".")
@@ -3646,12 +3711,12 @@ tracks/9/keys = {
 "times": PoolRealArray( 0.1, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.12, 0.2, 0.15 ]
+"values": [ 0.12, 0.2, 0.125 ]
 }
 
 [sub_resource type="Animation" id=110]
 resource_name = "transformToFishy_first"
-length = 2.0
+length = 2.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
 tracks/0/interp = 1
@@ -3746,7 +3811,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0.3, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0.05, 0.01 ]
+"values": [ 0.05, 0.005 ]
 }
 tracks/8/type = "method"
 tracks/8/path = NodePath(".")
@@ -3775,7 +3840,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0.3, 0.7, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.12, 0.2, 0.15 ]
+"values": [ 0.12, 0.2, 0.125 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("Sounds/GravitySound2:playing")
@@ -3784,10 +3849,172 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sounds/HurtSound3:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.8, 2.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sounds/HurtSound3:volume_db")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -12.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sounds/HurtSound3:pitch_scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+
+[sub_resource type="Animation" id=112]
+resource_name = "transformToStatue"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/shake_power")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.01, 0.05 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 6, 7 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stopTransformationAni"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/InnerSpriteContainer/StatueSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/InnerSpriteContainer/StatueSprite:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/InnerSpriteContainer/StatueSprite:material_override:shader_param/shake_power")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.05, 0.005 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/InnerSpriteContainer/StatueSprite:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.12, 0.2, 0.125 ]
 }
 
 [sub_resource type="Animation" id=97]
@@ -5566,7 +5793,7 @@ shader_param/target_palette = ExtResource( 36 )
 script = ExtResource( 1 )
 true_terminal_vel = 14
 grav = 28
-walk_speed = 5
+walk_speed = 6
 run_speed = 8
 feather_glitch_walk_speed = 7
 invisible_glitch_walk_speed = 4
@@ -5619,9 +5846,23 @@ material_override = SubResource( 107 )
 pixel_size = 0.12
 texture = ExtResource( 68 )
 hframes = 8
-vframes = 8
+vframes = 10
+frame = 24
 script = ExtResource( 10 )
 frame_delay = 0.3
+
+[node name="StatueSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
+visible = false
+material_override = SubResource( 111 )
+pixel_size = 0.125
+texture = ExtResource( 68 )
+hframes = 8
+vframes = 10
+frame = 26
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
 automatically_change_color = false
 
 [node name="Sprite3D2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer"]
@@ -5851,7 +6092,8 @@ volume_db = -15.0
 
 [node name="HurtSound3" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 66 )
-volume_db = -18.0
+volume_db = -12.0
+pitch_scale = 0.5
 
 [node name="SkateSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )
@@ -5914,6 +6156,7 @@ pitch_scale = 0.6
 
 [node name="GravitySound2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 70 )
+volume_db = 5.0
 pitch_scale = 0.6
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -5960,6 +6203,7 @@ anims/swimJumpStart = SubResource( 58 )
 anims/teleport = SubResource( 100 )
 anims/transformToFishy = SubResource( 109 )
 anims/transformToFishy_first = SubResource( 110 )
+anims/transformToStatue = SubResource( 112 )
 anims/tumbleLeft = SubResource( 97 )
 anims/tumbleRight = SubResource( 98 )
 anims/turnAround = SubResource( 23 )

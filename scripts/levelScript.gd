@@ -265,6 +265,8 @@ func tryToRespawn():
   player.target_last_grounded_y = player.global_transform.origin.y
   player.pauseAnimation = false
   self.overrideLevelRespawnEvent()
+  if global.memory["zora_flippers"] and global.memory["zora_flippers"] < 3:
+    global.memory["zora_flippers"] = 3
   player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
   

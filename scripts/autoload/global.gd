@@ -220,12 +220,13 @@ func _ready():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 0
-    memory["magic_lantern"] = 0
+    memory["broomerang"] = 1
+    memory["magic_lantern"] = 1 # aka chesire's blessing
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
     memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 1
 
     # GAME MODES
     memory["random_entrances"] = 0

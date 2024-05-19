@@ -35,20 +35,31 @@ func _process(delta):
     teleport_timer += (delta*22)
     if teleport_timer >= teleport_time_limit:
       for _i in range(1):
-        spawnASpore(true)
+        spawnASpore(self.global_transform.origin, true)
+        if global.memory["magic_lantern"]:
+          spawnASpore(level.player.global_transform.origin, true)
       if not has_teleported:
+        # TODO
         reassembleSound.play()
-        self.global_transform.origin = landing_position
-        landing.global_transform.origin = lastPosition
-        var temp_rotation_degrees = mySprite.rotation_degrees.z
-        mySprite.rotation_degrees.z = landing.rotation_degrees.z
-        landing.rotation_degrees.z = temp_rotation_degrees
-        landing_position = lastPosition
+        if global.memory["magic_lantern"]:
+          var position = self.global_transform.origin
+          self.global_transform.origin = level.player.global_transform.origin
+          level.player.global_transform.origin = position
+        else:
+          self.global_transform.origin = landing_position
+          landing.global_transform.origin = lastPosition
+          var temp_rotation_degrees = mySprite.rotation_degrees.z
+          mySprite.rotation_degrees.z = landing.rotation_degrees.z
+          landing.rotation_degrees.z = temp_rotation_degrees
+          landing_position = lastPosition
         has_teleported = true
     if teleport_timer >= teleport_time_limit2:
       has_ever_been_smacked = false
       teleporting = false
       visible = true
+      if global.memory["magic_lantern"]:
+        level.player.visible = true
+        level.player.physics_state = PhysicsState.NORMAL
 
 
   # if not is_smacked:
@@ -79,6 +90,9 @@ func getSmacked(broom_origin):
     return false
   poofSound.play()
   .getSmacked(broom_origin)
+  if global.memory["magic_lantern"]:
+    level.player.getSmacked()
+    level.player.physics_state = PhysicsState.OCCUPIED
   # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
   #   behavior_jumping = true
   pauseSelf = true
@@ -89,9 +103,13 @@ func getSmacked(broom_origin):
 func unsmack():
   .unsmack()
   visible = false
+  if global.memory["magic_lantern"]:
+      level.player.visible = false
   teleporting = true
   for _i in range(5):
-    spawnASpore(false)
+    spawnASpore(self.global_transform.origin, false)
+    if global.memory["magic_lantern"]:
+      spawnASpore(level.player.global_transform.origin, false)
   teleport_timer = 0
   has_teleported = false
   
@@ -132,7 +150,7 @@ func fallthroughCollisionActivate(friend):
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   if not who_is_standing_on_me.has(friend.name):
     playBounce("landSoft")
-    spawnASpore(false)
+    # spawnASpore(self.global_transform.origin, false)
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
   
 
@@ -165,11 +183,11 @@ func moveMyFriends(delta):
       who_is_standing_on_me.erase(friend_key)
 
 var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
-func spawnASpore(inverse):
+func spawnASpore(where_origin, inverse):
     var spore = sporeRes.instance()
     level.add_child(spore)
-    spore.global_transform.origin = self.global_transform.origin
-    spore.global_transform.origin.z = self.global_transform.origin.z + 1.0
+    spore.global_transform.origin = where_origin
+    spore.global_transform.origin.z = where_origin.z + 2.0
 
     if inverse:
       spore.global_transform.origin.x += rand_range(-3, 3)

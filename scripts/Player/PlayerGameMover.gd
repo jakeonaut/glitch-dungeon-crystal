@@ -203,22 +203,28 @@ func spawnOneSparkle(xdiff, above_the_head = false):
 func spawnSparkles(delta, above_the_head = false):
   if pauseSelf or pauseAnimation or global.pauseGame or global.pauseMoveInput: return
 
-  if global.memory["mp"] > 0:
-    sparkle_timer += (delta*22)
-    if sparkle_timer >= sparkle_time_limit:
-      global.memory["mp"] -= 1
-      showMpTimer = 0
+  sparkle_timer += (delta*22)
+  if sparkle_timer >= sparkle_time_limit:
+    
+    spawnOneSparkle(.5, above_the_head)
+    spawnOneSparkle(-.5, above_the_head)
+    sparkle_timer = 0
+  # if global.memory["mp"] > 0:
+  #   sparkle_timer += (delta*22)
+  #   if sparkle_timer >= sparkle_time_limit:
+  #     global.memory["mp"] -= 1
+  #     showMpTimer = 0
       
-      spawnOneSparkle(.5, above_the_head)
-      spawnOneSparkle(-.5, above_the_head)
-      sparkle_timer = 0
-      if global.memory["mp"] == 0:
-        # mySprite.get_material_override().set_shader_param("opacity", 1.0)
-        self.normalGlitch()
-        nullifySound.play()
-        blink_timer = 0
-        blink_time_limit = 20
-        is_blinked = false
+  #     spawnOneSparkle(.5, above_the_head)
+  #     spawnOneSparkle(-.5, above_the_head)
+  #     sparkle_timer = 0
+  #     if global.memory["mp"] == 0:
+  #       # mySprite.get_material_override().set_shader_param("opacity", 1.0)
+  #       self.normalGlitch()
+  #       nullifySound.play()
+  #       blink_timer = 0
+  #       blink_time_limit = 20
+  #       is_blinked = false
 
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
@@ -463,13 +469,13 @@ var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
-      global.memory["grav_direction"] = -global.memory["grav_direction"]
-      gravitySound.play()
-      level.flipGravity()
-      has_used_magic_lantern = true
-      was_just_on_ground_timer = was_just_on_ground_time_limit
-      glitchTickle()
+    # if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
+    #   global.memory["grav_direction"] = -global.memory["grav_direction"]
+    #   gravitySound.play()
+    #   level.flipGravity()
+    #   has_used_magic_lantern = true
+    #   was_just_on_ground_timer = was_just_on_ground_time_limit
+    #   glitchTickle()
     # elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
     #   has_mushroom_double_jumped = true
     #   feather_jump_timer = 0
@@ -486,7 +492,7 @@ func processJumpInputs(delta):
     #   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
     #   aniPlayer.queue("jumpStart")
     #   aniPlayer.queue("jump")
-    elif glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped and not is_mushroom_infected: 
+    if glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped and not is_mushroom_infected: 
       doubleJump()
       nesting_doll_state -= 1
       updateNestingDoll(nesting_doll_state + 1)
