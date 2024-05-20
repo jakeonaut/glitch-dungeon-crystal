@@ -14,9 +14,9 @@ func tryDieToOffscreenCamera():
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
             actuallyGoBackToPlayer()
             
-    var dist = self.global_transform.origin.distance_to(level.player.global_transform.origin)
-    if dist > 20:
-      actuallyGoBackToPlayer()
+    # var dist = self.global_transform.origin.distance_to(level.player.global_transform.origin)
+    # if dist > 20:
+    #   actuallyGoBackToPlayer()
 
 func actuallyGoBackToPlayer():
   self.global_transform.origin = level.player.global_transform.origin

@@ -28,6 +28,11 @@ func _ready():
     if is_static_in_level:
         get_node("SecretAnimationPlayer").play("isStaticInLevel")
         grav = 0
+
+    if projectile and global.memory["magic_lantern"]:
+        should_collide_ceil = false
+        should_collide_floor = false
+        should_collide_horizontally = false
  
 func _process(delta):
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
@@ -263,10 +268,10 @@ func hitStuff(_delta):
               my_broom_owner.has_sweeped_glitch = true
               getLevelTiles().infectSpikes(coords)
               # TODO(jaketrower): also reset the levelTiles array position?
-            if getLevelTiles().isTileSoftSand(tile_type):
-                getLevelTiles().sweepUpSand(coords)
-                my_broom_owner.digSound.play()
-                has_hit_something = true
+            # if getLevelTiles().isTileSoftSand(tile_type):
+            #     getLevelTiles().sweepUpSand(coords)
+            #     my_broom_owner.digSound.play()
+            #     has_hit_something = true
     return has_hit_something
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):

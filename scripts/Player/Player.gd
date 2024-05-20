@@ -1331,6 +1331,10 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
       global.incrementLevelZoneSweeps()
       fallenBroom.grav = 1
       fallenBroom.projectile = true
+      if global.memory["magic_lantern"]:
+        fallenBroom.should_collide_ceil = false
+        fallenBroom.should_collide_floor = false
+        fallenBroom.should_collide_horizontally = false
       fallenBroom.global_transform.origin.y -= 1
       if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
         fallenBroom.global_transform.origin.y = self.global_transform.origin.y
@@ -1458,12 +1462,12 @@ func hitStuff(_delta):
       if getLevelTiles().isTileSpikes(tile_type):
         my_broom_owner.has_sweeped_glitch = true
         getLevelTiles().infectSpikes(coords)
-      elif getLevelTiles().isTileSoftSand(tile_type):
-        my_broom_owner.has_sweeped_glitch = true
-        getLevelTiles().sweepUpSand(coords)
-        digSound.play()
-        getSmacked()
-        broomStop()
+      # elif getLevelTiles().isTileSoftSand(tile_type):
+      #   my_broom_owner.has_sweeped_glitch = true
+      #   getLevelTiles().sweepUpSand(coords)
+      #   digSound.play()
+      #   getSmacked()
+      #   broomStop()
 
 
 func swordClank(play_sound = true):

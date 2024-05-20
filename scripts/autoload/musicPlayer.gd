@@ -25,6 +25,7 @@ onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
 onready var crystalThemePlayer = get_node("CrystalThemePlayer")
+onready var continueThemePlayer = get_node("ContinueThemePlayer")
 
 onready var leavesSound = get_node("Sounds/LeavesSound")
 
@@ -111,6 +112,7 @@ func stopAll():
     fade_out(townThemePlayer)
     fade_out(bossThemePlayer)
     fade_out(crystalThemePlayer)
+    fade_out(continueThemePlayer)
     if currentlyPlayingTheme != null and currentlyPlayingTheme.is_playing():
         fade_out(currentlyPlayingTheme)
     currentlyPlayingTheme = null
@@ -181,6 +183,9 @@ func conductFromScenePath(path):
         self.stopAll()
     changeSongPitch(1.0)
     default_song_pitch = 1.0
+
+    if path.find("__introCutscene") > 0:
+        changeSongPitch(2.0)
 
 func changeSongPitch(new_pitch):
     # TODO(jaketrower): reset pitches when you play them
