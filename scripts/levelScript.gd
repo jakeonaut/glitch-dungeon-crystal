@@ -116,7 +116,7 @@ func _process(delta):
 
   # TODO(jaketrower): add an option
   ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
-  basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
+  basicCrtEffectRect.visible = false # global.memory["show_crt_effect"] and show_crt_effect
   colorBlindEffectRect2.visible = global.memory["show_color_blind"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return

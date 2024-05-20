@@ -171,7 +171,7 @@ func floorGlitch():
 func featherGlitch():
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
-     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20):
+     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and not is_fishy:
     var upward_gust = 5
     if linear_velocity.y < 0:
       linear_velocity.y = 1
@@ -629,6 +629,7 @@ func processFishyLogic(_delta):
   elif is_fishy:
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
+    glitchTilesAroundMe()
     if (not is_touching_water and not was_touching_water):
       getFishyCured()
       gravitySound.play()
