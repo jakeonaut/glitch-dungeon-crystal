@@ -418,7 +418,7 @@ var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
   if transformation == TransformationState.UNDERGROUND:
-    return 9
+    return 7
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
@@ -475,6 +475,7 @@ func getABroom(unpauseAnimation = true):
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
 onready var gravitySound = get_node("Sounds/GravitySound")
+onready var fastStepSound = get_node("Sounds/FastStepSound")
 var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
@@ -511,6 +512,16 @@ func processJumpInputs(delta):
       glitchTickle()
         
   .processJumpInputs(delta)
+
+# @override
+func addJumpSmokeCloud(flip_flip_h = false):
+  if transformation == TransformationState.FISHY:
+    return
+  if transformation == TransformationState.UNDERGROUND:
+    return
+  if transformation == TransformationState.UNDERGROUND_RETURNING:
+    return
+  .addJumpSmokeCloud(flip_flip_h)
 
 func playStickOnWallSound():
   runSound.play()

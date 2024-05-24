@@ -91,8 +91,8 @@ enum PhysicsState {
   CAN_WAKE_UP,
   WAKING_UP,
   GLITCH_DYING,
-  GLITCH_HURT,
-  GLITCH_RECOVERY,
+  GLITCH_HURT, # feel like this one shouldn't be in physics state
+  GLITCH_RECOVERY, # feel like this one shouldn't be in physics state
   IGNORE_PHYSICS,
 }
 var physics_state = PhysicsState.NORMAL
