@@ -433,7 +433,7 @@ shader_param/texture_albedo = ExtResource( 21 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 20 )
 
-[node name="GlitchMoleCricket" type="Spatial"]
+[node name="GlitchMoleCricket" type="Spatial" groups=["mole"]]
 script = ExtResource( 14 )
 smack_time_limit = 3
 

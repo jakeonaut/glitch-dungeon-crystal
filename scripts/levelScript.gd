@@ -70,9 +70,9 @@ func _ready_impl():
   if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false
     global.memory["has_gotten_broom"] = 0
-  elif not doesnt_have_broom:
-    global.memory["broom"] = true
-    global.memory["has_gotten_broom"] = 2
+  # elif not doesnt_have_broom:
+  #   global.memory["broom"] = true
+  #   global.memory["has_gotten_broom"] = 2
 
   if global.memory.has("current_glitch") and not should_glitch_activate:
     if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
@@ -180,6 +180,13 @@ func getShortLevelName():
 
 func getLevelZoneName():
   return global.getLevelZoneName(getLevelName())
+
+func isAnyMoleDigging():
+  var moles = get_tree().get_nodes_in_group("mole")
+  for mole in moles:
+    if mole.mole_state == mole.MoleState.DIG:
+      return true
+  return false
 
 func tryToRespawn():
   self.gameCamera.initial_target = player.get_node("CameraTarget")

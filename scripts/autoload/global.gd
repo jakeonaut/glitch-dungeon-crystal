@@ -195,7 +195,7 @@ func _ready():
 
     # game stuff
     memory["broom"] = false
-    memory["has_gotten_broom"] = 1
+    memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["clean_crystals"] = 0

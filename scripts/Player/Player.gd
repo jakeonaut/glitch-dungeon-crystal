@@ -76,6 +76,13 @@ func alignMySprite():
     spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
 
 func tryPlayFootstepSound():
+  if transformation == TransformationState.UNDERGROUND:
+    return
+  if transformation == TransformationState.UNDERGROUND_RETURNING:
+    return
+  if transformation == TransformationState.FISHY:
+    return
+
   if global.isPauseMenuOpen or global.pauseGame:
     return 
   if not (pressingMoveLeft() or pressingMoveRight()):
@@ -171,7 +178,7 @@ func floorGlitch():
 func featherGlitch():
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
-     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and not is_fishy:
+     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY:
     var upward_gust = 5
     if linear_velocity.y < 0:
       linear_velocity.y = 1
@@ -233,7 +240,7 @@ func canRun():
 
 # @override
 func canSwim():
-  return is_fishy
+  return transformation == TransformationState.FISHY
   
 func isWalkingIntoWall():
   if summonedBroom != null:
@@ -529,16 +536,16 @@ func processGlitchHurtRecovery(delta):
     return true
 
 onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
-func glitchTilesAroundMe():
+func glitchTilesAroundMe(margin = 0.25):
   var lt = getLevelTiles()
 
   var shape = glitchCollisionShape
   var x = shape.global_transform.origin.x
   var y = shape.global_transform.origin.y
-  var tb = y + shape.shape.extents.y/2*shape.scale.y + 0.25
-  var bb = y - shape.shape.extents.y/2*shape.scale.y - 0.25
-  var lb = x - shape.shape.extents.x/2*shape.scale.x - 0.25
-  var rb = x + shape.shape.extents.x/2*shape.scale.x + 0.25
+  var tb = y + shape.shape.extents.y/2*shape.scale.y + margin
+  var bb = y - shape.shape.extents.y/2*shape.scale.y - margin
+  var lb = x - shape.shape.extents.x/2*shape.scale.x - margin
+  var rb = x + shape.shape.extents.x/2*shape.scale.x + margin
   
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
@@ -623,10 +630,10 @@ func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
 
-  if not is_fishy and is_touching_water and was_touching_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
+  if transformation != TransformationState.FISHY and is_touching_water and was_touching_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
     getFishyInfected()
     gravitySound.play()
-  elif is_fishy:
+  elif transformation == TransformationState.FISHY:
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe()
@@ -636,14 +643,14 @@ func processFishyLogic(_delta):
 
   # weird recovery
   var canAnimate = not pauseAnimation or aniPlayer.assigned_animation == "hookCaught"
-  if not is_fishy and fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "revertFromFishy":
+  if transformation != TransformationState.FISHY and fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "revertFromFishy":
     getFishyCured()
-  elif is_fishy and not fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "transformToFishy":
+  elif transformation == TransformationState.FISHY and not fishySprite.visible and canAnimate and not aniPlayer.assigned_animation == "transformToFishy":
     getFishyInfected()
 
 # @override
 func justPressedJump():
-  return .justPressedJump() or (is_fishy and Input.is_action_just_pressed("ui_up") and not pauseInput and not isTextboxPausingMe())
+  return .justPressedJump() or (transformation == TransformationState.FISHY and Input.is_action_just_pressed("ui_up") and not pauseInput and not isTextboxPausingMe())
 
 func getFishyInfected():
   if summonedBroom:
@@ -651,7 +658,7 @@ func getFishyInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
-  is_fishy = true
+  transformation = TransformationState.FISHY
   aniPlayer.stop()
   aniPlayer.clear_queue()
   on_ground = false
@@ -676,7 +683,9 @@ func restartMusic():
   
 
 func getFishyCured():
-  is_fishy = false
+  if transformation != TransformationState.FISHY:
+    return
+  transformation = TransformationState.NORMAL
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("revertFromFishy")
@@ -691,25 +700,86 @@ func stopTransformationAni():
   pauseAnimation = false
   pauseInput = false
 
-var is_underground = false
+func checkSolidTilesBeneathMe():
+  var solid_tiles = getTilesBelow(getLevelTiles())
+  var has_solid_beneath = false
+  for i in range(len(solid_tiles)):
+      if solid_tiles[i] != null:
+        has_solid_beneath = true
+  return has_solid_beneath
+
+func checkSolidTilesOnMe():
+  var is_true = false
+  global_transform.origin.y += 1
+  if checkSolidTilesBeneathMe():
+    is_true = true
+  global_transform.origin.y += 1
+  if checkSolidTilesBeneathMe():
+    is_true = true
+  global_transform.origin.y -= 2
+  return is_true
+
+
 var dig_timer = 0
 var dig_time_limit = 5
 func processMoleLogic(delta):
-  if is_underground:
-    glitchTilesAroundMe()
+  if transformation == TransformationState.UNDERGROUND:
+    if not pressingDown():
+      transformation = TransformationState.UNDERGROUND_RETURNING
+      reelSound.play()
+    can_update_last_grounded_pos = false
+    on_ground = true
+    was_on_ground = true
+    was_just_on_ground_timer = 0
+    truly_on_ground = true
+    was_truly_on_ground = true
+    glitchTilesAroundMe(-2.5)
+
+    var has_solid_beneath = checkSolidTilesBeneathMe()
+    if has_solid_beneath:
+      global_transform.origin.y -= (5 * delta*11)
+      if not checkSolidTilesBeneathMe():
+        global_transform.origin.y += (5 * delta*11)
+
+  elif transformation == TransformationState.UNDERGROUND_RETURNING:
+    glitchTilesAroundMe(-2.5)
+    if pressingDown():
+      transformation = TransformationState.UNDERGROUND
+      digSound.play()
+    else:
+      var in_solid_tiles = checkSolidTilesOnMe()
+      if in_solid_tiles:
+        global_transform.origin.y += (5 * delta*11)
+      else:
+        transformation = TransformationState.NORMAL
+        should_magic_jump = true
+        getMoleCured()
+      
   else:
     var solid_tiles = getTilesBelow(getLevelTiles())
     var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
     if is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown():
       dig_timer += (delta*11)
       if dig_timer > dig_time_limit:
-        is_underground = true
+        transformation = TransformationState.UNDERGROUND
         summonSmokeClouds(5, true, true, 0)
         mySprite.visible = false
         loseBroom()
         digSound.play()
+        physics_vars.should_apply_gravity = false
+        should_collide_floor = false
+        should_collide_ceil = false
+        should_collide_horizontally = false
     else:
       dig_timer = 0
+
+func getMoleCured():
+  mySprite.visible = true
+  can_update_last_grounded_pos = true
+  physics_vars.should_apply_gravity = true
+  should_collide_floor = true
+  should_collide_ceil = true
+  should_collide_horizontally = true
 
 
 var is_mushroom_prefected = false
@@ -851,17 +921,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
   elif global.memory["hp"] <= 0 or should_immediately_die:
-    global.incrementLevelZoneDeaths()
-    global.memory["hp"] = 0
-    self.textBox.hideTextbox()
-    global.isRespawning = true
-    physics_state = PhysicsState.GLITCH_DYING
-    glitch_death_timer = 0
-    if global.canGlitchScreen and should_glitch: # TODO(jaketrower): RESPECT MORE
-      level.glitchScreenEffect.visible = true
-    if summonedBroom:
-      broomStop()
-    tryClearFallthroughCollisionSolid()
+    actuallyProcessDeath(should_glitch)
   else:
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
@@ -876,6 +936,24 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   remembered_feather_jump_timer = self.feather_jump_timer
   remembered_y_vel = lv.y
   remembered_on_ground = on_ground
+
+func actuallyProcessDeath(should_glitch):
+  if transformation == TransformationState.FISHY:
+    getFishyCured()
+  if transformation == TransformationState.UNDERGROUND:
+    getMoleCured()
+  global.incrementLevelZoneDeaths()
+  global.memory["hp"] = 0
+  self.textBox.hideTextbox()
+  global.isRespawning = true
+  physics_state = PhysicsState.GLITCH_DYING
+  glitch_death_timer = 0
+  # TODO(jaketrower): RESPECT MORE
+  if global.canGlitchScreen and should_glitch:
+    level.glitchScreenEffect.visible = true
+  if summonedBroom:
+    broomStop()
+  tryClearFallthroughCollisionSolid()
 
 export var time_influence = 35
 export var y_div = 2.3
@@ -1053,7 +1131,7 @@ onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):
   mushroomSpriteVisible.visible = is_mushroom_infected
-  should_collide_horizontally = not is_mushroom_infected
+  # should_collide_horizontally = not is_mushroom_infected # careful! interacts with processMoleLogic
   if not is_mushroom_infected:
     return
 
@@ -1244,7 +1322,7 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED and not is_fishy:
+  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED and transformation != TransformationState.FISHY:
     summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
@@ -1331,14 +1409,14 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
       global.incrementLevelZoneSweeps()
       fallenBroom.grav = 1
       fallenBroom.projectile = true
-      if global.memory["magic_lantern"]:
-        fallenBroom.should_collide_ceil = false
-        fallenBroom.should_collide_floor = false
-        fallenBroom.should_collide_horizontally = false
+      # if global.memory["magic_lantern"]:
+      #   fallenBroom.should_collide_ceil = false
+      #   fallenBroom.should_collide_floor = false
+      #   fallenBroom.should_collide_horizontally = false
       fallenBroom.global_transform.origin.y -= 1
-      if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
-        fallenBroom.global_transform.origin.y = self.global_transform.origin.y
-        fallenBroom.taking_the_player_with_me = true
+      # if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
+      #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
+      #   fallenBroom.taking_the_player_with_me = true
       fallenBroom.true_terminal_vel = 0
       fallenBroom.walk_speed *= 3
       fallenBroom.get_node("BroomSound").play()

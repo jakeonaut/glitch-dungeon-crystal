@@ -11,12 +11,7 @@ func isActive(_debug=false):
 var has_activated = false
 onready var player = get_node("../Player")
 
-onready var chicken5 = get_node("../NPC5")
-onready var chicken4 = get_node("../NPC4")
-
-onready var chicken6 = get_node("../NPC6")
-onready var chicken7 = get_node("../NPC7")
-onready var chicken8 = get_node("../NPC8")
+onready var chicken10 = get_node("../NPC10")
 onready var chicken9 = get_node("../NPC9")
 
 onready var glitchMoleCricket = get_node("../GlitchMoleCricket")
@@ -31,11 +26,11 @@ func passiveActivate(_delta, _is_player):
   has_activated = true
   player.override_press_move_right = false
   yield(get_tree().create_timer(0.99), "timeout")
-  chicken5.glitchOut()
-  yield(get_tree().create_timer(0.66), "timeout")
   chicken9.glitchOut()
-  yield(get_tree().create_timer(0.33), "timeout")
-  chicken4.glitchOut()
+  yield(get_tree().create_timer(0.66), "timeout")
+  chicken10.glitchOut()
+  # yield(get_tree().create_timer(0.33), "timeout")
+  # chicken4.glitchOut()
   yield(get_tree().create_timer(0.99), "timeout")
 
   var dig_time_limit = 2

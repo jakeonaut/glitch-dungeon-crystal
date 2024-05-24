@@ -1,5 +1,14 @@
 extends "../GameMover.gd"
 
+enum TransformationState {
+  NORMAL,
+  FISHY,
+  MUSHROOM,
+  UNDERGROUND,
+  UNDERGROUND_RETURNING,
+}
+var transformation = TransformationState.NORMAL
+
 var broom_timer = 0
 var broom_time_limit = 2
 var broom_state = 0
@@ -300,6 +309,8 @@ func tryingToWakeUp():
 
 # @override
 func pressingJump():
+  if transformation == TransformationState.UNDERGROUND:
+    return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   return (Input.is_action_pressed("jump_button") and not pauseInput and not isTextboxPausingMe()) or should_magic_jump
@@ -404,9 +415,10 @@ func regainNestingDoll():
   # has_mushroom_double_jumped = true
 
 var summonedBroom = null
-var is_fishy = false
 # @override
 func getWalkSpeed(delta):
+  if transformation == TransformationState.UNDERGROUND:
+    return 9
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
@@ -414,7 +426,7 @@ func getWalkSpeed(delta):
     return 9
   elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 6 if pressingRun() else 5
-  elif is_fishy or nesting_doll_state == global.NestingDoll.MOM:
+  elif transformation == TransformationState.FISHY or nesting_doll_state == global.NestingDoll.MOM:
     return 7
   else:
     if is_mushroom_infected:

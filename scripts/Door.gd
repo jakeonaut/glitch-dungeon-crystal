@@ -37,6 +37,8 @@ onready var landing = get_node("landing")
 onready var sparkleSprite = get_node("SparkleSprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var fallthroughSolid = get_node("FallthroughSolid")
+onready var activeCollisionShape = get_node("InteractionArea/ActiveCollisionShape")
+onready var passiveCollisionShape = get_node("InteractionArea/PassiveCollisionShape")
 var is_on_main_menu = false
 
 export var is_immediate = false
@@ -64,9 +66,13 @@ func _ready():
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false
+    if activeCollisionShape != null: activeCollisionShape.disabled = true
+    if passiveCollisionShape != null: passiveCollisionShape.disabled = false
   else:
     mySprite.material_override = mySprite.material_override.duplicate()
     mySprite2.material_override = mySprite.material_override
+    if activeCollisionShape != null: activeCollisionShape.disabled = false
+    if passiveCollisionShape != null: passiveCollisionShape.disabled = true
   if not self.path:
     mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 

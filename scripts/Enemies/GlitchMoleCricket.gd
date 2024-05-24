@@ -292,7 +292,6 @@ func checkForFlyPathOverrides():
                 aniPlayer.play("fly")
             flight_anchor = area.get_node("..")
             mole_state = MoleState.OVERRIDE_FLY_START
-            global.isAMoleDigging = false
         
 func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
@@ -384,7 +383,6 @@ func startDigging():
             aniPlayer.stop()
             aniPlayer.clear_queue()
         mole_state = MoleState.DIG
-        global.isAMoleDigging = true
         has_dug = false
         mole_state_timer = 0
         behavior_walking = false

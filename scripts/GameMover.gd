@@ -332,13 +332,14 @@ func tryClearFallthroughCollisionSolid():
       interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
 
+var can_update_last_grounded_pos = true
 func processLand():
   landed()
-  if (getGameCamera().rightmost_x == -999 or not (
+  if (can_update_last_grounded_pos and getGameCamera().rightmost_x == -999 or not (
     global_transform.origin.y > getGameCamera().topmost_y - 1 or \
     global_transform.origin.x > getGameCamera().rightmost_x - 1 or \
     global_transform.origin.x < getGameCamera().leftmost_x + 1 or \
-    global_transform.origin.y < getGameCamera().botmost_y + 1)) and not global.isAMoleDigging \
+    global_transform.origin.y < getGameCamera().botmost_y + 1)) and not level.isAnyMoleDigging() \
     and not grav < 0:
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true

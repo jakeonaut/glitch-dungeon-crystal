@@ -23,7 +23,7 @@ func getLevelTiles():
     levelTiles = get_tree().get_root().get_node("Game/Viewport/level").levelTiles
   return levelTiles
 
-var CAMERA_SIZE = 30
+var CAMERA_SIZE = 25
 export var override_camera_size = 0
 func _ready():
   if override_camera_size == 0:
@@ -147,7 +147,7 @@ var x_margin = 0
 var y_margin = 0
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size
-  x_margin = 18.75 # 10 - ((15-self.size)/1.5)
+  x_margin = 10 - ((15-self.size)/1.5)
   if global_transform.origin.x < leftmost_x + x_margin:
     global_transform.origin.x = leftmost_x + x_margin
   if global_transform.origin.x > rightmost_x - x_margin:
