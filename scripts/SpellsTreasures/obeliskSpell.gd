@@ -15,7 +15,6 @@ var original_position = null
 var previous_point = null
 var interpolation_point = null
 var t = 0
-var is_active = true
 export var is_locked = false
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -56,18 +55,10 @@ func _ready():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
-  if has_set_palette and is_active and not shouldIBeActive() and not is_touching_player:
-    is_active = false
+  if has_set_palette and not shouldIBeActive() and not is_touching_player:
     mySprite.visible = false
     obeliskSprite.material_override.set_shader_param("target_palette", global.grey_palette)
     t = 0
-
-  # if mySprite.visible and not is_active:
-  #   mySprite.global_transform.origin = previous_point.linear_interpolate(interpolation_point, t)
-  #   t += (delta*2)
-  #   if t >= 1:
-  #     mySprite.visible = false
-  #     t = 0
 
   if not mySprite.visible and shouldIBeActive():
     mySprite.visible = true
@@ -80,7 +71,6 @@ func _process(delta):
       is_touching_player = false
   else:
     mySprite.global_transform.origin = original_position
-    is_active = true
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
@@ -113,7 +103,7 @@ func shouldIBeActive():
     return true
 
 func isActive(_debug=false):
-  return self.visible and is_active and shouldIBeActive()
+  return self.visible and shouldIBeActive()
 
 func activate(is_player):
   passiveActivate(0, is_player)
@@ -128,7 +118,7 @@ func passiveActivate(_delta, _is_player):
   mySprite.global_transform.origin.x = level.player.global_transform.origin.x
   mySprite.global_transform.origin.y = level.player.global_transform.origin.y + 1
   level.player.glitchTickle(global.memory["mp"] < global.memory["max_mp"])
-  if not is_active:
+  if not isActive():
     if global.memory["mp"] < global.memory["max_mp"]:
       if level.player.glitch_form != my_glitch_form:
         collectSound.pitch_scale = 0.5
@@ -144,10 +134,11 @@ func passiveActivate(_delta, _is_player):
   if global.memory.has("spellbookPage"):
     collectSound.pitch_scale = 0.9
     collectSound.play()
-  is_active = false
 
   if level.player.glitch_form != my_glitch_form:
     level.player.getSmacked()
+    if my_glitch_form == global.GlitchForm.FLOOR:
+      level.player.on_ground = true
   getPlayer().applyObeliskGlitch(my_glitch_form)
   level.player.glitchTickle()
   # if level.player.glitch_death_timer == 0:

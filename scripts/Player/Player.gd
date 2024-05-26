@@ -270,7 +270,7 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   var newSpriteOpacity = spriteOpacity
-  if aniPlayer.assigned_animation == "returning":
+  if aniPlayer.assigned_animation == "returning" or glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 0.5
   # elif glitch_form == global.GlitchForm.INVISIBLE:
   #   newSpriteOpacity = 0.8
@@ -315,6 +315,8 @@ func _process(delta):
       pauseSelf = false
       physics_state = PhysicsState.NORMAL
       returning_to_save_point = 0
+      global.pauseMoveInput = false
+      global.pauseGame = false
   if not processGlitchHurtRecovery(delta):
     return
 
@@ -336,8 +338,8 @@ func _process(delta):
 
   # if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
   #   applySpellbookGlitch()
-  if Input.is_action_just_pressed("debug_glitch_button"):
-    applyNextGlitch()
+  # if Input.is_action_just_pressed("debug_glitch_button"):
+  #   applyNextGlitch()
     
   tryDieToOffscreenCamera(delta)
       
@@ -347,6 +349,16 @@ func _process(delta):
       gimme_mini_crystal_cubes_timer = 0
       gimme_mini_crystal_cubes -= 1
       var newCrystalCube = miniCubeCrystal.duplicate()
+      newCrystalCube.visible = true
+      add_child(newCrystalCube)
+
+  if lose_mini_crystal_cubes > 0:
+    lose_mini_crystal_cubes_timer += (delta*22)
+    if lose_mini_crystal_cubes_timer >= lose_mini_crystal_cubes_time_limit:
+      lose_mini_crystal_cubes_timer = 0
+      lose_mini_crystal_cubes -= 1
+      var newCrystalCube = miniCubeCrystal.duplicate()
+      newCrystalCube.is_negative = true
       newCrystalCube.visible = true
       add_child(newCrystalCube)
 
@@ -923,7 +935,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY:
     return
 
-  if glitch_form == global.GlitchForm.INVISIBLE and not should_kill_invis:
+  if (glitch_form == global.GlitchForm.INVISIBLE or returning_to_save_point > 0)and not should_kill_invis:
     spawnSparkles(delta, true)
     glitchTickle(true)
     return
@@ -1462,6 +1474,13 @@ var gimme_mini_crystal_cubes_time_limit = 5
 func giveMeMiniCrystalCubes(how_many):
   gimme_mini_crystal_cubes = how_many
   gimme_mini_crystal_cubes_timer = 0
+
+var lose_mini_crystal_cubes = 0
+var lose_mini_crystal_cubes_timer = 0
+var lose_mini_crystal_cubes_time_limit = 5
+func loseMiniCrystalCubes(how_many):
+  lose_mini_crystal_cubes = how_many
+  lose_mini_crystal_cubes_timer = 0
 
 var fallenBroomRef = null
 func iFellFlat():

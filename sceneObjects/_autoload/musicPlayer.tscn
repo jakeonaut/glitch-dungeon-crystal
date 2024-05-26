@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
 [ext_resource path="res://assets/DELETEME/markeryjane - unread - 12 pull.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/DELETEME/eryngi - mossy EP - 01 i've got moss.mp3" type="AudioStream" id=12]
-[ext_resource path="res://assets/DELETEME/markeryjane - unread - 15 kiqball.mp3" type="AudioStream" id=13]
+[ext_resource path="res://assets/music/explore2.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/music/soeth.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/music/fishing.mp3" type="AudioStream" id=15]
 [ext_resource path="res://assets/DELETEME/OOT_Sandstorm.wav" type="AudioStream" id=16]
@@ -72,7 +72,7 @@ volume_db = -17.0
 
 [node name="ExploreThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
-volume_db = -20.0
+volume_db = -25.0
 
 [node name="LongAdventureThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )

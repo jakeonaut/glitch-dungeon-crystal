@@ -461,6 +461,8 @@ var has_broom_flown = false
 var has_landed_since_last_flight = false
 func getABroom(unpauseAnimation = true):
   pauseAnimation = not unpauseAnimation
+  if transformation == TransformationState.FISHY or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
+    return
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
   if nesting_doll_state == global.NestingDoll.GRANDMA:

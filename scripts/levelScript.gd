@@ -57,12 +57,19 @@ func _ready_impl():
   levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
+
+  if global.memory.has("current_glitch") and not should_glitch_activate:
+    if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
+      player.applyGlitch(global.memory["current_glitch"], true)
+  else:
+    player.applyGlitch(starting_glitch_type, true)
   
   if has_spellbook_page and not global.memory.has("spellbookPage"):
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = []
     for spellbook_spell in spellbook_spells:
       global.memory["spellbookPage"].push_back(spellbook_spell)
+      player.applyGlitch(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
     
   if global.memory["has_gotten_broom"] > 0:
@@ -74,11 +81,6 @@ func _ready_impl():
   #   global.memory["broom"] = true
   #   global.memory["has_gotten_broom"] = 2
 
-  if global.memory.has("current_glitch") and not should_glitch_activate:
-    if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
-      player.applyGlitch(global.memory["current_glitch"], true)
-  else:
-    player.applyGlitch(starting_glitch_type, true)
   displayMessageText("")
 
   if global.memory.has("player_costume"):
@@ -115,8 +117,8 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   # TODO(jaketrower): add an option
-  ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
-  basicCrtEffectRect.visible = false # global.memory["show_crt_effect"] and show_crt_effect
+  ditherPaletteEffectRect2.visible = false # global.memory["show_dither_effect"] and show_dither_effect
+  basicCrtEffectRect.visible = true # global.memory["show_crt_effect"] and show_crt_effect
   colorBlindEffectRect2.visible = global.memory["show_color_blind"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return

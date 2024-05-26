@@ -1,6 +1,6 @@
 extends Spatial
 
-var has_been_smacked = false
+var is_purified = false
 var rot_amount = 100
 var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
@@ -20,6 +20,10 @@ export(String, FILE) var path # unused atm
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
 
+var num_gems_needed = 20
+
+onready var npc2 = get_node("NPC2")
+
 var levelTiles = null
 func getLevelTiles():
   if levelTiles == null:
@@ -29,7 +33,7 @@ func getLevelTiles():
 func _ready():
     set_process(true)
     if getMyStaticLevelZoneVar():
-        has_been_smacked = true
+        is_purified = true
         lightAniPlayer.play("lightUpQuiet")
         # musicPlayer.changeSongPitch(1.0)
     # if global.hasGottenLevelGeode:
@@ -48,11 +52,11 @@ var sams_weird_timeout_timer = 0
 var sams_weird_timeout_time_limit = 120
 var spawn_pos = null
 func _process(delta):
-    if has_been_smacked:
+    if is_purified:
         cubeContainer.rotation_degrees.y += delta*22
     else: 
         cubeContainer.rotation_degrees.y -= delta*22
-    # if has_been_smacked:
+    # if is_purified:
     #     # musicPlayer.changeSongPitch(1.0)
     # else:
     #     musicPlayer.changeSongPitch(0.5)
@@ -62,7 +66,7 @@ func _process(delta):
     if not can_do_my_power:
         return
     rot_amount = 10
-    if has_been_smacked:
+    if is_purified:
         rot_amount *= 2
     npc.rotation_degrees.y -= (delta * rot_amount)
 
@@ -76,10 +80,11 @@ func stopAnimation():
     # level.gameCamera.am_i_zooming = false
 
 func getSmacked(_broom_origin):
-    activate(true)
+    # passiveActivate(0, true)
+    if not notGetHitSound.is_playing(): notGetHitSound.play()
 
 func isActive(_debug=false):
-    return visible and not has_been_smacked
+    return visible and not is_purified
 
 func speakToMe():
     global.hasGottenLevelGeode = true
@@ -89,11 +94,15 @@ func speakToMe():
     # else:
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
-func activate(_is_player):
-    if not global.memory["broom"]:
-        if not notGetHitSound.is_playing(): notGetHitSound.play()
-        return
+# func activate(_is_player):
+func passiveActivate(_delta, is_player):
+    # if not global.memory["broom"]:
+    #     if not notGetHitSound.is_playing(): notGetHitSound.play()
+    #     return
+    # npc2.activate(is_player)
+    pass
 
+func getPurified():
     var children = self.get_children()
     for child in children:
         if child.is_in_group("event") and child.isActive():
@@ -112,7 +121,7 @@ func activate(_is_player):
     level.glitchScreenEffect.visible = true
     # level.levelTiles.randomize_num += 10
     # level.levelTiles.randomize_num_counter = 15
-    has_been_smacked = true
+    is_purified = true
     # level.show_crt_effect = true
     # level.player.pauseSelf = true
     # musicPlayer.stopAll()

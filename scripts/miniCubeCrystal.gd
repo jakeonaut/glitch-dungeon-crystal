@@ -4,6 +4,7 @@ onready var cubeContainer = get_node("CubeContainer")
 onready var cubeSound = get_node("cubeSound")
 onready var cubeSound2 = get_node("cubeSound2")
 onready var cubeSound3 = get_node("cubeSound3")
+onready var cubeSound4 = get_node("cubeSound4")
 onready var aniPlayer = get_node("AnimationPlayer")
 
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
@@ -13,6 +14,7 @@ onready var plusSpriteContainer = get_node("PlusSpriteContainer")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export var is_static_in_level = true
+export var is_negative = false
 
 export var MIN_STEP = -2
 export var should_randomize_step = true
@@ -65,10 +67,15 @@ func passiveActivate(_delta, _is_player):
   # musicPlayer.stopAll()
   if not disappearing2:
     cubeSound.play()
-    cubeSound2.pitch_scale = global.mini_cube_crystal_pitch
+    if is_negative:
+      cubeSound4.pitch_scale = global.mini_cube_crystal_pitch
+      cubeSound4.play()
+    else:
+      cubeSound2.pitch_scale = global.mini_cube_crystal_pitch
+      cubeSound2.play()
     global.mini_cube_crystal_pitch_timer = 0
     global.mini_cube_crystal_pitch += 0.1
-    cubeSound2.play()
+    
     aniPlayer.play("floatAway")
     # if global.memory["max_mp"] == 0:
     #   level.uiLayer.get_node("GlitchStatusRect").visible = true
@@ -78,11 +85,15 @@ func passiveActivate(_delta, _is_player):
     # global.memory["mp"] += 1
     # global.memory["max_mp"] += 1
     # global.memory["num_mini_crystal_cubes"] += 1
-    global.incrementLevelZoneThing("num_mini_crystal_cubes", 1)
+    if not is_negative:
+      global.incrementLevelZoneThing("num_mini_crystal_cubes", 1)
+
+
     if is_static_in_level:
       global.setStaticLevelZoneLevelVar(level, self.name, true)
+      if not is_negative:
+        addPlusSprite()
 
-    addPlusSprite()
     disappearing2 = true
 
 func addPlusSprite():

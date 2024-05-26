@@ -21,8 +21,7 @@ func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
   if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
-    has_been_hit = true
-    aniPlayer.play("hit")
+    passiveActivate(0, true)
   if spawned_object_path.length() != 0:
     spawned_object_res = load(spawned_object_path)
 
