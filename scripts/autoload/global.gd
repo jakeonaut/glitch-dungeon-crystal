@@ -194,7 +194,7 @@ func _ready():
     memory["show_color_blind"] = false
 
     # game stuff
-    memory["broom"] = false
+    memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1

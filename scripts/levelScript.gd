@@ -19,6 +19,9 @@ export var show_crt_effect = false
 export var show_dither_effect = false
 var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
 
+var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
+var mapManager = null
+
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
 export var should_glitch_activate = false 
@@ -112,6 +115,9 @@ func _ready_impl():
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
     flipGravity()
+  mapManager = mapManagerRes.instance()
+  mapManager.visible = false
+  self.add_child(mapManager)
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -145,6 +151,9 @@ func displayMessageText(message):
 
 func displaySpellMessageText(message):
   uiLayer.displaySpellMessageText(message)
+
+func getLevelManagerCoords():
+  mapManager.getCoords(self.getLevelName())
 
 func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)

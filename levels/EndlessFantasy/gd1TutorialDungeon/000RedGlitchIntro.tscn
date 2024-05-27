@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -16,22 +16,6 @@
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=16]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=17]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=18]
-
-[sub_resource type="BoxShape" id=30]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.75, 1 )
-
-[sub_resource type="BoxShape" id=31]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
-
-[sub_resource type="BoxShape" id=16]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=26]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=20]
 resource_name = "doorClose"
@@ -88,6 +72,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=16]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
 [sub_resource type="BoxShape" id=27]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
@@ -126,6 +114,7 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 5 )]
+override_camera_size = 20
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -186,29 +175,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 11, 0 )
-
-[node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9854, -2, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
-is_passive = true
-
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
-[node name="landing" parent="Viewport/level/Door" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 1 )
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 30 )
-
-[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
-shape = SubResource( 31 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 16 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
-shape = SubResource( 26 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 10, 0 )
@@ -277,8 +243,6 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 7 )]
 
-[editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]

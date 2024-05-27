@@ -906,6 +906,15 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0.0999999, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8, -6.5 )

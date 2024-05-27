@@ -1630,6 +1630,15 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1, 8, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
 pitch_scale = 1.1

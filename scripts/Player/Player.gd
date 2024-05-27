@@ -428,35 +428,45 @@ func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
   
 var returning_to_save_point = 0
-func tryDieToOffscreenCamera(delta):
-  var DEATH_MARGIN = 5
+func tryDieToOffscreenCamera(_delta):
+  var DEATH_MARGIN = 0
   if getGameCamera().rightmost_x > -999:
-    # global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-    if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-    global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-    global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
-    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-      if not has_landed_since_recovering:
-      #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-        global.memory["hp"] = 0
-        tryDieToEnemy(delta, true, true, true)
-        has_landed_since_recovering = true
-        return
-      returning_to_save_point = 1
-      returning_recover_time = 0
-      returnSound.play()
-      pauseSelf = true
-      ignorePhysics = true
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("returning")
-      has_landed_since_recovering = false
-      pauseAnimation = true
-      physics_state = PhysicsState.GLITCH_RECOVERY
-      if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-        if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-          global.memory["grav_direction"] = 1
-          level.flipGravity()
+    if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(1, 0, 0)))
+    if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(-1, 0, 0)))
+    if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(0, -1, 0)))
+    if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(0, 1, 0)))
+
+  # var DEATH_MARGIN = 5
+  # if getGameCamera().rightmost_x > -999:
+  #   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+  #   global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+  #   global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
+  #   global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+  #     if not has_landed_since_recovering:
+  #     #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
+  #       global.memory["hp"] = 0
+  #       tryDieToEnemy(delta, true, true, true)
+  #       has_landed_since_recovering = true
+  #       return
+  #     returning_to_save_point = 1
+  #     returning_recover_time = 0
+  #     returnSound.play()
+  #     pauseSelf = true
+  #     ignorePhysics = true
+  #     aniPlayer.stop()
+  #     aniPlayer.clear_queue()
+  #     aniPlayer.play("returning")
+  #     has_landed_since_recovering = false
+  #     pauseAnimation = true
+  #     physics_state = PhysicsState.GLITCH_RECOVERY
+  #     if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+  #       if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+  #         global.memory["grav_direction"] = 1
+  #         level.flipGravity()
   
 func doTimeDilation(_delta):
   pass
