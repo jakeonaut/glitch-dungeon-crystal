@@ -153,7 +153,7 @@ func displaySpellMessageText(message):
   uiLayer.displaySpellMessageText(message)
 
 func getLevelManagerCoords():
-  mapManager.getCoords(self.getLevelName())
+  return mapManager.getCoords(self.getLevelName())
 
 func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
@@ -210,6 +210,7 @@ func tryToRespawn():
 
   var found_door = null
   if global.isEnteringRoom and not global.isRespawning:
+    
     if global.memory.has("lastDoor") and global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -257,7 +258,11 @@ func tryToRespawn():
 
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
-    if found_door:
+    global.memory["broom"] = true
+    if global.roomEdgeVector != null:
+      adjustPlayerForEdgeTransition()
+      transition.reverse_fade()
+    elif found_door:
       # print(found_door)
       found_door.land(true, true)
       # global.saveMySpot(found_door.landing.global_transform.origin, null)
@@ -270,12 +275,12 @@ func tryToRespawn():
         global.grannyEnteringRoom = false
       else:
         transition.reverse_fade()
-        print("DEBUGGER DID NOT FIND DOOR")
       # global.saveMySpot(player.spawn_origin, null)
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom
   global.isEnteringRoom = false
+  global.roomEdgeVector = null
   global.isRespawning = false
 
   player.unsmack()
@@ -297,6 +302,59 @@ func tryToRespawn():
     player.mySprite.flip_h = not player.mySprite.flip_h
     player.summonFallenBroom(false, true)
     player.mySprite.flip_h = not player.mySprite.flip_h
+
+
+func adjustPlayerForEdgeTransition():
+  if global.memory.has("player_flip_h"):
+    player.mySprite.flip_h = global.memory["player_flip_h"]
+    global.memory.erase("player_flip_h")
+  if global.memory.has("feather_jump_timer"):
+    player.feather_jump_timer = global.memory["feather_jump_timer"]
+    global.memory.erase("feather_jump_timer")
+  if global.memory.has("linear_velocity"):
+    player.linear_velocity = global.memory["linear_velocity"]
+    global.memory.erase("linear_velocity")
+
+  var LANDING_MARGIN = 1
+
+  var xDiff = gameCamera.rightmost_x - gameCamera.leftmost_x
+  if global.memory.has("player_x_offset"):
+    var prevXDiff = global.memory["prevXDiff"]
+    player.global_transform.origin.x = gameCamera.leftmost_x + (xDiff*global.memory["player_x_offset"])
+    if prevXDiff > xDiff:
+      while player.checkSolidTilesOnMe():
+        player.global_transform.origin.x += 1
+    else:
+      while player.checkSolidTilesOnMe():
+        player.global_transform.origin.x -= 1
+    global.memory.erase("player_x_offset")
+    global.memory.erase("prevXDiff")
+  elif global.roomEdgeVector.x > 0:
+    player.global_transform.origin.x = gameCamera.leftmost_x + LANDING_MARGIN
+  elif global.roomEdgeVector.x < 0:
+    player.global_transform.origin.x = gameCamera.rightmost_x - LANDING_MARGIN
+  else:
+    player.global_transform.origin.x = gameCamera.leftmost_x + (xDiff/2)
+
+  var yDiff = gameCamera.topmost_y - gameCamera.botmost_y
+  if global.memory.has("player_y_offset"):
+    var prevYDiff = global.memory["prevYDiff"]
+    player.global_transform.origin.y = gameCamera.botmost_y + (yDiff*global.memory["player_y_offset"])
+    if prevYDiff > yDiff:
+      while player.checkSolidTilesOnMe():
+        player.global_transform.origin.y += 1
+    else:
+      while player.checkSolidTilesOnMe():
+        player.global_transform.origin.y -= 1
+    global.memory.erase("player_y_offset")
+    global.memory.erase("prevYDiff")
+  elif global.roomEdgeVector.y > 0:
+    player.global_transform.origin.y = gameCamera.botmost_y + LANDING_MARGIN
+  elif global.roomEdgeVector.y < 0:
+    player.global_transform.origin.y = gameCamera.topmost_y - LANDING_MARGIN
+  else:
+    player.global_transform.origin.y = gameCamera.topmost_y + (yDiff/2)
+
 
 
 func setDoorsSpriteFrame(_frame):

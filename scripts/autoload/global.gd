@@ -127,6 +127,7 @@ var activeSavePoint = null
 
 var isRespawning = false
 var isEnteringRoom = false
+var roomEdgeVector = null
 var grannyEnteringRoom = false
 var hasJustRespawned = false
 var hasJustEnteredRoom = false

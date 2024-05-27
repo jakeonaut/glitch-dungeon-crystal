@@ -16,10 +16,12 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   for child in self.get_foreign_children():
+    if myDynamicSpawnedChild and child == myDynamicSpawnedChild.get_ref():
+      continue
     child.visible = false
-  yield(TempTimer.idle_frame(self), "timeout")
-  yield(TempTimer.idle_frame(self), "timeout")
   if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
     passiveActivate(0, true)
   if spawned_object_path.length() != 0:
@@ -32,7 +34,12 @@ func _process(delta):
       aniPlayer.play("reset")
 
 func get_foreign_children():
-  return self.get_children().slice(4, self.get_child_count())
+  var possible_children = self.get_children().slice(4, self.get_child_count())
+  var spatial_children = []
+  for possible_child in possible_children:
+    if possible_child is Spatial:
+      spatial_children.push_back(possible_child)
+  return spatial_children
   
 func isActive(_debug=false):
   return not has_been_hit

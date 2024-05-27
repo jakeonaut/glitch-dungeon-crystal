@@ -71,7 +71,6 @@ func goThroughDoor():
   global.respawnVarTimerHack = 0
   global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
   global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
-  global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
   global.memory["linear_velocity"] = getPlayer().linear_velocity
   transition.granny_teleport_to(self.path)
 
@@ -98,16 +97,4 @@ func land():
   getPlayer().target_last_grounded_y = mySprite.global_transform.origin.y
 
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
-
-  if global.memory.has("player_flip_h"):
-    getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
-    global.memory.erase("player_flip_h")
-  if global.memory.has("player_y_offset"):
-    getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
-  if global.memory.has("feather_jump_timer"):
-    getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]
-    global.memory.erase("feather_jump_timer")
-  if global.memory.has("linear_velocity"):
-    getPlayer().linear_velocity = global.memory["linear_velocity"]
-    global.memory.erase("linear_velocity")
   getPlayer().on_ground = false

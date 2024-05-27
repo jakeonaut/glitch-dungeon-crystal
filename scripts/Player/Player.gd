@@ -429,16 +429,34 @@ func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
+  if global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
+    return
+
   var DEATH_MARGIN = 0
   if getGameCamera().rightmost_x > -999:
     if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
-      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(1, 0, 0)))
+      global.roomEdgeVector = Vector3(1, 0, 0)
     if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
-      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(-1, 0, 0)))
+      global.roomEdgeVector = Vector3(-1, 0, 0)
     if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(0, -1, 0)))
+      global.roomEdgeVector = Vector3(0, -1, 0)
     if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + Vector3(0, 1, 0)))
+      global.roomEdgeVector = Vector3(0, 1, 0)
+
+    if global.roomEdgeVector != null:
+      global.isEnteringRoom = true
+      global.memory["player_flip_h"] = mySprite.flip_h
+      global.memory["feather_jump_timer"] = feather_jump_timer
+      global.memory["linear_velocity"] = linear_velocity
+      if global.roomEdgeVector.x != 0:
+        var yDiff = getGameCamera().topmost_y - getGameCamera().botmost_y
+        global.memory["player_y_offset"] = (global_transform.origin.y - getGameCamera().botmost_y) / yDiff
+        global.memory["prevYDiff"] = yDiff
+      if global.roomEdgeVector.y != 0:
+        var xDiff = getGameCamera().rightmost_x - getGameCamera().leftmost_x
+        global.memory["player_x_offset"] = (global_transform.origin.x - getGameCamera().leftmost_x) / xDiff
+        global.memory["prevXDiff"] = xDiff
+      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + global.roomEdgeVector))
 
   # var DEATH_MARGIN = 5
   # if getGameCamera().rightmost_x > -999:
@@ -938,7 +956,7 @@ var remembered_on_ground = false
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
-  if transitioning:
+  if transitioning or global.isEnteringRoom:
     return
   if isOnSavePoint():
     return

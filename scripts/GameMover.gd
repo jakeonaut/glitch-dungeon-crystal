@@ -436,29 +436,30 @@ func applyTerminalVelocity(_delta):
     vv = 0
     
 func getTilesBelow(currLevelTiles):
+  var solidTilesBelow = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
   
-  var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - 0.1, z))
-  var tile_pos_a = currLevelTiles.map_to_world(coords_a.x, coords_a.y, coords_a.z)
-  var tile_type_a = currLevelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+  if currLevelTiles != null and lb != null and bb != null and rb != null and tb != null:
+    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - 0.1, z))
+    var tile_pos_a = currLevelTiles.map_to_world(coords_a.x, coords_a.y, coords_a.z)
+    var tile_type_a = currLevelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 
-  var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + bb - 0.1, z))
-  var tile_pos_b = currLevelTiles.map_to_world(coords_b.x, coords_b.y, coords_b.z)
-  var tile_type_b = currLevelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + bb - 0.1, z))
+    var tile_pos_b = currLevelTiles.map_to_world(coords_b.x, coords_b.y, coords_b.z)
+    var tile_type_b = currLevelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
 
-  var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + bb - 0.1, z))
-  var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
-  var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
+    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + bb - 0.1, z))
+    var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
+    var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
-  var solidTilesBelow = [null, null, null]
-  if isTileSolid(tile_type_a, true, 1, tile_pos_a):
-    solidTilesBelow[0] = coords_a
-  if isTileSolid(tile_type_mid, true, 1, tile_pos_mid):
-    solidTilesBelow[1] = coords_mid
-  if isTileSolid(tile_type_b, true, 1, tile_pos_b):
-    solidTilesBelow[2] = coords_b
+    if isTileSolid(tile_type_a, true, 1, tile_pos_a):
+      solidTilesBelow[0] = coords_a
+    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid):
+      solidTilesBelow[1] = coords_mid
+    if isTileSolid(tile_type_b, true, 1, tile_pos_b):
+      solidTilesBelow[2] = coords_b
 
   return solidTilesBelow
 

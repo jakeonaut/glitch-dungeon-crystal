@@ -376,8 +376,9 @@ func actuallyUnlockAndEnterDoor():
 
 
 func passiveActivate(_delta, is_player):
-  if is_passive and is_player:
-    goThroughDoor()
+  return # just let player tryDieToOffscreenCamera handle it!!!
+  # if is_passive and is_player:
+  #   goThroughDoor()
     
 func justStopPassiveActivate():
   pass
@@ -458,10 +459,6 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   elif is_passive:
     global.memory["on_ground"] = getPlayer().on_ground
     global.memory["player_flip_h"] = getPlayer().mySprite.flip_h
-    if is_vertical:
-      global.memory["feather_jump_timer"] = getPlayer().feather_jump_timer
-    else:
-      global.memory["player_y_offset"] = getPlayer().global_transform.origin.y - global_transform.origin.y - 1
     global.memory["linear_velocity"] = getPlayer().linear_velocity
     transition.fast_fade_to(self.path)
   elif really_really_long_fade:
@@ -524,17 +521,6 @@ func land(should_change_shader_params = true, should_play_transition = false):
         global.grannyEnteringRoom = false
       else:
         transition.fast_reverse_fade()
-    if global.memory.has("player_flip_h"):
-      getPlayer().mySprite.flip_h = global.memory["player_flip_h"]
-      global.memory.erase("player_flip_h")
-    if global.memory.has("player_y_offset") and not is_vertical:
-      getPlayer().global_transform.origin.y += global.memory["player_y_offset"]
-    if global.memory.has("feather_jump_timer"):
-      getPlayer().feather_jump_timer = global.memory["feather_jump_timer"]
-      global.memory.erase("feather_jump_timer")
-    if global.memory.has("linear_velocity"):
-      getPlayer().linear_velocity = global.memory["linear_velocity"]
-      global.memory.erase("linear_velocity")
 
     if is_vertical:
       getPlayer().on_ground = false
