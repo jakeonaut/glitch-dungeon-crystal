@@ -275,6 +275,7 @@ func tryToRespawn():
       else:
         transition.reverse_fade()
       # global.saveMySpot(player.spawn_origin, null)
+    gameCamera.setCameraPositionNow()
 
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom

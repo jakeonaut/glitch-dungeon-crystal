@@ -805,6 +805,22 @@ func checkSolidTilesBeneathMe():
         has_solid_beneath = true
   return has_solid_beneath
 
+func checkSolidTilesOnMyRight():
+  var solid_tiles = getTilesRightOf(getLevelTiles())
+  var has_solid_beneath = false
+  for i in range(len(solid_tiles)):
+      if solid_tiles[i] != null:
+        has_solid_beneath = true
+  return has_solid_beneath
+
+func checkSolidTilesOnMyLeft():
+  var solid_tiles = getTilesLeftOf(getLevelTiles())
+  var has_solid_beneath = false
+  for i in range(len(solid_tiles)):
+      if solid_tiles[i] != null:
+        has_solid_beneath = true
+  return has_solid_beneath
+
 func checkSolidTilesOnMe():
   var is_true = false
   global_transform.origin.y += 1
@@ -824,6 +840,7 @@ var dig_below_timer = 0
 var dig_below_time_limit = 20
 func processMoleLogic(delta):
   if transformation == TransformationState.UNDERGROUND:
+    spellbookGlitchSprite.visible = false
     if not pressingDown():
       transformation = TransformationState.UNDERGROUND_RETURNING
     fastStepSound.pitch_scale = 0.8
@@ -848,22 +865,33 @@ func processMoleLogic(delta):
       global_transform.origin.y -= (2 * delta*11)
       if not checkSolidTilesBeneathMe():
         global_transform.origin.y += (2 * delta*11)
-        if not pressingMoveLeft() and not pressingMoveRight():
-          dig_below_timer += (delta*11)
-          if dig_below_timer >= dig_below_time_limit:
-            dig_below_timer = 0
-            global_transform.origin.y -= 2
-            getMoleCured()
-      else:
-        dig_below_timer -= (delta*11)
-        if dig_below_timer <= 0:
-          dig_below_timer = 0
+        # if not pressingMoveLeft() and not pressingMoveRight():
+        #   dig_below_timer += (delta*11)
+        #   if dig_below_timer >= dig_below_time_limit:
+        #     dig_below_timer = 0
+        #     global_transform.origin.y -= 2
+        #     getMoleCured()
+      # else:
+      #   dig_below_timer -= (delta*11)
+      #   if dig_below_timer <= 0:
+      #     dig_below_timer = 0
 
-    var in_solid_tiles = checkSolidTilesOnMe()
-    if not in_solid_tiles:
+    if not checkSolidTilesOnMyLeft():
+      global_transform.origin.x += 1
+    if not checkSolidTilesOnMyRight():
+      global_transform.origin.x -= 1
+
+    if not checkSolidTilesOnMe():
       getMoleCured()
+      if pressingMoveLeft():
+        global_transform.origin.x += 1
+      elif pressingMoveRight():
+        global_transform.origin.x -= 1
+      else:
+        getMoleCured()
 
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
+    spellbookGlitchSprite.visible = false
     dig_below_timer = 0
     glitchTilesAroundMe(-2.5)
     fastStepSound.pitch_scale = 2.0
@@ -874,8 +902,7 @@ func processMoleLogic(delta):
       transformation = TransformationState.UNDERGROUND
       digSound.play()
     else:
-      var in_solid_tiles = checkSolidTilesOnMe()
-      if in_solid_tiles:
+      if checkSolidTilesOnMe():
         global_transform.origin.y += (4 * delta*11)
       else:
         should_magic_jump = true
@@ -914,6 +941,7 @@ func processMoleLogic(delta):
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
     return
+  spellbookGlitchSprite.visible = true
   transformation = TransformationState.NORMAL
   global_transform.origin.y -= 2
   summonSmokeClouds(5, true, true, 0)
@@ -1394,11 +1422,13 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
-  elif global.memory["broom"]:
+  elif global.memory["broom"] and not isHoldingMultiBroom():
     broomSpriteVisible.visible = true
+    if nesting_doll_state == global.NestingDoll.GRANDMA:
+      mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   else:
     broomSpriteVisible.visible = false
-    if nesting_doll_state == global.NestingDoll.GRANDMA:
+    if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
 
 
@@ -1502,6 +1532,17 @@ func landed():
         lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
       global_transform.origin.y -= 1
     global_transform.origin.y = original_y
+
+var secretMultiBroom = null
+func isHoldingMultiBroom():
+  return secretMultiBroom != null and \
+         global.memory["multi_broom"] and \
+         Input.is_action_pressed("sub_action_button") and \
+         not (
+          physics_state == PhysicsState.GLITCH_DYING or \
+          physics_state == PhysicsState.GLITCH_HURT or \
+          physics_state == PhysicsState.IGNORE_PHYSICS
+         )
     
 func broomStop():
   if summonedBroom != null:
@@ -1510,7 +1551,6 @@ func broomStop():
   pauseInput = false
   pauseAnimation = false
   global.pauseMoveInput = false
-  broomSpriteVisible.visible = true
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
@@ -1524,10 +1564,12 @@ func broomStop():
       linear_velocity.y = -0.01
   aniPlayer.stop()
   aniPlayer.clear_queue()
+  smacked_npc = null
   aniPlayer.queue("fall")
   if on_ground:
     aniPlayer.queue("stand")
-  smacked_npc = null
+  if not isHoldingMultiBroom():
+    broomSpriteVisible.visible = true
 
 # @override
 func playJumpSound():
@@ -1665,7 +1707,7 @@ onready var secretSweepActualCollisionShape = get_node("SpriteContainer/SecretSw
 
 # dedupe with SummonedBroom and FallenBroom
 func hitStuff(_delta):
-  if not visible: return
+  if not visible or isHoldingMultiBroom(): return
   
   var my_broom_owner = self
   var areas = secretSweepActualArea.get_overlapping_areas()

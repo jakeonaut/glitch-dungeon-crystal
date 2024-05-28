@@ -27,6 +27,7 @@ func _ready():
   set_process(true)
 
 
+var can_stop_player = true
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   
@@ -36,18 +37,25 @@ func _process(delta):
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0
-    if my_broom_owner: 
+    if my_broom_owner and can_stop_player: 
       if global.memory["multi_broom"]:
-        my_broom_owner.summonedBroom = null
+        my_broom_owner.secretMultiBroom = self
+        if my_broom_owner.isHoldingMultiBroom():
+          my_broom_owner.summonedBroom = null
+          my_broom_owner.mySprite.material_override.set_shader_param("texture_albedo", my_broom_owner.spriteSheetNoBroom)
       my_broom_owner.broomStop()
+      can_stop_player = false
     visible = false
     
   if not visible and not broomSound.is_playing():
-    if global.memory["multi_broom"]:
+    if my_broom_owner.isHoldingMultiBroom():
       visible = true
       broom_active_timer = 0
       aniPlayer.play(aniPlayer.assigned_animation)
     else:
+      if my_broom_owner.secretMultiBroom == self:
+        my_broom_owner.secretMultiBroom = null
+        my_broom_owner.broomSpriteVisible.visible = true
       queue_free()
 
 # dedupe with FallenBroom
