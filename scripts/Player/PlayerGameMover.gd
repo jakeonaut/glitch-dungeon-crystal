@@ -235,7 +235,9 @@ func spawnSparkles(delta, above_the_head = false):
   #       blink_time_limit = 20
   #       is_blinked = false
 
+onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
 func normalGlitch():
+  spellbookGlitchSprite.visible = false
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
   changeSpriteColorPalette(global.player_base_palette)

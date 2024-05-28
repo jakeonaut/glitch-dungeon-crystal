@@ -123,8 +123,8 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   # TODO(jaketrower): add an option
-  ditherPaletteEffectRect2.visible = false # global.memory["show_dither_effect"] and show_dither_effect
-  basicCrtEffectRect.visible = true # global.memory["show_crt_effect"] and show_crt_effect
+  ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
+  basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
   colorBlindEffectRect2.visible = global.memory["show_color_blind"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return
@@ -210,17 +210,12 @@ func tryToRespawn():
 
   var found_door = null
   if global.isEnteringRoom and not global.isRespawning:
-    print("hi")
     if global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
-      print("hi + " + door_path)
       var doors = get_tree().get_nodes_in_group("doors")
       for door in doors:
-        print(door.path)
         if door.path == door_path:
-          print("AHHH")
           found_door = door
-          print(found_door)
           break
   elif global.isRespawning:
     if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():

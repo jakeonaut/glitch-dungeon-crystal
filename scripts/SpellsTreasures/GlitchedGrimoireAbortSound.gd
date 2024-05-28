@@ -16,6 +16,7 @@ func activateScript():
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
+  level.player.pauseInput = false
 
   # IFNDEF SpellbookIntroLevelScript.gd
   # if level.has_node("NPC5"):

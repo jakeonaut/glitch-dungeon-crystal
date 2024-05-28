@@ -50,12 +50,3 @@ func _process(delta):
     elif not musicPlayer.dungeonThemePlayer2.is_playing():
       if not (frogCroneNpc.get_ref() and frogCroneNpc.get_ref().visible):
         musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer2)
-
-
-# @override
-func restartMusic():  
-  if has_decided and not global.isPauseMenuOpen:
-    if frogCroneNpc.get_ref() and frogCroneNpc.get_ref().visible:
-      musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
-    else:
-      musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer2)

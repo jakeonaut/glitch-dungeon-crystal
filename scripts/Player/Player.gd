@@ -24,7 +24,6 @@ onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySp
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
-onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -147,6 +146,7 @@ func restoreGlitchAndMP():
 func applyGlitch(glitch, notPlaySound = false):
   if returning_to_save_point > 0:
     return false
+  glitchTilesAroundMe()
   nullifySound.stop()
   if not notPlaySound:
     if glitch == self.glitch_form:
@@ -169,6 +169,8 @@ func applyGlitch(glitch, notPlaySound = false):
   return true
 
 func floorGlitch():
+  spellbookGlitchSprite.visible = true
+  spellbookGlitchSprite.frame = 1
   level.displaySpellMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
@@ -176,6 +178,8 @@ func floorGlitch():
   # mySprite.setBugCatcherCostume()
 
 func featherGlitch():
+  spellbookGlitchSprite.visible = true
+  spellbookGlitchSprite.frame = 0
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
      (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY:
@@ -196,6 +200,8 @@ func featherGlitch():
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
+  spellbookGlitchSprite.visible = true
+  spellbookGlitchSprite.frame = 2
   level.displaySpellMessageText("ladder")
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
@@ -204,6 +210,8 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
+  spellbookGlitchSprite.visible = true
+  spellbookGlitchSprite.frame = 3
   level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
@@ -279,6 +287,10 @@ func _process(delta):
   if newSpriteOpacity != spriteOpacity:
     spriteOpacity = newSpriteOpacity
     mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
+  if mySprite.flip_h:
+    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
+  else:
+    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
 
   if global.isPauseMenuOpen:
     return
@@ -647,6 +659,7 @@ func nullify():
   #   level.displaySpellMessageText("unaffected")
   #   return
 
+  glitchTilesAroundMe()
   glitchTickle(false)
   level.displaySpellMessageText("lose magic")
   var did_erase = false

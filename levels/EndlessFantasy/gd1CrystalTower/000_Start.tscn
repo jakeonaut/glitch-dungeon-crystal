@@ -151,6 +151,7 @@ shader_param/target_palette = ExtResource( 22 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 26 )
+show_dither_effect = true
 tileset_type = 2
 has_spellbook_page = true
 
@@ -224,6 +225,15 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33655, -4.95006, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.48196, 1, 0 )

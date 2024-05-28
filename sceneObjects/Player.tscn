@@ -45,7 +45,7 @@
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=43]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational2.wav" type="AudioStream" id=44]
 [ext_resource path="res://assets/DELETEME/assets_sfx_ui_cancel.wav" type="AudioStream" id=45]
-[ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=46]
+[ext_resource path="res://assets/sprites/obelisk_sheet.png" type="Texture" id=46]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=47]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=48]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=49]
@@ -5793,13 +5793,22 @@ shader_param/target_palette = ExtResource( 36 )
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
 true_terminal_vel = 14
+lb = null
+rb = null
+tb = null
+bb = null
 grav = 28
 walk_speed = 6
 run_speed = 8
 feather_glitch_walk_speed = 7
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
 swimming_walk_speed = 5
 jump_force = 9
 invisible_jump_force = 10
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="TileArea" type="Area" parent="."]
 
@@ -6290,13 +6299,12 @@ script = ExtResource( 10 )
 max_frames = 1
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.125, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.931, 1 )
 visible = false
 pixel_size = 0.125
 texture = ExtResource( 46 )
-hframes = 8
-vframes = 5
-frame = 4
+hframes = 4
+vframes = 6
 script = ExtResource( 10 )
 max_frames = 1
 should_animate = false
