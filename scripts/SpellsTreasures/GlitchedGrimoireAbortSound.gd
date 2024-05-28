@@ -32,4 +32,3 @@ func preActivateScript():
     global.memory["glitched_grimoire"] = true
     if not global.memory.has("spellbookPage"):
       global.memory["spellbookPage"] = []
-    level.player.applyObeliskGlitch(global.GlitchForm.WALK_THROUGH_WALLS)

@@ -229,6 +229,12 @@ func _process(delta):
     var spellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
     setGlitchSprite(equipSlotSprite, spellPage)
     setGlitchSprite(currSlotSprite, getPlayer().glitch_form)
+  var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
+  if global.memory["glitched_grimoire"]:
+    spellbookSprite.frame = 2
+  else:
+    spellbookSprite.frame = 0
+
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd

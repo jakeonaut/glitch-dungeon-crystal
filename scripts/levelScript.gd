@@ -210,13 +210,17 @@ func tryToRespawn():
 
   var found_door = null
   if global.isEnteringRoom and not global.isRespawning:
-    
-    if global.memory.has("lastDoor") and global.memory.has("roomPath"):
+    print("hi")
+    if global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
+      print("hi + " + door_path)
       var doors = get_tree().get_nodes_in_group("doors")
       for door in doors:
+        print(door.path)
         if door.path == door_path:
+          print("AHHH")
           found_door = door
+          print(found_door)
           break
   elif global.isRespawning:
     if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
@@ -240,7 +244,7 @@ func tryToRespawn():
         transition.path = global.memory["savedRoomPath"]
         transition.change_scene()
         return
-    elif global.memory.has("lastDoor"):
+    elif global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
       for door in doors:
@@ -259,13 +263,13 @@ func tryToRespawn():
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
     global.memory["broom"] = true
-    if global.roomEdgeVector != null:
-      adjustPlayerForEdgeTransition()
-      transition.reverse_fade()
-    elif found_door:
+    if found_door:
       # print(found_door)
       found_door.land(true, true)
       # global.saveMySpot(found_door.landing.global_transform.origin, null)
+    elif global.roomEdgeVector != null:
+      adjustPlayerForEdgeTransition()
+      transition.reverse_fade()
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
       player.global_transform.origin = player.spawn_origin
       # global.saveMySpot(player.spawn_origin, null)
@@ -282,6 +286,7 @@ func tryToRespawn():
   global.isEnteringRoom = false
   global.roomEdgeVector = null
   global.isRespawning = false
+  global.shouldRenderAsCinematic = false
 
   player.unsmack()
   player.aniPlayer.play("land")

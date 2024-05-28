@@ -366,9 +366,8 @@ func isActive(_debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    pass
-    # getSmacked(self.global_transform.origin)
-    # getPlayer().getSmacked()
+    getSmacked(self.global_transform.origin)
+    getPlayer().getSmacked()
 
 func passiveActivate(_delta, _is_player):
     pass

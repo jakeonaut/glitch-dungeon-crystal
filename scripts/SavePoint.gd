@@ -84,7 +84,7 @@ func isOnSavePoint():
     var y = origin.y
     var z = origin.z
     return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
-            int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
+            int(round(y) - 1) == int(round(global.memory["active_save_point_y"])) and \
             int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func enablePaletteCycle():
@@ -118,7 +118,7 @@ func passiveActivate(_delta, _is_player):
             else:
                 saveSound.volume_db = -32
             saveSound.play()
-        global.saveMySpot(self.translation, level)
+        global.saveMySpot(global_transform.origin + Vector3(0, -1, 0), level)
         
         global.memory.erase("player_y_offset")
     is_currently_on_save_point = true

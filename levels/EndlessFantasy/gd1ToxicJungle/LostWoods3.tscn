@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -54,9 +54,13 @@ shader_param/texture_albedo = ExtResource( 9 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 2 )
 
-[sub_resource type="BoxShape" id=47]
+[sub_resource type="BoxShape" id=62]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=63]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
@@ -221,6 +225,14 @@ tracks/1/keys = {
 "values": [ ExtResource( 23 ) ]
 }
 
+[sub_resource type="BoxShape" id=64]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=65]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
 [sub_resource type="Animation" id=56]
 length = 0.001
 tracks/0/type = "value"
@@ -376,6 +388,14 @@ tracks/1/keys = {
 "values": [ ExtResource( 23 ) ]
 }
 
+[sub_resource type="BoxShape" id=66]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=67]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -426,7 +446,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 21 )]
 fov = 80.7
-size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -508,8 +527,11 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 47 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 62 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 63 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )
@@ -532,8 +554,11 @@ anims/doorOpen = SubResource( 53 )
 anims/doorUnbarred = SubResource( 54 )
 anims/locked = SubResource( 55 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 47 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 64 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 65 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )
@@ -543,7 +568,7 @@ shape = SubResource( 49 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, 0 )
-path = "res://levels/EndlessFantasy/gd1/DebugTownToxicJungleEntrance.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
@@ -556,8 +581,11 @@ anims/doorOpen = SubResource( 59 )
 anims/doorUnbarred = SubResource( 60 )
 anims/locked = SubResource( 61 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 47 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 66 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 67 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )

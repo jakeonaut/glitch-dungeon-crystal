@@ -107,7 +107,7 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
      global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
     global.memory["spellbookPage"].push_back(glitch)
     # TODO..
-    if global.memory["spellbookPage"].size() > 2:
+    if not global.memory["glitched_grimoire"] and global.memory["spellbookPage"].size() > 2:
       global.memory["spellbookPage"].pop_front()
 
 # used in AnimationPlayer.broomSmackGlitch
@@ -409,82 +409,104 @@ func processCastingLogic(_delta):
   if not global.memory.has("spellbookPage"):
     return
 
-  if Input.is_action_just_pressed("alt_action_button"): #  or Input.is_action_just_pressed("right_button"):
+  if Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button"): #  or Input.is_action_just_pressed("right_button"):
     if global.memory["spellbookPage"].size() <= 1:
       noSpellSound.play()
     else:
       spellCastPauseIndex = 0
       applySpellbookGlitch()
       level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
-  # elif Input.is_action_just_pressed("left_button"):
-  #   if global.memory["spellbookPage"].size() <= 1:
-  #     noSpellSound.play()
-  #   else:
-  #     spellCastPauseIndex = -2
-  #     applySpellbookGlitch()
-  #     level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+  elif Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button"): # or Input.is_action_just_pressed("left_button"):
+    if global.memory["spellbookPage"].size() <= 1:
+      noSpellSound.play()
+    else:
+      spellCastPauseIndex = -2
+      applySpellbookGlitch()
+      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+
+  # TODO(REMAP)
+  if global.memory["glitched_grimoire"]:
+    # TODO(): do these only work if you have > 2 spells?
+    if Input.is_action_just_pressed("spell_1"):
+      pass
+    if Input.is_action_just_pressed("spell_2"):
+      pass
+    if Input.is_action_just_pressed("spell_3"):
+      pass
+    if Input.is_action_just_pressed("spell_4"):
+      pass
 
 func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
   
 var returning_to_save_point = 0
-func tryDieToOffscreenCamera(_delta):
-  if global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
+func tryDieToOffscreenCamera(delta):
+  if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 
   var DEATH_MARGIN = 0
-  if getGameCamera().rightmost_x > -999:
-    if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
-      global.roomEdgeVector = Vector3(1, 0, 0)
-    if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
-      global.roomEdgeVector = Vector3(-1, 0, 0)
-    if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-      global.roomEdgeVector = Vector3(0, -1, 0)
-    if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-      global.roomEdgeVector = Vector3(0, 1, 0)
+  if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+    global.roomEdgeVector = Vector3(1, 0, 0)
+  if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+    global.roomEdgeVector = Vector3(-1, 0, 0)
+  if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+    global.roomEdgeVector = Vector3(0, -1, 0)
+  if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+    global.roomEdgeVector = Vector3(0, 1, 0)
 
-    if global.roomEdgeVector != null:
+  if global.roomEdgeVector != null:
+    if global.roomEdgeVector.x != 0:
+      var yDiff = getGameCamera().topmost_y - getGameCamera().botmost_y
+      global.memory["player_y_offset"] = (global_transform.origin.y - getGameCamera().botmost_y) / yDiff
+      global.memory["prevYDiff"] = yDiff
+    if global.roomEdgeVector.y != 0:
+      var xDiff = getGameCamera().rightmost_x - getGameCamera().leftmost_x
+      global.memory["player_x_offset"] = (global_transform.origin.x - getGameCamera().leftmost_x) / xDiff
+      global.memory["prevXDiff"] = xDiff
+
+    var curr_coords = level.getLevelManagerCoords()
+    var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
+    if new_coords != null:
+      transition.fast_fade_to(new_coords)
       global.isEnteringRoom = true
       global.memory["player_flip_h"] = mySprite.flip_h
       global.memory["feather_jump_timer"] = feather_jump_timer
       global.memory["linear_velocity"] = linear_velocity
-      if global.roomEdgeVector.x != 0:
-        var yDiff = getGameCamera().topmost_y - getGameCamera().botmost_y
-        global.memory["player_y_offset"] = (global_transform.origin.y - getGameCamera().botmost_y) / yDiff
-        global.memory["prevYDiff"] = yDiff
-      if global.roomEdgeVector.y != 0:
-        var xDiff = getGameCamera().rightmost_x - getGameCamera().leftmost_x
-        global.memory["player_x_offset"] = (global_transform.origin.x - getGameCamera().leftmost_x) / xDiff
-        global.memory["prevXDiff"] = xDiff
-      transition.fast_fade_to(level.mapManager.getRoomPathAtCoords(level.getLevelManagerCoords() + global.roomEdgeVector))
+      global.memory["roomPath"] = level.getLevelName()
+      return
+    else:
+      global.roomEdgeVector = null
+      global.memory.erase("player_y_offset")
+      global.memory.erase("prevYDiff")
+      global.memory.erase("player_x_offset")
+      global.memory.erase("prevXDiff")
 
-  # var DEATH_MARGIN = 5
-  # if getGameCamera().rightmost_x > -999:
-  #   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-  #   global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-  #   global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
-  #   global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-  #     if not has_landed_since_recovering:
-  #     #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
-  #       global.memory["hp"] = 0
-  #       tryDieToEnemy(delta, true, true, true)
-  #       has_landed_since_recovering = true
-  #       return
-  #     returning_to_save_point = 1
-  #     returning_recover_time = 0
-  #     returnSound.play()
-  #     pauseSelf = true
-  #     ignorePhysics = true
-  #     aniPlayer.stop()
-  #     aniPlayer.clear_queue()
-  #     aniPlayer.play("returning")
-  #     has_landed_since_recovering = false
-  #     pauseAnimation = true
-  #     physics_state = PhysicsState.GLITCH_RECOVERY
-  #     if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-  #       if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-  #         global.memory["grav_direction"] = 1
-  #         level.flipGravity()
+  DEATH_MARGIN = 2
+  if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+    global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+    global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
+    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+      if not has_landed_since_recovering:
+      #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
+        global.memory["hp"] = 0
+        tryDieToEnemy(delta, true, true, true)
+        has_landed_since_recovering = true
+        return
+      returning_to_save_point = 1
+      returning_recover_time = 0
+      returnSound.play()
+      pauseSelf = true
+      ignorePhysics = true
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("returning")
+      has_landed_since_recovering = false
+      pauseAnimation = true
+      physics_state = PhysicsState.GLITCH_RECOVERY
+      if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+        if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+          global.memory["grav_direction"] = 1
+          level.flipGravity()
   
 func doTimeDilation(_delta):
   pass
@@ -620,10 +642,10 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  if global.memory["glitched_grimoire"]:
-    glitchTickle(false)
-    level.displaySpellMessageText("unaffected")
-    return
+  # if global.memory["glitched_grimoire"]:
+  #   glitchTickle(false)
+  #   level.displaySpellMessageText("unaffected")
+  #   return
 
   glitchTickle(false)
   level.displaySpellMessageText("lose magic")
@@ -1010,7 +1032,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   bumpSound.play()
   global.pauseGame = true
   global.pauseMoveInput = true
-  on_ground = false
+  global.memory["on_ground"] = on_ground
+  # on_ground = false
 
   level.glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
   level.glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)
@@ -1376,7 +1399,7 @@ func processBagRenderLogic(_delta):
 
 
 func processPoisonWaterLogic(delta):
-  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
+  var is_touching_poison_water = false # is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 
   if is_touching_poison_water:
     if glitch_form == global.GlitchForm.INVISIBLE:

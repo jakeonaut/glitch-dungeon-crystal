@@ -1,6 +1,7 @@
 extends Spatial
 
 var mapGrid = {}
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
   visible = false
@@ -24,10 +25,10 @@ func getCoords(of_path):
   var levelSprites = get_tree().get_nodes_in_group("LevelSprite")
   for levelSprite in levelSprites:
     if levelSprite.path == of_path:
-      print(levelSprite.path + ", " + of_path)
       var o = levelSprite.global_transform.origin
       return Vector3(int(o.x), int(o.y), int(o.z))
-  return Vector3(0, 0, 0)
+  print("THIS LEVEL AIN'T IN THE MAP YET")
+  return null
 
 func getRoomPathAtCoords(coords):
   if not has_grid_been_constructed:
@@ -37,5 +38,17 @@ func getRoomPathAtCoords(coords):
   if mapGrid.has(int(coords.y)):
     if mapGrid[int(coords.y)].has(int(coords.x)):
       return mapGrid[int(coords.y)][int(coords.x)].path
-  # hopefully we have Haven2 sitting smack dab at 0_0 or else this will fail
-  return mapGrid[0][0].path
+
+  return null
+
+  # this allows each "area" to set its own default room.
+  # var currPath = level.getLevelName()
+  # var levelSprites = get_tree().get_nodes_in_group("LevelSprite")
+  # for levelSprite in levelSprites:
+  #   if levelSprite.path == currPath:
+  #     var levelSpriteParent = levelSprite.get_node("..")
+  #     if levelSpriteParent != self and levelSpriteParent.has_node("DefaultLevel"):
+  #       return levelSpriteParent.get_node("DefaultLevel").path
+
+  # # hopefully we have Haven2 sitting smack dab at 0_0 or else this will fail
+  # return mapGrid[0][0].path

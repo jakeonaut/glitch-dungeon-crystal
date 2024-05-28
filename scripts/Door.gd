@@ -445,7 +445,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     return
     
   global.memory["cameraSize"] = level.gameCamera.initial_size
-  global.memory["lastDoor"] = id
+  # global.memory["lastDoor"] = id
   global.memory["roomPath"] = level.getLevelName()
   global.pauseGame = true
 
