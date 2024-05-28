@@ -134,6 +134,8 @@ func conductFromScenePath(path):
     changeSongPitch(1.0)
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
+    elif path.find("HighPriestessRoom") > 0:
+        tryToPlay(bossThemePlayer)
     elif path.find("gd1CrystalTower") > 0:
         tryToPlay(debugThemePlayer)
     elif path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0 or path.find("Corrupted0_0") > 0:
@@ -144,8 +146,6 @@ func conductFromScenePath(path):
             changeSongPitch(0.9)
             default_song_pitch = 0.9
             return
-    elif path.find("BossArenaReal") > 0:
-        tryToPlay(bossThemePlayer)
     elif path.find("Haven2") > 0 or path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(priestessPlayer)
         changeSongPitch(1.0)

@@ -226,6 +226,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/005_CrystalPuzzle_GlitchSave.tscn"
 
+[node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+material_override = null
+pixel_size = 0.1
+frame = 52
+path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
+
 [node name="ToxicJungle" type="Spatial" parent="."]
 
 [node name="Level" parent="ToxicJungle" instance=ExtResource( 3 )]

@@ -36,11 +36,19 @@ func _process(delta):
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0
-    if my_broom_owner: my_broom_owner.broomStop()
+    if my_broom_owner: 
+      if global.memory["multi_broom"]:
+        my_broom_owner.summonedBroom = null
+      my_broom_owner.broomStop()
     visible = false
     
   if not visible and not broomSound.is_playing():
-    queue_free()
+    if global.memory["multi_broom"]:
+      visible = true
+      broom_active_timer = 0
+      aniPlayer.play(aniPlayer.assigned_animation)
+    else:
+      queue_free()
 
 # dedupe with FallenBroom
 func hitStuff(_delta):

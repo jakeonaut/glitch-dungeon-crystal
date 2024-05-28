@@ -5793,22 +5793,13 @@ shader_param/target_palette = ExtResource( 36 )
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
 true_terminal_vel = 14
-lb = null
-rb = null
-tb = null
-bb = null
 grav = 28
 walk_speed = 6
 run_speed = 8
 feather_glitch_walk_speed = 7
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
 swimming_walk_speed = 5
 jump_force = 9
 invisible_jump_force = 10
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="TileArea" type="Area" parent="."]
 
@@ -6298,7 +6289,7 @@ frame = 880
 script = ExtResource( 10 )
 max_frames = 1
 
-[node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
+[node name="SpellbookGlitchSprite" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.931, 1 )
 visible = false
 pixel_size = 0.125

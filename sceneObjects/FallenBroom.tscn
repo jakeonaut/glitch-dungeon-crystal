@@ -719,7 +719,6 @@ script = ExtResource( 11 )
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -25.0
-pitch_scale = 0.8
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

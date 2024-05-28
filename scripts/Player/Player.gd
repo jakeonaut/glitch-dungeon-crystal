@@ -1188,7 +1188,10 @@ func processBroomLogic(delta):
 
   var aa = aniPlayer.assigned_animation
   if (aa == "broomSmackGlitch" or aa == "sweepFloor") and not aniPlayer.is_playing():
-    broomStop()
+    if global.memory["multi_broom"]:
+      summonedBroom = null
+    else:
+      broomStop()
 
   if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED:
     if Input.is_action_just_pressed("sub_action_button"):
@@ -1200,6 +1203,10 @@ func processBroomLogic(delta):
     if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
       summonSporeShroom()
     elif global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
+      # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
+      #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
+      #   if distance >= 2:
+      #     fallenBroomRef.get_ref().returning = true
       noBroomSound.play()
     return
 
