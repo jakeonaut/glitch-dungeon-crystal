@@ -1,0 +1,260 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Enemies/Boss/HighPriestessBoss.gd" type="Script" id=3]
+[ext_resource path="res://sceneObjects/MrMoTex.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
+[ext_resource path="res://assets/pokeball0000.png" type="Texture" id=8]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 7 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 6 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "windUpCast"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[node name="HighPriestessBoss" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 2 )
+hframes = 4
+script = ExtResource( 1 )
+max_frames = 4
+
+[node name="SpriteBreakUpExperiment" type="Spatial" parent="."]
+visible = false
+
+[node name="MrMoTex" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.5, -1 )
+material_override = SubResource( 1 )
+frame = 291
+
+[node name="MrMoTex2" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 2.5, -1 )
+material_override = SubResource( 1 )
+frame = 291
+
+[node name="MrMoTex3" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 3.5, -1 )
+material_override = SubResource( 1 )
+frame = 291
+
+[node name="MrMoTex16" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 7.5, -1 )
+material_override = SubResource( 1 )
+frame = 734
+
+[node name="MrMoTex17" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 7.5, -1 )
+material_override = SubResource( 1 )
+frame = 735
+
+[node name="MrMoTex18" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 6.5, -1 )
+material_override = SubResource( 1 )
+flip_v = true
+frame = 734
+
+[node name="MrMoTex19" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 6.5, -1 )
+material_override = SubResource( 1 )
+flip_v = true
+frame = 735
+
+[node name="MrMoTex4" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3.5, -1 )
+material_override = SubResource( 1 )
+frame = 603
+
+[node name="MrMoTex8" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 13.5, 4.5, -1 )
+material_override = SubResource( 1 )
+flip_v = true
+frame = 429
+
+[node name="MrMoTex7" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3.5, -1 )
+material_override = SubResource( 1 )
+frame = 260
+
+[node name="MrMoTex5" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.5, -1 )
+material_override = SubResource( 1 )
+frame = 699
+
+[node name="MrMoTex9" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex10" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex11" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex15" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, -1 )
+material_override = SubResource( 1 )
+frame = 139
+
+[node name="MrMoTex12" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, -0.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex13" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, -0.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex14" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, -0.5, -1 )
+material_override = SubResource( 1 )
+frame = 272
+
+[node name="MrMoTex6" parent="SpriteBreakUpExperiment" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1.5, -1 )
+material_override = SubResource( 1 )
+frame = 639
+
+[node name="landing" type="Sprite3D" parent="." groups=["priestess_landing"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+pixel_size = 0.12
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 2
+
+[node name="landing2" type="Sprite3D" parent="." groups=["priestess_landing"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 8, 1 )
+pixel_size = 0.12
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 2
+
+[node name="landing3" type="Sprite3D" parent="." groups=["priestess_landing"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 8, 1 )
+pixel_size = 0.12
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 2
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/windUpCast = SubResource( 3 )

@@ -21,6 +21,10 @@ var should_return = true
 var have_i_smacked_an_npc = false
 var taking_the_player_with_me = false
 
+# helper vars for just knowing which direction I was thrown. only relevant if projectile = true
+# doesn't actually control physics (see walk_direction, grav, and jump_force for that... weird)
+var thrown_direction = Vector2(0, 0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process(true)
@@ -33,7 +37,8 @@ func _ready():
         should_collide_ceil = false
         should_collide_floor = false
         should_collide_horizontally = false
- 
+
+var doing_a_final_hit = false
 func _process(delta):
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
         queue_free()
@@ -70,7 +75,8 @@ func _process(delta):
             die()
     if projectile:
         var has_hit_something = hitStuff(delta)
-        if has_hit_something or horizontal_collision or vertical_collision: # ((horizontal_collision or vertical_collision) and level.player.glitch_form != global.GlitchForm.WALK_THROUGH_WALLS):
+        if doing_a_final_hit:
+            oneMoreHit(delta)
             landSound.play()
             grav = 60
             walk_direction = Vector2(0, 0)
@@ -88,6 +94,12 @@ func _process(delta):
                 level.player.has_broom_flown = true
                 level.player.has_landed_since_last_flight = false
                 taking_the_player_with_me = false
+        elif has_hit_something or horizontal_collision or vertical_collision: # ((horizontal_collision or vertical_collision) and level.player.glitch_form != global.GlitchForm.WALK_THROUGH_WALLS):
+            doing_a_final_hit = true
+            physics_state = PhysicsState.IGNORE_PHYSICS
+            global_transform.origin.x += thrown_direction.x * 1
+            global_transform.origin.y += thrown_direction.y * 1 
+            return
         elif taking_the_player_with_me:
             level.player.on_ground = false
             level.player.global_transform.origin = self.global_transform.origin
@@ -118,6 +130,17 @@ func _process(delta):
         if return_timer >= return_time_limit:
             returning = true
             on_ground = false
+
+func oneMoreHit(delta):
+    # give me one last chance to hit QuestionBlocks and anything else that's clustered up
+    # var prev_origin = global_transform.origin
+    # get_node("SecretAnimationPlayer").play("finalHit")
+    collisionShape.translation = Vector3(0, 0, 0)
+    collisionShape.shape.height = 3
+    collisionShape.shape.radius = 1.5
+    hitStuff(delta)
+    # global.memory["fail"].fail = "fail"
+    # global_transform.origin = prev_origin
 
 func die():
     if is_dying:
@@ -215,18 +238,14 @@ func hitStuff(_delta):
         elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
             if not area.get_node("..").am_i_dying:
                 area.get_node("..").ouchies(global_transform.origin)
-                print("33")
                 # my_broom_owner.has_sweeped_glitch = true
                 level.summonSmokeClouds(global_transform.origin, 5, true, true)
                 # my_broom_owner.getSmacked()
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-            print("...")
             if area.get_node("..").notOuchies(global_transform.origin):
-                print("okay...")
                 my_broom_owner.getSmacked()
                 has_hit_something = true
-            print("okay... 2")
                 
             # # TODO kill glitches or "free" them like glitch slug...
             
@@ -240,7 +259,6 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 if smackResult == null:
                     has_hit_something = true
-                print("stop")
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/SpellsTreasures/FallenBroom.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -95,6 +95,66 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Area/CollisionShape:shape:height")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "AirSpinReverse"
@@ -143,6 +203,66 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area/CollisionShape:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Area/CollisionShape:shape:height")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -287,6 +407,66 @@ tracks/6/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Area:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Area/CollisionShape:translation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Area/CollisionShape:shape:height")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=59]
 resource_name = "die"
@@ -338,6 +518,118 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "finalHit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3DReal:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DReal:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, -0.6145, 0.125 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DReal:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/CollisionShape:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Area/CollisionShape:shape:height")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Area/CollisionShape:shape:radius")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.5 ]
 }
 
 [sub_resource type="Animation" id=52]
@@ -663,6 +955,7 @@ anims/AirSpinReverse = SubResource( 46 )
 anims/GET = SubResource( 51 )
 anims/RESET = SubResource( 44 )
 anims/die = SubResource( 59 )
+anims/finalHit = SubResource( 60 )
 anims/getItem = SubResource( 52 )
 anims/idle = SubResource( 53 )
 anims/isStaticInLevel = SubResource( 55 )

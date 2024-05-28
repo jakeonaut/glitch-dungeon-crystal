@@ -223,6 +223,8 @@ func tryToRespawn():
         global.memory["active_save_point_x"], 
         global.memory["active_save_point_y"], 
         global.memory["active_save_point_z"])
+      if global.isEnteringRoom:
+        player.global_transform.origin.y += 1
       gameCamera.rotation_degrees.y = global.cameraRotation
       player.last_grounded_pos = Vector3(player.global_transform.origin)
     elif global.memory.has("room_save_point_x"):

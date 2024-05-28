@@ -941,7 +941,7 @@ func processMoleLogic(delta):
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
     return
-  spellbookGlitchSprite.visible = true
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL
   transformation = TransformationState.NORMAL
   global_transform.origin.y -= 2
   summonSmokeClouds(5, true, true, 0)
@@ -1644,13 +1644,16 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
         fallenBroom.pressing_jump = true
         fallenBroom.grav = 0
         fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
+        fallenBroom.thrown_direction.y = 1
       elif Input.is_action_pressed("ui_down"):
         fallenBroom.walk_speed *= .7
         fallenBroom.walk_direction = Vector2(x_direction, -1)
         fallenBroom.grav = 600
         fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
+        fallenBroom.thrown_direction.y = -1
       elif x_direction != 0:
         fallenBroom.walk_direction.x = x_direction
+      fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
     global.memory["broom"] = false
     # print(fallenBroom.walk_direction)
 
