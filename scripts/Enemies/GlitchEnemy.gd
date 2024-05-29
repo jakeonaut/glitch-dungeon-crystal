@@ -507,10 +507,9 @@ func getMushroomInfected(ignore_ancestor = false):
         if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null:
             print(mushroomAncestorRef.get_ref())
             mushroomAncestorRef.get_ref().getMushroomInfected(true)
-            return
+            return null
     if mushroom_infected and len(mushroomBabyRefs) > 0:
         for mushroomBabyRef in mushroomBabyRefs:
-            print(mushroomBabyRef.get_ref())
             if mushroomBabyRef.get_ref() != null:
                 mushroomBabyRef.get_ref().getMushroomInfected(true)
         return null
