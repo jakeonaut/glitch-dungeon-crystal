@@ -156,6 +156,8 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
+  if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
+    getABroom()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -210,6 +212,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
+  loseBroom()
   spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 3
   level.displaySpellMessageText("ghost")
@@ -1203,14 +1206,11 @@ var force_a_sweep = false
 func processBroomLogic(delta):
   if transformation == TransformationState.FISHY:
     return
-  if transformation == TransformationState.UNDERGROUND:
-    return
-  if transformation == TransformationState.UNDERGROUND_RETURNING:
-    return
   if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":
     return
   if interactionArea.has_activated_something and not force_a_sweep:
     return
+
 
   var can_throw_broom = global.memory["broomerang"]
 
@@ -1221,7 +1221,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or glitch_form == global.GlitchForm.INVISIBLE or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
@@ -1418,8 +1418,10 @@ func processBroomRenderLogic(_delta):
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
       # mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     
-  if physics_state == PhysicsState.OCCUPIED:
+  if physics_state == PhysicsState.OCCUPIED or glitch_form == global.GlitchForm.INVISIBLE:
     broomSpriteVisible.visible = false
+    if nesting_doll_state == global.NestingDoll.GRANDMA:
+      mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"] and not isHoldingMultiBroom():

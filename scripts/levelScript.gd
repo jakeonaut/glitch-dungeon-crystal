@@ -34,6 +34,7 @@ export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BE
 export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
+export var has_glitched_grimoire = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 
 export var display_title = "???"
@@ -74,6 +75,8 @@ func _ready_impl():
       global.memory["spellbookPage"].push_back(spellbook_spell)
       player.applyGlitch(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
+  if has_glitched_grimoire:
+    global.memory["glitched_grimoire"] = true
     
   if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true

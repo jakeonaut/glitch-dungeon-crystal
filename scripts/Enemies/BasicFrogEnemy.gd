@@ -12,6 +12,7 @@ var spawn_time_limit = 15
 export var is_static = false
 export var is_licker = false
 export var is_infected = false
+var is_fragile = false
 var was_infected = false
 
 var who_is_standing_on_me = {}
@@ -225,7 +226,8 @@ onready var degaussAniPlayer = get_node("DegaussAnimationPlayer") if has_node("D
 # @override
 func ouchies(broom_origin):
   is_infected = false
-  getSmacked(broom_origin)
+  if not pauseSelf:
+    getSmacked(broom_origin)
   last_palette = global.tidepool_palette
   mySprite.get_material_override().set_shader_param("enable_glitch", false)
   mySprite.get_material_override().set_shader_param("target_palette", last_palette)
@@ -235,6 +237,8 @@ func ouchies(broom_origin):
   if dieSound and not dieSound.is_playing():
     dieSound.pitch_scale = rand_range(0.8, 1.2)
     dieSound.play()
+  if is_fragile:
+    am_i_dying = true
 
 # @override
 func unsmack():
@@ -255,6 +259,8 @@ func getSmacked(broom_origin):
   # is_static = false
   pauseSelf = true
   on_ground = true
+  if is_infected:
+    ouchies(broom_origin)
   if notDieSound and not notDieSound.is_playing():
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()

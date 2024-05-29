@@ -3,21 +3,53 @@ extends "../GlitchEnemy.gd"
 var teleport_timer = 0
 var teleport_time_limit = 20
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var sparkleSprite = get_node("SparkleSprite3D")
 
 func _ready():
   set_process(true)
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  secretAniPlayer.queue("blinkOpen")
+  secretAniPlayer.queue("blinkClose")
 
 
+var spawn_timer = 0
+var spawn_time_limit = 5
 func _process(delta): 
-  if not secretAniPlayer.is_playing():
-    teleport_timer += (delta*11)
-    if teleport_timer >= teleport_time_limit:
-      teleport_timer = 0
-      secretAniPlayer.stop()
-      secretAniPlayer.clear_queue()
-      secretAniPlayer.queue("blinkClose")
-      secretAniPlayer.queue("hiddenTeleport")
-      secretAniPlayer.queue("blinkOpen")
+  if secretAniPlayer.assigned_animation == "blinkClose" and not secretAniPlayer.is_playing():
+    queue_free()
+    return
+  
+  spawn_timer += (delta*22)
+  if spawn_timer >= spawn_time_limit:
+    var newSprite = sparkleSprite.duplicate()
+    newSprite.should_fizzle_out = true
+    newSprite.visible = true
+    newSprite.transform.origin = Vector3(
+        stepify(rand_range(-1.0, 1.0), 0.125),
+        stepify(rand_range(0.5, 1.5), 0.125),
+        0
+    )
+    newSprite.updateBaseFrame(0, 0)
+    newSprite.max_frames = 2
+    add_child(newSprite)
+    spawn_timer = 0
 
-func randomTeleport():
+func ouchies(_broom_pos):
+  if am_i_dying:
+    return
+  am_i_dying = true
+  if dieSound != null: dieSound.play()
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  secretAniPlayer.queue("getHurt")
+  secretAniPlayer.queue("blinkClose")
+
+  var priestess = level.get_node("HighPriestessBoss")
+  priestess.getHurt()
+  
+
+func processDeath():
   pass
