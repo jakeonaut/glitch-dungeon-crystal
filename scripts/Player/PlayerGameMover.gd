@@ -517,6 +517,17 @@ func processJumpInputs(delta):
         
   .processJumpInputs(delta)
 
+func mushroomClone():
+  global_transform.origin.y += 1
+  if not on_ground:
+    global_transform.origin.y += 0.5
+  doubleJump()
+  var carcass = spawnACarcass()
+  carcass.broomSprite.visible = false
+  carcass.mushroomSprite.visible = false
+  infectSound.play()
+  glitchTickle()
+
 # @override
 func addJumpSmokeCloud(flip_flip_h = false):
   if transformation == TransformationState.FISHY:

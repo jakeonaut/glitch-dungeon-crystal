@@ -51,7 +51,6 @@ func _process(delta):
 func glitchSetSpritesAndCollision():
   pass
 
-
 func glitchSwitchSprite(_delta):
   pass
 
@@ -66,9 +65,9 @@ func getSmacked(broom_origin):
   level.summonSmokeClouds(smokeOrigin, 5)
   spawnFiveSpores()
 
-func passiveActivate(delta, _is_player):
-  getSmacked(self.global_transform.origin)
-  getPlayer().getMushroomInfected()
+func passiveActivate(_delta, _is_player):
+  # getSmacked(self.global_transform.origin)
+  # getPlayer().getMushroomInfected()
   # getPlayer().tryDieToEnemy(delta, true, false, false)
   pass
 

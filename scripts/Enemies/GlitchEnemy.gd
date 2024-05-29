@@ -321,6 +321,10 @@ func processDeath():
 #         glitch_switch_time_limit = rand_range(30.0, 50.0)
 #         glitch_switch_timer = 0
 
+# @override
+func alignMySprite():
+    pass 
+
 func glitchSetSpritesAndCollision():
     mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
 

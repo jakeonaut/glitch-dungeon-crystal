@@ -454,4 +454,4 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods5.tscn"
 [node name="Level14" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -4, 0 )
 frame = 50
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"

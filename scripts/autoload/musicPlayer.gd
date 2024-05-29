@@ -146,10 +146,12 @@ func conductFromScenePath(path):
             changeSongPitch(0.9)
             default_song_pitch = 0.9
             return
-    elif path.find("Haven2") > 0 or path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
-        tryToPlay(priestessPlayer)
+    elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
+        tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
+    elif path.find("Haven2") > 0:
+        tryToPlay(townThemePlayer)
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:
@@ -162,15 +164,13 @@ func conductFromScenePath(path):
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
     elif path.find("Casino") > 0 or path.find("Medievel") > 0 or path.find("Piranesi") > 0 or path.find("Grimoire") > 0:
-        tryToPlay(poisonThemePlayer)
-    elif path.find("Suburb") > 0:
+        tryToPlay(casinoThemePlayer)
+    elif path.find("Suburb") > 0 or path.find("Poison") > 0 or path.find("Toxic") > 0:
         tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0:
         tryToPlay(oceanThemePlayer)
     elif path.find("Desert") > 0 or path.find("ShiftingSand") > 0:
         tryToPlay(exploreThemePlayer)
-    elif path.find("Poison") > 0 or path.find("Toxic") > 0:
-        tryToPlay(casinoThemePlayer)
     elif path.find("Swamp") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:

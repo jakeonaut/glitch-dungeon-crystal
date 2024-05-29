@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://assets/music/sfx005_cavelizards.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/music/explore.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/eba_leaves.wav" type="AudioStream" id=23]
-[ext_resource path="res://assets/music/chordloop003_midnight.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/DELETEME/03 continue.mp3" type="AudioStream" id=25]
 
 [node name="musicPlayer" type="Node"]
@@ -107,8 +106,8 @@ stream = ExtResource( 21 )
 volume_db = -10.0
 
 [node name="TownThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 24 )
-volume_db = -20.0
+stream = ExtResource( 10 )
+volume_db = -15.0
 
 [node name="BossThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
