@@ -7,7 +7,7 @@ var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn"
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
 
-var big_spawn_timer = 59
+var big_spawn_timer = 30
 var big_spawn_time_limit = 60
 var num_spawns = 0
 var num_spawn_limit = 3
@@ -22,6 +22,8 @@ enum BossPhase {
     FROG_PLAGUE_READY,
     FROG_PLAGUE_SPAWNING,
     FROG_PLAGUE_WAITING,
+    CRONE_CHASE,
+    COMPLETE,
 }
 var boss_phase = BossPhase.CASTING
 
@@ -45,6 +47,7 @@ func _ready():
         landing.visible = false
         landingArray.push_back(landing)
 
+var hp = 3
 func getHurt():
     mySprite.visible = true
     secretAniPlayer.stop()
@@ -54,18 +57,25 @@ func getHurt():
     big_spawn_timer = 0
     has_animated_attack = false
     landingArray.shuffle()
-    num_spawn_limit = len(landingArray)
 
-    if boss_phase == BossPhase.CASTING:
+    hp -= 1
+    if hp == 2:
+        num_spawn_limit = len(landingArray) / 2
+    elif hp == 1:
         boss_phase = BossPhase.FROG_PLAGUE_READY
-    elif boss_phase == BossPhase.FROG_PLAGUE_WAITING:
+    elif hp == 0:
         var num_frogs = len(frogArray)
         for _i in range(num_frogs):
             var frog = frogArray.pop_back()
             if frog != null:
                 frog.queue_free()
                 level.summonSmokeClouds(frog.global_transform.origin, 1, false, true)
+        num_spawn_limit = len(landingArray)
         boss_phase = BossPhase.CASTING
+    elif hp == -1:
+        boss_phase = BossPhase.CRONE_CHASE
+    elif hp == -3:
+        boss_phase = BossPhase.COMPLETE
 
 func _process(delta):
     if global.pauseGame:
