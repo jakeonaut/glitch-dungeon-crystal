@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=19]
@@ -445,6 +446,10 @@ anims/stand = SubResource( 60 )
 
 [node name="CollisionShape" parent="Viewport/level/Vileplume/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 61 )
+
+[node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -2, 0 )
+spawned_object_path = "res://sceneObjects/Enemies/BasicShroomEnemy.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

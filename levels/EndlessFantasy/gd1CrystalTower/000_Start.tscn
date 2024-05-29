@@ -151,7 +151,7 @@ shader_param/target_palette = ExtResource( 22 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 26 )
-show_dither_effect = true
+show_crt_effect = true
 tileset_type = 2
 has_spellbook_page = true
 
