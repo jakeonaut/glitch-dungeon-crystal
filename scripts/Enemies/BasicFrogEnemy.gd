@@ -248,8 +248,8 @@ func unsmack():
     .unsmack()
 
 # @override
-func getSmacked(broom_origin):
-  .getSmacked(broom_origin)
+func getSmacked(broom_origin, silently = false):
+  .getSmacked(broom_origin, silently)
   behavior_jumping = true
   behavior_walking = not is_static
   jump_timer = 0

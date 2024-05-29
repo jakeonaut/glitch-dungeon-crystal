@@ -23,8 +23,8 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
-func getSmacked(_broom_origin):
-  if smackSound: smackSound.play()
+func getSmacked(_broom_origin, silently = false):
+  if not silently and smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
     material.set_shader_param("time_influence", 35)

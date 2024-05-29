@@ -178,7 +178,7 @@ func fallthroughCollisionActivate(_friend):
   pass
 
 
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin, _silently = false):
   if not can_be_smacked:
     return false
   if is_smacked:

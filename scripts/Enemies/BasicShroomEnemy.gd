@@ -43,8 +43,20 @@ func _process(_delta):
   spriteYAlignment = 0
   glitchSetSpritesAndCollision()
 
+  infectGlitchEnemies()
+
 func glitchSwitchSprite(_delta):
   pass
+
+func infectGlitchEnemies():
+  var areas = smallInteractionArea.get_overlapping_areas()
+  for area in areas:
+    if area.is_in_group("enemies"):
+      var oldEnemy = area.get_node("..")
+      oldEnemy.getMushroomInfected()
+      dieSound.play()
+      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+      queue_free()
 
 # @override
 func tryDieToOffscreenCamera():

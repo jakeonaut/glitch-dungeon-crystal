@@ -553,7 +553,7 @@ func processInputs(delta):
     ladderUpdateTargetLastGroundedY()
 
 # dummy
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin, _silently = false):
   pass
 
 # dummy

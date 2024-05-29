@@ -1150,7 +1150,7 @@ export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 4
-func getSmacked(_broom_origin = Vector3(0, 0, 0)):
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
   mySprite.material_override.set_shader_param("normal_offset", normal_offset)

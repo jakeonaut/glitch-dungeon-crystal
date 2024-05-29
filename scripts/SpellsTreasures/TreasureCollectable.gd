@@ -179,11 +179,11 @@ func collectMe():
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin, silently = false):
   if is_smacked:
     return false
 
-  if smackSound and not smackSound.is_playing(): smackSound.play()
+  if not silently and smackSound and not smackSound.is_playing(): smackSound.play()
   if chestSprite:
     chestSprite.material_override.set_shader_param("time_influence", time_influence)
     chestSprite.material_override.set_shader_param("y_div", y_div)

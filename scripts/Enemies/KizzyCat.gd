@@ -85,11 +85,11 @@ func landed():
   behavior_jumping = false
 
 # @override
-func getSmacked(broom_origin):
+func getSmacked(broom_origin, silently = false):
   if is_smacked or has_ever_been_smacked:
     return false
   poofSound.play()
-  .getSmacked(broom_origin)
+  .getSmacked(broom_origin, silently)
   if global.memory["magic_lantern"]:
     level.player.getSmacked()
     level.player.physics_state = PhysicsState.OCCUPIED

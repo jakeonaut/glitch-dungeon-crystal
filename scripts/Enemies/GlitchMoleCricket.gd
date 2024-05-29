@@ -52,10 +52,10 @@ func _ready():
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
     myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.2
 
-func getSmacked(broom_origin):
+func getSmacked(broom_origin, silently = false):
     if has_ever_been_smacked or mole_state == MoleState.RESPAWN:
         return
-    .getSmacked(broom_origin)
+    .getSmacked(broom_origin, silently)
     walk_speed = 0
     grav = 0
     walk_direction.x = -1
