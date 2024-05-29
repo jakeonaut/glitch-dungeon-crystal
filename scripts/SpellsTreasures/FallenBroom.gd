@@ -155,11 +155,11 @@ func die():
     is_dying = true
     
 func tryReturnIfTooFarFromPlayer():
-    if is_static_in_level or was_projectile or projectile:
+    if is_static_in_level:
         return
         
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
-    if distance >= 10:
+    if distance >= 20:
         returning = true
 
     if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:

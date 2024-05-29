@@ -102,10 +102,13 @@ func shouldIBeActive():
   else:
     return true
 
-func isActive(_debug=false):
+func isActive(debug=false):
+  if debug:
+    print(shouldIBeActive())
   return self.visible and shouldIBeActive()
 
 func activate(is_player):
+  print("hey!")
   passiveActivate(0, is_player)
   return false
 
@@ -118,17 +121,19 @@ func passiveActivate(_delta, _is_player):
   mySprite.global_transform.origin.x = level.player.global_transform.origin.x
   mySprite.global_transform.origin.y = level.player.global_transform.origin.y + 1
   level.player.glitchTickle(global.memory["mp"] < global.memory["max_mp"])
-  if not isActive():
-    if global.memory["mp"] < global.memory["max_mp"]:
-      if level.player.glitch_form != my_glitch_form:
-        collectSound.pitch_scale = 0.5
-        collectSound.play()
-      elif global.memory["mp"] < global.memory["max_mp"]-2:
-        level.player.rechargeSound.play()
-      if global.memory["mp"] == 0:
-        level.player.restoreGlitchAndMP()
-      num_sparkles_spawned = 0
-      global.memory["mp"] = global.memory["max_mp"]
+  print("hi hi")
+  if not isActive(true):
+    print("!?")
+    # if global.memory["mp"] < global.memory["max_mp"]:
+    #   if level.player.glitch_form != my_glitch_form:
+    #     collectSound.pitch_scale = 0.5
+    #     collectSound.play()
+    #   elif global.memory["mp"] < global.memory["max_mp"]-2:
+    #     level.player.rechargeSound.play()
+    #   if global.memory["mp"] == 0:
+    #     level.player.restoreGlitchAndMP()
+    #   num_sparkles_spawned = 0
+    #   global.memory["mp"] = global.memory["max_mp"]
     return
 
   if global.memory.has("spellbookPage"):
@@ -136,6 +141,7 @@ func passiveActivate(_delta, _is_player):
     collectSound.play()
 
   if level.player.glitch_form != my_glitch_form:
+    print("hi hi?")
     level.player.getSmacked()
     if my_glitch_form == global.GlitchForm.FLOOR:
       level.player.on_ground = true
