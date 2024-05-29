@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=2]
+[gd_scene load_steps=170 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -28,8 +28,13 @@
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=29]
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=272]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=273]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -85,6 +90,14 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=274]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=275]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -10263,9 +10276,11 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tsc
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
-shape = SubResource( 17 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 272 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 273 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -10275,7 +10290,7 @@ shape = SubResource( 23 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.7, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/FlingAndFlung.tscn"
 num_keys_unlock = 1
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
@@ -10286,9 +10301,11 @@ anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
-shape = SubResource( 17 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 274 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 275 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )

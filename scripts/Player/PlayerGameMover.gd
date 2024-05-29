@@ -527,8 +527,9 @@ func addJumpSmokeCloud(flip_flip_h = false):
     return
   .addJumpSmokeCloud(flip_flip_h)
 
+onready var sporeSound = get_node("Sounds/SporeSound")
 func playStickOnWallSound():
-  runSound.play()
+  sporeSound.play()
 
 onready var tickleSound = get_node("Sounds/TickleSound")
 var glitch_tickle_timer = 0

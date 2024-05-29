@@ -393,6 +393,8 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 6 )
 show_dither_effect = true
 tileset_type = 2
+has_spellbook_page = true
+has_glitched_grimoire = true
 display_title = ""
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 19 )]

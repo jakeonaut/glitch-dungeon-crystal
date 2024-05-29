@@ -22,6 +22,7 @@ var my_speed_start = null
 var my_speed_max = null
 var my_acc = 5
 var has_set_origin = false
+var can_purify = false
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")

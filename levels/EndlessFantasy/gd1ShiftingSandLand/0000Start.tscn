@@ -376,7 +376,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 1.1, 0 )
 frame = 37
 
 [node name="DustFarmer" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 9.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 9.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )

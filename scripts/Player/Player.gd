@@ -90,13 +90,16 @@ func tryPlayFootstepSound():
     sporeSound.play()
     return
   if on_ground or glitch_form == global.GlitchForm.LADDER:
-    if nesting_doll_state == global.NestingDoll.MATRIARCH:
-      footstepSound.pitch_scale = rand_range(0.6, 0.8)
-    elif nesting_doll_state == global.NestingDoll.BABY:
-      footstepSound.pitch_scale = rand_range(1.2, 1.3)
+    if on_ground and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
+      if nesting_doll_state == global.NestingDoll.MATRIARCH:
+        footstepSound.pitch_scale = rand_range(0.6, 0.8)
+      elif nesting_doll_state == global.NestingDoll.BABY:
+        footstepSound.pitch_scale = rand_range(1.2, 1.3)
+      else:
+        footstepSound.pitch_scale = rand_range(0.9, 1.1)
+      footstepSound.play()
     else:
-      footstepSound.pitch_scale = rand_range(0.9, 1.1)
-    footstepSound.play()
+      sporeSound.play()
 
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
@@ -705,7 +708,7 @@ func loseBroom():
     mySprite.flip_h = not mySprite.flip_h
 
 var fish_broom_timer = 0
-var fish_broom_time_limit = 15
+var fish_broom_time_limit = 2
 var has_fish_broom = true
 func processFishyLogic(delta):
   if not global.memory["zora_flippers"]:
@@ -721,16 +724,21 @@ func processFishyLogic(delta):
     if (not is_touching_water and not was_touching_water):
       getFishyCured()
       gravitySound.play()
-    if global.memory["broomerang"] and Input.is_action_just_pressed("sub_action_button") and has_fish_broom:
-      global.memory["broom"] = true
-      summonFallenBroom(true, false, false)
-      global.memory["broom"] = false
-      has_fish_broom = false
-    if not has_fish_broom:
-      fish_broom_timer += (delta*11)
-      if fish_broom_timer >= fish_broom_time_limit:
-        fish_broom_timer = 0
-        has_fish_broom = true
+    if Input.is_action_just_pressed("sub_action_button") and has_fish_broom:
+      var bubble = bubbleRes.instance()
+      bubble.is_horizontal = true
+      bubble.horizontal_direction = 2
+      bubble.can_purify = true
+      if mySprite.flip_h:
+        bubble.horizontal_direction = -2
+      level.add_child(bubble)
+      bubble.global_transform.origin = global_transform.origin
+      bubble.global_transform.origin.x += bubble.horizontal_direction
+      bubble.my_original_pos = bubble.global_transform.origin.y
+      bubble.randomizeTargetPos()
+
+      blinkSound.pitch_scale = rand_range(0.8, 1.2)
+      blinkSound.play()
 
 
   # weird recovery
@@ -1317,7 +1325,6 @@ func processBroomLogic(delta):
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
-onready var sporeSound = get_node("Sounds/SporeSound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):

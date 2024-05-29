@@ -6153,7 +6153,7 @@ volume_db = -5.0
 [node name="RunSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 28 )
 volume_db = -25.0
-pitch_scale = 0.5
+pitch_scale = 0.25
 
 [node name="FastStepSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 60 )
