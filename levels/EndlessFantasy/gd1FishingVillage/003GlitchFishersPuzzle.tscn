@@ -1829,7 +1829,7 @@ is_licker = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 10, 0 )
 
 [node name="BabushkaCat" parent="Viewport/level/QuestionBlock4" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035099, -2.9241, 0.0630069 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035099, -1.9241, 0.0630069 )
 bbText = "*meow*
 (the fish here are tasty)"
 dont_recolor_me = true
@@ -2195,6 +2195,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 29, 0 )
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 65, 26, -1 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 18, 0 )
 
 [node name="Viewport2" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

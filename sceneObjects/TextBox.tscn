@@ -143,6 +143,7 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 tab_size = 2
 scroll_active = false
+scroll_following = true
 
 [node name="NextPrompt" type="Sprite" parent="TextBox"]
 material = SubResource( 3 )

@@ -94,6 +94,7 @@ func tinify():
 func untinify():
   is_tiny = false
   self.texture = bg_texture
+  textNode.rect_clip_content = true
   # get_node("Portrait").visible = true
   get_node("ColorRect").visible = true
   setTextBoxPosition()
@@ -172,9 +173,9 @@ func _process(delta):
       if textNode.visible_characters >= len(stripped_text):
         pass
       elif stripped_text[textNode.visible_characters - 1] == ",":
-        time_limit *= 10
+        time_limit *= 5
       elif stripped_text[textNode.visible_characters - 1] == ".":
-        time_limit *= 20
+        time_limit *= 10
 
       if text_timer >= time_limit and textNode.visible_characters < len(stripped_text):
         appendNextTextCharacter()
@@ -249,6 +250,9 @@ func resetPrompts():
 
 var is_interact_prompt = false
 func showInteractPrompt():
+  if global.activeInteractor == self:
+    return
+    
   var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
   if not is_interact_prompt:
     textNode.bbcode_text = "[lb]" + sweep_button_text + "[rb]"
@@ -374,7 +378,7 @@ func interact():
     if isWaitingForEndPrompt():
       hideTextbox()
     elif isWaitingForNextPrompt():
-      textNode.scroll_to_line(currently_scrolled_line + 1)
+      textNode.scroll_to_line(currently_scrolled_line + 2)
       currently_scrolled_line += 1
       now_were_scrolling = true
       nextDialogSound.play()
