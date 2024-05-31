@@ -504,18 +504,19 @@ bbText = "See MimicDialogStartSound.gd"
 is_important = true
 is_really_important = true
 dont_recolor_me = true
+showYesNoOptions = true
 
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
 
-[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 18 )
 
-[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="14"]
 stream = ExtResource( 6 )
 volume_db = -15.0
 
-[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 9 )
 
 [node name="Sprite3D" parent="MimicNPC" index="3"]
@@ -582,17 +583,17 @@ shape = SubResource( 119 )
 
 [node name="NPC TextBox" parent="TreasureSpellCollectable" instance=ExtResource( 21 )]
 
-[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 19 )
 
-[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="14"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="15"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
 stream = null
 script = ExtResource( 10 )
 

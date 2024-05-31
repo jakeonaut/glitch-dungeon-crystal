@@ -2,7 +2,7 @@ extends TextureRect
 
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
-onready var textNode = get_node("Text")
+onready var textNode = get_node("ScrollContainer/Text")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
@@ -39,6 +39,14 @@ var adjusted_tiny_x_pos = 0
 var target_origin = Vector3(0, 0, 0)
 var is_fast_text = false
 
+var showYesNoOptions = false
+onready var yesButton = get_node("YesButton")
+onready var yesButtonCursor = get_node("YesButton/CursorSprite")
+onready var yesButtonText = get_node("YesButton/TextPrompt")
+onready var noButton = get_node("NoButton")
+onready var noButtonCursor = get_node("NoButton/CursorSprite")
+onready var noButtonText = get_node("NoButton/TextPrompt")
+var selectedYesNoOption = true
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
 onready var textPrompt = get_node("TextPrompt")
@@ -154,6 +162,25 @@ func _process(delta):
       tryToHide(delta)
       
     if isWaitingForEndPrompt():
+      if showYesNoOptions and not is_interact_prompt:
+        if Input.is_action_just_pressed("ui_left"):
+          selectedYesNoOption = true
+        elif Input.is_action_just_pressed("ui_right"):
+          selectedYesNoOption = false
+        yesButton.visible = true
+        noButton.visible = true
+        yesButtonCursor.visible = selectedYesNoOption
+        noButtonCursor.visible = not selectedYesNoOption
+        if selectedYesNoOption:
+          yesButtonText.bbcode_text = "[center][wave]yes[/wave][/center]"
+          noButtonText.bbcode_text = "[center]no.[/center]"
+        else:
+          yesButtonText.bbcode_text = "[center]yes[/center]"
+          noButtonText.bbcode_text = "[center][wave]no.[/wave][/center]"
+      else:
+        yesButton.visible = false
+        noButton.visible = false
+
       if textboxParent.get_ref():
         textboxParent.get_ref().setGlobalMemoryOfHasSpoken()
       if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
@@ -162,9 +189,11 @@ func _process(delta):
       endPrompt.visible = not is_tiny and not floating_text
       has_been_shown = true
       is_really_important = false
-      
-    elif isWaitingForNextPrompt():
-      nextPrompt.visible = not is_tiny and not floating_text
+    else:
+      yesButton.visible = false
+      noButton.visible = false
+      if isWaitingForNextPrompt():
+        nextPrompt.visible = not is_tiny and not floating_text
 
 
     if (not isWaitingForNextPrompt() and not isWaitingForEndPrompt()) or ui_should_continue:
@@ -212,10 +241,7 @@ func appendNextTextCharacter(play_sound = true):
         currently_scrolled_line += 1
       elif stripped_text[tindex] == "\n":
         num_newlines += 1
-        # print(num_newlines)
         if num_newlines < 3 and now_were_scrolling:
-          # print("scroll")
-          # print(currently_scrolled_line + 1)
           textNode.scroll_to_line(currently_scrolled_line + 1)
           currently_scrolled_line += 1
       else:
@@ -275,12 +301,14 @@ func hideInteractPrompt():
       
 var tindex = -1
 func showTextbox():
+  selectedYesNoOption = true
   dialogStartSound.play()
   dialogStartSound.activateScript()
   # if text_final.find("•") == -1 and not text_final == "":
   #   text_final = "•" + text_final
   textNode.visible_characters = 0
 
+  textNode.scroll_to_line(0)
   textNode.bbcode_text = text_final
   tindex = -1
   stripped_text = global.strip_bbcode(textNode.bbcode_text)
@@ -327,6 +355,8 @@ func showTextbox():
     resetPrompts()
     
 func hideTextbox():
+  yesButton.visible = false
+  noButton.visible = false
   has_preactivated = false
   self.hide()
   if textboxParent.get_ref():
@@ -378,7 +408,7 @@ func interact():
     if isWaitingForEndPrompt():
       hideTextbox()
     elif isWaitingForNextPrompt():
-      textNode.scroll_to_line(currently_scrolled_line + 2)
+      textNode.scroll_to_line(currently_scrolled_line + 1)
       currently_scrolled_line += 1
       now_were_scrolling = true
       nextDialogSound.play()

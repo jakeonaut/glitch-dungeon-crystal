@@ -7,9 +7,10 @@ export(String, MULTILINE) var bbText = ""
 export(Texture) var portrait
 var is_immediate = false
 var floating_text = false
+var showYesNoOptions = false
 
 onready var textBox = get_node("TextBox")
-onready var textBoxtext = get_node("TextBox/Text")
+onready var textBoxtext = get_node("TextBox/ScrollContainer/Text")
 onready var textBoxportrait = get_node("TextBox/PortraitColor/ColorRect2/ColorRect3/ColorRect4/Portrait")
 
 var type = "textBoxContainer"
@@ -34,10 +35,9 @@ func setVars():
             nextTextBoxPathStr += nextTextBoxPath.get_name(i)
         textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
 
-    if is_immediate:
-        textBox.is_immediate = is_immediate
-    if floating_text:
-        textBox.floating_text = floating_text
+    textBox.is_immediate = is_immediate
+    textBox.floating_text = floating_text
+    textBox.showYesNoOptions = showYesNoOptions
 
 func InteractActivate(_is_player=true):
     return interact()

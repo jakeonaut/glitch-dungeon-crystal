@@ -38,6 +38,7 @@ var pressing_jump = false
 var just_pressed_jump = false 
 export var is_active = true
 
+export var showYesNoOptions = false
 export var tiny_textbox = false
 export var is_static_in_level = true
 
@@ -72,6 +73,7 @@ func _ready():
     textBoxContainer.portrait = portrait
   textBoxContainer.is_immediate = is_immediate
   textBoxContainer.floating_text = floating_text
+  textBoxContainer.showYesNoOptions = showYesNoOptions
   if floating_text:
     grav = 0
   if nextTextBoxPath != null and not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
@@ -91,6 +93,7 @@ func _ready():
   textBox.is_really_important = is_really_important
   textBox.can_camera_zoom = can_camera_zoom
   textBox.floating_text = floating_text
+  textBox.showYesNoOptions = showYesNoOptions
   if tiny_textbox or floating_text:
     textBox.tinify()
   textBox.is_fast_text = is_fast_text

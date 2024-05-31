@@ -29,7 +29,7 @@
 [ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=27]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=28]
 
-[sub_resource type="ArrayMesh" id=60]
+[sub_resource type="ArrayMesh" id=62]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1113,9 +1113,9 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 23 )
 
-[sub_resource type="BoxShape" id=58]
+[sub_resource type="BoxShape" id=63]
 resource_local_to_scene = true
-extents = Vector3( 3, 2, 1.3 )
+extents = Vector3( 3, 3, 1.3 )
 
 [sub_resource type="BoxShape" id=59]
 resource_local_to_scene = true
@@ -1144,7 +1144,7 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 60 )
+mesh = SubResource( 62 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 
@@ -1261,25 +1261,25 @@ script = ExtResource( 20 )
 minSize = 150
 maxSize = 250
 
-[node name="NPC2" parent="." instance=ExtResource( 19 )]
-visible = false
+[node name="ConfirmNPC" parent="." instance=ExtResource( 19 )]
 bbText = "•offer 20 crystal shards
 •to purify the crystal?"
 can_activate = false
+showYesNoOptions = true
 
-[node name="CollisionShape" parent="NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 58 )
+[node name="CollisionShape" parent="ConfirmNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 63 )
 
-[node name="AbortSound" parent="NPC2/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="ConfirmNPC/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 25 )
 
-[node name="Sprite3D" parent="NPC2" index="3"]
+[node name="Sprite3D" parent="ConfirmNPC" index="3"]
 pixel_size = 0.0001
 
-[node name="CollisionShape" parent="NPC2/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="ConfirmNPC/FallthroughSolid" index="0"]
 shape = SubResource( 59 )
 
-[node name="InteractPrompt" parent="NPC2" index="6"]
+[node name="InteractPrompt" parent="ConfirmNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, -0.03, 3.93185, -1.64705 )
 
 [node name="GlitchAura" parent="." instance=ExtResource( 26 )]
@@ -1288,6 +1288,6 @@ target_path = NodePath("..")
 [node name="ColorRect" parent="GlitchAura" index="0"]
 material = SubResource( 61 )
 
-[editable path="NPC2"]
-[editable path="NPC2/NPC TextBox"]
+[editable path="ConfirmNPC"]
+[editable path="ConfirmNPC/NPC TextBox"]
 [editable path="GlitchAura"]
