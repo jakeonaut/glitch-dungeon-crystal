@@ -1657,7 +1657,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=245]
+[sub_resource type="ArrayMesh" id=242]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2550,7 +2550,7 @@ tracks/1/keys = {
 
 [sub_resource type="BoxShape" id=243]
 resource_local_to_scene = true
-extents = Vector3( 3, 2, 1.3 )
+extents = Vector3( 3, 3, 1.3 )
 
 [sub_resource type="BoxShape" id=244]
 resource_local_to_scene = true
@@ -2710,7 +2710,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
 pitch_scale = 1.1
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
@@ -2981,56 +2981,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/ChickenNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 147 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/ChickenNPC" index="3"]
 material_override = SubResource( 202 )
 frame = 28
@@ -3157,7 +3107,7 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 245 )
+mesh = SubResource( 242 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal" index="12"]
 anims/RESET = SubResource( 221 )
@@ -3165,10 +3115,10 @@ anims/lightUp = SubResource( 222 )
 anims/lightUpQuiet = SubResource( 223 )
 anims/omen = SubResource( 224 )
 
-[node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC2/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/CubeCrystal/ConfirmNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 243 )
 
-[node name="CollisionShape" parent="Viewport/level/CubeCrystal/NPC2/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/CubeCrystal/ConfirmNPC/FallthroughSolid" index="0"]
 shape = SubResource( 244 )
 
 [node name="QuietSavePoint" parent="Viewport/level" instance=ExtResource( 42 )]
@@ -3253,8 +3203,9 @@ flip_v = true
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/CubeCrystal"]
-[editable path="Viewport/level/CubeCrystal/NPC2"]
-[editable path="Viewport/level/CubeCrystal/NPC2/NPC TextBox"]
+[editable path="Viewport/level/CubeCrystal/ConfirmNPC"]
+[editable path="Viewport/level/CubeCrystal/ConfirmNPC/NPC TextBox"]
+[editable path="Viewport/level/CubeCrystal/GlitchAura"]
 [editable path="Viewport/level/QuietSavePoint"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

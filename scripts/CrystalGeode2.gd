@@ -20,9 +20,9 @@ export(String, FILE) var path # unused atm
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
 
-var num_gems_needed = 20
+export var num_gems_needed = 20
 
-onready var npc2 = get_node("NPC2")
+onready var confirmNPC = get_node("ConfirmNPC")
 
 var levelTiles = null
 func getLevelTiles():
@@ -99,7 +99,7 @@ func passiveActivate(_delta, is_player):
     # if not global.memory["broom"]:
     #     if not notGetHitSound.is_playing(): notGetHitSound.play()
     #     return
-    # npc2.activate(is_player)
+    # confirmNPC.activate(is_player)
     pass
 
 func getPurified():
