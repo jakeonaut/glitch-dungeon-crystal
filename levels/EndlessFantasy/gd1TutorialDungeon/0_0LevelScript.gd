@@ -1,7 +1,7 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var npcGranny = get_node("NPC") if has_node("NPC") else null
-onready var frogCroneNpc = weakref(get_node("GlitchTileSpawner/NPC3"))
+# onready var npcGranny = get_node("NPC") if has_node("NPC") else null
+# onready var frogCroneNpc = weakref(get_node("GlitchTileSpawner/NPC3"))
 var original_granny_text = ""
 var is_start_of_game = true
 var has_decided = false
@@ -22,7 +22,8 @@ func setUpRoomInitializationOverride():
     uiLayer.get_node("GlitchStatusRect").visible = false
   has_decided = true
   
-func _process(delta):
+var showInstructions = false
+func _process(_delta):
   # ._process(delta) implicit
 
   if not has_decided:
@@ -41,12 +42,7 @@ func _process(delta):
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false
       player.textBox.interact()
-        
-
-  if not global.isPauseMenuOpen:
-    if not musicPlayer.restZonePlayer.is_playing():
-      if frogCroneNpc.get_ref() and frogCroneNpc.get_ref().visible:
-        musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
-    elif not musicPlayer.dungeonThemePlayer2.is_playing():
-      if not (frogCroneNpc.get_ref() and frogCroneNpc.get_ref().visible):
-        musicPlayer.tryToPlay(musicPlayer.dungeonThemePlayer2)
+      showInstructions = true
+  
+  if showInstructions and global.activeInteractor == null:
+    uiLayer.get_node("PressC").visible = true

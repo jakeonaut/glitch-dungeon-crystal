@@ -1212,6 +1212,8 @@ func processBagLogic(_delta):
 
 var force_a_sweep = false
 func processBroomLogic(delta):
+  if pauseInput:
+    return
   if transformation == TransformationState.FISHY:
     return
   if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":

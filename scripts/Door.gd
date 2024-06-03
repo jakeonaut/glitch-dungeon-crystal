@@ -77,11 +77,11 @@ func _ready():
     mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
 
   id = self.generateId()
-  var generateChickens = false
+  var _generateChickens = false
   if (is_locked or should_lock) and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id):
     is_locked = false
     should_lock = false
-    generateChickens = true
+    _generateChickens = true
 
   animationPlayer.clear_queue()
   animationPlayer.stop()
@@ -122,7 +122,7 @@ func _ready():
     npc.can_activate = false
     npc.is_active = false
 
-  # if generateChickens and num_keys_unlock < 10:
+  # if _generateChickens and num_keys_unlock < 10:
   #   yield(get_tree().create_timer(0.5), "timeout")
   #   for _i in range(num_keys_unlock):
   #     spawnChicken()
@@ -375,7 +375,7 @@ func actuallyUnlockAndEnterDoor():
   global.pauseMoveInput = false
 
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, _is_player):
   return # just let player tryDieToOffscreenCamera handle it!!!
   # if is_passive and is_player:
   #   goThroughDoor()

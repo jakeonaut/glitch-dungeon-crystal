@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=2]
+[gd_scene load_steps=217 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=10]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=12]
-[ext_resource path="res://levels/EndlessFantasy/gd1/000PastoralSceneLevelScript.gd" type="Script" id=13]
+[ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=14]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=16]
@@ -23,11 +23,14 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=24]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=26]
 [ext_resource path="res://assets/palettes/green_palette_town2.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=28]
 [ext_resource path="res://assets/sprites/obelisk_sheet.png" type="Texture" id=29]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=30]
+[ext_resource path="res://levels/MainMenu.gd" type="Script" id=31]
 [ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=32]
 [ext_resource path="res://levels/EndlessFantasy/gd1/PastoralGramdmaDialogStartSound.gd" type="Script" id=33]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=34]
@@ -35,6 +38,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=37]
 [ext_resource path="res://assets/sounds/eba_earthquake1.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/sprites/logo2.png" type="Texture" id=39]
 [ext_resource path="res://levels/EndlessFantasy/gd1/PastoralGramdmaAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=43]
 
@@ -2840,13 +2844,790 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=70]
 viewport_path = NodePath("Viewport2")
 
+[sub_resource type="Animation" id=192]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 512 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=193]
+resource_name = "endCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 448.0, 512.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=194]
+resource_name = "startCutscene"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 512.0, 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 64.0 ]
+}
+
+[sub_resource type="Animation" id=195]
+resource_name = "startCutsceneImmediate"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CinematicBottomRect:margin_top")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 448.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CinematicTopRect:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 64.0 ]
+}
+
+[sub_resource type="ArrayMesh" id=216]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="Animation" id=197]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CubeContainer:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=198]
+resource_name = "floatAway"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CubeContainer:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 5 ), Vector3( 0, 5, 5 ) ]
+}
+
+[sub_resource type="ViewportTexture" id=199]
+viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
+
+[sub_resource type="Animation" id=200]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=201]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=202]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=203]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=204]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmokeCloudSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeCloudSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeCloudSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13.0952, 4.47369 ) ]
+}
+
+[sub_resource type="Animation" id=205]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 2, 3, 2, 3, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SmokeCloudSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmokeCloudSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeCloudSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -13.0952, 4.47369 ), Vector2( -20, 4.47369 ), Vector2( -13.0952, 4.47369 ) ]
+}
+
+[sub_resource type="Animation" id=206]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=207]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=208]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=209]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=210]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
+
+[sub_resource type="Animation" id=211]
+resource_name = "idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 15, 4, 5, 4, 14, 6, 7, 15, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=212]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10, 16 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BroomSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=213]
+resource_name = "idle"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 51, 15, 24, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BroomSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 10, 16 ), Vector2( 8, 16 ), Vector2( 6, 18 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=214]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite2:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 13, 5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BroomSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=215]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 51, 15, 24, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BroomSprite2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ false, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite2:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 19, 5 ), Vector2( 26, 16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "changeCastSpritePalette"
+} ]
+}
+
+[sub_resource type="DynamicFont" id=217]
+size = 24
+outline_size = 2
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="Theme" id=190]
+default_font = SubResource( 217 )
+
+[sub_resource type="CanvasItemMaterial" id=191]
+
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
-script = ExtResource( 13 )
-show_crt_effect = true
+script = ExtResource( 31 )
 show_crt_effect = true
 tileset_type = 2
 
@@ -3290,9 +4071,6 @@ visible = false
 [node name="SaveSpores" parent="Viewport/level/SavePoint2" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.33447 )
 pixel_size = 0.0001
-
-[node name="CollisionShape" parent="Viewport/level/SavePoint2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.245172, 0 )
 
 [node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
 anims/RESET = SubResource( 60 )
@@ -3753,6 +4531,203 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 11 )]
 
+[node name="CinematicAnimationPlayer" parent="UILayer" index="2"]
+anims/RESET = SubResource( 192 )
+anims/endCutscene = SubResource( 193 )
+anims/startCutscene = SubResource( 194 )
+anims/startCutsceneImmediate = SubResource( 195 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="UILayer/Inventory/InventoryTitle/ColorRect/ColorRect/RichTextLabel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="UILayer/Inventory/InventoryTitle/ColorRect/ColorRect/RichTextLabel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="UILayer/PowerupRect/ColorRect/ColorRect/RichTextLabel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="UILayer/PowerupRect/ColorRect/ColorRect/RichTextLabel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="MeshInstance" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
+mesh = SubResource( 216 )
+
+[node name="AnimationPlayer" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal" index="6"]
+anims/RESET = SubResource( 197 )
+anims/floatAway = SubResource( 198 )
+
+[node name="Sprite" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect" index="2"]
+texture = SubResource( 199 )
+
+[node name="GlitchStatusRect" parent="UILayer" index="10"]
+visible = false
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/LeftSprite" index="0"]
+anims/RESET = SubResource( 200 )
+anims/idle = SubResource( 201 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/RightSprite" index="0"]
+anims/RESET = SubResource( 202 )
+anims/idle = SubResource( 203 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/RunSprite" index="1"]
+anims/RESET = SubResource( 204 )
+anims/idle = SubResource( 205 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/DownSprite" index="0"]
+anims/RESET = SubResource( 206 )
+anims/idle = SubResource( 207 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/UpSprite" index="0"]
+anims/RESET = SubResource( 208 )
+anims/idle = SubResource( 209 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/JumpSprite" index="0"]
+anims/RESET = SubResource( 210 )
+anims/idle = SubResource( 211 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/SweepSprite" index="0"]
+anims/RESET = SubResource( 212 )
+anims/idle = SubResource( 213 )
+
+[node name="AnimationPlayer" parent="UILayer/PauseMenu/CastSprite" index="0"]
+anims/RESET = SubResource( 214 )
+anims/idle = SubResource( 215 )
+
+[node name="MainMenu" type="Control" parent="UILayer"]
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu"]
+margin_left = 307.0
+margin_top = 350.0
+margin_right = 488.0
+margin_bottom = 390.0
+color = Color( 0, 0.309804, 0.309804, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="UILayer/MainMenu"]
+margin_left = 308.0
+margin_top = 407.0
+margin_right = 486.0
+margin_bottom = 447.0
+color = Color( 0, 0.309804, 0.309804, 1 )
+
+[node name="ContinuePrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
+margin_left = 271.5
+margin_top = 354.0
+margin_right = 591.0
+margin_bottom = 454.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 190 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "                             [C]
+
+"
+text = "                             [C]
+
+"
+scroll_active = false
+
+[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/ContinuePrompt"]
+material = SubResource( 191 )
+position = Vector2( 32, 16.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 28 )
+hframes = 6
+vframes = 5
+frame = 26
+script = ExtResource( 24 )
+
+[node name="NewGamePrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
+visible = false
+margin_left = 271.5
+margin_top = 354.0
+margin_right = 591.0
+margin_bottom = 454.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 190 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "
+
+                             [C]"
+text = "
+
+                             [C]"
+scroll_active = false
+
+[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/NewGamePrompt"]
+material = SubResource( 191 )
+position = Vector2( 32, 69.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 28 )
+hframes = 6
+vframes = 5
+frame = 26
+script = ExtResource( 24 )
+
+[node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
+margin_left = 318.5
+margin_top = 354.0
+margin_right = 553.5
+margin_bottom = 454.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 190 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]Continue...?[/wave]
+
+New Game"
+text = "Continue...?
+
+New Game"
+scroll_active = false
+
+[node name="PressC" type="RichTextLabel" parent="UILayer/MainMenu"]
+margin_left = 375.0
+margin_top = 478.5
+margin_right = 716.0
+margin_bottom = 579.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 190 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "press [C] to start"
+text = "press [C] to start"
+scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="UILayer/MainMenu"]
+position = Vector2( 153, 407 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 39 )
+
 [node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
 
 [editable path="Viewport/level/Player"]
@@ -3801,4 +4776,6 @@ flip_v = true
 [editable path="Viewport/level/GlitchMoleCricket2"]
 [editable path="Viewport/level/GlitchMoleCricket3"]
 [editable path="Viewport2/ScreenEffects"]
+[editable path="UILayer"]
+[editable path="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal"]
 [editable path="ScreenEffects"]

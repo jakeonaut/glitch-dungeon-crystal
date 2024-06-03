@@ -389,7 +389,8 @@ func applyGravity(delta):
           aniPlayer.clear_queue()
           aniPlayer.stop()
           if is_touching_water:
-            aniPlayer.queue("swimFall")
+            # aniPlayer.queue("swimFall")
+            pass
           else:
             if aniPlayer.has_animation("fallStart"): aniPlayer.queue("fallStart")
             if aniPlayer.has_animation("fall"): aniPlayer.queue("fall")

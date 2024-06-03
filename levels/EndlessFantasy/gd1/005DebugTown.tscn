@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=2]
+[gd_scene load_steps=130 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -730,8 +730,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=64]
+[sub_resource type="BoxShape" id=172]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=173]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -3037,6 +3042,48 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 24 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -3125,7 +3172,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 10, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
 pitch_scale = 1.1
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
@@ -3231,8 +3278,11 @@ anims/doorClose = SubResource( 101 )
 anims/doorOpen = SubResource( 102 )
 anims/locked = SubResource( 103 )
 
-[node name="CollisionShape" parent="Viewport/level/Door7/InteractionArea" index="0"]
-shape = SubResource( 64 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door7/InteractionArea" index="0"]
+shape = SubResource( 172 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door7/InteractionArea" index="1"]
+shape = SubResource( 173 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -3262,21 +3312,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
 shape = SubResource( 113 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="AbortSound" parent="Viewport/level/NPC4/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC4/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
@@ -3354,20 +3390,6 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 107 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 119 )
 frame = 0
@@ -3393,20 +3415,6 @@ can_camera_zoom = false
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 107 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 120 )
