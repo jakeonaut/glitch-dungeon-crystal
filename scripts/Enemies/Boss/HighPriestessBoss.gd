@@ -61,20 +61,15 @@ func getHurt():
     hp -= 1
     if hp == 2:
         num_spawn_limit = len(landingArray) / 2
-    elif hp == 1:
+    elif hp == 1 or hp == 0:
         boss_phase = BossPhase.FROG_PLAGUE_READY
-    elif hp == 0:
-        var num_frogs = len(frogArray)
-        for _i in range(num_frogs):
-            var frog = frogArray.pop_back()
-            if frog != null:
-                frog.queue_free()
-                level.summonSmokeClouds(frog.global_transform.origin, 1, false, true)
+    elif hp == -1:
         num_spawn_limit = len(landingArray)
         boss_phase = BossPhase.CASTING
-    elif hp == -1:
+        big_spawn_timer = 0
+    elif hp == -2:
         boss_phase = BossPhase.CRONE_CHASE
-    elif hp == -3:
+    elif hp == -4:
         boss_phase = BossPhase.COMPLETE
 
 func _process(delta):
@@ -94,7 +89,7 @@ func _process(delta):
             laughSound.play()
     elif boss_phase == BossPhase.FROG_PLAGUE_SPAWNING:
         spawn_timer += (delta*11)
-        if spawn_timer >= spawn_time_limit:
+        if spawn_timer >= spawn_time_limit * 4:
             spawn_timer = 0
             num_spawns += 1
             var frog = basicFrogEnemyRes.instance()
@@ -106,20 +101,39 @@ func _process(delta):
                 frog.walk_direction.x = 1
             else:
                 frog.walk_direction.x = -1
-            # frog.is_fragile = true
+            frog.is_fragile = true
             level.add_child(frog)
             frog.global_transform.origin = getRandomSpawnPosition(3)
-            frogArray.push_back(frog)
+            frogArray.push_back(weakref(frog))
             spawnSound.play()
             if num_spawns >= num_spawn_limit:
                 num_spawns = 0
                 spawn_timer = 0
                 boss_phase = BossPhase.FROG_PLAGUE_WAITING
+                big_spawn_timer = 20
+                frogArray.shuffle()
     elif boss_phase == BossPhase.FROG_PLAGUE_WAITING:
         var weak_enemies = level.get_tree().get_nodes_in_group("weak_enemies")
         if weak_enemies.size() == 0:
             spawnWeakEye()
             landingArray.shuffle()
+        else:
+            big_spawn_timer += (delta*11)
+            if big_spawn_timer >= big_spawn_time_limit:
+                big_spawn_timer = 20
+                var firstInfectedIndex = 0
+                for i in range(len(frogArray)):
+                    var frog = frogArray[i].get_ref()
+                    if frog != null and isFrogInfected(frog):
+                        firstInfectedIndex = i
+                        break
+                var infectedFrog = frogArray[firstInfectedIndex]
+                var weakEye = weakEyeRes.instance()
+                infectedFrog.get_ref().add_child(weakEye)
+                weakEye.global_transform.origin = infectedFrog.get_ref().global_transform.origin
+                weakEye.global_transform.origin.y += 0.75
+                weakEye.global_transform.origin.z += 0.5
+                frogArray.shuffle()
     elif boss_phase == BossPhase.CASTING:
         big_spawn_timer += (delta*11)
         if big_spawn_timer >= big_spawn_time_limit:
@@ -140,6 +154,29 @@ func _process(delta):
                     has_animated_attack = false
                     landingArray.shuffle()
 
+
+    frogCleanup(delta)
+
+var frog_cleanup_timer = 0
+var frog_cleanup_time_limit = 3
+func frogCleanup(delta):
+    if len(frogArray) == 0 or \
+       boss_phase == BossPhase.FROG_PLAGUE_READY or \
+       boss_phase == BossPhase.FROG_PLAGUE_SPAWNING or \
+       boss_phase == BossPhase.FROG_PLAGUE_WAITING:
+        return
+
+    frog_cleanup_timer += (delta*11)
+    if frog_cleanup_timer >= frog_cleanup_time_limit:
+        frog_cleanup_timer = 0
+        var frogRef = frogArray.pop_back()
+        if frogRef.get_ref() != null:
+            frogRef.get_ref().queue_free()
+            level.summonSmokeClouds(frogRef.get_ref().global_transform.origin, 1, false, true)
+
+func isFrogInfected(frog):
+    return frog.is_infected
+    
 func moveAbout(delta):
     var step = 1
     global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)

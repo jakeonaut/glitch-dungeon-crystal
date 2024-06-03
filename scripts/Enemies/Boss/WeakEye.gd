@@ -42,10 +42,11 @@ func ouchies(_broom_pos):
     return
   am_i_dying = true
   if dieSound != null: dieSound.play()
+  level.player.getSmacked()
   secretAniPlayer.stop()
   secretAniPlayer.clear_queue()
   secretAniPlayer.queue("getHurt")
-  secretAniPlayer.queue("blinkClose")
+  secretAniPlayer.queue("blinkCloseFast")
 
   var priestess = level.get_node("HighPriestessBoss")
   priestess.getHurt()

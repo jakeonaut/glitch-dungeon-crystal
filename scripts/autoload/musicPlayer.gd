@@ -48,7 +48,7 @@ func _process(delta):
             currentlyPlayingTheme = restartPlayingTheme
             restartPlayingTheme = null
         
-var stopAllMusic = false
+export var stopAllMusic = false
 func tryToPlay(stream_player):
     if stopAllMusic: return
     # if not initial_volume_dbs.has(stream_player.name):
@@ -138,13 +138,13 @@ func conductFromScenePath(path):
         tryToPlay(bossThemePlayer)
     elif path.find("gd1CrystalTower") > 0:
         tryToPlay(debugThemePlayer)
-    elif path.find("000FrogWizardIntro") > 0 or path.find("Pastoral") > 0 or path.find("Corrupted0_0") > 0:
+    elif path.find("MainMenu") > 0 or path.find("Pastoral") > 0:
         if global.memory["clean_crystals"] > 0 or global.memory.has("spellbookPage"):
-            tryToPlay(longAdventureThemePlayer)
+            tryToPlay(titleThemePlayer)
         else:
             tryToPlay(grannyPlayer)
-            changeSongPitch(0.9)
-            default_song_pitch = 0.9
+            # changeSongPitch(0.9)
+            # default_song_pitch = 0.9
             return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(poisonThemePlayer)
@@ -173,7 +173,7 @@ func conductFromScenePath(path):
         tryToPlay(exploreThemePlayer)
     elif path.find("Swamp") > 0 or path.find("Village") > 0:
         tryToPlay(swampThemePlayer)
-    elif path.find("MainMenu") > 0 or path.find("EndOfDemo") > 0:
+    elif path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)

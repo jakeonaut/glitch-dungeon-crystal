@@ -47,7 +47,6 @@ volume_db = -20.0
 [node name="GrannyPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 volume_db = -20.0
-pitch_scale = 0.9
 
 [node name="DungeonThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

@@ -781,7 +781,7 @@ func actuallyApplyJump(play_sound = true):
   elif glitch_form == global.GlitchForm.INVISIBLE:
     vv = invisible_jump_force
   elif glitch_form == global.GlitchForm.LADDER:
-    vv = 1
+    vv = jump_force * 0.5
   else:
     # rocket boost boots
     # vv = jump_force*3

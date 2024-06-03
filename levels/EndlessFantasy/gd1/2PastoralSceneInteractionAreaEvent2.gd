@@ -25,6 +25,7 @@ func passiveActivate(_delta, _is_player):
     return
   has_activated = true
   player.override_press_move_right = false
+  player.grav = 15
   yield(get_tree().create_timer(0.99), "timeout")
   chicken9.glitchOut()
   yield(get_tree().create_timer(0.66), "timeout")
