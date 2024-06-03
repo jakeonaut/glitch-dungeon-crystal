@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="secret of nana"
-run/main_scene="res://sceneObjects/_autoload/globalMap.tscn"
+run/main_scene="res://levels/MainMenu.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://Screenshot_2023-01-14_16-16-13.png"
 config/icon="res://icon.png"

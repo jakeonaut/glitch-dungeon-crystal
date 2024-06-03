@@ -2924,6 +2924,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 13 )
+show_crt_effect = true
 tileset_type = 2
 doesnt_have_broom = true
 
@@ -3030,20 +3031,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 29 )
 frame = 22
@@ -3074,30 +3061,16 @@ shape = SubResource( 86 )
 [node name="CollisionShape" parent="Viewport/level/PastoralGrannyNPC/SmallerInteractionArea" index="0"]
 shape = SubResource( 87 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 32 )
 volume_db = -15.0
 script = ExtResource( 33 )
 
-[node name="DialogSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="14"]
 stream = ExtResource( 32 )
 pitch_scale = 0.9
 
-[node name="AbortSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/PastoralGrannyNPC/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/PastoralGrannyNPC" index="3"]
@@ -3138,20 +3111,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC5/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC5/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC5" index="3"]
 material_override = SubResource( 29 )
 frame = 22
@@ -3182,20 +3141,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC7" index="3"]
 material_override = SubResource( 29 )
@@ -3228,20 +3173,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 29 )
 frame = 28
@@ -3269,20 +3200,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/ChickenNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/ChickenNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/ChickenNPC" index="3"]
 material_override = SubResource( 29 )
@@ -3315,20 +3232,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 material_override = SubResource( 29 )
 flip_h = true
@@ -3357,20 +3260,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC6" index="3"]
 material_override = SubResource( 29 )
@@ -3403,20 +3292,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC8/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC8/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC8/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
 material_override = SubResource( 29 )
@@ -3531,34 +3406,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC9/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC9/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -3604,34 +3451,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC10/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC10/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC10/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC10/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC10/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC10/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -3679,34 +3498,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC12/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC12/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC12/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC12/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC12/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC12/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -3752,34 +3543,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC13/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC13/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC13/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC13/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC13/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC13/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -3827,34 +3590,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC14/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC14/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC14/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC14/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC14/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC14/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -3900,34 +3635,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC15/SmallInteractionArea" index="0"]
 shape = SubResource( 94 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC15/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC15/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC15/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC15/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC15/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -4011,20 +3718,6 @@ shape = SubResource( 182 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 140 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
