@@ -22,19 +22,9 @@ func _ready():
     hooked = true
   set_process(true)
 
-enum PhysicsState {
-  NORMAL,
-  COLLAPSED,
-  CAN_WAKE_UP,
-  WAKING_UP,
-  GLITCH_DYING,
-  GLITCH_HURT,
-  GLITCH_RECOVERY,
-}
-
 func _process(delta):
   if hooked:
-    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == PhysicsState.GLITCH_DYING:
+    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
       restorePlayer()
       frog.unqueueGulpAnimation()
       return
@@ -58,21 +48,25 @@ func _process(delta):
 func restorePlayer():
   if not hookTarget or not hookTarget.get_ref():
     return
-
   hooked = false
   hookTarget.get_ref().should_collide_floor = true
   hookTarget.get_ref().can_collide_with_floor = true
   hookTarget.get_ref().pauseAnimation = false
   level.player.on_ground = false
-  level.player.hv = Vector3(0, 0, 0)
-  level.player.dir = Vector3(0.0, 0.0, 0.0)
-  level.player.linear_velocity.x = 0
-  level.player.lv.x = 0
+  level.player.vv = 0
+  level.player.linear_velocity.y = 0
+  level.player.lv.y = 0
+  
   var jump_val = 5
   level.player.vv = jump_val
   level.player.linear_velocity.y = jump_val
   level.player.lv.y = jump_val
   hookTarget = null
+  if level.player.physics_state == level.player.PhysicsState.GLITCH_DYING:
+    level.player.hv = Vector3(0, 0, 0)
+    level.player.dir = Vector3(0.0, 0.0, 0.0)
+    level.player.linear_velocity.x = 0
+    level.player.lv.x = 0
 
 func moveTargetToHook(delta):
   if not hookTarget or not hookTarget.get_ref():
@@ -104,7 +98,7 @@ func isActive(_debug=false):
   return tongueCollisionShape.visible
 
 func passiveActivate(_delta, is_player):
-  if not hooked and is_player and level.player.physics_state != PhysicsState.GLITCH_DYING:
+  if not hooked and is_player and level.player.canIGetCaught():
     level.clearOtherGrabbers()
     hooked = true
     hookTarget = weakref(level.player)

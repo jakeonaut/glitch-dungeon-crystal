@@ -330,8 +330,10 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 5 )
 show_crt_effect = true
+starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true
+spellbook_spells = [ 1, 2 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -539,62 +541,6 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 47 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -609,7 +555,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 30 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
@@ -646,7 +592,7 @@ shape = SubResource( 57 )
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 58 )
 
-[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 31 )
 
 [node name="Sprite3D" parent="Viewport/level/Mimic/TreasureSpellCollectable" index="3"]

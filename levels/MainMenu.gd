@@ -5,9 +5,10 @@ var switch_glitch_time_limit = 15
 var direction = -1
 
 func setUpRoomInitializationOverride():
-    player.aniPlayer.stop()
-    player.aniPlayer.clear_queue()
-    player.aniPlayer.play("happyStand")
+    pass
+    # player.aniPlayer.stop()
+    # player.aniPlayer.clear_queue()
+    # player.aniPlayer.play("happyStand")
 
 onready var eventSound1 = get_node("EventSound1")
 onready var chicken10 = get_node("NPC10")
@@ -27,9 +28,11 @@ func startGame():
   uiLayer.get_node("GlitchStatusRect").visible = false
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
-  player.aniPlayer.play("happyStand")
+  gameCamera.initial_size = 25
+  gameCamera.zoomed_size = 25
+  # gameCamera.can_i_move = false
 
-  yield(get_tree().create_timer(1.5), "timeout")
+  yield(get_tree().create_timer(0.5), "timeout")
   player.override_press_move_right = true
   yield(get_tree().create_timer(0.2), "timeout")
   player.override_press_move_right = false
@@ -48,7 +51,7 @@ func startGame():
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
   player.aniPlayer.play("happyStand")
-  yield(get_tree().create_timer(4.0), "timeout")
+  yield(get_tree().create_timer(2.0), "timeout")
   player.aniPlayer.play("fall")
   eventSound1.play()
   yield(get_tree().create_timer(1.0), "timeout")
@@ -102,9 +105,10 @@ export var camera_size = 30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var has_started_game = false
 func _process(_delta):
-    gameCamera.initial_size = camera_size
-    gameCamera.zoomed_size = camera_size
-    gameCamera.size = camera_size
+    if not has_started_game:
+        gameCamera.initial_size = camera_size
+        gameCamera.zoomed_size = camera_size
+        gameCamera.size = camera_size
     # gameCamera.can_i_move = false
     # global.pauseGame = true
     player.pauseInput = true

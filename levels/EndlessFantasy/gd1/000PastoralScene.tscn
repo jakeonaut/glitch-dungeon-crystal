@@ -2955,7 +2955,7 @@ tracks/1/keys = {
 "values": [ 64.0 ]
 }
 
-[sub_resource type="ArrayMesh" id=216]
+[sub_resource type="ArrayMesh" id=218]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -3643,6 +3643,7 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 14 )]
+target = NodePath("../cameraTarget")
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -3722,6 +3723,17 @@ automatically_change_color = false
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Sprite3D2/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
 shape = SubResource( 21 )
+
+[node name="cameraTarget" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5469, 2.36, -2 )
+material_override = SubResource( 36 )
+pixel_size = 0.0001
+texture = ExtResource( 19 )
+script = ExtResource( 10 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+automatically_change_color = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7, 0.0347237, 0 )
@@ -4574,7 +4586,7 @@ anchor_bottom = 1.0
 step = 1.0
 
 [node name="MeshInstance" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 216 )
+mesh = SubResource( 218 )
 
 [node name="AnimationPlayer" parent="UILayer/MiniCrystalCubeRect/ColorRect/ColorRect/Viewport/miniCubeCrystal" index="6"]
 anims/RESET = SubResource( 197 )

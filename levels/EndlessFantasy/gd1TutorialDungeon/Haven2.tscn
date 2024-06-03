@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=2]
@@ -15,10 +15,12 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=13]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=14]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=15]
+[ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=24]
 [ext_resource path="res://assets/tower.png" type="Texture" id=25]
@@ -1175,6 +1177,12 @@ shape = SubResource( 80 )
 [node name="InteractPrompt" parent="Viewport/level/FrogCroneNPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
+[node name="Mushroom" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -12, -1 )
+
+[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -11, -1 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -1200,6 +1208,15 @@ __meta__ = {
 [node name="UILayer" parent="." instance=ExtResource( 6 )]
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 8 )]
+
+[node name="Lilpad16" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 13, -6, -1 )
+
+[node name="Lilpad17" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 15, -4, -1 )
+
+[node name="Lilpad18" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 12, -2, -1 )
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

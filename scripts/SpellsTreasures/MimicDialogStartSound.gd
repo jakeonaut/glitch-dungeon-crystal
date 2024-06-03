@@ -17,14 +17,17 @@ func activateScript():
   var initial_text = ""
   if treasureSpellCollectable.okay_im_done:
     initial_text = "•sorry old-timer,\ni got nothin else."
+    textBox.showYesNoOptions = false
   else:
     initial_text = "•pssst, i'll trade you " + mimic.trade_item + "\nfor " + str(mimic.num_gems_needed) + " gems.\nwhaddyasay..?"
+    textBox.showYesNoOptions = true
 
   var finalText = initial_text
       
-  var num_gems = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
-  if num_gems > mimic.num_gems_needed:
-    finalText += "\n•youve got the goods.. fair trade!"
+  # if treasureSpellCollectable.okay_im_done:
+  #   var num_gems = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
+  #   if num_gems > mimic.num_gems_needed:
+  #     finalText += "\n•youve got the goods.. fair trade!"
 
   textBox.text_final = finalText
   textBox.textNode.bbcode_text = finalText

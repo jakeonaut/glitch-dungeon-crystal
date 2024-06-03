@@ -477,10 +477,14 @@ func tryDieToOffscreenCamera(delta):
       var yDiff = getGameCamera().topmost_y - getGameCamera().botmost_y
       global.memory["player_y_offset"] = (global_transform.origin.y - getGameCamera().botmost_y) / yDiff
       global.memory["prevYDiff"] = yDiff
+      global.memory.erase("player_x_offset")
+      global.memory.erase("prevXDiff")
     if global.roomEdgeVector.y != 0:
       var xDiff = getGameCamera().rightmost_x - getGameCamera().leftmost_x
       global.memory["player_x_offset"] = (global_transform.origin.x - getGameCamera().leftmost_x) / xDiff
       global.memory["prevXDiff"] = xDiff
+      global.memory.erase("player_y_offset")
+      global.memory.erase("prevYDiff")
 
     var curr_coords = level.getLevelManagerCoords()
     var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
@@ -491,6 +495,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory["feather_jump_timer"] = feather_jump_timer
       global.memory["linear_velocity"] = linear_velocity
       global.memory["roomPath"] = level.getLevelName()
+      global.pauseGame = true
       return
     else:
       global.roomEdgeVector = null
@@ -548,12 +553,16 @@ func doTimeDilation(_delta):
   #   if stepify(gtdm, 0.01) == stepify(high, 0.01):
   #     gtdm = high
   # global.time_dilation_multiplier = gtdm
+
+func canIGetCaught():
+  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_RECOVERY:
+    return false
+  
+  return true
   
   
 func processGlitchHurtRecovery(delta):
-  if physics_state == PhysicsState.GLITCH_HURT or \
-     (physics_state == PhysicsState.GLITCH_DYING and has_sweeped_glitch and \
-      false): # global.getLevelZoneThing("crystal_geode")):
+  if physics_state == PhysicsState.GLITCH_HURT:
     global.pauseGame = true
     lv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
@@ -583,6 +592,9 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
+      should_collide_horizontally = true
+      should_collide_floor = true 
+      should_collide_ceil = true
       self.feather_jump_timer = remembered_feather_jump_timer
       self.lv.y = remembered_y_vel
       self.linear_velocity.y = remembered_y_vel
@@ -931,7 +943,7 @@ func processMoleLogic(delta):
   else:
     var solid_tiles = getTilesBelow(getLevelTiles())
     var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
-    if is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
+    if global.memory["mole_cricket"] and is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
       dig_timer += (delta*11)
       mySprite.flip_h = not mySprite.flip_h
       glitchTickle()
@@ -1178,6 +1190,9 @@ func summonSporeShroom():
   summonedShroom = weakref(newShroom)
 
 func tumbleFall(direction):
+  if physics_state == PhysicsState.GLITCH_DYING:
+    return
+
   aniPlayer.stop()
   aniPlayer.clear_queue()
   var x_val = 10

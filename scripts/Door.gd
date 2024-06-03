@@ -165,8 +165,8 @@ func _process(delta):
   
   if global.pauseGame: return
 
-  if is_passive:
-    spawnParticles(delta)
+  # if is_passive:
+  #   spawnParticles(delta)
 
   if locked_to_monsters:
     npc.textBoxContainer.bbText = "•"
