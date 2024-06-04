@@ -415,7 +415,10 @@ func applyTerminalVelocity(_delta):
     else:
       terminal_vel = water_terminal_vel
   elif is_touching_sandstream:
-    terminal_vel = 0
+    if pressingDown():
+      terminal_vel = true_terminal_vel / 4
+    else:
+      terminal_vel = 0
   elif glitch_form == global.GlitchForm.FEATHER:
     if pressingJump() or pressingMoveUp():
       terminal_vel = true_terminal_feather_vel

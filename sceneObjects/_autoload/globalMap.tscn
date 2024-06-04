@@ -521,6 +521,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -4, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro002.tscn"
 
+[node name="Level9" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro.tscn"
+
 [node name="Level8" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -5, 0 )
 material_override = SubResource( 13 )

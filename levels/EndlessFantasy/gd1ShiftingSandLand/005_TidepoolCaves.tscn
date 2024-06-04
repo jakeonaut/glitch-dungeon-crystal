@@ -280,11 +280,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
 [node name="GlitchSlime4" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -15, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, 0 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -15, 0 )
 
 [node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 8, -1 )
@@ -321,7 +318,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 0 )
 behavior_walking = true
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8, 17.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2786, 17.1, 0 )
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9, 10.9, 1 )

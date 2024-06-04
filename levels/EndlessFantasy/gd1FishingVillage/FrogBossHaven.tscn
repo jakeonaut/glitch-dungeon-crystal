@@ -1054,20 +1054,6 @@ bbText = "•'ello dearie. oi'm the fishin' guru.
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 42 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0.345, 0 )
 material_override = SubResource( 43 )
@@ -1232,20 +1218,6 @@ shape = SubResource( 75 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 70 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door3/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 27.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door3/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door3/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false

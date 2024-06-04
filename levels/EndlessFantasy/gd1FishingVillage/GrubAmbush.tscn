@@ -453,7 +453,7 @@ shape = SubResource( 16 )
 shape = SubResource( 32 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11, 0 )
 parter_door_id = "Door3"
 locked_to_monsters = true
 
