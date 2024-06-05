@@ -34,13 +34,17 @@ func _process(_delta):
     mySprite.max_frames = 1
     mySprite.updateBaseFrame(3, 0)
 
+  sprite_offset_y = 0
+  spriteYAlignment = 0
   # if is_infected:
   #   # mySprite.get_material_override().set_shader_param("target_palette", global.black_palette)
   #   mySprite.pixel_size = 0.094
   #   sprite_offset_y = -0.25
   #   spriteYAlignment = 0
-  sprite_offset_y = 0
-  spriteYAlignment = 0
+  if is_big:
+    sprite_offset_y = .75
+    spriteYAlignment = .75
+  
   glitchSetSpritesAndCollision()
 
   infectGlitchEnemies()
@@ -53,7 +57,7 @@ func infectGlitchEnemies():
   for area in areas:
     if area.is_in_group("enemies"):
       var oldEnemy = area.get_node("..")
-      oldEnemy.getMushroomInfected()
+      oldEnemy.getMushroomInfected(self.global_transform.origin)
       dieSound.play()
       level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
       queue_free()

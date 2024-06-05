@@ -158,7 +158,6 @@ func _process(delta):
 
     # glitchSwitchSprite(delta)
 
-    processMushroomInfectionLogic(delta)
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
     tryDieToOffscreenCamera()
@@ -498,113 +497,60 @@ func setAsParent(spawner):
     parentSpawner = spawner
 
 var mushroom_infected = false
-var mushroom_infection_timer = 0
-var mushroom_infection_time_limit = 20
 var mushroomBabyRefs = []
 var mushroomAncestorRef = null
-func getMushroomInfected(ignore_ancestor = false):
-    if not ignore_ancestor:
-        if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null:
-            print(mushroomAncestorRef.get_ref())
-            mushroomAncestorRef.get_ref().getMushroomInfected(true)
-            return null
-    if mushroom_infected and len(mushroomBabyRefs) > 0:
-        for mushroomBabyRef in mushroomBabyRefs:
-            if mushroomBabyRef.get_ref() != null:
-                mushroomBabyRef.get_ref().getMushroomInfected(true)
-        return null
-    mushroom_infected = true
-
-    var newMushroomAncestorRef = mushroomAncestorRef if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null else weakref(self)
-    if canSpawnMushroomAbove:
-        var baby1 = spawnBabyMushroom()
-        baby1.global_transform.origin.y += 2
-        baby1.canSpawnMushroomLeft = false
-        baby1.canSpawnMushroomRight = false
-        baby1.canSpawnMushroomBelow = false
-        baby1.mushroomAncestorRef = newMushroomAncestorRef
-    if canSpawnMushroomLeft:
-        var baby2 = spawnBabyMushroom()
-        baby2.global_transform.origin.x -= 2
-        baby2.canSpawnMushroomRight = false
-        baby2.mushroomAncestorRef = newMushroomAncestorRef
-    if canSpawnMushroomRight:
-        var baby3 = spawnBabyMushroom()
-        baby3.global_transform.origin.x += 2
-        baby3.canSpawnMushroomLeft = false
-        baby3.mushroomAncestorRef = newMushroomAncestorRef
-    if canSpawnMushroomBelow:
-        var baby4 = spawnBabyMushroom()
-        baby4.global_transform.origin.y -= 2
-        baby4.canSpawnMushroomLeft = false
-        baby4.canSpawnMushroomRight = false
-        baby4.canSpawnMushroomAbove = false
-        baby4.mushroomAncestorRef = newMushroomAncestorRef
-    # if len(mushroomBabyRefs) == 1:
-    #     newEnemy.canSpawnMushroomLeft = false
-    #     newEnemy.canSpawnMushroomRight = false
-    mushroom_infection_timer = 0
-
-func spawnBabyMushroom():
-    var newEnemy = self.duplicate()
-    level.add_child(newEnemy)
-    newEnemy.global_transform.origin = global_transform.origin
-    newEnemy.getSmacked(global_transform.origin, true)
-    self.getSmacked(global_transform.origin, true)
-    mushroomBabyRefs.push_back(weakref(newEnemy))
-    return newEnemy
-
-var canSpawnMushroomRight = true
-var canSpawnMushroomLeft = true
-var canSpawnMushroomAbove = true
-var canSpawnMushroomBelow = true
-func processMushroomInfectionLogic(delta):
-    if not mushroom_infected:
+export var mushroomEmbiggensMe = false
+func getMushroomInfected(shroom_pos, ignore_ancestor = false):
+    if am_i_dying:
         return
 
-    # if len(mushroomBabyRefs) == 0:
-    #     mushroom_infection_timer += (delta*11)
-    #     if mushroom_infection_timer >= mushroom_infection_time_limit:
-    #         mushroom_infection_timer = 0
-    #         mushroom_infected = false
-    #         getMushroomInfected()
-    # else:
-    #     if len(mushroomBabyRefs) >= 3 and mushroomBabyRefs[0].get_ref() != null and mushroomBabyRefs[1].get_ref() != null and mushroomBabyRefs[2].get_ref() != null and \
-    #        mushroomBabyRefs[0].get_ref().mushroom_infected and mushroomBabyRefs[1].get_ref().mushroom_infected and mushroomBabyRefs[2].get_ref().mushroom_infected:
-    #         return
-    #     elif (canSpawnMushroomRight or canSpawnMushroomLeft) and len(mushroomBabyRefs) >= 2 and mushroomBabyRefs[0].get_ref() != null and mushroomBabyRefs[1].get_ref() != null and \
-    #        mushroomBabyRefs[0].get_ref().mushroom_infected and mushroomBabyRefs[1].get_ref().mushroom_infected:
-    #         return
-    #     elif not canSpawnMushroomRight and not canSpawnMushroomLeft and len(mushroomBabyRefs) >= 1 and mushroomBabyRefs[0].get_ref() != null and \
-    #        mushroomBabyRefs[0].get_ref().mushroom_infected:
-    #         return
-    #     mushroom_infection_timer += (delta*11)
-    #     if mushroom_infection_timer >= mushroom_infection_time_limit:
-    #         mushroom_infection_timer = 0
-    #         var index = 0
-    #         if len(mushroomBabyRefs) >= 1:
-    #             if mushroomBabyRefs[index].get_ref() != null:
-    #                 mushroomBabyRefs[index].get_ref().getMushroomInfected()
-    #                 index += 1
-    #             if canSpawnMushroomRight:
-    #                 if len(mushroomBabyRefs) > index and mushroomBabyRefs[index].get_ref() != null:
-    #                     mushroomBabyRefs[index].get_ref().getMushroomInfected()
-    #                     index += 1
-    #                 else:
-    #                     mushroom_infected = false
-    #                     var newBaby = getMushroomInfected()
-    #                     newBaby.global_transform.origin.y = self.global_transform.origin.y
-    #                     newBaby.global_transform.origin.x += 2
-    #                     newBaby.canSpawnMushroomRight = false
-    #                     index += 1
-    #             if canSpawnMushroomLeft:
-    #                 if len(mushroomBabyRefs) > index and mushroomBabyRefs[index].get_ref() != null:
-    #                     mushroomBabyRefs[index].get_ref().getMushroomInfected()
-    #                     index += 1
-    #                 else:
-    #                     mushroom_infected = false
-    #                     var newBaby2 = getMushroomInfected()
-    #                     newBaby2.global_transform.origin.y = self.global_transform.origin.y
-    #                     newBaby2.global_transform.origin.x -= 2
-    #                     newBaby2.canSpawnMushroomLeft = false
-    #                     index += 1
+    # if not ignore_ancestor:
+    #     if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null:
+    #         print(mushroomAncestorRef.get_ref().global_transform.origin)
+    #         mushroomAncestorRef.get_ref().getMushroomInfected(shroom_pos, true)
+    #         return null
+    # if mushroom_infected and len(mushroomBabyRefs) > 0:
+    #     for mushroomBabyRef in mushroomBabyRefs:
+    #         if mushroomBabyRef.get_ref() != null:
+    #             mushroomBabyRef.get_ref().getMushroomInfected(shroom_pos, true)
+    #     return null
+
+    mushroom_infected = true
+    getSmacked(global_transform.origin, true)
+
+    if mushroomEmbiggensMe and self.scale.x < 8:
+        self.scale.x *= 2
+        self.scale.y *= 2
+        self.scale.z *= 2
+        return
+
+    var babyTransform = Vector3(0, 0, 0)
+    var y_dist = abs(global_transform.origin.y - shroom_pos.y)
+    var x_dist = abs(global_transform.origin.x - shroom_pos.x)
+    if y_dist < x_dist:
+        if global_transform.origin.x > shroom_pos.x:
+            babyTransform.x = 2
+        else:
+            babyTransform.x = -2
+    else:
+        if global_transform.origin.y > shroom_pos.y:
+            babyTransform.y = 2
+        else:
+            babyTransform.y = -2
+
+    # print(self.global_transform.origin)
+    # print(babyTransform)
+
+    var newMushroomAncestorRef = mushroomAncestorRef if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null else weakref(self)
+    spawnBabyMushroom(babyTransform, newMushroomAncestorRef)
+    
+
+func spawnBabyMushroom(babyTransform, newMushroomAncestorRef):
+    var baby = self.duplicate()
+    level.add_child(baby)
+    baby.global_transform.origin = global_transform.origin + babyTransform
+    baby.getSmacked(global_transform.origin, true)
+    
+    baby.mushroomAncestorRef = newMushroomAncestorRef
+    mushroomBabyRefs.push_back(weakref(baby))
+    return baby

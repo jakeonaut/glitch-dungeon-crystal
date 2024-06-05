@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -34,9 +34,13 @@
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/Enemies/StrongGlitchEnemy.tscn" type="PackedScene" id=33]
 
-[sub_resource type="BoxShape" id=24]
+[sub_resource type="BoxShape" id=39]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=40]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=25]
 resource_local_to_scene = true
@@ -92,6 +96,14 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=41]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=42]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -211,6 +223,14 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 3 ]
 }
+
+[sub_resource type="BoxShape" id=43]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=44]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 17 )
@@ -369,8 +389,11 @@ is_vertical = true
 [node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 24 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 39 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 40 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
@@ -391,8 +414,11 @@ anims/doorClose = SubResource( 27 )
 anims/doorOpen = SubResource( 28 )
 anims/locked = SubResource( 29 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 24 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 41 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 42 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
@@ -413,8 +439,11 @@ anims/doorOpen = SubResource( 35 )
 anims/doorUnbarred = SubResource( 36 )
 anims/locked = SubResource( 37 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 24 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 43 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 44 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )

@@ -387,6 +387,34 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 101.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 101.0
+
+[node name="Viewport@level@NPC@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 18 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -580,7 +608,7 @@ shape = SubResource( 15 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 19, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/002_CrystalPuzzle.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
@@ -610,20 +638,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 20, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -663,20 +677,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 17, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false

@@ -693,13 +693,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 12.8539, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 24, 0 )
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 11, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8638, 11, 0 )
 
 [node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 17, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0 )

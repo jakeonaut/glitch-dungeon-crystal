@@ -3,14 +3,17 @@ extends Spatial
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var player = get_node("../Player")
 onready var bonkSound = get_node("BonkSound")
+onready var bonkSound2 = get_node("BonkSound2")
 var has_been_hit = false
-var num_hits = 0
-export var max_num_hits = 1
+var num_hits = 0 # aka num spawns
+export var max_num_hits = 1 # aka max num spawns
 var hit_cooldown = 0
 var hit_cooldown_limit = 5
 export(String, FILE) var spawned_object_path
 export var is_static_in_level = true
 var spawned_object_res = null
+var num_jumps = 0
+export var max_num_jumps = 1
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -50,7 +53,12 @@ func passiveActivate(_delta, is_player):
       if not is_player:
         player.getSmacked()
       aniPlayer.play("hit")
-      performSpawn()
+      num_jumps += 1
+      if num_jumps >= max_num_jumps:
+        performSpawn()
+        num_jumps = 0
+      else:
+        bonkSound2.play()
       hit_cooldown = hit_cooldown_limit
       if is_static_in_level:
         global.setStaticLevelZoneLevelVar(level, self.name, true)

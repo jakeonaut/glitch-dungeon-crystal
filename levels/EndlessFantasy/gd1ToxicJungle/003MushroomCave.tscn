@@ -5,7 +5,6 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
-[ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
@@ -20,7 +19,6 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=19]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=20]
-[ext_resource path="res://sceneObjects/Enemies/Worm.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=24]
@@ -80,7 +78,11 @@ tracks/0/keys = {
 
 [sub_resource type="BoxShape" id=44]
 resource_local_to_scene = true
-extents = Vector3( 2, 2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=45]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=34]
 resource_local_to_scene = true
@@ -102,9 +104,13 @@ extents = Vector3( 2, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=40]
+[sub_resource type="BoxShape" id=46]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=47]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=41]
 resource_local_to_scene = true
@@ -251,8 +257,11 @@ anims/doorClose = SubResource( 21 )
 anims/doorOpen = SubResource( 22 )
 anims/locked = SubResource( 23 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 44 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 45 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 34 )
@@ -451,8 +460,11 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/004MushroomInfectionPt1.tscn"
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 40 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 46 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 47 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 41 )
@@ -512,12 +524,6 @@ texture = ExtResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 43 )
 texture = ExtResource( 28 )
-
-[node name="Worm" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 13, 0 )
-
-[node name="Vileplume" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 34, 0 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 11.6014, 0 )

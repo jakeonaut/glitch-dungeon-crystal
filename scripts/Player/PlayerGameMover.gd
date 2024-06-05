@@ -517,7 +517,7 @@ func processJumpInputs(delta):
         
   .processJumpInputs(delta)
 
-func mushroomClone():
+func mushroomClone(trigger_another = true):
   global_transform.origin.y += 1
   if not on_ground:
     global_transform.origin.y += 0.5
@@ -527,6 +527,10 @@ func mushroomClone():
   carcass.mushroomSprite.visible = false
   infectSound.play()
   glitchTickle()
+  if trigger_another:
+    yield(get_tree().create_timer(0.1), "timeout")
+    mushroomClone(false)
+
 
 # @override
 func addJumpSmokeCloud(flip_flip_h = false):

@@ -605,6 +605,7 @@ walk_direction = Vector2( -1, 0 )
 [node name="BasicShroomEnemy2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3, 0 )
 script = ExtResource( 27 )
+mushroomEmbiggensMe = false
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3, 0 )

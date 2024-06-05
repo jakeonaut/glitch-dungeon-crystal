@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -107,8 +107,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=38]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=39]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -299,9 +304,11 @@ anims/doorClose = SubResource( 23 )
 anims/doorOpen = SubResource( 24 )
 anims/locked = SubResource( 25 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0 )
-shape = SubResource( 17 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 38 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 39 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -402,7 +409,7 @@ flip gravity"
 [node name="CollisionShape" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 37 )
 
-[node name="AbortSound" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 33 )
 
 [node name="Sprite3D" parent="Viewport/level/MimicLantern/TreasureSpellCollectable" index="3"]

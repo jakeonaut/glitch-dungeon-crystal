@@ -3,6 +3,7 @@ extends "GlitchEnemy.gd"
 onready var landing = get_node("landing")
 onready var poofSound = get_node("Sounds/PoofSound")
 onready var reassembleSound = get_node("Sounds/ReassembleSound")
+var basicShroomEnemyRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
 var landing_position = null
 
 func _ready():
@@ -84,6 +85,7 @@ func landed():
   .landed()
   behavior_jumping = false
 
+var old_broom_origin = null
 # @override
 func getSmacked(broom_origin, silently = false):
   if is_smacked or has_ever_been_smacked:
@@ -98,6 +100,14 @@ func getSmacked(broom_origin, silently = false):
   pauseSelf = true
   on_ground = true
   notDieSound.play()
+  old_broom_origin = broom_origin
+  var babyShroom = basicShroomEnemyRes.instance()
+  if old_broom_origin.x > self.global_transform.origin.x:
+    babyShroom.walk_direction.x = -1
+  else:
+    babyShroom.walk_direction.x = 1
+  level.add_child(babyShroom)
+  babyShroom.global_transform.origin = self.global_transform.origin
 
 # @override
 func unsmack():
