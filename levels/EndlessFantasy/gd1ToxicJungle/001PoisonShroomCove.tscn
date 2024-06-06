@@ -315,7 +315,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1, -2.6, 0 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 13, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false
@@ -366,7 +377,18 @@ texture = ExtResource( 12 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/Haven2.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false

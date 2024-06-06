@@ -3704,7 +3704,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1354, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1354, 0, 0 )
 grav = 15
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
@@ -4376,9 +4376,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2, 0.7, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1, -14.9, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
+parter_door_id = null
+dont_recolor_me = null
 is_passive = true
 is_vertical = true
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="landing" parent="Viewport/level/Door2" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 14.8, 1 )

@@ -2193,6 +2193,20 @@ shader_param/target_palette = ExtResource( 1 )
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 27.0
+step = 1.0
+page = 101.0
+
+[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 12 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -2279,7 +2293,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, -2.9, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -2300,7 +2325,7 @@ visible = false
 shape = SubResource( 48 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.0753822, 0 )
 is_static = true
 is_licker = true
 
@@ -2350,6 +2375,9 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 16.8397
 [node name="Lilpad24" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -4.16034, 5.76561, -1 )
 
+[node name="Lilpad25" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -7.16034, 8.76561, -1 )
+
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 0 )
 
@@ -2371,20 +2399,6 @@ is_a_body = false
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 73 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 27.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -2462,7 +2476,18 @@ spawned_object_path = ""
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 12, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false

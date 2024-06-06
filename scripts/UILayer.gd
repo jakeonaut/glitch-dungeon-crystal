@@ -353,7 +353,7 @@ func processHiscoreRenderLogic(delta):
     hiscoreTimer = 0
     # TODO(jaketrower): can consolidate this but i'm lazy rn
     if hiscoreDisplayIndex == 0:
-      crystalCubeHiscoreLabel.visible = true
+      crystalCubeHiscoreLabel.visible = false # true
       crystalCubeHiscoreLabel.text = "gems: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:

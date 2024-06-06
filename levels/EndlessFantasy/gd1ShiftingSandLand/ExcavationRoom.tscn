@@ -369,6 +369,7 @@ should_fade_away = true
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.3489, 0 )
+num_gems_needed = 20
 trade_item = "CRICKET SOUL"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]

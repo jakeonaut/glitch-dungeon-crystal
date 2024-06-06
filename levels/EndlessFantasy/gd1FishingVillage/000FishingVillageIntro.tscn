@@ -386,7 +386,7 @@ shape = SubResource( 31 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 22.2, 0, 0 )
 
 [node name="HookInteractionArea" parent="Viewport/level/FishingRod" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.3, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 32 )
@@ -448,7 +448,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 23, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/Haven2.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 visible = false
@@ -470,7 +481,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -4 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 22, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
 visible = false

@@ -109,11 +109,12 @@ func _ready():
         prev_keys = num_keys
         npc.textBoxContainer.bbText = "•"
     else:
+      var x_more_crystals = num_keys_unlock - global.memory["clean_crystals"]
       var key_name = "FISH KEY"
       if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
       elif key_type == global.KeyItem.SHROOM: key_name = "SHROOM KEY"
       elif key_type == global.KeyItem.CAT: key_name = "CAT KEY"
-      elif key_type == global.KeyItem.CRYSTAL: key_name = "3 CRYSTALS"
+      elif key_type == global.KeyItem.CRYSTAL: key_name = str(x_more_crystals) + " CRYSTALS"
       npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
