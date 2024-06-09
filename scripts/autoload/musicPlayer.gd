@@ -54,8 +54,6 @@ func tryToPlay(stream_player):
     # if not initial_volume_dbs.has(stream_player.name):
     #     initial_volume_dbs[stream_player.name] = stream_player.volume_db
         
-    # print("try to play: " + stream_player.name)
-        
     if stream_player.name == null:
         return
 
@@ -188,7 +186,6 @@ func conductFromScenePath(path):
         changeSongPitch(2.0)
 
 func changeSongPitch(new_pitch):
-    # print("change song pitch: " + str(new_pitch))
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch

@@ -413,7 +413,8 @@ func unsmack():
     pauseSelf = false
   mySprite.material_override.set_shader_param("time_influence", 3)
   mySprite.material_override.set_shader_param("y_div", 2.3)
-  mySprite.material_override.set_shader_param("normal_offset", 0.0)
+  # mySprite.material_override.set_shader_param("normal_offset", 0.0)
+  mySprite.material_override.set_shader_param("normal_offset", .02)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 var pausingFromSpellCasting = false
@@ -672,13 +673,12 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  # if global.memory["glitched_grimoire"]:
-  #   glitchTickle(false)
-  #   level.displaySpellMessageText("unaffected")
-  #   return
-
   glitchTilesAroundMe()
   glitchTickle(false)
+  if global.memory["glitched_grimoire"]:
+    level.displaySpellMessageText("unaffected")
+    return
+
   level.displaySpellMessageText("lose magic")
   var did_erase = false
   global.memory["mp"] = 0
@@ -722,7 +722,7 @@ func loseBroom():
 var fish_broom_timer = 0
 var fish_broom_time_limit = 2
 var has_fish_broom = true
-func processFishyLogic(delta):
+func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
 
@@ -743,7 +743,10 @@ func processFishyLogic(delta):
       bubble.can_purify = true
       if mySprite.flip_h:
         bubble.horizontal_direction = -2
+      bubble.is_dark = true
       level.add_child(bubble)
+      # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+      bubble.setAsParent(self)
       bubble.global_transform.origin = global_transform.origin
       bubble.global_transform.origin.x += bubble.horizontal_direction
       bubble.my_original_pos = bubble.global_transform.origin.y
@@ -774,20 +777,21 @@ func getFishyInfected():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   on_ground = false
-  if global.memory["zora_flippers"] == 1:
-    musicPlayer.stopAll()
-    aniPlayer.play("transformToFishy_first")
-    global.memory["zora_flippers"] = 2
-    dir = Vector3(0, 0, 0)
-    lv.x = 0
-    lv.y = 0
-    linear_velocity.x = 0
-    linear_velocity.y = 0
-    hv = 0
-    vv = 0
-    pauseInput = true
-  else:
-    aniPlayer.play("transformToFishy")
+  # if global.memory["zora_flippers"] == 1:
+  #   musicPlayer.stopAll()
+  #   aniPlayer.play("transformToFishy_first")
+  #   global.memory["zora_flippers"] = 2
+  #   dir = Vector3(0, 0, 0)
+  #   lv.x = 0
+  #   lv.y = 0
+  #   linear_velocity.x = 0
+  #   linear_velocity.y = 0
+  #   hv = 0
+  #   vv = 0
+  #   pauseInput = true
+  # else:
+  #   aniPlayer.play("transformToFishy")
+  aniPlayer.play("transformToFishy")
   pauseAnimation = true
   should_collide_floor = true
   should_collide_ceil = true
@@ -929,15 +933,15 @@ func processMoleLogic(delta):
         global_transform.origin.y += (4 * delta*11)
       else:
         should_magic_jump = true
-        level.player.vv = 10
-        level.player.target_last_grounded_y = level.player.global_transform.origin.y
-        level.player.global_transform.origin.y += 0.5
-        level.player.on_ground = false
-        level.player.truly_on_ground = false
-        level.player.was_on_ground = false
-        level.player.lv.y = level.player.vv
-        level.player.linear_velocity.y = level.player.vv
-        level.player.should_do_fallthrough_area_collision = false
+        self.vv = 10
+        self.target_last_grounded_y = self.global_transform.origin.y
+        self.global_transform.origin.y += 0.5
+        self.on_ground = false
+        self.truly_on_ground = false
+        self.was_on_ground = false
+        self.lv.y = self.vv
+        self.linear_velocity.y = self.vv
+        self.should_do_fallthrough_area_collision = false
         getMoleCured()
       
   else:

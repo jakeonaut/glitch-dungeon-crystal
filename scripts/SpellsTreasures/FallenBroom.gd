@@ -290,7 +290,6 @@ func hitStuff(_delta):
             #     getLevelTiles().sweepUpSand(coords)
             #     my_broom_owner.digSound.play()
             #     has_hit_something = true
-    print(has_hit_something)
     return has_hit_something
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):

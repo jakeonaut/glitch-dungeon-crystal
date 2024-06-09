@@ -81,9 +81,7 @@ func goThroughDoor():
   # # get_tree().get_root().add_child(newLevel)
   # var oldLevelTiles = getLevelTiles()
   # # level.add_child(newLevel)
-  # print(newLevel)
   # var newLevelTiles = newLevel.get_node("Viewport/level/LevelTiles")
-  # print(newLevelTiles)
 
   # oldLevelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles)
   # # TODO(jaketrower): When the above ^^ has completed, completely override newLevelTiles with oldLevelTiles.

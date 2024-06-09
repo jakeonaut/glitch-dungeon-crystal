@@ -369,7 +369,6 @@ should_fade_away = true
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.3489, 0 )
-num_gems_needed = 20
 trade_item = "CRICKET SOUL"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
@@ -380,6 +379,10 @@ shape = SubResource( 57 )
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/MimicNPC/FallthroughSolid" index="0"]
 shape = SubResource( 58 )
+
+[node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
+bbText = "•MOLE CRICKET'S MEMORY:
+hold [DOWN] to dig"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )

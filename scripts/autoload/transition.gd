@@ -56,7 +56,6 @@ func interrupt():
 
 # PRIVATE FUNCTION. CALLED AT THE MIDDLE OF THE TRANSITION ANIMATION
 func change_scene():
-    # print("was i interrupted?: " + str(was_i_interrupted) + ", " + str(self.path))
     if was_i_interrupted:
         was_i_interrupted = false
         return

@@ -29,12 +29,14 @@ func isActive(_debug=false):
 func activate(is_player):
   passiveActivate(0, is_player)
 
+var has_awakened = false
 func passiveActivate(delta, is_player):
   if not is_player and not global.memory["broom"]:
     mimicNPC.getSmacked(self.global_transform.origin)
     return
 
-  if not mimicNPC.is_active:
+  if not mimicNPC.is_active and not has_awakened:
+    has_awakened = true
     awakenSound.play()
     mimicNPC.is_active = true
     mimicNPC.mySprite.max_frames = 4

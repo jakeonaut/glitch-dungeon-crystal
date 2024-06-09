@@ -2,7 +2,6 @@ extends AudioStreamPlayer
 
 onready var slippers = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-var has_activated = false
 
 func activateScript():
   slippers.mySprite.visible = false
@@ -18,10 +17,6 @@ func activateScript():
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
   level.player.glitchTickle()
+  global.memory["mole_cricket"] = 1
 
   level.saveTheGame()
-
-func preActivateScript():
-  if not has_activated:
-    global.memory["mole_cricket"] = 1
-    has_activated = true

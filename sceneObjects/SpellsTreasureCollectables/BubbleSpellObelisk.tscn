@@ -169,7 +169,9 @@ volume_db = -15.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452547, -0.41842, -0.769371 )
 material_override = SubResource( 9 )
 pixel_size = 0.125
-frame = 1
+texture = ExtResource( 9 )
+hframes = 1
+vframes = 1
 
 [node name="SaveSpores" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45902, 0.165527 )

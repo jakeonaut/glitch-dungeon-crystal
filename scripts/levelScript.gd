@@ -68,7 +68,7 @@ func _ready_impl():
   else:
     player.applyGlitch(starting_glitch_type, true)
   
-  if has_spellbook_page and not global.memory.has("spellbookPage"):
+  if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = []
     for spellbook_spell in spellbook_spells:
@@ -264,7 +264,6 @@ func tryToRespawn():
   if global.isEnteringRoom:
     global.memory["broom"] = true
     if found_door:
-      # print(found_door)
       found_door.land(true, true)
       # global.saveMySpot(found_door.landing.global_transform.origin, null)
     elif global.roomEdgeVector != null:

@@ -515,12 +515,10 @@ func unrandomizeAllTiles():
 
 func unrandomizeTile(cell_index):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
-  #print("tile_type: " + str(tile_type))
   if tile_type == INVALID_CELL_ITEM:
     return false
 
   var tile_name = mesh_library.get_item_name(tile_type)
-  #print("tile_name: " + str(tile_name))
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "BrickSolidRoof" in tile_name or "BrickSolidCeil" in tile_name:
     setTileNameNum("BrickSolidCeil", 0, cell_index, tile_orientation)
@@ -528,8 +526,6 @@ func unrandomizeTile(cell_index):
     setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
-  #print("new tile_name: " + str(new_tile_name))
-  #print("new tile_type: " + str(mesh_library.find_item_by_name(new_tile_name)))
   return true
 
 func rerandomizeTile(cell_index, glitch_type):

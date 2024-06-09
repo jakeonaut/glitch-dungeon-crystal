@@ -1054,6 +1054,7 @@ bbText = "•I lost my smithing hammer...
 •oh... this? this is my
 recreational hammer...
 •howe shameful..."
+dont_recolor_me = true
 showYesNoOptions = true
 
 [node name="CollisionShape" parent="Viewport/level/SmithingNPC/SmallInteractionArea" index="0"]
@@ -1071,6 +1072,7 @@ script = ExtResource( 23 )
 
 [node name="Sprite3D" parent="Viewport/level/SmithingNPC" index="3"]
 frame = 70
+automatically_change_color = false
 
 [node name="AnimationPlayer" parent="Viewport/level/SmithingNPC" index="4"]
 anims/default = SubResource( 65 )
@@ -1088,7 +1090,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9649, 0.0759001, 0 )
 bbText = "•you seems to have
 some [color=red]hag magic[/color]... maybe,
 •you could purify the CRYSTALs"
-dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 72 )
@@ -1131,7 +1132,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -11, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
-num_keys_unlock = 4
+num_keys_unlock = 3
 key_type = 5
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]

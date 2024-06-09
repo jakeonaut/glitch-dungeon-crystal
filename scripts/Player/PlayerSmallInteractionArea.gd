@@ -13,6 +13,9 @@ var water_y = 0 # what does it do? nothing.y
 func _ready():
     set_process(true)
 
+func isActive(_debug=false):
+    return true
+
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 

@@ -103,6 +103,7 @@ func _process(delta):
       finishItAll()
 
 
+onready var mimicNPC = get_node("../MimicNPC") if has_node("../MimicNPC") else null
 func finishItAll():
   okay_im_done = true
   if display_textbox:
@@ -115,6 +116,8 @@ func finishItAll():
         abortSound.preActivateScript()
       abortSound.activateScript()
       level.player.getItemFailsafe()
+  if mimicNPC:
+    mimicNPC.is_active = true
 
 func adjustSprite():
   textBox.can_camera_zoom = false

@@ -1,12 +1,12 @@
 extends AudioStreamPlayer
 
-onready var slippers = get_node("../../..")
+onready var flippers = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-var has_activated = false
 
 func activateScript():
-  slippers.mySprite.visible = false
-  slippers.okay_im_done = true
+  global.memory["zora_flippers"] = 1
+  flippers.mySprite.visible = false
+  flippers.okay_im_done = true
   
   global.pauseGame = false
   global.pauseMoveInput = false
@@ -20,8 +20,3 @@ func activateScript():
   level.player.glitchTickle()
 
   level.saveTheGame()
-
-func preActivateScript():
-  if not has_activated:
-    global.memory["zora_flippers"] = 1
-    has_activated = true

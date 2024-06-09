@@ -23,6 +23,7 @@ var my_speed_max = null
 var my_acc = 5
 var has_set_origin = false
 var can_purify = false
+export var is_dark = false
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -54,8 +55,12 @@ func getGameCamera():
 func _ready():
   appearSound.play()
   mySprite.material_override = mySprite.material_override.duplicate()
-  aniPlayer.queue("bubbleGrow")
-  aniPlayer.queue("bubble")
+  if is_dark:
+    aniPlayer.queue("dark_bubbleGrow")
+    aniPlayer.queue("dark_bubble")
+  else:
+    aniPlayer.queue("bubbleGrow")
+    aniPlayer.queue("bubble")
   
   if is_horizontal:
     my_original_pos = global_transform.origin.y

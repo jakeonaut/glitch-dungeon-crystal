@@ -6,7 +6,6 @@ func _ready():
     pass
 
 func activateScript():
-    print(level.has_node("GlitchSlime4"))
     if not level.has_node("GlitchSlime4") or \
        level.levelTiles.get_cell_item(22, -11, 0) == GridMap.INVALID_CELL_ITEM or \
        level.levelTiles.get_cell_item(31, -11, 0) == GridMap.INVALID_CELL_ITEM:

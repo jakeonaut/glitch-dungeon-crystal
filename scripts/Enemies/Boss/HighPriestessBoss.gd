@@ -128,11 +128,12 @@ func _process(delta):
                         firstInfectedIndex = i
                         break
                 var infectedFrog = frogArray[firstInfectedIndex]
-                var weakEye = weakEyeRes.instance()
-                infectedFrog.get_ref().add_child(weakEye)
-                weakEye.global_transform.origin = infectedFrog.get_ref().global_transform.origin
-                weakEye.global_transform.origin.y += 0.75
-                weakEye.global_transform.origin.z += 0.5
+                if infectedFrog.get_ref() != null:
+                    var weakEye = weakEyeRes.instance()
+                    infectedFrog.get_ref().add_child(weakEye)
+                    weakEye.global_transform.origin = infectedFrog.get_ref().global_transform.origin
+                    weakEye.global_transform.origin.y += 0.75
+                    weakEye.global_transform.origin.z += 0.5
                 frogArray.shuffle()
     elif boss_phase == BossPhase.CASTING:
         big_spawn_timer += (delta*11)

@@ -406,7 +406,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 10, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, -1, 0 )
@@ -578,7 +578,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0677, 9.71043, 0 )
-num_gems_needed = 20
 trade_item = "FISH SOUL"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
@@ -589,6 +588,10 @@ shape = SubResource( 56 )
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/MimicNPC/FallthroughSolid" index="0"]
 shape = SubResource( 57 )
+
+[node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
+bbText = "•SOUL OF FISH
+try jumping in water"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 58 )

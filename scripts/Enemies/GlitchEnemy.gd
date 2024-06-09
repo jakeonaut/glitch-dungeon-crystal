@@ -506,7 +506,6 @@ func getMushroomInfected(shroom_pos, ignore_ancestor = false):
 
     # if not ignore_ancestor:
     #     if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null:
-    #         print(mushroomAncestorRef.get_ref().global_transform.origin)
     #         mushroomAncestorRef.get_ref().getMushroomInfected(shroom_pos, true)
     #         return null
     # if mushroom_infected and len(mushroomBabyRefs) > 0:
@@ -537,9 +536,6 @@ func getMushroomInfected(shroom_pos, ignore_ancestor = false):
             babyTransform.y = 2
         else:
             babyTransform.y = -2
-
-    # print(self.global_transform.origin)
-    # print(babyTransform)
 
     var newMushroomAncestorRef = mushroomAncestorRef if mushroomAncestorRef != null and mushroomAncestorRef.get_ref() != null else weakref(self)
     spawnBabyMushroom(babyTransform, newMushroomAncestorRef)

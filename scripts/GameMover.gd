@@ -1195,7 +1195,7 @@ func collideWithFloor(local_lv):
 func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
   if tile_distance <= 0:
     if debug:
-      # print("collide sensor A...")
+      print("collide sensor A...")
       if not is_vertical: get_tree().paused = true
     # push player out of the tile! # TODO(jaketrower): TopsyTurvy
     if is_vertical:

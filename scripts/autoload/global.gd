@@ -402,7 +402,7 @@ func turnRealIntoIntRecursive(obj):
         if "(" in obj:
             return normalizeMemoryPosition(obj)
         elif int(obj) != 0 and len(obj) == len(str(int(obj))): # don't convert "gd1", but convert 
-            print(obj + " ;; " + str(int(obj)))
+            # print(obj + " ;; " + str(int(obj)))
             return int(obj)
         return obj
     elif typeof(obj) == TYPE_REAL:

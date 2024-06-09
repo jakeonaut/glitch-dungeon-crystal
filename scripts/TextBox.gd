@@ -361,17 +361,12 @@ func hideTextbox():
   self.hide()
   if textboxParent.get_ref():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
-  if isWaitingForEndPrompt():
-    abortSound.play()
-    if abortSound.has_method("preActivateScript") and not has_preactivated:
-      abortSound.preActivateScript()
-      has_preactivated = true
-    abortSound.activateScript()
-  else:
-    abortSound.play()
-    if abortSound.has_method("preActivateScript") and not has_preactivated:
-      abortSound.preActivateScript()
-      has_preactivated = true
+  abortSound.play()
+  if abortSound.has_method("preActivateScript") and not has_preactivated:
+    abortSound.preActivateScript()
+    has_preactivated = true
+  abortSound.activateScript()
+  if not isWaitingForEndPrompt():
     if abortSound.has_method("cutOffEarlyActivateScript"):
       abortSound.cutOffEarlyActivateScript()
   if global.activeInteractor == self:

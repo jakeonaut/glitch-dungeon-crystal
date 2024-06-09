@@ -162,7 +162,6 @@ func fallthroughCollisionActivate(possible_game_mover):
         if possible_game_mover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
             passiveActivate(0, true)
     # mySprite.material_override.set_shader_param("enable_glitch", true)
-    # print("set shake power...")
     # shake_power = 0.005
     # mySprite.material_override.set_shader_param("shake_power", shake_power)
 

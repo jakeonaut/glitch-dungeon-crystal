@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=2]
@@ -94,6 +94,39 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "dark_bubble"
+length = 3.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1, 1.2, 1.5, 1.8, 2.2, 2.5, 2.9, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 13, 14, 13, 12, 13, 12, 12, 14, 13, 12 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "dark_bubbleGrow"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14 ]
+}
+
 [node name="BubbleSpell" type="Spatial"]
 script = ExtResource( 8 )
 
@@ -110,7 +143,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 shape = SubResource( 15 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073, 2 )
 material_override = SubResource( 11 )
 pixel_size = 0.12
 shaded = true
@@ -125,6 +158,8 @@ should_randomize_frame_delay = true
 anims/RESET = SubResource( 12 )
 anims/bubble = SubResource( 13 )
 anims/bubbleGrow = SubResource( 14 )
+anims/dark_bubble = SubResource( 17 )
+anims/dark_bubbleGrow = SubResource( 18 )
 
 [node name="AppearSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 9 )

@@ -283,9 +283,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -15, 0 )
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -15, 0 )
 
-[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 8, -1 )
-
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03944, 0, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub2.tscn"
@@ -354,6 +351,12 @@ shape = SubResource( 35 )
 [node name="WindGust" parent="Viewport/level/DustFarmer2" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76536, 0.4, 1 )
 
+[node name="Dragonfly2" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9, 9.1, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/Dragonfly2" index="0"]
+frame = 37
+
 [node name="Viewport2" parent="." instance=ExtResource( 4 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -379,4 +382,5 @@ flip_v = true
 [editable path="Viewport/level/Door4/NPC/NPC TextBox"]
 [editable path="Viewport/level/DustFarmer2/NPC"]
 [editable path="Viewport/level/DustFarmer2/NPC/NPC TextBox"]
+[editable path="Viewport/level/Dragonfly2"]
 [editable path="Viewport2/ScreenEffects"]
