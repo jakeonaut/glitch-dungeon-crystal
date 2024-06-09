@@ -611,6 +611,34 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@DustFarmer4@NPC@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 25.0
+step = 1.0
+page = 101.0
+
+[node name="Viewport@level@DustFarmer4@NPC@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@DustFarmer3@NPC@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 25.0
+step = 1.0
+page = 101.0
+
+[node name="Viewport@level@DustFarmer3@NPC@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 11 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -874,20 +902,6 @@ tiny_textbox = false
 [node name="CollisionShape" parent="Viewport/level/DustFarmer3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 39 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer3/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer3/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/DustFarmer3/NPC" index="3"]
 frame_delay = 0.2
 
@@ -918,20 +932,6 @@ tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 39 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer4/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer4/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="AnimationPlayer" parent="Viewport/level/DustFarmer4/NPC" index="4"]
 anims/default = SubResource( 58 )
@@ -975,7 +975,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -4, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -9, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )

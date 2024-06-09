@@ -195,7 +195,7 @@ func _process(delta):
   if global.pauseGame or pauseSelf: return
   if jump_force == null: jump_force = 16
 
-  if smallInteractionArea:
+  if smallInteractionArea and smallInteractionArea.has_method("isActive"):
     is_touching_water = smallInteractionArea.is_touching_water
     is_touching_waterfall = smallInteractionArea.is_touching_waterfall
     touched_water_area = smallInteractionArea.touched_water_area

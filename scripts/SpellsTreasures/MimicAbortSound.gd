@@ -14,6 +14,10 @@ func activateScript():
     if num_gems >= mimic.num_gems_needed:
       global.incrementLevelZoneThing("num_mini_crystal_cubes", -mimic.num_gems_needed)
       treasureSpellCollectable.passiveActivate(0, true)
+      musicPlayer.playTreasureJingle(-20)
+    else:
+      level.player.errorSound.play()
+      level.player.sayThis("need " + str(mimic.num_gems_needed - num_gems) + " more gems")
   level.player.pauseInput = false
     
 func preActivateScript():

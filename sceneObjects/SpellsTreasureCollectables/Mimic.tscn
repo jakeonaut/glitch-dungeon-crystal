@@ -562,11 +562,9 @@ floating_text = null
 can_move_player = null
 is_active = null
 tiny_textbox = null
-is_static_in_level = null
 is_wiggling_fast = null
 dont_align_sprite = null
 stop_all_music = null
-display_textbox = null
 canPause = null
 
 [node name="InteractionArea" type="Area" parent="TreasureSpellCollectable"]

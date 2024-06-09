@@ -261,7 +261,7 @@ func hitStuff(_delta):
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-            if not area.is_in_group("door"):
+            if not area.is_in_group("door") and not area.is_in_group("npc"):
                 area.InteractActivate(false)
                 has_hit_something = area.get_parent().has_method("activate")
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
@@ -290,6 +290,7 @@ func hitStuff(_delta):
             #     getLevelTiles().sweepUpSand(coords)
             #     my_broom_owner.digSound.play()
             #     has_hit_something = true
+    print(has_hit_something)
     return has_hit_something
 
 func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):

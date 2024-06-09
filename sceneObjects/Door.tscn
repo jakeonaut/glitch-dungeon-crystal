@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/pokeball0000.png" type="Texture" id=9]
 [ext_resource path="res://assets/sounds/MinishCap_Door2.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/assets_sfx_menu_confirm.wav" type="AudioStream" id=11]
-[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Yokai.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=14]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=15]
@@ -382,7 +381,6 @@ is_a_body = false
 is_static_in_level = false
 
 [node name="SmallInteractionArea" type="Area" parent="NPC" groups=["playerActivation"]]
-script = ExtResource( 12 )
 
 [node name="CollisionShape" type="CollisionShape" parent="NPC/SmallInteractionArea"]
 shape = SubResource( 17 )

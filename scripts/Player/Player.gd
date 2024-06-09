@@ -6,6 +6,7 @@ onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var hurt3Sound = get_node("Sounds/HurtSound3")
 onready var broomSound = get_node("Sounds/BroomSound")
 onready var noBroomSound = get_node("Sounds/NoBroomSound")
+onready var errorSound = get_node("Sounds/ErrorSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
 onready var noSpellSound = get_node("Sounds/NoSpellSound")
@@ -262,12 +263,12 @@ func isWalkingIntoWall():
   else:
     return .isWalkingIntoWall() # super
 
-func sayThis(message, time_to_clear = 3.0):
+func sayThis(message, _time_to_clear = 3.0):
   textBox.text_final = message
   textBox.interact()
   global.activeInteractor = textBox
-  yield(get_tree().create_timer(time_to_clear), "timeout")
-  textBox.hideTextbox()
+  # yield(get_tree().create_timer(time_to_clear), "timeout")
+  # textBox.hideTextbox()
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
@@ -510,7 +511,6 @@ func tryDieToOffscreenCamera(delta):
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
     global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
       if not has_landed_since_recovering:
-      #print(str(global_transform.origin.x) + ", " + str(global_transform.origin.y) + " || " + str(self.getCamera().rightmost_x) + ", " + str(self.getCamera().leftmost_x) + ", " + str(self.getCamera().topmost_y) + ", " + str(self.getCamera().botmost_y))
         global.memory["hp"] = 0
         tryDieToEnemy(delta, true, true, true)
         has_landed_since_recovering = true
@@ -1227,7 +1227,7 @@ func processBagLogic(_delta):
 
 var force_a_sweep = false
 func processBroomLogic(delta):
-  if pauseInput:
+  if pauseInput and summonedBroom == null:
     return
   if transformation == TransformationState.FISHY:
     return
@@ -1681,7 +1681,6 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
         fallenBroom.walk_direction.x = x_direction
       fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
     global.memory["broom"] = false
-    # print(fallenBroom.walk_direction)
 
     if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
       if grav > 0:
