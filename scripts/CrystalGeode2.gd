@@ -21,6 +21,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
 
 export var num_gems_needed = 20
+export var high_priestess_crystal = false
 
 onready var confirmNPC = get_node("ConfirmNPC")
 
@@ -32,10 +33,15 @@ func getLevelTiles():
 
 func _ready():
     set_process(true)
-    if getMyStaticLevelZoneVar():
+    if getMyStaticLevelZoneVar() or high_priestess_crystal:
         is_purified = true
         lightAniPlayer.play("lightUpQuiet")
         # musicPlayer.changeSongPitch(1.0)
+    else:
+        lightAniPlayer.play("RESET")
+    if high_priestess_crystal:
+        confirmNPC.is_active = false
+        confirmNPC.can_activate = false
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
     #     yield(TempTimer.idle_frame(self), "timeout")

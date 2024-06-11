@@ -109,7 +109,7 @@ shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 4 )
 shader_param/target_palette = ExtResource( 1 )
 
-[sub_resource type="Shader" id=56]
+[sub_resource type="Shader" id=78]
 code = "shader_type spatial;
 render_mode specular_schlick_ggx;
 
@@ -404,7 +404,7 @@ tracks/20/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ SubResource( 56 ) ]
+"values": [ SubResource( 78 ) ]
 }
 tracks/21/type = "value"
 tracks/21/path = NodePath("CubeContainer/MeshInstance2:material_override")
@@ -710,7 +710,7 @@ tracks/21/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 56 ) ]
+"values": [ SubResource( 78 ) ]
 }
 tracks/22/type = "value"
 tracks/22/path = NodePath("CubeContainer/MeshInstance2:material_override")
@@ -1266,6 +1266,7 @@ maxSize = 250
 bbText = "•offer 20 crystal shards
 •to purify the crystal?"
 can_activate = false
+is_a_body = false
 showYesNoOptions = true
 
 [node name="CollisionShape" parent="ConfirmNPC/SmallInteractionArea" index="0"]
@@ -1279,6 +1280,9 @@ script = ExtResource( 25 )
 
 [node name="Sprite3D" parent="ConfirmNPC" index="3"]
 pixel_size = 0.0001
+
+[node name="FallthroughSolid" parent="ConfirmNPC" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, -5.96046e-08, 1, 0, -9.57629, -44.6741 )
 
 [node name="CollisionShape" parent="ConfirmNPC/FallthroughSolid" index="0"]
 shape = SubResource( 59 )

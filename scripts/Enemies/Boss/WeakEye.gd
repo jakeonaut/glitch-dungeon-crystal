@@ -27,7 +27,7 @@ func _process(delta):
     var newSprite = sparkleSprite.duplicate()
     newSprite.should_fizzle_out = true
     newSprite.visible = true
-    newSprite.transform.origin = Vector3(
+    var random_pos = Vector3(
         stepify(rand_range(-1.0, 1.0), 0.125),
         stepify(rand_range(0.5, 1.5), 0.125),
         0
@@ -35,6 +35,7 @@ func _process(delta):
     newSprite.updateBaseFrame(0, 0)
     newSprite.max_frames = 2
     add_child(newSprite)
+    newSprite.global_transform.origin = self.global_transform.origin + random_pos
     spawn_timer = 0
 
 func ouchies(_broom_pos):

@@ -315,15 +315,15 @@ func pressingJump():
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  return (Input.is_action_pressed("jump_button") and not pauseInput and not isTextboxPausingMe()) or should_magic_jump
+  return (Input.is_action_pressed("jump_button") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()) or should_magic_jump
 
 # @override
 func pressingMoveUp():
-  return Input.is_action_pressed("ui_up") and not pauseInput and not isTextboxPausingMe()
+  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
   
 # @override
 func pressingMoveDown():
-  return Input.is_action_pressed("ui_down") and not pauseInput and not isTextboxPausingMe()
+  return Input.is_action_pressed("ui_down") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
   
 var override_stop_left_input = false
 # @override

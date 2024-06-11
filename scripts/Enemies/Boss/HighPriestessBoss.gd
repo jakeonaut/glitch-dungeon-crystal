@@ -72,8 +72,9 @@ func getHurt():
     elif hp == -4:
         boss_phase = BossPhase.COMPLETE
 
+var am_i_hidden = false
 func _process(delta):
-    if global.pauseGame:
+    if global.pauseGame or am_i_hidden:
         return
 
     if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
@@ -89,7 +90,7 @@ func _process(delta):
             laughSound.play()
     elif boss_phase == BossPhase.FROG_PLAGUE_SPAWNING:
         spawn_timer += (delta*11)
-        if spawn_timer >= spawn_time_limit * 4:
+        if spawn_timer >= spawn_time_limit:
             spawn_timer = 0
             num_spawns += 1
             var frog = basicFrogEnemyRes.instance()

@@ -209,6 +209,7 @@ func _ready():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
     memory["angel_flute"] = false
+    memory["has_seen_highpriestess"] = false
 
     # PERMANENT SPELLS
     
