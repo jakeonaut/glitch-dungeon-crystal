@@ -33,15 +33,16 @@ func getLevelTiles():
 
 func _ready():
     set_process(true)
-    if getMyStaticLevelZoneVar() or high_priestess_crystal:
+
+    var meshInstance2 = get_node("CubeContainer/MeshInstance2")
+    meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
+    meshInstance2.material_override.set_shader_param("alpha2", 0.5)
+    if getMyStaticLevelZoneVar():
         is_purified = true
         lightAniPlayer.play("lightUpQuiet")
         # musicPlayer.changeSongPitch(1.0)
     else:
-        lightAniPlayer.play("RESET")
-    if high_priestess_crystal:
-        confirmNPC.is_active = false
-        confirmNPC.can_activate = false
+        lightAniPlayer.play("RESET")    
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
     #     yield(TempTimer.idle_frame(self), "timeout")
@@ -66,9 +67,9 @@ func _process(delta):
     #     # musicPlayer.changeSongPitch(1.0)
     # else:
     #     musicPlayer.changeSongPitch(0.5)
-    var level_name = level.getLevelName()
-    if not "Haven" in level_name and not "MainMenu" in level_name:
-        musicPlayer.changeSongPitch(0.5)
+    # var level_name = level.getLevelName()
+    # if not "Haven" in level_name and not "MainMenu" in level_name:
+    #     musicPlayer.changeSongPitch(0.5)
     if not can_do_my_power:
         return
     rot_amount = 10
@@ -93,8 +94,12 @@ func isActive(_debug=false):
     return visible and not is_purified
 
 func speakToMe():
-    global.hasGottenLevelGeode = true
-    global.hasLevelGeodeBeenSmacked = true
+    if high_priestess_crystal:
+        global.hasGottenLevelGeode = false
+        global.hasLevelGeodeBeenSmacked = false
+    else:
+        global.hasGottenLevelGeode = true
+        global.hasLevelGeodeBeenSmacked = true
     # if global.memory["clean_crystals"] == 1:
     #     level.player.sayThis("you purified a crystal.\npleasant, somehow.")
     # else:

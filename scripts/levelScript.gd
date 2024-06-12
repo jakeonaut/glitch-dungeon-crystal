@@ -138,7 +138,7 @@ func _process(delta):
       global.isPauseMenuOpen = true
       global.pauseGame = true
       player.pauseSound.play()
-      musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
+      playMenuMusic()
   elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
     if global.is_reading_input:
       player.noBroomSound.play()
@@ -163,8 +163,10 @@ func saveTheGame(message = "saving!!"):
   global.memory["roomPath"] = self.getLevelName()
   global.saveGame()
     
+func playMenuMusic():
+  musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
+
 func restartMusic():
-  # update music
   musicPlayer.conductFromScenePath(getLevelName())
   
 func tryShowUIElements():

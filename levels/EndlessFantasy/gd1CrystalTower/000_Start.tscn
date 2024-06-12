@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/GlitchedGrimoire.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=16]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=19]
@@ -36,72 +36,7 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=34]
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=36]
-[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=37]
-[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=38]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=39]
-
-[sub_resource type="BoxShape" id=58]
-resource_local_to_scene = true
-
-[sub_resource type="ShaderMaterial" id=59]
-shader = ExtResource( 1 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = false
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 38 )
-shader_param/base_palette = ExtResource( 21 )
-shader_param/target_palette = ExtResource( 37 )
-
-[sub_resource type="StreamTexture" id=20]
-flags = 19
-load_path = "res://.import/treasureChest.png-88e03eeb0b30806bc8cf1f96e2861323.stex"
-
-[sub_resource type="ShaderMaterial" id=60]
-shader = ExtResource( 1 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 4.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = SubResource( 20 )
-shader_param/base_palette = ExtResource( 21 )
-shader_param/target_palette = ExtResource( 39 )
+[ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=37]
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 1 )
@@ -167,6 +102,100 @@ shader_param/target_palette = ExtResource( 31 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="Animation" id=67]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=68]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=69]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=71]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=72]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=73]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=74]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=75]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=77]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=78]
+resource_name = "stand"
+length = 0.1
+
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
@@ -198,6 +227,185 @@ extents = Vector3( 1, 0.8, 1.3 )
 [sub_resource type="BoxShape" id=57]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=58]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=59]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 21 )
+shader_param/target_palette = ExtResource( 16 )
+
+[sub_resource type="Animation" id=60]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=62]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=64]
+resource_name = "land"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "stand"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="BoxShape" id=66]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -308,24 +516,6 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33655, -4.95006, 0 )
 
-[node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.48196, 1, 0 )
-bbText = "•\"FORGET ME NOT̸\" get!!
-now you can remember
-all your spells!"
-is_static_in_level = true
-display_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/GlitchedGrimoire/SmallInteractionArea" index="0"]
-shape = SubResource( 58 )
-
-[node name="Sprite3D" parent="Viewport/level/GlitchedGrimoire" index="3"]
-material_override = SubResource( 59 )
-frame = 4
-
-[node name="TreasureSprite3D" parent="Viewport/level/GlitchedGrimoire" index="4"]
-material_override = SubResource( 60 )
-
 [node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.60406, 6.46449, 0 )
 
@@ -392,6 +582,64 @@ shape = SubResource( 49 )
 [node name="SwampBubbleSpawn" parent="Viewport/level/NPC" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
+[node name="NPC2" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 9, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
+shape = SubResource( 47 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
+material_override = SubResource( 48 )
+flip_h = true
+frame = 26
+max_frames = 1
+automatically_change_color = false
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
+anims/default = SubResource( 67 )
+anims/fall = SubResource( 68 )
+anims/flickerOn = SubResource( 69 )
+anims/jump = SubResource( 70 )
+anims/land = SubResource( 71 )
+anims/stand = SubResource( 72 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC2/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
+shape = SubResource( 49 )
+
+[node name="SwampBubbleSpawn" parent="Viewport/level/NPC2" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
+shape = SubResource( 47 )
+
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
+material_override = SubResource( 48 )
+flip_h = true
+frame = 26
+max_frames = 1
+automatically_change_color = false
+
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
+anims/default = SubResource( 73 )
+anims/fall = SubResource( 74 )
+anims/flickerOn = SubResource( 75 )
+anims/jump = SubResource( 76 )
+anims/land = SubResource( 77 )
+anims/stand = SubResource( 78 )
+
+[node name="CollisionShape" parent="Viewport/level/NPC3/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
+shape = SubResource( 49 )
+
+[node name="SwampBubbleSpawn" parent="Viewport/level/NPC3" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -4, 0 )
 
@@ -439,6 +687,92 @@ shape = SubResource( 56 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 57 )
 
+[node name="CroneNPC" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 1.0454, 0 )
+grav = 0
+bbText = "•only one crystal
+to be purified remains...."
+dont_recolor_me = true
+can_move_player = true
+
+[node name="CollisionShape" parent="Viewport/level/CroneNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 58 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="DialogStartSound" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox" index="13"]
+stream = ExtResource( 37 )
+
+[node name="Sprite3D" parent="Viewport/level/CroneNPC" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.345, 0 )
+material_override = SubResource( 59 )
+flip_h = true
+frame = 54
+automatically_change_color = false
+
+[node name="AnimationPlayer" parent="Viewport/level/CroneNPC" index="4"]
+anims/default = SubResource( 60 )
+anims/fall = SubResource( 61 )
+anims/flickerOn = SubResource( 62 )
+anims/jump = SubResource( 63 )
+anims/land = SubResource( 64 )
+anims/stand = SubResource( 65 )
+
+[node name="CollisionShape" parent="Viewport/level/CroneNPC/FallthroughSolid" index="0"]
+shape = SubResource( 66 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -468,15 +802,19 @@ __meta__ = {
 [node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
 material = SubResource( 44 )
 
-[editable path="Viewport/level/GlitchedGrimoire"]
-[editable path="Viewport/level/GlitchedGrimoire/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/NPC2"]
+[editable path="Viewport/level/NPC2/NPC TextBox"]
+[editable path="Viewport/level/NPC3"]
+[editable path="Viewport/level/NPC3/NPC TextBox"]
 [editable path="Viewport/level/SavePoint"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/CroneNPC"]
+[editable path="Viewport/level/CroneNPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

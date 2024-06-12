@@ -394,7 +394,6 @@ script = ExtResource( 6 )
 show_crt_effect = true
 tileset_type = 2
 has_spellbook_page = true
-has_glitched_grimoire = true
 display_title = ""
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 19 )]
@@ -542,11 +541,8 @@ behavior_flip_on_land = true
 behavior_was_thrown = true
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3605, 18, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3605, 22, 0 )
 behavior_walking = true
-behavior_jumping = true
-behavior_flip_on_land = true
-behavior_was_thrown = true
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3.98224, 0 )
@@ -557,7 +553,7 @@ to be down here"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]

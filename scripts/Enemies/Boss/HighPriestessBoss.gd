@@ -8,7 +8,7 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
 
 var big_spawn_timer = 30
-var big_spawn_time_limit = 60
+var big_spawn_time_limit = 90
 var num_spawns = 0
 var num_spawn_limit = 3
 

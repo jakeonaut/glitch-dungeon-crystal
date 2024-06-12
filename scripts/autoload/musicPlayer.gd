@@ -133,7 +133,7 @@ func conductFromScenePath(path):
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
     elif path.find("HighPriestessRoom") > 0:
-        tryToPlay(bossThemePlayer)
+        tryToPlay(crystalThemePlayer) # bossThemePlayer)
     elif path.find("gd1CrystalTower") > 0:
         tryToPlay(debugThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("Pastoral") > 0:

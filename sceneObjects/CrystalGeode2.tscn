@@ -30,7 +30,7 @@
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=28]
 [ext_resource path="res://sceneObjects/CrystalGeode2DialogStartSound.gd" type="Script" id=29]
 
-[sub_resource type="ArrayMesh" id=64]
+[sub_resource type="ArrayMesh" id=79]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1145,7 +1145,7 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 64 )
+mesh = SubResource( 79 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 
@@ -1291,9 +1291,11 @@ shape = SubResource( 59 )
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, -0.03, 3.93185, -1.64705 )
 
 [node name="GlitchAura" parent="." instance=ExtResource( 26 )]
+visible = false
 target_path = NodePath("..")
 
 [node name="ColorRect" parent="GlitchAura" index="0"]
+visible = false
 material = SubResource( 61 )
 
 [editable path="ConfirmNPC"]
