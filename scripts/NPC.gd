@@ -42,18 +42,8 @@ export var showYesNoOptions = false
 export var tiny_textbox = false
 export var is_static_in_level = true
 
-var pressing_move_left = false
-var pressing_move_right = false
 export var is_wiggling_fast = false
 export var can_be_smacked = false
-
-# @override
-func pressingMoveLeft():
-  return pressing_move_left
-
-# @override
-func pressingMoveRight():
-  return pressing_move_right
 
 func _ready():
   set_process(true)
@@ -83,6 +73,7 @@ func _ready():
         nextTextBoxPathStr += "/"
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+  is_sprite_flipped = true
 
   var my_memory = self.getMyStaticLevelZoneVar()
   # if not is_static_in_level or not my_memory: 
@@ -94,7 +85,7 @@ func _ready():
   textBox.can_camera_zoom = can_camera_zoom
   textBox.floating_text = floating_text
   textBox.showYesNoOptions = showYesNoOptions
-  if tiny_textbox or floating_text:
+  if floating_text:
     textBox.tinify()
   textBox.is_fast_text = is_fast_text
 
@@ -233,7 +224,7 @@ func activate(is_player):
     return false
   if global.activeInteractor == null and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
     textBox.hideInteractPrompt()
-    if not tiny_textbox and not floating_text:
+    if not floating_text:
       textBox.untinify()
     textBox.interact()
     return true
@@ -282,7 +273,7 @@ func alignMySprite():
 
 # @override
 func processPhysics(delta):
-  if grav == 0 and not just_pressed_jump and not pressing_jump and not pressing_move_left and not pressing_move_right:
+  if grav == 0 and not just_pressed_jump and not pressing_jump and not override_press_move_right and not override_press_move_right:
     return
   else:
     # call GameMover.gd super method

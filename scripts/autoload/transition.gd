@@ -47,7 +47,7 @@ func really_long_fade_to(scn_path):
 func really_really_long_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
-    aniPlayer.play("long_fade", -1, 0.25) # play the long transition animation
+    aniPlayer.play("really_long_fade")
 
 func interrupt():
     was_i_interrupted = true

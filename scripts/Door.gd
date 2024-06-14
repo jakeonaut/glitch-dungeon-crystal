@@ -114,7 +114,7 @@ func _ready():
       if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
       elif key_type == global.KeyItem.SHROOM: key_name = "SHROOM KEY"
       elif key_type == global.KeyItem.CAT: key_name = "CAT KEY"
-      elif key_type == global.KeyItem.CRYSTAL: key_name = str(x_more_crystals) + " CRYSTALS"
+      elif key_type == global.KeyItem.CRYSTAL: key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
       npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false

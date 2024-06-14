@@ -195,6 +195,7 @@ func _ready():
     memory["show_color_blind"] = false
 
     # game stuff
+    memory["tutorial_gem"] = 0
     memory["hammer"] = 0
     memory["broom"] = true
     memory["has_gotten_broom"] = 0

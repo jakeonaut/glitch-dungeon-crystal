@@ -117,31 +117,17 @@ shape = SubResource( 48 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 5 )]
 
-[node name="VScrollBar2" type="VScrollBar" parent="NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 69.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 14 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="15"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="16"]
 stream = null
 script = ExtResource( 12 )
 key_type = 0

@@ -425,6 +425,32 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@GlitchTileSpawner@NPC3@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 66.0
+step = 1.0
+page = 128.0
+
+[node name="Viewport@level@GlitchTileSpawner@NPC3@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@GlitchTileSpawner@NPC3@NPC TextBox@TextBox@Text@VScrollBar4" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@GlitchTileSpawner@NPC3@NPC TextBox@TextBox@Text@VScrollBar5" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 19 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -517,32 +543,6 @@ can_move_player = true
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -555,10 +555,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 14 )
 
-[node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 12 )
 
 [node name="Sprite3D" parent="Viewport/level/GlitchTileSpawner/NPC3" index="3"]

@@ -85,6 +85,11 @@ func passiveActivate(_delta, _is_player):
     # global.memory["mp"] += 1
     # global.memory["max_mp"] += 1
     # global.memory["num_mini_crystal_cubes"] += 1
+    if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") == 0:
+      global.memory["tutorial_gem"] = 1
+      level.uiLayer.get_node("GlitchStatusRect").visible = true
+      level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
+      level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(200, 325)
     if not is_negative:
       global.incrementLevelZoneThing("num_mini_crystal_cubes", 1)
 

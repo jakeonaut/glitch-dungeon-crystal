@@ -726,7 +726,8 @@ func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
 
-  if transformation != TransformationState.FISHY and is_touching_water and was_touching_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
+  var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
+  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
     getFishyInfected()
     gravitySound.play()
   elif transformation == TransformationState.FISHY:

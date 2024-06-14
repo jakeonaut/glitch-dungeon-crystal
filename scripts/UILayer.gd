@@ -217,9 +217,11 @@ func _process(delta):
   miniCrystalCubeRect.visible = false
 
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
-  # tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(3, 66))
+  if global.memory["tutorial_gem"] == 1:
+    get_node("GlitchStatusRect").visible = true
+    tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(480, 65))
   if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(65, 3))
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(7, 4))
     # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
 
   if global.memory.has("spellbookPage"):
@@ -414,12 +416,12 @@ func processHiscoreRenderLogic(delta):
     # transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
-  if rect.rect_scale.x > 1:
+  if rect.rect_scale.x != 1:
     rect.rect_scale.x = rect.rect_scale.x + (1 - rect.rect_scale.x) * (delta*2)
     rect.rect_scale.y = rect.rect_scale.y + (1 - rect.rect_scale.y) * (delta*2)
     if stepify(rect.rect_scale.x, 0.1) == 1:
       rect.rect_scale = Vector2(1, 1)
-  if rect.rect_position.x > final_pos.x:
+  if rect.rect_position.x != final_pos.x:
     rect.rect_position.x = rect.rect_position.x + (final_pos.x - rect.rect_position.x) * (delta*2)
     rect.rect_position.y = rect.rect_position.y + (final_pos.y - rect.rect_position.y) * (delta*2)
     if stepify(rect.rect_position.x, 0.1) == stepify(final_pos.x, 0.1):

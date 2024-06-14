@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=14]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=17]
@@ -192,6 +193,9 @@ shape = SubResource( 30 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 31 )
+
+[node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9012, 3.48714, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 

@@ -305,6 +305,7 @@ func processPhysics(delta):
       was_just_on_ground_timer = -8
     if "jump" in aa:
       was_just_on_ground_timer = was_just_on_ground_time_limit
+  was_touching_sandstream = is_touching_sandstream
   was_touching_water = is_touching_water
 
   if was_just_on_ground_timer <= was_just_on_ground_time_limit:
@@ -528,6 +529,7 @@ func iJustPressedDown():
   should_do_fallthrough_area_collision = false
 
 var is_touching_sandstream = false
+var was_touching_sandstream = false
 func processInputs(delta):
   processLadderInputs(delta)
   processJumpInputs(delta)
@@ -830,6 +832,7 @@ const PROJECTION_ORTHOGONAL = 1
 var was_running = false
 var horizontal_multiplier = 1
 var horizontal_addition = 0
+var is_sprite_flipped = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
@@ -903,6 +906,8 @@ func processHorizontalInputs(delta):
       elif pressingMoveRight():
         multiplier = -1
         flip_h = false
+      if is_sprite_flipped:
+        flip_h = not flip_h
       multiplier = multiplier * horizontal_multiplier + horizontal_addition
       
 

@@ -43,7 +43,7 @@ export var doesnt_have_broom = false
 func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   _ready_impl()
-  ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
+  # ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
 
 export var is_randomizing = false
 func _ready_impl():
@@ -132,6 +132,9 @@ func _process(delta):
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
+  processPauseMenu()
+
+func processPauseMenu():
   if not global.pauseGame and not global.pauseMoveInput:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
       uiLayer.quitGameTimer = 0

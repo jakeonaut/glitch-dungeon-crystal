@@ -384,7 +384,7 @@ script = ExtResource( 1 )
 [node name="PastoralScene" type="Spatial" parent="."]
 
 [node name="DefaultLevel" parent="PastoralScene" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, 0 )
 frame = 18
 path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 

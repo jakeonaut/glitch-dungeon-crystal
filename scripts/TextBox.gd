@@ -395,8 +395,8 @@ func interact():
     return false
   if !visible and dialogSound.isActive():
     showTextbox()
-    if not is_tiny:
-      global.activeInteractor = self
+    #if not is_tiny:
+    global.activeInteractor = self
     return true
 
   if global.activeInteractor == self:
@@ -423,9 +423,8 @@ func passiveInteract(_delta):
   if text_final == "":
     return
   if !visible and dialogSound.isActive() and (global.activeInteractor == null or (is_instance_valid(global.activeInteractor) and global.activeInteractor == self)):
-    if (is_tiny or is_really_important) and not has_been_shown:
-      if not is_tiny:
-        global.activeInteractor = self
+    if is_really_important and not has_been_shown:
+      global.activeInteractor = self
       showTextbox()
 
   if global.activeInteractor == self and not focus_me:
