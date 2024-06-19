@@ -38,6 +38,7 @@ func _ready():
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
+        print("teehee")
         is_purified = true
         lightAniPlayer.play("lightUpQuiet")
         # musicPlayer.changeSongPitch(1.0)
@@ -106,7 +107,7 @@ func speakToMe():
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
 # func activate(_is_player):
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, _is_player):
     # if not global.memory["broom"]:
     #     if not notGetHitSound.is_playing(): notGetHitSound.play()
     #     return
@@ -191,4 +192,4 @@ func getMyStaticLevelZoneVar(refresh_if_null = false):
         level = get_tree().get_root().get_node("Game/Viewport/level")
     if staticLevelZoneVar == null or refresh_if_null:
         staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self.name)
-        return staticLevelZoneVar
+    return staticLevelZoneVar

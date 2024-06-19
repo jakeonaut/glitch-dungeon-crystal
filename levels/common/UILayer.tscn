@@ -1,6 +1,6 @@
 [gd_scene load_steps=56 format=2]
 
-[ext_resource path="res://assets/sprites2D/minimi.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/UILayer.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites2D/hearts.png" type="Texture" id=4]
@@ -1098,6 +1098,7 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "0"
 
 [node name="GlitchSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 32.5, 34 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 19 )
@@ -1216,12 +1217,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3"]
-position = Vector2( 15, 15 )
+position = Vector2( 13.5, 16.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
-hframes = 8
-vframes = 5
-frame = 6
+hframes = 4
+vframes = 6
+frame = 4
 
 [node name="ColorRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 78.0
@@ -1238,12 +1239,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3"]
-position = Vector2( 15, 15 )
+position = Vector2( 13.5, 16.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
-hframes = 8
-vframes = 5
-frame = 6
+hframes = 4
+vframes = 6
+frame = 4
 
 [node name="EquipmentStatusRect" type="ColorRect" parent="."]
 visible = false

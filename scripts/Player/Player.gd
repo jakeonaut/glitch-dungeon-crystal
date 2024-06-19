@@ -267,6 +267,7 @@ func sayThis(message, _time_to_clear = 3.0):
   textBox.text_final = message
   textBox.interact()
   global.activeInteractor = textBox
+  print(global.activeInteractor)
   # yield(get_tree().create_timer(time_to_clear), "timeout")
   # textBox.hideTextbox()
 
@@ -357,8 +358,8 @@ func _process(delta):
 
   # if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
   #   applySpellbookGlitch()
-  # if Input.is_action_just_pressed("debug_glitch_button"):
-  #   applyNextGlitch()
+  if Input.is_action_just_pressed("debug_glitch_button"):
+    applyNextGlitch()
     
   tryDieToOffscreenCamera(delta)
       

@@ -1252,16 +1252,16 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC8/SmallInteractionArea" index="0"]
 shape = SubResource( 39 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.5
 
-[node name="DialogSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="14"]
 pitch_scale = 0.5
 
-[node name="NextDialogSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="15"]
 pitch_scale = 0.5
 
-[node name="AbortSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC8/NPC TextBox/TextBox" index="16"]
 pitch_scale = 0.5
 
 [node name="Sprite3D" parent="Viewport/level/NPC8" index="3"]
@@ -1298,60 +1298,6 @@ is_a_body = false
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 99 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 27.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/QuestionBlock/NPC2/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
@@ -1602,49 +1548,7 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 85 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 44 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
@@ -1672,49 +1576,7 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 85 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 44 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
@@ -1804,6 +1666,27 @@ texture = ExtResource( 38 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 19, 0 )
+glitch_form = 2
+
+[node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 31, 0 )
+glitch_form = 2
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 17, 0 )
+glitch_form = 2
+
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 12, 0 )
+glitch_form = 1
+
+[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, 27, 0 )
+glitch_form = 1
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, 29, 0 )
+glitch_form = 1
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 4, 0 )
@@ -1836,136 +1719,6 @@ dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/QuestionBlock4/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 125 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar13" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="11"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar14" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="12"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar15" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="13"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar16" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="14"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar17" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="15"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar18" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="16"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar19" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="17"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar20" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/Text" index="18"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/QuestionBlock4/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false

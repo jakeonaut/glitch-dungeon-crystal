@@ -13,7 +13,9 @@ var has_boss_started = false
 var debug_start_boss_immediately = false
 # @override
 func setUpRoomInitializationOverride():
-  if (global.memory.has("roomPath") and (not ("preBossRoom" in global.memory["roomPath"])))or not global.memory.has("roomPath") or crystalGeode.getMyStaticLevelZoneVar():
+  if not global.memory.has("roomPath"):
+    debug_start_boss_immediately = true
+  if crystalGeode.getMyStaticLevelZoneVar():
     debug_start_boss_immediately = true
 
   if debug_start_boss_immediately:
@@ -50,6 +52,7 @@ func _process(_delta):
       aniPlayer.play("appear")
       gameCamera.initial_size = 35
       gameCamera.zoomed_size = 35
+      global.pauseMoveInput = true
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
       musicPlayer.stopAll()
@@ -61,6 +64,7 @@ func unhideHighPriestess():
   highPriestessBoss.visible = true
   highPriestessBoss.am_i_hidden = false
   highPriestessBoss.mySprite.visible = true
+  global.pauseMoveInput = false
   global.pauseGame = false
   global.shouldRenderAsCinematic = false
   crystalGeode.queue_free()
@@ -71,3 +75,6 @@ func unhideHighPriestess():
   musicPlayer.stopAll()
   musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
   levelTiles.randomize_num = 1
+  global.memory["has_seen_highpriestess"] = true
+  global.memory.erase("spellbookPage")
+  player.nullify()

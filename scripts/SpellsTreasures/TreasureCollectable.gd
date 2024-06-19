@@ -55,7 +55,7 @@ func _process(delta):
       if abortSound.has_method("preActivateScript"):
         abortSound.preActivateScript()
       abortSound.activateScript()
-      global.activeInteractor = null
+      # global.activeInteractor = null
       level.player.getItemFailsafe()
       okay_im_really_done_bye = true
     return

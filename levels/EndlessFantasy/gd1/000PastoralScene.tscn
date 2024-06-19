@@ -1,4 +1,4 @@
-[gd_scene load_steps=234 format=2]
+[gd_scene load_steps=232 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -3158,22 +3158,6 @@ tracks/1/keys = {
 "values": [ 64.0 ]
 }
 
-[sub_resource type="ArrayMesh" id=231]
-surfaces/0 = {
-"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
-"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
-"blend_shape_data": [  ],
-"format": 2194689,
-"index_count": 24,
-"primitive": 1,
-"skeleton_aabb": [  ],
-"vertex_count": 8
-}
-
-[sub_resource type="ViewportTexture" id=232]
-viewport_path = NodePath("MiniCrystalCubeRect/ColorRect/ColorRect/Viewport")
-
 [sub_resource type="Animation" id=200]
 length = 0.001
 tracks/0/type = "value"
@@ -4878,12 +4862,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 231 )
-
-[node name="Sprite" parent="UILayer/GlitchStatusRect" index="3"]
-texture = SubResource( 232 )
-
 [node name="AnimationPlayer" parent="UILayer/PauseMenu/LeftSprite" index="0"]
 anims/RESET = SubResource( 200 )
 anims/idle = SubResource( 201 )
@@ -5117,5 +5095,4 @@ scroll_active = false
 [editable path="Viewport/level/CroneNPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="UILayer"]
-[editable path="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal"]
 [editable path="ScreenEffects"]

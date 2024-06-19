@@ -460,24 +460,30 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 29, 0 )
 
 [node name="GlitchEnemy9" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7, 0 )
+glitch_form = 1
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 19, 0 )
+glitch_form = 1
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 27, 0 )
+glitch_form = 4
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 27, 0 )
+glitch_form = 4
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 27, 0 )
+glitch_form = 4
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 35, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 2, 0 )
+glitch_form = 4
 
 [node name="CollisionShape" parent="Viewport/level/GlitchEnemy3/FallthroughSolid" index="0"]
 shape = SubResource( 31 )

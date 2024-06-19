@@ -777,6 +777,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       else:
         if area.get_node("..").notOuchies(global_transform.origin):
           my_broom_owner.getSmacked()
+          my_broom_owner.has_sweeped_glitch = true
       
       # # TODO kill glitches or "free" them like glitch slug...
       

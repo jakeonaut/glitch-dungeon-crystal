@@ -240,12 +240,12 @@ func _process(delta):
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd
-  if glitch == global.GlitchForm.NORMAL: sprite.frame = 5
-  elif glitch == global.GlitchForm.FLOOR: sprite.frame = 0
-  elif glitch == global.GlitchForm.FEATHER: sprite.frame = 14
-  elif glitch == global.GlitchForm.LADDER: sprite.frame = 25
-  elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 21
-  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 32
+  if glitch == global.GlitchForm.NORMAL: sprite.frame = 4
+  elif glitch == global.GlitchForm.FLOOR: sprite.frame = 1
+  elif glitch == global.GlitchForm.FEATHER: sprite.frame = 0
+  elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
+  elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
+  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 4
 
 onready var quitGameRect = get_node("QuitGameRect")
 onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")

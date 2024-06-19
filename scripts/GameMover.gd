@@ -125,7 +125,15 @@ export var walk_speed = 8
 export var run_speed = 10
 # export var fast_run_speed = 12
   
-var glitch_form = global.GlitchForm.NORMAL
+enum GlitchForm {
+  NORMAL,
+  FLOOR,
+  FEATHER,
+  INVISIBLE,
+  LADDER,
+  WALK_THROUGH_WALLS,
+}
+export(GlitchForm) var glitch_form = GlitchForm.NORMAL
 var prev_glitch_form = global.GlitchForm.NORMAL
 var feather_jump_timer = 0
 var feather_jump_time_limit = 8
@@ -329,9 +337,9 @@ func playLandAnimation():
 func tryClearFallthroughCollisionSolid():
   if self != level.player:
     return
-  if interactionArea and interactionArea.prev_fallthrough_collision_area != null and \
-      interactionArea.prev_fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionClear"):
-    interactionArea.prev_fallthrough_collision_area.get_node("..").fallthroughCollisionClear(self)
+  if interactionArea and interactionArea.prev_fallthrough_collision_area != null and interactionArea.prev_fallthrough_collision_area.get_ref() and \
+      interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").has_method("fallthroughCollisionClear"):
+    interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").fallthroughCollisionClear(self)
 
 var can_update_last_grounded_pos = true
 func processLand():

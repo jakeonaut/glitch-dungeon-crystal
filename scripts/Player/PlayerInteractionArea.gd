@@ -32,7 +32,7 @@ func _process(_delta):
                 continue
             if fallthroughParent.has_method("isFallthroughCollisionActive") and not fallthroughParent.isFallthroughCollisionActive():
                 continue
-            if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and prev_fallthrough_collision_area == null:
+            if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and (prev_fallthrough_collision_area == null or not prev_fallthrough_collision_area.get_ref()):
                 continue
             if global.doFallthroughObjectCollision(player, area):
                 # last fallthrough object overrides this value
@@ -106,4 +106,4 @@ func postProcessFallthroughCollisionArea(fallthrough_collision_area):
     else:
         player.should_do_fallthrough_area_collision = false
 
-    prev_fallthrough_collision_area = fallthrough_collision_area
+    prev_fallthrough_collision_area = weakref(fallthrough_collision_area)

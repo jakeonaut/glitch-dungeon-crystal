@@ -110,8 +110,25 @@ func _ready():
     if behavior_directional_bullet:
         mySprite.texture = altGlitchEnemySheet
         mySprite.set_material_override(null)
+    else:
+        mySprite.material_override = mySprite.material_override.duplicate()
 
-    mySprite.material_override = mySprite.material_override.duplicate()
+    yield(get_tree().create_timer(0.5), "timeout")
+    if mySprite and glitch_form != global.GlitchForm.NORMAL and not mySprite.is_in_group("sprite"):
+        mySprite.updateBaseFrame(4, 4)
+        var target_palette = level.levelTiles.grey_palette
+        if glitch_form == global.GlitchForm.FLOOR:
+            target_palette = level.levelTiles.red_palette
+        elif glitch_form == global.GlitchForm.LADDER:
+            target_palette = level.levelTiles.yellow_palette
+        elif glitch_form == global.GlitchForm.FEATHER:
+            target_palette = level.levelTiles.green_palette
+        elif glitch_form == global.GlitchForm.INVISIBLE:
+            target_palette = level.levelTiles.black_palette
+        elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+            target_palette = level.levelTiles.white_palette
+        if mySprite.material_override != null:
+            mySprite.material_override.set_shader_param("target_palette", target_palette)
 
 func shouldIDoCollisions():
     should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
@@ -127,6 +144,19 @@ func glitchOut():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
+        mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
+        if level.player.glitch_form == glitch_form and not smallInteractionArea.is_in_group("enemies"):
+            mySprite.material_override.set_shader_param("opacity", 1.0)
+            mySprite.material_override.set_shader_param("enable_glitch", true)
+            mySprite.global_transform.origin.z = 1
+            smallInteractionArea.add_to_group("enemies")
+        elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
+            mySprite.material_override.set_shader_param("opacity", 0.05)
+            mySprite.material_override.set_shader_param("enable_glitch", false)
+            mySprite.global_transform.origin.z = 0
+            smallInteractionArea.remove_from_group("enemies")
     
     
     if is_particle or behavior_directional_bullet:
@@ -208,10 +238,11 @@ func _process(delta):
 
 func updateFallthroughSolids():
     if fallthroughSolid:
-        if (smallInteractionArea.is_in_group("enemies") and fallthroughSolid.is_in_group("fallthrough")) or is_particle or behavior_directional_bullet:
+        if fallthroughSolid.is_in_group("fallthrough") and (smallInteractionArea.is_in_group("enemies") or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form)):
             fallthroughSolid.remove_from_group("fallthrough")
         elif not smallInteractionArea.is_in_group("enemies") and not fallthroughSolid.is_in_group("fallthrough"):
-            fallthroughSolid.add_to_group("fallthrough")
+            if glitch_form == global.GlitchForm.NORMAL or level.player.glitch_form == glitch_form:
+                fallthroughSolid.add_to_group("fallthrough")
 
 var last_palette = global.grey_palette
 var should_freeze = false

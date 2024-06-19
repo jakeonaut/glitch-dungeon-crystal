@@ -132,6 +132,8 @@ func conductFromScenePath(path):
     changeSongPitch(1.0)
     if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
         tryToPlay(restZonePlayer)
+    elif path.find("preBossRoom") > 0:
+        tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0:
         tryToPlay(crystalThemePlayer) # bossThemePlayer)
     elif path.find("gd1CrystalTower") > 0:
