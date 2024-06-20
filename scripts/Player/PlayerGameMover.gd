@@ -345,6 +345,14 @@ func pressingMoveRight():
     return mushroom_infection_direction == 1 and not am_paused
   return .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
 
+# @override
+func justPressedMoveLeft():
+  return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
+
+# @override
+func justPressedMoveRight():
+  return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
+
 func magicJump():
   has_used_magic_lantern = true
   if physics_state == PhysicsState.BEING_TOSSED:

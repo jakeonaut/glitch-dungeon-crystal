@@ -1288,7 +1288,10 @@ transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, -5.96046e-08, 1, 0, -9.57
 shape = SubResource( 59 )
 
 [node name="InteractPrompt" parent="ConfirmNPC" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, -0.03, 3.93185, -1.64705 )
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, -2.98023e-08, 1, -0.03, 3.93185, -1.64705 )
+
+[node name="TextBoxCameraTarget" parent="ConfirmNPC" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.0681484, 0.647047 )
 
 [node name="GlitchAura" parent="." instance=ExtResource( 26 )]
 visible = false

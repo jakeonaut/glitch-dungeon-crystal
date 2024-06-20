@@ -20,12 +20,12 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
     set_process(true)
+    for child in self.get_foreign_children():
+        child.visible = false
     if spawned_object_path.length() != 0:
         spawned_object_res = load(spawned_object_path)
     spawn_timer = spawn_time_limit if spawn_time_limit != null else 0
-    yield(get_tree().create_timer(0.1), "timeout")
-    for child in self.get_foreign_children():
-        child.visible = false
+    
 
 export var num_native_children = 1
 func get_foreign_children():

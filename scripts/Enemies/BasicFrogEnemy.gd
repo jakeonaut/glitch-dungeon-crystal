@@ -54,6 +54,17 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
+    var valid_inputs = ["sub_action_button", "ui_up", "ui_down", "ui_left", "ui_right", "jump_button"]
+    for valid_input in valid_inputs:
+      if tongueAniPlayer.assigned_animation == "gulpIdle" and Input.is_action_just_pressed(valid_input):
+        tongueAniPlayer.stop()
+        tongueAniPlayer.clear_queue()
+        tongueAniPlayer.play("spitOut")
+        break
+    level.player.processCastingLogic(delta)
+    if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
+      tongueAniPlayer.play("gulpIdle")
+    return
 
   if am_i_in_range_of_player:
     override_am_i_in_range_of_player = true
@@ -148,11 +159,12 @@ var gulpin = false
 func startGulp():
   if not gulpin:
     gulpin = true
-    level.player.tumbleFall(mySprite.flip_h)
+    level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController")
 func spitOut():
+  notDieSound.play()
   gulpin = false
   level.player.tumbleFall(mySprite.flip_h)
   level.player.visible = true
@@ -164,7 +176,7 @@ func spitOut():
 
 func queueGulpAnimation():
   tongueAniPlayer.queue("gulpIdle")
-  tongueAniPlayer.queue("spitOut")
+  # tongueAniPlayer.queue("spitOut")
 
 func unqueueGulpAnimation():
   var queuedAnimations = tongueAniPlayer.get_queue()
@@ -250,21 +262,11 @@ func unsmack():
 # @override
 func getSmacked(broom_origin, silently = false):
   .getSmacked(broom_origin, silently)
-  behavior_jumping = true
-  behavior_walking = not is_static
-  jump_timer = 0
-  walk_direction.x = 1
-  if level.player.mySprite.flip_h:
-    walk_direction.x = -1
-  # is_static = false
-  pauseSelf = true
-  on_ground = true
   if is_infected:
     ouchies(broom_origin)
   if notDieSound and not notDieSound.is_playing():
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
-  
   # stop the lick
   if is_licker:
     tongueAniPlayer.stop()
@@ -274,6 +276,16 @@ func getSmacked(broom_origin, silently = false):
     else:
       tongueController.restorePlayer()
       tongueAniPlayer.play("RESET")
+    return
+  behavior_jumping = true
+  behavior_walking = not is_static
+  jump_timer = 0
+  walk_direction.x = 1
+  if level.player.mySprite.flip_h:
+    walk_direction.x = -1
+  # is_static = false
+  pauseSelf = true
+  on_ground = true
 
 func fallthroughCollisionActivate(friend):
   if not friend.on_ground:

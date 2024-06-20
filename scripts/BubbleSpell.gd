@@ -126,7 +126,7 @@ func _process(delta):
 func isActive(_debug=false):
   return true
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, _is_player):
   if didja_get_me:# or not is_player:
     return
 

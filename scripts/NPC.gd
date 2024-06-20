@@ -76,8 +76,6 @@ func _ready():
   is_sprite_flipped = true
 
   var my_memory = self.getMyStaticLevelZoneVar()
-  # if not is_static_in_level or not my_memory: 
-  #   is_really_important = true
   textBoxContainer.setVars()
 
   textBox.is_important = is_important
@@ -205,7 +203,7 @@ func getSmacked(_broom_origin, _silently = false):
 func setGlobalMemoryOfHasSpoken(set_vars = false):
   if set_vars:
     mySprite.transform.origin.z = 0
-  global.setStaticLevelZoneLevelVar(level, self.name, true)
+  global.setStaticLevelZoneLevelVar(level, self, true)
 
 func isActive(_debug = false):
   return is_active and not floating_text and (visible or can_be_activated_invisibly) and textBox.text_final != ""
@@ -215,7 +213,7 @@ func glitchOut():
   var glitchEnemy = glitchEnemyRes.instance()
   level.add_child(glitchEnemy)
   glitchEnemy.global_transform.origin = self.global_transform.origin
-  global.setStaticLevelZoneLevelVar(level, self.name, global.DELETE_ME)
+  global.setStaticLevelZoneLevelVar(level, self, global.DELETE_ME)
   glitchEnemy.glitchOut()
   queue_free()
 

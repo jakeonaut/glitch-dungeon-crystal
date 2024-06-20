@@ -226,7 +226,14 @@ func tryToRespawn():
           found_door = door
           break
   elif global.isRespawning:
-    if global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+    if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+      var savePoint = get_node(global.memory["savePoint"])
+      player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
+      gameCamera.rotation_degrees.y = global.cameraRotation
+      player.last_grounded_pos = Vector3(player.global_transform.origin)
+      yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
+      player.global_transform.origin = savePoint.global_transform.origin
+    elif global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       player.global_transform.origin = Vector3(
         global.memory["active_save_point_x"], 
         global.memory["active_save_point_y"], 
@@ -270,20 +277,17 @@ func tryToRespawn():
     global.memory["broom"] = true
     if found_door:
       found_door.land(true, true)
-      # global.saveMySpot(found_door.landing.global_transform.origin, null)
     elif global.roomEdgeVector != null:
       adjustPlayerForEdgeTransition()
       transition.reverse_fade()
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
       player.global_transform.origin = player.spawn_origin
-      # global.saveMySpot(player.spawn_origin, null)
     if not found_door:
       if global.grannyEnteringRoom:
         transition.reverse_granny_teleport()
         global.grannyEnteringRoom = false
       else:
         transition.reverse_fade()
-      # global.saveMySpot(player.spawn_origin, null)
     gameCamera.setCameraPositionNow()
 
   global.respawnVarTimerHack = 0

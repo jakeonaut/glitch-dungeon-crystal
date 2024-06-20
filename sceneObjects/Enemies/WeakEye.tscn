@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=2]
@@ -611,9 +611,10 @@ tracks/9/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=159]
-resource_name = "blinkOpen"
-length = 6.0
+[sub_resource type="Animation" id=165]
+resource_name = "blinkIdle"
+length = 5.0
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -621,10 +622,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 2, 2.1, 2.2, 2.3, 3, 3.1, 3.2, 3.3, 5, 5.1, 5.2, 5.3, 5.5, 5.6, 5.7, 5.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 1, 1.1, 1.2, 1.3, 3, 3.1, 3.2, 3.3, 3.5, 3.6, 3.7, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94 ]
+"values": [ 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94 ]
+}
+
+[sub_resource type="Animation" id=159]
+resource_name = "blinkOpen"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 92, 93, 94 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("TileSpikes:visible")
@@ -729,7 +746,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.4, 2.7 ),
+"times": PoolRealArray( 0.4, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -981,6 +998,7 @@ mesh = SubResource( 154 )
 anims/RESET = SubResource( 157 )
 anims/blinkClose = SubResource( 158 )
 anims/blinkCloseFast = SubResource( 164 )
+anims/blinkIdle = SubResource( 165 )
 anims/blinkOpen = SubResource( 159 )
 anims/getHurt = SubResource( 160 )
 anims/hiddenTeleport = SubResource( 161 )

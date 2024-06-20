@@ -76,6 +76,10 @@ func _process(delta):
     #             spawn_timer = 0
 
 func isOnSavePoint():
+    if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == level.getLevelName():
+        var relativePathFromLevelToSavePoint = global.memory["savePoint"]
+        return self == level.get_node(relativePathFromLevelToSavePoint)
+
     if not global.memory.has("active_save_point_x"):
         return false
 
@@ -118,7 +122,7 @@ func passiveActivate(_delta, _is_player):
             else:
                 saveSound.volume_db = -32
             saveSound.play()
-        global.saveMySpot(global_transform.origin + Vector3(0, -1, 0), level)
+        global.saveMySpot(global.getNameRelativeToLevel(level, self), global_transform.origin + Vector3(0, -1, 0), level)
         
         global.memory.erase("player_y_offset")
     is_currently_on_save_point = true

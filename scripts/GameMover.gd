@@ -36,6 +36,7 @@ onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("Bou
 var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
 
+var is_turn_based = true
 export var true_terminal_vel = 32
 var true_terminal_feather_vel = 2 
 var water_terminal_vel = 4
@@ -179,7 +180,7 @@ func getMyStaticLevelZoneVar(refresh_if_null = false):
   if level == null:
     level = get_tree().get_root().get_node("Game/Viewport/level")
   if staticLevelZoneVar == null or refresh_if_null:
-    staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self.name)
+    staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self)
   return staticLevelZoneVar
 
 func _ready():
@@ -276,6 +277,9 @@ func processPhysics(delta):
   elif physics_state == PhysicsState.WAKING_UP:
     if aniPlayer == null or not aniPlayer.is_playing():
       physics_state = PhysicsState.NORMAL
+      jump_squat_jump_input_timer = 0
+      feather_jump_timer = 0
+      should_magic_jump = false
     
   lv = hv + (up * vv)
   
@@ -619,10 +623,15 @@ func pressingMoveDown():
   return false
 
 var override_press_move_left = false
+func justPressedMoveLeft():
+  return false
 func pressingMoveLeft():
   return override_press_move_left
 
 var override_press_move_right = false
+func justPressedMoveRight():
+  return false
+
 func pressingMoveRight():
   return override_press_move_right
 
@@ -1053,10 +1062,10 @@ func doWalkAnimation():
     aniPlayer.play("walk", -1, 1.5 if pressingRun() else 1.0)
     
 
-func normalizeLv(lv):
+func normalizeLv(lv_to_normalize):
   # if not truly_on_ground:
   #   lv.x = 0
-  return lv
+  return lv_to_normalize
 
 var is_a_physics_particle = false
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
@@ -1064,6 +1073,8 @@ var is_a_physics_particle = false
 func handleCollisionsAndMove(local_lv, delta):
   if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
+
+  var can_move = not is_turn_based or justPressedDown() or justPressedJump() or justPressedMoveLeft() or justPressedMoveRight()
 
   if is_a_physics_particle:
     global_transform.origin.x += local_lv.x / velocity_dampener
@@ -1077,7 +1088,15 @@ func handleCollisionsAndMove(local_lv, delta):
 
   if should_collide_horizontally:
     local_lv = handleHorizontalCollisions(local_lv)
-  global_transform.origin.x += local_lv.x / velocity_dampener
+
+  # PROCESS TURN_BASED MOVEMENT
+  if is_turn_based:
+    if can_move and local_lv.x > 0:
+      global_transform.origin.x += 2
+    elif can_move and local_lv.x < 0:
+      global_transform.origin.x -= 2
+  else:
+    global_transform.origin.x += local_lv.x / velocity_dampener
   
   was_on_ground = on_ground
   was_truly_on_ground = truly_on_ground
@@ -1096,7 +1115,15 @@ func handleCollisionsAndMove(local_lv, delta):
   elif should_do_fallthrough_area_collision:
     local_lv = collideWithFloor(local_lv)
     global_transform.origin.y = fallthrough_area_collision_y
-  global_transform.origin.y += local_lv.y / velocity_dampener
+
+  # PROCESS TURN_BASED MOVEMENT
+  if is_turn_based:
+    if can_move and local_lv.y > 0:
+      global_transform.origin.y += 2
+    elif can_move and local_lv.y < 0:
+      global_transform.origin.y -= 2
+  else:
+    global_transform.origin.y += local_lv.y / velocity_dampener
 
   handleSpikeCollisions(delta)
   

@@ -12,7 +12,7 @@ func _ready():
   secretAniPlayer.stop()
   secretAniPlayer.clear_queue()
   secretAniPlayer.queue("blinkOpen")
-  secretAniPlayer.queue("blinkClose")
+  secretAniPlayer.queue("blinkIdle")
 
 
 var spawn_timer = 0

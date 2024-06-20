@@ -25,7 +25,7 @@ func _ready():
     if myDynamicSpawnedChild and child == myDynamicSpawnedChild.get_ref():
       continue
     child.visible = false
-  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
     passiveActivate(0, true)
   if spawned_object_path.length() != 0:
     spawned_object_res = load(spawned_object_path)
@@ -61,7 +61,7 @@ func passiveActivate(_delta, is_player):
         bonkSound2.play()
       hit_cooldown = hit_cooldown_limit
       if is_static_in_level:
-        global.setStaticLevelZoneLevelVar(level, self.name, true)
+        global.setStaticLevelZoneLevelVar(level, self, true)
     # elif player.linear_velocity.y > 0:
     #   aniPlayer.play("hitDown")
     #   performSpawn()

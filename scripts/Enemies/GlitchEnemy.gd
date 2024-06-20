@@ -113,7 +113,7 @@ func _ready():
     else:
         mySprite.material_override = mySprite.material_override.duplicate()
 
-    yield(get_tree().create_timer(0.5), "timeout")
+    yield(TempTimer.idle_frame(self), "timeout")
     if mySprite and glitch_form != global.GlitchForm.NORMAL and not mySprite.is_in_group("sprite"):
         mySprite.updateBaseFrame(4, 4)
         var target_palette = level.levelTiles.grey_palette
@@ -492,7 +492,7 @@ func spawnABubble(is_horizontal):
     bubble.setAsParent(self)
 
 func setGlobalMemoryOfHasBeenDefeated():
-    # global.setStaticLevelZoneLevelVar(level, self.name, self.global_transform.origin)
+    # global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
     pass
 
 export var time_influence = 35
@@ -531,7 +531,7 @@ var mushroom_infected = false
 var mushroomBabyRefs = []
 var mushroomAncestorRef = null
 export var mushroomEmbiggensMe = false
-func getMushroomInfected(shroom_pos, ignore_ancestor = false):
+func getMushroomInfected(shroom_pos, _ignore_ancestor = false):
     if am_i_dying:
         return
 

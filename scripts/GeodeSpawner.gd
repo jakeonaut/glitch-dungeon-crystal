@@ -11,17 +11,17 @@ export var is_static_in_level = true
 
 func _ready():
     mySprite.visible = false
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
         # TODO(jaketrower): This is actually quite new, what if GeodeSpawner has spawned an enemy that hasn't been
         # killed yet, but was removed from the level (e.g. by leaving a room and re-entering it)
         # ideally we should have memory[geodeSpawnerShortName] be either:
         # 0, null = not_spawned
         # 1 = spawned_and_alive
         # 2 = spawned_and_dead
-        if global.getStaticLevelZoneLevelVar(level, self.name) == 1:
+        if global.getStaticLevelZoneLevelVar(level, self) == 1:
             spawn(false)
             has_spawned = true
-        if global.getStaticLevelZoneLevelVar(level, self.name) == 2:
+        if global.getStaticLevelZoneLevelVar(level, self) == 2:
             queue_free()
 
 func spawnEffect(child):
@@ -59,15 +59,15 @@ func spawn(with_flare = true):
         level.add_child(newSmokeCloud)
         newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
         newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y - 1
-        yield(get_tree().create_timer(0.3), "timeout")
+        yield(TempTimer.idle_frame(self), "timeout")
         newSmokeCloud = glitchParticleBurstRes.instance()
         level.add_child(newSmokeCloud)
         newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
         newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + 1
 
-        if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self.name):
-            global.setStaticLevelZoneLevelVar(level, self.name, 1)
+        if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self):
+            global.setStaticLevelZoneLevelVar(level, self, 1)
 
 # @override
 func myChildDied():
-    global.setStaticLevelZoneLevelVar(level, self.name, 2)
+    global.setStaticLevelZoneLevelVar(level, self, 2)

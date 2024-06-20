@@ -166,7 +166,7 @@ func passiveActivate(_delta, is_player):
     being_collected = true
     
     if is_static_in_level:
-      global.setStaticLevelZoneLevelVar(level, self.name, true)
+      global.setStaticLevelZoneLevelVar(level, self, true)
     collectMe()
     return true
   return false

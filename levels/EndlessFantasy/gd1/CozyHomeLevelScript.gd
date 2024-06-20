@@ -16,7 +16,6 @@ func _process(delta):
   # if not has_activated and player.global_transform.origin.y < -39:
   #   has_activated = true
   #   player.global_transform.origin.z = -10
-  #   global.saveMySpot(player.translation, self)
   #   player.tryDieToEnemy(delta, true, true, true)
   #   player.global_transform.origin.z = 0
     # player.grav = 0

@@ -22,13 +22,13 @@ func _ready():
     # is_static_in_level = false # TODO(jaketroweR): :-)
 
     set_process(true)
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
         set_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(global.getStaticLevelZoneLevelVar(level, self.name))
+        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(global.getStaticLevelZoneLevelVar(level, self))
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         queue_free()
@@ -138,4 +138,4 @@ func getSmacked(_broom_origin):
         miniCubeCrystal.global_transform.origin = self.global_transform.origin
         miniCubeCrystal.passiveActivate(0, false)
 
-        global.setStaticLevelZoneLevelVar(level, self.name, global_transform.origin)
+        global.setStaticLevelZoneLevelVar(level, self, global_transform.origin)

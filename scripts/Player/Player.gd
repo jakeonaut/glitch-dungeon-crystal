@@ -1009,7 +1009,7 @@ func getMushroomInfected():
     mushroom_infection_direction = -1
   else:
     mushroom_infection_direction = 1
-  yield(get_tree().create_timer(0.2), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   
   mushroomSpriteAniPlayer.stop()
   mushroomSpriteAniPlayer.clear_queue()

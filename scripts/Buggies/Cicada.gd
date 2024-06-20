@@ -17,7 +17,7 @@ export var is_static_in_level = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
         queue_free()
         
     set_process(true)
@@ -91,4 +91,4 @@ func passiveActivate(_delta, _is_player):
         )
         
         if is_static_in_level:
-            global.setStaticLevelZoneLevelVar(level, self.name, true)
+            global.setStaticLevelZoneLevelVar(level, self, true)

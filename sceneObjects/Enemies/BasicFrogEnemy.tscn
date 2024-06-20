@@ -444,6 +444,7 @@ tracks/19/keys = {
 [sub_resource type="Animation" id=145]
 resource_name = "gulpIdle"
 length = 0.9
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -1501,10 +1502,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.16, 0.17, 0.4, 0.46, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.01, 0.24, 0.3, 0.74 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 8, 5, 9, 5, 1, 0 ]
+"values": [ 5, 9, 5, 1, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
@@ -1513,7 +1514,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.84 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -1525,7 +1526,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.17 ),
+"times": PoolRealArray( 0.01 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],

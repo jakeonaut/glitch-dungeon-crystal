@@ -21,7 +21,7 @@ var disappearTimer = 0
 func _ready():
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
-    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+    if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
         queue_free()
         
     set_process(true)
@@ -58,7 +58,7 @@ func passiveActivate(_delta, _is_player):
         disappearing2 = true
         
         if is_static_in_level:
-            global.setStaticLevelZoneLevelVar(level, self.name, true)
+            global.setStaticLevelZoneLevelVar(level, self, true)
 
     # global.pauseGame = true
     # global.pauseMoveInput = true

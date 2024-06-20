@@ -28,7 +28,7 @@ var disappearTimer = 0
 func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self.name):
+  if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
     addPlusSprite()
     queue_free()
     
@@ -95,7 +95,7 @@ func passiveActivate(_delta, _is_player):
 
 
     if is_static_in_level:
-      global.setStaticLevelZoneLevelVar(level, self.name, true)
+      global.setStaticLevelZoneLevelVar(level, self, true)
       if not is_negative:
         addPlusSprite()
 

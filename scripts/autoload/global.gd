@@ -628,7 +628,20 @@ func resetLevelZone(_levelZone):
     # if self.memory.has("spellbookPage"):
     #     self.memory["spellbookPage"] = []
 
-func setStaticLevelZoneLevelVar(level, name, val):
+func getNameRelativeToLevel(level, node):
+  var nameRelativeToLevelPath = node.name
+  var parent = node.get_parent()
+  while true:
+    if parent == null: return null
+    if parent == level: break
+    nameRelativeToLevelPath = parent.name + "/" + nameRelativeToLevelPath
+    parent = parent.get_parent()
+  return nameRelativeToLevelPath
+
+func setStaticLevelZoneLevelVar(level, node, val):
+    var name = getNameRelativeToLevel(level, node)
+    if name == null: return # failure
+
     tryInitializeLevelZone(level.getLevelZoneName())
     if currLevelZone == null or not global.memory.has(currLevelZone): 
         return null
@@ -637,7 +650,10 @@ func setStaticLevelZoneLevelVar(level, name, val):
         global.memory[currLevelZone][level.getShortLevelName()] = {}
     global.memory[currLevelZone][level.getShortLevelName()][name] = val
 
-func getStaticLevelZoneLevelVar(level, name):
+func getStaticLevelZoneLevelVar(level, node):
+    var name = getNameRelativeToLevel(level, node)
+    if name == null: return null # failure
+
     tryInitializeLevelZone(level.getLevelZoneName())
     if currLevelZone == null or not global.memory.has(currLevelZone): 
         return null
@@ -747,15 +763,12 @@ func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
     var targetVec2 = vec3ToVec2(targetVec3)
     return (sourceVec2 - targetVec2).length() < closeness_amt    
 
-func saveMySpot(position, level):
-    if level == null:
-        global.memory["room_save_point_x"] = position.x
-        global.memory["room_save_point_y"] = position.y
-    else:
-        global.memory["active_save_point_x"] = position.x
-        global.memory["active_save_point_y"] = position.y
-        global.memory["active_save_point_z"] = position.z
-        global.memory["savedRoomPath"] = level.getLevelName()
+func saveMySpot(savePoint, position, level):
+    global.memory["savePoint"] = savePoint
+    global.memory["active_save_point_x"] = position.x
+    global.memory["active_save_point_y"] = position.y
+    global.memory["active_save_point_z"] = position.z
+    global.memory["savedRoomPath"] = level.getLevelName()
 
 
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):

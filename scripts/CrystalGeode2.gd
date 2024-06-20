@@ -120,7 +120,7 @@ func getPurified():
         if child.is_in_group("event") and child.isActive():
             child.passiveActivate(0, true)
 
-    global.setStaticLevelZoneLevelVar(level, self.name, true)
+    global.setStaticLevelZoneLevelVar(level, self, true)
     lightAniPlayer.play("lightUp")
     lightAniPlayer.queue("omen")
     level.player.glitchTickle()
@@ -191,5 +191,5 @@ func getMyStaticLevelZoneVar(refresh_if_null = false):
     if level == null:
         level = get_tree().get_root().get_node("Game/Viewport/level")
     if staticLevelZoneVar == null or refresh_if_null:
-        staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self.name)
+        staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self)
     return staticLevelZoneVar
