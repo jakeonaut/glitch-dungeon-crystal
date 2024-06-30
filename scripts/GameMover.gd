@@ -36,7 +36,7 @@ onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("Bou
 var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
 
-var is_turn_based = true
+var is_turn_based = false
 export var true_terminal_vel = 32
 var true_terminal_feather_vel = 2 
 var water_terminal_vel = 4
@@ -1068,13 +1068,23 @@ func normalizeLv(lv_to_normalize):
   return lv_to_normalize
 
 var is_a_physics_particle = false
+var turn_based_timer = 0
+var turn_based_time_limit = 4
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(local_lv, delta):
   if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
 
-  var can_move = not is_turn_based or justPressedDown() or justPressedJump() or justPressedMoveLeft() or justPressedMoveRight()
+  var can_turn_move = false
+  if justPressedDown() or justPressedJump() or justPressedMoveLeft() or justPressedMoveRight():
+    turn_based_timer = 0
+    can_turn_move = true
+  elif pressingDown() or pressingJump() or pressingMoveLeft() or pressingMoveRight():
+    turn_based_timer += (delta*22)
+    if turn_based_timer >= turn_based_time_limit:
+      turn_based_timer = 0
+      can_turn_move = true
 
   if is_a_physics_particle:
     global_transform.origin.x += local_lv.x / velocity_dampener
@@ -1091,10 +1101,10 @@ func handleCollisionsAndMove(local_lv, delta):
 
   # PROCESS TURN_BASED MOVEMENT
   if is_turn_based:
-    if can_move and local_lv.x > 0:
-      global_transform.origin.x += 2
-    elif can_move and local_lv.x < 0:
-      global_transform.origin.x -= 2
+    if can_turn_move and local_lv.x > 0:
+      global_transform.origin.x += 1
+    elif can_turn_move and local_lv.x < 0:
+      global_transform.origin.x -= 1
   else:
     global_transform.origin.x += local_lv.x / velocity_dampener
   
@@ -1118,10 +1128,10 @@ func handleCollisionsAndMove(local_lv, delta):
 
   # PROCESS TURN_BASED MOVEMENT
   if is_turn_based:
-    if can_move and local_lv.y > 0:
-      global_transform.origin.y += 2
-    elif can_move and local_lv.y < 0:
-      global_transform.origin.y -= 2
+    if can_turn_move and local_lv.y > 0:
+      global_transform.origin.y += 1
+    elif can_turn_move and local_lv.y < 0:
+      global_transform.origin.y -= 1
   else:
     global_transform.origin.y += local_lv.y / velocity_dampener
 

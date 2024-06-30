@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/easeFunction.png-6123c48c6fc990aabd4fbf9bde1fa85d.stex"
+path="res://.import/FNl99wzXIAUNpbc.jpeg-376d7e1e6388350a7e7312c728636525.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://easeFunction.png"
-dest_files=[ "res://.import/easeFunction.png-6123c48c6fc990aabd4fbf9bde1fa85d.stex" ]
+source_file="res://FNl99wzXIAUNpbc.jpeg"
+dest_files=[ "res://.import/FNl99wzXIAUNpbc.jpeg-376d7e1e6388350a7e7312c728636525.stex" ]
 
 [params]
 

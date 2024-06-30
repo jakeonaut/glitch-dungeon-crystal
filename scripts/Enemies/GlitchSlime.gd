@@ -27,6 +27,7 @@ func _ready():
         walk_direction.x = -walk_direction.x
         if myOtherSprite:
             myOtherSprite.flip_h = not myOtherSprite.flip_h
+    is_turn_based = true
 
 func _process(delta):
     # ._process(delta) implicit

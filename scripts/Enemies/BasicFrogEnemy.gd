@@ -54,7 +54,7 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
-    var valid_inputs = ["sub_action_button", "ui_up", "ui_down", "ui_left", "ui_right", "jump_button"]
+    var valid_inputs = ["sub_action_button"] #, "ui_up", "ui_down", "ui_left", "ui_right", "jump_button"]
     for valid_input in valid_inputs:
       if tongueAniPlayer.assigned_animation == "gulpIdle" and Input.is_action_just_pressed(valid_input):
         tongueAniPlayer.stop()
@@ -74,6 +74,7 @@ func _process(delta):
       mySprite.translation.z = 0.5
 
   if is_infected:
+    is_turn_based = true
     if not was_infected:
       mySprite.get_material_override().set_shader_param("enable_glitch", true)
       mySprite.get_material_override().set_shader_param("time_influence", 21.644)
@@ -86,6 +87,7 @@ func _process(delta):
     if not smallInteractionArea.is_in_group("enemies"):
       smallInteractionArea.add_to_group("enemies")
   else:
+    is_turn_based = false
     if tileSpikes:
       tileSpikes.visible = false
     if smallInteractionArea.is_in_group("weak_enemies"):
@@ -130,7 +132,7 @@ func _process(delta):
     spawn_timer = 0
     behavior_jumping = false
 
-    if behavior_walking and air_time_limit > 0:
+    if behavior_walking and air_time_limit > 0 and not is_turn_based:
       air_timer += (delta * 22)
       if air_timer >= air_time_limit:
         behavior_walking = false

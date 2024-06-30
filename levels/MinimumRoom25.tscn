@@ -50,6 +50,7 @@ shader_param/target_palette = ExtResource( 4 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 1 )
+show_crt_effect = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 31 )]
 
@@ -64,7 +65,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 27 )]
 fov = 80.7
-size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
