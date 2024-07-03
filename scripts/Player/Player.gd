@@ -1277,62 +1277,23 @@ func processBroomLogic(delta):
       which_broom_attack = 1
 
   if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    # TODO(jaketrower): has just turned around
-    # if Input.is_action_pressed("ui_down") and isKindOfOnGround():
-    #   aniPlayer.play("sweepFloor")
-    #   which_broom_attack = 0
-    #   summonSporeShroom()
-    var is_turn_around_attack = (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
-    if force_a_sweep:
-      aniPlayer.play("broomSmack")
-    elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
-      mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
-      aniPlayer.play("broomSmack2")
-      which_broom_attack = 2
-    else:
-      aniPlayer.play("broomSmack")
-    pauseAnimation = true
-
-    is_in_broom_cooldown = true
-    broom_cooldown_timer = 0
-    # elif glitch_form == global.GlitchForm.FEATHER:
-    #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
-    # velocity_dampener = 2.0
-    if on_ground:
-      walk_speed = 0
-      feather_glitch_walk_speed = 0
-      invisible_glitch_walk_speed = 0
+    doBroomAttack(which_broom_attack)
     if linear_velocity.y < 0:
       linear_velocity.y = 0
-    global.incrementLevelZoneSweeps()
-    jump_press_timer = jump_press_broom_time_limit
-    if which_broom_attack > 0:
-      pauseInput = true
-      summonedBroom = summonedBroomRes.instance()
-      level.add_child(summonedBroom)
-      if which_broom_attack == 2:
-        summonedBroom.aniPlayer.stop()
-        summonedBroom.aniPlayer.clear_queue()
-        summonedBroom.aniPlayer.play("broomSmack2")
-        summonedBroom.broom_active_time_limit = 15
-        is_in_broom_cooldown = false
-      if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
-        if smacked_npc == null:
-          smacked_npc = global.activeInteractor.textboxParent
-        summonedBroom.smacked_npc = smacked_npc
-      summonedBroom.my_broom_owner = self
-      adjustSummonedBroomSpritePosition()
-  elif can_throw_broom and Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
-    summonedBroom.queue_free()
-    broomStop()
-    if not on_ground:
-      var amt = 2
-      self.vv = amt
-      self.linear_velocity.y = amt
-      self.lv.y = amt
-    summonFallenBroom(true)
+  elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
+    if can_throw_broom:
+      summonedBroom.queue_free()
+      broomStop()
+      if not on_ground:
+        var amt = 2
+        self.vv = amt
+        self.linear_velocity.y = amt
+        self.lv.y = amt
+      summonFallenBroom(true)
+    elif on_ground:
+      summonedBroom.queue_free()
+      broomStop()
+      doBroomAttack(1)
   elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
     hitStuff(delta)
   elif aniPlayer.assigned_animation == "sweepFloor" and isKindOfOnGround():
@@ -1345,6 +1306,53 @@ func processBroomLogic(delta):
       broomStop()
       summonFallenBroom(true)
   force_a_sweep = false
+
+func doBroomAttack(which_broom_attack):
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  # TODO(jaketrower): has just turned around
+  # if Input.is_action_pressed("ui_down") and isKindOfOnGround():
+  #   aniPlayer.play("sweepFloor")
+  #   which_broom_attack = 0
+  #   summonSporeShroom()
+  var is_turn_around_attack = (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
+  if force_a_sweep:
+    aniPlayer.play("broomSmack")
+  elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
+    mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
+    aniPlayer.play("broomSmack2")
+    which_broom_attack = 2
+  else:
+    aniPlayer.play("broomSmack")
+  pauseAnimation = true
+
+  is_in_broom_cooldown = true
+  broom_cooldown_timer = 0
+  # elif glitch_form == global.GlitchForm.FEATHER:
+  #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
+  # velocity_dampener = 2.0
+  if on_ground:
+    walk_speed = 0
+    feather_glitch_walk_speed = 0
+    invisible_glitch_walk_speed = 0
+  global.incrementLevelZoneSweeps()
+  jump_press_timer = jump_press_broom_time_limit
+  if which_broom_attack > 0:
+    pauseInput = true
+    summonedBroom = summonedBroomRes.instance()
+    level.add_child(summonedBroom)
+    if which_broom_attack == 2:
+      summonedBroom.aniPlayer.stop()
+      summonedBroom.aniPlayer.clear_queue()
+      summonedBroom.aniPlayer.play("broomSmack2")
+      summonedBroom.broom_active_time_limit = 15
+      is_in_broom_cooldown = false
+    if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
+      if smacked_npc == null:
+        smacked_npc = global.activeInteractor.textboxParent
+      summonedBroom.smacked_npc = smacked_npc
+    summonedBroom.my_broom_owner = self
+    adjustSummonedBroomSpritePosition()
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

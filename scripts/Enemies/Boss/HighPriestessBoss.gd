@@ -3,12 +3,14 @@ extends Spatial
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
+var fallenAngelRes = preload("res://sceneObjects/Enemies/FallenAngel.tscn")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
+var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
 
 var big_spawn_timer = 30
-var big_spawn_time_limit = 90
+var big_spawn_time_limit = 60
 var num_spawns = 0
 var num_spawn_limit = 3
 
@@ -31,9 +33,12 @@ var original_pos = null
 var target_pos = null
 
 var landingArray = []
+var fallenAngelSpawnPointArray = []
+var saveSpawnPointArray = []
 var frogArray = []
 onready var laughSound = get_node("Sounds/LaughSound")
 onready var spawnSound = get_node("Sounds/SpawnSound")
+onready var spawnSavePointSound = get_node("Sounds/SpawnSavePointSound")
 func _ready():
     set_process(true)
     # Wait two frames cuz idk
@@ -47,6 +52,16 @@ func _ready():
         landing.visible = false
         landingArray.push_back(landing)
 
+    var fallenAngelSpawnPoints = get_tree().get_nodes_in_group("fallen_angel_spawn_point")
+    for fallenAngelSpawnPoint in fallenAngelSpawnPoints:
+        fallenAngelSpawnPoint.visible = false
+        fallenAngelSpawnPointArray.push_back(fallenAngelSpawnPoint)
+
+    var saveSpawnPoints = get_tree().get_nodes_in_group("save_spawn_point")
+    for saveSpawnPoint in saveSpawnPoints:
+        saveSpawnPoint.visible = false
+        saveSpawnPointArray.push_back(saveSpawnPoint)
+
 var hp = 3
 func getHurt():
     mySprite.visible = true
@@ -57,6 +72,7 @@ func getHurt():
     big_spawn_timer = 0
     has_animated_attack = false
     landingArray.shuffle()
+    fallenAngelSpawnPointArray.shuffle()
 
     hp -= 1
     if hp == 2:
@@ -73,12 +89,17 @@ func getHurt():
         boss_phase = BossPhase.COMPLETE
 
 var am_i_hidden = false
+var can_spawn_save_points = false
+var has_spawned_save_points = false
+var save_point_spawn_timer = 0
+var save_point_spawn_time_limit = 20
 func _process(delta):
     if global.pauseGame or am_i_hidden:
         return
 
     if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
         moveAbout(delta)
+    processSavePointSpawns(delta)
 
     if boss_phase == BossPhase.FROG_PLAGUE_READY:
         if not secretAniPlayer.is_playing():
@@ -118,6 +139,7 @@ func _process(delta):
         if weak_enemies.size() == 0:
             spawnWeakEye()
             landingArray.shuffle()
+            fallenAngelSpawnPointArray.shuffle()
         else:
             big_spawn_timer += (delta*11)
             if big_spawn_timer >= big_spawn_time_limit:
@@ -145,16 +167,21 @@ func _process(delta):
             spawn_timer += (delta*11)
             if spawn_timer >= spawn_time_limit:
                 spawn_timer = 0
-                spawnAttack(num_spawns, false)
+                # spawnAttack(num_spawns, false)
+                spawnFallenAngel(num_spawns, false)
                 num_spawns += 1
                 if num_spawns == 2:
-                    spawnAttack(0, true)
+                    # spawnAttack(0, true)
+                    spawnFallenAngel(0, true)
                 if num_spawns >= num_spawn_limit:
-                    spawnWeakEye()
+                    # spawnWeakEye()
                     num_spawns = 0
                     big_spawn_timer = 0
                     has_animated_attack = false
                     landingArray.shuffle()
+                    fallenAngelSpawnPointArray.shuffle()
+
+                    can_spawn_save_points = true
 
 
     frogCleanup(delta)
@@ -196,6 +223,7 @@ func randomizeTargetPos():
 
 func spawnWeakEye():
     var weakEye = weakEyeRes.instance()
+    weakEye.is_static_in_level = false
     level.add_child(weakEye)
     weakEye.global_transform.origin = landingArray[0].global_transform.origin if len(landingArray) > 0 else getRandomSpawnPosition()
 
@@ -212,6 +240,7 @@ func getRandomSpawnPosition(theMax = 10):
 
 func spawnAttack(which_spawn, spawn_on_player):
     var newGlitchEnemy = glitchEnemyRes.instance()
+    newGlitchEnemy.is_static_in_level = false
     newGlitchEnemy.visible = true
     newGlitchEnemy.grav = 0
     newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
@@ -223,7 +252,7 @@ func spawnAttack(which_spawn, spawn_on_player):
     else:
         newGlitchEnemy.global_transform.origin = landingArray[which_spawn].global_transform.origin if which_spawn < len(landingArray) else getRandomSpawnPosition()
     var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
-    if newGlitchEnemy.is_in_group("sprite"):
+    if newGlitchEnemy.mySprite.is_in_group("sprite"):
         newGlitchEnemy.mySprite.remove_from_group("sprite")
     if newGlitchMaterial is ShaderMaterial:
         newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
@@ -232,6 +261,49 @@ func spawnAttack(which_spawn, spawn_on_player):
     var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
     level.add_child(newSpawnGlitchEffect)
     newSpawnGlitchEffect.global_transform.origin = newGlitchEnemy.global_transform.origin
+
+func spawnFallenAngel(which_spawn, spawn_above_player):
+    var fallenAngel = fallenAngelRes.instance()
+    fallenAngel.is_static_in_level = false
+    fallenAngel.visible = true
+    level.add_child(fallenAngel)
+    if spawn_above_player:
+        fallenAngel.global_transform.origin = getPlayer().global_transform.origin
+        fallenAngel.global_transform.origin.y += 8
+    else:
+        fallenAngel.global_transform.origin = fallenAngelSpawnPointArray[which_spawn].global_transform.origin if which_spawn < len(fallenAngelSpawnPointArray) else getRandomSpawnPosition()
+    if fallenAngel.global_transform.origin.y <= getPlayer().global_transform.origin.y + 2:
+        fallenAngel.global_transform.origin.y = getPlayer().global_transform.origin.y + 5 + randi() % 3
+    var newGlitchMaterial = fallenAngel.myOtherSprite.get_material_override().duplicate()
+    fallenAngel.myOtherSprite.set_material_override(newGlitchMaterial)
+
+    var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+    level.add_child(newSpawnGlitchEffect)
+    newSpawnGlitchEffect.global_transform.origin = fallenAngel.global_transform.origin
+
+func processSavePointSpawns(delta):
+    if can_spawn_save_points and not has_spawned_save_points:
+        save_point_spawn_timer += (delta*11)
+        if save_point_spawn_timer >= save_point_spawn_time_limit:
+            save_point_spawn_timer = 0
+            if level.altarSprite.visible:
+                level.altarSprite.visible = false
+                var newSavePoint = savePointRes.instance()
+                level.add_child(newSavePoint)
+                newSavePoint.global_transform.origin = level.altarSprite.global_transform.origin
+                spawnSavePointSound.play()
+            else:
+                var saveSpawnPoint = null
+                if len(saveSpawnPointArray) > 0:
+                    saveSpawnPoint = saveSpawnPointArray.pop_front()
+                if saveSpawnPoint != null:
+                    var newSavePoint = savePointRes.instance()
+                    level.add_child(newSavePoint)
+                    newSavePoint.global_transform.origin = saveSpawnPoint.global_transform.origin
+                    spawnSavePointSound.play()
+
+                if len(saveSpawnPointArray) <= 0:
+                    has_spawned_save_points = true
 
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")

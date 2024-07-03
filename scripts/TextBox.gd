@@ -394,7 +394,6 @@ func interact():
   if text_final == "":
     return false
   if !visible and dialogSound.isActive():
-    print("show!")
     showTextbox()
     #if not is_tiny:
     global.activeInteractor = self

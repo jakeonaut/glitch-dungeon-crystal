@@ -139,7 +139,8 @@ onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if h
 func glitchOut():
     if not am_i_dying and glitchSecretAniPlayer:
         glitchSecretAniPlayer.play("glitchOut")
-        setGlobalMemoryOfHasBeenDefeated()
+        if is_static_in_level:
+            setGlobalMemoryOfHasBeenDefeated()
         am_i_dying = true
 
 func _process(delta):
@@ -325,7 +326,8 @@ func tryDieToOffscreenCamera():
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            setGlobalMemoryOfHasBeenDefeated()
+            if is_static_in_level:
+                setGlobalMemoryOfHasBeenDefeated()
             queue_free()
     
 var override_am_i_in_range_of_player = false
@@ -492,8 +494,9 @@ func spawnABubble(is_horizontal):
     bubble.setAsParent(self)
 
 func setGlobalMemoryOfHasBeenDefeated():
-    # global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
-    pass
+    if is_static_in_level:
+        # global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
+        pass
 
 export var time_influence = 35
 export var y_div = 2.3

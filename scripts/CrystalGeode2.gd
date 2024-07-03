@@ -38,7 +38,6 @@ func _ready():
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
-        print("teehee")
         is_purified = true
         lightAniPlayer.play("lightUpQuiet")
         # musicPlayer.changeSongPitch(1.0)

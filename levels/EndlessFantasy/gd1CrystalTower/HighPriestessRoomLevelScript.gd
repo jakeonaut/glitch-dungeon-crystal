@@ -1,5 +1,6 @@
 extends "../../../scripts/levelScript.gd"
 
+onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = get_node("HighPriestessBoss")
 onready var croneNPC = get_node("CroneNPC")
 onready var crystalGeode = get_node("CubeCrystal")
@@ -45,6 +46,10 @@ func overrideLevelRespawnEvent():
   pass
 
 func _process(_delta):
+  # i hate this but _process is not guaranteed to occur AFTER setUpRoomInitializationOverride
+  if not has_room_initialized:
+    return
+
   if not has_boss_started:
     if crystalGeode.getMyStaticLevelZoneVar():
       has_boss_started = true
@@ -76,5 +81,5 @@ func unhideHighPriestess():
   musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
   levelTiles.randomize_num = 1
   global.memory["has_seen_highpriestess"] = true
-  global.memory.erase("spellbookPage")
-  player.nullify()
+  # global.memory.erase("spellbookPage")
+  # player.nullify()

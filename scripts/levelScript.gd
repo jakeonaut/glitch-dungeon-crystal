@@ -39,14 +39,17 @@ export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_TH
 
 export var display_title = "???"
 export var doesnt_have_broom = false
+var has_room_initialized = false
 
 func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
+  has_room_initialized = false
   _ready_impl()
   # ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
 
 export var is_randomizing = false
 func _ready_impl():
+  has_room_initialized = false
   get_node("..").audio_listener_enable_3d = true
 
   global.canChangeSongPitch = true
@@ -68,7 +71,7 @@ func _ready_impl():
   else:
     player.applyGlitch(starting_glitch_type, true)
   
-  if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage") and not global.memory["has_seen_highpriestess"]:
+  if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and not global.memory["has_seen_highpriestess"]:
     global.memory["inventory"] = [global.Inventory.GRIMOIRE]
     global.memory["spellbookPage"] = []
     for spellbook_spell in spellbook_spells:
@@ -121,6 +124,7 @@ func _ready_impl():
   mapManager = mapManagerRes.instance()
   mapManager.visible = false
   self.add_child(mapManager)
+  has_room_initialized = true
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
