@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/music/echoisland_ben.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
 [ext_resource path="res://assets/DELETEME/markeryjane - unread - 12 pull.mp3" type="AudioStream" id=11]
-[ext_resource path="res://assets/DELETEME/eryngi - mossy EP - 01 i've got moss.mp3" type="AudioStream" id=12]
+[ext_resource path="res://assets/music/prairie swamp.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/music/explore2.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/music/soeth.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/music/fishing.mp3" type="AudioStream" id=15]

@@ -71,15 +71,19 @@ func _ready_impl():
   else:
     player.applyGlitch(starting_glitch_type, true)
   
-  if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and not global.memory["has_seen_highpriestess"]:
-    global.memory["inventory"] = [global.Inventory.GRIMOIRE]
-    global.memory["spellbookPage"] = []
-    for spellbook_spell in spellbook_spells:
-      global.memory["spellbookPage"].push_back(spellbook_spell)
-      player.applyGlitch(spellbook_spell)
   global.memory["tutorial_spellbookPage"] = false
-  if has_glitched_grimoire:
-    global.memory["glitched_grimoire"] = true
+  if global.memory["has_game_started"]:
+    pass
+  else:
+    global.memory["has_game_started"] = true
+    if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and not global.memory["has_seen_highpriestess"]:
+      global.memory["inventory"] = [global.Inventory.GRIMOIRE]
+      global.memory["spellbookPage"] = []
+      for spellbook_spell in spellbook_spells:
+        global.memory["spellbookPage"].push_back(spellbook_spell)
+        player.applyGlitch(spellbook_spell)  
+    if has_glitched_grimoire:
+      global.memory["glitched_grimoire"] = true
     
   if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true

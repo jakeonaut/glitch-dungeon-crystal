@@ -115,7 +115,7 @@ func _ready():
 
     yield(TempTimer.idle_frame(self), "timeout")
     if mySprite and glitch_form != global.GlitchForm.NORMAL and not mySprite.is_in_group("sprite"):
-        mySprite.updateBaseFrame(4, 4)
+        # mySprite.updateBaseFrame(4, 4)
         var target_palette = level.levelTiles.grey_palette
         if glitch_form == global.GlitchForm.FLOOR:
             target_palette = level.levelTiles.red_palette

@@ -16,6 +16,8 @@ func _ready():
     yield(TempTimer.idle_frame(self), "timeout")
     mySprite2.material_override = mySprite.material_override
 
+    # hideMe() # nocommit
+
 
 func _process(delta):
     camera.respectLevelTilesEdges()

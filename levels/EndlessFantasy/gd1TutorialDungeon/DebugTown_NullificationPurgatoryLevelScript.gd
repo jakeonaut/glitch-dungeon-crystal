@@ -6,6 +6,7 @@ var has_activated_npc = false
 # @override
 func setUpRoomInitializationOverride():
   if global.memory.has("spellbookPage"):
+    yield(get_tree().create_timer(1.0), "timeout")
     activateNPC()
   
 func activateNPC():
@@ -14,9 +15,3 @@ func activateNPC():
   npcTutorial.visible = true
   npcTutorial.can_activate = true
   npcTutorial.is_active = true
-
-func _process(_delta):
-  # ._process(delta) implicit
-
-  if not has_activated_npc and global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() >= 2:
-    activateNPC()

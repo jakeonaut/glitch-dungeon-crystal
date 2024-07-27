@@ -122,7 +122,7 @@ var vv = up.dot(lv) # vertical velocity
 var last_vv = vv
 var hv = lv - up * vv # horizontal velocity
 
-export var walk_speed = 8
+export(float) var walk_speed = 8.0
 export var run_speed = 10
 # export var fast_run_speed = 12
   
@@ -1301,10 +1301,10 @@ func collideWithWall(local_lv):
         aniPlayer.stop()
         aniPlayer.clear_queue()
         playLandSound()
-        aniPlayer.play("jumpBump", -1, bump_ani_speed)
-        if glitch_form == global.GlitchForm.LADDER:
-          aniPlayer.queue("walk")
-        else: aniPlayer.queue("fall" if isFeatherLike() else "jump")
+        # aniPlayer.play("jumpBump", -1, bump_ani_speed)
+        # if glitch_form == global.GlitchForm.LADDER:
+        #   aniPlayer.queue("walk")
+        # else: aniPlayer.queue("fall" if isFeatherLike() else "jump")
       elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar" and not ladder_glitch and not was_walking_into_wall:
         aniPlayer.stop()
         aniPlayer.clear_queue()

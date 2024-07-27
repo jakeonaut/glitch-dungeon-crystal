@@ -6,6 +6,7 @@ var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 var fallenAngelRes = preload("res://sceneObjects/Enemies/FallenAngel.tscn")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
 var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
+
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
 

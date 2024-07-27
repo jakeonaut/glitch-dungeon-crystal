@@ -3783,21 +3783,8 @@ default_font = SubResource( 217 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 31 )
-player_message = null
-show_crt_effect = true
-show_dither_effect = null
-starting_glitch_type = null
-should_glitch_activate = null
-null_glitch = null
+show_dither_effect = true
 tileset_type = 2
-spellbook_forbidden = null
-has_spellbook_page = null
-has_glitched_grimoire = null
-spellbook_spells = null
-display_title = null
-doesnt_have_broom = null
-is_randomizing = null
-camera_size = null
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 8 )]
 

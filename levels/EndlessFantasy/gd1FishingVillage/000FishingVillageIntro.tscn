@@ -303,6 +303,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -5.3, -4 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.1, -0.620962, 0 )
+walk_speed = 8.0
 smack_time_limit = 10
 smack_recovery_time_limit = 11
 is_static = true
@@ -333,6 +334,18 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 36.1, -
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9, 8.5, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.9, 2.61047, 0 )
+
+[node name="miniCubeCrystal15" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9, 2.61047, 0 )
+
+[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.9, 3.61047, 0 )
+
+[node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.9, 1.61047, 0 )
 
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2, 14.5, 0 )

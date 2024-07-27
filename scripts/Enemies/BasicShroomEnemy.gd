@@ -13,6 +13,8 @@ func _ready():
 
 func setAsParent(_owner):
   walk_direction.x = 1
+  if getPlayer().global_transform.origin.x > self.global_transform.origin.x:
+    walk_direction.x = -1
   linear_velocity.y = 5
   lv.y = 5
   vv = 5

@@ -45,7 +45,9 @@ func restartMusic():
 func overrideLevelRespawnEvent():
   pass
 
-func _process(_delta):
+var random_tiles_timer = 0
+var random_tiles_time_limit = 10
+func _process(delta):
   # i hate this but _process is not guaranteed to occur AFTER setUpRoomInitializationOverride
   if not has_room_initialized:
     return
@@ -61,6 +63,12 @@ func _process(_delta):
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
       musicPlayer.stopAll()
+
+  if highPriestessBoss.visible:
+    random_tiles_timer += (delta*11)
+    if random_tiles_timer >= random_tiles_time_limit:
+      random_tiles_timer = 0
+      generateRandomTiles()
 
 func triggerCroneDialog():
   croneNPC.activate(true)
@@ -83,3 +91,25 @@ func unhideHighPriestess():
   global.memory["has_seen_highpriestess"] = true
   # global.memory.erase("spellbookPage")
   # player.nullify()
+  global.memory["broom"] = false
+  # generateEyeTiles()
+
+var climbToEyeLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_001climbToEye.tscn")
+var filledInLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_002FilledIn.tscn")
+func generateEyeTiles():
+  var climbToEyeLevelInstance = climbToEyeLevel.instance()
+  var newLevelTiles = climbToEyeLevelInstance.get_node("Viewport/level/LevelTiles")
+  levelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles, false)
+
+func generateRandomTiles():
+  var filledInLevelInstance = filledInLevel.instance()
+  var newLevelTiles = filledInLevelInstance.get_node("Viewport/level/LevelTiles")
+
+  var usedCells = newLevelTiles.get_used_cells()
+  usedCells.shuffle()
+  var randomUsedCells = []
+  for i in range(0, 10):
+    randomUsedCells.push_back(usedCells.pop_back())
+
+
+  levelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles, false, randomUsedCells)

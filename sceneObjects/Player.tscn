@@ -249,8 +249,8 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 1.0
-shader_param/normal_offset = 0.0
-shader_param/time_influence = 3.0
+shader_param/normal_offset = 0.01
+shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 5 )
@@ -4707,14 +4707,11 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "tryPlayFootstepSound"
-}, {
-"args": [ 1, false, false, 0, true, true ],
-"method": "summonSmokeClouds"
 } ]
 }
 tracks/5/type = "value"
@@ -5936,7 +5933,7 @@ shader_param/target_palette = ExtResource( 36 )
 script = ExtResource( 1 )
 true_terminal_vel = 14
 grav = 28
-walk_speed = 6
+walk_speed = 6.5
 run_speed = 8
 feather_glitch_walk_speed = 7
 swimming_walk_speed = 5

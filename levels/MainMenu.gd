@@ -76,7 +76,7 @@ func startGame():
   babushkaCat.mySprite.should_randomize_frame_delay = false
   babushkaCat.mySprite.frame_delay = 0.1
   babushkaCat.override_press_move_right = true
-  player.mySprite.flip_h = not player.mySprite.flip_h = 
+  player.mySprite.flip_h = not player.mySprite.flip_h
   eventSound1.play()
   chicken9.glitchOut()
   chicken3.glitchOut()

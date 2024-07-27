@@ -54,7 +54,7 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
-    var valid_inputs = ["sub_action_button"] #, "ui_up", "ui_down", "ui_left", "ui_right", "jump_button"]
+    var valid_inputs = ["sub_action_button", "jump_button"] #, "ui_up", "ui_down", "ui_left", "ui_right"]
     for valid_input in valid_inputs:
       if tongueAniPlayer.assigned_animation == "gulpIdle" and Input.is_action_just_pressed(valid_input):
         tongueAniPlayer.stop()

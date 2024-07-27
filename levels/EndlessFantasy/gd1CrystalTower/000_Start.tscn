@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=37]
+[ext_resource path="res://sceneObjects/GrandmaStatue.tscn" type="PackedScene" id=38]
 
 [sub_resource type="ShaderMaterial" id=46]
 shader = ExtResource( 1 )
@@ -98,10 +99,6 @@ shader_param/texture_albedo = ExtResource( 30 )
 shader_param/base_palette = ExtResource( 21 )
 shader_param/target_palette = ExtResource( 31 )
 
-[sub_resource type="BoxShape" id=49]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="Animation" id=67]
 resource_name = "default"
 length = 0.1
@@ -148,6 +145,10 @@ length = 0.1
 [sub_resource type="Animation" id=72]
 resource_name = "stand"
 length = 0.1
+
+[sub_resource type="BoxShape" id=49]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=73]
 resource_name = "default"
@@ -562,25 +563,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 46 )
 texture = ExtResource( 28 )
 
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 32 )]
+[node name="GrandmaStatue" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0 )
 
-[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 47 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
-material_override = SubResource( 48 )
-flip_h = true
-frame = 26
-max_frames = 1
-automatically_change_color = false
-
-[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
-shape = SubResource( 49 )
-
-[node name="SwampBubbleSpawn" parent="Viewport/level/NPC" instance=ExtResource( 35 )]
+[node name="SwampBubbleSpawn2" parent="Viewport/level/GrandmaStatue" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 9, 0 )
@@ -749,8 +737,6 @@ __meta__ = {
 material = SubResource( 44 )
 
 [editable path="Viewport/level/ParallaxBackground"]
-[editable path="Viewport/level/NPC"]
-[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]

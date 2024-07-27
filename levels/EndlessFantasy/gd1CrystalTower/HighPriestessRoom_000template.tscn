@@ -1,6 +1,7 @@
 [gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=6]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
@@ -10,7 +11,6 @@
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/palettes/all_palette.png" type="Texture" id=14]
-[ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoomLevelScript.gd" type="Script" id=16]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/sprites/savepointaltar.png" type="Texture" id=18]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=19]
@@ -286,12 +286,7 @@ shader_param/target_palette = ExtResource( 6 )
 [node name="Viewport" parent="." instance=ExtResource( 21 )]
 
 [node name="level" type="Node" parent="Viewport"]
-script = ExtResource( 16 )
-show_crt_effect = true
-starting_glitch_type = 1
-tileset_type = 6
-has_spellbook_page = true
-spellbook_spells = [ 1, 2 ]
+script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level"]
 anims/RESET = SubResource( 89 )

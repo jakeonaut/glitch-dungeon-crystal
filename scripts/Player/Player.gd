@@ -286,8 +286,10 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   var newSpriteOpacity = spriteOpacity
-  if aniPlayer.assigned_animation == "returning" or glitch_form == global.GlitchForm.INVISIBLE:
+  if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    newSpriteOpacity = 0.9
   # elif glitch_form == global.GlitchForm.INVISIBLE:
   #   newSpriteOpacity = 0.8
   else:
@@ -674,7 +676,6 @@ func isOnSavePoint():
        int(round(z)) == int(round(global.memory["active_save_point_z"]))
 
 func nullify():
-  glitchTilesAroundMe()
   glitchTickle(false)
   if global.memory["glitched_grimoire"]:
     level.displaySpellMessageText("unaffected")
@@ -695,6 +696,7 @@ func nullify():
   else:
     if glitch_form != global.GlitchForm.NORMAL:
       nullifySound.play()
+      glitchTilesAroundMe()
       self.applyGlitch(global.GlitchForm.NORMAL, true)
     return
 
@@ -1555,7 +1557,10 @@ func landed():
   target_last_grounded_y = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
-  if physics_state != PhysicsState.BEING_TOSSED and physics_state != PhysicsState.OCCUPIED and transformation != TransformationState.FISHY:
+  if physics_state != PhysicsState.BEING_TOSSED and \
+     physics_state != PhysicsState.OCCUPIED and \
+     transformation != TransformationState.FISHY and \
+     not is_pressing_horizontal_input and not was_pressing_horizontal_input:
     summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
@@ -1605,9 +1610,10 @@ func broomStop():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   smacked_npc = null
-  aniPlayer.queue("fall")
   if on_ground:
     aniPlayer.queue("stand")
+  else:
+    aniPlayer.queue("fall")
   if not isHoldingMultiBroom():
     broomSpriteVisible.visible = true
 
