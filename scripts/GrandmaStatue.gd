@@ -14,29 +14,19 @@ onready var streetlightGlitchAura  = get_node("StreetlightGlitchAura")
 func _ready():
   set_process(true)
   set_physics_process(false)
+  spriteYAlignment = 0.5
 
   mySprite.material_override = mySprite.material_override.duplicate()
   spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
   streetlightGlitchAura.mainTextureRect.material = streetlightGlitchAura.mainTextureRect.material.duplicate()
 
+  glitch_form_before_nullification = glitch_form
   yield(TempTimer.idle_frame(self), "timeout")
-  if glitch_form != global.GlitchForm.NORMAL:
-      var target_palette = level.levelTiles.grey_palette
-      if glitch_form == global.GlitchForm.FLOOR:
-          target_palette = level.levelTiles.red_palette
-      elif glitch_form == global.GlitchForm.LADDER:
-          target_palette = level.levelTiles.yellow_palette
-      elif glitch_form == global.GlitchForm.FEATHER:
-          target_palette = level.levelTiles.green_palette
-      elif glitch_form == global.GlitchForm.INVISIBLE:
-          target_palette = level.levelTiles.black_palette
-      elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
-          target_palette = level.levelTiles.white_palette
-      # mySprite.material_override.set_shader_param("target_palette", target_palette)
-      spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
-      streetlightGlitchAura.mainTextureRect.material.set_shader_param("target_palette", target_palette)
+  updateColor()
 
 var has_swapped = false
+var players_last_glitch_form = global.GlitchForm.NORMAL
+var glitch_form_before_nullification = global.GlitchForm.NORMAL
 func _process(delta):
   # super._process(delta) implicit
 
@@ -50,9 +40,11 @@ func _process(delta):
     else:
       spellbookGlitchSprite.visible = true
       streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
+      true_terminal_vel = 32
       # TODO(jaketrower): could dedupe with Player.gd 
       if glitch_form == global.GlitchForm.FEATHER:
         spellbookGlitchSprite.frame = 0
+        true_terminal_vel = 16
       elif glitch_form == global.GlitchForm.FLOOR:
         spellbookGlitchSprite.frame = 1
       elif glitch_form == global.GlitchForm.LADDER:
@@ -63,11 +55,21 @@ func _process(delta):
     if level.player.glitch_form == glitch_form:
       if not has_swapped:
         has_swapped = true
-        var my_old_origin = self.global_transform.origin
-        self.global_transform.origin = level.player.global_transform.origin
-        level.player.global_transform.origin = my_old_origin
+        if glitch_form != global.GlitchForm.NORMAL:
+          var my_old_origin = self.global_transform.origin
+          self.global_transform.origin = level.player.global_transform.origin
+          level.player.global_transform.origin = my_old_origin
+          level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR
+          glitch_form = players_last_glitch_form
+          if glitch_form == global.GlitchForm.NORMAL:
+            glitch_form_before_nullification = level.player.glitch_form
+        elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
+          glitch_form = glitch_form_before_nullification
+        updateColor()
+        on_ground = glitch_form == global.GlitchForm.FLOOR
     else:
       has_swapped = false
+      players_last_glitch_form = level.player.glitch_form
     # if mySprite.material_override != null:
     #   if level.player.glitch_form == glitch_form:
     #       mySprite.material_override.set_shader_param("opacity", 1.0)
@@ -81,6 +83,28 @@ func _process(delta):
     if smack_timer >= smack_time_limit:
       is_smacked = false
       unsmack()
+
+func updateColor():
+  var target_palette = level.levelTiles.grey_palette
+  var sprite_palette = global.grey_player_palette
+  if glitch_form == global.GlitchForm.FLOOR:
+    sprite_palette = global.player_red_palette
+    target_palette = level.levelTiles.red_palette
+  elif glitch_form == global.GlitchForm.LADDER:
+    sprite_palette = global.yellow_player_palette
+    target_palette = level.levelTiles.yellow_palette
+  elif glitch_form == global.GlitchForm.FEATHER:
+    sprite_palette = global.green_dungeon_palette
+    target_palette = level.levelTiles.green_palette
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    sprite_palette = global.black_player_palette
+    target_palette = level.levelTiles.black_palette
+  elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+    sprite_palette = global.white_player_palette
+    target_palette = level.levelTiles.white_palette
+  mySprite.material_override.set_shader_param("target_palette", sprite_palette)
+  spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
+  streetlightGlitchAura.mainTextureRect.material.set_shader_param("target_palette", target_palette)
 
 func unsmack():
   var material = mySprite.material_override

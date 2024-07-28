@@ -40,7 +40,7 @@ func _process(_delta):
     return
     
   setPosition(not has_set_position)
-  has_set_position = true
+  # has_set_position = true
 
   # spawn_timer += (delta*22)
   # if spawn_timer >= spawn_time_limit:
