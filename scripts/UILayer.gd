@@ -228,9 +228,10 @@ func _process(delta):
     var spellbook = global.memory["spellbookPage"]
     var currSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
     var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3/EquipmentSlotSprite")
-    var spellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
-    setGlitchSprite(equipSlotSprite, spellPage)
-    setGlitchSprite(currSlotSprite, getPlayer().glitch_form)
+    var nextSpellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
+    var currSpellPage = spellbook[spellbook.size() - 1] if spellbook.size() > 1 else global.GlitchForm.NORMAL
+    setGlitchSprite(equipSlotSprite, nextSpellPage)
+    setGlitchSprite(currSlotSprite, currSpellPage)
   var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
   if global.memory["glitched_grimoire"]:
     spellbookSprite.frame = 2

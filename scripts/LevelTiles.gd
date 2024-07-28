@@ -534,7 +534,9 @@ func unrandomizeTile(cell_index):
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
   return true
 
-func rerandomizeTile(cell_index, glitch_type):
+func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
+  if rand_timer: 
+    yield(get_tree().create_timer(rand_range(0, 1)), "timeout")
   if unrandomizeTile(cell_index):
     randomizeTile(cell_index, glitch_type)  
   

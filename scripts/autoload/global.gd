@@ -225,7 +225,7 @@ func _ready():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 0
+    memory["broomerang"] = 1
     memory["multi_broom"] = false
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?
     memory["can_nest"] = 0

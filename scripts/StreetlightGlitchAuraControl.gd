@@ -7,7 +7,7 @@ onready var mainTextureRect = get_node("TextureRect")
 var has_set_position = false
 var spawn_timer = 0
 var spawn_time_limit = 3
-var target_origin = Vector3(0, 0, 0)
+export var target_origin = Vector3(0, 0, 0)
 
 onready var topGame = get_tree().get_root().get_node("Game")
 onready var viewport = get_tree().get_root().get_node("Game/Viewport")
@@ -72,7 +72,7 @@ func _process(_delta):
 func setPosition(should_set_target_origin):
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   if should_set_target_origin:
-    target_origin = target.global_transform.origin
+    target_origin = target.global_transform.origin + target_origin
   getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
   mainTextureRect.rect_position.x = target_pos.x - mainTextureRect.rect_size.x / 2

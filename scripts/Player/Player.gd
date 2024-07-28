@@ -150,7 +150,7 @@ func restoreGlitchAndMP():
 func applyGlitch(glitch, notPlaySound = false):
   if returning_to_save_point > 0:
     return false
-  glitchTilesAroundMe()
+  glitchTilesAroundMe(0.25, true)
   nullifySound.stop()
   if not notPlaySound:
     if glitch == self.glitch_form:
@@ -632,7 +632,7 @@ func processGlitchHurtRecovery(delta):
     return true
 
 onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
-func glitchTilesAroundMe(margin = 0.25):
+func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
   var lt = getLevelTiles()
 
   var shape = glitchCollisionShape
@@ -646,7 +646,7 @@ func glitchTilesAroundMe(margin = 0.25):
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      lt.rerandomizeTile(coords, lt.getRandomGlitchType())
+      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
 
 func applyGlitchDeathEffects(x):
   if global.canChangeSongPitch and (x < 0 or x > 20):
@@ -696,7 +696,7 @@ func nullify():
   else:
     if glitch_form != global.GlitchForm.NORMAL:
       nullifySound.play()
-      glitchTilesAroundMe()
+      glitchTilesAroundMe(0.25, true)
       self.applyGlitch(global.GlitchForm.NORMAL, true)
     return
 
