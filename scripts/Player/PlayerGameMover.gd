@@ -6,6 +6,7 @@ enum TransformationState {
   MUSHROOM,
   UNDERGROUND,
   UNDERGROUND_RETURNING,
+  BUBBLE,
 }
 var transformation = TransformationState.NORMAL
 
@@ -471,7 +472,9 @@ var has_broom_flown = false
 var has_landed_since_last_flight = false
 func getABroom(unpauseAnimation = true):
   pauseAnimation = not unpauseAnimation
-  if transformation == TransformationState.FISHY or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
+  if transformation == TransformationState.FISHY or \
+     transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
+     transformation == TransformationState.BUBBLE:
     return
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
@@ -563,6 +566,7 @@ func glitchTickle(play_sound = true):
   mySprite.material_override.set_shader_param("shake_power", 0.01)
   mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
   if play_sound:
+    tickleSound.pitch_scale = 0.5
     tickleSound.play()
 
 var sporeRes = preload("res://sceneObjects/Environment/PlayerSpore.tscn")

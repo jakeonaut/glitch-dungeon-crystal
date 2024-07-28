@@ -13,7 +13,7 @@ func _ready():
 
 func setAsParent(_owner):
   walk_direction.x = 1
-  if getPlayer().global_transform.origin.x > self.global_transform.origin.x:
+  if not is_big and getPlayer().global_transform.origin.x > self.global_transform.origin.x:
     walk_direction.x = -1
   linear_velocity.y = 5
   lv.y = 5
@@ -95,13 +95,13 @@ func passiveActivate(_delta, is_player):
     level.player.nesting_doll_state = global.NestingDoll.MATRIARCH
     global.memory["nesting_doll"] = global.NestingDoll.MATRIARCH
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
-    if global.memory["broom"] or level.player.fallenBroomRef:
-      if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
-        level.player.fallenBroomRef.get_ref().queue_free()
-        level.player.fallenBroomRef = null
-      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
-      level.player.summonFallenBroom(false, true)
-      level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+    # if global.memory["broom"] or level.player.fallenBroomRef:
+    #   if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
+    #     level.player.fallenBroomRef.get_ref().queue_free()
+    #     level.player.fallenBroomRef = null
+    #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+    #   level.player.summonFallenBroom(false, true)
+    #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
   # elif is_infected:
   #   level.player.shroomAniPlayer.queue("shrink")
   #   level.player.shroomAniPlayer.queue("adjust")

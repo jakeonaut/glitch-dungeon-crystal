@@ -486,7 +486,7 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/002FishingHooksMinimum.tscn"
 
 [node name="DefaultLevel" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
@@ -497,24 +497,24 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/GrubAmbush.tscn"
 
 [node name="Level4" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
 
 [node name="Level5" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 0 )
 material_override = SubResource( 6 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FlingAndFlung.tscn"
 
 [node name="Level7" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
 material_override = SubResource( 9 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="Level8" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, 0 )
 material_override = SubResource( 10 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"

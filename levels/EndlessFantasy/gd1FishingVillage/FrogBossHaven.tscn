@@ -918,7 +918,7 @@ __meta__ = {
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 8 )
-show_dither_effect = true
+show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true

@@ -80,13 +80,14 @@ func activate(is_player):
   passiveActivate(0, is_player)
 
 func passiveActivate(_delta, _is_player):
-  level.player.getSmacked()
-  is_active = false
-  is_spawning = true
-  collectSound.play()
-  num_sparkles_spawned = 0
+  # level.player.getSmacked()
+  level.player.getBubbleInfected()
+  # is_active = false
+  # is_spawning = true
+  # collectSound.play()
+  # num_sparkles_spawned = 0
 
-  mySprite.frame_delay = 0.1
-  mySprite.should_randomize_frame_delay = false
-  mySprite.updateBaseFrame(0, 1)
-  mySprite.should_soft_fizzle_out = true
+  # mySprite.frame_delay = 0.1
+  # mySprite.should_randomize_frame_delay = false
+  # mySprite.updateBaseFrame(0, 1)
+  # mySprite.should_soft_fizzle_out = true

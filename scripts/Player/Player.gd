@@ -25,6 +25,7 @@ onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySp
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
+onready var bubbleSprite = get_node("SpriteContainer/InnerSpriteContainer/BubbleSprite")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -81,6 +82,8 @@ func tryPlayFootstepSound():
   if transformation == TransformationState.UNDERGROUND_RETURNING:
     return
   if transformation == TransformationState.FISHY:
+    return
+  if transformation == TransformationState.BUBBLE:
     return
 
   if global.isPauseMenuOpen or global.pauseGame:
@@ -183,20 +186,28 @@ func floorGlitch():
   changeSpriteColorPalette(global.player_red_palette)
   # mySprite.setBugCatcherCostume()
 
+func miniUpwardGust(reverse_immediately = true):
+  var upward_gust = 5
+  if linear_velocity.y < 0:
+    if reverse_immediately:
+      linear_velocity.y = 1
+      lv.y = 1
+      vv = 1
+    else:
+      linear_velocity.y /= 2
+      lv.y /= 2
+      vv /= 2
+  linear_velocity.y += upward_gust
+  lv.y += upward_gust
+  vv += upward_gust
+
 func featherGlitch():
   spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 0
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
      (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY:
-    var upward_gust = 5
-    if linear_velocity.y < 0:
-      linear_velocity.y = 1
-      lv.y = 1
-      vv = 1
-    linear_velocity.y += upward_gust
-    lv.y += upward_gust
-    vv += upward_gust
+    miniUpwardGust()
   level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
@@ -288,6 +299,8 @@ func _process(delta):
   var newSpriteOpacity = spriteOpacity
   if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
+  elif transformation == TransformationState.BUBBLE:
+    newSpriteOpacity = 0.8
   elif glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 0.9
   # elif glitch_form == global.GlitchForm.INVISIBLE:
@@ -297,10 +310,17 @@ func _process(delta):
   if newSpriteOpacity != spriteOpacity:
     spriteOpacity = newSpriteOpacity
     mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
+    broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
   if mySprite.flip_h:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
   else:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
+
+  bubbleSprite.visible = transformation == TransformationState.BUBBLE
+  if transformation == TransformationState.BUBBLE:
+    spellbookGlitchSprite.visible = false
+    if horizontal_collision or on_ground:
+      getBubbleCured()
 
   if global.isPauseMenuOpen:
     return
@@ -770,6 +790,60 @@ func processFishyLogic(_delta):
 # @override
 func justPressedJump():
   return .justPressedJump() or (transformation == TransformationState.FISHY and Input.is_action_just_pressed("ui_up") and not pauseInput and not isTextboxPausingMe())
+
+
+var bubble_temp_grav = 60
+var bubble_temp_true_terminal_vel = 14
+func getBubbleInfected():
+  if transformation == TransformationState.BUBBLE:
+    return
+  pauseAnimation = true
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("tumbleRight", -1, 0.5)
+
+  miniUpwardGust(false)
+  loseBroom()
+  transformation = TransformationState.BUBBLE
+  on_ground = false
+  gravitySound.play()
+  level.flipGravity()
+  # physics_vars.should_apply_gravity = true
+  # bubble_temp_grav = grav
+  # grav *= -1
+  # bubble_temp_true_terminal_vel = true_terminal_vel
+  # true_terminal_vel *= -1
+
+func getBubbleCured():
+  if transformation != TransformationState.BUBBLE:
+    return
+  transformation = TransformationState.NORMAL
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.queue("land")
+  pauseAnimation = false
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL
+
+  getABroom()
+  level.flipGravity()
+  tickleSound.pitch_scale = 1.0
+  tickleSound.play()
+  var bubble = bubbleRes.instance()
+  level.add_child(bubble)
+  # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+  bubble.setAsParent(self)
+  bubble.global_transform.origin = global_transform.origin
+  bubble.my_original_pos = bubble.global_transform.origin.y
+  bubble.bubbleStartPop()
+  bubble.mySprite.pixel_size = 0.25
+  # physics_vars.should_apply_gravity = true
+  # should_collide_floor = true
+  # should_collide_ceil = true
+  # should_collide_horizontally = true
+  # grav = bubble_temp_grav
+  # true_terminal_vel = bubble_temp_true_terminal_vel
+
+
 
 func getFishyInfected():
   if summonedBroom:
