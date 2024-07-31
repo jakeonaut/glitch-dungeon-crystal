@@ -40,6 +40,7 @@ export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_TH
 export var display_title = "???"
 export var doesnt_have_broom = false
 var has_room_initialized = false
+export var pacman_wrapping = false
 
 func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.

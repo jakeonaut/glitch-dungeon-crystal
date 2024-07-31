@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -14,10 +14,15 @@
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=12]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=22]
 resource_local_to_scene = true
-extents = Vector3( 2, 8, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=23]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -74,23 +79,37 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
+[sub_resource type="BoxShape" id=24]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=25]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
 [sub_resource type="BoxShape" id=21]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=26]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=27]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 640, 512 )
+size = Vector2( 1280, 1024 )
 audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 12 )
+show_crt_effect = true
 starting_glitch_type = 2
 tileset_type = 2
+has_spellbook_page = true
+spellbook_spells = [ 1, 2 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 6 )]
 
@@ -175,9 +194,11 @@ is_passive = true
 [node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-shape = SubResource( 15 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 22 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 23 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -194,9 +215,11 @@ anims/doorClose = SubResource( 17 )
 anims/doorOpen = SubResource( 18 )
 anims/locked = SubResource( 19 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-shape = SubResource( 15 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 24 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 25 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -223,14 +246,21 @@ bbText = "•you've entered our realm
 ..now you cannot leave.."
 tiny_textbox = true
 
+[node name="Viewport2" parent="." instance=ExtResource( 15 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 26 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 5 )]
+
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 14 )
+texture = SubResource( 27 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 5 )]
 
@@ -238,3 +268,4 @@ __meta__ = {
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport2/ScreenEffects"]

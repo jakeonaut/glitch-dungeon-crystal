@@ -524,6 +524,10 @@ func getSmacked(_broom_origin, silently = false):
     smack_timer = 0
     is_smacked = true
     has_ever_been_smacked = true
+    if not silently and mushroomEmbiggensMe and self.scale.x > 1:
+        self.scale.x /= 2
+        self.scale.y /= 2
+        self.scale.z /= 2
     return true
 
 var parentSpawner = null

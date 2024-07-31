@@ -318,9 +318,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = SubResource( 14 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="UILayer" parent="." instance=ExtResource( 18 )]
 

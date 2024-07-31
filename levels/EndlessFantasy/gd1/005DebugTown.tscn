@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=2]
+[gd_scene load_steps=136 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -25,21 +25,26 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=23]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=26]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=28]
-[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=29]
 [ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=30]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=33]
+[ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=34]
 [ext_resource path="res://sceneObjects/PlayerLevelSelect.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=37]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=38]
+[ext_resource path="res://assets/palettes/swamp_water_palette2.png" type="Texture" id=39]
 [ext_resource path="res://levels/EndlessFantasy/001QuestionBlockNPCAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=41]
 [ext_resource path="res://assets/palettes/red_tidepool_palette.png" type="Texture" id=42]
+[ext_resource path="res://scripts/ParallaxBackground.gd" type="Script" id=43]
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=44]
+[ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=45]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 5 )
@@ -1022,6 +1027,34 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=123]
 resource_name = "jump"
 length = 0.001
+
+[sub_resource type="ShaderMaterial" id=174]
+shader = ExtResource( 5 )
+shader_param/albedo = null
+shader_param/opacity = 0.5
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 34 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 39 )
 
 [sub_resource type="ShaderMaterial" id=147]
 shader = ExtResource( 5 )
@@ -3042,48 +3075,6 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
-[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="Viewport@level@NPC2@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Viewport" parent="." instance=ExtResource( 24 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -3091,6 +3082,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Lv1: Debug"
 }
+tileset_type = 5
 has_spellbook_page = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
@@ -3140,18 +3132,19 @@ __meta__ = {
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-mesh_library = ExtResource( 23 )
+mesh_library = ExtResource( 26 )
 cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 65515, 0, 1, 65518, 0, 1, 131051, 0, 1, 131052, 0, 1, 131053, 0, 1, 131054, 0, 1, 196596, 0, 1, 196597, 0, 1, 196609, 0, 3, 196610, 0, 3, 262114, 0, 1, 262115, 0, 1, 262116, 0, 1, 262117, 0, 1, 262120, 0, 1, 262121, 0, 1, 262132, 0, 1, 262133, 0, 1, 262144, 0, 1, 262145, 0, 3, 262146, 0, 3, 327650, 0, 1, 327653, 0, 1, 327656, 0, 1, 327657, 0, 1, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 3, 327682, 0, 3, 393186, 0, 1, 393189, 0, 1, 393213, 0, 1, 393216, 0, 1, 458722, 0, 1, 458723, 0, 1, 458724, 0, 1, 458725, 0, 1, 458749, 0, 1, 458752, 0, 1, 524255, 0, 1, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 589791, 0, 1, 589805, 0, 1, 589806, 0, 1, 589807, 0, 1, 655325, 0, 1, 655326, 0, 1, 655327, 0, 1, 655328, 0, 1, 655341, 0, 1, 655343, 0, 1, 720861, 0, 1, 720863, 0, 1, 720877, 0, 1, 720878, 0, 1, 720879, 0, 1, 720898, 0, 1, 720899, 0, 1, 786397, 0, 1, 786398, 0, 1, 786399, 0, 1, 786400, 0, 1, 786434, 0, 1, 786435, 0, 1, 851934, 0, 1, 851936, 0, 1, 851937, 0, 1, 851938, 0, 1, 917470, 0, 1, 917471, 0, 1, 917472, 0, 1, 917474, 0, 1, 983008, 0, 1, 983009, 0, 1, 983010, 0, 1, 983043, 0, 1, 983044, 0, 1, 1048543, 0, 1, 1048545, 0, 1, 1048579, 0, 1, 1048580, 0, 1, 1114079, 0, 1, 1114080, 0, 1, 1114081, 0, 1, 1114082, 0, 1, 1114083, 0, 1, 1179617, 0, 1, 1179619, 0, 1, 1245153, 0, 1, 1245154, 0, 1, 1245155, 0, 1, -655355, 0, 1, -655354, 0, 1, -655353, 0, 1, -655352, 0, 1, -655347, 0, 1, -655346, 0, 1, -655345, 0, 1, -589843, 0, 1, -589842, 0, 1, -589841, 0, 1, -589826, 0, 1, -589819, 0, 1, -589816, 0, 1, -589811, 0, 1, -589809, 0, 1, -589808, 0, 1, -589807, 0, 1, -589806, 0, 1, -589805, 0, 1, -524307, 0, 1, -524305, 0, 1, -524293, 0, 1, -524292, 0, 1, -524291, 0, 1, -524290, 0, 1, -524289, 0, 1, -524288, 0, 1, -524283, 0, 1, -524280, 0, 1, -524275, 0, 1, -524274, 0, 1, -524273, 0, 1, -524272, 0, 1, -524269, 0, 1, -458771, 0, 1, -458770, 0, 1, -458769, 0, 1, -458760, 0, 1, -458759, 0, 1, -458758, 0, 1, -458757, 0, 1, -458755, 0, 1, -458754, 0, 1, -458753, 0, 1, -458752, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458738, 0, 1, -458736, 0, 1, -458733, 0, 1, -458731, 0, 1, -458730, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393217, 0, 1, -393216, 0, 1, -393214, 0, 1, -393212, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393197, 0, 1, -393195, 0, 1, -393194, 0, 1, -327693, 0, 3, -327692, 0, 3, -327691, 0, 3, -327690, 0, 3, -327681, 0, 1, -327680, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327668, 0, 1, -327666, 0, 1, -327663, 0, 1, -327661, 0, 1, -262157, 0, 3, -262156, 0, 3, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262145, 0, 1, -262144, 0, 1, -262142, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1, -262125, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 3, -196620, 0, 3, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131052, 0, 1, -65557, 0, 1, -65556, 0, 1, -65555, 0, 1, -65554, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -21, 0, 1, -18, 0, 1 )
+"cells": PoolIntArray( 65515, 0, 1, 65518, 0, 1, 131051, 0, 1, 131052, 0, 1, 131053, 0, 1, 131054, 0, 1, 196596, 0, 1, 196597, 0, 1, 196608, 0, 37, 196609, 0, 37, 196610, 0, 37, 262114, 0, 1, 262115, 0, 1, 262116, 0, 1, 262117, 0, 1, 262120, 0, 1, 262121, 0, 1, 262132, 0, 1, 262133, 0, 1, 262144, 0, 1, 262145, 0, 37, 262146, 0, 37, 327650, 0, 1, 327653, 0, 1, 327656, 0, 1, 327657, 0, 1, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 37, 327682, 0, 37, 393186, 0, 1, 393189, 0, 1, 393213, 0, 1, 393216, 0, 1, 458722, 0, 1, 458723, 0, 1, 458724, 0, 1, 458725, 0, 1, 458749, 0, 1, 458752, 0, 1, 524255, 0, 1, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 589791, 0, 1, 589805, 0, 1, 589806, 0, 1, 589807, 0, 1, 655325, 0, 1, 655326, 0, 1, 655327, 0, 1, 655328, 0, 1, 655341, 0, 1, 655343, 0, 1, 720861, 0, 1, 720863, 0, 1, 720877, 0, 1, 720878, 0, 1, 720879, 0, 1, 720898, 0, 1, 720899, 0, 1, 786397, 0, 1, 786398, 0, 1, 786399, 0, 1, 786400, 0, 1, 786434, 0, 1, 786435, 0, 1, 851934, 0, 1, 851936, 0, 1, 851937, 0, 1, 851938, 0, 1, 917470, 0, 1, 917471, 0, 1, 917472, 0, 1, 917474, 0, 1, 983008, 0, 1, 983009, 0, 1, 983010, 0, 1, 983043, 0, 1, 983044, 0, 1, 1048543, 0, 1, 1048545, 0, 1, 1048579, 0, 1, 1048580, 0, 1, 1114079, 0, 1, 1114080, 0, 1, 1114081, 0, 1, 1114082, 0, 1, 1114083, 0, 1, 1179617, 0, 1, 1179619, 0, 1, 1245153, 0, 1, 1245154, 0, 1, 1245155, 0, 1, -655355, 0, 1, -655354, 0, 1, -655353, 0, 1, -655352, 0, 1, -655347, 0, 1, -655346, 0, 1, -655345, 0, 1, -589843, 0, 1, -589842, 0, 1, -589841, 0, 1, -589826, 0, 1, -589819, 0, 1, -589816, 0, 1, -589811, 0, 1, -589809, 0, 1, -589808, 0, 1, -589807, 0, 1, -589806, 0, 1, -589805, 0, 1, -524307, 0, 1, -524305, 0, 1, -524293, 0, 1, -524292, 0, 1, -524291, 0, 1, -524290, 0, 1, -524289, 0, 1, -524288, 0, 1, -524283, 0, 1, -524280, 0, 1, -524275, 0, 1, -524274, 0, 1, -524273, 0, 1, -524272, 0, 1, -524269, 0, 1, -458771, 0, 1, -458770, 0, 1, -458769, 0, 1, -458760, 0, 1, -458759, 0, 1, -458758, 0, 1, -458757, 0, 1, -458755, 0, 1, -458754, 0, 1, -458753, 0, 1, -458752, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458738, 0, 1, -458736, 0, 1, -458733, 0, 1, -458731, 0, 1, -458730, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393217, 0, 1, -393216, 0, 1, -393214, 0, 1, -393212, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393197, 0, 1, -393195, 0, 1, -393194, 0, 1, -327693, 0, 37, -327692, 0, 37, -327691, 0, 37, -327690, 0, 37, -327681, 0, 1, -327680, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327668, 0, 1, -327666, 0, 1, -327663, 0, 1, -327661, 0, 1, -262157, 0, 37, -262156, 0, 37, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262145, 0, 1, -262144, 0, 1, -262142, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1, -262125, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 37, -196620, 0, 37, -196619, 0, 1, -196616, 0, 1, -196615, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131083, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131052, 0, 1, -65557, 0, 1, -65556, 0, 1, -65555, 0, 1, -65554, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -21, 0, 1, -18, 0, 1 )
 }
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, -1, 0 )
 }
+override_palette = ExtResource( 45 )
 
 [node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
@@ -3433,18 +3426,27 @@ shape = SubResource( 112 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -11.9, 1 )
 should_fade_away = true
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 29 )]
+[node name="ParallaxBackground" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -4.79943, 0 )
+script = ExtResource( 43 )
 
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/ParallaxBackground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
-material_override = SubResource( 147 )
+material_override = SubResource( 174 )
+pixel_size = 0.125
 texture = ExtResource( 11 )
+script = ExtResource( 29 )
+max_frames = 1
+should_animate = false
 
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/ParallaxBackground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 147 )
+pixel_size = 0.125
 texture = ExtResource( 11 )
+script = ExtResource( 29 )
+max_frames = 1
+should_animate = false
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 5.89079, 0 )
@@ -3546,7 +3548,6 @@ visible = true
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
-[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/BasicFrogEnemy"]
 [editable path="Viewport/level/BasicFrogEnemy2"]
 [editable path="Viewport2/ScreenEffects"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CherryCarcass.gd" type="Script" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
-[ext_resource path="res://sceneObjects/GlitchParticleBurst.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=9]
@@ -279,8 +278,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="MushroomFallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87297, 0 )
 shape = SubResource( 18 )
-
-[node name="GlitchParticleBurst" parent="." instance=ExtResource( 6 )]
 
 [node name="MushroomSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.971, -1 )

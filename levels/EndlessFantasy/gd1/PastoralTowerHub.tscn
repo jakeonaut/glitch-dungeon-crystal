@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=2]
+[gd_scene load_steps=135 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
@@ -251,9 +251,13 @@ tracks/1/keys = {
 "values": [ ExtResource( 19 ) ]
 }
 
-[sub_resource type="BoxShape" id=48]
+[sub_resource type="BoxShape" id=162]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=163]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=49]
 resource_local_to_scene = true
@@ -715,9 +719,13 @@ shader_param/target_palette = ExtResource( 25 )
 resource_local_to_scene = true
 extents = Vector3( 3.24, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=102]
+[sub_resource type="BoxShape" id=164]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=165]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=103]
 resource_local_to_scene = true
@@ -1576,7 +1584,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 17 )]
 fov = 80.7
-size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -1728,8 +1735,11 @@ anims/doorOpen = SubResource( 54 )
 anims/doorUnbarred = SubResource( 55 )
 anims/locked = SubResource( 56 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 48 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 162 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 163 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 49 )
@@ -1748,34 +1758,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 57 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 58 )
@@ -1809,40 +1791,12 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/GrannyNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 57 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 30 )
 volume_db = -15.0
 script = ExtResource( 26 )
 
-[node name="DialogSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="Viewport/level/GrannyNPC/NPC TextBox/TextBox" index="14"]
 stream = ExtResource( 30 )
 pitch_scale = 0.9
 
@@ -1876,34 +1830,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 57 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 58 )
 frame = 28
@@ -1934,34 +1860,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 57 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 material_override = SubResource( 58 )
@@ -2008,8 +1906,11 @@ is_passive = true
 [node name="landing" parent="Viewport/level/Door5" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
-shape = SubResource( 102 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+shape = SubResource( 164 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
+shape = SubResource( 165 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 103 )
@@ -2061,127 +1962,7 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 117 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar13" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="11"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar14" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="12"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar15" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="13"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar16" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="14"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar17" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="15"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar18" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="16"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="AbortSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="16"]
 script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/FrogCroneNPC" index="3"]
@@ -2215,126 +1996,6 @@ dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/FrogCroneNPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 126 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar13" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="11"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar14" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="12"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar15" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="13"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar16" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="14"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar17" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="15"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar18" type="VScrollBar" parent="Viewport/level/FrogCroneNPC2/NPC TextBox/TextBox/Text" index="16"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/FrogCroneNPC2" index="3"]
 material_override = SubResource( 127 )

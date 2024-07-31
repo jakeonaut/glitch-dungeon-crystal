@@ -72,7 +72,6 @@ shader_param/base_palette = ExtResource( 9 )
 shader_param/target_palette = ExtResource( 13 )
 
 [sub_resource type="CylinderShape" id=8]
-radius = 2.0
 
 [sub_resource type="BoxShape" id=15]
 

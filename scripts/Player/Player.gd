@@ -25,7 +25,7 @@ onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySp
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
-onready var bubbleSprite = get_node("SpriteContainer/InnerSpriteContainer/BubbleSprite")
+onready var bubbleSprite = get_node("BubbleSprite")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -163,8 +163,8 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
-  if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
-    getABroom()
+  # if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
+  #   getABroom()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -227,7 +227,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
-  loseBroom()
+  # loseBroom()
   spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 3
   level.displaySpellMessageText("ghost")
@@ -300,7 +300,7 @@ func _process(delta):
   if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
   elif transformation == TransformationState.BUBBLE:
-    newSpriteOpacity = 0.8
+    newSpriteOpacity = 0.5
   elif glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 0.9
   # elif glitch_form == global.GlitchForm.INVISIBLE:
@@ -523,11 +523,24 @@ func tryDieToOffscreenCamera(delta):
       global.pauseGame = true
       return
     else:
-      global.roomEdgeVector = null
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
       global.memory.erase("player_x_offset")
       global.memory.erase("prevXDiff")
+      if level.pacman_wrapping:
+        DEATH_MARGIN = -0.5
+        if global.roomEdgeVector == Vector3(1, 0, 0):
+          global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
+        if global.roomEdgeVector == Vector3(-1, 0, 0):
+          global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
+        if global.roomEdgeVector == Vector3(0, -1, 0):
+          global_transform.origin.y = getGameCamera().topmost_y + DEATH_MARGIN
+        if global.roomEdgeVector == Vector3(0, 1, 0):
+          global_transform.origin.y = getGameCamera().botmost_y - DEATH_MARGIN
+        global.roomEdgeVector = null
+        return
+      global.roomEdgeVector = null
+
 
   DEATH_MARGIN = 2
   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
@@ -1190,7 +1203,14 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
-  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+  if transformation == TransformationState.BUBBLE:
+    getBubbleCured()
+    physics_state = PhysicsState.GLITCH_HURT
+    glitchTickle(true)
+    getSmacked()
+    glitch_death_timer = 0
+    global.pauseMoveInput = false 
+  elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     global.memory["hp"] += 1
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
@@ -1328,7 +1348,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or glitch_form == global.GlitchForm.INVISIBLE or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
@@ -1532,7 +1552,7 @@ func processBroomRenderLogic(_delta):
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", false)
       # mySprite.material_override.set_shader_param("enable_palette_cycle", false)
     
-  if physics_state == PhysicsState.OCCUPIED or glitch_form == global.GlitchForm.INVISIBLE:
+  if physics_state == PhysicsState.OCCUPIED:
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
@@ -1722,83 +1742,82 @@ func iFellFlat():
     fallenBroomRef.get_ref().canPause = true
 
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
+  if not global.memory["broom"] or not broomSpriteVisible.visible:
+    return null
   broomSpriteVisible.visible = false
   summonSmokeClouds(5, false, false)
+  var fallenBroom = fallenBroomRes.instance()
+  level.add_child(fallenBroom)
+  if smacked_npc != null:
+    fallenBroom.smacked_npc = smacked_npc
+  fallenBroom.should_die_on_land = should_die_on_land
+  fallenBroom.should_return = should_return
+  fallenBroom.global_transform.origin = self.global_transform.origin
+  fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
+  fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
+  if grav > 0:
+    fallenBroom.global_transform.origin.y += 2
+  if was_thrown:
+    global.incrementLevelZoneSweeps()
+    fallenBroom.grav = 1
+    fallenBroom.projectile = true
+    # if global.memory["magic_lantern"]:
+    #   fallenBroom.should_collide_ceil = false
+    #   fallenBroom.should_collide_floor = false
+    #   fallenBroom.should_collide_horizontally = false
+    fallenBroom.global_transform.origin.y -= 1
+    # if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
+    #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
+    #   fallenBroom.taking_the_player_with_me = true
+    fallenBroom.true_terminal_vel = 0
+    fallenBroom.walk_speed *= 3
+    fallenBroom.get_node("BroomSound").play()
+    var x_direction = 0
+    if Input.is_action_pressed("ui_left"):
+      x_direction = -1
+    elif Input.is_action_pressed("ui_right"):
+      x_direction = 1
+    if Input.is_action_pressed("ui_up"):
+      fallenBroom.walk_speed *= .7
+      fallenBroom.walk_direction = Vector2(x_direction, 1)
+      fallenBroom.just_pressed_jump = true
+      fallenBroom.pressing_jump = true
+      fallenBroom.grav = 0
+      fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
+      fallenBroom.thrown_direction.y = 1
+    elif Input.is_action_pressed("ui_down"):
+      fallenBroom.walk_speed *= .7
+      fallenBroom.walk_direction = Vector2(x_direction, -1)
+      fallenBroom.grav = 600
+      fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
+      fallenBroom.thrown_direction.y = -1
+    elif x_direction != 0:
+      fallenBroom.walk_direction.x = x_direction
+    fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
+  global.memory["broom"] = false
 
-  if global.memory["broom"]:
-    var fallenBroom = fallenBroomRes.instance()
-    level.add_child(fallenBroom)
-    if smacked_npc != null:
-      fallenBroom.smacked_npc = smacked_npc
-    fallenBroom.should_die_on_land = should_die_on_land
-    fallenBroom.should_return = should_return
-    fallenBroom.global_transform.origin = self.global_transform.origin
-    fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
-    fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
+  if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
     if grav > 0:
-      fallenBroom.global_transform.origin.y += 2
-    if was_thrown:
-      global.incrementLevelZoneSweeps()
-      fallenBroom.grav = 1
-      fallenBroom.projectile = true
-      # if global.memory["magic_lantern"]:
-      #   fallenBroom.should_collide_ceil = false
-      #   fallenBroom.should_collide_floor = false
-      #   fallenBroom.should_collide_horizontally = false
-      fallenBroom.global_transform.origin.y -= 1
-      # if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
-      #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
-      #   fallenBroom.taking_the_player_with_me = true
-      fallenBroom.true_terminal_vel = 0
-      fallenBroom.walk_speed *= 3
-      fallenBroom.get_node("BroomSound").play()
-      var x_direction = 0
-      if Input.is_action_pressed("ui_left"):
-        x_direction = -1
-      elif Input.is_action_pressed("ui_right"):
-        x_direction = 1
-      if Input.is_action_pressed("ui_up"):
-        fallenBroom.walk_speed *= .7
-        fallenBroom.walk_direction = Vector2(x_direction, 1)
-        fallenBroom.just_pressed_jump = true
-        fallenBroom.pressing_jump = true
-        fallenBroom.grav = 0
-        fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
-        fallenBroom.thrown_direction.y = 1
-      elif Input.is_action_pressed("ui_down"):
-        fallenBroom.walk_speed *= .7
-        fallenBroom.walk_direction = Vector2(x_direction, -1)
-        fallenBroom.grav = 600
-        fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7
-        fallenBroom.thrown_direction.y = -1
-      elif x_direction != 0:
-        fallenBroom.walk_direction.x = x_direction
-      fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
-    global.memory["broom"] = false
-
-    if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
-      if grav > 0:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
-    elif (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and not was_thrown:
-      if grav > 0:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
-    elif (fallenBroom.walk_direction.x > 0  or not mySprite.flip_h) and was_thrown:
-      if grav > 0:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
     else:
-      if grav > 0:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
-      else:
-        fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
-    fallenBroomRef = weakref(fallenBroom)
-    return fallenBroomRef
-  return null
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+  elif (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and not was_thrown:
+    if grav > 0:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+  elif (fallenBroom.walk_direction.x > 0  or not mySprite.flip_h) and was_thrown:
+    if grav > 0:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin", -1, 2.0)
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse", -1, 2.0)
+  else:
+    if grav > 0:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+  fallenBroomRef = weakref(fallenBroom)
+  return fallenBroomRef
 
 func iJustPressedDown():
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:

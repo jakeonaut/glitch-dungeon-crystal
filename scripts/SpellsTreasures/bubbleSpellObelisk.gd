@@ -46,6 +46,8 @@ func _process(delta):
   else:
     bubbleSpawnTimer = 0
 
+  mySprite.visible = getPlayer().transformation != getPlayer().TransformationState.BUBBLE
+
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var bubbleSpawnTimer = 0
 var bubbleSpawnTimeLimit = 5

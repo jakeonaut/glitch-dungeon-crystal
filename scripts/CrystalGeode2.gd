@@ -87,8 +87,10 @@ func stopAnimation():
     # level.gameCamera.am_i_zooming = false
 
 func getSmacked(_broom_origin):
-    # passiveActivate(0, true)
-    if not notGetHitSound.is_playing(): notGetHitSound.play()
+    if not global.memory["broom"]:
+        if not notGetHitSound.is_playing(): notGetHitSound.play()
+        return
+    confirmNPC.activate(true)
 
 func isActive(_debug=false):
     return visible and not is_purified
@@ -104,14 +106,6 @@ func speakToMe():
     #     level.player.sayThis("you purified a crystal.\npleasant, somehow.")
     # else:
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
-
-# func activate(_is_player):
-func passiveActivate(_delta, _is_player):
-    # if not global.memory["broom"]:
-    #     if not notGetHitSound.is_playing(): notGetHitSound.play()
-    #     return
-    # confirmNPC.activate(is_player)
-    pass
 
 func getPurified():
     var children = self.get_children()

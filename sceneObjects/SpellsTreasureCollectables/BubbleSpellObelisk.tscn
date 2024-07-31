@@ -156,7 +156,7 @@ script = ExtResource( 3 )
 should_randomize_frame_delay = true
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42038, -0.369303 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458111, -0.369303 )
 material_override = SubResource( 8 )
 pixel_size = 0.15
 texture = ExtResource( 11 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -80,9 +80,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=27]
+[sub_resource type="BoxShape" id=78]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=79]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=28]
 resource_local_to_scene = true
@@ -139,9 +143,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=55]
+[sub_resource type="BoxShape" id=80]
 resource_local_to_scene = true
-extents = Vector3( 1, 4, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=81]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=35]
 resource_local_to_scene = true
@@ -348,9 +356,13 @@ length = 0.1
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=69]
+[sub_resource type="BoxShape" id=82]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=83]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=70]
 resource_local_to_scene = true
@@ -515,6 +527,14 @@ tracks/1/keys = {
 "values": [ ExtResource( 31 ) ]
 }
 
+[sub_resource type="BoxShape" id=84]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=85]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -638,8 +658,11 @@ anims/doorClose = SubResource( 30 )
 anims/doorOpen = SubResource( 31 )
 anims/locked = SubResource( 32 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 27 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 78 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 79 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
@@ -660,9 +683,11 @@ anims/doorClose = SubResource( 37 )
 anims/doorOpen = SubResource( 38 )
 anims/locked = SubResource( 39 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00228, 0, 0 )
-shape = SubResource( 55 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+shape = SubResource( 80 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
+shape = SubResource( 81 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 35 )
@@ -768,62 +793,6 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 61 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 27.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -875,8 +844,11 @@ visible = false
 [node name="landing" parent="Viewport/level/Door" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 69 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 82 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 83 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 70 )
@@ -899,8 +871,11 @@ anims/doorOpen = SubResource( 75 )
 anims/doorUnbarred = SubResource( 76 )
 anims/locked = SubResource( 77 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 69 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 84 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 85 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 70 )

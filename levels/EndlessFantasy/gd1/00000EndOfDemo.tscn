@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -566,8 +566,13 @@ shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 10 )
 shader_param/target_palette = ExtResource( 13 )
 
-[sub_resource type="BoxShape" id=44]
+[sub_resource type="BoxShape" id=66]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=67]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=45]
 resource_local_to_scene = true
@@ -698,24 +703,10 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 22 )
 
-[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="16"]
 stream = ExtResource( 29 )
 pitch_scale = 1.0
 
@@ -751,24 +742,10 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC6/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 22 )
 
-[node name="AbortSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC6/NPC TextBox/TextBox" index="16"]
 stream = ExtResource( 29 )
 pitch_scale = 1.0
 
@@ -804,24 +781,10 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC7/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="6"]
+[node name="DialogStartSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 22 )
 
-[node name="AbortSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="9"]
+[node name="AbortSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="16"]
 stream = ExtResource( 29 )
 pitch_scale = 1.0
 
@@ -855,20 +818,6 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC2/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 29 )
 frame = 22
@@ -896,20 +845,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 material_override = SubResource( 29 )
@@ -939,20 +874,6 @@ tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 material_override = SubResource( 29 )
@@ -1007,8 +928,11 @@ num_keys_unlock = 1
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 visible = false
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 44 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 66 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 67 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 45 )
