@@ -2431,7 +2431,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, -2.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 13.1, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 
@@ -2724,6 +2724,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 10.2748, 0 )
 
 [node name="BubbleSpellObelisk" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 14.4274, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 25, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 12 )]
 

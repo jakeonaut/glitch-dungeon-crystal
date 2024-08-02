@@ -151,7 +151,10 @@ func conductFromScenePath(path):
         changeSongPitch(1.0)
         default_song_pitch = 1.0
     elif path.find("Haven2") > 0:
-        tryToPlay(townThemePlayer)
+        tryToPlay(dungeonThemePlayer)
+        changeSongPitch(0.5)
+        default_song_pitch = 0.5
+        return
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("000IntroCutscene") > 0:

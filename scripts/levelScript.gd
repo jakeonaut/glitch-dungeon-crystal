@@ -11,7 +11,7 @@ onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/D
 onready var colorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
 onready var basicCrtEffectRect = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
-onready var viewport2 = get_node("../../Viewport2")
+onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 
@@ -60,7 +60,7 @@ func _ready_impl():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
 
-  viewportTexture.texture = viewport2.get_texture()
+  viewportTexture.texture = viewport2or3.get_texture()
   
   levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)

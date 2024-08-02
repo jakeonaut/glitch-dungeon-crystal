@@ -540,8 +540,11 @@ func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
   if unrandomizeTile(cell_index):
     randomizeTile(cell_index, glitch_type)  
   
+export var can_change_color = true
 func changeColorPalette(palette, _palette_alt = null):
-  if override_palette == null or palette != grey_palette:
+  if not can_change_color:
+    curr_palette = override_palette if override_palette != null else grey_palette
+  elif override_palette == null or palette != grey_palette:
     curr_palette = palette
   else:
     curr_palette = override_palette

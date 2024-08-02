@@ -612,6 +612,11 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       global.pauseMoveInput = false
+      self.feather_jump_timer = remembered_feather_jump_timer
+      self.lv.y = remembered_y_vel
+      self.linear_velocity.y = remembered_y_vel
+      self.vv = remembered_y_vel
+      self.on_ground = remembered_on_ground
       self.physics_state = PhysicsState.GLITCH_RECOVERY
       has_sweeped_glitch = false
 
@@ -1203,14 +1208,19 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
-  if transformation == TransformationState.BUBBLE:
-    getBubbleCured()
-    physics_state = PhysicsState.GLITCH_HURT
-    glitchTickle(true)
-    getSmacked()
-    glitch_death_timer = 0
-    global.pauseMoveInput = false 
-  elif nesting_doll_state == global.NestingDoll.MATRIARCH:
+  # if transformation == TransformationState.BUBBLE:
+  #   getBubbleCured()
+  #   physics_state = PhysicsState.GLITCH_HURT
+  #   global.pauseGame = false
+  #   global.pauseMoveInput = false
+  #   glitchTickle(true)
+  #   getSmacked()
+  #   on_ground = false
+  #   global.memory["on_ground"] = false
+  #   lv.y = 0
+  #   global.pauseMoveInput = false 
+  #   glitch_death_timer = 10
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
     global.memory["hp"] += 1
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
