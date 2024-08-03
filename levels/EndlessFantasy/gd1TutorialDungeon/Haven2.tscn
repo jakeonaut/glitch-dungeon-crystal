@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/nintendo-entertainment-system-1x.png" type="Texture" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/sounds/croak.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/sounds/eba_speech_info.wav" type="AudioStream" id=32]
 [ext_resource path="res://levels/EndlessFantasy/gd1/Haven2CroneAbortSound.gd" type="Script" id=33]
+[ext_resource path="res://assets/sprites/big_critters.png" type="Texture" id=34]
 [ext_resource path="res://assets/sprites/angel_statue.png" type="Texture" id=51]
 [ext_resource path="res://assets/palettes/dark_grey_palette2.png" type="Texture" id=52]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=53]
@@ -1153,6 +1154,14 @@ shape = SubResource( 44 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/FallthroughSolid" index="0"]
 shape = SubResource( 45 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/Door5" groups=["sprite", "walltorch"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.166665, 3.38651, -0.5 )
+opacity = 0.5
+pixel_size = 0.12
+texture = ExtResource( 34 )
+hframes = 2
+vframes = 2
 
 [node name="CRYSTAL_Door" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6.2, -2.0167, 0 )

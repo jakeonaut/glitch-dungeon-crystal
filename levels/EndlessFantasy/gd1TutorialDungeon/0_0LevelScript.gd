@@ -45,6 +45,7 @@ func _process(_delta):
       global.shouldRenderAsCinematic = false
       player.textBox.interact()
       global.activeInteractor = player.textBox
+      showInstructions = false
   
   if showInstructions:
-    uiLayer.get_node("PressC").visible = global.activeInteractor == null
+    uiLayer.get_node("PressC").visible = global.activeInteractor == null and player.physics_state != player.PhysicsState.WAKING_UP

@@ -27,10 +27,11 @@ onready var chicken15 = get_node("NPC15")
 onready var croneNPC = get_node("CroneNPC")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
+onready var glitchEnemy6 = get_node("GlitchEnemy6")
 func startGame():
   logoSprite.visible = false
-  show_dither_effect = false
-  show_crt_effect = true
+#   show_dither_effect = false
+#   show_crt_effect = true
   has_started_game = true
   mainMenuUi.visible = false
   global.shouldRenderAsCinematic = true
@@ -44,7 +45,8 @@ func startGame():
   gameCamera.zoomed_size = 25
   # gameCamera.can_i_move = false
 
-  yield(get_tree().create_timer(1.5 ), "timeout")
+  yield(get_tree().create_timer(1.5), "timeout")
+  gameCamera.can_i_move = false
   player.override_press_move_right = true
   yield(get_tree().create_timer(0.2), "timeout")
   player.override_press_move_right = false
@@ -68,6 +70,7 @@ func startGame():
   eventSound1.play()
   yield(get_tree().create_timer(1.0), "timeout")
   babushkaCat.mySprite.updateBaseFrame(2, 2)
+  gameCamera.can_i_move = true
   eventSound1.play()
   chicken10.glitchOut()
   yield(get_tree().create_timer(1.0), "timeout")
@@ -106,6 +109,8 @@ func startGame():
   summonSmokeClouds(croneNPC.global_transform.origin, 3, true, true)
   yield(get_tree().create_timer(1.0), "timeout")
   eventSound3.play()
+#   global.memory["savePoint"] = "SavePoint"
+#   global.memory["savedRoomPath"] = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
   player.aniPlayer.queue("teleport")
@@ -116,6 +121,10 @@ func startGame():
   global.isEnteringRoom = true
   global.memory["roomPath"] = self.getLevelName()
   transition.really_really_long_fade_to(door2.path)
+  eventSound1.play()
+  glitchEnemy6.global_transform.origin = player.global_transform.origin
+  glitchEnemy6.global_transform.origin.y += 1
+  glitchEnemy6.global_transform.origin.z += 2
 
   # var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
   # pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"

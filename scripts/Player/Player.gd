@@ -294,7 +294,9 @@ func _process(delta):
     getItemFailsafe()
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
-    OS.window_fullscreen = !OS.window_fullscreen
+    pass
+    # OS.window_fullscreen = !OS.window_fullscreen # no no no... this leads to crashes sucking!!!
+    OS.set_window_always_on_top(!OS.window_fullscreen)
   
   delta = delta * global.time_dilation_multiplier
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=231 format=2]
+[gd_scene load_steps=227 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -20,7 +20,6 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=19]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=20]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=24]
@@ -953,87 +952,6 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 30 )
 shader_param/base_palette = ExtResource( 18 )
 shader_param/target_palette = ExtResource( 26 )
-
-[sub_resource type="Animation" id=60]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("SaveSpores:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SaveSpores:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=61]
-resource_name = "default"
-tracks/0/type = "value"
-tracks/0/path = NodePath("SaveSpores:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SaveSpores:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=62]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SaveSpores:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SaveSpores:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6 ]
-}
 
 [sub_resource type="BoxShape" id=94]
 resource_local_to_scene = true
@@ -4212,37 +4130,6 @@ is_static_in_level = false
 [node name="Sprite3D" parent="Viewport/level/Dragonfly3" index="0"]
 automatically_change_color = false
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, 0, 0 )
-
-[node name="TriangleContainer" parent="Viewport/level/SavePoint" index="0"]
-visible = false
-
-[node name="Sprite3D2" parent="Viewport/level/SavePoint" index="1"]
-visible = false
-
-[node name="SaveSpores" parent="Viewport/level/SavePoint" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.33447 )
-pixel_size = 0.0001
-
-[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 7.3, 0 )
-
-[node name="TriangleContainer" parent="Viewport/level/SavePoint2" index="0"]
-visible = false
-
-[node name="Sprite3D2" parent="Viewport/level/SavePoint2" index="1"]
-visible = false
-
-[node name="SaveSpores" parent="Viewport/level/SavePoint2" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.33447 )
-pixel_size = 0.0001
-
-[node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
-anims/RESET = SubResource( 60 )
-anims/default = SubResource( 61 )
-anims/sporeGrow = SubResource( 62 )
-
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.8, 0.0347238, 0 )
 grav = 0
@@ -4527,6 +4414,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.8, 3.6, 0 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2, 0.7, 0 )
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 53.2, -17.3, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1, -14.9, 0 )
@@ -5006,8 +4896,6 @@ scroll_active = false
 [editable path="Viewport/level/Dragonfly"]
 [editable path="Viewport/level/Dragonfly2"]
 [editable path="Viewport/level/Dragonfly3"]
-[editable path="Viewport/level/SavePoint"]
-[editable path="Viewport/level/SavePoint2"]
 [editable path="Viewport/level/NPC9"]
 [editable path="Viewport/level/NPC9/NPC TextBox"]
 [editable path="Viewport/level/NPC10"]

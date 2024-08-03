@@ -222,7 +222,7 @@ shape = SubResource( 28 )
 shape = SubResource( 29 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 3 )]
 
