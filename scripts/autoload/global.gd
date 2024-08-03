@@ -202,6 +202,7 @@ func _ready():
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
+    memory["crone"] = 0
     memory["clean_crystals"] = 0
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false

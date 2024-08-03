@@ -67,7 +67,9 @@ func _ready():
   remembered_walk_speed = walk_speed
   remembered_feather_glitch_walk_speed = feather_glitch_walk_speed
   remembered_invisible_glitch_walk_speed = invisible_glitch_walk_speed
+  broomSpriteVisible.get_material_override().set_shader_param("opacity", 1.0)
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
+  mySprite.get_material_override().set_shader_param("opacity", 1.0)
 
 # @override
 func alignMySprite():

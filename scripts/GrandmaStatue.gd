@@ -54,19 +54,21 @@ func _process(delta):
 
     if level.player.glitch_form == glitch_form:
       if not has_swapped:
-        has_swapped = true
+        var last_on_ground = level.player.was_on_ground
+        has_swapped = true 
         if glitch_form != global.GlitchForm.NORMAL:
           var my_old_origin = self.global_transform.origin
           self.global_transform.origin = level.player.global_transform.origin
           level.player.global_transform.origin = my_old_origin
-          level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR
+          level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground
           glitch_form = players_last_glitch_form
           if glitch_form == global.GlitchForm.NORMAL:
             glitch_form_before_nullification = level.player.glitch_form
         elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
           glitch_form = glitch_form_before_nullification
         updateColor()
-        on_ground = glitch_form == global.GlitchForm.FLOOR
+        print(last_on_ground)
+        on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
     else:
       has_swapped = false
       players_last_glitch_form = level.player.glitch_form

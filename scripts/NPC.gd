@@ -51,6 +51,7 @@ func _ready():
 
   mySprite.material_override = mySprite.material_override.duplicate()
   mySprite.should_randomize_frame_delay = false
+  should_collide_ceil = false
   if is_wiggling_fast:
     mySprite.frame_delay = 0.2
 
