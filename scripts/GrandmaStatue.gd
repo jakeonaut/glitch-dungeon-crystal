@@ -10,6 +10,7 @@ onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("Fallthr
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
 onready var streetlightGlitchAura  = get_node("StreetlightGlitchAura")
+export var is_extra_life = false
 
 func _ready():
   set_process(true)
@@ -35,7 +36,8 @@ func _process(delta):
     streetlightGlitchAura.mainTextureRect.visible = false
   else:
     if glitch_form == global.GlitchForm.NORMAL:
-      spellbookGlitchSprite.visible = false
+      spellbookGlitchSprite.visible = is_extra_life
+      spellbookGlitchSprite.frame = 15
       streetlightGlitchAura.mainTextureRect.visible = false
     else:
       spellbookGlitchSprite.visible = true
@@ -79,6 +81,9 @@ func _process(delta):
     #   elif level.player.glitch_form != glitch_form:
     #       mySprite.material_override.set_shader_param("opacity", 0.05)
     #       mySprite.global_transform.origin.z = 0
+  if is_extra_life:
+    on_ground = true
+    grav = 0
 
   if is_smacked:
     smack_timer += (delta * 22)
@@ -89,7 +94,10 @@ func _process(delta):
 func updateColor():
   var target_palette = level.levelTiles.grey_palette
   var sprite_palette = global.grey_player_palette
-  if glitch_form == global.GlitchForm.FLOOR:
+  if is_extra_life:
+    sprite_palette = global.all_palette
+    target_palette = global.all_palette
+  elif glitch_form == global.GlitchForm.FLOOR:
     sprite_palette = global.player_red_palette
     target_palette = level.levelTiles.red_palette
   elif glitch_form == global.GlitchForm.LADDER:

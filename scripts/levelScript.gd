@@ -226,6 +226,12 @@ func tryToRespawn():
     global.pauseGame = false
 
   var found_door = null
+  var extra_lives = []
+  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  for i in range(len(grandmaStatues)):
+    if grandmaStatues[i].is_extra_life:
+      extra_lives.push_back(grandmaStatues[i])
+
   if global.isEnteringRoom and not global.isRespawning:
     if global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
@@ -235,7 +241,23 @@ func tryToRespawn():
           found_door = door
           break
   elif global.isRespawning:
-    if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+    if len(extra_lives) > 0:
+      var closest_extra_life = extra_lives[0]
+      var closest_extra_life_dist = 999
+      for i in range(1, len(extra_lives)):
+        var extra_life = extra_lives[i]
+        var distance = player.global_transform.origin.distance_to(extra_life.global_transform.origin)
+        if distance < closest_extra_life_dist:
+          closest_extra_life_dist = distance
+          closest_extra_life = extra_life
+      player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
+      gameCamera.rotation_degrees.y = global.cameraRotation
+      player.last_grounded_pos = Vector3(player.global_transform.origin)
+      yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
+      player.global_transform.origin = closest_extra_life.global_transform.origin
+      closest_extra_life.queue_free()
+      summonSmokeClouds(player.global_transform.origin, 3, true, true)
+    elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
       player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
       gameCamera.rotation_degrees.y = global.cameraRotation

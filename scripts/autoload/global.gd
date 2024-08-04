@@ -2,6 +2,7 @@ extends Node
 
 var kirokaze_palette = preload("res://assets/palettes/kirokaze-gameboy-1x.png")
 
+var all_palette = preload("res://assets/palettes/all_palette.png")
 var player_base_palette = preload("res://assets/palettes/player_base_palette.png")
 var player_red_palette = preload("res://assets/palettes/player_red_palette.png")
 var grey_player_palette = preload("res://assets/palettes/grey_player_palette.png")
