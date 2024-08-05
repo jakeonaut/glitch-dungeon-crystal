@@ -142,6 +142,7 @@ func _process(delta):
     return
 
   processPauseMenu()
+  processGrandmaStatueSavePoints()
 
 func processPauseMenu():
   if not global.pauseGame and not global.pauseMoveInput:
@@ -160,6 +161,31 @@ func processPauseMenu():
       global.pauseGame = false
       player.unpauseSound.play()
       restartMusic()
+
+var closest_extra_life = null
+func processGrandmaStatueSavePoints():
+  var last_closest_extra_life = closest_extra_life
+  closest_extra_life = null
+
+  var extra_lives = []
+  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  for i in range(len(grandmaStatues)):
+    if grandmaStatues[i].is_extra_life:
+      grandmaStatues[i].is_extra_life_active = false
+      extra_lives.push_back(grandmaStatues[i])
+
+  if len(extra_lives) > 0:
+    closest_extra_life = extra_lives[0]
+    var closest_extra_life_dist = player.global_transform.origin.distance_to(extra_lives[0].global_transform.origin)
+    for i in range(1, len(extra_lives)):
+      var extra_life = extra_lives[i]
+      var distance = player.global_transform.origin.distance_to(extra_life.global_transform.origin)
+      if distance < closest_extra_life_dist:
+        closest_extra_life_dist = distance
+        closest_extra_life = extra_life
+    if closest_extra_life != last_closest_extra_life:
+      closest_extra_life.saveSound.play()
+    closest_extra_life.is_extra_life_active = true
 
 func displayMessageText(message):
   uiLayer.displayMessageText(message)
@@ -226,11 +252,6 @@ func tryToRespawn():
     global.pauseGame = false
 
   var found_door = null
-  var extra_lives = []
-  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
-  for i in range(len(grandmaStatues)):
-    if grandmaStatues[i].is_extra_life:
-      extra_lives.push_back(grandmaStatues[i])
 
   if global.isEnteringRoom and not global.isRespawning:
     if global.memory.has("roomPath"):
@@ -241,21 +262,14 @@ func tryToRespawn():
           found_door = door
           break
   elif global.isRespawning:
-    if len(extra_lives) > 0:
-      var closest_extra_life = extra_lives[0]
-      var closest_extra_life_dist = 999
-      for i in range(1, len(extra_lives)):
-        var extra_life = extra_lives[i]
-        var distance = player.global_transform.origin.distance_to(extra_life.global_transform.origin)
-        if distance < closest_extra_life_dist:
-          closest_extra_life_dist = distance
-          closest_extra_life = extra_life
+    if closest_extra_life != null and closest_extra_life.isActive():
       player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
       gameCamera.rotation_degrees.y = global.cameraRotation
       player.last_grounded_pos = Vector3(player.global_transform.origin)
       yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
       player.global_transform.origin = closest_extra_life.global_transform.origin
       closest_extra_life.queue_free()
+      player.saveSound.play()
       summonSmokeClouds(player.global_transform.origin, 3, true, true)
     elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])

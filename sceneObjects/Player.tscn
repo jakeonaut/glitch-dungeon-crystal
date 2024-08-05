@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=2]
+[gd_scene load_steps=167 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -75,6 +75,7 @@
 [ext_resource path="res://assets/sounds/error.wav" type="AudioStream" id=73]
 [ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=74]
 [ext_resource path="res://assets/sprites/big_bubble.png" type="Texture" id=75]
+[ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=76]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -6358,6 +6359,11 @@ pitch_scale = 0.6
 stream = ExtResource( 64 )
 volume_db = 2.0
 pitch_scale = 1.2
+
+[node name="SaveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 76 )
+volume_db = -32.0
+pitch_scale = 0.9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "stand"

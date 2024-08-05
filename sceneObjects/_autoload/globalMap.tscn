@@ -583,39 +583,24 @@ path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 [node name="CrystalTower" type="Spatial" parent="."]
 
 [node name="DefaultLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
-
-[node name="Level2" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/001_CrystalPuzzle.tscn"
 
 [node name="Level7" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
 
+[node name="Level8" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
+
 [node name="Level6" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
-
-[node name="Level3" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/002_CrystalPuzzle.tscn"
-
-[node name="Level4" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/003_CrystalPuzzleLeftSide.tscn"
-
-[node name="Level5" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 4, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/005_CrystalPuzzle_GlitchSave.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1 )

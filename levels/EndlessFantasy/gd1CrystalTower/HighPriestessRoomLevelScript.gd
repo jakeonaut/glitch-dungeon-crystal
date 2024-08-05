@@ -64,11 +64,11 @@ func _process(delta):
       global.shouldRenderAsCinematic = true
       musicPlayer.stopAll()
 
-  if highPriestessBoss.visible:
-    random_tiles_timer += (delta*11)
-    if random_tiles_timer >= random_tiles_time_limit:
-      random_tiles_timer = 0
-      generateRandomTiles()
+  # if highPriestessBoss.visible:
+  #   random_tiles_timer += (delta*11)
+  #   if random_tiles_timer >= random_tiles_time_limit:
+  #     random_tiles_timer = 0
+  #     generateRandomTiles()
 
 func triggerCroneDialog():
   croneNPC.activate(true)

@@ -37,6 +37,10 @@ func _ready():
         should_collide_ceil = false
         should_collide_floor = false
         should_collide_horizontally = false
+    else:
+        should_collide_ceil = true
+        should_collide_floor = true
+        should_collide_horizontally = true
 
 var doing_a_final_hit = false
 func _process(delta):

@@ -100,7 +100,7 @@ func _process(delta):
 
     if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
         moveAbout(delta)
-    processSavePointSpawns(delta)
+    # processSavePointSpawns(delta)
 
     if boss_phase == BossPhase.FROG_PLAGUE_READY:
         if not secretAniPlayer.is_playing():

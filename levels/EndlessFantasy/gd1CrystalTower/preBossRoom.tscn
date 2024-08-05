@@ -965,7 +965,7 @@ show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 6
 has_spellbook_page = true
-spellbook_spells = [ 1, 2 ]
+spellbook_spells = [ 4, 2 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
 
