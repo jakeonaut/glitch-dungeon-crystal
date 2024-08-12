@@ -27,6 +27,7 @@
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
+stopAllMusic = true
 
 [node name="WindPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )

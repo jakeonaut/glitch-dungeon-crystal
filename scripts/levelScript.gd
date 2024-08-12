@@ -71,6 +71,9 @@ func _ready_impl():
       player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
+  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  for i in range(len(grandmaStatues)):
+    grandmaStatues[i].preprocessGlitchFormTeleportation()
   
   global.memory["tutorial_spellbookPage"] = false
   if global.memory["has_game_started"]:

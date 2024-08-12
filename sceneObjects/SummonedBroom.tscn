@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=8]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=10]
 
 [sub_resource type="ShaderMaterial" id=41]
 shader = ExtResource( 1 )
@@ -256,6 +257,18 @@ tracks/14/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("GlitchSound:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=45]
@@ -893,6 +906,11 @@ max_frames = 4
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -7.0
+
+[node name="GlitchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -7.0
+pitch_scale = 0.9
 
 [node name="Area" type="Area" parent="."]
 

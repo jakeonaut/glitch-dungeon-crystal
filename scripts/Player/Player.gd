@@ -927,27 +927,30 @@ func stopTransformationAni():
 
 func checkSolidTilesBeneathMe():
   var solid_tiles = getTilesBelow(getLevelTiles())
-  var has_solid_beneath = false
   for i in range(len(solid_tiles)):
       if solid_tiles[i] != null:
-        has_solid_beneath = true
-  return has_solid_beneath
+        return true
+  return false
 
-func checkSolidTilesOnMyRight():
+func checkSolidTilesOnMyRight(nearby = false):
+  if nearby: global_transform.origin.x += 1
   var solid_tiles = getTilesRightOf(getLevelTiles())
-  var has_solid_beneath = false
   for i in range(len(solid_tiles)):
       if solid_tiles[i] != null:
-        has_solid_beneath = true
-  return has_solid_beneath
+        if nearby: global_transform.origin.x -= 1
+        return true
+  if nearby: global_transform.origin.x -= 1
+  return false
 
-func checkSolidTilesOnMyLeft():
+func checkSolidTilesOnMyLeft(nearby = false):
+  if nearby: global_transform.origin.x -= 1
   var solid_tiles = getTilesLeftOf(getLevelTiles())
-  var has_solid_beneath = false
   for i in range(len(solid_tiles)):
       if solid_tiles[i] != null:
-        has_solid_beneath = true
-  return has_solid_beneath
+        if nearby: global_transform.origin.x += 1
+        return true
+  if nearby: global_transform.origin.x += 1
+  return false
 
 func checkSolidTilesOnMe():
   var is_true = false
@@ -1418,6 +1421,7 @@ func processBroomLogic(delta):
       summonFallenBroom(true)
   force_a_sweep = false
 
+var SOFT_SAND_TOP_TILE = 275
 func doBroomAttack(which_broom_attack):
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1427,8 +1431,12 @@ func doBroomAttack(which_broom_attack):
   #   which_broom_attack = 0
   #   summonSporeShroom()
   var is_turn_around_attack = (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
+  # var is_facing_wall = (checkSolidTilesOnMyLeft(true) and mySprite.flip_h) or (checkSolidTilesOnMyRight(true) and not mySprite.flip_h)
   if force_a_sweep:
     aniPlayer.play("broomSmack")
+  # elif global.memory["debug_broom"] > 0 and is_facing_wall:
+  #   aniPlayer.play("broomSmack")
+  #   which_broom_attack = 3
   elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
     mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
     aniPlayer.play("broomSmack2")
@@ -1464,6 +1472,33 @@ func doBroomAttack(which_broom_attack):
       summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
+  
+  if global.memory["debug_broom"]:
+    var x = global_transform.origin.x
+    var y = global_transform.origin.y
+    var z = global_transform.origin.z
+    if mySprite.flip_h:
+      if checkSolidTilesOnMyLeft(true):
+        levelTiles.removeTile(Vector3(x - 3, y + 0, z), false)
+        levelTiles.removeTile(Vector3(x - 4, y + 0, z), false)
+        levelTiles.removeTile(Vector3(x - 3, y - 1, z), false)
+        levelTiles.removeTile(Vector3(x - 4, y - 1, z), false)
+      else:
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y + 0, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y + 0, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y - 1, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y - 1, z), false)
+    else:
+      if checkSolidTilesOnMyRight(true):
+        levelTiles.removeTile(Vector3(x + 1, y + 0, z), false)
+        levelTiles.removeTile(Vector3(x + 2, y + 0, z), false)
+        levelTiles.removeTile(Vector3(x + 1, y - 1, z), false)
+        levelTiles.removeTile(Vector3(x + 2, y - 1, z), false)
+      else:
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y + 0, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false)
+        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
@@ -1518,7 +1553,7 @@ func processHorizontalInputs(delta):
 func adjustSummonedBroomSpritePosition():
   var xAddition = 0
   var yAddition = 0
-  if summonedBroom.aniPlayer.assigned_animation == "broomSmack":
+  if summonedBroom.aniPlayer.assigned_animation == "broomSmack" or summonedBroom.aniPlayer.assigned_animation == "sweepWall":
     xAddition = .875
     yAddition = .625
   elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":

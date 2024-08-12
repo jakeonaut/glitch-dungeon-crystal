@@ -225,10 +225,10 @@ can_activate = false
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 flip_h = true
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="4"]
 anims/default = SubResource( 17 )
 anims/flickerOn = SubResource( 18 )
 
@@ -244,7 +244,7 @@ are casting their glitchy spell"
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC5" index="4"]
 anims/default = SubResource( 19 )
 anims/flickerOn = SubResource( 20 )
 
@@ -263,127 +263,96 @@ path = "res://levels/SpriteTown.tscn"
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 16, 0 )
-grav = 0
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 22, 0 )
-grav = 0
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 19, 0 )
-grav = 0
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 2, 0 )
-grav = 0
 
 [node name="GlitchEnemy10" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 4, 0 )
-grav = 0
 
 [node name="GlitchEnemy11" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, 0 )
-grav = 0
 
 [node name="GlitchEnemy12" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0 )
-grav = 0
 
 [node name="GlitchEnemy13" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
-grav = 0
 
 [node name="GlitchEnemy14" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0 )
-grav = 0
 
 [node name="GlitchEnemy15" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -2, 0 )
-grav = 0
 
 [node name="GlitchEnemy16" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 15, 0 )
-grav = 0
 
 [node name="GlitchEnemy17" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 12, 0 )
-grav = 0
 
 [node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 8, 0 )
-grav = 0
 
 [node name="GlitchEnemy9" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, 0 )
-grav = 0
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, 0 )
-grav = 0
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 21, 0 )
-grav = 0
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 22, 0 )
-grav = 0
 
 [node name="GlitchEnemy18" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 19, 0 )
-grav = 0
 
 [node name="GlitchEnemy19" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 2, 0 )
-grav = 0
 
 [node name="GlitchEnemy20" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4, 0 )
-grav = 0
 
 [node name="GlitchEnemy21" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 7, 0 )
-grav = 0
 
 [node name="GlitchEnemy22" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 0 )
-grav = 0
 
 [node name="GlitchEnemy23" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-grav = 0
 
 [node name="GlitchEnemy24" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
-grav = 0
 
 [node name="GlitchEnemy25" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -2, 0 )
-grav = 0
 
 [node name="GlitchEnemy26" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 15, 0 )
-grav = 0
 
 [node name="GlitchEnemy27" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 12, 0 )
-grav = 0
 
 [node name="GlitchEnemy28" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 8, 0 )
-grav = 0
 
 [node name="GlitchEnemy29" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, 0 )
-grav = 0
 
 [node name="GlitchEnemy30" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1, 0 )
-grav = 0
 
 [node name="GlitchEnemy31" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 21, 0 )
-grav = 0
 
 [node name="HeartContainer" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 26, 0 )

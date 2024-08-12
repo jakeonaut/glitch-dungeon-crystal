@@ -12,6 +12,7 @@ onready var aniPlayer = get_node("AnimationPlayer")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
+export var camera_size = 30
 # @override
 func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
@@ -20,8 +21,8 @@ func setUpRoomInitializationOverride():
     debug_start_boss_immediately = true
 
   if debug_start_boss_immediately:
-    gameCamera.initial_size = 35
-    gameCamera.zoomed_size = 35
+    gameCamera.initial_size = camera_size
+    gameCamera.zoomed_size = camera_size
     unhideHighPriestess()
     has_boss_started = true
   else:
@@ -57,8 +58,8 @@ func _process(delta):
       has_boss_started = true
       levelTiles.randomize_num = 999
       aniPlayer.play("appear")
-      gameCamera.initial_size = 35
-      gameCamera.zoomed_size = 35
+      gameCamera.initial_size = camera_size
+      gameCamera.zoomed_size = camera_size
       global.pauseMoveInput = true
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
@@ -91,7 +92,7 @@ func unhideHighPriestess():
   global.memory["has_seen_highpriestess"] = true
   # global.memory.erase("spellbookPage")
   # player.nullify()
-  global.memory["broom"] = false
+  # global.memory["broom"] = false
   # generateEyeTiles()
 
 var climbToEyeLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_001climbToEye.tscn")

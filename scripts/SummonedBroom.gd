@@ -11,6 +11,7 @@ onready var collisionShape1 = get_node("Area/CollisionShape")
 onready var collisionShape2 = get_node("Area/CollisionShape2")
 onready var collisionShape3 = get_node("Area/CollisionShape3")
 onready var aniPlayer = get_node("AnimationPlayer")
+onready var mySprite = get_node("Sprite3D")
 var smacked_npc = null
 var have_i_smacked_an_npc = false
 var is_active = true
@@ -34,6 +35,8 @@ func _process(delta):
   # if global.pauseGame: return
   hitStuff(delta)
     
+  if global.memory["debug_broom"] > 0:
+    mySprite.material_override.set_shader_param("enable_glitch", true)
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0

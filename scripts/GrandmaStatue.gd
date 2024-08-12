@@ -40,6 +40,19 @@ func _process(delta):
 
   which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   dist_to_player = level.player.global_transform.origin.distance_to(self.global_transform.origin)
+  processRendering(delta)
+  if is_extra_life:
+    on_ground = true
+    grav = 0
+  processGlitchFormTeleportation()
+
+  if is_smacked:
+    smack_timer += (delta * 22)
+    if smack_timer >= smack_time_limit:
+      is_smacked = false
+      unsmack()
+
+func processRendering(delta):
   triangleContainer.visible = is_extra_life
 
   if not isActive():
@@ -80,26 +93,6 @@ func _process(delta):
       elif glitch_form == global.GlitchForm.INVISIBLE:
         spellbookGlitchSprite.frame = 3
 
-    if level.player.glitch_form == glitch_form:
-      if not has_swapped:
-        var last_on_ground = level.player.was_on_ground
-        has_swapped = true 
-        if glitch_form != global.GlitchForm.NORMAL:
-          var my_old_origin = self.global_transform.origin
-          self.global_transform.origin = level.player.global_transform.origin
-          level.player.global_transform.origin = my_old_origin
-          level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground
-          glitch_form = players_last_glitch_form
-          if glitch_form == global.GlitchForm.NORMAL:
-            glitch_form_before_nullification = level.player.glitch_form
-        elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
-          glitch_form = glitch_form_before_nullification
-        updateColor()
-        print(last_on_ground)
-        on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
-    else:
-      has_swapped = false
-      players_last_glitch_form = level.player.glitch_form
     # if mySprite.material_override != null:
     #   if level.player.glitch_form == glitch_form:
     #       mySprite.material_override.set_shader_param("opacity", 1.0)
@@ -107,15 +100,6 @@ func _process(delta):
     #   elif level.player.glitch_form != glitch_form:
     #       mySprite.material_override.set_shader_param("opacity", 0.05)
     #       mySprite.global_transform.origin.z = 0
-  if is_extra_life:
-    on_ground = true
-    grav = 0
-
-  if is_smacked:
-    smack_timer += (delta * 22)
-    if smack_timer >= smack_time_limit:
-      is_smacked = false
-      unsmack()
 
 func enablePaletteCycle():
   saveDiskSprite.material_override.set_shader_param("enable_palette_cycle", true)
@@ -124,6 +108,41 @@ func enablePaletteCycle():
 func disablePaletteCycle():
   saveDiskSprite.material_override.set_shader_param("enable_palette_cycle", false)
   saveDiskSprite.material_override.set_shader_param("target_palette", global.grey_palette)
+
+# this happens at time of room initialization
+func preprocessGlitchFormTeleportation():
+  if level.player.glitch_form == global.GlitchForm.NORMAL:
+    return
+  if level.player.glitch_form == glitch_form:
+    # nullify me instead!
+    glitch_form = global.GlitchForm.NORMAL
+    updateColor()
+  
+
+func processGlitchFormTeleportation():
+  if not level.has_room_initialized:
+    return
+
+  if level.player.glitch_form == glitch_form:
+    if not has_swapped:
+      var last_on_ground = level.player.was_on_ground
+      has_swapped = true
+      if glitch_form != global.GlitchForm.NORMAL:
+        var my_old_origin = self.global_transform.origin
+        self.global_transform.origin = level.player.global_transform.origin
+        level.player.global_transform.origin = my_old_origin
+        level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground
+        glitch_form = players_last_glitch_form
+        if glitch_form == global.GlitchForm.NORMAL:
+          glitch_form_before_nullification = level.player.glitch_form
+      elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
+        glitch_form = glitch_form_before_nullification
+      updateColor()
+      print("debug: " + str(last_on_ground))
+      on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
+  else:
+    has_swapped = false
+    players_last_glitch_form = level.player.glitch_form
 
 func updateColor():
   var target_palette = level.levelTiles.grey_palette
@@ -159,6 +178,9 @@ func unsmack():
     # material.set_shader_param("y_div", 2.3)
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
+
+func isFallthroughCollisionActive():
+  return level.player.glitch_form != self.glitch_form
 
 func fallthroughCollisionActivate(_friend):
   # don't allow text interaction

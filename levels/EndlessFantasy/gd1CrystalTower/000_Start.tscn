@@ -301,6 +301,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.412745, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50485, 2, 0 )
 grav = 0
+bbText = "part of the soul,
+exists in the stone"
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

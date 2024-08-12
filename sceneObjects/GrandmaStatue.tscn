@@ -333,7 +333,7 @@ volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39166, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.392, 0 )
 visible = false
 material_override = SubResource( 58 )
 pixel_size = 0.125
