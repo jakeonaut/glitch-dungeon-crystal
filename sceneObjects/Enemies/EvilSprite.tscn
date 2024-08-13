@@ -138,7 +138,7 @@ shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 5 )]
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
 volume_db = -23.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

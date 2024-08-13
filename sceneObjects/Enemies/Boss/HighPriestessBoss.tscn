@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=11]
+[ext_resource path="res://sceneObjects/HighpriestessCrystal.tscn" type="PackedScene" id=12]
+[ext_resource path="res://materials/PriestessCrystalGlitch.tres" type="Material" id=13]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
@@ -390,3 +392,32 @@ volume_db = -3.0
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.9
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )
+light_energy = 8.0
+light_indirect_energy = 0.0
+
+[node name="Crystals" type="Spatial" parent="."]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 1, 0, -2.13 )
+
+[node name="HighpriestessCrystal" parent="Crystals" instance=ExtResource( 12 )]
+transform = Transform( 0.979341, -0.0281433, -0.20025, 0, 0.990268, -0.139173, 0.202218, 0.136298, 0.96981, -3.71514, 7, -1.78821 )
+
+[node name="MeshInstance2" parent="Crystals/HighpriestessCrystal/CubeContainer" index="0"]
+transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
+material_override = ExtResource( 13 )
+
+[node name="HighpriestessCrystal2" parent="Crystals" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 4, 7, -1 )
+
+[node name="HighpriestessCrystal3" parent="Crystals" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 0, 7.911, -4 )
+
+[node name="HighpriestessCrystal4" parent="Crystals" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, -2, 5.967, 3.33 )
+
+[node name="HighpriestessCrystal5" parent="Crystals" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 2, 5.967, 3.33 )
+
+[editable path="Crystals/HighpriestessCrystal"]

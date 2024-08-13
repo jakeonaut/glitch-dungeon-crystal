@@ -5664,11 +5664,8 @@ shape = SubResource( 58 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -1.42658, 0 )
 high_priestess_crystal = true
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 143 )
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/ConfirmNPC/SmallInteractionArea" index="0"]
@@ -5681,11 +5678,8 @@ shape = SubResource( 76 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal2" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 144 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal2" index="12"]
@@ -5712,11 +5706,8 @@ shape = SubResource( 76 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal3" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 145 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal3" index="12"]
@@ -5743,11 +5734,8 @@ shape = SubResource( 76 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal4" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 146 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -5777,11 +5765,8 @@ shape = SubResource( 76 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal5" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 147 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal5" index="12"]
@@ -5871,6 +5856,7 @@ __meta__ = {
 material = SubResource( 44 )
 
 [editable path="Viewport/level/HighPriestessBoss"]
+[editable path="Viewport/level/HighPriestessBoss/Crystals/HighpriestessCrystal"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/CroneNPC"]

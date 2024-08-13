@@ -9,6 +9,13 @@ var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
+onready var crystalsContainer = get_node("Crystals")
+onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
+onready var crystal2 = get_node("Crystals/HighpriestessCrystal2")
+onready var crystal3 = get_node("Crystals/HighpriestessCrystal3")
+onready var crystal4 = get_node("Crystals/HighpriestessCrystal4")
+onready var crystal5 = get_node("Crystals/HighpriestessCrystal5")
+var crystalsArray = []
 
 var big_spawn_timer = 30
 var big_spawn_time_limit = 60
@@ -62,6 +69,7 @@ func _ready():
     for saveSpawnPoint in saveSpawnPoints:
         saveSpawnPoint.visible = false
         saveSpawnPointArray.push_back(saveSpawnPoint)
+    crystalsArray = [crystal3, crystal2, crystal5, crystal4, crystal1]
 
 var hp = 3
 func getHurt():
@@ -97,6 +105,8 @@ var save_point_spawn_time_limit = 20
 func _process(delta):
     if global.pauseGame or am_i_hidden:
         return
+
+    crystalsContainer.rotation_degrees.y -= delta*66
 
     if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
         moveAbout(delta)
@@ -214,6 +224,12 @@ func moveAbout(delta):
     if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
        stepify(target_pos.y, 0.1) == stepify(global_transform.origin.y, 0.1):
         randomizeTargetPos()
+
+    step = 2
+    var crystal_target_pos_x = 0
+    if mySprite.frame >= 2:
+        crystal_target_pos_x = 1
+    crystalsContainer.translation.x = crystalsContainer.translation.x + (crystal_target_pos_x - crystalsContainer.translation.x) * (delta*step)
 
 func randomizeTargetPos():
     target_pos = Vector3(

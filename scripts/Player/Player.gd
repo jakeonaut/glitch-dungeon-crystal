@@ -295,9 +295,7 @@ func _process(delta):
     getItemFailsafe()
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
-    pass
-    # OS.window_fullscreen = !OS.window_fullscreen # no no no... this leads to crashes sucking!!!
-    OS.set_window_always_on_top(!OS.window_fullscreen)
+    OS.window_fullscreen = !OS.window_fullscreen
   
   delta = delta * global.time_dilation_multiplier
 
@@ -324,7 +322,7 @@ func _process(delta):
   bubbleSprite.visible = transformation == TransformationState.BUBBLE
   if transformation == TransformationState.BUBBLE:
     spellbookGlitchSprite.visible = false
-    if horizontal_collision or on_ground:
+    if (horizontal_collision or on_ground) and physics_state != PhysicsState.GLITCH_DYING:
       getBubbleCured()
 
   if global.isPauseMenuOpen:
