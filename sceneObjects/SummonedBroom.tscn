@@ -905,7 +905,7 @@ max_frames = 4
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -7.0
+volume_db = -3.0
 
 [node name="GlitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

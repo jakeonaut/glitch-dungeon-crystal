@@ -297,7 +297,7 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 9 )
 grav = 30
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+[node name="SmallInteractionArea" type="Area" parent="."]
 script = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

@@ -1443,7 +1443,7 @@ func doBroomAttack(which_broom_attack):
     aniPlayer.play("broomSmack")
   pauseAnimation = true
 
-  is_in_broom_cooldown = true
+  is_in_broom_cooldown = false
   broom_cooldown_timer = 0
   # elif glitch_form == global.GlitchForm.FEATHER:
   #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5

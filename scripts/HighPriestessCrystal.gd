@@ -23,8 +23,14 @@ func _process(delta):
       meshInstance2.material_override.set_shader_param("corruption_seed", rand_range(0.1, 10.0))
       glitch_shader_timer = 0
 
-func applyGlitchMaterial():
+func applyGlitchMaterial(influence):
   if is_glitched:
     return
   is_glitched = true
-  meshInstance2.set_material_override(glitchedMaterial.duplicate())
+  var new_glitched_material = glitchedMaterial.duplicate()
+  new_glitched_material.set_shader_param("corruption_amount", 0.1 + influence*0.1)
+  new_glitched_material.set_shader_param("uv_scrolling_velocity", Vector2(influence*0.1, influence*0.1))
+  new_glitched_material.set_shader_param("normal_offset", influence*0.125 + 0.25)
+  new_glitched_material.set_shader_param("time_influence", influence + 2)
+  new_glitched_material.set_shader_param("y_div", influence * 0.5 + 3)
+  meshInstance2.set_material_override(new_glitched_material)

@@ -5,18 +5,26 @@
 
 [resource]
 shader = ExtResource( 2 )
-shader_param/modulate = Color( 1, 1, 1, 0.498039 )
-shader_param/uv_scrolling_velocity = Vector2( 0.1, 0.1 )
+shader_param/modulate = Color( 1, 1, 1, 1 )
+shader_param/uv_scrolling_velocity = Vector2( 0, 0 )
 shader_param/vertex_snapping_offset = 0.8
-shader_param/corruption_amount = 0.543
+shader_param/corruption_amount = 0.5
 shader_param/corruption_seed = 3.075
-shader_param/corrupt_red = false
+shader_param/corrupt_red = true
 shader_param/corrupt_green = true
-shader_param/corrupt_blue = false
+shader_param/corrupt_blue = true
 shader_param/checker = true
-shader_param/checker_size = Vector2( 16, 16 )
+shader_param/checker_size = Vector2( 8, 8 )
 shader_param/checker_offset = 2.0
 shader_param/normal_offset = 0.25
 shader_param/time_influence = 2.0
-shader_param/y_div = 2.9
+shader_param/y_div = 3.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/albedo = ExtResource( 1 )

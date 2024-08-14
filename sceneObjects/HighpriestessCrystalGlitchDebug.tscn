@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://materials/PriestessCrystalGlitch.tres" type="Material" id=2]
+[ext_resource path="res://scripts/HighPriestessCrystal.gd" type="Script" id=3]
+
+[node name="HighpriestessCrystal" type="Spatial" groups=["npc"]]
+transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )
+light_energy = 4.0
+light_indirect_energy = 0.0
+
+[node name="CubeContainer" type="Spatial" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 5.96044e-08, 0, -5.96044e-08, 2, 0, 0, 0 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0.241481, -0.0808809 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )

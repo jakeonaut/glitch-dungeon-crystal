@@ -28,6 +28,7 @@ onready var interactPrompt = get_node("InteractPrompt") if has_node("InteractPro
 onready var textBoxContainer = get_node("NPC TextBox")
 onready var textBox = get_node("NPC TextBox").get_node("TextBox")
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
+onready var fallthroughSolidCollisionShape = get_node("FallthroughSolid/CollisionShape") if has_node("FallthroughSolid/CollisionShape") else null
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
 

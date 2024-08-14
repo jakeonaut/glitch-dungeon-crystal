@@ -10,7 +10,7 @@ onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/Evo
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
-var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
+# var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
@@ -107,11 +107,11 @@ func _ready():
         glitch_switch_time_limit = rand_range(30.0, 50.0)
         mySprite.frame_delay = rand_range(0.3, 0.5)
         
-    if behavior_directional_bullet:
-        mySprite.texture = altGlitchEnemySheet
-        mySprite.set_material_override(null)
-    else:
-        mySprite.material_override = mySprite.material_override.duplicate()
+    # if behavior_directional_bullet:
+    #     mySprite.texture = altGlitchEnemySheet
+    #     mySprite.set_material_override(null)
+    # else:
+    mySprite.material_override = mySprite.material_override.duplicate()
 
     yield(TempTimer.idle_frame(self), "timeout")
     if mySprite and glitch_form != global.GlitchForm.NORMAL and not mySprite.is_in_group("sprite"):
@@ -145,6 +145,9 @@ func glitchOut():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if global.pauseGame:
+        return
 
     if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
         mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
@@ -193,9 +196,11 @@ func _process(delta):
     doVerticalWalkingBehavior()
     tryDieToOffscreenCamera()
     if behavior_directional_bullet:
-        global_transform.origin += bullet_direction_vector * delta
         tryDieToBody()
         bulletTryDieToSolids()
+        if is_smacked:
+            return
+        global_transform.origin += bullet_direction_vector * delta
 
     if behavior_evolve:
         evolution_timer += (delta*22)
@@ -516,7 +521,7 @@ func getSmacked(_broom_origin, silently = false):
     last_palette = mySprite.material_override.get_shader_param("target_palette")
     mySprite.material_override.set_shader_param("target_palette", smacked_palette)
 
-    if myOtherSprite:
+    if myOtherSprite != null and myOtherSprite.material_override != null:
         myOtherSprite.material_override.set_shader_param("time_influence", time_influence)
         myOtherSprite.material_override.set_shader_param("y_div", y_div)
         myOtherSprite.material_override.set_shader_param("normal_offset", normal_offset)
@@ -528,6 +533,10 @@ func getSmacked(_broom_origin, silently = false):
         self.scale.x /= 2
         self.scale.y /= 2
         self.scale.z /= 2
+    if behavior_directional_bullet:
+        level.summonSmokeClouds(global_transform.origin, 3)
+        queue_free()
+        return false
     return true
 
 var parentSpawner = null

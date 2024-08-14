@@ -13,12 +13,13 @@ func _ready():
   secretAniPlayer.clear_queue()
   secretAniPlayer.queue("blinkOpen")
   secretAniPlayer.queue("blinkIdle")
+  secretAniPlayer.queue("blinkClose")
 
 
 var spawn_timer = 0
 var spawn_time_limit = 5
 func _process(delta): 
-  if secretAniPlayer.assigned_animation == "blinkClose" and not secretAniPlayer.is_playing():
+  if "blinkClose" in secretAniPlayer.assigned_animation and not secretAniPlayer.is_playing():
     queue_free()
     return
   

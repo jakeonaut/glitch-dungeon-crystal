@@ -2,17 +2,20 @@ extends "../../../scripts/levelScript.gd"
 
 onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = get_node("HighPriestessBoss")
+onready var npcPlatformContainer = get_node("npcPlatforms")
 onready var croneNPC = get_node("CroneNPC")
+onready var croneNPCDefeated = get_node("CroneNPCDefeated")
 onready var crystalGeode = get_node("CubeCrystal")
 onready var crystalGeode2 = get_node("CubeCrystal2")
 onready var crystalGeode3 = get_node("CubeCrystal3")
 onready var crystalGeode4 = get_node("CubeCrystal4")
 onready var crystalGeode5 = get_node("CubeCrystal5")
 onready var aniPlayer = get_node("AnimationPlayer")
+onready var door2 = get_node("Door2")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
-export var camera_size = 30
+export var camera_size = 28
 # @override
 func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
@@ -25,6 +28,7 @@ func setUpRoomInitializationOverride():
     gameCamera.zoomed_size = camera_size
     unhideHighPriestess()
     has_boss_started = true
+    highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
@@ -65,6 +69,25 @@ func _process(delta):
       global.shouldRenderAsCinematic = true
       musicPlayer.stopAll()
 
+  if is_defeated:
+    player.pauseSelf = true
+    player.grav = 0
+    if not player.aniPlayer.assigned_animation == "fall":
+        player.aniPlayer.stop()
+        player.aniPlayer.clear_queue()
+        player.aniPlayer.play("fall")
+    if is_really_defeated and not global.isEnteringRoom:
+      var target_pos = Vector3(7.526, 5.414, player.global_transform.origin.z)
+      var step = 1
+      player.global_transform.origin = player.global_transform.origin + (target_pos - player.global_transform.origin) * (delta*step)
+      if stepify(player.global_transform.origin.x, 0.1) == stepify(target_pos.x, 0.1) and \
+       stepify(player.global_transform.origin.y, 0.1) == stepify(target_pos.y, 0.1):
+        enterMemoryZone()
+        global.memory["hp"] = 2
+        player.tryDieToEnemy(delta, true, false)
+        global.memory["hp"] = 1
+        player.nullify()
+
   # if highPriestessBoss.visible:
   #   random_tiles_timer += (delta*11)
   #   if random_tiles_timer >= random_tiles_time_limit:
@@ -74,10 +97,35 @@ func _process(delta):
 func triggerCroneDialog():
   croneNPC.activate(true)
 
+var is_defeated = false
+var is_really_defeated = false
+func triggerCroneDefeatedDialog():
+  croneNPCDefeated.activate(true)
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("glitchTransitionStart")
+  is_defeated = true
+  player.pauseSelf = true
+  global.shouldRenderAsCinematic = true
+  musicPlayer.stopAll()
+
+func playGlitchTransitionAnimation():
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("glitchTransition")
+  generateEyeTiles()
+
+func enterMemoryZone():
+  global.isEnteringRoom = true
+  global.memory["roomPath"] = self.getLevelName()
+  transition.really_really_long_fade_to(door2.path)
+  aniPlayer.play("glitchTransitionEnd")
+
 func unhideHighPriestess():
   highPriestessBoss.visible = true
   highPriestessBoss.am_i_hidden = false
   highPriestessBoss.mySprite.visible = true
+  highPriestessBoss.big_spawn_timer = highPriestessBoss.initial_big_spawn_timer
   global.pauseMoveInput = false
   global.pauseGame = false
   global.shouldRenderAsCinematic = false
@@ -95,22 +143,12 @@ func unhideHighPriestess():
   # global.memory["broom"] = false
   # generateEyeTiles()
 
+  var npcPlatforms = npcPlatformContainer.get_children()
+  for i in range(len(npcPlatforms)):
+    npcPlatforms[i].fallthroughSolidCollisionShape.scale.x = 1.5
+
 var climbToEyeLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_001climbToEye.tscn")
-var filledInLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_002FilledIn.tscn")
 func generateEyeTiles():
   var climbToEyeLevelInstance = climbToEyeLevel.instance()
   var newLevelTiles = climbToEyeLevelInstance.get_node("Viewport/level/LevelTiles")
   levelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles, false)
-
-func generateRandomTiles():
-  var filledInLevelInstance = filledInLevel.instance()
-  var newLevelTiles = filledInLevelInstance.get_node("Viewport/level/LevelTiles")
-
-  var usedCells = newLevelTiles.get_used_cells()
-  usedCells.shuffle()
-  var randomUsedCells = []
-  for i in range(0, 10):
-    randomUsedCells.push_back(usedCells.pop_back())
-
-
-  levelTiles.queueSausageDreamFadeAwayDifference(newLevelTiles, false, randomUsedCells)

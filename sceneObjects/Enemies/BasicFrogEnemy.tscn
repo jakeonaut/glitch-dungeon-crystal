@@ -1822,7 +1822,6 @@ tracks/11/keys = {
 script = ExtResource( 1 )
 true_terminal_vel = 8
 grav = 30
-walk_speed = 10
 jump_force = 13
 sprite_offset_y = 0.125
 

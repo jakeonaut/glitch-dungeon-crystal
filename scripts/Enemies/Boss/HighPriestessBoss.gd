@@ -9,22 +9,27 @@ var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
+onready var staffSpawnPoint = get_node("StaffSpawnPoint")
 onready var crystalsContainer = get_node("Crystals")
 onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 onready var crystal2 = get_node("Crystals/HighpriestessCrystal2")
 onready var crystal3 = get_node("Crystals/HighpriestessCrystal3")
 onready var crystal4 = get_node("Crystals/HighpriestessCrystal4")
 onready var crystal5 = get_node("Crystals/HighpriestessCrystal5")
+onready var attackSound = get_node("Sounds/AttackSound")
 var crystalsArray = []
 
-var big_spawn_timer = 30
-var big_spawn_time_limit = 60
+var big_spawn_timer = 0
+var initial_big_spawn_timer = 100
+var big_spawn_time_limit = 120
 var num_spawns = 0
 var num_spawn_limit = 3
 
 var spawn_timer = 0
-var spawn_time_limit = 1
+var spawn_time_limit = 2
+var BULLET_SPEED = 15
 var has_animated_attack = false
+var MAX_NUM_HITS = 5
 
 enum BossPhase {
     IDLE,
@@ -33,7 +38,7 @@ enum BossPhase {
     FROG_PLAGUE_SPAWNING,
     FROG_PLAGUE_WAITING,
     CRONE_CHASE,
-    COMPLETE,
+    DEFEATED,
 }
 var boss_phase = BossPhase.CASTING
 
@@ -70,49 +75,84 @@ func _ready():
         saveSpawnPoint.visible = false
         saveSpawnPointArray.push_back(saveSpawnPoint)
     crystalsArray = [crystal3, crystal2, crystal5, crystal4, crystal1]
+    staffSpawnPoint.visible = false
 
-var hp = 3
+var num_hits = 0
 func getHurt():
     mySprite.visible = true
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
     num_spawns = 0
-    big_spawn_timer = 0
+    big_spawn_timer = big_spawn_time_limit - ((big_spawn_time_limit - big_spawn_timer)/2.0)
     has_animated_attack = false
     landingArray.shuffle()
     fallenAngelSpawnPointArray.shuffle()
 
-    hp -= 1
-    if hp == 2:
-        num_spawn_limit = len(landingArray) / 2
-    elif hp == 1 or hp == 0:
-        boss_phase = BossPhase.FROG_PLAGUE_READY
-    elif hp == -1:
-        num_spawn_limit = len(landingArray)
-        boss_phase = BossPhase.CASTING
-        big_spawn_timer = 0
-    elif hp == -2:
-        boss_phase = BossPhase.CRONE_CHASE
-    elif hp == -4:
-        boss_phase = BossPhase.COMPLETE
+    for i in range(num_hits+1):
+        if i < len(crystalsArray):
+            crystalsArray[i].applyGlitchMaterial(i)
+    num_hits += 1
+    num_spawn_limit += 2
+    if num_hits == MAX_NUM_HITS:
+        yaBeatMe()
+
+func killTheBullets():
+    var glitchBullets = get_tree().get_nodes_in_group("enemies")
+    for i in range(len(glitchBullets)):
+        glitchBullets[i].get_node("..").getSmacked(global_transform.origin)
+
+func yaBeatMe():
+    killTheBullets()
+    for i in range(len(crystalsArray)):
+        crystalsArray[i].applyGlitchMaterial(i)
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.queue("defeatedStart")
+    secretAniPlayer.queue("defeatedIdle")
+    boss_phase = BossPhase.DEFEATED
+    level.levelTiles.randomize_num = 999
+    yield(get_tree().create_timer(1.0), "timeout")
+    level.triggerCroneDefeatedDialog()
+    var npcPlatforms = level.npcPlatformContainer.get_children()
+    for i in range(len(npcPlatforms)):
+        level.summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
+        npcPlatforms[i].queue_free()
+        yield(get_tree().create_timer(0.5), "timeout")
+
+func animationDefeatedEnd():
+    boss_phase = BossPhase.FROG_PLAGUE_READY
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    level.is_really_defeated = true
+    var smokeClouds = level.summonSmokeClouds(global_transform.origin, 3, true, true)
+    for i in range(len(smokeClouds)):
+        smokeClouds[i].scale *= 3
+
 
 var am_i_hidden = false
 var can_spawn_save_points = false
 var has_spawned_save_points = false
 var save_point_spawn_timer = 0
 var save_point_spawn_time_limit = 20
+var glitch_crystal_timer = 0
+var glitch_crystal_time_limit = 5
 func _process(delta):
     if global.pauseGame or am_i_hidden:
         return
 
-    crystalsContainer.rotation_degrees.y -= delta*66
-
-    if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
-        moveAbout(delta)
+    # rotate crystals
+    var normalized_num_hits = num_hits if num_hits < 5 else 5
+    crystalsContainer.rotation_degrees.y -= delta*(65 - normalized_num_hits*13)
+    glitch_crystal_timer += (delta * 11)
+    if glitch_crystal_timer >= glitch_crystal_time_limit:
+        glitch_crystal_timer = 0
+        crystalsContainer.rotation_degrees.y -= normalized_num_hits * 30
     # processSavePointSpawns(delta)
 
-    if boss_phase == BossPhase.FROG_PLAGUE_READY:
+    if boss_phase == BossPhase.DEFEATED:
+        pass
+    elif boss_phase == BossPhase.FROG_PLAGUE_READY:
         if not secretAniPlayer.is_playing():
             mySprite.visible = false
             boss_phase = BossPhase.FROG_PLAGUE_SPAWNING
@@ -126,7 +166,7 @@ func _process(delta):
             spawn_timer = 0
             num_spawns += 1
             var frog = basicFrogEnemyRes.instance()
-            frog.is_infected = true
+            # frog.is_infected = true
             frog.on_ground = true
             frog.behavior_jumping = true
             frog.behavior_walking = true
@@ -134,7 +174,7 @@ func _process(delta):
                 frog.walk_direction.x = 1
             else:
                 frog.walk_direction.x = -1
-            frog.is_fragile = true
+            # frog.is_fragile = true
             level.add_child(frog)
             frog.global_transform.origin = getRandomSpawnPosition(3)
             frogArray.push_back(weakref(frog))
@@ -146,30 +186,33 @@ func _process(delta):
                 big_spawn_timer = 20
                 frogArray.shuffle()
     elif boss_phase == BossPhase.FROG_PLAGUE_WAITING:
-        var weak_enemies = level.get_tree().get_nodes_in_group("weak_enemies")
-        if weak_enemies.size() == 0:
-            spawnWeakEye()
-            landingArray.shuffle()
-            fallenAngelSpawnPointArray.shuffle()
-        else:
-            big_spawn_timer += (delta*11)
-            if big_spawn_timer >= big_spawn_time_limit:
-                big_spawn_timer = 20
-                var firstInfectedIndex = 0
-                for i in range(len(frogArray)):
-                    var frog = frogArray[i].get_ref()
-                    if frog != null and isFrogInfected(frog):
-                        firstInfectedIndex = i
-                        break
-                var infectedFrog = frogArray[firstInfectedIndex]
-                if infectedFrog.get_ref() != null:
-                    var weakEye = weakEyeRes.instance()
-                    infectedFrog.get_ref().add_child(weakEye)
-                    weakEye.global_transform.origin = infectedFrog.get_ref().global_transform.origin
-                    weakEye.global_transform.origin.y += 0.75
-                    weakEye.global_transform.origin.z += 0.5
-                frogArray.shuffle()
+        pass
+        # var weak_enemies = level.get_tree().get_nodes_in_group("weak_enemies")
+        # if weak_enemies.size() == 0:
+        #     spawnWeakEye()
+        #     landingArray.shuffle()
+        #     fallenAngelSpawnPointArray.shuffle()
+        # else:
+        #     big_spawn_timer += (delta*11)
+        #     if big_spawn_timer >= big_spawn_time_limit:
+        #         big_spawn_timer = 20
+        #         var firstInfectedIndex = 0
+        #         for i in range(len(frogArray)):
+        #             var frog = frogArray[i].get_ref()
+        #             if frog != null and isFrogInfected(frog):
+        #                 firstInfectedIndex = i
+        #                 break
+        #         var infectedFrog = frogArray[firstInfectedIndex]
+        #         if infectedFrog.get_ref() != null:
+        #             var weakEye = weakEyeRes.instance()
+        #             infectedFrog.get_ref().add_child(weakEye)
+        #             weakEye.global_transform.origin = infectedFrog.get_ref().global_transform.origin
+        #             weakEye.global_transform.origin.y += 0.75
+        #             weakEye.global_transform.origin.z += 0.5
+        #         frogArray.shuffle()
     elif boss_phase == BossPhase.CASTING:
+        if target_pos != null and not ((secretAniPlayer.assigned_animation == "gotHurt" or secretAniPlayer.assigned_animation == "windUpCast") and secretAniPlayer.is_playing()):
+            moveAbout(delta)
         big_spawn_timer += (delta*11)
         if big_spawn_timer >= big_spawn_time_limit:
             if not has_animated_attack:
@@ -179,13 +222,17 @@ func _process(delta):
             if spawn_timer >= spawn_time_limit:
                 spawn_timer = 0
                 # spawnAttack(num_spawns, false)
-                spawnFallenAngel(num_spawns, false)
+                # spawnFallenAngel(num_spawns, false)
+                spawnGlitchBullet()
                 num_spawns += 1
                 if num_spawns == 2:
                     # spawnAttack(0, true)
-                    spawnFallenAngel(0, true)
-                if num_spawns >= num_spawn_limit:
-                    # spawnWeakEye()
+                    # spawnFallenAngel(0, true)
+                    pass
+                if num_spawns >= num_spawn_limit or level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
+                    if level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
+                        killTheBullets()
+                    spawnWeakEye()
                     num_spawns = 0
                     big_spawn_timer = 0
                     has_animated_attack = false
@@ -193,6 +240,11 @@ func _process(delta):
                     fallenAngelSpawnPointArray.shuffle()
 
                     can_spawn_save_points = true
+        else:
+            spawn_timer = -spawn_time_limit
+    elif boss_phase == BossPhase.IDLE:
+        if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
+            moveAbout(delta)
 
 
     frogCleanup(delta)
@@ -234,7 +286,7 @@ func moveAbout(delta):
 func randomizeTargetPos():
     target_pos = Vector3(
         original_pos.x + rand_range(-5, 5),
-        original_pos.y + rand_range(-5, 5),
+        original_pos.y + rand_range(-3, 5),
         original_pos.z
     )
 
@@ -297,6 +349,25 @@ func spawnFallenAngel(which_spawn, spawn_above_player):
     var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
     level.add_child(newSpawnGlitchEffect)
     newSpawnGlitchEffect.global_transform.origin = fallenAngel.global_transform.origin
+
+func spawnGlitchBullet():
+    attackSound.play()
+    var bullet = glitchEnemyRes.instance()
+    bullet.is_static_in_level = false
+    bullet.visible = true
+    bullet.behavior_directional_bullet = true
+
+    var player_pos = level.player.global_transform.origin
+    var staff_pos = staffSpawnPoint.global_transform.origin
+    var bullet_direction_vector = Vector3(
+        player_pos.x - staff_pos.x,
+        player_pos.y - staff_pos.y,
+        0
+    ).normalized() * BULLET_SPEED
+    bullet.bullet_direction_vector = bullet_direction_vector
+    level.add_child(bullet)
+
+    bullet.global_transform.origin = staff_pos
 
 func processSavePointSpawns(delta):
     if can_spawn_save_points and not has_spawned_save_points:

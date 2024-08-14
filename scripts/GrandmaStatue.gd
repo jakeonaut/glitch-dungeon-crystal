@@ -117,6 +117,7 @@ func preprocessGlitchFormTeleportation():
     # nullify me instead!
     glitch_form = global.GlitchForm.NORMAL
     updateColor()
+    queue_free()
   
 
 func processGlitchFormTeleportation():

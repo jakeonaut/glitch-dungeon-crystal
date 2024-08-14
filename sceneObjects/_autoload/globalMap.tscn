@@ -603,7 +603,7 @@ frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 1 )
 material_override = SubResource( 4 )
 frame = 55
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"

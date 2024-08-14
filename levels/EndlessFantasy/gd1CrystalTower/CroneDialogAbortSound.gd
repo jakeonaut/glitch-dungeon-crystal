@@ -9,6 +9,7 @@ func _ready():
 var has_talked = false
 func activateScript():
   level.aniPlayer.play("appearEnd")
+  has_talked = true
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
@@ -16,4 +17,4 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
 
 func isActive(_debug=false):
     # OVERRIDE ME... if you dare
-    return true
+    return not has_talked

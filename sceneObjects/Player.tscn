@@ -6482,8 +6482,7 @@ script = ExtResource( 10 )
 max_frames = 1
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.931, 1 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.931, 0.625111 )
 material_override = SubResource( 114 )
 pixel_size = 0.125
 texture = ExtResource( 74 )

@@ -24,7 +24,19 @@ uniform float normal_offset : hint_range(0, 1, 0.01) = 0.00;
 uniform float time_influence : hint_range(0, 50) = 0;
 uniform float y_div : hint_range(0, 10, .1) = 0;
 
-float random (vec2 uv) {
+// æŒ¯å‹•ã®å¼·ã•
+uniform float shake_power = 0.03;
+// æŒ¯å‹•ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚º
+uniform float shake_block_size = 30.5;
+// è‰²ã®åˆ†é›¢çŽ‡
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+uniform bool enable_glitch = false;
+uniform bool enable_color_glitch = true;
+uniform bool disable_glitch_dither = false;
+uniform bool enable_palette_cycle = false;
+uniform float palette_cycle_speed = 10.0;
+
+float randomuv(vec2 uv) {
     return fract(sin(dot(uv.xy,
         vec2(12.9898,78.233))) * 43758.5453123) * TIME;
 }
@@ -41,7 +53,7 @@ void vertex() {
     float z_origin = VERTEX.z;
     float snap_i = (1.0 - vertex_snapping_offset) * min(VIEWPORT_SIZE.x, VIEWPORT_SIZE.y) / 4.0;
 
-    float randomamt = random(UV);
+    float randomamt = randomuv(UV);
     float projection_w = (PROJECTION_MATRIX * vec4(VERTEX, 1.0)).w * randomamt;
     // VERTEX = round(VERTEX / projection_w * snap_i) / snap_i * projection_w;
     // VERTEX = VERTEX;
@@ -91,6 +103,10 @@ float randomb(vec2 uv) {
 	return fract(sin(dot(uv, vec2(corruption_seed - 12.9898, 78.233))) * 246.5453);
 }
 
+float random(float seed) {
+  return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
+}
+
 void fragment() {
     vec2 uv = UV / VERTEX.z;
 
@@ -132,7 +148,7 @@ void fragment() {
 		corrupt.b = step(corruption_amount, randomb(UVr * corruption_offset));
 	}
 	 
-    // applies the vertex colors and corruption effects.
+  // applies the vertex colors and corruption effects.
 	vec3 corrupt_texture_rgba = ((vec3(min(corrupt.r, pixelColor.r), min(corrupt.g, pixelColor.g), min(corrupt.b, pixelColor.b)) * COLOR.rgb) * modulate.rgb) * get_dither_brightness(texture_rgba.rgb, FRAGCOORD);
-    ALBEDO = corrupt_texture_rgba.rgb;
+  ALBEDO = corrupt_texture_rgba.rgb;
 }
