@@ -45,7 +45,9 @@ var boss_phase = BossPhase.CASTING
 var original_pos = null
 var target_pos = null
 
-var landingArray = []
+var landingArrayHard = []
+var landingArrayMedium = []
+var landingArrayEasy = []
 var fallenAngelSpawnPointArray = []
 var saveSpawnPointArray = []
 var frogArray = []
@@ -60,10 +62,18 @@ func _ready():
     original_pos = global_transform.origin
     randomizeTargetPos()
 
-    var landings = get_tree().get_nodes_in_group("priestess_landing")
+    var landings = get_tree().get_nodes_in_group("priestess_landing_hard")
     for landing in landings:
         landing.visible = false
-        landingArray.push_back(landing)
+        landingArrayHard.push_back(landing)
+    landings = get_tree().get_nodes_in_group("priestess_landing_medium")
+    for landing in landings:
+        landing.visible = false
+        landingArrayMedium.push_back(landing)
+    landings = get_tree().get_nodes_in_group("priestess_landing_easy")
+    for landing in landings:
+        landing.visible = false
+        landingArrayEasy.push_back(landing)
 
     var fallenAngelSpawnPoints = get_tree().get_nodes_in_group("fallen_angel_spawn_point")
     for fallenAngelSpawnPoint in fallenAngelSpawnPoints:
@@ -86,7 +96,9 @@ func getHurt():
     num_spawns = 0
     big_spawn_timer = big_spawn_time_limit - ((big_spawn_time_limit - big_spawn_timer)/2.0)
     has_animated_attack = false
-    landingArray.shuffle()
+    landingArrayHard.shuffle()
+    landingArrayMedium.shuffle()
+    landingArrayEasy.shuffle()
     fallenAngelSpawnPointArray.shuffle()
 
     for i in range(num_hits+1):
@@ -119,6 +131,13 @@ func yaBeatMe():
         level.summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
         npcPlatforms[i].queue_free()
         yield(get_tree().create_timer(0.5), "timeout")
+
+func randomExplosion():
+    level.summonSmokeClouds(Vector3(
+        original_pos.x + rand_range(-5, 5),
+        original_pos.y + rand_range(-3, 5),
+        original_pos.z
+    ), 3, true, true)
 
 func animationDefeatedEnd():
     boss_phase = BossPhase.FROG_PLAGUE_READY
@@ -159,7 +178,7 @@ func _process(delta):
             spawn_timer = 0
             num_spawns = 0
             num_spawn_limit = 7
-            laughSound.play()
+            # laughSound.play()
     elif boss_phase == BossPhase.FROG_PLAGUE_SPAWNING:
         spawn_timer += (delta*11)
         if spawn_timer >= spawn_time_limit:
@@ -177,6 +196,7 @@ func _process(delta):
             # frog.is_fragile = true
             level.add_child(frog)
             frog.global_transform.origin = getRandomSpawnPosition(3)
+            frog.scale *= 2
             frogArray.push_back(weakref(frog))
             spawnSound.play()
             if num_spawns >= num_spawn_limit:
@@ -221,7 +241,7 @@ func _process(delta):
             spawn_timer += (delta*11)
             if spawn_timer >= spawn_time_limit:
                 spawn_timer = 0
-                # spawnAttack(num_spawns, false)
+                spawnAttack(num_spawns, false)
                 # spawnFallenAngel(num_spawns, false)
                 spawnGlitchBullet()
                 num_spawns += 1
@@ -236,7 +256,9 @@ func _process(delta):
                     num_spawns = 0
                     big_spawn_timer = 0
                     has_animated_attack = false
-                    landingArray.shuffle()
+                    landingArrayHard.shuffle()
+                    landingArrayMedium.shuffle()
+                    landingArrayEasy.shuffle()
                     fallenAngelSpawnPointArray.shuffle()
 
                     can_spawn_save_points = true
@@ -294,6 +316,11 @@ func spawnWeakEye():
     var weakEye = weakEyeRes.instance()
     weakEye.is_static_in_level = false
     level.add_child(weakEye)
+    var landingArray = landingArrayEasy
+    if num_hits >= 2:
+        landingArray = landingArrayMedium
+    if num_hits >= 3:
+        landingArray = landingArrayHard
     weakEye.global_transform.origin = landingArray[0].global_transform.origin if len(landingArray) > 0 else getRandomSpawnPosition()
 
 # be a bit more deterministic... ideally, we would
@@ -316,6 +343,7 @@ func spawnAttack(which_spawn, spawn_on_player):
     newGlitchEnemy.behavior_evolve = true
     newGlitchEnemy.behavior_fizzle_out_after_evolve = true
     level.add_child(newGlitchEnemy)
+    var landingArray = landingArrayMedium
     if spawn_on_player:
         newGlitchEnemy.global_transform.origin = getPlayer().global_transform.origin
     else:

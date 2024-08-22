@@ -15,7 +15,7 @@ onready var door2 = get_node("Door2")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
-export var camera_size = 28
+export var camera_size = 30
 # @override
 func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
@@ -28,7 +28,7 @@ func setUpRoomInitializationOverride():
     gameCamera.zoomed_size = camera_size
     unhideHighPriestess()
     has_boss_started = true
-    highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
+    # highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
@@ -77,7 +77,7 @@ func _process(delta):
         player.aniPlayer.clear_queue()
         player.aniPlayer.play("fall")
     if is_really_defeated and not global.isEnteringRoom:
-      var target_pos = Vector3(7.526, 5.414, player.global_transform.origin.z)
+      var target_pos = Vector3(7.526, 3.414, player.global_transform.origin.z)
       var step = 1
       player.global_transform.origin = player.global_transform.origin + (target_pos - player.global_transform.origin) * (delta*step)
       if stepify(player.global_transform.origin.x, 0.1) == stepify(target_pos.x, 0.1) and \
@@ -113,13 +113,15 @@ func playGlitchTransitionAnimation():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("glitchTransition")
-  generateEyeTiles()
 
 func enterMemoryZone():
   global.isEnteringRoom = true
   global.memory["roomPath"] = self.getLevelName()
-  transition.really_really_long_fade_to(door2.path)
   aniPlayer.play("glitchTransitionEnd")
+  generateEyeTiles()
+
+  yield(get_tree().create_timer(1.0), "timeout")
+  transition.really_really_long_fade_to(door2.path)
 
 func unhideHighPriestess():
   highPriestessBoss.visible = true

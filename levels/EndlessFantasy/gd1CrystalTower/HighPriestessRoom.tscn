@@ -1484,7 +1484,7 @@ tracks/35/keys = {
 
 [sub_resource type="Animation" id=202]
 resource_name = "glitchTransition"
-length = 3.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("HighPriestessBoss/Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/0/interp = 1
@@ -1564,10 +1564,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.3, 1.6, 2, 2.2, 2.4, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.125, 0.16, 0.125, 0.14, 0.11, 0.0001 ]
+"times": PoolRealArray( 0.3, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.125, 0.0001 ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("HighPriestessBoss/Sprite3D:material_override:shader_param/target_palette")
@@ -1624,12 +1624,57 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 2.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8, 0.9, 1.2, 1.4, 1.5, 1.6, 1.7, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
+"args": [  ],
+"method": "randomExplosion"
+}, {
 "args": [  ],
 "method": "animationDefeatedEnd"
 } ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("CroneNPC:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=208]
@@ -1658,6 +1703,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.001, 0.05 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CroneNPC:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=201]
 resource_name = "glitchTransitionStart"
@@ -1671,7 +1728,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../../Viewport2/ScreenEffects/GlitchEffectRect:material:shader_param/shake_power")
@@ -1680,10 +1737,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 0.001 ]
+"values": [ 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("HighPriestessBoss:translation")
@@ -6419,52 +6476,156 @@ visible = false
 [node name="Crystals" parent="Viewport/level/HighPriestessBoss" index="5"]
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1, 3.074, -2.13 )
 
-[node name="glitchLandings" type="Spatial" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="glitchLandings_hard" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25382, 0 )
 
-[node name="landing2" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing2" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing3" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing3" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing5" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing5" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing6" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing6" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing7" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing7" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing11" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing11" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="landing15" type="Sprite3D" parent="Viewport/level/glitchLandings" groups=["priestess_landing"]]
+[node name="landing15" type="Sprite3D" parent="Viewport/level/glitchLandings_hard" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="glitchLandings_medium" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38576, -0.530375, 0 )
+
+[node name="landing2" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing3" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing5" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing6" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing7" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing11" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing15" type="Sprite3D" parent="Viewport/level/glitchLandings_medium" groups=["priestess_landing_medium"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="glitchLandings_easy" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -6, 0 )
+
+[node name="landing2" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing3" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing5" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing6" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing7" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing11" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing15" type="Sprite3D" parent="Viewport/level/glitchLandings_easy" groups=["priestess_landing_easy"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, 1 )
 pixel_size = 0.12
 texture = ExtResource( 2 )
@@ -7115,7 +7276,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 209 )
 
 [node name="CollisionShape" parent="Viewport/level/CubeCrystal/ConfirmNPC/SmallInteractionArea" index="0"]
@@ -7132,7 +7293,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 210 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal2" index="12"]
@@ -7163,7 +7324,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 211 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal3" index="12"]
@@ -7194,7 +7355,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 212 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -7228,7 +7389,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 213 )
 
 [node name="LightAnimationPlayer" parent="Viewport/level/CubeCrystal5" index="12"]
