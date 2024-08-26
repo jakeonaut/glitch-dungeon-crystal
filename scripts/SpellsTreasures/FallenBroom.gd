@@ -24,6 +24,7 @@ var taking_the_player_with_me = false
 # helper vars for just knowing which direction I was thrown. only relevant if projectile = true
 # doesn't actually control physics (see walk_direction, grav, and jump_force for that... weird)
 var thrown_direction = Vector2(0, 0)
+var can_warp = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -72,6 +73,19 @@ func _process(delta):
             if returning and global.activeInteractor and global.activeInteractor.is_important:
                 global.pauseGame = true
         return
+    elif projectile:
+        if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
+            level.player.global_transform.origin = global_transform.origin
+            level.player.global_transform.origin.y -= 1
+            level.player.gravitySound.play()
+            level.player.linear_velocity = self.linear_velocity
+            level.player.lv = self.lv
+            level.player.vv = self.vv
+            level.player.hv = self.hv
+            abortSound.activateScript()
+            if returning and global.activeInteractor and global.activeInteractor.is_important:
+                global.pauseGame = true
+    can_warp = true
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false

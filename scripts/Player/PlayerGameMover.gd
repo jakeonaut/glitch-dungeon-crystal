@@ -316,7 +316,10 @@ func pressingJump():
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  return (Input.is_action_pressed("jump_button") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()) or should_magic_jump
+  var is_pressing_jump = (Input.is_action_pressed("jump_button") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()) or should_magic_jump
+  # if is_pressing_jump:
+  #   should_collide_floor = true
+  return is_pressing_jump
 
 # @override
 func pressingMoveUp():
@@ -333,8 +336,12 @@ func pressingMoveLeft():
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
+    should_collide_floor = true
     return mushroom_infection_direction == -1 and not am_paused
-  return .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
+  var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
+  # if is_pressing_move_left:
+  #   should_collide_floor = true
+  return is_pressing_move_left
 
 var override_stop_right_input = false
 # @override
@@ -343,8 +350,12 @@ func pressingMoveRight():
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
+    # should_collide_floor = true
     return mushroom_infection_direction == 1 and not am_paused
-  return .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
+  var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
+  # if is_pressing_move_right:
+  #   should_collide_floor = true
+  return is_pressing_move_right
 
 # @override
 func justPressedMoveLeft():

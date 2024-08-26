@@ -10,7 +10,7 @@ onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/Evo
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
-# var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
+var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 

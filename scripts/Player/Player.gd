@@ -187,6 +187,7 @@ func floorGlitch():
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(global.player_red_palette)
+  # should_collide_floor = not (on_ground and not truly_on_ground)
   # mySprite.setBugCatcherCostume()
 
 func miniUpwardGust(reverse_immediately = true):
@@ -1802,7 +1803,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
   fallenBroom.should_return = should_return
   fallenBroom.global_transform.origin = self.global_transform.origin
   fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
-  fallenBroom.walk_direction.x = -1 if mySprite.flip_h else 1
+  fallenBroom.walk_direction = Vector2(-1 if mySprite.flip_h else 1, 0)
   if grav > 0:
     fallenBroom.global_transform.origin.y += 2
   if was_thrown:

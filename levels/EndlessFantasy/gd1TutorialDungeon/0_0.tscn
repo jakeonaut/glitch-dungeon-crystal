@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -29,7 +29,6 @@
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=30]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/backgrounds/dungeon_layer_0.png" type="Texture" id=32]
-[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=33]
 
 [sub_resource type="Animation" id=29]
 resource_name = "doorClose"
@@ -1016,9 +1015,6 @@ shape = SubResource( 42 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
@@ -1039,9 +1035,6 @@ shape = SubResource( 43 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
-
-[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
-visible = false
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/doorClose = SubResource( 25 )
@@ -1222,12 +1215,6 @@ texture = ExtResource( 30 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 75 )
 texture = ExtResource( 30 )
-
-[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5057, 4.73227, 0 )
-
-[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 33 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3359, 4.73227, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 6 )]
 
