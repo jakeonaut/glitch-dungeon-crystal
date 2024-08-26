@@ -110,11 +110,7 @@ func _ready():
         npc.textBoxContainer.bbText = "•"
     else:
       var x_more_crystals = num_keys_unlock - global.memory["clean_crystals"]
-      var key_name = "FISH KEY"
-      if key_type == global.KeyItem.PYRAMID: key_name = "PYRAMID KEY"
-      elif key_type == global.KeyItem.SHROOM: key_name = "SHROOM KEY"
-      elif key_type == global.KeyItem.CAT: key_name = "CAT KEY"
-      elif key_type == global.KeyItem.CRYSTAL: key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
+      var key_name = getKeyName(x_more_crystals)
       npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
     npc.textBoxContainer.setVars()
     npc.textBox.can_camera_zoom = false
@@ -127,6 +123,18 @@ func _ready():
   #   yield(get_tree().create_timer(0.5), "timeout")
   #   for _i in range(num_keys_unlock):
   #     spawnChicken()
+
+func getKeyName(x_more_crystals):
+  var key_name = "FISH KEY"
+  if key_type == global.KeyItem.PYRAMID:
+    key_name = "PYRAMID KEY"
+  elif key_type == global.KeyItem.SHROOM:
+    key_name = "SHROOM KEY"
+  elif key_type == global.KeyItem.CAT:
+    key_name = "CAT KEY"
+  elif key_type == global.KeyItem.CRYSTAL:
+    key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
+  return key_name
 
 func spawnChicken():
   var freeChicken = chickenRes.instance()
@@ -170,7 +178,7 @@ func _process(delta):
   #   spawnParticles(delta)
 
   if locked_to_monsters:
-    npc.textBoxContainer.bbText = "•"
+    npc.textBoxContainer.bbText = "•it won't open"
     npc.textBoxContainer.setVars()
   elif key_type == global.KeyItem.NORMAL:
     var num_keys = global.getLevelZoneThing("key")
@@ -294,8 +302,12 @@ func activate(is_player):
           lockedSound.play()
           npc.activate(is_player)
       elif key_type == global.KeyItem.CRYSTAL:
-        var has_special_key = global.memory["clean_crystals"] >= 3
+        var has_special_key = global.memory["clean_crystals"] >= num_keys_unlock
         if has_special_key:
+          # npc.textBoxContainer.bbText = "•you are worthy"
+          # npc.textBoxContainer.setVars()
+          # npc.activate(is_player)
+          # was_i_just_unlocked = true
           startDoorUnlock()
         elif not lockedSound.is_playing():
           lockedSound.play()
@@ -303,6 +315,11 @@ func activate(is_player):
       else:
         var has_special_key = global.memory.has("key_items") and global.memory["key_items"].has(key_type) and global.memory["key_items"][key_type] == global.ItemState.GOT_IT
         if has_special_key:
+          # var key_name = getKeyName(0)
+          # npc.textBoxContainer.bbText = "•used [wave]" + key_name + "[/wave]"
+          # npc.textBoxContainer.setVars()
+          # npc.activate(is_player)
+          # was_i_just_unlocked = true
           startDoorUnlock()
         elif not lockedSound.is_playing():
           lockedSound.play()
@@ -313,6 +330,7 @@ func unpause():
 
 var is_unlocking = false
 var unlocking_key_array = []
+var was_i_just_unlocked = false
 func startDoorUnlock():
   var num_keys = global.getLevelZoneThing("key")
 
@@ -359,7 +377,6 @@ func startDoorUnlock():
     getPlayer().aniPlayer.play("preGetItem")
     getPlayer().playBounce("land")
 
-# doesn't actually enter lol
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
   if key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL:
@@ -371,7 +388,7 @@ func actuallyUnlockAndEnterDoor():
   if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
     global.activeInteractor.stopInteract()
   global.activeInteractor = null
-  goThroughDoor()
+  goThroughDoor(false, was_i_just_unlocked, false)
   global.pauseMoveInput = false
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -9,26 +9,21 @@
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=8]
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=9]
-[ext_resource path="res://assets/sounds/glitterdisappear_firered.wav" type="AudioStream" id=10]
 [ext_resource path="res://scripts/CrystalGeode2.gd" type="Script" id=11]
 [ext_resource path="res://scripts/CubeCrystalMesh.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=15]
-[ext_resource path="res://assets/sounds/error.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/sounds/sfx010_weirdmetalchord.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=18]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scripts/GlitchAuraColorRect.gd" type="Script" id=20]
 [ext_resource path="res://scripts/StreetlightGlitchAuraControl.gd" type="Script" id=21]
 [ext_resource path="res://assets/lightAnimatedTexture.tres" type="Texture" id=22]
 [ext_resource path="res://assets/palettes/dream-haze-mini.png" type="Texture" id=23]
 [ext_resource path="res://assets/water_normal_4.png" type="Texture" id=24]
-[ext_resource path="res://scripts/CrystalGeode2NPCAbortSound.gd" type="Script" id=25]
 [ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=27]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=28]
-[ext_resource path="res://sceneObjects/CrystalGeode2DialogStartSound.gd" type="Script" id=29]
 
 [sub_resource type="ArrayMesh" id=79]
 surfaces/0 = {
@@ -47,11 +42,24 @@ surfaces/0 = {
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
 
+[sub_resource type="ArrayMesh" id=80]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
 [sub_resource type="BoxShape" id=22]
-extents = Vector3( 2, 3.5, 2 )
+extents = Vector3( 2, 2.5, 2 )
 
 [sub_resource type="BoxShape" id=39]
-extents = Vector3( 3, 2, 2 )
+extents = Vector3( 2.5, 2, 2 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 3 )
@@ -442,6 +450,30 @@ tracks/23/keys = {
 "update": 0,
 "values": [ ExtResource( 24 ) ]
 }
+tracks/24/type = "value"
+tracks/24/path = NodePath("CubeContainer/MeshInstance3:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("CubeContainer/MeshInstance3:scale")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "lightUp"
@@ -563,47 +595,47 @@ tracks/9/enabled = true
 tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ true ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("CubeContainer/MeshInstance:rotation_degrees")
+tracks/10/path = NodePath("CubeContainer/MeshInstance:scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 45, 90, 45 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("CubeContainer/MeshInstance:scale")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
 "times": PoolRealArray( 0, 0.5, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 2 ), Vector3( 4, 4, 4 ) ]
 }
-tracks/12/type = "value"
-tracks/12/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("cubeSound:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 tracks/13/type = "value"
-tracks/13/path = NodePath("cubeSound:playing")
+tracks/13/path = NodePath("cubeSound2:playing")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -614,25 +646,13 @@ tracks/13/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-tracks/14/type = "value"
-tracks/14/path = NodePath("cubeSound2:playing")
+tracks/14/type = "method"
+tracks/14/path = NodePath(".")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/15/type = "method"
-tracks/15/path = NodePath(".")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
 "times": PoolRealArray( 1.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -640,8 +660,20 @@ tracks/15/keys = {
 "method": "speakToMe"
 } ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("CubeContainer:translation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 tracks/16/type = "value"
-tracks/16/path = NodePath("CubeContainer:translation")
+tracks/16/path = NodePath("CubeContainer:rotation_degrees")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -650,46 +682,46 @@ tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( -1.70754e-06, 0, 0 ) ]
 }
 tracks/17/type = "value"
-tracks/17/path = NodePath("CubeContainer:rotation_degrees")
+tracks/17/path = NodePath("CubeContainer:scale")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
-tracks/17/enabled = true
+tracks/17/enabled = false
 tracks/17/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -1.70754e-06, 0, 0 ) ]
-}
-tracks/18/type = "value"
-tracks/18/path = NodePath("CubeContainer:scale")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = false
-tracks/18/keys = {
 "times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 4, 4, 4 ), Vector3( 1, 1.5, 1 ) ]
 }
-tracks/19/type = "value"
-tracks/19/path = NodePath("CubeContainer:visible")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = false
-tracks/19/keys = {
+tracks/18/type = "value"
+tracks/18/path = NodePath("CubeContainer:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = false
+tracks/18/keys = {
 "times": PoolRealArray( 0, 2.4, 2.5, 2.7, 3, 3.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false, true, false ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/HowShiny")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
 tracks/20/type = "value"
-tracks/20/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/HowShiny")
+tracks/20/path = NodePath("CubeContainer/MeshInstance2:material_override:shader")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
@@ -697,11 +729,11 @@ tracks/20/enabled = true
 tracks/20/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 2.0 ]
+"update": 1,
+"values": [ SubResource( 78 ) ]
 }
 tracks/21/type = "value"
-tracks/21/path = NodePath("CubeContainer/MeshInstance2:material_override:shader")
+tracks/21/path = NodePath("CubeContainer/MeshInstance2:material_override")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/imported = false
@@ -710,10 +742,10 @@ tracks/21/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 78 ) ]
+"values": [ ExtResource( 9 ) ]
 }
 tracks/22/type = "value"
-tracks/22/path = NodePath("CubeContainer/MeshInstance2:material_override")
+tracks/22/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/texture_albedo")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
@@ -722,10 +754,10 @@ tracks/22/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 9 ) ]
+"values": [ ExtResource( 24 ) ]
 }
 tracks/23/type = "value"
-tracks/23/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/texture_albedo")
+tracks/23/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/should_use_vertex_color")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/imported = false
@@ -734,10 +766,10 @@ tracks/23/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 24 ) ]
+"values": [ false ]
 }
 tracks/24/type = "value"
-tracks/24/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/should_use_vertex_color")
+tracks/24/path = NodePath("CubeContainer/MeshInstance3:visible")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
@@ -746,7 +778,19 @@ tracks/24/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("CubeContainer/MeshInstance3:scale")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 2 ), Vector3( 4, 4, 4 ) ]
 }
 
 [sub_resource type="Animation" id=50]
@@ -857,7 +901,7 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ true ]
 }
 tracks/9/type = "value"
@@ -877,7 +921,7 @@ tracks/10/path = NodePath("CubeContainer/MeshInstance:scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
-tracks/10/enabled = false
+tracks/10/enabled = true
 tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -1114,14 +1158,6 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 23 )
 
-[sub_resource type="BoxShape" id=63]
-resource_local_to_scene = true
-extents = Vector3( 3, 3, 1.3 )
-
-[sub_resource type="BoxShape" id=59]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="ShaderMaterial" id=61]
 shader = ExtResource( 28 )
 shader_param/palettesize = 8
@@ -1134,7 +1170,7 @@ shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 27 )
 
 [node name="CubeCrystal" type="Spatial"]
-transform = Transform( 0.8, 0, 0, 0, 0.965926, -0.207055, 0, 0.258819, 0.772741, 0, 0, 0 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
 script = ExtResource( 11 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
@@ -1149,13 +1185,21 @@ mesh = SubResource( 79 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 
+[node name="MeshInstance3" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource( 80 )
+material/0 = SubResource( 48 )
+script = ExtResource( 12 )
+
 [node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
-transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0.241481, -0.0808809 )
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 material_override = ExtResource( 9 )
 mesh = ExtResource( 18 )
 
 [node name="InteractionArea" type="Area" parent="." groups=["corporeal_body"]]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.207055, 0, -0.323524, 0.965926, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1.01867, 0, 0, 0, 0.987869, 0, 0, 0 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
@@ -1167,7 +1211,6 @@ shape = SubResource( 39 )
 [node name="cubeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 volume_db = -10.0
-pitch_scale = 1.1
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
@@ -1180,17 +1223,18 @@ volume_db = -15.0
 
 [node name="GetHitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -10.0
+volume_db = -15.0
+pitch_scale = 2.0
 
 [node name="GetHitSound2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -30.0
-pitch_scale = 0.8
+stream = ExtResource( 14 )
+volume_db = -10.0
+pitch_scale = 1.5
 
-[node name="NotGetHitSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
-volume_db = -25.0
-pitch_scale = 0.9
+[node name="GetHitSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -10.0
+pitch_scale = 1.2
 
 [node name="PlusSpriteContainer" type="Spatial" parent="."]
 visible = false
@@ -1262,37 +1306,6 @@ script = ExtResource( 20 )
 minSize = 150
 maxSize = 250
 
-[node name="ConfirmNPC" parent="." instance=ExtResource( 19 )]
-bbText = "•offer 20 crystal shards
-•to purify the crystal?"
-can_activate = false
-is_a_body = false
-showYesNoOptions = true
-
-[node name="CollisionShape" parent="ConfirmNPC/SmallInteractionArea" index="0"]
-shape = SubResource( 63 )
-
-[node name="DialogStartSound" parent="ConfirmNPC/NPC TextBox/TextBox" index="13"]
-script = ExtResource( 29 )
-
-[node name="AbortSound" parent="ConfirmNPC/NPC TextBox/TextBox" index="16"]
-script = ExtResource( 25 )
-
-[node name="Sprite3D" parent="ConfirmNPC" index="3"]
-pixel_size = 0.0001
-
-[node name="FallthroughSolid" parent="ConfirmNPC" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, -5.96046e-08, 1, 0, -9.57629, -44.6741 )
-
-[node name="CollisionShape" parent="ConfirmNPC/FallthroughSolid" index="0"]
-shape = SubResource( 59 )
-
-[node name="InteractPrompt" parent="ConfirmNPC" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, -2.98023e-08, 1, -0.03, 3.93185, -1.64705 )
-
-[node name="TextBoxCameraTarget" parent="ConfirmNPC" index="8"]
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.0681484, 0.647047 )
-
 [node name="GlitchAura" parent="." instance=ExtResource( 26 )]
 visible = false
 target_path = NodePath("..")
@@ -1301,6 +1314,4 @@ target_path = NodePath("..")
 visible = false
 material = SubResource( 61 )
 
-[editable path="ConfirmNPC"]
-[editable path="ConfirmNPC/NPC TextBox"]
 [editable path="GlitchAura"]

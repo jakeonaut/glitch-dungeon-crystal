@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -135,6 +135,50 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 64.0 ]
+}
+
+[sub_resource type="Animation" id=60]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
 }
 
 [sub_resource type="DynamicFont" id=3]
@@ -826,7 +870,138 @@ anims/endCutscene = SubResource( 33 )
 anims/startCutscene = SubResource( 34 )
 anims/startCutsceneImmediate = SubResource( 35 )
 
+[node name="BroomUpgradeMenu" type="Control" parent="."]
+visible = false
+margin_top = 12.0
+margin_right = 640.0
+margin_bottom = 522.0
+
+[node name="UpgradeMenuRect" type="ColorRect" parent="BroomUpgradeMenu"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 574.0
+margin_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.843137 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 570.0
+margin_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.447059, 0.454902, 0.454902, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 562.0
+margin_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 7
+
+[node name="ColorRect2" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect/ColorRect"]
+margin_right = 558.0
+margin_bottom = 427.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
+
+[node name="MenuTitle" type="ColorRect" parent="BroomUpgradeMenu"]
+margin_left = 222.5
+margin_top = 12.0
+margin_right = 428.5
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu/MenuTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "broom shop"
+text = "broom shop"
+scroll_active = false
+
+[node name="LeftSprite" type="Sprite" parent="BroomUpgradeMenu"]
+position = Vector2( 239.5, 94.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BroomUpgradeMenu/LeftSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 60 )
+anims/idle = SubResource( 61 )
+
+[node name="LeftTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu"]
+margin_left = 279.0
+margin_top = 90.0
+margin_right = 425.0
+margin_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "left
+"
+text = "left
+"
+scroll_active = false
+
+[node name="MenuMoveSound" type="AudioStreamPlayer" parent="BroomUpgradeMenu"]
+stream = ExtResource( 28 )
+volume_db = -15.0
+pitch_scale = 0.9
+
 [node name="TextBoxes" type="Control" parent="."]
+rect_pivot_offset = Vector2( -210.5, -92.5 )
 
 [node name="Filters" type="Control" parent="."]
 margin_right = 40.0

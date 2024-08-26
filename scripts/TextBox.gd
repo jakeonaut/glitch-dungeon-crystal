@@ -7,6 +7,8 @@ onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
 onready var abortSound = get_node("AbortSound")
+onready var broomSelectSound = get_node("BroomSelectSound")
+onready var broomConfirmSound = get_node("BroomConfirmSound")
 export(NodePath) var nextTextBoxPath = NodePath("")
 
 var text_timer = 0
@@ -164,8 +166,10 @@ func _process(delta):
     if isWaitingForEndPrompt():
       if showYesNoOptions and not is_interact_prompt:
         if Input.is_action_just_pressed("ui_left"):
+          if not selectedYesNoOption: broomSelectSound.play()
           selectedYesNoOption = true
         elif Input.is_action_just_pressed("ui_right"):
+          if selectedYesNoOption: broomSelectSound.play()
           selectedYesNoOption = false
         yesButton.visible = true
         noButton.visible = true
@@ -361,7 +365,11 @@ func hideTextbox():
   self.hide()
   if textboxParent.get_ref():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
-  abortSound.play()
+  if showYesNoOptions and selectedYesNoOption:
+    broomConfirmSound.play()
+  else:
+    abortSound.play()
+  
   if abortSound.has_method("preActivateScript") and not has_preactivated:
     abortSound.preActivateScript()
     has_preactivated = true

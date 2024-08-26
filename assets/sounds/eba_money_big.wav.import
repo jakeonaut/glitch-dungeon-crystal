@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/eba_money_big.wav-8aadde42af4f1e2adc2f330514e6453c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/eba_money_big.wav"
+dest_files=[ "res://.import/eba_money_big.wav-8aadde42af4f1e2adc2f330514e6453c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

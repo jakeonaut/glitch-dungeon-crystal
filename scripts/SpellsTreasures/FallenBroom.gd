@@ -77,6 +77,7 @@ func _process(delta):
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
             level.player.global_transform.origin = global_transform.origin
             level.player.global_transform.origin.y -= 1
+            level.player.target_last_grounded_y = level.player.global_transform.origin.y
             level.player.gravitySound.play()
             level.player.linear_velocity = self.linear_velocity
             level.player.lv = self.lv

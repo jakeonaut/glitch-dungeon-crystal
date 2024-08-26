@@ -227,7 +227,7 @@ func _ready():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 2
+    memory["broomerang"] = 0
     memory["multi_broom"] = false
     memory["debug_broom"] = 0 # this didn't turn out that fun
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?

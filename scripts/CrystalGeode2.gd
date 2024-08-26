@@ -9,7 +9,7 @@ onready var npc = get_node("NPC")
 onready var npcSprite = get_node("NPC/Sprite3D")
 onready var getHitSound = get_node("GetHitSound")
 onready var getHitSound2 = get_node("GetHitSound2")
-onready var notGetHitSound = get_node("NotGetHitSound")
+onready var getHitSound3 = get_node("GetHitSound3")
 onready var directionalLight = get_node("DirectionalLight")
 onready var collisionShape1 = get_node("InteractionArea/CollisionShape")
 onready var collisionShape2 = get_node("InteractionArea/CollisionShape2")
@@ -19,11 +19,14 @@ export(String, FILE) var path # unused atm
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var quietSavePoint = get_node("../QuietSavePoint") if has_node("../QuietSavePoint") else null
+onready var meshInstance1 = get_node("CubeContainer/MeshInstance")
+onready var meshInstance3 = get_node("CubeContainer/MeshInstance3")
+
+onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 
 export var num_gems_needed = 20
 export var high_priestess_crystal = false
 
-onready var confirmNPC = get_node("ConfirmNPC")
 
 var levelTiles = null
 func getLevelTiles():
@@ -34,7 +37,6 @@ func getLevelTiles():
 func _ready():
     set_process(true)
 
-    var meshInstance2 = get_node("CubeContainer/MeshInstance2")
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
@@ -58,11 +60,12 @@ var cube_rotation = 66
 var sams_weird_timeout_timer = 0
 var sams_weird_timeout_time_limit = 120
 var spawn_pos = null
+var pre_purification_rotate_amt = 1
 func _process(delta):
     if is_purified:
         cubeContainer.rotation_degrees.y += delta*22
     else: 
-        cubeContainer.rotation_degrees.y -= delta*22
+        cubeContainer.rotation_degrees.y -= delta*22 * pre_purification_rotate_amt
     # if is_purified:
     #     # musicPlayer.changeSongPitch(1.0)
     # else:
@@ -77,6 +80,12 @@ func _process(delta):
         rot_amount *= 2
     npc.rotation_degrees.y -= (delta * rot_amount)
 
+    if is_smacked:
+        smack_timer += (delta*11)
+        if smack_timer >= smack_time_limit:
+            smack_timer = 0
+            is_smacked = false
+
 func stopAnimation():
     can_do_my_power = false
     global.hasLevelGeodeBeenSmacked = false
@@ -86,14 +95,41 @@ func stopAnimation():
     # level.restartMusic()
     # level.gameCamera.am_i_zooming = false
 
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 3
 func getSmacked(_broom_origin):
-    if not global.memory["broom"]:
-        if not notGetHitSound.is_playing(): notGetHitSound.play()
+    if is_smacked:
         return
-    confirmNPC.activate(true)
+    is_smacked = true
+    smack_timer = 0
+
+    if is_purified:
+        getHitSound.play()
+        level.player.glitch_death_timer = 8
+        level.player.glitchTickle()
+        level.glitchScreenEffect.visible = true
+    else:
+        if not meshInstance1.visible:
+            meshInstance1.visible = true
+            pre_purification_rotate_amt = -2
+            level.player.glitch_death_timer = 8
+            getHitSound.play()
+        elif not meshInstance3.visible:
+            meshInstance3.visible = true
+            pre_purification_rotate_amt = 3
+            level.player.glitch_death_timer = 5
+            getHitSound2.play()
+        else:
+            getPurified()
+            level.player.glitch_death_timer = 1
+            getHitSound3.play()
+        level.player.glitchTickle()
+        level.glitchScreenEffect.visible = true
+    
 
 func isActive(_debug=false):
-    return visible and not is_purified
+    return visible
 
 func speakToMe():
     if high_priestess_crystal:
@@ -116,14 +152,11 @@ func getPurified():
     global.setStaticLevelZoneLevelVar(level, self, true)
     lightAniPlayer.play("lightUp")
     lightAniPlayer.queue("omen")
-    level.player.glitchTickle()
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
     level.player.pauseAnimation = false
     level.player.pauseSelf = false
     global.pauseMoveInput = true
     global.pauseGame = true
-    level.player.glitch_death_timer = 1
-    level.glitchScreenEffect.visible = true
     # level.levelTiles.randomize_num += 10
     # level.levelTiles.randomize_num_counter = 15
     is_purified = true
@@ -131,8 +164,6 @@ func getPurified():
     # level.player.pauseSelf = true
     # musicPlayer.stopAll()
     # musicPlayer.changeSongPitch(1.0)
-    # getHitSound.play()
-    # getHitSound2.play()
 
     # if level.has_node("SavePoint"):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
