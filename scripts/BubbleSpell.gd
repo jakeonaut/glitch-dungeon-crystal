@@ -5,6 +5,8 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var appearSound = get_node("AppearSound")
 onready var popSound1 = get_node("PopSound")
 onready var popSound2 = get_node("PopSound2")
+onready var purifyArea = get_node("PurifyArea")
+onready var purifyShape = get_node("PurifyArea/CollisionShape")
 var my_original_pos = null
 var my_target_pos = null
 var opacity = 0.5
@@ -83,6 +85,9 @@ func _process(delta):
     if not mySprite.visible:
       queue_free()
   else:
+    if can_purify:
+      hitStuff(delta)
+      
     pop_timer += (delta*22)
     if pop_timer >= pop_time_limit:
       bubbleStartPop()
@@ -133,7 +138,9 @@ func passiveActivate(_delta, is_player):
   bubbleStartPop()
   if not is_player and not global.memory["broom"]:
     return
-    
+
+  if getPlayer().transformation == getPlayer().TransformationState.FISHY:
+    return  
   if getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground:
     getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
     getPlayer().was_just_on_ground_timer = -8
@@ -223,3 +230,38 @@ func tryDieToOffscreenCamera():
 func setAsParent(parent):
   mySprite.changeSpriteColorPaletteToLevelPalette()
   my_parent = parent
+
+# dedupe with FallenBroom and SummonedBroom
+var smacked_npc = null
+func hitStuff(_delta):
+  if not visible or didja_get_me: return
+  
+  var all_overlapping_areas = purifyArea.get_overlapping_areas()
+  var non_bubble_areas = []
+  for area in all_overlapping_areas:
+    if not area.is_in_group("bubble_purify") and not area.is_in_group("bubble_body"):
+      non_bubble_areas.push_back(area)
+  smacked_npc = global.broomSmackStuff(non_bubble_areas, not didja_get_me, global_transform, level.player, level, smacked_npc)
+
+  # erase glitch tiles...
+  trySweepUpGlitchTiles(purifyShape)
+
+func trySweepUpGlitchTiles(collisionShape):
+  if not collisionShape.visible or didja_get_me:
+    return
+
+  var x = collisionShape.global_transform.origin.x
+  var y = collisionShape.global_transform.origin.y
+  var tb = y + collisionShape.shape.extents.y/2*collisionShape.scale.y + 0.25
+  var bb = y - collisionShape.shape.extents.y/2*collisionShape.scale.y - 0.25
+  var lb = x - collisionShape.shape.extents.x/2*collisionShape.scale.x - 0.25
+  var rb = x + collisionShape.shape.extents.x/2*collisionShape.scale.x + 0.25
+  
+  var _has_played_sound = false
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileSpikes(tile_type):
+        getLevelTiles().infectSpikes(coords)
+        level.player.has_sweeped_glitch = true

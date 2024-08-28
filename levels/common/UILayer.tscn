@@ -137,6 +137,46 @@ tracks/1/keys = {
 "values": [ 64.0 ]
 }
 
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 5
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 8
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=24]
+default_font = SubResource( 23 )
+
+[sub_resource type="DynamicFont" id=26]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=27]
+default_font = SubResource( 26 )
+
+[sub_resource type="DynamicFont" id=12]
+outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=13]
+default_font = SubResource( 12 )
+
 [sub_resource type="Animation" id=60]
 length = 0.001
 tracks/0/type = "value"
@@ -180,46 +220,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 2, 3 ]
 }
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
-outline_size = 5
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_top = 8
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
-
-[sub_resource type="DynamicFont" id=23]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=24]
-default_font = SubResource( 23 )
-
-[sub_resource type="DynamicFont" id=26]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=27]
-default_font = SubResource( 26 )
-
-[sub_resource type="DynamicFont" id=12]
-outline_color = Color( 0.180392, 0.0470588, 0.431373, 1 )
-use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 16 )
-
-[sub_resource type="Theme" id=13]
-default_font = SubResource( 12 )
 
 [sub_resource type="Animation" id=37]
 length = 0.001
@@ -870,284 +870,6 @@ anims/endCutscene = SubResource( 33 )
 anims/startCutscene = SubResource( 34 )
 anims/startCutsceneImmediate = SubResource( 35 )
 
-[node name="BroomUpgradeMenu" type="Control" parent="."]
-visible = false
-margin_top = 12.0
-margin_right = 640.0
-margin_bottom = 522.0
-
-[node name="UpgradeMenuRect" type="ColorRect" parent="BroomUpgradeMenu"]
-margin_left = 88.0
-margin_top = 36.0
-margin_right = 574.0
-margin_bottom = 419.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.843137 )
-
-[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect"]
-visible = false
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 570.0
-margin_bottom = 439.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.447059, 0.454902, 0.454902, 1 )
-
-[node name="ColorRect" type="TextureRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect"]
-visible = false
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 562.0
-margin_bottom = 431.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource( 20 )
-expand = true
-stretch_mode = 7
-
-[node name="ColorRect2" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect/ColorRect"]
-margin_right = 558.0
-margin_bottom = 427.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
-
-[node name="MenuTitle" type="ColorRect" parent="BroomUpgradeMenu"]
-margin_left = 222.5
-margin_top = 12.0
-margin_right = 428.5
-margin_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 202.0
-margin_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 193.0
-margin_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu/MenuTitle/ColorRect/ColorRect"]
-margin_left = 24.0
-margin_top = 8.0
-margin_right = 173.0
-margin_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "broom shop"
-text = "broom shop"
-scroll_active = false
-
-[node name="LeftSprite" type="Sprite" parent="BroomUpgradeMenu"]
-position = Vector2( 239.5, 94.5 )
-scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 24 )
-flip_h = true
-hframes = 8
-vframes = 8
-frame = 2
-__meta__ = {
-"_editor_description_": "3	"
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BroomUpgradeMenu/LeftSprite"]
-autoplay = "RESET"
-anims/RESET = SubResource( 60 )
-anims/idle = SubResource( 61 )
-
-[node name="LeftTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu"]
-margin_left = 279.0
-margin_top = 90.0
-margin_right = 425.0
-margin_bottom = 116.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "left
-"
-text = "left
-"
-scroll_active = false
-
-[node name="MenuMoveSound" type="AudioStreamPlayer" parent="BroomUpgradeMenu"]
-stream = ExtResource( 28 )
-volume_db = -15.0
-pitch_scale = 0.9
-
-[node name="TextBoxes" type="Control" parent="."]
-rect_pivot_offset = Vector2( -210.5, -92.5 )
-
-[node name="Filters" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Inventory" type="Control" parent="."]
-visible = false
-margin_right = 640.0
-margin_bottom = 510.0
-
-[node name="InventoryContent" type="ColorRect" parent="Inventory"]
-margin_left = 111.0
-margin_top = 104.0
-margin_right = 533.0
-margin_bottom = 400.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 416.0
-margin_bottom = 290.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 409.0
-margin_bottom = 282.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="SelectorBotRight2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 66, 55.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 220
-
-[node name="Pet1" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 32.5, 31.5 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 10 )
-hframes = 6
-vframes = 5
-frame = 3
-
-[node name="Pet2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-position = Vector2( 89.5001, 31.5 )
-scale = Vector2( 5, 5 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 304
-
-[node name="Control" type="Control" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="SelectorTopLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
-position = Vector2( 9, 8 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 188
-
-[node name="SelectorTopRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
-position = Vector2( 56, 8 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 190
-
-[node name="SelectorBotLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
-position = Vector2( 9, 55.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 220
-
-[node name="SelectorBotRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
-position = Vector2( 56, 55.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 17 )
-hframes = 16
-vframes = 23
-frame = 222
-
-[node name="InventoryTitle" type="ColorRect" parent="Inventory"]
-margin_left = 218.5
-margin_top = 70.5
-margin_right = 424.5
-margin_bottom = 122.5
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 202.0
-margin_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 193.0
-margin_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Inventory/InventoryTitle/ColorRect/ColorRect"]
-margin_left = 24.0
-margin_top = 8.0
-margin_right = 173.0
-margin_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "inventory"
-text = "inventory"
-scroll_active = false
-
 [node name="HeartsRect" type="ColorRect" parent="."]
 visible = false
 margin_left = 76.0
@@ -1437,6 +1159,326 @@ margin_bottom = 137.0
 theme = SubResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "L.1"
+
+[node name="BroomUpgradeMenu" type="Control" parent="."]
+visible = false
+margin_top = 12.0
+margin_right = 640.0
+margin_bottom = 522.0
+
+[node name="UpgradeMenuRect" type="ColorRect" parent="BroomUpgradeMenu"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 574.0
+margin_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.843137 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 570.0
+margin_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.447059, 0.454902, 0.454902, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 562.0
+margin_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 7
+
+[node name="ColorRect2" type="ColorRect" parent="BroomUpgradeMenu/UpgradeMenuRect/ColorRect/ColorRect"]
+margin_right = 558.0
+margin_bottom = 427.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
+
+[node name="MenuTitle" type="ColorRect" parent="BroomUpgradeMenu"]
+margin_left = 222.5
+margin_top = 12.0
+margin_right = 428.5
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="BroomUpgradeMenu/MenuTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu/MenuTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "broom shop"
+text = "broom shop"
+scroll_active = false
+
+[node name="LeftSprite" type="Sprite" parent="BroomUpgradeMenu"]
+position = Vector2( 239.5, 94.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 24 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BroomUpgradeMenu/LeftSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 60 )
+anims/idle = SubResource( 61 )
+
+[node name="LeftTextLabel" type="RichTextLabel" parent="BroomUpgradeMenu"]
+margin_left = 279.0
+margin_top = 90.0
+margin_right = 425.0
+margin_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "left
+"
+text = "left
+"
+scroll_active = false
+
+[node name="MenuMoveSound" type="AudioStreamPlayer" parent="BroomUpgradeMenu"]
+stream = ExtResource( 28 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="SavingTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 11.0
+margin_top = 463.0
+margin_right = 276.0
+margin_bottom = 503.0
+rect_clip_content = false
+theme = ExtResource( 5 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave] saving... (not really)[/wave]"
+text = " saving... (not really)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 510.0
+margin_top = 75.0
+margin_right = 632.0
+margin_bottom = 153.0
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave] got key![/wave]"
+text = " got key!"
+
+[node name="SpellMessageTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 9.5
+margin_top = 73.5
+margin_right = 182.5
+margin_bottom = 151.5
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave] feather fall[/wave]"
+text = " feather fall"
+
+[node name="TextBoxes" type="Control" parent="."]
+rect_pivot_offset = Vector2( -210.5, -92.5 )
+
+[node name="Filters" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Inventory" type="Control" parent="."]
+visible = false
+margin_right = 640.0
+margin_bottom = 510.0
+
+[node name="InventoryContent" type="ColorRect" parent="Inventory"]
+margin_left = 111.0
+margin_top = 104.0
+margin_right = 533.0
+margin_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 416.0
+margin_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryContent/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 409.0
+margin_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="SelectorBotRight2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 66, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 220
+
+[node name="Pet1" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 32.5, 31.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+hframes = 6
+vframes = 5
+frame = 3
+
+[node name="Pet2" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+position = Vector2( 89.5001, 31.5 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 304
+
+[node name="Control" type="Control" parent="Inventory/InventoryContent/ColorRect/ColorRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SelectorTopLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 9, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 188
+
+[node name="SelectorTopRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 56, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 190
+
+[node name="SelectorBotLeft" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 9, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 220
+
+[node name="SelectorBotRight" type="Sprite" parent="Inventory/InventoryContent/ColorRect/ColorRect/Control"]
+position = Vector2( 56, 55.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 17 )
+hframes = 16
+vframes = 23
+frame = 222
+
+[node name="InventoryTitle" type="ColorRect" parent="Inventory"]
+margin_left = 218.5
+margin_top = 70.5
+margin_right = 424.5
+margin_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/InventoryTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inventory/InventoryTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "inventory"
+text = "inventory"
+scroll_active = false
 
 [node name="StatsTitle" type="ColorRect" parent="."]
 visible = false
@@ -2197,45 +2239,3 @@ bbcode_enabled = true
 bbcode_text = "the dungeon"
 text = "the dungeon"
 scroll_active = false
-
-[node name="SavingTextLabel" type="RichTextLabel" parent="."]
-visible = false
-margin_left = 11.0
-margin_top = 463.0
-margin_right = 276.0
-margin_bottom = 503.0
-rect_clip_content = false
-theme = ExtResource( 5 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[wave] saving... (not really)[/wave]"
-text = " saving... (not really)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MessageTextLabel" type="RichTextLabel" parent="."]
-visible = false
-margin_left = 510.0
-margin_top = 75.0
-margin_right = 632.0
-margin_bottom = 153.0
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[wave] got key![/wave]"
-text = " got key!"
-
-[node name="SpellMessageTextLabel" type="RichTextLabel" parent="."]
-visible = false
-margin_left = 9.5
-margin_top = 73.5
-margin_right = 182.5
-margin_bottom = 151.5
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[wave] feather fall[/wave]"
-text = " feather fall"

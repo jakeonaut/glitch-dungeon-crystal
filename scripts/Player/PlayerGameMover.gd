@@ -250,7 +250,7 @@ func changeSpriteColorPalette(palette):
     return
 
   mySprite.material_override.set_shader_param("target_palette", palette)
-  broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
+  # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
 func bodyPushMe(_delta, _origin):
   pass # no more
@@ -279,9 +279,11 @@ func playLandSound():
   else:
     .playLandSound()
 
+var can_broomerang_warp = true
 # @override
 func landed():
   .landed()
+  can_broomerang_warp = true
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
   has_mushroom_double_jumped = false

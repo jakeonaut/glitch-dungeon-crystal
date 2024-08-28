@@ -282,7 +282,6 @@ func sayThis(message, _time_to_clear = 3.0):
   textBox.text_final = message
   textBox.interact()
   global.activeInteractor = textBox
-  print(global.activeInteractor)
   # yield(get_tree().create_timer(time_to_clear), "timeout")
   # textBox.hideTextbox()
 
@@ -767,7 +766,9 @@ func loseBroom():
 var fish_broom_timer = 0
 var fish_broom_time_limit = 2
 var has_fish_broom = true
-func processFishyLogic(_delta):
+var bubble_timer = 0
+var bubble_time_limit = 2
+func processFishyLogic(delta):
   if not global.memory["zora_flippers"]:
     return
 
@@ -782,24 +783,34 @@ func processFishyLogic(_delta):
     if (not is_touching_water and not was_touching_water):
       getFishyCured()
       gravitySound.play()
-    if Input.is_action_just_pressed("sub_action_button") and has_fish_broom:
-      var bubble = bubbleRes.instance()
-      bubble.is_horizontal = true
-      bubble.horizontal_direction = 2
-      bubble.can_purify = true
-      if mySprite.flip_h:
-        bubble.horizontal_direction = -2
-      bubble.is_dark = true
-      level.add_child(bubble)
-      # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-      bubble.setAsParent(self)
-      bubble.global_transform.origin = global_transform.origin
-      bubble.global_transform.origin.x += bubble.horizontal_direction
-      bubble.my_original_pos = bubble.global_transform.origin.y
-      bubble.randomizeTargetPos()
+    if Input.is_action_pressed("sub_action_button") and has_fish_broom:
+      bubble_timer += (delta*11)
+      if bubble_timer >= bubble_time_limit:
+        var bubble = bubbleRes.instance()
+        bubble.is_horizontal = true
+        bubble.horizontal_direction = 2
+        bubble.can_purify = true
+        if mySprite.flip_h:
+          bubble.horizontal_direction = -2
+        bubble.is_dark = true
+        level.add_child(bubble)
+        # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+        bubble.setAsParent(self)
+        bubble.global_transform.origin = global_transform.origin
+        bubble.global_transform.origin.x += bubble.horizontal_direction
+        bubble.my_original_pos = bubble.global_transform.origin.y
+        bubble.randomizeTargetPos()
 
-      blinkSound.pitch_scale = rand_range(0.8, 1.2)
-      blinkSound.play()
+        blinkSound.pitch_scale = rand_range(0.8, 1.2)
+        blinkSound.play()
+        bubble_timer = 0
+    else:
+      bubble_timer = 0
+  elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    aniPlayer.play("revertFromFishy")
+    aniPlayer.queue("land")
 
 
   # weird recovery
@@ -908,6 +919,7 @@ func restartMusic():
 func getFishyCured():
   if transformation != TransformationState.FISHY:
     return
+  can_broomerang_warp = true
   transformation = TransformationState.NORMAL
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1589,6 +1601,10 @@ func processBroomRenderLogic(_delta):
   broomSpriteVisible.scale = broomSpriteAnimated.scale
   secretSweepActualCollisionShape.translation = secretSweepCollisionShape.translation
   broomSpriteVisible.flip_h = false
+  if not can_broomerang_warp:
+    broomSpriteVisible.material_override.set_shader_param("target_palette", global.black_player_palette)
+  else:
+    broomSpriteVisible.material_override.set_shader_param("target_palette", global.player_red_palette)
   if mySprite.flip_h:
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1

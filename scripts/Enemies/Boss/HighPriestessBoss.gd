@@ -124,7 +124,7 @@ func yaBeatMe():
     secretAniPlayer.queue("defeatedIdle")
     boss_phase = BossPhase.DEFEATED
     global.memory["priestess"] = 2
-    yield(get_tree().create_timer(1.0), "timeout")
+    yield(get_tree().create_timer(2.0), "timeout")
     level.triggerCroneDefeatedDialog()
     var npcPlatforms = level.npcPlatformContainer.get_children()
     for i in range(len(npcPlatforms)):
@@ -252,7 +252,6 @@ func _process(delta):
                 if num_spawns >= num_spawn_limit or level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
                     if level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
                         killTheBullets()
-                    spawnWeakEye()
                     num_spawns = 0
                     big_spawn_timer = 0
                     has_animated_attack = false
@@ -262,6 +261,8 @@ func _process(delta):
                     fallenAngelSpawnPointArray.shuffle()
 
                     can_spawn_save_points = true
+                    yield(get_tree().create_timer(1.0), "timeout")
+                    spawnWeakEye()
         else:
             spawn_timer = -spawn_time_limit
     elif boss_phase == BossPhase.IDLE:

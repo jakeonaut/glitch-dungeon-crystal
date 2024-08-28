@@ -26,7 +26,8 @@ func activateScript():
     which_one = 3
   elif which_one == 3:
     NPC.is_active = false
-    # yield(get_tree().create_timer(1.0), "timeout")
+    NPC.mySprite.updateBaseFrame(6, 7)
+    yield(get_tree().create_timer(1.0), "timeout")
     level.summonSmokeClouds(NPC.global_transform.origin, 5, true, true)
     NPC.visible = false
     which_one = 3

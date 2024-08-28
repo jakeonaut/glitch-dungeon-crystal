@@ -11,7 +11,7 @@ onready var crystalGeode3 = get_node("CubeCrystal3")
 onready var crystalGeode4 = get_node("CubeCrystal4")
 onready var crystalGeode5 = get_node("CubeCrystal5")
 onready var aniPlayer = get_node("AnimationPlayer")
-onready var door2 = get_node("Door2")
+onready var door = get_node("Door")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
@@ -36,6 +36,10 @@ func setUpRoomInitializationOverride():
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
     highPriestessBoss.mySprite.visible = false
+
+  yield(get_tree().create_timer(0.5), "timeout")
+  summonSmokeClouds(door.global_transform.origin, 3, true, true)
+  door.queue_free()
 
 # @override
 func playMenuMusic():
@@ -112,18 +116,22 @@ func enterMemoryZone():
   is_really_defeated = true
   aniPlayer.play("glitchTransitionEnd")
   aniPlayer.queue("croneTwitch")
-  player.glitch_death_timer = 1
-  player.glitchTickle()
-  player.grav = 28
-  glitchScreenEffect.visible = true
+  glitchTickle(1)
   # generateEyeTiles()
+  player.grav = 28
   player.pauseSelf = false
   player.nullify()
   global.shouldRenderAsCinematic = false
   croneNPC.grav = 20
   croneNPC.mySprite.updateBaseFrame(6, 7)
   croneNPC.is_active = true
-  # transition.really_really_long_fade_to(door2.path)
+
+func glitchTickle(glitch_death_timer):
+  if glitch_death_timer > 1:
+    return # lol
+  player.glitch_death_timer = glitch_death_timer
+  player.glitchTickle()
+  glitchScreenEffect.visible = true
 
 func unhideHighPriestess():
   highPriestessBoss.visible = true

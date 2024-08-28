@@ -139,7 +139,6 @@ func processGlitchFormTeleportation():
       elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
         glitch_form = glitch_form_before_nullification
       updateColor()
-      print("debug: " + str(last_on_ground))
       on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
   else:
     has_swapped = false

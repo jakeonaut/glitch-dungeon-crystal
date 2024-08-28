@@ -130,12 +130,12 @@ tracks/0/keys = {
 [node name="BubbleSpell" type="Spatial"]
 script = ExtResource( 8 )
 
-[node name="PurifyArea" type="Area" parent="."]
+[node name="PurifyArea" type="Area" parent="." groups=["bubble_purify"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="PurifyArea"]
 shape = SubResource( 16 )
 
-[node name="SmallInteractionArea" type="Area" parent="."]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["bubble_body"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

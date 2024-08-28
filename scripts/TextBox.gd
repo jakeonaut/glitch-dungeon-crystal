@@ -109,7 +109,7 @@ func untinify():
   get_node("ColorRect").visible = true
   setTextBoxPosition()
 
-func setPosition():
+func setTinyPosition():
   var factor = 0.5
 
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
@@ -122,10 +122,16 @@ func setPosition():
 
 func setTextBoxPosition():
   if not is_tiny:
+    self.rect_position.x = 95
+    self.rect_position.y = 388
     self.margin_top = top_margin_start
     self.margin_left = left_margin_start
     self.margin_bottom = bot_margin_start
     self.margin_right = right_margin_start
+    
+    var player_camera_pos = getGameCamera().unproject_position(level.player.global_transform.origin)
+    if player_camera_pos.y > 600:
+      self.rect_position.y = 80
 
 func _process(delta):
   if global.activeInteractor == self and not self.visible:
@@ -156,7 +162,7 @@ func _process(delta):
       wigglePrompt(delta, nextPrompt)
 
   if is_tiny:
-    setPosition()
+    setTinyPosition()
 
   # TODO(jaketrower): This logic could probably be simplified with a FSM, or at least broken into functions
   if visible:
@@ -295,7 +301,7 @@ func showInteractPrompt():
   resetTinyColorRect()
   adjusted_tiny_x_pos = -25
   adjusted_tiny_y_pos = 10
-  setPosition()
+  setTinyPosition()
 
 func hideInteractPrompt():
   if is_interact_prompt:

@@ -14,6 +14,7 @@ var returning = false
 var returning_timer = 0
 var returning_time_limit = 5
 onready var collisionShape = get_node("Area/CollisionShape")
+onready var mySpriteReal = get_node("Sprite3DReal")
 var smacked_npc = null
 var should_die_on_land = false
 var is_dying = false
@@ -48,6 +49,11 @@ func _process(delta):
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
         queue_free()
 
+    if not level.player.can_broomerang_warp:
+        mySpriteReal.material_override.set_shader_param("target_palette", global.black_player_palette)
+    else:
+        mySpriteReal.material_override.set_shader_param("target_palette", global.player_red_palette)
+
     if returning:
         if not should_return:
             die()
@@ -75,18 +81,22 @@ func _process(delta):
         return
     elif projectile:
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
-            level.player.global_transform.origin = global_transform.origin
-            level.player.global_transform.origin.y -= 1
-            level.player.target_last_grounded_y = level.player.global_transform.origin.y
-            level.player.gravitySound.play()
-            level.player.linear_velocity = self.linear_velocity
-            level.player.lv = self.lv
-            level.player.vv = self.vv
-            level.player.hv = self.hv
-            level.player.tryClearFallthroughCollisionSolid()
-            abortSound.activateScript()
-            if returning and global.activeInteractor and global.activeInteractor.is_important:
-                global.pauseGame = true
+            if not level.player.can_broomerang_warp:
+                level.player.errorSound.play()
+            else:
+                level.player.global_transform.origin = global_transform.origin
+                level.player.global_transform.origin.y -= 1
+                level.player.target_last_grounded_y = level.player.global_transform.origin.y
+                level.player.gravitySound.play()
+                level.player.linear_velocity = self.linear_velocity
+                level.player.lv = self.lv
+                level.player.vv = self.vv
+                level.player.hv = self.hv
+                level.player.tryClearFallthroughCollisionSolid()
+                abortSound.activateScript()
+                level.player.can_broomerang_warp = level.player.on_ground
+        if returning and global.activeInteractor and global.activeInteractor.is_important:
+            global.pauseGame = true
     can_warp = true
 
     if vv > 0 and not projectile:

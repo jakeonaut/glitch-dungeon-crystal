@@ -37,6 +37,10 @@ func _process(delta):
     
   if global.memory["debug_broom"] > 0:
     mySprite.material_override.set_shader_param("enable_glitch", true)
+  if not level.player.can_broomerang_warp:
+      mySprite.material_override.set_shader_param("target_palette", global.black_player_palette)
+  else:
+      mySprite.material_override.set_shader_param("target_palette", global.player_red_palette)
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0

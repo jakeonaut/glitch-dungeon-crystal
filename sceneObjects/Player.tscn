@@ -6070,7 +6070,7 @@ texture = ExtResource( 31 )
 hframes = 8
 vframes = 8
 
-[node name="Sprite3DBroomVisible" type="Sprite3D" parent="SpriteContainer" groups=["sprite"]]
+[node name="Sprite3DBroomVisible" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0, 0.6 )
 material_override = SubResource( 50 )
 pixel_size = 0.125

@@ -210,9 +210,6 @@ frame = 3
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, -2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 54 )
 
