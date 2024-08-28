@@ -1210,9 +1210,13 @@ shape = SubResource( 71 )
 [node name="FrogCroneNPC" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3649, 10.1759, 0 )
 grav = 0
-bbText = "•you seem to have
+bbText = "•a crystal purified?
+interesting..
+•you seem to have
 some [color=red]hag magic[/color]... I can 
-enchant your broom with gems"
+enchant your broom with gems
+•to help you on your quest
+"
 showYesNoOptions = true
 
 [node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/SmallInteractionArea" index="0"]

@@ -39,6 +39,7 @@ func _process(_delta):
       global.shouldRenderAsCinematic = false
       yield(get_tree().create_timer(2.0), "timeout")
       showInstructions = true
+      print("true 1")
     elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
       is_start_of_game = false
       global.pauseMoveInput = false
@@ -46,6 +47,7 @@ func _process(_delta):
       player.textBox.interact()
       global.activeInteractor = player.textBox
       showInstructions = false
+      print("false 2")
   
   if showInstructions:
     uiLayer.get_node("PressC").visible = global.activeInteractor == null and player.physics_state != player.PhysicsState.WAKING_UP

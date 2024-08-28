@@ -83,6 +83,7 @@ func _process(delta):
             level.player.lv = self.lv
             level.player.vv = self.vv
             level.player.hv = self.hv
+            level.player.tryClearFallthroughCollisionSolid()
             abortSound.activateScript()
             if returning and global.activeInteractor and global.activeInteractor.is_important:
                 global.pauseGame = true

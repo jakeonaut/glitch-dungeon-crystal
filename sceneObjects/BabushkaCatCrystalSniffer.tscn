@@ -132,7 +132,9 @@ shader_param/target_palette = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9649, 0.0413837, 0 )
 script = ExtResource( 3 )
 bbText = "*meow*
-(there's still an unpurified 
+•(for some weird reason,
+you can hear me?)
+•(i smell an unpurified 
 [color=red]CRYSTAL[/color] in this area)"
 dont_recolor_me = true
 
@@ -149,7 +151,7 @@ shape = SubResource( 14 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 12 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
 script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

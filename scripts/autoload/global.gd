@@ -213,7 +213,7 @@ func _ready():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
     memory["angel_flute"] = false
-    memory["has_seen_highpriestess"] = false
+    memory["priestess"] = 0
 
     # PERMANENT SPELLS
     
@@ -234,8 +234,8 @@ func _ready():
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
+    memory["zora_flippers"] = 1
+    memory["mole_cricket"] = 1
 
     # GAME MODES
     memory["random_entrances"] = 0

@@ -123,7 +123,7 @@ func yaBeatMe():
     secretAniPlayer.queue("defeatedStart")
     secretAniPlayer.queue("defeatedIdle")
     boss_phase = BossPhase.DEFEATED
-    level.levelTiles.randomize_num = 999
+    global.memory["priestess"] = 2
     yield(get_tree().create_timer(1.0), "timeout")
     level.triggerCroneDefeatedDialog()
     var npcPlatforms = level.npcPlatformContainer.get_children()
@@ -143,7 +143,7 @@ func animationDefeatedEnd():
     boss_phase = BossPhase.FROG_PLAGUE_READY
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
-    level.is_really_defeated = true
+    level.enterMemoryZone()
     var smokeClouds = level.summonSmokeClouds(global_transform.origin, 3, true, true)
     for i in range(len(smokeClouds)):
         smokeClouds[i].scale *= 3
@@ -196,7 +196,7 @@ func _process(delta):
             # frog.is_fragile = true
             level.add_child(frog)
             frog.global_transform.origin = getRandomSpawnPosition(3)
-            frog.scale *= 2
+            # frog.scale *= 2
             frogArray.push_back(weakref(frog))
             spawnSound.play()
             if num_spawns >= num_spawn_limit:

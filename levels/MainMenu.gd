@@ -74,7 +74,7 @@ func startGame():
   eventSound1.play()
   chicken10.glitchOut()
   yield(get_tree().create_timer(1.0), "timeout")
-  levelTiles.randomize_num = 999
+  levelTiles.randomize_num = 3
   babushkaCat.mySprite.flip_h = true
   babushkaCat.mySprite.should_randomize_frame_delay = false
   babushkaCat.mySprite.frame_delay = 0.1

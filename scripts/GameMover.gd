@@ -341,6 +341,7 @@ func playLandAnimation():
 func tryClearFallthroughCollisionSolid():
   if self != level.player:
     return
+  should_do_fallthrough_area_collision = false
   if interactionArea and interactionArea.prev_fallthrough_collision_area != null and interactionArea.prev_fallthrough_collision_area.get_ref() and \
       interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").fallthroughCollisionClear(self)

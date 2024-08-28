@@ -326,6 +326,10 @@ func _process(delta):
     return
 
   randomize_timer += delta
+  if global.memory["priestess"] > 2:
+    randomize_timer = randomize_time_limit
+    randomize_num_counter = 0
+    randomize_num = 20
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
     if randomize_num > tile_dict.keys().size():

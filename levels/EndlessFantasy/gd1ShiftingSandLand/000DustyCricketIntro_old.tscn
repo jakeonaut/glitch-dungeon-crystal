@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://sceneObjects/AreaSound.tscn" type="PackedScene" id=37]
 [ext_resource path="res://assets/sounds/sandstream.mp3" type="AudioStream" id=38]
 [ext_resource path="res://assets/backgrounds/mountain_layer_0.png" type="Texture" id=39]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/ShroomKey.tscn" type="PackedScene" id=40]
 
 [sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
@@ -1144,9 +1145,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70.9, 18, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 64 )
 
@@ -1305,10 +1303,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 8.81841, 0 )
 frame = 37
 
 [node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63.0098, 33.4468, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.0098, 32.4468, 0 )
 
 [node name="miniCubeCrystal12" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7874, 33.4468, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.7874, 30.4468, 0 )
 
 [node name="miniCubeCrystal13" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0846, 34.9764, 0 )
@@ -1517,6 +1515,9 @@ shape = SubResource( 75 )
 
 [node name="FallenHammer" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 31, 0 )
+
+[node name="ShroomKey" parent="Viewport/level" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 35, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 25 )]
 

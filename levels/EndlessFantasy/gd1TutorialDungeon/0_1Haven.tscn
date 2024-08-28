@@ -3023,6 +3023,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 4.1849, 0 )
 path = "res://levels/EndlessFantasy/gd1/DebugTownSacredDoorsHubWorld.tscn"
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 242 )

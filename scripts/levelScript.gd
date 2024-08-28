@@ -80,7 +80,7 @@ func _ready_impl():
     pass
   else:
     global.memory["has_game_started"] = true
-    if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and not global.memory["has_seen_highpriestess"]:
+    if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and global.memory["priestess"] == 0:
       global.memory["inventory"] = [global.Inventory.GRIMOIRE]
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:

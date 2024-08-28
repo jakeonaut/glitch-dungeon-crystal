@@ -517,7 +517,7 @@ func tryDieToOffscreenCamera(delta):
 
     var curr_coords = level.getLevelManagerCoords()
     var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
-    if new_coords != null:
+    if new_coords != null and not level.pacman_wrapping:
       transition.fast_fade_to(new_coords)
       global.isEnteringRoom = true
       global.memory["player_flip_h"] = mySprite.flip_h
@@ -873,6 +873,8 @@ func getFishyInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
+  if transformation == TransformationState.BUBBLE:
+    level.flipGravity()
   transformation = TransformationState.FISHY
   aniPlayer.stop()
   aniPlayer.clear_queue()
