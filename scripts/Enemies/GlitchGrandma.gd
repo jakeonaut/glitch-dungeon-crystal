@@ -1,6 +1,7 @@
 extends "GlitchEnemy.gd"
 
 export var is_static = false
+# var cursedStatueRes = preload("res://sceneObjects/Enemies/CursedGrandmaStatue.tscn")
 
 func _ready():
   mySprite.set_material_override(mySprite.get_material_override().duplicate())

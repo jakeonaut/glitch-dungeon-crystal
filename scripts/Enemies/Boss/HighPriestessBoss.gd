@@ -125,6 +125,7 @@ func yaBeatMe():
     boss_phase = BossPhase.DEFEATED
     global.memory["priestess"] = 2
     yield(get_tree().create_timer(2.0), "timeout")
+    level.pacman_wrapping = false
     level.triggerCroneDefeatedDialog()
     var npcPlatforms = level.npcPlatformContainer.get_children()
     for i in range(len(npcPlatforms)):

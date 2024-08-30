@@ -236,6 +236,7 @@ func _ready():
     memory["broom_flight"] = false
     memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
+    memory["mushroom_soul"] = 0
 
     # GAME MODES
     memory["random_entrances"] = 0

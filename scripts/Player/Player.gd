@@ -805,7 +805,7 @@ func processFishyLogic(delta):
         blinkSound.play()
         bubble_timer = 0
     else:
-      bubble_timer = 0
+      bubble_timer = bubble_time_limit
   elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
     aniPlayer.stop()
     aniPlayer.clear_queue()

@@ -642,6 +642,66 @@ tracks/48/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/49/type = "value"
+tracks/49/path = NodePath("CubeCrystal:visible")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/50/type = "value"
+tracks/50/path = NodePath("CubeCrystal2:visible")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/51/type = "value"
+tracks/51/path = NodePath("CubeCrystal3:visible")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/52/type = "value"
+tracks/52/path = NodePath("CubeCrystal4:visible")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/53/type = "value"
+tracks/53/path = NodePath("CubeCrystal5:visible")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=90]
 resource_name = "appear"
@@ -6506,6 +6566,7 @@ vframes = 2
 [node name="npcPlatforms" type="Spatial" parent="Viewport/level"]
 
 [node name="NPC" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
+visible = false
 script = ExtResource( 44 )
 grav = 0
 
@@ -6594,6 +6655,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NPC2" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3, 0 )
+visible = false
 script = ExtResource( 44 )
 grav = 0
 
@@ -6682,6 +6744,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NPC3" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, 0 )
+visible = false
 script = ExtResource( 44 )
 grav = 0
 
@@ -6770,6 +6833,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NPC4" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, 0 )
+visible = false
 script = ExtResource( 44 )
 grav = 0
 
@@ -6858,6 +6922,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NPC5" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 6, 0 )
+visible = false
 script = ExtResource( 44 )
 grav = 0
 
@@ -7052,30 +7117,28 @@ shape = SubResource( 58 )
 
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -1.42658, 0 )
-visible = false
 high_priestess_crystal = true
 
 [node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 222 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 223 )
 
 [node name="CubeCrystal2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
-visible = false
 high_priestess_crystal = true
 
 [node name="CubeContainer" parent="Viewport/level/CubeCrystal2" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 224 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
@@ -7089,14 +7152,13 @@ anims/omen = SubResource( 82 )
 
 [node name="CubeCrystal3" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
-visible = false
 high_priestess_crystal = true
 
 [node name="CubeContainer" parent="Viewport/level/CubeCrystal3" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
@@ -7110,14 +7172,13 @@ anims/omen = SubResource( 96 )
 
 [node name="CubeCrystal4" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
-visible = false
 high_priestess_crystal = true
 
 [node name="CubeContainer" parent="Viewport/level/CubeCrystal4" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -7131,14 +7192,13 @@ anims/omen = SubResource( 107 )
 
 [node name="CubeCrystal5" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
-visible = false
 high_priestess_crystal = true
 
 [node name="CubeContainer" parent="Viewport/level/CubeCrystal5" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]

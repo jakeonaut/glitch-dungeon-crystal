@@ -4671,6 +4671,11 @@ anims/endCutscene = SubResource( 193 )
 anims/startCutscene = SubResource( 194 )
 anims/startCutsceneImmediate = SubResource( 195 )
 
+[node name="ColorRect" parent="UILayer/MiniCrystalCubeRect" index="0"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VScrollBar2" type="VScrollBar" parent="UILayer/Inventory/InventoryTitle/ColorRect/ColorRect/RichTextLabel" index="0"]
 visible = false
 anchor_right = 1.0
@@ -4682,11 +4687,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
-
-[node name="ColorRect" parent="UILayer/MiniCrystalCubeRect" index="0"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" parent="UILayer/PauseMenu/LeftSprite" index="0"]
 anims/RESET = SubResource( 200 )
