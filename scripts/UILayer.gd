@@ -92,8 +92,6 @@ onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
 onready var pauseMenu = get_node("PauseMenu")
 onready var textBoxes = get_node("TextBoxes")
 func _process(delta):
-  processControlsLogic(delta)
-  processQuitGameRenderLogic(delta)
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
   # TODO(jaketrower):
@@ -113,7 +111,6 @@ func _process(delta):
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
-  pauseMenu.visible = global.isPauseMenuOpen
 
   # if not global.memory.has("max_hp") or global.memory["max_hp"] <= 1:
   #   heartsRect.visible = false
@@ -247,49 +244,6 @@ func setGlitchSprite(sprite, glitch):
   elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
   elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
   elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 4
-
-onready var quitGameRect = get_node("QuitGameRect")
-onready var quitGameText = get_node("QuitGameRect/ColorRect/ColorRect/RichTextLabel")
-var quitGameTimer = 0
-var quitGameTimeLimit = 20
-var canHoldEscape = true
-func processQuitGameRenderLogic(delta):
-  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")):
-    getPlayer().noBroomSound.play()
-    return
-  if Input.is_action_pressed("ui_cancel") and canHoldEscape:
-    quitGameRect.visible = true
-    quitGameTimer += (delta*11)
-    if global.isPauseMenuOpen:
-      if quitGameTimer < 5:
-        quitGameText.text = "reset bindings\n ... 3"
-      elif quitGameTimer < 10:
-        quitGameText.text = "reset bindings\n ... 3 ... 2"
-      elif quitGameTimer < 15:
-        quitGameText.text = "reset bindings\n ... 3 ... 2 ... 1!"
-      if quitGameTimer >= quitGameTimeLimit:
-        for i in range(controlsConfig.size()):
-          controlsConfig[i]["key_code"] = controlsConfig[i]["default_keyCode"]
-          global.setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
-        global.memory["controls_config"] = controlsConfig
-        level.saveTheGame()
-        canHoldEscape = false
-    else:
-      quitGameRect.visible = false
-    #   if quitGameTimer < 5:
-    #     quitGameText.text = "hold ESC to quit:\n ... 3"
-    #   elif quitGameTimer < 10:
-    #     quitGameText.text = "hold ESC to quit:\n ... 3 ... 2"
-    #   elif quitGameTimer < 15:
-    #     quitGameText.text = "hold ESC to quit:\n ... 3 ... 2 ... 1!"
-    #   if quitGameTimer >= quitGameTimeLimit:
-    #     canHoldEscape = false
-    #     level.get_tree().quit()
-  else:
-    quitGameRect.visible = false
-    quitGameTimer = 0
-    if not Input.is_action_pressed("ui_cancel"):
-      canHoldEscape = true
 
 onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")
@@ -489,196 +443,5 @@ func invisibleGlitch():
 func walkThroughWallsGlitch():
   glitch(global.white_palette)
 
-onready var leftSprite = get_node("PauseMenu/LeftSprite")
-onready var leftSpriteAniPlayer = get_node("PauseMenu/LeftSprite/AnimationPlayer")
-onready var leftTextLabel = get_node("PauseMenu/LeftTextLabel")
-onready var rightSprite = get_node("PauseMenu/RightSprite")
-onready var rightSpriteAniPlayer = get_node("PauseMenu/RightSprite/AnimationPlayer")
-onready var rightTextLabel = get_node("PauseMenu/RightTextLabel")
-onready var runSprite = get_node("PauseMenu/RunSprite")
-onready var runSpriteAniPlayer = get_node("PauseMenu/RunSprite/AnimationPlayer")
-onready var runTextLabel = get_node("PauseMenu/RunTextLabel")
-onready var downSprite = get_node("PauseMenu/DownSprite")
-onready var downSpriteAniPlayer = get_node("PauseMenu/DownSprite/AnimationPlayer")
-onready var downTextLabel = get_node("PauseMenu/DownTextLabel")
-onready var upSprite = get_node("PauseMenu/UpSprite")
-onready var upSpriteAniPlayer = get_node("PauseMenu/UpSprite/AnimationPlayer")
-onready var upTextLabel = get_node("PauseMenu/UpTextLabel")
-onready var jumpSprite = get_node("PauseMenu/JumpSprite")
-onready var jumpSpriteAniPlayer = get_node("PauseMenu/JumpSprite/AnimationPlayer")
-onready var jumpTextLabel = get_node("PauseMenu/JumpTextLabel")
-onready var sweepSprite = get_node("PauseMenu/SweepSprite")
-onready var sweepSpriteAniPlayer = get_node("PauseMenu/SweepSprite/AnimationPlayer")
-onready var sweepTextLabel = get_node("PauseMenu/SweepTextLabel")
-onready var castSprite = get_node("PauseMenu/CastSprite")
-onready var castSpriteAniPlayer = get_node("PauseMenu/CastSprite/AnimationPlayer")
-onready var castTextLabel = get_node("PauseMenu/CastTextLabel")
-onready var menuMoveSound = get_node("PauseMenu/MenuMoveSound")
-onready var inputText = get_node("PauseMenu/InputRect/ColorRect/ColorRect/RichTextLabel")
-
-var control_index = 0
-var last_control_index = -1
-var hasInitializedControlsConfig = false
-var controlsConfig = []
-func initializeControlsConfig():
-  var newControlsConfig = [
-    {
-      "input_action": "ui_left",
-      "label_str": "LEFT",
-      "text_label": leftTextLabel,
-      "sprite": leftSprite,
-      "sprite_aniPlayer": leftSpriteAniPlayer,
-      "default_keyCode": 16777231, 
-    },
-    {
-      "input_action": "ui_right",
-      "label_str": "RIGHT",
-      "text_label": rightTextLabel,
-      "sprite": rightSprite,
-      "sprite_aniPlayer": rightSpriteAniPlayer,
-      "default_keyCode": 16777233, 
-    },
-    {
-      "input_action": "run_button",
-      "label_str": "RUN",
-      "text_label": runTextLabel,
-      "sprite": runSprite,
-      "sprite_aniPlayer": runSpriteAniPlayer,
-      "default_keyCode": 16777237, 
-    },
-    {
-      "input_action": "ui_down",
-      "label_str": "DOWN",
-      "text_label": downTextLabel,
-      "sprite": downSprite,
-      "sprite_aniPlayer": downSpriteAniPlayer,
-      "default_keyCode": 16777234, 
-    },
-    {
-      "input_action": "ui_up",
-      "label_str": "UP",
-      "text_label": upTextLabel,
-      "sprite": upSprite,
-      "sprite_aniPlayer": upSpriteAniPlayer,
-      "default_keyCode": 16777232, 
-    },
-    {
-      "input_action": "jump_button",
-      "label_str": "JUMP",
-      "text_label": jumpTextLabel,
-      "sprite": jumpSprite,
-      "sprite_aniPlayer": jumpSpriteAniPlayer,
-      "default_keyCode": 90, 
-    },
-    {
-      "input_action": "sub_action_button",
-      "label_str": "SWEEP",
-      "text_label": sweepTextLabel,
-      "sprite": sweepSprite,
-      "sprite_aniPlayer": sweepSpriteAniPlayer,
-      "default_keyCode": 88, 
-    },
-    {
-      "input_action": "alt_action_button",
-      "label_str": "MAGICK",
-      "text_label": castTextLabel,
-      "sprite": castSprite,
-      "sprite_aniPlayer": castSpriteAniPlayer,
-      "default_keyCode": 32, 
-    },
-  ]
-  if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
-    var rememberedControlsConfig = global.memory["controls_config"]
-    for control_config in newControlsConfig:
-      for remembered_config in rememberedControlsConfig:
-        if remembered_config.input_action == control_config.input_action:
-          global.setKeyCode(control_config.input_action, remembered_config["key_code"])
-          control_config["key_code"] = remembered_config["key_code"]
-          break
-      # make sure its set to default if it was erased from memory
-      if not control_config.has("key_code") or control_config["key_code"] == null:
-        control_config["key_code"] = global.getKeyCode(control_config.input_action)
-    global.hasInitializedControlsConfig = true
-  else:
-    for control_config in newControlsConfig:
-      control_config["key_code"] = global.getKeyCode(control_config.input_action)
-
-  controlsConfig = newControlsConfig
-
-func processControlsLogic(_delta):
-  if not hasInitializedControlsConfig:
-    if castTextLabel != null:
-      initializeControlsConfig()
-      hasInitializedControlsConfig = true
-  if not hasInitializedControlsConfig:
-    return
-
-  if global.isPauseMenuOpen:
-    if global.is_reading_input:
-      inputText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
-    else:
-      inputText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to change key\n    hold ENTER: reset bindings"
-
-    if global.is_reading_input:
-      if global.last_read_input != null:
-        var keyCodeString = OS.get_scancode_string(global.last_read_input)
-        if keyCodeString != "Enter" and keyCodeString != "Escape":
-          controlsConfig[control_index].key_code = global.last_read_input
-          global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
-          global.memory["controls_config"] = controlsConfig
-          global.is_reading_input = false
-          last_control_index = -1
-          level.saveTheGame()
-      return
-    else:
-      if Input.is_action_just_pressed("ui_down"):
-        control_index += 1
-        menuMoveSound.play()
-      elif Input.is_action_just_pressed("ui_up"):
-        control_index -= 1
-        menuMoveSound.play()
-      if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel"):
-        global.is_reading_input = true
-        global.last_read_input = null
-        last_control_index = -1
-
-    if control_index < 0:
-      control_index = controlsConfig.size() - 1
-    if control_index >= controlsConfig.size():
-      control_index = 0
-
-    var normal_size = Vector2(2, 2)
-    var big_size = Vector2(3, 3)
-
-    for i in range(controlsConfig.size()):
-      var controlConfig = controlsConfig[i]
-      if control_index == i:
-        controlConfig.sprite.scale = big_size
-        if control_index != last_control_index:
-          var waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
-          controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
-          # controlConfig.sprite.z_index = 1
-          controlConfig.sprite_aniPlayer.play("idle")
-      else:
-        controlConfig.sprite.scale = normal_size
-        controlConfig.text_label.bbcode_text = "[color=gray][lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb][/color]"
-        # controlConfig.sprite.z_index = 0
-        controlConfig.sprite_aniPlayer.stop()
-        controlConfig.sprite_aniPlayer.play("RESET")
-
-    last_control_index = control_index
-  else:
-    control_index = 0
-    last_control_index = -1
-
-var castSpritePalette = 0
 func changeCastSpritePalette():
-  if castSpritePalette == 0:
-    castSprite.material.set_shader_param("palette_out", global.green_palette)
-    castSpritePalette = 1
-  elif castSpritePalette == 1:
-    castSprite.material.set_shader_param("palette_out", global.red_palette)
-    castSpritePalette = 2
-  elif castSpritePalette == 2:
-    castSprite.material.set_shader_param("palette_out", global.grey_player_palette)
-    castSpritePalette = 0
+  pauseMenu.changeCastSpritePalette()

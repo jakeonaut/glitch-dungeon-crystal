@@ -18,7 +18,7 @@ func _process(delta):
             glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (cutscene_timer - 20)*0.0001)
             glitchScreenEffect.get_material().set_shader_param("shake_power", -.00001*pow(cutscene_timer-20, 2) + .005)
             # material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .005)
-            glitchScreenEffect.visible = true
+            glitchScreenEffect.visible = global.memory["canGlitchScreen"]
             if player.global_transform.origin.y <= 30:
                 player.mySprite.get_material_override().set_shader_param("enable_glitch", true)
         else:

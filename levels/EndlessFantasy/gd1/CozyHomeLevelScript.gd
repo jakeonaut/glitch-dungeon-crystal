@@ -12,7 +12,6 @@ func _process(delta):
   levelTiles.randomize_num = 999
   # ._process(delta) implicit
   player.fall_timer = 0
-  global.canChangeSongPitch = false
   # if not has_activated and player.global_transform.origin.y < -39:
   #   has_activated = true
   #   player.global_transform.origin.z = -10

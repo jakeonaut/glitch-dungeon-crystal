@@ -53,7 +53,6 @@ func _ready_impl():
   has_room_initialized = false
   get_node("..").audio_listener_enable_3d = true
 
-  global.canChangeSongPitch = true
   global.activeInteractor = null # somewhat of a failsafe
   set_process(true)
 
@@ -150,7 +149,9 @@ func _process(delta):
 func processPauseMenu():
   if not global.pauseGame and not global.pauseMoveInput:
     if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
-      uiLayer.quitGameTimer = 0
+      uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
+      uiLayer.pauseMenu.normalOptionIndex = 0
+      uiLayer.pauseMenu.shouldUpdateMenuText = true
       global.isPauseMenuOpen = true
       global.pauseGame = true
       player.pauseSound.play()
@@ -159,7 +160,6 @@ func processPauseMenu():
     if global.is_reading_input:
       player.noBroomSound.play()
     else:
-      uiLayer.quitGameTimer = 0
       global.isPauseMenuOpen = false
       global.pauseGame = false
       player.unpauseSound.play()

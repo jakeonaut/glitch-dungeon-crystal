@@ -48,9 +48,8 @@ func _process(delta):
             currentlyPlayingTheme = restartPlayingTheme
             restartPlayingTheme = null
         
-export var stopAllMusic = false
 func tryToPlay(stream_player):
-    if stopAllMusic: return
+    if global.memory["stopAllMusic"]: return
     # if not initial_volume_dbs.has(stream_player.name):
     #     initial_volume_dbs[stream_player.name] = stream_player.volume_db
         
@@ -126,7 +125,7 @@ func playTreasureJingle(volume_db):
 
 
 func conductFromScenePath(path):
-    if stopAllMusic or path.find("000Intro") > 0:
+    if global.memory["stopAllMusic"] or path.find("000Intro") > 0:
         stopAll()
         return
     changeSongPitch(1.0)

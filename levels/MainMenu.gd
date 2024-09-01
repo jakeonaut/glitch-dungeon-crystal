@@ -5,7 +5,7 @@ var switch_glitch_time_limit = 15
 var direction = -1
 
 func setUpRoomInitializationOverride():
-    pass
+    transition.reverse_fade()
     # player.aniPlayer.stop()
     # player.aniPlayer.clear_queue()
     # player.aniPlayer.play("happyStand")
@@ -28,6 +28,7 @@ onready var croneNPC = get_node("CroneNPC")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
+onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
 func startGame():
   logoSprite.visible = false
 #   show_dither_effect = false
@@ -114,7 +115,7 @@ func startGame():
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
   player.aniPlayer.queue("teleport")
-  glitchScreenEffect.visible = true
+  glitchScreenEffect.visible = global.memory["canGlitchScreen"]
   glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
   glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)
   yield(get_tree().create_timer(1.0), "timeout")
@@ -166,6 +167,7 @@ func _process(_delta):
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
+        mainMenuUi.visible = not global.isPauseMenuOpen
     # gameCamera.can_i_move = false
     # global.pauseGame = true
     player.pauseInput = true
@@ -180,6 +182,13 @@ func _process(_delta):
     #     direction = -1
     # elif player.rotation_degrees.y < -5:
     #     direction = 1
+
+    if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
+        mainMenuPromptIndex = 1
+        colorRect.visible = false
+
+    if global.isPauseMenuOpen:
+        return
 
     if Input.is_action_just_pressed("ui_down"):
         mainMenuPromptIndex += 1
@@ -199,12 +208,18 @@ func _process(_delta):
         continuePrompt.visible = false
         newGamePrompt.visible = true
         quitPrompt.visible = false
-        menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
+        if global.doesSaveGameExist():
+            menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
+        else:
+            menuText.bbcode_text = "\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
     elif mainMenuPromptIndex == 2 and not quitPrompt.visible:
         continuePrompt.visible = false
         newGamePrompt.visible = false
         quitPrompt.visible = true
-        menuText.bbcode_text = "Continue...?\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
+        if global.doesSaveGameExist():
+            menuText.bbcode_text = "Continue...?\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
+        else:
+            menuText.bbcode_text = "\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
 
 
     # switch_glitch_timer += (delta*22)
@@ -224,5 +239,5 @@ func _process(_delta):
             quitGame()
 
 # @override
-func processPauseMenu():
-    pass
+# func processPauseMenu():
+#     pass

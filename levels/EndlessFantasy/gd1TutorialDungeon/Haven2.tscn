@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/nintendo-entertainment-system-1x.png" type="Texture" id=2]
@@ -439,177 +439,6 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=42]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.75, 1 )
-
-[sub_resource type="BoxShape" id=43]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
-
-[sub_resource type="BoxShape" id=44]
-resource_local_to_scene = true
-extents = Vector3( 1, 0.8, 1.3 )
-
-[sub_resource type="BoxShape" id=45]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
-
-[sub_resource type="Animation" id=52]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 22 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 2 ]
-}
-
-[sub_resource type="Animation" id=53]
-resource_name = "doorBarred"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 7, 6, 5 ]
-}
-
-[sub_resource type="Animation" id=54]
-resource_name = "doorClose"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 1, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 22 ) ]
-}
-
-[sub_resource type="Animation" id=55]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 22 ) ]
-}
-
-[sub_resource type="Animation" id=56]
-resource_name = "doorUnbarred"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "unpause"
-} ]
-}
-
-[sub_resource type="Animation" id=57]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 22 ) ]
-}
-
 [sub_resource type="Animation" id=46]
 length = 0.001
 tracks/0/type = "value"
@@ -764,6 +593,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [ ExtResource( 22 ) ]
 }
+
+[sub_resource type="BoxShape" id=42]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=43]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=44]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.8, 1.3 )
+
+[sub_resource type="BoxShape" id=45]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
@@ -1072,56 +917,6 @@ shape = SubResource( 28 )
 [node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
 shape = SubResource( 29 )
 
-[node name="Door3" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -5, 6.1, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
-num_keys_unlock = 1
-key_type = 2
-
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
-root_node = NodePath("../../Door3")
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 42 )
-
-[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
-shape = SubResource( 43 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 44 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
-shape = SubResource( 45 )
-
-[node name="Door4" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 14, 16, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
-num_keys_unlock = 1
-key_type = 3
-
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
-root_node = NodePath("../../Door4")
-anims/RESET = SubResource( 52 )
-anims/doorBarred = SubResource( 53 )
-anims/doorClose = SubResource( 54 )
-anims/doorOpen = SubResource( 55 )
-anims/doorUnbarred = SubResource( 56 )
-anims/locked = SubResource( 57 )
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
-shape = SubResource( 42 )
-
-[node name="PassiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="1"]
-shape = SubResource( 43 )
-
-[node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 44 )
-
-[node name="CollisionShape" parent="Viewport/level/Door4/FallthroughSolid" index="0"]
-shape = SubResource( 45 )
-
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 16.4, -4, 0 )
 is_locked = true
@@ -1161,8 +956,8 @@ vframes = 2
 [node name="CRYSTAL_Door" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6.2, -2.0167, 0 )
 is_locked = true
-path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
-num_keys_unlock = 4
+path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
+num_keys_unlock = 2
 key_type = 5
 
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 30 )]
@@ -1324,10 +1119,6 @@ flip_v = true
 [editable path="Viewport/level/AngelStatue3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door3"]
-[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door4"]
-[editable path="Viewport/level/Door4/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door5"]
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
 [editable path="Viewport/level/SmithingNPC"]
