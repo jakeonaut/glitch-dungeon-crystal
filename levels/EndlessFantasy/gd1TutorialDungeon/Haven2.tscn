@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/nintendo-entertainment-system-1x.png" type="Texture" id=2]
@@ -6,14 +6,13 @@
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=5]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=7]
+[ext_resource path="res://sceneObjects/BroomUpgradeCrone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=10]
 [ext_resource path="res://levels/EndlessFantasy/gd1/Haven2LevelScript.gd" type="Script" id=11]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=12]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=13]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=14]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=15]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
@@ -30,11 +29,8 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=30]
-[ext_resource path="res://assets/sounds/croak.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/sounds/eba_speech_info.wav" type="AudioStream" id=32]
-[ext_resource path="res://levels/EndlessFantasy/gd1/Haven2CroneAbortSound.gd" type="Script" id=33]
 [ext_resource path="res://assets/sprites/big_critters.png" type="Texture" id=34]
-[ext_resource path="res://levels/EndlessFantasy/gd1/Haven2CroneDialogStartSound.gd" type="Script" id=35]
 [ext_resource path="res://assets/sprites/angel_statue.png" type="Texture" id=51]
 [ext_resource path="res://assets/palettes/dark_grey_palette2.png" type="Texture" id=52]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=53]
@@ -820,89 +816,6 @@ length = 0.1
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=72]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="ShaderMaterial" id=73]
-shader = ExtResource( 13 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 14 )
-shader_param/base_palette = ExtResource( 10 )
-shader_param/target_palette = ExtResource( 7 )
-
-[sub_resource type="Animation" id=74]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=75]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=76]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=77]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=78]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=79]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="BoxShape" id=80]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -1207,52 +1120,7 @@ anims/stand = SubResource( 70 )
 [node name="CollisionShape" parent="Viewport/level/SmithingNPC/FallthroughSolid" index="0"]
 shape = SubResource( 71 )
 
-[node name="FrogCroneNPC" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3649, 10.1759, 0 )
-grav = 0
-bbText = "•a crystal purified?
-interesting..
-•you seem to have
-some [color=red]hag magic[/color]... I can 
-enchant your broom with gems
-•to help you on your quest
-"
-showYesNoOptions = true
-
-[node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/SmallInteractionArea" index="0"]
-shape = SubResource( 72 )
-
-[node name="DialogStartSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="13"]
-script = ExtResource( 35 )
-
-[node name="DialogSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="14"]
-stream = ExtResource( 31 )
-volume_db = -10.0
-
-[node name="AbortSound" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox" index="16"]
-stream = ExtResource( 31 )
-volume_db = -10.0
-script = ExtResource( 33 )
-
-[node name="Sprite3D" parent="Viewport/level/FrogCroneNPC" index="3"]
-material_override = SubResource( 73 )
-flip_h = true
-frame = 54
-
-[node name="AnimationPlayer" parent="Viewport/level/FrogCroneNPC" index="4"]
-anims/default = SubResource( 74 )
-anims/fall = SubResource( 75 )
-anims/flickerOn = SubResource( 76 )
-anims/jump = SubResource( 77 )
-anims/land = SubResource( 78 )
-anims/stand = SubResource( 79 )
-
-[node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/FallthroughSolid" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 1.062, 0 )
-shape = SubResource( 80 )
-
-[node name="InteractPrompt" parent="Viewport/level/FrogCroneNPC" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
+[node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 7 )]
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 16.3, 0.706856, 0 )
@@ -1332,8 +1200,6 @@ flip_v = true
 [editable path="Viewport/level/Door5/NPC/NPC TextBox"]
 [editable path="Viewport/level/SmithingNPC"]
 [editable path="Viewport/level/SmithingNPC/NPC TextBox"]
-[editable path="Viewport/level/FrogCroneNPC"]
-[editable path="Viewport/level/FrogCroneNPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="Viewport3/ScreenEffects"]
 [editable path="UILayer"]

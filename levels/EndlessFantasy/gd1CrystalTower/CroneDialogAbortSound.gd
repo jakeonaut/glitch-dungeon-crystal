@@ -21,7 +21,7 @@ func activateScript():
     which_one = 2
   elif which_one == 2:
     NPC.mySprite.updateBaseFrame(6, 6)
-    NPC.textBoxContainer.bbText = "•well, this world must be ending soon.\nwhat do you care?"
+    NPC.textBoxContainer.bbText = "•well, this world must be ending soon.\nwhat do you care?\nleave this place!"
     NPC.textBoxContainer.setVars()
     which_one = 3
   elif which_one == 3:
@@ -31,6 +31,7 @@ func activateScript():
     level.summonSmokeClouds(NPC.global_transform.origin, 5, true, true)
     NPC.visible = false
     which_one = 3
+    level.pacman_wrapping = false
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

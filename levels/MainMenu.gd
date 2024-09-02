@@ -28,6 +28,7 @@ onready var croneNPC = get_node("CroneNPC")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
+onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
 func startGame():
   logoSprite.visible = false
 #   show_dither_effect = false
@@ -181,6 +182,10 @@ func _process(_delta):
     # elif player.rotation_degrees.y < -5:
     #     direction = 1
 
+    if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
+        mainMenuPromptIndex = 1
+        colorRect.visible = false
+
     if Input.is_action_just_pressed("ui_down"):
         mainMenuPromptIndex += 1
         if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
@@ -199,12 +204,18 @@ func _process(_delta):
         continuePrompt.visible = false
         newGamePrompt.visible = true
         quitPrompt.visible = false
-        menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
+        if global.doesSaveGameExist():
+            menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
+        else:
+            menuText.bbcode_text = "\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
     elif mainMenuPromptIndex == 2 and not quitPrompt.visible:
         continuePrompt.visible = false
         newGamePrompt.visible = false
         quitPrompt.visible = true
-        menuText.bbcode_text = "Continue...?\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
+        if global.doesSaveGameExist():
+            menuText.bbcode_text = "Continue...?\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
+        else:
+            menuText.bbcode_text = "\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
 
 
     # switch_glitch_timer += (delta*22)

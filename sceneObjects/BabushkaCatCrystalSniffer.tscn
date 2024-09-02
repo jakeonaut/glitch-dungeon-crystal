@@ -131,11 +131,7 @@ shader_param/target_palette = ExtResource( 9 )
 [node name="BabushkaCat" type="Spatial" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9649, 0.0413837, 0 )
 script = ExtResource( 3 )
-bbText = "*meow*
-•(for some weird reason,
-you can hear me?)
-•(i smell an unpurified 
-[color=red]CRYSTAL[/color] in this area)"
+bbText = "See BabushkaCatCrystalSnifferDialogStartSound."
 dont_recolor_me = true
 
 [node name="SmallInteractionArea" type="Area" parent="."]

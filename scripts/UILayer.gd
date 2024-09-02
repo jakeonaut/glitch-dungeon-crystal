@@ -414,7 +414,6 @@ func processHiscoreRenderLogic(delta):
     global.hasLevelGeodeBeenSmacked = false
     global.pauseMoveInput = false
     global.pauseGame = false
-    # transition.long_fade_to("res://levels/EndlessFantasy/gd1/005DebugTown.tscn")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:
