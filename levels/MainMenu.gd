@@ -5,6 +5,7 @@ var switch_glitch_time_limit = 15
 var direction = -1
 
 func setUpRoomInitializationOverride():
+    global.isOnMainMenu = true
     transition.reverse_fade()
     # player.aniPlayer.stop()
     # player.aniPlayer.clear_queue()

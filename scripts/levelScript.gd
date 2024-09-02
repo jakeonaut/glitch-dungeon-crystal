@@ -50,6 +50,7 @@ func _ready():
 
 export var is_randomizing = false
 func _ready_impl():
+  global.isOnMainMenu = false
   has_room_initialized = false
   get_node("..").audio_listener_enable_3d = true
 
@@ -412,6 +413,8 @@ func adjustPlayerForEdgeTransition():
     global.memory.erase("prevYDiff")
   elif global.roomEdgeVector.y > 0:
     player.global_transform.origin.y = gameCamera.botmost_y + LANDING_MARGIN
+    if player.glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+      player.global_transform.origin.y += 1
   elif global.roomEdgeVector.y < 0:
     player.global_transform.origin.y = gameCamera.topmost_y - LANDING_MARGIN
   else:

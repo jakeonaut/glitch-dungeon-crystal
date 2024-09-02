@@ -40,6 +40,7 @@ onready var castSprite = get_node("InputMenu/CastSprite")
 onready var castSpriteAniPlayer = get_node("InputMenu/CastSprite/AnimationPlayer")
 onready var castTextLabel = get_node("InputMenu/CastTextLabel")
 onready var menuMoveSound = get_node("MenuMoveSound")
+var glitch_death_timer = 0
 
 var control_index = 0
 var last_control_index = -1
@@ -69,6 +70,9 @@ func _ready():
 
 func _process(delta):
   self.visible = global.isPauseMenuOpen
+  if not global.isPauseMenuOpen:
+    return
+    
   if not hasInitializedControlsConfig:
     if castTextLabel != null:
       initializeControlsConfig()
@@ -76,6 +80,7 @@ func _process(delta):
   if not hasInitializedControlsConfig:
     return
 
+  processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
     normalMenu.visible = true
     processNormalLogic(delta)
@@ -110,9 +115,12 @@ func _process(delta):
 
 
 var normalMenuOptions = ["RESUME", "GRAPHICS", "SOUND", "INPUT", "QUIT TO MAIN"]
+var normalMenuOptionsOnMainMenu = ["RESUME", "GRAPHICS", "SOUND", "INPUT"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select\n(menu is work in progress..)"
+  if global.isOnMainMenu:
+    normalMenuOptions = normalMenuOptionsOnMainMenu
+  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -135,6 +143,7 @@ func processNormalLogic(_delta):
     normalOptionIndex = len(normalMenuOptions) - 1
   elif normalOptionIndex >= len(normalMenuOptions):
     normalOptionIndex = 0
+  cursorSprite.position.y = 120 + (80*normalOptionIndex)
 
   if Input.is_action_just_pressed("sub_action_button"):
     pauseMenuState = PauseMenuState.TEMP
@@ -158,7 +167,7 @@ func processNormalLogic(_delta):
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
 
 
-var graphicsOptions = ["CRT FILTER", "GLITCH EFFECTS", "FULLSCREEN"]
+var graphicsOptions = ["CRT FILTER", "GLITCH SCREEN", "COLOR BLIND", "FULLSCREEN"]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back"
@@ -169,7 +178,8 @@ func processGraphicsLogic(_delta):
       var option = graphicsOptions[i] + ": "
       if i == 0: option += ("ON" if global.memory["show_crt_effect"] else "OFF")
       if i == 1: option += ("ON" if global.memory["canGlitchScreen"] else "OFF")
-      if i == 2: option += ("ON" if OS.window_fullscreen else "OFF")
+      if i == 2: option += ("ON" if global.memory["colorblindMode"] else "OFF")
+      if i == 3: option += ("ON" if OS.window_fullscreen else "OFF")
 
       if i == graphicsOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n\n" 
@@ -188,6 +198,7 @@ func processGraphicsLogic(_delta):
     graphicsOptionIndex = len(graphicsOptions) - 1
   elif graphicsOptionIndex >= len(graphicsOptions):
     graphicsOptionIndex = 0
+  cursorSprite.position.y = 120 + (80*graphicsOptionIndex)
 
   if Input.is_action_just_pressed("sub_action_button"):
     shouldUpdateMenuText = true
@@ -195,12 +206,26 @@ func processGraphicsLogic(_delta):
       global.memory["show_crt_effect"] = not global.memory["show_crt_effect"]
     elif graphicsOptionIndex == 1:
       global.memory["canGlitchScreen"] = not global.memory["canGlitchScreen"]
+      glitch_death_timer = 1
     elif graphicsOptionIndex == 2:
+      global.memory["colorblindMode"] = not global.memory["colorblindMode"]
+    elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
   elif Input.is_action_just_pressed("jump_button"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
+func processGlitchScreen(delta):
+  if glitch_death_timer != 0:
+    glitch_death_timer += (delta*22)
+    getPlayer().applyGlitchDeathEffects(abs(glitch_death_timer))
+    if global.memory["canChangeSongPitch"]:
+      musicPlayer.changeSongPitch(abs(sin((glitch_death_timer)*.05)+.02))
+    level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+    if glitch_death_timer >= 40:
+      musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
+      level.glitchScreenEffect.visible = false
+      glitch_death_timer = 0
 
 var soundOptions = ["PLAY MUSIC", "MUSIC GLITCH"] # global.memory["canChangeSongPitch"]
 var soundOptionIndex = 0
@@ -231,13 +256,21 @@ func processSoundLogic(_delta):
     soundOptionIndex = len(soundOptions) - 1
   elif soundOptionIndex >= len(soundOptions):
     soundOptionIndex = 0
+  cursorSprite.position.y = 120 + (80*soundOptionIndex)
 
   if Input.is_action_just_pressed("sub_action_button"):
     shouldUpdateMenuText = true
     if soundOptionIndex == 0:
       global.memory["stopAllMusic"] = not global.memory["stopAllMusic"]
+      if global.memory["stopAllMusic"]:
+        musicPlayer.stopAll()
+      else:
+        musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
     elif soundOptionIndex == 1:
       global.memory["canChangeSongPitch"] = not global.memory["canChangeSongPitch"]
+      if global.memory["canChangeSongPitch"]:
+        musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
+      glitch_death_timer = 1
   elif Input.is_action_just_pressed("jump_button"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
@@ -246,7 +279,7 @@ func processSoundLogic(_delta):
 var quitToMainOptions = ["YES", "CANCEL"]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back... Really Quit?!?"
+  pauseTitleText.bbcode_text = "  Really Quit?!?\npress " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back..."
 
   if shouldUpdateMenuText:
     var text = ""
@@ -269,6 +302,7 @@ func processQuitToMainLogic(_delta):
     quitToMainOptionIndex = len(quitToMainOptions) - 1
   elif quitToMainOptionIndex >= len(quitToMainOptions):
     quitToMainOptionIndex = 0
+  cursorSprite.position.y = 120 + (80*quitToMainOptionIndex)
 
   if Input.is_action_just_pressed("sub_action_button"):
     if quitToMainOptionIndex == 0:

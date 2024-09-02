@@ -656,7 +656,6 @@ tracks/4/keys = {
 [sub_resource type="CanvasItemMaterial" id=62]
 
 [node name="PauseMenu" type="Control"]
-margin_top = 12.0
 margin_right = 640.0
 margin_bottom = 522.0
 script = ExtResource( 16 )
@@ -1110,9 +1109,10 @@ volume_db = -15.0
 pitch_scale = 0.9
 
 [node name="PauseTitleRect" type="ColorRect" parent="."]
-margin_left = 87.0
-margin_right = 559.0
-margin_bottom = 94.0
+margin_left = 89.0
+margin_top = 5.0
+margin_right = 561.0
+margin_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -1160,7 +1160,7 @@ scroll_active = false
 
 [node name="CursorSprite" type="Sprite" parent="."]
 material = SubResource( 62 )
-position = Vector2( 58, 43 )
+position = Vector2( 180, 120 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 14 )
 hframes = 6

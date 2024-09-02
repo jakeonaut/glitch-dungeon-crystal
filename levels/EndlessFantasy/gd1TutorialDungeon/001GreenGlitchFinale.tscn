@@ -60,7 +60,7 @@ data = {
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 7, 1 )
+"_editor_floor_": Vector3( 0, 7, 2 )
 }
 tileset_type = 5
 
@@ -127,7 +127,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48446, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48445, 0, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 11.2762, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 12.3129, 0 )
 grav = 0
 bbText = "press down to fall through.
 you can also hold [color=#00ff00]jump[/color] 

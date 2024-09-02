@@ -43,14 +43,13 @@ func _process(delta):
 
   cubeContainer.rotation_degrees.y += delta*22
   which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
   if not isActive():
     streetlightGlitchAura.mainTextureRect.visible = false
   else:
     if glitch_form == global.GlitchForm.NORMAL:
-      spellbookGlitchSprite.visible = false
       streetlightGlitchAura.mainTextureRect.visible = false
     else:
-      spellbookGlitchSprite.visible = true
       streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
       # TODO(jaketrower): could dedupe with Player.gd 
       if glitch_form == global.GlitchForm.FEATHER:

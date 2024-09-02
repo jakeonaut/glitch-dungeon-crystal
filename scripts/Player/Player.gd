@@ -181,7 +181,6 @@ func applyGlitch(glitch, notPlaySound = false):
   return true
 
 func floorGlitch():
-  spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 1
   level.displaySpellMessageText("air walk")
   glitch_form = global.GlitchForm.FLOOR
@@ -206,7 +205,6 @@ func miniUpwardGust(reverse_immediately = true):
   vv += upward_gust
 
 func featherGlitch():
-  spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 0
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
@@ -221,7 +219,6 @@ func featherGlitch():
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
 func ladderGlitch():
-  spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 2
   level.displaySpellMessageText("ladder")
   glitch_form = global.GlitchForm.LADDER
@@ -232,7 +229,6 @@ func ladderGlitch():
 
 func invisibleGlitch():
   # loseBroom()
-  spellbookGlitchSprite.visible = true
   spellbookGlitchSprite.frame = 3
   level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
@@ -318,10 +314,10 @@ func _process(delta):
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
   else:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"] and transformation == TransformationState.NORMAL
 
   bubbleSprite.visible = transformation == TransformationState.BUBBLE
   if transformation == TransformationState.BUBBLE:
-    spellbookGlitchSprite.visible = false
     if (horizontal_collision or on_ground) and physics_state != PhysicsState.GLITCH_DYING:
       getBubbleCured()
 
@@ -855,7 +851,6 @@ func getBubbleCured():
   aniPlayer.clear_queue()
   aniPlayer.queue("land")
   pauseAnimation = false
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL
 
   getABroom()
   level.flipGravity()
@@ -984,7 +979,6 @@ var dig_below_timer = 0
 var dig_below_time_limit = 20
 func processMoleLogic(delta):
   if transformation == TransformationState.UNDERGROUND:
-    spellbookGlitchSprite.visible = false
     if not pressingDown():
       transformation = TransformationState.UNDERGROUND_RETURNING
     fastStepSound.pitch_scale = 0.8
@@ -1035,7 +1029,6 @@ func processMoleLogic(delta):
         getMoleCured()
 
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
-    spellbookGlitchSprite.visible = false
     dig_below_timer = 0
     glitchTilesAroundMe(-2.5)
     fastStepSound.pitch_scale = 2.0
@@ -1085,7 +1078,6 @@ func processMoleLogic(delta):
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
     return
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL
   transformation = TransformationState.NORMAL
   global_transform.origin.y -= 2
   summonSmokeClouds(5, true, true, 0)
@@ -1245,6 +1237,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     global.memory["hp"] += 1
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)
+    getSmacked()
     glitch_death_timer = 0
     shroomAniPlayer.stop()
     shroomAniPlayer.clear_queue()
@@ -1256,6 +1249,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     global.pauseMoveInput = false
   elif global.memory["hp"] <= 0 or should_immediately_die:
     actuallyProcessDeath(should_glitch)
+    getSmacked()
   else:
     physics_state = PhysicsState.GLITCH_HURT
     glitchTickle(true)

@@ -40,15 +40,14 @@ func _process(delta):
       unsmack()
 
 func processRendering(_delta):
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
   if not isActive():
     streetlightGlitchAura.mainTextureRect.visible = false
   else:
     if glitch_form == global.GlitchForm.NORMAL:
-      spellbookGlitchSprite.visible = false
       spellbookGlitchSprite.frame = 15
       streetlightGlitchAura.mainTextureRect.visible = false
     else:
-      spellbookGlitchSprite.visible = true
       streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
       true_terminal_vel = 32
       # TODO(jaketrower): could dedupe with Player.gd and GrandmaStatue.gd

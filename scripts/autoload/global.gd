@@ -164,10 +164,13 @@ var hasGottenLevelGeode = false
 
 var isAMoleDigging = false
 
+var isOnMainMenu = false
+
 func _ready():
     set_process(true)
 
     # somehow this gets rid of errors LOL
+    if isOnMainMenu: pass
     if memory: pass
     if activeInteractor: pass
     if activeThrowableObject: pass
@@ -188,6 +191,7 @@ func _ready():
     memory["show_dither_effect"] = true
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
+    memory["colorblindMode"] = true
     memory["stopAllMusic"] = false
     memory["canChangeSongPitch"] = true
 

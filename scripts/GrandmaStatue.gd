@@ -55,6 +55,7 @@ func _process(delta):
 func processRendering(delta):
   triangleContainer.visible = is_extra_life
 
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
   if not isActive():
     streetlightGlitchAura.mainTextureRect.visible = false
     triangleContainer.scale.x = 1.0
@@ -74,12 +75,10 @@ func processRendering(delta):
       saveSporesSprite.visible = true
 
     if glitch_form == global.GlitchForm.NORMAL:
-      spellbookGlitchSprite.visible = false
       spellbookGlitchSprite.frame = 15
       streetlightGlitchAura.mainTextureRect.visible = false
     else:
       triangleContainer.visible = false
-      spellbookGlitchSprite.visible = true
       streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
       true_terminal_vel = 32
       # TODO(jaketrower): could dedupe with Player.gd 
