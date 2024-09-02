@@ -292,6 +292,7 @@ func _process(delta):
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
+    level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   
   delta = delta * global.time_dilation_multiplier
 

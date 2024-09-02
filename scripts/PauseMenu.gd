@@ -87,9 +87,11 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
     normalMenu.visible = true
+    colorblindPlayers.visible = true
     processGraphicsLogic(delta)
   else:
     graphicsOptionIndex = 0
+    colorblindPlayers.visible = false
 
   if pauseMenuState == PauseMenuState.SOUND:
     normalMenu.visible = true
@@ -166,7 +168,8 @@ func processNormalLogic(_delta):
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
 
-
+onready var colorblindPlayers = get_node("ColorblindPlayers")
+onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptions = ["CRT FILTER", "GLITCH SCREEN", "COLOR BLIND", "FULLSCREEN"]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
@@ -214,6 +217,7 @@ func processGraphicsLogic(_delta):
   elif Input.is_action_just_pressed("jump_button"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
+  colorblindHats.visible = global.memory["colorblindMode"]
 
 func processGlitchScreen(delta):
   if glitch_death_timer != 0:
@@ -335,14 +339,14 @@ func initializeControlsConfig():
       "sprite_aniPlayer": rightSpriteAniPlayer,
       "default_keyCode": 16777233, 
     },
-    {
-      "input_action": "run_button",
-      "label_str": "RUN",
-      "text_label": runTextLabel,
-      "sprite": runSprite,
-      "sprite_aniPlayer": runSpriteAniPlayer,
-      "default_keyCode": 16777237, 
-    },
+    # {
+    #   "input_action": "run_button",
+    #   "label_str": "RUN",
+    #   "text_label": runTextLabel,
+    #   "sprite": runSprite,
+    #   "sprite_aniPlayer": runSpriteAniPlayer,
+    #   "default_keyCode": 16777237, 
+    # },
     {
       "input_action": "ui_down",
       "label_str": "DOWN",
@@ -438,6 +442,7 @@ func processControlsLogic(_delta):
     control_index = controlsConfig.size() - 1
   if control_index >= controlsConfig.size():
     control_index = 0
+  cursorSprite.position.y = 120 + (58*control_index)
 
   var normal_size = Vector2(2, 2)
   var big_size = Vector2(3, 3)

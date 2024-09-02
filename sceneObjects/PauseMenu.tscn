@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -11,23 +11,14 @@
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=9]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=12]
+[ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=12]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=14]
-[ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/sprites2D/player_sheet_old.png" type="Texture" id=15]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=16]
-
-[sub_resource type="DynamicFont" id=60]
-size = 35
-outline_size = 3
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 15 )
-
-[sub_resource type="Theme" id=61]
-default_font = SubResource( 60 )
+[ext_resource path="res://assets/sprites2D/player_sheet_aged.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites2D/small_critters.png" type="Texture" id=19]
 
 [sub_resource type="Animation" id=37]
 length = 0.001
@@ -359,6 +350,102 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, -5 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../SmokeCloudSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 231, 334 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../SmokeCloudSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../SmokeCloudSprite2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 214, 329 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../SmokeCloudSprite2:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../SmokeCloudSprite2:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../SmokeCloudSprite:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 13 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../SmokeCloudSprite:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../SmokeCloudSprite2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "idle"
@@ -387,6 +474,54 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../SmokeCloudSprite2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../SmokeCloudSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../SmokeCloudSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 14, 13, 14, 15 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../SmokeCloudSprite2:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 14, 13, 14, 15 ]
 }
 
 [sub_resource type="ShaderMaterial" id=47]
@@ -460,10 +595,33 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 2 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../BroomSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../BroomSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 210, 369 ) ]
+}
 
 [sub_resource type="Animation" id=49]
 resource_name = "idle"
-length = 1.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -512,6 +670,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BroomSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 200, 348 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../BroomSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
 }
 
 [sub_resource type="ShaderMaterial" id=51]
@@ -758,7 +940,7 @@ margin_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -745, -223 )
-theme = SubResource( 61 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "[wave]RESUME[/wave]
@@ -787,9 +969,9 @@ margin_right = 640.0
 margin_bottom = 522.0
 
 [node name="LeftSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 241, 113 )
+position = Vector2( 243, 124 )
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 flip_h = true
 hframes = 8
 vframes = 8
@@ -806,12 +988,12 @@ anims/idle = SubResource( 38 )
 [node name="LeftTextLabel" type="RichTextLabel" parent="InputMenu"]
 margin_left = 280.5
 margin_top = 108.5
-margin_right = 426.5
-margin_bottom = 134.5
+margin_right = 580.5
+margin_bottom = 160.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "left
@@ -821,9 +1003,9 @@ text = "left
 scroll_active = false
 
 [node name="RightSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 238.5, 157.5 )
+position = Vector2( 239, 182 )
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
 frame = 2
@@ -837,14 +1019,14 @@ anims/RESET = SubResource( 39 )
 anims/idle = SubResource( 40 )
 
 [node name="RightTextLabel" type="RichTextLabel" parent="InputMenu"]
-margin_left = 282.5
-margin_top = 150.5
-margin_right = 427.5
-margin_bottom = 176.5
+margin_left = 283.0
+margin_top = 165.0
+margin_right = 583.0
+margin_bottom = 217.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[wave]right[/wave]"
@@ -852,9 +1034,10 @@ text = "right"
 scroll_active = false
 
 [node name="RunSprite" type="Sprite" parent="InputMenu"]
+visible = false
 position = Vector2( 236.5, 194.5 )
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
 frame = 2
@@ -878,14 +1061,15 @@ anims/RESET = SubResource( 58 )
 anims/idle = SubResource( 59 )
 
 [node name="RunTextLabel" type="RichTextLabel" parent="InputMenu"]
+visible = false
 margin_left = 280.5
 margin_top = 187.5
-margin_right = 425.5
-margin_bottom = 213.5
+margin_right = 580.5
+margin_bottom = 239.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "shift"
@@ -893,10 +1077,10 @@ text = "shift"
 scroll_active = false
 
 [node name="DownSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 244.5, 232.5 )
+position = Vector2( 246, 235 )
 rotation = 1.5708
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
 frame = 2
@@ -910,14 +1094,14 @@ anims/RESET = SubResource( 41 )
 anims/idle = SubResource( 42 )
 
 [node name="DownTextLabel" type="RichTextLabel" parent="InputMenu"]
-margin_left = 283.5
-margin_top = 229.0
-margin_right = 433.5
-margin_bottom = 255.0
+margin_left = 283.0
+margin_top = 223.5
+margin_right = 583.0
+margin_bottom = 275.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "down
@@ -929,10 +1113,10 @@ text = "down
 scroll_active = false
 
 [node name="UpSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 242.5, 281 )
+position = Vector2( 241, 295 )
 rotation = -1.5708
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
 frame = 2
@@ -946,14 +1130,14 @@ anims/RESET = SubResource( 43 )
 anims/idle = SubResource( 44 )
 
 [node name="UpTextLabel" type="RichTextLabel" parent="InputMenu"]
-margin_left = 283.5
-margin_top = 269.5
-margin_right = 435.0
-margin_bottom = 295.5
+margin_left = 284.0
+margin_top = 273.5
+margin_right = 584.0
+margin_bottom = 325.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "up
@@ -964,10 +1148,36 @@ text = "up
 "
 scroll_active = false
 
-[node name="JumpSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 243.5, 339.5 )
+[node name="SmokeCloudSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 231, 334 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
+texture = ExtResource( 19 )
+offset = Vector2( 10, 16 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 13
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="SmokeCloudSprite2" type="Sprite" parent="InputMenu"]
+position = Vector2( 214, 329 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 19 )
+offset = Vector2( 10, 16 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 15
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="JumpSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 243, 349 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
 offset = Vector2( 0, -5 )
 hframes = 8
 vframes = 8
@@ -982,14 +1192,14 @@ anims/RESET = SubResource( 45 )
 anims/idle = SubResource( 46 )
 
 [node name="JumpTextLabel" type="RichTextLabel" parent="InputMenu"]
-margin_left = 279.0
-margin_top = 322.0
-margin_right = 432.0
-margin_bottom = 348.0
+margin_left = 278.5
+margin_top = 331.5
+margin_right = 578.5
+margin_bottom = 383.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "z key
@@ -1002,7 +1212,7 @@ scroll_active = false
 
 [node name="BroomSprite" type="Sprite" parent="InputMenu"]
 material = SubResource( 47 )
-position = Vector2( 220, 352 )
+position = Vector2( 210, 369 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
 offset = Vector2( 10, 16 )
@@ -1015,9 +1225,9 @@ __meta__ = {
 }
 
 [node name="SweepSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 247, 394 )
+position = Vector2( 247, 415 )
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 flip_h = true
 hframes = 8
 vframes = 8
@@ -1033,13 +1243,13 @@ anims/idle = SubResource( 49 )
 
 [node name="SweepTextLabel" type="RichTextLabel" parent="InputMenu"]
 margin_left = 281.5
-margin_top = 383.0
-margin_right = 434.5
-margin_bottom = 409.0
+margin_top = 395.0
+margin_right = 581.5
+margin_bottom = 447.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "x key
@@ -1053,7 +1263,7 @@ scroll_active = false
 [node name="BroomSprite2" type="Sprite" parent="InputMenu"]
 visible = false
 material = SubResource( 47 )
-position = Vector2( 185.5, 344.5 )
+position = Vector2( 185, 381 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 offset = Vector2( 13, 5 )
@@ -1066,9 +1276,9 @@ __meta__ = {
 
 [node name="CastSprite" type="Sprite" parent="InputMenu"]
 material = SubResource( 51 )
-position = Vector2( 246, 446.5 )
+position = Vector2( 246, 473 )
 scale = Vector2( 2.1, 1.9 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
 frame = 1
@@ -1083,13 +1293,13 @@ anims/idle = SubResource( 53 )
 
 [node name="CastTextLabel" type="RichTextLabel" parent="InputMenu"]
 margin_left = 281.5
-margin_top = 438.5
-margin_right = 435.5
-margin_bottom = 464.5
+margin_top = 465.0
+margin_right = 581.5
+margin_bottom = 517.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
-theme = ExtResource( 8 )
+theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "c key"
@@ -1097,7 +1307,7 @@ text = "c key"
 scroll_active = false
 
 [node name="EquipmentSprite" type="Sprite" parent="InputMenu"]
-position = Vector2( 208, 451.5 )
+position = Vector2( 208, 474 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
 hframes = 6
@@ -1167,6 +1377,56 @@ hframes = 6
 vframes = 5
 frame = 26
 script = ExtResource( 13 )
+
+[node name="ColorblindPlayers" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PlayerSpritGreen" type="Sprite" parent="ColorblindPlayers"]
+material = SubResource( 62 )
+position = Vector2( 61, 291 )
+scale = Vector2( -3, 3 )
+texture = ExtResource( 17 )
+hframes = 8
+vframes = 8
+script = ExtResource( 13 )
+max_frames = 1
+
+[node name="PlayerSpriteRed" type="Sprite" parent="ColorblindPlayers"]
+material = SubResource( 62 )
+position = Vector2( 114, 291 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 17 )
+hframes = 8
+vframes = 8
+frame = 1
+script = ExtResource( 13 )
+max_frames = 1
+
+[node name="ColorblindHats" type="Control" parent="ColorblindPlayers"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PlayerHatRed" type="Sprite" parent="ColorblindPlayers/ColorblindHats"]
+material = SubResource( 62 )
+position = Vector2( 122, 253 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 4
+frame = 1
+script = ExtResource( 13 )
+max_frames = 1
+
+[node name="PlayerHatGreen" type="Sprite" parent="ColorblindPlayers/ColorblindHats"]
+material = SubResource( 62 )
+position = Vector2( 50, 259 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 4
+script = ExtResource( 13 )
+max_frames = 1
 
 [node name="PopupRect" type="ColorRect" parent="."]
 visible = false
