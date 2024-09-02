@@ -1237,7 +1237,6 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 13 )]
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
-visible = false
 margin_left = 5.0
 margin_top = 479.0
 margin_right = 717.0
@@ -1247,8 +1246,8 @@ grow_vertical = 2
 theme = SubResource( 190 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[X] to Jump. [C] to Sweep. Arrow keys to walk.."
-text = "[X] to Jump. [C] to Sweep. Arrow keys to walk.."
+bbcode_text = "[Z] to Jump. [X] to Sweep. Arrow keys to walk.."
+text = "[Z] to Jump. [X] to Sweep. Arrow keys to walk.."
 scroll_active = false
 
 [editable path="Viewport/level/Player"]
@@ -1272,3 +1271,4 @@ scroll_active = false
 [editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
+[editable path="UILayer"]

@@ -1,16 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/title.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/music/wakeup.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/music/dungeon.mp3" type="AudioStream" id=5]
-[ext_resource path="res://assets/DELETEME/tumblr_c858d28f9886fe8e09939d365c165486_c9576aa6_0.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/music/demon suburb.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/music/selfrealization.mp3" type="AudioStream" id=8]
-[ext_resource path="res://assets/music/echoisland_ben.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
-[ext_resource path="res://assets/DELETEME/markeryjane - newyear.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/music/prairie swamp.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/music/explore2.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/music/soeth.mp3" type="AudioStream" id=14]
@@ -23,20 +20,17 @@
 [ext_resource path="res://assets/music/sfx005_cavelizards.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/music/explore.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/eba_leaves.wav" type="AudioStream" id=23]
-[ext_resource path="res://assets/DELETEME/03 continue.mp3" type="AudioStream" id=25]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
-stopAllMusic = true
 
 [node name="WindPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 volume_db = -15.0
 
 [node name="RestZonePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
-volume_db = -22.0
-pitch_scale = 0.5
+stream = ExtResource( 17 )
+volume_db = -18.0
 
 [node name="TitleThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -79,11 +73,9 @@ stream = ExtResource( 22 )
 volume_db = -30.0
 
 [node name="OceanThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
 volume_db = -5.0
 
 [node name="PriestessThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
 volume_db = -20.0
 
 [node name="RealizationThemePlayer" type="AudioStreamPlayer" parent="."]
@@ -120,7 +112,6 @@ volume_db = -20.0
 pitch_scale = 1.5
 
 [node name="ContinueThemePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 25 )
 volume_db = -20.0
 pitch_scale = 0.5
 

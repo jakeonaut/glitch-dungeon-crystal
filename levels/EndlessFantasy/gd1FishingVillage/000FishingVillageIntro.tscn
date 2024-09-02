@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -126,22 +126,6 @@ resource_local_to_scene = true
 extents = Vector3( 1, 0.8, 1.3 )
 
 [sub_resource type="BoxShape" id=38]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=46]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.75, 1 )
-
-[sub_resource type="BoxShape" id=47]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
-
-[sub_resource type="BoxShape" id=40]
-resource_local_to_scene = true
-extents = Vector3( 1, 0.8, 1.3 )
-
-[sub_resource type="BoxShape" id=41]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
@@ -347,6 +331,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4, 11.1, 0 )
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 14.6, 0 )
 
+[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 24.6, 0 )
+
+[node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 23.6, 0 )
+
+[node name="miniCubeCrystal12" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 23.6, 0 )
+
 [node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 12.6, 0 )
 
@@ -444,9 +437,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.558517, -10.4259, 5 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
 
-[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 36 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 23, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
 is_locked = null
@@ -476,33 +466,6 @@ shape = SubResource( 38 )
 
 [node name="WaterCube10" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -4 )
-
-[node name="Door3" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 22, 0 )
-is_locked = null
-should_lock = null
-path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
-parter_door_id = null
-dont_recolor_me = null
-is_passive = null
-is_vertical = null
-num_keys_unlock = null
-locked_to_monsters = null
-is_level_door = null
-is_immediate = null
-key_type = null
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 46 )
-
-[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
-shape = SubResource( 47 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 40 )
-
-[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
-shape = SubResource( 41 )
 
 [node name="WaterCube18" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 15, -4 )
@@ -564,7 +527,5 @@ flip_v = true
 [editable path="Viewport/level/Waterfall2/AreaSound"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/Door3"]
-[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

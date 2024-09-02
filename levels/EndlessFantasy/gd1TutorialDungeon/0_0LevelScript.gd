@@ -49,5 +49,7 @@ func _process(_delta):
       showInstructions = false
       print("false 2")
   
-  if showInstructions:
-    uiLayer.get_node("PressC").visible = global.activeInteractor == null and player.physics_state != player.PhysicsState.WAKING_UP
+  if global.isPauseMenuOpen:
+    uiLayer.get_node("PressC").visible = false
+  elif showInstructions:
+    uiLayer.get_node("PressC").visible = global.activeInteractor == null and player.physics_state != player.PhysicsState.WAKING_UP and not global.isPauseMenuOpen

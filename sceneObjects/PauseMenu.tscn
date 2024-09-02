@@ -1,153 +1,1218 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=38 format=2]
 
-[ext_resource path="res://scripts/TextBox.gd" type="Script" id=1]
-[ext_resource path="res://assets/textures/closebutton.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=4]
-[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=5]
-[ext_resource path="res://scripts/AbortSound.gd" type="Script" id=6]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://shaders/Sprite2DPaletteShader.shader" type="Shader" id=3]
+[ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/player_sheet_broom.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/broom_ani.png" type="Texture" id=7]
+[ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=8]
+[ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=9]
+[ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=12]
+[ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=16]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0.392157, 0.215686, 0.882353, 1 )
+[sub_resource type="DynamicFont" id=60]
+size = 35
+outline_size = 3
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 15 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="Theme" id=61]
+default_font = SubResource( 60 )
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 1, 0, 0.937255, 1 )
+[sub_resource type="Animation" id=37]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
-width = 100
+[sub_resource type="Animation" id=38]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
 
-[sub_resource type="DynamicFont" id=5]
-size = 27
-extra_spacing_top = 16
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 3 )
+[sub_resource type="Animation" id=39]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
 
-[node name="PauseMenu" type="CanvasLayer"]
+[sub_resource type="Animation" id=40]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
 
-[node name="MenuBox" type="TextureRect" parent="."]
-margin_left = 18.0
-margin_top = 21.0
-margin_right = 748.0
-margin_bottom = 740.0
-texture = SubResource( 2 )
+[sub_resource type="Animation" id=58]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmokeCloudSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeCloudSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeCloudSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13.0952, 4.47369 ) ]
+}
+
+[sub_resource type="Animation" id=59]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 2, 3, 2, 3, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SmokeCloudSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmokeCloudSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeCloudSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -13.0952, 4.47369 ), Vector2( -20, 4.47369 ), Vector2( -13.0952, 4.47369 ) ]
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=43]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=45]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 15, 4, 5, 4, 14, 6, 7, 15, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=47]
+shader = ExtResource( 3 )
+shader_param/screen_mode = false
+shader_param/num_colors = 16
+shader_param/offset = 3
+shader_param/precision = 0.4
+shader_param/palette_in = ExtResource( 2 )
+shader_param/palette_out = ExtResource( 4 )
+
+[sub_resource type="Animation" id=48]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10, 16 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BroomSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "idle"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 51, 15, 24, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BroomSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 10, 16 ), Vector2( 8, 16 ), Vector2( 6, 18 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3 ]
+}
+
+[sub_resource type="ShaderMaterial" id=51]
+shader = ExtResource( 3 )
+shader_param/screen_mode = false
+shader_param/num_colors = 16
+shader_param/offset = 0
+shader_param/precision = 0.9
+shader_param/palette_in = ExtResource( 2 )
+shader_param/palette_out = ExtResource( 1 )
+
+[sub_resource type="Animation" id=52]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 1.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite2:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 13, 5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BroomSprite2:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 51, 15, 24, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BroomSprite2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ false, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BroomSprite2:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 19, 5 ), Vector2( 26, 16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BroomSprite2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "changeCastSpritePalette"
+} ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=62]
+
+[node name="PauseMenu" type="Control"]
+margin_top = 12.0
+margin_right = 640.0
+margin_bottom = 522.0
+script = ExtResource( 16 )
+
+[node name="PauseMenuRect" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 522.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.843137 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenuRect"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 570.0
+margin_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.447059, 0.454902, 0.454902, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="PauseMenuRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 562.0
+margin_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 10 )
 expand = true
-script = ExtResource( 1 )
+stretch_mode = 7
 
-[node name="TitleBar" type="TextureRect" parent="MenuBox"]
-margin_right = 471.0
-margin_bottom = 53.0
-texture = SubResource( 4 )
-expand = true
+[node name="ColorRect2" type="ColorRect" parent="PauseMenuRect/ColorRect/ColorRect"]
+margin_right = 558.0
+margin_bottom = 427.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
 
-[node name="TextureButton" type="TextureButton" parent="MenuBox/TitleBar"]
-margin_left = 424.037
-margin_top = 5.09308
-margin_right = 464.037
-margin_bottom = 46.0931
-shortcut_in_tooltip = false
-texture_normal = ExtResource( 2 )
-expand = true
+[node name="PauseTitle" type="ColorRect" parent="."]
+visible = false
+margin_left = 222.5
+margin_top = 12.0
+margin_right = 428.5
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="Text5" type="RichTextLabel" parent="MenuBox/TitleBar"]
-margin_left = 112.0
-margin_top = 87.0
-margin_right = 335.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = "costume"
-text = "costume"
+[node name="ColorRect" type="ColorRect" parent="PauseTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 202.0
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Sprite" type="Sprite" parent="MenuBox"]
-position = Vector2( 60, 110 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-vframes = 8
+[node name="ColorRect" type="ColorRect" parent="PauseTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 193.0
+margin_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseTitle/ColorRect/ColorRect"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "paused..."
+text = "paused..."
+scroll_active = false
+
+[node name="NormalMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NormalMenu"]
+margin_left = 215.0
+margin_top = 104.0
+margin_right = 658.0
+margin_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( -745, -223 )
+theme = SubResource( 61 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]RESUME[/wave]
+
+GRAPHICS
+
+SOUND
+
+INPUT
+
+QUIT TO MAIN"
+text = "RESUME
+
+GRAPHICS
+
+SOUND
+
+INPUT
+
+QUIT TO MAIN"
+scroll_active = false
+
+[node name="InputMenu" type="Control" parent="."]
+visible = false
+margin_right = 640.0
+margin_bottom = 522.0
+
+[node name="LeftSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 241, 113 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
+flip_h = true
 hframes = 8
-
-[node name="Text" type="RichTextLabel" parent="MenuBox"]
-margin_left = 23.0
-margin_top = 1.0
-margin_right = 246.0
-margin_bottom = 54.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = "menu"
-text = "menu"
-
-[node name="Sprite2" type="Sprite" parent="MenuBox"]
-position = Vector2( 64, 192 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
 vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/LeftSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 37 )
+anims/idle = SubResource( 38 )
+
+[node name="LeftTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 280.5
+margin_top = 108.5
+margin_right = 426.5
+margin_bottom = 134.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "left
+"
+text = "left
+"
+scroll_active = false
+
+[node name="RightSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 238.5, 157.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
 hframes = 8
-frame = 16
-
-[node name="Text2" type="RichTextLabel" parent="MenuBox"]
-margin_left = 111.0
-margin_top = 161.0
-margin_right = 334.0
-margin_bottom = 214.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = "palette"
-text = "palette"
-
-[node name="Sprite3" type="Sprite" parent="MenuBox"]
-position = Vector2( 62, 273 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
 vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/RightSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 39 )
+anims/idle = SubResource( 40 )
+
+[node name="RightTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 282.5
+margin_top = 150.5
+margin_right = 427.5
+margin_bottom = 176.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]right[/wave]"
+text = "right"
+scroll_active = false
+
+[node name="RunSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 236.5, 194.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
 hframes = 8
-frame = 32
-
-[node name="Text3" type="RichTextLabel" parent="MenuBox"]
-margin_left = 113.0
-margin_top = 247.0
-margin_right = 336.0
-margin_bottom = 300.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = "glitch"
-text = "glitch"
-
-[node name="Sprite4" type="Sprite" parent="MenuBox"]
-position = Vector2( 61, 346 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
 vframes = 8
-hframes = 8
-frame = 49
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
 
-[node name="Text4" type="RichTextLabel" parent="MenuBox"]
-margin_left = 112.0
+[node name="SmokeCloudSprite" type="Sprite" parent="InputMenu/RunSprite"]
+position = Vector2( -13.0952, 4.47369 )
+texture = ExtResource( 6 )
+hframes = 8
+vframes = 8
+frame = 12
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/RunSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 58 )
+anims/idle = SubResource( 59 )
+
+[node name="RunTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 280.5
+margin_top = 187.5
+margin_right = 425.5
+margin_bottom = 213.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "shift"
+text = "shift"
+scroll_active = false
+
+[node name="DownSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 244.5, 232.5 )
+rotation = 1.5708
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/DownSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 41 )
+anims/idle = SubResource( 42 )
+
+[node name="DownTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 283.5
+margin_top = 229.0
+margin_right = 433.5
+margin_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "down
+
+"
+text = "down
+
+"
+scroll_active = false
+
+[node name="UpSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 242.5, 281 )
+rotation = -1.5708
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
+hframes = 8
+vframes = 8
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/UpSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 43 )
+anims/idle = SubResource( 44 )
+
+[node name="UpTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 283.5
+margin_top = 269.5
+margin_right = 435.0
+margin_bottom = 295.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "up
+
+"
+text = "up
+
+"
+scroll_active = false
+
+[node name="JumpSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 243.5, 339.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+offset = Vector2( 0, -5 )
+hframes = 8
+vframes = 8
+frame = 5
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/JumpSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 45 )
+anims/idle = SubResource( 46 )
+
+[node name="JumpTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 279.0
 margin_top = 322.0
-margin_right = 335.0
-margin_bottom = 375.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = "party"
-text = "party"
+margin_right = 432.0
+margin_bottom = 348.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "z key
 
-[node name="DialogSound" type="AudioStreamPlayer" parent="MenuBox"]
-stream = ExtResource( 5 )
-volume_db = -10.0
-script = ExtResource( 6 )
+"
+text = "z key
 
-[node name="AbortSound" type="AudioStreamPlayer" parent="MenuBox"]
-stream = ExtResource( 5 )
-volume_db = -20.0
-script = ExtResource( 6 )
+"
+scroll_active = false
 
+[node name="BroomSprite" type="Sprite" parent="InputMenu"]
+material = SubResource( 47 )
+position = Vector2( 220, 352 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+offset = Vector2( 10, 16 )
+flip_h = true
+hframes = 4
+vframes = 4
+frame = 2
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="SweepSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 247, 394 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
+flip_h = true
+hframes = 8
+vframes = 8
+frame = 15
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/SweepSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 48 )
+anims/idle = SubResource( 49 )
+
+[node name="SweepTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 281.5
+margin_top = 383.0
+margin_right = 434.5
+margin_bottom = 409.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "x key
+
+"
+text = "x key
+
+"
+scroll_active = false
+
+[node name="BroomSprite2" type="Sprite" parent="InputMenu"]
+visible = false
+material = SubResource( 47 )
+position = Vector2( 185.5, 344.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+offset = Vector2( 13, 5 )
+hframes = 8
+vframes = 8
+frame = 1
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="CastSprite" type="Sprite" parent="InputMenu"]
+material = SubResource( 51 )
+position = Vector2( 246, 446.5 )
+scale = Vector2( 2.1, 1.9 )
+texture = ExtResource( 12 )
+hframes = 8
+vframes = 8
+frame = 1
+__meta__ = {
+"_editor_description_": "3	"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputMenu/CastSprite"]
+autoplay = "RESET"
+anims/RESET = SubResource( 52 )
+anims/idle = SubResource( 53 )
+
+[node name="CastTextLabel" type="RichTextLabel" parent="InputMenu"]
+margin_left = 281.5
+margin_top = 438.5
+margin_right = 435.5
+margin_bottom = 464.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "c key"
+text = "c key"
+scroll_active = false
+
+[node name="EquipmentSprite" type="Sprite" parent="InputMenu"]
+position = Vector2( 208, 451.5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+hframes = 6
+vframes = 5
+
+[node name="MenuMoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="PauseTitleRect" type="ColorRect" parent="."]
+margin_left = 87.0
+margin_right = 559.0
+margin_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseTitleRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseTitleRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 460.0
+margin_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseTitleRect/ColorRect/ColorRect"]
+margin_left = 11.0
+margin_top = -1.0
+margin_right = 527.0
+margin_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "press X to select, Z to go back
+     hold ENTER: reset bindings"
+text = "press X to select, Z to go back
+     hold ENTER: reset bindings"
+scroll_active = false
+
+[node name="CursorSprite" type="Sprite" parent="."]
+material = SubResource( 62 )
+position = Vector2( 58, 43 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 14 )
+hframes = 6
+vframes = 5
+frame = 26
+script = ExtResource( 13 )
+
+[node name="PopupRect" type="ColorRect" parent="."]
+visible = false
+margin_left = 109.0
+margin_top = 213.0
+margin_right = 519.0
+margin_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PopupRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 405.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PopupRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 398.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupRect/ColorRect/ColorRect"]
+margin_left = 11.0
+margin_top = 3.0
+margin_right = 394.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "the dungeon"
+text = "the dungeon"
+scroll_active = false

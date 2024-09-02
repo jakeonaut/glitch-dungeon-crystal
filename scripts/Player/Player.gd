@@ -660,7 +660,7 @@ func processGlitchHurtRecovery(delta):
       glitch_death_timer += (delta*22)
       applyGlitchDeathEffects(abs(glitch_death_timer))
       if glitch_death_timer >= 20 and should_turn_on_glitch_screen_effects:
-        level.glitchScreenEffect.visible = true
+        level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
         should_turn_on_glitch_screen_effects = false
       if glitch_death_timer >= 40:
         musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
@@ -690,7 +690,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
       lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
 
 func applyGlitchDeathEffects(x):
-  if global.canChangeSongPitch and (x < 0 or x > 20):
+  if global.memory["canChangeSongPitch"] and (x < 0 or x > 20):
     musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
   if x > 10:
     mySprite.material_override.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
@@ -1225,7 +1225,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   mySprite.material_override.set_shader_param("enable_glitch", true)
   mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   
-  if global.canChangeSongPitch:
+  if global.memory["canChangeSongPitch"]:
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
@@ -1283,7 +1283,7 @@ func actuallyProcessDeath(should_glitch):
   physics_state = PhysicsState.GLITCH_DYING
   glitch_death_timer = 0
   # TODO(jaketrower): RESPECT MORE
-  if global.canGlitchScreen and should_glitch:
+  if global.memory["canGlitchScreen"] and should_glitch:
     level.glitchScreenEffect.visible = true
   if summonedBroom:
     broomStop()
@@ -1696,7 +1696,7 @@ func processPoisonWaterLogic(delta):
         reversePoisonWaterSound.stop()
 
   if poison_timer > 0:
-    level.glitchScreenEffect.visible = true
+    level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
     level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
     musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
   if poison_timer < 0:

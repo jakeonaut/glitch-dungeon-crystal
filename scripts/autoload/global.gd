@@ -149,10 +149,6 @@ var collectable_key_recently_got = null
 var collectable_key_recently_got_timer = 0
 var collectable_key_recently_got_time_limit = 40
 
-var canGlitchScreen = true
-var canChangeSongPitch = true
-var crtScreenEffects = true
-
 var time_dilation_multiplier = 1.0
 
 var mini_cube_crystal_pitch_min = 0.5
@@ -184,9 +180,6 @@ func _ready():
     if pauseMoveInput: pass
     if pauseGame: pass
     if num_cherries_eaten > 0: pass
-    if canGlitchScreen: pass
-    if canChangeSongPitch: pass
-    if crtScreenEffects: pass
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
@@ -194,6 +187,9 @@ func _ready():
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
     memory["show_color_blind"] = false
+    memory["canGlitchScreen"] = true
+    memory["stopAllMusic"] = false
+    memory["canChangeSongPitch"] = true
 
     # game stuff
     memory["has_game_started"] = 0
@@ -227,15 +223,15 @@ func _ready():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 2
+    memory["broomerang"] = 0
     memory["multi_broom"] = false
     memory["debug_broom"] = 0 # this didn't turn out that fun
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
 
     # GAME MODES
