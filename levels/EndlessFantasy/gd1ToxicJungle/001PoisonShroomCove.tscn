@@ -129,6 +129,7 @@ show_crt_effect = true
 tileset_type = 6
 has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
+pacman_wrapping = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 20 )]
 

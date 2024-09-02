@@ -14,6 +14,8 @@ func activateScript():
     textBox.textNode.bbcode_text = newText
   else:
     var newText = "*meow*\n•(for some weird reason,\nyou can hear me?)\n•(i smell an unpurified\n[color=red]CRYSTAL[/color] in this area)"
+    textBox.text_final = newText
+    textBox.textNode.bbcode_text = newText
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

@@ -6,8 +6,7 @@ onready var crystalGeode2 = get_node("../../../..")
 func _ready():
   pass
 
-var NUM_GEMS_FOR_BROOMERANG = 30
-var NUM_GEMS_FOR_BROOMERANG_WARP = 99
+
 func activateScript():
   if global.memory["crone"] == 0:
     return
@@ -17,9 +16,9 @@ func activateScript():
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false
   elif (global.memory["crone"] == 1 or global.memory["crone"] == 3) and global.memory["broomerang"] < 2:
-    var text = "•trade " + str(NUM_GEMS_FOR_BROOMERANG) + " gems for\n[color=red]BROOMERANG[/color]?"
+    var text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG) + " gems for\n[color=red]BROOMERANG[/color]?"
     if global.memory["broomerang"] == 1:
-      text = "•trade " + str(NUM_GEMS_FOR_BROOMERANG_WARP) + " gems for\n[color=red]BROOMERANG WARP[/color]?"
+      text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " gems for\n[color=red]BROOMERANG WARP[/color]?"
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true

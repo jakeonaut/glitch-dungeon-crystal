@@ -511,7 +511,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
 
-    var curr_coords = level.getLevelManagerCoords()
+    var curr_coords = level.getLevelManagerCoords() if not level.pacman_wrapping else null
     var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
     if new_coords != null and not level.pacman_wrapping:
       transition.fast_fade_to(new_coords)

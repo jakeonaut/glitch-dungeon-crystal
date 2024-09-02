@@ -12548,7 +12548,7 @@ shape = SubResource( 24 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45.7, -1, 0 )
-is_locked = null
+is_locked = true
 should_lock = null
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
 parter_door_id = null
@@ -12559,7 +12559,7 @@ num_keys_unlock = 1
 locked_to_monsters = null
 is_level_door = null
 is_immediate = null
-key_type = null
+key_type = 3
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
 anims/RESET = SubResource( 299 )

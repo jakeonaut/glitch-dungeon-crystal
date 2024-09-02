@@ -165,6 +165,8 @@ var hasGottenLevelGeode = false
 var isAMoleDigging = false
 
 var isOnMainMenu = false
+var NUM_GEMS_FOR_BROOMERANG = 50
+var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
 func _ready():
     set_process(true)
