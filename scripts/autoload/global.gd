@@ -693,7 +693,7 @@ func getThingFromAllLevelZonez(thing):
             continue
         if not self.memory[levelZone].has(thing):
             continue
-        thingSum += self.memory[levelZone][thing]
+        thingSum += int(self.memory[levelZone][thing])
     return thingSum
 
 func setLevelZoneThing(thing, val):

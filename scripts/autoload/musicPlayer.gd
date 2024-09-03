@@ -190,7 +190,6 @@ func conductFromScenePath(path):
         changeSongPitch(2.0)
 
 func changeSongPitch(new_pitch):
-    print("new_pitch: " + str(new_pitch))
     # TODO(jaketrower): reset pitches when you play them
     if currentlyPlayingTheme:
         currentlyPlayingTheme.pitch_scale = new_pitch

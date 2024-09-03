@@ -22,17 +22,27 @@ func _ready():
             spawn(false)
             has_spawned = true
         if global.getStaticLevelZoneLevelVar(level, self) == 2:
-            queue_free()
+            has_spawned = true
 
 func spawnEffect(child):
     level.summonSmokeClouds(child.global_transform.origin, 2, true, true)
 
-func _process(_delta):
-    var is_condition_active = isConditionActive()
-    is_active = is_condition_active and not has_spawned
-    if not is_condition_active:
+# @override
+func processSpawningLogic(_delta):
+    if has_spawned:
+        return
+
+    am_i_in_range_of_player = am_i_really_in_range_of_player or (not only_activate_in_range)
+    am_i_really_in_range_of_player = false
+    is_active = isConditionActive()
+ 
+    if not is_active:
+        # should I put this in _ready ?
         for child in self.get_foreign_children():
             child.visible = false
+        return
+
+    spawn()
 
 func isConditionActive():
     return global.getLevelZoneThing("crystal_geode")
@@ -52,19 +62,7 @@ func spawn(with_flare = true):
     has_spawned = true
 
     if with_flare:
-        spawnSound.play()
-        spawnSound2.play()
-
-        var newSmokeCloud = glitchParticleBurstRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y - 1
-        yield(TempTimer.idle_frame(self), "timeout")
-        newSmokeCloud = glitchParticleBurstRes.instance()
-        level.add_child(newSmokeCloud)
-        newSmokeCloud.global_transform.origin.x = self.global_transform.origin.x
-        newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + 1
-
+        level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
         if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self):
             global.setStaticLevelZoneLevelVar(level, self, 1)
 

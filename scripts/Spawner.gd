@@ -36,7 +36,9 @@ func get_foreign_children():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
-    
+    processSpawningLogic(delta)
+
+func processSpawningLogic(delta):
     am_i_in_range_of_player = am_i_really_in_range_of_player or (not only_activate_in_range)
     am_i_really_in_range_of_player = false
     

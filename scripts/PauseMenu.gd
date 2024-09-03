@@ -151,6 +151,7 @@ func processNormalLogic(_delta):
     pauseMenuState = PauseMenuState.TEMP
     shouldUpdateMenuText = true
     if normalOptionIndex == 0:
+      yield(get_tree().create_timer(0.1), "timeout")
       global.isPauseMenuOpen = false
       global.pauseGame = false
       getPlayer().unpauseSound.play()
@@ -167,6 +168,12 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
+  elif Input.is_action_just_pressed("jump_button"):
+    yield(get_tree().create_timer(0.1), "timeout")
+    global.isPauseMenuOpen = false
+    global.pauseGame = false
+    getPlayer().unpauseSound.play()
+    level.restartMusic()
 
 onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")

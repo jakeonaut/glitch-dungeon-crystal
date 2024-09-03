@@ -86,7 +86,7 @@ func _ready():
   animationPlayer.clear_queue()
   animationPlayer.stop()
   if is_locked:
-    animationPlayer.play("locked")
+    queueLockAnimation()
   elif should_lock or locked_to_monsters:
     is_locked = true
     doorCloseSound.play()
@@ -574,6 +574,20 @@ func lockMeUp(num_keys):
   animationPlayer.stop()
   animationPlayer.clear_queue()
   animationPlayer.queue("doorClose")
-  animationPlayer.queue("locked")
+  queueLockAnimation()
   is_locked = true
   num_keys_unlock = num_keys
+
+func queueLockAnimation():
+  if key_type == global.KeyItem.FISH:
+    animationPlayer.queue("fishLocked")
+  elif key_type == global.KeyItem.PYRAMID:
+    animationPlayer.queue("pyramidLocked")
+  elif key_type == global.KeyItem.SHROOM:
+    animationPlayer.queue("shroomLocked")
+  elif key_type == global.KeyItem.CAT:
+    animationPlayer.queue("catLocked")
+  elif key_type == global.KeyItem.CRYSTAL:
+    animationPlayer.queue("crystalLocked")
+  else:
+    animationPlayer.queue("locked")

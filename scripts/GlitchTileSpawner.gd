@@ -1,4 +1,5 @@
-extends "GeodeSpawner.gd"
+extends "GeodeSpawner.gd" # should inherit Spawner and make it more generic
+# give it a "is_immediate_and_once" vs "is_intermittent and continuous" flag
 
 var levelTiles = null
 func getLevelTiles():
