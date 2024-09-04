@@ -112,6 +112,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.02731, 0 )
 glitch_form = 1
 
+[node name="GlitchGrandmaManager2" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.02731, 0 )
+glitch_form = 2
+
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
