@@ -15,6 +15,7 @@ onready var mySprite = get_node("Sprite3D")
 var smacked_npc = null
 var have_i_smacked_an_npc = false
 var is_active = true
+var is_evil = false
 
 var levelTiles = null
 func getLevelTiles():
@@ -45,7 +46,7 @@ func _process(delta):
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0
     if my_broom_owner and can_stop_player: 
-      if global.memory["multi_broom"]:
+      if global.memory["multi_broom"] and my_broom_owner == level.player:
         my_broom_owner.secretMultiBroom = self
         if my_broom_owner.isHoldingMultiBroom():
           my_broom_owner.summonedBroom = null
@@ -55,7 +56,7 @@ func _process(delta):
     visible = false
     
   if not visible and not broomSound.is_playing():
-    if my_broom_owner.isHoldingMultiBroom():
+    if my_broom_owner == level.player and my_broom_owner.isHoldingMultiBroom():
       visible = true
       broom_active_timer = 0
       aniPlayer.play(aniPlayer.assigned_animation)

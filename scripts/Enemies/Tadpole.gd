@@ -99,7 +99,7 @@ func glitchSetSpritesAndCollision():
 
 var can_be_smacked = true
 # @override 
-func getSmacked(broom_origin, silently = false):
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if not can_be_smacked:
     return
   .getSmacked(broom_origin, silently)

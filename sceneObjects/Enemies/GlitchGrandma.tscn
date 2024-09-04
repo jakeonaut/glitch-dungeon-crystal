@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=2]
@@ -173,7 +173,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.25, 1.5, 2 ) ]
+"values": [ Vector3( 0.25, 1.65, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite3DBroomVisible:visible")
@@ -234,6 +234,18 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -323,6 +335,46 @@ tracks/6/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "broomWindUp"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 106, 107, 113 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0.79255, 0.7 ), Vector3( -0.241179, 1.31404, 0.7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3DBroomAnimated:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 23 ]
+}
+
 [sub_resource type="Animation" id=12]
 resource_name = "fall"
 length = 0.4
@@ -363,6 +415,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "jump"
@@ -390,7 +454,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1.8, 2 ) ]
+"values": [ Vector3( 0, 1.95, 2 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite3DBroomAnimated:frame")
@@ -403,6 +467,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -442,7 +518,19 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.25, 1.5, 2 ) ]
+"values": [ Vector3( 0, 1.55, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -484,6 +572,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0.25, 1.5, 2 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "stand"
@@ -524,6 +624,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0.25, 1.5, 2 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "sweepAttack"
@@ -535,10 +647,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 113, 114 ]
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 113, 114, 107 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpellbookGlitchSprite:translation")
@@ -550,7 +662,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.75, 1.5, 2 ), Vector3( 0.25, 1.5, 2 ) ]
+"values": [ Vector3( -0.25, 1.5, 2 ), Vector3( 0, 1.5, 2 ) ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -588,10 +700,22 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.25, 1.65, 2 ), Vector3( 0.25, 1.55, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.25, 1.5, 2 ) ]
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -629,14 +753,27 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0.25, 1.65, 2 ), Vector3( 0.25, 1.55, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0.25, 1.5, 2 ) ]
+"values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
 
 [node name="GlitchGrandma" type="Spatial"]
 script = ExtResource( 10 )
+mushroomEmbiggensMe = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5 )
@@ -659,7 +796,7 @@ script = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "enemies"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
 script = ExtResource( 1 )
 
@@ -716,13 +853,12 @@ hframes = 8
 vframes = 8
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.5, 2 )
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.25, 1.65, 2 )
 material_override = SubResource( 10 )
 pixel_size = 0.125
 texture = ExtResource( 18 )
 hframes = 4
 vframes = 6
-frame = 1
 script = ExtResource( 6 )
 max_frames = 1
 should_animate = false
@@ -730,6 +866,7 @@ should_animate = false
 [node name="SecretAniPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 11 )
 anims/appear = SubResource( 20 )
+anims/broomWindUp = SubResource( 21 )
 anims/fall = SubResource( 12 )
 anims/jump = SubResource( 13 )
 anims/jumpStart = SubResource( 14 )

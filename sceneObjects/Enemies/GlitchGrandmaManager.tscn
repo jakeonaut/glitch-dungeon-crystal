@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sceneObjects/Enemies/GlitchGrandma.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sceneObjects/Enemies/CursedGrandmaStatue.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Enemies/GlitchGrandmaManager.gd" type="Script" id=3]
+
+[node name="GlitchGrandmaManager" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="GlitchGrandma" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223662, 0 )
+visible = false
+
+[node name="CursedGrandmaStatue" parent="." instance=ExtResource( 2 )]
+true_terminal_vel = 32
+lb = -0.72
+rb = 0.72
+tb = 1.0
+bb = -1.0
+grav = 60
+walk_speed = 8.0
+run_speed = 10
+glitch_form = 0
+feather_glitch_walk_speed = 9
+floor_glitch_walk_speed = 3
+invisible_glitch_walk_speed = 6
+swimming_walk_speed = 6
+jump_force = 16
+invisible_jump_force = 14
+max_dist_to_player = 30

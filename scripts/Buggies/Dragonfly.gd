@@ -113,7 +113,7 @@ func passiveActivate(_delta, _is_player):
 export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     if is_smacked:
         return
 

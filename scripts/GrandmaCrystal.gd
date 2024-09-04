@@ -84,7 +84,7 @@ func unsmack():
     mySprite.material_override = material
 
 
-func getSmacked(_broom_origin, _silently = false):
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up

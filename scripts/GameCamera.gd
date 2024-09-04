@@ -27,8 +27,8 @@ var CAMERA_SIZE = 25
 export var override_camera_size = 0
 func _ready():
   if override_camera_size == 0:
-    initial_size = CAMERA_SIZE# self.size
-    zoomed_size = CAMERA_SIZE # (initial_size-8)
+    initial_size = CAMERA_SIZE
+    zoomed_size = CAMERA_SIZE
   else:
     initial_size = override_camera_size
     zoomed_size = override_camera_size

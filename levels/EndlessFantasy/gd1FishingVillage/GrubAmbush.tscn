@@ -410,9 +410,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 10, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, -1, 0 )
+is_locked = false
+should_lock = false
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+parter_door_id = ""
+dont_recolor_me = false
+is_passive = false
+is_vertical = false
+num_keys_unlock = 999
+locked_to_monsters = false
+is_level_door = false
+is_immediate = false
+key_type = 0
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -429,10 +440,20 @@ shape = SubResource( 30 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 0 )
+is_locked = false
+should_lock = false
+path = ""
 parter_door_id = "Door4"
+dont_recolor_me = false
+is_passive = false
+is_vertical = false
+num_keys_unlock = 999
 locked_to_monsters = true
+is_level_door = false
+is_immediate = false
+key_type = 0
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/doorClose = SubResource( 23 )
 anims/doorOpen = SubResource( 24 )
 anims/locked = SubResource( 25 )
@@ -451,10 +472,20 @@ shape = SubResource( 32 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11, 0 )
+is_locked = false
+should_lock = false
+path = ""
 parter_door_id = "Door3"
+dont_recolor_me = false
+is_passive = false
+is_vertical = false
+num_keys_unlock = 999
 locked_to_monsters = true
+is_level_door = false
+is_immediate = false
+key_type = 0
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/doorClose = SubResource( 26 )
 anims/doorOpen = SubResource( 27 )
 anims/locked = SubResource( 28 )

@@ -87,7 +87,7 @@ func landed():
 
 var old_broom_origin = null
 # @override
-func getSmacked(broom_origin, silently = false):
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or has_ever_been_smacked:
     return false
   poofSound.play()

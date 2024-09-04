@@ -148,20 +148,7 @@ func _process(delta):
 
     if global.pauseGame:
         return
-
-    if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
-        mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
-        if level.player.glitch_form == glitch_form and not smallInteractionArea.is_in_group("enemies"):
-            mySprite.material_override.set_shader_param("opacity", 1.0)
-            mySprite.material_override.set_shader_param("enable_glitch", true)
-            mySprite.global_transform.origin.z = 1
-            smallInteractionArea.add_to_group("enemies")
-        elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
-            mySprite.material_override.set_shader_param("opacity", 0.05)
-            mySprite.material_override.set_shader_param("enable_glitch", false)
-            mySprite.global_transform.origin.z = 0
-            smallInteractionArea.remove_from_group("enemies")
-    
+    processGlitchFormGlitchiness()
     
     if is_particle or behavior_directional_bullet:
         if is_particle:
@@ -241,6 +228,20 @@ func _process(delta):
             unsmack()
         if smack_timer >= smack_recovery_time_limit:
             is_smacked = false
+
+func processGlitchFormGlitchiness():
+    if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
+        mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
+        if level.player.glitch_form == glitch_form and not smallInteractionArea.is_in_group("enemies"):
+            mySprite.material_override.set_shader_param("opacity", 1.0)
+            mySprite.material_override.set_shader_param("enable_glitch", true)
+            mySprite.global_transform.origin.z = 1
+            smallInteractionArea.add_to_group("enemies")
+        elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
+            mySprite.material_override.set_shader_param("opacity", 0.05)
+            mySprite.material_override.set_shader_param("enable_glitch", false)
+            mySprite.global_transform.origin.z = 0
+            smallInteractionArea.remove_from_group("enemies")
 
 func updateFallthroughSolids():
     if fallthroughSolid:
@@ -507,7 +508,7 @@ export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
-func getSmacked(_broom_origin, silently = false):
+func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
     if is_smacked:
         return false
 

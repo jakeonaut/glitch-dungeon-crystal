@@ -262,7 +262,7 @@ func unsmack():
     .unsmack()
 
 # @override
-func getSmacked(broom_origin, silently = false):
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   .getSmacked(broom_origin, silently)
   if is_infected:
     ouchies(broom_origin)

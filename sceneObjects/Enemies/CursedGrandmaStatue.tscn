@@ -1,18 +1,15 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/palettes/all_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/CursedGrandmaStatue.gd" type="Script" id=4]
-[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=5]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
-[ext_resource path="res://scripts/StreetlightGlitchAuraControl.gd" type="Script" id=8]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=12]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=13]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=15]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/lightAnimatedTexture.tres" type="Texture" id=18]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=19]
 
 [sub_resource type="BoxShape" id=55]
@@ -46,7 +43,7 @@ shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 3 )
 
-[sub_resource type="ShaderMaterial" id=62]
+[sub_resource type="ShaderMaterial" id=59]
 shader = ExtResource( 12 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -106,133 +103,6 @@ shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 1 )
 
-[sub_resource type="Shader" id=12]
-code = "shader_type canvas_item;
-
-uniform sampler2D target_palette : hint_albedo;
-uniform int palettesize = 16;
-uniform float resolution_scale = 4;
-uniform float canvas_width = 1280.0;
-uniform float canvas_height = 1024.0;
-uniform float r_mult = 0.0;
-uniform float g_mult = 1.0;
-uniform float b_mult = -1.0;
-// uniform int color_depth : hint_range(1, 8) = 8;
-
-// const int bayer[] = {
-//  0,32, 8,40, 2,34,10,42,
-// 48,16,56,24,50,18,58,26, 
-// 12,44, 4,36,14,46, 6,38, 
-// 60,28,52,20,62,30,54,22, 
-//  3,35,11,43, 1,33, 9,41, 
-// 51,19,59,27,49,17,57,25,
-// 15,47, 7,39,13,45, 5,37,
-// 63,31,55,23,61,29,53,21
-// }; 
-// const float bayerSize = 8.0;
-// const float bayerDivider = bayerSize * bayerSize;
-
-float myDistance(ivec3 A, ivec3 B) {
-    return sqrt(
-        pow(float(A.r - B.r), 2.0) +
-        pow(float(A.g - B.g), 2.0) +
-        pow(float(A.b - B.b), 2.0)
-    );
-}
-
-vec3 getClosestMatchingFromPalette(ivec3 color) {
-    float closest_distance = 9990.0;
-    vec3 closest_color = vec3(0, 1.0, 0);
-    for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(target_palette, coord, 0).rgb;
-        ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
-        float dist = myDistance(color, ipixelcolor);
-        if (dist < closest_distance) {
-            closest_distance = dist;
-            closest_color = pixelcolor;
-        }
-    }
-    return closest_color;
-}
-
-// https://unlimited3d.wordpress.com/2020/01/08/srgb-color-space-in-opengl/
-float Convert_sRGB_FromLinear (float theLinearValue) {
-  return theLinearValue <= 0.0031308
-       ? theLinearValue * 12.92
-       : pow (theLinearValue, 1.0/2.4) * 1.055 - 0.055;
-}
-
-float Convert_sRGB_ToLinear (float thesRGBValue) {
-  return thesRGBValue <= 0.04045f
-       ? thesRGBValue / 12.92f
-       : pow ((thesRGBValue + 0.055) / 1.055, 2.4);
-}
-
-const float matrixSize = 8.0;
-const float tile_size = 32.0;
-void fragment() {
-    int m[] = {
-        0,32, 8,40, 2,34,10,42,
-        48,16,56,24,50,18,58,26, 
-        12,44, 4,36,14,46, 6,38, 
-        60,28,52,20,62,30,54,22, 
-        3,35,11,43, 1,33, 9,41, 
-        51,19,59,27,49,17,57,25,
-        15,47, 7,39,13,45, 5,37,
-        63,31,55,23,61,29,53,21
-    };
-
-    float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
-    float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
-    float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
-	float alpha = texture(TEXTURE, UV).a;
-    vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
-    vec2 uv = SCREEN_UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
-
-    float x = uv.x;
-    float y = uv.y;
-    int tile_x = int(floor(x / tile_size));
-    int tile_y = int(floor(y / tile_size));
-
-    ////////////////////////////////////////////////
-    // TODO(jaketrower): Select sub-palette is more work...
-    ////////////////////////////////////////////////
-
-    int m_x = int(mod(x, matrixSize));
-    int m_y = int(mod(y, matrixSize));
-    int ratio = m[m_x + (m_y*int(matrixSize))];
-
-    // Convert from [0.0, 1.0] range to [0, 255] range
-    ivec3 pixel_color = ivec3(round(incolor * 255.0));
-    int r = pixel_color.r + ratio;
-    int g = pixel_color.g + ratio;
-    int b = pixel_color.b + ratio;
-    // Note: don't have to convert back to [0.0, 1.0] range because
-    // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
-    vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
-    
-    COLOR.rgb = vec3(
-        Convert_sRGB_FromLinear(closest_color.r),
-        Convert_sRGB_FromLinear(closest_color.g),
-        Convert_sRGB_FromLinear(closest_color.b)
-    );
-	COLOR.a = alpha;
-    // COLOR.rgb = incolor;
-    // COLOR.rgb = vec3(float(r) / 255.0, float(g) / 255.0, float(b) / 255.0);
-}"
-
-[sub_resource type="ShaderMaterial" id=57]
-shader = SubResource( 12 )
-shader_param/palettesize = 2
-shader_param/resolution_scale = 0.0
-shader_param/canvas_width = 1280.0
-shader_param/canvas_height = 1024.0
-shader_param/r_mult = 0.0
-shader_param/g_mult = 1.0
-shader_param/b_mult = -1.0
-shader_param/target_palette = ExtResource( 5 )
-
 [node name="CursedGrandmaStatue" type="Spatial" groups=["npc"]]
 script = ExtResource( 4 )
 
@@ -262,7 +132,7 @@ automatically_change_color = false
 
 [node name="FaceSprite" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.126971, 0.782344, 0.241211 )
-material_override = SubResource( 62 )
+material_override = SubResource( 59 )
 flip_h = true
 pixel_size = 0.125
 transparent = false
@@ -273,8 +143,8 @@ vframes = 16
 frame = 4
 region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 4
+max_frames = 1
+should_animate = false
 automatically_change_color = false
 
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
@@ -289,27 +159,12 @@ volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.392, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0975, 0 )
 material_override = SubResource( 58 )
 pixel_size = 0.125
 texture = ExtResource( 15 )
 hframes = 4
 vframes = 4
-frame = 15
 script = ExtResource( 2 )
 max_frames = 1
 should_animate = false
-
-[node name="StreetlightGlitchAura" type="Control" parent="."]
-script = ExtResource( 8 )
-target_origin = Vector3( 0, 0.75, 0 )
-
-[node name="TextureRect" type="TextureRect" parent="StreetlightGlitchAura"]
-material = SubResource( 57 )
-margin_left = -75.0
-margin_top = -75.0
-margin_right = 75.0
-margin_bottom = 75.0
-texture = ExtResource( 18 )
-expand = true

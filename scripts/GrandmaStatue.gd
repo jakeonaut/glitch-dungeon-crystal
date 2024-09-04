@@ -131,6 +131,8 @@ func processGlitchFormTeleportation():
         var my_old_origin = self.global_transform.origin
         self.global_transform.origin = level.player.global_transform.origin
         level.player.global_transform.origin = my_old_origin
+        level.summonSmokeClouds(level.player.global_transform.origin, 2, true, true)
+        level.summonSmokeClouds(global_transform.origin, 2, false, true)
         level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground
         glitch_form = players_last_glitch_form
         if glitch_form == global.GlitchForm.NORMAL:
@@ -186,7 +188,7 @@ func fallthroughCollisionActivate(_friend):
   pass
 
 
-func getSmacked(_broom_origin, _silently = false):
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   return false
   # if is_smacked:
   #   return false

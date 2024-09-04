@@ -55,7 +55,7 @@ func glitchSwitchSprite(_delta):
   pass
 
 # @override
-func getSmacked(broom_origin, silently = false):
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if (getPlayer().is_mushroom_infected or getPlayer().is_mushroom_prefected) and (is_smacked or is_in_cooldown):
     return
   is_in_cooldown = true

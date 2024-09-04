@@ -39,6 +39,7 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 12 )
 show_crt_effect = true
 tileset_type = 6
+has_spellbook_page = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 18 )]
 

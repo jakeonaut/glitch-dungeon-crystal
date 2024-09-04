@@ -63,6 +63,9 @@ func _ready():
   set_process(true)
   landing.visible = false
 
+  if num_keys_unlock == null:
+    num_keys_unlock = 0
+
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false

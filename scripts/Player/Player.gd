@@ -1481,32 +1481,32 @@ func doBroomAttack(which_broom_attack):
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
   
-  if global.memory["debug_broom"]:
-    var x = global_transform.origin.x
-    var y = global_transform.origin.y
-    var z = global_transform.origin.z
-    if mySprite.flip_h:
-      if checkSolidTilesOnMyLeft(true):
-        levelTiles.removeTile(Vector3(x - 3, y + 0, z), false)
-        levelTiles.removeTile(Vector3(x - 4, y + 0, z), false)
-        levelTiles.removeTile(Vector3(x - 3, y - 1, z), false)
-        levelTiles.removeTile(Vector3(x - 4, y - 1, z), false)
-      else:
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y + 0, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y + 0, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y - 1, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y - 1, z), false)
-    else:
-      if checkSolidTilesOnMyRight(true):
-        levelTiles.removeTile(Vector3(x + 1, y + 0, z), false)
-        levelTiles.removeTile(Vector3(x + 2, y + 0, z), false)
-        levelTiles.removeTile(Vector3(x + 1, y - 1, z), false)
-        levelTiles.removeTile(Vector3(x + 2, y - 1, z), false)
-      else:
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y + 0, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false)
-        levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false)
+  # if global.memory["debug_broom"]:
+  #   var x = global_transform.origin.x
+  #   var y = global_transform.origin.y
+  #   var z = global_transform.origin.z
+  #   if mySprite.flip_h:
+  #     if checkSolidTilesOnMyLeft(true):
+  #       levelTiles.removeTile(Vector3(x - 3, y + 0, z), false)
+  #       levelTiles.removeTile(Vector3(x - 4, y + 0, z), false)
+  #       levelTiles.removeTile(Vector3(x - 3, y - 1, z), false)
+  #       levelTiles.removeTile(Vector3(x - 4, y - 1, z), false)
+  #     else:
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y + 0, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y + 0, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y - 1, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y - 1, z), false)
+  #   else:
+  #     if checkSolidTilesOnMyRight(true):
+  #       levelTiles.removeTile(Vector3(x + 1, y + 0, z), false)
+  #       levelTiles.removeTile(Vector3(x + 2, y + 0, z), false)
+  #       levelTiles.removeTile(Vector3(x + 1, y - 1, z), false)
+  #       levelTiles.removeTile(Vector3(x + 2, y - 1, z), false)
+  #     else:
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y + 0, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

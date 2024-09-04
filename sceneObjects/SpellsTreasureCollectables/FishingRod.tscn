@@ -109,6 +109,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82717, -0.57786, 0 )
 shape = SubResource( 11 )
 
 [node name="HookSprite" type="Sprite3D" parent="HookInteractionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
 material_override = SubResource( 7 )
 pixel_size = 0.125
 shaded = true
@@ -137,6 +138,7 @@ max_frames = 1
 should_animate = false
 
 [node name="LineSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
 material_override = SubResource( 7 )
 pixel_size = 0.125
 shaded = true

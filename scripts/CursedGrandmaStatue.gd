@@ -5,12 +5,11 @@ var smack_timer = 0
 var smack_time_limit = 10
 var which_side_is_player_on = false
 
-var glitchGrandmaRes = preload("res://sceneObjects/Enemies/GlitchGrandma.tscn")
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
-onready var streetlightGlitchAura  = get_node("StreetlightGlitchAura")
+onready var faceSprite = get_node("FaceSprite")
 
 func _ready():
   set_process(true)
@@ -19,7 +18,6 @@ func _ready():
 
   mySprite.material_override = mySprite.material_override.duplicate()
   spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
-  streetlightGlitchAura.mainTextureRect.material = streetlightGlitchAura.mainTextureRect.material.duplicate()
 
   yield(TempTimer.idle_frame(self), "timeout")
   updateColor()
@@ -31,7 +29,6 @@ func _process(delta):
   which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   dist_to_player = level.player.global_transform.origin.distance_to(self.global_transform.origin)
   processRendering(delta)
-  processGlitchFormActivation()
 
   if is_smacked:
     smack_timer += (delta * 22)
@@ -39,16 +36,17 @@ func _process(delta):
       is_smacked = false
       unsmack()
 
+var FACE_X_OFFSET = 0.127
+var FACE_Y_OFFSET = 0.782
+var FACE_Z_OFFSET = 0.25
 func processRendering(_delta):
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
   if not isActive():
-    streetlightGlitchAura.mainTextureRect.visible = false
+    pass
   else:
     if glitch_form == global.GlitchForm.NORMAL:
       spellbookGlitchSprite.frame = 15
-      streetlightGlitchAura.mainTextureRect.visible = false
     else:
-      streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
       true_terminal_vel = 32
       # TODO(jaketrower): could dedupe with Player.gd and GrandmaStatue.gd
       if glitch_form == global.GlitchForm.FEATHER:
@@ -60,18 +58,13 @@ func processRendering(_delta):
         spellbookGlitchSprite.frame = 2
       elif glitch_form == global.GlitchForm.INVISIBLE:
         spellbookGlitchSprite.frame = 3
-  
 
-func processGlitchFormActivation():
-  if not level.has_room_initialized:
-    return
-  if glitch_form == level.player.glitch_form:
-    var glitchGrandma = glitchGrandmaRes.instance()
-    glitchGrandma.glitch_form = glitch_form
-    level.add_child(glitchGrandma)
-    glitchGrandma.global_transform.origin = self.global_transform.origin
-    glitchGrandma.global_transform.origin.y += 0.2
-    queue_free()
+  if mySprite.flip_h:
+    faceSprite.flip_h = true
+    faceSprite.global_transform.origin = global_transform.origin + Vector3(FACE_X_OFFSET, FACE_Y_OFFSET, FACE_Z_OFFSET)
+  else:
+    faceSprite.flip_h = false
+    faceSprite.global_transform.origin = global_transform.origin + Vector3(-FACE_X_OFFSET, FACE_Y_OFFSET, FACE_Z_OFFSET)
 
 func updateColor():
   var target_palette = level.levelTiles.grey_palette
@@ -93,8 +86,8 @@ func updateColor():
     sprite_palette = global.white_player_palette
     target_palette = level.levelTiles.white_palette
   mySprite.material_override.set_shader_param("target_palette", sprite_palette)
+  faceSprite.material_override.set_shader_param("target_palette", sprite_palette)
   spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
-  streetlightGlitchAura.mainTextureRect.material.set_shader_param("target_palette", target_palette)
 
 func unsmack():
   var material = mySprite.material_override
@@ -112,7 +105,7 @@ func fallthroughCollisionActivate(_friend):
   pass
 
 
-func getSmacked(_broom_origin, _silently = false):
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   return false
   # if is_smacked:
   #   return false
