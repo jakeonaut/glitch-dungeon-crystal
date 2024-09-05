@@ -33,6 +33,7 @@ export var only_activate_in_range = true
 export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
 export var behavior_intermittent_walking = false
+export var behavior_walk_flip = true
 export var behavior_jumping = false
 export var behavior_flip_on_land = false
 export var behavior_stop_on_land = false
@@ -281,6 +282,8 @@ func unsmack():
         myOtherSprite.material_override.set_shader_param("normal_offset", .02)
     
 func doHorizontalWalkingBehavior():
+    if not behavior_walk_flip:
+            return
     if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
         horizontal_collision = false
         walk_direction.x = -walk_direction.x
@@ -409,6 +412,7 @@ func isActive(_debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
+    print("activate")
     getSmacked(self.global_transform.origin)
     getPlayer().getSmacked()
 
@@ -509,8 +513,9 @@ export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
 func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
-    if is_smacked:
+    if is_smacked or am_i_dying:
         return false
+    print("get smacked")
 
     if notDieSound and not notDieSound.is_playing() and not silently: notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)

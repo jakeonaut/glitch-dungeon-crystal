@@ -480,18 +480,6 @@ extents = Vector3( 1.5, 0.24, 1 )
 
 [node name="Door" type="Spatial" groups=["doors"]]
 script = ExtResource( 1 )
-is_locked = null
-should_lock = null
-path = null
-parter_door_id = null
-dont_recolor_me = null
-is_passive = null
-is_vertical = null
-num_keys_unlock = null
-locked_to_monsters = null
-is_level_door = null
-is_immediate = null
-key_type = null
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.9 )

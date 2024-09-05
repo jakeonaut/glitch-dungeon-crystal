@@ -20,4 +20,5 @@ func playerActivationAreaPassiveActivate():
   touchingPlayer = true
 
 func _process(_delta):
-  pass
+  wasTouchingPlayer = touchingPlayer
+    touchingPlayer = false

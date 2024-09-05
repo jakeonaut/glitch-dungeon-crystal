@@ -557,9 +557,6 @@ shape = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 43 )
 
@@ -576,10 +573,7 @@ shape = SubResource( 35 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 36 )
 anims/doorBarred = SubResource( 37 )
 anims/doorClose = SubResource( 38 )

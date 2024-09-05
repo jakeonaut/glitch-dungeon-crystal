@@ -363,6 +363,15 @@ anims/jump = SubResource( 26 )
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 27 )
 
+[node name="FishingRod" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8, 9, 0 )
+
+[node name="HookInteractionArea" parent="Viewport/level/FishingRod" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.9, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
+shape = SubResource( 28 )
+
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, -4 )
 
@@ -440,15 +449,6 @@ frame = 8
 
 [node name="SplashSprite" parent="Viewport/level/WaterCube13" index="3"]
 visible = true
-
-[node name="FishingRod" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8, 9, 0 )
-
-[node name="HookInteractionArea" parent="Viewport/level/FishingRod" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.9, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/FishingRod/HookInteractionArea" index="0"]
-shape = SubResource( 28 )
 
 [node name="Fishy" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.7, 0 )
@@ -733,6 +733,7 @@ flip_v = true
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
+[editable path="Viewport/level/FishingRod"]
 [editable path="Viewport/level/WaterCube"]
 [editable path="Viewport/level/WaterCube9"]
 [editable path="Viewport/level/WaterCube10"]
@@ -743,7 +744,6 @@ flip_v = true
 [editable path="Viewport/level/WaterCube11"]
 [editable path="Viewport/level/WaterCube12"]
 [editable path="Viewport/level/WaterCube13"]
-[editable path="Viewport/level/FishingRod"]
 [editable path="Viewport/level/ParallaxBackground2"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/AreaSound"]

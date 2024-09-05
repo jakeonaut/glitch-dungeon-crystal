@@ -42,7 +42,7 @@ onready var passiveCollisionShape = get_node("InteractionArea/PassiveCollisionSh
 var is_on_main_menu = false
 
 export var is_immediate = false
-export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL") var key_type
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL") onready var key_type
 
 var gameCamera = null
 func getGameCamera():
@@ -97,6 +97,8 @@ func _ready():
   else: 
     animationPlayer.play("doorOpen")
 
+  if key_type == null:
+    key_type = global.KeyItem.NORMAL
   if is_locked:
     if key_type == global.KeyItem.NORMAL:
       var num_keys = global.getLevelZoneThing("key")

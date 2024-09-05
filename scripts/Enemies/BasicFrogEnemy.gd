@@ -42,6 +42,10 @@ func _ready():
 
   smallInteractionArea.add_to_group("no_pushems")
 
+  var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
+  gulpIdleAnimation.loop = false
+  gulpIdleAnimation.length = 1.4
+
 func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
@@ -56,14 +60,14 @@ func _process(delta):
     level.player.visible = false
     var valid_inputs = ["sub_action_button", "jump_button"] #, "ui_up", "ui_down", "ui_left", "ui_right"]
     for valid_input in valid_inputs:
-      if tongueAniPlayer.assigned_animation == "gulpIdle" and Input.is_action_just_pressed(valid_input):
+      if tongueAniPlayer.assigned_animation == "gulpIdle" and (not tongueAniPlayer.is_playing() or Input.is_action_just_pressed(valid_input)):
         tongueAniPlayer.stop()
         tongueAniPlayer.clear_queue()
         tongueAniPlayer.play("spitOut")
         break
     level.player.processCastingLogic(delta)
-    if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
-      tongueAniPlayer.play("gulpIdle")
+    # if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
+    #   tongueAniPlayer.play("gulpIdle")
     return
 
   if am_i_in_range_of_player:

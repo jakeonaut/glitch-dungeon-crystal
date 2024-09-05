@@ -443,8 +443,7 @@ tracks/19/keys = {
 
 [sub_resource type="Animation" id=145]
 resource_name = "gulpIdle"
-length = 0.9
-loop = true
+length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -1823,7 +1822,7 @@ script = ExtResource( 1 )
 true_terminal_vel = 8
 grav = 30
 jump_force = 13
-sprite_offset_y = 0.125
+sprite_offset_y = 0.25
 
 [node name="SpriteContainer" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )

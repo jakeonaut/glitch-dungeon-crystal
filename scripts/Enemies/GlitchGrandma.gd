@@ -21,12 +21,11 @@ func _ready():
   mySprite.set_material_override(mySprite.get_material_override().duplicate())
 
   smallInteractionArea.add_to_group("no_pushems")
+  yield(TempTimer.idle_frame(self), "timeout")
+  updateColor()
 
 func _process(delta):
   if not visible: return
-
-  sprite_offset_y = 0
-  spriteYAlignment = 0
   
   glitchSetSpritesAndCollision()
   processBroomRenderLogic(delta)
@@ -55,14 +54,16 @@ func processGrandmaBehavior(_delta):
     return
   
   var x = global_transform.origin.x
+  var y = global_transform.origin.y
   var px = level.player.global_transform.origin.x
+  var py = level.player.global_transform.origin.y
   if behavior_state == BehaviorState.NORMAL:
     if glitch_form == GlitchForm.FLOOR:
       if not "walk" in secretAniPlayer.assigned_animation:
         secretAniPlayer.stop()
         secretAniPlayer.play("walk")
         behavior_walking = true
-      if px < x + SWEEP_BUFFER_DIST and px > x - SWEEP_BUFFER_DIST:
+      if glitch_form == GlitchForm.FLOOR and px < x + SWEEP_BUFFER_DIST and px > x - SWEEP_BUFFER_DIST:
         behavior_state = BehaviorState.BROOM_WIND_UP
         secretAniPlayer.stop()
         secretAniPlayer.play("broomWindUp")
@@ -72,8 +73,31 @@ func processGrandmaBehavior(_delta):
       elif px < x:
         walk_direction = Vector2(-1, 0)
         mySprite.flip_h = true
+    if glitch_form == GlitchForm.FEATHER:
+      behavior_walking = true
+      behavior_jumping = true
+
+      if on_ground and not "jump" in secretAniPlayer.assigned_animation:
+        secretAniPlayer.stop()
+        secretAniPlayer.play("jumpStart")
+        secretAniPlayer.queue("jump")
+      elif vv < 0 and not "fall" in secretAniPlayer.assigned_animation:
+        secretAniPlayer.stop()
+        secretAniPlayer.play("fall")
+      
+      if glitch_form == GlitchForm.FEATHER and py < y + SWEEP_BUFFER_DIST and py > y - SWEEP_BUFFER_DIST and px < x + SWEEP_BUFFER_DIST and px > x - SWEEP_BUFFER_DIST:
+        behavior_state = BehaviorState.BROOM_WIND_UP
+        secretAniPlayer.stop()
+        secretAniPlayer.play("broomWindUp")
+      elif px > x and (on_ground or horizontal_collision):
+        walk_direction = Vector2(1, 0)
+        mySprite.flip_h = false
+      elif px < x and (on_ground or horizontal_collision):
+        walk_direction = Vector2(-1, 0)
+        mySprite.flip_h = true
   elif behavior_state == BehaviorState.BROOM_WIND_UP:
     behavior_walking = false
+    behavior_jumping = false
     if px > x:
       walk_direction = Vector2(1, 0)
       mySprite.flip_h = false
@@ -85,6 +109,7 @@ func processGrandmaBehavior(_delta):
       behavior_state = BehaviorState.SWEEPING
   elif behavior_state == BehaviorState.SWEEPING:
     behavior_walking = false
+    behavior_jumping = false
     
 func doBroomAttack():
   secretAniPlayer.stop()
@@ -113,7 +138,7 @@ func broomStop():
 
 # @override ?
 func isActive(_debug=false):
-  return visible and glitch_form == level.player.glitch_form
+  return visible# and glitch_form == level.player.glitch_form
 
 # @override ?
 func passiveActivate(_delta, is_player):
@@ -167,3 +192,17 @@ func adjustSummonedBroomSpritePosition():
 
 func isHoldingMultiBroom():
   return false
+
+func updateColor():
+  var sprite_palette = global.grey_player_palette
+  if glitch_form == global.GlitchForm.FLOOR:
+    sprite_palette = global.player_red_palette
+  elif glitch_form == global.GlitchForm.LADDER:
+    sprite_palette = global.yellow_player_palette
+  elif glitch_form == global.GlitchForm.FEATHER:
+    sprite_palette = global.green_dungeon_palette
+  elif glitch_form == global.GlitchForm.INVISIBLE:
+    sprite_palette = global.black_player_palette
+  elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+    sprite_palette = global.white_player_palette
+  mySprite.material_override.set_shader_param("target_palette", sprite_palette)

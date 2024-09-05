@@ -331,7 +331,7 @@ texture = ExtResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7, 4, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 15 )
 anims/doorOpen = SubResource( 16 )
 anims/locked = SubResource( 17 )
@@ -410,7 +410,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 11, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TidepoolCaves.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 35 )

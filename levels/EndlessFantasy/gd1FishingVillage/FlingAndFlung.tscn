@@ -455,7 +455,6 @@ tracks/19/keys = {
 [sub_resource type="Animation" id=51]
 resource_name = "gulpIdle"
 length = 0.9
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -2538,6 +2537,9 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -4.1603
 
 [node name="Lilpad25" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -7.16034, 8.76561, -1 )
+
+[node name="Lilpad26" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -2.16034, 3.76561, -1 )
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 11, 0 )

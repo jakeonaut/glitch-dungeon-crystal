@@ -236,7 +236,7 @@ func _ready():
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["zora_flippers"] = 1
+    memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
 
@@ -647,7 +647,6 @@ func getNameRelativeToLevel(level, node):
 
 func setStaticLevelZoneLevelVar(level, node, val):
     var name = getNameRelativeToLevel(level, node)
-    print("name: " + str(name))
     if name == null: return # failure
 
     tryInitializeLevelZone(level.getLevelZoneName())

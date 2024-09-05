@@ -479,7 +479,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterfallSecretRoom.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 0 )
 material_override = SubResource( 6 )
 frame = 20
-path = "res://levels/EndlessFantasy/gd1FishingVillage/FlingAndFlung.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
 
 [node name="Level7" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
@@ -554,6 +554,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -5, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+
+[node name="Level11" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TidepoolCaves.tscn"
 
 [node name="Level2" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -5, 0 )
@@ -638,9 +643,14 @@ frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/BabushkaCatSoulRoom.tscn"
 
 [node name="Level10" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
+
+[node name="Level11" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 8, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 1 )

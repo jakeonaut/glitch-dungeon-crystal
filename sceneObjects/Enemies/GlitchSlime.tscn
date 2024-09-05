@@ -577,9 +577,12 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "unsmack"
+}, {
 "args": [  ],
 "method": "unenemize"
 } ]
@@ -590,7 +593,6 @@ extents = Vector3( 25, 13, 1 )
 
 [node name="GlitchSlime" type="Spatial"]
 script = ExtResource( 12 )
-walk_speed = 2
 behavior_walking = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

@@ -17,6 +17,7 @@ func _ready():
   spriteYAlignment = 0.5
 
   mySprite.material_override = mySprite.material_override.duplicate()
+  faceSprite.material_override = faceSprite.material_override.duplicate()
   spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
 
   yield(TempTimer.idle_frame(self), "timeout")
