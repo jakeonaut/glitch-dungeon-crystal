@@ -991,10 +991,10 @@ path = "res://levels/EndlessFantasy/gd1/PastoralScene_tangible.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door4" index="3"]
+[node name="landing" parent="Viewport/level/Door4" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/doorClose = SubResource( 29 )
 anims/doorOpen = SubResource( 30 )
 anims/locked = SubResource( 31 )
@@ -1015,7 +1015,7 @@ shape = SubResource( 42 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -1036,7 +1036,7 @@ shape = SubResource( 43 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/doorClose = SubResource( 25 )
 anims/doorOpen = SubResource( 26 )
 anims/locked = SubResource( 27 )

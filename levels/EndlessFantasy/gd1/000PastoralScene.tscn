@@ -3819,10 +3819,10 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 14.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 133 )
 anims/doorBarred = SubResource( 134 )
 anims/doorClose = SubResource( 135 )

@@ -145,6 +145,8 @@ func conductFromScenePath(path):
             # changeSongPitch(0.9)
             # default_song_pitch = 0.9
             return
+    elif path.find("gd1GrandmaVillage") > 0:
+        tryToPlay(grannyPlayer)
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)
