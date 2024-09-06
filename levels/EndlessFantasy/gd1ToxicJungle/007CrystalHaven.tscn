@@ -1111,6 +1111,7 @@ can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
 dont_align_sprite = true
+bring_to_front = false
 
 [node name="CollisionShape" parent="Viewport/level/ElderShroomNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )

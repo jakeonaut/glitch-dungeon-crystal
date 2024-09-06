@@ -144,8 +144,8 @@ func _process(delta):
 
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
   if textPrompt.visible:
-    var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-    textPrompt.bbcode_text = "[center][lb]" + sweep_button_text + "[rb][/center]"
+    var sweep_button_text = global.getInputText("sub_action_button")
+    textPrompt.bbcode_text = "[center]" + sweep_button_text + "[/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -290,9 +290,9 @@ func showInteractPrompt():
   if global.activeInteractor == self:
     return
     
-  var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
+  var sweep_button_text = global.getInputText("sub_action_button")
   if not is_interact_prompt:
-    textNode.bbcode_text = "[lb]" + sweep_button_text + "[rb]"
+    textNode.bbcode_text = sweep_button_text
     tinify()
     is_interact_prompt = true
     self.theme = promptFont

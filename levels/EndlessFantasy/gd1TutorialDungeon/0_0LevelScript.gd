@@ -9,8 +9,9 @@ var has_decided = false
 # @override
 func setUpRoomInitializationOverride():
   # original_granny_text = npcGranny.textBox.text_final
-  if (global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"])))or not global.memory.has("roomPath"):
+  if (global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"]))) or not global.memory.has("roomPath"):
     is_start_of_game = false
+    showInstructions = not global.memory.has("roomPath")
     # npcGranny.is_really_important = true
     # npcGranny.textBox.is_really_important = true
   else:
@@ -47,7 +48,16 @@ func _process(_delta):
       global.activeInteractor = player.textBox
       showInstructions = false
   
-  if global.isPauseMenuOpen:
-    uiLayer.get_node("PressC").visible = false
+  var pressCText = uiLayer.get_node("PressC")
+  if global.isPauseMenuOpen or not showInstructions:
+    pressCText.visible = false
   elif showInstructions:
-    uiLayer.get_node("PressC").visible = global.activeInteractor == null and player.physics_state != player.PhysicsState.WAKING_UP and not global.isPauseMenuOpen
+    var is_controller_connected = Input.get_connected_joypads().size() > 0
+    # TODO(jaketrower): I don't super love this but...
+    pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
+    if player.physics_state == player.PhysicsState.WAKING_UP or player.physics_state == player.PhysicsState.WAKING_UP:
+      showInstructions = false
+    if is_controller_connected:
+      pressCText.bbcode_text = "        " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep."
+    else:
+      pressCText.bbcode_text = global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep. Arrow keys to walk.."

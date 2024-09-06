@@ -10,11 +10,13 @@ var has_grid_been_constructed = false
 func constructMapGrid():
   var levelSprites = get_tree().get_nodes_in_group("LevelSprite")
 
+  # print("constructing Map Grid")
   for levelSprite in levelSprites:
     var i = int(levelSprite.global_transform.origin.y)
     var j = int(levelSprite.global_transform.origin.x)
     if not mapGrid.has(i):
       mapGrid[i] = {}
+    # print("[" + str(i) + "][" + str(j) + "] = " + str(levelSprite.path))
     mapGrid[i][j] = levelSprite
   has_grid_been_constructed = true
   
@@ -34,10 +36,15 @@ func getRoomPathAtCoords(coords):
   if not has_grid_been_constructed:
     constructMapGrid()
 
+  # print("new coords: " + str(coords) + ", " + str(int(coords.y)) + ", " + str(int(coords.x)))
   # annoying but these int casts are necessary. 
   if mapGrid.has(int(coords.y)):
     if mapGrid[int(coords.y)].has(int(coords.x)):
+      # print(mapGrid[int(coords.y)][int(coords.x)])
+      # print(mapGrid[int(coords.y)][int(coords.x)].path)
       return mapGrid[int(coords.y)][int(coords.x)].path
+  # print("printing mapGrid")
+  # print(mapGrid)
 
   return null
 

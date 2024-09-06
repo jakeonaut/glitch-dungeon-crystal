@@ -663,9 +663,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67606, -1.63987, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0776997, 2.68293, 0 )
 visible = false
 grav = 0
-bbText = "with the GRIMOIRE:
-press SPACE to switch
-between spells"
+bbText = "see DebugTown_NullificationPurgatoryLevelScript.gd"
 can_activate = false
 can_camera_zoom = false
 is_active = false

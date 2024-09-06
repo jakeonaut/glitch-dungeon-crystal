@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=214 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -3090,6 +3090,18 @@ default_font = SubResource( 217 )
 
 [sub_resource type="CanvasItemMaterial" id=191]
 
+[sub_resource type="DynamicFont" id=231]
+size = 24
+outline_size = 2
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="Theme" id=232]
+default_font = SubResource( 231 )
+
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
@@ -4071,17 +4083,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VScrollBar2" type="VScrollBar" parent="UILayer/Inventory/InventoryTitle/ColorRect/ColorRect/RichTextLabel" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="UILayer/Inventory/InventoryTitle/ColorRect/ColorRect/RichTextLabel" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
+[node name="SkipText" type="RichTextLabel" parent="UILayer"]
+margin_left = 320.0
+margin_top = 470.0
+margin_right = 636.0
+margin_bottom = 571.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource( 190 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "press [X] to start"
+text = "press [X] to start"
+scroll_active = false
 
 [node name="MainMenu" type="Control" parent="UILayer"]
 margin_top = -45.0
@@ -4107,25 +4122,16 @@ margin_right = 489.5
 margin_bottom = 502.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="ContinuePrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
+[node name="SelectPrompt" type="Control" parent="UILayer/MainMenu"]
 margin_left = 271.5
-margin_top = 354.0
+margin_top = 354.5
 margin_right = 591.0
-margin_bottom = 454.5
+margin_bottom = 402.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 190 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "                             [X]
 
-"
-text = "                             [X]
-
-"
-scroll_active = false
-
-[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/ContinuePrompt"]
+[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/SelectPrompt"]
 material = SubResource( 191 )
 position = Vector2( 32, 16.5 )
 scale = Vector2( 2, 2 )
@@ -4135,67 +4141,13 @@ vframes = 5
 frame = 26
 script = ExtResource( 24 )
 
-[node name="NewGamePrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
-visible = false
-margin_left = 271.5
-margin_top = 354.0
-margin_right = 591.0
-margin_bottom = 454.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 190 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+[node name="TextPrompt" type="RichTextLabel" parent="UILayer/MainMenu/SelectPrompt"]
+margin_left = 221.0
+margin_right = 322.0
+margin_bottom = 40.0
 bbcode_enabled = true
-bbcode_text = "
-
-                             [X]"
-text = "
-
-                             [X]"
-scroll_active = false
-
-[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/NewGamePrompt"]
-material = SubResource( 191 )
-position = Vector2( 32, 69.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 28 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 24 )
-
-[node name="QuitPrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
-visible = false
-margin_left = 272.0
-margin_top = 354.0
-margin_right = 592.0
-margin_bottom = 495.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource( 190 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "
-
-
-
-                             [X]"
-text = "
-
-
-
-                             [X]"
-scroll_active = false
-
-[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/QuitPrompt"]
-material = SubResource( 191 )
-position = Vector2( 37.5, 126 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 28 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 24 )
+bbcode_text = "[lb]X[rb]"
+text = "[X]"
 
 [node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 319.0
@@ -4220,20 +4172,21 @@ QUIT!!! bye."
 scroll_active = false
 
 [node name="PressC" type="RichTextLabel" parent="UILayer/MainMenu"]
-margin_left = 372.5
+margin_left = 383.0
 margin_top = 515.0
-margin_right = 713.5
+margin_right = 636.0
 margin_bottom = 616.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource( 190 )
+size_flags_horizontal = 3
+theme = SubResource( 232 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "press [X] to start"
 text = "press [X] to start"
 scroll_active = false
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="UILayer/MainMenu"]
+[node name="OptionsMenuPrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 11.5
 margin_top = 61.0
 margin_right = 454.5

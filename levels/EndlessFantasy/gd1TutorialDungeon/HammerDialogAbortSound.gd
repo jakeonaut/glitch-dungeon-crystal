@@ -19,14 +19,14 @@ func activateScript():
   if not global.memory["broomerang"]:
     global.incrementLevelZoneThing("num_mini_crystal_cubes", -num_gems_needed)
     global.memory["broomerang"] = 1
-    var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-    level.player.sayThis("•\"BROOMERANG\" get: press [" + sweep_button_text + "] twice\nto throw your broom!!!")
+    var sweep_button_text = global.getInputText("sub_action_button")
+    level.player.sayThis("•\"BROOMERANG\" get: press " + sweep_button_text + " twice\nto throw your broom!!!")
     musicPlayer.playTreasureJingle(-20)
   elif not global.memory["multi_broom"]:
     global.incrementLevelZoneThing("num_mini_crystal_cubes", -num_gems_needed)
     global.memory["multi_broom"] = 1
-    var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-    level.player.sayThis("•\"FLOATING BROOM\" get: \nhold [" + sweep_button_text + "] button\nkeep the broom swinging!!!")
+    var sweep_button_text = global.getInputText("sub_action_button")
+    level.player.sayThis("•\"FLOATING BROOM\" get: \nhold " + sweep_button_text + " button\nkeep the broom swinging!!!")
     musicPlayer.playTreasureJingle(-20)
     
 func preActivateScript():

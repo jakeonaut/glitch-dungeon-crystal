@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=36]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=37]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=38]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=39]
 
 [sub_resource type="Animation" id=29]
 resource_name = "ActivatedIdle"
@@ -1032,6 +1033,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 11, 0 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 39 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.42585, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
 

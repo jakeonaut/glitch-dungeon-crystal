@@ -150,23 +150,32 @@ func _process(delta):
   processGrandmaStatueSavePoints()
 
 func processPauseMenu():
-  if not global.pauseGame and not global.pauseMoveInput:
-    if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
-      uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
-      uiLayer.pauseMenu.normalOptionIndex = 0
-      uiLayer.pauseMenu.shouldUpdateMenuText = true
-      global.isPauseMenuOpen = true
-      global.pauseGame = true
-      player.pauseSound.play()
-      playMenuMusic()
-  elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
-    if global.is_reading_input:
-      player.noBroomSound.play()
-    else:
+  if global.shouldRenderAsCinematic:
+    global.is_reading_input = false
+    global.is_reading_keyboard_input = false
+    global.is_reading_controller_input = false
+    if global.isPauseMenuOpen:
       global.isPauseMenuOpen = false
-      global.pauseGame = false
       player.unpauseSound.play()
       restartMusic()
+  else:
+    if not global.pauseGame and not global.pauseMoveInput:
+      if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
+        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
+        uiLayer.pauseMenu.normalOptionIndex = 0
+        uiLayer.pauseMenu.shouldUpdateMenuText = true
+        global.isPauseMenuOpen = true
+        global.pauseGame = true
+        player.pauseSound.play()
+        playMenuMusic()
+    elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
+      if global.is_reading_input:
+        player.noBroomSound.play()
+      else:
+        global.isPauseMenuOpen = false
+        global.pauseGame = false
+        player.unpauseSound.play()
+        restartMusic()
 
 var closest_extra_life = null
 func processGrandmaStatueSavePoints():

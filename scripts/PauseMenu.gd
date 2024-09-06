@@ -6,7 +6,7 @@ var popupTimer = 0
 var popupTimeLimit = 20
 var canResetBindings = true
 
-onready var pauseTitleText = get_node("PauseTitleRect/ColorRect/ColorRect/RichTextLabel")
+onready var pauseTitleText = get_node("PauseTitleText")
 
 onready var cursorSprite = get_node("CursorSprite")
 # NORMAL MENU
@@ -58,7 +58,9 @@ enum PauseMenuState {
   NORMAL,
   GRAPHICS,
   SOUND,
-  INPUT,
+  TOP_INPUT,
+  KEYBOARD_INPUT,
+  CONTROLLER_INPUT,
   QUIT_TO_MAIN,
   TEMP
 }
@@ -79,6 +81,11 @@ func _process(delta):
       hasInitializedControlsConfig = true
   if not hasInitializedControlsConfig:
     return
+
+  if Input.is_action_just_pressed("ui_down"):
+    menuMoveSound.play()
+  elif Input.is_action_just_pressed("ui_up"):
+    menuMoveSound.play()
 
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
@@ -105,7 +112,13 @@ func _process(delta):
   else:
     quitToMainOptionIndex = 0
 
-  if pauseMenuState == PauseMenuState.INPUT:
+  if pauseMenuState == PauseMenuState.TOP_INPUT:
+    normalMenu.visible = true
+    processTopInputLogic(delta)
+  else:
+    topInputOptionIndex = 0
+
+  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     normalMenu.visible = false
     inputMenu.visible = true
     processControlsLogic(delta)
@@ -122,7 +135,7 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -164,7 +177,7 @@ func processNormalLogic(_delta):
       pauseMenuState = PauseMenuState.SOUND
     elif normalOptionIndex == 3:
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.INPUT
+      pauseMenuState = PauseMenuState.TOP_INPUT
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
@@ -180,7 +193,7 @@ onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptions = ["CRT FILTER", "GLITCH SCREEN", "COLOR BLIND", "FULLSCREEN"]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -241,7 +254,7 @@ func processGlitchScreen(delta):
 var soundOptions = ["PLAY MUSIC", "MUSIC GLITCH"] # global.memory["canChangeSongPitch"]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -290,7 +303,7 @@ func processSoundLogic(_delta):
 var quitToMainOptions = ["YES", "CANCEL"]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  pauseTitleText.bbcode_text = "  Really Quit?!?\npress " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back..."
+  pauseTitleText.bbcode_text = "  Really Quit?!?\npress " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back..."
 
   if shouldUpdateMenuText:
     var text = ""
@@ -327,6 +340,45 @@ func processQuitToMainLogic(_delta):
     shouldUpdateMenuText = true
 
 
+var topInputOptions = ["KEYBOARD", "CONTROLLER"]
+var topInputOptionIndex = 0
+func processTopInputLogic(_delta):
+  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
+
+  if shouldUpdateMenuText:
+    var text = ""
+    for i in range(len(topInputOptions)):
+      var option = topInputOptions[i]
+
+      if i == topInputOptionIndex:
+        text += "[wave]" + str(option) + "[/wave]\n\n" 
+      else:
+        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+    normalMenuText.bbcode_text = text
+    shouldUpdateMenuText = false
+
+  if Input.is_action_just_pressed("ui_down"):
+    topInputOptionIndex += 1
+    shouldUpdateMenuText = true
+  elif Input.is_action_just_pressed("ui_up"):
+    topInputOptionIndex -= 1
+    shouldUpdateMenuText = true
+  if topInputOptionIndex < 0:
+    topInputOptionIndex = len(topInputOptions) - 1
+  elif topInputOptionIndex >= len(topInputOptions):
+    topInputOptionIndex = 0
+  cursorSprite.position.y = 120 + (80*topInputOptionIndex)
+
+  if Input.is_action_just_pressed("sub_action_button"):
+    if topInputOptionIndex == 0:
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.KEYBOARD_INPUT
+    elif topInputOptionIndex == 1:
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.CONTROLLER_INPUT
+  elif Input.is_action_just_pressed("jump_button"):
+    pauseMenuState = PauseMenuState.NORMAL
+    shouldUpdateMenuText = true
 
 func initializeControlsConfig():
   var newControlsConfig = [
@@ -337,6 +389,7 @@ func initializeControlsConfig():
       "sprite": leftSprite,
       "sprite_aniPlayer": leftSpriteAniPlayer,
       "default_keyCode": 16777231, 
+      "button_index": JOY_DPAD_LEFT,
     },
     {
       "input_action": "ui_right",
@@ -345,6 +398,7 @@ func initializeControlsConfig():
       "sprite": rightSprite,
       "sprite_aniPlayer": rightSpriteAniPlayer,
       "default_keyCode": 16777233, 
+      "button_index": JOY_DPAD_RIGHT,
     },
     # {
     #   "input_action": "run_button",
@@ -361,6 +415,7 @@ func initializeControlsConfig():
       "sprite": downSprite,
       "sprite_aniPlayer": downSpriteAniPlayer,
       "default_keyCode": 16777234, 
+      "button_index": JOY_DPAD_DOWN,
     },
     {
       "input_action": "ui_up",
@@ -369,6 +424,7 @@ func initializeControlsConfig():
       "sprite": upSprite,
       "sprite_aniPlayer": upSpriteAniPlayer,
       "default_keyCode": 16777232, 
+      "button_index": JOY_DPAD_UP,
     },
     {
       "input_action": "jump_button",
@@ -377,6 +433,7 @@ func initializeControlsConfig():
       "sprite": jumpSprite,
       "sprite_aniPlayer": jumpSpriteAniPlayer,
       "default_keyCode": 90, 
+      "button_index": JOY_DS_A,
     },
     {
       "input_action": "sub_action_button",
@@ -385,6 +442,7 @@ func initializeControlsConfig():
       "sprite": sweepSprite,
       "sprite_aniPlayer": sweepSpriteAniPlayer,
       "default_keyCode": 88, 
+      "button_index": JOY_DS_B,
     },
     {
       "input_action": "alt_action_button",
@@ -392,7 +450,7 @@ func initializeControlsConfig():
       "text_label": castTextLabel,
       "sprite": castSprite,
       "sprite_aniPlayer": castSpriteAniPlayer,
-      "default_keyCode": 32, 
+      "default_keyCode": JOY_DS_X, 
     },
   ]
   if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
@@ -417,28 +475,41 @@ func processControlsLogic(_delta):
   if global.is_reading_input:
     pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
   else:
-    pauseTitleText.bbcode_text = "press " + global.getKeyCodeStr(controlsConfig[6].key_code) + " to select, " + global.getKeyCodeStr(controlsConfig[5].key_code) + " to go back\n    hold BACKSPACE: reset bindings"
+    pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n    hold BACKSPACE: reset bindings"
 
   if global.is_reading_input:
     if global.last_read_input != null:
-      var keyCodeString = OS.get_scancode_string(global.last_read_input)
-      if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "Backspace":
-        controlsConfig[control_index].key_code = global.last_read_input
-        global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
-        global.memory["controls_config"] = controlsConfig
-        global.is_reading_input = false
-        last_control_index = -1
-        level.saveTheGame()
+      if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+        var keyCodeString = OS.get_scancode_string(global.last_read_input)
+        if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "Backspace":
+          controlsConfig[control_index].key_code = global.last_read_input
+          global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
+          global.memory["controls_config"] = controlsConfig
+          global.is_reading_input = false
+          global.is_reading_keyboard_input = false
+          last_control_index = -1
+          level.saveTheGame()
+      elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+        if global.last_read_input != JOY_START:
+          controlsConfig[control_index].button_index = global.last_read_input
+          global.setButtonIndex(controlsConfig[control_index].input_action, global.last_read_input)
+          global.memory["controls_config"] = controlsConfig
+          global.is_reading_input = false
+          global.is_reading_controller_input = false
+          last_control_index = -1
+          level.saveTheGame()
     return
   else:
     if Input.is_action_just_pressed("ui_down"):
       control_index += 1
-      menuMoveSound.play()
     elif Input.is_action_just_pressed("ui_up"):
       control_index -= 1
-      menuMoveSound.play()
     if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel"):
       global.is_reading_input = true
+      if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+        global.is_reading_keyboard_input = true
+      elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+        global.is_reading_controller_input = true
       global.last_read_input = null
       last_control_index = -1
     elif Input.is_action_just_pressed("jump_button"):
@@ -459,13 +530,20 @@ func processControlsLogic(_delta):
     if control_index == i:
       controlConfig.sprite.scale = big_size
       if control_index != last_control_index:
-        var waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
+        var waveTextVal = ""
+        if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+          waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
+        elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+          waveTextVal = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, true)
         controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
         # controlConfig.sprite.z_index = 1
         controlConfig.sprite_aniPlayer.play("idle")
     else:
       controlConfig.sprite.scale = normal_size
-      controlConfig.text_label.bbcode_text = "[color=gray][lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb][/color]"
+      if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+        controlConfig.text_label.bbcode_text = "[color=gray][lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb][/color]"
+      elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, true) + "[/color]"
       # controlConfig.sprite.z_index = 0
       controlConfig.sprite_aniPlayer.stop()
       controlConfig.sprite_aniPlayer.play("RESET")
