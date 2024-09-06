@@ -9,7 +9,11 @@ func _ready():
 
 var which_one = 0
 func activateScript():
-  if which_one == 0:
+  if which_one == -1:
+    NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
+    NPC.textBoxContainer.setVars()
+    which_one = 1
+  elif which_one == 0:
     level.aniPlayer.play("appearEnd")
     NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
     NPC.textBoxContainer.setVars()

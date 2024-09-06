@@ -129,24 +129,24 @@ func conductFromScenePath(path):
         stopAll()
         return
     changeSongPitch(1.0)
-    if path.find("RestZone") > 0 or path.find("TowerHub") > 0:
-        tryToPlay(restZonePlayer)
-    elif path.find("preBossRoom") > 0:
+    if path.find("preBossRoom") > 0 or \
+       (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
+       path.find("MiniRestZone") > 0 or \
+       path.find("LongGlitchyHallway") > 0:
         tryToPlay(windPlayer)
-    elif path.find("HighPriestessRoom") > 0:
+    elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] < 2:
         tryToPlay(crystalThemePlayer) # bossThemePlayer)
     elif path.find("gd1CrystalTower") > 0:
         tryToPlay(debugThemePlayer)
-    elif path.find("MainMenu") > 0 or path.find("Pastoral") > 0:
-        if global.memory["clean_crystals"] > 0 or global.memory.has("spellbookPage"):
-            tryToPlay(titleThemePlayer)
-        else:
-            tryToPlay(grannyPlayer)
-            # changeSongPitch(0.9)
-            # default_song_pitch = 0.9
-            return
-    elif path.find("gd1GrandmaVillage") > 0:
+    elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
         tryToPlay(grannyPlayer)
+        changeSongPitch(0.9)
+        default_song_pitch = 0.9
+        return
+    elif path.find("PastoralScene_tangible") > 0:
+        tryToPlay(grannyPlayer)
+    elif path.find("gd1GrandmaVillage") > 0:
+        tryToPlay(titleThemePlayer)
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)

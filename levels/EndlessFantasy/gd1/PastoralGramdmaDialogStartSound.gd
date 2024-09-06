@@ -19,8 +19,8 @@ func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR 
 
 func isActive(_debug=false):
   if "sweep" in textBox.text_final:
-    var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-    textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"
+    var sweep_button_text = global.getInputText("sub_action_button")
+    textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with " + sweep_button_text + "?"
     textBoxContainer.bbText = textBox.text_final
 
   return true

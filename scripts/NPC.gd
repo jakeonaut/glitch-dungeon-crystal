@@ -293,7 +293,9 @@ func idleTalk():
 func imAnNpc():
   return true
 
+export var bring_to_front = true
 func appendNextTextCharacter():
   if not is_wiggling_fast:
     mySprite.frame_delay = 0.2
-    mySprite.transform.origin.z = 1
+    if bring_to_front:
+      mySprite.transform.origin.z = 1

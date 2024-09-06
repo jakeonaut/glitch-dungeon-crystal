@@ -19,6 +19,7 @@ func activateScript():
   elif global.memory["crone"] == 1:
     if global.memory["broomerang"] < 1 and textBox.selectedYesNoOption:
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG:
+        global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG)
         global.memory["broomerang"] = 1
         level.player.sayThis("BROOMERANG GET!\nsweep twice to THROW")
         global.memory["crone"] = 2
@@ -30,6 +31,7 @@ func activateScript():
   elif global.memory["crone"] == 3:
     if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
+        global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)
         global.memory["broomerang"] = 2
         level.player.sayThis("BROOMERANG WARP GET!\nsweep three times to WARP")
       else:

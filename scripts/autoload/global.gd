@@ -188,6 +188,11 @@ func _ready():
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
 
+    resetMemory()
+    loadGameSettings()
+
+func resetMemory():
+    memory = {}
     # settings?
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
@@ -248,8 +253,6 @@ func _ready():
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 
-    loadGameSettings()
-
 var anna_mode_counter = 0
 var anna_key_helper = false
 func processEasterEggs():
@@ -305,59 +308,6 @@ func _process(delta):
             respawnVarTimerHack = 0
             hasJustEnteredRoom = false
             isEnteringRoom = false
-
-var is_reading_input = false
-var last_read_input = null
-var hasInitializedControlsConfig = false
-func _input(ev):
-    if is_reading_input and ev is InputEventKey and ev.pressed:
-        last_read_input = ev.scancode
-
-func getKeyCodeStr(keycode):
-    var keycode_str = OS.get_scancode_string(keycode)
-    match keycode_str:
-        "Control":
-            return "Ctrl"
-        "CapsLock", "Capslock", "Caps Lock", "Caps lock":
-            return "Caps"
-        "Function":
-            return "Fn"
-        "PageUp":
-            return "PgUp"
-        "PageDown":
-            return "PgDn"
-        "Delete":
-            return "Del"
-        "Space":
-            return "Space"
-        "QuoteLeft":
-            return "`"
-        "Shift":
-            return "Shft"
-        "Minus":
-            return "-"
-        "Equal":
-            return "="
-        "BracketLeft":
-            return "["
-        "BracketRight":
-            return "]"
-        "Semicolon":
-            return ";"
-        "Apostrophe":
-            return "'"
-        "Comma":
-            return ","
-        "Period":
-            return "."
-        "Insert":
-            return "Ins"
-        "Slash":
-            return "/"
-        "BackSlash":
-            return "\\"
-        _:
-            return keycode_str
 
 var SACRED_LEVEL_NAME = "res://levels/EndlessFantasy"
 var MINI_SACRED_LEVEL_NAME = "EndlessFantasy"
@@ -489,15 +439,120 @@ func loadGame():
             global.memory["level_zonez"].push_back(currLevelZone)
     return true
 
+var is_reading_input = false
+var last_read_input = null
+var hasInitializedControlsConfig = false
+func _input(ev):
+    if is_reading_input and ev is InputEventKey and ev.pressed:
+        last_read_input = ev.scancode
+
+func getButtonIndexStr(button_index):
+    match button_index:
+        JOY_DS_B:
+            return "B" # TODO(jaketrower): This is gonna be a little whack between Xbox/Nintendo
+        JOY_DS_A:
+            return "A"
+        JOY_DS_X:
+            return "X"
+        JOY_DS_Y:
+            return "Y"
+        JOY_START:
+            return "Start"
+        JOY_SELECT:
+            return "Select"
+        JOY_DPAD_UP:
+            return "Dpad Up"
+        JOY_L:
+            return "L1"
+        JOY_L2:
+            return "L2"
+        JOY_L3:
+            return "L3"
+        JOY_R:
+            return "R1"
+        JOY_R2:
+            return "R2"
+        JOY_R3:
+            return "R3"
+        _:
+            return "???"
+
+func getAxisStr(axis, axis_value):
+    if axis == JOY_AXIS_0:
+        if axis_value > 0.5:
+            return "Lstick Right"
+        elif axis_value < 0.5:
+            return "Lstick Left"
+    if axis == JOY_AXIS_1:
+        if axis_value > 0.5:
+            return "Lstick Up"
+        elif axis_value < 0.5:
+            return "Lstick Down"
+    if axis == JOY_AXIS_2:
+        if axis_value > 0.5:
+            return "Rstick Right"
+        elif axis_value < 0.5:
+            return "Rstick Left"
+    if axis == JOY_AXIS_3:
+        if axis_value > 0.5:
+            return "Rstick Up"
+        elif axis_value < 0.5:
+            return "Rstick Down"
+    return "???"
+
+func getKeyCodeStr(keycode):
+    var keycode_str = OS.get_scancode_string(keycode)
+    match keycode_str:
+        "Control":
+            return "Ctrl"
+        "CapsLock", "Capslock", "Caps Lock", "Caps lock":
+            return "Caps"
+        "Function":
+            return "Fn"
+        "PageUp":
+            return "PgUp"
+        "PageDown":
+            return "PgDn"
+        "Delete":
+            return "Del"
+        "Space":
+            return "Space"
+        "QuoteLeft":
+            return "`"
+        "Shift":
+            return "Shft"
+        "Minus":
+            return "-"
+        "Equal":
+            return "="
+        "BracketLeft":
+            return "["
+        "BracketRight":
+            return "]"
+        "Semicolon":
+            return ";"
+        "Apostrophe":
+            return "'"
+        "Comma":
+            return ","
+        "Period":
+            return "."
+        "Insert":
+            return "Ins"
+        "Slash":
+            return "/"
+        "BackSlash":
+            return "\\" # " # idk why VSC needs this to render syntax correctly after the "\\"
+        _:
+            return keycode_str
+
 func getKeyCode(input_action):
   var inputEvents = InputMap.get_action_list(input_action)
-  # TODO(jaketrower): Support both key & gamepad here
   for inputEvent in inputEvents:
     if inputEvent is InputEventKey:
       return inputEvent.get_scancode()
   return null
 
-# TODO(jaketrower): Support both key & gamepad here
 func setKeyCode(input_action, key_code):
   var inputEvents = InputMap.get_action_list(input_action)
   for inputEvent in inputEvents:
@@ -506,6 +561,23 @@ func setKeyCode(input_action, key_code):
   var new_event = InputEventKey.new()
   new_event.set_scancode(key_code)
   InputMap.action_add_event(input_action, new_event)
+
+func getInputText(input_action):
+    # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
+    var is_controller_connected = Input.get_connected_joypads().size() > 0
+
+    var inputEvents = InputMap.get_action_list(input_action)
+    for inputEvent in inputEvents:
+        if is_controller_connected:
+            if inputEvent is InputEventJoypadButton:
+                return "(" + getButtonIndexStr(inputEvent.button_index) + ")"
+            if inputEvent is InputEventJoypadMotion:
+                return getAxisStr(inputEvent.axis, inputEvent.axis_value)
+        else:
+            if inputEvent is InputEventKey:
+                return "[lb]" + getKeyCodeStr(inputEvent.get_scancode()) + "[rb]"
+        
+    return null
 
 func normalizeLoadedMemory():
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:

@@ -11,8 +11,7 @@ func _ready():
   set_process(true)
 
 func isActive(_debug=false):
-  return parent.has_method("isActive") and \
-       parent.isActive()
+  return parent.has_method("isActive") and parent.isActive()
 
 func playerActivationAreaPassiveActivate():
   if parent.has_method("playerActivationAreaPassiveActivate3"):
@@ -21,4 +20,4 @@ func playerActivationAreaPassiveActivate():
 
 func _process(_delta):
   wasTouchingPlayer = touchingPlayer
-    touchingPlayer = false
+  touchingPlayer = false

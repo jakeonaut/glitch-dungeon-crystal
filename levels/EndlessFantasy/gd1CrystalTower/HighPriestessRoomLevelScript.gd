@@ -21,31 +21,42 @@ func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
     debug_start_boss_immediately = true
     highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
-    croneNPC.textBox.get_node("AbortSound").activateScript()
-  if crystalGeode.getMyStaticLevelZoneVar():
+  if crystalGeode.getMyStaticLevelZoneVar() and global.memory["priestess"] < 2:
     debug_start_boss_immediately = true
 
-  if debug_start_boss_immediately:
+  var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
+  if debug_start_boss_immediately and global.memory["priestess"] < 2:
     gameCamera.initial_size = camera_size
     gameCamera.zoomed_size = camera_size
     aniPlayer.stop()
     aniPlayer.clear_queue()
     unhideHighPriestess()
     has_boss_started = true
+    croneAbortSound.which_one = -1
+    croneAbortSound.activateScript()
+    global.setStaticLevelZoneLevelVar(self, crystalGeode, true)
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
     highPriestessBoss.mySprite.visible = false
-
-  yield(get_tree().create_timer(0.5), "timeout")
-  summonSmokeClouds(door.global_transform.origin, 3, true, true)
-  door.queue_free()
-  yield(get_tree().create_timer(0.5), "timeout")
-  var npcPlatforms = npcPlatformContainer.get_children()
-  for i in range(len(npcPlatforms)):
-      summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
-      npcPlatforms[i].visible = true
+    if global.memory["priestess"] >= 2:
+      croneAbortSound.which_one = -1
+      croneAbortSound.activateScript()
+      has_boss_started = true
+      is_defeated = true
+      is_really_defeated = true
+      crystalGeode.visible = false
+      pacman_wrapping = false
+    else:
       yield(get_tree().create_timer(0.5), "timeout")
+      summonSmokeClouds(door.global_transform.origin, 3, true, true)
+      door.queue_free()
+      yield(get_tree().create_timer(0.5), "timeout")
+      var npcPlatforms = npcPlatformContainer.get_children()
+      for i in range(len(npcPlatforms)):
+          summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
+          npcPlatforms[i].visible = true
+          yield(get_tree().create_timer(0.5), "timeout")
 
 # @override
 func playMenuMusic():

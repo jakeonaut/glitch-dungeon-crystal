@@ -226,7 +226,7 @@ func _process(delta):
     var currSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
     var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3/EquipmentSlotSprite")
     var nextSpellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
-    var currSpellPage = spellbook[spellbook.size() - 1] if spellbook.size() > 1 else global.GlitchForm.NORMAL
+    var currSpellPage = spellbook[spellbook.size() - 1] if spellbook.size() >= 1 else level.player.glitch_form #global.GlitchForm.NORMAL
     setGlitchSprite(equipSlotSprite, nextSpellPage)
     setGlitchSprite(currSlotSprite, currSpellPage)
   var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
@@ -355,8 +355,8 @@ func processHiscoreRenderLogic(delta):
       hiscoreTimeLimit = 15
     elif hiscoreDisplayIndex == 6:
       pressEnterLabel.visible = not pressEnterLabel.visible
-      var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-      pressEnterLabel.text = "press [​" + sweep_button_text + "​] to continue"
+      var sweep_button_text = global.getInputText("sub_action_button")
+      pressEnterLabel.text = "press " + sweep_button_text + "​ to continue"
     # totalHiscoreLabel.visible = true
     # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
     # if level.has_node("CubeCrystal"):

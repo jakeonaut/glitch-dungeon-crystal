@@ -452,14 +452,14 @@ func processCastingLogic(_delta):
   if not global.memory.has("spellbookPage"):
     return
 
-  if Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button"): #  or Input.is_action_just_pressed("right_button"):
+  if (Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("right_button"):
     if global.memory["spellbookPage"].size() <= 1:
       noSpellSound.play()
     else:
       spellCastPauseIndex = 0
       applySpellbookGlitch()
       level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
-  elif Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button"): # or Input.is_action_just_pressed("left_button"):
+  elif (Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("left_button"):
     if global.memory["spellbookPage"].size() <= 1:
       noSpellSound.play()
     else:
@@ -512,6 +512,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("prevYDiff")
 
     var curr_coords = level.getLevelManagerCoords() if not level.pacman_wrapping else null
+    # print("curr_coords: " + str(curr_coords))
     var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
     if new_coords != null and not level.pacman_wrapping:
       transition.fast_fade_to(new_coords)

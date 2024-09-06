@@ -67,15 +67,15 @@ func setUpRoomInitializationOverride():
   eventSound1.play()
   yield(get_tree().create_timer(0.33), "timeout")
   eventSound1.play()
-  # var sweep_button_text = global.getKeyCodeStr(global.getKeyCode("sub_action_button"))
-  # pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with [lb]" + sweep_button_text + "[rb]?"
+  # var sweep_button_text = global.getInputText("sub_action_button")
+  # pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with " + sweep_button_text + "?"
   # pastoralGrannyNPC.textBoxContainer.bbText = pastoralGrannyNPC.textBox.text_final
 
   # NPC7.floating_text = true
   # NPC7.mySprite.pixel_size = 0.0001
   # NPC7.textBox.floating_text = true
-  # var right_button_text = global.getKeyCodeStr(global.getKeyCode("ui_right"))
-  # NPC7.textBox.text_final = "*meow!\n•up here dearie!\npress [lb]" + right_button_text + "[rb] to walk"
+  # var right_button_text = global.getInputText("ui_right")
+  # NPC7.textBox.text_final = "*meow!\n•up here dearie!\npress " + right_button_text + " to walk"
   # NPC7.textBox.showTextbox()
   
 
@@ -100,9 +100,9 @@ func _process(_delta):
   #     NPC5.textBox.hideTextbox()
   #   has_updated = true
   # elif NPC5.textBox.visible:
-  #   var jump_button_text = global.getKeyCodeStr(global.getKeyCode("jump_button"))
+  #   var jump_button_text = global.getInputText("jump_button")
   #   if jump_button_text != prev_jump_button_text:
   #     NPC5.textBox.hideTextbox()
-  #     NPC5.textBox.text_final = ("•moo.\njump with [lb]" + str(jump_button_text) + "[rb]")
+  #     NPC5.textBox.text_final = ("•moo.\njump with " + str(jump_button_text))
   #     NPC5.textBox.showTextbox()
   #     prev_jump_button_text = jump_button_text
