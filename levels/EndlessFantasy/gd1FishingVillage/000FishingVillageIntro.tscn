@@ -490,13 +490,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9, 12.5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.9, 2.06646, 0 )
 
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2, 14.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.2, 1.5, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4, 11.1, 0 )
 
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 14.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 2.6, 0 )
 
 [node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 24.6, 0 )

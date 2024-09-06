@@ -9,6 +9,7 @@ onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var secretAniPlayer = get_node("SecretAniPlayer")
 var SWEEP_BUFFER_DIST = 4
 var secretMultiBroom = null
+var has_sweeped_glitch = false
 
 enum BehaviorState {
   NORMAL,

@@ -240,6 +240,7 @@ func appendNextTextCharacter(play_sound = true):
     resetPrompts()
     
   if play_sound:
+    dialogSound.pitch_scale = rand_range(0.8, 1.2)
     dialogSound.play()
   text_timer = 0
   

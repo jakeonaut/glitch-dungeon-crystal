@@ -412,7 +412,6 @@ func isActive(_debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    print("activate")
     getSmacked(self.global_transform.origin)
     getPlayer().getSmacked()
 
@@ -515,7 +514,6 @@ var smacked_palette = global.white_palette
 func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
     if is_smacked or am_i_dying:
         return false
-    print("get smacked")
 
     if notDieSound and not notDieSound.is_playing() and not silently: notDieSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)

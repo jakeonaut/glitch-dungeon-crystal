@@ -42,10 +42,6 @@ func _ready():
 
   smallInteractionArea.add_to_group("no_pushems")
 
-  var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
-  gulpIdleAnimation.loop = false
-  gulpIdleAnimation.length = 1.4
-
 func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
@@ -181,6 +177,9 @@ func spitOut():
   level.player.tumbleFall(mySprite.flip_h)
 
 func queueGulpAnimation():
+  var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
+  gulpIdleAnimation.loop = false
+  gulpIdleAnimation.length = 1.4
   tongueAniPlayer.queue("gulpIdle")
   # tongueAniPlayer.queue("spitOut")
 

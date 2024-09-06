@@ -103,9 +103,11 @@ func _ready_impl():
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
 
-  tryShowUIElements()
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName())
+  if global.memory["currLevelZone"] != global.currLevelZone:
+    uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
+  tryShowUIElements()
   trySpawnFollowers()
   setUpRoomInitializationOverride()
   restartMusic()
@@ -213,7 +215,6 @@ func restartMusic():
   
 func tryShowUIElements():
   # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
-  uiLayer.setDisplayTitle(display_title)
   uiLayer.initiateCutsceneRenderLogic()
 
   if global.memory.has("spellbookPage"):

@@ -198,6 +198,7 @@ func _ready():
     memory["canChangeSongPitch"] = true
 
     # game stuff
+    memory["currLevelZone"] = null
     memory["has_game_started"] = 0
     memory["tutorial_gem"] = 0
     memory["hammer"] = 0
@@ -376,6 +377,24 @@ func getLevelZoneName(longLevelName):
     if segments.size() <= 1:
         return null
     return segments[segments.size() - 2]
+
+func getDisplayTitle(levelZoneName):
+    match levelZoneName:
+        "gd1":
+            return "???" # basically "null"
+        "gd1FishingVillage":
+            return "tadpole bog"
+        "gd1ToxicJungle":
+            return "moldy dogwoods"
+        "gd1ShiftingSandLand":
+            return "cricket burrows"
+        "gd1CrystalTower":
+            return "crystal sanctuary"
+        "gd1GrandmaVillage":
+            return "village of elders"
+        _:
+            return "???"
+    
 
 
 func normalizeMemoryPosition(positionVariable):

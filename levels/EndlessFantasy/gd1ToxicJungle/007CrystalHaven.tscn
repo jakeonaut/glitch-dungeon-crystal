@@ -1144,7 +1144,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299988, 2, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7327, 1.8209, -1 )
 
 [node name="Sprite3D" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41687, 4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41687, 1.5 )
 material_override = SubResource( 22 )
 
 [node name="Sprite3D12" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="1"]

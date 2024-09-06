@@ -546,7 +546,7 @@ func tryDieToOffscreenCamera(delta):
   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
     global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
     global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
-    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN*2:
       if not has_landed_since_recovering:
         global.memory["hp"] = 0
         tryDieToEnemy(delta, true, true, true)

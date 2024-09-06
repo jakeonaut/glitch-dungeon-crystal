@@ -60,6 +60,7 @@ func change_scene():
         was_i_interrupted = false
         return
 
+    global.memory["currLevelZone"] = global.currLevelZone
     global.set_camera_position_on_respawn = true
 
     if self.path != "":
