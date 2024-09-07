@@ -154,7 +154,8 @@ func getPurified():
     lightAniPlayer.queue("omen")
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
     level.player.pauseAnimation = false
-    level.player.pauseSelf = false
+    level.player.pauseSelf = true
+    level.player.pauseInput = true
     global.pauseMoveInput = true
     global.pauseGame = true
     # level.levelTiles.randomize_num += 10

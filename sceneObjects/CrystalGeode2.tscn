@@ -1186,7 +1186,7 @@ material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="CubeContainer"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource( 80 )
@@ -1223,17 +1223,17 @@ volume_db = -15.0
 
 [node name="GetHitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -15.0
+volume_db = -18.0
 pitch_scale = 2.0
 
 [node name="GetHitSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -10.0
+volume_db = -15.0
 pitch_scale = 1.5
 
 [node name="GetHitSound3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -10.0
+volume_db = -13.0
 pitch_scale = 1.2
 
 [node name="PlusSpriteContainer" type="Spatial" parent="."]
