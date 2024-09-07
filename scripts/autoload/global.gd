@@ -369,8 +369,9 @@ func saveGame():
     save_game.close()
 
 func doesSaveGameExist():
-    var save_game = File.new()
-    return save_game.file_exists(save_game_file)
+    return false # nocommit
+    # var save_game = File.new()
+    # return save_game.file_exists(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
     if typeof(obj) == TYPE_STRING:
