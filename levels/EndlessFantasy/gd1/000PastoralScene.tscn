@@ -4084,13 +4084,13 @@ __meta__ = {
 }
 
 [node name="SkipText" type="RichTextLabel" parent="UILayer"]
-visible = false
-margin_left = 372.5
+margin_left = 320.0
 margin_top = 470.0
-margin_right = 713.5
+margin_right = 636.0
 margin_bottom = 571.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
+size_flags_horizontal = 3
 theme = SubResource( 190 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true

@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Babushka Quest: secret of nana"
+config/name="GLITCH DUNGEON CRYSTAL"
 run/main_scene="res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"

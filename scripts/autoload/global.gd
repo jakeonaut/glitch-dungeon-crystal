@@ -369,8 +369,9 @@ func saveGame():
     save_game.close()
 
 func doesSaveGameExist():
-    var save_game = File.new()
-    return save_game.file_exists(save_game_file)
+    return false # nocommit
+    # var save_game = File.new()
+    # return save_game.file_exists(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
     if typeof(obj) == TYPE_STRING:
@@ -442,9 +443,16 @@ func loadGame():
 var is_reading_input = false
 var last_read_input = null
 var hasInitializedControlsConfig = false
+var is_reading_keyboard_input = false
+var is_reading_controller_input = false
 func _input(ev):
-    if is_reading_input and ev is InputEventKey and ev.pressed:
+    if not is_reading_input:
+        return
+
+    if is_reading_keyboard_input and ev is InputEventKey and ev.pressed:
         last_read_input = ev.scancode
+    if is_reading_controller_input and ev is InputEventJoypadButton and ev.pressed:
+        last_read_input = ev.button_index
 
 func getButtonIndexStr(button_index):
     match button_index:
@@ -462,6 +470,12 @@ func getButtonIndexStr(button_index):
             return "Select"
         JOY_DPAD_UP:
             return "Dpad Up"
+        JOY_DPAD_DOWN:
+            return "Dpad Down"
+        JOY_DPAD_LEFT:
+            return "Dpad Left"
+        JOY_DPAD_RIGHT:
+            return "Dpad Right"
         JOY_L:
             return "L1"
         JOY_L2:
@@ -562,9 +576,18 @@ func setKeyCode(input_action, key_code):
   new_event.set_scancode(key_code)
   InputMap.action_add_event(input_action, new_event)
 
-func getInputText(input_action):
+func setButtonIndex(input_action, button_index):
+  var inputEvents = InputMap.get_action_list(input_action)
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventJoypadButton:
+      InputMap.action_erase_event(input_action, inputEvent)
+  var new_event = InputEventJoypadButton.new()
+  new_event.set_button_index(button_index)
+  InputMap.action_add_event(input_action, new_event)
+
+func getInputText(input_action, force_controller_display = false):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = Input.get_connected_joypads().size() > 0
+    var is_controller_connected = Input.get_connected_joypads().size() > 0 or force_controller_display
 
     var inputEvents = InputMap.get_action_list(input_action)
     for inputEvent in inputEvents:

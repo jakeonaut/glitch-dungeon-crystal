@@ -152,6 +152,8 @@ func _process(delta):
 func processPauseMenu():
   if global.shouldRenderAsCinematic:
     global.is_reading_input = false
+    global.is_reading_keyboard_input = false
+    global.is_reading_controller_input = false
     if global.isPauseMenuOpen:
       global.isPauseMenuOpen = false
       player.unpauseSound.play()

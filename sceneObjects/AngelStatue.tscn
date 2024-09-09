@@ -12,10 +12,10 @@
 [ext_resource path="res://scripts/AngelStatue.gd" type="Script" id=10]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=11]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 3 )
 shader_param/albedo = null
-shader_param/opacity = 1.0
+shader_param/opacity = 0.8
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.05
@@ -353,7 +353,7 @@ script = ExtResource( 10 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.860353, 0 )
-material_override = SubResource( 10 )
+material_override = SubResource( 13 )
 pixel_size = 0.125
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
@@ -413,11 +413,11 @@ is_a_body = false
 [node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 11 )
 
-[node name="Sprite3D" parent="NPC" index="4"]
+[node name="Sprite3D" parent="NPC" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, -0.195348 )
 pixel_size = 0.0001
 
-[node name="FallthroughSolid" parent="NPC" index="6"]
+[node name="FallthroughSolid" parent="NPC" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.82613, 0 )
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
