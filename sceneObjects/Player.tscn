@@ -2137,7 +2137,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 23 ]
+"values": [ 63 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:rotation_degrees")

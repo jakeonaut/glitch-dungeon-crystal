@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=2]
 [ext_resource path="res://sceneObjects/Spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
-[ext_resource path="res://sceneObjects/BabushkaCatCrystalSniffer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
@@ -238,7 +238,7 @@ shape = SubResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 23, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 20 )
 anims/doorOpen = SubResource( 21 )
 anims/locked = SubResource( 22 )
@@ -310,8 +310,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 24, 0 )
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6, 24, 0 )
 
-[node name="BabushkaCatCrystalSniffer" parent="Viewport/level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9649, 0.0413799, 0 )
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0 )
+grav = 0
+bbText = "[color=#ffff00]Wall Ladder[/color] spell:
+try to walk into walls"
 
 [node name="Viewport2" parent="." instance=ExtResource( 24 )]
 

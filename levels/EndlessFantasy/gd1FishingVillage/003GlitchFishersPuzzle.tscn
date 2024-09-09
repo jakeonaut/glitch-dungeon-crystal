@@ -1197,6 +1197,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 10, 0 )
 [node name="SavePoint3" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, 17, 0 )
 
+[node name="SavePoint4" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 17, 0 )
+
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 8, 0 )
 
@@ -1205,6 +1208,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 8, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 40 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 7.74876, 0 )
+sprite_offset_y = 0.25
 is_static = true
 is_licker = true
 
@@ -1360,9 +1364,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 29, 0 )
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 65, 26, -1 )
-
-[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 18, 0 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 37, 0 )

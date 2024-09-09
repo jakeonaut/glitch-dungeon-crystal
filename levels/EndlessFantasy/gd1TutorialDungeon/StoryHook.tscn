@@ -509,27 +509,16 @@ spawned_object_path = ""
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.20833, 0 )
 grav = 0
-bbText = "•i am caretaker of the CRYSTALs
-but age has made me weary.
-•and I have lost track of them"
+bbText = "•if you purify all 5 [color=#0798bf]crystals[/color],
+we can make a wish to the 
+[color=red]goddess[/color] and stop this world
+from withering away"
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true
 
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 14 )

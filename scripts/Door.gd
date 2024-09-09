@@ -109,7 +109,7 @@ func _ready():
           npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
       elif num_keys != null and num_keys < num_keys_unlock:
         prev_keys = num_keys
-        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
+        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " [wave]more[/wave] keys\n(" + str(num_keys_unlock) +" total)"
       else:
         prev_keys = num_keys
         npc.textBoxContainer.bbText = "•"

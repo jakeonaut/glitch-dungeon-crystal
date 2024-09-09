@@ -226,14 +226,6 @@ func tryShowUIElements():
   # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()
   uiLayer.initiateCutsceneRenderLogic()
 
-  if global.memory.has("spellbookPage"):
-    # TODO(jaketrower): less ideal
-    uiLayer.get_node("EquipmentRect").visible = true
-    # uiLayer.get_node("EquipmentStatusRect").visible = true
-  else:
-    uiLayer.get_node("EquipmentRect").visible = false
-    # uiLayer.get_node("EquipmentStatusRect").visible = false
-
 func overrideLevelRespawnEvent():
   pass
   

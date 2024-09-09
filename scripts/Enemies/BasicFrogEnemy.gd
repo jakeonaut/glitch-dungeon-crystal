@@ -54,13 +54,18 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
-    var valid_inputs = ["sub_action_button", "jump_button"] #, "ui_up", "ui_down", "ui_left", "ui_right"]
-    for valid_input in valid_inputs:
-      if tongueAniPlayer.assigned_animation == "gulpIdle" and (not tongueAniPlayer.is_playing() or Input.is_action_just_pressed(valid_input)):
-        tongueAniPlayer.stop()
-        tongueAniPlayer.clear_queue()
-        tongueAniPlayer.play("spitOut")
-        break
+    if tongueAniPlayer.assigned_animation == "gulpIdle":
+      # if Input.is_action_pressed("ui_left"):
+      #   mySprite.flip_h = true
+      # elif Input.is_action_pressed("ui_right"):
+      #   mySprite.flip_h = false
+      var valid_inputs = ["sub_action_button", "jump_button"]
+      for valid_input in valid_inputs:
+        if (not tongueAniPlayer.is_playing() or Input.is_action_just_pressed(valid_input)):
+          tongueAniPlayer.stop()
+          tongueAniPlayer.clear_queue()
+          tongueAniPlayer.play("spitOut")
+          break
     level.player.processCastingLogic(delta)
     # if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
     #   tongueAniPlayer.play("gulpIdle")
@@ -96,6 +101,8 @@ func _process(delta):
       smallInteractionArea.remove_from_group("enemies")
   was_infected = is_infected
 
+  if is_licker or is_static:
+    sprite_offset_y = 0.25
   if pauseSelf and not is_smacked:
     pauseSelf = false
     on_ground = true
@@ -165,7 +172,15 @@ func startGulp():
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController")
+var SPIT_OFFSET = Vector2(0.2, 0.1)
 func spitOut():
+  level.player.global_transform.origin = self.global_transform.origin
+  level.player.global_transform.origin.y += SPIT_OFFSET.y
+  if mySprite.flip_h: # left
+    level.player.global_transform.origin.x -= SPIT_OFFSET.x
+  else: # right
+    level.player.global_transform.origin.x += SPIT_OFFSET.x
+
   notDieSound.play()
   gulpin = false
   level.player.tumbleFall(mySprite.flip_h)
@@ -266,6 +281,8 @@ func unsmack():
 
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+  if is_smacked or am_i_dying:
+    return false
   .getSmacked(broom_origin, silently)
   if is_infected:
     ouchies(broom_origin)
@@ -274,6 +291,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     notDieSound.play()
   # stop the lick
   if is_licker:
+    mySprite.flip_h = not mySprite.flip_h
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
     if gulpin:
@@ -288,6 +306,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   walk_direction.x = 1
   if level.player.mySprite.flip_h:
     walk_direction.x = -1
+    
   # is_static = false
   pauseSelf = true
   on_ground = true
@@ -302,7 +321,8 @@ func fallthroughCollisionActivate(friend):
   # ALSO, need to make game_mover call "fallthroughCollisionClear" if we ever
   # like jump, or fall off too...
   if not who_is_standing_on_me.has(friend.name):
-    playBounce("land")
+    # playBounce("land")
+    pass
 
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
@@ -323,7 +343,7 @@ func moveMyFriends(delta):
       continue
     friend.should_do_fallthrough_area_collision = true
     friend.global_transform.origin += self.global_transform.origin - lastPosition
-    if friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
+    if not friend.on_ground or friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
        friend.global_transform.origin.x > self.global_transform.origin.x + rb:
       who_is_standing_on_me.erase(friend_key)
       continue

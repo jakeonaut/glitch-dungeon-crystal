@@ -382,6 +382,11 @@ func _process(delta):
   #   applySpellbookGlitch()
   if Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()
+  if Input.is_action_just_pressed("debug_toggle_spellbook"):
+    if global.memory.has("spellbookPage"):
+      global.memory.erase("spellbookPage")
+    else:
+      global.memory["spellbookPage"] = [glitch_form]
     
   tryDieToOffscreenCamera(delta)
       
@@ -876,6 +881,7 @@ func getBubbleCured():
 
 
 func getFishyInfected():
+  tryClearFallthroughCollisionSolid()
   if summonedBroom:
     summonFallenBroom(true, false, false)
   if physics_state == PhysicsState.BEING_TOSSED:
@@ -1064,6 +1070,7 @@ func processMoleLogic(delta):
       mySprite.flip_h = not mySprite.flip_h
       glitchTickle()
       if dig_timer > dig_time_limit:
+        tryClearFallthroughCollisionSolid()
         transformation = TransformationState.UNDERGROUND
         global_transform.origin.y -= 2
         summonSmokeClouds(5, true, true, 0)
@@ -1099,6 +1106,7 @@ func getMoleCured():
 
 var is_mushroom_prefected = false
 func getMushroomInfected(): 
+  tryClearFallthroughCollisionSolid()
   if is_mushroom_infected or is_mushroom_prefected:
     # glitchTickle(0)
     # getSmacked()
@@ -1439,7 +1447,7 @@ func doBroomAttack(which_broom_attack):
   #   aniPlayer.play("sweepFloor")
   #   which_broom_attack = 0
   #   summonSporeShroom()
-  var is_turn_around_attack = (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
+  var is_turn_around_attack = false # (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
   # var is_facing_wall = (checkSolidTilesOnMyLeft(true) and mySprite.flip_h) or (checkSolidTilesOnMyRight(true) and not mySprite.flip_h)
   if force_a_sweep:
     aniPlayer.play("broomSmack")

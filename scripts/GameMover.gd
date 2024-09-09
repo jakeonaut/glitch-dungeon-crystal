@@ -280,6 +280,10 @@ func processPhysics(delta):
       jump_squat_jump_input_timer = 0
       feather_jump_timer = 0
       should_magic_jump = false
+  elif physics_state == PhysicsState.BEING_TOSSED:
+    if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
+      fall_timer = 0
+      landed()
     
   lv = hv + (up * vv)
   
@@ -1124,7 +1128,9 @@ func handleCollisionsAndMove(local_lv, delta):
     if last_vv != 0 and local_lv.y == 0:
       self.vertical_collision = true
   elif should_do_fallthrough_area_collision:
+    var truly_on_ground_memory = truly_on_ground
     local_lv = collideWithFloor(local_lv)
+    truly_on_ground = truly_on_ground_memory
     global_transform.origin.y = fallthrough_area_collision_y
 
   # PROCESS TURN_BASED MOVEMENT

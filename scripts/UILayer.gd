@@ -213,13 +213,18 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
+  get_node("EquipmentRect").visible = global.memory.has("spellbookPage")
+  glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if global.memory["tutorial_gem"] == 1:
     get_node("GlitchStatusRect").visible = true
     tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(480, 65))
-  if global.memory.has("tutorial_spellbookPage") and global.memory["tutorial_spellbookPage"]:
-    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(7, 4))
     # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
+  if not global.memory.has("spellbookPage"):
+    tryLerpFromCenter(glitchSpriteContainer, delta, Vector2(7.5, 7))
+  else:
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(7, 4))
+  tryLerpFromCenter(spellMessageTextLabel, delta, Vector2(9.5, 73.5))
 
   if global.memory.has("spellbookPage"):
     var spellbook = global.memory["spellbookPage"]
@@ -416,32 +421,25 @@ func setDisplayTitle(title):
   display_title = title
   levelTitleRect.get_node("RichTextLabel").bbcode_text = ("[center][wave amp=50 freq=2]" + title + "[/wave][/center]")
 
-onready var glitchSprite = get_node("GlitchSprite")
+onready var glitchSpriteContainer = get_node("GlitchSpriteColorRect")
+onready var glitchSprite = get_node("GlitchSpriteColorRect/ColorRect2/ColorRect3/GlitchSprite")
 func normalGlitch():
-  glitchSprite.visible = false
-  glitchSprite.frame = 0
-
-func glitch(_palette):
-  glitchSprite.visible = true
-
-func floorGlitch():
-  glitch(global.red_palette)
-  glitchSprite.frame = 2
-
-func featherGlitch():
-  glitch(global.green_palette)
-  glitchSprite.frame = 1
-
-func ladderGlitch():
-  glitch(global.yellow_palette)
   glitchSprite.frame = 4
 
+func floorGlitch():
+  glitchSprite.frame = 1
+
+func featherGlitch():
+  glitchSprite.frame = 0
+
+func ladderGlitch():
+  glitchSprite.frame = 2
+
 func invisibleGlitch():
-  glitch(global.black_palette)
   glitchSprite.frame = 3
 
 func walkThroughWallsGlitch():
-  glitch(global.white_palette)
+  pass
 
 func changeCastSpritePalette():
   pauseMenu.changeCastSpritePalette()

@@ -26,7 +26,7 @@ func activateScript():
         global.setStaticLevelZoneLevelVar(level, self, true)
 
 func doActivateScriptStuff():
-    NPC3.textBoxContainer.bbText = "•in time, this place will decay.\n• truthfully, i have nothing\nmore to say"
+    NPC3.textBoxContainer.bbText = "•i am caretaker of the CRYSTALs\nbut age has made me weary.\n•seek me when you have purified"
     NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self, false)
     NPC3.can_camera_zoom = false

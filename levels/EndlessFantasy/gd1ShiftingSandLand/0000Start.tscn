@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=21]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=24]
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 21 )
@@ -423,6 +424,9 @@ shape = SubResource( 31 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
 shape = SubResource( 32 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
 
 [node name="Viewport2" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

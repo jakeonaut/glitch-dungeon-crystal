@@ -139,13 +139,9 @@ shader_param/target_palette = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3649, 10.1759, 0 )
 script = ExtResource( 10 )
 grav = 0
-bbText = "•a crystal purified?
-interesting..
-•you seem to have
+bbText = "•you seem to have
 some [color=red]hag magic[/color]... I can 
-enchant your broom with gems
-•to help you on your quest
-"
+enchant your broom with gems"
 showYesNoOptions = true
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["npc"]]

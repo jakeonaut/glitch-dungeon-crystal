@@ -689,7 +689,7 @@ shape = SubResource( 63 )
 [node name="NPCTutorial2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9223, 11.6829, 0 )
 grav = 0
-bbText = "[color=blue]holy aura[/color] makes u forget..
+bbText = "[color=#0798bf]holy aura[/color] makes u forget..
 •and cuz you're [color=red]old[/color]: you'll only
 remember 2 spells at a time"
 can_camera_zoom = false

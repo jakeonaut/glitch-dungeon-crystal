@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/CHUNKY.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites2D/glitches.png" type="Texture" id=19]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=20]
 [ext_resource path="res://assets/player_sheet_old_nobroom.png" type="Texture" id=24]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=28]
@@ -365,13 +364,34 @@ theme = SubResource( 4 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "0"
 
-[node name="GlitchSprite" type="Sprite" parent="."]
+[node name="GlitchSpriteColorRect" type="ColorRect" parent="."]
 visible = false
-position = Vector2( 32.5, 34 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 19 )
-hframes = 3
-vframes = 3
+margin_left = 7.5
+margin_top = 7.0
+margin_right = 72.5
+margin_bottom = 72.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="GlitchSpriteColorRect"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 63.0
+margin_bottom = 62.0
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="GlitchSpriteColorRect/ColorRect2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 58.0
+margin_bottom = 58.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GlitchSprite" type="Sprite" parent="GlitchSpriteColorRect/ColorRect2/ColorRect3"]
+position = Vector2( 25.5, 39 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 4
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
 visible = false
@@ -703,8 +723,9 @@ bbcode_enabled = true
 bbcode_text = "[wave] feather fall[/wave]"
 text = " feather fall"
 
-[node name="TextBoxes" type="Control" parent="."]
-rect_pivot_offset = Vector2( -210.5, -92.5 )
+[node name="TextBoxes" type="CanvasLayer" parent="."]
+scale = Vector2( 2.5, 2.5 )
+transform = Transform2D( 2.5, 0, 0, 2.5, 0, 0 )
 
 [node name="Filters" type="Control" parent="."]
 margin_right = 40.0

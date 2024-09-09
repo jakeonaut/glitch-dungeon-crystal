@@ -110,7 +110,7 @@ func untinify():
   setTextBoxPosition()
 
 func setTinyPosition():
-  var factor = 0.5
+  var factor = 0.4
 
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
   if textboxParent.get_ref():
@@ -122,16 +122,14 @@ func setTinyPosition():
 
 func setTextBoxPosition():
   if not is_tiny:
-    self.rect_position.x = 95
-    self.rect_position.y = 388
-    self.margin_top = top_margin_start
-    self.margin_left = left_margin_start
-    self.margin_bottom = bot_margin_start
-    self.margin_right = right_margin_start
+    self.rect_position.x = 20
+    self.rect_position.y = 280
+    self.rect_size.x = 467
+    self.rect_size.y = 104
     
     var player_camera_pos = getGameCamera().unproject_position(level.player.global_transform.origin)
     if player_camera_pos.y > 600:
-      self.rect_position.y = 80
+      self.rect_position.y = 20
 
 func _process(delta):
   if global.activeInteractor == self and not self.visible:

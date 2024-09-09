@@ -629,7 +629,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -1.492, -0.26, 0.5 ), Vector3( -1.492, -0.26, 0.5 ) ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("TongueSprite2:translation")
@@ -641,7 +641,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -2.492, -0.26, 0.5 ), Vector3( -2.492, -0.26, 0.5 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("TongueSprite3:translation")
@@ -653,7 +653,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -3.492, -0.26, 0.5 ), Vector3( -3.492, -0.26, 0.5 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("TongueSprite4:translation")
@@ -665,7 +665,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -4.492, -0.26, 0.5 ), Vector3( -4.492, -0.26, 0.5 ) ]
 }
 tracks/15/type = "value"
 tracks/15/path = NodePath("TongueSprite:flip_h")
@@ -890,7 +890,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector3( 1.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 1.5, -0.26, 0.5 ) ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("TongueSprite2:translation")
@@ -902,7 +902,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector3( 2.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 2.5, -0.26, 0.5 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("TongueSprite3:translation")
@@ -914,7 +914,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector3( 3.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 3.5, -0.26, 0.5 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("TongueSprite4:translation")
@@ -926,7 +926,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector3( 4.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 4.5, -0.26, 0.5 ) ]
 }
 tracks/15/type = "value"
 tracks/15/path = NodePath("TongueSprite4:flip_h")
@@ -1135,7 +1135,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -4.6, -0.25, 0 ), Vector3( -4.6, -0.25, 0 ) ]
+"values": [ Vector3( -4.6, -0.26, 0 ), Vector3( -4.6, -0.26, 0 ) ]
 }
 tracks/11/type = "value"
 tracks/11/path = NodePath("TongueSprite:translation")
@@ -1147,7 +1147,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -1.49165, -0.35, 0.5 ), Vector3( -1.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -1.492, -0.26, 0.5 ), Vector3( -1.492, -0.26, 0.5 ) ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("TongueSprite2:translation")
@@ -1159,7 +1159,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -2.49165, -0.35, 0.5 ), Vector3( -2.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -2.492, -0.26, 0.5 ), Vector3( -2.492, -0.26, 0.5 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("TongueSprite3:translation")
@@ -1171,7 +1171,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -3.49165, -0.35, 0.5 ), Vector3( -3.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -3.492, -0.26, 0.5 ), Vector3( -3.492, -0.26, 0.5 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("TongueSprite4:translation")
@@ -1183,7 +1183,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( -4.49165, -0.35, 0.5 ), Vector3( -4.49165, -0.35, 0.5 ) ]
+"values": [ Vector3( -4.492, -0.26, 0.5 ), Vector3( -4.492, -0.26, 0.5 ) ]
 }
 tracks/15/type = "value"
 tracks/15/path = NodePath("TongueSprite:flip_h")
@@ -1392,7 +1392,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 1.5, -0.35, 0.5 ), Vector3( 1.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 1.5, -0.26, 0.5 ), Vector3( 1.5, -0.26, 0.5 ) ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("TongueSprite2:translation")
@@ -1404,7 +1404,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 2.5, -0.35, 0.5 ), Vector3( 2.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 2.5, -0.26, 0.5 ), Vector3( 2.5, -0.26, 0.5 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("TongueSprite3:translation")
@@ -1416,7 +1416,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 3.5, -0.35, 0.5 ), Vector3( 3.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 3.5, -0.26, 0.5 ), Vector3( 3.5, -0.26, 0.5 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("TongueSprite4:translation")
@@ -1428,7 +1428,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 4.5, -0.35, 0.5 ), Vector3( 4.5, -0.35, 0.5 ) ]
+"values": [ Vector3( 4.5, -0.26, 0.5 ), Vector3( 4.5, -0.26, 0.5 ) ]
 }
 tracks/15/type = "value"
 tracks/15/path = NodePath("TongueSprite:flip_h")
@@ -1822,7 +1822,6 @@ script = ExtResource( 1 )
 true_terminal_vel = 8
 grav = 30
 jump_force = 13
-sprite_offset_y = 0.25
 
 [node name="SpriteContainer" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
@@ -1999,7 +1998,7 @@ script = ExtResource( 16 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TongueController/TongueArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264062, -0.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.25, 0 )
 visible = false
 shape = SubResource( 147 )
 

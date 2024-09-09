@@ -133,6 +133,7 @@ func passiveActivate(_delta, _is_player):
     #   global.memory["mp"] = global.memory["max_mp"]
     return
 
+  global.memory["hasEverTouchedObelisk"] = true
   if global.memory.has("spellbookPage"):
     collectSound.pitch_scale = 0.9
     collectSound.play()
@@ -141,6 +142,12 @@ func passiveActivate(_delta, _is_player):
     level.player.getSmacked()
     if my_glitch_form == global.GlitchForm.FLOOR:
       level.player.on_ground = true
+    if not global.memory.has("spellbookPage") and global.memory["clean_crystals"] < 1:
+      level.uiLayer.glitchSpriteContainer.visible = true
+      level.uiLayer.glitchSpriteContainer.rect_scale = Vector2(1.5, 1.5)
+      level.uiLayer.glitchSpriteContainer.rect_position = Vector2(300, 250)
+      level.uiLayer.spellMessageTextLabel.rect_scale = Vector2(1.5, 1.5)
+      level.uiLayer.spellMessageTextLabel.rect_position = Vector2(320, 250)
   getPlayer().applyObeliskGlitch(my_glitch_form)
   level.player.glitchTickle()
   # if level.player.glitch_death_timer == 0:

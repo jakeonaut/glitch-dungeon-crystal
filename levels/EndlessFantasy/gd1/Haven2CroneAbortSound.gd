@@ -27,7 +27,16 @@ func activateScript():
         level.player.errorSound.play()
         level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes) + " more gems.\nthis is strong magic y'know")
   elif global.memory["crone"] == 2:
-    global.memory["crone"] = 3
+    if global.memory["max_hp"] < 2 and textBox.selectedYesNoOption: 
+      if num_cubes >= global.NUM_GEMS_FOR_ENCHANTED_BAG:
+        global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_ENCHANTED_BAG)
+        global.memory["max_hp"] = 2
+        global.memory["hp"] = global.memory["max_hp"]
+        level.player.sayThis("ENCHANTED BAG GET!\nnow you can take another hit")
+        global.memory["crone"] = 3
+      else:
+        level.player.errorSound.play()
+        level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes) + " more gems.\nthis is strong magic y'know")
   elif global.memory["crone"] == 3:
     if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:

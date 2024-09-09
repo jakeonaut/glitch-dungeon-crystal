@@ -165,7 +165,8 @@ var hasGottenLevelGeode = false
 var isAMoleDigging = false
 
 var isOnMainMenu = false
-var NUM_GEMS_FOR_BROOMERANG = 50
+var NUM_GEMS_FOR_BROOMERANG = 30
+var NUM_GEMS_FOR_ENCHANTED_BAG = 50
 var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
 func _ready():
@@ -203,6 +204,7 @@ func resetMemory():
     memory["canChangeSongPitch"] = true
 
     # game stuff
+    memory["hasEverTouchedObelisk"] = false
     memory["currLevelZone"] = null
     memory["has_game_started"] = 0
     memory["tutorial_gem"] = 0
@@ -674,6 +676,7 @@ func doFallthroughObjectCollision(gameMover, area):
         tb = bb
         bb = temp
 
+    var truly_on_ground_memory = gameMover.truly_on_ground
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
         x + lb, y + bb, x + rb, y + bb + diff
@@ -681,6 +684,8 @@ func doFallthroughObjectCollision(gameMover, area):
         gameMover.should_do_fallthrough_area_collision = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
         gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
+        gameMover.truly_on_ground = truly_on_ground_memory
+        
         gameMover.lv = gameMover.linear_velocity
         gameMover.global_transform.origin.y = gameMover.fallthrough_area_collision_y
 
