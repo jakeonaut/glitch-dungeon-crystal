@@ -9,7 +9,6 @@ onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else n
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
-onready var streetlightGlitchAura  = get_node("StreetlightGlitchAura")
 onready var triangleContainer = get_node("TriangleContainer")
 onready var saveDiskSprite = get_node("TriangleContainer/Sprite3D")
 onready var saveSporesSprite = get_node("SaveSpores")
@@ -25,7 +24,6 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
   spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
   saveDiskSprite.material_override = saveDiskSprite.material_override.duplicate()
-  streetlightGlitchAura.mainTextureRect.material = streetlightGlitchAura.mainTextureRect.material.duplicate()
 
   glitch_form_before_nullification = glitch_form
   yield(TempTimer.idle_frame(self), "timeout")
@@ -57,7 +55,6 @@ func processRendering(delta):
 
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
   if not isActive():
-    streetlightGlitchAura.mainTextureRect.visible = false
     triangleContainer.scale.x = 1.0
     triangleContainer.scale.y = 1.0
     triangleContainer.rotation_degrees.y = 0
@@ -76,10 +73,8 @@ func processRendering(delta):
 
     if glitch_form == global.GlitchForm.NORMAL:
       spellbookGlitchSprite.frame = 15
-      streetlightGlitchAura.mainTextureRect.visible = false
     else:
       triangleContainer.visible = false
-      streetlightGlitchAura.mainTextureRect.visible = level.player.glitch_form != glitch_form
       true_terminal_vel = 32
       # TODO(jaketrower): could dedupe with Player.gd 
       if glitch_form == global.GlitchForm.FEATHER:
@@ -170,7 +165,6 @@ func updateColor():
     target_palette = level.levelTiles.white_palette
   mySprite.material_override.set_shader_param("target_palette", sprite_palette)
   spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
-  streetlightGlitchAura.mainTextureRect.material.set_shader_param("target_palette", target_palette)
 
 func unsmack():
   var material = mySprite.material_override

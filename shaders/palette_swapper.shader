@@ -10,8 +10,8 @@ void vertex() {
 }
 
 vec3 getpalettecolor(int x) {
-    ivec2 coord = ivec2(x,0);
-    return texelFetch(base_palette, coord, 0).rgb;
+    vec2 coord = vec2(float(x)/float(palettesize),0);
+    return texture(base_palette, coord).rgb;
 }
 
 // https://unlimited3d.wordpress.com/2020/01/08/srgb-color-space-in-opengl/

@@ -35,8 +35,8 @@ vec3 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
     vec3 closest_color = vec3(0, 1.0, 0);
     for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(real_base_palette, coord, 0).rgb;
+        vec2 coord = vec2(float(x)/float(palettesize),0);
+        vec3 pixelcolor = texture(real_base_palette, coord).rgb;
         ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
         float dist = distance(vec3(color), vec3(ipixelcolor));
         if (dist < closest_distance) {
@@ -49,8 +49,8 @@ vec3 getClosestMatchingFromPalette(ivec3 color) {
 
 int getpaletteidx(vec3 color) {
     for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(base_palette, coord, 0).rgb;    
+        vec2 coord = vec2(float(x)/float(palettesize),0);
+        vec3 pixelcolor = texture(base_palette, coord).rgb;    
         if (distance(color, pixelcolor) == 0.0) {
             return x;
         }
@@ -59,8 +59,8 @@ int getpaletteidx(vec3 color) {
 }
 
 vec3 getpalettecolor(int x) {
-    ivec2 coord = ivec2(x,0);
-    return texelFetch(real_base_palette, coord, 0).rgb;
+    vec2 coord = vec2(float(x)/float(palettesize),0);
+    return texture(real_base_palette, coord).rgb;
 }
 
 void vertex() {
@@ -90,6 +90,27 @@ float random2( vec2 p )
 const float canvas_width = 2560.0;
 const float canvas_height = 2048.0;
 const float matrixSize = 4.0;
+int getM(int x) {
+  if (x == 0) { return 1; }
+  if (x == 1) { return 9; }
+  if (x == 2) { return 3; }
+  if (x == 3) { return 11; }
+  
+  if (x == 4) { return 13; }
+  if (x == 5) { return 5; }
+  if (x == 6) { return 15; }
+  if (x == 7) { return 7; }
+  
+  if (x == 8) { return 4; }
+  if (x == 9) { return 12; }
+  if (x == 10) { return 2; }
+  if (x == 11) { return 10; }
+  
+  if (x == 12) { return 16; }
+  if (x == 13) { return 8; }
+  if (x == 14) { return 14; }
+  if (x == 15) { return 6; }
+}
 void fragment() {
     // vec4 incolor = texture(texture_albedo, UV);
     // float fdelta = mod(256.0 * Convert_sRGB_FromLinear(incolor.r), 16.0);
@@ -98,12 +119,6 @@ void fragment() {
     // vec3 color = getpalettecolor(delta);
     // ALBEDO.rgb = color.rgb;
     // ALPHA = incolor.a;
-    int m[] = {
-        1, 9, 3, 11,
-        13, 5, 15, 7,
-        4, 12, 2, 10,
-        16, 8, 14, 6
-    };
     vec4 incolor = texture(texture_albedo, UV);
     float alpha = incolor.a * opacity; 
     if (alpha == 0.0) {
@@ -114,7 +129,7 @@ void fragment() {
     float y = uv.y;
     int m_x = int(mod(x, matrixSize));
     int m_y = int(mod(y, matrixSize));
-    int ratio = m[m_x + (m_y*int(matrixSize))];
+    int ratio = getM(m_x + (m_y*int(matrixSize)));
 
     int index = getpaletteidx(incolor.rgb);
     if (enable_remove_skin_tone && (index == 8 || index == 9)) {
