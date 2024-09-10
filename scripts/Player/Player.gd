@@ -492,19 +492,24 @@ func tryDieToOffscreenCamera(delta):
   if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 
+  var curr_coords = level.getLevelManagerCoords() if not level.pacman_wrapping else null
+
   var repositioned_player = global_transform.origin
   var try_to_recover = false
-  var DEATH_MARGIN = -2
+  var DEATH_MARGIN = -1
+  var ADJUSTMENT_MARGIN = -1
+
   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(1, 0, 0)
-    repositioned_player.x = getGameCamera().rightmost_x + DEATH_MARGIN
+    repositioned_player.x = getGameCamera().rightmost_x + ADJUSTMENT_MARGIN
   if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(-1, 0, 0)
-    repositioned_player.x = getGameCamera().leftmost_x - DEATH_MARGIN
-  DEATH_MARGIN = -1
+    repositioned_player.x = getGameCamera().leftmost_x - ADJUSTMENT_MARGIN
+  DEATH_MARGIN = 0
+  ADJUSTMENT_MARGIN = 0
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
-    repositioned_player.y = getGameCamera().topmost_y + DEATH_MARGIN
+    repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
   # only relocate back to safety if off bottom screen
   if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, -1, 0)
@@ -524,11 +529,9 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
 
-    var curr_coords = level.getLevelManagerCoords() if not level.pacman_wrapping else null
-    # print("curr_coords: " + str(curr_coords))
-    var new_coords = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
-    if new_coords != null and not level.pacman_wrapping:
-      transition.fast_fade_to(new_coords)
+    var next_room = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
+    if next_room != null and not level.pacman_wrapping:
+      transition.fast_fade_to(next_room)
       global.isEnteringRoom = true
       global.memory["player_flip_h"] = mySprite.flip_h
       global.memory["feather_jump_timer"] = feather_jump_timer

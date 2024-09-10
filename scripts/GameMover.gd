@@ -858,6 +858,7 @@ var is_sprite_flipped = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
+  var flip_h = mySprite.flip_h
   if pressingRun() and not was_running:
     startRun()
   was_running = pressingRun()
@@ -921,15 +922,16 @@ func processHorizontalInputs(delta):
 
     if not global.pauseMoveInput and not (not pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
       var multiplier = 0
-      var flip_h = false
       if pressingMoveLeft():
         multiplier = 1
         flip_h = true
+        if is_sprite_flipped:
+          flip_h = not flip_h
       elif pressingMoveRight():
         multiplier = -1
         flip_h = false
-      if is_sprite_flipped:
-        flip_h = not flip_h
+        if is_sprite_flipped:
+          flip_h = not flip_h
       multiplier = multiplier * horizontal_multiplier + horizontal_addition
       
 
@@ -964,7 +966,7 @@ func processHorizontalInputs(delta):
   
   # TODO(jaketrower): Maybe this? seems complicated
   if not pauseAnimation and not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer != null and \
-     (aniPlayer.current_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
+     (aniPlayer.assigned_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
      (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
     if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
       mySprite.flip_h = not mySprite.flip_h
@@ -981,6 +983,7 @@ func processHorizontalInputs(delta):
         if aniPlayer.assigned_animation == "walk":
           aniPlayer.queue("walkStop")
         aniPlayer.queue("stand")
+  mySprite.flip_h = flip_h
 
   var DNUMSKID = DNUMSKID_BASE
   if self.isFeatherLike():

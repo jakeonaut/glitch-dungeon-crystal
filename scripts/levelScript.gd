@@ -380,7 +380,7 @@ func adjustPlayerForEdgeTransition():
     player.linear_velocity = global.memory["linear_velocity"]
     global.memory.erase("linear_velocity")
 
-  var LANDING_MARGIN = 1
+  var LANDING_MARGIN = 2
 
   var xDiff = gameCamera.rightmost_x - gameCamera.leftmost_x
   if global.memory.has("player_x_offset"):
