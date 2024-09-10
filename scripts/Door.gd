@@ -435,13 +435,14 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("teleport")
-      getPlayer().pauseAnimation = true
       getPlayer().getSmacked()
     else:
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("enterDoor")
       getPlayer().playBounce("land")
+    getPlayer().pauseAnimation = true
+    getPlayer().pauseInput = true
   getPlayer().pauseSelf = true
 
   global.activeInteractor = null
@@ -460,6 +461,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().aniPlayer.play("stand")
       getPlayer().playBounce("land")
       getPlayer().pauseSelf = false
+      getPlayer().pauseAnimation = false
+      getPlayer().pauseInput = false
     return
 
   if start_of_game:

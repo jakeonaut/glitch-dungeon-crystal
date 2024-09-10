@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 0.5
+shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03

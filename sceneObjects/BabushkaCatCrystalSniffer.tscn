@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=14]
 
 [sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
@@ -148,6 +149,9 @@ shape = SubResource( 14 )
 [node name="NPC TextBox" parent="." instance=ExtResource( 12 )]
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
+stream = ExtResource( 14 )
+volume_db = -25.0
+pitch_scale = 0.8
 script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

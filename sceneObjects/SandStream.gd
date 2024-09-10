@@ -14,6 +14,7 @@ func isActive(_debug=false):
 func passiveActivate(delta, is_player):
   if not is_player or level.player.truly_on_ground:
     return
+  level.player.target_last_grounded_y = level.player.global_transform.origin.y
   level.player.is_touching_sandstream = true
   var value = 1
   level.player.global_transform.origin.y -= (delta*value)

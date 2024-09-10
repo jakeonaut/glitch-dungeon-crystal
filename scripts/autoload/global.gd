@@ -932,6 +932,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)
+      var areaParent = area.get_node("..")
+      if areaParent.has_method("getSmacked") and areaParent.getSmacked():
+        my_broom_owner.getSmacked()
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.PassiveInteractActivate(0, false)

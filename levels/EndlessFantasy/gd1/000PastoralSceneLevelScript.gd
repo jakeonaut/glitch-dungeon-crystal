@@ -19,7 +19,7 @@ func setUpRoomInitializationOverride():
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false
   player.pauseInput = true
-  uiLayer.get_node("GlitchSprite").visible = false
+  uiLayer.glitchSprite.visible = false
   uiLayer.get_node("GlitchStatusRect").visible = false
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()

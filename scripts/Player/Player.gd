@@ -492,15 +492,23 @@ func tryDieToOffscreenCamera(delta):
   if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 
-  var DEATH_MARGIN = 0
+  var repositioned_player = global_transform.origin
+  var try_to_recover = false
+  var DEATH_MARGIN = -2
   if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(1, 0, 0)
+    repositioned_player.x = getGameCamera().rightmost_x + DEATH_MARGIN
   if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(-1, 0, 0)
-  if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-    global.roomEdgeVector = Vector3(0, -1, 0)
+    repositioned_player.x = getGameCamera().leftmost_x - DEATH_MARGIN
+  DEATH_MARGIN = -1
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
+    repositioned_player.y = getGameCamera().topmost_y + DEATH_MARGIN
+  # only relocate back to safety if off bottom screen
+  if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+    global.roomEdgeVector = Vector3(0, -1, 0)
+    try_to_recover = true
 
   if global.roomEdgeVector != null:
     if global.roomEdgeVector.x != 0:
@@ -547,12 +555,8 @@ func tryDieToOffscreenCamera(delta):
         return
       global.roomEdgeVector = null
 
-
-  DEATH_MARGIN = 2
-  if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-    global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-    global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN or \
-    global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN*2:
+    # otherwise you just can't go there...
+    if try_to_recover:
       if not has_landed_since_recovering:
         global.memory["hp"] = 0
         tryDieToEnemy(delta, true, true, true)
@@ -573,6 +577,8 @@ func tryDieToOffscreenCamera(delta):
         if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
           global.memory["grav_direction"] = 1
           level.flipGravity()
+    else:
+      global_transform.origin = repositioned_player
   
 func doTimeDilation(_delta):
   pass
@@ -1448,12 +1454,8 @@ func doBroomAttack(which_broom_attack):
   #   which_broom_attack = 0
   #   summonSporeShroom()
   var is_turn_around_attack = false # (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
-  # var is_facing_wall = (checkSolidTilesOnMyLeft(true) and mySprite.flip_h) or (checkSolidTilesOnMyRight(true) and not mySprite.flip_h)
   if force_a_sweep:
     aniPlayer.play("broomSmack")
-  # elif global.memory["debug_broom"] > 0 and is_facing_wall:
-  #   aniPlayer.play("broomSmack")
-  #   which_broom_attack = 3
   elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
     mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
     aniPlayer.play("broomSmack2")

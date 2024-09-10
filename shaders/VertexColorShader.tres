@@ -5,6 +5,7 @@ code = "shader_type spatial;
 render_mode unshaded;
 
 varying smooth vec3 our_color;
+uniform float opacity = 0.5;
 
 void vertex() {
     our_color = VERTEX;
@@ -12,5 +13,5 @@ void vertex() {
 
 void fragment() {
     ALBEDO = our_color + our_color;
-    ALPHA = 0.5;
+    ALPHA = opacity;
 }"

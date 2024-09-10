@@ -19,7 +19,7 @@ func activateScript():
     global.incrementLevelZoneThing("key", 1)
     global.pauseGame = false
     global.pauseMoveInput = false
-    level.spawnKeyFollower(key.global_transform.origin)
+    level.spawnKeyFollower(level.player.global_transform.origin)
     key.okay_im_done = true
     key.queue_free()
     level.player.pauseInput = false

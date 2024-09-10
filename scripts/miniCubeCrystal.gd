@@ -11,6 +11,9 @@ onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 onready var mySprite = get_node("Sprite3D")
 
 onready var plusSpriteContainer = get_node("PlusSpriteContainer")
+onready var plusSprite = get_node("PlusSpriteContainer/PlusSprite")
+onready var plusSprite2 = get_node("PlusSpriteContainer/PlusSprite2")
+onready var plusSpriteAniPlayer = get_node("PlusSpriteContainer/AnimationPlayer")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export var is_static_in_level = true
@@ -29,14 +32,16 @@ func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
   if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
-    addPlusSprite()
-    queue_free()
+    iAmAGhost()
+    # addPlusSprite()
+    # queue_free()
     
   set_process(true)
 
   var rand_init_step = rand_range(-90, -2)
   cubeContainer.rotate_y(rand_init_step)
   cubeContainer.rotate_x((rand_init_step/2))
+  meshInstance2.material_override = meshInstance2.material_override.duplicate()
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -49,7 +54,7 @@ func _process(delta):
       disappearTimer += (delta*22)
       cubeContainer.rotate_y(disappearTimer*delta)
       cubeContainer.rotate_x((disappearTimer/2)*delta)
-      if aniPlayer.assigned_animation == "floatAway" and not aniPlayer.is_playing() and \
+      if "floatAway" in aniPlayer.assigned_animation and not aniPlayer.is_playing() and \
          not cubeSound.is_playing() and not cubeSound2.is_playing():
         queue_free()
     else:
@@ -59,6 +64,10 @@ func _process(delta):
         step = MIN_STEP
     cubeContainer.rotate_y(step*delta)
     cubeContainer.rotate_x((step/2)*delta)
+
+func iAmAGhost():
+  is_negative = true
+  aniPlayer.play("ghostify")
 
 func isActive(_debug=false):
   return visible and not disappearing2
@@ -76,7 +85,10 @@ func passiveActivate(_delta, _is_player):
     global.mini_cube_crystal_pitch_timer = 0
     global.mini_cube_crystal_pitch += 0.1
     
-    aniPlayer.play("floatAway")
+    if is_negative:
+      aniPlayer.play("floatAway2")
+    else:
+      aniPlayer.play("floatAway")
     # if global.memory["max_mp"] == 0:
     #   level.uiLayer.get_node("GlitchStatusRect").visible = true
     #   level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
@@ -102,10 +114,14 @@ func passiveActivate(_delta, _is_player):
     disappearing2 = true
 
 func addPlusSprite():
-  remove_child(plusSpriteContainer)
-  level.add_child(plusSpriteContainer)
-  plusSpriteContainer.visible = true
-  plusSpriteContainer.global_transform.origin = self.global_transform.origin
+  pass
+  # remove_child(plusSpriteContainer)
+  # level.add_child(plusSpriteContainer)
+  # plusSpriteContainer.visible = true
+  # plusSpriteContainer.global_transform.origin = self.global_transform.origin
+  # plusSprite.material_override = plusSprite.material_override.duplicate()
+  # plusSprite2.material_override = plusSprite2.material_override.duplicate()
+  # plusSpriteAniPlayer.play("byebye")
 
   # global.pauseGame = true
   # global.pauseMoveInput = true

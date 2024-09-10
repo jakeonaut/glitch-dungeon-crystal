@@ -2,17 +2,20 @@ extends "Enemies/GlitchEnemy.gd"
 
 onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
 
-enum MoleState {
+enum ChickenState {
     IDLE,
     PREPARE_JUMP,
     LAND,
     JUMP,
+    AFRAID,
 }
-var mole_state = MoleState.IDLE
-var mole_state_timer = 0
-var mole_state_idle_time_limit = 10
-var mole_state_dig_time_limit = 6
-var mole_state_reset_dig_time_limit = 8
+var chicken_state = ChickenState.IDLE
+var chicken_state_timer = 0
+var chicken_state_idle_time_limit = 10
+var chicken_state_dig_time_limit = 6
+var chicken_state_reset_dig_time_limit = 8
+var afraid_timer = 0
+var afraid_time_limit = 10
 var far_from_home_dist = 5
 
 export var can_hop = true
@@ -26,7 +29,6 @@ func _ready():
     initial_grav = grav
     initial_true_terminal_vel = true_terminal_vel
 
-export var is_digging_left = false
 func _process(delta):
     # ._process(delta) implicit
     
@@ -34,11 +36,22 @@ func _process(delta):
 
     should_collide_horizontally = true
     
-    if mole_state == MoleState.IDLE:
+    if chicken_state == ChickenState.AFRAID:
+        behavior_jumping = true
+        behavior_walking = true
+        mySprite.frame_delay = 0.2
+        afraid_timer += (delta*11)
+        if afraid_timer >= afraid_time_limit:
+            afraid_timer = 0
+            chicken_state = ChickenState.IDLE if on_ground else ChickenState.JUMP
+            walk_speed /= 4
+            jump_force /= 2
+    elif chicken_state == ChickenState.IDLE:
+        mySprite.frame_delay = 1
         if can_hop:
-            mole_state_timer += (delta*22)
-            if mole_state_timer >= mole_state_idle_time_limit:
-                mole_state_timer = 0
+            chicken_state_timer += (delta*22)
+            if chicken_state_timer >= chicken_state_idle_time_limit:
+                chicken_state_timer = 0
                 var i = randi() % 4
                 if i == 0:
                     pass # stay idle
@@ -50,34 +63,60 @@ func _process(delta):
                         else:
                             walk_direction.x = 1
                     behavior_jumping = true
-                    mole_state = MoleState.JUMP
-    elif mole_state == MoleState.PREPARE_JUMP:
+                    chicken_state = ChickenState.JUMP
+    elif chicken_state == ChickenState.PREPARE_JUMP:
         # run away from player
         walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
         behavior_jumping = true
-        mole_state = MoleState.JUMP
-    elif mole_state == MoleState.JUMP:
-        walk_speed = 5
+        chicken_state = ChickenState.JUMP
+    elif chicken_state == ChickenState.JUMP:
+        mySprite.frame_delay = 0.4
         behavior_walking = not on_ground
-    elif mole_state == MoleState.LAND:
-        mole_state = MoleState.IDLE
+    elif chicken_state == ChickenState.LAND:
+        mySprite.frame_delay = 1
+        chicken_state = ChickenState.IDLE
 
     if am_i_dying:
         return
 
 func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
-
-# @override
-func glitchSetSpritesAndCollision():
-    pass
     
 
 # @override
 func landed():
     .landed()
+    if chicken_state == ChickenState.AFRAID:
+        return
     behavior_jumping = false
     behavior_walking = false
         
-    if mole_state != MoleState.IDLE:
-        mole_state = MoleState.LAND
+    if chicken_state != ChickenState.IDLE:
+        chicken_state = ChickenState.LAND
+
+
+# @override
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+  if is_smacked or am_i_dying:
+    return false
+  .getSmacked(broom_origin, silently)
+  if dieSound:
+    dieSound.pitch_scale = rand_range(0.8, 1.2)
+    dieSound.play()
+  if notDieSound:
+    notDieSound.pitch_scale = rand_range(0.8, 1.2)
+    notDieSound.play()
+  behavior_jumping = true
+  behavior_walking = true
+  walk_direction.x = 1
+  if level.player.mySprite.flip_h:
+    walk_direction.x = -1
+    
+  # pauseSelf = true
+  on_ground = true
+  if chicken_state != ChickenState.AFRAID:
+    walk_speed *= 4
+    jump_force *= 2
+  if afraid_time_limit < 60:
+    afraid_time_limit *= 2
+  chicken_state = ChickenState.AFRAID

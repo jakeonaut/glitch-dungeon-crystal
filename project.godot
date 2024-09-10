@@ -35,6 +35,7 @@ _global_script_class_icons={
 config/name="GLITCH DUNGEON CRYSTAL"
 run/main_scene="res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 run/low_processor_mode=true
+boot_splash/image="res://splash.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://favicon.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"

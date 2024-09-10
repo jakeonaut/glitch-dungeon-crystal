@@ -9,9 +9,9 @@ var has_decided = false
 # @override
 func setUpRoomInitializationOverride():
   # original_granny_text = npcGranny.textBox.text_final
-  if (global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"]))) or not global.memory.has("roomPath"):
+  if global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"])):
     is_start_of_game = false
-    showInstructions = not global.memory.has("roomPath")
+    showInstructions = false
     # npcGranny.is_really_important = true
     # npcGranny.textBox.is_really_important = true
   else:
@@ -19,7 +19,6 @@ func setUpRoomInitializationOverride():
     global.shouldRenderAsCinematic = true
     player.fall_timer = 50
     uiLayer.statsTitleRect.visible = false
-    uiLayer.get_node("GlitchSprite").visible = false
     uiLayer.get_node("GlitchStatusRect").visible = false
   has_decided = true
   
