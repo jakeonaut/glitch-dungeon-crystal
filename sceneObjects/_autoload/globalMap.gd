@@ -29,7 +29,7 @@ func getCoords(of_path):
     if levelSprite.path == of_path:
       var o = levelSprite.global_transform.origin
       return Vector3(int(o.x), int(o.y), int(o.z))
-  print("THIS LEVEL AIN'T IN THE MAP YET")
+  # print("THIS LEVEL AIN'T IN THE MAP YET")
   return null
 
 func getRoomPathAtCoords(coords):

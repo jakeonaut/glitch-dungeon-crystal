@@ -23,6 +23,8 @@ onready var meshInstance1 = get_node("CubeContainer/MeshInstance")
 onready var meshInstance3 = get_node("CubeContainer/MeshInstance3")
 
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
+var npcRes = preload("res://sceneObjects/NPC.tscn")
+var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 
 export var num_gems_needed = 20
 export var high_priestess_crystal = false
@@ -41,7 +43,11 @@ func _ready():
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
         is_purified = true
-        lightAniPlayer.play("lightUpQuiet")
+        visible = false
+        # lightAniPlayer.play("lightUpQuiet")
+        yield(get_tree().create_timer(0.1), "timeout")
+        freeUpPlayer()
+        queue_free()
         # musicPlayer.changeSongPitch(1.0)
     else:
         lightAniPlayer.play("RESET")    
@@ -78,7 +84,7 @@ func _process(delta):
     rot_amount = 10
     if is_purified:
         rot_amount *= 2
-    npc.rotation_degrees.y -= (delta * rot_amount)
+    # npc.rotation_degrees.y -= (delta * rot_amount)
 
     if is_smacked:
         smack_timer += (delta*11)
@@ -128,8 +134,9 @@ func getSmacked(_broom_origin):
         level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
     
 
+var is_active = true
 func isActive(_debug=false):
-    return visible
+    return visible and is_active
 
 func speakToMe():
     if high_priestess_crystal:
@@ -180,15 +187,21 @@ func getPurified():
     global.setLevelZoneThing("crystal_geode", true)
     level.saveTheGame()
 
+# actually "spawn elderNPC" but the animations are already calling it...
 func freeUpPlayer():
-    # var interactor = global.activeInteractor
-    # global.activeInteractor = null
-    # level.player.getItemFailsafe()
-    # global.activeInteractor = interactor
-
-    # if quietSavePoint:
-    #     quietSavePoint.passiveActivate(0, true)
-    pass
+    is_active = false
+    var elderNPC = npcRes.instance()
+    level.add_child(elderNPC)
+    elderNPC.mySprite.updateBaseFrame(0, 1)
+    level.summonSmokeClouds(global_transform.origin, 3, true, true)
+    elderNPC.global_transform.origin = global_transform.origin
+    elderNPC.global_transform.origin.y -= 0.5
+    elderNPC.can_move = false
+    var finalText = "•zzz\n(she's still asleep...)"
+    elderNPC.textBox.text_final = finalText
+    elderNPC.textBox.textNode.bbcode_text = finalText
+    elderNPC.textBox.dialogStartSound.volume_db = -15
+    elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:

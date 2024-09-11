@@ -75,15 +75,15 @@ func isActive(_debug=false):
 func passiveActivate(_delta, _is_player):
   # musicPlayer.stopAll()
   if not disappearing2:
-    cubeSound.play()
     if is_negative:
-      cubeSound4.pitch_scale = global.mini_cube_crystal_pitch
+      cubeSound4.pitch_scale = rand_range(0.4, 0.7)
       cubeSound4.play()
     else:
+      cubeSound.play()
       cubeSound2.pitch_scale = global.mini_cube_crystal_pitch
       cubeSound2.play()
-    global.mini_cube_crystal_pitch_timer = 0
-    global.mini_cube_crystal_pitch += 0.1
+      global.mini_cube_crystal_pitch_timer = 0
+      global.mini_cube_crystal_pitch += 0.1
     
     if is_negative:
       aniPlayer.play("floatAway2")

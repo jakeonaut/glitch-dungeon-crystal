@@ -411,7 +411,7 @@ shape = SubResource( 49 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 42 )
@@ -429,7 +429,7 @@ shape = SubResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 29 )
 anims/doorBarred = SubResource( 30 )
 anims/doorClose = SubResource( 31 )

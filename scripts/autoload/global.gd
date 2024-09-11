@@ -344,6 +344,8 @@ func getDisplayTitle(levelZoneName):
             return "crystal sanctuary"
         "gd1GrandmaVillage":
             return "village of elders"
+        "gd1BubblegloopSwamp":
+            return "haunted swamp"
         _:
             return "???"
     
@@ -587,7 +589,7 @@ func setButtonIndex(input_action, button_index):
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
 
-func getInputText(input_action, force_controller_display = false):
+func getInputText(input_action, force_controller_display = false, use_bbtext = true):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
     var is_controller_connected = Input.get_connected_joypads().size() > 0 or force_controller_display
 
@@ -600,7 +602,9 @@ func getInputText(input_action, force_controller_display = false):
                 return getAxisStr(inputEvent.axis, inputEvent.axis_value)
         else:
             if inputEvent is InputEventKey:
-                return "[lb]" + getKeyCodeStr(inputEvent.get_scancode()) + "[rb]"
+                if use_bbtext:
+                    return "[lb]" + getKeyCodeStr(inputEvent.get_scancode()) + "[rb]"
+                return "[" + getKeyCodeStr(inputEvent.get_scancode()) + "]"
         
     return null
 

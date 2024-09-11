@@ -162,7 +162,7 @@ shape = SubResource( 14 )
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 16 )
 volume_db = -10.0
-pitch_scale = 2.0
+pitch_scale = 1.2
 script = ExtResource( 14 )
 
 [node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]

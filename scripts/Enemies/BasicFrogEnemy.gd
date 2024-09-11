@@ -101,8 +101,6 @@ func _process(delta):
       smallInteractionArea.remove_from_group("enemies")
   was_infected = is_infected
 
-  if is_licker or is_static:
-    sprite_offset_y = 0# 0.25
   if pauseSelf and not is_smacked:
     pauseSelf = false
     on_ground = true
