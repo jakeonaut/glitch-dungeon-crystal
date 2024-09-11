@@ -275,11 +275,17 @@ func alignMySprite():
 
 # @override
 func processPhysics(delta):
-  if grav == 0 and not just_pressed_jump and not pressing_jump and not override_press_move_right and not override_press_move_right:
+  if grav == 0 and not just_pressed_jump and not pressing_jump and not override_press_move_left and not override_press_move_right:
     return
   else:
     # call GameMover.gd super method
     .processPhysics(delta)
+    if override_press_move_left and horizontal_collision:
+      override_press_move_left = false
+      override_press_move_right = true
+    if override_press_move_right and horizontal_collision:
+      override_press_move_left = true
+      override_press_move_right = false
   
 
 func justPressedJump():

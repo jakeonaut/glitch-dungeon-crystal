@@ -9,7 +9,7 @@ var has_decided = false
 # @override
 func setUpRoomInitializationOverride():
   # original_granny_text = npcGranny.textBox.text_final
-  if global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"])):
+  if (global.memory.has("roomPath") and (not ("000PastoralScene" in global.memory["roomPath"]))) or (global.memory["splat"]):
     is_start_of_game = false
     showInstructions = false
     # npcGranny.is_really_important = true
@@ -30,6 +30,7 @@ func _process(_delta):
     return
   
   if is_start_of_game:
+    global.memory["splat"] = true
     global.pauseMoveInput = true
     global.shouldRenderAsCinematic = true
     player.fall_timer = 999

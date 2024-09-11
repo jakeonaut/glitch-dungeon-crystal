@@ -169,11 +169,16 @@ var NUM_GEMS_FOR_BROOMERANG = 30
 var NUM_GEMS_FOR_ENCHANTED_BAG = 50
 var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
+var has_started_game = false
+var has_really_started_game = false
+
 func _ready():
     set_process(true)
 
-    # somehow this gets rid of errors LOL
+    # somehow this gets rid of warnings LOL
     if isOnMainMenu: pass
+    if has_started_game: pass
+    if has_really_started_game: pass
     if memory: pass
     if activeInteractor: pass
     if activeThrowableObject: pass
@@ -206,8 +211,9 @@ func resetMemory():
     # game stuff
     memory["hasEverTouchedObelisk"] = false
     memory["currLevelZone"] = null
-    memory["has_game_started"] = 0
+    memory["initialized_from_debug"] = 0
     memory["tutorial_gem"] = 0
+    memory["splat"] = 0
     memory["hammer"] = 0
     memory["broom"] = true
     memory["has_gotten_broom"] = 0

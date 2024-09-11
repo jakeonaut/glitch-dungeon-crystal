@@ -508,11 +508,9 @@ spawned_object_path = ""
 
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.20833, 0 )
-grav = 0
-bbText = "•if you purify all 5 [color=#0798bf]crystals[/color],
-we can make a wish to the 
-[color=red]goddess[/color] and stop this world
-from withering away"
+bbText = "•ah! you saved me from
+the \"glitch\" corruption.
+this world is withering away.."
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true

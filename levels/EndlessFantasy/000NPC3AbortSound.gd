@@ -19,14 +19,14 @@ var has_talked = false
 func activateScript():
     if not has_talked:
         doActivateScriptStuff()
-    else:
-        level.summonSmokeClouds(NPC3.global_transform.origin, 3, true, true)
-        global.activeInteractor = null
-        NPC3.queue_free()
-        global.setStaticLevelZoneLevelVar(level, self, true)
+    # else:
+    #     level.summonSmokeClouds(NPC3.global_transform.origin, 3, true, true)
+    #     global.activeInteractor = null
+    #     NPC3.queue_free()
+    #     global.setStaticLevelZoneLevelVar(level, self, true)
 
 func doActivateScriptStuff():
-    NPC3.textBoxContainer.bbText = "•i am caretaker of the CRYSTALs\nbut age has made me weary.\n•seek me when you have purified"
+    NPC3.textBoxContainer.bbText = "•I traveled here to meet the\ncrystal elders. Why have they\nallowed this place to decay?"
     NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self, false)
     NPC3.can_camera_zoom = false

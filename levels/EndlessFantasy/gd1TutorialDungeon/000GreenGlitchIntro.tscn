@@ -226,7 +226,7 @@ shape = SubResource( 52 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 0.991713, 0 )
 grav = 0
-bbText = "this pillar gives you
+bbText = "this magic pillar will give you
 [color=#00ff00]Feather Fall[/color]: jump high
 by holding jump button"
 can_camera_zoom = false

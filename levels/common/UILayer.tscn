@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -32,7 +32,6 @@
 [ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=31]
 [ext_resource path="res://assets/sounds/tone2.wav" type="AudioStream" id=32]
 [ext_resource path="res://assets/sounds/tone.wav" type="AudioStream" id=33]
-[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=34]
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -173,7 +172,7 @@ viewport_path = NodePath("GlitchStatusRect/Viewport")
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17210]
+[sub_resource type="ArrayMesh" id=17213]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -914,6 +913,7 @@ hframes = 4
 vframes = 4
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 480.0
 margin_top = 65.0
 margin_right = 480.0
@@ -963,11 +963,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -603 )
 [node name="MeshInstance" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
 transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373667, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17210 )
+mesh = SubResource( 17213 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1045,8 +1045,6 @@ anims/byebye = SubResource( 17207 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -600.5 )
 projection = 1
 size = 1.5
-
-[node name="commonWorldEnvironment" parent="GlitchStatusRect/Viewport" instance=ExtResource( 34 )]
 
 [node name="KeyStatusRect" type="ColorRect" parent="."]
 visible = false

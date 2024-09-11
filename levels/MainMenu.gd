@@ -5,27 +5,32 @@ var switch_glitch_time_limit = 15
 var direction = -1
 
 func setUpRoomInitializationOverride():
-    global.isOnMainMenu = true
+    if not global.has_started_game:
+        global.isOnMainMenu = true
+        player.normalGlitch()
+        player.pauseInput = true
+        show_dither_effect = true
+        show_crt_effect = false
+    else:
+        logoSprite.visible = false
+        mainMenuUi.visible = false
+        show_dither_effect = false
+        show_crt_effect = true
+        babushkaCat.visible = false
+        var finalText = "*moo* (nice of you to stop by.\ni'm taking care of the\nfarm while you're gone)"
+        cowNPC.textBox.text_final = finalText
+        cowNPC.textBox.textNode.bbcode_text = finalText
     transition.reverse_fade()
-    # player.aniPlayer.stop()
-    # player.aniPlayer.clear_queue()
-    # player.aniPlayer.play("happyStand")
 
 onready var eventSound1 = get_node("EventSound1")
 onready var eventSound2 = get_node("EventSound2")
 onready var eventSound3 = get_node("EventSound3")
-onready var chicken10 = get_node("NPC10")
-onready var chicken9 = get_node("NPC9")
-onready var chicken3 = get_node("NPC3")
 onready var glitchMoleCricket = get_node("GlitchMoleCricket")
 onready var glitchMoleCricket2 = get_node("GlitchMoleCricket2")
 onready var glitchMoleCricket3 = get_node("GlitchMoleCricket3")
 onready var babushkaCat = get_node("BabushkaCat")
-onready var chicken12 = get_node("NPC12")
-onready var chicken13 = get_node("NPC13")
-onready var chicken14 = get_node("NPC14")
-onready var chicken15 = get_node("NPC15")
 onready var croneNPC = get_node("CroneNPC")
+onready var cowNPC = get_node("NPC2")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
@@ -39,7 +44,7 @@ func startGame():
   logoSprite.visible = false
 #   show_dither_effect = false
 #   show_crt_effect = true
-  has_started_game = true
+  global.has_started_game = true
   mainMenuUi.visible = false
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false
@@ -87,7 +92,6 @@ func startGame():
   babushkaCat.mySprite.updateBaseFrame(2, 2)
   gameCamera.can_i_move = true
   eventSound1.play()
-  chicken10.glitchOut()
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
   levelTiles.randomize_num = 3
@@ -97,71 +101,15 @@ func startGame():
   babushkaCat.override_press_move_right = true
   player.mySprite.flip_h = not player.mySprite.flip_h
   eventSound1.play()
-  chicken9.glitchOut()
-  chicken3.glitchOut()
   yield(get_tree().create_timer(2.0), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  eventSound2.play()
-  player.override_press_move_right = true
-  yield(get_tree().create_timer(3.0), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  player.override_press_move_right = false
-  eventSound1.play()
-  chicken12.glitchOut()
-#   var dig_time_limit = 2
-#   glitchMoleCricket.mole_state_dig_time_limit = dig_time_limit
-#   glitchMoleCricket.startDigging()
-#   glitchMoleCricket2.mole_state_dig_time_limit = dig_time_limit
-#   glitchMoleCricket2.startDigging()
-#   glitchMoleCricket3.mole_state_dig_time_limit = dig_time_limit
-#   glitchMoleCricket3.startDigging()
-  yield(get_tree().create_timer(0.33), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  eventSound1.play()
-  chicken13.glitchOut()
-  yield(get_tree().create_timer(0.33), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  eventSound1.play()
-  chicken14.glitchOut()
-  yield(get_tree().create_timer(1.0), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  eventSound1.play()
-  croneNPC.visible = true
-  summonSmokeClouds(croneNPC.global_transform.origin, 3, true, true)
-  yield(get_tree().create_timer(1.0), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  eventSound3.play()
-#   global.memory["savePoint"] = "SavePoint"
-#   global.memory["savedRoomPath"] = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
-  player.aniPlayer.stop()
-  player.aniPlayer.clear_queue()
-  player.aniPlayer.queue("teleport")
-  glitchScreenEffect.visible = global.memory["canGlitchScreen"]
-  glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
-  glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)
-  yield(get_tree().create_timer(1.0), "timeout")
-  if was_intro_cutscene_skipped == 2: return
-  global.isEnteringRoom = true
-  global.memory["roomPath"] = self.getLevelName()
-  transition.really_really_long_fade_to(door2.path)
-  eventSound1.play()
-  glitchEnemy6.global_transform.origin = player.global_transform.origin
-  glitchEnemy6.global_transform.origin.y += 1
-  glitchEnemy6.global_transform.origin.z += 2
-
-  # var sweep_button_text = global.getInputText("sub_action_button")
-  # pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with " + sweep_button_text + "?"
-  # pastoralGrannyNPC.textBoxContainer.bbText = pastoralGrannyNPC.textBox.text_final
-
-  # NPC7.floating_text = true
-  # NPC7.mySprite.pixel_size = 0.0001
-  # NPC7.textBox.floating_text = true
-  # var right_button_text = global.getInputText("ui_right")
-  # NPC7.textBox.text_final = "*meow!\n•up here dearie!\npress " + right_button_text + " to walk"
-  # NPC7.textBox.showTextbox()
+  global.shouldRenderAsCinematic = false
+  player.pauseInput = false
+  global.has_really_started_game = true
 
 func loadGame():
+    global.has_started_game = true
     if global.loadGame():
+        global.has_really_started_game = true
         global.isRespawning = true
         if global.memory.has("roomPath"):
             var roomPath = global.memory["roomPath"]
@@ -183,22 +131,17 @@ onready var pressCText = get_node("../../UILayer/MainMenu/PressC")
 onready var skipText = get_node("../../UILayer/SkipText")
 
 export var camera_size = 30
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-var has_started_game = false
 var mainMenuPromptIndex = 0
 var updateMenuText = true
-func _process(delta):
-    if not has_started_game:
+func _process(_delta):
+    if not global.has_started_game:
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
         mainMenuUi.visible = not global.isPauseMenuOpen
-    # gameCamera.can_i_move = false
-    # global.pauseGame = true
-    player.pauseInput = true
-    pressCText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to start"
-    optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
-    selectTextPrompt.bbcode_text = global.getInputText("sub_action_button")
+        pressCText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to start"
+        optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
+        selectTextPrompt.bbcode_text = global.getInputText("sub_action_button")
 
     # if uiLayer.title_display_state == 3:
     #     uiLayer.title_display_state = 0
@@ -218,33 +161,28 @@ func _process(delta):
     if global.isPauseMenuOpen:
         return
 
-    if has_started_game:
-        if Input.is_action_just_pressed("ui_start"):
-            if was_intro_cutscene_skipped == 0:
-                was_intro_cutscene_skipped = 1
-                skip_intro_cutscene_reset_timer = 0
-            elif was_intro_cutscene_skipped == 1 and not global.isEnteringRoom:
-                was_intro_cutscene_skipped = 2
-                global.isEnteringRoom = true
-                global.memory["roomPath"] = self.getLevelName()
-                transition.really_really_long_fade_to(door2.path)
-        skipText.visible = was_intro_cutscene_skipped == 1
-        skipText.bbcode_text = "press " + global.getInputText("ui_start") + " to skip"
-        if was_intro_cutscene_skipped == 1:
-            skip_intro_cutscene_reset_timer += (delta*11)
-            if skip_intro_cutscene_reset_timer >= skip_intro_cutscene_reset_time_limit:
-                was_intro_cutscene_skipped = 0
+    if global.has_started_game:
+        if global.has_really_started_game:
+            if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
+                mainMenuUi.remove_child(pressCText)
+                uiLayer.add_child(pressCText)
+                pressCText.rect_position = Vector2(5, 479)
+                pressCText.rect_size = Vector2(712, 101)
+                # show_dither_effect = false
+                # show_crt_effect = true
+            var is_controller_connected = Input.get_connected_joypads().size() > 0
+            pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
+            if is_controller_connected:
+                pressCText.bbcode_text = "        " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep."
+            else:
+                pressCText.bbcode_text = global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep. Arrow keys to walk.."
         return
 
     if Input.is_action_just_pressed("ui_down"):
-        mainMenuPromptIndex += 1
-        if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
-            mainMenuPromptIndex = 1
+        normalizeMainMenuPromptIndex(1)
         updateMenuText = true
     elif Input.is_action_just_pressed("ui_up"):
-        mainMenuPromptIndex -= 1
-        if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
-            mainMenuPromptIndex = 2
+        normalizeMainMenuPromptIndex(-1)
         updateMenuText = true
 
     selectPrompt.rect_position.y = 354.5 + (mainMenuPromptIndex*55)
@@ -268,7 +206,7 @@ func _process(delta):
     #     switch_glitch_timer = 0
     #     player.applyNextGlitch()
 
-    if Input.is_action_just_pressed("sub_action_button") and not has_started_game:
+    if Input.is_action_just_pressed("sub_action_button") and not global.has_started_game:
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()
@@ -282,3 +220,16 @@ func _process(delta):
 # @override
 # func processPauseMenu():
 #     pass
+
+func normalizeMainMenuPromptIndex(change):
+    mainMenuPromptIndex += change
+
+    if mainMenuPromptIndex > 2:
+        mainMenuPromptIndex = 0
+    if mainMenuPromptIndex < 0:
+        mainMenuPromptIndex = 2
+
+    if change > 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
+        mainMenuPromptIndex = 1
+    if change < 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
+        mainMenuPromptIndex = 2

@@ -43,13 +43,17 @@ var has_room_initialized = false
 export var pacman_wrapping = false
 
 func _ready():
-  # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   has_room_initialized = false
+  # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   _ready_impl()
   # ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
 
 export var is_randomizing = false
 func _ready_impl():
+  if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
+    global.has_started_game = true
+    global.has_really_started_game = true
+
   global.isOnMainMenu = false
   has_room_initialized = false
   get_node("..").audio_listener_enable_3d = true
@@ -76,10 +80,10 @@ func _ready_impl():
     grandmaStatues[i].preprocessGlitchFormTeleportation()
   
   global.memory["tutorial_spellbookPage"] = false
-  if global.memory["has_game_started"]:
+  if global.memory["initialized_from_debug"]:
     pass
   else:
-    global.memory["has_game_started"] = true
+    global.memory["initialized_from_debug"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and global.memory["priestess"] == 0:
       global.memory["inventory"] = [global.Inventory.GRIMOIRE]
       global.memory["spellbookPage"] = []
