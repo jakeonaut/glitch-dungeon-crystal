@@ -207,3 +207,6 @@ func updateColor():
   elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
     sprite_palette = global.white_player_palette
   mySprite.material_override.set_shader_param("target_palette", sprite_palette)
+
+func glitchTickle():
+  return

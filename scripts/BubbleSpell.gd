@@ -264,4 +264,4 @@ func trySweepUpGlitchTiles(collisionShape):
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileSpikes(tile_type):
         getLevelTiles().infectSpikes(coords)
-        level.player.has_sweeped_glitch = true
+        level.player.has_sweeped_glitch = false

@@ -295,7 +295,7 @@ func activate(is_player):
   if not is_player:
     return false
     
-  if not is_passive and getPlayer().on_ground:
+  if not is_passive and getPlayer().truly_on_ground:
     if not is_locked:
       goThroughDoor()
     elif is_locked:

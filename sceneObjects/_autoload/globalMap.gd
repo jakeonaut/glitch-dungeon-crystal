@@ -1,7 +1,6 @@
 extends Spatial
 
 var mapGrid = {}
-onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
   visible = false
@@ -47,15 +46,3 @@ func getRoomPathAtCoords(coords):
   # print(mapGrid)
 
   return null
-
-  # this allows each "area" to set its own default room.
-  # var currPath = level.getLevelName()
-  # var levelSprites = get_tree().get_nodes_in_group("LevelSprite")
-  # for levelSprite in levelSprites:
-  #   if levelSprite.path == currPath:
-  #     var levelSpriteParent = levelSprite.get_node("..")
-  #     if levelSpriteParent != self and levelSpriteParent.has_node("DefaultLevel"):
-  #       return levelSpriteParent.get_node("DefaultLevel").path
-
-  # # hopefully we have Haven2 sitting smack dab at 0_0 or else this will fail
-  # return mapGrid[0][0].path

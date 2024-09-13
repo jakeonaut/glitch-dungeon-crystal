@@ -54,7 +54,7 @@ frame = 8
 script = ExtResource( 3 )
 frame_delay = 0.1
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["bug", "corporeal_body"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

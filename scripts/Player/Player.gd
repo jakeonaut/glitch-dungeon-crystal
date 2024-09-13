@@ -538,9 +538,9 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
 
-    var next_room = level.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
+    var next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
     if next_room != null and not level.pacman_wrapping:
-      transition.fast_fade_to(next_room)
+      transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
       global.memory["player_flip_h"] = mySprite.flip_h
       global.memory["feather_jump_timer"] = feather_jump_timer
@@ -1443,17 +1443,17 @@ func processBroomLogic(delta):
       summonedBroom.queue_free()
       broomStop()
       doBroomAttack(1)
-  elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
-    hitStuff(delta)
-  elif aniPlayer.assigned_animation == "sweepFloor" and isKindOfOnGround():
-    vv = 0
-    lv.y = 0
-    linear_velocity.y = 0
-    hitStuff(delta)
-    # global_transform.origin.y = last_grounded_pos.y
-    if can_throw_broom and Input.is_action_just_pressed("sub_action_button"):
-      broomStop()
-      summonFallenBroom(true)
+  # elif Input.is_action_pressed("sub_action_button") and not summonedBroom and not pauseSelf and on_ground and is_pressing_horizontal_input:
+  #   hitStuff(delta)
+  # elif aniPlayer.assigned_animation == "sweepFloor" and isKindOfOnGround():
+  #   vv = 0
+  #   lv.y = 0
+  #   linear_velocity.y = 0
+  #   hitStuff(delta)
+  #   # global_transform.origin.y = last_grounded_pos.y
+  #   if can_throw_broom and Input.is_action_just_pressed("sub_action_button"):
+  #     broomStop()
+  #     summonFallenBroom(true)
   force_a_sweep = false
 
 var SOFT_SAND_TOP_TILE = 275

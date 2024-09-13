@@ -98,6 +98,7 @@ func trySweepUpGlitchTiles(collisionShape):
       if getLevelTiles().isTileSpikes(tile_type):
         getLevelTiles().infectSpikes(coords)
         my_broom_owner.has_sweeped_glitch = true
+        my_broom_owner.glitchTickle()
       if getLevelTiles().isTileFragileSolid(tile_type):
         getLevelTiles().breakFragile(coords)
         # TODO(jaketrower): also reset the levelTiles array position?

@@ -5,24 +5,137 @@ extends CanvasLayer
 # STORE THE SCENE PATH
 var path = ""
 var was_i_interrupted = false
+var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
+var mapManager = null
+
+var time_max = 100 # msec
+var current_scene = null
+var adjacent_level_loaders = []
+var adjacent_levels = []
+enum RoomMap {
+    EAST,
+    WEST,
+    NORTH,
+    SOUTH,
+}
 
 onready var aniPlayer = get_node("AnimationPlayer")
 
 func _ready():
-    set_process(true)
+    set_process(false) # no need to process when not background loading adjacent scenes...
+    
+    mapManager = mapManagerRes.instance()
+    mapManager.visible = false
+    self.add_child(mapManager)
+    adjacent_level_loaders = [
+        null, # RoomMap.EAST
+        null, # RoomMap.WEST
+        null, # RoomMap.NORTH
+        null  # RoomMap.SOUTH
+    ]
+    adjacent_levels = [
+        null, # RoomMap.EAST
+        null, # RoomMap.WEST
+        null, # RoomMap.NORTH
+        null  # RoomMap.SOUTH
+    ]
+
+    var root = get_tree().get_root()
+    current_scene = root.get_child(root.get_child_count() - 1)
+    self.path = current_scene.get_node("Viewport/level").getLevelName()
+    startAdjacentLevelLoading()
 
 func _process(_delta):
-    aniPlayer.playback_speed = global.time_dilation_multiplier
+    # aniPlayer.playback_speed = global.time_dilation_multiplier
+    var currentLoadingAdjacentLevelLoader = null
+    var currentLoadingAdjacentLevelLoader_idx = null
+    for i in len(adjacent_level_loaders):
+        var adjacent_level_loader = adjacent_level_loaders[i]
+        if adjacent_level_loader == null:
+            continue
+        else:
+            currentLoadingAdjacentLevelLoader = adjacent_level_loader
+            currentLoadingAdjacentLevelLoader_idx = i
+            break
+    
+    if currentLoadingAdjacentLevelLoader == null:
+        # no need to process anymore
+        set_process(false)
+        return
 
-func unpause():
-    global.pauseGame = false
+    var t = Time.get_ticks_msec()
+    # Use "time_max" to control for how long we block this thread.
+    while Time.get_ticks_msec() < t + time_max:
+        # Poll your loader.
+        var err = currentLoadingAdjacentLevelLoader.poll()
 
-func fast_reverse_fade():
-    aniPlayer.play("reverse_fade", -1, 2.0)
-func reverse_fade():
-    aniPlayer.play("reverse_fade")
-func reverse_granny_teleport():
-    aniPlayer.play("reverse_granny_teleport")
+        if err == ERR_FILE_EOF: # Finished loading.
+            # could you tell I used to be a Java programmer?
+            adjacent_levels[currentLoadingAdjacentLevelLoader_idx] = currentLoadingAdjacentLevelLoader.get_resource().instance()
+            adjacent_level_loaders[currentLoadingAdjacentLevelLoader_idx] = null
+            break
+        elif err == OK:
+            pass # all good.
+        else: # Error during loading.
+            # show_error() # ruh roh
+            adjacent_level_loaders[currentLoadingAdjacentLevelLoader_idx] = null
+            break
+    
+
+func startAdjacentLevelLoading():
+    # clear prev adjacent levels & loaders
+    for i in len(adjacent_levels):
+        var prev_adjacent_level = adjacent_levels[i]
+        if prev_adjacent_level != null and prev_adjacent_level.get_node("Viewport/level").getLevelName() != self.path:
+            prev_adjacent_level.queue_free()
+        adjacent_levels[i] = null
+        adjacent_level_loaders[i] = null
+
+    # TODO, could possibly be more efficient if we see if a level that we are ABOUT to load 
+    # was previously adjacent somewhere else... it could happen occasionally.
+
+    # setup new adjacent level loaders
+    var curr_coords = mapManager.getCoords(self.path)
+    if curr_coords != null:
+        var roomPath_east = mapManager.getRoomPathAtCoords(curr_coords + Vector3(1, 0, 0))
+        if roomPath_east != null:
+            adjacent_level_loaders[RoomMap.EAST] = ResourceLoader.load_interactive(roomPath_east)
+        var roomPath_west = mapManager.getRoomPathAtCoords(curr_coords + Vector3(-1, 0, 0))
+        if roomPath_west != null:
+            adjacent_level_loaders[RoomMap.WEST] = ResourceLoader.load_interactive(roomPath_west)
+        var roomPath_north = mapManager.getRoomPathAtCoords(curr_coords + Vector3(0, 1, 0))
+        if roomPath_north != null:
+            adjacent_level_loaders[RoomMap.NORTH] = ResourceLoader.load_interactive(roomPath_north)
+        var roomPath_south = mapManager.getRoomPathAtCoords(curr_coords + Vector3(0, -1, 0))
+        if roomPath_south != null:
+            adjacent_level_loaders[RoomMap.SOUTH] = ResourceLoader.load_interactive(roomPath_south)
+        set_process(true) # so that we can "interactively load"
+
+# PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
+func edge_fade_to(scn_path):
+    was_i_interrupted = false
+    self.path = scn_path # store the scene path
+    if global.roomEdgeVector != null:
+        var root = get_node("/root")
+        var adjacentLevelIdx = 0
+        if global.roomEdgeVector.x == 1:
+            adjacentLevelIdx = RoomMap.EAST
+        elif global.roomEdgeVector.x == -1:
+            adjacentLevelIdx = RoomMap.WEST
+        elif global.roomEdgeVector.y == 1:
+            adjacentLevelIdx = RoomMap.NORTH
+        elif global.roomEdgeVector.y == -1:
+            adjacentLevelIdx = RoomMap.SOUTH
+        if adjacent_levels[adjacentLevelIdx] != null:
+            root.remove_child(current_scene)
+            current_scene.queue_free()
+            current_scene = adjacent_levels[adjacentLevelIdx]
+            root.add_child(current_scene)
+            startAdjacentLevelLoading()
+            return
+    change_scene() # nocommit, still need to update what we're doing here, by shifting one of the adjacent levels into the currently active one
+                   # rather than just completely change_sceneing ...??
+
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func granny_teleport_to(scn_path):
     was_i_interrupted = false
@@ -67,10 +180,24 @@ func change_scene():
         var was_change_ok = get_tree().change_scene(self.path)
         if was_change_ok != OK:
             was_change_ok = get_tree().change_scene("res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn")
-            print("okay something is broken")
+            print("defaulting to fish village")
             global.pauseGame = false
     else:
         global.pauseGame = false
         
     if global.activeThrowableObject:
         global.activeThrowableObjectPath = global.activeThrowableObject.filename
+
+    var root = get_tree().get_root()
+    current_scene = root.get_child(root.get_child_count() - 1)
+    startAdjacentLevelLoading()
+
+func unpause():
+    global.pauseGame = false
+
+func fast_reverse_fade():
+    aniPlayer.play("reverse_fade", -1, 2.0)
+func reverse_fade():
+    aniPlayer.play("reverse_fade")
+func reverse_granny_teleport():
+    aniPlayer.play("reverse_granny_teleport")

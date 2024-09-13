@@ -3082,8 +3082,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Lv1: Debug"
 }
+starting_glitch_type = 1
 tileset_type = 5
 has_spellbook_page = true
+spellbook_spells = [ 2, 1 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
 
@@ -3099,6 +3101,7 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 33 )]
+override_camera_size = 30
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -3263,10 +3266,7 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 num_keys_unlock = 1
 
-[node name="Sprite3D2" parent="Viewport/level/Door7" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door7" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door7" index="6"]
 anims/doorClose = SubResource( 101 )
 anims/doorOpen = SubResource( 102 )
 anims/locked = SubResource( 103 )

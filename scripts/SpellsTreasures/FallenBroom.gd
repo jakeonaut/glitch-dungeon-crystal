@@ -314,6 +314,7 @@ func hitStuff(_delta):
             var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
             if getLevelTiles().isTileSpikes(tile_type):
               my_broom_owner.has_sweeped_glitch = true
+              my_broom_owner.glitchTickle()
               getLevelTiles().infectSpikes(coords)
               # TODO(jaketrower): also reset the levelTiles array position?
             # if getLevelTiles().isTileSoftSand(tile_type):

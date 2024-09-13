@@ -1734,7 +1734,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.1818, 34.1596, 0 )
 grav = 0
 bbText = "•we're trying out
 new technique"
-is_really_important = true
 can_move = false
 can_camera_zoom = false
 is_a_body = false

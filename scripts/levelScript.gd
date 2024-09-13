@@ -19,9 +19,6 @@ export var show_crt_effect = false
 export var show_dither_effect = false
 var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
 
-var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
-var mapManager = null
-
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
 export var should_glitch_activate = false 
@@ -135,9 +132,6 @@ func _ready_impl():
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
     flipGravity()
-  mapManager = mapManagerRes.instance()
-  mapManager.visible = false
-  self.add_child(mapManager)
   has_room_initialized = true
 
 func _process(delta):
@@ -213,7 +207,7 @@ func displaySpellMessageText(message):
   uiLayer.displaySpellMessageText(message)
 
 func getLevelManagerCoords():
-  return mapManager.getCoords(self.getLevelName())
+  return transition.mapManager.getCoords(self.getLevelName())
 
 func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
@@ -237,7 +231,7 @@ func setUpRoomInitializationOverride():
   pass
 
 func getLevelName():
-  return get_tree().get_root().get_node("Game").get_filename()
+  return get_node("../..").get_filename()
   
 func getShortLevelName():
   return global.getShortLevelName(getLevelName())
@@ -334,7 +328,7 @@ func tryToRespawn():
       found_door.land(true, true)
     elif global.roomEdgeVector != null:
       adjustPlayerForEdgeTransition()
-      transition.reverse_fade()
+      # transition.reverse_fade()
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
       player.global_transform.origin = player.spawn_origin
     if not found_door:
@@ -500,7 +494,6 @@ func walkThroughWallsGlitch():
   get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
   current_sprite_palette = levelTiles.white_palette
   setDoorsSpriteFrame(29)
-
 
 
 var followers = []

@@ -731,6 +731,7 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 8 )]
+override_camera_size = 20
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -842,7 +843,7 @@ is_static = true
 blow_bubble_horizontally = true
 
 [node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.97533, 20.793, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97533, 20.793, 0 )
 is_static = true
 is_licker = true
 
