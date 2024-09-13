@@ -383,8 +383,12 @@ func _process(delta):
   if Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()
   if Input.is_action_just_pressed("debug_toggle_spellbook"):
-    if global.memory.has("spellbookPage"):
+    if global.memory["glitched_grimoire"]:
+      global.memory["glitched_grimoire"] = false
       global.memory.erase("spellbookPage")
+    elif global.memory.has("spellbookPage"):
+      global.memory["glitched_grimoire"] = true
+      global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.INVISIBLE, GlitchForm.LADDER]
     else:
       global.memory["spellbookPage"] = [glitch_form]
     
@@ -513,6 +517,11 @@ func tryDieToOffscreenCamera(delta):
   # only relocate back to safety if off bottom screen
   if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, -1, 0)
+    # if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+    #   repositioned_player.y = getGameCamera().botmost_y - ADJUSTMENT_MARGIN
+    #   if not on_ground:
+    #     landed()
+    # else:
     try_to_recover = true
 
   if global.roomEdgeVector != null:

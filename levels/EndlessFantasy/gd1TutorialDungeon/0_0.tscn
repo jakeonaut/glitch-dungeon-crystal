@@ -259,7 +259,7 @@ viewport_path = NodePath("Viewport2")
 [sub_resource type="ViewportTexture" id=191]
 viewport_path = NodePath("GlitchStatusRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=192]
+[sub_resource type="ArrayMesh" id=194]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -531,10 +531,10 @@ flip_v = true
 texture = SubResource( 191 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 192 )
+mesh = SubResource( 194 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
 margin_left = 5.0

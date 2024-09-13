@@ -137,6 +137,8 @@ func buildSingleRandomTile(cell_index, glitch_type):
       setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
     else:
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
+  elif tile_name == "FragileBrickSolid":
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
     var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
@@ -406,6 +408,12 @@ func isTileSolid(tile_type):
   var tile_name = mesh_library.get_item_name(tile_type)
   return tileCollisionShape is BoxShape and not "Spikes" in tile_name
 
+func isTileFragileSolid(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "Fragile" in tile_name
+
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
@@ -446,6 +454,18 @@ func infectSpikes(coords, play_sound = true):
     did_infect_spikes = true
   spike_infection_timer = 0
   return did_infect_spikes
+
+func breakFragile(coords, play_sound = true):
+  var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+  if isTileFragileSolid(tile_type):
+    # TODO(jaketrower): If you want to only TEMPORARILY clear spikes, use this
+    # self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+    # TODO(jaketrower): Otherwise, use this
+    removeTile(coords)
+
+    var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+    level.summonSmokeClouds(tile_pos, 2, play_sound, true)
+    return true
 
 func sweepUpSand(coords):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
@@ -494,7 +514,9 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
   if debug:
     print("tile_name: " + str(tile_name))
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
-  if "BrickSolidRoof" in tile_name:
+  if "FragileBrickSolid" in tile_name:
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, glitch_type, debug)
+  elif "BrickSolidRoof" in tile_name:
     setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidCeil" in tile_name:
     setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
@@ -530,7 +552,9 @@ func unrandomizeTile(cell_index):
 
   var tile_name = mesh_library.get_item_name(tile_type)
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
-  if "BrickSolidRoof" in tile_name or "BrickSolidCeil" in tile_name:
+  if "FragileBrickSolid" in tile_name:
+    setTileNameNum("FragileBrickSolid", 0, cell_index, tile_orientation)
+  elif "BrickSolidRoof" in tile_name or "BrickSolidCeil" in tile_name:
     setTileNameNum("BrickSolidCeil", 0, cell_index, tile_orientation)
   elif "BrickSolid" in tile_name:
     setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)

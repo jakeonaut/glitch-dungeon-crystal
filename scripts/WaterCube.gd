@@ -49,7 +49,6 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
   waterFilterColorRect.material = waterFilterColorRect.material.duplicate()
   if turn_poisonous:
-    is_poison = true
     becomePoisonous()
 
 func _process(delta):
@@ -76,12 +75,11 @@ func _process(delta):
         waterFilterColorRect.material.set_shader(poisonWaterShader)
 
 func becomePoisonous():
-  return
-  # if is_poison or poisonous_counter > 0:
-  #   return
-  # is_poison = true
-  # poisonous_counter = 1
-  # mySprite.material_override.set_shader_param("target_palette", global.dream_palette)
+  if is_poison or poisonous_counter > 0:
+    return
+  is_poison = true
+  poisonous_counter = 1
+  mySprite.material_override.set_shader_param("target_palette", global.dream_palette)
 
 func isActive(_debug=false):
   return true

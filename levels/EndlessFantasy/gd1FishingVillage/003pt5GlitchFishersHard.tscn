@@ -1295,6 +1295,7 @@ viewport_path = NodePath("Viewport2")
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 4 )
+show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 2
 
@@ -1376,7 +1377,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9, 4.1, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 3, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 114 )
@@ -1933,7 +1934,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8, 19.9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7899, 38, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004FrogCove.tscn"
-parter_door_id = "Door2"
 num_keys_unlock = 2
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
@@ -2027,7 +2027,7 @@ shape = SubResource( 109 )
 shape = SubResource( 110 )
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.6, 22.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.6, 21.5, 0 )
 
 [node name="GlitchTileSpawner2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.6, 19.6, 0 )

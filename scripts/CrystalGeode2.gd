@@ -179,7 +179,8 @@ func getPurified():
     trySweepUpGlitchTiles(collisionShape2)
     var crystal_shards = level.get_tree().get_nodes_in_group("crystal_shard")
     for shard in crystal_shards:
-        shard.cubeSound.volume_db = -99
+        if shard.cubeSound != null:
+            shard.cubeSound.volume_db = -99
         shard.cubeSound2.volume_db = -99
         shard.passiveActivate(0, false)
     musicPlayer.playTreasureJingle(-80)
