@@ -14,7 +14,7 @@ func activateScript():
     textBox.textNode.bbcode_text = newText
   else:
     var newText = "*meow*\n•(for some weird reason,\nyou can hear me?)\n•(i smell an unpurified\n[color=red]CRYSTAL[/color] in this zone)"
-    newText += "\n" + str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " total left!"
+    newText += "\n      " + str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " total left!"
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText
     

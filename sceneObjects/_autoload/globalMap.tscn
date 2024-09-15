@@ -506,7 +506,7 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="Level8" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 0 )
 material_override = SubResource( 10 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"
@@ -515,61 +515,61 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 8, 0 )
 
 [node name="Level" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -9, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 
 [node name="Level2" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
 
 [node name="Level4" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -9, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 
 [node name="Level5" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomCave2.tscn"
 
 [node name="DefaultLevel" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
 
 [node name="Level10" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 
 [node name="Level11" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 
 [node name="Level12" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods4.tscn"
 
 [node name="Level14" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -10, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 
 [node name="Level15" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, 0 )
 material_override = SubResource( 11 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
 
 [node name="CricketCaves" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 0 )
 
 [node name="Level" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 
@@ -628,7 +628,7 @@ frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 
 [node name="Level11" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TidepoolCaves.tscn"
 
@@ -677,6 +677,11 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7, 0 )
 frame = 8
 path = "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"
+
+[node name="Haven2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/Haven2.tscn"
 
 [editable path="FishingVillage/Level7"]
 [editable path="FishingVillage/Level8"]

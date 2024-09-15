@@ -41,7 +41,7 @@ func _ready():
     ]
 
     var root = get_tree().get_root()
-    current_scene = root.get_child(root.get_child_count() - 1)
+    current_scene = root.get_node("Game")
     self.path = current_scene.get_node("Viewport/level").getLevelName()
     startAdjacentLevelLoading()
 
@@ -83,6 +83,8 @@ func _process(_delta):
     
 
 func startAdjacentLevelLoading():
+    return
+
     # clear prev adjacent levels & loaders
     for i in len(adjacent_levels):
         var prev_adjacent_level = adjacent_levels[i]
@@ -113,6 +115,10 @@ func startAdjacentLevelLoading():
 
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func edge_fade_to(scn_path):
+    long_fade_to(scn_path)
+    return
+
+    # aniPlayer.play("long_fade_no_change", -1, 2.0) # play the long transition animation
     was_i_interrupted = false
     self.path = scn_path # store the scene path
     if global.roomEdgeVector != null:
@@ -131,10 +137,17 @@ func edge_fade_to(scn_path):
             current_scene.queue_free()
             current_scene = adjacent_levels[adjacentLevelIdx]
             root.add_child(current_scene)
+            global.memory["currLevelZone"] = global.currLevelZone
+            global.set_camera_position_on_respawn = true
             startAdjacentLevelLoading()
             return
     change_scene() # nocommit, still need to update what we're doing here, by shifting one of the adjacent levels into the currently active one
                    # rather than just completely change_sceneing ...??
+
+func die_fade_to(scn_path):
+    was_i_interrupted = false
+    self.path = scn_path # store the scene path
+    change_scene()
 
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func granny_teleport_to(scn_path):
@@ -177,20 +190,18 @@ func change_scene():
     global.set_camera_position_on_respawn = true
 
     if self.path != "":
-        var was_change_ok = get_tree().change_scene(self.path)
-        if was_change_ok != OK:
-            was_change_ok = get_tree().change_scene("res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn")
-            print("defaulting to fish village")
-            global.pauseGame = false
+        var root = get_tree().get_root()
+        root.remove_child(current_scene)
+        current_scene.queue_free()
+        var newScene = load(self.path).instance()
+        root.add_child(newScene)
+        current_scene = newScene
+        startAdjacentLevelLoading()
     else:
         global.pauseGame = false
         
     if global.activeThrowableObject:
         global.activeThrowableObjectPath = global.activeThrowableObject.filename
-
-    var root = get_tree().get_root()
-    current_scene = root.get_child(root.get_child_count() - 1)
-    startAdjacentLevelLoading()
 
 func unpause():
     global.pauseGame = false

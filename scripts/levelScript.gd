@@ -137,6 +137,9 @@ func _ready_impl():
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
+  if should_adjust_player:
+    adjustPlayerForEdgeTransition()
+
   # TODO(jaketrower): add an option
   ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
   basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
@@ -302,8 +305,7 @@ func tryToRespawn():
       if global.memory.has("active_save_point_x"):
         # transition.fast_fade_to(global.memory["savedRoomPath"])
         global.isEnteringRoom = true
-        transition.path = global.memory["savedRoomPath"]
-        transition.change_scene()
+        transition.die_fade_to(global.memory["savedRoomPath"])
         return
     elif global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
@@ -327,8 +329,9 @@ func tryToRespawn():
     if found_door:
       found_door.land(true, true)
     elif global.roomEdgeVector != null:
-      adjustPlayerForEdgeTransition()
-      # transition.reverse_fade()
+      should_adjust_player = true
+      remembered_edge_vector = global.roomEdgeVector
+      transition.reverse_fade()
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
       player.global_transform.origin = player.spawn_origin
     if not found_door:
@@ -366,6 +369,8 @@ func tryToRespawn():
     player.summonFallenBroom(false, true)
     player.mySprite.flip_h = not player.mySprite.flip_h
 
+var should_adjust_player = false
+var remembered_edge_vector = null
 
 func adjustPlayerForEdgeTransition():
   if global.memory.has("player_flip_h"):
@@ -392,9 +397,9 @@ func adjustPlayerForEdgeTransition():
         player.global_transform.origin.x -= 1
     global.memory.erase("player_x_offset")
     global.memory.erase("prevXDiff")
-  elif global.roomEdgeVector.x > 0:
+  elif remembered_edge_vector.x > 0:
     player.global_transform.origin.x = gameCamera.leftmost_x + LANDING_MARGIN
-  elif global.roomEdgeVector.x < 0:
+  elif remembered_edge_vector.x < 0:
     player.global_transform.origin.x = gameCamera.rightmost_x - LANDING_MARGIN
   else:
     player.global_transform.origin.x = gameCamera.leftmost_x + (xDiff/2)
@@ -411,14 +416,16 @@ func adjustPlayerForEdgeTransition():
         player.global_transform.origin.y -= 1
     global.memory.erase("player_y_offset")
     global.memory.erase("prevYDiff")
-  elif global.roomEdgeVector.y > 0:
+  elif remembered_edge_vector.y > 0:
     player.global_transform.origin.y = gameCamera.botmost_y + LANDING_MARGIN
     if player.glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
       player.global_transform.origin.y += 1
-  elif global.roomEdgeVector.y < 0:
+  elif remembered_edge_vector.y < 0:
     player.global_transform.origin.y = gameCamera.topmost_y - LANDING_MARGIN
   else:
     player.global_transform.origin.y = gameCamera.topmost_y + (yDiff/2)
+  should_adjust_player = false
+  remembered_edge_vector = null
 
 
 

@@ -170,7 +170,7 @@ func startGulp():
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController")
-var SPIT_OFFSET = Vector2(0.2, 0.1)
+var SPIT_OFFSET = Vector2(0.2, 0.5)
 func spitOut():
   level.player.global_transform.origin = self.global_transform.origin
   level.player.global_transform.origin.y += SPIT_OFFSET.y

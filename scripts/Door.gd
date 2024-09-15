@@ -492,8 +492,6 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     transition.really_long_fade_to(self.path)
   else:
     transition.long_fade_to(self.path)
-  # if is_immediate or is_passive:
-  #   transition.change_scene()
 
 func isLandingOutsideOfCameraBounds():
   var DEATH_MARGIN = 0

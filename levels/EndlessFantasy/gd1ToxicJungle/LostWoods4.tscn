@@ -352,7 +352,7 @@ texture = ExtResource( 9 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 50 )
@@ -370,10 +370,10 @@ shape = SubResource( 49 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -4, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 11, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 52 )
 anims/doorBarred = SubResource( 53 )
 anims/doorClose = SubResource( 54 )

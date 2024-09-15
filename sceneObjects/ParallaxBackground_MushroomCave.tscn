@@ -1,0 +1,452 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
+[ext_resource path="res://scripts/AdvancedParallaxBackground.gd" type="Script" id=5]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/1.png" type="Texture" id=6]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/4.png" type="Texture" id=7]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/0.png" type="Texture" id=8]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/7.png" type="Texture" id=9]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/5.png" type="Texture" id=10]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/background.png" type="Texture" id=12]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/6.png" type="Texture" id=13]
+[ext_resource path="res://assets/backgrounds/cave_mushroom/3.png" type="Texture" id=14]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Background" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Background" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -18 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 12 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Background" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -18 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 12 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer0" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.3, -17 )
+
+[node name="Sprite" type="Sprite3D" parent="Layer0" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 0, 0 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer0" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 0, 0 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer1" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -16 )
+material_override = SubResource( 3 )
+pixel_size = 0.125
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -16 )
+material_override = SubResource( 3 )
+pixel_size = 0.125
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer2" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -15 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 11 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -15 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 11 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer3" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -14 )
+material_override = SubResource( 5 )
+pixel_size = 0.125
+texture = ExtResource( 14 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -14 )
+material_override = SubResource( 5 )
+pixel_size = 0.125
+texture = ExtResource( 14 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer4" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -13 )
+material_override = SubResource( 6 )
+pixel_size = 0.125
+texture = ExtResource( 7 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -13 )
+material_override = SubResource( 6 )
+pixel_size = 0.125
+texture = ExtResource( 7 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer5" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer5" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -12 )
+material_override = SubResource( 7 )
+pixel_size = 0.125
+texture = ExtResource( 10 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer5" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -12 )
+material_override = SubResource( 7 )
+pixel_size = 0.125
+texture = ExtResource( 10 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer6" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer6" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -11 )
+material_override = SubResource( 8 )
+pixel_size = 0.125
+texture = ExtResource( 13 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer6" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -11 )
+material_override = SubResource( 8 )
+pixel_size = 0.125
+texture = ExtResource( 13 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Layer7" type="Spatial" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Layer7" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 9 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite2" type="Sprite3D" parent="Layer7" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 9 )
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false

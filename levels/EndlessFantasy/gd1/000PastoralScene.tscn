@@ -1825,7 +1825,7 @@ font_data = ExtResource( 13 )
 [sub_resource type="Theme" id=232]
 default_font = SubResource( 231 )
 
-[node name="Game" type="Spatial"]
+[node name="Game2" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
