@@ -165,8 +165,9 @@ var hasGottenLevelGeode = false
 var isAMoleDigging = false
 
 var isOnMainMenu = false
-var NUM_GEMS_FOR_BROOMERANG = 30
+var NUM_GEMS_FOR_BROOMERANG = 25
 var NUM_GEMS_FOR_ENCHANTED_BAG = 50
+var NUM_GEMS_FOR_DOUBLE_JUMP = 75
 var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
 var has_started_game = false
@@ -243,7 +244,8 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 0
+    memory["broomerang"] = 1
+    memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
     memory["debug_broom"] = 0 # this didn't turn out that fun
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?

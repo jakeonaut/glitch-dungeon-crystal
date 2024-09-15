@@ -35,6 +35,9 @@ func setUpRoomInitializationOverride():
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
     global.setStaticLevelZoneLevelVar(self, crystalGeode, true)
+    var npcPlatforms = npcPlatformContainer.get_children()
+    for i in range(len(npcPlatforms)):
+        npcPlatforms[i].visible = true
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true

@@ -412,8 +412,20 @@ func isActive(_debug=false):
     return visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    getSmacked(self.global_transform.origin)
-    getPlayer().getSmacked()
+    if smallInteractionArea.is_in_group("enemies"):
+        if notOuchies(global_transform.origin):
+            getPlayer().getSmacked()
+            getPlayer().has_sweeped_glitch = true
+            getPlayer().glitchTickle()
+    elif smallInteractionArea.is_in_group("weak_enemies"):
+        ouchies(global_transform.origin)
+        getPlayer().has_sweeped_glitch = true
+        getPlayer().glitchTickle()
+        level.summonSmokeClouds(global_transform.origin, 5, true, true)
+        getPlayer().getSmacked()
+    else:
+        getSmacked(global_transform.origin)
+        getPlayer().getSmacked()
 
 func passiveActivate(_delta, _is_player):
     pass

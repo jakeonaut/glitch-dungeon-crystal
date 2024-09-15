@@ -12,6 +12,7 @@ onready var colorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/Pale
 onready var basicCrtEffectRect = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
+onready var crystalGeode = get_node("CubeCrystal") if has_node("CubeCrystal") else null
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 

@@ -374,6 +374,8 @@ func processHiscoreRenderLogic(delta):
     global.pauseMoveInput = false
     global.pauseGame = false
     level.player.pauseSelf = false
+    if level.crystalGeode != null:
+      level.crystalGeode.lightAniPlayer.play("omen")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:

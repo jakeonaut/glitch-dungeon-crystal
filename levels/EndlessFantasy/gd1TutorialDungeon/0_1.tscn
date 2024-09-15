@@ -980,7 +980,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 9, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
 pitch_scale = 1.1
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
@@ -1075,9 +1075,6 @@ vframes = 8
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/PatienceIsAVirtue.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 89 )
 
@@ -1094,7 +1091,7 @@ shape = SubResource( 86 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, 0 )
 path = "res://levels/EndlessFantasy/003SacredDoorsHubWorld.tscn"
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 53 )
 anims/doorOpen = SubResource( 54 )
 anims/locked = SubResource( 55 )

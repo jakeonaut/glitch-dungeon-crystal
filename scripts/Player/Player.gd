@@ -57,9 +57,6 @@ var poison_time_limit = 28
 var unpoison_timer = 0
 var unpoison_time_limit = 10
 
-var remembered_walk_speed = 7
-var remembered_feather_glitch_walk_speed = 6
-var remembered_invisible_glitch_walk_speed = 5
 func _ready():
   set_process(true)
   set_physics_process(false)
@@ -554,7 +551,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_x_offset")
       global.memory.erase("prevXDiff")
       if level.pacman_wrapping:
-        DEATH_MARGIN = -0.5
+        DEATH_MARGIN = -1
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
         if global.roomEdgeVector == Vector3(-1, 0, 0):
@@ -1757,45 +1754,6 @@ func landed():
       global_transform.origin.y -= 1
     global_transform.origin.y = original_y
 
-var secretMultiBroom = null
-func isHoldingMultiBroom():
-  return secretMultiBroom != null and \
-         global.memory["multi_broom"] and \
-         Input.is_action_pressed("sub_action_button") and \
-         not (
-          physics_state == PhysicsState.GLITCH_DYING or \
-          physics_state == PhysicsState.GLITCH_HURT or \
-          physics_state == PhysicsState.IGNORE_PHYSICS
-         )
-    
-func broomStop():
-  if summonedBroom != null:
-    summonedBroom.queue_free()
-  summonedBroom = null
-  pauseInput = false
-  pauseAnimation = false
-  global.pauseMoveInput = false
-  walk_speed = remembered_walk_speed
-  feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
-  invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
-  if has_sweeped_glitch:
-    was_just_on_ground_timer = -8
-  if linear_velocity.y < 0:
-    linear_velocity.y = 0
-  if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:
-    jump_press_timer = 0
-    if has_sweeped_glitch or should_magic_jump:
-      linear_velocity.y = -0.01
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  smacked_npc = null
-  if on_ground:
-    aniPlayer.queue("stand")
-  else:
-    aniPlayer.queue("fall")
-  if not isHoldingMultiBroom():
-    broomSpriteVisible.visible = true
-
 # @override
 func playJumpSound():
   .playJumpSound()
@@ -1930,61 +1888,6 @@ onready var secretSweepCollisionShape = get_node("SpriteContainer/SecretSweepAre
 # used for actually sweeping up glitch tiles
 onready var secretSweepActualArea = get_node("SpriteContainer/SecretSweepAreaActual")
 onready var secretSweepActualCollisionShape = get_node("SpriteContainer/SecretSweepAreaActual/CollisionShape")
-
-# dedupe with SummonedBroom and FallenBroom
-func hitStuff(_delta):
-  if not visible or isHoldingMultiBroom(): return
-  
-  var my_broom_owner = self
-  var areas = secretSweepActualArea.get_overlapping_areas()
-  for area in areas:
-    if area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
-      if not area.get_node("..").am_i_dying:
-        area.get_node("..").ouchies(global_transform.origin)
-        my_broom_owner.has_sweeped_glitch = true
-        summonSmokeClouds(5, true, true)
-        # my_broom_owner.getSmacked()
-    elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
-      if false: # global.getLevelZoneThing("crystal_geode"):
-        if area.get_node("..").ouchies(global_transform.origin):
-          my_broom_owner.has_sweeped_glitch = true
-          my_broom_owner.getSmacked()
-      else:
-        # TODO(should "remember" i hit it until i'm no longer touching it...?)
-        if area.get_node("..").notOuchies(global_transform.origin):
-          area.get_node("..").smack_recovery_time_limit = 30
-          my_broom_owner.getSmacked()
-      # # TODO kill glitches or "free" them like glitch slug...
-    elif area.is_in_group("bug") and area.get_node("..").has_method("getSmacked"):
-      area.get_node("..").getSmacked(global_transform.origin)
-      my_broom_owner.getSmacked()
-
-
-  # erase glitch tiles...
-  if not global.memory.has("broom"):
-    return
-  var x = secretSweepActualCollisionShape.global_transform.origin.x
-  var y = secretSweepActualCollisionShape.global_transform.origin.y
-  var tb = y + secretSweepActualCollisionShape.shape.height/2
-  var bb = y - secretSweepActualCollisionShape.shape.height/2
-  var lb = x - secretSweepActualCollisionShape.shape.radius
-  var rb = x + secretSweepActualCollisionShape.shape.radius
-  
-  var _has_played_sound = false
-  for i in range(int(floor(bb)), int(ceil(tb))):
-    for j in range(int(floor(lb)), int(ceil(rb))):
-      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if getLevelTiles().isTileSpikes(tile_type):
-        my_broom_owner.has_sweeped_glitch = true
-        getLevelTiles().infectSpikes(coords)
-      # elif getLevelTiles().isTileSoftSand(tile_type):
-      #   my_broom_owner.has_sweeped_glitch = true
-      #   getLevelTiles().sweepUpSand(coords)
-      #   digSound.play()
-      #   getSmacked()
-      #   broomStop()
-
 
 func swordClank(play_sound = true):
   if summonedBroom:

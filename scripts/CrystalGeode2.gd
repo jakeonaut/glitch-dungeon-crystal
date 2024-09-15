@@ -158,7 +158,6 @@ func getPurified():
 
     global.setStaticLevelZoneLevelVar(level, self, true)
     lightAniPlayer.play("lightUp")
-    lightAniPlayer.queue("omen")
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
     level.player.pauseAnimation = false
     level.player.pauseSelf = true

@@ -58,6 +58,10 @@ var mushroom_turn_timer = 0
 var mushroom_turn_time_limit = 6
 var has_used_magic_lantern = false
 
+var remembered_walk_speed = 7
+var remembered_feather_glitch_walk_speed = 6
+var remembered_invisible_glitch_walk_speed = 5
+
 func _ready():
   set_physics_process(false)
   set_process(true)
@@ -100,10 +104,12 @@ func _process(delta):
   if justPressedJump():
     # mushroom_turn_timer = mushroom_turn_time_limit
     jump_press_timer = 0
-    if has_sweeped_glitch and aniPlayer.assigned_animation == "broomSweep":
+    if has_sweeped_glitch and global.memory["broom_double_jump"]: # and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
       target_last_grounded_y = global_transform.origin.y
-      magicJump()
+      if summonedBroom != null:
+        broomStop()
+      doubleJump()
 
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input and not was_walking_into_wall:
     spawnSparkles(delta)
@@ -301,7 +307,7 @@ func pressingDown():
 
 # @override
 func justPressedJump():
-  return (Input.is_action_just_pressed("jump_button") and not pauseInput and not isTextboxPausingMe()) or should_magic_jump
+  return (Input.is_action_just_pressed("jump_button") and (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()) or should_magic_jump
   
 # @override
 func recentlyJustPressedJump():
@@ -498,6 +504,45 @@ func getABroom(unpauseAnimation = true):
   var ps = physics_state
   if ps == PhysicsState.COLLAPSED or ps == PhysicsState.CAN_WAKE_UP or ps == PhysicsState.WAKING_UP:
     physics_state = PhysicsState.NORMAL
+
+func broomStop():
+  if summonedBroom != null:
+    summonedBroom.queue_free()
+  summonedBroom = null
+  pauseInput = false
+  pauseAnimation = false
+  global.pauseMoveInput = false
+  walk_speed = remembered_walk_speed
+  feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
+  invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
+  if has_sweeped_glitch and global.memory["broom_double_jump"]:
+    was_just_on_ground_timer = -8
+  if linear_velocity.y < 0:
+    linear_velocity.y = 0
+  if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:
+    jump_press_timer = 0
+    if (has_sweeped_glitch and global.memory["broom_double_jump"]) or should_magic_jump:
+      linear_velocity.y = -0.01
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  smacked_npc = null
+  if on_ground:
+    aniPlayer.queue("stand")
+  else:
+    aniPlayer.queue("fall")
+  if not isHoldingMultiBroom():
+    broomSpriteVisible.visible = true
+
+var secretMultiBroom = null
+func isHoldingMultiBroom():
+  return secretMultiBroom != null and \
+         global.memory["multi_broom"] and \
+         Input.is_action_pressed("sub_action_button") and \
+         not (
+          physics_state == PhysicsState.GLITCH_DYING or \
+          physics_state == PhysicsState.GLITCH_HURT or \
+          physics_state == PhysicsState.IGNORE_PHYSICS
+         )
 
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
