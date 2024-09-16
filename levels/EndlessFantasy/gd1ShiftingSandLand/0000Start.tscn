@@ -329,7 +329,7 @@ texture = ExtResource( 22 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 10, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 15 )
@@ -407,7 +407,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/Haven2.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]

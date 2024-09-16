@@ -347,13 +347,17 @@ func getDisplayTitle(levelZoneName):
         "gd1ToxicJungle":
             return "moldy dogwoods"
         "gd1ShiftingSandLand":
-            return "cricket burrows"
+            return "insect caves" # could amp up the insect-ness more
         "gd1CrystalTower":
-            return "crystal sanctuary"
+            return "tower of goddess"
         "gd1GrandmaVillage":
-            return "village of elders"
+            return "elder village"
         "gd1BubblegloopSwamp":
-            return "haunted swamp"
+            return "malware swamp"
+        "gd1TombSouls":
+            return "corrupted tombs"
+        "gd1AbstractSuburbs":
+            return "demonic suburb"
         _:
             return "???"
     
