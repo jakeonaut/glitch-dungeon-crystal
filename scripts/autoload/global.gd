@@ -227,6 +227,7 @@ func resetMemory():
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
     memory["level_zonez"] = []
+    memory["fishing_rod_shortcut"] = 0
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
     memory["angel_flute"] = false
@@ -353,11 +354,13 @@ func getDisplayTitle(levelZoneName):
         "gd1GrandmaVillage":
             return "elder village"
         "gd1BubblegloopSwamp":
-            return "malware swamp"
+            return "malware swamp" # "sea of corruption" # malware swamp
         "gd1TombSouls":
             return "corrupted tombs"
         "gd1AbstractSuburbs":
             return "demonic suburb"
+        "gd1primordialOoze":
+            return "primordial ooze"
         _:
             return "???"
     

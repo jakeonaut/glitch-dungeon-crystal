@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -19,9 +19,13 @@
 [ext_resource path="res://sceneObjects/SandStream.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=18]
 
-[sub_resource type="BoxShape" id=46]
+[sub_resource type="BoxShape" id=49]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=50]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=47]
 resource_local_to_scene = true
@@ -81,7 +85,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 9 )]
 fov = 80.7
-size = 25.0
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -146,11 +149,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3, 11.1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 10, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 49 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 46 )
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 50 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 47 )

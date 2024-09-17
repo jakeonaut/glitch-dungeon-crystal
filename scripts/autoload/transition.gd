@@ -7,6 +7,7 @@ var path = ""
 var was_i_interrupted = false
 var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
 var mapManager = null
+onready var colorRect = get_node("ColorRect")
 
 var time_max = 100 # msec
 var current_scene = null
@@ -83,6 +84,8 @@ func _process(_delta):
     
 
 func startAdjacentLevelLoading():
+    if colorRect.material.get_shader_param("progress") > 0.5:
+        reverse_fade()
     return
 
     # clear prev adjacent levels & loaders
@@ -153,26 +156,31 @@ func die_fade_to(scn_path):
 func granny_teleport_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
+    aniPlayer.stop()
     aniPlayer.play("granny_teleport", -1, 1.0)
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func fast_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
+    aniPlayer.stop()
     aniPlayer.play("long_fade", -1, 2.0) # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func long_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
+    aniPlayer.stop()
     aniPlayer.play("long_fade") # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func really_long_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
+    aniPlayer.stop()
     aniPlayer.play("long_fade", -1, 0.5) # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func really_really_long_fade_to(scn_path):
     was_i_interrupted = false
     self.path = scn_path # store the scene path
+    aniPlayer.stop()
     aniPlayer.play("really_long_fade")
 
 func interrupt():
@@ -207,8 +215,11 @@ func unpause():
     global.pauseGame = false
 
 func fast_reverse_fade():
+    aniPlayer.stop()
     aniPlayer.play("reverse_fade", -1, 2.0)
 func reverse_fade():
+    aniPlayer.stop()
     aniPlayer.play("reverse_fade")
 func reverse_granny_teleport():
+    aniPlayer.stop()
     aniPlayer.play("reverse_granny_teleport")

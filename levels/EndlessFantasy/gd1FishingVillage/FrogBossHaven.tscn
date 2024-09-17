@@ -1482,7 +1482,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -1, 0 )
 parter_door_id = "Door4"
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 10, 0 )
 parter_door_id = "Door3"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]

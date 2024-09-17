@@ -134,6 +134,7 @@ export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
 func _process(_delta):
+    player.camera_y_offset = 5
     if not global.has_started_game:
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size

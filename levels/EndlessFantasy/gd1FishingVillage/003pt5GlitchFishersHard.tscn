@@ -1472,7 +1472,6 @@ shape = SubResource( 35 )
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.9818, 29.1596, 0 )
-bbText = "•oops!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1511,7 +1510,6 @@ anims/getItem = SubResource( 83 )
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.6818, 28.1596, 0 )
-bbText = "•oops!"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

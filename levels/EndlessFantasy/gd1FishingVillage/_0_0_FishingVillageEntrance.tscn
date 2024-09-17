@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
-[ext_resource path="res://scripts/levelScript.gd" type="Script" id=7]
+[ext_resource path="res://levels/EndlessFantasy/gd1FishingVillage/FishingVillageEntranceLevelScript.gd" type="Script" id=7]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=8]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=10]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=28]
 [ext_resource path="res://sceneObjects/BroomUpgradeCrone.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=31]
 
 [sub_resource type="Animation" id=57]
 length = 0.001
@@ -537,6 +538,10 @@ shader_param/texture_albedo = ExtResource( 28 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/target_palette = ExtResource( 26 )
 
+[sub_resource type="BoxShape" id=72]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 1 )
+
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -550,7 +555,6 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 7 )
 show_crt_effect = true
-starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
 spellbook_spells = [ 1, 2 ]
@@ -960,6 +964,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 11, 0 )
 [node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2662, 1.1759, 0 )
 
+[node name="FishingRodShortcut" parent="Viewport/level" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23017, 20, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/FishingRodShortcut/HookInteractionArea" index="0"]
+shape = SubResource( 72 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -969,6 +979,9 @@ texture = SubResource( 23 )
 flip_v = true
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 19 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -995,5 +1008,6 @@ __meta__ = {
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground2"]
+[editable path="Viewport/level/FishingRodShortcut"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

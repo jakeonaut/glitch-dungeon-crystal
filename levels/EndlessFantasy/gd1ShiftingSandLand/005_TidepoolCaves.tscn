@@ -285,12 +285,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -15, 0 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03944, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub2.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub1.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door4" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/doorClose = SubResource( 26 )
 anims/doorOpen = SubResource( 27 )
 anims/locked = SubResource( 28 )

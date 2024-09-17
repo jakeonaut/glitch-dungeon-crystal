@@ -61,6 +61,7 @@ var has_used_magic_lantern = false
 var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
 var remembered_invisible_glitch_walk_speed = 5
+var camera_y_offset = 1
 
 func _ready():
   set_physics_process(false)
@@ -139,7 +140,7 @@ func _process(delta):
   cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
   if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
-  cameraTarget.global_transform.origin.y = target_last_grounded_y
+  cameraTarget.global_transform.origin.y = target_last_grounded_y + camera_y_offset
 
   adjustStuffForNestingDolls()
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():

@@ -16,7 +16,8 @@ var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
 
 enum SlimeState {
     IDLE,
-    WALK
+    WALK,
+    NULL
 }
 var slime_state = SlimeState.WALK
 
@@ -170,7 +171,7 @@ func _process(delta):
         processDeath()
         return
         
-    am_i_in_range_of_player = true # am_i_really_in_range_of_player
+    am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
 
     if behavior_fizzle_out_after_evolve:
@@ -281,14 +282,15 @@ func unsmack():
         myOtherSprite.material_override.set_shader_param("y_div", 2.3)
         myOtherSprite.material_override.set_shader_param("normal_offset", .02)
     
+var should_reset_slime_timer_on_flip = true
 func doHorizontalWalkingBehavior():
     if not behavior_walk_flip:
             return
-    if (behavior_intermittent_walking or behavior_walking) and horizontal_collision:
+    if behavior_walking and horizontal_collision:
         horizontal_collision = false
         walk_direction.x = -walk_direction.x
         if horizontalTurnSound: horizontalTurnSound.play()
-        if behavior_intermittent_walking:
+        if behavior_intermittent_walking and should_reset_slime_timer_on_flip and slime_state != SlimeState.NULL:
             behavior_walking = true
             slime_state_timer = 0
             slime_state = SlimeState.WALK
