@@ -1204,8 +1204,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 8, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 8, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 40 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 7.74876, 0 )
-sprite_offset_y = 0.25
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 8, 0 )
 is_static = true
 is_licker = true
 

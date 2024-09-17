@@ -26,6 +26,7 @@ onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
 onready var crystalThemePlayer = get_node("CrystalThemePlayer")
 onready var continueThemePlayer = get_node("ContinueThemePlayer")
+onready var catacombThemePlayer = get_node("CatacombThemePlayer")
 
 onready var leavesSound = get_node("Sounds/LeavesSound")
 
@@ -110,6 +111,7 @@ func stopAll():
     fade_out(bossThemePlayer)
     fade_out(crystalThemePlayer)
     fade_out(continueThemePlayer)
+    fade_out(catacombThemePlayer)
     if currentlyPlayingTheme != null and currentlyPlayingTheme.is_playing():
         fade_out(currentlyPlayingTheme)
     currentlyPlayingTheme = null
@@ -136,8 +138,6 @@ func conductFromScenePath(path):
         tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] < 2:
         tryToPlay(crystalThemePlayer) # bossThemePlayer)
-    elif path.find("gd1CrystalTower") > 0:
-        tryToPlay(debugThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
         tryToPlay(grannyPlayer)
         changeSongPitch(0.9)
@@ -145,38 +145,50 @@ func conductFromScenePath(path):
         return
     elif path.find("PastoralScene_tangible") > 0:
         tryToPlay(grannyPlayer)
-    elif path.find("gd1GrandmaVillage") > 0:
-        tryToPlay(titleThemePlayer)
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
         tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
-    elif path.find("Haven2") > 0:
-        tryToPlay(dungeonThemePlayer)
-        changeSongPitch(0.5)
-        default_song_pitch = 0.5
-        return
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
+    elif path.find("gd1ToxicJungle") > 0:
+        tryToPlay(poisonThemePlayer)
+    elif path.find("gd1ShiftingSandLand") > 0:
+        tryToPlay(exploreThemePlayer)
+    elif path.find("gd1FishingVillage") > 0:
+        tryToPlay(swampThemePlayer)
+    elif path.find("gd1CrystalTower") > 0:
+        tryToPlay(goddessThemePlayer)
+    elif path.find("gd1GrandmaVillage") > 0:
+        tryToPlay(dungeonThemePlayer)
+    elif path.find("gd1BubblegloopSwamp") > 0:
+        tryToPlay(debugThemePlayer)
+        # changeSongPitch(0.7)
+        # default_song_pitch = 0.7
+        # return
+    elif path.find("gd1TombSouls") > 0:
+        tryToPlay(catacombThemePlayer)
+        # changeSongPitch(0.9)
+        # default_song_pitch = 0.9
+        # return
+    elif path.find("gd1AbstractSuburb") > 0:
+        tryToPlay(suburbThemePlayer)
+        # changeSongPitch(0.9)
+        # default_song_pitch = 0.9
+        # return
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
         changeSongPitch(0.63)
         default_song_pitch = 0.63
         return
-    elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
-        tryToPlay(goddessThemePlayer)
+    # elif path.find("Goddess") > 0 or path.find("Psychic") > 0 or path.find("002PathToSacredDoors") > 0 or path.find("003SacredDoorsHubWorld") > 0:
+    #     tryToPlay(goddessThemePlayer)
     elif path.find("001CozyHome") > 0:
         tryToPlay(wakeupPlayer)
     elif path.find("Casino") > 0 or path.find("Medievel") > 0 or path.find("Piranesi") > 0 or path.find("Grimoire") > 0:
         tryToPlay(casinoThemePlayer)
-    elif path.find("Suburb") > 0 or path.find("Poison") > 0 or path.find("Toxic") > 0:
-        tryToPlay(suburbThemePlayer)
     elif path.find("Ocean") > 0:
         tryToPlay(oceanThemePlayer)
-    elif path.find("Desert") > 0 or path.find("ShiftingSand") > 0:
-        tryToPlay(exploreThemePlayer)
-    elif path.find("Swamp") > 0 or path.find("Village") > 0:
-        tryToPlay(swampThemePlayer)
     elif path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)
     elif path.find("005DebugTown") > 0:

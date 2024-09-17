@@ -11,6 +11,7 @@ var spawn_time_limit = 15
 
 export var is_static = false
 export var is_licker = false
+export var is_bubble_spitter = false
 export var is_infected = false
 var is_fragile = false
 var was_infected = false
@@ -170,7 +171,7 @@ func startGulp():
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController")
-var SPIT_OFFSET = Vector2(0.2, 0.5)
+var SPIT_OFFSET = Vector2(0.2, 0.1)
 func spitOut():
   level.player.global_transform.origin = self.global_transform.origin
   level.player.global_transform.origin.y += SPIT_OFFSET.y
@@ -181,13 +182,16 @@ func spitOut():
 
   notDieSound.play()
   gulpin = false
-  level.player.tumbleFall(mySprite.flip_h)
   level.player.visible = true
   level.player.on_ground = true
   tongueController.hooked = false
   tongueController.hookTarget = null
   level.player.glitchTickle()
   level.player.tumbleFall(mySprite.flip_h)
+  if is_bubble_spitter:
+    level.player.getBubbleInfected()
+    yield(get_tree().create_timer(0.2), "timeout")
+    level.player.physics_state = level.player.PhysicsState.NORMAL
 
 func queueGulpAnimation():
   var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
@@ -353,3 +357,12 @@ func moveMyFriends(delta):
     friendArray[1] += (delta*22)
     if friendArray[1] >= move_my_friends_time_limit:
       who_is_standing_on_me.erase(friend_key)
+
+# @override
+func glitchSetSpritesAndCollision():
+  mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+  if tongueSprite != null:
+    tongueSprite.offset.y = sprite_offset_y
+    tongueSprite2.offset.y = sprite_offset_y
+    tongueSprite3.offset.y = sprite_offset_y
+    tongueSprite4.offset.y = sprite_offset_y

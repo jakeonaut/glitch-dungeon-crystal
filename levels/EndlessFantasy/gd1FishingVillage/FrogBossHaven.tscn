@@ -1384,7 +1384,7 @@ is_infected = true
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.30402, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/004FrogCove.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
 is_passive = true
 is_vertical = true
 
