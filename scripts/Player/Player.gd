@@ -371,6 +371,7 @@ func _process(delta):
   processFishyLogic(delta)
   processMoleLogic(delta)
   processChickenLogic(delta)
+  processCurseLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -1017,6 +1018,34 @@ func getChickenCured():
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true
+
+var curse_timer = 0
+var curse_time_limit = 10
+func processCurseLogic(delta):
+  if transformation == TransformationState.CURSED:
+    glitchTilesAroundMe(-2)
+    curse_timer += (delta*11)
+    if curse_timer >= curse_time_limit:
+      getCurseCured()
+      gravitySound.play()
+
+func getCurseInfected():
+  curse_timer = 0
+  if summonedBroom:
+    summonFallenBroom(true, false, false)
+  # TODO(jaketrower): could probably DRY some of this stuff...
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
+  loseBroom()
+  if transformation == TransformationState.BUBBLE:
+    level.flipGravity()
+  transformation = TransformationState.CURSED
+  
+func getCurseCured():
+  if transformation != TransformationState.CURSED:
+    return
+  transformation = TransformationState.NORMAL
+  getABroom()
 
 func checkSolidTilesBeneathMe():
   var solid_tiles = getTilesBelow(getLevelTiles())

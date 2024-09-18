@@ -96,7 +96,6 @@ func _ready_impl():
     global.memory["initialized_from_debug"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and global.memory["priestess"] == 0:
       global.memory["inventory"] = [global.Inventory.GRIMOIRE]
-      print("this is happening")
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)

@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/music/title.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/music/wakeup.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/music/dungeon.mp3" type="AudioStream" id=5]
-[ext_resource path="res://assets/music/trunk.mp3" type="AudioStream" id=6]
+[ext_resource path="res://assets/music/leez&jake.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/music/demon suburb.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/music/selfrealization.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
@@ -119,8 +119,7 @@ pitch_scale = 0.5
 
 [node name="CatacombThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -20.0
-pitch_scale = 0.9
+volume_db = -10.0
 
 [node name="Tween" type="Tween" parent="."]
 

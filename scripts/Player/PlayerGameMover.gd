@@ -8,6 +8,7 @@ enum TransformationState {
   UNDERGROUND_RETURNING,
   BUBBLE,
   CHICKEN,
+  CURSED,
 }
 var transformation = TransformationState.NORMAL
 

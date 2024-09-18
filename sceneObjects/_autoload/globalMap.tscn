@@ -628,8 +628,16 @@ path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TidepoolCaves.tscn"
 
 [node name="CorruptedTomb" type="Spatial" parent="."]
 
-[node name="000Start" parent="CorruptedTomb" instance=ExtResource( 3 )]
+[node name="ZombieIntro" parent="CorruptedTomb" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -4, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
+
+[node name="CricketCaveHub2" parent="CorruptedTomb" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -7, 0 )
 material_override = SubResource( 18 )
 texture = ExtResource( 10 )
 vframes = 16

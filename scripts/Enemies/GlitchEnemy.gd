@@ -53,8 +53,8 @@ var is_smacked = false
 var has_ever_been_smacked = false
 
 var smack_timer = 0
-export var smack_time_limit = 5
-export var smack_recovery_time_limit = 6
+export var smack_time_limit = 10
+export var smack_recovery_time_limit = 10
 
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
@@ -64,6 +64,8 @@ var evolution_timer = 0
 export var evolution_time_limit = 15
 export var kill_invis = false
 export var kill_immediately = false
+export var hp_enemy = 1
+var am_i_hurt = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -257,6 +259,7 @@ var last_palette = global.grey_palette
 var should_freeze = false
 var is_frozen = false
 func unsmack():
+    am_i_hurt = false
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
@@ -443,16 +446,19 @@ func tryAddEnemiesGroup():
     if not smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.add_to_group("enemies")
 
+var can_spawn_mini_crystal = true
 func ouchies_base():
-    if am_i_dying or am_i_freezing:
+    if am_i_dying or am_i_freezing: # or am_i_hurt:
         return
+    # am_i_hurt = true
     if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
-        var miniCubeCrystal = miniCubeCrystalRes.instance()
-        miniCubeCrystal.is_static_in_level = false
-        level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = self.global_transform.origin
-        miniCubeCrystal.passiveActivate(0, false)
+        if can_spawn_mini_crystal:
+            var miniCubeCrystal = miniCubeCrystalRes.instance()
+            miniCubeCrystal.is_static_in_level = false
+            level.add_child(miniCubeCrystal)
+            miniCubeCrystal.global_transform.origin = self.global_transform.origin
+            miniCubeCrystal.passiveActivate(0, false)
     if parentSpawner != null and parentSpawner.has_method("myChildDied"):
         parentSpawner.myChildDied()
 
