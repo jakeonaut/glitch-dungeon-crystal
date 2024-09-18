@@ -948,6 +948,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
+        if areaParent == level.player and my_broom_owner != level.player and my_broom_owner.summonedBroom.is_evil:
+            level.player.tryDieToEnemy(0, true, true)
+
         if areaParent.has_method("imAnNpc") and smackResult == null:
           smacked_npc = weakref(areaParent)
           have_i_smacked_an_npc = true

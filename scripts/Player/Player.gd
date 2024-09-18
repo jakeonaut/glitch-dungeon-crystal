@@ -969,7 +969,7 @@ func stopTransformationAni():
   pauseInput = false
 
 var chicken_timer = 0
-var chicken_time_limit = 80
+var chicken_time_limit = 120
 func processChickenLogic(delta):
   if transformation == TransformationState.CHICKEN:
     chickenSprite.flip_h = mySprite.flip_h

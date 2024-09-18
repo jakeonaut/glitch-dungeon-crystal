@@ -121,7 +121,7 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 22 )
 
-[node name="Game" type="Spatial"]
+[node name="Game2" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 14 )]
 
