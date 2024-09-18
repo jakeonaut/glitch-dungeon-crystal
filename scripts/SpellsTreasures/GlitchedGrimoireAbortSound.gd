@@ -32,4 +32,7 @@ func preActivateScript():
   if not global.memory["glitched_grimoire"]:
     global.memory["glitched_grimoire"] = true
     if not global.memory.has("spellbookPage"):
-      global.memory["spellbookPage"] = []
+      if level.player.glitch_form != global.GlitchForm.NORMAL:
+        global.memory["spellbookPage"] = [level.player.glitch_form]
+      else:
+        global.memory["spellbookPage"] = []

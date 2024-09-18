@@ -113,10 +113,11 @@ func preprocessGlitchFormTeleportation():
   if level.player.glitch_form == global.GlitchForm.NORMAL:
     return
   if level.player.glitch_form == glitch_form:
-    # nullify me instead!
-    glitch_form = global.GlitchForm.NORMAL
-    updateColor()
-    queue_free()
+    has_swapped = true
+    # # nullify me instead!
+    # glitch_form = global.GlitchForm.NORMAL
+    # updateColor()
+    # queue_free()
   
 
 func processGlitchFormTeleportation():
@@ -134,16 +135,20 @@ func processGlitchFormTeleportation():
         level.summonSmokeClouds(level.player.global_transform.origin, 2, true, true)
         level.summonSmokeClouds(global_transform.origin, 2, false, true)
         level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground
-        glitch_form = players_last_glitch_form
+        if not level.grandmaStatueCatalogue.has(players_last_glitch_form) or level.grandmaStatueCatalogue[players_last_glitch_form] == null:
+          glitch_form = players_last_glitch_form
+        else:
+          glitch_form = global.GlitchForm.NORMAL
         if glitch_form == global.GlitchForm.NORMAL:
           glitch_form_before_nullification = level.player.glitch_form
       elif glitch_form_before_nullification != global.GlitchForm.NORMAL:
-        glitch_form = glitch_form_before_nullification
+        glitch_form = players_last_glitch_form
+      level.reindexGrandmaStatueCatalogue()
       updateColor()
       on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
   else:
     has_swapped = false
-    players_last_glitch_form = level.player.glitch_form
+  players_last_glitch_form = level.player.glitch_form
 
 func updateColor():
   var target_palette = level.levelTiles.grey_palette

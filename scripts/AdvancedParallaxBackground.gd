@@ -20,10 +20,6 @@ var layers = []
 
 func _ready():
     camera_origin = camera.global_transform.origin
-    yield(TempTimer.idle_frame(self), "timeout")
-    yield(TempTimer.idle_frame(self), "timeout")
-    # hideMe() # nocommit
-
 
 func _process(delta):
     camera.respectLevelTilesEdges()

@@ -127,11 +127,11 @@ func yaBeatMe():
     yield(get_tree().create_timer(2.0), "timeout")
     global.shouldRenderAsCinematic = true
     level.triggerCroneDefeatedDialog()
-    var npcPlatforms = level.npcPlatformContainer.get_children()
-    for i in range(len(npcPlatforms)):
-        level.summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
-        npcPlatforms[i].queue_free()
-        yield(get_tree().create_timer(0.5), "timeout")
+    # var npcPlatforms = level.npcPlatformContainer.get_children()
+    # for i in range(len(npcPlatforms)):
+    #     level.summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
+    #     npcPlatforms[i].queue_free()
+    #     yield(get_tree().create_timer(0.5), "timeout")
 
 func randomExplosion():
     level.summonSmokeClouds(Vector3(

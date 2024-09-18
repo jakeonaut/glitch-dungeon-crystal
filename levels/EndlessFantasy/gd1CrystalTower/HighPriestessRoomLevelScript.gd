@@ -35,9 +35,9 @@ func setUpRoomInitializationOverride():
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
     global.setStaticLevelZoneLevelVar(self, crystalGeode, true)
-    var npcPlatforms = npcPlatformContainer.get_children()
-    for i in range(len(npcPlatforms)):
-        npcPlatforms[i].visible = true
+    # var npcPlatforms = npcPlatformContainer.get_children()
+    # for i in range(len(npcPlatforms)):
+    #     npcPlatforms[i].visible = true
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
@@ -55,11 +55,11 @@ func setUpRoomInitializationOverride():
       summonSmokeClouds(door.global_transform.origin, 3, true, true)
       door.queue_free()
       yield(get_tree().create_timer(0.5), "timeout")
-      var npcPlatforms = npcPlatformContainer.get_children()
-      for i in range(len(npcPlatforms)):
-          summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
-          npcPlatforms[i].visible = true
-          yield(get_tree().create_timer(0.5), "timeout")
+      # var npcPlatforms = npcPlatformContainer.get_children()
+      # for i in range(len(npcPlatforms)):
+      #     summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
+      #     npcPlatforms[i].visible = true
+      #     yield(get_tree().create_timer(0.5), "timeout")
 
 # @override
 func playMenuMusic():
@@ -176,9 +176,9 @@ func unhideHighPriestess():
   # global.memory["broom"] = false
   # generateEyeTiles()
 
-  var npcPlatforms = npcPlatformContainer.get_children()
-  for i in range(len(npcPlatforms)):
-    npcPlatforms[i].fallthroughSolidCollisionShape.scale.x = 1.5
+  # var npcPlatforms = npcPlatformContainer.get_children()
+  # for i in range(len(npcPlatforms)):
+  #   npcPlatforms[i].fallthroughSolidCollisionShape.scale.x = 1.5
 
 # var climbToEyeLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_001climbToEye.tscn")
 # func generateEyeTiles():

@@ -47,6 +47,20 @@ func _ready():
   # ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
 
 export var is_randomizing = false
+# this will be a map of global.GlitchForm => weakref(instance)
+var grandmaStatueCatalogue = {}
+func reindexGrandmaStatueCatalogue(is_start_of_level = false):
+  grandmaStatueCatalogue = {}
+  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  for i in range(len(grandmaStatues)):
+    var grandmaStatue = grandmaStatues[i]
+    if is_start_of_level:
+      grandmaStatue.preprocessGlitchFormTeleportation()
+    if grandmaStatueCatalogue.has(grandmaStatue.glitch_form):
+      pass # TODO(jaketrower): should probably NULLIFY if is_start_of_level
+    else:
+      grandmaStatueCatalogue[grandmaStatue.glitch_form] = weakref(grandmaStatue)
+
 func _ready_impl():
   if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
     global.has_started_game = true
@@ -73,9 +87,7 @@ func _ready_impl():
       player.applyGlitch(global.memory["current_glitch"], true)
   else:
     player.applyGlitch(starting_glitch_type, true)
-  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
-  for i in range(len(grandmaStatues)):
-    grandmaStatues[i].preprocessGlitchFormTeleportation()
+  reindexGrandmaStatueCatalogue(true)
   
   global.memory["tutorial_spellbookPage"] = false
   if global.memory["initialized_from_debug"]:
@@ -84,6 +96,7 @@ func _ready_impl():
     global.memory["initialized_from_debug"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"): # and global.memory["priestess"] == 0:
       global.memory["inventory"] = [global.Inventory.GRIMOIRE]
+      print("this is happening")
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)

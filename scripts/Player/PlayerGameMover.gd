@@ -7,6 +7,7 @@ enum TransformationState {
   UNDERGROUND,
   UNDERGROUND_RETURNING,
   BUBBLE,
+  CHICKEN,
 }
 var transformation = TransformationState.NORMAL
 
@@ -308,6 +309,8 @@ func pressingDown():
 
 # @override
 func justPressedJump():
+  if transformation == TransformationState.CHICKEN:
+    return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
   return (Input.is_action_just_pressed("jump_button") and (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()) or should_magic_jump
   
 # @override
@@ -320,6 +323,8 @@ func tryingToWakeUp():
 
 # @override
 func pressingJump():
+  if transformation == TransformationState.CHICKEN:
+    return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
   if transformation == TransformationState.UNDERGROUND:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
@@ -447,6 +452,8 @@ func regainNestingDoll():
 var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
+  if transformation == TransformationState.CHICKEN:
+    return 6
   if transformation == TransformationState.UNDERGROUND:
     return 7
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
@@ -493,7 +500,8 @@ func getABroom(unpauseAnimation = true):
   pauseAnimation = not unpauseAnimation
   if transformation == TransformationState.FISHY or \
      transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
-     transformation == TransformationState.BUBBLE:
+     transformation == TransformationState.BUBBLE or \
+     transformation == TransformationState.CHICKEN:
     return
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2

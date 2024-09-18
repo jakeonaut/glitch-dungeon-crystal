@@ -144,8 +144,12 @@ func edge_fade_to(scn_path):
             global.set_camera_position_on_respawn = true
             startAdjacentLevelLoading()
             return
-    change_scene() # nocommit, still need to update what we're doing here, by shifting one of the adjacent levels into the currently active one
+    change_scene() # TODO(jaketrower): still need to update what we're doing here, by shifting one of the adjacent levels into the currently active one
                    # rather than just completely change_sceneing ...??
+
+func quick_hide():
+    aniPlayer.stop()
+    aniPlayer.play("quick_hide")
 
 func die_fade_to(scn_path):
     was_i_interrupted = false

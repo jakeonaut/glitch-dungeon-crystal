@@ -212,7 +212,7 @@ func resetMemory():
     # game stuff
     memory["hasEverTouchedObelisk"] = false
     memory["currLevelZone"] = null
-    memory["initialized_from_debug"] = 0
+    memory["initialized_from_debug"] = false
     memory["tutorial_gem"] = 0
     memory["splat"] = 0
     memory["hammer"] = 0
@@ -245,17 +245,19 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 1
-    memory["broom_double_jump"] = 1
+    memory["broomerang"] = 0
+    memory["broom_double_jump"] = 0
     memory["multi_broom"] = false
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
+
+    # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
-    memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
-    memory["mushroom_soul"] = 0
 
     # GAME MODES
     memory["random_entrances"] = 0
@@ -267,36 +269,37 @@ func resetMemory():
 var anna_mode_counter = 0
 var anna_key_helper = false
 func processEasterEggs():
-    if Input.is_physical_key_pressed(KEY_A):
-        if anna_mode_counter == 0:
-            anna_key_helper = true
-            anna_mode_counter += 1
-        elif anna_mode_counter == 3:
-            if not memory.has("anna_mode"):
-                memory["anna_mode"] = true
-            else:
-                memory["anna_mode"] = not memory["anna_mode"]
-            print("ANNA_MODE = " + str(memory["anna_mode"]))
-            anna_key_helper = true
-            anna_mode_counter = 0
-        elif not anna_key_helper:
-            anna_mode_counter = 0
-    elif Input.is_physical_key_pressed(KEY_N):
-        if (anna_mode_counter == 1 or anna_mode_counter == 2) and not anna_key_helper:
-            anna_key_helper = true
-            anna_mode_counter += 1
-        elif not anna_key_helper:
-            anna_mode_counter = 0
-    elif Input.is_physical_key_pressed(KEY_B):
-        if not anna_key_helper:
-            anna_mode_counter = 0
-            anna_key_helper = true
-            if not memory.has("blue_mode"):
-                memory["blue_mode"] = true
-            else:
-                memory["blue_mode"] = not memory["blue_mode"]
-    else:
-        anna_key_helper = false
+    pass
+    # if Input.is_physical_key_pressed(KEY_A):
+    #     if anna_mode_counter == 0:
+    #         anna_key_helper = true
+    #         anna_mode_counter += 1
+    #     elif anna_mode_counter == 3:
+    #         if not memory.has("anna_mode"):
+    #             memory["anna_mode"] = true
+    #         else:
+    #             memory["anna_mode"] = not memory["anna_mode"]
+    #         print("ANNA_MODE = " + str(memory["anna_mode"]))
+    #         anna_key_helper = true
+    #         anna_mode_counter = 0
+    #     elif not anna_key_helper:
+    #         anna_mode_counter = 0
+    # elif Input.is_physical_key_pressed(KEY_N):
+    #     if (anna_mode_counter == 1 or anna_mode_counter == 2) and not anna_key_helper:
+    #         anna_key_helper = true
+    #         anna_mode_counter += 1
+    #     elif not anna_key_helper:
+    #         anna_mode_counter = 0
+    # elif Input.is_physical_key_pressed(KEY_B):
+    #     if not anna_key_helper:
+    #         anna_mode_counter = 0
+    #         anna_key_helper = true
+    #         if not memory.has("blue_mode"):
+    #             memory["blue_mode"] = true
+    #         else:
+    #             memory["blue_mode"] = not memory["blue_mode"]
+    # else:
+    #     anna_key_helper = false
 
 
 func _process(delta):
@@ -350,7 +353,7 @@ func getDisplayTitle(levelZoneName):
         "gd1ShiftingSandLand":
             return "insect caves" # could amp up the insect-ness more
         "gd1CrystalTower":
-            return "tower of goddess"
+            return "dream temple"
         "gd1GrandmaVillage":
             return "elder village"
         "gd1BubblegloopSwamp":
@@ -388,9 +391,8 @@ func saveGame():
     save_game.close()
 
 func doesSaveGameExist():
-    return false # nocommit
-    # var save_game = File.new()
-    # return save_game.file_exists(save_game_file)
+    var save_game = File.new()
+    return save_game.file_exists(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
     if typeof(obj) == TYPE_STRING:

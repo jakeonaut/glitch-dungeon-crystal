@@ -5197,6 +5197,7 @@ anims/getItem = SubResource( 118 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.4922, 49, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 is_passive = true
 is_vertical = true
 

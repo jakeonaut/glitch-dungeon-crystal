@@ -303,7 +303,7 @@ func processSoundLogic(_delta):
 var quitToMainOptions = ["YES", "CANCEL"]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  pauseTitleText.bbcode_text = "  Really Quit?!?\npress " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back..."
+  pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("sub_action_button") + " to confirm, " + global.getInputText("jump_button") + " to cancel"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -330,6 +330,9 @@ func processQuitToMainLogic(_delta):
 
   if Input.is_action_just_pressed("sub_action_button"):
     if quitToMainOptionIndex == 0:
+      global.has_started_game = false
+      global.has_really_started_game = false
+      global.resetMemory()
       transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
       global.isPauseMenuOpen = false
     elif quitToMainOptionIndex == 1:

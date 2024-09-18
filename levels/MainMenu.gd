@@ -114,7 +114,7 @@ func loadGame():
         if global.memory.has("roomPath"):
             var roomPath = global.memory["roomPath"]
             global.isEnteringRoom = true
-            transition.really_long_fade_to(roomPath)
+            transition.long_fade_to(roomPath)
             return
     # default
     startGame()
@@ -134,8 +134,8 @@ export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
 func _process(_delta):
-    player.camera_y_offset = 5
     if not global.has_started_game:
+        player.camera_y_offset = 0
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
@@ -162,7 +162,8 @@ func _process(_delta):
     if global.isPauseMenuOpen:
         return
 
-    if global.has_started_game:
+    if global.has_started_game and not global.isRespawning:
+        player.camera_y_offset = 5
         if global.has_really_started_game:
             if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
                 mainMenuUi.remove_child(pressCText)

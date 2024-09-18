@@ -131,6 +131,7 @@ show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 6
 has_spellbook_page = true
+spellbook_spells = [ 2, 1 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -266,7 +267,7 @@ shape = SubResource( 53 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -6, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/000_000_NullifyIntro.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 54 )
@@ -296,8 +297,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.412745, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50485, 2, 0 )
 grav = 0
-bbText = "[color=blue]holy aura[/color] makes you forget.
-part of the soul,
+bbText = "part of the soul,
 exists in the stone."
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]

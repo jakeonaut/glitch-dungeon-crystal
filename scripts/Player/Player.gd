@@ -22,6 +22,7 @@ onready var saveSound = get_node("Sounds/SaveSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
+onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
 onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
@@ -369,6 +370,7 @@ func _process(delta):
   processMushroomLogic(delta)
   processFishyLogic(delta)
   processMoleLogic(delta)
+  processChickenLogic(delta)
     
   # doTimeDilation(real_delta)
 
@@ -388,6 +390,19 @@ func _process(delta):
       global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.INVISIBLE, GlitchForm.LADDER]
     else:
       global.memory["spellbookPage"] = [glitch_form]
+  if Input.is_action_just_pressed("debug_upgrade_broom"):
+    if global.memory["broomerang"] == 0:
+      global.memory["broomerang"] = 1
+      global.memory["broom_double_jump"] = 1
+    elif global.memory["broomerang"] < 2:
+      global.memory["max_hp"] = 2
+      global.memory["hp"] = 2
+      global.memory["broomerang"] = 2
+      global.memory["multi_broom"] = 1
+  if Input.is_action_just_pressed("debug_more_crystals"):
+    if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") < 99:
+      global.incrementLevelZoneThing("num_mini_crystal_cubes", 99)
+    global.memory["clean_crystals"] = 99
     
   tryDieToOffscreenCamera(delta)
       
@@ -893,7 +908,8 @@ func getBubbleCured():
   # grav = bubble_temp_grav
   # true_terminal_vel = bubble_temp_true_terminal_vel
 
-
+func restartMusic():
+  level.restartMusic()
 
 func getFishyInfected():
   tryClearFallthroughCollisionSolid()
@@ -929,11 +945,7 @@ func getFishyInfected():
   should_collide_horizontally = true
   fish_broom_timer = 0
   has_fish_broom = true
-
-func restartMusic():
-  level.restartMusic()
   
-
 func getFishyCured():
   if transformation != TransformationState.FISHY:
     return
@@ -955,6 +967,56 @@ func getFishyCured():
 func stopTransformationAni():
   pauseAnimation = false
   pauseInput = false
+
+var chicken_timer = 0
+var chicken_time_limit = 80
+func processChickenLogic(delta):
+  if transformation == TransformationState.CHICKEN:
+    chickenSprite.flip_h = mySprite.flip_h
+    glitchTilesAroundMe(-2)
+    chicken_timer += (delta*11)
+    if chicken_timer >= chicken_time_limit:
+      getChickenCured()
+      gravitySound.play()
+  elif chickenSprite.visible and not aniPlayer.assigned_animation == "revertFromChicken":
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    aniPlayer.play("revertFromChicken")
+    aniPlayer.queue("land")
+
+func getChickenInfected():
+  chicken_timer = 0
+  if summonedBroom:
+    summonFallenBroom(true, false, false)
+  # TODO(jaketrower): could probably DRY some of this stuff...
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
+  loseBroom()
+  if transformation == TransformationState.BUBBLE:
+    level.flipGravity()
+  transformation = TransformationState.CHICKEN
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("transformToChicken")
+  pauseAnimation = true
+  should_collide_floor = true
+  should_collide_ceil = true
+  should_collide_horizontally = true
+  
+func getChickenCured():
+  if transformation != TransformationState.CHICKEN:
+    return
+  can_broomerang_warp = true
+  transformation = TransformationState.NORMAL
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("revertFromChicken")
+  aniPlayer.queue("land")
+  pauseAnimation = true
+  physics_vars.should_apply_gravity = true
+  should_collide_floor = true
+  should_collide_ceil = true
+  should_collide_horizontally = true
 
 func checkSolidTilesBeneathMe():
   var solid_tiles = getTilesBelow(getLevelTiles())
@@ -1295,6 +1357,8 @@ func actuallyProcessDeath(should_glitch):
     getFishyCured()
   if transformation == TransformationState.UNDERGROUND:
     getMoleCured()
+  if transformation == TransformationState.CHICKEN:
+    getChickenCured()
   global.incrementLevelZoneDeaths()
   global.memory["hp"] = 0
   self.textBox.hideTextbox()
@@ -1372,8 +1436,6 @@ func tumbleFall(direction):
   yield(TempTimer.idle_frame(self), "timeout")
   fall_timer = fall_time_max - 5
 
-
-
 func processBagLogic(_delta):
   pass
 
@@ -1398,7 +1460,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.CHICKEN:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return

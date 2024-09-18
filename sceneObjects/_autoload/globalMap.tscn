@@ -638,7 +638,12 @@ path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
 
 [node name="CrystalTower" type="Spatial" parent="."]
 
-[node name="DefaultLevel" parent="CrystalTower" instance=ExtResource( 3 )]
+[node name="NullifyIntro" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/000_000_NullifyIntro.tscn"
+
+[node name="000Start" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"

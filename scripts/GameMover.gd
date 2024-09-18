@@ -1266,9 +1266,6 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
         local_lv.y = 0
         if feather_jump_timer < feather_jump_partial_time_limit:
           feather_jump_timer = feather_jump_partial_time_limit
-        # # nocommit # failed offspring fling experiment
-        # if is_pressing_horizontal_input or was_pressing_horizontal_input:
-        #   global_transform.origin.x += local_lv.x / velocity_dampener
     else:
       global_transform.origin.x += tile_distance * sensor_direction
       collideWithWall(local_lv)
