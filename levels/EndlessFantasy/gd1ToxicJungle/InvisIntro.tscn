@@ -118,6 +118,7 @@ audio_listener_enable_3d = true
 script = ExtResource( 3 )
 show_crt_effect = true
 tileset_type = 6
+pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -202,7 +203,7 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -278,7 +279,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 25, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4902, 24, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/003MushroomCave.tscn"
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0857925, 0.778692, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]

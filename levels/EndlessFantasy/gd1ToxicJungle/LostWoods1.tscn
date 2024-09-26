@@ -291,6 +291,7 @@ script = ExtResource( 11 )
 show_crt_effect = true
 tileset_type = 6
 has_spellbook_page = true
+pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 

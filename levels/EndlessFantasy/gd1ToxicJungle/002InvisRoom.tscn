@@ -145,6 +145,7 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 1 )
 show_crt_effect = true
 tileset_type = 6
+pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 

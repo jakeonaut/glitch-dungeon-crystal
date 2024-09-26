@@ -200,6 +200,8 @@ func _ready():
 
 func resetMemory():
     memory = {}
+
+    memory["demo_mode"] = 0
     # settings?
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
@@ -248,7 +250,7 @@ func resetMemory():
     memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
 

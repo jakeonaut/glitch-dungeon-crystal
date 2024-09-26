@@ -111,6 +111,13 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
+  if how_many_times_did_u_hit_me >= 3:
+    how_many_times_did_u_hit_me = 0
+    if level.player.transformation != level.player.TransformationState.CHICKEN:
+        level.player.gravitySound.play()
+        level.player.errorSound.play()
+        level.player.getChickenInfected()
+        level.player.chicken_timer = 0
 
   behavior_jumping = true
   behavior_walking = true

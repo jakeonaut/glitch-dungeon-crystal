@@ -1,0 +1,572 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=3]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=7]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=10]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=11]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
+[ext_resource path="res://assets/pokeballgreen.png" type="Texture" id=15]
+[ext_resource path="res://assets/sounds/657930__matrixxx__cartoon-drowning-02.wav" type="AudioStream" id=17]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 6 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 6 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.001
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 3
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="CylinderShape" id=2]
+height = 1.6
+radius = 0.8
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 21, 13, 1 )
+
+[sub_resource type="BoxShape" id=8]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[node name="WeirdKizzyCat" type="Spatial"]
+
+[node name="SpriteContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5 )
+
+[node name="InnerSpriteContainer" type="Spatial" parent="SpriteContainer"]
+
+[node name="HeadSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.63699, 1.57044, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 74
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="BodySprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 79
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="BodySprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.10372, -0.259291, 0.649452 )
+visible = false
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 79
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="TailSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5739, 0.640454, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.15
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 78
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="Limbs" type="Spatial" parent="SpriteContainer/InnerSpriteContainer"]
+
+[node name="Neck" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.74087, 0.329313, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35552, 0.055299, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93329, -0.167012, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44007, -0.189068, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Tail" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+visible = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40857, 2.90403, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0215, 2.42976, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81436, 1.89276, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0215, 1.29855, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Tail2" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+visible = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40857, 0.901473, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22176, 0.427202, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81436, -0.109796, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Tail2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27769, -0.246285, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Leg1" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+
+[node name="FootSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0497036, -3.12664, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 78
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245068, -2.67325, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54459, -2.34649, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.680738, -1.91082, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54459, -1.47515, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Leg2" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+
+[node name="FootSprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5201, -3.12664, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 78
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03472, -2.67325, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.762426, -2.23757, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62628, -1.8019, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.762426, -1.36623, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Leg3" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+
+[node name="FootSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24675, -3.12664, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 78
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54152, -2.67325, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84105, -2.0872, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7179, -1.52188, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32246, -1.06028, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Leg4" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
+
+[node name="FootSprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.89434, -3.12664, 0.8 )
+material_override = SubResource( 9 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 16
+frame = 78
+script = ExtResource( 5 )
+automatically_change_color = false
+
+[node name="Sprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22746, -2.67325, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87738, -2.15979, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5338, -1.59447, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3588, -1.08101, 0 )
+material_override = SubResource( 10 )
+pixel_size = 0.0975
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+frame = 49
+script = ExtResource( 5 )
+frame_delay = 0.1
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -30.0
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+volume_db = -20.0
+pitch_scale = 0.3
+
+[node name="PoofSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+volume_db = -20.0
+pitch_scale = 1.5
+
+[node name="ReassembleSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 6 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
+shape = SubResource( 8 )
+
+[node name="landing" type="Sprite3D" parent="." groups=["landing"]]
+pixel_size = 0.12
+texture = ExtResource( 15 )
+hframes = 2
+vframes = 2

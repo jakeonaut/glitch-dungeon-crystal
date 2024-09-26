@@ -291,6 +291,9 @@ func _process(delta):
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
+  if Input.is_action_just_pressed("restart_key"):
+    tryDieToEnemy(delta, true, true, true)
+    global.incrementLevelZoneThing("num_deaths", -1)
   
   delta = delta * global.time_dilation_multiplier
 
@@ -909,7 +912,7 @@ func getBubbleCured():
   # grav = bubble_temp_grav
   # true_terminal_vel = bubble_temp_true_terminal_vel
 
-func restartMusic():
+func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
 
 func getFishyInfected():
@@ -970,7 +973,7 @@ func stopTransformationAni():
   pauseInput = false
 
 var chicken_timer = 0
-var chicken_time_limit = 120
+var chicken_time_limit = 90
 func processChickenLogic(delta):
   if transformation == TransformationState.CHICKEN:
     chickenSprite.flip_h = mySprite.flip_h

@@ -123,8 +123,8 @@ func _ready_impl():
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
   trySpawnFollowers()
-  setUpRoomInitializationOverride()
   restartMusic()
+  setUpRoomInitializationOverride()
   if global.hasGottenLevelGeode or is_randomizing:
     levelTiles.randomize_num += 10
     levelTiles.randomize_num_counter = 15
@@ -537,6 +537,13 @@ func trySpawnFollowers():
             stepify(rand_range(0.5, 1.5), 0.125), 
             0
           ))
+
+func purifyAllWeakEnemies():
+  var weak_enemies = self.get_tree().get_nodes_in_group("weak_enemies")
+  for weak_enemy in weak_enemies:
+    if weak_enemy.isActive() and not weak_enemy.am_i_dying:
+      weak_enemy.ouchies(weak_enemy.global_transform.origin)
+      self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
 
 var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
 func spawnAngelTadpole(starting_position):

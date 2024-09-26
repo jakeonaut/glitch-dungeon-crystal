@@ -172,10 +172,12 @@ func getPurified():
     # musicPlayer.stopAll()
     # musicPlayer.changeSongPitch(1.0)
 
+    getLevelTiles().purifyAllSpikes()
+    level.purifyAllWeakEnemies()
     # if level.has_node("SavePoint"):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
-    trySweepUpGlitchTiles(collisionShape1)
-    trySweepUpGlitchTiles(collisionShape2)
+    # trySweepUpGlitchTiles(collisionShape1)
+    # trySweepUpGlitchTiles(collisionShape2)
     var crystal_shards = level.get_tree().get_nodes_in_group("crystal_shard")
     for shard in crystal_shards:
         if shard.cubeSound != null:

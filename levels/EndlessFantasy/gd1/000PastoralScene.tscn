@@ -1,4 +1,4 @@
-[gd_scene load_steps=162 format=2]
+[gd_scene load_steps=163 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -37,10 +37,10 @@
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=35]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=37]
-[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/sprites/logo2.png" type="Texture" id=39]
 [ext_resource path="res://levels/EndlessFantasy/gd1/PastoralGramdmaAbortSound.gd" type="Script" id=40]
-[ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=41]
+[ext_resource path="res://assets/sounds/eba_earthquake1.wav" type="AudioStream" id=41]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=42]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=43]
 [ext_resource path="res://levels/EndlessFantasy/000NPC3AbortSound.gd" type="Script" id=44]
@@ -52,6 +52,7 @@
 [ext_resource path="res://assets/sprites/angel_statue.png" type="Texture" id=50]
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=51]
 [ext_resource path="res://assets/tower.png" type="Texture" id=52]
+[ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=53]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 17 )
@@ -2510,13 +2511,19 @@ anims/stand = SubResource( 178 )
 anims/suddenly_fly = SubResource( 179 )
 anims/walk = SubResource( 180 )
 
+[node name="EventSoundWakeup" type="AudioStreamPlayer" parent="Viewport/level"]
+stream = ExtResource( 53 )
+volume_db = -25.0
+pitch_scale = 0.8
+
 [node name="EventSound1" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 38 )
 volume_db = -11.0
+pitch_scale = 1.5
 
 [node name="EventSound2" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 41 )
-volume_db = -5.0
+volume_db = -15.0
 
 [node name="EventSound3" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 46 )

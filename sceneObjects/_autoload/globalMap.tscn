@@ -645,6 +645,7 @@ frame = 39
 path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
 
 [node name="CrystalTower" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="NullifyIntro" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
