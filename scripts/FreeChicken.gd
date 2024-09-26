@@ -47,8 +47,8 @@ func _process(delta):
             afraid_timer = 0
             chicken_state = ChickenState.IDLE if on_ground else ChickenState.JUMP
             mySprite.updateBaseFrame(4, 3)
-            walk_speed /= 4
-            jump_force /= 2
+            walk_speed = 2
+            jump_force = 4
     elif chicken_state == ChickenState.IDLE:
         mySprite.frame_delay = 1
         if can_hop:
@@ -111,12 +111,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
-  if how_many_times_did_u_hit_me >= 3:
-    how_many_times_did_u_hit_me = 0
-    if level.player.transformation != level.player.TransformationState.CHICKEN:
-        level.player.gravitySound.play()
-        level.player.getChickenInfected()
-        level.player.chicken_timer = 0
 
   behavior_jumping = true
   behavior_walking = true
@@ -126,10 +120,17 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     
   # pauseSelf = true
   on_ground = true
-  if chicken_state != ChickenState.AFRAID:
-    walk_speed *= 4
-    jump_force *= 2
+  walk_speed = 8
+  jump_force = 8
   afraid_timer = 0
   if afraid_time_limit < 60:
     afraid_time_limit *= 2
   chicken_state = ChickenState.AFRAID
+
+  if how_many_times_did_u_hit_me >= 3:
+    how_many_times_did_u_hit_me = 0
+    yield(get_tree().create_timer(0.2), "timeout")
+    if level.player.transformation != level.player.TransformationState.CHICKEN:
+        level.player.gravitySound.play()
+        level.player.getChickenInfected()
+        level.player.chicken_timer = 0
