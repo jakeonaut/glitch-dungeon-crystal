@@ -36,6 +36,7 @@ onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
+onready var cameraTarget = get_node("cameraTarget")
 
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
@@ -95,6 +96,9 @@ func startGame():
   if was_intro_cutscene_skipped == 2: return
   babushkaCat.mySprite.updateBaseFrame(2, 2)
   gameCamera.can_i_move = true
+  if cameraTarget != null:
+    cameraTarget.queue_free()
+    cameraTarget = null
   eventSound1.play()
   eventSound2.play()
   yield(get_tree().create_timer(1.0), "timeout")

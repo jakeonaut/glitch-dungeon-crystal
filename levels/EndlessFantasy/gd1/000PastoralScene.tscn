@@ -86,9 +86,9 @@ shader_param/target_palette = ExtResource( 7 )
 resource_local_to_scene = true
 extents = Vector3( 3.24, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=22]
+[sub_resource type="BoxShape" id=253]
 resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
+extents = Vector3( 1, 1, 1.3 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 17 )
@@ -2187,7 +2187,8 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 14 )]
-target = NodePath("../cameraTarget")
+is_doing_fake_static = null
+override_camera_size = null
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -2288,7 +2289,7 @@ is_a_body = false
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
-shape = SubResource( 22 )
+shape = SubResource( 253 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 29 )
@@ -2925,6 +2926,7 @@ scroll_active = false
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 9 )]
 
+[editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
 [editable path="Viewport/level/NPC2"]
