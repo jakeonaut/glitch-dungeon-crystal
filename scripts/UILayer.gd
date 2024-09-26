@@ -11,6 +11,9 @@ onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/Ric
 onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
+onready var miniCrystalTextureRect = get_node("GlitchStatusRect/TextureRect") if has_node("GlitchStatusRect/TextureRect") else null
+onready var miniCrystalViewport = get_node("GlitchStatusRect/Viewport") if has_node("GlitchStatusRect/Viewport") else null
+
 onready var inventoryControl = get_node("Inventory")
 var inventory_index = 0
 func getInventoryBBText():
@@ -217,6 +220,8 @@ func _process(delta):
   glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if global.memory["tutorial_gem"] == 1:
+    if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null :
+      miniCrystalTextureRect.texture = miniCrystalViewport.get_texture()
     get_node("GlitchStatusRect").visible = true
     tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(480, 65))
     # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))

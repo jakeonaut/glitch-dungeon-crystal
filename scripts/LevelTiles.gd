@@ -138,7 +138,7 @@ func buildSingleRandomTile(cell_index, glitch_type):
     else:
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "FragileBrickSolid":
-    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, global.GlitchForm.WALK_THROUGH_WALLS)
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
     var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
@@ -455,6 +455,16 @@ func infectSpikes(coords, play_sound = true):
   spike_infection_timer = 0
   return did_infect_spikes
 
+func purifyAllSpikes():
+  var cell_indices = get_used_cells()
+  for i in range(len(cell_indices)):
+    var cell_index = cell_indices[i]
+    var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+    if isTileSpikes(tile_type):
+      removeTile(cell_index)
+      var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
+      level.summonSmokeClouds(tile_pos, 2, false, true)
+
 func breakFragile(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
   if isTileFragileSolid(tile_type):
@@ -515,7 +525,7 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
     print("tile_name: " + str(tile_name))
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "FragileBrickSolid" in tile_name:
-    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, glitch_type, debug)
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, global.GlitchForm.WALK_THROUGH_WALLS, debug)
   elif "BrickSolidRoof" in tile_name:
     setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidCeil" in tile_name:
@@ -564,9 +574,15 @@ func unrandomizeTile(cell_index):
 
 func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
   if rand_timer: 
-    yield(get_tree().create_timer(rand_range(0, 1)), "timeout")
+    var timer = Timer.new() # get_tree().create_timer(rand_range(0, 1))
+    add_child(timer)
+    timer.wait_time = rand_range(0, 1)
+    timer.one_shot = true
+    timer.start()
+    timer.connect("timeout", self, "rerandomizeTile", [ cell_index, glitch_type, false ])
+    return
   if unrandomizeTile(cell_index):
-    randomizeTile(cell_index, glitch_type)  
+    randomizeTile(cell_index, glitch_type)
   
 export var can_change_color = true
 func changeColorPalette(palette, _palette_alt = null):
@@ -586,13 +602,17 @@ func changeColorPalette(palette, _palette_alt = null):
     var tile_name = mesh_library.get_item_name(item_id)
     if tile_name == "GlitchSpikes" or "Pink" in tile_name:
       continue
+    var palette_to_use = curr_palette
+    # if "Fragile" in tile_name:
+    #   palette_to_use = white_palette
+
     var material = mesh.surface_get_material(0)
     var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)
     if material != null and material is SpatialMaterial:
       var next_material = material.next_pass
       if next_material != null and next_material is ShaderMaterial:
         if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
-          next_material.set_shader_param("base_palette", curr_palette)
+          next_material.set_shader_param("base_palette", palette_to_use)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
 

@@ -20,6 +20,7 @@ func setUpRoomInitializationOverride():
     player.fall_timer = 50
     uiLayer.statsTitleRect.visible = false
     uiLayer.get_node("GlitchStatusRect").visible = false
+    musicPlayer.stopAll()
   has_decided = true
   
 var showInstructions = false
@@ -27,6 +28,7 @@ func _process(_delta):
   # ._process(delta) implicit
 
   if not has_decided:
+    musicPlayer.stopAll()
     return
   
   if is_start_of_game:
@@ -34,12 +36,16 @@ func _process(_delta):
     global.pauseMoveInput = true
     global.shouldRenderAsCinematic = true
     player.fall_timer = 999
+    musicPlayer.stopAll()
     if player.physics_state == player.PhysicsState.COLLAPSED or \
        player.physics_state == player.PhysicsState.CAN_WAKE_UP:
+      musicPlayer.stopAll()
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false
       yield(get_tree().create_timer(2.0), "timeout")
-      showInstructions = true
+      if player.physics_state == player.PhysicsState.COLLAPSED or \
+         player.physics_state == player.PhysicsState.CAN_WAKE_UP:
+        showInstructions = true
     elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
       is_start_of_game = false
       global.pauseMoveInput = false
@@ -47,6 +53,7 @@ func _process(_delta):
       player.textBox.interact()
       global.activeInteractor = player.textBox
       showInstructions = false
+      musicPlayer.stopAll()
   
   var pressCText = uiLayer.get_node("PressC")
   if global.isPauseMenuOpen or not showInstructions:

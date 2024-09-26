@@ -22,6 +22,7 @@ func setUpRoomInitializationOverride():
         cowNPC.textBox.textNode.bbcode_text = finalText
     transition.reverse_fade()
 
+onready var eventSoundWakeup = get_node("EventSoundWakeup")
 onready var eventSound1 = get_node("EventSound1")
 onready var eventSound2 = get_node("EventSound2")
 onready var eventSound3 = get_node("EventSound3")
@@ -87,11 +88,15 @@ func startGame():
   if was_intro_cutscene_skipped == 2: return
   player.aniPlayer.play("fall")
   eventSound1.play()
+  eventSound2.play()
+  musicPlayer.stopAll()
+  eventSoundWakeup.play()
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
   babushkaCat.mySprite.updateBaseFrame(2, 2)
   gameCamera.can_i_move = true
   eventSound1.play()
+  eventSound2.play()
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
   levelTiles.randomize_num = 3

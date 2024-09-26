@@ -115,6 +115,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     how_many_times_did_u_hit_me = 0
     if level.player.transformation != level.player.TransformationState.CHICKEN:
         level.player.gravitySound.play()
+        level.player.errorSound.play()
         level.player.getChickenInfected()
         level.player.chicken_timer = 0
 

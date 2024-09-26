@@ -511,6 +511,7 @@ starting_glitch_type = 3
 tileset_type = 6
 has_spellbook_page = true
 spellbook_spells = [ 3, 1 ]
+pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 11 )]
 
