@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=7]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
@@ -453,7 +454,7 @@ shape = SubResource( 38 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 11.9777, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods5.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 46 )
@@ -492,7 +493,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8, 19.8, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6, 14.7, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 14.7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1805, 14.2805, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7.89626, 0 )
@@ -519,6 +520,9 @@ texture = ExtResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 43 )
 texture = ExtResource( 28 )
+
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.3006, 0 )
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 11.6014, 0 )

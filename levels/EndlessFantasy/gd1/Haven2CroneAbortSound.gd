@@ -36,7 +36,7 @@ func activateScript():
         global.memory["crone"] = 3
       else:
         level.player.errorSound.play()
-        level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes) + " more gems.\nthis is strong magic y'know")
+        level.player.sayThis("need " + str(global.NUM_GEMS_FOR_ENCHANTED_BAG - num_cubes) + " more gems.\nthis is strong magic y'know")
   elif global.memory["crone"] == 3:
     if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:

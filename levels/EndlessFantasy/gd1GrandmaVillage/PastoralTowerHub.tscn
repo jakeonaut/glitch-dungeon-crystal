@@ -971,7 +971,7 @@ anims/stand = SubResource( 85 )
 shape = SubResource( 86 )
 
 [node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 37 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
 bbText = "•\"ELDER GRIMOIRE\" get!!
 never forget a spell
 again.

@@ -112,19 +112,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 0 )
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 1.5, 0 )
 
-[node name="FloorSpell2" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7, 11.5, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/FloorSpell2" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.981697, 14 )
-
-[node name="Obelisk" parent="Viewport/level/FloorSpell2" index="4"]
-flip_v = true
-
-[node name="SaveSpores" parent="Viewport/level/FloorSpell2" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52616, 0.165527 )
-flip_v = true
-
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, 0 )
 
@@ -189,6 +176,5 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 4 )]
 
-[editable path="Viewport/level/FloorSpell2"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

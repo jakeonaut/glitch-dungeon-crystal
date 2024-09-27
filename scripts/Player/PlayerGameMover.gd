@@ -326,7 +326,7 @@ func tryingToWakeUp():
 func pressingJump():
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
-  if transformation == TransformationState.UNDERGROUND:
+  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false

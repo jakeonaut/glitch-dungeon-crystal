@@ -6,10 +6,10 @@ onready var npcPlatformContainer = get_node("npcPlatforms")
 onready var croneNPC = get_node("CroneNPC")
 onready var croneNPCDefeated = get_node("CroneNPCDefeated")
 # onready var crystalGeode = get_node("CubeCrystal")
-onready var crystalGeode2 = get_node("CubeCrystal2")
-onready var crystalGeode3 = get_node("CubeCrystal3")
-onready var crystalGeode4 = get_node("CubeCrystal4")
-onready var crystalGeode5 = get_node("CubeCrystal5")
+onready var crystalGeode2 = weakref(get_node("CubeCrystal2"))
+onready var crystalGeode3 = weakref(get_node("CubeCrystal3"))
+onready var crystalGeode4 = weakref(get_node("CubeCrystal4"))
+onready var crystalGeode5 = weakref(get_node("CubeCrystal5"))
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var door = get_node("Door")
 
@@ -21,7 +21,7 @@ func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
     debug_start_boss_immediately = true
     highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
-  if crystalGeode.getMyStaticLevelZoneVar() and global.memory["priestess"] < 2:
+  if (crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar()) and global.memory["priestess"] < 2:
     debug_start_boss_immediately = true
 
   var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
@@ -34,7 +34,7 @@ func setUpRoomInitializationOverride():
     has_boss_started = true
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
-    global.setStaticLevelZoneLevelVar(self, crystalGeode, true)
+    global.setStaticLevelZoneLevelVar(self, crystalGeode.get_ref(), true)
     # var npcPlatforms = npcPlatformContainer.get_children()
     # for i in range(len(npcPlatforms)):
     #     npcPlatforms[i].visible = true
@@ -48,7 +48,8 @@ func setUpRoomInitializationOverride():
       has_boss_started = true
       is_defeated = true
       is_really_defeated = true
-      crystalGeode.visible = false
+      if crystalGeode.get_ref() != null:
+        crystalGeode.get_ref().visible = false
       pacman_wrapping = false
     else:
       yield(get_tree().create_timer(0.5), "timeout")
@@ -85,7 +86,7 @@ func _process(delta):
     return
 
   if not has_boss_started:
-    if crystalGeode.getMyStaticLevelZoneVar():
+    if crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar():
       has_boss_started = true
       levelTiles.randomize_num = 1
       aniPlayer.play("appear")
@@ -162,11 +163,12 @@ func unhideHighPriestess():
   global.pauseMoveInput = false
   global.pauseGame = false
   global.shouldRenderAsCinematic = false
-  crystalGeode.queue_free()
-  crystalGeode2.queue_free()
-  crystalGeode3.queue_free()
-  crystalGeode4.queue_free()
-  crystalGeode5.queue_free()
+  if crystalGeode.get_ref() != null:
+    crystalGeode.get_ref().queue_free()
+    crystalGeode2.get_ref().queue_free()
+    crystalGeode3.get_ref().queue_free()
+    crystalGeode4.get_ref().queue_free()
+    crystalGeode5.get_ref().queue_free()
   musicPlayer.stopAll()
   musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
   levelTiles.randomize_num = 1
