@@ -35,9 +35,9 @@ func setUpRoomInitializationOverride():
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
     global.setStaticLevelZoneLevelVar(self, crystalGeode.get_ref(), true)
-    # var npcPlatforms = npcPlatformContainer.get_children()
-    # for i in range(len(npcPlatforms)):
-    #     npcPlatforms[i].visible = true
+    var npcPlatforms = npcPlatformContainer.get_children()
+    for i in range(len(npcPlatforms)):
+        npcPlatforms[i].visible = true
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
@@ -52,10 +52,7 @@ func setUpRoomInitializationOverride():
         crystalGeode.get_ref().visible = false
       pacman_wrapping = false
     else:
-      yield(get_tree().create_timer(0.5), "timeout")
-      summonSmokeClouds(door.global_transform.origin, 3, true, true)
-      door.queue_free()
-      yield(get_tree().create_timer(0.5), "timeout")
+      pass
       # var npcPlatforms = npcPlatformContainer.get_children()
       # for i in range(len(npcPlatforms)):
       #     summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
@@ -80,7 +77,7 @@ func overrideLevelRespawnEvent():
 
 var random_tiles_timer = 0
 var random_tiles_time_limit = 10
-func _process(delta):
+func _process(_delta):
   # i hate this but _process is not guaranteed to occur AFTER setUpRoomInitializationOverride
   if not has_room_initialized:
     return

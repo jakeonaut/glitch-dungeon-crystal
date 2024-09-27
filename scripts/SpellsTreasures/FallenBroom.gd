@@ -255,7 +255,7 @@ func canActivate(area):
               (smacked_npc.get_ref().textBox == global.activeInteractor and \
                 !smacked_npc.get_ref().textBox.isWaitingForEndPrompt())))
 
-# dedupe with SummonedBroom
+# dedupe with SummonedBroom, why am i not using global.broomSmackStuff
 func hitStuff(_delta):
     if not visible or not projectile or should_die_on_land: return
         
@@ -290,6 +290,12 @@ func hitStuff(_delta):
                 # my_broom_owner.getSmacked()
                 if smackResult == null:
                     has_hit_something = true
+        elif area.is_in_group("bug") and is_active:
+            var areaParent = area.get_node("..")
+            if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+                var smackResult = areaParent.getSmacked(global_transform.origin)
+                if not area.is_in_group("tadpole") and smackResult == null:
+                    my_broom_owner.getSmacked()
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door") and not area.is_in_group("npc"):

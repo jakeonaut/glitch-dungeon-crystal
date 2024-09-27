@@ -598,6 +598,8 @@ func processJumpInputs(delta):
   .processJumpInputs(delta)
 
 func mushroomClone(trigger_another = true):
+  if smallInteractionArea.is_touching_carcass:
+    global_transform.origin.y += 1
   global_transform.origin.y += 1
   if not on_ground:
     global_transform.origin.y += 0.5
@@ -605,6 +607,7 @@ func mushroomClone(trigger_another = true):
   var carcass = spawnACarcass()
   carcass.broomSprite.visible = false
   carcass.mushroomSprite.visible = false
+  carcass.is_crumbling = true
   infectSound.play()
   glitchTickle()
   if trigger_another:

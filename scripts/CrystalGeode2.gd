@@ -189,9 +189,13 @@ func getPurified():
     global.setLevelZoneThing("crystal_geode", true)
     level.saveTheGame()
 
+export var spawn_an_elder = true
 # actually "spawn elderNPC" but the animations are already calling it...
 func freeUpPlayer():
     is_active = false
+
+    if not spawn_an_elder or high_priestess_crystal:
+        return
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
     elderNPC.mySprite.updateBaseFrame(0, 1)

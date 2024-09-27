@@ -709,48 +709,6 @@ material_override = SubResource( 22 )
 [node name="CollisionShape" parent="Viewport/level/Mushroom2/FallthroughSolid" index="0"]
 shape = SubResource( 23 )
 
-[node name="Mushroom6" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4826, 3.79816, -1 )
-
-[node name="Sprite3D" parent="Viewport/level/Mushroom6" index="0"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D12" parent="Viewport/level/Mushroom6" index="1"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D2" parent="Viewport/level/Mushroom6" index="2"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D3" parent="Viewport/level/Mushroom6" index="3"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D4" parent="Viewport/level/Mushroom6" index="4"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D5" parent="Viewport/level/Mushroom6" index="5"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D9" parent="Viewport/level/Mushroom6" index="6"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D10" parent="Viewport/level/Mushroom6" index="7"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D11" parent="Viewport/level/Mushroom6" index="8"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D6" parent="Viewport/level/Mushroom6" index="9"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D7" parent="Viewport/level/Mushroom6" index="10"]
-material_override = SubResource( 22 )
-
-[node name="Sprite3D8" parent="Viewport/level/Mushroom6" index="11"]
-material_override = SubResource( 22 )
-
-[node name="CollisionShape" parent="Viewport/level/Mushroom6/FallthroughSolid" index="0"]
-shape = SubResource( 23 )
-
 [node name="Mushroom5" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.902, -0.434841, -1 )
 
@@ -794,7 +752,7 @@ material_override = SubResource( 22 )
 shape = SubResource( 23 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.902, 6.09915, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.902, 5.09915, -1 )
 
 [node name="Sprite3D" parent="Viewport/level/Mushroom3" index="0"]
 material_override = SubResource( 22 )
@@ -1177,7 +1135,10 @@ texture = ExtResource( 31 )
 
 [node name="Door2" parent="Viewport/level/GeodeSpawner" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 16, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
+is_locked = true
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+num_keys_unlock = 2
+key_type = 5
 
 [node name="ActiveCollisionShape" parent="Viewport/level/GeodeSpawner/Door2/InteractionArea" index="0"]
 shape = SubResource( 36 )
@@ -1294,7 +1255,6 @@ flip_v = true
 [editable path="Viewport/level/SavePoint2"]
 [editable path="Viewport/level/Mushroom"]
 [editable path="Viewport/level/Mushroom2"]
-[editable path="Viewport/level/Mushroom6"]
 [editable path="Viewport/level/Mushroom5"]
 [editable path="Viewport/level/Mushroom3"]
 [editable path="Viewport/level/Mushroom12"]

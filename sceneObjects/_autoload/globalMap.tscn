@@ -542,11 +542,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 
-[node name="LostWoods3" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
-frame = 50
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
-
 [node name="LostWoods4" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8, 0 )
 frame = 50
@@ -614,7 +609,7 @@ frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub1.tscn"
 
 [node name="005TidepoolCaves" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 

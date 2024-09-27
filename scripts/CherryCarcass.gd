@@ -73,9 +73,9 @@ func _process(delta):
 
     if is_crumbling:
         broomSprite.visible = false
-        opacity -= delta/5
-        shake_color_rate += delta/2000
-        shake_power += delta/100
+        opacity -= delta/15
+        shake_color_rate += delta/6000
+        shake_power += delta/300
         mySprite.material_override.set_shader_param("shake_color_rate", shake_color_rate)
         mySprite.material_override.set_shader_param("shake_power", shake_power)
         mySprite.material_override.set_shader_param("opacity", opacity)
@@ -84,20 +84,30 @@ func _process(delta):
             
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
-        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            # queue_free()
-            returning_to_save_point = 1
-            returning_recover_time = 0
-            pauseSelf = true
-            ignorePhysics = true
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("fall")
-            pauseAnimation = true
-            physics_state = PhysicsState.GLITCH_RECOVERY
+        if level.pacman_wrapping:
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().leftmost_x + DEATH_MARGIN
+            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().rightmost_x - DEATH_MARGIN
+            if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+                global_transform.origin.y = getGameCamera().botmost_y + DEATH_MARGIN
+            if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+                global_transform.origin.y = getGameCamera().topmost_y - DEATH_MARGIN
+        else:
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+            global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+            global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+            global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+                queue_free()
+            # returning_to_save_point = 1
+            # returning_recover_time = 0
+            # pauseSelf = true
+            # ignorePhysics = true
+            # secretAniPlayer.stop()
+            # secretAniPlayer.clear_queue()
+            # secretAniPlayer.play("fall")
+            # pauseAnimation = true
+            # physics_state = PhysicsState.GLITCH_RECOVERY
 
     if returning_to_save_point == 1:
         linear_velocity = Vector3(0, 0, 0)

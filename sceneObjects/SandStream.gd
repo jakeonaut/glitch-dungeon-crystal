@@ -16,7 +16,7 @@ func passiveActivate(delta, is_player):
     return
   level.player.target_last_grounded_y = level.player.global_transform.origin.y
   level.player.is_touching_sandstream = true
-  var value = 1
+  var value = 2
   level.player.global_transform.origin.y -= (delta*value)
   level.player.on_ground = true
   # if global.memory["zora_flippers"] == 0:

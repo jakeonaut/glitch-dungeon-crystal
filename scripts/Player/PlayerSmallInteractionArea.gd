@@ -8,6 +8,7 @@ var is_touching_waterfall = false
 var is_touching_door = false
 var touched_water_area = null
 var is_touching_ladder = false
+var is_touching_carcass = false
 var water_y = 0 # what does it do? nothing.y
 
 func _ready():
@@ -28,6 +29,7 @@ func _process(delta):
     is_touching_door = false
     touched_water_area = null
     is_touching_ladder = false
+    is_touching_carcass = false
     var areas = get_overlapping_areas()
     for area in areas:
         # always interact with passive interaction areas
@@ -52,6 +54,8 @@ func _process(delta):
             var door = area.get_node("..")
             if door.is_unlocking or door.is_passive or not door.visible:
                 is_touching_door = false
+        if area.is_in_group("carcass"):
+            is_touching_carcass = true
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           (global.activeInteractor == null or global.activeInteractor.is_tiny) and \

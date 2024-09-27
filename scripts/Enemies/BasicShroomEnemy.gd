@@ -10,6 +10,7 @@ func _ready():
   mySprite.set_material_override(mySprite.get_material_override().duplicate())
 
   smallInteractionArea.add_to_group("no_pushems")
+  only_activate_in_range = false
 
 func setAsParent(_owner):
   walk_direction.x = 1
@@ -67,13 +68,23 @@ func infectGlitchEnemies():
 # @override
 func tryDieToOffscreenCamera():
     var DEATH_MARGIN = 5
-    if getGameCamera().rightmost_x > -999:
-        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            setGlobalMemoryOfHasBeenDefeated()
-            queue_free()
+    if level.pacman_wrapping:
+        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+            global_transform.origin.x = getGameCamera().leftmost_x
+        if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+            global_transform.origin.x = getGameCamera().rightmost_x
+        if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+            global_transform.origin.y = getGameCamera().botmost_y
+        if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            global_transform.origin.y = getGameCamera().topmost_y
+    else:
+      if getGameCamera().rightmost_x > -999:
+          if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+          global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+          global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+          global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+              setGlobalMemoryOfHasBeenDefeated()
+              queue_free()
 
 
 # @override ?
