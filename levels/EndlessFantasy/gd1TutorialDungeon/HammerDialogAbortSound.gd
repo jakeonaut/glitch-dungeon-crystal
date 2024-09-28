@@ -13,7 +13,7 @@ func activateScript():
   var num_gems_needed = 20
   if num_gems < 20:
     level.player.errorSound.play()
-    level.player.sayThis("need " + str(num_gems_needed - num_gems) + " more gems")
+    level.player.sayThis("need " + str(num_gems_needed - num_gems) + " more shards")
     return
 
   if not global.memory["broomerang"]:

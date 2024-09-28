@@ -128,6 +128,16 @@ func _process(delta):
     control_index = 0
     last_control_index = -1
 
+  if Input.is_action_just_pressed("dev_demo_reset"):
+    global.has_started_game = true
+    global.has_really_started_game = true
+    global.memory.erase("roomPath")
+    global.resetMemory()
+    global.isPauseMenuOpen = false
+    global.pauseGame = false
+    global.currLevelZone = null
+    transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
+
 
 var normalMenuOptions = ["RESUME", "GRAPHICS", "SOUND", "INPUT", "QUIT TO MAIN"]
 var normalMenuOptionsOnMainMenu = ["RESUME", "GRAPHICS", "SOUND", "INPUT"]
@@ -330,9 +340,11 @@ func processQuitToMainLogic(_delta):
 
   if Input.is_action_just_pressed("sub_action_button"):
     if quitToMainOptionIndex == 0:
+      # dedupe (ish) with "dev_demo_reset" above
       global.has_started_game = false
       global.has_really_started_game = false
       global.resetMemory()
+      global.currLevelZone = null
       transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
       global.isPauseMenuOpen = false
     elif quitToMainOptionIndex == 1:

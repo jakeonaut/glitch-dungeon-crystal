@@ -260,7 +260,7 @@ var should_freeze = false
 var is_frozen = false
 func unsmack():
     am_i_hurt = false
-    mySprite.material_override.set_shader_param("time_influence", 3)
+    mySprite.material_override.set_shader_param("time_influence", 16)
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
     mySprite.material_override.set_shader_param("shake_power", 0.03)
@@ -588,10 +588,11 @@ func getMushroomInfected(shroom_pos, _ignore_ancestor = false):
     mushroom_infected = true
     getSmacked(global_transform.origin, true)
 
-    if mushroomEmbiggensMe and self.scale.x < 8:
-        self.scale.x *= 2
-        self.scale.y *= 2
-        self.scale.z *= 2
+    if mushroomEmbiggensMe:
+        if self.scale.x < 8:
+            self.scale.x *= 2
+            self.scale.y *= 2
+            self.scale.z *= 2
         return
 
     var babyTransform = Vector3(0, 0, 0)

@@ -1003,9 +1003,6 @@ material_override = SubResource( 22 )
 [node name="CollisionShape" parent="Viewport/level/Mushroom7/FallthroughSolid" index="0"]
 shape = SubResource( 23 )
 
-[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9797, 3.88038, 0 )
-
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 7, -3 )
 visible = false

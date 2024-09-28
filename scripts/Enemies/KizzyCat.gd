@@ -86,6 +86,7 @@ func landed():
   behavior_jumping = false
 
 var old_broom_origin = null
+var my_shroom = null
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or has_ever_been_smacked:
@@ -101,6 +102,11 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   on_ground = true
   notDieSound.play()
   old_broom_origin = broom_origin
+
+  if my_shroom != null:
+    my_shroom.queue_free()
+    my_shroom = null
+
   var babyShroom = basicShroomEnemyRes.instance()
   if old_broom_origin.x > self.global_transform.origin.x:
     babyShroom.walk_direction.x = -1
@@ -108,6 +114,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     babyShroom.walk_direction.x = 1
   level.add_child(babyShroom)
   babyShroom.global_transform.origin = self.global_transform.origin
+  my_shroom = babyShroom
 
 # @override
 func unsmack():

@@ -19,7 +19,7 @@ func activateScript():
     initial_text = "•my hammer! I can smith again!\n•that broom.. well, it's\nno sword, but I can make do\n•speake with me to enchant it"
     textBox.showYesNoOptions = false
   elif not global.memory["broomerang"] or not global.memory["multi_broom"]:
-    initial_text = "•I can infuse 20 gems\ninto your broom handle to\nenchant it. yes?"
+    initial_text = "•I can infuse 20 shards\ninto your broom handle to\nenchant it. yes?"
     textBox.showYesNoOptions = true
   else:
     initial_text = "•I can helpe you no more."

@@ -17,7 +17,7 @@ func activateScript():
       mimicNPC.is_active = false
     else:
       level.player.errorSound.play()
-      level.player.sayThis("need " + str(mimic.num_gems_needed - num_gems) + " more gems")
+      level.player.sayThis("need " + str(mimic.num_gems_needed - num_gems) + " more shards")
   level.player.pauseInput = false
     
 func preActivateScript():

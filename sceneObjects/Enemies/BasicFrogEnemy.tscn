@@ -188,8 +188,8 @@ shader_param/offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 3.0
 shader_param/texture_albedo = SubResource( 125 )
 shader_param/base_palette = ExtResource( 17 )
 shader_param/real_base_palette = ExtResource( 18 )
@@ -1964,7 +1964,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
 shape = SubResource( 7 )
 
 [node name="TileSpikes" type="Spatial" parent="."]
-visible = false
 
 [node name="Spikes3" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.75, 0 )

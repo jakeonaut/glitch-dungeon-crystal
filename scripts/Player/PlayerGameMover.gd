@@ -90,6 +90,7 @@ func processPauseAnimation():
   
 onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
 onready var interactPromptSprite = get_node("InteractPrompt")
+var override_camera_y = null
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
@@ -142,7 +143,10 @@ func _process(delta):
   cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
   if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
-  cameraTarget.global_transform.origin.y = target_last_grounded_y + camera_y_offset
+  if override_camera_y == null:
+    cameraTarget.global_transform.origin.y = target_last_grounded_y + camera_y_offset
+  else:
+    cameraTarget.global_transform.origin.y = override_camera_y
 
   adjustStuffForNestingDolls()
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():
@@ -597,6 +601,7 @@ func processJumpInputs(delta):
         
   .processJumpInputs(delta)
 
+var my_carcasses = []
 func mushroomClone(trigger_another = true):
   if smallInteractionArea.is_touching_carcass:
     global_transform.origin.y += 1
@@ -607,7 +612,11 @@ func mushroomClone(trigger_another = true):
   var carcass = spawnACarcass()
   carcass.broomSprite.visible = false
   carcass.mushroomSprite.visible = false
-  carcass.is_crumbling = true
+  # carcass.is_crumbling = true
+  my_carcasses.push_back(carcass)
+  if len(my_carcasses) > 6:
+    var crumbled_carcass = my_carcasses.pop_front()
+    crumbled_carcass.queue_free()
   infectSound.play()
   glitchTickle()
   if trigger_another:

@@ -19,7 +19,7 @@ func activateScript():
     initial_text = "•sorry old-timer,\ni got nothin else."
     textBox.showYesNoOptions = false
   else:
-    initial_text = "•pssst, i'll trade you\n" + mimic.trade_item + ", for " + str(mimic.num_gems_needed) + " gems.\nwhaddyasay..?"
+    initial_text = "•pssst, i'll trade you\n" + mimic.trade_item + ", for " + str(mimic.num_gems_needed) + " shards.\nwhaddyasay..?"
     textBox.showYesNoOptions = true
 
   var finalText = initial_text

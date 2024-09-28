@@ -1096,6 +1096,7 @@ var dig_below_timer = 0
 var dig_below_time_limit = 20
 func processMoleLogic(delta):
   if transformation == TransformationState.UNDERGROUND:
+    override_camera_y = global_transform.origin.y
     if not pressingDown():
       transformation = TransformationState.UNDERGROUND_RETURNING
     fastStepSound.pitch_scale = 0.8
@@ -1146,6 +1147,7 @@ func processMoleLogic(delta):
         getMoleCured()
 
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
+    override_camera_y = global_transform.origin.y
     dig_below_timer = 0
     glitchTilesAroundMe(-2.5)
     fastStepSound.pitch_scale = 2.0
@@ -1196,6 +1198,7 @@ func processMoleLogic(delta):
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
     return
+  override_camera_y = null
   transformation = TransformationState.NORMAL
   global_transform.origin.y -= 2
   summonSmokeClouds(5, true, true, 0)
