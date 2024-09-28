@@ -539,6 +539,7 @@ func trySpawnFollowers():
           ))
 
 func purifyAllWeakEnemies():
+  return # a little buggy
   var weak_enemies = self.get_tree().get_nodes_in_group("weak_enemies")
   for weak_enemy in weak_enemies:
     if weak_enemy.isActive() and not weak_enemy.am_i_dying:
