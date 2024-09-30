@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -31,6 +31,9 @@
 [ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/Enemies/TadpoleEnemy.tscn" type="PackedScene" id=31]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=32]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/GlitchedGrimoire.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=34]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 7 )
@@ -520,7 +523,10 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 25 )
 show_dither_effect = true
+starting_glitch_type = 1
 tileset_type = 2
+has_spellbook_page = true
+spellbook_spells = [ 2, 1 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 16 )]
 
@@ -816,6 +822,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 18, 0 )
+
+[node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1.53421, 0 )
+
+[node name="InvisibleSpell" parent="Viewport/level/LadderSpell" instance=ExtResource( 34 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.53421, 5.60263, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 28 )]
 

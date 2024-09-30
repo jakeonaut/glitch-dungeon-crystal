@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GLITCH DUNGEON CRYSTAL"
+config/name="Glitch Dungeon Crystal: Grandma's Quest Demo"
 run/main_scene="res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://splash.png"
