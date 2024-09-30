@@ -202,7 +202,7 @@ func _ready():
 func resetMemory():
     memory = {}
 
-    memory["demo_mode"] = 1
+    memory["demo_mode"] = 0
     # settings?
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
