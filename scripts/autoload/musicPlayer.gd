@@ -157,7 +157,7 @@ func conductFromScenePath(path):
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:
         tryToPlay(swampThemePlayer)
-    elif path.find("gd1CrystalTower") > 0:
+    elif path.find("gd1CrystalTower") > 0 or path.find("entrance_to_tower") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("gd1GrandmaVillage") > 0:
         tryToPlay(dungeonThemePlayer)

@@ -572,6 +572,13 @@ func unrandomizeTile(cell_index):
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
   return true
 
+var rand_tile_timers = []
+func clearRandomTileTimers():
+  while len(rand_tile_timers) > 0:
+    var randTileTimerRef = rand_tile_timers.pop_back()
+    if randTileTimerRef and randTileTimerRef.get_ref():
+      randTileTimerRef.get_ref().queue_free()
+
 func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
   if rand_timer: 
     var timer = Timer.new() # get_tree().create_timer(rand_range(0, 1))
@@ -580,6 +587,7 @@ func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
     timer.one_shot = true
     timer.start()
     timer.connect("timeout", self, "rerandomizeTile", [ cell_index, glitch_type, false ])
+    rand_tile_timers.push_back(weakref(timer))
     return
   if unrandomizeTile(cell_index):
     randomizeTile(cell_index, glitch_type)

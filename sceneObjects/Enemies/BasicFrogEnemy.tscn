@@ -1964,6 +1964,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
 shape = SubResource( 7 )
 
 [node name="TileSpikes" type="Spatial" parent="."]
+visible = false
 
 [node name="Spikes3" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.75, 0 )
@@ -1998,7 +1999,7 @@ script = ExtResource( 16 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TongueController/TongueArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, -0.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, -0.26, 0 )
 visible = false
 shape = SubResource( 147 )
 

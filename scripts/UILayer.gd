@@ -228,7 +228,7 @@ func _process(delta):
     if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null :
       miniCrystalTextureRect.texture = miniCrystalViewport.get_texture()
     get_node("GlitchStatusRect").visible = true
-    tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(480, 65))
+    tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(480, 56))
     # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
   if not global.memory.has("spellbookPage"):
     tryLerpFromCenter(glitchSpriteContainer, delta, Vector2(7.5, 7))

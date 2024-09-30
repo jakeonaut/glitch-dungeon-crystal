@@ -525,11 +525,13 @@ func tryDieToOffscreenCamera(delta):
   if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(-1, 0, 0)
     repositioned_player.x = getGameCamera().leftmost_x - ADJUSTMENT_MARGIN
-  DEATH_MARGIN = 0
-  ADJUSTMENT_MARGIN = 0
+  DEATH_MARGIN = 1
+  ADJUSTMENT_MARGIN = 1
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
+    if transformation == TransformationState.BUBBLE:
+      getBubbleCured()
   # only relocate back to safety if off bottom screen
   if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, -1, 0)
@@ -721,6 +723,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
   var lb = x - shape.shape.extents.x/2*shape.scale.x - margin
   var rb = x + shape.shape.extents.x/2*shape.scale.x + margin
   
+  lt.clearRandomTileTimers()
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))

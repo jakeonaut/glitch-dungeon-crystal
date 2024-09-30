@@ -34,6 +34,9 @@ func _ready():
   mySprite.max_frames = 2
   mySprite.updateBaseFrame(0, 0)
   mySprite.set_material_override(mySprite.get_material_override().duplicate())
+  if is_bubble_spitter:
+    mySprite.material_override.set_shader_param("target_palette", global.base_palette)
+    mySprite.material_override.set_shader_param("offset", -1)
   if tongueSprite:
     var tongueSpriteMaterial = tongueSprite.get_material_override().duplicate()
     tongueSprite.set_material_override(tongueSpriteMaterial)
@@ -55,7 +58,7 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
-    if tongueAniPlayer.assigned_animation == "gulpIdle":
+    if tongueAniPlayer != null and tongueAniPlayer.assigned_animation == "gulpIdle":
       # if Input.is_action_pressed("ui_left"):
       #   mySprite.flip_h = true
       # elif Input.is_action_pressed("ui_right"):
@@ -115,11 +118,11 @@ func _process(delta):
         jump_timer = 0
 
     if on_ground and is_static and (not is_infected or is_licker):
-      if not is_licker or not tongueAniPlayer or not tongueAniPlayer.is_playing():
+      if not is_licker or tongueAniPlayer == null or not tongueAniPlayer.is_playing():
         spawn_timer += (delta*22)
         if spawn_timer >= spawn_time_limit: # or (is_touching_water and spawn_timer >= water_jump_time_limit):
             spawn_timer = 0
-            if is_licker and tongueAniPlayer:
+            if is_licker and tongueAniPlayer != null:
               tongueAniPlayer.stop()
               tongueAniPlayer.clear_queue()
               if mySprite.flip_h:
@@ -132,7 +135,7 @@ func _process(delta):
                 tongueAniPlayer.queue("lickRight")
             else:
               spawnABubble(blow_bubble_horizontally)
-  elif behavior_jumping and tongueAniPlayer and tongueAniPlayer.is_playing():
+  elif behavior_jumping and tongueAniPlayer != null and tongueAniPlayer.is_playing():
     pass
   else:
     spawn_timer = 0
@@ -170,7 +173,7 @@ func startGulp():
     level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
     notDieSound.play()
 
-onready var tongueController = get_node("TongueController")
+onready var tongueController = get_node("TongueController") if has_node("TongueController") else null
 var SPIT_OFFSET = Vector2(0.2, 0.1)
 func spitOut():
   level.player.global_transform.origin = self.global_transform.origin
@@ -184,8 +187,9 @@ func spitOut():
   gulpin = false
   level.player.visible = true
   level.player.on_ground = true
-  tongueController.hooked = false
-  tongueController.hookTarget = null
+  if tongueController != null:
+    tongueController.hooked = false
+    tongueController.hookTarget = null
   level.player.glitchTickle()
   level.player.tumbleFall(mySprite.flip_h)
   if is_bubble_spitter:
@@ -194,6 +198,8 @@ func spitOut():
     level.player.physics_state = level.player.PhysicsState.NORMAL
 
 func queueGulpAnimation():
+  if tongueAniPlayer == null:
+    return
   var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
   gulpIdleAnimation.loop = false
   gulpIdleAnimation.length = 1.4
@@ -201,6 +207,8 @@ func queueGulpAnimation():
   # tongueAniPlayer.queue("spitOut")
 
 func unqueueGulpAnimation():
+  if tongueAniPlayer == null:
+    return
   var queuedAnimations = tongueAniPlayer.get_queue()
   tongueAniPlayer.clear_queue()
   for aniName in queuedAnimations:
@@ -224,13 +232,13 @@ func tryDieToOffscreenCamera():
 
 # @override
 func justPressedJump():
-  if tongueAniPlayer and tongueAniPlayer.is_playing():
+  if tongueAniPlayer != null and tongueAniPlayer.is_playing():
     return false
   return .justPressedJump()
 
 # @override
 func pressingJump():
-  if tongueAniPlayer and tongueAniPlayer.is_playing():
+  if tongueAniPlayer != null and tongueAniPlayer.is_playing():
     return false
   return .pressingJump()
 
@@ -292,15 +300,16 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   # stop the lick
-  if is_licker:
+  if is_licker and tongueAniPlayer != null:
     mySprite.flip_h = not mySprite.flip_h
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
     if gulpin:
       tongueAniPlayer.play("spitOut")
     else:
-      tongueController.restorePlayer()
-      tongueAniPlayer.play("RESET")
+      if tongueController != null:
+        tongueController.restorePlayer()
+        tongueAniPlayer.play("RESET")
     return
   behavior_jumping = true
   behavior_walking = not is_static

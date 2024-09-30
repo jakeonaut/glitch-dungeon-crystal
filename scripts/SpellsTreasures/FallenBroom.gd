@@ -58,18 +58,20 @@ func _process(delta):
         if not should_return:
             die()
             return
+        hitStuff(delta)
         returning_timer += (delta*22)
 
         pauseSelf = true
-        is_active = false
+        is_active = true
+        # is_active = false
         okay_im_really_done_bye = true
         grav = 0
         behavior_was_thrown = false
         behavior_walking = false
         if walk_direction.x == 1:
-            get_node("SecretAnimationPlayer").play("returnAirSpinReverse")
+            get_node("SecretAnimationPlayer").play("AirSpinReverse")
         else:
-            get_node("SecretAnimationPlayer").play("returnAirSpin")
+            get_node("SecretAnimationPlayer").play("AirSpin")
 
         var pos = global_transform.origin
         var playerPos = level.player.global_transform.origin
@@ -257,7 +259,7 @@ func canActivate(area):
 
 # dedupe with SummonedBroom, why am i not using global.broomSmackStuff
 func hitStuff(_delta):
-    if not visible or not projectile or should_die_on_land: return
+    if not visible or (not projectile and not was_projectile) or should_die_on_land: return
         
     var my_broom_owner = level.player
     var has_hit_something = false
