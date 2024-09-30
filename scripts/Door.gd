@@ -97,28 +97,9 @@ func _ready():
   else: 
     animationPlayer.play("doorOpen")
 
-  if key_type == null:
-    key_type = global.KeyItem.NORMAL
   if is_locked:
-    if key_type == global.KeyItem.NORMAL:
-      var num_keys = global.getLevelZoneThing("key")
-      if num_keys == null or num_keys == 0:
-        if num_keys_unlock == 1:
-          npc.textBoxContainer.bbText = "•locked,\nneeds a key"
-        else:
-          npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
-      elif num_keys != null and num_keys < num_keys_unlock:
-        prev_keys = num_keys
-        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " [wave]more[/wave] keys\n(" + str(num_keys_unlock) +" total)"
-      else:
-        prev_keys = num_keys
-        npc.textBoxContainer.bbText = "•"
-    else:
-      var x_more_crystals = num_keys_unlock - global.memory["clean_crystals"]
-      var key_name = getKeyName(x_more_crystals)
-      npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
+    npc.textBoxContainer.bbText = "•see DoorDialogStartSound.gd"
     npc.textBoxContainer.setVars()
-    npc.textBox.can_camera_zoom = false
   else:
     npc.visible = false 
     npc.can_activate = false
@@ -189,26 +170,6 @@ func _process(delta):
 
   # if is_passive:
   #   spawnParticles(delta)
-
-  if locked_to_monsters:
-    npc.textBoxContainer.bbText = "•it won't open"
-    npc.textBoxContainer.setVars()
-  elif key_type == global.KeyItem.NORMAL:
-    var num_keys = global.getLevelZoneThing("key")
-    if prev_keys != num_keys and is_locked:
-      prev_keys = num_keys
-      if num_keys == null or num_keys == 0:
-        if num_keys_unlock == 1:
-          npc.textBoxContainer.bbText = "•locked,\nneeds a key"
-        else:
-          npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock) + " keys"
-      elif num_keys != null and num_keys < num_keys_unlock:
-        npc.textBoxContainer.bbText = "•locked,\nneeds " + str(num_keys_unlock - num_keys) + " more key"
-      else:
-        npc.textBoxContainer.bbText = "•"
-      npc.textBoxContainer.setVars()
-  else:
-    pass
 
   if is_unlocking and not keySound.playing:
     if unlocking_key_array.size() == 0:
