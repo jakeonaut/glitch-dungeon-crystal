@@ -2784,7 +2784,7 @@ flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 11 )]
 
-[node name="CinematicAnimationPlayer" parent="UILayer" index="2"]
+[node name="CinematicAnimationPlayer" parent="UILayer" index="3"]
 anims/RESET = SubResource( 192 )
 anims/endCutscene = SubResource( 193 )
 anims/startCutscene = SubResource( 194 )
@@ -2802,7 +2802,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 254 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="SkipText" type="RichTextLabel" parent="UILayer"]
 visible = false
@@ -2949,4 +2949,5 @@ scroll_active = false
 [editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="UILayer"]
+[editable path="UILayer/EdgeDistortion"]
 [editable path="ScreenEffects"]
