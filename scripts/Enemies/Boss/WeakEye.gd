@@ -13,6 +13,8 @@ func _ready():
   secretAniPlayer.clear_queue()
   secretAniPlayer.queue("blinkOpen")
   secretAniPlayer.queue("blinkIdle")
+  if global.memory["broomerang"] <= 0:
+    secretAniPlayer.queue("blinkIdle")
   secretAniPlayer.queue("blinkClose")
 
 

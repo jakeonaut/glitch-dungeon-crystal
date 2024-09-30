@@ -143,26 +143,38 @@ func _process(delta):
 
 var x_margin = 0
 var y_margin = 0
+var x_edge = 0
+var y_edge = 0
 func respectLevelTilesEdges():
   # respect left and right, dependent on gameCamera size
   x_margin = 10 - ((15-self.size)/1.5)
   if global_transform.origin.x < leftmost_x + x_margin:
     global_transform.origin.x = leftmost_x + x_margin
+    x_edge = -1
   if global_transform.origin.x > rightmost_x - x_margin:
     global_transform.origin.x = rightmost_x - x_margin
+    x_edge = 1
+  if global_transform.origin.x > leftmost_x + x_margin and global_transform.origin.x < rightmost_x - x_margin:
+    x_edge = 0
   # if it's too small
   var x_median = (rightmost_x + leftmost_x) / 2
   # x_median = -19.5
   if rightmost_x - leftmost_x < x_margin * 2:
     global_transform.origin.x = x_median
+    x_edge = 2
     
   # respect top and bottom, dependent on gameCamera size
   y_margin = 7.5 - ((15-self.size)/2)
   if global_transform.origin.y < botmost_y + y_margin:
     global_transform.origin.y = botmost_y + y_margin
+    y_edge = -1
   if global_transform.origin.y > topmost_y - y_margin:
     global_transform.origin.y = topmost_y - y_margin
+    y_edge = 1
+  if global_transform.origin.y > botmost_y + y_margin and global_transform.origin.y < topmost_y - y_margin:
+    x_edge = 0
   # if it's too small
   var y_median = (topmost_y + botmost_y) / 2
   if topmost_y - botmost_y < y_margin * 2:
     global_transform.origin.y = y_median
+    y_edge = 2

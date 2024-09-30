@@ -103,9 +103,9 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   notDieSound.play()
   old_broom_origin = broom_origin
 
-  if my_shroom != null:
-    my_shroom.queue_free()
-    my_shroom = null
+  # if my_shroom != null:
+  #   my_shroom.queue_free()
+  #   my_shroom = null
 
   var babyShroom = basicShroomEnemyRes.instance()
   if old_broom_origin.x > self.global_transform.origin.x:

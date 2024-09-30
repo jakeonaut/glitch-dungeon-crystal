@@ -42,7 +42,7 @@ onready var passiveCollisionShape = get_node("InteractionArea/PassiveCollisionSh
 var is_on_main_menu = false
 
 export var is_immediate = false
-export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL") onready var key_type
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL", "ZONE_CRYSTAL") onready var key_type
 
 var gameCamera = null
 func getGameCamera():
@@ -123,6 +123,7 @@ func _ready():
     npc.visible = false 
     npc.can_activate = false
     npc.is_active = false
+  meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
 
   # if _generateChickens and num_keys_unlock < 10:
   #   yield(get_tree().create_timer(0.5), "timeout")
@@ -139,6 +140,8 @@ func getKeyName(x_more_crystals):
     key_name = "CAT KEY"
   elif key_type == global.KeyItem.CRYSTAL:
     key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
+  elif key_type == global.KeyItem.ZONE_CRYSTAL:
+    key_name = "purify [wave]CRYSTAL[/wave]\n in this zone"
   return key_name
 
 func spawnChicken():
@@ -150,7 +153,12 @@ func spawnChicken():
   freeChicken.spawn_origin = freeChicken.global_transform.origin
   level.summonSmokeClouds(freeChicken.global_transform.origin, 1, false, true)
     
+onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
+  if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL:
+    meshInstance2.visible = true
+    meshInstance2.rotation_degrees.y += delta*22
+
   if is_passive and parter_door_id:
     canPlayDoorSound = false
 
@@ -312,6 +320,18 @@ func activate(is_player):
           # npc.textBoxContainer.bbText = "•you are worthy"
           # npc.textBoxContainer.setVars()
           # npc.activate(is_player)
+          # was_i_just_unlocked = true # this isn't working cuz startDoorUnlock ignores textbox
+          # need to put startDoorunlock in abortSound...
+          startDoorUnlock()
+        elif not lockedSound.is_playing():
+          lockedSound.play()
+          npc.activate(is_player)
+      elif key_type == global.KeyItem.ZONE_CRYSTAL:
+        var has_special_key = global.getLevelZoneThing("crystal_geode")
+        if has_special_key:
+          # npc.textBoxContainer.bbText = "•you are worthy"
+          # npc.textBoxContainer.setVars()
+          # npc.activate(is_player)
           # was_i_just_unlocked = true
           startDoorUnlock()
         elif not lockedSound.is_playing():
@@ -353,7 +373,7 @@ func startDoorUnlock():
           if unlocking_key_array.size() >= num_keys_unlock:
             break
         
-    if not key_type == global.KeyItem.CRYSTAL:
+    if not key_type == global.KeyItem.CRYSTAL and not key_type == global.KeyItem.ZONE_CRYSTAL:
       global.setLevelZoneThing("key", num_keys - num_keys_unlock)
   npc.visible = false 
   npc.can_activate = false
@@ -384,7 +404,7 @@ func startDoorUnlock():
 
 func actuallyUnlockAndEnterDoor():
   # level.displayMessageText("unlocked!")
-  if key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL:
+  if key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL:
     global.memory["key_items"][key_type] = global.ItemState.USED_IT
   animationPlayer.clear_queue()
   animationPlayer.stop()
@@ -595,5 +615,7 @@ func queueLockAnimation():
     animationPlayer.queue("catLocked")
   elif key_type == global.KeyItem.CRYSTAL:
     animationPlayer.queue("crystalLocked")
+  elif key_type == global.KeyItem.ZONE_CRYSTAL:
+    animationPlayer.queue("crystalZoneLocked")
   else:
     animationPlayer.queue("locked")

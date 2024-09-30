@@ -52,12 +52,11 @@ func setUpRoomInitializationOverride():
         crystalGeode.get_ref().visible = false
       pacman_wrapping = false
     else:
-      pass
-      # var npcPlatforms = npcPlatformContainer.get_children()
-      # for i in range(len(npcPlatforms)):
-      #     summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
-      #     npcPlatforms[i].visible = true
-      #     yield(get_tree().create_timer(0.5), "timeout")
+      var npcPlatforms = npcPlatformContainer.get_children()
+      for i in range(len(npcPlatforms)):
+          summonSmokeClouds(npcPlatforms[i].global_transform.origin, 2, true, true)
+          npcPlatforms[i].visible = true
+          yield(get_tree().create_timer(0.5), "timeout")
 
 # @override
 func playMenuMusic():

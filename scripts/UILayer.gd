@@ -94,6 +94,11 @@ onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
 onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
 onready var pauseMenu = get_node("PauseMenu")
 onready var textBoxes = get_node("TextBoxes")
+onready var edgeDistortion = get_node("EdgeDistortion")
+onready var edgeDistortionLeft = get_node("EdgeDistortion/LeftDistortion")
+onready var edgeDistortionRight = get_node("EdgeDistortion/RightDistortion")
+onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
+onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
 func _process(delta):
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
@@ -244,6 +249,16 @@ func _process(delta):
     spellbookSprite.frame = 2
   else:
     spellbookSprite.frame = 0
+
+  if global.memory["canGlitchScreen"] and level.pacman_wrapping:
+    edgeDistortion.visible = true
+    # x_edge/y_edge is finnicky in PoisonShroomCove/LostWoods1
+    # edgeDistortionLeft.visible = (level.gameCamera.x_edge == -1 or level.gameCamera.x_edge == 2)
+    # edgeDistortionRight.visible = (level.gameCamera.x_edge == 1 or level.gameCamera.x_edge == 2)
+    # edgeDistortionBottom.visible = (level.gameCamera.y_edge == -1 or level.gameCamera.y_edge == 2)
+    # edgeDistortionTop.visible = (level.gameCamera.y_edge == 1 or level.gameCamera.y_edge == 2)
+  else:
+    edgeDistortion.visible = false
 
 
 func setGlitchSprite(sprite, glitch):
