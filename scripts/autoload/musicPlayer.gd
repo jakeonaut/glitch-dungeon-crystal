@@ -134,7 +134,8 @@ func conductFromScenePath(path):
     if path.find("preBossRoom") > 0 or \
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \
-       path.find("LongGlitchyHallway") > 0:
+       path.find("LongGlitchyHallway") > 0 or \
+       (path.find("0_0") > 0 and not global.okay_really_really_started_game):
         tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] < 2:
         tryToPlay(crystalThemePlayer) # bossThemePlayer)

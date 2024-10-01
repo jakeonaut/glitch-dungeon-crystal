@@ -82,9 +82,9 @@ func _process(delta):
   if not hasInitializedControlsConfig:
     return
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     menuMoveSound.play()
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     menuMoveSound.play()
 
   processGlitchScreen(delta)
@@ -158,10 +158,10 @@ func processNormalLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     normalOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     normalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
@@ -221,10 +221,10 @@ func processGraphicsLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     graphicsOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     graphicsOptionIndex -= 1
     shouldUpdateMenuText = true
   if graphicsOptionIndex < 0:
@@ -280,10 +280,10 @@ func processSoundLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     soundOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     soundOptionIndex -= 1
     shouldUpdateMenuText = true
   if soundOptionIndex < 0:
@@ -326,10 +326,10 @@ func processQuitToMainLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     quitToMainOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     quitToMainOptionIndex -= 1
     shouldUpdateMenuText = true
   if quitToMainOptionIndex < 0:
@@ -343,6 +343,7 @@ func processQuitToMainLogic(_delta):
       # dedupe (ish) with "dev_demo_reset" above
       global.has_started_game = false
       global.has_really_started_game = false
+      global.okay_really_really_started_game = false
       global.resetMemory()
       global.currLevelZone = null
       transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
@@ -372,10 +373,10 @@ func processTopInputLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("ui_down"):
+  if Input.is_action_just_pressed("menu_down"):
     topInputOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("ui_up"):
+  elif Input.is_action_just_pressed("menu_up"):
     topInputOptionIndex -= 1
     shouldUpdateMenuText = true
   if topInputOptionIndex < 0:
@@ -405,6 +406,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": leftSpriteAniPlayer,
       "default_keyCode": 16777231, 
       "button_index": JOY_DPAD_LEFT,
+      "default_button_index": JOY_DPAD_LEFT,
     },
     {
       "input_action": "ui_right",
@@ -414,6 +416,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": rightSpriteAniPlayer,
       "default_keyCode": 16777233, 
       "button_index": JOY_DPAD_RIGHT,
+      "default_button_index": JOY_DPAD_RIGHT,
     },
     # {
     #   "input_action": "run_button",
@@ -431,6 +434,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": downSpriteAniPlayer,
       "default_keyCode": 16777234, 
       "button_index": JOY_DPAD_DOWN,
+      "default_button_index": JOY_DPAD_DOWN,
     },
     {
       "input_action": "ui_up",
@@ -440,6 +444,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": upSpriteAniPlayer,
       "default_keyCode": 16777232, 
       "button_index": JOY_DPAD_UP,
+      "default_button_index": JOY_DPAD_UP,
     },
     {
       "input_action": "jump_button",
@@ -449,6 +454,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": jumpSpriteAniPlayer,
       "default_keyCode": 90, 
       "button_index": JOY_DS_A,
+      "default_button_index": JOY_DS_A,
     },
     {
       "input_action": "sub_action_button",
@@ -458,6 +464,7 @@ func initializeControlsConfig():
       "sprite_aniPlayer": sweepSpriteAniPlayer,
       "default_keyCode": 88, 
       "button_index": JOY_DS_B,
+      "default_button_index": JOY_DS_B,
     },
     {
       "input_action": "alt_action_button",
@@ -465,7 +472,9 @@ func initializeControlsConfig():
       "text_label": castTextLabel,
       "sprite": castSprite,
       "sprite_aniPlayer": castSpriteAniPlayer,
-      "default_keyCode": JOY_DS_X, 
+      "default_keyCode": 32, 
+      "button_index": JOY_DS_X, 
+      "default_button_index": JOY_DS_X, 
     },
   ]
   if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
@@ -490,7 +499,10 @@ func processControlsLogic(_delta):
   if global.is_reading_input:
     pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
   else:
-    pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n    hold BACKSPACE: reset bindings"
+    if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n hold BACKSPACE: reset bindings"
+    elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n   hold SELECT: reset bindings"
 
   if global.is_reading_input:
     if global.last_read_input != null:
@@ -515,11 +527,11 @@ func processControlsLogic(_delta):
           level.saveTheGame()
     return
   else:
-    if Input.is_action_just_pressed("ui_down"):
+    if Input.is_action_just_pressed("menu_down"):
       control_index += 1
-    elif Input.is_action_just_pressed("ui_up"):
+    elif Input.is_action_just_pressed("menu_up"):
       control_index -= 1
-    if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel"):
+    if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
       global.is_reading_input = true
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         global.is_reading_keyboard_input = true
@@ -544,7 +556,7 @@ func processControlsLogic(_delta):
     var controlConfig = controlsConfig[i]
     if control_index == i:
       controlConfig.sprite.scale = big_size
-      if control_index != last_control_index:
+      if control_index != last_control_index or shouldUpdateMenuText:
         var waveTextVal = ""
         if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
           waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
@@ -578,10 +590,11 @@ func changeCastSpritePalette():
     castSpritePalette = 0
 
 func processPopupRenderLogic(delta):
-  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")):
+  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("ui_cancel_controller"):
     getPlayer().noBroomSound.play()
     return
-  if Input.is_action_pressed("ui_cancel") and canResetBindings:
+
+  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and Input.is_action_pressed("ui_cancel") and canResetBindings:
     popupRect.visible = true
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
@@ -598,10 +611,31 @@ func processPopupRenderLogic(delta):
         global.memory["controls_config"] = controlsConfig
         level.saveTheGame()
         canResetBindings = false
+        shouldUpdateMenuText = true
+    else:
+      popupRect.visible = false
+  elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT and Input.is_action_pressed("ui_cancel_controller") and canResetBindings:
+    popupRect.visible = true
+    popupTimer += (delta*11)
+    if global.isPauseMenuOpen:
+      if popupTimer < 5:
+        popupText.text = "reset bindings\n ... 3"
+      elif popupTimer < 10:
+        popupText.text = "reset bindings\n ... 3 ... 2"
+      elif popupTimer < 15:
+        popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
+      if popupTimer >= popupTimeLimit:
+        for i in range(controlsConfig.size()):
+          controlsConfig[control_index].button_index = controlsConfig[i].default_button_index
+          global.setButtonIndex(controlsConfig[i].input_action, controlsConfig[i].default_button_index)
+        global.memory["controls_config"] = controlsConfig
+        level.saveTheGame()
+        canResetBindings = false
+        shouldUpdateMenuText = true
     else:
       popupRect.visible = false
   else:
     popupRect.visible = false
     popupTimer = 0
-    if not Input.is_action_pressed("ui_cancel"):
+    if not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
       canResetBindings = true

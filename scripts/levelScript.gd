@@ -65,6 +65,8 @@ func _ready_impl():
   if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true
+    if not "0_0" in self.getLevelName():
+      global.okay_really_really_started_game = true
 
   global.isOnMainMenu = false
   has_room_initialized = false

@@ -2172,7 +2172,7 @@ default_font = SubResource( 231 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 31 )
-show_dither_effect = true
+show_crt_effect = true
 tileset_type = 2
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 8 )]

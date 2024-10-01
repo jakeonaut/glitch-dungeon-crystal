@@ -173,6 +173,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
 var has_started_game = false
 var has_really_started_game = false
+var okay_really_really_started_game = false
 
 func _ready():
     set_process(true)
@@ -181,6 +182,7 @@ func _ready():
     if isOnMainMenu: pass
     if has_started_game: pass
     if has_really_started_game: pass
+    if okay_really_really_started_game: pass
     if memory: pass
     if activeInteractor: pass
     if activeThrowableObject: pass
@@ -481,13 +483,13 @@ func _input(ev):
 func getButtonIndexStr(button_index):
     match button_index:
         JOY_DS_B:
-            return "B" # TODO(jaketrower): This is gonna be a little whack between Xbox/Nintendo
+            return "A" # TODO(jaketrower): This is gonna be a little whack between Xbox/Nintendo
         JOY_DS_A:
-            return "A"
+            return "B"
         JOY_DS_X:
-            return "X"
-        JOY_DS_Y:
             return "Y"
+        JOY_DS_Y:
+            return "X"
         JOY_START:
             return "Start"
         JOY_SELECT:

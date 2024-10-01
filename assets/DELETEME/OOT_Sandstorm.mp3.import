@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/OOT_Sandstorm.mp3-a5b4bff4b54435462a29558c245056ee.mp3str"
+
+[deps]
+
+source_file="res://assets/DELETEME/OOT_Sandstorm.mp3"
+dest_files=[ "res://.import/OOT_Sandstorm.mp3-a5b4bff4b54435462a29558c245056ee.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

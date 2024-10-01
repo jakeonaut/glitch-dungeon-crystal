@@ -291,7 +291,7 @@ func _process(delta):
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
-  if Input.is_action_just_pressed("restart_key"):
+  if Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame:
     tryDieToEnemy(delta, true, true, true)
     global.incrementLevelZoneThing("num_deaths", -1)
   

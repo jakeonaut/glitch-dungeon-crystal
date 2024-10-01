@@ -9,8 +9,8 @@ func setUpRoomInitializationOverride():
         global.isOnMainMenu = true
         player.normalGlitch()
         player.pauseInput = true
-        show_dither_effect = true
-        show_crt_effect = false
+        show_dither_effect = false
+        show_crt_effect = true
     else:
         logoSprite.visible = false
         mainMenuUi.visible = false
@@ -119,6 +119,7 @@ func loadGame():
     global.has_started_game = true
     if global.loadGame():
         global.has_really_started_game = true
+        global.okay_really_really_started_game = true
         global.isRespawning = true
         if global.memory.has("roomPath"):
             var roomPath = global.memory["roomPath"]
@@ -244,3 +245,11 @@ func normalizeMainMenuPromptIndex(change):
         mainMenuPromptIndex = 1
     if change < 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
         mainMenuPromptIndex = 2
+
+# @override
+func playMenuMusic():
+    # musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
+    pass
+    
+func restartMusic():
+    musicPlayer.conductFromScenePath(getLevelName())

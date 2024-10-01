@@ -100,6 +100,7 @@ onready var edgeDistortionRight = get_node("EdgeDistortion/RightDistortion")
 onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
 onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
 func _process(delta):
+  textBoxes.visible = not global.isPauseMenuOpen
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
   # TODO(jaketrower):
