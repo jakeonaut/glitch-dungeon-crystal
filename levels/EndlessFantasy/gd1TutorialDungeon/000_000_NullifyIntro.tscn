@@ -69,9 +69,9 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 9 )
 show_crt_effect = true
-starting_glitch_type = 1
+starting_glitch_type = 3
 has_spellbook_page = true
-spellbook_spells = [ 2, 1 ]
+spellbook_spells = [ 4, 3 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 8 )]
 
@@ -189,7 +189,7 @@ texture = ExtResource( 26 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/tutorial_GhostIntro.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, 0 )

@@ -531,7 +531,7 @@ func trySpawnFollowers():
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
 
-  if getLevelName().find("Haven2") > 0:        
+  if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
     var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
     if numAngelTadpoles != null:
       for _i in range(numAngelTadpoles):

@@ -780,7 +780,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18768, -3, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0904, 13, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
 is_vertical = true
 
 [node name="AnimationPlayer" parent="Viewport/level/Door" index="6"]
@@ -811,9 +811,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 13, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54171, 14, 0 )
-
-[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54171, 14, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4174, 5.10442, 0 )

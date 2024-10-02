@@ -42,6 +42,7 @@ export var behavior_was_thrown = false
 export var behavior_thrower = false
 export var behavior_evolve = false
 export var behavior_fizzle_out_after_evolve = false
+export var behavior_phase_through_walls = false
 export var behavior_mini_explore = false
 export var behavior_directional_bullet = false
 export var walk_direction = Vector2(1, 0)
@@ -135,9 +136,9 @@ func _ready():
             mySprite.material_override.set_shader_param("target_palette", target_palette)
 
 func shouldIDoCollisions():
-    should_collide_floor = not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown
-    should_collide_ceil = not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown
-    should_collide_horizontally = behavior_walking and walk_direction.x != 0
+    should_collide_floor = (not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
+    should_collide_ceil = (not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
+    should_collide_horizontally = behavior_walking and walk_direction.x != 0 and not behavior_phase_through_walls
 
 onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
 func glitchOut():
@@ -291,14 +292,17 @@ func doHorizontalWalkingBehavior():
             return
     if behavior_walking and horizontal_collision:
         horizontal_collision = false
-        walk_direction.x = -walk_direction.x
-        if horizontalTurnSound: horizontalTurnSound.play()
-        if behavior_intermittent_walking and should_reset_slime_timer_on_flip and slime_state != SlimeState.NULL:
-            behavior_walking = true
-            slime_state_timer = 0
-            slime_state = SlimeState.WALK
-        if myOtherSprite:
-            myOtherSprite.flip_h = not myOtherSprite.flip_h
+        flipWalkingDirection()
+
+func flipWalkingDirection():
+    walk_direction.x = -walk_direction.x
+    if horizontalTurnSound: horizontalTurnSound.play()
+    if behavior_intermittent_walking and should_reset_slime_timer_on_flip and slime_state != SlimeState.NULL:
+        behavior_walking = true
+        slime_state_timer = 0
+        slime_state = SlimeState.WALK
+    if myOtherSprite:
+        myOtherSprite.flip_h = not myOtherSprite.flip_h
     
 func doVerticalWalkingBehavior():
     if behavior_walking and walk_direction.y != 0:
@@ -336,6 +340,17 @@ func bulletTryDieToSolids():
 func tryDieToOffscreenCamera():
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
+        if behavior_walking:
+            DEATH_MARGIN = 0
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+                global_transform.origin.x -= 0.5
+                flipWalkingDirection()
+                return
+            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+                global_transform.origin.x += 0.5
+                flipWalkingDirection()
+                return
+        DEATH_MARGIN = 5
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \

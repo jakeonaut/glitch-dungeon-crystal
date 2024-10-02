@@ -1,0 +1,213 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=3]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=4]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=7]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=8]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=9]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=15]
+[ext_resource path="res://assets/backgrounds/dungeon_layer_0.png" type="Texture" id=16]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=18]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/Enemies/BigGlitchSlime.tscn" type="PackedScene" id=23]
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 18 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ViewportTexture" id=23]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport2")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" parent="." instance=ExtResource( 12 )]
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 8 )
+show_crt_effect = true
+starting_glitch_type = 4
+tileset_type = 2
+has_spellbook_page = true
+spellbook_spells = [ 2, 4 ]
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 19 )]
+override_camera_size = 20
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 7 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 1 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 4 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 9 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131074, 0, 1, 131075, 0, 1, 131076, 0, 1, 131077, 0, 1, 131078, 0, 1, 131079, 0, 1, 131080, 0, 1, 131081, 0, 1, 131082, 0, 1, 131083, 0, 1, 131084, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196600, 0, 1, 196601, 0, 1, 196602, 0, 1, 196603, 0, 1, 196604, 0, 1, 196605, 0, 1, 196606, 0, 1, 196608, 0, 1, 196609, 0, 1, 196610, 0, 1, 196611, 0, 1, 196612, 0, 1, 196613, 0, 1, 196614, 0, 1, 196615, 0, 1, 196616, 0, 1, 196618, 0, 1, 196619, 0, 1, 196620, 0, 1, 196621, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262138, 0, 1, 262139, 0, 1, 262140, 0, 1, 262141, 0, 1, 262143, 0, 1, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 1, 262153, 0, 1, 262154, 0, 1, 262155, 0, 1, 262156, 0, 1, 262157, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327672, 0, 1, 327673, 0, 1, 327674, 0, 1, 327675, 0, 1, 327676, 0, 1, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327680, 0, 1, 327681, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393215, 0, 1, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458752, 0, 37, 458753, 0, 37, 458754, 0, 37, 458755, 0, 37, 458756, 0, 37, 458757, 0, 37, 458758, 0, 37, 458759, 0, 37, 458760, 0, 37, 458761, 0, 37, 458762, 0, 37, 458763, 0, 37, 458764, 0, 37, 458765, 0, 37, 458766, 0, 37, 458767, 0, 37, 524278, 0, 37, 524279, 0, 37, 524280, 0, 37, 524281, 0, 37, 524282, 0, 37, 524283, 0, 37, 524284, 0, 37, 524285, 0, 37, 524286, 0, 37, 524287, 0, 37, 524288, 0, 37, 524289, 0, 37, 524290, 0, 37, 524291, 0, 37, 524292, 0, 37, 524293, 0, 37, 524294, 0, 37, 524295, 0, 37, 524296, 0, 37, 524297, 0, 37, 524298, 0, 37, 524299, 0, 37, 524300, 0, 37, 524301, 0, 37, 524302, 0, 37, 524303, 0, 37, 589814, 0, 37, 589815, 0, 37, 589816, 0, 37, 589817, 0, 37, 589818, 0, 37, 589819, 0, 37, 589820, 0, 37, 589821, 0, 37, 589822, 0, 37, 589823, 0, 37, 589838, 0, 37, 589839, 0, 37, 655350, 0, 37, 655351, 0, 37, 655374, 0, 37, 655375, 0, 37, 720886, 0, 37, 720887, 0, 37, 720910, 0, 37, 720911, 0, 37, 786422, 0, 37, 786423, 0, 37, 786446, 0, 37, 786447, 0, 37, 851958, 0, 37, 851959, 0, 37, 851982, 0, 37, 851983, 0, 37, 917494, 0, 37, 917495, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 37, 917515, 0, 37, 917516, 0, 37, 917517, 0, 37, 917518, 0, 37, 917519, 0, 37, 983030, 0, 37, 983031, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 37, 983049, 0, 37, 983050, 0, 37, 983051, 0, 37, 983052, 0, 37, 983053, 0, 37, 983054, 0, 37, 983055, 0, 37, 1048566, 0, 37, 1048567, 0, 37, 1048568, 0, 37, 1048569, 0, 37, 1048570, 0, 37, 1048571, 0, 37, 1048572, 0, 37, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1 )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 4 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 131084, 0, 2, 655365, 0, 36, 720892, 0, 36, 917506, 0, 2, -4, 0, 36 )
+}
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0.0999999, 0 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 24 )
+texture = ExtResource( 15 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 24 )
+texture = ExtResource( 15 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 0 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 0 )
+parter_door_id = "Door4"
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, 0 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
+
+[node name="Door4" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, 0 )
+parter_door_id = "Door2"
+
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23632, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
+
+[node name="BigGlitchSlime" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 11.625, 0 )
+
+[node name="Viewport2" parent="." instance=ExtResource( 12 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 23 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 11 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 14 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UILayer" parent="." instance=ExtResource( 13 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
+
+[editable path="Viewport/level/ParallaxBackground"]
+[editable path="Viewport2/ScreenEffects"]
+[editable path="ScreenEffects"]

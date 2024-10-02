@@ -184,10 +184,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6351, 3.1759, 0 )
 bbText = "•you seem to have some
 [color=red]hag magic[/color]... I can enchant
 your broom with shards
-•like those you just collected"
-
-[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
+•like that one just collected"
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.20448, 0 )
