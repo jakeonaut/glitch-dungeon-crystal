@@ -285,6 +285,12 @@ var spriteOpacity = 1.0
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
+
+  if global.isEnteringRoom:
+    return
+  if level.pacman_wrapping:
+    target_last_grounded_y = global_transform.origin.y
+
   if aniPlayer.assigned_animation == "getItem" and not aniPlayer.is_playing():
     getItemFailsafe()
 
@@ -676,6 +682,7 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
+      if global.isEnteringRoom: return
       should_collide_horizontally = true
       should_collide_floor = true 
       should_collide_ceil = true

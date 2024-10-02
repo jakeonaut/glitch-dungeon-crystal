@@ -320,6 +320,7 @@ func tryToRespawn():
       if global.memory.has("active_save_point_x"):
         # transition.fast_fade_to(global.memory["savedRoomPath"])
         global.isEnteringRoom = true
+        global.pauseGame = true
         transition.die_fade_to(global.memory["savedRoomPath"])
         return
     elif global.memory.has("roomPath"):
