@@ -320,7 +320,7 @@ func _process(delta):
 
   bubbleSprite.visible = transformation == TransformationState.BUBBLE
   if transformation == TransformationState.BUBBLE:
-    if (horizontal_collision or on_ground) and physics_state != PhysicsState.GLITCH_DYING:
+    if (horizontal_collision or on_ground or justPressedJump()) and physics_state != PhysicsState.GLITCH_DYING:
       getBubbleCured()
 
   if global.isPauseMenuOpen:
