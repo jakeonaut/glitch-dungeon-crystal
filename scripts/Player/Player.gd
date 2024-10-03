@@ -765,7 +765,7 @@ func isOnSavePoint():
 
 func nullify():
   glitchTickle(false)
-  if global.memory["glitched_grimoire"]:
+  if global.memory["forget_me_not"]:
     level.displaySpellMessageText("unaffected")
     return
 

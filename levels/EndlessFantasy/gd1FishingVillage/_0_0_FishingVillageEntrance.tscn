@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=26]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=27]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=28]
+[ext_resource path="res://sceneObjects/PriestessSpawner.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=31]
 
@@ -630,10 +631,9 @@ __meta__ = {
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, -1 )
-is_locked = true
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 num_keys_unlock = 1
-key_type = 5
+key_type = 6
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 root_node = NodePath("../../Door3")
@@ -968,6 +968,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23017, 20, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/FishingRodShortcut/HookInteractionArea" index="0"]
 shape = SubResource( 72 )
+
+[node name="PriestessSpawner" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 6, 0 )
+
+[node name="PriestessSpawner2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, 0 )
+
+[node name="PriestessSpawner3" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0 )
+spawned_object_path = "res://sceneObjects/Enemies/BasicFrogEnemy.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

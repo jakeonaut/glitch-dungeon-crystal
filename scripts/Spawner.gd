@@ -17,6 +17,7 @@ export var only_activate_in_range = true
 var should_staticify_children = false  # this breaks dynamically created SmallKeys
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var mySprite = get_node("Sprite3D") if has_node("Sprite3D") else null
 
 func _ready():
     set_process(true)
@@ -113,3 +114,27 @@ func fakeSlice(array: Array, start = null, end = null, step = null):
     for i in range(start, stop, step):
         sliced.push_back(array[i])
     return sliced
+
+var levelTiles = null
+func getLevelTiles():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if levelTiles == null:
+    levelTiles = level.levelTiles
+  return levelTiles
+func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
+  var lt = getLevelTiles()
+  if not lt:
+    return
+  var x = global_transform.origin.x
+  var y = global_transform.origin.y
+  var tb = y + 4 + margin
+  var bb = y - 4 - margin
+  var lb = x - 4 - margin
+  var rb = x + 4 + margin
+  
+  lt.clearRandomTileTimers()
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)

@@ -1,0 +1,283 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=3]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Lament.wav" type="AudioStream" id=5]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=7]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=12]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=14]
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = ExtResource( 8 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 8 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.002
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="CylinderShape" id=2]
+height = 1.6
+radius = 0.8
+
+[sub_resource type="CylinderShape" id=29]
+height = 1.2
+
+[sub_resource type="BoxShape" id=30]
+extents = Vector3( 5, 3, 1 )
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "reveal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 61, 62, 64, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 1 )
+
+[node name="AnglerFish" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1 )
+material_override = SubResource( 31 )
+pixel_size = 0.15
+texture = ExtResource( 4 )
+hframes = 8
+vframes = 16
+frame = 59
+script = ExtResource( 6 )
+max_frames = 1
+should_animate = false
+
+[node name="DanglerBase" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9793, 0.5, 1 )
+visible = false
+material_override = SubResource( 31 )
+pixel_size = 0.15
+texture = ExtResource( 4 )
+hframes = 8
+vframes = 16
+frame = 8
+script = ExtResource( 6 )
+max_frames = 1
+should_animate = false
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11 )
+visible = false
+material_override = SubResource( 21 )
+pixel_size = 0.12
+texture = ExtResource( 4 )
+hframes = 8
+vframes = 16
+frame = 4
+script = ExtResource( 6 )
+frame_delay = 0.3
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies", "weak_enemies"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.86043e-08, 0.425616 )
+shape = SubResource( 29 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -4.0
+pitch_scale = 0.8
+
+[node name="DieSound2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )
+volume_db = -4.0
+pitch_scale = 0.8
+
+[node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = -30.0
+pitch_scale = 1.25
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -20.0
+pitch_scale = 0.7
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 30 )
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 32 )
+anims/reveal = SubResource( 33 )
+
+[node name="FishingRod" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+
+[node name="CollisionShape" parent="FishingRod/HookInteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[editable path="FishingRod"]

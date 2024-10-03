@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=30]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=31]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=32]
+[ext_resource path="res://sceneObjects/PriestessSpawner.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=38]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=39]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=40]
@@ -1959,11 +1960,11 @@ transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3, 3, 0 )
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 284 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 285 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
@@ -2015,6 +2016,18 @@ frame = 37
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -7, -11.8233, -1 )
+
+[node name="PriestessSpawner" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
+spawned_object_path = "res://sceneObjects/FreeChicken.tscn"
+
+[node name="PriestessSpawner2" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 0 )
+spawned_object_path = "res://sceneObjects/FreeChicken.tscn"
+
+[node name="PriestessSpawner3" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0 )
+spawned_object_path = "res://sceneObjects/FreeChicken.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

@@ -1,7 +1,5 @@
 extends "Spawner.gd"
 
-
-onready var mySprite = get_node("Sprite3D")
 onready var spawnSound = get_node("SpawnSound")
 onready var spawnSound2 = get_node("SpawnSound2")
 

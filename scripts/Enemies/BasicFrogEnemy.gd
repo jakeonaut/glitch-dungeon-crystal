@@ -52,6 +52,13 @@ func setAsParent(_owner):
   jump_timer = 0
   walk_direction.x = -1
 
+func evilSetAsParent(_owner):
+  behavior_jumping = true
+  behavior_walking = true
+  jump_timer = 0
+  walk_direction.x = -1
+  is_infected = true
+
 func _process(delta):
   if not visible:
     return
@@ -88,7 +95,7 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("enable_glitch", true)
       mySprite.get_material_override().set_shader_param("time_influence", 21.644)
       mySprite.get_material_override().set_shader_param("shake_color_rate", 0.625)
-      mySprite.get_material_override().set_shader_param("target_palette", global.red_dungeon_palette)
+      mySprite.get_material_override().set_shader_param("target_palette", global.rgb_palette)
     if tileSpikes:
       tileSpikes.visible = true
     if not smallInteractionArea.is_in_group("weak_enemies"):

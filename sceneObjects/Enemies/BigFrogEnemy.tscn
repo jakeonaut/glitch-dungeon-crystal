@@ -76,6 +76,7 @@ vframes = 4
 script = ExtResource( 2 )
 frame_delay = 1.0
 max_frames = 6
+automatically_change_color = false
 
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

@@ -235,9 +235,10 @@ func resetMemory():
     memory["fishing_rod_shortcut"] = 0
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
+    memory["forget_me_not"] = false
     memory["angel_flute"] = false
     # if you've beaten the midpoint boss
-    memory["priestess"] = 0
+    memory["priestess"] = 2
 
     # PERMANENT SPELLS
     

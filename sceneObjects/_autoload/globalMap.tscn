@@ -447,7 +447,7 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
 [node name="FishingVillage" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0 )
 
 [node name="FishingVillageEntrance" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0 )
@@ -484,6 +484,11 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterfallSecretRoom.tscn"
+
+[node name="MarshChallenge" parent="FishingVillage" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/Marsh_Challenge.tscn"
 
 [node name="EasyFling" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0 )

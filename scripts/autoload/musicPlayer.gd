@@ -198,8 +198,12 @@ func conductFromScenePath(path):
         tryToPlay(dungeonThemePlayer2)
     else:
         self.stopAll()
-    changeSongPitch(1.0)
-    default_song_pitch = 1.0
+    if global.memory["priestess"] >= 2:
+        changeSongPitch(0.2)
+        default_song_pitch = 0.2
+    else:
+        changeSongPitch(1.0)
+        default_song_pitch = 1.0
 
     if path.find("__introCutscene") > 0:
         changeSongPitch(2.0)

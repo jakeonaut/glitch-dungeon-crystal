@@ -65,7 +65,7 @@ func _ready_impl():
   if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true
-    if not "0_0" in self.getLevelName():
+    if not "0_0" in self.getLevelName() or "Fish" in self.getLevelName():
       global.okay_really_really_started_game = true
 
   global.isOnMainMenu = false
@@ -543,9 +543,9 @@ func trySpawnFollowers():
           ))
 
 func purifyAllWeakEnemies():
-  return # a little buggy
   var weak_enemies = self.get_tree().get_nodes_in_group("weak_enemies")
-  for weak_enemy in weak_enemies:
+  for weak_enemy_area in weak_enemies:
+    var weak_enemy = weak_enemy_area.get_node("..")
     if weak_enemy.isActive() and not weak_enemy.am_i_dying:
       weak_enemy.ouchies(weak_enemy.global_transform.origin)
       self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)

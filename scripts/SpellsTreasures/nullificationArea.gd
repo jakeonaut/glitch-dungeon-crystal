@@ -1,7 +1,9 @@
 extends Spatial
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var aniPlayer = get_node("AnimationPlayer")
 onready var transformSound = get_node("TransformSound")
+onready var fadeAwaySound = get_node("FadeAwaySound")
 var original_position = null
 var previous_point = null
 var interpolation_point = null
@@ -15,6 +17,10 @@ func getPlayer():
     return player
 
 func _ready():
+    if is_static_in_level and self.getMyStaticLevelZoneVar():
+        set_process(false)
+        queue_free()
+        return
     set_process(true)
     original_position = global_transform.origin
     previous_point = original_position
@@ -28,9 +34,23 @@ func isActive(_debug=false):
 
 func passiveActivate(_delta, is_player):
     if is_player:
-        if getPlayer().glitch_form != global.GlitchForm.NORMAL and global.memory["clean_crystals"] < 1:
+        getPlayer().nullify()
+        if global.memory["forget_me_not"]:
+            fadeAwaySound.play()
+            is_active = false
+            setGlobalMemoryOfHasBeenDefeated()
+            aniPlayer.stop()
+            aniPlayer.clear_queue()
+            aniPlayer.play("fadeAway")
+            return
+
+        if getPlayer().glitch_form != global.GlitchForm.NORMAL and global.memory["clean_crystals"] < 1 and global.memory["priestess"] == 0:
             level.uiLayer.glitchSpriteContainer.rect_scale = Vector2(1.5, 1.5)
             level.uiLayer.glitchSpriteContainer.rect_position = Vector2(300, 250)
             level.uiLayer.spellMessageTextLabel.rect_scale = Vector2(1.5, 1.5)
             level.uiLayer.spellMessageTextLabel.rect_position = Vector2(320, 250)
-        getPlayer().nullify()
+
+func setGlobalMemoryOfHasBeenDefeated():
+    if is_static_in_level:
+        global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
+        pass
