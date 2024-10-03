@@ -6,6 +6,8 @@ export var is_locked = false
 export var should_lock = false
 # String is a path to a file.
 export(String, FILE) var path
+# for after you beat the high priestess
+export(String, FILE) var glitched_path
 # partner_door_id assumes path is unset.
 export var parter_door_id = ""
 export var dont_recolor_me = false

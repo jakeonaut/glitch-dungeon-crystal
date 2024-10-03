@@ -548,7 +548,7 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.38231, 1, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -571,10 +571,10 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73889, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 16 )
 anims/doorOpen = SubResource( 17 )
 anims/locked = SubResource( 18 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -14,22 +14,18 @@
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=15]
+[ext_resource path="res://scripts/AdvancedParallaxBackground.gd" type="Script" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=27]
-[ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=28]
-[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=29]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=30]
 
 [sub_resource type="BoxShape" id=33]
 resource_local_to_scene = true
@@ -69,34 +65,6 @@ albedo_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [sub_resource type="BoxShape" id=28]
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
-
-[sub_resource type="ShaderMaterial" id=29]
-shader = ExtResource( 30 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 0.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 28 )
-shader_param/base_palette = ExtResource( 24 )
-shader_param/target_palette = ExtResource( 15 )
 
 [sub_resource type="BoxShape" id=37]
 resource_local_to_scene = true
@@ -339,32 +307,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 28.3, 0 )
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 16.2, 0 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.89626, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
-material_override = SubResource( 29 )
-texture = ExtResource( 29 )
-
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
-material_override = SubResource( 29 )
-texture = ExtResource( 29 )
-
-[node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 21.8963, 0 )
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
-material_override = SubResource( 29 )
-texture = ExtResource( 29 )
-
-[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground2" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
-material_override = SubResource( 29 )
-texture = ExtResource( 29 )
-
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
 
@@ -376,6 +318,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
+script = ExtResource( 15 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 23 )]
 
@@ -408,7 +354,5 @@ __meta__ = {
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Mushroom9"]
-[editable path="Viewport/level/ParallaxBackground"]
-[editable path="Viewport/level/ParallaxBackground2"]
 [editable path="Viewport/level/Furbo"]
 [editable path="Viewport2/ScreenEffects"]
