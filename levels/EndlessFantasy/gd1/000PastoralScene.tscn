@@ -2168,6 +2168,34 @@ default_font = SubResource( 231 )
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@AngelStatue@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="Viewport@level@AngelStatue@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@CroneNPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="Viewport@level@CroneNPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -2542,20 +2570,6 @@ can_move_player = true
 [node name="CollisionShape" parent="Viewport/level/CroneNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 218 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -2683,20 +2697,6 @@ shape = SubResource( 241 )
 [node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 242 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
@@ -2802,7 +2802,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 254 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="SkipText" type="RichTextLabel" parent="UILayer"]
 visible = false

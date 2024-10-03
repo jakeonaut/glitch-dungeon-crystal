@@ -136,21 +136,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="Control" parent="TextBox"]
-margin_left = 17.0
-margin_top = 14.0
-margin_right = 529.0
-margin_bottom = 95.0
+[node name="CanvasLayer" type="CanvasLayer" parent="TextBox"]
+
+[node name="ScrollContainer" type="Control" parent="TextBox/CanvasLayer"]
+margin_left = 87.0
+margin_top = 730.0
+margin_right = 1269.0
+margin_bottom = 932.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = true
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 4 )
 
-[node name="Text" type="RichTextLabel" parent="TextBox/ScrollContainer"]
-margin_right = 512.0
-margin_bottom = 81.0
-rect_pivot_offset = Vector2( -511, -189 )
+[node name="Text" type="RichTextLabel" parent="TextBox/CanvasLayer/ScrollContainer"]
+margin_right = 1183.0
+margin_bottom = 197.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 4 )

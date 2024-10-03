@@ -2,7 +2,7 @@ extends TextureRect
 
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
-onready var textNode = get_node("ScrollContainer/Text")
+onready var textNode = get_node("CanvasLayer/ScrollContainer/Text")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
