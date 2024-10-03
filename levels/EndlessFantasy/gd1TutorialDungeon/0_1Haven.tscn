@@ -1546,7 +1546,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3, -22, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 1.1
 
 [node name="Player2" type="Spatial" parent="Viewport/level"]
@@ -1640,6 +1640,7 @@ vframes = 8
 [node name="Door" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -23, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
+num_keys_unlock = 1
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 238 )
@@ -1898,6 +1899,7 @@ shape = SubResource( 219 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -16, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+num_keys_unlock = 1
 key_type = 5
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
@@ -1935,6 +1937,7 @@ shape = SubResource( 219 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7042, -24, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+num_keys_unlock = 1
 key_type = 5
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
@@ -1964,7 +1967,7 @@ transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707
 mesh = SubResource( 284 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 285 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]

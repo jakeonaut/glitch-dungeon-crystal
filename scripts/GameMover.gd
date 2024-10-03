@@ -731,7 +731,7 @@ func processJumpInputs(delta):
         aniPlayer.clear_queue()
         aniPlayer.play("jumpSquat", -1, 2.0 if isFeatherLike() else 1.0)
         aniPlayer.queue("jumpStart")
-        aniPlayer.queue("fall" if isFeatherLike() else "jump")
+        aniPlayer.queue("jump")
       if bounceAniPlayer:
         playBounce("jumpSquat", ["jumpStart"])
 

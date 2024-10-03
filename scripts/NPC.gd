@@ -204,6 +204,9 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
     return false
 
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
+    textBox.hideInteractPrompt()
+    if not floating_text:
+      textBox.untinify()
     textBox.interact(true) # was_smacked
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):

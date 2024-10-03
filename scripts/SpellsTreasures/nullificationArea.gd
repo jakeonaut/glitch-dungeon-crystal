@@ -52,3 +52,11 @@ func passiveActivate(_delta, is_player):
 
 func setGlobalMemoryOfHasBeenDefeated():
     global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
+
+var staticLevelZoneVar = null
+func getMyStaticLevelZoneVar(refresh_if_null = false):
+    if level == null:
+        level = get_tree().get_root().get_node("Game/Viewport/level")
+    if staticLevelZoneVar == null or refresh_if_null:
+        staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self)
+    return staticLevelZoneVar

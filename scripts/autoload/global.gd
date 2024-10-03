@@ -610,6 +610,38 @@ func getKeyCodeStr(keycode, useSpecialChar = true):
             return "/"
         "BackSlash":
             return "\\" # " # idk why VSC needs this to render syntax correctly after the "\\"
+        "Down":
+            return "F"
+        "Left":
+            return "V"
+        "Right":
+            return "Q"
+        "Up":
+            return "G"
+        "Home":
+            return "H"
+        "Tab":
+            return "T"
+        "ScrollLock":
+            return "L"
+        "Escape":
+            return "R"
+        "Alt":
+            return "A"
+        "Menu":
+            return "M"
+        "WinKey":
+            return "W"
+        "Super":
+            return "W"
+        "Cmd":
+            return "W"
+        "PrintScreen":
+            return "P"
+        "Pause":
+            return "U"
+        "BackSpace":
+            return "B"
         _:
             return keycode_str.to_lower()
 
@@ -637,6 +669,33 @@ func setButtonIndex(input_action, button_index):
   var new_event = InputEventJoypadButton.new()
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
+
+func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
+    # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
+    var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
+
+    var inputEvents = InputMap.get_action_list(input_action)
+    var glyphType = GlyphType.XBOX
+    for inputEvent in inputEvents:
+        if is_controller_connected:
+            if inputEvent is InputEventJoypadButton:
+                if use_bbtext:
+                    return "[font=res://DarkInputExtraFont.tres]" + getButtonIndexStr(inputEvent.button_index, glyphType) + "[/font]"
+                else:
+                    return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
+            if inputEvent is InputEventJoypadMotion:
+                if use_bbtext:
+                    return "[font=res://DarkInputExtraFont.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
+                else:
+                    return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
+        else:
+            if inputEvent is InputEventKey:
+                if use_bbtext:
+                    return "[font=res://DarkInputFont.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
+                else:
+                    return "[" + getKeyCodeStr(inputEvent.get_scancode(), false) + "]"
+        
+    return null
 
 func getInputText(input_action, input_display = 0, use_bbtext = true):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
@@ -1007,9 +1066,6 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)
-      var areaParent = area.get_node("..")
-      if areaParent.has_method("getSmacked") and areaParent.getSmacked():
-        my_broom_owner.getSmacked()
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.PassiveInteractActivate(0, false)

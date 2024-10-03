@@ -381,8 +381,8 @@ func processHiscoreRenderLogic(delta):
       hiscoreTimeLimit = 15
     elif hiscoreDisplayIndex == 6:
       pressEnterLabel.visible = not pressEnterLabel.visible
-      var sweep_button_text = global.getInputText("sub_action_button", false, false)
-      pressEnterLabel.text = "press " + sweep_button_text + "​ to continue"
+      var sweep_button_text = global.getInputText("sub_action_button")
+      pressEnterLabel.bbcode_text = "press " + sweep_button_text + "​ to continue"
     # totalHiscoreLabel.visible = true
     # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
     # if level.has_node("CubeCrystal"):

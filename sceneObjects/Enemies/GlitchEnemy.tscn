@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=12]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=13]
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=14]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=16]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 12 )
@@ -269,6 +271,34 @@ tracks/7/keys = {
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 12 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 9 )
+shader_param/target_palette = ExtResource( 15 )
+
 [node name="GlitchEnemy" type="Spatial"]
 script = ExtResource( 1 )
 grav = 0
@@ -354,3 +384,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
 shape = SubResource( 14 )
+
+[node name="SpellbookGlitchSprite" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69203, 0.625 )
+visible = false
+material_override = SubResource( 16 )
+pixel_size = 0.125
+texture = ExtResource( 16 )
+hframes = 4
+vframes = 6
+script = ExtResource( 4 )
+max_frames = 1
+should_animate = false

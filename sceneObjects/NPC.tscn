@@ -18,8 +18,8 @@
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
-[sub_resource type="BoxShape" id=14]
-extents = Vector3( 1.35, 0.8, 1 )
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 1, 0.8, 1 )
 
 [sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 5 )
@@ -143,10 +143,10 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 shape = SubResource( 20 )
 
-[node name="SmallerInteractionArea" type="Area" parent="."]
+[node name="SmallerInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallerInteractionArea"]
-shape = SubResource( 14 )
+shape = SubResource( 24 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 4 )]
 
@@ -159,20 +159,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 10 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

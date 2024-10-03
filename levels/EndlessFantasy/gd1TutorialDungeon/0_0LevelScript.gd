@@ -38,7 +38,7 @@ func _process(_delta):
        player.physics_state == player.PhysicsState.CAN_WAKE_UP:
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false
-      yield(get_tree().create_timer(2.0), "timeout")
+      yield(get_tree().create_timer(3.0), "timeout")
       if player.physics_state == player.PhysicsState.COLLAPSED or \
          player.physics_state == player.PhysicsState.CAN_WAKE_UP:
         showInstructions = true
@@ -60,6 +60,6 @@ func _process(_delta):
     if player.physics_state == player.PhysicsState.WAKING_UP or player.physics_state == player.PhysicsState.WAKING_UP:
       showInstructions = false
     if is_controller_connected:
-      pressCText.bbcode_text = "        " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep."
+      pressCText.bbcode_text = "        " + global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump."
     else:
-      pressCText.bbcode_text = global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep. Arrow keys to walk.."
+      pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. Arrow keys to walk.."

@@ -2,8 +2,9 @@ extends TextureRect
 
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
-onready var textNode = get_node("CanvasLayer/ScrollContainer/Text")
-onready var textNodeCanvasLayer = get_node("CanvasLayer")
+onready var textNode = get_node("TextCanvasLayer/Container/ScrollContainer/Text")
+onready var textNodeCanvasLayer = get_node("TextCanvasLayer")
+onready var textNodeCanvasLayerContainer = get_node("TextCanvasLayer/Container")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
@@ -43,16 +44,16 @@ var target_origin = Vector3(0, 0, 0)
 var is_fast_text = false
 
 var showYesNoOptions = false
-onready var yesButton = get_node("CanvasLayer/YesButton")
-onready var yesButtonCursor = get_node("CanvasLayer/YesButton/CursorSprite")
-onready var yesButtonText = get_node("CanvasLayer/YesButton/TextPrompt")
-onready var noButton = get_node("CanvasLayer/NoButton")
-onready var noButtonCursor = get_node("CanvasLayer/NoButton/CursorSprite")
-onready var noButtonText = get_node("CanvasLayer/NoButton/TextPrompt")
+onready var yesButton = get_node("TextCanvasLayer/Container/YesButton")
+onready var yesButtonCursor = get_node("TextCanvasLayer/Container/YesButton/CursorSprite")
+onready var yesButtonText = get_node("TextCanvasLayer/Container/YesButton/TextPrompt")
+onready var noButton = get_node("TextCanvasLayer/Container/NoButton")
+onready var noButtonCursor = get_node("TextCanvasLayer/Container/NoButton/CursorSprite")
+onready var noButtonText = get_node("TextCanvasLayer/Container/NoButton/TextPrompt")
 var selectedYesNoOption = true
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
-onready var textPrompt = get_node("CanvasLayer/TextPrompt")
+onready var textPrompt = get_node("TextCanvasLayer/Container/TextPrompt")
 var nextPrompt_wiggle_timer = 0
 var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
@@ -60,7 +61,7 @@ var nextPrompt_wiggled_up = false
 onready var textContainer = get_node("..")
 onready var textboxParent = weakref(get_node("../.."))
 onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget")) if has_node("../../TextBoxCameraTarget") else weakref(get_node("../.."))
-onready var portrait = get_node("PortraitColor")
+# onready var portrait = get_node("PortraitColor")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
@@ -81,7 +82,6 @@ func getPlayer():
 
 func _ready():
   self.hide()
-  textNodeCanvasLayer.hide()
   set_process(true)
   
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
@@ -89,8 +89,10 @@ func _ready():
   left_margin_start = self.margin_left
   bot_margin_start = self.margin_bottom
   right_margin_start = self.margin_right
+  yield(get_tree().create_timer(0.1), "timeout")
   nextPrompt.visible = false
   endPrompt.visible = false
+  hideMe()
 
 var bg_texture = null
 func tinify():
@@ -123,6 +125,10 @@ func setTinyPosition():
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 50 - adjusted_tiny_y_pos
 
+  var m = 2.5
+  textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m
+  textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m
+
 func setTextBoxPosition():
   if not is_tiny:
     self.rect_position.x = 20
@@ -133,21 +139,28 @@ func setTextBoxPosition():
     var player_camera_pos = getGameCamera().unproject_position(level.player.global_transform.origin)
     if player_camera_pos.y > 600:
       self.rect_position.y = 20
+    
+    var m = 2.5
+    textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m
+    textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m
+    textNodeCanvasLayerContainer.rect_size.x = self.rect_size.x * m
+    textNodeCanvasLayerContainer.rect_size.y = self.rect_size.x * m
 
 func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
 
-  portrait.visible = false # not is_tiny
+  # portrait.visible = false # not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
-    self.hide()
+    hideMe()
     textNodeCanvasLayer.hide()
     return
 
+  textNodeCanvasLayer.visible = self.visible
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
   if textPrompt.visible:
-    var sweep_button_text = global.getInputText("sub_action_button")
-    textPrompt.bbcode_text = "[center]" + sweep_button_text + "[/center]"
+    var sweep_button_text = global.getLargeInputText("sub_action_button")
+    textPrompt.bbcode_text = "[center][wave]" + sweep_button_text + "[/wave][/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
 
@@ -292,26 +305,30 @@ func showInteractPrompt():
   if global.activeInteractor == self:
     return
     
-  var sweep_button_text = global.getInputText("sub_action_button")
+  var sweep_button_text = global.getLargeInputText("sub_action_button")
   if not is_interact_prompt:
-    textNode.bbcode_text = sweep_button_text
+    textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
     tinify()
     is_interact_prompt = true
     self.theme = promptFont
 
-  self.show()
-  textNodeCanvasLayer.show()
+  showMe()
   textNode.visible_characters = -1
   resetTinyColorRect()
   adjusted_tiny_x_pos = -25
-  adjusted_tiny_y_pos = 10
+  adjusted_tiny_y_pos = 20
   setTinyPosition()
+
+func showMe():
+  self.show()
+
+func hideMe():
+  self.hide()
 
 func hideInteractPrompt():
   if is_interact_prompt:
     is_interact_prompt = false
-    self.hide()
-    textNodeCanvasLayer.hide()
+    hideMe()
     self.theme = dialogFont
       
 var tindex = -1
@@ -327,7 +344,8 @@ func showTextbox(wasSmacked = false):
   textNode.visible_characters = 0
 
   textNode.scroll_to_line(0)
-  if wasSmacked and smackedBbText != null:
+  if wasSmacked and smackedBbText != null and smackedBbText != "":
+    print("hi! " + str(smackedBbText))
     textNode.bbcode_text = smackedBbText
   else:
     textNode.bbcode_text = text_final
@@ -369,8 +387,7 @@ func showTextbox(wasSmacked = false):
   resetTinyColorRect()
 
   textNode.get_v_scroll().value = 0
-  self.show()
-  textNodeCanvasLayer.show()
+  showMe()
   dialogSound.activateScript()
   
   if not floating_text:
@@ -380,8 +397,7 @@ func hideTextbox():
   yesButton.visible = false
   noButton.visible = false
   has_preactivated = false
-  self.hide()
-  textNodeCanvasLayer.hide()
+  hideMe()
   if textboxParent.get_ref():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
   if showYesNoOptions and selectedYesNoOption:
@@ -493,7 +509,7 @@ func adjustTinyColorRect():
   tinyColorRect.margin_right += 12
 
   if not floating_text:
-    nextPrompt.position = Vector2(last_line_width + 160, total_height + 20)
+    nextPrompt.position = Vector2(last_line_width + 160, total_height - 20)
     endPrompt.position = nextPrompt.position
 
 func resetTinyColorRect():

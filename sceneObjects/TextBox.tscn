@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
@@ -19,13 +19,9 @@
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=18]
 [ext_resource path="res://uiConfirm.tres" type="Theme" id=19]
-[ext_resource path="res://DarkInputTheme.tres" type="Theme" id=21]
-
-[sub_resource type="Gradient" id=8]
-colors = PoolColorArray( 0.0156863, 0.0156863, 0.0156863, 1, 0.0156863, 0.0156863, 0.0156863, 1 )
+[ext_resource path="res://assets/fonts/Enter_Input_Dark.ttf" type="DynamicFontData" id=20]
 
 [sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 13 )
@@ -34,6 +30,17 @@ shader_param/base_palette = ExtResource( 11 )
 shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="CanvasItemMaterial" id=7]
+
+[sub_resource type="DynamicFont" id=8]
+size = 80
+outline_size = 6
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = -50
+extra_spacing_space = 1
+font_data = ExtResource( 20 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
@@ -138,21 +145,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="TextBox"]
+[node name="TextCanvasLayer" type="CanvasLayer" parent="TextBox"]
 layer = 2
 
-[node name="ScrollContainer" type="Control" parent="TextBox/CanvasLayer"]
-margin_left = 87.0
-margin_top = 730.0
-margin_right = 1269.0
-margin_bottom = 932.0
+[node name="Container" type="TextureRect" parent="TextBox/TextCanvasLayer"]
+margin_left = 50.0
+margin_top = 700.0
+margin_right = 1218.0
+margin_bottom = 960.0
+expand = true
+
+[node name="ScrollContainer" type="Control" parent="TextBox/TextCanvasLayer/Container"]
+margin_left = 37.0
+margin_top = 30.0
+margin_right = 1219.0
+margin_bottom = 232.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = true
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 4 )
 
-[node name="Text" type="RichTextLabel" parent="TextBox/CanvasLayer/ScrollContainer"]
+[node name="Text" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/ScrollContainer"]
 margin_right = 1183.0
 margin_bottom = 197.0
 size_flags_horizontal = 0
@@ -163,14 +177,14 @@ bbcode_enabled = true
 tab_size = 2
 scroll_active = false
 
-[node name="YesButton" type="ColorRect" parent="TextBox/CanvasLayer"]
-margin_left = 400.0
-margin_top = 954.0
-margin_right = 550.0
-margin_bottom = 1009.0
+[node name="YesButton" type="ColorRect" parent="TextBox/TextCanvasLayer/Container"]
+margin_left = 350.0
+margin_top = 254.0
+margin_right = 500.0
+margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="TextBox/CanvasLayer/YesButton"]
+[node name="CursorSprite" type="Sprite" parent="TextBox/TextCanvasLayer/Container/YesButton"]
 material = SubResource( 7 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -180,7 +194,7 @@ vframes = 5
 frame = 26
 script = ExtResource( 12 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer/YesButton"]
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/YesButton"]
 margin_left = 25.0
 margin_right = 145.0
 margin_bottom = 52.0
@@ -196,14 +210,14 @@ tab_size = 2
 text = "yes"
 scroll_active = false
 
-[node name="NoButton" type="ColorRect" parent="TextBox/CanvasLayer"]
-margin_left = 650.0
-margin_top = 954.0
-margin_right = 800.0
-margin_bottom = 1009.0
+[node name="NoButton" type="ColorRect" parent="TextBox/TextCanvasLayer/Container"]
+margin_left = 600.0
+margin_top = 254.0
+margin_right = 750.0
+margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="TextBox/CanvasLayer/NoButton"]
+[node name="CursorSprite" type="Sprite" parent="TextBox/TextCanvasLayer/Container/NoButton"]
 material = SubResource( 7 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -213,7 +227,7 @@ vframes = 5
 frame = 26
 script = ExtResource( 12 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer/NoButton"]
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/NoButton"]
 margin_left = 25.0
 margin_right = 125.0
 margin_bottom = 52.0
@@ -229,17 +243,16 @@ tab_size = 2
 text = "no"
 scroll_active = false
 
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer"]
-margin_left = 964.0
-margin_top = 962.0
-margin_right = 1324.0
-margin_bottom = 1018.0
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container"]
+margin_left = 914.0
+margin_top = 250.0
+margin_right = 1274.0
+margin_bottom = 306.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 21 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
+theme = SubResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]c[/center]"
 tab_size = 2

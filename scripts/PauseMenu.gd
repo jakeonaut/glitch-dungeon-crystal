@@ -139,8 +139,8 @@ func _process(delta):
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
 
-var normalMenuOptions = ["RESUME", "GRAPHICS", "SOUND", "INPUT", "QUIT TO MAIN"]
-var normalMenuOptionsOnMainMenu = ["RESUME", "GRAPHICS", "SOUND", "INPUT"]
+var normalMenuOptions = ["RESUME", "INPUT", "GRAPHICS", "SOUND", "QUIT TO MAIN"]
+var normalMenuOptionsOnMainMenu = ["RESUME", "INPUT", "GRAPHICS", "SOUND"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
@@ -181,13 +181,13 @@ func processNormalLogic(_delta):
       level.restartMusic()
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.GRAPHICS
+      pauseMenuState = PauseMenuState.TOP_INPUT
     elif normalOptionIndex == 2:
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.SOUND
+      pauseMenuState = PauseMenuState.GRAPHICS
     elif normalOptionIndex == 3:
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.TOP_INPUT
+      pauseMenuState = PauseMenuState.SOUND
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
@@ -508,7 +508,7 @@ func processControlsLogic(_delta):
     if global.last_read_input != null:
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         var keyCodeString = OS.get_scancode_string(global.last_read_input)
-        if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "Backspace":
+        if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "BackSpace":
           controlsConfig[control_index].key_code = global.last_read_input
           global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
           global.memory["controls_config"] = controlsConfig
@@ -559,7 +559,7 @@ func processControlsLogic(_delta):
       if control_index != last_control_index or shouldUpdateMenuText:
         var waveTextVal = ""
         if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-          waveTextVal = "press key" if global.is_reading_input else global.getInputText(controlConfig.key_code, 2)
+          waveTextVal = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2)
         elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
           waveTextVal = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
         controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
@@ -568,7 +568,7 @@ func processControlsLogic(_delta):
     else:
       controlConfig.sprite.scale = normal_size
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.key_code, 2) + "[/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, 2) + "[/color]"
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
       # controlConfig.sprite.z_index = 0
