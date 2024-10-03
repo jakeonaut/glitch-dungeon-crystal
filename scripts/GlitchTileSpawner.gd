@@ -1,14 +1,6 @@
 extends "GeodeSpawner.gd" # should inherit Spawner and make it more generic
 # give it a "is_immediate_and_once" vs "is_intermittent and continuous" flag
 
-var levelTiles = null
-func getLevelTiles():
-  if level == null:
-    level = get_tree().get_root().get_node("Game/Viewport/level")
-  if levelTiles == null:
-    levelTiles = level.levelTiles
-  return levelTiles
-
 func isConditionActive():
   return not amITouchingGlitchTile(getLevelTiles())
 

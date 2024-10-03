@@ -355,7 +355,7 @@ shader_param/target_palette = ExtResource( 16 )
 [node name="SpellbookPage" type="Spatial"]
 script = ExtResource( 7 )
 grav = 0
-bbText = "•You got \"GRIMOIRE\"
+bbText = "•You got \"Grimoire\"
 ..but it's missing a
 few pages"
 portrait = ExtResource( 11 )
@@ -377,17 +377,17 @@ shape = SubResource( 8 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 10 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="9"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="12"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 13 )
 

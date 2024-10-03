@@ -500,7 +500,7 @@ func processControlsLogic(_delta):
     pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
   else:
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n hold BACKSPACE: reset bindings"
+      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
     elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
       pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n   hold SELECT: reset bindings"
 
@@ -559,18 +559,18 @@ func processControlsLogic(_delta):
       if control_index != last_control_index or shouldUpdateMenuText:
         var waveTextVal = ""
         if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-          waveTextVal = "press key" if global.is_reading_input else "[lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb]"
+          waveTextVal = "press key" if global.is_reading_input else global.getInputText(controlConfig.key_code, 2)
         elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-          waveTextVal = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, true)
+          waveTextVal = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
         controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
         # controlConfig.sprite.z_index = 1
         controlConfig.sprite_aniPlayer.play("idle")
     else:
       controlConfig.sprite.scale = normal_size
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        controlConfig.text_label.bbcode_text = "[color=gray][lb]" + global.getKeyCodeStr(controlConfig.key_code) + "[rb][/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.key_code, 2) + "[/color]"
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, true) + "[/color]"
+        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
       # controlConfig.sprite.z_index = 0
       controlConfig.sprite_aniPlayer.stop()
       controlConfig.sprite_aniPlayer.play("RESET")

@@ -14,6 +14,7 @@ onready var textBoxtext = get_node("TextBox/CanvasLayer/ScrollContainer/Text")
 onready var textBoxportrait = get_node("TextBox/PortraitColor/ColorRect2/ColorRect3/ColorRect4/Portrait")
 
 var type = "textBoxContainer"
+var smackedBbText = null
 
 func _ready():
     self.setVars()
@@ -24,6 +25,9 @@ func setVars():
         textBox.text_final = bbText
     else:
         textBox.text_final = textBoxtext.bbcode_text
+
+    if smackedBbText != null:
+        textBox.smackedBbText = smackedBbText
     if portrait:
         textBoxportrait.texture = portrait
 

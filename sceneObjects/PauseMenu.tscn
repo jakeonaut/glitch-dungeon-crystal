@@ -1312,10 +1312,10 @@ grow_vertical = 2
 theme = ExtResource( 8 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "press X to select, Z to go back
-     hold ENTER: reset bindings"
-text = "press X to select, Z to go back
-     hold ENTER: reset bindings"
+bbcode_text = "press [font=res://DarkInputFont_small.tres]x[/font] to select, [font=res://DarkInputFont_small.tres]z[/font] to go back
+     hold [font=res://DarkInputFont_small.tres]E[/font]: reset bindings"
+text = "press x to select, z to go back
+     hold E: reset bindings"
 scroll_active = false
 
 [node name="CursorSprite" type="Sprite" parent="."]

@@ -145,7 +145,7 @@ var mainMenuPromptIndex = 0
 var updateMenuText = true
 func _process(_delta):
     if not global.has_started_game:
-        player.camera_y_offset = 0
+        player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
@@ -185,9 +185,9 @@ func _process(_delta):
             var is_controller_connected = Input.get_connected_joypads().size() > 0
             pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
             if is_controller_connected:
-                pressCText.bbcode_text = "        " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep."
+                pressCText.bbcode_text = "        " + global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump."
             else:
-                pressCText.bbcode_text = global.getInputText("jump_button") + " to Jump. " + global.getInputText("sub_action_button") + " to Sweep. Arrow keys to walk.."
+                pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. Arrow keys to walk.."
         return
 
     if Input.is_action_just_pressed("ui_down"):

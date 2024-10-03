@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=16]
 [ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=18]
+[ext_resource path="res://uiConfirm.tres" type="Theme" id=19]
+[ext_resource path="res://DarkInputTheme.tres" type="Theme" id=21]
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 0.0156863, 0.0156863, 0.0156863, 1, 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -76,7 +78,7 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 464.0
 margin_bottom = 99.0
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
+color = Color( 0, 0.309804, 0.309804, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="TextBox/ColorRect"]
 margin_right = 456.0
@@ -137,6 +139,7 @@ __meta__ = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="TextBox"]
+layer = 2
 
 [node name="ScrollContainer" type="Control" parent="TextBox/CanvasLayer"]
 margin_left = 87.0
@@ -155,9 +158,92 @@ margin_bottom = 197.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 4 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/default_color = Color( 0.933594, 0.915867, 0.915867, 1 )
 bbcode_enabled = true
 tab_size = 2
+scroll_active = false
+
+[node name="YesButton" type="ColorRect" parent="TextBox/CanvasLayer"]
+margin_left = 400.0
+margin_top = 954.0
+margin_right = 550.0
+margin_bottom = 1009.0
+color = Color( 0, 0.309804, 0.309804, 1 )
+
+[node name="CursorSprite" type="Sprite" parent="TextBox/CanvasLayer/YesButton"]
+material = SubResource( 7 )
+position = Vector2( 7, 24 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 16 )
+hframes = 6
+vframes = 5
+frame = 26
+script = ExtResource( 12 )
+
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer/YesButton"]
+margin_left = 25.0
+margin_right = 145.0
+margin_bottom = 52.0
+rect_pivot_offset = Vector2( -511, -189 )
+rect_clip_content = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 19 )
+custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]yes[/center]"
+tab_size = 2
+text = "yes"
+scroll_active = false
+
+[node name="NoButton" type="ColorRect" parent="TextBox/CanvasLayer"]
+margin_left = 650.0
+margin_top = 954.0
+margin_right = 800.0
+margin_bottom = 1009.0
+color = Color( 0, 0.309804, 0.309804, 1 )
+
+[node name="CursorSprite" type="Sprite" parent="TextBox/CanvasLayer/NoButton"]
+material = SubResource( 7 )
+position = Vector2( 7, 24 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 16 )
+hframes = 6
+vframes = 5
+frame = 26
+script = ExtResource( 12 )
+
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer/NoButton"]
+margin_left = 25.0
+margin_right = 125.0
+margin_bottom = 52.0
+rect_pivot_offset = Vector2( -511, -189 )
+rect_clip_content = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 19 )
+custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]no[/center]"
+tab_size = 2
+text = "no"
+scroll_active = false
+
+[node name="TextPrompt" type="RichTextLabel" parent="TextBox/CanvasLayer"]
+margin_left = 964.0
+margin_top = 962.0
+margin_right = 1324.0
+margin_bottom = 1018.0
+rect_pivot_offset = Vector2( -511, -189 )
+rect_clip_content = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 21 )
+custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]c[/center]"
+tab_size = 2
+text = "c"
 scroll_active = false
 
 [node name="Sprite" type="Sprite" parent="TextBox"]
@@ -200,75 +286,6 @@ hframes = 8
 vframes = 8
 frame = 41
 
-[node name="YesButton" type="ColorRect" parent="TextBox"]
-margin_left = 130.5
-margin_top = 90.5
-margin_right = 205.5
-margin_bottom = 115.5
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="CursorSprite" type="Sprite" parent="TextBox/YesButton"]
-material = SubResource( 7 )
-position = Vector2( 1, 11.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 16 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 12 )
-
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox/YesButton"]
-margin_left = -21.5
-margin_top = 3.0
-margin_right = 101.5
-margin_bottom = 29.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 4 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]yes[/center]"
-tab_size = 2
-text = "yes"
-scroll_active = false
-
-[node name="NoButton" type="ColorRect" parent="TextBox"]
-visible = false
-margin_left = 252.5
-margin_top = 90.0
-margin_right = 327.5
-margin_bottom = 115.0
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="CursorSprite" type="Sprite" parent="TextBox/NoButton"]
-material = SubResource( 7 )
-position = Vector2( 1, 11.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 16 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 12 )
-
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox/NoButton"]
-margin_left = -21.5
-margin_top = 3.0
-margin_right = 101.5
-margin_bottom = 29.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 4 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]no.[/center]"
-tab_size = 2
-text = "no."
-scroll_active = false
-
 [node name="NextPrompt" type="Sprite" parent="TextBox"]
 material = SubResource( 3 )
 position = Vector2( 439.783, 103.343 )
@@ -280,23 +297,6 @@ material = SubResource( 3 )
 position = Vector2( 439.783, 103.343 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 10 )
-
-[node name="TextPrompt" type="RichTextLabel" parent="TextBox"]
-margin_left = 383.0
-margin_top = 103.0
-margin_right = 490.0
-margin_bottom = 127.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 4 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
-bbcode_enabled = true
-bbcode_text = "[center][lb]C[rb][/center]"
-tab_size = 2
-text = "[C]"
-scroll_active = false
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="TextBox"]
 volume_db = -15.0

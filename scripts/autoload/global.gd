@@ -482,87 +482,112 @@ func _input(ev):
     if is_reading_controller_input and ev is InputEventJoypadButton and ev.pressed:
         last_read_input = ev.button_index
 
-func getButtonIndexStr(button_index):
+enum GlyphType {
+    XBOX,
+    NINTENDO,
+    PLAYSTATION,
+}
+func getButtonIndexStr(button_index, glyph_type = GlyphType.XBOX, useSpecialChar = true):
     match button_index:
-        JOY_DS_B:
-            return "A" # TODO(jaketrower): This is gonna be a little whack between Xbox/Nintendo
-        JOY_DS_A:
-            return "B"
-        JOY_DS_X:
-            return "Y"
-        JOY_DS_Y:
-            return "X"
+        JOY_XBOX_A:
+            if glyph_type == GlyphType.XBOX:
+                return "A"
+            if glyph_type == GlyphType.NINTENDO:
+                return "B"
+            if glyph_type == GlyphType.PLAYSTATION:
+                return "X"
+        JOY_XBOX_B:
+            if glyph_type == GlyphType.XBOX:
+                return "B"
+            if glyph_type == GlyphType.NINTENDO:
+                return "A"
+            if glyph_type == GlyphType.PLAYSTATION:
+                return "C" if useSpecialChar else "Circle"
+        JOY_XBOX_Y:
+            if glyph_type == GlyphType.XBOX:
+                return "Y"
+            if glyph_type == GlyphType.NINTENDO:
+                return "X"
+            if glyph_type == GlyphType.PLAYSTATION:
+                return "T" if useSpecialChar else "Triangle"
+        JOY_XBOX_X:
+            if glyph_type == GlyphType.XBOX:
+                return "X"
+            if glyph_type == GlyphType.NINTENDO:
+                return "Y"
+            if glyph_type == GlyphType.PLAYSTATION:
+                return "N" if useSpecialChar else "Square"
         JOY_START:
             return "Start"
         JOY_SELECT:
             return "Select"
         JOY_DPAD_UP:
-            return "Dpad Up"
+            return "^" if useSpecialChar else "Dpad Up"
         JOY_DPAD_DOWN:
-            return "Dpad Down"
+            return "V" if useSpecialChar else "Dpad Down"
         JOY_DPAD_LEFT:
-            return "Dpad Left"
+            return "<" if useSpecialChar else "Dpad Left"
         JOY_DPAD_RIGHT:
-            return "Dpad Right"
+            return ">" if useSpecialChar else "Dpad Right"
         JOY_L:
-            return "L1"
+            return "Q" if useSpecialChar else "L1"
         JOY_L2:
-            return "L2"
-        JOY_L3:
+            return "O" if useSpecialChar else "L2"
+        JOY_L3: # TODO(jaketrower): if useSpecialChar
             return "L3"
         JOY_R:
-            return "R1"
+            return "W" if useSpecialChar else "R1"
         JOY_R2:
-            return "R2"
-        JOY_R3:
+            return "P" if useSpecialChar else "R2"
+        JOY_R3: # TODO(jaketrower): if useSpecialChar
             return "R3"
         _:
-            return "???"
+            return "?"
 
-func getAxisStr(axis, axis_value):
+func getAxisStr(axis, axis_value, useSpecialChar = true):
     if axis == JOY_AXIS_0:
         if axis_value > 0.5:
-            return "Lstick Right"
+            return "h" if useSpecialChar else "Lstick Right"
         elif axis_value < 0.5:
-            return "Lstick Left"
+            return "f" if useSpecialChar else "Lstick Left"
     if axis == JOY_AXIS_1:
         if axis_value > 0.5:
-            return "Lstick Up"
+            return "t" if useSpecialChar else "Lstick Up"
         elif axis_value < 0.5:
-            return "Lstick Down"
+            return "b" if useSpecialChar else "Lstick Down"
     if axis == JOY_AXIS_2:
         if axis_value > 0.5:
-            return "Rstick Right"
+            return "h" if useSpecialChar else "Rstick Right"
         elif axis_value < 0.5:
-            return "Rstick Left"
+            return "f" if useSpecialChar else "Rstick Left"
     if axis == JOY_AXIS_3:
         if axis_value > 0.5:
-            return "Rstick Up"
+            return "t" if useSpecialChar else "Rstick Up"
         elif axis_value < 0.5:
-            return "Rstick Down"
-    return "???"
+            return "b" if useSpecialChar else "Rstick Down"
+    return "?"
 
-func getKeyCodeStr(keycode):
+func getKeyCodeStr(keycode, useSpecialChar = true):
     var keycode_str = OS.get_scancode_string(keycode)
     match keycode_str:
+        "Enter":
+            return "E" if useSpecialChar else "Enter"
         "Control":
-            return "Ctrl"
+            return "C" if useSpecialChar else "Ctrl"
         "CapsLock", "Capslock", "Caps Lock", "Caps lock":
-            return "Caps"
-        "Function":
-            return "Fn"
+            return "O" if useSpecialChar else "Caps"
         "PageUp":
-            return "PgUp"
+            return "K" if useSpecialChar else "PgUp"
         "PageDown":
-            return "PgDn"
+            return "J" if useSpecialChar else "PgDn"
         "Delete":
-            return "Del"
+            return "D" if useSpecialChar else "Del"
         "Space":
-            return "Space"
+            return "Z" if useSpecialChar else "Space"
         "QuoteLeft":
             return "`"
         "Shift":
-            return "Shft"
+            return "S" if useSpecialChar else "Shft"
         "Minus":
             return "-"
         "Equal":
@@ -580,13 +605,13 @@ func getKeyCodeStr(keycode):
         "Period":
             return "."
         "Insert":
-            return "Ins"
+            return "I" if useSpecialChar else "Ins"
         "Slash":
             return "/"
         "BackSlash":
             return "\\" # " # idk why VSC needs this to render syntax correctly after the "\\"
         _:
-            return keycode_str
+            return keycode_str.to_lower()
 
 func getKeyCode(input_action):
   var inputEvents = InputMap.get_action_list(input_action)
@@ -613,22 +638,30 @@ func setButtonIndex(input_action, button_index):
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
 
-func getInputText(input_action, force_controller_display = false, use_bbtext = true):
+func getInputText(input_action, input_display = 0, use_bbtext = true):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = Input.get_connected_joypads().size() > 0 or force_controller_display
+    var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
+    var glyphType = GlyphType.XBOX
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
-                return "(" + getButtonIndexStr(inputEvent.button_index) + ")"
+                if use_bbtext:
+                    return "[font=res://DarkInputExtraFont_small.tres]" + getButtonIndexStr(inputEvent.button_index, glyphType) + "[/font]"
+                else:
+                    return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
             if inputEvent is InputEventJoypadMotion:
-                return getAxisStr(inputEvent.axis, inputEvent.axis_value)
+                if use_bbtext:
+                    return "[font=res://DarkInputExtraFont_small.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
+                else:
+                    return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
         else:
             if inputEvent is InputEventKey:
                 if use_bbtext:
-                    return "[lb]" + getKeyCodeStr(inputEvent.get_scancode()) + "[rb]"
-                return "[" + getKeyCodeStr(inputEvent.get_scancode()) + "]"
+                    return "[font=res://DarkInputFont_small.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
+                else:
+                    return "[" + getKeyCodeStr(inputEvent.get_scancode(), false) + "]"
         
     return null
 

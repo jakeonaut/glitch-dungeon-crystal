@@ -513,6 +513,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.20833, 0 )
 bbText = "•ah! you saved me from
 the \"glitch\" corruption.
 this world is withering away.."
+smackedBbText = "•don't test me hag"
 is_really_important = true
 dont_recolor_me = true
 can_move_player = true
@@ -520,10 +521,10 @@ can_move_player = true
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 14 )
 
-[node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 12 )
 
 [node name="Sprite3D" parent="Viewport/level/GlitchTileSpawner/NPC3" index="3"]

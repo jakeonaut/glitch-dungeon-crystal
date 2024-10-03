@@ -17,7 +17,7 @@ func getPlayer():
     return player
 
 func _ready():
-    if is_static_in_level and self.getMyStaticLevelZoneVar():
+    if self.getMyStaticLevelZoneVar():
         set_process(false)
         queue_free()
         return
@@ -51,6 +51,4 @@ func passiveActivate(_delta, is_player):
             level.uiLayer.spellMessageTextLabel.rect_position = Vector2(320, 250)
 
 func setGlobalMemoryOfHasBeenDefeated():
-    if is_static_in_level:
-        global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
-        pass
+    global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)

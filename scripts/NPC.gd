@@ -61,6 +61,7 @@ func _ready():
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
+    textBoxContainer.smackedBbText = smackedBbText
   if portrait and not textBoxContainer.portrait:
     textBoxContainer.portrait = portrait
   textBoxContainer.is_immediate = is_immediate
@@ -176,8 +177,8 @@ func fallthroughCollisionActivate(_friend):
 
 
 func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
-  if not can_be_smacked:
-    return false
+  # if not can_be_smacked:
+  #   return false
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
@@ -203,7 +204,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
     return false
 
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
-    textBox.interact()
+    textBox.interact(true) # was_smacked
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
   if set_vars:

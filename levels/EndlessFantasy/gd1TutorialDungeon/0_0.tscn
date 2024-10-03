@@ -368,7 +368,7 @@ bbText = "•i don't remember having a
 basement.. but what a mess!
 let's sweep up that dust"
 
-[node name="AbortSound" parent="Viewport/level/Player/TextContainer/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
 script = ExtResource( 14 )
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 4 )]
@@ -476,7 +476,7 @@ an adventurous spirit"
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 66 )
 
-[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="11"]
 stream = ExtResource( 19 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
@@ -528,20 +528,20 @@ flip_v = true
 mesh = SubResource( 194 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
-margin_left = 5.0
-margin_top = 479.0
-margin_right = 717.0
-margin_bottom = 580.0
+margin_left = 2.5
+margin_top = 469.5
+margin_right = 714.5
+margin_bottom = 570.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 190 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[Z] to Jump. [X] to Sweep. Arrow keys to walk.."
-text = "[Z] to Jump. [X] to Sweep. Arrow keys to walk.."
+bbcode_text = "[font=res://DarkInputFont_small.tres]x[/font] to Sweep. [font=res://DarkInputFont_small.tres]z[/font] to Jump. Arrow keys to walk.."
+text = "x to Sweep. z to Jump. Arrow keys to walk.."
 scroll_active = false
 
 [editable path="Viewport/level/Player"]

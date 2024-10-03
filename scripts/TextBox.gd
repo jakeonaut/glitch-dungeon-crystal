@@ -3,6 +3,7 @@ extends TextureRect
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
 onready var textNode = get_node("CanvasLayer/ScrollContainer/Text")
+onready var textNodeCanvasLayer = get_node("CanvasLayer")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
@@ -42,16 +43,16 @@ var target_origin = Vector3(0, 0, 0)
 var is_fast_text = false
 
 var showYesNoOptions = false
-onready var yesButton = get_node("YesButton")
-onready var yesButtonCursor = get_node("YesButton/CursorSprite")
-onready var yesButtonText = get_node("YesButton/TextPrompt")
-onready var noButton = get_node("NoButton")
-onready var noButtonCursor = get_node("NoButton/CursorSprite")
-onready var noButtonText = get_node("NoButton/TextPrompt")
+onready var yesButton = get_node("CanvasLayer/YesButton")
+onready var yesButtonCursor = get_node("CanvasLayer/YesButton/CursorSprite")
+onready var yesButtonText = get_node("CanvasLayer/YesButton/TextPrompt")
+onready var noButton = get_node("CanvasLayer/NoButton")
+onready var noButtonCursor = get_node("CanvasLayer/NoButton/CursorSprite")
+onready var noButtonText = get_node("CanvasLayer/NoButton/TextPrompt")
 var selectedYesNoOption = true
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
-onready var textPrompt = get_node("TextPrompt")
+onready var textPrompt = get_node("CanvasLayer/TextPrompt")
 var nextPrompt_wiggle_timer = 0
 var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
@@ -64,6 +65,7 @@ onready var portrait = get_node("PortraitColor")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
 var is_immediate = false
+var was_smacked = false
 
 var gameCamera = null
 func getGameCamera():
@@ -79,6 +81,7 @@ func getPlayer():
 
 func _ready():
   self.hide()
+  textNodeCanvasLayer.hide()
   set_process(true)
   
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
@@ -138,6 +141,7 @@ func _process(delta):
   portrait.visible = false # not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
     self.hide()
+    textNodeCanvasLayer.hide()
     return
 
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
@@ -296,6 +300,7 @@ func showInteractPrompt():
     self.theme = promptFont
 
   self.show()
+  textNodeCanvasLayer.show()
   textNode.visible_characters = -1
   resetTinyColorRect()
   adjusted_tiny_x_pos = -25
@@ -306,19 +311,26 @@ func hideInteractPrompt():
   if is_interact_prompt:
     is_interact_prompt = false
     self.hide()
+    textNodeCanvasLayer.hide()
     self.theme = dialogFont
       
 var tindex = -1
-func showTextbox():
+var smackedBbText = null
+func showTextbox(wasSmacked = false):
   selectedYesNoOption = true
+  # TODO(jaketrower): DialogStartSound play nice with smackedBbText?
   dialogStartSound.play()
   dialogStartSound.activateScript()
+
   # if text_final.find("•") == -1 and not text_final == "":
   #   text_final = "•" + text_final
   textNode.visible_characters = 0
 
   textNode.scroll_to_line(0)
-  textNode.bbcode_text = text_final
+  if wasSmacked and smackedBbText != null:
+    textNode.bbcode_text = smackedBbText
+  else:
+    textNode.bbcode_text = text_final
   tindex = -1
   stripped_text = global.strip_bbcode(textNode.bbcode_text)
 
@@ -358,6 +370,7 @@ func showTextbox():
 
   textNode.get_v_scroll().value = 0
   self.show()
+  textNodeCanvasLayer.show()
   dialogSound.activateScript()
   
   if not floating_text:
@@ -368,6 +381,7 @@ func hideTextbox():
   noButton.visible = false
   has_preactivated = false
   self.hide()
+  textNodeCanvasLayer.hide()
   if textboxParent.get_ref():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
   if showYesNoOptions and selectedYesNoOption:
@@ -403,11 +417,12 @@ func tryToHide(delta):
 func InteractActivate(_is_player=true):
   return interact()
     
-func interact():
+func interact(wasSmacked = false):
+  was_smacked = wasSmacked
   if text_final == "":
     return false
   if !visible and dialogSound.isActive():
-    showTextbox()
+    showTextbox(wasSmacked)
     #if not is_tiny:
     global.activeInteractor = self
     return true
