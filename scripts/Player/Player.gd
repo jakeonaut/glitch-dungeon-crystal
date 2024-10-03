@@ -286,6 +286,8 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  processBroomRenderLogic(delta)
+  processBagRenderLogic(delta)
   if global.isEnteringRoom:
     return
   if level.pacman_wrapping:
@@ -371,8 +373,6 @@ func _process(delta):
 
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     return
-  processBroomRenderLogic(delta)
-  processBagRenderLogic(delta)
   processCastingLogic(delta)
   processBroomLogic(delta)
   processBagLogic(delta)
