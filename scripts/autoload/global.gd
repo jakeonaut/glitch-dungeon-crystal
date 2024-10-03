@@ -236,6 +236,7 @@ func resetMemory():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["glitched_grimoire"] = false
     memory["angel_flute"] = false
+    # if you've beaten the midpoint boss
     memory["priestess"] = 0
 
     # PERMANENT SPELLS

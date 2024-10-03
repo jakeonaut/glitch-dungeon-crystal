@@ -102,8 +102,9 @@ func _ready_impl():
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)
         player.applyGlitch(spellbook_spell)  
-    if has_glitched_grimoire:
+    if has_glitched_grimoire or global.memory["priestess"] >= 2:
       global.memory["glitched_grimoire"] = true
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.FLOOR, global.GlitchForm.LADDER, global.GlitchForm.INVISIBLE]
     
   if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true
