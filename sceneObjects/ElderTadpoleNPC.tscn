@@ -282,11 +282,11 @@ shape = SubResource( 14 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 6 )]
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 stream = ExtResource( 17 )
 pitch_scale = 1.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 17 )
 script = ExtResource( 16 )
 

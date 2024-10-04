@@ -156,8 +156,10 @@ func _process(delta):
     textNodeCanvasLayer.hide()
     return
 
-  textNodeCanvasLayer.visible = self.visible
+  textNodeCanvasLayer.visible = self.visible and not global.isPauseMenuOpen
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
+  if global.isPauseMenuOpen:
+    return
   if textPrompt.visible:
     var sweep_button_text = global.getLargeInputText("sub_action_button")
     textPrompt.bbcode_text = "[center][wave]" + sweep_button_text + "[/wave][/center]"

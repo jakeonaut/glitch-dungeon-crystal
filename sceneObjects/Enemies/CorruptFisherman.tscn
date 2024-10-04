@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=14]
+[ext_resource path="res://scripts/Enemies/CorruptFisherman.gd" type="Script" id=15]
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 8 )
@@ -188,6 +189,7 @@ resource_local_to_scene = true
 extents = Vector3( 0.5, 0.5, 1 )
 
 [node name="AnglerFish" type="Spatial"]
+script = ExtResource( 15 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1 )

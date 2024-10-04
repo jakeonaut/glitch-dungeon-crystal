@@ -328,10 +328,10 @@ func _process(delta):
     return
 
   randomize_timer += delta
-  if global.memory["priestess"] > 2:
+  if global.memory["priestess"] >= 2:
     randomize_timer = randomize_time_limit
     randomize_num_counter = 0
-    randomize_num = 999
+    randomize_num = 20
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
     if randomize_num > tile_dict.keys().size():
@@ -632,7 +632,7 @@ func properlySetTiles():
     var tile_orientation = tile_dict[cell_index][1]
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
 
-    if global.hasGottenLevelGeode:
+    if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:
       randomizeTile(cell_index, getRandomGlitchType())
 
 func setTileset(tileset_type, properly_set_tiles = true):
