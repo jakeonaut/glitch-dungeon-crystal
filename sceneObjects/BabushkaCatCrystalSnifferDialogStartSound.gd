@@ -6,14 +6,17 @@ func _ready():
 
 var NUM_CRYSTAL_GEODES_TO_BOSS = 4
 func activateScript():
+  if textBox.was_smacked:
+    return
+
   var allCrystalGeodes = global.getThingFromAllLevelZonez("crystal_geode")
   if global.getLevelZoneThing("crystal_geode"):
-    var newText = "*mewmew*\n(...you've already purified the\n[color=#0798bf]CRYSTAL[/color] in this zone!)\nthere are only "
+    var newText = "*mewmew*\n(...you've already purified the\n[color=#0798bf]Crystal[/color] in this zone!)\nthere are only "
     newText += str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " left"
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText
   else:
-    var newText = "*meow*\n•(for some weird reason,\nyou can hear me?)\n•(i smell an unpurified\n[color=red]CRYSTAL[/color] in this zone)"
+    var newText = "*meow*\n•(for some weird reason,\nyou can hear me?)\n•(i smell an unpurified\n[color=red]Crystal[/color] in this zone)"
     newText += "\n      " + str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " total left!"
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText

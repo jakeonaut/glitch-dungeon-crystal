@@ -2,6 +2,7 @@ extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var NPC = get_node("../../..")
+onready var textBox = get_node("..")
 
 func _ready():
     pass
@@ -9,26 +10,26 @@ func _ready():
 
 var which_one = 0
 func activateScript():
-  if which_one == -1:
+  if which_one == -1 and not textBox.was_smacked:
     NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
     NPC.textBoxContainer.setVars()
     which_one = 1
-  elif which_one == 0:
+  elif which_one == 0 and not textBox.was_smacked:
     level.aniPlayer.play("appearEnd")
     NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
     NPC.textBoxContainer.setVars()
     which_one = 1
-  elif which_one == 1:
+  elif which_one == 1 and not textBox.was_smacked:
     # NPC.mySprite.updateBaseFrame(6, 6)
     NPC.textBoxContainer.bbText = "•the GODDESS still hasn't\nshown herself to me\n•was I wrong?"
     NPC.textBoxContainer.setVars()
     which_one = 2
-  elif which_one == 2:
+  elif which_one == 2 and not textBox.was_smacked:
     NPC.mySprite.updateBaseFrame(6, 6)
     NPC.textBoxContainer.bbText = "•well, this world must be ending soon.\nwhat do you care?\nleave this place!"
     NPC.textBoxContainer.setVars()
     which_one = 3
-  elif which_one == 3:
+  elif which_one == 3 or textBox.was_smacked:
     NPC.is_active = false
     NPC.mySprite.updateBaseFrame(6, 7)
     yield(get_tree().create_timer(1.0), "timeout")

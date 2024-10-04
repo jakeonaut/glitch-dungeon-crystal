@@ -203,6 +203,8 @@ func spitOut():
     level.player.getBubbleInfected()
     yield(get_tree().create_timer(0.2), "timeout")
     level.player.physics_state = level.player.PhysicsState.NORMAL
+  yield(get_tree().create_timer(0.1), "timeout")
+  level.player.visible = true
 
 func queueGulpAnimation():
   if tongueAniPlayer == null:

@@ -1171,7 +1171,7 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 86 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 39 )
 volume_db = -25.0
 

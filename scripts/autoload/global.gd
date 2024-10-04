@@ -238,7 +238,7 @@ func resetMemory():
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
     # if you've beaten the midpoint boss
-    memory["priestess"] = 2
+    memory["priestess"] = 0
 
     # PERMANENT SPELLS
     

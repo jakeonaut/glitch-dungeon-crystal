@@ -512,9 +512,11 @@ spawned_object_path = ""
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.20833, 0 )
 bbText = "•ah! you saved me from
 the \"glitch\" corruption.
-this world is withering away.."
+this world is withering away..
+•I traveled here to meet the
+crystal elders. Why have they
+allowed this decay?"
 smackedBbText = "•don't test me hag"
-is_really_important = true
 dont_recolor_me = true
 can_move_player = true
 

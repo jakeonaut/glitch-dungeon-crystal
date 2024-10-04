@@ -10,6 +10,7 @@ onready var evolveSound = get_node("Sounds/EvolveSound") if has_node("Sounds/Evo
 onready var startEvolveSound = get_node("Sounds/StartEvolveSound") if has_node("Sounds/StartEvolveSound") else null
 onready var myOtherSprite = get_node("Sprite3D2") if has_node("Sprite3D2") else null
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
+onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite") if has_node("SpellbookGlitchSprite") else null
 var altGlitchEnemySheet = preload("res://assets/enemy_sheet.png")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
@@ -124,16 +125,23 @@ func _ready():
         var target_palette = level.levelTiles.grey_palette
         if glitch_form == global.GlitchForm.FLOOR:
             target_palette = level.levelTiles.red_palette
+            spellbookGlitchSprite.frame = 1
         elif glitch_form == global.GlitchForm.LADDER:
             target_palette = level.levelTiles.yellow_palette
+            spellbookGlitchSprite.frame = 2
         elif glitch_form == global.GlitchForm.FEATHER:
             target_palette = level.levelTiles.green_palette
+            spellbookGlitchSprite.frame = 0
         elif glitch_form == global.GlitchForm.INVISIBLE:
             target_palette = level.levelTiles.black_palette
+            spellbookGlitchSprite.frame = 3
         elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
             target_palette = level.levelTiles.white_palette
         if mySprite.material_override != null:
             mySprite.material_override.set_shader_param("target_palette", target_palette)
+        if spellbookGlitchSprite != null:
+            spellbookGlitchSprite.visible = true
+            spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
 
 func shouldIDoCollisions():
     should_collide_floor = (not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
@@ -240,13 +248,21 @@ func processGlitchFormGlitchiness():
         if level.player.glitch_form == glitch_form and not smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 1.0)
             mySprite.material_override.set_shader_param("enable_glitch", true)
+            mySprite.material_override.set_shader_param("enable_palette_cycle", false)
             mySprite.global_transform.origin.z = 1
             smallInteractionArea.add_to_group("enemies")
+            if spellbookGlitchSprite != null:
+                spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.7
+                spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", false)
         elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 0.05)
             mySprite.material_override.set_shader_param("enable_glitch", false)
+            mySprite.material_override.set_shader_param("enable_palette_cycle", true)
             mySprite.global_transform.origin.z = 0
             smallInteractionArea.remove_from_group("enemies")
+            if spellbookGlitchSprite != null:
+                # spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y
+                spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", true)
 
 func updateFallthroughSolids():
     if fallthroughSolid:

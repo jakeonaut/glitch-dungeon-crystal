@@ -354,6 +354,60 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 24.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="Viewport@level@Door2@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 8 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -516,24 +570,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8737, 13.071, 1 )
 frame = 2
 should_fade_away = true
 
-[node name="SandStream" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 31, 0 )
-
-[node name="SandStream2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 31, 0 )
-
-[node name="SandStream3" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 25, 0 )
-
-[node name="SandStream4" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 25, 0 )
-
-[node name="SandStream5" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 19, 0 )
-
-[node name="SandStream6" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 19, 0 )
-
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 6.44628, 0 )
 
@@ -542,18 +578,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 
 [node name="SandStream7" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 0 )
-
-[node name="SandStream8" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 35, 0 )
-
-[node name="SandStream9" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 29, 0 )
-
-[node name="SandStream10" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 29, 0 )
-
-[node name="SandStream11" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 35, 0 )
 
 [node name="SandStream12" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -1, 0 )
@@ -594,60 +618,6 @@ shape = SubResource( 42 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 43 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 24.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 44 )

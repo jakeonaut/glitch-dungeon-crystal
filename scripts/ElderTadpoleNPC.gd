@@ -6,12 +6,20 @@ export var has_broom = false
 onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
 onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var caneSprite = get_node("CaneSprite")
+var am_i_sleepy = false
 
 func _ready():
   set_process(true)
 
 func _process(delta):
   processBroomRenderLogic(delta)
+  if mySprite.flip_h:
+    caneSprite.flip_h = true
+    caneSprite.global_transform.origin.x = self.global_transform.origin.x + 1.814
+  else:
+    caneSprite.flip_h = false
+    caneSprite.global_transform.origin.x = self.global_transform.origin.x - 1.814
 
 
 func processBroomRenderLogic(_delta):
@@ -53,3 +61,50 @@ func adjustSummonedBroomSpritePosition():
 
   summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
+
+func chickenifyPlayer():
+  if smackSound: smackSound.play()
+  level.player.getChickenInfected()
+  global.pauseGame = false
+  level.player.pauseInput = false
+  can_move = false
+
+  if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
+    textBox.hideInteractPrompt()
+    if not floating_text:
+      textBox.untinify()
+    textBox.interact(true) # was_smacked
+
+# @override
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+  # if not can_be_smacked:
+  #   return false
+  if is_smacked:
+    return false
+  # don't get smacked if we're on the wrong side of a wind up
+  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+    return false
+    
+  if smackSound: smackSound.play()
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 35)
+    material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .15)
+    mySprite.material_override = material
+  smack_timer = 0
+  is_smacked = true
+
+  # well... if you threw it at me.. i'm going to ignore that..
+  if not global.memory["broom"]:
+    return false
+
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  if am_i_sleepy:
+    secretAniPlayer.play("smackPlayerFromSleep")
+  else:
+    secretAniPlayer.play("smackPlayer")
+  mySprite.flip_h = which_side_is_player_on
+  global.pauseGame = true
+  level.player.pauseInput = true

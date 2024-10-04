@@ -8,6 +8,9 @@ func _ready():
   pass
 
 func activateScript():
+  if textBox.was_smacked:
+    return
+
   var num_cubes = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
 
   if global.memory["crone"] == 0:

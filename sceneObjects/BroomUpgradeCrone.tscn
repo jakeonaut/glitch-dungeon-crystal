@@ -21,8 +21,8 @@
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=14]
-extents = Vector3( 1.35, 0.8, 1 )
+[sub_resource type="BoxShape" id=81]
+extents = Vector3( 1, 0.8, 1 )
 
 [sub_resource type="ShaderMaterial" id=73]
 shader = ExtResource( 5 )
@@ -144,6 +144,7 @@ grav = 0
 bbText = "•you seem to have
 some [color=red]hag magic[/color]... I can 
 enchant your broom with shards"
+smackedBbText = "•don't test me, hag."
 showYesNoOptions = true
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["npc"]]
@@ -152,23 +153,23 @@ script = ExtResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 shape = SubResource( 72 )
 
-[node name="SmallerInteractionArea" type="Area" parent="."]
+[node name="SmallerInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallerInteractionArea"]
-shape = SubResource( 14 )
+shape = SubResource( 81 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 16 )
 volume_db = -10.0
 pitch_scale = 1.2
 script = ExtResource( 14 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 stream = ExtResource( 15 )
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 script = ExtResource( 6 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]

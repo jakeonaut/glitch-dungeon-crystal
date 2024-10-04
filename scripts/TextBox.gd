@@ -347,7 +347,6 @@ func showTextbox(wasSmacked = false):
 
   textNode.scroll_to_line(0)
   if wasSmacked and smackedBbText != null and smackedBbText != "":
-    print("hi! " + str(smackedBbText))
     textNode.bbcode_text = smackedBbText
   else:
     textNode.bbcode_text = text_final
@@ -436,7 +435,9 @@ func InteractActivate(_is_player=true):
   return interact()
     
 func interact(wasSmacked = false):
-  was_smacked = wasSmacked
+  if global.activeInteractor == null:
+    was_smacked = wasSmacked
+
   if text_final == "":
     return false
   if !visible and dialogSound.isActive():

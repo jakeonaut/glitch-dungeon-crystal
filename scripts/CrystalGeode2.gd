@@ -23,7 +23,7 @@ onready var meshInstance1 = get_node("CubeContainer/MeshInstance")
 onready var meshInstance3 = get_node("CubeContainer/MeshInstance3")
 
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
-var npcRes = preload("res://sceneObjects/NPC.tscn")
+var npcRes = preload("res://sceneObjects/ElderTadpoleNPC.tscn")
 var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 
 export var num_gems_needed = 20
@@ -202,7 +202,11 @@ func freeUpPlayer():
     level.summonSmokeClouds(global_transform.origin, 3, true, true)
     elderNPC.global_transform.origin = global_transform.origin
     elderNPC.global_transform.origin.y -= 0.5
+    elderNPC.am_i_sleepy = true
+    elderNPC.is_really_important = false
+    elderNPC.is_important = false
     elderNPC.can_move = false
+    elderNPC.mySprite.updateBaseFrame(0, 1)
     var finalText = "•zzz\n(she's still asleep...)"
     elderNPC.textBox.text_final = finalText
     elderNPC.textBox.textNode.bbcode_text = finalText

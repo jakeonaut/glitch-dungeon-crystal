@@ -6774,20 +6774,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 42 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC" groups=["sprite"]]
@@ -6863,20 +6863,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 42 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC2" groups=["sprite"]]
@@ -6952,20 +6952,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 42 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC3" groups=["sprite"]]
@@ -7041,20 +7041,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 42 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC4" groups=["sprite"]]
@@ -7130,20 +7130,20 @@ margin_bottom = 90.0
 [node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
 margin_bottom = 91.0
 
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="10"]
+[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="8"]
 position = Vector2( 439.5, 80 )
 
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="11"]
+[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="9"]
 position = Vector2( 439.5, 80 )
 
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 42 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="11"]
 volume_db = -23.0
 
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="13"]
 pitch_scale = 0.65
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC5" groups=["sprite"]]
@@ -7210,6 +7210,9 @@ very happy!
 •the purified crystals
 restore my youth!!
 •now, I will take yours too!"
+smackedBbText = "•agh!!
+what do you care?
+leave this place!"
 is_really_important = true
 can_activate = false
 dont_recolor_me = true
@@ -7219,10 +7222,10 @@ is_active = false
 [node name="CollisionShape" parent="Viewport/level/CroneNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 50 )
 
-[node name="DialogStartSound" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 12 )
 
-[node name="AbortSound" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/CroneNPC/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 16 )
 
 [node name="Sprite3D" parent="Viewport/level/CroneNPC" index="3"]
@@ -7245,7 +7248,7 @@ shape = SubResource( 58 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 22.0454, 0 )
 grav = 0
 bbText = "•AGH! Aagast. this
-CORRUPTION. i cannot
+Corruption. i cannot
 •controle . . . . "
 is_really_important = true
 can_activate = false
@@ -7257,10 +7260,10 @@ can_move_player = true
 [node name="CollisionShape" parent="Viewport/level/CroneNPCDefeated/SmallInteractionArea" index="0"]
 shape = SubResource( 50 )
 
-[node name="DialogStartSound" parent="Viewport/level/CroneNPCDefeated/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/CroneNPCDefeated/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 12 )
 
-[node name="AbortSound" parent="Viewport/level/CroneNPCDefeated/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/CroneNPCDefeated/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 50 )
 
 [node name="Sprite3D" parent="Viewport/level/CroneNPCDefeated" index="3"]
@@ -7286,13 +7289,19 @@ transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -1.42658, 0 )
 high_priestess_crystal = true
 spawn_an_elder = false
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 227 )
+
+[node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="Sprite3D" parent="Viewport/level/CubeCrystal/NPC" index="0"]
 frame = 54
@@ -7301,8 +7310,11 @@ frame = 54
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal2" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
@@ -7324,8 +7336,11 @@ anims/omen = SubResource( 82 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal3" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
@@ -7347,8 +7362,11 @@ anims/omen = SubResource( 96 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal4" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 232 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -7370,8 +7388,11 @@ anims/omen = SubResource( 107 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal5" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 234 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]
