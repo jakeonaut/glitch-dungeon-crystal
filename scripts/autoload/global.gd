@@ -238,7 +238,7 @@ func resetMemory():
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
     # if you've beaten the midpoint boss
-    memory["priestess"] = 0
+    memory["priestess"] = 2
 
     # PERMANENT SPELLS
     
@@ -366,7 +366,7 @@ func getDisplayTitle(levelZoneName):
         "gd1BubblegloopSwamp":
             return "malware swamp" # "sea of corruption" # malware swamp
         "gd1TombSouls":
-            return "corrupted tombs"
+            return "crypt of memory"
         "gd1AbstractSuburbs":
             return "demonic suburb"
         "gd1primordialOoze":
@@ -1050,7 +1050,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
         if areaParent == level.player and my_broom_owner != level.player and my_broom_owner.summonedBroom.is_evil:
-            level.player.tryDieToEnemy(0, true, true)
+            level.player.tryDieToEnemy(0, true, false)
 
         if areaParent.has_method("imAnNpc") and smackResult == null:
           smacked_npc = weakref(areaParent)

@@ -28,7 +28,7 @@ func _ready():
     slime_idle_time_limit = 30
     can_spawn_mini_crystal = false
     hp_enemy = ZOMBIE_MAX_HP
-    kill_invis = true
+    kill_invis = false
     yield(get_tree().create_timer(0.1), "timeout")
     spawn_point = global_transform.origin
 

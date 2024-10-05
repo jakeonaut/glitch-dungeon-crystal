@@ -180,23 +180,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4, 1.9, 0 )
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 7.1, 0 )
 
-[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 6.5, 0 )
-
 [node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 3.3, 0 )
-
-[node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.2, 0 )
-
-[node name="miniCubeCrystal10" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 2.5, 0 )
-
-[node name="miniCubeCrystal11" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 1.4, 0 )
-
-[node name="miniCubeCrystal12" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 1.4, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 27 )]
 

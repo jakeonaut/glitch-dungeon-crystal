@@ -81,7 +81,8 @@ func getPlayer():
   return player
 
 func _ready():
-  self.hide()
+  hideMe()
+  textNodeCanvasLayer.hide()
   set_process(true)
   
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
@@ -92,7 +93,6 @@ func _ready():
   yield(get_tree().create_timer(0.1), "timeout")
   nextPrompt.visible = false
   endPrompt.visible = false
-  hideMe()
 
 var bg_texture = null
 func tinify():
