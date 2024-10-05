@@ -255,7 +255,7 @@ func resetMemory():
     memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
 

@@ -30,7 +30,7 @@ func _process(delta):
   if hooked:
     if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
       hooked = false
-      restorePlayer()
+      restorePlayer(false)
       hookTarget = null
       is_reeled_in = true
       return
@@ -52,7 +52,7 @@ func _process(delta):
   elif is_reeled_in:
     reelItOut(delta)
 
-func restorePlayer():
+func restorePlayer(_got_to_top):
   if hookTarget == null:
     return
   hookTarget.get_ref().should_collide_floor = true # look at me pretending to be safe
@@ -103,7 +103,7 @@ func reelItIn(delta):
     hookInteractionArea.global_transform.origin.y = self.global_transform.origin.y
     is_reeled_in = true      
     if hookTarget.get_ref() == level.player:
-      restorePlayer()
+      restorePlayer(true)
       level.player.sporeSound.play()
 
     hooked = false

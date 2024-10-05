@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=14]
 [ext_resource path="res://scripts/Enemies/CorruptFisherman.gd" type="Script" id=15]
+[ext_resource path="res://sceneObjects/Enemies/AnglerFishingRod.gd" type="Script" id=16]
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 8 )
@@ -79,8 +80,8 @@ radius = 0.8
 [sub_resource type="CylinderShape" id=29]
 height = 1.2
 
-[sub_resource type="BoxShape" id=30]
-extents = Vector3( 5, 3, 1 )
+[sub_resource type="BoxShape" id=35]
+extents = Vector3( 3, 2, 1 )
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -133,8 +134,115 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=37]
+resource_name = "digest"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 66, 67, 66, 67, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "swallowPlayer"
+} ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "openMouth"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="Animation" id=33]
 resource_name = "reveal"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -145,7 +253,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 59, 60, 59, 60, 61, 62, 64, 63 ]
+"values": [ 59, 60, 59, 60, 62, 61, 65, 63 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("DanglerBase:visible")
@@ -190,6 +298,8 @@ extents = Vector3( 0.5, 0.5, 1 )
 
 [node name="AnglerFish" type="Spatial"]
 script = ExtResource( 15 )
+grav = 0
+sprite_offset_y = 0.5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1 )
@@ -270,14 +380,17 @@ pitch_scale = 0.7
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
-shape = SubResource( 30 )
+shape = SubResource( 35 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 32 )
+anims/digest = SubResource( 37 )
+anims/openMouth = SubResource( 36 )
 anims/reveal = SubResource( 33 )
 
 [node name="FishingRod" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+script = ExtResource( 16 )
 
 [node name="CollisionShape" parent="FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 34 )

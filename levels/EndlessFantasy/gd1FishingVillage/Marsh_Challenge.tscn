@@ -150,6 +150,60 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 24.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )
 audio_listener_enable_3d = true
@@ -335,60 +389,6 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4.1, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 24.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 frame = 20
