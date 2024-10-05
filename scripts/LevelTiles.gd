@@ -694,29 +694,29 @@ func normalGlitch(_palette = null):
   # set_mesh_library(grey_tiles)
   changeColorPalette(grey_palette, grey_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(grey_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_grey_palette)
 
 func floorGlitch(_palette = null):
   changeColorPalette(red_palette, red_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(red_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(global.dark_red_palette)
 
 func featherGlitch(_palette = null):
   changeColorPalette(green_palette, green_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(green_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(global.dark_green_palette)
 
 func invisibleGlitch(_palette = null):
   changeColorPalette(black_palette, black_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(black_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_black_palette)
   
 func ladderGlitch(_palette = null):
   changeColorPalette(yellow_palette, yellow_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(yellow_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(global.dark_yellow_palette)
 
 func walkThroughWallsGlitch(_palette = null):
   changeColorPalette(white_palette, white_palette)
   # properlySetTiles()
-  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(white_palette)
+  if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_white_palette)

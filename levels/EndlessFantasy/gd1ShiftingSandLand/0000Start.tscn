@@ -735,6 +735,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06536, 0.4, 1 )
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0 )
+permanently_alter_tiles = true
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 0 )

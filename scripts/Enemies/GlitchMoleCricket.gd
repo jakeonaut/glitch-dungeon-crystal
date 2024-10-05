@@ -25,6 +25,7 @@ var has_dug = false
 var has_been_smacked = false
 
 export var is_builder = false
+export var permanently_alter_tiles = false
 export var is_mushroom_infected = false
 onready var mushroomSprite = get_node("MushroomSprite")
 export var can_hop = false

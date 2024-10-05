@@ -138,7 +138,7 @@ func setTextBoxPosition():
     
     var player_camera_pos = getGameCamera().unproject_position(level.player.global_transform.origin)
     if player_camera_pos.y > 600:
-      self.rect_position.y = 20
+      self.rect_position.y = 30
     
     var m = 2.5
     textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m

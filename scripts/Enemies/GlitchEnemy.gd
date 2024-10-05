@@ -118,6 +118,8 @@ func _ready():
     #     mySprite.set_material_override(null)
     # else:
     mySprite.material_override = mySprite.material_override.duplicate()
+    if spellbookGlitchSprite:
+        spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
 
     yield(TempTimer.idle_frame(self), "timeout")
     if mySprite and glitch_form != global.GlitchForm.NORMAL and not mySprite.is_in_group("sprite"):

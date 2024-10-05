@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=18]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -152,6 +153,9 @@ grav = 0
 bbText = "glitch out and die
 to go back .. sorry.."
 can_be_activated_invisibly = true
+
+[node name="WallTorch" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77731, 2.43624, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 3 )]
 

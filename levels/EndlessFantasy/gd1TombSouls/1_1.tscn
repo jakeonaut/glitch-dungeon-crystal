@@ -192,7 +192,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
 path = "res://levels/FantasyDungeon/0_1.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -210,10 +210,7 @@ shape = SubResource( 20 )
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 8, 0 )
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 17 )
 anims/doorOpen = SubResource( 18 )
 anims/locked = SubResource( 19 )
@@ -239,6 +236,13 @@ grav = 0
 bbText = "•? who are you ?
 .....
 "
+tiny_textbox = true
+
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 17, 0 )
+grav = 0
+bbText = "...we are praying for a
+miracle."
 tiny_textbox = true
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 7 )]
