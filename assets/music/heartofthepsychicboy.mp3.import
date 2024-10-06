@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/heartofthepsychicboy.mp3-a1ebb1b35c6c21d6f390769b253d5841.mp3str"
+
+[deps]
+
+source_file="res://assets/music/heartofthepsychicboy.mp3"
+dest_files=[ "res://.import/heartofthepsychicboy.mp3-a1ebb1b35c6c21d6f390769b253d5841.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -699,305 +699,6 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=99]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
-
-[sub_resource type="BoxShape" id=100]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=101]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="Animation" id=229]
-resource_name = "ActivatedIdle"
-length = 5.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("BirdSprite:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -1.28119, 2.34887, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BirdSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 5, 2, 5, 2, 5, 2, 5, 2, 5 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BirdSprite:material_override:shader_param/opacity")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("MusicNoteSprite:material_override:shader_param/opacity")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.9, 1.1, 2.4, 2.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 1.0, 1.0, 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("MusicNoteSprite:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.9, 1.4, 1.9, 2.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 6, 7, 6, 7 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("MusicNoteSprite:translation")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0.9, 1.2, 1.6, 2, 2.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( -1.80339, 1.91616, 0.100891 ), Vector3( -1.44101, 2.91616, 0.100891 ), Vector3( -2.44844, 3.89566, 0.100891 ), Vector3( -1.45268, 4.84013, 0.100891 ), Vector3( -2.87767, 6.73475, 0.100891 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("TweetSound:playing")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 1, 2.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("BirdSprite:flip_h")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=230]
-resource_name = "BirdFlyIn"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("BirdSprite:translation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( -4.20136, 6.43754, 0 ), Vector3( -0.914846, 4.29386, 0 ), Vector3( -1.26308, 2.3127, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BirdSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 4, 3, 4, 3, 4, 3, 2 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BirdSprite:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("BirdSprite:material_override:shader_param/opacity")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-
-[sub_resource type="Animation" id=231]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("BirdSprite:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("MusicNoteSprite:material_override:shader_param/opacity")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("MusicNoteSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 7 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("MusicNoteSprite:translation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -1.44101, 2.91616, 0.100891 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("TweetSound:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("BirdSprite:translation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -1.79978, 2.65261, 0 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("BirdSprite:flip_h")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=232]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=233]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=234]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=235]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=236]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=237]
-resource_name = "stand"
-length = 0.1
-
 [sub_resource type="Animation" id=106]
 resource_name = "ActivatedIdle"
 length = 5.0
@@ -1238,6 +939,14 @@ tracks/6/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="BoxShape" id=99]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=100]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
 [sub_resource type="Animation" id=109]
 resource_name = "default"
 length = 0.1
@@ -1380,6 +1089,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
+
+[sub_resource type="BoxShape" id=101]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=266]
 extents = Vector3( 1, 4, 1.8 )
@@ -1718,53 +1431,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98702, -15.3312, 0 )
 [node name="Torch5" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98702, -15.3312, 0 )
 
-[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -20, 0 )
-is_active = false
-
-[node name="Sprite3D" parent="Viewport/level/AngelStatue" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980348, 0 )
-flip_h = true
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/Area" index="0"]
-shape = SubResource( 99 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 100 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 101 )
-
-[node name="AngelStatue3" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
-is_active = false
-
-[node name="Sprite3D" parent="Viewport/level/AngelStatue3" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980348, 0 )
-flip_h = true
-
-[node name="AnimationPlayer" parent="Viewport/level/AngelStatue3" index="3"]
-anims/ActivatedIdle = SubResource( 229 )
-anims/BirdFlyIn = SubResource( 230 )
-anims/RESET = SubResource( 231 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue3/Area" index="0"]
-shape = SubResource( 99 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue3/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 100 )
-
-[node name="AnimationPlayer" parent="Viewport/level/AngelStatue3/NPC" index="4"]
-anims/default = SubResource( 232 )
-anims/fall = SubResource( 233 )
-anims/flickerOn = SubResource( 234 )
-anims/jump = SubResource( 235 )
-anims/land = SubResource( 236 )
-anims/stand = SubResource( 237 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue3/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 101 )
-
 [node name="AngelStatue2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -22, 0 )
 visible = false
@@ -2066,6 +1732,9 @@ spawned_object_path = "res://sceneObjects/FreeChicken.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0 )
 spawned_object_path = "res://sceneObjects/FreeChicken.tscn"
 
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1208, -2.82703, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -2096,12 +1765,6 @@ flip_v = true
 [editable path="Viewport/level/Player2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/AngelStatue"]
-[editable path="Viewport/level/AngelStatue/NPC"]
-[editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]
-[editable path="Viewport/level/AngelStatue3"]
-[editable path="Viewport/level/AngelStatue3/NPC"]
-[editable path="Viewport/level/AngelStatue3/NPC/NPC TextBox"]
 [editable path="Viewport/level/AngelStatue2"]
 [editable path="Viewport/level/AngelStatue2/NPC"]
 [editable path="Viewport/level/AngelStatue2/NPC/NPC TextBox"]

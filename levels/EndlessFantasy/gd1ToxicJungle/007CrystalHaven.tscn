@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/sprites/gruesomecreatures0.png" type="Texture" id=17]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scripts/AdvancedParallaxBackground.gd" type="Script" id=20]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=23]
@@ -1182,7 +1182,9 @@ pitch_scale = 0.7
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
-script = ExtResource( 20 )
+
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 19.173, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

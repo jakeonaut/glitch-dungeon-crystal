@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -25,28 +25,13 @@
 [ext_resource path="res://assets/backgrounds/greybackground.png" type="Texture" id=23]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=24]
 [ext_resource path="res://assets/player_sheet0000.png" type="Texture" id=26]
-[ext_resource path="res://levels/EndlessFantasy/AngelStatueRestZoneAbortSound.gd" type="Script" id=27]
-[ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=28]
 [ext_resource path="res://assets/palettes/green_dungeon_palette.png" type="Texture" id=29]
 [ext_resource path="res://assets/palettes/yellow_tidepool_palette.png" type="Texture" id=30]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=31]
-[ext_resource path="res://assets/sounds/ghostVoices/vox_Lament9.wav" type="AudioStream" id=32]
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=33]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=35]
 [ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=36]
-
-[sub_resource type="BoxShape" id=67]
-resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
-
-[sub_resource type="BoxShape" id=68]
-resource_local_to_scene = true
-extents = Vector3( 2, 1.3, 1.3 )
-
-[sub_resource type="BoxShape" id=69]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=78]
 resource_local_to_scene = true
@@ -813,12 +798,21 @@ shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 15 )
 shader_param/target_palette = ExtResource( 29 )
 
-[sub_resource type="BoxShape" id=70]
+[sub_resource type="BoxShape" id=82]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=83]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=71]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=84]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=74]
 shader = ExtResource( 16 )
@@ -848,12 +842,21 @@ shader_param/texture_albedo = ExtResource( 31 )
 shader_param/base_palette = ExtResource( 15 )
 shader_param/target_palette = ExtResource( 30 )
 
-[sub_resource type="BoxShape" id=75]
+[sub_resource type="BoxShape" id=85]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=86]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=76]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=87]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -877,7 +880,6 @@ shader_param/target_palette = ExtResource( 17 )
 script = ExtResource( 6 )
 show_crt_effect = true
 starting_glitch_type = 4
-how_much_mp = 12
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 12 )]
 
@@ -956,9 +958,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_clip_": 0
@@ -966,37 +965,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.8, -1.49012e-07, 0 )
-
-[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 9.1, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/Area" index="0"]
-shape = SubResource( 67 )
-
-[node name="NPC" parent="Viewport/level/AngelStatue" index="7"]
-bbText = "•
-[wave amp=50 freq=2]* you offer a prayer *[/wave]"
-can_camera_zoom = false
-is_immediate = true
-tiny_textbox = true
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 68 )
-
-[node name="DialogStartSound" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox" index="6"]
-stream = ExtResource( 28 )
-volume_db = -5.0
-script = ExtResource( 27 )
-
-[node name="AbortSound" parent="Viewport/level/AngelStatue/NPC/NPC TextBox/TextBox" index="9"]
-stream = ExtResource( 32 )
-volume_db = -5.0
-
-[node name="CollisionShape" parent="Viewport/level/AngelStatue/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 69 )
-
-[node name="InteractPrompt" parent="Viewport/level/AngelStatue/NPC" index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 3.11877, -1 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2, 9.7, 0 )
@@ -1017,7 +985,7 @@ bbText = "•welcome to REST ZONE
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 78 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 material_override = SubResource( 79 )
 pixel_size = 0.16
 frame = 72
@@ -1025,7 +993,7 @@ frame = 72
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 80 )
 
-[node name="InteractPrompt" parent="Viewport/level/NPC" index="7"]
+[node name="InteractPrompt" parent="Viewport/level/NPC" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303364, 2.51877, -1 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 18 )]
@@ -1035,11 +1003,11 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 15 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="4"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 flip_h = true
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 16 )
 anims/flickerOn = SubResource( 17 )
 anims/jump = SubResource( 18 )
@@ -1151,11 +1119,17 @@ dont_recolor_me = true
 material_override = SubResource( 73 )
 frame = 14
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 70 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 82 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 83 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 71 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 84 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 6.1, 0 )
@@ -1166,11 +1140,17 @@ dont_recolor_me = true
 [node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
 material_override = SubResource( 74 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 75 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 85 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 86 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 76 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 87 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 0, 0 )
@@ -1178,6 +1158,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 0, 0 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9, -1, 0 )
 path = "res://levels/EndlessFantasy/002PathToSacredDoors/0_1.tscn"
+
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 9.17297, 0 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -1191,9 +1174,6 @@ flip_v = true
 visible = true
 material = SubResource( 81 )
 
-[editable path="Viewport/level/AngelStatue"]
-[editable path="Viewport/level/AngelStatue/NPC"]
-[editable path="Viewport/level/AngelStatue/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]

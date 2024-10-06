@@ -299,7 +299,7 @@ func _process(delta):
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
-  if Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame:
+  if Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame and ritual_state_index < len(global.correct_ritual)-1:
     tryDieToEnemy(delta, true, true, true)
     global.incrementLevelZoneThing("num_deaths", -1)
   
@@ -381,6 +381,7 @@ func _process(delta):
   processMoleLogic(delta)
   processChickenLogic(delta)
   processCurseLogic(delta)
+  processAngelStatueRitual(delta)
     
   # doTimeDilation(real_delta)
 
@@ -1059,6 +1060,32 @@ func getCurseCured():
     return
   transformation = TransformationState.NORMAL
   getABroom()
+
+var ritual_state_index = 0
+func processAngelStatueRitual(_delta):
+  if ritual_state_index == len(global.correct_ritual):
+    ritual_state_index = 0
+    global.memory["roomPath"] = level.getLevelName()
+    global.pauseGame = true
+    global.isEnteringRoom = true
+    global.hasJustEnteredRoom = false
+    global.respawnVarTimerHack = 0
+    global.memory["on_ground"] = true
+    transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn")
+    return
+  
+  if Input.is_action_just_pressed(global.correct_ritual[ritual_state_index]):
+    ritual_state_index += 1
+  elif anyOtherRitualInputsDetected():
+    ritual_state_index = 0
+  
+
+func anyOtherRitualInputsDetected():
+  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start"]
+  for input in inputs:
+    if Input.is_action_just_pressed(input):
+      return true
+  return false
 
 func checkSolidTilesBeneathMe():
   var solid_tiles = getTilesBelow(getLevelTiles())

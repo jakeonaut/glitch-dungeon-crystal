@@ -174,6 +174,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
+var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "ui_right", "ui_left", "jump_button", "restart_key"]
 
 func _ready():
     set_process(true)
