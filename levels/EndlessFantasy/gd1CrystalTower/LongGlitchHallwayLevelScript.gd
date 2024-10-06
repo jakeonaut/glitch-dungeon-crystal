@@ -4,5 +4,6 @@ onready var door2 = get_node("Door2")
 
 # @override
 func setUpRoomInitializationOverride():
-  if global.memory["demo_mode"] > 0:
-    door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
+  pass
+  # if global.memory["demo_mode"] > 0:
+  #   door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"

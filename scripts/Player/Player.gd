@@ -1932,9 +1932,7 @@ func loseMiniCrystalCubes(how_many):
 
 var fallenBroomRef = null
 func iFellFlat():
-  summonFallenBroom(false)
-  if fallenBroomRef and fallenBroomRef.get_ref():
-    fallenBroomRef.get_ref().canPause = true
+  summonFallenBroom(false, true)
 
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
   if not global.memory["broom"] or not broomSpriteVisible.visible:

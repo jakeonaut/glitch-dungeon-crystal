@@ -103,8 +103,6 @@ func _process(delta):
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
-        if should_die_on_land:
-            die()
     if projectile:
         var has_hit_something = hitStuff(delta)
         if doing_a_final_hit:
@@ -240,6 +238,8 @@ func alignMySprite():
 func landed():
     if not projectile:
         get_node("SecretAnimationPlayer").play("land")
+    if should_die_on_land:
+        die()
 
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")
@@ -272,7 +272,7 @@ func hitStuff(_delta):
                 area.get_node("..").ouchies(global_transform.origin)
                 my_broom_owner.has_sweeped_glitch = true
                 level.summonSmokeClouds(global_transform.origin, 5, true, true)
-                # my_broom_owner.getSmacked()
+                # my_broom_owner.should_die_on_land)
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             if area.get_node("..").notOuchies(global_transform.origin):

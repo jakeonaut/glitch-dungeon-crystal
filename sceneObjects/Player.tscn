@@ -2051,6 +2051,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
 
 [sub_resource type="Animation" id=14]
 length = 0.1
@@ -4690,6 +4702,32 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 31, 30, 29, 24, 25, 26, 27, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 25, 2, 0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getABroom"
+} ]
 }
 
 [sub_resource type="Animation" id=25]

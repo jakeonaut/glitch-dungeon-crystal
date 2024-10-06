@@ -11,7 +11,6 @@ onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/Ric
 onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
-onready var glitchStatusRect = get_node("GlitchStatusRect")
 onready var miniCrystalTextureRect = get_node("GlitchStatusRect/TextureRect") if has_node("GlitchStatusRect/TextureRect") else null
 onready var miniCrystalViewport = get_node("GlitchStatusRect/Viewport") if has_node("GlitchStatusRect/Viewport") else null
 
@@ -88,7 +87,6 @@ func _ready():
 #     newHeartSprite.global_position.x = 72 + i * 48
 #     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
-onready var uiBackground = get_node("UIBackground")
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
 onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 onready var keyStatusRect = get_node("KeyStatusRect")
@@ -101,7 +99,6 @@ onready var edgeDistortionLeft = get_node("EdgeDistortion/LeftDistortion")
 onready var edgeDistortionRight = get_node("EdgeDistortion/RightDistortion")
 onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
 onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
-onready var equipmentRect = get_node("EquipmentRect")
 func _process(delta):
   textBoxes.visible = not global.isPauseMenuOpen
   processCutsceneRenderLogic(delta)
@@ -225,20 +222,19 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
-  equipmentRect.visible = global.memory.has("spellbookPage")
+  get_node("EquipmentRect").visible = global.memory.has("spellbookPage")
   glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
-  uiBackground.visible = equipmentRect.visible or glitchSpriteContainer.visible
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if global.memory["tutorial_gem"] == 1:
     if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null :
       miniCrystalTextureRect.texture = miniCrystalViewport.get_texture()
-    glitchStatusRect.visible = true
-    tryLerpFromCenter(glitchStatusRect, delta, Vector2(50, 68))
+    get_node("GlitchStatusRect").visible = true
+    tryLerpFromCenter(get_node("GlitchStatusRect"), delta, Vector2(530, 8))
     # tryLerpFromCenter(get_node("EquipmentStatusRect"), delta, Vector2(68, 79))
   if not global.memory.has("spellbookPage"):
-    tryLerpFromCenter(glitchSpriteContainer, delta, Vector2(11, 9.5))
+    tryLerpFromCenter(glitchSpriteContainer, delta, Vector2(7.5, 7))
   else:
-    tryLerpFromCenter(equipmentRect, delta, Vector2(8, 8))
+    tryLerpFromCenter(get_node("EquipmentRect"), delta, Vector2(7, 4))
   tryLerpFromCenter(spellMessageTextLabel, delta, Vector2(9.5, 73.5))
 
   if global.memory.has("spellbookPage"):

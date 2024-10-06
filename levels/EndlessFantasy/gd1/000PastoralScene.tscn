@@ -2084,6 +2084,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.8, 3.6, 0 )
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2, 0.7, 0 )
 
+[node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2, 13.5627, 0 )
+
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 58.2, 1.7, -0.209856 )
 
@@ -2332,7 +2335,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" parent="UILayer/GlitchStatusRect" index="2"]
+[node name="TextureRect" parent="UILayer/GlitchStatusRect" index="3"]
 texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
