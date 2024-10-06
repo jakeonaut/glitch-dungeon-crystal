@@ -157,15 +157,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=23]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=24]
-default_font = SubResource( 23 )
-
 [sub_resource type="SpatialMaterial" id=17199]
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
@@ -669,6 +660,15 @@ tracks/7/keys = {
 "values": [ Vector3( -0.317175, 0, -1 ), Vector3( -0.317, 0.1, -1 ), Vector3( -0.317, 1, -1 ) ]
 }
 
+[sub_resource type="DynamicFont" id=23]
+size = 48
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=24]
+default_font = SubResource( 23 )
+
 [sub_resource type="DynamicFont" id=26]
 size = 48
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -887,6 +887,7 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "0"
 
 [node name="GlitchSpriteColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 7.5
 margin_top = 7.0
 margin_right = 72.5
@@ -936,17 +937,6 @@ margin_right = 92.0
 margin_bottom = 34.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="GlitchStatusRect"]
-visible = false
-margin_left = 62.0
-margin_top = -65.0
-margin_right = 243.0
-margin_bottom = 75.0
-theme = SubResource( 24 )
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "10/
-10"
-
 [node name="RichTextLabel" type="RichTextLabel" parent="GlitchStatusRect"]
 margin_left = 40.0
 margin_top = 6.0
@@ -982,7 +972,7 @@ mesh = SubResource( 17213 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 

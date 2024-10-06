@@ -6,5 +6,15 @@ onready var door5 = get_node("Door5")
 # @override
 func setUpRoomInitializationOverride():
   if global.memory["demo_mode"] > 0:
-    door3.queue_free()
-    door5.queue_free()
+    door3.key_type = global.KeyItem.DEMO
+    global.memory[self.getShortLevelName()].erase("Door3")
+    door3.is_locked = true
+    door3.animationPlayer.stop()
+    door3.animationPlayer.clear_queue()
+    door3.queueLockAnimation()
+    door5.key_type = global.KeyItem.DEMO
+    global.memory[self.getShortLevelName()].erase("Door5")
+    door5.is_locked = true
+    door5.animationPlayer.stop()
+    door5.animationPlayer.clear_queue()
+    door5.queueLockAnimation()

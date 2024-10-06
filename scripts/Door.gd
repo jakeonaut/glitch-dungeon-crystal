@@ -44,7 +44,7 @@ onready var passiveCollisionShape = get_node("InteractionArea/PassiveCollisionSh
 var is_on_main_menu = false
 
 export var is_immediate = false
-export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL", "ZONE_CRYSTAL") onready var key_type
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL", "ZONE_CRYSTAL", "DEMO") onready var key_type
 
 var gameCamera = null
 func getGameCamera():
@@ -125,6 +125,8 @@ func getKeyName(x_more_crystals):
     key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
   elif key_type == global.KeyItem.ZONE_CRYSTAL:
     key_name = "purify [wave]CRYSTAL[/wave]\n in this zone"
+  elif key_type == global.KeyItem.DEMO:
+    key_name = "[wave]full game release \nHalloween 2024.. pls wishlist thx![/wave]"
   return key_name
 
 func spawnChicken():
@@ -138,7 +140,7 @@ func spawnChicken():
     
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
-  if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL:
+  if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO:
     meshInstance2.visible = true
     meshInstance2.rotation_degrees.y += delta*22
 
@@ -257,7 +259,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive(_debug=false):
-  return (visible or is_passive) and getPlayer().nesting_doll_state != global.NestingDoll.MATRIARCH
+  return (visible or is_passive)
 
 func generateId():
   return get_name()
@@ -291,6 +293,17 @@ func activate(is_player):
           npc.activate(is_player)
       elif key_type == global.KeyItem.ZONE_CRYSTAL:
         var has_special_key = global.getLevelZoneThing("crystal_geode")
+        if has_special_key:
+          # npc.textBoxContainer.bbText = "•you are worthy"
+          # npc.textBoxContainer.setVars()
+          # npc.activate(is_player)
+          # was_i_just_unlocked = true
+          startDoorUnlock()
+        elif not lockedSound.is_playing():
+          lockedSound.play()
+          npc.activate(is_player)
+      elif key_type == global.KeyItem.DEMO:
+        var has_special_key = global.memory["demo_mode"] == 0
         if has_special_key:
           # npc.textBoxContainer.bbText = "•you are worthy"
           # npc.textBoxContainer.setVars()
@@ -420,6 +433,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().aniPlayer.play("teleport")
       getPlayer().getSmacked()
     else:
+      if getPlayer().nesting_doll_state == global.NestingDoll.MATRIARCH:
+        getPlayer().tryDieToEnemy(0, true, true, true)
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
       getPlayer().aniPlayer.play("enterDoor")
@@ -580,5 +595,7 @@ func queueLockAnimation():
     animationPlayer.queue("crystalLocked")
   elif key_type == global.KeyItem.ZONE_CRYSTAL:
     animationPlayer.queue("crystalZoneLocked")
+  elif key_type == global.KeyItem.DEMO:
+    animationPlayer.queue("demoLocked")
   else:
     animationPlayer.queue("locked")

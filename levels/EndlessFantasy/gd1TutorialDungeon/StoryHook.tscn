@@ -610,9 +610,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 0 )
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.11107, -0.203964 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
 

@@ -548,6 +548,8 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
     setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation)
   elif "PinkCloudSemisolidTop" in tile_name:
     setRandomTileNameOfType("PinkCloudSemisolidTop", 1, cell_index, tile_orientation) 
+  elif "SoftSandTop" in tile_name:
+    setRandomTileNameOfType("SoftSandTop", 2, cell_index, tile_orientation) 
 
 func unrandomizeAllTiles():
   unrandomize_cell_indices = get_used_cells()

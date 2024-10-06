@@ -206,7 +206,11 @@ func change_scene():
     var root = get_tree().get_root()
     root.remove_child(current_scene)
     current_scene.queue_free()
-    var newScene = load(self.path).instance()
+    var loadedRoomResource = load(self.path)
+    if loadedRoomResource == null:
+      # a fallback
+      loadedRoomResource = load("res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn")
+    var newScene = loadedRoomResource.instance()
     root.add_child(newScene)
     current_scene = newScene
     startAdjacentLevelLoading()

@@ -1148,7 +1148,7 @@ onready var digSound2 = get_node("Sounds/DigSound2")
 var dig_timer = 0
 var dig_time_limit = 4
 var dig_below_timer = 0
-var dig_below_time_limit = 20
+var dig_below_time_limit = 5
 func processMoleLogic(delta):
   if transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
@@ -1159,11 +1159,6 @@ func processMoleLogic(delta):
     if not fastStepSound.is_playing():
       fastStepSound.play()
     can_update_last_grounded_pos = false
-    on_ground = true
-    was_on_ground = true
-    was_just_on_ground_timer = 0
-    truly_on_ground = true
-    was_truly_on_ground = true
     glitchTilesAroundMe(-2.5)
 
     dig_timer += (delta*11)
@@ -1175,17 +1170,24 @@ func processMoleLogic(delta):
     if has_solid_beneath:
       global_transform.origin.y -= (2 * delta*11)
       if not checkSolidTilesBeneathMe():
-        global_transform.origin.y += (2 * delta*11)
-        # if not pressingMoveLeft() and not pressingMoveRight():
-        #   dig_below_timer += (delta*11)
-        #   if dig_below_timer >= dig_below_time_limit:
-        #     dig_below_timer = 0
-        #     global_transform.origin.y -= 2
-        #     getMoleCured()
-      # else:
-      #   dig_below_timer -= (delta*11)
-      #   if dig_below_timer <= 0:
-      #     dig_below_timer = 0
+        on_ground = true
+        was_on_ground = true
+        was_just_on_ground_timer = 0
+        truly_on_ground = true
+        was_truly_on_ground = true
+        if not pressingMoveLeft() and not pressingMoveRight():
+          dig_below_timer += (delta*11)
+          if dig_below_timer >= dig_below_time_limit:
+            dig_below_timer = 0
+            global_transform.origin.y -= 2
+            getMoleCured()
+          else:
+            global_transform.origin.y += (2 * delta*11)
+        else:
+          global_transform.origin.y += (2 * delta*11)
+          dig_below_timer = 0
+      else:
+        dig_below_timer = 0
 
     if not checkSolidTilesOnMyLeft():
       global_transform.origin.x += 1

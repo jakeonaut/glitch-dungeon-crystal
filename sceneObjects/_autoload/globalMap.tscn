@@ -602,6 +602,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro.tscn"
 
+[node name="BelowExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -2, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/BelowExcavationRoom.tscn"
+
 [node name="CricketCaveHub1" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 frame = 78
@@ -617,11 +622,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
 material_override = SubResource( 13 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"
-
-[node name="TidepoolCaves" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, 0 )
-frame = 78
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TidepoolCaves.tscn"
 
 [node name="CorruptedTomb" type="Spatial" parent="."]
 
