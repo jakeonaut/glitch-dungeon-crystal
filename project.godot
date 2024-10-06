@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Glitch Dungeon Crystal: Grandma's Quest"
+config/name="Babushka's Glitch Dungeon Crystal"
 run/main_scene="res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 run/low_processor_mode=true
 boot_splash/image="res://splash.png"
@@ -232,7 +232,7 @@ spell_4={
 }
 debug_toggle_spellbook={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":71,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug_upgrade_broom={

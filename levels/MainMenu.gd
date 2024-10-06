@@ -43,16 +43,23 @@ var skip_intro_cutscene_reset_timer = 0
 var skip_intro_cutscene_reset_time_limit = 10
 func startGame():
   global.resetMemory()
-  logoSprite.visible = false
 #   show_dither_effect = false
 #   show_crt_effect = true
   global.has_started_game = true
-  mainMenuUi.visible = false
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false
   player.pauseInput = true
   uiLayer.glitchSprite.visible = false
   uiLayer.get_node("GlitchStatusRect").visible = false
+  if global.memory["demo_mode"] > 0:
+    global.has_started_game = true
+    global.has_really_started_game = true
+    global.pauseGame = false
+    transition.really_long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
+    global.isRespawning = true
+    return
+  logoSprite.visible = false
+  mainMenuUi.visible = false
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
   gameCamera.initial_size = 25
