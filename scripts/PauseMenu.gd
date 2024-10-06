@@ -62,7 +62,8 @@ enum PauseMenuState {
   KEYBOARD_INPUT,
   CONTROLLER_INPUT,
   QUIT_TO_MAIN,
-  TEMP
+  TEMP,
+  SECRET_RITUAL
 }
 var pauseMenuState = PauseMenuState.NORMAL
 var shouldUpdateMenuText = true
@@ -127,6 +128,12 @@ func _process(delta):
     inputMenu.visible = false
     control_index = 0
     last_control_index = -1
+
+  if pauseMenuState == PauseMenuState.SECRET_RITUAL:
+    normalMenu.visible = true
+    processSecretRitualLogic(delta)
+  else:
+    secretRitualOptionIndex = 0
 
   if Input.is_action_just_pressed("dev_demo_reset"):
     global.has_started_game = true
@@ -354,6 +361,61 @@ func processQuitToMainLogic(_delta):
   elif Input.is_action_just_pressed("jump_button"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
+
+var secretRitualOptionIndex = 0
+func processSecretRitualLogic(_delta):
+  pauseTitleText.bbcode_text = "warp to angel statue\n" + global.getInputText("sub_action_button") + " to confirm, " + global.getInputText("jump_button") + " to cancel"
+
+  var secretRitualOptions = global.getThingArrayFromAllLevelZonez("angel_statue")
+  secretRitualOptions.push_back(["cancel", null])
+  if shouldUpdateMenuText:
+    var text = ""
+    for i in range(len(secretRitualOptions)):
+      var option = secretRitualOptions[i]
+      if i == secretRitualOptionIndex:
+        text += "[wave]" + str(option[0]) + "[/wave]\n" 
+      else:
+        text += "[color=gray]" + str(option[0]) + "[/color]\n" 
+    normalMenuText.bbcode_text = text
+    shouldUpdateMenuText = false
+
+  if Input.is_action_just_pressed("menu_down"):
+    secretRitualOptionIndex += 1
+    shouldUpdateMenuText = true
+  elif Input.is_action_just_pressed("menu_up"):
+    secretRitualOptionIndex -= 1
+    shouldUpdateMenuText = true
+  if secretRitualOptionIndex < 0:
+    secretRitualOptionIndex = len(secretRitualOptions) - 1
+  elif secretRitualOptionIndex >= len(secretRitualOptions):
+    secretRitualOptionIndex = 0
+  cursorSprite.position.y = 120 + (40*secretRitualOptionIndex)
+
+  if Input.is_action_just_pressed("sub_action_button"):
+    if secretRitualOptionIndex == len(secretRitualOptions) - 1:
+      yield(get_tree().create_timer(0.1), "timeout")
+      global.isPauseMenuOpen = false
+      global.pauseGame = false
+      getPlayer().unpauseSound.play()
+      level.restartMusic()
+    else:
+      var level_to_spawn_to = secretRitualOptions[secretRitualOptionIndex][1]
+      global.memory["roomPath"] = level.getLevelName()
+      global.pauseGame = true
+      global.isEnteringRoom = true
+      global.angelWarping = true
+      global.hasJustEnteredRoom = false
+      global.respawnVarTimerHack = 0
+      global.memory["on_ground"] = true
+      transition.long_fade_to(level_to_spawn_to)
+      global.isPauseMenuOpen = false
+  elif Input.is_action_just_pressed("jump_button"):
+    yield(get_tree().create_timer(0.1), "timeout")
+    global.isPauseMenuOpen = false
+    global.pauseGame = false
+    getPlayer().unpauseSound.play()
+    level.restartMusic()
+    
 
 
 var topInputOptions = ["KEYBOARD", "CONTROLLER"]

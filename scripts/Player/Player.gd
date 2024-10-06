@@ -1061,23 +1061,41 @@ func getCurseCured():
   transformation = TransformationState.NORMAL
   getABroom()
 
+onready var ritualSound = get_node("Sounds/RitualSound")
 var ritual_state_index = 0
 func processAngelStatueRitual(_delta):
-  if ritual_state_index == len(global.correct_ritual):
+  if global.isEnteringRoom or global.isPauseMenuOpen:
+    return
+  if global.pauseGame or pauseInput or global.pauseMoveInput or pauseSelf:
+    if ritual_state_index > 1:
+      tickleSound.play()
     ritual_state_index = 0
-    global.memory["roomPath"] = level.getLevelName()
+    ritualSound.stop()
+    return
+
+  if ritual_state_index == len(global.correct_ritual):
+    global.isPauseMenuOpen = true
     global.pauseGame = true
-    global.isEnteringRoom = true
-    global.hasJustEnteredRoom = false
-    global.respawnVarTimerHack = 0
-    global.memory["on_ground"] = true
-    transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn")
+    level.uiLayer.pauseMenu.pauseMenuState = level.uiLayer.pauseMenu.PauseMenuState.SECRET_RITUAL
+    level.uiLayer.pauseMenu.shouldUpdateMenuText = true
+    level.uiLayer.pauseMenu.secretRitualOptionIndex = 0
+    ritual_state_index = 0
     return
   
-  if Input.is_action_just_pressed(global.correct_ritual[ritual_state_index]):
+  if Input.is_action_just_pressed(global.correct_ritual[ritual_state_index]) and (on_ground or ritual_state_index == len(global.correct_ritual) - 1):
+    if ritual_state_index > 0:
+      ritualSound.stop()
+      ritualSound.pitch_scale = 0.5 + (ritual_state_index * 0.1)
+      ritualSound.play()
+      glitchTickle(false)
     ritual_state_index += 1
+    
   elif anyOtherRitualInputsDetected():
+    if ritual_state_index > 1:
+      tickleSound.play()
     ritual_state_index = 0
+    ritualSound.stop()
+    
   
 
 func anyOtherRitualInputsDetected():

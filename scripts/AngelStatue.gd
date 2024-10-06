@@ -3,6 +3,8 @@ extends Spatial
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var activateSound = get_node("ActivateSound")
 onready var mySprite = get_node("Sprite3D")
+onready var birdSprite = get_node("BirdSprite")
+onready var musicNoteSprite = get_node("MusicNoteSprite")
 onready var tweetSound = get_node("TweetSound")
 var hasRandomizedTweet = false
 var is_angel_activated = false
@@ -12,6 +14,14 @@ onready var npc = get_node("NPC") if has_node("NPC") else null
 
 func _ready():
     set_process(true)
+    birdSprite.material_override = birdSprite.material_override.duplicate()
+    musicNoteSprite.material_override = musicNoteSprite.material_override.duplicate()
+
+    if global.getLevelZoneThing("angel_statue") != null:
+        is_angel_activated = true
+        aniPlayer.stop()
+        aniPlayer.clear_queue()
+        aniPlayer.play("ActivatedIdle")
     
 func _process(delta):
     aniPlayer.playback_speed = global.time_dilation_multiplier
@@ -35,6 +45,10 @@ func isActive(_debug=false):
 
 func passiveActivate(_delta, _is_player):
     if not is_angel_activated:
+        global.setLevelZoneThing("angel_statue", [
+            global.getDisplayTitle(level.getLevelZoneName()),
+            level.getLevelName()
+        ])
         is_angel_activated = true
         activateSound.play()
         aniPlayer.stop()

@@ -254,6 +254,7 @@ func processGlitchFormGlitchiness():
             mySprite.global_transform.origin.z = 1
             smallInteractionArea.add_to_group("enemies")
             if spellbookGlitchSprite != null:
+                spellbookGlitchSprite.global_transform.origin.z = 1.1
                 spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.7
                 spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", false)
         elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
@@ -263,6 +264,7 @@ func processGlitchFormGlitchiness():
             mySprite.global_transform.origin.z = 0
             smallInteractionArea.remove_from_group("enemies")
             if spellbookGlitchSprite != null:
+                spellbookGlitchSprite.global_transform.origin.z = 0.1
                 # spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y
                 spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", true)
 

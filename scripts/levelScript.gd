@@ -343,7 +343,11 @@ func tryToRespawn():
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
     global.memory["broom"] = true
-    if found_door:
+    if global.angelWarping:
+      var angelStatues = get_tree().get_nodes_in_group("angel_statue")
+      if len(angelStatues) > 0:
+        player.global_transform.origin = angelStatues[0].global_transform.origin
+    elif found_door:
       found_door.land(true, true)
     elif global.roomEdgeVector != null:
       should_adjust_player = true
@@ -362,6 +366,7 @@ func tryToRespawn():
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom
   global.isEnteringRoom = false
+  global.angelWarping = false
   global.roomEdgeVector = null
   global.isRespawning = false
   global.shouldRenderAsCinematic = false

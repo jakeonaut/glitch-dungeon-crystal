@@ -129,6 +129,7 @@ var activeSavePoint = null
 
 var isRespawning = false
 var isEnteringRoom = false
+var angelWarping = false
 var roomEdgeVector = null
 var grannyEnteringRoom = false
 var hasJustRespawned = false
@@ -937,6 +938,16 @@ func getThingFromAllLevelZonez(thing):
             continue
         thingSum += int(self.memory[levelZone][thing])
     return thingSum
+
+func getThingArrayFromAllLevelZonez(thing):
+    var thingArr = []
+    for levelZone in global.memory["level_zonez"]:
+        if not self.memory.has(levelZone):
+            continue
+        if not self.memory[levelZone].has(thing):
+            continue
+        thingArr.push_back(self.memory[levelZone][thing])
+    return thingArr
 
 func setLevelZoneThing(thing, val):
     # also set the total counter

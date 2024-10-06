@@ -307,7 +307,7 @@ normal_offset = 0.5
 mushroomEmbiggensMe = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.832585 )
 material_override = SubResource( 7 )
 pixel_size = 0.125
 texture = ExtResource( 14 )
@@ -385,8 +385,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
 shape = SubResource( 14 )
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69203, 1.2015 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69203, 0.94656 )
 material_override = SubResource( 16 )
 pixel_size = 0.125
 texture = ExtResource( 16 )
