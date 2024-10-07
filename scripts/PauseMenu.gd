@@ -152,7 +152,7 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -177,7 +177,7 @@ func processNormalLogic(_delta):
     normalOptionIndex = 0
   cursorSprite.position.y = 120 + (80*normalOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     pauseMenuState = PauseMenuState.TEMP
     shouldUpdateMenuText = true
     if normalOptionIndex == 0:
@@ -198,7 +198,7 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
     global.pauseGame = false
@@ -210,7 +210,7 @@ onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptions = ["CRT FILTER", "GLITCH SCREEN", "COLOR BLIND", "FULLSCREEN"]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -240,7 +240,7 @@ func processGraphicsLogic(_delta):
     graphicsOptionIndex = 0
   cursorSprite.position.y = 120 + (80*graphicsOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     shouldUpdateMenuText = true
     if graphicsOptionIndex == 0:
       global.memory["show_crt_effect"] = not global.memory["show_crt_effect"]
@@ -251,7 +251,7 @@ func processGraphicsLogic(_delta):
       global.memory["colorblindMode"] = not global.memory["colorblindMode"]
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
   colorblindHats.visible = global.memory["colorblindMode"]
@@ -271,7 +271,7 @@ func processGlitchScreen(delta):
 var soundOptions = ["PLAY MUSIC", "MUSIC GLITCH"] # global.memory["canChangeSongPitch"]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -299,7 +299,7 @@ func processSoundLogic(_delta):
     soundOptionIndex = 0
   cursorSprite.position.y = 120 + (80*soundOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     shouldUpdateMenuText = true
     if soundOptionIndex == 0:
       global.memory["stopAllMusic"] = not global.memory["stopAllMusic"]
@@ -312,7 +312,7 @@ func processSoundLogic(_delta):
       if global.memory["canChangeSongPitch"]:
         musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
       glitch_death_timer = 1
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
@@ -320,7 +320,7 @@ func processSoundLogic(_delta):
 var quitToMainOptions = ["YES", "CANCEL"]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("sub_action_button") + " to confirm, " + global.getInputText("jump_button") + " to cancel"
+  pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -345,7 +345,7 @@ func processQuitToMainLogic(_delta):
     quitToMainOptionIndex = 0
   cursorSprite.position.y = 120 + (80*quitToMainOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     if quitToMainOptionIndex == 0:
       # dedupe (ish) with "dev_demo_reset" above
       global.has_started_game = false
@@ -358,13 +358,13 @@ func processQuitToMainLogic(_delta):
     elif quitToMainOptionIndex == 1:
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
 var secretRitualOptionIndex = 0
 func processSecretRitualLogic(_delta):
-  pauseTitleText.bbcode_text = "warp to angel statue\n" + global.getInputText("sub_action_button") + " to confirm, " + global.getInputText("jump_button") + " to cancel"
+  pauseTitleText.bbcode_text = "warp to angel statue\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
 
   var secretRitualOptions = global.getThingArrayFromAllLevelZonez("angel_statue")
   secretRitualOptions.push_back(["cancel", null])
@@ -391,7 +391,7 @@ func processSecretRitualLogic(_delta):
     secretRitualOptionIndex = 0
   cursorSprite.position.y = 120 + (40*secretRitualOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     if secretRitualOptionIndex == len(secretRitualOptions) - 1:
       yield(get_tree().create_timer(0.1), "timeout")
       global.isPauseMenuOpen = false
@@ -409,7 +409,7 @@ func processSecretRitualLogic(_delta):
       global.memory["on_ground"] = true
       transition.long_fade_to(level_to_spawn_to)
       global.isPauseMenuOpen = false
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
     global.pauseGame = false
@@ -421,7 +421,7 @@ func processSecretRitualLogic(_delta):
 var topInputOptions = ["KEYBOARD", "CONTROLLER"]
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -447,14 +447,14 @@ func processTopInputLogic(_delta):
     topInputOptionIndex = 0
   cursorSprite.position.y = 120 + (80*topInputOptionIndex)
 
-  if Input.is_action_just_pressed("sub_action_button"):
+  if Input.is_action_just_pressed("menu_confirm"):
     if topInputOptionIndex == 0:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.KEYBOARD_INPUT
     elif topInputOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.CONTROLLER_INPUT
-  elif Input.is_action_just_pressed("jump_button"):
+  elif Input.is_action_just_pressed("menu_cancel"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
@@ -562,9 +562,9 @@ func processControlsLogic(_delta):
     pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
   else:
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
+      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
     elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to select, " + global.getInputText("jump_button") + " to go back\n   hold SELECT: reset bindings"
+      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n   hold SELECT: reset bindings"
 
   if global.is_reading_input:
     if global.last_read_input != null:
@@ -593,7 +593,7 @@ func processControlsLogic(_delta):
       control_index += 1
     elif Input.is_action_just_pressed("menu_up"):
       control_index -= 1
-    if Input.is_action_just_pressed("sub_action_button") and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
+    if Input.is_action_just_pressed("menu_confirm") and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
       global.is_reading_input = true
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         global.is_reading_keyboard_input = true
@@ -601,7 +601,7 @@ func processControlsLogic(_delta):
         global.is_reading_controller_input = true
       global.last_read_input = null
       last_control_index = -1
-    elif Input.is_action_just_pressed("jump_button"):
+    elif Input.is_action_just_pressed("menu_cancel"):
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true
 

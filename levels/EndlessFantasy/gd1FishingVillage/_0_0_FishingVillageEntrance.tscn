@@ -32,6 +32,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=31]
 
+
 [sub_resource type="Animation" id=57]
 length = 0.001
 tracks/0/type = "value"

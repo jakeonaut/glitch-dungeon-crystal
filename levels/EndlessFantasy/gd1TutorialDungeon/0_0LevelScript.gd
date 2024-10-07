@@ -23,6 +23,8 @@ func setUpRoomInitializationOverride():
   has_decided = true
   
 var showInstructions = false
+onready var pressCText = get_node("../../UILayer/PressC")
+onready var optionsMenuPrompt = get_node("../../UILayer/OptionsMenuPrompt")
 func _process(_delta):
   # ._process(delta) implicit
 
@@ -50,15 +52,17 @@ func _process(_delta):
       global.activeInteractor = player.textBox
       showInstructions = false
   
-  var pressCText = uiLayer.get_node("PressC")
   if global.isPauseMenuOpen or not showInstructions:
     pressCText.visible = false
+    optionsMenuPrompt.visible = false
   elif showInstructions:
     var is_controller_connected = Input.get_connected_joypads().size() > 0
     # TODO(jaketrower): I don't super love this but...
     pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
+    optionsMenuPrompt.visible = pressCText.visible
     if player.physics_state == player.PhysicsState.WAKING_UP or player.physics_state == player.PhysicsState.WAKING_UP:
       showInstructions = false
+    optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
     if is_controller_connected:
       pressCText.bbcode_text = "        " + global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump."
     else:

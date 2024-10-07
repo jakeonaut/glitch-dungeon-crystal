@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=22]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=23]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
+[ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=25]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=28]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=29]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=30]
@@ -549,6 +550,20 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "[font=res://DarkInputFont_small.tres]x[/font] to Sweep. [font=res://DarkInputFont_small.tres]z[/font] to Jump. Arrow keys to walk.."
 text = "x to Sweep. z to Jump. Arrow keys to walk.."
+scroll_active = false
+
+[node name="OptionsMenuPrompt" type="RichTextLabel" parent="UILayer"]
+margin_left = 11.5
+margin_top = 13.0
+margin_right = 454.5
+margin_bottom = 124.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 25 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
+text = "Press R for OPTIONS"
 scroll_active = false
 
 [editable path="Viewport/level/Player"]
