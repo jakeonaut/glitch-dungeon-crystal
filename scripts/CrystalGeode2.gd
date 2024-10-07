@@ -194,7 +194,7 @@ export var spawn_an_elder = true
 func freeUpPlayer():
     is_active = false
 
-    if not spawn_an_elder or high_priestess_crystal or global.memory["priestess"] >= 2:
+    if not spawn_an_elder or high_priestess_crystal or global.memory["priestess"] > 0:
         return
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
