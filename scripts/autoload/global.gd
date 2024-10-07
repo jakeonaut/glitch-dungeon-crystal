@@ -91,7 +91,8 @@ enum KeyItem {
     SHROOM,
     CAT,
     CRYSTAL,
-    ZONE_CRYSTAL
+    ZONE_CRYSTAL,
+    DEMO,
 }
 
 enum Inventory {
@@ -213,7 +214,7 @@ func resetMemory():
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
     memory["colorblindMode"] = true
-    memory["stopAllMusic"] = false
+    memory["stopAllMusic"] = true
     memory["canChangeSongPitch"] = true
 
     # game stuff

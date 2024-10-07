@@ -208,6 +208,7 @@ func freeUpPlayer():
     elderNPC.can_move = false
     elderNPC.mySprite.updateBaseFrame(0, 1)
     var finalText = "•zzz\n(she's still asleep...)"
+    elderNPC.textBox.is_really_important = false
     elderNPC.textBox.text_final = finalText
     elderNPC.textBox.textNode.bbcode_text = finalText
     elderNPC.textBox.dialogStartSound.volume_db = -15

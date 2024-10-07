@@ -146,14 +146,14 @@ func conductFromScenePath(path):
         return
     elif path.find("PastoralScene_tangible") > 0:
         tryToPlay(grannyPlayer)
-    elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0:
+    elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
         tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
-        tryToPlay(poisonThemePlayer)
+        tryToPlay(suburbThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:

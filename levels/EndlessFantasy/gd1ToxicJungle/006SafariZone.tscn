@@ -601,10 +601,10 @@ shader_param/target_palette = ExtResource( 7 )
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 6 )
 show_crt_effect = true
-starting_glitch_type = 1
+starting_glitch_type = 2
 tileset_type = 2
 has_spellbook_page = true
-spellbook_spells = [ 1, 3 ]
+spellbook_spells = [ 3, 2 ]
 pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]

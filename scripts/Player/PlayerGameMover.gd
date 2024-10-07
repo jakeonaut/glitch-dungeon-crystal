@@ -459,7 +459,7 @@ var summonedBroom = null
 func getWalkSpeed(delta):
   if transformation == TransformationState.CHICKEN:
     return 6
-  if transformation == TransformationState.UNDERGROUND_RETURNING:    
+  if transformation == TransformationState.UNDERGROUND_RETURNING:
     return 0
   if transformation == TransformationState.UNDERGROUND:
     return 7 if on_ground else 0

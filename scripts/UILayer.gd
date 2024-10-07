@@ -88,7 +88,6 @@ func _ready():
 #     heartsRect.get_node("ColorRect/ColorRect").add_child(newHeartSprite)
 
 onready var glitchStatusText1 = get_node("GlitchStatusRect/RichTextLabel")
-onready var glitchStatusText2 = get_node("GlitchStatusRect/RichTextLabel2")
 onready var keyStatusRect = get_node("KeyStatusRect")
 onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
 onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
@@ -116,7 +115,6 @@ func _process(delta):
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
   var glitchStatusText = str(global.getThingFromAllLevelZonez("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
   glitchStatusText1.text = glitchStatusText 
-  glitchStatusText2.text = glitchStatusText
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
 
   inventoryControl.visible = global.isInventoryOpen
@@ -321,7 +319,6 @@ func processHiscoreRenderLogic(delta):
     pressEnterLabel.visible = false
 
     glitchStatusText1.visible = true
-    glitchStatusText2.visible = true
     return
   # global.pauseMoveInput = true
   endOfLevel.visible = true
@@ -332,7 +329,6 @@ func processHiscoreRenderLogic(delta):
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
     glitchStatusText1.visible = false
-    glitchStatusText2.visible = false
     hiscoreTimer = 0
     # TODO(jaketrower): can consolidate this but i'm lazy rn
     if hiscoreDisplayIndex == 0:

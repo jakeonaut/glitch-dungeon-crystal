@@ -11,8 +11,11 @@ func constructMapGrid():
     var children = get_children()
     for i in range(len(children) - 1, -1, -1):
       var child_name = children[i].name
-      if child_name != "PastoralScene" and child_name != "TutorialDungeon" and child_name != "FishingVillage" and child_name != "ToxicJungle" and child_name != "CricketCaves":
-        children[i].queue_free()
+      if child_name != "PastoralScene" and child_name != "TutorialDungeon" and child_name != "FishingVillage": # and child_name != "ToxicJungle" and child_name != "CricketCaves":
+        var more_children = children[i].get_children()
+        for j in range(len(more_children)):
+          more_children[j].remove_from_group("LevelSprite")
+        # children[i].queue_free()
 
   var levelSprites = get_tree().get_nodes_in_group("LevelSprite")
 

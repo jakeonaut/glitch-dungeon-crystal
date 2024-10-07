@@ -1010,7 +1010,7 @@ show_crt_effect = true
 starting_glitch_type = 4
 tileset_type = 4
 has_spellbook_page = true
-spellbook_spells = [ 4 ]
+spellbook_spells = [ 1, 4 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 19 )]
 

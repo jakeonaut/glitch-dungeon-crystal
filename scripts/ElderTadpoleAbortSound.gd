@@ -8,6 +8,8 @@ func _ready():
   pass
 
 func activateScript():
+  if elderTadpoleNPC.am_i_sleepy:
+    return
   if not elderTadpoleNPC.has_broom:
     # elderTadpoleNPC.has_broom = true
     # elderTadpoleNPC.secretAniPlayer.stop()

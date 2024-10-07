@@ -42,6 +42,7 @@ var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
 var skip_intro_cutscene_reset_time_limit = 10
 func startGame():
+  global.isOnMainMenu = false
   global.resetMemory()
 #   show_dither_effect = false
 #   show_crt_effect = true
