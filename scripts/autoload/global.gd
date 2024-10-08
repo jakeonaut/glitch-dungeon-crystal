@@ -142,7 +142,6 @@ var cameraRotation = 0
 var pauseMoveInput = false # don't allow player physics or camera input??
 var shouldRenderAsCinematic = false
 var pauseGame = false
-var isInventoryOpen = false
 var isPauseMenuOpen = false
 
 var num_cherries_eaten = 0
@@ -176,7 +175,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
-var correct_ritual = ["ui_down", "ui_down", "ui_left", "ui_right", "ui_left", "ui_right", "jump_button", "restart_key"]
+var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "jump_button", "restart_key"]
 
 func _ready():
     set_process(true)
@@ -353,10 +352,10 @@ func getLevelZoneName(longLevelName):
         return null
     return segments[segments.size() - 2]
 
-func getDisplayTitle(levelZoneName):
+func getDisplayTitle(levelZoneName, gd1 = "???"):
     match levelZoneName:
         "gd1":
-            return "???" # basically "null"
+            return  # basically "null"
         "gd1FishingVillage":
             return "tadpole bog"
         "gd1ToxicJungle":

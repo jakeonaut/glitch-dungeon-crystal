@@ -12,6 +12,8 @@ onready var cursorSprite = get_node("CursorSprite")
 # NORMAL MENU
 onready var normalMenu = get_node("NormalMenu")
 onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
+onready var pauseMenuRect = get_node("PauseMenuRect")
+onready var largerPopup = get_node("LargerPopup")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -39,7 +41,8 @@ enum PauseMenuState {
   CONTROLLER_INPUT,
   QUIT_TO_MAIN,
   TEMP,
-  SECRET_RITUAL
+  SECRET_RITUAL,
+  INVENTORY,
 }
 var pauseMenuState = PauseMenuState.NORMAL
 var shouldUpdateMenuText = true
@@ -65,11 +68,15 @@ func _process(delta):
 
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
     processNormalLogic(delta)
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = true
     colorblindPlayers.visible = true
     cursorSprite.position.x = 180
@@ -79,6 +86,8 @@ func _process(delta):
     colorblindPlayers.visible = false
 
   if pauseMenuState == PauseMenuState.SOUND:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
     processSoundLogic(delta)
@@ -86,6 +95,8 @@ func _process(delta):
     soundOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.QUIT_TO_MAIN:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
     processQuitToMainLogic(delta)
@@ -93,6 +104,8 @@ func _process(delta):
     quitToMainOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.TOP_INPUT:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
     processTopInputLogic(delta)
@@ -100,6 +113,8 @@ func _process(delta):
     topInputOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+    pauseMenuRect.visible = true
+    largerPopup.visible = false
     normalMenu.visible = false
     cursorSprite.position.x = 100
     inputMenu.visible = true
@@ -111,6 +126,8 @@ func _process(delta):
     last_control_index = -1
 
   if pauseMenuState == PauseMenuState.SECRET_RITUAL:
+    pauseMenuRect.visible = false
+    largerPopup.visible = true
     normalMenu.visible = true
     cursorSprite.position.x = 180
     processSecretRitualLogic(delta)
@@ -132,8 +149,8 @@ func _process(delta):
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
 
-var normalMenuOptions = ["RESUME", "INPUT", "GRAPHICS", "SOUND", "QUIT TO MAIN"]
-var normalMenuOptionsOnMainMenu = ["RESUME", "INPUT", "GRAPHICS", "SOUND"]
+var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
+var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
@@ -193,7 +210,7 @@ func processNormalLogic(_delta):
 
 onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
-var graphicsOptions = ["CRT FILTER", "GLITCH SCREEN", "COLOR BLIND", "FULLSCREEN"]
+var graphicsOptions = ["CRT Filter", "Glitch Screen", "Color Blind", "Fullscreen"]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -254,7 +271,7 @@ func processGlitchScreen(delta):
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0
 
-var soundOptions = ["PLAY MUSIC", "MUSIC GLITCH"] # global.memory["canChangeSongPitch"]
+var soundOptions = ["Play Music", "Music Glitches"] # global.memory["canChangeSongPitch"]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -303,10 +320,13 @@ func processSoundLogic(_delta):
     shouldUpdateMenuText = true
 
 
-var quitToMainOptions = ["YES", "CANCEL"]
+var quitToMainOptions = ["Yes", "cancel"]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
+  if global.isOnMainMenu:
+    pauseTitleText.bbcode_text = "Really quit?\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
+  else:
+    pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -333,13 +353,16 @@ func processQuitToMainLogic(_delta):
 
   if Input.is_action_just_pressed("menu_confirm"):
     if quitToMainOptionIndex == 0:
-      # dedupe (ish) with "dev_demo_reset" above
-      global.has_started_game = false
-      global.has_really_started_game = false
-      global.resetMemory()
-      global.currLevelZone = null
-      transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
-      global.isPauseMenuOpen = false
+      if global.isOnMainMenu:
+        get_tree().quit()
+      else:
+        # dedupe (ish) with "dev_demo_reset" above
+        global.has_started_game = false
+        global.has_really_started_game = false
+        global.resetMemory()
+        global.currLevelZone = null
+        transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
+        global.isPauseMenuOpen = false
     elif quitToMainOptionIndex == 1:
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true
@@ -403,7 +426,7 @@ func processSecretRitualLogic(_delta):
     
 
 
-var topInputOptions = ["KEYBOARD", "CONTROLLER"]
+var topInputOptions = ["Keyboard", "Controller"]
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -488,6 +511,13 @@ func initializeControlsConfig():
       "default_button_index": JOY_DS_B,
     },
     {
+      "input_action": "restart_key",
+      "label_str": "Return.",
+      "default_keyCode": 82, 
+      "button_index": JOY_SELECT, 
+      "default_button_index": JOY_SELECT, 
+    },
+    {
       "input_action": "alt_action_button",
       "label_str": "next spell",
       "default_keyCode": 32, 
@@ -495,9 +525,9 @@ func initializeControlsConfig():
       "default_button_index": JOY_DS_X, 
     },
     {
-      "input_action": "right_button",
+      "input_action": "left_button",
       "label_str": "prev spell",
-      "default_keyCode": 67, 
+      "default_keyCode": 16, 
       "button_index": JOY_DS_X, 
       "default_button_index": JOY_DS_X, 
     },
@@ -574,7 +604,7 @@ func processControlsLogic(_delta):
     control_index = controlsConfig.size() - 1
   if control_index >= controlsConfig.size():
     control_index = 0
-  cursorSprite.position.y = 114 + (40*control_index)
+  cursorSprite.position.y = 114 + (44*control_index)
 
   var inputLabelText = ""
   var buttonInputText = "[center]"

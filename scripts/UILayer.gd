@@ -14,14 +14,6 @@ onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/C
 onready var miniCrystalTextureRect = get_node("GlitchStatusRect/TextureRect") if has_node("GlitchStatusRect/TextureRect") else null
 onready var miniCrystalViewport = get_node("GlitchStatusRect/Viewport") if has_node("GlitchStatusRect/Viewport") else null
 
-onready var inventoryControl = get_node("Inventory")
-var inventory_index = 0
-func getInventoryBBText():
-  if inventory_index == 0:
-    return "GRIMOIRE spells:\n  •floor\n  •feather"
-  if inventory_index == 1:
-    return "...hi!!! hi!!! hi hi hi!..."
-
 var display_title = "???"
 onready var levelTitleRect = get_node("LevelTitle")
 var title_display_timer = 10
@@ -98,6 +90,14 @@ onready var edgeDistortionLeft = get_node("EdgeDistortion/LeftDistortion")
 onready var edgeDistortionRight = get_node("EdgeDistortion/RightDistortion")
 onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
 onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
+onready var glitchSpellSprite1 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect1/ColorRect/EquipmentSlotSprite")
+onready var glitchSpellSprite2 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
+onready var glitchSpell3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3")
+onready var glitchSpell4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4")
+onready var glitchSpellSprite3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
+onready var glitchSpellSprite4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
+onready var extension = get_node("EquipmentRect/ColorRect/ColorRect/Extension")
+
 func _process(delta):
   textBoxes.visible = not global.isPauseMenuOpen
   processCutsceneRenderLogic(delta)
@@ -116,8 +116,6 @@ func _process(delta):
   var glitchStatusText = str(global.getThingFromAllLevelZonez("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
   glitchStatusText1.text = glitchStatusText 
   #it's okay to let the UI go fast, even if it's hearts # delta = delta * global.time_dilation_multiplier
-
-  inventoryControl.visible = global.isInventoryOpen
 
   # if not global.memory.has("max_hp") or global.memory["max_hp"] <= 1:
   #   heartsRect.visible = false
@@ -237,17 +235,34 @@ func _process(delta):
 
   if global.memory.has("spellbookPage"):
     var spellbook = global.memory["spellbookPage"]
-    var currSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect2/ColorRect3/EquipmentSlotSprite")
-    var equipSlotSprite = get_node("EquipmentRect/ColorRect/ColorRect/ColorRect3/ColorRect3/EquipmentSlotSprite")
-    var nextSpellPage = spellbook[0] if spellbook.size() > 1 else global.GlitchForm.NORMAL
-    var currSpellPage = spellbook[spellbook.size() - 1] if spellbook.size() >= 1 else level.player.glitch_form #global.GlitchForm.NORMAL
-    setGlitchSprite(equipSlotSprite, nextSpellPage)
-    setGlitchSprite(currSlotSprite, currSpellPage)
-  var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
-  if global.memory["glitched_grimoire"]:
-    spellbookSprite.frame = 3
+    var spellbookSize = spellbook.size()
+    var index = level.player.spellCastPauseIndex
+    setGlitchSprite(glitchSpellSprite1, spellbook[level.player.spellCastPauseIndex] if spellbookSize >= 1 else level.player.glitch_form)
+    if spellbookSize >= 2:
+      index = (index + 1) % spellbookSize
+      setGlitchSprite(glitchSpellSprite2, spellbook[index])
+    else:
+      setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
+    if spellbookSize >= 3:
+      index = (index + 1) % spellbookSize
+      setGlitchSprite(glitchSpellSprite3, spellbook[index])
+    else:
+      setGlitchSprite(glitchSpellSprite3, global.GlitchForm.NORMAL)
+    if spellbookSize >= 4:
+      index = (index + 1) % spellbookSize
+      setGlitchSprite(glitchSpellSprite4, spellbook[index])
+    else:
+      setGlitchSprite(glitchSpellSprite4, global.GlitchForm.NORMAL)
+
+    glitchSpell3.visible = global.memory["glitched_grimoire"]
+    glitchSpell4.visible = global.memory["glitched_grimoire"]
+    extension.visible = global.memory["glitched_grimoire"]
   else:
-    spellbookSprite.frame = 0
+    var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
+    if global.memory["glitched_grimoire"]:
+      spellbookSprite.frame = 3
+    else:
+      spellbookSprite.frame = 0
 
   if global.memory["canGlitchScreen"] and level.pacman_wrapping:
     edgeDistortion.visible = true

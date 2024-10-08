@@ -835,14 +835,9 @@ func nullify():
     return
 
   if did_erase or glitch_form != global.GlitchForm.NORMAL:
+    spellCastPauseIndex = 0
     nullifySound.play()
-    if global.memory["permanent_spells"][self.glitch_form]:
-      return
-      
-    if global.memory["spellbookPage"].size() > 0:
-      self.applyGlitch(global.memory["spellbookPage"][0], true)
-    else:
-      self.applyGlitch(global.GlitchForm.NORMAL, true)    
+    self.applyGlitch(global.GlitchForm.NORMAL, true)    
 
 # need this to have it available in the aniPlayer
 func firstAdjustmentForNestingDolls():
