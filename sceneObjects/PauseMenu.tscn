@@ -55,6 +55,39 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
 
+[node name="LargerPopup" type="Control" parent="."]
+visible = false
+margin_right = 640.0
+margin_bottom = 510.0
+
+[node name="ColorRect" type="ColorRect" parent="LargerPopup"]
+margin_left = 115.0
+margin_top = 98.0
+margin_right = 537.0
+margin_bottom = 394.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="LargerPopup/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 416.0
+margin_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="LargerPopup/ColorRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 409.0
+margin_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
 [node name="NormalMenu" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -106,8 +139,9 @@ size_flags_vertical = 0
 theme = ExtResource( 20 )
 
 [node name="InputLabels" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
-margin_right = 441.0
-margin_bottom = 443.0
+margin_top = -4.0
+margin_right = 286.0
+margin_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -745, -223 )

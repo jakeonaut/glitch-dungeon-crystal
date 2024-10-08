@@ -11,7 +11,7 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
     pass
     
 func activateScript():
-  var finalText = "are you stuck?\npress " + global.getLargeInputText("restart_key") + " to die"
+  var finalText = "are you stuck?\npress " + global.getLargeInputText("restart_key") + " to return"
   textBox.text_final = finalText
   textBox.textNode.bbcode_text = finalText
         

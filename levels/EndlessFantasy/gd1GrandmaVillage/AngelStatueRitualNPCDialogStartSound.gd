@@ -7,10 +7,10 @@ func _ready():
 
 
 func activateScript():
-    var text = "•I will teach you Ritual. \nTo travel between Angels\n•"
+    var text = "•I will teach you Ritual. \nTo travel between Angels\n"
     for ritual_step in global.correct_ritual:
         text += global.getLargeInputText(ritual_step)
-    text += "\nRemember it like this:\n•Pray twice, •Dance twice.\n•Jump then Die"
+    text += "\n\nRemember it like this:\n  •Pray twice, dance, jump,\n    then Return."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

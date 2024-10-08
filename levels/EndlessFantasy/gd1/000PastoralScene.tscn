@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -52,7 +52,6 @@
 [ext_resource path="res://assets/tower.png" type="Texture" id=52]
 [ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=53]
 [ext_resource path="res://sceneObjects/ElderTadpoleNPC.tscn" type="PackedScene" id=54]
-[ext_resource path="res://scripts/AbortSound.gd" type="Script" id=55]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 17 )
@@ -2284,9 +2283,6 @@ is released"
 [node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 254 )
 
-[node name="AbortSound" parent="Viewport/level/ElderTadpoleNPC/NPC TextBox/TextBox" index="13"]
-script = ExtResource( 55 )
-
 [node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/FallthroughSolid" index="0"]
 shape = SubResource( 255 )
 
@@ -2340,9 +2336,6 @@ texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 256 )
-
-[node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="SkipText" type="RichTextLabel" parent="UILayer"]
 visible = false
