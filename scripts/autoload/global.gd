@@ -207,7 +207,6 @@ func _ready():
 func resetMemory():
     memory = {}
 
-    memory["demo_mode"] = 0
     # settings?
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
@@ -239,9 +238,11 @@ func resetMemory():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
+
     # if you've beaten the midpoint boss
+    memory["demo_mode"] = 0
     memory["glitched_grimoire"] = false
-    memory["priestess"] = 2
+    memory["priestess"] = 0
 
     # PERMANENT SPELLS
     
