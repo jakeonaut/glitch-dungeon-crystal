@@ -536,9 +536,10 @@ flip_v = true
 mesh = SubResource( 194 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
+visible = false
 margin_left = 2.5
 margin_top = 469.5
 margin_right = 714.5
@@ -553,6 +554,7 @@ text = "x to Sweep. z to Jump. Arrow keys to walk.."
 scroll_active = false
 
 [node name="OptionsMenuPrompt" type="RichTextLabel" parent="UILayer"]
+visible = false
 margin_left = 11.5
 margin_top = 13.0
 margin_right = 454.5

@@ -153,6 +153,7 @@ func _process(delta):
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
+
     
 onready var tileCollisionShape = get_node("TileArea/CollisionShape")
 onready var interactionShape = get_node("InteractionArea/CollisionShape")
@@ -249,7 +250,7 @@ func spawnSparkles(delta, above_the_head = false):
   #       blink_time_limit = 20
   #       is_blinked = false
 
-onready var spellbookGlitchSprite = get_node("SpellbookGlitchSprite")
+onready var spellbookGlitchSprite = get_node("SpriteContainer/SpellbookGlitchSprite")
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
@@ -484,6 +485,25 @@ func getWalkSpeed(delta):
         else: return 2
     return .getWalkSpeed(delta) # super()
 
+func doIHaveSpell(which_spell):
+  if glitch_form == which_spell:
+    return true
+  if global.memory.has("spellbookPage"):
+    for spell in global.memory["spellbookPage"]:
+      if spell == which_spell:
+        return true
+  return false
+
+func findSpellInSpellbook(which_spell):
+  if glitch_form == which_spell:
+    return -1
+  if global.memory.has("spellbookPage"):
+    for i in len(global.memory["spellbookPage"]):
+      var spell = global.memory["spellbookPage"][i]
+      if spell == which_spell:
+        return i
+  return -1
+
 func doubleJump():
   was_just_on_ground_timer = was_just_on_ground_time_limit
   jumped_from_true_ground = truly_on_ground
@@ -716,6 +736,7 @@ func summonSmokeClouds(num_clouds, play_sound = false, is_glitchy = false, horiz
             newSmokeCloud.set_material_override(new_material.duplicate())
     
 
+var touching_glitch_or_spikes = false
 # @override
 func handleSpikeCollisions(delta):
   var x = global_transform.origin.x
@@ -724,6 +745,7 @@ func handleSpikeCollisions(delta):
   var TILE_WIDTH = levelTiles.cell_size.x
   var TILE_HEIGHT = levelTiles.cell_size.y
 
+  touching_glitch_or_spikes = false
   for i in range(int(round(y+bb)), int(round(y+tb))):
     for j in range(int(round(x+lb)), int(round(x+rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))

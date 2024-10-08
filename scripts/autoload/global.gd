@@ -176,7 +176,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
-var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "ui_right", "ui_left", "jump_button", "restart_key"]
+var correct_ritual = ["ui_down", "ui_down", "ui_left", "ui_right", "ui_left", "ui_right", "jump_button", "restart_key"]
 
 func _ready():
     set_process(true)
@@ -207,7 +207,7 @@ func _ready():
 func resetMemory():
     memory = {}
 
-    memory["demo_mode"] = 1
+    memory["demo_mode"] = 0
     # settings?
     memory["show_crt_effect"] = true
     memory["show_dither_effect"] = true
@@ -216,13 +216,13 @@ func resetMemory():
     memory["colorblindMode"] = true
     memory["stopAllMusic"] = true
     memory["canChangeSongPitch"] = true
+    memory["spellAssist"] = false
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false
     memory["currLevelZone"] = null
     memory["initialized_from_debug"] = false
     memory["tutorial_gem"] = 0
-    memory["splat"] = 0
     memory["hammer"] = 0
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
@@ -237,11 +237,11 @@ func resetMemory():
     memory["level_zonez"] = []
     memory["fishing_rod_shortcut"] = 0
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
-    memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
     # if you've beaten the midpoint boss
-    memory["priestess"] = 0
+    memory["glitched_grimoire"] = false
+    memory["priestess"] = 2
 
     # PERMANENT SPELLS
     
@@ -732,11 +732,11 @@ func normalizeLoadedMemory():
         global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
     
 func getNextGlitch(glitch_form):
-    if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FLOOR
-    if glitch_form == global.GlitchForm.FLOOR: return global.GlitchForm.FEATHER
-    if glitch_form == global.GlitchForm.FEATHER: return global.GlitchForm.INVISIBLE
-    if glitch_form == global.GlitchForm.INVISIBLE: return global.GlitchForm.LADDER
-    if glitch_form == global.GlitchForm.LADDER: return global.GlitchForm.WALK_THROUGH_WALLS
+    if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FEATHER
+    if glitch_form == global.GlitchForm.FEATHER: return global.GlitchForm.FLOOR
+    if glitch_form == global.GlitchForm.FLOOR: return global.GlitchForm.LADDER
+    if glitch_form == global.GlitchForm.LADDER: return global.GlitchForm.INVISIBLE
+    if glitch_form == global.GlitchForm.INVISIBLE: return global.GlitchForm.WALK_THROUGH_WALLS
     if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS: return global.GlitchForm.NORMAL
 
 func strip_bbcode(source):

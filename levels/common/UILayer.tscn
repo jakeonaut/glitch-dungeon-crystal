@@ -157,18 +157,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-<<<<<<< HEAD
-[sub_resource type="DynamicFont" id=23]
-size = 48
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=24]
-default_font = SubResource( 23 )
-
-=======
->>>>>>> 699db62ebe2f04c43d6c3409b96c993d6de45e89
 [sub_resource type="SpatialMaterial" id=17199]
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
@@ -672,8 +660,6 @@ tracks/7/keys = {
 "values": [ Vector3( -0.317175, 0, -1 ), Vector3( -0.317, 0.1, -1 ), Vector3( -0.317, 1, -1 ) ]
 }
 
-<<<<<<< HEAD
-=======
 [sub_resource type="DynamicFont" id=23]
 size = 48
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -683,7 +669,6 @@ font_data = ExtResource( 7 )
 [sub_resource type="Theme" id=24]
 default_font = SubResource( 23 )
 
->>>>>>> 699db62ebe2f04c43d6c3409b96c993d6de45e89
 [sub_resource type="DynamicFont" id=26]
 size = 48
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -902,10 +887,7 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "0"
 
 [node name="GlitchSpriteColorRect" type="ColorRect" parent="."]
-<<<<<<< HEAD
-=======
 visible = false
->>>>>>> 699db62ebe2f04c43d6c3409b96c993d6de45e89
 margin_left = 7.5
 margin_top = 7.0
 margin_right = 72.5

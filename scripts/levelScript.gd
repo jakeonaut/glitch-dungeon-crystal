@@ -103,6 +103,7 @@ func _ready_impl():
         global.memory["spellbookPage"].push_back(spellbook_spell)
         player.applyGlitch(spellbook_spell)  
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
+      global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.FLOOR, global.GlitchForm.LADDER, global.GlitchForm.INVISIBLE]
     
@@ -629,15 +630,13 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
 
 func flipGravity():
   player.grav *= -1
-  # level.player.mySprite.flip_v = not level.player.mySprite.flip_v
-  # level.player.broomSpriteVisible.flip_v = not level.player.broomSpriteVisible.flip_v
-  player.spriteContainer.rotation_degrees.x += 180
-  player.spriteContainer.rotation_degrees.x = fmod(player.spriteContainer.rotation_degrees.x, 360)
 
   if player.grav < 0:
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
+    player.spriteContainer.rotation_degrees.x = 180
   else:
     player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1
+    player.spriteContainer.rotation_degrees.x = 0
 
 func clearOtherGrabbers():
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

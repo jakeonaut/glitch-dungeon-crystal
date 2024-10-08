@@ -15,30 +15,6 @@ onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
-onready var leftSprite = get_node("InputMenu/LeftSprite")
-onready var leftSpriteAniPlayer = get_node("InputMenu/LeftSprite/AnimationPlayer")
-onready var leftTextLabel = get_node("InputMenu/LeftTextLabel")
-onready var rightSprite = get_node("InputMenu/RightSprite")
-onready var rightSpriteAniPlayer = get_node("InputMenu/RightSprite/AnimationPlayer")
-onready var rightTextLabel = get_node("InputMenu/RightTextLabel")
-onready var runSprite = get_node("InputMenu/RunSprite")
-onready var runSpriteAniPlayer = get_node("InputMenu/RunSprite/AnimationPlayer")
-onready var runTextLabel = get_node("InputMenu/RunTextLabel")
-onready var downSprite = get_node("InputMenu/DownSprite")
-onready var downSpriteAniPlayer = get_node("InputMenu/DownSprite/AnimationPlayer")
-onready var downTextLabel = get_node("InputMenu/DownTextLabel")
-onready var upSprite = get_node("InputMenu/UpSprite")
-onready var upSpriteAniPlayer = get_node("InputMenu/UpSprite/AnimationPlayer")
-onready var upTextLabel = get_node("InputMenu/UpTextLabel")
-onready var jumpSprite = get_node("InputMenu/JumpSprite")
-onready var jumpSpriteAniPlayer = get_node("InputMenu/JumpSprite/AnimationPlayer")
-onready var jumpTextLabel = get_node("InputMenu/JumpTextLabel")
-onready var sweepSprite = get_node("InputMenu/SweepSprite")
-onready var sweepSpriteAniPlayer = get_node("InputMenu/SweepSprite/AnimationPlayer")
-onready var sweepTextLabel = get_node("InputMenu/SweepTextLabel")
-onready var castSprite = get_node("InputMenu/CastSprite")
-onready var castSpriteAniPlayer = get_node("InputMenu/CastSprite/AnimationPlayer")
-onready var castTextLabel = get_node("InputMenu/CastTextLabel")
 onready var menuMoveSound = get_node("MenuMoveSound")
 var glitch_death_timer = 0
 
@@ -77,9 +53,8 @@ func _process(delta):
     return
     
   if not hasInitializedControlsConfig:
-    if castTextLabel != null:
-      initializeControlsConfig()
-      hasInitializedControlsConfig = true
+    initializeControlsConfig()
+    hasInitializedControlsConfig = true
   if not hasInitializedControlsConfig:
     return
 
@@ -91,11 +66,13 @@ func _process(delta):
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
     normalMenu.visible = true
+    cursorSprite.position.x = 180
     processNormalLogic(delta)
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
     normalMenu.visible = true
     colorblindPlayers.visible = true
+    cursorSprite.position.x = 180
     processGraphicsLogic(delta)
   else:
     graphicsOptionIndex = 0
@@ -103,24 +80,28 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.SOUND:
     normalMenu.visible = true
+    cursorSprite.position.x = 180
     processSoundLogic(delta)
   else:
     soundOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.QUIT_TO_MAIN:
     normalMenu.visible = true
+    cursorSprite.position.x = 180
     processQuitToMainLogic(delta)
   else:
     quitToMainOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.TOP_INPUT:
     normalMenu.visible = true
+    cursorSprite.position.x = 180
     processTopInputLogic(delta)
   else:
     topInputOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     normalMenu.visible = false
+    cursorSprite.position.x = 100
     inputMenu.visible = true
     processControlsLogic(delta)
     processPopupRenderLogic(delta)
@@ -131,11 +112,16 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.SECRET_RITUAL:
     normalMenu.visible = true
+    cursorSprite.position.x = 180
     processSecretRitualLogic(delta)
   else:
     secretRitualOptionIndex = 0
 
-  if Input.is_action_just_pressed("dev_demo_reset"):
+  if cursorSprite.position.x >= 150:
+    cursorSprite.scale = Vector2(4, 4)
+  else:
+    cursorSprite.scale = Vector2(3, 3)
+  if Input.is_action_just_pressed("dev_demo_reset") and global.memory["demo_mode"] > 0:
     global.has_started_game = true
     global.has_really_started_game = true
     global.memory.erase("roomPath")
@@ -350,7 +336,6 @@ func processQuitToMainLogic(_delta):
       # dedupe (ish) with "dev_demo_reset" above
       global.has_started_game = false
       global.has_really_started_game = false
-      global.okay_really_really_started_game = false
       global.resetMemory()
       global.currLevelZone = null
       transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
@@ -462,79 +447,57 @@ func initializeControlsConfig():
   var newControlsConfig = [
     {
       "input_action": "ui_left",
-      "label_str": "LEFT",
-      "text_label": leftTextLabel,
-      "sprite": leftSprite,
-      "sprite_aniPlayer": leftSpriteAniPlayer,
+      "label_str": "move left",
       "default_keyCode": 16777231, 
       "button_index": JOY_DPAD_LEFT,
       "default_button_index": JOY_DPAD_LEFT,
     },
     {
       "input_action": "ui_right",
-      "label_str": "RIGHT",
-      "text_label": rightTextLabel,
-      "sprite": rightSprite,
-      "sprite_aniPlayer": rightSpriteAniPlayer,
+      "label_str": "move right",
       "default_keyCode": 16777233, 
       "button_index": JOY_DPAD_RIGHT,
       "default_button_index": JOY_DPAD_RIGHT,
     },
-    # {
-    #   "input_action": "run_button",
-    #   "label_str": "RUN",
-    #   "text_label": runTextLabel,
-    #   "sprite": runSprite,
-    #   "sprite_aniPlayer": runSpriteAniPlayer,
-    #   "default_keyCode": 16777237, 
-    # },
     {
       "input_action": "ui_down",
-      "label_str": "DOWN",
-      "text_label": downTextLabel,
-      "sprite": downSprite,
-      "sprite_aniPlayer": downSpriteAniPlayer,
+      "label_str": "down",
       "default_keyCode": 16777234, 
       "button_index": JOY_DPAD_DOWN,
       "default_button_index": JOY_DPAD_DOWN,
     },
     {
       "input_action": "ui_up",
-      "label_str": "UP",
-      "text_label": upTextLabel,
-      "sprite": upSprite,
-      "sprite_aniPlayer": upSpriteAniPlayer,
+      "label_str": "up",
       "default_keyCode": 16777232, 
       "button_index": JOY_DPAD_UP,
       "default_button_index": JOY_DPAD_UP,
     },
     {
       "input_action": "jump_button",
-      "label_str": "JUMP",
-      "text_label": jumpTextLabel,
-      "sprite": jumpSprite,
-      "sprite_aniPlayer": jumpSpriteAniPlayer,
+      "label_str": "jump",
       "default_keyCode": 90, 
       "button_index": JOY_DS_A,
       "default_button_index": JOY_DS_A,
     },
     {
       "input_action": "sub_action_button",
-      "label_str": "SWEEP",
-      "text_label": sweepTextLabel,
-      "sprite": sweepSprite,
-      "sprite_aniPlayer": sweepSpriteAniPlayer,
+      "label_str": "sweep",
       "default_keyCode": 88, 
       "button_index": JOY_DS_B,
       "default_button_index": JOY_DS_B,
     },
     {
       "input_action": "alt_action_button",
-      "label_str": "MAGICK",
-      "text_label": castTextLabel,
-      "sprite": castSprite,
-      "sprite_aniPlayer": castSpriteAniPlayer,
+      "label_str": "next spell",
       "default_keyCode": 32, 
+      "button_index": JOY_DS_X, 
+      "default_button_index": JOY_DS_X, 
+    },
+    {
+      "input_action": "right_button",
+      "label_str": "prev spell",
+      "default_keyCode": 67, 
       "button_index": JOY_DS_X, 
       "default_button_index": JOY_DS_X, 
     },
@@ -557,6 +520,8 @@ func initializeControlsConfig():
 
   controlsConfig = newControlsConfig
 
+onready var inputLabelTextLabel = get_node("InputMenu/ScrollContainer/InputLabels")
+onready var buttonInputTextLabel = get_node("InputMenu/ScrollContainer/ButtonInputs")
 func processControlsLogic(_delta):
   if global.is_reading_input:
     pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
@@ -609,47 +574,33 @@ func processControlsLogic(_delta):
     control_index = controlsConfig.size() - 1
   if control_index >= controlsConfig.size():
     control_index = 0
-  cursorSprite.position.y = 120 + (58*control_index)
+  cursorSprite.position.y = 114 + (40*control_index)
 
-  var normal_size = Vector2(2, 2)
-  var big_size = Vector2(3, 3)
-
+  var inputLabelText = ""
+  var buttonInputText = "[center]"
   for i in range(controlsConfig.size()):
     var controlConfig = controlsConfig[i]
     if control_index == i:
-      controlConfig.sprite.scale = big_size
-      if control_index != last_control_index or shouldUpdateMenuText:
-        var waveTextVal = ""
-        if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-          waveTextVal = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2)
-        elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-          waveTextVal = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
-        controlConfig.text_label.bbcode_text = "[wave]" + waveTextVal + "[/wave]"
-        # controlConfig.sprite.z_index = 1
-        controlConfig.sprite_aniPlayer.play("idle")
-    else:
-      controlConfig.sprite.scale = normal_size
+      var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, 2) + "[/color]"
+        buttonTextAdd = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2)
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        controlConfig.text_label.bbcode_text = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
-      # controlConfig.sprite.z_index = 0
-      controlConfig.sprite_aniPlayer.stop()
-      controlConfig.sprite_aniPlayer.play("RESET")
+        buttonTextAdd = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
+      buttonInputText += buttonTextAdd + " \n"
+      inputLabelText += "[wave]" + controlConfig.label_str + "[/wave]\n"
+    else:
+      var buttonTextAdd = ""
+      if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 2) + "[/color]"
+      elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
+      buttonInputText += buttonTextAdd + "\n"
+      inputLabelText += "[color=gray]" + controlConfig.label_str + "[/color] \n"
+  if last_control_index != control_index or shouldUpdateMenuText:
+    inputLabelTextLabel.bbcode_text = inputLabelText
+    buttonInputTextLabel.bbcode_text = buttonInputText + "[/center]"
 
   last_control_index = control_index
-
-var castSpritePalette = 0
-func changeCastSpritePalette():
-  if castSpritePalette == 0:
-    castSprite.material.set_shader_param("palette_out", global.green_palette)
-    castSpritePalette = 1
-  elif castSpritePalette == 1:
-    castSprite.material.set_shader_param("palette_out", global.red_palette)
-    castSpritePalette = 2
-  elif castSpritePalette == 2:
-    castSprite.material.set_shader_param("palette_out", global.grey_player_palette)
-    castSpritePalette = 0
 
 func processPopupRenderLogic(delta):
   if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("ui_cancel_controller"):

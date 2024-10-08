@@ -564,16 +564,24 @@ func processInputs(delta):
     # getSmacked(global_transform.origin)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
-    if pauseAnimation and not pressingJump() and aniPlayer.assigned_animation != "sinkInSand":
-      vv = 0
-    else:
-      vv = getWalkSpeed(delta) * 1.1
-    if not pauseAnimation and aniPlayer != null and not "walk" in aniPlayer.assigned_animation:
-      aniPlayer.stop()
-      # aniPlayer.queue("walkBump")
-      aniPlayer.queue("walk")
-    should_do_fallthrough_area_collision = false
-    ladderUpdateTargetLastGroundedY()
+    processWallLadderWalking(delta)
+  else:
+    processNotWallLadderWalking(delta)
+
+func processWallLadderWalking(delta):
+  if pauseAnimation and not pressingJump() and aniPlayer.assigned_animation != "sinkInSand":
+    vv = 0
+  else:
+    vv = getWalkSpeed(delta) * 1.1
+  if not pauseAnimation and aniPlayer != null and not "walk" in aniPlayer.assigned_animation:
+    aniPlayer.stop()
+    # aniPlayer.queue("walkBump")
+    aniPlayer.queue("walk")
+  should_do_fallthrough_area_collision = false
+  ladderUpdateTargetLastGroundedY()
+
+func processNotWallLadderWalking(_delta):
+  pass
 
 # dummy
 func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):

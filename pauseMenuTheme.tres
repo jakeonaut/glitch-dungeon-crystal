@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=60]
-size = 35
+size = 36
 outline_size = 3
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true

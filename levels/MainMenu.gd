@@ -46,6 +46,7 @@ func startGame():
   global.resetMemory()
 #   show_dither_effect = false
 #   show_crt_effect = true
+  global.okay_really_really_started_game = false
   global.has_started_game = true
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false

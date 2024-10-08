@@ -847,6 +847,34 @@ tracks/14/keys = {
 height = 1.23275
 radius = 0.48954
 
+[sub_resource type="ShaderMaterial" id=114]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 74 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 46 )
+
 [sub_resource type="Animation" id=29]
 length = 0.001
 tracks/0/type = "value"
@@ -5193,7 +5221,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SpellbookGlitchSprite:scale")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -5205,36 +5233,12 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0.25, 1.931, 0.625111 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -5271,7 +5275,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SpellbookGlitchSprite:scale")
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -5283,36 +5287,12 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.25, 1.931, 0.625111 ), Vector3( 0.25, 1.931, 0.625111 ), Vector3( 0.25, 1.37999, 0.625111 ), Vector3( 0.25, 0.77522, 0.625111 ), Vector3( 0.25, 1.931, 0.625111 ), Vector3( 0.25, 2.40138, 0.625111 ), Vector3( 0.25, 1.931, 0.625111 ), Vector3( 0.25, 1.37999, 0.625111 ), Vector3( 0.25, 1.931, 0.625111 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
@@ -6322,34 +6302,6 @@ shader_param/texture_albedo = ExtResource( 37 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 36 )
 
-[sub_resource type="ShaderMaterial" id=114]
-shader = ExtResource( 4 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 20.0
-shader_param/shake_color_rate = 0.0
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 4.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 74 )
-shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 46 )
-
 [sub_resource type="ShaderMaterial" id=85]
 shader = ExtResource( 4 )
 shader_param/albedo = null
@@ -6571,6 +6523,17 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="SpriteContainer/SecretSweepAreaActual"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48652, -0.916496, 0 )
 shape = SubResource( 68 )
+
+[node name="SpellbookGlitchSprite" type="Sprite3D" parent="SpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.68452, 0.625111 )
+material_override = SubResource( 114 )
+pixel_size = 0.125
+texture = ExtResource( 74 )
+hframes = 4
+vframes = 6
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
 
 [node name="Sounds" type="Node" parent="."]
 
@@ -6917,17 +6880,6 @@ vframes = 32
 frame = 880
 script = ExtResource( 10 )
 max_frames = 1
-
-[node name="SpellbookGlitchSprite" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.931, 0.625111 )
-material_override = SubResource( 114 )
-pixel_size = 0.125
-texture = ExtResource( 74 )
-hframes = 4
-vframes = 6
-script = ExtResource( 10 )
-max_frames = 1
-should_animate = false
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="."]
 

@@ -70,6 +70,19 @@ func _ready():
   broomSpriteAnimated.get_material_override().set_shader_param("opacity", 1.0)
   mySprite.get_material_override().set_shader_param("opacity", 1.0)
 
+# make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
+func processWallLadderWalking(delta):
+  .processWallLadderWalking(delta) # super
+  # if pressingMoveLeft():
+  #   spriteContainer.rotation_degrees.z = 270
+  # elif pressingMoveRight():
+  #   spriteContainer.rotation_degrees.z = 90
+func processNotWallLadderWalking(delta):
+  .processNotWallLadderWalking(delta)
+  # spriteContainer.rotation_degrees.z = 0
+  # if summonedBroom:
+  #   summonedBroom.rotation_degrees.z = 0
+
 # @override
 func alignMySprite():
   var pixelSize = 0.125
@@ -119,20 +132,15 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
-  if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
+  var spellbookSize = global.memory["spellbookPage"].size() if global.memory.has("spellbookPage") else 0
+  if spellbookSize == 0:
     return
-  var new_spellbook = []
-  var old_spellbook = global.memory["spellbookPage"]
-  var glitch_type = old_spellbook[spellCastPauseIndex]
-  var i = spellCastPauseIndex + 1
-  while new_spellbook.size() < old_spellbook.size():
-    if i >= old_spellbook.size():
-      i = 0
-    new_spellbook.append(old_spellbook[i])
-    i += 1
+  while spellCastPauseIndex < 0:
+    spellCastPauseIndex += spellbookSize
+  spellCastPauseIndex = spellCastPauseIndex % spellbookSize
+  var glitch_type = global.memory["spellbookPage"][spellCastPauseIndex]
   applyGlitch(glitch_type)
   applyObeliskGlitch(glitch_type, false)
-  global.memory["spellbookPage"] = new_spellbook
     
 func applySpellbookGlitch():
   if not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() <= 0:
@@ -484,32 +492,69 @@ func processCastingLogic(_delta):
   if not global.memory.has("spellbookPage"):
     return
 
-  if (Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("right_button"):
-    if global.memory["spellbookPage"].size() <= 1:
-      noSpellSound.play()
-    else:
-      spellCastPauseIndex = 0
-      applySpellbookGlitch()
-      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
-  elif (Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("left_button"):
-    if global.memory["spellbookPage"].size() <= 1:
-      noSpellSound.play()
-    else:
-      spellCastPauseIndex = -2
-      applySpellbookGlitch()
-      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
+  if global.memory["spellAssist"]:
+    # automatic mode
+    var desired_spell = global.GlitchForm.NORMAL
+    if touching_glitch_or_spikes:
+      desired_spell = global.GlitchForm.INVISIBLE
+    elif horizontal_collision and (pressingMoveLeft() or pressingMoveRight()):
+      desired_spell = global.GlitchForm.LADDER
+    elif justPressedJump():
+      desired_spell = global.GlitchForm.FEATHER
+    elif was_on_ground and not on_ground and not pressingJump() and (pressingMoveLeft() or pressingMoveRight()) and not pressingDown():
+      desired_spell = global.GlitchForm.FLOOR
+      on_ground = true
+      
+    tryToApplySpellAssist(desired_spell)
+  else:
+    # manual mode
+    if (Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("right_button"):
+      if global.memory["spellbookPage"].size() <= 1:
+        noSpellSound.play()
+      else:
+        spellCastPauseIndex += 1
+        applySpellbookGlitch()
+        level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
+    elif (Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("left_button"):
+      if global.memory["spellbookPage"].size() <= 1:
+        noSpellSound.play()
+      else:
+        spellCastPauseIndex -= 1
+        applySpellbookGlitch()
+        level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
 
-  # TODO(REMAP)
-  if global.memory["glitched_grimoire"]:
-    # TODO(): do these only work if you have > 2 spells?
-    if Input.is_action_just_pressed("spell_1"):
-      pass
-    if Input.is_action_just_pressed("spell_2"):
-      pass
-    if Input.is_action_just_pressed("spell_3"):
-      pass
-    if Input.is_action_just_pressed("spell_4"):
-      pass
+    # TODO(REMAP)
+    if global.memory.has("spellbookPage") and global.memory["glitched_grimoire"]:
+      # TODO(): do these only work if you have > 2 spells?
+      var spellbookSize = len(global.memory["spellbookPage"])
+      if Input.is_action_just_pressed("spell_1"):
+        if spellbookSize >= 1:
+          spellCastPauseIndex = 0
+          applySpellbookGlitch()
+          level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
+      if Input.is_action_just_pressed("spell_2"):
+        if spellbookSize >= 2:
+          spellCastPauseIndex = 1
+          applySpellbookGlitch()
+          level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
+      if Input.is_action_just_pressed("spell_3"):
+        if spellbookSize >= 3:
+          spellCastPauseIndex = 2
+          applySpellbookGlitch()
+          level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
+      if Input.is_action_just_pressed("spell_4"):
+        if spellbookSize >= 4:
+          spellCastPauseIndex = 3
+          applySpellbookGlitch()
+          level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
+
+func tryToApplySpellAssist(desired_spell):
+  if glitch_form != desired_spell and desired_spell != global.GlitchForm.NORMAL and doIHaveSpell(desired_spell):
+    var newSpellIndex = findSpellInSpellbook(desired_spell)
+    if newSpellIndex >= 0:
+      spellCastPauseIndex = newSpellIndex
+      applySpellbookGlitch()
+      level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
 
 func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
@@ -1241,7 +1286,7 @@ func processMoleLogic(delta):
         tryClearFallthroughCollisionSolid()
         transformation = TransformationState.UNDERGROUND
         global_transform.origin.y -= 2
-        summonSmokeClouds(5, true, true, 0)
+        summonSmokeClouds(3, true, true, 0)
         mySprite.visible = false
         loseBroom()
         digSound.play()
@@ -1258,7 +1303,7 @@ func getMoleCured():
   override_camera_y = null
   transformation = TransformationState.NORMAL
   global_transform.origin.y -= 2
-  summonSmokeClouds(5, true, true, 0)
+  summonSmokeClouds(3, true, true, 0)
   digSound2.play()
   global_transform.origin.y += 2
   mySprite.visible = true
@@ -1334,6 +1379,8 @@ var remembered_on_ground = false
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
+  touching_glitch_or_spikes = true
+  tryToApplySpellAssist(global.GlitchForm.INVISIBLE)
   if transitioning or global.isEnteringRoom:
     return
   if isOnSavePoint():
@@ -1437,7 +1484,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     global.pauseMoveInput = false 
 
     if global.memory["hp"] <= 1:
-      summonSmokeClouds(5, true, true, -1)
+      summonSmokeClouds(3, true, true, -1)
       enchantedBagSpriteVisible.visible = false
     # self.nullify()
   remembered_feather_jump_timer = self.feather_jump_timer
@@ -1590,7 +1637,7 @@ func processBroomLogic(delta):
         self.linear_velocity.y = amt
         self.lv.y = amt
       summonFallenBroom(true)
-    elif on_ground:
+    elif on_ground or was_walking_into_wall:
       summonedBroom.queue_free()
       broomStop()
       doBroomAttack(1)
@@ -1756,6 +1803,7 @@ func adjustSummonedBroomSpritePosition():
     # yAddition -= 3.146
   else:
     summonedBroom.rotation_degrees.x = 0
+  summonedBroom.rotation_degrees.z = spriteContainer.rotation_degrees.z
 
   summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
@@ -1940,7 +1988,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
   if not global.memory["broom"] or not broomSpriteVisible.visible:
     return null
   broomSpriteVisible.visible = false
-  summonSmokeClouds(5, false, false)
+  summonSmokeClouds(3, false, false)
   var fallenBroom = fallenBroomRes.instance()
   level.add_child(fallenBroom)
   if smacked_npc != null:

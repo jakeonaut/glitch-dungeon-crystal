@@ -245,7 +245,7 @@ func _process(delta):
     setGlitchSprite(currSlotSprite, currSpellPage)
   var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
   if global.memory["glitched_grimoire"]:
-    spellbookSprite.frame = 2
+    spellbookSprite.frame = 3
   else:
     spellbookSprite.frame = 0
 
