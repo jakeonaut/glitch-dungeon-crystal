@@ -126,7 +126,7 @@ func applyNextGlitch():
 func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
   if applyGlitch(glitch, false) and add_spell_to_grimoire and \
      global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
-    if not global.memory["glitched_grimoire"]:
+    if not global.memory["glitched_grimoire"] and global.memory["spellbookPage"].size() > 0:
       global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
     global.memory["spellbookPage"].push_back(glitch)
     spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
@@ -341,6 +341,8 @@ func _process(delta):
       getBubbleCured()
 
   if global.isPauseMenuOpen:
+    if level.uiLayer.pauseMenu.pauseMenuState == level.uiLayer.pauseMenu.PauseMenuState.INVENTORY:
+      processCastingLogic(delta)
     return
 
   # if Input.is_action_pressed("sub_action_button") and on_ground:
@@ -405,6 +407,7 @@ func _process(delta):
     if global.memory["glitched_grimoire"]:
       global.memory["glitched_grimoire"] = false
       global.memory.erase("spellbookPage")
+      spellCastPauseIndex = 0
     elif global.memory.has("spellbookPage"):
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.INVISIBLE, GlitchForm.LADDER]
@@ -1044,8 +1047,7 @@ func processChickenLogic(delta):
 
 func getChickenInfected():
   chicken_timer = 0
-  if summonedBroom:
-    summonFallenBroom(true, false, false)
+  summonFallenBroom(false, true, false)
   # TODO(jaketrower): could probably DRY some of this stuff...
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
@@ -1088,8 +1090,7 @@ func processCurseLogic(delta):
 
 func getCurseInfected():
   curse_timer = 0
-  if summonedBroom:
-    summonFallenBroom(true, false, false)
+  summonFallenBroom(false, true, false)
   # TODO(jaketrower): could probably DRY some of this stuff...
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
@@ -1981,7 +1982,7 @@ func loseMiniCrystalCubes(how_many):
 
 var fallenBroomRef = null
 func iFellFlat():
-  summonFallenBroom(false, true)
+  summonFallenBroom(false, true, false)
 
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
   if not global.memory["broom"] or not broomSpriteVisible.visible:

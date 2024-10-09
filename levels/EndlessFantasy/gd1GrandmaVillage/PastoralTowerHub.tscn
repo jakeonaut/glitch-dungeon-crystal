@@ -270,7 +270,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
-[node name="Game" type="Spatial"]
+[node name="Game2" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 33 )]
 
