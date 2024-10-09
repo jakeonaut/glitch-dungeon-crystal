@@ -270,7 +270,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
-[node name="Game2" type="Spatial"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 33 )]
 
@@ -545,7 +545,6 @@ shape = SubResource( 79 )
 script = ExtResource( 38 )
 
 [node name="AnimationPlayer" parent="Viewport/level/BabushkaCat2" index="4"]
-root_node = NodePath("../../BabushkaCat2")
 anims/default = SubResource( 80 )
 anims/fall = SubResource( 81 )
 anims/flickerOn = SubResource( 82 )
