@@ -85,10 +85,10 @@ func _ready_impl():
   levelTiles.buildRandomTiles()
 
   if global.memory.has("current_glitch") and not should_glitch_activate:
-    if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
-      player.applyGlitch(global.memory["current_glitch"], true)
-  else:
-    player.applyGlitch(starting_glitch_type, true)
+    # if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
+    player.applyGlitch(global.memory["current_glitch"], true)
+  if global.spellCastPauseIndex:
+    player.spellCastPauseIndex = global.spellCastPauseIndex
   reindexGrandmaStatueCatalogue(true)
   
   global.memory["tutorial_spellbookPage"] = false
@@ -101,7 +101,9 @@ func _ready_impl():
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)
-        player.applyGlitch(spellbook_spell)  
+      player.applyGlitch(global.memory["spellbookPage"][0] if global.memory["spellbookPage"].size() > 0 else global.GlitchForm.NORMAL)
+    else:
+      player.applyGlitch(starting_glitch_type)
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
       global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true

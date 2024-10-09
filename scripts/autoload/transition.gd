@@ -199,6 +199,7 @@ func change_scene():
     was_i_interrupted = false
     return
 
+  global.spellCastPauseIndex = current_scene.get_node("Viewport/level/Player").spellCastPauseIndex
   global.memory["currLevelZone"] = global.currLevelZone
   global.set_camera_position_on_respawn = true
 

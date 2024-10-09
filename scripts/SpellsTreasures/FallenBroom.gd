@@ -80,7 +80,21 @@ func _process(delta):
             abortSound.activateScript()
             if returning and global.activeInteractor and global.activeInteractor.is_important:
                 global.pauseGame = true
-        return
+        if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
+            if not level.player.can_broomerang_warp:
+                level.player.errorSound.play()
+            else:
+                level.player.global_transform.origin = global_transform.origin
+                level.player.global_transform.origin.y -= 1
+                level.player.target_last_grounded_y = level.player.global_transform.origin.y
+                level.player.gravitySound.play()
+                level.player.linear_velocity = self.linear_velocity
+                level.player.lv = self.lv
+                level.player.vv = self.vv
+                level.player.hv = self.hv
+                level.player.tryClearFallthroughCollisionSolid()
+                abortSound.activateScript()
+                level.player.can_broomerang_warp = false
     elif projectile:
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
             if not level.player.can_broomerang_warp:
@@ -96,7 +110,7 @@ func _process(delta):
                 level.player.hv = self.hv
                 level.player.tryClearFallthroughCollisionSolid()
                 abortSound.activateScript()
-                level.player.can_broomerang_warp = level.player.on_ground
+                level.player.can_broomerang_warp = false
         if returning and global.activeInteractor and global.activeInteractor.is_important:
             global.pauseGame = true
     can_warp = true

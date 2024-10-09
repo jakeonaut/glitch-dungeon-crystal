@@ -236,6 +236,12 @@ func _process(delta):
   tryLerpFromCenter(spellMessageTextLabel, delta, Vector2(9.5, 73.5))
 
   if global.memory.has("spellbookPage"):
+    var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
+    if global.memory["glitched_grimoire"]:
+      spellbookSprite.frame = 3
+    else:
+      spellbookSprite.frame = 0
+      
     var spellbook = global.memory["spellbookPage"]
     var spellbookSize = spellbook.size()
     var activeColor = Color("#dcdcdc")
@@ -274,13 +280,6 @@ func _process(delta):
         setGlitchSprite(glitchSpellSprite2, spellbook[index])
       else:
         setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
-
-  else:
-    var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
-    if global.memory["glitched_grimoire"]:
-      spellbookSprite.frame = 3
-    else:
-      spellbookSprite.frame = 0
 
   if global.memory["canGlitchScreen"] and level.pacman_wrapping:
     edgeDistortion.visible = true

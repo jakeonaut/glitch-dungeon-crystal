@@ -8,7 +8,6 @@ onready var musicNoteSprite = get_node("MusicNoteSprite")
 onready var tweetSound = get_node("TweetSound")
 var hasRandomizedTweet = false
 var is_angel_activated = false
-export var is_active = true 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var npc = get_node("NPC") if has_node("NPC") else null
 
@@ -41,7 +40,7 @@ func _process(delta):
 
 
 func isActive(_debug=false):
-    return self.visible and is_active
+    return self.visible
 
 func passiveActivate(_delta, _is_player):
     if not is_angel_activated:

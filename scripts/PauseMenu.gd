@@ -6,7 +6,8 @@ var popupTimer = 0
 var popupTimeLimit = 20
 var canResetBindings = true
 
-onready var pauseTitleText = get_node("PauseTitleText")
+onready var pauseTitleRect = get_node("PauseTitleRect")
+onready var pauseTitleText = get_node("PauseTitleRect/PauseTitleText")
 
 onready var cursorSprite = get_node("CursorSprite")
 # NORMAL MENU
@@ -175,6 +176,11 @@ func _process(delta):
     global.pauseGame = false
     global.currLevelZone = null
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
+
+  if largerPopup.visible and not pauseMenuRect.visible:
+    pauseTitleRect.rect_position = Vector2(92, 400)
+  else:
+    pauseTitleRect.rect_position = Vector2(92, 5)
 
 
 var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
@@ -446,6 +452,7 @@ func processSecretRitualLogic(_delta):
       global.memory["on_ground"] = true
       transition.long_fade_to(level_to_spawn_to)
       global.isPauseMenuOpen = false
+      get_node("TeleportSound").play()
   elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
@@ -467,10 +474,13 @@ onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/Equipm
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 func processInventoryLogic(delta):
   pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("popup_menu") + " to resume\nPress " + global.getInputText("ui_start") + " for OPTIONS"
-  if selectedGlitchSprite >= 0:
-    pauseTitleText.bbcode_text = "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
-  var spellbook = global.memory["spellbookPage"]
+  var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
+  if selectedGlitchSprite >= 0:
+    if spellbookSize == 0:
+      pauseTitleText.bbcode_text = "you've forgotten your spells"
+    else:
+      pauseTitleText.bbcode_text = "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
   processInventoryRender(delta)
   
   var activeColor = Color("#dcdcdc")
@@ -486,7 +496,6 @@ func processInventoryLogic(delta):
     elif Input.is_action_just_pressed("menu_left"):
       inventoryOptionIndexX -= 1
       menuMoveSound.play()
-    # could be better... hardcoded as of now (doesn't account for WALK_THRU_WALLS)
     if inventoryOptionIndexX < 0:
       inventoryOptionIndexX = spellbookSize - 1
     elif inventoryOptionIndexX > spellbookSize - 1:
@@ -495,13 +504,25 @@ func processInventoryLogic(delta):
     glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
     glitchRect4.color = activeColor if inventoryOptionIndexX == 3 else selectedColor if selectedGlitchSprite == 3 else inactiveColor
+    if spellbookSize > 0:
+      var which_glitch = spellbook[inventoryOptionIndexX]
+      if which_glitch == global.GlitchForm.FLOOR:
+        popupText.text = "air walk:\n  walk off platforms\n  without falling"
+      if which_glitch == global.GlitchForm.FEATHER:
+        popupText.text = "feather fall:\n  hold jump to\n  float or jump high"
+      if which_glitch == global.GlitchForm.LADDER:
+        popupText.text = "ladder:\n  walk into walls\n  climb upwards"
+      if which_glitch == global.GlitchForm.INVISIBLE:
+        popupText.text = "ghost:\n  glitches can't get u"
+      if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
+        popupText.text = "undefined:\n ???"
   else:
     glitchRect1.color = inactiveColor
     glitchRect2.color = inactiveColor
     glitchRect3.color = inactiveColor
     glitchRect4.color = inactiveColor
       
-  if selectedGlitchSprite < 0 and not popupRect.visible:
+  if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible:
     if Input.is_action_just_pressed("menu_up"):
       normalizeInventoryOptionIndex(-1, 0)
     if Input.is_action_just_pressed("menu_down"):
@@ -516,19 +537,6 @@ func processInventoryLogic(delta):
       menuMoveSound.play()
 
   if Input.is_action_just_pressed("menu_confirm"):
-    popupRect.visible = not popupRect.visible
-    var which_glitch = spellbook[inventoryOptionIndexX]
-    if which_glitch == global.GlitchForm.FLOOR:
-      popupText.text = "air walk:\n  walk off platforms\n  without falling"
-    if which_glitch == global.GlitchForm.FEATHER:
-      popupText.text = "feather fall:\n  hold jump to\n  float or jump high"
-    if which_glitch == global.GlitchForm.LADDER:
-      popupText.text = "ladder:\n  walk into walls\n  climb upwards"
-    if which_glitch == global.GlitchForm.INVISIBLE:
-      popupText.text = "ghost:\n  glitches can't get u"
-    if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
-      popupText.text = "undefined:\n ???"
-
     if inventoryOptionIndex == 0:
       if selectedGlitchSprite == -1:
         selectedGlitchSprite = inventoryOptionIndexX
@@ -538,9 +546,12 @@ func processInventoryLogic(delta):
           spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
           spellbook[inventoryOptionIndexX] = temp
           global.memory["spellbookPage"] = spellbook
-          if inventoryOptionIndexX == 0 or selectedGlitchSprite == 0:
-            level.player.applyGlitch(spellbook[0])
+          var spellCastPauseIndex = level.player.spellCastPauseIndex
+          if inventoryOptionIndexX == spellCastPauseIndex or selectedGlitchSprite == spellCastPauseIndex:
+            level.player.applyGlitch(spellbook[spellCastPauseIndex])
         selectedGlitchSprite = -1
+      if spellbookSize > 0:
+        popupRect.visible = not popupRect.visible
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
       popupText.text = "your trusty broom.."
@@ -676,13 +687,16 @@ func processInventoryRender(_delta):
     elif inventoryOptionIndexX == 2:
       invSelectionSprite.position.x = 125
 
-  var spellbook = global.memory["spellbookPage"]
+  var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
   var index = level.player.spellCastPauseIndex
   if global.memory.has("spellbookPage"):
     grimoireSprite.visible = true
     # should dedupe with UILayer...
     if global.memory["glitched_grimoire"]:
+      grimoireSprite.frame = 3
+      glitchRect1.visible = true
+      glitchRect2.visible = true
       glitchRect3.visible = true
       glitchRect4.visible = true
       setGlitchSprite(glitchSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
@@ -690,6 +704,9 @@ func processInventoryRender(_delta):
       setGlitchSprite(glitchSprite3, spellbook[2] if spellbookSize >= 3 else global.GlitchForm.NORMAL)
       setGlitchSprite(glitchSprite4, spellbook[3] if spellbookSize >= 4 else global.GlitchForm.NORMAL)
     else:
+      grimoireSprite.frame = 0
+      glitchRect1.visible = true
+      glitchRect2.visible = true
       glitchRect3.visible = false
       glitchRect4.visible = false
       setGlitchSprite(glitchSprite1, spellbook[index] if spellbookSize >= 1 else level.player.glitch_form)
@@ -832,6 +849,31 @@ func initializeControlsConfig():
       "button_index": JOY_DS_X, 
       "default_button_index": JOY_DS_X, 
     },
+    {
+      "input_action": "spell_1",
+      "label_str": "spell 1",
+      "default_keyCode": 49, 
+    },
+    {
+      "input_action": "spell_2",
+      "label_str": "spell 2",
+      "default_keyCode": 50, 
+    },
+    {
+      "input_action": "spell_3",
+      "label_str": "spell 3",
+      "default_keyCode": 51, 
+    },
+    {
+      "input_action": "spell_4",
+      "label_str": "spell 4",
+      "default_keyCode": 52, 
+    },
+    {
+      "input_action": "spell_5",
+      "label_str": "spell 5",
+      "default_keyCode": 53, 
+    },
   ]
   if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
     var rememberedControlsConfig = global.memory["controls_config"]
@@ -901,22 +943,27 @@ func processControlsLogic(_delta):
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true
 
+  var showCondensedMenu = pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]
+  var properSize = controlsConfig.size() if showCondensedMenu else controlsConfig.size() - 5
   if control_index < 0:
-    control_index = controlsConfig.size() - 1
-  if control_index >= controlsConfig.size():
+    control_index = properSize - 1
+  if control_index >= properSize:
     control_index = 0
-  cursorSprite.position.y = 114 + (44*control_index)
+  if showCondensedMenu:
+    cursorSprite.position.y = 114 + (29*control_index)
+  else:
+    cursorSprite.position.y = 114 + (44*control_index)
 
   var inputLabelText = ""
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]:
     inputLabelText = "[font=res://pauseMenuFontInputCondensed.tres]"
-  var buttonInputText = "[center]"
-  for i in range(controlsConfig.size()):
+  var buttonInputText = "[font=res://pauseMenuFontInputCondensed.tres][center]"
+  for i in range(properSize):
     var controlConfig = controlsConfig[i]
     if control_index == i:
       var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        buttonTextAdd = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2)
+        buttonTextAdd = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         buttonTextAdd = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
       buttonInputText += buttonTextAdd + " \n"
@@ -924,7 +971,7 @@ func processControlsLogic(_delta):
     else:
       var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 2) + "[/color]"
+        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu) + "[/color]"
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
       buttonInputText += buttonTextAdd + "\n"

@@ -175,6 +175,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
+var spellCastPauseIndex = null
 var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "jump_button", "restart_key"]
 
 func _ready():
@@ -199,6 +200,7 @@ func _ready():
     if num_cherries_eaten > 0: pass
     if set_camera_position_on_respawn: pass
     if hasGottenLevelGeode: pass
+    if spellCastPauseIndex: pass
 
     resetMemory()
     loadGameSettings()
@@ -241,7 +243,7 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire"] = false
     memory["priestess"] = 0
 
     # PERMANENT SPELLS
@@ -353,10 +355,12 @@ func getLevelZoneName(longLevelName):
         return null
     return segments[segments.size() - 2]
 
-func getDisplayTitle(levelZoneName, gd1 = "???"):
+func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
     match levelZoneName:
         "gd1":
-            return gd1 # basically "null"
+            return "???" # basically "null"
+        "gd1TutorialDungeon":
+            return gd1TutorialName
         "gd1FishingVillage":
             return "tadpole bog"
         "gd1ToxicJungle":
@@ -701,7 +705,7 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
         
     return null
 
-func getInputText(input_action, input_display = 0, use_bbtext = true):
+func getInputText(input_action, input_display = 0, use_bbtext = true, showCondensedMenu = false):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
     var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
 
@@ -722,6 +726,8 @@ func getInputText(input_action, input_display = 0, use_bbtext = true):
         else:
             if inputEvent is InputEventKey:
                 if use_bbtext:
+                    if showCondensedMenu:
+                        return "[font=res://DarkInputFont_smallCondensed.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                     return "[font=res://DarkInputFont_small.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                 else:
                     return "[" + getKeyCodeStr(inputEvent.get_scancode(), false) + "]"

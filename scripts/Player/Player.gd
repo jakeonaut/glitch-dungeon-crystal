@@ -73,6 +73,7 @@ func _ready():
 # make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
 func processWallLadderWalking(delta):
   .processWallLadderWalking(delta) # super
+  can_broomerang_warp = true
   # if pressingMoveLeft():
   #   spriteContainer.rotation_degrees.z = 270
   # elif pressingMoveRight():
@@ -125,10 +126,10 @@ func applyNextGlitch():
 func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
   if applyGlitch(glitch, false) and add_spell_to_grimoire and \
      global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
+    if not global.memory["glitched_grimoire"]:
+      global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
     global.memory["spellbookPage"].push_back(glitch)
-    # TODO..
-    if not global.memory["glitched_grimoire"] and global.memory["spellbookPage"].size() > 2:
-      global.memory["spellbookPage"].pop_front()
+    spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
@@ -549,6 +550,8 @@ func processCastingLogic(_delta):
           level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
 
 func tryToApplySpellAssist(desired_spell):
+  if not global.memory["spellAssist"]:
+    return
   if glitch_form != desired_spell and desired_spell != global.GlitchForm.NORMAL and doIHaveSpell(desired_spell):
     var newSpellIndex = findSpellInSpellbook(desired_spell)
     if newSpellIndex >= 0:

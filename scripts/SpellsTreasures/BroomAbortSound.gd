@@ -15,6 +15,7 @@ func activateScript():
     aniPlayer.queue("walkStop")
     aniPlayer.queue("stand")
     level.player.getABroom()
+    level.player.can_broomerang_warp = level.player.truly_on_ground
     level.player.textBox.hideTextbox()
     if not global.memory.has("spellbookPage") and level.getLevelName().find("000PastoralScene") > 0 and level.has_node("PastoralGrannyNPC"):
         level.player.pauseInput = true
