@@ -14,10 +14,13 @@ onready var normalMenu = get_node("NormalMenu")
 onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
 onready var pauseMenuRect = get_node("PauseMenuRect")
 onready var largerPopup = get_node("LargerPopup")
+onready var inventoryRect = get_node("InventoryRect")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
 onready var menuMoveSound = get_node("MenuMoveSound")
+onready var menuConfirmSound = get_node("MenuConfirmSound")
+onready var menuCancelSound = get_node("MenuCancelSound")
 var glitch_death_timer = 0
 
 var control_index = 0
@@ -53,6 +56,7 @@ func _ready():
 func _process(delta):
   self.visible = global.isPauseMenuOpen
   if not global.isPauseMenuOpen:
+    popupRect.visible = false
     return
     
   if not hasInitializedControlsConfig:
@@ -66,12 +70,18 @@ func _process(delta):
   elif Input.is_action_just_pressed("menu_up"):
     menuMoveSound.play()
 
+  if Input.is_action_just_pressed("menu_confirm"):
+    menuConfirmSound.play()
+  elif Input.is_action_just_pressed("menu_cancel"):
+    menuCancelSound.play()
+
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processNormalLogic(delta)
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
@@ -80,6 +90,7 @@ func _process(delta):
     normalMenu.visible = true
     colorblindPlayers.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processGraphicsLogic(delta)
   else:
     graphicsOptionIndex = 0
@@ -90,6 +101,7 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processSoundLogic(delta)
   else:
     soundOptionIndex = 0
@@ -99,6 +111,7 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processQuitToMainLogic(delta)
   else:
     quitToMainOptionIndex = 0
@@ -108,6 +121,7 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processTopInputLogic(delta)
   else:
     topInputOptionIndex = 0
@@ -117,6 +131,7 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = false
     cursorSprite.position.x = 100
+    cursorSprite.visible = true
     inputMenu.visible = true
     processControlsLogic(delta)
     processPopupRenderLogic(delta)
@@ -130,9 +145,22 @@ func _process(delta):
     largerPopup.visible = true
     normalMenu.visible = true
     cursorSprite.position.x = 180
+    cursorSprite.visible = true
     processSecretRitualLogic(delta)
   else:
     secretRitualOptionIndex = 0
+
+  if pauseMenuState == PauseMenuState.INVENTORY:
+    pauseMenuRect.visible = false
+    largerPopup.visible = true
+    normalMenu.visible = false
+    cursorSprite.visible = false
+    processInventoryLogic(delta)
+    inventoryRect.visible = true
+  else:
+    inventoryRect.visible = false
+    inventoryOptionIndex = 0
+    inventoryOptionIndexX = 0
 
   if cursorSprite.position.x >= 150:
     cursorSprite.scale = Vector2(4, 4)
@@ -155,7 +183,8 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select"
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("ui_start") + " to resume\n" + \
+    ((global.getInputText("popup_menu") + " for inventory") if level.getLevelName().find("MainMenu") < 0 else "")
 
   if shouldUpdateMenuText:
     var text = ""
@@ -423,7 +452,279 @@ func processSecretRitualLogic(_delta):
     global.pauseGame = false
     getPlayer().unpauseSound.play()
     level.restartMusic()
-    
+
+var inventoryOptionIndex = 0
+var inventoryOptionIndexX = 0
+var selectedGlitchSprite = -1
+onready var invSelectionSprite = get_node("InventoryRect/SelectionSprite")
+onready var glitchRect1 = get_node("InventoryRect/GlitchRect1")
+onready var glitchRect2 = get_node("InventoryRect/GlitchRect2")
+onready var glitchRect3 = get_node("InventoryRect/GlitchRect3")
+onready var glitchRect4 = get_node("InventoryRect/GlitchRect4")
+onready var glitchSprite1 = get_node("InventoryRect/GlitchRect1/ColorRect/EquipmentSlotSprite")
+onready var glitchSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
+onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
+onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
+func processInventoryLogic(delta):
+  pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("popup_menu") + " to resume\nPress " + global.getInputText("ui_start") + " for OPTIONS"
+  if selectedGlitchSprite >= 0:
+    pauseTitleText.bbcode_text = "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
+  var spellbook = global.memory["spellbookPage"]
+  var spellbookSize = spellbook.size()
+  processInventoryRender(delta)
+  
+  var activeColor = Color("#dcdcdc")
+  var inactiveColor = Color("#006400")
+  var selectedColor = Color("#f79838")
+  if inventoryOptionIndex == 0:
+    if not global.memory.has("spellbookPage"):
+      inventoryOptionIndex = 1
+      return
+    if Input.is_action_just_pressed("menu_right"):
+      inventoryOptionIndexX += 1
+      menuMoveSound.play()
+    elif Input.is_action_just_pressed("menu_left"):
+      inventoryOptionIndexX -= 1
+      menuMoveSound.play()
+    # could be better... hardcoded as of now (doesn't account for WALK_THRU_WALLS)
+    if inventoryOptionIndexX < 0:
+      inventoryOptionIndexX = spellbookSize - 1
+    elif inventoryOptionIndexX > spellbookSize - 1:
+      inventoryOptionIndexX = 0
+    glitchRect1.color = activeColor if inventoryOptionIndexX == 0 else selectedColor if selectedGlitchSprite == 0 else inactiveColor
+    glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
+    glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
+    glitchRect4.color = activeColor if inventoryOptionIndexX == 3 else selectedColor if selectedGlitchSprite == 3 else inactiveColor
+  else:
+    glitchRect1.color = inactiveColor
+    glitchRect2.color = inactiveColor
+    glitchRect3.color = inactiveColor
+    glitchRect4.color = inactiveColor
+      
+  if selectedGlitchSprite < 0 and not popupRect.visible:
+    if Input.is_action_just_pressed("menu_up"):
+      normalizeInventoryOptionIndex(-1, 0)
+    if Input.is_action_just_pressed("menu_down"):
+      normalizeInventoryOptionIndex(1, 0)
+
+  if inventoryOptionIndex != 0 and not popupRect.visible:
+    if Input.is_action_just_pressed("menu_right"):
+      normalizeInventoryOptionIndex(0, 1)
+      menuMoveSound.play()
+    elif Input.is_action_just_pressed("menu_left"):
+      normalizeInventoryOptionIndex(0, -1)
+      menuMoveSound.play()
+
+  if Input.is_action_just_pressed("menu_confirm"):
+    popupRect.visible = not popupRect.visible
+    var which_glitch = spellbook[inventoryOptionIndexX]
+    if which_glitch == global.GlitchForm.FLOOR:
+      popupText.text = "air walk:\n  walk off platforms\n  without falling"
+    if which_glitch == global.GlitchForm.FEATHER:
+      popupText.text = "feather fall:\n  hold jump to\n  float or jump high"
+    if which_glitch == global.GlitchForm.LADDER:
+      popupText.text = "ladder:\n  walk into walls\n  climb upwards"
+    if which_glitch == global.GlitchForm.INVISIBLE:
+      popupText.text = "ghost:\n  glitches can't get u"
+    if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
+      popupText.text = "undefined:\n ???"
+
+    if inventoryOptionIndex == 0:
+      if selectedGlitchSprite == -1:
+        selectedGlitchSprite = inventoryOptionIndexX
+      else:
+        if inventoryOptionIndexX != selectedGlitchSprite:
+          var temp = spellbook[selectedGlitchSprite]
+          spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
+          spellbook[inventoryOptionIndexX] = temp
+          global.memory["spellbookPage"] = spellbook
+          if inventoryOptionIndexX == 0 or selectedGlitchSprite == 0:
+            level.player.applyGlitch(spellbook[0])
+        selectedGlitchSprite = -1
+    elif inventoryOptionIndex == 1:
+      popupRect.visible = not popupRect.visible
+      popupText.text = "your trusty broom.."
+      if global.memory["broomerang"] > 1:
+        popupText.text += "\nsweep twice to throw it!"
+      else:
+        popupText.text += "\ngreat for sweeping dust"
+      if global.memory["broomerang"] >= 2:
+        popupText.text += "\nand again to warp!"
+    elif inventoryOptionIndex == 2:
+      popupRect.visible = not popupRect.visible
+      popupText.text = "an enchanted bag\nlets you take another hit"
+    elif inventoryOptionIndex == 3:
+      popupRect.visible = not popupRect.visible
+      if inventoryOptionIndexX == 0:
+        popupText.text = "memory of fish:\n  swim in water\n  blow bubbles"
+      elif inventoryOptionIndexX == 1:
+        popupText.text = "mole cricket memory:\n  press down to dig"
+      elif inventoryOptionIndexX == 2:
+        popupText.text = "mushroom memory:\n  what does this do?"
+    elif inventoryOptionIndex == 4:
+      popupRect.visible = not popupRect.visible
+      if inventoryOptionIndexX == 0:
+        popupText.text = "forget me not:\n  the goddess allows you\n  to remember"
+      elif inventoryOptionIndexX == 1:
+        popupText.text = "goddess dream 2:\n  what does this do?"
+      elif inventoryOptionIndexX == 2:
+        popupText.text = "goddess dream 3:\n  what does this do?"
+  elif Input.is_action_just_pressed("menu_cancel"):
+    if popupRect.visible:
+      popupRect.visible = false
+    elif selectedGlitchSprite >= 0:
+      selectedGlitchSprite = -1
+    else:
+      yield(get_tree().create_timer(0.1), "timeout")
+      global.isPauseMenuOpen = false
+      global.pauseGame = false
+      getPlayer().unpauseSound.play()
+      level.restartMusic()
+
+func normalizeInventoryOptionIndex(y, x):
+  # gonna need to not be hard coded... based on global.memories... it will be REALLY gross to hardcode this in the case where
+  # for example, the player has not collected the enchanted broom, but has collected some SOUL MEMORIES or DREAMS.
+  # so on menu_down/up, we're gonna have to have a normalizeFunction...
+  if y != 0:
+    inventoryOptionIndexX = 0
+    inventoryOptionIndex += y
+    if y > 0:
+      if inventoryOptionIndex == 0 and not grimoireSprite.visible:
+        inventoryOptionIndex = 1
+      if inventoryOptionIndex == 2 and not bagSprite.visible:
+        inventoryOptionIndex = 3
+      if inventoryOptionIndex == 3 and not soulLabel.visible:
+        inventoryOptionIndex = 4
+      if (inventoryOptionIndex == 4 and not dreamLabel.visible) or inventoryOptionIndex > 4:
+        inventoryOptionIndex = 0 if grimoireSprite.visible else 1
+    elif y < 0:
+      if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
+        inventoryOptionIndex = 4
+      if inventoryOptionIndex == 4 and not dreamLabel.visible:
+        inventoryOptionIndex = 3
+      if inventoryOptionIndex == 3 and not soulLabel.visible:
+        inventoryOptionIndex = 2
+      if inventoryOptionIndex == 2 and not bagSprite.visible:
+        inventoryOptionIndex = 1
+
+  if inventoryOptionIndex == 3 or inventoryOptionIndex == 4:
+    inventoryOptionIndexX += x
+    if inventoryOptionIndex == 3: # soul memories
+      if x >= 0:
+        if inventoryOptionIndexX == 0 and not soulSprite1.visible:
+          inventoryOptionIndexX = 1
+        if inventoryOptionIndexX == 1 and not soulSprite2.visible:
+          inventoryOptionIndexX = 2
+        if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
+          inventoryOptionIndexX = 0 if soulSprite1.visible else 1
+      elif x < 0:
+        if inventoryOptionIndexX == 2 and not soulSprite3.visible:
+          inventoryOptionIndexX = 1
+        if inventoryOptionIndexX == 1 and not soulSprite2.visible:
+          inventoryOptionIndexX = 0
+        if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndex < 0:
+          inventoryOptionIndexX = 2 if soulSprite3.visible else 1
+    elif inventoryOptionIndex == 4: # goddess dreams
+      if x >= 0:
+        if inventoryOptionIndexX == 0 and not dreamSprite1.visible:
+          inventoryOptionIndexX = 1
+        if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
+          inventoryOptionIndexX = 2
+        if (inventoryOptionIndexX == 2 and not dreamSprite3.visible) or inventoryOptionIndexX > 2:
+          inventoryOptionIndexX = 0 if dreamSprite1.visible else 1
+      elif x < 0:
+        if inventoryOptionIndexX == 2 and not dreamSprite3.visible:
+          inventoryOptionIndexX = 1
+        if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
+          inventoryOptionIndexX = 0
+        if (inventoryOptionIndexX == 0 and not dreamSprite1.visible) or inventoryOptionIndex < 0:
+          inventoryOptionIndexX = 2 if dreamSprite3.visible else 1
+
+
+onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
+onready var bagSprite = get_node("InventoryRect/BagSprite")
+onready var bagLabel = get_node("InventoryRect/BagLabel")
+onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
+onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
+onready var soulSprite3 = get_node("InventoryRect/SoulSprite3")
+onready var soulLabel = get_node("InventoryRect/SoulLabel")
+onready var dreamSprite1 = get_node("InventoryRect/DreamSprite1")
+onready var dreamSprite2 = get_node("InventoryRect/DreamSprite2")
+onready var dreamSprite3 = get_node("InventoryRect/DreamSprite3")
+onready var dreamLabel = get_node("InventoryRect/DreamLabel")
+func processInventoryRender(_delta):
+  if inventoryOptionIndex == 0:
+    invSelectionSprite.position = Vector2(26, 46)
+  elif inventoryOptionIndex == 1:
+    invSelectionSprite.position = Vector2(26, 96)
+  elif inventoryOptionIndex == 2:
+    invSelectionSprite.position = Vector2(26, 145)
+  elif inventoryOptionIndex == 3:
+    invSelectionSprite.position.y = 190
+    if inventoryOptionIndexX == 0:
+      invSelectionSprite.position.x = 26
+    elif inventoryOptionIndexX == 1:
+      invSelectionSprite.position.x = 75
+    elif inventoryOptionIndexX == 2:
+      invSelectionSprite.position.x = 125
+  elif inventoryOptionIndex == 4:
+    invSelectionSprite.position.y = 240
+    if inventoryOptionIndexX == 0:
+      invSelectionSprite.position.x = 26
+    elif inventoryOptionIndexX == 1:
+      invSelectionSprite.position.x = 75
+    elif inventoryOptionIndexX == 2:
+      invSelectionSprite.position.x = 125
+
+  var spellbook = global.memory["spellbookPage"]
+  var spellbookSize = spellbook.size()
+  var index = level.player.spellCastPauseIndex
+  if global.memory.has("spellbookPage"):
+    grimoireSprite.visible = true
+    # should dedupe with UILayer...
+    if global.memory["glitched_grimoire"]:
+      glitchRect3.visible = true
+      glitchRect4.visible = true
+      setGlitchSprite(glitchSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
+      setGlitchSprite(glitchSprite2, spellbook[1] if spellbookSize >= 2 else global.GlitchForm.NORMAL)
+      setGlitchSprite(glitchSprite3, spellbook[2] if spellbookSize >= 3 else global.GlitchForm.NORMAL)
+      setGlitchSprite(glitchSprite4, spellbook[3] if spellbookSize >= 4 else global.GlitchForm.NORMAL)
+    else:
+      glitchRect3.visible = false
+      glitchRect4.visible = false
+      setGlitchSprite(glitchSprite1, spellbook[index] if spellbookSize >= 1 else level.player.glitch_form)
+      if spellbookSize >= 2:
+        index = (index + 1) % spellbookSize
+        setGlitchSprite(glitchSprite2, spellbook[index])
+      else:
+        setGlitchSprite(glitchSprite2, global.GlitchForm.NORMAL)
+  else:
+    grimoireSprite.visible = false
+    glitchRect1.visible = false
+    glitchRect2.visible = false
+    glitchRect3.visible = false
+    glitchRect4.visible = false
+
+  bagSprite.visible = global.memory["hp"] > 1
+  bagLabel.visible = global.memory["hp"] > 1
+
+  soulSprite1.visible = global.memory["zora_flippers"]
+  soulSprite2.visible = global.memory["mole_cricket"]
+  soulSprite3.visible = global.memory["mushroom_soul"]
+  soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
+  dreamSprite1.visible = global.memory["forget_me_not"]
+  dreamSprite2.visible = global.memory["angel_flute"]
+  dreamSprite3.visible = global.memory["goddess_dream3"]
+  dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
+
+func setGlitchSprite(sprite, glitch):
+  # TODO(jaketrower): dedupe (1) with Player.gd
+  if glitch == global.GlitchForm.NORMAL: sprite.frame = 4
+  elif glitch == global.GlitchForm.FLOOR: sprite.frame = 1
+  elif glitch == global.GlitchForm.FEATHER: sprite.frame = 0
+  elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
+  elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
+  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 4
 
 
 var topInputOptions = ["Keyboard", "Controller"]
@@ -607,6 +908,8 @@ func processControlsLogic(_delta):
   cursorSprite.position.y = 114 + (44*control_index)
 
   var inputLabelText = ""
+  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]:
+    inputLabelText = "[font=res://pauseMenuFontInputCondensed.tres]"
   var buttonInputText = "[center]"
   for i in range(controlsConfig.size()):
     var controlConfig = controlsConfig[i]
@@ -678,7 +981,8 @@ func processPopupRenderLogic(delta):
     else:
       popupRect.visible = false
   else:
-    popupRect.visible = false
+    if pauseMenuState != PauseMenuState.INVENTORY:
+      popupRect.visible = false
     popupTimer = 0
     if not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
       canResetBindings = true

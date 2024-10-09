@@ -186,9 +186,37 @@ func processPauseMenu():
         global.pauseGame = true
         player.pauseSound.play()
         playMenuMusic()
+      elif Input.is_action_just_pressed("popup_menu") and getLevelName().find("MainMenu") < 0:
+        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
+        uiLayer.pauseMenu.selectedGlitchSprite = -1
+        uiLayer.pauseMenu.inventoryOptionIndex = 0
+        uiLayer.pauseMenu.inventoryOptionIndexX = 0
+        global.isPauseMenuOpen = true
+        global.pauseGame = true
+        player.inventorySound.play()
     elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
       if global.is_reading_input:
         player.noBroomSound.play()
+      elif uiLayer.pauseMenu.pauseMenuState == uiLayer.pauseMenu.PauseMenuState.INVENTORY:
+        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
+        uiLayer.pauseMenu.normalOptionIndex = 0
+        uiLayer.pauseMenu.shouldUpdateMenuText = true
+        player.pauseSound.play()
+        playMenuMusic()
+      else:
+        global.isPauseMenuOpen = false
+        global.pauseGame = false
+        player.unpauseSound.play()
+        restartMusic()
+    elif global.isPauseMenuOpen and Input.is_action_just_pressed("popup_menu") and getLevelName().find("MainMenu") < 0:
+      if uiLayer.pauseMenu.pauseMenuState != uiLayer.pauseMenu.PauseMenuState.INVENTORY:
+        uiLayer.pauseMenu.selectedGlitchSprite = -1
+        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
+        uiLayer.pauseMenu.inventoryOptionIndex = 0
+        uiLayer.pauseMenu.inventoryOptionIndexX = 0
+        global.isPauseMenuOpen = true
+        global.pauseGame = true
+        player.inventorySound.play()
       else:
         global.isPauseMenuOpen = false
         global.pauseGame = false

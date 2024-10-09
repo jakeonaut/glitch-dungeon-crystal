@@ -370,7 +370,7 @@ should_fade_away = true
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.3489, 0 )
-trade_item = "CRICKET SOUL"
+trade_item = "Cricket Mem"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
 shape = SubResource( 56 )
@@ -388,7 +388,7 @@ hold [DOWN] to dig"
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )
 
-[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 24 )
 
 [node name="Sprite3D" parent="Viewport/level/Mimic/TreasureSpellCollectable" index="3"]

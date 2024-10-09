@@ -207,6 +207,20 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="Viewport@level@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 11 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -373,21 +387,7 @@ can_camera_zoom = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 47 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 30 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
@@ -410,7 +410,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0677, 9.71043, 0 )
-trade_item = "FISH SOUL"
+trade_item = "Fish Mem"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
 shape = SubResource( 55 )
@@ -422,13 +422,13 @@ shape = SubResource( 56 )
 shape = SubResource( 57 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
-bbText = "•SOUL OF FISH
+bbText = "•FISH MEMORY
 try jumping in water"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 58 )
 
-[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/Mimic/TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 31 )
 
 [node name="Sprite3D" parent="Viewport/level/Mimic/TreasureSpellCollectable" index="3"]

@@ -92,10 +92,12 @@ onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
 onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
 onready var glitchSpellSprite1 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect1/ColorRect/EquipmentSlotSprite")
 onready var glitchSpellSprite2 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
-onready var glitchSpell3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3")
-onready var glitchSpell4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4")
 onready var glitchSpellSprite3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
 onready var glitchSpellSprite4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
+onready var glitchSpellRect1 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect1")
+onready var glitchSpellRect2 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect2")
+onready var glitchSpellRect3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3")
+onready var glitchSpellRect4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4")
 onready var extension = get_node("EquipmentRect/ColorRect/ColorRect/Extension")
 
 func _process(delta):
@@ -236,27 +238,43 @@ func _process(delta):
   if global.memory.has("spellbookPage"):
     var spellbook = global.memory["spellbookPage"]
     var spellbookSize = spellbook.size()
+    var activeColor = Color("#dcdcdc")
+    var inactiveColor = Color("#006400")
     var index = level.player.spellCastPauseIndex
-    setGlitchSprite(glitchSpellSprite1, spellbook[level.player.spellCastPauseIndex] if spellbookSize >= 1 else level.player.glitch_form)
-    if spellbookSize >= 2:
-      index = (index + 1) % spellbookSize
-      setGlitchSprite(glitchSpellSprite2, spellbook[index])
+    if global.memory["glitched_grimoire"]:
+      glitchSpellRect1.color = activeColor if index == 0 else inactiveColor
+      glitchSpellRect2.color = activeColor if index == 1 else inactiveColor
+      glitchSpellRect3.color = activeColor if index == 2 else inactiveColor
+      glitchSpellRect4.color = activeColor if index == 3 else inactiveColor
+      glitchSpellRect3.visible = true
+      glitchSpellRect4.visible = true
+      extension.visible = true
+      setGlitchSprite(glitchSpellSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
+      if spellbookSize >= 2:
+        setGlitchSprite(glitchSpellSprite2, spellbook[1])
+      else:
+        setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
+      if spellbookSize >= 3:
+        setGlitchSprite(glitchSpellSprite3, spellbook[2])
+      else:
+        setGlitchSprite(glitchSpellSprite3, global.GlitchForm.NORMAL)
+      if spellbookSize >= 4:
+        setGlitchSprite(glitchSpellSprite4, spellbook[3])
+      else:
+        setGlitchSprite(glitchSpellSprite4, global.GlitchForm.NORMAL)
     else:
-      setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
-    if spellbookSize >= 3:
-      index = (index + 1) % spellbookSize
-      setGlitchSprite(glitchSpellSprite3, spellbook[index])
-    else:
-      setGlitchSprite(glitchSpellSprite3, global.GlitchForm.NORMAL)
-    if spellbookSize >= 4:
-      index = (index + 1) % spellbookSize
-      setGlitchSprite(glitchSpellSprite4, spellbook[index])
-    else:
-      setGlitchSprite(glitchSpellSprite4, global.GlitchForm.NORMAL)
+      glitchSpellRect1.color = activeColor
+      glitchSpellRect2.color = inactiveColor
+      glitchSpellRect3.visible = false
+      glitchSpellRect4.visible = false
+      extension.visible = false
+      setGlitchSprite(glitchSpellSprite1, spellbook[level.player.spellCastPauseIndex] if spellbookSize >= 1 else level.player.glitch_form)
+      if spellbookSize >= 2:
+        index = (index + 1) % spellbookSize
+        setGlitchSprite(glitchSpellSprite2, spellbook[index])
+      else:
+        setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
 
-    glitchSpell3.visible = global.memory["glitched_grimoire"]
-    glitchSpell4.visible = global.memory["glitched_grimoire"]
-    extension.visible = global.memory["glitched_grimoire"]
   else:
     var spellbookSprite = get_node("EquipmentRect/ColorRect/ColorRect/EquipmentSprite")
     if global.memory["glitched_grimoire"]:
@@ -399,7 +417,7 @@ func processHiscoreRenderLogic(delta):
     # if level.has_node("CubeCrystal"):
     #   global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button")):
+  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("popup_menu")):
     # global.isEnteringRoom = true
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false

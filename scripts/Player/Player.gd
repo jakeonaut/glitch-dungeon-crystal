@@ -1139,7 +1139,7 @@ func processAngelStatueRitual(_delta):
   
 
 func anyOtherRitualInputsDetected():
-  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start"]
+  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button", "right_button"]
   for input in inputs:
     if Input.is_action_just_pressed(input):
       return true
@@ -1726,6 +1726,7 @@ func doBroomAttack(which_broom_attack):
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
+onready var inventorySound = get_node("Sounds/InventorySound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):

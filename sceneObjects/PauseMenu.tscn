@@ -1,5 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
+[ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=3]
 [ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=8]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=11]
@@ -89,6 +92,7 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="NormalMenu" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -124,7 +128,6 @@ QUIT TO MAIN"
 scroll_active = false
 
 [node name="InputMenu" type="Control" parent="."]
-visible = false
 margin_right = 640.0
 margin_bottom = 522.0
 
@@ -148,7 +151,7 @@ rect_pivot_offset = Vector2( -745, -223 )
 theme = ExtResource( 21 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "•[wave]move left:[/wave]
+bbcode_text = "[font=res://pauseMenuFontInputCondensed.tres]•[wave]move left:[/wave]
 •move right:
 •up:
 •down: 		
@@ -156,7 +159,12 @@ bbcode_text = "•[wave]move left:[/wave]
 •jump: 		   
 •die move: 	    
 •next spell:  
-•prev spell:  "
+•prev spell:  
+•spell 1:
+•spell 2:
+•spell 3:
+•spell 4:
+•spell 5:[/font]"
 text = "•move left:
 •move right:
 •up:
@@ -165,7 +173,12 @@ text = "•move left:
 •jump: 		   
 •die move: 	    
 •next spell:  
-•prev spell:  "
+•prev spell:  
+•spell 1:
+•spell 2:
+•spell 3:
+•spell 4:
+•spell 5:"
 scroll_active = false
 
 [node name="ButtonInputs" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
@@ -180,28 +193,50 @@ rect_clip_content = false
 theme = ExtResource( 21 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[center][color=gray][font=res://DarkInputFont_small.tres]V[/font][/color]
-[font=res://DarkInputFont_small.tres]Q[/font] 
-[color=gray][font=res://DarkInputFont_small.tres]F[/font][/color]
-[color=gray][font=res://DarkInputFont_small.tres]G[/font][/color]
-[color=gray][font=res://DarkInputFont_small.tres]z[/font][/color]
-[color=gray][font=res://DarkInputFont_small.tres]x[/font][/color]
-[color=gray][font=res://DarkInputFont_small.tres]Z[/font][/color]
-[color=gray][font=res://DarkInputFont_small.tres]c[/font][/color]
-[/center]"
-text = "V
-Q 
+bbcode_text = "[font=res://pauseMenuFontInputCondensed.tres][center][font=res://DarkInputFont_smallCondensed.tres]V[/font] 
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]Q[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]F[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]G[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]z[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]x[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]r[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]Z[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]S[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]1[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]2[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]3[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]4[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]5[/font][/color]
+[/center][/font]"
+text = "V 
+Q
 F
 G
 z
 x
+r
 Z
-c
+S
+1
+2
+3
+4
+5
 "
 scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="MenuConfirmSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="MenuCancelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 volume_db = -15.0
 pitch_scale = 0.9
 
@@ -254,6 +289,228 @@ bbcode_text = "press [font=res://DarkInputFont_small.tres]x[/font] to select, [f
 text = "press x to select, z to go back
      hold E: reset bindings"
 scroll_active = false
+
+[node name="InventoryRect" type="ColorRect" parent="."]
+visible = false
+margin_left = 133.0
+margin_top = 114.0
+margin_right = 525.0
+margin_bottom = 383.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0 )
+
+[node name="GrimoireSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 26, 46 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 3
+
+[node name="BroomSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 28, 96 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 27
+
+[node name="BroomLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 60.0
+margin_top = 88.0
+margin_right = 254.0
+margin_bottom = 120.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "trusty broom"
+text = "trusty broom"
+
+[node name="BagSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 23, 147 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 22
+
+[node name="BagLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 60.0
+margin_top = 131.0
+margin_right = 278.0
+margin_bottom = 163.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "enchanted bag"
+text = "enchanted bag"
+
+[node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
+position = Vector2( 25, 187 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 29
+
+[node name="SoulSprite2" type="Sprite" parent="InventoryRect"]
+position = Vector2( 74, 189 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 21
+
+[node name="SoulSprite3" type="Sprite" parent="InventoryRect"]
+position = Vector2( 125, 189 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 23
+
+[node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 157.0
+margin_top = 180.0
+margin_right = 375.0
+margin_bottom = 212.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "lost souls"
+text = "lost souls"
+
+[node name="DreamSprite1" type="Sprite" parent="InventoryRect"]
+position = Vector2( 24, 237 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 19
+
+[node name="DreamSprite2" type="Sprite" parent="InventoryRect"]
+position = Vector2( 73, 237 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 9
+
+[node name="DreamSprite3" type="Sprite" parent="InventoryRect"]
+position = Vector2( 126, 242 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 8
+
+[node name="DreamLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 168.0
+margin_top = 220.0
+margin_right = 386.0
+margin_bottom = 276.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "goddess
+    dreams"
+text = "goddess
+    dreams"
+
+[node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 26, 46 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 20
+
+[node name="GlitchRect1" type="ColorRect" parent="InventoryRect"]
+margin_left = 34.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 43.0
+rect_scale = Vector2( 1.5, 1.5 )
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/GlitchRect1"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect1/ColorRect"]
+position = Vector2( 13.5, 16.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 6
+frame = 4
+
+[node name="GlitchRect2" type="ColorRect" parent="InventoryRect"]
+margin_left = 96.0
+margin_top = 9.0
+margin_right = 130.0
+margin_bottom = 43.0
+rect_scale = Vector2( 1.5, 1.5 )
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/GlitchRect2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect2/ColorRect"]
+position = Vector2( 13.5, 16.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 6
+frame = 4
+
+[node name="GlitchRect3" type="ColorRect" parent="InventoryRect"]
+margin_left = 156.0
+margin_top = 9.0
+margin_right = 190.0
+margin_bottom = 43.0
+rect_scale = Vector2( 1.5, 1.5 )
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/GlitchRect3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect3/ColorRect"]
+position = Vector2( 13.5, 16.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 6
+frame = 4
+
+[node name="GlitchRect4" type="ColorRect" parent="InventoryRect"]
+margin_left = 216.0
+margin_top = 9.0
+margin_right = 250.0
+margin_bottom = 43.0
+rect_scale = Vector2( 1.5, 1.5 )
+color = Color( 0, 0.392157, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/GlitchRect4"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect4/ColorRect"]
+position = Vector2( 13.5, 16.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 6
+frame = 4
 
 [node name="CursorSprite" type="Sprite" parent="."]
 material = SubResource( 62 )
@@ -321,7 +578,7 @@ visible = false
 margin_left = 109.0
 margin_top = 213.0
 margin_right = 519.0
-margin_bottom = 285.0
+margin_bottom = 313.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -331,7 +588,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 405.0
-margin_bottom = 68.0
+margin_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -343,7 +600,7 @@ __meta__ = {
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 398.0
-margin_bottom = 61.0
+margin_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -355,7 +612,7 @@ __meta__ = {
 margin_left = 11.0
 margin_top = 3.0
 margin_right = 394.0
-margin_bottom = 56.0
+margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 8 )

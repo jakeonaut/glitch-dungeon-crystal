@@ -8,7 +8,7 @@ func _ready():
   pass
 
 func activateScript():
-  if elderTadpoleNPC.am_i_sleepy:
+  if elderTadpoleNPC.am_i_sleepy or textBox.was_smacked:
     return
   if not elderTadpoleNPC.has_broom:
     # elderTadpoleNPC.has_broom = true

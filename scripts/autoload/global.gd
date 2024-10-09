@@ -212,7 +212,7 @@ func resetMemory():
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
     memory["colorblindMode"] = true
-    memory["stopAllMusic"] = true
+    memory["stopAllMusic"] = false
     memory["canChangeSongPitch"] = true
     memory["spellAssist"] = false
 
@@ -237,10 +237,11 @@ func resetMemory():
     # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
+    memory["goddess_dream3"] = false
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = false
+    memory["glitched_grimoire"] = true
     memory["priestess"] = 0
 
     # PERMANENT SPELLS
@@ -264,7 +265,7 @@ func resetMemory():
 
     # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun
-    memory["magic_lantern"] = 0 # 1 # aka chesire's blessing # maybe dedupe with broomerang?
+    memory["magic_lantern"] = 0 # 1 # aka chesire's blessing
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
@@ -355,7 +356,7 @@ func getLevelZoneName(longLevelName):
 func getDisplayTitle(levelZoneName, gd1 = "???"):
     match levelZoneName:
         "gd1":
-            return  # basically "null"
+            return gd1 # basically "null"
         "gd1FishingVillage":
             return "tadpole bog"
         "gd1ToxicJungle":
