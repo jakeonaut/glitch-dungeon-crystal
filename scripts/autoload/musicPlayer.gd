@@ -9,6 +9,7 @@ onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var grannyPlayer = get_node("GrannyPlayer")
+onready var mainMenuPlayer = get_node("MainMenuPlayer")
 onready var longAdventureThemePlayer = get_node("LongAdventureThemePlayer")
 onready var priestessPlayer = get_node("PriestessThemePlayer")
 onready var dungeonThemePlayer = get_node("DungeonThemePlayer")
@@ -93,6 +94,7 @@ func stopAll():
     fade_out(windPlayer)
     fade_out(restZonePlayer)
     fade_out(grannyPlayer)
+    fade_out(mainMenuPlayer)
     fade_out(priestessPlayer)
     fade_out(wakeupPlayer)
     fade_out(titleThemePlayer)
@@ -141,9 +143,6 @@ func conductFromScenePath(path):
         tryToPlay(crystalThemePlayer) # bossThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
         tryToPlay(grannyPlayer)
-        changeSongPitch(0.9)
-        default_song_pitch = 0.9
-        return
     elif path.find("PastoralScene_tangible") > 0:
         tryToPlay(grannyPlayer)
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:

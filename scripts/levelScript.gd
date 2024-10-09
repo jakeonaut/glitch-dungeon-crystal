@@ -108,6 +108,31 @@ func _ready_impl():
       global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.FLOOR, global.GlitchForm.LADDER, global.GlitchForm.INVISIBLE]
+
+      # debug "hack" to set angel_statues on debug_initialization
+      var tempLevelZone = global.currLevelZone
+      # set for haven
+      global.tryInitializeLevelZone("gd1TutorialDungeon")
+      global.setLevelZoneThing("angel_statue", 
+        ["haven", "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"])
+      # set for tadpole bog
+      global.tryInitializeLevelZone("gd1FishingVillage")
+      global.setLevelZoneThing("angel_statue", 
+        ["tadpole bog", "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"])
+      # set for mushroom forest
+      global.tryInitializeLevelZone("gd1ToxicJungle")
+      global.setLevelZoneThing("angel_statue", 
+        ["moldy dogwoods", "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"])
+      # set for cricket caves
+      global.tryInitializeLevelZone("gd1ShiftingSandLand")
+      global.setLevelZoneThing("angel_statue", 
+        ["bug desert", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
+      # set for elder village
+      global.tryInitializeLevelZone("gd1GrandmaVillage")
+      global.setLevelZoneThing("angel_statue", 
+        ["elder village", "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"])
+      # reset levelZone
+      global.currLevelZone = tempLevelZone
     
   if global.memory["has_gotten_broom"] > 0:
     global.memory["broom"] = true
@@ -180,7 +205,7 @@ func processPauseMenu():
       restartMusic()
   else:
     if not global.pauseGame and not global.pauseMoveInput:
-      if Input.is_action_just_pressed("ui_start") and getLevelName().find("MainMenu") < 0:
+      if Input.is_action_just_pressed("ui_start"):
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
         uiLayer.pauseMenu.normalOptionIndex = 0
         uiLayer.pauseMenu.shouldUpdateMenuText = true
@@ -188,14 +213,22 @@ func processPauseMenu():
         global.pauseGame = true
         player.pauseSound.play()
         playMenuMusic()
-      elif Input.is_action_just_pressed("popup_menu") and getLevelName().find("MainMenu") < 0:
-        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
-        uiLayer.pauseMenu.selectedGlitchSprite = -1
-        uiLayer.pauseMenu.inventoryOptionIndex = 0
-        uiLayer.pauseMenu.inventoryOptionIndexX = 0
-        global.isPauseMenuOpen = true
-        global.pauseGame = true
-        player.inventorySound.play()
+      elif Input.is_action_just_pressed("popup_menu"):
+        if global.has_really_started_game:
+          uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
+          uiLayer.pauseMenu.selectedGlitchSprite = -1
+          uiLayer.pauseMenu.inventoryOptionIndex = 0
+          uiLayer.pauseMenu.inventoryOptionIndexX = 0
+          global.isPauseMenuOpen = true
+          global.pauseGame = true
+          player.inventorySound.play()
+        else:
+          uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
+          uiLayer.pauseMenu.normalOptionIndex = 0
+          uiLayer.pauseMenu.shouldUpdateMenuText = true
+          global.isPauseMenuOpen = true
+          global.pauseGame = true
+          player.pauseSound.play()
     elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
       if global.is_reading_input:
         player.noBroomSound.play()
@@ -210,8 +243,8 @@ func processPauseMenu():
         global.pauseGame = false
         player.unpauseSound.play()
         restartMusic()
-    elif global.isPauseMenuOpen and Input.is_action_just_pressed("popup_menu") and getLevelName().find("MainMenu") < 0:
-      if uiLayer.pauseMenu.pauseMenuState != uiLayer.pauseMenu.PauseMenuState.INVENTORY:
+    elif global.isPauseMenuOpen and Input.is_action_just_pressed("popup_menu"):
+      if uiLayer.pauseMenu.pauseMenuState != uiLayer.pauseMenu.PauseMenuState.INVENTORY and global.has_really_started_game:
         uiLayer.pauseMenu.selectedGlitchSprite = -1
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
         uiLayer.pauseMenu.inventoryOptionIndex = 0
@@ -371,6 +404,7 @@ func tryToRespawn():
     gameCamera.setCameraPositionNow()
     global.set_camera_position_on_respawn = false
 
+  global.justAngelWarped = global.angelWarping
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
     global.memory["broom"] = true

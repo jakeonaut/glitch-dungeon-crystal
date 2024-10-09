@@ -25,6 +25,7 @@ onready var meshInstance3 = get_node("CubeContainer/MeshInstance3")
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 var npcRes = preload("res://sceneObjects/ElderTadpoleNPC.tscn")
 var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
+var ritualDialogStartSoundScriptRes = preload("res://levels/EndlessFantasy/gd1GrandmaVillage/AngelStatueRitualNPCDialogStartSound.gd")
 
 export var num_gems_needed = 20
 export var high_priestess_crystal = false
@@ -42,6 +43,17 @@ func _ready():
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
+        is_purified = true
+        visible = false
+        # lightAniPlayer.play("lightUpQuiet")
+        yield(get_tree().create_timer(0.1), "timeout")
+        freeUpPlayer()
+        queue_free()
+        # musicPlayer.changeSongPitch(1.0)
+    elif global.memory["priestess"] >= 2 and global.memory["glitched_grimoire"]:
+        global.setStaticLevelZoneLevelVar(level, self, true)
+        global.memory["clean_crystals"] += 1
+        global.setLevelZoneThing("crystal_geode", true)
         is_purified = true
         visible = false
         # lightAniPlayer.play("lightUpQuiet")
@@ -194,25 +206,29 @@ export var spawn_an_elder = true
 func freeUpPlayer():
     is_active = false
 
-    if not spawn_an_elder or high_priestess_crystal or global.memory["priestess"] > 0:
+    if not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
         return
+
+    ritualDialogStartSoundScriptRes
+
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
     elderNPC.mySprite.updateBaseFrame(0, 1)
     level.summonSmokeClouds(global_transform.origin, 3, true, true)
     elderNPC.global_transform.origin = global_transform.origin
     elderNPC.global_transform.origin.y -= 0.5
-    elderNPC.am_i_sleepy = true
-    elderNPC.is_really_important = false
-    elderNPC.is_important = false
-    elderNPC.can_move = false
     elderNPC.mySprite.updateBaseFrame(0, 1)
-    var finalText = "•zzz\n(she's still asleep...)"
-    elderNPC.textBox.is_really_important = false
-    elderNPC.textBox.text_final = finalText
-    elderNPC.textBox.textNode.bbcode_text = finalText
-    elderNPC.textBox.dialogStartSound.volume_db = -15
-    elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
+    if global.memory["priestess"] > 0:
+        elderNPC.textBox.dialogStartSound.script = ritualDialogStartSoundScriptRes
+    else:
+        elderNPC.am_i_sleepy = true
+        elderNPC.can_move = false
+        var finalText = "•zzz\n(she's still asleep...)"
+        elderNPC.textBox.is_really_important = false
+        elderNPC.textBox.text_final = finalText
+        elderNPC.textBox.textNode.bbcode_text = finalText
+        elderNPC.textBox.dialogStartSound.volume_db = -15
+        elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:

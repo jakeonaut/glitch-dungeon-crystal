@@ -438,7 +438,7 @@ func interact(wasSmacked = false):
   if global.activeInteractor == null:
     was_smacked = wasSmacked
 
-  if text_final == "":
+  if text_final == "" and (not was_smacked or smackedBbText == ""):
     return false
   if !visible and dialogSound.isActive():
     showTextbox(wasSmacked)

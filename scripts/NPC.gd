@@ -61,6 +61,7 @@ func _ready():
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
+  if smackedBbText != "":
     textBoxContainer.smackedBbText = smackedBbText
   if portrait and not textBoxContainer.portrait:
     textBoxContainer.portrait = portrait
@@ -195,7 +196,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   smack_timer = 0
   is_smacked = true
 
-  if textBox.text_final == "":
+  if textBox.text_final == "" and textBox.smackedBbText == "":
     return false
   if floating_text or not is_active: 
     return false
@@ -203,7 +204,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   if is_important and not global.memory["broom"]:
     return false
 
-  if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
+  if (global.activeInteractor == null and (textBox.text_final != "" or textBox.smackedBbText != "")) or (global.activeInteractor == textBox and global.pauseGame):
     textBox.hideInteractPrompt()
     if not floating_text:
       textBox.untinify()

@@ -230,21 +230,21 @@ scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -15.0
+volume_db = -20.0
 pitch_scale = 0.9
 
 [node name="MenuConfirmSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -15.0
+volume_db = -25.0
 pitch_scale = 0.9
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -12.0
+volume_db = -20.0
 
 [node name="MenuCancelSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -15.0
+volume_db = -20.0
 pitch_scale = 0.9
 
 [node name="PauseTitleRect" type="ColorRect" parent="."]

@@ -1,7 +1,5 @@
 extends AudioStreamPlayer
 
-onready var textBox = get_node("..")
-
 func _ready():
   pass
 
@@ -11,6 +9,7 @@ func activateScript():
     for ritual_step in global.correct_ritual:
         text += global.getLargeInputText(ritual_step)
     text += "\n•Pray twice, dance, jump,\n    then Return."
+    var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

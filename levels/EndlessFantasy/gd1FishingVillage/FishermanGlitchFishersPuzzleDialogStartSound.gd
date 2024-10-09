@@ -6,7 +6,7 @@ func _ready():
 
 func activateScript():
   if global.memory.has("roomPath") and "FlingAndFlung" in global.memory["roomPath"]:
-    var newText = "oh, you fell! if you glitch out\nyou can respawn back up\nin that other room"
+    var newText = "oh, you fell! if you glitch out\nyou can Return.\nto that other room"
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText
     # global.memory["zora_flippers"] = 3

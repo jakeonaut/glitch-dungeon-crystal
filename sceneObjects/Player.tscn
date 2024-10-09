@@ -6568,15 +6568,16 @@ volume_db = -8.0
 
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 45 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="PauseSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 65 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="InventorySound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 78 )
-volume_db = -15.0
+volume_db = -25.0
+pitch_scale = 0.9
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )

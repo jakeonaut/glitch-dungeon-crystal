@@ -282,7 +282,7 @@ func _process(delta):
         setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
 
   if global.memory["canGlitchScreen"] and level.pacman_wrapping:
-    edgeDistortion.visible = true
+    edgeDistortion.visible = false # true # a little visually glitchy at times in a way i dont like
     # x_edge/y_edge is finnicky in PoisonShroomCove/LostWoods1
     # edgeDistortionLeft.visible = (level.gameCamera.x_edge == -1 or level.gameCamera.x_edge == 2)
     # edgeDistortionRight.visible = (level.gameCamera.x_edge == 1 or level.gameCamera.x_edge == 2)

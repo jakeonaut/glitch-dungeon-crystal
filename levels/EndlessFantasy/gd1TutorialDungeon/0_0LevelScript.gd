@@ -59,10 +59,7 @@ func _process(_delta):
     if player.physics_state == player.PhysicsState.WAKING_UP or player.physics_state == player.PhysicsState.WAKING_UP:
       showInstructions = false
     optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
-    if is_controller_connected:
-      pressCText.bbcode_text = "        " + global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump."
-    else:
-      pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. Arrow keys to walk.."
+    pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
   else:
     pressCText.visible = false
     optionsMenuPrompt.visible = false

@@ -3,6 +3,7 @@ extends "../scripts/levelScript.gd"
 var switch_glitch_timer = 0
 var switch_glitch_time_limit = 15
 var direction = -1
+onready var broomSound = get_node("BroomSound")
 
 func setUpRoomInitializationOverride():
     if not global.has_started_game:
@@ -159,9 +160,9 @@ func _process(_delta):
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
         mainMenuUi.visible = not global.isPauseMenuOpen
-        pressCText.bbcode_text = "press " + global.getInputText("sub_action_button") + " to start"
+        pressCText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to start"
         optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
-        selectTextPrompt.bbcode_text = global.getInputText("sub_action_button")
+        selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
     # if uiLayer.title_display_state == 3:
     #     uiLayer.title_display_state = 0
@@ -187,22 +188,23 @@ func _process(_delta):
             if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
                 mainMenuUi.remove_child(pressCText)
                 uiLayer.add_child(pressCText)
-                pressCText.rect_position = Vector2(5, 479)
+                pressCText.rect_position = Vector2(16, 465)
                 pressCText.rect_size = Vector2(712, 101)
-                # show_dither_effect = false
-                # show_crt_effect = true
+                mainMenuUi.remove_child(optionsMenuPrompt)
+                uiLayer.add_child(optionsMenuPrompt)
+                optionsMenuPrompt.rect_position.y = 16
             var is_controller_connected = Input.get_connected_joypads().size() > 0
             pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
-            if is_controller_connected:
-                pressCText.bbcode_text = "        " + global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump."
-            else:
-                pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. Arrow keys to walk.."
+            optionsMenuPrompt.visible = pressCText.visible
+            pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
         return
 
-    if Input.is_action_just_pressed("ui_down"):
+    if Input.is_action_just_pressed("menu_down"):
+        uiLayer.pauseMenu.menuMoveSound.play()
         normalizeMainMenuPromptIndex(1)
         updateMenuText = true
-    elif Input.is_action_just_pressed("ui_up"):
+    elif Input.is_action_just_pressed("menu_up"):
+        uiLayer.pauseMenu.menuMoveSound.play()
         normalizeMainMenuPromptIndex(-1)
         updateMenuText = true
 
@@ -227,13 +229,15 @@ func _process(_delta):
     #     switch_glitch_timer = 0
     #     player.applyNextGlitch()
 
-    if Input.is_action_just_pressed("sub_action_button") and not global.has_started_game:
+    if Input.is_action_just_pressed("menu_confirm") and not global.has_started_game:
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()
         if mainMenuPromptIndex == 0:
+            broomSound.play()
             loadGame()
         elif mainMenuPromptIndex == 1:
+            broomSound.play()
             startGame()
         else:
             quitGame()
@@ -255,10 +259,14 @@ func normalizeMainMenuPromptIndex(change):
     if change < 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
         mainMenuPromptIndex = 2
 
+var has_ever_started_music = false
 # @override
 func playMenuMusic():
     # musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
     pass
     
+# @override
 func restartMusic():
-    musicPlayer.conductFromScenePath(getLevelName())
+    if not has_ever_started_music:
+        musicPlayer.conductFromScenePath(getLevelName())
+        has_ever_started_music = true

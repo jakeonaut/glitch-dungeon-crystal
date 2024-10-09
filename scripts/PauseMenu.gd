@@ -73,7 +73,7 @@ func _process(delta):
 
   if Input.is_action_just_pressed("menu_confirm"):
     menuConfirmSound.play()
-  elif Input.is_action_just_pressed("menu_cancel"):
+  elif Input.is_action_just_pressed("menu_cancel") and ((pauseMenuState == PauseMenuState.INVENTORY and popupRect.visible) or (pauseMenuState != PauseMenuState.SECRET_RITUAL and pauseMenuState != PauseMenuState.INVENTORY and pauseMenuState != PauseMenuState.NORMAL)):
     menuCancelSound.play()
 
   processGlitchScreen(delta)
@@ -190,7 +190,7 @@ func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("ui_start") + " to resume\n" + \
-    ((global.getInputText("popup_menu") + " for inventory") if level.getLevelName().find("MainMenu") < 0 else "")
+    ((global.getInputText("popup_menu") + " for inventory") if global.has_really_started_game else "")
 
   if shouldUpdateMenuText:
     var text = ""
@@ -505,7 +505,7 @@ func processInventoryLogic(delta):
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
     glitchRect4.color = activeColor if inventoryOptionIndexX == 3 else selectedColor if selectedGlitchSprite == 3 else inactiveColor
     if spellbookSize > 0:
-      var which_glitch = spellbook[inventoryOptionIndexX]
+      var which_glitch = spellbook[inventoryOptionIndexX] if global.memory["glitched_grimoire"] or level.player.spellCastPauseIndex == 0 else spellbook[1-inventoryOptionIndexX]
       if which_glitch == global.GlitchForm.FLOOR:
         popupText.text = "air walk:\n  walk off platforms\n  without falling"
       if which_glitch == global.GlitchForm.FEATHER:

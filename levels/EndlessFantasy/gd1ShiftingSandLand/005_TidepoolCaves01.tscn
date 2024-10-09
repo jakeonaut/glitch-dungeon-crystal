@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -99,25 +99,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=27]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
-
-[sub_resource type="BoxShape" id=28]
+[sub_resource type="BoxShape" id=35]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="BoxShape" id=29]
 resource_local_to_scene = true
@@ -174,22 +162,13 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=35]
-resource_name = "fade"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("InteractPrompt:material_override:shader_param/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8, 0.1 ]
-}
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -292,36 +271,19 @@ material_override = SubResource( 31 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.96056, 3, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door4" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/doorClose = SubResource( 24 )
 anims/doorOpen = SubResource( 25 )
 anims/locked = SubResource( 26 )
 
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door4" index="6"]
-anims/fade = SubResource( 27 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
+shape = SubResource( 35 )
 
-[node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
-shape = SubResource( 28 )
+[node name="PassiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="1"]
+shape = SubResource( 36 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="CollisionShape" parent="Viewport/level/Door4/FallthroughSolid" index="0"]
 shape = SubResource( 30 )
@@ -330,36 +292,19 @@ shape = SubResource( 30 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77217, 10, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="5"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/doorClose = SubResource( 32 )
 anims/doorOpen = SubResource( 33 )
 anims/locked = SubResource( 34 )
 
-[node name="InteractionAnimationPlayer" parent="Viewport/level/Door5" index="6"]
-anims/fade = SubResource( 35 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+shape = SubResource( 37 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
-shape = SubResource( 28 )
+[node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
+shape = SubResource( 38 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door5/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door5/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="CollisionShape" parent="Viewport/level/Door5/FallthroughSolid" index="0"]
 shape = SubResource( 30 )

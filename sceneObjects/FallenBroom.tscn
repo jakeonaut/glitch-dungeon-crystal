@@ -980,17 +980,17 @@ shape = SubResource( 48 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 10 )]
 
-[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 13 )
 
-[node name="DialogSound" parent="NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="15"]
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="12"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 11 )
 
