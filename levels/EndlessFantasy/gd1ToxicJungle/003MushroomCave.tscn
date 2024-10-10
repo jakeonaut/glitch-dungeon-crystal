@@ -1,7 +1,7 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
-[ext_resource path="res://scripts/AdvancedParallaxBackground.gd" type="Script" id=2]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
@@ -23,7 +23,6 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=30]
 
 [sub_resource type="Animation" id=21]
@@ -466,15 +465,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1805, 14.2805, 0 )
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.3006, 0 )
 
-[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 11.6014, 0 )
-
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 8, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 13, 0 )
-script = ExtResource( 2 )
+
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 11.4709, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 

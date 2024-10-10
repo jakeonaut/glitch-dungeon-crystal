@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -15,11 +15,15 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=15]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=16]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=18]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=19]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=21]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=23]
+[ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=24]
 
 [sub_resource type="Animation" id=15]
 resource_name = "doorClose"
@@ -465,6 +469,62 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="ShaderMaterial" id=58]
+shader = ExtResource( 16 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 24 )
+shader_param/base_palette = ExtResource( 19 )
+shader_param/target_palette = ExtResource( 23 )
+
+[sub_resource type="ShaderMaterial" id=59]
+shader = ExtResource( 16 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 24 )
+shader_param/base_palette = ExtResource( 19 )
+shader_param/target_palette = ExtResource( 23 )
+
 [sub_resource type="ViewportTexture" id=24]
 viewport_path = NodePath("Viewport")
 
@@ -554,9 +614,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -2.9, 0 )
-
-[node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.3, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, -33.568, 0 )
@@ -717,6 +774,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -20, 0 )
 [node name="SandStream6" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -26, 0 )
 
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+material_override = SubResource( 58 )
+texture = ExtResource( 24 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+material_override = SubResource( 59 )
+texture = ExtResource( 24 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -749,4 +817,5 @@ flip_v = true
 [editable path="Viewport/level/Dragonfly4"]
 [editable path="Viewport/level/Dragonfly6"]
 [editable path="Viewport/level/Dragonfly7"]
+[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport2/ScreenEffects"]

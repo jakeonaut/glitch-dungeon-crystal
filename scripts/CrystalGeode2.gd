@@ -213,7 +213,6 @@ func freeUpPlayer():
 
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
-    elderNPC.mySprite.updateBaseFrame(0, 1)
     level.summonSmokeClouds(global_transform.origin, 3, true, true)
     elderNPC.global_transform.origin = global_transform.origin
     elderNPC.global_transform.origin.y -= 0.5

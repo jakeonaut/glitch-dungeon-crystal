@@ -439,6 +439,7 @@ func tryToRespawn():
   global.roomEdgeVector = null
   global.isRespawning = false
   global.shouldRenderAsCinematic = false
+  global.memory["broom"] = true
 
   player.visible = true
   player.unsmack()

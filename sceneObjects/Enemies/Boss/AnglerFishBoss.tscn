@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
+[ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=4]
+[ext_resource path="res://scripts/Enemies/Boss/AnglerFishBoss.gd" type="Script" id=5]
+[ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
+[ext_resource path="res://sceneObjects/HighpriestessCrystal.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=13]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 9 )
+
+[node name="AnglerFishBoss" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 3 )
+hframes = 3
+vframes = 3
+script = ExtResource( 1 )
+max_frames = 1
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+volume_db = -3.0
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 4 )
+volume_db = -8.0
+pitch_scale = 1.2
+
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 7 )
+volume_db = -15.0
+pitch_scale = 1.1
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )
+light_energy = 7.0
+light_indirect_energy = 0.0
+
+[node name="Crystals" type="Spatial" parent="."]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1, 4.07366, -2.13 )
+
+[node name="HighpriestessCrystal" parent="Crystals" instance=ExtResource( 10 )]
+transform = Transform( 0.979341, -0.0281433, -0.20025, 0, 0.990268, -0.139173, 0.202218, 0.136298, 0.96981, 0, 0, -1.788 )
+visible = true
+
+[node name="MeshInstance2" parent="Crystals/HighpriestessCrystal/CubeContainer" index="0"]
+transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+
+[editable path="Crystals/HighpriestessCrystal"]

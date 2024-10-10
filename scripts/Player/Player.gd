@@ -983,10 +983,11 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 func getFishyInfected():
   tryClearFallthroughCollisionSolid()
   if summonedBroom:
+    broomStop()
     summonFallenBroom(true, false, false)
+  global.memory["broom"] = false
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
-  loseBroom()
   if transformation == TransformationState.BUBBLE:
     level.flipGravity()
   transformation = TransformationState.FISHY

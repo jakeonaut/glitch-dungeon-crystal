@@ -435,6 +435,8 @@ shader_param/target_palette = ExtResource( 20 )
 
 [node name="GlitchMoleCricket" type="Spatial" groups=["mole"]]
 script = ExtResource( 14 )
+lb = -1.0
+rb = 1.0
 smack_time_limit = 3
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]

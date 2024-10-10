@@ -694,10 +694,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro.tscn"
 
-[node name="BelowExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -2, 0 )
+[node name="DustyCricketHoppers" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 frame = 78
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/BelowExcavationRoom.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
 
 [node name="CricketCaveHub1" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
@@ -727,7 +727,7 @@ frame = 39
 path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
 
 [node name="CricketCaveHub2" parent="CorruptedTomb" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -9, 0 )
 material_override = SubResource( 18 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -789,5 +789,21 @@ texture = ExtResource( 10 )
 vframes = 16
 frame = 63
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="FishingScene" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/FishingScene.tscn"
+
+[node name="PlasticBeach" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/PlasticBeach.tscn"
 
 [editable path="FishingVillage/FrogBossHaven"]

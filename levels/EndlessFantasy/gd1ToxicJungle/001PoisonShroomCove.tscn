@@ -1,10 +1,9 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=3]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/AdvancedParallaxBackground.gd" type="Script" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=8]
@@ -632,6 +631,60 @@ viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 24.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@NoButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 26.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@YesButton@TextPrompt@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 20.0
+step = 1.0
+page = 81.0
+
+[node name="Viewport@level@Vileplume2@NPC@NPC TextBox@TextBox@ScrollContainer@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" parent="." instance=ExtResource( 29 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -880,60 +933,6 @@ woods"
 [node name="CollisionShape" parent="Viewport/level/Vileplume2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 85 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 81.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 24.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Vileplume2/NPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="AnimationPlayer" parent="Viewport/level/Vileplume2/NPC" index="4"]
 anims/default = SubResource( 86 )
 anims/fall = SubResource( 87 )
@@ -955,7 +954,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.752851, 0 )
-script = ExtResource( 5 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 

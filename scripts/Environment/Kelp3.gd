@@ -1,7 +1,7 @@
 extends Spatial
 
 
-var bubbleRes = preload("res://sceneObjects/Environment/Bubble.tscn")
+var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 
 var bubble_timer = 0
 var bubble_time_limit = 5
@@ -22,7 +22,7 @@ func _process(delta):
 
         if randi() % 2 == 0:
             var bubble = bubbleRes.instance()
-            bubble.bubble_speed = rand_range(4.0, 8.0)
+            # bubble.bubble_speed = rand_range(4.0, 8.0)
             add_child(bubble)
             bubble.global_transform.origin = self.global_transform.origin
             bubble.global_transform.origin.z = 0
