@@ -217,11 +217,12 @@ func freeUpPlayer():
     level.summonSmokeClouds(global_transform.origin, 3, true, true)
     elderNPC.global_transform.origin = global_transform.origin
     elderNPC.global_transform.origin.y -= 0.5
-    elderNPC.mySprite.updateBaseFrame(0, 1)
     if global.memory["priestess"] > 0:
         elderNPC.textBox.dialogStartSound.script = ritualDialogStartSoundScriptRes
+        elderNPC.am_i_sleepy = false
     else:
         elderNPC.am_i_sleepy = true
+        elderNPC.mySprite.updateBaseFrame(0, 1)
         elderNPC.can_move = false
         var finalText = "•zzz\n(she's still asleep...)"
         elderNPC.textBox.is_really_important = false

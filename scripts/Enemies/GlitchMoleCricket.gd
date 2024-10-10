@@ -42,6 +42,11 @@ func getFakeLevelTiles():
     return fakeLevelTiles
 
 func _ready():
+    if getMyStaticLevelZoneVar():
+        visible = false
+        queue_free()
+        return
+
     set_process(true)
     aniPlayer.stop()
     aniPlayer.clear_queue()
@@ -293,6 +298,8 @@ func checkForFlyPathOverrides():
                 aniPlayer.play("fly")
             flight_anchor = area.get_node("..")
             mole_state = MoleState.OVERRIDE_FLY_START
+            if permanently_alter_tiles:
+                global.setStaticLevelZoneLevelVar(level, self, true)
         
 func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
@@ -331,23 +338,23 @@ func digTiles(solidTiles, should_summon_clouds):
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_a.x, coords_a.y+1, coords_a.z), false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_a.x, coords_a.y+1, coords_a.z), permanently_alter_tiles, false)
         else:
-            levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), false)
+            levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), permanently_alter_tiles)
         tiles_dug += 1
     if solidTiles[1] != null:
         var coords_mid = solidTiles[1]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), permanently_alter_tiles, false)
         else:
-            levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), false)
+            levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), permanently_alter_tiles)
         tiles_dug += 1
     if solidTiles[2] != null:
         var coords_b = solidTiles[2]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_b.x, coords_b.y+1, coords_b.z), false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_b.x, coords_b.y+1, coords_b.z), permanently_alter_tiles, false)
         else:
-            levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), false)
+            levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), permanently_alter_tiles)
         tiles_dug += 1
 
     if should_summon_clouds and tiles_dug > 0:

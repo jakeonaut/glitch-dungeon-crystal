@@ -154,12 +154,6 @@ func processDeath():
 func stopJumping():
   behavior_jumping = false
 
-func unenemize():
-    if smallInteractionArea.is_in_group("enemies"):
-        smallInteractionArea.remove_from_group("enemies")
-    if smallInteractionArea.is_in_group("weak_enemies"):
-        smallInteractionArea.remove_from_group("weak_enemies")
-
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or am_i_dying:
     return false

@@ -127,6 +127,10 @@ func _ready_impl():
       global.tryInitializeLevelZone("gd1ShiftingSandLand")
       global.setLevelZoneThing("angel_statue", 
         ["bug desert", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
+      # set for dream temple
+      global.tryInitializeLevelZone("gd1CrystalTower")
+      global.setLevelZoneThing("angel_statue",
+        ["dream temple", "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"])
       # set for elder village
       global.tryInitializeLevelZone("gd1GrandmaVillage")
       global.setLevelZoneThing("angel_statue", 
@@ -436,6 +440,7 @@ func tryToRespawn():
   global.isRespawning = false
   global.shouldRenderAsCinematic = false
 
+  player.visible = true
   player.unsmack()
   player.aniPlayer.play("land")
   player.target_last_grounded_y = player.global_transform.origin.y

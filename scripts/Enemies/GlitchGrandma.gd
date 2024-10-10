@@ -2,6 +2,7 @@ extends "GlitchEnemy.gd"
 
 var summonedBroom = null
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
+var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 export var is_static = false
 export var has_broom = true
 onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
@@ -26,7 +27,7 @@ func _ready():
   updateColor()
 
 func _process(delta):
-  if not visible: return
+  if not visible or am_i_dying: return
   
   glitchSetSpritesAndCollision()
   processBroomRenderLogic(delta)
@@ -34,6 +35,10 @@ func _process(delta):
 
 func glitchSwitchSprite(_delta):
   pass
+
+func reallyDie():
+  level.summonSmokeClouds(global_transform.origin, 3, true, true)
+  queue_free()
 
 # @override
 func tryDieToOffscreenCamera():
@@ -210,3 +215,44 @@ func updateColor():
 
 func glitchTickle():
   return
+
+        
+# @override
+func ouchies(broom_origin):
+  .ouchies_base()
+  if am_i_dying or not visible: return
+  unenemize()
+      
+  am_i_dying = true
+  grav = 0
+  if summonedBroom:
+    broomStop()
+  summonFallenBroom(broom_origin)
+  secretAniPlayer.stop()
+  secretAniPlayer.play("die")
+  
+func summonFallenBroom(_broom_origin):
+  has_broom = false
+  broomSpriteVisible.visible = false
+  var fallenBroom = fallenBroomRes.instance()
+  level.add_child(fallenBroom)
+  fallenBroom.should_die_on_land = true
+  fallenBroom.should_return = false
+  fallenBroom.global_transform.origin = self.global_transform.origin
+  fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
+
+  var which_direction = 1
+  if level.player.global_transform.origin.x > global_transform.origin.x:
+    which_direction = -1
+  fallenBroom.walk_direction = Vector2(which_direction, 0)
+
+  if fallenBroom.walk_direction.x < 0:
+    if grav > 0:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+  else:
+    if grav > 0:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
+    else:
+      fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")

@@ -699,13 +699,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, -1 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
 grav = 0
-bbText = "welcome to the domain\\n of the GODDESS"
+bbText = "welcome to the domain\\n of the Goddess"
 
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 21, 0 )
 grav = 0
 bbText = "we are all offspring
-of GODDESS"
+of Goddess"
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 

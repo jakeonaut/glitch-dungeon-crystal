@@ -253,12 +253,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 28.1509, 0 )
 visible = false
 script = ExtResource( 19 )
 grav = 0
-bbText = "•GODDESS can enchant
+bbText = "Goddess can enchant
 you so that you may
 gain ultimate power....
 cure all regret and guilt
 evade even death
-...GODDESS loves all"
+...Goddess loves all"
 is_important = true
 
 [node name="InteractionArea" type="Area" parent="Viewport/level/NPC3"]

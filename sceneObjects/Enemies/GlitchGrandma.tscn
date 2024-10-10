@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=2]
@@ -247,6 +247,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector3( 1.125, 0, 0.7 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.001 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "appear"
@@ -373,6 +397,83 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 2, 23 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpellbookGlitchSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.005 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/DieSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reallyDie"
+} ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -800,7 +901,7 @@ script = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "enemies"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "weak_enemies"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
 script = ExtResource( 1 )
 
@@ -812,7 +913,7 @@ shape = SubResource( 2 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 13 )
-volume_db = -5.0
+volume_db = -1.0
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
@@ -871,6 +972,7 @@ should_animate = false
 anims/RESET = SubResource( 11 )
 anims/appear = SubResource( 20 )
 anims/broomWindUp = SubResource( 21 )
+anims/die = SubResource( 23 )
 anims/fall = SubResource( 12 )
 anims/jump = SubResource( 13 )
 anims/jumpStart = SubResource( 14 )

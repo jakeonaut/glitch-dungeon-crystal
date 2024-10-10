@@ -21,7 +21,7 @@ func activateScript():
     which_one = 1
   elif which_one == 1 and not textBox.was_smacked:
     # NPC.mySprite.updateBaseFrame(6, 6)
-    NPC.textBoxContainer.bbText = "•the GODDESS still hasn't\nshown herself to me\n•was I wrong?"
+    NPC.textBoxContainer.bbText = "•the Goddess still hasn't\nshown herself to me\n•was I wrong?"
     NPC.textBoxContainer.setVars()
     which_one = 2
   elif which_one == 2 and not textBox.was_smacked:

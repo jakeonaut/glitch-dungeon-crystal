@@ -692,7 +692,12 @@ func doTimeDilation(_delta):
   # global.time_dilation_multiplier = gtdm
 
 func canIGetCaught():
+  if not visible:
+    return false
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_RECOVERY:
+    return false
+  if glitch_form == global.GlitchForm.INVISIBLE:
+    glitchTickle(false)
     return false
   
   return true
@@ -854,7 +859,7 @@ func loseBroom():
     broomStop()
   if global.memory["broom"]:
     mySprite.flip_h = not mySprite.flip_h
-    summonFallenBroom(false, true)
+    summonFallenBroom(false, true, false)
     mySprite.flip_h = not mySprite.flip_h
 
 var fish_broom_timer = 0
@@ -862,6 +867,7 @@ var fish_broom_time_limit = 2
 var has_fish_broom = true
 var bubble_timer = 0
 var bubble_time_limit = 2
+onready var fishFormSound = get_node("Sounds/FishFormSound")
 func processFishyLogic(delta):
   if not global.memory["zora_flippers"]:
     return
@@ -869,13 +875,15 @@ func processFishyLogic(delta):
   var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
   if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
     getFishyInfected()
-    gravitySound.play()
+    fishFormSound.pitch_scale = rand_range(0.8, 1.2)
+    fishFormSound.play()
   elif transformation == TransformationState.FISHY:
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
     if (not is_touching_water and not was_touching_water):
       getFishyCured()
+      gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
     if Input.is_action_pressed("sub_action_button") and has_fish_broom:
       bubble_timer += (delta*11)
@@ -1473,6 +1481,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
   elif global.memory["hp"] <= 0 or should_immediately_die:
+    if summonedBroom:
+      broomStop()
+    summonFallenBroom(false, true, false)
     actuallyProcessDeath(should_glitch)
     getSmacked()
   else:
@@ -1712,10 +1723,10 @@ func doBroomAttack(which_broom_attack):
   #       levelTiles.removeTile(Vector3(x - 3, y - 1, z), false)
   #       levelTiles.removeTile(Vector3(x - 4, y - 1, z), false)
   #     else:
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y + 0, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y + 0, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y - 1, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y - 1, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y + 0, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y + 0, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 3, y - 1, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x - 4, y - 1, z), false, false)
   #   else:
   #     if checkSolidTilesOnMyRight(true):
   #       levelTiles.removeTile(Vector3(x + 1, y + 0, z), false)
@@ -1723,10 +1734,10 @@ func doBroomAttack(which_broom_attack):
   #       levelTiles.removeTile(Vector3(x + 1, y - 1, z), false)
   #       levelTiles.removeTile(Vector3(x + 2, y - 1, z), false)
   #     else:
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y + 0, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false)
-  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y + 0, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false, false)
+  #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false, false)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15
@@ -1862,7 +1873,7 @@ func processBagRenderLogic(_delta):
     
   # if summonedBroom != null:
   #   adjustSummonedBroomSpritePosition()
-  if global.memory["hp"] > 1:
+  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
     enchantedBagSpriteVisible.visible = true
   else:
     enchantedBagSpriteVisible.visible = false

@@ -10,6 +10,8 @@ func activateScript():
         text += global.getLargeInputText(ritual_step)
     text += "\n•Pray twice, dance, jump,\n    then Return."
     var textBox = get_node("..")
+    if global.justAngelWarped:
+      text = "•Keep up your daily prayers.\nThe Goddess needs your strength."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

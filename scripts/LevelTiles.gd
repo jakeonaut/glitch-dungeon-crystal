@@ -486,7 +486,7 @@ func sweepUpSand(coords):
     level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)
   spike_infection_timer = 0
 
-func addTile(tile_id, target, is_transient = false, transient_time_start = 0):
+func addTile(tile_id, target, addToLevelZone = true, is_transient = false, transient_time_start = 0):
   set_cell_item(target.x, target.y, target.z, tile_id)
   randomizeTile(target, my_tileset_glitch_type)
   var name = mesh_library.get_item_name(tile_id)

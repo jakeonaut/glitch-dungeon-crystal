@@ -231,7 +231,7 @@ func pressingMoveRight():
     return walk_direction.x == 1 and behavior_walking and (projectile or not on_ground)
 
 func isActive(_debug=false):
-    return visible and on_ground and not behavior_was_thrown and not level.player.is_mushroom_infected
+    return visible and on_ground and not behavior_was_thrown and not level.player.is_mushroom_infected and not should_die_on_land
 
 # @override
 func justPressedJump():

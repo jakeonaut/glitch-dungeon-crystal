@@ -657,3 +657,9 @@ func spawnBabyMushroom(babyTransform, newMushroomAncestorRef):
     baby.mushroomAncestorRef = newMushroomAncestorRef
     mushroomBabyRefs.push_back(weakref(baby))
     return baby
+
+func unenemize():
+    if smallInteractionArea.is_in_group("enemies"):
+        smallInteractionArea.remove_from_group("enemies")
+    if smallInteractionArea.is_in_group("weak_enemies"):
+        smallInteractionArea.remove_from_group("weak_enemies")

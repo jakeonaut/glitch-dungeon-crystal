@@ -163,19 +163,22 @@ func conductFromScenePath(path):
         tryToPlay(dungeonThemePlayer)
     elif path.find("gd1BubblegloopSwamp") > 0:
         tryToPlay(debugThemePlayer)
-        # changeSongPitch(0.7)
-        # default_song_pitch = 0.7
-        # return
+        if global.memory["priestess"] >= 2:
+            changeSongPitch(0.9)
+            default_song_pitch = 0.9
+            return
     elif path.find("gd1TombSouls") > 0:
         tryToPlay(catacombThemePlayer)
-        # changeSongPitch(0.9)
-        # default_song_pitch = 0.9
-        # return
+        if global.memory["priestess"] >= 2:
+            changeSongPitch(0.9)
+            default_song_pitch = 0.9
+            return
     elif path.find("gd1AbstractSuburb") > 0:
         tryToPlay(suburbThemePlayer)
-        # changeSongPitch(0.9)
-        # default_song_pitch = 0.9
-        # return
+        if global.memory["priestess"] >= 2:
+            changeSongPitch(0.9)
+            default_song_pitch = 0.9
+            return
     elif path.find("000IntroCutscene") > 0:
         tryToPlay(priestessPlayer)
         changeSongPitch(0.63)
@@ -198,8 +201,8 @@ func conductFromScenePath(path):
     else:
         self.stopAll()
     if global.memory["priestess"] >= 2:
-        changeSongPitch(0.2)
-        default_song_pitch = 0.2
+        changeSongPitch(0.4)
+        default_song_pitch = 0.4
     else:
         changeSongPitch(1.0)
         default_song_pitch = 1.0

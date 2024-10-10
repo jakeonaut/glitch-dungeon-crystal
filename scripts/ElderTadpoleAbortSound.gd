@@ -28,7 +28,7 @@ func activateScript():
     # global.memory["nesting_doll"] = global.NestingDoll.BABY
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
 
-    elderTadpoleNPC.textBoxContainer.bbText = "•We must awaken the GODDESS.\nPlease, collect her 3 dreams,\nscattered in the darkest\ncorners of this dungeon."
+    elderTadpoleNPC.textBoxContainer.bbText = "•We must awaken the Goddess.\nPlease, collect her 3 dreams,\nscattered in the darkest\ncorners of this dungeon."
     elderTadpoleNPC.textBoxContainer.setVars()
     # yield(get_tree().create_timer(0.1), "timeout")
     # elderTadpoleNPC.activate(true)

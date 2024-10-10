@@ -1,5 +1,7 @@
 extends "../FishingRod.gd"
 
+onready var anglerFish = get_node("..")
+
 # @override
 func restorePlayer(got_to_top):
   if hookTarget == null:
@@ -17,4 +19,6 @@ func restorePlayer(got_to_top):
     level.player.linear_velocity.y = 0
     level.player.lv.y = 0
     return
-  level.player.physics_state = level.player.PhysicsState.NORMAL
+  # level.player.physics_state = level.player.PhysicsState.NORMAL
+  if got_to_top:
+    level.player.tumbleFall(anglerFish.mySprite.flip_h)

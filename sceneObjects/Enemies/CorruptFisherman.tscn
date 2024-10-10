@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -15,7 +15,9 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=14]
 [ext_resource path="res://scripts/Enemies/CorruptFisherman.gd" type="Script" id=15]
-[ext_resource path="res://sceneObjects/Enemies/AnglerFishingRod.gd" type="Script" id=16]
+[ext_resource path="res://scripts/Enemies/AnglerFishingRod.gd" type="Script" id=16]
+[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/eb_bite.wav" type="AudioStream" id=18]
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 8 )
@@ -133,10 +135,46 @@ tracks/3/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/ChompSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=37]
 resource_name = "digest"
-length = 1.2
+length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -144,10 +182,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 66, 67, 66, 67, 61 ]
+"values": [ 63, 65, 66, 67, 66, 67, 61 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("DanglerBase:visible")
@@ -180,17 +218,29 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1.2 ),
+"times": PoolRealArray( 1.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "swallowPlayer"
 } ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=36]
 resource_name = "openMouth"
-length = 0.2
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -239,10 +289,22 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "reveal"
-length = 0.9
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -291,10 +353,38 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="BoxShape" id=34]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="AnglerFish" type="Spatial"]
 script = ExtResource( 15 )
@@ -346,7 +436,7 @@ script = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies", "weak_enemies"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 7 )
 
@@ -360,6 +450,20 @@ shape = SubResource( 29 )
 stream = ExtResource( 14 )
 volume_db = -4.0
 pitch_scale = 0.8
+
+[node name="RevealSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -10.0
+pitch_scale = 1.5
+
+[node name="OpenMouthSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 18 )
+volume_db = -8.0
 
 [node name="DieSound2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 5 )
@@ -394,5 +498,11 @@ script = ExtResource( 16 )
 
 [node name="CollisionShape" parent="FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 34 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
+shape = SubResource( 38 )
 
 [editable path="FishingRod"]

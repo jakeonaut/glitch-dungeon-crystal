@@ -24,14 +24,25 @@ func _process(_delta):
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("openMouth")
 
-  if not i_caught_player and was_player_caught:
+  was_player_caught = i_caught_player
+
+func fallthroughCollisionActivate(friend):
+  if friend == level.player:
+    passiveActivate(0, true)
+
+var gulping = false
+func passiveActivate(_delta, is_player):
+  if gulping:
+    return
+  if is_player and level.player.canIGetCaught():
+    am_revealed = true
+    gulping = true
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("digest")
-
-  was_player_caught = i_caught_player
-
+    level.player.visible = false
+    level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
   
 func swallowPlayer():
-  pass
-
+  level.player.tryDieToEnemy(0, true, true, true)
+  gulping = false
