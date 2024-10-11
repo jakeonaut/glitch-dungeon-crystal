@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=2]
+[gd_scene load_steps=152 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -50,9 +50,13 @@
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=48]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=49]
 [ext_resource path="res://assets/sounds/cowMoo.wav" type="AudioStream" id=50]
+[ext_resource path="res://library_hero.jpg" type="Texture" id=51]
 [ext_resource path="res://assets/tower.png" type="Texture" id=52]
 [ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=53]
 [ext_resource path="res://sceneObjects/ElderTadpoleNPC.tscn" type="PackedScene" id=54]
+
+[sub_resource type="CanvasItemMaterial" id=257]
+blend_mode = 3
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 17 )
@@ -1843,6 +1847,12 @@ default_font = SubResource( 231 )
 
 [node name="Game" type="Spatial"]
 
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 257 )
+position = Vector2( 660, 510 )
+scale = Vector2( 1.3125, 1.63871 )
+texture = ExtResource( 51 )
+
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
 [node name="level" type="Node" parent="Viewport"]
@@ -2348,7 +2358,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 256 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

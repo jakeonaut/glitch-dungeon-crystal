@@ -569,7 +569,7 @@ func processInventoryLogic(delta):
       if inventoryOptionIndexX == 0:
         popupText.text = "memory of fish:\n  swim in water\n  blow bubbles"
       elif inventoryOptionIndexX == 1:
-        popupText.text = "mole cricket memory:\n  press down to dig"
+        popupText.text = "mole cricket memory:\n  press down to dig\n  and move around"
       elif inventoryOptionIndexX == 2:
         popupText.text = "mushroom memory:\n  what does this do?"
     elif inventoryOptionIndex == 4:
