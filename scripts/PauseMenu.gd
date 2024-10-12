@@ -187,10 +187,7 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  var tempOptions = normalMenuOptions
-  if global.memory["demo_mode"] >= 2 and tempOptions.size() <= 5:
-    tempOptions.push_back("leave feedback!")
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("ui_start") + " to resume\n" + \
+  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + \
     ((global.getInputText("popup_menu") + " for inventory") if global.has_really_started_game else "")
 
   if shouldUpdateMenuText:
@@ -488,7 +485,7 @@ onready var glitchSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/Equipm
 onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 func processInventoryLogic(delta):
-  pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("popup_menu") + " to resume\nPress " + global.getInputText("ui_start") + " for OPTIONS"
+  pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\nPress " + global.getInputText("ui_start") + " for OPTIONS"
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
   if selectedGlitchSprite >= 0:
@@ -847,8 +844,8 @@ func initializeControlsConfig():
       "input_action": "restart_key",
       "label_str": "Return.",
       "default_keyCode": 82, 
-      "button_index": JOY_SELECT, 
-      "default_button_index": JOY_SELECT, 
+      "button_index": JOY_DS_Y, 
+      "default_button_index": JOY_DS_Y,
     },
     {
       "input_action": "alt_action_button",
@@ -860,9 +857,9 @@ func initializeControlsConfig():
     {
       "input_action": "left_button",
       "label_str": "prev spell",
-      "default_keyCode": 16, 
-      "button_index": JOY_DS_X, 
-      "default_button_index": JOY_DS_X, 
+      "default_keyCode": 16777237, 
+      "button_index": JOY_L, 
+      "default_button_index": JOY_L, 
     },
     {
       "input_action": "spell_1",
@@ -917,7 +914,7 @@ func processControlsLogic(_delta):
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
       pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
     elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n   hold SELECT: reset bindings"
+      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n   hold " + global.getInputText("ui_cancel_controller") + ": reset bindings"
 
   if global.is_reading_input:
     if global.last_read_input != null:
@@ -946,7 +943,7 @@ func processControlsLogic(_delta):
       control_index += 1
     elif Input.is_action_just_pressed("menu_up"):
       control_index -= 1
-    if Input.is_action_just_pressed("menu_confirm") and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
+    if Input.is_action_just_pressed("menu_confirm") and not Input.is_action_pressed("ui_cancel"):
       global.is_reading_input = true
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         global.is_reading_keyboard_input = true
@@ -955,7 +952,8 @@ func processControlsLogic(_delta):
       global.last_read_input = null
       last_control_index = -1
     elif Input.is_action_just_pressed("menu_cancel"):
-      pauseMenuState = PauseMenuState.NORMAL
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.TOP_INPUT
       shouldUpdateMenuText = true
 
   var showCondensedMenu = pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]
@@ -998,7 +996,7 @@ func processControlsLogic(_delta):
   last_control_index = control_index
 
 func processPopupRenderLogic(delta):
-  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("ui_cancel_controller"):
+  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("popup_menu"):
     getPlayer().noBroomSound.play()
     global.is_reading_input = false
     return
@@ -1035,8 +1033,9 @@ func processPopupRenderLogic(delta):
         popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
       if popupTimer >= popupTimeLimit:
         for i in range(controlsConfig.size()):
-          controlsConfig[control_index].button_index = controlsConfig[i].default_button_index
-          global.setButtonIndex(controlsConfig[i].input_action, controlsConfig[i].default_button_index)
+          if controlsConfig[i].has("default_button_index"):
+            controlsConfig[control_index].button_index = controlsConfig[i].default_button_index
+            global.setButtonIndex(controlsConfig[i].input_action, controlsConfig[i].default_button_index)
         global.memory["controls_config"] = controlsConfig
         level.saveTheGame()
         canResetBindings = false
@@ -1047,5 +1046,5 @@ func processPopupRenderLogic(delta):
     if pauseMenuState != PauseMenuState.INVENTORY:
       popupRect.visible = false
     popupTimer = 0
-    if not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("ui_cancel_controller"):
+    if not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("popup_menu") and not Input.is_action_pressed("ui_start"):
       canResetBindings = true
