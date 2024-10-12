@@ -1,0 +1,455 @@
+[gd_scene load_steps=51 format=2]
+
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=3]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=4]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=5]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
+[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=9]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Streetlight.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=17]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=19]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=20]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=22]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Mimic.tscn" type="PackedScene" id=24]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=26]
+[ext_resource path="res://assets/palettes/japanese-woodblock-1x.png" type="Texture" id=27]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=28]
+[ext_resource path="res://assets/sprites/house0000.png" type="Texture" id=29]
+[ext_resource path="res://assets/palettes/magicolor-16-1x.png" type="Texture" id=30]
+[ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/SuburbDitherMaterial.tres" type="Material" id=31]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scripts/SpellsTreasures/LanternAbortSound.gd" type="Script" id=33]
+
+[sub_resource type="ShaderMaterial" id=33]
+shader = ExtResource( 19 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 22 )
+shader_param/base_palette = ExtResource( 17 )
+shader_param/target_palette = ExtResource( 20 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=39]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=16]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=30]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=27]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = ExtResource( 19 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 29 )
+shader_param/base_palette = ExtResource( 17 )
+shader_param/target_palette = ExtResource( 30 )
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+extents = Vector3( 3.24, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 2.5, 2.5, 1 )
+
+[sub_resource type="BoxShape" id=35]
+resource_local_to_scene = true
+extents = Vector3( 4, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=19]
+viewport_path = NodePath("Viewport2")
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = ExtResource( 26 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 0.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 27 )
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" parent="." instance=ExtResource( 9 )]
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 5 )
+show_crt_effect = true
+tileset_type = 7
+has_spellbook_page = true
+display_title = "demon suburb"
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 13 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 12 )]
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
+material_override = SubResource( 33 )
+texture = ExtResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
+material_override = SubResource( 33 )
+texture = ExtResource( 22 )
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 6 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 1 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 3 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 23 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 4, 0, 51, 5, 0, 51, 6, 0, 51, 12, 0, 1, 13, 0, 57, 14, 0, 57, 15, 0, 1, 16, 0, 1, 18, 0, 1, 25, 0, 1, 26, 0, 1, 27, 0, 1, 28, 0, 1, 65526, 0, 1, 65527, 0, 1, 65540, 0, 51, 65542, 0, 51, 65548, 0, 1, 65550, 0, 1, 65551, 0, 57, 65552, 0, 1, 65553, 0, 1, 65554, 0, 1, 65563, 0, 1, 65564, 0, 1, 131062, 0, 1, 131063, 0, 1, 131076, 0, 51, 131077, 0, 51, 131078, 0, 51, 131084, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131092, 0, 1, 131093, 0, 1, 131094, 0, 1, 131099, 0, 1, 131100, 0, 1, 196598, 0, 1, 196599, 0, 1, 196628, 0, 1, 196630, 0, 1, 196635, 0, 1, 196636, 0, 1, 262134, 0, 1, 262135, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 1, 262163, 0, 1, 262164, 0, 1, 262165, 0, 1, 262166, 0, 1, 262171, 0, 1, 262172, 0, 1, 327670, 0, 1, 327671, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 327688, 0, 1, 327704, 0, 51, 327705, 0, 51, 327706, 0, 51, 327707, 0, 1, 327708, 0, 1, 393206, 0, 1, 393207, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 1, 393224, 0, 1, 393240, 0, 51, 393242, 0, 51, 393243, 0, 1, 393244, 0, 1, 458742, 0, 1, 458743, 0, 1, 458776, 0, 51, 458777, 0, 51, 458778, 0, 51, 458779, 0, 1, 458780, 0, 1, 524278, 0, 1, 524279, 0, 1, 524288, 0, 1, 524289, 0, 1, 524315, 0, 1, 524316, 0, 1, 589814, 0, 1, 589815, 0, 1, 589823, 0, 1, 589825, 0, 1, 589827, 0, 51, 589828, 0, 51, 589829, 0, 51, 589851, 0, 1, 589852, 0, 1, 655350, 0, 1, 655351, 0, 1, 655359, 0, 1, 655360, 0, 1, 655361, 0, 1, 655363, 0, 51, 655365, 0, 51, 655387, 0, 1, 655388, 0, 1, 720886, 0, 1, 720887, 0, 1, 720895, 0, 1, 720899, 0, 51, 720900, 0, 51, 720901, 0, 51, 720910, 0, 37, 720911, 0, 37, 720912, 0, 37, 720923, 0, 1, 720924, 0, 1, 786422, 0, 1, 786423, 0, 1, 786445, 0, 37, 786446, 0, 37, 786448, 0, 37, 786459, 0, 1, 786460, 0, 1, 851958, 0, 1, 851959, 0, 1, 851968, 0, 37, 851969, 0, 37, 851970, 0, 37, 851971, 0, 37, 851972, 0, 37, 851973, 0, 37, 851974, 0, 37, 851975, 0, 37, 851976, 0, 37, 851977, 0, 37, 851978, 0, 37, 851979, 0, 37, 851980, 0, 37, 851981, 0, 37, 851982, 0, 37, 851983, 0, 37, 851984, 0, 37, 851985, 0, 37, 851990, 0, 37, 851991, 0, 37, 851992, 0, 37, 851993, 0, 37, 851994, 0, 37, 851995, 0, 37, 851996, 0, 37, 917494, 0, 37, 917495, 0, 37, 917496, 0, 37, 917497, 0, 37, 917498, 0, 37, 917500, 0, 37, 917501, 0, 37, 917502, 0, 37, 917503, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 37, 917515, 0, 37, 917516, 0, 37, 917517, 0, 37, 917518, 0, 37, 917519, 0, 37, 917520, 0, 37, 917521, 0, 37, 917526, 0, 37, 917527, 0, 37, 917528, 0, 37, 917529, 0, 37, 917531, 0, 37, 917532, 0, 37, 983030, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 37, 983049, 0, 37, 983050, 0, 37, 983051, 0, 37, 983052, 0, 37, 983053, 0, 37, 983054, 0, 37, 983055, 0, 37, 983056, 0, 37, 983057, 0, 37, 983062, 0, 37, 983063, 0, 37, 983064, 0, 37, 983065, 0, 37, 983066, 0, 37, 983067, 0, 37, 983068, 0, 37, 1048566, 0, 37, 1048567, 0, 37, 1048568, 0, 37, 1048570, 0, 37, 1048571, 0, 37, 1048572, 0, 37, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, 1048576, 0, 37, 1048577, 0, 37, 1048598, 0, 37, 1048599, 0, 37, 1048600, 0, 37, 1048601, 0, 37, 1048602, 0, 37, 1048603, 0, 37, 1048604, 0, 37, 1114103, 0, 37, 1114104, 0, 37, 1114106, 0, 37, 1114107, 0, 37, 1114108, 0, 37, 1114109, 0, 37, 1114110, 0, 37, 1114111, 0, 37, 1114134, 0, 37, 1114135, 0, 37, 1114136, 0, 37, 1114137, 0, 37, 1114138, 0, 37, 1114139, 0, 37, 1114140, 0, 37, 1179639, 0, 37, 1179640, 0, 37, 1179641, 0, 37, 1179642, 0, 37, 1179643, 0, 37, 1179670, 0, 37, 1179671, 0, 37, 1179672, 0, 37, 1179673, 0, 37, 1179674, 0, 37, 1179675, 0, 37, 1179676, 0, 37, 1245175, 0, 37, 1245177, 0, 37, 1245178, 0, 37, 1245179, 0, 37, 1245206, 0, 37, 1245207, 0, 37, 1245208, 0, 37, 1245209, 0, 37, 1245210, 0, 37, 1245211, 0, 37, 1245212, 0, 37, 1310711, 0, 37, 1310713, 0, 37, 1310714, 0, 37, 1310715, 0, 37, 1310742, 0, 37, 1310743, 0, 37, 1310744, 0, 37, 1310745, 0, 37, 1310746, 0, 37, 1310747, 0, 37, 1310748, 0, 37, 1376246, 0, 37, 1376247, 0, 37, 1376248, 0, 37, 1376249, 0, 37, 1376250, 0, 37, 1376278, 0, 37, 1376279, 0, 37, 1376280, 0, 37, 1376282, 0, 37, 1376283, 0, 37, 1376284, 0, 37, 1441782, 0, 37, 1441784, 0, 37, 1441792, 0, 37, 1441793, 0, 37, 1441794, 0, 37, 1441795, 0, 37, 1441796, 0, 37, 1441797, 0, 37, 1441798, 0, 37, 1441799, 0, 37, 1441800, 0, 37, 1441801, 0, 37, 1441802, 0, 37, 1441803, 0, 37, 1441804, 0, 37, 1441805, 0, 37, 1441806, 0, 37, 1441807, 0, 37, 1441808, 0, 37, 1441809, 0, 37, 1441810, 0, 37, 1441811, 0, 37, 1441812, 0, 37, 1441813, 0, 37, 1441814, 0, 37, 1441815, 0, 37, 1441816, 0, 37, 1441817, 0, 37, 1441818, 0, 37, 1441819, 0, 37, 1441820, 0, 37, 1507318, 0, 37, 1507320, 0, 37, 1507321, 0, 37, 1507322, 0, 37, 1507323, 0, 37, 1507324, 0, 37, 1507325, 0, 37, 1507326, 0, 37, 1507327, 0, 37, 1507328, 0, 37, 1507329, 0, 37, 1507330, 0, 37, 1507331, 0, 37, 1507332, 0, 37, 1507333, 0, 37, 1507334, 0, 37, 1507335, 0, 37, 1507336, 0, 37, 1507337, 0, 37, 1507338, 0, 37, 1507339, 0, 37, 1507340, 0, 37, 1507341, 0, 37, 1507342, 0, 37, 1507343, 0, 37, 1507344, 0, 37, 1507345, 0, 37, 1507346, 0, 37, 1507347, 0, 37, 1507348, 0, 37, 1507349, 0, 37, 1507350, 0, 37, 1507351, 0, 37, 1507352, 0, 37, 1507353, 0, 37, 1507354, 0, 37, 1507355, 0, 37, 1507356, 0, 37, 1572854, 0, 37, 1572855, 0, 37, 1572856, 0, 37, 1572857, 0, 37, 1572858, 0, 37, 1572859, 0, 37, 1572860, 0, 37, 1572861, 0, 37, 1572862, 0, 37, 1572863, 0, 37, 1638390, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 60, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -262128, 0, 1, -262127, 0, 1, -262126, 0, 1, -262125, 0, 1, -262124, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 60, -196599, 0, 60, -196598, 0, 1, -196597, 0, 1, -196596, 0, 60, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 1, -196591, 0, 60, -196590, 0, 1, -196589, 0, 1, -196588, 0, 1, -196587, 0, 1, -196586, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 60, -131058, 0, 58, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -131053, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131044, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65522, 0, 60, -65521, 0, 60, -65520, 0, 1, -65519, 0, 1, -65518, 0, 1, -65514, 0, 1, -65513, 0, 1, -65512, 0, 1, -65511, 0, 1, -65509, 0, 1, -65508, 0, 1, -10, 0, 1, -9, 0, 1 )
+}
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 3 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 262151, 0, 2, 589823, 0, 2, 720911, 0, 2, 851991, 0, 2 )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 0, 0 )
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9, 5, 0 )
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001pt5_StreetlightManifesto.tscn"
+
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
+anims/doorClose = SubResource( 23 )
+anims/doorOpen = SubResource( 24 )
+anims/locked = SubResource( 25 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 38 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 39 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 20 )
+
+[node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0.3, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/KizzyCat/FallthroughSolid" index="0"]
+shape = SubResource( 30 )
+
+[node name="landing" parent="Viewport/level/KizzyCat" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29704, 0, 1 )
+
+[node name="KizzyCat3" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7, 4.3, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/KizzyCat3/FallthroughSolid" index="0"]
+shape = SubResource( 27 )
+
+[node name="landing" parent="Viewport/level/KizzyCat3" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1525, 4.03737, 1 )
+
+[node name="KizzyCat4" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.8, 1.3, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/KizzyCat4/SpriteContainer/InnerSpriteContainer" index="0"]
+frame = 87
+max_frames = 1
+
+[node name="CollisionShape" parent="Viewport/level/KizzyCat4/FallthroughSolid" index="0"]
+shape = SubResource( 27 )
+
+[node name="landing" parent="Viewport/level/KizzyCat4" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.32931, 0 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 2.36, -2 )
+material_override = SubResource( 31 )
+pixel_size = 0.12
+texture = ExtResource( 29 )
+script = ExtResource( 28 )
+max_frames = 1
+overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
+overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
+
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Sprite3D2" groups=["fallthrough"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Sprite3D2/FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 1.2 )
+shape = SubResource( 32 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 11, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 18, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 18, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 18, 0 )
+
+[node name="Streetlight" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.37142, 0 )
+
+[node name="Streetlight2" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 20.3714, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.139728, 0 )
+
+[node name="MimicLantern" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 19, 0 )
+num_gems_needed = 50
+trade_item = "MAGIC LANTERN"
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/SmallInteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/MimicNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 35 )
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/MimicNPC/FallthroughSolid" index="0"]
+shape = SubResource( 36 )
+
+[node name="TreasureSpellCollectable" parent="Viewport/level/MimicLantern" index="3"]
+bbText = "•MAGIC LANTERN
+jump twice to
+flip gravity"
+
+[node name="CollisionShape" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/SmallInteractionArea" index="0"]
+shape = SubResource( 37 )
+
+[node name="AbortSound" parent="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
+script = ExtResource( 33 )
+
+[node name="Sprite3D" parent="Viewport/level/MimicLantern/TreasureSpellCollectable" index="3"]
+frame = 49
+
+[node name="Viewport2" parent="." instance=ExtResource( 9 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 14 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 11 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+visible = true
+material = ExtResource( 31 )
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 19 )
+flip_v = true
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
+
+[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
+material = SubResource( 28 )
+
+[node name="UILayer" parent="." instance=ExtResource( 10 )]
+
+[editable path="Viewport/level/ParallaxBackground"]
+[editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/KizzyCat"]
+[editable path="Viewport/level/KizzyCat3"]
+[editable path="Viewport/level/KizzyCat4"]
+[editable path="Viewport/level/Streetlight"]
+[editable path="Viewport/level/Streetlight2"]
+[editable path="Viewport/level/MimicLantern"]
+[editable path="Viewport/level/MimicLantern/MimicNPC"]
+[editable path="Viewport/level/MimicLantern/MimicNPC/NPC TextBox"]
+[editable path="Viewport/level/MimicLantern/TreasureSpellCollectable/NPC TextBox"]
+[editable path="Viewport2/ScreenEffects"]
+[editable path="ScreenEffects"]

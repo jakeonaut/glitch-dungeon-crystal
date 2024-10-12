@@ -1,0 +1,325 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=4]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=5]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=16]
+[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=18]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=22]
+
+[sub_resource type="Animation" id=21]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="BoxShape" id=40]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=41]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=38]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=42]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=43]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=39]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="ViewportTexture" id=35]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1280, 1024 )
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 16 )
+starting_glitch_type = 3
+tileset_type = 6
+
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 13 )]
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 9 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 10 )]
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 5 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( -131078, 1, 1, -131075, 1, 1, -65541, 1, 1 )
+}
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, -5 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 22 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 786449, 0, 1, 786450, 0, 1, 786451, 0, 1, 786452, 0, 1, 786453, 0, 1, 786454, 0, 1, 786455, 0, 1, 786456, 0, 1, 786457, 0, 1, 786458, 0, 1, 786459, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 786463, 0, 1, 786464, 0, 1, 786465, 0, 1, 786466, 0, 1, 786467, 0, 1, 786468, 0, 1, 786469, 0, 1, 786470, 0, 1, 786471, 0, 1, 786472, 0, 1, 786473, 0, 1, 786474, 0, 1, 851985, 0, 1, 851986, 0, 1, 851987, 0, 1, 851988, 0, 1, 851989, 0, 1, 851990, 0, 1, 851991, 0, 1, 851992, 0, 1, 851993, 0, 1, 851994, 0, 1, 851995, 0, 1, 851996, 0, 1, 851997, 0, 1, 851998, 0, 1, 851999, 0, 1, 852000, 0, 1, 852001, 0, 1, 852002, 0, 1, 852003, 0, 1, 852004, 0, 1, 852005, 0, 1, 852006, 0, 1, 852007, 0, 1, 852008, 0, 1, 852009, 0, 1, 852010, 0, 1, 917521, 0, 1, 917523, 0, 1, 917537, 0, 1, 917539, 0, 1, 917542, 0, 1, 917543, 0, 1, 917544, 0, 1, 917545, 0, 1, 917546, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 983073, 0, 1, 983074, 0, 1, 983075, 0, 1, 983078, 0, 1, 983079, 0, 1, 983080, 0, 1, 983081, 0, 1, 983082, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1048597, 0, 1, 1048598, 0, 1, 1048609, 0, 1, 1048611, 0, 1, 1048613, 0, 1, 1048615, 0, 1, 1048616, 0, 1, 1048617, 0, 1, 1048618, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, 1114134, 0, 1, 1114144, 0, 1, 1114145, 0, 1, 1114146, 0, 1, 1114147, 0, 1, 1114148, 0, 1, 1114149, 0, 1, 1179665, 0, 1, 1179680, 0, 1, 1179682, 0, 1, 1245202, 0, 1, 1245203, 0, 1, 1245204, 0, 1, 1245215, 0, 1, 1245216, 0, 1, 1245217, 0, 1, 1245218, 0, 1, 1245226, 0, 1, 1310738, 0, 1, 1310740, 0, 1, 1310751, 0, 1, 1310753, 0, 1, 1310754, 0, 1, 1310762, 0, 1, 1376274, 0, 1, 1376275, 0, 1, 1376276, 0, 1, 1376287, 0, 1, 1376288, 0, 1, 1376289, 0, 1, 1376298, 0, 1, 1441813, 0, 1, 1441814, 0, 1, 1441815, 0, 1, 1441834, 0, 1, 1507349, 0, 1, 1507351, 0, 1, 1507370, 0, 1, 1572882, 0, 1, 1572883, 0, 1, 1572885, 0, 1, 1572886, 0, 1, 1572887, 0, 1, 1572906, 0, 1, 1638418, 0, 1, 1638420, 0, 1, 1638435, 0, 1, 1638436, 0, 1, 1638437, 0, 1, 1638442, 0, 1, 1703955, 0, 1, 1703956, 0, 1, 1703958, 0, 1, 1703959, 0, 1, 1703960, 0, 1, 1703966, 0, 1, 1703971, 0, 1, 1703973, 0, 1, 1703974, 0, 1, 1703975, 0, 1, 1703978, 0, 1, 1769492, 0, 1, 1769493, 0, 1, 1769494, 0, 1, 1769496, 0, 1, 1769501, 0, 1, 1769502, 0, 1, 1769507, 0, 1, 1769508, 0, 1, 1769509, 0, 1, 1769511, 0, 1, 1769514, 0, 1, 1835030, 0, 1, 1835031, 0, 1, 1835032, 0, 1, 1835036, 0, 1, 1835037, 0, 1, 1835038, 0, 1, 1835045, 0, 1, 1835046, 0, 1, 1835047, 0, 1, 1835050, 0, 1, 1900570, 0, 1, 1900571, 0, 1, 1900572, 0, 1, 1900574, 0, 1, 1900578, 0, 3, 1900579, 0, 3, 1900580, 0, 3, 1900581, 0, 3, 1900582, 0, 3, 1900583, 0, 3, 1900584, 0, 3, 1900585, 0, 3, 1900586, 0, 3, 1966098, 0, 3, 1966099, 0, 3, 1966100, 0, 3, 1966101, 0, 3, 1966102, 0, 3, 1966103, 0, 3, 1966104, 0, 3, 1966105, 0, 3, 1966106, 0, 3, 1966107, 0, 3, 1966108, 0, 3, 1966109, 0, 3, 1966110, 0, 1, 1966114, 0, 3, 1966116, 0, 3, 1966117, 0, 3, 1966118, 0, 3, 1966119, 0, 3, 1966120, 0, 3, 1966121, 0, 3, 1966122, 0, 3, 2031634, 0, 3, 2031635, 0, 3, 2031636, 0, 3, 2031637, 0, 3, 2031638, 0, 3, 2031639, 0, 3, 2031640, 0, 3, 2031641, 0, 3, 2031642, 0, 3, 2031643, 0, 3, 2031644, 0, 3, 2031645, 0, 3, 2031646, 0, 1, 2031650, 0, 3, 2031651, 0, 3, 2031652, 0, 3, 2031653, 0, 3, 2031654, 0, 3, 2031655, 0, 3, 2031656, 0, 3, 2031657, 0, 3, 2031658, 0, 3 )
+}
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 1769501, 0, 2 )
+}
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1, 29.2, 0 )
+
+[node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 17, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+is_passive = true
+
+[node name="landing" parent="Viewport/level/Door3" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+anims/doorClose = SubResource( 21 )
+anims/doorOpen = SubResource( 22 )
+anims/locked = SubResource( 23 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 40 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 41 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
+shape = SubResource( 38 )
+
+[node name="WallTorch4" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4222, 18.5768, 0 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 2, 0 )
+
+[node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 38, -1 )
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, 14.9662, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8, 14, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/004MushroomInfectionPt1.tscn"
+
+[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
+visible = false
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 42 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 43 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 37 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 39 )
+
+[node name="Mushroom" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8, 21, -1 )
+
+[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1, 22.6, -1 )
+
+[node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4, 17.8, -1 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3, 14.8, 0 )
+
+[node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 15, 0 )
+
+[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 15.9, 0 )
+
+[node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1, 17, 0 )
+
+[node name="miniCubeCrystal6" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 25.5, 0 )
+
+[node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 19.4, 0 )
+
+[node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.9, 20.6, 0 )
+
+[node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.1, 20.6, 0 )
+
+[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7, 16.8, 0 )
+
+[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 26.2, 0 )
+
+[node name="Viewport2" parent="." instance=ExtResource( 19 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 35 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 15 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 14 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 15 )]
+
+[editable path="Viewport/level/Door3"]
+[editable path="Viewport/level/Door3/NPC/NPC TextBox"]
+[editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport2/ScreenEffects"]

@@ -1,0 +1,1073 @@
+[gd_scene load_steps=63 format=2]
+
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
+[ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=7]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=13]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/mushroom.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/gruesomecreatures0.png" type="Texture" id=17]
+[ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=18]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/GeodeSpawner.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=25]
+[ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHavenLevelScript.gd" type="Script" id=26]
+[ext_resource path="res://assets/elder_sheet.png" type="Texture" id=27]
+[ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=28]
+[ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=33]
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=35]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=16]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=29]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SaveSpores:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SaveSpores:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 25 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 24 )
+shader_param/target_palette = ExtResource( 28 )
+
+[sub_resource type="BoxShape" id=23]
+resource_local_to_scene = true
+extents = Vector3( 2, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=24]
+resource_local_to_scene = true
+extents = Vector3( 6, 4, 1.3 )
+
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 5.5, 4, 1 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 25 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 3
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 1.0
+shader_param/normal_offset = 0.08
+shader_param/time_influence = 0.0
+shader_param/y_div = 1.4
+shader_param/texture_albedo = ExtResource( 27 )
+shader_param/base_palette = ExtResource( 24 )
+shader_param/target_palette = ExtResource( 28 )
+
+[sub_resource type="BoxShape" id=26]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=36]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=32]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.8, 1.3 )
+
+[sub_resource type="BoxShape" id=33]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=42]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=49]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="Animation" id=43]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=44]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=45]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=47]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=48]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="BoxShape" id=51]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=52]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=53]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=54]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=50]
+resource_local_to_scene = true
+extents = Vector3( 0.9, 0.75, 1.3 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=19]
+viewport_path = NodePath("Viewport2")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" parent="." instance=ExtResource( 13 )]
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 26 )
+show_crt_effect = true
+starting_glitch_type = 3
+tileset_type = 6
+has_spellbook_page = true
+spellbook_spells = [ 3, 1 ]
+pacman_wrapping = true
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 11 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1728.0
+margin_bottom = 1527.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 10 )]
+
+[node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 7 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 1 )
+}
+tileset_type = 1
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/FakeLevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 1 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh_library = ExtResource( 7 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 29, 0, 1, 30, 0, 1, 31, 0, 1, 32, 0, 1, 33, 0, 1, 34, 0, 1, 35, 0, 1, 36, 0, 1, 38, 0, 1, 42, 0, 1, 43, 0, 1, 44, 0, 1, 65526, 0, 1, 65527, 0, 1, 65544, 0, 1, 65545, 0, 1, 65562, 0, 1, 65563, 0, 1, 65564, 0, 1, 65565, 0, 1, 65566, 0, 1, 65567, 0, 1, 65568, 0, 1, 65569, 0, 1, 65570, 0, 1, 65571, 0, 1, 65572, 0, 1, 65573, 0, 1, 65574, 0, 1, 65575, 0, 1, 65578, 0, 1, 65580, 0, 1, 65581, 0, 1, 65582, 0, 1, 65583, 0, 1, 131062, 0, 1, 131063, 0, 1, 131080, 0, 1, 131081, 0, 1, 131098, 0, 1, 131100, 0, 1, 131106, 0, 1, 131107, 0, 1, 131108, 0, 1, 131109, 0, 1, 131111, 0, 1, 131112, 0, 1, 131113, 0, 1, 131114, 0, 1, 131115, 0, 1, 131116, 0, 1, 131119, 0, 1, 196598, 0, 1, 196599, 0, 1, 196634, 0, 1, 196635, 0, 1, 196636, 0, 1, 196642, 0, 1, 196645, 0, 1, 196646, 0, 1, 196647, 0, 1, 196648, 0, 1, 196650, 0, 1, 196651, 0, 1, 196652, 0, 1, 196655, 0, 1, 262134, 0, 1, 262135, 0, 1, 262144, 0, 3, 262145, 0, 3, 262146, 0, 3, 262147, 0, 3, 262178, 0, 1, 262181, 0, 1, 262182, 0, 1, 262184, 0, 1, 262185, 0, 1, 262186, 0, 1, 262188, 0, 1, 262189, 0, 1, 262190, 0, 1, 262191, 0, 1, 262192, 0, 1, 327670, 0, 1, 327671, 0, 1, 327679, 0, 3, 327680, 0, 3, 327681, 0, 3, 327682, 0, 3, 327683, 0, 3, 327714, 0, 1, 327715, 0, 1, 327716, 0, 1, 327717, 0, 1, 327726, 0, 1, 327728, 0, 1, 393206, 0, 1, 393207, 0, 1, 393215, 0, 3, 393216, 0, 3, 393217, 0, 3, 393218, 0, 3, 393246, 0, 28, 393247, 0, 28, 393248, 0, 28, 393262, 0, 1, 393263, 0, 1, 393264, 0, 1, 458742, 0, 1, 458743, 0, 1, 458766, 0, 1, 458767, 0, 1, 458768, 0, 1, 458782, 0, 28, 458784, 0, 28, 458788, 0, 28, 524278, 0, 1, 524279, 0, 1, 524302, 0, 1, 524304, 0, 1, 524318, 0, 28, 524319, 0, 28, 524320, 0, 28, 524323, 0, 28, 524324, 0, 28, 589814, 0, 1, 589815, 0, 1, 589838, 0, 1, 589839, 0, 1, 589840, 0, 1, 589841, 0, 1, 589842, 0, 1, 589857, 0, 28, 589858, 0, 28, 655350, 0, 1, 655351, 0, 1, 655376, 0, 1, 655378, 0, 1, 655383, 0, 1, 655384, 0, 1, 655385, 0, 1, 655393, 0, 28, 655394, 0, 28, 655395, 0, 28, 655396, 0, 28, 655397, 0, 28, 720886, 0, 1, 720887, 0, 1, 720912, 0, 1, 720913, 0, 1, 720914, 0, 1, 720917, 0, 1, 720918, 0, 1, 720919, 0, 1, 720921, 0, 1, 720930, 0, 28, 720932, 0, 28, 720933, 0, 28, 786422, 0, 1, 786423, 0, 1, 786453, 0, 1, 786455, 0, 1, 786456, 0, 1, 786457, 0, 1, 786464, 0, 28, 786465, 0, 28, 786468, 0, 28, 786470, 0, 28, 786471, 0, 28, 851958, 0, 1, 851959, 0, 1, 851968, 0, 1, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 1, 851974, 0, 1, 851975, 0, 1, 851976, 0, 1, 851977, 0, 1, 851989, 0, 1, 851990, 0, 1, 851991, 0, 1, 852000, 0, 28, 852001, 0, 28, 852004, 0, 28, 852006, 0, 28, 852007, 0, 28, 917494, 0, 1, 917495, 0, 1, 917496, 0, 1, 917497, 0, 1, 917498, 0, 1, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917503, 0, 1, 917504, 0, 1, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 1, 917509, 0, 1, 917511, 0, 1, 917512, 0, 1, 917513, 0, 1, 917538, 0, 28, 983030, 0, 1, 983031, 0, 1, 983032, 0, 1, 983033, 0, 1, 983034, 0, 1, 983035, 0, 1, 983036, 0, 1, 983037, 0, 1, 983038, 0, 1, 983039, 0, 1, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 1, 983049, 0, 1, 983074, 0, 1, 983075, 0, 1, 983076, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048568, 0, 1, 1048569, 0, 1, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048575, 0, 1, 1048583, 0, 1, 1048585, 0, 1, 1048610, 0, 1, 1048611, 0, 1, 1048612, 0, 1, 1048624, 0, 1, 1048625, 0, 1, 1048626, 0, 1, 1114102, 0, 1, 1114103, 0, 1, 1114104, 0, 1, 1114105, 0, 1, 1114119, 0, 1, 1114120, 0, 1, 1114121, 0, 1, 1114146, 0, 1, 1114147, 0, 1, 1114148, 0, 1, 1114160, 0, 1, 1114162, 0, 1, 1179638, 0, 1, 1179640, 0, 1, 1179650, 0, 28, 1179651, 0, 28, 1179696, 0, 1, 1179697, 0, 1, 1179698, 0, 1, 1245174, 0, 1, 1245175, 0, 1, 1245176, 0, 1, 1245184, 0, 28, 1245186, 0, 28, 1245187, 0, 28, 1376254, 0, 28, 1441795, 0, 28, 1441796, 0, 28, 1507325, 0, 28, 1507326, 0, 28, 1507327, 0, 28, 1507331, 0, 28, 1507332, 0, 28, 1572861, 0, 28, 1572863, 0, 28, 1638397, 0, 28, 1638398, 0, 28, 1638399, 0, 28, 1703930, 0, 1, 1703931, 0, 1, 1703932, 0, 1, 1769466, 0, 1, 1769468, 0, 1, 1835002, 0, 1, 1835003, 0, 1, 1835004, 0, 1, 1900573, 0, 1, 1900574, 0, 1, 1900576, 0, 1, 1966109, 0, 1, 1966111, 0, 1, 1966112, 0, 1, 2031645, 0, 1, 2031648, 0, 1, 2097181, 0, 1, 2097182, 0, 1, 2097183, 0, 1, 2097184, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262118, 0, 1, -262117, 0, 1, -262110, 0, 1, -262109, 0, 1, -262108, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196595, 0, 1, -196593, 0, 1, -196582, 0, 1, -196581, 0, 1, -196574, 0, 1, -196572, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131038, 0, 1, -131037, 0, 1, -131036, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65502, 0, 1, -65501, 0, 1, -65500, 0, 1, -65499, 0, 1, -65498, 0, 1, -10, 0, 1, -9, 0, 1, -2, 0, 1, -1, 0, 1 )
+}
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 1 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 196601, 0, 36, 262145, 0, 0, 262147, 0, 2, 917497, 0, 2, -65524, 0, 36 )
+}
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 1, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 34 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 35 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 20 )
+
+[node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 21.5139, 0 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1, 7, 0 )
+
+[node name="TriangleContainer" parent="Viewport/level/SavePoint" index="0"]
+visible = false
+
+[node name="Sprite3D2" parent="Viewport/level/SavePoint" index="1"]
+visible = false
+
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 17, 0 )
+
+[node name="TriangleContainer" parent="Viewport/level/SavePoint2" index="0"]
+visible = false
+
+[node name="AnimationPlayer" parent="Viewport/level/SavePoint2" index="6"]
+anims/RESET = SubResource( 27 )
+anims/default = SubResource( 28 )
+anims/sporeGrow = SubResource( 29 )
+
+[node name="Mushroom" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5591, 0, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.902, -2.43484, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom2" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom2" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom2" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom2" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom2" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom2" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom2" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom2" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom2" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom2" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom2" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom2" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom2/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom5" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.902, -0.434841, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom5" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom5" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom5" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom5" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom5" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom5" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom5" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom5" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom5" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom5" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom5" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom5" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom5/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.902, 5.09915, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom3" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom3" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom3" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom3" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom3" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom3" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom3" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom3" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom3" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom3" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom3" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom3" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom3/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom12" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.902, 16.2153, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom12" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom12" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom12" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom12" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom12" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom12" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom12" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom12" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom12" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom12" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom12" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom12" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom12/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom14" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.902, 17.1724, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom14" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom14" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom14" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom14" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom14" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom14" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom14" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom14" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom14" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom14" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom14" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom14" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom14/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom13" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.902, 21.0992, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom13" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom13" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom13" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom13" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom13" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom13" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom13" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom13" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom13" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom13" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom13" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom13" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom13/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom9" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.4438, 9.145, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom9" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom9" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom9" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom9" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom9" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom9" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom9" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom9" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom9" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom9" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom9" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom9" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom9/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Mushroom7" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3, 2, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom7" index="0"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom7" index="1"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom7" index="2"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom7" index="3"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom7" index="4"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom7" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom7" index="6"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom7" index="7"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom7" index="8"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom7" index="9"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom7" index="10"]
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom7" index="11"]
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom7/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 7, -3 )
+visible = false
+pixel_size = 0.125
+texture = ExtResource( 17 )
+hframes = 4
+vframes = 8
+
+[node name="ElderShroomNPC" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 10.024, 0 )
+grav = 0
+bbText = "•[shake]cough[/shake], [shake]cough[/shake]
+greetings, fellow elder... 
+•i sense great power in you
+•take the blessing in 
+this question block."
+is_important = true
+is_really_important = true
+can_move = false
+can_camera_zoom = false
+dont_recolor_me = true
+dont_align_sprite = true
+bring_to_front = false
+
+[node name="CollisionShape" parent="Viewport/level/ElderShroomNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 24 )
+
+[node name="CollisionShape" parent="Viewport/level/ElderShroomNPC/SmallerInteractionArea" index="0"]
+shape = SubResource( 25 )
+
+[node name="Sprite3D" parent="Viewport/level/ElderShroomNPC" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.345, 0 )
+material_override = SubResource( 21 )
+flip_h = true
+pixel_size = 0.25
+texture = ExtResource( 27 )
+hframes = 4
+vframes = 5
+frame = 0
+frame_delay = 0.6
+should_randomize_frame_delay = false
+automatically_change_color = false
+
+[node name="FallthroughSolid" parent="Viewport/level/ElderShroomNPC" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/ElderShroomNPC/FallthroughSolid" index="0"]
+shape = SubResource( 26 )
+
+[node name="InteractPrompt" parent="Viewport/level/ElderShroomNPC" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299988, 2, -1 )
+
+[node name="Mushroom11" parent="Viewport/level/ElderShroomNPC" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7327, 1.8209, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41687, 1.5 )
+material_override = SubResource( 22 )
+
+[node name="Sprite3D12" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="1"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D2" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="2"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D3" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="3"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D4" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="4"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D5" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="5"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D9" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="6"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D10" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="7"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D11" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="8"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D6" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="9"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D7" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="10"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="Sprite3D8" parent="Viewport/level/ElderShroomNPC/Mushroom11" index="11"]
+visible = false
+material_override = SubResource( 22 )
+
+[node name="CollisionShape" parent="Viewport/level/ElderShroomNPC/Mushroom11/FallthroughSolid" index="0"]
+shape = SubResource( 23 )
+
+[node name="Torch" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 17, 0 )
+
+[node name="Torch2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 17, 0 )
+
+[node name="GeodeSpawner" parent="Viewport/level" instance=ExtResource( 23 )]
+
+[node name="Door2" parent="Viewport/level/GeodeSpawner" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 16, 0 )
+is_locked = true
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+num_keys_unlock = 2
+key_type = 5
+
+[node name="ActiveCollisionShape" parent="Viewport/level/GeodeSpawner/Door2/InteractionArea" index="0"]
+shape = SubResource( 36 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/GeodeSpawner/Door2/InteractionArea" index="1"]
+shape = SubResource( 37 )
+
+[node name="CollisionShape" parent="Viewport/level/GeodeSpawner/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 32 )
+
+[node name="CollisionShape" parent="Viewport/level/GeodeSpawner/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 33 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 21, 0 )
+
+[node name="Vileplume" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 7, 0 )
+
+[node name="NPC" parent="Viewport/level/Vileplume" index="1"]
+bbText = ""
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 42 )
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 49 )
+
+[node name="InteractPrompt" parent="Viewport/level/Vileplume/NPC" index="6"]
+pixel_size = 0.0001
+
+[node name="Vileplume4" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="NPC" parent="Viewport/level/Vileplume4" index="1"]
+bbText = "•please have reverence"
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume4/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 42 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Vileplume4/NPC" index="4"]
+anims/default = SubResource( 43 )
+anims/fall = SubResource( 44 )
+anims/flickerOn = SubResource( 45 )
+anims/jump = SubResource( 46 )
+anims/land = SubResource( 47 )
+anims/stand = SubResource( 48 )
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume4/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 49 )
+
+[node name="Vileplume3" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 6, 0 )
+
+[node name="NPC" parent="Viewport/level/Vileplume3" index="1"]
+bbText = ""
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume3/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 51 )
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume3/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 52 )
+
+[node name="Vileplume2" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.5053, 7.84711, 0 )
+
+[node name="NPC" parent="Viewport/level/Vileplume2" index="1"]
+bbText = ""
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 53 )
+
+[node name="CollisionShape" parent="Viewport/level/Vileplume2/NPC/FallthroughSolid" index="0"]
+shape = SubResource( 54 )
+
+[node name="SavePoint3" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
+
+[node name="QuestionBlock" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 35.5053, 16.4947, 0 )
+spawned_object_path = "res://sceneObjects/Enemies/BigShroomEnemy.tscn"
+max_num_jumps = 3
+
+[node name="CollisionShape" parent="Viewport/level/QuestionBlock/PassiveInteractionArea" index="0"]
+shape = SubResource( 50 )
+
+[node name="BonkSound" parent="Viewport/level/QuestionBlock" index="3"]
+volume_db = -10.0
+pitch_scale = 0.7
+
+[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
+
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 19.173, 0 )
+
+[node name="Viewport2" parent="." instance=ExtResource( 13 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 14 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 6 )]
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 19 )
+flip_v = true
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 6 )]
+
+[node name="UILayer" parent="." instance=ExtResource( 14 )]
+
+[editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/SavePoint"]
+[editable path="Viewport/level/SavePoint2"]
+[editable path="Viewport/level/Mushroom"]
+[editable path="Viewport/level/Mushroom2"]
+[editable path="Viewport/level/Mushroom5"]
+[editable path="Viewport/level/Mushroom3"]
+[editable path="Viewport/level/Mushroom12"]
+[editable path="Viewport/level/Mushroom14"]
+[editable path="Viewport/level/Mushroom13"]
+[editable path="Viewport/level/Mushroom9"]
+[editable path="Viewport/level/Mushroom7"]
+[editable path="Viewport/level/ElderShroomNPC"]
+[editable path="Viewport/level/ElderShroomNPC/NPC TextBox"]
+[editable path="Viewport/level/ElderShroomNPC/Mushroom11"]
+[editable path="Viewport/level/GeodeSpawner/Door2"]
+[editable path="Viewport/level/GeodeSpawner/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/Vileplume"]
+[editable path="Viewport/level/Vileplume/NPC"]
+[editable path="Viewport/level/Vileplume/NPC/NPC TextBox"]
+[editable path="Viewport/level/Vileplume4"]
+[editable path="Viewport/level/Vileplume4/NPC"]
+[editable path="Viewport/level/Vileplume4/NPC/NPC TextBox"]
+[editable path="Viewport/level/Vileplume3"]
+[editable path="Viewport/level/Vileplume3/NPC"]
+[editable path="Viewport/level/Vileplume3/NPC/NPC TextBox"]
+[editable path="Viewport/level/Vileplume2"]
+[editable path="Viewport/level/Vileplume2/NPC"]
+[editable path="Viewport/level/Vileplume2/NPC/NPC TextBox"]
+[editable path="Viewport/level/QuestionBlock"]
+[editable path="Viewport2/ScreenEffects"]
+[editable path="ScreenEffects"]
