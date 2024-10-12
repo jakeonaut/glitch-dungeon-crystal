@@ -214,7 +214,7 @@ func processNormalLogic(_delta):
     normalOptionIndex += 1
     shouldUpdateMenuText = true
   elif Input.is_action_just_pressed("menu_up"):
-    normalOptionIndex -= 1
+    nsrmalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
     normalOptionIndex = len(tempOptions) - 1
@@ -247,9 +247,10 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
-    elif normalOptionIndex == 5 and global.memory["demo_mode"] >= 2:
-      pauseMenuState = PauseMenuState.NORMAL
+    elif normalOptionIndex == 5:
       OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.NORMAL
   elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
