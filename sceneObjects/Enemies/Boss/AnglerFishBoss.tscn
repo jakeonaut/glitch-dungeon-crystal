@@ -1,17 +1,52 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=3]
 [ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=4]
 [ext_resource path="res://scripts/Enemies/Boss/AnglerFishBoss.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/angleDangleSheet.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=8]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=9]
 [ext_resource path="res://sceneObjects/HighpriestessCrystal.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sprites/babyAnglerFish.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/anglerFishTail.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
+[ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=15]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=16]
+[ext_resource path="res://scripts/Enemies/Boss/AnglerLureScript.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 2 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -35,9 +70,581 @@ shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.9
-shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_albedo = ExtResource( 12 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LureContainer:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -6, 2.7, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "castRod"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 0, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LureContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -6, 2.7, 0 ), Vector3( -6.18538, 3.42193, 0 ), Vector3( -5.44387, 4.85861, 0 ), Vector3( -4.86456, 6.17942, 0 ), Vector3( -5.86456, 5.17942, 0 ), Vector3( -6.25632, 4.92758, 0 ), Vector3( -6.53615, 2.7729, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0.7, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0.7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "doLureCast"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "chatter"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1.3, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LureContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -6, 2.7, 0 ), Vector3( -6, 3, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "chompDown"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.3, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LureContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -6, 3, 0 ), Vector3( -6, 2.7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 0.7, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LureContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.45, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -6, 2.7, 0 ), Vector3( -6, 2.5, 0 ), Vector3( -6, 2.7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "openIdle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LureContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -6, 2.7, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "openUp"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1.3, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LureContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( -6, 2.7, 0 ), Vector3( -6, 3, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4.5, -0.2, -3 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "wiggle"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.2, -3 ), Vector3( 4.5, -0.4, -3 ), Vector3( 4.5, 0, -3 ), Vector3( 4.5, 0.2, -3 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 2 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 5.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 15 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("FishLureSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "spinAttack"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FishLureSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
+}
 
 [node name="AnglerFishBoss" type="Spatial"]
 script = ExtResource( 5 )
@@ -47,6 +654,45 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 material_override = SubResource( 1 )
 pixel_size = 0.125
 texture = ExtResource( 3 )
+hframes = 3
+vframes = 3
+script = ExtResource( 1 )
+max_frames = 4
+should_animate = false
+
+[node name="TailContainer" type="Spatial" parent="."]
+
+[node name="TailSprite" type="Sprite3D" parent="TailContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.2, -3 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 12 )
+hframes = 3
+vframes = 2
+script = ExtResource( 1 )
+max_frames = 4
+should_animate = false
+
+[node name="DangleContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="DanglerBaseSprite" type="Sprite3D" parent="DangleContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66968, 2.24577, -3 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 6 )
+hframes = 3
+vframes = 2
+script = ExtResource( 1 )
+max_frames = 1
+
+[node name="WeakPointContainer" type="Spatial" parent="."]
+
+[node name="SpermatophoreSprite" type="Sprite3D" parent="WeakPointContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8614, 1.76054, -1 )
+material_override = SubResource( 3 )
+pixel_size = 0.125
+texture = ExtResource( 11 )
 hframes = 3
 vframes = 3
 script = ExtResource( 1 )
@@ -74,7 +720,7 @@ light_energy = 7.0
 light_indirect_energy = 0.0
 
 [node name="Crystals" type="Spatial" parent="."]
-transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1, 4.07366, -2.13 )
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -2, 5.07366, -2.13 )
 
 [node name="HighpriestessCrystal" parent="Crystals" instance=ExtResource( 10 )]
 transform = Transform( 0.979341, -0.0281433, -0.20025, 0, 0.990268, -0.139173, 0.202218, 0.136298, 0.96981, 0, 0, -1.788 )
@@ -84,5 +730,47 @@ visible = true
 transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 5 )
+anims/castRod = SubResource( 16 )
+anims/chatter = SubResource( 12 )
+anims/chompDown = SubResource( 13 )
+anims/idle = SubResource( 6 )
+anims/openIdle = SubResource( 14 )
+anims/openUp = SubResource( 15 )
+
+[node name="TailAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "wiggle"
+anims/RESET = SubResource( 7 )
+anims/wiggle = SubResource( 8 )
+
+[node name="DangleAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 9 )
+
+[node name="LureContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.7, 0 )
+
+[node name="FreeRange" type="Spatial" parent="LureContainer"]
+script = ExtResource( 17 )
+
+[node name="FishLureSprite" type="Sprite3D" parent="LureContainer/FreeRange" groups=["sprite"]]
+material_override = SubResource( 10 )
+flip_h = true
+pixel_size = 0.12
+texture = ExtResource( 14 )
+hframes = 8
+vframes = 8
+script = ExtResource( 1 )
+frame_delay = 0.1
+
+[node name="HookInteractionArea" type="Area" parent="LureContainer/FreeRange"]
+script = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LureContainer/FreeRange/HookInteractionArea"]
+shape = SubResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LureContainer/FreeRange"]
+anims/RESET = SubResource( 17 )
+anims/spinAttack = SubResource( 18 )
 
 [editable path="Crystals/HighpriestessCrystal"]
