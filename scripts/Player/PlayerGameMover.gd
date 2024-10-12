@@ -117,7 +117,7 @@ func _process(delta):
 
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input and not was_walking_into_wall:
     spawnSparkles(delta)
-  elif glitch_form == global.GlitchForm.FEATHER and pressingJump() and not on_ground and feather_jump_timer > feather_jump_time_limit / 3:
+  elif glitch_form == global.GlitchForm.FEATHER and (pressingJump() or pressingMoveUp()) and not on_ground and feather_jump_timer > feather_jump_time_limit / 3:
     spawnSparkles(delta)
   elif glitch_form == global.GlitchForm.LADDER and was_walking_into_wall:
     spawnSparkles(delta)

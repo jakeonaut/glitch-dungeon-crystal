@@ -208,9 +208,14 @@ func change_scene():
     root.remove_child(current_scene)
     current_scene.queue_free()
     var loadedRoomResource = load(self.path)
+    print(loadedRoomResource)
     if loadedRoomResource == null:
       # a fallback
-      loadedRoomResource = load("res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn")
+      var fallbackPath = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+      self.path = fallbackPath
+      global.memory["roomPath"] = fallbackPath
+      global.memory["savedRoomPath"] = fallbackPath
+      loadedRoomResource = load(fallbackPath)
     var newScene = loadedRoomResource.instance()
     root.add_child(newScene)
     current_scene = newScene

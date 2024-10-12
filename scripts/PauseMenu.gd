@@ -124,8 +124,6 @@ func _process(delta):
     cursorSprite.position.x = 180
     cursorSprite.visible = true
     processTopInputLogic(delta)
-  else:
-    topInputOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     pauseMenuRect.visible = true
@@ -183,8 +181,8 @@ func _process(delta):
     pauseTitleRect.rect_position = Vector2(92, 5)
 
 
-var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
-var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game"]
+var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main", "leave feedback!"]
+var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game", "leave feedback!"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
@@ -239,6 +237,7 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.TOP_INPUT
+      topInputOptionIndex = 0
     elif normalOptionIndex == 2:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.GRAPHICS
@@ -1000,6 +999,7 @@ func processControlsLogic(_delta):
 func processPopupRenderLogic(delta):
   if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("ui_cancel_controller"):
     getPlayer().noBroomSound.play()
+    global.is_reading_input = false
     return
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and Input.is_action_pressed("ui_cancel") and canResetBindings:

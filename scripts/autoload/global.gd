@@ -244,7 +244,7 @@ func resetMemory():
     memory["goddess_dream3"] = false
 
     # if you've beaten the midpoint boss
-    memory["demo_mode"] = 2
+    memory["demo_mode"] = 0
     memory["glitched_grimoire"] = false
     memory["priestess"] = 0
 
@@ -717,7 +717,11 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
-                    return "[font=res://DarkInputExtraFont_small.tres]" + getButtonIndexStr(inputEvent.button_index, glyphType) + "[/font]"
+                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
+                    print(buttonIndexStr)
+                    if buttonIndexStr == "Start" or buttonIndexStr == "Select":
+                        return buttonIndexStr
+                    return "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
                 else:
                     return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
             if inputEvent is InputEventJoypadMotion:
