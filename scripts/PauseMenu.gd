@@ -189,17 +189,26 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
+  var tempOptions = normalMenuOptions
+  if global.memory["demo_mode"] >= 2 and tempOptions.size() <= 5:
+    tempOptions.push_back("leave feedback!")
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("ui_start") + " to resume\n" + \
     ((global.getInputText("popup_menu") + " for inventory") if global.has_really_started_game else "")
 
   if shouldUpdateMenuText:
     var text = ""
-    for i in range(len(normalMenuOptions)):
-      var option = normalMenuOptions[i]
+    for i in range(len(tempOptions)):
+      var option = tempOptions[i]
       if i == normalOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        if global.memory["demo_mode"] >= 2:
+          text += "[wave]" + str(option) + "[/wave]\n" 
+        else:
+          text += "[wave]" + str(option) + "[/wave]\n\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        if global.memory["demo_mode"] >= 2:
+          text += "[color=gray]" + str(option) + "[/color]\n" 
+        else:
+          text += "[color=gray]" + str(option) + "[/color]\n\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -210,10 +219,13 @@ func processNormalLogic(_delta):
     normalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
-    normalOptionIndex = len(normalMenuOptions) - 1
-  elif normalOptionIndex >= len(normalMenuOptions):
+    normalOptionIndex = len(tempOptions) - 1
+  elif normalOptionIndex >= len(tempOptions):
     normalOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*normalOptionIndex)
+  if global.memory["demo_mode"] >= 2:
+    cursorSprite.position.y = 120 + (40*normalOptionIndex)
+  else:
+    cursorSprite.position.y = 120 + (80*normalOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm"):
     pauseMenuState = PauseMenuState.TEMP
@@ -236,6 +248,9 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
+    elif normalOptionIndex == 5 and global.memory["demo_mode"] >= 2:
+      pauseMenuState = PauseMenuState.NORMAL
+      OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
   elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
