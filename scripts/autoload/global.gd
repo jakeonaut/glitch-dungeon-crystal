@@ -561,9 +561,9 @@ func getAxisStr(axis, axis_value, useSpecialChar = true):
         elif axis_value < 0.5:
             return "f" if useSpecialChar else "Lstick Left"
     if axis == JOY_AXIS_1:
-        if axis_value > 0.5:
+        if axis_value < 0.5:
             return "t" if useSpecialChar else "Lstick Up"
-        elif axis_value < 0.5:
+        elif axis_value > 0.5:
             return "b" if useSpecialChar else "Lstick Down"
     if axis == JOY_AXIS_2:
         if axis_value > 0.5:
@@ -571,9 +571,9 @@ func getAxisStr(axis, axis_value, useSpecialChar = true):
         elif axis_value < 0.5:
             return "f" if useSpecialChar else "Rstick Left"
     if axis == JOY_AXIS_3:
-        if axis_value > 0.5:
+        if axis_value < 0.5:
             return "t" if useSpecialChar else "Rstick Up"
-        elif axis_value < 0.5:
+        elif axis_value > 0.5:
             return "b" if useSpecialChar else "Rstick Down"
     return "?"
 
@@ -690,14 +690,17 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
-                    return "[font=res://DarkInputExtraFont.tres]" + getButtonIndexStr(inputEvent.button_index, glyphType) + "[/font]"
+                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
+                    if buttonIndexStr == "Start" or buttonIndexStr == "Select":
+                        return buttonIndexStr
+                    return "[font=res://DarkInputExtraFont.tres]" + buttonIndexStr + "[/font]"
                 else:
                     return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
-            if inputEvent is InputEventJoypadMotion:
-                if use_bbtext:
-                    return "[font=res://DarkInputExtraFont.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
-                else:
-                    return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
+            # if inputEvent is InputEventJoypadMotion:
+            #     if use_bbtext:
+            #         return "[font=res://DarkInputExtraFont.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
+            #     else:
+            #         return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
         else:
             if inputEvent is InputEventKey:
                 if use_bbtext:
@@ -717,14 +720,17 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
-                    return "[font=res://DarkInputExtraFont_small.tres]" + getButtonIndexStr(inputEvent.button_index, glyphType) + "[/font]"
+                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
+                    if buttonIndexStr == "Start" or buttonIndexStr == "Select":
+                        return buttonIndexStr
+                    return "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
                 else:
                     return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
-            if inputEvent is InputEventJoypadMotion:
-                if use_bbtext:
-                    return "[font=res://DarkInputExtraFont_small.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
-                else:
-                    return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
+            # if inputEvent is InputEventJoypadMotion:
+            #     if use_bbtext:
+            #         return "[font=res://DarkInputExtraFont_small.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
+            #     else:
+            #         return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
         else:
             if inputEvent is InputEventKey:
                 if use_bbtext:

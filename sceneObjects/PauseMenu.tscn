@@ -254,7 +254,6 @@ margin_right = 564.0
 margin_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="PauseTitleRect"]
