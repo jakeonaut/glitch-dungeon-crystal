@@ -511,7 +511,7 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
 
 [node name="StoryHook" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 0 )
 material_override = SubResource( 16 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/StoryHook.tscn"

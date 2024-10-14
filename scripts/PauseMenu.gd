@@ -192,8 +192,8 @@ func processNormalLogic(_delta):
 
   if shouldUpdateMenuText:
     var text = ""
-    for i in range(len(tempOptions)):
-      var option = tempOptions[i]
+    for i in range(len(normalMenuOptions)):
+      var option = normalMenuOptions[i]
       if i == normalOptionIndex:
         if global.memory["demo_mode"] >= 2:
           text += "[wave]" + str(option) + "[/wave]\n" 
@@ -211,11 +211,11 @@ func processNormalLogic(_delta):
     normalOptionIndex += 1
     shouldUpdateMenuText = true
   elif Input.is_action_just_pressed("menu_up"):
-    nsrmalOptionIndex -= 1
+    normalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
-    normalOptionIndex = len(tempOptions) - 1
-  elif normalOptionIndex >= len(tempOptions):
+    normalOptionIndex = len(normalMenuOptions) - 1
+  elif normalOptionIndex >= len(normalMenuOptions):
     normalOptionIndex = 0
   if global.memory["demo_mode"] >= 2:
     cursorSprite.position.y = 120 + (40*normalOptionIndex)
