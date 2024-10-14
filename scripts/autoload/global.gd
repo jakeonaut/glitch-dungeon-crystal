@@ -229,7 +229,7 @@ func resetMemory():
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
-    memory["max_hp"] = 1
+    memory["max_hp"] = 2
     memory["crone"] = 0
     memory["clean_crystals"] = 0
     memory["hp"] = memory["max_hp"]
@@ -245,8 +245,8 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = false
-    memory["priestess"] = 0
+    memory["glitched_grimoire"] = true
+    memory["priestess"] = 2
 
     # PERMANENT SPELLS
     
@@ -260,12 +260,12 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["broomerang"] = 0
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
-    memory["mushroom_soul"] = 0
+    memory["zora_flippers"] = 1
+    memory["mole_cricket"] = 1
+    memory["mushroom_soul"] = 1
 
     # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun

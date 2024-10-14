@@ -301,7 +301,7 @@ shader_param/target_palette = ExtResource( 1 )
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
-[node name="Game3" type="Spatial"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )
