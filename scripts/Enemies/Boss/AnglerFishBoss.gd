@@ -13,6 +13,8 @@ onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 onready var lureContainer = get_node("LureContainer")
 onready var lureFreeRange = get_node("LureContainer/FreeRange")
 onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
+onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
+onready var reelStopArea = get_node("LureContainer/ReelStopArea")
 
 var MAX_NUM_HITS = 3
 
@@ -20,6 +22,8 @@ enum BossPhase {
     IDLE,
     WINDUP_CAST,
     CAST_LURE,
+    REEL_IT_IN,
+    EAT_IT,
 }
 var boss_phase = BossPhase.IDLE
 
@@ -57,6 +61,7 @@ func _process(delta):
             moveAbout(delta)
         cast_timer += (delta*11)
         if cast_timer >= cast_time_limit:
+            cast_timer = 0
             boss_phase = BossPhase.WINDUP_CAST
     elif boss_phase == BossPhase.WINDUP_CAST:
         if secretAniPlayer.assigned_animation != "castRod":
@@ -68,25 +73,74 @@ func _process(delta):
             lureAniPlayer.play("spinAttack")
     elif boss_phase == BossPhase.CAST_LURE:
         lureFreeRange.global_transform.origin += bullet_direction_vector * delta
+        lureBulletTryDieToSolids()
+        if lureFreeRange.hooked:
+            boss_phase = BossPhase.REEL_IT_IN
+    elif boss_phase == BossPhase.REEL_IT_IN:
+        if lureFreeRange.hooked:
+            fishLureSprite.scale = Vector3(1, 1, 1)
+        else:
+            fishLureSprite.scale = Vector3(2, 2, 1)
+
+        var pos = reelStopArea.global_transform.origin
+        var lure_pos = lureFreeRange.global_transform.origin
+        bullet_direction_vector = Vector3(
+            pos.x - lure_pos.x,
+            pos.y - lure_pos.y,
+            0
+        ).normalized() * (BULLET_SPEED / 2)
+        lureFreeRange.global_transform.origin += bullet_direction_vector * delta
+
+        if lureFreeRange.hookInteractionArea.overlaps_area(reelStopArea):
+            boss_phase = BossPhase.EAT_IT
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("chompDown")
+            bullet_direction_vector = null
+            if lureFreeRange.get_parent() == level:
+                level.remove_child(lureFreeRange)
+                lureContainer.add_child(lureFreeRange)
+                lureFreeRange.global_transform.origin = lureContainer.global_transform.origin
+                fishLureSprite.scale = Vector3(1, 1, 1)
+    elif boss_phase == BossPhase.EAT_IT:
+        if secretAniPlayer.assigned_animation == "chompDown" and not secretAniPlayer.is_playing():
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idle")
+            boss_phase = BossPhase.IDLE
 
 func doLureCast():
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
-    secretAniPlayer.play("idle")
+    secretAniPlayer.play("openUp")
+    secretAniPlayer.queue("openIdle")
+    fishLureSprite.scale = Vector3(2, 2, 1)
     boss_phase = BossPhase.CAST_LURE
     if lureFreeRange.get_parent() == lureContainer:
         var temp_pos = lureFreeRange.global_transform.origin
         lureContainer.remove_child(lureFreeRange)
         level.add_child(lureFreeRange)
         lureFreeRange.global_transform.origin = temp_pos
-    if bullet_direction_vector == null:
-        var player_pos = level.player.global_transform.origin
-        var lure_pos = lureContainer.global_transform.origin
-        bullet_direction_vector = Vector3(
-            player_pos.x - lure_pos.x,
-            player_pos.y - lure_pos.y,
-            0
-        ).normalized() * BULLET_SPEED
+    var player_pos = level.player.global_transform.origin
+    var lure_pos = lureContainer.global_transform.origin
+    bullet_direction_vector = Vector3(
+        player_pos.x - lure_pos.x,
+        player_pos.y - lure_pos.y,
+        0
+    ).normalized() * BULLET_SPEED
+
+func lureBulletTryDieToSolids():
+    if boss_phase != BossPhase.CAST_LURE:
+        return
+
+    var x = lureFreeRange.global_transform.origin.x
+    var y = lureFreeRange.global_transform.origin.y
+    
+    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, 0))
+    var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+
+    if getLevelTiles().isTileSolid(tile_type_a):
+        boss_phase = BossPhase.REEL_IT_IN
 
     
 func moveAbout(delta):
@@ -118,3 +172,11 @@ func getPlayer():
     if player == null:
         player = level.player
     return player
+
+var levelTiles = null
+func getLevelTiles():
+  if level == null:
+    level = get_tree().get_root().get_node("Game/Viewport/level")
+  if levelTiles == null:
+    levelTiles = level.levelTiles
+  return levelTiles

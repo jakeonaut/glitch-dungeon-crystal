@@ -181,8 +181,8 @@ func _process(delta):
     pauseTitleRect.rect_position = Vector2(92, 5)
 
 
-var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main", "leave feedback!"]
-var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game", "leave feedback!"]
+var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
+var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:

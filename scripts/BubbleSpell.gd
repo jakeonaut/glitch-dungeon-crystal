@@ -132,7 +132,7 @@ func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player):
-  if didja_get_me:
+  if didja_get_me or global.pauseGame:
     return
 
   bubbleStartPop()
@@ -241,7 +241,7 @@ func hitStuff(_delta):
   for area in all_overlapping_areas:
     if not area.is_in_group("bubble_purify") and not area.is_in_group("bubble_body"):
       non_bubble_areas.push_back(area)
-  smacked_npc = global.broomSmackStuff(non_bubble_areas, not didja_get_me, global_transform, level.player, level, smacked_npc)
+  smacked_npc = global.broomSmackStuff(non_bubble_areas, not didja_get_me, global_transform, null, level, smacked_npc)
 
   # erase glitch tiles...
   trySweepUpGlitchTiles(purifyShape)

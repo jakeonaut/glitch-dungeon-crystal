@@ -4,6 +4,7 @@ onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 onready var obeliskSprite = get_node("Obelisk")
 onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
+onready var playerInteractionArea = get_node("PlayerInteractionArea")
 var spawn_timer = 0
 var spawn_time_limit = 5
 var num_sparkles_spawned = 0
@@ -32,7 +33,10 @@ func getLevelTiles():
 var is_touching_player = false
 var is_touching_player_timer = 0
 var is_touching_player_time_limit = 15
+var is_in_cooldown = false
+var is_in_player_area = false
 var player = null
+var my_next_glitch_form = null
 func getPlayer():
   if player == null:
     player = level.player
@@ -48,6 +52,7 @@ func _ready():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
+  mySprite.material_override = mySprite.material_override.duplicate()
   obeliskSprite.material_override = obeliskSprite.material_override.duplicate()
   original_target_palette = obeliskSprite.material_override.get_shader_param("target_palette")
   has_set_palette = true
@@ -64,6 +69,8 @@ func _process(delta):
     mySprite.visible = true
     if original_target_palette:
       obeliskSprite.material_override.set_shader_param("target_palette", original_target_palette)
+
+  # this logic is for the glitch sprite "sticking" to the player
   if is_touching_player:
     is_touching_player_timer += (delta*22)
     if is_touching_player_timer >= is_touching_player_time_limit:
@@ -71,6 +78,31 @@ func _process(delta):
       is_touching_player = false
   else:
     mySprite.global_transform.origin = original_position
+    
+  if not playerInteractionArea.touchingPlayer and not playerInteractionArea.wasTouchingPlayer and my_next_glitch_form != null:
+    is_in_cooldown = false
+    match my_next_glitch_form:
+      global.GlitchForm.FLOOR:
+        original_target_palette = global.red_palette
+        obeliskSprite.updateBaseFrame(1, 0)
+      global.GlitchForm.FEATHER:
+        original_target_palette = global.green_palette
+        obeliskSprite.updateBaseFrame(0, 0)
+      global.GlitchForm.LADDER:
+        original_target_palette = global.yellow_palette
+        obeliskSprite.updateBaseFrame(2, 0)
+      global.GlitchForm.INVISIBLE:
+        original_target_palette = global.black_palette
+        obeliskSprite.updateBaseFrame(3, 0)
+      global.GlitchForm.WALK_THROUGH_WALLS:
+        original_target_palette = global.white_palette
+      _:
+        pass
+    mySprite.visible = true
+    mySprite.material_override.set_shader_param("target_palette", original_target_palette)
+    obeliskSprite.material_override.set_shader_param("target_palette", original_target_palette)
+    my_glitch_form = my_next_glitch_form
+    my_next_glitch_form = null
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
@@ -95,6 +127,8 @@ func shouldIBeActive():
     return false
   elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
     return false
+  elif is_in_cooldown:
+    return false
   elif global.memory["mp"] == 0:
     return true
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
@@ -106,6 +140,9 @@ func isActive(debug=false):
   if debug:
     print(shouldIBeActive())
   return self.visible and shouldIBeActive()
+
+func isPlayerPassiveActive():
+  return true
 
 func activate(is_player):
   passiveActivate(0, is_player)
@@ -148,7 +185,7 @@ func passiveActivate(_delta, _is_player):
       level.uiLayer.glitchSpriteContainer.rect_position = Vector2(300, 250)
       level.uiLayer.spellMessageTextLabel.rect_scale = Vector2(1.5, 1.5)
       level.uiLayer.spellMessageTextLabel.rect_position = Vector2(320, 250)
-  getPlayer().applyObeliskGlitch(my_glitch_form)
+  var newSpell = getPlayer().applyObeliskGlitch(my_glitch_form)
   level.player.glitchTickle()
   # if level.player.glitch_death_timer == 0:
   #   level.player.glitch_death_timer = 5
@@ -156,3 +193,8 @@ func passiveActivate(_delta, _is_player):
   global.memory["mp"] = global.memory["max_mp"]
 
   num_sparkles_spawned = 0
+  my_next_glitch_form = newSpell
+  is_in_cooldown = true
+  
+func playerActivationAreaPassiveActivate():
+  pass

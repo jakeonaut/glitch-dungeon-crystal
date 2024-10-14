@@ -124,12 +124,18 @@ func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
   
 func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
+  var spellToBeForgotten = null
   if applyGlitch(glitch, false) and add_spell_to_grimoire and \
      global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
     if not global.memory["glitched_grimoire"] and global.memory["spellbookPage"].size() > 0:
+      if global.memory["spellbookPage"].size() > 1:
+        spellToBeForgotten = global.memory["spellbookPage"][0] if spellCastPauseIndex != 0 else global.memory["spellbookPage"][1]
       global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
     global.memory["spellbookPage"].push_back(glitch)
-    spellCastPauseIndex = global.memory["spellbookPage"].size() - 1
+    spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
+  if spellToBeForgotten == global.GlitchForm.NORMAL:
+    return null
+  return spellToBeForgotten
 
 # used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
@@ -412,7 +418,7 @@ func _process(delta):
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.INVISIBLE, GlitchForm.LADDER]
     else:
-      global.memory["spellbookPage"] = [glitch_form]
+      global.memory["spellbookPage"] = [glitch_form] if glitch_form != GlitchForm.NORMAL else []
   if Input.is_action_just_pressed("debug_upgrade_broom"):
     if global.memory["broomerang"] == 0:
       global.memory["broomerang"] = 1
@@ -938,7 +944,10 @@ func getBubbleInfected():
   aniPlayer.play("tumbleRight", -1, 0.5)
 
   miniUpwardGust(false)
-  loseBroom()
+  if summonedBroom:
+    broomStop()
+    summonFallenBroom(true, false, false)
+  global.memory["broom"] = false
   transformation = TransformationState.BUBBLE
   on_ground = false
   gravitySound.play()
@@ -1296,7 +1305,10 @@ func processMoleLogic(delta):
         global_transform.origin.y -= 2
         summonSmokeClouds(3, true, true, 0)
         mySprite.visible = false
-        loseBroom()
+        if summonedBroom:
+          broomStop()
+          summonFallenBroom(true, false, false)
+        global.memory["broom"] = false
         digSound.play()
         physics_vars.should_apply_gravity = false
         should_collide_floor = false

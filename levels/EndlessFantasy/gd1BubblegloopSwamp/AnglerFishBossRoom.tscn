@@ -309,6 +309,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3913, 7, 0 )
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3913, 5, 0 )
 
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3913, 3, 0 )
+
+[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6087, 12, 0 )
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6087, -2, 0 )
+
+[node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6087, 0, 0 )
+
+[node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6087, 9, 0 )
+
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6087, 4, 0 )
 
