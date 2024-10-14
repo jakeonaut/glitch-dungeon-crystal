@@ -210,6 +210,9 @@ grav = 0
 bbText = "•some glitches are
 un-sweepable.
 i know this"
+smackedBbText = "•i am also
+un-sweepable.
+i know this."
 can_camera_zoom = false
 is_a_body = false
 

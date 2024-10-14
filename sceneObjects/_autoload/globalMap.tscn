@@ -562,7 +562,7 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/002FishingHooksMinimum.tscn"
 
 [node name="GlitchFishersPuzzle" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 
