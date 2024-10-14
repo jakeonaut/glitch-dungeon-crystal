@@ -632,10 +632,10 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 22 )
 
-[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 29 )
 pitch_scale = 1.0
 
@@ -659,8 +659,10 @@ material_override = SubResource( 46 )
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7, 3.93472, 0 )
 grav = 0
-bbText = "•ill make better credits
-later"
+bbText = "•leave any feedback in
+Steam Discussion hub,
+or email me:
+jakeonaut@gmail.com"
 can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
@@ -669,10 +671,10 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC7/SmallInteractionArea" index="0"]
 shape = SubResource( 22 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 22 )
 
-[node name="AbortSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="Viewport/level/NPC7/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 29 )
 pitch_scale = 1.0
 
@@ -749,7 +751,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6.8347, 0 )
 grav = 0
-bbText = "•bye so much"
+bbText = "•bye so much
+•please wishlist if
+you liked it!"
 is_really_important = true
 can_activate = false
 can_camera_zoom = false

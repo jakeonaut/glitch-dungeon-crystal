@@ -17,8 +17,5 @@ func activateNPC():
   npcTutorial.is_active = true
 
   var finalText = "with the \"Grimoire\":\npress " + global.getLargeInputText("alt_action_button") + " to switch\nbetween spells"
-  var is_controller_connected = Input.get_connected_joypads().size() > 0
-  if is_controller_connected:
-    finalText += "\nor use " + global.getLargeInputText("left_button") + " and " + global.getLargeInputText("right_button")
   npcTutorial.textBox.text_final = finalText
   npcTutorial.textBox.textNode.bbcode_text = finalText

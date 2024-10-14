@@ -124,8 +124,6 @@ func _process(delta):
     cursorSprite.position.x = 180
     cursorSprite.visible = true
     processTopInputLogic(delta)
-  else:
-    topInputOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     pauseMenuRect.visible = true
@@ -183,8 +181,8 @@ func _process(delta):
     pauseTitleRect.rect_position = Vector2(92, 5)
 
 
-var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
-var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game"]
+var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main", "leave feedback!"]
+var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game", "leave feedback!"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
@@ -194,12 +192,18 @@ func processNormalLogic(_delta):
 
   if shouldUpdateMenuText:
     var text = ""
-    for i in range(len(normalMenuOptions)):
-      var option = normalMenuOptions[i]
+    for i in range(len(tempOptions)):
+      var option = tempOptions[i]
       if i == normalOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        if global.memory["demo_mode"] >= 2:
+          text += "[wave]" + str(option) + "[/wave]\n" 
+        else:
+          text += "[wave]" + str(option) + "[/wave]\n\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        if global.memory["demo_mode"] >= 2:
+          text += "[color=gray]" + str(option) + "[/color]\n" 
+        else:
+          text += "[color=gray]" + str(option) + "[/color]\n\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -207,13 +211,16 @@ func processNormalLogic(_delta):
     normalOptionIndex += 1
     shouldUpdateMenuText = true
   elif Input.is_action_just_pressed("menu_up"):
-    normalOptionIndex -= 1
+    nsrmalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
-    normalOptionIndex = len(normalMenuOptions) - 1
-  elif normalOptionIndex >= len(normalMenuOptions):
+    normalOptionIndex = len(tempOptions) - 1
+  elif normalOptionIndex >= len(tempOptions):
     normalOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*normalOptionIndex)
+  if global.memory["demo_mode"] >= 2:
+    cursorSprite.position.y = 120 + (40*normalOptionIndex)
+  else:
+    cursorSprite.position.y = 120 + (80*normalOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm"):
     pauseMenuState = PauseMenuState.TEMP
@@ -227,6 +234,7 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.TOP_INPUT
+      topInputOptionIndex = 0
     elif normalOptionIndex == 2:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.GRAPHICS
@@ -236,6 +244,10 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
+    elif normalOptionIndex == 5:
+      OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.NORMAL
   elif Input.is_action_just_pressed("menu_cancel"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false
@@ -986,6 +998,7 @@ func processControlsLogic(_delta):
 func processPopupRenderLogic(delta):
   if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("popup_menu"):
     getPlayer().noBroomSound.play()
+    global.is_reading_input = false
     return
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and Input.is_action_pressed("ui_cancel") and canResetBindings:

@@ -425,7 +425,7 @@ func _process(delta):
   if Input.is_action_just_pressed("debug_more_crystals"):
     if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") < 99:
       global.incrementLevelZoneThing("num_mini_crystal_cubes", 99)
-    global.memory["clean_crystals"] = 99
+    # global.memory["clean_crystals"] = 99
     
   tryDieToOffscreenCamera(delta)
       
