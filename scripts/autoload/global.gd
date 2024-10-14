@@ -245,7 +245,7 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire"] = false
     memory["priestess"] = 2
 
     # PERMANENT SPELLS
@@ -1055,21 +1055,25 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
-        my_broom_owner.has_sweeped_glitch = true
-        my_broom_owner.glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
-        my_broom_owner.getSmacked()
+        if my_broom_owner:
+          my_broom_owner.has_sweeped_glitch = true
+          my_broom_owner.glitchTickle()
+          my_broom_owner.getSmacked()
+    # thisisn't working because it's the PassiveInteractionArea that has the enemy group, not the active?
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if false: # global.getLevelZoneThing("crystal_geode"):
         if area.get_node("..").ouchies(global_transform.origin):
-          my_broom_owner.getSmacked()
-          my_broom_owner.has_sweeped_glitch = true
-          my_broom_owner.glitchTickle()
+          if my_broom_owner:
+            my_broom_owner.getSmacked()
+            my_broom_owner.has_sweeped_glitch = true
+            my_broom_owner.glitchTickle()
       else:
         if area.get_node("..").notOuchies(global_transform.origin):
-          my_broom_owner.getSmacked()
-          my_broom_owner.has_sweeped_glitch = true
-          my_broom_owner.glitchTickle()
+          if my_broom_owner:
+            my_broom_owner.getSmacked()
+            my_broom_owner.has_sweeped_glitch = true
+            my_broom_owner.glitchTickle()
       
       # # TODO kill glitches or "free" them like glitch slug...
       
@@ -1077,20 +1081,22 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
-        if areaParent == level.player and my_broom_owner != level.player and my_broom_owner.summonedBroom.is_evil:
-            level.player.tryDieToEnemy(0, true, false)
+        if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom.is_evil:
+          level.player.tryDieToEnemy(0, true, false)
 
         if areaParent.has_method("imAnNpc") and smackResult == null:
           smacked_npc = weakref(areaParent)
           have_i_smacked_an_npc = true
         if not area.is_in_group("tadpole") and smackResult == null:
-          my_broom_owner.getSmacked()
+          if my_broom_owner:
+            my_broom_owner.getSmacked()
     elif area.is_in_group("bug") and is_active:
-        var areaParent = area.get_node("..")
-        if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
-            var smackResult = areaParent.getSmacked(global_transform.origin)
-            if not area.is_in_group("tadpole") and smackResult == null:
-                my_broom_owner.getSmacked()
+      var areaParent = area.get_node("..")
+      if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+        var smackResult = areaParent.getSmacked(global_transform.origin)
+        if not area.is_in_group("tadpole") and smackResult == null:
+          if my_broom_owner:
+            my_broom_owner.getSmacked()
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)

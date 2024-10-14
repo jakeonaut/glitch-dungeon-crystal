@@ -56,7 +56,7 @@ var has_ever_been_smacked = false
 
 var smack_timer = 0
 export var smack_time_limit = 10
-export var smack_recovery_time_limit = 10
+export var smack_recovery_time_limit = 12
 
 var bullet_direction_vector = Vector3(1, 0, 0)
 var glitch_switch_timer = 0
@@ -449,7 +449,7 @@ func landed():
         behavior_jumping = false
 
 func isActive(_debug=false):
-    return visible and not behavior_evolve and not is_frozen and not am_i_dying
+    return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
     if smallInteractionArea.is_in_group("enemies"):
