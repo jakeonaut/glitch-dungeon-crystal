@@ -60,7 +60,7 @@ window/size/fullscreen=true
 window/size/test_width=640
 window/size/test_height=512
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
