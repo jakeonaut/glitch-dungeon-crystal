@@ -231,7 +231,7 @@ func resetMemory():
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 2
     memory["crone"] = 0
-    memory["clean_crystals"] = 0
+    memory["clean_crystals"] = 4
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
@@ -245,7 +245,7 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = false
+    memory["glitched_grimoire"] = true
     memory["priestess"] = 2
 
     # PERMANENT SPELLS

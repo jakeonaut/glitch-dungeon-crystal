@@ -60,8 +60,8 @@ var has_transformed = false
 func passiveActivate(_delta, _is_player):
   if is_smacked or is_in_cooldown:
     return
-  if not getPlayer().is_mushroom_infected:
-    return
+  # if not getPlayer().is_mushroom_infected:
+  #   return
 
   is_in_cooldown = true
   cooldown_timer = 0

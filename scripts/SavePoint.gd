@@ -106,14 +106,6 @@ func generateId():
 
 var is_currently_on_save_point = false
 func passiveActivate(_delta, _is_player):
-    # global.memory["hearts_recovering"] = true
-    # level.player.restoreGlitchAndMP()
-    # if level.player.is_mushroom_infected:
-    #     level.player.is_mushroom_infected = false
-    #     level.player.summonSmokeClouds(2, true, true)
-    #     musicPlayer.changeSongPitch(1.0)
-    #     if not global.memory["broom"]:
-    #         level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and (not is_currently_on_save_point or not isOnSavePoint()):
         

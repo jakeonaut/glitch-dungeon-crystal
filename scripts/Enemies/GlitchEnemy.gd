@@ -72,6 +72,9 @@ var am_i_hurt = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process(true)
+
+    if slime_walk_time_limit == null:
+        slime_walk_time_limit = 10
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         set_process(false)
         yield(TempTimer.idle_frame(self), "timeout")

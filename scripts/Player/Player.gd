@@ -105,7 +105,7 @@ func tryPlayFootstepSound():
     return 
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
-  if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground or is_mushroom_infected:
+  if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground:
     sporeSound.play()
     return
   if on_ground or glitch_form == global.GlitchForm.LADDER:

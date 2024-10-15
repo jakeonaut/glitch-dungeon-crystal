@@ -194,7 +194,7 @@ func passiveActivate(_delta, _is_player):
 
   num_sparkles_spawned = 0
   my_next_glitch_form = newSpell
-  is_in_cooldown = true
+  is_in_cooldown = newSpell != null
   
 func playerActivationAreaPassiveActivate():
   pass

@@ -19,7 +19,7 @@
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=17]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SandStream.tscn" type="PackedScene" id=19]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=21]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=22]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=23]
@@ -577,9 +577,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8737, 13.071, 1 )
 frame = 2
 should_fade_away = true
 
-[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 6.44628, 0 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 
@@ -639,6 +636,9 @@ texture = ExtResource( 30 )
 [node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
 material_override = SubResource( 46 )
 texture = ExtResource( 30 )
+
+[node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 6.46825, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 8 )]
 

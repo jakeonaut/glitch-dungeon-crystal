@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=23]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=24]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=15]
 resource_name = "doorClose"
@@ -784,6 +785,9 @@ texture = ExtResource( 24 )
 [node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
 material_override = SubResource( 59 )
 texture = ExtResource( 24 )
+
+[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -14.7321, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

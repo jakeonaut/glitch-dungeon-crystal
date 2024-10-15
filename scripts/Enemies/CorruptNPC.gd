@@ -10,6 +10,8 @@ enum ZombieState {
   LURCH_END,
   DYING,
   REVIVING,
+  CONSUMING,
+  GRANDMA_FORM
 }
 var zombie_state = ZombieState.IDLE
 var ZOMBIE_MAX_HP = 2
@@ -47,7 +49,7 @@ func _process(delta):
   elif zombie_state == ZombieState.SLIME_WALK:
     walk_speed = slow_walk_speed
     behavior_jumping = false
-    if am_i_really_in_range_of_player:
+    if am_i_really_in_range_of_player and level.player.nesting_doll_state == global.NestingDoll.GRANDMA:
       zombie_state = ZombieState.LURCH_START
       behavior_intermittent_walking = false
     else:
@@ -128,6 +130,20 @@ func _process(delta):
       if not secretAniPlayer.is_playing():
         unsmack()
         zombie_state = ZombieState.IDLE
+  elif zombie_state == ZombieState.CONSUMING:
+    behavior_jumping = false
+    behavior_walking = false
+    grav = 0
+    vv = 0
+    hv = 0
+    dir = Vector3(0, 0, 0)
+    lv = Vector3(0, 0, 0)
+    linear_velocity = Vector3(0, 0, 0)
+
+    if secretAniPlayer.assigned_animation == "consumeMemory" and not secretAniPlayer.is_playing():
+      zombie_state = ZombieState.GRANDMA_FORM
+  elif zombie_state == ZombieState.GRANDMA_FORM:
+    grav = 30
 
 # @override
 func unsmack():
@@ -186,9 +202,39 @@ func ouchies(_broom_origin):
       # yield(get_tree().create_timer(0.5), "timeout")
       am_i_dying = true
       zombie_state = ZombieState.DYING
-      dieSound.play()
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("die")
       death_timer = 0
 
+func isActive(debug=false):
+  if not level.player.visible:
+    return false
+  return .isActive(debug)
+
+func doSomethingElseToPlayer(player):
+  player.nullify()
+  getSmacked()
+  # player.tryDieToEnemy(0, true, kill_invis, kill_immediately)
+
+  # this is good and normal actually
+  # if player.nesting_doll_state == global.NestingDoll.GRANDMA and player.visible:
+  #   player.visible = false
+  #   player.pauseInput = true
+  #   player.pauseSelf = true
+  #   secretAniPlayer.stop()
+  #   secretAniPlayer.clear_queue()
+  #   secretAniPlayer.play("consumeMemory")
+  #   dieSound.play()
+  #   zombie_state = ZombieState.CONSUMING
+
+func popOutPlayer():
+  level.player.global_transform.origin = self.global_transform.origin
+  level.player.doubleJump()
+  level.player.nesting_doll_state = global.NestingDoll.BABY
+  level.player.updateNestingDoll(global.NestingDoll.GRANDMA, false)
+  level.player.glitchTickle()
+  level.player.loseBroom()
+  level.player.visible = true
+  level.player.pauseInput = false
+  level.player.pauseSelf = false

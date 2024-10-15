@@ -39,7 +39,10 @@ func _process(delta):
         if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
             is_touching_enemy = true
-            parent.tryDieToEnemy(delta, true, enemy.kill_invis, enemy.kill_immediately)
+            if enemy.has_method("doSomethingElseToPlayer"):
+                enemy.doSomethingElseToPlayer(parent)
+            else:
+                parent.tryDieToEnemy(delta, true, enemy.kill_invis, enemy.kill_immediately)
         if area.is_in_group("water"):
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true

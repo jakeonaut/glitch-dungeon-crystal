@@ -395,18 +395,19 @@ func magicJump():
 
 onready var dollOpenSound = get_node("Sounds/DollOpenSound")
 onready var dollCloseSound = get_node("Sounds/DollCloseSound")
-func updateNestingDoll(prevNestingDollState):
+func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
   global.memory["nesting_doll"] = nesting_doll_state
   if nesting_doll_state < prevNestingDollState:
-    var emptyDoll = spawnACarcass()
-    if nesting_doll_state == global.NestingDoll.BABY:
-      emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
-      emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
-    elif nesting_doll_state == global.NestingDoll.MOM:
-      emptyDoll.broomSprite.visible = global.memory["broom"]
-    # if randi() % 4 == 1:
-    #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
-    nesting_doll_array.push_back(emptyDoll)
+    if shouldSpawnCarcass:
+      var emptyDoll = spawnACarcass()
+      if nesting_doll_state == global.NestingDoll.BABY:
+        emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
+        emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
+      elif nesting_doll_state == global.NestingDoll.MOM:
+        emptyDoll.broomSprite.visible = global.memory["broom"]
+      # if randi() % 4 == 1:
+      #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
+      nesting_doll_array.push_back(emptyDoll)
     if nesting_doll_state == global.NestingDoll.BABY:
       dollOpenSound.pitch_scale = 1.2
     elif nesting_doll_state == global.NestingDoll.MOM:
@@ -528,7 +529,8 @@ func getABroom(unpauseAnimation = true):
   if transformation == TransformationState.FISHY or \
      transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.BUBBLE or \
-     transformation == TransformationState.CHICKEN:
+     transformation == TransformationState.CHICKEN or \
+     nesting_doll_state == global.NestingDoll.BABY:
     return
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
