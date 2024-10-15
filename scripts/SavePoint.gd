@@ -27,6 +27,8 @@ var was_on_save_point = false
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+    if global.pauseGame:
+        return
     
     if isOnSavePoint():
         triangleContainer.rotation_degrees.y -= delta*22*5

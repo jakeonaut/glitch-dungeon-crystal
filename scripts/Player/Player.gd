@@ -297,6 +297,7 @@ func sayThis(message, _time_to_clear = 3.0):
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
 var spriteOpacity = 1.0
+var respawn_key_hp = null
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
@@ -315,6 +316,7 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   if Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame and ritual_state_index < len(global.correct_ritual)-1:
+    respawn_key_hp = global.memory["hp"]
     tryDieToEnemy(delta, true, true, true)
     global.incrementLevelZoneThing("num_deaths", -1)
   
@@ -759,7 +761,6 @@ func processGlitchHurtRecovery(delta):
       else:
         self.global_transform.origin.y += 1
       target_last_grounded_y = global_transform.origin.y
-      global.memory["hp"] = global.memory["max_hp"]
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY
 

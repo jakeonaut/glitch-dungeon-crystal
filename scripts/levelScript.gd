@@ -353,7 +353,12 @@ func tryToRespawn():
           found_door = door
           break
   elif global.isRespawning:
+    global.memory["hp"] = global.memory["max_hp"]
     if closest_extra_life != null and closest_extra_life.isActive():
+      global.memory["hp"] = 1 # respawning at a grandma statue, don't restore bag
+      if player.respawn_key_hp != null:
+        global.memory["hp"] = player.respawn_key_hp
+        player.respawn_key_hp = null
       player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
       gameCamera.rotation_degrees.y = global.cameraRotation
       player.last_grounded_pos = Vector3(player.global_transform.origin)

@@ -404,6 +404,7 @@ func processQuitToMainLogic(_delta):
         get_tree().quit()
       else:
         # dedupe (ish) with "dev_demo_reset" above
+        global.pauseGame = true
         global.has_started_game = false
         global.has_really_started_game = false
         global.resetMemory()
