@@ -369,11 +369,13 @@ func tryToRespawn():
       summonSmokeClouds(player.global_transform.origin, 3, true, true)
     elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
-      player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
+      if savePoint != null:
+        player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
       gameCamera.rotation_degrees.y = global.cameraRotation
       player.last_grounded_pos = Vector3(player.global_transform.origin)
       yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
-      player.global_transform.origin = savePoint.global_transform.origin
+      if savePoint != null:
+        player.global_transform.origin = savePoint.global_transform.origin
     elif global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       player.global_transform.origin = Vector3(
         global.memory["active_save_point_x"], 

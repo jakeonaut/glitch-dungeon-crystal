@@ -16,6 +16,7 @@ export var dont_recolor_me = false
 var hiding = false
 var opacity = 1.0
 var did_i_do_that = false
+var MAX_OPACITY = 0.1
 
 func _ready():
   camera_origin = camera.global_transform.origin
@@ -34,7 +35,7 @@ func _process(delta):
     opacity = opacity + (0.0 - opacity) * (delta * 1)
     # mySprite.material_override.set_shader_param("opacity", opacity)
   elif not hiding and opacity < 1.0:
-    opacity = opacity + (1.0 - opacity) * (delta * 1)
+    opacity = opacity + (MAX_OPACITY - opacity) * (delta * 1)
     # mySprite.material_override.set_shader_param("opacity", opacity)
 
 func hideMe():

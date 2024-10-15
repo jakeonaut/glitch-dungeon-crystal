@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -717,10 +717,38 @@ albedo_texture = ExtResource( 45 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=284]
+shader = ExtResource( 6 )
+shader_param/albedo = null
+shader_param/opacity = 0.3
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 0.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 40 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 30 )
+
 [sub_resource type="ShaderMaterial" id=215]
 shader = ExtResource( 6 )
 shader_param/albedo = null
-shader_param/opacity = 1.0
+shader_param/opacity = 0.3
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
@@ -761,7 +789,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=284]
+[sub_resource type="ArrayMesh" id=285]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -774,7 +802,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=285]
+[sub_resource type="ArrayMesh" id=286]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1126,7 +1154,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -21.0057, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/ParallaxBackground2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4, 8.3, -10 )
-material_override = SubResource( 215 )
+material_override = SubResource( 284 )
 texture = ExtResource( 38 )
 
 [node name="Sprite3D2" parent="Viewport/level/ParallaxBackground2" index="1"]
@@ -1238,11 +1266,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 284 )
+mesh = SubResource( 285 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 285 )
+mesh = SubResource( 286 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )

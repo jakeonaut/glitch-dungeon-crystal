@@ -2063,7 +2063,6 @@ volume_db = -15.0
 script = ExtResource( 33 )
 
 [node name="DialogSound" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox" index="11"]
-stream = ExtResource( 32 )
 pitch_scale = 0.9
 
 [node name="AbortSound" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox" index="13"]
