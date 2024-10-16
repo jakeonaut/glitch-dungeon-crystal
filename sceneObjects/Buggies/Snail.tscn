@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/SpritePaletteCycle.shader" type="Shader" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain7.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Lament6.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/assets_sfx_wingflap.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=21]
 
 [sub_resource type="ShaderMaterial" id=13]
@@ -66,7 +67,6 @@ extents = Vector3( 18, 13, 1 )
 
 [node name="Snail" type="Spatial"]
 script = ExtResource( 12 )
-walk_speed = 1
 floor_glitch_walk_speed = 1
 invisible_glitch_walk_speed = 1
 swimming_walk_speed = 1
@@ -158,6 +158,11 @@ out_of_range_mode = 1
 stream = ExtResource( 13 )
 volume_db = -34.0
 pitch_scale = 1.2
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
+volume_db = -25.0
+pitch_scale = 0.9
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 10 )

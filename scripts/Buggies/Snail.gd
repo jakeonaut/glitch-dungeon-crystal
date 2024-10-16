@@ -61,6 +61,15 @@ func _process(delta):
     if am_i_dying:
         return
 
+    if didja_get_me:
+        opacity = opacity + (0.0 - opacity) * (delta * 5)
+        myOtherSprite.material_override.set_shader_param("opacity", opacity)
+        
+        if stepify(opacity, 0.1) == 0:
+            queue_free()
+        slime_state = SlimeState.WALK
+        slime_state_timer = 0
+
     slime_state_timer += (delta*22)
     if slime_state == SlimeState.WALK:
         true_terminal_vel = 1
@@ -112,21 +121,41 @@ func processDeath():
 func ouchies(_broom_origin):
     pass
 
+var is_active = true
 func isActive(_debug=false):
-    return false # true
+    return visible and is_active
 
 func passiveActivate(_delta, _is_player):
-    if not am_i_dying:
-        myOtherSprite.visible = false
-        catchSound.play()
-        if global.memory.has("snails"):
-            global.memory["snails"] += 1
-        else:
-            global.memory["snails"] = 1
-        am_i_dying = true
-        global.collectable_key_recently_got = "snails"
-        global.collectable_key_recently_got_timer = 0
-        
-        if is_static_in_level:
-            global.setStaticLevelZoneLevelVar(level, self, true)
+    pass
+
+var didja_get_me = false
+var opacity = 1.0
+onready var smackSound = get_node("Sounds/SmackSound")
+func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+    if is_smacked:
+        return
+
+    if catchSound: catchSound.play()
+    if smackSound: smackSound.play()
+    myOtherSprite.material_override.set_shader_param("time_influence", time_influence)
+    myOtherSprite.material_override.set_shader_param("y_div", y_div)
+    myOtherSprite.material_override.set_shader_param("normal_offset", normal_offset)
     
+    smack_timer = 0
+    is_smacked = true
+    didja_get_me = true
+
+    if is_static_in_level:
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        miniCubeCrystal.is_static_in_level = false
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = self.global_transform.origin
+        miniCubeCrystal.passiveActivate(0, false)
+
+        global.setStaticLevelZoneLevelVar(level, self, global_transform.origin)
+
+func unsmack():
+    is_smacked = false
+    myOtherSprite.material_override.set_shader_param("time_influence", 3)
+    myOtherSprite.material_override.set_shader_param("y_div", 2.3)
+    myOtherSprite.material_override.set_shader_param("normal_offset", .02)

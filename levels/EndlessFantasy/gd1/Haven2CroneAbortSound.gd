@@ -17,14 +17,12 @@ func activateScript():
   var num_cubes = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
 
   if global.memory["crone"] == 0:
-    print("yo")
     if not textBox.showYesNoOptions or not textBox.selectedYesNoOption:
         return
     global.memory["crone"] = 1
     yield(get_tree().create_timer(0.1), "timeout")
     NPC.activate(true)
   elif global.memory["crone"] == 1 and global.memory["broomerang"] < 1:
-    print("yo2")
     if global.memory["broomerang"] < 1 and textBox.selectedYesNoOption:
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG:
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG)
@@ -35,7 +33,6 @@ func activateScript():
         level.player.errorSound.play()
         level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes) + " more shards.\n" + suffix)
   elif global.memory["crone"] == 2 or (global.memory["broomerang"] == 1 and global.memory["max_hp"] < 2):
-    print("yo3")
     if global.memory["max_hp"] < 2 and textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_ENCHANTED_BAG:
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_ENCHANTED_BAG)
@@ -47,7 +44,6 @@ func activateScript():
         level.player.errorSound.play()
         level.player.sayThis("need " + str(global.NUM_GEMS_FOR_ENCHANTED_BAG - num_cubes) + " more shards.\n" + suffix)
   elif global.memory["crone"] == 3 or (global.memory["broomerang"] == 1 and global.memory["max_hp"] >= 2):
-    print("yo4")
     if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)

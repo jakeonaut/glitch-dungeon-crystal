@@ -1427,22 +1427,22 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
-  if is_mushroom_infected:
-    getABroom()
-    for _i in range(5):
-      spawnASpore(0, -1)
-    var x_offset = 0
-    if pressingMoveLeft():
-      x_offset = 1
-    elif pressingMoveRight():
-      x_offset = -1
-    global_transform.origin.x += x_offset
-    global_transform.origin.y += 1
-    var carcass = spawnACarcass()
-    carcass.mushroomSprite.visible = true
-    global_transform.origin.x -= x_offset
-    global_transform.origin.y -= 1
-    is_mushroom_infected = false
+  # if is_mushroom_infected:
+  #   getABroom()
+  #   for _i in range(5):
+  #     spawnASpore(0, -1)
+  #   var x_offset = 0
+  #   if pressingMoveLeft():
+  #     x_offset = 1
+  #   elif pressingMoveRight():
+  #     x_offset = -1
+  #   global_transform.origin.x += x_offset
+  #   global_transform.origin.y += 1
+  #   var carcass = spawnACarcass()
+  #   carcass.mushroomSprite.visible = true
+  #   global_transform.origin.x -= x_offset
+  #   global_transform.origin.y -= 1
+  #   is_mushroom_infected = false
 
   if global.activeInteractor:
     global.activeInteractor.hideTextbox()
@@ -1772,50 +1772,52 @@ onready var inventorySound = get_node("Sounds/InventorySound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
 func processMushroomLogic(delta):
-  mushroomSpriteVisible.visible = is_mushroom_infected
-  # should_collide_horizontally = not is_mushroom_infected # careful! interacts with processMoleLogic
-  if not is_mushroom_infected:
-    return
-
-  var my_y = global_transform.origin.y
-  global_transform.origin.y += 1
-  var solid_tiles = getTilesBelow(getLevelTiles())
-  if solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null:
-    # my_y += delta*11
+  if is_mushroom_infected:
     glitchTickle()
-  global_transform.origin.y = my_y
-  
-  spore_spawn_timer += (delta*22)
-  if spore_spawn_timer >= spore_spawn_time_limit:
-    spore_spawn_timer = 0
-    spawnASpore()
-    # sporeSound.pitch_scale = rand_range(2.0, 2.8)
-    # sporeSound.play()
+  # mushroomSpriteVisible.visible = is_mushroom_infected
+  # should_collide_horizontally = not is_mushroom_infected # careful! interacts with processMoleLogic
+  # if not is_mushroom_infected:
+  #   return
 
-  mushroomSpriteVisible.frame = mushroomSpriteAnimated.frame
-  mushroomSpriteVisible.translation = mushroomSpriteAnimated.translation
-  mushroomSpriteVisible.scale = mushroomSpriteAnimated.scale
-  mushroomSpriteVisible.flip_h = false
-  if mySprite.flip_h:
-    mushroomSpriteVisible.flip_h = true
-    mushroomSpriteVisible.translation.x *= -1
+  # var my_y = global_transform.origin.y
+  # global_transform.origin.y += 1
+  # var solid_tiles = getTilesBelow(getLevelTiles())
+  # if solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null:
+  #   # my_y += delta*11
+  #   glitchTickle()
+  # global_transform.origin.y = my_y
+  
+  # spore_spawn_timer += (delta*22)
+  # if spore_spawn_timer >= spore_spawn_time_limit:
+  #   spore_spawn_timer = 0
+  #   spawnASpore()
+  #   # sporeSound.pitch_scale = rand_range(2.0, 2.8)
+  #   # sporeSound.play()
+
+  # mushroomSpriteVisible.frame = mushroomSpriteAnimated.frame
+  # mushroomSpriteVisible.translation = mushroomSpriteAnimated.translation
+  # mushroomSpriteVisible.scale = mushroomSpriteAnimated.scale
+  # mushroomSpriteVisible.flip_h = false
+  # if mySprite.flip_h:
+  #   mushroomSpriteVisible.flip_h = true
+  #   mushroomSpriteVisible.translation.x *= -1
 
 var should_flip = false
 # @override
 func processHorizontalInputs(delta):
   .processHorizontalInputs(delta)
-  if is_mushroom_infected:
-    should_flip = not should_flip
-    var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
-    var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
-    if turning_left or turning_right:
-      mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
-      if should_flip: mySprite.flip_h = not mySprite.flip_h
-      if mushroom_turn_timer >= mushroom_turn_time_limit:
-        mushroom_turn_timer = 0
-        mushroom_infection_direction *= -1
-    else:
-      mushroom_turn_timer = 0
+  # if is_mushroom_infected:
+  #   should_flip = not should_flip
+  #   var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")
+  #   var turning_right = mushroom_infection_direction == -1 and Input.is_action_pressed("ui_right")
+  #   if turning_left or turning_right:
+  #     mushroom_turn_timer += (delta*22) if on_ground else mushroom_turn_time_limit
+  #     if should_flip: mySprite.flip_h = not mySprite.flip_h
+  #     if mushroom_turn_timer >= mushroom_turn_time_limit:
+  #       mushroom_turn_timer = 0
+  #       mushroom_infection_direction *= -1
+  #   else:
+  #     mushroom_turn_timer = 0
 
 func adjustSummonedBroomSpritePosition():
   var xAddition = 0
@@ -1907,58 +1909,62 @@ func processBagRenderLogic(_delta):
 
 
 func processPoisonWaterLogic(delta):
-  var is_touching_poison_water = false # is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
+  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 
-  if is_touching_poison_water:
-    if glitch_form == global.GlitchForm.INVISIBLE:
-      tryDieToEnemy(delta, true, false)
-    else:
-      if poison_timer == 0 or unpoison_timer > 0:
-        poisonWaterSound.play()
-      elif reversePoisonWaterSound.is_playing():
-        # TODO(jaketrower): Could be put in a function
-        var playback_position = reversePoisonWaterSound.get_playback_position()
-        var sound_length = reversePoisonWaterSound.stream.get_length()
-        poisonWaterSound.play(sound_length - playback_position)
-        reversePoisonWaterSound.stop()
-      # If trying to jump out of water a lot... poison harder!
-      if unpoison_timer > 0:
-        poison_timer += (delta * 220)
-        unpoison_timer = 0
-      poison_timer += (delta*22)
-      if poison_timer > 7:
-        glitchTickle(0)
-      if poison_timer >= poison_time_limit:
-        tryDieToEnemy(delta, true, false)
-        poison_timer = 0
-        poisonWaterSound.stop()
+  # if is_touching_poison_water:
+  #   is_mushroom_infected = true
+  #   grav = 0
 
-  if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
-    if poisonWaterSound.is_playing():
-      # TODO(jaketrower): Could be put in a function
-      var playback_position = poisonWaterSound.get_playback_position()
-      var sound_length = poisonWaterSound.stream.get_length()
-      reversePoisonWaterSound.play(sound_length - playback_position)
-      poisonWaterSound.stop()
-    # decrease more slowly than it increases... toxic
-    unpoison_timer += (delta * 22)
-    if unpoison_timer >= unpoison_time_limit:
-      poison_timer -= (delta * 22)
-      if poison_timer <= 0:
-        poison_timer = 0
-        level.glitchScreenEffect.visible = false
-        musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
-        reversePoisonWaterSound.stop()
+  # if is_touching_poison_water:
+  #   if glitch_form == global.GlitchForm.INVISIBLE:
+  #     tryDieToEnemy(delta, true, false)
+  #   else:
+  #     if poison_timer == 0 or unpoison_timer > 0:
+  #       poisonWaterSound.play()
+  #     elif reversePoisonWaterSound.is_playing():
+  #       # TODO(jaketrower): Could be put in a function
+  #       var playback_position = reversePoisonWaterSound.get_playback_position()
+  #       var sound_length = reversePoisonWaterSound.stream.get_length()
+  #       poisonWaterSound.play(sound_length - playback_position)
+  #       reversePoisonWaterSound.stop()
+  #     # If trying to jump out of water a lot... poison harder!
+  #     if unpoison_timer > 0:
+  #       poison_timer += (delta * 220)
+  #       unpoison_timer = 0
+  #     poison_timer += (delta*22)
+  #     if poison_timer > 7:
+  #       glitchTickle(0)
+  #     if poison_timer >= poison_time_limit:
+  #       tryDieToEnemy(delta, true, false)
+  #       poison_timer = 0
+  #       poisonWaterSound.stop()
 
-  if poison_timer > 0:
-    level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
-    level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
-    musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
-  if poison_timer < 0:
-    poison_timer = 0
-    level.glitchScreenEffect.visible = false
-    musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
-    reversePoisonWaterSound.stop()
+  # if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
+  #   if poisonWaterSound.is_playing():
+  #     # TODO(jaketrower): Could be put in a function
+  #     var playback_position = poisonWaterSound.get_playback_position()
+  #     var sound_length = poisonWaterSound.stream.get_length()
+  #     reversePoisonWaterSound.play(sound_length - playback_position)
+  #     poisonWaterSound.stop()
+  #   # decrease more slowly than it increases... toxic
+  #   unpoison_timer += (delta * 22)
+  #   if unpoison_timer >= unpoison_time_limit:
+  #     poison_timer -= (delta * 22)
+  #     if poison_timer <= 0:
+  #       poison_timer = 0
+  #       level.glitchScreenEffect.visible = false
+  #       musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
+  #       reversePoisonWaterSound.stop()
+
+  # if poison_timer > 0:
+  #   level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+  #   level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
+  #   musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
+  # if poison_timer < 0:
+  #   poison_timer = 0
+  #   level.glitchScreenEffect.visible = false
+  #   musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
+  #   reversePoisonWaterSound.stop()
     
 var has_landed_since_recovering = true
 # @override

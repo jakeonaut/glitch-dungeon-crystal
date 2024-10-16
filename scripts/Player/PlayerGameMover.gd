@@ -81,12 +81,12 @@ func processPauseAnimation():
   if aniPlayer.assigned_animation == "hookCaught":
     return
   
-  # if is_mushroom_infected:
-  #   pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump()))) and not has_mushroom_double_jumped
-  #   if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
-  #     aniPlayer.stop()
-  #     aniPlayer.clear_queue()
-  #     aniPlayer.play("walk")
+  if is_mushroom_infected:
+    pauseAnimation = (not on_ground or (on_ground and (justPressedJump() or recentlyJustPressedJump())))# and not has_mushroom_double_jumped
+    if pauseAnimation and aniPlayer.assigned_animation != "walk" and not "etItem" in aniPlayer.assigned_animation:
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("walk")
   
 onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
 onready var interactPromptSprite = get_node("InteractPrompt")
@@ -317,15 +317,30 @@ func pressingDown():
 func justPressedJump():
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
+  # if is_mushroom_infected:
+  #   return false
   return (Input.is_action_just_pressed("jump_button") and (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()) or should_magic_jump
   
 # @override
 func recentlyJustPressedJump():
+  # if is_mushroom_infected:
+  #   return false
   return jump_press_timer < jump_press_time_limit
 
 # @override
 func tryingToWakeUp():
   return Input.is_action_just_pressed("sub_action_button")
+
+# @override
+func collideWithWall(local_lv):
+  .collideWithWall(local_lv)
+  if is_mushroom_infected:
+    is_mushroom_infected = false
+    pauseAnimation = false
+    bumpSound2.play()
+    getABroom()
+    global.memory["hp"] += 1
+    tryDieToEnemy(0, false, true, false)
 
 # @override
 func pressingJump():
@@ -335,6 +350,8 @@ func pressingJump():
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
+  # if is_mushroom_infected:
+  #   return false
   var is_pressing_jump = (Input.is_action_pressed("jump_button") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()) or should_magic_jump
   # if is_pressing_jump:
   #   should_collide_floor = true
@@ -355,11 +372,8 @@ func pressingMoveLeft():
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
-    should_collide_floor = true
     return mushroom_infection_direction == -1 and not am_paused
   var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
-  # if is_pressing_move_left:
-  #   should_collide_floor = true
   return is_pressing_move_left
 
 var override_stop_right_input = false
@@ -369,11 +383,8 @@ func pressingMoveRight():
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
   if is_mushroom_infected:
-    # should_collide_floor = true
     return mushroom_infection_direction == 1 and not am_paused
   var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
-  # if is_pressing_move_right:
-  #   should_collide_floor = true
   return is_pressing_move_right
 
 # @override
@@ -475,15 +486,15 @@ func getWalkSpeed(delta):
   elif transformation == TransformationState.FISHY or nesting_doll_state == global.NestingDoll.MOM:
     return 7
   else:
-    if is_mushroom_infected:
-      if mushroom_infection_direction < 0:
-        if Input.is_action_pressed("ui_left"):
-          return 4
-        else: return 2
-      else:
-        if Input.is_action_pressed("ui_right"):
-          return 4
-        else: return 2
+    # if is_mushroom_infected:
+    #   if mushroom_infection_direction < 0:
+    #     if Input.is_action_pressed("ui_left"):
+    #       return 4
+    #     else: return 2
+    #   else:
+    #     if Input.is_action_pressed("ui_right"):
+    #       return 4
+    #     else: return 2
     return .getWalkSpeed(delta) # super()
 
 func doIHaveSpell(which_spell):
@@ -590,6 +601,11 @@ var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
+  if is_mushroom_infected:
+    was_just_on_ground_timer = -8
+    .processJumpInputs(delta)
+    return
+
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
     # if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
@@ -615,7 +631,7 @@ func processJumpInputs(delta):
     #   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
     #   aniPlayer.queue("jumpStart")
     #   aniPlayer.queue("jump")
-    if glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped and not is_mushroom_infected: 
+    if glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
       doubleJump()
       nesting_doll_state -= 1
       updateNestingDoll(nesting_doll_state + 1)

@@ -118,6 +118,7 @@ enum PetFollower {
     BIG_MOLE_CRICKET,
     FROG,
     GLITCH_SLIME,
+    FISHY,
 }
 
 enum GrandmaOutfit {
@@ -139,6 +140,11 @@ enum GrandmaBroom {
     CRONE_STAFF,
     BABA_YAGA_CHICKEN_STAFF,
     BUG_NET,
+}
+
+enum GrandmaBag {
+    NORMAL,
+    PURSE,
 }
 
 func getColorSuffixFromTilesetType(type):
@@ -263,6 +269,8 @@ func resetMemory():
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
     memory["currBroom"] = GrandmaBroom.NORMAL
     memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
+    memory["currBag"] = GrandmaBag.NORMAL
+    memory["allMyBags"] = [GrandmaBag.NORMAL]
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false
@@ -412,17 +420,17 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1ToxicJungle":
             return "moldy dogwoods"
         "gd1ShiftingSandLand":
-            return "bug desert" # could amp up the insect-ness more
+            return "insect caves" # could amp up the insect-ness more
         "gd1CrystalTower":
             return "dream temple"
         "gd1GrandmaVillage":
             return "elder village"
         "gd1BubblegloopSwamp":
-            return "malware swamp" # "sea of corruption" # malware swamp
+            return "malware sea" # "sea of corruption" # malware swamp
         "gd1TombSouls":
-            return "crypt of memory"
+            return "forgotten crypt"
         "gd1AbstractSuburbs":
-            return "demonic suburb"
+            return "baba's forest"
         "gd1primordialOoze":
             return "primordial ooze"
         _:
