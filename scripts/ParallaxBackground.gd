@@ -8,7 +8,7 @@ var camera_origin
 export var dont_recolor_me = false
 var hiding = false
 var opacity = 0.1
-var MAX_OPACITY = 0.1
+export var MAX_OPACITY = 0.1
 
 
 func _ready():

@@ -145,6 +145,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0 )
 can_move = false
 can_camera_zoom = false
+dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
 is_wiggling_fast = true

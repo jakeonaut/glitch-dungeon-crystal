@@ -143,8 +143,10 @@ func conductFromScenePath(path):
         tryToPlay(crystalThemePlayer) # bossThemePlayer)
     elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
         tryToPlay(grannyPlayer)
-    elif path.find("PastoralScene_tangible") > 0:
-        tryToPlay(grannyPlayer)
+        if global.memory["priestess"] >= 2:
+            changeSongPitch(1.0)
+            default_song_pitch = 1.0
+            return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
         tryToPlay(poisonThemePlayer)
         changeSongPitch(1.0)

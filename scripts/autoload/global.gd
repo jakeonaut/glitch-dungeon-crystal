@@ -169,9 +169,9 @@ var isAMoleDigging = false
 
 var isOnMainMenu = false
 var NUM_GEMS_FOR_BROOMERANG = 25
-var NUM_GEMS_FOR_ENCHANTED_BAG = 50
+var NUM_GEMS_FOR_ENCHANTED_BAG = 75
 var NUM_GEMS_FOR_DOUBLE_JUMP = 75
-var NUM_GEMS_FOR_BROOMERANG_WARP = 99
+var NUM_GEMS_FOR_BROOMERANG_WARP = 150
 
 var has_started_game = false
 var has_really_started_game = false

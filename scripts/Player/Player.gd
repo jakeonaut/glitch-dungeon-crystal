@@ -593,11 +593,15 @@ func tryDieToOffscreenCamera(delta):
     repositioned_player.x = getGameCamera().leftmost_x - ADJUSTMENT_MARGIN
   DEATH_MARGIN = 1
   ADJUSTMENT_MARGIN = 1
+  var next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + Vector3(0, 1, 0)) if curr_coords != null else null
+  if next_room != null:
+    DEATH_MARGIN = 0
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
     if transformation == TransformationState.BUBBLE:
       getBubbleCured()
+  DEATH_MARGIN = 1
   # only relocate back to safety if off bottom screen
   if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, -1, 0)
@@ -622,7 +626,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
 
-    var next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
+    next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
     if next_room != null and not level.pacman_wrapping:
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
