@@ -32,6 +32,8 @@ func _ready():
 var can_stop_player = true
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
+  if is_evil:
+    aniPlayer.playback_speed = 4.0
   
   # if global.pauseGame: return
   hitStuff(delta)

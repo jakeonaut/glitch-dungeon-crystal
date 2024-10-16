@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://sceneObjects/Enemies/CursedGrandmaStatue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sceneObjects/Enemies/GlitchGrandmaManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=4]
@@ -115,9 +115,8 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 20 )]
 
-[node name="CursedGrandmaStatue" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 9, 0 )
-grav = 0
+[node name="GlitchGrandmaManager" parent="Viewport/level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, 0 )
 glitch_form = 1
 
 [node name="Viewport2" parent="." instance=ExtResource( 16 )]

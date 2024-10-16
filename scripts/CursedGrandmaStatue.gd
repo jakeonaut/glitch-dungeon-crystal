@@ -129,4 +129,4 @@ func passiveActivate(_delta, _is_player):
 
 export var max_dist_to_player = 30
 func isActive(_debug = false):
-  return visible and dist_to_player <= max_dist_to_player
+  return visible#  and dist_to_player <= max_dist_to_player

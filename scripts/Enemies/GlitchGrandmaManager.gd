@@ -33,9 +33,12 @@ var Y_OFFSET = 0.2
 func processGlitchFormActivation():
   if not level.has_room_initialized:
     return
+
+  if glitchGrandma.get_ref() == null or glitchGrandma.get_ref() == null:
+    return
   
   if which_mode == WhichMode.STATUE:
-    if playerActivationArea.touchingPlayer: #and glitch_form == level.player.glitch_form:
+    if glitch_form == level.player.glitch_form:
       glitchGrandma.get_ref().visible = true
       glitchGrandma.get_ref().global_transform.origin = cursedGrandmaStatue.get_ref().global_transform.origin
       glitchGrandma.get_ref().global_transform.origin.y += Y_OFFSET
@@ -44,15 +47,20 @@ func processGlitchFormActivation():
       level.summonSmokeClouds(cursedGrandmaStatue.get_ref().global_transform.origin, 3, true, true)
       which_mode = WhichMode.ALIVE
   elif which_mode == WhichMode.ALIVE:
-    pass
-    # if glitch_form != level.player.glitch_form:
-    #   cursedGrandmaStatue.get_ref().visible = true
-    #   cursedGrandmaStatue.get_ref().global_transform.origin = glitchGrandma.get_ref().global_transform.origin
-    #   cursedGrandmaStatue.get_ref().global_transform.origin.y -= Y_OFFSET
-    #   cursedGrandmaStatue.get_ref().mySprite.flip_h = glitchGrandma.get_ref().mySprite.flip_h
-    #   glitchGrandma.get_ref().visible = false
-    #   level.summonSmokeClouds(cursedGrandmaStatue.get_ref().global_transform.origin, 3, true, true)
-    #   which_mode = WhichMode.STATUE
+    if glitch_form != level.player.glitch_form:
+      cursedGrandmaStatue.get_ref().visible = true
+      cursedGrandmaStatue.get_ref().global_transform.origin = glitchGrandma.get_ref().global_transform.origin
+      cursedGrandmaStatue.get_ref().global_transform.origin.y -= Y_OFFSET
+      cursedGrandmaStatue.get_ref().mySprite.flip_h = glitchGrandma.get_ref().mySprite.flip_h
+      if glitchGrandma.get_ref().glitch_form == global.GlitchForm.FLOOR:
+        glitchGrandma.get_ref().on_ground = true
+      glitchGrandma.get_ref().vv = 0
+      glitchGrandma.get_ref().hv = 0
+      glitchGrandma.get_ref().lv = Vector3(0, 0, 0)
+      glitchGrandma.get_ref().linear_velocity = Vector3(0, 0, 0)
+      glitchGrandma.get_ref().visible = false
+      level.summonSmokeClouds(cursedGrandmaStatue.get_ref().global_transform.origin, 3, true, true)
+      which_mode = WhichMode.STATUE
 
 
 func isActive():

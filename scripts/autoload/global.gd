@@ -1050,6 +1050,8 @@ func saveMySpot(savePoint, position, level):
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
   for area in areas:
+    if area.get_node("..") == my_broom_owner:
+        continue
     if area.is_in_group("tadpole"):
       continue
     elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
@@ -1081,7 +1083,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
-        if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom.is_evil:
+        if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom and my_broom_owner.summonedBroom.is_evil:
           level.player.tryDieToEnemy(0, true, false)
 
         if areaParent.has_method("imAnNpc") and smackResult == null:
