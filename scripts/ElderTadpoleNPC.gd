@@ -64,7 +64,10 @@ func adjustSummonedBroomSpritePosition():
 
 func chickenifyPlayer():
   if smackSound: smackSound.play()
+  var temp = global.has_been_baba_yaga_cursed
+  global.has_been_baba_yaga_cursed = true
   level.player.getChickenInfected()
+  global.has_been_baba_yaga_cursed = temp
   global.pauseGame = false
   level.player.pauseInput = false
   can_move = false

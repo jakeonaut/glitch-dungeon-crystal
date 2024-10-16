@@ -1069,6 +1069,9 @@ func processChickenLogic(delta):
     aniPlayer.queue("land")
 
 func getChickenInfected():
+  if not global.has_been_baba_yaga_cursed:
+    self.sayThis("Baba Yaga does not\napprove of your actions...\nyou've been cursed.")
+    global.has_been_baba_yaga_cursed = true
   chicken_timer = 0
   summonFallenBroom(false, true, false)
   # TODO(jaketrower): could probably DRY some of this stuff...
