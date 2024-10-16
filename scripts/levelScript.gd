@@ -612,6 +612,12 @@ func walkThroughWallsGlitch():
 
 var followers = []
 func trySpawnFollowers():
+  spawnPetFollower(
+        player.global_transform.origin + Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125), 
+          0))
+
   var numKeys = global.getThingFromAllLevelZonez("key")
   if numKeys != null:
     for _i in range(numKeys):
@@ -663,6 +669,21 @@ func spawnKeyFollower(starting_position):
   var target = followers[-1] if followers.size() > 0 else player
   keyFollower.gameMoverTarget = weakref(target)
   followers.push_back(keyFollower)
+
+var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
+func spawnPetFollower(starting_position):
+  if global.memory["currPet"] == null:
+    return
+  var currPet = global.memory["currPet"]
+  
+  if currPet == global.PetFollower.CHICKEN or currPet == global.PetFollower.THREE_CHICKENS:
+    for _i in range(0, 1 if currPet == global.PetFollower.CHICKEN else 3):
+      var petFollower = petChickenFollowerRes.instance()
+      self.add_child(petFollower)
+      petFollower.global_transform.origin = starting_position
+      var target = followers[-1] if followers.size() > 0 else player
+      petFollower.gameMoverTarget = weakref(target)
+      followers.push_back(petFollower)
 
 var key_items_spawned = {}
 func trySpawnSpecialKey(keyFollower, keyType):

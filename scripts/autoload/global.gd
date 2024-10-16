@@ -107,6 +107,40 @@ enum NestingDoll {
     MATRIARCH,
 }
 
+enum PetFollower {
+    NONE,
+    CHICKEN,
+    THREE_CHICKENS,
+    DRAGONFLY,
+    MOLE_CRICKET,
+    KIZZY,
+    BABUSHKA_CAT,
+    BIG_MOLE_CRICKET,
+    FROG,
+    GLITCH_SLIME,
+}
+
+enum GrandmaOutfit {
+    BABUSHKA,
+    NO_HAT,
+    WITCH_HAT,
+    BONNET,
+    NON_LA,
+    SUN_HAT,
+    BUG_CATCHER,
+    CROCHET,
+    SCARF_EARMUFFS,
+    YOUNG_BABA,
+}
+
+enum GrandmaBroom {
+    NORMAL,
+    ELDER_CANE,
+    CRONE_STAFF,
+    BABA_YAGA_CHICKEN_STAFF,
+    BUG_NET,
+}
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""
@@ -178,6 +212,7 @@ var has_really_started_game = false
 var okay_really_really_started_game = false
 var spellCastPauseIndex = null
 var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "jump_button", "restart_key"]
+var has_been_baba_yaga_cursed = false
 
 func _ready():
     set_process(true)
@@ -203,6 +238,7 @@ func _ready():
     if hasGottenLevelGeode: pass
     if spellCastPauseIndex: pass
     if angelWarping: if justAngelWarped: pass
+    if has_been_baba_yaga_cursed: pass
 
     resetMemory()
     loadGameSettings()
@@ -219,6 +255,14 @@ func resetMemory():
     memory["stopAllMusic"] = false
     memory["canChangeSongPitch"] = true
     memory["spellAssist"] = false
+
+    # customization upgrades
+    memory["currPet"] = PetFollower.THREE_CHICKENS
+    memory["allMyPets"] = [PetFollower.NONE]
+    memory["currOutfit"] = GrandmaOutfit.BABUSHKA
+    memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
+    memory["currBroom"] = GrandmaBroom.NORMAL
+    memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false

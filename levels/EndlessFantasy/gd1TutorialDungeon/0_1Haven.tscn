@@ -1269,7 +1269,7 @@ transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707
 mesh = SubResource( 285 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 286 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
