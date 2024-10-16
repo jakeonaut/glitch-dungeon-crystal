@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=31]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=32]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/BroomUpgradeCrone.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/palettes/bog_water_palette2.png" type="Texture" id=35]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=36]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/GlitchedGrimoire.tscn" type="PackedScene" id=37]
@@ -45,6 +46,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=44]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=45]
 [ext_resource path="res://levels/EndlessFantasy/gd1GrandmaVillage/AngelStatueRitualNPCDialogStartSound.gd" type="Script" id=46]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=47]
 
 [sub_resource type="ShaderMaterial" id=78]
 shader = ExtResource( 12 )
@@ -585,6 +587,42 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="BoxShape" id=105]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="ShaderMaterial" id=106]
+shader = ExtResource( 12 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 47 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="BoxShape" id=107]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -684,7 +722,7 @@ material_override = SubResource( 78 )
 automatically_change_color = false
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1, 0.0999999, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 19.1, 0 )
 
 [node name="WaterCubes" type="Spatial" parent="Viewport/level"]
 
@@ -855,7 +893,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
 
 [node name="BabushkaCat2" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0702, 15.8612, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69351, 6.8612, 0 )
 grav = 0
 bbText = "SEE BabushkaCatSOULSnifferDialogStartSound.gd"
 
@@ -971,6 +1009,26 @@ anims/smackPlayer = SubResource( 102 )
 anims/smackPlayerFromSleep = SubResource( 103 )
 anims/snatchBroom = SubResource( 104 )
 
+[node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6351, 15.872, 0 )
+bbText = "•before you go,
+make sure you fortify
+your broom with magic!"
+smackedBbText = "•it's a good broom"
+
+[node name="CollisionShape" parent="Viewport/level/BroomUpgradeCrone/SmallInteractionArea" index="0"]
+shape = SubResource( 105 )
+
+[node name="Sprite3D" parent="Viewport/level/BroomUpgradeCrone" index="3"]
+material_override = SubResource( 106 )
+frame = 58
+
+[node name="CollisionShape" parent="Viewport/level/BroomUpgradeCrone/FallthroughSolid" index="0"]
+shape = SubResource( 107 )
+
+[node name="InteractPrompt" parent="Viewport/level/BroomUpgradeCrone" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.38303, -1 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 33 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -1003,5 +1061,7 @@ flip_v = true
 [editable path="Viewport/level/ElderTadpoleNPC2/NPC TextBox"]
 [editable path="Viewport/level/ElderTadpoleNPC4"]
 [editable path="Viewport/level/ElderTadpoleNPC4/NPC TextBox"]
+[editable path="Viewport/level/BroomUpgradeCrone"]
+[editable path="Viewport/level/BroomUpgradeCrone/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

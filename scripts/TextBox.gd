@@ -348,6 +348,7 @@ func showTextbox(wasSmacked = false):
   textNode.scroll_to_line(0)
   if wasSmacked and smackedBbText != null and smackedBbText != "":
     textNode.bbcode_text = smackedBbText
+    showYesNoOptions = false
   else:
     textNode.bbcode_text = text_final
   tindex = -1
@@ -404,6 +405,7 @@ func hideTextbox():
   if showYesNoOptions and selectedYesNoOption:
     broomConfirmSound.play()
   else:
+    selectedYesNoOption = false
     abortSound.play()
   
   if abortSound.has_method("preActivateScript") and not has_preactivated:

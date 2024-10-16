@@ -11,7 +11,7 @@ func activateScript():
     text += "\n•Pray twice, dance, jump,\n    then Return."
     var textBox = get_node("..")
     if global.justAngelWarped:
-      text = "•Keep up your daily prayers.\nThe Goddess needs your strength."
+      text = "•Keep up your daily prayers.\nOur mother needs your strength."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

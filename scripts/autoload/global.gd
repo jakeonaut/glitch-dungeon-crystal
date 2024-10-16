@@ -1094,7 +1094,7 @@ func saveMySpot(savePoint, position, level):
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
   for area in areas:
-    if area.get_node("..") == my_broom_owner:
+    if area.get_node("..") == my_broom_owner or area.get_node("../..") == my_broom_owner:
         continue
     if area.is_in_group("tadpole"):
       continue

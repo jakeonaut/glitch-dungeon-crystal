@@ -455,17 +455,18 @@ func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    if smallInteractionArea.is_in_group("enemies"):
-        if notOuchies(global_transform.origin):
-            getPlayer().getSmacked()
-            getPlayer().has_sweeped_glitch = true
-            getPlayer().glitchTickle()
-    elif smallInteractionArea.is_in_group("weak_enemies"):
+    if smallInteractionArea.is_in_group("weak_enemies"):
+        # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         ouchies(global_transform.origin)
         getPlayer().has_sweeped_glitch = true
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         getPlayer().getSmacked()
+    elif smallInteractionArea.is_in_group("enemies"):
+        if notOuchies(global_transform.origin):
+            getPlayer().getSmacked()
+            getPlayer().has_sweeped_glitch = true
+            getPlayer().glitchTickle()
     else:
         getSmacked(global_transform.origin)
         getPlayer().getSmacked()
@@ -485,9 +486,10 @@ func tryAddEnemiesGroup():
         smallInteractionArea.add_to_group("enemies")
 
 var can_spawn_mini_crystal = true
-func ouchies_base():
+func ouchies_base(broom_origin):
     if am_i_dying or am_i_freezing: # or am_i_hurt:
         return
+    getSmacked(broom_origin)
     # am_i_hurt = true
     if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
@@ -500,11 +502,11 @@ func ouchies_base():
     if parentSpawner != null and parentSpawner.has_method("myChildDied"):
         parentSpawner.myChildDied()
 
-func ouchies(_broom_origin):
+func ouchies(broom_origin):
     if is_particle:
         return false
 
-    ouchies_base()
+    ouchies_base(broom_origin)
 
     if not am_i_dying and not am_i_freezing:
         am_i_freezing = true

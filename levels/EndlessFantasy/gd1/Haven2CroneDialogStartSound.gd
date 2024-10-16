@@ -1,5 +1,6 @@
 extends AudioStreamPlayer
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var textBox = get_node("..")
 onready var crystalGeode2 = get_node("../../../..")
 
@@ -8,6 +9,8 @@ func _ready():
 
 
 func activateScript():
+  var isElderTadpole = "PastoralTowerHub" in level.getLevelName()
+
   if global.memory["crone"] == 0:
     return
   elif global.memory["crone"] == 2:
@@ -23,7 +26,7 @@ func activateScript():
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true
   else:
-    var text = "•keeheehee\nyou've taken all I can offer\n•please, purify the crystals"
+    var text = "•keeheehee\nyou've taken all I can offer\n•please, purify the crystals" if not isElderTadpole else "•your broom is very mighty!\nplease find mother's dreams.\nso we may awaken her."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

@@ -431,8 +431,14 @@ func _process(delta):
       global.memory["broomerang"] = 2
       global.memory["multi_broom"] = 1
   if Input.is_action_just_pressed("debug_more_crystals"):
-    if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") < 99:
-      global.incrementLevelZoneThing("num_mini_crystal_cubes", 99)
+    if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") < 150:
+      if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") == 0:
+        global.memory["tutorial_gem"] = 1
+        level.uiLayer.get_node("GlitchStatusRect").visible = true
+        level.uiLayer.get_node("GlitchStatusRect").rect_scale = Vector2(1.5, 1.5)
+        level.uiLayer.get_node("GlitchStatusRect").rect_position = Vector2(200, 325)
+      global.incrementLevelZoneThing("num_mini_crystal_cubes", 150)
+      
     # global.memory["clean_crystals"] = 99
     
   tryDieToOffscreenCamera(delta)

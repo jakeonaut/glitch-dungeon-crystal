@@ -179,8 +179,8 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     ouchies(broom_origin)
         
 # @override
-func ouchies(_broom_origin):
-    .ouchies_base()
+func ouchies(broom_origin):
+    .ouchies_base(broom_origin)
     if am_i_dying or not visible: return # or am_i_hurt: return
 
     # if zombie_state == ZombieState.REVIVING:

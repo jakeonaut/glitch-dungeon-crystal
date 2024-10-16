@@ -95,7 +95,7 @@ func processDeath():
         
 # @override
 func ouchies(broom_origin):
-    .ouchies_base()
+    .ouchies_base(broom_origin)
     if am_i_dying or not visible: return
         
     am_i_dying = true
