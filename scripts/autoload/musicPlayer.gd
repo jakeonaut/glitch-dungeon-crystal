@@ -139,8 +139,14 @@ func conductFromScenePath(path):
        path.find("LongGlitchyHallway") > 0 or \
        (path.find("0_0") > 0 and not global.okay_really_really_started_game):
         tryToPlay(windPlayer)
-    elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] < 2:
-        tryToPlay(crystalThemePlayer) # bossThemePlayer)
+    elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] == 0:
+        tryToPlay(crystalThemePlayer)
+    elif (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] > 0) or path.find("BossRoom") > 0:
+        tryToPlay(bossThemePlayer)
+        if global.memory["priestess"] >= 2:
+            changeSongPitch(1.0)
+            default_song_pitch = 1.0
+            return
     elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
         tryToPlay(grannyPlayer)
         if global.memory["priestess"] >= 2:

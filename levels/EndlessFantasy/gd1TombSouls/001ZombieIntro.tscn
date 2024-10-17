@@ -789,7 +789,7 @@ num_keys_unlock = 4
 key_type = 5
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 0 )
 
 [node name="WindGustCorpse" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.6, 0 )

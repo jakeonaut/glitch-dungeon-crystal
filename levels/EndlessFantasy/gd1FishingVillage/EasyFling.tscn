@@ -4841,7 +4841,7 @@ shader_param/target_palette = ExtResource( 1 )
 script = ExtResource( 13 )
 show_crt_effect = true
 starting_glitch_type = 1
-tileset_type = 2
+tileset_type = 9
 has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 

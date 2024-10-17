@@ -596,12 +596,21 @@ func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
   
 export var can_change_color = true
 func changeColorPalette(palette, _palette_alt = null):
-  if not can_change_color:
-    curr_palette = override_palette if override_palette != null else grey_palette
-  elif override_palette == null or palette != grey_palette:
-    curr_palette = palette
-  else:
-    curr_palette = override_palette
+  if my_tileset_type == global.TilesetType.DUNGEON or my_tileset_type == global.TilesetType.BEACH:
+    if not can_change_color:
+      curr_palette = override_palette if override_palette != null else grey_palette
+    elif override_palette == null or palette != grey_palette:
+      curr_palette = palette
+    else:
+      curr_palette = override_palette
+  elif my_tileset_type == global.TilesetType.FOREST:
+    curr_palette = global.green_tidepool_palette
+  elif my_tileset_type == global.TilesetType.AUTUMN_FOREST:
+    curr_palette = global.red_palette
+  elif my_tileset_type == global.TilesetType.DESERT:
+    curr_palette = global.green_palette
+  elif my_tileset_type == global.TilesetType.POISON_FOREST:
+    curr_palette = global.grey_black_palette
     
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):

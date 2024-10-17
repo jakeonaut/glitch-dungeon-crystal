@@ -358,44 +358,58 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 
+[node name="FlowerSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 347, 38 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 19
+
 [node name="BroomSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 28, 96 )
+position = Vector2( 27, 104 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 27
 
-[node name="BroomLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 60.0
-margin_top = 88.0
-margin_right = 254.0
-margin_bottom = 120.0
-theme = ExtResource( 8 )
-bbcode_enabled = true
-bbcode_text = "trusty broom"
-text = "trusty broom"
+[node name="HatSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 83, 102 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 7
+
+[node name="PetSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 139, 102 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 6
 
 [node name="BagSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 23, 147 )
+position = Vector2( 195, 102 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 22
 
-[node name="BagLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 60.0
-margin_top = 131.0
-margin_right = 278.0
-margin_bottom = 163.0
+[node name="EquipLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 235.0
+margin_top = 94.0
+margin_right = 453.0
+margin_bottom = 126.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "enchanted bag"
-text = "enchanted bag"
+bbcode_text = "equipment"
+text = "equipment"
 
 [node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
-position = Vector2( 25, 187 )
+position = Vector2( 27, 166 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -403,7 +417,7 @@ vframes = 5
 frame = 29
 
 [node name="SoulSprite2" type="Sprite" parent="InventoryRect"]
-position = Vector2( 74, 189 )
+position = Vector2( 83, 166 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -411,7 +425,7 @@ vframes = 5
 frame = 21
 
 [node name="SoulSprite3" type="Sprite" parent="InventoryRect"]
-position = Vector2( 125, 189 )
+position = Vector2( 139, 166 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -419,50 +433,74 @@ vframes = 5
 frame = 23
 
 [node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 157.0
-margin_top = 180.0
-margin_right = 375.0
-margin_bottom = 212.0
+margin_left = 179.0
+margin_top = 158.0
+margin_right = 397.0
+margin_bottom = 190.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "lost souls"
 text = "lost souls"
 
-[node name="DreamSprite1" type="Sprite" parent="InventoryRect"]
-position = Vector2( 24, 237 )
+[node name="KeySprite1" type="Sprite" parent="InventoryRect"]
+position = Vector2( 27, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 19
+frame = 12
 
-[node name="DreamSprite2" type="Sprite" parent="InventoryRect"]
-position = Vector2( 73, 237 )
+[node name="KeySprite2" type="Sprite" parent="InventoryRect"]
+position = Vector2( 83, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 9
+frame = 13
 
-[node name="DreamSprite3" type="Sprite" parent="InventoryRect"]
-position = Vector2( 126, 242 )
+[node name="KeySprite3" type="Sprite" parent="InventoryRect"]
+position = Vector2( 139, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 8
+frame = 14
 
-[node name="DreamLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 168.0
-margin_top = 220.0
-margin_right = 386.0
-margin_bottom = 276.0
+[node name="KeySprite4" type="Sprite" parent="InventoryRect"]
+position = Vector2( 203, 230 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 15
+
+[node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 43.0
+margin_top = 246.0
+margin_right = 162.0
+margin_bottom = 292.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "goddess
-    dreams"
-text = "goddess
-    dreams"
+bbcode_text = "2"
+text = "2"
+
+[node name="CrystalSprite1" type="Sprite" parent="InventoryRect"]
+position = Vector2( 347, 230 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 18
+
+[node name="CrystalLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 363.0
+margin_top = 246.0
+margin_right = 482.0
+margin_bottom = 292.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "1"
+text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 26, 46 )

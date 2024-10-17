@@ -24,6 +24,8 @@
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
+transition_duration = null
+transition_type = null
 
 [node name="WindPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

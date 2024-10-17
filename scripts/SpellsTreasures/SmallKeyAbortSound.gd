@@ -12,6 +12,14 @@ func activateScript():
         if not global.memory.has("key_items"):
             global.memory["key_items"] = {}
         global.memory["key_items"][key_type] = global.ItemState.GOT_IT
+        var key_name = "FISH KEY"
+        if key_type == global.KeyItem.PYRAMID:
+            key_name = "PYRAMID KEY"
+        elif key_type == global.KeyItem.SHROOM:
+            key_name = "SHROOM KEY"
+        elif key_type == global.KeyItem.CAT:
+            key_name = "CAT KEY"
+        level.player.sayThis("Got the " + key_name + "!")
         
     var num_keys = global.getLevelZoneThing("key")
     if num_keys == null:

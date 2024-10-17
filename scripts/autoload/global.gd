@@ -77,6 +77,7 @@ enum TilesetType {
     BEACH,
     POISON_FOREST,
     POISON_HOUSE,
+    AUTUMN_FOREST,
 }
 
 enum ItemState {

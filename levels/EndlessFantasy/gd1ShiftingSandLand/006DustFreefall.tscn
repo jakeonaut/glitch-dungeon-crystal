@@ -618,7 +618,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -2.9, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, -33.568, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CricketCaveHub2.tscn"
 is_passive = true
 is_vertical = true
 

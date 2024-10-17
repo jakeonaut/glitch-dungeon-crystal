@@ -1,5 +1,6 @@
 extends Spatial
 
+onready var anglerFish = get_node("../..")
 onready var hookInteractionArea = get_node("HookInteractionArea")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hooked = false
@@ -48,10 +49,15 @@ func moveTargetToHook(delta):
     hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
 
 func isActive(_debug=false):
-  return true
+  return true and \
+         anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
+         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_LEFT or \
+         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
+         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_MIDDLE
 
 func passiveActivate(_delta, is_player):
   if not hooked and is_player and level.player.canIGetCaught():
+    print("gotcha?")
     level.clearOtherGrabbers()
     hooked = true
     hookTarget = weakref(level.player)

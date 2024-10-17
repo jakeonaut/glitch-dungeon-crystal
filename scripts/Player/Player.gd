@@ -926,10 +926,12 @@ func processFishyLogic(delta):
     else:
       bubble_timer = bubble_time_limit
   elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    aniPlayer.play("revertFromFishy")
-    aniPlayer.queue("land")
+    # aniPlayer.stop()
+    # aniPlayer.clear_queue()
+    # aniPlayer.play("revertFromFishy")
+    # aniPlayer.queue("land")
+    fishySprite.visible = false
+    mySprite.visible = true
 
 
   # weird recovery
@@ -1001,6 +1003,8 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
 
 func getFishyInfected():
+  if is_mushroom_infected:
+    return
   tryClearFallthroughCollisionSolid()
   if summonedBroom:
     broomStop()
@@ -1069,14 +1073,14 @@ func processChickenLogic(delta):
       getChickenCured()
       gravitySound.play()
   elif chickenSprite.visible and not aniPlayer.assigned_animation == "revertFromChicken":
-    aniPlayer.stop()
-    aniPlayer.clear_queue()
-    aniPlayer.play("revertFromChicken")
-    aniPlayer.queue("land")
+    chickenSprite.visible = false
+    mySprite.visible = true
 
 func getChickenInfected():
+  if is_mushroom_infected:
+    return
   if not global.has_been_baba_yaga_cursed:
-    self.sayThis("Baba Yaga does not\napprove of your actions...\nyou've been cursed.")
+    self.sayThis("Baba Yaga's curse")
     global.has_been_baba_yaga_cursed = true
   chicken_timer = 0
   summonFallenBroom(false, true, false)
@@ -1909,7 +1913,8 @@ func processBagRenderLogic(_delta):
 
 
 func processPoisonWaterLogic(delta):
-  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
+  pass
+#  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 
   # if is_touching_poison_water:
   #   is_mushroom_infected = true

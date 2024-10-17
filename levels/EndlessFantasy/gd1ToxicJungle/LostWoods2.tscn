@@ -410,7 +410,7 @@ shader_param/target_palette = ExtResource( 5 )
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 12 )
 show_crt_effect = true
-tileset_type = 2
+tileset_type = 7
 pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 21 )]

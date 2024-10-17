@@ -84,7 +84,7 @@ audio_listener_enable_3d = true
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
 show_crt_effect = true
-tileset_type = 6
+tileset_type = 7
 pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
