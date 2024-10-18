@@ -413,6 +413,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 19.1, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45126, 19, 0 )
@@ -472,8 +482,8 @@ shape = SubResource( 58 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
 bbText = "•MOLE CRICKET'S MEMORY:
-hold [DOWN] to dig
-and move around"
+jump up through a ceiling
+to dig up through floors!"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )

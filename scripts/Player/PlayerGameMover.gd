@@ -6,6 +6,7 @@ enum TransformationState {
   MUSHROOM,
   UNDERGROUND,
   UNDERGROUND_RETURNING,
+  UNDERGROUND_HORIZONTAL,
   BUBBLE,
   CHICKEN,
   CURSED,
@@ -339,8 +340,10 @@ func collideWithWall(local_lv):
     pauseAnimation = false
     bumpSound2.play()
     getABroom()
+    var prev_hp = global.memory["hp"]
     global.memory["hp"] += 1
     tryDieToEnemy(0, false, true, false)
+    global.memory["hp"] = prev_hp
 
 # @override
 func pressingJump():
@@ -472,8 +475,8 @@ var summonedBroom = null
 func getWalkSpeed(delta):
   if transformation == TransformationState.CHICKEN:
     return 6
-  if transformation == TransformationState.UNDERGROUND_RETURNING:
-    return 0
+  # if transformation == TransformationState.UNDERGROUND_RETURNING:
+  #   return 0
   if transformation == TransformationState.UNDERGROUND:
     return 7 if on_ground else 0
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
@@ -538,7 +541,7 @@ var has_landed_since_last_flight = false
 func getABroom(unpauseAnimation = true):
   var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
   for fallenBroom in fallenBroomArray:
-    if fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying:
+    if fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return:
       return
 
   if transformation == TransformationState.FISHY or \

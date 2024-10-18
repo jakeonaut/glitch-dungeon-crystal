@@ -45,7 +45,7 @@ var BULLET_SPEED = 15
 var cast_timer = 0
 var cast_time_limit = 60
 var stun_timer = 0
-var stun_time_limit = 120
+var stun_time_limit = 240
 var which_facing = -1
 
 onready var spawnSound = get_node("Sounds/SpawnSound")

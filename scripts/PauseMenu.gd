@@ -567,25 +567,29 @@ func processInventoryLogic(delta):
         popupRect.visible = not popupRect.visible
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
-      popupText.text = "your trusty broom.."
-      if global.memory["broomerang"] > 1:
-        popupText.text += "\nsweep twice to throw it!"
-      else:
-        popupText.text += "\ngreat for sweeping dust"
-      if global.memory["broomerang"] >= 2:
-        popupText.text += "\nand again to warp!"
+      if inventoryOptionIndexX == 0:
+        popupText.text = "your trusty broom.."
+        if global.memory["broomerang"] > 1:
+          popupText.text += "\nsweep twice to throw it!"
+        else:
+          popupText.text += "\ngreat for sweeping dust"
+        if global.memory["broomerang"] >= 2:
+          popupText.text += "\nand again to warp!"
+      elif inventoryOptionIndexX == 1:
+        popupText.text = "babushka scarf\nkeeps ya warm"
+      elif inventoryOptionIndexX == 2:
+        popupText.text = "pet follower\nin progress..."
+      elif inventoryOptionIndexX == 3:
+        popupText.text = "an enchanted bag\nlets you take another hit"
     elif inventoryOptionIndex == 2:
-      popupRect.visible = not popupRect.visible
-      popupText.text = "an enchanted bag\nlets you take another hit"
-    elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
         popupText.text = "memory of fish:\n  swim in water\n  blow bubbles"
       elif inventoryOptionIndexX == 1:
-        popupText.text = "mole cricket memory:\n  press down to dig\n  and move around"
+        popupText.text = "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
       elif inventoryOptionIndexX == 2:
         popupText.text = "mushroom memory:\n  what does this do?"
-    elif inventoryOptionIndex == 4:
+    elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
         popupText.text = "forget me not:\n  the goddess allows you\n  to remember"
@@ -619,79 +623,94 @@ func normalizeInventoryOptionIndex(y, x):
         inventoryOptionIndex = 3
       if inventoryOptionIndex == 3 and not soulLabel.visible:
         inventoryOptionIndex = 4
-      if (inventoryOptionIndex == 4 and not dreamLabel.visible) or inventoryOptionIndex > 4:
+      if inventoryOptionIndex == 4 or inventoryOptionIndex > 4: # if (inventoryOptionIndex == 4 and not dreamLabel.visible) or inventoryOptionIndex > 4:
         inventoryOptionIndex = 0 if grimoireSprite.visible else 1
     elif y < 0:
       if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
         inventoryOptionIndex = 4
-      if inventoryOptionIndex == 4 and not dreamLabel.visible:
+      if inventoryOptionIndex == 4: # and not dreamLabel.visible:
         inventoryOptionIndex = 3
       if inventoryOptionIndex == 3 and not soulLabel.visible:
         inventoryOptionIndex = 2
       if inventoryOptionIndex == 2 and not bagSprite.visible:
         inventoryOptionIndex = 1
 
-  if inventoryOptionIndex == 3 or inventoryOptionIndex == 4:
+  if inventoryOptionIndex == 1:
     inventoryOptionIndexX += x
-    if inventoryOptionIndex == 3: # soul memories
-      if x >= 0:
-        if inventoryOptionIndexX == 0 and not soulSprite1.visible:
-          inventoryOptionIndexX = 1
-        if inventoryOptionIndexX == 1 and not soulSprite2.visible:
-          inventoryOptionIndexX = 2
-        if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
-          inventoryOptionIndexX = 0 if soulSprite1.visible else 1
-      elif x < 0:
-        if inventoryOptionIndexX == 2 and not soulSprite3.visible:
-          inventoryOptionIndexX = 1
-        if inventoryOptionIndexX == 1 and not soulSprite2.visible:
-          inventoryOptionIndexX = 0
-        if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndex < 0:
-          inventoryOptionIndexX = 2 if soulSprite3.visible else 1
-    elif inventoryOptionIndex == 4: # goddess dreams
-      if x >= 0:
-        if inventoryOptionIndexX == 0 and not dreamSprite1.visible:
-          inventoryOptionIndexX = 1
-        if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
-          inventoryOptionIndexX = 2
-        if (inventoryOptionIndexX == 2 and not dreamSprite3.visible) or inventoryOptionIndexX > 2:
-          inventoryOptionIndexX = 0 if dreamSprite1.visible else 1
-      elif x < 0:
-        if inventoryOptionIndexX == 2 and not dreamSprite3.visible:
-          inventoryOptionIndexX = 1
-        if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
-          inventoryOptionIndexX = 0
-        if (inventoryOptionIndexX == 0 and not dreamSprite1.visible) or inventoryOptionIndex < 0:
-          inventoryOptionIndexX = 2 if dreamSprite3.visible else 1
+    if x >= 0:
+      if (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
+        inventoryOptionIndexX = 0
+    elif x < 0:
+      if inventoryOptionIndexX < 0:
+        inventoryOptionIndexX = 3 if bagSprite.visible else 2
+      
+  if inventoryOptionIndex == 2:
+    inventoryOptionIndexX += x
+    if x >= 0:
+      if inventoryOptionIndexX == 0 and not soulSprite1.visible:
+        inventoryOptionIndexX = 1
+      if inventoryOptionIndexX == 1 and not soulSprite2.visible:
+        inventoryOptionIndexX = 2
+      if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
+        inventoryOptionIndexX = 0 if soulSprite1.visible else 1
+    elif x < 0:
+      if inventoryOptionIndexX == 2 and not soulSprite3.visible:
+        inventoryOptionIndexX = 1
+      if inventoryOptionIndexX == 1 and not soulSprite2.visible:
+        inventoryOptionIndexX = 0
+      if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndex < 0:
+        inventoryOptionIndexX = 2 if soulSprite3.visible else 1
+  # elif inventoryOptionIndex == 4: # goddess dreams
+  #   pass
+  #   # if x >= 0:
+  #   #   if inventoryOptionIndexX == 0 and not dreamSprite1.visible:
+  #   #     inventoryOptionIndexX = 1
+  #   #   if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
+  #   #     inventoryOptionIndexX = 2
+  #   #   if (inventoryOptionIndexX == 2 and not dreamSprite3.visible) or inventoryOptionIndexX > 2:
+  #   #     inventoryOptionIndexX = 0 if dreamSprite1.visible else 1
+  #   # elif x < 0:
+  #   #   if inventoryOptionIndexX == 2 and not dreamSprite3.visible:
+  #   #     inventoryOptionIndexX = 1
+  #   #   if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
+  #   #     inventoryOptionIndexX = 0
+  #   #   if (inventoryOptionIndexX == 0 and not dreamSprite1.visible) or inventoryOptionIndex < 0:
+  #   #     inventoryOptionIndexX = 2 if dreamSprite3.visible else 1
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
-onready var bagLabel = get_node("InventoryRect/BagLabel")
+# onready var bagLabel = get_node("InventoryRect/BagLabel")
 onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
 onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
 onready var soulSprite3 = get_node("InventoryRect/SoulSprite3")
 onready var soulLabel = get_node("InventoryRect/SoulLabel")
-onready var dreamSprite1 = get_node("InventoryRect/DreamSprite1")
-onready var dreamSprite2 = get_node("InventoryRect/DreamSprite2")
-onready var dreamSprite3 = get_node("InventoryRect/DreamSprite3")
-onready var dreamLabel = get_node("InventoryRect/DreamLabel")
+# onready var dreamSprite1 = get_node("InventoryRect/DreamSprite1")
+# onready var dreamSprite2 = get_node("InventoryRect/DreamSprite2")
+# onready var dreamSprite3 = get_node("InventoryRect/DreamSprite3")
+# onready var dreamLabel = get_node("InventoryRect/DreamLabel")
 func processInventoryRender(_delta):
   if inventoryOptionIndex == 0:
     invSelectionSprite.position = Vector2(26, 46)
   elif inventoryOptionIndex == 1:
-    invSelectionSprite.position = Vector2(26, 96)
-  elif inventoryOptionIndex == 2:
-    invSelectionSprite.position = Vector2(26, 145)
-  elif inventoryOptionIndex == 3:
-    invSelectionSprite.position.y = 190
+    invSelectionSprite.position = Vector2(26, 102)
     if inventoryOptionIndexX == 0:
       invSelectionSprite.position.x = 26
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 75
+      invSelectionSprite.position.x = 82
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 125
-  elif inventoryOptionIndex == 4:
+      invSelectionSprite.position.x = 140
+    elif inventoryOptionIndexX == 3:
+      invSelectionSprite.position.x = 197
+  elif inventoryOptionIndex == 2:
+    invSelectionSprite.position.y = 165
+    if inventoryOptionIndexX == 0:
+      invSelectionSprite.position.x = 26
+    elif inventoryOptionIndexX == 1:
+      invSelectionSprite.position.x = 82
+    elif inventoryOptionIndexX == 2:
+      invSelectionSprite.position.x = 140
+  elif inventoryOptionIndex == 3:
     invSelectionSprite.position.y = 240
     if inventoryOptionIndexX == 0:
       invSelectionSprite.position.x = 26
@@ -736,16 +755,16 @@ func processInventoryRender(_delta):
     glitchRect4.visible = false
 
   bagSprite.visible = global.memory["hp"] > 1
-  bagLabel.visible = global.memory["hp"] > 1
+  # bagLabel.visible = global.memory["hp"] > 1
 
   soulSprite1.visible = global.memory["zora_flippers"]
   soulSprite2.visible = global.memory["mole_cricket"]
   soulSprite3.visible = global.memory["mushroom_soul"]
   soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
-  dreamSprite1.visible = global.memory["forget_me_not"]
-  dreamSprite2.visible = global.memory["angel_flute"]
-  dreamSprite3.visible = global.memory["goddess_dream3"]
-  dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
+  # dreamSprite1.visible = global.memory["forget_me_not"]
+  # dreamSprite2.visible = global.memory["angel_flute"]
+  # dreamSprite3.visible = global.memory["goddess_dream3"]
+  # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd

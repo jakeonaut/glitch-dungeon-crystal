@@ -179,8 +179,8 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
-  # if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
-  #   getABroom()
+  if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
+    getABroom()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -241,7 +241,7 @@ func ladderGlitch():
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
-  # loseBroom()
+  loseBroom()
   spellbookGlitchSprite.frame = 3
   level.displaySpellMessageText("ghost")
   glitch_form = global.GlitchForm.INVISIBLE
@@ -903,26 +903,31 @@ func processFishyLogic(delta):
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
     if Input.is_action_pressed("sub_action_button") and has_fish_broom:
-      bubble_timer += (delta*11)
-      if bubble_timer >= bubble_time_limit:
-        var bubble = bubbleRes.instance()
-        bubble.is_horizontal = true
-        bubble.horizontal_direction = 2
-        bubble.can_purify = true
-        if mySprite.flip_h:
-          bubble.horizontal_direction = -2
-        bubble.is_dark = true
-        level.add_child(bubble)
-        # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-        bubble.setAsParent(self)
-        bubble.global_transform.origin = global_transform.origin
-        bubble.global_transform.origin.x += bubble.horizontal_direction
-        bubble.my_original_pos = bubble.global_transform.origin.y
-        bubble.randomizeTargetPos()
+      if glitch_form == global.GlitchForm.INVIS:
+        bubble_timer = bubble_time_limit
+        if Input.is_action_just_pressed("sub_action_button"):
+          noBroomSound.play()
+      else:
+        bubble_timer += (delta*11)
+        if bubble_timer >= bubble_time_limit:
+          var bubble = bubbleRes.instance()
+          bubble.is_horizontal = true
+          bubble.horizontal_direction = 2
+          bubble.can_purify = true
+          if mySprite.flip_h:
+            bubble.horizontal_direction = -2
+          bubble.is_dark = true
+          level.add_child(bubble)
+          # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+          bubble.setAsParent(self)
+          bubble.global_transform.origin = global_transform.origin
+          bubble.global_transform.origin.x += bubble.horizontal_direction
+          bubble.my_original_pos = bubble.global_transform.origin.y
+          bubble.randomizeTargetPos()
 
-        blinkSound.pitch_scale = rand_range(0.8, 1.2)
-        blinkSound.play()
-        bubble_timer = 0
+          blinkSound.pitch_scale = rand_range(0.8, 1.2)
+          blinkSound.play()
+          bubble_timer = 0
     else:
       bubble_timer = bubble_time_limit
   elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
@@ -1229,6 +1234,7 @@ var dig_timer = 0
 var dig_time_limit = 4
 var dig_below_timer = 0
 var dig_below_time_limit = 5
+var can_dig_up = false
 func processMoleLogic(delta):
   if transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
@@ -1282,7 +1288,6 @@ func processMoleLogic(delta):
         global_transform.origin.x -= 1
       else:
         getMoleCured()
-
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
     override_camera_y = global_transform.origin.y
     dig_below_timer = 0
@@ -1291,49 +1296,95 @@ func processMoleLogic(delta):
     fastStepSound.volume_db = -8
     if not fastStepSound.is_playing():
       fastStepSound.play()
-    if pressingDown():
-      transformation = TransformationState.UNDERGROUND
-      digSound.play()
+    # if pressingDown():
+    #   transformation = TransformationState.UNDERGROUND
+    #   digSound.play()
+    # else:
+    if checkSolidTilesOnMe():
+      global_transform.origin.y += (4 * delta*11)
     else:
-      if checkSolidTilesOnMe():
-        global_transform.origin.y += (4 * delta*11)
-      else:
-        should_magic_jump = true
-        self.vv = 10
-        self.target_last_grounded_y = self.global_transform.origin.y
-        self.global_transform.origin.y += 0.5
-        self.on_ground = false
-        self.truly_on_ground = false
-        self.was_on_ground = false
-        self.lv.y = self.vv
-        self.linear_velocity.y = self.vv
-        self.should_do_fallthrough_area_collision = false
-        getMoleCured()
-      
+      should_magic_jump = true
+      self.vv = 5
+      self.target_last_grounded_y = self.global_transform.origin.y
+      self.global_transform.origin.y += 0.5
+      self.on_ground = false
+      self.truly_on_ground = false
+      self.was_on_ground = false
+      self.lv.y = self.vv
+      self.linear_velocity.y = self.vv
+      self.should_do_fallthrough_area_collision = false
+      getMoleCured()
   else:
-    var solid_tiles = getTilesBelow(getLevelTiles())
-    var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
-    if global.memory["mole_cricket"] and is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
-      dig_timer += (delta*11)
-      mySprite.flip_h = not mySprite.flip_h
-      glitchTickle()
-      if dig_timer > dig_time_limit:
-        tryClearFallthroughCollisionSolid()
-        transformation = TransformationState.UNDERGROUND
-        global_transform.origin.y -= 2
-        summonSmokeClouds(3, true, true, 0)
-        mySprite.visible = false
-        if summonedBroom:
-          broomStop()
-          summonFallenBroom(true, false, false)
-        global.memory["broom"] = false
-        digSound.play()
-        physics_vars.should_apply_gravity = false
-        should_collide_floor = false
-        should_collide_ceil = false
-        should_collide_horizontally = false
+    if not pressingJump() and on_ground:
+      can_dig_up = true
+    # var solid_tiles = getTilesBelow(getLevelTiles())
+    # var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
+    # if global.memory["mole_cricket"] and is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
+    #   dig_timer += (delta*11)
+    #   mySprite.flip_h = not mySprite.flip_h
+    #   glitchTickle()
+    #   if dig_timer > dig_time_limit:
+    #     tryClearFallthroughCollisionSolid()
+    #     transformation = TransformationState.UNDERGROUND
+    #     global_transform.origin.y -= 2
+    #     summonSmokeClouds(3, true, true, 0)
+    #     mySprite.visible = false
+    #     if summonedBroom:
+    #       broomStop()
+    #       summonFallenBroom(true, false, false)
+    #     global.memory["broom"] = false
+    #     digSound.play()
+    #     physics_vars.should_apply_gravity = false
+    #     should_collide_floor = false
+    #     should_collide_ceil = false
+    #     should_collide_horizontally = false
+    # else:
+    #   dig_timer = 0
+
+func applyGravity(delta):
+  if dig_timer > 0 and pressingJump() and can_dig_up and (on_ceiling or was_on_ceiling):
+    createG(delta)
+    lv -= g * delta * 1
+    return
+  if glitch_form == GlitchForm.FLOOR and dig_timer > 0 and can_dig_up:
+    on_ground = true
+    was_on_ground = true
+  if glitch_form == GlitchForm.FEATHER and dig_timer > 0 and can_dig_up:
+    on_ground = true
+    was_on_ground = true
+    feather_jump_timer = 0
+  dig_timer = 0
+  .applyGravity(delta)
+
+func collideWithCeiling(local_lv):
+  on_ceiling = true
+  if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"]:
+    local_lv.y = 0
+    return local_lv
+  local_lv.y = 0
+  if dig_timer <= 0 or (not pressingMoveLeft() and not pressingMoveRight()):
+    dig_timer += (secret_delta*11)
+  # mySprite.flip_h = not mySprite.flip_h
+  glitchTickle()
+  if dig_timer > dig_time_limit:
+    can_dig_up = false
+    tryClearFallthroughCollisionSolid()
+    transformation = TransformationState.UNDERGROUND_RETURNING
+    summonSmokeClouds(3, true, true, 0)
+    mySprite.visible = false
+    if summonedBroom:
+      broomStop()
+      summonFallenBroom(false, true, false)
     else:
-      dig_timer = 0
+      summonFallenBroom(true, false, false)
+    global.memory["broom"] = false
+    global_transform.origin.y += 2
+    digSound.play()
+    physics_vars.should_apply_gravity = false
+    should_collide_floor = false
+    should_collide_ceil = false
+    should_collide_horizontally = false
+  return local_lv
 
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
@@ -1974,6 +2025,7 @@ func processPoisonWaterLogic(delta):
 var has_landed_since_recovering = true
 # @override
 func landed():
+  dig_timer = 0
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):
     has_landed_since_recovering = true

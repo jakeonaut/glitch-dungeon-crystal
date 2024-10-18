@@ -193,7 +193,9 @@ func _ready():
   spawn_origin = Vector3(global_transform.origin.x, global_transform.origin.y, global_transform.origin.z)
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
+var secret_delta = 0
 func _process(delta):
+  secret_delta = delta
   if mySprite.has_method("glitchyTrySetFrame"):
     mySprite.is_really_glitchy = is_really_glitchy 
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
@@ -366,28 +368,7 @@ func applyGravity(delta):
   if not physics_vars.should_apply_gravity:
     return
 
-  if physics_vars.applyHalfGrav:
-    physics_vars.applyHalfGravTimer += (delta*22)
-    if physics_vars.applyHalfGravTimer >= physics_vars.applyHalfGravTimeLimit:
-      physics_vars.applyHalfGravTimer = 0
-      physics_vars.applyHalfGrav = 0
-
-  if is_touching_water or physics_vars.applyHalfGrav:
-    g = Vector3(0, -grav/3, 0)
-    if is_touching_waterfall:
-      g = Vector3(0, -grav/2, 0)
-    if fallSound:
-      fallSound.stop()
-  elif isFeatherLike():
-    if pressingDown():
-      g = Vector3(0, -grav*2, 0)
-    else:
-      g = Vector3(0, -grav/1.5, 0)
-  else:
-    if pressingDown():
-      g = Vector3(0, -grav*2, 0)
-    else:
-      g = Vector3(0, -grav, 0)
+  createG(delta)
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
     lv += g * delta
@@ -418,6 +399,30 @@ func applyGravity(delta):
         aniPlayer.stop()
         aniPlayer.play("fallFar")
         if not transitioning and fallSound: fallSound.play()
+
+func createG(delta):
+  if physics_vars.applyHalfGrav:
+    physics_vars.applyHalfGravTimer += (delta*22)
+    if physics_vars.applyHalfGravTimer >= physics_vars.applyHalfGravTimeLimit:
+      physics_vars.applyHalfGravTimer = 0
+      physics_vars.applyHalfGrav = 0
+
+  if is_touching_water or physics_vars.applyHalfGrav:
+    g = Vector3(0, -grav/3, 0)
+    if is_touching_waterfall:
+      g = Vector3(0, -grav/2, 0)
+    if fallSound:
+      fallSound.stop()
+  elif isFeatherLike():
+    if pressingDown():
+      g = Vector3(0, -grav*2, 0)
+    else:
+      g = Vector3(0, -grav/1.5, 0)
+  else:
+    if pressingDown():
+      g = Vector3(0, -grav*2, 0)
+    else:
+      g = Vector3(0, -grav, 0)
       
 
 func applyTerminalVelocity(_delta):
@@ -1126,12 +1131,14 @@ func handleCollisionsAndMove(local_lv, delta):
   
   was_on_ground = on_ground
   was_truly_on_ground = truly_on_ground
+  was_on_ceiling = on_ceiling
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
     on_ground = isWalkingIntoWall()
   elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
     on_ground = false
   truly_on_ground = false
   half_on_ground = false
+  on_ceiling = false
 
   if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
     last_vv = local_lv.y
@@ -1260,6 +1267,13 @@ func collideWithFloor(local_lv):
     truly_on_ground = true
   return local_lv
 
+var on_ceiling = false
+var was_on_ceiling = false
+func collideWithCeiling(local_lv):
+  local_lv.y = 0
+  on_ceiling = true
+  return local_lv
+
 func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
   if tile_distance <= 0:
     if debug:
@@ -1271,7 +1285,7 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
       if should_collide_with_floor:
         local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
       else:
-        local_lv.y = 0
+        local_lv = collideWithCeiling(local_lv)
         if feather_jump_timer < feather_jump_partial_time_limit:
           feather_jump_timer = feather_jump_partial_time_limit
     else:
@@ -1283,7 +1297,7 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
     if should_collide_with_floor:
       local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
     else:
-      local_lv.y = 0
+      local_lv = collideWithCeiling(local_lv)
       if feather_jump_timer < feather_jump_partial_time_limit:
         feather_jump_timer = feather_jump_partial_time_limit
   elif not is_vertical and tile_distance < local_lv.x * sensor_direction: # TODO(jaketrower): TopsyTurvy

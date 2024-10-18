@@ -359,6 +359,7 @@ hframes = 6
 vframes = 5
 
 [node name="FlowerSprite" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 347, 38 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -443,6 +444,7 @@ bbcode_text = "lost souls"
 text = "lost souls"
 
 [node name="KeySprite1" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 27, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -451,6 +453,7 @@ vframes = 5
 frame = 12
 
 [node name="KeySprite2" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 83, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -459,6 +462,7 @@ vframes = 5
 frame = 13
 
 [node name="KeySprite3" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 139, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -467,6 +471,7 @@ vframes = 5
 frame = 14
 
 [node name="KeySprite4" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 203, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -475,6 +480,7 @@ vframes = 5
 frame = 15
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
+visible = false
 margin_left = 43.0
 margin_top = 246.0
 margin_right = 162.0
@@ -485,6 +491,7 @@ bbcode_text = "2"
 text = "2"
 
 [node name="CrystalSprite1" type="Sprite" parent="InventoryRect"]
+visible = false
 position = Vector2( 347, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -493,6 +500,7 @@ vframes = 5
 frame = 18
 
 [node name="CrystalLabel" type="RichTextLabel" parent="InventoryRect"]
+visible = false
 margin_left = 363.0
 margin_top = 246.0
 margin_right = 482.0
@@ -503,7 +511,7 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 26, 46 )
+position = Vector2( 26, 165 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6

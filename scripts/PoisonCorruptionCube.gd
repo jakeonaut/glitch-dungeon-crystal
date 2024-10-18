@@ -17,6 +17,6 @@ func passiveActivate(_delta, is_player):
             level.player.getFishyCured()
         if level.player.transformation == level.player.TransformationState.CHICKEN:
             level.player.getChickenCured()
-        # level.player.loseBroom()
+        level.player.loseBroom()
         # level.player.grav = 0
         # level.player.vv = 3

@@ -107,7 +107,7 @@ func _ready_impl():
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
       global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.FLOOR, global.GlitchForm.LADDER, global.GlitchForm.INVISIBLE]
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
 
       # debug "hack" to set angel_statues on debug_initialization
       var tempLevelZone = global.currLevelZone
@@ -552,9 +552,9 @@ func normalGlitch():
   uiLayer.normalGlitch()
   if not null_glitch: levelTiles.normalGlitch()
   if fakeLevelTiles and not null_glitch: fakeLevelTiles.normalGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_grey_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_grey_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.grey_palette, "grey_palette")
   current_sprite_palette = levelTiles.grey_palette
   setDoorsSpriteFrame(4)
   
@@ -562,50 +562,50 @@ func normalGlitch():
 func floorGlitch():
   uiLayer.floorGlitch()
   if not null_glitch: levelTiles.floorGlitch()
-  if fakeLevelTiles and not null_glitch: fakeLevelTiles.floorGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_red_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
+  # if fakeLevelTiles and not null_glitch: fakeLevelTiles.floorGlitch()
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_red_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.red_palette, "red_palette")
   current_sprite_palette = levelTiles.red_palette
   setDoorsSpriteFrame(9)
 
 func featherGlitch():
   uiLayer.featherGlitch()
   if not null_glitch: levelTiles.featherGlitch()
-  if fakeLevelTiles and not null_glitch: fakeLevelTiles.featherGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_green_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
+  # if fakeLevelTiles and not null_glitch: fakeLevelTiles.featherGlitch()
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_green_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.green_palette, "green_palette")
   current_sprite_palette = levelTiles.green_palette
   setDoorsSpriteFrame(14)
 
 func ladderGlitch():
   uiLayer.ladderGlitch()
   if not null_glitch: levelTiles.ladderGlitch()
-  if fakeLevelTiles and not null_glitch: fakeLevelTiles.ladderGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_yellow_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
+  # if fakeLevelTiles and not null_glitch: fakeLevelTiles.ladderGlitch()
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_yellow_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.yellow_palette, "yellow_palette")
   current_sprite_palette = levelTiles.yellow_palette
   setDoorsSpriteFrame(19)
 
 func invisibleGlitch():
   uiLayer.invisibleGlitch()
   if not null_glitch: levelTiles.invisibleGlitch()
-  if fakeLevelTiles and not null_glitch: fakeLevelTiles.invisibleGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_black_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
+  # if fakeLevelTiles and not null_glitch: fakeLevelTiles.invisibleGlitch()
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_black_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.black_palette, "black_palette")
   current_sprite_palette = levelTiles.black_palette
   setDoorsSpriteFrame(24)
 
 func walkThroughWallsGlitch():
   uiLayer.walkThroughWallsGlitch()
   if not null_glitch: levelTiles.walkThroughWallsGlitch()
-  if fakeLevelTiles and not null_glitch: fakeLevelTiles.walkThroughWallsGlitch()
-  get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
-  get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_white_palette, "grey_palette")
-  get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
+  # if fakeLevelTiles and not null_glitch: fakeLevelTiles.walkThroughWallsGlitch()
+  # get_tree().call_group("sprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
+  # get_tree().call_group("dark_sprite","changeSpriteColorPalette", global.dark_white_palette, "grey_palette")
+  # get_tree().call_group("glitchSprite","changeSpriteColorPalette", levelTiles.white_palette, "white_palette")
   current_sprite_palette = levelTiles.white_palette
   setDoorsSpriteFrame(29)
 
