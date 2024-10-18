@@ -117,6 +117,8 @@ func _process(delta):
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
+    if vv < 0 and should_die_on_land:
+        die()
     if projectile:
         var has_hit_something = hitStuff(delta)
         if doing_a_final_hit:

@@ -10,12 +10,21 @@ func _ready():
   set_process(true)
 
 func _process(delta):
-  if not hooked:
+  if hooked and hookTarget != null and hookTarget.get_ref() != null:
+    var prey = hookTarget.get_ref()
+    if prey == anglerFish or prey == anglerFish.weakPointContainer:
+      hooked = false
+      hookTarget = null
+
+  if not hooked and isActive():
     var enemies = get_tree().get_nodes_in_group("enemies")
-    for enemy in enemies:
-      if hookInteractionArea.overlaps_area(enemy):
+    for enemyArea in enemies:
+      var enemy = enemyArea.get_node("..")
+      if enemy == anglerFish or enemy == anglerFish.weakPointContainer:
+        continue
+      if hookInteractionArea.overlaps_area(enemyArea):
         hooked = true
-        hookTarget = weakref(enemy.get_node(".."))
+        hookTarget = weakref(enemy)
         return
   else:
     if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
@@ -49,15 +58,13 @@ func moveTargetToHook(delta):
     hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
 
 func isActive(_debug=false):
-  return true and \
-         anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
+  return anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
          anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_LEFT or \
          anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
          anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_MIDDLE
 
 func passiveActivate(_delta, is_player):
   if not hooked and is_player and level.player.canIGetCaught():
-    print("gotcha?")
     level.clearOtherGrabbers()
     hooked = true
     hookTarget = weakref(level.player)

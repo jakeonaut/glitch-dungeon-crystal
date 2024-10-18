@@ -536,13 +536,18 @@ var is_in_broom_cooldown = false
 var has_broom_flown = false
 var has_landed_since_last_flight = false
 func getABroom(unpauseAnimation = true):
-  pauseAnimation = not unpauseAnimation
+  var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
+  for fallenBroom in fallenBroomArray:
+    if fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying:
+      return
+
   if transformation == TransformationState.FISHY or \
      transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
      nesting_doll_state == global.NestingDoll.BABY:
     return
+  pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true
   global.memory["has_gotten_broom"] = 2
   if nesting_doll_state == global.NestingDoll.GRANDMA:

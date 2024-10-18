@@ -1,4 +1,4 @@
-extends Spatial
+extends "../GlitchEnemy.gd"
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
@@ -6,7 +6,6 @@ var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn"
 var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-onready var mySprite = get_node("Sprite3D")
 onready var crystalsContainer = get_node("Crystals")
 onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 
@@ -15,6 +14,7 @@ onready var lureFreeRange = get_node("LureContainer/FreeRange")
 onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
 onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
 onready var reelStopArea = get_node("LureContainer/ReelStopArea")
+onready var weakPointContainer = get_node("WeakPointContainer")
 
 var MAX_NUM_HITS = 3
 
@@ -34,10 +34,11 @@ var boss_phase = BossPhase.IDLE
 
 var original_pos = null
 var target_pos = null
-var bullet_direction_vector = null
+var lure_bullet_direction_vector = null
 var BULLET_SPEED = 15
 var cast_timer = 0
 var cast_time_limit = 30
+var which_facing = -1
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
@@ -49,6 +50,7 @@ func _ready():
     randomizeTargetPos()
 
     crystal1.applyGlitchMaterial(5)
+    behavior_phase_through_walls = true
 
 var num_hits = 0
 func getHurt():
@@ -62,8 +64,10 @@ func _process(delta):
     if global.pauseGame:
         return
 
-    lureFreeRange.global_transform.origin.z = 0
     if boss_phase == BossPhase.IDLE:
+        reenemize()
+        if which_facing == 1:
+            tryFlipLeft("idle")
         if lureAniPlayer.assigned_animation != "spinAttack":
             lureAniPlayer.stop()
             lureAniPlayer.clear_queue()
@@ -83,7 +87,7 @@ func _process(delta):
             lureAniPlayer.clear_queue()
             lureAniPlayer.play("spinAttack")
     elif boss_phase == BossPhase.CAST_LURE:
-        lureFreeRange.global_transform.origin += bullet_direction_vector * delta
+        lureFreeRange.global_transform.origin += lure_bullet_direction_vector * delta
         moveToSpecificPosition(delta, Vector3(6, 6, 0))
         lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
         lureBulletTryDieToSolids()
@@ -134,20 +138,22 @@ func _process(delta):
     elif boss_phase == BossPhase.REEL_IT_IN:
         if lureFreeRange.hooked:
             fishLureSprite.scale = Vector3(1, 1, 1)
-            bullet_direction_vector = Vector3(0, BULLET_SPEED/2, 0)
+            lure_bullet_direction_vector = Vector3(0, BULLET_SPEED/2, 0)
+            if lureFreeRange.hookTarget != null and lureFreeRange.hookTarget.get_ref() == level.player:
+                unenemize()
         else:
             fishLureSprite.scale = Vector3(2, 2, 1)
-            bullet_direction_vector = Vector3(0, BULLET_SPEED, 0)
+            lure_bullet_direction_vector = Vector3(0, BULLET_SPEED, 0)
 
         # var pos = reelStopArea.global_transform.origin
         # var lure_pos = lureFreeRange.global_transform.origin
-        lureFreeRange.global_transform.origin += bullet_direction_vector * delta
+        lureFreeRange.global_transform.origin += lure_bullet_direction_vector * delta
 
         if lureFreeRange.hookInteractionArea.overlaps_area(reelStopArea) or lureFreeRange.global_transform.origin.y > global_transform.origin.y + 2.5:
             boss_phase = BossPhase.EAT_IT
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            bullet_direction_vector = null
+            lure_bullet_direction_vector = null
             if lureFreeRange.get_parent() == level:
                 level.remove_child(lureFreeRange)
                 lureContainer.add_child(lureFreeRange)
@@ -174,7 +180,10 @@ func _process(delta):
                 level.player.vv = 0
                 level.player.linear_velocity.y = 0
                 level.player.lv.y = 0
+                if not prey.pauseInput:
+                    level.player.gravitySound.play()
                 level.player.glitchTickle()
+                prey.pauseInput = true
 
         if secretAniPlayer.assigned_animation == "chompDown" and not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
@@ -182,37 +191,48 @@ func _process(delta):
             secretAniPlayer.play("idle")
             boss_phase = BossPhase.IDLE
     
+    lureFreeRange.global_transform.origin.x = reelStopArea.global_transform.origin.x
     lureFreeRange.global_transform.origin.z = 0
 
-func tryFlipLeft():
+func tryFlipLeft(nextIdle = "openIdle"):
     if secretAniPlayer.assigned_animation != "turnRightToLeft" and secretAniPlayer.assigned_animation != "openIdle":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
+        which_facing = -1
         secretAniPlayer.play("turnRightToLeft")
-        secretAniPlayer.queue("openIdle")
+        secretAniPlayer.queue(nextIdle)
 
 func tryFlipRight():
     if secretAniPlayer.assigned_animation != "turnLeftToRight" and secretAniPlayer.assigned_animation != "openIdle":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("turnLeftToRight")
+        which_facing = 1
         secretAniPlayer.queue("openIdle")
 
 func teleportToPrey():
     if preyTarget != null and preyTarget.get_ref() != null:
         var prey = preyTarget.get_ref()
-        global_transform.origin = prey.global_transform.origin + Vector3(2, -0.361, 0)
+        if which_facing == -1:
+            global_transform.origin = prey.global_transform.origin + Vector3(2, -0.361, 0)
+        else:
+            global_transform.origin = prey.global_transform.origin + Vector3(-2, -0.361, 0)
 
 func gotcha():
     if preyTarget != null and preyTarget.get_ref() != null:
         var prey = preyTarget.get_ref()
         if prey == level.player:
             level.player.tryDieToEnemy(0, true, true, true)
+            yield(get_tree().create_timer(0.1), "timeout")
+            prey.visible = false
+            yield(get_tree().create_timer(0.4), "timeout")
+            prey.visible = true
+            prey.pauseInput = false
         else:
             # i think the only other thing here is a GlitchEnemy?
             prey.ouchies(self.global_transform.origin)
-        yield(get_tree().create_timer(0.1), "timeout")
-        prey.visible = false
+            yield(get_tree().create_timer(0.1), "timeout")
+            prey.queue_free()
     preyTarget = null
 
 func doLureCast():
@@ -229,7 +249,7 @@ func doLureCast():
         lureFreeRange.global_transform.origin = temp_pos
     # var player_pos = level.player.global_transform.origin
     # var lure_pos = lureContainer.global_transform.origin
-    bullet_direction_vector = Vector3(0, -BULLET_SPEED, 0)
+    lure_bullet_direction_vector = Vector3(0, -BULLET_SPEED, 0)
 
 func lureBulletTryDieToSolids():
     if boss_phase != BossPhase.CAST_LURE:
@@ -244,7 +264,7 @@ func lureBulletTryDieToSolids():
     if getLevelTiles().isTileSolid(tile_type_a):
         boss_phase = BossPhase.REEL_IT_IN
 
-    
+
 func moveAbout(delta):
     var step = 1
     global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
@@ -273,19 +293,10 @@ func randomizeTargetPos():
         original_pos.z
     )
 
-onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-var player = null
-func getPlayer():
-    if level == null:
-        level = get_tree().get_root().get_node("Game/Viewport/level")
-    if player == null:
-        player = level.player
-    return player
+# @override
+func tryDieToOffscreenCamera():
+    pass
 
-var levelTiles = null
-func getLevelTiles():
-  if level == null:
-    level = get_tree().get_root().get_node("Game/Viewport/level")
-  if levelTiles == null:
-    levelTiles = level.levelTiles
-  return levelTiles
+# @override
+func handleCollisionsAndMove(_local_lv, _delta):
+    return Vector3(0, 0, 0)

@@ -898,7 +898,7 @@ tracks/3/keys = {
 height = 1.6
 radius = 0.8
 
-[node name="FallenBroom" type="Spatial"]
+[node name="FallenBroom" type="Spatial" groups=["fallen_broom_group"]]
 script = ExtResource( 1 )
 true_terminal_vel = 8
 grav = 30
