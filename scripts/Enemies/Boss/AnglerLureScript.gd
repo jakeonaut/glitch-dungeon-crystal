@@ -51,7 +51,7 @@ func moveTargetToHook(delta):
 
   var fishPos = hookTarget.get_ref().global_transform.origin
   var hookPos = hookInteractionArea.global_transform.origin
-  hookTarget.get_ref().global_transform.origin = global.moveToward2D(fishPos, hookPos, delta * 15)
+  hookTarget.get_ref().global_transform.origin = global.moveToward2D(fishPos, hookPos, delta * 45)
   # hookInteractionArea.global_transform.origin.z = fishPos.z - 1
 
   if hookTarget.get_ref().has_method("ladderUpdateTargetLastGroundedY"):

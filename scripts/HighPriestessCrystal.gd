@@ -13,6 +13,7 @@ func _ready():
 var glitch_shader_timer = 0
 var glitch_shader_time_limit = 1
 var is_glitched = false
+var is_goddess_dream_collectible = false
 func _process(delta):
   # super._process(delta) implicit
 

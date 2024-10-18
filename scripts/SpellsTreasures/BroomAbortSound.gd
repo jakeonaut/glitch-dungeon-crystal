@@ -1,11 +1,11 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var broom = get_node("../../..")
 
 func _ready():
     pass
 
-onready var broom = get_node("../../..")
 func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
@@ -14,6 +14,7 @@ func activateScript():
     aniPlayer.clear_queue()
     aniPlayer.queue("walkStop")
     aniPlayer.queue("stand")
+    broom.visible = false
     level.player.getABroom()
     if level.player.truly_on_ground:
         level.player.can_broomerang_warp = true

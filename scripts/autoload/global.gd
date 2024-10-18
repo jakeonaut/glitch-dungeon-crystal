@@ -264,7 +264,7 @@ func resetMemory():
     memory["spellAssist"] = false
 
     # customization upgrades
-    memory["currPet"] = PetFollower.THREE_CHICKENS
+    memory["currPet"] = PetFollower.NONE
     memory["allMyPets"] = [PetFollower.NONE]
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
