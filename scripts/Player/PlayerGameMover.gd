@@ -259,11 +259,15 @@ func normalGlitch():
   # mySprite.setNormalClothes()
 
 onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
+onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
+onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 func changeSpriteColorPalette(palette):
   if level.spellbook_forbidden:
     return
 
   mySprite.material_override.set_shader_param("target_palette", palette)
+  fishySprite.material_override.set_shader_param("target_palette", palette)
+  chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
 func bodyPushMe(_delta, _origin):
@@ -548,7 +552,8 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
-     nesting_doll_state == global.NestingDoll.BABY:
+     nesting_doll_state == global.NestingDoll.BABY or \
+     glitch_form == global.GlitchForm.INVISIBLE:
     return
   pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true

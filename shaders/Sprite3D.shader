@@ -17,6 +17,7 @@ uniform float shake_block_size = 30.5;
 // è‰²ã®åˆ†é›¢çŽ‡
 uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
 
+uniform bool no_palette_swap = false;
 uniform bool enable_remove_skin_tone = false;
 uniform bool enable_dither = false;
 uniform bool enable_no_transparency = false;
@@ -129,7 +130,9 @@ void fragment() {
     // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
     vec4 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
-    if (index > -1) {
+    if (no_palette_swap) {
+      ALBEDO.rgb = incolor.rgb;
+    } else if (index > -1) {
         ALBEDO.rgb = closest_color.rgb;
     }
     else if (enable_no_transparency) {

@@ -22,8 +22,6 @@ onready var saveSound = get_node("Sounds/SaveSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
 onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
-onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
-onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
@@ -903,7 +901,7 @@ func processFishyLogic(delta):
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
     if Input.is_action_pressed("sub_action_button") and has_fish_broom:
-      if glitch_form == global.GlitchForm.INVIS:
+      if glitch_form == global.GlitchForm.INVISIBLE:
         bubble_timer = bubble_time_limit
         if Input.is_action_just_pressed("sub_action_button"):
           noBroomSound.play()
@@ -1007,6 +1005,7 @@ func getBubbleCured():
 func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
 
+var temp_cleansed_fish_glitch = null
 func getFishyInfected():
   if is_mushroom_infected:
     return
@@ -1023,6 +1022,9 @@ func getFishyInfected():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   on_ground = false
+  if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
+    temp_cleansed_fish_glitch = glitch_form
+    normalGlitch() # FORCE NOT ALLOW SWAPPING
   # if global.memory["zora_flippers"] == 1:
   #   musicPlayer.stopAll()
   #   aniPlayer.play("transformToFishy_first")
@@ -1048,6 +1050,8 @@ func getFishyInfected():
 func getFishyCured():
   if transformation != TransformationState.FISHY:
     return
+  if temp_cleansed_fish_glitch != null:
+    glitch_form = temp_cleansed_fish_glitch # JUST APPLY SPELLBOOKPAUSEINDEX GLITCH
   can_broomerang_warp = true
   transformation = TransformationState.NORMAL
   aniPlayer.stop()

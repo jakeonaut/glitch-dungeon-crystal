@@ -115,7 +115,8 @@ enum PetFollower {
     DRAGONFLY,
     MOLE_CRICKET,
     KIZZY,
-    BABUSHKA_CAT,
+    CAT_BABUSHKA,
+    CAT_JIJI,
     BIG_MOLE_CRICKET,
     FROG,
     GLITCH_SLIME,
@@ -133,6 +134,12 @@ enum GrandmaOutfit {
     CROCHET,
     SCARF_EARMUFFS,
     YOUNG_BABA,
+    YUBABA,
+    WASTE_WITCH,
+    SOPHIE,
+    TOTORO_GRANNY,
+    KIKI,
+    MONONOKE,
 }
 
 enum GrandmaBroom {

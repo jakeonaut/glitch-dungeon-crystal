@@ -314,18 +314,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 0 )
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4 )
+is_cleansing = true
 
 [node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, -4 )
+is_cleansing = true
 
 [node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 7, -4 )
+is_cleansing = true
 
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 14, -4 )
+is_cleansing = true
 
 [node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -3, -4 )
+is_cleansing = true
 
 [node name="PoisonWaterCube4" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 16, 0 )
@@ -334,7 +339,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 16, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 13, 0 )
 
 [node name="PoisonWaterCube6" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

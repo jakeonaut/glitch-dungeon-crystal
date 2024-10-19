@@ -19,6 +19,7 @@ export var water_cube_height = 2.0
 export var turn_poisonous = false
 export var can_splash = true
 export var is_waterfall = false
+export var is_cleansing = false
 var is_poison = false
 var poisonous_timer = 0
 var poisonous_time_limit = 10
