@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -79,6 +79,7 @@
 [ext_resource path="res://assets/sounds/Alien Dead.wav" type="AudioStream" id=77]
 [ext_resource path="res://assets/sounds/eb_menu5.wav" type="AudioStream" id=78]
 [ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=79]
+[ext_resource path="res://assets/sprites2D/player_sheet_old.png" type="Texture" id=80]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -102,6 +103,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -130,6 +132,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 20.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -158,6 +161,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -186,6 +190,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.005
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -214,6 +219,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.005
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = true
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -242,6 +248,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -270,6 +277,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.05
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -298,6 +306,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -326,6 +335,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.05
 shader_param/shake_block_size = 10.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -354,6 +364,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
@@ -382,6 +393,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 15.0
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -858,6 +870,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 20.0
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -6257,6 +6270,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -6285,6 +6299,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -6313,6 +6328,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -6389,7 +6405,7 @@ pixel_size = 0.125
 transparent = false
 double_sided = false
 alpha_cut = 2
-texture = ExtResource( 30 )
+texture = ExtResource( 80 )
 hframes = 8
 vframes = 8
 

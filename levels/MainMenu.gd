@@ -5,6 +5,27 @@ var switch_glitch_time_limit = 15
 var direction = -1
 onready var broomSound = get_node("BroomSound")
 
+var epilepsy_fade_timer = 0
+var EPILEPSY_SHOW_TIME_LIMIT = 120
+var epilepsy_cover_opacity = 1
+enum MainMenuState {
+    SHOWING_EPILEPSY_WARNING,
+    HIDING_EPILEPSY_WARNING,
+    MAIN_MENU,
+    NORMAL_GAMEPLAY,
+}
+var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+onready var epilepsyWarning = get_node("../../UILayer/EpilepsyWarning")
+onready var epilepsyWarningCoverup = get_node("../../UILayer/EpilepsyWarning/Coverup")
+onready var epilepsyWarningSprite = get_node("../../UILayer/EpilepsyWarning/Sprite")
+onready var epilepsyWarningText = get_node("../../UILayer/EpilepsyWarning/Text")
+func tryInitializeFromDebug():
+  if global.memory["initialized_from_debug"]:
+    epilepsyWarning.visible = false
+    mainMenuState = MainMenuState.NORMAL_GAMEPLAY
+  else:
+    mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+
 func setUpRoomInitializationOverride():
     if not global.has_started_game:
         global.isOnMainMenu = true
@@ -13,6 +34,7 @@ func setUpRoomInitializationOverride():
         show_dither_effect = false
         show_crt_effect = true
     else:
+        mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
         mainMenuUi.visible = false
         show_dither_effect = false
@@ -21,7 +43,8 @@ func setUpRoomInitializationOverride():
         var finalText = "*moo* (nice of you to stop by.\ni'm taking care of the\nfarm while you're gone)"
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
-    transition.reverse_fade()
+    if global.pauseGame:
+        transition.reverse_fade()
 
 onready var eventSoundWakeup = get_node("EventSoundWakeup")
 onready var eventSound1 = get_node("EventSound1")
@@ -153,7 +176,33 @@ onready var skipText = get_node("../../UILayer/SkipText")
 export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
-func _process(_delta):
+func _process(delta):
+    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+        if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
+            epilepsy_cover_opacity -= (delta)
+            if epilepsy_cover_opacity < 0:
+                epilepsy_cover_opacity = 0
+                epilepsy_fade_timer += (delta*11)
+                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
+                    Input.is_action_just_pressed("sub_action_button") or \
+                    Input.is_action_just_pressed("jump_button") or \
+                    Input.is_action_just_pressed("ui_start") or \
+                    Input.is_action_just_pressed("popup_menu")
+                ):
+                    mainMenuState = MainMenuState.HIDING_EPILEPSY_WARNING
+                    transition.aniPlayer.stop()
+                    transition.aniPlayer.play("long_fade_no_change")
+        elif mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+            epilepsy_cover_opacity += (delta)
+            if epilepsy_cover_opacity >= 1:
+                epilepsy_cover_opacity = 1
+                transition.reverse_fade()
+                epilepsyWarning.visible = false
+                mainMenuState = MainMenuState.MAIN_MENU
+        epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
+        return
+
+
     if not global.has_started_game:
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size

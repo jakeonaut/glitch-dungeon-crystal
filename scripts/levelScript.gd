@@ -92,6 +92,53 @@ func _ready_impl():
   reindexGrandmaStatueCatalogue(true)
   
   global.memory["tutorial_spellbookPage"] = false
+  tryInitializeFromDebug()
+    
+  if global.memory["has_gotten_broom"] > 0:
+    global.memory["broom"] = true
+  if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
+    global.memory["broom"] = false
+    global.memory["has_gotten_broom"] = 0
+  # elif not doesnt_have_broom:
+  #   global.memory["broom"] = true
+  #   global.memory["has_gotten_broom"] = 2
+
+  displayMessageText("")
+
+  if global.memory.has("player_costume"):
+    player.wearCostume(global.memory["player_costume"])
+
+  tryToRespawn()
+  global.tryInitializeLevelZone(self.getLevelZoneName())
+  if global.memory["currLevelZone"] != global.currLevelZone:
+    uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
+  tryShowUIElements()
+  trySpawnFollowers()
+  restartMusic()
+  setUpRoomInitializationOverride()
+  if global.hasGottenLevelGeode or is_randomizing:
+    levelTiles.randomize_num += 10
+    levelTiles.randomize_num_counter = 15
+
+  global.activeThrowableObject = null
+  if global.activeThrowableObjectPath != null:
+    # resource is loaded at compile time
+    var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
+    add_child(carriedThrowableObject)
+    carriedThrowableObject.activate(true)
+    carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
+  else:
+    pass
+  global.activeThrowableObjectPath = null
+  player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
+  player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  if player_message != "???":
+    player.sayThis(player_message)
+  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+    flipGravity()
+  has_room_initialized = true
+
+func tryInitializeFromDebug():
   if global.memory["initialized_from_debug"]:
     pass
   else:
@@ -137,50 +184,6 @@ func _ready_impl():
         ["elder village", "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"])
       # reset levelZone
       global.currLevelZone = tempLevelZone
-    
-  if global.memory["has_gotten_broom"] > 0:
-    global.memory["broom"] = true
-  if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
-    global.memory["broom"] = false
-    global.memory["has_gotten_broom"] = 0
-  # elif not doesnt_have_broom:
-  #   global.memory["broom"] = true
-  #   global.memory["has_gotten_broom"] = 2
-
-  displayMessageText("")
-
-  if global.memory.has("player_costume"):
-    player.wearCostume(global.memory["player_costume"])
-
-  tryToRespawn()
-  global.tryInitializeLevelZone(self.getLevelZoneName())
-  if global.memory["currLevelZone"] != global.currLevelZone:
-    uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
-  tryShowUIElements()
-  trySpawnFollowers()
-  restartMusic()
-  setUpRoomInitializationOverride()
-  if global.hasGottenLevelGeode or is_randomizing:
-    levelTiles.randomize_num += 10
-    levelTiles.randomize_num_counter = 15
-
-  global.activeThrowableObject = null
-  if global.activeThrowableObjectPath != null:
-    # resource is loaded at compile time
-    var carriedThrowableObject = load(global.activeThrowableObjectPath).instance() 
-    add_child(carriedThrowableObject)
-    carriedThrowableObject.activate(true)
-    carriedThrowableObject.spawn_origin = carriedThrowableObject.global_transform.origin
-  else:
-    pass
-  global.activeThrowableObjectPath = null
-  player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
-  player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
-  if player_message != "???":
-    player.sayThis(player_message)
-  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    flipGravity()
-  has_room_initialized = true
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
