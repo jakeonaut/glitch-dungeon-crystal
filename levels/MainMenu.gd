@@ -25,6 +25,7 @@ func tryInitializeFromDebug():
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY
   else:
     mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+    epilepsyWarning.visible = true
 
 func setUpRoomInitializationOverride():
     if not global.has_started_game:

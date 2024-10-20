@@ -15,6 +15,7 @@ onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
 onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
 onready var reelStopArea = get_node("LureContainer/ReelStopArea")
 onready var weakPointContainer = get_node("WeakPointContainer")
+onready var weakPointAniPlayer = get_node("WeakPointAnimationPlayer")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -186,12 +187,18 @@ func _process(delta):
                 lureFreeRange.hookTarget = null
                 if preyTarget.get_ref() == level.player:
                     secretAniPlayer.play("chompDown")
+                    weakPointAniPlayer.stop()
+                    weakPointAniPlayer.clear_queue()
+                    weakPointAniPlayer.play("chompDown")
                 else:
                     secretAniPlayer.play("chompDownQuick")
                     preyTarget.get_ref().grav = 0
                     preyTarget.get_ref().behavior_walking = false
             else:
                 secretAniPlayer.play("idle")
+                weakPointAniPlayer.stop()
+                weakPointAniPlayer.clear_queue()
+                weakPointAniPlayer.play("idle")
                 boss_phase = BossPhase.IDLE
                 cast_timer = 0
     elif boss_phase == BossPhase.EAT_IT:
@@ -215,6 +222,9 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
             boss_phase = BossPhase.IDLE
             cast_timer = 0
             lureFreeRange.visible = true
@@ -229,9 +239,14 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("stunIdle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("stunIdle")
             weakPointContainer.vulnerable = true
             stun_timer = 0
     elif boss_phase == BossPhase.STUN_IDLE:
+        if not is_weakpoint_attached:
+            moveAbout(delta, true) # move the baby
         stun_timer += (delta * 11)
         if stun_timer >= stun_time_limit:
             stun_timer = 0
@@ -240,11 +255,17 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
         if weakPointContainer.is_smacked:
             boss_phase = BossPhase.HURT
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("ouchies")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("ouchies")
             num_hits += 1
             if num_hits >= MAX_NUM_HITS:
                 boss_phase = BossPhase.DEFEATED
@@ -260,6 +281,9 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.DEFEATED:
         moveToSpecificPosition(delta, Vector3(6, 6, 0))
         if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
@@ -284,6 +308,11 @@ func tryFlipLeft(nextIdle = "openIdle"):
         which_facing = -1
         secretAniPlayer.play("turnRightToLeft")
         secretAniPlayer.queue(nextIdle)
+        weakPointAniPlayer.stop()
+        weakPointAniPlayer.clear_queue()
+        weakPointAniPlayer.play("turnRightToLeft")
+        if nextIdle == "idle":
+            weakPointAniPlayer.queue(nextIdle)
 
 func tryFlipRight():
     if secretAniPlayer.assigned_animation != "turnLeftToRight" and secretAniPlayer.assigned_animation != "openIdle":
@@ -319,6 +348,8 @@ func gotcha():
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("stunFall")
+            tryToStartWeakPointDetachment()
+            
             # i think the only other thing here is a GlitchEnemy?
             prey.ouchies(self.global_transform.origin)
             yield(get_tree().create_timer(0.1), "timeout")
@@ -349,8 +380,15 @@ func lureBulletTryDieToSolids():
         boss_phase = BossPhase.REEL_IT_IN
 
 
-func moveAbout(delta):
+func moveAbout(delta, moveTheBaby = false):
     var step = 1
+    if moveTheBaby:
+        weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (target_pos - weakPointContainer.global_transform.origin) * (delta*step)
+    
+        if stepify(target_pos.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
+           stepify(target_pos.y, 0.1) == stepify(weakPointContainer.global_transform.origin.y, 0.1):
+            randomizeTargetPos()
+        return
     global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
     
     if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
@@ -363,7 +401,13 @@ func moveAbout(delta):
         crystal_target_pos_x = 1
     crystalsContainer.translation.x = crystalsContainer.translation.x + (crystal_target_pos_x - crystalsContainer.translation.x) * (delta*step)
 
-func moveToSpecificPosition(delta, position, step = 1):
+func moveToSpecificPosition(delta, position, step = 1, moveTheBaby = false):
+    if moveTheBaby:
+        weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (position - weakPointContainer.global_transform.origin) * (delta*step)
+        if stepify(position.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
+        stepify(position.y, 0.1) == stepify(weakPointContainer.global_transform.origin.y, 0.1):
+            return true
+        return false
     global_transform.origin = global_transform.origin + (position - global_transform.origin) * (delta*step)
     if stepify(position.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
        stepify(position.y, 0.1) == stepify(global_transform.origin.y, 0.1):
@@ -392,7 +436,27 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("stunFall")
+        tryToStartWeakPointDetachment()
     time_influence = 35
     y_div = 5
     normal_offset = 0.5
     return .getSmacked(broom_origin, silently)
+
+
+var is_weakpoint_attached = true
+func tryToStartWeakPointDetachment():
+    if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
+        weakPointAniPlayer.stop()
+        weakPointAniPlayer.clear_queue()
+        weakPointAniPlayer.play("detachSelf")
+        weakPointAniPlayer.queue("swim")
+
+func detachWeakPoint():
+    if weakPointContainer.get_parent() != self:
+        return
+    var tempPos = weakPointContainer.global_transform.origin
+    self.remove_child(weakPointContainer)
+    level.summonSmokeClouds(tempPos, 1)
+    level.add_child(weakPointContainer)
+    is_weakpoint_attached = false
+    weakPointContainer.global_transform.origin = tempPos
