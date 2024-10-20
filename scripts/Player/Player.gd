@@ -90,9 +90,13 @@ func alignMySprite():
     spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
 
 func tryPlayFootstepSound():
+  if transformation == TransformationState.MOLE_DIGGING:
+    return
   if transformation == TransformationState.UNDERGROUND:
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
+    return
+  if transformation == TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.FISHY:
     return
@@ -177,8 +181,9 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
+  var gimmeABroom = false
   if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
-    getABroom()
+    gimmeABroom = true
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -189,6 +194,8 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
+  if gimmeABroom:
+    getABroom()
   return true
 
 func floorGlitch():
@@ -900,34 +907,34 @@ func processFishyLogic(delta):
       getFishyCured()
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
-    if Input.is_action_pressed("sub_action_button") and has_fish_broom:
-      if glitch_form == global.GlitchForm.INVISIBLE:
-        bubble_timer = bubble_time_limit
-        if Input.is_action_just_pressed("sub_action_button"):
-          noBroomSound.play()
-      else:
-        bubble_timer += (delta*11)
-        if bubble_timer >= bubble_time_limit:
-          var bubble = bubbleRes.instance()
-          bubble.is_horizontal = true
-          bubble.horizontal_direction = 2
-          bubble.can_purify = true
-          if mySprite.flip_h:
-            bubble.horizontal_direction = -2
-          bubble.is_dark = true
-          level.add_child(bubble)
-          # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-          bubble.setAsParent(self)
-          bubble.global_transform.origin = global_transform.origin
-          bubble.global_transform.origin.x += bubble.horizontal_direction
-          bubble.my_original_pos = bubble.global_transform.origin.y
-          bubble.randomizeTargetPos()
+    # if Input.is_action_pressed("sub_action_button") and has_fish_broom:
+    #   if glitch_form == global.GlitchForm.INVISIBLE:
+    #     bubble_timer = bubble_time_limit
+    #     if Input.is_action_just_pressed("sub_action_button"):
+    #       noBroomSound.play()
+    #   else:
+    #     bubble_timer += (delta*11)
+    #     if bubble_timer >= bubble_time_limit:
+    #       var bubble = bubbleRes.instance()
+    #       bubble.is_horizontal = true
+    #       bubble.horizontal_direction = 2
+    #       bubble.can_purify = true
+    #       if mySprite.flip_h:
+    #         bubble.horizontal_direction = -2
+    #       bubble.is_dark = true
+    #       level.add_child(bubble)
+    #       # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+    #       bubble.setAsParent(self)
+    #       bubble.global_transform.origin = global_transform.origin
+    #       bubble.global_transform.origin.x += bubble.horizontal_direction
+    #       bubble.my_original_pos = bubble.global_transform.origin.y
+    #       bubble.randomizeTargetPos()
 
-          blinkSound.pitch_scale = rand_range(0.8, 1.2)
-          blinkSound.play()
-          bubble_timer = 0
-    else:
-      bubble_timer = bubble_time_limit
+    #       blinkSound.pitch_scale = rand_range(0.8, 1.2)
+    #       blinkSound.play()
+    #       bubble_timer = 0
+    # else:
+    #   bubble_timer = bubble_time_limit
   elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
     # aniPlayer.stop()
     # aniPlayer.clear_queue()
@@ -1010,10 +1017,10 @@ func getFishyInfected():
   if is_mushroom_infected:
     return
   tryClearFallthroughCollisionSolid()
-  if summonedBroom:
-    broomStop()
-    summonFallenBroom(true, false, false)
-  global.memory["broom"] = false
+  # if summonedBroom:
+  #   broomStop()
+  #   summonFallenBroom(true, false, false)
+  # global.memory["broom"] = false
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   if transformation == TransformationState.BUBBLE:
@@ -1240,7 +1247,9 @@ var dig_below_timer = 0
 var dig_below_time_limit = 5
 var can_dig_up = false
 func processMoleLogic(delta):
-  if transformation == TransformationState.UNDERGROUND:
+  if transformation == TransformationState.MOLE_DIGGING:
+    pass
+  elif transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
     if not pressingDown():
       transformation = TransformationState.UNDERGROUND_RETURNING
@@ -1364,12 +1373,17 @@ func collideWithCeiling(local_lv):
   on_ceiling = true
   if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"]:
     local_lv.y = 0
+    getMoleCured()
     return local_lv
   local_lv.y = 0
   if dig_timer <= 0 or (not pressingMoveLeft() and not pressingMoveRight()):
     dig_timer += (secret_delta*11)
   # mySprite.flip_h = not mySprite.flip_h
-  glitchTickle()
+  transformation = TransformationState.MOLE_DIGGING
+  # fix this
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("transformToMole")
   if dig_timer > dig_time_limit:
     can_dig_up = false
     tryClearFallthroughCollisionSolid()
@@ -1590,7 +1604,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 func actuallyProcessDeath(should_glitch):
   if transformation == TransformationState.FISHY:
     getFishyCured()
-  if transformation == TransformationState.UNDERGROUND:
+  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING:
     getMoleCured()
   if transformation == TransformationState.CHICKEN:
     getChickenCured()
@@ -1678,8 +1692,8 @@ var force_a_sweep = false
 func processBroomLogic(delta):
   if pauseInput and summonedBroom == null:
     return
-  if transformation == TransformationState.FISHY:
-    return
+  # if transformation == TransformationState.FISHY:
+  #   return
   if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":
     return
   if interactionArea.has_activated_something and not force_a_sweep:
@@ -1695,7 +1709,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.CHICKEN:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.CHICKEN:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
@@ -1721,7 +1735,7 @@ func processBroomLogic(delta):
 
   if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     doBroomAttack(which_broom_attack)
-    if linear_velocity.y < 0:
+    if linear_velocity.y < 0 and transformation != TransformationState.FISHY:
       linear_velocity.y = 0
   elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
     if can_throw_broom:
@@ -1752,37 +1766,38 @@ func processBroomLogic(delta):
 
 var SOFT_SAND_TOP_TILE = 275
 func doBroomAttack(which_broom_attack):
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
   # TODO(jaketrower): has just turned around
   # if Input.is_action_pressed("ui_down") and isKindOfOnGround():
   #   aniPlayer.play("sweepFloor")
   #   which_broom_attack = 0
   #   summonSporeShroom()
   var is_turn_around_attack = false # (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
-  if force_a_sweep:
-    aniPlayer.play("broomSmack")
-  elif is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
+  if not force_a_sweep and is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
     mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
-    aniPlayer.play("broomSmack2")
     which_broom_attack = 2
-  else:
-    aniPlayer.play("broomSmack")
-  pauseAnimation = true
+
+  if transformation != TransformationState.FISHY:
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    pauseAnimation = true
+    if which_broom_attack == 1:
+      aniPlayer.play("broomSmack")
+    else:
+      aniPlayer.play("broomSmack2")
 
   is_in_broom_cooldown = false
   broom_cooldown_timer = 0
   # elif glitch_form == global.GlitchForm.FEATHER:
   #   broom_cooldown_timer = -broom_cooldown_time_limit * 1.5
   # velocity_dampener = 2.0
-  if on_ground:
+  if on_ground and transformation != TransformationState.FISHY:
     walk_speed = 0
     feather_glitch_walk_speed = 0
     invisible_glitch_walk_speed = 0
   global.incrementLevelZoneSweeps()
   jump_press_timer = jump_press_broom_time_limit
   if which_broom_attack > 0:
-    pauseInput = true
+    pauseInput = transformation != TransformationState.FISHY
     summonedBroom = summonedBroomRes.instance()
     level.add_child(summonedBroom)
     if which_broom_attack == 2:

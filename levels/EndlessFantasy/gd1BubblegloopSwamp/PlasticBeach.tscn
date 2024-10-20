@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -44,6 +44,8 @@
 [ext_resource path="res://sceneObjects/Enemies/BigShroomEnemy.tscn" type="PackedScene" id=42]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=43]
 [ext_resource path="res://sceneObjects/WaterCubes/CleansingWaterCube.tscn" type="PackedScene" id=44]
+[ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=45]
+[ext_resource path="res://assets/palettes/base_palette_pink.png" type="Texture" id=46]
 
 [sub_resource type="BoxShape" id=47]
 resource_local_to_scene = true
@@ -873,6 +875,64 @@ length = 0.001
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=78]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.03
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 45 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 46 )
+
+[sub_resource type="ShaderMaterial" id=79]
+shader = ExtResource( 24 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.03
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 45 )
+shader_param/base_palette = ExtResource( 28 )
+shader_param/target_palette = ExtResource( 46 )
+
 [sub_resource type="BoxShape" id=62]
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
@@ -1040,16 +1100,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9, 0, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.60782, -1, 0 )
@@ -1629,6 +1679,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.95558, 6.44996, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0 )
 mushroom_walk_direction = -1
 
+[node name="Sprite3D" parent="Viewport/level/PoisonWaterCube" index="0"]
+material_override = SubResource( 78 )
+
+[node name="PoisonWaterCube5" parent="Viewport/level" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57, -5, 0 )
+mushroom_walk_direction = -1
+
+[node name="Sprite3D" parent="Viewport/level/PoisonWaterCube5" index="0"]
+material_override = SubResource( 79 )
+
+[node name="PoisonWaterCube4" parent="Viewport/level" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 5, 0 )
+mushroom_walk_direction = -1
+
 [node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
 
@@ -1749,6 +1813,8 @@ __meta__ = {
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/NPC3"]
 [editable path="Viewport/level/NPC3/NPC TextBox"]
+[editable path="Viewport/level/PoisonWaterCube"]
+[editable path="Viewport/level/PoisonWaterCube5"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]
 [editable path="Viewport/level/NPC5"]

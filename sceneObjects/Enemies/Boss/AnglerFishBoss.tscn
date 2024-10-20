@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://assets/sounds/sfx_sounds_interaction18.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=26]
 [ext_resource path="res://assets/palettes/custodian-8-1x.png" type="Texture" id=27]
+[ext_resource path="res://assets/sounds/eb_swoosh3.wav" type="AudioStream" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -2488,6 +2489,11 @@ shape = SubResource( 24 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
 stream = ExtResource( 24 )
+volume_db = -2.0
+pitch_scale = 0.9
+
+[node name="MissSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 28 )
 volume_db = -2.0
 pitch_scale = 0.9
 

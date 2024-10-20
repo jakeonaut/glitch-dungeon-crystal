@@ -32,7 +32,6 @@ enum BossPhase {
     STUN_FALL,
     STUN_IDLE,
     HURT,
-    COUNTER_ATTACK,
     DEFEATED,
 }
 var claw_machine_cycle = 0
@@ -258,23 +257,6 @@ func _process(delta):
             weakPointAniPlayer.stop()
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
-        if weakPointContainer.is_smacked:
-            boss_phase = BossPhase.HURT
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("ouchies")
-            weakPointAniPlayer.stop()
-            weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("ouchies")
-            num_hits += 1
-            if num_hits >= MAX_NUM_HITS:
-                boss_phase = BossPhase.DEFEATED
-                secretAniPlayer.queue("defeated")
-                var temp_pos = crystal1.global_transform.origin
-                crystalsContainer.remove_child(crystal1)
-                level.add_child(crystal1)
-                crystal1.global_transform.origin = temp_pos
-                crystal1.is_goddess_dream_collectible = true
     elif boss_phase == BossPhase.HURT:
         if not secretAniPlayer.is_playing():
             boss_phase = BossPhase.IDLE
@@ -425,7 +407,7 @@ func randomizeTargetPos():
 func tryDieToOffscreenCamera():
     pass
 
-var bubbleHP = 5
+var bubbleHP = 10 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     bubbleHP -= 1

@@ -4,6 +4,7 @@ enum TransformationState {
   NORMAL,
   FISHY,
   MUSHROOM,
+  MOLE_DIGGING,
   UNDERGROUND,
   UNDERGROUND_RETURNING,
   UNDERGROUND_HORIZONTAL,
@@ -548,12 +549,13 @@ func getABroom(unpauseAnimation = true):
     if fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return:
       return
 
-  if transformation == TransformationState.FISHY or \
+  #transformation == TransformationState.FISHY or \
+  if glitch_form == global.GlitchForm.INVISIBLE or \
      transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
+     transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
-     nesting_doll_state == global.NestingDoll.BABY or \
-     glitch_form == global.GlitchForm.INVISIBLE:
+     nesting_doll_state == global.NestingDoll.BABY:
     return
   pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true
@@ -577,21 +579,22 @@ func broomStop():
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
-  if has_sweeped_glitch and global.memory["broom_double_jump"]:
-    was_just_on_ground_timer = -8
-  if linear_velocity.y < 0:
-    linear_velocity.y = 0
-  if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:
-    jump_press_timer = 0
-    if (has_sweeped_glitch and global.memory["broom_double_jump"]) or should_magic_jump:
-      linear_velocity.y = -0.01
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
+  if transformation != TransformationState.FISHY:
+    if has_sweeped_glitch and global.memory["broom_double_jump"]:
+      was_just_on_ground_timer = -8
+    if linear_velocity.y < 0:
+      linear_velocity.y = 0
+    if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:
+      jump_press_timer = 0
+      if (has_sweeped_glitch and global.memory["broom_double_jump"]) or should_magic_jump:
+        linear_velocity.y = -0.01
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    if on_ground:
+      aniPlayer.queue("stand")
+    else:
+      aniPlayer.queue("fall")
   smacked_npc = null
-  if on_ground:
-    aniPlayer.queue("stand")
-  else:
-    aniPlayer.queue("fall")
   if not isHoldingMultiBroom():
     broomSpriteVisible.visible = true
 
@@ -679,7 +682,7 @@ func mushroomClone(trigger_another = true):
 func addJumpSmokeCloud(flip_flip_h = false):
   if transformation == TransformationState.FISHY:
     return
-  if transformation == TransformationState.UNDERGROUND:
+  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
     return
