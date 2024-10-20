@@ -135,7 +135,7 @@ func _process(delta):
     behavior_walking = false
     grav = 0
     vv = 0
-    hv = 0
+    hv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
     lv = Vector3(0, 0, 0)
     linear_velocity = Vector3(0, 0, 0)

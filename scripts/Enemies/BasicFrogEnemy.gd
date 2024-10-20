@@ -187,8 +187,12 @@ func spitOut():
   level.player.global_transform.origin.y += SPIT_OFFSET.y
   if mySprite.flip_h: # left
     level.player.global_transform.origin.x -= SPIT_OFFSET.x
+    if is_bubble_spitter and level.player.pressingMoveLeft():
+      level.player.global_transform.origin.x -= SPIT_OFFSET.x * 2
   else: # right
     level.player.global_transform.origin.x += SPIT_OFFSET.x
+    if is_bubble_spitter and level.player.pressingMoveRight():
+      level.player.global_transform.origin.x += SPIT_OFFSET.x * 2
 
   notDieSound.play()
   gulpin = false

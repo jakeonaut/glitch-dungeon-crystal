@@ -367,13 +367,13 @@ func _process(delta):
     linear_velocity = Vector3(0, 0, 0)
     lv = linear_velocity
     vv = 0
-    hv = 0
+    hv = Vector3(0, 0, 0)
 
   if returning_to_save_point == 1:
     linear_velocity = Vector3(0, 0, 0)
     lv = linear_velocity
     vv = 0
-    hv = 0
+    hv = Vector3(0, 0, 0)
     fall_timer = 0
     global_transform.origin = moveToward2D(global_transform.origin, last_grounded_pos, delta * 22)
     if compare2D(global_transform.origin, last_grounded_pos):
@@ -604,7 +604,7 @@ func tryDieToOffscreenCamera(delta):
     repositioned_player.x = getGameCamera().leftmost_x - ADJUSTMENT_MARGIN
   DEATH_MARGIN = 1
   ADJUSTMENT_MARGIN = 1
-  var next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + Vector3(0, 1, 0)) if curr_coords != null else null
+  var next_room = transition.mapManager.getRelativeRoomPath(curr_coords, Vector3(0, 1, 0)) if curr_coords != null else null
   if next_room != null:
     DEATH_MARGIN = 0
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
@@ -612,6 +612,9 @@ func tryDieToOffscreenCamera(delta):
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
     if transformation == TransformationState.BUBBLE:
       getBubbleCured()
+  if global_transform.origin.y > getGameCamera().topmost_y and DEATH_MARGIN == 1:
+    glitchTilesAroundMe(-2.5) # just show the player where they are...
+
   DEATH_MARGIN = 1
   # only relocate back to safety if off bottom screen
   if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
@@ -637,7 +640,7 @@ func tryDieToOffscreenCamera(delta):
       global.memory.erase("player_y_offset")
       global.memory.erase("prevYDiff")
 
-    next_room = transition.mapManager.getRoomPathAtCoords(curr_coords + global.roomEdgeVector) if curr_coords != null else null
+    next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
     if next_room != null and not level.pacman_wrapping:
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
@@ -884,13 +887,23 @@ func loseBroom():
     summonFallenBroom(false, true, false)
     mySprite.flip_h = not mySprite.flip_h
 
+func spriteBackToNormal():
+  mySprite.visible = true
+  mySprite.material_override.set_shader_param("enable_glitch", false)
+  mySprite.material_override.set_shader_param("shake_power", 0.01)
+  mySprite.material_override.set_shader_param("enable_remove_skin_tone", false)
+  pauseAnimation = false
+  fishySprite.visible = false
+  moleSprite.visible = false
+  chickenSprite.visible = false
+
 var fish_broom_timer = 0
 var fish_broom_time_limit = 2
 var has_fish_broom = true
 var bubble_timer = 0
 var bubble_time_limit = 2
 onready var fishFormSound = get_node("Sounds/FishFormSound")
-func processFishyLogic(delta):
+func processFishyLogic(_delta):
   if not global.memory["zora_flippers"]:
     return
 
@@ -940,8 +953,7 @@ func processFishyLogic(delta):
     # aniPlayer.clear_queue()
     # aniPlayer.play("revertFromFishy")
     # aniPlayer.queue("land")
-    fishySprite.visible = false
-    mySprite.visible = true
+    spriteBackToNormal()
 
 
   # weird recovery
@@ -1041,8 +1053,8 @@ func getFishyInfected():
   #   lv.y = 0
   #   linear_velocity.x = 0
   #   linear_velocity.y = 0
-  #   hv = 0
   #   vv = 0
+  #   hv = Vector3(0, 0, 0)
   #   pauseInput = true
   # else:
   #   aniPlayer.play("transformToFishy")
@@ -1068,6 +1080,10 @@ func getFishyCured():
   pauseAnimation = true
   if glitch_form == global.GlitchForm.FLOOR and not pressingDown():
     on_ground = true
+  was_just_on_ground_timer = 0
+  jump_squat_jump_input_timer = 0
+  feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else 0
+  jump_press_timer = jump_press_time_limit
   # pauseInput = true
   physics_vars.should_apply_gravity = true
   should_collide_floor = true
@@ -1089,8 +1105,7 @@ func processChickenLogic(delta):
       getChickenCured()
       gravitySound.play()
   elif chickenSprite.visible and not aniPlayer.assigned_animation == "revertFromChicken":
-    chickenSprite.visible = false
-    mySprite.visible = true
+    spriteBackToNormal()
 
 func getChickenInfected():
   if is_mushroom_infected:
@@ -1242,13 +1257,26 @@ func checkSolidTilesOnMe():
 
 onready var digSound2 = get_node("Sounds/DigSound2")
 var dig_timer = 0
-var dig_time_limit = 4
+var dig_time_limit = 8
 var dig_below_timer = 0
 var dig_below_time_limit = 5
 var can_dig_up = false
+var dig_smoke_timer = 0
+var dig_smoke_time_limit = 3
 func processMoleLogic(delta):
   if transformation == TransformationState.MOLE_DIGGING:
-    pass
+    dig_smoke_timer += (delta*11)
+    if dig_smoke_timer >= dig_smoke_time_limit:
+      dig_smoke_timer = 0
+      summonSmokeClouds(1)
+    moleSprite.flip_h = mySprite.flip_h
+    if not on_ceiling and was_on_ceiling:
+      getMoleCured()
+      was_just_on_ground_timer = 0
+      jump_squat_jump_input_timer = 0
+      feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else 0
+      jump_press_timer = jump_press_time_limit
+      on_ground = true
   elif transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
     if not pressingDown():
@@ -1314,7 +1342,7 @@ func processMoleLogic(delta):
     #   digSound.play()
     # else:
     if checkSolidTilesOnMe():
-      global_transform.origin.y += (4 * delta*11)
+      global_transform.origin.y += (2 * delta*11)
     else:
       should_magic_jump = true
       self.vv = 5
@@ -1328,8 +1356,22 @@ func processMoleLogic(delta):
       self.should_do_fallthrough_area_collision = false
       getMoleCured()
   else:
+    dig_smoke_timer = 0
+    if on_ceiling and not was_on_ceiling and pressingJump() and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING:
+      transformation = TransformationState.MOLE_DIGGING
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("transformToMole")
+      pauseAnimation = true
+      if summonedBroom:
+        broomStop()
+        summonFallenBroom(true, false, false)
+      global.memory["broom"] = false
     if not pressingJump() and on_ground:
       can_dig_up = true
+    if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
+      spriteBackToNormal()
+      getABroom()
     # var solid_tiles = getTilesBelow(getLevelTiles())
     # var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
     # if global.memory["mole_cricket"] and is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
@@ -1378,24 +1420,15 @@ func collideWithCeiling(local_lv):
   local_lv.y = 0
   if dig_timer <= 0 or (not pressingMoveLeft() and not pressingMoveRight()):
     dig_timer += (secret_delta*11)
+    
+    # on_ground = true
   # mySprite.flip_h = not mySprite.flip_h
-  transformation = TransformationState.MOLE_DIGGING
-  # fix this
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("transformToMole")
   if dig_timer > dig_time_limit:
     can_dig_up = false
     tryClearFallthroughCollisionSolid()
     transformation = TransformationState.UNDERGROUND_RETURNING
+    moleSprite.visible = false
     summonSmokeClouds(3, true, true, 0)
-    mySprite.visible = false
-    if summonedBroom:
-      broomStop()
-      summonFallenBroom(false, true, false)
-    else:
-      summonFallenBroom(true, false, false)
-    global.memory["broom"] = false
     global_transform.origin.y += 2
     digSound.play()
     physics_vars.should_apply_gravity = false
@@ -1405,24 +1438,35 @@ func collideWithCeiling(local_lv):
   return local_lv
 
 func getMoleCured():
-  if transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
+  if transformation != TransformationState.UNDERGROUND and \
+     transformation != TransformationState.UNDERGROUND_RETURNING and \
+     transformation != TransformationState.MOLE_DIGGING:
     return
-  override_camera_y = null
-  transformation = TransformationState.NORMAL
-  global_transform.origin.y -= 2
-  summonSmokeClouds(3, true, true, 0)
-  digSound2.play()
-  global_transform.origin.y += 2
-  mySprite.visible = true
-  can_update_last_grounded_pos = true
-  physics_vars.should_apply_gravity = true
+  if transformation == TransformationState.UNDERGROUND_RETURNING:
+    override_camera_y = null
+    global_transform.origin.y -= 2
+    summonSmokeClouds(3, true, true, 0)
+    digSound2.play()
+    global_transform.origin.y += 2
+    mySprite.visible = true
+    pauseAnimation = false
+    can_update_last_grounded_pos = true
+    physics_vars.should_apply_gravity = true
+    was_just_on_ground_timer = 0
+    jump_squat_jump_input_timer = 0
+    feather_jump_timer = 0
+    jump_press_timer = jump_press_time_limit
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true
   dig_timer = 0
   dig_below_timer = 0
-  glitchTickle()
-  getABroom()
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("revertFromMole")
+  transformation = TransformationState.NORMAL
+  getABroom() # HAS TO BE AFTER SETTING THE TRANSFORMATION STATE
+  
 
 
 var is_mushroom_prefected = false
@@ -1845,7 +1889,7 @@ var spore_spawn_time_limit = 15
 onready var inventorySound = get_node("Sounds/InventorySound")
 onready var pauseSound = get_node("Sounds/PauseSound")
 onready var unpauseSound = get_node("Sounds/UnpauseSound")
-func processMushroomLogic(delta):
+func processMushroomLogic(_delta):
   if is_mushroom_infected:
     glitchTickle()
   # mushroomSpriteVisible.visible = is_mushroom_infected
@@ -1982,7 +2026,7 @@ func processBagRenderLogic(_delta):
     enchantedBagSpriteVisible.visible = false
 
 
-func processPoisonWaterLogic(delta):
+func processPoisonWaterLogic(_delta):
   pass
 #  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
 

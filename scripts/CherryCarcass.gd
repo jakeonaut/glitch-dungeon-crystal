@@ -113,7 +113,7 @@ func _process(delta):
         linear_velocity = Vector3(0, 0, 0)
         lv = linear_velocity
         vv = 0
-        hv = 0
+        hv = Vector3(0, 0, 0)
         fall_timer = 0
         global_transform.origin = moveToward2D(global_transform.origin, last_grounded_pos, delta * 22)
         if compare2D(global_transform.origin, last_grounded_pos):

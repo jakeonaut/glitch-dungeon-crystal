@@ -259,7 +259,7 @@ func calculateXYMinMax():
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
 func isActive(_debug=false):
-  return (visible or is_passive)
+  return (visible or is_passive) and (getPlayer().on_ground or (getPlayer().isWalkingIntoWall() and getPlayer().on_ceiling))
 
 func generateId():
   return get_name()
@@ -268,7 +268,7 @@ func activate(is_player):
   if not is_player:
     return false
     
-  if not is_passive and getPlayer().truly_on_ground:
+  if not is_passive:
     if not is_locked:
       goThroughDoor()
     elif is_locked:
@@ -368,7 +368,7 @@ func startDoorUnlock():
     getPlayer().pauseSelf = true
     setGlobalMemoryOfHasUnlocked()
     is_unlocking = true
-    getPlayer().hv = 0
+    getPlayer().hv = Vector3(0, 0, 0)
     getPlayer().linear_velocity.x = 0
     getPlayer().lv.x = 0
     getPlayer().dir = Vector3(0, 0, 0)

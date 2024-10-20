@@ -2,6 +2,10 @@ extends Sprite3D
 
 # String is a path to a file.
 export(String, FILE) var path
+export var can_nav_left = true
+export var can_nav_right = true
+export var can_nav_up = true
+export var can_nav_down = true
 
 
 # Declare member variables here. Examples:

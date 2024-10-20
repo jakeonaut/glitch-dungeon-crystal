@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
+[ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sprites/Tadpole_smaller.png" type="Texture" id=8]
+[ext_resource path="res://scripts/KeyFollower.gd" type="Script" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 4
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.11
+shader_param/time_influence = 1.0
+shader_param/y_div = 7.4
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[node name="AngelEggFollower" type="Spatial" groups=["keys"]]
+script = ExtResource( 9 )
+only_activate_in_range = false
+is_static_in_level = false
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+material_override = SubResource( 1 )
+pixel_size = 0.14
+texture = ExtResource( 8 )
+hframes = 7
+frame = 4
+script = ExtResource( 4 )
+frame_delay = 1.0
+max_frames = 1
+should_animate = false
+automatically_change_color = false
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 7 )
+volume_db = -30.0
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -50.0
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+pitch_scale = 0.5

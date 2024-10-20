@@ -42,6 +42,12 @@ func getCoords(of_path):
   return null
 
 func getRoomPathAtCoords(coords):
+  var room = getRoomAtCoords(coords)
+  if room != null:
+    return room.path
+  return null
+
+func getRoomAtCoords(coords):
   if not has_grid_been_constructed:
     constructMapGrid()
 
@@ -51,8 +57,25 @@ func getRoomPathAtCoords(coords):
     if mapGrid[int(coords.y)].has(int(coords.x)):
       # print(mapGrid[int(coords.y)][int(coords.x)])
       # print(mapGrid[int(coords.y)][int(coords.x)].path)
-      return mapGrid[int(coords.y)][int(coords.x)].path
+      return mapGrid[int(coords.y)][int(coords.x)]
   # print("printing mapGrid")
   # print(mapGrid)
 
   return null
+
+# this supports blocking traversal in the map
+func getRelativeRoomPath(coords, addendum):
+  if addendum.x == 0 and addendum.y == 0: # why are you doing this func then
+    return getRoomAtCoords(coords)
+
+  var currRoom = getRoomAtCoords(coords)
+  # putting the blockers here
+  if addendum.x > 0 and not currRoom.can_nav_right:
+    return null
+  if addendum.x < 0 and not currRoom.can_nav_left:
+    return null
+  if addendum.y > 0 and not currRoom.can_nav_up:
+    return null
+  if addendum.y < 0 and not currRoom.can_nav_down:
+    return null
+  return getRoomPathAtCoords(coords + addendum)

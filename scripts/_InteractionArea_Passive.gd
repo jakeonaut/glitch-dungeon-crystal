@@ -8,6 +8,7 @@ var touched_water_area = null
 var is_touching_ladder = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
+export var ignore_water = false
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -63,7 +64,7 @@ func _process(_delta):
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
     for area in areas:
-        if area.is_in_group("water"):
+        if area.is_in_group("water") and not ignore_water:
             is_touching_water = true
             touched_water_area = area
             if area.is_in_group("waterfall"):

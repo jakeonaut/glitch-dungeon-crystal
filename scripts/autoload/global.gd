@@ -161,7 +161,7 @@ func getColorSuffixFromTilesetType(type):
         return ""
     if type == TilesetType.HOUSE or type == TilesetType.POISON_HOUSE:
         return "_red"
-    if type == TilesetType.FOREST or type == TilesetType.BEACH or type == TilesetType.POISON_FOREST:
+    if type == TilesetType.FOREST or type == TilesetType.BEACH or type == TilesetType.POISON_FOREST or type == TilesetType.AUTUMN_FOREST:
         return "_green"
     if type == TilesetType.ALIEN:
         return "_black"
@@ -169,6 +169,7 @@ func getColorSuffixFromTilesetType(type):
         return "_yellow"
     if type == TilesetType.GLITCH_WORLD:
         return "_white"
+    return ""
 
 var memory = {}
 

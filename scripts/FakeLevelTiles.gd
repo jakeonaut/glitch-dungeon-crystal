@@ -18,5 +18,5 @@ func randomizeTile(_cell_index, _glitch_type = global.GlitchForm.NORMAL, _debug 
   pass
 
 # @override after all these years..
-func changeColorPalette(palette, _palette_alt = null):
+func changeColorPalette(_palette, _palette_alt = null):
   pass

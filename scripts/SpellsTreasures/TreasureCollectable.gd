@@ -68,7 +68,7 @@ func _process(delta):
     level.player.broomSpriteVisible.visible = false
     level.player.physics_state = PhysicsState.OCCUPIED
     level.player.dir = Vector3(0, 0, 0)
-    level.player.hv = 0
+    level.player.hv = Vector3(0, 0, 0)
     level.player.lv.x = 0
     level.player.linear_velocity.x = 0
   

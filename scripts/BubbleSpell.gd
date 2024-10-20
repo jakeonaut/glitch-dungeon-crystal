@@ -132,7 +132,7 @@ func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player):
-  if didja_get_me or global.pauseGame:
+  if didja_get_me or global.pauseGame or (is_player and level.player.transformation == level.player.TransformationState.BUBBLE):
     return
 
   bubbleStartPop()

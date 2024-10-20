@@ -24,7 +24,7 @@ func playerActivationAreaPassiveActivate():
     touchingPlayer = true
     stupid_timer = 0
 
-func _process(delta):
+func _process(_delta):
     wasTouchingPlayer = touchingPlayer
     # if touchingPlayer:
     #     wasTouchingPlayer = touchingPlayer

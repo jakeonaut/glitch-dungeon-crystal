@@ -55,7 +55,7 @@ func processGlitchFormActivation():
       if glitchGrandma.get_ref().glitch_form == global.GlitchForm.FLOOR:
         glitchGrandma.get_ref().on_ground = true
       glitchGrandma.get_ref().vv = 0
-      glitchGrandma.get_ref().hv = 0
+      glitchGrandma.get_ref().hv = Vector3(0, 0, 0)
       glitchGrandma.get_ref().lv = Vector3(0, 0, 0)
       glitchGrandma.get_ref().linear_velocity = Vector3(0, 0, 0)
       glitchGrandma.get_ref().visible = false

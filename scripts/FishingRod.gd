@@ -93,7 +93,7 @@ func reelItIn(delta):
     level.player.vv = jump_val
     level.player.linear_velocity.y = jump_val
     level.player.lv.y = jump_val
-    level.player.hv = 0
+    level.player.hv = Vector3(0, 0, 0)
     level.player.linear_velocity.x = 0
     level.player.lv.x = 0
     if not level.player.reelSound.is_playing():

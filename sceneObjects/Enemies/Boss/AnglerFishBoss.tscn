@@ -2481,6 +2481,7 @@ shape = SubResource( 24 )
 [node name="SmallInteractionArea" type="Area" parent="WeakPointContainer" groups=["corporeal_body", "enemies", "no_pushems"]]
 transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 3, 1.58258, 3.57628e-07 )
 script = ExtResource( 16 )
+ignore_water = true
 
 [node name="CollisionShape" type="CollisionShape" parent="WeakPointContainer/SmallInteractionArea"]
 shape = SubResource( 24 )

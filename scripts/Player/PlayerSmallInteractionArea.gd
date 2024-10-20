@@ -55,11 +55,11 @@ func _process(delta):
         if area.is_in_group("door"):
             is_touching_door = true
             var door = area.get_node("..")
-            if door.is_unlocking or door.is_passive or not door.visible:
+            if door.is_unlocking or door.is_passive or not door.visible or not door.isActive():
                 is_touching_door = false
         if area.is_in_group("carcass"):
             is_touching_carcass = true
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           (global.activeInteractor == null or global.activeInteractor.is_tiny) and \
-                                          not global.isEnteringRoom and not global.pauseGame and parent.truly_on_ground
+                                          not global.isEnteringRoom and not global.pauseGame

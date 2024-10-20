@@ -57,6 +57,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -256,6 +257,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -284,6 +286,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -413,26 +416,19 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 19.1, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45126, 19, 0 )
+permanently_alter_tiles = true
 
 [node name="GlitchMoleCricket3" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.54874, 11.2561, 0 )
+permanently_alter_tiles = true
 
 [node name="GlitchMoleCricket2" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69514, 11.2899, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6951, 11.2899, 0 )
 sprite_offset_y = -0.25
+permanently_alter_tiles = true
 
 [node name="SandStream" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -4, 1 )

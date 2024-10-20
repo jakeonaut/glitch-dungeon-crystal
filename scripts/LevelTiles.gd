@@ -486,7 +486,7 @@ func sweepUpSand(coords):
     level.summonSmokeClouds(tile_pos, 2, false, false, global.yellow_palette)
   spike_infection_timer = 0
 
-func addTile(tile_id, target, addToLevelZone = true, is_transient = false, transient_time_start = 0):
+func addTile(tile_id, target, _addToLevelZone = true, is_transient = false, transient_time_start = 0):
   set_cell_item(target.x, target.y, target.z, tile_id)
   randomizeTile(target, my_tileset_glitch_type)
   var name = mesh_library.get_item_name(tile_id)
@@ -608,7 +608,7 @@ func changeColorPalette(palette, _palette_alt = null):
   elif my_tileset_type == global.TilesetType.AUTUMN_FOREST:
     curr_palette = global.red_palette
   elif my_tileset_type == global.TilesetType.DESERT:
-    curr_palette = global.green_palette
+    curr_palette = global.yellow_palette
   elif my_tileset_type == global.TilesetType.POISON_FOREST:
     curr_palette = global.grey_black_palette
     
@@ -669,7 +669,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
     red_palette = global.red_black_palette
     yellow_palette = global.yellow_black_palette
     black_palette = global.black_palette
-  elif tileset_type == global.TilesetType.FOREST:
+  elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
     my_tileset_glitch_type = global.GlitchForm.FEATHER
   elif tileset_type == global.TilesetType.DESERT:
     my_tileset_glitch_type = global.GlitchForm.LADDER

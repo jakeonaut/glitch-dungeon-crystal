@@ -173,7 +173,7 @@ func tryInitializeFromDebug():
       # set for cricket caves
       global.tryInitializeLevelZone("gd1ShiftingSandLand")
       global.setLevelZoneThing("angel_statue", 
-        ["bug desert", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
+        ["insect caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
       # set for dream temple
       global.tryInitializeLevelZone("gd1CrystalTower")
       global.setLevelZoneThing("angel_statue",
@@ -630,6 +630,15 @@ func trySpawnFollowers():
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
 
+  var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+  if numEggs != null:
+    for _i in range(numEggs):
+      spawnAngelEggFollower(
+        player.global_transform.origin + Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125), 
+          0))
+
   if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
     var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
     if numAngelTadpoles != null:
@@ -672,6 +681,16 @@ func spawnKeyFollower(starting_position):
   var target = followers[-1] if followers.size() > 0 else player
   keyFollower.gameMoverTarget = weakref(target)
   followers.push_back(keyFollower)
+
+var angelEggFollowerRes = preload("res://sceneObjects/AngelEggFollower.tscn")
+func spawnAngelEggFollower(starting_position):
+  var angelEggFollower = angelEggFollowerRes.instance()
+  self.add_child(angelEggFollower)
+  angelEggFollower.global_transform.origin = starting_position
+
+  var target = followers[-1] if followers.size() > 0 else player
+  angelEggFollower.gameMoverTarget = weakref(target)
+  followers.push_back(angelEggFollower)
 
 var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
 func spawnPetFollower(starting_position):

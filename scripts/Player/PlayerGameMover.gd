@@ -262,6 +262,7 @@ func normalGlitch():
 onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
 onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
 onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
+onready var moleSprite = get_node("SpriteContainer/InnerSpriteContainer/MoleSprite")
 func changeSpriteColorPalette(palette):
   if level.spellbook_forbidden:
     return
@@ -409,6 +410,7 @@ func magicJump():
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
   should_magic_jump = true
+  print("magic jump")
   actuallyApplyJump(false)
   tryClearFallthroughCollisionSolid()
 

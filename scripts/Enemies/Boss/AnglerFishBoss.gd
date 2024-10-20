@@ -258,6 +258,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
+        global.transform.origin.y += (10*delta*11)
         if not secretAniPlayer.is_playing():
             boss_phase = BossPhase.IDLE
             secretAniPlayer.stop()
@@ -407,7 +408,7 @@ func randomizeTargetPos():
 func tryDieToOffscreenCamera():
     pass
 
-var bubbleHP = 10 # should slowly "glitch" the crystal and then corrupt him??
+var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     bubbleHP -= 1
