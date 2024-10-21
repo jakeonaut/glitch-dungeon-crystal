@@ -192,7 +192,7 @@ func _process(delta):
     adjustPlayerForEdgeTransition()
 
   # TODO(jaketrower): add an option
-  ditherPaletteEffectRect2.visible = global.memory["show_dither_effect"] and show_dither_effect
+  ditherPaletteEffectRect2.visible = global.memory["show_crt_effect"] and show_dither_effect
   basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
   colorBlindEffectRect2.visible = global.memory["show_color_blind"]
   if Input.is_action_pressed("toggle_fullscreen"):
@@ -211,7 +211,7 @@ func processPauseMenu():
       player.unpauseSound.play()
       restartMusic()
   else:
-    if not global.pauseGame and not global.pauseMoveInput:
+    if not global.isPauseMenuOpen:
       if Input.is_action_just_pressed("ui_start"):
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
         uiLayer.pauseMenu.normalOptionIndex = 0

@@ -284,6 +284,7 @@ func processPhysics(delta):
       should_magic_jump = false
   elif physics_state == PhysicsState.BEING_TOSSED:
     if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
+      print("the secret way" + str(lv) + ", " + str(vertical_collision) + ", " + str(vv))
       fall_timer = 0
       landed()
     
@@ -622,7 +623,7 @@ func startRun():
   var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
   if runSound:
     runSound.play()
-  level.summonSmokeClouds(origin, 3, false, false)
+  level.summonSmokeClouds(origin, 2, false, false)
 
 func justPressedJump():
   return false
@@ -853,9 +854,11 @@ func getWalkSpeed(_delta):
   var run_add = 0
   if pressingRun():
       run_add = 3
+      if not on_ground:
+        run_add = 1
 
   if glitch_form == global.GlitchForm.FEATHER:
-    return feather_glitch_walk_speed # no run_add
+    return feather_glitch_walk_speed + run_add # no run_add
   if glitch_form == global.GlitchForm.INVISIBLE:
     return invisible_glitch_walk_speed + run_add
   elif is_touching_water:
@@ -1010,18 +1013,19 @@ func processHorizontalInputs(delta):
     # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
 
   # TODO(Engine.time_scale suspect)
-  if dir.length() > 1 and physics_state != PhysicsState.BEING_TOSSED:
-    dir = dir.normalized()
-  if (on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction()) or \
-     (not on_ground and not self.is_pressing_horizontal_input and shouldAirHaveFriction()):
-    if dir.x > 0:
-      dir.x -= (delta*DNUMSKID)
-      if dir.x <= 0:
-        dir = Vector3(0, 0, 0)
-    elif dir.x < 0:
-      dir.x += (delta*DNUMSKID)
-      if dir.x >= 0:
-        dir.x = 0
+  if physics_state != PhysicsState.BEING_TOSSED:
+    if dir.length() > 1:
+      dir = dir.normalized()
+    if (on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction()) or \
+      (not on_ground and not self.is_pressing_horizontal_input and shouldAirHaveFriction()):
+      if dir.x > 0:
+        dir.x -= (delta*DNUMSKID)
+        if dir.x <= 0:
+          dir = Vector3(0, 0, 0)
+      elif dir.x < 0:
+        dir.x += (delta*DNUMSKID)
+        if dir.x >= 0:
+          dir.x = 0
     
   # elif glitch_form == global.GlitchForm.FLOOR and not on_ground:
   #     dir = dir * 0.97*(delta*DNUMSKID)
@@ -1270,6 +1274,9 @@ func collideWithFloor(local_lv):
 var on_ceiling = false
 var was_on_ceiling = false
 func collideWithCeiling(local_lv):
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
+    pauseAnimation = false
   local_lv.y = 0
   on_ceiling = true
   return local_lv

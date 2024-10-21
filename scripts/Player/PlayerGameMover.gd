@@ -302,6 +302,9 @@ func playLandSound():
 var can_broomerang_warp = true
 # @override
 func landed():
+  print("landed")
+  if physics_state == PhysicsState.BEING_TOSSED and is_toss_corrupted:
+    bigBump()
   .landed()
   can_broomerang_warp = true
   has_sweeped_glitch = false
@@ -338,23 +341,34 @@ func recentlyJustPressedJump():
 func tryingToWakeUp():
   return Input.is_action_just_pressed("sub_action_button")
 
+var is_toss_corrupted = false
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
-  if is_mushroom_infected:
+  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and is_toss_corrupted):
     is_mushroom_infected = false
     pauseAnimation = false
-    bumpSound2.play()
+    bigBump()
     getABroom()
-    var prev_hp = global.memory["hp"]
-    global.memory["hp"] += 1
-    tryDieToEnemy(0, false, true, false)
-    global.memory["hp"] = prev_hp
+  grav = 28
+
+func bigBump():
+  grav = 28
+  bumpSound2.play()
+  var prev_hp = global.memory["hp"]
+  global.memory["hp"] += 1
+  tryDieToEnemy(0, false, true, false)
+  global.memory["hp"] = prev_hp
+  fall_timer = 0
+  pauseAnimation = false
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("fall")
 
 # @override
 func pressingJump():
   if transformation == TransformationState.CHICKEN:
-    return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
+    return should_magic_jump or pressingMoveRight() or pressingMoveLeft() or Input.is_action_pressed("jump_button")
   if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
@@ -557,7 +571,8 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
-     nesting_doll_state == global.NestingDoll.BABY:
+     nesting_doll_state == global.NestingDoll.BABY or \
+     is_mushroom_infected:
     return
   pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true

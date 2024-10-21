@@ -41,7 +41,7 @@ var FACE_X_OFFSET = 0.127
 var FACE_Y_OFFSET = 0.782
 var FACE_Z_OFFSET = 0.25
 func processRendering(_delta):
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL # and global.memory["colorblindMode"]
   if not isActive():
     pass
   else:

@@ -243,6 +243,8 @@ var rerandomize_timer = 0
 var rerandomize_time_limit = 5
 
 func getRandomGlitchType():
+  if my_tileset_type == global.TilesetType.GLITCH_WORLD:
+    return global.GlitchForm.WALK_THROUGH_WALLS
   var rand_int = randi() % 4
   if rand_int == 0:
     return global.GlitchForm.NORMAL

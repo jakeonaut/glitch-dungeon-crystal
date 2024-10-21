@@ -312,8 +312,9 @@ func hitStuff(_delta):
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
                 var smackResult = areaParent.getSmacked(global_transform.origin)
-                if not area.is_in_group("tadpole") and smackResult == null:
+                if not (area.is_in_group("tadpole") and smackResult == null):
                     my_broom_owner.getSmacked()
+                    has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door") and not area.is_in_group("npc"):

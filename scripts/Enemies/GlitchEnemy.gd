@@ -145,7 +145,6 @@ func _ready():
         if mySprite.material_override != null:
             mySprite.material_override.set_shader_param("target_palette", target_palette)
         if spellbookGlitchSprite != null:
-            spellbookGlitchSprite.visible = true
             spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
 
 func shouldIDoCollisions():
@@ -163,6 +162,9 @@ func glitchOut():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+
+    if glitch_form != global.GlitchForm.NORMAL:
+        spellbookGlitchSprite.visible = level.player.glitch_form == glitch_form
 
     if global.pauseGame:
         return

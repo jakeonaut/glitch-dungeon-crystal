@@ -21,4 +21,4 @@ func restorePlayer(got_to_top):
     return
   # level.player.physics_state = level.player.PhysicsState.NORMAL
   if got_to_top:
-    level.player.tumbleFall(anglerFish.mySprite.flip_h)
+    level.player.tumbleFall(Vector2(-1 if anglerFish.mySprite.flip_h else 1, 0))

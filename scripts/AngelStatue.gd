@@ -15,6 +15,7 @@ func _ready():
     set_process(true)
     birdSprite.material_override = birdSprite.material_override.duplicate()
     musicNoteSprite.material_override = musicNoteSprite.material_override.duplicate()
+    mySprite.material_override = mySprite.material_override.duplicate()
 
     if global.getLevelZoneThing("angel_statue") != null:
         is_angel_activated = true

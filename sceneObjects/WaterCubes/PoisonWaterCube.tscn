@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://scripts/PoisonCorruptionCube.gd" type="Script" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=4]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
-[ext_resource path="res://assets/enemy_sheet.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/Toad_Dude_smaller.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/croak.wav" type="AudioStream" id=7]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=8]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
@@ -15,7 +17,7 @@ shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.03
+shader_param/shake_color_rate = 0.01
 shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = true
@@ -29,9 +31,9 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.0
-shader_param/time_influence = 0.0
-shader_param/y_div = 0.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 3 )
@@ -39,25 +41,93 @@ shader_param/target_palette = ExtResource( 3 )
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.9, 0.9, 1 )
 
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.8, 0.8, 0.8 )
+
 [node name="PoisonWaterCube" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.2 )
 material_override = SubResource( 2 )
+offset = Vector2( 0, 1 )
+flip_h = true
 pixel_size = 0.125
 texture = ExtResource( 6 )
-hframes = 6
-vframes = 4
+hframes = 14
+vframes = 8
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+automatically_change_color = false
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -0.2 )
+material_override = SubResource( 2 )
+offset = Vector2( 0, 1 )
+flip_h = true
+pixel_size = 0.125
+texture = ExtResource( 6 )
+hframes = 14
+vframes = 8
+frame = 16
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+automatically_change_color = false
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.8 )
+material_override = SubResource( 2 )
+offset = Vector2( 0, 1 )
+flip_h = true
+pixel_size = 0.125
+texture = ExtResource( 6 )
+hframes = 14
+vframes = 8
+frame = 1
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+automatically_change_color = false
+
+[node name="Sprite3D4" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -0.2 )
+material_override = SubResource( 2 )
+offset = Vector2( 0, 1 )
+flip_h = true
+pixel_size = 0.125
+texture = ExtResource( 6 )
+hframes = 14
+vframes = 8
+frame = 15
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+automatically_change_color = false
+
+[node name="TongueDirSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.2 )
+material_override = SubResource( 2 )
+offset = Vector2( 0, 1 )
+flip_h = true
+pixel_size = 0.125
+texture = ExtResource( 6 )
+hframes = 14
+vframes = 8
+frame = 12
 script = ExtResource( 1 )
 frame_delay = 0.2
-should_randomize_frame_delay = true
-max_frames = 6
 automatically_change_color = false
-is_really_glitchy = true
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -5.0
 
 [node name="Area" type="Area" parent="."]
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 1 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
+script = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+shape = SubResource( 3 )

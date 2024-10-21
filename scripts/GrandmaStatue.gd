@@ -55,7 +55,7 @@ func _process(delta):
 func processRendering(delta):
   triangleContainer.visible = is_extra_life
 
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"]
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL # and global.memory["colorblindMode"]
   if not isActive():
     streetlightGlitchAura.mainTextureRect.visible = false
     triangleContainer.scale.x = 1.0

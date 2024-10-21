@@ -202,7 +202,7 @@ func spitOut():
     tongueController.hooked = false
     tongueController.hookTarget = null
   level.player.glitchTickle()
-  level.player.tumbleFall(mySprite.flip_h)
+  level.player.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
   if is_bubble_spitter:
     level.player.getBubbleInfected()
     yield(get_tree().create_timer(0.2), "timeout")

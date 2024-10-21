@@ -1,4 +1,4 @@
-[gd_scene load_steps=178 format=2]
+[gd_scene load_steps=181 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -81,6 +81,9 @@
 [ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=79]
 [ext_resource path="res://assets/sprites2D/player_sheet_old.png" type="Texture" id=80]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=81]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=82]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Glitch Entity.wav" type="AudioStream" id=83]
+[ext_resource path="res://assets/sounds/eba_digging2.wav" type="AudioStream" id=84]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -7280,5 +7283,21 @@ frame = 63
 script = ExtResource( 10 )
 frame_delay = 0.5
 automatically_change_color = false
+
+[node name="AngelZoneLevelDoor" parent="." instance=ExtResource( 82 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19 )
+visible = false
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/AngelWarpZone.tscn"
+is_level_door = true
+
+[node name="WarpSound2" type="AudioStreamPlayer" parent="AngelZoneLevelDoor"]
+stream = ExtResource( 84 )
+volume_db = -20.0
+pitch_scale = 0.7
+
+[node name="TeleportSound" type="AudioStreamPlayer" parent="AngelZoneLevelDoor"]
+stream = ExtResource( 83 )
+volume_db = -12.0
+pitch_scale = 0.9
 
 [editable path="TextContainer"]

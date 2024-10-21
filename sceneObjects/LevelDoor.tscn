@@ -38,6 +38,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -66,6 +67,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.001
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -94,6 +96,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -122,6 +125,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.002
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.002
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -448,14 +452,14 @@ shape = SubResource( 17 )
 
 [node name="TextBox" parent="NPC/NPC TextBox" index="0" groups=["door_textbox"]]
 
-[node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 21 )
 volume_db = -20.0
 
-[node name="DialogSound" parent="NPC/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="NPC/NPC TextBox/TextBox" index="11"]
 stream = ExtResource( 24 )
 
-[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="13"]
 stream = ExtResource( 23 )
 pitch_scale = 0.8
 

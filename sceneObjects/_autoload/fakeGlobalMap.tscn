@@ -1,0 +1,1167 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=6]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=8]
+[ext_resource path="res://assets/palettes/green_glitch_palette.png" type="Texture" id=9]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=10]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=11]
+[ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=12]
+[ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=15]
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 2.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 8 )
+
+[node name="globalMap" type="Spatial"]
+script = ExtResource( 12 )
+
+[node name="PastoralScene" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="MainMenu" parent="PastoralScene" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
+pixel_size = 0.07
+frame = 18
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="MainMenu2" parent="PastoralScene" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0 )
+pixel_size = 0.07
+frame = 18
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="PrimordialOoze" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="Level" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
+pixel_size = 0.07
+frame = 45
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level2" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level3" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 9, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level4" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level11" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 14, -2 )
+material_override = null
+pixel_size = 0.07
+texture = ExtResource( 15 )
+hframes = 4
+vframes = 1
+frame = 1
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level5" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level6" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level7" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -10, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level8" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -9, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level9" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="Level10" parent="PrimordialOoze" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, 10, 0 )
+material_override = SubResource( 23 )
+pixel_size = 0.07
+frame = 72
+path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+
+[node name="TutorialDungeon" type="Spatial" parent="."]
+
+[node name="Level" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
+
+[node name="GreenGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
+material_override = SubResource( 1 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
+
+[node name="GreenGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+material_override = SubResource( 1 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001GreenGlitchFinale.tscn"
+
+[node name="RedGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -1, 0 )
+material_override = SubResource( 2 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
+
+[node name="RedGlitchMiddle" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 0 )
+material_override = SubResource( 2 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchMiddle.tscn"
+
+[node name="RedGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
+material_override = SubResource( 2 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
+
+[node name="StoryHook" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 0 )
+material_override = SubResource( 16 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/StoryHook.tscn"
+
+[node name="NullificationPurgatory" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
+
+[node name="entrance_to_tower" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/entrance_to_tower.tscn"
+
+[node name="NullifyIntro" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
+
+[node name="LadderIntro" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+material_override = SubResource( 19 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
+
+[node name="GhostIntro" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+material_override = SubResource( 20 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/tutorial_GhostIntro.tscn"
+
+[node name="0_1Haven" parent="TutorialDungeon" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
+material_override = SubResource( 9 )
+frame = 54
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+
+[node name="FishingVillage" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0 )
+
+[node name="FishingVillageEntrance" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
+
+[node name="WaterGateRoom" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
+
+[node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
+
+[node name="FishHooksMinimum" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/002FishingHooksMinimum.tscn"
+
+[node name="GlitchFishersPuzzle" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
+can_nav_left = false
+can_nav_right = false
+
+[node name="GrubAmbush" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+material_override = SubResource( 5 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/GrubAmbush.tscn"
+
+[node name="RightsideTunnel" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+
+[node name="WaterfallSecret" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterfallSecretRoom.tscn"
+
+[node name="EasyFling" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0 )
+material_override = SubResource( 6 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
+
+[node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 2, 3, 0 )
+material_override = SubResource( 6 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
+
+[node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 0 )
+material_override = SubResource( 9 )
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
+
+[node name="ToxicJungle" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="PoisonShroomCove" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+
+[node name="InvisRoom" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
+
+[node name="InvisIntro" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -5, -9, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
+
+[node name="MushroomCave2" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -9, 0 )
+flip_v = true
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomCave2.tscn"
+
+[node name="LostWoods1" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -7, -8, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
+
+[node name="LostWoods2" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
+
+[node name="LostWoods4" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8, 0 )
+flip_h = true
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods4.tscn"
+
+[node name="SafariZone" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -3, -9, 0 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
+
+[node name="CrystalHaven" parent="ToxicJungle" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -2, -9, 0 )
+material_override = SubResource( 17 )
+frame = 50
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
+
+[node name="CricketCaves" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -4, 0 )
+
+[node name="000Start" parent="CricketCaves" instance=ExtResource( 13 )]
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+
+[node name="DustyCricketIntro" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0 )
+material_override = SubResource( 7 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
+
+[node name="DustyCricketIntro_old" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 2, 1, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
+
+[node name="RedHallway" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
+material_override = SubResource( 8 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
+
+[node name="DustFreefall" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 3, 0, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006DustFreefall.tscn"
+
+[node name="002BroomIntro2" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro002.tscn"
+
+[node name="ExcavationRoom" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 0 )
+material_override = SubResource( 15 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
+
+[node name="002BroomIntro" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro.tscn"
+
+[node name="DustyCricketHoppers" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
+
+[node name="CricketCaveHub1" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub1.tscn"
+
+[node name="005TidepoolCaves" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
+
+[node name="CrystalHaven" parent="CricketCaves" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+material_override = SubResource( 13 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"
+
+[node name="CorruptedTomb" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="ZombieIntro" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 8, -5, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/001ZombieIntro.tscn"
+
+[node name="DustyCricketCrypts" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 7, -1, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003DustyCricketCrypts.tscn"
+
+[node name="GlitchSavePuzzle" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 8, -6, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
+
+[node name="GlitchSavePuzzle2" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 5, -6, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
+
+[node name="GlitchPuzzleLeftside" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -7, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="GlitchPuzzleLeftside5" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -6, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="GlitchPuzzleLeftside6" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -6, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="GlitchPuzzleLeftside2" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="GlitchPuzzleLeftside4" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -4, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="GlitchPuzzleLeftside3" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+
+[node name="CricketCaveHub2" parent="CorruptedTomb" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -4, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 48
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CricketCaveHub2.tscn"
+
+[node name="CrystalTower" type="Spatial" parent="."]
+
+[node name="000Start" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
+
+[node name="LockedRoom1" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
+
+[node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 5, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
+
+[node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
+
+[node name="LongGlitchyHallway" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
+
+[node name="MiniRestZone" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 7, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
+
+[node name="BossLevel" parent="CrystalTower" instance=ExtResource( 13 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 1, 7, 1 )
+material_override = SubResource( 4 )
+frame = 55
+path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
+
+[node name="GrandmaVillage" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="DefaultLevel" parent="GrandmaVillage" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 3, 7, 0 )
+frame = 8
+path = "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"
+
+[node name="BubblegloopSwamp" type="Spatial" parent="."]
+
+[node name="MarshChallenge" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="MarshChallenge5" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="MarshChallenge2" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="MarshChallenge3" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="MarshChallenge6" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="MarshChallenge4" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 7, 2, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
+
+[node name="FishingScene" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -1, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/FishingScene.tscn"
+
+[node name="FishingScene2" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -7, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/FishingScene.tscn"
+
+[node name="PlasticBeach" parent="BubblegloopSwamp" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 1.5, 0, 0, 0, 1, 6, 1, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/PlasticBeach.tscn"
+
+[node name="AbstractSuburbs" type="Spatial" parent="."]
+
+[node name="000SuburbStreetlight" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -7, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight2" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight3" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight4" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight7" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -3, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight5" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -7, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[node name="000SuburbStreetlight6" parent="AbstractSuburbs" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, -9, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 11 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+
+[editable path="FishingVillage/FrogBossHaven"]

@@ -264,7 +264,6 @@ func resetMemory():
 
     # settings?
     memory["show_crt_effect"] = true
-    memory["show_dither_effect"] = true
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
     memory["colorblindMode"] = true
@@ -1158,7 +1157,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
-        if not area.is_in_group("tadpole") and smackResult == null:
+        if not (area.is_in_group("tadpole") and smackResult == null):
           if my_broom_owner:
             my_broom_owner.getSmacked()
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:

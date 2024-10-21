@@ -278,9 +278,8 @@ func pressingRun():
 
 # @override
 func canRun():
-  return false
-  # var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
-  # return not is_giant
+  var is_giant = nesting_doll_state == global.NestingDoll.MATRIARCH
+  return not is_giant
 
 # @override
 func canSwim():
@@ -794,9 +793,10 @@ func processGlitchHurtRecovery(delta):
         musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
         level.glitchScreenEffect.visible = false
         glitch_death_timer = 0
+        if physics_state == PhysicsState.GLITCH_RECOVERY:
+          self.physics_state = PhysicsState.NORMAL
         mySprite.material_override.set_shader_param("enable_glitch", false)
         mySprite.material_override.set_shader_param("enable_remove_skin_tone", false)
-        self.physics_state = PhysicsState.NORMAL
 
     return true
 
@@ -1024,7 +1024,7 @@ func getBubbleCured():
 func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
 
-var temp_cleansed_fish_glitch = null
+# var temp_cleansed_fish_glitch = null
 func getFishyInfected():
   if is_mushroom_infected:
     return
@@ -1041,9 +1041,9 @@ func getFishyInfected():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   on_ground = false
-  if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
-    temp_cleansed_fish_glitch = glitch_form
-    normalGlitch() # FORCE NOT ALLOW SWAPPING
+  # if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
+  #   temp_cleansed_fish_glitch = glitch_form
+  #   normalGlitch() # FORCE NOT ALLOW SWAPPING
   # if global.memory["zora_flippers"] == 1:
   #   musicPlayer.stopAll()
   #   aniPlayer.play("transformToFishy_first")
@@ -1069,8 +1069,8 @@ func getFishyInfected():
 func getFishyCured():
   if transformation != TransformationState.FISHY:
     return
-  if temp_cleansed_fish_glitch != null:
-    glitch_form = temp_cleansed_fish_glitch # JUST APPLY SPELLBOOKPAUSEINDEX GLITCH
+  # if temp_cleansed_fish_glitch != null:
+  #   glitch_form = temp_cleansed_fish_glitch # JUST APPLY SPELLBOOKPAUSEINDEX GLITCH
   can_broomerang_warp = true
   transformation = TransformationState.NORMAL
   aniPlayer.stop()
@@ -1173,6 +1173,7 @@ func getCurseCured():
   getABroom()
 
 onready var ritualSound = get_node("Sounds/RitualSound")
+onready var angelZoneLevelDoor = get_node("AngelZoneLevelDoor")
 var ritual_state_index = 0
 func processAngelStatueRitual(_delta):
   if global.isEnteringRoom or global.isPauseMenuOpen:
@@ -1185,6 +1186,7 @@ func processAngelStatueRitual(_delta):
     return
 
   if ritual_state_index == len(global.correct_ritual):
+    # angelZoneLevelDoor.goThroughDoor()
     global.isPauseMenuOpen = true
     global.pauseGame = true
     level.uiLayer.pauseMenu.pauseMenuState = level.uiLayer.pauseMenu.PauseMenuState.SECRET_RITUAL
@@ -1412,6 +1414,12 @@ func applyGravity(delta):
   .applyGravity(delta)
 
 func collideWithCeiling(local_lv):
+  grav = 28
+  if physics_state == PhysicsState.BEING_TOSSED:
+    physics_state = PhysicsState.NORMAL
+    pauseAnimation = false
+    if is_toss_corrupted:
+      bigBump()
   on_ceiling = true
   if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"]:
     local_lv.y = 0
@@ -1698,21 +1706,33 @@ func summonSporeShroom():
     newShroom.walk_direction.x = 1
   summonedShroom = weakref(newShroom)
 
-func tumbleFall(direction):
+func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:
     return
 
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  var x_val = 10
+  var x_val = 0
+  var jump_val = 5 if not is_corrupted else 0
   playBounce("grow")
-  if direction:
+  if direction_vector.x < 0:
     aniPlayer.play("tumbleLeft")
-    x_val *= -1
-  else:
+    x_val = -10
+  elif direction_vector.x > 0:
     aniPlayer.play("tumbleRight")
-    x_val *= 1
+    x_val = 10
+  elif direction_vector.y > 0:
+    aniPlayer.play("tumbleRight")
+    jump_val = 10
+    grav = 0
+  elif direction_vector.y < 0:
+    aniPlayer.play("tumbleLeft")
+    jump_val = -10
 
+  is_toss_corrupted = is_corrupted
+  if is_toss_corrupted:
+    grav = 0
+    on_ground = true
   physics_state = PhysicsState.BEING_TOSSED
   pauseAnimation = true
   should_collide_floor = true
@@ -1721,7 +1741,7 @@ func tumbleFall(direction):
   dir = Vector3(x_val, 0.0, 0.0)
   linear_velocity.x = x_val
   lv.x = x_val
-  var jump_val = 5
+
   vv = jump_val
   linear_velocity.y = jump_val
   lv.y = jump_val
