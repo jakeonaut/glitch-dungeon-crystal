@@ -24,6 +24,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -988,7 +989,7 @@ stream = null
 volume_db = -23.0
 
 [node name="NextDialogSound" parent="NPC TextBox/TextBox" index="12"]
-volume_db = -10.0
+volume_db = -80.0
 
 [node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null

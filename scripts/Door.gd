@@ -258,8 +258,17 @@ func calculateXYMinMax():
   # okay.... I wish godot allowed multiple return values like javascript
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
 
-func isActive(_debug=false):
-  return (visible or is_passive) and (getPlayer().on_ground or (getPlayer().isWalkingIntoWall() and getPlayer().on_ceiling))
+func isActive(care_about_facing=false):
+  return (visible or is_passive) and \
+         (getPlayer().on_ground or \
+            (getPlayer().was_on_ground and Input.is_action_just_pressed("jump_button")) or \
+            (getPlayer().isWalkingIntoWall() and getPlayer().on_ceiling)
+          ) and \
+          (not care_about_facing or (
+            getPlayer().global_transform.origin.x > self.global_transform.origin.x and getPlayer().mySprite.flip_h
+          ) or (
+            getPlayer().global_transform.origin.x < self.global_transform.origin.x and not getPlayer().mySprite.flip_h
+          ))
 
 func generateId():
   return get_name()

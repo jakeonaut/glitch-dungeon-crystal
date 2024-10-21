@@ -55,10 +55,17 @@ func _process(delta):
         if area.is_in_group("door"):
             is_touching_door = true
             var door = area.get_node("..")
+            if door.is_unlocking or door.is_passive or not door.visible or not door.isActive(true):
+                is_touching_door = false
+        if area.is_in_group("true_small_door"):
+            is_touching_door = true
+            var door = area.get_node("..")
             if door.is_unlocking or door.is_passive or not door.visible or not door.isActive():
                 is_touching_door = false
         if area.is_in_group("carcass"):
             is_touching_carcass = true
+        if area.is_in_group("return_recover"):
+            parent.tryToRecover()
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           (global.activeInteractor == null or global.activeInteractor.is_tiny) and \

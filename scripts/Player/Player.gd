@@ -306,6 +306,14 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  if grav < 0:
+    if spriteContainer.rotation_degrees.x != 180:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = -1
+      spriteContainer.rotation_degrees.x = 180
+  else:
+    if spriteContainer.rotation_degrees.x != 0:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
+      spriteContainer.rotation_degrees.x = 0
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
   if global.isEnteringRoom:
@@ -353,8 +361,6 @@ func _process(delta):
       getBubbleCured()
 
   if global.isPauseMenuOpen:
-    if level.uiLayer.pauseMenu.pauseMenuState == level.uiLayer.pauseMenu.PauseMenuState.INVENTORY:
-      processCastingLogic(delta)
     return
 
   # if Input.is_action_pressed("sub_action_button") and on_ground:
@@ -670,26 +676,7 @@ func tryDieToOffscreenCamera(delta):
 
     # otherwise you just can't go there...
     if try_to_recover:
-      if not has_landed_since_recovering:
-        global.memory["hp"] = 0
-        tryDieToEnemy(delta, true, true, true)
-        has_landed_since_recovering = true
-        return
-      returning_to_save_point = 1
-      returning_recover_time = 0
-      returnSound.play()
-      pauseSelf = true
-      ignorePhysics = true
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("returning")
-      has_landed_since_recovering = false
-      pauseAnimation = true
-      physics_state = PhysicsState.GLITCH_RECOVERY
-      if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
-        if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-          global.memory["grav_direction"] = 1
-          level.flipGravity()
+      tryToRecover()
     else:
       global_transform.origin = repositioned_player
   
@@ -715,6 +702,28 @@ func doTimeDilation(_delta):
   #   if stepify(gtdm, 0.01) == stepify(high, 0.01):
   #     gtdm = high
   # global.time_dilation_multiplier = gtdm
+
+func tryToRecover():
+  if not has_landed_since_recovering:
+    global.memory["hp"] = 0
+    tryDieToEnemy(0, true, true, true)
+    has_landed_since_recovering = true
+    return
+  returning_to_save_point = 1
+  returning_recover_time = 0
+  returnSound.play()
+  pauseSelf = true
+  ignorePhysics = true
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("returning")
+  has_landed_since_recovering = false
+  pauseAnimation = true
+  physics_state = PhysicsState.GLITCH_RECOVERY
+  if global_transform.origin.y > getGameCamera().topmost_y:
+    if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+      global.memory["grav_direction"] = 1
+      level.flipGravity(1)
 
 func canIGetCaught():
   if not visible:
@@ -971,7 +980,7 @@ func justPressedJump():
 var bubble_temp_grav = 60
 var bubble_temp_true_terminal_vel = 14
 func getBubbleInfected():
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or nesting_doll_state == global.NestingDoll.MATRIARCH:
     return
   pauseAnimation = true
   aniPlayer.stop()
@@ -986,7 +995,7 @@ func getBubbleInfected():
   transformation = TransformationState.BUBBLE
   on_ground = false
   gravitySound.play()
-  level.flipGravity()
+  level.flipGravity(-1)
   # physics_vars.should_apply_gravity = true
   # bubble_temp_grav = grav
   # grav *= -1
@@ -1003,7 +1012,7 @@ func getBubbleCured():
   pauseAnimation = false
 
   getABroom()
-  level.flipGravity()
+  level.flipGravity(1)
   tickleSound.pitch_scale = 1.0
   tickleSound.play()
   var bubble = bubbleRes.instance()
@@ -1026,7 +1035,7 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 
 # var temp_cleansed_fish_glitch = null
 func getFishyInfected():
-  if is_mushroom_infected:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH:
     return
   tryClearFallthroughCollisionSolid()
   # if summonedBroom:
@@ -1036,7 +1045,7 @@ func getFishyInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   if transformation == TransformationState.BUBBLE:
-    level.flipGravity()
+    level.flipGravity(1)
   transformation = TransformationState.FISHY
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1108,7 +1117,7 @@ func processChickenLogic(delta):
     spriteBackToNormal()
 
 func getChickenInfected():
-  if is_mushroom_infected:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH:
     return
   if not global.has_been_baba_yaga_cursed:
     self.sayThis("Baba Yaga's curse")
@@ -1120,7 +1129,7 @@ func getChickenInfected():
     physics_state = PhysicsState.NORMAL
   loseBroom()
   if transformation == TransformationState.BUBBLE:
-    level.flipGravity()
+    level.flipGravity(1)
   transformation = TransformationState.CHICKEN
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1163,7 +1172,7 @@ func getCurseInfected():
     physics_state = PhysicsState.NORMAL
   loseBroom()
   if transformation == TransformationState.BUBBLE:
-    level.flipGravity()
+    level.flipGravity(1)
   transformation = TransformationState.CURSED
   
 func getCurseCured():
@@ -1421,7 +1430,7 @@ func collideWithCeiling(local_lv):
     if is_toss_corrupted:
       bigBump()
   on_ceiling = true
-  if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"]:
+  if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH:
     local_lv.y = 0
     getMoleCured()
     return local_lv

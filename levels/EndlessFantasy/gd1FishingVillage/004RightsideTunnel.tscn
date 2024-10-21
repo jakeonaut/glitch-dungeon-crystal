@@ -4195,6 +4195,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -10458,79 +10459,60 @@ shape = SubResource( 24 )
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube8" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube9" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube10" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube16" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube17" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube18" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube19" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube12" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube13" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube14" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -3.7, -4 )
-turn_poisonous = false
 
 [node name="WaterCube15" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -3.7, -4 )
-turn_poisonous = false
 
 [node name="BasicFrogEnemy6" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 0.1, 0 )

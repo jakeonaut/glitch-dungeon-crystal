@@ -3167,10 +3167,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.4, 18, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5, 27.3, 0 )
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.9, 18.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.9, 19.9, 0 )
 
 [node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8, 19.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8, 18.9, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 9.9, 0 )

@@ -247,7 +247,7 @@ func _process(delta):
             optionsMenuPrompt.visible = pressCText.visible
         return
 
-    if global.isPauseMenuOpen:
+    if global.isPauseMenuOpen or mainMenuState != MainMenuState.MAIN_MENU:
         return
 
     if Input.is_action_just_pressed("menu_down"):
@@ -280,7 +280,7 @@ func _process(delta):
     #     switch_glitch_timer = 0
     #     player.applyNextGlitch()
 
-    if Input.is_action_just_pressed("menu_confirm") and not global.has_started_game:
+    if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not global.has_started_game:
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()

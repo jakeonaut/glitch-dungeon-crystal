@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -53,6 +53,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=78]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=40]
 resource_local_to_scene = true
@@ -527,6 +531,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 10, 11 ]
 }
+
+[sub_resource type="BoxShape" id=79]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 24 )
@@ -1058,6 +1066,9 @@ shape = SubResource( 47 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 48 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 78 )
+
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 40 )
 
@@ -1094,6 +1105,9 @@ shape = SubResource( 47 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
 shape = SubResource( 48 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 79 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 40 )
@@ -1661,7 +1675,10 @@ frame = 68
 shape = SubResource( 63 )
 
 [node name="BigShroomEnemy" parent="Viewport/level" instance=ExtResource( 42 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 116, -9, 0 )
+
+[node name="BigShroomEnemy2" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68, -7, 0 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 26, 0 )

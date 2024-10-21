@@ -24,6 +24,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
@@ -52,6 +53,7 @@ extents = Vector3( 21, 13, 1 )
 
 [node name="BigShroomEnemy" type="Spatial"]
 script = ExtResource( 13 )
+walk_speed = 2.0
 sprite_offset_y = 1.0
 walk_direction = Vector2( -1, 0 )
 is_big = true

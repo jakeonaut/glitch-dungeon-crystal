@@ -129,6 +129,8 @@ func _process(delta):
         spawn_timer += (delta*22)
         if spawn_timer >= spawn_time_limit: # or (is_touching_water and spawn_timer >= water_jump_time_limit):
             spawn_timer = 0
+            if is_bubble_spitter:
+              spawnABubble(blow_bubble_horizontally)
             if is_licker and tongueAniPlayer != null:
               tongueAniPlayer.stop()
               tongueAniPlayer.clear_queue()

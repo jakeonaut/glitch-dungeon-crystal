@@ -89,6 +89,14 @@ func _process(_delta):
         # if no nearby active area, and no held object, use primary player action
         # else:
         #     player.tryBroom()
+    elif global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+        if Input.is_action_just_pressed("popup_menu") or Input.is_action_just_pressed("ui_start"):
+            if Input.is_action_just_pressed("ui_start"):
+                global.activeInteractor.selectedYesNoOption = false
+            var activatedSomething = global.activeInteractor.InteractActivate()
+            if activatedSomething and player.summonedBroom != null:
+                player.broomStop()
+                has_activated_something = true
     elif global.activeInteractor == null and nearest_area != null and nearest_area.get_node("..").has_method("tryShowInteractPrompt") and can_activate:
         if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
             nearest_area.get_node("..").tryShowInteractPrompt(true)

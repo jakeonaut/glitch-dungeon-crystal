@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=2]
@@ -1088,6 +1088,9 @@ tracks/0/keys = {
 "values": [ 10, 11 ]
 }
 
+[sub_resource type="BoxShape" id=170]
+extents = Vector3( 17, 1, 1 )
+
 [sub_resource type="ViewportTexture" id=74]
 viewport_path = NodePath("Viewport")
 
@@ -1451,9 +1454,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 8, -4 )
 
 [node name="WaterCube25" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 4, -4 )
-
-[node name="WaterCube29" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 1, -4 )
 
 [node name="WaterCube30" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -3, -4 )
@@ -1857,36 +1857,6 @@ shape = SubResource( 152 )
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 18, 0 )
 
-[node name="GlitchEnemy10" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -1, 0 )
-
-[node name="GlitchEnemy12" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, -1, 0 )
-
-[node name="GlitchEnemy15" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 1, 0 )
-
-[node name="GlitchEnemy13" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 0, 0 )
-
-[node name="GlitchEnemy18" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 2, 0 )
-
-[node name="GlitchEnemy19" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 1, 0 )
-
-[node name="GlitchEnemy20" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 81, -2, 0 )
-
-[node name="GlitchEnemy14" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -2.44492, 0 )
-
-[node name="GlitchEnemy16" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -2.92292, 0 )
-
-[node name="GlitchEnemy17" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -1.92292, 0 )
-
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 43 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 3.20147, 0 )
 
@@ -1944,6 +1914,12 @@ shape = SubResource( 155 )
 
 [node name="CollisionShape" parent="Viewport/level/Door6/FallthroughSolid" index="0"]
 shape = SubResource( 156 )
+
+[node name="ReturnArea" type="Area" parent="Viewport/level" groups=["return_recover"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76, -6, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/ReturnArea"]
+shape = SubResource( 170 )
 
 [node name="Viewport2" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

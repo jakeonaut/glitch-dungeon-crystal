@@ -135,8 +135,9 @@ func _ready_impl():
   if player_message != "???":
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    flipGravity()
+    flipGravity(1)
   has_room_initialized = true
+  global.setHaveIBeenToLevel(self)
 
 func tryInitializeFromDebug():
   if global.memory["initialized_from_debug"]:
@@ -211,8 +212,9 @@ func processPauseMenu():
       player.unpauseSound.play()
       restartMusic()
   else:
-    if not global.isPauseMenuOpen:
+    if not global.isPauseMenuOpen and global.activeInteractor == null:
       if Input.is_action_just_pressed("ui_start"):
+        yield(get_tree().create_timer(0.1), "timeout")
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
         uiLayer.pauseMenu.normalOptionIndex = 0
         uiLayer.pauseMenu.shouldUpdateMenuText = true
@@ -221,6 +223,7 @@ func processPauseMenu():
         player.pauseSound.play()
         playMenuMusic()
       elif Input.is_action_just_pressed("popup_menu"):
+        yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
           uiLayer.pauseMenu.selectedGlitchSprite = -1
@@ -229,41 +232,6 @@ func processPauseMenu():
           global.isPauseMenuOpen = true
           global.pauseGame = true
           player.inventorySound.play()
-        else:
-          uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
-          uiLayer.pauseMenu.normalOptionIndex = 0
-          uiLayer.pauseMenu.shouldUpdateMenuText = true
-          global.isPauseMenuOpen = true
-          global.pauseGame = true
-          player.pauseSound.play()
-    elif global.isPauseMenuOpen and Input.is_action_just_pressed("ui_start"):
-      if global.is_reading_input:
-        player.noBroomSound.play()
-      elif uiLayer.pauseMenu.pauseMenuState == uiLayer.pauseMenu.PauseMenuState.INVENTORY:
-        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
-        uiLayer.pauseMenu.normalOptionIndex = 0
-        uiLayer.pauseMenu.shouldUpdateMenuText = true
-        player.pauseSound.play()
-        playMenuMusic()
-      else:
-        global.isPauseMenuOpen = false
-        global.pauseGame = false
-        player.unpauseSound.play()
-        restartMusic()
-    elif global.isPauseMenuOpen and Input.is_action_just_pressed("popup_menu"):
-      if uiLayer.pauseMenu.pauseMenuState != uiLayer.pauseMenu.PauseMenuState.INVENTORY and global.has_really_started_game:
-        uiLayer.pauseMenu.selectedGlitchSprite = -1
-        uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
-        uiLayer.pauseMenu.inventoryOptionIndex = 0
-        uiLayer.pauseMenu.inventoryOptionIndexX = 0
-        global.isPauseMenuOpen = true
-        global.pauseGame = true
-        player.inventorySound.play()
-      else:
-        global.isPauseMenuOpen = false
-        global.pauseGame = false
-        player.unpauseSound.play()
-        restartMusic()
 
 var closest_extra_life = null
 func processGrandmaStatueSavePoints():
@@ -748,15 +716,13 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
     smokeClouds.push_back(newSmokeCloud)
   return smokeClouds
 
-func flipGravity():
-  player.grav *= -1
-
-  if player.grav < 0:
-    player.spriteContainer.get_node("InnerSpriteContainer").translation.z -= 1
-    player.spriteContainer.rotation_degrees.x = 180
-  else:
-    player.spriteContainer.get_node("InnerSpriteContainer").translation.z += 1
-    player.spriteContainer.rotation_degrees.x = 0
+func flipGravity(specific_dir = null):
+  if specific_dir == 1:
+    player.grav = abs(player.grav)
+  elif specific_dir == -1:
+    player.grav = -abs(player.grav)
+  elif specific_dir == null:
+    player.grav *= -1
 
 func clearOtherGrabbers():
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

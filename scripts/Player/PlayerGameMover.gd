@@ -302,7 +302,6 @@ func playLandSound():
 var can_broomerang_warp = true
 # @override
 func landed():
-  print("landed")
   if physics_state == PhysicsState.BEING_TOSSED and is_toss_corrupted:
     bigBump()
   .landed()

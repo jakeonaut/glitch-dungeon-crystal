@@ -963,6 +963,15 @@ func getNameRelativeToLevel(level, node):
     parent = parent.get_parent()
   return nameRelativeToLevelPath
 
+func setHaveIBeenToLevel(level):
+    tryInitializeLevelZone(level.getLevelZoneName())
+    if currLevelZone == null or not global.memory.has(currLevelZone): 
+        return null
+
+    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+        global.memory[currLevelZone][level.getShortLevelName()] = {}
+    global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"] = true
+
 func setStaticLevelZoneLevelVar(level, node, val):
     if node == null:
         return
