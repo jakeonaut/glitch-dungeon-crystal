@@ -1257,16 +1257,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100006, 2, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1 )
@@ -1932,10 +1922,7 @@ shape = SubResource( 156 )
 
 [node name="Door6" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2, 0 )
-is_locked = true
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/Marsh_Challenge.tscn"
-num_keys_unlock = 1
-key_type = 1
 
 [node name="AnimationPlayer" parent="Viewport/level/Door6" index="6"]
 anims/RESET = SubResource( 157 )

@@ -11,7 +11,7 @@ var showYesNoOptions = false
 
 onready var textBox = get_node("TextBox")
 onready var textBoxtext = get_node("TextBox/TextCanvasLayer/Container/ScrollContainer/Text")
-onready var textBoxportrait = get_node("TextBox/PortraitColor/ColorRect2/ColorRect3/ColorRect4/Portrait")
+onready var textBoxportrait = get_node("TextBox/PortraitColor/ColorRect2/ColorRect4/Portrait")
 
 var type = "textBoxContainer"
 var smackedBbText = null

@@ -164,7 +164,7 @@ func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
     if glitch_form != global.GlitchForm.NORMAL:
-        spellbookGlitchSprite.visible = level.player.glitch_form == glitch_form
+        spellbookGlitchSprite.visible = true
 
     if global.pauseGame:
         return
@@ -457,6 +457,7 @@ func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
+    print("activated")
     if smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         ouchies(global_transform.origin)
@@ -465,7 +466,12 @@ func activate(_is_player):
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         getPlayer().getSmacked()
     elif smallInteractionArea.is_in_group("enemies"):
-        if notOuchies(global_transform.origin):
+        if global.memory["glitched_broom"]:
+            ouchies(global_transform.origin)
+            getPlayer().getSmacked()
+            getPlayer().has_sweeped_glitch = true
+            getPlayer().glitchTickle()
+        elif notOuchies(global_transform.origin):
             getPlayer().getSmacked()
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
@@ -536,6 +542,7 @@ func getPlayer():
 func notOuchies(broom_origin):
     if not is_smacked:
         level.summonSmokeClouds(global_transform.origin, 1, true, true)
+        print("not ouchies")
         return getSmacked(broom_origin)
     return false
 

@@ -975,7 +975,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 27, 0 )
 
 [node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0 )
-bbText = "•missing page of Grimoire
+bbText = "•Grimoire Memory
 Now you can use 3 spells.
 Try [font=res://DarkInputFont.tres]1[/font][font=res://DarkInputFont.tres]2[/font][font=res://DarkInputFont.tres]3[/font]"
 

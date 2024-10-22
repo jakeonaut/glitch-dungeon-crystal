@@ -567,7 +567,7 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
-        popupText.text = "your trusty broom.."
+        popupText.text = "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
         if global.memory["broomerang"] > 1:
           popupText.text += "\nsweep twice to throw it!"
         else:

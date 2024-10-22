@@ -420,16 +420,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 19.1, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45126, 19, 0 )

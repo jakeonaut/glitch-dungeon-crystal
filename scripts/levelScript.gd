@@ -95,12 +95,12 @@ func _ready_impl():
   tryInitializeFromDebug()
     
   if global.memory["has_gotten_broom"] > 0:
-    global.memory["broom"] = true
+    player.getABroom()
   if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false
     global.memory["has_gotten_broom"] = 0
   # elif not doesnt_have_broom:
-  #   global.memory["broom"] = true
+  #   player.getABroom()
   #   global.memory["has_gotten_broom"] = 2
 
   displayMessageText("")
@@ -389,7 +389,10 @@ func tryToRespawn():
   global.justAngelWarped = global.angelWarping
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
-    global.memory["broom"] = true
+    levelTiles.tryToSayTidy()
+    if global.malware_infected:
+      player.malware_infected = true
+    player.getABroom() # after malware infection so we don't improperly give a broom
     if global.angelWarping:
       var angelStatues = get_tree().get_nodes_in_group("angel_statue")
       if len(angelStatues) > 0:
@@ -417,7 +420,7 @@ func tryToRespawn():
   global.roomEdgeVector = null
   global.isRespawning = false
   global.shouldRenderAsCinematic = false
-  global.memory["broom"] = true
+  player.getABroom()
 
   player.visible = true
   player.unsmack()
@@ -718,11 +721,11 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
 
 func flipGravity(specific_dir = null):
   if specific_dir == 1:
-    player.grav = abs(player.grav)
+    player.grav = player.PLAYER_GRAV
   elif specific_dir == -1:
-    player.grav = -abs(player.grav)
+    player.grav = -player.PLAYER_GRAV
   elif specific_dir == null:
-    player.grav *= -1
+    player.grav = -1 * player.PLAYER_GRAV
 
 func clearOtherGrabbers():
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

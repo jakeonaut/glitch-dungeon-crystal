@@ -105,10 +105,12 @@ func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 var is_currently_on_save_point = false
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, is_player):
+    if is_player and level.player.malware_infected:
+        level.player.malware_infected = false
+        level.player.getABroom()
     global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and (not is_currently_on_save_point or not isOnSavePoint()):
-        
         was_on_save_point = false
         if not saveSound.is_playing():
             if isOnSavePoint():

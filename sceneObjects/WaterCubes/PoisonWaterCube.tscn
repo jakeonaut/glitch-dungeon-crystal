@@ -126,7 +126,7 @@ script = ExtResource( 5 )
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 1 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["bug", "malware"]]
 script = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

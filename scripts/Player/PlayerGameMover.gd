@@ -5,9 +5,7 @@ enum TransformationState {
   FISHY,
   MUSHROOM,
   MOLE_DIGGING,
-  UNDERGROUND,
   UNDERGROUND_RETURNING,
-  UNDERGROUND_HORIZONTAL,
   BUBBLE,
   CHICKEN,
   CURSED,
@@ -302,7 +300,7 @@ func playLandSound():
 var can_broomerang_warp = true
 # @override
 func landed():
-  if physics_state == PhysicsState.BEING_TOSSED and is_toss_corrupted:
+  if physics_state == PhysicsState.BEING_TOSSED and malware_infected:
     bigBump()
   .landed()
   can_broomerang_warp = true
@@ -340,12 +338,12 @@ func recentlyJustPressedJump():
 func tryingToWakeUp():
   return Input.is_action_just_pressed("sub_action_button")
 
-var is_toss_corrupted = false
+var malware_infected = false
 var PLAYER_GRAV = 28
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
-  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and is_toss_corrupted):
+  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and malware_infected):
     is_mushroom_infected = false
     pauseAnimation = false
     bigBump()
@@ -363,19 +361,25 @@ func bigBump():
   pauseAnimation = false
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("fall")
+  aniPlayer.play("uncorruptMe")
+  aniPlayer.queue("fall")
 
 # @override
 func pressingJump():
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or pressingMoveRight() or pressingMoveLeft() or Input.is_action_pressed("jump_button")
-  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
+  var pressing_input = Input.is_action_pressed("jump_button") if not malware_infected else Input.is_action_pressed("sub_action_button")
   # if is_mushroom_infected:
   #   return false
-  var is_pressing_jump = (Input.is_action_pressed("jump_button") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()) or should_magic_jump
+  var is_pressing_jump = (
+        pressing_input and \
+        (not pauseInput or summonedBroom != null) and \
+        not isTextboxPausingMe()
+      ) or should_magic_jump
   # if is_pressing_jump:
   #   should_collide_floor = true
   return is_pressing_jump
@@ -394,6 +398,8 @@ func pressingMoveLeft():
   if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
+  if malware_infected:
+    return Input.is_action_pressed("ui_right") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
   var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
@@ -405,6 +411,8 @@ func pressingMoveRight():
   if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
+  if malware_infected:
+    return Input.is_action_pressed("ui_left") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused
   var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
@@ -412,10 +420,14 @@ func pressingMoveRight():
 
 # @override
 func justPressedMoveLeft():
+  if malware_infected:
+    return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
   return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
 
 # @override
 func justPressedMoveRight():
+  if malware_infected:
+    return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
   return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
 
 func magicJump():
@@ -498,8 +510,6 @@ func getWalkSpeed(delta):
     return 6
   # if transformation == TransformationState.UNDERGROUND_RETURNING:
   #   return 0
-  if transformation == TransformationState.UNDERGROUND:
-    return 7 if on_ground else 0
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
@@ -567,12 +577,13 @@ func getABroom(unpauseAnimation = true):
 
   #transformation == TransformationState.FISHY or \
   if glitch_form == global.GlitchForm.INVISIBLE or \
-     transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or \
+     transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
      nesting_doll_state == global.NestingDoll.BABY or \
-     is_mushroom_infected:
+     is_mushroom_infected or \
+     malware_infected:
     return
   pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true
@@ -699,7 +710,7 @@ func mushroomClone(trigger_another = true):
 func addJumpSmokeCloud(flip_flip_h = false):
   if transformation == TransformationState.FISHY:
     return
-  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.MOLE_DIGGING:
+  if transformation == TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
     return
@@ -811,7 +822,11 @@ func handleSpikeCollisions(delta):
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
         x + lb, y + tb, x + rb, y + bb
       ):
-        tryDieToEnemy(delta, true, false)
+        if malware_infected:
+          getLevelTiles().infectSpikes(coords)
+          has_sweeped_glitch = true
+        else:
+          tryDieToEnemy(delta, true, false)
         return
 
 # @override

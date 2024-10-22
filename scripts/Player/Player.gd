@@ -70,7 +70,11 @@ func _ready():
 
 # make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
 func processWallLadderWalking(delta):
+  var temp = pauseAnimation
+  if dig_timer > 0:
+    pauseAnimation = true
   .processWallLadderWalking(delta) # super
+  pauseAnimation = temp
   can_broomerang_warp = true
   # if pressingMoveLeft():
   #   spriteContainer.rotation_degrees.z = 270
@@ -92,11 +96,7 @@ func alignMySprite():
 func tryPlayFootstepSound():
   if transformation == TransformationState.MOLE_DIGGING:
     return
-  if transformation == TransformationState.UNDERGROUND:
-    return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
-    return
-  if transformation == TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.FISHY:
     return
@@ -139,7 +139,7 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
         if spellToBeForgottenIndex < 0:
           spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
         spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
-        global.memory["spellbookPage"].remove_at(spellToBeForgottenIndex)
+        global.memory["spellbookPage"].pop_at(spellToBeForgottenIndex)
     global.memory["spellbookPage"].push_back(glitch)
     spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
   if spellToBeForgotten == global.GlitchForm.NORMAL:
@@ -313,14 +313,7 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
-  if grav < 0:
-    if spriteContainer.rotation_degrees.x != 180:
-      spriteContainer.get_node("InnerSpriteContainer").translation.z = -1
-      spriteContainer.rotation_degrees.x = 180
-  else:
-    if spriteContainer.rotation_degrees.x != 0:
-      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
-      spriteContainer.rotation_degrees.x = 0
+  processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
   if global.isEnteringRoom:
@@ -543,14 +536,14 @@ func processCastingLogic(_delta):
     tryToApplySpellAssist(desired_spell)
   else:
     # manual mode
-    if (Input.is_action_just_pressed("alt_action_button") and not Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("right_button"):
+    if Input.is_action_just_pressed("alt_action_button"):
       if global.memory["spellbookPage"].size() <= 1:
         noSpellSound.play()
       else:
         spellCastPauseIndex += 1
         applySpellbookGlitch()
         level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
-    elif (Input.is_action_just_pressed("alt_action_button") and Input.is_action_pressed("run_button")) or Input.is_action_just_pressed("left_button"):
+    elif Input.is_action_just_pressed("left_button"):
       if global.memory["spellbookPage"].size() <= 1:
         noSpellSound.play()
       else:
@@ -762,7 +755,6 @@ func processGlitchHurtRecovery(delta):
       self.lv.y = remembered_y_vel
       self.linear_velocity.y = remembered_y_vel
       self.vv = remembered_y_vel
-      print("OH!!!")
       self.on_ground = remembered_on_ground
       self.physics_state = PhysicsState.GLITCH_RECOVERY
       has_sweeped_glitch = false
@@ -1043,7 +1035,7 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 
 # var temp_cleansed_fish_glitch = null
 func getFishyInfected():
-  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING:
     return
   tryClearFallthroughCollisionSolid()
   # if summonedBroom:
@@ -1054,6 +1046,8 @@ func getFishyInfected():
     physics_state = PhysicsState.NORMAL
   if transformation == TransformationState.BUBBLE:
     level.flipGravity(1)
+  elif grav == 0:
+    grav = PLAYER_GRAV
   transformation = TransformationState.FISHY
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1138,6 +1132,8 @@ func getChickenInfected():
   loseBroom()
   if transformation == TransformationState.BUBBLE:
     level.flipGravity(1)
+  elif grav == 0:
+    grav = PLAYER_GRAV
   transformation = TransformationState.CHICKEN
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1181,6 +1177,8 @@ func getCurseInfected():
   loseBroom()
   if transformation == TransformationState.BUBBLE:
     level.flipGravity(1)
+  elif grav == 0:
+    grav = PLAYER_GRAV
   transformation = TransformationState.CURSED
   
 func getCurseCured():
@@ -1229,7 +1227,7 @@ func processAngelStatueRitual(_delta):
   
 
 func anyOtherRitualInputsDetected():
-  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button", "right_button"]
+  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button"]
   for input in inputs:
     if Input.is_action_just_pressed(input):
       return true
@@ -1291,63 +1289,11 @@ func processMoleLogic(delta):
     moleSprite.flip_h = mySprite.flip_h
     if not on_ceiling and was_on_ceiling:
       getMoleCured()
-      # was_just_on_ground_timer = 0
-      # jump_squat_jump_input_timer = 0
-      # feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else 0
-      # jump_press_timer = jump_press_time_limit
-      # on_ground = true
-  elif transformation == TransformationState.UNDERGROUND:
-    override_camera_y = global_transform.origin.y
-    if not pressingDown():
-      transformation = TransformationState.UNDERGROUND_RETURNING
-    fastStepSound.pitch_scale = 0.8
-    fastStepSound.volume_db = -15
-    if not fastStepSound.is_playing():
-      fastStepSound.play()
-    can_update_last_grounded_pos = false
-    glitchTilesAroundMe(-2.5)
-
-    dig_timer += (delta*11)
-    if dig_timer > dig_time_limit:
-      summonSmokeClouds(1, true, true, 0)
-      dig_timer = 0
-
-    var has_solid_beneath = checkSolidTilesBeneathMe()
-    if has_solid_beneath:
-      global_transform.origin.y -= (2 * delta*11)
-      if not checkSolidTilesBeneathMe():
-        on_ground = true
-        was_on_ground = true
-        was_just_on_ground_timer = 0
-        truly_on_ground = true
-        was_truly_on_ground = true
-        if not pressingMoveLeft() and not pressingMoveRight():
-          dig_below_timer += (delta*11)
-          if dig_below_timer >= dig_below_time_limit:
-            dig_below_timer = 0
-            global_transform.origin.y -= 2
-            getMoleCured()
-          else:
-            global_transform.origin.y += (2 * delta*11)
-        else:
-          global_transform.origin.y += (2 * delta*11)
-          dig_below_timer = 0
-      else:
-        dig_below_timer = 0
-
-    if not checkSolidTilesOnMyLeft():
-      global_transform.origin.x += 1
-    if not checkSolidTilesOnMyRight():
-      global_transform.origin.x -= 1
-
-    if not checkSolidTilesOnMe():
-      getMoleCured()
-      if pressingMoveLeft():
-        global_transform.origin.x += 1
-      elif pressingMoveRight():
-        global_transform.origin.x -= 1
-      else:
-        getMoleCured()
+      was_just_on_ground_timer = 0
+      jump_squat_jump_input_timer = 0
+      feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else feather_jump_time_limit / 2
+      jump_press_timer = jump_press_time_limit / 2
+      on_ground = true
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
     override_camera_y = global_transform.origin.y
     dig_below_timer = 0
@@ -1356,10 +1302,6 @@ func processMoleLogic(delta):
     fastStepSound.volume_db = -8
     if not fastStepSound.is_playing():
       fastStepSound.play()
-    # if pressingDown():
-    #   transformation = TransformationState.UNDERGROUND
-    #   digSound.play()
-    # else:
     if checkSolidTilesOnMe():
       global_transform.origin.y += (2 * delta*11)
     else:
@@ -1376,7 +1318,7 @@ func processMoleLogic(delta):
       getMoleCured()
   else:
     dig_smoke_timer = 0
-    if on_ceiling and not was_on_ceiling and pressingJump() and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING:
+    if on_ceiling and not was_on_ceiling and (pressingJump() or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING:
       transformation = TransformationState.MOLE_DIGGING
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -1391,32 +1333,9 @@ func processMoleLogic(delta):
     if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
       spriteBackToNormal()
       getABroom()
-    # var solid_tiles = getTilesBelow(getLevelTiles())
-    # var is_on_solid_ground = solid_tiles[0] != null or solid_tiles[1] != null or solid_tiles[2] != null
-    # if global.memory["mole_cricket"] and is_on_solid_ground and truly_on_ground and was_truly_on_ground and pressingDown() and not pressingMoveLeft() and not pressingMoveRight():
-    #   dig_timer += (delta*11)
-    #   mySprite.flip_h = not mySprite.flip_h
-    #   glitchTickle()
-    #   if dig_timer > dig_time_limit:
-    #     tryClearFallthroughCollisionSolid()
-    #     transformation = TransformationState.UNDERGROUND
-    #     global_transform.origin.y -= 2
-    #     summonSmokeClouds(3, true, true, 0)
-    #     mySprite.visible = false
-    #     if summonedBroom:
-    #       broomStop()
-    #       summonFallenBroom(true, false, false)
-    #     global.memory["broom"] = false
-    #     digSound.play()
-    #     physics_vars.should_apply_gravity = false
-    #     should_collide_floor = false
-    #     should_collide_ceil = false
-    #     should_collide_horizontally = false
-    # else:
-    #   dig_timer = 0
 
 func applyGravity(delta):
-  if dig_timer > 0 and pressingJump() and can_dig_up and (on_ceiling or was_on_ceiling):
+  if dig_timer > 0 and (pressingJump() or glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()) and can_dig_up and (on_ceiling or was_on_ceiling):
     createG(delta)
     lv -= g * delta * 1
     return
@@ -1435,12 +1354,13 @@ func collideWithCeiling(local_lv):
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
-    if is_toss_corrupted:
+    if malware_infected:
       on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
   if local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
-     (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())):
+     (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or \
+     (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())):
     local_lv.y = 0
     getMoleCured()
     return local_lv
@@ -1464,8 +1384,7 @@ func collideWithCeiling(local_lv):
   return local_lv
 
 func getMoleCured():
-  if transformation != TransformationState.UNDERGROUND and \
-     transformation != TransformationState.UNDERGROUND_RETURNING and \
+  if transformation != TransformationState.UNDERGROUND_RETURNING and \
      transformation != TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
@@ -1674,7 +1593,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 func actuallyProcessDeath(should_glitch):
   if transformation == TransformationState.FISHY:
     getFishyCured()
-  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING:
+  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING:
     getMoleCured()
   if transformation == TransformationState.CHICKEN:
     getChickenCured()
@@ -1730,27 +1649,30 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
   aniPlayer.stop()
   aniPlayer.clear_queue()
+  if is_corrupted:
+    aniPlayer.play("corruptMe")
   var x_val = 0
   var jump_val = 5 if not is_corrupted else 0
   playBounce("grow")
   if direction_vector.x < 0:
-    aniPlayer.play("tumbleLeft")
+    aniPlayer.queue("tumbleLeft")
     x_val = -10
   elif direction_vector.x > 0:
-    aniPlayer.play("tumbleRight")
+    aniPlayer.queue("tumbleRight")
     x_val = 10
   elif direction_vector.y > 0:
-    aniPlayer.play("tumbleRight")
+    aniPlayer.queue("tumbleRight")
     jump_val = 10
     grav = 0
   elif direction_vector.y < 0:
-    aniPlayer.play("tumbleLeft")
+    aniPlayer.queue("tumbleLeft")
     jump_val = -10
 
-  is_toss_corrupted = is_corrupted
-  if is_toss_corrupted:
+  malware_infected = is_corrupted
+  if malware_infected:
     grav = 0
     on_ground = false
+    loseBroom()
   else:
     on_ground = true
     grav = PLAYER_GRAV
@@ -1771,6 +1693,27 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
   yield(TempTimer.idle_frame(self), "timeout")
   fall_timer = fall_time_max - 5
+
+func corruptSprite():
+  mySprite.material_override.set_shader_param("enable_dither", true)
+  mySprite.material_override.set_shader_param("enable_glitch", true)
+  mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  mySprite.material_override.set_shader_param("enable_no_transparency", true)
+  mySprite.material_override.set_shader_param("shake_power", 0.1)
+  mySprite.material_override.set_shader_param("shake_color_rate", 0.5)
+  mySprite.material_override.set_shader_param("shake_block_size", 10)
+  spellbookGlitchSprite.material_override.set_shader_param("enable_glitch", true)
+  spellbookGlitchSprite.material_override.set_shader_param("disable_glitch_dither", false)
+
+func uncorruptSprite():
+  mySprite.material_override.set_shader_param("enable_dither", false)
+  mySprite.material_override.set_shader_param("enable_glitch", false)
+  mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+  mySprite.material_override.set_shader_param("enable_no_transparency", false)
+  mySprite.material_override.set_shader_param("shake_power", 0.01)
+  mySprite.material_override.set_shader_param("shake_color_rate", 0)
+  mySprite.material_override.set_shader_param("shake_block_size", 20)
+  spellbookGlitchSprite.material_override.set_shader_param("enable_glitch", false)
 
 func processBagLogic(_delta):
   pass
@@ -1796,7 +1739,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.CHICKEN:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.CHICKEN:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
@@ -2012,6 +1955,21 @@ func adjustSummonedBroomSpritePosition():
 func shouldAirHaveFriction():
   return summonedBroom == null and .shouldAirHaveFriction()
 
+func processSpriteRenderLogic(_delta):
+  if malware_infected:
+    corruptSprite()
+  elif mySprite.material_override.get_shader_param("enable_no_transparency"):
+    uncorruptSprite()
+
+  if grav < 0:
+    if spriteContainer.rotation_degrees.x != 180:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = -1
+      spriteContainer.rotation_degrees.x = 180
+  else:
+    if spriteContainer.rotation_degrees.x != 0:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
+      spriteContainer.rotation_degrees.x = 0
+
 # var broom_flip_h = false
 func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
@@ -2028,7 +1986,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.translation.x *= -1
     secretSweepActualCollisionShape.translation.x *= -1
   if aniPlayer.assigned_animation != "broomSmackGlitch":
-    if false: # global.getLevelZoneThing("crystal_geode"):
+    if global.memory["glitched_broom"]:
       broomSpriteVisible.material_override.set_shader_param("enable_glitch", true)
       broomSpriteVisible.material_override.set_shader_param("enable_palette_cycle", true)
       # mySprite.material_override.set_shader_param("enable_palette_cycle", true)
@@ -2063,7 +2021,7 @@ func processBagRenderLogic(_delta):
     
   # if summonedBroom != null:
   #   adjustSummonedBroomSpritePosition()
-  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND and transformation != TransformationState.UNDERGROUND_RETURNING:
+  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND_RETURNING:
     enchantedBagSpriteVisible.visible = true
   else:
     enchantedBagSpriteVisible.visible = false

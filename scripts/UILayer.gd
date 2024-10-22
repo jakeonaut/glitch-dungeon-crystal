@@ -168,10 +168,10 @@ func _process(delta):
           levelTitleRect.rect_scale.x = 0
           title_display_timer = 0
           title_display_state = 3
-  if global.activeInteractor:
-    levelTitleRect.rect_scale.x = 0
-    title_display_timer = 0
-    title_display_state = 3
+  # if global.activeInteractor:
+  #   levelTitleRect.rect_scale.x = 0
+  #   title_display_timer = 0
+  #   title_display_state = 3
 
   if should_display_saving_text:
     saving_text_timer += (delta*22)
@@ -385,7 +385,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
-      angelHiscoreLabel.text = "angels: " + str(hiscoreCounter)
+      angelHiscoreLabel.text = "angel eggs: " + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("angelTadpole")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
@@ -464,7 +464,7 @@ func displaySpellMessageText(message):
 
 func displayMessageText(message):
   messageTextLabel.visible = true
-  messageTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
+  messageTextLabel.bbcode_text = "[center][wave]" + message + "[/wave][/center]"
   should_display_message_text = true
   message_text_timer = 0
 
