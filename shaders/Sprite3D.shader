@@ -179,4 +179,7 @@ void fragment() {
       ALPHA = opacity;
     }
     }
+    
+    ALBEDO.rgb = incolor.rgb;
+    ALPHA = alpha;
 }

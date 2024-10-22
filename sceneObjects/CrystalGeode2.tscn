@@ -1148,9 +1148,9 @@ void fragment() {
     vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
     COLOR.rgb = vec3(
-        Convert_sRGB_FromLinear(closest_color.r),
-        Convert_sRGB_FromLinear(closest_color.g),
-        Convert_sRGB_FromLinear(closest_color.b)
+        closest_color.r,
+        closest_color.g,
+        closest_color.b
     );
   COLOR.a = alpha;
     // COLOR.rgb = incolor;

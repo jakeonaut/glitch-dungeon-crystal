@@ -113,7 +113,7 @@ int getM(int x) {
 }
 void fragment() {
     // vec4 incolor = texture(texture_albedo, UV);
-    // float fdelta = mod(256.0 * Convert_sRGB_FromLinear(incolor.r), 16.0);
+    // float fdelta = mod(256.0 * incolor.r, 16.0);
     // float mod2 = mod(fdelta, float(palettesize));
     // int delta = int(mod2);
     // vec3 color = getpalettecolor(delta);

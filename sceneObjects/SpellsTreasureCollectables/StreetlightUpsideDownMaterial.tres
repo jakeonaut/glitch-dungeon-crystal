@@ -1,6 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
-
-[ext_resource path="res://assets/palettes/grey_palette_alt.png" type="Texture" id=1]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
@@ -120,11 +118,3 @@ void fragment() {
 
 [resource]
 shader = SubResource( 12 )
-shader_param/palettesize = 6
-shader_param/resolution_scale = 2.0
-shader_param/canvas_width = 1280.0
-shader_param/canvas_height = 1024.0
-shader_param/r_mult = 0.0
-shader_param/g_mult = 1.0
-shader_param/b_mult = -1.0
-shader_param/target_palette = ExtResource( 1 )

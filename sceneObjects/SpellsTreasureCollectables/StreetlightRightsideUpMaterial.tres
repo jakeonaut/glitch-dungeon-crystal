@@ -82,7 +82,7 @@ void fragment() {
     float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
     float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
     float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
-	float alpha = texture(TEXTURE, UV).a;
+    float alpha = texture(TEXTURE, UV).a;
     vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
     vec2 uv = SCREEN_UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
 
@@ -109,11 +109,11 @@ void fragment() {
     vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
     
     COLOR.rgb = vec3(
-        Convert_sRGB_FromLinear(closest_color.r),
-        Convert_sRGB_FromLinear(closest_color.g),
-        Convert_sRGB_FromLinear(closest_color.b)
+        closest_color.r,
+        closest_color.g,
+        closest_color.b
     );
-	COLOR.a = alpha;
+    COLOR.a = alpha;
     // COLOR.rgb = incolor;
     // COLOR.rgb = vec3(float(r) / 255.0, float(g) / 255.0, float(b) / 255.0);
 }"
