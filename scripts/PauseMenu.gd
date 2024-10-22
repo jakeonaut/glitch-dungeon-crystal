@@ -730,7 +730,7 @@ func processInventoryRender(_delta):
       glitchRect1.visible = true
       glitchRect2.visible = true
       glitchRect3.visible = true
-      glitchRect4.visible = true
+      glitchRect4.visible = false
       setGlitchSprite(glitchSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
       setGlitchSprite(glitchSprite2, spellbook[1] if spellbookSize >= 2 else global.GlitchForm.NORMAL)
       setGlitchSprite(glitchSprite3, spellbook[2] if spellbookSize >= 3 else global.GlitchForm.NORMAL)
@@ -976,7 +976,7 @@ func processControlsLogic(_delta):
       pauseMenuState = PauseMenuState.TOP_INPUT
       shouldUpdateMenuText = true
 
-  var showCondensedMenu = pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]
+  var showCondensedMenu = pauseMenuState == PauseMenuState.KEYBOARD_INPUT
   var properSize = controlsConfig.size() if showCondensedMenu else controlsConfig.size() - 5
   if control_index < 0:
     control_index = properSize - 1
@@ -988,7 +988,7 @@ func processControlsLogic(_delta):
     cursorSprite.position.y = 114 + (44*control_index)
 
   var inputLabelText = ""
-  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and global.memory["glitched_grimoire"]:
+  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
     inputLabelText = "[font=res://pauseMenuFontInputCondensed.tres]"
   var buttonInputText = "[font=res://pauseMenuFontInputCondensed.tres][center]"
   for i in range(properSize):

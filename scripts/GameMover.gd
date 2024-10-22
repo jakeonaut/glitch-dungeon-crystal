@@ -284,7 +284,6 @@ func processPhysics(delta):
       should_magic_jump = false
   elif physics_state == PhysicsState.BEING_TOSSED:
     if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
-      print("the secret way" + str(lv) + ", " + str(vertical_collision) + ", " + str(vv))
       fall_timer = 0
       landed()
     
@@ -1457,7 +1456,7 @@ func handleVerticalCollisions(local_lv):
   var TILE_HEIGHT = getLevelTiles().cell_size.y
 
   # check for bottom collisions
-  if should_collide_floor and (on_ground or local_lv.y <= 0):
+  if should_collide_floor and (on_ground or local_lv.y <= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav == 0 and local_lv.y == 0):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
     local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, grav >= 0)
     # TODO(jaketrower): TopsyTurvy is_vertical

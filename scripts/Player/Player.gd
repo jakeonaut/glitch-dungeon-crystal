@@ -133,6 +133,13 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
       if global.memory["spellbookPage"].size() > 1:
         spellToBeForgotten = global.memory["spellbookPage"][0] if spellCastPauseIndex != 0 else global.memory["spellbookPage"][1]
       global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
+    elif global.memory["glitched_grimoire"] and not global.memory["glitched_grimoire2"] and global.memory["spellbookPage"].size() > 0:
+      if global.memory["spellbookPage"].size() > 2:
+        var spellToBeForgottenIndex = spellCastPauseIndex - 1
+        if spellToBeForgottenIndex < 0:
+          spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
+        spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
+        global.memory["spellbookPage"].remove_at(spellToBeForgottenIndex)
     global.memory["spellbookPage"].push_back(glitch)
     spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
   if spellToBeForgotten == global.GlitchForm.NORMAL:
@@ -755,6 +762,7 @@ func processGlitchHurtRecovery(delta):
       self.lv.y = remembered_y_vel
       self.linear_velocity.y = remembered_y_vel
       self.vv = remembered_y_vel
+      print("OH!!!")
       self.on_ground = remembered_on_ground
       self.physics_state = PhysicsState.GLITCH_RECOVERY
       has_sweeped_glitch = false
@@ -1283,11 +1291,11 @@ func processMoleLogic(delta):
     moleSprite.flip_h = mySprite.flip_h
     if not on_ceiling and was_on_ceiling:
       getMoleCured()
-      was_just_on_ground_timer = 0
-      jump_squat_jump_input_timer = 0
-      feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else 0
-      jump_press_timer = jump_press_time_limit
-      on_ground = true
+      # was_just_on_ground_timer = 0
+      # jump_squat_jump_input_timer = 0
+      # feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else 0
+      # jump_press_timer = jump_press_time_limit
+      # on_ground = true
   elif transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
     if not pressingDown():
@@ -1412,31 +1420,32 @@ func applyGravity(delta):
     createG(delta)
     lv -= g * delta * 1
     return
-  if glitch_form == GlitchForm.FLOOR and dig_timer > 0 and can_dig_up:
-    on_ground = true
-    was_on_ground = true
-  if glitch_form == GlitchForm.FEATHER and dig_timer > 0 and can_dig_up:
-    on_ground = true
-    was_on_ground = true
-    feather_jump_timer = 0
+  # if glitch_form == GlitchForm.FLOOR and dig_timer > 0 and can_dig_up:
+  #   on_ground = true
+  #   was_on_ground = true
+  # if glitch_form == GlitchForm.FEATHER and dig_timer > 0 and can_dig_up:
+  #   on_ground = true
+  #   was_on_ground = true
+  #   feather_jump_timer = 0
   dig_timer = 0
   .applyGravity(delta)
 
 func collideWithCeiling(local_lv):
-  grav = 28
+  grav = PLAYER_GRAV
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
     if is_toss_corrupted:
+      on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
-  if local_lv.y < 0 or not pressingJump() or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH:
+  if local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
+     (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())):
     local_lv.y = 0
     getMoleCured()
     return local_lv
   local_lv.y = 0
-  if dig_timer <= 0 or (not pressingMoveLeft() and not pressingMoveRight()):
-    dig_timer += (secret_delta*11)
+  dig_timer += (secret_delta*11)
     
     # on_ground = true
   # mySprite.flip_h = not mySprite.flip_h
@@ -1741,8 +1750,13 @@ func tumbleFall(direction_vector, is_corrupted = false):
   is_toss_corrupted = is_corrupted
   if is_toss_corrupted:
     grav = 0
+    on_ground = false
+  else:
     on_ground = true
+    grav = PLAYER_GRAV
   physics_state = PhysicsState.BEING_TOSSED
+  global.pauseGame = false
+  global.pauseMoveInput = false
   pauseAnimation = true
   should_collide_floor = true
   can_collide_with_floor = true

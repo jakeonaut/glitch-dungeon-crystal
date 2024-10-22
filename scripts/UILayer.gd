@@ -253,7 +253,7 @@ func _process(delta):
       glitchSpellRect3.color = activeColor if index == 2 else inactiveColor
       glitchSpellRect4.color = activeColor if index == 3 else inactiveColor
       glitchSpellRect3.visible = true
-      glitchSpellRect4.visible = true
+      glitchSpellRect4.visible = false
       extension.visible = true
       setGlitchSprite(glitchSpellSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
       if spellbookSize >= 2:

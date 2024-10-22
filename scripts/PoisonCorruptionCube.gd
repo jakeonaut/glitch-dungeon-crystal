@@ -39,13 +39,12 @@ func _process(delta):
 
 var is_active = true
 func isActive():
-    return is_active
+    return true
 
 func passiveActivate(_delta, is_player):
-    if is_player:
+    if is_player and is_active:
+        reactivate_timer = 0
         is_active = false
-    reactivate_timer = 0
-    if is_player:
         # level.player.is_mushroom_infected = true
         
         level.player.gravitySound.play()
@@ -119,6 +118,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     rotation_degrees.z = int(rotation_degrees.z) % 360
     # if rotation_degrees.z == 90 or rotation_degrees.z == -270:
     #     rotation_degrees.z = 0
+    is_active = true
     return true
 
 func unsmack():

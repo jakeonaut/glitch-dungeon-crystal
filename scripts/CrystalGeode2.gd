@@ -50,7 +50,7 @@ func _ready():
         freeUpPlayer()
         queue_free()
         # musicPlayer.changeSongPitch(1.0)
-    elif global.memory["priestess"] >= 2 and global.memory["glitched_grimoire"]:
+    elif global.memory["priestess"] >= 2: # and global.memory["glitched_grimoire"]:
         global.setStaticLevelZoneLevelVar(level, self, true)
         global.memory["clean_crystals"] += 1
         global.setLevelZoneThing("crystal_geode", true)

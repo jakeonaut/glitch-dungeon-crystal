@@ -1049,6 +1049,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9, 0, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.60782, -1, 0 )
@@ -1555,8 +1565,7 @@ anims/wiggle = SubResource( 27 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 23, 0 )
-is_locked = true
-should_lock = true
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/AnglerFishBossRoom.tscn"
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -11, 0 )

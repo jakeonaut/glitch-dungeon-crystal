@@ -135,7 +135,7 @@ func enterMemoryZone():
   aniPlayer.queue("croneTwitch")
   glitchTickle(1)
   # generateEyeTiles()
-  player.grav = 28
+  player.grav = player.PLAYER_GRAV
   player.pauseSelf = false
   player.nullify()
   global.shouldRenderAsCinematic = false

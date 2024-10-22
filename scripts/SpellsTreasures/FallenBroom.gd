@@ -208,8 +208,9 @@ func tryReturnIfTooFarFromPlayer():
     if distance >= 20:
         returning = true
 
-    if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:
-        returning = true
+    # if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:
+    #     print("returing 5")
+    #     returning = true
 
 func tryReturnToOffscreenCamera():
     var DEATH_MARGIN = 5
@@ -302,7 +303,7 @@ func hitStuff(_delta):
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
                 var smackResult = areaParent.getSmacked(global_transform.origin)
-                if areaParent.has_method("imAnNpc") and smackResult == null:
+                if areaParent.has_method("imAnNpc") and smackResult == null and not returning:
                     smacked_npc = weakref(areaParent)
                     have_i_smacked_an_npc = true
                 # my_broom_owner.getSmacked()

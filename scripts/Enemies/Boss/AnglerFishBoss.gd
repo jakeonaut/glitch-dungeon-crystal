@@ -277,12 +277,29 @@ func _process(delta):
         lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
     lureFreeRange.global_transform.origin.z = 0
 
+var lure_up_down_dir = Vector2(0, -1)
 func lureMatchPlayerY(delta):
-    var step = 1
-    var lerpedY = lureFreeRange.global_transform.origin.y
-    var playerY = level.player.global_transform.origin.y
-    lerpedY = lerpedY + (playerY - lerpedY) * (delta*step)
-    lureFreeRange.global_transform.origin.y = lerpedY
+    # don't actually match player Y
+    # var step = 1
+    # var lerpedY = lureFreeRange.global_transform.origin.y
+    # var playerY = level.player.global_transform.origin.y
+    # lerpedY = lerpedY + (playerY - lerpedY) * (delta*step)
+    # lureFreeRange.global_transform.origin.y = lerpedY
+    var bottom_length = lureContainer.global_transform.origin.y - 12
+    var top_length = lureContainer.global_transform.origin.y - 6
+    var speed = 1
+    if lure_up_down_dir.y < 0:
+        lureFreeRange.global_transform.origin.y -= (speed * delta * 11)
+        if lureFreeRange.global_transform.origin.y <= bottom_length:
+            lureFreeRange.global_transform.origin.y = bottom_length
+            lure_up_down_dir.y = 1
+    elif lure_up_down_dir.y > 0:
+        lureFreeRange.global_transform.origin.y += (speed * delta * 11)
+        if lureFreeRange.global_transform.origin.y >= top_length:
+            lureFreeRange.global_transform.origin.y = top_length
+            lure_up_down_dir.y = -1
+
+
 
 func tryFlipLeft(nextIdle = "openIdle"):
     if secretAniPlayer.assigned_animation != "turnRightToLeft" and secretAniPlayer.assigned_animation != "openIdle":

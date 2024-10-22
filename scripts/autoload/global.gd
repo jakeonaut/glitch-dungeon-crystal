@@ -221,7 +221,7 @@ var isOnMainMenu = false
 var NUM_GEMS_FOR_BROOMERANG = 25
 var NUM_GEMS_FOR_ENCHANTED_BAG = 75
 var NUM_GEMS_FOR_DOUBLE_JUMP = 75
-var NUM_GEMS_FOR_BROOMERANG_WARP = 150
+var NUM_GEMS_FOR_BROOMERANG_WARP = 999
 
 var has_started_game = false
 var has_really_started_game = false
@@ -290,7 +290,7 @@ func resetMemory():
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
-    memory["max_hp"] = 2
+    memory["max_hp"] = 1
     memory["crone"] = 0
     memory["clean_crystals"] = 4
     memory["hp"] = memory["max_hp"]
@@ -306,8 +306,9 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["glitched_grimoire"] = true
     memory["priestess"] = 2
+    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
     

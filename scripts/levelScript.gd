@@ -155,7 +155,7 @@ func tryInitializeFromDebug():
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
       global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR]
 
       # debug "hack" to set angel_statues on debug_initialization
       var tempLevelZone = global.currLevelZone

@@ -341,6 +341,7 @@ func tryingToWakeUp():
   return Input.is_action_just_pressed("sub_action_button")
 
 var is_toss_corrupted = false
+var PLAYER_GRAV = 28
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
@@ -349,10 +350,10 @@ func collideWithWall(local_lv):
     pauseAnimation = false
     bigBump()
     getABroom()
-  grav = 28
+  grav = PLAYER_GRAV
 
 func bigBump():
-  grav = 28
+  grav = PLAYER_GRAV
   bumpSound2.play()
   var prev_hp = global.memory["hp"]
   global.memory["hp"] += 1
