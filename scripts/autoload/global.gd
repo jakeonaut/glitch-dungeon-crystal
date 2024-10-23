@@ -330,7 +330,7 @@ func resetMemory():
     memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 1
-    memory["glitched_broom"] = true
+    memory["glitched_broom"] = false
 
     # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun
@@ -1135,9 +1135,6 @@ func saveMySpot(savePoint, position, level):
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
   for area in areas:
-    if area.is_in_group("enemies"):
-        print(str(area.isActive()) + ", " + str(is_active) + ", " + str(area.get_node("..").is_smacked) + ", " + str(area.get_node("..").am_i_dying))
-
     if area.get_node("..") == my_broom_owner or area.get_node("../..") == my_broom_owner:
         continue
     if area.is_in_group("tadpole"):
