@@ -186,6 +186,7 @@ func getPurified():
 
     getLevelTiles().purifyAllSpikes()
     level.purifyAllWeakEnemies()
+    level.purifyAllFragileBrickSolids()
     # if level.has_node("SavePoint"):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
     # trySweepUpGlitchTiles(collisionShape1)

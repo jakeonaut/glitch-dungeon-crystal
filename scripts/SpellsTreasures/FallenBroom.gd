@@ -344,6 +344,8 @@ func hitStuff(_delta):
               my_broom_owner.has_sweeped_glitch = true
               my_broom_owner.glitchTickle()
               getLevelTiles().infectSpikes(coords)
+            if global.memory["glitched_broom"] and getLevelTiles().isTileFragileSolid(tile_type):
+              getLevelTiles().breakFragile(coords)
               # TODO(jaketrower): also reset the levelTiles array position?
             # if getLevelTiles().isTileSoftSand(tile_type):
             #     getLevelTiles().sweepUpSand(coords)

@@ -471,12 +471,22 @@ func infectSpikes(coords, play_sound = true):
   spike_infection_timer = 0
   return did_infect_spikes
 
+# probably a more efficient way to do this rather than polling all used cells... see infect spikes check somewhere above
 func purifyAllSpikes():
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
     var cell_index = cell_indices[i]
     var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
     if isTileSpikes(tile_type):
+      removeTile(cell_index)
+      var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
+      level.summonSmokeClouds(tile_pos, 2, false, true)
+func purifyAllFragileBrickSolids():
+  var cell_indices = get_used_cells()
+  for i in range(len(cell_indices)):
+    var cell_index = cell_indices[i]
+    var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+    if isTileFragileSolid(tile_type):
       removeTile(cell_index)
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
       level.summonSmokeClouds(tile_pos, 2, false, true)

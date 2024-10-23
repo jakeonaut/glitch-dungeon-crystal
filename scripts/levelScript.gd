@@ -629,6 +629,9 @@ func purifyAllWeakEnemies():
       weak_enemy.ouchies(weak_enemy.global_transform.origin)
       self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
 
+func purifyAllFragileBrickSolids():
+  levelTiles.purifyAllFragileBrickSolids()
+
 var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
 func spawnAngelTadpole(starting_position):
   var tadpole = tadpoleRes.instance()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=2]
@@ -26,6 +26,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=51]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=52]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
@@ -120,7 +124,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 262138, 0, 37, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262143, 0, 37, 327675, 0, 37, 327676, 0, 37, 327677, 0, 37, 327678, 0, 37, 983058, 0, 1, 983059, 0, 1, 983060, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1 )
+"cells": PoolIntArray( 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 262138, 0, 37, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262143, 0, 37, 327675, 0, 37, 327676, 0, 37, 327677, 0, 37, 327678, 0, 37, 524289, 0, 51, 524290, 0, 51, 524291, 0, 51, 589825, 0, 51, 589827, 0, 51, 655361, 0, 51, 655362, 0, 51, 655363, 0, 51, 983058, 0, 1, 983059, 0, 1, 983060, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -156,6 +160,9 @@ shape = SubResource( 50 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 51 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 52 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )

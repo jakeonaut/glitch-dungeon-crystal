@@ -436,7 +436,6 @@ func magicJump():
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
   should_magic_jump = true
-  print("magic jump")
   actuallyApplyJump(false)
   tryClearFallthroughCollisionSolid()
 
@@ -700,9 +699,9 @@ func mushroomClone(trigger_another = true):
     crumbled_carcass.queue_free()
   infectSound.play()
   glitchTickle()
-  if trigger_another:
-    yield(get_tree().create_timer(0.1), "timeout")
-    mushroomClone(false)
+  # if trigger_another:
+  #   yield(get_tree().create_timer(0.1), "timeout")
+  #   mushroomClone(false)
 
 
 # @override

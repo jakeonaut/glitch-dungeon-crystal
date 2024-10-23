@@ -23,6 +23,9 @@ var mole_state_reset_dig_time_limit = 8
 var far_from_home_dist = 5
 var has_dug = false
 var has_been_smacked = false
+var on_building_time_limit = false
+var building_timer = 0
+var building_time_limit = 10
 
 export var is_builder = false
 export var permanently_alter_tiles = false
@@ -138,7 +141,7 @@ func _process(delta):
                 aniPlayer.play("dig")
                 mole_state_timer = 0
 
-        if aniPlayer.assigned_animation == "dig": 
+        if aniPlayer.assigned_animation == "dig":
             mole_state_timer += (delta*22)
             if mole_state_timer >= mole_state_dig_time_limit:
                 if mole_state == MoleState.DIG_IDLE:
@@ -153,6 +156,15 @@ func _process(delta):
                     has_dug = true
                     digSound.play()
                 mole_state_timer = 0
+            building_timer += (delta * 11)
+            if building_timer >= building_time_limit:
+                grav = 0
+                linear_velocity.y = 0
+                vv = 0
+                aniPlayer.stop()
+                aniPlayer.clear_queue()
+                aniPlayer.play("fly")
+                mole_state = MoleState.OVERRIDE_FLY_START
     elif mole_state == MoleState.PREPARE_JUMP:
         # run away from player
         walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1

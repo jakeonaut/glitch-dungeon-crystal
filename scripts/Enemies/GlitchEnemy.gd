@@ -457,7 +457,6 @@ func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying
 
 func activate(_is_player):
-    print("activated")
     if smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         ouchies(global_transform.origin)

@@ -30,8 +30,7 @@ func _ready():
   pass
 
 func _process(delta):
-  if not visible:
-    return
+  if not visible: return
 
   mySprite.flip_h = level.player.global_transform.origin.x > global_transform.origin.x
 
@@ -43,40 +42,50 @@ func _process(delta):
 
   if is_in_cooldown:
     cooldown_timer += (delta*22)
-    if cooldown_timer >= cooldown_time_limit:
-      cooldown_timer = 0
-      is_in_cooldown = false
+  if cooldown_timer >= cooldown_time_limit:
+    cooldown_timer = 0
+    is_in_cooldown = false
 
 # @override
 func glitchSetSpritesAndCollision():
   pass
+
+# @override
+func pressingMoveLeft():
+  if am_i_dying or not visible: return false
+  return walk_direction.x == -1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
+
+# @override
+func pressingMoveRight():
+  if am_i_dying or not visible: return false
+  return walk_direction.x == 1 and ((behavior_walking and slime_state == SlimeState.WALK) or (behavior_was_thrown and not on_ground))
 
 
 func glitchSwitchSprite(_delta):
   pass
 
 
-var has_transformed = false
-func passiveActivate(_delta, _is_player):
-  if is_smacked or is_in_cooldown:
-    return
-  # if not getPlayer().is_mushroom_infected:
-  #   return
+# var has_transformed = false
+# func passiveActivate(_delta, _is_player):
+#   if is_smacked or is_in_cooldown:
+#     return
+#   # if not getPlayer().is_mushroom_infected:
+#   #   return
 
-  is_in_cooldown = true
-  cooldown_timer = 0
-  .getSmacked(null)
-  global_transform.origin.z = 2
-  getPlayer().pauseInput = true
-  global.pauseMoveInput = true
-  getPlayer().pauseAnimation = true
-  wormAniPlayer.stop()
-  wormAniPlayer.clear_queue()
-  wormAniPlayer.queue("gulp")
-  if not has_transformed:
-    wormAniPlayer.queue("transform")
-    has_transformed = true
-  wormAniPlayer.queue("bob")
+#   is_in_cooldown = true
+#   cooldown_timer = 0
+#   .getSmacked(null)
+#   global_transform.origin.z = 2
+#   getPlayer().pauseInput = true
+#   global.pauseMoveInput = true
+#   getPlayer().pauseAnimation = true
+#   wormAniPlayer.stop()
+#   wormAniPlayer.clear_queue()
+#   wormAniPlayer.queue("gulp")
+#   if not has_transformed:
+#     wormAniPlayer.queue("transform")
+#   has_transformed = true
+#   wormAniPlayer.queue("bob")
 
 func jumpToPlayerPosition():
   global_transform.origin.x = getPlayer().global_transform.origin.x  
@@ -102,38 +111,71 @@ func finishGulp():
   
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():
-    var spore = sporeRes.instance()
-    spore.initially_fly_up = true
-    level.add_child(spore)
-    spore.global_transform.origin = self.global_transform.origin
-    spore.original_pos = self.global_transform.origin
-    spore.setAsParent(self)
-    spore.bubble_speed = -rand_range(2.925, 3.8)
-    spore.target_pos.x = self.global_transform.origin.x + rand_range(-4, 4)
-    spore.delta_multiplier = 4.0
-    spore.global_transform.origin.x += rand_range(-3, 3)
-    spore.global_transform.origin.y -= rand_range(0, 1)
-    spore.lifespan_time_limit = 15
+  var spore = sporeRes.instance()
+  spore.initially_fly_up = true
+  level.add_child(spore)
+  spore.global_transform.origin = self.global_transform.origin
+  spore.original_pos = self.global_transform.origin
+  spore.setAsParent(self)
+  spore.bubble_speed = -rand_range(2.925, 3.8)
+  spore.target_pos.x = self.global_transform.origin.x + rand_range(-4, 4)
+  spore.delta_multiplier = 4.0
+  spore.global_transform.origin.x += rand_range(-3, 3)
+  spore.global_transform.origin.y -= rand_range(0, 1)
+  spore.lifespan_time_limit = 15
 
 onready var bounceSound = get_node("Sounds/BounceSound")
 func fallthroughCollisionActivate(possible_game_mover):
-  if not has_transformed:
-    return
+  pass
+  # if not has_transformed:
+  #   return
 
-  # if level.player.nesting_doll_state == global.NestingDoll.BABY:
-  if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
-      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-      var jump_val = 14
-      possible_game_mover.magicJump()
-      getPlayer().linear_velocity.y = jump_val
-      getPlayer().lv.y = jump_val
-      getPlayer().vv = jump_val
-      # getPlayer().physics_vars.applyHalfGrav = true
-      # getPlayer().physics_vars.applyHalfGravTimer = 3
-      bounceSound.pitch_scale = rand_range(0.8, 1.5)
-      bounceSound.play()
-      getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-      mushroomBounceAniPlayer.stop()
-      mushroomBounceAniPlayer.clear_queue()
-      mushroomBounceAniPlayer.play("bounce")
-      spawnASpore()
+  # # if level.player.nesting_doll_state == global.NestingDoll.BABY:
+  # if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
+  #   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+  #   var jump_val = 14
+  #   possible_game_mover.magicJump()
+  #   getPlayer().linear_velocity.y = jump_val
+  #   getPlayer().lv.y = jump_val
+  #   getPlayer().vv = jump_val
+  #   # getPlayer().physics_vars.applyHalfGrav = true
+  #   # getPlayer().physics_vars.applyHalfGravTimer = 3
+  #   bounceSound.pitch_scale = rand_range(0.8, 1.5)
+  #   bounceSound.play()
+  #   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+  #   mushroomBounceAniPlayer.stop()
+  #   mushroomBounceAniPlayer.clear_queue()
+  #   mushroomBounceAniPlayer.play("bounce")
+  #   spawnASpore()
+
+# @override
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+  if has_ever_been_smacked:
+    return
+  .getSmacked(broom_origin, silently)
+  walk_speed = 0
+  grav = 0
+  walk_direction.x = -1
+  if level.player.mySprite.flip_h:
+    walk_direction.x = 1
+  linear_velocity.y = 0
+  lv.y = 0
+  smallInteractionArea.add_to_group("no_pushems")
+
+var moleCricketRes = preload("res://sceneObjects/Enemies/GlitchMoleCricket.tscn")
+# @override
+func unsmack():
+  .unsmack()
+  var evolvedSelf = moleCricketRes.instance()
+  evolvedSelf.is_builder = true
+  level.add_child(evolvedSelf)
+  evolvedSelf.global_transform.origin = self.global_transform.origin
+  evolvedSelf.startDigging()
+
+  var flyPath = get_node("Flypath")
+  var temp = flyPath.global_transform.origin
+  remove_child(flyPath)
+  level.add_child(flyPath)
+  flyPath.global_transform.origin =  temp
+  # evolvedSelf.on_building_time_limit = true
+  queue_free()
