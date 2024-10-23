@@ -306,8 +306,8 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["priestess"] = 2
-    memory["glitched_grimoire"] = true
+    memory["priestess"] = 0
+    memory["glitched_grimoire"] = false
     memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
