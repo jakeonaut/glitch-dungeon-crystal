@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Streetlight.tscn" type="PackedScene" id=2]
@@ -31,6 +31,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=39]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=42]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=27]
 resource_local_to_scene = true
@@ -95,6 +99,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=43]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="BoxShape" id=37]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
@@ -108,6 +116,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -216,14 +225,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0.0734386, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 38 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 39 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 42 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -238,10 +247,7 @@ path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001SpellbookSuburb.tscn"
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.38419e-07, 0.536766, -0.9 )
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 33 )
 anims/doorOpen = SubResource( 34 )
 anims/locked = SubResource( 35 )
@@ -251,6 +257,9 @@ shape = SubResource( 40 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
 shape = SubResource( 41 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 43 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -282,6 +291,7 @@ transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 13, 11.38
 [node name="KizzyCat2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -2.50982, 3.75518, 0 )
 grav = 0
+walk_speed = 8.0
 
 [node name="CollisionShape" parent="Viewport/level/KizzyCat2/FallthroughSolid" index="0"]
 shape = SubResource( 37 )

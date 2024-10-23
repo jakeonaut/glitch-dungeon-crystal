@@ -34,6 +34,16 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
   smack_timer = 0
   is_smacked = true
 
+  if level.player.nesting_doll_state == global.NestingDoll.BABY:
+    level.player.shroomAniPlayer.queue("grow")
+    level.player.shroomAniPlayer.queue("adjust")
+    level.player.getABroom()
+    # for _i in range(3):
+    #     level.player.spawnASpore(0, -1)
+    level.player.nesting_doll_state = global.NestingDoll.GRANDMA
+    global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+    queue_free()
+
 onready var mushroomFallthroughSolid = get_node("MushroomFallthroughSolid")
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -168,9 +178,6 @@ func fallthroughCollisionActivate(possible_game_mover):
             mushroomBounceAniPlayer.clear_queue()
             mushroomBounceAniPlayer.play("bounce")
             spawnASpore()
-    else:
-        if possible_game_mover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
-            passiveActivate(0, true)
     # mySprite.material_override.set_shader_param("enable_glitch", true)
     # shake_power = 0.005
     # mySprite.material_override.set_shader_param("shake_power", shake_power)
@@ -182,17 +189,8 @@ func isActive(_debug=false):
     return cooldown_timer >= cooldown_time_limit
 
 
-func passiveActivate(_delta, is_player):
-    if is_player:
-        if level.player.nesting_doll_state == global.NestingDoll.BABY or level.player.nesting_doll_state == global.NestingDoll.MOM:
-            level.player.shroomAniPlayer.queue("grow")
-            level.player.shroomAniPlayer.queue("adjust")
-            level.player.getABroom()
-            # for _i in range(3):
-            #     level.player.spawnASpore(0, -1)
-            level.player.nesting_doll_state = global.NestingDoll.GRANDMA
-            global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
-            queue_free()
+func passiveActivate(_delta, _is_player):
+    pass
 
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():

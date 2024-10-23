@@ -1035,7 +1035,7 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 
 # var temp_cleansed_fish_glitch = null
 func getFishyInfected():
-  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING or nesting_doll_state == global.NestingDoll.BABY:
     return
   tryClearFallthroughCollisionSolid()
   # if summonedBroom:
@@ -1359,6 +1359,7 @@ func collideWithCeiling(local_lv):
       bigBump()
   on_ceiling = true
   if local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
+     nesting_doll_state == global.NestingDoll.BABY or \
      (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or \
      (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())):
     local_lv.y = 0

@@ -337,7 +337,7 @@ is_extra_life = true
 max_dist_to_player = 999
 
 [node name="ClaydolBoss" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 

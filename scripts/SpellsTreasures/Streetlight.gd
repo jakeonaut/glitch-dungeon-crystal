@@ -96,7 +96,10 @@ func passiveActivate(_delta, _is_player):
 
   global.memory["grav_direction"] = grav_direction
   collectSound.play()
-  level.flipGravity()
+  if grav_direction > 0: 
+    level.flipGravity(1)
+  else:
+    level.flipGravity(-1)
 
   level.player.mySprite.material_override.set_shader_param("enable_palette_cycle", true)
   level.player.getSmacked()

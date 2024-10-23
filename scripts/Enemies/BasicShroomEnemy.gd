@@ -113,19 +113,11 @@ func passiveActivate(_delta, is_player):
     #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
     #   level.player.summonFallenBroom(false, true)
     #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
-  # elif is_infected:
-  #   level.player.shroomAniPlayer.queue("shrink")
-  #   level.player.shroomAniPlayer.queue("adjust")
-  #   level.player.nesting_doll_state = global.NestingDoll.BABY
-  #   global.memory["nesting_doll"] = global.NestingDoll.BABY
-  #   # level.player.updateNestingDoll(global.NestingDoll.BABY)
-  #   if global.memory["broom"] or level.player.fallenBroomRef:
-  #     if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
-  #       level.player.fallenBroomRef.get_ref().queue_free()
-  #       level.player.fallenBroomRef = null
-  #     level.player.mySprite.flip_h = not level.player.mySprite.flip_h
-  #     level.player.summonFallenBroom(false, true)
-  #     level.player.mySprite.flip_h = not level.player.mySprite.flip_h
+  elif is_infected:
+    level.player.shroomAniPlayer.queue("shrink")
+    level.player.shroomAniPlayer.queue("adjust")
+    level.player.nesting_doll_state = global.NestingDoll.BABY
+    global.memory["nesting_doll"] = global.NestingDoll.BABY
   # else:
   #   level.player.shroomAniPlayer.queue("grow")
   #   level.player.shroomAniPlayer.queue("adjust")

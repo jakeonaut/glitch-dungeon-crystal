@@ -293,7 +293,7 @@ func hitStuff(_delta):
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             if area.get_node("..").notOuchies(global_transform.origin):
-                my_broom_owner.getSmacked()
+                if not returning: my_broom_owner.getSmacked()
                 my_broom_owner.has_sweeped_glitch = true
                 has_hit_something = true
                 
@@ -306,19 +306,20 @@ func hitStuff(_delta):
                 if areaParent.has_method("imAnNpc") and smackResult == null and not returning:
                     smacked_npc = weakref(areaParent)
                     have_i_smacked_an_npc = true
-                # my_broom_owner.getSmacked()
+                # if not returning: my_broom_owner.getSmacked()
                 if smackResult == null:
+                    print(areaParent)
                     has_hit_something = true
         elif area.is_in_group("bug") and is_active:
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
                 var smackResult = areaParent.getSmacked(global_transform.origin)
                 if not (area.is_in_group("tadpole") and smackResult == null):
-                    my_broom_owner.getSmacked()
+                    if not returning: my_broom_owner.getSmacked()
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-            if not area.is_in_group("door") and not area.is_in_group("npc"):
+            if not area.is_in_group("door") and not area.is_in_group("true_small_door") and not area.is_in_group("npc"):
                 area.InteractActivate(false)
                 has_hit_something = area.get_parent().has_method("activate")
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):

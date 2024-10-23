@@ -103,9 +103,9 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   notDieSound.play()
   old_broom_origin = broom_origin
 
-  # if my_shroom != null:
-  #   my_shroom.queue_free()
-  #   my_shroom = null
+  if my_shroom != null and my_shroom.get_ref() != null:
+    my_shroom.get_ref().queue_free()
+    my_shroom = null
 
   var babyShroom = basicShroomEnemyRes.instance()
   if old_broom_origin.x > self.global_transform.origin.x:
@@ -114,7 +114,9 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     babyShroom.walk_direction.x = 1
   level.add_child(babyShroom)
   babyShroom.global_transform.origin = self.global_transform.origin
-  my_shroom = babyShroom
+  # if global.currLevelZone == "gd1AbstractSuburbs":
+  #   babyShroom.is_infected = true
+  my_shroom = weakref(babyShroom)
 
 # @override
 func unsmack():

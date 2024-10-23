@@ -348,7 +348,7 @@ func collideWithWall(local_lv):
     pauseAnimation = false
     bigBump()
     getABroom()
-  grav = PLAYER_GRAV
+  # grav = PLAYER_GRAV if grav >
 
 func bigBump():
   grav = PLAYER_GRAV
@@ -386,7 +386,7 @@ func pressingJump():
 
 # @override
 func pressingMoveUp():
-  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+  return malware_infected or Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
   
 # @override
 func pressingMoveDown():
@@ -581,7 +581,6 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
-     nesting_doll_state == global.NestingDoll.BABY or \
      is_mushroom_infected or \
      malware_infected:
     return
