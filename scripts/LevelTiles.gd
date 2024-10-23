@@ -355,6 +355,7 @@ func _process(delta):
     if spike_infection_timer >= spike_infection_time_limit: 
       spike_infection_timer = 0
       global.incrementLevelZoneGlitchTiles(num_infected_spikes)
+      tryToSayTidy()
       for _i in range(num_infected_spikes):
         var coords = infected_spikes.pop_front()
         var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
@@ -399,6 +400,19 @@ func isNeighborOfInfectedSpikes(neighborCoords):
        neighborCoords.y <= infectedCoords.y + 1 and neighborCoords.y >= infectedCoords.y - 1:
       return true
   return false
+
+func tryToSayTidy():
+  var spike_id_array = [51, 52, 53, 54, 55]
+  for spike_id in spike_id_array:
+    if get_used_cells_by_item(spike_id).size() > 0:
+      return
+
+  if level.get_tree().get_nodes_in_group("weak_enemies").size() > 0:
+    return
+  if level.get_tree().get_nodes_in_group("enemies").size() > 0:
+    return
+  
+  level.displayMessageText("all tidy!")
 
 func isTileSolid(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:

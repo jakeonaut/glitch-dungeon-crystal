@@ -88,36 +88,29 @@ margin_bottom = 92.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="PortraitColor" type="ColorRect" parent="TextBox"]
-visible = false
-margin_left = -90.0
-margin_top = -0.5
-margin_right = 5.0
-margin_bottom = 97.5
+margin_left = 395.6
+margin_top = 27.6
+margin_right = 490.6
+margin_bottom = 125.6
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="TextBox/PortraitColor"]
-margin_left = 3.0
-margin_top = 8.0
-margin_right = 89.0
-margin_bottom = 90.0
-color = Color( 0.792157, 0.854902, 0.988235, 1 )
-
-[node name="ColorRect3" type="ColorRect" parent="TextBox/PortraitColor/ColorRect2"]
 margin_left = 4.0
-margin_top = -4.0
-margin_right = 83.0
-margin_bottom = 86.0
-color = Color( 0.792157, 0.854902, 0.988235, 1 )
+margin_top = 5.0
+margin_right = 92.0
+margin_bottom = 93.0
+color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="ColorRect4" type="ColorRect" parent="TextBox/PortraitColor/ColorRect2/ColorRect3"]
+[node name="ColorRect4" type="ColorRect" parent="TextBox/PortraitColor/ColorRect2"]
+margin_left = 4.0
 margin_top = 4.0
-margin_right = 79.0
+margin_right = 85.0
 margin_bottom = 86.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="Portrait" type="Sprite" parent="TextBox/PortraitColor/ColorRect2/ColorRect3/ColorRect4" groups=["sprite"]]
+[node name="Portrait" type="Sprite" parent="TextBox/PortraitColor/ColorRect2/ColorRect4" groups=["sprite"]]
 material = SubResource( 4 )
-position = Vector2( 39, 42.5 )
+position = Vector2( 41, 40.9 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 script = ExtResource( 12 )
@@ -168,9 +161,9 @@ tab_size = 2
 scroll_active = false
 
 [node name="YesButton" type="ColorRect" parent="TextBox/TextCanvasLayer/Container"]
-margin_left = 350.0
+margin_left = 211.0
 margin_top = 254.0
-margin_right = 500.0
+margin_right = 361.0
 margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
@@ -201,9 +194,9 @@ text = "yes"
 scroll_active = false
 
 [node name="NoButton" type="ColorRect" parent="TextBox/TextCanvasLayer/Container"]
-margin_left = 600.0
+margin_left = 461.0
 margin_top = 254.0
-margin_right = 750.0
+margin_right = 611.0
 margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
@@ -234,9 +227,9 @@ text = "no"
 scroll_active = false
 
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container"]
-margin_left = 914.0
+margin_left = 775.0
 margin_top = 250.0
-margin_right = 1274.0
+margin_right = 1135.0
 margin_bottom = 306.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -364,6 +364,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=73]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="BoxShape" id=70]
 resource_local_to_scene = true
 extents = Vector3( 1, 0.8, 1.3 )
@@ -488,6 +492,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=74]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="BoxShape" id=28]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -503,6 +511,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=52]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=75]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=32]
 resource_local_to_scene = true
@@ -657,6 +669,9 @@ shape = SubResource( 68 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
 shape = SubResource( 69 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea2" index="0"]
+shape = SubResource( 73 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 70 )
@@ -862,6 +877,9 @@ shape = SubResource( 49 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
 shape = SubResource( 50 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 74 )
+
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
 
@@ -888,6 +906,9 @@ shape = SubResource( 51 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 52 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 75 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )

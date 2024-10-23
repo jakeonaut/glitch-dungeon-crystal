@@ -201,6 +201,7 @@ var max_cherries = 5
 var collectable_key_recently_got = null
 var collectable_key_recently_got_timer = 0
 var collectable_key_recently_got_time_limit = 40
+var malware_infected = false
 
 var time_dilation_multiplier = 1.0
 
@@ -255,6 +256,7 @@ func _ready():
     if spellCastPauseIndex: pass
     if angelWarping: if justAngelWarped: pass
     if has_been_baba_yaga_cursed: pass
+    if malware_infected: pass
 
     resetMemory()
     loadGameSettings()
@@ -328,6 +330,7 @@ func resetMemory():
     memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 1
+    memory["glitched_broom"] = true
 
     # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun
@@ -973,6 +976,17 @@ func setHaveIBeenToLevel(level):
         global.memory[currLevelZone][level.getShortLevelName()] = {}
     global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"] = true
 
+func haveIBeenToThisLevel(level):
+    tryInitializeLevelZone(level.getLevelZoneName())
+    if currLevelZone == null or not global.memory.has(currLevelZone):
+        return null
+
+    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+        return false
+    if not global.memory[currLevelZone][level.getShortLevelName()].has("have_i_been_here"):
+        return false
+    return global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"]
+
 func setStaticLevelZoneLevelVar(level, node, val):
     if node == null:
         return
@@ -1121,6 +1135,9 @@ func saveMySpot(savePoint, position, level):
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
   for area in areas:
+    if area.is_in_group("enemies"):
+        print(str(area.isActive()) + ", " + str(is_active) + ", " + str(area.get_node("..").is_smacked) + ", " + str(area.get_node("..").am_i_dying))
+
     if area.get_node("..") == my_broom_owner or area.get_node("../..") == my_broom_owner:
         continue
     if area.is_in_group("tadpole"):
@@ -1135,7 +1152,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
           my_broom_owner.getSmacked()
     # thisisn't working because it's the PassiveInteractionArea that has the enemy group, not the active?
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
-      if false: # global.getLevelZoneThing("crystal_geode"):
+      if global.memory["glitched_broom"]: # see GlitchEnemy.activate cuz it gets there first...
         if area.get_node("..").ouchies(global_transform.origin):
           if my_broom_owner:
             my_broom_owner.getSmacked()

@@ -135,6 +135,7 @@ radius = 0.8
 script = ExtResource( 15 )
 stop_all_music = false
 display_textbox = false
+message = "fish key!"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.125 )

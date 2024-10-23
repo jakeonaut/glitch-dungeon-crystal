@@ -1,6 +1,7 @@
 extends Area
 
 onready var parent = get_parent()
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var is_touching_enemy = false
 var is_touching_water = false
@@ -30,13 +31,18 @@ func _process(delta):
     touched_water_area = null
     is_touching_ladder = false
     is_touching_carcass = false
+
     var areas = get_overlapping_areas()
+    var non_malware_areas = []
+
     for area in areas:
+        if not area.is_in_group("malware") and not area.get_node("..") == parent:
+            non_malware_areas.push_back(area)
         # always interact with passive interaction areas
         if area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             area.PassiveInteractActivate(delta)
 
-        if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+        if not parent.malware_infected and area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
             is_touching_enemy = true
             if enemy.has_method("doSomethingElseToPlayer"):
@@ -66,6 +72,9 @@ func _process(delta):
             is_touching_carcass = true
         if area.is_in_group("return_recover"):
             parent.tryToRecover()
+
+    if parent.malware_infected:
+        global.broomSmackStuff(non_malware_areas, true, parent.global_transform, parent, level, null)
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           (global.activeInteractor == null or global.activeInteractor.is_tiny) and \

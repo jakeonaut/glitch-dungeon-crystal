@@ -15,7 +15,7 @@ onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
 onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
 onready var reelStopArea = get_node("LureContainer/ReelStopArea")
 onready var weakPointContainer = get_node("WeakPointContainer")
-onready var weakPointAniPlayer = get_node("WeakPointAnimationPlayer")
+onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -203,7 +203,7 @@ func _process(delta):
     elif boss_phase == BossPhase.EAT_IT:
         if preyTarget != null and preyTarget.get_ref() != null:
             var prey = preyTarget.get_ref()
-            lureFreeRange.global_transform.origin.y = prey.global_transform.origin.y
+            # lureFreeRange.global_transform.origin.y = prey.global_transform.origin.y
             if prey == level.player:
                 level.player.hv = Vector3(0, 0, 0)
                 level.player.dir = Vector3(0.0, 0.0, 0.0)
@@ -228,6 +228,7 @@ func _process(delta):
             cast_timer = 0
             lureFreeRange.visible = true
     elif boss_phase == BossPhase.STUN_FALL:
+        print("hi...")
         grav = 60
         on_ground = false
         if global_transform.origin.y <= -5:
@@ -238,10 +239,6 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("stunIdle")
-            weakPointAniPlayer.stop()
-            weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("stunIdle")
-            weakPointContainer.vulnerable = true
             stun_timer = 0
     elif boss_phase == BossPhase.STUN_IDLE:
         if not is_weakpoint_attached:
@@ -335,25 +332,21 @@ func gotcha():
         var prey = preyTarget.get_ref()
         lureFreeRange.visible = false
         if prey == level.player:
-            level.player.tryDieToEnemy(0, true, true, true)
-            yield(get_tree().create_timer(0.1), "timeout")
-            prey.visible = false
-            yield(get_tree().create_timer(0.4), "timeout")
-            prey.visible = true
-            prey.pauseInput = false
-        else:
-            getSmacked(Vector3(0, 0, 0))
-            boss_phase = BossPhase.STUN_FALL
-            unenemize()
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("stunFall")
-            tryToStartWeakPointDetachment()
-            
-            # i think the only other thing here is a GlitchEnemy?
-            prey.ouchies(self.global_transform.origin)
-            yield(get_tree().create_timer(0.1), "timeout")
-            prey.queue_free()
+            if level.player.malware_infected:
+                print("got a bad apple")
+                boss_phase = BossPhase.STUN_FALL
+                unenemize()
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("stunFall")
+                tryToStartWeakPointDetachment()
+            else:
+                level.player.tryDieToEnemy(0, true, true, true)
+                yield(get_tree().create_timer(0.1), "timeout")
+                level.player.visible = false
+                yield(get_tree().create_timer(0.4), "timeout")
+                level.player.visible = true
+                level.player.pauseInput = false
     preyTarget = null
 
 func doLureCast():
@@ -425,22 +418,39 @@ func randomizeTargetPos():
 func tryDieToOffscreenCamera():
     pass
 
-var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
+# var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
-    bubbleHP -= 1
-    if bubbleHP <= 0:
-        bubbleHP = 5
-        boss_phase = BossPhase.STUN_FALL
-        unenemize()
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("stunFall")
-        tryToStartWeakPointDetachment()
-    time_influence = 35
-    y_div = 5
-    normal_offset = 0.5
-    return .getSmacked(broom_origin, silently)
+    if boss_phase == BossPhase.STUN_FALL or boss_phase == BossPhase.STUN_IDLE:
+        time_influence = 35
+        y_div = 5
+        normal_offset = 0.5
+        return .getSmacked(broom_origin, silently)
+
+    print("eat it though?")
+    boss_phase = BossPhase.EAT_IT
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    lure_bullet_direction_vector = null
+    preyTarget = weakref(level.player)
+    # lureFreeRange.hooked = false
+    # lureFreeRange.restorePlayer(true)
+    # lureFreeRange.hookTarget = null
+    secretAniPlayer.play("chompDown")
+    weakPointAniPlayer.stop()
+    weakPointAniPlayer.clear_queue()
+    weakPointAniPlayer.play("chompDown")
+    return false
+    # bubbleHP -= 1
+    # if bubbleHP <= 0:
+    #     bubbleHP = 5
+    #     boss_phase = BossPhase.STUN_FALL
+    #     unenemize()
+    #     secretAniPlayer.stop()
+    #     secretAniPlayer.clear_queue()
+    #     secretAniPlayer.play("stunFall")
+    #     tryToStartWeakPointDetachment()
+    
 
 
 var is_weakpoint_attached = true
@@ -449,7 +459,7 @@ func tryToStartWeakPointDetachment():
         weakPointAniPlayer.stop()
         weakPointAniPlayer.clear_queue()
         weakPointAniPlayer.play("detachSelf")
-        weakPointAniPlayer.queue("swim")
+        weakPointAniPlayer.queue("stunIdle")
 
 func detachWeakPoint():
     if weakPointContainer.get_parent() != self:
@@ -460,3 +470,4 @@ func detachWeakPoint():
     level.add_child(weakPointContainer)
     is_weakpoint_attached = false
     weakPointContainer.global_transform.origin = tempPos
+    weakPointContainer.vulnerable = true

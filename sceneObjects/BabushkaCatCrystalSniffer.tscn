@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/npcs/catportrait2.png" type="Texture" id=15]
 
 [sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
@@ -31,6 +32,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -110,6 +112,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -150,6 +153,10 @@ shape = SubResource( 42 )
 shape = SubResource( 51 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 12 )]
+
+[node name="Portrait" parent="NPC TextBox/TextBox/PortraitColor/ColorRect2/ColorRect4" index="0"]
+material = null
+texture = ExtResource( 15 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 14 )

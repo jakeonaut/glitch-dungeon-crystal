@@ -202,6 +202,7 @@ func change_scene():
   global.spellCastPauseIndex = current_scene.get_node("Viewport/level/Player").spellCastPauseIndex
   global.memory["currLevelZone"] = global.currLevelZone
   global.set_camera_position_on_respawn = true
+  global.malware_infected = current_scene.get_node("Viewport/level").player.malware_infected
 
   if self.path != "":
     var root = get_tree().get_root()
