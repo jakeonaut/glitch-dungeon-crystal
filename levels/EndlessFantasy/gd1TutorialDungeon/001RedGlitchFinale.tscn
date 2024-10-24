@@ -160,8 +160,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 12, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4861, 10, 0 )
 visible = false
 grav = 0
-bbText = "glitch out and Return.
-to go back .. sorry..
+bbText = "jump into glitch
+to Return. .. sorry..
 you'll keep the key!"
 can_be_activated_invisibly = true
 

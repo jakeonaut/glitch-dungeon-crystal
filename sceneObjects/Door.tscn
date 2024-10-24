@@ -828,6 +828,9 @@ shape = SubResource( 17 )
 
 [node name="TextBox" parent="NPC/NPC TextBox" index="0" groups=["door_textbox"]]
 
+[node name="PortraitColor" parent="NPC/NPC TextBox/TextBox" index="1"]
+visible = false
+
 [node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 21 )
 volume_db = -20.0

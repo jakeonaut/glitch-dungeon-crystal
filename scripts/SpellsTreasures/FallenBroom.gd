@@ -301,7 +301,7 @@ func hitStuff(_delta):
             
         elif area.is_in_group("corporeal_body"):
             var areaParent = area.get_node("..")
-            if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+            if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
                 var smackResult = areaParent.getSmacked(global_transform.origin)
                 if areaParent.has_method("imAnNpc") and smackResult == null and not returning:
                     smacked_npc = weakref(areaParent)

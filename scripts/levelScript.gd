@@ -177,8 +177,6 @@ func tryInitializeFromDebug():
         ["insect caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
       # set for dream temple
       global.tryInitializeLevelZone("gd1CrystalTower")
-      global.setLevelZoneThing("angel_statue",
-        ["dream temple", "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"])
       # set for elder village
       global.tryInitializeLevelZone("gd1GrandmaVillage")
       global.setLevelZoneThing("angel_statue", 
@@ -222,7 +220,7 @@ func processPauseMenu():
         global.pauseGame = true
         player.pauseSound.play()
         playMenuMusic()
-      elif Input.is_action_just_pressed("popup_menu"):
+      elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
         yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY

@@ -1350,7 +1350,8 @@ func applyGravity(delta):
   .applyGravity(delta)
 
 func collideWithCeiling(local_lv):
-  grav = PLAYER_GRAV
+  if grav == 0:
+    grav = PLAYER_GRAV
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false

@@ -28,6 +28,11 @@ func constructMapGrid():
     # print("[" + str(i) + "][" + str(j) + "] = " + str(levelSprite.path))
     mapGrid[i][j] = levelSprite
   has_grid_been_constructed = true
+
+func gimmeMapGrid():
+  if not has_grid_been_constructed:
+    constructMapGrid()
+  return mapGrid
   
 func getCoords(of_path):
   if not has_grid_been_constructed:

@@ -1,7 +1,7 @@
 extends Control
 
-onready var popupRect = get_node("PopupRect")
-onready var popupText = get_node("PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var popupRect = get_node("CanvasLayer/PopupRect")
+onready var popupText = get_node("CanvasLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 var popupTimer = 0
 var popupTimeLimit = 20
 var canResetBindings = true
@@ -16,6 +16,9 @@ onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
 onready var pauseMenuRect = get_node("PauseMenuRect")
 onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
+onready var shardsText = get_node("InventoryRect/ShardsText")
+onready var mapRect = get_node("InventoryRect/MapRect")
+onready var mapIconSprite = get_node("InventoryRect/MapRect/MapIconSprite")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -56,6 +59,7 @@ func _ready():
 
 func _process(delta):
   self.visible = global.isPauseMenuOpen
+  shardsText.visible = get_node("../GlitchStatusRect").visible
   if not global.isPauseMenuOpen:
     popupRect.visible = false
     return
@@ -71,7 +75,7 @@ func _process(delta):
   elif Input.is_action_just_pressed("menu_up"):
     menuMoveSound.play()
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     menuConfirmSound.play()
   elif (Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start")) and ((pauseMenuState == PauseMenuState.INVENTORY and popupRect.visible) or (pauseMenuState != PauseMenuState.SECRET_RITUAL and pauseMenuState != PauseMenuState.INVENTORY and pauseMenuState != PauseMenuState.NORMAL)):
     menuCancelSound.play()
@@ -221,7 +225,7 @@ func processNormalLogic(_delta):
   else:
     cursorSprite.position.y = 120 + (80*normalOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     pauseMenuState = PauseMenuState.TEMP
     shouldUpdateMenuText = true
     if normalOptionIndex == 0:
@@ -289,7 +293,7 @@ func processGraphicsLogic(_delta):
     graphicsOptionIndex = 0
   cursorSprite.position.y = 120 + (80*graphicsOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     if graphicsOptionIndex == 0:
       global.memory["show_crt_effect"] = not global.memory["show_crt_effect"]
@@ -348,7 +352,7 @@ func processSoundLogic(_delta):
     soundOptionIndex = 0
   cursorSprite.position.y = 120 + (80*soundOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     if soundOptionIndex == 0:
       global.memory["stopAllMusic"] = not global.memory["stopAllMusic"]
@@ -397,7 +401,7 @@ func processQuitToMainLogic(_delta):
     quitToMainOptionIndex = 0
   cursorSprite.position.y = 120 + (80*quitToMainOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if quitToMainOptionIndex == 0:
       if global.isOnMainMenu:
         get_tree().quit()
@@ -446,7 +450,7 @@ func processSecretRitualLogic(_delta):
     secretRitualOptionIndex = 0
   cursorSprite.position.y = 120 + (40*secretRitualOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if secretRitualOptionIndex == len(secretRitualOptions) - 1:
       yield(get_tree().create_timer(0.1), "timeout")
       global.isPauseMenuOpen = false
@@ -596,7 +600,7 @@ func processInventoryLogic(delta):
         popupText.text = "goddess dream 2:\n  what does this do?"
       elif inventoryOptionIndexX == 2:
         popupText.text = "goddess dream 3:\n  what does this do?"
-  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("popup_menu"):
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if popupRect.visible:
       popupRect.visible = false
       selectedGlitchSprite = -1
@@ -690,6 +694,7 @@ onready var soulLabel = get_node("InventoryRect/SoulLabel")
 # onready var dreamSprite3 = get_node("InventoryRect/DreamSprite3")
 # onready var dreamLabel = get_node("InventoryRect/DreamLabel")
 func processInventoryRender(_delta):
+  tryDrawMap()
   if inventoryOptionIndex == 0:
     invSelectionSprite.position = Vector2(26, 46)
   elif inventoryOptionIndex == 1:
@@ -766,6 +771,124 @@ func processInventoryRender(_delta):
   # dreamSprite3.visible = global.memory["goddess_dream3"]
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
+# optimization could be, rather than reconstructing the map on every level, can keep this map sprite grid on transition, and simply draw it here...
+var MAP_WIDTH = 15
+var MAP_HEIGHT = 15
+var has_drawn_map = false
+func setProperMapFrame(sprite, mapGrid, i, j):
+  var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
+  var mapPath = mapRoom.path
+  var levelZoneName = global.getLevelZoneName(mapPath)
+  sprite.frame = 0
+  var is_left_open = mapRoom.can_nav_left and j > 0 and mapGrid[i].has(j-1)
+  var is_right_open = mapRoom.can_nav_right and j < 14 and mapGrid[i].has(j+1)
+  var is_top_open = mapRoom.can_nav_up and i < 14 and mapGrid.has(i+1) and mapGrid[i+1].has(j)
+  var is_bottom_open = mapRoom.can_nav_down and i > 0 and mapGrid.has(i-1) and mapGrid[i-1].has(j)
+  if is_left_open and is_right_open and is_top_open and is_bottom_open:
+    sprite.frame = 5
+  elif is_left_open and is_right_open and is_top_open:
+    sprite.frame = 4
+  elif is_left_open and is_right_open and is_bottom_open:
+    sprite.frame = 4
+    sprite.flip_v = true
+  elif is_left_open and is_top_open and is_bottom_open:
+    sprite.frame = 15
+    sprite.flip_h = true
+  elif is_right_open and is_top_open and is_bottom_open:
+    sprite.frame = 15
+  elif is_left_open and is_right_open:
+    sprite.frame = 3
+  elif is_left_open and is_top_open:
+    sprite.frame = 2
+    sprite.flip_h = true
+  elif is_left_open and is_bottom_open:
+    sprite.frame = 2
+    sprite.flip_h = true
+    sprite.flip_v = true
+  elif is_right_open and is_top_open:
+    sprite.frame = 2
+  elif is_right_open and is_bottom_open:
+    sprite.frame = 2
+    sprite.flip_v = true
+  elif is_top_open and is_bottom_open:
+    sprite.frame = 13
+  elif is_left_open:
+    sprite.frame = 1
+    sprite.flip_h = true
+  elif is_right_open:
+    sprite.frame = 1
+  elif is_top_open:
+    sprite.frame = 9
+  elif is_bottom_open:
+    sprite.frame = 8
+  
+  sprite.material = sprite.material.duplicate()
+  sprite.z_index = 1
+  match levelZoneName:
+    "gd1":
+        pass
+    "gd1TutorialDungeon":
+        sprite.material.set_shader_param("target_palette", global.grey_palette)
+    "gd1FishingVillage":
+        sprite.material.set_shader_param("target_palette", global.green_palette)
+    "gd1ToxicJungle":
+        sprite.material.set_shader_param("target_palette", global.black_palette)
+    "gd1ShiftingSandLand":
+        sprite.material.set_shader_param("target_palette", global.yellow_palette)
+    "gd1CrystalTower":
+        sprite.material.set_shader_param("target_palette", global.white_palette)
+    "gd1GrandmaVillage":
+        sprite.material.set_shader_param("target_palette", global.white_palette)
+    "gd1BubblegloopSwamp":
+        sprite.material.set_shader_param("target_palette", global.green_tidepool_palette)
+    "gd1TombSouls":
+        sprite.material.set_shader_param("target_palette", global.yellow_black_palette)
+    "gd1AbstractSuburbs":
+        sprite.material.set_shader_param("target_palette", global.green_black_palette)
+    "gd1primordialOoze":
+        sprite.material.set_shader_param("target_palette", global.dream_palette)
+    _:
+        pass
+
+func tryDrawMap():
+  if has_drawn_map:
+    return
+
+  var mapGrid = transition.mapManager.gimmeMapGrid()
+  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  for i in range(MAP_HEIGHT):
+    for j in range(MAP_WIDTH):
+      if not mapGrid.has(i) or not mapGrid[i].has(j):
+        continue
+      var spriteIndex = (j + ((14-i)*MAP_WIDTH)) + 1
+      var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
+      var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+      sprite.z_index = 0
+      var mapRoom = mapGrid[i][j]
+      if sprite == null:
+        print("DEBUG: " + spriteName + " doesn't exist")
+      elif mapRoom.path == level.getLevelName():
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.frame = 1
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      # elif global.haveIBeenToThisLevelPath(mapRoom.path):
+      else:
+        for angelStatue in angelStatues:
+          if mapRoom.path == angelStatue[1]:
+            var playerIcon = mapIconSprite.duplicate()
+            playerIcon.frame = 2
+            playerIcon.visible = true
+            sprite.add_child(playerIcon)
+        setProperMapFrame(sprite, mapGrid, i, j)
+  has_drawn_map = true
+
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd
   if glitch == global.GlitchForm.NORMAL: sprite.frame = 4
@@ -805,7 +928,7 @@ func processTopInputLogic(_delta):
     topInputOptionIndex = 0
   cursorSprite.position.y = 120 + (80*topInputOptionIndex)
 
-  if Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu"):
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if topInputOptionIndex == 0:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.KEYBOARD_INPUT
@@ -1016,7 +1139,7 @@ func processControlsLogic(_delta):
   last_control_index = control_index
 
 func processPopupRenderLogic(delta):
-  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or Input.is_action_just_pressed("popup_menu"):
+  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     getPlayer().noBroomSound.play()
     global.is_reading_input = false
     return

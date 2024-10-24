@@ -90,7 +90,7 @@ func _process(_delta):
         # else:
         #     player.tryBroom()
     elif global.activeInteractor != null and is_instance_valid(global.activeInteractor):
-        if Input.is_action_just_pressed("popup_menu") or Input.is_action_just_pressed("ui_start"):
+        if (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) or Input.is_action_just_pressed("ui_start"):
             if Input.is_action_just_pressed("ui_start"):
                 global.activeInteractor.selectedYesNoOption = false
             var activatedSomething = global.activeInteractor.InteractActivate()

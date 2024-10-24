@@ -1,32 +1,44 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=3]
 [ext_resource path="res://pauseMenuThemeInputCondensed.tres" type="Theme" id=4]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Glitch Entity.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sprites/map_sprites2d.png" type="Texture" id=6]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=7]
 [ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=8]
+[ext_resource path="res://shaders/Sprite2D.shader" type="Shader" id=9]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=11]
 [ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=12]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/map_spritesIcons2d.png" type="Texture" id=15]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=16]
 [ext_resource path="res://assets/sprites2D/player_sheet_aged.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=18]
 [ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=20]
 [ext_resource path="res://pauseMenuThemeInput.tres" type="Theme" id=21]
 
+[sub_resource type="ShaderMaterial" id=63]
+shader = ExtResource( 9 )
+shader_param/palette_size = 16
+shader_param/base_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 7 )
+
 [sub_resource type="CanvasItemMaterial" id=62]
 
 [node name="PauseMenu" type="Control"]
+margin_left = -86.0
 margin_right = 640.0
 margin_bottom = 522.0
 script = ExtResource( 16 )
 
 [node name="PauseMenuRect" type="ColorRect" parent="."]
 visible = false
-margin_right = 640.0
+margin_left = 86.0
+margin_right = 726.0
 margin_bottom = 522.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -62,7 +74,9 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0.639216 )
 
 [node name="LargerPopup" type="Control" parent="."]
-margin_right = 640.0
+visible = false
+margin_left = -23.0
+margin_right = 617.0
 margin_bottom = 510.0
 
 [node name="ColorRect" type="ColorRect" parent="LargerPopup"]
@@ -248,6 +262,7 @@ volume_db = -20.0
 pitch_scale = 0.9
 
 [node name="PauseTitleRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 92.0
 margin_top = 400.0
 margin_right = 564.0
@@ -297,11 +312,28 @@ text = "press x to select, z to go back
 scroll_active = false
 
 [node name="InventoryRect" type="ColorRect" parent="."]
-margin_left = 133.0
-margin_top = 114.0
-margin_right = 525.0
-margin_bottom = 383.0
+visible = false
+margin_left = 107.0
+margin_top = 113.0
+margin_right = 499.0
+margin_bottom = 382.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0 )
+
+[node name="ShardsText" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 506.0
+margin_top = -73.0
+margin_right = 1022.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "shards
+"
+text = "shards
+"
+scroll_active = false
 
 [node name="TitleRect" type="ColorRect" parent="InventoryRect"]
 margin_left = 103.0
@@ -349,6 +381,2115 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "inventory"
 text = "inventory"
+scroll_active = false
+
+[node name="MapRect" type="ColorRect" parent="InventoryRect"]
+margin_left = 345.0
+margin_top = -25.0
+margin_right = 608.0
+margin_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/MapRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 259.0
+margin_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/MapRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 250.0
+margin_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="MapSprite1" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite2" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite3" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite4" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite5" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite6" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite7" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite8" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite9" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite10" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite11" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite12" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite13" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite14" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite15" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite16" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite17" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite18" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite19" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite20" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite21" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite22" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite23" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite24" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite25" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite26" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite27" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite28" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite29" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite30" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 29 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite31" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite32" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite33" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite34" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite35" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite36" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite37" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite38" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite39" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite40" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite41" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite42" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite43" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite44" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite45" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 45 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite46" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite47" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite48" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite49" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite50" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite51" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite52" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite53" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite54" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite55" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite56" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite57" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite58" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite59" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite60" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 61 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite61" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite62" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite63" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite64" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite65" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite66" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite67" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite68" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite69" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite70" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite71" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite72" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite73" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite74" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite75" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 77 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite76" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite77" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite78" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite79" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite80" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite81" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite82" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite83" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite84" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite85" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite86" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite87" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite88" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite89" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite90" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 93 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite91" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite92" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite93" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite94" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite95" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite96" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite97" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite98" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite99" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite100" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite101" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite102" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite103" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite104" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite105" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 109 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite106" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite107" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite108" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite109" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite110" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite111" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite112" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite113" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite114" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite115" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite116" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite117" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite118" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite119" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite120" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 125 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite121" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite122" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite123" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite124" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite125" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite126" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite127" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite128" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite129" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite130" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite131" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite132" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite133" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite134" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite135" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite136" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite137" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite138" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite139" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite140" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite141" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite142" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite143" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite144" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite145" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite146" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite147" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite148" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite149" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite150" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 157 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite151" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite152" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite153" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite154" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite155" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite156" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite157" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite158" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite159" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite160" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite161" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite162" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite163" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite164" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite165" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 173 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite166" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite167" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite168" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite169" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite170" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite171" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite172" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite173" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite174" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite175" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite176" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite177" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite178" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite179" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite180" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 189 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite181" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite182" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite183" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite184" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite185" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite186" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite187" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite188" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite189" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite190" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite191" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite192" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite193" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite194" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite195" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 204 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite196" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite197" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite198" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite199" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite200" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite201" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite202" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite203" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite204" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite205" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite206" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite207" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite208" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite209" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite210" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 219 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite211" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 12, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite212" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 28, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite213" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 44, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite214" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 60, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite215" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 76, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite216" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 92, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite217" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 108, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite218" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 124, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite219" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 140, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite220" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 156, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite221" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 172, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite222" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 188, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite223" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 204, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite224" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 220, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapSprite225" type="Sprite" parent="InventoryRect/MapRect/ColorRect/ColorRect"]
+material = SubResource( 63 )
+position = Vector2( 236, 235 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+frame = 6
+
+[node name="MapIconSprite" type="Sprite" parent="InventoryRect/MapRect"]
+visible = false
+scale = Vector2( 0.8, 0.8 )
+z_index = 2
+texture = ExtResource( 15 )
+hframes = 4
+vframes = 2
+
+[node name="MapTitleRect" type="ColorRect" parent="InventoryRect"]
+margin_left = 388.0
+margin_top = -59.0
+margin_right = 488.0
+margin_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/MapTitleRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 97.0
+margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/MapTitleRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 90.0
+margin_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapText" type="RichTextLabel" parent="InventoryRect/MapTitleRect"]
+margin_left = 19.0
+margin_top = 8.0
+margin_right = 535.0
+margin_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "map"
+text = "map"
 scroll_active = false
 
 [node name="GrimoireSprite" type="Sprite" parent="InventoryRect"]
@@ -406,8 +2547,8 @@ margin_right = 453.0
 margin_bottom = 126.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "equipment"
-text = "equipment"
+bbcode_text = "equip"
+text = "equip"
 
 [node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
 position = Vector2( 27, 166 )
@@ -612,6 +2753,7 @@ vframes = 6
 frame = 4
 
 [node name="CursorSprite" type="Sprite" parent="."]
+visible = false
 material = SubResource( 62 )
 position = Vector2( 120, 114 )
 scale = Vector2( 3, 3 )
@@ -672,21 +2814,25 @@ vframes = 4
 script = ExtResource( 13 )
 max_frames = 1
 
-[node name="PopupRect" type="ColorRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-margin_left = 109.0
+margin_left = 23.0
 margin_top = 213.0
-margin_right = 519.0
+margin_right = 395.0
 margin_bottom = 313.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="ColorRect" type="ColorRect" parent="PopupRect"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 405.0
+margin_right = 368.0
 margin_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -695,10 +2841,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="PopupRect/ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 398.0
+margin_right = 361.0
 margin_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -707,7 +2853,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PopupRect/ColorRect/ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PopupRect/ColorRect/ColorRect"]
 margin_left = 11.0
 margin_top = 3.0
 margin_right = 394.0

@@ -48,6 +48,8 @@ func _ready():
         # lightAniPlayer.play("lightUpQuiet")
         yield(get_tree().create_timer(0.1), "timeout")
         freeUpPlayer()
+        level.purifyAllWeakEnemies()
+        level.purifyAllFragileBrickSolids()
         queue_free()
         # musicPlayer.changeSongPitch(1.0)
     elif global.memory["priestess"] >= 2: # and global.memory["glitched_grimoire"]:
@@ -209,8 +211,6 @@ func freeUpPlayer():
 
     if not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
         return
-
-    ritualDialogStartSoundScriptRes
 
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)

@@ -19,10 +19,10 @@ func setAsParent(_owner):
   linear_velocity.y = 5
   lv.y = 5
   vv = 5
-  if level.player.nesting_doll_state == global.NestingDoll.GRANDMA:
-    is_infected = true
-  else:
-    is_infected = false
+  # if level.player.nesting_doll_state == global.NestingDoll.GRANDMA:
+  #   is_infected = true
+  # else:
+  #   is_infected = false
 
 func _process(_delta):
   if not visible: return
@@ -113,11 +113,11 @@ func passiveActivate(_delta, is_player):
     #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
     #   level.player.summonFallenBroom(false, true)
     #   level.player.mySprite.flip_h = not level.player.mySprite.flip_h
-  elif is_infected:
-    level.player.shroomAniPlayer.queue("shrink")
-    level.player.shroomAniPlayer.queue("adjust")
-    level.player.nesting_doll_state = global.NestingDoll.BABY
-    global.memory["nesting_doll"] = global.NestingDoll.BABY
+  # elif is_infected:
+  #   level.player.shroomAniPlayer.queue("shrink")
+  #   level.player.shroomAniPlayer.queue("adjust")
+  #   level.player.nesting_doll_state = global.NestingDoll.BABY
+  #   global.memory["nesting_doll"] = global.NestingDoll.BABY
   # else:
   #   level.player.shroomAniPlayer.queue("grow")
   #   level.player.shroomAniPlayer.queue("adjust")

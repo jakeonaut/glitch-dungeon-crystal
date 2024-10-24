@@ -308,8 +308,8 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["priestess"] = 0
-    memory["glitched_grimoire"] = false
+    memory["priestess"] = 2
+    memory["glitched_grimoire"] = true
     memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
@@ -987,6 +987,18 @@ func haveIBeenToThisLevel(level):
         return false
     return global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"]
 
+func haveIBeenToThisLevelPath(levelPath):
+    var shortLevelName = getShortLevelName(levelPath)
+    tryInitializeLevelZone(getLevelZoneName(levelPath))
+    if currLevelZone == null or not global.memory.has(currLevelZone):
+        return null
+
+    if not global.memory[currLevelZone].has(shortLevelName):
+        return false
+    if not global.memory[currLevelZone][shortLevelName].has("have_i_been_here"):
+        return false
+    return global.memory[currLevelZone][shortLevelName]["have_i_been_here"]
+
 func setStaticLevelZoneLevelVar(level, node, val):
     if node == null:
         return
@@ -1166,7 +1178,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       
     elif area.is_in_group("corporeal_body") and is_active:
       var areaParent = area.get_node("..")
-      if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
+      if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
         var smackResult = areaParent.getSmacked(global_transform.origin)
         if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom and my_broom_owner.summonedBroom.is_evil:
           level.player.tryDieToEnemy(0, true, false)

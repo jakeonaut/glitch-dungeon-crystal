@@ -188,7 +188,7 @@ func _process(delta):
                     Input.is_action_just_pressed("sub_action_button") or \
                     Input.is_action_just_pressed("jump_button") or \
                     Input.is_action_just_pressed("ui_start") or \
-                    Input.is_action_just_pressed("popup_menu")
+                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
                 ):
                     mainMenuState = MainMenuState.HIDING_EPILEPSY_WARNING
                     transition.aniPlayer.stop()
@@ -280,7 +280,7 @@ func _process(delta):
     #     switch_glitch_timer = 0
     #     player.applyNextGlitch()
 
-    if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not global.has_started_game:
+    if (Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))) and not global.has_started_game:
         switch_glitch_timer = -999999
         global.memory["current_glitch"] = global.GlitchForm.NORMAL
         player.normalGlitch()

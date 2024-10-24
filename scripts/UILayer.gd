@@ -416,7 +416,7 @@ func processHiscoreRenderLogic(delta):
     # if level.has_node("CubeCrystal"):
     #   global.setLevelZoneThing("hiscore", totalHiscoreCounter)
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or Input.is_action_just_pressed("popup_menu")):
+  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
     # global.isEnteringRoom = true
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false

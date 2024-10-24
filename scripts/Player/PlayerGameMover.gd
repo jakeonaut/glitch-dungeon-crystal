@@ -348,10 +348,12 @@ func collideWithWall(local_lv):
     pauseAnimation = false
     bigBump()
     getABroom()
-  # grav = PLAYER_GRAV if grav >
+  if grav == 0:
+    grav = PLAYER_GRAV
 
 func bigBump():
-  grav = PLAYER_GRAV
+  if grav == 0:
+    grav = PLAYER_GRAV
   bumpSound2.play()
   var prev_hp = global.memory["hp"]
   global.memory["hp"] += 1

@@ -299,7 +299,7 @@ func unsmack():
         mySprite.translation.z = 0
         mySprite.should_animate = false
         mySprite.restart()
-        grav = 20
+        # grav = 20
         on_ground = false
         is_frozen = true
     else:

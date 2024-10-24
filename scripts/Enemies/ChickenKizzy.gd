@@ -105,7 +105,7 @@ func landed():
         chicken_state = ChickenState.LAND
 
 
-var tinyShroomEnemyRes = preload("res://sceneObjects/Enemies/TinyShroomEnemy.tscn")
+var basicShroomEnemyRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
 var old_broom_origin = null
 var my_shroom = null
 # @override
@@ -121,27 +121,27 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
-  # if how_many_times_did_u_hit_me >= 1:
-  #   how_many_times_did_u_hit_me = 0
-  #   if level.player.transformation != level.player.TransformationState.CHICKEN:
-  #       level.player.gravitySound.play()
-  #       level.player.errorSound.play()
-  #       level.player.getChickenInfected()
-  #       level.player.chicken_timer = 0
+  if how_many_times_did_u_hit_me >= 1:
+    how_many_times_did_u_hit_me = 0
+    if level.player.transformation != level.player.TransformationState.CHICKEN:
+        level.player.gravitySound.play()
+        level.player.errorSound.play()
+        level.player.getChickenInfected()
+        level.player.chicken_timer = 0
   .getSmacked(broom_origin, silently)
   if my_shroom != null and my_shroom.get_ref() != null:
     my_shroom.get_ref().queue_free()
     my_shroom = null
 
   old_broom_origin = broom_origin
-  var babyShroom = tinyShroomEnemyRes.instance()
+  var babyShroom = basicShroomEnemyRes.instance()
   if old_broom_origin.x > self.global_transform.origin.x:
     babyShroom.walk_direction.x = -1
   else:
     babyShroom.walk_direction.x = 1
   level.add_child(babyShroom)
   babyShroom.global_transform.origin = self.global_transform.origin
-  babyShroom.is_infected = true
+  # babyShroom.is_infected = true
   my_shroom = weakref(babyShroom)
 
   behavior_jumping = true

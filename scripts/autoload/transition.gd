@@ -160,30 +160,35 @@ func die_fade_to(scn_path):
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func granny_teleport_to(scn_path):
   was_i_interrupted = false
+  global.memory["prev_room"] = self.path
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("granny_teleport", -1, 1.0)
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func fast_fade_to(scn_path):
   was_i_interrupted = false
+  global.memory["prev_room"] = self.path
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("long_fade", -1, 2.0) # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func long_fade_to(scn_path):
   was_i_interrupted = false
+  global.memory["prev_room"] = self.path
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("long_fade") # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func really_long_fade_to(scn_path):
   was_i_interrupted = false
+  global.memory["prev_room"] = self.path
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("long_fade", -1, 0.5) # play the long transition animation
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func really_really_long_fade_to(scn_path):
   was_i_interrupted = false
+  global.memory["prev_room"] = self.path
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("really_long_fade")
