@@ -255,7 +255,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
-        global.transform.origin.y += (10*delta*11)
+        global_transform.origin.y += (10*delta*11)
         if not secretAniPlayer.is_playing():
             boss_phase = BossPhase.IDLE
             secretAniPlayer.stop()

@@ -541,7 +541,6 @@ func getPlayer():
 func notOuchies(broom_origin):
     if not is_smacked:
         level.summonSmokeClouds(global_transform.origin, 1, true, true)
-        print("not ouchies")
         return getSmacked(broom_origin)
     return false
 

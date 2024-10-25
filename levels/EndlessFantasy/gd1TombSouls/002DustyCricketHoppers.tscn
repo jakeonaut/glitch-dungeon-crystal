@@ -2141,7 +2141,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9, 19, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 23, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4813, 23, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 is_passive = true
 is_vertical = true

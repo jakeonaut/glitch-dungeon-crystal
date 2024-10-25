@@ -168,14 +168,8 @@ func unsmack():
   .unsmack()
   var evolvedSelf = moleCricketRes.instance()
   evolvedSelf.is_builder = true
+  evolvedSelf.do_i_care_about_time_limit = true
   level.add_child(evolvedSelf)
   evolvedSelf.global_transform.origin = self.global_transform.origin
   evolvedSelf.startDigging()
-
-  var flyPath = get_node("Flypath")
-  var temp = flyPath.global_transform.origin
-  remove_child(flyPath)
-  level.add_child(flyPath)
-  flyPath.global_transform.origin =  temp
-  # evolvedSelf.on_building_time_limit = true
   queue_free()

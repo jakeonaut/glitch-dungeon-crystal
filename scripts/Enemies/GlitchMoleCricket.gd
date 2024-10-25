@@ -23,7 +23,6 @@ var mole_state_reset_dig_time_limit = 8
 var far_from_home_dist = 5
 var has_dug = false
 var has_been_smacked = false
-var on_building_time_limit = false
 var building_timer = 0
 var building_time_limit = 10
 
@@ -35,6 +34,7 @@ export var can_hop = false
 var initial_grav = 60
 var initial_true_terminal_vel = 32
 var flight_anchor = null
+var do_i_care_about_time_limit = false
 
 var opacity = 1.0
 
@@ -156,15 +156,17 @@ func _process(delta):
                     has_dug = true
                     digSound.play()
                 mole_state_timer = 0
-            building_timer += (delta * 11)
-            if building_timer >= building_time_limit:
-                grav = 0
-                linear_velocity.y = 0
-                vv = 0
-                aniPlayer.stop()
-                aniPlayer.clear_queue()
-                aniPlayer.play("fly")
-                mole_state = MoleState.OVERRIDE_FLY_START
+            if do_i_care_about_time_limit:
+                building_timer += (delta * 11)
+                if building_timer >= building_time_limit:
+                    grav = 0
+                    linear_velocity.y = 0
+                    vv = 0
+                    aniPlayer.stop()
+                    aniPlayer.clear_queue()
+                    aniPlayer.play("fly")
+                    mole_state = MoleState.OVERRIDE_FLY_START
+                    should_fade_away = true
     elif mole_state == MoleState.PREPARE_JUMP:
         # run away from player
         walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
@@ -260,8 +262,9 @@ func amITouchingSolidTiles(currLevelTiles):
 
 var respawn_timer = 0
 var respawn_time_limit = 20
+var should_fade_away = false
 func tryFadeAway(delta):
-    if flight_anchor != null and flight_anchor.should_fade_away:
+    if should_fade_away:
         opacity = opacity + (0.0 - opacity) * (delta * 3)
         myOtherSprite.material_override.set_shader_param("opacity", opacity)
         
@@ -309,6 +312,8 @@ func checkForFlyPathOverrides():
                 aniPlayer.clear_queue()
                 aniPlayer.play("fly")
             flight_anchor = area.get_node("..")
+            if flight_anchor != null:
+                should_fade_away = flight_anchor.should_fade_away
             mole_state = MoleState.OVERRIDE_FLY_START
             if permanently_alter_tiles:
                 global.setStaticLevelZoneLevelVar(level, self, true)

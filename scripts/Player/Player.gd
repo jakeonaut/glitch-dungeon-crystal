@@ -81,14 +81,18 @@ func processWallLadderWalking(delta):
   # elif pressingMoveRight():
   #   spriteContainer.rotation_degrees.z = 90
   if pressingMoveLeft():
+    global_transform.origin.x -= 1
     var leftTiles = getTilesLeftOf(levelTiles)
+    global_transform.origin.x += 1
     for tile_coords in leftTiles:
       if tile_coords == null: continue
       var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
       if levelTiles.isTileDissolvingStone(tile_type):
         levelTiles.corrode(tile_coords)
   if pressingMoveRight():
+    global_transform.origin.x += 1
     var rightTiles = getTilesRightOf(levelTiles)
+    global_transform.origin.x -= 1
     for tile_coords in rightTiles:
       if tile_coords == null: continue
       var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
@@ -319,10 +323,10 @@ func canSwim():
   return transformation == TransformationState.FISHY
   
 func isWalkingIntoWall():
-  if summonedBroom != null:
-    return was_walking_into_wall
-  else:
-    return .isWalkingIntoWall() # super
+  # if summonedBroom != null:
+  #   return was_walking_into_wall
+  # else:
+  return .isWalkingIntoWall() # super
 
 func sayThis(message, _time_to_clear = 3.0):
   textBox.text_final = message

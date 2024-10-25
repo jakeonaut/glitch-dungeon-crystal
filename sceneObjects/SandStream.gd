@@ -17,12 +17,12 @@ func passiveActivate(delta, is_player):
   level.player.target_last_grounded_y = level.player.global_transform.origin.y
   level.player.is_touching_sandstream = true
   var value = 2
-  if level.player.pressingDown():
-    value = 4
-  if level.player.pressingJump():
-    value = -2
+  # if level.player.pressingDown():
+  #   value = 4
+  # if level.player.pressingJump():
+  #   value = -2
   level.player.global_transform.origin.y -= (delta*value)
-  level.player.on_ground = true
+  # level.player.on_ground = true
   # if global.memory["zora_flippers"] == 0:
   level.player.pauseAnimation = true
   var aa = level.player.aniPlayer.assigned_animation
