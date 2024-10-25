@@ -44,5 +44,17 @@ func passiveActivate(_delta, is_player):
     level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
   
 func swallowPlayer():
-  level.player.tryDieToEnemy(0, true, true, true)
-  gulping = false
+  if level.player.malware_infected:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("corrupt")
+  else:
+    level.player.tryDieToEnemy(0, true, true, true)
+    gulping = false
+
+func getCorruptedAndDie():
+  fishingRod.restorePlayer(false)
+  level.player.visible = true
+  level.player.physics_state = level.player.PhysicsState.NORMAL
+  level.player.magicJump()
+  queue_free()

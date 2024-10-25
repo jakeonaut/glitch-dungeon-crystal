@@ -22,10 +22,13 @@ func getPlayer():
 
 var tile_dict = {}
 var infected_spikes = []
+var dissolving_stones = []
 var transient_tiles = []
 var transient_time_limit = 20
 var spike_infection_timer = 0
 var spike_infection_time_limit = 5
+var stone_corrosion_timer = 0
+var stone_corrosion_time_limit = 5
 var my_tileset_type = global.TilesetType.DUNGEON
 var my_tileset_glitch_type = global.GlitchForm.NORMAL
 
@@ -241,6 +244,9 @@ var is_rerandomizing = false
 
 var rerandomize_timer = 0
 var rerandomize_time_limit = 5
+var DISSOLVING_STONE1 = 325
+var DISSOLVING_STONE2 = 326
+var DISSOLVING_STONE3 = 327
 
 func getRandomGlitchType():
   if my_tileset_type == global.TilesetType.GLITCH_WORLD:
@@ -348,6 +354,22 @@ func _process(delta):
 
   if global.isPauseMenuOpen: return
 
+  var num_dissolving_stones = len(dissolving_stones)
+  if num_dissolving_stones > 0:
+    stone_corrosion_timer += (delta*22)
+    if stone_corrosion_timer >= stone_corrosion_time_limit:
+      stone_corrosion_timer = 0
+      for _i in range(num_dissolving_stones):
+        var coords = dissolving_stones.pop_front()
+        var tile_type = get_cell_item(coords.x, coords.y, coords.z)
+        var tile_name = mesh_library.get_item_name(tile_type)
+        if tile_name == "DissolvingStone1":
+          set_cell_item(coords.x, coords.y, coords.z, DISSOLVING_STONE2)
+        elif tile_name == "DissolvingStone2":
+          set_cell_item(coords.x, coords.y, coords.z, DISSOLVING_STONE3)
+        elif tile_name == "DissolvingStone3":
+          set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+
   # process infected tiles, and spread infection.
   var num_infected_spikes = len(infected_spikes)
   if num_infected_spikes > 0:
@@ -430,6 +452,12 @@ func isTileFragileSolid(tile_type):
   var tile_name = mesh_library.get_item_name(tile_type)
   return "Fragile" in tile_name
 
+func isTileDissolvingStone(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "DissolvingStone" in tile_name
+
 func isTileSpikes(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
@@ -470,6 +498,11 @@ func infectSpikes(coords, play_sound = true):
     did_infect_spikes = true
   spike_infection_timer = 0
   return did_infect_spikes
+
+func corrode(coords):
+  var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+  if isTileDissolvingStone(tile_type) and not coords in dissolving_stones:
+    dissolving_stones.append(coords)
 
 # probably a more efficient way to do this rather than polling all used cells... see infect spikes check somewhere above
 func purifyAllSpikes():

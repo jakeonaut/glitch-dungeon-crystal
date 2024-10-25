@@ -623,20 +623,12 @@ func normalizeInventoryOptionIndex(y, x):
     if y > 0:
       if inventoryOptionIndex == 0 and not grimoireSprite.visible:
         inventoryOptionIndex = 1
-      if inventoryOptionIndex == 2 and not bagSprite.visible:
-        inventoryOptionIndex = 3
-      if inventoryOptionIndex == 3 and not soulLabel.visible:
-        inventoryOptionIndex = 4
-      if inventoryOptionIndex == 4 or inventoryOptionIndex > 4: # if (inventoryOptionIndex == 4 and not dreamLabel.visible) or inventoryOptionIndex > 4:
+      if (inventoryOptionIndex == 2 and not soulLabel.visible) or inventoryOptionIndex > 2:
         inventoryOptionIndex = 0 if grimoireSprite.visible else 1
     elif y < 0:
       if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
-        inventoryOptionIndex = 4
-      if inventoryOptionIndex == 4: # and not dreamLabel.visible:
-        inventoryOptionIndex = 3
-      if inventoryOptionIndex == 3 and not soulLabel.visible:
         inventoryOptionIndex = 2
-      if inventoryOptionIndex == 2 and not bagSprite.visible:
+      if inventoryOptionIndex == 2 and not soulLabel.visible:
         inventoryOptionIndex = 1
 
   if inventoryOptionIndex == 1:

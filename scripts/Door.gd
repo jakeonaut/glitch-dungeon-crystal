@@ -262,7 +262,8 @@ func isActive(care_about_facing=false):
   return (visible or is_passive) and \
          (getPlayer().on_ground or \
             (getPlayer().was_on_ground and Input.is_action_just_pressed("jump_button")) or \
-            (getPlayer().isWalkingIntoWall() and getPlayer().on_ceiling)
+            (getPlayer().isWalkingIntoWall() and getPlayer().on_ceiling) or \
+            getPlayer().transformation == getPlayer().TransformationState.FISHY
           ) and \
           (not care_about_facing or (
             getPlayer().global_transform.origin.x > self.global_transform.origin.x and getPlayer().mySprite.flip_h

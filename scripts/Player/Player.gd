@@ -80,6 +80,32 @@ func processWallLadderWalking(delta):
   #   spriteContainer.rotation_degrees.z = 270
   # elif pressingMoveRight():
   #   spriteContainer.rotation_degrees.z = 90
+  if pressingMoveLeft():
+    var leftTiles = getTilesLeftOf(levelTiles)
+    for tile_coords in leftTiles:
+      if tile_coords == null: continue
+      var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+      if levelTiles.isTileDissolvingStone(tile_type):
+        levelTiles.corrode(tile_coords)
+  if pressingMoveRight():
+    var rightTiles = getTilesRightOf(levelTiles)
+    for tile_coords in rightTiles:
+      if tile_coords == null: continue
+      var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+      if levelTiles.isTileDissolvingStone(tile_type):
+        levelTiles.corrode(tile_coords)
+
+# make this work with FLIP GRAVITY... ? (if it doesnt already)
+# @override
+func collideWithFloor(local_lv):
+  var bottomTiles = getTilesBelow(levelTiles)
+  for tile_coords in bottomTiles:
+    if tile_coords == null: continue
+    var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+    if levelTiles.isTileDissolvingStone(tile_type):
+      levelTiles.corrode(tile_coords)
+  return .collideWithFloor(local_lv)
+
 func processNotWallLadderWalking(delta):
   .processNotWallLadderWalking(delta)
   # spriteContainer.rotation_degrees.z = 0
@@ -1670,8 +1696,8 @@ func tumbleFall(direction_vector, is_corrupted = false):
     aniPlayer.queue("tumbleLeft")
     jump_val = -10
 
-  malware_infected = is_corrupted
-  if malware_infected:
+  if is_corrupted:
+    malware_infected = is_corrupted
     grav = 0
     on_ground = false
     loseBroom()

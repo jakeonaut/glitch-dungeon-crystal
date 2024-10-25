@@ -135,7 +135,7 @@ func _ready_impl():
   if player_message != "???":
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    flipGravity(1)
+    flipGravity(-1)
   has_room_initialized = true
   global.setHaveIBeenToLevel(self)
 
@@ -213,6 +213,7 @@ func processPauseMenu():
     if not global.isPauseMenuOpen and global.activeInteractor == null:
       if Input.is_action_just_pressed("ui_start"):
         yield(get_tree().create_timer(0.1), "timeout")
+        glitchScreenEffect.visible = false
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
         uiLayer.pauseMenu.normalOptionIndex = 0
         uiLayer.pauseMenu.shouldUpdateMenuText = true
@@ -223,6 +224,7 @@ func processPauseMenu():
       elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
         yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
+          glitchScreenEffect.visible = false
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
           uiLayer.pauseMenu.selectedGlitchSprite = -1
           uiLayer.pauseMenu.inventoryOptionIndex = 0

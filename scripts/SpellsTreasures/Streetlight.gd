@@ -41,27 +41,28 @@ func _process(delta):
       is_sparkle_smacked = false
 
   if sparkleSprite != null:
-    spawn_timer += (delta*22)
-    if spawn_timer >= spawn_time_limit:
-      var newSprite = sparkleSprite.duplicate()
-      newSprite.should_fizzle_out = true
-      newSprite.visible = true
-      newSprite.transform.origin = Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125),
-          0
-      )
-      newSprite.updateBaseFrame(0, 0)
-      newSprite.max_frames = 2
-      add_child(newSprite)
-      spawn_timer = 0
-      if is_sparkle_smacked:
-        newSprite.should_fly_somewhere = true
-        newSprite.fly_pos = level.player.global_transform.origin + newSprite.transform.origin
-        newSprite.fly_speed = 5
+    if (level.player.grav > 0 and grav_direction < 0) or (level.player.grav < 0 and grav_direction > 0):
+      spawn_timer += (delta*22)
+      if spawn_timer >= spawn_time_limit:
+        var newSprite = sparkleSprite.duplicate()
         newSprite.should_fizzle_out = true
-        newSprite.max_frames = 4
-        newSprite.pixel_size = 0.18
+        newSprite.visible = true
+        newSprite.transform.origin = Vector3(
+            stepify(rand_range(-1.0, 1.0), 0.125),
+            stepify(rand_range(0.5, 1.5), 0.125),
+            0
+        )
+        newSprite.updateBaseFrame(0, 0)
+        newSprite.max_frames = 2
+        add_child(newSprite)
+        spawn_timer = 0
+        if is_sparkle_smacked:
+          newSprite.should_fly_somewhere = true
+          newSprite.fly_pos = level.player.global_transform.origin + newSprite.transform.origin
+          newSprite.fly_speed = 5
+          newSprite.should_fizzle_out = true
+          newSprite.max_frames = 4
+          newSprite.pixel_size = 0.18
 
 func unsmack():
   smack_timer = 0
