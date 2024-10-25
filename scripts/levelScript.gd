@@ -592,7 +592,14 @@ func trySpawnFollowers():
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
 
-  var numKeys = global.getThingFromAllLevelZonez("key")
+  spawnSpecialKeyFollowers(
+    player.global_transform.origin + Vector3(
+      stepify(rand_range(-1.0, 1.0), 0.125),
+      stepify(rand_range(0.5, 1.5), 0.125),
+      0
+    )
+  )
+  var numKeys = global.memory["key"] if global.memory.has("key") else null
   if numKeys != null:
     for _i in range(numKeys):
       spawnKeyFollower(
@@ -642,19 +649,39 @@ func spawnAngelTadpole(starting_position):
   return tadpole
 
 var keyFollowerRes = preload("res://sceneObjects/KeyFollower.tscn")
+func spawnSpecialKeyFollowers(starting_position):
+  if trySpawnSpecialKey(global.KeyItem.FISH):
+    var keyFollower = spawnKeyFollower(starting_position)
+    keyFollower.makeMeSpecial(global.KeyItem.FISH)
+  if trySpawnSpecialKey(global.KeyItem.PYRAMID):
+    var keyFollower = spawnKeyFollower(starting_position)
+    keyFollower.makeMeSpecial(global.KeyItem.PYRAMID)
+  if trySpawnSpecialKey(global.KeyItem.SHROOM):
+    var keyFollower = spawnKeyFollower(starting_position)
+    keyFollower.makeMeSpecial(global.KeyItem.SHROOM)
+  if trySpawnSpecialKey(global.KeyItem.CAT):
+    var keyFollower = spawnKeyFollower(starting_position)
+    keyFollower.makeMeSpecial(global.KeyItem.CAT)
+
+var key_items_spawned = {}
+func trySpawnSpecialKey(keyType):
+  if not global.memory.has("key_items") or not global.memory["key_items"].has(keyType):
+    return false
+  if key_items_spawned.has(keyType):
+    return false
+  if global.memory["key_items"][keyType] == global.ItemState.GOT_IT:
+    key_items_spawned[keyType] = true
+    return true
+
 func spawnKeyFollower(starting_position):
   var keyFollower = keyFollowerRes.instance()
   self.add_child(keyFollower)
   keyFollower.global_transform.origin = starting_position
-  # this is dumb but whatever
-  if not trySpawnSpecialKey(keyFollower, global.KeyItem.FISH):
-    if not trySpawnSpecialKey(keyFollower, global.KeyItem.PYRAMID):
-      if not trySpawnSpecialKey(keyFollower, global.KeyItem.SHROOM):
-        trySpawnSpecialKey(keyFollower, global.KeyItem.CAT)
 
   var target = followers[-1] if followers.size() > 0 else player
   keyFollower.gameMoverTarget = weakref(target)
   followers.push_back(keyFollower)
+  return keyFollower
 
 var angelEggFollowerRes = preload("res://sceneObjects/AngelEggFollower.tscn")
 func spawnAngelEggFollower(starting_position):
@@ -680,17 +707,6 @@ func spawnPetFollower(starting_position):
       var target = followers[-1] if followers.size() > 0 else player
       petFollower.gameMoverTarget = weakref(target)
       followers.push_back(petFollower)
-
-var key_items_spawned = {}
-func trySpawnSpecialKey(keyFollower, keyType):
-  if not global.memory.has("key_items") or not global.memory["key_items"].has(keyType):
-    return false
-  if key_items_spawned.has(keyType):
-    return false
-  if global.memory["key_items"][keyType] == global.ItemState.GOT_IT:
-    keyFollower.makeMeSpecial(keyType)
-    key_items_spawned[keyType] = true
-    return true
 
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")

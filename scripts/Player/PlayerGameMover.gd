@@ -509,8 +509,8 @@ var summonedBroom = null
 func getWalkSpeed(delta):
   if transformation == TransformationState.CHICKEN:
     return 6
-  # if transformation == TransformationState.UNDERGROUND_RETURNING:
-  #   return 0
+  if transformation == TransformationState.UNDERGROUND_RETURNING:
+    return 0
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2

@@ -20,7 +20,7 @@ func activateScript():
     if door.locked_to_monsters:
       npc.textBoxContainer.bbText = "•it won't open"
     elif door.key_type == global.KeyItem.NORMAL:
-      var num_keys = global.getLevelZoneThing("key")
+      var num_keys = global.memory["key"] if global.memory.has("key") else null
       if door.prev_keys != num_keys and door.is_locked:
         door.prev_keys = num_keys
         if num_keys == null or num_keys == 0:

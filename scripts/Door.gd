@@ -83,7 +83,12 @@ func _ready():
 
   id = self.generateId()
   var _generateChickens = false
-  if (is_locked or should_lock) and global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id):
+  if (is_locked or should_lock) and ((
+    global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id)
+  ) or (
+    key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL and 
+    global.memory["key_items"][key_type] == global.ItemState.USED_IT
+  )):
     is_locked = false
     should_lock = false
     _generateChickens = true
@@ -283,7 +288,7 @@ func activate(is_player):
       goThroughDoor()
     elif is_locked:
       if key_type == global.KeyItem.NORMAL:
-        var num_keys = global.getLevelZoneThing("key")
+        var num_keys = global.memory["key"] if global.memory.has("key") else null
         if num_keys != null and num_keys >= num_keys_unlock:
           startDoorUnlock()
         elif not lockedSound.is_playing():
@@ -343,7 +348,7 @@ var is_unlocking = false
 var unlocking_key_array = []
 var was_i_just_unlocked = false
 func startDoorUnlock():
-  var num_keys = global.getLevelZoneThing("key")
+  var num_keys = global.memory["key"] if global.memory.has("key") else null
 
   if not locked_to_monsters:
     unlocking_key_array = []
@@ -359,7 +364,7 @@ func startDoorUnlock():
           if unlocking_key_array.size() >= num_keys_unlock:
             break
         
-    if not key_type == global.KeyItem.CRYSTAL and not key_type == global.KeyItem.ZONE_CRYSTAL:
+    if key_type == global.KeyItem.NORMAL:
       global.setLevelZoneThing("key", num_keys - num_keys_unlock)
   npc.visible = false 
   npc.can_activate = false

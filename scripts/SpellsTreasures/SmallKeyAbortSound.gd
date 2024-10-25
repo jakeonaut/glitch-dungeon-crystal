@@ -20,11 +20,11 @@ func activateScript():
         elif key_type == global.KeyItem.CAT:
             key_name = "CAT KEY"
         level.player.sayThis("Got the " + key_name + "!")
-        
-    var num_keys = global.getLevelZoneThing("key")
-    if num_keys == null:
-        global.setLevelZoneThing("key", 0)
-    global.incrementLevelZoneThing("key", 1)
+    else:
+        var num_keys = global.memory["key"] if global.memory.has("key") else null
+        if num_keys == null:
+            global.memory["key"] = 0
+        global.memory["key"] += 1
     global.pauseGame = false
     global.pauseMoveInput = false
     level.spawnKeyFollower(level.player.global_transform.origin)

@@ -105,10 +105,10 @@ func _process(delta):
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
   # TODO(jaketrower):
-  # if global.getLevelZoneThing("key") != null:
+  # if global.memory.has("key"):
   #   keyStatusRect.visible = true
-  #   keyStatusText1.text = str(global.getLevelZoneThing("key"))
-  #   keyStatusText2.text = str(global.getLevelZoneThing("key"))
+  #   keyStatusText1.text = str(global.memory["key"])
+  #   keyStatusText2.text = str(global.memory["key"])
   # else:
   keyStatusRect.visible = false
     

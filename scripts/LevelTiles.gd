@@ -152,10 +152,10 @@ func buildSingleRandomTile(cell_index, glitch_type):
     var skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
     
     # DESERT MODIFICATION
-    if my_tileset_type == global.TilesetType.DESERT:
-      skip_level_top_neighbor_tile_type = top_neighbor_tile_type
-      skip_top_name = top_name
-      skip_level_bottom_neighbor_tile_type = bottom_neighbor_tile_type
+    # if my_tileset_type == global.TilesetType.DESERT:
+    #   skip_level_top_neighbor_tile_type = top_neighbor_tile_type
+    #   skip_top_name = top_name
+    #   skip_level_bottom_neighbor_tile_type = bottom_neighbor_tile_type
 
     # no top neighbor
     if (top_neighbor_tile_type == -1 or "Cloud" in top_name or "Spike" in top_name) and (skip_level_top_neighbor_tile_type == -1 or "Cloud" in skip_top_name or "Spike" in skip_top_name):
@@ -171,15 +171,15 @@ func buildSingleRandomTile(cell_index, glitch_type):
     elif bottom_neighbor_tile_type == -1 and skip_level_bottom_neighbor_tile_type == -1: 
       setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, glitch_type)
       # DESERT MODIFICATION 
-      if my_tileset_type == global.TilesetType.DESERT:
-        skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
-        if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
-          var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
-          setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation, 0, glitch_type)
-          var type = get_cell_item(new_index.x, new_index.y, new_index.z)
-          if type != INVALID_CELL_ITEM:
-            var name = mesh_library.get_item_name(type)
-            tile_dict[new_index] = [name, tile_orientation]
+      # if my_tileset_type == global.TilesetType.DESERT:
+      #   skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
+      #   if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
+      #     var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
+      #     setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation, 0, glitch_type)
+      #     var type = get_cell_item(new_index.x, new_index.y, new_index.z)
+      #     if type != INVALID_CELL_ITEM:
+      #       var name = mesh_library.get_item_name(type)
+      #       tile_dict[new_index] = [name, tile_orientation]
     else:
       setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "CloudSemisolid":
