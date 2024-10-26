@@ -454,7 +454,7 @@ func landed():
         behavior_jumping = false
 
 func isActive(_debug=false):
-    return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying
+    return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
 func activate(_is_player):
     if smallInteractionArea.is_in_group("weak_enemies"):
@@ -464,6 +464,9 @@ func activate(_is_player):
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         getPlayer().getSmacked()
+        if getPlayer().teleport_to == null:
+            getPlayer().teleport_to = weakref(self)
+            getPlayer().teleport_to_origin = self.global_transform.origin
     elif smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:
             ouchies(global_transform.origin)
@@ -477,6 +480,9 @@ func activate(_is_player):
     else:
         getSmacked(global_transform.origin)
         getPlayer().getSmacked()
+        if getPlayer().teleport_to == null:
+            getPlayer().teleport_to = weakref(self)
+            getPlayer().teleport_to_origin = self.global_transform.origin
 
 func passiveActivate(_delta, _is_player):
     pass

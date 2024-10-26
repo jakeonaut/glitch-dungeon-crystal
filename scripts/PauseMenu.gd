@@ -591,7 +591,7 @@ func processInventoryLogic(delta):
       elif inventoryOptionIndexX == 1:
         popupText.text = "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
       elif inventoryOptionIndexX == 2:
-        popupText.text = "mushroom memory:\n  what does this do?"
+        popupText.text = "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
     elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:

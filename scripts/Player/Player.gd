@@ -432,6 +432,7 @@ func _process(delta):
 
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     return
+  processTeleportationLogic(delta)
   processCastingLogic(delta)
   processBroomLogic(delta)
   processBagLogic(delta)
@@ -527,6 +528,13 @@ func _process(delta):
     mySprite.material_override.set_shader_param("target_palette", global.NES_palette)
   
 
+var teleporting = false
+var has_teleported = false
+var teleport_timer = 0
+var teleport_time_limit = 2
+var teleport_time_limit2 = 5
+var teleport_to = null
+var teleport_to_origin = null
 func unsmack():
   smack_timer = 0
   is_smacked = false
@@ -537,6 +545,42 @@ func unsmack():
   # mySprite.material_override.set_shader_param("normal_offset", 0.0)
   mySprite.material_override.set_shader_param("normal_offset", .02)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
+
+  if global.memory["mushroom_soul"] and teleport_to != null and Input.is_action_pressed("sub_action_button"):
+    pauseSelf = true
+    global.pauseMoveInput = true
+    visible = false
+    teleporting = true
+    for _i in range(5):
+      spawnASpore(self.global_transform.origin, false)
+    teleport_timer = 0
+    has_teleported = false
+
+func processTeleportationLogic(delta):
+  if teleporting:
+    teleport_timer += (delta*22)
+    if teleport_timer >= teleport_time_limit:
+      if not has_teleported:
+        # TODO
+        # reassembleSound.play()
+        if global.memory["mushroom_soul"]:
+          # if teleport_to != null and teleport_to.get_ref() != null:
+          #   var teleportTarget = teleport_to.get_ref()
+          #   var temp_position = self.global_transform.origin
+          #   self.global_transform.origin = teleportTarget.global_transform.origin
+          #   # teleportTarget.global_transform.origin = temp_position
+          if teleport_to_origin != null:
+            self.global_transform.origin = teleport_to_origin
+        has_teleported = true
+        teleport_to = null
+        teleport_to_origin = null
+      for _i in range(1):
+        spawnASpore(self.global_transform.origin, true)
+    if teleport_timer >= teleport_time_limit2:
+      teleporting = false
+      visible = true
+      pauseSelf = false
+      global.pauseMoveInput = false
 
 var pausingFromSpellCasting = false
 var tryPauseFromSpellCasting = false

@@ -294,7 +294,6 @@ func resetMemory():
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["max_hp"] = 1
     memory["crone"] = 0
-    memory["clean_crystals"] = 4
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
@@ -308,8 +307,9 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["priestess"] = 2
-    memory["glitched_grimoire"] = true
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
+    memory["glitched_grimoire"] = false
     memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
@@ -327,9 +327,9 @@ func resetMemory():
     memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
-    memory["mushroom_soul"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
 
     # DEFUNCT POWERUPS
@@ -1159,6 +1159,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
           my_broom_owner.has_sweeped_glitch = true
           my_broom_owner.glitchTickle()
           my_broom_owner.getSmacked()
+          if my_broom_owner.teleport_to == null:
+            my_broom_owner.teleport_to = weakref(area.get_parent())
+            my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
     # thisisn't working because it's the PassiveInteractionArea that has the enemy group, not the active?
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if global.memory["glitched_broom"]: # see GlitchEnemy.activate cuz it gets there first...
@@ -1173,6 +1176,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
             my_broom_owner.getSmacked()
             my_broom_owner.has_sweeped_glitch = true
             my_broom_owner.glitchTickle()
+            if my_broom_owner.teleport_to == null:            
+                my_broom_owner.teleport_to = weakref(area.get_parent())
+                my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
       
       # # TODO kill glitches or "free" them like glitch slug...
       
@@ -1189,6 +1195,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
         if not area.is_in_group("tadpole") and smackResult == null:
           if my_broom_owner:
             my_broom_owner.getSmacked()
+            if my_broom_owner.teleport_to == null:
+                my_broom_owner.teleport_to = weakref(area.get_parent())
+                my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
     elif area.is_in_group("bug") and is_active:
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
@@ -1196,6 +1205,9 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
         if not (area.is_in_group("tadpole") and smackResult == null):
           if my_broom_owner:
             my_broom_owner.getSmacked()
+            if my_broom_owner.teleport_to == null:
+                my_broom_owner.teleport_to = weakref(area.get_parent())
+                my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and not area.is_in_group("true_small_door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
       area.InteractActivate(false)

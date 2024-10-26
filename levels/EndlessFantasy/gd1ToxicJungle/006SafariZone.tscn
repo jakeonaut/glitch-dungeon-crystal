@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -32,6 +32,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=47]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=83]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
@@ -195,6 +199,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [ ExtResource( 12 ) ]
 }
+
+[sub_resource type="BoxShape" id=84]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=68]
 resource_local_to_scene = true
@@ -691,6 +699,9 @@ shape = SubResource( 46 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 47 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 83 )
+
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )
 
@@ -715,6 +726,9 @@ shape = SubResource( 46 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
 shape = SubResource( 47 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 84 )
+
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )
 
@@ -732,7 +746,6 @@ spawned_object_path = "res://sceneObjects/Enemies/BasicShroomEnemy.tscn"
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -2, 0 )
 grav = 0
-walk_speed = 8.0
 
 [node name="CollisionShape" parent="Viewport/level/Furbo/FallthroughSolid" index="0"]
 shape = SubResource( 68 )

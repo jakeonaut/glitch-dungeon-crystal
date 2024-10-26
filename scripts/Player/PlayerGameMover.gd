@@ -738,32 +738,26 @@ func glitchTickle(play_sound = true):
     tickleSound.pitch_scale = 0.5
     tickleSound.play()
 
-var sporeRes = preload("res://sceneObjects/Environment/PlayerSpore.tscn")
-func spawnASpore(x_dir = 0, y_dir = 1):
-  # summonSmokeClouds(1, 0, 0, 0)
+var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
+func spawnASpore(where_origin, inverse):
   var spore = sporeRes.instance()
-  if y_dir == 1:
-    spore.initially_fly_up = true
   level.add_child(spore)
-  spore.global_transform.origin = self.global_transform.origin
-  spore.original_pos = self.global_transform.origin
-  if y_dir == 1:
-    spore.bubble_speed = -rand_range(1.925, 2.8)
-  elif y_dir == -1:
-    spore.bubble_speed = rand_range(1.925, 2.8)
-  spore.target_pos.x = self.global_transform.origin.x + rand_range(-1, 1)
-  if x_dir == 1:
-    if mySprite.flip_h:
-      spore.global_transform.origin.x -= 1
-      spore.target_pos.x = self.global_transform.origin.x + rand_range(-2, -1)
-    else:
-      spore.global_transform.origin.x += 1
-      spore.target_pos.x = self.global_transform.origin.x + rand_range(1, 2)
-  spore.delta_multiplier = 4.0
-  spore.global_transform.origin.x += rand_range(-.5, .5)
-  spore.global_transform.origin.y += 1.5
-  spore.global_transform.origin.y += rand_range(0, .225)
-  spore.is_active = false
+  spore.global_transform.origin = where_origin
+  spore.global_transform.origin.z = where_origin.z + 2.0
+
+  if inverse:
+    spore.global_transform.origin.x += rand_range(-3, 3)
+    spore.global_transform.origin.y += rand_range(-3, 3)
+    var r = 1
+    spore.target_pos = Vector2(global_transform.origin.x + rand_range(-r, r), global_transform.origin.y + rand_range(-r, r))
+    spore.delta_multiplier = 2.0
+    spore.mySprite.reverseIt()
+  else:
+    spore.global_transform.origin.x += rand_range(-1, 1)
+    spore.global_transform.origin.y += rand_range(-1, 1)
+    var r = 2
+    spore.target_pos = Vector2(spore.global_transform.origin.x + rand_range(-r, r), spore.global_transform.origin.y + rand_range(-r, r))
+    spore.delta_multiplier = 4.0
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
 var smokeCloudThrottleTimer = 0

@@ -30,4 +30,5 @@ func activateScript():
   level.saveTheGame()
 
 func preActivateScript():
-  global.memory["magic_lantern"] = true
+  # global.memory["magic_lantern"] = true
+  pass

@@ -35,32 +35,22 @@ func _process(delta):
   if teleporting:
     teleport_timer += (delta*22)
     if teleport_timer >= teleport_time_limit:
-      for _i in range(1):
-        spawnASpore(self.global_transform.origin, true)
-        if global.memory["magic_lantern"]:
-          spawnASpore(level.player.global_transform.origin, true)
       if not has_teleported:
         # TODO
         reassembleSound.play()
-        if global.memory["magic_lantern"]:
-          var position = self.global_transform.origin
-          self.global_transform.origin = level.player.global_transform.origin
-          level.player.global_transform.origin = position
-        else:
-          self.global_transform.origin = landing_position
-          landing.global_transform.origin = lastPosition
-          var temp_rotation_degrees = mySprite.rotation_degrees.z
-          mySprite.rotation_degrees.z = landing.rotation_degrees.z
-          landing.rotation_degrees.z = temp_rotation_degrees
-          landing_position = lastPosition
+        self.global_transform.origin = landing_position
+        landing.global_transform.origin = lastPosition
+        var temp_rotation_degrees = mySprite.rotation_degrees.z
+        mySprite.rotation_degrees.z = landing.rotation_degrees.z
+        landing.rotation_degrees.z = temp_rotation_degrees
+        landing_position = lastPosition
         has_teleported = true
+        for _i in range(1):
+          spawnASpore(self.global_transform.origin, true)
     if teleport_timer >= teleport_time_limit2:
       has_ever_been_smacked = false
       teleporting = false
       visible = true
-      if global.memory["magic_lantern"]:
-        level.player.visible = true
-        level.player.physics_state = PhysicsState.NORMAL
 
 
   # if not is_smacked:
@@ -93,9 +83,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     return false
   poofSound.play()
   .getSmacked(broom_origin, silently)
-  if global.memory["magic_lantern"]:
-    level.player.getSmacked()
-    level.player.physics_state = PhysicsState.OCCUPIED
   # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
   #   behavior_jumping = true
   pauseSelf = true
@@ -122,13 +109,9 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
 func unsmack():
   .unsmack()
   visible = false
-  if global.memory["magic_lantern"]:
-      level.player.visible = false
   teleporting = true
   for _i in range(5):
     spawnASpore(self.global_transform.origin, false)
-    if global.memory["magic_lantern"]:
-      spawnASpore(level.player.global_transform.origin, false)
   teleport_timer = 0
   has_teleported = false
   

@@ -268,6 +268,8 @@ func ouchies(broom_origin):
   secretAniPlayer.stop()
   secretAniPlayer.play("die")
   
+var teleport_to = null
+var teleport_to_origin = null
 func summonFallenBroom(_broom_origin):
   has_broom = false
   broomSpriteVisible.visible = false

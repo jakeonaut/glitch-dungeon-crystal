@@ -826,7 +826,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
-walk_speed = 8.0
 
 [node name="CollisionShape" parent="Viewport/level/Furbo/FallthroughSolid" index="0"]
 shape = SubResource( 50 )
@@ -836,7 +835,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 5, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.825, 19, 0 )
-walk_speed = 8.0
 
 [node name="CollisionShape" parent="Viewport/level/Furbo2/FallthroughSolid" index="0"]
 shape = SubResource( 50 )

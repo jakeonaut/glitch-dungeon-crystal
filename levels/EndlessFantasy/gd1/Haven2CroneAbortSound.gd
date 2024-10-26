@@ -43,15 +43,15 @@ func activateScript():
   #     else:
   #       level.player.errorSound.play()
   #       level.player.sayThis("need " + str(global.NUM_GEMS_FOR_ENCHANTED_BAG - num_cubes) + " more shards.\n" + suffix)
-  elif global.memory["crone"] == 3 or (global.memory["broomerang"] == 1): # and global.memory["max_hp"] >= 2):
-    if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
-      if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
-        global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)
-        global.memory["broomerang"] = 2
-        level.player.sayThis("BROOMERANG WARP GET!\nsweep three times to WARP")
-      else:
-        level.player.errorSound.play()
-        level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes) + " more shards.\n" + suffix)
+  # elif global.memory["crone"] == 3 or (global.memory["broomerang"] == 1): # and global.memory["max_hp"] >= 2):
+  #   if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
+  #     if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
+  #       global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)
+  #       global.memory["broomerang"] = 2
+  #       level.player.sayThis("BROOMERANG WARP GET!\nsweep three times to WARP")
+  #     else:
+  #       level.player.errorSound.play()
+  #       level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes) + " more shards.\n" + suffix)
 
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

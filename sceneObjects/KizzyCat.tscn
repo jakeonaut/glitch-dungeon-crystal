@@ -91,7 +91,6 @@ extents = Vector3( 0.5, 0.24, 1 )
 script = ExtResource( 12 )
 true_terminal_vel = 14
 grav = 28
-walk_speed = 5
 run_speed = 7
 feather_glitch_walk_speed = 7
 invisible_glitch_walk_speed = 5

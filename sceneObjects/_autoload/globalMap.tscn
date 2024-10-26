@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=12]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/doguBoss.png" type="Texture" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -420,13 +424,13 @@ shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=25]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
+shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/no_palette_swap = false
@@ -445,9 +449,38 @@ shader_param/palette_cycle_speed = 10.0
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
+shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = true
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 16 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 7 )
@@ -478,6 +511,35 @@ shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 5 )
 
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 15 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -504,6 +566,35 @@ shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 13 )
 
@@ -676,6 +767,10 @@ can_nav_down = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
 
 [node name="WaterfallSecret" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0 )
@@ -689,12 +784,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
 material_override = SubResource( 6 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
+can_nav_down = false
 
 [node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 4, 4, 0 )
 material_override = SubResource( 6 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
+can_nav_down = false
 
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5, 0 )
@@ -706,7 +803,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11, 0 )
 
 [node name="PoisonShroomCove" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8, 0 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 can_nav_left = false
@@ -723,7 +820,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="InvisIntro" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -2, -7, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -4, -7, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 can_nav_left = false
@@ -732,7 +829,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="MushroomCave2" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
 flip_v = true
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomCave2.tscn"
@@ -751,7 +848,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="LostWoods2" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -6, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 can_nav_left = false
@@ -768,7 +865,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="LostWoods4" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -6, 0 )
 flip_h = true
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods4.tscn"
@@ -778,7 +875,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="SafariZone" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -2, -6, 0 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8, 0 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 can_nav_left = false
@@ -787,7 +884,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="CrystalHaven" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -1, -6, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -5, -9, 0 )
 material_override = SubResource( 17 )
 frame = 50
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
@@ -963,6 +1060,18 @@ path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
 can_nav_right = false
 can_nav_up = false
 
+[node name="DoguBossRoom" parent="CorruptedTomb" instance=ExtResource( 3 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 6, -5, -1 )
+material_override = SubResource( 25 )
+texture = ExtResource( 17 )
+hframes = 3
+vframes = 3
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/ClaydolBossRoom.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_down = false
+
 [node name="CrystalTower" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 7, 0 )
 
@@ -1000,8 +1109,11 @@ frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 1, 7, 1 )
-material_override = SubResource( 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 7, -1 )
+material_override = SubResource( 26 )
+texture = ExtResource( 16 )
+hframes = 4
+vframes = 1
 frame = 55
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 
@@ -1047,8 +1159,17 @@ frame = 63
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/PlasticBeach.tscn"
 can_nav_down = false
 
+[node name="AnglerFishBossRoom" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -1 )
+material_override = SubResource( 24 )
+texture = ExtResource( 15 )
+hframes = 3
+vframes = 3
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/AnglerFishBossRoom.tscn"
+can_nav_down = false
+
 [node name="AbstractSuburbs" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
 
 [node name="000SuburbStreetlight" parent="AbstractSuburbs" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, 0 )
@@ -1057,6 +1178,8 @@ texture = ExtResource( 10 )
 vframes = 16
 frame = 76
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
+can_nav_left = false
+can_nav_up = false
 can_nav_down = false
 
 [node name="StreetlightManifesto" parent="AbstractSuburbs" instance=ExtResource( 3 )]
@@ -1071,7 +1194,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="001SpellbookSuburb" parent="AbstractSuburbs" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -5, 0 )
 material_override = SubResource( 22 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -1082,13 +1205,40 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
-[node name="001SpellbookSuburb2" parent="AbstractSuburbs" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -5, 0 )
+[node name="DieToSavePoint" parent="AbstractSuburbs" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 material_override = SubResource( 22 )
 texture = ExtResource( 10 )
 vframes = 16
 frame = 76
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001SpellbookSuburb.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000DieToSavePoint.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
+[node name="Neighborhood" parent="AbstractSuburbs" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+material_override = SubResource( 22 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/004Neighborhood.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
+[node name="BabaYagaBossRoom" parent="AbstractSuburbs" instance=ExtResource( 3 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 1, -4, -1 )
+material_override = SubResource( 23 )
+texture = ExtResource( 14 )
+hframes = 1
+vframes = 1
+frame = 76
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/BabaYagaBossRoom.tscn"
+can_nav_left = false
+can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 

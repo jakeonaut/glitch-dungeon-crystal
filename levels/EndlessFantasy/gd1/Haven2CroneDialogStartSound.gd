@@ -18,10 +18,10 @@ func activateScript():
   #   textBox.text_final = text
   #   textBox.textNode.bbcode_text = text
   #   textBox.showYesNoOptions = true
-  elif global.memory["broomerang"] < 2:
+  elif global.memory["broomerang"] < 1:
     var text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG) + " shards for\n[color=red]BROOMERANG[/color]?"
-    if global.memory["broomerang"] == 1:
-      text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " shards for\n[color=red]BROOMERANG WARP[/color]?"
+    # if global.memory["broomerang"] == 1:
+    #   text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " shards for\n[color=red]BROOMERANG WARP[/color]?"
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true
