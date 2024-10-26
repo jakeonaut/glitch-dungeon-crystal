@@ -86,7 +86,8 @@ func _ready():
   if (is_locked or should_lock) and ((
     global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id)
   ) or (
-    key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL and 
+    key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL and \
+    global.memory.has("key_items") and global.memory["key_items"].has(key_type) and \
     global.memory["key_items"][key_type] == global.ItemState.USED_IT
   )):
     is_locked = false

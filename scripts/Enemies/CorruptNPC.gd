@@ -128,6 +128,9 @@ func _process(delta):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("revive")
+      if my_carcass != null and my_carcass.get_ref() != null:
+        my_carcass.get_ref().queue_free()
+        my_carcass = null
       windGust.is_active = true
       hp_enemy = ZOMBIE_MAX_HP
       # global_transform.origin = spawn_point
@@ -191,7 +194,7 @@ func ouchies(broom_origin):
     if zombie_state == ZombieState.CONSUMING:
       return
     .ouchies_base(broom_origin)
-    if am_i_dying or not visible or level.player.nesting_doll_state == global.NestingDoll.BABY:
+    if am_i_dying or not visible:
       return # or am_i_hurt: return
 
     # if zombie_state == ZombieState.REVIVING:
@@ -229,7 +232,6 @@ func doSomethingElseToPlayer(player):
   if level.player.nesting_doll_state == global.NestingDoll.BABY:
     return
   # player.nullify()
-  getSmacked()
   # player.tryDieToEnemy(0, true, kill_invis, kill_immediately)
 
   # this is good and normal actually
@@ -242,6 +244,7 @@ func doSomethingElseToPlayer(player):
     secretAniPlayer.play("consumeMemory")
     dieSound.play()
     zombie_state = ZombieState.CONSUMING
+    getSmacked()
 
 func popOutPlayer():
   level.player.global_transform.origin = self.global_transform.origin

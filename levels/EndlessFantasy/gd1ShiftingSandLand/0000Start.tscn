@@ -1593,7 +1593,7 @@ shape = SubResource( 25 )
 
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4644, -1.0576, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/005_CricketCaveHub2.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/RESET = SubResource( 65 )

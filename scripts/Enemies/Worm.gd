@@ -64,28 +64,21 @@ func pressingMoveRight():
 func glitchSwitchSprite(_delta):
   pass
 
+func passiveActivate(_delta, _is_player):
+  if is_smacked or is_in_cooldown or getPlayer().nesting_doll_state != global.NestingDoll.BABY:
+    return
 
-# var has_transformed = false
-# func passiveActivate(_delta, _is_player):
-#   if is_smacked or is_in_cooldown:
-#     return
-#   # if not getPlayer().is_mushroom_infected:
-#   #   return
-
-#   is_in_cooldown = true
-#   cooldown_timer = 0
-#   .getSmacked(null)
-#   global_transform.origin.z = 2
-#   getPlayer().pauseInput = true
-#   global.pauseMoveInput = true
-#   getPlayer().pauseAnimation = true
-#   wormAniPlayer.stop()
-#   wormAniPlayer.clear_queue()
-#   wormAniPlayer.queue("gulp")
-#   if not has_transformed:
-#     wormAniPlayer.queue("transform")
-#   has_transformed = true
-#   wormAniPlayer.queue("bob")
+  is_in_cooldown = true
+  cooldown_timer = 0
+  .getSmacked(null)
+  global_transform.origin.z = 2
+  getPlayer().pauseInput = true
+  global.pauseMoveInput = true
+  getPlayer().pauseAnimation = true
+  wormAniPlayer.stop()
+  wormAniPlayer.clear_queue()
+  wormAniPlayer.queue("gulp")
+  wormAniPlayer.queue("bob")
 
 func jumpToPlayerPosition():
   global_transform.origin.x = getPlayer().global_transform.origin.x  
@@ -97,9 +90,7 @@ func jumpToPlayerPosition():
   global_transform.origin.y = getPlayer().global_transform.origin.y + 1
 
 func cureMushroom():
-  var playerMushroomOrigin = getPlayer().mushroomSpriteVisible.global_transform.origin
-  level.summonSmokeClouds(playerMushroomOrigin, 1)
-  getPlayer().getMushroomCured()
+  getPlayer().tryDieToEnemy(0, true, true, true)
 
 func finishGulp():
   global_transform.origin.z = 0

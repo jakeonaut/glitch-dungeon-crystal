@@ -740,7 +740,7 @@ shape = SubResource( 15 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -11, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/003DustyCricketCrypts.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"
 is_passive = true
 is_vertical = true
 num_keys_unlock = 1

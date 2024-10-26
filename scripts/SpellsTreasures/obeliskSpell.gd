@@ -193,8 +193,8 @@ func passiveActivate(_delta, _is_player):
   global.memory["mp"] = global.memory["max_mp"]
 
   num_sparkles_spawned = 0
-  my_next_glitch_form = newSpell
-  is_in_cooldown = newSpell != null
+  # my_next_glitch_form = newSpell
+  # is_in_cooldown = newSpell != null
   
 func playerActivationAreaPassiveActivate():
   pass

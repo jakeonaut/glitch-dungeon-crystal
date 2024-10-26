@@ -435,6 +435,13 @@ texture = ExtResource( 30 )
 material_override = SubResource( 43 )
 texture = ExtResource( 30 )
 
+[node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 0 )
+is_locked = true
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
+num_keys_unlock = 1
+key_type = 2
+
 [node name="Viewport2" parent="." instance=ExtResource( 4 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

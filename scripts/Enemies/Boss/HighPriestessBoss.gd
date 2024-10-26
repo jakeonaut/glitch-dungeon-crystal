@@ -386,6 +386,7 @@ func spawnGlitchBullet():
     bullet.is_static_in_level = false
     bullet.visible = true
     bullet.behavior_directional_bullet = true
+    bullet.behavior_phase_through_walls = true
 
     var player_pos = level.player.global_transform.origin
     var staff_pos = staffSpawnPoint.global_transform.origin
