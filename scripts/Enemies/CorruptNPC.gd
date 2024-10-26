@@ -2,6 +2,7 @@ extends "GlitchEnemy.gd"
 
 onready var screamSound = get_node("Sounds/ScreamSound")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var windGust = get_node("WindGust")
 enum ZombieState {
   IDLE,
   SLIME_WALK,
@@ -20,6 +21,7 @@ var slow_walk_speed = 4
 var death_timer = 0
 var death_time_limit = 40
 var spawn_point = 0
+var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -126,6 +128,7 @@ func _process(delta):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("revive")
+      windGust.is_active = true
       hp_enemy = ZOMBIE_MAX_HP
       # global_transform.origin = spawn_point
     else:
@@ -180,11 +183,13 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or am_i_dying:
     return false
   .getSmacked(broom_origin, silently)
-  if not am_i_dying:
+  if not am_i_dying and zombie_state != ZombieState.CONSUMING:
     ouchies(broom_origin)
         
 # @override
 func ouchies(broom_origin):
+    if zombie_state == ZombieState.CONSUMING:
+      return
     .ouchies_base(broom_origin)
     if am_i_dying or not visible or level.player.nesting_doll_state == global.NestingDoll.BABY:
       return # or am_i_hurt: return
@@ -196,6 +201,7 @@ func ouchies(broom_origin):
     hp_enemy -= ZOMBIE_MAX_HP
     # am_i_hurt = true
     if true: # hp_enemy <= 0:
+      windGust.is_active = false
       behavior_walking = false
       behavior_intermittent_walking = false
       behavior_jumping = false
@@ -211,6 +217,7 @@ func ouchies(broom_origin):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("die")
+      spawnACarcass()
       death_timer = 0
 
 func isActive(debug=false):
@@ -242,7 +249,28 @@ func popOutPlayer():
   level.player.nesting_doll_state = global.NestingDoll.BABY
   level.player.updateNestingDoll(global.NestingDoll.GRANDMA, false)
   level.player.glitchTickle()
-  level.player.loseBroom()
   level.player.visible = true
   level.player.pauseInput = false
   level.player.pauseSelf = false
+
+# @override
+func addJumpSmokeCloud(flip_flip_h = false):
+  if zombie_state == ZombieState.DYING or zombie_state == ZombieState.REVIVING:
+    return
+  .addJumpSmokeCloud(flip_flip_h)
+
+var my_carcass = null
+func spawnACarcass():
+  if my_carcass != null and my_carcass.get_ref() != null:
+    my_carcass.get_ref().queue_free()
+    my_carcass = null
+
+  var carcass = cherryCarcassRes.instance()
+  level.add_child(carcass)
+  carcass.broomSprite.visible = false
+  carcass.mushroomSprite.visible = false
+  carcass.global_transform.origin = self.global_transform.origin
+  carcass.mySprite.flip_h = mySprite.flip_h
+  carcass.mySprite.material_override.set_shader_param(
+    "target_palette", mySprite.material_override.get_shader_param("target_palette"))
+  my_carcass = weakref(carcass)

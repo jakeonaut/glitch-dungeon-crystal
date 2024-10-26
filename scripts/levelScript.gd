@@ -433,15 +433,15 @@ func tryToRespawn():
   player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
   
-  if player.nesting_doll_state == global.NestingDoll.BABY:
-    player.shroomAniPlayer.stop(true)
-    player.shroomAniPlayer.clear_queue()
-    player.shroomAniPlayer.play("shrink", -1, 999)
+  # if player.nesting_doll_state == global.NestingDoll.BABY:
+  #   player.shroomAniPlayer.stop(true)
+  #   player.shroomAniPlayer.clear_queue()
+  #   player.shroomAniPlayer.play("shrink", -1, 999)
 
-  if player.nesting_doll_state != global.NestingDoll.GRANDMA:
-    player.mySprite.flip_h = not player.mySprite.flip_h
-    player.summonFallenBroom(false, true)
-    player.mySprite.flip_h = not player.mySprite.flip_h
+  # if player.nesting_doll_state != global.NestingDoll.GRANDMA:
+  #   player.mySprite.flip_h = not player.mySprite.flip_h
+  #   player.summonFallenBroom(false, true)
+  #   player.mySprite.flip_h = not player.mySprite.flip_h
 
 var should_adjust_player = false
 var remembered_edge_vector = null

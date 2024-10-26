@@ -34,16 +34,6 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
   smack_timer = 0
   is_smacked = true
 
-  if level.player.nesting_doll_state == global.NestingDoll.BABY:
-    level.player.shroomAniPlayer.queue("grow")
-    level.player.shroomAniPlayer.queue("adjust")
-    level.player.getABroom()
-    # for _i in range(3):
-    #     level.player.spawnASpore(0, -1)
-    level.player.nesting_doll_state = global.NestingDoll.GRANDMA
-    global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
-    queue_free()
-
 onready var mushroomFallthroughSolid = get_node("MushroomFallthroughSolid")
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
@@ -188,9 +178,16 @@ var cooldown_time_limit = 5
 func isActive(_debug=false):
     return cooldown_timer >= cooldown_time_limit
 
-
-func passiveActivate(_delta, _is_player):
-    pass
+func passiveActivate(_delta, is_player):
+    if is_player and level.player.nesting_doll_state == global.NestingDoll.BABY:
+        level.player.shroomAniPlayer.queue("grow")
+        level.player.shroomAniPlayer.queue("adjust")
+        # level.player.getABroom()
+        # for _i in range(3):
+        #     level.player.spawnASpore(0, -1)
+        level.player.nesting_doll_state = global.NestingDoll.GRANDMA
+        global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+        queue_free()
 
 var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 func spawnASpore():

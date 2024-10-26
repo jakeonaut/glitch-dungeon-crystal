@@ -451,8 +451,8 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
       if nesting_doll_state == global.NestingDoll.BABY:
         emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
         emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
-      elif nesting_doll_state == global.NestingDoll.MOM:
-        emptyDoll.broomSprite.visible = global.memory["broom"]
+      # elif nesting_doll_state == global.NestingDoll.MOM:
+      #   emptyDoll.broomSprite.visible = global.memory["broom"]
       # if randi() % 4 == 1:
       #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
       nesting_doll_array.push_back(emptyDoll)
@@ -460,8 +460,8 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
       dollOpenSound.pitch_scale = 1.2
     elif nesting_doll_state == global.NestingDoll.MOM:
       dollOpenSound.pitch_scale = 0.95
-      global.memory["had_broom"] = global.memory["broom"]
-      global.memory["broom"] = false
+      # global.memory["had_broom"] = global.memory["broom"]
+      # global.memory["broom"] = false
     dollOpenSound.play()
   elif nesting_doll_state > prevNestingDollState and nesting_doll_array.size() > 0:
     var emptyDoll = nesting_doll_array.pop_back()
@@ -470,19 +470,25 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
       dollCloseSound.pitch_scale = 1.1
     elif nesting_doll_state == global.NestingDoll.GRANDMA:
       dollCloseSound.pitch_scale = 0.9
-      global.memory["broom"] = global.memory["had_broom"] or global.memory["broom"]
+      # global.memory["broom"] = global.memory["had_broom"] or global.memory["broom"]
     dollCloseSound.play()
 
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
   elif nesting_doll_state == global.NestingDoll.GRANDMA:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+    smallCollisionShape.shape.radius = 0.543
+    smallCollisionShape.shape.radius = 2.032
   elif nesting_doll_state == global.NestingDoll.MOM:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
+    smallCollisionShape.shape.radius = 0.543
+    smallCollisionShape.shape.radius = 2.032
   elif nesting_doll_state == global.NestingDoll.BABY:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheetTiny)
+    smallCollisionShape.shape.radius = 0.25
+    smallCollisionShape.shape.radius = 0.75
 
-  if nesting_doll_state == global.NestingDoll.MOM:
+  if nesting_doll_state == global.NestingDoll.BABY:
     broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheetTiny)
   else:
     broomSpriteVisible.material_override.set_shader_param("texture_albedo", broomSpriteSheet)

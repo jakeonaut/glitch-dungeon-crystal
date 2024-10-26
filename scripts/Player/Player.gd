@@ -919,6 +919,7 @@ func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
   
 func loseBroom():
+  print("!")
   if summonedBroom:
     broomStop()
   if global.memory["broom"]:
@@ -1778,9 +1779,9 @@ func processBroomLogic(delta):
 
   var which_broom_attack = 1
   if not global.memory["broom"]:
-    if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
-      summonSporeShroom()
-    elif global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
+    # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
+    #   summonSporeShroom()
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:

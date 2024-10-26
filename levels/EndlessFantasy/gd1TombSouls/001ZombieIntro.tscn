@@ -772,7 +772,7 @@ anims/glitchOut = SubResource( 28 )
 shape = SubResource( 26 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5991, 11.4988, 0 )
 
 [node name="GlitchSecretAnimationPlayer" parent="Viewport/level/GlitchEnemy3" index="6"]
 anims/RESET = SubResource( 29 )
@@ -803,10 +803,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 16, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4346, 0, 0 )
-is_locked = true
 path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
-num_keys_unlock = 4
-key_type = 5
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 0 )
