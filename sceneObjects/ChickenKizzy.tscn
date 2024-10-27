@@ -128,7 +128,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 [node name="InnerSpriteContainer" type="Spatial" parent="SpriteContainer"]
 
 [node name="Sprite3D" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
-transform = Transform( -1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 0, -0.25, 0 )
+transform = Transform( -1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 0, -0.25, -1 )
 material_override = SubResource( 8 )
 pixel_size = 0.125
 texture = ExtResource( 8 )
@@ -140,7 +140,7 @@ frame_delay = 1.0
 automatically_change_color = false
 
 [node name="Sprite3D2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, 0.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, -0.610407 )
 material_override = SubResource( 9 )
 pixel_size = 0.125
 texture = ExtResource( 13 )

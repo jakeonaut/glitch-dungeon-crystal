@@ -1,9 +1,6 @@
 extends "../GlitchEnemy.gd"
 
-var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
-var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
-var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var crystalsContainer = get_node("Crystals")

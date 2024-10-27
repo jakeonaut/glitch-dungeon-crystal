@@ -1,17 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
-[ext_resource path="res://sceneObjects/FreeChicken.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/magicolor-16-1x.png" type="Texture" id=5]
-[ext_resource path="res://sceneObjects/ChickenKizzy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=10]
 [ext_resource path="res://sceneObjects/HighpriestessCrystal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/Enemies/Boss/BabaYagaBoss.gd" type="Script" id=12]
+[ext_resource path="res://sceneObjects/Enemies/CrowWitch.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
@@ -42,6 +41,102 @@ shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 5 )
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Crystals:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 9.07366, -2.13 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CrowWitch:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 2, 8.02163, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "run"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "wakeup"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 1.5, 1.6, 1.7, 1.9, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 2, 3, 4, 3, 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Crystals:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 9.07366, -2.13 ), Vector3( 0, 10.0737, -2.13 ), Vector3( 0, 12.0737, -2.13 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CrowWitch:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 1.6, 1.7, 1.9, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 2, 8.02163, 0 ), Vector3( 2, 9.02163, 0 ), Vector3( 2, 10.8212, 0 ), Vector3( 2, 11.0216, 0 ), Vector3( 2, 10.8212, 0 ), Vector3( 2, 11.0216, 0 ) ]
+}
+
 [node name="BabaYagaBoss" type="Spatial"]
 script = ExtResource( 12 )
 
@@ -67,20 +162,21 @@ light_energy = 7.0
 light_indirect_energy = 0.0
 
 [node name="SpriteContainer" type="Spatial" parent="."]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Sprite3D" type="Sprite3D" parent="SpriteContainer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79911, -4 )
 material_override = SubResource( 4 )
 pixel_size = 0.12
 texture = ExtResource( 10 )
+hframes = 4
+vframes = 4
 script = ExtResource( 4 )
 max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="Crystals" type="Spatial" parent="SpriteContainer"]
-transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 6.07366, -2.13 )
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 9.07366, -2.13 )
 
 [node name="HighpriestessCrystal" parent="SpriteContainer/Crystals" instance=ExtResource( 11 )]
 transform = Transform( 0.979341, -0.0281433, -0.20025, 0, 0.990268, -0.139173, 0.202218, 0.136298, 0.96981, 0, 0, -1.788 )
@@ -89,13 +185,12 @@ visible = true
 [node name="MeshInstance2" parent="SpriteContainer/Crystals/HighpriestessCrystal/CubeContainer" index="0"]
 transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
 
-[node name="FreeChicken" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/run = SubResource( 7 )
+anims/wakeup = SubResource( 6 )
 
-[node name="FreeChicken2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
-
-[node name="ChickenKizzy" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0 )
+[node name="CrowWitch" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8.02163, 0 )
 
 [editable path="SpriteContainer/Crystals/HighpriestessCrystal"]

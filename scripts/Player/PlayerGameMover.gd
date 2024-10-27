@@ -369,7 +369,7 @@ func bigBump():
 # @override
 func pressingJump():
   if transformation == TransformationState.CHICKEN:
-    return should_magic_jump or pressingMoveRight() or pressingMoveLeft() or Input.is_action_pressed("jump_button")
+    return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_pressed("jump_button")
   if transformation == TransformationState.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
@@ -651,7 +651,7 @@ var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
 func processJumpInputs(delta):
-  if is_mushroom_infected:
+  if transformation == TransformationState.CHICKEN:
     was_just_on_ground_timer = -8
     .processJumpInputs(delta)
     return
