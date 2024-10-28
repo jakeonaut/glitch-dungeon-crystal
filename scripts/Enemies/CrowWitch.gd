@@ -28,6 +28,8 @@ onready var windUpSound = get_node("Sounds/WindUpSound")
 const GlitchEnemyResource = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var MAX_SQUARED_DIST = 225
+var should_fly_away = false
+var fly_away_from_where = Vector3(0, 0, 0)
 
 func _ready():
   set_process(true)
@@ -38,6 +40,10 @@ func _ready():
 
 var opacity = 1.0
 func _process(delta):
+  if should_fly_away and not crow_state == CrowState.FLY_AWAY:
+    startFlyAway(fly_away_from_where)
+    return
+
   if crow_state == CrowState.IDLE:
     mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
     hatSprite.flip_h = mySprite.flip_h

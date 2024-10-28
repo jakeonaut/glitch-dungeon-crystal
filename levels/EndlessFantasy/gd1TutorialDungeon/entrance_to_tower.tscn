@@ -123,7 +123,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1358, 3.1785, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1358, 3.1785, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 1.1
@@ -161,10 +161,6 @@ texture = ExtResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
-[node name="Door3" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
-
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -12.6945, -1, 0 )
 is_locked = true
@@ -182,7 +178,7 @@ your broom with shards"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.20448, 0 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 3.33878, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3.33878, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 

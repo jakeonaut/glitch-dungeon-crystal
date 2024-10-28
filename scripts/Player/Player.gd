@@ -963,7 +963,6 @@ func firstAdjustmentForNestingDolls():
   .adjustStuffForNestingDolls()
   
 func loseBroom():
-  print("!")
   if summonedBroom:
     broomStop()
   if global.memory["broom"]:
@@ -971,15 +970,21 @@ func loseBroom():
     summonFallenBroom(false, true, false)
     mySprite.flip_h = not mySprite.flip_h
 
-func spriteBackToNormal():
-  mySprite.visible = true
-  mySprite.material_override.set_shader_param("enable_glitch", false)
-  mySprite.material_override.set_shader_param("shake_power", 0.01)
-  mySprite.material_override.set_shader_param("enable_remove_skin_tone", false)
+func allSpritesBackToNormal(spriteToBeVisible):
   pauseAnimation = false
-  fishySprite.visible = false
-  moleSprite.visible = false
-  chickenSprite.visible = false
+  spriteBackToNormal(mySprite)
+  spriteBackToNormal(fishySprite)
+  spriteBackToNormal(moleSprite)
+  spriteBackToNormal(chickenSprite)
+  if spriteToBeVisible != mySprite:
+    pauseAnimation = true
+  spriteToBeVisible.visible = true
+
+func spriteBackToNormal(sprite):
+  sprite.visible = false
+  sprite.material_override.set_shader_param("enable_glitch", false)
+  sprite.material_override.set_shader_param("shake_power", 0.01)
+  sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
 
 var fish_broom_timer = 0
 var fish_broom_time_limit = 2
@@ -997,6 +1002,8 @@ func processFishyLogic(_delta):
     fishFormSound.pitch_scale = rand_range(0.8, 1.2)
     fishFormSound.play()
   elif transformation == TransformationState.FISHY:
+    if not fishySprite.visible and not aniPlayer.assigned_animation == "transformToFishy":
+      allSpritesBackToNormal(fishySprite)
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
@@ -1037,7 +1044,7 @@ func processFishyLogic(_delta):
     # aniPlayer.clear_queue()
     # aniPlayer.play("revertFromFishy")
     # aniPlayer.queue("land")
-    spriteBackToNormal()
+    allSpritesBackToNormal(mySprite)
 
 
   # weird recovery
@@ -1184,6 +1191,8 @@ var chicken_timer = 0
 var chicken_time_limit = 90
 func processChickenLogic(delta):
   if transformation == TransformationState.CHICKEN:
+    if not chickenSprite.visible and not aniPlayer.assigned_animation == "transformToChicken":
+      allSpritesBackToNormal(chickenSprite)
     chickenSprite.flip_h = mySprite.flip_h
     glitchTilesAroundMe(-2)
     chicken_timer += (delta*11)
@@ -1191,13 +1200,14 @@ func processChickenLogic(delta):
       getChickenCured()
       gravitySound.play()
   elif chickenSprite.visible and not aniPlayer.assigned_animation == "revertFromChicken":
-    spriteBackToNormal()
+    allSpritesBackToNormal(mySprite)
 
 func getChickenInfected():
   if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH:
     return
   if not global.has_been_baba_yaga_cursed:
-    self.sayThis("Baba Yaga's curse")
+    if not "BabaYagaBossRoom" in level.getLevelName():
+      self.sayThis("Baba Yaga's curse")
     global.has_been_baba_yaga_cursed = true
   chicken_timer = 0
   summonFallenBroom(false, true, false)
@@ -1357,6 +1367,8 @@ var dig_smoke_timer = 0
 var dig_smoke_time_limit = 3
 func processMoleLogic(delta):
   if transformation == TransformationState.MOLE_DIGGING:
+    if not moleSprite.visible and not aniPlayer.assigned_animation == "transformToMole":
+      allSpritesBackToNormal(moleSprite)
     dig_smoke_timer += (delta*11)
     if dig_smoke_timer >= dig_smoke_time_limit:
       dig_smoke_timer = 0
@@ -1406,7 +1418,7 @@ func processMoleLogic(delta):
     if not pressingJump() and on_ground:
       can_dig_up = true
     if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
-      spriteBackToNormal()
+      allSpritesBackToNormal(mySprite)
       getABroom()
 
 func applyGravity(delta):

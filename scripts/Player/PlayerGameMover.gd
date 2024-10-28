@@ -323,7 +323,7 @@ func pressingDown():
 # @override
 func justPressedJump():
   if transformation == TransformationState.CHICKEN:
-    return should_magic_jump or pressingMoveRight() or pressingMoveLeft()
+    return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_just_pressed("jump_button")
   # if is_mushroom_infected:
   #   return false
   return (Input.is_action_just_pressed("jump_button") and (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()) or should_magic_jump
@@ -690,7 +690,7 @@ func processJumpInputs(delta):
   .processJumpInputs(delta)
 
 var my_carcasses = []
-func mushroomClone(trigger_another = true):
+func mushroomClone(_trigger_another = true):
   if smallInteractionArea.is_touching_carcass:
     global_transform.origin.y += 1
   global_transform.origin.y += 1
