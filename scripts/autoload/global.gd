@@ -269,7 +269,7 @@ func resetMemory():
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
     memory["colorblindMode"] = true
-    memory["stopAllMusic"] = false
+    memory["stopAllMusic"] = true
     memory["canChangeSongPitch"] = true
     memory["spellAssist"] = false
 
@@ -307,9 +307,12 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
-    memory["glitched_grimoire"] = false
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 2
+    memory["baba_yaga"] = 0
+    memory["angler_seaman"] = 0
+    memory["dogu_matryoshka"] = 0
+    memory["glitched_grimoire"] = true
     memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
@@ -327,9 +330,9 @@ func resetMemory():
     memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
-    memory["mushroom_soul"] = 0
+    memory["zora_flippers"] = 1
+    memory["mole_cricket"] = 1
+    memory["mushroom_soul"] = 1
     memory["glitched_broom"] = false
 
     # DEFUNCT POWERUPS

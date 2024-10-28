@@ -31,5 +31,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
         level.add_child(anglerFish.crystal1)
         anglerFish.crystal1.global_transform.origin = temp_pos
         anglerFish.crystal1.is_goddess_dream_collectible = true
+        global.memory["angler_seaman"] = 2
     .getSmacked(broom_origin, silently)
     return true

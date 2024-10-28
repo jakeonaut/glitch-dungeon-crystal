@@ -72,24 +72,25 @@ func _process(_delta):
         elif nearest_area and not global.pauseMoveInput and nearest_area.is_in_group("door"):
             nearest_area.InteractActivate()
     if Input.is_action_just_pressed("sub_action_button"):
-        var activated_something = false
+        # var activated_something = false
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
-            activated_something = global.activeInteractor.InteractActivate()
-        # give priority to active area if user pressing interact action
-        elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
-            if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
-                activated_something = nearest_area.InteractActivate()
+            global.activeInteractor.InteractActivate()
+    # no.
+    #     # give priority to active area if user pressing interact action
+    #     elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
+    #         if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
+    #             activated_something = nearest_area.InteractActivate()
             
-        if activated_something and player.summonedBroom != null:
-            player.broomStop()
-            has_activated_something = true
-        # Give secondary priority to held objects action.
-        # elif global.activeThrowableObject:
-        #     global.activeThrowableObject.activate(true)
-        # if no nearby active area, and no held object, use primary player action
-        # else:
-        #     player.tryBroom()
-    elif global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+    #     if activated_something and player.summonedBroom != null:
+    #         player.broomStop()
+    #         has_activated_something = true
+    #     # Give secondary priority to held objects action.
+    #     # elif global.activeThrowableObject:
+    #     #     global.activeThrowableObject.activate(true)
+    #     # if no nearby active area, and no held object, use primary player action
+    #     # else:
+    #     #     player.tryBroom()
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
         if (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) or Input.is_action_just_pressed("ui_start"):
             if Input.is_action_just_pressed("ui_start"):
                 global.activeInteractor.selectedYesNoOption = false

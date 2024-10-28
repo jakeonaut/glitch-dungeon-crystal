@@ -2673,7 +2673,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3899, 4.89746, 0 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 59 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72, 0, 0 )
-walk_speed = 8.0
 
 [node name="DustFarmer" parent="Viewport/level" instance=ExtResource( 61 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.6, 0 )
@@ -2748,7 +2747,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 280 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

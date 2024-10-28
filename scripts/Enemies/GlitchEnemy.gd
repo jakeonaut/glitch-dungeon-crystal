@@ -351,6 +351,8 @@ func tryDieToBody():
             queue_free()
 
 func bulletTryDieToSolids():
+    if behavior_phase_through_walls:
+        return
     var x = global_transform.origin.x
     var y = global_transform.origin.y
     

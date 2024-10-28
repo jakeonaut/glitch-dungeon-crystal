@@ -247,10 +247,10 @@ func processNormalLogic(_delta):
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
-    elif normalOptionIndex == 5:
-      OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
-      yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.NORMAL
+    # elif normalOptionIndex == 5:
+    #   OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
+    #   yield(get_tree().create_timer(0.1), "timeout")
+    #   pauseMenuState = PauseMenuState.NORMAL
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     yield(get_tree().create_timer(0.1), "timeout")
     global.isPauseMenuOpen = false

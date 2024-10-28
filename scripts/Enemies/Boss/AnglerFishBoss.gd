@@ -225,7 +225,6 @@ func _process(delta):
             cast_timer = 0
             lureFreeRange.visible = true
     elif boss_phase == BossPhase.STUN_FALL:
-        print("hi...")
         grav = 60
         on_ground = false
         if global_transform.origin.y <= -5:
@@ -424,7 +423,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
         normal_offset = 0.5
         return .getSmacked(broom_origin, silently)
 
-    print("eat it though?")
     boss_phase = BossPhase.EAT_IT
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()

@@ -1203,7 +1203,7 @@ func processChickenLogic(delta):
     allSpritesBackToNormal(mySprite)
 
 func getChickenInfected():
-  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.CHICKEN:
     return
   if not global.has_been_baba_yaga_cursed:
     if not "BabaYagaBossRoom" in level.getLevelName():
@@ -1223,22 +1223,8 @@ func getChickenInfected():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("transformToChicken")
+  chicken_jumps = 0
   pauseAnimation = true
-  should_collide_floor = true
-  should_collide_ceil = true
-  should_collide_horizontally = true
-  
-func getChickenCured():
-  if transformation != TransformationState.CHICKEN:
-    return
-  can_broomerang_warp = true
-  transformation = TransformationState.NORMAL
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("revertFromChicken")
-  aniPlayer.queue("land")
-  pauseAnimation = true
-  physics_vars.should_apply_gravity = true
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true

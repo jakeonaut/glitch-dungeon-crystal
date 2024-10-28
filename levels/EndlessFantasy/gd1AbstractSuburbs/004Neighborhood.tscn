@@ -684,7 +684,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.0999999, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001PoisonShroomCove.tscn"
+path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/BabaYagaBossRoom.tscn"
 num_keys_unlock = 2
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]

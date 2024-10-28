@@ -57,25 +57,19 @@ func landed():
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("hatch")
 
-
-  
-export var dont_align_sprite = false
 # @override
 func alignMySprite():
-  if dont_align_sprite:
-    return
-  var pixelSize = 0.125
-  mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-  mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + 0.3
+  pass
 
 func hatchEmAll():
+  var babaYagaBoss = level.get_node("BabaYagaBoss/CrowContainer") if level.has_node("BabaYagaBoss/CrowContainer") else level
   for _i in range(5):
     var newCrow = crowRes.instance()
-    level.add_child(newCrow)
+    babaYagaBoss.add_child(newCrow)
     newCrow.global_transform.origin = Vector3(
       self.global_transform.origin.x + rand_range(-0.2, 0.2),
       self.global_transform.origin.y + rand_range(0, 0.4),
       0
     )
-    newCrow.fly_away_from_where = self.global_transform.origin
-    newCrow.should_fly_away = true
+    newCrow.should_scatter = true
+    newCrow.original_pos = Vector3(7, 6, 0)

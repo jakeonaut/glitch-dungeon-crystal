@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=11]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=12]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/doguBoss.png" type="Texture" id=17]
@@ -569,7 +569,7 @@ shader_param/texture_albedo = ExtResource( 10 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 13 )
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -1063,10 +1063,10 @@ can_nav_up = false
 [node name="DoguBossRoom" parent="CorruptedTomb" instance=ExtResource( 3 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 6, -5, -1 )
 material_override = SubResource( 25 )
+pixel_size = 0.04
 texture = ExtResource( 17 )
 hframes = 3
 vframes = 3
-frame = 39
 path = "res://levels/EndlessFantasy/gd1TombSouls/ClaydolBossRoom.tscn"
 can_nav_left = false
 can_nav_right = false
@@ -1114,7 +1114,6 @@ material_override = SubResource( 26 )
 texture = ExtResource( 16 )
 hframes = 4
 vframes = 1
-frame = 55
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 
 [node name="GrandmaVillage" type="Spatial" parent="."]
@@ -1162,6 +1161,7 @@ can_nav_down = false
 [node name="AnglerFishBossRoom" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -1 )
 material_override = SubResource( 24 )
+pixel_size = 0.04
 texture = ExtResource( 15 )
 hframes = 3
 vframes = 3
@@ -1214,7 +1214,6 @@ frame = 76
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000DieToSavePoint.tscn"
 can_nav_left = false
 can_nav_right = false
-can_nav_up = false
 can_nav_down = false
 
 [node name="Neighborhood" parent="AbstractSuburbs" instance=ExtResource( 3 )]
@@ -1227,15 +1226,15 @@ path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/004Neighborhood.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
-can_nav_down = false
 
 [node name="BabaYagaBossRoom" parent="AbstractSuburbs" instance=ExtResource( 3 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 1, -4, -1 )
-material_override = SubResource( 23 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -4, -1 )
+material_override = SubResource( 27 )
+offset = Vector2( 0, 24 )
+pixel_size = 0.04
 texture = ExtResource( 14 )
 hframes = 1
 vframes = 1
-frame = 76
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/BabaYagaBossRoom.tscn"
 can_nav_left = false
 can_nav_right = false

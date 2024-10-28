@@ -282,7 +282,11 @@ func bodyPushMe(_delta, _origin):
   #   self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
-  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+  if transformation == TransformationState.CHICKEN:
+    flapSound.pitch_scale = rand_range(1.2, 1.4)
+    flapSound.play()
+    return
+  elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     jumpSound.pitch_scale = rand_range(0.5, 0.6)
   elif nesting_doll_state == global.NestingDoll.BABY:
     jumpSound.pitch_scale = rand_range(1.2, 1.4)
@@ -303,6 +307,7 @@ func landed():
   if physics_state == PhysicsState.BEING_TOSSED and malware_infected:
     bigBump()
   .landed()
+  chicken_jumps = 0
   can_broomerang_warp = true
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
@@ -646,13 +651,20 @@ func isHoldingMultiBroom():
 onready var infectSound = get_node("Sounds/InfectSound")
 onready var wormSound = get_node("Sounds/WormSound")
 onready var gravitySound = get_node("Sounds/GravitySound")
+onready var flapSound = get_node("Sounds/FlapSound")
 onready var fastStepSound = get_node("Sounds/FastStepSound")
 var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
+var chicken_jumps = 0
+var MAX_CHICKEN_JUMPS = 6
 func processJumpInputs(delta):
   if transformation == TransformationState.CHICKEN:
     was_just_on_ground_timer = -8
+    if vv <= 0 and justPressedJump() and not on_ground:
+      chicken_jumps += 1
+      if chicken_jumps >= MAX_CHICKEN_JUMPS:
+        getChickenCured()
     .processJumpInputs(delta)
     return
 
@@ -688,6 +700,21 @@ func processJumpInputs(delta):
       glitchTickle()
         
   .processJumpInputs(delta)
+
+func getChickenCured():
+  if transformation != TransformationState.CHICKEN:
+    return
+  can_broomerang_warp = true
+  transformation = TransformationState.NORMAL
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("revertFromChicken")
+  aniPlayer.queue("land")
+  pauseAnimation = true
+  physics_vars.should_apply_gravity = true
+  should_collide_floor = true
+  should_collide_ceil = true
+  should_collide_horizontally = true
 
 var my_carcasses = []
 func mushroomClone(_trigger_another = true):

@@ -986,7 +986,7 @@ mesh = SubResource( 17213 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1101,6 +1101,7 @@ text = "2
 "
 
 [node name="EquipmentRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 7.0
 margin_top = 4.0
 margin_right = 84.0
@@ -1122,10 +1123,9 @@ margin_bottom = 68.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="Extension" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
-margin_left = 30.5
-margin_top = 31.5
-margin_right = 175.5
-margin_bottom = 71.5
+margin_left = 31.0
+margin_right = 138.0
+margin_bottom = 40.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/Extension"]
@@ -1167,9 +1167,9 @@ frame = 4
 
 [node name="GlitchRect2" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 64.5
-margin_top = 35.0
+margin_top = 3.0
 margin_right = 98.5
-margin_bottom = 69.0
+margin_bottom = 37.0
 color = Color( 0, 0.392157, 0, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect2"]
@@ -1189,9 +1189,9 @@ frame = 4
 
 [node name="GlitchRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 100.5
-margin_top = 35.0
+margin_top = 3.0
 margin_right = 134.5
-margin_bottom = 69.0
+margin_bottom = 37.0
 color = Color( 0, 0.392157, 0, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect3"]

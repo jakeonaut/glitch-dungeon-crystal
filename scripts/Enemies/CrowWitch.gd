@@ -12,6 +12,8 @@ enum CrowState {
   WIND_UP,
   CAST_GLITCH,
   COOLDOWN,
+  SCATTER,
+  SWOOP_DIVE,
 }
 var crow_state = CrowState.IDLE
 var caw_timer = 0
@@ -30,6 +32,7 @@ var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var MAX_SQUARED_DIST = 225
 var should_fly_away = false
 var fly_away_from_where = Vector3(0, 0, 0)
+var should_scatter = false
 
 func _ready():
   set_process(true)
@@ -43,8 +46,22 @@ func _process(delta):
   if should_fly_away and not crow_state == CrowState.FLY_AWAY:
     startFlyAway(fly_away_from_where)
     return
+  
+  if should_scatter and crow_state != CrowState.SCATTER:
+    crow_state = CrowState.SCATTER
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("flyAway")
+    randomizeTargetPos()
+    should_scatter = false
 
-  if crow_state == CrowState.IDLE:
+  if crow_state == CrowState.SCATTER:
+    moveAbout(delta)
+    mySprite.flip_h = target_pos.x < self.global_transform.origin.x
+    hatSprite.flip_h = mySprite.flip_h
+  elif crow_state == CrowState.SWOOP_DIVE:
+    pass
+  elif crow_state == CrowState.IDLE:
     mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
     hatSprite.flip_h = mySprite.flip_h
     if secretAniPlayer.assigned_animation != "startCaw":
@@ -150,6 +167,8 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   startFlyAway(level.player.global_transform.origin)
 
 func playerActivationAreaPassiveActivate():
+  if crow_state == CrowState.SCATTER or crow_state == CrowState.SWOOP_DIVE:
+    return
   startFlyAway(level.player.global_transform.origin)
 
 func startFlyAway(from_where):
@@ -167,5 +186,31 @@ func startFlyAway(from_where):
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("flyAway")
 
+func startSwoopAttack():
+  reenemize(true)
+  crow_state = CrowState.SWOOP_DIVE
+  behavior_directional_bullet = true
+  behavior_phase_through_walls = false
+  mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  var CROW_SPEED = 20
+  bullet_direction_vector = (level.player.global_transform.origin - self.global_transform.origin).normalized() * CROW_SPEED
+
 func glitchSwitchSprite(_delta):
   pass
+
+var original_pos = null
+var target_pos = null
+func moveAbout(delta):
+  var step = 3
+  global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
+  
+  if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
+      stepify(target_pos.y, 0.1) == stepify(global_transform.origin.y, 0.1):
+      randomizeTargetPos()
+
+func randomizeTargetPos():
+  target_pos = Vector3(
+      original_pos.x + rand_range(-9, 9),
+      original_pos.y + rand_range(-5, 6),
+      original_pos.z
+  )
