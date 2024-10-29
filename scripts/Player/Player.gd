@@ -1719,9 +1719,9 @@ func summonSporeShroom():
   summonedShroom = weakref(newShroom)
 
 func malwareCorruptMe():
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("corruptMe")
+  # aniPlayer.stop()
+  # aniPlayer.clear_queue()
+  # aniPlayer.play("corruptMe")
   malware_infected = true
   loseBroom()
 
@@ -1773,26 +1773,38 @@ func tumbleFall(direction_vector, is_corrupted = false):
   yield(TempTimer.idle_frame(self), "timeout")
   fall_timer = fall_time_max - 5
 
-func corruptSprite():
-  mySprite.material_override.set_shader_param("enable_dither", true)
-  mySprite.material_override.set_shader_param("enable_glitch", true)
-  mySprite.material_override.set_shader_param("enable_palette_cycle", true)
-  mySprite.material_override.set_shader_param("enable_no_transparency", true)
-  mySprite.material_override.set_shader_param("shake_power", 0.1)
-  mySprite.material_override.set_shader_param("shake_color_rate", 0.5)
-  mySprite.material_override.set_shader_param("shake_block_size", 10)
+func corruptAllSprites():
+  corruptSprite(mySprite)
+  corruptSprite(fishySprite)
+  corruptSprite(moleSprite)
+  corruptSprite(chickenSprite)
   spellbookGlitchSprite.material_override.set_shader_param("enable_glitch", true)
   spellbookGlitchSprite.material_override.set_shader_param("disable_glitch_dither", false)
 
-func uncorruptSprite():
-  mySprite.material_override.set_shader_param("enable_dither", false)
-  mySprite.material_override.set_shader_param("enable_glitch", false)
-  mySprite.material_override.set_shader_param("enable_palette_cycle", false)
-  mySprite.material_override.set_shader_param("enable_no_transparency", false)
-  mySprite.material_override.set_shader_param("shake_power", 0.01)
-  mySprite.material_override.set_shader_param("shake_color_rate", 0)
-  mySprite.material_override.set_shader_param("shake_block_size", 20)
+func uncorruptAllSprites():
+  uncorruptSprite(mySprite)
+  uncorruptSprite(fishySprite)
+  uncorruptSprite(moleSprite)
+  uncorruptSprite(chickenSprite)
   spellbookGlitchSprite.material_override.set_shader_param("enable_glitch", false)
+
+func corruptSprite(sprite):
+  sprite.material_override.set_shader_param("enable_dither", true)
+  sprite.material_override.set_shader_param("enable_glitch", true)
+  sprite.material_override.set_shader_param("enable_palette_cycle", true)
+  sprite.material_override.set_shader_param("enable_no_transparency", true)
+  sprite.material_override.set_shader_param("shake_power", 0.1)
+  sprite.material_override.set_shader_param("shake_color_rate", 0.5)
+  sprite.material_override.set_shader_param("shake_block_size", 10)
+  
+func uncorruptSprite(sprite):
+  sprite.material_override.set_shader_param("enable_dither", false)
+  sprite.material_override.set_shader_param("enable_glitch", false)
+  sprite.material_override.set_shader_param("enable_palette_cycle", false)
+  sprite.material_override.set_shader_param("enable_no_transparency", false)
+  sprite.material_override.set_shader_param("shake_power", 0.01)
+  sprite.material_override.set_shader_param("shake_color_rate", 0)
+  sprite.material_override.set_shader_param("shake_block_size", 20)
 
 func processBagLogic(_delta):
   pass
@@ -2038,9 +2050,9 @@ func shouldAirHaveFriction():
 
 func processSpriteRenderLogic(_delta):
   if malware_infected:
-    corruptSprite()
+    corruptAllSprites()
   elif mySprite.material_override.get_shader_param("enable_no_transparency"):
-    uncorruptSprite()
+    uncorruptAllSprites()
 
   if grav < 0:
     if spriteContainer.rotation_degrees.x != 180:

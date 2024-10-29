@@ -30,6 +30,21 @@ func fallthroughCollisionActivate(friend):
   if friend == level.player:
     passiveActivate(0, true)
 
+var origin_before_teleportation = null
+# @override
+func unsmack():
+  .unsmack()
+  if origin_before_teleportation != null:
+    origin_before_teleportation = self.global_transform.origin
+  self.global_transform.origin = level.player.global_transform.origin
+  .passiveActivate(0, true)
+
+# @override
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+  if is_smacked or am_i_dying:
+    return false
+  .getSmacked(broom_origin, silently)
+
 var gulping = false
 func passiveActivate(_delta, is_player):
   if gulping:
@@ -42,6 +57,8 @@ func passiveActivate(_delta, is_player):
     secretAniPlayer.play("digest")
     level.player.visible = false
     level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
+  elif origin_before_teleportation != null:
+    self.global_transform.origin = origin_before_teleportation
   
 func swallowPlayer():
   if level.player.malware_infected:
@@ -51,6 +68,8 @@ func swallowPlayer():
   else:
     level.player.tryDieToEnemy(0, true, true, true)
     gulping = false
+    if origin_before_teleportation != null:
+      self.global_transform.origin = origin_before_teleportation
 
 func getCorruptedAndDie():
   fishingRod.restorePlayer(false)
