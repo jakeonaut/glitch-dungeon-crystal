@@ -514,7 +514,7 @@ func purifyAllSpikes():
       removeTile(cell_index)
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
       level.summonSmokeClouds(tile_pos, 2, false, true)
-func purifyAllFragileBrickSolids():
+func purifyAllFragileBrickSolids(summon_smoke_clouds = true):
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
     var cell_index = cell_indices[i]
@@ -522,7 +522,8 @@ func purifyAllFragileBrickSolids():
     if isTileFragileSolid(tile_type):
       removeTile(cell_index)
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
-      level.summonSmokeClouds(tile_pos, 2, false, true)
+      if summon_smoke_clouds:
+        level.summonSmokeClouds(tile_pos, 2, false, true)
 
 func breakFragile(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)

@@ -20,7 +20,6 @@ export var camera_size = 30
 func setUpRoomInitializationOverride():
   if not global.memory.has("roomPath"):
     debug_start_boss_immediately = true
-    highPriestessBoss.MAX_NUM_HITS = 1 # nocommit
   if (crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar()) and global.memory["priestess"] < 2:
     debug_start_boss_immediately = true
 
@@ -88,6 +87,8 @@ func _process(_delta):
       aniPlayer.play("appear")
       gameCamera.initial_size = camera_size
       gameCamera.zoomed_size = camera_size
+      player.pauseInput = true
+      player.pauseSelf = true
       global.pauseMoveInput = true
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
@@ -137,7 +138,7 @@ func enterMemoryZone():
   # generateEyeTiles()
   player.grav = player.PLAYER_GRAV
   player.pauseSelf = false
-  player.nullify()
+  # player.nullify()
   global.shouldRenderAsCinematic = false
   croneNPC.grav = 20
   croneNPC.mySprite.updateBaseFrame(6, 7)
@@ -158,6 +159,8 @@ func unhideHighPriestess():
   highPriestessBoss.laughSound.play()
   global.pauseMoveInput = false
   global.pauseGame = false
+  player.pauseInput = false
+  player.pauseSelf = false
   global.shouldRenderAsCinematic = false
   if crystalGeode.get_ref() != null:
     crystalGeode.get_ref().queue_free()

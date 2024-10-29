@@ -10,13 +10,13 @@ func activateScript():
   if global.memory["zora_flippers"] and global.memory["mole_cricket"] and global.memory["mushroom_soul"]:
     newText = "*mewmew*\n(...seems like you've found\nall the SOULs)"
   else:
-    newText = "*mew..* (smells like you're\n missing some SOULs.. try\n"
+    newText = "*mew..* (smells like you're\n missing some SOULs.."
   if global.memory["zora_flippers"] == 0:
-    newText += "search the fish village,"
+    newText += "\nsearch tadpole bog"
   if global.memory["mole_cricket"] == 0:
-    newText += "search the cricket caves,"
+    newText += ",\nsearch cricket caves"
   elif global.memory["mushroom_soul"] == 0:
-    newText += "search the fungus forest,"
+    newText += ",\nsearch moldy dogwoods"
     
   if newText != null:
     textBox.text_final = newText

@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=6]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=12]
@@ -29,7 +29,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=27]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=29]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/CatKey.tscn" type="PackedScene" id=30]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=32]
 
@@ -12211,7 +12211,7 @@ data = {
 script = ExtResource( 5 )
 __meta__ = {
 "_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 7, 1 )
+"_editor_floor_": Vector3( 0, 7, 0 )
 }
 tileset_type = 1
 
@@ -12252,7 +12252,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 131023, 0, 2, 131075, 0, 0, 262127, 0, 2, 262129, 0, 0, 458755, 0, 0, 589833, 0, 2, 655310, 0, 2, 655316, 0, 0, 655318, 0, 2, 655326, 0, 2, 917492, 0, 2, 917502, 0, 2 )
+"cells": PoolIntArray( 131023, 0, 2, 131075, 0, 0, 262127, 0, 2, 262129, 0, 0, 458755, 0, 0, 589833, 0, 2, 655310, 0, 2, 655318, 0, 2, 655326, 0, 2, 917492, 0, 2, 917502, 0, 2 )
 }
 script = ExtResource( 3 )
 __meta__ = {
@@ -12261,6 +12261,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6, 0, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4, -1, 0 )
@@ -12305,63 +12315,6 @@ shape = SubResource( 16 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 24 )
-
-[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3.7, -4 )
-
-[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3.7, -4 )
-
-[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3.7, -4 )
-
-[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3.7, -4 )
-
-[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.7, -4 )
-
-[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -3.7, -4 )
-
-[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -3.7, -4 )
-
-[node name="WaterCube8" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3.7, -4 )
-
-[node name="WaterCube9" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -3.7, -4 )
-
-[node name="WaterCube10" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.7, -4 )
-
-[node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, -3.7, -4 )
-
-[node name="WaterCube16" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -3.7, -4 )
-
-[node name="WaterCube17" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, -3.7, -4 )
-
-[node name="WaterCube18" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51, -3.7, -4 )
-
-[node name="WaterCube19" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55, -3.7, -4 )
-
-[node name="WaterCube12" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, -3.7, -4 )
-
-[node name="WaterCube13" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31, -3.7, -4 )
-
-[node name="WaterCube14" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -3.7, -4 )
-
-[node name="WaterCube15" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -3.7, -4 )
 
 [node name="BasicFrogEnemy6" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 0.1, 0 )
@@ -12522,8 +12475,65 @@ has_spawned = true
 [node name="WaterCube20" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -4 )
 
+[node name="WaterCube22" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -4, -4 )
+
+[node name="WaterCube23" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -4, -4 )
+
+[node name="WaterCube24" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, -4 )
+
+[node name="WaterCube25" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -4, -4 )
+
+[node name="WaterCube26" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -4, -4 )
+
+[node name="WaterCube27" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -4, -4 )
+
+[node name="WaterCube28" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -4, -4 )
+
+[node name="WaterCube29" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -4, -4 )
+
+[node name="WaterCube30" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -4, -4 )
+
+[node name="WaterCube31" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, -4, -4 )
+
+[node name="WaterCube32" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, -4, -4 )
+
+[node name="WaterCube33" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -4, -4 )
+
+[node name="WaterCube34" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, -4, -4 )
+
+[node name="WaterCube35" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, -4, -4 )
+
+[node name="WaterCube36" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42, -4, -4 )
+
+[node name="WaterCube37" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46, -4, -4 )
+
+[node name="WaterCube38" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -4, -4 )
+
+[node name="WaterCube39" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, -4, -4 )
+
+[node name="WaterCube40" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58, -4, -4 )
+
 [node name="WaterCube21" parent="Viewport/level" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 1, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 3, -4 )
 
 [node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.125, 0 )
@@ -12698,61 +12708,37 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 5, 0 )
 glitch_form = 4
 
-[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 19, 0 )
-
-[node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 16, 0 )
-
-[node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 16, 0 )
-
 [node name="GlitchEnemy9" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 15, 0 )
 
 [node name="GlitchEnemy10" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 14, 0 )
-
-[node name="GlitchEnemy11" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 12, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 20, 0 )
 
 [node name="GlitchEnemy12" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 12, 0 )
 
-[node name="GlitchEnemy13" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 12, 0 )
-
-[node name="GlitchEnemy14" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 11, 0 )
-
 [node name="GlitchEnemy15" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 3, 0 )
-
-[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 21, 0 )
-
-[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 23, 0 )
-
-[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 3, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 7, 0 )
 glitch_form = 1
 
-[node name="CatKey" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 19, 0 )
-grav = 0
-
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 19, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 18, 0 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 19, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 18, 0 )
 
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, -52, 14, -1 )
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 18, 0 )
+grav = 0
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]
 

@@ -879,7 +879,7 @@ func processHorizontalInputs(delta):
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
 
-  var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and dir.x > 0) or (pressingMoveRight() and dir.x < 0)
+  var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and (dir.x > 0 or not flip_h)) or (pressingMoveRight() and (dir.x < 0 or flip_h))
   if is_pressing_opposite_horizontal_input:
     num_horizontal_input_presses = 1
   elif is_pressing_horizontal_input and not was_pressing_horizontal_input and on_ground:

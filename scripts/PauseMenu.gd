@@ -408,12 +408,7 @@ func processQuitToMainLogic(_delta):
       else:
         # dedupe (ish) with "dev_demo_reset" above
         global.pauseGame = true
-        global.has_started_game = false
-        global.has_really_started_game = false
-        global.resetMemory()
-        global.currLevelZone = null
-        transition.long_fade_to("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
-        global.isPauseMenuOpen = false
+        transition.reset_game("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
     elif quitToMainOptionIndex == 1:
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true
@@ -587,7 +582,7 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
-        popupText.text = "memory of fish:\n  swim in water\n  blow bubbles"
+        popupText.text = "memory of fish:\n  swim in water\n"
       elif inventoryOptionIndexX == 1:
         popupText.text = "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
       elif inventoryOptionIndexX == 2:
@@ -595,11 +590,14 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
-        popupText.text = "forget me not:\n  the goddess allows you\n  to remember"
+        var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+        popupText.text = "angel eggs:\n  spawn of the goddess\n  you have " + str(numEggs)
       elif inventoryOptionIndexX == 1:
-        popupText.text = "goddess dream 2:\n  what does this do?"
+        popupText.text = "phishing key:\n  to malware swamp"
       elif inventoryOptionIndexX == 2:
-        popupText.text = "goddess dream 3:\n  what does this do?"
+        popupText.text = "spore key:\n  to baba's forest"
+      elif inventoryOptionIndexX == 3:
+        popupText.text = "crypt key:\n  to forgotten crypt"
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if popupRect.visible:
       popupRect.visible = false
@@ -623,10 +621,14 @@ func normalizeInventoryOptionIndex(y, x):
     if y > 0:
       if inventoryOptionIndex == 0 and not grimoireSprite.visible:
         inventoryOptionIndex = 1
-      if (inventoryOptionIndex == 2 and not soulLabel.visible) or inventoryOptionIndex > 2:
+      if (inventoryOptionIndex == 2 and not soulLabel.visible):
+        inventoryOptionIndex = 3
+      if (inventoryOptionIndex == 3 and not keyLabel.visible) or inventoryOptionIndex > 3:
         inventoryOptionIndex = 0 if grimoireSprite.visible else 1
     elif y < 0:
       if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
+        inventoryOptionIndex = 3
+      if inventoryOptionIndex == 3 and not keyLabel.visible:
         inventoryOptionIndex = 2
       if inventoryOptionIndex == 2 and not soulLabel.visible:
         inventoryOptionIndex = 1
@@ -648,30 +650,35 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
         inventoryOptionIndexX = 2
       if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
-        inventoryOptionIndexX = 0 if soulSprite1.visible else 1
+        inventoryOptionIndexX = 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
     elif x < 0:
       if inventoryOptionIndexX == 2 and not soulSprite3.visible:
         inventoryOptionIndexX = 1
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
         inventoryOptionIndexX = 0
-      if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndex < 0:
-        inventoryOptionIndexX = 2 if soulSprite3.visible else 1
-  # elif inventoryOptionIndex == 4: # goddess dreams
-  #   pass
-  #   # if x >= 0:
-  #   #   if inventoryOptionIndexX == 0 and not dreamSprite1.visible:
-  #   #     inventoryOptionIndexX = 1
-  #   #   if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
-  #   #     inventoryOptionIndexX = 2
-  #   #   if (inventoryOptionIndexX == 2 and not dreamSprite3.visible) or inventoryOptionIndexX > 2:
-  #   #     inventoryOptionIndexX = 0 if dreamSprite1.visible else 1
-  #   # elif x < 0:
-  #   #   if inventoryOptionIndexX == 2 and not dreamSprite3.visible:
-  #   #     inventoryOptionIndexX = 1
-  #   #   if inventoryOptionIndexX == 1 and not dreamSprite2.visible:
-  #   #     inventoryOptionIndexX = 0
-  #   #   if (inventoryOptionIndexX == 0 and not dreamSprite1.visible) or inventoryOptionIndex < 0:
-  #   #     inventoryOptionIndexX = 2 if dreamSprite3.visible else 1
+      if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndexX < 0:
+        inventoryOptionIndexX = 2 if soulSprite3.visible else 1 if soulSprite2.visible else 0
+
+  if inventoryOptionIndex == 3:
+    inventoryOptionIndexX += x
+    if x >= 0:
+      if inventoryOptionIndexX == 0 and not angelEggSprite.visible:
+        inventoryOptionIndexX = 1
+      if inventoryOptionIndexX == 1 and not fishKeySprite.visible:
+        inventoryOptionIndexX = 2
+      if inventoryOptionIndexX == 2 and not sporeKeySprite.visible:
+        inventoryOptionIndexX = 3
+      if (inventoryOptionIndexX == 3 and not pyramidKeySprite.visible) or inventoryOptionIndexX > 3:
+        inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishKeySprite.visible else 2 if sporeKeySprite.visible else 3
+    elif x < 0:
+      if inventoryOptionIndexX == 3 and not pyramidKeySprite.visible:
+        inventoryOptionIndexX = 2
+      if inventoryOptionIndexX == 2 and not sporeKeySprite.visible:
+        inventoryOptionIndexX = 1
+      if inventoryOptionIndexX == 1 and not fishKeySprite.visible:
+        inventoryOptionIndexX = 0
+      if (inventoryOptionIndexX == 0 and not angelEggSprite.visible) or inventoryOptionIndexX < 0:
+        inventoryOptionIndexX = 3 if pyramidKeySprite.visible else 2 if sporeKeySprite.visible else 1 if fishKeySprite.visible else 0 
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
@@ -681,10 +688,12 @@ onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
 onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
 onready var soulSprite3 = get_node("InventoryRect/SoulSprite3")
 onready var soulLabel = get_node("InventoryRect/SoulLabel")
-# onready var dreamSprite1 = get_node("InventoryRect/DreamSprite1")
-# onready var dreamSprite2 = get_node("InventoryRect/DreamSprite2")
-# onready var dreamSprite3 = get_node("InventoryRect/DreamSprite3")
-# onready var dreamLabel = get_node("InventoryRect/DreamLabel")
+onready var angelEggSprite = get_node("InventoryRect/AngelEggSprite")
+onready var angelEggLabel = get_node("InventoryRect/AngelEggLabel")
+onready var fishKeySprite = get_node("InventoryRect/FishKeySprite")
+onready var sporeKeySprite = get_node("InventoryRect/SporeKeySprite")
+onready var pyramidKeySprite = get_node("InventoryRect/PyramidKeySprite")
+onready var keyLabel = get_node("InventoryRect/KeyLabel")
 func processInventoryRender(_delta):
   tryDrawMap()
   if inventoryOptionIndex == 0:
@@ -708,13 +717,15 @@ func processInventoryRender(_delta):
     elif inventoryOptionIndexX == 2:
       invSelectionSprite.position.x = 140
   elif inventoryOptionIndex == 3:
-    invSelectionSprite.position.y = 240
+    invSelectionSprite.position.y = 230
     if inventoryOptionIndexX == 0:
       invSelectionSprite.position.x = 26
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 75
+      invSelectionSprite.position.x = 82
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 125
+      invSelectionSprite.position.x = 140
+    elif inventoryOptionIndexX == 3:
+      invSelectionSprite.position.x = 197
 
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
@@ -752,15 +763,19 @@ func processInventoryRender(_delta):
     glitchRect4.visible = false
 
   bagSprite.visible = global.memory["hp"] > 1
-  # bagLabel.visible = global.memory["hp"] > 1
 
   soulSprite1.visible = global.memory["zora_flippers"]
   soulSprite2.visible = global.memory["mole_cricket"]
   soulSprite3.visible = global.memory["mushroom_soul"]
   soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
-  # dreamSprite1.visible = global.memory["forget_me_not"]
-  # dreamSprite2.visible = global.memory["angel_flute"]
-  # dreamSprite3.visible = global.memory["goddess_dream3"]
+  var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+  angelEggSprite.visible = numEggs > 0
+  angelEggLabel.visible = angelEggSprite.visible
+  angelEggLabel.bbcode_text = str(numEggs)
+  fishKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH)
+  sporeKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT)
+  pyramidKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID)
+  keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
 # optimization could be, rather than reconstructing the map on every level, can keep this map sprite grid on transition, and simply draw it here...

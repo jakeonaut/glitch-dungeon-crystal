@@ -48,7 +48,8 @@ func _ready():
         # lightAniPlayer.play("lightUpQuiet")
         yield(get_tree().create_timer(0.1), "timeout")
         freeUpPlayer()
-        level.purifyAllWeakEnemies()
+        level.purifyAllWeakEnemies(false)
+        level.purifyAllFragileBrickSolids(false)
         queue_free()
         # musicPlayer.changeSongPitch(1.0)
     elif global.memory["priestess"] >= 2: # and global.memory["glitched_grimoire"]:
@@ -61,8 +62,8 @@ func _ready():
         yield(get_tree().create_timer(0.1), "timeout")
         freeUpPlayer()
         getLevelTiles().purifyAllSpikes()
-        level.purifyAllWeakEnemies()
-        level.purifyAllFragileBrickSolids()
+        level.purifyAllWeakEnemies(false)
+        level.purifyAllFragileBrickSolids(false)
         queue_free()
         # musicPlayer.changeSongPitch(1.0)
     else:

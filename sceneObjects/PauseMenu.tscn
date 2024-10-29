@@ -2584,36 +2584,32 @@ bbcode_enabled = true
 bbcode_text = "lost souls"
 text = "lost souls"
 
-[node name="KeySprite1" type="Sprite" parent="InventoryRect"]
-visible = false
+[node name="AngelEggSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 27, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 12
+frame = 5
 
-[node name="KeySprite2" type="Sprite" parent="InventoryRect"]
-visible = false
-position = Vector2( 83, 230 )
+[node name="FishKeySprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 81, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 13
 
-[node name="KeySprite3" type="Sprite" parent="InventoryRect"]
-visible = false
-position = Vector2( 139, 230 )
+[node name="SporeKeySprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 137, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 14
 
-[node name="KeySprite4" type="Sprite" parent="InventoryRect"]
-visible = false
-position = Vector2( 203, 230 )
+[node name="PyramidKeySprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 198, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -2621,15 +2617,14 @@ vframes = 5
 frame = 15
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
-visible = false
-margin_left = 43.0
-margin_top = 246.0
-margin_right = 162.0
-margin_bottom = 292.0
+margin_left = 234.0
+margin_top = 222.0
+margin_right = 353.0
+margin_bottom = 268.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "2"
-text = "2"
+bbcode_text = "key item"
+text = "key item"
 
 [node name="CrystalSprite1" type="Sprite" parent="InventoryRect"]
 visible = false
@@ -2652,12 +2647,22 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 26, 165 )
+position = Vector2( 197, 230 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 20
+
+[node name="AngelEggLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 36.0
+margin_top = 241.0
+margin_right = 155.0
+margin_bottom = 287.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "0"
+text = "0"
 
 [node name="GlitchRect1" type="ColorRect" parent="InventoryRect"]
 margin_left = 34.0

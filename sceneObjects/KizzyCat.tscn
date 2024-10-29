@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=13]
 [ext_resource path="res://assets/pokeballgreen.png" type="Texture" id=14]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sounds/657930__matrixxx__cartoon-drowning-02.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=16]
 [ext_resource path="res://sceneObjects/BounceAnimationPlayer.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ShaderMaterial" id=9]

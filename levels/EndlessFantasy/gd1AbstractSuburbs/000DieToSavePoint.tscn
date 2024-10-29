@@ -3,7 +3,7 @@
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
-[ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=4]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
@@ -301,23 +301,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.309381, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 17.3094, 0 )
-script = ExtResource( 4 )
 
 [node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 16.3094, 0 )
-script = ExtResource( 4 )
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 17.3094, 0 )
-script = ExtResource( 4 )
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 19.1144, 0 )
-script = ExtResource( 4 )
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 9.11436, 0 )
-script = ExtResource( 4 )
+
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 12.3922, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 24 )]
 

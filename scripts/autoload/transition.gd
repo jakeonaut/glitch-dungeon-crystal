@@ -171,6 +171,11 @@ func fast_fade_to(scn_path):
   self.path = scn_path # store the scene path
   aniPlayer.stop()
   aniPlayer.play("long_fade", -1, 2.0) # play the long transition animation
+# PUBLIC FUNCTION.
+var should_reset = false
+func reset_game(scn_path):
+  should_reset = true
+  long_fade_to(scn_path)
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func long_fade_to(scn_path):
   was_i_interrupted = false
@@ -204,6 +209,13 @@ func change_scene():
     was_i_interrupted = false
     return
 
+  if should_reset:
+    global.has_started_game = false
+    global.has_really_started_game = false
+    global.resetMemory()
+    global.currLevelZone = null
+    global.isPauseMenuOpen = false
+  should_reset = false
   global.spellCastPauseIndex = current_scene.get_node("Viewport/level/Player").spellCastPauseIndex
   global.memory["currLevelZone"] = global.currLevelZone
   global.set_camera_position_on_respawn = true

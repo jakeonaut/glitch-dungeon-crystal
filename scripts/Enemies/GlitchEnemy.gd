@@ -346,7 +346,8 @@ func doVerticalWalkingBehavior():
 func tryDieToBody():
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:
-        if area.is_in_group("corporeal_body"):
+        var areaParent = area.get_parent()
+        if area.is_in_group("corporeal_body") and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
             level.summonSmokeClouds(global_transform.origin, 3)
             queue_free()
 

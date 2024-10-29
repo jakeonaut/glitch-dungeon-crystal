@@ -1611,7 +1611,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6, 38.7, -4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 46, 0 )
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 38 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9, 3.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7, 3.9, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 25 )]
 

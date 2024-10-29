@@ -302,12 +302,13 @@ func playLandSound():
     .playLandSound()
 
 var can_broomerang_warp = true
+var should_big_bump = false
 # @override
 func landed():
-  if physics_state == PhysicsState.BEING_TOSSED and malware_infected:
+  if physics_state == PhysicsState.BEING_TOSSED and should_big_bump:
     bigBump()
   .landed()
-  chicken_jumps = 0
+  # chicken_jumps = 0
   can_broomerang_warp = true
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
@@ -348,7 +349,7 @@ var PLAYER_GRAV = 28
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
-  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and malware_infected):
+  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and should_big_bump):
     is_mushroom_infected = false
     pauseAnimation = false
     bigBump()
@@ -366,9 +367,10 @@ func bigBump():
   global.memory["hp"] = prev_hp
   fall_timer = 0
   pauseAnimation = false
+  should_big_bump = false
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("uncorruptMe")
+  # aniPlayer.play("uncorruptMe")
   aniPlayer.queue("fall")
 
 # @override

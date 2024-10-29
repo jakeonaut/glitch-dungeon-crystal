@@ -23,6 +23,9 @@ func tryInitializeFromDebug():
   if global.memory["initialized_from_debug"]:
     epilepsyWarning.visible = false
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY
+  elif global.has_ever_seen_epilepsy_warning:
+    mainMenuState = MainMenuState.MAIN_MENU
+    epilepsyWarning.visible = false
   else:
     mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
     epilepsyWarning.visible = true
@@ -34,7 +37,11 @@ func setUpRoomInitializationOverride():
         player.pauseInput = true
         show_dither_effect = false
         show_crt_effect = true
+        if global.has_ever_seen_epilepsy_warning:
+            mainMenuState = MainMenuState.MAIN_MENU
+            epilepsyWarning.visible = false
     else:
+        epilepsyWarning.visible = false
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
         mainMenuUi.visible = false
@@ -180,6 +187,7 @@ var updateMenuText = true
 func _process(delta):
     if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
         if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
+            global.has_ever_seen_epilepsy_warning = true
             epilepsy_cover_opacity -= (delta)
             if epilepsy_cover_opacity < 0:
                 epilepsy_cover_opacity = 0

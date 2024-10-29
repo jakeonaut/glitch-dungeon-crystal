@@ -383,6 +383,7 @@ behavior_walking = true
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2786, 17.1, 0 )
+permanently_alter_tiles = true
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9, 10.9, 1 )

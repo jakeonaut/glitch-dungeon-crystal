@@ -200,9 +200,9 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
     return false
   if floating_text or not is_active: 
     return false
-  # don't start IMPORTANT dialog if you threw broom at me
-  if is_important and not global.memory["broom"]:
-    return false
+  # don't start dialog if you threw broom at me
+  if not global.memory["broom"]:
+    return true
 
   if (global.activeInteractor == null and (textBox.text_final != "" or textBox.smackedBbText != "")) or (global.activeInteractor == textBox and global.pauseGame):
     textBox.hideInteractPrompt()

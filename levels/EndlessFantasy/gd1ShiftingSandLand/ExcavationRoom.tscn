@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
@@ -29,7 +29,6 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=27]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=29]
-[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=31]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=32]
 
@@ -440,6 +439,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 19.1, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45126, 19, 0 )
@@ -568,9 +577,6 @@ texture = ExtResource( 29 )
 [node name="Sprite3D2" parent="Viewport/level/ParallaxBackground" index="1"]
 material_override = SubResource( 61 )
 texture = ExtResource( 29 )
-
-[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 19, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, 0 )

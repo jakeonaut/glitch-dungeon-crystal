@@ -8,7 +8,7 @@ func activateScript():
     var text = "•I will teach you Ritual. \nTo travel between Angels\n•like so:\ndo this: "
     for ritual_step in global.correct_ritual:
         text += global.getLargeInputText(ritual_step) + " "
-    text += "\n•Pray twice, dance, jump,\n    then Return."
+    text += "\n\n•\"Pray thrice then Return.\""
     var textBox = get_node("..")
     if global.justAngelWarped:
       text = "•Keep up your daily prayers.\nOur mother needs your strength."

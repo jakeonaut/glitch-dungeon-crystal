@@ -95,6 +95,8 @@ func _ready_impl():
   tryInitializeFromDebug()
     
   if global.memory["has_gotten_broom"] > 0:
+    if global.malware_infected:
+      player.malware_infected = true
     player.getABroom()
   if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false
@@ -159,10 +161,6 @@ func tryInitializeFromDebug():
 
       # debug "hack" to set angel_statues on debug_initialization
       var tempLevelZone = global.currLevelZone
-      # set for haven
-      global.tryInitializeLevelZone("gd1TutorialDungeon")
-      global.setLevelZoneThing("angel_statue", 
-        ["haven", "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"])
       # set for tadpole bog
       global.tryInitializeLevelZone("gd1FishingVillage")
       global.setLevelZoneThing("angel_statue", 
@@ -174,7 +172,7 @@ func tryInitializeFromDebug():
       # set for cricket caves
       global.tryInitializeLevelZone("gd1ShiftingSandLand")
       global.setLevelZoneThing("angel_statue", 
-        ["insect caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
+        ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
       # set for dream temple
       global.tryInitializeLevelZone("gd1CrystalTower")
       # set for elder village
@@ -389,7 +387,7 @@ func tryToRespawn():
   global.justAngelWarped = global.angelWarping
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
   if global.isEnteringRoom:
-    levelTiles.tryToSayTidy()
+    # levelTiles.tryToSayTidy()
     if global.malware_infected:
       player.malware_infected = true
     player.getABroom() # after malware infection so we don't improperly give a broom
@@ -592,52 +590,53 @@ func trySpawnFollowers():
           stepify(rand_range(0.5, 1.5), 0.125), 
           0))
 
-  spawnSpecialKeyFollowers(
-    player.global_transform.origin + Vector3(
-      stepify(rand_range(-1.0, 1.0), 0.125),
-      stepify(rand_range(0.5, 1.5), 0.125),
-      0
-    )
-  )
-  var numKeys = global.memory["key"] if global.memory.has("key") else null
-  if numKeys != null:
-    for _i in range(numKeys):
-      spawnKeyFollower(
-        player.global_transform.origin + Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125), 
-          0))
+  # spawnSpecialKeyFollowers(
+  #   player.global_transform.origin + Vector3(
+  #     stepify(rand_range(-1.0, 1.0), 0.125),
+  #     stepify(rand_range(0.5, 1.5), 0.125),
+  #     0
+  #   )
+  # )
+  # var numKeys = global.memory["key"] if global.memory.has("key") else null
+  # if numKeys != null:
+  #   for _i in range(numKeys):
+  #     spawnKeyFollower(
+  #       player.global_transform.origin + Vector3(
+  #         stepify(rand_range(-1.0, 1.0), 0.125),
+  #         stepify(rand_range(0.5, 1.5), 0.125), 
+  #         0))
 
-  var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-  if numEggs != null:
-    for _i in range(numEggs):
-      spawnAngelEggFollower(
-        player.global_transform.origin + Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125), 
-          0))
+  # var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+  # if numEggs != null:
+  #   for _i in range(numEggs):
+  #     spawnAngelEggFollower(
+  #       player.global_transform.origin + Vector3(
+  #         stepify(rand_range(-1.0, 1.0), 0.125),
+  #         stepify(rand_range(0.5, 1.5), 0.125), 
+  #         0))
 
-  if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
-    var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
-    if numAngelTadpoles != null:
-      for _i in range(numAngelTadpoles):
-        spawnAngelTadpole(
-          player.global_transform.origin + Vector3(
-            stepify(rand_range(-1.0, 1.0), 0.125),
-            stepify(rand_range(0.5, 1.5), 0.125), 
-            0
-          ))
+  # if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
+  #   var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
+  #   if numAngelTadpoles != null:
+  #     for _i in range(numAngelTadpoles):
+  #       spawnAngelTadpole(
+  #         player.global_transform.origin + Vector3(
+  #           stepify(rand_range(-1.0, 1.0), 0.125),
+  #           stepify(rand_range(0.5, 1.5), 0.125), 
+  #           0
+  #         ))
 
-func purifyAllWeakEnemies():
+func purifyAllWeakEnemies(summon_smoke_clouds = true):
   var weak_enemies = self.get_tree().get_nodes_in_group("weak_enemies")
   for weak_enemy_area in weak_enemies:
     var weak_enemy = weak_enemy_area.get_node("..")
     if weak_enemy.isActive() and not weak_enemy.am_i_dying:
       weak_enemy.ouchies(weak_enemy.global_transform.origin)
-      self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
+      if summon_smoke_clouds:
+        self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
 
-func purifyAllFragileBrickSolids():
-  levelTiles.purifyAllFragileBrickSolids()
+func purifyAllFragileBrickSolids(summon_smoke_clouds = true):
+  levelTiles.purifyAllFragileBrickSolids(summon_smoke_clouds)
 
 var tadpoleRes = preload("res://sceneObjects/Enemies/TadpoleEnemy.tscn")
 func spawnAngelTadpole(starting_position):

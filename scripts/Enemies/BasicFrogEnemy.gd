@@ -304,6 +304,7 @@ func unsmack():
   else:
     .unsmack()
 
+export var can_jump = true
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or am_i_dying:
@@ -326,7 +327,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
         tongueController.restorePlayer()
         tongueAniPlayer.play("RESET")
     return
-  behavior_jumping = true
+  behavior_jumping = can_jump
   behavior_walking = not is_static
   jump_timer = 0
   walk_direction.x = 1

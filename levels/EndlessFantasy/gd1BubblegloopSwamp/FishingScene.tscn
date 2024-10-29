@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/water_normal_2.png" type="Texture" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
 [ext_resource path="res://assets/sprites/critters.png" type="Texture" id=10]
@@ -820,6 +821,9 @@ grav = 0
 [node name="GlitchMoleCricket2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -9, 0 )
 grav = 0
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

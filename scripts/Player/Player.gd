@@ -165,7 +165,7 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
       global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
     elif global.memory["glitched_grimoire"] and not global.memory["glitched_grimoire2"] and global.memory["spellbookPage"].size() > 0:
       if global.memory["spellbookPage"].size() > 2:
-        var spellToBeForgottenIndex = spellCastPauseIndex - 1
+        var spellToBeForgottenIndex = spellCastPauseIndex # - 1
         if spellToBeForgottenIndex < 0:
           spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
         spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
@@ -546,7 +546,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("normal_offset", .02)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
-  if global.memory["mushroom_soul"] and teleport_to != null and Input.is_action_pressed("sub_action_button"):
+  if global.memory["mushroom_soul"] and teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
     pauseSelf = true
     global.pauseMoveInput = true
     visible = false
@@ -1428,7 +1428,7 @@ func collideWithCeiling(local_lv):
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
-    if malware_infected:
+    if should_big_bump:
       on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
@@ -1718,14 +1718,19 @@ func summonSporeShroom():
     newShroom.walk_direction.x = 1
   summonedShroom = weakref(newShroom)
 
+func malwareCorruptMe():
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("corruptMe")
+  malware_infected = true
+  loseBroom()
+
 func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:
     return
 
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  if is_corrupted:
-    aniPlayer.play("corruptMe")
   var x_val = 0
   var jump_val = 5 if not is_corrupted else 0
   playBounce("grow")
@@ -1744,10 +1749,9 @@ func tumbleFall(direction_vector, is_corrupted = false):
     jump_val = -10
 
   if is_corrupted:
-    malware_infected = is_corrupted
     grav = 0
     on_ground = false
-    loseBroom()
+    should_big_bump = true
   else:
     on_ground = true
     grav = PLAYER_GRAV
@@ -1795,7 +1799,7 @@ func processBagLogic(_delta):
 
 var force_a_sweep = false
 func processBroomLogic(delta):
-  if pauseInput and summonedBroom == null:
+  if (pauseInput or global.shouldRenderAsCinematic) and summonedBroom == null:
     return
   # if transformation == TransformationState.FISHY:
   #   return
@@ -1839,11 +1843,13 @@ func processBroomLogic(delta):
       which_broom_attack = 1
 
   if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+    teleport_to = null
     doBroomAttack(which_broom_attack)
     if linear_velocity.y < 0 and transformation != TransformationState.FISHY:
       linear_velocity.y = 0
   elif Input.is_action_just_pressed("sub_action_button") and summonedBroom and not pauseSelf and not global.pauseGame:
     if can_throw_broom:
+      teleport_to = null
       summonedBroom.queue_free()
       broomStop()
       if not on_ground:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -23,10 +23,83 @@
 [ext_resource path="res://sceneObjects/BroomUpgradeCrone.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/FreeChicken.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=24]
+[ext_resource path="res://assets/water_normal_4.png" type="Texture" id=25]
 
 [sub_resource type="BoxShape" id=239]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=267]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=268]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=269]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=270]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.8, 1.3 )
+
+[sub_resource type="BoxShape" id=271]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="Shader" id=78]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float HowShiny = 2;
+uniform float Roughness = 0.2;
+uniform float alpha2 = 0.5;
+uniform bool should_use_vertex_color = true;
+uniform sampler2D texture_albedo : hint_albedo;
+
+varying smooth vec3 our_color;
+
+void vertex() {
+// Output:0
+  our_color = VERTEX;
+}
+
+void fragment() {
+// ColorUniform:4;
+	vec3 n_out4p0 = our_color;
+
+// ScalarUniform:2
+	float n_out2p0 = HowShiny;
+
+// ScalarUniform:3
+	float n_out3p0 = Roughness;
+
+  if (should_use_vertex_color) {
+	 ALBEDO = our_color;
+  } else {
+    ALBEDO = texture(texture_albedo, UV).rgb;
+  }
+	METALLIC = n_out2p0;
+	ROUGHNESS = n_out3p0;
+  ALPHA = alpha2;
+
+}
+
+void light() {
+// Output:0
+
+}"
+
+[sub_resource type="ShaderMaterial" id=79]
+shader = SubResource( 78 )
+shader_param/HowShiny = 2.0
+shader_param/Roughness = 0.2
+shader_param/alpha2 = 0.5
+shader_param/should_use_vertex_color = false
+shader_param/texture_albedo = ExtResource( 25 )
 
 [sub_resource type="ViewportTexture" id=265]
 viewport_path = NodePath("Viewport")
@@ -168,6 +241,39 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 num_keys_unlock = 4
 key_type = 5
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 267 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 268 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 269 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 270 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 271 )
+
+[node name="MeshInstance2" parent="Viewport/level/Door2" index="18"]
+visible = true
+
+[node name="MeshInstance3" type="MeshInstance" parent="Viewport/level/Door2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 6.23508, -0.0808809 )
+material_override = SubResource( 79 )
+mesh = ExtResource( 24 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Viewport/level/Door2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 1.33333, 4.90174, -0.0808809 )
+material_override = SubResource( 79 )
+mesh = ExtResource( 24 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Viewport/level/Door2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 4.90174, -0.0808809 )
+material_override = SubResource( 79 )
+mesh = ExtResource( 24 )
+
 [node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6351, 3.1759, 0 )
 bbText = "•you seem to have some
@@ -202,5 +308,7 @@ flip_v = true
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
 [editable path="Viewport/level/GlitchEnemy6"]
+[editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

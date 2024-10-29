@@ -228,8 +228,9 @@ var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
 var spellCastPauseIndex = null
-var correct_ritual = ["ui_down", "ui_down", "ui_right", "ui_left", "jump_button", "restart_key"]
+var correct_ritual = ["ui_down", "ui_down", "ui_down", "restart_key"]
 var has_been_baba_yaga_cursed = false
+var has_ever_seen_epilepsy_warning = false
 
 func _ready():
     set_process(true)
@@ -257,6 +258,7 @@ func _ready():
     if angelWarping: if justAngelWarped: pass
     if has_been_baba_yaga_cursed: pass
     if malware_infected: pass
+    if has_ever_seen_epilepsy_warning: pass
 
     resetMemory()
     loadGameSettings()
@@ -269,7 +271,7 @@ func resetMemory():
     memory["show_color_blind"] = false
     memory["canGlitchScreen"] = true
     memory["colorblindMode"] = true
-    memory["stopAllMusic"] = true
+    memory["stopAllMusic"] = false
     memory["canChangeSongPitch"] = true
     memory["spellAssist"] = false
 
@@ -436,13 +438,13 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1ToxicJungle":
             return "moldy dogwoods"
         "gd1ShiftingSandLand":
-            return "insect caves" # could amp up the insect-ness more
+            return "cricket caves" # could amp up the insect-ness more
         "gd1CrystalTower":
             return "dream temple"
         "gd1GrandmaVillage":
             return "elder village"
         "gd1BubblegloopSwamp":
-            return "malware sea" # "sea of corruption" # malware swamp
+            return "malware swamp" # "sea of corruption" # malware swamp
         "gd1TombSouls":
             return "forgotten crypt"
         "gd1AbstractSuburbs":

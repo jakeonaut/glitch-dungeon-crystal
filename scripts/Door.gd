@@ -120,13 +120,13 @@ func _ready():
   #     spawnChicken()
 
 func getKeyName(x_more_crystals):
-  var key_name = "FISH KEY"
+  var key_name = "PHISHING KEY"
   if key_type == global.KeyItem.PYRAMID:
-    key_name = "PYRAMID KEY"
+    key_name = "CRYPT KEY"
   elif key_type == global.KeyItem.SHROOM:
     key_name = "SHROOM KEY"
   elif key_type == global.KeyItem.CAT:
-    key_name = "CAT KEY"
+    key_name = "SPORE KEY"
   elif key_type == global.KeyItem.CRYSTAL:
     key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
   elif key_type == global.KeyItem.ZONE_CRYSTAL:

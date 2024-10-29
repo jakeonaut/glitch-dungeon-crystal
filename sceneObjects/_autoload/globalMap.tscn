@@ -784,6 +784,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
 material_override = SubResource( 6 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
+can_nav_left = false
 can_nav_down = false
 
 [node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 3 )]
@@ -791,6 +792,7 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 4, 4, 0 )
 material_override = SubResource( 6 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
+can_nav_left = false
 can_nav_down = false
 
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
@@ -978,7 +980,6 @@ frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"
 can_nav_left = false
 can_nav_right = false
-can_nav_up = false
 can_nav_down = false
 
 [node name="CorruptedTomb" type="Spatial" parent="."]
