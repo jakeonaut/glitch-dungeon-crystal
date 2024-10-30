@@ -314,7 +314,7 @@ func resetMemory():
     memory["baba_yaga"] = 0
     memory["angler_seaman"] = 0
     memory["dogu_matryoshka"] = 0
-    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire"] = false
     memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS

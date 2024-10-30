@@ -41,6 +41,8 @@ func _process(delta):
         # always interact with passive interaction areas
         if area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             area.PassiveInteractActivate(delta)
+        if area.has_method("PassivePassiveInteractActivate"):
+            area.PassivePassiveInteractActivate(delta)
 
         if not parent.malware_infected and area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
@@ -49,7 +51,7 @@ func _process(delta):
                 enemy.doSomethingElseToPlayer(parent)
             else:
                 parent.tryDieToEnemy(delta, true, enemy.kill_invis, enemy.kill_immediately)
-        if area.is_in_group("water"):
+        if area.is_in_group("water") and not parent.should_big_bump:
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true
             water_y = collision_shape.global_transform.origin.y + (collision_shape.get_shape().get_extents().y) + 1

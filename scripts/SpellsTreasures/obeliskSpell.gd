@@ -4,6 +4,7 @@ onready var collectSound = get_node("CollectSound")
 onready var mySprite = get_node("Sprite3D")
 onready var obeliskSprite = get_node("Obelisk")
 onready var sparkleSprite = get_node("SparkleSprite3D") if has_node("SparkleSprite3D") else null
+onready var activePassiveArea = get_node("InteractionArea") if has_node("InteractionArea") else null
 onready var playerInteractionArea = get_node("PlayerInteractionArea")
 var spawn_timer = 0
 var spawn_time_limit = 5
@@ -35,8 +36,10 @@ var is_touching_player_timer = 0
 var is_touching_player_time_limit = 15
 var is_in_cooldown = false
 var is_in_player_area = false
+var was_touching_player_proxy = false
 var player = null
 var my_next_glitch_form = null
+var should_respect_player_proxy = true
 func getPlayer():
   if player == null:
     player = level.player
@@ -121,6 +124,10 @@ func _process(delta):
       add_child(newSprite)
       spawn_timer = 0
       num_sparkles_spawned += 1
+  if activePassiveArea != null:
+    was_touching_player_proxy = false
+    if activePassiveArea.is_touching_player_proxy or activePassiveArea.was_touching_player_proxy or activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer:
+      was_touching_player_proxy = true
     
 func shouldIBeActive():
   if getPlayer().glitch_form == my_glitch_form:
@@ -128,6 +135,10 @@ func shouldIBeActive():
   elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
     return false
   elif is_in_cooldown:
+    return false
+  elif activePassiveArea.is_touching_player_proxy or was_touching_player_proxy:
+    return false
+  elif activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer:
     return false
   elif global.memory["mp"] == 0:
     return true
@@ -157,7 +168,7 @@ func passiveActivate(_delta, _is_player):
   mySprite.global_transform.origin.x = level.player.global_transform.origin.x
   mySprite.global_transform.origin.y = level.player.global_transform.origin.y + 1
   level.player.glitchTickle(global.memory["mp"] < global.memory["max_mp"])
-  if not isActive():
+  if not isActive() or was_touching_player_proxy:
     # if global.memory["mp"] < global.memory["max_mp"]:
     #   if level.player.glitch_form != my_glitch_form:
     #     collectSound.pitch_scale = 0.5

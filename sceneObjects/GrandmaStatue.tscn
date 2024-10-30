@@ -302,7 +302,7 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 9 )
 grav = 30
 
-[node name="SmallInteractionArea" type="Area" parent="."]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["player_proxy"]]
 script = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

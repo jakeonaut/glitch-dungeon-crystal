@@ -6,6 +6,8 @@ var is_touching_water = false
 var is_touching_waterfall = false
 var touched_water_area = null
 var is_touching_ladder = false
+var is_touching_player_proxy = false
+var was_touching_player_proxy = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 export var ignore_water = false
@@ -35,6 +37,9 @@ func PassiveInteractActivate(delta, is_player = true):
     if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:
         getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
+func PassivePassiveInteractActivate(delta, is_player = true):
+    touchingPlayer = is_player
+
 func playerActivationAreaPassiveActivate():
     if parent.has_method("playerActivationAreaPassiveActivate"):
         parent.playerActivationAreaPassiveActivate()
@@ -54,6 +59,7 @@ func _process(_delta):
     # handles the PassiveInteractActivate method, and this can occur
     # before or after this NPC's _process event
     wasTouchingPlayer = touchingPlayer
+    was_touching_player_proxy = is_touching_player_proxy
     touchingPlayer = false
 
     var areas = get_overlapping_areas()
@@ -61,6 +67,7 @@ func _process(_delta):
     is_touching_waterfall = false
     touched_water_area = null
     is_touching_ladder = false
+    is_touching_player_proxy = false
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
     for area in areas:
@@ -75,6 +82,8 @@ func _process(_delta):
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if isActive() and area.is_in_group("corporeal_body") and parent.has_method("touchCorporealBody"):
             parent.touchCorporealBody(area.get_node(".."))
+        if area.is_in_group("player_proxy"):
+            is_touching_player_proxy = true
 
     if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:
         possible_game_mover.should_do_fallthrough_area_collision = false

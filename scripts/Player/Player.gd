@@ -459,7 +459,7 @@ func _process(delta):
       spellCastPauseIndex = 0
     elif global.memory.has("spellbookPage"):
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.INVISIBLE, GlitchForm.LADDER]
+      global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.LADDER]
     else:
       global.memory["spellbookPage"] = [glitch_form] if glitch_form != GlitchForm.NORMAL else []
   if Input.is_action_just_pressed("debug_upgrade_broom"):
@@ -753,6 +753,11 @@ func tryDieToOffscreenCamera(delta):
       tryToRecover()
     else:
       global_transform.origin = repositioned_player
+      if should_big_bump:
+        bigBump()
+      elif physics_state == PhysicsState.BEING_TOSSED:
+        physics_state = PhysicsState.NORMAL
+        grav = PLAYER_GRAV
   
 func doTimeDilation(_delta):
   pass
@@ -997,7 +1002,7 @@ func processFishyLogic(_delta):
     return
 
   var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
-  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump():
+  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and not should_big_bump:
     getFishyInfected()
     fishFormSound.pitch_scale = rand_range(0.8, 1.2)
     fishFormSound.play()
@@ -1007,7 +1012,7 @@ func processFishyLogic(_delta):
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
-    if (not is_touching_water and not was_touching_water):
+    if (not is_touching_water and not was_touching_water) or should_big_bump:
       getFishyCured()
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
@@ -1171,7 +1176,7 @@ func getFishyCured():
   aniPlayer.play("revertFromFishy")
   aniPlayer.queue("land")
   pauseAnimation = true
-  if glitch_form == global.GlitchForm.FLOOR and not pressingDown():
+  if glitch_form == global.GlitchForm.FLOOR and not pressingDown() and not should_big_bump:
     on_ground = true
   was_just_on_ground_timer = 0
   jump_squat_jump_input_timer = 0
