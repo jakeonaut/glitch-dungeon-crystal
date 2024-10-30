@@ -172,6 +172,7 @@ func getColorSuffixFromTilesetType(type):
     return ""
 
 var memory = {}
+var userSettings = {}
 
 var activeInteractor = null
 var activeThrowableObject = null
@@ -261,19 +262,11 @@ func _ready():
     if has_ever_seen_epilepsy_warning: pass
 
     resetMemory()
-    loadGameSettings()
+    resetUserSettings()
+    loadUserSettings()
 
 func resetMemory():
     memory = {}
-
-    # settings?
-    memory["show_crt_effect"] = true
-    memory["show_color_blind"] = false
-    memory["canGlitchScreen"] = true
-    memory["colorblindMode"] = true
-    memory["stopAllMusic"] = false
-    memory["canChangeSongPitch"] = true
-    memory["spellAssist"] = false
 
     # customization upgrades
     memory["currPet"] = PetFollower.NONE
@@ -350,6 +343,18 @@ func resetMemory():
     # EASTER EGGS
     memory["anna_mode"] = false
     memory["blue_mode"] = false
+
+func resetUserSettings():
+    userSettings = {}
+
+    # settings?
+    userSettings["show_crt_effect"] = true
+    userSettings["show_palette_swap_color_blind_filter"] = false
+    userSettings["canGlitchScreen"] = true
+    userSettings["colorblindMode"] = true
+    userSettings["stopAllMusic"] = true
+    userSettings["canChangeSongPitch"] = true
+    userSettings["spellAssist"] = false
 
 var anna_mode_counter = 0
 var anna_key_helper = false
@@ -470,16 +475,101 @@ func normalizeMemoryPosition(positionVariable):
     return Vector3(0, 0, 0)
 
 
-var save_game_file = "user://savegame.save"
+var save_game_files = [
+    "user://savegame.save",
+    "user://savegame2.save",
+    "user://savegame3.save",
+]
+var user_settings_files = [
+    "user://usersettings.config"
+]
+var save_game_index = 0
 func saveGame():
-    var save_game = File.new()
-    save_game.open(save_game_file, File.WRITE)
-    save_game.store_line(to_json(global.memory))
-    save_game.close()
+    var save_game_file = save_game_files[save_game_index]
+    var file = File.new()
+    file.open(save_game_file, File.WRITE)
+    file.store_line(to_json(global.memory))
+    file.close()
 
-func doesSaveGameExist():
-    var save_game = File.new()
-    return save_game.file_exists(save_game_file)
+func doesSaveGameExist(saveGameIndex):
+    # do not set!!!
+    # save_game_index = saveGameIndex
+    var save_game_file = save_game_files[saveGameIndex]
+    var file = File.new()
+    return file.file_exists(save_game_file)
+
+func doesAnySaveGameExist():
+    var file = File.new()
+    for i in range(save_game_files.size()):
+        var save_game_file = save_game_files[i]
+        if file.file_exists(save_game_file):
+            return true
+    return false
+
+func saveUserSettings():
+    var user_settings_file = user_settings_files[0]
+    var file = File.new()
+    file.open(user_settings_file, File.WRITE)
+    file.store_line(to_json(global.userSettings))
+    file.close()
+
+func loadUserSettings():
+    var user_settings_file = user_settings_files[0]
+    var file = File.new()
+    if not file.file_exists(user_settings_file):
+        return false # Error! We don't have a save to load.
+    
+    # Load the file line by line and process that dictionary to restore
+    # the object it represents.
+    file.open(user_settings_file, File.READ)
+
+    var user_settings_contents = file.get_line()
+    global.userSettings.merge(parseJsonPreserveInt(user_settings_contents), true)
+    while not file.eof_reached():
+        # ... ??? Is this because global.memory is stored on a single line? enigmatic..
+        var _current_line = parseJsonPreserveInt(file.get_line())
+    normalizeLoadedUserSettings()
+        
+    file.close()
+    return true
+
+func loadGame(saveGameIndex):
+    if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
+        return false # Error! out of bounds
+    save_game_index = saveGameIndex
+    var save_game_file = save_game_files[save_game_index]
+    var file = File.new()
+    if not file.file_exists(save_game_file):
+        return false # Error! We don't have a save to load.
+    
+    # Load the file line by line and process that dictionary to restore
+    # the object it represents.
+    file.open(save_game_file, File.READ)
+    
+    var save_game_contents = file.get_line()
+    global.memory.merge(parseJsonPreserveInt(save_game_contents), true)
+    while not file.eof_reached():
+        # ... ??? Is this because global.memory is stored on a single line? enigmatic..
+        var _current_line = parseJsonPreserveInt(file.get_line())
+    normalizeLoadedMemory()
+        
+    file.close()
+
+    if global.memory.has("roomPath"):
+        currLevelZone = getLevelZoneName(global.memory["roomPath"])
+        if not global.memory["level_zonez"].has(currLevelZone):
+            global.memory["level_zonez"].push_back(currLevelZone)
+    return true
+
+func tryDeleteGame(saveGameIndex):
+    if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
+        return
+    var save_game_file = save_game_files[saveGameIndex]
+    var file = File.new()
+    if not file.file_exists(save_game_file):
+        return false # Error! We don't have a save to load.
+    var dir = Directory.new()
+    dir.remove(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
     if typeof(obj) == TYPE_STRING:
@@ -509,44 +599,6 @@ func turnRealIntoIntRecursive(obj):
 
 func parseJsonPreserveInt(json_str):
     return turnRealIntoIntRecursive(parse_json(json_str))
-
-func loadGameSettings():
-    var save_game = File.new()
-    if not save_game.file_exists(save_game_file):
-        return false # Error! We don't have a save to load.
-    
-    # Load the file line by line and process that dictionary to restore
-    # the object it represents.
-    save_game.open(save_game_file, File.READ)
-
-    var save_game_contents = save_game.get_line()
-    var fake_memory = parseJsonPreserveInt(save_game_contents)
-    if fake_memory.has("controls_config"):
-        global.memory["controls_config"] = fake_memory["controls_config"]
-
-func loadGame():
-    var save_game = File.new()
-    if not save_game.file_exists(save_game_file):
-        return false # Error! We don't have a save to load.
-    
-    # Load the file line by line and process that dictionary to restore
-    # the object it represents.
-    save_game.open(save_game_file, File.READ)
-    
-    var save_game_contents = save_game.get_line()
-    global.memory.merge(parseJsonPreserveInt(save_game_contents), true)
-    while not save_game.eof_reached():
-        # ... ??? Is this because global.memory is stored on a single line? enigmatic..
-        var _current_line = parseJsonPreserveInt(save_game.get_line())
-    normalizeLoadedMemory()
-        
-    save_game.close()
-
-    if global.memory.has("roomPath"):
-        currLevelZone = getLevelZoneName(global.memory["roomPath"])
-        if not global.memory["level_zonez"].has(currLevelZone):
-            global.memory["level_zonez"].push_back(currLevelZone)
-    return true
 
 var is_reading_input = false
 var last_read_input = null
@@ -815,6 +867,10 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
 func normalizeLoadedMemory():
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
         global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+
+func normalizeLoadedUserSettings():
+    # global.userSettings
+    pass
     
 func getNextGlitch(glitch_form):
     if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FEATHER

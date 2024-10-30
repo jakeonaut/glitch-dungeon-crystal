@@ -131,7 +131,7 @@ func getSmacked(_broom_origin):
         getHitSound.play()
         level.player.glitch_death_timer = 8
         level.player.glitchTickle()
-        level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+        level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
     else:
         if not meshInstance1.visible:
             meshInstance1.visible = true
@@ -148,7 +148,7 @@ func getSmacked(_broom_origin):
             level.player.glitch_death_timer = 1
             getHitSound3.play()
         level.player.glitchTickle()
-        level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+        level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
     
 
 var is_active = true

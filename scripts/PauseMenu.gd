@@ -133,7 +133,7 @@ func _process(delta):
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = false
-    cursorSprite.position.x = 100
+    cursorSprite.position.x = 108
     cursorSprite.visible = true
     inputMenu.visible = true
     processControlsLogic(delta)
@@ -180,9 +180,9 @@ func _process(delta):
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
   if largerPopup.visible and not pauseMenuRect.visible:
-    pauseTitleRect.rect_position = Vector2(92, 400)
+    pauseTitleRect.rect_position = Vector2(164, 400)
   else:
-    pauseTitleRect.rect_position = Vector2(92, 5)
+    pauseTitleRect.rect_position = Vector2(164, 5)
 
 
 var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
@@ -269,9 +269,9 @@ func processGraphicsLogic(_delta):
     var text = ""
     for i in range(len(graphicsOptions)):
       var option = graphicsOptions[i] + ": "
-      if i == 0: option += ("ON" if global.memory["show_crt_effect"] else "OFF")
-      if i == 1: option += ("ON" if global.memory["canGlitchScreen"] else "OFF")
-      if i == 2: option += ("ON" if global.memory["colorblindMode"] else "OFF")
+      if i == 0: option += ("ON" if global.userSettings["show_crt_effect"] else "OFF")
+      if i == 1: option += ("ON" if global.userSettings["canGlitchScreen"] else "OFF")
+      if i == 2: option += ("ON" if global.userSettings["colorblindMode"] else "OFF")
       if i == 3: option += ("ON" if OS.window_fullscreen else "OFF")
 
       if i == graphicsOptionIndex:
@@ -296,32 +296,33 @@ func processGraphicsLogic(_delta):
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     if graphicsOptionIndex == 0:
-      global.memory["show_crt_effect"] = not global.memory["show_crt_effect"]
+      global.userSettings["show_crt_effect"] = not global.userSettings["show_crt_effect"]
     elif graphicsOptionIndex == 1:
-      global.memory["canGlitchScreen"] = not global.memory["canGlitchScreen"]
+      global.userSettings["canGlitchScreen"] = not global.userSettings["canGlitchScreen"]
       glitch_death_timer = 1
     elif graphicsOptionIndex == 2:
-      global.memory["colorblindMode"] = not global.memory["colorblindMode"]
+      global.userSettings["colorblindMode"] = not global.userSettings["colorblindMode"]
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
+    level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
-  colorblindHats.visible = global.memory["colorblindMode"]
+  colorblindHats.visible = global.userSettings["colorblindMode"]
 
 func processGlitchScreen(delta):
   if glitch_death_timer != 0:
     glitch_death_timer += (delta*22)
     getPlayer().applyGlitchDeathEffects(abs(glitch_death_timer))
-    if global.memory["canChangeSongPitch"]:
+    if global.userSettings["canChangeSongPitch"]:
       musicPlayer.changeSongPitch(abs(sin((glitch_death_timer)*.05)+.02))
-    level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+    level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
     if glitch_death_timer >= 40:
       musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0
 
-var soundOptions = ["Play Music", "Music Glitches"] # global.memory["canChangeSongPitch"]
+var soundOptions = ["Play Music", "Music Glitches"]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -330,8 +331,8 @@ func processSoundLogic(_delta):
     var text = ""
     for i in range(len(soundOptions)):
       var option = soundOptions[i] + ": "
-      if i == 0: option += ("OFF" if global.memory["stopAllMusic"] else "ON")
-      if i == 1: option += ("ON" if global.memory["canChangeSongPitch"] else "OFF")
+      if i == 0: option += ("OFF" if global.userSettings["stopAllMusic"] else "ON")
+      if i == 1: option += ("ON" if global.userSettings["canChangeSongPitch"] else "OFF")
 
       if i == soundOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n\n" 
@@ -355,16 +356,17 @@ func processSoundLogic(_delta):
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     if soundOptionIndex == 0:
-      global.memory["stopAllMusic"] = not global.memory["stopAllMusic"]
-      if global.memory["stopAllMusic"]:
+      global.userSettings["stopAllMusic"] = not global.userSettings["stopAllMusic"]
+      if global.userSettings["stopAllMusic"]:
         musicPlayer.stopAll()
       else:
         musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
     elif soundOptionIndex == 1:
-      global.memory["canChangeSongPitch"] = not global.memory["canChangeSongPitch"]
-      if global.memory["canChangeSongPitch"]:
+      global.userSettings["canChangeSongPitch"] = not global.userSettings["canChangeSongPitch"]
+      if global.userSettings["canChangeSongPitch"]:
         musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
       glitch_death_timer = 1
+    level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
@@ -1037,8 +1039,8 @@ func initializeControlsConfig():
       "default_keyCode": 53, 
     },
   ]
-  if global.memory.has("controls_config") and not global.hasInitializedControlsConfig:
-    var rememberedControlsConfig = global.memory["controls_config"]
+  if global.userSettings.has("controls_config") and not global.hasInitializedControlsConfig:
+    var rememberedControlsConfig = global.userSettings["controls_config"]
     for control_config in newControlsConfig:
       for remembered_config in rememberedControlsConfig:
         if remembered_config.input_action == control_config.input_action:
@@ -1073,20 +1075,20 @@ func processControlsLogic(_delta):
         if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "BackSpace":
           controlsConfig[control_index].key_code = global.last_read_input
           global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
-          global.memory["controls_config"] = controlsConfig
+          global.userSettings["controls_config"] = controlsConfig
           global.is_reading_input = false
           global.is_reading_keyboard_input = false
           last_control_index = -1
-          level.saveTheGame()
+          level.saveUserSettings()
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         if global.last_read_input != JOY_START:
           controlsConfig[control_index].button_index = global.last_read_input
           global.setButtonIndex(controlsConfig[control_index].input_action, global.last_read_input)
-          global.memory["controls_config"] = controlsConfig
+          global.userSettings["controls_config"] = controlsConfig
           global.is_reading_input = false
           global.is_reading_controller_input = false
           last_control_index = -1
-          level.saveTheGame()
+          level.saveUserSettings()
     return
   else:
     if Input.is_action_just_pressed("menu_down"):
@@ -1113,7 +1115,7 @@ func processControlsLogic(_delta):
   if control_index >= properSize:
     control_index = 0
   if showCondensedMenu:
-    cursorSprite.position.y = 114 + (29*control_index)
+    cursorSprite.position.y = 100 + (29*control_index)
   else:
     cursorSprite.position.y = 114 + (44*control_index)
 
@@ -1165,8 +1167,8 @@ func processPopupRenderLogic(delta):
         for i in range(controlsConfig.size()):
           controlsConfig[i]["key_code"] = controlsConfig[i]["default_keyCode"]
           global.setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
-        global.memory["controls_config"] = controlsConfig
-        level.saveTheGame()
+        global.userSettings["controls_config"] = controlsConfig
+        level.saveUserSettings()
         canResetBindings = false
         shouldUpdateMenuText = true
     else:
@@ -1186,8 +1188,8 @@ func processPopupRenderLogic(delta):
           if controlsConfig[i].has("default_button_index"):
             controlsConfig[control_index].button_index = controlsConfig[i].default_button_index
             global.setButtonIndex(controlsConfig[i].input_action, controlsConfig[i].default_button_index)
-        global.memory["controls_config"] = controlsConfig
-        level.saveTheGame()
+        global.userSettings["controls_config"] = controlsConfig
+        level.saveUserSettings()
         canResetBindings = false
         shouldUpdateMenuText = true
     else:

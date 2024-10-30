@@ -383,7 +383,7 @@ func _process(delta):
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
   else:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.memory["colorblindMode"] and transformation == TransformationState.NORMAL
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL
 
   bubbleSprite.visible = transformation == TransformationState.BUBBLE
   if transformation == TransformationState.BUBBLE:
@@ -594,7 +594,7 @@ func processCastingLogic(_delta):
   if not global.memory.has("spellbookPage"):
     return
 
-  if global.memory["spellAssist"]:
+  if global.userSettings["spellAssist"]:
     # automatic mode
     var desired_spell = global.GlitchForm.NORMAL
     if touching_glitch_or_spikes:
@@ -651,7 +651,7 @@ func processCastingLogic(_delta):
           level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
 
 func tryToApplySpellAssist(desired_spell):
-  if not global.memory["spellAssist"]:
+  if not global.userSettings["spellAssist"]:
     return
   if glitch_form != desired_spell and desired_spell != global.GlitchForm.NORMAL and doIHaveSpell(desired_spell):
     var newSpellIndex = findSpellInSpellbook(desired_spell)
@@ -875,7 +875,7 @@ func processGlitchHurtRecovery(delta):
       glitch_death_timer += (delta*22)
       applyGlitchDeathEffects(abs(glitch_death_timer))
       if glitch_death_timer >= 20 and should_turn_on_glitch_screen_effects:
-        level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+        level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
         should_turn_on_glitch_screen_effects = false
       if glitch_death_timer >= 40:
         musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
@@ -907,7 +907,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
       lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
 
 func applyGlitchDeathEffects(x):
-  if global.memory["canChangeSongPitch"] and (x < 0 or x > 20):
+  if global.userSettings["canChangeSongPitch"] and (x < 0 or x > 20):
     musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
   if x > 10:
     mySprite.material_override.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
@@ -1619,7 +1619,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   mySprite.material_override.set_shader_param("enable_glitch", true)
   mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   
-  if global.memory["canChangeSongPitch"]:
+  if global.userSettings["canChangeSongPitch"]:
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
@@ -1684,7 +1684,7 @@ func actuallyProcessDeath(should_glitch):
   physics_state = PhysicsState.GLITCH_DYING
   glitch_death_timer = 0
   # TODO(jaketrower): RESPECT MORE
-  if global.memory["canGlitchScreen"] and should_glitch:
+  if global.userSettings["canGlitchScreen"] and should_glitch:
     level.glitchScreenEffect.visible = true
   if summonedBroom:
     broomStop()
@@ -2175,7 +2175,7 @@ func processPoisonWaterLogic(_delta):
   #       reversePoisonWaterSound.stop()
 
   # if poison_timer > 0:
-  #   level.glitchScreenEffect.visible = global.memory["canGlitchScreen"]
+  #   level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
   #   level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
   #   musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
   # if poison_timer < 0:

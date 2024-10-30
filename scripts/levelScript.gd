@@ -8,7 +8,7 @@ onready var gameCamera = get_node("GameCamera")
 # onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
-onready var colorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
+onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
 onready var basicCrtEffectRect = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
@@ -189,9 +189,9 @@ func _process(delta):
     adjustPlayerForEdgeTransition()
 
   # TODO(jaketrower): add an option
-  ditherPaletteEffectRect2.visible = global.memory["show_crt_effect"] and show_dither_effect
-  basicCrtEffectRect.visible = global.memory["show_crt_effect"] and show_crt_effect
-  colorBlindEffectRect2.visible = global.memory["show_color_blind"]
+  ditherPaletteEffectRect2.visible = global.userSettings["show_crt_effect"] and show_dither_effect
+  basicCrtEffectRect.visible = global.userSettings["show_crt_effect"] and show_crt_effect
+  paletteSwapColorBlindEffectRect2 = global.userSettings["show_palette_swap_color_blind_filter"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
@@ -269,6 +269,10 @@ func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
   global.memory["roomPath"] = self.getLevelName()
   global.saveGame()
+
+func saveUserSettings(message = "saving settings.."):
+  uiLayer.displaySavingText(message)
+  global.saveUserSettings()
     
 func playMenuMusic():
   musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
@@ -328,14 +332,14 @@ func tryToRespawn():
       if player.respawn_key_hp != null:
         global.memory["hp"] = player.respawn_key_hp
         player.respawn_key_hp = null
-      player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
-      gameCamera.rotation_degrees.y = global.cameraRotation
-      player.last_grounded_pos = Vector3(player.global_transform.origin)
-      yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
-      player.global_transform.origin = closest_extra_life.global_transform.origin
+      # player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
+      # gameCamera.rotation_degrees.y = global.cameraRotation
+      # player.last_grounded_pos = Vector3(player.global_transform.origin)
+      # yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
+      # player.global_transform.origin = closest_extra_life.global_transform.origin
+      summonSmokeClouds(closest_extra_life.global_transform.origin, 3, true, true)
       closest_extra_life.queue_free()
       player.saveSound.play()
-      summonSmokeClouds(player.global_transform.origin, 3, true, true)
     elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
       if savePoint != null:

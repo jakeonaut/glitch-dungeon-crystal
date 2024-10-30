@@ -4,6 +4,11 @@ var switch_glitch_timer = 0
 var switch_glitch_time_limit = 15
 var direction = -1
 onready var broomSound = get_node("BroomSound")
+onready var noBroomSound = get_node("NoBroomSound")
+onready var startDeleteSound = get_node("StartDeleteSound")
+onready var deleteSound = get_node("DeleteSound")
+onready var reliefSound = get_node("ReliefSound")
+onready var bellSound = get_node("BellSound")
 
 var epilepsy_fade_timer = 0
 var EPILEPSY_SHOW_TIME_LIMIT = 120
@@ -12,6 +17,8 @@ enum MainMenuState {
     SHOWING_EPILEPSY_WARNING,
     HIDING_EPILEPSY_WARNING,
     MAIN_MENU,
+    TRY_DELETE_FILE,
+    MAIN_MENU_TRY_QUIT_GAME,
     NORMAL_GAMEPLAY,
 }
 var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
@@ -40,6 +47,9 @@ func setUpRoomInitializationOverride():
         if global.has_ever_seen_epilepsy_warning:
             mainMenuState = MainMenuState.MAIN_MENU
             epilepsyWarning.visible = false
+        else:
+            mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+            epilepsyWarning.visible = true
     else:
         epilepsyWarning.visible = false
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
@@ -73,11 +83,11 @@ onready var cameraTarget = get_node("cameraTarget")
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
 var skip_intro_cutscene_reset_time_limit = 10
-func startGame():
+func startGame(saveGameIndex):
+  global.save_game_index = saveGameIndex
+  mainMenuState = MainMenuState.NORMAL_GAMEPLAY
   global.isOnMainMenu = false
   global.resetMemory()
-#   show_dither_effect = false
-#   show_crt_effect = true
   global.okay_really_really_started_game = false
   global.has_started_game = true
   global.shouldRenderAsCinematic = true
@@ -156,9 +166,10 @@ func startGame():
   player.pauseInput = false
   global.has_really_started_game = true
 
-func loadGame():
+func loadGame(saveGameIndex):
+    mainMenuState = MainMenuState.NORMAL_GAMEPLAY
     global.has_started_game = true
-    if global.loadGame():
+    if global.loadGame(saveGameIndex):
         global.has_really_started_game = true
         global.okay_really_really_started_game = true
         global.isRespawning = true
@@ -168,7 +179,7 @@ func loadGame():
             transition.long_fade_to(roomPath)
             return
     # default
-    startGame()
+    startGame(saveGameIndex)
 
 func quitGame():
     get_tree().quit()
@@ -179,13 +190,38 @@ onready var selectPrompt = get_node("../../UILayer/MainMenu/SelectPrompt")
 onready var selectTextPrompt = get_node("../../UILayer/MainMenu/SelectPrompt/TextPrompt")
 onready var menuText = get_node("../../UILayer/MainMenu/MenuText")
 onready var pressCText = get_node("../../UILayer/MainMenu/PressC")
+onready var deleteSprite = get_node("../../UILayer/MainMenu/DeleteSprite")
+onready var deleteConfirmationLayer = get_node("../../UILayer/MainMenu/DeleteConfirmationLayer")
+onready var deleteConfirmationLayerText =  get_node("../../UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 onready var skipText = get_node("../../UILayer/SkipText")
 
 export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
 func _process(delta):
-    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+    if mainMenuState == MainMenuState.TRY_DELETE_FILE:
+        epilepsyWarning.visible = false
+        deleteConfirmationLayer.visible = true
+        if deleteConfirmationLayerText.bbcode_text == "":
+            deleteConfirmationLayerText.bbcode_text = "Really Delete [wave]\"File " + str(mainMenuPromptIndex + 1) + "\"[/wave]?\n                      " + global.getInputText("menu_confirm") + " Confirm\n                      " + global.getInputText("menu_cancel") + " Cancel"
+        if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+            if global.doesSaveGameExist(mainMenuPromptIndex):
+                global.tryDeleteGame(mainMenuPromptIndex)
+            mainMenuState = MainMenuState.MAIN_MENU
+            deleteSound.play()
+            updateMenuText = true
+        elif Input.is_action_just_pressed("menu_cancel"):
+            mainMenuState = MainMenuState.MAIN_MENU
+            reliefSound.play()
+            broomSound.play()
+        elif Input.is_action_just_pressed("menu_delete"):
+            noBroomSound.play()
+        return
+    deleteConfirmationLayer.visible = false
+    deleteConfirmationLayerText.bbcode_text = ""
+
+    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
+       mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
         if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
             global.has_ever_seen_epilepsy_warning = true
             epilepsy_cover_opacity -= (delta)
@@ -211,111 +247,93 @@ func _process(delta):
         epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
         return
 
+    elif mainMenuState == MainMenuState.NORMAL_GAMEPLAY:
+        epilepsyWarning.visible = false
+        if global.has_started_game and not global.isRespawning:
+            player.camera_y_offset = 5
+            if global.has_really_started_game:
+                # pressCText.rect_position.x = 214
+                # pressCText.rect_position.y = 515
+                if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
+                    mainMenuUi.remove_child(pressCText)
+                    uiLayer.add_child(pressCText)
+                    pressCText.rect_position = Vector2(16, 465)
+                    pressCText.rect_size = Vector2(712, 101)
+                    mainMenuUi.remove_child(optionsMenuPrompt)
+                    uiLayer.add_child(optionsMenuPrompt)
+                    optionsMenuPrompt.rect_position.y = 16
+                var is_controller_connected = Input.get_connected_joypads().size() > 0
+                pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
+                pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
+                deleteSprite.visible = false
+                optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
+                optionsMenuPrompt.visible = pressCText.visible
+            return
 
-    if not global.has_started_game:
+    if global.isPauseMenuOpen or global.has_started_game:
+        mainMenuUi.visible = false
+        return
+
+    if mainMenuState == MainMenuState.MAIN_MENU:
+        epilepsyWarning.visible = false
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
-        mainMenuUi.visible = not global.isPauseMenuOpen
-        pressCText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to start"
+        mainMenuUi.visible = true
+        if mainMenuState == MainMenuState.MAIN_MENU_TRY_QUIT_GAME:
+            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
+        else:
+            var secondPartTemp = global.getInputText("menu_delete") + ": delete file       "
+            var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[s][color=gray]" + secondPartTemp + "[/color][/s]")
+            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_confirm") + " to start              " + second_part + "[/right]"
         optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
-    # if uiLayer.title_display_state == 3:
-    #     uiLayer.title_display_state = 0
-    # uiLayer.setDisplayTitle("press " + global.getInputText("sub_action_button"))
+        if Input.is_action_just_pressed("menu_down"):
+            uiLayer.pauseMenu.menuMoveSound.play()
+            normalizeMainMenuPromptIndex(1)
+            updateMenuText = true
+        elif Input.is_action_just_pressed("menu_up"):
+            uiLayer.pauseMenu.menuMoveSound.play()
+            normalizeMainMenuPromptIndex(-1)
+            updateMenuText = true
 
-    # .process(delta) implicit
-    # player.rotation_degrees.y += (delta)*direction
-    # if player.rotation_degrees.y > 5:
-    #     direction = -1
-    # elif player.rotation_degrees.y < -5:
-    #     direction = 1
+        selectPrompt.rect_position.y = 354.5 + (mainMenuPromptIndex*55)
+        if updateMenuText:
+            menuText.bbcode_text = ""
+            for i in range(global.save_game_files.size()):
+                if i != 0: menuText.bbcode_text += "\n\n"
 
-    if mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
-        mainMenuPromptIndex = 1
-        colorRect.visible = false
+                var fileText = ("File " + str(i+1)) if global.doesSaveGameExist(i) else "[color=gray]Empty[/color]"
+                if mainMenuPromptIndex == i:
+                    menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
+                else:
+                    menuText.bbcode_text += fileText
+        updateMenuText = false
 
-    if global.has_started_game and not global.isRespawning:
-        player.camera_y_offset = 5
-        if global.has_really_started_game:
-            if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
-                mainMenuUi.remove_child(pressCText)
-                uiLayer.add_child(pressCText)
-                pressCText.rect_position = Vector2(16, 465)
-                pressCText.rect_size = Vector2(712, 101)
-                mainMenuUi.remove_child(optionsMenuPrompt)
-                uiLayer.add_child(optionsMenuPrompt)
-                optionsMenuPrompt.rect_position.y = 16
-            var is_controller_connected = Input.get_connected_joypads().size() > 0
-            pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
-            pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
-            optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
-            optionsMenuPrompt.visible = pressCText.visible
-        return
-
-    if global.isPauseMenuOpen or mainMenuState != MainMenuState.MAIN_MENU:
-        return
-
-    if Input.is_action_just_pressed("menu_down"):
-        uiLayer.pauseMenu.menuMoveSound.play()
-        normalizeMainMenuPromptIndex(1)
-        updateMenuText = true
-    elif Input.is_action_just_pressed("menu_up"):
-        uiLayer.pauseMenu.menuMoveSound.play()
-        normalizeMainMenuPromptIndex(-1)
-        updateMenuText = true
-
-    selectPrompt.rect_position.y = 354.5 + (mainMenuPromptIndex*55)
-    if mainMenuPromptIndex == 0 and updateMenuText:
-        menuText.bbcode_text = "[wave]Continue...?[/wave]\n\nNew Game\n\nQUIT!!! bye."
-    elif mainMenuPromptIndex == 1 and updateMenuText:
-        if global.doesSaveGameExist():
-            menuText.bbcode_text = "Continue...?\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
-        else:
-            menuText.bbcode_text = "\n\n[wave]New Game[/wave]\n\nQUIT!!! bye."
-    elif mainMenuPromptIndex == 2 and updateMenuText:
-        if global.doesSaveGameExist():
-            menuText.bbcode_text = "Continue...?\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
-        else:
-            menuText.bbcode_text = "\n\nNew Game\n\n[wave]QUIT!!! bye.[/wave]"
-    updateMenuText = false
-
-
-    # switch_glitch_timer += (delta*22)
-    # if switch_glitch_timer >= switch_glitch_time_limit:
-    #     switch_glitch_timer = 0
-    #     player.applyNextGlitch()
-
-    if (Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))) and not global.has_started_game:
-        switch_glitch_timer = -999999
-        global.memory["current_glitch"] = global.GlitchForm.NORMAL
-        player.normalGlitch()
-        if mainMenuPromptIndex == 0:
-            broomSound.play()
-            loadGame()
-        elif mainMenuPromptIndex == 1:
-            broomSound.play()
-            startGame()
-        else:
-            quitGame()
-
+        if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+            bellSound.play()
+            if global.doesSaveGameExist(mainMenuPromptIndex):
+                loadGame(mainMenuPromptIndex)
+            else:
+                startGame(mainMenuPromptIndex)
+        elif Input.is_action_just_pressed("menu_delete"):
+            if global.doesSaveGameExist(mainMenuPromptIndex):
+                mainMenuState = MainMenuState.TRY_DELETE_FILE
+                startDeleteSound.play()
+            else:
+                noBroomSound.play()
+    
 # @override
 # func processPauseMenu():
 #     pass
 
 func normalizeMainMenuPromptIndex(change):
     mainMenuPromptIndex += change
-
     if mainMenuPromptIndex > 2:
         mainMenuPromptIndex = 0
     if mainMenuPromptIndex < 0:
-        mainMenuPromptIndex = 2
-
-    if change > 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
-        mainMenuPromptIndex = 1
-    if change < 0 and mainMenuPromptIndex == 0 and not global.doesSaveGameExist():
         mainMenuPromptIndex = 2
 
 var has_ever_started_music = false
