@@ -1010,6 +1010,9 @@ func processFishyLogic(_delta):
     return
 
   var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
+  if touched_water_area != null and touched_water_area.get_node("..").is_cleansing and malware_infected:
+    malwareCured()
+    
   if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and not should_big_bump:
     getFishyInfected()
     fishFormSound.pitch_scale = rand_range(0.8, 1.2)
@@ -1147,7 +1150,6 @@ func getFishyInfected():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   on_ground = false
-  # if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
   #   temp_cleansed_fish_glitch = glitch_form
   #   normalGlitch() # FORCE NOT ALLOW SWAPPING
   # if global.memory["zora_flippers"] == 1:
@@ -1594,6 +1596,12 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   #   global_transform.origin.y -= 1
   #   is_mushroom_infected = false
 
+  if should_big_bump:
+    if grav == 0:
+      grav = PLAYER_GRAV
+    pauseAnimation = false
+    should_big_bump = false
+
   if global.activeInteractor:
     global.activeInteractor.hideTextbox()
   global.activeInteractor = null
@@ -1736,7 +1744,13 @@ func malwareCorruptMe():
   # aniPlayer.clear_queue()
   # aniPlayer.play("corruptMe")
   malware_infected = true
+  infectSound.play()
   loseBroom()
+
+func malwareCured():
+  malware_infected = false
+  infectReverseSound.play()
+  getABroom()
 
 func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:

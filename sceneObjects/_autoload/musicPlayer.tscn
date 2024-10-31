@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/music/selfrealization.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/music/mario_old_point.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/music/town.mp3" type="AudioStream" id=10]
+[ext_resource path="res://assets/music/march of the forest creatures - 6_29_24, 7.06 PM.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/music/prairie swamp.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/music/explore2.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/music/soeth.mp3" type="AudioStream" id=14]
@@ -24,8 +25,6 @@
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
-transition_duration = null
-transition_type = null
 
 [node name="WindPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
@@ -69,6 +68,10 @@ volume_db = -20.0
 
 [node name="PoisonThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
+volume_db = -17.0
+
+[node name="ForestMarchThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
 volume_db = -17.0
 
 [node name="ExploreThemePlayer" type="AudioStreamPlayer" parent="."]

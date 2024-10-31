@@ -1665,7 +1665,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109, 33, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108, 34, 0 )
 
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.63182, 7, 0 )
 
 [node name="AnglerFish" parent="Viewport/level" instance=ExtResource( 39 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 8, 0 )

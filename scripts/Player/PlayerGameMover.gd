@@ -381,17 +381,25 @@ func pressingJump():
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  var pressing_input = Input.is_action_pressed("jump_button") if not malware_infected else Input.is_action_pressed("sub_action_button")
   # if is_mushroom_infected:
   #   return false
   var is_pressing_jump = (
-        pressing_input and \
+        Input.is_action_pressed("jump_button") and \
         (not pauseInput or summonedBroom != null) and \
         not isTextboxPausingMe()
       ) or should_magic_jump
   # if is_pressing_jump:
   #   should_collide_floor = true
   return is_pressing_jump
+
+# @overrride
+func actuallyApplyJump(play_sound = true):
+  if malware_infected:
+    on_ground = false
+    should_do_fallthrough_area_collision = false
+    has_just_jumped_timer = 0
+  else:
+    .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():
@@ -651,6 +659,7 @@ func isHoldingMultiBroom():
          )
 
 onready var infectSound = get_node("Sounds/InfectSound")
+onready var infectReverseSound = get_node("Sounds/InfectReverseSound")
 onready var wormSound = get_node("Sounds/WormSound")
 onready var gravitySound = get_node("Sounds/GravitySound")
 onready var flapSound = get_node("Sounds/FlapSound")

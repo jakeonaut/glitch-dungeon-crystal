@@ -303,12 +303,14 @@ func resetMemory():
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
     memory["clean_crystals"] = 0
-    memory["priestess"] = 2
+    memory["priestess"] = 0
+    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire2"] = false
+
+    # goddess dream bosses
     memory["baba_yaga"] = 0
     memory["angler_seaman"] = 0
     memory["dogu_matryoshka"] = 0
-    memory["glitched_grimoire"] = false
-    memory["glitched_grimoire2"] = false
 
     # PERMANENT SPELLS
     
@@ -352,7 +354,7 @@ func resetUserSettings():
     userSettings["show_palette_swap_color_blind_filter"] = false
     userSettings["canGlitchScreen"] = true
     userSettings["colorblindMode"] = true
-    userSettings["stopAllMusic"] = true
+    userSettings["stopAllMusic"] = false
     userSettings["canChangeSongPitch"] = true
     userSettings["spellAssist"] = false
 

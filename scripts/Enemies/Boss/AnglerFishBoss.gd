@@ -13,6 +13,7 @@ onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
 onready var reelStopArea = get_node("LureContainer/ReelStopArea")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
+onready var weakPointTarget = get_node("WeakPointTarget")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -65,6 +66,9 @@ var preyTarget = null
 func _process(delta):
     if global.pauseGame:
         return
+    
+    if boss_phase != BossPhase.STUN_IDLE and boss_phase != BossPhase.STUN_FALL:
+        tryToReturnWeakPoint(delta)
 
     if boss_phase == BossPhase.IDLE:
         weakPointContainer.vulnerable = false
@@ -251,7 +255,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
-        global_transform.origin.y += (10*delta*11)
+        global_transform.origin.y += (delta*11)
         if not secretAniPlayer.is_playing():
             boss_phase = BossPhase.IDLE
             secretAniPlayer.stop()
@@ -329,13 +333,17 @@ func gotcha():
         lureFreeRange.visible = false
         if prey == level.player:
             if level.player.malware_infected:
-                print("got a bad apple")
                 boss_phase = BossPhase.STUN_FALL
                 unenemize()
                 secretAniPlayer.stop()
                 secretAniPlayer.clear_queue()
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
+                lureFreeRange.restorePlayer(false)
+                level.player.bigBump()
+                level.player.malwareCured()
+                level.player.pauseInput = false
+                level.player.on_ground = false
             else:
                 level.player.tryDieToEnemy(0, true, true, true)
                 yield(get_tree().create_timer(0.1), "timeout")
@@ -459,10 +467,30 @@ func tryToStartWeakPointDetachment():
 func detachWeakPoint():
     if weakPointContainer.get_parent() != self:
         return
-    var tempPos = weakPointContainer.global_transform.origin
     self.remove_child(weakPointContainer)
-    level.summonSmokeClouds(tempPos, 1)
+    level.summonSmokeClouds(weakPointTarget.global_transform.origin, 1)
     level.add_child(weakPointContainer)
     is_weakpoint_attached = false
-    weakPointContainer.global_transform.origin = tempPos
+    weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
     weakPointContainer.vulnerable = true
+
+func tryToReturnWeakPoint(delta):
+    if is_weakpoint_attached:
+        return
+    var step = 3
+    weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (weakPointTarget.global_transform.origin - weakPointContainer.global_transform.origin) * (delta*step)
+    
+    if stepify(weakPointTarget.global_transform.origin.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
+        stepify(weakPointTarget.global_transform.origin.y, 0.1) == stepify(weakPointContainer.global_transform.origin.y, 0.1):
+        reattachWeakPoint()
+    return
+
+func reattachWeakPoint():
+    if weakPointContainer.get_parent() == self:
+        return
+    level.remove_child(weakPointContainer)
+    level.summonSmokeClouds(weakPointTarget.global_transform.origin, 1)
+    self.add_child(weakPointContainer)
+    is_weakpoint_attached = true
+    weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
+    weakPointContainer.vulnerable = false
