@@ -63,10 +63,7 @@ func _process(delta):
   if not global.isPauseMenuOpen:
     popupRect.visible = false
     return
-    
-  if not hasInitializedControlsConfig:
-    initializeControlsConfig()
-    hasInitializedControlsConfig = true
+
   if not hasInitializedControlsConfig:
     return
 

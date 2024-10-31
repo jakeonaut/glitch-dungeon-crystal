@@ -61,7 +61,8 @@ var nextPrompt_wiggled_up = false
 onready var textContainer = get_node("..")
 onready var textboxParent = weakref(get_node("../.."))
 onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget")) if has_node("../../TextBoxCameraTarget") else weakref(get_node("../.."))
-# onready var portrait = get_node("PortraitColor")
+onready var portraitContainer = get_node("PortraitColor")
+onready var portraitSprite = get_node("PortraitColor/ColorRect2/ColorRect3/ColorRect4/Portrait")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
@@ -100,7 +101,7 @@ func tinify():
     bg_texture = self.texture
   self.texture = null
   textNode.rect_clip_content = false
-  # get_node("Portrait").visible = false
+  portraitContainer.visible = false
   get_node("ColorRect").visible = false
   is_tiny = true
   if floating_text:
@@ -110,7 +111,7 @@ func untinify():
   is_tiny = false
   self.texture = bg_texture
   textNode.rect_clip_content = true
-  # get_node("Portrait").visible = true
+  portraitContainer.visible = true
   get_node("ColorRect").visible = true
   setTextBoxPosition()
 
@@ -150,10 +151,11 @@ func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
 
-  # portrait.visible = false # not is_tiny
+  portraitContainer.visible = not is_interact_prompt
   if is_interact_prompt and not textboxParent.get_ref():
     hideMe()
     textNodeCanvasLayer.hide()
+    portraitContainer.visible = false
     return
 
   textNodeCanvasLayer.visible = self.visible and not global.isPauseMenuOpen

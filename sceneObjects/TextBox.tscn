@@ -89,6 +89,7 @@ margin_bottom = 92.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="PortraitColor" type="ColorRect" parent="TextBox"]
+visible = false
 margin_left = 395.6
 margin_top = 27.6
 margin_right = 490.6

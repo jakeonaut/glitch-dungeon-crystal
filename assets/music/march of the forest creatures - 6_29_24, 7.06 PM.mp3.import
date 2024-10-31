@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/march of the forest creatures - 6_29_24, 7.06 PM.mp3-5a0962b554f560a74d4c640c8815558b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/march of the forest creatures - 6_29_24, 7.06 PM.mp3"
+dest_files=[ "res://.import/march of the forest creatures - 6_29_24, 7.06 PM.mp3-5a0962b554f560a74d4c640c8815558b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

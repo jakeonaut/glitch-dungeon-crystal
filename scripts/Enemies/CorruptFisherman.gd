@@ -9,6 +9,9 @@ func _ready():
   set_process(true)
 
 func _process(_delta):
+  if am_i_dying:
+    return
+
   i_caught_player = fishingRod.hookTarget != null and fishingRod.hookTarget.get_ref() == level.player
   fishingRod.max_speed = 6
 
@@ -34,6 +37,8 @@ var origin_before_teleportation = null
 # @override
 func unsmack():
   .unsmack()
+  if gulping or am_i_dying:
+    return
   if origin_before_teleportation != null:
     origin_before_teleportation = self.global_transform.origin
   self.global_transform.origin = level.player.global_transform.origin
@@ -47,7 +52,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
 
 var gulping = false
 func passiveActivate(_delta, is_player):
-  if gulping:
+  if gulping or am_i_dying:
     return
   if is_player and level.player.canIGetCaught():
     am_revealed = true
@@ -72,8 +77,18 @@ func swallowPlayer():
       self.global_transform.origin = origin_before_teleportation
 
 func getCorruptedAndDie():
+  level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
   fishingRod.restorePlayer(false)
+  level.player.global_transform.origin = self.global_transform.origin
+  level.player.global_transform.origin.y += 1
   level.player.visible = true
   level.player.physics_state = level.player.PhysicsState.NORMAL
   level.player.magicJump()
-  queue_free()
+  var jump_force = 10
+  level.player.vv = jump_force
+  level.player.linear_velocity.y = jump_force
+  level.player.lv.y = jump_force
+  visible = false
+  am_i_dying = true
+  dieSound.play()
+  fallthroughSolid.remove_from_group("fallthrough")

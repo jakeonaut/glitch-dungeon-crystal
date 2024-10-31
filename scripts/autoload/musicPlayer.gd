@@ -20,6 +20,7 @@ onready var realizationThemePlayer = get_node("RealizationThemePlayer")
 onready var suburbThemePlayer = get_node("SuburbThemePlayer")
 onready var swampThemePlayer = get_node("SwampThemePlayer")
 onready var poisonThemePlayer = get_node("PoisonThemePlayer")
+onready var forestMarchThemePlayer = get_node("ForestMarchThemePlayer")
 onready var oceanThemePlayer = get_node("OceanThemePlayer")
 onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
@@ -160,7 +161,7 @@ func conductFromScenePath(path):
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
-        tryToPlay(suburbThemePlayer)
+        tryToPlay(forestMarchThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:

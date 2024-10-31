@@ -107,8 +107,7 @@ func generateId():
 var is_currently_on_save_point = false
 func passiveActivate(_delta, is_player):
     if is_player and level.player.malware_infected:
-        level.player.malware_infected = false
-        level.player.getABroom()
+        level.player.malwareCured()
     global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and (not is_currently_on_save_point or not isOnSavePoint()):
         was_on_save_point = false
