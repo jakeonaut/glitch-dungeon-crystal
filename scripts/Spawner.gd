@@ -22,6 +22,7 @@ onready var mySprite = get_node("Sprite3D") if has_node("Sprite3D") else null
 func _ready():
     set_process(true)
     for child in self.get_foreign_children():
+        print(child)
         child.visible = false
     if spawned_object_path.length() != 0:
         spawned_object_res = load(spawned_object_path)
@@ -68,6 +69,7 @@ func spawnEffect(_child):
         
 func spawn(_with_flare = true):
     for child in self.get_foreign_children():
+        print(child)
         child.visible = true
         spawnEffect(child)
     if spawned_object_res == null:

@@ -93,6 +93,7 @@ func _ready():
 
   if is_static_in_level and my_memory:
     if (typeof(my_memory) == TYPE_INT or typeof(my_memory) == TYPE_REAL) and my_memory == global.DELETE_ME:
+      print("bye?")
       queue_free()
     else:
       can_camera_zoom = false
@@ -225,6 +226,7 @@ func glitchOut():
   glitchEnemy.global_transform.origin = self.global_transform.origin
   global.setStaticLevelZoneLevelVar(level, self, global.DELETE_ME)
   glitchEnemy.glitchOut()
+  print("bye bye")
   queue_free()
 
 func activate(is_player):

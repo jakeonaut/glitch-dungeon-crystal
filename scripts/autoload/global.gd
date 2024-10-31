@@ -302,7 +302,7 @@ func resetMemory():
 
     # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["clean_crystals"] = 4
+    memory["clean_crystals"] = 0
     memory["priestess"] = 2
     memory["baba_yaga"] = 0
     memory["angler_seaman"] = 0

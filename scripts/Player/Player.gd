@@ -159,12 +159,13 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
   var spellToBeForgotten = null
   if applyGlitch(glitch, false) and add_spell_to_grimoire and \
      global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
-    if not global.memory["glitched_grimoire"] and global.memory["spellbookPage"].size() > 0:
-      if global.memory["spellbookPage"].size() > 1:
-        spellToBeForgotten = global.memory["spellbookPage"][0] if spellCastPauseIndex != 0 else global.memory["spellbookPage"][1]
-      global.memory["spellbookPage"] = [global.memory["spellbookPage"][spellCastPauseIndex]]
-    elif global.memory["glitched_grimoire"] and not global.memory["glitched_grimoire2"] and global.memory["spellbookPage"].size() > 0:
-      if global.memory["spellbookPage"].size() > 2:
+    var maxSpellbookSize = 2
+    if global.memory["glitched_grimoire"]:
+      maxSpellbookSize = 3
+    if global.memory["glitched_grimoire2"]:
+      maxSpellbookSize = 4
+    if global.memory["spellbookPage"].size() > 0:
+      if global.memory["spellbookPage"].size() >= maxSpellbookSize:
         var spellToBeForgottenIndex = spellCastPauseIndex # - 1
         if spellToBeForgottenIndex < 0:
           spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
@@ -328,12 +329,19 @@ func isWalkingIntoWall():
   # else:
   return .isWalkingIntoWall() # super
 
-func sayThis(message, _time_to_clear = 3.0):
+var hideSmallTextboxTimer = null
+func sayThis(message, time_to_clear = 0.0):
   textBox.text_final = message
-  textBox.interact()
-  global.activeInteractor = textBox
-  # yield(get_tree().create_timer(time_to_clear), "timeout")
-  # textBox.hideTextbox()
+  
+  if time_to_clear > 0:
+    textBox.tinify()
+    textBox.showTextbox()
+    yield(get_tree().create_timer(time_to_clear), "timeout")
+    textBox.hideTextbox()
+  else:
+    textBox.untinify()
+    textBox.interact()
+    global.activeInteractor = textBox
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3

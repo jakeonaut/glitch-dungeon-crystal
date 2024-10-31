@@ -7304,7 +7304,7 @@ spawn_an_elder = false
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
@@ -7325,7 +7325,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
@@ -7351,7 +7351,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
@@ -7377,7 +7377,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 232 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -7403,7 +7403,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 234 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]

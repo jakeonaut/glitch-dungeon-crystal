@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/backgrounds/dungeon_layer_0.png" type="Texture" id=28]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=29]
+[ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/BecauseYoureOldAbortSound.gd" type="Script" id=30]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=31]
 
 [sub_resource type="ShaderMaterial" id=46]
@@ -762,6 +763,9 @@ can_camera_zoom = false
 
 [node name="CollisionShape" parent="Viewport/level/NPCTutorial2/SmallInteractionArea" index="0"]
 shape = SubResource( 56 )
+
+[node name="AbortSound" parent="Viewport/level/NPCTutorial2/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 30 )
 
 [node name="AnimationPlayer" parent="Viewport/level/NPCTutorial2" index="4"]
 anims/default = SubResource( 74 )

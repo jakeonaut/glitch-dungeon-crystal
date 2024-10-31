@@ -12,8 +12,6 @@ func spawn(with_flare = true):
     spawnSound2.play()
     level.summonSmokeClouds(global_transform.origin, 10, false, true)
 
-
-
 func amITouchingGlitchTile(currLevelTiles):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
