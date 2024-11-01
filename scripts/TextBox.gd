@@ -151,7 +151,7 @@ func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
 
-  portraitContainer.visible = not is_interact_prompt
+  portraitContainer.visible = not is_interact_prompt and not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
     hideMe()
     textNodeCanvasLayer.hide()
@@ -181,6 +181,9 @@ func _process(delta):
       wigglePrompt(delta, nextPrompt)
 
   if is_tiny:
+    if not is_interact_prompt:
+      adjusted_tiny_x_pos = 50
+      adjusted_tiny_y_pos = 20
     setTinyPosition()
 
   # TODO(jaketrower): This logic could probably be simplified with a FSM, or at least broken into functions
@@ -210,14 +213,15 @@ func _process(delta):
         yesButton.visible = false
         noButton.visible = false
 
-      if textboxParent.get_ref():
+      if textboxParent.get_ref() and not is_interact_prompt:
         textboxParent.get_ref().setGlobalMemoryOfHasSpoken()
-      if not endPrompt.visible and abortSound.has_method("preActivateScript") and not has_preactivated:
+      if abortSound.has_method("preActivateScript") and not has_preactivated and not is_interact_prompt:
         abortSound.preActivateScript()
         has_preactivated = true
       endPrompt.visible = not is_tiny and not floating_text
-      has_been_shown = true
-      is_really_important = false
+      if not is_interact_prompt:
+        has_been_shown = true
+        is_really_important = false
     else:
       yesButton.visible = false
       noButton.visible = false
@@ -400,7 +404,6 @@ func showTextbox(wasSmacked = false):
 func hideTextbox():
   yesButton.visible = false
   noButton.visible = false
-  has_preactivated = false
   hideMe()
   if textboxParent.get_ref():
     textboxParent.get_ref().setGlobalMemoryOfHasSpoken(true)
@@ -457,7 +460,7 @@ func interact(wasSmacked = false):
       textNode.scroll_to_line(currently_scrolled_line + 1)
       currently_scrolled_line += 1
       now_were_scrolling = true
-      nextDialogSound.play()
+      # nextDialogSound.play()
       ui_should_continue = true
       nextPrompt.visible = false
       stupid_newline_difference_variable += 3
@@ -465,7 +468,7 @@ func interact(wasSmacked = false):
       resetTinyColorRect()
       adjusted_tiny_y_pos += 35
     else:
-      nextDialogSound.play()
+      # nextDialogSound.play()
       advanceToEndOfPhrase()
     return true
   return false

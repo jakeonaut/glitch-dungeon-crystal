@@ -9,10 +9,10 @@ onready var catchSound = get_node("CatchSound")
 var heartSpriteOriginX = 0
 var heartSpriteOriginY = 0
 
-# Called when the node enters the scene tree for the first time.
+var can_i_spawn_crystal = true
 func _ready():
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
-        queue_free()
+        can_i_spawn_crystal = false
 
     # ._ready() implicit
     myOtherSprite.set_material_override(myOtherSprite.get_material_override().duplicate())
@@ -145,7 +145,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
     is_smacked = true
     didja_get_me = true
 
-    if is_static_in_level:
+    if is_static_in_level and can_i_spawn_crystal:
         var miniCubeCrystal = miniCubeCrystalRes.instance()
         miniCubeCrystal.is_static_in_level = false
         level.add_child(miniCubeCrystal)

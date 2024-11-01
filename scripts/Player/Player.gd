@@ -331,17 +331,38 @@ func isWalkingIntoWall():
 
 var hideSmallTextboxTimer = null
 func sayThis(message, time_to_clear = 0.0):
+  if textBox.visible:
+    textBox.hideTextbox()
+  if hideSmallTextboxTimer != null:
+    hideSmallTextboxTimer.stop()
+    self.remove_child(hideSmallTextboxTimer)
+    hideSmallTextboxTimer.queue_free()
+    hideSmallTextboxTimer = null
   textBox.text_final = message
-  
   if time_to_clear > 0:
+    textBox.text_final = "[wave][font=res://YosterFontBig.tres]" + message + "[/font][/wave]"
     textBox.tinify()
     textBox.showTextbox()
-    yield(get_tree().create_timer(time_to_clear), "timeout")
-    textBox.hideTextbox()
+    hideSmallTextboxTimer = Timer.new()
+    hideSmallTextboxTimer.one_shot = true
+    hideSmallTextboxTimer.connect("timeout", self, "_on_dialog_timer_timeout_func")
+    self.add_child(hideSmallTextboxTimer)
+    hideSmallTextboxTimer.start(time_to_clear)
   else:
+    textBox.text_final = message
     textBox.untinify()
     textBox.interact()
     global.activeInteractor = textBox
+
+func stopTalking():
+  _on_dialog_timer_timeout_func()
+
+func _on_dialog_timer_timeout_func():
+  textBox.hideTextbox()
+  if hideSmallTextboxTimer != null:
+    self.remove_child(hideSmallTextboxTimer)
+    hideSmallTextboxTimer.queue_free()
+    hideSmallTextboxTimer = null
 
 var returning_recover_time = 0
 var returning_recover_time_limit = 3

@@ -304,7 +304,7 @@ func resetMemory():
     memory["demo_mode"] = 0
     memory["clean_crystals"] = 0
     memory["priestess"] = 0
-    memory["glitched_grimoire"] = true
+    memory["glitched_grimoire"] = false
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses

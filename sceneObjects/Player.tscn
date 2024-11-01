@@ -7289,6 +7289,12 @@ texture = ExtResource( 85 )
 stream = ExtResource( 27 )
 pitch_scale = 0.9
 
+[node name="NextDialogSound" parent="TextContainer/TextBox" index="12"]
+volume_db = -80.0
+
+[node name="AbortSound" parent="TextContainer/TextBox" index="13"]
+volume_db = -80.0
+
 [node name="MPNumSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 19 )
 material_override = SubResource( 56 )

@@ -10,10 +10,10 @@ func activateScript():
   # OVERRIDE ME
   # textBox.text_final = "hi"
   # textBox.textNode.bbcode_text = "hi"
-  pass
+  level.player.stopTalking()
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
-  level.player.sayThis("harumph!", 4.0)
+  level.player.sayThis("harumph!", 10.0)
 
 func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   pass
