@@ -49,7 +49,7 @@
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=47]
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=48]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=49]
-[ext_resource path="res://assets/sounds/MM_DekuKing_UhOh.wav" type="AudioStream" id=50]
+[ext_resource path="res://assets/sounds/cowMoo.wav" type="AudioStream" id=50]
 [ext_resource path="res://library_hero.jpg" type="Texture" id=51]
 [ext_resource path="res://assets/tower.png" type="Texture" id=52]
 [ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=53]
@@ -1864,7 +1864,7 @@ tracks/1/keys = {
 [sub_resource type="ViewportTexture" id=235]
 viewport_path = NodePath("UILayer/GlitchStatusRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=280]
+[sub_resource type="ArrayMesh" id=282]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2054,7 +2054,7 @@ shape = SubResource( 253 )
 [node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 50 )
 volume_db = -15.0
-pitch_scale = 0.5
+pitch_scale = 1.5
 
 [node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 material_override = SubResource( 29 )
@@ -2433,10 +2433,10 @@ __meta__ = {
 texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 280 )
+mesh = SubResource( 282 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

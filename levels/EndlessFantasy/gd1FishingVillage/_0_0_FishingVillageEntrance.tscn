@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://sceneObjects/PriestessSpawner.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=31]
+[ext_resource path="res://icon.png" type="Texture" id=32]
 
 [sub_resource type="Animation" id=57]
 length = 0.001
@@ -949,6 +950,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, 0 )
 [node name="PriestessSpawner3" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0 )
 spawned_object_path = "res://sceneObjects/Enemies/BasicFrogEnemy.tscn"
+
+[node name="DialogPosition" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0 )
+visible = false
+pixel_size = 0.025
+texture = ExtResource( 32 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

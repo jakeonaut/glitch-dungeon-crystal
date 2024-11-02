@@ -22,8 +22,13 @@ func _ready():
     # is_static_in_level = false # TODO(jaketroweR): :-)
 
     set_process(true)
+    original_pos = global_transform.origin
+    randomizeTargetPos()
+    mySprite.material_override = mySprite.material_override.duplicate()
+    mySprite.global_transform.origin = self.global_transform.origin
+
     if is_static_in_level and global.getStaticLevelZoneLevelVar(level, self):
-        set_process(false)
+        # set_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
@@ -32,13 +37,6 @@ func _ready():
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         can_i_spawn_crystal = false
-        
-    
-    
-    original_pos = global_transform.origin
-    randomizeTargetPos()
-    mySprite.material_override = mySprite.material_override.duplicate()
-    mySprite.global_transform.origin = self.global_transform.origin
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

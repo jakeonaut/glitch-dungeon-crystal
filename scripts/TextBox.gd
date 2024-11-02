@@ -41,6 +41,7 @@ var right_margin_start = 0
 var adjusted_tiny_y_pos = 0
 var adjusted_tiny_x_pos = 0
 var target_origin = Vector3(0, 0, 0)
+var override_target_origin = null
 var is_fast_text = false
 
 var showYesNoOptions = false
@@ -119,7 +120,9 @@ func setTinyPosition():
   var factor = 0.4
 
   # https://godotengine.org/qa/64393/how-do-i-get-2d-coordinates-from-a-3d-scene
-  if textboxParent.get_ref():
+  if override_target_origin != null:
+    target_origin = override_target_origin
+  elif textboxParent.get_ref():
     target_origin = textboxParent.get_ref().global_transform.origin
   getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
