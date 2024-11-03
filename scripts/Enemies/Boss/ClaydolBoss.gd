@@ -11,6 +11,8 @@ var MAX_NUM_HITS = 3
 var num_hits = 0
 var dreidel_timer = 0
 var dreidel_time_limit = 40
+var dizzy_timer = 0
+var dizzy_time_limit = 30
 var smokeCloudTimer = 0
 
 enum BossPhase {
@@ -25,12 +27,15 @@ enum BossPhase {
     DRILL_FALL,
     DRILL_DREIDEL_SPIN,
     DIZZY,
+    FALL_OVER,
+    STUN_TWITCH,
 }
 var boss_phase = BossPhase.ASLEEP
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
     set_process(true)
+    sprite_offset_y = 7.5
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
@@ -42,24 +47,55 @@ func getHurt():
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
 
-func _process(delta):
-    noseSprite.flip_h = mySprite.flip_h
-    if global.pauseGame:
-        return
+var asleep_unearth_counter = 0
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+    if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
+        return false
 
     if boss_phase == BossPhase.ASLEEP:
+        global_transform.origin.y += 1
+        level.summonSmokeClouds(self.global_transform.origin, 3, false, false)
+        level.summonSmokeClouds(self.global_transform.origin + Vector3(2, 0, 0), 3, false, false, global.grey_palette, 1)
+        level.summonSmokeClouds(self.global_transform.origin + Vector3(-2, 0, 0), 3, false, false, global.grey_palette, -1)
+        asleep_unearth_counter += 1
+        if asleep_unearth_counter >= 4:
+            global.pauseGame = true
+            global.shouldRenderAsCinematic = true
+            asleep_unearth_counter = 0
+            boss_phase = BossPhase.WAKEUP
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("wakeup")
+
+    if boss_phase == BossPhase.DIZZY:
+        boss_phase = BossPhase.FALL_OVER
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        secretAniPlayer.play("idleStand")
-        boss_phase = BossPhase.IDLE
-        sprite_offset_y = 7.5
-    elif boss_phase == BossPhase.WAKEUP:
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("idleStand")
-        boss_phase = BossPhase.IDLE
-        # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
-    elif boss_phase == BossPhase.IDLE:
+        secretAniPlayer.play("fallOver")
+
+    return .getSmacked(broom_origin, silently)
+
+# be careful cuz both the HurtPlayerArea and the InteractArea will both rely on this one function...
+func isActive(debug = false):
+    return .isActive(debug)
+
+func _process(delta):
+    noseSprite.flip_h = mySprite.flip_h
+    # need to be before global.pauseGame check so we can unpause
+    if boss_phase == BossPhase.WAKEUP:
+        if not secretAniPlayer.is_playing():
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            global.pauseGame = false
+            global.shouldRenderAsCinematic = false
+            secretAniPlayer.play("idleStand")
+            boss_phase = BossPhase.IDLE
+            return
+
+    if global.pauseGame:
+        return
+    # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
+    if boss_phase == BossPhase.IDLE:
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("jumpSquat")
@@ -111,13 +147,24 @@ func _process(delta):
             dreidel_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("idleStand")
+            secretAniPlayer.play("dizzy")
             boss_phase = BossPhase.DIZZY
     elif boss_phase == BossPhase.DIZZY:
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("idleStand")
-        boss_phase = BossPhase.IDLE
+        dizzy_timer += (delta*11)
+        if dizzy_timer >= dizzy_time_limit:
+            dizzy_timer = 0
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idleStand")
+            boss_phase = BossPhase.IDLE
+    elif boss_phase == BossPhase.FALL_OVER:
+        if not secretAniPlayer.is_playing():
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("stunTwitch")
+            boss_phase = BossPhase.STUN_TWITCH
+    elif boss_phase == BossPhase.STUN_TWITCH:
+        pass
 
     noseSprite.flip_h = mySprite.flip_h
 
