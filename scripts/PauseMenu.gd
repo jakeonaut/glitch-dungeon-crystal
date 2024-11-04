@@ -355,9 +355,9 @@ func processSoundLogic(_delta):
     if soundOptionIndex == 0:
       global.userSettings["stopAllMusic"] = not global.userSettings["stopAllMusic"]
       if global.userSettings["stopAllMusic"]:
-        musicPlayer.stopAll()
+        level.stopAllMusic()
       else:
-        musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
+        level.playMenuMusic()
     elif soundOptionIndex == 1:
       global.userSettings["canChangeSongPitch"] = not global.userSettings["canChangeSongPitch"]
       if global.userSettings["canChangeSongPitch"]:

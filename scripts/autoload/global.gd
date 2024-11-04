@@ -300,17 +300,17 @@ func resetMemory():
     memory["angel_flute"] = false
     memory["goddess_dream3"] = false
 
-    # if you've beaten the midpoint boss
     memory["demo_mode"] = 0
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
-    memory["glitched_grimoire"] = false
+    # if you've beaten the midpoint boss
+    memory["clean_crystals"] = 4
+    memory["glitched_grimoire"] = true
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
-    memory["baba_yaga"] = 0
-    memory["angler_seaman"] = 0
-    memory["dogu_matryoshka"] = 0
+    memory["priestess"] = 2
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
 
     # PERMANENT SPELLS
     
@@ -561,6 +561,17 @@ func loadGame(saveGameIndex):
         currLevelZone = getLevelZoneName(global.memory["roomPath"])
         if not global.memory["level_zonez"].has(currLevelZone):
             global.memory["level_zonez"].push_back(currLevelZone)
+
+    # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
+    # if the boss flag is 2 already, it means you've beat them, so don't reset
+    if global.memory["priestess"] == 1:
+        global.memory["priestess"] = 0
+    if global.memory["baba_yaga_boss"] == 1:        
+        global.memory["baba_yaga_boss"] = 0
+    if global.memory["angler_seaman_boss"] == 1:
+        global.memory["angler_seaman_boss"] = 0
+    if global.memory["dogu_matryoshka_boss"] == 1:
+        global.memory["dogu_matryoshka_boss"] = 0
     return true
 
 func tryDeleteGame(saveGameIndex):

@@ -95,7 +95,6 @@ func passiveActivate(_delta, _is_player):
   elif grav_direction < 0 and level.player.grav < 0:
     return
 
-  global.memory["grav_direction"] = grav_direction
   collectSound.play()
   if grav_direction > 0: 
     level.flipGravity(1)

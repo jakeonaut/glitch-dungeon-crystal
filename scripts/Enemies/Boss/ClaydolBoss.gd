@@ -31,8 +31,9 @@ enum BossPhase {
     STUN_TWITCH,
 }
 var boss_phase = BossPhase.ASLEEP
-
+var asleep_unearth_counter = 0
 onready var spawnSound = get_node("Sounds/SpawnSound")
+
 func _ready():
     set_process(true)
     sprite_offset_y = 7.5
@@ -41,40 +42,6 @@ func _ready():
     yield(TempTimer.idle_frame(self), "timeout")
     crystal1.applyGlitchMaterial(5)
 
-func getHurt():
-    mySprite.visible = true
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
-    secretAniPlayer.play("gotHurt")
-
-var asleep_unearth_counter = 0
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
-    if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
-        return false
-
-    if boss_phase == BossPhase.ASLEEP:
-        global_transform.origin.y += 1
-        level.summonSmokeClouds(self.global_transform.origin, 3, false, false)
-        level.summonSmokeClouds(self.global_transform.origin + Vector3(2, 0, 0), 3, false, false, global.grey_palette, 1)
-        level.summonSmokeClouds(self.global_transform.origin + Vector3(-2, 0, 0), 3, false, false, global.grey_palette, -1)
-        asleep_unearth_counter += 1
-        if asleep_unearth_counter >= 4:
-            global.pauseGame = true
-            global.shouldRenderAsCinematic = true
-            asleep_unearth_counter = 0
-            boss_phase = BossPhase.WAKEUP
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("wakeup")
-
-    if boss_phase == BossPhase.DIZZY:
-        boss_phase = BossPhase.FALL_OVER
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("fallOver")
-
-    return .getSmacked(broom_origin, silently)
-
 # be careful cuz both the HurtPlayerArea and the InteractArea will both rely on this one function...
 func isActive(debug = false):
     return .isActive(debug)
@@ -82,7 +49,21 @@ func isActive(debug = false):
 func _process(delta):
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
-    if boss_phase == BossPhase.WAKEUP:
+    if boss_phase == BossPhase.ASLEEP:
+        if global.memory["dogu_matryoshka_boss"] == 1:
+            global_transform.origin.y += 4
+            global.pauseGame = true
+            global.shouldRenderAsCinematic = true
+            asleep_unearth_counter = 0
+            boss_phase = BossPhase.WAKEUP
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("wakeup")
+            level.gameCamera.initial_size = 30
+            level.gameCamera.zoomed_size = 30
+            return
+        return
+    elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -90,6 +71,9 @@ func _process(delta):
             global.shouldRenderAsCinematic = false
             secretAniPlayer.play("idleStand")
             boss_phase = BossPhase.IDLE
+            if global.memory["dogu_matryoshka_boss"] == 0:
+                global.memory["dogu_matryoshka_boss"] = 1
+                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
             return
 
     if global.pauseGame:
@@ -167,6 +151,41 @@ func _process(delta):
         pass
 
     noseSprite.flip_h = mySprite.flip_h
+
+func getHurt():
+    mySprite.visible = true
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("gotHurt")
+
+func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+    if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
+        return false
+
+    if boss_phase == BossPhase.ASLEEP:
+        global_transform.origin.y += 1
+        level.summonSmokeClouds(self.global_transform.origin, 3, false, false)
+        level.summonSmokeClouds(self.global_transform.origin + Vector3(2, 0, 0), 3, false, false, global.grey_palette, 1)
+        level.summonSmokeClouds(self.global_transform.origin + Vector3(-2, 0, 0), 3, false, false, global.grey_palette, -1)
+        asleep_unearth_counter += 1
+        if asleep_unearth_counter >= 4:
+            global.pauseGame = true
+            global.shouldRenderAsCinematic = true
+            asleep_unearth_counter = 0
+            boss_phase = BossPhase.WAKEUP
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("wakeup")
+            level.gameCamera.initial_size = 30
+            level.gameCamera.zoomed_size = 30
+
+    if boss_phase == BossPhase.DIZZY:
+        boss_phase = BossPhase.FALL_OVER
+        secretAniPlayer.stop()
+        secretAniPlayer.clear_queue()
+        secretAniPlayer.play("fallOver")
+
+    return .getSmacked(broom_origin, silently)
 
 # @override
 func landed():

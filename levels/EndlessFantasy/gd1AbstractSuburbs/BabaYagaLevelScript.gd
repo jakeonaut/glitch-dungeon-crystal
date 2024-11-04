@@ -5,7 +5,7 @@ onready var babaYagaBoss = get_node("BabaYagaBoss")
 
 # @override
 func setUpRoomInitializationOverride():
-    if global.memory["baba_yaga"] >= 2:
+    if global.memory["baba_yaga_boss"] >= 2:
         babaYagaBoss.queue_free()
     else:
         yield(get_tree().create_timer(0.5), "timeout")
@@ -20,4 +20,7 @@ func playMenuMusic():
 # @override
 func restartMusic():
     musicPlayer.changeSongPitch(1.0)
-    # musicPlayer.conductFromScenePath(getLevelName())
+    if global.memory["baba_yaga_boss"] == 1:
+        musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+    else:
+        musicPlayer.tryToPlay(musicPlayer.windPlayer)

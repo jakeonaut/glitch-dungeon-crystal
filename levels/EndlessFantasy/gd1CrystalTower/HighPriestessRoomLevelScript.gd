@@ -66,8 +66,10 @@ func playMenuMusic():
 # @override
 func restartMusic():
   musicPlayer.changeSongPitch(1.0)
-  # musicPlayer.conductFromScenePath(getLevelName())
-  pass
+  if global.memory["priestess"] == 1:
+    musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+  else:
+    musicPlayer.conductFromScenePath(getLevelName())
 
 # @override
 func overrideLevelRespawnEvent():

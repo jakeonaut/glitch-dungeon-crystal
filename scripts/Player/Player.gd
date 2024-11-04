@@ -70,6 +70,8 @@ func _ready():
 
 # make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
 func processWallLadderWalking(delta):
+  if should_big_bump:
+    return false
   var temp = pauseAnimation
   if dig_timer > 0:
     pauseAnimation = true
@@ -264,7 +266,8 @@ func featherGlitch():
   spellbookGlitchSprite.frame = 0
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
-     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY:
+     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY and \
+     physics_state == PhysicsState.NORMAL:
     miniUpwardGust()
   level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER
@@ -718,8 +721,11 @@ func tryDieToOffscreenCamera(delta):
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
-    if transformation == TransformationState.BUBBLE:
-      getBubbleCured()
+    if next_room == null:
+      if transformation == TransformationState.BUBBLE:
+        getBubbleCured()
+      elif grav < 0:
+        level.flipGravity(1)
   if global_transform.origin.y > getGameCamera().topmost_y and DEATH_MARGIN == 1:
     glitchTilesAroundMe(-2.5) # just show the player where they are...
 
@@ -830,7 +836,6 @@ func tryToRecover():
   physics_state = PhysicsState.GLITCH_RECOVERY
   if global_transform.origin.y > getGameCamera().topmost_y:
     if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-      global.memory["grav_direction"] = 1
       level.flipGravity(1)
 
 func canIGetCaught():

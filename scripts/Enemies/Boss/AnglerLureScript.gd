@@ -58,22 +58,38 @@ func moveTargetToHook(delta):
     hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
 
 func isActive(_debug=false):
-  return anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
-         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_LEFT or \
-         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
-         anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_MIDDLE
+  return true
+
+func activate(is_player):
+  if anglerFish.boss_phase != anglerFish.BossPhase.LYING_IN_WAIT:
+    return false
+  anglerFish.startBossFight(is_player)
 
 func passiveActivate(_delta, is_player):
-  if not hooked and is_player and level.player.canIGetCaught():
-    level.clearOtherGrabbers()
-    hooked = true
-    hookTarget = weakref(level.player)
-    level.player.hookSound.play()
-    if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-      level.player.aniPlayer.play("hookCaught")
-    level.player.pauseAnimation = true
-    level.player.should_do_fallthrough_area_collision = false
-    level.player.tryClearFallthroughCollisionSolid()
+  if anglerFish.boss_phase == anglerFish.BossPhase.LYING_IN_WAIT:
+    anglerFish.startBossFight(true)
+    return
+
+  if not (
+      anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
+      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_LEFT or \
+      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
+      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_MIDDLE
+  ):
+    return
+
+  if hooked or not is_player or not level.player.canIGetCaught():
+    return
+  
+  level.clearOtherGrabbers()
+  hooked = true
+  hookTarget = weakref(level.player)
+  level.player.hookSound.play()
+  if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+    level.player.aniPlayer.play("hookCaught")
+  level.player.pauseAnimation = true
+  level.player.should_do_fallthrough_area_collision = false
+  level.player.tryClearFallthroughCollisionSolid()
   
 
 func restorePlayer(_got_to_top):

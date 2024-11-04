@@ -15,6 +15,8 @@ func glitchSetSpritesAndCollision():
 # WARNING!!! WARNING!!! DO NOT LET BUBBLES HIT THE SMALL FISH, JUST A PERSONAL BROOM SMACK
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE:
+    notDieSound.play()
+    dieSound.play()
     anglerFish.boss_phase = anglerFish.BossPhase.HURT
     anglerFish.secretAniPlayer.stop()
     anglerFish.secretAniPlayer.clear_queue()
@@ -26,11 +28,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     if anglerFish.num_hits >= anglerFish.MAX_NUM_HITS:
         anglerFish.boss_phase = anglerFish.BossPhase.DEFEATED
         anglerFish.secretAniPlayer.queue("defeated")
-        var temp_pos = anglerFish.crystal1.global_transform.origin
-        anglerFish.crystalsContainer.remove_child(anglerFish.crystal1)
-        level.add_child(anglerFish.crystal1)
-        anglerFish.crystal1.global_transform.origin = temp_pos
-        anglerFish.crystal1.is_goddess_dream_collectible = true
-        global.memory["angler_seaman"] = 2
+        global.memory["angler_seaman_boss"] = 2
     .getSmacked(broom_origin, silently)
     return true

@@ -957,7 +957,6 @@ tracks/1/keys = {
 }
 
 [node name="ClaydolBoss" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 7 )
 grav = 15
 jump_force = 12

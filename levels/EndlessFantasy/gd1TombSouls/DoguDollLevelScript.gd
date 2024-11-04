@@ -5,7 +5,7 @@ onready var doguMatryoshkaBoss = get_node("ClaydolBoss")
 
 # @override
 func setUpRoomInitializationOverride():
-    if global.memory["dogu_matryoshka"] >= 2:
+    if global.memory["dogu_matryoshka_boss"] >= 2:
         doguMatryoshkaBoss.queue_free()
     else:
         yield(get_tree().create_timer(0.5), "timeout")
@@ -20,4 +20,7 @@ func playMenuMusic():
 # @override
 func restartMusic():
     musicPlayer.changeSongPitch(1.0)
-    # musicPlayer.conductFromScenePath(getLevelName())
+    if global.memory["dogu_matryoshka_boss"] == 1:
+        musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+    else:
+        musicPlayer.tryToPlay(musicPlayer.windPlayer)
