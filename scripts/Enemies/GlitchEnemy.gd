@@ -251,7 +251,7 @@ func _process(delta):
 func processGlitchFormGlitchiness():
     if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
         mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
-        if level.player.glitch_form == glitch_form and not smallInteractionArea.is_in_group("enemies"):
+        if level.player.glitch_form == glitch_form and smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 1.0)
             mySprite.material_override.set_shader_param("enable_glitch", true)
             mySprite.material_override.set_shader_param("enable_palette_cycle", false)
@@ -261,7 +261,7 @@ func processGlitchFormGlitchiness():
                 spellbookGlitchSprite.global_transform.origin.z = 1.1
                 spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.7
                 spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", false)
-        elif level.player.glitch_form != glitch_form and smallInteractionArea.is_in_group("enemies"):
+        elif level.player.glitch_form != glitch_form and smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 0.05)
             mySprite.material_override.set_shader_param("enable_glitch", false)
             mySprite.material_override.set_shader_param("enable_palette_cycle", true)
@@ -274,7 +274,7 @@ func processGlitchFormGlitchiness():
 
 func updateFallthroughSolids():
     if fallthroughSolid:
-        if (smallInteractionArea.is_in_group("enemies") or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying):
+        if ((smallInteractionArea != null and smallInteractionArea.is_in_group("enemies")) or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying):
             if fallthroughSolid.is_in_group("fallthrough"):
                 fallthroughSolid.remove_from_group("fallthrough")
         elif not fallthroughSolid.is_in_group("fallthrough"):
@@ -343,6 +343,8 @@ func doVerticalWalkingBehavior():
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
                 
 func tryDieToBody():
+    if smallInteractionArea == null:
+        return
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:
         var areaParent = area.get_parent()
@@ -459,7 +461,7 @@ func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
 func activate(_is_player):
-    if smallInteractionArea.is_in_group("weak_enemies"):
+    if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         ouchies(global_transform.origin)
         getPlayer().has_sweeped_glitch = true
@@ -469,7 +471,7 @@ func activate(_is_player):
         if getPlayer().teleport_to == null:
             getPlayer().teleport_to = weakref(self)
             getPlayer().teleport_to_origin = self.global_transform.origin
-    elif smallInteractionArea.is_in_group("enemies"):
+    elif smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:
             ouchies(global_transform.origin)
             getPlayer().getSmacked()
@@ -493,11 +495,11 @@ func stopPassiveActivate():
     pass
 
 func tryRemoveEnemiesGroup():
-    if smallInteractionArea.is_in_group("enemies"):
+    if smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.remove_from_group("enemies")
 
 func tryAddEnemiesGroup():
-    if not smallInteractionArea.is_in_group("enemies"):
+    if smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.add_to_group("enemies")
 
 var can_spawn_mini_crystal = true
@@ -679,13 +681,13 @@ func spawnBabyMushroom(babyTransform, newMushroomAncestorRef):
     return baby
 
 func reenemize(is_weak = false):
-    if not smallInteractionArea.is_in_group("enemies"):
+    if smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.add_to_group("enemies")
-    if is_weak and not smallInteractionArea.is_in_group("weak_enemies"):
+    if smallInteractionArea != null and is_weak and not smallInteractionArea.is_in_group("weak_enemies"):
         smallInteractionArea.add_to_group("weak_enemies")
 
 func unenemize():
-    if smallInteractionArea.is_in_group("enemies"):
+    if smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.remove_from_group("enemies")
-    if smallInteractionArea.is_in_group("weak_enemies"):
+    if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         smallInteractionArea.remove_from_group("weak_enemies")

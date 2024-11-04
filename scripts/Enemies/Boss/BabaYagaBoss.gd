@@ -88,15 +88,15 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     boss_phase = BossPhase.GOT_HURT
 
 func _process(delta):
-    if global.pauseGame:
-        return
-
+    # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
-        if Input.is_action_just_pressed("sub_action_button"):
+        if level.player.transformation == level.player.TransformationState.CHICKEN:
             boss_phase = BossPhase.WAKEUP
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("wakeup")
+            global.pauseGame = true
+            global.shouldRenderAsCinematic = true
     elif boss_phase == BossPhase.WAKEUP:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
@@ -106,7 +106,14 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("run")
             am_i_hurt = false
-    elif boss_phase == BossPhase.IDLE:
+            global.pauseGame = false
+            global.shouldRenderAsCinematic = false
+        return
+
+    if global.pauseGame:
+        return
+
+    if boss_phase == BossPhase.IDLE:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
             run_counter = 0

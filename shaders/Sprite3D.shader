@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode blend_mix,depth_draw_alpha_prepass,cull_disabled,diffuse_burley,specular_schlick_ggx,unshaded;
-uniform vec4 albedo : hint_color;
+uniform vec4 albedo : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D base_palette : hint_albedo;
 uniform sampler2D target_palette : hint_albedo;
@@ -111,7 +111,7 @@ void fragment() {
     float mod2 = mod(fdelta,float(palettesize));
     int delta = int(mod2);
      
-    vec3 color = getpalettecolor(delta);
+    vec3 color = getpalettecolor(delta) * albedo.rgb;
 
     // Convert from [0.0, 1.0] range to [0, 255] range
     ivec3 pixel_color = ivec3(round(color.rgb * 255.0));

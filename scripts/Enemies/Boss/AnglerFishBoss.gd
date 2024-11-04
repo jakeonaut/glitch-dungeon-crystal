@@ -3,13 +3,11 @@ extends "../GlitchEnemy.gd"
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-onready var crystalsContainer = get_node("Crystals")
-onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 
 onready var lureContainer = get_node("LureContainer")
 onready var lureFreeRange = get_node("LureContainer/FreeRange")
+onready var crystal = get_node("LureContainer/FreeRange/HighpriestessCrystal")
 onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
-onready var fishLureSprite = get_node("LureContainer/FreeRange/FishLureSprite")
 onready var reelStopArea = get_node("LureContainer/ReelStopArea")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
@@ -20,6 +18,7 @@ var MAX_NUM_HITS = 3
 
 enum BossPhase {
     IDLE,
+    HIDING_IN_WAIT,
     WINDUP_CAST,
     CAST_LURE,
     CLAW_MACHINE_FISHING_LEFT,
@@ -34,7 +33,7 @@ enum BossPhase {
 }
 var claw_machine_cycle = 0
 var CLAW_MACHINE_CYCLE_MAX = 1
-var boss_phase = BossPhase.IDLE
+var boss_phase = BossPhase.HIDING_IN_WAIT
 
 var original_pos = null
 var target_pos = null
@@ -55,7 +54,7 @@ func _ready():
     original_pos = global_transform.origin
     randomizeTargetPos()
 
-    crystal1.applyGlitchMaterial(5)
+    crystal.applyGlitchMaterial(5)
     behavior_phase_through_walls = true
     if lureFreeRange.get_parent() == lureContainer:
         lureContainer.remove_child(lureFreeRange)
@@ -64,6 +63,10 @@ func _ready():
 
 var preyTarget = null
 func _process(delta):
+    # need to be before global.pauseGame check so we can unpause
+    if boss_phase == BossPhase.HIDING_IN_WAIT:
+        pass
+
     if global.pauseGame:
         return
     
@@ -391,12 +394,6 @@ func moveAbout(delta, moveTheBaby = false):
     if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1) and \
        stepify(target_pos.y, 0.1) == stepify(global_transform.origin.y, 0.1):
         randomizeTargetPos()
-
-    step = 2
-    var crystal_target_pos_x = 0
-    if mySprite.frame >= 2:
-        crystal_target_pos_x = 1
-    crystalsContainer.translation.x = crystalsContainer.translation.x + (crystal_target_pos_x - crystalsContainer.translation.x) * (delta*step)
 
 func moveToSpecificPosition(delta, position, step = 1, moveTheBaby = false):
     if moveTheBaby:

@@ -15,7 +15,7 @@
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -42,9 +42,9 @@ shader_param/texture_albedo = ExtResource( 2 )
 shader_param/base_palette = ExtResource( 10 )
 shader_param/target_palette = ExtResource( 11 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -93,7 +93,7 @@ max_frames = 4
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 9 )
-material_override = SubResource( 4 )
+material_override = SubResource( 8 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 8
