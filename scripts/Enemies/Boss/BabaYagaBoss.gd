@@ -67,7 +67,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
         global.pauseGame = true
         global.pauseMoveInput = true
         global.shouldRenderAsCinematic = true
-        global.memory["baba_yaga"] = 2
+        global.memory["baba_yaga_boss"] = 2
         level.saveTheGame()
         
         secretAniPlayer.stop()
@@ -90,13 +90,15 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
-        if level.player.transformation == level.player.TransformationState.CHICKEN:
+        if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
             boss_phase = BossPhase.WAKEUP
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("wakeup")
             global.pauseGame = true
             global.shouldRenderAsCinematic = true
+            level.gameCamera.initial_size = 30
+            level.gameCamera.zoomed_size = 30
     elif boss_phase == BossPhase.WAKEUP:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
@@ -108,6 +110,9 @@ func _process(delta):
             am_i_hurt = false
             global.pauseGame = false
             global.shouldRenderAsCinematic = false
+            if global.memory["baba_yaga_boss"] == 0:
+                global.memory["baba_yaga_boss"] = 1
+                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
         return
 
     if global.pauseGame:

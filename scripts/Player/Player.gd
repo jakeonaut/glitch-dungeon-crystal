@@ -70,6 +70,8 @@ func _ready():
 
 # make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
 func processWallLadderWalking(delta):
+  if should_big_bump:
+    return false
   var temp = pauseAnimation
   if dig_timer > 0:
     pauseAnimation = true
@@ -264,7 +266,8 @@ func featherGlitch():
   spellbookGlitchSprite.frame = 0
   var ui = level.uiLayer
   if glitch_form != global.GlitchForm.FEATHER and not on_ground and \
-     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY:
+     (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY and \
+     physics_state == PhysicsState.NORMAL:
     miniUpwardGust()
   level.displaySpellMessageText("feather fall")
   glitch_form = global.GlitchForm.FEATHER

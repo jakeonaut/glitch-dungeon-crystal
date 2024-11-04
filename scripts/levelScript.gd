@@ -282,6 +282,9 @@ func playMenuMusic():
 
 func restartMusic():
   musicPlayer.conductFromScenePath(getLevelName())
+
+func stopAllMusic():
+  musicPlayer.stopAll()
   
 func tryShowUIElements():
   # TODO(jaketrower): Could be better method to fetch this without a weird node search in the ready_impl()

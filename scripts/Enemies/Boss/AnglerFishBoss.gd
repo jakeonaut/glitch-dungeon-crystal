@@ -18,7 +18,8 @@ var MAX_NUM_HITS = 3
 
 enum BossPhase {
     IDLE,
-    HIDING_IN_WAIT,
+    LYING_IN_WAIT,
+    WAKING_UP,
     WINDUP_CAST,
     CAST_LURE,
     CLAW_MACHINE_FISHING_LEFT,
@@ -33,7 +34,7 @@ enum BossPhase {
 }
 var claw_machine_cycle = 0
 var CLAW_MACHINE_CYCLE_MAX = 1
-var boss_phase = BossPhase.HIDING_IN_WAIT
+var boss_phase = BossPhase.LYING_IN_WAIT
 
 var original_pos = null
 var target_pos = null
@@ -44,6 +45,7 @@ var cast_time_limit = 60
 var stun_timer = 0
 var stun_time_limit = 240
 var which_facing = -1
+var is_weakpoint_attached = true
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
@@ -54,18 +56,42 @@ func _ready():
     original_pos = global_transform.origin
     randomizeTargetPos()
 
-    crystal.applyGlitchMaterial(5)
     behavior_phase_through_walls = true
     if lureFreeRange.get_parent() == lureContainer:
+        var temp = lureFreeRange.global_transform.origin
         lureContainer.remove_child(lureFreeRange)
         level.add_child(lureFreeRange)
-        lureFreeRange.global_transform.origin = lureContainer.global_transform.origin
+        lureFreeRange.global_transform.origin = temp
 
 var preyTarget = null
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
-    if boss_phase == BossPhase.HIDING_IN_WAIT:
-        pass
+    if boss_phase == BossPhase.LYING_IN_WAIT:
+        unenemize()
+        if global.memory["angler_seaman_boss"] == 1:
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("openUp")
+            secretAniPlayer.queue("fadeFromBlack")
+            reenemize()
+            boss_phase = BossPhase.WAKING_UP
+            global.pauseGame = true
+            global.shouldRenderAsCinematic = true
+            level.gameCamera.initial_size = 30
+            level.gameCamera.zoomed_size = 30
+            pass
+        return
+    elif boss_phase == BossPhase.WAKING_UP:
+        if not secretAniPlayer.is_playing():
+            boss_phase = BossPhase.REEL_IT_IN
+            global.shouldRenderAsCinematic = false
+            global.pauseGame = false
+            crystal.scale = Vector3(0.6, 0.6, 0.6)
+            crystal.applyGlitchMaterial(5)
+            if global.memory["angler_seaman_boss"] == 0:
+                global.memory["angler_seaman_boss"] = 1
+                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+        return
 
     if global.pauseGame:
         return
@@ -277,6 +303,27 @@ func _process(delta):
         lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
     lureFreeRange.global_transform.origin.z = 0
 
+func startBossFight(_was_player_caught):
+    if boss_phase != BossPhase.LYING_IN_WAIT:
+        return false
+    level.player.aniPlayer.stop()
+    level.player.aniPlayer.clear_queue()
+    level.player.aniPlayer.queue("fall")
+    if level.player.summonedBroom:
+        level.player.broomStop()
+
+    global.pauseGame = true
+    global.shouldRenderAsCinematic = true
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("fadeFromBlack")
+    secretAniPlayer.queue("2secondPause")
+    secretAniPlayer.queue("openUp")
+    secretAniPlayer.queue("2secondPause")
+    boss_phase = BossPhase.WAKING_UP
+    level.gameCamera.initial_size = 30
+    level.gameCamera.zoomed_size = 30
+
 var lure_up_down_dir = Vector2(0, -1)
 func lureMatchPlayerY(delta):
     # don't actually match player Y
@@ -342,7 +389,9 @@ func gotcha():
                 secretAniPlayer.clear_queue()
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
+                level.player.on_ground = false
                 lureFreeRange.restorePlayer(false)
+                level.player.on_ground = false
                 level.player.bigBump()
                 level.player.malwareCured()
                 level.player.pauseInput = false
@@ -422,6 +471,9 @@ func tryDieToOffscreenCamera():
 # var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+    if boss_phase == BossPhase.LYING_IN_WAIT or boss_phase == BossPhase.EAT_IT:
+        return false
+
     if boss_phase == BossPhase.STUN_FALL or boss_phase == BossPhase.STUN_IDLE:
         time_influence = 35
         y_div = 5
@@ -452,8 +504,6 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     #     tryToStartWeakPointDetachment()
     
 
-
-var is_weakpoint_attached = true
 func tryToStartWeakPointDetachment():
     if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
         weakPointAniPlayer.stop()
