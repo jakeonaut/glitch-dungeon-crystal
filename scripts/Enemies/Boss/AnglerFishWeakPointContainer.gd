@@ -12,7 +12,6 @@ func isActive(_debug=false):
 func glitchSetSpritesAndCollision():
   return false
 
-# WARNING!!! WARNING!!! DO NOT LET BUBBLES HIT THE SMALL FISH, JUST A PERSONAL BROOM SMACK
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE:
     notDieSound.play()
@@ -24,6 +23,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     anglerFish.weakPointAniPlayer.stop()
     anglerFish.weakPointAniPlayer.clear_queue()
     anglerFish.weakPointAniPlayer.play("ouchies")
+    anglerFish.weakPointAniPlayer.queue("swim")
     anglerFish.num_hits += 1
     if anglerFish.num_hits >= anglerFish.MAX_NUM_HITS:
         anglerFish.boss_phase = anglerFish.BossPhase.DEFEATED
