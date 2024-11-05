@@ -682,7 +682,6 @@ func processJumpInputs(delta):
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
     # if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
-    #   global.memory["grav_direction"] = -global.memory["grav_direction"]
     #   gravitySound.play()
     #   level.flipGravity()
     #   has_used_magic_lantern = true

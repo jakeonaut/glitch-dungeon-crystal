@@ -721,8 +721,11 @@ func tryDieToOffscreenCamera(delta):
   if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
-    if transformation == TransformationState.BUBBLE:
-      getBubbleCured()
+    if next_room == null:
+      if transformation == TransformationState.BUBBLE:
+        getBubbleCured()
+      elif grav < 0:
+        level.flipGravity(1)
   if global_transform.origin.y > getGameCamera().topmost_y and DEATH_MARGIN == 1:
     glitchTilesAroundMe(-2.5) # just show the player where they are...
 
@@ -833,7 +836,6 @@ func tryToRecover():
   physics_state = PhysicsState.GLITCH_RECOVERY
   if global_transform.origin.y > getGameCamera().topmost_y:
     if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-      global.memory["grav_direction"] = 1
       level.flipGravity(1)
 
 func canIGetCaught():
