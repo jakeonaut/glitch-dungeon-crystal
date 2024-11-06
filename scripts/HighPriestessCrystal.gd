@@ -2,18 +2,19 @@ extends Spatial
 
 onready var cubeContainer = get_node("CubeContainer")
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
+var nonGlitchedMaterial = null
 var glitchedMaterial = preload("res://materials/PriestessCrystalGlitch.tres")
 
 func _ready():
   set_process(true)
   set_physics_process(false)
 
-  meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
+  nonGlitchedMaterial = meshInstance2.get_material_override().duplicate()
+  meshInstance2.set_material_override(nonGlitchedMaterial)
 
 var glitch_shader_timer = 0
 var glitch_shader_time_limit = 1
 var is_glitched = false
-var is_goddess_dream_collectible = false
 func _process(delta):
   # super._process(delta) implicit
 
@@ -35,3 +36,6 @@ func applyGlitchMaterial(influence):
   new_glitched_material.set_shader_param("time_influence", influence + 2)
   new_glitched_material.set_shader_param("y_div", influence * 0.5 + 3)
   meshInstance2.set_material_override(new_glitched_material)
+
+func unapplyGlitchMaterial():
+  meshInstance2.set_material_override(nonGlitchedMaterial)

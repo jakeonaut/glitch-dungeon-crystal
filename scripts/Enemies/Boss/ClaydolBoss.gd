@@ -29,6 +29,7 @@ enum BossPhase {
     DIZZY,
     FALL_OVER,
     STUN_TWITCH,
+    GET_UP,
 }
 var boss_phase = BossPhase.ASLEEP
 var asleep_unearth_counter = 0
@@ -37,10 +38,6 @@ onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
     set_process(true)
     sprite_offset_y = 7.5
-    # Wait two frames cuz idk
-    yield(TempTimer.idle_frame(self), "timeout")
-    yield(TempTimer.idle_frame(self), "timeout")
-    crystal1.applyGlitchMaterial(5)
 
 # be careful cuz both the HurtPlayerArea and the InteractArea will both rely on this one function...
 func isActive(debug = false):
@@ -65,6 +62,7 @@ func _process(delta):
         return
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
+            crystal1.applyGlitchMaterial(5)
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             global.pauseGame = false
@@ -131,7 +129,10 @@ func _process(delta):
             dreidel_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("dizzy")
+            if global_transform.origin.x >= 8:
+                secretAniPlayer.play("dizzy")
+            else:
+                secretAniPlayer.play("dizzyRight")
             boss_phase = BossPhase.DIZZY
     elif boss_phase == BossPhase.DIZZY:
         dizzy_timer += (delta*11)
@@ -142,10 +143,16 @@ func _process(delta):
             secretAniPlayer.play("idleStand")
             boss_phase = BossPhase.IDLE
     elif boss_phase == BossPhase.FALL_OVER:
+        unenemize()
         if not secretAniPlayer.is_playing():
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("stunTwitch")
+            if secretAniPlayer.assigned_animation == "fallOver":
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("stunTwitch")
+            elif secretAniPlayer.assigned_animation == "fallOverRight":
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("stunTwitchRight")
             boss_phase = BossPhase.STUN_TWITCH
     elif boss_phase == BossPhase.STUN_TWITCH:
         pass
@@ -181,9 +188,14 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
 
     if boss_phase == BossPhase.DIZZY:
         boss_phase = BossPhase.FALL_OVER
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("fallOver")
+        if secretAniPlayer.assigned_animation == "dizzy":
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()    
+            secretAniPlayer.play("fallOver")
+        elif secretAniPlayer.assigned_animation == "dizzyRight":
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()    
+            secretAniPlayer.play("fallOverRight")
 
     return .getSmacked(broom_origin, silently)
 
@@ -202,4 +214,6 @@ func landed():
 
 # @override
 func glitchSetSpritesAndCollision():
+    if boss_phase == BossPhase.FALL_OVER or boss_phase == BossPhase.STUN_TWITCH or boss_phase == BossPhase.GET_UP:
+        return
     spriteContainer.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y

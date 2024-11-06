@@ -2596,6 +2596,8 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 13
+script = ExtResource( 13 )
+max_frames = 1
 
 [node name="SporeKeySprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 137, 230 )
@@ -2604,6 +2606,8 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 14
+script = ExtResource( 13 )
+max_frames = 1
 
 [node name="PyramidKeySprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 198, 230 )
@@ -2612,6 +2616,8 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 15
+script = ExtResource( 13 )
+max_frames = 1
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
 margin_left = 234.0

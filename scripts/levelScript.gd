@@ -147,7 +147,6 @@ func tryInitializeFromDebug():
   else:
     global.memory["initialized_from_debug"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
-      global.memory["inventory"] = [global.Inventory.GRIMOIRE]
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)

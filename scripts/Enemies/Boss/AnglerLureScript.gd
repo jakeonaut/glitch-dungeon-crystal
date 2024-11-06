@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var anglerFish = get_node("../..")
+onready var anglerFish = weakref(get_node("../.."))
 onready var hookInteractionArea = get_node("HookInteractionArea")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hooked = false
@@ -10,9 +10,12 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  if anglerFish == null or anglerFish.get_ref() == null:
+    return false
+    
   if hooked and hookTarget != null and hookTarget.get_ref() != null:
     var prey = hookTarget.get_ref()
-    if prey == anglerFish or prey == anglerFish.weakPointContainer:
+    if prey == anglerFish.get_ref() or prey == anglerFish.get_ref().weakPointContainer:
       hooked = false
       hookTarget = null
 
@@ -20,7 +23,7 @@ func _process(delta):
     var enemies = get_tree().get_nodes_in_group("enemies")
     for enemyArea in enemies:
       var enemy = enemyArea.get_node("..")
-      if enemy == anglerFish or enemy == anglerFish.weakPointContainer:
+      if enemy == anglerFish.get_ref() or enemy == anglerFish.get_ref().weakPointContainer:
         continue
       if hookInteractionArea.overlaps_area(enemyArea):
         hooked = true
@@ -61,20 +64,26 @@ func isActive(_debug=false):
   return true
 
 func activate(is_player):
-  if anglerFish.boss_phase != anglerFish.BossPhase.LYING_IN_WAIT:
+  if anglerFish == null or anglerFish.get_ref() == null:
     return false
-  anglerFish.startBossFight(is_player)
+
+  if anglerFish.get_ref().boss_phase != anglerFish.get_ref().BossPhase.LYING_IN_WAIT:
+    return false
+  anglerFish.get_ref().startBossFight(is_player)
 
 func passiveActivate(_delta, is_player):
-  if anglerFish.boss_phase == anglerFish.BossPhase.LYING_IN_WAIT:
-    anglerFish.startBossFight(true)
+  if anglerFish == null or anglerFish.get_ref() == null:
+    return false
+
+  if anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.LYING_IN_WAIT:
+    anglerFish.get_ref().startBossFight(true)
     return
 
   if not (
-      anglerFish.boss_phase == anglerFish.BossPhase.CAST_LURE or \
-      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_LEFT or \
-      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
-      anglerFish.boss_phase == anglerFish.BossPhase.CLAW_MACHINE_FISHING_MIDDLE
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CAST_LURE or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_LEFT or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_MIDDLE
   ):
     return
 

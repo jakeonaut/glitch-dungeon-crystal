@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1AbstractSuburbs/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/pokeball0000.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Streetlight.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/DreamOfDemon.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=89]
 length = 0.001
@@ -200,8 +201,11 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 15 )
 
-[sub_resource type="ViewportTexture" id=168]
+[sub_resource type="ViewportTexture" id=224]
 viewport_path = NodePath("Viewport2")
+
+[sub_resource type="ViewportTexture" id=225]
+viewport_path = NodePath("Viewport3")
 
 [sub_resource type="ShaderMaterial" id=44]
 shader = ExtResource( 4 )
@@ -308,7 +312,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4736, -2.58555, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4736, 3.41445, 0 )
 
 [node name="GrandmaStatues" type="Spatial" parent="Viewport/level"]
 
@@ -456,8 +460,12 @@ grav_direction = -1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 6, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 0 )
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/004Neighborhood.tscn"
+
+[node name="DreamOfDemon" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7, 0 )
+visible = false
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 
@@ -470,15 +478,29 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+visible = true
 material = SubResource( 45 )
 
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+[node name="Viewport3" parent="." instance=ExtResource( 17 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport3"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 224 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport3" instance=ExtResource( 16 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport3/ScreenEffects" index="0"]
+material = SubResource( 45 )
+
+[node name="BasicCrtEffectRect" parent="Viewport3/ScreenEffects" index="1"]
 visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 168 )
+texture = SubResource( 225 )
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -498,4 +520,5 @@ material = SubResource( 44 )
 [editable path="Viewport/level/BabaYagaBoss"]
 [editable path="Viewport/level/BabaYagaBoss/SpriteContainer/Crystals/HighpriestessCrystal"]
 [editable path="Viewport2/ScreenEffects"]
+[editable path="Viewport3/ScreenEffects"]
 [editable path="ScreenEffects"]

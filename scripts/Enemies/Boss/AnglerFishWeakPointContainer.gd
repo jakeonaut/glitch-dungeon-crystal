@@ -23,11 +23,10 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     anglerFish.weakPointAniPlayer.stop()
     anglerFish.weakPointAniPlayer.clear_queue()
     anglerFish.weakPointAniPlayer.play("ouchies")
-    anglerFish.weakPointAniPlayer.queue("swim")
+    if anglerFish.num_hits > 0:
+      anglerFish.weakPointAniPlayer.queue("swim")
     anglerFish.num_hits += 1
     if anglerFish.num_hits >= anglerFish.MAX_NUM_HITS:
-        anglerFish.boss_phase = anglerFish.BossPhase.DEFEATED
-        anglerFish.secretAniPlayer.queue("defeated")
-        global.memory["angler_seaman_boss"] = 2
+        anglerFish.defeatMe()
     .getSmacked(broom_origin, silently)
     return true

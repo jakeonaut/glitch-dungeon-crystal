@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/MalwareSquare.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/GrandmaStatue.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/DreamOfDeceit.tscn" type="PackedScene" id=22]
 [ext_resource path="res://shaders/CrackedFuzzyDither.gdshader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes/foggyforest.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites2D/bayer2tile16.png" type="Texture" id=25]
@@ -311,7 +312,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4736, -4.92598, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.929492, -2.92598, 0 )
 
 [node name="AnglerFishBoss" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 6, 0 )
@@ -335,7 +336,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 15, -1,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.05878, -6.01779, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.472629, -4.01779, 0 )
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/preBossRoomAnglerFish.tscn"
 
 [node name="MalwareSquare" parent="Viewport/level" instance=ExtResource( 20 )]
@@ -387,6 +388,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 3, -4 )
 [node name="WaterCube12" parent="Viewport/level/WaterCubes" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -4 )
 
+[node name="DreamOfDeceit" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6, 0 )
+visible = false
+
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -398,6 +403,7 @@ flip_v = true
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 12 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+visible = true
 material = SubResource( 222 )
 
 [node name="Viewport3" parent="." instance=ExtResource( 13 )]

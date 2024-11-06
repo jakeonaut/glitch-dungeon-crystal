@@ -295,8 +295,9 @@ func _process(delta):
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.DEFEATED:
         moveToSpecificPosition(delta, Vector3(6, 6, 0))
-        if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
-            pass
+        # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
+        #     pass
+        # self.rotation_degrees.y += delta*22
             
     
     if boss_phase != BossPhase.EAT_IT:
@@ -393,7 +394,7 @@ func gotcha():
                 lureFreeRange.restorePlayer(false)
                 level.player.on_ground = false
                 level.player.bigBump()
-                level.player.malwareCured()
+                # level.player.malwareCured()
                 level.player.pauseInput = false
                 level.player.on_ground = false
             else:
@@ -432,6 +433,7 @@ func lureBulletTryDieToSolids():
 func moveAbout(delta, moveTheBaby = false):
     var step = 1
     if moveTheBaby:
+        step = 3
         weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (target_pos - weakPointContainer.global_transform.origin) * (delta*step)
     
         if stepify(target_pos.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
@@ -471,6 +473,9 @@ func tryDieToOffscreenCamera():
 # var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
+        return false
+
     if boss_phase == BossPhase.LYING_IN_WAIT or boss_phase == BossPhase.EAT_IT:
         return false
 
@@ -505,11 +510,21 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     
 
 func tryToStartWeakPointDetachment():
+    if num_hits <= 0:
+        if weakPointAniPlayer.assigned_animation != "ouchies" and weakPointAniPlayer.assigned_animation != "stunIdleAttached":
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("ouchies")
+            weakPointAniPlayer.queue("stunIdleAttached")
+        return
     if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
         weakPointAniPlayer.stop()
         weakPointAniPlayer.clear_queue()
         weakPointAniPlayer.play("detachSelf")
         weakPointAniPlayer.queue("stunIdle")
+
+func makeWeakPointVulnerable():
+    weakPointContainer.vulnerable = true
 
 func detachWeakPoint():
     if weakPointContainer.get_parent() != self:
@@ -523,8 +538,10 @@ func detachWeakPoint():
 
 func tryToReturnWeakPoint(delta):
     if is_weakpoint_attached:
+        weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
+        weakPointContainer.vulnerable = false
         return
-    var step = 3
+    var step = 3 if boss_phase == BossPhase.DEFEATED else 6
     weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (weakPointTarget.global_transform.origin - weakPointContainer.global_transform.origin) * (delta*step)
     
     if stepify(weakPointTarget.global_transform.origin.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
@@ -541,3 +558,23 @@ func reattachWeakPoint():
     is_weakpoint_attached = true
     weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
     weakPointContainer.vulnerable = false
+    if boss_phase == BossPhase.DEFEATED:
+        global.memory["angler_seaman_boss"] = 2
+        global.pauseGame = false
+        global.shouldRenderAsCinematic = false
+        queue_free()
+
+func defeatMe():
+    boss_phase = BossPhase.DEFEATED
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("ouchies")
+    secretAniPlayer.queue("defeated")
+    global.pauseGame = true
+    global.shouldRenderAsCinematic = true
+
+    if lureFreeRange.get_parent() == lureContainer:
+        var temp = lureFreeRange.global_transform.origin
+        lureContainer.remove_child(lureFreeRange)
+        level.add_child(lureFreeRange)
+        lureFreeRange.global_transform.origin = temp

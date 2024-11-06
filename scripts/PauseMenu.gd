@@ -592,11 +592,20 @@ func processInventoryLogic(delta):
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
         popupText.text = "angel eggs:\n  spawn of the goddess\n  you have " + str(numEggs)
       elif inventoryOptionIndexX == 1:
-        popupText.text = "phishing key:\n  to malware swamp"
+        if global.memory["angler_seaman_boss"] == 3:
+          popupText.text = "goddess dream of deceit"
+        else:
+          popupText.text = "phishing key:\n  to malware swamp"
       elif inventoryOptionIndexX == 2:
-        popupText.text = "spore key:\n  to baba's forest"
+        if global.memory["baba_yaga_boss"] == 3:
+          popupText.text = "goddess dream of demon"
+        else:
+          popupText.text = "spore key:\n  to baba's forest"
       elif inventoryOptionIndexX == 3:
-        popupText.text = "crypt key:\n  to forgotten crypt"
+        if global.memory["dogu_matryoshka_boss"] == 3:
+          popupText.text = "goddess dream of death"
+        else:
+          popupText.text = "crypt key:\n  to forgotten crypt"
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if popupRect.visible:
       popupRect.visible = false
@@ -771,9 +780,15 @@ func processInventoryRender(_delta):
   angelEggSprite.visible = numEggs > 0
   angelEggLabel.visible = angelEggSprite.visible
   angelEggLabel.bbcode_text = str(numEggs)
-  fishKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH)
-  sporeKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT)
-  pyramidKeySprite.visible = global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID)
+  fishKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH)) or global.memory["angler_seaman_boss"] == 3
+  sporeKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT)) or global.memory["baba_yaga_boss"] == 3
+  pyramidKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID)) or global.memory["dogu_matryoshka_boss"] == 3
+  if global.memory["angler_seaman_boss"] == 3:
+    fishKeySprite.frame = 25
+  if global.memory["baba_yaga_boss"] == 3:
+    sporeKeySprite.frame = 24
+  if global.memory["dogu_matryoshka_boss"] == 3:
+    pyramidKeySprite.frame = 26
   keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 

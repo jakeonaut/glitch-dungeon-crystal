@@ -20,6 +20,7 @@ enum BossPhase {
     RUN_BACKWARDS,
     GOT_HURT,
     LAY_AN_EGG,
+    DEFEATED,
 }
 var boss_phase = BossPhase.ASLEEP
 var landingArray = []
@@ -34,7 +35,6 @@ func _ready():
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
-    crystal1.applyGlitchMaterial(5)
     
     var runTracks = runTrack.get_children()
     for landing in runTracks:
@@ -63,23 +63,20 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     am_i_hurt = true
     num_hits += 1
     if num_hits >= MAX_NUM_HITS:
-        level.player.pauseInput = true
-        global.pauseGame = true
-        global.pauseMoveInput = true
-        global.shouldRenderAsCinematic = true
-        global.memory["baba_yaga_boss"] = 2
         level.saveTheGame()
         
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        secretAniPlayer.play("gotHurt")
-        secretAniPlayer.queue("gotHurt")
-        secretAniPlayer.queue("gotHurt")
+        secretAniPlayer.play("dieMove")
         var temp_pos = crystal1.global_transform.origin
         crystalsContainer.remove_child(crystal1)
         level.add_child(crystal1)
         crystal1.global_transform.origin = temp_pos
-        crystal1.is_goddess_dream_collectible = true
+        boss_phase = BossPhase.DEFEATED
+        level.player.pauseInput = true
+        global.pauseMoveInput = true
+        global.pauseGame = true
+        global.shouldRenderAsCinematic = true
         return
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -99,6 +96,7 @@ func _process(delta):
             global.shouldRenderAsCinematic = true
             level.gameCamera.initial_size = 30
             level.gameCamera.zoomed_size = 30
+            crystal1.applyGlitchMaterial(5)
     elif boss_phase == BossPhase.WAKEUP:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
@@ -114,6 +112,11 @@ func _process(delta):
                 global.memory["baba_yaga_boss"] = 1
                 musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
         return
+    elif boss_phase == BossPhase.DEFEATED:
+        if not secretAniPlayer.is_playing():
+            global.pauseGame = false
+            global.shouldRenderAsCinematic = false
+            global.memory["baba_yaga_boss"] = 2
 
     if global.pauseGame:
         return

@@ -2,15 +2,23 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
 onready var anglerFishBoss = get_node("AnglerFishBoss")
+onready var dreamOfDeceit = get_node("DreamOfDeceit")
 
 # @override
 func setUpRoomInitializationOverride():
     if global.memory["angler_seaman_boss"] >= 2:
+        anglerFishBoss.lureFreeRange.queue_free()
         anglerFishBoss.queue_free()
     else:
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(door.global_transform.origin, 2, true, true)
         door.queue_free()
+
+func _process(_delta):
+    if global.memory["angler_seaman_boss"] >= 2:
+        dreamOfDeceit.visible = true
+        dreamOfDeceit.grav = 60
+
   
 # @override
 func playMenuMusic():

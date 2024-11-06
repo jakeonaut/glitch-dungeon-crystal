@@ -2,6 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
 onready var babaYagaBoss = get_node("BabaYagaBoss")
+onready var dreamOfDemon = get_node("DreamOfDemon")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -11,6 +12,11 @@ func setUpRoomInitializationOverride():
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(door.global_transform.origin, 2, true, true)
         door.queue_free()
+
+func _process(_delta):
+    if global.memory["baba_yaga_boss"] >= 2:
+        dreamOfDemon.visible = true
+        dreamOfDemon.grav = 60
   
 # @override
 func playMenuMusic():

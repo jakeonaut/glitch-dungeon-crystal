@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://assets/sprites/babyAnglerFish.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/anglerFishTail.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=14]
-[ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=15]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=16]
 [ext_resource path="res://scripts/Enemies/Boss/AnglerLureScript.gd" type="Script" id=17]
 [ext_resource path="res://scripts/Enemies/Boss/AnglerFishWeakPointContainer.gd" type="Script" id=18]
@@ -26,7 +24,6 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/sfx_sounds_interaction18.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=26]
-[ext_resource path="res://assets/palettes/custodian-8-1x.png" type="Texture" id=27]
 [ext_resource path="res://assets/sounds/eb_swoosh3.wav" type="AudioStream" id=28]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=29]
 
@@ -404,6 +401,73 @@ tracks/3/keys = {
 "values": [ 2.0 ]
 }
 
+[sub_resource type="Animation" id=49]
+resource_name = "stunIdleAttached"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.16, 0.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1, 0, 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/palette_cycle_speed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "makeWeakPointVulnerable"
+} ]
+}
+
 [sub_resource type="Animation" id=44]
 resource_name = "swim"
 length = 0.2
@@ -771,7 +835,7 @@ tracks/27/keys = {
 "values": [ false ]
 }
 tracks/28/type = "value"
-tracks/28/path = NodePath("LureContainer/FreeRange/FishLureSprite:automatically_change_color")
+tracks/28/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/imported = false
@@ -779,11 +843,11 @@ tracks/28/enabled = true
 tracks/28/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ false ]
 }
 tracks/29/type = "value"
-tracks/29/path = NodePath("LureContainer/FreeRange/FishLureSprite:material_override:shader_param/target_palette")
+tracks/29/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_glitch")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/imported = false
@@ -791,11 +855,11 @@ tracks/29/enabled = true
 tracks/29/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 15 ) ]
+"update": 0,
+"values": [ false ]
 }
 tracks/30/type = "value"
-tracks/30/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/30/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/y_div")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/imported = false
@@ -804,10 +868,10 @@ tracks/30/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ 2.9 ]
 }
 tracks/31/type = "value"
-tracks/31/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/31/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/time_influence")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/imported = false
@@ -816,10 +880,10 @@ tracks/31/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ 1.0 ]
 }
 tracks/32/type = "value"
-tracks/32/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/32/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/normal_offset")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/imported = false
@@ -828,10 +892,10 @@ tracks/32/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2.9 ]
+"values": [ 0.02 ]
 }
 tracks/33/type = "value"
-tracks/33/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/33/path = NodePath("Sprite3D:material_override:shader_param/albedo")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/imported = false
@@ -840,10 +904,10 @@ tracks/33/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1.0 ]
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 tracks/34/type = "value"
-tracks/34/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/34/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/imported = false
@@ -852,10 +916,10 @@ tracks/34/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.02 ]
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 tracks/35/type = "value"
-tracks/35/path = NodePath("Sprite3D:material_override:shader_param/albedo")
+tracks/35/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
 tracks/35/interp = 1
 tracks/35/loop_wrap = true
 tracks/35/imported = false
@@ -867,7 +931,7 @@ tracks/35/keys = {
 "values": [ Color( 0, 0, 0, 1 ) ]
 }
 tracks/36/type = "value"
-tracks/36/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
+tracks/36/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/imported = false
@@ -879,7 +943,7 @@ tracks/36/keys = {
 "values": [ Color( 0, 0, 0, 1 ) ]
 }
 tracks/37/type = "value"
-tracks/37/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
+tracks/37/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/imported = false
@@ -888,19 +952,7 @@ tracks/37/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
-}
-tracks/38/type = "value"
-tracks/38/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
-tracks/38/interp = 1
-tracks/38/loop_wrap = true
-tracks/38/imported = false
-tracks/38/enabled = true
-tracks/38/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ 0.03 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -1680,7 +1732,7 @@ tracks/11/keys = {
 "values": [ 2 ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("LureContainer/FreeRange/FishLureSprite:material_override:shader_param/target_palette")
+tracks/12/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -1689,10 +1741,10 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 15 ) ]
+"values": [ ExtResource( 9 ) ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/13/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -1704,24 +1756,12 @@ tracks/13/keys = {
 "values": [ ExtResource( 9 ) ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/14/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -2242,19 +2282,19 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("LureContainer/FreeRange/FishLureSprite:material_override:shader_param/enable_palette_cycle")
+tracks/3/path = NodePath("DangleContainer:translation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ Vector3( 0, 1.25057, 0 ), Vector3( 0, 1.25057, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("DangleContainer:translation")
+tracks/4/path = NodePath("LureContainer:translation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -2262,23 +2302,23 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector3( 0, 1.25057, 0 ), Vector3( 0, 1.25057, 0 ) ]
+"update": 0,
+"values": [ Vector3( -6.18538, 1.6725, 0 ), Vector3( -6.18538, 1.6725, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("LureContainer:translation")
+tracks/5/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -6.18538, 1.6725, 0 ), Vector3( -6.18538, 1.6725, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/6/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -2287,10 +2327,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ 0 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -2299,10 +2339,10 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ ExtResource( 26 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/8/path = NodePath("Sprite3D:automatically_change_color")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -2311,10 +2351,10 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 26 ) ]
+"values": [ false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Sprite3D:automatically_change_color")
+tracks/9/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -2323,10 +2363,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ ExtResource( 26 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/10/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -2338,7 +2378,7 @@ tracks/10/keys = {
 "values": [ ExtResource( 26 ) ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/11/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -2347,10 +2387,10 @@ tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 26 ) ]
+"values": [ false ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("LureContainer/FreeRange/FishLureSprite:material_override:shader_param/target_palette")
+tracks/12/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -2359,10 +2399,10 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 27 ) ]
+"values": [ false ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/13/path = NodePath("Sprite3D:material_override:shader_param/normal_offset")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -2370,11 +2410,11 @@ tracks/13/enabled = true
 tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ 0.02 ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/14/path = NodePath("Sprite3D:material_override:shader_param/time_influence")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -2382,40 +2422,16 @@ tracks/14/enabled = true
 tracks/14/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ 1.0 ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Sprite3D:material_override:shader_param/normal_offset")
+tracks/15/path = NodePath("Sprite3D:material_override:shader_param/y_div")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.02 ]
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("Sprite3D:material_override:shader_param/time_influence")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1.0 ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("Sprite3D:material_override:shader_param/y_div")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -2691,137 +2707,24 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=9]
 length = 0.001
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 5.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 14 )
-shader_param/base_palette = ExtResource( 8 )
-shader_param/target_palette = ExtResource( 15 )
-
 [sub_resource type="BoxShape" id=23]
 extents = Vector3( 1.5, 1.5, 10 )
 
 [sub_resource type="Animation" id=17]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("FishLureSprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("FishLureSprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=27]
 resource_name = "grow"
 length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("FishLureSprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("FishLureSprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("FishLureSprite:material_override:shader_param/enable_palette_cycle")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=28]
 resource_name = "shrink"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("FishLureSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 2, 2, 1 ), Vector3( 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=18]
 resource_name = "spinAttack"
 length = 0.4
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("FishLureSprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
-}
 
 [sub_resource type="BoxShape" id=19]
 extents = Vector3( 10, 1, 10 )
@@ -2944,6 +2847,7 @@ anims/idle = SubResource( 39 )
 anims/ouchies = SubResource( 40 )
 anims/retachSelf = SubResource( 45 )
 anims/stunIdle = SubResource( 41 )
+anims/stunIdleAttached = SubResource( 49 )
 anims/swim = SubResource( 44 )
 anims/turnLeftToRight = SubResource( 42 )
 anims/turnRightToLeft = SubResource( 43 )
@@ -2986,16 +2890,11 @@ stream = ExtResource( 20 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )
-light_energy = 7.0
-light_indirect_energy = 0.0
-
 [node name="Crystals" type="Spatial" parent="."]
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -2, 5.07366, -2.13 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
+autoplay = "RESET"
 anims/2secondPause = SubResource( 48 )
 anims/RESET = SubResource( 5 )
 anims/castRod = SubResource( 16 )
@@ -3038,18 +2937,6 @@ visible = true
 [node name="MeshInstance2" parent="LureContainer/FreeRange/HighpriestessCrystal/CubeContainer" index="0"]
 transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
 
-[node name="FishLureSprite" type="Sprite3D" parent="LureContainer/FreeRange" groups=["sprite"]]
-visible = false
-material_override = SubResource( 10 )
-flip_h = true
-pixel_size = 0.12
-texture = ExtResource( 14 )
-hframes = 8
-vframes = 8
-script = ExtResource( 1 )
-frame_delay = 0.1
-automatically_change_color = false
-
 [node name="HookInteractionArea" type="Area" parent="LureContainer/FreeRange"]
 script = ExtResource( 29 )
 
@@ -3061,6 +2948,11 @@ anims/RESET = SubResource( 17 )
 anims/grow = SubResource( 27 )
 anims/shrink = SubResource( 28 )
 anims/spinAttack = SubResource( 18 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="LureContainer/FreeRange"]
+transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 6, 9.828, 4.47 )
+light_energy = 7.0
+light_indirect_energy = 0.0
 
 [node name="ReelStopArea" type="Area" parent="LureContainer" groups=["malware"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.452, -5.24537e-07 )

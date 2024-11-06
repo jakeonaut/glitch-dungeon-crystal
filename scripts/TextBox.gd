@@ -63,7 +63,7 @@ onready var textContainer = get_node("..")
 onready var textboxParent = weakref(get_node("../.."))
 onready var textboxCameraTarget = weakref(get_node("../../TextBoxCameraTarget")) if has_node("../../TextBoxCameraTarget") else weakref(get_node("../.."))
 onready var portraitContainer = get_node("PortraitColor")
-onready var portraitSprite = get_node("PortraitColor/ColorRect2/ColorRect3/ColorRect4/Portrait")
+onready var portraitSprite = get_node("PortraitColor/ColorRect2/ColorRect4/Portrait")
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var am_i_in_ui_layer = false
