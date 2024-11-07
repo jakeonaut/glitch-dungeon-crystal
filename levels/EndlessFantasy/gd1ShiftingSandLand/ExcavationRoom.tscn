@@ -253,7 +253,7 @@ extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=60]
 shader = ExtResource( 26 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -282,7 +282,7 @@ shader_param/target_palette = ExtResource( 28 )
 
 [sub_resource type="ShaderMaterial" id=61]
 shader = ExtResource( 26 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -439,16 +439,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 19.1, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45126, 19, 0 )

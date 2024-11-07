@@ -279,36 +279,6 @@ func updateFallthroughSolids():
                 fallthroughSolid.remove_from_group("fallthrough")
         elif not fallthroughSolid.is_in_group("fallthrough"):
             fallthroughSolid.add_to_group("fallthrough")
-
-var last_palette = global.grey_palette
-var should_freeze = false
-var is_frozen = false
-func unsmack():
-    am_i_hurt = false
-    mySprite.material_override.set_shader_param("time_influence", 16)
-    mySprite.material_override.set_shader_param("y_div", 2.3)
-    mySprite.material_override.set_shader_param("normal_offset", .02)
-    mySprite.material_override.set_shader_param("shake_power", 0.03)
-    mySprite.material_override.set_shader_param("shake_block_size", 30.5)
-    mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
-    if should_freeze:
-        mySprite.material_override.set_shader_param("shake_power", 0.00)
-        mySprite.material_override.set_shader_param("target_palette", global.kirokaze_palette)
-        mySprite.material_override.set_shader_param("enable_glitch", false)
-        mySprite.translation.z = 0
-        mySprite.should_animate = false
-        mySprite.restart()
-        # grav = 20
-        on_ground = false
-        is_frozen = true
-    else:
-        mySprite.material_override.set_shader_param("shake_power", 0.03)
-        mySprite.material_override.set_shader_param("target_palette", last_palette)
-
-    if myOtherSprite:
-        myOtherSprite.material_override.set_shader_param("time_influence", 3)
-        myOtherSprite.material_override.set_shader_param("y_div", 2.3)
-        myOtherSprite.material_override.set_shader_param("normal_offset", .02)
     
 var should_reset_slime_timer_on_flip = true
 func doHorizontalWalkingBehavior():
@@ -372,12 +342,14 @@ func tryDieToOffscreenCamera():
         if behavior_walking:
             DEATH_MARGIN = 0
             if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
-                global_transform.origin.x -= 0.5
-                flipWalkingDirection()
+                global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
+                if behavior_walk_flip:
+                    flipWalkingDirection()
                 return
             if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
-                global_transform.origin.x += 0.5
-                flipWalkingDirection()
+                global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
+                if behavior_walk_flip:
+                    flipWalkingDirection()
                 return
         DEATH_MARGIN = 5
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
@@ -588,6 +560,7 @@ export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
+var should_modify_glitch_shader_vars = true
 func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
     if is_smacked or am_i_dying:
         return false
@@ -596,9 +569,10 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
     mySprite.material_override.set_shader_param("time_influence", time_influence)
     mySprite.material_override.set_shader_param("y_div", y_div)
     mySprite.material_override.set_shader_param("normal_offset", normal_offset)
-    mySprite.material_override.set_shader_param("shake_power", 0.143)
-    mySprite.material_override.set_shader_param("shake_block_size", 60)
-    mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
+    if should_modify_glitch_shader_vars:
+        mySprite.material_override.set_shader_param("shake_power", 0.143)
+        mySprite.material_override.set_shader_param("shake_block_size", 60)
+        mySprite.material_override.set_shader_param("shake_color_rate", 0.219)
     last_palette = mySprite.material_override.get_shader_param("target_palette")
     mySprite.material_override.set_shader_param("target_palette", smacked_palette)
 
@@ -619,6 +593,39 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
         queue_free()
         return false
     return true
+
+var last_palette = global.grey_palette
+var should_freeze = false
+var is_frozen = false
+func unsmack():
+    am_i_hurt = false
+    mySprite.material_override.set_shader_param("time_influence", 16)
+    mySprite.material_override.set_shader_param("y_div", 2.3)
+    mySprite.material_override.set_shader_param("normal_offset", .02)
+    if should_modify_glitch_shader_vars:
+        mySprite.material_override.set_shader_param("shake_power", 0.03)
+        mySprite.material_override.set_shader_param("shake_block_size", 30.5)
+        mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
+    if should_freeze:
+        if should_modify_glitch_shader_vars:
+            mySprite.material_override.set_shader_param("shake_power", 0.00)
+            mySprite.material_override.set_shader_param("target_palette", global.kirokaze_palette)
+            mySprite.material_override.set_shader_param("enable_glitch", false)
+        mySprite.translation.z = 0
+        mySprite.should_animate = false
+        mySprite.restart()
+        # grav = 20
+        on_ground = false
+        is_frozen = true
+    else:
+        if should_modify_glitch_shader_vars:
+            mySprite.material_override.set_shader_param("shake_power", 0.03)
+        mySprite.material_override.set_shader_param("target_palette", last_palette)
+
+    if myOtherSprite:
+        myOtherSprite.material_override.set_shader_param("time_influence", 3)
+        myOtherSprite.material_override.set_shader_param("y_div", 2.3)
+        myOtherSprite.material_override.set_shader_param("normal_offset", .02)
 
 var parentSpawner = null
 func setAsParent(spawner):

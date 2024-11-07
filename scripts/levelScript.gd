@@ -717,7 +717,7 @@ func spawnPetFollower(starting_position):
 
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")
-func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, override_palette = global.grey_palette, horizontal = 0):
+func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, override_palette = global.grey_palette, horizontal = 0, vertical = 1):
   var smokeClouds = []
   for _i in range(num_clouds):
     var newSmokeCloud = smokeCloudRes.instance()
@@ -727,7 +727,7 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
     if horizontal != 0:
       newSmokeCloud.target_x = newSmokeCloud.global_transform.origin.x + rand_range(horizontal, 3*horizontal)
     else:
-      newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(1, 3)
+      newSmokeCloud.target_y = newSmokeCloud.global_transform.origin.y + rand_range(vertical, 3*vertical)
     
     if play_sound:
       newSmokeCloud.tryPlaySound()

@@ -1,6 +1,8 @@
 extends "GlitchEnemy.gd"
 
 onready var screamSound = get_node("Sounds/ScreamSound")
+onready var thudSound = get_node("Sounds/ThudSound")
+onready var digSound = get_node("Sounds/DigSound")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var windGust = get_node("WindGust")
 enum ZombieState {
@@ -12,7 +14,8 @@ enum ZombieState {
   DYING,
   REVIVING,
   CONSUMING,
-  GRANDMA_FORM
+  GRANDMA_FORM,
+  BONK,
 }
 var zombie_state = ZombieState.IDLE
 var ZOMBIE_MAX_HP = 2
@@ -21,7 +24,7 @@ var slow_walk_speed = 4
 var death_timer = 0
 var death_time_limit = 40
 var spawn_point = 0
-var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
+# var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +35,7 @@ func _ready():
     slime_idle_time_limit = 30
     can_spawn_mini_crystal = false
     hp_enemy = ZOMBIE_MAX_HP
-    kill_invis = true
+    kill_invis = false
     kill_immediately = true
     yield(get_tree().create_timer(0.1), "timeout")
     spawn_point = global_transform.origin
@@ -47,9 +50,11 @@ func _process(delta):
   #   player.getCurseInfected()
 
   if zombie_state == ZombieState.IDLE:
+    windGust.is_active = false
     grav = 60
     zombie_state = ZombieState.SLIME_WALK
   elif zombie_state == ZombieState.SLIME_WALK:
+    windGust.is_active = false
     grav = 60
     walk_speed = slow_walk_speed
     behavior_jumping = false
@@ -75,6 +80,7 @@ func _process(delta):
       elif slime_state == SlimeState.IDLE:
         pass
   elif zombie_state == ZombieState.LURCH_START:
+    windGust.is_active = true
     behavior_intermittent_walking = false
     behavior_walking = false
     slime_state = SlimeState.NULL
@@ -91,26 +97,37 @@ func _process(delta):
       walk_direction.x = -1
       mySprite.flip_h = true
   elif zombie_state == ZombieState.LURCH_ATTACK:
+    windGust.is_active = false
     behavior_walking = true
     behavior_walk_flip = false
     walk_speed = fast_walk_speed
+    var buffer = 0.5
     if secretAniPlayer.assigned_animation != "lurchAttack":
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("lurchAttack")
-      behavior_jumping = true
+      # behavior_jumping = true
       # see stopJumping, called by lurchAttack
       screamSound.pitch_scale = rand_range(0.4, 0.6)
       screamSound.play()
     elif secretAniPlayer.assigned_animation == "lurchAttack" and not secretAniPlayer.is_playing():
       zombie_state = ZombieState.LURCH_END
+      return
+    if walk_direction.x > 0:
+      digTiles(getTilesRightOf(getLevelTiles(), buffer))
+    elif walk_direction.x < 0:
+      digTiles(getTilesLeftOf(getLevelTiles(), buffer))
   elif zombie_state == ZombieState.LURCH_END:
+    windGust.is_active = false
     if secretAniPlayer.assigned_animation != "lurchEnd":
       behavior_walking = false
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("lurchEnd")
     elif secretAniPlayer.assigned_animation == "lurchEnd" and not secretAniPlayer.is_playing():
+      zombie_state = ZombieState.IDLE
+  elif zombie_state == ZombieState.BONK:
+    if not secretAniPlayer.is_playing():
       zombie_state = ZombieState.IDLE
   elif zombie_state == ZombieState.DYING:
     # see ouchies()
@@ -128,9 +145,9 @@ func _process(delta):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("revive")
-      if my_carcass != null and my_carcass.get_ref() != null:
-        my_carcass.get_ref().queue_free()
-        my_carcass = null
+      # if my_carcass != null and my_carcass.get_ref() != null:
+      #   my_carcass.get_ref().queue_free()
+      #   my_carcass = null
       windGust.is_active = true
       hp_enemy = ZOMBIE_MAX_HP
       # global_transform.origin = spawn_point
@@ -220,7 +237,7 @@ func ouchies(broom_origin):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("die")
-      spawnACarcass()
+      # spawnACarcass()
       death_timer = 0
 
 func isActive(debug=false):
@@ -228,23 +245,23 @@ func isActive(debug=false):
     return false
   return .isActive(debug)
 
-func doSomethingElseToPlayer(player):
-  if level.player.nesting_doll_state == global.NestingDoll.BABY:
-    return
-  # player.nullify()
-  # player.tryDieToEnemy(0, true, kill_invis, kill_immediately)
+# func doSomethingElseToPlayer(player):
+#   if level.player.nesting_doll_state == global.NestingDoll.BABY:
+#     return
+#   # player.nullify()
+#   # player.tryDieToEnemy(0, true, kill_invis, kill_immediately)
 
-  # this is good and normal actually
-  if player.nesting_doll_state == global.NestingDoll.GRANDMA and player.visible:
-    player.visible = false
-    player.pauseInput = true
-    player.pauseSelf = true
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
-    secretAniPlayer.play("consumeMemory")
-    dieSound.play()
-    zombie_state = ZombieState.CONSUMING
-    getSmacked()
+#   # this is good and normal actually
+#   if player.nesting_doll_state == global.NestingDoll.GRANDMA and player.visible:
+#     player.visible = false
+#     player.pauseInput = true
+#     player.pauseSelf = true
+#     secretAniPlayer.stop()
+#     secretAniPlayer.clear_queue()
+#     secretAniPlayer.play("consumeMemory")
+#     dieSound.play()
+#     zombie_state = ZombieState.CONSUMING
+#     getSmacked()
 
 func popOutPlayer():
   level.player.global_transform.origin = self.global_transform.origin
@@ -262,18 +279,48 @@ func addJumpSmokeCloud(flip_flip_h = false):
     return
   .addJumpSmokeCloud(flip_flip_h)
 
-var my_carcass = null
-func spawnACarcass():
-  if my_carcass != null and my_carcass.get_ref() != null:
-    my_carcass.get_ref().queue_free()
-    my_carcass = null
+# var my_carcass = null
+# func spawnACarcass():
+#   if my_carcass != null and my_carcass.get_ref() != null:
+#     my_carcass.get_ref().queue_free()
+#     my_carcass = null
 
-  var carcass = cherryCarcassRes.instance()
-  level.add_child(carcass)
-  carcass.broomSprite.visible = false
-  carcass.mushroomSprite.visible = false
-  carcass.global_transform.origin = self.global_transform.origin
-  carcass.mySprite.flip_h = mySprite.flip_h
-  carcass.mySprite.material_override.set_shader_param(
-    "target_palette", mySprite.material_override.get_shader_param("target_palette"))
-  my_carcass = weakref(carcass)
+#   var carcass = cherryCarcassRes.instance()
+#   level.add_child(carcass)
+#   carcass.broomSprite.visible = false
+#   carcass.mushroomSprite.visible = false
+#   carcass.global_transform.origin = self.global_transform.origin
+#   carcass.mySprite.flip_h = mySprite.flip_h
+#   carcass.mySprite.material_override.set_shader_param(
+#     "target_palette", mySprite.material_override.get_shader_param("target_palette"))
+#   my_carcass = weakref(carcass)
+
+export var permanently_alter_tiles = false
+func digTiles(solidTiles):
+  var tiles_dug = 0
+  for i in solidTiles.size():
+    var coords = solidTiles[i]
+    if coords == null: continue
+    var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+    if getLevelTiles().isTileFragileSolid(tile_type):
+      thudSound.play()
+      if screamSound.is_playing():
+        screamSound.stop()
+      secretAniPlayer.stop()
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.play("bonk")
+      zombie_state = ZombieState.BONK
+      if walk_direction.x > 0:
+        global_transform.origin.x -= 0.5
+      elif walk_direction.x < 0:
+        global_transform.origin.x += 0.5
+      behavior_walking = false
+      return false
+    levelTiles.removeTile(Vector3(coords.x, coords.y, coords.z), permanently_alter_tiles)
+    tiles_dug += 1
+
+  if tiles_dug > 0:
+    level.summonSmokeClouds(global_transform.origin, 2)
+    digSound.play()
+              
+  return tiles_dug > 0

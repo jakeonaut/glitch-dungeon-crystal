@@ -128,7 +128,7 @@ func alignMySprite():
 func tryPlayFootstepSound():
   if transformation == TransformationState.MOLE_DIGGING:
     return
-  if transformation == TransformationState.UNDERGROUND_RETURNING:
+  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:
     return
   if transformation == TransformationState.FISHY:
     return
@@ -890,11 +890,11 @@ func processGlitchHurtRecovery(delta):
       should_collide_horizontally = true
       should_collide_floor = true 
       should_collide_ceil = true
-      self.feather_jump_timer = remembered_feather_jump_timer
-      self.lv.y = remembered_y_vel
-      self.linear_velocity.y = remembered_y_vel
-      self.vv = remembered_y_vel
-      self.on_ground = remembered_on_ground
+      self.feather_jump_timer = remembered_feather_jump_timer if glitch_form != global.GlitchForm.FLOOR else 0
+      self.lv.y = remembered_y_vel if glitch_form != global.GlitchForm.FLOOR else 0
+      self.linear_velocity.y = remembered_y_vel if glitch_form != global.GlitchForm.FLOOR else 0
+      self.vv = remembered_y_vel if glitch_form != global.GlitchForm.FLOOR else 0
+      self.on_ground = remembered_on_ground if glitch_form != global.GlitchForm.FLOOR else true
       if grav < 0:
         self.global_transform.origin.y -= 1
       else:
@@ -1159,7 +1159,7 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 
 # var temp_cleansed_fish_glitch = null
 func getFishyInfected():
-  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING or nesting_doll_state == global.NestingDoll.BABY:
+  if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND or nesting_doll_state == global.NestingDoll.BABY:
     return
   tryClearFallthroughCollisionSolid()
   # if summonedBroom:
@@ -1416,11 +1416,51 @@ func processMoleLogic(delta):
     fastStepSound.volume_db = -8
     if not fastStepSound.is_playing():
       fastStepSound.play()
-    if checkSolidTilesOnMe():
+    var solidTilesAbove = getTilesAbove(getLevelTiles())
+    var areAnyTilesAboveMeGlitched = false
+    for i in range(solidTilesAbove.size()):
+      var coords = solidTilesAbove[i]
+      if coords == null: continue
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileFragileSolid(tile_type):
+        areAnyTilesAboveMeGlitched = true
+        break
+    if areAnyTilesAboveMeGlitched:
+      bumpSound.play()
+      fastStepSound.stop()
+      getSmacked()
+      smack_timer = -8
+      transformation = TransformationState.UNDERGROUND
+      global_transform.origin.y -= 1
+    elif checkSolidTilesOnMe():
       global_transform.origin.y += (2 * delta*11)
     else:
       should_magic_jump = true
       self.vv = 5
+      self.target_last_grounded_y = self.global_transform.origin.y
+      self.global_transform.origin.y += 0.5
+      self.on_ground = false
+      self.truly_on_ground = false
+      self.was_on_ground = false
+      self.lv.y = self.vv
+      self.linear_velocity.y = self.vv
+      self.should_do_fallthrough_area_collision = false
+      getMoleCured()
+  elif transformation == TransformationState.UNDERGROUND:
+    override_camera_y = global_transform.origin.y
+    dig_below_timer = 0
+    glitchTilesAroundMe(-2.5)
+    if is_smacked:
+      return
+    fastStepSound.pitch_scale = 1.0
+    fastStepSound.volume_db = -16
+    if not fastStepSound.is_playing():
+      fastStepSound.play()
+    if checkSolidTilesOnMe():
+      global_transform.origin.y -= (2 * delta*11)
+    else:
+      should_magic_jump = true
+      self.vv = -2
       self.target_last_grounded_y = self.global_transform.origin.y
       self.global_transform.origin.y += 0.5
       self.on_ground = false
@@ -1473,10 +1513,27 @@ func collideWithCeiling(local_lv):
       on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
-  if local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
-     nesting_doll_state == global.NestingDoll.BABY or \
-     (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or \
-     (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())):
+  var solidTilesAbove = getTilesAbove(getLevelTiles())
+  var areAnyTilesAboveMeGlitched = false
+  for i in range(solidTilesAbove.size()):
+    var coords = solidTilesAbove[i]
+    if coords == null: continue
+    var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+    if getLevelTiles().isTileFragileSolid(tile_type):
+      areAnyTilesAboveMeGlitched = true
+      if pressingJump():
+        if not noBroomSound.is_playing():
+          noBroomSound.play()
+        glitchTilesAroundMe()
+        glitchTickle()
+      break
+  if (
+    local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
+    nesting_doll_state == global.NestingDoll.BABY or \
+    (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or \
+    (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or \
+    areAnyTilesAboveMeGlitched
+  ):
     local_lv.y = 0
     getMoleCured()
     return local_lv
@@ -1501,6 +1558,7 @@ func collideWithCeiling(local_lv):
 
 func getMoleCured():
   if transformation != TransformationState.UNDERGROUND_RETURNING and \
+     transformation != TransformationState.UNDERGROUND and \
      transformation != TransformationState.MOLE_DIGGING:
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING:
@@ -1517,6 +1575,17 @@ func getMoleCured():
     jump_squat_jump_input_timer = 0
     feather_jump_timer = 0
     jump_press_timer = jump_press_time_limit
+  elif transformation == TransformationState.UNDERGROUND:
+    override_camera_y = null
+    global_transform.origin.y += 2
+    summonSmokeClouds(3, true, true, 0)
+    digSound2.play()
+    global_transform.origin.y -= 2
+    mySprite.visible = true
+    pauseAnimation = false
+    can_update_last_grounded_pos = true
+    physics_vars.should_apply_gravity = true
+    on_ground = false
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true
@@ -1715,7 +1784,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 func actuallyProcessDeath(should_glitch):
   if transformation == TransformationState.FISHY:
     getFishyCured()
-  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING:
+  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.MOLE_DIGGING:
     getMoleCured()
   if transformation == TransformationState.CHICKEN:
     getChickenCured()
@@ -1883,7 +1952,7 @@ func processBroomLogic(delta):
     else:
       broomStop()
 
-  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.CHICKEN:
+  if (global.pauseMoveInput and global.activeInteractor == null) or physics_state == PhysicsState.BEING_TOSSED or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.CHICKEN:
     if Input.is_action_just_pressed("sub_action_button"):
       noBroomSound.play()
     return
@@ -2167,7 +2236,7 @@ func processBagRenderLogic(_delta):
     
   # if summonedBroom != null:
   #   adjustSummonedBroomSpritePosition()
-  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND_RETURNING:
+  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND_RETURNING and transformation != TransformationState.UNDERGROUND:
     enchantedBagSpriteVisible.visible = true
   else:
     enchantedBagSpriteVisible.visible = false

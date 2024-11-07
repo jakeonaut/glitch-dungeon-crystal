@@ -15,7 +15,7 @@ func _process(delta):
   cloud_timer += (delta*22)
   if cloud_timer >= cloud_time_limit:
     cloud_timer = 0
-    level.summonSmokeClouds(global_transform.origin, 1)
+    level.summonSmokeClouds(global_transform.origin, 1, false, false, global.grey_palette, getDirection().x, getDirection().y)
     
 
 func getDirection():
@@ -36,17 +36,30 @@ func passiveActivate(delta, is_player):
   if not is_player:
     return
     
-  var mult = 6
-  if level.player.vv > 4:
-    mult = 2
-  level.player.vv += (mult*delta*22)
-  if level.player.on_ground:
-    level.player.vv = 2
-    level.player.global_transform.origin.y += 0.5
-  level.player.on_ground = false
-  level.player.truly_on_ground = false
-  level.player.was_on_ground = false
-  level.player.lv.y = level.player.vv
-  level.player.linear_velocity.y = level.player.vv
-  level.player.target_last_grounded_y = level.player.global_transform.origin.y
-  level.player.should_do_fallthrough_area_collision = false
+  if getDirection().y != 0:
+    var v_sign = 1
+    var mult = 6
+    if level.player.vv > 4:
+      mult = 2
+    if getDirection().y == -1:
+      v_sign = -1
+    level.player.vv += (v_sign*mult*delta*22)
+    if level.player.on_ground:
+      level.player.vv = v_sign*2
+      level.player.global_transform.origin.y += v_sign*0.5
+    level.player.on_ground = false
+    level.player.truly_on_ground = false
+    level.player.was_on_ground = false
+    level.player.lv.y = level.player.vv
+    level.player.linear_velocity.y = level.player.vv
+    level.player.target_last_grounded_y = level.player.global_transform.origin.y
+    level.player.should_do_fallthrough_area_collision = false
+  if getDirection().x != 0:
+    var x_sign = 1
+    var mult = 6
+    if level.player.linear_velocity.x > 4:
+      mult = 2
+    if getDirection().x == -1:
+      x_sign = -1
+    level.player.linear_velocity.x += (x_sign*mult*delta*22)
+    level.player.lv.x = level.player.linear_velocity.x

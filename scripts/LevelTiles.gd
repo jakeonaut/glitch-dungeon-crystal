@@ -48,18 +48,19 @@ func setTileNameNum(newName, num, cell_index, tile_orientation, glitch_type = gl
   if num != 0:
     newName = newName + str(num+1) # 0 index, so add one
 
-  # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
-  # and we named them "_green", etc. but it's more like "_forest" etc. 
-  if glitch_type == global.GlitchForm.FEATHER:
-    newName = newName + "_green"
-  elif glitch_type == global.GlitchForm.FLOOR:
-    newName = newName + "_red"
-  elif glitch_type == global.GlitchForm.LADDER:
-    newName = newName + "_yellow"
-  elif glitch_type == global.GlitchForm.INVISIBLE:
-    newName = newName + "_black"
-  elif glitch_type == global.GlitchForm.WALK_THROUGH_WALLS: 
-    newName = newName + "_white"
+  if not "FragileBrickSolid" in newName:
+    # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
+    # and we named them "_green", etc. but it's more like "_forest" etc. 
+    if glitch_type == global.GlitchForm.FEATHER:
+      newName = newName + "_green"
+    elif glitch_type == global.GlitchForm.FLOOR:
+      newName = newName + "_red"
+    elif glitch_type == global.GlitchForm.LADDER:
+      newName = newName + "_yellow"
+    elif glitch_type == global.GlitchForm.INVISIBLE:
+      newName = newName + "_black"
+    elif glitch_type == global.GlitchForm.WALK_THROUGH_WALLS: 
+      newName = newName + "_white"
 
   var new_tile_type = mesh_library.find_item_by_name(newName)
   if debug:
@@ -141,7 +142,7 @@ func buildSingleRandomTile(cell_index, glitch_type):
     else:
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "FragileBrickSolid":
-    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, global.GlitchForm.WALK_THROUGH_WALLS)
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0)
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
     var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
@@ -585,7 +586,7 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
     print("tile_name: " + str(tile_name))
   var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
   if "FragileBrickSolid" in tile_name:
-    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0, global.GlitchForm.WALK_THROUGH_WALLS, debug)
+    setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0)
   elif "BrickSolidRoof" in tile_name:
     setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolidCeil" in tile_name:
@@ -676,6 +677,8 @@ func changeColorPalette(palette, _palette_alt = null):
   for i in range(len(item_list)):
     var item_id = item_list[i]
     if item_id == INVALID_CELL_ITEM:
+      continue
+    if isTileFragileSolid(item_id):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)

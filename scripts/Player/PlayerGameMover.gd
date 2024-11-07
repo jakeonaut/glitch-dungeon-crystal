@@ -6,6 +6,7 @@ enum TransformationState {
   MUSHROOM,
   MOLE_DIGGING,
   UNDERGROUND_RETURNING,
+  UNDERGROUND,
   BUBBLE,
   CHICKEN,
   CURSED,
@@ -530,7 +531,7 @@ var summonedBroom = null
 func getWalkSpeed(delta):
   if transformation == TransformationState.CHICKEN:
     return 6
-  if transformation == TransformationState.UNDERGROUND_RETURNING:
+  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:
     return 0
   # var is_really_pressing_horizontal_input = (pressingRun() and on_ground) or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
   if aniPlayer.assigned_animation == "sweepFloor":
@@ -600,6 +601,7 @@ func getABroom(unpauseAnimation = true):
   #transformation == TransformationState.FISHY or \
   if glitch_form == global.GlitchForm.INVISIBLE or \
      transformation == TransformationState.UNDERGROUND_RETURNING or \
+     transformation == TransformationState.UNDERGROUND or \
      transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
@@ -755,7 +757,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
     return
   if transformation == TransformationState.MOLE_DIGGING:
     return
-  if transformation == TransformationState.UNDERGROUND_RETURNING:
+  if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:
     return
   .addJumpSmokeCloud(flip_flip_h)
 

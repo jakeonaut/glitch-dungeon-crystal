@@ -1,4 +1,4 @@
-[gd_scene load_steps=14670 format=2]
+[gd_scene load_steps=14672 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=19]
 [ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=20]
 [ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=21]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=22]
 [ext_resource path="res://assets/palettes/spikes_palette.png" type="Texture" id=23]
 [ext_resource path="res://addons/sprite_mesh/sprite_mesh.gd" type="Script" id=194]
 [ext_resource path="res://sceneObjects/tiles/tile_material.tres" type="Material" id=195]
@@ -173652,8 +173653,13 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 12562 ), SubResource( 12563 ), SubResource( 12564 ), SubResource( 12565 ), SubResource( 12566 ), SubResource( 12567 ), SubResource( 12568 ), SubResource( 12569 ), SubResource( 12570 ), SubResource( 12571 ), SubResource( 12572 ), SubResource( 12573 ), SubResource( 12574 ), SubResource( 12575 ), SubResource( 12576 ), SubResource( 12577 ), SubResource( 12578 ), SubResource( 12579 ), SubResource( 12580 ), SubResource( 12581 ), SubResource( 12582 ), SubResource( 12561 ), SubResource( 12583 ), SubResource( 12584 ), SubResource( 12585 ), SubResource( 12586 ), SubResource( 12587 ), SubResource( 12588 ), SubResource( 12589 ), SubResource( 12590 ), SubResource( 12591 ), SubResource( 12592 ), SubResource( 12593 ), SubResource( 12594 ), SubResource( 12595 ), SubResource( 12596 ), SubResource( 12597 ), SubResource( 12598 ), SubResource( 12599 ), SubResource( 12600 ), SubResource( 12601 ), SubResource( 12602 ), SubResource( 12603 ), SubResource( 12604 ), SubResource( 12605 ), SubResource( 12606 ), SubResource( 12607 ), SubResource( 12608 ), SubResource( 12609 ), SubResource( 12610 ), SubResource( 12611 ), SubResource( 12612 ), SubResource( 12613 ), SubResource( 12614 ), SubResource( 12615 ), SubResource( 12616 ), SubResource( 12617 ), SubResource( 12618 ), SubResource( 12619 ), SubResource( 12620 ), SubResource( 12621 ), SubResource( 12622 ), SubResource( 12623 ), SubResource( 12624 ), SubResource( 12625 ), SubResource( 12626 ), SubResource( 12627 ), SubResource( 12628 ), SubResource( 12629 ), SubResource( 12630 ), SubResource( 12631 ), SubResource( 12632 ), SubResource( 12633 ), SubResource( 12634 ), SubResource( 12635 ), SubResource( 12636 ), SubResource( 12637 ), SubResource( 12638 ), SubResource( 12639 ), SubResource( 12640 ), SubResource( 12641 ), SubResource( 12642 ), SubResource( 12643 ), SubResource( 12644 ), SubResource( 12645 ), SubResource( 12646 ), SubResource( 12647 ), SubResource( 12648 ), SubResource( 12649 ), SubResource( 12650 ), SubResource( 12651 ), SubResource( 12652 ), SubResource( 12653 ), SubResource( 12654 ), SubResource( 12655 ), SubResource( 12656 ), SubResource( 12657 ), SubResource( 12658 ), SubResource( 12659 ), SubResource( 12660 ), SubResource( 12661 ), SubResource( 12662 ), SubResource( 12663 ), SubResource( 12664 ), SubResource( 12665 ), SubResource( 12666 ), SubResource( 12667 ), SubResource( 12668 ), SubResource( 12669 ), SubResource( 12670 ), SubResource( 12671 ), SubResource( 12672 ), SubResource( 12673 ), SubResource( 12674 ), SubResource( 12675 ), SubResource( 12676 ), SubResource( 12677 ), SubResource( 12678 ), SubResource( 12679 ), SubResource( 12680 ), SubResource( 12681 ), SubResource( 12682 ), SubResource( 12683 ), SubResource( 12684 ), SubResource( 12685 ), SubResource( 12686 ), SubResource( 12687 ), SubResource( 12688 ), SubResource( 12689 ), SubResource( 12690 ), SubResource( 12691 ), SubResource( 12692 ), SubResource( 12693 ), SubResource( 12694 ), SubResource( 12695 ), SubResource( 12696 ), SubResource( 12697 ), SubResource( 12698 ), SubResource( 12699 ), SubResource( 12700 ), SubResource( 12701 ), SubResource( 12702 ), SubResource( 12703 ), SubResource( 12704 ), SubResource( 12705 ), SubResource( 12706 ), SubResource( 12707 ), SubResource( 12708 ), SubResource( 12709 ), SubResource( 12710 ), SubResource( 12711 ), SubResource( 12712 ), SubResource( 12713 ), SubResource( 12714 ), SubResource( 12715 ), SubResource( 12716 ), SubResource( 12717 ), SubResource( 12718 ), SubResource( 12719 ), SubResource( 12720 ), SubResource( 12721 ), SubResource( 12722 ), SubResource( 12723 ), SubResource( 12724 ), SubResource( 12725 ), SubResource( 12726 ), SubResource( 12727 ), SubResource( 12728 ), SubResource( 12729 ), SubResource( 12730 ), SubResource( 12731 ), SubResource( 12732 ), SubResource( 12733 ), SubResource( 12734 ), SubResource( 12735 ), SubResource( 12736 ), SubResource( 12737 ), SubResource( 12738 ), SubResource( 12739 ), SubResource( 12740 ), SubResource( 12741 ), SubResource( 12742 ), SubResource( 12743 ), SubResource( 12744 ), SubResource( 12745 ), SubResource( 12746 ), SubResource( 12747 ), SubResource( 12748 ), SubResource( 12749 ), SubResource( 12750 ), SubResource( 12751 ), SubResource( 12752 ), SubResource( 12753 ), SubResource( 12754 ), SubResource( 12755 ), SubResource( 12756 ), SubResource( 12757 ), SubResource( 12758 ), SubResource( 12759 ), SubResource( 12760 ), SubResource( 12761 ), SubResource( 12762 ), SubResource( 12763 ), SubResource( 12764 ), SubResource( 12765 ), SubResource( 12766 ), SubResource( 12767 ), SubResource( 12768 ), SubResource( 12769 ), SubResource( 12770 ), SubResource( 12771 ), SubResource( 12772 ), SubResource( 12773 ), SubResource( 12774 ), SubResource( 12775 ), SubResource( 12776 ), SubResource( 12777 ), SubResource( 12778 ), SubResource( 12779 ), SubResource( 12780 ), SubResource( 12781 ), SubResource( 12782 ), SubResource( 12783 ), SubResource( 12784 ), SubResource( 12785 ), SubResource( 12786 ), SubResource( 12787 ), SubResource( 12788 ), SubResource( 12789 ), SubResource( 12790 ), SubResource( 12791 ), SubResource( 12792 ), SubResource( 12793 ), SubResource( 12794 ), SubResource( 12795 ), SubResource( 12796 ), SubResource( 12797 ), SubResource( 12798 ), SubResource( 12799 ), SubResource( 12800 ), SubResource( 12801 ), SubResource( 12802 ), SubResource( 12803 ), SubResource( 12804 ), SubResource( 12805 ), SubResource( 12806 ), SubResource( 12807 ), SubResource( 12808 ), SubResource( 12809 ), SubResource( 12810 ), SubResource( 12811 ), SubResource( 12812 ), SubResource( 12813 ), SubResource( 12814 ), SubResource( 12815 ), SubResource( 12816 ) ]
 material = SubResource( 13241 )
 
+[sub_resource type="ShaderMaterial" id=17720]
+shader = ExtResource( 2 )
+shader_param/palettesize = 16
+shader_param/base_palette = ExtResource( 22 )
+
 [sub_resource type="SpatialMaterial" id=408]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173666,7 +173672,7 @@ material = SubResource( 408 )
 extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=665]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173676,7 +173682,7 @@ meshes = [ SubResource( 2322 ), SubResource( 2323 ), SubResource( 2324 ), SubRes
 material = SubResource( 665 )
 
 [sub_resource type="SpatialMaterial" id=667]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173686,7 +173692,7 @@ meshes = [ SubResource( 2578 ), SubResource( 2579 ), SubResource( 2580 ), SubRes
 material = SubResource( 667 )
 
 [sub_resource type="SpatialMaterial" id=669]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173696,7 +173702,7 @@ meshes = [ SubResource( 2834 ), SubResource( 2835 ), SubResource( 2836 ), SubRes
 material = SubResource( 669 )
 
 [sub_resource type="SpatialMaterial" id=671]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173706,7 +173712,7 @@ meshes = [ SubResource( 3090 ), SubResource( 3091 ), SubResource( 3092 ), SubRes
 material = SubResource( 671 )
 
 [sub_resource type="SpatialMaterial" id=673]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173716,7 +173722,7 @@ meshes = [ SubResource( 3346 ), SubResource( 3347 ), SubResource( 3348 ), SubRes
 material = SubResource( 673 )
 
 [sub_resource type="SpatialMaterial" id=675]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -173726,7 +173732,7 @@ meshes = [ SubResource( 3602 ), SubResource( 3603 ), SubResource( 3604 ), SubRes
 material = SubResource( 675 )
 
 [sub_resource type="SpatialMaterial" id=677]
-next_pass = ExtResource( 195 )
+next_pass = SubResource( 17720 )
 flags_unshaded = true
 albedo_texture = ExtResource( 196 )
 
@@ -177486,238 +177492,6 @@ generated_sprite_mesh = SubResource( 678 )
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="FragileBrickSolid" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
-mesh = SubResource( 2288 )
-material/0 = SubResource( 13073 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 223
-animation_frame_coords = Vector2( 15, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 664 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid2" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -1 )
-mesh = SubResource( 2321 )
-material/0 = SubResource( 13074 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 49
-animation_frame_coords = Vector2( 1, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 666 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid3" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -2 )
-mesh = SubResource( 2577 )
-material/0 = SubResource( 13075 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 50
-animation_frame_coords = Vector2( 2, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 668 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid4" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -3 )
-mesh = SubResource( 2833 )
-material/0 = SubResource( 13076 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 51
-animation_frame_coords = Vector2( 3, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 670 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid5" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -4 )
-mesh = SubResource( 3089 )
-material/0 = SubResource( 13077 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 52
-animation_frame_coords = Vector2( 4, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 672 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid6" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -5 )
-mesh = SubResource( 3345 )
-material/0 = SubResource( 13078 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 53
-animation_frame_coords = Vector2( 5, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 674 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid7" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -6 )
-mesh = SubResource( 3601 )
-material/0 = SubResource( 13079 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 54
-animation_frame_coords = Vector2( 6, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 676 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="FragileBrickSolid8" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -7 )
-mesh = SubResource( 3857 )
-material/0 = SubResource( 13080 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 55
-animation_frame_coords = Vector2( 7, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 678 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, 0 )
 mesh = SubResource( 4113 )
@@ -179497,238 +179271,6 @@ generated_sprite_mesh = SubResource( 13123 )
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_green/StaticBody"]
 shape = SubResource( 13116 )
 
-[node name="FragileBrickSolid_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, 0 )
-mesh = SubResource( 15912 )
-material/0 = SubResource( 13329 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 56
-animation_frame_coords = Vector2( 8, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13115 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid2_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -1 )
-mesh = SubResource( 2378 )
-material/0 = SubResource( 13330 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 57
-animation_frame_coords = Vector2( 9, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13117 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid3_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -2 )
-mesh = SubResource( 2635 )
-material/0 = SubResource( 13331 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 58
-animation_frame_coords = Vector2( 10, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13118 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid4_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -3 )
-mesh = SubResource( 2892 )
-material/0 = SubResource( 13332 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 59
-animation_frame_coords = Vector2( 11, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13119 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid5_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -4 )
-mesh = SubResource( 3149 )
-material/0 = SubResource( 13333 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 60
-animation_frame_coords = Vector2( 12, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13120 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid6_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -5 )
-mesh = SubResource( 3406 )
-material/0 = SubResource( 13334 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 61
-animation_frame_coords = Vector2( 13, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13121 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid7_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -6 )
-mesh = SubResource( 3663 )
-material/0 = SubResource( 13335 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 62
-animation_frame_coords = Vector2( 14, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13122 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7_green/StaticBody"]
-shape = SubResource( 13116 )
-
-[node name="FragileBrickSolid8_green" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0, -7 )
-mesh = SubResource( 3920 )
-material/0 = SubResource( 13336 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 63
-animation_frame_coords = Vector2( 15, 3 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13123 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTop_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, 0 )
 mesh = SubResource( 4153 )
@@ -180945,238 +180487,6 @@ generated_sprite_mesh = SubResource( 13174 )
 [node name="StaticBody" type="StaticBody" parent="BrickSolid8_red"]
 
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, 0 )
-mesh = SubResource( 2193 )
-material/0 = SubResource( 15485 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 128
-animation_frame_coords = Vector2( 0, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13159 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid2_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -1 )
-mesh = SubResource( 2450 )
-material/0 = SubResource( 15486 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 129
-animation_frame_coords = Vector2( 1, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13162 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid3_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -2 )
-mesh = SubResource( 2707 )
-material/0 = SubResource( 15487 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 130
-animation_frame_coords = Vector2( 2, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13164 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid4_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -3 )
-mesh = SubResource( 2964 )
-material/0 = SubResource( 15488 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 131
-animation_frame_coords = Vector2( 3, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13166 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid5_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -4 )
-mesh = SubResource( 3221 )
-material/0 = SubResource( 15489 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 132
-animation_frame_coords = Vector2( 4, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13168 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid6_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -5 )
-mesh = SubResource( 3478 )
-material/0 = SubResource( 15490 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 133
-animation_frame_coords = Vector2( 5, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13170 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid7_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -6 )
-mesh = SubResource( 3735 )
-material/0 = SubResource( 15491 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 134
-animation_frame_coords = Vector2( 6, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13172 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7_red/StaticBody"]
-shape = SubResource( 13160 )
-
-[node name="FragileBrickSolid8_red" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -5, -7 )
-mesh = SubResource( 3992 )
-material/0 = SubResource( 15492 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 135
-animation_frame_coords = Vector2( 7, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13174 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8_red/StaticBody"]
 shape = SubResource( 13160 )
 
 [node name="BrickSolidTop_red" type="MeshInstance" parent="."]
@@ -182513,238 +181823,6 @@ generated_sprite_mesh = SubResource( 13380 )
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_yellow/StaticBody"]
 shape = SubResource( 13373 )
 
-[node name="FragileBrickSolid_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, 0 )
-mesh = SubResource( 2201 )
-material/0 = SubResource( 15527 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 136
-animation_frame_coords = Vector2( 8, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13372 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid2_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -1 )
-mesh = SubResource( 2458 )
-material/0 = SubResource( 15528 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 137
-animation_frame_coords = Vector2( 9, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13374 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid3_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -2 )
-mesh = SubResource( 2715 )
-material/0 = SubResource( 15529 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 138
-animation_frame_coords = Vector2( 10, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13375 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid4_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -3 )
-mesh = SubResource( 2972 )
-material/0 = SubResource( 15530 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 139
-animation_frame_coords = Vector2( 11, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13376 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid5_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -4 )
-mesh = SubResource( 3229 )
-material/0 = SubResource( 15531 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 140
-animation_frame_coords = Vector2( 12, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13377 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid6_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -5 )
-mesh = SubResource( 3486 )
-material/0 = SubResource( 15532 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 141
-animation_frame_coords = Vector2( 13, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13378 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid7_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -6 )
-mesh = SubResource( 3743 )
-material/0 = SubResource( 15533 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 142
-animation_frame_coords = Vector2( 14, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13379 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
-[node name="FragileBrickSolid8_yellow" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -5, -7 )
-mesh = SubResource( 4000 )
-material/0 = SubResource( 15534 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 143
-animation_frame_coords = Vector2( 15, 8 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 13380 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTop_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, 0 )
 mesh = SubResource( 16943 )
@@ -183961,238 +183039,6 @@ generated_sprite_mesh = SubResource( 15578 )
 [node name="StaticBody" type="StaticBody" parent="BrickSolid8_black"]
 
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, 0 )
-mesh = SubResource( 2273 )
-material/0 = SubResource( 13158 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 208
-animation_frame_coords = Vector2( 0, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15570 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid2_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -1 )
-mesh = SubResource( 2530 )
-material/0 = SubResource( 13161 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 209
-animation_frame_coords = Vector2( 1, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15572 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid3_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -2 )
-mesh = SubResource( 2787 )
-material/0 = SubResource( 13163 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 210
-animation_frame_coords = Vector2( 2, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15573 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid4_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -3 )
-mesh = SubResource( 3044 )
-material/0 = SubResource( 13165 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 211
-animation_frame_coords = Vector2( 3, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15574 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid5_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -4 )
-mesh = SubResource( 3301 )
-material/0 = SubResource( 13167 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 212
-animation_frame_coords = Vector2( 4, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15575 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid6_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -5 )
-mesh = SubResource( 3558 )
-material/0 = SubResource( 13169 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 213
-animation_frame_coords = Vector2( 5, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15576 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid7_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -6 )
-mesh = SubResource( 3815 )
-material/0 = SubResource( 13171 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 214
-animation_frame_coords = Vector2( 6, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15577 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7_black/StaticBody"]
-shape = SubResource( 15571 )
-
-[node name="FragileBrickSolid8_black" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -10, -7 )
-mesh = SubResource( 4072 )
-material/0 = SubResource( 13173 )
-script = ExtResource( 3 )
-texture = ExtResource( 196 )
-mesh_depth = 0.0
-mesh_pixel_size = 0.125
-mesh_double_sided = false
-animation_hframes = 16
-animation_vframes = 16
-animation_frame = 215
-animation_frame_coords = Vector2( 7, 13 )
-position_centered = true
-position_offset = Vector3( 0, 0, 4 )
-position_flip_h = false
-position_flip_v = false
-position_axis = 2
-region_enabled = false
-region_rect = Rect2( 0, 0, 1, 1 )
-generation_alpha_threshold = 0.0
-generation_uv_correction = 0.0
-generated_sprite_mesh = SubResource( 15578 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8_black/StaticBody"]
 shape = SubResource( 15571 )
 
 [node name="BrickSolidTop_black" type="MeshInstance" parent="."]
@@ -185413,8 +184259,8 @@ generated_sprite_mesh = SubResource( 15621 )
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_white/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, 0 )
+[node name="FragileBrickSolid" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
 mesh = SubResource( 2288 )
 material/0 = SubResource( 408 )
 script = ExtResource( 3 )
@@ -185437,13 +184283,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15613 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid2_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -1 )
+[node name="FragileBrickSolid2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -1 )
 mesh = SubResource( 2538 )
 material/0 = SubResource( 665 )
 script = ExtResource( 3 )
@@ -185466,13 +184312,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15615 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid3_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -2 )
+[node name="FragileBrickSolid3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -2 )
 mesh = SubResource( 2795 )
 material/0 = SubResource( 667 )
 script = ExtResource( 3 )
@@ -185495,13 +184341,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15616 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid4_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -3 )
+[node name="FragileBrickSolid4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -3 )
 mesh = SubResource( 3052 )
 material/0 = SubResource( 669 )
 script = ExtResource( 3 )
@@ -185524,13 +184370,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15617 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid5_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -4 )
+[node name="FragileBrickSolid5" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -4 )
 mesh = SubResource( 3309 )
 material/0 = SubResource( 671 )
 script = ExtResource( 3 )
@@ -185553,13 +184399,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15618 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid6_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -5 )
+[node name="FragileBrickSolid6" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -5 )
 mesh = SubResource( 3566 )
 material/0 = SubResource( 673 )
 script = ExtResource( 3 )
@@ -185582,13 +184428,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15619 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid7_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -6 )
+[node name="FragileBrickSolid7" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -6 )
 mesh = SubResource( 3823 )
 material/0 = SubResource( 675 )
 script = ExtResource( 3 )
@@ -185611,13 +184457,13 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15620 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7/StaticBody"]
 shape = SubResource( 15614 )
 
-[node name="FragileBrickSolid8_white" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -10, -7 )
+[node name="FragileBrickSolid8" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -7 )
 mesh = SubResource( 4080 )
 material/0 = SubResource( 677 )
 script = ExtResource( 3 )
@@ -185640,9 +184486,9 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15621 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8_white"]
+[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8"]
 
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8_white/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8/StaticBody"]
 shape = SubResource( 15614 )
 
 [node name="BrickSolidTop_white" type="MeshInstance" parent="."]

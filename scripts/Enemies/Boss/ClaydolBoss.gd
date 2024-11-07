@@ -155,7 +155,7 @@ func _process(delta):
                 secretAniPlayer.play("stunTwitchRight")
             boss_phase = BossPhase.STUN_TWITCH
     elif boss_phase == BossPhase.STUN_TWITCH:
-        pass
+        unenemize()
 
     noseSprite.flip_h = mySprite.flip_h
 
@@ -166,6 +166,7 @@ func getHurt():
     secretAniPlayer.play("gotHurt")
 
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+    should_modify_glitch_shader_vars = false
     if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
         return false
 
