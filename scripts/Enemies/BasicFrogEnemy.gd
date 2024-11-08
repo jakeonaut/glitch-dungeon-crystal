@@ -272,6 +272,7 @@ func landed():
   
 # var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var glitchParticleBurstRes = preload("res://sceneObjects/GlitchParticleBurst.tscn")
+var poisonWaterCubeRes = preload("res://sceneObjects/WaterCubes/PoisonWaterCube.tscn")
 func spawnAGlitchParticle():
   var particle = glitchParticleBurstRes.instance()
   level.add_child(particle)
@@ -309,6 +310,18 @@ export var can_jump = true
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
   if is_smacked or am_i_dying:
     return false
+  if level.player.malware_infected:
+    var newCorruptedFrog = poisonWaterCubeRes.instance()
+    level.add_child(newCorruptedFrog)
+    if not mySprite.flip_h:
+      newCorruptedFrog.rotation_degrees.z = -180
+    var tempRotationZ = newCorruptedFrog.rotation_degrees.z
+    newCorruptedFrog.getSmacked()
+    newCorruptedFrog.rotation_degrees.z = tempRotationZ
+    newCorruptedFrog.global_transform.origin = self.global_transform.origin
+    queue_free()
+    return
+
   .getSmacked(broom_origin, silently)
   if is_infected:
     ouchies(broom_origin)

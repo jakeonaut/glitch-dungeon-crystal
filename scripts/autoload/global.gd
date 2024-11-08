@@ -324,11 +324,11 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["can_force_respawn"] = 0
-    memory["broomerang"] = 0
+    memory["can_force_respawn"] = 1
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 1
     memory["glitched_broom"] = false

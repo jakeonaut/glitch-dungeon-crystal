@@ -262,10 +262,14 @@ onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible"
 onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
 onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var moleSprite = get_node("SpriteContainer/InnerSpriteContainer/MoleSprite")
+var the_proper_palette = null
 func changeSpriteColorPalette(palette):
   if level.spellbook_forbidden:
     return
 
+  the_proper_palette = palette
+  if malware_infected:
+    return
   mySprite.material_override.set_shader_param("target_palette", palette)
   fishySprite.material_override.set_shader_param("target_palette", palette)
   chickenSprite.material_override.set_shader_param("target_palette", palette)

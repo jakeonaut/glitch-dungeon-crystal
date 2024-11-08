@@ -27,6 +27,7 @@ onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomA
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
 onready var bubbleSprite = get_node("BubbleSprite")
+var malwareBugSpriteRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.tscn")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
@@ -1925,6 +1926,7 @@ func corruptSprite(sprite):
   sprite.material_override.set_shader_param("shake_power", 0.1)
   sprite.material_override.set_shader_param("shake_color_rate", 0.5)
   sprite.material_override.set_shader_param("shake_block_size", 10)
+  sprite.material_override.set_shader_param("target_palette", global.weird_base_palette)
   
 func uncorruptSprite(sprite):
   sprite.material_override.set_shader_param("enable_dither", false)
@@ -1934,6 +1936,7 @@ func uncorruptSprite(sprite):
   sprite.material_override.set_shader_param("shake_power", 0.01)
   sprite.material_override.set_shader_param("shake_color_rate", 0)
   sprite.material_override.set_shader_param("shake_block_size", 20)
+  sprite.material_override.set_shader_param("target_palette", the_proper_palette)
 
 func processBagLogic(_delta):
   pass
@@ -2186,9 +2189,20 @@ func adjustSummonedBroomSpritePosition():
 func shouldAirHaveFriction():
   return summonedBroom == null and .shouldAirHaveFriction()
 
-func processSpriteRenderLogic(_delta):
+var cloud_timer = 0
+var cloud_time_limit = 5
+func processSpriteRenderLogic(delta):
   if malware_infected:
     corruptAllSprites()
+    cloud_timer += (delta*11)
+    if cloud_timer >= cloud_time_limit:
+        cloud_timer = 0
+        var newMalwareBugSprite = malwareBugSpriteRes.instance()
+        var which_dir_x = ((randi() % 3) - 1)
+        var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
+        newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
+        level.add_child(newMalwareBugSprite)
+        newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
   elif mySprite.material_override.get_shader_param("enable_no_transparency"):
     uncorruptAllSprites()
 
