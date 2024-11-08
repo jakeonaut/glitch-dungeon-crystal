@@ -6,6 +6,7 @@ onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var hurt3Sound = get_node("Sounds/HurtSound3")
 onready var broomSound = get_node("Sounds/BroomSound")
 onready var noBroomSound = get_node("Sounds/NoBroomSound")
+onready var broomReverseSound = get_node("Sounds/BroomReverseSound")
 onready var errorSound = get_node("Sounds/ErrorSound")
 onready var blinkSound = get_node("Sounds/BlinkSound")
 onready var transformSound = get_node("Sounds/TransformSound")
@@ -389,7 +390,7 @@ func _process(delta):
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
-  if Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame and ritual_state_index < len(global.correct_ritual)-1:
+  if global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and not global.pauseGame and ritual_state_index < len(global.correct_ritual)-1:
     respawn_key_hp = global.memory["hp"]
     tryDieToEnemy(delta, true, true, true)
     global.incrementLevelZoneThing("num_deaths", -1)
@@ -583,6 +584,8 @@ func unsmack():
     global.pauseMoveInput = true
     visible = false
     teleporting = true
+    gravitySound.pitch_scale = rand_range(0.8, 1.2)
+    gravitySound.play()
     for _i in range(5):
       spawnASpore(self.global_transform.origin, false)
     teleport_timer = 0
@@ -606,6 +609,8 @@ func processTeleportationLogic(delta):
         has_teleported = true
         teleport_to = null
         teleport_to_origin = null
+      # gravitySound2.pitch_scale = rand_range(0.8, 1.2)
+      # gravitySound2.play()
       for _i in range(1):
         spawnASpore(self.global_transform.origin, true)
     if teleport_timer >= teleport_time_limit2:
@@ -1666,7 +1671,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     return
   if isOnSavePoint():
     return
-  if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY:
+  var no_trust_me_guys = Input.is_action_just_pressed("restart_key")
+  if not no_trust_me_guys and (physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY):
     return
 
   if (glitch_form == global.GlitchForm.INVISIBLE or returning_to_save_point > 0)and not should_kill_invis:
@@ -1708,7 +1714,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   else:
     hurtSound_pitch_scale = rand_range(0.8, 1.5)
 
-  if should_immediately_die:
+  if should_immediately_die and not no_trust_me_guys:
     hurt3Sound.pitch_scale = hurtSound_pitch_scale
     hurt3Sound.volume_db = -18
     hurt3Sound.play()
@@ -1718,8 +1724,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   else:
     hurtSound.pitch_scale = hurtSound_pitch_scale
     hurtSound.play()
-  bumpSound.pitch_scale = hurtSound_pitch_scale
-  bumpSound.play()
+  if not no_trust_me_guys:
+    bumpSound.pitch_scale = hurtSound_pitch_scale
+    bumpSound.play()
   global.pauseGame = true
   global.pauseMoveInput = true
   global.memory["on_ground"] = on_ground
@@ -1966,7 +1973,16 @@ func processBroomLogic(delta):
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
       #     fallenBroomRef.get_ref().returning = true
-      noBroomSound.play()
+      var found_fallen_broom = false
+      var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
+      for fallenBroom in fallenBroomArray:
+        if not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return:
+          fallenBroom.returning = true
+          found_fallen_broom = true
+      if found_fallen_broom:
+        broomReverseSound.play()
+      else:
+        noBroomSound.play()
     return
 
   if not summonedBroom and is_in_broom_cooldown:

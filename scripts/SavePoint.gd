@@ -109,7 +109,7 @@ func passiveActivate(_delta, is_player):
     if is_player and level.player.malware_infected:
         level.player.malwareCured()
     global.memory["hp"] = global.memory["max_hp"]
-    if not global.isRespawning and (not is_currently_on_save_point or not isOnSavePoint()):
+    if not global.isRespawning and not isOnSavePoint():
         was_on_save_point = false
         if not saveSound.is_playing():
             if isOnSavePoint():

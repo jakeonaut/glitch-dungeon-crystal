@@ -636,10 +636,13 @@ func trySpawnFollowers():
 
 func purifyAllWeakEnemies(summon_smoke_clouds = true):
   var weak_enemies = self.get_tree().get_nodes_in_group("weak_enemies")
-  for weak_enemy_area in weak_enemies:
+  for i in range(weak_enemies.size()):
+    var weak_enemy_area = weak_enemies[i]
     var weak_enemy = weak_enemy_area.get_node("..")
     if weak_enemy.isActive() and not weak_enemy.am_i_dying:
       weak_enemy.ouchies(weak_enemy.global_transform.origin)
+      if i < weak_enemies.size() - 1 and weak_enemy.dieSound != null:
+        weak_enemy.dieSound.stop()
       if summon_smoke_clouds:
         self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
 

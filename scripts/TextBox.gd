@@ -112,7 +112,7 @@ func untinify():
   is_tiny = false
   self.texture = bg_texture
   textNode.rect_clip_content = true
-  portraitContainer.visible = true
+  portraitContainer.visible = false # true
   get_node("ColorRect").visible = true
   setTextBoxPosition()
 
@@ -154,7 +154,7 @@ func _process(delta):
   if global.activeInteractor == self and not self.visible:
     global.activeInteractor = null
 
-  portraitContainer.visible = not is_interact_prompt and not is_tiny
+  portraitContainer.visible = false # not is_interact_prompt and not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
     hideMe()
     textNodeCanvasLayer.hide()

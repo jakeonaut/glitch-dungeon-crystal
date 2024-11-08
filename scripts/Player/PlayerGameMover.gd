@@ -664,6 +664,7 @@ onready var infectSound = get_node("Sounds/InfectSound")
 onready var infectReverseSound = get_node("Sounds/InfectReverseSound")
 onready var wormSound = get_node("Sounds/WormSound")
 onready var gravitySound = get_node("Sounds/GravitySound")
+onready var gravitySound2 = get_node("Sounds/GravitySound2")
 onready var flapSound = get_node("Sounds/FlapSound")
 onready var fastStepSound = get_node("Sounds/FastStepSound")
 var has_mushroom_double_jumped = false

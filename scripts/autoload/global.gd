@@ -324,6 +324,7 @@ func resetMemory():
     ]
 
     # POWERUPS
+    memory["can_force_respawn"] = 0
     memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
