@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=21]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=26]
@@ -206,7 +205,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 9, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/004_DustFarmersRedWalkers.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 35 )
@@ -225,7 +224,7 @@ shape = SubResource( 33 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 31, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/004_DustFarmersRedWalkers.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/002BroomIntro002.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 20 )
@@ -355,12 +354,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8743, 29.5106, 0 )
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.6, 12.9, 0 )
 
-[node name="SmallKey" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8, 35.6, 0 )
-
-[node name="SmallKey2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.4, 35.6, 0 )
-
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5, 28, 0 )
 
@@ -387,9 +380,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 30, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7, 26, 0 )
-
-[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.3, 34, 0 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -1.2, 0 )

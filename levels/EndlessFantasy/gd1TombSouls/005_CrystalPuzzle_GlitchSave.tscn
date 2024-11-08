@@ -385,7 +385,7 @@ shape = SubResource( 15 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3635, 16, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/003_CrystalPuzzleLeftSide.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/004_KeyRoom.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 16 )

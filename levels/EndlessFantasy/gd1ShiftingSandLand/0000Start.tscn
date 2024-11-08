@@ -29,7 +29,7 @@
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 21 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -58,7 +58,7 @@ shader_param/target_palette = ExtResource( 19 )
 
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 21 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -1593,7 +1593,7 @@ shape = SubResource( 25 )
 
 [node name="Door5" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4644, -1.0576, 0 )
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/003DustyCricketCrypts.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/RESET = SubResource( 65 )

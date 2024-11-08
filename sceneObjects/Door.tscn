@@ -91,7 +91,7 @@ shader_param/target_palette = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 2 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -120,7 +120,7 @@ shader_param/target_palette = ExtResource( 7 )
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 2 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -738,7 +738,6 @@ script = ExtResource( 14 )
 
 [node name="landing" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
-visible = false
 pixel_size = 0.12
 texture = ExtResource( 9 )
 hframes = 2
@@ -827,9 +826,6 @@ shape = SubResource( 17 )
 [node name="NPC TextBox" parent="NPC" instance=ExtResource( 23 )]
 
 [node name="TextBox" parent="NPC/NPC TextBox" index="0" groups=["door_textbox"]]
-
-[node name="PortraitColor" parent="NPC/NPC TextBox/TextBox" index="1"]
-visible = false
 
 [node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 21 )

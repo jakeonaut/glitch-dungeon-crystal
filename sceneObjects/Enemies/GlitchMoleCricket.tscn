@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -21,10 +21,11 @@
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=19]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=20]
 [ext_resource path="res://assets/mushroom.png" type="Texture" id=21]
+[ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=22]
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 2 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.5
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -53,7 +54,7 @@ shader_param/target_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=39]
 shader = ExtResource( 2 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -409,7 +410,7 @@ tracks/0/keys = {
 
 [sub_resource type="ShaderMaterial" id=41]
 shader = ExtResource( 2 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -513,6 +514,11 @@ volume_db = -15.0
 stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+volume_db = -30.0
+pitch_scale = 1.25
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 12 )

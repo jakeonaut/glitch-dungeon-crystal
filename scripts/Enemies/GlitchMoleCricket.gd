@@ -4,6 +4,7 @@ onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/
 
 onready var digSound = get_node("Sounds/DigSound")
 onready var respawnSound = get_node("Sounds/RespawnSound")
+onready var thudSound = get_node("Sounds/ThudSound")
 enum MoleState {
     IDLE,
     PREPARE_JUMP,
@@ -351,6 +352,18 @@ func unsmack():
 
 var SOFT_SAND_TOP_TILE = 275
 func digTiles(solidTiles, should_summon_clouds):
+    if not is_builder:
+        for i in range(solidTiles.size()):
+            var coords = solidTiles[i]
+            if coords == null: continue
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if getLevelTiles().isTileFragileSolid(tile_type):
+                getSmacked()
+                thudSound.play()
+                should_fade_away = flight_anchor.should_fade_away
+                mole_state = MoleState.OVERRIDE_FLY_START
+                return
+
     var tiles_dug = 0
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
