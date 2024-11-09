@@ -466,6 +466,7 @@ func _process(delta):
 
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     return
+  processBeingTossedLogic(delta)
   processTeleportationLogic(delta)
   processCastingLogic(delta)
   processBroomLogic(delta)
@@ -591,6 +592,17 @@ func unsmack():
       spawnASpore(self.global_transform.origin, false)
     teleport_timer = 0
     has_teleported = false
+
+func processBeingTossedLogic(_delta):
+  if physics_state == PhysicsState.BEING_TOSSED and not "tumble" in aniPlayer.assigned_animation:
+    if linear_velocity.x < 0:
+      aniPlayer.queue("tumbleLeft")
+    elif linear_velocity.x > 0:
+      aniPlayer.queue("tumbleRight")
+    elif linear_velocity.y > 0:
+      aniPlayer.queue("tumbleRight")
+    elif linear_velocity.y < 0:
+      aniPlayer.queue("tumbleLeft")
 
 func processTeleportationLogic(delta):
   if teleporting:

@@ -347,6 +347,9 @@ shape = SubResource( 225 )
 [node name="CollisionShape2" parent="Viewport/level/ClaydolBoss/FallthroughSolid" index="1"]
 shape = SubResource( 226 )
 
+[node name="InteractPrompt" parent="Viewport/level/ClaydolBoss" index="11"]
+transform = Transform( 0.996453, -0.0841474, 0, 0.0841474, 0.996453, 0, 0, 0, 1, 0.526223, 15.5525, 7 )
+
 [node name="Door" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0 )
 path = "res://levels/EndlessFantasy/gd1TombSouls/preBossRoomDogu.tscn"

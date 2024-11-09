@@ -24,6 +24,7 @@ var slow_walk_speed = 4
 var death_timer = 0
 var death_time_limit = 40
 var spawn_point = 0
+var ghostEnemyRes = preload("res://sceneObjects/Enemies/GhostEnemy.tscn")
 # var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -239,6 +240,13 @@ func ouchies(broom_origin):
       secretAniPlayer.play("die")
       # spawnACarcass()
       death_timer = 0
+      var newGhostEnemy = ghostEnemyRes.instance()
+      var rand_x_speed = rand_range(-4, 4)
+      var rand_y_speed = rand_range(2, 4)
+      newGhostEnemy.x_speed = rand_x_speed
+      newGhostEnemy.y_speed = rand_y_speed
+      level.add_child(newGhostEnemy)
+      newGhostEnemy.global_transform.origin = self.global_transform.origin
 
 func isActive(debug=false):
   if not level.player.visible:
