@@ -39,6 +39,7 @@ export var display_title = "???"
 export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
+var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.tscn")
 
 func _ready():
   has_room_initialized = false
@@ -97,6 +98,12 @@ func _ready_impl():
   if global.memory["has_gotten_broom"] > 0:
     if global.malware_infected:
       player.malware_infected = true
+      var newMalwareDragonfly = malwareDragonflyRes.instance()
+      newMalwareDragonfly.original_pos = player.global_transform.origin
+      newMalwareDragonfly.target_pos = newMalwareDragonfly.original_pos
+      self.add_child(newMalwareDragonfly)
+      newMalwareDragonfly.global_transform.origin = player.global_transform.origin
+      newMalwareDragonfly.do_i_belong_here = false
     player.getABroom()
   if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false

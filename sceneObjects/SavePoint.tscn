@@ -256,7 +256,7 @@ texture = ExtResource( 2 )
 hframes = 8
 script = ExtResource( 6 )
 
-[node name="InteractionArea" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="." groups=["save_point"]]
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]

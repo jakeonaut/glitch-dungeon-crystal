@@ -319,6 +319,7 @@ func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
     newCorruptedFrog.getSmacked()
     newCorruptedFrog.rotation_degrees.z = tempRotationZ
     newCorruptedFrog.global_transform.origin = self.global_transform.origin
+    level.player.visible = true
     queue_free()
     return
 

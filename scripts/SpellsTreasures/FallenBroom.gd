@@ -40,6 +40,9 @@ func _ready():
     should_collide_horizontally = true
 
 var doing_a_final_hit = false
+var can_return_via_input = false
+var can_return_via_input_timer = 0
+var can_return_via_input_time_limit = 5
 func _process(delta):
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
         queue_free()
@@ -48,6 +51,12 @@ func _process(delta):
         mySpriteReal.material_override.set_shader_param("target_palette", global.black_player_palette)
     else:
         mySpriteReal.material_override.set_shader_param("target_palette", global.player_red_palette)
+
+    if not can_return_via_input:
+        can_return_via_input_timer += (delta*11)
+        if can_return_via_input_timer >= can_return_via_input_time_limit:
+            can_return_via_input_timer = 0
+            can_return_via_input = true
 
     if returning:
         if not should_return:
@@ -78,7 +87,7 @@ func _process(delta):
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
             if not level.player.can_broomerang_warp:
                 level.player.errorSound.play()
-            else:
+            elif can_return_via_input:
                 level.player.global_transform.origin = global_transform.origin
                 level.player.global_transform.origin.y -= 1
                 level.player.target_last_grounded_y = level.player.global_transform.origin.y

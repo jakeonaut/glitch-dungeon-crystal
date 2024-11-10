@@ -973,17 +973,12 @@ func applyGlitchDeathEffects(x):
 func tryRotateCamera(_delta):
   pass
 
+var is_currently_on_save_point = false
 func isOnSavePoint():
   if not global.memory.has("active_save_point_x"):
     return false
     
-  var origin = self.global_transform.origin
-  var x = origin.x
-  var y = origin.y
-  var z = origin.z
-  return int(round(x)) == int(round(global.memory["active_save_point_x"])) and \
-       int(round(y)) == int(round(global.memory["active_save_point_y"])) and \
-       int(round(z)) == int(round(global.memory["active_save_point_z"]))
+  return smallInteractionArea.is_touching_save_point
 
 func nullify():
   glitchTickle(false)
@@ -1860,12 +1855,14 @@ func malwareCorruptMe():
   # aniPlayer.play("corruptMe")
   malware_infected = true
   infectSound.play()
-  loseBroom()
+  if not pressingMoveLeft() and not pressingMoveRight():
+    mySprite.flip_h = not mySprite.flip_h
+  # loseBroom()
 
 func malwareCured():
   malware_infected = false
   infectReverseSound.play()
-  getABroom()
+  # getABroom()
 
 func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:
@@ -1932,23 +1929,25 @@ func uncorruptAllSprites():
 
 func corruptSprite(sprite):
   sprite.material_override.set_shader_param("enable_dither", true)
-  sprite.material_override.set_shader_param("enable_glitch", true)
-  sprite.material_override.set_shader_param("enable_palette_cycle", true)
-  sprite.material_override.set_shader_param("enable_no_transparency", true)
-  sprite.material_override.set_shader_param("shake_power", 0.1)
-  sprite.material_override.set_shader_param("shake_color_rate", 0.5)
-  sprite.material_override.set_shader_param("shake_block_size", 10)
-  sprite.material_override.set_shader_param("target_palette", global.weird_base_palette)
+  # sprite.material_override.set_shader_param("enable_glitch", true)
+  # sprite.material_override.set_shader_param("enable_palette_cycle", true)
+  # sprite.material_override.set_shader_param("enable_no_transparency", true)
+  sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
+  # sprite.material_override.set_shader_param("shake_power", 0.1)
+  # sprite.material_override.set_shader_param("shake_color_rate", 0.5)
+  # sprite.material_override.set_shader_param("shake_block_size", 10)
+  # sprite.material_override.set_shader_param("target_palette", global.weird_base_palette)
   
 func uncorruptSprite(sprite):
   sprite.material_override.set_shader_param("enable_dither", false)
-  sprite.material_override.set_shader_param("enable_glitch", false)
-  sprite.material_override.set_shader_param("enable_palette_cycle", false)
-  sprite.material_override.set_shader_param("enable_no_transparency", false)
-  sprite.material_override.set_shader_param("shake_power", 0.01)
-  sprite.material_override.set_shader_param("shake_color_rate", 0)
-  sprite.material_override.set_shader_param("shake_block_size", 20)
-  sprite.material_override.set_shader_param("target_palette", the_proper_palette)
+  sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
+  # sprite.material_override.set_shader_param("enable_glitch", false)
+  # sprite.material_override.set_shader_param("enable_palette_cycle", false)
+  # sprite.material_override.set_shader_param("enable_no_transparency", false)
+  # sprite.material_override.set_shader_param("shake_power", 0.01)
+  # sprite.material_override.set_shader_param("shake_color_rate", 0)
+  # sprite.material_override.set_shader_param("shake_block_size", 20)
+  # sprite.material_override.set_shader_param("target_palette", the_proper_palette)
 
 func processBagLogic(_delta):
   pass
@@ -2202,20 +2201,22 @@ func shouldAirHaveFriction():
   return summonedBroom == null and .shouldAirHaveFriction()
 
 var cloud_timer = 0
-var cloud_time_limit = 5
+var cloud_time_limit = 15
 func processSpriteRenderLogic(delta):
   if malware_infected:
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:
         cloud_timer = 0
-        var newMalwareBugSprite = malwareBugSpriteRes.instance()
-        var which_dir_x = ((randi() % 3) - 1)
-        var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
-        newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
-        level.add_child(newMalwareBugSprite)
-        newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
-  elif mySprite.material_override.get_shader_param("enable_no_transparency"):
+        glitchTickle()
+        getSmacked()
+        # var newMalwareBugSprite = malwareBugSpriteRes.instance()
+        # var which_dir_x = ((randi() % 3) - 1)
+        # var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
+        # newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
+        # level.add_child(newMalwareBugSprite)uncorruptAllSprites
+        # newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
+  elif mySprite.material_override.get_shader_param("enable_dither"):
     uncorruptAllSprites()
 
   if grav < 0:

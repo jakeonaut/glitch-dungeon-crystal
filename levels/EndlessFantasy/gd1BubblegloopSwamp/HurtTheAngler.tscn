@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -16,10 +16,11 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=14]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Enemies/CorruptFisherman.tscn" type="PackedScene" id=16]
-[ext_resource path="res://sceneObjects/MalwareSquare.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sceneObjects/Buggies/MalwareDragonfly.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=21]
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -119,9 +120,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0.0999999, 0 )
 [node name="PoisonWaterCube" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8, 0 )
 
-[node name="PoisonWaterCube2" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2, 1, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/MalwareIntro.tscn"
@@ -148,14 +146,28 @@ shape = SubResource( 24 )
 [node name="CollisionShape" parent="Viewport/level/AnglerFish/FallthroughSolid" index="0"]
 shape = SubResource( 25 )
 
-[node name="MalwareSquare" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0 )
-
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 12, -4 )
 
-[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5, -4 )
+[node name="MalwareDragonfly" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 8, 0 )
+
+[node name="MalwareDragonfly2" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 10, 0 )
+
+[node name="MalwareDragonfly3" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 9, 0 )
+
+[node name="MalwareDragonfly4" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, 0 )
+
+[node name="MalwareDragonfly5" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 0 )
+
+[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+is_static = true
+is_licker = true
 
 [node name="Viewport2" parent="." instance=ExtResource( 5 )]
 

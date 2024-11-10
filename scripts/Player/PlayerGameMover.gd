@@ -268,8 +268,8 @@ func changeSpriteColorPalette(palette):
     return
 
   the_proper_palette = palette
-  if malware_infected:
-    return
+  # if malware_infected:
+  #   return
   mySprite.material_override.set_shader_param("target_palette", palette)
   fishySprite.material_override.set_shader_param("target_palette", palette)
   chickenSprite.material_override.set_shader_param("target_palette", palette)
@@ -399,16 +399,16 @@ func pressingJump():
 
 # @overrride
 func actuallyApplyJump(play_sound = true):
-  if malware_infected:
-    on_ground = false
-    should_do_fallthrough_area_collision = false
-    has_just_jumped_timer = 0
-  else:
-    .actuallyApplyJump(play_sound)
+  # if malware_infected:
+  #   on_ground = false
+  #   should_do_fallthrough_area_collision = false
+  #   has_just_jumped_timer = 0
+  # else:
+  .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():
-  return malware_infected or Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
   
 # @override
 func pressingMoveDown():
@@ -609,8 +609,7 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.MOLE_DIGGING or \
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
-     is_mushroom_infected or \
-     malware_infected:
+     is_mushroom_infected: # or malware_infected:
     return
   pauseAnimation = not unpauseAnimation
   global.memory["broom"] = true
@@ -852,8 +851,9 @@ func handleSpikeCollisions(delta):
   var TILE_HEIGHT = levelTiles.cell_size.y
 
   touching_glitch_or_spikes = false
-  for i in range(int(round(y+bb)), int(round(y+tb))):
-    for j in range(int(round(x+lb)), int(round(x+rb))):
+  var amt = 0.5 if malware_infected else 0
+  for i in range(int(round(y+bb-amt)), int(round(y+tb+amt))):
+    for j in range(int(round(x+lb-amt)), int(round(x+rb+amt))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
