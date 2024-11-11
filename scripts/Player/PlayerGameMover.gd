@@ -533,6 +533,9 @@ func regainNestingDoll():
 var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
+  return getWalkSpeedHelper(delta) * 1.0
+
+func getWalkSpeedHelper(delta):
   if transformation == TransformationState.CHICKEN:
     return 6
   if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:

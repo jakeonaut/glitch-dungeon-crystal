@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -34,8 +34,6 @@
 [ext_resource path="res://assets/backgrounds/dungeon_layer_0.png" type="Texture" id=32]
 [ext_resource path="res://sceneObjects/GlitchTileSpawner.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=34]
-[ext_resource path="res://scripts/NPC.gd" type="Script" id=35]
-[ext_resource path="res://scripts/GlitchTileSpawner.gd" type="Script" id=36]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=37]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=38]
 [ext_resource path="res://scripts/InverseGlitchTileSpawner.gd" type="Script" id=39]
@@ -247,7 +245,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=75]
 shader = ExtResource( 23 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -495,7 +493,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
-[sub_resource type="ArrayMesh" id=209]
+[sub_resource type="ArrayMesh" id=211]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -778,12 +776,10 @@ automatically_change_color = false
 
 [node name="GlitchTileSpawner" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 8, 0 )
-script = ExtResource( 36 )
 spawned_object_path = ""
 
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.20833, 0 )
-script = ExtResource( 35 )
 bbText = "•ah! you saved me from
 the \"glitch\" corruption.
 I feared death."
@@ -839,10 +835,10 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 13 )]
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 209 )
+mesh = SubResource( 211 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
 visible = false

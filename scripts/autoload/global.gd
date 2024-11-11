@@ -302,12 +302,12 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 4
-    memory["glitched_grimoire"] = true
+    memory["clean_crystals"] = 0
+    memory["glitched_grimoire"] = false
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
-    memory["priestess"] = 2
+    memory["priestess"] = 0
     memory["baba_yaga_boss"] = 0
     memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
@@ -324,13 +324,13 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["can_force_respawn"] = 1
-    memory["broomerang"] = 1
+    memory["can_force_respawn"] = 0
+    memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
-    memory["mushroom_soul"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
 
     # DEFUNCT POWERUPS
