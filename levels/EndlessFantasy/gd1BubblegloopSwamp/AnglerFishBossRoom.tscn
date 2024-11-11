@@ -19,7 +19,7 @@
 [ext_resource path="res://sceneObjects/Enemies/Boss/AnglerFishBoss.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=19]
-[ext_resource path="res://sceneObjects/MalwareSquare.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/Buggies/MalwareDragonfly.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/GrandmaStatue.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/DreamOfDeceit.tscn" type="PackedScene" id=22]
 [ext_resource path="res://shaders/CrackedFuzzyDither.gdshader" type="Shader" id=23]
@@ -339,9 +339,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.472629, -4.01779, 0 )
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/preBossRoomAnglerFish.tscn"
 
-[node name="MalwareSquare" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 13, 0 )
-
 [node name="GrandmaStatue" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3.93281, 0 )
 is_extra_life = true
@@ -391,6 +388,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -4 )
 [node name="DreamOfDeceit" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6, 0 )
 visible = false
+
+[node name="MalwareDragonfly" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 9, 0 )
+
+[node name="MalwareDragonfly2" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 
