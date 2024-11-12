@@ -132,9 +132,9 @@ tracks/0/keys = {
 "values": [ 11, 0 ]
 }
 
-[sub_resource type="BoxShape" id=21]
+[sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 0.75, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=18]
 resource_local_to_scene = true
@@ -278,11 +278,11 @@ anims/fall = SubResource( 13 )
 anims/land = SubResource( 10 )
 
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough", "fallthrough_tiny"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.776669, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="MushroomFallthroughSolid" type="Area" parent="." groups=["fallthrough", "fallthrough_tiny"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39, 0.24, 0 )

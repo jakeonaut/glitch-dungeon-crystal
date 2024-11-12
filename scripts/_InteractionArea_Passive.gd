@@ -9,6 +9,7 @@ var is_touching_ladder = false
 var is_touching_player_proxy = false
 var was_touching_player_proxy = false
 var is_touching_carcass = false
+var was_touching_carcass = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 export var ignore_water = false
@@ -61,6 +62,7 @@ func _process(_delta):
     # before or after this NPC's _process event
     wasTouchingPlayer = touchingPlayer
     was_touching_player_proxy = is_touching_player_proxy
+    was_touching_carcass = is_touching_carcass
     touchingPlayer = false
 
     var areas = get_overlapping_areas()
@@ -73,6 +75,8 @@ func _process(_delta):
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
     for area in areas:
+        if area.get_node("..") == self.get_node(".."):
+            continue
         if area.is_in_group("water") and not ignore_water:
             is_touching_water = true
             touched_water_area = area

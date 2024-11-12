@@ -134,10 +134,12 @@ func _process(delta):
     if on_ground:
         if secretAniPlayer.assigned_animation == "fall":
             secretAniPlayer.play("land")
-    if smallInteractionArea.is_touching_carcass and should_i_move_up:
-        global_transform.origin.y += 1
-    elif not smallInteractionArea.is_touching_carcass:
-        should_i_move_up = false
+    if should_i_move_up:
+        if smallInteractionArea.is_touching_carcass or smallInteractionArea.was_touching_carcass:
+            global_transform.origin.y += delta*11*2
+        else:
+            should_i_move_up = false
+            print("WHY")
             
 # @override
 func landed():

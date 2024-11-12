@@ -36,6 +36,9 @@ func _process(delta):
     if hit_cooldown <= 0:
       aniPlayer.play("reset")
 
+  if has_been_hit and spawned_object_res != null and myDynamicSpawnedChild.get_ref() == null:
+    has_been_hit = false
+
 func get_foreign_children():
   var possible_children = self.get_children().slice(4, self.get_child_count())
   var spatial_children = []
@@ -83,7 +86,6 @@ func performSpawn():
           child.passiveActivate(33, false)
 
     if spawned_object_res != null:
-      has_been_hit = false
       if (myDynamicSpawnedChild == null or not myDynamicSpawnedChild.get_ref()):
         bonkSound.play()
         var newObject = spawned_object_res.instance()

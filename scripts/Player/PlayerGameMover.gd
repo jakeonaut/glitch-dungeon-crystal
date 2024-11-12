@@ -744,6 +744,7 @@ func mushroomClone(_trigger_another = true):
     global_transform.origin.y += 0.5
   doubleJump()
   var carcass = spawnACarcass()
+  carcass.smallInteractionArea.is_touching_carcass = true
   carcass.broomSprite.visible = false
   carcass.mushroomSprite.visible = false
   # carcass.is_crumbling = true
