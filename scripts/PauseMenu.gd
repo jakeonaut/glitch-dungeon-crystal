@@ -19,6 +19,7 @@ onready var inventoryRect = get_node("InventoryRect")
 onready var shardsText = get_node("InventoryRect/ShardsText")
 onready var mapRect = get_node("InventoryRect/MapRect")
 onready var mapIconSprite = get_node("InventoryRect/MapRect/MapIconSprite")
+onready var mapTileMap = get_node("InventoryRect/MapRect/ColorRect/ColorRect/TileMap")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -792,6 +793,45 @@ func processInventoryRender(_delta):
   keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
+func tryDrawMap():
+  if has_drawn_map:
+    return
+
+  var mapGrid = transition.mapManager.gimmeMapGrid()
+  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  for i in range(MAP_HEIGHT):
+    for j in range(MAP_WIDTH):
+      if not mapGrid.has(i) or not mapGrid[i].has(j):
+        continue
+      var spriteIndex = (j + ((14-i)*MAP_WIDTH)) + 1
+      var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
+      var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+      sprite.z_index = 0
+      var mapRoom = mapGrid[i][j]
+      if sprite == null:
+        print("DEBUG: " + spriteName + " doesn't exist")
+      elif mapRoom.path == level.getLevelName():
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.frame = 1
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      # elif global.haveIBeenToThisLevelPath(mapRoom.path):
+      else:
+        for angelStatue in angelStatues:
+          if mapRoom.path == angelStatue[1]:
+            var playerIcon = mapIconSprite.duplicate()
+            playerIcon.frame = 2
+            playerIcon.visible = true
+            sprite.add_child(playerIcon)
+        setProperMapFrame(sprite, mapGrid, i, j)
+  has_drawn_map = true
+
 # optimization could be, rather than reconstructing the map on every level, can keep this map sprite grid on transition, and simply draw it here...
 var MAP_WIDTH = 15
 var MAP_HEIGHT = 15
@@ -870,45 +910,6 @@ func setProperMapFrame(sprite, mapGrid, i, j):
         sprite.material.set_shader_param("target_palette", global.dream_palette)
     _:
         pass
-
-func tryDrawMap():
-  if has_drawn_map:
-    return
-
-  var mapGrid = transition.mapManager.gimmeMapGrid()
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
-  for i in range(MAP_HEIGHT):
-    for j in range(MAP_WIDTH):
-      if not mapGrid.has(i) or not mapGrid[i].has(j):
-        continue
-      var spriteIndex = (j + ((14-i)*MAP_WIDTH)) + 1
-      var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
-      var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
-      sprite.z_index = 0
-      var mapRoom = mapGrid[i][j]
-      if sprite == null:
-        print("DEBUG: " + spriteName + " doesn't exist")
-      elif mapRoom.path == level.getLevelName():
-        setProperMapFrame(sprite, mapGrid, i, j)
-        var playerIcon = mapIconSprite.duplicate()
-        playerIcon.visible = true
-        sprite.add_child(playerIcon)
-      elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
-        setProperMapFrame(sprite, mapGrid, i, j)
-        var playerIcon = mapIconSprite.duplicate()
-        playerIcon.frame = 1
-        playerIcon.visible = true
-        sprite.add_child(playerIcon)
-      # elif global.haveIBeenToThisLevelPath(mapRoom.path):
-      else:
-        for angelStatue in angelStatues:
-          if mapRoom.path == angelStatue[1]:
-            var playerIcon = mapIconSprite.duplicate()
-            playerIcon.frame = 2
-            playerIcon.visible = true
-            sprite.add_child(playerIcon)
-        setProperMapFrame(sprite, mapGrid, i, j)
-  has_drawn_map = true
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd
