@@ -416,7 +416,7 @@ shader_param/target_palette = ExtResource( 12 )
 
 [sub_resource type="ShaderMaterial" id=17205]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -445,7 +445,7 @@ shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0

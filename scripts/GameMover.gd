@@ -849,7 +849,7 @@ var has_just_glitch_swapped_time_limit = 5
 func actuallyApplyJump(play_sound = true):
   tryClearFallthroughCollisionSolid()
   if isFeatherLike():
-    vv = jump_force / 1.3 # jump_force / 1.9
+    vv = jump_force / 1.2 # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
     #   if vv < (2*jump_force) / 3:
     #     vv = (2*jump_force) / 3

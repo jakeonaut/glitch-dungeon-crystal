@@ -6,6 +6,7 @@ export var can_nav_left = true
 export var can_nav_right = true
 export var can_nav_up = true
 export var can_nav_down = true
+export var hide_me_from_map = false
 
 
 # Declare member variables here. Examples:
