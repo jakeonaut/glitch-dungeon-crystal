@@ -8,6 +8,7 @@ var touched_water_area = null
 var is_touching_ladder = false
 var is_touching_player_proxy = false
 var was_touching_player_proxy = false
+var is_touching_carcass = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 export var ignore_water = false
@@ -68,6 +69,7 @@ func _process(_delta):
     touched_water_area = null
     is_touching_ladder = false
     is_touching_player_proxy = false
+    is_touching_carcass = false
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
     for area in areas:
@@ -84,6 +86,8 @@ func _process(_delta):
             parent.touchCorporealBody(area.get_node(".."))
         if area.is_in_group("player_proxy"):
             is_touching_player_proxy = true
+        if area.is_in_group("carcass"):
+            is_touching_carcass = true
 
     if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:
         possible_game_mover.should_do_fallthrough_area_collision = false

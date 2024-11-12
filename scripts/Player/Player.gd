@@ -223,13 +223,16 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.play()
   global.memory["current_glitch"] = glitch
 
+  if glitch != self.glitch_form:
+    has_just_glitch_swapped = true
+    has_just_glitch_swapped_timer = 0
   var gimmeABroom = false
   if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
     gimmeABroom = true
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
-    if self.glitch_form == global.GlitchForm.LADDER and (was_walking_into_wall or isWalkingIntoWall()):
+    if self.glitch_form == global.GlitchForm.LADDER and (was_just_walking_on_wall or was_walking_into_wall or isWalkingIntoWall()):
       on_ground = true
     floorGlitch()
   if glitch == global.GlitchForm.FEATHER: featherGlitch()
@@ -409,8 +412,6 @@ func _process(delta):
     newSpriteOpacity = 0.5
   elif glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 0.9
-  # elif glitch_form == global.GlitchForm.INVISIBLE:
-  #   newSpriteOpacity = 0.8
   else:
     newSpriteOpacity = 1.0
   if newSpriteOpacity != spriteOpacity:
@@ -430,11 +431,6 @@ func _process(delta):
 
   if global.isPauseMenuOpen:
     return
-
-  # if Input.is_action_pressed("sub_action_button") and on_ground:
-  #   mySprite.flip_h = broom_flip_h
-  # else:
-  #   broom_flip_h = mySprite.flip_h
 
   if aniPlayer.assigned_animation == "broomSmackGlitch":
     linear_velocity = Vector3(0, 0, 0)
@@ -1004,14 +1000,17 @@ func nullify():
           did_erase = true 
   else:
     if glitch_form != global.GlitchForm.NORMAL:
+      level.resetGrandmaStatues()
       nullifySound.play()
       glitchTilesAroundMe(0.25, true)
       self.applyGlitch(global.GlitchForm.NORMAL, true)
     return
 
   if did_erase or glitch_form != global.GlitchForm.NORMAL:
+    level.resetGrandmaStatues()
     spellCastPauseIndex = 0
     nullifySound.play()
+    glitchTilesAroundMe(0.25, true)
     self.applyGlitch(global.GlitchForm.NORMAL, true)    
 
 # need this to have it available in the aniPlayer
@@ -1070,34 +1069,6 @@ func processFishyLogic(_delta):
       getFishyCured()
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
-    # if Input.is_action_pressed("sub_action_button") and has_fish_broom:
-    #   if glitch_form == global.GlitchForm.INVISIBLE:
-    #     bubble_timer = bubble_time_limit
-    #     if Input.is_action_just_pressed("sub_action_button"):
-    #       noBroomSound.play()
-    #   else:
-    #     bubble_timer += (delta*11)
-    #     if bubble_timer >= bubble_time_limit:
-    #       var bubble = bubbleRes.instance()
-    #       bubble.is_horizontal = true
-    #       bubble.horizontal_direction = 2
-    #       bubble.can_purify = true
-    #       if mySprite.flip_h:
-    #         bubble.horizontal_direction = -2
-    #       bubble.is_dark = true
-    #       level.add_child(bubble)
-    #       # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-    #       bubble.setAsParent(self)
-    #       bubble.global_transform.origin = global_transform.origin
-    #       bubble.global_transform.origin.x += bubble.horizontal_direction
-    #       bubble.my_original_pos = bubble.global_transform.origin.y
-    #       bubble.randomizeTargetPos()
-
-    #       blinkSound.pitch_scale = rand_range(0.8, 1.2)
-    #       blinkSound.play()
-    #       bubble_timer = 0
-    # else:
-    #   bubble_timer = bubble_time_limit
   elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
     # aniPlayer.stop()
     # aniPlayer.clear_queue()
@@ -1986,7 +1957,7 @@ func processBroomLogic(delta):
   if not global.memory["broom"]:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and nesting_doll_state == global.NestingDoll.GRANDMA:
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
@@ -1994,12 +1965,12 @@ func processBroomLogic(delta):
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
-        if not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return:
+        if not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
           fallenBroom.returning = true
           found_fallen_broom = true
       if found_fallen_broom:
         broomReverseSound.play()
-      else:
+      elif fallenBroomArray.size() == 0:
         noBroomSound.play()
     return
 
@@ -2440,7 +2411,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
     #   fallenBroom.taking_the_player_with_me = true
     fallenBroom.true_terminal_vel = 0
-    fallenBroom.walk_speed *= 6
+    fallenBroom.walk_speed *= 3
     fallenBroom.get_node("BroomSound").play()
     var x_direction = 0
     if Input.is_action_pressed("ui_left"):

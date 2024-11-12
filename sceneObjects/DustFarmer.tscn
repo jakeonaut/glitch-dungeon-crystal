@@ -155,7 +155,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite3D" parent="NPC" index="3"]
 frame = 78
-frame_delay = 1.0
+frame_delay = 0.2
 should_randomize_frame_delay = false
 
 [node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]

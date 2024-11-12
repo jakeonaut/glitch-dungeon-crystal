@@ -15,6 +15,8 @@ onready var saveSporesSprite = get_node("SaveSpores")
 onready var saveSound = get_node("SaveSound")
 export var is_extra_life = false
 var is_extra_life_active = false
+var original_pos = null
+var original_glitch_form = null
 
 func _ready():
   set_process(true)
@@ -26,6 +28,8 @@ func _ready():
   saveDiskSprite.material_override = saveDiskSprite.material_override.duplicate()
 
   glitch_form_before_nullification = glitch_form
+  original_pos = self.global_transform.origin
+  original_glitch_form = glitch_form
   yield(TempTimer.idle_frame(self), "timeout")
   updateColor()
 
@@ -49,6 +53,13 @@ func _process(delta):
     if smack_timer >= smack_time_limit:
       is_smacked = false
       unsmack()
+
+func resetPositionInASecond():
+  yield(get_tree().create_timer(0.5), "timeout")
+  self.global_transform.origin = self.original_pos
+  visible = true
+  updateColor()
+  level.summonSmokeClouds(global_transform.origin, 2, true, true)
 
 func processRendering(delta):
   triangleContainer.visible = is_extra_life
@@ -121,7 +132,7 @@ func processGlitchFormTeleportation():
 
   if level.player.glitch_form == glitch_form:
     if not has_swapped:
-      var last_on_ground = level.player.was_on_ground
+      var last_on_ground = level.player.was_on_ground or level.player.isKindOfOnGround()
       has_swapped = true
       if glitch_form != global.GlitchForm.NORMAL:
         var my_old_origin = self.global_transform.origin
@@ -141,7 +152,10 @@ func processGlitchFormTeleportation():
         glitch_form = players_last_glitch_form
       level.reindexGrandmaStatueCatalogue()
       updateColor()
-      on_ground = glitch_form == global.GlitchForm.FLOOR and last_on_ground
+      on_ground = true
+      if not level.player.was_on_ground and not level.player.isKindOfOnGround():
+        self.global_transform.origin.y = level.player.target_last_grounded_y
+      level.player.landed()
   else:
     has_swapped = false
   players_last_glitch_form = level.player.glitch_form
@@ -149,11 +163,11 @@ func processGlitchFormTeleportation():
 func updateColor():
   var target_palette = level.levelTiles.grey_palette
   var sprite_palette = global.grey_player_palette
-  mySprite.material_override.set_shader_param("enable_no_transparency", true)
+  # mySprite.material_override.set_shader_param("enable_no_transparency", true)
   if is_extra_life:
     sprite_palette = global.NES_broom_palette
     target_palette = global.NES_broom_palette
-    mySprite.material_override.set_shader_param("enable_no_transparency", false)
+#     mySprite.material_override.set_shader_param("enable_no_transparency", false)
   elif glitch_form == global.GlitchForm.FLOOR:
     sprite_palette = global.player_red_palette
     target_palette = level.levelTiles.red_palette

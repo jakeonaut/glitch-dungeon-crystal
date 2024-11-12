@@ -42,7 +42,7 @@ func _ready():
 var doing_a_final_hit = false
 var can_return_via_input = false
 var can_return_via_input_timer = 0
-var can_return_via_input_time_limit = 5
+var can_return_via_input_time_limit = 3
 func _process(delta):
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
         queue_free()
@@ -84,21 +84,6 @@ func _process(delta):
             abortSound.activateScript()
             if returning and global.activeInteractor and global.activeInteractor.is_important:
                 global.pauseGame = true
-        if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
-            if not level.player.can_broomerang_warp:
-                level.player.errorSound.play()
-            elif can_return_via_input:
-                level.player.global_transform.origin = global_transform.origin
-                level.player.global_transform.origin.y -= 1
-                level.player.target_last_grounded_y = level.player.global_transform.origin.y
-                level.player.gravitySound.play()
-                level.player.linear_velocity = self.linear_velocity
-                level.player.lv = self.lv
-                level.player.vv = self.vv
-                level.player.hv = self.hv
-                level.player.tryClearFallthroughCollisionSolid()
-                abortSound.activateScript()
-                level.player.can_broomerang_warp = false
     elif projectile:
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
             if not level.player.can_broomerang_warp:
@@ -339,8 +324,7 @@ func hitStuff(_delta):
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             if not area.is_in_group("door") and not area.is_in_group("true_small_door") and not area.is_in_group("npc"):
-                area.InteractActivate(false)
-                has_hit_something = area.get_parent().has_method("activate")
+                has_hit_something = area.InteractActivate(false)
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
             area.PassiveInteractActivate(0, false)

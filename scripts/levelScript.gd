@@ -50,6 +50,17 @@ func _ready():
 export var is_randomizing = false
 # this will be a map of global.GlitchForm => weakref(instance)
 var grandmaStatueCatalogue = {}
+func resetGrandmaStatues():
+  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  for i in range(len(grandmaStatues)):
+    var grandmaStatue = grandmaStatues[i]
+    summonSmokeClouds(grandmaStatue.global_transform.origin, 2, true, true)
+    grandmaStatue.visible = false
+    grandmaStatue.glitch_form = grandmaStatue.original_glitch_form
+    grandmaStatue.resetPositionInASecond()
+
+  reindexGrandmaStatueCatalogue()
+
 func reindexGrandmaStatueCatalogue(is_start_of_level = false):
   grandmaStatueCatalogue = {}
   var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
@@ -621,14 +632,14 @@ func trySpawnFollowers():
   #         stepify(rand_range(0.5, 1.5), 0.125), 
   #         0))
 
-  # var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-  # if numEggs != null:
-  #   for _i in range(numEggs):
-  #     spawnAngelEggFollower(
-  #       player.global_transform.origin + Vector3(
-  #         stepify(rand_range(-1.0, 1.0), 0.125),
-  #         stepify(rand_range(0.5, 1.5), 0.125), 
-  #         0))
+  var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+  if numEggs != null:
+    for _i in range(numEggs):
+      spawnAngelEggFollower(
+        player.global_transform.origin + Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125), 
+          0))
 
   # if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
   #   var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")

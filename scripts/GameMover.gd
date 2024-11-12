@@ -205,6 +205,11 @@ func _process(delta):
 
   if global.pauseGame or pauseSelf: return
   if jump_force == null: jump_force = 16
+  if has_just_glitch_swapped:
+    has_just_glitch_swapped_timer += (delta*11)
+    if has_just_glitch_swapped_timer >= has_just_glitch_swapped_time_limit:
+      has_just_glitch_swapped_timer = 0
+      has_just_glitch_swapped = false
 
   if smallInteractionArea and smallInteractionArea.has_method("isActive"):
     is_touching_water = smallInteractionArea.is_touching_water
@@ -518,7 +523,7 @@ func getTilesAbove(currLevelTiles):
 
   return solidTilesAbove
 
-func getTilesLeftOf(currLevelTiles, buffer = 0.1):
+func getTilesLeftOf(currLevelTiles, buffer = 0.5):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -580,6 +585,8 @@ func iJustPressedDown():
 
 var is_touching_sandstream = false
 var was_touching_sandstream = false
+var was_just_walking_on_wall = false
+var was_just_walking_on_wall_timer = 0
 func processInputs(delta):
   processLadderInputs(delta)
   processJumpInputs(delta)
@@ -592,14 +599,22 @@ func processInputs(delta):
     vv = jump_force*2
   if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
     vv = 1
+    was_just_walking_on_wall = true
+    was_just_walking_on_wall_timer = 0
   if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
     playStickOnWallSound()
     # getSmacked(global_transform.origin)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
     processWallLadderWalking(delta)
+    was_just_walking_on_wall = true
   else:
     processNotWallLadderWalking(delta)
+  if not was_walking_into_wall and was_just_walking_on_wall:
+    was_just_walking_on_wall_timer += (delta*11)
+    if was_just_walking_on_wall_timer >= was_just_on_ground_time_limit:
+      was_just_walking_on_wall = false
+      was_just_walking_on_wall_timer = 0
 
 func processWallLadderWalking(delta):
   # if pauseAnimation and not pressingJump() and aniPlayer.assigned_animation != "sinkInSand":
@@ -757,6 +772,7 @@ func processJumpInputs(delta):
       has_water_double_jumped = false
       was_touching_water_at_start_of_jump = is_touching_water
       was_just_on_ground_timer = was_just_on_ground_time_limit
+      was_just_walking_on_wall_timer = was_just_on_ground_time_limit
       jumped_from_true_ground = truly_on_ground
       jump_squat_jump_input_timer = 0
       feather_jump_timer = 0
@@ -827,6 +843,9 @@ func addJumpSmokeCloud(flip_flip_h = false):
   newSmokeCloud.get_material_override().set_shader_param("target_palette", level.current_sprite_palette)
   newSmokeCloud.is_really_glitchy = is_really_glitchy
 
+var has_just_glitch_swapped = false
+var has_just_glitch_swapped_timer = 0
+var has_just_glitch_swapped_time_limit = 5
 func actuallyApplyJump(play_sound = true):
   tryClearFallthroughCollisionSolid()
   if isFeatherLike():
@@ -848,7 +867,7 @@ func actuallyApplyJump(play_sound = true):
       vv = (1.58*jump_force)/3
   elif glitch_form == global.GlitchForm.INVISIBLE:
     vv = invisible_jump_force
-  elif glitch_form == global.GlitchForm.LADDER:
+  elif glitch_form == global.GlitchForm.LADDER and not has_just_glitch_swapped:
     vv = jump_force * 0.5
   else:
     # rocket boost boots

@@ -166,7 +166,7 @@ func _process(delta):
                     aniPlayer.stop()
                     aniPlayer.clear_queue()
                     aniPlayer.play("fly")
-                    mole_state = MoleState.OVERRIDE_FLY_START
+                    mole_state = MoleState.OVERRIDE_FLYING
                     should_fade_away = true
     elif mole_state == MoleState.PREPARE_JUMP:
         # run away from player
@@ -198,6 +198,8 @@ func _process(delta):
                stepify(global_transform.origin.y, step) == stepify(flight_anchor.global_transform.origin.y, step):
                 mole_state = MoleState.OVERRIDE_FLYING
                 myOtherSprite.material_override.set_shader_param("enable_glitch", true)
+        elif grav == 0 and should_fade_away:
+            mole_state = MoleState.OVERRIDE_FLYING
     elif mole_state == MoleState.OVERRIDE_FLYING:
         tryFadeAway(delta)
 

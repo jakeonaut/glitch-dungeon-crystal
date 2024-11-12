@@ -24,9 +24,10 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = true
 shader_param/enable_dither = true
-shader_param/enable_no_transparency = true
+shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
@@ -52,6 +53,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = true
 shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
@@ -84,6 +86,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = true
 shader_param/enable_no_transparency = false
@@ -133,7 +136,7 @@ max_frames = 1
 automatically_change_color = false
 
 [node name="FaceSprite" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.126971, 0.782344, 0.241211 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.126971, 0.484903, 0.241211 )
 material_override = SubResource( 59 )
 flip_h = true
 pixel_size = 0.125
@@ -150,6 +153,7 @@ should_animate = false
 automatically_change_color = false
 
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
@@ -161,7 +165,7 @@ volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0975, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84255, 0 )
 material_override = SubResource( 58 )
 pixel_size = 0.125
 texture = ExtResource( 15 )

@@ -435,7 +435,7 @@ func isActive(_debug=false):
 func activate(_is_player):
     if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
-        ouchies(global_transform.origin)
+        var result = ouchies(global_transform.origin)
         getPlayer().has_sweeped_glitch = true
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
@@ -443,22 +443,27 @@ func activate(_is_player):
         if getPlayer().teleport_to == null:
             getPlayer().teleport_to = weakref(self)
             getPlayer().teleport_to_origin = self.global_transform.origin
+        return result
     elif smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:
-            ouchies(global_transform.origin)
+            var result  = ouchies(global_transform.origin)
             getPlayer().getSmacked()
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
+            return result
         elif notOuchies(global_transform.origin):
             getPlayer().getSmacked()
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
+            return true
     else:
-        getSmacked(global_transform.origin)
+        var result = getSmacked(global_transform.origin)
         getPlayer().getSmacked()
         if getPlayer().teleport_to == null:
             getPlayer().teleport_to = weakref(self)
             getPlayer().teleport_to_origin = self.global_transform.origin
+        return result
+    return false
 
 func passiveActivate(_delta, _is_player):
     pass
@@ -478,7 +483,7 @@ var can_spawn_mini_crystal = true
 func ouchies_base(broom_origin):
     if am_i_dying or am_i_freezing: # or am_i_hurt:
         return
-    getSmacked(broom_origin)
+    var result = getSmacked(broom_origin)
     # am_i_hurt = true
     if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
@@ -490,12 +495,13 @@ func ouchies_base(broom_origin):
             miniCubeCrystal.passiveActivate(0, false)
     if parentSpawner != null and parentSpawner.has_method("myChildDied"):
         parentSpawner.myChildDied()
+    return result
 
 func ouchies(broom_origin):
     if is_particle:
         return false
 
-    ouchies_base(broom_origin)
+    var result = ouchies_base(broom_origin)
 
     if not am_i_dying and not am_i_freezing:
         am_i_freezing = true
@@ -509,7 +515,7 @@ func ouchies(broom_origin):
         # glitchSecretAniPlayer.play("freeze")
         should_freeze = true
         return true
-    return false
+    return result
 
 # is this cheating?
 var player = null

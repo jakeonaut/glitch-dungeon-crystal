@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -24,10 +24,11 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=25]
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 20 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -184,6 +185,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58321, 2, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58321, 2, 0 )
+
+[node name="NPC" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 12, 0 )
+grav = 0
+bbText = "did you notice?
+the spell you forget
+is the one you had active.
+weird, huh?"
 
 [node name="Viewport2" parent="." instance=ExtResource( 12 )]
 

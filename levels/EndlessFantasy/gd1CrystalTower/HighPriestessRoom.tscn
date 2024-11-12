@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/Boss/HighPriestessBoss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/pokeball0000.png" type="Texture" id=2]
@@ -37,15 +37,7 @@
 [ext_resource path="res://assets/pokeball_sprite.png" type="Texture" id=38]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=39]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=40]
-[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=41]
-[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=42]
-[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=43]
-[ext_resource path="res://scripts/NPC.gd" type="Script" id=44]
-[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=45]
-[ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=46]
-[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=47]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=48]
-[ext_resource path="res://scripts/Sprite.gd" type="Script" id=49]
 [ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/CroneDefeatedDialogAbortSound.gd" type="Script" id=50]
 [ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=51]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=52]
@@ -1993,7 +1985,7 @@ tracks/4/keys = {
 
 [sub_resource type="ShaderMaterial" id=136]
 shader = ExtResource( 26 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -2019,456 +2011,6 @@ shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 38 )
 shader_param/base_palette = ExtResource( 23 )
 shader_param/target_palette = ExtResource( 23 )
-
-[sub_resource type="BoxShape" id=148]
-resource_local_to_scene = true
-extents = Vector3( 3, 2, 1.3 )
-
-[sub_resource type="BoxShape" id=14]
-extents = Vector3( 1.35, 0.8, 1 )
-
-[sub_resource type="ShaderMaterial" id=222]
-shader = ExtResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 8
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 30 )
-
-[sub_resource type="Animation" id=5]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=17]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=6]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=15]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=16]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="Animation" id=22]
-resource_name = "walk"
-
-[sub_resource type="Animation" id=23]
-resource_name = "walkStart"
-
-[sub_resource type="BoxShape" id=149]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="ShaderMaterial" id=150]
-shader = ExtResource( 26 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.001
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.05
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 3.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 47 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 35 )
-
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 30 )
-
-[sub_resource type="Animation" id=151]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=152]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=153]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=154]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=155]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=156]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="Animation" id=157]
-resource_name = "walk"
-
-[sub_resource type="Animation" id=158]
-resource_name = "walkStart"
-
-[sub_resource type="ShaderMaterial" id=223]
-shader = ExtResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 9
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 30 )
-
-[sub_resource type="Animation" id=159]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=160]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=161]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=162]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=163]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=164]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="Animation" id=165]
-resource_name = "walk"
-
-[sub_resource type="Animation" id=166]
-resource_name = "walkStart"
-
-[sub_resource type="ShaderMaterial" id=224]
-shader = ExtResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = -3
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 30 )
-
-[sub_resource type="Animation" id=169]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=170]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=171]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=172]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=173]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=174]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="Animation" id=175]
-resource_name = "walk"
-
-[sub_resource type="Animation" id=176]
-resource_name = "walkStart"
-
-[sub_resource type="ShaderMaterial" id=225]
-shader = ExtResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 1
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 27 )
-shader_param/base_palette = ExtResource( 23 )
-shader_param/target_palette = ExtResource( 30 )
-
-[sub_resource type="Animation" id=177]
-resource_name = "default"
-length = 0.1
-
-[sub_resource type="Animation" id=178]
-resource_name = "fall"
-length = 0.1
-
-[sub_resource type="Animation" id=179]
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=180]
-resource_name = "jump"
-length = 0.001
-
-[sub_resource type="Animation" id=181]
-resource_name = "land"
-length = 0.1
-
-[sub_resource type="Animation" id=182]
-resource_name = "stand"
-length = 0.1
-
-[sub_resource type="Animation" id=183]
-resource_name = "walk"
-
-[sub_resource type="Animation" id=184]
-resource_name = "walkStart"
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
@@ -2828,7 +2370,7 @@ resource_name = "walk"
 [sub_resource type="Animation" id=193]
 resource_name = "walkStart"
 
-[sub_resource type="ArrayMesh" id=226]
+[sub_resource type="ArrayMesh" id=222]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2841,7 +2383,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=227]
+[sub_resource type="ArrayMesh" id=223]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2854,7 +2396,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=228]
+[sub_resource type="ArrayMesh" id=224]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2867,7 +2409,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=229]
+[sub_resource type="ArrayMesh" id=225]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -3758,7 +3300,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="ArrayMesh" id=230]
+[sub_resource type="ArrayMesh" id=226]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -3771,7 +3313,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=231]
+[sub_resource type="ArrayMesh" id=227]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -4619,7 +4161,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="ArrayMesh" id=232]
+[sub_resource type="ArrayMesh" id=228]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -4632,7 +4174,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=233]
+[sub_resource type="ArrayMesh" id=229]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -5480,7 +5022,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="ArrayMesh" id=234]
+[sub_resource type="ArrayMesh" id=230]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -5493,7 +5035,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=235]
+[sub_resource type="ArrayMesh" id=231]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -6347,7 +5889,7 @@ extents = Vector3( 1.2, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=219]
 shader = ExtResource( 26 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -6376,7 +5918,7 @@ shader_param/target_palette = ExtResource( 51 )
 
 [sub_resource type="ShaderMaterial" id=220]
 shader = ExtResource( 26 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -6756,452 +6298,6 @@ texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
-[node name="npcPlatforms" type="Spatial" parent="Viewport/level"]
-
-[node name="NPC" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
-visible = false
-script = ExtResource( 44 )
-grav = 0
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC" groups=["npc"]]
-script = ExtResource( 43 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC/SmallInteractionArea"]
-shape = SubResource( 148 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC/SmallerInteractionArea"]
-shape = SubResource( 14 )
-
-[node name="NPC TextBox" parent="Viewport/level/npcPlatforms/NPC" instance=ExtResource( 41 )]
-
-[node name="TextBox" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox" index="0"]
-margin_bottom = 491.0
-
-[node name="ColorRect2" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 90.0
-
-[node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 91.0
-
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="8"]
-position = Vector2( 439.5, 80 )
-
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="9"]
-position = Vector2( 439.5, 80 )
-
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="10"]
-stream = ExtResource( 42 )
-volume_db = -20.0
-
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="11"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC/NPC TextBox/TextBox" index="13"]
-pitch_scale = 0.65
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 222 )
-pixel_size = 0.125
-transparent = false
-double_sided = false
-texture = ExtResource( 27 )
-hframes = 8
-vframes = 10
-frame = 10
-region_rect = Rect2( 0, 0, 62, 0 )
-script = ExtResource( 49 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/npcPlatforms/NPC"]
-anims/default = SubResource( 5 )
-anims/fall = SubResource( 17 )
-anims/flickerOn = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/land = SubResource( 15 )
-anims/stand = SubResource( 16 )
-anims/walk = SubResource( 22 )
-anims/walkStart = SubResource( 23 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/npcPlatforms/NPC" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 149 )
-
-[node name="InteractPrompt" parent="Viewport/level/npcPlatforms/NPC" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 150 )
-frame = 745
-frame_delay = 0.5
-
-[node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/npcPlatforms/NPC"]
-stream = ExtResource( 45 )
-volume_db = -20.0
-pitch_scale = 0.65
-
-[node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/npcPlatforms/NPC"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="NPC2" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3, 0 )
-visible = false
-script = ExtResource( 44 )
-grav = 0
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC2" groups=["npc"]]
-script = ExtResource( 43 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC2/SmallInteractionArea"]
-shape = SubResource( 148 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC2/SmallerInteractionArea"]
-shape = SubResource( 14 )
-
-[node name="NPC TextBox" parent="Viewport/level/npcPlatforms/NPC2" instance=ExtResource( 41 )]
-
-[node name="TextBox" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox" index="0"]
-margin_bottom = 491.0
-
-[node name="ColorRect2" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 90.0
-
-[node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 91.0
-
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="8"]
-position = Vector2( 439.5, 80 )
-
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="9"]
-position = Vector2( 439.5, 80 )
-
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="10"]
-stream = ExtResource( 42 )
-volume_db = -20.0
-
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="11"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC2/NPC TextBox/TextBox" index="13"]
-pitch_scale = 0.65
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC2" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-transparent = false
-double_sided = false
-texture = ExtResource( 27 )
-hframes = 8
-vframes = 10
-frame = 10
-region_rect = Rect2( 0, 0, 62, 0 )
-script = ExtResource( 49 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/npcPlatforms/NPC2"]
-anims/default = SubResource( 151 )
-anims/fall = SubResource( 152 )
-anims/flickerOn = SubResource( 153 )
-anims/jump = SubResource( 154 )
-anims/land = SubResource( 155 )
-anims/stand = SubResource( 156 )
-anims/walk = SubResource( 157 )
-anims/walkStart = SubResource( 158 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/npcPlatforms/NPC2" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC2/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 149 )
-
-[node name="InteractPrompt" parent="Viewport/level/npcPlatforms/NPC2" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 150 )
-frame = 745
-frame_delay = 0.5
-
-[node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/npcPlatforms/NPC2"]
-stream = ExtResource( 45 )
-volume_db = -20.0
-pitch_scale = 0.65
-
-[node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/npcPlatforms/NPC2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="NPC3" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, 0 )
-visible = false
-script = ExtResource( 44 )
-grav = 0
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC3" groups=["npc"]]
-script = ExtResource( 43 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC3/SmallInteractionArea"]
-shape = SubResource( 148 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC3/SmallerInteractionArea"]
-shape = SubResource( 14 )
-
-[node name="NPC TextBox" parent="Viewport/level/npcPlatforms/NPC3" instance=ExtResource( 41 )]
-
-[node name="TextBox" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox" index="0"]
-margin_bottom = 491.0
-
-[node name="ColorRect2" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 90.0
-
-[node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 91.0
-
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="8"]
-position = Vector2( 439.5, 80 )
-
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="9"]
-position = Vector2( 439.5, 80 )
-
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="10"]
-stream = ExtResource( 42 )
-volume_db = -20.0
-
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="11"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC3/NPC TextBox/TextBox" index="13"]
-pitch_scale = 0.65
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC3" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 223 )
-pixel_size = 0.125
-transparent = false
-double_sided = false
-texture = ExtResource( 27 )
-hframes = 8
-vframes = 10
-frame = 10
-region_rect = Rect2( 0, 0, 62, 0 )
-script = ExtResource( 49 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/npcPlatforms/NPC3"]
-anims/default = SubResource( 159 )
-anims/fall = SubResource( 160 )
-anims/flickerOn = SubResource( 161 )
-anims/jump = SubResource( 162 )
-anims/land = SubResource( 163 )
-anims/stand = SubResource( 164 )
-anims/walk = SubResource( 165 )
-anims/walkStart = SubResource( 166 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/npcPlatforms/NPC3" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC3/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 149 )
-
-[node name="InteractPrompt" parent="Viewport/level/npcPlatforms/NPC3" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 150 )
-frame = 745
-frame_delay = 0.5
-
-[node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/npcPlatforms/NPC3"]
-stream = ExtResource( 45 )
-volume_db = -20.0
-pitch_scale = 0.65
-
-[node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/npcPlatforms/NPC3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="NPC4" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, 0 )
-visible = false
-script = ExtResource( 44 )
-grav = 0
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC4" groups=["npc"]]
-script = ExtResource( 43 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC4/SmallInteractionArea"]
-shape = SubResource( 148 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC4/SmallerInteractionArea"]
-shape = SubResource( 14 )
-
-[node name="NPC TextBox" parent="Viewport/level/npcPlatforms/NPC4" instance=ExtResource( 41 )]
-
-[node name="TextBox" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox" index="0"]
-margin_bottom = 491.0
-
-[node name="ColorRect2" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 90.0
-
-[node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 91.0
-
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="8"]
-position = Vector2( 439.5, 80 )
-
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="9"]
-position = Vector2( 439.5, 80 )
-
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="10"]
-stream = ExtResource( 42 )
-volume_db = -20.0
-
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="11"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC4/NPC TextBox/TextBox" index="13"]
-pitch_scale = 0.65
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC4" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 224 )
-pixel_size = 0.125
-transparent = false
-double_sided = false
-texture = ExtResource( 27 )
-hframes = 8
-vframes = 10
-frame = 10
-region_rect = Rect2( 0, 0, 62, 0 )
-script = ExtResource( 49 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/npcPlatforms/NPC4"]
-anims/default = SubResource( 169 )
-anims/fall = SubResource( 170 )
-anims/flickerOn = SubResource( 171 )
-anims/jump = SubResource( 172 )
-anims/land = SubResource( 173 )
-anims/stand = SubResource( 174 )
-anims/walk = SubResource( 175 )
-anims/walkStart = SubResource( 176 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/npcPlatforms/NPC4" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC4/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 149 )
-
-[node name="InteractPrompt" parent="Viewport/level/npcPlatforms/NPC4" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 150 )
-frame = 745
-frame_delay = 0.5
-
-[node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/npcPlatforms/NPC4"]
-stream = ExtResource( 45 )
-volume_db = -20.0
-pitch_scale = 0.65
-
-[node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/npcPlatforms/NPC4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="NPC5" type="Spatial" parent="Viewport/level/npcPlatforms" groups=["npc"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 6, 0 )
-visible = false
-script = ExtResource( 44 )
-grav = 0
-
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC5" groups=["npc"]]
-script = ExtResource( 43 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC5/SmallInteractionArea"]
-shape = SubResource( 148 )
-
-[node name="SmallerInteractionArea" type="Area" parent="Viewport/level/npcPlatforms/NPC5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC5/SmallerInteractionArea"]
-shape = SubResource( 14 )
-
-[node name="NPC TextBox" parent="Viewport/level/npcPlatforms/NPC5" instance=ExtResource( 41 )]
-
-[node name="TextBox" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox" index="0"]
-margin_bottom = 491.0
-
-[node name="ColorRect2" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox/ColorRect" index="0"]
-margin_bottom = 90.0
-
-[node name="ColorRect3" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
-margin_bottom = 91.0
-
-[node name="NextPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="8"]
-position = Vector2( 439.5, 80 )
-
-[node name="EndPrompt" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="9"]
-position = Vector2( 439.5, 80 )
-
-[node name="DialogStartSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="10"]
-stream = ExtResource( 42 )
-volume_db = -20.0
-
-[node name="DialogSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="11"]
-volume_db = -23.0
-
-[node name="AbortSound" parent="Viewport/level/npcPlatforms/NPC5/NPC TextBox/TextBox" index="13"]
-pitch_scale = 0.65
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/npcPlatforms/NPC5" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 225 )
-pixel_size = 0.125
-transparent = false
-double_sided = false
-texture = ExtResource( 27 )
-hframes = 8
-vframes = 10
-frame = 10
-region_rect = Rect2( 0, 0, 62, 0 )
-script = ExtResource( 49 )
-should_randomize_frame_delay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/npcPlatforms/NPC5"]
-anims/default = SubResource( 177 )
-anims/fall = SubResource( 178 )
-anims/flickerOn = SubResource( 179 )
-anims/jump = SubResource( 180 )
-anims/land = SubResource( 181 )
-anims/stand = SubResource( 182 )
-anims/walk = SubResource( 183 )
-anims/walkStart = SubResource( 184 )
-
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/npcPlatforms/NPC5" groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/npcPlatforms/NPC5/FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
-shape = SubResource( 149 )
-
-[node name="InteractPrompt" parent="Viewport/level/npcPlatforms/NPC5" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
-visible = false
-material_override = SubResource( 150 )
-frame = 745
-frame_delay = 0.5
-
-[node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/npcPlatforms/NPC5"]
-stream = ExtResource( 45 )
-volume_db = -20.0
-pitch_scale = 0.65
-
-[node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/npcPlatforms/NPC5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3913, 7, 0 )
 
@@ -7304,12 +6400,12 @@ spawn_an_elder = false
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 226 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 222 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 227 )
+mesh = SubResource( 223 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
@@ -7325,11 +6421,11 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 228 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 224 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
-mesh = SubResource( 229 )
+mesh = SubResource( 225 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal2" index="12"]
 visible = false
@@ -7351,11 +6447,11 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 230 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
-mesh = SubResource( 231 )
+mesh = SubResource( 227 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal3" index="12"]
 visible = false
@@ -7377,11 +6473,11 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 232 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
-mesh = SubResource( 233 )
+mesh = SubResource( 229 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal4" index="12"]
 visible = false
@@ -7403,11 +6499,11 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 234 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]
-mesh = SubResource( 235 )
+mesh = SubResource( 231 )
 
 [node name="NPC" parent="Viewport/level/CubeCrystal5" index="12"]
 visible = false
@@ -7498,11 +6594,6 @@ material = SubResource( 44 )
 
 [editable path="Viewport/level/HighPriestessBoss"]
 [editable path="Viewport/level/HighPriestessBoss/Crystals/HighpriestessCrystal"]
-[editable path="Viewport/level/npcPlatforms/NPC/NPC TextBox"]
-[editable path="Viewport/level/npcPlatforms/NPC2/NPC TextBox"]
-[editable path="Viewport/level/npcPlatforms/NPC3/NPC TextBox"]
-[editable path="Viewport/level/npcPlatforms/NPC4/NPC TextBox"]
-[editable path="Viewport/level/npcPlatforms/NPC5/NPC TextBox"]
 [editable path="Viewport/level/CroneNPC"]
 [editable path="Viewport/level/CroneNPC/NPC TextBox"]
 [editable path="Viewport/level/CroneNPCDefeated"]

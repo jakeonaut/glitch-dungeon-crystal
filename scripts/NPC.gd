@@ -177,7 +177,7 @@ func fallthroughCollisionActivate(_friend):
   # don't allow text interaction
   pass
 
-
+var should_i_respond_to_smacks = true
 func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   # if not can_be_smacked:
   #   return false
@@ -235,7 +235,7 @@ func activate(is_player):
     return false
   if not is_player:
     return false
-  if global.activeInteractor == null and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
+  if global.activeInteractor == null and (level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5 or level.player.nesting_doll_state == global.NestingDoll.MATRIARCH):
     textBox.hideInteractPrompt()
     if not floating_text:
       textBox.untinify()

@@ -12,6 +12,7 @@ var nesting_doll_state = global.NestingDoll.GRANDMA
 var returning_recover_time = 0
 var returning_recover_time_limit = 3
 var returning_to_save_point = 0
+var should_i_move_up = true
 
 
 func _ready():
@@ -133,6 +134,10 @@ func _process(delta):
     if on_ground:
         if secretAniPlayer.assigned_animation == "fall":
             secretAniPlayer.play("land")
+    if smallInteractionArea.is_touching_carcass and should_i_move_up:
+        global_transform.origin.y += 1
+    elif not smallInteractionArea.is_touching_carcass:
+        should_i_move_up = false
             
 # @override
 func landed():

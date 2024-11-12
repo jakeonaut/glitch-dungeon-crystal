@@ -31,7 +31,7 @@ shader_param/shake_color_rate = 0.01
 shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = true
 shader_param/enable_dither = true
-shader_param/enable_no_transparency = true
+shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
@@ -83,7 +83,7 @@ shader_param/target_palette = ExtResource( 12 )
 
 [sub_resource type="ShaderMaterial" id=59]
 shader = ExtResource( 5 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -112,7 +112,7 @@ shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="ShaderMaterial" id=60]
 shader = ExtResource( 5 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -141,7 +141,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=61]
 shader = ExtResource( 5 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -197,6 +197,7 @@ max_frames = 1
 automatically_change_color = false
 
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )

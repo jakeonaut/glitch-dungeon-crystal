@@ -135,7 +135,7 @@ func alignMySprite():
 
 # @override
 func activate(is_player):
-  return passiveActivate(0, is_player)
+  return false # passiveActivate(0, is_player)
   
 # @override
 func isActive(_debug=false):
@@ -183,20 +183,7 @@ var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
 func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
-  if is_smacked:
-    return false
-
-  if not silently and smackSound and not smackSound.is_playing(): smackSound.play()
-  if chestSprite:
-    chestSprite.material_override.set_shader_param("time_influence", time_influence)
-    chestSprite.material_override.set_shader_param("y_div", y_div)
-    chestSprite.material_override.set_shader_param("normal_offset", normal_offset)
-    chestSprite.material_override.set_shader_param("shake_power", 0.143)
-    chestSprite.material_override.set_shader_param("shake_block_size", 60)
-    chestSprite.material_override.set_shader_param("shake_color_rate", 0.219)
-  smack_timer = 0
-  is_smacked = true
-  return true
+  return false
 
 # @override
 func unsmack():

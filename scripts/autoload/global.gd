@@ -295,7 +295,6 @@ func resetMemory():
     memory["mp"] = memory["max_mp"]
     memory["level_zonez"] = []
     memory["fishing_rod_shortcut"] = 0
-    # memory["spellbookPage"] = null # we check if the key exists to see if we have it... -_-
     memory["forget_me_not"] = false
     memory["angel_flute"] = false
     memory["goddess_dream3"] = false
@@ -324,12 +323,13 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["can_force_respawn"] = 0
-    memory["broomerang"] = 0
+    memory["can_force_respawn"] = 1
+    memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
     memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
+    memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
 
