@@ -18,8 +18,11 @@ onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
 onready var shardsText = get_node("InventoryRect/ShardsText")
 onready var mapRect = get_node("InventoryRect/MapRect")
-onready var mapIconSprite = get_node("InventoryRect/MapRect/MapIconSprite")
-onready var mapTileMap = get_node("InventoryRect/MapRect/ColorRect/ColorRect/TileMap")
+onready var mapPlayerSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/PlayerSprite")
+onready var mapCursorSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/CursorSprite")
+onready var mapCursorSprite2 = get_node("InventoryRect/MapRect/ColorRect/ColorRect/CursorSprite2")
+onready var mapAngelSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/AngelSprite")
+onready var mapFaderRect = get_node("InventoryRect/MapRect/ColorRect/ColorRect/MapFaderRect")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -475,6 +478,7 @@ var inventoryOptionIndex = 0
 var inventoryOptionIndexX = 0
 var selectedGlitchSprite = -1
 onready var invSelectionSprite = get_node("InventoryRect/SelectionSprite")
+onready var inventoryFaderRect = get_node("InventoryRect/InventoryFaderRect")
 onready var glitchRect1 = get_node("InventoryRect/GlitchRect1")
 onready var glitchRect2 = get_node("InventoryRect/GlitchRect2")
 onready var glitchRect3 = get_node("InventoryRect/GlitchRect3")
@@ -510,7 +514,13 @@ func processInventoryLogic(delta):
     if inventoryOptionIndexX < 0:
       inventoryOptionIndexX = spellbookSize - 1
     elif inventoryOptionIndexX > spellbookSize - 1:
-      inventoryOptionIndexX = 0
+      if global.memory["angel_flute"] and selectedGlitchSprite == -1:
+        inventoryOptionIndex = 4
+        menuConfirmSound.play()
+        inventoryOptionIndexX = 0
+        return
+      else:
+        inventoryOptionIndexX = 0
     glitchRect1.color = activeColor if inventoryOptionIndexX == 0 else selectedColor if selectedGlitchSprite == 0 else inactiveColor
     glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
@@ -533,19 +543,48 @@ func processInventoryLogic(delta):
     glitchRect3.color = inactiveColor
     glitchRect4.color = inactiveColor
       
-  if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible:
+  var isOnMap = inventoryOptionIndex == 4
+  if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible and not isOnMap:
     if Input.is_action_just_pressed("menu_up"):
       normalizeInventoryOptionIndex(-1, 0)
     if Input.is_action_just_pressed("menu_down"):
       normalizeInventoryOptionIndex(1, 0)
 
   if inventoryOptionIndex != 0 and not popupRect.visible:
-    if Input.is_action_just_pressed("menu_right"):
+    if Input.is_action_just_pressed("menu_right") or (Input.is_action_just_pressed("menu_down") and isOnMap):
+      mapCursorSprite.restart()
+      mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, 1)
       menuMoveSound.play()
-    elif Input.is_action_just_pressed("menu_left"):
+    elif Input.is_action_just_pressed("menu_left") or (Input.is_action_just_pressed("menu_up") and isOnMap):
+      mapCursorSprite.restart()
+      mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, -1)
       menuMoveSound.play()
+  isOnMap = inventoryOptionIndex == 4
+  inventoryFaderRect.visible = isOnMap
+  mapFaderRect.visible = not isOnMap
+
+  invSelectionSprite.visible = not isOnMap
+  if isOnMap:
+    var mapGrid = transition.mapManager.gimmeMapGrid()
+    var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+    var mapPathToSeek = angelStatues[inventoryOptionIndexX][1]
+    for i in range(MAP_HEIGHT):
+      for j in range(MAP_WIDTH):
+        if not mapGrid.has(i) or not mapGrid[i].has(j):
+          continue
+        var roomPath = mapGrid[i][j].path
+        if roomPath == mapPathToSeek:
+          var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
+          var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
+          var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+          if sprite != null:
+            mapCursorSprite.position = sprite.position
+            mapCursorSprite2.position = mapCursorSprite.position
+            mapCursorSprite2.position.x -= 28
+          break
+        
 
   if Input.is_action_just_pressed("menu_confirm"):
     if inventoryOptionIndex == 0:
@@ -607,12 +646,22 @@ func processInventoryLogic(delta):
           popupText.text = "goddess dream of death"
         else:
           popupText.text = "crypt key:\n  to forgotten crypt"
+    elif inventoryOptionIndex == 4:
+      var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+      var mapPathToSeek = angelStatues[inventoryOptionIndexX][1]
+      popupRect.visible = not popupRect.visible
+      popupText.text = "TODO: teleport to: " + mapPathToSeek
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if popupRect.visible:
       popupRect.visible = false
       selectedGlitchSprite = -1
     elif selectedGlitchSprite >= 0:
       selectedGlitchSprite = -1
+    elif inventoryOptionIndex == 4:
+      inventoryOptionIndex = 0
+      inventoryOptionIndexX = 0
+      menuCancelSound.play()
+      processInventoryRender(delta)
     else:
       yield(get_tree().create_timer(0.1), "timeout")
       global.isPauseMenuOpen = false
@@ -620,7 +669,9 @@ func processInventoryLogic(delta):
       getPlayer().unpauseSound.play()
       level.restartMusic()
 
+# this would be SOO much easier with some FSM vars
 func normalizeInventoryOptionIndex(y, x):
+  var hasAngelFlute = global.memory["angel_flute"]
   # gonna need to not be hard coded... based on global.memories... it will be REALLY gross to hardcode this in the case where
   # for example, the player has not collected the enchanted broom, but has collected some SOUL MEMORIES or DREAMS.
   # so on menu_down/up, we're gonna have to have a normalizeFunction...
@@ -633,9 +684,20 @@ func normalizeInventoryOptionIndex(y, x):
       if (inventoryOptionIndex == 2 and not soulLabel.visible):
         inventoryOptionIndex = 3
       if (inventoryOptionIndex == 3 and not keyLabel.visible) or inventoryOptionIndex > 3:
-        inventoryOptionIndex = 0 if grimoireSprite.visible else 1
+        inventoryOptionIndex = 4 if hasAngelFlute else 0 if grimoireSprite.visible else 1
+        if hasAngelFlute:
+          menuConfirmSound.play()
+        mapCursorSprite.restart()
+        mapCursorSprite2.restart()
     elif y < 0:
       if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
+        inventoryOptionIndex = 4
+        menuConfirmSound.play()
+        mapCursorSprite.restart()
+        mapCursorSprite2.restart()
+        var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+        inventoryOptionIndexX = angelStatues.size() - 1
+      if inventoryOptionIndex == 4 and not hasAngelFlute:
         inventoryOptionIndex = 3
       if inventoryOptionIndex == 3 and not keyLabel.visible:
         inventoryOptionIndex = 2
@@ -646,7 +708,15 @@ func normalizeInventoryOptionIndex(y, x):
     inventoryOptionIndexX += x
     if x >= 0:
       if (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
-        inventoryOptionIndexX = 0
+        if hasAngelFlute:
+          inventoryOptionIndex = 4
+          menuConfirmSound.play()
+          mapCursorSprite.restart()
+          mapCursorSprite2.restart()
+          inventoryOptionIndexX = 0
+          return
+        else:
+          inventoryOptionIndexX = 0
     elif x < 0:
       if inventoryOptionIndexX < 0:
         inventoryOptionIndexX = 3 if bagSprite.visible else 2
@@ -659,7 +729,15 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
         inventoryOptionIndexX = 2
       if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
-        inventoryOptionIndexX = 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
+        if hasAngelFlute:
+          inventoryOptionIndex = 4
+          menuConfirmSound.play()
+          mapCursorSprite.restart()
+          mapCursorSprite2.restart()
+          inventoryOptionIndexX = 0
+          return
+        else:
+          inventoryOptionIndexX = 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
     elif x < 0:
       if inventoryOptionIndexX == 2 and not soulSprite3.visible:
         inventoryOptionIndexX = 1
@@ -678,7 +756,15 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 2 and not sporeKeySprite.visible:
         inventoryOptionIndexX = 3
       if (inventoryOptionIndexX == 3 and not pyramidKeySprite.visible) or inventoryOptionIndexX > 3:
-        inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishKeySprite.visible else 2 if sporeKeySprite.visible else 3
+        if hasAngelFlute:
+          inventoryOptionIndex = 4
+          menuConfirmSound.play()
+          mapCursorSprite.restart()
+          mapCursorSprite2.restart()
+          inventoryOptionIndexX = 0
+          return
+        else:
+          inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishKeySprite.visible else 2 if sporeKeySprite.visible else 3
     elif x < 0:
       if inventoryOptionIndexX == 3 and not pyramidKeySprite.visible:
         inventoryOptionIndexX = 2
@@ -688,6 +774,28 @@ func normalizeInventoryOptionIndex(y, x):
         inventoryOptionIndexX = 0
       if (inventoryOptionIndexX == 0 and not angelEggSprite.visible) or inventoryOptionIndexX < 0:
         inventoryOptionIndexX = 3 if pyramidKeySprite.visible else 2 if sporeKeySprite.visible else 1 if fishKeySprite.visible else 0 
+
+  if inventoryOptionIndex == 4:
+    inventoryOptionIndexX += x
+    var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+    if x > 0:
+      if inventoryOptionIndexX >= angelStatues.size():
+        inventoryOptionIndex = 0 if grimoireSprite.visible else 1
+        inventoryOptionIndexX = 0
+        processInventoryRender(0)
+        return
+    if x < 0:
+      if inventoryOptionIndexX < 0:
+        inventoryOptionIndex -= 1
+        if inventoryOptionIndex == 3 and not keyLabel.visible:
+          inventoryOptionIndex = 2
+        if inventoryOptionIndex == 2 and not soulLabel.visible:
+          inventoryOptionIndex = 1
+        inventoryOptionIndexX = 0
+        processInventoryRender(0)
+        return
+    
+
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
@@ -790,9 +898,15 @@ func processInventoryRender(_delta):
     sporeKeySprite.frame = 24
   if global.memory["dogu_matryoshka_boss"] == 3:
     pyramidKeySprite.frame = 26
+  mapAngelSprite.visible = false
   keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
+  mapCursorSprite.visible = inventoryOptionIndex == 4
+  mapCursorSprite2.visible = mapCursorSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
+var MAP_WIDTH = 12
+var MAP_HEIGHT = 12
+var has_drawn_map = false
 func tryDrawMap():
   if has_drawn_map:
     return
@@ -801,113 +915,73 @@ func tryDrawMap():
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   for i in range(MAP_HEIGHT):
     for j in range(MAP_WIDTH):
-      if not mapGrid.has(i) or not mapGrid[i].has(j):
-        continue
-      var spriteIndex = (j + ((14-i)*MAP_WIDTH)) + 1
+      var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
       var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
       var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
-      sprite.z_index = 0
-      var mapRoom = mapGrid[i][j]
       if sprite == null:
         print("DEBUG: " + spriteName + " doesn't exist")
-      elif mapRoom.path == level.getLevelName():
-        setProperMapFrame(sprite, mapGrid, i, j)
-        var playerIcon = mapIconSprite.duplicate()
-        playerIcon.visible = true
-        sprite.add_child(playerIcon)
-      elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
-        setProperMapFrame(sprite, mapGrid, i, j)
-        var playerIcon = mapIconSprite.duplicate()
-        playerIcon.frame = 1
-        playerIcon.visible = true
-        sprite.add_child(playerIcon)
-      # elif global.haveIBeenToThisLevelPath(mapRoom.path):
+        continue
+      if not mapGrid.has(i) or not mapGrid[i].has(j) or mapGrid[i][j].hide_me_from_map:
+        sprite.frame = 0
+        continue
+      setProperMapFrame(sprite, mapGrid, i, j)
+      var mapRoom = mapGrid[i][j]
+      if mapRoom.path == level.getLevelName():
+        mapPlayerSprite.position = sprite.position
+        mapPlayerSprite.position.y += 2
       else:
         for angelStatue in angelStatues:
           if mapRoom.path == angelStatue[1]:
-            var playerIcon = mapIconSprite.duplicate()
-            playerIcon.frame = 2
-            playerIcon.visible = true
-            sprite.add_child(playerIcon)
-        setProperMapFrame(sprite, mapGrid, i, j)
+            var angelSprite = mapAngelSprite.duplicate()
+            angelSprite.visible = true
+            angelSprite.position = sprite.position
+            mapAngelSprite.get_parent().add_child(angelSprite)
   has_drawn_map = true
 
 # optimization could be, rather than reconstructing the map on every level, can keep this map sprite grid on transition, and simply draw it here...
-var MAP_WIDTH = 15
-var MAP_HEIGHT = 15
-var has_drawn_map = false
 func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
   sprite.frame = 0
-  var is_left_open = mapRoom.can_nav_left and j > 0 and mapGrid[i].has(j-1)
-  var is_right_open = mapRoom.can_nav_right and j < 14 and mapGrid[i].has(j+1)
-  var is_top_open = mapRoom.can_nav_up and i < 14 and mapGrid.has(i+1) and mapGrid[i+1].has(j)
-  var is_bottom_open = mapRoom.can_nav_down and i > 0 and mapGrid.has(i-1) and mapGrid[i-1].has(j)
-  if is_left_open and is_right_open and is_top_open and is_bottom_open:
-    sprite.frame = 5
-  elif is_left_open and is_right_open and is_top_open:
-    sprite.frame = 4
-  elif is_left_open and is_right_open and is_bottom_open:
-    sprite.frame = 4
-    sprite.flip_v = true
-  elif is_left_open and is_top_open and is_bottom_open:
-    sprite.frame = 15
-    sprite.flip_h = true
-  elif is_right_open and is_top_open and is_bottom_open:
-    sprite.frame = 15
-  elif is_left_open and is_right_open:
-    sprite.frame = 3
-  elif is_left_open and is_top_open:
-    sprite.frame = 2
-    sprite.flip_h = true
-  elif is_left_open and is_bottom_open:
-    sprite.frame = 2
-    sprite.flip_h = true
-    sprite.flip_v = true
-  elif is_right_open and is_top_open:
-    sprite.frame = 2
-  elif is_right_open and is_bottom_open:
-    sprite.frame = 2
-    sprite.flip_v = true
-  elif is_top_open and is_bottom_open:
-    sprite.frame = 13
-  elif is_left_open:
-    sprite.frame = 1
-    sprite.flip_h = true
-  elif is_right_open:
-    sprite.frame = 1
-  elif is_top_open:
-    sprite.frame = 9
-  elif is_bottom_open:
-    sprite.frame = 8
-  
   sprite.material = sprite.material.duplicate()
   sprite.z_index = 1
+  sprite.material.set_shader_param("palette_out", global.white_palette2d)
+  sprite.material.set_shader_param("num_colors", 16)
   match levelZoneName:
     "gd1":
-        pass
+        sprite.frame = 231
+        sprite.material.set_shader_param("offset", 11)
     "gd1TutorialDungeon":
-        sprite.material.set_shader_param("target_palette", global.grey_palette)
+        sprite.frame = 190
+        sprite.material.set_shader_param("offset", 10)
     "gd1FishingVillage":
-        sprite.material.set_shader_param("target_palette", global.green_palette)
+        sprite.frame = 245
+        sprite.material.set_shader_param("offset", 3)
     "gd1ToxicJungle":
-        sprite.material.set_shader_param("target_palette", global.black_palette)
+        sprite.frame = 95
+        sprite.material.set_shader_param("offset", 2)
     "gd1ShiftingSandLand":
-        sprite.material.set_shader_param("target_palette", global.yellow_palette)
+        sprite.frame = 253
+        sprite.material.set_shader_param("offset", 1)
     "gd1CrystalTower":
-        sprite.material.set_shader_param("target_palette", global.white_palette)
+        sprite.frame = 219
+        sprite.material.set_shader_param("offset", 14)
     "gd1GrandmaVillage":
-        sprite.material.set_shader_param("target_palette", global.white_palette)
+        sprite.frame = 231
+        sprite.material.set_shader_param("offset", 6)
     "gd1BubblegloopSwamp":
-        sprite.material.set_shader_param("target_palette", global.green_tidepool_palette)
+        sprite.frame = 207
+        sprite.material.set_shader_param("offset", 15)
     "gd1TombSouls":
-        sprite.material.set_shader_param("target_palette", global.yellow_black_palette)
+        sprite.frame = 217
+        sprite.material.set_shader_param("offset", 0)
     "gd1AbstractSuburbs":
-        sprite.material.set_shader_param("target_palette", global.green_black_palette)
+        sprite.frame = 252
+        sprite.material.set_shader_param("offset", 13)
     "gd1primordialOoze":
-        sprite.material.set_shader_param("target_palette", global.dream_palette)
+        sprite.frame = 61
+        sprite.material.set_shader_param("offset", 1)
     _:
         pass
 

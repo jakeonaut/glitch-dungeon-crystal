@@ -1485,6 +1485,10 @@ text = "MAGIC: 10"
 scroll_active = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="MapBackgroundSprite" parent="PauseMenu/InventoryRect/MapRect/ColorRect/ColorRect" index="0"]
+frame = 0
 
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false
