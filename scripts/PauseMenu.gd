@@ -793,184 +793,123 @@ func processInventoryRender(_delta):
   keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
-var MAP_WIDTH = 12
-var MAP_HEIGHT = 12
 func tryDrawMap():
   if has_drawn_map:
     return
 
   var mapGrid = transition.mapManager.gimmeMapGrid()
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
-  for raw_y in range(MAP_HEIGHT):
-    for x in range(MAP_WIDTH):
-      if not mapGrid.has(raw_y) or not mapGrid[raw_y].has(x):
+  for i in range(MAP_HEIGHT):
+    for j in range(MAP_WIDTH):
+      if not mapGrid.has(i) or not mapGrid[i].has(j):
         continue
-      if mapGrid[raw_y][x].hide_me_from_map:
-        continue
-      # a little inefficient because neighboring rooms are double setting shared walls... oh well. its only 144
-      setProperMapTile(mapGrid, x, raw_y)
-      # var mapRoom = mapGrid[i][j]
-      # if sprite == null:
-      #   print("DEBUG: " + spriteName + " doesn't exist")
-      # elif mapRoom.path == level.getLevelName():
-      #   setProperMapFrame(sprite, mapGrid, i, j)
-      #   var playerIcon = mapIconSprite.duplicate()
-      #   playerIcon.visible = true
-      #   sprite.add_child(playerIcon)
-      # elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
-      #   setProperMapFrame(sprite, mapGrid, i, j)
-      #   var playerIcon = mapIconSprite.duplicate()
-      #   playerIcon.frame = 1
-      #   playerIcon.visible = true
-      #   sprite.add_child(playerIcon)
-      # # elif global.haveIBeenToThisLevelPath(mapRoom.path):
-      # else:
-      #   for angelStatue in angelStatues:
-      #     if mapRoom.path == angelStatue[1]:
-      #       var playerIcon = mapIconSprite.duplicate()
-      #       playerIcon.frame = 2
-      #       playerIcon.visible = true
-      #       sprite.add_child(playerIcon)
-      #   setProperMapFrame(sprite, mapGrid, i, j)
+      var spriteIndex = (j + ((14-i)*MAP_WIDTH)) + 1
+      var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
+      var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+      sprite.z_index = 0
+      var mapRoom = mapGrid[i][j]
+      if sprite == null:
+        print("DEBUG: " + spriteName + " doesn't exist")
+      elif mapRoom.path == level.getLevelName():
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      elif global.memory.has("prev_room") and mapRoom.path == global.memory["prev_room"]:
+        setProperMapFrame(sprite, mapGrid, i, j)
+        var playerIcon = mapIconSprite.duplicate()
+        playerIcon.frame = 1
+        playerIcon.visible = true
+        sprite.add_child(playerIcon)
+      # elif global.haveIBeenToThisLevelPath(mapRoom.path):
+      else:
+        for angelStatue in angelStatues:
+          if mapRoom.path == angelStatue[1]:
+            var playerIcon = mapIconSprite.duplicate()
+            playerIcon.frame = 2
+            playerIcon.visible = true
+            sprite.add_child(playerIcon)
+        setProperMapFrame(sprite, mapGrid, i, j)
   has_drawn_map = true
 
 # optimization could be, rather than reconstructing the map on every level, can keep this map sprite grid on transition, and simply draw it here...
+var MAP_WIDTH = 15
+var MAP_HEIGHT = 15
 var has_drawn_map = false
-var M = 2
-func getLevelZoneName(raw_y, x):
-  var mapGrid = transition.mapManager.gimmeMapGrid()
-  var mapRoom = mapGrid[raw_y][x]  # guaranteedish to already have this room at least by the time that we get here.
+func setProperMapFrame(sprite, mapGrid, i, j):
+  var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
-  return global.getLevelZoneName(mapPath)
-
-func setProperMapTile(mapGrid, x, raw_y):
-  var mapRoom = mapGrid[raw_y][x]  # guaranteed to already have this room at least by the time that we get here.
-  var y = MAP_HEIGHT - 1 - raw_y 
-  var UL = Vector2(M*x + 0, M*y + 0)
-  var UM = Vector2(M*x + 1, M*y + 0)
-  var UR = Vector2(M*x + 2, M*y + 0)
-  var ML = Vector2(M*x + 0, M*y + 1)
-  ## var MM = Vector2(M*x + 1, M*y + 1)
-  var MR = Vector2(M*x + 2, M*y + 1)
-  var DL = Vector2(M*x + 0, M*y + 2)
-  var DM = Vector2(M*x + 1, M*y + 2)
-  var DR = Vector2(M*x + 2, M*y + 2)
-
-  var levelZoneName = getLevelZoneName(raw_y, x)
-  var has_left_neighbor = mapGrid[raw_y].has(x-1) and not mapGrid[raw_y][x-1].hide_me_from_map
-  var has_right_neighbor = mapGrid[raw_y].has(x+1) and not mapGrid[raw_y][x+1].hide_me_from_map
-  var has_top_neighbor = mapGrid.has(raw_y+1) and mapGrid[raw_y+1].has(x) and not mapGrid[raw_y+1][x].hide_me_from_map
-  var has_bottom_neighbor = mapGrid.has(raw_y-1) and mapGrid[raw_y-1].has(x) and not mapGrid[raw_y-1][x].hide_me_from_map
-  var has_top_left_neighbor = mapGrid.has(raw_y+1) and mapGrid[raw_y+1].has(x-1) and not mapGrid[raw_y+1][x-1].hide_me_from_map
-  var has_top_right_neighbor = mapGrid.has(raw_y+1) and mapGrid[raw_y+1].has(x+1) and not mapGrid[raw_y+1][x+1].hide_me_from_map
-  var has_bottom_left_neighbor = mapGrid.has(raw_y-1) and mapGrid[raw_y-1].has(x-1) and not mapGrid[raw_y-1][x-1].hide_me_from_map
-  var has_bottom_right_neighbor = mapGrid.has(raw_y-1) and mapGrid[raw_y-1].has(x+1) and not mapGrid[raw_y-1][x+1].hide_me_from_map
-
-  var is_left_open = x > 0 and has_left_neighbor and (mapRoom.can_nav_left or getLevelZoneName(raw_y, x-1) == levelZoneName)
-  var is_right_open = x < MAP_WIDTH-1 and has_right_neighbor and (mapRoom.can_nav_right or getLevelZoneName(raw_y, x+1) == levelZoneName)
-  var is_top_open = raw_y < MAP_HEIGHT-1 and has_top_neighbor and (mapRoom.can_nav_up or getLevelZoneName(raw_y+1, x) == levelZoneName)
-  var is_bottom_open = raw_y > 0 and has_bottom_neighbor and (mapRoom.can_nav_down or getLevelZoneName(raw_y-1, x) == levelZoneName)
-
-  var mapTileYOffset = getMapTileYOffset(raw_y, x)
-
-  # set UL
-  var cell = UL
-  if has_top_left_neighbor:
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-  elif has_top_neighbor:
-    if has_left_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(3, 0 + mapTileYOffset))
-  else:
-    if has_left_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(3, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(0, 0 + mapTileYOffset))
-  # set UR
-  cell = UR
-  if has_top_right_neighbor:
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-  elif has_top_neighbor:
-    if has_right_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(4, 0 + mapTileYOffset))
-  else:
-    if has_right_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(3, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(2, 0 + mapTileYOffset))
-  # set DL
-  cell = DL
-  if has_bottom_left_neighbor:
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-  elif has_bottom_neighbor:
-    if has_left_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(3, 0 + mapTileYOffset))
-  else:
-    if has_left_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(4, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(0, 2 + mapTileYOffset))
-  # set DR
-  cell = DR
-  if has_bottom_right_neighbor:
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-  elif has_bottom_neighbor:
-    if has_right_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(4, 0 + mapTileYOffset))
-  else:
-    if has_right_neighbor:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(4, 1 + mapTileYOffset))
-    else:
-      mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(2, 2 + mapTileYOffset))
+  var levelZoneName = global.getLevelZoneName(mapPath)
+  sprite.frame = 0
+  var is_left_open = mapRoom.can_nav_left and j > 0 and mapGrid[i].has(j-1)
+  var is_right_open = mapRoom.can_nav_right and j < 14 and mapGrid[i].has(j+1)
+  var is_top_open = mapRoom.can_nav_up and i < 14 and mapGrid.has(i+1) and mapGrid[i+1].has(j)
+  var is_bottom_open = mapRoom.can_nav_down and i > 0 and mapGrid.has(i-1) and mapGrid[i-1].has(j)
+  if is_left_open and is_right_open and is_top_open and is_bottom_open:
+    sprite.frame = 5
+  elif is_left_open and is_right_open and is_top_open:
+    sprite.frame = 4
+  elif is_left_open and is_right_open and is_bottom_open:
+    sprite.frame = 4
+    sprite.flip_v = true
+  elif is_left_open and is_top_open and is_bottom_open:
+    sprite.frame = 15
+    sprite.flip_h = true
+  elif is_right_open and is_top_open and is_bottom_open:
+    sprite.frame = 15
+  elif is_left_open and is_right_open:
+    sprite.frame = 3
+  elif is_left_open and is_top_open:
+    sprite.frame = 2
+    sprite.flip_h = true
+  elif is_left_open and is_bottom_open:
+    sprite.frame = 2
+    sprite.flip_h = true
+    sprite.flip_v = true
+  elif is_right_open and is_top_open:
+    sprite.frame = 2
+  elif is_right_open and is_bottom_open:
+    sprite.frame = 2
+    sprite.flip_v = true
+  elif is_top_open and is_bottom_open:
+    sprite.frame = 13
+  elif is_left_open:
+    sprite.frame = 1
+    sprite.flip_h = true
+  elif is_right_open:
+    sprite.frame = 1
+  elif is_top_open:
+    sprite.frame = 9
+  elif is_bottom_open:
+    sprite.frame = 8
   
-  if not is_left_open: # set ML
-    cell = ML
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(0, 1 + mapTileYOffset))
-  if not is_top_open: # set UM
-    cell = UM
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 0 + mapTileYOffset))
-  if not is_right_open: # set UM
-    cell = MR
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(2, 1 + mapTileYOffset))
-  if not is_bottom_open: # set DM
-    cell = DM
-    mapTileMap.set_cell(cell.x, cell.y, 0, false, false, false, Vector2(1, 2 + mapTileYOffset))
-
-var TILE_MAP_HEIGHT = 5
-func getMapTileYOffset(raw_y, x):
-  var levelZoneName = getLevelZoneName(raw_y, x)
+  sprite.material = sprite.material.duplicate()
+  sprite.z_index = 1
   match levelZoneName:
     "gd1":
-        return 2 * TILE_MAP_HEIGHT
+        pass
     "gd1TutorialDungeon":
-        return 0
+        sprite.material.set_shader_param("target_palette", global.grey_palette)
     "gd1FishingVillage":
-        return 1 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.green_palette)
     "gd1ToxicJungle":
-        return 3 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.black_palette)
     "gd1ShiftingSandLand":
-        return 4 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.yellow_palette)
     "gd1CrystalTower":
-        return 4 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.white_palette)
     "gd1GrandmaVillage":
-        return 4 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.white_palette)
     "gd1BubblegloopSwamp":
-        return 5 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.green_tidepool_palette)
     "gd1TombSouls":
-        return 5 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.yellow_black_palette)
     "gd1AbstractSuburbs":
-        return 5 * TILE_MAP_HEIGHT
+        sprite.material.set_shader_param("target_palette", global.green_black_palette)
     "gd1primordialOoze":
-        return 0
+        sprite.material.set_shader_param("target_palette", global.dream_palette)
     _:
-        return 0
+        pass
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd
