@@ -80,6 +80,7 @@ enum TilesetType {
     POISON_FOREST,
     POISON_HOUSE,
     AUTUMN_FOREST,
+    PRIMORDIAL_OOZE,
 }
 
 enum ItemState {

@@ -120,7 +120,7 @@ func _ready():
     #     mySprite.set_material_override(null)
     # else:
     mySprite.material_override = mySprite.material_override.duplicate()
-    if spellbookGlitchSprite:
+    if spellbookGlitchSprite != null:
         spellbookGlitchSprite.material_override = spellbookGlitchSprite.material_override.duplicate()
 
     yield(TempTimer.idle_frame(self), "timeout")
@@ -162,7 +162,7 @@ func glitchOut():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
-    if glitch_form != global.GlitchForm.NORMAL:
+    if glitch_form != global.GlitchForm.NORMAL and spellbookGlitchSprite != null:
         spellbookGlitchSprite.visible = true
 
     if global.pauseGame:
@@ -226,6 +226,18 @@ func _process(delta):
                 glitch_switch_time_limit = 99999
                 mySprite.should_soft_fizzle_out = true
 
+    handleSlimeWalking(delta)
+
+    glitchSetSpritesAndCollision()
+
+    if is_smacked:
+        smack_timer += (delta * 22)
+        if smack_timer >= smack_time_limit:
+            unsmack()
+        if smack_timer >= smack_recovery_time_limit:
+            is_smacked = false
+
+func handleSlimeWalking(delta):
     if behavior_intermittent_walking:
         slime_state_timer += (delta*22)
         if slime_state == SlimeState.WALK:
@@ -238,15 +250,6 @@ func _process(delta):
             if slime_state_timer >= slime_idle_time_limit:
                 slime_state_timer = 0
                 slime_state = SlimeState.WALK
-
-    glitchSetSpritesAndCollision()
-
-    if is_smacked:
-        smack_timer += (delta * 22)
-        if smack_timer >= smack_time_limit:
-            unsmack()
-        if smack_timer >= smack_recovery_time_limit:
-            is_smacked = false
 
 func processGlitchFormGlitchiness():
     if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
