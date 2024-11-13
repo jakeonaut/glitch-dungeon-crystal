@@ -32,14 +32,6 @@ func _ready():
 func _process(delta):
   if not visible: return
 
-  mySprite.flip_h = level.player.global_transform.origin.x > global_transform.origin.x
-
-  # flip_timer += (delta*22)
-  # if flip_timer >= flip_time_limit:
-  #   flip_timer = 0
-  #   flip_time_limit = rand_range(5, 30)
-  #   mySprite.flip_h = not mySprite.flip_h
-
   if is_in_cooldown:
     cooldown_timer += (delta*22)
   if cooldown_timer >= cooldown_time_limit:
@@ -65,29 +57,25 @@ func glitchSwitchSprite(_delta):
   pass
 
 func passiveActivate(_delta, _is_player):
-  if is_smacked or is_in_cooldown or getPlayer().nesting_doll_state != global.NestingDoll.BABY:
-    return
+  pass
 
-  is_in_cooldown = true
-  cooldown_timer = 0
-  .getSmacked(null)
-  global_transform.origin.z = 2
-  getPlayer().pauseInput = true
-  global.pauseMoveInput = true
-  getPlayer().pauseAnimation = true
-  wormAniPlayer.stop()
-  wormAniPlayer.clear_queue()
-  wormAniPlayer.queue("gulp")
-  wormAniPlayer.queue("bob")
+# @override
+func handleSlimeWalking(delta):
+  if behavior_intermittent_walking:
+    slime_state_timer += (delta*22)
+    if slime_state == SlimeState.WALK:
+      mySprite.trySetFrame(20)
+      behavior_walking = true
+      if slime_state_timer >= slime_walk_time_limit:
+        slime_state_timer = 0
+        slime_state = SlimeState.IDLE 
+    elif slime_state == SlimeState.IDLE:
+      mySprite.restart()
+      behavior_walking = false
+      if slime_state_timer >= slime_idle_time_limit:
+        slime_state_timer = 0
+        slime_state = SlimeState.WALK
 
-func jumpToPlayerPosition():
-  global_transform.origin.x = getPlayer().global_transform.origin.x  
-  if mySprite.flip_h:
-    global_transform.origin.x -= 1
-  else:
-    global_transform.origin.x += 1
-  
-  global_transform.origin.y = getPlayer().global_transform.origin.y + 1
 
 func cureMushroom():
   getPlayer().tryDieToEnemy(0, true, true, true)

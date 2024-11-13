@@ -476,7 +476,7 @@ func _process(delta):
   processMoleLogic(delta)
   processChickenLogic(delta)
   processCurseLogic(delta)
-  processAngelStatueRitual(delta)
+  # processAngelStatueRitual(delta)
     
   # doTimeDilation(real_delta)
 
@@ -1516,10 +1516,10 @@ func collideWithCeiling(local_lv):
         glitchTickle()
       break
   if (
-    local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or \
-    nesting_doll_state == global.NestingDoll.BABY or \
-    (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or \
-    (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or \
+    local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or
+    nesting_doll_state == global.NestingDoll.BABY or
+    (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or
+    # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
     areAnyTilesAboveMeGlitched
   ):
     local_lv.y = 0
@@ -2130,6 +2130,8 @@ var should_flip = false
 # @override
 func processHorizontalInputs(delta):
   .processHorizontalInputs(delta)
+  if transformation == TransformationState.MOLE_DIGGING:
+    hv = Vector3(0, 0, 0)
   # if is_mushroom_infected:
   #   should_flip = not should_flip
   #   var turning_left = mushroom_infection_direction == 1 and Input.is_action_pressed("ui_left")

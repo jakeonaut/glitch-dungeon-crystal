@@ -2440,6 +2440,9 @@ transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.52
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
 
+[node name="AngelSprite" parent="UILayer/PauseMenu/InventoryRect/MapRect/ColorRect/ColorRect" index="4"]
+frame = 0
+
 [node name="SkipText" type="RichTextLabel" parent="UILayer"]
 visible = false
 margin_left = 320.0

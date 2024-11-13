@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -14,7 +14,9 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=14]
+[ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=15]
 [ext_resource path="res://sceneObjects/HighpriestessCrystal.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=17]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
@@ -1504,6 +1506,7 @@ shader_param/target_palette = ExtResource( 12 )
 
 [node name="ClaydolBoss" type="Spatial"]
 script = ExtResource( 7 )
+tb = 5.0
 grav = 15
 jump_force = 12
 only_activate_in_range = false
@@ -1552,6 +1555,16 @@ pitch_scale = 1.2
 stream = ExtResource( 10 )
 volume_db = -15.0
 pitch_scale = 1.1
+
+[node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+volume_db = -24.0
+pitch_scale = 1.4
+
+[node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = -30.0
+pitch_scale = 1.25
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )

@@ -337,7 +337,9 @@ func _process(delta):
     return
 
   randomize_timer += delta
-  if global.memory["priestess"] >= 2:
+  
+  # if global.memory["priestess"] >= 2:
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
     randomize_timer = randomize_time_limit
     randomize_num_counter = 0
     randomize_num = 1
@@ -657,7 +659,11 @@ func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
   
 export var can_change_color = true
 func changeColorPalette(palette, _palette_alt = null):
-  if my_tileset_type == global.TilesetType.DUNGEON or my_tileset_type == global.TilesetType.BEACH:
+  if (
+     my_tileset_type == global.TilesetType.DUNGEON or
+     my_tileset_type == global.TilesetType.BEACH or
+     my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE
+  ):
     if not can_change_color:
       curr_palette = override_palette if override_palette != null else grey_palette
     elif override_palette == null or palette != grey_palette:
@@ -706,7 +712,8 @@ func properlySetTiles():
     var tile_orientation = tile_dict[cell_index][1]
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
 
-    if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:
+    # if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
       randomizeTile(cell_index, getRandomGlitchType())
 
 func setTileset(tileset_type, properly_set_tiles = true):
@@ -717,6 +724,8 @@ func setTileset(tileset_type, properly_set_tiles = true):
     red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_dungeon_palette
     black_palette = global.black_dungeon_palette
+  elif tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
+    my_tileset_glitch_type = global.GlitchForm.FEATHER
   elif tileset_type == global.TilesetType.HOUSE:
     # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
     # and we named them "_green", etc. but it's more like "_forest" etc. 

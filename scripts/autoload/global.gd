@@ -16,6 +16,7 @@ var green_palette = preload("res://assets/palettes/green_palette.png")
 var black_palette = preload("res://assets/palettes/black_palette.png")
 var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
+var white_palette2d = preload("res://assets/palettes2D/white_palette.png")
 var base_palette = preload("res://assets/palettes/base_palette.png")
 var base_palette_pink = preload("res://assets/palettes/base_palette_pink.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
@@ -79,6 +80,7 @@ enum TilesetType {
     POISON_FOREST,
     POISON_HOUSE,
     AUTUMN_FOREST,
+    PRIMORDIAL_OOZE,
 }
 
 enum ItemState {
@@ -287,7 +289,7 @@ func resetMemory():
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
-    memory["max_hp"] = 1
+    memory["max_hp"] = 2
     memory["crone"] = 0
     memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
@@ -296,17 +298,17 @@ func resetMemory():
     memory["level_zonez"] = []
     memory["fishing_rod_shortcut"] = 0
     memory["forget_me_not"] = false
-    memory["angel_flute"] = false
+    memory["angel_flute"] = true
     memory["goddess_dream3"] = false
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 0
-    memory["glitched_grimoire"] = false
+    memory["clean_crystals"] = 4
+    memory["glitched_grimoire"] = true
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
-    memory["priestess"] = 0
+    memory["priestess"] = 2
     memory["baba_yaga_boss"] = 0
     memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
@@ -328,9 +330,9 @@ func resetMemory():
     memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
-    memory["mushroom_soul"] = 0
+    memory["mushroom_soul"] = 1
     memory["glitched_broom"] = false
 
     # DEFUNCT POWERUPS

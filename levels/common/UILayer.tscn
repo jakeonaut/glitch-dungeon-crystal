@@ -416,7 +416,7 @@ shader_param/target_palette = ExtResource( 12 )
 
 [sub_resource type="ShaderMaterial" id=17205]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -445,7 +445,7 @@ shader_param/target_palette = ExtResource( 14 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -976,7 +976,7 @@ mesh = SubResource( 17213 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1486,6 +1486,9 @@ scroll_active = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 9 )]
 visible = false
+
+[node name="MapBackgroundSprite" parent="PauseMenu/InventoryRect/MapRect/ColorRect/ColorRect" index="0"]
+frame = 0
 
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false

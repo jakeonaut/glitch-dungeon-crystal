@@ -6,6 +6,8 @@ onready var crystalsContainer = get_node("Crystals")
 onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 onready var noseSprite = get_node("SpriteContainer/InnerSpriteContainer/NoseSprite")
 onready var spriteContainer = get_node("SpriteContainer")
+onready var thudSound = get_node("Sounds/ThudSound")
+onready var digSound = get_node("Sounds/DigSound")
 
 var MAX_NUM_HITS = 3
 var num_hits = 0
@@ -212,9 +214,65 @@ func landed():
         secretAniPlayer.play("drillAttackFall")
         boss_phase = BossPhase.DRILL_DREIDEL_SPIN
         dreidel_timer = 0
+        for _i in range(2):
+            if digTiles(getTilesBelow(getLevelTiles()), true):
+                global_transform.origin.y -= 8*.125
 
 # @override
 func glitchSetSpritesAndCollision():
     if boss_phase == BossPhase.FALL_OVER or boss_phase == BossPhase.STUN_TWITCH or boss_phase == BossPhase.GET_UP:
         return
     spriteContainer.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+
+# @override
+func shouldIDoCollisions():
+    .shouldIDoCollisions()
+    should_collide_ceil = false
+
+# @override
+func doHorizontalWalkingBehavior():
+    if behavior_walking and horizontal_collision:
+        var solidTiles = []
+        if walk_direction.x < 0:
+            solidTiles = getTilesLeftOf(getLevelTiles(), 1.0)
+        elif walk_direction.x > 0:
+            solidTiles = getTilesRightOf(getLevelTiles(), 1.0)
+            print("right")
+        for i in range(solidTiles.size()):
+            var coords = solidTiles[i]
+            if coords == null: continue
+            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+            if getLevelTiles().isTileFragileSolid(tile_type):
+                print("fragile tile!")
+                getSmacked()
+                thudSound.play()
+                horizontal_collision = false
+                flipWalkingDirection()
+                return
+        
+        print("dig dig" + str(solidTiles))
+        horizontal_collision = false
+        digTiles(solidTiles, true)
+
+func digTiles(solidTiles, should_summon_clouds):
+    var tiles_dug = 0
+    if solidTiles[0] != null:
+        var coords_a = solidTiles[0]
+        levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), false)
+        tiles_dug += 1
+    if solidTiles[1] != null:
+        var coords_mid = solidTiles[1]
+        levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), false)
+        tiles_dug += 1
+    if solidTiles[2] != null:
+        var coords_b = solidTiles[2]
+        levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), false)
+        tiles_dug += 1
+
+    if should_summon_clouds and tiles_dug > 0:
+        level.summonSmokeClouds(global_transform.origin, 2)
+
+    if tiles_dug > 0:
+        digSound.play()
+                
+    return tiles_dug > 0

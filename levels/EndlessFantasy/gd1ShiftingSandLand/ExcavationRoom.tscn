@@ -474,8 +474,8 @@ shape = SubResource( 58 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
 bbText = "•MOLE CRICKET'S MEMORY:
-jump up through a ceiling
-to dig up through floors!"
+bonk head on ceiling
+and hold jump button!"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )
@@ -499,7 +499,6 @@ is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
-visible = true
 
 [node name="AnimationPlayer" parent="Viewport/level/Door" index="6"]
 anims/RESET = SubResource( 46 )
