@@ -17,12 +17,27 @@ onready var pauseMenuRect = get_node("PauseMenuRect")
 onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
 onready var shardsText = get_node("InventoryRect/ShardsText")
-onready var mapRect = get_node("InventoryRect/MapRect")
-onready var mapPlayerSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/PlayerSprite")
-onready var mapCursorSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/CursorSprite")
-onready var mapCursorSprite2 = get_node("InventoryRect/MapRect/ColorRect/ColorRect/CursorSprite2")
-onready var mapAngelSprite = get_node("InventoryRect/MapRect/ColorRect/ColorRect/AngelSprite")
-onready var mapFaderRect = get_node("InventoryRect/MapRect/ColorRect/ColorRect/MapFaderRect")
+onready var mapRect = get_node("MapRect")
+onready var mapTitleRect = get_node("InventoryRect/MapTitleRect")
+onready var mapColorRect1 = get_node("MapRect/ColorRect")
+onready var mapColorRect2 = get_node("MapRect/ColorRect/ColorRect")
+onready var mapBackgroundSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite")
+onready var mapPlayerSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/PlayerSprite")
+
+onready var map_anglerFishBossSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/AnglerFishBossSprite")
+onready var map_babaYagaBossSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/BabaYagaBossSprite")
+onready var map_doguBossSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/DoguBossSprite")
+onready var map_mushroomSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/MushroomSoulSprite")
+onready var map_cricketSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CricketSoulSprite")
+onready var map_fishSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/FishSoulSprite")
+onready var map_cryptKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CryptKeySprite")
+onready var map_phishingKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/PhishingKeySprite")
+onready var map_sporeKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/SporeKeySprite")
+
+onready var mapCursorSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CursorSprite")
+onready var mapCursorSprite2 = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CursorSprite2")
+onready var mapAngelSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/AngelSprite")
+onready var mapFaderRect = get_node("MapRect/ColorRect/ColorRect/MapFaderRect")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -62,7 +77,43 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  if not global.isPauseMenuOpen and Input.is_action_pressed("open_map") and global.activeInteractor == null and not global.shouldRenderAsCinematic and global.memory["has_map_item"]:
+    self.visible = true
+    if mapRect.rect_scale.x == 1:
+      if not has_drawn_map:
+        processInventoryRender(delta)
+        tryDrawMap()
+      mapRect.visible = true
+      mapRect.rect_position = Vector2(140, -10)
+      mapRect.rect_scale = Vector2(2, 2)
+      mapRect.color = Color("#00000000")
+      mapColorRect1.color = Color("#00000000")
+      mapColorRect2.color = Color("#00000000")
+      mapBackgroundSprite.modulate = Color("#c8ffffff")
+      # mapBackgroundSprite.self_modulate = Color("#80ffffff")
+
+    pauseTitleRect.visible = false
+    pauseMenuRect.visible = false
+    largerPopup.visible = false
+    normalMenu.visible = false
+    cursorSprite.visible = false
+    inventoryRect.visible = false
+    shardsText.visible = false
+    inventoryFaderRect.visible = false
+    mapFaderRect.visible = false
+    return
+
   self.visible = global.isPauseMenuOpen
+  if mapRect.rect_scale.x == 2:
+    pauseTitleRect.visible = true
+    mapRect.rect_position = Vector2(452, 88)
+    mapRect.rect_scale = Vector2(1, 1)
+    mapRect.color = Color("#040404")
+    mapColorRect1.color = Color("#394c62")
+    mapColorRect2.color = Color("#040404")
+    mapBackgroundSprite.modulate = Color("#ffffff")
+    # mapBackgroundSprite.self_modulate = Color("#ffffff")
+
   shardsText.visible = get_node("../GlitchStatusRect").visible
   if not global.isPauseMenuOpen:
     popupRect.visible = false
@@ -161,8 +212,11 @@ func _process(delta):
     cursorSprite.visible = false
     processInventoryLogic(delta)
     inventoryRect.visible = true
+    mapRect.visible = global.memory["has_map_item"]
+    mapTitleRect.visible = mapRect.visible
   else:
     inventoryRect.visible = false
+    mapRect.visible = false
     inventoryOptionIndex = 0
     inventoryOptionIndexX = 0
 
@@ -497,6 +551,7 @@ func processInventoryLogic(delta):
     else:
       pauseTitleText.bbcode_text = "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
   processInventoryRender(delta)
+  tryDrawMap()
   
   var activeColor = Color("#dcdcdc")
   var inactiveColor = Color("#006400")
@@ -812,7 +867,6 @@ onready var sporeKeySprite = get_node("InventoryRect/SporeKeySprite")
 onready var pyramidKeySprite = get_node("InventoryRect/PyramidKeySprite")
 onready var keyLabel = get_node("InventoryRect/KeyLabel")
 func processInventoryRender(_delta):
-  tryDrawMap()
   if inventoryOptionIndex == 0:
     invSelectionSprite.position = Vector2(26, 46)
   elif inventoryOptionIndex == 1:
@@ -911,12 +965,21 @@ func tryDrawMap():
   if has_drawn_map:
     return
 
+  map_anglerFishBossSprite.visible = false
+  map_babaYagaBossSprite.visible = false
+  map_doguBossSprite.visible = false
+  map_mushroomSoulSprite.visible = false
+  map_cricketSoulSprite.visible = false
+  map_fishSoulSprite.visible = false
+  map_cryptKeySprite.visible = false
+  map_phishingKeySprite.visible = false
+  map_sporeKeySprite.visible = false
   var mapGrid = transition.mapManager.gimmeMapGrid()
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   for i in range(MAP_HEIGHT):
     for j in range(MAP_WIDTH):
       var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
-      var spriteName = "ColorRect/ColorRect/MapSprite" + str(spriteIndex)
+      var spriteName = "ColorRect/ColorRect/MapBackgroundSprite/MapSprite" + str(spriteIndex)
       var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
       if sprite == null:
         print("DEBUG: " + spriteName + " doesn't exist")
@@ -927,12 +990,57 @@ func tryDrawMap():
       setProperMapFrame(sprite, mapGrid, i, j)
       var mapRoom = mapGrid[i][j]
       if mapRoom.path == level.getLevelName():
+        mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
         mapPlayerSprite.position.y += 2
+      elif "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
+        if "AnglerFish" in mapRoom.path:
+          sprite.frame = 217
+          sprite.material.set_shader_param("offset", 0)
+          # map_anglerFishBossSprite.visible = true
+          # map_anglerFishBossSprite.position = sprite.position
+        if "Claydol" in mapRoom.path:
+          sprite.frame = 217
+          sprite.material.set_shader_param("offset", 0)
+          # map_doguBossSprite.visible = true
+          # map_doguBossSprite.position = sprite.position
+        if "BabaYaga" in mapRoom.path:
+          sprite.frame = 217
+          sprite.material.set_shader_param("offset", 0)
+          # map_babaYagaBossSprite.visible = true
+          # map_babaYagaBossSprite.position = sprite.position
+      elif mapRoom.has_mole_memory:
+        sprite.frame = 90 if not soulSprite2.visible else 91
+        # map_cricketSoulSprite.visible = true
+        # map_cricketSoulSprite.position = sprite.position
+      elif mapRoom.has_baba_memory:
+        sprite.frame = 90 if not soulSprite3.visible else 91
+        # map_mushroomSoulSprite.visible = true
+        # map_mushroomSoulSprite.position = sprite.position
+      elif mapRoom.has_fish_memory:
+        sprite.frame = 90 if not soulSprite1.visible else 91
+        # map_fishSoulSprite.visible = true
+        # map_fishSoulSprite.position = sprite.position
+      elif mapRoom.has_crypt_key:
+        sprite.frame = 248 if not pyramidKeySprite.visible else 246
+        sprite.material.set_shader_param("offset", 1)
+        # map_cryptKeySprite.visible = true
+        # map_cryptKeySprite.position = sprite.position
+      elif mapRoom.has_phishing_key:
+        sprite.frame = 248 if not fishKeySprite.visible else 246
+        sprite.material.set_shader_param("offset", 3)
+        # map_phishingKeySprite.visible = true
+        # map_phishingKeySprite.position = sprite.position
+      elif mapRoom.has_spore_key:
+        sprite.frame = 248 if not sporeKeySprite.visible else 246
+        sprite.material.set_shader_param("offset", 2)
+        # map_sporeKeySprite.visible = true
+        # map_sporeKeySprite.position = sprite.position
       else:
         for angelStatue in angelStatues:
           if mapRoom.path == angelStatue[1]:
             var angelSprite = mapAngelSprite.duplicate()
+            sprite.visible = false
             angelSprite.visible = true
             angelSprite.position = sprite.position
             mapAngelSprite.get_parent().add_child(angelSprite)
@@ -974,8 +1082,8 @@ func setProperMapFrame(sprite, mapGrid, i, j):
         sprite.frame = 207
         sprite.material.set_shader_param("offset", 15)
     "gd1TombSouls":
-        sprite.frame = 217
-        sprite.material.set_shader_param("offset", 0)
+        sprite.frame = 250
+        sprite.material.set_shader_param("offset", 12)
     "gd1AbstractSuburbs":
         sprite.frame = 252
         sprite.material.set_shader_param("offset", 13)
@@ -1074,14 +1182,14 @@ func initializeControlsConfig():
     },
     {
       "input_action": "sub_action_button",
-      "label_str": "sweep",
+      "label_str": "sweep broom",
       "default_keyCode": 88, 
       "button_index": JOY_DS_B,
       "default_button_index": JOY_DS_B,
     },
     {
       "input_action": "restart_key",
-      "label_str": "Return.",
+      "label_str": "Return to save.",
       "default_keyCode": 82, 
       "button_index": JOY_DS_Y, 
       "default_button_index": JOY_DS_Y,
@@ -1121,9 +1229,11 @@ func initializeControlsConfig():
       "default_keyCode": 52, 
     },
     {
-      "input_action": "spell_5",
-      "label_str": "spell 5",
-      "default_keyCode": 53, 
+      "input_action": "open_map",
+      "label_str": "open map",
+      "default_keyCode": 67, 
+      "button_index": JOY_L, 
+      "default_button_index": JOY_L, 
     },
   ]
   if global.userSettings.has("controls_config") and not global.hasInitializedControlsConfig:

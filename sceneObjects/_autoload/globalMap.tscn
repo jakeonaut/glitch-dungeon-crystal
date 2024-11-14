@@ -729,7 +729,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
 can_nav_up = false
-hide_me_from_map = true
+has_spore_key = true
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0 )
@@ -753,6 +753,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tsc
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
+can_nav_down = false
 
 [node name="GrubAmbush" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
@@ -762,6 +763,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/GrubAmbush.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
+has_fish_memory = true
 
 [node name="RightsideTunnel" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0 )
@@ -889,6 +891,7 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+has_phishing_door = true
 
 [node name="AnglerFishBossRoom" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -1 )
@@ -931,6 +934,7 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
 can_nav_up = false
+has_phishing_key = true
 
 [node name="RedHallway" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
@@ -954,6 +958,7 @@ path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_down = false
+has_mole_memory = true
 
 [node name="002BroomIntro" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
@@ -1045,29 +1050,10 @@ path = "res://levels/EndlessFantasy/gd1TombSouls/004_KeyRoom.tscn"
 can_nav_left = false
 can_nav_up = false
 can_nav_down = false
-
-[node name="BroomIntro2" parent="CorruptedTomb" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 1, -5, 0 )
-material_override = SubResource( 18 )
-texture = ExtResource( 10 )
-vframes = 16
-frame = 39
-path = "res://levels/EndlessFantasy/gd1TombSouls/002BroomIntro002.tscn"
-can_nav_left = false
-can_nav_up = false
-
-[node name="preBossRoom" parent="CorruptedTomb" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 1, -6, 0 )
-material_override = SubResource( 18 )
-texture = ExtResource( 10 )
-vframes = 16
-frame = 39
-path = "res://levels/EndlessFantasy/gd1TombSouls/preBossRoomDogu.tscn"
-can_nav_left = false
-can_nav_up = false
+has_crypt_door = true
 
 [node name="DoguBossRoom" parent="CorruptedTomb" instance=ExtResource( 3 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 2, -6, -1 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 1, -5, -1 )
 material_override = SubResource( 25 )
 pixel_size = 0.03
 texture = ExtResource( 17 )
@@ -1089,6 +1075,7 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
+has_crypt_key = true
 
 [node name="InvisRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -8, 0 )
@@ -1107,12 +1094,13 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+has_baba_memory = true
 
-[node name="MushroomCave2" parent="ToxicJungle" instance=ExtResource( 3 )]
+[node name="MushroomCave" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8, 0 )
 flip_v = true
 frame = 50
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomCave2.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/003MushroomCave.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
@@ -1231,21 +1219,10 @@ path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/004Neighborhood.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
-
-[node name="preBossRoom" parent="AbstractSuburbs" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -2, 0 )
-material_override = SubResource( 22 )
-texture = ExtResource( 10 )
-vframes = 16
-frame = 76
-path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/preBossRoomBabaYaga.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
+has_spore_door = true
 
 [node name="BabaYagaBossRoom" parent="AbstractSuburbs" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -2, -1 )
 material_override = SubResource( 27 )
 offset = Vector2( 0, 24 )
 pixel_size = 0.03

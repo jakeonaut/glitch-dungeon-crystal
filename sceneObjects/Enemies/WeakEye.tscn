@@ -23,13 +23,14 @@
 
 [sub_resource type="ShaderMaterial" id=47]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.117
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -737,6 +738,20 @@ tracks/10/keys = {
 "update": 0,
 "values": [ 0.12, 0.17, 0.15 ]
 }
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "reenemize"
+} ]
+}
 
 [sub_resource type="Animation" id=160]
 resource_name = "getHurt"
@@ -908,13 +923,14 @@ height = 1.8
 
 [sub_resource type="ShaderMaterial" id=163]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -988,7 +1004,7 @@ anims/blinkOpen = SubResource( 159 )
 anims/getHurt = SubResource( 160 )
 anims/hiddenTeleport = SubResource( 161 )
 
-[node name="SmallInteractionArea" type="Area" parent="." groups=["enemies", "weak_enemies"]]
+[node name="SmallInteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 15 )
 

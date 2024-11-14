@@ -7,6 +7,15 @@ export var can_nav_right = true
 export var can_nav_up = true
 export var can_nav_down = true
 export var hide_me_from_map = false
+export var has_mole_memory = false
+export var has_fish_memory = false
+export var has_baba_memory = false
+export var has_crypt_key = false
+export var has_spore_key = false
+export var has_phishing_key = false
+export var has_crypt_door = false
+export var has_spore_door = false
+export var has_phishing_door = false
 
 
 # Declare member variables here. Examples:

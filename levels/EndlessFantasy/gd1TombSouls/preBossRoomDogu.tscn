@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/Enemies/Sphinx.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=11]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
@@ -17,7 +16,6 @@
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/Enemies/CorruptNPC.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -110,17 +108,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0.0999999, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 0 )
 path = "res://levels/EndlessFantasy/gd1TombSouls/ClaydolBossRoom.tscn"
 
-[node name="Sphinx" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1, 2, 1, 0 )
-
-[node name="Sphinx2" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1, 10, 1, 0 )
-
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
-
-[node name="CorruptNPC" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 16 )]
 

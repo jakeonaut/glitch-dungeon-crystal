@@ -6533,7 +6533,7 @@ flip_h = false
 shape = SubResource( 142 )
 
 [node name="GrandmaStatue4" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -4.95191, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -4.95191, 0 )
 is_extra_life = true
 max_dist_to_player = 999
 

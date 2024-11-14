@@ -330,10 +330,11 @@ func resetMemory():
     memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["multi_broom"] = false
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
-    memory["mushroom_soul"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
+    memory["has_map_item"] = true
 
     # DEFUNCT POWERUPS
     memory["debug_broom"] = 0 # this didn't turn out that fun

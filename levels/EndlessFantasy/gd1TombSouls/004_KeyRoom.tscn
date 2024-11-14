@@ -21,9 +21,9 @@
 [ext_resource path="res://sceneObjects/Flypath.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=25]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=27]
 
 [sub_resource type="BoxShape" id=35]
@@ -224,7 +224,9 @@ shape = SubResource( 33 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 31, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/002BroomIntro002.tscn"
+is_locked = true
+path = "res://levels/EndlessFantasy/gd1TombSouls/ClaydolBossRoom.tscn"
+key_type = 2
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 20 )
@@ -378,17 +380,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4, 30, 0 )
 [node name="Torch7" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 30, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7, 26, 0 )
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 13, 0 )
 
-[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -1.2, 0 )
-
-[node name="FeatherSpell2" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4, -1.2, 0 )
-
-[node name="FeatherSpell3" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7, -1.2, 0 )
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 30.1411, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 3 )]
 

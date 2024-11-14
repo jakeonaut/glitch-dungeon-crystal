@@ -129,17 +129,17 @@ func _process(delta):
         if dreidel_timer >= dreidel_time_limit:
             behavior_walking = false
             dreidel_timer = 0
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            if global_transform.origin.x >= 8:
-                secretAniPlayer.play("dizzy")
-            else:
-                secretAniPlayer.play("dizzyRight")
-            boss_phase = BossPhase.DIZZY
-    elif boss_phase == BossPhase.DIZZY:
-        dizzy_timer += (delta*11)
-        if dizzy_timer >= dizzy_time_limit:
-            dizzy_timer = 0
+    #         secretAniPlayer.stop()
+    #         secretAniPlayer.clear_queue()
+    #         if global_transform.origin.x >= 8:
+    #             secretAniPlayer.play("dizzy")
+    #         else:
+    #             secretAniPlayer.play("dizzyRight")
+    #         boss_phase = BossPhase.DIZZY
+    # elif boss_phase == BossPhase.DIZZY:
+    #     dizzy_timer += (delta*11)
+    #     if dizzy_timer >= dizzy_time_limit:
+    #         dizzy_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idleStand")

@@ -476,7 +476,7 @@ func _process(delta):
   processMoleLogic(delta)
   processChickenLogic(delta)
   processCurseLogic(delta)
-  # processAngelStatueRitual(delta)
+  processAngelStatueRitual(delta)
     
   # doTimeDilation(real_delta)
 

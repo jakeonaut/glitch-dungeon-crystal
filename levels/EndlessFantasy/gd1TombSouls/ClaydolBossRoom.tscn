@@ -366,7 +366,7 @@ shape = SubResource( 226 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/preBossRoomDogu.tscn"
+path = "res://levels/EndlessFantasy/gd1TombSouls/004_KeyRoom.tscn"
 
 [node name="DreamOfDeath" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 0 )

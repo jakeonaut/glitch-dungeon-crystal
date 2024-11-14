@@ -24,7 +24,7 @@
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Enemies/CrowWitch.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=28]
@@ -535,7 +535,7 @@ tracks/0/keys = {
 
 [sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 17 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -568,7 +568,7 @@ extents = Vector3( 3.24, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 17 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -685,8 +685,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.0999999, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0 )
+is_locked = true
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/BabaYagaBossRoom.tscn"
-num_keys_unlock = 2
+num_keys_unlock = 1
+key_type = 4
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 27 )
@@ -843,8 +845,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6, 0 )
 [node name="CrowWitch2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 11, 0 )
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.16497, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 
