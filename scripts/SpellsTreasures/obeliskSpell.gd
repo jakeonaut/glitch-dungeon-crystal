@@ -106,6 +106,9 @@ func _process(delta):
     obeliskSprite.material_override.set_shader_param("target_palette", original_target_palette)
     my_glitch_form = my_next_glitch_form
     my_next_glitch_form = null
+
+  if not shouldIBeActive() and shouldIBeActive(true):
+    obeliskSprite.material_override.set_shader_param("target_palette", original_target_palette)
     
 
   if num_sparkles_spawned < num_sparkles_spawned_limit and sparkleSprite != null:
@@ -129,16 +132,16 @@ func _process(delta):
     if activePassiveArea.is_touching_player_proxy or activePassiveArea.was_touching_player_proxy or activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer:
       was_touching_player_proxy = true
     
-func shouldIBeActive():
+func shouldIBeActive(can_i_touch_player_debug = false):
   if getPlayer().glitch_form == my_glitch_form:
     return false
   elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
     return false
   elif is_in_cooldown:
     return false
-  elif activePassiveArea.is_touching_player_proxy or was_touching_player_proxy:
+  elif not can_i_touch_player_debug and (activePassiveArea.is_touching_player_proxy or was_touching_player_proxy):
     return false
-  elif activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer:
+  elif not can_i_touch_player_debug and (activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer):
     return false
   elif global.memory["mp"] == 0:
     return true

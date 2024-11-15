@@ -14,7 +14,7 @@ func activateScript():
     # tadpole.get_node("Sounds/HatchSound").play()
     # global.incrementLevelZoneThing("angelTadpole", 1)
     global.incrementLevelZoneThing("angelEgg", 1)
-    level.spawnAngelEggFollower(level.player.global_transform.origin)
+    # level.spawnAngelEggFollower(level.player.global_transform.origin)
     global.activeInteractor = null
     egg.queue_free()
     level.player.aniPlayer.play("stand")

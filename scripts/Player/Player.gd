@@ -311,8 +311,8 @@ func wearCostume(costume):
   global.memory["player_costume"] = costume
 
 # @override
-func pressingRun():
-  return true
+# func pressingRun():
+#   return true
   # if nesting_doll_state == global.NestingDoll.BABY:
   #   return true
   # elif not canRun():
@@ -476,7 +476,7 @@ func _process(delta):
   processMoleLogic(delta)
   processChickenLogic(delta)
   processCurseLogic(delta)
-  processAngelStatueRitual(delta)
+  # processAngelStatueRitual(delta)
     
   # doTimeDilation(real_delta)
 
@@ -2413,7 +2413,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
     #   fallenBroom.taking_the_player_with_me = true
     fallenBroom.true_terminal_vel = 0
-    fallenBroom.walk_speed *= 3
+    fallenBroom.walk_speed *= (3 if pressingRun() else 1.5)
     fallenBroom.get_node("BroomSound").play()
     var x_direction = 0
     if Input.is_action_pressed("ui_left"):

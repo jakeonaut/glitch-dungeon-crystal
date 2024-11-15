@@ -774,6 +774,7 @@ func playStickOnWallSound():
   sporeSound.play()
 
 onready var tickleSound = get_node("Sounds/TickleSound")
+onready var malwareSound = get_node("Sounds/MalwareSound")
 var glitch_tickle_timer = 0
 func glitchTickle(play_sound = true):
   glitch_tickle_timer = 1
@@ -782,8 +783,11 @@ func glitchTickle(play_sound = true):
   mySprite.material_override.set_shader_param("shake_power", 0.01)
   mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
   if play_sound:
-    tickleSound.pitch_scale = 0.5
-    tickleSound.play()
+    if malware_infected:
+      malwareSound.play()
+    else:
+      tickleSound.pitch_scale = 0.5
+      tickleSound.play()
 
 var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
 func spawnASpore(where_origin, inverse):

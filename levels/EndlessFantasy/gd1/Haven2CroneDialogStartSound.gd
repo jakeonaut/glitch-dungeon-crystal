@@ -9,7 +9,7 @@ func _ready():
 
 
 func activateScript():
-  var isElderTadpole = "PastoralTowerHub" in level.getLevelName()
+  var isElderTadpole = global.memory["priestess"] > 0
 
   if global.memory["crone"] == 0:
     return

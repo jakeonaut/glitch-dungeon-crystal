@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=36]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=37]
 [ext_resource path="res://scripts/InverseGlitchTileSpawner.gd" type="Script" id=38]
+[ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/SpellbookPage_DialogStartSound.gd" type="Script" id=39]
 
 [sub_resource type="BoxShape" id=43]
 resource_local_to_scene = true
@@ -254,6 +255,9 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 25 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/target_palette = ExtResource( 23 )
+
+[sub_resource type="BoxShape" id=61]
+resource_local_to_scene = true
 
 [sub_resource type="BoxShape" id=49]
 resource_local_to_scene = true
@@ -625,6 +629,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 0 )
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.11107, -0.203964 )
 
+[node name="CollisionShape" parent="Viewport/level/SpellbookPage/SmallInteractionArea" index="0"]
+shape = SubResource( 61 )
+
+[node name="DialogStartSound" parent="Viewport/level/SpellbookPage/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 39 )
+
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
 
@@ -729,6 +739,8 @@ flip_v = true
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground"]
+[editable path="Viewport/level/SpellbookPage"]
+[editable path="Viewport/level/SpellbookPage/NPC TextBox"]
 [editable path="Viewport/level/GlitchTileSpawner"]
 [editable path="Viewport/level/GlitchTileSpawner/NPC3"]
 [editable path="Viewport/level/GlitchTileSpawner/NPC3/NPC TextBox"]

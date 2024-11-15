@@ -1,12 +1,11 @@
 extends AudioStreamPlayer
 
-onready var angelFlute = get_node("../../..")
+onready var treasureChest = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-var has_activated = false
 
 func activateScript():
-  angelFlute.mySprite.visible = false
-  angelFlute.okay_im_done = true
+  treasureChest.mySprite.visible = false
+  treasureChest.okay_im_done = true
   
   global.pauseGame = false
   global.pauseMoveInput = false
@@ -17,6 +16,8 @@ func activateScript():
   level.player.aniPlayer.clear_queue()
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
+  if level.player.glitch_form != global.GlitchForm.NORMAL:
+    level.player.applyObeliskGlitch(level.player.glitch_form)
 
   # IFNDEF SpellbookIntroLevelScript.gd
   # if level.has_node("NPC5"):
@@ -29,6 +30,4 @@ func activateScript():
   level.saveTheGame()
 
 func preActivateScript():
-  if not has_activated:
-    global.memory["angel_flute"] = true
-    has_activated = true
+  global.memory["angel_flute"] = true

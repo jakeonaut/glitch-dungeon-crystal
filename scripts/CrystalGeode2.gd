@@ -192,6 +192,11 @@ func getPurified():
     getLevelTiles().purifyAllSpikes()
     level.purifyAllWeakEnemies()
     level.purifyAllFragileBrickSolids()
+    if global.getLevelZoneThing("angel_statue") == null:
+        global.setLevelZoneThing("angel_statue", [
+            global.getDisplayTitle(level.getLevelZoneName(), "haven"),
+            level.getLevelName()
+        ])
     # if level.has_node("SavePoint"):
     #     level.get_node("SavePoint").passiveActivate(0, is_player)
     # trySweepUpGlitchTiles(collisionShape1)

@@ -2,6 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door2 = get_node("Door2")
 onready var broomUpgradeCrone = get_node("BroomUpgradeCrone")
+onready var broomUpgradeElder = get_node("BroomUpgradeElder")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -11,3 +12,4 @@ func setUpRoomInitializationOverride():
 
   if global.memory["priestess"] > 0:
     broomUpgradeCrone.queue_free()
+    broomUpgradeElder.visible = true

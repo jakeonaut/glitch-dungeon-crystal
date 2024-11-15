@@ -10,7 +10,7 @@ func activateScript():
   if textBox.was_smacked:
     return
 
-  if global.memory["priestess"] == 0:
+  if global.memory["priestess"] == 0 and not global.getLevelZoneThing("crystal_geode"):
     var allCrystalGeodes = global.getThingFromAllLevelZonez("crystal_geode")
     if global.getLevelZoneThing("crystal_geode"):
       var newText = "*mewmew*\n(...you've already purified the\n[color=#0798bf]Crystal[/color] in this zone!)"
@@ -22,25 +22,25 @@ func activateScript():
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
     else:
-      var newText = "*meow*\n•(for some weird reason,\nyou can hear me?)\n•(i smell an unpurified\n[color=red]Crystal[/color] in this zone)"
-      if global.memory["demo_mode"] >= 2:
-        pass
-      else:
-        newText += "\n      " + str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " total left!"
+      var newText = "*meow* •(for some weird reason,\nyou can hear me? i smell an\nunpurified[color=red]Crystal[/color] in this zone)"
+      if global.memory["has_map_item"]:
+        newText += "\n(•i'll mark it on your map)"
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
+
+    global.setLevelZoneThing("babushkaCatSniffed", 1)
   else:
     var levelZoneName = level.getLevelZoneName()
     var has_key = false
     var has_soul = false
     if "ToxicJungle" in levelZoneName:
-      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT))
+      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID))
       has_soul = global.memory["mushroom_soul"] > 0
     elif "FishingVillage" in levelZoneName:
-      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH))
+      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT))
       has_soul = global.memory["zora_flippers"] > 0
     if "ShiftingSandLand" in levelZoneName:
-      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID))
+      has_key = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH))
       has_soul = global.memory["mole_cricket"] > 0
 
     if has_key and has_soul:
@@ -49,8 +49,12 @@ func activateScript():
       textBox.textNode.bbcode_text = newText
     if not has_key or not has_soul:
       var newText = "*meow*, *sniff, sniff*\n•(seems like there's still:\n" + ("a key" if not has_key else "") + ((" and a soul" if not has_key else "a soul") if not has_soul else "") + " in this zone)."
+      if global.memory["has_map_item"]:
+        var plural = "them" if not has_key and not has_soul else "it"
+        newText += "\n(•i'll mark " + plural + " on your map!)"
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
+    global.setLevelZoneThing("babushkaCatSniffed", 2)
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

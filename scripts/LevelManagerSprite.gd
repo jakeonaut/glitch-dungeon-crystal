@@ -16,6 +16,7 @@ export var has_phishing_key = false
 export var has_crypt_door = false
 export var has_spore_door = false
 export var has_phishing_door = false
+export var has_angel_statue = false
 
 
 # Declare member variables here. Examples:

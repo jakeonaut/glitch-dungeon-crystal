@@ -289,26 +289,22 @@ func resetMemory():
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
-    memory["max_hp"] = 2
+    
     memory["crone"] = 0
-    memory["hp"] = memory["max_hp"]
     memory["hearts_recovering"] = false
     memory["max_mp"] = 0
     memory["mp"] = memory["max_mp"]
     memory["level_zonez"] = []
-    memory["fishing_rod_shortcut"] = 0
     memory["forget_me_not"] = false
-    memory["angel_flute"] = true
-    memory["goddess_dream3"] = false
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
     memory["clean_crystals"] = 4
+    memory["priestess"] = 2
     memory["glitched_grimoire"] = true
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
-    memory["priestess"] = 2
     memory["baba_yaga_boss"] = 0
     memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
@@ -325,23 +321,29 @@ func resetMemory():
     ]
 
     # POWERUPS
-    memory["can_force_respawn"] = 1
     memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
-    memory["multi_broom"] = false
+    memory["can_force_respawn"] = 1
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
     memory["has_map_item"] = true
+    memory["max_hp"] = 1
+    memory["hp"] = memory["max_hp"]
+    memory["fishing_rod_shortcut"] = 0
+    memory["angel_flute"] = true
+    memory["has_marked_bosses_on_map"] = false
 
     # DEFUNCT POWERUPS
+    memory["multi_broom"] = false
     memory["debug_broom"] = 0 # this didn't turn out that fun
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
     memory["broom_flight"] = false
+    memory["goddess_dream3"] = false
 
     # GAME MODES
     memory["random_entrances"] = 0
@@ -452,14 +454,14 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
             return "cricket caves" # could amp up the insect-ness more
         "gd1CrystalTower":
             return "dream temple"
-        "gd1GrandmaVillage":
-            return "elder village"
         "gd1BubblegloopSwamp":
             return "malware swamp" # "sea of corruption" # malware swamp
         "gd1TombSouls":
             return "forgotten crypt"
         "gd1AbstractSuburbs":
             return "baba's forest"
+        "gd1GrandmaVillage":
+            return "primordial ooze"
         "gd1primordialOoze":
             return "primordial ooze"
         _:
@@ -1112,11 +1114,11 @@ func getHighScoreLevelZoneThing(highScoreStr, levelZoneThing):
 
 func getLevelZoneThing(thing):
     if currLevelZone == null:
-        return
+        return null
     if not self.memory.has(currLevelZone):
-        return
+        return null
     if not self.memory[currLevelZone].has(thing):
-        return
+        return null
     return self.memory[currLevelZone][thing]
 
 # assumes that we can make a sum of thing

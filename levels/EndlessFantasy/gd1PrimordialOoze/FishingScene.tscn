@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shaders/PoisonWaterCube.gdshader" type="Shader" id=7]
 [ext_resource path="res://sceneObjects/WaterCubes/CleansingWaterCube.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=11]
@@ -1027,6 +1027,9 @@ extents = Vector3( 0.5, 0.5, 1 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="ShaderMaterial" id=51]
+shader = ExtResource( 7 )
+
 [sub_resource type="ViewportTexture" id=9]
 viewport_path = NodePath("Viewport")
 
@@ -1252,17 +1255,26 @@ shape = SubResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -9, 0 )
 grav = 0
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
-
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -3, -4 )
+is_cleansing = false
+
+[node name="ColorRect" parent="Viewport/level/WaterCube/WaterFilter" index="0"]
+material = SubResource( 51 )
 
 [node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, -4 )
+is_cleansing = false
+
+[node name="ColorRect" parent="Viewport/level/WaterCube2/WaterFilter" index="0"]
+material = SubResource( 51 )
 
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -4 )
+is_cleansing = false
+
+[node name="ColorRect" parent="Viewport/level/WaterCube3/WaterFilter" index="0"]
+material = SubResource( 51 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
@@ -1303,5 +1315,8 @@ __meta__ = {
 [editable path="Viewport/level/Waterfall/AreaSound"]
 [editable path="Viewport/level/AnglerFish"]
 [editable path="Viewport/level/AnglerFish/FishingRod"]
+[editable path="Viewport/level/WaterCube"]
+[editable path="Viewport/level/WaterCube2"]
+[editable path="Viewport/level/WaterCube3"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

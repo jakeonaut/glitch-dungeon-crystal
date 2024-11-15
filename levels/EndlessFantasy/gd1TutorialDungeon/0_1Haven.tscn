@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=43]
 [ext_resource path="res://assets/water_normal_4.png" type="Texture" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
+[ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=46]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 6 )
@@ -728,7 +729,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=284]
 shader = ExtResource( 6 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.3
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -757,7 +758,7 @@ shader_param/target_palette = ExtResource( 30 )
 
 [sub_resource type="ShaderMaterial" id=215]
 shader = ExtResource( 6 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.3
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -4442,6 +4443,9 @@ transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 13, -6,
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

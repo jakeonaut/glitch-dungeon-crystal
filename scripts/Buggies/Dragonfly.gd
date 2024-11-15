@@ -15,6 +15,7 @@ var is_smacked = false
 var smack_timer = 0
 export var smack_time_limit = 2
 var miniCubeCrystalRes = preload("res://sceneObjects/miniCubeCrystal.tscn")
+var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareDragonfly.tscn")
 var is_swimmin_away = false
 
 # Called when the node enters the scene tree for the first time.
@@ -116,6 +117,12 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     if is_smacked:
         return
 
+    if level.player.malware_infected:
+        var malwareDragonfly = malwareDragonflyRes.instance()
+        level.add_child(malwareDragonfly)
+        malwareDragonfly.global_transform = self.global_transform.origin
+        self.queue_free()
+        return
     if catchSound: catchSound.play()
     if smackSound: smackSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)

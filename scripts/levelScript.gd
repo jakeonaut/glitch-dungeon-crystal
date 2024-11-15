@@ -39,7 +39,7 @@ export var display_title = "???"
 export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
-var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.tscn")
+var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareDragonfly.tscn")
 
 func _ready():
   has_room_initialized = false
@@ -115,6 +115,8 @@ func _ready_impl():
       self.add_child(newMalwareDragonfly)
       newMalwareDragonfly.global_transform.origin = player.global_transform.origin
       newMalwareDragonfly.do_i_belong_here = false
+      newMalwareDragonfly.is_following_player = true
+      newMalwareDragonfly.smallInteractionArea.remove_from_group("bug")
     player.getABroom()
   if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
     global.memory["broom"] = false
@@ -178,6 +180,10 @@ func tryInitializeFromDebug():
 
       # debug "hack" to set angel_statues on debug_initialization
       var tempLevelZone = global.currLevelZone
+      # set for tutorial dungeon
+      global.tryInitializeLevelZone("gd1TutorialDungeon")
+      global.setLevelZoneThing("angel_statue", 
+        ["tutorial dungeon", "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"])
       # set for tadpole bog
       global.tryInitializeLevelZone("gd1FishingVillage")
       global.setLevelZoneThing("angel_statue", 
@@ -191,7 +197,7 @@ func tryInitializeFromDebug():
       global.setLevelZoneThing("angel_statue", 
         ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
       # set for dream temple
-      global.tryInitializeLevelZone("gd1CrystalTower")
+      # global.tryInitializeLevelZone("gd1CrystalTower")
       # set for elder village
       global.tryInitializeLevelZone("gd1GrandmaVillage")
       global.setLevelZoneThing("angel_statue", 
@@ -238,7 +244,7 @@ func processPauseMenu():
         global.pauseGame = true
         player.pauseSound.play()
         playMenuMusic()
-      elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+      elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) and not global.isOnMainMenu:
         yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
           glitchScreenEffect.visible = false
@@ -632,14 +638,14 @@ func trySpawnFollowers():
   #         stepify(rand_range(0.5, 1.5), 0.125), 
   #         0))
 
-  var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-  if numEggs != null:
-    for _i in range(numEggs):
-      spawnAngelEggFollower(
-        player.global_transform.origin + Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125), 
-          0))
+  # var numEggs = global.getThingFromAllLevelZonez("angelEgg")
+  # if numEggs != null:
+  #   for _i in range(numEggs):
+  #     spawnAngelEggFollower(
+  #       player.global_transform.origin + Vector3(
+  #         stepify(rand_range(-1.0, 1.0), 0.125),
+  #         stepify(rand_range(0.5, 1.5), 0.125), 
+  #         0))
 
   # if getLevelName().find("0_1Haven") > 0 or getLevelName().find("EndOfDemo") > 0:
   #   var numAngelTadpoles = global.getThingFromAllLevelZonez("angelTadpole")
@@ -659,8 +665,11 @@ func purifyAllWeakEnemies(summon_smoke_clouds = true):
     var weak_enemy = weak_enemy_area.get_node("..")
     if weak_enemy.isActive() and not weak_enemy.am_i_dying:
       weak_enemy.ouchies(weak_enemy.global_transform.origin)
-      if i < weak_enemies.size() - 1 and weak_enemy.dieSound != null:
-        weak_enemy.dieSound.stop()
+      if i < weak_enemies.size() - 1:
+        if weak_enemy.dieSound != null:
+          weak_enemy.dieSound.stop()
+        if weak_enemy.notDieSound != null:
+          weak_enemy.notDieSound.stop()
       if summon_smoke_clouds:
         self.summonSmokeClouds(weak_enemy.global_transform.origin, 3, false, true)
 

@@ -121,7 +121,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0.0999999, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/MalwareIntro.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 7 )]

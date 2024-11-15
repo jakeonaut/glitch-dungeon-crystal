@@ -79,7 +79,7 @@ tracks/0/keys = {
 shader = ExtResource( 23 )
 shader_param/screen_mode = false
 shader_param/num_colors = 16
-shader_param/offset = 14
+shader_param/offset = 11
 shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 7 )
 shader_param/palette_out = ExtResource( 24 )
@@ -566,7 +566,7 @@ position = Vector2( -46.5, -47 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 61
 
 [node name="MapSprite2" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )
@@ -886,7 +886,7 @@ position = Vector2( -12.5, -21.5 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 219
 
 [node name="MapSprite42" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )
@@ -990,7 +990,7 @@ position = Vector2( -4, -13 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 59
 
 [node name="MapSprite55" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )

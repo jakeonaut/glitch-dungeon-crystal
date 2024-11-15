@@ -18,7 +18,7 @@
 
 [sub_resource type="ShaderMaterial" id=55]
 shader = ExtResource( 4 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -97,7 +97,7 @@ radius = 0.8
 
 [sub_resource type="ShaderMaterial" id=56]
 shader = ExtResource( 4 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -168,6 +168,8 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0
 shape = SubResource( 48 )
 
 [node name="NPC TextBox" parent="." instance=ExtResource( 10 )]
+bbText = "got an angel egg!!
+???"
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 13 )
