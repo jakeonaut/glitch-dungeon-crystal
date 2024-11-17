@@ -137,9 +137,9 @@ margin_bottom = 510.0
 
 [node name="ColorRect" type="ColorRect" parent="LargerPopup"]
 margin_left = 115.0
-margin_top = 98.0
+margin_top = 44.0
 margin_right = 537.0
-margin_bottom = 394.0
+margin_bottom = 425.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -149,7 +149,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 416.0
-margin_bottom = 290.0
+margin_bottom = 376.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -158,7 +158,7 @@ color = Color( 0.223529, 0.298039, 0.384314, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 409.0
-margin_bottom = 282.0
+margin_bottom = 368.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -367,10 +367,10 @@ text = "press x to select, z to go back
 scroll_active = false
 
 [node name="MapRect" type="ColorRect" parent="."]
-margin_left = 452.0
-margin_top = 88.0
-margin_right = 715.0
-margin_bottom = 351.0
+margin_left = 450.0
+margin_top = 131.0
+margin_right = 713.0
+margin_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -1722,16 +1722,16 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 0.501961 )
 
 [node name="InventoryRect" type="ColorRect" parent="."]
 margin_left = 107.0
-margin_top = 113.0
+margin_top = 82.0
 margin_right = 499.0
-margin_bottom = 382.0
+margin_bottom = 368.0
 color = Color( 0, 0, 0, 0 )
 
 [node name="ShardsText" type="RichTextLabel" parent="InventoryRect"]
 margin_left = 506.0
-margin_top = -73.0
+margin_top = -28.0
 margin_right = 1022.0
-margin_bottom = 20.0
+margin_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 8 )
@@ -1745,9 +1745,9 @@ scroll_active = false
 
 [node name="TitleRect" type="ColorRect" parent="InventoryRect"]
 margin_left = 103.0
-margin_top = -45.0
+margin_top = -69.0
 margin_right = 283.0
-margin_bottom = -1.0
+margin_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -1792,10 +1792,10 @@ text = "inventory"
 scroll_active = false
 
 [node name="MapTitleRect" type="ColorRect" parent="InventoryRect"]
-margin_left = 388.0
-margin_top = -59.0
-margin_right = 488.0
-margin_bottom = -15.0
+margin_left = 415.0
+margin_top = 16.0
+margin_right = 515.0
+margin_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = true
@@ -1839,8 +1839,18 @@ bbcode_text = "map"
 text = "map"
 scroll_active = false
 
+[node name="SpellsLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 117.0
+margin_top = -20.0
+margin_right = 335.0
+margin_bottom = 19.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "--spells--"
+text = "--spells--"
+
 [node name="GrimoireSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 26, 46 )
+position = Vector2( 96, 52 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1855,8 +1865,18 @@ hframes = 6
 vframes = 5
 frame = 19
 
+[node name="EquipLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 124.0
+margin_top = 70.0
+margin_right = 342.0
+margin_bottom = 109.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "--equip--"
+text = "--equip--"
+
 [node name="BroomSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 27, 104 )
+position = Vector2( 159, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1864,7 +1884,7 @@ vframes = 5
 frame = 27
 
 [node name="HatSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 83, 102 )
+position = Vector2( 214, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1872,7 +1892,8 @@ vframes = 5
 frame = 7
 
 [node name="PetSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 139, 102 )
+visible = false
+position = Vector2( 266, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1880,25 +1901,26 @@ vframes = 5
 frame = 6
 
 [node name="BagSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 195, 102 )
+visible = false
+position = Vector2( 322, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 22
 
-[node name="EquipLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 235.0
-margin_top = 94.0
-margin_right = 453.0
-margin_bottom = 133.0
+[node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 107.0
+margin_top = 154.0
+margin_right = 325.0
+margin_bottom = 191.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "equip"
-text = "equip"
+bbcode_text = "--memories--"
+text = "--memories--"
 
 [node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
-position = Vector2( 27, 166 )
+position = Vector2( 137, 202 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1906,7 +1928,7 @@ vframes = 5
 frame = 29
 
 [node name="SoulSprite2" type="Sprite" parent="InventoryRect"]
-position = Vector2( 83, 166 )
+position = Vector2( 188, 202 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1914,25 +1936,25 @@ vframes = 5
 frame = 21
 
 [node name="SoulSprite3" type="Sprite" parent="InventoryRect"]
-position = Vector2( 139, 166 )
+position = Vector2( 244, 202 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 23
 
-[node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 179.0
-margin_top = 158.0
-margin_right = 397.0
-margin_bottom = 195.0
+[node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 107.0
+margin_top = 233.0
+margin_right = 317.0
+margin_bottom = 279.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "lost souls"
-text = "lost souls"
+bbcode_text = "--key items--"
+text = "--key items--"
 
 [node name="AngelEggSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 27, 230 )
+position = Vector2( 109, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1940,7 +1962,7 @@ vframes = 5
 frame = 5
 
 [node name="FishKeySprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 81, 230 )
+position = Vector2( 163, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1950,7 +1972,7 @@ script = ExtResource( 13 )
 max_frames = 1
 
 [node name="SporeKeySprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 137, 230 )
+position = Vector2( 219, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1960,7 +1982,7 @@ script = ExtResource( 13 )
 max_frames = 1
 
 [node name="PyramidKeySprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 198, 230 )
+position = Vector2( 280, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -1968,16 +1990,6 @@ vframes = 5
 frame = 15
 script = ExtResource( 13 )
 max_frames = 1
-
-[node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 234.0
-margin_top = 222.0
-margin_right = 353.0
-margin_bottom = 268.0
-theme = ExtResource( 8 )
-bbcode_enabled = true
-bbcode_text = "key item"
-text = "key item"
 
 [node name="CrystalSprite1" type="Sprite" parent="InventoryRect"]
 visible = false
@@ -2000,7 +2012,7 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 197, 230 )
+position = Vector2( 213, 120 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -2008,20 +2020,20 @@ vframes = 5
 frame = 20
 
 [node name="AngelEggLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 36.0
-margin_top = 241.0
-margin_right = 155.0
-margin_bottom = 287.0
+margin_left = 116.0
+margin_top = 287.0
+margin_right = 235.0
+margin_bottom = 333.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "0"
 text = "0"
 
 [node name="GlitchRect1" type="ColorRect" parent="InventoryRect"]
-margin_left = 34.0
-margin_top = 9.0
-margin_right = 68.0
-margin_bottom = 43.0
+margin_left = 104.0
+margin_top = 15.0
+margin_right = 138.0
+margin_bottom = 49.0
 rect_scale = Vector2( 1.5, 1.5 )
 color = Color( 0, 0.392157, 0, 1 )
 
@@ -2041,10 +2053,10 @@ vframes = 6
 frame = 4
 
 [node name="GlitchRect2" type="ColorRect" parent="InventoryRect"]
-margin_left = 96.0
-margin_top = 9.0
-margin_right = 130.0
-margin_bottom = 43.0
+margin_left = 166.0
+margin_top = 15.0
+margin_right = 200.0
+margin_bottom = 49.0
 rect_scale = Vector2( 1.5, 1.5 )
 color = Color( 0, 0.392157, 0, 1 )
 
@@ -2064,10 +2076,10 @@ vframes = 6
 frame = 4
 
 [node name="GlitchRect3" type="ColorRect" parent="InventoryRect"]
-margin_left = 156.0
-margin_top = 9.0
-margin_right = 190.0
-margin_bottom = 43.0
+margin_left = 226.0
+margin_top = 15.0
+margin_right = 260.0
+margin_bottom = 49.0
 rect_scale = Vector2( 1.5, 1.5 )
 color = Color( 0, 0.392157, 0, 1 )
 
@@ -2186,9 +2198,9 @@ transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-margin_left = 23.0
+margin_left = 69.5
 margin_top = 213.0
-margin_right = 395.0
+margin_right = 441.5
 margin_bottom = 313.0
 grow_horizontal = 2
 grow_vertical = 2

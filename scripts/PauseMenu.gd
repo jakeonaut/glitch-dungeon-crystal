@@ -557,8 +557,8 @@ func processInventoryLogic(delta):
       normalizeInventoryOptionIndex(0, -1)
       menuMoveSound.play()
   isOnMap = inventoryOptionIndex == 4
-  inventoryFaderRect.visible = isOnMap
-  mapFaderRect.visible = not isOnMap
+  # inventoryFaderRect.visible = isOnMap
+  # mapFaderRect.visible = not isOnMap
 
   invSelectionSprite.visible = not isOnMap
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
@@ -684,7 +684,7 @@ func getAngelStatueIndex():
     return 0
   return angelStatueIndex
 
-# this would be SOO much easier with some FSM vars
+# this would be SOO much easier with a 2d array
 func normalizeInventoryOptionIndex(y, x):
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   var hasAngelFlute = global.memory["angel_flute"] and angelStatues.size() > 0
@@ -722,7 +722,7 @@ func normalizeInventoryOptionIndex(y, x):
   if inventoryOptionIndex == 1:
     inventoryOptionIndexX += x
     if x >= 0:
-      if (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
+      if inventoryOptionIndexX > 1: # (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
         if hasAngelFlute:
           inventoryOptionIndex = 4
           menuConfirmSound.play()
@@ -734,7 +734,7 @@ func normalizeInventoryOptionIndex(y, x):
           inventoryOptionIndexX = 0
     elif x < 0:
       if inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 3 if bagSprite.visible else 2
+        inventoryOptionIndexX = 1 # 3 if bagSprite.visible else 2
       
   if inventoryOptionIndex == 2:
     inventoryOptionIndexX += x
@@ -814,6 +814,7 @@ func normalizeInventoryOptionIndex(y, x):
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
+onready var petSprite = get_node("InventoryRect/PetSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
 onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
 onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
@@ -827,35 +828,35 @@ onready var pyramidKeySprite = get_node("InventoryRect/PyramidKeySprite")
 onready var keyLabel = get_node("InventoryRect/KeyLabel")
 func processInventoryRender(_delta):
   if inventoryOptionIndex == 0:
-    invSelectionSprite.position = Vector2(26, 46)
+    invSelectionSprite.position = Vector2(99, 51)
   elif inventoryOptionIndex == 1:
-    invSelectionSprite.position = Vector2(26, 102)
+    invSelectionSprite.position.y = 121
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 26
+      invSelectionSprite.position.x = 213
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 82
+      invSelectionSprite.position.x = 152
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 140
+      invSelectionSprite.position.x = 209
     elif inventoryOptionIndexX == 3:
-      invSelectionSprite.position.x = 197
+      invSelectionSprite.position.x = 265
   elif inventoryOptionIndex == 2:
-    invSelectionSprite.position.y = 165
+    invSelectionSprite.position.y = 204
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 26
+      invSelectionSprite.position.x = 136
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 82
+      invSelectionSprite.position.x = 190
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 140
+      invSelectionSprite.position.x = 243
   elif inventoryOptionIndex == 3:
-    invSelectionSprite.position.y = 230
+    invSelectionSprite.position.y = 287
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 26
+      invSelectionSprite.position.x = 112
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 82
+      invSelectionSprite.position.x = 166
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 140
+      invSelectionSprite.position.x = 223
     elif inventoryOptionIndexX == 3:
-      invSelectionSprite.position.x = 197
+      invSelectionSprite.position.x = 280
 
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
@@ -893,6 +894,7 @@ func processInventoryRender(_delta):
     glitchRect4.visible = false
 
   bagSprite.visible = global.memory["hp"] > 1
+  petSprite.visible = false
 
   soulSprite1.visible = global.memory["zora_flippers"]
   soulSprite2.visible = global.memory["mole_cricket"]
