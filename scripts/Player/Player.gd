@@ -507,6 +507,10 @@ func _process(delta):
       global.memory["broomerang"] = 2
       global.memory["multi_broom"] = 1
   if Input.is_action_just_pressed("debug_more_crystals"):
+    var num_keys = global.memory["key"] if global.memory.has("key") else null
+    if num_keys == null:
+      global.memory["key"] = 0
+    global.memory["key"] += 2
     if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") < 150:
       if global.getThingFromAllLevelZonez("num_mini_crystal_cubes") == 0:
         global.memory["tutorial_gem"] = 1

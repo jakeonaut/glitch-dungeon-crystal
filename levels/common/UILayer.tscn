@@ -1580,10 +1580,10 @@ rect_clip_content = false
 theme = ExtResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "you purified a 
-     [color=#00ffff][wave amp=50 freq=2]CRYSTAL[/wave][/color]"
-text = "you purified a 
-     CRYSTAL"
+bbcode_text = "you awoke a
+     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]"
+text = "you awoke a
+     CRYSTAL elder"
 scroll_active = false
 
 [node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]

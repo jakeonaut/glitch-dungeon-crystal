@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = "•Grimoire Memory\nNow you can use 3 spells.\n" + global.getLargeInputText("left_button") + ", " + global.getLargeInputText("alt_action_button") + " swaps back and forth"
+    var text = "•Forget-me-not\nNow you can use 3 spells.\n" + global.getLargeInputText("left_button") + ", " + global.getLargeInputText("alt_action_button") + " swaps back and forth"
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text

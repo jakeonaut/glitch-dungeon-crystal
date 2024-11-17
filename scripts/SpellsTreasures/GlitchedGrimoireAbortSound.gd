@@ -29,6 +29,7 @@ func activateScript():
   level.saveTheGame()
 
 func preActivateScript():
+  global.memory["forget_me_not"] = true
   if not global.memory["glitched_grimoire"]:
     global.memory["glitched_grimoire"] = true
     if not global.memory.has("spellbookPage"):

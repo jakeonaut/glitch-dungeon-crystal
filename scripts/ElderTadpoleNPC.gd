@@ -8,6 +8,7 @@ onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var caneSprite = get_node("CaneSprite")
 var am_i_sleepy = false
+var am_i_glitchy = false
 
 func _ready():
   set_process(true)
@@ -63,11 +64,14 @@ func adjustSummonedBroomSpritePosition():
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
 
 func chickenifyPlayer():
+  am_i_sleepy = false
+  textBox.dialogStartSound.stream = null
   if smackSound: smackSound.play()
-  var temp = global.has_been_baba_yaga_cursed
-  global.has_been_baba_yaga_cursed = true
-  level.player.getChickenInfected()
-  global.has_been_baba_yaga_cursed = temp
+  # var temp = global.has_been_baba_yaga_cursed
+  # global.has_been_baba_yaga_cursed = true
+  # level.player.getChickenInfected()
+  # global.has_been_baba_yaga_cursed = temp
+  level.player.tumbleFall(Vector2(-1 if (not mySprite.flip_h) else 1, 0))
   global.pauseGame = false
   level.player.pauseInput = false
   can_move = false
@@ -108,6 +112,8 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
     secretAniPlayer.play("smackPlayerFromSleep")
   else:
     secretAniPlayer.play("smackPlayer")
+  if am_i_glitchy:
+    secretAniPlayer.queue("glitchTickle")
   mySprite.flip_h = which_side_is_player_on
   global.pauseGame = true
   level.player.pauseInput = true

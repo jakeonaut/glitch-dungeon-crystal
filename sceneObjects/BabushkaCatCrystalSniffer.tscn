@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/npcs/catportrait2.png" type="Texture" id=15]
+[ext_resource path="res://assets/sounds/eba_speech_info.wav" type="AudioStream" id=16]
 
 [sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
@@ -25,7 +26,7 @@ extents = Vector3( 1, 0.8, 1 )
 
 [sub_resource type="ShaderMaterial" id=43]
 shader = ExtResource( 1 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -105,7 +106,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 1 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -136,9 +137,9 @@ shader_param/target_palette = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9649, 0.0413837, 0 )
 script = ExtResource( 3 )
 bbText = "See BabushkaCatCrystalSnifferDialogStartSound."
-smackedBbText = "meOW!
-is that any way
-to treat a friend?"
+smackedBbText = "*meOW!*
+(is that any way
+to treat a friend?)"
 dont_recolor_me = true
 
 [node name="SmallInteractionArea" type="Area" parent="."]
@@ -163,6 +164,9 @@ stream = ExtResource( 14 )
 volume_db = -25.0
 pitch_scale = 0.8
 script = ExtResource( 6 )
+
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
+stream = ExtResource( 16 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )

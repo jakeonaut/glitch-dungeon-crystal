@@ -14,6 +14,8 @@ func setUpRoomInitializationOverride():
     uiLayer.statsTitleRect.visible = false
     uiLayer.get_node("GlitchStatusRect").visible = false
     should_i_show_prompt = true
+  if global.memory["priestess"] > 0:
+    get_node("GlitchTileSpawner").queue_free()
   has_decided = true
   
 var showInstructions = false

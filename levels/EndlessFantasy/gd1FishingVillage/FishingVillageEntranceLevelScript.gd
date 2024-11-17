@@ -10,6 +10,6 @@ func setUpRoomInitializationOverride():
     fishingRodShortcut.depth = 16
     fishingRodShortcut.low_speed = 8
     fishingRodShortcut.is_reeled_in = true
-  elif not global.haveIBeenToThisLevel(self):
-    player.textBox.override_target_origin = dialogPosition.global_transform.origin
-    player.sayThis("hm, basement is looking\n a little waterlogged..", 4.0)
+  # elif not global.haveIBeenToThisLevel(self):
+  #   player.textBox.override_target_origin = dialogPosition.global_transform.origin
+  #   player.sayThis("hm, cellar is looking\n a little waterlogged..", 4.0)

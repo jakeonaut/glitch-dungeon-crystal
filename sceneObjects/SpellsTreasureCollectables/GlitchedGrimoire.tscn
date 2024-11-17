@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=1]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=15]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=16]
+[ext_resource path="res://levels/EndlessFantasy/gd1GrandmaVillage/GlitchedGrimoire_DialogStartSound.gd" type="Script" id=17]
 
 [sub_resource type="SphereShape" id=2]
 radius = 1.5
@@ -31,13 +32,14 @@ albedo_texture = ExtResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 6 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -166,6 +168,30 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite3D/ForgetMeNotSprite:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D/ForgetMeNotSprite:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.84343, 0.291156 ) ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -323,16 +349,41 @@ tracks/5/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D/ForgetMeNotSprite:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D/ForgetMeNotSprite:translation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.84343, 0.291156 ), Vector3( 0, 1.71781, 0.291 ) ]
+}
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 6 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -379,6 +430,7 @@ shape = SubResource( 8 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 11 )
+script = ExtResource( 17 )
 
 [node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
 stream = null
@@ -402,6 +454,20 @@ texture = ExtResource( 8 )
 hframes = 12
 vframes = 10
 frame = 3
+script = ExtResource( 3 )
+should_randomize_frame_delay = true
+max_frames = 1
+
+[node name="ForgetMeNotSprite" type="Sprite3D" parent="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.84343, 0.291156 )
+material_override = SubResource( 20 )
+pixel_size = 0.125
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 8 )
+hframes = 12
+vframes = 10
+frame = 4
 script = ExtResource( 3 )
 should_randomize_frame_delay = true
 max_frames = 1
