@@ -527,6 +527,16 @@ func purifyAllFragileBrickSolids(summon_smoke_clouds = true):
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
       if summon_smoke_clouds:
         level.summonSmokeClouds(tile_pos, 2, false, true)
+func purifyAllSoftSandSolids(summon_smoke_clouds = true):
+  var cell_indices = get_used_cells()
+  for i in range(len(cell_indices)):
+    var cell_index = cell_indices[i]
+    var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+    if isTileSoftSand(tile_type):
+      removeTile(cell_index)
+      var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
+      if summon_smoke_clouds:
+        level.summonSmokeClouds(tile_pos, 2, false, true)
 
 func breakFragile(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
@@ -678,6 +688,8 @@ func changeColorPalette(palette, _palette_alt = null):
     curr_palette = global.yellow_palette
   elif my_tileset_type == global.TilesetType.POISON_FOREST:
     curr_palette = global.grey_black_palette
+  elif my_tileset_type == global.TilesetType.ALIEN:
+    curr_palette = global.NES_palette
     
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):
@@ -762,7 +774,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
     black_palette = global.black_palette
   elif tileset_type == global.TilesetType.ALIEN:
     my_tileset_glitch_type = global.GlitchForm.INVISIBLE
-    black_palette = global.black_palette_alien
+    # black_palette = global.black_palette_alien
   elif tileset_type == global.TilesetType.GLITCH_WORLD:
     my_tileset_glitch_type = global.GlitchForm.WALK_THROUGH_WALLS
     level.setTorchSpriteFrame(3)

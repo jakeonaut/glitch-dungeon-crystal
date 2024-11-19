@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=6]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Ominous5.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/sounds/ghostVoices/vox_Scream3.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Yawn.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=10]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=11]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Lament.wav" type="AudioStream" id=12]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/Zombie.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=16]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=18]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=20]
 
 [sub_resource type="ShaderMaterial" id=21]
@@ -190,6 +192,30 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpellbookGlitchSprite:pixel_size")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0001 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.37599, 0.94656 ) ]
 }
 
 [sub_resource type="Animation" id=34]
@@ -456,10 +482,35 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpellbookGlitchSprite:pixel_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.125, 0.0001 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.37599, 0.94656 ), Vector3( 0, 2.37599, 0.94656 ), Vector3( 0, 0, 0.947 ) ]
+}
 
 [sub_resource type="Animation" id=23]
 resource_name = "lurchAttack"
 length = 1.2
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
@@ -683,10 +734,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.1, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.4, 1.1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true, false ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite3D2:material_override:shader_param/shake_power")
@@ -719,10 +770,73 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 2.9 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.947 ), Vector3( 0, 2.37599, 0.94656 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpellbookGlitchSprite:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0001, 0.125 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "startDead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpellbookGlitchSprite:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0001 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpellbookGlitchSprite:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.947 ) ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -774,12 +888,41 @@ tracks/0/keys = {
 "values": [ 36, 32 ]
 }
 
+[sub_resource type="ShaderMaterial" id=36]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 17 )
+
 [node name="CorruptNPC" type="Spatial"]
 script = ExtResource( 4 )
 jump_force = 8
 sprite_offset_y = 0.5
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 material_override = SubResource( 21 )
 pixel_size = 0.15
@@ -838,12 +981,11 @@ pitch_scale = 1.25
 
 [node name="ScreamSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 9 )
-volume_db = -5.0
-pitch_scale = 0.5
+volume_db = -10.0
 
 [node name="ZombieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 10 )
@@ -862,6 +1004,7 @@ script = ExtResource( 7 )
 shape = SubResource( 30 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "startDead"
 anims/RESET = SubResource( 22 )
 anims/bonk = SubResource( 34 )
 anims/consumeMemory = SubResource( 33 )
@@ -870,10 +1013,24 @@ anims/lurchAttack = SubResource( 23 )
 anims/lurchEnd = SubResource( 24 )
 anims/lurchStart = SubResource( 25 )
 anims/revive = SubResource( 32 )
+anims/startDead = SubResource( 35 )
 anims/walk = SubResource( 26 )
 anims/walk1 = SubResource( 27 )
 anims/walk2 = SubResource( 28 )
 
 [node name="WindGust" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 1 )
+visible = false
 is_active = false
+
+[node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37599, 0.94656 )
+material_override = SubResource( 36 )
+pixel_size = 0.0001
+texture = ExtResource( 18 )
+hframes = 4
+vframes = 6
+script = ExtResource( 5 )
+max_frames = 1
+should_animate = false
+automatically_change_color = false

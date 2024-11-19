@@ -74,7 +74,7 @@ func chickenifyPlayer():
   level.player.tumbleFall(Vector2(-1 if (not mySprite.flip_h) else 1, 0))
   global.pauseGame = false
   level.player.pauseInput = false
-  can_move = false
+  # can_move = false
 
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.hideInteractPrompt()
@@ -110,6 +110,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   secretAniPlayer.clear_queue()
   if am_i_sleepy:
     secretAniPlayer.play("smackPlayerFromSleep")
+    mySprite.updateBaseFrame(0, 5)
   else:
     secretAniPlayer.play("smackPlayer")
   if am_i_glitchy:

@@ -357,8 +357,8 @@ func startDoorUnlock():
       num_keys_unlock = 1
 
     for i in range(level.followers.size() - 1, -1, -1):
-      var follower = level.followers[i]
-      if follower.is_in_group("keys"):
+      var follower = level.followers[i].get_ref()
+      if follower != null and follower.is_in_group("keys"):
         if key_type == global.KeyItem.NORMAL or follower.key_type == self.key_type:
           follower.popFromFollowers()
           unlocking_key_array.push_back(follower)

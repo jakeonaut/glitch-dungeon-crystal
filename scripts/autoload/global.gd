@@ -81,6 +81,7 @@ enum TilesetType {
     POISON_HOUSE,
     AUTUMN_FOREST,
     PRIMORDIAL_OOZE,
+    TOMB,
 }
 
 enum ItemState {
@@ -271,7 +272,7 @@ func resetMemory():
     memory = {}
 
     # customization upgrades
-    memory["currPet"] = PetFollower.NONE
+    memory["currPet"] = null
     memory["allMyPets"] = [PetFollower.NONE]
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
@@ -298,9 +299,9 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
-    memory["glitched_grimoire"] = false
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 2
+    memory["glitched_grimoire"] = true
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
 
@@ -315,15 +316,18 @@ func resetMemory():
     memory["broom_double_jump"] = 1
     memory["can_force_respawn"] = 1
     memory["zora_flippers"] = 0
-    memory["mole_cricket"] = 0
+    memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
     memory["has_map_item"] = true
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
-    memory["fishing_rod_shortcut"] = 0
     memory["angel_flute"] = true
     memory["has_marked_bosses_on_map"] = true
+
+    # STORY OR LEVEL STATE
+    memory["babushka_cat_story_hook"] = 0
+    memory["fishing_rod_shortcut"] = 0
 
     # DEFUNCT POWERUPS
     memory["multi_broom"] = false
@@ -454,11 +458,11 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1CrystalTower":
             return "elder temple"
         "gd1BubblegloopSwamp":
-            return "malware swamp" # "sea of corruption" # malware swamp
+            return "sea of corruption" # malware swamp
         "gd1TombSouls":
             return "forgotten crypt"
         "gd1AbstractSuburbs":
-            return "baba's forest"
+            return "yaga village"
         "gd1GrandmaVillage":
             return "primordial ooze"
         "gd1PrimordialOoze":

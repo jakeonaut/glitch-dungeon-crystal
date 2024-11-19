@@ -5097,7 +5097,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8818, 6.14345, 0 )
 grav = 0
 bbText = "•the closer we are to
-the Goddess, the
+the Crystal, the
 less stable things get.."
 can_move = false
 can_camera_zoom = false

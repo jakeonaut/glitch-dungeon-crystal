@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=2]
+[gd_scene load_steps=186 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -88,6 +88,7 @@
 [ext_resource path="res://assets/sounds/assets_sfx_wingflap.wav" type="AudioStream" id=86]
 [ext_resource path="res://assets/sounds/faststep.wav" type="AudioStream" id=87]
 [ext_resource path="res://assets/sounds/broomThrowReverse.wav" type="AudioStream" id=88]
+[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=89]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -7296,9 +7297,15 @@ can_camera_zoom = false
 [node name="Portrait" parent="TextContainer/TextBox/PortraitColor/ColorRect2/ColorRect4" index="0"]
 texture = ExtResource( 85 )
 
+[node name="TextCanvasLayer" parent="TextContainer/TextBox" index="3"]
+visible = true
+
 [node name="DialogStartSound" parent="TextContainer/TextBox" index="10"]
 stream = ExtResource( 27 )
 pitch_scale = 0.9
+
+[node name="DialogSound" parent="TextContainer/TextBox" index="11"]
+stream = ExtResource( 89 )
 
 [node name="NextDialogSound" parent="TextContainer/TextBox" index="12"]
 volume_db = -80.0

@@ -65,6 +65,7 @@ func _process(delta):
 # @override
 func shouldIDoCollisions():
   if gameMoverTarget == null or gameMoverTarget.get_ref() == null:
+    should_collide_horizontally = true
     return
   var targetOrigin = gameMoverTarget.get_ref().global_transform.origin
   should_collide_ceil = false
@@ -80,7 +81,11 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
   pass
 
 func popFromFollowers():
-  var followerIndex = level.followers.find(self)
+  var followerIndex = 0
+  for i in range(level.followers.size()):
+    if level.followers[i].get_ref() == self:
+      followerIndex = i
+      break
   level.followers.remove(followerIndex)
 
 var flying_to_target = false

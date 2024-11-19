@@ -1,5 +1,6 @@
 extends Control
 
+onready var popupRectCanvasLayer = get_node("CanvasLayer")
 onready var popupRect = get_node("CanvasLayer/PopupRect")
 onready var popupText = get_node("CanvasLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 var popupTimer = 0
@@ -78,7 +79,7 @@ func _ready():
   set_process(true)
 
 func _process(delta):
-  if not global.isPauseMenuOpen and Input.is_action_pressed("open_map") and global.activeInteractor == null and not global.shouldRenderAsCinematic and global.memory["has_map_item"]:
+  if not global.isOnMainMenu and not global.isPauseMenuOpen and Input.is_action_pressed("open_map") and global.activeInteractor == null and not global.shouldRenderAsCinematic and global.memory["has_map_item"]:
     self.visible = true
     if mapRect.rect_scale.x == 1:
       if not has_drawn_map:
@@ -107,7 +108,7 @@ func _process(delta):
   self.visible = global.isPauseMenuOpen
   if mapRect.rect_scale.x == 2:
     pauseTitleRect.visible = true
-    mapRect.rect_position = Vector2(452, 88)
+    mapRect.rect_position = Vector2(450, 131)
     mapRect.rect_scale = Vector2(1, 1)
     mapRect.color = Color("#040404")
     mapColorRect1.color = Color("#394c62")
@@ -122,6 +123,8 @@ func _process(delta):
 
   if not hasInitializedControlsConfig:
     return
+  if not popupRectCanvasLayer.visible:
+    popupRectCanvasLayer.visible = true
 
   if Input.is_action_just_pressed("menu_down"):
     menuMoveSound.play()
@@ -479,8 +482,10 @@ onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/Equipm
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 var angelStatueToTeleportTo = null
 func processInventoryLogic(delta):
+  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  var angelStatueArrValue = angelStatues[getAngelStatueIndex()]
   if inventoryOptionIndex == 4 or angelStatueToTeleportTo != null:
-    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
+    pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
   else:
     pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume"
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
@@ -507,9 +512,10 @@ func processInventoryLogic(delta):
       inventoryOptionIndexX -= 1
       menuMoveSound.play()
     if inventoryOptionIndexX < 0:
-      inventoryOptionIndexX = spellbookSize - 1
-    elif inventoryOptionIndexX > spellbookSize - 1:
-      if global.memory["angel_flute"] and selectedGlitchSprite == -1:
+      inventoryOptionIndexX = (spellbookSize - 1) if spellbookSize > 0 else 0
+    elif inventoryOptionIndexX > spellbookSize - 1 and inventoryOptionIndexX != 0:
+      if global.memory["angel_flute"] and selectedGlitchSprite == -1 and angelStatues.size() > 0:
+        print(str(inventoryOptionIndexX) + ", " + str(spellbookSize))
         inventoryOptionIndex = 4
         menuConfirmSound.play()
         inventoryOptionIndexX = 0
@@ -561,10 +567,9 @@ func processInventoryLogic(delta):
   # mapFaderRect.visible = not isOnMap
 
   invSelectionSprite.visible = not isOnMap
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   if isOnMap and angelStatues.size() != 0:
     var mapGrid = transition.mapManager.gimmeMapGrid()
-    var mapPathToSeek = angelStatues[getAngelStatueIndex()][1]
+    var mapPathToSeek = angelStatueArrValue[1]
     for i in range(MAP_HEIGHT):
       for j in range(MAP_WIDTH):
         if not mapGrid.has(i) or not mapGrid[i].has(j):
@@ -654,12 +659,14 @@ func processInventoryLogic(delta):
       global.isPauseMenuOpen = false
       get_node("TeleportSound").play()
     elif inventoryOptionIndex == 4 and angelStatues.size() > 0:
-      var angelStatueArrValue = angelStatues[getAngelStatueIndex()]
-      var levelZoneName = angelStatueArrValue[0]
-      popupRect.visible = not popupRect.visible
-      if popupRect.visible:
-        angelStatueToTeleportTo = angelStatues[getAngelStatueIndex()]
-      popupText.text = "teleport to " + levelZoneName + "?"
+      if angelStatueArrValue[1] == level.getLevelName():
+        getPlayer().noBroomSound.play()
+      else:
+        var levelZoneName = angelStatueArrValue[0]
+        popupRect.visible = not popupRect.visible
+        if popupRect.visible:
+          angelStatueToTeleportTo = angelStatueArrValue
+        popupText.text = "teleport to " + levelZoneName + "?"
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     angelStatueToTeleportTo = null
     if popupRect.visible:
@@ -832,13 +839,13 @@ func processInventoryRender(_delta):
   elif inventoryOptionIndex == 1:
     invSelectionSprite.position.y = 121
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 213
+      invSelectionSprite.position.x = 158
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 152
-    elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 209
-    elif inventoryOptionIndexX == 3:
-      invSelectionSprite.position.x = 265
+      invSelectionSprite.position.x = 213
+    # elif inventoryOptionIndexX == 2:
+    #   invSelectionSprite.position.x = 209
+    # elif inventoryOptionIndexX == 3:
+    #   invSelectionSprite.position.x = 265
   elif inventoryOptionIndex == 2:
     invSelectionSprite.position.y = 204
     if inventoryOptionIndexX == 0:
@@ -919,6 +926,10 @@ func processInventoryRender(_delta):
   mapCursorSprite2.visible = mapCursorSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
 
+func forceRedrawMap():
+  has_drawn_map = false
+  tryDrawMap()
+
 var MAP_WIDTH = 12
 var MAP_HEIGHT = 12
 var has_drawn_map = false
@@ -953,9 +964,8 @@ func tryDrawMap():
       if mapRoom.path == level.getLevelName():
         mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
-        mapPlayerSprite.position.y += 2
       elif "Haven" in mapRoom.path or mapRoom.has_angel_statue:
-        if getBabushkaCatSniffedVar(mapRoom.path) > 0:
+        if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
           sprite.frame = 61
           sprite.material.set_shader_param("offset", 11)
 
@@ -969,6 +979,7 @@ func tryDrawMap():
               mapAngelSprite.get_parent().add_child(angelSprite)
             else:
               sprite.material.set_shader_param("offset", 6)
+
       if "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
         if "AnglerFish" in mapRoom.path:
           sprite.frame = 217
@@ -1012,6 +1023,9 @@ func tryDrawMap():
         sprite.material.set_shader_param("offset", 2)
         # map_sporeKeySprite.visible = true
         # map_sporeKeySprite.position = sprite.position
+      
+      if global.memory.has("prev_room") and global.memory["prev_room"] == mapRoom.path:
+        sprite.material.set_shader_param("offset", 10)
   has_drawn_map = true
 
 func getBabushkaCatSniffedVar(mapRoomPath):
@@ -1037,7 +1051,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
         sprite.material.set_shader_param("offset", 11)
     "gd1TutorialDungeon":
         sprite.frame = 190
-        sprite.material.set_shader_param("offset", 10)
+        sprite.material.set_shader_param("offset", 7)
     "gd1FishingVillage":
         sprite.frame = 245
         sprite.material.set_shader_param("offset", 3)

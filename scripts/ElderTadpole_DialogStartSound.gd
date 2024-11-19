@@ -1,25 +1,30 @@
 extends AudioStreamPlayer
 
+onready var textBox = get_node("..")
+onready var elderTadpoleNPC = get_node("../../..")
+
 func _ready():
   pass
 
 
 func activateScript():
+  if elderTadpoleNPC.am_i_sleepy:
+    return
+
   var levelZoneName = global.currLevelZone
   if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
     return
-  var text = "•ok I'm up."
+  var text = "•ok I'm up.!"
   match levelZoneName:
     "gd1TutorialDungeon":
-        text = "[wave]*cough*[/wave]where am i?"
+        text = "•ok I'm up.!\n[wave]*cough*[/wave] where am i?"
     "gd1FishingVillage":
-        text = "[wave]*cough*[/wave]where am i?"
+        text = "[wave]*cough*[/wave] where am i?"
     "gd1ToxicJungle":
-        text = "[wave]*cough*[/wave]where am i?"
+        text = "[wave]*cough*[/wave] where am i?"
     "gd1ShiftingSandLand":
-        text = "[wave]*cough*[/wave]where am i?"
+        text = "[wave]*cough*[/wave] where am i?"
   
-  var textBox = get_node("..")
   textBox.text_final = text
   textBox.textNode.bbcode_text = text
   textBox.showYesNoOptions = false

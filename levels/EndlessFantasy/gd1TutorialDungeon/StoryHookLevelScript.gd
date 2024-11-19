@@ -1,15 +1,8 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var frogCroneNpc = weakref(get_node("GlitchTileSpawner/NPC3"))
-var has_decided = false
+onready var babushkaCatNpc = weakref(get_node("GlitchTileSpawner"))
 
 # @override
 func setUpRoomInitializationOverride():
-  has_decided = true
-  # see 000NPC3AbortSound.gd
-  
-  
-func _process(_delta):
-  # ._process(delta) implicit
-  if not has_decided:
-    return
+  if global.memory["babushka_cat_story_hook"] > 0 and babushkaCatNpc.get_ref() != null:
+    babushkaCatNpc.get_ref().queue_free()

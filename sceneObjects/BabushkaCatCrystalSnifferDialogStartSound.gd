@@ -22,11 +22,12 @@ func activateScript():
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
     else:
-      var newText = "*meow* •(for some weird reason,\nyou can hear me? i smell an\nunpurified[color=red]Crystal[/color] in this zone)"
+      var newText = "*meow* •(for some weird reason,\nyou can hear me? i smell a\nsleeping [color=red]Crystal[/color] in this zone)"
       if global.memory["has_map_item"]:
         newText += "\n(•i'll mark it on your map)"
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
+      level.redrawMap()
 
     global.setLevelZoneThing("babushkaCatSniffed", 1)
   else:
@@ -54,6 +55,7 @@ func activateScript():
         newText += "\n(•i'll mark " + plural + " on your map!)"
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
+      level.redrawMap()
     global.setLevelZoneThing("babushkaCatSniffed", 2)
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

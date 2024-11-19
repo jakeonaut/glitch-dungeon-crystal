@@ -210,6 +210,21 @@ func getPurified():
     musicPlayer.playTreasureJingle(-80)
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
+
+    if global.memory["babushka_cat_story_hook"] == 1:
+        global.memory["babushka_cat_story_hook"] = 2
+        global.memory["currPet"] = null
+        var babushkaCatFollower = level.get_node("PetBabushkaCatFollower")
+        if babushkaCatFollower != null:
+            babushkaCatFollower.gameMoverTarget = null
+            babushkaCatFollower.behavior_walking = true
+            babushkaCatFollower.behavior_walk_flip = true
+            babushkaCatFollower.walk_direction.x = 1
+            babushkaCatFollower.walk_speed = 8
+            babushkaCatFollower.jump_force = 16
+            babushkaCatFollower.mySprite.frame_delay /= 2
+            babushkaCatFollower.can_i_personally_ignore_game_pause = true
+
     level.saveTheGame()
 
 export var spawn_an_elder = true

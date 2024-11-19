@@ -54,7 +54,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=52]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
@@ -165,7 +165,7 @@ tracks/8/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=53]
 resource_name = "catLocked"
 length = 0.4
 loop = true
@@ -182,7 +182,7 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=54]
 resource_name = "crystalLocked"
 length = 2.0
 loop = true
@@ -223,7 +223,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=55]
 resource_name = "crystalZoneLocked"
 length = 2.0
 loop = true
@@ -288,7 +288,7 @@ tracks/4/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=56]
 resource_name = "demoLocked"
 length = 2.0
 loop = true
@@ -341,7 +341,7 @@ tracks/3/keys = {
 "values": [ ExtResource( 31 ) ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=57]
 resource_name = "doorBarred"
 length = 0.4
 tracks/0/type = "value"
@@ -357,7 +357,7 @@ tracks/0/keys = {
 "values": [ 7, 6, 5 ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=58]
 resource_name = "doorClose"
 length = 0.4
 tracks/0/type = "value"
@@ -385,7 +385,7 @@ tracks/1/keys = {
 "values": [ ExtResource( 29 ) ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=59]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -424,7 +424,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=46]
+[sub_resource type="Animation" id=60]
 resource_name = "doorUnbarred"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -453,7 +453,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=47]
+[sub_resource type="Animation" id=61]
 resource_name = "fishLocked"
 length = 0.4
 loop = true
@@ -470,7 +470,7 @@ tracks/0/keys = {
 "values": [ 12, 13 ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=62]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -486,7 +486,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=63]
 resource_name = "pyramidLocked"
 length = 0.4
 loop = true
@@ -503,7 +503,7 @@ tracks/0/keys = {
 "values": [ 15, 16 ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=64]
 resource_name = "shroomLocked"
 length = 0.4
 loop = true
@@ -1076,7 +1076,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 2, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 8, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, 983046, 0, 28, 1048575, 0, 28, -1179616, 0, 28, -524268, 0, 1, -524267, 0, 1, -524266, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458732, 0, 1, -458730, 0, 1, -393209, 0, 1, -393207, 0, 1, -393196, 0, 1, -393195, 0, 1, -393194, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -262147, 0, 1, -262146, 0, 1, -262145, 0, 1, -196611, 0, 1, -196609, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
+"cells": PoolIntArray( 2, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 8, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, 262160, 0, 1, 262161, 0, 1, 262162, 0, 1, 327696, 0, 1, 327698, 0, 1, 393232, 0, 1, 393233, 0, 1, 393234, 0, 1, 983046, 0, 28, 1048575, 0, 28, -1179616, 0, 28, -524268, 0, 1, -524267, 0, 1, -524266, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458732, 0, 1, -458730, 0, 1, -393209, 0, 1, -393207, 0, 1, -393196, 0, 1, -393195, 0, 1, -393194, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -262147, 0, 1, -262146, 0, 1, -262145, 0, 1, -196611, 0, 1, -196609, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1 )
 }
 script = ExtResource( 5 )
 __meta__ = {
@@ -1141,25 +1141,25 @@ shape = SubResource( 14 )
 shape = SubResource( 15 )
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/003DustyCricketCrypts.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 7, 0 )
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 num_keys_unlock = 1
 key_type = 6
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
-anims/RESET = SubResource( 38 )
-anims/catLocked = SubResource( 39 )
-anims/crystalLocked = SubResource( 40 )
-anims/crystalZoneLocked = SubResource( 41 )
-anims/demoLocked = SubResource( 42 )
-anims/doorBarred = SubResource( 43 )
-anims/doorClose = SubResource( 44 )
-anims/doorOpen = SubResource( 45 )
-anims/doorUnbarred = SubResource( 46 )
-anims/fishLocked = SubResource( 47 )
-anims/locked = SubResource( 48 )
-anims/pyramidLocked = SubResource( 49 )
-anims/shroomLocked = SubResource( 50 )
+anims/RESET = SubResource( 52 )
+anims/catLocked = SubResource( 53 )
+anims/crystalLocked = SubResource( 54 )
+anims/crystalZoneLocked = SubResource( 55 )
+anims/demoLocked = SubResource( 56 )
+anims/doorBarred = SubResource( 57 )
+anims/doorClose = SubResource( 58 )
+anims/doorOpen = SubResource( 59 )
+anims/doorUnbarred = SubResource( 60 )
+anims/fishLocked = SubResource( 61 )
+anims/locked = SubResource( 62 )
+anims/pyramidLocked = SubResource( 63 )
+anims/shroomLocked = SubResource( 64 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
 shape = SubResource( 12 )

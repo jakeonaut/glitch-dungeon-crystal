@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -40,9 +40,9 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.9
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 8 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 2 )
@@ -281,6 +281,54 @@ tracks/16/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -583,6 +631,70 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "gotHurt"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 5.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.86, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.9, 0.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -1589,6 +1701,7 @@ anims/dizzyRight = SubResource( 26 )
 anims/drillAttackFall = SubResource( 9 )
 anims/fallOver = SubResource( 23 )
 anims/fallOverRight = SubResource( 27 )
+anims/gotHurt = SubResource( 32 )
 anims/idleStand = SubResource( 10 )
 anims/idleStomp = SubResource( 11 )
 anims/jumpFall = SubResource( 12 )
@@ -1599,10 +1712,10 @@ anims/stunTwitchRight = SubResource( 28 )
 anims/waddle = SubResource( 8 )
 anims/wakeup = SubResource( 15 )
 
-[node name="InteractionArea" type="Area" parent="." groups=["bug"]]
+[node name="WallStunArea" type="Area" parent="." groups=["bug"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="WallStunArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334242, 0.332879, 0 )
 shape = SubResource( 16 )
 

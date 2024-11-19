@@ -141,9 +141,9 @@ func unsmack():
     mySprite.material_override = material
 
 func tryHideActiveInteractPrompt():
+  textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
   if interactPrompt == null:
     return
-  textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
   if visible and is_active and not floating_text and textBox.text_final != "":
     interactPrompt.visible = true
     interactPrompt.max_frames = 4
@@ -151,7 +151,7 @@ func tryHideActiveInteractPrompt():
   else:
     interactPrompt.visible = false
 
-func tryShowInteractPrompt(is_active_interact_prompt = false):
+func tryShowInteractPrompt(is_active_interact_prompt = false, is_comic_alert = false):
   if interactPrompt == null:
     return
 
@@ -163,7 +163,7 @@ func tryShowInteractPrompt(is_active_interact_prompt = false):
       interactPrompt.max_frames = 1
       interactPrompt.updateBaseFrame(9, 23)
       interactPrompt.visible = false
-      textBox.showInteractPrompt()
+      textBox.showInteractPrompt(is_comic_alert)
     elif interactPrompt.max_frames == 1:
       interactPrompt.max_frames = 4
       interactPrompt.updateBaseFrame(9, 23)
@@ -226,7 +226,6 @@ func glitchOut():
   glitchEnemy.global_transform.origin = self.global_transform.origin
   global.setStaticLevelZoneLevelVar(level, self, global.DELETE_ME)
   glitchEnemy.glitchOut()
-  print("bye bye")
   queue_free()
 
 func activate(is_player):

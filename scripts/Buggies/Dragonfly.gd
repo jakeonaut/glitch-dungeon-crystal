@@ -120,7 +120,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     if level.player.malware_infected:
         var malwareDragonfly = malwareDragonflyRes.instance()
         level.add_child(malwareDragonfly)
-        malwareDragonfly.global_transform = self.global_transform.origin
+        malwareDragonfly.global_transform.origin = self.global_transform.origin
         self.queue_free()
         return
     if catchSound: catchSound.play()

@@ -17,13 +17,13 @@ enum ZombieState {
   GRANDMA_FORM,
   BONK,
 }
-var zombie_state = ZombieState.IDLE
+var zombie_state = ZombieState.DYING
 var ZOMBIE_MAX_HP = 2
-var fast_walk_speed = 12
+var fast_walk_speed = 6
 var slow_walk_speed = 4
 var death_timer = 0
 var death_time_limit = 40
-var spawn_point = 0
+var spawn_point = null
 var ghostEnemyRes = preload("res://sceneObjects/Enemies/GhostEnemy.tscn")
 # var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
 
@@ -38,6 +38,7 @@ func _ready():
     hp_enemy = ZOMBIE_MAX_HP
     kill_invis = false
     kill_immediately = true
+    death_timer = death_time_limit / 2
     yield(get_tree().create_timer(0.1), "timeout")
     spawn_point = global_transform.origin
 
@@ -46,11 +47,14 @@ func _process(delta):
   if not visible: return
   
   delta = delta * global.time_dilation_multiplier
+  self.glitch_form = level.player.glitch_form
+  should_collide_ceil = self.glitch_form == global.GlitchForm.LADDER
 
   # if screamSound.is_playing() and am_i_really_in_range_of_player:
   #   player.getCurseInfected()
 
   if zombie_state == ZombieState.IDLE:
+    reenemize()
     windGust.is_active = false
     grav = 60
     zombie_state = ZombieState.SLIME_WALK
@@ -114,10 +118,13 @@ func _process(delta):
     elif secretAniPlayer.assigned_animation == "lurchAttack" and not secretAniPlayer.is_playing():
       zombie_state = ZombieState.LURCH_END
       return
-    if walk_direction.x > 0:
-      digTiles(getTilesRightOf(getLevelTiles(), buffer))
-    elif walk_direction.x < 0:
-      digTiles(getTilesLeftOf(getLevelTiles(), buffer))
+    if level.player.glitch_form == global.GlitchForm.LADDER:
+      digTiles(getTilesAbove(getLevelTiles()))
+    else:
+      if walk_direction.x > 0:
+        digTiles(getTilesRightOf(getLevelTiles(), buffer))
+      elif walk_direction.x < 0:
+        digTiles(getTilesLeftOf(getLevelTiles(), buffer))
   elif zombie_state == ZombieState.LURCH_END:
     windGust.is_active = false
     if secretAniPlayer.assigned_animation != "lurchEnd":
@@ -131,15 +138,18 @@ func _process(delta):
     if not secretAniPlayer.is_playing():
       zombie_state = ZombieState.IDLE
   elif zombie_state == ZombieState.DYING:
+    unenemize()
     # see ouchies()
     death_timer += (delta*11)
     if death_timer >= death_time_limit:
+      global_transform.origin = spawn_point
       zombie_state = ZombieState.REVIVING
       death_timer = 0
       unsmack()
     if secretAniPlayer.assigned_animation == "die" and not secretAniPlayer.is_playing():
       grav = 60
   elif zombie_state == ZombieState.REVIVING:
+    unenemize()
     behavior_jumping = false
     if secretAniPlayer.assigned_animation != "revive":
       am_i_dying = false
@@ -245,6 +255,7 @@ func ouchies(broom_origin):
       var rand_y_speed = rand_range(2, 4)
       newGhostEnemy.x_speed = rand_x_speed
       newGhostEnemy.y_speed = rand_y_speed
+      newGhostEnemy.just_a_figment = true
       level.add_child(newGhostEnemy)
       newGhostEnemy.global_transform.origin = self.global_transform.origin
 
@@ -303,6 +314,10 @@ func addJumpSmokeCloud(flip_flip_h = false):
 #     "target_palette", mySprite.material_override.get_shader_param("target_palette"))
 #   my_carcass = weakref(carcass)
 
+# @override
+func processGlitchFormGlitchiness():
+  pass
+
 export var permanently_alter_tiles = false
 func digTiles(solidTiles):
   var tiles_dug = 0
@@ -332,3 +347,15 @@ func digTiles(solidTiles):
     digSound.play()
               
   return tiles_dug > 0
+
+func actuallyDieToOffscreenCamera():
+  mySprite.visible = false
+  global_transform.origin = spawn_point
+  am_i_dying = true
+  zombie_state = ZombieState.DYING
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  secretAniPlayer.play("startDead")
+  # spawnACarcass()
+  death_timer = 0
+  behavior_walking = false

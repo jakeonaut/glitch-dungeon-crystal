@@ -429,6 +429,10 @@ func processHiscoreRenderLogic(delta):
     global.pauseMoveInput = false
     global.pauseGame = false
     level.player.pauseSelf = false
+    var babushkaCatFollower = level.get_node("PetBabushkaCatFollower")
+    if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
+      babushkaCatFollower.popFromFollowers()
+      babushkaCatFollower.queue_free()
     if level.crystalGeode.get_ref() != null:
       level.crystalGeode.get_ref().lightAniPlayer.play("omen")
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=5]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=9]
@@ -20,7 +19,6 @@
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=20]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=22]
 
 [sub_resource type="Animation" id=21]
@@ -202,7 +200,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1, 29.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.1, 15.0005, 0 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 17, 0 )
@@ -244,9 +242,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 38, -1 )
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6, 0 )
 
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4, 14.9662, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8, 14, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/004MushroomInfectionPt1.tscn"
@@ -275,14 +270,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1, 22.6, -1 )
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4, 17.8, -1 )
 
-[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3, 14.8, 0 )
-
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 15, 0 )
-
-[node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 15.9, 0 )
 
 [node name="miniCubeCrystal4" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1, 17, 0 )
@@ -293,17 +282,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 25.5, 0 )
 [node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 19.4, 0 )
 
-[node name="miniCubeCrystal8" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.9, 20.6, 0 )
-
 [node name="miniCubeCrystal9" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.1, 20.6, 0 )
-
-[node name="miniCubeCrystal5" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7, 16.8, 0 )
-
-[node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 26.2, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
 

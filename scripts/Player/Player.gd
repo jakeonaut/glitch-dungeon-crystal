@@ -86,7 +86,7 @@ func processWallLadderWalking(delta):
   #   spriteContainer.rotation_degrees.z = 90
   if pressingMoveLeft():
     global_transform.origin.x -= 1
-    var leftTiles = getTilesLeftOf(levelTiles)
+    var leftTiles = getTilesLeftOf(levelTiles, 0.1)
     global_transform.origin.x += 1
     for tile_coords in leftTiles:
       if tile_coords == null: continue
@@ -95,7 +95,7 @@ func processWallLadderWalking(delta):
         levelTiles.corrode(tile_coords)
   if pressingMoveRight():
     global_transform.origin.x += 1
-    var rightTiles = getTilesRightOf(levelTiles)
+    var rightTiles = getTilesRightOf(levelTiles, 0.1)
     global_transform.origin.x -= 1
     for tile_coords in rightTiles:
       if tile_coords == null: continue
@@ -380,6 +380,8 @@ var respawn_key_hp = null
 func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
+
+  is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
 
   processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
@@ -778,6 +780,7 @@ func tryDieToOffscreenCamera(delta):
 
     next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
     if next_room != null and not level.pacman_wrapping:
+      try_to_recover = false
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
       global.memory["player_flip_h"] = mySprite.flip_h
@@ -1834,8 +1837,8 @@ func malwareCorruptMe():
   # aniPlayer.play("corruptMe")
   malware_infected = true
   infectSound.play()
-  if not pressingMoveLeft() and not pressingMoveRight():
-    mySprite.flip_h = not mySprite.flip_h
+  # if not pressingMoveLeft() and not pressingMoveRight():
+  #   mySprite.flip_h = not mySprite.flip_h
   # loseBroom()
 
 func malwareCured():
@@ -2190,7 +2193,7 @@ func processSpriteRenderLogic(delta):
     if cloud_timer >= cloud_time_limit:
         cloud_timer = 0
         glitchTickle()
-        getSmacked()
+        # getSmacked()
         # var newMalwareBugSprite = malwareBugSpriteRes.instance()
         # var which_dir_x = ((randi() % 3) - 1)
         # var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...

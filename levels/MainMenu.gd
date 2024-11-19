@@ -72,6 +72,12 @@ onready var glitchMoleCricket = get_node("GlitchMoleCricket")
 onready var glitchMoleCricket2 = get_node("GlitchMoleCricket2")
 onready var glitchMoleCricket3 = get_node("GlitchMoleCricket3")
 onready var babushkaCat = get_node("BabushkaCat")
+onready var secretGlitchyNPC = get_node("SecretGlitchyNPC")
+onready var secretGlitchyNPC2 = get_node("SecretGlitchyNPC2")
+onready var secretGlitchyNPC3 = get_node("SecretGlitchyNPC3")
+onready var secretGlitchyNPC4 = get_node("SecretGlitchyNPC4")
+onready var secretGlitchyNPC5 = get_node("SecretGlitchyNPC5")
+onready var secretGlitchyNPC6 = get_node("SecretGlitchyNPC6")
 onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var door2 = get_node("Door2")
@@ -79,6 +85,7 @@ onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
 onready var cameraTarget = get_node("cameraTarget")
+onready var dialogPosition = get_node("DialogPosition")
 
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
@@ -143,28 +150,41 @@ func startGame(saveGameIndex):
   eventSound2.play()
   musicPlayer.stopAll()
   eventSoundWakeup.play()
+  secretGlitchyNPC.glitchOut()
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
+  secretGlitchyNPC2.glitchOut()
   babushkaCat.mySprite.updateBaseFrame(2, 2)
+  babushkaCat.tryShowInteractPrompt(true, true)
   gameCamera.can_i_move = true
   if cameraTarget != null:
     cameraTarget.queue_free()
     cameraTarget = null
   eventSound1.play()
   eventSound2.play()
-  yield(get_tree().create_timer(1.0), "timeout")
+  yield(get_tree().create_timer(0.4), "timeout")
+  secretGlitchyNPC4.glitchOut()
+  yield(get_tree().create_timer(0.6), "timeout")
+  secretGlitchyNPC3.glitchOut()
   if was_intro_cutscene_skipped == 2: return
   levelTiles.randomize_num = 3
+  babushkaCat.tryHideActiveInteractPrompt()
   babushkaCat.mySprite.flip_h = true
   babushkaCat.mySprite.should_randomize_frame_delay = false
   babushkaCat.mySprite.frame_delay = 0.1
   babushkaCat.override_press_move_right = true
   player.mySprite.flip_h = not player.mySprite.flip_h
   eventSound1.play()
-  yield(get_tree().create_timer(2.0), "timeout")
+  yield(get_tree().create_timer(0.2), "timeout")
+  secretGlitchyNPC5.glitchOut()
+  yield(get_tree().create_timer(0.2), "timeout")
+  secretGlitchyNPC6.glitchOut()
+  yield(get_tree().create_timer(1.6), "timeout")
   global.shouldRenderAsCinematic = false
   player.pauseInput = false
   global.has_really_started_game = true
+  player.textBox.override_target_origin = dialogPosition.global_transform.origin
+  player.sayThis("now where's that cat\nrun off to now!", 4.0)
 
 func loadGame(saveGameIndex):
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY

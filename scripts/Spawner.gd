@@ -69,7 +69,6 @@ func spawnEffect(_child):
         
 func spawn(_with_flare = true):
     for child in self.get_foreign_children():
-        print(child)
         child.visible = true
         spawnEffect(child)
     if spawned_object_res == null:

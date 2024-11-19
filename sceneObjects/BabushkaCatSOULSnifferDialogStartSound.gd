@@ -1,6 +1,7 @@
 extends AudioStreamPlayer
 
 onready var textBox = get_node("..")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 func _ready():
   pass
 
@@ -22,7 +23,8 @@ func activateScript():
     if global.memory["mushroom_soul"] == 0 or not (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID)):
       newText += ",\nsearch moldy dogwoods"
     newText += "\ni'll mark your map!)"
-    
+    level.redrawMap()
+
   if newText != null:
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText

@@ -35,7 +35,7 @@ func _ready():
   can_be_smacked = true
   # ._ready() implicit
 
-func tryShowInteractPrompt(_is_active_interact_prompt = false):
+func tryShowInteractPrompt(_is_active_interact_prompt = false, is_comic_alert = false):
   if interactPrompt == null:
     return
   interactPrompt.visible = false

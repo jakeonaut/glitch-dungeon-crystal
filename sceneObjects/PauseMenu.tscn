@@ -1729,9 +1729,9 @@ color = Color( 0, 0, 0, 0 )
 
 [node name="ShardsText" type="RichTextLabel" parent="InventoryRect"]
 margin_left = 506.0
-margin_top = -28.0
+margin_top = -36.0
 margin_right = 1022.0
-margin_bottom = 65.0
+margin_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 8 )
@@ -2012,7 +2012,7 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 213, 120 )
+position = Vector2( 158, 120 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6

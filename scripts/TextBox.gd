@@ -312,13 +312,16 @@ func resetPrompts():
   nextPrompt_wiggled_up = false
 
 var is_interact_prompt = false
-func showInteractPrompt():
+func showInteractPrompt(is_comic_alert = false): 
   if global.activeInteractor == self:
     return
     
   var sweep_button_text = global.getLargeInputText("sub_action_button")
   if not is_interact_prompt:
-    textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
+    if is_comic_alert:
+      textNode.bbcode_text = "[wave]![/wave]"
+    else:
+      textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
     tinify()
     is_interact_prompt = true
     self.theme = promptFont

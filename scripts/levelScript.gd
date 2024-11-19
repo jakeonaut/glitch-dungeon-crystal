@@ -27,7 +27,7 @@ export var null_glitch = false
 # TODO(jaketrower): need to make this work with grimoire
 
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
-export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST", "POISON_HOUSE", "AUTUMN_FOREST", "PRIMORDIAL_OOZE") var tileset_type 
+export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST", "POISON_HOUSE", "AUTUMN_FOREST", "PRIMORDIAL_OOZE", "TOMB") var tileset_type 
 
 export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
@@ -250,11 +250,14 @@ func processPauseMenu():
           glitchScreenEffect.visible = false
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
           uiLayer.pauseMenu.selectedGlitchSprite = -1
-          uiLayer.pauseMenu.inventoryOptionIndex = 0
+          uiLayer.pauseMenu.inventoryOptionIndex = 4 if Input.is_action_pressed("open_map") and global.memory["has_map_item"] else 0
           uiLayer.pauseMenu.inventoryOptionIndexX = 0
           global.isPauseMenuOpen = true
           global.pauseGame = true
           player.inventorySound.play()
+
+func redrawMap():
+  uiLayer.pauseMenu.forceRedrawMap()
 
 var closest_extra_life = null
 func processGrandmaStatueSavePoints():
@@ -682,7 +685,7 @@ func spawnAngelTadpole(starting_position):
   self.add_child(tadpole)
   tadpole.global_transform.origin = starting_position
 
-  followers.push_back(tadpole)
+  followers.push_back(weakref(tadpole))
   return tadpole
 
 var keyFollowerRes = preload("res://sceneObjects/KeyFollower.tscn")
@@ -715,9 +718,9 @@ func spawnKeyFollower(starting_position):
   self.add_child(keyFollower)
   keyFollower.global_transform.origin = starting_position
 
-  var target = followers[-1] if followers.size() > 0 else player
-  keyFollower.gameMoverTarget = weakref(target)
-  followers.push_back(keyFollower)
+  var target = followers[-1].get_ref() if followers.size() > 0 else player
+  keyFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+  followers.push_back(weakref(keyFollower))
   return keyFollower
 
 var angelEggFollowerRes = preload("res://sceneObjects/AngelEggFollower.tscn")
@@ -727,10 +730,11 @@ func spawnAngelEggFollower(starting_position):
   angelEggFollower.global_transform.origin = starting_position
 
   var target = followers[-1] if followers.size() > 0 else player
-  angelEggFollower.gameMoverTarget = weakref(target)
-  followers.push_back(angelEggFollower)
+  angelEggFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+  followers.push_back(weakref(angelEggFollower))
 
 var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
+var petBabushkaCatFollowerRes = preload("res://sceneObjects/BabushkaCatFollower.tscn")
 func spawnPetFollower(starting_position):
   if global.memory["currPet"] == null:
     return
@@ -742,8 +746,15 @@ func spawnPetFollower(starting_position):
       self.add_child(petFollower)
       petFollower.global_transform.origin = starting_position
       var target = followers[-1] if followers.size() > 0 else player
-      petFollower.gameMoverTarget = weakref(target)
-      followers.push_back(petFollower)
+      petFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+      followers.push_back(weakref(petFollower))
+  elif currPet == global.PetFollower.CAT_BABUSHKA:
+    var petFollower = petBabushkaCatFollowerRes.instance()
+    self.add_child(petFollower)
+    petFollower.global_transform.origin = starting_position
+    var target = followers[-1] if followers.size() > 0 else player
+    petFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+    followers.push_back(weakref(petFollower))
 
 
 var smokeCloudRes = preload("res://sceneObjects/SmokeCloud.tscn")

@@ -2,6 +2,7 @@ extends Spatial
 
 # TODO(jaketrower): This "class" is monolithic when it should be Modular... but how in gdscript?
 
+var can_i_personally_ignore_game_pause = false
 onready var landSound = get_node("Sounds/LandSound") if has_node("Sounds/LandSound") else null
 onready var bumpSound = get_node("Sounds/BumpSound") if has_node("Sounds/BumpSound") else null
 onready var fallSound = get_node("Sounds/FallSound") if has_node("Sounds/FallSound") else null
@@ -203,7 +204,7 @@ func _process(delta):
   if aniPlayer:
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
 
-  if global.pauseGame or pauseSelf: return
+  if (global.pauseGame and not can_i_personally_ignore_game_pause) or pauseSelf: return
   if jump_force == null: jump_force = 16
   if has_just_glitch_swapped:
     has_just_glitch_swapped_timer += (delta*11)
@@ -377,7 +378,7 @@ func applyGravity(delta):
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
     lv += g * delta
-    if on_ground or physics_state == PhysicsState.OCCUPIED:
+    if on_ground or physics_state == PhysicsState.OCCUPIED or is_turn_based:
       fall_timer = 0
     elif physics_state == PhysicsState.BEING_TOSSED or (glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water):
       fall_timer += (delta*22)
@@ -1152,6 +1153,7 @@ func handleCollisionsAndMove(local_lv, delta):
     can_turn_move = true
   elif pressingDown() or pressingJump() or pressingMoveLeft() or pressingMoveRight():
     turn_based_timer += (delta*22)
+    if pressingRun(): turn_based_timer += (delta*22) # double it
     if turn_based_timer >= turn_based_time_limit:
       turn_based_timer = 0
       can_turn_move = true

@@ -272,7 +272,7 @@ func tryFadeAway(delta):
         myOtherSprite.material_override.set_shader_param("opacity", opacity)
         
         if stepify(opacity, 0.1) == 0:
-            if is_builder:
+            if is_builder and not do_i_care_about_time_limit:
                 myOtherSprite.material_override.set_shader_param("opacity", 0)
                 mole_state = MoleState.RESPAWN
                 aniPlayer.stop()
@@ -280,7 +280,14 @@ func tryFadeAway(delta):
                 aniPlayer.play("idle")
                 respawn_timer = 0
             else:
+                if permanently_alter_tiles:
+                    setGlobalMemoryOfHasBeenDefeated()
                 queue_free()
+
+func actuallyDieToOffscreenCamera():
+    if permanently_alter_tiles:
+        setGlobalMemoryOfHasBeenDefeated()
+    queue_free()
 
 func tryFadeBack(delta):
     opacity = opacity + (1.0 - opacity) * (delta * 5)

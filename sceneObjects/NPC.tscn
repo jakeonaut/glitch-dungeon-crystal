@@ -111,7 +111,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 5 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0

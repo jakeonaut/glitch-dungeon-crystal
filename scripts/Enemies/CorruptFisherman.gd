@@ -39,10 +39,10 @@ func unsmack():
   .unsmack()
   if gulping or am_i_dying:
     return
-  if origin_before_teleportation != null:
-    origin_before_teleportation = self.global_transform.origin
-  self.global_transform.origin = level.player.global_transform.origin
-  .passiveActivate(0, true)
+  # if origin_before_teleportation != null:
+  #   origin_before_teleportation = self.global_transform.origin
+  # self.global_transform.origin = level.player.global_transform.origin
+  # .passiveActivate(0, true)
 
 # @override
 func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):

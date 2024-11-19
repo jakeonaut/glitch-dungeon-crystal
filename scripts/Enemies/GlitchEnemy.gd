@@ -76,7 +76,7 @@ func _ready():
     if slime_walk_time_limit == null:
         slime_walk_time_limit = 10
     if is_static_in_level and self.getMyStaticLevelZoneVar():
-        set_process(false)
+        # set_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
         var miniCubeCrystal = miniCubeCrystalRes.instance()
@@ -129,6 +129,23 @@ func _ready():
         var target_palette = level.levelTiles.grey_palette
         if glitch_form == global.GlitchForm.FLOOR:
             target_palette = level.levelTiles.red_palette
+        elif glitch_form == global.GlitchForm.LADDER:
+            target_palette = level.levelTiles.yellow_palette
+        elif glitch_form == global.GlitchForm.FEATHER:
+            target_palette = level.levelTiles.green_palette
+        elif glitch_form == global.GlitchForm.INVISIBLE:
+            target_palette = level.levelTiles.black_palette
+        elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+            target_palette = level.levelTiles.white_palette
+        mySprite.material_override.set_shader_param("target_palette", target_palette)
+    updateSpellbookGlitchSprite()
+
+func updateSpellbookGlitchSprite():
+    if spellbookGlitchSprite != null and glitch_form != global.GlitchForm.NORMAL:
+        # mySprite.updateBaseFrame(4, 4)
+        var target_palette = level.levelTiles.grey_palette
+        if glitch_form == global.GlitchForm.FLOOR:
+            target_palette = level.levelTiles.red_palette
             spellbookGlitchSprite.frame = 1
         elif glitch_form == global.GlitchForm.LADDER:
             target_palette = level.levelTiles.yellow_palette
@@ -141,10 +158,10 @@ func _ready():
             spellbookGlitchSprite.frame = 3
         elif glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
             target_palette = level.levelTiles.white_palette
-        if mySprite.material_override != null:
-            mySprite.material_override.set_shader_param("target_palette", target_palette)
-        if spellbookGlitchSprite != null:
-            spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
+        spellbookGlitchSprite.material_override.set_shader_param("target_palette", target_palette)
+
+func ladderUpdateTargetLastGroundedY():
+    on_ground = false
 
 func shouldIDoCollisions():
     should_collide_floor = (not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
@@ -164,8 +181,9 @@ func _process(delta):
 
     if glitch_form != global.GlitchForm.NORMAL and spellbookGlitchSprite != null:
         spellbookGlitchSprite.visible = true
+        updateSpellbookGlitchSprite()
 
-    if global.pauseGame:
+    if global.pauseGame and not can_i_personally_ignore_game_pause:
         return
     processGlitchFormGlitchiness()
     
@@ -345,23 +363,28 @@ func tryDieToOffscreenCamera():
         if behavior_walking:
             DEATH_MARGIN = 0
             if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
-                global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
                 if behavior_walk_flip:
+                    global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
+
                     flipWalkingDirection()
-                return
+                    return
             if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
-                global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
                 if behavior_walk_flip:
+                    global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
                     flipWalkingDirection()
-                return
+                    return
         DEATH_MARGIN = 5
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            # if is_static_in_level:
-            #     setGlobalMemoryOfHasBeenDefeated()
-            queue_free()
+            actuallyDieToOffscreenCamera()
+
+func actuallyDieToOffscreenCamera():
+    if is_static_in_level:
+        setGlobalMemoryOfHasBeenDefeated()
+        trySpawnACrystal()
+    queue_free()
     
 var override_am_i_in_range_of_player = false
 # @override
@@ -483,6 +506,14 @@ func tryAddEnemiesGroup():
         smallInteractionArea.add_to_group("enemies")
 
 var can_spawn_mini_crystal = true
+func trySpawnACrystal():
+    if can_spawn_mini_crystal:
+        var miniCubeCrystal = miniCubeCrystalRes.instance()
+        miniCubeCrystal.is_static_in_level = false
+        level.add_child(miniCubeCrystal)
+        miniCubeCrystal.global_transform.origin = self.global_transform.origin
+        miniCubeCrystal.passiveActivate(0, false)
+
 func ouchies_base(broom_origin):
     if am_i_dying or am_i_freezing: # or am_i_hurt:
         return
@@ -490,12 +521,7 @@ func ouchies_base(broom_origin):
     # am_i_hurt = true
     if is_static_in_level and not self.getMyStaticLevelZoneVar(true):
         setGlobalMemoryOfHasBeenDefeated()
-        if can_spawn_mini_crystal:
-            var miniCubeCrystal = miniCubeCrystalRes.instance()
-            miniCubeCrystal.is_static_in_level = false
-            level.add_child(miniCubeCrystal)
-            miniCubeCrystal.global_transform.origin = self.global_transform.origin
-            miniCubeCrystal.passiveActivate(0, false)
+        trySpawnACrystal()
     if parentSpawner != null and parentSpawner.has_method("myChildDied"):
         parentSpawner.myChildDied()
     return result
@@ -563,7 +589,6 @@ func spawnABubble(is_horizontal):
 func setGlobalMemoryOfHasBeenDefeated():
     if is_static_in_level:
         global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
-        pass
 
 export var time_influence = 35
 export var y_div = 2.3

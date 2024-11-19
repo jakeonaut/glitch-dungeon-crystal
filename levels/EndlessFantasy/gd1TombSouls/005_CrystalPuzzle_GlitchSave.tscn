@@ -242,7 +242,7 @@ shader_param/shake_color_rate = 0.001
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 17 )
 show_crt_effect = true
-tileset_type = 4
+tileset_type = 1
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 16 )]
 

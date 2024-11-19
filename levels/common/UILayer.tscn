@@ -976,7 +976,7 @@ mesh = SubResource( 17213 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1488,12 +1488,10 @@ scroll_active = false
 visible = false
 
 [node name="CanvasLayer" parent="PauseMenu" index="13"]
-visible = false
 scale = Vector2( 3, 3 )
 transform = Transform2D( 3, 0, 0, 3, 0, 0 )
 
 [node name="PopupRect" parent="PauseMenu/CanvasLayer" index="0"]
-visible = true
 margin_left = 35.0
 margin_top = 101.0
 margin_right = 407.0
@@ -1583,7 +1581,7 @@ bbcode_enabled = true
 bbcode_text = "you awoke a
      [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]"
 text = "you awoke a
-     CRYSTAL elder"
+     Crystal Elder"
 scroll_active = false
 
 [node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
