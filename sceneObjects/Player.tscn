@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=2]
+[gd_scene load_steps=185 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -60,8 +60,7 @@
 [ext_resource path="res://assets/sounds/land2.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=59]
 [ext_resource path="res://assets/sounds/eba_earthquake1.wav" type="AudioStream" id=60]
-[ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=61]
-[ext_resource path="res://assets/sprites/spellicons.png" type="Texture" id=62]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=61]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Conversational.wav" type="AudioStream" id=63]
 [ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=64]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=65]
@@ -190,6 +189,35 @@ shader_param/texture_albedo = ExtResource( 68 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 69 )
 
+[sub_resource type="ShaderMaterial" id=122]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 1.0
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 61 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 69 )
+
 [sub_resource type="ShaderMaterial" id=119]
 shader = ExtResource( 4 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -276,35 +304,6 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 68 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 71 )
-
-[sub_resource type="ShaderMaterial" id=101]
-shader = ExtResource( 4 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 10.0
-shader_param/shake_color_rate = 0.0
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 4.0
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 62 )
-shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 61 )
 
 [sub_resource type="ShaderMaterial" id=48]
 shader = ExtResource( 4 )
@@ -6735,13 +6734,23 @@ shader_param/target_palette = ExtResource( 36 )
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
 true_terminal_vel = 14
+lb = null
+rb = null
+tb = null
+bb = null
 grav = 28
 walk_speed = 6.5
 run_speed = 8
+glitch_form = null
 feather_glitch_walk_speed = 7
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
 swimming_walk_speed = 5
 jump_force = 9
 invisible_jump_force = 10
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="TileArea" type="Area" parent="."]
 
@@ -6805,6 +6814,18 @@ frame = 24
 script = ExtResource( 10 )
 frame_delay = 0.3
 
+[node name="MalwareSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
+visible = false
+material_override = SubResource( 122 )
+pixel_size = 0.125
+texture = ExtResource( 61 )
+hframes = 8
+vframes = 16
+frame = 106
+script = ExtResource( 10 )
+frame_delay = 0.3
+
 [node name="MoleSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
 visible = false
@@ -6842,18 +6863,6 @@ script = ExtResource( 10 )
 max_frames = 1
 should_animate = false
 automatically_change_color = false
-
-[node name="Sprite3D2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267474, 2.12345, 0.8 )
-visible = false
-material_override = SubResource( 101 )
-pixel_size = 0.1
-transparent = false
-double_sided = false
-alpha_cut = 2
-texture = ExtResource( 62 )
-hframes = 5
-vframes = 5
 
 [node name="Sprite3DBroomAnimated" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0, 0.7 )

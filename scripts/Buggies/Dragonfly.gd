@@ -117,12 +117,12 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     if is_smacked:
         return
 
-    if level.player.malware_infected:
-        var malwareDragonfly = malwareDragonflyRes.instance()
-        level.add_child(malwareDragonfly)
-        malwareDragonfly.global_transform.origin = self.global_transform.origin
-        self.queue_free()
-        return
+    # if level.player.malware_infected:
+    #     var malwareDragonfly = malwareDragonflyRes.instance()
+    #     level.add_child(malwareDragonfly)
+    #     malwareDragonfly.global_transform.origin = self.global_transform.origin
+    #     self.queue_free()
+    #     return
     if catchSound: catchSound.play()
     if smackSound: smackSound.play()
     mySprite.material_override.set_shader_param("time_influence", time_influence)

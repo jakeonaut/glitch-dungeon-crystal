@@ -8,6 +8,12 @@ var was_player_caught = false
 func _ready():
   set_process(true)
 
+  if global.has_revealed_an_angler_fish:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("revealQuiet")
+    am_revealed = true
+
 func _process(_delta):
   if am_i_dying:
     return
@@ -21,11 +27,13 @@ func _process(_delta):
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("reveal")
       am_revealed = true
+      global.has_revealed_an_angler_fish = true
   else:
     if i_caught_player and not was_player_caught:
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("openMouth")
+      global.has_revealed_an_angler_fish = true
 
   was_player_caught = i_caught_player
 
@@ -60,6 +68,7 @@ func passiveActivate(_delta, is_player):
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("digest")
+    global.has_revealed_an_angler_fish = true
     level.player.visible = false
     level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
   elif origin_before_teleportation != null:
@@ -83,6 +92,7 @@ func getCorruptedAndDie():
   level.player.global_transform.origin.y += 1
   level.player.visible = true
   level.player.physics_state = level.player.PhysicsState.NORMAL
+  level.player.aniPlayer.stop()
   level.player.magicJump()
   var jump_force = 10
   level.player.vv = jump_force

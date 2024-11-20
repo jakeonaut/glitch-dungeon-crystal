@@ -332,10 +332,21 @@ func processPhysics(delta):
   was_touching_sandstream = is_touching_sandstream
   was_touching_water = is_touching_water
 
-  if was_just_on_ground_timer <= was_just_on_ground_time_limit:
-    was_just_on_ground_timer += (delta*22)
-    if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
+  if is_turn_based:
+    if can_turn_move:
+      if on_ground:
+        was_just_on_ground_timer = 0
+      elif was_just_on_ground_timer == 0:
+        print("1 was_just_on_ground_timer 1")
+        was_just_on_ground_timer = 1
+      else:
+        print("MAX was_just_on_ground_timer MAX")
+        was_just_on_ground_timer = was_just_on_ground_time_limit + 1
+  else:
+    if was_just_on_ground_timer <= was_just_on_ground_time_limit:
       was_just_on_ground_timer += (delta*22)
+      if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
+        was_just_on_ground_timer += (delta*22)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
     horizontal_input_reset_timer += (delta*11)
@@ -377,13 +388,20 @@ func applyGravity(delta):
   createG(delta)
 
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
-    lv += g * delta
+
+    if is_turn_based:
+      if can_turn_move:
+        lv.y = g.y * delta
+    else:
+      lv += g * delta
+
     if on_ground or physics_state == PhysicsState.OCCUPIED or is_turn_based:
       fall_timer = 0
     elif physics_state == PhysicsState.BEING_TOSSED or (glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water):
       fall_timer += (delta*22)
     elif (glitch_form == global.GlitchForm.FEATHER or vv > 0) and physics_state != PhysicsState.BEING_TOSSED:
       fall_timer = 0
+
     if lv.y < 0:
       if not on_ground and not pauseAnimation and aniPlayer != null:
         var a = aniPlayer.current_animation
@@ -599,7 +617,11 @@ func processInputs(delta):
   if vv > jump_force*2:
     vv = jump_force*2
   if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
-    vv = 1
+    if not is_turn_based:
+      vv = 1
+    else:
+      vv = 0
+      was_just_on_ground_timer = 0
     was_just_walking_on_wall = true
     was_just_walking_on_wall_timer = 0
   if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
@@ -744,87 +766,87 @@ func processLadderInputs(_delta):
           aniPlayer.clear_queue()
           aniPlayer.play("climbStop")
     
-
 func processJumpInputs(delta):
   if is_climbing_ladder or global.pauseMoveInput: return
 
-  # jump
-  if justPressedJump() or recentlyJustPressedJump(): 
-    # # Jump from the water
-    if canSwim() and is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
-    (aniPlayer == null or pauseAnimation or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
-      was_touching_water_at_start_of_jump = true
-      vv = jump_force * .75
-      has_water_double_jumped = true
+  if not is_turn_based:
+    # jump
+    if justPressedJump() or recentlyJustPressedJump():
+      # # Jump from the water
+      if canSwim() and is_touching_water and not has_water_double_jumped and not isKindOfOnGround() and \
+      (aniPlayer == null or pauseAnimation or (aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart")):
+        was_touching_water_at_start_of_jump = true
+        vv = jump_force * .75
+        has_water_double_jumped = true
 
-      if is_touching_water and wetJumpSound != null and justPressedJump():
-        wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
-        wetJumpSound.play()
-      on_ground = false
-      should_do_fallthrough_area_collision = false
-      has_just_jumped_timer = -has_just_jumped_time_limit
+        if is_touching_water and wetJumpSound != null and justPressedJump():
+          wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
+          wetJumpSound.play()
+        on_ground = false
+        should_do_fallthrough_area_collision = false
+        has_just_jumped_timer = -has_just_jumped_time_limit
 
-      if not pauseAnimation and aniPlayer != null:
-        aniPlayer.clear_queue()
-        aniPlayer.play("swimJumpStart")
-        aniPlayer.queue("swimJump")
-    # Jump from the ground
-    if isKindOfOnGround():
-      has_water_double_jumped = false
-      was_touching_water_at_start_of_jump = is_touching_water
-      was_just_on_ground_timer = was_just_on_ground_time_limit
-      was_just_walking_on_wall_timer = was_just_on_ground_time_limit
-      jumped_from_true_ground = truly_on_ground
-      jump_squat_jump_input_timer = 0
-      feather_jump_timer = 0
-      weak_feather_dbl_jump = false
-      if on_ground:
-        addJumpSmokeCloud()
-      if aniPlayer == null or pauseAnimation:
-        jump_squat_jump_input_timer = 1
+        if not pauseAnimation and aniPlayer != null:
+          aniPlayer.clear_queue()
+          aniPlayer.play("swimJumpStart")
+          aniPlayer.queue("swimJump")
+      # Jump from the ground
+      if isKindOfOnGround():
+        has_water_double_jumped = false
+        was_touching_water_at_start_of_jump = is_touching_water
+        was_just_on_ground_timer = was_just_on_ground_time_limit
+        was_just_walking_on_wall_timer = was_just_on_ground_time_limit
+        jumped_from_true_ground = truly_on_ground
+        jump_squat_jump_input_timer = 0
+        feather_jump_timer = 0
+        weak_feather_dbl_jump = false
+        if on_ground:
+          addJumpSmokeCloud()
+        if aniPlayer == null or pauseAnimation:
+          jump_squat_jump_input_timer = 1
+          actuallyApplyJump()
+
+        if not pauseAnimation and aniPlayer != null and (not "jump" in aniPlayer.assigned_animation or not "fall" in aniPlayer.assigned_animation):
+          aniPlayer.clear_queue()
+          aniPlayer.play("jumpSquat", -1, 2.0 if isFeatherLike() else 1.0)
+          aniPlayer.queue("jumpStart")
+          aniPlayer.queue("jump")
+        if bounceAniPlayer:
+          playBounce("jumpSquat", ["jumpStart"])
+
+    if not pauseAnimation and aniPlayer != null:
+      if aniPlayer.assigned_animation == "jumpSquat":
+        vv = 0
+        if pressingJump():
+          jump_squat_jump_input_timer += (delta*22)
+      if aniPlayer.assigned_animation != "jumpSquat" and jump_squat_jump_input_timer > 0:
         actuallyApplyJump()
+        jump_squat_jump_input_timer = 0
+        
 
-      if not pauseAnimation and aniPlayer != null and (not "jump" in aniPlayer.assigned_animation or not "fall" in aniPlayer.assigned_animation):
-        aniPlayer.clear_queue()
-        aniPlayer.play("jumpSquat", -1, 2.0 if isFeatherLike() else 1.0)
-        aniPlayer.queue("jumpStart")
-        aniPlayer.queue("jump")
-      if bounceAniPlayer:
-        playBounce("jumpSquat", ["jumpStart"])
-
-  if not pauseAnimation and aniPlayer != null:
-    if aniPlayer.assigned_animation == "jumpSquat":
-      vv = 0
-      if pressingJump():
-        jump_squat_jump_input_timer += (delta*22)
-    if aniPlayer.assigned_animation != "jumpSquat" and jump_squat_jump_input_timer > 0:
-      actuallyApplyJump()
-      jump_squat_jump_input_timer = 0
-      
-
-  if true: # not glitch_form == global.GlitchForm.LADDER:
-    if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
-      feather_jump_timer += (delta*22)
-      if weak_feather_dbl_jump:
+    if true: # not glitch_form == global.GlitchForm.LADDER:
+      if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
         feather_jump_timer += (delta*22)
-      actuallyApplyJump(false)
-    elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
-      feather_jump_timer += (delta*22)
-      if feather_jump_timer > 3: 
+        if weak_feather_dbl_jump:
+          feather_jump_timer += (delta*22)
         actuallyApplyJump(false)
-    elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
-      feather_jump_timer += (delta*22)
-    
-  # if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
-  #   feather_jump_timer = 0
-  #   should_magic_jump = true
-  #   actuallyApplyJump(false)
-  #   was_touching_water_at_start_of_jump = false
-    
-  if not pressingJump():
-    weak_feather_dbl_jump = true
-    feather_jump_timer = 200
+      elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
+        feather_jump_timer += (delta*22)
+        if feather_jump_timer > 3: 
+          actuallyApplyJump(false)
+      elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
+        feather_jump_timer += (delta*22)
       
+    # if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:
+    #   feather_jump_timer = 0
+    #   should_magic_jump = true
+    #   actuallyApplyJump(false)
+    #   was_touching_water_at_start_of_jump = false
+      
+    if not pressingJump():
+      weak_feather_dbl_jump = true
+      feather_jump_timer = 200
+        
   if vv > 0 or on_ground:
     should_magic_jump = false
 
@@ -917,6 +939,7 @@ var was_running = false
 var horizontal_multiplier = 1
 var horizontal_addition = 0
 var is_sprite_flipped = false
+var should_always_stop_walking_immediately = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
@@ -977,8 +1000,8 @@ func processHorizontalInputs(delta):
     is_pressing_horizontal_input or self.isFeatherLike() or self.glitch_form == global.GlitchForm.LADDER:
     
     horizontal_input = true
-    if is_pressing_opposite_horizontal_input and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround"):
-      if not glitch_form == global.GlitchForm.FLOOR or on_ground:
+    if is_turn_based or (is_pressing_opposite_horizontal_input and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation == "jumpStart" or aniPlayer.assigned_animation == "turnAround")):
+      if not glitch_form == global.GlitchForm.FLOOR or on_ground or is_turn_based or should_always_stop_walking_immediately:
         dir = Vector3(0.0, 0.0, 0.0)
       
 
@@ -1048,7 +1071,9 @@ func processHorizontalInputs(delta):
   mySprite.flip_h = flip_h
 
   var DNUMSKID = DNUMSKID_BASE
-  if self.isFeatherLike():
+  if is_turn_based:
+    DNUMSKID = 999.0
+  elif self.isFeatherLike():
     DNUMSKID = DNUMSKID_BASE/2.8
     if not on_ground:
       DNUMSKID = DNUMSKID_BASE/7
@@ -1141,13 +1166,16 @@ func normalizeLv(lv_to_normalize):
 var is_a_physics_particle = false
 var turn_based_timer = 0
 var turn_based_time_limit = 4
+var can_turn_move = false
+var turn_based_jump_count = 0
+var turn_based_jump_max = 2
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 # https://info.sonicretro.org/SPG:Solid_Tiles
 func handleCollisionsAndMove(local_lv, delta):
   if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
 
-  var can_turn_move = false
+  can_turn_move = false
   if justPressedDown() or justPressedJump() or justPressedMoveLeft() or justPressedMoveRight():
     turn_based_timer = 0
     can_turn_move = true
@@ -1157,6 +1185,24 @@ func handleCollisionsAndMove(local_lv, delta):
     if turn_based_timer >= turn_based_time_limit:
       turn_based_timer = 0
       can_turn_move = true
+
+  if is_turn_based and can_turn_move and pressingJump() and physics_state == PhysicsState.NORMAL:
+    var max_jumps = turn_based_jump_max
+    if isFeatherLike():
+      max_jumps *= 2
+    if glitch_form == global.GlitchForm.LADDER:
+      max_jumps /= 2
+    if isKindOfOnGround():
+      print("jump_count = 1")
+      turn_based_jump_count = 1
+      local_lv.y = 1
+      on_ground = false
+    elif turn_based_jump_count < max_jumps:
+      turn_based_jump_count += 1
+      print("jump_count++ => " + str(turn_based_jump_count))
+      local_lv.y = 1
+    elif local_lv.y > 0:
+      local_lv.y = 0
 
   if is_a_physics_particle:
     global_transform.origin.x += local_lv.x / velocity_dampener
@@ -1186,7 +1232,9 @@ func handleCollisionsAndMove(local_lv, delta):
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
     on_ground = isWalkingIntoWall()
   elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
-    on_ground = false
+    var tiles_underfoot = getTilesBelow(getLevelTiles())
+    if not is_turn_based or (tiles_underfoot[0] == null and tiles_underfoot[1] == null and tiles_underfoot[2] == null):
+      on_ground = false
   truly_on_ground = false
   half_on_ground = false
   on_ceiling = false
@@ -1204,10 +1252,17 @@ func handleCollisionsAndMove(local_lv, delta):
 
   # PROCESS TURN_BASED MOVEMENT
   if is_turn_based:
-    if can_turn_move and local_lv.y > 0:
+    var walking_up_wall = (isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER)
+    if can_turn_move and (local_lv.y > 0 or walking_up_wall):
       global_transform.origin.y += 1
-    elif can_turn_move and local_lv.y < 0:
-      global_transform.origin.y -= 1
+      if walking_up_wall:
+        turn_based_jump_count = 999
+        on_ground = true
+    elif can_turn_move and (local_lv.y < 0 or justPressedDown()):
+      if glitch_form == global.GlitchForm.FEATHER and not pressingDown():
+        global_transform.origin.y -= 0.5
+      else:
+        global_transform.origin.y -= 1
   else:
     global_transform.origin.y += local_lv.y / velocity_dampener
 
@@ -1575,7 +1630,7 @@ func iFellFlat():
 
 func isWalkingIntoWall():
   return horizontal_collision \
-       and is_pressing_horizontal_input and was_pressing_horizontal_input \
+       and is_pressing_horizontal_input and (was_pressing_horizontal_input or is_turn_based) \
        and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation != "jumpSquat") 
 
 func updateFacing(local_dir):

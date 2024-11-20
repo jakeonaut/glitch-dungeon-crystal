@@ -65,7 +65,7 @@ func _process(delta):
 
   if gulpin:
     level.player.visible = false
-    if tongueAniPlayer != null and tongueAniPlayer.assigned_animation == "gulpIdle":
+    if tongueAniPlayer != null and tongueAniPlayer.assigned_animation != "spitOut":
       # if Input.is_action_pressed("ui_left"):
       #   mySprite.flip_h = true
       # elif Input.is_action_pressed("ui_right"):

@@ -122,7 +122,7 @@ func processNotWallLadderWalking(delta):
 
 # @override
 func alignMySprite():
-  var pixelSize = 0.125
+  var pixelSize = 0.125 if not malware_infected else 1.0
   if spriteContainer:
     spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
     spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
@@ -381,7 +381,8 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
-  is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
+  # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
+  should_always_stop_walking_immediately = malware_infected
 
   processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
@@ -2186,20 +2187,26 @@ func shouldAirHaveFriction():
 
 var cloud_timer = 0
 var cloud_time_limit = 15
+var bug_sprite_timer = 0
+var bug_sprite_time_limit = 5
 func processSpriteRenderLogic(delta):
   if malware_infected:
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:
-        cloud_timer = 0
-        glitchTickle()
-        # getSmacked()
-        # var newMalwareBugSprite = malwareBugSpriteRes.instance()
-        # var which_dir_x = ((randi() % 3) - 1)
-        # var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
-        # newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
-        # level.add_child(newMalwareBugSprite)uncorruptAllSprites
-        # newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
+      cloud_timer = 0
+      glitchTickle()
+      # getSmacked()
+    bug_sprite_timer += (delta*11)
+    if bug_sprite_timer >= bug_sprite_time_limit:
+      bug_sprite_timer = 0
+      var newMalwareBugSprite = malwareBugSpriteRes.instance()
+      var which_dir_x = ((randi() % 3) - 1)
+      var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
+      newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
+      level.add_child(newMalwareBugSprite)
+      newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
+      newMalwareBugSprite.global_transform.origin.z += 1
   elif mySprite.material_override.get_shader_param("enable_dither"):
     uncorruptAllSprites()
 

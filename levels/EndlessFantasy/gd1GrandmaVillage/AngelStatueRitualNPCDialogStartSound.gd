@@ -5,13 +5,12 @@ func _ready():
 
 
 func activateScript():
-    var text = "•I will teach you Ritual. \nTo travel between Angels\n•like so:\ndo this: "
-    for ritual_step in global.correct_ritual:
-        text += global.getLargeInputText(ritual_step) + " "
-    text += "\n\n•\"Pray thrice then Return.\""
+    # var text = "•I will teach you Ritual. \nTo travel between Angels\n•like so:\ndo this: "
+    # for ritual_step in global.correct_ritual:
+    #     text += global.getLargeInputText(ritual_step) + " "
+    # text += "\n\n•\"Pray thrice then Return.\""
     var textBox = get_node("..")
-    if global.justAngelWarped:
-      text = "•Keep up your daily prayers.\nOur mother needs your strength."
+    var text = "•Keep up your daily prayers.\nOur mother needs your strength."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

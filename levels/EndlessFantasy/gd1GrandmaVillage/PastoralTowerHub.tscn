@@ -888,9 +888,6 @@ Try [font=res://DarkInputFont.tres]1[/font][font=res://DarkInputFont.tres]2[/fon
 [node name="CollisionShape" parent="Viewport/level/GlitchedGrimoire/SmallInteractionArea" index="0"]
 shape = SubResource( 105 )
 
-[node name="ForgetMeNotSprite" parent="Viewport/level/GlitchedGrimoire/Sprite3D" index="0"]
-transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.84343, 0.291156 )
-
 [node name="ElderTadpoleNPC3" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6009, 13, 0 )
 bbText = "ah, seems that

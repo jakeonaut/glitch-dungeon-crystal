@@ -93,6 +93,15 @@ onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContaine
 onready var interactPromptSprite = get_node("InteractPrompt")
 var override_camera_y = null
 func _process(delta):
+  if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
+    should_big_bump = false
+    if grav == 0:
+      grav = PLAYER_GRAV
+    aniPlayer.stop()
+    aniPlayer.clear_queue()
+    # aniPlayer.play("uncorruptMe")
+    aniPlayer.queue("fall")
+    fall_timer = 0
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
   if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
@@ -399,12 +408,12 @@ func pressingJump():
 
 # @overrride
 func actuallyApplyJump(play_sound = true):
-  # if malware_infected:
-  #   on_ground = false
-  #   should_do_fallthrough_area_collision = false
-  #   has_just_jumped_timer = 0
-  # else:
-  .actuallyApplyJump(play_sound)
+  if malware_infected:
+    on_ground = false
+    should_do_fallthrough_area_collision = false
+    has_just_jumped_timer = 0
+  else:
+    .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():
