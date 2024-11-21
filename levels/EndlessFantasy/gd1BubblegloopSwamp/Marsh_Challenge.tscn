@@ -887,6 +887,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, 0 )
+lb = -0.72
+rb = 0.72
+tb = 1.0
+bb = -1.0
+glitch_form = 0
+floor_glitch_walk_speed = 3
+invisible_glitch_walk_speed = 6
+time_influence = 35
+y_div = 2.3
+normal_offset = 0.15
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0 )

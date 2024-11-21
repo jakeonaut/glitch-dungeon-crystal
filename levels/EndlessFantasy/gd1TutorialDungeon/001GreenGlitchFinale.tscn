@@ -204,6 +204,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 11, 0 )
+lb = -0.72
+rb = 0.72
+tb = 1.0
+bb = -1.0
+glitch_form = 0
+floor_glitch_walk_speed = 3
+invisible_glitch_walk_speed = 6
+time_influence = 35
+y_div = 2.3
+normal_offset = 0.15
 
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48446, 0, 0 )
@@ -319,7 +329,7 @@ flip_v = true
 mesh = SubResource( 37 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]

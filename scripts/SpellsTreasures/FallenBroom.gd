@@ -38,6 +38,7 @@ func _ready():
     should_collide_ceil = true
     should_collide_floor = true
     should_collide_horizontally = true
+    is_sprite_flipped = false # need to reset this from NPC UGH
 
 var doing_a_final_hit = false
 var can_return_via_input = false
@@ -85,6 +86,7 @@ func _process(delta):
             if returning and global.activeInteractor and global.activeInteractor.is_important:
                 global.pauseGame = true
     elif projectile:
+        on_ground = false
         if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
             if not level.player.can_broomerang_warp:
                 level.player.errorSound.play()

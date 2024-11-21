@@ -46,7 +46,6 @@ func _process(delta):
     if didja_get_me:
         opacity = opacity + (0.0 - opacity) * (delta * 5)
         mySprite.material_override.set_shader_param("opacity", opacity)
-        
         if stepify(opacity, 0.1) == 0:
             queue_free()
 

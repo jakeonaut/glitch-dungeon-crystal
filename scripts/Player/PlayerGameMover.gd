@@ -371,14 +371,21 @@ func collideWithWall(local_lv):
   if grav == 0:
     grav = PLAYER_GRAV
 
+var glitch_death_timer = 0
 func bigBump():
   if grav == 0:
     grav = PLAYER_GRAV
   bumpSound2.play()
-  var prev_hp = global.memory["hp"]
-  global.memory["hp"] += 1
-  tryDieToEnemy(0, false, true, false)
-  global.memory["hp"] = prev_hp
+  # var prev_hp = global.memory["hp"]
+  # global.memory["hp"] += 1
+  # tryDieToEnemy(0, false, true, false)
+  # global.memory["hp"] = prev_hp
+  glitchTilesAroundMe()
+  glitchTickle()
+  getSmacked()
+  if global.userSettings["canGlitchScreen"]:
+    level.glitchScreenEffect.visible = true
+    glitch_death_timer = 1
   fall_timer = 0
   pauseAnimation = false
   should_big_bump = false
@@ -386,6 +393,24 @@ func bigBump():
   aniPlayer.clear_queue()
   # aniPlayer.play("uncorruptMe")
   aniPlayer.queue("fall")
+
+onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
+func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
+  var lt = getLevelTiles()
+
+  var shape = glitchCollisionShape
+  var x = shape.global_transform.origin.x
+  var y = shape.global_transform.origin.y
+  var tb = y + shape.shape.extents.y/2*shape.scale.y + margin
+  var bb = y - shape.shape.extents.y/2*shape.scale.y - margin
+  var lb = x - shape.shape.extents.x/2*shape.scale.x - margin
+  var rb = x + shape.shape.extents.x/2*shape.scale.x + margin
+  
+  lt.clearRandomTileTimers()
+  for i in range(int(floor(bb)), int(ceil(tb))):
+    for j in range(int(floor(lb)), int(ceil(rb))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
 
 # @override
 func pressingJump():

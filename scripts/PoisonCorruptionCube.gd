@@ -62,24 +62,46 @@ func passiveActivate(_delta, is_player):
         if rotZ == 0:
             rotation_vector = Vector2(-1, 0)
             level.player.global_transform.origin.y = global_transform.origin.y
+            level.player.global_transform.origin.y -= 0.3
         elif rotZ == -90 or rotZ == 270:
             rotation_vector = Vector2(0, 1)
             level.player.global_transform.origin.x = global_transform.origin.x
         elif rotZ == -180 or rotZ == 180:
             rotation_vector = Vector2(1, 0)
             level.player.global_transform.origin.y = global_transform.origin.y
+            level.player.global_transform.origin.y -= 0.3
         elif rotZ == -270 or rotZ == 90:
             rotation_vector = Vector2(0, -1)
             level.player.global_transform.origin.x = global_transform.origin.x
         level.player.tumbleFall(rotation_vector, true)
+        if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+            level.player.playBounce("grow")
 
-    # var is_flipped = true if mushroom_walk_direction < 0 else false
-    # mySprite1.flip_h = is_flipped
-    # mySprite2.flip_h = is_flipped
-    # mySprite2.flip_h = is_flipped
-    # mySprite2.flip_h = is_flipped
-    # tongueDirSprite.global_transform.origin.x = self.global_transform.origin.x + (1.5 * mushroom_walk_direction)
-    # tongueDirSprite.flip_h = is_flipped
+func otherPassiveActivate(_delta, gameMover):
+    if not gameMover.has_method("tumbleFall"):
+        return
+        
+    level.player.gravitySound.play()
+    gameMover.on_ground = false
+    gameMover.truly_on_ground = false
+    # gameMover.glitchTickle()
+    var rotation_vector = Vector2(0, 0)
+    var rotZ = stepify(rotation_degrees.z, 90)
+    if rotZ == 0:
+        rotation_vector = Vector2(-1, 0)
+        gameMover.global_transform.origin.y = global_transform.origin.y
+        gameMover.global_transform.origin.y -= 0.25
+    elif rotZ == -90 or rotZ == 270:
+        rotation_vector = Vector2(0, 1)
+        gameMover.global_transform.origin.x = global_transform.origin.x
+    elif rotZ == -180 or rotZ == 180:
+        rotation_vector = Vector2(1, 0)
+        gameMover.global_transform.origin.y = global_transform.origin.y
+        gameMover.global_transform.origin.y -= 0.25 
+    elif rotZ == -270 or rotZ == 90:
+        rotation_vector = Vector2(0, -1)
+        gameMover.global_transform.origin.x = global_transform.origin.x
+    gameMover.tumbleFall(rotation_vector, true)
 
 
 func stopPassiveActivate():
@@ -116,6 +138,7 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     mushroom_walk_direction = -mushroom_walk_direction
     rotation_degrees.z -= 90
     rotation_degrees.z = int(rotation_degrees.z) % 360
+    rotation_degrees.z = stepify(rotation_degrees.z, 90.0)
     # if rotation_degrees.z == 90 or rotation_degrees.z == -270:
     #     rotation_degrees.z = 0
     is_active = true

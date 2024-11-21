@@ -205,6 +205,8 @@ func spitOut():
     tongueController.hookTarget = null
   level.player.glitchTickle()
   level.player.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
+  if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+    level.player.playBounce("grow")
   if is_bubble_spitter:
     level.player.getBubbleInfected()
     yield(get_tree().create_timer(0.2), "timeout")

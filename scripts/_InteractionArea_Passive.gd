@@ -31,6 +31,7 @@ func _ready():
 func isActive(_debug=false):
     return parent.has_method("isActive") and parent.isActive()
 
+# for use with PlayerSmallInteractionArea
 func PassiveInteractActivate(delta, is_player = true):
     if parent.has_method("passiveActivate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
@@ -39,7 +40,13 @@ func PassiveInteractActivate(delta, is_player = true):
     if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:
         getPlayer().bodyPushMe(delta, self.global_transform.origin)
 
-func PassivePassiveInteractActivate(delta, is_player = true):
+# for use with GameMoverSmallInteractionArea
+func OtherPassiveInteractActivate(delta, gameMover):
+    if parent.has_method("otherPassiveActivate"):
+        parent.otherPassiveActivate(delta, gameMover)
+
+
+func PassivePassiveInteractActivate(_delta, is_player = true):
     touchingPlayer = is_player
 
 func playerActivationAreaPassiveActivate():

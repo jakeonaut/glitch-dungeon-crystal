@@ -12,6 +12,8 @@ func activateScript():
   global.memory["currPet"] = global.PetFollower.CAT_BABUSHKA
   level.spawnPetFollower(NPC.global_transform.origin)
   global.memory["babushka_cat_story_hook"] = 1
+  level.player.textBox.override_target_origin = level.get_node("DialogPosition").global_transform.origin
+  level.player.sayThis("oh hello dearie..", 2.0)
   NPC.queue_free()
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

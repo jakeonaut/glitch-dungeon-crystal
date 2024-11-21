@@ -49,7 +49,6 @@ var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
 var should_turn_on_glitch_screen_effects = false
-var glitch_death_timer = 0
 var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
@@ -948,24 +947,6 @@ func processGlitchHurtRecovery(delta):
 
     return true
 
-onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
-func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
-  var lt = getLevelTiles()
-
-  var shape = glitchCollisionShape
-  var x = shape.global_transform.origin.x
-  var y = shape.global_transform.origin.y
-  var tb = y + shape.shape.extents.y/2*shape.scale.y + margin
-  var bb = y - shape.shape.extents.y/2*shape.scale.y - margin
-  var lb = x - shape.shape.extents.x/2*shape.scale.x - margin
-  var rb = x + shape.shape.extents.x/2*shape.scale.x + margin
-  
-  lt.clearRandomTileTimers()
-  for i in range(int(floor(bb)), int(ceil(tb))):
-    for j in range(int(floor(lb)), int(ceil(rb))):
-      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
-
 func applyGlitchDeathEffects(x):
   if global.userSettings["canChangeSongPitch"] and (x < 0 or x > 20):
     musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
@@ -1855,7 +1836,6 @@ func tumbleFall(direction_vector, is_corrupted = false):
   aniPlayer.clear_queue()
   var x_val = 0
   var jump_val = 5 if not is_corrupted else 0
-  playBounce("grow")
   if direction_vector.x < 0:
     aniPlayer.queue("tumbleLeft")
     x_val = -10
@@ -2407,6 +2387,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
   level.add_child(fallenBroom)
   if smacked_npc != null:
     fallenBroom.smacked_npc = smacked_npc
+  fallenBroom.mySprite.flip_h = self.mySprite.flip_h
   fallenBroom.should_die_on_land = should_die_on_land
   fallenBroom.should_return = should_return
   fallenBroom.global_transform.origin = self.global_transform.origin
