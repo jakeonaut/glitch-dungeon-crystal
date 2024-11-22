@@ -112,7 +112,7 @@ func getHurt():
 func killTheBullets():
     var glitchBullets = get_tree().get_nodes_in_group("enemies")
     for i in range(len(glitchBullets)):
-        glitchBullets[i].get_node("..").getSmacked(global_transform.origin)
+        glitchBullets[i].get_node("..").ouchies_base(global_transform.origin)
 
 func yaBeatMe():
     killTheBullets()

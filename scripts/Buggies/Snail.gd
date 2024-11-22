@@ -131,7 +131,7 @@ func passiveActivate(_delta, _is_player):
 var didja_get_me = false
 var opacity = 1.0
 onready var smackSound = get_node("Sounds/SmackSound")
-func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
     if is_smacked:
         return
 

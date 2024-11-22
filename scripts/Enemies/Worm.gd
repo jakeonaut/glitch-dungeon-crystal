@@ -128,7 +128,7 @@ func fallthroughCollisionActivate(possible_game_mover):
   #   spawnASpore()
 
 # @override
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   if has_ever_been_smacked:
     return
   .getSmacked(broom_origin, silently)

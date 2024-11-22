@@ -55,10 +55,10 @@ func _process(delta):
         if stepify(target_pos.x, 0.1) == stepify(global_transform.origin.x, 0.1):
             randomizeTargetPos()
 
-        tryDieToOffscreenCamera()
+        tryDieToOffscreenCamera(delta)
         bulletTryDieToSolids()
 
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \

@@ -34,8 +34,6 @@ func _process(delta):
       hookTarget = null
       is_reeled_in = true
       return
-    elif hookTarget.get_ref() == level.player:
-      pass
 
     hookTarget.get_ref().should_do_fallthrough_area_collision = false
     hookTarget.get_ref().should_collide_floor = false
@@ -53,58 +51,61 @@ func _process(delta):
     reelItOut(delta)
 
 func restorePlayer(_got_to_top):
-  if hookTarget == null:
+  if hookTarget == null or hookTarget.get_ref() == null:
     return
-  hookTarget.get_ref().should_collide_floor = true # look at me pretending to be safe
-  hookTarget.get_ref().can_collide_with_floor = true
-  hookTarget.get_ref().pauseAnimation = false
-  level.player.hv = Vector3(0, 0, 0)
-  level.player.dir = Vector3(0.0, 0.0, 0.0)
-  level.player.linear_velocity.x = 0
-  level.player.lv.x = 0
-  level.player.pauseAnimation = false
-  if level.player.physics_state == level.player.PhysicsState.GLITCH_DYING:
-    level.player.vv = 0
-    level.player.linear_velocity.y = 0
-    level.player.lv.y = 0
+  var gameMover = hookTarget.get_ref()
+  gameMover.should_collide_floor = true # look at me pretending to be safe
+  gameMover.can_collide_with_floor = true
+  gameMover.pauseAnimation = false
+  gameMover.hv = Vector3(0, 0, 0)
+  gameMover.dir = Vector3(0.0, 0.0, 0.0)
+  gameMover.linear_velocity.x = 0
+  gameMover.lv.x = 0
+  gameMover.pauseAnimation = false
+  if gameMover.physics_state == gameMover.PhysicsState.GLITCH_DYING:
+    gameMover.vv = 0
+    gameMover.linear_velocity.y = 0
+    gameMover.lv.y = 0
     return
-  level.player.physics_state = level.player.PhysicsState.NORMAL
+  gameMover.physics_state = gameMover.PhysicsState.NORMAL
 
 func moveTargetToHook(delta):
-  if not hookTarget.get_ref():
+  if hookTarget == null or hookTarget.get_ref() == null:
     return
 
-  var fishPos = hookTarget.get_ref().global_transform.origin
+  var gameMover = hookTarget.get_ref()
+  var fishPos = gameMover.global_transform.origin
   var hookPos = hookInteractionArea.global_transform.origin
-  hookTarget.get_ref().global_transform.origin = global.moveToward2D(fishPos, hookPos, delta * 15)
+  gameMover.global_transform.origin = global.moveToward2D(fishPos, hookPos, delta * 15)
   # hookInteractionArea.global_transform.origin.z = fishPos.z - 1
 
-  if hookTarget.get_ref().has_method("ladderUpdateTargetLastGroundedY"):
-    hookTarget.get_ref().ladderUpdateTargetLastGroundedY()
+  if gameMover.has_method("ladderUpdateTargetLastGroundedY"):
+    gameMover.ladderUpdateTargetLastGroundedY()
 
 func reelItIn(delta):
+  if hookTarget == null or hookTarget.get_ref() == null:
+    return
+  var gameMover = hookTarget.get_ref()
   vv += acc * delta
   if vv >= max_speed:
     vv = max_speed
   hookInteractionArea.global_transform.origin.y += vv * delta
-  if hookTarget.get_ref() == level.player:
-    var jump_val = 10
-    level.player.on_ground = false
-    level.player.vv = jump_val
-    level.player.linear_velocity.y = jump_val
-    level.player.lv.y = jump_val
-    level.player.hv = Vector3(0, 0, 0)
-    level.player.linear_velocity.x = 0
-    level.player.lv.x = 0
-    if not level.player.reelSound.is_playing():
-      level.player.reelSound.play()
+  var jump_val = 10
+  gameMover.on_ground = false
+  gameMover.vv = jump_val
+  gameMover.linear_velocity.y = jump_val
+  gameMover.lv.y = jump_val
+  gameMover.hv = Vector3(0, 0, 0)
+  gameMover.linear_velocity.x = 0
+  gameMover.lv.x = 0
+  if not level.player.reelSound.is_playing():
+    level.player.reelSound.play()
 
   if hookInteractionArea.global_transform.origin.y > self.global_transform.origin.y:
     hookInteractionArea.global_transform.origin.y = self.global_transform.origin.y
     is_reeled_in = true      
-    if hookTarget.get_ref() == level.player:
-      restorePlayer(true)
-      level.player.sporeSound.play()
+    restorePlayer(true)
+    level.player.sporeSound.play()
 
     hooked = false
     hookTarget = null
@@ -120,7 +121,7 @@ func isActive(_debug=false):
 
 func passiveActivate(_delta, is_player):
   if not hooked and not is_reeled_in and is_player and level.player.canIGetCaught():
-    level.clearOtherGrabbers()
+    level.clearOtherGrabbers(level.player)
     hooked = true
     hookTarget = weakref(level.player)
     level.player.hookSound.play()
@@ -130,3 +131,17 @@ func passiveActivate(_delta, is_player):
     level.player.should_do_fallthrough_area_collision = false
     level.player.tryClearFallthroughCollisionSolid()
   
+func otherPassiveActivate(_delta, gameMover):
+  if not hooked and not is_reeled_in:
+    level.clearOtherGrabbers(gameMover)
+    hooked = true
+    hookTarget = weakref(gameMover)
+    level.player.hookSound.play()
+    # if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+    #   level.player.aniPlayer.play("hookCaught")
+    gameMover.behavior_walking = false
+    gameMover.behavior_was_thrown = false
+    gameMover.pauseAnimation = true
+    gameMover.physics_state = gameMover.PhysicsState.NORMAL
+    gameMover.should_do_fallthrough_area_collision = false
+    gameMover.tryClearFallthroughCollisionSolid()

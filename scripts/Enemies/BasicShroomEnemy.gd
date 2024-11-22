@@ -66,7 +66,7 @@ func infectGlitchEnemies():
       queue_free()
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if level.pacman_wrapping:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:

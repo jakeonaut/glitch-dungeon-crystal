@@ -12,7 +12,7 @@ func isActive(_debug=false):
 func glitchSetSpritesAndCollision():
   return false
 
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   if anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE:
     notDieSound.play()
     dieSound.play()

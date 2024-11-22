@@ -218,7 +218,7 @@ func _process(delta):
 
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
-    tryDieToOffscreenCamera()
+    tryDieToOffscreenCamera(delta)
     if behavior_directional_bullet:
         tryDieToBody()
         bulletTryDieToSolids()
@@ -295,7 +295,7 @@ func processGlitchFormGlitchiness():
 
 func updateFallthroughSolids():
     if fallthroughSolid:
-        if ((smallInteractionArea != null and smallInteractionArea.is_in_group("enemies")) or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying):
+        if ((smallInteractionArea != null and smallInteractionArea.is_in_group("enemies")) or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying or not visible):
             if fallthroughSolid.is_in_group("fallthrough"):
                 fallthroughSolid.remove_from_group("fallthrough")
         elif not fallthroughSolid.is_in_group("fallthrough"):
@@ -304,13 +304,17 @@ func updateFallthroughSolids():
 var should_reset_slime_timer_on_flip = true
 func doHorizontalWalkingBehavior():
     if not behavior_walk_flip:
-            return
+        return
     if behavior_walking and horizontal_collision:
         horizontal_collision = false
         flipWalkingDirection()
 
 func flipWalkingDirection():
     walk_direction.x = -walk_direction.x
+    # these three to handle BEING_TOSSED cases...
+    hv.x = -hv.x
+    lv.x = hv.x
+    linear_velocity.x = hv.x
     if horizontalTurnSound: horizontalTurnSound.play()
     if behavior_intermittent_walking and should_reset_slime_timer_on_flip and slime_state != SlimeState.NULL:
         behavior_walking = true
@@ -357,7 +361,7 @@ func bulletTryDieToSolids():
         level.summonSmokeClouds(global_transform.origin, 3)
         queue_free()
 
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if behavior_walking:
@@ -378,9 +382,9 @@ func tryDieToOffscreenCamera():
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
         global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            actuallyDieToOffscreenCamera()
+            actuallyDieToOffscreenCamera(delta)
 
-func actuallyDieToOffscreenCamera():
+func actuallyDieToOffscreenCamera(_delta):
     if is_static_in_level:
         setGlobalMemoryOfHasBeenDefeated()
         trySpawnACrystal()
@@ -483,7 +487,7 @@ func activate(_is_player):
             getPlayer().glitchTickle()
             return true
     else:
-        var result = getSmacked(global_transform.origin)
+        var result = getSmacked(null)
         getPlayer().getSmacked()
         if getPlayer().teleport_to == null:
             getPlayer().teleport_to = weakref(self)
@@ -595,7 +599,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
 var should_modify_glitch_shader_vars = true
-func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
     if is_smacked or am_i_dying:
         return false
 
@@ -684,7 +688,7 @@ func getMushroomInfected(shroom_pos, _ignore_ancestor = false):
     #     return null
 
     mushroom_infected = true
-    getSmacked(global_transform.origin, true)
+    getSmacked(null, true)
 
     if mushroomEmbiggensMe:
         if self.scale.x < 8:

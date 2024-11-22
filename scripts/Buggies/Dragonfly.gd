@@ -112,7 +112,7 @@ export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 var can_i_spawn_crystal = true
-func getSmacked(_broom_origin = Vector3(0, 0, 0)):
+func getSmacked(broom_origin = null):
     if is_smacked:
         return
 
@@ -130,10 +130,16 @@ func getSmacked(_broom_origin = Vector3(0, 0, 0)):
     
     smack_timer = 0
     is_smacked = true
-    if level.player.mySprite.flip_h:
-        target_pos = self.global_transform.origin + Vector3(-3, 6, 0)
+    if broom_origin != null:
+        if broom_origin.x > self.global_transform.origin.x:
+            target_pos = self.global_transform.origin + Vector3(-3, 6, 0)
+        else:
+            target_pos = self.global_transform.origin + Vector3(3, 6, 0)
     else:
-        target_pos = self.global_transform.origin + Vector3(3, 6, 0)
+        if level.player.mySprite.flip_h:
+            target_pos = self.global_transform.origin + Vector3(-3, 6, 0)
+        else:
+            target_pos = self.global_transform.origin + Vector3(3, 6, 0)
     mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
     if is_static_in_level and can_i_spawn_crystal:

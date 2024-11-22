@@ -58,7 +58,7 @@ func shouldIDoCollisions():
     should_collide_horizontally = true
 
 # @override
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   smacked_palette = global.weird_base_palette
   if is_smacked:
     return false

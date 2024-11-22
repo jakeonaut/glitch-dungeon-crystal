@@ -6,7 +6,7 @@ func _ready():
   pass
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
   pass
   
 func moveMyFriends(_delta):
@@ -77,7 +77,7 @@ func glitchSetSpritesAndCollision():
   pass
 
 # @override 
-func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
   pass
 
 func popFromFollowers():

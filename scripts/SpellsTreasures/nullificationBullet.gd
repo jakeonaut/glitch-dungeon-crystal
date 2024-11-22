@@ -51,7 +51,7 @@ func _process(delta):
     global_transform.origin += bullet_direction_vector * delta
     tryDieToBody()
     # bulletTryDieToSolids()
-    tryDieToOffscreenCamera()
+    tryDieToOffscreenCamera(delta)
 
     particle_timer += (delta*22)
     if particle_timer >= particle_time_limit:
@@ -81,7 +81,7 @@ func tryDieToBody():
 #         summonSmokeClouds(3)
 #         queue_free()
 
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \

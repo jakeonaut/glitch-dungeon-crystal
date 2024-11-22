@@ -42,7 +42,8 @@ func isActive():
     return true
 
 func passiveActivate(_delta, is_player):
-    if is_player and is_active:
+    if is_player and is_active and level.player.canIGetCaught():
+        level.clearOtherGrabbers(level.player)
         reactivate_timer = 0
         is_active = false
         # level.player.is_mushroom_infected = true
@@ -57,6 +58,7 @@ func passiveActivate(_delta, is_player):
         level.player.on_ground = false
         level.player.truly_on_ground = false
         level.player.glitchTickle()
+        level.player.tryClearFallthroughCollisionSolid()
         var rotation_vector = Vector2(0, 0)
         var rotZ = round(rotation_degrees.z)
         if rotZ == 0:
@@ -85,6 +87,7 @@ func otherPassiveActivate(_delta, gameMover):
     gameMover.on_ground = false
     gameMover.truly_on_ground = false
     # gameMover.glitchTickle()
+    gameMover.tryClearFallthroughCollisionSolid()
     var rotation_vector = Vector2(0, 0)
     var rotZ = stepify(rotation_degrees.z, 90)
     if rotZ == 0:
@@ -120,7 +123,7 @@ export var normal_offset = .15
 var smacked_palette = global.white_palette
 var last_palette = global.base_palette
 onready var notDieSound = get_node("NotDieSound")
-func getSmacked(_broom_origin = Vector3(0, 0, 0)):
+func getSmacked(_broom_origin = null):
     if is_smacked:
         return false
 

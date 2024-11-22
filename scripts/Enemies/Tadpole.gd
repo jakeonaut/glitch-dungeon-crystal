@@ -5,7 +5,7 @@ func _ready():
   pass
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
@@ -99,7 +99,7 @@ func glitchSetSpritesAndCollision():
 
 var can_be_smacked = true
 # @override 
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   if not can_be_smacked:
     return
   .getSmacked(broom_origin, silently)

@@ -50,14 +50,14 @@ var kill_immediately = false
 func isActive():
     return not am_i_hurt
 
-func notOuchies(_broom_origin = Vector3(0, 0, 0)):
+func notOuchies(_broom_origin = null):
     pass
 
 func fallthroughCollisionActivate(possible_game_mover):
     if possible_game_mover == level.player:
         pass
 
-func getSmacked(_broom_origin = Vector3(0, 0, 0)):
+func getSmacked(_broom_origin = null):
     if not eyeSprite.visible:
         return
     am_i_hurt = true

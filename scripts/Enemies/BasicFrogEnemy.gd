@@ -237,7 +237,7 @@ func glitchSwitchSprite(_delta):
   pass
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
@@ -309,7 +309,7 @@ func unsmack():
 
 export var can_jump = true
 # @override
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
     return false
   if level.player.malware_infected:

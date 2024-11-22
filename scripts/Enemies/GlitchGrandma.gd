@@ -50,7 +50,7 @@ func reallyDie():
   queue_free()
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \

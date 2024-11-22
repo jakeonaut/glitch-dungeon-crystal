@@ -83,7 +83,7 @@ func chickenifyPlayer():
     textBox.interact(true) # was_smacked
 
 # @override
-func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
   # if not can_be_smacked:
   #   return false
   if is_smacked:

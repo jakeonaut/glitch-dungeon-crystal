@@ -53,7 +53,7 @@ func unsmack():
   # .passiveActivate(0, true)
 
 # @override
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
     return false
   .getSmacked(broom_origin, silently)

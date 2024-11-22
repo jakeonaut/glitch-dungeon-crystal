@@ -380,7 +380,7 @@ func bigBump():
   # global.memory["hp"] += 1
   # tryDieToEnemy(0, false, true, false)
   # global.memory["hp"] = prev_hp
-  glitchTilesAroundMe()
+  # glitchTilesAroundMe()
   glitchTickle()
   getSmacked()
   if global.userSettings["canGlitchScreen"]:
@@ -433,12 +433,12 @@ func pressingJump():
 
 # @overrride
 func actuallyApplyJump(play_sound = true):
-  if malware_infected:
-    on_ground = false
-    should_do_fallthrough_area_collision = false
-    has_just_jumped_timer = 0
-  else:
-    .actuallyApplyJump(play_sound)
+  # if malware_infected:
+  #   on_ground = false
+  #   should_do_fallthrough_area_collision = false
+  #   has_just_jumped_timer = 0
+  # else:
+  .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():

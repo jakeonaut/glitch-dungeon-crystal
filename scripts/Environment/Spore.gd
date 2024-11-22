@@ -84,7 +84,7 @@ func _process(delta):
         if stepify(abs(diff_x), step) == 0:
             randomizeTargetPos()
 
-        tryDieToOffscreenCamera()
+        tryDieToOffscreenCamera(delta)
         bulletTryDieToSolids()
         if smallInteractionArea.is_touching_water and smallInteractionArea.touched_water_area != null:
             bubbleStartPop()
@@ -92,7 +92,7 @@ func _process(delta):
             # interactionArea.touched_water_area.get_node("..").becomePoisonous()
 
 
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \

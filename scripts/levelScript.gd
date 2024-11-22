@@ -798,7 +798,8 @@ func flipGravity(specific_dir = null):
   elif player.grav < 0:
     global.memory["grav_direction"] = -1
 
-func clearOtherGrabbers():
+func clearOtherGrabbers(gameMover):
   var grabbers = self.get_tree().get_nodes_in_group("grabber")
   for grabber in grabbers:
-    grabber.hookTarget = null
+    if grabber.hookTarget != null and grabber.hookTarget.get_ref() == gameMover:
+      grabber.hookTarget = null

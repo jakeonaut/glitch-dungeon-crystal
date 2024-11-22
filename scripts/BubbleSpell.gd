@@ -119,7 +119,7 @@ func _process(delta):
       else:
         target_opacity = 1.0
 
-    tryDieToOffscreenCamera()
+    tryDieToOffscreenCamera(delta)
     bulletTryDieToSolids()
     # if pop_from_distance and \
     #    global_transform.origin.y > getPlayer().global_transform.origin.y and \
@@ -216,7 +216,7 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var tileCollisionShape = tileShape[0]
   return is_above_top_of_tile and (tileCollisionShape is PlaneShape)
 
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
   # TODO(jaketrower): should be if not in camera range at all...
   # or if far away enough from player
   var DEATH_MARGIN = 5

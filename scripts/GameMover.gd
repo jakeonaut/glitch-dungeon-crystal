@@ -288,10 +288,11 @@ func processPhysics(delta):
       jump_squat_jump_input_timer = 0
       feather_jump_timer = 0
       should_magic_jump = false
-  elif physics_state == PhysicsState.BEING_TOSSED:
-    if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
-      fall_timer = 0
-      landed()
+  # elif physics_state == PhysicsState.BEING_TOSSED:
+  #   if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
+  #     print("WEIRD BEING_TOSSED BUG")
+  #     fall_timer = 0
+  #     landed()
     
   lv = hv + (up * vv)
   
@@ -466,7 +467,7 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel / 4
     else:
       terminal_vel = 0
-  elif glitch_form == global.GlitchForm.FEATHER:
+  elif isFeatherLike():
     if pressingJump() or pressingMoveUp():
       terminal_vel = true_terminal_feather_vel
     elif pressingDown():
@@ -626,7 +627,7 @@ func processInputs(delta):
     was_just_walking_on_wall_timer = 0
   if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
     playStickOnWallSound()
-    # getSmacked(global_transform.origin)
+    # getSmacked(null)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
     processWallLadderWalking(delta)
@@ -654,7 +655,7 @@ func processNotWallLadderWalking(_delta):
   pass
 
 # dummy
-func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
   pass
 
 # dummy

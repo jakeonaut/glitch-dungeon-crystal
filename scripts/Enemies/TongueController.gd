@@ -99,7 +99,7 @@ func isActive(_debug=false):
 
 func passiveActivate(_delta, is_player):
   if not hooked and is_player and level.player.canIGetCaught():
-    level.clearOtherGrabbers()
+    level.clearOtherGrabbers(level.player)
     hooked = true
     hookTarget = weakref(level.player)
     level.player.hookSound.play()

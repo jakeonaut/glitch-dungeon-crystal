@@ -162,7 +162,7 @@ func getSquaredDistToPlayer():
 func isActive(_debug = false):
   return crow_state != CrowState.FLY_AWAY
 
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
   startFlyAway(level.player.global_transform.origin)
 

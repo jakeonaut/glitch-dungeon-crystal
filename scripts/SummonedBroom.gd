@@ -72,7 +72,7 @@ func _process(delta):
 func hitStuff(_delta):
   if not visible: return
   
-  smacked_npc = global.broomSmackStuff(myArea.get_overlapping_areas(), is_active, global_transform, my_broom_owner, level, smacked_npc)
+  smacked_npc = global.broomSmackStuff(myArea.get_overlapping_areas(), is_active, level.player.global_transform, my_broom_owner, level, smacked_npc)
 
   # erase glitch tiles...
   trySweepUpGlitchTiles(collisionShape1)

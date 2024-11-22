@@ -467,12 +467,12 @@ func randomizeTargetPos():
     )
 
 # @override
-func tryDieToOffscreenCamera():
+func tryDieToOffscreenCamera(_delta):
     pass
 
 # var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
     if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
         return false
 

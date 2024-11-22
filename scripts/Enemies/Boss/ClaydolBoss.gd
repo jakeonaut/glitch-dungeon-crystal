@@ -171,7 +171,7 @@ func unsmack():
     .unsmack()
     smack_time_limit = 10
 
-func getSmacked(broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(broom_origin = null, silently = false):
     should_modify_glitch_shader_vars = false
     if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN or boss_phase == BossPhase.DIZZY:
         return false

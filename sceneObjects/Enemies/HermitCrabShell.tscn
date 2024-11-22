@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/black_palette_town.png" type="Texture" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=10]
-[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/eba_digging2.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=14]
@@ -80,6 +80,9 @@ shader_param/target_palette = ExtResource( 3 )
 [sub_resource type="CylinderShape" id=2]
 height = 1.6
 radius = 0.8
+
+[sub_resource type="BoxShape" id=54]
+extents = Vector3( 0.6, 0.6, 3 )
 
 [sub_resource type="BoxShape" id=43]
 extents = Vector3( 0.8, 0.8, 3 )
@@ -314,9 +317,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "unenemize"
+}, {
 "args": [  ],
 "method": "slowDownMore"
 }, {
@@ -407,9 +413,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "unenemize"
+}, {
 "args": [  ],
 "method": "slowDownMore"
 }, {
@@ -542,6 +551,20 @@ tracks/5/keys = {
 "update": 0,
 "values": [ 0.01 ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reenemize"
+} ]
+}
 
 [sub_resource type="Animation" id=47]
 resource_name = "spinForwardReverse"
@@ -607,8 +630,8 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.1 ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D2:material_override:shader_param/palette_cycle_speed")
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -616,14 +639,37 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 10.0 ]
+"values": [ {
+"args": [  ],
+"method": "reenemize"
+} ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D2:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="BoxShape" id=53]
+extents = Vector3( 6, 6, 6 )
+
+[sub_resource type="BoxShape" id=55]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="HermitCrabShell" type="Spatial"]
 script = ExtResource( 15 )
+tb = 0.8
+bb = -0.8
+grav = 28
 only_activate_in_range = false
-behavior_walk_flip = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -666,7 +712,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 43 )
+shape = SubResource( 54 )
 
 [node name="GameMoverSmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -680,7 +726,8 @@ shape = SubResource( 43 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 11 )
-volume_db = -30.0
+volume_db = -20.0
+pitch_scale = 0.8
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
@@ -719,3 +766,15 @@ anims/slowSpinForward = SubResource( 50 )
 anims/slowSpinForwardReverse = SubResource( 51 )
 anims/spinForward = SubResource( 46 )
 anims/spinForwardReverse = SubResource( 47 )
+
+[node name="GlitchArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="GlitchArea"]
+shape = SubResource( 53 )
+
+[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.181238, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762, 0 )
+shape = SubResource( 55 )

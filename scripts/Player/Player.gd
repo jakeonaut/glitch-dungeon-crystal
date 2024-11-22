@@ -1786,7 +1786,7 @@ export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 4
-func getSmacked(_broom_origin = Vector3(0, 0, 0), _silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
   mySprite.material_override.set_shader_param("normal_offset", normal_offset)
@@ -1874,6 +1874,10 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
   yield(TempTimer.idle_frame(self), "timeout")
   fall_timer = fall_time_max - 5
+
+# @override
+func isFeatherLike():
+  return glitch_form == global.GlitchForm.FEATHER and not (physics_state == PhysicsState.BEING_TOSSED and should_big_bump)
 
 func corruptAllSprites():
   corruptSprite(mySprite)

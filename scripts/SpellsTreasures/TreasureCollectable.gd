@@ -182,7 +182,7 @@ func collectMe():
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(_broom_origin = Vector3(0, 0, 0), silently = false):
+func getSmacked(_broom_origin = null, silently = false):
   return false
 
 # @override
