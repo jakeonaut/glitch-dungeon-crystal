@@ -63,8 +63,11 @@ func _process(delta):
   if not visible:
     return
 
-  if gulpin:
-    level.player.visible = false
+  if gulpin and tongueController and tongueController.hookTarget and tongueController.hookTarget.get_ref():
+    var lickedGameMover = tongueController.hookTarget.get_ref()
+    lickedGameMover.visible = false
+    if lickedGameMover == level.player:
+      level.player.processCastingLogic(delta)
     if tongueAniPlayer != null and tongueAniPlayer.assigned_animation != "spitOut":
       # if Input.is_action_pressed("ui_left"):
       #   mySprite.flip_h = true
@@ -72,12 +75,11 @@ func _process(delta):
       #   mySprite.flip_h = false
       var valid_inputs = ["sub_action_button", "jump_button"]
       for valid_input in valid_inputs:
-        if (not tongueAniPlayer.is_playing() or Input.is_action_just_pressed(valid_input)):
+        if (not tongueAniPlayer.is_playing() or (lickedGameMover == level.player and Input.is_action_just_pressed(valid_input))):
           tongueAniPlayer.stop()
           tongueAniPlayer.clear_queue()
           tongueAniPlayer.play("spitOut")
           break
-    level.player.processCastingLogic(delta)
     # if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
     #   tongueAniPlayer.play("gulpIdle")
     return
@@ -179,40 +181,45 @@ var gulpin = false
 func startGulp():
   if not gulpin:
     gulpin = true
-    level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
+    var lickedGameMover = tongueController.hookTarget.get_ref() if tongueController and tongueController.hookTarget else null
+    if lickedGameMover != null:
+      lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController") if has_node("TongueController") else null
 var SPIT_OFFSET = Vector2(0.2, 0.2)
 func spitOut():
-  level.player.global_transform.origin = self.global_transform.origin
-  level.player.global_transform.origin.y += SPIT_OFFSET.y
-  if mySprite.flip_h: # left
-    level.player.global_transform.origin.x -= SPIT_OFFSET.x
-    if is_bubble_spitter and level.player.pressingMoveLeft():
-      level.player.global_transform.origin.x -= SPIT_OFFSET.x * 2
-  else: # right
-    level.player.global_transform.origin.x += SPIT_OFFSET.x
-    if is_bubble_spitter and level.player.pressingMoveRight():
-      level.player.global_transform.origin.x += SPIT_OFFSET.x * 2
-
+  var lickedGameMover = tongueController.hookTarget.get_ref() if tongueController and tongueController.hookTarget else null
+  if lickedGameMover != null:
+    lickedGameMover.global_transform.origin = self.global_transform.origin
+    lickedGameMover.global_transform.origin.y += SPIT_OFFSET.y
+    if mySprite.flip_h: # left
+      lickedGameMover.global_transform.origin.x -= SPIT_OFFSET.x
+      if is_bubble_spitter and lickedGameMover.pressingMoveLeft():
+        lickedGameMover.global_transform.origin.x -= SPIT_OFFSET.x * 2
+    else: # right
+      lickedGameMover.global_transform.origin.x += SPIT_OFFSET.x
+      if is_bubble_spitter and lickedGameMover.pressingMoveRight():
+        lickedGameMover.global_transform.origin.x += SPIT_OFFSET.x * 2
   notDieSound.play()
   gulpin = false
-  level.player.visible = true
-  level.player.on_ground = true
+  if lickedGameMover != null:
+    lickedGameMover.visible = true
+    lickedGameMover.on_ground = true
   if tongueController != null:
     tongueController.hooked = false
     tongueController.hookTarget = null
-  level.player.glitchTickle()
-  level.player.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
-  if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-    level.player.playBounce("grow")
-  if is_bubble_spitter:
-    level.player.getBubbleInfected()
-    yield(get_tree().create_timer(0.2), "timeout")
-    level.player.physics_state = level.player.PhysicsState.NORMAL
-  yield(get_tree().create_timer(0.1), "timeout")
-  level.player.visible = true
+  if lickedGameMover != null:
+    if lickedGameMover.has_method("glitchTickle"): lickedGameMover.glitchTickle()
+    if lickedGameMover.has_method("tumbleFall"): lickedGameMover.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
+    if lickedGameMover == level.player and level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+      level.player.playBounce("grow")
+    if is_bubble_spitter and lickedGameMover.has_method("getBubbleInfected"):
+      lickedGameMover.getBubbleInfected()
+      yield(get_tree().create_timer(0.2), "timeout")
+      lickedGameMover.physics_state = lickedGameMover.PhysicsState.NORMAL
+    yield(get_tree().create_timer(0.1), "timeout")
+    lickedGameMover.visible = true
 
 func queueGulpAnimation():
   if tongueAniPlayer == null:
@@ -220,6 +227,8 @@ func queueGulpAnimation():
   var gulpIdleAnimation = tongueAniPlayer.get_animation("gulpIdle")
   gulpIdleAnimation.loop = false
   gulpIdleAnimation.length = 1.4
+  if tongueController and tongueController.hookTarget and tongueController.hookTarget.get_ref() != level.player:
+    gulpIdleAnimation.length = 2.1
   tongueAniPlayer.queue("gulpIdle")
   # tongueAniPlayer.queue("spitOut")
 
@@ -313,6 +322,9 @@ func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
     return false
   if level.player.malware_infected:
+    level.player.visible = true
+    is_smacked = true
+    am_i_dying = true
     var newCorruptedFrog = poisonWaterCubeRes.instance()
     level.add_child(newCorruptedFrog)
     if not mySprite.flip_h:
@@ -338,6 +350,8 @@ func getSmacked(broom_origin = null, silently = false):
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
     if gulpin:
+      if tongueController and tongueController.hookTarget and tongueController.hookTarget.get_ref() != level.player:
+        tongueController.hookTarget.get_ref().getSmacked(broom_origin, silently)
       tongueAniPlayer.play("spitOut")
     else:
       if tongueController != null:

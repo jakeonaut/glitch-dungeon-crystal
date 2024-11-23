@@ -30,7 +30,7 @@ func _process(delta):
   if is_smacked and glitch_tiles_around_me:
     glitchTilesAroundMe()
 
-  if physics_state == PhysicsState.NORMAL and "slowSpin" in secretAniPlayer.assigned_animation and not secretAniPlayer.is_playing():
+  if physics_state == PhysicsState.NORMAL and "slowSpin" in secretAniPlayer.assigned_animation and not secretAniPlayer.is_playing() and not pauseAnimation:
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("popOutHead")
@@ -153,11 +153,20 @@ func landed():
       if secretAniPlayer.assigned_animation == "spinForward":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        secretAniPlayer.play("land")
+        secretAniPlayer.play("slowSpinForward")
       elif secretAniPlayer.assigned_animation == "spinForwardReverse":
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        secretAniPlayer.play("landRight")
+        secretAniPlayer.play("slowSpinForwardReverse")
+  else:
+    if secretAniPlayer.assigned_animation == "spinForward":
+      secretAniPlayer.stop()
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.play("slowSpinForward")
+    elif secretAniPlayer.assigned_animation == "spinForwardReverse":
+      secretAniPlayer.stop()
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.play("slowSpinForwardReverse")
 
 func slowDownMore():
   walk_speed = 4
@@ -181,11 +190,11 @@ func becomeACrab():
 # @override
 func getSmacked(broom_origin = null, silently = false):
   die_offscreen_timer = 0
-  if should_big_bump:
-    .getSmacked(broom_origin, silently)
-    dieSound.play()
-    notDieSound.stop()
-    return
+  # if should_big_bump:
+  #   .getSmacked(broom_origin, silently)
+  #   dieSound.play()
+  #   notDieSound.stop()
+  #   return
 
   if not silently:
     if (broom_origin != null and broom_origin.x <= self.global_transform.origin.x) or (broom_origin == null and not level.player.mySprite.flip_h):

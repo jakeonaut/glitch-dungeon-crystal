@@ -454,10 +454,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2, 1.6, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
+"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
@@ -2002,7 +2002,7 @@ script = ExtResource( 16 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TongueController/TongueArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, -0.26, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264062, -0.25, 0 )
 visible = false
 shape = SubResource( 147 )
 

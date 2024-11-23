@@ -1509,7 +1509,8 @@ func collideWithCeiling(local_lv):
     nesting_doll_state == global.NestingDoll.BABY or
     (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or
     # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
-    areAnyTilesAboveMeGlitched
+    areAnyTilesAboveMeGlitched or
+    (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
   ):
     local_lv.y = 0
     getMoleCured()

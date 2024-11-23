@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/WaterCubes/DeepOceanWaterCube.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=25]
 
 [sub_resource type="BoxShape" id=46]
 resource_local_to_scene = true
@@ -185,7 +186,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -4.87528, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 8.14999, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2.79561, 0 )
 is_static = true
 is_licker = true
 
@@ -214,13 +215,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 13.0412, 0 )
 
 [node name="HookInteractionArea" parent="Viewport/level/AnglerFish/FishingRod" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/AnglerFish/FishingRod/HookInteractionArea" index="0"]
 shape = SubResource( 46 )
 
 [node name="CollisionShape" parent="Viewport/level/AnglerFish/FallthroughSolid" index="0"]
 shape = SubResource( 47 )
+
+[node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8.4109, -4 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 5 )]
 

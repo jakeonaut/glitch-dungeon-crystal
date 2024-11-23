@@ -4,21 +4,22 @@ onready var anglerFish = get_node("..")
 
 # @override
 func restorePlayer(got_to_top):
-  if hookTarget == null:
+  if hookTarget == null or hookTarget.get_ref() == null:
     return
-  hookTarget.get_ref().should_collide_floor = true # look at me pretending to be safe
-  hookTarget.get_ref().can_collide_with_floor = true
-  hookTarget.get_ref().pauseAnimation = false
-  level.player.hv = Vector3(0, 0, 0)
-  level.player.dir = Vector3(0.0, 0.0, 0.0)
-  level.player.linear_velocity.x = 0
-  level.player.lv.x = 0
-  level.player.pauseAnimation = false
-  if level.player.physics_state == level.player.PhysicsState.GLITCH_DYING:
-    level.player.vv = 0
-    level.player.linear_velocity.y = 0
-    level.player.lv.y = 0
+  var gameMover = hookTarget.get_ref()
+  gameMover.should_collide_floor = true # look at me pretending to be safe
+  gameMover.can_collide_with_floor = true
+  gameMover.pauseAnimation = false
+  gameMover.hv = Vector3(0, 0, 0)
+  gameMover.dir = Vector3(0.0, 0.0, 0.0)
+  gameMover.linear_velocity.x = 0
+  gameMover.lv.x = 0
+  gameMover.pauseAnimation = false
+  if gameMover.physics_state == gameMover.PhysicsState.GLITCH_DYING:
+    gameMover.vv = 0
+    gameMover.linear_velocity.y = 0
+    gameMover.lv.y = 0
     return
-  # level.player.physics_state = level.player.PhysicsState.NORMAL
-  if got_to_top:
-    level.player.tumbleFall(Vector2(-1 if anglerFish.mySprite.flip_h else 1, 0))
+  gameMover.physics_state = gameMover.PhysicsState.NORMAL
+  if got_to_top and gameMover.has_method("tumbleFall"):
+    gameMover.tumbleFall(Vector2(-1 if anglerFish.mySprite.flip_h else 1, 0))

@@ -27,9 +27,8 @@ func _process(delta):
     if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
       restorePlayer()
       frog.unqueueGulpAnimation()
+      hooked = false
       return
-    elif hookTarget.get_ref() == level.player:
-      pass
 
     hookTarget.get_ref().should_do_fallthrough_area_collision = false
     hookTarget.get_ref().should_collide_floor = false
@@ -46,27 +45,29 @@ func _process(delta):
       # restorePlayer()
 
 func restorePlayer():
-  if not hookTarget or not hookTarget.get_ref():
-    return
   hooked = false
-  hookTarget.get_ref().should_collide_floor = true
-  hookTarget.get_ref().can_collide_with_floor = true
-  hookTarget.get_ref().pauseAnimation = false
-  level.player.on_ground = false
-  level.player.vv = 0
-  level.player.linear_velocity.y = 0
-  level.player.lv.y = 0
+  if not hookTarget or not hookTarget.get_ref():
+    hookTarget = null
+    return
+  var gameMover = hookTarget.get_ref()
+  gameMover.should_collide_floor = true
+  gameMover.can_collide_with_floor = true
+  gameMover.pauseAnimation = false
+  gameMover.on_ground = false
+  gameMover.vv = 0
+  gameMover.linear_velocity.y = 0
+  gameMover.lv.y = 0
   
   var jump_val = 5
-  level.player.vv = jump_val
-  level.player.linear_velocity.y = jump_val
-  level.player.lv.y = jump_val
+  gameMover.vv = jump_val
+  gameMover.linear_velocity.y = jump_val
+  gameMover.lv.y = jump_val
   hookTarget = null
-  if level.player.physics_state == level.player.PhysicsState.GLITCH_DYING:
-    level.player.hv = Vector3(0, 0, 0)
-    level.player.dir = Vector3(0.0, 0.0, 0.0)
-    level.player.linear_velocity.x = 0
-    level.player.lv.x = 0
+  if gameMover.physics_state == gameMover.PhysicsState.GLITCH_DYING:
+    gameMover.hv = Vector3(0, 0, 0)
+    gameMover.dir = Vector3(0.0, 0.0, 0.0)
+    gameMover.linear_velocity.x = 0
+    gameMover.lv.x = 0
 
 func moveTargetToHook(delta):
   if not hookTarget or not hookTarget.get_ref():
@@ -84,15 +85,15 @@ func reelItIn(_delta):
   if not hookTarget or not hookTarget.get_ref():
     return
     
-  if hookTarget.get_ref() == level.player:
-    level.player.on_ground = false
-    level.player.vv = 0
-    level.player.linear_velocity.y = 0
-    level.player.lv.y = 0
-    level.player.hv = Vector3(0, 0, 0)
-    level.player.dir = Vector3(0.0, 0.0, 0.0)
-    level.player.linear_velocity.x = 0
-    level.player.lv.x = 0
+  var gameMover = hookTarget.get_ref()
+  gameMover.on_ground = false
+  gameMover.vv = 0
+  gameMover.linear_velocity.y = 0
+  gameMover.lv.y = 0
+  gameMover.hv = Vector3(0, 0, 0)
+  gameMover.dir = Vector3(0.0, 0.0, 0.0)
+  gameMover.linear_velocity.x = 0
+  gameMover.lv.x = 0
 
 func isActive(_debug=false):
   return tongueCollisionShape.visible
@@ -110,3 +111,14 @@ func passiveActivate(_delta, is_player):
 
     frog.queueGulpAnimation()
   
+func otherPassiveActivate(_delta, gameMover):
+  if not hooked:
+    level.clearOtherGrabbers(gameMover)
+    hooked = true
+    hookTarget = weakref(gameMover)
+    level.player.hookSound.play()
+    gameMover.pauseAnimation = true
+    gameMover.should_do_fallthrough_area_collision = false
+    gameMover.tryClearFallthroughCollisionSolid()
+
+    frog.queueGulpAnimation()

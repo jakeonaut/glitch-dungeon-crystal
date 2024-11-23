@@ -3,8 +3,8 @@ extends "GlitchEnemy.gd"
 onready var fishingRod = get_node("FishingRod")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 var am_revealed = false
-var i_caught_player = false
-var was_player_caught = false
+var is_hook_got_something = false
+var was_hook_got_something = false
 func _ready():
   set_process(true)
 
@@ -18,24 +18,25 @@ func _process(_delta):
   if am_i_dying:
     return
 
-  i_caught_player = fishingRod.hookTarget != null and fishingRod.hookTarget.get_ref() == level.player
+  is_hook_got_something = fishingRod.hookTarget != null
   fishingRod.max_speed = 6
 
-  if not am_revealed:
-    if i_caught_player and not was_player_caught:
-      secretAniPlayer.stop()
-      secretAniPlayer.clear_queue()
-      secretAniPlayer.play("reveal")
-      am_revealed = true
-      global.has_revealed_an_angler_fish = true
-  else:
-    if i_caught_player and not was_player_caught:
-      secretAniPlayer.stop()
-      secretAniPlayer.clear_queue()
-      secretAniPlayer.play("openMouth")
-      global.has_revealed_an_angler_fish = true
+  if not gulping:
+    if not am_revealed:
+      if is_hook_got_something and not was_hook_got_something:
+        secretAniPlayer.stop()
+        secretAniPlayer.clear_queue()
+        secretAniPlayer.play("reveal")
+        am_revealed = true
+        global.has_revealed_an_angler_fish = true
+    else:
+      if is_hook_got_something and not was_hook_got_something:
+        secretAniPlayer.stop()
+        secretAniPlayer.clear_queue()
+        secretAniPlayer.play("openMouth")
+        global.has_revealed_an_angler_fish = true
 
-  was_player_caught = i_caught_player
+  was_hook_got_something = is_hook_got_something
 
 func fallthroughCollisionActivate(friend):
   if friend == level.player:
@@ -59,6 +60,7 @@ func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
 
 var gulping = false
+var nowWhoAmIEating = null
 func passiveActivate(_delta, is_player):
   if gulping or am_i_dying:
     return
@@ -71,34 +73,49 @@ func passiveActivate(_delta, is_player):
     global.has_revealed_an_angler_fish = true
     level.player.visible = false
     level.player.physics_state = level.player.PhysicsState.IGNORE_PHYSICS
+    nowWhoAmIEating = level.player
   elif origin_before_teleportation != null:
     self.global_transform.origin = origin_before_teleportation
+
+func otherPassiveActivate(_delta, gameMover):
+  if gulping or am_i_dying:
+    return
+  am_revealed = true
+  gulping = true
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  secretAniPlayer.play("hurtMyToof")
+  secretAniPlayer.queue("cry")
+  global.has_revealed_an_angler_fish = true
+  gameMover.visible = false
+  gameMover.physics_state = gameMover.PhysicsState.IGNORE_PHYSICS
+  nowWhoAmIEating = gameMover
   
 func swallowPlayer():
-  if level.player.malware_infected:
+  if nowWhoAmIEating == level.player:
+    if level.player.malware_infected:
+      secretAniPlayer.stop()
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.play("corrupt")
+    else:
+      level.player.tryDieToEnemy(0, true, true, true)
+      gulping = false
+      if origin_before_teleportation != null:
+        self.global_transform.origin = origin_before_teleportation
+  elif nowWhoAmIEating != null:
+    # gulping = false
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
-    secretAniPlayer.play("corrupt")
-  else:
-    level.player.tryDieToEnemy(0, true, true, true)
-    gulping = false
-    if origin_before_teleportation != null:
-      self.global_transform.origin = origin_before_teleportation
+    secretAniPlayer.play("cry")
 
 func getCorruptedAndDie():
   level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
-  fishingRod.restorePlayer(false)
-  level.player.global_transform.origin = self.global_transform.origin
-  level.player.global_transform.origin.y += 1
-  level.player.visible = true
-  level.player.physics_state = level.player.PhysicsState.NORMAL
-  level.player.aniPlayer.stop()
-  level.player.magicJump()
-  var jump_force = 10
-  level.player.vv = jump_force
-  level.player.linear_velocity.y = jump_force
-  level.player.lv.y = jump_force
-  visible = false
-  am_i_dying = true
-  dieSound.play()
-  fallthroughSolid.remove_from_group("fallthrough")
+  nowWhoAmIEating.tumbleFall(Vector2(1 if mySprite.flip_h else -1, 0))
+  nowWhoAmIEating.global_transform.origin = self.global_transform.origin
+  nowWhoAmIEating.global_transform.origin.y += 1
+  nowWhoAmIEating.visible = true
+  # nowWhoAmIEating.aniPlayer.stop()
+  nowWhoAmIEating = null
+  # visible = false
+  # am_i_dying = true
+  # fallthroughSolid.remove_from_group("fallthrough")

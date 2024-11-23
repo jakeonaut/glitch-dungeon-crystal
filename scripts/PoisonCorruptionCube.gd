@@ -60,6 +60,17 @@ func passiveActivate(_delta, is_player):
         level.player.glitchTickle()
         level.player.tryClearFallthroughCollisionSolid()
         var rotation_vector = Vector2(0, 0)
+        
+        # respect inputs first...
+        if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+            rotation_degrees.z = 180
+        elif Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+            rotation_degrees.z = 0
+        if Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
+            rotation_degrees.z = 270
+        elif Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_up"):
+            rotation_degrees.z = 90
+
         var rotZ = round(rotation_degrees.z)
         if rotZ == 0:
             rotation_vector = Vector2(-1, 0)

@@ -99,6 +99,35 @@ func passiveActivate(_delta, is_player):
   level.player.pauseAnimation = true
   level.player.should_do_fallthrough_area_collision = false
   level.player.tryClearFallthroughCollisionSolid()
+
+func otherPassiveActivate(_delta, gameMover):
+  if anglerFish == null or anglerFish.get_ref() == null:
+    return false
+
+  if anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.LYING_IN_WAIT:
+    anglerFish.get_ref().startBossFight(true)
+    return
+
+  if not (
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CAST_LURE or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_LEFT or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_RIGHT or \
+      anglerFish.get_ref().boss_phase == anglerFish.get_ref().BossPhase.CLAW_MACHINE_FISHING_MIDDLE
+  ):
+    return
+
+  if hooked:
+    return
+  
+  level.clearOtherGrabbers(gameMover)
+  hooked = true
+  hookTarget = weakref(level.player)
+  level.player.hookSound.play()
+  if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+    level.player.aniPlayer.play("hookCaught")
+  level.player.pauseAnimation = true
+  level.player.should_do_fallthrough_area_collision = false
+  level.player.tryClearFallthroughCollisionSolid()
   
 
 func restorePlayer(_got_to_top):

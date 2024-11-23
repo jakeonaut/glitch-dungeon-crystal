@@ -38,10 +38,10 @@ func _process(delta):
             is_touching_save_point = true
 
         # always interact with passive interaction areas
-        if area.has_method("isActive") and area.isActive() and area.has_method("OtherPassiveInteractActivate"):
+        if parent.isActive() and area.has_method("isActive") and area.isActive() and area.has_method("OtherPassiveInteractActivate"):
             area.OtherPassiveInteractActivate(delta, parent)
 
-        if area.is_in_group("water") and not parent.should_big_bump:
+        if area.is_in_group("water"):
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true
             water_y = collision_shape.global_transform.origin.y + (collision_shape.get_shape().get_extents().y) + 1

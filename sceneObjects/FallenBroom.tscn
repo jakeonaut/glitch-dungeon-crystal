@@ -130,7 +130,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+"values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Area/CollisionShape:shape:height")
@@ -219,7 +219,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+"values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Area/CollisionShape:rotation_degrees")
@@ -442,7 +442,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( -0.568256, -2.66135e-08, -0.608846 ) ]
+"values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("Area/CollisionShape:shape:height")
@@ -893,7 +893,7 @@ tracks/3/keys = {
 "values": [ 0.5 ]
 }
 
-[sub_resource type="CylinderShape" id=56]
+[sub_resource type="CylinderShape" id=61]
 
 [sub_resource type="CylinderShape" id=48]
 height = 1.6
@@ -969,8 +969,8 @@ anims/returnAirSpinReverse = SubResource( 57 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.568256, -2.66135e-08, -0.608846 )
-shape = SubResource( 56 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 61 )
 
 [node name="SmallInteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
