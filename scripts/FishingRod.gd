@@ -28,7 +28,7 @@ func _process(delta):
   lineSprite.scale.y = (diff - .75) / 2
 
   if hooked:
-    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
+    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING or hookTarget.get_ref().glitch_form == global.GlitchForm.INVISIBLE:
       hooked = false
       restorePlayer(false)
       hookTarget = null
@@ -129,7 +129,7 @@ func passiveActivate(_delta, is_player):
       level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
     level.player.should_do_fallthrough_area_collision = false
-    level.player.tryClearFallthroughCollisionSolid()
+    level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
   
 func otherPassiveActivate(_delta, gameMover):
   if not hooked and not is_reeled_in:
@@ -144,4 +144,4 @@ func otherPassiveActivate(_delta, gameMover):
     gameMover.pauseAnimation = true
     gameMover.physics_state = gameMover.PhysicsState.NORMAL
     gameMover.should_do_fallthrough_area_collision = false
-    gameMover.tryClearFallthroughCollisionSolid()
+    gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)

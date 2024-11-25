@@ -74,7 +74,7 @@ func chickenifyPlayer():
   level.player.tumbleFall(Vector2(-1 if (not mySprite.flip_h) else 1, 0))
   global.pauseGame = false
   level.player.pauseInput = false
-  # can_move = false
+  can_move = true
 
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.hideInteractPrompt()

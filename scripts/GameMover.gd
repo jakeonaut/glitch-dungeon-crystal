@@ -362,7 +362,7 @@ func playLandAnimation():
   aniPlayer.clear_queue()
   aniPlayer.play("land", -1, 0.5 if isFeatherLike() else 1.5)
 
-func tryClearFallthroughCollisionSolid():
+func tryClearFallthroughCollisionSolid(_mostlyIgnoredOriginPosition):
   if self != level.player:
     return
   should_do_fallthrough_area_collision = false
@@ -871,7 +871,7 @@ var has_just_glitch_swapped = false
 var has_just_glitch_swapped_timer = 0
 var has_just_glitch_swapped_time_limit = 5
 func actuallyApplyJump(play_sound = true):
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
   if isFeatherLike():
     vv = jump_force / 1.2 # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:

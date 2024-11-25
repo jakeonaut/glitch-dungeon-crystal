@@ -36,6 +36,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
 show_crt_effect = true
+tileset_type = 10
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -107,6 +108,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9, 7.1, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 12 )]
 

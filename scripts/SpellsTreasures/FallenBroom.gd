@@ -99,7 +99,7 @@ func _process(delta):
                 level.player.lv = self.lv
                 level.player.vv = self.vv
                 level.player.hv = self.hv
-                level.player.tryClearFallthroughCollisionSolid()
+                level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
                 abortSound.activateScript()
                 level.player.can_broomerang_warp = false
         if returning and global.activeInteractor and global.activeInteractor.is_important:

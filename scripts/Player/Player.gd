@@ -553,7 +553,7 @@ func _process(delta):
   
   processPoisonWaterLogic(delta)
   if pressingJump():
-    tryClearFallthroughCollisionSolid()
+    tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
   if is_smacked:
     smack_timer += (delta * 22)
@@ -720,7 +720,7 @@ func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
   
 var returning_to_save_point = 0
-func tryDieToOffscreenCamera(delta):
+func tryDieToOffscreenCamera(_delta):
   if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 
@@ -748,6 +748,11 @@ func tryDieToOffscreenCamera(delta):
     if next_room == null:
       if transformation == TransformationState.BUBBLE:
         getBubbleCured()
+      elif transformation == TransformationState.UNDERGROUND_RETURNING:
+        bumpSound.play()
+        fastStepSound.stop()
+        getSmacked()
+        transformation = TransformationState.UNDERGROUND
       elif grav < 0:
         level.flipGravity(1)
   if global_transform.origin.y > getGameCamera().topmost_y and DEATH_MARGIN == 1:
@@ -816,8 +821,7 @@ func tryDieToOffscreenCamera(delta):
       if should_big_bump:
         bigBump()
       elif physics_state == PhysicsState.BEING_TOSSED:
-        physics_state = PhysicsState.NORMAL
-        grav = PLAYER_GRAV
+        collideWithWall(linear_velocity)
   
 func doTimeDilation(_delta):
   pass
@@ -1041,7 +1045,7 @@ func processFishyLogic(_delta):
     return
 
   var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
-  if touched_water_area != null and touched_water_area.get_node("..").is_cleansing and malware_infected:
+  if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
     malwareCured()
     
   if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and not should_big_bump:
@@ -1138,7 +1142,7 @@ func restartMusic(): # maybe an animation uses this idk, dont delete it
 func getFishyInfected():
   if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.MOLE_DIGGING or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND or nesting_doll_state == global.NestingDoll.BABY:
     return
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
   # if summonedBroom:
   #   broomStop()
   #   summonFallenBroom(true, false, false)
@@ -1522,7 +1526,7 @@ func collideWithCeiling(local_lv):
   # mySprite.flip_h = not mySprite.flip_h
   if dig_timer > dig_time_limit:
     can_dig_up = false
-    tryClearFallthroughCollisionSolid()
+    tryClearFallthroughCollisionSolid(self.global_transform.origin)
     transformation = TransformationState.UNDERGROUND_RETURNING
     moleSprite.visible = false
     summonSmokeClouds(3, true, true, 0)
@@ -1579,7 +1583,7 @@ func getMoleCured():
 
 var is_mushroom_prefected = false
 func getMushroomInfected(): 
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
   if is_mushroom_infected or is_mushroom_prefected:
     # glitchTickle(0)
     # getSmacked()
@@ -1779,7 +1783,7 @@ func actuallyProcessDeath(should_glitch):
     level.glitchScreenEffect.visible = true
   if summonedBroom:
     broomStop()
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 export var time_influence = 35
 export var y_div = 2.3
@@ -2175,7 +2179,7 @@ var cloud_time_limit = 15
 var bug_sprite_timer = 0
 var bug_sprite_time_limit = 5
 func processSpriteRenderLogic(delta):
-  if malware_infected:
+  if malware_infected or should_big_bump:
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:
@@ -2469,7 +2473,7 @@ func iJustPressedDown():
 
   on_ground = false
   should_do_fallthrough_area_collision = false
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 var is_active = true
 func setGlobalMemoryOfHasSpoken(_set_vars = false):

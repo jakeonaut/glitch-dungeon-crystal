@@ -483,8 +483,8 @@ onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/Equipm
 var angelStatueToTeleportTo = null
 func processInventoryLogic(delta):
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
-  var angelStatueArrValue = angelStatues[getAngelStatueIndex()]
-  if inventoryOptionIndex == 4 or angelStatueToTeleportTo != null:
+  var angelStatueArrValue = angelStatues[getAngelStatueIndex()] if angelStatues.size() > 0 else null
+  if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
     pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
   else:
     pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume"
@@ -567,7 +567,7 @@ func processInventoryLogic(delta):
   # mapFaderRect.visible = not isOnMap
 
   invSelectionSprite.visible = not isOnMap
-  if isOnMap and angelStatues.size() != 0:
+  if isOnMap and angelStatues.size() != 0 and angelStatueArrValue != null:
     var mapGrid = transition.mapManager.gimmeMapGrid()
     var mapPathToSeek = angelStatueArrValue[1]
     for i in range(MAP_HEIGHT):
@@ -658,7 +658,7 @@ func processInventoryLogic(delta):
       transition.long_fade_to(level_to_spawn_to)
       global.isPauseMenuOpen = false
       get_node("TeleportSound").play()
-    elif inventoryOptionIndex == 4 and angelStatues.size() > 0:
+    elif inventoryOptionIndex == 4 and angelStatues.size() > 0 and angelStatueArrValue != null:
       if angelStatueArrValue[1] == level.getLevelName():
         getPlayer().noBroomSound.play()
       else:
@@ -965,6 +965,7 @@ func tryDrawMap():
         mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
       elif "Haven" in mapRoom.path or mapRoom.has_angel_statue:
+        print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
         if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
           sprite.frame = 61
           sprite.material.set_shader_param("offset", 11)

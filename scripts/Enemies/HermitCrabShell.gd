@@ -109,6 +109,11 @@ func tumbleFall(direction_vector, is_corrupted = false):
   lv.y = jump_val
   fall_timer = -999
 
+# @ override
+func isActive(_debug=false):
+  # same as GlitchEnemy.gd except allow is_smacked to still count as "active"
+  return visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
+
 func collideWithWall(local_lv):
   if should_big_bump:
     glitch_tiles_around_me = true
@@ -176,6 +181,8 @@ func okayStop():
   behavior_walking = false
 
 func becomeACrab():
+  if pauseAnimation:
+    return
   if myManager.glitchHermitCrab.get_ref() != null:
     var glitchHermitCrab = myManager.glitchHermitCrab.get_ref()
     glitchHermitCrab.visible = true
@@ -185,6 +192,7 @@ func becomeACrab():
     glitchHermitCrab.secretAniPlayer.play("prepare")
     glitchHermitCrab.crab_state = glitchHermitCrab.CrabState.RESPAWN_PREPARE
     glitchHermitCrab.spawn_origin = self.global_transform.origin
+    glitchHermitCrab.pauseAnimation = false
     visible = false
 
 # @override
@@ -197,6 +205,7 @@ func getSmacked(broom_origin = null, silently = false):
   #   return
 
   if not silently:
+    print(str(broom_origin.x if broom_origin != null else null) + "<=" + str(self.global_transform.origin.x) + ", " + str(level.player.mySprite.flip_h))
     if (broom_origin != null and broom_origin.x <= self.global_transform.origin.x) or (broom_origin == null and not level.player.mySprite.flip_h):
       tumbleFall(Vector2(1, 0), false)
     elif (broom_origin != null and broom_origin.x > self.global_transform.origin.x) or (broom_origin == null and level.player.mySprite.flip_h):

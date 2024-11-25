@@ -140,6 +140,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33655, -4.95006, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -7, -4 )
@@ -224,7 +234,7 @@ shape = SubResource( 46 )
 shape = SubResource( 47 )
 
 [node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 8.4109, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.4109, -4 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 5 )]
 

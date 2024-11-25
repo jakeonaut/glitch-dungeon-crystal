@@ -465,7 +465,7 @@ func isActive(_debug=false):
 func activate(_is_player):
     if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
-        var result = ouchies(global_transform.origin)
+        var result = ouchies(null)
         getPlayer().has_sweeped_glitch = true
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
@@ -476,12 +476,12 @@ func activate(_is_player):
         return result
     elif smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:
-            var result  = ouchies(global_transform.origin)
+            var result  = ouchies(null)
             getPlayer().getSmacked()
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
             return result
-        elif notOuchies(global_transform.origin):
+        elif notOuchies(null):
             getPlayer().getSmacked()
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()

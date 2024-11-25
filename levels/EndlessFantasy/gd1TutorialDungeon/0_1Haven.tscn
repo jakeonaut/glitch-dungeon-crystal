@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=164 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -32,7 +32,6 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=30]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=31]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=32]
-[ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=33]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=34]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=35]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=36]
@@ -43,7 +42,6 @@
 [ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=41]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=42]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=43]
-[ext_resource path="res://assets/water_normal_4.png" type="Texture" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=46]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/MapTreasure.tscn" type="PackedScene" id=47]
@@ -806,57 +804,6 @@ extents = Vector3( 1, 0.8, 1.3 )
 [sub_resource type="BoxShape" id=219]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
-
-[sub_resource type="Shader" id=78]
-code = "shader_type spatial;
-render_mode specular_schlick_ggx;
-
-uniform float HowShiny = 2;
-uniform float Roughness = 0.2;
-uniform float alpha2 = 0.5;
-uniform bool should_use_vertex_color = true;
-uniform sampler2D texture_albedo : hint_albedo;
-
-varying smooth vec3 our_color;
-
-void vertex() {
-// Output:0
-  our_color = VERTEX;
-}
-
-void fragment() {
-// ColorUniform:4;
-	vec3 n_out4p0 = our_color;
-
-// ScalarUniform:2
-	float n_out2p0 = HowShiny;
-
-// ScalarUniform:3
-	float n_out3p0 = Roughness;
-
-  if (should_use_vertex_color) {
-	 ALBEDO = our_color;
-  } else {
-    ALBEDO = texture(texture_albedo, UV).rgb;
-  }
-	METALLIC = n_out2p0;
-	ROUGHNESS = n_out3p0;
-  ALPHA = alpha2;
-
-}
-
-void light() {
-// Output:0
-
-}"
-
-[sub_resource type="ShaderMaterial" id=79]
-shader = SubResource( 78 )
-shader_param/HowShiny = 2.0
-shader_param/Roughness = 0.2
-shader_param/alpha2 = 0.5
-shader_param/should_use_vertex_color = false
-shader_param/texture_albedo = ExtResource( 44 )
 
 [sub_resource type="ArrayMesh" id=347]
 surfaces/0 = {
@@ -4199,21 +4146,6 @@ shape = SubResource( 219 )
 
 [node name="MeshInstance2" parent="Viewport/level/Door4" index="18"]
 visible = true
-
-[node name="MeshInstance3" type="MeshInstance" parent="Viewport/level/Door4"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 4.90174, -0.0808809 )
-material_override = SubResource( 79 )
-mesh = ExtResource( 33 )
-
-[node name="MeshInstance4" type="MeshInstance" parent="Viewport/level/Door4"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 1.33333, 4.90174, -0.0808809 )
-material_override = SubResource( 79 )
-mesh = ExtResource( 33 )
-
-[node name="MeshInstance5" type="MeshInstance" parent="Viewport/level/Door4"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 6.23508, -0.0808809 )
-material_override = SubResource( 79 )
-mesh = ExtResource( 33 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.534194, 0 )

@@ -36,6 +36,11 @@ func _process(_delta):
         secretAniPlayer.play("openMouth")
         global.has_revealed_an_angler_fish = true
 
+    if (secretAniPlayer.assigned_animation == "reveal" or secretAniPlayer.assigned_animation == "openMouth") and not secretAniPlayer.is_playing() and not is_hook_got_something:
+      secretAniPlayer.stop()
+      secretAniPlayer.clear_queue()
+      secretAniPlayer.play("closeMouthCoyly")
+
   was_hook_got_something = is_hook_got_something
 
 func fallthroughCollisionActivate(friend):
@@ -52,6 +57,11 @@ func unsmack():
   #   origin_before_teleportation = self.global_transform.origin
   # self.global_transform.origin = level.player.global_transform.origin
   # .passiveActivate(0, true)
+
+# @ override
+func isActive(_debug=false):
+  # same as GlitchEnemy.gd except allow is_smacked to still count as "active"
+  return visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
 # @override
 func getSmacked(broom_origin = null, silently = false):
@@ -93,15 +103,10 @@ func otherPassiveActivate(_delta, gameMover):
   
 func swallowPlayer():
   if nowWhoAmIEating == level.player:
-    if level.player.malware_infected:
-      secretAniPlayer.stop()
-      secretAniPlayer.clear_queue()
-      secretAniPlayer.play("corrupt")
-    else:
-      level.player.tryDieToEnemy(0, true, true, true)
-      gulping = false
-      if origin_before_teleportation != null:
-        self.global_transform.origin = origin_before_teleportation
+    level.player.tryDieToEnemy(0, true, true, true)
+    gulping = false
+    if origin_before_teleportation != null:
+      self.global_transform.origin = origin_before_teleportation
   elif nowWhoAmIEating != null:
     # gulping = false
     secretAniPlayer.stop()

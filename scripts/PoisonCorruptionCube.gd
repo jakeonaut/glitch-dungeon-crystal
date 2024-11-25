@@ -58,18 +58,19 @@ func passiveActivate(_delta, is_player):
         level.player.on_ground = false
         level.player.truly_on_ground = false
         level.player.glitchTickle()
-        level.player.tryClearFallthroughCollisionSolid()
+        level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
         var rotation_vector = Vector2(0, 0)
         
         # respect inputs first...
-        if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-            rotation_degrees.z = 180
-        elif Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-            rotation_degrees.z = 0
-        if Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
-            rotation_degrees.z = 270
-        elif Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_up"):
-            rotation_degrees.z = 90
+        if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+            if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
+                rotation_degrees.z = 180
+            elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
+                rotation_degrees.z = 0
+            if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
+                rotation_degrees.z = 270
+            elif Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up"):
+                rotation_degrees.z = 90
 
         var rotZ = round(rotation_degrees.z)
         if rotZ == 0:
@@ -98,7 +99,7 @@ func otherPassiveActivate(_delta, gameMover):
     gameMover.on_ground = false
     gameMover.truly_on_ground = false
     # gameMover.glitchTickle()
-    gameMover.tryClearFallthroughCollisionSolid()
+    gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)
     var rotation_vector = Vector2(0, 0)
     var rotZ = stepify(rotation_degrees.z, 90)
     if rotZ == 0:

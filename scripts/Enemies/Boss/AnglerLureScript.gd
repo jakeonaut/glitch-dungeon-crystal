@@ -6,6 +6,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var hooked = false
 var hookTarget = null
 
+# should we um just inherit from FishingRod.gd like AnglerFishingRod.gd does?
 func _ready():
   set_process(true)
 
@@ -30,7 +31,7 @@ func _process(delta):
         hookTarget = weakref(enemy)
         return
   else:
-    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING:
+    if hookTarget == null or not hookTarget.get_ref() or hookTarget.get_ref().physics_state == level.player.PhysicsState.GLITCH_DYING or hookTarget.get_ref().glitch_form == global.GlitchForm.INVISIBLE:
       hooked = false
       restorePlayer(false)
       hookTarget = null
@@ -98,7 +99,7 @@ func passiveActivate(_delta, is_player):
     level.player.aniPlayer.play("hookCaught")
   level.player.pauseAnimation = true
   level.player.should_do_fallthrough_area_collision = false
-  level.player.tryClearFallthroughCollisionSolid()
+  level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 func otherPassiveActivate(_delta, gameMover):
   if anglerFish == null or anglerFish.get_ref() == null:
@@ -127,7 +128,7 @@ func otherPassiveActivate(_delta, gameMover):
     level.player.aniPlayer.play("hookCaught")
   level.player.pauseAnimation = true
   level.player.should_do_fallthrough_area_collision = false
-  level.player.tryClearFallthroughCollisionSolid()
+  level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
   
 
 func restorePlayer(_got_to_top):

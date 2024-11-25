@@ -49,7 +49,7 @@ func _process(delta):
         if area.has_method("PassivePassiveInteractActivate"):
             area.PassivePassiveInteractActivate(delta)
 
-        if not parent.malware_infected and area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+        if not parent.should_big_bump and area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
             is_touching_enemy = true
             if enemy.has_method("doSomethingElseToPlayer"):
@@ -80,7 +80,7 @@ func _process(delta):
         if area.is_in_group("return_recover"):
             parent.tryToRecover()
 
-    if parent.malware_infected:
+    if parent.should_big_bump:
         global.broomSmackStuff(non_malware_areas, true, parent.global_transform, parent, level, null)
 
     parent.interactPromptSprite.visible = is_touching_door and \

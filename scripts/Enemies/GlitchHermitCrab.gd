@@ -124,6 +124,7 @@ func getSmacked(broom_origin = null, silently = false):
   var hermitCrabShell = myHermitCrabShell.get_ref()
   hermitCrabShell.global_transform.origin.y -= 1
   hermitCrabShell.getSmacked(broom_origin, silently)
+  hermitCrabShell.pauseAnimation = false
   myHermitCrabShell = null
   visible = false
   opacity = 1.0
@@ -146,6 +147,7 @@ func throwPreparedShell():
   if myHermitCrabShell != null and myHermitCrabShell.get_ref() != null:
     var direction_vector = Vector2(1 if not myOtherSprite.flip_h else -1, 0)
     myHermitCrabShell.get_ref().tumbleFall(direction_vector, false)
+    myHermitCrabShell.get_ref().pauseAnimation = false
     myHermitCrabShell = null
 
 func updateMyHermitCrabShellPos():

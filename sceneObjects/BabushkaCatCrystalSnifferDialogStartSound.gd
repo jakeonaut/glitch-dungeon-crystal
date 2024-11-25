@@ -11,6 +11,7 @@ func activateScript():
     return
 
   if global.memory["priestess"] == 0 and not global.getLevelZoneThing("crystal_geode"):
+    global.setLevelZoneThing("babushkaCatSniffed", 1)
     var allCrystalGeodes = global.getThingFromAllLevelZonez("crystal_geode")
     if global.getLevelZoneThing("crystal_geode"):
       var newText = "*mewmew*\n(...you've already purified the\n[color=#0798bf]Crystal[/color] in this zone!)"
@@ -29,8 +30,8 @@ func activateScript():
       textBox.textNode.bbcode_text = newText
       level.redrawMap()
 
-    global.setLevelZoneThing("babushkaCatSniffed", 1)
   else:
+    global.setLevelZoneThing("babushkaCatSniffed", 2)
     var levelZoneName = level.getLevelZoneName()
     var has_key = false
     var has_soul = false
@@ -56,7 +57,6 @@ func activateScript():
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
       level.redrawMap()
-    global.setLevelZoneThing("babushkaCatSniffed", 2)
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

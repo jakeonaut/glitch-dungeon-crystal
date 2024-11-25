@@ -183,7 +183,13 @@ func startGulp():
     gulpin = true
     var lickedGameMover = tongueController.hookTarget.get_ref() if tongueController and tongueController.hookTarget else null
     if lickedGameMover != null:
-      lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
+      if lickedGameMover.physics_state == -1:
+        if lickedGameMover.has_method("corruptMyself"):
+          lickedGameMover.corruptMyself()
+        corruptMyself()
+      else:
+        lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
+      
     notDieSound.play()
 
 onready var tongueController = get_node("TongueController") if has_node("TongueController") else null
@@ -321,22 +327,6 @@ export var can_jump = true
 func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
     return false
-  if level.player.malware_infected:
-    level.player.visible = true
-    is_smacked = true
-    am_i_dying = true
-    var newCorruptedFrog = poisonWaterCubeRes.instance()
-    level.add_child(newCorruptedFrog)
-    if not mySprite.flip_h:
-      newCorruptedFrog.rotation_degrees.z = -180
-    var tempRotationZ = newCorruptedFrog.rotation_degrees.z
-    newCorruptedFrog.getSmacked()
-    newCorruptedFrog.rotation_degrees.z = tempRotationZ
-    newCorruptedFrog.global_transform.origin = self.global_transform.origin
-    newCorruptedFrog.global_transform.origin.y += 0.1
-    level.player.visible = true
-    queue_free()
-    return
 
   .getSmacked(broom_origin, silently)
   if is_infected:
@@ -388,6 +378,22 @@ func fallthroughCollisionActivate(friend):
     behavior_jumping = true
     behavior_walking = true
     jump_timer = 0
+
+func corruptMyself():
+  level.player.visible = true
+  is_smacked = true
+  am_i_dying = true
+  var newCorruptedFrog = poisonWaterCubeRes.instance()
+  level.add_child(newCorruptedFrog)
+  if not mySprite.flip_h:
+    newCorruptedFrog.rotation_degrees.z = -180
+  var tempRotationZ = newCorruptedFrog.rotation_degrees.z
+  newCorruptedFrog.getSmacked()
+  newCorruptedFrog.rotation_degrees.z = tempRotationZ
+  newCorruptedFrog.global_transform.origin = self.global_transform.origin
+  newCorruptedFrog.global_transform.origin.y += 0.1
+  level.player.visible = true
+  queue_free()
 
 func fallthroughCollisionClear(exFriend):
   who_is_standing_on_me.erase(exFriend.name)

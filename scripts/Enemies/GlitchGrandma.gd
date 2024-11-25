@@ -304,7 +304,7 @@ func iJustPressedDown():
 
   on_ground = false
   should_do_fallthrough_area_collision = false
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 # @override
 func unenemize():

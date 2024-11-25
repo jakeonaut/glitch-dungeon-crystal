@@ -628,6 +628,7 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="GreenGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
@@ -637,6 +638,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001GreenGlitchFinale.tscn
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="RedGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
@@ -645,6 +647,7 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
 can_nav_left = false
 can_nav_up = false
+hide_me_from_map = true
 
 [node name="RedGlitchMiddle" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
@@ -653,6 +656,7 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchMiddle.tscn"
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="RedGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
@@ -662,6 +666,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="StoryHook" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0 )
@@ -674,7 +679,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="NullificationPurgatory" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
 can_nav_left = false
@@ -686,22 +691,27 @@ can_nav_down = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
-can_nav_right = false
+can_nav_up = false
 can_nav_down = false
 
 [node name="LadderIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 material_override = SubResource( 19 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
+can_nav_up = false
 can_nav_down = false
 
 [node name="GhostIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 material_override = SubResource( 20 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/tutorial_GhostIntro.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="0_1Haven" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
@@ -730,6 +740,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
 can_nav_up = false
+hide_me_from_map = true
 has_spore_key = true
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
@@ -810,7 +821,7 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
 
 [node name="MarshChallenge" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
 material_override = SubResource( 21 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -822,7 +833,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="MarshChallenge2" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
 material_override = SubResource( 21 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -857,18 +868,6 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
-[node name="preBossRoom" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
-material_override = SubResource( 21 )
-texture = ExtResource( 10 )
-vframes = 16
-frame = 63
-path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/preBossRoomAnglerFish.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
-
 [node name="FishingScene" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -3, 0 )
 material_override = SubResource( 21 )
@@ -882,7 +881,7 @@ can_nav_up = false
 hide_me_from_map = true
 
 [node name="PlasticBeach" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 1.5, 0, 0, 0, 1, 4, 0, 0 )
+transform = Transform( 2, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, -2, 0 )
 material_override = SubResource( 21 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -894,8 +893,18 @@ can_nav_down = false
 has_phishing_door = true
 has_angel_statue = true
 
+[node name="PlasticReef" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 0 )
+material_override = SubResource( 21 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 63
+path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/PlasticReef.tscn"
+can_nav_left = false
+can_nav_up = false
+
 [node name="AnglerFishBossRoom" parent="BubblegloopSwamp" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, -1 )
 material_override = SubResource( 24 )
 pixel_size = 0.04
 texture = ExtResource( 15 )

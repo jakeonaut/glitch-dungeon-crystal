@@ -107,7 +107,7 @@ func passiveActivate(_delta, is_player):
     level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
     level.player.should_do_fallthrough_area_collision = false
-    level.player.tryClearFallthroughCollisionSolid()
+    level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
     frog.queueGulpAnimation()
   
@@ -119,6 +119,6 @@ func otherPassiveActivate(_delta, gameMover):
     level.player.hookSound.play()
     gameMover.pauseAnimation = true
     gameMover.should_do_fallthrough_area_collision = false
-    gameMover.tryClearFallthroughCollisionSolid()
+    gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
     frog.queueGulpAnimation()

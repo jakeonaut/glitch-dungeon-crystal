@@ -35,3 +35,4 @@ func tryRespawnMyBabies():
     self.add_child(newHermitCrabShell)
     newHermitCrabShell.global_transform.origin = self.global_transform.origin
     hermitCrabShell = weakref(newHermitCrabShell)
+    hermitCrabShell.get_ref().visible = not glitchHermitCrab.get_ref().visible

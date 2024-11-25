@@ -17,7 +17,7 @@ func activateScript():
   var text = "•ok I'm up.!"
   match levelZoneName:
     "gd1TutorialDungeon":
-        text = "•ok I'm up.!\n[wave]*cough*[/wave] where am i?"
+        text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 6 other sisters\nwe will resurrect our mother\nand undo all corruption"
     "gd1FishingVillage":
         text = "[wave]*cough*[/wave] where am i?"
     "gd1ToxicJungle":

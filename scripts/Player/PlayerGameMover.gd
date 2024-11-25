@@ -366,6 +366,8 @@ func collideWithWall(local_lv):
   if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and should_big_bump):
     is_mushroom_infected = false
     pauseAnimation = false
+    physics_state = PhysicsState.NORMAL
+    on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
     bigBump()
     getABroom()
   if grav == 0:
@@ -385,7 +387,7 @@ func bigBump():
   getSmacked()
   if global.userSettings["canGlitchScreen"]:
     level.glitchScreenEffect.visible = true
-    glitch_death_timer = 1
+    glitch_death_timer = 25
   fall_timer = 0
   pauseAnimation = false
   should_big_bump = false
@@ -433,12 +435,12 @@ func pressingJump():
 
 # @overrride
 func actuallyApplyJump(play_sound = true):
-  # if malware_infected:
-  #   on_ground = false
-  #   should_do_fallthrough_area_collision = false
-  #   has_just_jumped_timer = 0
-  # else:
-  .actuallyApplyJump(play_sound)
+  if malware_infected:
+    on_ground = false
+    should_do_fallthrough_area_collision = false
+    has_just_jumped_timer = 0
+  else:
+    .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():
@@ -454,8 +456,8 @@ func pressingMoveLeft():
   if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
-  # if malware_infected:
-  #   return Input.is_action_pressed("ui_right") and not am_paused
+  if malware_infected:
+    return Input.is_action_pressed("ui_right") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
   var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
@@ -467,8 +469,8 @@ func pressingMoveRight():
   if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
-  # if malware_infected:
-  #   return Input.is_action_pressed("ui_left") and not am_paused
+  if malware_infected:
+    return Input.is_action_pressed("ui_left") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused
   var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
@@ -476,14 +478,14 @@ func pressingMoveRight():
 
 # @override
 func justPressedMoveLeft():
-  # if malware_infected:
-  #   return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
+  if malware_infected:
+    return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
   return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
 
 # @override
 func justPressedMoveRight():
-  # if malware_infected:
-  #   return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
+  if malware_infected:
+    return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
   return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
 
 func magicJump():
@@ -491,9 +493,13 @@ func magicJump():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
+  if physics_state == PhysicsState.COLLAPSED or physics_state == PhysicsState.CAN_WAKE_UP or physics_state == PhysicsState.WAKING_UP:
+    physics_state = PhysicsState.NORMAL
+    pauseAnimation = false
+    getABroom()
   should_magic_jump = true
   actuallyApplyJump(false)
-  tryClearFallthroughCollisionSolid()
+  tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 onready var dollOpenSound = get_node("Sounds/DollOpenSound")
 onready var dollCloseSound = get_node("Sounds/DollCloseSound")
@@ -893,7 +899,7 @@ func handleSpikeCollisions(delta):
   var TILE_HEIGHT = levelTiles.cell_size.y
 
   touching_glitch_or_spikes = false
-  var amt = 0.5 if malware_infected else 0
+  var amt = 0.5 if should_big_bump else 0.0
   for i in range(int(round(y+bb-amt)), int(round(y+tb+amt))):
     for j in range(int(round(x+lb-amt)), int(round(x+rb+amt))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
@@ -908,7 +914,7 @@ func handleSpikeCollisions(delta):
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
         x + lb, y + tb, x + rb, y + bb
       ):
-        if malware_infected:
+        if should_big_bump:
           getLevelTiles().infectSpikes(coords)
           has_sweeped_glitch = true
         else:

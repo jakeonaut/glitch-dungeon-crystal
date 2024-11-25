@@ -120,5 +120,3 @@ func ouchies(broom_origin):
         dieAniPlayer.queue("metamorphosis")
         dieAniPlayer.queue("flutterAway")
     
-    if broom_origin.x < self.global_transform.origin.x:
-        pass

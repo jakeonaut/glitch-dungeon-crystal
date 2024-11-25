@@ -289,7 +289,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1358, 3.1785, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1358, 3.1785, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 1.1
@@ -324,7 +324,7 @@ pixel_size = 0.125
 texture = ExtResource( 8 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 20 )]
@@ -368,7 +368,7 @@ material_override = SubResource( 79 )
 mesh = ExtResource( 24 )
 
 [node name="BroomUpgradeElder" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2702, 3.0479, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2702, 3.0479, 0 )
 visible = false
 bbText = "•before you go,
 make sure you fortify
@@ -399,7 +399,7 @@ shape = SubResource( 282 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.38303, -1 )
 
 [node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6351, 3.1759, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6351, 3.1759, 0 )
 bbText = "•you seem to have some
 [color=red]hag magic[/color]... I can enchant
 your broom with shards"

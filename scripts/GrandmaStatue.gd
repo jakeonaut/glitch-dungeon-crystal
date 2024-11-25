@@ -138,7 +138,7 @@ func processGlitchFormTeleportation():
         var my_old_origin = self.global_transform.origin
         self.global_transform.origin = level.player.global_transform.origin
         level.player.global_transform.origin = my_old_origin
-        level.player.tryClearFallthroughCollisionSolid()
+        level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
         level.summonSmokeClouds(level.player.global_transform.origin, 2, true, true)
         level.summonSmokeClouds(global_transform.origin, 2, false, true)
         level.player.on_ground = level.player.glitch_form == global.GlitchForm.FLOOR and on_ground

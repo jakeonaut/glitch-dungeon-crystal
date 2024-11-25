@@ -177,7 +177,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 35, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 25, -4 )
 
 [node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 36, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 35, -4 )
 
 [node name="InvisibleSpell2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 11.982, 39.4488, 0 )
