@@ -362,7 +362,7 @@ func bulletTryDieToSolids():
         queue_free()
 
 func tryDieToOffscreenCamera(delta):
-    var DEATH_MARGIN = 5
+    var DEATH_MARGIN = 0
     if getGameCamera().rightmost_x > -999:
         if behavior_walking:
             DEATH_MARGIN = 0
@@ -377,7 +377,7 @@ func tryDieToOffscreenCamera(delta):
                     global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
                     flipWalkingDirection()
                     return
-        DEATH_MARGIN = 5
+        DEATH_MARGIN = 0
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \

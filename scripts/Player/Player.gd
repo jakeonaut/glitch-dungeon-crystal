@@ -820,6 +820,8 @@ func tryDieToOffscreenCamera(_delta):
       global_transform.origin = repositioned_player
       if should_big_bump:
         bigBump()
+        pauseAnimation = false
+        physics_state = PhysicsState.NORMAL
       elif physics_state == PhysicsState.BEING_TOSSED:
         collideWithWall(linear_velocity)
   

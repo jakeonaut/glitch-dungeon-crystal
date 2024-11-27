@@ -159,26 +159,27 @@ func updateMyHermitCrabShellPos():
     myHermitCrabShell.get_ref().myOtherSprite.flip_h = self.myOtherSprite.flip_h
 
 # @override
-func activate(_is_player):
-  if global.activeInteractor == null:
-    summonHermitCrabShell()
-    var hermitCrabShell = myHermitCrabShell.get_ref()
-    hermitCrabShell.global_transform.origin.y -= 1
-    global.activeInteractor = hermitCrabShell
-    global.memory["broom"] = false
-    level.player.inventorySound.play()
-    if level.player.summonedBroom:
-      level.player.broomStop()
-    hermitCrabShell.pauseAnimation = false
-    hermitCrabShell.secretAniPlayer.stop()
-    hermitCrabShell.secretAniPlayer.clear_queue()
-    hermitCrabShell.secretAniPlayer.play("RESET")
-    hermitCrabShell.rotation_degrees.z = 0
-    myHermitCrabShell = null
-    visible = false
-    opacity = 1.0
-    myOtherSprite.material_override.set_shader_param("opacity", opacity)
-    crab_state = CrabState.SCURRY_AWAY
+# only let you pick up and throw the shell if it's already in a prone state...
+# func activate(_is_player):
+#   if global.activeInteractor == null:
+#     summonHermitCrabShell()
+#     var hermitCrabShell = myHermitCrabShell.get_ref()
+#     hermitCrabShell.global_transform.origin.y -= 1
+#     global.activeInteractor = hermitCrabShell
+#     global.memory["broom"] = false
+#     level.player.inventorySound.play()
+#     if level.player.summonedBroom:
+#       level.player.broomStop()
+#     hermitCrabShell.pauseAnimation = false
+#     hermitCrabShell.secretAniPlayer.stop()
+#     hermitCrabShell.secretAniPlayer.clear_queue()
+#     hermitCrabShell.secretAniPlayer.play("RESET")
+#     hermitCrabShell.rotation_degrees.z = 0
+#     myHermitCrabShell = null
+#     visible = false
+#     opacity = 1.0
+#     myOtherSprite.material_override.set_shader_param("opacity", opacity)
+#     crab_state = CrabState.SCURRY_AWAY
 
 
 # @override

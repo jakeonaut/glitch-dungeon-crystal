@@ -28,7 +28,7 @@ func _process(delta):
     self.global_transform.origin = level.player.global_transform.origin
     self.global_transform.origin.y += 2
     self.global_transform.origin.z += 2
-    self.mySprite.flip_h = level.player.mySprite.flip_h
+    self.myOtherSprite.flip_h = level.player.mySprite.flip_h
 
   delta = delta * global.time_dilation_multiplier
   secretAniPlayer.playback_speed = global.time_dilation_multiplier
@@ -59,8 +59,19 @@ func flipWalkingDirection():
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("slowSpinForward")
-  
 
+# @override
+func doVerticalWalkingBehavior():
+  if behavior_walking and walk_direction.y != 0:
+    if not on_ground and linear_velocity.y == 0:
+      walk_direction.y = -1
+      grav = 60
+      if should_big_bump:
+        glitch_tiles_around_me = true
+        getSmacked(null, true)
+        thudSound.play()
+      should_big_bump = false
+  
 func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:
     return
@@ -138,6 +149,14 @@ func collideWithWall(local_lv):
     #   secretAniPlayer.play("landRight")
   should_big_bump = false
   return .collideWithWall(local_lv)
+
+# func collideWithCeiling(local_lv):
+#   if should_big_bump:
+#     glitch_tiles_around_me = true
+#     getSmacked(null, true)
+#     thudSound.play()
+#   should_big_bump = false
+#   return .collideWithCeiling(local_lv)
 
 var glitch_tiles_around_me = false
 func landed():
@@ -227,15 +246,23 @@ var die_offscreen_timer = 0
 var die_offscreen_time_limit = 10
 # @override
 func actuallyDieToOffscreenCamera(delta):
-  # if is_static_in_level:
-  #   setGlobalMemoryOfHasBeenDefeated()
-  #   trySpawnACrystal()
-  # myManager.queue_free()
   if physics_state == PhysicsState.BEING_TOSSED:
-    landed()
+    global_transform.origin.y -= 2
+    linear_velocity.y = 0
+    lv.y = 0
+    vv = 0
+    die_offscreen_timer = 0
+    if should_big_bump:
+      getSmacked(null, true)
+    should_big_bump = false
+    physics_state = PhysicsState.NORMAL
+    behavior_was_thrown = false
+    behavior_walking = false
+    behavior_jumping = false
   die_offscreen_timer += (delta*11)
   if die_offscreen_timer >= die_offscreen_time_limit:
     myManager.dieOffscreen()
+    die_offscreen_timer = 0
 
 # @override
 func unsmack():
