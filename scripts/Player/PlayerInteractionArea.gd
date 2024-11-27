@@ -77,8 +77,8 @@ func _process(_delta):
             activated_something = global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
         elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
-            if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
-                activated_something = nearest_area.InteractActivate()        
+            # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
+            activated_something = nearest_area.InteractActivate()        
         if activated_something and player.summonedBroom != null:
             player.broomStop()
             has_activated_something = true
@@ -88,7 +88,7 @@ func _process(_delta):
     #     # if no nearby active area, and no held object, use primary player action
     #     # else:
     #     #     player.tryBroom()
-    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.am_i_a_textbox:
         if (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) or Input.is_action_just_pressed("ui_start"):
             if Input.is_action_just_pressed("ui_start"):
                 global.activeInteractor.selectedYesNoOption = false

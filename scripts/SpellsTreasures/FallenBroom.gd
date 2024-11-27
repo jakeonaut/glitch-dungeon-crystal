@@ -310,7 +310,7 @@ func hitStuff(_delta):
                     if my_broom_owner.teleport_to == null:
                         my_broom_owner.teleport_to = weakref(area.get_parent())
                         my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
-                if smackResult == null:
+                if smackResult != null:
                     has_hit_something = true
         elif area.is_in_group("bug") and is_active:
             var areaParent = area.get_node("..")

@@ -137,6 +137,7 @@ func summonHermitCrabShell():
     return
   if myManager.hermitCrabShell.get_ref() != null:
     myHermitCrabShell = weakref(myManager.hermitCrabShell.get_ref())
+    myHermitCrabShell.get_ref().rotation_degrees.z = 0
     myHermitCrabShell.get_ref().visible = true
     myHermitCrabShell.get_ref().secretAniPlayer.stop()
     myHermitCrabShell.get_ref().secretAniPlayer.clear_queue()
@@ -152,9 +153,33 @@ func throwPreparedShell():
 
 func updateMyHermitCrabShellPos():
   if myHermitCrabShell != null and myHermitCrabShell.get_ref() != null:
+    myHermitCrabShell.get_ref().rotation_degrees.z = 0
     myHermitCrabShell.get_ref().global_transform.origin = self.global_transform.origin
     myHermitCrabShell.get_ref().global_transform.origin.y += 1
     myHermitCrabShell.get_ref().myOtherSprite.flip_h = self.myOtherSprite.flip_h
+
+# @override
+func activate(_is_player):
+  if global.activeInteractor == null:
+    summonHermitCrabShell()
+    var hermitCrabShell = myHermitCrabShell.get_ref()
+    hermitCrabShell.global_transform.origin.y -= 1
+    global.activeInteractor = hermitCrabShell
+    global.memory["broom"] = false
+    level.player.inventorySound.play()
+    if level.player.summonedBroom:
+      level.player.broomStop()
+    hermitCrabShell.pauseAnimation = false
+    hermitCrabShell.secretAniPlayer.stop()
+    hermitCrabShell.secretAniPlayer.clear_queue()
+    hermitCrabShell.secretAniPlayer.play("RESET")
+    hermitCrabShell.rotation_degrees.z = 0
+    myHermitCrabShell = null
+    visible = false
+    opacity = 1.0
+    myOtherSprite.material_override.set_shader_param("opacity", opacity)
+    crab_state = CrabState.SCURRY_AWAY
+
 
 # @override
 func actuallyDieToOffscreenCamera(_delta):

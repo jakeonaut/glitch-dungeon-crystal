@@ -70,6 +70,9 @@ var am_i_in_ui_layer = false
 var is_immediate = false
 var was_smacked = false
 
+# used with global.activeInteractor
+var am_i_a_textbox = true
+
 var gameCamera = null
 func getGameCamera():
   if gameCamera == null:

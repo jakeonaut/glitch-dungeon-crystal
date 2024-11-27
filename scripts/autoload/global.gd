@@ -1278,7 +1278,6 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
           have_i_smacked_an_npc = true
         if not area.is_in_group("tadpole") and smackResult == null:
           if my_broom_owner:
-            print("SMACK IT")
             my_broom_owner.getSmacked()
             if my_broom_owner.teleport_to == null:
                 my_broom_owner.teleport_to = weakref(area.get_parent())

@@ -93,6 +93,9 @@ onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContaine
 onready var interactPromptSprite = get_node("InteractPrompt")
 var override_camera_y = null
 func _process(delta):
+  # weird failsafe
+  global_transform.origin.z = 0
+
   if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
     should_big_bump = false
     if grav == 0:
@@ -330,7 +333,8 @@ func landed():
   has_used_magic_lantern = false
 
 func isTextboxPausingMe():
-   return global.activeInteractor != null # and not global.activeInteractor.is_tiny
+   # and not global.activeInteractor.is_tiny
+   return global.activeInteractor != null and global.activeInteractor.am_i_a_textbox
 
 # @override
 func justPressedDown():

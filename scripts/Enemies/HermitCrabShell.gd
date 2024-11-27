@@ -24,6 +24,12 @@ func _process(delta):
     updateFallthroughSolids()
     return
 
+  if global.activeInteractor == self:
+    self.global_transform.origin = level.player.global_transform.origin
+    self.global_transform.origin.y += 2
+    self.global_transform.origin.z += 2
+    self.mySprite.flip_h = level.player.mySprite.flip_h
+
   delta = delta * global.time_dilation_multiplier
   secretAniPlayer.playback_speed = global.time_dilation_multiplier
 
@@ -112,6 +118,8 @@ func tumbleFall(direction_vector, is_corrupted = false):
 # @ override
 func isActive(_debug=false):
   # same as GlitchEnemy.gd except allow is_smacked to still count as "active"
+  if global.activeInteractor == self:
+    return false
   return visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
 func collideWithWall(local_lv):
@@ -254,3 +262,47 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
+
+
+# @override
+func activate(_is_player):
+  if global.activeInteractor == null:
+    should_big_bump = false
+    physics_state = PhysicsState.NORMAL
+    is_smacked = false
+    behavior_was_thrown = false
+    behavior_walking = false
+    behavior_jumping = false
+    rotation_degrees.z = 0
+    global.activeInteractor = self
+    global.memory["broom"] = false
+    level.player.inventorySound.play()
+    if level.player.summonedBroom:
+      level.player.broomStop()
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("RESET")
+
+# activeInteractor responsibilities... sorry
+var am_i_a_textbox = false
+var textboxParent = null
+var is_tiny = false
+var is_important = false
+var can_camera_zoom = false
+var textboxCameraTarget = null
+func InteractActivate():
+  if global.activeInteractor == self:
+    global.activeInteractor = null
+    level.player.getABroom()
+    var direction_vector = Vector2(1 if not level.player.mySprite.flip_h else -1, 0)
+    tumbleFall(direction_vector, false)
+    pauseAnimation = false
+  
+func hideTextbox():
+  pass
+
+func stopInteract():
+  pass
+
+func tryStopInteractPassive():
+  pass
