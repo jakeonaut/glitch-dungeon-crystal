@@ -300,10 +300,10 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
-    memory["glitched_grimoire"] = false
-    memory["forget_me_not"] = false
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 2
+    memory["glitched_grimoire"] = true
+    memory["forget_me_not"] = true
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
@@ -316,7 +316,7 @@ func resetMemory():
     memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["can_force_respawn"] = 1
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
@@ -1278,6 +1278,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
           have_i_smacked_an_npc = true
         if not area.is_in_group("tadpole") and smackResult == null:
           if my_broom_owner:
+            print("SMACK IT")
             my_broom_owner.getSmacked()
             if my_broom_owner.teleport_to == null:
                 my_broom_owner.teleport_to = weakref(area.get_parent())

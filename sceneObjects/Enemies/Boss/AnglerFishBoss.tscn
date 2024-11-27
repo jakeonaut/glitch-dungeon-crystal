@@ -2931,7 +2931,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.7, 0 )
 script = ExtResource( 17 )
 
 [node name="HighpriestessCrystal" parent="LureContainer/FreeRange" instance=ExtResource( 10 )]
-transform = Transform( 0.587604, -0.016886, -0.12015, 0, 0.594161, -0.083504, 0.121331, 0.0817788, 0.581886, 0, -0.62634, -3.5604 )
+transform = Transform( 0.97934, -0.0337721, -0.12015, 0, 1.18832, -0.0835039, 0.202218, 0.163558, 0.581886, 0, -1.76567, -3.5604 )
 visible = true
 
 [node name="MeshInstance2" parent="LureContainer/FreeRange/HighpriestessCrystal/CubeContainer" index="0"]

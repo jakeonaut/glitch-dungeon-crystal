@@ -346,8 +346,8 @@ func processPhysics(delta):
   else:
     if was_just_on_ground_timer <= was_just_on_ground_time_limit:
       was_just_on_ground_timer += (delta*22)
-      if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
-        was_just_on_ground_timer += (delta*22)
+      # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
+      #   was_just_on_ground_timer += (delta*22)
   was_pressing_horizontal_input = is_pressing_horizontal_input
   if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
     horizontal_input_reset_timer += (delta*11)
@@ -873,7 +873,7 @@ var has_just_glitch_swapped_time_limit = 5
 func actuallyApplyJump(play_sound = true):
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
   if isFeatherLike():
-    vv = jump_force / 1.2 # jump_force / 1.9
+    vv = jump_force / 1.1 # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
     #   if vv < (2*jump_force) / 3:
     #     vv = (2*jump_force) / 3

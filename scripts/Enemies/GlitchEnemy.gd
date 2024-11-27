@@ -423,22 +423,22 @@ func glitchSetSpritesAndCollision():
 
 # @override
 func pressingMoveLeft():
-    if am_i_dying or am_i_freezing: return false
+    if am_i_dying or am_i_freezing or is_smacked: return false
     return walk_direction.x == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    if am_i_dying or am_i_freezing: return false
+    if am_i_dying or am_i_freezing or is_smacked: return false
     return walk_direction.x == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
-    if am_i_dying or am_i_freezing: return false
+    if am_i_dying or am_i_freezing or is_smacked: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override
 func pressingJump():
-    if am_i_dying or am_i_freezing: return false
+    if am_i_dying or am_i_freezing or is_smacked: return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override
@@ -599,7 +599,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
 var should_modify_glitch_shader_vars = true
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(_broom_origin = null, silently = false):
     if is_smacked or am_i_dying:
         return false
 

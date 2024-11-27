@@ -2,7 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
 onready var anglerFishBoss = get_node("AnglerFishBoss")
-onready var dreamOfDeceit = get_node("DreamOfDeceit")
+# onready var dreamOfDeceit = get_node("DreamOfDeceit")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -15,9 +15,10 @@ func setUpRoomInitializationOverride():
         door.queue_free()
 
 func _process(_delta):
-    if global.memory["angler_seaman_boss"] >= 2:
-        dreamOfDeceit.visible = true
-        dreamOfDeceit.grav = 60
+    pass
+    # if global.memory["angler_seaman_boss"] >= 2:
+    #     dreamOfDeceit.visible = true
+    #     dreamOfDeceit.grav = 60
 
   
 # @override

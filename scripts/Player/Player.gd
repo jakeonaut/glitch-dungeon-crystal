@@ -1792,6 +1792,8 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 4
 func getSmacked(_broom_origin = null, _silently = false):
+  if is_smacked or should_big_bump:
+    return
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
   mySprite.material_override.set_shader_param("normal_offset", normal_offset)

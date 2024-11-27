@@ -4,6 +4,9 @@ onready var anglerFish = get_node("..")
 
 # @override
 func restorePlayer(got_to_top):
+  if anglerFish.gulping:
+    .restorePlayer(got_to_top)
+    return
   if hookTarget == null or hookTarget.get_ref() == null:
     return
   var gameMover = hookTarget.get_ref()

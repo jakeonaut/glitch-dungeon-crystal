@@ -205,7 +205,6 @@ func getSmacked(broom_origin = null, silently = false):
   #   return
 
   if not silently:
-    print(str(broom_origin.x if broom_origin != null else null) + "<=" + str(self.global_transform.origin.x) + ", " + str(level.player.mySprite.flip_h))
     if (broom_origin != null and broom_origin.x <= self.global_transform.origin.x) or (broom_origin == null and not level.player.mySprite.flip_h):
       tumbleFall(Vector2(1, 0), false)
     elif (broom_origin != null and broom_origin.x > self.global_transform.origin.x) or (broom_origin == null and level.player.mySprite.flip_h):

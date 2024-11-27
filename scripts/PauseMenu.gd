@@ -1025,8 +1025,8 @@ func tryDrawMap():
         # map_sporeKeySprite.visible = true
         # map_sporeKeySprite.position = sprite.position
       
-      if global.memory.has("prev_room") and global.memory["prev_room"] == mapRoom.path:
-        sprite.material.set_shader_param("offset", 10)
+      # if global.memory.has("prev_room") and global.memory["prev_room"] == mapRoom.path:
+      #   sprite.material.set_shader_param("offset", 10)
   has_drawn_map = true
 
 func getBabushkaCatSniffedVar(mapRoomPath):
@@ -1041,46 +1041,49 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
+  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath)
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.z_index = 1
   sprite.material.set_shader_param("palette_out", global.white_palette2d)
   sprite.material.set_shader_param("num_colors", 16)
+  if not haveIBeenToThisLevel:
+    sprite.material.set_shader_param("offset", 10)
   match levelZoneName:
     "gd1":
         sprite.frame = 231
-        sprite.material.set_shader_param("offset", 11)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 11)
     "gd1TutorialDungeon":
         sprite.frame = 190
-        sprite.material.set_shader_param("offset", 7)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 7)
     "gd1FishingVillage":
         sprite.frame = 245
-        sprite.material.set_shader_param("offset", 3)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 3)
     "gd1ToxicJungle":
         sprite.frame = 95
-        sprite.material.set_shader_param("offset", 2)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 2)
     "gd1ShiftingSandLand":
         sprite.frame = 253
-        sprite.material.set_shader_param("offset", 1)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 1)
     "gd1CrystalTower":
         sprite.frame = 219
-        sprite.material.set_shader_param("offset", 14)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 14)
     "gd1BubblegloopSwamp":
         sprite.frame = 207
-        sprite.material.set_shader_param("offset", 15)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 15)
     "gd1TombSouls":
         sprite.frame = 250
-        sprite.material.set_shader_param("offset", 12)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 12)
     "gd1AbstractSuburbs":
         sprite.frame = 59
-        sprite.material.set_shader_param("offset", 13)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 13)
 
     "gd1GrandmaVillage":
       sprite.frame = 252
-      sprite.material.set_shader_param("offset", 5)
+      if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 5)
     "gd1PrimordialOoze":
         sprite.frame = 252
-        sprite.material.set_shader_param("offset", 5)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 5)
     _:
         pass
 

@@ -140,16 +140,6 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33655, -4.95006, 0 )
-lb = null
-rb = null
-tb = null
-bb = null
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="WaterCube" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -7, -4 )
@@ -187,7 +177,9 @@ path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/MalwareIntro.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13, 0 )
+is_locked = true
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/PlasticBeach.tscn"
+num_keys_unlock = 1
 
 [node name="GlitchHermitCrabManager2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -4.87528, 0 )
@@ -223,6 +215,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 0 )
 
 [node name="AnglerFish" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 13.0412, 0 )
+has_a_key = true
 
 [node name="HookInteractionArea" parent="Viewport/level/AnglerFish/FishingRod" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0 )
@@ -235,6 +228,9 @@ shape = SubResource( 47 )
 
 [node name="WaterCube11" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.4109, -4 )
+
+[node name="WaterCube12" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -0.5891, -4 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 5 )]
 
