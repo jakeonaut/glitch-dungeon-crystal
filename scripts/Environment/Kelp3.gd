@@ -15,6 +15,9 @@ func randomizeBubbleTimeLimit():
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
 
+    if global_transform.origin.z > 2:
+        return
+
     bubble_timer += (delta*22)
     if bubble_timer >= bubble_time_limit:
         bubble_timer = 0

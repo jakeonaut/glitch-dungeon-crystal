@@ -16,6 +16,7 @@ func _ready():
     mySprite.material_override = mySprite.material_override.duplicate() # make unique
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
     myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.2
+    should_smack_pause_me = false
 
 func _process(delta):
   # ._process(delta) implicit

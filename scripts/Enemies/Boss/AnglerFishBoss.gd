@@ -4,14 +4,12 @@ var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn"
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
-onready var lureContainer = get_node("LureContainer")
-onready var lureFreeRange = get_node("LureContainer/FreeRange")
-onready var crystal = get_node("LureContainer/FreeRange/HighpriestessCrystal")
-onready var lureAniPlayer = get_node("LureContainer/FreeRange/AnimationPlayer")
-onready var reelStopArea = get_node("LureContainer/ReelStopArea")
+onready var cubeCrystal = get_node("CubeCrystal")
+onready var fakeCrystalContainer = get_node("FakeCrystals")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 onready var weakPointTarget = get_node("WeakPointTarget")
+var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -20,74 +18,71 @@ enum BossPhase {
     IDLE,
     LYING_IN_WAIT,
     WAKING_UP,
-    WINDUP_CAST,
-    CAST_LURE,
-    CLAW_MACHINE_FISHING_LEFT,
-    CLAW_MACHINE_FISHING_RIGHT,
-    CLAW_MACHINE_FISHING_MIDDLE,
-    REEL_IT_IN,
+    PREPARING_CHARGE,
+    CHARGING,
+    HIDING_WITH_DUPLICATES,
     EAT_IT,
     STUN_FALL,
     STUN_IDLE,
     HURT,
     DEFEATED,
 }
-var claw_machine_cycle = 0
-var CLAW_MACHINE_CYCLE_MAX = 1
 var boss_phase = BossPhase.LYING_IN_WAIT
 
 var original_pos = null
 var target_pos = null
 var lure_bullet_direction_vector = null
 var BULLET_SPEED = 15
-var cast_timer = 0
-var cast_time_limit = 60
+var idle_timer = 0
+var idle_time_limit = 20
+var charging_time_limit = 30
+var crystal_appear_time_limit = 10
 var stun_timer = 0
 var stun_time_limit = 240
-var which_facing = -1
 var is_weakpoint_attached = true
+var crystalLandings = []
+var which_three = []
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
     set_process(true)
+    is_sprite_flipped = true
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
     original_pos = global_transform.origin
     randomizeTargetPos()
+    crystalLandings = level.get_tree().get_nodes_in_group("crystal_landing")
 
     behavior_phase_through_walls = true
-    if lureFreeRange.get_parent() == lureContainer:
-        var temp = lureFreeRange.global_transform.origin
-        lureContainer.remove_child(lureFreeRange)
-        level.add_child(lureFreeRange)
-        lureFreeRange.global_transform.origin = temp
+    walk_speed = 16
+
+    self.remove_child(fakeCrystalContainer)
+    level.add_child(fakeCrystalContainer)
 
 var preyTarget = null
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.LYING_IN_WAIT:
         unenemize()
+        if cubeCrystal.meshInstance1.visible:
+            cubeCrystal.meshInstance1.visible = false
+            global.memory["angler_seaman_boss"] = 1 
         if global.memory["angler_seaman_boss"] == 1:
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("openUp")
-            secretAniPlayer.queue("fadeFromBlack")
-            reenemize()
-            boss_phase = BossPhase.WAKING_UP
-            global.pauseGame = true
-            global.shouldRenderAsCinematic = true
-            level.gameCamera.initial_size = 30
-            level.gameCamera.zoomed_size = 30
-            pass
+            startBossFight()
         return
     elif boss_phase == BossPhase.WAKING_UP:
         if not secretAniPlayer.is_playing():
-            boss_phase = BossPhase.REEL_IT_IN
+            boss_phase = BossPhase.IDLE
             global.shouldRenderAsCinematic = false
             global.pauseGame = false
-            crystal.scale = Vector3(0.6, 0.6, 0.6)
-            crystal.applyGlitchMaterial(5)
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
+            # cubeCrystal.applyGlitchMaterial(5)
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
                 musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
@@ -101,139 +96,78 @@ func _process(delta):
 
     if boss_phase == BossPhase.IDLE:
         weakPointContainer.vulnerable = false
-        lureFreeRange.global_transform.origin.y = lureContainer.global_transform.origin.y
-        lureFreeRange.visible = true
-        if which_facing == 1:
-            tryFlipLeft("idle")
-        if lureAniPlayer.assigned_animation != "shrink":
-            lureAniPlayer.stop()
-            lureAniPlayer.clear_queue()
-            lureAniPlayer.play("shrink")
         if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
             moveAbout(delta)
-        cast_timer += (delta*11)
-        if cast_timer >= 10:
+        idle_timer += (delta*11)
+        if idle_timer >= 10:
             reenemize()
-        if cast_timer >= cast_time_limit:
-            cast_timer = 0
-            boss_phase = BossPhase.WINDUP_CAST
-    elif boss_phase == BossPhase.WINDUP_CAST:
-        if secretAniPlayer.assigned_animation != "castRod":
+        if idle_timer >= idle_time_limit:
+            idle_timer = 0
+            boss_phase = BossPhase.PREPARING_CHARGE
+    elif boss_phase == BossPhase.PREPARING_CHARGE:
+        if secretAniPlayer.assigned_animation != "openUp" and secretAniPlayer.assigned_animation != "openIdle":
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("castRod")
-            lureAniPlayer.stop()
-            lureAniPlayer.clear_queue()
-            lureAniPlayer.queue("grow")
-            lureAniPlayer.queue("spinAttack")
-        lureFreeRange.global_transform.origin.y = lureContainer.global_transform.origin.y
-    elif boss_phase == BossPhase.CAST_LURE:
-        lureFreeRange.global_transform.origin += lure_bullet_direction_vector * delta
-        moveToSpecificPosition(delta, Vector3(6, 6, 0))
-        # lureBulletTryDieToSolids()
-        if lureFreeRange.hooked:
-            boss_phase = BossPhase.REEL_IT_IN
+            secretAniPlayer.play("openUp")
+            secretAniPlayer.queue("openIdle")
+        # this position is stupid and specific to the level I'm in... oh well
+        moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1, false)
+        idle_timer += (delta*11)
+        if idle_timer >= charging_time_limit:
+            idle_timer = 0
+            boss_phase = BossPhase.CHARGING
+    elif boss_phase == BossPhase.CHARGING:
+        behavior_walking = true
+        walk_direction.x = -1
+        # this is stupid and specific to the level I'm in... oh well
+        if global_transform.origin.x < 16.134:
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-        elif lureFreeRange.global_transform.origin.y < self.global_transform.origin.y - 4:
-            claw_machine_cycle = 0
-            boss_phase = BossPhase.CLAW_MACHINE_FISHING_LEFT
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-    elif boss_phase == BossPhase.CLAW_MACHINE_FISHING_LEFT:
-        lureMatchPlayerY(delta)
-        tryFlipLeft()
-        if lureFreeRange.hooked:
-            boss_phase = BossPhase.REEL_IT_IN
-            return
-        if moveToSpecificPosition(delta, Vector3(-2, 6, 0), 2) or global_transform.origin.x < -1:
-            boss_phase = BossPhase.CLAW_MACHINE_FISHING_RIGHT
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("cheat")
-        lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
-    elif boss_phase == BossPhase.CLAW_MACHINE_FISHING_RIGHT:
-        lureMatchPlayerY(delta)
-        tryFlipRight()
-        if lureFreeRange.hooked:
-            boss_phase = BossPhase.REEL_IT_IN
-            return
-        if moveToSpecificPosition(delta, Vector3(15, 6, 0), 2) or global_transform.origin.x > 14:
-            if claw_machine_cycle < CLAW_MACHINE_CYCLE_MAX:
-                boss_phase = BossPhase.CLAW_MACHINE_FISHING_LEFT
-            else:
-                boss_phase = BossPhase.CLAW_MACHINE_FISHING_MIDDLE
-            claw_machine_cycle += 1
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("cheat")
-        lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
-    elif boss_phase == BossPhase.CLAW_MACHINE_FISHING_MIDDLE:
-        lureMatchPlayerY(delta)
-        tryFlipLeft()
-        if lureFreeRange.hooked:
-            boss_phase = BossPhase.REEL_IT_IN
-            return
-        if moveToSpecificPosition(delta, Vector3(6, 6, 0), 2):
-            boss_phase = BossPhase.REEL_IT_IN
-            return
-        lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
-    elif boss_phase == BossPhase.REEL_IT_IN:
-        if lureFreeRange.hooked:
-            lure_bullet_direction_vector = Vector3(0, BULLET_SPEED/2, 0)
-            if lureFreeRange.hookTarget != null and lureFreeRange.hookTarget.get_ref() != null:
-                if lureFreeRange.hookTarget.get_ref() == level.player:
-                    unenemize()
+            secretAniPlayer.play("fadeToBlack")
+            behavior_walking = false
+            boss_phase = BossPhase.HIDING_WITH_DUPLICATES
+            which_three = []
+            crystalLandings.shuffle()
+            which_three.push_back(crystalLandings[0])
+            which_three.push_back(crystalLandings[1])
+            which_three.push_back(crystalLandings[2])
+    elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
+        unenemize()
+        if which_three.size() > 0:
+            idle_timer += (delta*11)
+            if idle_timer >= crystal_appear_time_limit:
+                idle_timer = 0
+                var crystalLanding = which_three.pop_back()
+                if which_three.size() == 0:
+                    global_transform.origin = crystalLanding.global_transform.origin
+                    global_transform.origin.x += 6
+                    global_transform.origin.y -= 1.5
                 else:
-                    unenemize()
-                    preyTarget = weakref(lureFreeRange.hookTarget.get_ref())
-                    lureFreeRange.hooked = false
-                    lureFreeRange.restorePlayer(true)
-                    lureFreeRange.hookTarget = null
-                    preyTarget.get_ref().grav = 0
-                    preyTarget.get_ref().behavior_walking = false
-                    secretAniPlayer.stop()
-                    secretAniPlayer.clear_queue()
-                    secretAniPlayer.play("stunFall")
-                    evolveSound.play()
-                    gotcha()
-        else:
-            lure_bullet_direction_vector = Vector3(0, BULLET_SPEED, 0)
+                    var newFakeCrystal = crystalGeodeRes.instance()
+                    newFakeCrystal.is_fake = true
+                    fakeCrystalContainer.add_child(newFakeCrystal)
+                    newFakeCrystal.global_transform.origin = crystalLanding.global_transform.origin
 
-        # var pos = reelStopArea.global_transform.origin
-        # var lure_pos = lureFreeRange.global_transform.origin
-        lureFreeRange.global_transform.origin += lure_bullet_direction_vector * delta
-
-        if lureFreeRange.hookInteractionArea.overlaps_area(reelStopArea) or lureFreeRange.global_transform.origin.y > global_transform.origin.y + 2.5:
-            boss_phase = BossPhase.EAT_IT
+        if cubeCrystal.meshInstance1.visible:
+            cubeCrystal.meshInstance1.visible = false
+            boss_phase = BossPhase.IDLE
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            lure_bullet_direction_vector = null
-            if lureFreeRange.hookTarget != null and lureFreeRange.hookTarget.get_ref() != null:
-                preyTarget = weakref(lureFreeRange.hookTarget.get_ref())
-                lureFreeRange.hooked = false
-                lureFreeRange.restorePlayer(true)
-                lureFreeRange.hookTarget = null
-                if preyTarget.get_ref() == level.player:
-                    secretAniPlayer.play("chompDown")
-                    weakPointAniPlayer.stop()
-                    weakPointAniPlayer.clear_queue()
-                    weakPointAniPlayer.play("chompDown")
-                else:
-                    secretAniPlayer.play("chompDownQuick")
-                    preyTarget.get_ref().grav = 0
-                    preyTarget.get_ref().behavior_walking = false
-            else:
-                secretAniPlayer.play("idle")
-                weakPointAniPlayer.stop()
-                weakPointAniPlayer.clear_queue()
-                weakPointAniPlayer.play("idle")
-                boss_phase = BossPhase.IDLE
-                cast_timer = 0
+            secretAniPlayer.play("fadeFromBlack")
+            secretAniPlayer.queue("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
+
+            var fakeCrystals = fakeCrystalContainer.get_children()
+            for fakeCrystal in fakeCrystals:
+                fakeCrystalContainer.remove_child(fakeCrystal)
+                fakeCrystal.queue_free()
+            
+
     elif boss_phase == BossPhase.EAT_IT:
         if preyTarget != null and preyTarget.get_ref() != null:
             var prey = preyTarget.get_ref()
-            # lureFreeRange.global_transform.origin.y = prey.global_transform.origin.y
             if prey == level.player:
                 level.player.hv = Vector3(0, 0, 0)
                 level.player.dir = Vector3(0.0, 0.0, 0.0)
@@ -255,8 +189,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
             boss_phase = BossPhase.IDLE
-            cast_timer = 0
-            lureFreeRange.visible = true
+            idle_timer = 0
     elif boss_phase == BossPhase.STUN_FALL:
         grav = 60
         on_ground = false
@@ -276,7 +209,7 @@ func _process(delta):
         if stun_timer >= stun_time_limit:
             stun_timer = 0
             boss_phase = BossPhase.IDLE
-            cast_timer = 0
+            idle_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idle")
@@ -298,13 +231,9 @@ func _process(delta):
         # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
         #     pass
         # self.rotation_degrees.y += delta*22
-            
-    
-    if boss_phase != BossPhase.EAT_IT:
-        lureFreeRange.global_transform.origin.x = lureContainer.global_transform.origin.x
-    lureFreeRange.global_transform.origin.z = 0
+    cubeCrystal.meshInstance1.visible = false
 
-func startBossFight(_was_player_caught):
+func startBossFight():
     if boss_phase != BossPhase.LYING_IN_WAIT:
         return false
     level.player.aniPlayer.stop()
@@ -325,63 +254,14 @@ func startBossFight(_was_player_caught):
     level.gameCamera.initial_size = 30
     level.gameCamera.zoomed_size = 30
 
-var lure_up_down_dir = Vector2(0, -1)
-func lureMatchPlayerY(delta):
-    # don't actually match player Y
-    # var step = 1
-    # var lerpedY = lureFreeRange.global_transform.origin.y
-    # var playerY = level.player.global_transform.origin.y
-    # lerpedY = lerpedY + (playerY - lerpedY) * (delta*step)
-    # lureFreeRange.global_transform.origin.y = lerpedY
-    var bottom_length = lureContainer.global_transform.origin.y - 12
-    var top_length = lureContainer.global_transform.origin.y - 6
-    var speed = 1
-    if lure_up_down_dir.y < 0:
-        lureFreeRange.global_transform.origin.y -= (speed * delta * 11)
-        if lureFreeRange.global_transform.origin.y <= bottom_length:
-            lureFreeRange.global_transform.origin.y = bottom_length
-            lure_up_down_dir.y = 1
-    elif lure_up_down_dir.y > 0:
-        lureFreeRange.global_transform.origin.y += (speed * delta * 11)
-        if lureFreeRange.global_transform.origin.y >= top_length:
-            lureFreeRange.global_transform.origin.y = top_length
-            lure_up_down_dir.y = -1
-
-
-
-func tryFlipLeft(nextIdle = "openIdle"):
-    if secretAniPlayer.assigned_animation != "turnRightToLeft" and secretAniPlayer.assigned_animation != "openIdle":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        which_facing = -1
-        secretAniPlayer.play("turnRightToLeft")
-        secretAniPlayer.queue(nextIdle)
-        weakPointAniPlayer.stop()
-        weakPointAniPlayer.clear_queue()
-        weakPointAniPlayer.play("turnRightToLeft")
-        if nextIdle == "idle":
-            weakPointAniPlayer.queue(nextIdle)
-
-func tryFlipRight():
-    if secretAniPlayer.assigned_animation != "turnLeftToRight" and secretAniPlayer.assigned_animation != "openIdle":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("turnLeftToRight")
-        which_facing = 1
-        secretAniPlayer.queue("openIdle")
-
 func teleportToPrey():
     if preyTarget != null and preyTarget.get_ref() != null:
         var prey = preyTarget.get_ref()
-        if which_facing == -1:
-            global_transform.origin = prey.global_transform.origin + Vector3(2, -0.361, 0)
-        else:
-            global_transform.origin = prey.global_transform.origin + Vector3(-2, -0.361, 0)
+        global_transform.origin = prey.global_transform.origin + Vector3(2, -0.361, 0)
 
 func gotcha():
     if preyTarget != null and preyTarget.get_ref() != null:
         var prey = preyTarget.get_ref()
-        lureFreeRange.visible = false
         if prey == level.player:
             if level.player.malware_infected:
                 boss_phase = BossPhase.STUN_FALL
@@ -391,7 +271,6 @@ func gotcha():
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
                 level.player.on_ground = false
-                lureFreeRange.restorePlayer(false)
                 level.player.on_ground = false
                 level.player.bigBump()
                 # level.player.malwareCured()
@@ -405,29 +284,6 @@ func gotcha():
                 level.player.visible = true
                 level.player.pauseInput = false
     preyTarget = null
-
-func doLureCast():
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
-    secretAniPlayer.play("openUp")
-    secretAniPlayer.queue("openIdle")
-    boss_phase = BossPhase.CAST_LURE
-    # var player_pos = level.player.global_transform.origin
-    # var lure_pos = lureContainer.global_transform.origin
-    lure_bullet_direction_vector = Vector3(0, -BULLET_SPEED, 0)
-
-func lureBulletTryDieToSolids():
-    if boss_phase != BossPhase.CAST_LURE:
-        return
-
-    var x = lureFreeRange.global_transform.origin.x
-    var y = lureFreeRange.global_transform.origin.y
-    
-    var coords_a = getLevelTiles().world_to_map(Vector3(x, y, 0))
-    var tile_type_a = getLevelTiles().get_cell_item(coords_a.x, coords_a.y, coords_a.z)
-
-    if getLevelTiles().isTileSolid(tile_type_a):
-        boss_phase = BossPhase.REEL_IT_IN
 
 
 func moveAbout(delta, moveTheBaby = false):
@@ -490,23 +346,11 @@ func getSmacked(broom_origin = null, silently = false):
     secretAniPlayer.clear_queue()
     lure_bullet_direction_vector = null
     preyTarget = weakref(level.player)
-    # lureFreeRange.hooked = false
-    # lureFreeRange.restorePlayer(true)
-    # lureFreeRange.hookTarget = null
     secretAniPlayer.play("chompDown")
     weakPointAniPlayer.stop()
     weakPointAniPlayer.clear_queue()
     weakPointAniPlayer.play("chompDown")
     return false
-    # bubbleHP -= 1
-    # if bubbleHP <= 0:
-    #     bubbleHP = 5
-    #     boss_phase = BossPhase.STUN_FALL
-    #     unenemize()
-    #     secretAniPlayer.stop()
-    #     secretAniPlayer.clear_queue()
-    #     secretAniPlayer.play("stunFall")
-    #     tryToStartWeakPointDetachment()
     
 
 func tryToStartWeakPointDetachment():
@@ -573,8 +417,6 @@ func defeatMe():
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
 
-    if lureFreeRange.get_parent() == lureContainer:
-        var temp = lureFreeRange.global_transform.origin
-        lureContainer.remove_child(lureFreeRange)
-        level.add_child(lureFreeRange)
-        lureFreeRange.global_transform.origin = temp
+# @override
+func actuallyDieToOffscreenCamera(_delta):
+  pass

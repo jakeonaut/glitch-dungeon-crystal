@@ -12,6 +12,10 @@ func isActive(_debug=false):
 func glitchSetSpritesAndCollision():
   return false
 
+# @override
+func actuallyDieToOffscreenCamera(_delta):
+  pass
+
 func getSmacked(broom_origin = null, silently = false):
   if anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE:
     notDieSound.play()

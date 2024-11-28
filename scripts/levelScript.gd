@@ -793,6 +793,8 @@ func flipGravity(specific_dir = null):
     player.grav = -player.PLAYER_GRAV
   elif specific_dir == null:
     player.grav = -1 * player.PLAYER_GRAV
+  else:
+    player.grav = specific_dir
   if player.grav >= 0:
     global.memory["grav_direction"] = 1
   elif player.grav < 0:

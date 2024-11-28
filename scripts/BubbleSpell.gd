@@ -88,9 +88,9 @@ func _process(delta):
     if can_purify:
       hitStuff(delta)
       
-    pop_timer += (delta*22)
-    if pop_timer >= pop_time_limit:
-      bubbleStartPop()
+    # pop_timer += (delta*22)
+    # if pop_timer >= pop_time_limit:
+    #   bubbleStartPop()
 
     if is_horizontal:
       global_transform.origin.x += delta*my_speed*horizontal_direction
@@ -139,7 +139,7 @@ func passiveActivate(_delta, is_player):
   if not is_player and not global.memory["broom"]:
     return
 
-  if getPlayer().transformation == getPlayer().TransformationState.FISHY:
+  if getPlayer().transformation == getPlayer().TransformationState.FISHY or getPlayer().pressingDown():
     return  
   if getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground:
     getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y

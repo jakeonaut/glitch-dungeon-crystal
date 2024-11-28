@@ -421,24 +421,25 @@ func alignMySprite():
 func glitchSetSpritesAndCollision():
     mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
 
+var should_smack_pause_me = true
 # @override
 func pressingMoveLeft():
-    if am_i_dying or am_i_freezing or is_smacked: return false
+    if am_i_dying or am_i_freezing or (is_smacked and should_smack_pause_me): return false
     return walk_direction.x == -1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func pressingMoveRight():
-    if am_i_dying or am_i_freezing or is_smacked: return false
+    if am_i_dying or am_i_freezing or (is_smacked and should_smack_pause_me): return false
     return walk_direction.x == 1 and (behavior_walking or (behavior_was_thrown and not on_ground))
 
 # @override
 func justPressedJump():
-    if am_i_dying or am_i_freezing or is_smacked: return false
+    if am_i_dying or am_i_freezing or (is_smacked and should_smack_pause_me): return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override
 func pressingJump():
-    if am_i_dying or am_i_freezing or is_smacked: return false
+    if am_i_dying or am_i_freezing or (is_smacked and should_smack_pause_me): return false
     return behavior_jumping or (behavior_walking and walk_direction.y == 1)
 
 # @override

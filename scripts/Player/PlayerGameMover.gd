@@ -271,6 +271,7 @@ func normalGlitch():
   # mySprite.setNormalClothes()
 
 onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
+onready var bubbleSprite = get_node("SpriteContainer/InnerSpriteContainer/BubbleSprite")
 onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
 onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var moleSprite = get_node("SpriteContainer/InnerSpriteContainer/MoleSprite")

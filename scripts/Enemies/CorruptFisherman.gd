@@ -11,6 +11,7 @@ export var has_a_key = false
 func _ready():
   set_process(true)
 
+  fishingRod.max_speed = 6
   if global.has_revealed_an_angler_fish:
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -24,7 +25,6 @@ func _process(_delta):
     return
 
   is_hook_got_something = fishingRod.hookTarget != null
-  fishingRod.max_speed = 6
 
   if not gulping:
     if not am_revealed:
@@ -104,6 +104,7 @@ func otherPassiveActivate(_delta, gameMover):
     hurtMyToofAnimation.length = 2.1
   secretAniPlayer.play("hurtMyToof")
   secretAniPlayer.queue("cry")
+  fishingRod.max_speed = 12
   global.has_revealed_an_angler_fish = true
   gameMover.visible = false
   gameMover.physics_state = gameMover.PhysicsState.IGNORE_PHYSICS

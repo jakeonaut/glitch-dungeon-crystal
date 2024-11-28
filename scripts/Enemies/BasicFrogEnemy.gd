@@ -45,6 +45,7 @@ func _ready():
     tongueSprite4.set_material_override(tongueSpriteMaterial)
 
   smallInteractionArea.add_to_group("no_pushems")
+  should_smack_pause_me = false
 
 func setAsParent(_owner):
   behavior_jumping = true

@@ -52,20 +52,20 @@ func _ready():
         level.purifyAllFragileBrickSolids(false)
         queue_free()
         # musicPlayer.changeSongPitch(1.0)
-    elif global.memory["priestess"] >= 2: # and global.memory["glitched_grimoire"]:
-        global.setStaticLevelZoneLevelVar(level, self, true)
-        global.memory["clean_crystals"] += 1
-        global.setLevelZoneThing("crystal_geode", true)
-        is_purified = true
-        visible = false
-        # lightAniPlayer.play("lightUpQuiet")
-        yield(get_tree().create_timer(0.1), "timeout")
-        freeUpPlayer()
-        getLevelTiles().purifyAllSpikes()
-        level.purifyAllWeakEnemies(false)
-        level.purifyAllFragileBrickSolids(false)
-        queue_free()
-        # musicPlayer.changeSongPitch(1.0)
+    # elif global.memory["priestess"] >= 2: # and global.memory["glitched_grimoire"]:
+    #     global.setStaticLevelZoneLevelVar(level, self, true)
+    #     global.memory["clean_crystals"] += 1
+    #     global.setLevelZoneThing("crystal_geode", true)
+    #     is_purified = true
+    #     visible = false
+    #     # lightAniPlayer.play("lightUpQuiet")
+    #     yield(get_tree().create_timer(0.1), "timeout")
+    #     freeUpPlayer()
+    #     getLevelTiles().purifyAllSpikes()
+    #     level.purifyAllWeakEnemies(false)
+    #     level.purifyAllFragileBrickSolids(false)
+    #     queue_free()
+    #     # musicPlayer.changeSongPitch(1.0)
     else:
         lightAniPlayer.play("RESET")    
     # if global.hasGottenLevelGeode:
@@ -121,13 +121,18 @@ func stopAnimation():
 var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 3
+var is_fake = false
 func getSmacked(_broom_origin):
     if is_smacked:
         return
     is_smacked = true
     smack_timer = 0
 
-    if is_purified:
+    if is_fake:
+        lightAniPlayer.stop()
+        lightAniPlayer.clear_queue()
+        lightAniPlayer.play("omen")
+    elif is_purified:
         getHitSound.play()
         level.player.glitch_death_timer = 8
         level.player.glitchTickle()
@@ -232,7 +237,7 @@ export var spawn_an_elder = true
 func freeUpPlayer():
     is_active = false
 
-    if not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
+    if is_fake or not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
         return
 
     level.player.physics_state = level.player.PhysicsState.NORMAL

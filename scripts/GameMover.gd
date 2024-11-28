@@ -444,14 +444,16 @@ func createG(delta):
     else:
       g = Vector3(0, -grav/1.5, 0)
   else:
-    if pressingDown():
+    if pressingDown() or glitch_form == global.GlitchForm.LADDER:
       g = Vector3(0, -grav*2, 0)
     else:
       g = Vector3(0, -grav, 0)
       
-
+var override_terminal_vel = null
 func applyTerminalVelocity(_delta):
-  if is_touching_water:
+  if override_terminal_vel != null:
+    terminal_vel = override_terminal_vel
+  elif is_touching_water:
     if not was_touching_water:
       terminal_vel = hit_water_terminal_vel
     elif is_touching_waterfall:
@@ -474,6 +476,8 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel * .75
     else:
       terminal_vel = true_terminal_vel / 2
+  elif glitch_form == global.GlitchForm.LADDER:
+    terminal_vel = true_terminal_vel * 1.5
   # elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
   #   terminal_vel = true_terminal_vel * 1.5
   else:

@@ -4,6 +4,11 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var transformSound = get_node("TransformSound")
 onready var fadeAwaySound = get_node("FadeAwaySound")
+onready var sprite3D1 = get_node("Sprite3D")
+onready var sprite3D2 = get_node("Sprite3D2")
+onready var sprite3D3 = get_node("Sprite3D3")
+onready var sprite3D4 = get_node("Sprite3D4")
+onready var sprite3D5 = get_node("Sprite3D5")
 var original_position = null
 var previous_point = null
 var interpolation_point = null
@@ -25,6 +30,12 @@ func _ready():
     original_position = global_transform.origin
     previous_point = original_position
     interpolation_point = Vector3(original_position.x, original_position.y + 1, original_position.z)
+    var newMaterial = sprite3D1.material_override.duplicate()
+    sprite3D1.material_override = newMaterial
+    sprite3D2.material_override = newMaterial
+    sprite3D3.material_override = newMaterial
+    sprite3D4.material_override = newMaterial
+    sprite3D5.material_override = newMaterial
 
 func _process(_delta):
     pass

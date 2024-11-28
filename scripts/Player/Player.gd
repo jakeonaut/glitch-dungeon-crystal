@@ -26,7 +26,6 @@ onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
-onready var bubbleSprite = get_node("BubbleSprite")
 var malwareBugSpriteRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.tscn")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
@@ -426,11 +425,6 @@ func _process(delta):
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL
 
-  bubbleSprite.visible = transformation == TransformationState.BUBBLE
-  if transformation == TransformationState.BUBBLE:
-    if (horizontal_collision or on_ground or justPressedJump()) and physics_state != PhysicsState.GLITCH_DYING:
-      getBubbleCured()
-
   if global.isPauseMenuOpen:
     return
 
@@ -468,6 +462,7 @@ func _process(delta):
 
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     return
+  processBubbleLogic(delta)
   processBeingTossedLogic(delta)
   processTeleportationLogic(delta)
   processCastingLogic(delta)
@@ -598,6 +593,19 @@ func unsmack():
       spawnASpore(self.global_transform.origin, false)
     teleport_timer = 0
     has_teleported = false
+
+func processBubbleLogic(_delta):
+  bubbleSprite.visible = transformation == TransformationState.BUBBLE
+  if transformation == TransformationState.BUBBLE:
+    if (horizontal_collision or on_ground or justPressedJump()) and physics_state != PhysicsState.GLITCH_DYING:
+      getBubbleCured()
+    else:
+      if glitch_form == global.GlitchForm.LADDER:
+        override_terminal_vel = 4
+        level.flipGravity(1)
+      else:
+        override_terminal_vel = null
+        level.flipGravity(-1)
 
 func processBeingTossedLogic(_delta):
   if physics_state == PhysicsState.BEING_TOSSED and not "tumble" in aniPlayer.assigned_animation:
@@ -1117,6 +1125,7 @@ func getBubbleCured():
   aniPlayer.clear_queue()
   aniPlayer.queue("land")
   pauseAnimation = false
+  override_terminal_vel = null
 
   getABroom()
   level.flipGravity(1)

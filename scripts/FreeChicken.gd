@@ -30,6 +30,7 @@ func _ready():
     set_process(true)
     initial_grav = grav
     initial_true_terminal_vel = true_terminal_vel
+    should_smack_pause_me = false
 
 func _process(delta):
     # ._process(delta) implicit
