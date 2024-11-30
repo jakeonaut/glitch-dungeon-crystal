@@ -31,6 +31,16 @@ uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
 
+// Glitch intensity
+uniform float shake_power_3d = 0.5;
+// Probability
+uniform float shake_rate : hint_range(0.0, 1.0) = 0.5;
+uniform float shake_speed = 5.0;
+// Hard to describe, change it and monitor result
+uniform float shake_block_size_3d = 30.5;
+uniform float shake_color_rate_3d : hint_range(0.0, 1.0) = 0.5;
+varying float enable_shift;
+
 vec3 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
     vec3 closest_color = vec3(0, 1.0, 0);
@@ -63,8 +73,18 @@ vec3 getpalettecolor(int x) {
     return texelFetch(real_base_palette, coord, 0).rgb;
 }
 
+float random3d(float seed) {
+    return fract(sin(seed * 12345.678) * 43758.5453);
+}
+
 void vertex() {
     UV=UV*vec3(3, 2, 3).xy+vec3(0, 0, 0).xy;
+    float adjusted_time = mod(TIME, 5.0);
+
+    enable_shift = float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);
+
+    float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
+    VERTEX.x += offset_x;
 }
 
 float Convert_sRGB_FromLinear (float theLinearValue) {
@@ -90,6 +110,7 @@ float random2( vec2 p )
 const float canvas_width = 2560.0;
 const float canvas_height = 2048.0;
 const float matrixSize = 4.0;
+
 void fragment() {
     // vec4 incolor = texture(texture_albedo, UV);
     // float fdelta = mod(256.0 * Convert_sRGB_FromLinear(incolor.r), 16.0);
@@ -109,6 +130,7 @@ void fragment() {
     if (alpha == 0.0) {
       incolor = vec4(4.0/256.0, 4.0/256.0, 4.0/256.0, 1.0);
     }
+    
     vec2 uv = UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
     float x = uv.x;
     float y = uv.y;
@@ -165,12 +187,30 @@ void fragment() {
         vec2 fixed_uv = UV;
         fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
         fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+
+        // hi!!!!
+        float adjusted_time = mod(TIME, 5.0);
+        fixed_uv.x += (
+            random3d((trunc(UV.y * shake_block_size_3d) / shake_block_size_3d) + adjusted_time) - 0.5
+        ) * shake_power_3d * enable_shift;
     
         vec4 alp = texture(texture_albedo, fixed_uv);
 
         if (enable_color_glitch) {
             closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
             closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
+            
+            // hi!!!! 2
+            closest_color.r = mix(
+                closest_color.r,
+                texture(texture_albedo, fixed_uv + vec2(shake_color_rate_3d, 0.0)).r,
+                enable_shift
+            );
+            closest_color.b = mix(
+                closest_color.b,
+                texture(texture_albedo, fixed_uv + vec2(-shake_color_rate_3d, 0.0)).b,
+                enable_shift
+            );
         }
         ALBEDO.rgb = closest_color.rgb;
         if (!enable_no_transparency) {
