@@ -31,6 +31,17 @@ uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
 
+// Glitch intensity
+uniform bool enable_glitch_3d = false;
+uniform float shake_power_3d = 0.5;
+// Probability
+uniform float shake_rate : hint_range(0.0, 1.0) = 0.5;
+uniform float shake_speed = 5.0;
+// Hard to describe, change it and monitor result
+uniform float shake_block_size_3d = 30.5;
+uniform float shake_color_rate_3d : hint_range(0.0, 1.0) = 0.5;
+varying float enable_shift;
+
 vec4 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
     vec4 closest_color = vec4(0, 1.0, 0, 1.0);
@@ -67,6 +78,11 @@ float random(float seed) {
   return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
 }
 
+
+float random3d(float seed) {
+    return fract(sin(seed * 12345.678) * 43758.5453);
+}
+
 uniform float normal_offset : hint_range(0, 1, 0.01) = 0.00;
 uniform float time_influence : hint_range(0, 50) = 0;
 uniform float y_div : hint_range(0, 10, .1) = 0;
@@ -75,6 +91,13 @@ void vertex() {
     VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
     VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
     VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+
+    float adjusted_time = mod(TIME, 5.0);
+
+    enable_shift = float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);
+
+    float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
+    VERTEX.x += offset_x;
 }
 
 const float canvas_width = 2560.0;
@@ -152,12 +175,34 @@ void fragment() {
         vec2 fixed_uv = UV;
         fixed_uv.x += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
         fixed_uv.y += (random((trunc(ALBEDO.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power;
+
+        if (enable_glitch_3d) {
+          // hi!!!!
+          float adjusted_time = mod(TIME, 5.0);
+          fixed_uv.x += (
+              random3d((trunc(UV.y * shake_block_size_3d) / shake_block_size_3d) + adjusted_time) - 0.5
+          ) * shake_power_3d * enable_shift;
+        }
     
         vec4 alp = texture(texture_albedo, fixed_uv);
 
         if (enable_color_glitch) {
             closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
             closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
+
+            if (enable_glitch_3d) {
+              // hi!!!! 2
+              closest_color.r = mix(
+                  closest_color.r,
+                  texture(texture_albedo, fixed_uv + vec2(shake_color_rate_3d, 0.0)).r,
+                  enable_shift
+              );
+              closest_color.b = mix(
+                  closest_color.b,
+                  texture(texture_albedo, fixed_uv + vec2(-shake_color_rate_3d, 0.0)).b,
+                  enable_shift
+              );
+            }
         }
         ALBEDO.rgb = closest_color.rgb;
         if (!enable_no_transparency) {
