@@ -335,7 +335,7 @@ func landed():
 
 func isTextboxPausingMe():
    # and not global.activeInteractor.is_tiny
-   return global.activeInteractor != null and global.activeInteractor.am_i_a_textbox
+   return false # global.activeInteractor != null and global.activeInteractor.am_i_a_textbox
 
 # @override
 func justPressedDown():
