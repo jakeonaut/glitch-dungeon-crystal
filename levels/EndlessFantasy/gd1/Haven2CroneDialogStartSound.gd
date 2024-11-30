@@ -26,7 +26,7 @@ func activateScript():
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true
   else:
-    var text = "•keeheehee\nyou've taken all I can offer\n•please, purify the crystals" if not isElderTadpole else "•your broom is very mighty!\nplease find mother's dreams.\nso we may awaken her."
+    var text = "•this tower will unlock when\nyou've awoken 3 crystals\nit holds some strong magic." if not isElderTadpole else "•your broom is very mighty!\nplease wake my other sisters.\nso that we may resurrect Her."
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

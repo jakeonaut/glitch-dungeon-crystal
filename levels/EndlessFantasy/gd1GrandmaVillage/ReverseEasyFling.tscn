@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelFlute.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=23]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=24]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=25]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=27]
@@ -1992,6 +1993,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -6.59195, 0 )
 
 [node name="AngelFlute" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.49353, -7, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 28, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
 

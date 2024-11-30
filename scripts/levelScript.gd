@@ -251,6 +251,7 @@ func processPauseMenu():
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
           uiLayer.pauseMenu.selectedGlitchSprite = -1
           uiLayer.pauseMenu.inventoryOptionIndex = 4 if Input.is_action_pressed("open_map") and global.memory["has_map_item"] else 0
+          uiLayer.pauseMenu.mapRect.rect_scale = Vector2(1, 1)
           uiLayer.pauseMenu.inventoryOptionIndexX = 0
           global.isPauseMenuOpen = true
           global.pauseGame = true

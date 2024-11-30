@@ -2006,6 +2006,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.0
 shader_param/time_influence = 0.0
 shader_param/y_div = 0.0
@@ -2039,6 +2045,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -2215,6 +2227,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -5910,6 +5928,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.0
 shader_param/y_div = 2.87
@@ -5939,6 +5963,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.0
 shader_param/y_div = 2.87
@@ -6312,7 +6342,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6087, 4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 5.0454, 0 )
 visible = false
 grav = 0
-bbText = "•oh, my dear hag,
+bbText = "•keeheehee •oh, my dear hag,
 you've made an old crone
 very happy!
 •the purified crystals
@@ -6397,13 +6427,19 @@ transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -1.42658, 0 )
 high_priestess_crystal = true
 spawn_an_elder = false
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 222 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 223 )
+
+[node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="Sprite3D" parent="Viewport/level/CubeCrystal/NPC" index="0"]
 frame = 54
@@ -6412,8 +6448,11 @@ frame = 54
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal2" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 224 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
@@ -6435,8 +6474,11 @@ anims/omen = SubResource( 82 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal3" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
@@ -6458,8 +6500,11 @@ anims/omen = SubResource( 96 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal4" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -6481,8 +6526,11 @@ anims/omen = SubResource( 107 )
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7, -16, 0 )
 high_priestess_crystal = true
 
+[node name="CubeContainer" parent="Viewport/level/CubeCrystal5" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]

@@ -429,6 +429,7 @@ func processHiscoreRenderLogic(delta):
     global.pauseMoveInput = false
     global.pauseGame = false
     level.player.pauseSelf = false
+    global.shouldRenderAsCinematic = false
     var babushkaCatFollower = level.get_node("PetBabushkaCatFollower")
     if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
       babushkaCatFollower.popFromFollowers()

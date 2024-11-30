@@ -19,7 +19,7 @@ onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
 onready var shardsText = get_node("InventoryRect/ShardsText")
 onready var mapRect = get_node("MapRect")
-onready var mapTitleRect = get_node("InventoryRect/MapTitleRect")
+onready var mapTitleRect = get_node("MapRect/MapTitleRect")
 onready var mapColorRect1 = get_node("MapRect/ColorRect")
 onready var mapColorRect2 = get_node("MapRect/ColorRect/ColorRect")
 onready var mapBackgroundSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite")
@@ -85,13 +85,20 @@ func _process(delta):
       if not has_drawn_map:
         processInventoryRender(delta)
         tryDrawMap()
-      mapRect.visible = true
-      mapRect.rect_position = Vector2(140, -10)
-      mapRect.rect_scale = Vector2(2, 2)
-      mapRect.color = Color("#00000000")
-      mapColorRect1.color = Color("#00000000")
-      mapColorRect2.color = Color("#00000000")
-      mapBackgroundSprite.modulate = Color("#c8ffffff")
+      # mapRect.visible = true
+      # mapRect.rect_position = Vector2(140, -10)
+      # mapRect.rect_scale = Vector2(2, 2)
+      # mapRect.color = Color("#00000000")
+      # mapColorRect1.color = Color("#00000000")
+      # mapColorRect2.color = Color("#00000000")
+      # mapBackgroundSprite.modulate = Color("#c8ffffff")
+      mapTitleRect.visible = false
+      mapRect.rect_position = Vector2(225, 60)
+      mapRect.rect_scale = Vector2(1.5, 1.5)
+      mapRect.color = Color("#040404")
+      mapColorRect1.color = Color("#394c62")
+      mapColorRect2.color = Color("#040404")
+      mapBackgroundSprite.modulate = Color("#ffffff")
       # mapBackgroundSprite.self_modulate = Color("#80ffffff")
 
     pauseTitleRect.visible = false
@@ -106,10 +113,11 @@ func _process(delta):
     return
 
   self.visible = global.isPauseMenuOpen
-  if mapRect.rect_scale.x == 2:
+  if (mapRect.rect_scale.x == 1.5 and inventoryOptionIndex != 4) or (mapRect.rect_scale.x == 1 and inventoryOptionIndex == 4):
+    mapTitleRect.visible = inventoryOptionIndex != 4
     pauseTitleRect.visible = true
-    mapRect.rect_position = Vector2(450, 131)
-    mapRect.rect_scale = Vector2(1, 1)
+    mapRect.rect_position = Vector2(450, 131) if inventoryOptionIndex != 4 else Vector2(225, 30)
+    mapRect.rect_scale = Vector2(1, 1) if inventoryOptionIndex != 4 else Vector2(1.5, 1.5)
     mapRect.color = Color("#040404")
     mapColorRect1.color = Color("#394c62")
     mapColorRect2.color = Color("#040404")
@@ -207,7 +215,7 @@ func _process(delta):
     processInventoryLogic(delta)
     inventoryRect.visible = true
     mapRect.visible = global.memory["has_map_item"]
-    mapTitleRect.visible = mapRect.visible
+    mapTitleRect.visible = mapRect.visible and inventoryOptionIndex != 4
   else:
     inventoryRect.visible = false
     mapRect.visible = false
@@ -240,7 +248,7 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n"
+  pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
 
   if shouldUpdateMenuText:
     var text = ""
@@ -487,7 +495,7 @@ func processInventoryLogic(delta):
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
     pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
   else:
-    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume"
+    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
   if selectedGlitchSprite >= 0:
@@ -1202,26 +1210,26 @@ func initializeControlsConfig():
       "button_index": JOY_L, 
       "default_button_index": JOY_L, 
     },
-    {
-      "input_action": "spell_1",
-      "label_str": "spell 1",
-      "default_keyCode": 49, 
-    },
-    {
-      "input_action": "spell_2",
-      "label_str": "spell 2",
-      "default_keyCode": 50, 
-    },
-    {
-      "input_action": "spell_3",
-      "label_str": "spell 3",
-      "default_keyCode": 51, 
-    },
-    {
-      "input_action": "spell_4",
-      "label_str": "spell 4",
-      "default_keyCode": 52, 
-    },
+    # {
+    #   "input_action": "spell_1",
+    #   "label_str": "spell 1",
+    #   "default_keyCode": 49, 
+    # },
+    # {
+    #   "input_action": "spell_2",
+    #   "label_str": "spell 2",
+    #   "default_keyCode": 50, 
+    # },
+    # {
+    #   "input_action": "spell_3",
+    #   "label_str": "spell 3",
+    #   "default_keyCode": 51, 
+    # },
+    # {
+    #   "input_action": "spell_4",
+    #   "label_str": "spell 4",
+    #   "default_keyCode": 52, 
+    # },
     {
       "input_action": "open_map",
       "label_str": "open map",
@@ -1248,11 +1256,26 @@ func initializeControlsConfig():
 
   controlsConfig = newControlsConfig
 
+func getVisibleControlsConfig():
+  var visibleControlsConfig = []
+  for controlConfig in controlsConfig:
+    var whichInput = controlConfig["input_action"]
+    if whichInput == "restart_key" and not global.memory["can_force_respawn"]:
+      continue
+    if (whichInput == "alt_action_button" or whichInput == "left_button") and not global.memory.has("spellbookPage"):
+      continue
+    if whichInput == "open_map" and not global.memory["has_map_item"]:
+      continue
+    visibleControlsConfig.push_back(controlConfig)
+  return visibleControlsConfig
+
 onready var inputLabelTextLabel = get_node("InputMenu/ScrollContainer/InputLabels")
 onready var buttonInputTextLabel = get_node("InputMenu/ScrollContainer/ButtonInputs")
 func processControlsLogic(_delta):
+  var tempControlsConfig = getVisibleControlsConfig()
+
   if global.is_reading_input:
-    pauseTitleText.bbcode_text = "press key to set \"" + str(controlsConfig[control_index].label_str) + "\""
+    pauseTitleText.bbcode_text = "press key to set \"" + str(tempControlsConfig[control_index].label_str) + "\""
   else:
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
       pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
@@ -1264,18 +1287,18 @@ func processControlsLogic(_delta):
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         var keyCodeString = OS.get_scancode_string(global.last_read_input)
         if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "BackSpace":
-          controlsConfig[control_index].key_code = global.last_read_input
-          global.setKeyCode(controlsConfig[control_index].input_action, global.last_read_input)
-          global.userSettings["controls_config"] = controlsConfig
+          tempControlsConfig[control_index].key_code = global.last_read_input
+          global.setKeyCode(tempControlsConfig[control_index].input_action, global.last_read_input)
+          global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false
           global.is_reading_keyboard_input = false
           last_control_index = -1
           level.saveUserSettings()
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         if global.last_read_input != JOY_START:
-          controlsConfig[control_index].button_index = global.last_read_input
-          global.setButtonIndex(controlsConfig[control_index].input_action, global.last_read_input)
-          global.userSettings["controls_config"] = controlsConfig
+          tempControlsConfig[control_index].button_index = global.last_read_input
+          global.setButtonIndex(tempControlsConfig[control_index].input_action, global.last_read_input)
+          global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false
           global.is_reading_controller_input = false
           last_control_index = -1
@@ -1299,8 +1322,8 @@ func processControlsLogic(_delta):
       pauseMenuState = PauseMenuState.TOP_INPUT
       shouldUpdateMenuText = true
 
-  var showCondensedMenu = pauseMenuState == PauseMenuState.KEYBOARD_INPUT
-  var properSize = controlsConfig.size() if showCondensedMenu else controlsConfig.size() - 5
+  var showCondensedMenu = true
+  var properSize = tempControlsConfig.size()
   if control_index < 0:
     control_index = properSize - 1
   if control_index >= properSize:
@@ -1311,11 +1334,11 @@ func processControlsLogic(_delta):
     cursorSprite.position.y = 114 + (44*control_index)
 
   var inputLabelText = ""
-  if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+  if showCondensedMenu:
     inputLabelText = "[font=res://pauseMenuFontInputCondensed.tres]"
   var buttonInputText = "[font=res://pauseMenuFontInputCondensed.tres][center]"
   for i in range(properSize):
-    var controlConfig = controlsConfig[i]
+    var controlConfig = tempControlsConfig[i]
     if control_index == i:
       var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:

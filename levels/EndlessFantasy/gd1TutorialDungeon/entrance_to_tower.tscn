@@ -54,7 +54,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="Shader" id=78]
+[sub_resource type="Shader" id=283]
 code = "shader_type spatial;
 render_mode specular_schlick_ggx;
 
@@ -98,7 +98,7 @@ void light() {
 }"
 
 [sub_resource type="ShaderMaterial" id=79]
-shader = SubResource( 78 )
+shader = SubResource( 283 )
 shader_param/HowShiny = 2.0
 shader_param/Roughness = 0.2
 shader_param/alpha2 = 0.5
@@ -131,6 +131,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -331,7 +337,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -12.6945, -1, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
-num_keys_unlock = 4
+num_keys_unlock = 3
 key_type = 5
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
@@ -352,18 +358,13 @@ shape = SubResource( 271 )
 [node name="MeshInstance2" parent="Viewport/level/Door2" index="18"]
 visible = true
 
-[node name="MeshInstance3" type="MeshInstance" parent="Viewport/level/Door2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 6.23508, -0.0808809 )
-material_override = SubResource( 79 )
-mesh = ExtResource( 24 )
-
 [node name="MeshInstance4" type="MeshInstance" parent="Viewport/level/Door2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 1.33333, 4.90174, -0.0808809 )
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 1.33333, 5.56841, -0.0808809 )
 material_override = SubResource( 79 )
 mesh = ExtResource( 24 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Viewport/level/Door2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 4.90174, -0.0808809 )
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 5.56841, -0.0808809 )
 material_override = SubResource( 79 )
 mesh = ExtResource( 24 )
 
@@ -400,9 +401,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.38303, -1 )
 
 [node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6351, 3.1759, 0 )
-bbText = "•you seem to have some
-[color=red]hag magic[/color]... I can enchant
-your broom with shards"
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.20448, 0 )

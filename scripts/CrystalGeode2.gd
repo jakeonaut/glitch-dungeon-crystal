@@ -186,6 +186,7 @@ func getPurified():
     level.player.pauseInput = true
     global.pauseMoveInput = true
     global.pauseGame = true
+    global.shouldRenderAsCinematic = true
     # level.levelTiles.randomize_num += 10
     # level.levelTiles.randomize_num_counter = 15
     is_purified = true
