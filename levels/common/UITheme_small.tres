@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=3 format=2]
 
-[ext_resource path="res://assets/fonts/Jamma 8x8.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Pixeletter.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=1]
-size = 12
+size = 18
 outline_size = 3
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true

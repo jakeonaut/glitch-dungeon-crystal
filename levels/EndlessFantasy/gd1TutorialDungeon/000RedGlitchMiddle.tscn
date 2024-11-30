@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sprites2D/floorPillar.PNG" type="Texture" id=11]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=16]
@@ -184,19 +185,24 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.9, 0 )
 grav = 0
-bbText = "•this magic pillar will give
-you the [color=#ff0000]Air Walk[/color] spell:
+bbText = "•touch magic pillar to learn
+the [color=#ff0000]Air Walk[/color] spell:
 walk without falling down"
 can_camera_zoom = false
 is_a_body = false
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
+
+[node name="TextSprite" type="Sprite" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="1"]
+position = Vector2( 960, 96 )
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 11 )
 
 [node name="AnimationPlayer" parent="Viewport/level/NPC" index="4"]
 anims/default = SubResource( 21 )

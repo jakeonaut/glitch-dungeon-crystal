@@ -3,6 +3,7 @@ extends TextureRect
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
 onready var textNode = get_node("TextCanvasLayer/Container/ScrollContainer/Text")
+onready var textSprite = get_node("TextCanvasLayer/Container/ScrollContainer/TextSprite") if has_node("TextCanvasLayer/Container/ScrollContainer/TextSprite") else null
 onready var textNodeCanvasLayer = get_node("TextCanvasLayer")
 onready var textNodeCanvasLayerContainer = get_node("TextCanvasLayer/Container")
 onready var dialogStartSound = get_node("DialogStartSound")
@@ -98,6 +99,7 @@ func _ready():
   yield(get_tree().create_timer(0.1), "timeout")
   nextPrompt.visible = false
   endPrompt.visible = false
+  if textSprite: textSprite.visible = false
 
 var bg_texture = null
 func tinify():
@@ -362,9 +364,11 @@ func showTextbox(wasSmacked = false):
 
   textNode.scroll_to_line(0)
   if wasSmacked and smackedBbText != null and smackedBbText != "":
+    if textSprite: textSprite.visible = false
     textNode.bbcode_text = smackedBbText
     showYesNoOptions = false
   else:
+    if textSprite: textSprite.visible = true
     textNode.bbcode_text = text_final
   tindex = -1
   stripped_text = global.strip_bbcode(textNode.bbcode_text)
@@ -411,6 +415,7 @@ func showTextbox(wasSmacked = false):
     resetPrompts()
     
 func hideTextbox():
+  if textSprite: textSprite.visible = false
   yesButton.visible = false
   noButton.visible = false
   hideMe()

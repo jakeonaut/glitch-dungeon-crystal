@@ -96,8 +96,10 @@ void vertex() {
 
     enable_shift = float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);
 
-    float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
-    VERTEX.x += offset_x;
+    if (enable_glitch_3d) {
+        float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
+        VERTEX.x += offset_x;
+    }
 }
 
 const float canvas_width = 2560.0;
