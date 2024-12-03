@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites2D/jpetscii.png" type="Texture" id=19]
 [ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=20]
+[ext_resource path="res://assets/fonts/Pixeletter.ttf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=22]
 [ext_resource path="res://shaders/Sprite2DPaletteShader.shader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes2D/white_palette.png" type="Texture" id=24]
@@ -86,6 +87,19 @@ shader_param/palette_out = ExtResource( 24 )
 
 [sub_resource type="CanvasItemMaterial" id=62]
 
+[sub_resource type="DynamicFont" id=69]
+size = 18
+outline_size = 1
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+extra_spacing_top = 2
+extra_spacing_bottom = 8
+extra_spacing_char = 1
+extra_spacing_space = 1
+font_data = ExtResource( 21 )
+
+[sub_resource type="Theme" id=70]
+default_font = SubResource( 69 )
+
 [node name="PauseMenu" type="Control"]
 margin_left = -86.0
 margin_right = 640.0
@@ -93,6 +107,7 @@ margin_bottom = 522.0
 script = ExtResource( 16 )
 
 [node name="PauseMenuRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 86.0
 margin_right = 726.0
 margin_bottom = 522.0
@@ -164,6 +179,7 @@ grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="NormalMenu" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -2186,15 +2202,15 @@ max_frames = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+scale = Vector2( 1.5, 1.5 )
+transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
 
 [node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-margin_left = 69.5
+margin_left = 70.0
 margin_top = 213.0
-margin_right = 441.5
-margin_bottom = 313.0
+margin_right = 367.0
+margin_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -2202,8 +2218,8 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 368.0
-margin_bottom = 96.0
+margin_right = 292.0
+margin_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -2214,23 +2230,20 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 361.0
-margin_bottom = 89.0
+margin_right = 284.0
+margin_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PopupRect/ColorRect/ColorRect"]
 margin_left = 11.0
 margin_top = 3.0
-margin_right = 394.0
+margin_right = 280.0
 margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource( 8 )
+theme = SubResource( 70 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "the dungeon"

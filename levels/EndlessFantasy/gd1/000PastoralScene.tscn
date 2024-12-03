@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=2]
+[gd_scene load_steps=207 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -54,14 +54,16 @@
 [ext_resource path="res://assets/tower.png" type="Texture" id=52]
 [ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=53]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=54]
-[ext_resource path="res://assets/sprites2D/Chara_sheet.png" type="Texture" id=55]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=56]
 [ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=57]
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=59]
 [ext_resource path="res://assets/fonts/High_Birth.ttf" type="DynamicFontData" id=60]
+[ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=61]
+[ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=62]
 [ext_resource path="res://assets/fonts/VGATypewriterSf.ttf" type="DynamicFontData" id=63]
 [ext_resource path="res://assets/sprites2D/caution.png" type="Texture" id=64]
+[ext_resource path="res://canvas.png" type="Texture" id=65]
 
 [sub_resource type="CanvasItemMaterial" id=257]
 blend_mode = 3
@@ -2043,6 +2045,41 @@ resource_name = "walk"
 [sub_resource type="Animation" id=324]
 resource_name = "walkStart"
 
+[sub_resource type="ShaderMaterial" id=326]
+shader = ExtResource( 17 )
+shader_param/albedo = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/opacity = 0.75
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 62 )
+shader_param/base_palette = ExtResource( 18 )
+shader_param/target_palette = ExtResource( 61 )
+
 [sub_resource type="ViewportTexture" id=69]
 viewport_path = NodePath("Viewport")
 
@@ -2174,7 +2211,7 @@ tracks/1/keys = {
 [sub_resource type="ViewportTexture" id=235]
 viewport_path = NodePath("UILayer/GlitchStatusRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=325]
+[sub_resource type="ArrayMesh" id=327]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2228,14 +2265,6 @@ material = SubResource( 257 )
 position = Vector2( 660, 510 )
 scale = Vector2( 1.3125, 1.63871 )
 texture = ExtResource( 51 )
-
-[node name="LogoSprite" type="Sprite" parent="Sprite"]
-position = Vector2( -276.571, 140.354 )
-scale = Vector2( 1.12162, 0.918307 )
-texture = ExtResource( 39 )
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Viewport" parent="." instance=ExtResource( 15 )]
 
@@ -2406,6 +2435,7 @@ pitch_scale = 0.9
 script = ExtResource( 40 )
 
 [node name="Sprite3D" parent="Viewport/level/BabushkaCat" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 4 )
 material_override = SubResource( 71 )
 frame = 16
 automatically_change_color = false
@@ -2473,7 +2503,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.8, -0.4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.2, 1.7, 0 )
 
 [node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 36 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2, 13.5627, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2933, -13.4373, 0 )
 
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 56.2, -4.3, -0.209856 )
@@ -2639,9 +2669,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 7.27493, 0 )
 
 [node name="FreeChicken5" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.411366, 0 )
-
-[node name="FreeChicken8" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0.383184, 0 )
 
 [node name="FreeChicken2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.52752, 0 )
@@ -2842,6 +2869,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17, 0 )
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC6/FallthroughSolid" index="0"]
 shape = SubResource( 283 )
 
+[node name="OverlayRect" type="Sprite3D" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1 )
+material_override = SubResource( 326 )
+pixel_size = 10.0
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 65 )
+hframes = 8
+vframes = 8
+
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -2889,10 +2927,7 @@ __meta__ = {
 texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 325 )
-
-[node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+mesh = SubResource( 327 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
@@ -2967,31 +3002,21 @@ text = "x"
 [node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 319.0
 margin_top = 351.0
-margin_right = 554.0
-margin_bottom = 503.0
+margin_right = 494.0
+margin_bottom = 517.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_clip_content = false
 theme = SubResource( 190 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "1: [wave][color=gray]It's[/color][/wave]
-2: [color=gray]Babushka[/color]
-3: [color=gray]time[/color]"
-text = "1: It's
-2: Babushka
-3: time"
+bbcode_text = "[color=gray]1: [wave]File 1[/wave]
+2: Empty
+3: Empty[/color]"
+text = "1: File 1
+2: Empty
+3: Empty"
 scroll_active = false
-
-[node name="DeleteSprite" type="Sprite" parent="UILayer/MainMenu"]
-position = Vector2( 611, 526 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 55 )
-hframes = 13
-vframes = 7
-frame = 52
-script = ExtResource( 24 )
-frame_delay = 0.2
-should_randomize_frame_delay = true
 
 [node name="PressC" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 12.0

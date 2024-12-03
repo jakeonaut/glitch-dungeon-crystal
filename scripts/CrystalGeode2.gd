@@ -40,6 +40,7 @@ func getLevelTiles():
 func _ready():
     set_process(true)
 
+    meshInstance2.mesh = meshInstance2.mesh.duplicate()
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
     if getMyStaticLevelZoneVar():
@@ -122,6 +123,14 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 3
 var is_fake = false
+
+func fakify():
+    is_fake = true
+    yield(TempTimer.idle_frame(self), "timeout")
+    lightAniPlayer.stop()
+    lightAniPlayer.clear_queue()
+    lightAniPlayer.play("fadeIn")
+
 func getSmacked(_broom_origin):
     if is_smacked:
         return
@@ -131,7 +140,7 @@ func getSmacked(_broom_origin):
     if is_fake:
         lightAniPlayer.stop()
         lightAniPlayer.clear_queue()
-        lightAniPlayer.play("omen")
+        lightAniPlayer.play("fakeBreak")
     elif is_purified:
         getHitSound.play()
         level.player.glitch_death_timer = 8

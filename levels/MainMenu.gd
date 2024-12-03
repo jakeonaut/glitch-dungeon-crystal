@@ -54,6 +54,7 @@ func setUpRoomInitializationOverride():
         epilepsyWarning.visible = false
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
+        overlayRect.visible = false
         mainMenuUi.visible = false
         show_dither_effect = false
         show_crt_effect = true
@@ -82,6 +83,7 @@ onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
+onready var overlayRect = get_node("OverlayRect")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
 onready var cameraTarget = get_node("cameraTarget")
@@ -110,6 +112,7 @@ func startGame(saveGameIndex):
     global.isRespawning = true
     return
   logoSprite.visible = false
+  overlayRect.visible = false
   mainMenuUi.visible = false
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()

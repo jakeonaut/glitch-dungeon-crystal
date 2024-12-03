@@ -174,7 +174,6 @@ func tryInitializeFromDebug():
     else:
       player.applyGlitch(starting_glitch_type)
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
-      global.memory["priestess"] = 2
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR]
 

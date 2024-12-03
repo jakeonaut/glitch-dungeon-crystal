@@ -136,7 +136,8 @@ num_keys_unlock = 1
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, 12, 0 )
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 11, 0 )
+grav = 0
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

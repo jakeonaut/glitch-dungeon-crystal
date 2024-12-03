@@ -6,6 +6,7 @@ enum BubbleFishState {
     IDLE,
     PUFFED_UP_IDLE,
     SPITTING_BUBBLE,
+    SPITTING_BUBBLE_CLOSE,
     BLOW_UP,
 }
 var bubble_fish_state = BubbleFishState.PUFFED_UP_IDLE
@@ -55,6 +56,9 @@ func _process(delta):
       BubbleFishState.SPITTING_BUBBLE:
         setAnimationAndChangeStateWhenItEnds("spitBubble", BubbleFishState.IDLE)
         idle_blow_up_timer = 0
+      BubbleFishState.SPITTING_BUBBLE:
+        setAnimationAndChangeStateWhenItEnds("spitBubble", BubbleFishState.IDLE)
+        idle_blow_up_timer = 0
       BubbleFishState.BLOW_UP:
         setAnimationAndChangeStateWhenItEnds("blowUp", BubbleFishState.PUFFED_UP_IDLE)
 
@@ -85,19 +89,25 @@ func randomizeTargetPos():
 func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
   if bubble_fish_state == BubbleFishState.PUFFED_UP_IDLE:
-    bubble_fish_state = BubbleFishState.SPITTING_BUBBLE
+    if global.memory["broom"]:
+      bubble_fish_state = BubbleFishState.SPITTING_BUBBLE_CLOSE
+    else:
+      bubble_fish_state = BubbleFishState.SPITTING_BUBBLE
     return true
   return false
 
 func spitBubble():
-  var bigBubbleSpell = bigBubbleRes.instance()
-  level.add_child(bigBubbleSpell)
-  bigBubbleSpell.global_transform.origin = self.global_transform.origin
-  bigBubbleSpell.global_transform.origin.y -= 0.5
-  if myOtherSprite.flip_h:
-    bigBubbleSpell.global_transform.origin.x -= 2
+  if bubble_fish_state == BubbleFishState.SPITTING_BUBBLE_CLOSE:
+    level.player.getBubbleInfected()
   else:
-    bigBubbleSpell.global_transform.origin.x += 2
-  bigBubbleSpell.my_parent = self
-  bigBubbleSpell.my_original_pos = bigBubbleSpell.global_transform.origin.x
-  bigBubbleSpell.randomizeTargetPos()
+    var bigBubbleSpell = bigBubbleRes.instance()
+    level.add_child(bigBubbleSpell)
+    bigBubbleSpell.global_transform.origin = self.global_transform.origin
+    bigBubbleSpell.global_transform.origin.y -= 0.5
+    if myOtherSprite.flip_h:
+      bigBubbleSpell.global_transform.origin.x -= 2
+    else:
+      bigBubbleSpell.global_transform.origin.x += 2
+    bigBubbleSpell.my_parent = self
+    bigBubbleSpell.my_original_pos = bigBubbleSpell.global_transform.origin.x
+    bigBubbleSpell.randomizeTargetPos()

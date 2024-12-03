@@ -303,6 +303,8 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
 
 # @override
 func activate(_is_player):
+  if is_extra_bouncy:
+    return false
   if global.activeInteractor == null:
     should_big_bump = false
     physics_state = PhysicsState.NORMAL

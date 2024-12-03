@@ -57,10 +57,16 @@ func _ready():
     crystalLandings = level.get_tree().get_nodes_in_group("crystal_landing")
 
     behavior_phase_through_walls = true
-    walk_speed = 16
+    walk_speed = 32
 
     self.remove_child(fakeCrystalContainer)
     level.add_child(fakeCrystalContainer)
+
+# @override
+func unsmack():
+    .unsmack()
+    if boss_phase == BossPhase.STUN_FALL:
+        grav = 60
 
 var preyTarget = null
 func _process(delta):
@@ -84,6 +90,8 @@ func _process(delta):
             weakPointAniPlayer.stop()
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
+            level.restartMusic()
+            level.uiLayer.setDisplayTitle("Warty sea devil")
             # cubeCrystal.applyGlitchMaterial(5)
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
@@ -127,13 +135,21 @@ func _process(delta):
         if idle_timer >= charging_time_limit:
             idle_timer = 0
             boss_phase = BossPhase.CHARGING
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("charging")
     elif boss_phase == BossPhase.CHARGING:
         behavior_walking = true
         walk_direction.x = -1
         # this is stupid and specific to the level I'm in... oh well
-        if global_transform.origin.x < 30:
+        if global_transform.origin.x < 28 and num_hits == 0:
             behavior_walking = false
+            dir = Vector3(0, 0, 0)
+            lv.x = 0
+            linear_velocity.x = 0
+            hv = Vector3(0, 0, 0)
             boss_phase = BossPhase.STUN_FALL
+            level.player.bumpSound.play()
             unenemize()
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -141,17 +157,21 @@ func _process(delta):
             tryToStartWeakPointDetachment()
             # level.player.malwareCured()
             getSmacked()
-        # if global_transform.origin.x < 16.134:
-        #     secretAniPlayer.stop()
-        #     secretAniPlayer.clear_queue()
-        #     secretAniPlayer.play("fadeToBlack")
-        #     behavior_walking = false
-        #     boss_phase = BossPhase.HIDING_WITH_DUPLICATES
-        #     which_three = []
-        #     crystalLandings.shuffle()
-        #     which_three.push_back(crystalLandings[0])
-        #     which_three.push_back(crystalLandings[1])
-        #     which_three.push_back(crystalLandings[2])
+        elif global_transform.origin.x < 16.134 and num_hits == 1:
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("fadeToBlack")
+            behavior_walking = false
+            dir = Vector3(0, 0, 0)
+            lv.x = 0
+            linear_velocity.x = 0
+            hv = Vector3(0, 0, 0)
+            boss_phase = BossPhase.HIDING_WITH_DUPLICATES
+            which_three = []
+            crystalLandings.shuffle()
+            which_three.push_back(crystalLandings[0])
+            which_three.push_back(crystalLandings[1])
+            which_three.push_back(crystalLandings[2])
     elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
         behavior_walking = false
         unenemize()
@@ -166,7 +186,7 @@ func _process(delta):
                     global_transform.origin.y -= 1.5
                 else:
                     var newFakeCrystal = crystalGeodeRes.instance()
-                    newFakeCrystal.is_fake = true
+                    newFakeCrystal.fakify()
                     fakeCrystalContainer.add_child(newFakeCrystal)
                     newFakeCrystal.global_transform.origin = crystalLanding.global_transform.origin
 
@@ -176,10 +196,18 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("fadeFromBlack")
-            secretAniPlayer.queue("idle")
-            weakPointAniPlayer.stop()
-            weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("idle")
+            secretAniPlayer.queue("stunFall")
+            behavior_walking = false
+            dir = Vector3(0, 0, 0)
+            lv.x = 0
+            linear_velocity.x = 0
+            hv = Vector3(0, 0, 0)
+            boss_phase = BossPhase.STUN_FALL
+            unenemize()
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("stunFall")
+            tryToStartWeakPointDetachment()
 
             var fakeCrystals = fakeCrystalContainer.get_children()
             for fakeCrystal in fakeCrystals:
@@ -215,7 +243,6 @@ func _process(delta):
             idle_timer = 0
     elif boss_phase == BossPhase.STUN_FALL:
         behavior_walking = false
-        grav = 60
         on_ground = false
         if global_transform.origin.y <= -30:
             grav = 0
@@ -278,6 +305,7 @@ func startBossFight():
     if level.player.summonedBroom:
         level.player.broomStop()
 
+    musicPlayer.stopAll()
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
     secretAniPlayer.stop()
@@ -310,26 +338,12 @@ func gotcha():
     if preyTarget != null and preyTarget.get_ref() != null:
         var prey = preyTarget.get_ref()
         if prey == level.player:
-            if level.player.malware_infected:
-                boss_phase = BossPhase.STUN_FALL
-                unenemize()
-                secretAniPlayer.stop()
-                secretAniPlayer.clear_queue()
-                secretAniPlayer.play("stunFall")
-                tryToStartWeakPointDetachment()
-                level.player.on_ground = false
-                level.player.on_ground = false
-                level.player.bigBump()
-                # level.player.malwareCured()
-                level.player.pauseInput = false
-                level.player.on_ground = false
-            else:
-                level.player.tryDieToEnemy(0, true, true, true)
-                yield(get_tree().create_timer(0.1), "timeout")
-                level.player.visible = false
-                yield(get_tree().create_timer(0.4), "timeout")
-                level.player.visible = true
-                level.player.pauseInput = false
+            level.player.tryDieToEnemy(0, true, true, true)
+            yield(get_tree().create_timer(0.1), "timeout")
+            level.player.visible = false
+            yield(get_tree().create_timer(0.4), "timeout")
+            level.player.visible = true
+            level.player.pauseInput = false
     preyTarget = null
 
 
@@ -382,37 +396,37 @@ func getSmacked(broom_origin = null, silently = false):
     if boss_phase == BossPhase.LYING_IN_WAIT or boss_phase == BossPhase.EAT_IT:
         return false
 
-    if boss_phase == BossPhase.STUN_FALL or boss_phase == BossPhase.STUN_IDLE:
-        time_influence = 35
-        y_div = 5
-        normal_offset = 0.5
-        return .getSmacked(broom_origin, silently)
+    # if boss_phase == BossPhase.STUN_FALL or boss_phase == BossPhase.STUN_IDLE:
+    time_influence = 35
+    y_div = 5
+    normal_offset = 0.5
+    return .getSmacked(broom_origin, silently)
 
-    boss_phase = BossPhase.EAT_IT
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
-    lure_bullet_direction_vector = null
-    preyTarget = weakref(level.player)
-    secretAniPlayer.play("chompDown")
-    weakPointAniPlayer.stop()
-    weakPointAniPlayer.clear_queue()
-    weakPointAniPlayer.play("chompDown")
-    return false
+    # boss_phase = BossPhase.EAT_IT
+    # secretAniPlayer.stop()
+    # secretAniPlayer.clear_queue()
+    # lure_bullet_direction_vector = null
+    # preyTarget = weakref(level.player)
+    # secretAniPlayer.play("chompDown")
+    # weakPointAniPlayer.stop()
+    # weakPointAniPlayer.clear_queue()
+    # weakPointAniPlayer.play("chompDown")
+    # return false
     
 
 func tryToStartWeakPointDetachment():
-    if num_hits <= 0:
-        if weakPointAniPlayer.assigned_animation != "ouchies" and weakPointAniPlayer.assigned_animation != "stunIdleAttached":
-            weakPointAniPlayer.stop()
-            weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("ouchies")
-            weakPointAniPlayer.queue("stunIdleAttached")
-        return
-    if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
+    # if num_hits <= 0:
+    if weakPointAniPlayer.assigned_animation != "ouchies" and weakPointAniPlayer.assigned_animation != "stunIdleAttached":
         weakPointAniPlayer.stop()
         weakPointAniPlayer.clear_queue()
-        weakPointAniPlayer.play("detachSelf")
-        weakPointAniPlayer.queue("stunIdle")
+        weakPointAniPlayer.play("ouchies")
+        weakPointAniPlayer.queue("stunIdleAttached")
+    return
+    # if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
+    #     weakPointAniPlayer.stop()
+    #     weakPointAniPlayer.clear_queue()
+    #     weakPointAniPlayer.play("detachSelf")
+    #     weakPointAniPlayer.queue("stunIdle")
 
 func makeWeakPointVulnerable():
     weakPointContainer.vulnerable = true

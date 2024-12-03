@@ -307,6 +307,10 @@ func iJustPressedDown():
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 # @override
+func pressingRun():
+  return level.player.pressingRun()
+
+# @override
 func unenemize():
   if smallInteractionArea.is_in_group("enemies"):
     smallInteractionArea.remove_from_group("enemies")

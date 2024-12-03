@@ -209,8 +209,8 @@ func restoreGlitchAndMP():
   
 
 func applyGlitch(glitch, notPlaySound = false):
-  if returning_to_save_point > 0:
-    return false
+  # if returning_to_save_point > 0:
+  #   return false
   glitchTilesAroundMe(0.25, true)
   nullifySound.stop()
   if not notPlaySound:

@@ -482,6 +482,10 @@ func displayMessageText(message):
 func setDisplayTitle(title):
   display_title = title
   levelTitleRect.get_node("RichTextLabel").bbcode_text = ("[center][wave amp=50 freq=2]" + title + "[/wave][/center]")
+  title_display_timer = 0
+  title_display_state = 0
+  levelTitleRect.rect_pivot_offset = levelTitleRect.rect_size / 2
+  levelTitleRect.rect_scale = Vector2(0, 1)
 
 onready var glitchSpriteContainer = get_node("GlitchSpriteColorRect")
 onready var glitchSprite = get_node("GlitchSpriteColorRect/ColorRect2/ColorRect3/GlitchSprite")
