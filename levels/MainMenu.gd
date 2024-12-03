@@ -304,9 +304,9 @@ func _process(delta):
         if mainMenuState == MainMenuState.MAIN_MENU_TRY_QUIT_GAME:
             pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
         else:
-            var secondPartTemp = global.getInputText("menu_delete") + ": delete file       "
+            var secondPartTemp = global.getInputText("menu_delete") + ": delete file  "
             var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[s][color=gray]" + secondPartTemp + "[/color][/s]")
-            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_confirm") + " to start              " + second_part + "[/right]"
+            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_confirm") + " to start    " + second_part + "[/right]"
         optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
@@ -323,7 +323,7 @@ func _process(delta):
         if updateMenuText:
             menuText.bbcode_text = ""
             for i in range(global.save_game_files.size()):
-                if i != 0: menuText.bbcode_text += "\n\n"
+                if i != 0: menuText.bbcode_text += "\n"
 
                 var fileText = ("File " + str(i+1)) if global.doesSaveGameExist(i) else "[color=gray]Empty[/color]"
                 if mainMenuPromptIndex == i:

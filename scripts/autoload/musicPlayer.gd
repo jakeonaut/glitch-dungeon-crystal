@@ -155,13 +155,13 @@ func conductFromScenePath(path):
             default_song_pitch = 1.0
             return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
-        tryToPlay(poisonThemePlayer)
+        tryToPlay(townThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
     elif path.find("Haven") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
-        tryToPlay(forestMarchThemePlayer)
+        tryToPlay(poisonThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:
@@ -206,7 +206,7 @@ func conductFromScenePath(path):
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
-        tryToPlay(dungeonThemePlayer2)
+        tryToPlay(dungeonThemePlayer)
     else:
         self.stopAll()
     if global.memory["priestess"] >= 2:

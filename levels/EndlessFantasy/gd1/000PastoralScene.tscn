@@ -1,4 +1,4 @@
-[gd_scene load_steps=203 format=2]
+[gd_scene load_steps=204 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=10]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=12]
-[ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=14]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=16]
@@ -59,6 +59,7 @@
 [ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=57]
 [ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=59]
+[ext_resource path="res://assets/fonts/High_Birth.ttf" type="DynamicFontData" id=60]
 [ext_resource path="res://assets/fonts/VGATypewriterSf.ttf" type="DynamicFontData" id=63]
 [ext_resource path="res://assets/sprites2D/caution.png" type="Texture" id=64]
 
@@ -2191,9 +2192,8 @@ size = 24
 outline_size = 2
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 13 )
+extra_spacing_bottom = 6
+font_data = ExtResource( 60 )
 
 [sub_resource type="Theme" id=190]
 default_font = SubResource( 281 )
@@ -2201,7 +2201,6 @@ default_font = SubResource( 281 )
 [sub_resource type="CanvasItemMaterial" id=191]
 
 [sub_resource type="DynamicFont" id=231]
-size = 24
 outline_size = 2
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
@@ -2893,7 +2892,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 325 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
@@ -2967,23 +2966,19 @@ text = "x"
 
 [node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 319.0
-margin_top = 354.0
+margin_top = 351.0
 margin_right = 554.0
-margin_bottom = 502.0
+margin_bottom = 503.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 190 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "1: [wave][color=gray]It's[/color][/wave]
-
 2: [color=gray]Babushka[/color]
-
 3: [color=gray]time[/color]"
 text = "1: It's
-
 2: Babushka
-
 3: time"
 scroll_active = false
 
@@ -3009,8 +3004,8 @@ size_flags_horizontal = 3
 theme = SubResource( 232 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]press  [font=res://DarkInputFont_small.tres]x[/font] to start                [font=res://DarkInputFont_small.tres]c[/font]: delete file       [/right]"
-text = "press  x to start                c: delete file       "
+bbcode_text = "[right]press [font=res://DarkInputFont_small.tres]x[/font] to start   [font=res://DarkInputFont_small.tres]c[/font]:delete file   [/right]"
+text = "press x to start   c:delete file   "
 scroll_active = false
 
 [node name="OptionsMenuPrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
@@ -3020,7 +3015,7 @@ margin_right = 454.5
 margin_bottom = 172.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource( 21 )
+theme = SubResource( 232 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"

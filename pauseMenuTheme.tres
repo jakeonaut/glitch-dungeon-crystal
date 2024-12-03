@@ -1,14 +1,12 @@
 [gd_resource type="Theme" load_steps=3 format=2]
 
-[ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/High_Birth.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=60]
-size = 36
-outline_size = 3
+size = 40
+outline_size = 1
 outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
 font_data = ExtResource( 1 )
 
 [resource]

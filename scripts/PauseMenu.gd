@@ -258,12 +258,12 @@ func processNormalLogic(_delta):
         if global.memory["demo_mode"] >= 2:
           text += "[wave]" + str(option) + "[/wave]\n" 
         else:
-          text += "[wave]" + str(option) + "[/wave]\n\n" 
+          text += "[wave]" + str(option) + "[/wave]\n" 
       else:
         if global.memory["demo_mode"] >= 2:
           text += "[color=gray]" + str(option) + "[/color]\n" 
         else:
-          text += "[color=gray]" + str(option) + "[/color]\n\n" 
+          text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -332,9 +332,9 @@ func processGraphicsLogic(_delta):
       if i == 3: option += ("ON" if OS.window_fullscreen else "OFF")
 
       if i == graphicsOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        text += "[wave]" + str(option) + "[/wave]\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -392,9 +392,9 @@ func processSoundLogic(_delta):
       if i == 1: option += ("ON" if global.userSettings["canChangeSongPitch"] else "OFF")
 
       if i == soundOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        text += "[wave]" + str(option) + "[/wave]\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -442,9 +442,9 @@ func processQuitToMainLogic(_delta):
     for i in range(len(quitToMainOptions)):
       var option = quitToMainOptions[i]
       if i == quitToMainOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        text += "[wave]" + str(option) + "[/wave]\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
@@ -1116,9 +1116,9 @@ func processTopInputLogic(_delta):
       var option = topInputOptions[i]
 
       if i == topInputOptionIndex:
-        text += "[wave]" + str(option) + "[/wave]\n\n" 
+        text += "[wave]" + str(option) + "[/wave]\n" 
       else:
-        text += "[color=gray]" + str(option) + "[/color]\n\n" 
+        text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
