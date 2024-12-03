@@ -170,6 +170,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.0
 shader_param/time_influence = 0.0
 shader_param/y_div = 0.0
@@ -311,6 +317,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 1.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.0
 shader_param/time_influence = 0.0
 shader_param/y_div = 0.0
@@ -741,33 +753,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 1, 0 )
 [node name="miniCubeCrystal17" parent="Viewport/level/miniCrystalCubes" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 2, 0 )
 
-[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -31, 0 )
-
-[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -31, 0 )
-
-[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -31, 0 )
-
-[node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -29, 0 )
-
-[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -27, 0 )
-
-[node name="GlitchEnemy7" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -29, 0 )
-
-[node name="GlitchEnemy8" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -27, 0 )
-
-[node name="GlitchEnemy9" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -29, 0 )
-
-[node name="GlitchEnemy10" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -27, 0 )
-
 [node name="GlitchFish" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0 )
 grav = 0
@@ -841,6 +826,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57, -31, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -37, 0 )
+
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -8, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 34 )]
 

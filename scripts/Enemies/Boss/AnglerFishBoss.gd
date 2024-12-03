@@ -1,6 +1,5 @@
 extends "../GlitchEnemy.gd"
 
-var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
@@ -9,6 +8,8 @@ onready var fakeCrystalContainer = get_node("FakeCrystals")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 onready var weakPointTarget = get_node("WeakPointTarget")
+var glitchHermitCrabManagerRes = preload("res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn")
+var spawnedHermitCrabManagers = []
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 
 var num_hits = 0
@@ -20,6 +21,7 @@ enum BossPhase {
     WAKING_UP,
     PREPARING_CHARGE,
     CHARGING,
+    BARFING_SNAILS,
     HIDING_WITH_DUPLICATES,
     EAT_IT,
     STUN_FALL,
@@ -96,14 +98,23 @@ func _process(delta):
 
     if boss_phase == BossPhase.IDLE:
         weakPointContainer.vulnerable = false
-        if target_pos != null and not (secretAniPlayer.assigned_animation == "gotHurt" and secretAniPlayer.is_playing()):
+        if target_pos != null:
             moveAbout(delta)
         idle_timer += (delta*11)
-        if idle_timer >= 10:
-            reenemize()
         if idle_timer >= idle_time_limit:
             idle_timer = 0
             boss_phase = BossPhase.PREPARING_CHARGE
+    elif boss_phase == BossPhase.BARFING_SNAILS:
+        weakPointContainer.vulnerable = false
+        moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1, false)
+        if "barfingSnails" in secretAniPlayer.assigned_animation and not secretAniPlayer.is_playing():
+            boss_phase = BossPhase.IDLE
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idle")
+            weakPointAniPlayer.stop()
+            weakPointAniPlayer.clear_queue()
+            weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.PREPARING_CHARGE:
         if secretAniPlayer.assigned_animation != "openUp" and secretAniPlayer.assigned_animation != "openIdle":
             secretAniPlayer.stop()
@@ -120,18 +131,29 @@ func _process(delta):
         behavior_walking = true
         walk_direction.x = -1
         # this is stupid and specific to the level I'm in... oh well
-        if global_transform.origin.x < 16.134:
+        if global_transform.origin.x < 30:
+            behavior_walking = false
+            boss_phase = BossPhase.STUN_FALL
+            unenemize()
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("fadeToBlack")
-            behavior_walking = false
-            boss_phase = BossPhase.HIDING_WITH_DUPLICATES
-            which_three = []
-            crystalLandings.shuffle()
-            which_three.push_back(crystalLandings[0])
-            which_three.push_back(crystalLandings[1])
-            which_three.push_back(crystalLandings[2])
+            secretAniPlayer.play("stunFall")
+            tryToStartWeakPointDetachment()
+            # level.player.malwareCured()
+            getSmacked()
+        # if global_transform.origin.x < 16.134:
+        #     secretAniPlayer.stop()
+        #     secretAniPlayer.clear_queue()
+        #     secretAniPlayer.play("fadeToBlack")
+        #     behavior_walking = false
+        #     boss_phase = BossPhase.HIDING_WITH_DUPLICATES
+        #     which_three = []
+        #     crystalLandings.shuffle()
+        #     which_three.push_back(crystalLandings[0])
+        #     which_three.push_back(crystalLandings[1])
+        #     which_three.push_back(crystalLandings[2])
     elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
+        behavior_walking = false
         unenemize()
         if which_three.size() > 0:
             idle_timer += (delta*11)
@@ -166,6 +188,7 @@ func _process(delta):
             
 
     elif boss_phase == BossPhase.EAT_IT:
+        behavior_walking = false
         if preyTarget != null and preyTarget.get_ref() != null:
             var prey = preyTarget.get_ref()
             if prey == level.player:
@@ -191,11 +214,15 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
             idle_timer = 0
     elif boss_phase == BossPhase.STUN_FALL:
+        behavior_walking = false
         grav = 60
         on_ground = false
-        if global_transform.origin.y <= -5:
+        if global_transform.origin.y <= -30:
             grav = 0
-            global_transform.origin.y = -5
+            linear_velocity.y = 0
+            lv.y = 0
+            vv = 0
+            global_transform.origin.y = -30
             boss_phase = BossPhase.STUN_IDLE
             level.player.bumpSound.play()
             secretAniPlayer.stop()
@@ -217,15 +244,24 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
-        global_transform.origin.y += (delta*11)
+        moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
         if not secretAniPlayer.is_playing():
-            boss_phase = BossPhase.IDLE
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("idle")
-            weakPointAniPlayer.stop()
-            weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("idle")
+            if num_hits <= 2:
+                boss_phase = BossPhase.BARFING_SNAILS
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("barfingSnails")
+                weakPointAniPlayer.stop()
+                weakPointAniPlayer.clear_queue()
+                weakPointAniPlayer.play("idle")
+            else:
+                boss_phase = BossPhase.IDLE
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("idle")
+                weakPointAniPlayer.stop()
+                weakPointAniPlayer.clear_queue()
+                weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.DEFEATED:
         moveToSpecificPosition(delta, Vector3(6, 6, 0))
         # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
@@ -247,12 +283,23 @@ func startBossFight():
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("fadeFromBlack")
-    secretAniPlayer.queue("2secondPause")
-    secretAniPlayer.queue("openUp")
-    secretAniPlayer.queue("2secondPause")
+    secretAniPlayer.queue("openAndScream")
     boss_phase = BossPhase.WAKING_UP
     level.gameCamera.initial_size = 30
     level.gameCamera.zoomed_size = 30
+
+func barfRandomSnail():
+    if num_hits <= spawnedHermitCrabManagers.size():
+        return
+
+    var newHermitCrabManager = glitchHermitCrabManagerRes.instance()
+    level.add_child(newHermitCrabManager)
+    yield(TempTimer.idle_frame(self), "timeout")
+    newHermitCrabManager.scale = Vector3(1.5, 1.5, 1.5)
+    newHermitCrabManager.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
+    newHermitCrabManager.hermitCrabShell.get_ref().is_extra_bouncy = true
+    newHermitCrabManager.glitchHermitCrab.get_ref().getSmacked(self.global_transform.origin)
+    spawnedHermitCrabManagers.push_back(newHermitCrabManager)
 
 func teleportToPrey():
     if preyTarget != null and preyTarget.get_ref() != null:

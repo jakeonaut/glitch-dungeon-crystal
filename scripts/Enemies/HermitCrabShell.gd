@@ -5,6 +5,7 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 var SHELL_GRAV = 28
 var should_big_bump = false
 onready var myManager = get_node("..")
+var is_extra_bouncy = false
 
 func _ready():
     if getMyStaticLevelZoneVar():
@@ -51,7 +52,7 @@ func flipWalkingDirection():
     elif walk_direction.x > 0:
       secretAniPlayer.play("spinForward")
 
-  if physics_state == PhysicsState.NORMAL and on_ground: # i don't know how we got into this state.
+  if not is_extra_bouncy and physics_state == PhysicsState.NORMAL and on_ground: # i don't know how we got into this state.
     if secretAniPlayer.assigned_animation == "spinForward":
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
@@ -163,35 +164,37 @@ var glitch_tiles_around_me = false
 func landed():
   .landed()
 
-  behavior_jumping = false
+  if not is_extra_bouncy:
+    behavior_jumping = false
   if physics_state == PhysicsState.BEING_TOSSED:
     if should_big_bump:
       getSmacked(null, true)
       thudSound.play()
     should_big_bump = false
     physics_state = PhysicsState.NORMAL
-    if walk_direction.x != 0:
-      walk_speed = 7
-      if secretAniPlayer.assigned_animation == "spinForward":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("slowSpinForward")
-      elif secretAniPlayer.assigned_animation == "spinForwardReverse":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("slowSpinForwardReverse")
-    else:
-      behavior_walking = false
-      behavior_was_thrown = false
-      if secretAniPlayer.assigned_animation == "spinForward":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("slowSpinForward")
-      elif secretAniPlayer.assigned_animation == "spinForwardReverse":
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("slowSpinForwardReverse")
-  else:
+    if not is_extra_bouncy:
+      if walk_direction.x != 0:
+        walk_speed = 7
+        if secretAniPlayer.assigned_animation == "spinForward":
+          secretAniPlayer.stop()
+          secretAniPlayer.clear_queue()
+          secretAniPlayer.play("slowSpinForward")
+        elif secretAniPlayer.assigned_animation == "spinForwardReverse":
+          secretAniPlayer.stop()
+          secretAniPlayer.clear_queue()
+          secretAniPlayer.play("slowSpinForwardReverse")
+      else:
+        behavior_walking = false
+        behavior_was_thrown = false
+        if secretAniPlayer.assigned_animation == "spinForward":
+          secretAniPlayer.stop()
+          secretAniPlayer.clear_queue()
+          secretAniPlayer.play("slowSpinForward")
+        elif secretAniPlayer.assigned_animation == "spinForwardReverse":
+          secretAniPlayer.stop()
+          secretAniPlayer.clear_queue()
+          secretAniPlayer.play("slowSpinForwardReverse")
+  elif not is_extra_bouncy:
     if secretAniPlayer.assigned_animation == "spinForward":
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
@@ -200,6 +203,10 @@ func landed():
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("slowSpinForwardReverse")
+
+# @override
+func canSwim():
+  return false
 
 func slowDownMore():
   walk_speed = 4
@@ -241,6 +248,8 @@ func getSmacked(broom_origin = null, silently = false):
     vv = jump_val
     linear_velocity.y = jump_val
     lv.y = jump_val
+  if is_extra_bouncy:
+    behavior_jumping = true
   return .getSmacked(broom_origin, silently)
 
 var die_offscreen_timer = 0
