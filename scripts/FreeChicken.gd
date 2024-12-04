@@ -18,7 +18,7 @@ var chicken_state_reset_dig_time_limit = 8
 var afraid_timer = 0
 var afraid_time_limit = 10
 var far_from_home_dist = 5
-var how_many_times_did_u_hit_me = 0
+export var how_many_times_did_u_hit_me = 0
 
 export var can_hop = true
 var initial_grav = 60
@@ -142,3 +142,6 @@ func getSmacked(broom_origin = null, silently = false):
         level.player.gravitySound.play()
         level.player.getChickenInfected()
         level.player.chicken_timer = 0
+
+func actuallyDieToOffscreenCamera(_delta):
+    queue_free()

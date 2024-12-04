@@ -91,6 +91,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.0
 shader_param/y_div = 2.87
@@ -120,6 +126,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.0
 shader_param/y_div = 2.87
@@ -279,7 +291,6 @@ transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 23.453, -11.044, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -10, 0 )
-is_locked = true
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 num_keys_unlock = 2
 key_type = 5
@@ -314,7 +325,7 @@ material_override = SubResource( 42 )
 texture = ExtResource( 25 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 19, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -10, 0 )
 grav = 0
 
 [node name="Viewport2" parent="." instance=ExtResource( 24 )]

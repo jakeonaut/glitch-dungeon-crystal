@@ -25,7 +25,7 @@
 [ext_resource path="res://sceneObjects/WaterCubes/DeepOceanWaterCube.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=25]
-[ext_resource path="res://sceneObjects/Enemies/BubbleFish.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=27]
 
 [sub_resource type="BoxShape" id=46]
 resource_local_to_scene = true
@@ -233,8 +233,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.4109, -4 )
 [node name="WaterCube12" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -0.5891, -4 )
 
-[node name="BubbleFish" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -5, 0 )
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0 )
+glitch_form = 4
 
 [node name="Viewport2" parent="." instance=ExtResource( 5 )]
 

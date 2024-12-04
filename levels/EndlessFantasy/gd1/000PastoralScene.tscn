@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=2]
+[gd_scene load_steps=206 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -43,7 +43,6 @@
 [ext_resource path="res://assets/sounds/eba_earthquake1.wav" type="AudioStream" id=41]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=42]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=43]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=44]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=45]
 [ext_resource path="res://assets/sounds/glitchMoth.wav" type="AudioStream" id=46]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=47]
@@ -2666,12 +2665,15 @@ shape = SubResource( 228 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 7.27493, 0 )
+how_many_times_did_u_hit_me = -999
 
 [node name="FreeChicken5" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.411366, 0 )
+how_many_times_did_u_hit_me = -999
 
 [node name="FreeChicken2" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.52752, 0 )
+how_many_times_did_u_hit_me = -999
 
 [node name="Sprite3D9" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.9973, 9.78628, -6 )
@@ -2688,9 +2690,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94049, 3 )
 [node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Sprite3D9/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406319, 3.08217, 2 )
 shape = SubResource( 236 )
-
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 44 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 16, 0 )
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 56 )
@@ -2928,6 +2927,9 @@ texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 327 )
+
+[node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

@@ -47,8 +47,8 @@ func _process(delta):
   if not visible: return
   
   delta = delta * global.time_dilation_multiplier
-  self.glitch_form = level.player.glitch_form
-  should_collide_ceil = self.glitch_form == global.GlitchForm.LADDER
+  # self.glitch_form = level.player.glitch_form
+  # should_collide_ceil = self.glitch_form == global.GlitchForm.LADDER
 
   # if screamSound.is_playing() and am_i_really_in_range_of_player:
   #   player.getCurseInfected()

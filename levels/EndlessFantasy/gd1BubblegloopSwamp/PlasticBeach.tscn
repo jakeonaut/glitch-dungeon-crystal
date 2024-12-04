@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=2]
@@ -46,6 +46,7 @@
 [ext_resource path="res://sceneObjects/WaterCubes/CleansingWaterCube.tscn" type="PackedScene" id=44]
 [ext_resource path="res://sceneObjects/Enemies/BubbleFish.tscn" type="PackedScene" id=45]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=46]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=47]
 [ext_resource path="res://sceneObjects/Buggies/MalwareDragonfly.tscn" type="PackedScene" id=48]
 [ext_resource path="res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn" type="PackedScene" id=49]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=50]
@@ -2593,6 +2594,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117, 46, 0 )
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117, 44, 0 )
 
+[node name="miniCubeCrystal7" parent="Viewport/level" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69, 19, 0 )
+
 [node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 116, 45, 0 )
 
@@ -2620,8 +2624,11 @@ shape = SubResource( 80 )
 [node name="CollisionShape" parent="Viewport/level/AnglerFish/FallthroughSolid" index="0"]
 shape = SubResource( 81 )
 
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 16.3025, 0 )
+
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 46 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 16, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 16.3025, 0 )
 
 [node name="MalwareDragonfly2" parent="Viewport/level" instance=ExtResource( 48 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 5.6, 0 )

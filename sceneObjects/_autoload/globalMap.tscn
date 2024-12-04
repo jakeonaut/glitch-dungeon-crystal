@@ -856,7 +856,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
 can_nav_up = false
-hide_me_from_map = true
 has_spore_key = true
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
@@ -1371,6 +1370,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
 can_nav_right = false
+can_nav_up = false
 
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 4, 0 )
@@ -1425,7 +1425,6 @@ path = "res://levels/EndlessFantasy/gd1GrandmaVillage/ReverseEasyFling.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_down = false
-hide_me_from_map = true
 
 [node name="PrimordialOoze" type="Spatial" parent="."]
 

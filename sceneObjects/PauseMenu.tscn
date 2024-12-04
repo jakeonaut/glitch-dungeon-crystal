@@ -325,33 +325,16 @@ volume_db = -20.0
 pitch_scale = 0.9
 
 [node name="InventoryRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 107.0
 margin_top = 82.0
 margin_right = 499.0
 margin_bottom = 368.0
 color = Color( 0, 0, 0, 0 )
 
-[node name="ShardsText" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 506.0
-margin_top = -36.0
-margin_right = 1022.0
-margin_bottom = 57.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 8 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "shards
-"
-text = "shards
-"
-scroll_active = false
-
 [node name="TitleRect" type="ColorRect" parent="InventoryRect"]
-margin_left = 103.0
+margin_left = -11.0
 margin_top = -69.0
-margin_right = 283.0
+margin_right = 169.0
 margin_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -394,6 +377,100 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "inventory"
 text = "inventory"
+scroll_active = false
+
+[node name="ShardsRect" type="ColorRect" parent="InventoryRect"]
+margin_left = 507.0
+margin_top = -38.0
+margin_right = 634.0
+margin_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/ShardsRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 123.0
+margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/ShardsRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardsText" type="RichTextLabel" parent="InventoryRect/ShardsRect/ColorRect"]
+margin_left = 14.0
+margin_top = 4.0
+margin_right = 530.0
+margin_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "shards
+"
+text = "shards
+"
+scroll_active = false
+
+[node name="KeysRect" type="ColorRect" parent="InventoryRect"]
+margin_left = 421.0
+margin_top = -38.0
+margin_right = 511.0
+margin_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/KeysRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 85.0
+margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="InventoryRect/KeysRect/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 77.0
+margin_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeysText" type="RichTextLabel" parent="InventoryRect/KeysRect/ColorRect"]
+margin_left = 14.0
+margin_top = 4.0
+margin_right = 530.0
+margin_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 8 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "keys
+"
+text = "keys
+"
 scroll_active = false
 
 [node name="SpellsLabel" type="RichTextLabel" parent="InventoryRect"]
