@@ -168,7 +168,7 @@ default_font = SubResource( 23 )
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17213]
+[sub_resource type="ArrayMesh" id=17216]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1002,11 +1002,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -603 )
 [node name="MeshInstance" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
 transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373667, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17213 )
+mesh = SubResource( 17216 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1451,10 +1451,10 @@ text = " got key!"
 
 [node name="SpellMessageTextLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 9.5
-margin_top = 73.5
-margin_right = 182.5
-margin_bottom = 151.5
+margin_left = 10.0
+margin_top = 74.0
+margin_right = 229.0
+margin_bottom = 152.0
 rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
@@ -1709,22 +1709,6 @@ bbcode_text = "love: 3"
 text = "love: 3"
 scroll_active = false
 
-[node name="TotalHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 365.0
-margin_top = 183.0
-margin_right = 748.0
-margin_bottom = 236.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "the dungeon"
-text = "the dungeon"
-scroll_active = false
-
 [node name="PressEnterLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
 margin_left = 180.0
@@ -1739,6 +1723,22 @@ custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "press X to continue"
 text = "press X to continue"
+scroll_active = false
+
+[node name="TotalHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 365.0
+margin_top = 183.0
+margin_right = 748.0
+margin_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "the dungeon"
+text = "the dungeon"
 scroll_active = false
 
 [editable path="EdgeDistortion"]

@@ -144,7 +144,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( 1179646, 0, 2, 2162689, 0, 2, 2359292, 0, 3, 2359303, 0, 2, 2752519, 0, 0, 2752522, 0, 0, 2883583, 0, 3 )
+"cells": PoolIntArray( 1179646, 0, 2, 2162689, 0, 2, 2359292, 0, 3, 2359303, 0, 2, 2883583, 0, 3 )
 }
 script = ExtResource( 24 )
 __meta__ = {
@@ -187,6 +187,7 @@ frame = 14
 
 [node name="AnglerFish" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, 0 )
+has_a_key = true
 
 [node name="Sprite3D" parent="Viewport/level/AnglerFish" index="0"]
 pixel_size = 0.14
@@ -221,9 +222,9 @@ shape = SubResource( 24 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9389, 38, 0 )
+is_locked = true
 path = "res://levels/EndlessFantasy/gd1BubblegloopSwamp/MalwareIntro.tscn"
 num_keys_unlock = 1
-key_type = 6
 
 [node name="PoisonWaterCube" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -4, 40, 0 )

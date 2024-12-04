@@ -12,13 +12,16 @@ func _ready():
   set_process(true)
 
   fishingRod.max_speed = 6
-  if global.has_revealed_an_angler_fish:
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
-    secretAniPlayer.play("revealQuiet")
-    am_revealed = true
+  # if global.has_revealed_an_angler_fish:
+  #   secretAniPlayer.stop()
+  #   secretAniPlayer.clear_queue()
+  #   secretAniPlayer.play("revealQuiet")
+  am_revealed = true
   if has_a_key and not self.getMyStaticLevelZoneVar():
     mySprite.material_override.set_shader_param("target_palette", global.white_palette)
+  secretAniPlayer.stop()
+  secretAniPlayer.clear_queue()
+  secretAniPlayer.play("idle")
 
 func _process(_delta):
   if am_i_dying:
@@ -45,6 +48,7 @@ func _process(_delta):
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("closeMouthCoyly")
+      secretAniPlayer.queue("queue")
 
   was_hook_got_something = is_hook_got_something
 
@@ -116,11 +120,18 @@ func swallowPlayer():
     gulping = false
     if origin_before_teleportation != null:
       self.global_transform.origin = origin_before_teleportation
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("idle")
   elif nowWhoAmIEating != null:
     # gulping = false
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("cry")
+  else:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("idle")
 
 func owie():
   level.summonSmokeClouds(self.global_transform.origin, 3, true, true)

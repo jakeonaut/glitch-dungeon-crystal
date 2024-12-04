@@ -919,11 +919,11 @@ func handleSpikeCollisions(delta):
         tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
         x + lb, y + tb, x + rb, y + bb
       ):
-        if should_big_bump:
-          getLevelTiles().infectSpikes(coords)
-          has_sweeped_glitch = true
-        else:
-          tryDieToEnemy(delta, true, false)
+        # if should_big_bump:
+        #   getLevelTiles().infectSpikes(coords)
+        #   has_sweeped_glitch = true
+        # else:
+        tryDieToEnemy(delta, true, false)
         return
 
 # @override

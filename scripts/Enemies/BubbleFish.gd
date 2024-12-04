@@ -56,7 +56,7 @@ func _process(delta):
       BubbleFishState.SPITTING_BUBBLE:
         setAnimationAndChangeStateWhenItEnds("spitBubble", BubbleFishState.IDLE)
         idle_blow_up_timer = 0
-      BubbleFishState.SPITTING_BUBBLE:
+      BubbleFishState.SPITTING_BUBBLE_CLOSE:
         setAnimationAndChangeStateWhenItEnds("spitBubble", BubbleFishState.IDLE)
         idle_blow_up_timer = 0
       BubbleFishState.BLOW_UP:
@@ -89,10 +89,10 @@ func randomizeTargetPos():
 func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
   if bubble_fish_state == BubbleFishState.PUFFED_UP_IDLE:
-    if global.memory["broom"]:
-      bubble_fish_state = BubbleFishState.SPITTING_BUBBLE_CLOSE
-    else:
-      bubble_fish_state = BubbleFishState.SPITTING_BUBBLE
+    # if global.memory["broom"]:
+    #   bubble_fish_state = BubbleFishState.SPITTING_BUBBLE_CLOSE
+    # else:
+    bubble_fish_state = BubbleFishState.SPITTING_BUBBLE
     return true
   return false
 

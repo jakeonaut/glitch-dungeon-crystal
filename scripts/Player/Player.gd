@@ -172,8 +172,12 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
         if spellToBeForgottenIndex < 0:
           spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
         spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
-        global.memory["spellbookPage"].pop_at(spellToBeForgottenIndex)
-    global.memory["spellbookPage"].push_back(glitch)
+        if maxSpellbookSize == 2:
+          global.memory["spellbookPage"].pop_at(spellToBeForgottenIndex)
+        else:
+          global.memory["spellbookPage"][spellToBeForgottenIndex] = glitch
+    if maxSpellbookSize == 2 or global.memory["spellbookPage"].size() < maxSpellbookSize:
+      global.memory["spellbookPage"].push_back(glitch)
     spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
   if spellToBeForgotten == global.GlitchForm.NORMAL:
     return null
@@ -207,7 +211,6 @@ func restoreGlitchAndMP():
     applyGlitch(global.memory["current_glitch"], true)
   global.memory["mp"] = global.memory["max_mp"]
   
-
 func applyGlitch(glitch, notPlaySound = false):
   # if returning_to_save_point > 0:
   #   return false
@@ -220,7 +223,6 @@ func applyGlitch(glitch, notPlaySound = false):
       transformSound.pitch_scale = rand_range(0.8, 1.2)
       transformSound.play()
   global.memory["current_glitch"] = glitch
-
   if glitch != self.glitch_form:
     has_just_glitch_swapped = true
     has_just_glitch_swapped_timer = 0
@@ -247,6 +249,7 @@ func floorGlitch():
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(global.player_red_palette)
+  spellbookGlitchSprite.changeSpriteColorPalette(global.red_palette)
   # should_collide_floor = not (on_ground and not truly_on_ground)
   # mySprite.setBugCatcherCostume()
 
@@ -277,6 +280,7 @@ func featherGlitch():
   level.featherGlitch()
   # TODO(jaketrower):
   changeSpriteColorPalette(global.green_dungeon_palette)
+  spellbookGlitchSprite.changeSpriteColorPalette(global.green_palette)
   # mySprite.setMothCostume()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheetFeather)
 
@@ -287,6 +291,7 @@ func ladderGlitch():
   level.ladderGlitch()
   # TODO(jaketrower):
   changeSpriteColorPalette(global.yellow_player_palette)
+  spellbookGlitchSprite.changeSpriteColorPalette(global.yellow_palette)
   # mySprite.setLuckyCatCostume()
 
 func invisibleGlitch():
@@ -296,6 +301,7 @@ func invisibleGlitch():
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(global.black_player_palette)
+  spellbookGlitchSprite.changeSpriteColorPalette(global.black_palette)
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
@@ -303,6 +309,7 @@ func walkThroughWallsGlitch():
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
   changeSpriteColorPalette(global.white_player_palette)
+  spellbookGlitchSprite.changeSpriteColorPalette(global.white_palette)
   # mySprite.setNightgown()
 
 func wearCostume(costume):
@@ -1111,11 +1118,6 @@ func getBubbleInfected():
   on_ground = false
   gravitySound.play()
   level.flipGravity(-1)
-  # physics_vars.should_apply_gravity = true
-  # bubble_temp_grav = grav
-  # grav *= -1
-  # bubble_temp_true_terminal_vel = true_terminal_vel
-  # true_terminal_vel *= -1
 
 func getBubbleCured():
   if transformation != TransformationState.BUBBLE:

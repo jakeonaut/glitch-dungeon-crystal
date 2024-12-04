@@ -689,7 +689,7 @@ func changeColorPalette(palette, _palette_alt = null):
   elif my_tileset_type == global.TilesetType.POISON_FOREST:
     curr_palette = global.grey_black_palette
   elif my_tileset_type == global.TilesetType.ALIEN:
-    curr_palette = global.foggy_forest_palette
+    curr_palette = global.red_palette
     
   var item_list = mesh_library.get_item_list()
   for i in range(len(item_list)):

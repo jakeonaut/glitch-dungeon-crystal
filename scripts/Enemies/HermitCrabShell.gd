@@ -345,3 +345,30 @@ func stopInteract():
 
 func tryStopInteractPassive():
   pass
+
+# @override
+func handleSpikeCollisions(_delta):
+  if not behavior_walking:
+    return
+  var x = global_transform.origin.x
+  var y = global_transform.origin.y
+  
+  var TILE_WIDTH = levelTiles.cell_size.x
+  var TILE_HEIGHT = levelTiles.cell_size.y
+
+  var amt = 0.5 if should_big_bump else 0.0
+  for i in range(int(round(y+bb-amt)), int(round(y+tb+amt))):
+    for j in range(int(round(x+lb-amt)), int(round(x+rb+amt))):
+      var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      var tile_pos = getLevelTiles().map_to_world(coords.x, coords.y, coords.z)
+      var tile_x = tile_pos.x - TILE_WIDTH/2
+      var tile_y = tile_pos.y - TILE_HEIGHT/2
+      if (
+        (getLevelTiles().isTileSpikes(tile_type) and not getLevelTiles().isNeighborOfInfectedSpikes(coords))
+          or getLevelTiles().isTileGlitchSpikes(tile_type) 
+        ) and isRectColliding(
+        tile_x, tile_y + TILE_HEIGHT, tile_x + TILE_WIDTH, tile_y,
+        x + lb, y + tb, x + rb, y + bb
+      ):
+        getLevelTiles().infectSpikes(coords)

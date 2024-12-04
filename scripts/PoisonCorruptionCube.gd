@@ -62,15 +62,15 @@ func passiveActivate(_delta, is_player):
         var rotation_vector = Vector2(0, 0)
         
         # respect inputs first...
-        if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-            if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
-                rotation_degrees.z = 180
-            elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
-                rotation_degrees.z = 0
-            if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
-                rotation_degrees.z = 270
-            elif Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up"):
-                rotation_degrees.z = 90
+        # if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+        #     if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
+        #         rotation_degrees.z = 180
+        #     elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
+        #         rotation_degrees.z = 0
+        #     if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
+        #         rotation_degrees.z = 270
+        #     elif Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up"):
+        #         rotation_degrees.z = 90
 
         var rotZ = round(rotation_degrees.z)
         if rotZ == 0:
@@ -151,7 +151,7 @@ func getSmacked(_broom_origin = null):
     smack_timer = 0
     is_smacked = true
     mushroom_walk_direction = -mushroom_walk_direction
-    rotation_degrees.z -= 90
+    rotation_degrees.z -= 180
     rotation_degrees.z = int(rotation_degrees.z) % 360
     rotation_degrees.z = stepify(rotation_degrees.z, 90.0)
     # if rotation_degrees.z == 90 or rotation_degrees.z == -270:
