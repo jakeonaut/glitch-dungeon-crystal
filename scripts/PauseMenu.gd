@@ -17,7 +17,8 @@ onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
 onready var pauseMenuRect = get_node("PauseMenuRect")
 onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
-onready var shardsText = get_node("InventoryRect/ShardsText")
+onready var shardsRect = get_node("InventoryRect/ShardsRect")
+onready var keysRect = get_node("InventoryRect/KeysRect")
 onready var mapRect = get_node("MapRect")
 onready var mapTitleRect = get_node("MapRect/MapTitleRect")
 onready var mapColorRect1 = get_node("MapRect/ColorRect")
@@ -79,27 +80,24 @@ func _ready():
   set_process(true)
 
 func _process(delta):
-  if not global.isOnMainMenu and not global.isPauseMenuOpen and Input.is_action_pressed("open_map") and global.activeInteractor == null and not global.shouldRenderAsCinematic and global.memory["has_map_item"]:
+  if global.memory["has_map_item"] and not global.isOnMainMenu and not global.isPauseMenuOpen and global.activeInteractor == null and not global.shouldRenderAsCinematic:
     self.visible = true
-    if mapRect.rect_scale.x == 1:
-      if not has_drawn_map:
-        processInventoryRender(delta)
-        tryDrawMap()
-      # mapRect.visible = true
-      # mapRect.rect_position = Vector2(140, -10)
-      # mapRect.rect_scale = Vector2(2, 2)
-      # mapRect.color = Color("#00000000")
-      # mapColorRect1.color = Color("#00000000")
-      # mapColorRect2.color = Color("#00000000")
-      # mapBackgroundSprite.modulate = Color("#c8ffffff")
-      mapTitleRect.visible = false
+    if not has_drawn_map:
+      processInventoryRender(delta)
+      tryDrawMap()
+    mapRect.visible = true
+    mapTitleRect.visible = false
+    mapRect.color = Color("#00000000")
+    mapColorRect1.color = Color("#00000000")
+    mapColorRect2.color = Color("#00000000")
+    mapBackgroundSprite.modulate = Color("#ffffffff")
+    mapBackgroundSprite.self_modulate = Color("#ffffffff")
+    if Input.is_action_pressed("open_map"):
       mapRect.rect_position = Vector2(225, 60)
       mapRect.rect_scale = Vector2(1.5, 1.5)
-      mapRect.color = Color("#040404")
-      mapColorRect1.color = Color("#394c62")
-      mapColorRect2.color = Color("#040404")
-      mapBackgroundSprite.modulate = Color("#ffffff")
-      # mapBackgroundSprite.self_modulate = Color("#80ffffff")
+    else:
+      mapRect.rect_position = Vector2(595, 380)
+      mapRect.rect_scale = Vector2(0.5, 0.5)
 
     pauseTitleRect.visible = false
     pauseMenuRect.visible = false
@@ -107,24 +105,28 @@ func _process(delta):
     normalMenu.visible = false
     cursorSprite.visible = false
     inventoryRect.visible = false
-    shardsText.visible = false
+    shardsRect.visible = false
+    keysRect.visible = false
     inventoryFaderRect.visible = false
     mapFaderRect.visible = false
+    # inventoryOptionIndex = 4
+    # processInventoryLogic(delta)
+    # inventoryOptionIndex = 4
     return
 
   self.visible = global.isPauseMenuOpen
-  if (mapRect.rect_scale.x == 1.5 and inventoryOptionIndex != 4) or (mapRect.rect_scale.x == 1 and inventoryOptionIndex == 4):
-    mapTitleRect.visible = inventoryOptionIndex != 4
-    pauseTitleRect.visible = true
-    mapRect.rect_position = Vector2(450, 131) if inventoryOptionIndex != 4 else Vector2(225, 30)
-    mapRect.rect_scale = Vector2(1, 1) if inventoryOptionIndex != 4 else Vector2(1.5, 1.5)
-    mapRect.color = Color("#040404")
-    mapColorRect1.color = Color("#394c62")
-    mapColorRect2.color = Color("#040404")
-    mapBackgroundSprite.modulate = Color("#ffffff")
-    # mapBackgroundSprite.self_modulate = Color("#ffffff")
+  mapTitleRect.visible = true
+  pauseTitleRect.visible = true
+  mapRect.rect_position = Vector2(450, 131)
+  mapRect.rect_scale = Vector2(1, 1)
+  mapRect.color = Color("#040404")
+  mapColorRect1.color = Color("#394c62")
+  mapColorRect2.color = Color("#040404")
+  mapBackgroundSprite.modulate = Color("#ffffff")
+  mapBackgroundSprite.self_modulate = Color("#ffffff")
 
-  shardsText.visible = get_node("../GlitchStatusRect").visible
+  shardsRect.visible = get_node("../GlitchStatusRect").visible
+  keysRect.visible = get_node("../KeyStatusRect").visible
   if not global.isPauseMenuOpen:
     popupRect.visible = false
     return
@@ -146,6 +148,7 @@ func _process(delta):
 
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
@@ -154,6 +157,7 @@ func _process(delta):
     processNormalLogic(delta)
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
@@ -166,6 +170,7 @@ func _process(delta):
     colorblindPlayers.visible = false
 
   if pauseMenuState == PauseMenuState.SOUND:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
@@ -176,6 +181,7 @@ func _process(delta):
     soundOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.QUIT_TO_MAIN:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
@@ -186,6 +192,7 @@ func _process(delta):
     quitToMainOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.TOP_INPUT:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
@@ -194,6 +201,7 @@ func _process(delta):
     processTopInputLogic(delta)
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+    pauseTitleRect.visible = true
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = false
@@ -643,7 +651,7 @@ func processInventoryLogic(delta):
         if global.memory["angler_seaman_boss"] == 3:
           popupText.text = "goddess dream of deceit"
         else:
-          popupText.text = "phishing key:\n  to malware swamp"
+          popupText.text = "phishing key:\n  to sea of corruption"
       elif inventoryOptionIndexX == 2:
         if global.memory["baba_yaga_boss"] == 3:
           popupText.text = "goddess dream of demon"
@@ -1291,6 +1299,7 @@ func processControlsLogic(_delta):
           global.setKeyCode(tempControlsConfig[control_index].input_action, global.last_read_input)
           global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false
+          print("hiii")
           global.is_reading_keyboard_input = false
           last_control_index = -1
           level.saveUserSettings()
@@ -1362,7 +1371,7 @@ func processControlsLogic(_delta):
   last_control_index = control_index
 
 func processPopupRenderLogic(delta):
-  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")) or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+  if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")):
     getPlayer().noBroomSound.play()
     global.is_reading_input = false
     return

@@ -131,3 +131,7 @@ func passiveActivate(_delta, is_player):
     level.player.mushroomClone()
   level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
   queue_free()
+
+func actuallyDieToOffscreenCamera(_delta):
+  queue_free()
+  

@@ -213,7 +213,6 @@ onready var selectPrompt = get_node("../../UILayer/MainMenu/SelectPrompt")
 onready var selectTextPrompt = get_node("../../UILayer/MainMenu/SelectPrompt/TextPrompt")
 onready var menuText = get_node("../../UILayer/MainMenu/MenuText")
 onready var pressCText = get_node("../../UILayer/MainMenu/PressC")
-onready var deleteSprite = get_node("../../UILayer/MainMenu/DeleteSprite")
 onready var deleteConfirmationLayer = get_node("../../UILayer/MainMenu/DeleteConfirmationLayer")
 onready var deleteConfirmationLayerText =  get_node("../../UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 onready var skipText = get_node("../../UILayer/SkipText")
@@ -288,7 +287,6 @@ func _process(delta):
                 var is_controller_connected = Input.get_connected_joypads().size() > 0
                 pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
                 pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
-                deleteSprite.visible = false
                 optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
                 optionsMenuPrompt.visible = pressCText.visible
             return

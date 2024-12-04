@@ -84,5 +84,4 @@ func _process(delta):
         global.broomSmackStuff(non_malware_areas, true, parent.global_transform, null, level, null)
 
     parent.interactPromptSprite.visible = is_touching_door and \
-                                          (global.activeInteractor == null or global.activeInteractor.is_tiny) and \
                                           not global.isEnteringRoom and not global.pauseGame
