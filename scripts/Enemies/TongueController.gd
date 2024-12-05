@@ -112,6 +112,8 @@ func passiveActivate(_delta, is_player):
     frog.queueGulpAnimation()
   
 func otherPassiveActivate(_delta, gameMover):
+  if gameMover.is_extra_bouncy:
+    return
   if not hooked:
     level.clearOtherGrabbers(gameMover)
     hooked = true

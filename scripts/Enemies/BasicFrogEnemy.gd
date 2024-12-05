@@ -47,6 +47,9 @@ func _ready():
   smallInteractionArea.add_to_group("no_pushems")
   should_smack_pause_me = false
 
+  if self.getMyStaticLevelZoneVar():
+    is_infected = false
+
 func setAsParent(_owner):
   behavior_jumping = true
   behavior_walking = true
@@ -74,7 +77,7 @@ func _process(delta):
       #   mySprite.flip_h = true
       # elif Input.is_action_pressed("ui_right"):
       #   mySprite.flip_h = false
-      var valid_inputs = ["sub_action_button", "jump_button"]
+      var valid_inputs = ["sub_action_button"]
       for valid_input in valid_inputs:
         if (not tongueAniPlayer.is_playing() or (lickedGameMover == level.player and Input.is_action_just_pressed(valid_input))):
           tongueAniPlayer.stop()
@@ -315,6 +318,7 @@ func ouchies(broom_origin):
     dieSound.play()
   if is_fragile:
     am_i_dying = true
+  global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
 
 # @override
 func unsmack():

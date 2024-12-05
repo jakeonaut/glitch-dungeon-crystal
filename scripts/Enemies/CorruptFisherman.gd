@@ -2,6 +2,7 @@ extends "GlitchEnemy.gd"
 
 onready var fishingRod = get_node("FishingRod")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
+onready var danglerBaseSprite = get_node("DanglerBase")
 var smallKeyRes = preload("res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn")
 var am_revealed = false
 var is_hook_got_something = false
@@ -17,11 +18,19 @@ func _ready():
   #   secretAniPlayer.clear_queue()
   #   secretAniPlayer.play("revealQuiet")
   am_revealed = true
+  danglerBaseSprite.material_override = danglerBaseSprite.material_override.duplicate()
   if has_a_key and not self.getMyStaticLevelZoneVar():
     mySprite.material_override.set_shader_param("target_palette", global.white_palette)
-  secretAniPlayer.stop()
-  secretAniPlayer.clear_queue()
-  secretAniPlayer.play("idle")
+    danglerBaseSprite.material_override.set_shader_param("target_palette", global.white_palette)
+  if self.getMyStaticLevelZoneVar():
+    gulping = true
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("cry")
+  else:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("idle")
 
 func _process(_delta):
   if am_i_dying:
@@ -153,6 +162,7 @@ func spitOutAKey():
 
   global.setStaticLevelZoneLevelVar(level, self, self.global_transform.origin)
   mySprite.material_override.set_shader_param("target_palette", global.grey_palette)
+  danglerBaseSprite.material_override.set_shader_param("target_palette", global.grey_palette)
   if has_a_key:
     var smallKey = smallKeyRes.instance()
     level.add_child(smallKey)

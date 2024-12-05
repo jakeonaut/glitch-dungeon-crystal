@@ -5,7 +5,6 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 var SHELL_GRAV = 28
 var should_big_bump = false
 onready var myManager = get_node("..")
-var is_extra_bouncy = false
 
 func _ready():
     if getMyStaticLevelZoneVar():

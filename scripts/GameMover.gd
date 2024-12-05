@@ -338,10 +338,10 @@ func processPhysics(delta):
       if on_ground:
         was_just_on_ground_timer = 0
       elif was_just_on_ground_timer == 0:
-        print("1 was_just_on_ground_timer 1")
+        # print("1 was_just_on_ground_timer 1")
         was_just_on_ground_timer = 1
       else:
-        print("MAX was_just_on_ground_timer MAX")
+        # print("MAX was_just_on_ground_timer MAX")
         was_just_on_ground_timer = was_just_on_ground_time_limit + 1
   else:
     if was_just_on_ground_timer <= was_just_on_ground_time_limit:
@@ -1198,7 +1198,6 @@ func handleCollisionsAndMove(local_lv, delta):
     if glitch_form == global.GlitchForm.LADDER:
       max_jumps /= 2
     if isKindOfOnGround():
-      print("jump_count = 1")
       turn_based_jump_count = 1
       local_lv.y = 1
       on_ground = false
@@ -1681,3 +1680,5 @@ func isTouchingSpikes(collisionShape):
         return true
         # TODO(jaketrower): also reset the levelTiles array position?
   return false
+
+var is_extra_bouncy = false # whatever

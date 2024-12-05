@@ -26,7 +26,7 @@
 [ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=27]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=28]
 
-[sub_resource type="ArrayMesh" id=82]
+[sub_resource type="ArrayMesh" id=86]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -43,7 +43,7 @@ surfaces/0 = {
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=83]
+[sub_resource type="ArrayMesh" id=87]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -652,6 +652,29 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+} ]
 }
 
 [sub_resource type="Animation" id=45]
@@ -1396,7 +1419,7 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 82 )
+mesh = SubResource( 86 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 
@@ -1404,7 +1427,7 @@ script = ExtResource( 12 )
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 83 )
+mesh = SubResource( 87 )
 material/0 = SubResource( 48 )
 script = ExtResource( 12 )
 

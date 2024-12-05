@@ -16,8 +16,18 @@ func _ready():
     if is_static_in_level and memory:
         visible = false
 
-func _process(_delta):
-    pauseSelf = not visible
+# @override
+func collideWithWall(local_lv):
+    behavior_was_thrown = false
+    behavior_walking = false
+    hv.x = 0
+    dir.x = 0
+    lv.x = 0
+    linear_velocity.x = 0
+    override_press_move_left = false
+    override_press_move_right = false
+    .collideWithWall(local_lv)
+    return local_lv
 
 func isActive(_debug=false):
     return visible and on_ground

@@ -680,12 +680,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect1/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 15.1667 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect2" type="ColorRect" parent="InventoryRect"]
 margin_left = 166.0
@@ -703,12 +703,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect2/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 15.1667 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect3" type="ColorRect" parent="InventoryRect"]
 margin_left = 226.0
@@ -726,12 +726,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect3/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 15.1667 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect4" type="ColorRect" parent="InventoryRect"]
 visible = false
@@ -750,12 +750,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="InventoryRect/GlitchRect4/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 15.1667 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="InventoryFaderRect" type="ColorRect" parent="InventoryRect"]
 visible = false

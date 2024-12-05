@@ -46,7 +46,27 @@ func _process(delta):
   else:
     bubbleSpawnTimer = 0
 
-  mySprite.visible = getPlayer().transformation != getPlayer().TransformationState.BUBBLE
+  mySprite.visible = shouldIBeActive() # getPlayer().transformation != getPlayer().TransformationState.BUBBLE
+
+func shouldIBeActive(can_i_touch_player_debug = false):
+  var my_glitch_form = global.GlitchForm.BUBBLE
+
+  if getPlayer().glitch_form == my_glitch_form:
+    return false
+  elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
+    return false
+  # elif is_in_cooldown:
+  #   return false
+  # elif not can_i_touch_player_debug and (activePassiveArea.is_touching_player_proxy or was_touching_player_proxy):
+  #   return false
+  # elif not can_i_touch_player_debug and (activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer):
+  #   return false
+  elif global.memory["mp"] == 0:
+    return true
+  elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
+    return true
+  else:
+    return true
 
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
 var bubbleSpawnTimer = 0
@@ -83,7 +103,8 @@ func activate(is_player):
 
 func passiveActivate(_delta, _is_player):
   # level.player.getSmacked()
-  level.player.getBubbleInfected()
+  # level.player.getBubbleInfected()
+  level.player.applyObeliskGlitch(global.GlitchForm.BUBBLE)
   # is_active = false
   # is_spawning = true
   # collectSound.play()

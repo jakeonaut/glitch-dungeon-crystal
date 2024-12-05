@@ -49,14 +49,14 @@ func _process(delta):
         if area.has_method("PassivePassiveInteractActivate"):
             area.PassivePassiveInteractActivate(delta)
 
-        if not parent.should_big_bump and area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+        if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
             is_touching_enemy = true
             if enemy.has_method("doSomethingElseToPlayer"):
                 enemy.doSomethingElseToPlayer(parent)
-            else:
+            elif parent.visible:
                 parent.tryDieToEnemy(delta, true, enemy.kill_invis, enemy.kill_immediately)
-        if area.is_in_group("water") and not parent.should_big_bump:
+        if area.is_in_group("water"):
             var collision_shape = area.get_node("CollisionShape")
             is_touching_water = true
             water_y = collision_shape.global_transform.origin.y + (collision_shape.get_shape().get_extents().y) + 1
@@ -80,7 +80,7 @@ func _process(delta):
         if area.is_in_group("return_recover"):
             parent.tryToRecover()
 
-    if parent.should_big_bump:
+    if parent.physics_state == parent.PhysicsState.BEING_TOSSED:
         global.broomSmackStuff(non_malware_areas, true, parent.global_transform, null, level, null)
 
     parent.interactPromptSprite.visible = is_touching_door and \

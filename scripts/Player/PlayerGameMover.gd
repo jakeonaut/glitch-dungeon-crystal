@@ -92,6 +92,7 @@ func processPauseAnimation():
 onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContainer")
 onready var interactPromptSprite = get_node("InteractPrompt")
 var override_camera_y = null
+var should_free_when_falling = false
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
@@ -105,6 +106,10 @@ func _process(delta):
     # aniPlayer.play("uncorruptMe")
     aniPlayer.queue("fall")
     fall_timer = 0
+  if physics_state == PhysicsState.BEING_TOSSED and should_free_when_falling:
+    physics_state = PhysicsState.NORMAL
+    should_free_when_falling = false
+    pauseAnimation = false
   delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
   if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
@@ -323,7 +328,7 @@ var can_broomerang_warp = true
 var should_big_bump = false
 # @override
 func landed():
-  if physics_state == PhysicsState.BEING_TOSSED and should_big_bump:
+  if physics_state == PhysicsState.BEING_TOSSED:
     bigBump()
   .landed()
   # chicken_jumps = 0
@@ -368,8 +373,7 @@ var PLAYER_GRAV = 28
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
-  if is_mushroom_infected or (physics_state == PhysicsState.BEING_TOSSED and should_big_bump):
-    is_mushroom_infected = false
+  if physics_state == PhysicsState.BEING_TOSSED:
     pauseAnimation = false
     physics_state = PhysicsState.NORMAL
     on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
@@ -423,7 +427,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
 func pressingJump():
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_pressed("jump_button")
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
@@ -655,7 +659,7 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.UNDERGROUND or \
      transformation == TransformationState.MOLE_DIGGING or \
-     transformation == TransformationState.BUBBLE or \
+     (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE) or \
      transformation == TransformationState.CHICKEN or \
      is_mushroom_infected: # or malware_infected:
     return
@@ -904,7 +908,7 @@ func handleSpikeCollisions(delta):
   var TILE_HEIGHT = levelTiles.cell_size.y
 
   touching_glitch_or_spikes = false
-  var amt = 0.5 if should_big_bump else 0.0
+  var amt = 0.0 #0.5 if should_big_bump else 0.0
   for i in range(int(round(y+bb-amt)), int(round(y+tb+amt))):
     for j in range(int(round(x+lb-amt)), int(round(x+rb+amt))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))

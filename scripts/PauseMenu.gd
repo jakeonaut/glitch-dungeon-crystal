@@ -80,7 +80,7 @@ func _ready():
   set_process(true)
 
 func _process(delta):
-  if global.memory["has_map_item"] and not global.isOnMainMenu and not global.isPauseMenuOpen and global.activeInteractor == null and not global.shouldRenderAsCinematic:
+  if Input.is_action_pressed("open_map") and global.memory["has_map_item"] and not global.isOnMainMenu and not global.isPauseMenuOpen and global.activeInteractor == null and not global.shouldRenderAsCinematic:
     self.visible = true
     if not has_drawn_map:
       processInventoryRender(delta)
@@ -92,12 +92,12 @@ func _process(delta):
     mapColorRect2.color = Color("#00000000")
     mapBackgroundSprite.modulate = Color("#ffffffff")
     mapBackgroundSprite.self_modulate = Color("#ffffffff")
-    if Input.is_action_pressed("open_map"):
-      mapRect.rect_position = Vector2(225, 60)
-      mapRect.rect_scale = Vector2(1.5, 1.5)
-    else:
-      mapRect.rect_position = Vector2(595, 380)
-      mapRect.rect_scale = Vector2(0.5, 0.5)
+    # if Input.is_action_pressed("open_map"):
+    mapRect.rect_position = Vector2(225, 60)
+    mapRect.rect_scale = Vector2(1.5, 1.5)
+    # else:
+    #   mapRect.rect_position = Vector2(595, 380)
+    #   mapRect.rect_scale = Vector2(0.5, 0.5)
 
     pauseTitleRect.visible = false
     pauseMenuRect.visible = false
@@ -531,7 +531,6 @@ func processInventoryLogic(delta):
       inventoryOptionIndexX = (spellbookSize - 1) if spellbookSize > 0 else 0
     elif inventoryOptionIndexX > spellbookSize - 1 and inventoryOptionIndexX != 0:
       if global.memory["angel_flute"] and selectedGlitchSprite == -1 and angelStatues.size() > 0:
-        print(str(inventoryOptionIndexX) + ", " + str(spellbookSize))
         inventoryOptionIndex = 4
         menuConfirmSound.play()
         inventoryOptionIndexX = 0
@@ -996,8 +995,7 @@ func tryDrawMap():
               mapAngelSprite.get_parent().add_child(angelSprite)
             else:
               sprite.material.set_shader_param("offset", 6)
-
-      if "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
+      elif "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
         if "AnglerFish" in mapRoom.path:
           sprite.frame = 217
           sprite.material.set_shader_param("offset", 0)
@@ -1105,12 +1103,13 @@ func setProperMapFrame(sprite, mapGrid, i, j):
 
 func setGlitchSprite(sprite, glitch):
   # TODO(jaketrower): dedupe (1) with Player.gd
-  if glitch == global.GlitchForm.NORMAL: sprite.frame = 4
+  if glitch == global.GlitchForm.NORMAL: sprite.frame = 9
   elif glitch == global.GlitchForm.FLOOR: sprite.frame = 1
   elif glitch == global.GlitchForm.FEATHER: sprite.frame = 0
   elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
   elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
-  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 4
+  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 9
+  elif glitch == global.GlitchForm.BUBBLE: sprite.frame = 4
 
 
 var topInputOptions = ["Keyboard", "Controller"]

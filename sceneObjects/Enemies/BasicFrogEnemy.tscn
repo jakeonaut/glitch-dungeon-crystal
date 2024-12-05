@@ -1946,7 +1946,7 @@ texture = ExtResource( 15 )
 hframes = 2
 script = ExtResource( 4 )
 
-[node name="InteractionArea" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="." groups=["malware"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 3 )
 

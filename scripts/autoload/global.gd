@@ -68,6 +68,7 @@ enum GlitchForm {
     INVISIBLE,
     LADDER,
     WALK_THROUGH_WALLS,
+    BUBBLE,
 }
 enum TilesetType {
     DUNGEON,
@@ -300,10 +301,10 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 2
     memory["glitched_grimoire"] = false
-    memory["forget_me_not"] = false
+    memory["forget_me_not"] = true
     memory["glitched_grimoire2"] = false
 
     # goddess dream bosses
@@ -313,10 +314,10 @@ func resetMemory():
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["broomerang"] = 0
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["can_force_respawn"] = 1
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false

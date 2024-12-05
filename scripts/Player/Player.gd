@@ -70,7 +70,7 @@ func _ready():
 
 # make this work with FLIP GRAVITY (level.flipGravity) (and bubble form uses it too)
 func processWallLadderWalking(delta):
-  if should_big_bump:
+  if physics_state == PhysicsState.BEING_TOSSED:
     return false
   var temp = pauseAnimation
   if dig_timer > 0:
@@ -132,7 +132,7 @@ func tryPlayFootstepSound():
     return
   if transformation == TransformationState.FISHY:
     return
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     return
 
   if global.isPauseMenuOpen or global.pauseGame:
@@ -229,6 +229,8 @@ func applyGlitch(glitch, notPlaySound = false):
   var gimmeABroom = false
   if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
     gimmeABroom = true
+  if glitch_form == global.GlitchForm.BUBBLE and glitch != global.GlitchForm.BUBBLE:
+    level.flipGravity()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -239,6 +241,8 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
+  if glitch == global.GlitchForm.BUBBLE:
+    getBubbleInfected(true)
   if gimmeABroom:
     getABroom()
   return true
@@ -416,7 +420,7 @@ func _process(delta):
   var newSpriteOpacity = spriteOpacity
   if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
-  elif transformation == TransformationState.BUBBLE:
+  elif transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     newSpriteOpacity = 0.5
   elif glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 0.9
@@ -602,9 +606,10 @@ func unsmack():
     has_teleported = false
 
 func processBubbleLogic(_delta):
-  bubbleSprite.visible = transformation == TransformationState.BUBBLE
-  if transformation == TransformationState.BUBBLE:
-    if (horizontal_collision or on_ground or justPressedJump()) and physics_state != PhysicsState.GLITCH_DYING:
+  bubbleSprite.visible = transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+    var just_pressed_jump = false # justPressedJump()
+    if (horizontal_collision or on_ground or just_pressed_jump) and physics_state != PhysicsState.GLITCH_DYING:
       getBubbleCured()
     else:
       if glitch_form == global.GlitchForm.LADDER:
@@ -761,7 +766,7 @@ func tryDieToOffscreenCamera(_delta):
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
     if next_room == null:
-      if transformation == TransformationState.BUBBLE:
+      if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
         getBubbleCured()
       elif transformation == TransformationState.UNDERGROUND_RETURNING:
         bumpSound.play()
@@ -833,12 +838,12 @@ func tryDieToOffscreenCamera(_delta):
       tryToRecover()
     else:
       global_transform.origin = repositioned_player
-      if should_big_bump:
+      if physics_state == PhysicsState.BEING_TOSSED:
         bigBump()
         pauseAnimation = false
         physics_state = PhysicsState.NORMAL
-      elif physics_state == PhysicsState.BEING_TOSSED:
-        collideWithWall(linear_velocity)
+      # elif physics_state == PhysicsState.BEING_TOSSED:
+      #   collideWithWall(linear_velocity)
   
 func doTimeDilation(_delta):
   pass
@@ -884,12 +889,12 @@ func tryToRecover():
     if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
       level.flipGravity(1)
 
-func canIGetCaught():
+func canIGetCaught(can_they_catch_invis = false):
   if not visible:
     return false
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_RECOVERY:
     return false
-  if glitch_form == global.GlitchForm.INVISIBLE:
+  if glitch_form == global.GlitchForm.INVISIBLE and not can_they_catch_invis:
     glitchTickle(false)
     return false
   
@@ -1065,7 +1070,7 @@ func processFishyLogic(_delta):
   if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
     malwareCured()
     
-  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and not should_big_bump:
+  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and physics_state != PhysicsState.BEING_TOSSED:
     getFishyInfected()
     fishFormSound.pitch_scale = rand_range(0.8, 1.2)
     fishFormSound.play()
@@ -1075,7 +1080,7 @@ func processFishyLogic(_delta):
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
-    if (not is_touching_water and not was_touching_water) or should_big_bump:
+    if (not is_touching_water and not was_touching_water) or physics_state == PhysicsState.BEING_TOSSED:
       getFishyCured()
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()
@@ -1101,8 +1106,8 @@ func justPressedJump():
 
 var bubble_temp_grav = 60
 var bubble_temp_true_terminal_vel = 14
-func getBubbleInfected():
-  if transformation == TransformationState.BUBBLE or nesting_doll_state == global.NestingDoll.MATRIARCH:
+func getBubbleInfected(applyViaGlitchForm = false):
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     return
   pauseAnimation = true
   aniPlayer.stop()
@@ -1115,14 +1120,18 @@ func getBubbleInfected():
     summonFallenBroom(true, false, false)
   global.memory["broom"] = false
   transformation = TransformationState.BUBBLE
+  if applyViaGlitchForm:
+    glitch_form = global.GlitchForm.BUBBLE
   on_ground = false
   gravitySound.play()
   level.flipGravity(-1)
 
 func getBubbleCured():
-  if transformation != TransformationState.BUBBLE:
+  if transformation != TransformationState.BUBBLE and glitch_form != global.GlitchForm.BUBBLE:
     return
   transformation = TransformationState.NORMAL
+  if glitch_form == global.GlitchForm.BUBBLE:
+    applyGlitch(global.GlitchForm.NORMAL)
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.queue("land")
@@ -1162,7 +1171,7 @@ func getFishyInfected():
   # global.memory["broom"] = false
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     level.flipGravity(1)
   elif grav == 0:
     grav = PLAYER_GRAV
@@ -1206,7 +1215,7 @@ func getFishyCured():
   aniPlayer.play("revertFromFishy")
   aniPlayer.queue("land")
   pauseAnimation = true
-  if glitch_form == global.GlitchForm.FLOOR and not pressingDown() and not should_big_bump:
+  if glitch_form == global.GlitchForm.FLOOR and not pressingDown() and physics_state != PhysicsState.BEING_TOSSED:
     on_ground = true
   was_just_on_ground_timer = 0
   jump_squat_jump_input_timer = 0
@@ -1250,7 +1259,7 @@ func getChickenInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     level.flipGravity(1)
   elif grav == 0:
     grav = PLAYER_GRAV
@@ -1281,7 +1290,7 @@ func getCurseInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
-  if transformation == TransformationState.BUBBLE:
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     level.flipGravity(1)
   elif grav == 0:
     grav = PLAYER_GRAV
@@ -1503,7 +1512,7 @@ func collideWithCeiling(local_lv):
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
-    if should_big_bump:
+    if physics_state == PhysicsState.BEING_TOSSED:
       on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
@@ -1687,7 +1696,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   #   global_transform.origin.y -= 1
   #   is_mushroom_infected = false
 
-  if should_big_bump:
+  if physics_state == PhysicsState.BEING_TOSSED:
     if grav == 0:
       grav = PLAYER_GRAV
     pauseAnimation = false
@@ -1731,7 +1740,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
   global.memory["hp"] -= 1
-  # if transformation == TransformationState.BUBBLE:
+  # if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
   #   getBubbleCured()
   #   physics_state = PhysicsState.GLITCH_HURT
   #   global.pauseGame = false
@@ -1805,7 +1814,7 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 4
 func getSmacked(_broom_origin = null, _silently = false):
-  if is_smacked or should_big_bump:
+  if is_smacked or physics_state == PhysicsState.BEING_TOSSED:
     return
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
@@ -1852,6 +1861,7 @@ func tumbleFall(direction_vector, is_corrupted = false):
   if physics_state == PhysicsState.GLITCH_DYING:
     return
 
+  should_free_when_falling = false
   aniPlayer.stop()
   aniPlayer.clear_queue()
   var x_val = 0
@@ -1859,23 +1869,28 @@ func tumbleFall(direction_vector, is_corrupted = false):
   if direction_vector.x < 0:
     aniPlayer.queue("tumbleLeft")
     x_val = -10
+    on_ground = true
   elif direction_vector.x > 0:
     aniPlayer.queue("tumbleRight")
     x_val = 10
+    on_ground = true
   elif direction_vector.y > 0:
     aniPlayer.queue("tumbleRight")
-    jump_val = 10
-    grav = 0
+    jump_val = 20
+    should_free_when_falling = true
+    on_ground = false
+    # grav = 0
   elif direction_vector.y < 0:
     aniPlayer.queue("tumbleLeft")
     jump_val = -10
+    on_ground = false
 
   if is_corrupted:
     grav = 0
-    on_ground = false
+    # on_ground = false
     should_big_bump = true
   else:
-    on_ground = true
+    # on_ground = true
     grav = PLAYER_GRAV
   physics_state = PhysicsState.BEING_TOSSED
   global.pauseGame = false
@@ -1897,7 +1912,7 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
 # @override
 func isFeatherLike():
-  return glitch_form == global.GlitchForm.FEATHER and not (physics_state == PhysicsState.BEING_TOSSED and should_big_bump)
+  return glitch_form == global.GlitchForm.FEATHER and physics_state != PhysicsState.BEING_TOSSED
 
 func corruptAllSprites():
   corruptSprite(mySprite)
@@ -1915,21 +1930,23 @@ func uncorruptAllSprites():
   spellbookGlitchSprite.material_override.set_shader_param("enable_glitch", false)
 
 func corruptSprite(sprite):
-  sprite.material_override.set_shader_param("enable_dither", true)
-  # sprite.material_override.set_shader_param("enable_glitch", true)
-  # sprite.material_override.set_shader_param("enable_palette_cycle", true)
+  # sprite.material_override.set_shader_param("enable_dither", true)
+  # sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
+  sprite.material_override.set_shader_param("enable_glitch", true)
+  sprite.material_override.set_shader_param("enable_glitch_3d", false)
+  sprite.material_override.set_shader_param("enable_palette_cycle", true)
   # sprite.material_override.set_shader_param("enable_no_transparency", true)
-  sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   # sprite.material_override.set_shader_param("shake_power", 0.1)
   # sprite.material_override.set_shader_param("shake_color_rate", 0.5)
   # sprite.material_override.set_shader_param("shake_block_size", 10)
   # sprite.material_override.set_shader_param("target_palette", global.weird_base_palette)
   
 func uncorruptSprite(sprite):
-  sprite.material_override.set_shader_param("enable_dither", false)
-  sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
-  # sprite.material_override.set_shader_param("enable_glitch", false)
-  # sprite.material_override.set_shader_param("enable_palette_cycle", false)
+  # sprite.material_override.set_shader_param("enable_dither", false)
+  # sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
+  sprite.material_override.set_shader_param("enable_glitch", false)
+  sprite.material_override.set_shader_param("enable_glitch_3d", false)
+  sprite.material_override.set_shader_param("enable_palette_cycle", false)
   # sprite.material_override.set_shader_param("enable_no_transparency", false)
   # sprite.material_override.set_shader_param("shake_power", 0.01)
   # sprite.material_override.set_shader_param("shake_color_rate", 0)
@@ -2194,24 +2211,24 @@ var cloud_time_limit = 15
 var bug_sprite_timer = 0
 var bug_sprite_time_limit = 5
 func processSpriteRenderLogic(delta):
-  if malware_infected or should_big_bump:
+  if physics_state == PhysicsState.BEING_TOSSED:
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:
       cloud_timer = 0
       glitchTickle()
       # getSmacked()
-    bug_sprite_timer += (delta*11)
-    if bug_sprite_timer >= bug_sprite_time_limit:
-      bug_sprite_timer = 0
-      var newMalwareBugSprite = malwareBugSpriteRes.instance()
-      var which_dir_x = ((randi() % 3) - 1)
-      var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
-      newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
-      level.add_child(newMalwareBugSprite)
-      newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
-      newMalwareBugSprite.global_transform.origin.z += 1
-  elif mySprite.material_override.get_shader_param("enable_dither"):
+    # bug_sprite_timer += (delta*11)
+    # if bug_sprite_timer >= bug_sprite_time_limit:
+    #   bug_sprite_timer = 0
+    #   var newMalwareBugSprite = malwareBugSpriteRes.instance()
+    #   var which_dir_x = ((randi() % 3) - 1)
+    #   var which_dir_y = ((randi() % 3) - 1) if which_dir_x != 0 else -1 if (randi() % 2) == 0 else 1 # complicated...
+    #   newMalwareBugSprite.which_direction = Vector3(which_dir_x, which_dir_y, 0)
+    #   level.add_child(newMalwareBugSprite)
+    #   newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
+    #   newMalwareBugSprite.global_transform.origin.z += 1
+  elif physics_state == PhysicsState.NORMAL:
     uncorruptAllSprites()
 
   if grav < 0:

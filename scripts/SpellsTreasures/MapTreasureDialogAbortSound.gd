@@ -29,3 +29,4 @@ func activateScript():
 
 func preActivateScript():
   global.memory["has_map_item"] = true
+  global.memory["angel_flute"] = true

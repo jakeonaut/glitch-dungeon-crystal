@@ -1006,7 +1006,7 @@ mesh = SubResource( 17216 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1145,7 +1145,6 @@ vframes = 5
 frame = 12
 
 [node name="EquipmentRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 7.0
 margin_top = 4.0
 margin_right = 84.0
@@ -1202,12 +1201,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect1/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 13.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect2" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 64.5
@@ -1224,12 +1223,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect2/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 13.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect3" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 margin_left = 100.5
@@ -1246,12 +1245,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect3/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 13.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="GlitchRect4" type="ColorRect" parent="EquipmentRect/ColorRect/ColorRect"]
 visible = false
@@ -1269,12 +1268,12 @@ margin_bottom = 32.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="EquipmentSlotSprite" type="Sprite" parent="EquipmentRect/ColorRect/ColorRect/GlitchRect4/ColorRect"]
-position = Vector2( 13.5, 16.5 )
+position = Vector2( 13.5, 13.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
-frame = 4
+frame = 9
 
 [node name="EquipmentStatusRect" type="ColorRect" parent="."]
 visible = false

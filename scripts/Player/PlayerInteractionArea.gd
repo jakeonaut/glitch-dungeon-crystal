@@ -76,9 +76,9 @@ func _process(_delta):
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             activated_something = global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
-        # elif nearest_area and can_activate and not nearest_area.is_in_group("door"):
-        #     # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
-        #     activated_something = nearest_area.InteractActivate()        
+        elif nearest_area and can_activate and nearest_area.is_in_group("npc") and not nearest_area.is_in_group("door"):
+            # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
+            activated_something = nearest_area.InteractActivate()        
         if activated_something and player.summonedBroom != null:
             player.broomStop()
             has_activated_something = true

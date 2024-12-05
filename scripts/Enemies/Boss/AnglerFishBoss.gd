@@ -28,6 +28,8 @@ enum BossPhase {
     STUN_IDLE,
     HURT,
     DEFEATED,
+    GNASH_ATTACK_PREP,
+    GNASH_ATTACK_CHARGE,
 }
 var boss_phase = BossPhase.LYING_IN_WAIT
 
@@ -38,12 +40,15 @@ var BULLET_SPEED = 15
 var idle_timer = 0
 var idle_time_limit = 20
 var charging_time_limit = 30
+var gnash_charge_time_limit = 15
 var crystal_appear_time_limit = 10
 var stun_timer = 0
 var stun_time_limit = 240
 var is_weakpoint_attached = true
 var crystalLandings = []
 var which_three = []
+var gnash_charge_position = null
+var how_many_final_charges = 0
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
@@ -61,6 +66,8 @@ func _ready():
 
     self.remove_child(fakeCrystalContainer)
     level.add_child(fakeCrystalContainer)
+
+var has_already_hidden = false
 
 # @override
 func unsmack():
@@ -91,18 +98,25 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
             level.restartMusic()
-            level.uiLayer.setDisplayTitle("Warty sea devil")
+            level.uiLayer.setDisplayTitle("the Warty sea devil")
             # cubeCrystal.applyGlitchMaterial(5)
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
                 musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
         return
+    elif boss_phase == BossPhase.DEFEATED:
+        moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
+        idle_timer += (delta*11)
+        if idle_timer >= 5:
+            idle_timer = 0
+            var random_pos = global_transform.origin + Vector3(rand_range(-2, 2), rand_range(-2, 2), 0)
+            level.summonSmokeClouds(random_pos, 1, true, true, false)
+        # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
+        #     pass
+        # self.rotation_degrees.y += delta*22
 
     if global.pauseGame:
         return
-    
-    if boss_phase != BossPhase.STUN_IDLE and boss_phase != BossPhase.STUN_FALL:
-        tryToReturnWeakPoint(delta)
 
     if boss_phase == BossPhase.IDLE:
         weakPointContainer.vulnerable = false
@@ -142,7 +156,7 @@ func _process(delta):
         behavior_walking = true
         walk_direction.x = -1
         # this is stupid and specific to the level I'm in... oh well
-        if global_transform.origin.x < 28 and num_hits == 0:
+        if global_transform.origin.x < 28 and (num_hits == 0 or (num_hits == 1 and has_already_hidden) or (num_hits == 2 and how_many_final_charges == 2)):
             behavior_walking = false
             dir = Vector3(0, 0, 0)
             lv.x = 0
@@ -172,7 +186,24 @@ func _process(delta):
             which_three.push_back(crystalLandings[0])
             which_three.push_back(crystalLandings[1])
             which_three.push_back(crystalLandings[2])
+        elif global_transform.origin.x < 16.134 and num_hits == 2:
+            global_transform.origin.x = 90.134
+            global_transform.origin.y = level.player.global_transform.origin.y
+            how_many_final_charges += 1
+            # secretAniPlayer.stop()
+            # secretAniPlayer.clear_queue()
+            # secretAniPlayer.play("turnLeftToRight")
+            # secretAniPlayer.queue("gnashAttack")
+            # tryToStartWeakPointDetachment()
+            # behavior_walking = false
+            # dir = Vector3(0, 0, 0)
+            # lv.x = 0
+            # linear_velocity.x = 0
+            # hv = Vector3(0, 0, 0)
+            # boss_phase = BossPhase.GNASH_ATTACK_PREP
+            # idle_timer = 0
     elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
+        has_already_hidden = true
         behavior_walking = false
         unenemize()
         if which_three.size() > 0:
@@ -196,24 +227,38 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("fadeFromBlack")
-            secretAniPlayer.queue("stunFall")
+            secretAniPlayer.queue("idle")
             behavior_walking = false
             dir = Vector3(0, 0, 0)
             lv.x = 0
             linear_velocity.x = 0
             hv = Vector3(0, 0, 0)
-            boss_phase = BossPhase.STUN_FALL
-            unenemize()
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("stunFall")
-            tryToStartWeakPointDetachment()
 
             var fakeCrystals = fakeCrystalContainer.get_children()
             for fakeCrystal in fakeCrystals:
                 fakeCrystalContainer.remove_child(fakeCrystal)
                 fakeCrystal.queue_free()
-            
+    elif boss_phase == BossPhase.GNASH_ATTACK_PREP:
+        idle_timer += (delta*11)
+        if idle_timer >= gnash_charge_time_limit:
+            idle_timer = 0
+            boss_phase = BossPhase.GNASH_ATTACK_CHARGE
+            gnash_charge_position = level.player.global_transform.origin
+
+        if player.global_transform.origin.x > self.global_transform.origin.x + 2 and self.rotation_degrees.y < 90:
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("turnLeftToRight")
+            secretAniPlayer.queue("gnashAttack")
+        elif player.global_transform.origin.x < self.global_transform.origin.x - 2 and self.rotation_degrees.y > 90:
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("turnRightToLeft")
+            secretAniPlayer.queue("gnashAttack")
+    elif boss_phase == BossPhase.GNASH_ATTACK_CHARGE:
+        if not ("turn" in secretAniPlayer.assigned_animation):
+            if moveToSpecificPosition(delta, gnash_charge_position, 2):
+                boss_phase = BossPhase.GNASH_ATTACK_PREP
 
     elif boss_phase == BossPhase.EAT_IT:
         behavior_walking = false
@@ -271,6 +316,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
+        has_already_hidden = false
         moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
         if not secretAniPlayer.is_playing():
             if num_hits <= 2:
@@ -281,6 +327,8 @@ func _process(delta):
                 weakPointAniPlayer.stop()
                 weakPointAniPlayer.clear_queue()
                 weakPointAniPlayer.play("idle")
+            elif num_hits == 2:
+                boss_phase = BossPhase.PREPARING_CHARGE
             else:
                 boss_phase = BossPhase.IDLE
                 secretAniPlayer.stop()
@@ -289,11 +337,7 @@ func _process(delta):
                 weakPointAniPlayer.stop()
                 weakPointAniPlayer.clear_queue()
                 weakPointAniPlayer.play("idle")
-    elif boss_phase == BossPhase.DEFEATED:
-        moveToSpecificPosition(delta, Vector3(6, 6, 0))
-        # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
-        #     pass
-        # self.rotation_degrees.y += delta*22
+    
     cubeCrystal.meshInstance1.visible = false
 
 func startBossFight():
@@ -320,14 +364,14 @@ func barfRandomSnail():
     if num_hits <= spawnedHermitCrabManagers.size():
         return
 
-    var newHermitCrabManager = glitchHermitCrabManagerRes.instance()
-    level.add_child(newHermitCrabManager)
+    var glitchHermitCrabManager = glitchHermitCrabManagerRes.instance()
+    level.add_child(glitchHermitCrabManager)
     yield(TempTimer.idle_frame(self), "timeout")
-    newHermitCrabManager.scale = Vector3(1.5, 1.5, 1.5)
-    newHermitCrabManager.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
-    newHermitCrabManager.hermitCrabShell.get_ref().is_extra_bouncy = true
-    newHermitCrabManager.glitchHermitCrab.get_ref().getSmacked(self.global_transform.origin)
-    spawnedHermitCrabManagers.push_back(newHermitCrabManager)
+    # glitchHermitCrabManager.scale = Vector3(1.5, 1.5, 1.5)
+    glitchHermitCrabManager.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
+    glitchHermitCrabManager.hermitCrabShell.get_ref().is_extra_bouncy = true
+    glitchHermitCrabManager.glitchHermitCrab.get_ref().getSmacked(self.global_transform.origin)
+    spawnedHermitCrabManagers.push_back(weakref(glitchHermitCrabManager))
 
 func teleportToPrey():
     if preyTarget != null and preyTarget.get_ref() != null:
@@ -441,35 +485,9 @@ func detachWeakPoint():
     weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
     weakPointContainer.vulnerable = true
 
-func tryToReturnWeakPoint(delta):
-    if is_weakpoint_attached:
-        weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
-        weakPointContainer.vulnerable = false
-        return
-    var step = 3 if boss_phase == BossPhase.DEFEATED else 6
-    weakPointContainer.global_transform.origin = weakPointContainer.global_transform.origin + (weakPointTarget.global_transform.origin - weakPointContainer.global_transform.origin) * (delta*step)
-    
-    if stepify(weakPointTarget.global_transform.origin.x, 0.1) == stepify(weakPointContainer.global_transform.origin.x, 0.1) and \
-        stepify(weakPointTarget.global_transform.origin.y, 0.1) == stepify(weakPointContainer.global_transform.origin.y, 0.1):
-        reattachWeakPoint()
-    return
-
-func reattachWeakPoint():
-    if weakPointContainer.get_parent() == self:
-        return
-    level.remove_child(weakPointContainer)
-    level.summonSmokeClouds(weakPointTarget.global_transform.origin, 1)
-    self.add_child(weakPointContainer)
-    is_weakpoint_attached = true
-    weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
-    weakPointContainer.vulnerable = false
-    if boss_phase == BossPhase.DEFEATED:
-        global.memory["angler_seaman_boss"] = 2
-        global.pauseGame = false
-        global.shouldRenderAsCinematic = false
-        queue_free()
-
 func defeatMe():
+    idle_timer = 0
+    unenemize()
     boss_phase = BossPhase.DEFEATED
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -477,6 +495,24 @@ func defeatMe():
     secretAniPlayer.queue("defeated")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
+
+func okayImDead():
+    if global.memory["angler_seaman_boss"] < 2:
+        global.memory["angler_seaman_boss"] = 2
+        level.restartMusic()
+    for glitchHermitCrabRef in spawnedHermitCrabManagers:
+        if glitchHermitCrabRef.get_ref():
+            glitchHermitCrabRef.get_ref().hermitCrabShell.get_ref().is_extra_bouncy = false
+    global.pauseGame = false
+    global.shouldRenderAsCinematic = false
+
+    var newRealCrystal = crystalGeodeRes.instance()
+    level.add_child(newRealCrystal)
+    newRealCrystal.global_transform.origin = Vector3(49, -23, 0)
+    level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
+    level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
+    level.door.visible = true
+    queue_free()
 
 # @override
 func actuallyDieToOffscreenCamera(_delta):

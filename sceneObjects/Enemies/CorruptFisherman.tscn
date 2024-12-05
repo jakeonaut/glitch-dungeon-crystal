@@ -662,7 +662,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, true ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("FishingRod/RodSprite:visible")
@@ -674,7 +674,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, false ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")

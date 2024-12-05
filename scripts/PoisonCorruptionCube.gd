@@ -42,7 +42,7 @@ func isActive():
     return true
 
 func passiveActivate(_delta, is_player):
-    if is_player and is_active and level.player.canIGetCaught():
+    if is_player and is_active and level.player.canIGetCaught(true):
         level.clearOtherGrabbers(level.player)
         reactivate_timer = 0
         is_active = false
@@ -87,7 +87,7 @@ func passiveActivate(_delta, is_player):
         elif rotZ == -270 or rotZ == 90:
             rotation_vector = Vector2(0, -1)
             level.player.global_transform.origin.x = global_transform.origin.x
-        level.player.tumbleFall(rotation_vector, true)
+        level.player.tumbleFall(rotation_vector, false)
         if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
             level.player.playBounce("grow")
 

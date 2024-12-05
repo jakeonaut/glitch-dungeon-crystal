@@ -131,8 +131,9 @@ func fakify():
     lightAniPlayer.clear_queue()
     lightAniPlayer.play("fadeIn")
 
+var ok_byebye = false
 func getSmacked(_broom_origin):
-    if is_smacked:
+    if is_smacked or ok_byebye:
         return
     is_smacked = true
     smack_timer = 0
@@ -141,6 +142,8 @@ func getSmacked(_broom_origin):
         lightAniPlayer.stop()
         lightAniPlayer.clear_queue()
         lightAniPlayer.play("fakeBreak")
+        ok_byebye = true
+        level.player.getSmacked()
     elif is_purified:
         getHitSound.play()
         level.player.glitch_death_timer = 8
@@ -163,6 +166,9 @@ func getSmacked(_broom_origin):
             getHitSound3.play()
         level.player.glitchTickle()
         level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
+
+func resmack():
+    level.player.getSmacked()
     
 
 var is_active = true

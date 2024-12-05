@@ -17,7 +17,11 @@ func actuallyDieToOffscreenCamera(_delta):
   pass
 
 func getSmacked(broom_origin = null, silently = false):
-  if anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE:
+  if (
+    anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE or 
+    anglerFish.boss_phase == anglerFish.BossPhase.GNASH_ATTACK_PREP or 
+    anglerFish.boss_phase == anglerFish.BossPhase.GNASH_ATTACK_CHARGE
+  ):
     notDieSound.play()
     dieSound.play()
     anglerFish.boss_phase = anglerFish.BossPhase.HURT
