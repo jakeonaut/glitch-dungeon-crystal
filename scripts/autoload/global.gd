@@ -302,7 +302,7 @@ func resetMemory():
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
     memory["clean_crystals"] = 4
-    memory["priestess"] = 2
+    memory["priestess"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = true
     memory["glitched_grimoire2"] = false

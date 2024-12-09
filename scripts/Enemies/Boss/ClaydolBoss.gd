@@ -37,6 +37,9 @@ var boss_phase = BossPhase.ASLEEP
 var asleep_unearth_counter = 0
 onready var spawnSound = get_node("Sounds/SpawnSound")
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
+var fallingRockRes = preload("res://sceneObjects/Enemies/FallingRock.tscn")
+var fallingRockTimer = 0
+var fallingRockTimeLimit = 10
 
 func _ready():
     set_process(true)
@@ -62,7 +65,6 @@ func _process(delta):
             level.gameCamera.initial_size = 30
             level.gameCamera.zoomed_size = 30
             return
-        return
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
             crystal1.applyGlitchMaterial(5)
@@ -80,6 +82,12 @@ func _process(delta):
 
     if global.pauseGame:
         return
+
+    fallingRockTimer += (delta*11)
+    if fallingRockTimer >= fallingRockTimeLimit:
+        fallingRockTimer = 0
+        spawnFallingRock()
+
     # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
     if boss_phase == BossPhase.IDLE:
         secretAniPlayer.stop()
@@ -328,6 +336,12 @@ func tryGetStunnedByWalls(margin = 0.25):
     #   if isTileFragileSolid():
         flipWalkingDirection()
         spawnWeakEye()
+
+func spawnFallingRock():
+    var fallingRock = fallingRockRes.instance()
+    level.add_child(fallingRock)
+    fallingRock.global_transform.origin.x = randi() % 36 - 10 # -10 to 26
+    fallingRock.global_transform.origin.y = 13
 
 func spawnWeakEye():
     var weakEye = weakEyeRes.instance()

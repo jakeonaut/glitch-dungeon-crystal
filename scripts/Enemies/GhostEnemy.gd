@@ -44,11 +44,6 @@ func _process(delta):
       if stepify(abs(diff.x), buff) == 0 and stepify(abs(diff.y), buff) == 0:
         randomizeTargetPos()
 
-    if is_smacked:
-      smack_timer += (delta * 22)
-      if smack_timer >= smack_time_limit:
-        unsmack()
-
     if is_following_player and level.player.isOnSavePoint():
       is_following_player = false
       randomizeTargetPos()
