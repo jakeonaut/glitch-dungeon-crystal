@@ -538,7 +538,7 @@ func ouchies(broom_origin):
     var result = ouchies_base(broom_origin)
 
     if not am_i_dying and not am_i_freezing:
-        am_i_freezing = true
+        # am_i_freezing = true
         mySprite.frame_delay = 0.1
         mySprite.max_frames = 1
         mySprite.restart()
@@ -547,7 +547,7 @@ func ouchies(broom_origin):
         pauseSelf = true
         tryRemoveEnemiesGroup()
         # glitchSecretAniPlayer.play("freeze")
-        should_freeze = true
+        # should_freeze = true
         return true
     return result
 
