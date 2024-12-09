@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/doguBoss.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/angleDangleSheet.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/babyAnglerFish.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/anglerFishTail.png" type="Texture" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -298,6 +301,41 @@ shader_param/texture_albedo = ExtResource( 2 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 9 )
 
+[sub_resource type="ShaderMaterial" id=28]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -543,6 +581,41 @@ shader_param/texture_albedo = ExtResource( 2 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 4 )
 
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 9 )
+
 [sub_resource type="ShaderMaterial" id=25]
 shader = ExtResource( 7 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -612,41 +685,6 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 5 )
-
-[sub_resource type="ShaderMaterial" id=18]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 10 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 9 )
 
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )
@@ -862,14 +900,19 @@ can_nav_right = false
 can_nav_down = false
 
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 0 )
-material_override = SubResource( 9 )
-frame = 20
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6, 5, 1 )
+material_override = SubResource( 28 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 63
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
+can_nav_left = false
+can_nav_up = false
 
 [node name="AnglerFishBossRoom" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, -1 )
 material_override = SubResource( 24 )
+offset = Vector2( 20, 0 )
 pixel_size = 0.04
 texture = ExtResource( 15 )
 hframes = 3
@@ -879,6 +922,27 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+
+[node name="Sprite3D" type="Sprite3D" parent="FishingVillage/AnglerFishBossRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89229, 0.587093, 0 )
+pixel_size = 0.04
+texture = ExtResource( 19 )
+hframes = 3
+vframes = 3
+
+[node name="Sprite3D2" type="Sprite3D" parent="FishingVillage/AnglerFishBossRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.820476, 1.26395, 0 )
+pixel_size = 0.04
+texture = ExtResource( 18 )
+hframes = 3
+vframes = 3
+
+[node name="Sprite3D3" type="Sprite3D" parent="FishingVillage/AnglerFishBossRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25662, -0.0494709, 0 )
+pixel_size = 0.04
+texture = ExtResource( 20 )
+hframes = 3
+vframes = 2
 
 [node name="ToxicJungle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
@@ -1040,7 +1104,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="ExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 material_override = SubResource( 15 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
@@ -1080,6 +1144,16 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+
+[node name="GlitchSavePuzzle2" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, -1, 0 )
+material_override = SubResource( 18 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 39
+path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
+can_nav_left = false
+can_nav_up = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 3, -2, -1 )
@@ -1139,6 +1213,7 @@ can_nav_down = false
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1 )
 material_override = SubResource( 26 )
+offset = Vector2( 0, 30 )
 pixel_size = 0.03
 texture = ExtResource( 16 )
 hframes = 4
@@ -1151,7 +1226,7 @@ material_override = SubResource( 18 )
 texture = ExtResource( 10 )
 vframes = 16
 frame = 39
-path = "res://levels/EndlessFantasy/gd1TombSouls/005_CrystalPuzzle_GlitchSave.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/005_CrystalPuzzle_GlitchSave.tscn"
 can_nav_left = false
 can_nav_up = false
 
@@ -1175,5 +1250,3 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 has_angel_statue = true
-
-[editable path="FishingVillage/FrogBossHaven"]

@@ -31,6 +31,7 @@ func getSmacked(broom_origin = null, silently = false):
     anglerFish.weakPointAniPlayer.stop()
     anglerFish.weakPointAniPlayer.clear_queue()
     anglerFish.weakPointAniPlayer.play("ouchies")
+    anglerFish.weakEyeAniPlayer.play("blinkCloseFast")
     if anglerFish.num_hits > 0:
       anglerFish.weakPointAniPlayer.queue("swim")
     anglerFish.num_hits += 1

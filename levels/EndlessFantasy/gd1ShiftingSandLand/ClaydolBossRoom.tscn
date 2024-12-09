@@ -534,13 +534,16 @@ is_extra_life = true
 max_dist_to_player = 999
 
 [node name="ClaydolBoss" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9.24973, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -18.2497, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/ClaydolBoss/FallthroughSolid" index="0"]
 shape = SubResource( 225 )
 
 [node name="CollisionShape2" parent="Viewport/level/ClaydolBoss/FallthroughSolid" index="1"]
 shape = SubResource( 226 )
+
+[node name="InteractPrompt" parent="Viewport/level/ClaydolBoss" index="11"]
+transform = Transform( 0.996453, -0.0841474, 0, 0.0841474, 0.996453, 0, 0, 0, 1, 0.526223, 15.5525, 7 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0 )

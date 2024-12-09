@@ -7,6 +7,7 @@ onready var cubeCrystal = get_node("CubeCrystal")
 onready var fakeCrystalContainer = get_node("FakeCrystals")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
+onready var weakEyeAniPlayer = get_node("WeakPointContainer/WeakEye/SecretAnimationPlayer")
 onready var weakPointTarget = get_node("WeakPointTarget")
 var glitchHermitCrabManagerRes = preload("res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn")
 var spawnedHermitCrabManagers = []
@@ -97,12 +98,11 @@ func _process(delta):
             weakPointAniPlayer.stop()
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
-            level.restartMusic()
-            level.uiLayer.setDisplayTitle("the Warty sea devil")
             # cubeCrystal.applyGlitchMaterial(5)
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
-                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+                level.restartMusic()
+                level.uiLayer.setDisplayTitle("the Warty sea devil")
         return
     elif boss_phase == BossPhase.DEFEATED:
         moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
@@ -465,6 +465,7 @@ func tryToStartWeakPointDetachment():
         weakPointAniPlayer.clear_queue()
         weakPointAniPlayer.play("ouchies")
         weakPointAniPlayer.queue("stunIdleAttached")
+        weakEyeAniPlayer.play("blinkOpen")
     return
     # if is_weakpoint_attached and weakPointAniPlayer.assigned_animation != "detachSelf":
     #     weakPointAniPlayer.stop()

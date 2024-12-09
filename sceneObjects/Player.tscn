@@ -3337,7 +3337,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.12, 0.2, 0.12 ]
+"values": [ 0.12, 0.06, 0.12 ]
 }
 
 [sub_resource type="Animation" id=108]
@@ -3469,7 +3469,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.12, 0.2, 0.12 ]
+"values": [ 0.12, 0.06, 0.12 ]
 }
 
 [sub_resource type="Animation" id=121]
@@ -3557,7 +3557,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.12, 0.2, 0.12 ]
+"values": [ 0.12, 0.06, 0.12 ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("SpriteContainer/InnerSpriteContainer/MoleSprite:material_override:shader_param/shake_power")
@@ -6916,7 +6916,7 @@ frame_delay = 0.1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
 visible = false
 material_override = SubResource( 116 )
-pixel_size = 0.2
+pixel_size = 0.12
 texture = ExtResource( 68 )
 hframes = 8
 vframes = 10

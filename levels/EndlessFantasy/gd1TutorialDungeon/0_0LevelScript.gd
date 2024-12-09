@@ -39,6 +39,8 @@ func _process(_delta):
       if player.physics_state == player.PhysicsState.COLLAPSED or \
          player.physics_state == player.PhysicsState.CAN_WAKE_UP:
         showInstructions = true
+    elif player.physics_state == player.PhysicsState.WAKING_UP:
+      global.pauseMoveInput = true
     elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false

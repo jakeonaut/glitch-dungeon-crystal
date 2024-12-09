@@ -74,7 +74,8 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
             if global.memory["dogu_matryoshka_boss"] == 0:
                 global.memory["dogu_matryoshka_boss"] = 1
-                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+                level.restartMusic()
+                level.uiLayer.setDisplayTitle("the Vessel of souls")
             return
 
     if global.pauseGame:

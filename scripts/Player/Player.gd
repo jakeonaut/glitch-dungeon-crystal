@@ -1169,6 +1169,7 @@ func getFishyInfected():
   #   broomStop()
   #   summonFallenBroom(true, false, false)
   # global.memory["broom"] = false
+  getABroom()
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
@@ -1195,6 +1196,7 @@ func getFishyInfected():
   #   pauseInput = true
   # else:
   #   aniPlayer.play("transformToFishy")
+  fall_timer = 0
   aniPlayer.play("transformToFishy")
   pauseAnimation = true
   should_collide_floor = true
@@ -1214,6 +1216,7 @@ func getFishyCured():
   aniPlayer.clear_queue()
   aniPlayer.play("revertFromFishy")
   aniPlayer.queue("land")
+  fall_timer = 0
   pauseAnimation = true
   if glitch_form == global.GlitchForm.FLOOR and not pressingDown() and physics_state != PhysicsState.BEING_TOSSED:
     on_ground = true
