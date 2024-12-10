@@ -4599,6 +4599,3 @@ shape = SubResource( 26 )
 transform = Transform( 0.6, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -6.13517, 1.51816, 0 )
 
 [node name="FakeCrystals" type="Spatial" parent="."]
-
-[node name="CubeCrystal" parent="FakeCrystals" instance=ExtResource( 10 )]
-transform = Transform( 0.6, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -6.13517, 1.51816, 0 )

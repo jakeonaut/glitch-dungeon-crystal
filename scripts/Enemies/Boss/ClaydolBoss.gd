@@ -2,12 +2,11 @@ extends "../GlitchEnemy.gd"
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var secretBounceAniPlayer = get_node("SecretBounceAnimationPlayer")
-onready var crystalsContainer = get_node("Crystals")
-onready var crystal1 = get_node("Crystals/HighpriestessCrystal")
 onready var noseSprite = get_node("SpriteContainer/InnerSpriteContainer/NoseSprite")
 onready var spriteContainer = get_node("SpriteContainer")
 onready var thudSound = get_node("Sounds/ThudSound")
 onready var digSound = get_node("Sounds/DigSound")
+onready var cubeCrystal = get_node("CubeCrystal")
 
 var MAX_NUM_HITS = 3
 var num_hits = 0
@@ -16,6 +15,10 @@ var dreidel_time_limit = 40
 var dizzy_timer = 0
 var dizzy_time_limit = 60
 var smokeCloudTimer = 0
+var idle_stomp_timer = 0
+var idle_stomp_time_limit = 10
+var waddle_timer = 0
+var waddle_time_limit = 15
 
 enum BossPhase {
     ASLEEP,
@@ -32,7 +35,11 @@ enum BossPhase {
     FALL_OVER,
     STUN_TWITCH,
     GET_UP,
+    SPAWN_BIG_ROCK,
+    HURT,
 }
+var behavior_should_drill = false
+var behavior_should_fall_rocks = false
 var boss_phase = BossPhase.ASLEEP
 var asleep_unearth_counter = 0
 onready var spawnSound = get_node("Sounds/SpawnSound")
@@ -40,6 +47,9 @@ var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
 var fallingRockRes = preload("res://sceneObjects/Enemies/FallingRock.tscn")
 var fallingRockTimer = 0
 var fallingRockTimeLimit = 10
+var big_rock_counter = 0
+var big_rock_count_max = 3
+var myBigRock = null
 
 func _ready():
     set_process(true)
@@ -53,10 +63,17 @@ func _process(delta):
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
-        if global.memory["dogu_matryoshka_boss"] == 1:
-            global_transform.origin.y += 4
+        if cubeCrystal.meshInstance1.visible:
+            cubeCrystal.meshInstance1.visible = false
+            global.memory["dogu_matryoshka_boss"] = -1
+        if global.memory["dogu_matryoshka_boss"] == -1:
             global.pauseGame = true
             global.shouldRenderAsCinematic = true
+            global_transform.origin.y += (delta*11)
+            if global_transform.origin.y >= -8:
+                global_transform.origin.y = -8
+                global.memory["dogu_matryoshka_boss"] = 1
+        if global.memory["dogu_matryoshka_boss"] == 1:
             asleep_unearth_counter = 0
             boss_phase = BossPhase.WAKEUP
             secretAniPlayer.stop()
@@ -67,7 +84,6 @@ func _process(delta):
             return
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
-            crystal1.applyGlitchMaterial(5)
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             global.pauseGame = false
@@ -80,13 +96,17 @@ func _process(delta):
                 level.uiLayer.setDisplayTitle("the Vessel of souls")
             return
 
+    cubeCrystal.meshInstance1.visible = false
     if global.pauseGame:
         return
 
-    fallingRockTimer += (delta*11)
-    if fallingRockTimer >= fallingRockTimeLimit:
-        fallingRockTimer = 0
-        spawnFallingRock()
+    if behavior_should_fall_rocks:
+        fallingRockTimer += (delta*11)
+        if fallingRockTimer >= fallingRockTimeLimit:
+            fallingRockTimer = 0
+            spawnFallingRock()
+    else:
+        fallingRockTimer = fallingRockTimeLimit
 
     # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
     if boss_phase == BossPhase.IDLE:
@@ -99,9 +119,74 @@ func _process(delta):
         boss_phase = BossPhase.JUMP_SQUAT
         # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
     elif boss_phase == BossPhase.WADDLE:
-        pass
+        # TODO(jaketrower): handle wall collision when waddling...
+        behavior_walking = true
+        waddle_timer += (delta*11)
+        if waddle_timer >= waddle_time_limit:
+            waddle_timer = 0
+            behavior_walking = false
+            walk_direction.x *= -1
+            if big_rock_counter >= big_rock_count_max:
+                boss_phase = BossPhase.SPAWN_BIG_ROCK
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("idleStomp")
+                idle_stomp_timer = 0
+                big_rock_counter = 0
+                var newBigRock = spawnFallingRock(global_transform.origin.x)
+                newBigRock.scale = Vector3(2, 2, 1)
+                myBigRock = weakref(newBigRock)
+            else:
+                boss_phase = BossPhase.IDLE_STOMP
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("idleStomp")
+                idle_stomp_timer = 0
     elif boss_phase == BossPhase.IDLE_STOMP:
-        pass
+        behavior_walking = false
+        behavior_should_fall_rocks = ("idleStomp" in secretAniPlayer.assigned_animation) or ("waddle" in secretAniPlayer.assigned_animation)
+        if behavior_should_fall_rocks:
+            idle_stomp_timer += (delta*11)
+            if idle_stomp_timer >= idle_stomp_time_limit:
+                idle_stomp_timer = 0
+                boss_phase = BossPhase.WADDLE
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                if walk_direction.x > 0:
+                    secretAniPlayer.play("waddle")
+                else:
+                    secretAniPlayer.play("waddleLeft")
+                waddle_timer = 0
+                big_rock_counter += 1
+        else:
+            idle_stomp_timer = 0
+    elif boss_phase == BossPhase.SPAWN_BIG_ROCK:
+        if myBigRock != null and myBigRock.get_ref() != null:
+            var bigRock = myBigRock.get_ref()
+            var correctYPos = global_transform.origin.y + 13.5
+            if bigRock.global_transform.origin.y <= correctYPos:
+                bigRock.grav = 0
+                bigRock.on_ground = true
+                bigRock.global_transform.origin.y = correctYPos
+                bigRock.landed()
+                myBigRock = null
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("dizzy")
+                boss_phase = BossPhase.DIZZY
+                thudSound.play()
+                spawnWeakEye()
+                global_transform.origin.y -= 2
+        else:
+            pass
+    elif boss_phase == BossPhase.HURT:
+        if not secretAniPlayer.is_playing():
+            dizzy_timer = 0
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idleStand")
+            boss_phase = BossPhase.IDLE
+            behavior_should_drill = not behavior_should_drill
     elif boss_phase == BossPhase.JUMP_SQUAT:
         if not secretAniPlayer.is_playing():
             behavior_jumping = true
@@ -115,10 +200,15 @@ func _process(delta):
     elif boss_phase == BossPhase.JUMP:
         if vv < -2:
             behavior_jumping = false
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("startDrillAttack")
-            boss_phase = BossPhase.START_DRILL_ATTACK
+            if behavior_should_drill:
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("startDrillAttack")
+                boss_phase = BossPhase.START_DRILL_ATTACK
+            else:
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("jumpFallEvil")
     elif boss_phase == BossPhase.START_DRILL_ATTACK:
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
@@ -136,13 +226,14 @@ func _process(delta):
         behavior_walking = true
         dreidel_timer += (delta*11)
         walk_speed = 16 * sin(dreidel_timer / (PI * 3)) + 16
-        tryGetStunnedByWalls()
+        # tryGetStunnedByWalls()
         if dreidel_timer >= dreidel_time_limit:
             behavior_walking = false
             dreidel_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idleStand")
+            behavior_should_drill = false
             boss_phase = BossPhase.IDLE
             # secretAniPlayer.stop()
             # secretAniPlayer.clear_queue()
@@ -152,6 +243,7 @@ func _process(delta):
             #     secretAniPlayer.play("dizzyRight")
             # boss_phase = BossPhase.DIZZY
     elif boss_phase == BossPhase.DIZZY:
+        behavior_should_fall_rocks = false
         dizzy_timer += (delta*11)
         if dizzy_timer >= dizzy_time_limit:
             dizzy_timer = 0
@@ -175,6 +267,7 @@ func _process(delta):
         unenemize()
 
     noseSprite.flip_h = mySprite.flip_h
+    cubeCrystal.meshInstance1.visible = false
 
 func unsmack():
     .unsmack()
@@ -230,7 +323,7 @@ func landed():
     secretBounceAniPlayer.stop()
     secretBounceAniPlayer.clear_queue()
     secretBounceAniPlayer.play("land")
-    if boss_phase == BossPhase.START_DRILL_ATTACK or boss_phase == BossPhase.DRILL_FALL:
+    if boss_phase == BossPhase.START_DRILL_ATTACK or boss_phase == BossPhase.DRILL_FALL or behavior_should_drill:
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("drillAttackFall")
@@ -239,6 +332,14 @@ func landed():
         for _i in range(2):
             if digTiles(getTilesBelow(getLevelTiles()), true):
                 global_transform.origin.y -= 8*.125
+    if boss_phase == BossPhase.JUMP and not behavior_should_drill:
+        boss_phase = BossPhase.IDLE_STOMP
+        secretAniPlayer.stop()
+        secretAniPlayer.clear_queue()
+        secretAniPlayer.play("idlePause")
+        secretAniPlayer.queue("idleStomp")
+        idle_stomp_timer = 0
+        big_rock_counter = 0
 
 # @override
 func glitchSetSpritesAndCollision():
@@ -337,11 +438,15 @@ func tryGetStunnedByWalls(margin = 0.25):
         flipWalkingDirection()
         spawnWeakEye()
 
-func spawnFallingRock():
+func spawnFallingRock(specific_x = null):
     var fallingRock = fallingRockRes.instance()
     level.add_child(fallingRock)
-    fallingRock.global_transform.origin.x = randi() % 36 - 10 # -10 to 26
+    if specific_x != null:
+        fallingRock.global_transform.origin.x = specific_x
+    else:
+        fallingRock.global_transform.origin.x = randi() % 36 - 10 # -10 to 26
     fallingRock.global_transform.origin.y = 13
+    return fallingRock
 
 func spawnWeakEye():
     var weakEye = weakEyeRes.instance()
@@ -358,6 +463,8 @@ func getHurt():
     num_hits += 1
     if num_hits >= MAX_NUM_HITS:
         yaBeatMe()
+    else:
+        boss_phase = BossPhase.HURT
 
 func yaBeatMe():
     pass
