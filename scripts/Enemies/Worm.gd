@@ -37,6 +37,8 @@ func _process(delta):
   if cooldown_timer >= cooldown_time_limit:
     cooldown_timer = 0
     is_in_cooldown = false
+  moveMyFriends(delta)
+  lastPosition = self.global_transform.origin
 
 # @override
 func glitchSetSpritesAndCollision():
@@ -104,28 +106,6 @@ func spawnASpore():
   spore.lifespan_time_limit = 15
 
 onready var bounceSound = get_node("Sounds/BounceSound")
-func fallthroughCollisionActivate(possible_game_mover):
-  pass
-  # if not has_transformed:
-  #   return
-
-  # # if level.player.nesting_doll_state == global.NestingDoll.BABY:
-  # if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
-  #   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-  #   var jump_val = 14
-  #   possible_game_mover.magicJump()
-  #   getPlayer().linear_velocity.y = jump_val
-  #   getPlayer().lv.y = jump_val
-  #   getPlayer().vv = jump_val
-  #   # getPlayer().physics_vars.applyHalfGrav = true
-  #   # getPlayer().physics_vars.applyHalfGravTimer = 3
-  #   bounceSound.pitch_scale = rand_range(0.8, 1.5)
-  #   bounceSound.play()
-  #   getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
-  #   mushroomBounceAniPlayer.stop()
-  #   mushroomBounceAniPlayer.clear_queue()
-  #   mushroomBounceAniPlayer.play("bounce")
-  #   spawnASpore()
 
 # @override
 func getSmacked(broom_origin = null, silently = false):
@@ -152,3 +132,44 @@ func unsmack():
   evolvedSelf.global_transform.origin = self.global_transform.origin
   evolvedSelf.startDigging()
   queue_free()
+
+func fallthroughCollisionActivate(friend):
+  if not friend.on_ground:
+    return # just landed
+  # TODO(jaketrower): The downside to this if there are multiple fallthroughSolids a game_mover is "on"
+  # is that multiple of them could fight for control here
+  # so TODO(jaketrower): Need to make the game_mover call like "fallthroughCollisionClear"
+  # if we are on another 
+  # ALSO, need to make game_mover call "fallthroughCollisionClear" if we ever
+  # like jump, or fall off too...
+  if not who_is_standing_on_me.has(friend.name):
+    # playBounce("land")
+    pass
+
+  var relativePosition = self.global_transform.origin - friend.global_transform.origin
+  who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
+
+func fallthroughCollisionClear(exFriend):
+  who_is_standing_on_me.erase(exFriend.name)
+
+func moveMyFriends(delta):
+  for friend_key in who_is_standing_on_me.keys():
+    var friendArray = who_is_standing_on_me[friend_key]
+    var friend = friendArray[0]
+    var relativePosition = friendArray[2]
+    if friend.linear_velocity.y > 0 or friend.should_magic_jump:
+      continue
+    friend.should_do_fallthrough_area_collision = true
+    friend.global_transform.origin += self.global_transform.origin - lastPosition
+    if not friend.on_ground or friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
+        friend.global_transform.origin.x > self.global_transform.origin.x + rb:
+      who_is_standing_on_me.erase(friend_key)
+      continue
+    friend.on_ground = true
+    friend.linear_velocity.y = 0
+    friend.fallthrough_area_collision_y = self.global_transform.origin.y - relativePosition.y + (self.linear_velocity.y*delta)
+
+    # try to clean up
+    friendArray[1] += (delta*22)
+    if friendArray[1] >= move_my_friends_time_limit:
+      who_is_standing_on_me.erase(friend_key)

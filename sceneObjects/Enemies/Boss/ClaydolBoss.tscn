@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -497,6 +497,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.8 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -1098,6 +1110,23 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "jumpFall"
@@ -1684,6 +1713,23 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
+}
 
 [sub_resource type="Animation" id=89]
 resource_name = "waddleLeft"
@@ -1760,6 +1806,23 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -1981,14 +2044,6 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 14.243, 0 ), Vector3( 0, 11.974, 0 ), Vector3( 0, 15.601, 0 ) ]
 }
 
-[sub_resource type="BoxShape" id=29]
-resource_local_to_scene = true
-extents = Vector3( 5.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=30]
-resource_local_to_scene = true
-extents = Vector3( 1.8, 0.24, 1 )
-
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -2024,7 +2079,7 @@ shader_param/texture_albedo = ExtResource( 14 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 12 )
 
-[sub_resource type="ArrayMesh" id=79]
+[sub_resource type="ArrayMesh" id=90]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2037,7 +2092,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=80]
+[sub_resource type="ArrayMesh" id=91]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -3292,17 +3347,6 @@ anims/jump = SubResource( 19 )
 anims/jumpSquat = SubResource( 20 )
 anims/land = SubResource( 21 )
 
-[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.368152, 7.55664, 2 )
-shape = SubResource( 29 )
-
-[node name="CollisionShape2" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.655257, 10.8332, 2 )
-shape = SubResource( 30 )
-
 [node name="WindGust" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17431, 14.9924, 1 )
 frame = 0
@@ -3335,11 +3379,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 79 )
+mesh = SubResource( 90 )
 
 [node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 80 )
+mesh = SubResource( 91 )
 
 [node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )

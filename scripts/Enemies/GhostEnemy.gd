@@ -9,14 +9,17 @@ var true_original_pos = null
 var target_pos = null
 var is_following_player = false
 var do_i_belong_here = true
+var moving_towards_player = false
 
 func _process(delta):
   # ._process(delta) implicit
   if not visible: return
   
   delta = delta * global.time_dilation_multiplier
+  behavior_phase_through_walls = true
 
   if just_a_figment:
+    mySprite.material_override.set_shader_param("enable_glitch_3d", false)
     global_transform.origin.x += x_speed * delta
     if x_speed > 0:
       mySprite.flip_h = false
@@ -33,9 +36,12 @@ func _process(delta):
     mySprite.material_override.set_shader_param("opacity", my_opacity)
     if my_opacity <= 0:
       queue_free()
+  elif moving_towards_player:
+    var step = 2
+    var directionVector = (level.player.global_transform.origin - global_transform.origin).normalized()
+    global_transform.origin += directionVector * (delta*step)
+    mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
   else:
-    behavior_phase_through_walls = true
-
     var step = 10
     if target_pos != null:
       global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*step)
@@ -47,7 +53,6 @@ func _process(delta):
     if is_following_player and level.player.isOnSavePoint():
       is_following_player = false
       randomizeTargetPos()
-
   
 func randomizeTargetPos():
   var amt = 0.5
@@ -67,8 +72,15 @@ func randomizeTargetPos():
 
   mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
-func passiveActivate(_delta, is_player):
-  if is_player and not level.player.malware_infected and not is_following_player and not level.player.isOnSavePoint() and not just_a_figment:
-    is_following_player = true
-    level.player.glitchTickle()
-    level.player.malwareCorruptMe()
+# func passiveActivate(_delta, is_player):
+#   if just_a_figment or is_following_player:
+#     return
+#   if is_player and not level.player.malware_infected and not is_following_player and not level.player.isOnSavePoint() and not just_a_figment:
+#     moving_towards_player = false
+#     is_following_player = true
+#     randomizeTargetPos()
+#     level.player.glitchTickle()
+#     level.player.malwareCorruptMe()
+
+func isActive(_debug = false):
+  return visible
