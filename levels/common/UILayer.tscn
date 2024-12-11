@@ -932,11 +932,11 @@ margin_bottom = 58.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GlitchSprite" type="Sprite" parent="GlitchSpriteColorRect/ColorRect2/ColorRect3"]
-position = Vector2( 25.5, 39 )
+position = Vector2( 25.5, 28 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 hframes = 4
-vframes = 4
+vframes = 6
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
 visible = false
@@ -1006,7 +1006,7 @@ mesh = SubResource( 17216 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1145,6 +1145,7 @@ vframes = 5
 frame = 12
 
 [node name="EquipmentRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 7.0
 margin_top = 4.0
 margin_right = 84.0

@@ -38,6 +38,7 @@ func tryInitializeFromDebug():
     epilepsyWarning.visible = true
 
 func setUpRoomInitializationOverride():
+    player.mySprite.material_override.set_shader_param("black_offset", 0)
     if not global.has_started_game:
         global.isOnMainMenu = true
         player.normalGlitch()

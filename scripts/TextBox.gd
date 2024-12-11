@@ -324,7 +324,7 @@ func showInteractPrompt(is_comic_alert = false):
   var sweep_button_text = global.getLargeInputText("sub_action_button")
   if not is_interact_prompt:
     if is_comic_alert:
-      textNode.bbcode_text = "[wave]![/wave]"
+      textNode.bbcode_text = "[wave]!" + sweep_button_text + "![/wave]"
     else:
       textNode.bbcode_text = "[wave]" + sweep_button_text + "[/wave]"
     tinify()

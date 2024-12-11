@@ -7,6 +7,7 @@ var is_touching_enemy = false
 var is_touching_water = false
 var is_touching_waterfall = false
 var is_touching_door = false
+var is_touching_npc = false
 var touched_water_area = null
 var is_touching_ladder = false
 var is_touching_carcass = false
@@ -29,6 +30,7 @@ func _process(delta):
     is_touching_water = false
     is_touching_waterfall = false
     is_touching_door = false
+    is_touching_npc = false
     touched_water_area = null
     is_touching_ladder = false
     is_touching_carcass = false
@@ -79,6 +81,8 @@ func _process(delta):
             is_touching_carcass = true
         if area.is_in_group("return_recover"):
             parent.tryToRecover()
+        if area.is_in_group("npc"):
+            is_touching_npc = true
 
     if parent.physics_state == parent.PhysicsState.BEING_TOSSED:
         global.broomSmackStuff(non_malware_areas, true, parent.global_transform, null, level, null)

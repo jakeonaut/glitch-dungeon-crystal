@@ -25,6 +25,7 @@ uniform bool enable_black_unknown = false;
 uniform int palettesize = 16;
 uniform int resolution_scale = 1;
 uniform int offset = 0;
+uniform int black_offset = 0;
 uniform bool enable_glitch = false;
 uniform bool enable_color_glitch = true;
 uniform bool disable_glitch_dither = false;
@@ -130,6 +131,9 @@ void fragment() {
     }
      
     float fdelta = float(index+offset);
+    if (index == 4) {
+      fdelta = float(index+black_offset);
+    }
     if (enable_palette_cycle) {
       fdelta = fdelta - (TIME * palette_cycle_speed);
     }

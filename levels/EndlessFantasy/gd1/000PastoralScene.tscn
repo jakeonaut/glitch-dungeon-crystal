@@ -84,6 +84,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -127,6 +128,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -232,6 +234,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -410,6 +413,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -445,6 +449,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -1596,6 +1601,7 @@ shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -2061,6 +2067,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -2344,7 +2351,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1354, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1354, 0, 0 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5469, 2.36, -2 )
@@ -2364,7 +2371,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406321, 3.08217, 0 )
 shape = SubResource( 21 )
 
 [node name="cameraTarget" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5469, 2.36, -2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5469, 2.36, -2 )
 material_override = SubResource( 36 )
 pixel_size = 0.0001
 texture = ExtResource( 19 )
@@ -2375,7 +2382,7 @@ overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png
 automatically_change_color = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7, 0.0751328, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7, 0.0751328, 0 )
 grav = 0
 smackedBbText = "moo!!! (cut that out)"
 is_really_important = true
@@ -2409,7 +2416,7 @@ shape = SubResource( 27 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="BabushkaCat" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.299, 0.0529289, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.299, 0.0529289, -4 )
 bbText = "sweep"
 is_really_important = true
 can_camera_zoom = false
@@ -2672,7 +2679,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.411366, 0 )
 how_many_times_did_u_hit_me = -999
 
 [node name="FreeChicken2" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.52752, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 2.52752, 0 )
 how_many_times_did_u_hit_me = -999
 
 [node name="Sprite3D9" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
@@ -2717,7 +2724,7 @@ volume_db = -28.0
 pitch_scale = 1.6
 
 [node name="DialogPosition" type="Sprite3D" parent="Viewport/level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2, 0 )
 visible = false
 pixel_size = 0.025
 texture = ExtResource( 49 )

@@ -14,6 +14,7 @@ func _process(_delta):
     var player = get_node("..")
     has_activated_something = false
     var can_activate = not global.pauseMoveInput and player.on_ground
+    var hadGlobalActiveInteractor = global.activeInteractor != null
 
     if global.hasJustEnteredRoom or global.isEnteringRoom or global.isPauseMenuOpen:
         return
@@ -79,7 +80,7 @@ func _process(_delta):
         elif nearest_area and can_activate and nearest_area.is_in_group("npc") and not nearest_area.is_in_group("door"):
             # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
             activated_something = nearest_area.InteractActivate()        
-        if activated_something and player.summonedBroom != null:
+        if activated_something and player.summonedBroom != null and (not hadGlobalActiveInteractor or (player.smallInteractionArea.is_touching_npc and player.on_ground)):
             player.broomStop()
             has_activated_something = true
     #     # Give secondary priority to held objects action.
@@ -95,6 +96,7 @@ func _process(_delta):
             var activatedSomething = global.activeInteractor.InteractActivate()
             if activatedSomething and player.summonedBroom != null:
                 player.broomStop()
+                print("...2")
                 has_activated_something = true
     elif global.activeInteractor == null and nearest_area != null and nearest_area.get_node("..").has_method("tryShowInteractPrompt") and can_activate:
         if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):

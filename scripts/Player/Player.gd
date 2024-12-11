@@ -1963,11 +1963,7 @@ var force_a_sweep = false
 func processBroomLogic(delta):
   if (pauseInput or global.shouldRenderAsCinematic) and summonedBroom == null:
     return
-  # if transformation == TransformationState.FISHY:
-  #   return
   if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":
-    return
-  if interactionArea.has_activated_something and not force_a_sweep:
     return
 
 
@@ -2090,6 +2086,7 @@ func doBroomAttack(which_broom_attack):
       is_in_broom_cooldown = false
     if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
       if smacked_npc == null:
+        print("girl bye") 
         smacked_npc = global.activeInteractor.textboxParent
       summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
@@ -2272,16 +2269,19 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+      mySprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"] and not isHoldingMultiBroom():
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
+      mySprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("000PastoralScene") > 0 and global.has_started_game) else 1)
   else:
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
+      mySprite.material_override.set_shader_param("black_offset", 0)
 
 
 func processBagRenderLogic(_delta):
