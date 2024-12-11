@@ -37,6 +37,12 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -443,9 +449,9 @@ radius = 2.0
 [sub_resource type="BoxShape" id=29]
 extents = Vector3( 18, 13, 1 )
 
-[sub_resource type="BoxShape" id=39]
+[sub_resource type="BoxShape" id=43]
 resource_local_to_scene = true
-extents = Vector3( 1, 0.24, 1 )
+extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="Worm" type="Spatial"]
 script = ExtResource( 5 )
@@ -523,4 +529,4 @@ transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.91
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.95, 0 )
-shape = SubResource( 39 )
+shape = SubResource( 43 )

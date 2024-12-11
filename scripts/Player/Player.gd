@@ -120,7 +120,7 @@ func processNotWallLadderWalking(delta):
 
 # @override
 func alignMySprite():
-  var pixelSize = 0.125 if not malware_infected else 1.0
+  var pixelSize = 0.125 # 0.125 if not malware_infected else 1.0
   if spriteContainer:
     spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
     spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
@@ -1937,7 +1937,7 @@ func corruptSprite(sprite):
   # sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   sprite.material_override.set_shader_param("enable_glitch", true)
   sprite.material_override.set_shader_param("enable_glitch_3d", false)
-  sprite.material_override.set_shader_param("enable_palette_cycle", true)
+  sprite.material_override.set_shader_param("enable_palette_cycle", not malware_infected)
   # sprite.material_override.set_shader_param("enable_no_transparency", true)
   # sprite.material_override.set_shader_param("shake_power", 0.1)
   # sprite.material_override.set_shader_param("shake_color_rate", 0.5)
@@ -2211,7 +2211,7 @@ var cloud_time_limit = 15
 var bug_sprite_timer = 0
 var bug_sprite_time_limit = 5
 func processSpriteRenderLogic(delta):
-  if physics_state == PhysicsState.BEING_TOSSED:
+  if physics_state == PhysicsState.BEING_TOSSED or malware_infected:
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:
@@ -2228,7 +2228,7 @@ func processSpriteRenderLogic(delta):
     #   level.add_child(newMalwareBugSprite)
     #   newMalwareBugSprite.global_transform.origin = self.global_transform.origin + newMalwareBugSprite.which_direction
     #   newMalwareBugSprite.global_transform.origin.z += 1
-  elif physics_state == PhysicsState.NORMAL:
+  elif physics_state == PhysicsState.NORMAL and not malware_infected:
     uncorruptAllSprites()
 
   if grav < 0:

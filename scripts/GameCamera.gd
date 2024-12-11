@@ -4,6 +4,7 @@ var initial_z
 onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
+onready var aniPlayer = get_node("AnimationPlayer")
 
 var leftmost_x = 999
 var rightmost_x = -999
@@ -67,6 +68,18 @@ func _ready():
       botmost_y = tile_y
     if tile_y + TILE_HEIGHT > topmost_y:
       topmost_y = tile_y + TILE_HEIGHT
+
+func shakeScreen():
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("screenShake")
+
+func miniShakeScreen():
+  if aniPlayer.assigned_animation == "screenShake" and aniPlayer.is_playing():
+    return
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("miniScreenShake")
       
 func setCameraPositionNow():
   global_transform.origin.x = initial_target.global_transform.origin.x

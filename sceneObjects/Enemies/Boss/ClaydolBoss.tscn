@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -499,6 +499,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.8 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -1100,6 +1112,23 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "jumpFall"
@@ -1686,6 +1715,23 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
+}
 
 [sub_resource type="Animation" id=89]
 resource_name = "waddleLeft"
@@ -1762,6 +1808,23 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "miniShakeScreen"
+}, {
+"args": [  ],
+"method": "miniShakeScreen"
+} ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -1982,14 +2045,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, 14.243, 0 ), Vector3( 0, 11.974, 0 ), Vector3( 0, 15.601, 0 ) ]
 }
-
-[sub_resource type="BoxShape" id=29]
-resource_local_to_scene = true
-extents = Vector3( 5.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=30]
-resource_local_to_scene = true
-extents = Vector3( 1.8, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 1 )
@@ -3294,17 +3349,6 @@ anims/RESET = SubResource( 18 )
 anims/jump = SubResource( 19 )
 anims/jumpSquat = SubResource( 20 )
 anims/land = SubResource( 21 )
-
-[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.368152, 7.55664, 2 )
-shape = SubResource( 29 )
-
-[node name="CollisionShape2" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.655257, 10.8332, 2 )
-shape = SubResource( 30 )
 
 [node name="WindGust" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17431, 14.9924, 1 )

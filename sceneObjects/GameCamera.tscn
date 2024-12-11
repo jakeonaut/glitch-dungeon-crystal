@@ -1,7 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/GameCamera.gd" type="Script" id=1]
 [ext_resource path="res://scripts/GameCamera2.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RealCamera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "miniScreenShake"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RealCamera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.1, 0 ), Vector3( -0.1, -0.1, 0 ), Vector3( 0.1, -0.1, 0 ), Vector3( 0, 0.1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "screenShake"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RealCamera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( -0.5, -0.5, 0 ), Vector3( 0.5, -0.5, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( -0.5, -0.5, 0 ), Vector3( 0.5, -0.5, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 0, 0 ) ]
+}
 
 [node name="GameCamera" type="InterpolatedCamera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.923, 19.226 )
@@ -17,3 +66,8 @@ projection = 1
 current = true
 size = 20.0
 script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/miniScreenShake = SubResource( 3 )
+anims/screenShake = SubResource( 2 )

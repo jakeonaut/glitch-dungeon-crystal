@@ -22,9 +22,12 @@ func getPlayer():
 
 var tile_dict = {}
 var infected_spikes = []
+var infected_soft_sand = []
 var dissolving_stones = []
 var transient_tiles = []
 var transient_time_limit = 20
+var soft_sand_infection_timer = 0
+var soft_sand_infection_time_limit = 10
 var spike_infection_timer = 0
 var spike_infection_time_limit = 5
 var stone_corrosion_timer = 0
@@ -399,6 +402,32 @@ func _process(delta):
         infectSpikes(bottom_right_neighbor_coords)
         infectSpikes(bottom_left_neighbor_coords)
         infectSpikes(top_right_neighbor_coords)
+  
+  var num_infected_soft_sand = len(infected_soft_sand)
+  if num_infected_soft_sand > 0:
+    soft_sand_infection_timer += (delta*22)
+    if soft_sand_infection_timer >= soft_sand_infection_time_limit: 
+      soft_sand_infection_timer = 0
+      # global.incrementLevelZoneGlitchTiles(num_infected_soft_sand)
+      # tryToSayTidy()
+      for _i in range(num_infected_soft_sand):
+        var coords = infected_soft_sand.pop_front()
+        var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
+        var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)
+        var left_neighbor_coords = Vector3(coords.x - 1, coords.y, coords.z)
+        var right_neighbor_coords = Vector3(coords.x + 1, coords.y, coords.z)
+        infectSoftSand(top_neighbor_coords)
+        infectSoftSand(bottom_neighbor_coords)
+        infectSoftSand(left_neighbor_coords)
+        infectSoftSand(right_neighbor_coords)
+        var top_left_neighbor_coords = Vector3(coords.x - 1, coords.y + 1, coords.z)
+        var bottom_right_neighbor_coords = Vector3(coords.x + 1, coords.y - 1, coords.z)
+        var bottom_left_neighbor_coords = Vector3(coords.x - 1, coords.y - 1, coords.z)
+        var top_right_neighbor_coords = Vector3(coords.x + 1, coords.y + 1, coords.z)
+        infectSoftSand(top_left_neighbor_coords)
+        infectSoftSand(bottom_right_neighbor_coords)
+        infectSoftSand(bottom_left_neighbor_coords)
+        infectSoftSand(top_right_neighbor_coords)
 
   # process transient tiles. no spread.
   for i in range(len(transient_tiles)-1, -1, -1):
@@ -500,6 +529,21 @@ func infectSpikes(coords, play_sound = true):
     level.summonSmokeClouds(tile_pos, 2, play_sound, true)
     did_infect_spikes = true
   spike_infection_timer = 0
+  return did_infect_spikes
+
+func infectSoftSand(coords, play_sound = true):
+  var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
+  var did_infect_spikes = false
+  if isTileSoftSand(tile_type):
+    infected_soft_sand.append(coords)
+    
+    # clear it only for this instance of the room, as this will likely only be used for ClaydolBoss... ??
+    self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+
+    var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+    level.summonSmokeClouds(tile_pos, 2, play_sound, true)
+    did_infect_spikes = true
+  soft_sand_infection_timer = 0
   return did_infect_spikes
 
 func corrode(coords):
