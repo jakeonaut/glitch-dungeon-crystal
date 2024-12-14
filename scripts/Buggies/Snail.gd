@@ -61,6 +61,9 @@ func _process(delta):
     if am_i_dying:
         return
 
+    if is_wall_snail:
+        walk_direction.x = 0
+
     if didja_get_me:
         opacity = opacity + (0.0 - opacity) * (delta * 5)
         myOtherSprite.material_override.set_shader_param("opacity", opacity)

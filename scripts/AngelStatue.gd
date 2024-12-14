@@ -6,6 +6,7 @@ onready var mySprite = get_node("Sprite3D")
 onready var birdSprite = get_node("BirdSprite")
 onready var musicNoteSprite = get_node("MusicNoteSprite")
 onready var tweetSound = get_node("TweetSound")
+onready var savePoint = get_node("SavePoint")
 var hasRandomizedTweet = false
 var is_angel_activated = false
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
@@ -43,7 +44,7 @@ func _process(delta):
 func isActive(_debug=false):
     return self.visible
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(delta, is_player):
     if not is_angel_activated:
         global.setLevelZoneThing("angel_statue", [
             global.getDisplayTitle(level.getLevelZoneName(), "haven"),
@@ -58,6 +59,7 @@ func passiveActivate(_delta, _is_player):
         var my_material = mySprite.get_material_override()
         if my_material is ShaderMaterial:
             my_material.set_shader_param("enable_palette_cycle", true)
+    savePoint.passiveActivate(delta, is_player)
     
 
 func stopPassiveActivate():

@@ -36,6 +36,7 @@ export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
 export var behavior_intermittent_walking = false
 export var behavior_walk_flip = true
+export var behavior_stick_to_walls = false
 export var behavior_jumping = false
 export var behavior_flip_on_land = false
 export var behavior_stop_on_land = false
@@ -167,6 +168,43 @@ func shouldIDoCollisions():
     should_collide_floor = (not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
     should_collide_ceil = (not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
     should_collide_horizontally = behavior_walking and walk_direction.x != 0 and not behavior_phase_through_walls
+
+var my_up_vector = Vector2(0, 1)
+func collideWithWall(local_lv):
+    if behavior_stick_to_walls:
+        if my_up_vector.y < 0:
+            my_up_vector.y = 0
+            if walk_direction.x > 0:
+                my_up_vector.x = -1
+                mySprite.rotation_degrees.z = 90
+                walk_direction = Vector2(0, -1)
+            elif walk_direction.x < 0:
+                my_up_vector.x = 1
+                mySprite.rotation_degrees.z = 270
+                walk_direction = Vector2(0, -1)
+        elif my_up_vector.y > 0:
+            my_up_vector.y = 0
+            if walk_direction.x > 0:
+                mySprite.rotation_degrees.z = 270
+                walk_direction = Vector2(0, 1)
+                my_up_vector.x = -1
+            elif walk_direction.x < 0:
+                mySprite.rotation_degrees.z = 90
+                walk_direction = Vector2(0, 1)
+                my_up_vector.x = 1
+    return .collideWithWall(local_lv)
+
+func collideWithCeiling(local_lv):
+    if behavior_stick_to_walls:
+        if walk_direction.y > 0 and my_up_vector.y == 0:
+            if my_up_vector.x < 0:
+                walk_direction = Vector2(-1, 0)
+                mySprite.rotation_degrees.z = 180
+            elif my_up_vector.x > 0:
+                walk_direction = Vector2(1, 0)
+                mySprite.rotation_degrees.z = 180
+            my_up_vector = Vector2(0, -1)
+    return .collideWithCeiling(local_lv)
 
 onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
 func glitchOut():
@@ -303,7 +341,7 @@ func updateFallthroughSolids():
     
 var should_reset_slime_timer_on_flip = true
 func doHorizontalWalkingBehavior():
-    if not behavior_walk_flip:
+    if not behavior_walk_flip or behavior_stick_to_walls:
         return
     if behavior_walking and horizontal_collision:
         horizontal_collision = false
@@ -324,7 +362,10 @@ func flipWalkingDirection():
         myOtherSprite.flip_h = not myOtherSprite.flip_h
     
 func doVerticalWalkingBehavior():
-    if behavior_walking and walk_direction.y != 0:
+    if walk_direction.y == 0:
+        return
+    if behavior_walking:
+        jump_force = walk_speed
         if on_ground:
             on_ground = false
             walk_direction.y = 1
@@ -336,6 +377,10 @@ func doVerticalWalkingBehavior():
             grav = 60
             if myOtherSprite:
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
+    elif not behavior_walking:
+        vv = 0
+        lv.y = 0
+        linear_velocity.y = 0
                 
 func tryDieToBody():
     if smallInteractionArea == null:
@@ -459,6 +504,15 @@ func landed():
     if behavior_stop_on_land:
         behavior_was_thrown = false
         behavior_jumping = false
+    if behavior_stick_to_walls:
+        if walk_direction.y < 0 and my_up_vector.y == 0:
+            if my_up_vector.x < 0:
+                walk_direction = Vector2(-1, 0)
+                mySprite.rotation_degrees.z = 0
+            elif my_up_vector.x > 0:
+                walk_direction = Vector2(1, 0)
+                mySprite.rotation_degrees.z = 0
+            my_up_vector = Vector2(0, 1)
 
 func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)

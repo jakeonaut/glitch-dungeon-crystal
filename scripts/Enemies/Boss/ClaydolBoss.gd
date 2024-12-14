@@ -39,6 +39,7 @@ enum BossPhase {
     GET_UP,
     SPAWN_BIG_ROCK,
     HURT,
+    DEFEATED,
 }
 var behavior_should_drill = false
 var behavior_should_fall_rocks = false
@@ -67,6 +68,7 @@ func _process(delta):
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
+        unenemize()
         if cubeCrystal.meshInstance1.visible:
             cubeCrystal.meshInstance1.visible = false
             global.memory["dogu_matryoshka_boss"] = -1
@@ -74,8 +76,8 @@ func _process(delta):
             global.pauseGame = true
             global.shouldRenderAsCinematic = true
             global_transform.origin.y += (delta*11)
-            if global_transform.origin.y >= -8:
-                global_transform.origin.y = -8
+            if global_transform.origin.y >= -4.5:
+                global_transform.origin.y = -4.5
                 global.memory["dogu_matryoshka_boss"] = 1
         if global.memory["dogu_matryoshka_boss"] == 1:
             asleep_unearth_counter = 0
@@ -114,13 +116,7 @@ func _process(delta):
 
     # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
     if boss_phase == BossPhase.IDLE:
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("jumpSquat")
-        secretBounceAniPlayer.stop()
-        secretBounceAniPlayer.clear_queue()
-        secretBounceAniPlayer.play("jumpSquat")
-        boss_phase = BossPhase.JUMP_SQUAT
+        queueUpAJump()
         # waddle around or stomp randomly, if NOSE is smacked, then do a jump and spin attack
     elif boss_phase == BossPhase.WADDLE:
         # TODO(jaketrower): handle wall collision when waddling...
@@ -130,23 +126,11 @@ func _process(delta):
             waddle_timer = 0
             behavior_walking = false
             walk_direction.x *= -1
-            if big_rock_counter >= big_rock_count_max:
-                boss_phase = BossPhase.SPAWN_BIG_ROCK
-                secretAniPlayer.stop()
-                secretAniPlayer.clear_queue()
-                secretAniPlayer.play("idleStomp")
-                idle_stomp_timer = 0
-                big_rock_counter = 0
-                level.gameCamera.shakeScreen()
-                var newBigRock = spawnFallingRock(global_transform.origin.x)
-                newBigRock.scale = Vector3(2, 2, 1)
-                myBigRock = weakref(newBigRock)
-            else:
-                boss_phase = BossPhase.IDLE_STOMP
-                secretAniPlayer.stop()
-                secretAniPlayer.clear_queue()
-                secretAniPlayer.play("idleStomp")
-                idle_stomp_timer = 0
+            boss_phase = BossPhase.IDLE_STOMP
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idleStomp")
+            idle_stomp_timer = 0
     elif boss_phase == BossPhase.IDLE_STOMP:
         behavior_walking = false
         behavior_should_fall_rocks = ("idleStomp" in secretAniPlayer.assigned_animation) or ("waddle" in secretAniPlayer.assigned_animation)
@@ -157,10 +141,13 @@ func _process(delta):
                 boss_phase = BossPhase.WADDLE
                 secretAniPlayer.stop()
                 secretAniPlayer.clear_queue()
+                behavior_walking = true
                 if walk_direction.x > 0:
                     secretAniPlayer.play("waddle")
                 else:
                     secretAniPlayer.play("waddleLeft")
+                walk_direction.x *= -1
+                queueUpAJump()
                 waddle_timer = 0
                 big_rock_counter += 1
         else:
@@ -280,6 +267,15 @@ func _process(delta):
     noseSprite.flip_h = mySprite.flip_h
     cubeCrystal.meshInstance1.visible = false
 
+func queueUpAJump():
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("jumpSquat")
+    secretBounceAniPlayer.stop()
+    secretBounceAniPlayer.clear_queue()
+    secretBounceAniPlayer.play("jumpSquat")
+    boss_phase = BossPhase.JUMP_SQUAT
+
 func unsmack():
     .unsmack()
     smack_time_limit = 10
@@ -314,6 +310,8 @@ func getSmacked(broom_origin = null, silently = false):
             mySprite.material_override.set_shader_param("shake_block_size", 60*2)
             mySprite.material_override.set_shader_param("shake_color_rate", 0.219*2)
         smack_time_limit = 20
+    elif boss_phase == BossPhase.DEFEATED:
+        pass
 
     # if boss_phase == BossPhase.DIZZY:
     #     boss_phase = BossPhase.FALL_OVER
@@ -348,13 +346,22 @@ func landed():
             if digTiles(getTilesBelow(getLevelTiles()), true):
                 global_transform.origin.y -= 8*.125
     if boss_phase == BossPhase.JUMP and not behavior_should_drill:
+        behavior_walking = false
         boss_phase = BossPhase.IDLE_STOMP
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("idlePause")
         secretAniPlayer.queue("idleStomp")
         idle_stomp_timer = 0
-        big_rock_counter = 0
+        if big_rock_counter >= big_rock_count_max:
+            boss_phase = BossPhase.SPAWN_BIG_ROCK
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("idleStomp")
+            level.gameCamera.shakeScreen()
+            var newBigRock = spawnFallingRock(global_transform.origin.x)
+            newBigRock.scale = Vector3(2, 2, 1)
+            myBigRock = weakref(newBigRock)
 
 # @override
 func glitchSetSpritesAndCollision():
@@ -387,6 +394,14 @@ func doHorizontalWalkingBehavior():
                     global_transform.origin.y -= 8*.125
                 flipWalkingDirection()
                 return
+        if global_transform.origin.x >= 24 or global_transform.origin.x <= -7:
+            getSmacked()
+            thudSound.play()
+            horizontal_collision = false
+            if digTiles(getTilesBelow(getLevelTiles()), true):
+                global_transform.origin.y -= 8*.125
+            flipWalkingDirection()
+            return
         
         horizontal_collision = false
         digTiles(solidTiles, true)
@@ -487,6 +502,8 @@ func spawnWorm():
     worm.linear_velocity.y = jump_pop_val
     worm.lv.y = jump_pop_val
     worm.vv = jump_pop_val
+    worm.behavior_walk_flip = false
+    worm.behavior_stick_to_walls = true
     level.add_child(worm)
     worm.global_transform.origin.x = self.global_transform.origin.x
     worm.global_transform.origin.y = self.global_transform.origin.y + 13
@@ -502,6 +519,7 @@ func miniShakeScreen():
     level.gameCamera.miniShakeScreen()
 
 func getHurt():
+    big_rock_counter = 0
     mySprite.visible = true
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -514,7 +532,7 @@ func getHurt():
         boss_phase = BossPhase.HURT
 
 func yaBeatMe():
-    pass
+    boss_phase = BossPhase.DEFEATED
 
 func updateFallthroughSolids():
     if fallthroughSolid:
