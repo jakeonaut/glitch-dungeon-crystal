@@ -37,12 +37,7 @@ func _process(delta):
   if cooldown_timer >= cooldown_time_limit:
     cooldown_timer = 0
     is_in_cooldown = false
-  moveMyFriends(delta)
   lastPosition = self.global_transform.origin
-
-# @override
-func glitchSetSpritesAndCollision():
-  pass
 
 # @override
 func pressingMoveLeft():
@@ -119,6 +114,8 @@ func getSmacked(broom_origin = null, silently = false):
     walk_direction.x = 1
   linear_velocity.y = 0
   lv.y = 0
+  behavior_walking = false
+  behavior_intermittent_walking = false
   smallInteractionArea.add_to_group("no_pushems")
 
 var moleCricketRes = preload("res://sceneObjects/Enemies/GlitchMoleCricket.tscn")
@@ -128,48 +125,11 @@ func unsmack():
   var evolvedSelf = moleCricketRes.instance()
   evolvedSelf.is_builder = true
   evolvedSelf.do_i_care_about_time_limit = true
+  evolvedSelf.grav = 0
+  evolvedSelf.on_ground = true
+  evolvedSelf.my_up_vector = self.my_up_vector
   level.add_child(evolvedSelf)
   evolvedSelf.global_transform.origin = self.global_transform.origin
+  evolvedSelf.get_node("Sprite3D2").rotation_degrees = mySprite.rotation_degrees
   evolvedSelf.startDigging()
   queue_free()
-
-func fallthroughCollisionActivate(friend):
-  if not friend.on_ground:
-    return # just landed
-  # TODO(jaketrower): The downside to this if there are multiple fallthroughSolids a game_mover is "on"
-  # is that multiple of them could fight for control here
-  # so TODO(jaketrower): Need to make the game_mover call like "fallthroughCollisionClear"
-  # if we are on another 
-  # ALSO, need to make game_mover call "fallthroughCollisionClear" if we ever
-  # like jump, or fall off too...
-  if not who_is_standing_on_me.has(friend.name):
-    # playBounce("land")
-    pass
-
-  var relativePosition = self.global_transform.origin - friend.global_transform.origin
-  who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
-
-func fallthroughCollisionClear(exFriend):
-  who_is_standing_on_me.erase(exFriend.name)
-
-func moveMyFriends(delta):
-  for friend_key in who_is_standing_on_me.keys():
-    var friendArray = who_is_standing_on_me[friend_key]
-    var friend = friendArray[0]
-    var relativePosition = friendArray[2]
-    if friend.linear_velocity.y > 0 or friend.should_magic_jump:
-      continue
-    friend.should_do_fallthrough_area_collision = true
-    friend.global_transform.origin += self.global_transform.origin - lastPosition
-    if not friend.on_ground or friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
-        friend.global_transform.origin.x > self.global_transform.origin.x + rb:
-      who_is_standing_on_me.erase(friend_key)
-      continue
-    friend.on_ground = true
-    friend.linear_velocity.y = 0
-    friend.fallthrough_area_collision_y = self.global_transform.origin.y - relativePosition.y + (self.linear_velocity.y*delta)
-
-    # try to clean up
-    friendArray[1] += (delta*22)
-    if friendArray[1] >= move_my_friends_time_limit:
-      who_is_standing_on_me.erase(friend_key)

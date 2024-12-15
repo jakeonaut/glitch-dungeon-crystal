@@ -504,6 +504,8 @@ func spawnWorm():
     worm.vv = jump_pop_val
     worm.behavior_walk_flip = false
     worm.behavior_stick_to_walls = true
+    worm.slime_walk_time_limit = 2
+    worm.slime_idle_time_limit = 2
     level.add_child(worm)
     worm.global_transform.origin.x = self.global_transform.origin.x
     worm.global_transform.origin.y = self.global_transform.origin.y + 13

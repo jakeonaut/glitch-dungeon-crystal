@@ -172,17 +172,7 @@ func shouldIDoCollisions():
 var my_up_vector = Vector2(0, 1)
 func collideWithWall(local_lv):
     if behavior_stick_to_walls:
-        if my_up_vector.y < 0:
-            my_up_vector.y = 0
-            if walk_direction.x > 0:
-                my_up_vector.x = -1
-                mySprite.rotation_degrees.z = 90
-                walk_direction = Vector2(0, -1)
-            elif walk_direction.x < 0:
-                my_up_vector.x = 1
-                mySprite.rotation_degrees.z = 270
-                walk_direction = Vector2(0, -1)
-        elif my_up_vector.y > 0:
+        if my_up_vector.y > 0:
             my_up_vector.y = 0
             if walk_direction.x > 0:
                 mySprite.rotation_degrees.z = 270
@@ -192,6 +182,17 @@ func collideWithWall(local_lv):
                 mySprite.rotation_degrees.z = 90
                 walk_direction = Vector2(0, 1)
                 my_up_vector.x = 1
+        elif my_up_vector.y < 0:
+            my_up_vector.y = 0
+            if walk_direction.x > 0:
+                my_up_vector.x = -1
+                mySprite.rotation_degrees.z = 90
+                walk_direction = Vector2(0, -1)
+                global_transform.origin.x -= 0.2
+            elif walk_direction.x < 0:
+                my_up_vector.x = 1
+                mySprite.rotation_degrees.z = 270
+                walk_direction = Vector2(0, -1)
     return .collideWithWall(local_lv)
 
 func collideWithCeiling(local_lv):
@@ -199,9 +200,11 @@ func collideWithCeiling(local_lv):
         if walk_direction.y > 0 and my_up_vector.y == 0:
             if my_up_vector.x < 0:
                 walk_direction = Vector2(-1, 0)
+                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
                 mySprite.rotation_degrees.z = 180
             elif my_up_vector.x > 0:
                 walk_direction = Vector2(1, 0)
+                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
                 mySprite.rotation_degrees.z = 180
             my_up_vector = Vector2(0, -1)
     return .collideWithCeiling(local_lv)
@@ -381,6 +384,7 @@ func doVerticalWalkingBehavior():
         vv = 0
         lv.y = 0
         linear_velocity.y = 0
+        grav = 0
                 
 func tryDieToBody():
     if smallInteractionArea == null:
@@ -464,7 +468,14 @@ func alignMySprite():
     pass 
 
 func glitchSetSpritesAndCollision():
-    mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+    if my_up_vector.y == 1:
+        mySprite.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+    elif my_up_vector.y == -1:
+        mySprite.global_transform.origin.y = self.global_transform.origin.y - sprite_offset_y
+    elif my_up_vector.x == 1:
+        mySprite.global_transform.origin.x = self.global_transform.origin.x + sprite_offset_y/2
+    elif my_up_vector.x == -1:
+        mySprite.global_transform.origin.x = self.global_transform.origin.x - sprite_offset_y/2
 
 var should_smack_pause_me = true
 # @override
@@ -508,9 +519,11 @@ func landed():
         if walk_direction.y < 0 and my_up_vector.y == 0:
             if my_up_vector.x < 0:
                 walk_direction = Vector2(-1, 0)
+                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
                 mySprite.rotation_degrees.z = 0
             elif my_up_vector.x > 0:
                 walk_direction = Vector2(1, 0)
+                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
                 mySprite.rotation_degrees.z = 0
             my_up_vector = Vector2(0, 1)
 

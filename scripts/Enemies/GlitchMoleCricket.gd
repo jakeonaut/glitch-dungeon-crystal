@@ -128,7 +128,7 @@ func _process(delta):
             startDigging()
     elif mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE:
         # falling
-        if not on_ground and has_dug:
+        if not on_ground and has_dug and my_up_vector.y == 1:
             mole_state_timer += (delta*22)
             if mole_state_timer >= mole_state_reset_dig_time_limit:
                 mole_state = MoleState.IDLE
@@ -151,9 +151,19 @@ func _process(delta):
                     if is_digging_left:
                         digTiles(getTilesLeftOf(getLevelTiles()), true)
                         digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
-                    else:
+                    elif my_up_vector.y == 1:
                         digTiles(getTilesBelow(getLevelTiles()), true)
                         digTiles(getTilesBelow(getFakeLevelTiles()), false)
+                    else:
+                        if my_up_vector.y == -1:
+                            digTiles(getTilesAbove(getLevelTiles()), true)
+                            digTiles(getTilesAbove(getFakeLevelTiles()), false)
+                        elif my_up_vector.x == 1:
+                            digTiles(getTilesLeftOf(getLevelTiles()), true)
+                            digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
+                        elif my_up_vector.x == -1:
+                            digTiles(getTilesRightOf(getLevelTiles(), 0.4), true)
+                            digTiles(getTilesRightOf(getFakeLevelTiles(), 0.4), false)
                     has_dug = true
                     digSound.play()
                 mole_state_timer = 0
@@ -355,7 +365,7 @@ func glitchSetSpritesAndCollision():
 func unsmack():
     .unsmack()
     has_been_smacked = true
-    if not (mole_state == MoleState.OVERRIDE_FLY_START or mole_state == MoleState.OVERRIDE_FLYING):
+    if not (mole_state == MoleState.OVERRIDE_FLY_START or mole_state == MoleState.OVERRIDE_FLYING or mole_state == MoleState.DIG):
         grav = 60
     
 
@@ -373,28 +383,49 @@ func digTiles(solidTiles, should_summon_clouds):
                 mole_state = MoleState.OVERRIDE_FLY_START
                 return
 
+    var x_add = 0
+    var y_add = 1
+    if my_up_vector.y == -1:
+        y_add = -1
+    elif my_up_vector.x == 1:
+        x_add = 1
+        y_add = 0
+    elif my_up_vector.x == -1:
+        x_add = -1
+        y_add = 0
     var tiles_dug = 0
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_a.x, coords_a.y+1, coords_a.z), permanently_alter_tiles, false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_a.x + x_add, coords_a.y + y_add, coords_a.z), permanently_alter_tiles, false)
         else:
             levelTiles.removeTile(Vector3(coords_a.x, coords_a.y, coords_a.z), permanently_alter_tiles)
         tiles_dug += 1
     if solidTiles[1] != null:
         var coords_mid = solidTiles[1]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_mid.x, coords_mid.y+1, coords_mid.z), permanently_alter_tiles, false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_mid.x + x_add, coords_mid.y + y_add, coords_mid.z), permanently_alter_tiles, false)
         else:
             levelTiles.removeTile(Vector3(coords_mid.x, coords_mid.y, coords_mid.z), permanently_alter_tiles)
         tiles_dug += 1
     if solidTiles[2] != null:
         var coords_b = solidTiles[2]
         if is_builder:
-            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_b.x, coords_b.y+1, coords_b.z), permanently_alter_tiles, false)
+            levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(coords_b.x + x_add, coords_b.y + y_add, coords_b.z), permanently_alter_tiles, false)
         else:
             levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), permanently_alter_tiles)
         tiles_dug += 1
+
+    var tileSize = 8*.125
+    if level.player.checkSolidTilesOnMe():
+        if my_up_vector.y == 1:
+            level.player.global_transform.origin.y += tileSize
+        elif my_up_vector.y == -1:
+            level.player.global_transform.origin.y -= tileSize
+        elif my_up_vector.x == 1:
+            level.player.global_transform.origin.x += tileSize
+        elif my_up_vector.x == -1:
+            level.player.global_transform.origin.x -= tileSize
 
     if should_summon_clouds and tiles_dug > 0:
         level.summonSmokeClouds(global_transform.origin, 2)
@@ -402,10 +433,17 @@ func digTiles(solidTiles, should_summon_clouds):
     if tiles_dug > 0:
         dig_counter += 1
         if is_builder:
-            global_transform.origin.y += 8*.125
+            if my_up_vector.y == 1:
+                global_transform.origin.y += tileSize
+            elif my_up_vector.y == -1:
+                global_transform.origin.y -= tileSize
+            elif my_up_vector.x == 1:
+                global_transform.origin.x += tileSize
+            elif my_up_vector.x == -1:
+                global_transform.origin.x -= tileSize
         else:
-            if is_digging_left: global_transform.origin.x -= 8*.125
-            else: global_transform.origin.y -= 8*.125
+            if is_digging_left: global_transform.origin.x -= tileSize
+            else: global_transform.origin.y -= tileSize
                 
     return tiles_dug > 0
 
