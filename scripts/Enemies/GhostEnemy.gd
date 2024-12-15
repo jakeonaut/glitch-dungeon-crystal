@@ -72,6 +72,11 @@ func randomizeTargetPos():
 
   mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
+func getSmacked(broom_origin = null, silently = false):
+  .getSmacked(broom_origin, silently)
+  just_a_figment = true
+  mySprite.material_override.set_shader_param("enable_glitch_3d", false)
+
 # func passiveActivate(_delta, is_player):
 #   if just_a_figment or is_following_player:
 #     return

@@ -19,8 +19,6 @@ var idle_stomp_timer = 0
 var idle_stomp_time_limit = 10
 var waddle_timer = 0
 var waddle_time_limit = 15
-var ghost_spawn_timer = 0
-var ghost_spawn_time_limit = 20
 
 enum BossPhase {
     ASLEEP,
@@ -34,9 +32,6 @@ enum BossPhase {
     DRILL_FALL,
     DRILL_DREIDEL_SPIN,
     DIZZY,
-    FALL_OVER,
-    STUN_TWITCH,
-    GET_UP,
     SPAWN_BIG_ROCK,
     HURT,
     DEFEATED,
@@ -58,7 +53,7 @@ var myBigRock = null
 
 func _ready():
     set_process(true)
-    sprite_offset_y = 7.5
+    # sprite_offset_y = 7.5
 
 # be careful cuz both the HurtPlayerArea and the InteractArea will both rely on this one function...
 func isActive(debug = false):
@@ -71,15 +66,15 @@ func _process(delta):
         unenemize()
         if cubeCrystal.meshInstance1.visible:
             cubeCrystal.meshInstance1.visible = false
-            global.memory["dogu_matryoshka_boss"] = -1
-        if global.memory["dogu_matryoshka_boss"] == -1:
+            global.memory["dogu_matryoshka_boss"] = -2
+        if global.memory["dogu_matryoshka_boss"] == -2:
             global.pauseGame = true
             global.shouldRenderAsCinematic = true
             global_transform.origin.y += (delta*11)
             if global_transform.origin.y >= -4.5:
                 global_transform.origin.y = -4.5
-                global.memory["dogu_matryoshka_boss"] = 1
-        if global.memory["dogu_matryoshka_boss"] == 1:
+                global.memory["dogu_matryoshka_boss"] = -1
+        if global.memory["dogu_matryoshka_boss"] == -1:
             asleep_unearth_counter = 0
             boss_phase = BossPhase.WAKEUP
             secretAniPlayer.stop()
@@ -96,10 +91,12 @@ func _process(delta):
             global.shouldRenderAsCinematic = false
             secretAniPlayer.play("idleStand")
             boss_phase = BossPhase.IDLE
-            if global.memory["dogu_matryoshka_boss"] == 0:
+            if global.memory["dogu_matryoshka_boss"] == -1:
                 global.memory["dogu_matryoshka_boss"] = 1
                 level.restartMusic()
                 level.uiLayer.setDisplayTitle("the Vessel of souls")
+                level.gameCamera.initial_size = 35
+                level.gameCamera.zoomed_size = 35
             return
 
     cubeCrystal.meshInstance1.visible = false
@@ -141,7 +138,6 @@ func _process(delta):
                 boss_phase = BossPhase.WADDLE
                 secretAniPlayer.stop()
                 secretAniPlayer.clear_queue()
-                behavior_walking = true
                 if walk_direction.x > 0:
                     secretAniPlayer.play("waddle")
                 else:
@@ -155,11 +151,12 @@ func _process(delta):
     elif boss_phase == BossPhase.SPAWN_BIG_ROCK:
         if myBigRock != null and myBigRock.get_ref() != null:
             var bigRock = myBigRock.get_ref()
-            var correctYPos = global_transform.origin.y + 13.5
+            var correctYPos = global_transform.origin.y + 11.5
             if bigRock.global_transform.origin.y <= correctYPos:
                 bigRock.grav = 0
                 bigRock.on_ground = true
                 bigRock.global_transform.origin.y = correctYPos
+                bigRock.is_big = false
                 bigRock.landed()
                 myBigRock = null
                 secretAniPlayer.stop()
@@ -180,6 +177,7 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
             behavior_should_drill = not behavior_should_drill
     elif boss_phase == BossPhase.JUMP_SQUAT:
+        behavior_should_fall_rocks = false
         if not secretAniPlayer.is_playing():
             behavior_jumping = true
             secretAniPlayer.stop()
@@ -190,6 +188,9 @@ func _process(delta):
             secretBounceAniPlayer.clear_queue()
             secretBounceAniPlayer.play("jump")
     elif boss_phase == BossPhase.JUMP:
+        behavior_should_fall_rocks = false
+        if not behavior_should_drill:
+            behavior_walking = true
         if vv < -2:
             behavior_jumping = false
             if behavior_should_drill:
@@ -210,12 +211,6 @@ func _process(delta):
     elif boss_phase == BossPhase.DRILL_FALL:
         pass
     elif boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
-        ghost_spawn_timer += (delta*11)
-        if ghost_spawn_timer >= ghost_spawn_time_limit:
-            ghost_spawn_timer = 0
-            spawnGhostEnemy()
-            spawnWorm()
-
         smokeCloudTimer += (delta*11)
         if smokeCloudTimer >= 1:
             smokeCloudTimer = 0
@@ -233,6 +228,7 @@ func _process(delta):
             secretAniPlayer.play("idleStand")
             behavior_should_drill = false
             boss_phase = BossPhase.IDLE
+            spawnWorm()
             # secretAniPlayer.stop()
             # secretAniPlayer.clear_queue()
             # if global_transform.origin.x >= 8:
@@ -249,20 +245,6 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idleStand")
             boss_phase = BossPhase.IDLE
-    elif boss_phase == BossPhase.FALL_OVER:
-        unenemize()
-        if not secretAniPlayer.is_playing():
-            if secretAniPlayer.assigned_animation == "fallOver":
-                secretAniPlayer.stop()
-                secretAniPlayer.clear_queue()
-                secretAniPlayer.play("stunTwitch")
-            elif secretAniPlayer.assigned_animation == "fallOverRight":
-                secretAniPlayer.stop()
-                secretAniPlayer.clear_queue()
-                secretAniPlayer.play("stunTwitchRight")
-            boss_phase = BossPhase.STUN_TWITCH
-    elif boss_phase == BossPhase.STUN_TWITCH:
-        unenemize()
 
     noseSprite.flip_h = mySprite.flip_h
     cubeCrystal.meshInstance1.visible = false
@@ -313,25 +295,14 @@ func getSmacked(broom_origin = null, silently = false):
     elif boss_phase == BossPhase.DEFEATED:
         pass
 
-    # if boss_phase == BossPhase.DIZZY:
-    #     boss_phase = BossPhase.FALL_OVER
-    #     if secretAniPlayer.assigned_animation == "dizzy":
-    #         secretAniPlayer.stop()
-    #         secretAniPlayer.clear_queue()    
-    #         secretAniPlayer.play("fallOver")
-    #     elif secretAniPlayer.assigned_animation == "dizzyRight":
-    #         secretAniPlayer.stop()
-    #         secretAniPlayer.clear_queue()    
-    #         secretAniPlayer.play("fallOverRight")
-
     return .getSmacked(broom_origin, silently)
 
 # @override
 func landed():
     .landed()
-    getLevelTiles().purifyAllSoftSandSolids()
+    # getLevelTiles().purifyAllSoftSandSolids()
+
     miniShakeScreen()
-    spawnFallingRock(level.player.global_transform.origin.x)
     secretBounceAniPlayer.stop()
     secretBounceAniPlayer.clear_queue()
     secretBounceAniPlayer.play("land")
@@ -339,13 +310,15 @@ func landed():
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("drillAttackFall")
+        if boss_phase != BossPhase.DRILL_DREIDEL_SPIN:
+            spawnGhostEnemy()
+            dreidel_timer = 0
         boss_phase = BossPhase.DRILL_DREIDEL_SPIN
-        ghost_spawn_timer = 0
-        dreidel_timer = 0
-        for _i in range(2):
-            if digTiles(getTilesBelow(getLevelTiles()), true):
-                global_transform.origin.y -= 8*.125
+        # for _i in range(2):
+        #     if digTiles(getTilesBelow(getLevelTiles()), true):
+        #         global_transform.origin.y -= 8*.125
     if boss_phase == BossPhase.JUMP and not behavior_should_drill:
+        spawnFallingRock(level.player.global_transform.origin.x)
         behavior_walking = false
         boss_phase = BossPhase.IDLE_STOMP
         secretAniPlayer.stop()
@@ -361,13 +334,23 @@ func landed():
             level.gameCamera.shakeScreen()
             var newBigRock = spawnFallingRock(global_transform.origin.x)
             newBigRock.scale = Vector3(2, 2, 1)
+            newBigRock.is_big = true
             myBigRock = weakref(newBigRock)
+
+        var tiles_underfoot = getTilesBelow(getLevelTiles())
+        for tile_coords in tiles_underfoot:
+            if tile_coords != null:
+                var tile_type = getLevelTiles().get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+                if getLevelTiles().isTileSoftSand(tile_type):
+                    # getLevelTiles().infectSoftSand(tile_coords, false)
+                    getLevelTiles().set_cell_item(tile_coords.x, tile_coords.y, tile_coords.z, GridMap.INVALID_CELL_ITEM)
 
 # @override
 func glitchSetSpritesAndCollision():
-    if boss_phase == BossPhase.FALL_OVER or boss_phase == BossPhase.STUN_TWITCH or boss_phase == BossPhase.GET_UP:
-        return
-    spriteContainer.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
+    pass
+    # if boss_phase == BossPhase.FALL_OVER or boss_phase == BossPhase.STUN_TWITCH or boss_phase == BossPhase.GET_UP:
+    #     return
+    # spriteContainer.global_transform.origin.y = self.global_transform.origin.y + sprite_offset_y
 
 # @override
 func shouldIDoCollisions():
@@ -385,21 +368,12 @@ func doHorizontalWalkingBehavior():
         for i in range(solidTiles.size()):
             var coords = solidTiles[i]
             if coords == null: continue
-            var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-            if getLevelTiles().isTileFragileSolid(tile_type):
-                getSmacked()
-                thudSound.play()
-                horizontal_collision = false
-                if digTiles(getTilesBelow(getLevelTiles()), true):
-                    global_transform.origin.y -= 8*.125
-                flipWalkingDirection()
-                return
         if global_transform.origin.x >= 24 or global_transform.origin.x <= -7:
             getSmacked()
             thudSound.play()
             horizontal_collision = false
-            if digTiles(getTilesBelow(getLevelTiles()), true):
-                global_transform.origin.y -= 8*.125
+            # if digTiles(getTilesBelow(getLevelTiles()), true):
+            #     global_transform.origin.y -= 8*.125
             flipWalkingDirection()
             return
         
@@ -479,6 +453,7 @@ func tryGetStunnedByWalls(margin = 0.25):
 
 func spawnFallingRock(specific_x = null):
     var fallingRock = fallingRockRes.instance()
+    fallingRock.true_terminal_vel = 12
     level.add_child(fallingRock)
     if specific_x != null:
         fallingRock.global_transform.origin.x = specific_x

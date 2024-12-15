@@ -5,6 +5,7 @@ onready var particleSprite1 = get_node("ParticleSprite1")
 onready var particleSprite2 = get_node("ParticleSprite2")
 onready var particleSprite3 = get_node("ParticleSprite3")
 onready var particleSprite4 = get_node("ParticleSprite4")
+var is_big = false
 
 func _ready():
   can_spawn_mini_crystal = false
@@ -29,15 +30,28 @@ func isActive(_debug = false):
     return visible and mySprite.visible
 
 func landed():
-  secretAniPlayer.stop()
-  secretAniPlayer.clear_queue()
-  secretAniPlayer.play("crackAndShatter")
-  behavior_walking = false
-  on_ground = true
-  grav = 0
-  linear_velocity.y = 0
-  lv.y = 0
-  vv = 0
+  if not is_big:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("crackAndShatter")
+    behavior_walking = false
+    on_ground = true
+    grav = 0
+    linear_velocity.y = 0
+    lv.y = 0
+    vv = 0
+  else:
+    on_ground = false
+    linear_velocity.y = -true_terminal_vel
+    lv.y = -true_terminal_vel
+    vv = -true_terminal_vel
+
+  var tiles_underfoot = getTilesBelow(getLevelTiles())
+  for tile_coords in tiles_underfoot:
+    if tile_coords != null:
+      var tile_type = getLevelTiles().get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+      getLevelTiles().set_cell_item(tile_coords.x, tile_coords.y, tile_coords.z, GridMap.INVALID_CELL_ITEM)
+
 
 # @override
 func getSmacked(broom_origin = null, silently = false):
