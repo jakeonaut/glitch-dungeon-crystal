@@ -15,7 +15,7 @@
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 3 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/albedo = Color( 0.811765, 0.811765, 0.811765, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -485,7 +485,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.82613, 0 )
 shape = SubResource( 12 )
 
 [node name="SavePoint" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.178282, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.178, -999 )
+visible = false
 
 [node name="Sprite3D" parent="SavePoint/TriangleContainer" index="0"]
 pixel_size = 0.0001

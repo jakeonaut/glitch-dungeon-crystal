@@ -48,7 +48,7 @@ shader_param/base_palette = ExtResource( 2 )
 shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 1, 1, 0.5 )
+extents = Vector3( 1, 1.2, 0.5 )
 
 [node name="GhostEnemy" type="Spatial"]
 script = ExtResource( 1 )

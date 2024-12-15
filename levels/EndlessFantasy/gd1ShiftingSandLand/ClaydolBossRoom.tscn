@@ -453,7 +453,7 @@ max_dist_to_player = 999
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -15.2497, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, 5.33851e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 231 )
 
 [node name="MeshInstance3" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="1"]
@@ -462,7 +462,7 @@ mesh = SubResource( 232 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -6, 0 )
-path = "res://levels/EndlessFantasy/gd1TombSouls/004_KeyRoom.tscn"
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
 
 [node name="DreamOfDeath" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 0 )
@@ -492,14 +492,10 @@ texture = ExtResource( 29 )
 
 [node name="Worm2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
-behavior_walk_flip = false
-behavior_stick_to_walls = true
 walk_direction = Vector2( -1, 0 )
 
 [node name="Worm" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -5, 0 )
-behavior_walk_flip = false
-behavior_stick_to_walls = true
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 
@@ -535,9 +531,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = SubResource( 224 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="UILayer" parent="." instance=ExtResource( 8 )]
 

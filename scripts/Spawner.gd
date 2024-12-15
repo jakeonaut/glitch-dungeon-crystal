@@ -10,6 +10,7 @@ export var max_num_children = 10
 export var x_range = Vector2(-5, 5)
 export var y_range = Vector2(0, 0)
 export var is_active = true
+export var should_shake_screen = false
 
 var am_i_in_range_of_player = false
 var am_i_really_in_range_of_player = false
@@ -65,7 +66,8 @@ func getNumForeignChildren():
     return count
 
 func spawnEffect(_child):
-    pass
+    if should_shake_screen:
+        level.gameCamera.miniShakeScreen()
         
 func spawn(_with_flare = true):
     for child in self.get_foreign_children():
@@ -85,6 +87,7 @@ func spawn(_with_flare = true):
         newObject.is_static_in_level = should_staticify_children # this breaks dynamically created SmallKeys
         # newObject.is_static_in_level = false
     add_child(newObject)
+    spawnEffect(newObject)
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)
     spawned_object_instance = newObject

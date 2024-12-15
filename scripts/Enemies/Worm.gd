@@ -27,7 +27,8 @@ onready var mushroomBounceAniPlayer = get_node("MushroomBounceAniPlayer")
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
-  pass
+  slime_walk_time_limit = 3
+  slime_idle_time_limit = 3
 
 func _process(delta):
   if not visible: return

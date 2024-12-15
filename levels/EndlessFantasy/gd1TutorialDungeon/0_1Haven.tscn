@@ -3865,7 +3865,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PoolIntArray( -1441802, 0, 36, -851991, 0, 36, -851982, 0, 36, -786448, 0, 36, -786424, 0, 36, -786416, 0, 36, -786414, 0, 36, -720897, 0, 36, -524272, 0, 2, -458770, 0, 2 )
+"cells": PoolIntArray( -1441802, 0, 36, -851991, 0, 36, -851982, 0, 36, -786448, 0, 36, -786424, 0, 36, -786416, 0, 36, -786414, 0, 36, -524272, 0, 2, -458770, 0, 2, -393203, 0, 36 )
 }
 script = ExtResource( 31 )
 __meta__ = {
@@ -4189,7 +4189,7 @@ transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707
 mesh = SubResource( 347 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 348 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]

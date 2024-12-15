@@ -3,13 +3,18 @@ extends "GlitchEnemy.gd"
 var just_a_figment = false
 var my_opacity = 0.9
 var x_speed = 0
-var y_speed = 1
+var y_speed = 2
 var original_pos = null
 var true_original_pos = null
 var target_pos = null
 var is_following_player = false
 var do_i_belong_here = true
-var moving_towards_player = false
+export var moving_towards_player = false
+var scared_timer = 0
+var scared_time_limit = 20
+
+func _ready():
+  scared_timer = scared_time_limit
 
 func _process(delta):
   # ._process(delta) implicit
@@ -34,8 +39,25 @@ func _process(delta):
     global_transform.origin.y += y_speed * delta * 2
     my_opacity -= (delta)
     mySprite.material_override.set_shader_param("opacity", my_opacity)
-    if my_opacity <= 0:
-      queue_free()
+    if my_opacity <= 0.0:
+      my_opacity = 0.0
+      mySprite.material_override.set_shader_param("opacity", my_opacity)
+      just_a_figment = false
+  elif scared_timer < scared_time_limit:
+    scared_timer += (delta*11)
+    global_transform.origin = level.player.global_transform.origin
+    if level.player.mySprite.flip_h:
+      global_transform.origin.x += 5
+    else:
+      global_transform.origin.x -= 5
+    global_transform.origin.y += 5
+    mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
+  elif my_opacity < 0.9:
+    my_opacity += (delta/5)
+    mySprite.material_override.set_shader_param("opacity", my_opacity)
+    if my_opacity >= 0.9:
+      my_opacity = 0.9
+      mySprite.material_override.set_shader_param("opacity", my_opacity)
   elif moving_towards_player:
     var step = 2
     var directionVector = (level.player.global_transform.origin - global_transform.origin).normalized()
@@ -74,6 +96,16 @@ func randomizeTargetPos():
 
 func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
+  var speed = 8
+  if broom_origin != null:
+    if broom_origin.x > self.global_transform.origin.x:
+      x_speed = -speed
+    else:
+      x_speed = speed
+  else:
+    if level.player.mySprite.flip_h: x_speed = -speed
+    else: x_speed = speed
+  scared_timer = 0
   just_a_figment = true
   mySprite.material_override.set_shader_param("enable_glitch_3d", false)
 

@@ -55,6 +55,8 @@ func landed():
 
 # @override
 func getSmacked(broom_origin = null, silently = false):
+  if is_big:
+    return
   if not silently:
     unenemize()
     behavior_walking = true
@@ -73,5 +75,16 @@ func byeBye():
   queue_free()
 
 func collideWithWall(local_lv):
+  if walk_direction.x > 0:
+    var tiles = getTilesRightOf(getLevelTiles())
+    for tile_coords in tiles:
+      if tile_coords != null:
+        getLevelTiles().set_cell_item(tile_coords.x, tile_coords.y, tile_coords.z, GridMap.INVALID_CELL_ITEM)
+  elif walk_direction.x < 0:
+    var tiles = getTilesLeftOf(getLevelTiles())
+    for tile_coords in tiles:
+      if tile_coords != null:
+        getLevelTiles().set_cell_item(tile_coords.x, tile_coords.y, tile_coords.z, GridMap.INVALID_CELL_ITEM)
+
   landed()
   return .collideWithWall(local_lv)

@@ -462,12 +462,14 @@ func spawnFallingRock(specific_x = null):
     fallingRock.global_transform.origin.y = 16
     return fallingRock
 
+var ghostEnemies = []
 func spawnGhostEnemy():
     var ghostEnemy = ghostEnemyRes.instance()
     ghostEnemy.moving_towards_player = true
     level.add_child(ghostEnemy)
     ghostEnemy.global_transform.origin.x = self.global_transform.origin.x
     ghostEnemy.global_transform.origin.y = self.global_transform.origin.y
+    ghostEnemies.push_back(weakref(ghostEnemy))
     return ghostEnemy
     
 func spawnWorm():
@@ -477,10 +479,6 @@ func spawnWorm():
     worm.linear_velocity.y = jump_pop_val
     worm.lv.y = jump_pop_val
     worm.vv = jump_pop_val
-    worm.behavior_walk_flip = false
-    worm.behavior_stick_to_walls = true
-    worm.slime_walk_time_limit = 2
-    worm.slime_idle_time_limit = 2
     level.add_child(worm)
     worm.global_transform.origin.x = self.global_transform.origin.x
     worm.global_transform.origin.y = self.global_transform.origin.y + 13
@@ -509,7 +507,37 @@ func getHurt():
         boss_phase = BossPhase.HURT
 
 func yaBeatMe():
+    behavior_should_fall_rocks = false
+    behavior_should_drill = false
+    behavior_walking = false
+    behavior_jumping = false
+    unenemize()
     boss_phase = BossPhase.DEFEATED
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("gotHurt")
+    secretAniPlayer.queue("defeated")
+    global.pauseGame = true
+    global.shouldRenderAsCinematic = true
+
+var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
+func okayImDead():
+    if global.memory["dogu_matryoshka_boss"] < 2:
+        global.memory["dogu_matryoshka_boss"] = 2
+        level.restartMusic()
+    for ghostEnemyRef in ghostEnemies:
+        if ghostEnemyRef.get_ref():
+            ghostEnemyRef.get_ref().getSmacked(level.player.global_transform.origin, true)
+    global.pauseGame = false
+    global.shouldRenderAsCinematic = false
+
+    var newRealCrystal = crystalGeodeRes.instance()
+    level.add_child(newRealCrystal)
+    newRealCrystal.global_transform.origin = Vector3(8, -2, 0)
+    level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
+    level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
+    level.door.visible = true
+    queue_free()
 
 func updateFallthroughSolids():
     if fallthroughSolid:

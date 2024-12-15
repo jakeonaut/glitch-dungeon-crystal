@@ -18,11 +18,11 @@ func _ready():
     musicNoteSprite.material_override = musicNoteSprite.material_override.duplicate()
     mySprite.material_override = mySprite.material_override.duplicate()
 
-    if global.getLevelZoneThing("angel_statue") != null:
-        is_angel_activated = true
-        aniPlayer.stop()
-        aniPlayer.clear_queue()
-        aniPlayer.play("ActivatedIdle")
+    # if global.getLevelZoneThing("angel_statue") != null:
+    #     is_angel_activated = true
+    #     aniPlayer.stop()
+    #     aniPlayer.clear_queue()
+    #     aniPlayer.play("ActivatedIdle")
     
 func _process(delta):
     aniPlayer.playback_speed = global.time_dilation_multiplier
@@ -42,24 +42,25 @@ func _process(delta):
 
 
 func isActive(_debug=false):
-    return self.visible
+    return false # self.visible
 
 func passiveActivate(delta, is_player):
-    if not is_angel_activated:
-        global.setLevelZoneThing("angel_statue", [
-            global.getDisplayTitle(level.getLevelZoneName(), "haven"),
-            level.getLevelName()
-        ])
-        is_angel_activated = true
-        activateSound.play()
-        aniPlayer.stop()
-        aniPlayer.clear_queue()
-        aniPlayer.queue("BirdFlyIn")
-        aniPlayer.queue("ActivatedIdle")
-        var my_material = mySprite.get_material_override()
-        if my_material is ShaderMaterial:
-            my_material.set_shader_param("enable_palette_cycle", true)
-    savePoint.passiveActivate(delta, is_player)
+    pass
+    # if not is_angel_activated:
+    #     global.setLevelZoneThing("angel_statue", [
+    #         global.getDisplayTitle(level.getLevelZoneName(), "haven"),
+    #         level.getLevelName()
+    #     ])
+    #     is_angel_activated = true
+    #     activateSound.play()
+    #     aniPlayer.stop()
+    #     aniPlayer.clear_queue()
+    #     aniPlayer.queue("BirdFlyIn")
+    #     aniPlayer.queue("ActivatedIdle")
+    #     var my_material = mySprite.get_material_override()
+    #     if my_material is ShaderMaterial:
+    #         my_material.set_shader_param("enable_palette_cycle", true)
+    # savePoint.passiveActivate(delta, is_player)
     
 
 func stopPassiveActivate():
