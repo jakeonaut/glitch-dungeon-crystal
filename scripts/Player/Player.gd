@@ -1,6 +1,7 @@
 extends "PlayerGameMover.gd"
 
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
+onready var screenShakeSound = get_node("Sounds/ScreenShakeSound")
 onready var hurtSound = get_node("Sounds/HurtSound")
 onready var hurt2Sound = get_node("Sounds/HurtSound2")
 onready var hurt3Sound = get_node("Sounds/HurtSound3")

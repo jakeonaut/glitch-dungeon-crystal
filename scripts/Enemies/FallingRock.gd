@@ -34,6 +34,7 @@ func landed():
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("crackAndShatter")
+    notDieSound.play()
     behavior_walking = false
     on_ground = true
     grav = 0

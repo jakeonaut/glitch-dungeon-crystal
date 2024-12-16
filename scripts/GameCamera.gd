@@ -5,6 +5,7 @@ onready var actual_target = weakref(get_node(target))
 onready var initial_target = get_node(target)
 onready var realCamera = get_node("RealCamera")
 onready var aniPlayer = get_node("AnimationPlayer")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 var leftmost_x = 999
 var rightmost_x = -999
@@ -73,6 +74,8 @@ func shakeScreen():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("screenShake")
+  level.player.screenShakeSound.pitch_scale = 1.5
+  level.player.screenShakeSound.play()
 
 func miniShakeScreen():
   if aniPlayer.assigned_animation == "screenShake" and aniPlayer.is_playing():
@@ -80,6 +83,8 @@ func miniShakeScreen():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("miniScreenShake")
+  level.player.screenShakeSound.pitch_scale = 2.0
+  level.player.screenShakeSound.play()
       
 func setCameraPositionNow():
   global_transform.origin.x = initial_target.global_transform.origin.x

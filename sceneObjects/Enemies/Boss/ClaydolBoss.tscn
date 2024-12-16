@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=19]
 [ext_resource path="res://assets/water_normal_4.png" type="Texture" id=20]
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=21]
+[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=23]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
@@ -563,6 +565,42 @@ tracks/38/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("Sounds/BlinkSound:playing")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("Sounds/BlinkSound2:playing")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("Sounds/DieSound:playing")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -2735,6 +2773,42 @@ tracks/7/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sounds/BlinkSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/BlinkSound2:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sounds/DieSound:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 2.3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="BoxShape" id=16]
 extents = Vector3( 5, 3, 2 )
@@ -4150,6 +4224,16 @@ should_animate = false
 stream = ExtResource( 13 )
 volume_db = -3.0
 
+[node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+volume_db = -20.0
+pitch_scale = 2.0
+
+[node name="BlinkSound2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+volume_db = -20.0
+pitch_scale = 2.0
+
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 9 )
 volume_db = -8.0
@@ -4167,8 +4251,13 @@ pitch_scale = 1.4
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
-volume_db = -30.0
-pitch_scale = 1.25
+volume_db = -25.0
+pitch_scale = 0.7
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
+volume_db = -2.0
+pitch_scale = 0.9
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "asleep"

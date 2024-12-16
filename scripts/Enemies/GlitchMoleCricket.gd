@@ -149,20 +149,20 @@ func _process(delta):
                     mole_state = MoleState.IDLE
                 else:
                     if is_digging_left:
-                        digTiles(getTilesLeftOf(getLevelTiles()), true)
+                        digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder), true)
                         digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
                     elif my_up_vector.y == 1:
-                        digTiles(getTilesBelow(getLevelTiles()), true)
+                        digTiles(getTilesBelow(getLevelTiles(), is_builder), true)
                         digTiles(getTilesBelow(getFakeLevelTiles()), false)
                     else:
                         if my_up_vector.y == -1:
-                            digTiles(getTilesAbove(getLevelTiles()), true)
+                            digTiles(getTilesAbove(getLevelTiles(), is_builder), true)
                             digTiles(getTilesAbove(getFakeLevelTiles()), false)
                         elif my_up_vector.x == 1:
-                            digTiles(getTilesLeftOf(getLevelTiles()), true)
+                            digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder), true)
                             digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
                         elif my_up_vector.x == -1:
-                            digTiles(getTilesRightOf(getLevelTiles(), 0.4), true)
+                            digTiles(getTilesRightOf(getLevelTiles(), 0.1, is_builder), true)
                             digTiles(getTilesRightOf(getFakeLevelTiles(), 0.4), false)
                     has_dug = true
                     digSound.play()

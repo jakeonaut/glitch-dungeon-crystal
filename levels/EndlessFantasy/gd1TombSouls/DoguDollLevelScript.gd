@@ -27,7 +27,9 @@ func playMenuMusic():
 # @override
 func restartMusic():
     musicPlayer.changeSongPitch(1.0)
-    if global.memory["dogu_matryoshka_boss"] == 1:
+    if global.memory["dogu_matryoshka_boss"] == 0:
+        musicPlayer.tryToPlay(musicPlayer.crystalThemePlayer)
+    elif global.memory["dogu_matryoshka_boss"] == 1:
         musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
     else:
-        musicPlayer.tryToPlay(musicPlayer.windPlayer)
+        musicPlayer.tryToPlay(musicPlayer.crystalThemePlayer)

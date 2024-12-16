@@ -35,6 +35,9 @@ func isActive(_debug=false):
 func passiveActivate(delta, is_player):
   if not is_player:
     return
+
+  if level.player.glitch_form == global.GlitchForm.LADDER:
+    return
     
   if getDirection().y != 0:
     var v_sign = 1

@@ -67,6 +67,8 @@ func _process(delta):
         if cubeCrystal.meshInstance1.visible:
             cubeCrystal.meshInstance1.visible = false
             global.memory["dogu_matryoshka_boss"] = -2
+            miniShakeScreen()
+            musicPlayer.stopAll()
         if global.memory["dogu_matryoshka_boss"] == -2:
             global.pauseGame = true
             global.shouldRenderAsCinematic = true
@@ -75,6 +77,7 @@ func _process(delta):
                 global_transform.origin.y = -4.5
                 global.memory["dogu_matryoshka_boss"] = -1
         if global.memory["dogu_matryoshka_boss"] == -1:
+            miniShakeScreen()
             asleep_unearth_counter = 0
             boss_phase = BossPhase.WAKEUP
             secretAniPlayer.stop()
@@ -83,6 +86,9 @@ func _process(delta):
             level.gameCamera.initial_size = 30
             level.gameCamera.zoomed_size = 30
             return
+        if global.memory["dogu_matryoshka_boss"] == 1:
+            global_transform.origin.y += 10.5
+            boss_phase = BossPhase.WAKEUP
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
@@ -179,7 +185,6 @@ func _process(delta):
     elif boss_phase == BossPhase.JUMP_SQUAT:
         behavior_should_fall_rocks = false
         if not secretAniPlayer.is_playing():
-            behavior_jumping = true
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("jumpFall")
@@ -189,8 +194,14 @@ func _process(delta):
             secretBounceAniPlayer.play("jump")
     elif boss_phase == BossPhase.JUMP:
         behavior_should_fall_rocks = false
+        behavior_jumping = true
         if not behavior_should_drill:
             behavior_walking = true
+            if on_ground:
+                if level.player.global_transform.origin.x > global_transform.origin.x:
+                    walk_direction.x = 1
+                else:
+                    walk_direction.x = -1
         if vv < -2:
             behavior_jumping = false
             if behavior_should_drill:
@@ -527,6 +538,7 @@ func okayImDead():
         level.restartMusic()
     for ghostEnemyRef in ghostEnemies:
         if ghostEnemyRef.get_ref():
+            ghostEnemyRef.get_ref().moving_towards_player = false
             ghostEnemyRef.get_ref().getSmacked(level.player.global_transform.origin, true)
     global.pauseGame = false
     global.shouldRenderAsCinematic = false

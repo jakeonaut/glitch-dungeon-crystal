@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=9]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=10]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=11]
-[ext_resource path="res://assets/sounds/151RetroMonsters/minicast.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/infected_enemy_sheet0000.png" type="Texture" id=13]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=14]
 
@@ -458,7 +458,8 @@ anims/bounce = SubResource( 41 )
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 12 )
-volume_db = -80.0
+volume_db = -18.0
+pitch_scale = 0.9
 
 [node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 8 )

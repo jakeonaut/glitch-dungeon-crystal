@@ -11,14 +11,16 @@ var is_following_player = false
 var do_i_belong_here = true
 export var moving_towards_player = false
 var scared_timer = 0
-var scared_time_limit = 20
+var scared_time_limit = 30
+onready var booSound = get_node("Sounds/BooSound")
+onready var hauntSound = get_node("Sounds/HauntSound")
 
 func _ready():
   scared_timer = scared_time_limit
 
 func _process(delta):
   # ._process(delta) implicit
-  if not visible: return
+  if not visible or global.pauseGame: return
   
   delta = delta * global.time_dilation_multiplier
   behavior_phase_through_walls = true
@@ -40,9 +42,12 @@ func _process(delta):
     my_opacity -= (delta)
     mySprite.material_override.set_shader_param("opacity", my_opacity)
     if my_opacity <= 0.0:
-      my_opacity = 0.0
-      mySprite.material_override.set_shader_param("opacity", my_opacity)
-      just_a_figment = false
+      if moving_towards_player:
+        my_opacity = 0.0
+        mySprite.material_override.set_shader_param("opacity", my_opacity)
+        just_a_figment = false
+      else:
+        queue_free()
   elif scared_timer < scared_time_limit:
     scared_timer += (delta*11)
     global_transform.origin = level.player.global_transform.origin
@@ -52,8 +57,10 @@ func _process(delta):
       global_transform.origin.x -= 5
     global_transform.origin.y += 5
     mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
+    if scared_timer >= scared_time_limit:
+      hauntSound.play()
   elif my_opacity < 0.9:
-    my_opacity += (delta/5)
+    my_opacity += (delta)
     mySprite.material_override.set_shader_param("opacity", my_opacity)
     if my_opacity >= 0.9:
       my_opacity = 0.9
@@ -95,19 +102,21 @@ func randomizeTargetPos():
   mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
 func getSmacked(broom_origin = null, silently = false):
-  .getSmacked(broom_origin, silently)
-  var speed = 8
-  if broom_origin != null:
-    if broom_origin.x > self.global_transform.origin.x:
-      x_speed = -speed
+  if not is_smacked:
+    booSound.play()
+    var speed = 8
+    if broom_origin != null:
+      if broom_origin.x > self.global_transform.origin.x:
+        x_speed = -speed
+      else:
+        x_speed = speed
     else:
-      x_speed = speed
-  else:
-    if level.player.mySprite.flip_h: x_speed = -speed
-    else: x_speed = speed
-  scared_timer = 0
-  just_a_figment = true
-  mySprite.material_override.set_shader_param("enable_glitch_3d", false)
+      if level.player.mySprite.flip_h: x_speed = -speed
+      else: x_speed = speed
+    scared_timer = 0
+    just_a_figment = true
+    mySprite.material_override.set_shader_param("enable_glitch_3d", false)
+    .getSmacked(broom_origin, silently)
 
 # func passiveActivate(_delta, is_player):
 #   if just_a_figment or is_following_player:

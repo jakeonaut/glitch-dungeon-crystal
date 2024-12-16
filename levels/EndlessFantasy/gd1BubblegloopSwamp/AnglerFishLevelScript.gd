@@ -28,7 +28,9 @@ func playMenuMusic():
 # @override
 func restartMusic():
     musicPlayer.changeSongPitch(1.0)
-    if global.memory["angler_seaman_boss"] == 1:
+    if global.memory["angler_seaman_boss"] == 0:
+        musicPlayer.tryToPlay(musicPlayer.crystalThemePlayer)
+    elif global.memory["angler_seaman_boss"] == 1:
         musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
     else:
         musicPlayer.tryToPlay(musicPlayer.crystalThemePlayer)
