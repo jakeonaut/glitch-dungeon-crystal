@@ -34,6 +34,8 @@ export var only_activate_in_range = true
 
 export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
+export var behavior_sine_movement = false
+var sine_angle = 0.0
 export var behavior_intermittent_walking = false
 export var behavior_walk_flip = true
 export var behavior_stick_to_walls = false
@@ -98,6 +100,7 @@ func _ready():
     if walk_direction == null:
         walk_direction = Vector2(1, 0) # ????????????????????? TODO(jaketrower): Why?
 
+    
     if walk_direction.y != 0:
         jump_force = 3
         grav = 0
@@ -257,6 +260,7 @@ func _process(delta):
 
     # glitchSwitchSprite(delta)
 
+    doSineMovementBehavior(delta)
     doHorizontalWalkingBehavior()
     doVerticalWalkingBehavior()
     tryDieToOffscreenCamera(delta)
@@ -363,6 +367,17 @@ func flipWalkingDirection():
         slime_state = SlimeState.WALK
     if myOtherSprite:
         myOtherSprite.flip_h = not myOtherSprite.flip_h
+
+func doSineMovementBehavior(delta):
+    if behavior_sine_movement:
+        grav = 0
+        if is_smacked and should_smack_pause_me:
+            vv = 0
+        else:
+            vv = sin(sine_angle)*6
+            sine_angle += (delta*4)
+        linear_velocity.y = vv
+        lv.y = vv
     
 func doVerticalWalkingBehavior():
     if walk_direction.y == 0:

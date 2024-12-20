@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://assets/models/lowPolyHorse.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
+[ext_resource path="res://sceneObjects/Enemies/GlitchMusicNote.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
@@ -104,20 +105,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0.0999999, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 12 )]
 
-[node name="Worm" parent="Viewport/level" instance=ExtResource( 4 )]
-behavior_walk_flip = false
-behavior_stick_to_walls = true
-
 [node name="Worm2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
-behavior_walk_flip = false
-behavior_stick_to_walls = true
 walk_direction = Vector2( -1, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Viewport/level"]
 
 [node name="lowPolyHorse" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, 22, -1, 0 )
+
+[node name="GlitchMusicNote" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, 0 )
+
+[node name="GlitchMusicNote2" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 
@@ -142,6 +143,5 @@ __meta__ = {
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
-[editable path="Viewport/level/Worm"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
