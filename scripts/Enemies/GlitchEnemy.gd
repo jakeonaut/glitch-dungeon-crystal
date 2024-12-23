@@ -35,7 +35,7 @@ export var only_activate_in_range = true
 export(float) var sprite_offset_y = 0.0
 export var behavior_walking = false
 export var behavior_sine_movement = false
-var sine_angle = 0.0
+var sine_angle = 1.57
 export var behavior_intermittent_walking = false
 export var behavior_walk_flip = true
 export var behavior_stick_to_walls = false
@@ -374,7 +374,7 @@ func doSineMovementBehavior(delta):
         if is_smacked and should_smack_pause_me:
             vv = 0
         else:
-            vv = sin(sine_angle)*6
+            vv = sin(sine_angle)*16
             sine_angle += (delta*4)
         linear_velocity.y = vv
         lv.y = vv
@@ -592,7 +592,7 @@ func tryAddEnemiesGroup():
     if smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
         smallInteractionArea.add_to_group("enemies")
 
-var can_spawn_mini_crystal = true
+export var can_spawn_mini_crystal = true
 func trySpawnACrystal():
     if can_spawn_mini_crystal:
         var miniCubeCrystal = miniCubeCrystalRes.instance()

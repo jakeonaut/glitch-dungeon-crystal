@@ -2,7 +2,6 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
 onready var babaYagaBoss = get_node("BabaYagaBoss")
-onready var dreamOfDemon = get_node("DreamOfDemon")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -15,8 +14,7 @@ func setUpRoomInitializationOverride():
 
 func _process(_delta):
     if global.memory["baba_yaga_boss"] >= 2:
-        dreamOfDemon.visible = true
-        dreamOfDemon.grav = 60
+        pass
   
 # @override
 func playMenuMusic():
@@ -29,4 +27,4 @@ func restartMusic():
     if global.memory["baba_yaga_boss"] == 1:
         musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
     else:
-        musicPlayer.tryToPlay(musicPlayer.windPlayer)
+        musicPlayer.tryToPlay(musicPlayer.crystalThemePlayer)

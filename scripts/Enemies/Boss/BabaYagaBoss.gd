@@ -9,6 +9,13 @@ onready var runTrack = get_tree().get_root().get_node("Game/Viewport/level/RunTr
 onready var spawnSound = get_node("Sounds/SpawnSound")
 var babaEggRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaEgg.tscn")
 var crowRes = preload("res://sceneObjects/Enemies/CrowWitch.tscn")
+var glitchMusicNoteRes = preload("res://sceneObjects/Enemies/GlitchMusicNote.tscn")
+onready var noteSpawner = get_node("SpriteContainer/Sprite3D/NoteSpawner")
+onready var eyeSpawner = get_node("SpriteContainer/EyeSprite3D/EyeSpawner")
+var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
+var noteRefArray = []
+var singing_counter = 0
+var singing_count_max = 1
 
 var MAX_NUM_HITS = 3
 
@@ -16,6 +23,7 @@ enum BossPhase {
     ASLEEP,
     WAKEUP
     IDLE,
+    SINGING,
     RUN_AROUND,
     RUN_BACKWARDS,
     GOT_HURT,
@@ -42,24 +50,6 @@ func _ready():
 
 var num_hits = 0
 func getHurt():
-    pass
-
-var am_i_hurt = false
-var kill_invis = false
-var kill_immediately = false
-func isActive():
-    return not am_i_hurt
-
-func notOuchies(_broom_origin = null):
-    pass
-
-func fallthroughCollisionActivate(possible_game_mover):
-    if possible_game_mover == level.player:
-        pass
-
-func getSmacked(_broom_origin = null):
-    if not eyeSprite.visible:
-        return
     am_i_hurt = true
     num_hits += 1
     if num_hits >= MAX_NUM_HITS:
@@ -81,36 +71,59 @@ func getSmacked(_broom_origin = null):
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
-    secretAniPlayer.queue("hibernate")
+    secretAniPlayer.queue("idle")
+    # secretAniPlayer.queue("hibernate")
     boss_phase = BossPhase.GOT_HURT
+
+var am_i_hurt = false
+var kill_invis = false
+var kill_immediately = false
+func isActive():
+    return not am_i_hurt
+
+func notOuchies(_broom_origin = null):
+    pass
+
+func fallthroughCollisionActivate(possible_game_mover):
+    if possible_game_mover == level.player:
+        pass
+
+func getSmacked(_broom_origin = null):
+    pass
+    
 
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
-            boss_phase = BossPhase.WAKEUP
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("wakeup")
-            global.pauseGame = true
-            global.shouldRenderAsCinematic = true
-            level.gameCamera.initial_size = 30
-            level.gameCamera.zoomed_size = 30
-            crystal1.applyGlitchMaterial(5)
+            wakeMeUp()
     elif boss_phase == BossPhase.WAKEUP:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
+            boss_phase = BossPhase.SINGING
+            singing_counter = 0
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("flipLeftToRight")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("flipRightToLeft")
+            # boss_phase = BossPhase.RUN_AROUND
+            # secretAniPlayer.stop()
+            # secretAniPlayer.clear_queue()
+            # secretAniPlayer.play("run")
             run_counter = 0
-            boss_phase = BossPhase.RUN_AROUND
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("run")
             am_i_hurt = false
             global.pauseGame = false
             global.shouldRenderAsCinematic = false
             if global.memory["baba_yaga_boss"] == 0:
                 global.memory["baba_yaga_boss"] = 1
-                musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+                level.restartMusic()
+                level.uiLayer.setDisplayTitle("house of Yaga")
         return
     elif boss_phase == BossPhase.DEFEATED:
         if not secretAniPlayer.is_playing():
@@ -125,10 +138,48 @@ func _process(delta):
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
             run_counter = 0
-            boss_phase = BossPhase.RUN_AROUND
+            boss_phase = BossPhase.SINGING
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("run")
+            singing_counter = 0
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("flipLeftToRight")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idleWalk")
+            secretAniPlayer.queue("idle")
+            secretAniPlayer.queue("flipRightToLeft")
+    elif boss_phase == BossPhase.SINGING:
+        if not secretAniPlayer.is_playing():
+            singing_counter += 1
+            if singing_counter >= singing_count_max:
+                spawnWeakEye()
+                for noteRef in noteRefArray:
+                    if noteRef != null and noteRef.get_ref():
+                        noteRef.get_ref().behavior_walk_flip = false
+                noteRefArray = []
+                singing_counter = 0
+                boss_phase = BossPhase.IDLE
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+            else:
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idleWalk")
+                secretAniPlayer.queue("idleWalk")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("flipLeftToRight")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idleWalk")
+                secretAniPlayer.queue("idleWalk")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("flipRightToLeft")
     elif boss_phase == BossPhase.RUN_AROUND:
         tryToSpawnCrowStream(delta)
         if secretAniPlayer.assigned_animation == "run":
@@ -166,10 +217,11 @@ func _process(delta):
             landingIndex = 0
     elif boss_phase == BossPhase.GOT_HURT:
         if not secretAniPlayer.is_playing():
-            boss_phase = BossPhase.LAY_AN_EGG
-            var newEgg = babaEggRes.instance()
-            level.add_child(newEgg)
-            newEgg.global_transform.origin = Vector3(7, 6, 0)
+            run_counter = 0
+            boss_phase = BossPhase.RUN_AROUND
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("run")
     elif boss_phase == BossPhase.LAY_AN_EGG:
         if crowArray.size() > 0:
             crow_swoop_timer += (delta*11)
@@ -206,6 +258,45 @@ func getPlayer():
     if player == null:
         player = level.player
     return player
+
+onready var babaYagaDoor = get_node("Door")
+func wakeMeUp():
+    if boss_phase != BossPhase.ASLEEP:
+        return
+
+    if babaYagaDoor.visible:
+        babaYagaDoor.visible = false
+        level.summonSmokeClouds(babaYagaDoor.global_transform.origin, 2, true, true)
+    boss_phase = BossPhase.WAKEUP
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("wakeup")
+    global.pauseGame = true
+    global.shouldRenderAsCinematic = true
+    level.gameCamera.initial_size = 30
+    level.gameCamera.zoomed_size = 30
+    # crystal1.applyGlitchMaterial(5)
+
+onready var tweetSound = get_node("Sounds/TweetSound")
+func trySpawnAGlitchNote():
+    if boss_phase == BossPhase.SINGING or boss_phase == BossPhase.WAKEUP:
+        tweetSound.pitch_scale = rand_range(0.6, 0.8)
+        tweetSound.play()
+        var newNote = glitchMusicNoteRes.instance()
+        if mySprite.rotation_degrees.y < 90:
+            newNote.walk_direction.x = -1
+        else:
+            newNote.walk_direction.x = 1
+        level.add_child(newNote)
+        newNote.global_transform.origin = noteSpawner.global_transform.origin
+        newNote.global_transform.origin.z = 0
+        noteRefArray.push_back(weakref(newNote))
+
+func spawnWeakEye():
+    var newEye = weakEyeRes.instance()
+    level.add_child(newEye)
+    newEye.global_transform.origin = eyeSpawner.global_transform.origin
+    newEye.global_transform.origin.z = 0
 
 var levelTiles = null
 func getLevelTiles():

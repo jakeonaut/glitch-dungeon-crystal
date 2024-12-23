@@ -57,6 +57,8 @@ func ouchies(_broom_pos):
     bossToHurt = level.get_node("HighPriestessBoss")
   elif level.has_node("ClaydolBoss"):
     bossToHurt = level.get_node("ClaydolBoss")
+  elif level.has_node("BabaYagaBoss"):
+    bossToHurt = level.get_node("BabaYagaBoss")
   bossToHurt.getHurt()
   
 

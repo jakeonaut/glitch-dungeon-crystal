@@ -366,6 +366,7 @@ behavior_walking = true
 behavior_sine_movement = true
 behavior_jumping = true
 behavior_phase_through_walls = true
+can_spawn_mini_crystal = false
 time_influence = 20
 y_div = 0.9
 normal_offset = 0.5
