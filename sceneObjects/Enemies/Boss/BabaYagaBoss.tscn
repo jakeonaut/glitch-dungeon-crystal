@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=27]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=28]
 [ext_resource path="res://assets/sounds/MM_DekuLink_Step1.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/sounds/464910__plasterbrain__sonic-skid.wav" type="AudioStream" id=30]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
@@ -886,6 +887,18 @@ tracks/55/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
+"values": [ false ]
+}
+tracks/56/type = "value"
+tracks/56/path = NodePath("Sounds/SkidSound:playing")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ false ]
 }
 
@@ -2563,7 +2576,7 @@ tracks/13/keys = {
 
 [sub_resource type="Animation" id=40]
 resource_name = "shellExplode"
-length = 1.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1
@@ -3243,6 +3256,18 @@ tracks/14/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 5 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sounds/SkidSound:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -3944,7 +3969,7 @@ volume_db = -3.0
 
 [node name="ShatterSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 28 )
-volume_db = -10.0
+volume_db = -15.0
 pitch_scale = 0.7
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -3964,8 +3989,8 @@ pitch_scale = 0.3
 
 [node name="WakeUpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 24 )
-volume_db = -20.0
-pitch_scale = 1.1
+volume_db = -15.0
+pitch_scale = 0.9
 
 [node name="RunBawkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 29 )
@@ -3980,6 +4005,11 @@ pitch_scale = 2.0
 stream = ExtResource( 25 )
 volume_db = -16.0
 pitch_scale = 2.0
+
+[node name="SkidSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 30 )
+volume_db = -22.0
+pitch_scale = 0.9
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )

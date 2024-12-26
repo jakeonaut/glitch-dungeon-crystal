@@ -534,8 +534,9 @@ func yaBeatMe():
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 func okayImDead():
     if global.memory["dogu_matryoshka_boss"] < 2:
-        global.memory["dogu_matryoshka_boss"] = 2
         level.restartMusic()
+        global.memory["dogu_matryoshka_boss"] = 2
+        musicPlayer.playDefeatBossJingle()
     for ghostEnemyRef in ghostEnemies:
         if ghostEnemyRef.get_ref():
             ghostEnemyRef.get_ref().moving_towards_player = false

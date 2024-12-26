@@ -33,6 +33,7 @@ onready var catacombThemePlayer = get_node("CatacombThemePlayer")
 onready var leavesSound = get_node("Sounds/LeavesSound")
 
 onready var treasureJingle = get_node("TreasureJingle")
+onready var defeatBossJingle = get_node("DefeatBossJingle")
 
 var initial_volume_dbs = {}
 
@@ -50,6 +51,13 @@ func _process(delta):
             tryToPlay(restartPlayingTheme)
             currentlyPlayingTheme = restartPlayingTheme
             restartPlayingTheme = null
+    if did_play_defeat_boss_jingle and not defeatBossJingle.is_playing():
+        did_play_defeat_boss_jingle = false
+        if restartPlayingTheme != null:
+            tryToPlay(restartPlayingTheme)
+            currentlyPlayingTheme = restartPlayingTheme
+            restartPlayingTheme = null
+            
         
 func tryToPlay(stream_player):
     if global.userSettings["stopAllMusic"]: return
@@ -127,6 +135,13 @@ func playTreasureJingle(volume_db):
     did_play_treasure_jingle = true
     treasureJingle.volume_db = volume_db
     treasureJingle.play()
+
+var did_play_defeat_boss_jingle = false
+func playDefeatBossJingle():
+    restartPlayingTheme = currentlyPlayingTheme
+    stopAll()
+    did_play_defeat_boss_jingle = true
+    defeatBossJingle.play()
 
 
 func conductFromScenePath(path):

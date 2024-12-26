@@ -501,6 +501,7 @@ func okayImDead():
     if global.memory["angler_seaman_boss"] < 2:
         global.memory["angler_seaman_boss"] = 2
         level.restartMusic()
+        musicPlayer.playDefeatBossJingle()
     for glitchHermitCrabRef in spawnedHermitCrabManagers:
         if glitchHermitCrabRef.get_ref():
             glitchHermitCrabRef.get_ref().hermitCrabShell.get_ref().is_extra_bouncy = false

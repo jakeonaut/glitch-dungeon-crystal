@@ -146,8 +146,10 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             global.pauseGame = false
             global.shouldRenderAsCinematic = false
-            level.restartMusic()
-            global.memory["baba_yaga_boss"] = 2
+            if global.memory["baba_yaga_boss"] < 2:
+                level.restartMusic()
+                musicPlayer.playDefeatBossJingle()
+                global.memory["baba_yaga_boss"] = 2
 
     if global.pauseGame:
         return
