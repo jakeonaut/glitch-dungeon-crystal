@@ -458,6 +458,8 @@ func stopInIdleDir():
 var crow_stream_spawn_timer = 0
 var crow_stream_spawn_time_limit = 10
 func tryToSpawnCrowStream(delta):
+    return
+
     var CROW_SPEED = 10
     if num_hits >= 2:
         crow_stream_spawn_timer += (delta*11)
