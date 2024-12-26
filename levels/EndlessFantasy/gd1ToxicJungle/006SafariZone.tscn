@@ -710,7 +710,7 @@ shape = SubResource( 49 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/001pt5_StreetlightManifesto.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 62 )
