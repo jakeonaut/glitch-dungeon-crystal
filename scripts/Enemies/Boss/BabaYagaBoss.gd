@@ -7,6 +7,7 @@ onready var crystalsContainer = get_node("SpriteContainer/Crystals")
 onready var crystal1 = get_node("SpriteContainer/Crystals/HighpriestessCrystal")
 onready var runTrack = get_tree().get_root().get_node("Game/Viewport/level/RunTrack")
 onready var spawnSound = get_node("Sounds/SpawnSound")
+onready var wakeUpSound = get_node("Sounds/WakeUpSound")
 var babaEggRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaEgg.tscn")
 var crowRes = preload("res://sceneObjects/Enemies/CrowWitch.tscn")
 var glitchMusicNoteRes = preload("res://sceneObjects/Enemies/GlitchMusicNote.tscn")
@@ -181,6 +182,7 @@ func _process(delta):
                 secretAniPlayer.queue("idle")
                 secretAniPlayer.queue("flipRightToLeft")
     elif boss_phase == BossPhase.RUN_AROUND:
+        tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
         if secretAniPlayer.assigned_animation == "run":
             processRunLogic(delta)
@@ -193,6 +195,7 @@ func _process(delta):
             boss_phase = BossPhase.RUN_BACKWARDS
             landingIndex = 11
     elif boss_phase == BossPhase.RUN_BACKWARDS:
+        tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
         if secretAniPlayer.assigned_animation == "run":
             processRunBackwardsLogic(delta)
@@ -474,3 +477,8 @@ func tryToSpawnCrowStream(delta):
             newCrow.secretAniPlayer.play("flyAway")
             # newCrow.reenemize(true)
             newCrow.behavior_phase_through_walls = true
+
+func tryPlayBawkSound():
+    if not wakeUpSound.is_playing():
+        wakeUpSound.pitch_scale = rand_range(0.8, 1.2)
+        wakeUpSound.play()
