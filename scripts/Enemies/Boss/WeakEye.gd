@@ -4,18 +4,27 @@ var teleport_timer = 0
 var teleport_time_limit = 20
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var sparkleSprite = get_node("SparkleSprite3D")
+export var is_permanent = false
+var is_fast = false
 
 func _ready():
   set_process(true)
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  secretAniPlayer.stop()
-  secretAniPlayer.clear_queue()
-  secretAniPlayer.queue("blinkOpen")
-  secretAniPlayer.queue("blinkIdle")
-  if global.memory["broomerang"] <= 0:
-    secretAniPlayer.queue("blinkIdle")
-  secretAniPlayer.queue("blinkClose")
+  if not is_permanent:
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.queue("blinkOpen")
+    if is_fast:
+      secretAniPlayer.queue("blinkIdleFast")
+    else:
+      secretAniPlayer.queue("blinkIdle")
+    if global.memory["broomerang"] <= 0:
+      if is_fast:
+        secretAniPlayer.queue("blinkIdleFast")
+      else:
+        secretAniPlayer.queue("blinkIdle")
+    secretAniPlayer.queue("blinkClose")
 
 
 var spawn_timer = 0

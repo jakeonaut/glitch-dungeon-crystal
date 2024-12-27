@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=15]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=16]
 [ext_resource path="res://assets/palettes/microsoft-windows-1x.png" type="Texture" id=17]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=18]
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 8 )
@@ -420,6 +421,28 @@ frame = 12
 script = ExtResource( 7 )
 frame_delay = 0.2
 should_randomize_frame_delay = true
+
+[node name="BlackBackgroundSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.580602 )
+pixel_size = 0.12
+texture = ExtResource( 18 )
+hframes = 8
+vframes = 16
+frame = 127
+script = ExtResource( 7 )
+frame_delay = 0.3
+should_animate = false
+
+[node name="BlackBackgroundSprite2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0.580602 )
+pixel_size = 0.08
+texture = ExtResource( 18 )
+hframes = 8
+vframes = 16
+frame = 127
+script = ExtResource( 7 )
+frame_delay = 0.3
+should_animate = false
 
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

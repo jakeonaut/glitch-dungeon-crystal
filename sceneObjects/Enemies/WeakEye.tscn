@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=2]
@@ -656,6 +656,21 @@ tracks/0/keys = {
 "values": [ 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94 ]
 }
 
+[sub_resource type="Animation" id=166]
+resource_name = "blinkIdleFast"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 1, 1.1, 1.2, 1.3, 3.9, 4, 4.1, 4.2, 4.4, 4.5, 4.6, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94 ]
+}
+
 [sub_resource type="Animation" id=159]
 resource_name = "blinkOpen"
 length = 2.0
@@ -1096,6 +1111,7 @@ anims/RESET = SubResource( 157 )
 anims/blinkClose = SubResource( 158 )
 anims/blinkCloseFast = SubResource( 164 )
 anims/blinkIdle = SubResource( 165 )
+anims/blinkIdleFast = SubResource( 166 )
 anims/blinkOpen = SubResource( 159 )
 anims/getHurt = SubResource( 160 )
 anims/hiddenTeleport = SubResource( 161 )

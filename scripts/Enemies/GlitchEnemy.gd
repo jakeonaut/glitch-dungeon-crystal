@@ -368,14 +368,16 @@ func flipWalkingDirection():
     if myOtherSprite:
         myOtherSprite.flip_h = not myOtherSprite.flip_h
 
+var sine_delta = 4
+var sine_velocity = 16
 func doSineMovementBehavior(delta):
     if behavior_sine_movement:
         grav = 0
         if is_smacked and should_smack_pause_me:
             vv = 0
         else:
-            vv = sin(sine_angle)*16
-            sine_angle += (delta*4)
+            vv = sin(sine_angle)*sine_velocity
+            sine_angle += (delta*sine_delta)
         linear_velocity.y = vv
         lv.y = vv
     

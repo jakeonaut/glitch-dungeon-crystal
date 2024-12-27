@@ -14,6 +14,7 @@ var glitchMusicNoteRes = preload("res://sceneObjects/Enemies/GlitchMusicNote.tsc
 onready var noteSpawner = get_node("SpriteContainer/Sprite3D/NoteSpawner")
 onready var eyeSpawner = get_node("SpriteContainer/EyeSprite3D/EyeSpawner")
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
+var babaWitchRes = preload("res://sceneObjects/Enemies/Boss/BabaWitch.tscn")
 var noteRefArray = []
 var singing_counter = 0
 var singing_count_max = 1
@@ -30,14 +31,19 @@ enum BossPhase {
     GOT_HURT,
     LAY_AN_EGG,
     DEFEATED,
+    ABOUT_TO_CRASH,
 }
 var boss_phase = BossPhase.ASLEEP
+var prev_boss_phase = BossPhase.ASLEEP
+var boss_phase_should_crash = 0
 var landingArray = []
 var landingIndex = 0
 onready var crowContainer = get_node("CrowContainer")
 var crowArray = []
 var crow_swoop_timer = 0
 var crow_swoop_time_limit = 20
+var eyeSporeSpawn_timer = 0
+var eyeSporeSpawn_time_limit = 10
 
 func _ready():
     set_process(true)
@@ -48,6 +54,10 @@ func _ready():
     var runTracks = runTrack.get_children()
     for landing in runTracks:
         landingArray.push_back(landing)
+
+    if boss_phase == BossPhase.ASLEEP:
+        babaYagaDoor.visible = true
+    runTrack.visible = false
 
 var num_hits = 0
 func getHurt():
@@ -63,17 +73,22 @@ func getHurt():
         crystalsContainer.remove_child(crystal1)
         level.add_child(crystal1)
         crystal1.global_transform.origin = temp_pos
+        prev_boss_phase = boss_phase
         boss_phase = BossPhase.DEFEATED
+        musicPlayer.stopAll()
         level.player.pauseInput = true
         global.pauseMoveInput = true
         global.pauseGame = true
         global.shouldRenderAsCinematic = true
         return
+    if num_hits >= 2 and boss_phase_should_crash == 0:
+        boss_phase_should_crash = 1
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
     secretAniPlayer.queue("idle")
     # secretAniPlayer.queue("hibernate")
+    prev_boss_phase = boss_phase
     boss_phase = BossPhase.GOT_HURT
 
 var am_i_hurt = false
@@ -101,6 +116,7 @@ func _process(delta):
     elif boss_phase == BossPhase.WAKEUP:
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
+            prev_boss_phase = boss_phase
             boss_phase = BossPhase.SINGING
             singing_counter = 0
             secretAniPlayer.queue("idle")
@@ -130,6 +146,7 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             global.pauseGame = false
             global.shouldRenderAsCinematic = false
+            level.restartMusic()
             global.memory["baba_yaga_boss"] = 2
 
     if global.pauseGame:
@@ -137,8 +154,16 @@ func _process(delta):
 
     if boss_phase == BossPhase.IDLE:
         tryToSpawnCrowStream(delta)
+        if secretAniPlayer.assigned_animation == "suddenlyBrake":
+            run_speed = 0.5
+            if prev_boss_phase == BossPhase.RUN_AROUND:
+                processRunLogic(delta)
+            elif prev_boss_phase == BossPhase.RUN_BACKWARDS:
+                processRunBackwardsLogic(delta)
+
         if not secretAniPlayer.is_playing():
             run_counter = 0
+            prev_boss_phase = boss_phase
             boss_phase = BossPhase.SINGING
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -163,6 +188,7 @@ func _process(delta):
                         noteRef.get_ref().behavior_walk_flip = false
                 noteRefArray = []
                 singing_counter = 0
+                prev_boss_phase = boss_phase
                 boss_phase = BossPhase.IDLE
                 secretAniPlayer.queue("idle")
                 secretAniPlayer.queue("idle")
@@ -184,20 +210,27 @@ func _process(delta):
     elif boss_phase == BossPhase.RUN_AROUND:
         tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
-        if secretAniPlayer.assigned_animation == "run":
+        tryToSpawnEyeSpore(delta)
+        if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
+            run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
             processRunLogic(delta)
-        if run_counter == RUN_COUNT_MAX:
+        if run_counter >= RUN_COUNT_MAX and boss_phase_should_crash == 0:
             run_counter = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("flipLeftToRight")
+            wakeUpSound.play()
+            secretAniPlayer.play("suddenlyBrake")
+            secretAniPlayer.queue("flipLeftToRight")
             secretAniPlayer.queue("run")
+            prev_boss_phase = boss_phase
             boss_phase = BossPhase.RUN_BACKWARDS
             landingIndex = 11
     elif boss_phase == BossPhase.RUN_BACKWARDS:
         tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
-        if secretAniPlayer.assigned_animation == "run":
+        tryToSpawnEyeSpore(delta)
+        if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
+            run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
             processRunBackwardsLogic(delta)
         if run_counter > RUN_COUNT_MAX:
             if num_hits >= 2:
@@ -205,19 +238,38 @@ func _process(delta):
             run_counter = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("flipRightToLeft")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("flipLeftToRight")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
+            wakeUpSound.play()
+            secretAniPlayer.play("suddenlyBrake")
             secretAniPlayer.queue("flipRightToLeft")
+            secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipLeftToRight")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipRightToLeft")
+            prev_boss_phase = boss_phase
             boss_phase = BossPhase.IDLE
-            landingIndex = 0
+    elif boss_phase == BossPhase.ABOUT_TO_CRASH:
+        if secretAniPlayer.assigned_animation == "suddenlyBrake":
+            run_speed = 3
+            self.global_transform.origin.x -= run_speed * (delta*11)
+            if self.global_transform.origin.x <= -12:
+                self.global_transform.origin.x = -12
+                secretAniPlayer.stop()
+                secretAniPlayer.play("shellExplode")
+        elif secretAniPlayer.assigned_animation == "shellExplode":
+            run_speed = 0.1
+            self.global_transform.origin.x += run_speed * (delta*11)
+            if not secretAniPlayer.is_playing():
+                boss_phase = BossPhase.RUN_AROUND
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("run") 
+                eyeSporeSpawn_timer = 0
     elif boss_phase == BossPhase.GOT_HURT:
         if not secretAniPlayer.is_playing():
             run_counter = 0
@@ -225,6 +277,7 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("run")
+            wakeUpSound.play()
     elif boss_phase == BossPhase.LAY_AN_EGG:
         if crowArray.size() > 0:
             crow_swoop_timer += (delta*11)
@@ -270,14 +323,15 @@ func wakeMeUp():
     if babaYagaDoor.visible:
         babaYagaDoor.visible = false
         level.summonSmokeClouds(babaYagaDoor.global_transform.origin, 2, true, true)
+        musicPlayer.stopAll()
     boss_phase = BossPhase.WAKEUP
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("wakeup")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
-    level.gameCamera.initial_size = 30
-    level.gameCamera.zoomed_size = 30
+    level.gameCamera.initial_size = 35
+    level.gameCamera.zoomed_size = 35
     # crystal1.applyGlitchMaterial(5)
 
 onready var tweetSound = get_node("Sounds/TweetSound")
@@ -290,6 +344,9 @@ func trySpawnAGlitchNote():
             newNote.walk_direction.x = -1
         else:
             newNote.walk_direction.x = 1
+        if num_hits >= 1:
+            newNote.sine_velocity = 32
+            newNote.rotation_degrees.z = 180
         level.add_child(newNote)
         newNote.global_transform.origin = noteSpawner.global_transform.origin
         newNote.global_transform.origin.z = 0
@@ -301,6 +358,14 @@ func spawnWeakEye():
     newEye.global_transform.origin = eyeSpawner.global_transform.origin
     newEye.global_transform.origin.z = 0
 
+func spawnBabaWitch():
+    return
+    # var newWitch = babaWitchRes.instance()
+    # level.add_child(newWitch)
+    # newWitch.global_transform.origin = mySprite.global_transform.origin
+    # newWitch.global_transform.origin.z = 0
+    # newWitch.laughSound.play()
+
 var levelTiles = null
 func getLevelTiles():
   if level == null:
@@ -311,6 +376,7 @@ func getLevelTiles():
 
 var run_counter = 0
 var RUN_COUNT_MAX = 1
+var run_speed = 3
 func processRunLogic(delta):
     var currLanding = landingArray[landingIndex]
     self.rotation_degrees.z = currLanding.rotation_degrees.z
@@ -319,12 +385,18 @@ func processRunLogic(delta):
     if landingIndex == 2 or landingIndex == 3 or landingIndex == 8 or landingIndex == 9:
         self.global_transform.origin.x = currLanding.global_transform.origin.x
 
-    var run_speed = 3
     var angle_mult = 0.72
     if landingIndex == 0:
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
-            landingIndex += 1
+            if boss_phase_should_crash == 1:
+                boss_phase_should_crash = 2
+                boss_phase = BossPhase.ABOUT_TO_CRASH
+                wakeUpSound.play()
+                secretAniPlayer.stop()
+                secretAniPlayer.play("suddenlyBrake")
+            else:
+                landingIndex += 1
     elif landingIndex == 1:
         self.global_transform.origin.x -= run_speed * (delta*11) * angle_mult
         self.global_transform.origin.y += run_speed * (delta*11) * angle_mult
@@ -347,8 +419,8 @@ func processRunLogic(delta):
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
             landingIndex = 6
-            if num_hits >= 1:
-                run_counter += 1
+            # if num_hits >= 1:
+            #     run_counter += 1
     elif landingIndex == 6:
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
@@ -375,8 +447,8 @@ func processRunLogic(delta):
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
             landingIndex = 0
-            if num_hits < 1:
-                run_counter += 1
+            # if num_hits < 1:
+            run_counter += 1
 
 func processRunBackwardsLogic(delta):
     var currLanding = landingArray[landingIndex]
@@ -386,7 +458,6 @@ func processRunBackwardsLogic(delta):
     if landingIndex == 2 or landingIndex == 3 or landingIndex == 8 or landingIndex == 9:
         self.global_transform.origin.x = currLanding.global_transform.origin.x
 
-    var run_speed = 3
     var angle_mult = 0.72
     if landingIndex == 0:
         self.global_transform.origin.x += run_speed * (delta*11)
@@ -414,8 +485,8 @@ func processRunBackwardsLogic(delta):
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
             landingIndex = 5
-            if num_hits >= 1:
-                run_counter += 1
+            # if num_hits >= 1:
+            run_counter = 999
     elif landingIndex == 6:
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
@@ -442,8 +513,8 @@ func processRunBackwardsLogic(delta):
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
             landingIndex -= 1
-            if num_hits < 1:
-                run_counter += 1
+            # if num_hits < 1:
+            # run_counter += 1
 
 func stepInIdleDir():
     var step_dist = 1
@@ -454,6 +525,28 @@ func stepInIdleDir():
 
 func stopInIdleDir():
     pass
+
+var eyeSporeRef = null
+var eyeSporeRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaMiniShroom.tscn")
+func tryToSpawnEyeSpore(delta):
+    if boss_phase_should_crash < 2:
+        return
+
+    if eyeSporeRef == null:
+        eyeSporeSpawn_timer += (delta*11)
+        if eyeSporeSpawn_timer >= eyeSporeSpawn_time_limit:
+            eyeSporeSpawn_timer = 0
+            var newEyeSpore = eyeSporeRes.instance()
+            var randomPosition = landingArray[randi() % landingArray.size()]
+            level.add_child(newEyeSpore)
+            newEyeSpore.global_transform.origin = randomPosition.global_transform.origin
+            newEyeSpore.rotation_degrees = randomPosition.rotation_degrees
+            eyeSporeRef = weakref(newEyeSpore)
+            
+    else:
+        if eyeSporeRef.get_ref() == null:
+            eyeSporeRef = null
+            eyeSporeSpawn_timer = 0
 
 var crow_stream_spawn_timer = 0
 var crow_stream_spawn_time_limit = 10
@@ -481,6 +574,7 @@ func tryToSpawnCrowStream(delta):
             newCrow.behavior_phase_through_walls = true
 
 func tryPlayBawkSound():
-    if not wakeUpSound.is_playing():
-        wakeUpSound.pitch_scale = rand_range(0.8, 1.2)
-        wakeUpSound.play()
+    pass
+    # if not wakeUpSound.is_playing():
+    #     wakeUpSound.pitch_scale = rand_range(0.8, 1.2)
+    #     wakeUpSound.play()

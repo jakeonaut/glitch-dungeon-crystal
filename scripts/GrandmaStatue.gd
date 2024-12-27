@@ -62,7 +62,7 @@ func resetPositionInASecond():
   level.summonSmokeClouds(global_transform.origin, 2, true, true)
 
 func processRendering(delta):
-  triangleContainer.visible = is_extra_life
+  triangleContainer.visible = false # is_extra_life
 
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL # and global.userSettings["colorblindMode"]
   if not isActive():
@@ -72,15 +72,15 @@ func processRendering(delta):
     saveSporesSprite.visible = false
     disablePaletteCycle()
   else:
-    if is_extra_life:
-      triangleContainer.rotation_degrees.y -= delta*22*5
-      triangleContainer.scale.x = 1.5
-      triangleContainer.scale.y = 1.5
-      enablePaletteCycle()
-      # spawn_timer = spawn_time_limit
-      triangleContainer.scale.x = 1.5
-      triangleContainer.scale.y = 1.5
-      saveSporesSprite.visible = true
+    # if is_extra_life:
+    #   triangleContainer.rotation_degrees.y -= delta*22*5
+    #   triangleContainer.scale.x = 1.5
+    #   triangleContainer.scale.y = 1.5
+    #   enablePaletteCycle()
+    #   # spawn_timer = spawn_time_limit
+    #   triangleContainer.scale.x = 1.5
+    #   triangleContainer.scale.y = 1.5
+    #   saveSporesSprite.visible = true
 
     if glitch_form == global.GlitchForm.NORMAL:
       spellbookGlitchSprite.frame = 15
@@ -164,11 +164,11 @@ func updateColor():
   var target_palette = level.levelTiles.grey_palette
   var sprite_palette = global.grey_player_palette
   # mySprite.material_override.set_shader_param("enable_no_transparency", true)
-  if is_extra_life:
-    sprite_palette = global.NES_broom_palette
-    target_palette = global.NES_broom_palette
+  # if is_extra_life:
+  #   sprite_palette = global.NES_broom_palette
+  #   target_palette = global.NES_broom_palette
 #     mySprite.material_override.set_shader_param("enable_no_transparency", false)
-  elif glitch_form == global.GlitchForm.FLOOR:
+  if glitch_form == global.GlitchForm.FLOOR:
     sprite_palette = global.player_red_palette
     target_palette = level.levelTiles.red_palette
   elif glitch_form == global.GlitchForm.LADDER:

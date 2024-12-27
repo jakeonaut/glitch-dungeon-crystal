@@ -1,5 +1,7 @@
 extends "../GlitchEnemy.gd"
 
+onready var laughSound = get_node("LaughSound")
+
 
 # Declare member variables here. Examples:
 # var a = 2
