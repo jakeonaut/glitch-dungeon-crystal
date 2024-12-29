@@ -334,7 +334,7 @@ func landed():
         boss_phase = BossPhase.IDLE_STOMP
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
-        secretAniPlayer.play("idlePause")
+        secretAniPlayer.play("idleLand")
         secretAniPlayer.queue("idleStomp")
         idle_stomp_timer = 0
         if big_rock_counter >= big_rock_count_max:
@@ -534,9 +534,10 @@ func yaBeatMe():
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 func okayImDead():
     if global.memory["dogu_matryoshka_boss"] < 2:
-        level.restartMusic()
         global.memory["dogu_matryoshka_boss"] = 2
+        musicPlayer.stopAll()
         musicPlayer.playDefeatBossJingle()
+        level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     for ghostEnemyRef in ghostEnemies:
         if ghostEnemyRef.get_ref():
             ghostEnemyRef.get_ref().moving_towards_player = false
@@ -548,7 +549,6 @@ func okayImDead():
     level.add_child(newRealCrystal)
     newRealCrystal.global_transform.origin = Vector3(8, -2, 0)
     level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
-    level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     level.door.visible = true
     queue_free()
 

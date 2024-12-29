@@ -6,6 +6,7 @@ var fade_out_opacity = false
 var curr_opacity = .5
 var opacity_fade_rate = 2
 onready var cleanGlitchSound = get_node("CleanGlitchSound") if has_node("CleanGlitchSound") else null
+var should_randomize = false
 
 func tryPlaySound():
     if cleanGlitchSound == null:
@@ -25,6 +26,8 @@ func _ready():
         flip_v = true
     var material = get_material_override().duplicate()
     set_material_override(material)
+    if should_randomize:
+        randomizeFrame()
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier

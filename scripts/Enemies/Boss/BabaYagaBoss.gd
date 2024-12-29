@@ -3,8 +3,6 @@ extends Spatial
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("SpriteContainer/Sprite3D")
 onready var eyeSprite = get_node("SpriteContainer/EyeSprite3D")
-onready var crystalsContainer = get_node("SpriteContainer/Crystals")
-onready var crystal1 = get_node("SpriteContainer/Crystals/HighpriestessCrystal")
 onready var runTrack = get_tree().get_root().get_node("Game/Viewport/level/RunTrack")
 onready var spawnSound = get_node("Sounds/SpawnSound")
 onready var wakeUpSound = get_node("Sounds/WakeUpSound")
@@ -18,6 +16,8 @@ var babaWitchRes = preload("res://sceneObjects/Enemies/Boss/BabaWitch.tscn")
 var noteRefArray = []
 var singing_counter = 0
 var singing_count_max = 1
+var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
+onready var cubeCrystal = get_node("CubeCrystal")
 
 var MAX_NUM_HITS = 3
 
@@ -55,8 +55,8 @@ func _ready():
     for landing in runTracks:
         landingArray.push_back(landing)
 
-    if boss_phase == BossPhase.ASLEEP:
-        babaYagaDoor.visible = true
+    # if boss_phase == BossPhase.ASLEEP:
+    #     babaYagaDoor.visible = true
     runTrack.visible = false
 
 var num_hits = 0
@@ -69,10 +69,6 @@ func getHurt():
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()
         secretAniPlayer.play("dieMove")
-        var temp_pos = crystal1.global_transform.origin
-        crystalsContainer.remove_child(crystal1)
-        level.add_child(crystal1)
-        crystal1.global_transform.origin = temp_pos
         prev_boss_phase = boss_phase
         boss_phase = BossPhase.DEFEATED
         musicPlayer.stopAll()
@@ -111,6 +107,9 @@ func getSmacked(_broom_origin = null):
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
+        if cubeCrystal.meshInstance1.visible:
+            cubeCrystal.meshInstance1.visible = false
+            wakeMeUp()
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
             wakeMeUp()
     elif boss_phase == BossPhase.WAKEUP:
@@ -144,13 +143,9 @@ func _process(delta):
         return
     elif boss_phase == BossPhase.DEFEATED:
         if not secretAniPlayer.is_playing():
-            global.pauseGame = false
-            global.shouldRenderAsCinematic = false
-            if global.memory["baba_yaga_boss"] < 2:
-                level.restartMusic()
-                musicPlayer.playDefeatBossJingle()
-                global.memory["baba_yaga_boss"] = 2
+            okayImDead()
 
+    cubeCrystal.meshInstance1.visible = false
     if global.pauseGame:
         return
 
@@ -304,6 +299,7 @@ func _process(delta):
             crow_swoop_timer = 0
             for crow in crowContainer.get_children():
                 crowArray.push_back(weakref(crow))
+    cubeCrystal.meshInstance1.visible = false
 
 func getMushroomInfected(_shroom_pos, _ignore_ancestor = false):
     pass
@@ -325,7 +321,7 @@ func wakeMeUp():
     if babaYagaDoor.visible:
         babaYagaDoor.visible = false
         level.summonSmokeClouds(babaYagaDoor.global_transform.origin, 2, true, true)
-        musicPlayer.stopAll()
+    musicPlayer.stopAll()
     boss_phase = BossPhase.WAKEUP
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -335,6 +331,22 @@ func wakeMeUp():
     level.gameCamera.initial_size = 35
     level.gameCamera.zoomed_size = 35
     # crystal1.applyGlitchMaterial(5)
+
+func okayImDead():
+    global.pauseGame = false
+    global.shouldRenderAsCinematic = false
+    if global.memory["baba_yaga_boss"] < 2:
+        # level.restartMusic()
+        musicPlayer.stopAll()
+        musicPlayer.playDefeatBossJingle()
+        global.memory["baba_yaga_boss"] = 2
+        level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
+    var newRealCrystal = crystalGeodeRes.instance()
+    level.add_child(newRealCrystal)
+    newRealCrystal.global_transform.origin = Vector3(6, 4, 0)
+    level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
+    level.door.visible = true
+    queue_free()
 
 onready var tweetSound = get_node("Sounds/TweetSound")
 func trySpawnAGlitchNote():

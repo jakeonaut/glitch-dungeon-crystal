@@ -6,11 +6,11 @@ onready var babaYagaBoss = get_node("BabaYagaBoss")
 # @override
 func setUpRoomInitializationOverride():
     if global.memory["baba_yaga_boss"] >= 2:
-        babaYagaBoss.queue_free()
+        babaYagaBoss.okayImDead()
     else:
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(door.global_transform.origin, 2, true, true)
-        door.queue_free()
+        door.visible = false
 
 func _process(_delta):
     if global.memory["baba_yaga_boss"] >= 2:

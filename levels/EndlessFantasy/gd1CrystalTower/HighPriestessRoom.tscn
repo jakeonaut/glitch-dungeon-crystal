@@ -2001,6 +2001,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -2040,6 +2041,7 @@ shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -2222,6 +2224,7 @@ shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -5923,6 +5926,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -5958,6 +5962,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -6428,7 +6433,7 @@ spawn_an_elder = false
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 222 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
@@ -6449,7 +6454,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal2/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 224 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal2/CubeContainer" index="1"]
@@ -6475,7 +6480,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal3/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 226 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal3/CubeContainer" index="1"]
@@ -6501,7 +6506,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal4/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 228 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal4/CubeContainer" index="1"]
@@ -6527,7 +6532,7 @@ high_priestess_crystal = true
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal5/CubeContainer" index="0"]
-transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, -3.09086e-08, 0, 0, 0 )
+transform = Transform( 0.500001, 0.499999, 0.707107, 0.500001, 0.499999, -0.707107, -0.707106, 0.707108, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 230 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal5/CubeContainer" index="1"]

@@ -500,8 +500,9 @@ func defeatMe():
 func okayImDead():
     if global.memory["angler_seaman_boss"] < 2:
         global.memory["angler_seaman_boss"] = 2
-        level.restartMusic()
+        musicPlayer.stopAll()
         musicPlayer.playDefeatBossJingle()
+        level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     for glitchHermitCrabRef in spawnedHermitCrabManagers:
         if glitchHermitCrabRef.get_ref():
             glitchHermitCrabRef.get_ref().hermitCrabShell.get_ref().is_extra_bouncy = false
@@ -512,7 +513,6 @@ func okayImDead():
     level.add_child(newRealCrystal)
     newRealCrystal.global_transform.origin = Vector3(49, -23, 0)
     level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
-    level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     level.door.visible = true
     queue_free()
 

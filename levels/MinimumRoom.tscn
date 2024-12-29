@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/models/lowPolyHorse.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMusicNote.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
@@ -119,6 +120,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, 0 )
 
 [node name="GlitchMusicNote2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7, 0 )
+
+[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.185079, 0 )
+path = "res://levels/MinimumRoom2.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 

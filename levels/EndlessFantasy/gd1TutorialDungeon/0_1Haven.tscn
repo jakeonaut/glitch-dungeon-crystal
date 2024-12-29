@@ -3904,7 +3904,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, -13, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -7, 0 )
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 1.1
@@ -4189,7 +4189,7 @@ transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707
 mesh = SubResource( 347 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 348 )
 
 [node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
