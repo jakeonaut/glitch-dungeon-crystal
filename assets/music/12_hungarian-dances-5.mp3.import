@@ -11,5 +11,5 @@ dest_files=[ "res://.import/12_hungarian-dances-5.mp3-52c322969c7aac9e20a858ce45
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

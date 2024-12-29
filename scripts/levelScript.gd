@@ -12,7 +12,6 @@ onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenE
 onready var basicCrtEffectRect2 = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
-onready var crystalGeode = weakref(get_node("CubeCrystal") if has_node("CubeCrystal") else null)
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 
@@ -261,28 +260,30 @@ func redrawMap():
 
 var closest_extra_life = null
 func processGrandmaStatueSavePoints():
-  var last_closest_extra_life = closest_extra_life
-  closest_extra_life = null
+  return
+  # var last_closest_extra_life = closest_extra_life
+  # closest_extra_life = null
 
-  var extra_lives = []
-  var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
-  for i in range(len(grandmaStatues)):
-    if grandmaStatues[i].is_extra_life:
-      grandmaStatues[i].is_extra_life_active = false
-      extra_lives.push_back(grandmaStatues[i])
+  # var extra_lives = []
+  # var grandmaStatues = get_tree().get_nodes_in_group("grandma_statue")
+  # for i in range(len(grandmaStatues)):
+  #   if grandmaStatues[i].is_extra_life:
+  #     grandmaStatues[i].is_extra_life_active = false
+  #     extra_lives.push_back(grandmaStatues[i])
 
-  if len(extra_lives) > 0:
-    closest_extra_life = extra_lives[0]
-    var closest_extra_life_dist = player.global_transform.origin.distance_to(extra_lives[0].global_transform.origin)
-    for i in range(1, len(extra_lives)):
-      var extra_life = extra_lives[i]
-      var distance = player.global_transform.origin.distance_to(extra_life.global_transform.origin)
-      if distance < closest_extra_life_dist:
-        closest_extra_life_dist = distance
-        closest_extra_life = extra_life
-    if closest_extra_life != last_closest_extra_life:
-      closest_extra_life.saveSound.play()
-    closest_extra_life.is_extra_life_active = true
+  # if len(extra_lives) > 0:
+  #   closest_extra_life = extra_lives[0]
+  #   var closest_extra_life_dist = player.global_transform.origin.distance_to(extra_lives[0].global_transform.origin)
+  #   for i in range(1, len(extra_lives)):
+  #     var extra_life = extra_lives[i]
+  #     var distance = player.global_transform.origin.distance_to(extra_life.global_transform.origin)
+  #     if distance < closest_extra_life_dist:
+  #       closest_extra_life_dist = distance
+  #       closest_extra_life = extra_life
+  #   if closest_extra_life != last_closest_extra_life:
+  #     # closest_extra_life.saveSound.play()
+  #     pass
+  #   closest_extra_life.is_extra_life_active = true
 
 func displayMessageText(message):
   uiLayer.displayMessageText(message)
@@ -358,20 +359,20 @@ func tryToRespawn():
           break
   elif global.isRespawning:
     global.memory["hp"] = global.memory["max_hp"]
-    if closest_extra_life != null and closest_extra_life.isActive():
-      global.memory["hp"] = 1 # respawning at a grandma statue, don't restore bag
-      if player.respawn_key_hp != null:
-        global.memory["hp"] = player.respawn_key_hp
-        player.respawn_key_hp = null
-      # player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
-      # gameCamera.rotation_degrees.y = global.cameraRotation
-      # player.last_grounded_pos = Vector3(player.global_transform.origin)
-      # yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
-      # player.global_transform.origin = closest_extra_life.global_transform.origin
-      summonSmokeClouds(closest_extra_life.global_transform.origin, 3, true, true)
-      closest_extra_life.queue_free()
-      player.saveSound.play()
-    elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+    # if closest_extra_life != null and closest_extra_life.isActive():
+    #   global.memory["hp"] = 1 # respawning at a grandma statue, don't restore bag
+    #   if player.respawn_key_hp != null:
+    #     global.memory["hp"] = player.respawn_key_hp
+    #     player.respawn_key_hp = null
+    #   # player.global_transform.origin = closest_extra_life.global_transform.origin + Vector3(0, -1, 0)
+    #   # gameCamera.rotation_degrees.y = global.cameraRotation
+    #   # player.last_grounded_pos = Vector3(player.global_transform.origin)
+    #   # yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
+    #   # player.global_transform.origin = closest_extra_life.global_transform.origin
+    #   summonSmokeClouds(closest_extra_life.global_transform.origin, 3, true, true)
+    #   closest_extra_life.queue_free()
+    #   player.saveSound.play()
+    if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
       if savePoint != null:
         player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
