@@ -348,6 +348,7 @@ func tryToRespawn():
     global.pauseGame = false
 
   var found_door = null
+  var found_broth = null
 
   if global.isEnteringRoom and not global.isRespawning:
     if global.memory.has("roomPath"):
@@ -356,6 +357,11 @@ func tryToRespawn():
       for door in doors:
         if door.path == door_path:
           found_door = door
+          break
+      var broths = get_tree().get_nodes_in_group("broths")
+      for broth in broths:
+        if broth.path == door_path:
+          found_broth = broth
           break
   elif global.isRespawning:
     global.memory["hp"] = global.memory["max_hp"]
@@ -427,7 +433,15 @@ func tryToRespawn():
     if global.malware_infected:
       player.malware_infected = true
     player.getABroom() # after malware infection so we don't improperly give a broom
-    if global.angelWarping:
+    if global.isBrothWarping and found_broth:
+      found_broth.spitSound.play()
+      found_broth.spitSound2.play()
+      found_broth.has_popped_out = true
+      player.visible = true
+      player.tumbleFall(Vector2(0, 1), true)
+      player.global_transform.origin.x = found_broth.global_transform.origin.x
+      player.global_transform.origin.y = found_broth.global_transform.origin.y + 1.0
+    elif global.angelWarping:
       var angelStatues = get_tree().get_nodes_in_group("angel_statue")
       if len(angelStatues) > 0:
         player.global_transform.origin = angelStatues[0].global_transform.origin
@@ -440,9 +454,8 @@ func tryToRespawn():
     elif not global.memory.has("savedRoomPath") or global.memory["savedRoomPath"] != getLevelName():
       player.global_transform.origin = player.spawn_origin
     if not found_door:
-      if global.grannyEnteringRoom:
+      if global.grannyEnteringRoom or global.isBrothWarping:
         transition.reverse_granny_teleport()
-        global.grannyEnteringRoom = false
       else:
         transition.reverse_fade()
     gameCamera.setCameraPositionNow()
@@ -450,6 +463,8 @@ func tryToRespawn():
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom
   global.isEnteringRoom = false
+  global.grannyEnteringRoom = false
+  global.isBrothWarping = false
   global.angelWarping = false
   global.roomEdgeVector = null
   global.isRespawning = false

@@ -1879,13 +1879,19 @@ func tumbleFall(direction_vector, is_corrupted = false):
     x_val = 10
     on_ground = true
   elif direction_vector.y > 0:
-    aniPlayer.queue("tumbleRight")
+    if mySprite.flip_h:
+      aniPlayer.queue("tumbleLeft")
+    else:
+      aniPlayer.queue("tumbleRight")
     jump_val = 20
     should_free_when_falling = true
     on_ground = false
     # grav = 0
   elif direction_vector.y < 0:
-    aniPlayer.queue("tumbleLeft")
+    if mySprite.flip_h:
+      aniPlayer.queue("tumbleLeft")
+    else:
+      aniPlayer.queue("tumbleRight")
     jump_val = -10
     on_ground = false
 

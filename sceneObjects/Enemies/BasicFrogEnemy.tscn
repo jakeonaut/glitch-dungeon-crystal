@@ -2033,7 +2033,7 @@ script = ExtResource( 16 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TongueController/TongueArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264062, -0.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.68495, -0.25, 0 )
 visible = false
 shape = SubResource( 147 )
 

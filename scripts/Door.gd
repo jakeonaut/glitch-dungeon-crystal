@@ -459,8 +459,6 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     getPlayer().pauseInput = true
   getPlayer().pauseSelf = true
 
-  global.activeInteractor = null
-
   if not self.path:
     if not parter_door_id:
       return
@@ -483,16 +481,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     transition.really_long_fade_to(self.path)
     return
     
-  global.memory["cameraSize"] = level.gameCamera.initial_size
-  # global.memory["lastDoor"] = id
-  global.memory["roomPath"] = level.getLevelName()
-  global.pauseGame = true
+  global.prepareForTransition(level)
 
-  global.isEnteringRoom = true
-  global.hasJustEnteredRoom = false
-  global.respawnVarTimerHack = 0
-  
-  global.memory["on_ground"] = true
   if "LevelDoor" in self.id:
     transition.granny_teleport_to(self.path)
   elif is_passive:

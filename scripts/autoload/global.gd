@@ -185,6 +185,7 @@ var activeSavePoint = null
 
 var isRespawning = false
 var isEnteringRoom = false
+var isBrothWarping = false
 var angelWarping = false
 var justAngelWarped = false
 var roomEdgeVector = null
@@ -403,6 +404,17 @@ func processEasterEggs():
     #             memory["blue_mode"] = not memory["blue_mode"]
     # else:
     #     anna_key_helper = false
+
+func prepareForTransition(level):
+    global.activeInteractor = null
+    global.memory["cameraSize"] = level.gameCamera.initial_size
+    # global.memory["lastDoor"] = id
+    global.memory["roomPath"] = level.getLevelName()
+    global.pauseGame = true
+    global.isEnteringRoom = true
+    global.hasJustEnteredRoom = false
+    global.respawnVarTimerHack = 0
+    global.memory["on_ground"] = true
 
 
 func _process(delta):

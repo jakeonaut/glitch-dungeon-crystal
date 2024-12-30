@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=2]
@@ -6,7 +6,13 @@
 [ext_resource path="res://scripts/BrothCauldron.gd" type="Script" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
 [ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/eba_lawnmower_cutting.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/eb_impact4.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Yokai.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=11]
+[ext_resource path="res://assets/sounds/cauldron.wav" type="AudioStream" id=12]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -177,7 +183,10 @@ tracks/1/keys = {
 "values": [ ExtResource( 2 ) ]
 }
 
-[node name="BrothCauldron" type="Spatial"]
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 0.8, 0.5 )
+
+[node name="BrothCauldron" type="Spatial" groups=["broths"]]
 script = ExtResource( 4 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -203,3 +212,34 @@ shape = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 anims/active = SubResource( 4 )
 anims/inactive = SubResource( 5 )
+
+[node name="SwallowSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -15.0
+pitch_scale = 0.7
+
+[node name="SpitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0
+pitch_scale = 0.9
+
+[node name="SpitSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.0
+pitch_scale = 0.9
+
+[node name="WarpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -20.0
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -15.0
+pitch_scale = 0.8
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
+script = ExtResource( 13 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0476092, 0 )
+shape = SubResource( 6 )
