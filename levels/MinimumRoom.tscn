@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
@@ -123,6 +124,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7, 0 )
 
 [node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.185079, 0 )
+path = "res://levels/MinimumRoom2.tscn"
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0 )
 path = "res://levels/MinimumRoom2.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
