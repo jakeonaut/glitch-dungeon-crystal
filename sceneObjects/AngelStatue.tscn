@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scripts/AngelStatue.gd" type="Script" id=10]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/GrandmaStatue.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 3 )
@@ -414,6 +415,7 @@ script = ExtResource( 10 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.860353, 0 )
+visible = false
 material_override = SubResource( 13 )
 pixel_size = 0.125
 texture = ExtResource( 4 )
@@ -422,6 +424,7 @@ max_frames = 1
 
 [node name="BirdSprite" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79978, 2.65261, 0 )
+visible = false
 material_override = SubResource( 6 )
 pixel_size = 0.125
 texture = ExtResource( 6 )
@@ -433,6 +436,7 @@ max_frames = 1
 
 [node name="MusicNoteSprite" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44101, 2.91616, 0.100891 )
+visible = false
 material_override = SubResource( 7 )
 opacity = 0.0
 pixel_size = 0.12
@@ -461,6 +465,7 @@ max_db = -24.0
 max_distance = 25.0
 
 [node name="Area" type="Area" parent="."]
+visible = false
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
@@ -469,6 +474,7 @@ shape = SubResource( 9 )
 
 [node name="NPC" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.32072 )
+visible = false
 is_a_body = false
 
 [node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
@@ -496,6 +502,8 @@ pixel_size = 0.0001
 
 [node name="SparkleSprite3D" parent="SavePoint" index="3"]
 pixel_size = 0.0001
+
+[node name="GrandmaStatue" parent="." instance=ExtResource( 13 )]
 
 [editable path="NPC"]
 [editable path="NPC/NPC TextBox"]

@@ -1,22 +1,23 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/BrothCauldron.gd" type="Script" id=4]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=5]
-[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=6]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/eba_lawnmower_cutting.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/eb_impact4.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Yokai.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=11]
-[ext_resource path="res://assets/sounds/cauldron.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/brothPot.png" type="Texture" id=11]
+[ext_resource path="res://assets/sounds/cauldron2.wav" type="AudioStream" id=12]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=13]
+[ext_resource path="res://assets/brothPotLip.png" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/albedo = Color( 0.564706, 0.564706, 0.564706, 1 )
+shader_param/albedo = Color( 0.741176, 0.741176, 0.741176, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -31,7 +32,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
-shader_param/black_offset = -1
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -50,9 +51,45 @@ shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 2 )
 
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 0.741176, 0.741176, 0.741176, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.002
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 2.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
 [sub_resource type="BoxShape" id=2]
 resource_local_to_scene = true
-extents = Vector3( 0.9, 0.24, 1 )
+extents = Vector3( 1.4, 0.24, 1 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -66,7 +103,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.564706, 0.564706, 0.564706, 1 ) ]
+"values": [ Color( 0.741176, 0.741176, 0.741176, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
@@ -90,7 +127,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -1 ]
+"values": [ 0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite3D:material_override:shader_param/offset")
@@ -104,6 +141,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D2:material_override:shader_param/albedo")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.741176, 0.741176, 0.741176, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D2:material_override:shader_param/target_palette")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "active"
@@ -114,10 +175,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0.737255, 0.737255, 0.737255, 1 ), Color( 0.737255, 0.737255, 0.737255, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
@@ -126,34 +187,34 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 6 ) ]
+"values": [ ExtResource( 2 ), ExtResource( 6 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:material_override:shader_param/black_offset")
+tracks/2/path = NodePath("Sprite3D2:material_override:shader_param/albedo")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ -10 ]
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.741176, 0.741176, 0.741176, 1 ), Color( 0.741176, 0.741176, 0.741176, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/3/path = NodePath("Sprite3D2:material_override:shader_param/target_palette")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ ExtResource( 2 ), ExtResource( 6 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -168,7 +229,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.564706, 0.564706, 0.564706, 1 ) ]
+"values": [ Color( 0.741176, 0.741176, 0.741176, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
@@ -184,28 +245,37 @@ tracks/1/keys = {
 }
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 1, 0.8, 0.5 )
+extents = Vector3( 1.8, 1.1, 0.5 )
 
 [node name="BrothCauldron" type="Spatial" groups=["broths"]]
 script = ExtResource( 4 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, 0 )
 material_override = SubResource( 1 )
 offset = Vector2( 0.5, 0 )
 pixel_size = 0.15
 texture = ExtResource( 11 )
-hframes = 12
-vframes = 10
-frame = 86
+hframes = 2
 script = ExtResource( 1 )
 frame_delay = 0.2
 should_animate = false
 
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, -1 )
+material_override = SubResource( 7 )
+offset = Vector2( 0.5, 0 )
+pixel_size = 0.15
+texture = ExtResource( 14 )
+hframes = 2
+script = ExtResource( 1 )
+frame_delay = 0.2
+
 [node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0233603, -0.27096, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0233603, 0.877102, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00221586, 0 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -235,11 +305,11 @@ volume_db = -20.0
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -15.0
-pitch_scale = 0.8
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, 0 )
 script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0476092, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.930334, 0 )
 shape = SubResource( 6 )

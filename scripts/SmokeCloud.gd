@@ -3,16 +3,19 @@ extends "Sprite.gd"
 var target_x = -9999
 var target_y = -9999
 var fade_out_opacity = false
-var curr_opacity = .5
+export var curr_opacity = .5
 var opacity_fade_rate = 2
 onready var cleanGlitchSound = get_node("CleanGlitchSound") if has_node("CleanGlitchSound") else null
+onready var bubbleSound = get_node("BubbleSound") if has_node("BubbleSound") else null
 var should_randomize = false
 
 func tryPlaySound():
-    if cleanGlitchSound == null:
-        return
-    cleanGlitchSound.play()
-    cleanGlitchSound.pitch_scale = rand_range(0.8, 1.2)
+    if cleanGlitchSound != null:
+        cleanGlitchSound.play()
+        cleanGlitchSound.pitch_scale = rand_range(0.8, 1.2)
+    if bubbleSound != null:
+        bubbleSound.play()
+        bubbleSound.pitch_scale = rand_range(0.6, 0.9)
 
 func _ready():
 

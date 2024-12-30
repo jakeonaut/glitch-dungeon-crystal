@@ -6,6 +6,7 @@ export(String, FILE) var path
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var mySprite = get_node("Sprite3D")
+onready var mySprite2 = get_node("Sprite3D2")
 onready var swallowSound = get_node("SwallowSound")
 onready var spitSound = get_node("SpitSound")
 onready var spitSound2 = get_node("SpitSound2")
@@ -22,11 +23,12 @@ var spit_out_time_limit = 5
 func _ready():
   set_process(true)
   mySprite.material_override = mySprite.material_override.duplicate()
+  mySprite2.material_override = mySprite2.material_override.duplicate()
 
 func _process(delta):
   is_active = global.haveIBeenToThisLevelPath(path)
 
-  if is_active:
+  if is_active and not aniPlayer.assigned_animation == "active":
     aniPlayer.play("active")
     smoke_fume_time_limit = 5
 
@@ -42,12 +44,12 @@ func _process(delta):
     newSmokeFume.fade_out_opacity = true
     level.add_child(newSmokeFume)
     newSmokeFume.global_transform.origin = self.global_transform.origin
-    newSmokeFume.global_transform.origin.y += 1.4
+    newSmokeFume.global_transform.origin.y += 1.5
     newSmokeFume.global_transform.origin.x += rand_range(-1.0, 1.0)
-    newSmokeFume.target_y = newSmokeFume.global_transform.origin.y + rand_range(1.0, 2.0)
+    newSmokeFume.target_y = newSmokeFume.global_transform.origin.y + rand_range(2.0, 3.0)
     if is_active:
-      newSmokeFume.material_override.set_shader_param("target_palette", global.yellow_palette)
-      newSmokeFume.material_override.set_shader_param("offset", 8)
+      newSmokeFume.material_override.set_shader_param("target_palette", global.red_palette)
+      # newSmokeFume.material_override.set_shader_param("offset", 8)
 
   if global.pauseGame:
     return
@@ -111,6 +113,10 @@ func unsmack():
     mySprite.material_override.set_shader_param("time_influence", 3)
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
+
+    mySprite2.material_override.set_shader_param("time_influence", 3)
+    mySprite2.material_override.set_shader_param("y_div", 2.3)
+    mySprite2.material_override.set_shader_param("normal_offset", .02)
         
 var who_did_i_get = null
 var maybe_friend_refs = {}
@@ -158,6 +164,9 @@ func getSmacked(broom_origin = null):
   mySprite.material_override.set_shader_param("time_influence", time_influence)
   mySprite.material_override.set_shader_param("y_div", y_div)
   mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+  mySprite2.material_override.set_shader_param("time_influence", time_influence)
+  mySprite2.material_override.set_shader_param("y_div", y_div)
+  mySprite2.material_override.set_shader_param("normal_offset", normal_offset)
   
   smack_timer = 0
   is_smacked = true
