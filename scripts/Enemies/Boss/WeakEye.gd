@@ -61,14 +61,9 @@ func ouchies(_broom_pos):
   secretAniPlayer.queue("getHurt")
   secretAniPlayer.queue("blinkCloseFast")
 
-  var bossToHurt = null
-  if level.has_node("HighPriestessBoss"):
-    bossToHurt = level.get_node("HighPriestessBoss")
-  elif level.has_node("ClaydolBoss"):
-    bossToHurt = level.get_node("ClaydolBoss")
-  elif level.has_node("BabaYagaBoss"):
-    bossToHurt = level.get_node("BabaYagaBoss")
-  bossToHurt.getHurt()
+  var whichBoss = level.getBoss()
+  if whichBoss != null:
+    whichBoss.getHurt()
   
 
 func processDeath():

@@ -1248,9 +1248,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -18, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
 
-[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5795, 13.4393, 0 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -10, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"

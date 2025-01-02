@@ -99,6 +99,17 @@ onready var glitchSpellRect2 = get_node("EquipmentRect/ColorRect/ColorRect/Glitc
 onready var glitchSpellRect3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3")
 onready var glitchSpellRect4 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect4")
 onready var extension = get_node("EquipmentRect/ColorRect/ColorRect/Extension")
+onready var livesRect = get_node("LivesRect")
+onready var grannyLifeSprite1 = get_node("LivesRect/LifeSprite")
+onready var grannyLifeSprite2 = get_node("LivesRect/LifeSprite2")
+onready var grannyLifeSprite3 = get_node("LivesRect/LifeSprite3")
+onready var deadTextLabel = get_node("LivesRect/DeadTextLabel")
+onready var bossLifeSprite1 = get_node("LivesRect/BossLifeSprite")
+onready var bossLifeSprite2 = get_node("LivesRect/BossLifeSprite2")
+onready var bossLifeSprite3 = get_node("LivesRect/BossLifeSprite3")
+onready var bossLifeSprite4 = get_node("LivesRect/BossLifeSprite4")
+onready var bossLifeSprite5 = get_node("LivesRect/BossLifeSprite5")
+onready var bossTextLabel = get_node("LivesRect/BossTextLabel")
 
 func _process(delta):
   textBoxes.visible = not global.isPauseMenuOpen
@@ -259,7 +270,7 @@ func _process(delta):
       glitchSpellRect3.color = activeColor if index == 2 else inactiveColor
       glitchSpellRect4.color = activeColor if index == 3 else inactiveColor
       glitchSpellRect3.visible = true
-      glitchSpellRect4.visible = false
+      glitchSpellRect4.visible = true
       extension.visible = true
       setGlitchSprite(glitchSpellSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
       if spellbookSize >= 2:

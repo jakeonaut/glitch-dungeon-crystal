@@ -19,7 +19,10 @@ var singing_count_max = 1
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 onready var cubeCrystal = get_node("CubeCrystal")
 
+var num_hits = 0
 var MAX_NUM_HITS = 3
+var num_granny_hits = 0
+var MAX_GRANNY_HITS = 3
 
 enum BossPhase {
     ASLEEP,
@@ -59,7 +62,9 @@ func _ready():
     #     babaYagaDoor.visible = true
     runTrack.visible = false
 
-var num_hits = 0
+func getMyVariable():
+    return global.memory["baba_yaga_boss"]
+
 func getHurt():
     am_i_hurt = true
     num_hits += 1

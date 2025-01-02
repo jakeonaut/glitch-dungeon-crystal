@@ -28,10 +28,11 @@ func activateScript():
     # global.memory["nesting_doll"] = global.NestingDoll.BABY
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
 
-    elderTadpoleNPC.textBoxContainer.bbText = "•We must awaken the Goddess.\nPlease, collect her 3 dreams,\nscattered in the darkest\ncorners of this dungeon."
-    elderTadpoleNPC.textBoxContainer.setVars()
+    # elderTadpoleNPC.textBoxContainer.bbText = "•TBH.. still working on \nthe ending of game.\nBut I'm close to being done!"
+    # elderTadpoleNPC.textBoxContainer.setVars()
     # yield(get_tree().create_timer(0.1), "timeout")
     # elderTadpoleNPC.activate(true)
+    pass
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

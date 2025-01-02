@@ -220,6 +220,7 @@ func _process(delta):
 
   processPauseMenu()
   processGrandmaStatueSavePoints()
+  processBossHealth(delta)
 
 func processPauseMenu():
   if global.shouldRenderAsCinematic:
@@ -821,3 +822,48 @@ func clearOtherGrabbers(gameMover):
   for grabber in grabbers:
     if grabber.hookTarget != null and grabber.hookTarget.get_ref() == gameMover:
       grabber.hookTarget = null
+
+func getBoss():
+  if self.has_node("HighPriestessBoss"):
+    return get_node("HighPriestessBoss")
+  elif has_node("ClaydolBoss"):
+    return get_node("ClaydolBoss")
+  elif has_node("BabaYagaBoss"):
+    return get_node("BabaYagaBoss")
+  elif has_node("AnglerFishBoss"):
+    return get_node("AnglerFishBoss")
+  return null
+
+var animate_life_timer = 0
+var animate_life_time_limit = 5
+func processBossHealth(delta):
+  var whichBoss = getBoss()
+  if whichBoss == null or whichBoss.getMyVariable() == 0:
+    uiLayer.livesRect.visible = false
+    return
+
+  animate_life_timer += (delta*11)
+  uiLayer.livesRect.visible = true
+  # a bit esoteric logic given that we're hard coding it
+
+  uiLayer.grannyLifeSprite1.visible = whichBoss.num_granny_hits < whichBoss.MAX_GRANNY_HITS and (animate_life_timer >= animate_life_time_limit*1)
+  uiLayer.grannyLifeSprite2.visible = whichBoss.num_granny_hits <= 1 and (animate_life_timer >= animate_life_time_limit*2)
+  uiLayer.grannyLifeSprite3.visible = whichBoss.num_granny_hits == 0 and (animate_life_timer >= animate_life_time_limit*3)
+  # a bit esoteric logic given that we're hard coding it
+  if whichBoss.MAX_NUM_HITS == 5:
+    uiLayer.bossLifeSprite1.visible = whichBoss.num_hits < whichBoss.MAX_NUM_HITS and (animate_life_timer >= animate_life_time_limit*4)
+    uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 3 and (animate_life_timer >= animate_life_time_limit*5)
+    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits <= 2 and (animate_life_timer >= animate_life_time_limit*6)
+    uiLayer.bossLifeSprite4.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*8)
+    uiLayer.bossLifeSprite5.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*10)
+  elif whichBoss.MAX_NUM_HITS == 3:
+    uiLayer.bossLifeSprite1.visible = whichBoss.num_hits < whichBoss.MAX_NUM_HITS and (animate_life_timer >= animate_life_time_limit*4)
+    uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*5)
+    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*6)
+    uiLayer.bossLifeSprite4.visible = false
+    uiLayer.bossLifeSprite5.visible = false
+
+  # Text!
+  uiLayer.deadTextLabel.visible = whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS
+  uiLayer.bossTextLabel.visible = whichBoss.num_hits == whichBoss.MAX_NUM_HITS
+  

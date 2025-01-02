@@ -891,7 +891,7 @@ func processInventoryRender(_delta):
       glitchRect1.visible = true
       glitchRect2.visible = true
       glitchRect3.visible = true
-      glitchRect4.visible = false
+      glitchRect4.visible = true
       setGlitchSprite(glitchSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
       setGlitchSprite(glitchSprite2, spellbook[1] if spellbookSize >= 2 else global.GlitchForm.NORMAL)
       setGlitchSprite(glitchSprite3, spellbook[2] if spellbookSize >= 3 else global.GlitchForm.NORMAL)

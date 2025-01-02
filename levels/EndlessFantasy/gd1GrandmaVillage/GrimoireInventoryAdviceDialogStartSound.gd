@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = "•try to rearrange spells\nin your inventory.\npress " + global.getLargeInputText("popup_menu") + "\n•remember: your active spell\nwill be replaced by new memory"
+    var text = "•try to rearrange spells\nin your inventory.\npress " + global.getLargeInputText("popup_menu")
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text

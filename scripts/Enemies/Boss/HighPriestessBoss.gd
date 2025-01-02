@@ -29,7 +29,11 @@ var spawn_timer = 0
 var spawn_time_limit = 2
 var BULLET_SPEED = 15
 var has_animated_attack = false
+
+var num_hits = 0
 var MAX_NUM_HITS = 5
+var num_granny_hits = 0
+var MAX_GRANNY_HITS = 3
 
 enum BossPhase {
     IDLE,
@@ -87,7 +91,9 @@ func _ready():
     crystalsArray = [crystal3, crystal2, crystal5, crystal4, crystal1]
     staffSpawnPoint.visible = false
 
-var num_hits = 0
+func getMyVariable():
+    return global.memory["priestess"]
+
 func getHurt():
     mySprite.visible = true
     secretAniPlayer.stop()

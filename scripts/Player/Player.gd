@@ -1743,7 +1743,12 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if global.userSettings["canChangeSongPitch"]:
     musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
 
-  global.memory["hp"] -= 1
+  var whichBoss = level.getBoss()
+  if whichBoss != null and whichBoss.getMyVariable() > 0:
+    whichBoss.num_granny_hits += 1
+    global.incrementLevelZoneDeaths()
+  else:
+    global.memory["hp"] -= 1
   # if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
   #   getBubbleCured()
   #   physics_state = PhysicsState.GLITCH_HURT
@@ -1770,7 +1775,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
-  elif global.memory["hp"] <= 0 or should_immediately_die:
+  elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS):
     if summonedBroom:
       broomStop()
     summonFallenBroom(false, true, false)
@@ -1783,7 +1788,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitch_death_timer = 0
     global.pauseMoveInput = false 
 
-    if global.memory["hp"] <= 1:
+    if global.memory["hp"] <= 1 and enchantedBagSpriteVisible.visible:
       summonSmokeClouds(3, true, true, -1)
       enchantedBagSpriteVisible.visible = false
     # self.nullify()

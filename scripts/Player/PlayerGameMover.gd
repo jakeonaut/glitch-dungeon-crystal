@@ -211,7 +211,7 @@ func adjustStuffForNestingDolls():
     tb = 1
     bb = -1
     lb = -0.72
-    rb = .72
+    rb = 0.72
     should_only_do_middle_sensor = false
     cheating_horizontal_offset = 0
     smallCollisionShape.shape.height = 2.032

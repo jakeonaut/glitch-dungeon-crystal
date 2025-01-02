@@ -15,6 +15,8 @@ var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
+var num_granny_hits = 0
+var MAX_GRANNY_HITS = 3
 
 enum BossPhase {
     IDLE,
@@ -75,6 +77,9 @@ func unsmack():
     .unsmack()
     if boss_phase == BossPhase.STUN_FALL:
         grav = 60
+
+func getMyVariable():
+    return global.memory["angler_seaman_boss"]
 
 var preyTarget = null
 func _process(delta):

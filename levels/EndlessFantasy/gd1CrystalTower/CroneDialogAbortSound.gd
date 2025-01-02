@@ -7,26 +7,30 @@ onready var textBox = get_node("..")
 func _ready():
     pass
         
+var cursesText1 = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
+var cursesText2 = "•the Goddess still hasn't\nshown herself to me\n•was I wrong?"
+var cursesText3 = "•well, this world must be ending soon.\nwhat do you care?\nleave this place!"
+
 
 var which_one = 0
 func activateScript():
   if which_one == -1 and not textBox.was_smacked:
-    NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
+    NPC.textBoxContainer.bbText = cursesText1
     NPC.textBoxContainer.setVars()
     which_one = 1
   elif which_one == 0 and not textBox.was_smacked:
     level.aniPlayer.play("appearEnd")
-    NPC.textBoxContainer.bbText = "•curses!! 1000s of years\n studying glitch magick\n•and still bested by a hag.."
+    NPC.textBoxContainer.bbText = cursesText1
     NPC.textBoxContainer.setVars()
     which_one = 1
   elif which_one == 1 and not textBox.was_smacked:
     # NPC.mySprite.updateBaseFrame(6, 6)
-    NPC.textBoxContainer.bbText = "•the Goddess still hasn't\nshown herself to me\n•was I wrong?"
+    NPC.textBoxContainer.bbText = cursesText2
     NPC.textBoxContainer.setVars()
     which_one = 2
   elif which_one == 2 and not textBox.was_smacked:
     NPC.mySprite.updateBaseFrame(6, 6)
-    NPC.textBoxContainer.bbText = "•well, this world must be ending soon.\nwhat do you care?\nleave this place!"
+    NPC.textBoxContainer.bbText = cursesText3
     NPC.textBoxContainer.setVars()
     which_one = 3
   elif which_one == 3 or textBox.was_smacked:

@@ -8,8 +8,11 @@ onready var thudSound = get_node("Sounds/ThudSound")
 onready var digSound = get_node("Sounds/DigSound")
 onready var cubeCrystal = get_node("CubeCrystal")
 
-var MAX_NUM_HITS = 3
 var num_hits = 0
+var MAX_NUM_HITS = 3
+var num_granny_hits = 0
+var MAX_GRANNY_HITS = 3
+
 var dreidel_timer = 0
 var dreidel_time_limit = 40
 var dizzy_timer = 0
@@ -59,6 +62,9 @@ func _ready():
 func isActive(debug = false):
     return .isActive(debug) and boss_phase != BossPhase.DIZZY
 
+func getMyVariable():
+    return global.memory["dogu_matryoshka_boss"]
+
 func _process(delta):
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
@@ -89,6 +95,8 @@ func _process(delta):
         if global.memory["dogu_matryoshka_boss"] == 1:
             global_transform.origin.y += 10.5
             boss_phase = BossPhase.WAKEUP
+            level.gameCamera.initial_size = 35
+            level.gameCamera.zoomed_size = 35
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()

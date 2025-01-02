@@ -734,7 +734,6 @@ vframes = 6
 frame = 9
 
 [node name="GlitchRect4" type="ColorRect" parent="InventoryRect"]
-visible = false
 margin_left = 216.0
 margin_top = 9.0
 margin_right = 250.0

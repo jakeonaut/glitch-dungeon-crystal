@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = "•Forget-me-not\nHoly aura no longer affects."
+    var text = "•Forget-me-not\nHold all 4 spells.\nHoly aura no longer affects."
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
