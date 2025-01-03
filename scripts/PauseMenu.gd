@@ -152,7 +152,7 @@ func _process(delta):
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 180
+    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processNormalLogic(delta)
 
@@ -162,7 +162,7 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     colorblindPlayers.visible = true
-    cursorSprite.position.x = 180
+    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processGraphicsLogic(delta)
   else:
@@ -174,7 +174,7 @@ func _process(delta):
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 180
+    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processSoundLogic(delta)
   else:
@@ -185,7 +185,7 @@ func _process(delta):
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 180
+    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processQuitToMainLogic(delta)
   else:
@@ -196,7 +196,7 @@ func _process(delta):
     pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 180
+    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processTopInputLogic(delta)
 
@@ -247,7 +247,7 @@ func _process(delta):
   if largerPopup.visible and not pauseMenuRect.visible:
     pauseTitleRect.rect_position = Vector2(164, 400)
   else:
-    pauseTitleRect.rect_position = Vector2(164, 5)
+    pauseTitleRect.rect_position = Vector2(164, 400)
 
 
 var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
@@ -288,7 +288,7 @@ func processNormalLogic(_delta):
   if global.memory["demo_mode"] >= 2:
     cursorSprite.position.y = 120 + (40*normalOptionIndex)
   else:
-    cursorSprite.position.y = 120 + (80*normalOptionIndex)
+    cursorSprite.position.y = 80 + (65*normalOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     pauseMenuState = PauseMenuState.TEMP

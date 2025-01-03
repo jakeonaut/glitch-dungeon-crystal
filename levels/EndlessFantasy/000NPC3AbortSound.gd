@@ -11,20 +11,15 @@ func _ready():
         NPC3.queue_free()
         return
 
-    # var memory = global.getStaticLevelZoneLevelVar(level, self)
-    # if memory == null:
-    #     return
-    # elif not memory:
-    #     doActivateScriptStuff()
-    # elif memory:
-    #     NPC3.queue_free()
+    var memory = global.getStaticLevelZoneLevelVar(level, self)
+    if memory:
+        doActivateScriptStuff()
         
 
 # var has_talked = false
 func activateScript():
-    pass
     # if not has_talked:
-    #     doActivateScriptStuff()
+    doActivateScriptStuff()
     # if textBox.was_smacked:
     #     level.summonSmokeClouds(NPC3.global_transform.origin, 3, true, true)
     #     global.activeInteractor = null
@@ -32,13 +27,16 @@ func activateScript():
     #     global.setStaticLevelZoneLevelVar(level, self, true)
 
 func doActivateScriptStuff():
-    pass
-    # NPC3.textBoxContainer.bbText = "•I traveled here to meet the\ncrystal elders. Why have they\nallowed this place to decay?"
-    # NPC3.textBoxContainer.setVars()
-    # global.setStaticLevelZoneLevelVar(level, self, false)
-    # NPC3.can_camera_zoom = false
-    # NPC3.textBox.can_camera_zoom = false
-    # has_talked = true
+    var door = level.get_node("Door")
+
+    if door.is_locked:
+        NPC3.textBoxContainer.bbText = "•I think the crystals are ahead\nbut I can't get past this door.."
+    else:
+        NPC3.textBoxContainer.bbText ="•Ah! great work.\nI'll meet you on ahead"
+    NPC3.textBoxContainer.setVars()
+    global.setStaticLevelZoneLevelVar(level, self, true)
+    NPC3.can_camera_zoom = false
+    NPC3.textBox.can_camera_zoom = false
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

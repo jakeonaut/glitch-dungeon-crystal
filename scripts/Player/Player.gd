@@ -1747,6 +1747,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if whichBoss != null and whichBoss.getMyVariable() > 0:
     whichBoss.num_granny_hits += 1
     global.incrementLevelZoneDeaths()
+    level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
   else:
     global.memory["hp"] -= 1
   # if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
