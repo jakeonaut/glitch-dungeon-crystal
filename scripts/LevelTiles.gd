@@ -342,7 +342,7 @@ func _process(delta):
   randomize_timer += delta
   
   # if global.memory["priestess"] >= 2:
-  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     randomize_timer = randomize_time_limit
     randomize_num_counter = 0
     randomize_num = 1
@@ -716,7 +716,8 @@ func changeColorPalette(palette, _palette_alt = null):
   if (
      my_tileset_type == global.TilesetType.DUNGEON or
      my_tileset_type == global.TilesetType.BEACH or
-     my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE
+     my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or
+     global.memory["glitch_world"] > 0
   ):
     if not can_change_color:
       curr_palette = override_palette if override_palette != null else grey_palette
@@ -769,7 +770,7 @@ func properlySetTiles():
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
 
     # if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:
-    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
       randomizeTile(cell_index, getRandomGlitchType())
 
 func setTileset(tileset_type, properly_set_tiles = true):

@@ -307,6 +307,7 @@ func resetMemory():
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
+    memory["glitch_world"] = 0
 
     # goddess dream bosses
     memory["baba_yaga_boss"] = 0
