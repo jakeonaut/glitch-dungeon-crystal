@@ -88,7 +88,7 @@ func _process(delta):
         unenemize()
         if cubeCrystal.meshInstance1.visible:
             cubeCrystal.meshInstance1.visible = false
-            global.memory["angler_seaman_boss"] = 1 
+            startBossFight()
         if global.memory["angler_seaman_boss"] == 1:
             startBossFight()
         return

@@ -733,10 +733,10 @@ vframes = 6
 frame = 9
 
 [node name="GlitchRect4" type="ColorRect" parent="InventoryRect"]
-margin_left = 286.0
-margin_top = 12.0
-margin_right = 320.0
-margin_bottom = 46.0
+margin_left = 284.0
+margin_top = 13.0
+margin_right = 318.0
+margin_bottom = 47.0
 rect_scale = Vector2( 1.5, 1.5 )
 color = Color( 0, 0.392157, 0, 1 )
 
@@ -2216,8 +2216,8 @@ scroll_active = false
 [node name="CursorSprite" type="Sprite" parent="."]
 visible = false
 material = SubResource( 62 )
-position = Vector2( 120, 114 )
-scale = Vector2( 3, 3 )
+position = Vector2( 160, 80 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 14 )
 hframes = 6
 vframes = 5

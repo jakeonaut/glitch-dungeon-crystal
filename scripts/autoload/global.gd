@@ -656,7 +656,7 @@ enum GlyphType {
     NINTENDO,
     PLAYSTATION,
 }
-func getButtonIndexStr(button_index, glyph_type = GlyphType.XBOX, useSpecialChar = true):
+func getButtonIndexStr(button_index, glyph_type = GlyphType.NINTENDO, useSpecialChar = true):
     match button_index:
         JOY_XBOX_A:
             if glyph_type == GlyphType.XBOX:
@@ -844,7 +844,7 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
     var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
-    var glyphType = GlyphType.XBOX
+    var glyphType = GlyphType.NINTENDO
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
@@ -874,7 +874,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
     var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
-    var glyphType = GlyphType.XBOX
+    var glyphType = GlyphType.NINTENDO
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:

@@ -15,6 +15,8 @@ func _ready():
     var memory = self.getMyStaticLevelZoneVar()
     if is_static_in_level and memory:
         visible = false
+        landSound.volume_db = -80
+        grav = 0
 
 # @override
 func collideWithWall(local_lv):
