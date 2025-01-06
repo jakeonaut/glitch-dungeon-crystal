@@ -146,6 +146,10 @@ func spawnChicken():
     
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
+  if glitched_path != "" and glitched_path != null and global.memory["glitch_world"] > 0:
+    self.path = self.glitched_path
+    mySprite.material_override.set_shader_param("enable_glitch", true)
+
   if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO:
     meshInstance2.visible = true
     meshInstance2.rotation_degrees.y += delta*22

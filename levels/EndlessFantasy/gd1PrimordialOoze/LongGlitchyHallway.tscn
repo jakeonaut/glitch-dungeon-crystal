@@ -8,7 +8,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sceneObjects/Enemies/GlitchGrandmaManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=8]
-[ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchHallwayLevelScript.gd" type="Script" id=9]
+[ext_resource path="res://levels/EndlessFantasy/gd1PrimordialOoze/LongGlitchHallwayLevelScript.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SmallKey.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
@@ -104,7 +104,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9, 1.1, 0 )
 
 [node name="GlitchGrandmaManager" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 8.02731, 0 )
@@ -124,12 +124,13 @@ glitch_form = 2
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
+is_locked = true
+num_keys_unlock = 1
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 num_keys_unlock = 1
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 6 )]
