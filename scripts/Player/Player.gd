@@ -17,6 +17,9 @@ onready var grannyLandSound = get_node("Sounds/GrannyLandSound")
 onready var poisonWaterSound = get_node("Sounds/PoisonWaterSound")
 onready var reversePoisonWaterSound = get_node("Sounds/PoisonWaterReverseSound")
 onready var footstepSound = get_node("Sounds/FootstepSound")
+onready var waterFootstepSound = get_node("Sounds/WaterFootstepSound")
+onready var sandFootstepSound = get_node("Sounds/SandFootstepSound")
+onready var tileFootstepSound = get_node("Sounds/TileFootstepSound")
 onready var hookSound = get_node("Sounds/HookSound")
 onready var reelSound = get_node("Sounds/ReelSound")
 onready var digSound = get_node("Sounds/DigSound")
@@ -111,6 +114,8 @@ func collideWithFloor(local_lv):
     var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
     if levelTiles.isTileDissolvingStone(tile_type):
       levelTiles.corrode(tile_coords)
+    if levelTiles.isTileFragileSolid(tile_type):
+      glitchTickle()
   return .collideWithFloor(local_lv)
 
 func processNotWallLadderWalking(delta):
@@ -140,20 +145,27 @@ func tryPlayFootstepSound():
     return 
   if not (pressingMoveLeft() or pressingMoveRight()):
     return
-  if glitch_form == global.GlitchForm.FLOOR and not truly_on_ground:
-    sporeSound.play()
-    return
+
   if on_ground or glitch_form == global.GlitchForm.LADDER:
-    if on_ground and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()):
-      if nesting_doll_state == global.NestingDoll.MATRIARCH:
-        footstepSound.pitch_scale = rand_range(0.6, 0.8)
-      elif nesting_doll_state == global.NestingDoll.BABY:
-        footstepSound.pitch_scale = rand_range(1.2, 1.3)
-      else:
-        footstepSound.pitch_scale = rand_range(0.9, 1.1)
-      footstepSound.play()
+    var whichFootStepSound = footstepSound
+    if is_touching_water:
+      whichFootStepSound = waterFootstepSound
+    elif (not (on_ground and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()))) or (glitch_form == global.GlitchForm.FLOOR and not truly_on_ground):
+      whichFootStepSound = sporeSound
+    elif level.tileset_type == global.TilesetType.DESERT:
+      whichFootStepSound = sandFootstepSound
+    elif level.tileset_type == global.TilesetType.DUNGEON:
+      whichFootStepSound = tileFootstepSound
+
+    if nesting_doll_state == global.NestingDoll.MATRIARCH:
+      whichFootStepSound.pitch_scale = rand_range(0.6, 0.8)
+    elif nesting_doll_state == global.NestingDoll.BABY:
+      whichFootStepSound.pitch_scale = rand_range(1.2, 1.3)
     else:
-      sporeSound.play()
+      whichFootStepSound.pitch_scale = rand_range(0.9, 1.1)
+    if whichFootStepSound == sporeSound or whichFootStepSound == sandFootstepSound:
+      whichFootStepSound.pitch_scale *= 2.0
+    whichFootStepSound.play()
 
 func applyNextGlitch():
   applyGlitch(global.getNextGlitch(glitch_form))
@@ -1529,9 +1541,9 @@ func collideWithCeiling(local_lv):
     if getLevelTiles().isTileFragileSolid(tile_type):
       areAnyTilesAboveMeGlitched = true
       if pressingJump():
-        if not noBroomSound.is_playing():
+        if not noBroomSound.is_playing() and global.memory["mole_cricket"] > 0:
           noBroomSound.play()
-        glitchTilesAroundMe()
+          glitchTilesAroundMe()
         glitchTickle()
       break
   if (
@@ -2224,7 +2236,7 @@ var cloud_time_limit = 15
 var bug_sprite_timer = 0
 var bug_sprite_time_limit = 5
 func processSpriteRenderLogic(delta):
-  if physics_state == PhysicsState.BEING_TOSSED or malware_infected:
+  if malware_infected: # or physics_state == PhysicsState.BEING_TOSSED: 
     corruptAllSprites()
     cloud_timer += (delta*11)
     if cloud_timer >= cloud_time_limit:

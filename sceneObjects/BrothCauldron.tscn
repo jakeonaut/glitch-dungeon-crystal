@@ -89,7 +89,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [sub_resource type="BoxShape" id=2]
 resource_local_to_scene = true
-extents = Vector3( 1.4, 0.24, 1 )
+extents = Vector3( 1, 0.24, 1 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -253,7 +253,6 @@ script = ExtResource( 4 )
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, 0 )
 material_override = SubResource( 1 )
-offset = Vector2( 0.5, 0 )
 pixel_size = 0.15
 texture = ExtResource( 11 )
 hframes = 2
@@ -264,7 +263,6 @@ should_animate = false
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, -1 )
 material_override = SubResource( 7 )
-offset = Vector2( 0.5, 0 )
 pixel_size = 0.15
 texture = ExtResource( 14 )
 hframes = 2
@@ -304,7 +302,7 @@ volume_db = -20.0
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
-volume_db = -15.0
+volume_db = -20.0
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["bug"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19873, 0 )

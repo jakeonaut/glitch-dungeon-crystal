@@ -13,6 +13,9 @@ onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/C
 
 onready var miniCrystalTextureRect = get_node("GlitchStatusRect/TextureRect") if has_node("GlitchStatusRect/TextureRect") else null
 onready var miniCrystalViewport = get_node("GlitchStatusRect/Viewport") if has_node("GlitchStatusRect/Viewport") else null
+onready var savingTextureRect = get_node("SavingTextLabel/TextureRect") if has_node("SavingTextLabel/TextureRect") else null
+onready var savingViewport = get_node("SavingTextLabel/Viewport") if has_node("SavingTextLabel/Viewport") else null
+onready var savingSprite3D = get_node("SavingTextLabel/Viewport/SavingSprite3D") if has_node("SavingTextLabel/Viewport/SavingSprite3D") else null
 
 var display_title = "???"
 onready var levelTitleRect = get_node("LevelTitle")
@@ -187,9 +190,11 @@ func _process(delta):
 
   if should_display_saving_text:
     saving_text_timer += (delta*22)
+    savingSprite3D.rotation_degrees.y -= delta*22*5
     if saving_text_timer >= saving_text_time_limit:
       should_display_saving_text = false
       savingTextLabel.visible = false
+      savingSprite3D.rotation_degrees.y = 0
 
   if should_display_spell_message_text:
     spell_message_text_timer += (delta*22)
@@ -235,8 +240,10 @@ func _process(delta):
   get_node("EquipmentRect").visible = global.memory.has("spellbookPage")
   glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
+  if savingTextureRect != null and savingTextureRect.texture == null and savingViewport != null:
+    savingTextureRect.texture = savingViewport.get_texture()
   if global.memory["tutorial_gem"] == 1:
-    if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null :
+    if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null:
       miniCrystalTextureRect.texture = miniCrystalViewport.get_texture()
     var glitchStatusRect = get_node("GlitchStatusRect")
     glitchStatusRect.visible = true
@@ -297,6 +304,8 @@ func _process(delta):
         setGlitchSprite(glitchSpellSprite2, spellbook[index])
       else:
         setGlitchSprite(glitchSpellSprite2, global.GlitchForm.NORMAL)
+  else:
+    setGlitchSprite(glitchSpellSprite1, level.player.glitch_form)
 
   if global.userSettings["canGlitchScreen"] and level.pacman_wrapping:
     edgeDistortion.visible = true # a little visually glitchy at times in a way i dont like
@@ -316,7 +325,7 @@ func setGlitchSprite(sprite, glitch):
   elif glitch == global.GlitchForm.FEATHER: sprite.frame = 0
   elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
   elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
-  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 9
+  elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 5
   elif glitch == global.GlitchForm.BUBBLE: sprite.frame = 4
 
 onready var cinematicTopRect = get_node("CinematicTopRect")
@@ -476,7 +485,7 @@ func tryLerpSpriteFromCenter(sprite, delta, final_pos):
 
 func displaySavingText(message = "saving (not really)"):
   savingTextLabel.visible = true
-  savingTextLabel.bbcode_text = "[wave] "+message+"[/wave]"
+  savingTextLabel.bbcode_text = "" # [wave] "+message+"[/wave]"
   should_display_saving_text = true
   saving_text_timer = 0
 
@@ -503,7 +512,7 @@ func setDisplayTitle(title):
 onready var glitchSpriteContainer = get_node("GlitchSpriteColorRect")
 onready var glitchSprite = get_node("GlitchSpriteColorRect/ColorRect2/ColorRect3/GlitchSprite")
 func normalGlitch():
-  glitchSprite.frame = 4
+  glitchSprite.frame = 9
 
 func floorGlitch():
   glitchSprite.frame = 1
@@ -518,7 +527,7 @@ func invisibleGlitch():
   glitchSprite.frame = 3
 
 func walkThroughWallsGlitch():
-  pass
+  glitchSprite.frame = 5
 
 func changeCastSpritePalette():
   pauseMenu.changeCastSpritePalette()

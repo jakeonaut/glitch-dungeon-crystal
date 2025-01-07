@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -36,6 +36,8 @@
 [ext_resource path="res://shaders/Sprite2DPaletteShader.shader" type="Shader" id=34]
 [ext_resource path="res://assets/sprites2D/jpetscii.png" type="Texture" id=35]
 [ext_resource path="res://levels/common/UITheme_small.tres" type="Theme" id=36]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=37]
+[ext_resource path="res://assets/sprites/savepoint.png" type="Texture" id=38]
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -173,7 +175,7 @@ default_font = SubResource( 23 )
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17216]
+[sub_resource type="ArrayMesh" id=17219]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -750,6 +752,42 @@ tracks/0/keys = {
 "values": [ 2, 3 ]
 }
 
+[sub_resource type="ShaderMaterial" id=17220]
+shader = ExtResource( 22 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 12
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 5.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 38 )
+shader_param/base_palette = ExtResource( 19 )
+shader_param/target_palette = ExtResource( 12 )
+
 [sub_resource type="DynamicFont" id=17214]
 size = 24
 outline_size = 4
@@ -963,6 +1001,7 @@ scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
+frame = 9
 
 [node name="GlitchStatusRect" type="ColorRect" parent="."]
 visible = false
@@ -1028,11 +1067,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -603 )
 [node name="MeshInstance" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
 transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373667, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17216 )
+mesh = SubResource( 17219 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1458,8 +1497,36 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[wave] saving... (not really)[/wave]"
-text = " saving... (not really)"
+
+[node name="TextureRect" type="TextureRect" parent="SavingTextLabel"]
+margin_left = 9.0
+margin_top = -28.0
+margin_right = 59.0
+margin_bottom = 22.0
+expand = true
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="SavingTextLabel"]
+size = Vector2( 480, 480 )
+transparent_bg = true
+handle_input_locally = false
+
+[node name="Camera" type="Camera" parent="SavingTextLabel/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 600 )
+projection = 1
+size = 1.5
+
+[node name="SavingSprite3D" type="Sprite3D" parent="SavingTextLabel/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 599 )
+material_override = SubResource( 17220 )
+offset = Vector2( 0, -3.5 )
+flip_h = true
+pixel_size = 0.22
+texture = ExtResource( 38 )
+hframes = 2
+vframes = 2
+script = ExtResource( 37 )
+frame_delay = 0.8
 
 [node name="MessageTextLabel" type="RichTextLabel" parent="."]
 visible = false

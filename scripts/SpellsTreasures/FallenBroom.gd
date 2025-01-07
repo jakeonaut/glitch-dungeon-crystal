@@ -10,6 +10,7 @@ var projectile = false
 var was_projectile = false
 var return_timer = 0
 var return_time_limit = 5
+var loop_return_time_limit = 10
 var returning = false
 var returning_timer = 0
 var returning_time_limit = 5
@@ -45,6 +46,11 @@ var can_return_via_input = false
 var can_return_via_input_timer = 0
 var can_return_via_input_time_limit = 3
 func _process(delta):
+    if global.pauseGame:
+        returning = true
+        was_projectile = false
+        return
+
     if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
         queue_free()
 
@@ -142,7 +148,7 @@ func _process(delta):
             level.player.global_transform.origin = self.global_transform.origin
             level.player.target_last_grounded_y = self.global_transform.origin.y
             return_timer += (delta*11)
-            if return_timer >= returning_time_limit:
+            if return_timer >= return_time_limit:
                 return_timer = 0
                 returning = false
                 var mult = 2
@@ -153,6 +159,13 @@ func _process(delta):
                 level.player.has_broom_flown = true
                 level.player.has_landed_since_last_flight = false
                 taking_the_player_with_me = false
+        else:
+            return_timer += (delta*11)
+            if return_timer >= loop_return_time_limit:
+                return_timer = 0
+                returning = true
+                on_ground = false
+                was_projectile = true
     if global.activeInteractor and global.activeInteractor.is_important:
         returning = true
         if taking_the_player_with_me:
@@ -206,6 +219,19 @@ func tryReturnIfTooFarFromPlayer():
 func tryReturnToOffscreenCamera():
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
+        if level.pacman_wrapping:
+            var buffer = -1
+            DEATH_MARGIN = -1
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().leftmost_x - buffer
+            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().rightmost_x + buffer
+            if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+                global_transform.origin.y = getGameCamera().topmost_y + buffer
+            if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+                global_transform.origin.y = getGameCamera().botmost_y - buffer
+            return
+        DEATH_MARGIN = 5
         if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
         global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
         global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \

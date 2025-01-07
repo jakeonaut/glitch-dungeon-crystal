@@ -163,6 +163,7 @@ func passiveActivate(_delta, is_player):
     if canPause:
       global.pauseGame = true
       global.pauseMoveInput = true
+      level.glitchScreenEffect.visible = false
     being_collected = true
     
     if is_static_in_level:

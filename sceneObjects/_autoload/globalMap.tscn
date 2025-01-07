@@ -1266,6 +1266,7 @@ can_nav_up = false
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 4, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
+can_nav_down = false
 
 [node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )

@@ -93,6 +93,8 @@ onready var innerSpriteContainer = get_node("SpriteContainer/InnerSpriteContaine
 onready var interactPromptSprite = get_node("InteractPrompt")
 var override_camera_y = null
 var should_free_when_falling = false
+var holding_down_timer = 0
+var holding_down_time_limit = 5
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
@@ -163,6 +165,14 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = target_last_grounded_y + camera_y_offset
+    if pressingDown():
+      if holding_down_timer < holding_down_time_limit:
+        holding_down_timer += (delta*11)
+    else:
+      if holding_down_timer > 0:
+        holding_down_timer -= (delta*11)
+    if holding_down_timer >= holding_down_time_limit:
+      cameraTarget.global_transform.origin.y -= 10
   else:
     cameraTarget.global_transform.origin.y = override_camera_y
 
@@ -381,6 +391,22 @@ func collideWithWall(local_lv):
     getABroom()
   if grav == 0:
     grav = PLAYER_GRAV
+  if pressingMoveLeft():
+    var leftTiles = getTilesLeftOf(getLevelTiles(), 0.1)
+    for i in range(leftTiles.size()):
+      var coords = leftTiles[i]
+      if coords == null: continue
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileFragileSolid(tile_type):
+        glitchTickle()
+  if pressingMoveRight():
+    var rightTiles = getTilesRightOf(getLevelTiles(), 0.1)
+    for i in range(rightTiles.size()):
+      var coords = rightTiles[i]
+      if coords == null: continue
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileFragileSolid(tile_type):
+        glitchTickle()
 
 var glitch_death_timer = 0
 func bigBump():
@@ -394,9 +420,9 @@ func bigBump():
   # glitchTilesAroundMe()
   glitchTickle()
   getSmacked()
-  if global.userSettings["canGlitchScreen"]:
-    level.glitchScreenEffect.visible = true
-    glitch_death_timer = 25
+  # if global.userSettings["canGlitchScreen"]:
+  #   level.glitchScreenEffect.visible = true
+  #   glitch_death_timer = 25
   fall_timer = 0
   pauseAnimation = false
   should_big_bump = false
@@ -820,6 +846,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
 
 onready var sporeSound = get_node("Sounds/SporeSound")
 func playStickOnWallSound():
+  sporeSound.pitch_scale = 2.0
   sporeSound.play()
 
 onready var tickleSound = get_node("Sounds/TickleSound")

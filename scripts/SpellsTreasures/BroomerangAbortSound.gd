@@ -30,4 +30,4 @@ func activateScript():
   level.saveTheGame()
 
 func preActivateScript():
-  global.memory["broomerang"] = true
+  global.memory["broomerang"] = 1

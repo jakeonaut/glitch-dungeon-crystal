@@ -166,6 +166,7 @@ func getSmacked(_broom_origin):
             getHitSound3.play()
         level.player.glitchTickle()
         level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
+    return true
 
 func resmack():
     level.player.getSmacked()

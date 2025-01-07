@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -97,7 +97,23 @@ void light() {
 
 }"
 
-[sub_resource type="ShaderMaterial" id=79]
+[sub_resource type="ShaderMaterial" id=284]
+shader = SubResource( 283 )
+shader_param/HowShiny = 2.0
+shader_param/Roughness = 0.2
+shader_param/alpha2 = 0.5
+shader_param/should_use_vertex_color = false
+shader_param/texture_albedo = ExtResource( 25 )
+
+[sub_resource type="ShaderMaterial" id=285]
+shader = SubResource( 283 )
+shader_param/HowShiny = 2.0
+shader_param/Roughness = 0.2
+shader_param/alpha2 = 0.5
+shader_param/should_use_vertex_color = false
+shader_param/texture_albedo = ExtResource( 25 )
+
+[sub_resource type="ShaderMaterial" id=286]
 shader = SubResource( 283 )
 shader_param/HowShiny = 2.0
 shader_param/Roughness = 0.2
@@ -359,19 +375,19 @@ shape = SubResource( 271 )
 [node name="MeshInstance2" parent="Viewport/level/Door2" index="18"]
 visible = true
 
-[node name="MeshInstance4" type="MeshInstance" parent="Viewport/level/Door2"]
+[node name="MeshInstance3" type="MeshInstance" parent="Viewport/level/Door2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 1.33333, 5.56841, -0.0808809 )
-material_override = SubResource( 79 )
+material_override = SubResource( 284 )
+mesh = ExtResource( 24 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Viewport/level/Door2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 5.56841, -0.0808809 )
+material_override = SubResource( 285 )
 mesh = ExtResource( 24 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Viewport/level/Door2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, -1.33333, 5.56841, -0.0808809 )
-material_override = SubResource( 79 )
-mesh = ExtResource( 24 )
-
-[node name="MeshInstance6" type="MeshInstance" parent="Viewport/level/Door2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 2.86102e-06, 7.56841, -0.0808809 )
-material_override = SubResource( 79 )
+material_override = SubResource( 286 )
 mesh = ExtResource( 24 )
 
 [node name="BroomUpgradeElder" parent="Viewport/level" instance=ExtResource( 21 )]
