@@ -18,6 +18,7 @@ var yellow_palette = preload("res://assets/palettes/yellow_palette.png")
 var white_palette = preload("res://assets/palettes/white_palette.png")
 var white_palette2d = preload("res://assets/palettes2D/white_palette.png")
 var base_palette = preload("res://assets/palettes/base_palette.png")
+var base_palette2d = preload("res://assets/palettes2D/base_palette.png")
 var base_palette_pink = preload("res://assets/palettes/base_palette_pink.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
@@ -58,6 +59,7 @@ var NES_palette = preload("res://assets/palettes/NES_base_palette.png")
 var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
 onready var doorSound = get_node("DoorSound")
+onready var glitchedDoorSound = get_node("GlitchedDoorSound")
 var DELETE_ME = 2
 
 # GlitchForm variables
@@ -302,8 +304,8 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 2
-    memory["priestess"] = 2
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false

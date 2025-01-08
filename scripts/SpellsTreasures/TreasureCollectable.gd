@@ -35,7 +35,7 @@ func _ready():
   can_be_smacked = true
   # ._ready() implicit
 
-func tryShowInteractPrompt(_is_active_interact_prompt = false, is_comic_alert = false):
+func tryShowInteractPrompt(_is_active_interact_prompt = false, _is_comic_alert = false):
   if interactPrompt == null:
     return
   interactPrompt.visible = false
@@ -134,7 +134,7 @@ func alignMySprite():
   pass
 
 # @override
-func activate(is_player):
+func activate(_is_player):
   return false # passiveActivate(0, is_player)
   
 # @override
@@ -183,7 +183,7 @@ func collectMe():
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(_broom_origin = null, silently = false):
+func getSmacked(_broom_origin = null, _silently = false):
   return false
 
 # @override

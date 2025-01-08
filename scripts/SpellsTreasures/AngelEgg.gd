@@ -19,7 +19,7 @@ func _ready():
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
-func _process(delta):
+func _process(_delta):
     pauseSelf = not visible
     if pauseSelf:
       return

@@ -422,8 +422,8 @@ func tryToRespawn():
       player.global_transform.origin = player.spawn_origin
 
   if global.set_camera_position_on_respawn:
-    player.target_last_grounded_y = player.global_transform.origin.y
-    player.cameraTarget.global_transform.origin.y = player.target_last_grounded_y
+    player.camera_target_y_pos = player.global_transform.origin.y
+    player.cameraTarget.global_transform.origin.y = player.camera_target_y_pos
     gameCamera.setCameraPositionNow()
     global.set_camera_position_on_respawn = false
 
@@ -475,7 +475,7 @@ func tryToRespawn():
   player.visible = true
   player.unsmack()
   player.aniPlayer.play("land")
-  player.target_last_grounded_y = player.global_transform.origin.y
+  player.camera_target_y_pos = player.global_transform.origin.y
   player.pauseAnimation = false
   self.overrideLevelRespawnEvent()
   if global.memory["zora_flippers"] and global.memory["zora_flippers"] < 3:

@@ -92,7 +92,7 @@ func land():
   
   getPlayer().global_transform.origin.x = mySprite.global_transform.origin.x
   getPlayer().global_transform.origin.y = mySprite.global_transform.origin.y
-  getPlayer().target_last_grounded_y = mySprite.global_transform.origin.y
+  getPlayer().camera_target_y_pos = mySprite.global_transform.origin.y
 
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
   getPlayer().on_ground = false

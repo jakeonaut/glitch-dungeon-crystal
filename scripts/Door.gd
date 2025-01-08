@@ -43,6 +43,7 @@ onready var activeCollisionShape = get_node("InteractionArea/ActiveCollisionShap
 onready var passiveCollisionShape = get_node("InteractionArea/PassiveCollisionShape")
 var is_on_main_menu = false
 
+var is_glitched = false
 export var is_immediate = false
 export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL", "ZONE_CRYSTAL", "DEMO") onready var key_type
 
@@ -149,6 +150,7 @@ func _process(delta):
   if glitched_path != "" and glitched_path != null and (global.memory["glitch_world"] > 0 or path == "" or path == null):
     self.path = self.glitched_path
     mySprite.material_override.set_shader_param("enable_glitch", true)
+    is_glitched = true
 
   if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO:
     meshInstance2.visible = true
@@ -434,7 +436,11 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
   if "LevelDoor" in self.id:
     get_node("TeleportSound").play()
   elif canPlayDoorSound:
-    global.doorSound.play()
+    if is_glitched:
+      global.glitchedDoorSound.play()
+      getPlayer().glitchTickle(false)
+    else:
+      global.doorSound.play()
   elif is_passive and parter_door_id:
     warpSound.play()
 
@@ -543,7 +549,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
   getPlayer().global_transform.origin.x = landing.global_transform.origin.x
   getPlayer().global_transform.origin.y = landing.global_transform.origin.y
   landing.global_transform.origin.z = 0
-  getPlayer().target_last_grounded_y = landing.global_transform.origin.y
+  getPlayer().camera_target_y_pos = landing.global_transform.origin.y
 
   getPlayer().mySprite.get_material_override().set_shader_param("enable_glitch", false)
 

@@ -483,7 +483,7 @@ func tryLerpSpriteFromCenter(sprite, delta, final_pos):
     if stepify(sprite.position.x, 0.1) == stepify(final_pos.x, 0.1):
       sprite.position = final_pos
 
-func displaySavingText(message = "saving (not really)"):
+func displaySavingText(_message = "saving (not really)"):
   savingTextLabel.visible = true
   savingTextLabel.bbcode_text = "" # [wave] "+message+"[/wave]"
   should_display_saving_text = true

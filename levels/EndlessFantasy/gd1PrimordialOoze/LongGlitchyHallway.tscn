@@ -107,11 +107,11 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9, 1.1, 0 )
 
 [node name="GlitchGrandmaManager" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 8.02731, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6.02731, 0 )
 glitch_form = 1
 
 [node name="GlitchGrandmaManager4" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 11.0273, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 9.0273, 0 )
 glitch_form = 1
 
 [node name="GlitchGrandmaManager2" parent="Viewport/level" instance=ExtResource( 7 )]
@@ -125,6 +125,7 @@ glitch_form = 2
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
 is_locked = true
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/005_CrystalPuzzle_GlitchSave.tscn"
 num_keys_unlock = 1
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]

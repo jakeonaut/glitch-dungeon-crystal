@@ -142,7 +142,7 @@ func passiveActivate(_delta, is_player):
   if getPlayer().transformation == getPlayer().TransformationState.FISHY or getPlayer().pressingDown():
     return  
   if getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground:
-    getPlayer().target_last_grounded_y = getPlayer().global_transform.origin.y
+    getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
     getPlayer().was_just_on_ground_timer = -8
     getPlayer().magicJump()
     if getPlayer().linear_velocity.y < 0:

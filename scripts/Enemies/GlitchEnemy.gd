@@ -340,7 +340,10 @@ func processGlitchFormGlitchiness():
 
 func updateFallthroughSolids():
     if fallthroughSolid:
-        if ((smallInteractionArea != null and smallInteractionArea.is_in_group("enemies")) or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying or not visible):
+        if level.player.glitch_form == global.GlitchForm.INVISIBLE:
+            if not fallthroughSolid.is_in_group("fallthrough"):
+                fallthroughSolid.add_to_group("fallthrough")
+        elif ((smallInteractionArea != null and smallInteractionArea.is_in_group("enemies")) or is_particle or behavior_directional_bullet or (glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form != glitch_form) or am_i_dying or not visible):
             if fallthroughSolid.is_in_group("fallthrough"):
                 fallthroughSolid.remove_from_group("fallthrough")
         elif not fallthroughSolid.is_in_group("fallthrough"):

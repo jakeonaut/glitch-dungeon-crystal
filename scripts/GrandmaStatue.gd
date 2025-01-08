@@ -61,7 +61,7 @@ func resetPositionInASecond():
   updateColor()
   level.summonSmokeClouds(global_transform.origin, 2, true, true)
 
-func processRendering(delta):
+func processRendering(_delta):
   triangleContainer.visible = false # is_extra_life
 
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL # and global.userSettings["colorblindMode"]
@@ -132,7 +132,7 @@ func processGlitchFormTeleportation():
 
   if level.player.glitch_form == glitch_form:
     if not has_swapped:
-      var last_on_ground = level.player.was_on_ground or level.player.isKindOfOnGround()
+      # var last_on_ground = level.player.was_on_ground or level.player.isKindOfOnGround()
       has_swapped = true
       if glitch_form != global.GlitchForm.NORMAL:
         var my_old_origin = self.global_transform.origin
@@ -154,7 +154,7 @@ func processGlitchFormTeleportation():
       updateColor()
       on_ground = true
       if not level.player.was_on_ground and not level.player.isKindOfOnGround():
-        self.global_transform.origin.y = level.player.target_last_grounded_y
+        self.global_transform.origin.y = level.player.camera_target_y_pos
       level.player.landed()
   else:
     has_swapped = false

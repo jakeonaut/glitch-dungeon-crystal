@@ -412,7 +412,7 @@ func _process(delta):
   if global.isEnteringRoom:
     return
   if level.pacman_wrapping:
-    target_last_grounded_y = global_transform.origin.y
+    camera_target_y_pos = global_transform.origin.y
 
   if aniPlayer.assigned_animation == "getItem" and not aniPlayer.is_playing():
     getItemFailsafe()
@@ -436,7 +436,7 @@ func _process(delta):
   elif transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     newSpriteOpacity = 0.5
   elif glitch_form == global.GlitchForm.INVISIBLE:
-    newSpriteOpacity = 0.9
+    newSpriteOpacity = 1.0
   else:
     newSpriteOpacity = 1.0
   if newSpriteOpacity != spriteOpacity:
@@ -465,6 +465,8 @@ func _process(delta):
     hv = Vector3(0, 0, 0)
     fall_timer = 0
     global_transform.origin = moveToward2D(global_transform.origin, last_grounded_pos, delta * 22)
+    if camera_target_y_pos < global_transform.origin.y:
+      camera_target_y_pos = global_transform.origin.y
     if compare2D(global_transform.origin, last_grounded_pos):
       global_transform.origin = last_grounded_pos
       returning_to_save_point = 2
@@ -515,7 +517,7 @@ func _process(delta):
       spellCastPauseIndex = 0
     elif global.memory.has("spellbookPage"):
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.LADDER]
+      global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.LADDER, GlitchForm.INVISIBLE]
     else:
       global.memory["spellbookPage"] = [glitch_form] if glitch_form != GlitchForm.NORMAL else []
   if Input.is_action_just_pressed("debug_upgrade_broom"):
@@ -963,7 +965,7 @@ func processGlitchHurtRecovery(delta):
         self.global_transform.origin.y -= 1
       else:
         self.global_transform.origin.y += 1
-      target_last_grounded_y = global_transform.origin.y
+      camera_target_y_pos = global_transform.origin.y
       global.memory["hearts_recovering"] = true
       self.physics_state = PhysicsState.GLITCH_RECOVERY
 
@@ -1456,7 +1458,7 @@ func processMoleLogic(delta):
     else:
       should_magic_jump = true
       self.vv = 5
-      self.target_last_grounded_y = self.global_transform.origin.y
+      self.camera_target_y_pos = self.global_transform.origin.y
       self.global_transform.origin.y += 0.5
       self.on_ground = false
       self.truly_on_ground = false
@@ -1480,7 +1482,7 @@ func processMoleLogic(delta):
     else:
       should_magic_jump = true
       self.vv = -2
-      self.target_last_grounded_y = self.global_transform.origin.y
+      self.camera_target_y_pos = self.global_transform.origin.y
       self.global_transform.origin.y += 0.5
       self.on_ground = false
       self.truly_on_ground = false
@@ -2395,7 +2397,7 @@ func landed():
   if has_broom_flown:
     has_landed_since_last_flight = true
   num_spell_casts_used = 0
-  target_last_grounded_y = global_transform.origin.y
+  camera_target_y_pos = global_transform.origin.y
   broom_cooldown_timer = 0
   is_in_broom_cooldown = false
   if physics_state != PhysicsState.BEING_TOSSED and \
@@ -2477,7 +2479,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y
     #   fallenBroom.taking_the_player_with_me = true
     fallenBroom.true_terminal_vel = 0
-    fallenBroom.walk_speed *= (2 if pressingRun() else 1.5)
+    fallenBroom.walk_speed *= (2.0 if pressingRun() else 1.5)
     fallenBroom.get_node("BroomSound").play()
     var x_direction = 0
     if Input.is_action_pressed("ui_left"):

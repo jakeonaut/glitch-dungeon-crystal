@@ -199,7 +199,7 @@ func passiveActivate(_delta, _is_player):
       level.uiLayer.glitchSpriteContainer.rect_position = Vector2(300, 250)
       level.uiLayer.spellMessageTextLabel.rect_scale = Vector2(1.5, 1.5)
       level.uiLayer.spellMessageTextLabel.rect_position = Vector2(320, 250)
-  var newSpell = getPlayer().applyObeliskGlitch(my_glitch_form)
+  var _newSpell = getPlayer().applyObeliskGlitch(my_glitch_form)
   level.player.glitchTickle()
   # if level.player.glitch_death_timer == 0:
   #   level.player.glitch_death_timer = 5

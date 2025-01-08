@@ -160,7 +160,7 @@ onready var mushroomBounceAniPlayer = get_node("MushroomBounceAniPlayer")
 func fallthroughCollisionActivate(possible_game_mover):
     if mushroomSprite.visible:
         if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
-            level.player.target_last_grounded_y = level.player.global_transform.origin.y
+            level.player.camera_target_y_pos = level.player.global_transform.origin.y
             var jump_val = 14
             possible_game_mover.magicJump()
             level.player.linear_velocity.y = jump_val
@@ -170,7 +170,7 @@ func fallthroughCollisionActivate(possible_game_mover):
             # getPlayer().physics_vars.applyHalfGravTimer = 3
             bounceSound.pitch_scale = rand_range(0.8, 1.5)
             bounceSound.play()
-            level.player.target_last_grounded_y = level.player.global_transform.origin.y
+            level.player.camera_target_y_pos = level.player.global_transform.origin.y
             mushroomBounceAniPlayer.stop()
             mushroomBounceAniPlayer.clear_queue()
             mushroomBounceAniPlayer.play("bounce")

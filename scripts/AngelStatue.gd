@@ -44,7 +44,7 @@ func _process(delta):
 func isActive(_debug=false):
     return false # self.visible
 
-func passiveActivate(delta, is_player):
+func passiveActivate(_delta, _is_player):
     pass
     # if not is_angel_activated:
     #     global.setLevelZoneThing("angel_statue", [

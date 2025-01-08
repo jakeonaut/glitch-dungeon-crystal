@@ -99,7 +99,7 @@ func _process(delta):
             else:
                 level.player.global_transform.origin = global_transform.origin
                 level.player.global_transform.origin.y -= 1
-                level.player.target_last_grounded_y = level.player.global_transform.origin.y
+                level.player.camera_target_y_pos = level.player.global_transform.origin.y
                 level.player.gravitySound.play()
                 level.player.linear_velocity = self.linear_velocity
                 level.player.lv = self.lv
@@ -146,7 +146,7 @@ func _process(delta):
         elif taking_the_player_with_me:
             level.player.on_ground = false
             level.player.global_transform.origin = self.global_transform.origin
-            level.player.target_last_grounded_y = self.global_transform.origin.y
+            level.player.camera_target_y_pos = self.global_transform.origin.y
             return_timer += (delta*11)
             if return_timer >= return_time_limit:
                 return_timer = 0

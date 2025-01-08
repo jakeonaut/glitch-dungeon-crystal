@@ -19,7 +19,7 @@ var broom_state = 0
 var jump_press_timer = 999
 var jump_press_time_limit = 5
 var jump_press_broom_time_limit = 30
-var target_last_grounded_y = 0
+var camera_target_y_pos = 0
 var pauseInput = false
 
 var has_played_fall_sound = false
@@ -72,10 +72,10 @@ func _ready():
   
   should_do_middle_sensor = true
   should_do_simple_sensor_probe = false
-  target_last_grounded_y = global_transform.origin.y
+  camera_target_y_pos = global_transform.origin.y
 
 func ladderUpdateTargetLastGroundedY():
-  target_last_grounded_y = global_transform.origin.y
+  camera_target_y_pos = global_transform.origin.y
 
 onready var shroomAniPlayer = get_node("ShroomAnimationPlayer")
 func processPauseAnimation():
@@ -118,9 +118,9 @@ func _process(delta):
     smokeCloudThrottleTimer += (delta*11)
 
   if is_touching_water or is_touching_ladder or \
-     (grav > 0 and global_transform.origin.y < target_last_grounded_y) or \
-     (grav < 0 and global_transform.origin.y > target_last_grounded_y):
-    target_last_grounded_y = global_transform.origin.y
+     (grav > 0 and global_transform.origin.y < camera_target_y_pos) or \
+     (grav < 0 and global_transform.origin.y > camera_target_y_pos):
+    camera_target_y_pos = global_transform.origin.y
   
   if jump_press_timer <= jump_press_broom_time_limit:
     jump_press_timer += 1
@@ -130,7 +130,7 @@ func _process(delta):
     jump_press_timer = 0
     if has_sweeped_glitch and global.memory["broom_double_jump"]: # and aniPlayer.assigned_animation == "broomSweep":
       has_sweeped_glitch = false
-      target_last_grounded_y = global_transform.origin.y
+      camera_target_y_pos = global_transform.origin.y
       if summonedBroom != null:
         broomStop()
       doubleJump()
@@ -164,7 +164,7 @@ func _process(delta):
   if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
-    cameraTarget.global_transform.origin.y = target_last_grounded_y + camera_y_offset
+    cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
     if pressingDown():
       if holding_down_timer < holding_down_time_limit:
         holding_down_timer += (delta*11)
@@ -303,16 +303,15 @@ func changeSpriteColorPalette(palette):
   chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
-func bodyPushMe(_delta, _origin):
-  pass # no more
-  # if not on_ground or is_pressing_horizontal_input:
-  #   return
+func enemyPushMe(delta, origin):
+  if glitch_form != global.GlitchForm.INVISIBLE:
+    return
 
-  # var multiplier = 5
-  # if self.global_transform.origin.x > origin.x:
-  #   self.global_transform.origin.x += (delta * multiplier)
-  # else:
-  #   self.global_transform.origin.x -= (delta * multiplier)
+  var multiplier = 5
+  if self.global_transform.origin.x > origin.x:
+    self.global_transform.origin.x += (delta * multiplier)
+  else:
+    self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
   if transformation == TransformationState.CHICKEN:
@@ -668,7 +667,7 @@ func doubleJump():
   aniPlayer.queue("jumpStart")
   aniPlayer.queue("jump")
 
-  target_last_grounded_y = global_transform.origin.y
+  camera_target_y_pos = global_transform.origin.y
 
 var smacked_npc = null
 var is_in_broom_cooldown = false
@@ -961,12 +960,12 @@ func handleSpikeCollisions(delta):
 func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   var is_tile_solid = .isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords)
   var is_tile_spikes = getLevelTiles().isTileSpikes(tile_type)
-  if nesting_doll_state == global.NestingDoll.MOM:
+  if glitch_form == global.GlitchForm.INVISIBLE:
     return is_tile_solid or is_tile_spikes
   return is_tile_solid
 
 # @override
 func isTouchingSpikes(collisionShape):
-  if nesting_doll_state == global.NestingDoll.MOM:
+  if glitch_form == global.GlitchForm.INVISIBLE:
     return false
   return .isTouchingSpikes(collisionShape)

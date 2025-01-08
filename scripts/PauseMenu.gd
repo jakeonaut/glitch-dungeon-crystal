@@ -645,7 +645,7 @@ func processInventoryLogic(delta):
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-        popupText.text = "angel eggs:\n  spawn of the goddess\n  you have " + str(numEggs)
+        popupText.text = "angel eggs:\n  spawn of goddess\n  got " + str(numEggs)
       elif inventoryOptionIndexX == 1:
         if global.memory["angler_seaman_boss"] == 3:
           popupText.text = "goddess dream of deceit"
@@ -948,6 +948,7 @@ func forceRedrawMap():
 var MAP_WIDTH = 12
 var MAP_HEIGHT = 12
 var has_drawn_map = false
+var glitchSheetTex = preload("res://assets/sprites2D/glitchSheet.png")
 func tryDrawMap():
   if has_drawn_map:
     return
@@ -971,15 +972,27 @@ func tryDrawMap():
       if sprite == null:
         print("DEBUG: " + spriteName + " doesn't exist")
         continue
-      if not mapGrid.has(i) or not mapGrid[i].has(j) or mapGrid[i][j].hide_me_from_map:
+      if not mapGrid.has(i) or not mapGrid[i].has(j):
         sprite.frame = 0
         continue
-      setProperMapFrame(sprite, mapGrid, i, j)
       var mapRoom = mapGrid[i][j]
       if mapRoom.path == level.getLevelName():
         mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
-      elif "Haven" in mapRoom.path or mapRoom.has_angel_statue:
+      if mapGrid[i][j].hide_me_from_map:
+        sprite.frame = 0
+        var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapRoom.path)
+        if haveIBeenToThisLevel:
+          sprite.texture = glitchSheetTex
+          sprite.hframes = 12
+          sprite.vframes = 8
+          sprite.frame = randi() % 96
+          sprite.material.set_shader_param("palette_out", global.base_palette2d)
+          sprite.material.set_shader_param("num_colors", 16)
+          sprite.material.set_shader_param("offset", 11)
+        continue
+      setProperMapFrame(sprite, mapGrid, i, j)
+      if "Haven" in mapRoom.path or mapRoom.has_angel_statue:
         print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
         if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
           sprite.frame = 61

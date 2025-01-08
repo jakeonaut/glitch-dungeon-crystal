@@ -131,11 +131,11 @@ func fallthroughCollisionActivate(friend):
   if has_popped_out:
     return
 
-  var buffer = 0.5
-  var x = self.global_transform.origin.x
-  var friendX = friend.global_transform.origin.x
-  if friendX > x + buffer or friendX < x - buffer:
-    return
+  # var buffer = 0.2
+  # var x = self.global_transform.origin.x
+  # var friendX = friend.global_transform.origin.x
+  # if friendX > x + buffer or friendX < x - buffer:
+  #   return
   who_did_i_get = weakref(friend)
   friend.physics_state = friend.PhysicsState.IGNORE_PHYSICS
   friend.spriteContainer.global_transform.origin.z = -1.0

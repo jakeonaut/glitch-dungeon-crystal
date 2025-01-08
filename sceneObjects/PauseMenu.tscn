@@ -916,6 +916,7 @@ vframes = 5
 frame = 13
 
 [node name="CursorSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
+visible = false
 material = SubResource( 66 )
 position = Vector2( -46.5, -47 )
 scale = Vector2( 0.75, 0.75 )
@@ -928,6 +929,7 @@ frame = 40
 script = ExtResource( 13 )
 
 [node name="CursorSprite2" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
+visible = false
 material = SubResource( 66 )
 position = Vector2( -60.5, -47 )
 scale = Vector2( 0.75, 0.75 )

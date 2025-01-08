@@ -102,6 +102,9 @@ func _process(_delta):
         if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
             nearest_area.get_node("..").tryShowInteractPrompt(true)
 
+    if has_activated_something:
+        player.noBroomSound.stop()
+
     postProcessFallthroughCollisionArea(fallthrough_collision_area)
     if prev_nearest_area != null and prev_nearest_area.get_ref() and (nearest_area != prev_nearest_area.get_ref() or not can_activate) and prev_nearest_area.get_ref().get_node("..").has_method("tryHideActiveInteractPrompt"):
         prev_nearest_area.get_ref().get_node("..").tryHideActiveInteractPrompt()

@@ -37,8 +37,8 @@ func PassiveInteractActivate(delta, is_player = true):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
         parent.passiveActivate(delta, is_player)
     touchingPlayer = is_player
-    if is_in_group("corporeal_body") and not is_in_group("no_pushems") and is_player:
-        getPlayer().bodyPushMe(delta, self.global_transform.origin)
+    if is_in_group("enemies") and not is_in_group("no_pushems") and is_player:
+        getPlayer().enemyPushMe(delta, self.global_transform.origin)
 
 # for use with GameMoverSmallInteractionArea
 func OtherPassiveInteractActivate(delta, gameMover):
