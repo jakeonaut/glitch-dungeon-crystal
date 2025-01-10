@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -14,20 +14,26 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/frames 1-bit.png" type="Texture" id=20]
 [ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Enemies/Sphinx.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=24]
 
-[sub_resource type="BoxShape" id=41]
+[sub_resource type="BoxShape" id=58]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=59]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=60]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
@@ -37,9 +43,17 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=27]
+[sub_resource type="BoxShape" id=61]
 resource_local_to_scene = true
-extents = Vector3( 0.2, 0.2, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=62]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=63]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=28]
 resource_local_to_scene = true
@@ -96,8 +110,29 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=54]
+[sub_resource type="BoxShape" id=64]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=65]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=66]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=67]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=68]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=69]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=35]
 resource_local_to_scene = true
@@ -154,9 +189,17 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=55]
+[sub_resource type="BoxShape" id=70]
 resource_local_to_scene = true
-extents = Vector3( 1, 4, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=71]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=72]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=46]
 resource_local_to_scene = true
@@ -427,22 +470,18 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, -3, 0 )
 
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
-visible = false
-
-[node name="Sprite3D" parent="Viewport/level/ParallaxBackground" index="0"]
-material_override = null
-texture = ExtResource( 20 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96228, -4, 0 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 58 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 41 )
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 59 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 60 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 42 )
@@ -456,8 +495,14 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1GrimoireGrove/001GrimoireTraining.tscn"
 num_keys_unlock = 2
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-shape = SubResource( 27 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 61 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 62 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 63 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
@@ -468,16 +513,19 @@ shape = SubResource( 29 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 18.9, 0 )
 
-[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/doorClose = SubResource( 30 )
 anims/doorOpen = SubResource( 31 )
 anims/locked = SubResource( 32 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 27 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 64 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 65 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea2" index="0"]
+shape = SubResource( 66 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
@@ -490,12 +538,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9, 1.6, 0 )
 path = "res://levels/EndlessFantasy/gd1GrimoireGrove/000_LeftRoom.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door4" index="3"]
+[node name="landing" parent="Viewport/level/Door4" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.3, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
-transform = Transform( 1.5, 0, 0, 0, 4, 0, 0, 0, 1, 0.375854, -0.5, 0 )
-shape = SubResource( 54 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="0"]
+shape = SubResource( 67 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="1"]
+shape = SubResource( 68 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea2" index="0"]
+shape = SubResource( 69 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 35 )
@@ -508,17 +561,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1, 1.7, 0 )
 path = "res://levels/EndlessFantasy/gd1GrimoireGrove/000_RightRoom.tscn"
 is_passive = true
 
-[node name="landing" parent="Viewport/level/Door5" index="3"]
+[node name="landing" parent="Viewport/level/Door5" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, 1.5, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/doorClose = SubResource( 37 )
 anims/doorOpen = SubResource( 38 )
 anims/locked = SubResource( 39 )
 
-[node name="CollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00228, 0, 0 )
-shape = SubResource( 55 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="0"]
+shape = SubResource( 70 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
+shape = SubResource( 71 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea2" index="0"]
+shape = SubResource( 72 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 35 )
@@ -631,7 +689,6 @@ visible = true
 
 [node name="UILayer" parent="." instance=ExtResource( 19 )]
 
-[editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]

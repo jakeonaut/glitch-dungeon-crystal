@@ -13,6 +13,7 @@ onready var spitSound2 = get_node("SpitSound2")
 onready var warpSound = get_node("WarpSound")
 onready var smackSound = get_node("SmackSound")
 var smokeFumeRes = preload("res://sceneObjects/SmokeFume.tscn")
+var brothPotNPCRes = preload("res://sceneObjects/BrothPotNPC.tscn")
 var smoke_fume_timer = 0
 var smoke_fume_time_limit = 15
 export var is_active = false
@@ -26,6 +27,12 @@ func _ready():
   mySprite2.material_override = mySprite2.material_override.duplicate()
 
 func _process(delta):
+  if global.memory["glitch_world"] > 0:
+    var newBrothPotNPC = brothPotNPCRes.instance()
+    level.add_child(newBrothPotNPC)
+    newBrothPotNPC.global_transform.origin = self.global_transform.origin
+    queue_free()
+
   is_active = global.haveIBeenToThisLevelPath(path)
 
   if is_active and not aniPlayer.assigned_animation == "active":

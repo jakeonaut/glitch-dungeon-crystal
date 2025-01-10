@@ -38,6 +38,7 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="GlitchDungeonCrystal"
 run/low_processor_mode=true
 boot_splash/image="res://splash.png"
+boot_splash/bg_color=Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://favicon.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"
@@ -56,10 +57,10 @@ settings/fps/force_fps=60
 
 [display]
 
-window/size/width=1280
-window/size/height=1024
-window/size/test_width=640
-window/size/test_height=512
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=960
+window/size/test_height=540
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

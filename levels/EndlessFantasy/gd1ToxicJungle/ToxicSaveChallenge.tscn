@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -20,8 +20,17 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Enemies/Vileplume.tscn" type="PackedScene" id=20]
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=18]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=19]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=20]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -133,11 +142,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9, 8, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 18 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 15 )
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 19 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 20 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )

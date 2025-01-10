@@ -2248,7 +2248,7 @@ hframes = 2
 vframes = 2
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.9191, -6.99112, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 48.9191, -6.99112, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
@@ -2705,7 +2705,7 @@ flip_v = true
 mesh = SubResource( 54 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]

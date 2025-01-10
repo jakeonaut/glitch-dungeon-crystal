@@ -95,6 +95,8 @@ var override_camera_y = null
 var should_free_when_falling = false
 var holding_down_timer = 0
 var holding_down_time_limit = 5
+var holding_up_timer = 0
+var holding_up_time_limit = 5
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
@@ -165,13 +167,22 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
-    if pressingDown():
-      if holding_down_timer < holding_down_time_limit:
-        holding_down_timer += (delta*11)
+    if pressingMoveUp():
+      if holding_up_timer < holding_up_time_limit:
+        holding_up_timer += (delta*11)
     else:
-      if holding_down_timer > 0:
-        holding_down_timer -= (delta*11)
-    if holding_down_timer >= holding_down_time_limit:
+      if holding_up_timer > 0:
+        holding_up_timer -= (delta*11)
+      if pressingDown():
+        if holding_down_timer < holding_down_time_limit:
+          holding_down_timer += (delta*11)
+      else:
+        if holding_down_timer > 0:
+          holding_down_timer -= (delta*11)
+
+    if holding_up_timer >= holding_up_time_limit:
+      cameraTarget.global_transform.origin.y += 10
+    elif holding_down_timer >= holding_down_time_limit:
       cameraTarget.global_transform.origin.y -= 10
   else:
     cameraTarget.global_transform.origin.y = override_camera_y

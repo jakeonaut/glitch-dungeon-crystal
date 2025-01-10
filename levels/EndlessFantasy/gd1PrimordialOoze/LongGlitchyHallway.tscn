@@ -104,7 +104,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 1.1, 0 )
 
 [node name="GlitchGrandmaManager" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6.02731, 0 )
@@ -124,18 +124,20 @@ glitch_form = 2
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-is_locked = true
-path = "res://levels/EndlessFantasy/gd1PrimordialOoze/005_CrystalPuzzle_GlitchSave.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 num_keys_unlock = 1
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
+is_locked = true
+glitched_path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 num_keys_unlock = 1
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, 12, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -8, 14, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 6 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 48, -2, 0 )
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 11, 0 )

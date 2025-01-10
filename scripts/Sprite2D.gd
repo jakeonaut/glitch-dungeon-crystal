@@ -4,6 +4,7 @@ var animation_counter = 0
 export var frame_delay = 0.4
 # If true, this will override frame_delay after first frame change.
 export var should_randomize_frame_delay = false
+export var randomize_frame_on_init = false
 var start_frame = 0
 var base_frame = start_frame
 export var max_frames = 2
@@ -16,6 +17,9 @@ var is_rotating = false
 
 func _ready():
     set_process(true)
+
+    if randomize_frame_on_init:
+        self.frame = randi() % ((self.hframes * self.vframes) - max_frames)
     start_frame = get_frame()
     
 func changeSpriteColorPalette(palette):

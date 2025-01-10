@@ -949,6 +949,7 @@ var MAP_WIDTH = 12
 var MAP_HEIGHT = 12
 var has_drawn_map = false
 var glitchSheetTex = preload("res://assets/sprites2D/glitchSheet.png")
+var spriteScript = preload("res://scripts/Sprite2D.gd")
 func tryDrawMap():
   if has_drawn_map:
     return
@@ -982,14 +983,20 @@ func tryDrawMap():
       if mapGrid[i][j].hide_me_from_map:
         sprite.frame = 0
         var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapRoom.path)
-        if haveIBeenToThisLevel:
+        if haveIBeenToThisLevel or global.memory["glitch_world"]:
           sprite.texture = glitchSheetTex
           sprite.hframes = 12
           sprite.vframes = 8
-          sprite.frame = randi() % 96
-          sprite.material.set_shader_param("palette_out", global.base_palette2d)
-          sprite.material.set_shader_param("num_colors", 16)
-          sprite.material.set_shader_param("offset", 11)
+          sprite.frame = randi() % 92
+          sprite.set_script(spriteScript)
+          sprite.should_randomize_frame_delay = true
+          sprite.max_frames = 4
+          sprite._ready()
+          sprite.set_process(true)
+          if haveIBeenToThisLevel:
+            sprite.material.set_shader_param("palette_out", global.base_palette2d)
+            sprite.material.set_shader_param("num_colors", 16)
+            sprite.material.set_shader_param("offset", 11)
         continue
       setProperMapFrame(sprite, mapGrid, i, j)
       if "Haven" in mapRoom.path or mapRoom.has_angel_statue:
@@ -1010,20 +1017,23 @@ func tryDrawMap():
               sprite.material.set_shader_param("offset", 6)
       elif "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
         if "AnglerFish" in mapRoom.path:
-          sprite.frame = 217
-          sprite.material.set_shader_param("offset", 0)
-          # map_anglerFishBossSprite.visible = true
-          # map_anglerFishBossSprite.position = sprite.position
+          if global.memory["angler_seaman_boss"] >= 2:
+            sprite.frame = 182
+          else:
+            sprite.frame = 217
+            sprite.material.set_shader_param("offset", 0)
         if "Claydol" in mapRoom.path:
-          sprite.frame = 217
-          sprite.material.set_shader_param("offset", 0)
-          # map_doguBossSprite.visible = true
-          # map_doguBossSprite.position = sprite.position
+          if global.memory["dogu_matryoshka_boss"] >= 2:
+            sprite.frame = 182
+          else:
+            sprite.frame = 217
+            sprite.material.set_shader_param("offset", 0)
         if "BabaYaga" in mapRoom.path:
-          sprite.frame = 217
-          sprite.material.set_shader_param("offset", 0)
-          # map_babaYagaBossSprite.visible = true
-          # map_babaYagaBossSprite.position = sprite.position
+          if global.memory["baba_yaga_boss"] >= 2:
+            sprite.frame = 182
+          else:
+            sprite.frame = 217
+            sprite.material.set_shader_param("offset", 0)
       elif mapRoom.has_mole_memory and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
         sprite.frame = 90 if not soulSprite2.visible else 91
         # map_cricketSoulSprite.visible = true
@@ -1068,7 +1078,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
-  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath)
+  var haveIBeenToThisLevel = true # global.haveIBeenToThisLevelPath(mapPath) # TODO(jaketrower): debug remove
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.z_index = 1
@@ -1094,7 +1104,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
         if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 1)
     "gd1CrystalTower":
         sprite.frame = 219
-        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 14)
+        if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 15)
     "gd1BubblegloopSwamp":
         sprite.frame = 207
         if haveIBeenToThisLevel: sprite.material.set_shader_param("offset", 15)

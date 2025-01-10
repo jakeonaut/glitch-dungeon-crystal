@@ -796,6 +796,22 @@ frame = 18
 path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
 can_nav_left = false
 
+[node name="PastoralScene3" parent="PastoralScene" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
+pixel_size = 0.07
+frame = 18
+path = "res://levels/EndlessFantasy/gd1/PastoralScene03.tscn"
+can_nav_left = false
+hide_me_from_map = true
+
+[node name="PoisonForest" parent="PastoralScene" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )
+pixel_size = 0.07
+frame = 18
+path = "res://levels/EndlessFantasy/gd1/PoisonForest.tscn"
+can_nav_left = false
+hide_me_from_map = true
+
 [node name="TutorialDungeon" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
 
@@ -807,7 +823,7 @@ can_nav_right = false
 can_nav_down = false
 
 [node name="GreenGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
 material_override = SubResource( 1 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
@@ -815,14 +831,13 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="GreenGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
 material_override = SubResource( 1 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001GreenGlitchFinale.tscn"
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-hide_me_from_map = true
 
 [node name="RedGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
@@ -840,7 +855,6 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchMiddle.tscn"
 can_nav_up = false
 can_nav_down = false
-hide_me_from_map = true
 
 [node name="RedGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
@@ -850,7 +864,6 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-hide_me_from_map = true
 
 [node name="StoryHook" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0 )
@@ -1283,35 +1296,37 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="CrystalTower" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
 
 [node name="000Start" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 can_nav_left = false
 can_nav_right = false
 
 [node name="LockedRoom1" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
 can_nav_right = false
 can_nav_up = false
 
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 5, 9, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
 can_nav_down = false
 
 [node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -1 )
 material_override = SubResource( 26 )
 offset = Vector2( 0, 30 )
 pixel_size = 0.03
@@ -1323,7 +1338,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="MiniRestZone" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10, 0 )
 frame = 8
 path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
 can_nav_right = false
@@ -1332,7 +1347,7 @@ can_nav_down = false
 has_angel_statue = true
 
 [node name="PastoralTowerHub" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, 0 )
 frame = 8
 path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 can_nav_left = false
@@ -1354,7 +1369,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="LongGlitchyHallway" parent="PrimordialOoze" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7, 0 )
 material_override = SubResource( 34 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -1367,8 +1382,22 @@ can_nav_down = false
 hide_me_from_map = true
 has_angel_statue = true
 
+[node name="LongGlitchyHallway2" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 11, 0 )
+material_override = SubResource( 34 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 113
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+has_angel_statue = true
+
 [node name="CrystalSave" parent="PrimordialOoze" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 7, 0 )
 material_override = SubResource( 34 )
 texture = ExtResource( 10 )
 vframes = 16

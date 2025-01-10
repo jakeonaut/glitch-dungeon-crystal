@@ -6,6 +6,7 @@ onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
 # onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
+onready var screenEffectsContainer = get_node("../../ScreenEffects")
 onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
 onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
 onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
@@ -39,6 +40,8 @@ export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
 var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareDragonfly.tscn")
+
+var gameFrameBackgroundRes = preload("res://sceneObjects/GameFrameBackground.tscn")
 
 func _ready():
   has_room_initialized = false
@@ -86,8 +89,13 @@ func _ready_impl():
   global.activeInteractor = null # somewhat of a failsafe
   set_process(true)
 
+  uiLayer.offset = Vector2(320, 28)
+  screenEffectsContainer.offset = Vector2(320, 28)
+  if not get_tree().get_root().has_node("Game/GameFrameBackground"):
+    viewportTexture.rect_position = Vector2(320, 28)
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
+  tryToAddGameFrameBackground()
 
   viewportTexture.texture = viewport2or3.get_texture()
   
@@ -159,6 +167,12 @@ func _ready_impl():
     flipGravity(-1)
   has_room_initialized = true
   global.setHaveIBeenToLevel(self)
+
+func tryToAddGameFrameBackground():
+  var gameTree = get_tree().get_root().get_node("Game")
+  if not gameTree.has_node("GameFrameBackground"):
+    var newGameBackground = gameFrameBackgroundRes.instance()
+    gameTree.add_child_below_node(viewport2or3, newGameBackground)
 
 func tryInitializeFromDebug():
   if global.memory["initialized_from_debug"]:
@@ -415,6 +429,7 @@ func tryToRespawn():
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
       for door in doors:
+        door.tryProcessGlitchedPath()
         if door.path == door_path:
           found_door = door
           break

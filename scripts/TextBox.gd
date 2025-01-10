@@ -100,6 +100,7 @@ func _ready():
   nextPrompt.visible = false
   endPrompt.visible = false
   if textSprite: textSprite.visible = false
+  textNodeCanvasLayer.offset = Vector2(320, 28)
 
 var bg_texture = null
 func tinify():
@@ -376,6 +377,7 @@ func showTextbox(wasSmacked = false):
   if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
     textContainer.remove_child(self)
     level.uiLayer.textBoxes.add_child(self)
+    textContainer.offset = Vector2(320, 28)
     am_i_in_ui_layer = true
 
   num_newlines = 0

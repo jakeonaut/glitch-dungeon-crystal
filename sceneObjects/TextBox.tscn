@@ -136,6 +136,8 @@ __meta__ = {
 [node name="TextCanvasLayer" type="CanvasLayer" parent="TextBox"]
 layer = 2
 visible = false
+offset = Vector2( 320, 28 )
+transform = Transform2D( 1, 0, 0, 1, 320, 28 )
 
 [node name="Container" type="TextureRect" parent="TextBox/TextCanvasLayer"]
 margin_left = 50.0

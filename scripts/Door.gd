@@ -147,10 +147,7 @@ func spawnChicken():
     
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
-  if glitched_path != "" and glitched_path != null and (global.memory["glitch_world"] > 0 or path == "" or path == null):
-    self.path = self.glitched_path
-    mySprite.material_override.set_shader_param("enable_glitch", true)
-    is_glitched = true
+  tryProcessGlitchedPath()
 
   if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO:
     meshInstance2.visible = true
@@ -203,6 +200,12 @@ func _process(delta):
         unlocking_key_array.remove(0)
         key.queue_free()
         # spawnChicken()
+
+func tryProcessGlitchedPath():
+  if glitched_path != "" and glitched_path != null and (global.memory["glitch_world"] > 0 or path == "" or path == null):
+    self.path = self.glitched_path
+    mySprite.material_override.set_shader_param("enable_glitch", true)
+    is_glitched = true
 
 
 func spawnParticles(delta):

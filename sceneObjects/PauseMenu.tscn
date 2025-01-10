@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
@@ -27,8 +27,40 @@
 [ext_resource path="res://assets/sprites2D/player_sheet_old.png" type="Texture" id=25]
 [ext_resource path="res://levels/common/UITheme_small.tres" type="Theme" id=26]
 
+[sub_resource type="Shader" id=71]
+code = "shader_type canvas_item;
+
+uniform bool screen_mode = true;
+uniform int num_colors;
+uniform int offset;
+uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
+
+uniform sampler2D palette_in;
+uniform sampler2D palette_out;
+
+vec4 swap_color(vec4 color) {
+	float inc = 1.0 / float(num_colors); 
+	for (float i = 0.0; i < 1.0; i += inc) {
+		vec2 uv = vec2(i, 0.0);
+		vec2 uv2 = vec2(i + float(offset*num_colors)/256.0, 0.0);
+		vec4 color_in = texture(palette_in, uv);
+		if (distance(color, color_in) <= precision) {
+			return texture(palette_out, uv2);
+		}
+	}
+	return color;
+}
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	if (screen_mode) {
+		color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	}
+	COLOR = swap_color(color);
+}"
+
 [sub_resource type="ShaderMaterial" id=64]
-shader = ExtResource( 23 )
+shader = SubResource( 71 )
 shader_param/screen_mode = false
 shader_param/num_colors = 0
 shader_param/offset = null
@@ -762,7 +794,6 @@ margin_bottom = 269.0
 color = Color( 0, 0, 0, 0.501961 )
 
 [node name="MapRect" type="ColorRect" parent="."]
-visible = false
 margin_left = 450.0
 margin_top = 131.0
 margin_right = 713.0
@@ -795,8 +826,6 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 
 [node name="PlayerSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
-visible = false
-material = SubResource( 64 )
 position = Vector2( -46.5, -47.5 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 99
@@ -1195,7 +1224,7 @@ position = Vector2( -4, -30 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 182
 
 [node name="MapSprite31" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )

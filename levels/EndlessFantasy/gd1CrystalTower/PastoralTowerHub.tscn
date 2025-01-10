@@ -687,7 +687,7 @@ shape = SubResource( 90 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/LongGlitchyHallway.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
 
 [node name="BabushkaCat2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.69351, 8.99416, 0 )
