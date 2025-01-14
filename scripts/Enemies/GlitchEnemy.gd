@@ -239,7 +239,7 @@ func _process(delta):
         should_collide_floor = false
         should_collide_ceil = false
         should_collide_horizontally = false
-        should_do_fallthrough_area_collision = false
+        was_fallthrough_area_collision_triggered = false
         is_a_physics_particle = true
     else:
         shouldIDoCollisions()

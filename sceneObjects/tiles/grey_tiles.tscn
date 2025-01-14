@@ -1,4 +1,4 @@
-[gd_scene load_steps=14661 format=2]
+[gd_scene load_steps=14662 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=2]
@@ -158905,6 +158905,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=17206]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 23 )
 
@@ -165557,6 +165558,7 @@ material = SubResource( 19738 )
 
 [sub_resource type="ShaderMaterial" id=13328]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 5 )
 
@@ -169524,6 +169526,7 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=13337]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 5 )
 
@@ -173557,6 +173560,7 @@ material = SubResource( 13241 )
 
 [sub_resource type="ShaderMaterial" id=17720]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 22 )
 
@@ -173643,8 +173647,15 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 3858 ), SubResource( 3859 ), SubResource( 3860 ), SubResource( 3861 ), SubResource( 3862 ), SubResource( 3863 ), SubResource( 3864 ), SubResource( 3865 ), SubResource( 3866 ), SubResource( 3867 ), SubResource( 3868 ), SubResource( 3869 ), SubResource( 3870 ), SubResource( 3871 ), SubResource( 3872 ), SubResource( 3873 ), SubResource( 3874 ), SubResource( 3875 ), SubResource( 3876 ), SubResource( 3877 ), SubResource( 3878 ), SubResource( 3879 ), SubResource( 3880 ), SubResource( 3881 ), SubResource( 3882 ), SubResource( 3883 ), SubResource( 3884 ), SubResource( 3885 ), SubResource( 3886 ), SubResource( 3887 ), SubResource( 3888 ), SubResource( 3889 ), SubResource( 3890 ), SubResource( 3891 ), SubResource( 3892 ), SubResource( 3893 ), SubResource( 3894 ), SubResource( 3895 ), SubResource( 3896 ), SubResource( 3897 ), SubResource( 3898 ), SubResource( 3899 ), SubResource( 3900 ), SubResource( 3901 ), SubResource( 3902 ), SubResource( 3903 ), SubResource( 3904 ), SubResource( 3905 ), SubResource( 3906 ), SubResource( 3907 ), SubResource( 3908 ), SubResource( 3909 ), SubResource( 3910 ), SubResource( 3911 ), SubResource( 3912 ), SubResource( 3857 ), SubResource( 3913 ), SubResource( 3914 ), SubResource( 3915 ), SubResource( 3916 ), SubResource( 3917 ), SubResource( 3918 ), SubResource( 3919 ), SubResource( 3920 ), SubResource( 3921 ), SubResource( 3922 ), SubResource( 3923 ), SubResource( 3924 ), SubResource( 3925 ), SubResource( 3926 ), SubResource( 3927 ), SubResource( 3928 ), SubResource( 3929 ), SubResource( 3930 ), SubResource( 3931 ), SubResource( 3932 ), SubResource( 3933 ), SubResource( 3934 ), SubResource( 3935 ), SubResource( 3936 ), SubResource( 3937 ), SubResource( 3938 ), SubResource( 3939 ), SubResource( 3940 ), SubResource( 3941 ), SubResource( 3942 ), SubResource( 3943 ), SubResource( 3944 ), SubResource( 3945 ), SubResource( 3946 ), SubResource( 3947 ), SubResource( 3948 ), SubResource( 3949 ), SubResource( 3950 ), SubResource( 3951 ), SubResource( 3952 ), SubResource( 3953 ), SubResource( 3954 ), SubResource( 3955 ), SubResource( 3956 ), SubResource( 3957 ), SubResource( 3958 ), SubResource( 3959 ), SubResource( 3960 ), SubResource( 3961 ), SubResource( 3962 ), SubResource( 3963 ), SubResource( 3964 ), SubResource( 3965 ), SubResource( 3966 ), SubResource( 3967 ), SubResource( 3968 ), SubResource( 3969 ), SubResource( 3970 ), SubResource( 3971 ), SubResource( 3972 ), SubResource( 3973 ), SubResource( 3974 ), SubResource( 3975 ), SubResource( 3976 ), SubResource( 3977 ), SubResource( 3978 ), SubResource( 3979 ), SubResource( 3980 ), SubResource( 3981 ), SubResource( 3982 ), SubResource( 3983 ), SubResource( 3984 ), SubResource( 3985 ), SubResource( 3986 ), SubResource( 3987 ), SubResource( 3988 ), SubResource( 3989 ), SubResource( 3990 ), SubResource( 3991 ), SubResource( 3992 ), SubResource( 3993 ), SubResource( 3994 ), SubResource( 3995 ), SubResource( 3996 ), SubResource( 3997 ), SubResource( 3998 ), SubResource( 3999 ), SubResource( 4000 ), SubResource( 4001 ), SubResource( 4002 ), SubResource( 4003 ), SubResource( 4004 ), SubResource( 4005 ), SubResource( 4006 ), SubResource( 4007 ), SubResource( 4008 ), SubResource( 4009 ), SubResource( 4010 ), SubResource( 4011 ), SubResource( 4012 ), SubResource( 4013 ), SubResource( 4014 ), SubResource( 4015 ), SubResource( 4016 ), SubResource( 4017 ), SubResource( 4018 ), SubResource( 4019 ), SubResource( 4020 ), SubResource( 4021 ), SubResource( 4022 ), SubResource( 4023 ), SubResource( 4024 ), SubResource( 4025 ), SubResource( 4026 ), SubResource( 4027 ), SubResource( 4028 ), SubResource( 4029 ), SubResource( 4030 ), SubResource( 4031 ), SubResource( 4032 ), SubResource( 4033 ), SubResource( 4034 ), SubResource( 4035 ), SubResource( 4036 ), SubResource( 4037 ), SubResource( 4038 ), SubResource( 4039 ), SubResource( 4040 ), SubResource( 4041 ), SubResource( 4042 ), SubResource( 4043 ), SubResource( 4044 ), SubResource( 4045 ), SubResource( 4046 ), SubResource( 4047 ), SubResource( 4048 ), SubResource( 4049 ), SubResource( 4050 ), SubResource( 4051 ), SubResource( 4052 ), SubResource( 4053 ), SubResource( 4054 ), SubResource( 4055 ), SubResource( 4056 ), SubResource( 4057 ), SubResource( 4058 ), SubResource( 4059 ), SubResource( 4060 ), SubResource( 4061 ), SubResource( 4062 ), SubResource( 4063 ), SubResource( 4064 ), SubResource( 4065 ), SubResource( 4066 ), SubResource( 4067 ), SubResource( 4068 ), SubResource( 4069 ), SubResource( 4070 ), SubResource( 4071 ), SubResource( 4072 ), SubResource( 4073 ), SubResource( 4074 ), SubResource( 4075 ), SubResource( 4076 ), SubResource( 4077 ), SubResource( 4078 ), SubResource( 4079 ), SubResource( 4080 ), SubResource( 4081 ), SubResource( 4082 ), SubResource( 4083 ), SubResource( 4084 ), SubResource( 4085 ), SubResource( 4086 ), SubResource( 4087 ), SubResource( 4088 ), SubResource( 4089 ), SubResource( 4090 ), SubResource( 4091 ), SubResource( 4092 ), SubResource( 4093 ), SubResource( 4094 ), SubResource( 4095 ), SubResource( 4096 ), SubResource( 4097 ), SubResource( 4098 ), SubResource( 4099 ), SubResource( 4100 ), SubResource( 4101 ), SubResource( 4102 ), SubResource( 4103 ), SubResource( 4104 ), SubResource( 4105 ), SubResource( 4106 ), SubResource( 4107 ), SubResource( 4108 ), SubResource( 4109 ), SubResource( 4110 ), SubResource( 4111 ), SubResource( 4112 ) ]
 material = SubResource( 677 )
 
+[sub_resource type="SpatialMaterial" id=19739]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 1, 1, 1, 0.0196078 )
+albedo_texture = ExtResource( 196 )
+
 [sub_resource type="ShaderMaterial" id=15535]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 5 )
 
@@ -184158,6 +184169,30 @@ generated_sprite_mesh = SubResource( 15621 )
 
 [node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_white/StaticBody"]
 shape = SubResource( 15614 )
+
+[node name="TransparentGlitchTile" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, -1, 0 )
+mesh = SubResource( 2288 )
+material/0 = SubResource( 19739 )
+script = ExtResource( 3 )
+texture = ExtResource( 196 )
+mesh_depth = 0.0
+mesh_pixel_size = 0.125
+mesh_double_sided = false
+animation_hframes = 16
+animation_vframes = 16
+animation_frame = 223
+animation_frame_coords = Vector2( 15, 13 )
+position_centered = true
+position_offset = Vector3( 0, 0, 4 )
+position_flip_h = false
+position_flip_v = false
+position_axis = 2
+region_enabled = false
+region_rect = Rect2( 0, 0, 1, 1 )
+generation_alpha_threshold = 0.0
+generation_uv_correction = 0.0
+generated_sprite_mesh = SubResource( 15613 )
 
 [node name="FragileBrickSolid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )

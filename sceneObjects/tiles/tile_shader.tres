@@ -5,6 +5,7 @@ code = "shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
 uniform sampler2D base_palette : hint_albedo;
 
+uniform float alpha = 1.0;
 uniform int palettesize = 16;
 
 vec3 getpalettecolor(int x) {
@@ -26,6 +27,6 @@ void fragment() {
     int delta = int(mod2);
     vec3 color = getpalettecolor(delta);
     ALBEDO.rgb = color.rgb;
-    ALPHA = incolor.a;
+    ALPHA = alpha;
 }
 "

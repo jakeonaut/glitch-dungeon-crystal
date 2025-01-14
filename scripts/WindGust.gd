@@ -56,7 +56,7 @@ func passiveActivate(delta, is_player):
     level.player.lv.y = level.player.vv
     level.player.linear_velocity.y = level.player.vv
     level.player.camera_target_y_pos = level.player.global_transform.origin.y
-    level.player.should_do_fallthrough_area_collision = false
+    level.player.was_fallthrough_area_collision_triggered = false
   if getDirection().x != 0:
     var x_sign = 1
     var mult = 6

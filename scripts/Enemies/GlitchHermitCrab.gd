@@ -234,7 +234,7 @@ func moveMyFriends(delta):
     var relativePosition = friendArray[2]
     if friend.linear_velocity.y > 0 or friend.should_magic_jump:
       continue
-    friend.should_do_fallthrough_area_collision = true
+    friend.was_fallthrough_area_collision_triggered = true
     friend.global_transform.origin += self.global_transform.origin - lastPosition
     if not friend.on_ground or friend.global_transform.origin.x < self.global_transform.origin.x + lb or \
        friend.global_transform.origin.x > self.global_transform.origin.x + rb:

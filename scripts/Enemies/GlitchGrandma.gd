@@ -303,7 +303,7 @@ func iJustPressedDown():
     return
 
   on_ground = false
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 # @override

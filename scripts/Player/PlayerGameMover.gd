@@ -167,13 +167,13 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
-    if pressingMoveUp():
+    if pressingMoveUp() and on_ground:
       if holding_up_timer < holding_up_time_limit:
         holding_up_timer += (delta*11)
     else:
       if holding_up_timer > 0:
         holding_up_timer -= (delta*11)
-      if pressingDown():
+      if pressingDown() and on_ground:
         if holding_down_timer < holding_down_time_limit:
           holding_down_timer += (delta*11)
       else:
@@ -482,7 +482,7 @@ func pressingJump():
 func actuallyApplyJump(play_sound = true):
   if malware_infected:
     on_ground = false
-    should_do_fallthrough_area_collision = false
+    was_fallthrough_area_collision_triggered = false
     has_just_jumped_timer = 0
   else:
     .actuallyApplyJump(play_sound)

@@ -304,7 +304,7 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["glitch_world"] = 1
+    memory["glitch_world"] = 0
     memory["clean_crystals"] = 4
     memory["priestess"] = 2
     memory["glitched_grimoire"] = false
@@ -314,13 +314,13 @@ func resetMemory():
 
     # crystal elder bosses
     memory["baba_yaga_boss"] = 2
-    memory["angler_seaman_boss"] = 2
+    memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 2
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 1
-    memory["broomerang"] = 1
+    memory["broomerang"] = 2
     memory["broom_double_jump"] = 1
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
@@ -947,15 +947,18 @@ func doFallthroughObjectCollision(gameMover, area):
     var atb = areaShape.shape.extents.y
     var abb = -atb
 
+    if not gameMover.should_collide_fallthrough_area:
+        return false
+
     if gameMover.physics_state != gameMover.PhysicsState.NORMAL:
         return false
 
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
     if (gameMover.pressingDown() and (gameMover.on_ground or (y - gameMover.tb) < (ay + atb))) or \
-       (not "should_do_fallthrough_area_collision" in gameMover):
-        if "should_do_fallthrough_area_collision" in gameMover:
-            gameMover.should_do_fallthrough_area_collision = false
+       (not "was_fallthrough_area_collision_triggered" in gameMover):
+        if "was_fallthrough_area_collision_triggered" in gameMover:
+            gameMover.was_fallthrough_area_collision_triggered = false
         if gameMover.on_ground and gameMover.pressingDown() and (y - gameMover.tb) >= (ay + atb):
             gameMover.global_transform.origin.y = ay + atb + gameMover.tb + 0.125
         return false
@@ -985,7 +988,7 @@ func doFallthroughObjectCollision(gameMover, area):
         ax + alb, ay + atb, ax + arb, ay + abb,
         x + lb, y + bb, x + rb, y + bb + diff
     ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
-        gameMover.should_do_fallthrough_area_collision = true
+        gameMover.was_fallthrough_area_collision_triggered = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
         gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
         gameMover.truly_on_ground = truly_on_ground_memory
@@ -1000,7 +1003,7 @@ func doFallthroughObjectCollision(gameMover, area):
     # the above check counts for falling down onto the fallthroughCollision,
     # but if we are already on it, we know vel.y is 0ish, and need a more constrained check
     # to see if we are still on it
-    if gameMover.should_do_fallthrough_area_collision and \
+    if gameMover.was_fallthrough_area_collision_triggered and \
         gameMover.isRectColliding(
             ax + alb, ay + atb, ax + arb, ay + abb,
             x + lb, y + bb, x + rb, y + bb + diff
@@ -1311,9 +1314,11 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
                 my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and not area.is_in_group("true_small_door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+      # TODO(jaketrower): Will be not true when broomerang >= 2
       area.InteractActivate(false)
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
       # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+      # TODO(jaketrower): Will be not true when broomerang >= 2
       area.PassiveInteractActivate(0, false)
   return smacked_npc
 

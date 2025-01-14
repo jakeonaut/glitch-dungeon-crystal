@@ -31,12 +31,14 @@ func isActive(_debug=false):
 func InteractActivate(is_player=true):
     if parent.has_method("activate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+        # TODO(jaketrower): Will be not true when broomerang >= 2
         return parent.activate(is_player)
     return false
 
 func PassiveInteractActivate(delta, is_player = true):
     if parent.has_method("passiveActivate"):
         # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+        # TODO(jaketrower): Will be not true when broomerang >= 2
         parent.passiveActivate(delta, is_player)
     touchingPlayer = true
     if is_in_group("enemies") and not is_in_group("no_pushems") and is_player:
@@ -80,11 +82,11 @@ func _process(_delta):
                 is_touching_waterfall = true
         if area.is_in_group("ladder"):
             is_touching_ladder = true
-        if area.is_in_group("fallthrough") and "should_do_fallthrough_area_collision" in possible_game_mover:
+        if area.is_in_group("fallthrough") and "was_fallthrough_area_collision_triggered" in possible_game_mover:
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if area.is_in_group("player_proxy"):
             is_touching_player_proxy = true
             
 
-    if not has_done_fallthrough_object_collision and "should_do_fallthrough_area_collision" in possible_game_mover:
-        possible_game_mover.should_do_fallthrough_area_collision = false
+    if not has_done_fallthrough_object_collision and "was_fallthrough_area_collision_triggered" in possible_game_mover:
+        possible_game_mover.was_fallthrough_area_collision_triggered = false

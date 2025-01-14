@@ -46,7 +46,7 @@ var charging_time_limit = 30
 var gnash_charge_time_limit = 15
 var crystal_appear_time_limit = 10
 var stun_timer = 0
-var stun_time_limit = 240
+var stun_time_limit = 120
 var is_weakpoint_attached = true
 var crystalLandings = []
 var which_three = []
@@ -57,6 +57,10 @@ onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
     set_process(true)
     is_sprite_flipped = true
+    should_collide_floor = false
+    should_collide_ceil = false
+    should_collide_horizontally = false
+    should_collide_fallthrough_area = false
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
@@ -65,7 +69,7 @@ func _ready():
     crystalLandings = level.get_tree().get_nodes_in_group("crystal_landing")
 
     behavior_phase_through_walls = true
-    walk_speed = 32
+    walk_speed = 16
 
     self.remove_child(fakeCrystalContainer)
     level.add_child(fakeCrystalContainer)
@@ -161,7 +165,7 @@ func _process(delta):
         behavior_walking = true
         walk_direction.x = -1
         # this is stupid and specific to the level I'm in... oh well
-        if global_transform.origin.x < 28 and (num_hits == 0 or (num_hits == 1 and has_already_hidden) or (num_hits == 2 and how_many_final_charges == 2)):
+        if global_transform.origin.x < 28 and (num_hits <= 1 or (num_hits == 2 and how_many_final_charges == 2)):
             behavior_walking = false
             dir = Vector3(0, 0, 0)
             lv.x = 0
@@ -176,21 +180,21 @@ func _process(delta):
             tryToStartWeakPointDetachment()
             # level.player.malwareCured()
             getSmacked()
-        elif global_transform.origin.x < 16.134 and num_hits == 1:
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("fadeToBlack")
-            behavior_walking = false
-            dir = Vector3(0, 0, 0)
-            lv.x = 0
-            linear_velocity.x = 0
-            hv = Vector3(0, 0, 0)
-            boss_phase = BossPhase.HIDING_WITH_DUPLICATES
-            which_three = []
-            crystalLandings.shuffle()
-            which_three.push_back(crystalLandings[0])
-            which_three.push_back(crystalLandings[1])
-            which_three.push_back(crystalLandings[2])
+        # elif global_transform.origin.x < 16.134 and num_hits == 1:
+        #     secretAniPlayer.stop()
+        #     secretAniPlayer.clear_queue()
+        #     secretAniPlayer.play("fadeToBlack")
+        #     behavior_walking = false
+        #     dir = Vector3(0, 0, 0)
+        #     lv.x = 0
+        #     linear_velocity.x = 0
+        #     hv = Vector3(0, 0, 0)
+        #     boss_phase = BossPhase.HIDING_WITH_DUPLICATES
+        #     which_three = []
+        #     crystalLandings.shuffle()
+        #     which_three.push_back(crystalLandings[0])
+        #     which_three.push_back(crystalLandings[1])
+        #     which_three.push_back(crystalLandings[2])
         elif global_transform.origin.x < 16.134 and num_hits == 2:
             global_transform.origin.x = 90.134
             global_transform.origin.y = level.player.global_transform.origin.y
@@ -332,7 +336,7 @@ func _process(delta):
                 weakPointAniPlayer.stop()
                 weakPointAniPlayer.clear_queue()
                 weakPointAniPlayer.play("idle")
-            elif num_hits == 2:
+            elif num_hits == 1:
                 boss_phase = BossPhase.PREPARING_CHARGE
             else:
                 boss_phase = BossPhase.IDLE

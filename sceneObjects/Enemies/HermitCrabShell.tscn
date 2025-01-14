@@ -35,6 +35,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -70,6 +71,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
@@ -769,9 +771,11 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="HermitCrabShell" type="Spatial"]
 script = ExtResource( 15 )
+true_terminal_vel = 16
 tb = 0.8
 bb = -0.8
 grav = 28
+walk_speed = 5.0
 only_activate_in_range = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]

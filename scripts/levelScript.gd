@@ -76,6 +76,9 @@ func reindexGrandmaStatueCatalogue(is_start_of_level = false):
       grandmaStatueCatalogue[grandmaStatue.glitch_form] = weakref(grandmaStatue)
 
 func _ready_impl():
+  if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
+    self.purifyAllFragileBrickSolids(false)
+
   if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true

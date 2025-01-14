@@ -30,7 +30,7 @@ func _process(delta):
       hooked = false
       return
 
-    hookTarget.get_ref().should_do_fallthrough_area_collision = false
+    hookTarget.get_ref().was_fallthrough_area_collision_triggered = false
     hookTarget.get_ref().should_collide_floor = false
     hookTarget.get_ref().can_collide_with_floor = false
     hookTarget.get_ref().fall_timer = 0
@@ -106,7 +106,7 @@ func passiveActivate(_delta, is_player):
     level.player.hookSound.play()
     level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
-    level.player.should_do_fallthrough_area_collision = false
+    level.player.was_fallthrough_area_collision_triggered = false
     level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
     frog.queueGulpAnimation()
@@ -120,7 +120,7 @@ func otherPassiveActivate(_delta, gameMover):
     hookTarget = weakref(gameMover)
     level.player.hookSound.play()
     gameMover.pauseAnimation = true
-    gameMover.should_do_fallthrough_area_collision = false
+    gameMover.was_fallthrough_area_collision_triggered = false
     gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
     frog.queueGulpAnimation()

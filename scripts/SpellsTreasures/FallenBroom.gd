@@ -66,7 +66,7 @@ func _process(delta):
             can_return_via_input = true
 
     if returning:
-        if not should_return:
+        if not should_return or global.memory["broomerang"] >= 2:
             die()
             return
         hitStuff(delta)
@@ -110,7 +110,7 @@ func _process(delta):
                 level.player.can_broomerang_warp = false
         if returning and global.activeInteractor and global.activeInteractor.is_important:
             global.pauseGame = true
-    can_warp = true
+    # can_warp = true
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
@@ -166,6 +166,9 @@ func _process(delta):
                 returning = true
                 on_ground = false
                 was_projectile = true
+    else:
+        self.remove_from_group("fallen_broom_group")
+
     if global.activeInteractor and global.activeInteractor.is_important:
         returning = true
         if taking_the_player_with_me:
@@ -203,6 +206,9 @@ func die():
     linear_velocity.y = 0
     lv.y = 0
     is_dying = true
+    self.remove_from_group("fallen_broom_group")
+    if not global.memory["broom"]:
+        global.memory["broom"] = true
     
 func tryReturnIfTooFarFromPlayer():
     if is_static_in_level:
@@ -351,10 +357,12 @@ func hitStuff(_delta):
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+            # TODO(jaketrower): Will be not true when broomerang >= 2
             if not area.is_in_group("door") and not area.is_in_group("true_small_door") and not area.is_in_group("npc"):
                 has_hit_something = area.InteractActivate(false)
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
+            # TODO(jaketrower): Will be not true when broomerang >= 2
             area.PassiveInteractActivate(0, false)
       
         # erase glitch tiles...

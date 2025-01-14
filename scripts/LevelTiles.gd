@@ -51,7 +51,7 @@ func setTileNameNum(newName, num, cell_index, tile_orientation, glitch_type = gl
   if num != 0:
     newName = newName + str(num+1) # 0 index, so add one
 
-  if not "FragileBrickSolid" in newName:
+  if not "FragileBrickSolid" in newName and not "TransparentGlitchTile" in newName:
     # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
     # and we named them "_green", etc. but it's more like "_forest" etc. 
     if glitch_type == global.GlitchForm.FEATHER:
@@ -566,8 +566,10 @@ func purifyAllFragileBrickSolids(summon_smoke_clouds = true):
   for i in range(len(cell_indices)):
     var cell_index = cell_indices[i]
     var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
+    var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
     if isTileFragileSolid(tile_type):
-      removeTile(cell_index)
+      # removeTile(cell_index)
+      setTileNameNum("TransparentGlitchTile", 0, cell_index, tile_orientation, global.GlitchForm.NORMAL)
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
       if summon_smoke_clouds:
         level.summonSmokeClouds(tile_pos, 2, false, true)

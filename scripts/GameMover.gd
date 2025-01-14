@@ -70,10 +70,11 @@ var fall_time_max = 50
 var should_collide_horizontally = true
 var should_collide_floor = true 
 var should_collide_ceil = true
+var should_collide_fallthrough_area = true
 var should_do_middle_sensor = false
 var should_only_do_middle_sensor = false
 var should_do_simple_sensor_probe = true
-var should_do_fallthrough_area_collision = false
+var was_fallthrough_area_collision_triggered = false
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
 export var lb = -0.72
@@ -365,7 +366,7 @@ func playLandAnimation():
 func tryClearFallthroughCollisionSolid(_mostlyIgnoredOriginPosition):
   if self != level.player:
     return
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
   if interactionArea and interactionArea.prev_fallthrough_collision_area != null and interactionArea.prev_fallthrough_collision_area.get_ref() and \
       interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").has_method("fallthroughCollisionClear"):
     interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").fallthroughCollisionClear(self)
@@ -605,7 +606,7 @@ func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = 
 
 func iJustPressedDown():
   on_ground = false
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
 
 var is_touching_sandstream = false
 var was_touching_sandstream = false
@@ -652,7 +653,7 @@ func processWallLadderWalking(delta):
     aniPlayer.stop()
     # aniPlayer.queue("walkBump")
     aniPlayer.queue("walk")
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
   ladderUpdateTargetLastGroundedY()
 
 func processNotWallLadderWalking(_delta):
@@ -788,7 +789,7 @@ func processJumpInputs(delta):
           wetJumpSound.pitch_scale = rand_range(0.8, 1.3)
           wetJumpSound.play()
         on_ground = false
-        should_do_fallthrough_area_collision = false
+        was_fallthrough_area_collision_triggered = false
         has_just_jumped_timer = -has_just_jumped_time_limit
 
         if not pauseAnimation and aniPlayer != null:
@@ -907,7 +908,7 @@ func actuallyApplyJump(play_sound = true):
   if play_sound and jumpSound != null:
     playJumpSound()
   on_ground = false
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
   has_just_jumped_timer = 0 
 
 func playJumpSound():
@@ -1243,12 +1244,12 @@ func handleCollisionsAndMove(local_lv, delta):
   half_on_ground = false
   on_ceiling = false
 
-  if not should_do_fallthrough_area_collision and (should_collide_floor or should_collide_ceil):
+  if not was_fallthrough_area_collision_triggered and (should_collide_floor or should_collide_ceil):
     last_vv = local_lv.y
     local_lv = handleVerticalCollisions(local_lv)
     if last_vv != 0 and local_lv.y == 0:
       self.vertical_collision = true
-  elif should_do_fallthrough_area_collision:
+  elif was_fallthrough_area_collision_triggered:
     var truly_on_ground_memory = truly_on_ground
     local_lv = collideWithFloor(local_lv)
     truly_on_ground = truly_on_ground_memory

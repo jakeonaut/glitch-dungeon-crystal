@@ -83,10 +83,10 @@ func tumbleFall(direction_vector, is_corrupted = false):
   var jump_val = 5 if not is_corrupted else 0
   if direction_vector.x < 0:
     secretAniPlayer.play("spinForwardReverse")
-    x_val = -10
+    x_val = -5
   elif direction_vector.x > 0:
     secretAniPlayer.play("spinForward")
-    x_val = 10
+    x_val = 5
   elif direction_vector.y > 0:
     secretAniPlayer.play("spinForward")
     jump_val = 10

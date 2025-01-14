@@ -116,6 +116,6 @@ func postProcessFallthroughCollisionArea(fallthrough_collision_area):
         if fallthrough_collision_area.get_node("..").has_method("fallthroughCollisionActivate"):
             fallthrough_collision_area.get_node("..").fallthroughCollisionActivate(player)
     else:
-        player.should_do_fallthrough_area_collision = false
+        player.was_fallthrough_area_collision_triggered = false
 
     prev_fallthrough_collision_area = weakref(fallthrough_collision_area)

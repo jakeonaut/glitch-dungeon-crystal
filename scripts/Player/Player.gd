@@ -523,12 +523,8 @@ func _process(delta):
   if Input.is_action_just_pressed("debug_upgrade_broom"):
     if global.memory["broomerang"] == 0:
       global.memory["broomerang"] = 1
-      global.memory["broom_double_jump"] = 1
     elif global.memory["broomerang"] < 2:
-      global.memory["max_hp"] = 2
-      global.memory["hp"] = 2
       global.memory["broomerang"] = 2
-      global.memory["multi_broom"] = 1
   if Input.is_action_just_pressed("debug_more_crystals"):
     var num_keys = global.memory["key"] if global.memory.has("key") else null
     if num_keys == null:
@@ -1465,7 +1461,7 @@ func processMoleLogic(delta):
       self.was_on_ground = false
       self.lv.y = self.vv
       self.linear_velocity.y = self.vv
-      self.should_do_fallthrough_area_collision = false
+      self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
   elif transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
@@ -1489,7 +1485,7 @@ func processMoleLogic(delta):
       self.was_on_ground = false
       self.lv.y = self.vv
       self.linear_velocity.y = self.vv
-      self.should_do_fallthrough_area_collision = false
+      self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
   else:
     dig_smoke_timer = 0
@@ -2012,7 +2008,7 @@ func processBroomLogic(delta):
   if not global.memory["broom"]:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing():
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] == 1:
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
@@ -2503,7 +2499,11 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     elif x_direction != 0:
       fallenBroom.walk_direction.x = x_direction
     fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
+
   global.memory["broom"] = false
+  var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
+  if was_thrown and fallenBroomArray.size() < global.memory["broomerang"]:
+    global.memory["broom"] = true
 
   if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
     if grav > 0:
@@ -2534,7 +2534,7 @@ func iJustPressedDown():
     return
 
   on_ground = false
-  should_do_fallthrough_area_collision = false
+  was_fallthrough_area_collision_triggered = false
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 var is_active = true

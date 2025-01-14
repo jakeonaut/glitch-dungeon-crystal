@@ -5,5 +5,6 @@
 
 [resource]
 shader = ExtResource( 2 )
+shader_param/alpha = 1.0
 shader_param/palettesize = 16
 shader_param/base_palette = ExtResource( 1 )

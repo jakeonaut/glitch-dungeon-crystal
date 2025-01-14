@@ -35,7 +35,7 @@ func _process(delta):
       is_reeled_in = true
       return
 
-    hookTarget.get_ref().should_do_fallthrough_area_collision = false
+    hookTarget.get_ref().was_fallthrough_area_collision_triggered = false
     hookTarget.get_ref().should_collide_floor = false
     hookTarget.get_ref().can_collide_with_floor = false
     hookTarget.get_ref().fall_timer = 0
@@ -128,7 +128,7 @@ func passiveActivate(_delta, is_player):
     if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
       level.player.aniPlayer.play("hookCaught")
     level.player.pauseAnimation = true
-    level.player.should_do_fallthrough_area_collision = false
+    level.player.was_fallthrough_area_collision_triggered = false
     level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
   
 func otherPassiveActivate(_delta, gameMover):
@@ -143,5 +143,5 @@ func otherPassiveActivate(_delta, gameMover):
     gameMover.behavior_was_thrown = false
     gameMover.pauseAnimation = true
     gameMover.physics_state = gameMover.PhysicsState.NORMAL
-    gameMover.should_do_fallthrough_area_collision = false
+    gameMover.was_fallthrough_area_collision_triggered = false
     gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)

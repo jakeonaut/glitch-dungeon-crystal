@@ -1382,13 +1382,27 @@ can_nav_down = false
 hide_me_from_map = true
 has_angel_statue = true
 
-[node name="LongGlitchyHallway2" parent="PrimordialOoze" instance=ExtResource( 3 )]
+[node name="FishingScene" parent="PrimordialOoze" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 11, 0 )
 material_override = SubResource( 34 )
 texture = ExtResource( 10 )
 vframes = 16
 frame = 113
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+has_angel_statue = true
+
+[node name="ReverseEasyFling" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, 0 )
+material_override = SubResource( 34 )
+texture = ExtResource( 10 )
+vframes = 16
+frame = 113
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/ReverseEasyFling.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false

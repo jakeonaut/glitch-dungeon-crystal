@@ -14,7 +14,7 @@ onready var cursorSprite = get_node("CursorSprite")
 # NORMAL MENU
 onready var normalMenu = get_node("NormalMenu")
 onready var normalMenuText = get_node("NormalMenu/RichTextLabel")
-onready var pauseMenuRect = get_node("PauseMenuRect")
+onready var pauseMenuRect = get_node("../PauseMenuRect")
 onready var largerPopup = get_node("LargerPopup")
 onready var inventoryRect = get_node("InventoryRect")
 onready var shardsRect = get_node("InventoryRect/ShardsRect")
@@ -100,7 +100,7 @@ func _process(delta):
     #   mapRect.rect_scale = Vector2(0.5, 0.5)
 
     pauseTitleRect.visible = false
-    pauseMenuRect.visible = false
+    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = false
     cursorSprite.visible = false
@@ -115,6 +115,7 @@ func _process(delta):
     return
 
   self.visible = global.isPauseMenuOpen
+  pauseMenuRect.visible = self.visible
   mapTitleRect.visible = true
   pauseTitleRect.visible = true
   mapRect.rect_position = Vector2(450, 131)
@@ -149,7 +150,6 @@ func _process(delta):
   processGlitchScreen(delta)
   if pauseMenuState == PauseMenuState.NORMAL:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 160
@@ -158,7 +158,6 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     colorblindPlayers.visible = true
@@ -171,7 +170,6 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.SOUND:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 160
@@ -182,7 +180,6 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.QUIT_TO_MAIN:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 160
@@ -193,7 +190,6 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.TOP_INPUT:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.position.x = 160
@@ -202,7 +198,6 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     pauseTitleRect.visible = true
-    pauseMenuRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = false
     cursorSprite.position.x = 108
@@ -216,7 +211,6 @@ func _process(delta):
     last_control_index = -1
 
   if pauseMenuState == PauseMenuState.INVENTORY:
-    pauseMenuRect.visible = false
     largerPopup.visible = true
     normalMenu.visible = false
     cursorSprite.visible = false
@@ -244,10 +238,7 @@ func _process(delta):
     global.currLevelZone = null
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
-  if largerPopup.visible and not pauseMenuRect.visible:
-    pauseTitleRect.rect_position = Vector2(164, 400)
-  else:
-    pauseTitleRect.rect_position = Vector2(164, 400)
+  pauseTitleRect.rect_position = Vector2(164, 400)
 
 
 var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
@@ -626,7 +617,7 @@ func processInventoryLogic(delta):
         else:
           popupText.text += "\ngreat for sweeping dust"
         if global.memory["broomerang"] >= 2:
-          popupText.text += "\nand again to warp!"
+          popupText.text += "\nno limits!"
       elif inventoryOptionIndexX == 1:
         popupText.text = "babushka scarf\nkeeps ya warm"
       elif inventoryOptionIndexX == 2:
