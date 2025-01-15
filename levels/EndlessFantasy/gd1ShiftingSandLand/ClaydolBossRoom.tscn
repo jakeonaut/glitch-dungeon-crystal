@@ -446,6 +446,12 @@ max_dist_to_player = 999
 [node name="ClaydolBoss" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -15.2497, 0 )
 
+[node name="InteractPrompt" parent="Viewport/level/ClaydolBoss" index="8"]
+transform = Transform( 0.996453, -0.0841474, 0, 0.0841474, 0.996453, 0, 0, 0, 1, 0.526223, 15.5525, 7 )
+
+[node name="CubeContainer" parent="Viewport/level/ClaydolBoss/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 231 )
@@ -453,6 +459,9 @@ mesh = SubResource( 231 )
 [node name="MeshInstance3" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 232 )
+
+[node name="MeshInstance2" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -6, 0 )

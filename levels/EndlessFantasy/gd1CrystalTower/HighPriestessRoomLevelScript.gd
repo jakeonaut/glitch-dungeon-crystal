@@ -38,8 +38,10 @@ func setUpRoomInitializationOverride():
     highPriestessBoss.am_i_hidden = true
     highPriestessBoss.mySprite.visible = false
     if global.memory["priestess"] >= 2:
+      highPriestessBoss.queue_free()
+      croneNPC.queue_free()
+      croneNPCDefeated.queue_free()
       croneAbortSound.which_one = -1
-      croneAbortSound.activateScript()
       has_boss_started = true
       is_defeated = true
       is_really_defeated = true

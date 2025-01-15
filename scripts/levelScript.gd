@@ -376,6 +376,13 @@ func tryToRespawn():
         if door.path == door_path:
           found_door = door
           break
+      # if we didn't find a door, try to find last entered door in the room
+      # useful for weird triangle circuit navigation
+      if found_door == null:
+        for door in doors:
+          if global.getStaticLevelZoneLevelVar(self, door) == door.DoorMemory.LAST_ENTERED:
+            found_door = door
+            break
       var broths = get_tree().get_nodes_in_group("broths")
       for broth in broths:
         if broth.path == door_path:

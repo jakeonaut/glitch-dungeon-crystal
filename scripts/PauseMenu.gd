@@ -1069,7 +1069,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
-  var haveIBeenToThisLevel = true # global.haveIBeenToThisLevelPath(mapPath) # TODO(jaketrower): debug remove
+  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) # TODO(jaketrower): debug remove
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.z_index = 1

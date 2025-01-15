@@ -47,6 +47,11 @@ var is_glitched = false
 export var is_immediate = false
 export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT", "CRYSTAL", "ZONE_CRYSTAL", "DEMO") onready var key_type
 
+enum DoorMemory {
+  NULL,
+  LAST_ENTERED,
+}
+
 var gameCamera = null
 func getGameCamera():
   if level == null:
@@ -496,7 +501,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     transition.really_long_fade_to(self.path)
     return
     
-  global.prepareForTransition(level)
+  global.prepareForTransition(level, self)
 
   if "LevelDoor" in self.id:
     transition.granny_teleport_to(self.path)

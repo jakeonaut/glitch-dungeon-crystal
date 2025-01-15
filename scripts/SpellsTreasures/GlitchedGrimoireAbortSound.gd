@@ -30,8 +30,8 @@ func activateScript():
 
 func preActivateScript():
   global.memory["forget_me_not"] = true
+  global.memory["glitch_world"] = 1
   if not global.memory["glitched_grimoire"]:
-    global.memory["glitch_world"] = 1
     global.memory["glitched_grimoire"] = true
     global.memory["glitched_grimoire2"] = true
     if not global.memory.has("spellbookPage"):

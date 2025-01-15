@@ -305,7 +305,7 @@ func resetMemory():
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
     memory["glitch_world"] = 0
-    memory["clean_crystals"] = 4
+    memory["clean_crystals"] = 5
     memory["priestess"] = 2
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -314,19 +314,19 @@ func resetMemory():
 
     # crystal elder bosses
     memory["baba_yaga_boss"] = 2
-    memory["angler_seaman_boss"] = 0
+    memory["angler_seaman_boss"] = 2
     memory["dogu_matryoshka_boss"] = 2
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 1
-    memory["broomerang"] = 2
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
-    memory["has_map_item"] = true
+    memory["has_map_item"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
@@ -409,7 +409,7 @@ func processEasterEggs():
     # else:
     #     anna_key_helper = false
 
-func prepareForTransition(level):
+func prepareForTransition(level, enteredDoor = null):
     global.activeInteractor = null
     global.memory["cameraSize"] = level.gameCamera.initial_size
     # global.memory["lastDoor"] = id
@@ -419,6 +419,12 @@ func prepareForTransition(level):
     global.hasJustEnteredRoom = false
     global.respawnVarTimerHack = 0
     global.memory["on_ground"] = true
+
+    if enteredDoor != null:
+        var doors = level.get_tree().get_nodes_in_group("doors")
+        for door in doors:
+            global.eraseStaticLevelZoneLevelVar(level, door)
+        global.setStaticLevelZoneLevelVar(level, enteredDoor, enteredDoor.DoorMemory.LAST_ENTERED)
 
 
 func _process(delta):
@@ -1102,6 +1108,20 @@ func haveIBeenToThisLevelPath(levelPath):
     if not global.memory[currLevelZone][shortLevelName].has("have_i_been_here"):
         return false
     return global.memory[currLevelZone][shortLevelName]["have_i_been_here"]
+
+func eraseStaticLevelZoneLevelVar(level, node):
+    if node == null:
+        return
+    var name = getNameRelativeToLevel(level, node)
+    if name == null: return # failure
+
+    tryInitializeLevelZone(level.getLevelZoneName())
+    if currLevelZone == null or not global.memory.has(currLevelZone): 
+        return null
+
+    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+        global.memory[currLevelZone][level.getShortLevelName()] = {}
+    global.memory[currLevelZone][level.getShortLevelName()].erase(name)
 
 func setStaticLevelZoneLevelVar(level, node, val):
     if node == null:

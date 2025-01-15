@@ -139,9 +139,9 @@ func passiveActivate(_delta, is_player):
   if not is_player and not global.memory["broom"]:
     return
 
-  if getPlayer().transformation == getPlayer().TransformationState.FISHY or getPlayer().pressingDown():
+  if getPlayer().transformation == getPlayer().TransformationState.FISHY:
     return  
-  if getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground:
+  if not getPlayer().pressingDown() and (getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground):
     getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
     getPlayer().was_just_on_ground_timer = -8
     getPlayer().magicJump()
@@ -155,6 +155,8 @@ func passiveActivate(_delta, is_player):
       getPlayer().linear_velocity.y = jump_val
       getPlayer().lv.y = jump_val
       getPlayer().vv = jump_val
+  else:
+    getPlayer().has_sweeped_glitch = true
 
 func bubbleStartPop():
   if didja_get_me:
